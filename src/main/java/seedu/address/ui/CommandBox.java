@@ -55,6 +55,13 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             navigateToNextInput();
             break;
+        case TAB:
+//            keyEvent.consume();
+            System.out.println("Tab pressed");
+            commandTextField.requestFocus(); // Set the focus back on textfield
+            commandTextField.selectEnd(); // Move cursor to the end of text
+            break;
+
         default:
             // let JavaFx handle the keypress
         }
