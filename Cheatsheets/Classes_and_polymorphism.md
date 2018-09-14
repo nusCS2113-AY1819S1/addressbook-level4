@@ -59,17 +59,15 @@ public class PetShelter2 {
 
 In Java, an abstract method is declared with the keyword **abstract** and given without an implementation. If a class includes abstract methods, then the class itself must be declared abstract.  
 
-- Abstract classes cannot have methods with body.  
+- Abstract classes cannot have methods with body (unless it is static).  
 - As one method of the class is **abstract**, the class itself is abstract.
 
 ```java
 public abstract class Account {
-
     int number;
-
-    void close(){
-        //...
-    }
+    public abstract String speak (); // Method signature
+    static void testFunc () {/* do something*/} // Legal 
+    void testFuncIllegal () {/*Do something*/} // Illegal 
 }
 ```
 
@@ -110,7 +108,7 @@ public interface AnimalClassAddon {
     int CONSTANT = 10;
 
     // Method signature
-    void movement (String input); // We do not declare functions with a body here either similar to abstract class
+    void movement (String input); 
 
     // Static method
     static boolean isSpeedAllowed(int speed){
