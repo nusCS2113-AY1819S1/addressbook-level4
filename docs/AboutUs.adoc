@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-Iventarie Pro was developed by the CS2113-AY1819S1-T13-3 team. +
+Inventarie Pro was developed by the CS2113-AY1819S1-T13-3 team. +
 _{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
