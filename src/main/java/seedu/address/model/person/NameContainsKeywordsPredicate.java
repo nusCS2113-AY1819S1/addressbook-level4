@@ -3,13 +3,14 @@ package seedu.address.model.person;
 import java.util.List;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.StringUtil;
+import seedu.address.commons.util.HammingDistanceUtil;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
+    private final int SIMILARITY = 2;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
@@ -17,8 +18,17 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
+        String tokens[] = person.getName().fullName.split("\\s+");
+
+        for (int i = 0; i < keywords.size(); i++) {
+            for (int j = 0; j < tokens.length; j++) {
+                HammingDistanceUtil myHammingDistance = new HammingDistanceUtil(keywords.get(i), tokens[j]);
+                if (myHammingDistance.getDistance() < SIMILARITY) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     @Override
