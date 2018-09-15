@@ -1,8 +1,8 @@
 package seedu.address;
 
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.util.Enumeration;
 import java.util.Optional;
@@ -213,8 +213,8 @@ public class MainApp extends Application {
      * Commence login process for access to application
      */
     public static void initializeLoginProcess() {
-        System.out.println("You need to login for access to application. " +
-                           "  Please enter student matriculation ID as user ID:");
+        System.out.println("You need to login for access to application. "
+                         + "Please enter student matriculation ID as user ID:");
         Scanner userInput = new Scanner(System.in);
         String userId = userInput.next();
         Properties loadLoginCredentials = new Properties();
