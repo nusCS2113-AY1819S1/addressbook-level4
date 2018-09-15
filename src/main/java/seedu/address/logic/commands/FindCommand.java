@@ -7,6 +7,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
+import javax.sound.midi.SysexMessage;
+
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
@@ -29,7 +31,8 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
+
+        model.updateFilteredPersonList(predicate); // Updates the list of people to be displayed
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
