@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import seedu.address.commons.util.Passwords;
 import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -15,16 +16,24 @@ public class PasswordCommandParser implements Parser<PasswordCommand>{
      */
     public PasswordCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] password = trimmedArgs.split("\\s+");
 
-        System.out.println(nameKeywords[0]); // Read off the argument
+        if (password.length < 2) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
+        }
 
-        return new PasswordCommand();
+
+        byte hash[] = Passwords.hash(password[1].toCharArray(), password[0].getBytes());
+//        System.out.println(hash);
+
+        return new PasswordCommand(hash);
     }
 
 
