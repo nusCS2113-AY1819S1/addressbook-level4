@@ -9,6 +9,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 public class PasswordCommand extends Command {
 
     public static final String COMMAND_WORD = "password";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "yada yada";
 
     public static final String MESSAGE_SUCCESS = "Stored and encrypted password";
 
