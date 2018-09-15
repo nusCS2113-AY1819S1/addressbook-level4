@@ -2,7 +2,9 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Enumeration;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -34,6 +36,9 @@ import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Scanner;
 
 /**
  * The main entry point to the application.
@@ -117,6 +122,7 @@ public class MainApp extends Application {
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         if (configFilePath != null) {
+
             logger.info("Custom Config file specified " + configFilePath);
             configFilePathUsed = configFilePath;
         }
@@ -124,6 +130,7 @@ public class MainApp extends Application {
         logger.info("Using config file : " + configFilePathUsed);
 
         try {
+
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
@@ -202,7 +209,53 @@ public class MainApp extends Application {
         stop();
     }
 
+    /**
+     * Commence login process for access to application
+     */
+    public static void initializeLoginProcess() {
+        System.out.println("You need to login for access to application. Please enter student matriculation ID as user ID:");
+        Scanner userInput = new Scanner(System.in);
+        String userID = userInput.next();
+        Properties loadLoginCredentials = new Properties();
+        InputStream input = null;
+        try {
+            input = new FileInputStream("loginCredentials.properties");
+            loadLoginCredentials.load(input);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (input != null) {
+                try {
+                    input.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Enumeration<String> loginData = (Enumeration<String>) loadLoginCredentials.propertyNames();
+        while (loginData.hasMoreElements()) {
+            String key = loginData.nextElement();
+            if(userID.equals(key)) {
+                System.out.println("Current user exists!");
+            }
+            System.out.println("Enter your password:");
+            Scanner userPassword = new Scanner(System.in);
+            String password = userPassword.next();
+            String value = loadLoginCredentials.getProperty(key);
+            // If password input is correct.
+            if (password.equals(value)) {
+                System.out.println("Correct password! Login successful!");
+                break;
+            }
+            // If password input is incorrect.
+            else {
+                System.out.println("Wrong password!");
+                System.exit(0);
+            }
+        }
+    }
     public static void main(String[] args) {
+        initializeLoginProcess();
         launch(args);
     }
 }
