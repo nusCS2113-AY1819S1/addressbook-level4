@@ -5,7 +5,6 @@ import static seedu.address.ui.LoginWindow.initializeLoginProcess;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
-import com.oracle.tools.packager.Log;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
