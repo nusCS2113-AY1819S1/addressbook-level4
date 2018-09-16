@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static seedu.address.ui.LoginWindow.initializeLoginProcess;
+
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -119,20 +121,25 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        initializeLoginProcess();
+        if(LoginWindow.isLoginSuccessful) {
+            browserPanel = new BrowserPanel();
+            browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+            ResultDisplay resultDisplay = new ResultDisplay();
+            resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+            StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+            statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        CommandBox commandBox = new CommandBox(logic);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+            CommandBox commandBox = new CommandBox(logic);
+            commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        } else {
+            System.exit(0);
+        }
     }
 
     void hide() {

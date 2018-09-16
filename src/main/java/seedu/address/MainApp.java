@@ -1,13 +1,8 @@
 package seedu.address;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Path;
-import java.util.Enumeration;
 import java.util.Optional;
-import java.util.Properties;
-import java.util.Scanner;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -39,6 +34,7 @@ import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+
 
 /**
  * The main entry point to the application.
@@ -210,56 +206,10 @@ public class MainApp extends Application {
     }
 
     /**
-     * Commence login process for access to application
-     */
-    public static void initializeLoginProcess() {
-        System.out.println("You need to login for access to application. "
-                         + "Please enter student matriculation ID as user ID:");
-        Scanner userInput = new Scanner(System.in);
-        String userId = userInput.next();
-        Properties loadLoginCredentials = new Properties();
-        InputStream input = null;
-        try {
-            input = new FileInputStream("loginCredentials.properties");
-            loadLoginCredentials.load(input);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        } finally {
-            if (input != null) {
-                try {
-                    input.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        Enumeration<String> loginData = (Enumeration<String>) loadLoginCredentials.propertyNames();
-        while (loginData.hasMoreElements()) {
-            String key = loginData.nextElement();
-            if (userId.equals(key)) {
-                System.out.println("Current user exists!");
-            }
-            System.out.println("Enter your password:");
-            Scanner userPassword = new Scanner(System.in);
-            String password = userPassword.next();
-            String value = loadLoginCredentials.getProperty(key);
-            // If password input is correct.
-            if (password.equals(value)) {
-                System.out.println("Correct password! Login successful!");
-                break;
-            } else {
-                System.out.println("Wrong password!");
-                System.exit(0);
-            }
-        }
-    }
-
-    /**
      * Runs the application.
      */
 
     public static void main(String[] args) {
-        initializeLoginProcess();
         launch(args);
     }
 }
