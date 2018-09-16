@@ -17,9 +17,16 @@ import javax.swing.JOptionPane;
  */
 public class LoginWindow {
 
-    public static boolean isLoginSuccessful = false;
-    public static boolean isUserIdExists = false;
+    private static boolean isLoginSuccessful = false;
+    private static boolean isUserIdExists = false;
 
+    public static boolean getIsLoginSuccessful() {
+        return isLoginSuccessful;
+    }
+
+    /**
+     * Kick starts the log in process with pop-up login windows.
+     */
     public static void initializeLoginProcess() {
         Properties loadLoginCredentials = new Properties();
         InputStream input = null;
@@ -63,7 +70,7 @@ public class LoginWindow {
             }
         }
 
-        if(!isUserIdExists) {
+        if (!isUserIdExists) {
             final JFrame wrongUserId = new JFrame();
             wrongUserId.add(button);
             wrongUserId.pack();
@@ -82,7 +89,6 @@ public class LoginWindow {
             String value = loadLoginCredentials.getProperty(key);
             // If password input is correct.
             if (password.equals(value)) {
-                System.out.println("Correct password! Login successful!");
                 isLoginSuccessful = true;
                 break;
             }
