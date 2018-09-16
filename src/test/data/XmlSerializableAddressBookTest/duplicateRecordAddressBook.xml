@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+
+    <records>
+        <name>Alice Pauline</name>
+        <date>10-3-2000</date>
+        <email>alice@example.com</email>
+        <address>123, Jurong West Ave 6, #08-111</address>
+        <tagged>friends</tagged>
+    </records>
+
+    <!-- Record with same identity as Alice Pauline -->
+    <records>
+        <name>Alice Pauline</name>
+        <date>10-3-2000</date>
+        <email>pauline@example.com</email>
+        <address>4th street</address>
+    </records>
+
+</addressbook>

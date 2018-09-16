@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Record with invalid email field -->
+    <records>
+        <name>Hans Muster</name>
+        <date isPrivate="false">10-12-1994</date>
+        <email isPrivate="false">hans@exam!32ple</email>
+        <address isPrivate="false">4th street</address>
+    </records>
+</addressbook>

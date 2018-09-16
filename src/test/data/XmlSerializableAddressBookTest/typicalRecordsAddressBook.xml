@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- AddressBook save file which contains the same Record values as in TypicalRecords#getTypicalAddressBook() -->
+<addressbook>
+    <records>
+        <name>Alice Pauline</name>
+        <date>18-9-2012</date>
+        <email>alice@example.com</email>
+        <address>123, Jurong West Ave 6, #08-111</address>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Benson Meier</name>
+        <date>18-12-2012</date>
+        <email>johnd@example.com</email>
+        <address>311, Clementi Ave 2, #02-25</address>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Carl Kurz</name>
+        <date>10-12-2012</date>
+        <email>heinz@example.com</email>
+        <address>wall street</address>
+    </records>
+    <records>
+        <name>Daniel Meier</name>
+        <date>10-1-2012</date>
+        <email>cornelia@example.com</email>
+        <address>10th street</address>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Elle Meyer</name>
+        <date>10-1-2003</date>
+        <email>werner@example.com</email>
+        <address>michegan ave</address>
+    </records>
+    <records>
+        <name>Fiona Kunz</name>
+        <date>31-12-1996</date>
+        <email>lydia@example.com</email>
+        <address>little tokyo</address>
+    </records>
+    <records>
+        <name>George Best</name>
+        <date>23-10-2010</date>
+        <email>anna@example.com</email>
+        <address>4th street</address>
+    </records>
+</addressbook>
