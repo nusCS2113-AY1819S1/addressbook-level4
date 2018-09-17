@@ -38,35 +38,33 @@ public class Trie {
         baseList.add(value);
     }
 
-    /**
-     * Inserts the input string value to the actual Trie graph implementation
-     * @param value
-     */
-    private void insertToGraph(String value) {
+    private void insertToGraph(String keyString) {
         TrieNode ptr = root; // A TrieNode as pointer to traverse through the tree
 
-        // Run through all characters in the given string value
-        for (int i = 0; i < value.length(); i++) {
-            char ch = value.charAt(i);
-            boolean hasChar = false;
-            ArrayList<TrieNode> children = ptr.getChildren();
+        // Run through all characters in the given key string
+        for (int i = 0; i < keyString.length(); i++) {
+            char ch = keyString.charAt(i);
 
+            boolean hasChar = false;
             // Run through all children of this node
-            for (int j = 0; j < children.size(); j++) {
-                if (children.get(j).getValue() == ch) {
+            for (int j = 0; j < ptr.getChildrenSize(); j++) {
+                if (ptr.getChildren().get(j).getValue() == ch) {
                     hasChar = true;
-                    ptr = children.get(j);
+                    ptr = ptr.getChildren().get(j);
                     break;
                 }
             }
 
-            // There is no such node so create a new node
             if (!hasChar) {
+                TrieNode parent = ptr;
                 ptr = ptr.appendChild(new TrieNode(ch));
+                ptr.setParent(parent);
             }
-
+            
         }
-        ptr.setEndNode(true); // Set end node
+
+        // Mark end of word node
+        ptr.setEndNode(true);
     }
 
     /**
@@ -82,27 +80,68 @@ public class Trie {
         baseList.remove(value);
     }
 
-    /**
+        /**
      * Remove the input string value from the actual graph implementation
      * Traverse from the root to the last character (End node) of the string
-     * Three conditions for removal / setting of end node:
+     * Prerequisites: the value must exist in the Trie
      *
-     * If the end node (last character) has at least one child,
-     * set the end node to a non-end node
-     *
-     * If any previous nodes of the end node (last character) is an end node,
-     * and the end node (last character) has zero child,
-     * remove all the nodes beginning from the end node (last character)
-     * to the first of the previous nodes that is an end node, excluding.
-     *
-     * If any previous nodes of the end node (last character) has at least one child,
-     * and the end node (last character) has zero child,
-     * remove all the nodes beginning from the end node (last character)
-     * to the first of the previous nodes that has at least one child, excluding.
+     * If the remove of this node does not affect any chidren node
+     * (ie the node has no children), remove the whole word
      *
      * @param value
      */
     private void removeFromGraph(String value) {
+        TrieNode pointer;
 
+        pointer = traverseToEndNode(value);
+
+        // Check for the conditions for removal or setting of end node
+        if (pointer.getChildrenSize() == 0) {
+            removeWordFromGraph(pointer);
+        }
+        else {
+            pointer.setEndNode(false);
+        }
+    }
+
+    /**
+     * Traverse the Trie from the start character to the end character of the given string value
+     * @param value the given value
+     * @return the TrieNode referencing the end node
+     */
+    private TrieNode traverseToEndNode(String value) {
+        TrieNode pointer = root;
+
+        // Run through all characters in the string and reaches the end node
+        for (int i = 0; i < value.length(); i++) {
+            ArrayList<TrieNode> children = pointer.getChildren();
+
+            // Run through all children of this node
+            for (int j = 0; j < pointer.getChildrenSize(); j++) {
+                if (children.get(j).getValue() == value.charAt(i)) {
+                    pointer = children.get(j);
+                    break;
+                }
+            }
+        }
+
+        return pointer;
+    }
+
+    /**
+     * Removes a word from the graph given the end node of that word
+     * Removes every parent level node until a node that has more than one child
+     * or it is an end node
+     * @param pointer
+     */
+    private void removeWordFromGraph(TrieNode pointer) {
+        // Set this node as non-end node first
+        pointer.setEndNode(false);
+
+        // Traverse upwards the trie
+        while (!pointer.isEndNode() && pointer.getChildrenSize() == 0) {
+            TrieNode parent = pointer.getParent();
+            pointer = parent;
+        }
     }
 }
