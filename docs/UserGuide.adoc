@@ -236,7 +236,7 @@ _{explain how the user can enable/disable data encryption}_
 *A*: We have Swedish developer on our team. Inventarie is the Swedish word for inventory.
 
 Q: How do I transfer my data to another computer?
-A: Install the application on another computer and copy the file “data”  from the old computer to the new computer and place it in the folder that belong to the program. 
+A: Install the application on another computer and copy the file “data”  from the old computer to the new computer and place it in the folder that belong to the program.
 
 Q: I see your screenshots are from a Windows computer. Will this software work on my Macbook?
 A: Yes, because Java is platform independent. However, please ensure that the latest version of Java is installed on your system.
