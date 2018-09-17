@@ -235,6 +235,11 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+=== Storing password and authenticating
+Password hashes are stored in the password.txt file in the root folder. +
+Format: `password YOUR_NAME YOUR_PASSWORD` +
+If password.txt file already exists, password command will authenticate instead.
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
