@@ -2,6 +2,8 @@ package seedu.address.logic.trie;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 /**
  * A bi-directional Tree structure that stems from the root node
@@ -166,9 +168,9 @@ public class Trie {
     }
 
     /**
-     * Testing code to print all words in the Trie
+     * Testing codes section
      */
-    public ArrayList<String> printAllWords() {
+    public void printAllWords() {
         predictionsList = new ArrayList<>();
         StringBuilder charStack = new StringBuilder();
 
@@ -178,7 +180,11 @@ public class Trie {
             explore(charStack, ptr.getChildren().get(i));
         }
 
-        return predictionsList;
+        for (String item : predictionsList) {
+            System.out.println(item);
+        }
+
+        return;
     }
 
     private void explore(StringBuilder charStack, TrieNode ptr) {
@@ -202,5 +208,15 @@ public class Trie {
         if (charStack.length() > 0) {
             charStack.deleteCharAt(charStack.length()-1);
         }
+    }
+
+    public static ArrayList<String> translateList(ReadOnlyAddressBook input) {
+        ArrayList<String> output = new ArrayList<String>();
+
+        for (Person person : input.getPersonList()) {
+            output.add(person.getName().fullName);
+        }
+
+        return output;
     }
 }
