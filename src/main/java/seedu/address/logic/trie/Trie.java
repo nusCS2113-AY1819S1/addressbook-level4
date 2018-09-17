@@ -29,9 +29,19 @@ public class Trie {
     /**
      * Default constructor
      */
-    public Trie () {
+    public Trie() {
         root = new TrieNode(ROOT_CHAR);
         baseList = new ArrayList<>();
+    }
+
+    /**
+     * Initialises a Trie graph with a list of words
+     * @param input
+     */
+    public void init(ArrayList<String> input) {
+        for (String item : input) {
+            this.insert(item);
+        }
     }
 
     /**
