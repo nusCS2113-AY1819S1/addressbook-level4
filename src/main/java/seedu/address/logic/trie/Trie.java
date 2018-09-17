@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.AddressBook;
 
 /**
  * A bi-directional Tree structure that stems from the root node
@@ -31,20 +32,32 @@ public class Trie {
     /**
      * Default constructor
      */
-    public Trie() {
+    public Trie(AddressBook inputAddressBook) {
         root = new TrieNode(ROOT_CHAR);
         baseList = new ArrayList<>();
+        this.init(inputAddressBook);
     }
 
     /**
      * Initialises a Trie graph with a list of words
      * @param input
      */
-    public void init(ArrayList<String> input) {
+    private void init(AddressBook inputAddressBook) {
+        ArrayList<String> input = getListFromAddressBook(inputAddressBook);
         for (String item : input) {
             this.insert(item);
         }
     }
+
+    public static ArrayList<String> getListFromAddressBook(AddressBook input) {
+        ArrayList<String> output = new ArrayList<String>();
+
+        for (Person person : input.getPersonList()) {
+            output.add(person.getName().fullName);
+        }
+
+        return output;
+    } 
 
     /**
      * Inserts the input string value to the class instance
@@ -210,13 +223,4 @@ public class Trie {
         }
     }
 
-    public static ArrayList<String> translateList(ReadOnlyAddressBook input) {
-        ArrayList<String> output = new ArrayList<String>();
-
-        for (Person person : input.getPersonList()) {
-            output.add(person.getName().fullName);
-        }
-
-        return output;
-    }
 }

@@ -25,9 +25,9 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Testing variables
+     * 
      */
-    private Trie trie;
+    private Trie nameTrie;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -40,9 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-
-        trie = new Trie();
-        trie.init(Trie.translateList(versionedAddressBook));
+        nameTrie = new Trie(versionedAddressBook);
     }
 
     public ModelManager() {
@@ -155,20 +153,20 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
-    
+
     //=========== Command Auto Complete =====================================================================
     @Override
     public void printAllTrieWords() {
-        trie.printAllWords();
+        nameTrie.printAllWords();
     }
 
     @Override
     public void addStringToTrie(String value) {
-        trie.insert(value);
+        nameTrie.insert(value);
     }
 
     @Override
     public void removeStringFromTrie(String value) {
-        trie.remove(value);
+        nameTrie.remove(value);
     }
 }
