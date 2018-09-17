@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
@@ -20,7 +20,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.record.Address;
+import seedu.address.model.record.Expense;
 import seedu.address.model.record.Email;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
@@ -28,7 +28,7 @@ import seedu.address.model.record.Date;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing record in the address book.
+ * Edits the details of an existing record in the expense book.
  */
 public class EditCommand extends Command {
 
@@ -41,7 +41,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_EXPENSE + "EXPENSE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "91234567 "
@@ -49,7 +49,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited Record: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the expense book.";
 
     private final Index index;
     private final EditRecordDescriptor editRecordDescriptor;
@@ -98,10 +98,10 @@ public class EditCommand extends Command {
         Name updatedName = editRecordDescriptor.getName().orElse(recordToEdit.getName());
         Date updatedDate = editRecordDescriptor.getDate().orElse(recordToEdit.getDate());
         Email updatedEmail = editRecordDescriptor.getEmail().orElse(recordToEdit.getEmail());
-        Address updatedAddress = editRecordDescriptor.getAddress().orElse(recordToEdit.getAddress());
+        Expense updatedExpense = editRecordDescriptor.getExpense().orElse(recordToEdit.getExpense());
         Set<Tag> updatedTags = editRecordDescriptor.getTags().orElse(recordToEdit.getTags());
 
-        return new Record(updatedName, updatedDate, updatedEmail, updatedAddress, updatedTags);
+        return new Record(updatedName, updatedDate, updatedEmail, updatedExpense, updatedTags);
     }
 
     @Override
@@ -130,7 +130,7 @@ public class EditCommand extends Command {
         private Name name;
         private Date date;
         private Email email;
-        private Address address;
+        private Expense expense;
         private Set<Tag> tags;
 
         public EditRecordDescriptor() {}
@@ -143,7 +143,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setDate(toCopy.date);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setExpense(toCopy.expense);
             setTags(toCopy.tags);
         }
 
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, date, email, expense, tags);
         }
 
         public void setName(Name name) {
@@ -178,12 +178,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setExpense(Expense expense) {
+            this.expense = expense;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Expense> getExpense() {
+            return Optional.ofNullable(expense);
         }
 
         /**
@@ -221,7 +221,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getDate().equals(e.getDate())
                     && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getExpense().equals(e.getExpense())
                     && getTags().equals(e.getTags());
         }
     }

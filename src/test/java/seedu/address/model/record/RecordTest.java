@@ -2,7 +2,7 @@ package seedu.address.model.record;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
@@ -44,17 +44,17 @@ public class RecordTest {
         assertFalse(ALICE.isSameRecord(editedAlice));
 
         // same name, same day parameter, different attributes -> returns true
-        editedAlice = new RecordBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+        editedAlice = new RecordBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withExpense(VALID_EXPENSE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameRecord(editedAlice));
 
         // same name, same email, different attributes -> returns true
-        editedAlice = new RecordBuilder(ALICE).withDate(VALID_DATE_BOB).withAddress(VALID_ADDRESS_BOB)
+        editedAlice = new RecordBuilder(ALICE).withDate(VALID_DATE_BOB).withExpense(VALID_EXPENSE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameRecord(editedAlice));
 
         // same name, same day parameter, same email, different attributes -> returns true
-        editedAlice = new RecordBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new RecordBuilder(ALICE).withExpense(VALID_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameRecord(editedAlice));
     }
 
@@ -88,8 +88,8 @@ public class RecordTest {
         editedAlice = new RecordBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new RecordBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        // different expense -> returns false
+        editedAlice = new RecordBuilder(ALICE).withExpense(VALID_EXPENSE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false

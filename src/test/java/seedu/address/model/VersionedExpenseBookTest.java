@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.AddressBookBuilder;
 
-public class VersionedAddressBookTest {
+public class VersionedExpenseBookTest {
 
     private final ReadOnlyAddressBook addressBookWithAmy = new AddressBookBuilder().withRecord(AMY).build();
     private final ReadOnlyAddressBook addressBookWithBob = new AddressBookBuilder().withRecord(BOB).build();

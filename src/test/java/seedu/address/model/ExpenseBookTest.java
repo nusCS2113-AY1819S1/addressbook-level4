@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalRecords.ALICE;
 import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
@@ -23,7 +23,7 @@ import seedu.address.model.record.Record;
 import seedu.address.model.record.exceptions.DuplicateRecordException;
 import seedu.address.testutil.RecordBuilder;
 
-public class AddressBookTest {
+public class ExpenseBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -51,7 +51,7 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateRecords_throwsDuplicateRecordException() {
         // Two records with the same identity fields
-        Record editedAlice = new RecordBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Record editedAlice = new RecordBuilder(ALICE).withExpense(VALID_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Record> newRecords = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newRecords);
@@ -80,7 +80,7 @@ public class AddressBookTest {
     @Test
     public void hasRecord_recordWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addRecord(ALICE);
-        Record editedAlice = new RecordBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Record editedAlice = new RecordBuilder(ALICE).withExpense(VALID_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasRecord(editedAlice));
     }

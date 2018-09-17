@@ -5,14 +5,14 @@
         <name>Alice Pauline</name>
         <date>18-9-2012</date>
         <email>alice@example.com</email>
-        <address>123, Jurong West Ave 6, #08-111</address>
+        <expense>39.60</expense>
         <tagged>friends</tagged>
     </records>
     <records>
         <name>Benson Meier</name>
         <date>18-12-2012</date>
         <email>johnd@example.com</email>
-        <address>311, Clementi Ave 2, #02-25</address>
+        <expense>25.80</expense>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </records>
@@ -20,31 +20,31 @@
         <name>Carl Kurz</name>
         <date>10-12-2012</date>
         <email>heinz@example.com</email>
-        <address>wall street</address>
+        <expense>25.90</expense>
     </records>
     <records>
         <name>Daniel Meier</name>
         <date>10-1-2012</date>
         <email>cornelia@example.com</email>
-        <address>10th street</address>
+        <expense>30.50</expense>
         <tagged>friends</tagged>
     </records>
     <records>
         <name>Elle Meyer</name>
         <date>10-1-2003</date>
         <email>werner@example.com</email>
-        <address>michegan ave</address>
+        <expense>49.99</expense>
     </records>
     <records>
         <name>Fiona Kunz</name>
         <date>31-12-1996</date>
         <email>lydia@example.com</email>
-        <address>little tokyo</address>
+        <expense>25.89</expense>
     </records>
     <records>
         <name>George Best</name>
         <date>23-10-2010</date>
         <email>anna@example.com</email>
-        <address>4th street</address>
+        <expense>3.50</expense>
     </records>
 </addressbook>

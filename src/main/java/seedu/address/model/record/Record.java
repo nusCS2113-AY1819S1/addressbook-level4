@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Record in the address book.
+ * Represents a Record in the expense book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Record {
@@ -21,18 +21,18 @@ public class Record {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Expense expense;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Record(Name name, Date date, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, date, email, address, tags);
+    public Record(Name name, Date date, Email email, Expense expense, Set<Tag> tags) {
+        requireAllNonNull(name, date, email, expense, tags);
         this.name = name;
         this.date = date;
         this.email = email;
-        this.address = address;
+        this.expense = expense;
         this.tags.addAll(tags);
     }
 
@@ -48,8 +48,8 @@ public class Record {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Expense getExpense() {
+        return expense;
     }
 
     /**
@@ -92,14 +92,14 @@ public class Record {
         return otherRecord.getName().equals(getName())
                 && otherRecord.getDate().equals(getDate())
                 && otherRecord.getEmail().equals(getEmail())
-                && otherRecord.getAddress().equals(getAddress())
+                && otherRecord.getExpense().equals(getExpense())
                 && otherRecord.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, email, address, tags);
+        return Objects.hash(name, date, email, expense, tags);
     }
 
     @Override
@@ -110,8 +110,8 @@ public class Record {
                 .append(getDate())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Expense: ")
+                .append(getExpense())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

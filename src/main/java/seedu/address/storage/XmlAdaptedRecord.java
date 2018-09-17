@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.record.Address;
+import seedu.address.model.record.Expense;
 import seedu.address.model.record.Email;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
@@ -31,7 +31,7 @@ public class XmlAdaptedRecord {
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
-    private String address;
+    private String expense;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,11 +45,11 @@ public class XmlAdaptedRecord {
     /**
      * Constructs an {@code XmlAdaptedRecord} with the given record details.
      */
-    public XmlAdaptedRecord(String name, String date, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedRecord(String name, String date, String email, String expense, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.date = date;
         this.email = email;
-        this.address = address;
+        this.expense = expense;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -64,7 +64,7 @@ public class XmlAdaptedRecord {
         name = source.getName().fullName;
         date = source.getDate().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        expense = source.getExpense().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -105,16 +105,16 @@ public class XmlAdaptedRecord {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (expense == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Expense.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        if (!Expense.isValidExpense(expense)) {
+            throw new IllegalValueException(Expense.MESSAGE_EXPENSE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Expense modelExpense = new Expense(expense);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Record(modelName, modelDate, modelEmail, modelAddress, modelTags);
+        return new Record(modelName, modelDate, modelEmail, modelExpense, modelTags);
     }
 
     @Override
@@ -131,7 +131,7 @@ public class XmlAdaptedRecord {
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(date, otherPerson.date)
                 && Objects.equals(email, otherPerson.email)
-                && Objects.equals(address, otherPerson.address)
+                && Objects.equals(expense, otherPerson.expense)
                 && tagged.equals(otherPerson.tagged);
     }
 }

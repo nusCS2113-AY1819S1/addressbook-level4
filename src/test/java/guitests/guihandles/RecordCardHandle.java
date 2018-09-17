@@ -16,7 +16,7 @@ import seedu.address.model.record.Record;
 public class RecordCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
+    private static final String EXPENSE_FIELD_ID = "#expense";
     private static final String DATE_FIELD_ID = "#date";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
@@ -33,7 +33,7 @@ public class RecordCardHandle extends NodeHandle<Node> {
 
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
-        addressLabel = getChildNode(ADDRESS_FIELD_ID);
+        addressLabel = getChildNode(EXPENSE_FIELD_ID);
         dateLabel = getChildNode(DATE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
 
@@ -53,7 +53,7 @@ public class RecordCardHandle extends NodeHandle<Node> {
         return nameLabel.getText();
     }
 
-    public String getAddress() {
+    public String getExpense() {
         return addressLabel.getText();
     }
 
@@ -77,7 +77,7 @@ public class RecordCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(Record record) {
         return getName().equals(record.getName().fullName)
-                && getAddress().equals(record.getAddress().value)
+                && getExpense().equals(record.getExpense().value)
                 && getDate().equals(record.getDate().value)
                 && getEmail().equals(record.getEmail().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(record.getTags().stream()

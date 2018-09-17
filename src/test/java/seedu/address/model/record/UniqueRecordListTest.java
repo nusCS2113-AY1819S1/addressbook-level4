@@ -3,7 +3,7 @@ package seedu.address.model.record;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalRecords.ALICE;
 import static seedu.address.testutil.TypicalRecords.BOB;
@@ -46,7 +46,7 @@ public class UniqueRecordListTest {
     @Test
     public void contains_recordWithSameIdentityFieldsInList_returnsTrue() {
         uniqueRecordList.add(ALICE);
-        Record editedAlice = new RecordBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Record editedAlice = new RecordBuilder(ALICE).withExpense(VALID_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueRecordList.contains(editedAlice));
     }
@@ -94,7 +94,7 @@ public class UniqueRecordListTest {
     @Test
     public void setRecord_editedRecordHasSameIdentity_success() {
         uniqueRecordList.add(ALICE);
-        Record editedAlice = new RecordBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Record editedAlice = new RecordBuilder(ALICE).withExpense(VALID_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueRecordList.setRecord(ALICE, editedAlice);
         UniqueRecordList expectedUniqueRecordList = new UniqueRecordList();

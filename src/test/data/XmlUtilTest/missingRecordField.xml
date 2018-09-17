@@ -3,6 +3,6 @@
 <record>
     <date>23-10-2010</date>
     <email>hans@example</email>
-    <address>4th street</address>
+    <expense>10.99</expense>
     <tagged>friends</tagged>
 </record>

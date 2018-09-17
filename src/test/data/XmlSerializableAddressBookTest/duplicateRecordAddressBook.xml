@@ -5,7 +5,7 @@
         <name>Alice Pauline</name>
         <date>10-3-2000</date>
         <email>alice@example.com</email>
-        <address>123, Jurong West Ave 6, #08-111</address>
+        <expense>39.60</expense>
         <tagged>friends</tagged>
     </records>
 
@@ -14,7 +14,7 @@
         <name>Alice Pauline</name>
         <date>10-3-2000</date>
         <email>pauline@example.com</email>
-        <address>4th street</address>
+        <expense>39.60</expense>
     </records>
 
 </addressbook>

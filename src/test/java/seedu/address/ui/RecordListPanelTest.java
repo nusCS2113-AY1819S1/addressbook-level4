@@ -98,7 +98,7 @@ public class RecordListPanelTest extends GuiUnitTest {
             builder.append("<name>").append(i).append("a</name>\n");
             builder.append("<date>10-10-2000</date>\n");
             builder.append("<email>a@aa</email>\n");
-            builder.append("<address>a</address>\n");
+            builder.append("<expense>0.1</expense>\n");
             builder.append("</records>\n");
         }
         builder.append("</addressbook>\n");
