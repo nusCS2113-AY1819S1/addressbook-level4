@@ -5,7 +5,7 @@
 :stylesDir: stylesheets
 
 AddressBook - Level 4 was developed by CS2113 T13 Group 2 team. +
-{empty} 
+{empty}
 
 == Project Team
 
@@ -23,7 +23,7 @@ image::yijinl.jpg[width="150", align="left"]
 {empty}[https://github.com/HansKoh[github]]
 
 Role: Developer +
-Responsibilities: 
+Responsibilities:
 
 '''
 
@@ -32,7 +32,7 @@ image::m133225.jpg[width="150", align="left"]
 {empty}[http://github.com/E0191729[github]]
 
 Role: Developer +
-Responsibilities: 
+Responsibilities:
 
 '''
 
@@ -41,6 +41,6 @@ image::cai_xiaolin.jpg[width="150", align="left"]
 {empty}[https://github.com/xllx1[github]]
 
 Role: Developer +
-Responsibilities: 
+Responsibilities:
 
 '''
