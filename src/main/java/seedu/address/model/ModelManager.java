@@ -155,19 +155,20 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
-    /**
-     * Testing code
-     */
+    
+    //=========== Command Auto Complete =====================================================================
+    @Override
     public void printAllTrieWords() {
         trie.printAllWords();
     }
 
-    public void addWordToTrie(String value) {
+    @Override
+    public void addStringToTrie(String value) {
         trie.insert(value);
     }
 
-    public void removeWordFromTrie(String value) {
+    @Override
+    public void removeStringFromTrie(String value) {
         trie.remove(value);
     }
 }

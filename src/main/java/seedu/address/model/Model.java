@@ -77,11 +77,19 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Testing code
+     * Prints all the stored words in the Trie 
      */
     void printAllTrieWords();
 
-    void addWordToTrie(String value);
+    /**
+     * Add a String value to the Triew
+     * @param value
+     */
+    void addStringToTrie(String value);
 
-    void removeWordFromTrie(String value);
+    /**
+     * Remove a String value from the Trie
+     * @param value
+     */
+    void removeStringFromTrie(String value);
 }
