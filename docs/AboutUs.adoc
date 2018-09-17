@@ -10,8 +10,8 @@ AddressBook - Level 4 was developed by CS2113 T13 Group 2 team. +
 == Project Team
 
 === Zhao Mingda
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+image::zhao_mingda.jpg[width="150", align="left"]
+{empty}[https://github.com/Meowzz95[github]]
 
 Role: Project Leader +
 Responsibility
@@ -20,7 +20,7 @@ Responsibility
 
 === Xu Hanhui
 image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/HansKoh[github]]
 
 Role: Developer +
 Responsibilities: 
@@ -29,7 +29,7 @@ Responsibilities:
 
 === Dinesh Mangalanathadurai
 image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/E0191729[github]]
 
 Role: Developer +
 Responsibilities: 
@@ -37,8 +37,8 @@ Responsibilities:
 '''
 
 === Cai Xiaolin
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+image::cai_xiaolin.jpg[width="150", align="left"]
+{empty}[https://github.com/xllx1[github]]
 
 Role: Developer +
 Responsibilities: 
