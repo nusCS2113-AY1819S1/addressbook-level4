@@ -12,9 +12,9 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T13-1/main/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2113-AY1819S1-T13-1`      Since: `September`      Licence: `MIT`
 
 == Setting up
 
@@ -69,9 +69,9 @@ Optionally, you can follow the <<UsingCheckstyle#, UsingCheckstyle.adoc>> docume
 
 ==== Updating documentation to match your fork
 
-After forking the repo, the documentation will still have the SE-EDU branding and refer to the `se-edu/addressbook-level4` repo.
+After forking the repo, the documentation will still have the Student Planner branding and refer to the `CS2113-AY1819S1-T13-1/main` repo.
 
-If you plan to develop this fork as a separate product (i.e. instead of contributing to `se-edu/addressbook-level4`), you should do the following:
+If you plan to develop this fork as a separate product (i.e. instead of contributing to `CS2113-AY1819S1-T13-1/main`), you should do the following:
 
 . Configure the <<Docs-SiteWideDocSettings, site-wide documentation settings>> in link:{repoURL}/build.gradle[`build.gradle`], such as the `site-name`, to suit your own project.
 
@@ -813,7 +813,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
+*Target user profile*: Busy final year SoC/Business Double Major student
 
 * has a need to manage a significant number of contacts
 * prefer desktop apps over other types
@@ -821,9 +821,11 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: Manage tasks faster than a typical mouse/GUI driven app
 
 [appendix]
+== User Stories
+
 == User Stories
 
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
@@ -833,15 +835,24 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |user |add a new task | track the tasks
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |user |delete a task |remove entries that I no longer need
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |find a task by name |locate task/s without having to go through the entire list
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |user |find a task by details |locate task/s without having to go through the details of the entire list of tasks
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |user with many tasks in the address book |sort tasks by deadline |locate upcoming due tasks easily
+
+|`* * *` |user with many tasks in the address book |sort tasks by priority |locate important tasks easily
+
+|`* *` |paranoid user|backup tasks locally |I have a backup in case I accidentally delete my tasks file
+
+|`* *` |paranoid user|backup tasks online |I have a backup in case my desktop computer dies or I have to switch computers.
+
+|`* *` |user|be notified of upcoming deadlines |complete the tasks on time
+
 |=======================================================================
 
 _{More to be added}_
@@ -849,17 +860,64 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `StudentPlanner` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: List task (UC1)
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list tasks
+2.  StudentPlanner shows a list of tasks
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+[none]
+** 2a1. StudentPlanner informs User that there are no tasks.
+Use case ends.
+
+
+[discrete]
+=== Use case: Add task (UC2)
+
+*MSS*
+
+1.  User requests to add a new task with details
+2.  StudentPlanner adds new task with given details
++
+Use case ends.
+
+*Extensions*
+
+
+* 2a. A similar tasks exists.
++
+[none]
+** 2a1. StudentPlanner informs user about skipping adding possible duplicated task.
++
+Use case ends.
+* 2b. Insufficient or Invalid details provided.
++
+[none]
+** 2b1. StudentPlanner informs user about unsuccessful adding of task.
+** 2b1. StudentPlanner <<_use_case_app_usage_uc6,shows application usage (UC6)>>
++
+Use case ends.
+
+[discrete]
+=== Use case: Delete task (UC3)
+
+*MSS*
+
+1.  User requests to list tasks
+2.  StudentPlanner shows a list of tasks
+3.  User requests to delete a specific task in the list
+4.  StudentPlanner deletes the task
 +
 Use case ends.
 
@@ -873,9 +931,146 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. StudentPlanner shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: Find tasks by name (UC4)
+*Prerequisite*
+
+1. At least one tasks exists
+
+*MSS*
+
+1.  User requests to find task by name/s in the list
+2.  StudentPlanner shows the list of task/s with provided name/s
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
+[none]
+** 2a1. StudentPlanner informs user that no tasks found
++
+Use case ends.
+
+[discrete]
+=== Use case: Find tasks by details (UC5)
+*Prerequisite*
+
+1. At least one tasks exists
+
+*MSS*
+
+1.  User requests to find tasks by details
+2.  StudentPlanner shows the list of task/s with provided details/s
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
+[none]
+** 2a1. StudentPlanner informs user that no tasks found
++
+Use case ends.
+
+
+[discrete]
+=== Use case: App Usage (UC6)
+
+*MSS*
+
+1.  User requests to see help
+2.  StudentPlanner shows help and example usage.
++
+Use case ends.
+
+[discrete]
+=== Use case: Invalid command (UC7)
+
+*MSS*
+
+1.  User enters a command that does not exists
+2.  StudentPlanner informs User about unknown command
+3.  StudentPlanner <<_use_case_app_usage_uc6,shows application usage (UC6)>>
++
+Use case ends.
+
+[discrete]
+=== Use case: Local tasks backup (UC8)
+*Prerequisite*
+
+1. At least one tasks exists
+
+*MSS*
+
+1.  User requests to backup all data to another local folder
+2.  StudentPlanner backups current data to specified folder
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Folder provided cannot be written to
+[none]
+** 2a1. StudentPlanner informs user that folder cannot be used for backup
++
+Use case ends.
+
+[discrete]
+=== Use case: Local tasks backup (UC8)
+*Prerequisite*
+
+1. At least one tasks exists
+
+*MSS*
+
+1.  User requests to backup all data to another local folder
+2.  StudentPlanner backups current data to specified folder
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Folder provided cannot be written to
+[none]
+** 2a1. StudentPlanner informs user that folder cannot be used for backup
++
+Use case ends.
+
+[discrete]
+=== Use case: Online tasks backup (UC9)
+*Prerequisite*
+
+1. At least one online backup service has been set up.
+
+*MSS*
+
+1.  User requests to backup all data to an online service
+2.  StudentPlanner backups current data to online service
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Service has not been set up previously
+[none]
+** 2a1. StudentPlanner prompts user to first set up the specified online service.
++
+* 2b. Service is not recognised or unsupported
+[none]
+** 2b1. StudentPlanner shows error.
+** 2b2. StudentPlanner shows help for online backup.
++
+Use case ends.
 
 _{More to be added}_
 
@@ -883,8 +1078,10 @@ _{More to be added}_
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to hold up to 1000 tasks without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should take no longer than 5 seconds on each startup
+.  Should have internet connectivity for features requiring online interactivity.
 
 _{More to be added}_
 
@@ -900,19 +1097,22 @@ A contact detail that is not meant to be shared with others
 [appendix]
 == Product Survey
 
-*Product Name*
+*EverNote*
 
-Author: ...
+Author: Adrian Tan link:https://github.com/QzSG[@QzSG]
 
 Pros:
 
-* ...
-* ...
+* Lots of features including
+
+** Tasks, Events, Notes, Meetings
+* Cross Platform
 
 Cons:
 
-* ...
-* ...
+* No power user friendly features like in built console based commands
+* Not free, good features are premium only
+* Not open source.
 
 [appendix]
 == Instructions for Manual Testing
@@ -928,7 +1128,7 @@ These instructions only provide a starting point for testers to work on; testers
 
 .. Download the jar file and copy into an empty folder
 .. Double-click the jar file +
-   Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   Expected: Shows the GUI with a set of sample tasks. The window size may not be optimum.
 
 . Saving window preferences
 
@@ -938,15 +1138,15 @@ These instructions only provide a starting point for testers to work on; testers
 
 _{ more test cases ... }_
 
-=== Deleting a person
+=== Deleting a task
 
-. Deleting a person while all persons are listed
+. Deleting a task while all tasks are listed
 
-.. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+.. Prerequisites: List all tasks using the `list` command. Multiple tasks in the list.
 .. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   Expected: First task is deleted from the list. Details of the deleted task shown in the status message. Timestamp in the status bar is updated.
 .. Test case: `delete 0` +
-   Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   Expected: No task is deleted. Error details shown in the status message. Status bar remains the same.
 .. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
    Expected: Similar to previous.
 
