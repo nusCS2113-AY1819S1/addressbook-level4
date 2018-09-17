@@ -28,5 +28,5 @@ public interface Logic {
     /**
      * Testing code
      */
-    void printAllTrieWords();
+    public void printAllTrieWords();
 }

@@ -23,14 +23,11 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
-    private Trie trie;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
-        trie = new Trie();
-        trie.init(Trie.translateList(model.getAddressBook()));
     }
 
     @Override
@@ -41,6 +38,7 @@ public class LogicManager extends ComponentManager implements Logic {
             return command.execute(model, history);
         } finally {
             history.add(commandText);
+
         }
     }
 
@@ -58,6 +56,6 @@ public class LogicManager extends ComponentManager implements Logic {
      * Testing code
      */
     public void printAllTrieWords() {
-        trie.printAllWords();
+        model.printAllTrieWords();
     }
 }
