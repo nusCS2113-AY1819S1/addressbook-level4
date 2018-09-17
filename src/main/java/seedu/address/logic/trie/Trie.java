@@ -11,6 +11,11 @@ import java.util.ArrayList;
 public class Trie {
 
     /**
+     * Testing variables
+     */
+    private ArrayList<String> predictionsList;
+
+    /**
      * Class constants
      */
     private final char ROOT_CHAR = '.';
@@ -38,6 +43,11 @@ public class Trie {
         baseList.add(value);
     }
 
+    /**
+     * Insert the given string value to the Trie graph.
+     * 
+     * @param keyString the string value to be inserted
+     */
     private void insertToGraph(String keyString) {
         TrieNode ptr = root; // A TrieNode as pointer to traverse through the tree
 
@@ -142,6 +152,45 @@ public class Trie {
         while (!pointer.isEndNode() && pointer.getChildrenSize() == 0) {
             TrieNode parent = pointer.getParent();
             pointer = parent;
+        }
+    }
+
+    /**
+     * Testing code to print all words in the Trie
+     */
+    public ArrayList<String> printAllWords() {
+        predictionsList = new ArrayList<>();
+        StringBuilder charStack = new StringBuilder();
+
+        TrieNode ptr = root;
+
+        for (int i = 0; i < ptr.getChildren().size(); i++) {
+            explore(charStack, ptr.getChildren().get(i));
+        }
+
+        return predictionsList;
+    }
+
+    private void explore(StringBuilder charStack, TrieNode ptr) {
+        // Push the character of current node to stack
+        if (ptr.getValue() != '.') {
+            charStack.append(ptr.getValue());
+        }
+        
+        // We have hit the end of a word but the branch continues or there are more branch
+        if (ptr.isEndNode()) {
+            predictionsList.add(charStack.toString());
+        }
+
+        // Explore all other neighbours
+        for (int i = 0; i < ptr.getChildren().size(); i++) {
+            TrieNode neighbour = ptr.getChildren().get(i);
+            explore(charStack, neighbour);
+        }
+
+        // Pop the last character out of stack
+        if (charStack.length() > 0) {
+            charStack.deleteCharAt(charStack.length()-1);
         }
     }
 }
