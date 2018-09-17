@@ -79,5 +79,9 @@ public interface Model {
     /**
      * Testing code
      */
-    public void printAllTrieWords();
+    void printAllTrieWords();
+
+    void addWordToTrie(String value);
+
+    void removeWordFromTrie(String value);
 }

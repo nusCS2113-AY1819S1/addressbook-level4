@@ -52,6 +52,9 @@ public class LogicManager extends ComponentManager implements Logic {
         return new ListElementPointer(history.getHistory());
     }
 
+    /**
+     * Testing code
+     */
     public void printAllTrieWords() {
         model.printAllTrieWords();
     }

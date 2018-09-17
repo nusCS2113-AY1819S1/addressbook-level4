@@ -163,5 +163,11 @@ public class ModelManager extends ComponentManager implements Model {
         trie.printAllWords();
     }
 
-    
+    public void addWordToTrie(String value) {
+        trie.insert(value);
+    }
+
+    public void removeWordFromTrie(String value) {
+        trie.remove(value);
+    }
 }
