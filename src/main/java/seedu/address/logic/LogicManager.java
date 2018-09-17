@@ -10,6 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.trie.Trie;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -22,11 +23,14 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
+    private Trie trie;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
+        trie = new Trie();
+        trie.init(Trie.translateList(model.getAddressBook()));
     }
 
     @Override
@@ -48,5 +52,12 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
+    }
+
+    /**
+     * Testing code
+     */
+    public void printAllTrieWords() {
+        trie.printAllWords();
     }
 }

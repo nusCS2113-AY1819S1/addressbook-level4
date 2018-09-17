@@ -41,6 +41,10 @@ public class TrieNode {
         return children;
     }
 
+    public int getChildrenSize() {
+        return children.size();
+    }
+
     public TrieNode appendChild(TrieNode child) {
         children.add(child);
         children.get(children.size()-1).setParent(this);
