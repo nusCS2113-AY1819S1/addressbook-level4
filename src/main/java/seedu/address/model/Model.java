@@ -75,4 +75,9 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Testing code
+     */
+    public void printAllTrieWords();
 }

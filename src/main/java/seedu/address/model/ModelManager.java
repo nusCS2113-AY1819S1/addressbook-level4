@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Person;
+import seedu.address.logic.trie.Trie;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,6 +23,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+
+    /**
+     * Testing variables
+     */
+    private Trie trie;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +40,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+
+        trie = new Trie();
+        trie.init(Trie.translateList(versionedAddressBook));
     }
 
     public ModelManager() {
@@ -147,4 +156,12 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    /**
+     * Testing code
+     */
+    public void printAllTrieWords() {
+        trie.printAllWords();
+    }
+
+    
 }
