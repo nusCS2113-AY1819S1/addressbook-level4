@@ -18,7 +18,7 @@ public class GenListCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        for(Person p : model.getFilteredPersonList()){
+        for (Person p : model.getFilteredPersonList()) {
             System.out.print(p.getName() + " ");
         }
         System.out.print("\n");
