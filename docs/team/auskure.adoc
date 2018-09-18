@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Low Wei Jie, Oscar - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
