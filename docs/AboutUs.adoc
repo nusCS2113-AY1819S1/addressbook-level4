@@ -21,7 +21,7 @@ Responsibilities: Logic
 '''
 
 === Low Wei Jie, Oscar
-image::doc/images/auskure.png[width="150", align="left"]
+image::https://github.com/CS2113-AY1819S1-W12-2/main/blob/master/docs/images/auskure.png[width="150", align="left"]
 {empty}[http://github.com/auskure[github]] [<<auskure#, portfolio>>]
 
 Role: Team Lead +
@@ -39,7 +39,7 @@ Responsibilities: Model
 '''
 
 === Lim Zhi Hui Alden
-image::doc/images/e0201942.png[width="150", align="left"]
+image::https://github.com/CS2113-AY1819S1-W12-2/main/blob/master/docs/images/e0201942.png[width="150", align="left"]
 {empty}[http://github.com/e0201942[github]] [<<e0201942#, portfolio>>]
 
 Role: Developer +
