@@ -22,10 +22,12 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 
 == Quick Start
 
-.  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Ensure you have Java version 10 or later installed in your Computer.
+.  Download the latest inventarie.jar here (link will be added later).
+.  Copy the file to the folder you want to use as the home folder for your Inventarie Pro.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Once prompted, enter your username and password. This will be your permanent username and password for subsequent uses.
+
 +
 image::Ui.png[width="790"]
 +
