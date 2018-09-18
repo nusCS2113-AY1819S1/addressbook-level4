@@ -1,4 +1,3 @@
-
 = John Doe - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
