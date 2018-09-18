@@ -10,11 +10,12 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 //Alphabetical order : AT, CSG, I , LH , MGGM ???
 //Image naming format : [yourgithubusername].jpg Example: QzSG.jpg
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Adrian Tan Guo Hua
+image::qzsg.jpg[width="150", align="left"]
+{empty}[https://qz.sg[homepage]] [https://github.com/qzsg[github]]
 
-Role: Project Advisor
+Role: Team Lead, Developer, Git Expert +
+Responsibilities: Devops, Integration, Scheduling and tracking
 
 '''
 
