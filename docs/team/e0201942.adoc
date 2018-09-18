@@ -1,5 +1,4 @@
-
-= John Doe - Project Portfolio
+= Lim Zhi Hui Alden - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
