@@ -63,9 +63,42 @@ Displays the product and basic information related to it
 The search is case insensitive e.g ‘potato’ will match ‘POTATO’
 All products containing the name searched for will appear.
 
-=== Adding a distributor: `add`
+=== Add a product: add product name <product name>
+
+Format: `add product name <product name>`  
+
+Adds a product to the list of products offered by the store
+
+=== List all distributors: distributors
+
+Format: `distributors`
+
+List all distributors the store is in touch with
+
+=== Search for a distributor: search <distributor name>
+
+Format: `search <distributor_name>`
+
+Displays the distributor and basic information related to it
 Adds a distributor to the address book.
-Format: `add distributor <distributor_name>`
+
+=== Add a distributor: add distributor name <distributor name>
+
+Format: `add distributor name <distributor name>`
+
+Adds a distributor to the list of distributors engaged with the store.
+
+=== Find all stored contact information (distributors and customers): contacts
+
+Format: `contacts`
+
+This command lists all the contacts in alphabetical order of the first name, and whether they are distributors or customers. 
+
+=== Show best selling product: top selling
+
+Format: `top selling`
+
+Lists the best selling products in order of the sales revenues from those products.
 
 ****
 * Edits the product at the specified `INDEX`. The index refers to the index number shown in the displayed product list. The index *must be a positive integer* 1, 2, 3, ...
