@@ -49,27 +49,19 @@ Format: `help`
 
 All commands and information about it is displayed
 
-=== Adding a product: `add`
+=== List all products: inventory
 
-Adds a product to the inventory +
-Format: `add <product_name> <product_quantity> <price>`
-
-[TIP]
-A product can have any number of tags (including 0)
-
-Examples:
-
-* `add mushroom 2 3.50 coca-cola 3 5`
-
-=== Listing all products : `inventory`
-
-Shows a list of all products in the inventory. +
 Format: `inventory`
 
-=== Editing a product : `edit`
+Lists all products offered by the store in alphabetical order
 
-Edits an existing product in the inventory. +
-Format: `edit INDEX `
+=== Search for a product: search <product name>
+
+Format: `search <product name>`            
+            
+Displays the product and basic information related to it
+The search is case insensitive e.g ‘potato’ will match ‘POTATO’
+All products containing the name searched for will appear.
 
 === Adding a distributor: `add`
 Adds a distributor to the address book.
