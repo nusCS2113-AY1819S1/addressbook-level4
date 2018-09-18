@@ -36,8 +36,8 @@ import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
 /**
- * The main entry point to the application. This is a test commit.
- * This is a second test commit.
+ * The main entry point to the application.
+ * Test commit to see if Travis detects commits after re-configuring.
  */
 public class MainApp extends Application {
 
