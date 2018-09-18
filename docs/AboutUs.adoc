@@ -4,53 +4,60 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
+AddressBook - Level 4 is currently being developed by the https://github.com/orgs/CS2113-AY1819S1-T13-4/teams[T13-4] team. +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Novin Tong Yong Kang
+image::novin997.png[width="150", align="left"]
+{empty}[https://github.com/novin997[github]] [<<johndoe#, portfolio>>]
+
+Role: Team Leader + Lead Developer +
+Responsibilities: Development of features, scheduling and tracking of tasks
+
+'''
+
+=== Rajdeep Singh Hundal
+image::rajdeepsh.png[width="150", align="left"]
+{empty}[https://github.com/rajdeepsh[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer + Documentation +
+Responsibilities: Development of features and ensuring document correctness
+
+'''
+
+=== Tan Wei Hao Joel
+image::e0176882.png[width="150", align="left"]
+{empty}[https://github.com/E0176882[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer + Quality Assurance +
+Responsibilities: Development of features and ensuring good quality of application
+
+'''
+
+=== Tsu Wei Quan
+image::tsuweiquan.png[width="150", align="left"]
+{empty}[https://github.com/Tsuweiquan[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer + Integration +
+Responsibilities: Development of features, maintainance of github site and other administrative duties
+
+'''
+
+=== Yang Shuang
+image::clara1234566.png[width="150", align="left"]
+{empty}[https://github.com/clara1234566[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer + Tester +
+Responsibilities: Development of features and rigorous testing of application
+
+'''
+
+=== Nishant Shyamal Budhdev
+image::Nishant.png[width="150", align="left"]
+{empty}[[github]] [<<johndoe#, portfolio>>]
 
 Role: Project Advisor
-
-'''
-
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
-
-Role: Team Lead +
-Responsibilities: UI
-
-'''
-
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: Data
-
-'''
-
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: Dev Ops + Threading
-
-'''
-
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: UI
 
 '''
