@@ -813,15 +813,15 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
+*Target user profile*: University Lecturers
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage students and groups faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -838,6 +838,22 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |delete a person |remove entries that I no longer need
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+
+|`* * *` |university lecturer |create groups of students |have a list of all my students in a particular module/group
+
+|`* * *` |university lecturer |add groups to a calender |have a list of all my modules with their respective dates
+
+|`* * *` |university lecturer |send an email to all students in any group |make module specific announcements
+
+|`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
+
+|`* *` |university lecturer |automatically distribute students into groups via criteria-based user options (gender/nationality) |efficiently from random groups
+
+|`* *` |university lecturer |filter student contacts by their scores |generate a list of students who need my help
+
+|`* *` |university lecturer |automatically add tags for specific student groups |efficiently mark out weak students
+
+|`* *` |university lecturer |create a group chat for my students to have an open discussion |efficiently mediate discussions
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
