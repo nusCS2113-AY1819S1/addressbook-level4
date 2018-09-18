@@ -41,7 +41,7 @@ public class Expense {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid expense.
      */
     public static boolean isValidExpense(String test) {
         return test.matches(EXPENSE_VALIDATION_REGEX);

@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.record.Expense;
-import seedu.address.model.record.Email;
+import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.Date;
@@ -29,7 +29,7 @@ public class XmlAdaptedRecord {
     @XmlElement(required = true)
     private String date;
     @XmlElement(required = true)
-    private String email;
+    private String income;
     @XmlElement(required = true)
     private String expense;
 
@@ -45,10 +45,10 @@ public class XmlAdaptedRecord {
     /**
      * Constructs an {@code XmlAdaptedRecord} with the given record details.
      */
-    public XmlAdaptedRecord(String name, String date, String email, String expense, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedRecord(String name, String date, String income, String expense, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.date = date;
-        this.email = email;
+        this.income = income;
         this.expense = expense;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -63,7 +63,7 @@ public class XmlAdaptedRecord {
     public XmlAdaptedRecord(Record source) {
         name = source.getName().fullName;
         date = source.getDate().value;
-        email = source.getEmail().value;
+        income = source.getIncome().value;
         expense = source.getExpense().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -76,9 +76,9 @@ public class XmlAdaptedRecord {
      * @throws IllegalValueException if there were any data constraints violated in the adapted record
      */
     public Record toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> recordTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            recordTags.add(tag.toModelType());
         }
 
         if (name == null) {
@@ -97,13 +97,13 @@ public class XmlAdaptedRecord {
         }
         final Date modelDate = new Date(date);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+        if (income == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Income.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!Income.isValidIncome(income)) {
+            throw new IllegalValueException(Income.MESSAGE_INCOME_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Income modelIncome = new Income(income);
 
         if (expense == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Expense.class.getSimpleName()));
@@ -113,8 +113,8 @@ public class XmlAdaptedRecord {
         }
         final Expense modelExpense = new Expense(expense);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Record(modelName, modelDate, modelEmail, modelExpense, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(recordTags);
+        return new Record(modelName, modelDate, modelIncome, modelExpense, modelTags);
     }
 
     @Override
@@ -127,11 +127,11 @@ public class XmlAdaptedRecord {
             return false;
         }
 
-        XmlAdaptedRecord otherPerson = (XmlAdaptedRecord) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(date, otherPerson.date)
-                && Objects.equals(email, otherPerson.email)
-                && Objects.equals(expense, otherPerson.expense)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedRecord otherRecord = (XmlAdaptedRecord) other;
+        return Objects.equals(name, otherRecord.name)
+                && Objects.equals(date, otherRecord.date)
+                && Objects.equals(income, otherRecord.income)
+                && Objects.equals(expense, otherRecord.expense)
+                && tagged.equals(otherRecord.tagged);
     }
 }

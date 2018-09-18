@@ -4,7 +4,7 @@
     <records>
         <name>Ha!ns Mu@ster</name>
         <date isPrivate="false">10-12-1994</date>
-        <email isPrivate="false">hans@example.com</email>
+        <income isPrivate="false">11.99</income>
         <expense isPrivate="false">10.99</expense>
     </records>
 </addressbook>

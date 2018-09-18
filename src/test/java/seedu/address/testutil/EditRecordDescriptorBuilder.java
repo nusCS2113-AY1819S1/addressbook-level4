@@ -7,7 +7,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditRecordDescriptor;
 import seedu.address.model.record.Expense;
-import seedu.address.model.record.Email;
+import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.Date;
@@ -35,7 +35,7 @@ public class EditRecordDescriptorBuilder {
         descriptor = new EditCommand.EditRecordDescriptor();
         descriptor.setName(record.getName());
         descriptor.setDate(record.getDate());
-        descriptor.setEmail(record.getEmail());
+        descriptor.setIncome(record.getIncome());
         descriptor.setExpense(record.getExpense());
         descriptor.setTags(record.getTags());
     }
@@ -57,10 +57,10 @@ public class EditRecordDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code EditRecordDescriptor} that we are building.
+     * Sets the {@code Income} of the {@code EditRecordDescriptor} that we are building.
      */
-    public EditRecordDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+    public EditRecordDescriptorBuilder withIncome(String income) {
+        descriptor.setIncome(new Income(income));
         return this;
     }
 

@@ -3,10 +3,10 @@ package systemtests;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPENSE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
@@ -17,7 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -38,7 +38,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.record.Expense;
-import seedu.address.model.record.Email;
+import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.Date;
@@ -59,7 +59,7 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
          */
         Record toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + DATE_DESC_AMY + " "
-                + EMAIL_DESC_AMY + "   " + EXPENSE_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + INCOME_DESC_AMY + "   " + EXPENSE_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -75,14 +75,14 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
 
         /* Case: add a record with all fields same as another record in the address book except name -> added */
         toAdd = new RecordBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + DATE_DESC_AMY + EMAIL_DESC_AMY + EXPENSE_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + DATE_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a record with all fields same as another record in the address book except day parameter and email
+        /* Case: add a record with all fields same as another record in the address book except date and income
          * -> added
          */
-        toAdd = new RecordBuilder(AMY).withDate(VALID_DATE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        toAdd = new RecordBuilder(AMY).withDate(VALID_DATE_BOB).withIncome(VALID_INCOME_BOB).build();
         command = RecordUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
@@ -93,7 +93,7 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
         /* Case: add a record with tags, command with parameters in random order -> added */
         toAdd = BOB;
         command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + DATE_DESC_BOB + EXPENSE_DESC_BOB + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB;
+                + TAG_DESC_HUSBAND + INCOME_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add a record, missing tags -> added */
@@ -122,8 +122,8 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
         command = RecordUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
-        /* Case: add a duplicate record except with different email -> rejected */
-        toAdd = new RecordBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
+        /* Case: add a duplicate record except with different income -> rejected */
+        toAdd = new RecordBuilder(HOON).withIncome(VALID_INCOME_BOB).build();
         command = RecordUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
@@ -137,19 +137,19 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RECORD);
 
         /* Case: missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + DATE_DESC_AMY + EMAIL_DESC_AMY + EXPENSE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + DATE_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing day parameter -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + EMAIL_DESC_AMY + EXPENSE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        /* Case: missing email -> rejected */
+        /* Case: missing income -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + EXPENSE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing expense -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + EMAIL_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + INCOME_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
@@ -157,23 +157,23 @@ public class AddCommandSystemTest extends ExpenseBookSystemTest {
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
-        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + DATE_DESC_AMY + EMAIL_DESC_AMY + EXPENSE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + DATE_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid day parameter -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_DATE_DESC + EMAIL_DESC_AMY + EXPENSE_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_DATE_DESC + INCOME_DESC_AMY + EXPENSE_DESC_AMY;
         assertCommandFailure(command, Date.MESSAGE_DATE_CONSTRAINTS);
 
-        /* Case: invalid email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + INVALID_EMAIL_DESC + EXPENSE_DESC_AMY;
-        assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
+        /* Case: invalid income -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + INVALID_INCOME_DESC + EXPENSE_DESC_AMY;
+        assertCommandFailure(command, Income.MESSAGE_INCOME_CONSTRAINTS);
 
         /* Case: invalid expense -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + EMAIL_DESC_AMY + INVALID_EXPENSE_DESC;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + INCOME_DESC_AMY + INVALID_EXPENSE_DESC;
         assertCommandFailure(command, Expense.MESSAGE_EXPENSE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + EMAIL_DESC_AMY + EXPENSE_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + DATE_DESC_AMY + INCOME_DESC_AMY + EXPENSE_DESC_AMY
                 + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
     }

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -21,7 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.record.Expense;
-import seedu.address.model.record.Email;
+import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.Date;
@@ -40,12 +40,12 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_INCOME + "INCOME] "
             + "[" + PREFIX_EXPENSE + "EXPENSE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_INCOME + "4.50";
 
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited Record: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -76,7 +76,7 @@ public class EditCommand extends Command {
         }
 
         Record recordToEdit = lastShownList.get(index.getZeroBased());
-        Record editedRecord = createEditedPerson(recordToEdit, editRecordDescriptor);
+        Record editedRecord = createEditedRecord(recordToEdit, editRecordDescriptor);
 
         if (!recordToEdit.isSameRecord(editedRecord) && model.hasRecord(editedRecord)) {
             throw new CommandException(MESSAGE_DUPLICATE_RECORD);
@@ -92,16 +92,16 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Record} with the details of {@code recordToEdit}
      * edited with {@code editRecordDescriptor}.
      */
-    private static Record createEditedPerson(Record recordToEdit, EditRecordDescriptor editRecordDescriptor) {
+    private static Record createEditedRecord(Record recordToEdit, EditRecordDescriptor editRecordDescriptor) {
         assert recordToEdit != null;
 
         Name updatedName = editRecordDescriptor.getName().orElse(recordToEdit.getName());
         Date updatedDate = editRecordDescriptor.getDate().orElse(recordToEdit.getDate());
-        Email updatedEmail = editRecordDescriptor.getEmail().orElse(recordToEdit.getEmail());
+        Income updatedIncome = editRecordDescriptor.getIncome().orElse(recordToEdit.getIncome());
         Expense updatedExpense = editRecordDescriptor.getExpense().orElse(recordToEdit.getExpense());
         Set<Tag> updatedTags = editRecordDescriptor.getTags().orElse(recordToEdit.getTags());
 
-        return new Record(updatedName, updatedDate, updatedEmail, updatedExpense, updatedTags);
+        return new Record(updatedName, updatedDate, updatedIncome, updatedExpense, updatedTags);
     }
 
     @Override
@@ -129,7 +129,7 @@ public class EditCommand extends Command {
     public static class EditRecordDescriptor {
         private Name name;
         private Date date;
-        private Email email;
+        private Income income;
         private Expense expense;
         private Set<Tag> tags;
 
@@ -142,7 +142,7 @@ public class EditCommand extends Command {
         public EditRecordDescriptor(EditRecordDescriptor toCopy) {
             setName(toCopy.name);
             setDate(toCopy.date);
-            setEmail(toCopy.email);
+            setIncome(toCopy.income);
             setExpense(toCopy.expense);
             setTags(toCopy.tags);
         }
@@ -151,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date, email, expense, tags);
+            return CollectionUtil.isAnyNonNull(name, date, income, expense, tags);
         }
 
         public void setName(Name name) {
@@ -170,12 +170,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(date);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setIncome(Income income) {
+            this.income = income;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Income> getIncome() {
+            return Optional.ofNullable(income);
         }
 
         public void setExpense(Expense expense) {
@@ -220,7 +220,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getDate().equals(e.getDate())
-                    && getEmail().equals(e.getEmail())
+                    && getIncome().equals(e.getIncome())
                     && getExpense().equals(e.getExpense())
                     && getTags().equals(e.getTags());
         }

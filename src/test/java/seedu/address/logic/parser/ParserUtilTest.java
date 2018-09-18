@@ -17,7 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.record.Expense;
-import seedu.address.model.record.Email;
+import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Date;
 import seedu.address.model.tag.Tag;
@@ -27,13 +27,13 @@ public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_DATE = "+651234";
     private static final String INVALID_EXPENSE = " ";
-    private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_INCOME = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_DATE = "12-07-2007";
     private static final String VALID_EXPENSE = "15.70";
-    private static final String VALID_EMAIL = "rachel@example.com";
+    private static final String VALID_INCOME = "16.70";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -134,26 +134,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseEmail_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+    public void parseIncome_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIncome((String) null));
     }
 
     @Test
-    public void parseEmail_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+    public void parseIncome_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIncome(INVALID_INCOME));
     }
 
     @Test
-    public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+    public void parseIncome_validValueWithoutWhitespace_returnsIncome() throws Exception {
+        Income expectedIncome = new Income(VALID_INCOME);
+        assertEquals(expectedIncome, ParserUtil.parseIncome(VALID_INCOME));
     }
 
     @Test
-    public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
-        String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+    public void parseIncome_validValueWithWhitespace_returnsTrimmedIncome() throws Exception {
+        String incomeWithWhitespace = WHITESPACE + VALID_INCOME + WHITESPACE;
+        Income expectedIncome = new Income(VALID_INCOME);
+        assertEquals(expectedIncome, ParserUtil.parseIncome(incomeWithWhitespace));
     }
 
     @Test

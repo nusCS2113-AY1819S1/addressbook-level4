@@ -88,7 +88,7 @@ public class UniqueRecordList implements Iterable<Record> {
      */
     public void setRecords(List<Record> records) {
         requireAllNonNull(records);
-        if (!personsAreUnique(records)) {
+        if (!recordsAreUnique(records)) {
             throw new DuplicateRecordException();
         }
 
@@ -122,7 +122,7 @@ public class UniqueRecordList implements Iterable<Record> {
     /**
      * Returns true if {@code records} contains only unique records.
      */
-    private boolean personsAreUnique(List<Record> records) {
+    private boolean recordsAreUnique(List<Record> records) {
         for (int i = 0; i < records.size() - 1; i++) {
             for (int j = i + 1; j < records.size(); j++) {
                 if (records.get(i).isSameRecord(records.get(j))) {

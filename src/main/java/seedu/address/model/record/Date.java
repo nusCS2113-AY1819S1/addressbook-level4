@@ -13,21 +13,40 @@ public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date parameter should be in the format of dd-mm-yyyy with dd and mm being 2 digits, and yyyy being 4 digits.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
-    public final String value;
+    public String value;
+    private String day;
+
+    private String month;
+    private String year;
 
     /**
      * Constructs a {@code Date}.
      *
-     * @param date A valid day parameter.
+     * @param date A valid date.
      */
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_DATE_CONSTRAINTS);
+        // TODO: Change this part to split dates into dd, mm, yyyy.
         value = date;
+        splitDate(date);
     }
 
     /**
-     * Returns true if a given string is a valid day parameter of any date.
+     * Splits a date into the different parameters and assigns them to day,month,year
+     * Format specified: dd-mm-yyyy
+     * @param date
+     */
+    private void splitDate(String date) {
+        String[] dateParams = date.split("-");
+        day = dateParams[0];
+        month = dateParams[1];
+        year = dateParams[2];
+    }
+
+
+    /**
+     * Returns true if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
@@ -50,4 +69,16 @@ public class Date {
         return value.hashCode();
     }
 
+    // TODO: Decide as a group whether we want days/month/year to be accessed separately
+    public String getDay() {
+        return day;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public String getYear() {
+        return year;
+    }
 }

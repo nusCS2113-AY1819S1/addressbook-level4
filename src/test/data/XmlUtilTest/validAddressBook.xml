@@ -3,55 +3,55 @@
     <records>
         <name>Hans Muster</name>
         <date isPrivate="false">01-13-1400</date>
-        <email isPrivate="false">hans@example.com</email>
+        <income isPrivate="false">21.40</income>
         <expense isPrivate="false">20.40</expense>
     </records>
     <records>
         <name>Ruth Mueller</name>
         <date isPrivate="false">01-19-1400</date>
-        <email isPrivate="false">ruth@example.com</email>
+        <income isPrivate="false">35.59</income>
         <expense isPrivate="false">34.59</expense>
     </records>
     <records>
         <name>Heinz Kurz</name>
         <date isPrivate="false">9-3-3003</date>
-        <email isPrivate="false">heinz@example.com</email>
+        <income isPrivate="false">20.30</income>
         <expense isPrivate="false">19.30</expense>
     </records>
     <records>
         <name>Cornelia Meier</name>
         <date isPrivate="false">10-4-2005</date>
-        <email isPrivate="false">cornelia@example.com</email>
+        <income isPrivate="false">30.40</income>
         <expense isPrivate="false">29.40</expense>
     </records>
     <records>
         <name>Werner Meyer</name>
         <date isPrivate="false">17-9-2018</date>
-        <email isPrivate="false">werner@example.com</email>
+        <income isPrivate="false">39.50</income>
         <expense isPrivate="false">38.50</expense>
     </records>
     <records>
         <name>Lydia Kunz</name>
         <date isPrivate="false">18-10-2018</date>
-        <email isPrivate="false">lydia@example.com</email>
+        <income isPrivate="false">91.99</income>
         <expense isPrivate="false">90.99</expense>
     </records>
     <records>
         <name>Anna Best</name>
         <date isPrivate="false">20-10-2018</date>
-        <email isPrivate="false">anna@example.com</email>
+        <income isPrivate="false">101</income>
         <expense isPrivate="false">100</expense>
     </records>
     <records>
         <name>Stefan Meier</name>
         <date isPrivate="false">23-5-2009</date>
-        <email isPrivate="false">stefan@example.com</email>
+        <income isPrivate="false">10001</income>
         <expense isPrivate="false">10000</expense>
     </records>
     <records>
         <name>Martin Mueller</name>
         <date isPrivate="false">27-10-2006</date>
-        <email isPrivate="false">hans@example.com</email>
+        <income isPrivate="false">1000001</income>
         <expense isPrivate="false">1000000</expense>
     </records>
 </addressbook>

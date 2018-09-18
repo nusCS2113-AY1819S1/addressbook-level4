@@ -4,7 +4,7 @@
     <records>
         <name>Alice Pauline</name>
         <date>10-3-2000</date>
-        <email>alice@example.com</email>
+        <income>40.60</income>
         <expense>39.60</expense>
         <tagged>friends</tagged>
     </records>
@@ -13,7 +13,7 @@
     <records>
         <name>Alice Pauline</name>
         <date>10-3-2000</date>
-        <email>pauline@example.com</email>
+        <income>40.60</income>
         <expense>39.60</expense>
     </records>
 
