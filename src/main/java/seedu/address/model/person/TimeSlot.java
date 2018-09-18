@@ -14,23 +14,23 @@ public class TimeSlot {
         this.modName = "";
     }
 
-    public void setIsFilled(){
-        this.isFilled  = true;
+    public void setIsFilled() {
+        this.isFilled = true;
     }
 
-    public boolean getIsFilled(){
+    public boolean getIsFilled() {
         return isFilled;
     }
 
-    public void removeIsFilled(){
+    public void removeIsFilled() {
         this.isFilled = false;
     }
 
-    public void setModName(String Name){
-        modName = Name;
+    public void setModName(String name) {
+        modName = name;
     }
 
-    public String getModName(){
+    public String getModName() {
         return modName;
     }
 }

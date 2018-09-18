@@ -14,15 +14,15 @@ public class TimeTable {
         //this.weeklyslots = new TimeSlot weeklyslots;
     }
 
-    public void fillTimeSlot(int day, int hour){
+    public void fillTimeSlot(int day, int hour) {
         weeklyslots[day][hour].setIsFilled();
     }
 
-    public void removeTimeSlot(int day, int hour){
+    public void removeTimeSlot(int day, int hour) {
         weeklyslots[day][hour].removeIsFilled();
     }
 
-    public boolean checkTimeSlot(int day, int hour){
+    public boolean checkTimeSlot(int day, int hour) {
         return false;
     }
 }
