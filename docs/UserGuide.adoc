@@ -215,19 +215,17 @@ There is no need to save manually.
 Alert user when a deadline is due
 
 // tag::databackup[]
-=== Backing up and restoring of data `[coming in v1.2 - v1.3]`
-
-===== Local backup `Coming in [v1.2]`
+=== Local backup `Coming in [v1.2]`
 
 Allow user to backup data _locally_ by calling `backup local <path to backup too>` +
 Where the backup folder is a folder the user has write permissions to.
 
-===== Online backup `Coming in [v1.3]`
+=== Online backup `Coming in [v1.3]`
 
 Allow user to backup data to online services like GitHub gists or Google Drive by calling `backup online <service>` +
 Where the service to backup data to has already been setup beforehand
 
-===== Setup or restore backup data
+=== Setup or restore backup data
 Allow user to setup backup settings (setup cloud services like GitHub gists or Google Drive, backup location) by calling `backup doctor`
 
 // end::databackup[]
