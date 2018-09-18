@@ -32,7 +32,6 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 image::Ui.png[width="790"]
 +
 
-[[Features]]
 == Features
 
 ====
