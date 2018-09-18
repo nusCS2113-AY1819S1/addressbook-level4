@@ -20,7 +20,7 @@ Responsibilities: Devops, Integration, Scheduling and tracking
 '''
 
 === Chen Songjian
-image::chen_songjian.jpg[width="150", align="left"]
+image::chensongjian.jpg[width="150", align="left"]
 {empty}[http://github.com/ChenSongJian[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
