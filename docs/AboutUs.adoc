@@ -24,7 +24,7 @@ Responsibilities: Logic
 image::https://github.com/CS2113-AY1819S1-W12-2/main/blob/master/docs/images/auskure.png[width="150", align="left"]
 {empty}[http://github.com/auskure[github]] [<<auskure#, portfolio>>]
 
-Role: Team Lead +
+Role: Developer +
 Responsibilities: Storage
 
 '''
