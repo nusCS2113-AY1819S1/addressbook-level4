@@ -19,11 +19,11 @@ Responsibilities: Devops, Integration, Scheduling and tracking
 
 '''
 
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+=== Chen Songjian
+image::chen_songjian.jpg[width="150", align="left"]
+{empty}[http://github.com/ChenSongJian[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead +
+Role: Developer +
 Responsibilities: UI
 
 '''
