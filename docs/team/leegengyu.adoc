@@ -13,13 +13,13 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 
 == Summary of contributions
 
-* *Major enhancement*: 
-** What it does: 
+* *Major enhancement*: To be decided.
+** What it does: To be decided.
 ** Justification: ide a convenient way to rectify them.
-** Highlights: 
+** Highlights: To be decided.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
-* *Minor enhancement*: 
+* *Minor enhancement*: To be decided.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
