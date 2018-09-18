@@ -35,6 +35,7 @@ import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
+
 /**
  * The main entry point to the application.
  */
@@ -117,6 +118,7 @@ public class MainApp extends Application {
         configFilePathUsed = Config.DEFAULT_CONFIG_FILE;
 
         if (configFilePath != null) {
+
             logger.info("Custom Config file specified " + configFilePath);
             configFilePathUsed = configFilePath;
         }
@@ -124,6 +126,7 @@ public class MainApp extends Application {
         logger.info("Using config file : " + configFilePathUsed);
 
         try {
+
             Optional<Config> configOptional = ConfigUtil.readConfig(configFilePathUsed);
             initializedConfig = configOptional.orElse(new Config());
         } catch (DataConversionException e) {
@@ -201,6 +204,10 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         stop();
     }
+
+    /**
+     * Runs the application.
+     */
 
     public static void main(String[] args) {
         launch(args);
