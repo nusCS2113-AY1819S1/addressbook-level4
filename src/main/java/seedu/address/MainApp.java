@@ -37,6 +37,7 @@ import seedu.address.ui.UiManager;
 
 /**
  * The main entry point to the application. This is a test commit.
+ * This is a second test commit.
  */
 public class MainApp extends Application {
 
