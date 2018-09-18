@@ -121,8 +121,8 @@ public class FindCommandSystemTest extends ExpenseBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of record in address book -> 0 records found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
+        /* Case: find income of record in address book -> 0 records found */
+        command = FindCommand.COMMAND_WORD + " " + DANIEL.getIncome().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

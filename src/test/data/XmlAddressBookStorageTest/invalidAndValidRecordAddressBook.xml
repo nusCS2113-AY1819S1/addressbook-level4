@@ -4,7 +4,7 @@
     <records>
         <name>Hans Muster</name>
         <date isPrivate="false">10-12-1994</date>
-        <email isPrivate="false">hans@example.com</email>
+        <income isPrivate="false">1.90</income>
         <expense isPrivate="false">0.90</expense>
     </records>
     <!-- Record with invalid date field -->
@@ -12,7 +12,7 @@
 
         <name>Hans Muster</name>
         <date isPrivate="false">948asdf2424</date>
-        <email isPrivate="false">hans@example.com</email>
+        <income isPrivate="false">11.99</income>
         <expense isPrivate="false">10.99</expense>
     </records>
 </addressbook>

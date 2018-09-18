@@ -33,7 +33,7 @@ import seedu.address.testutil.EditRecordDescriptorBuilder;
 import seedu.address.testutil.RecordBuilder;
 import seedu.address.testutil.RecordUtil;
 
-public class ExpenseBookParserTest {
+public class AddressBookParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 

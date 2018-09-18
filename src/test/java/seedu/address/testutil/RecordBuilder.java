@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.record.Expense;
-import seedu.address.model.record.Email;
+import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.Date;
@@ -18,19 +18,19 @@ public class RecordBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_DATE = "01-01-2001";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
+    public static final String DEFAULT_INCOME = "11.30";
     public static final String DEFAULT_EXPENSE = "10.30";
 
     private Name name;
     private Date date;
-    private Email email;
+    private Income income;
     private Expense expense;
     private Set<Tag> tags;
 
     public RecordBuilder() {
         name = new Name(DEFAULT_NAME);
         date = new Date(DEFAULT_DATE);
-        email = new Email(DEFAULT_EMAIL);
+        income = new Income(DEFAULT_INCOME);
         expense = new Expense(DEFAULT_EXPENSE);
         tags = new HashSet<>();
     }
@@ -41,7 +41,7 @@ public class RecordBuilder {
     public RecordBuilder(Record recordToCopy) {
         name = recordToCopy.getName();
         date = recordToCopy.getDate();
-        email = recordToCopy.getEmail();
+        income = recordToCopy.getIncome();
         expense = recordToCopy.getExpense();
         tags = new HashSet<>(recordToCopy.getTags());
     }
@@ -79,15 +79,15 @@ public class RecordBuilder {
     }
 
     /**
-     * Sets the {@code Email} of the {@code Record} that we are building.
+     * Sets the {@code Income} of the {@code Record} that we are building.
      */
-    public RecordBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public RecordBuilder withIncome(String income) {
+        this.income = new Income(income);
         return this;
     }
 
     public Record build() {
-        return new Record(name, date, email, expense, tags);
+        return new Record(name, date, income, expense, tags);
     }
 
 }

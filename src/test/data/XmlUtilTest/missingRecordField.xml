@@ -2,7 +2,7 @@
 <!-- Record with missing name field -->
 <record>
     <date>23-10-2010</date>
-    <email>hans@example</email>
+    <income>11.99</income>
     <expense>10.99</expense>
     <tagged>friends</tagged>
 </record>
