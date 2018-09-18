@@ -1,4 +1,4 @@
-= John Doe - Project Portfolio
+= Lee Geng Yu - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
