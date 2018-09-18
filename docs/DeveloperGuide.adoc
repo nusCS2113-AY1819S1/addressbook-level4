@@ -893,6 +893,248 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+[discrete]
+=== Use case: Create Groups (UC01)
+*Precondition*
+
+1.  Address Book is not empty
+
+*MSS*
+
+1.  User creates a group
+2.  AddressBook confirms that group is created
+3.  User adds students to group
+4.  AddressBook confirms that students were added
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command entered.
+[none]
+* 3a. AddressBook detects error in data entered.
++
+
+[none]
+** 3a1. AddressBook rejects command entered.
+[none]
+* 3b. AddressBook detects group is not created.
++
+
+[none]
+** 3b1. AddressBook asks user to create group.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Calendar (UC02)
+*Precondition*
+
+1.  Calender is created
+
+*MSS*
+
+1.  User adds group to date
+2.  AddressBook confirms that group is added
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command entered.
+[none]
+* 1b. AddressBook detects group is not created.
++
+
+[none]
+** 1b1. AddressBook rejects command entered.
+[none]
+** 1b2. AddressBook asks user to create group.
+[none]
+** 1b3. User creates group (UC01).
+
+[discrete]
+=== Use case: Grading Filter
+*Precondition*
+
+1.  Student scores exist in the AddressBook
+
+*MSS*
+
+1.  User requests AddressBook to generate a list of students that need extra help
+2.  AddressBook displays standard deviation of marks
+3.  User enters the filter standard
+4.  AddressBook outputs results
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[none]
+* 3a. AddressBook detects wrong standard set by user.
++
+
+[none]
+** 3a1. AddressBook rejects command and displays error message.
++
+Use case ends
+
+[discrete]
+=== Use case: Mass Email Communication
+*Precondition*
+
+1.  Group's exist in the AddressBook
+
+*MSS*
+
+1.  User requests to send email with specified content to a group
+2.  AddressBook confirms with user that email was sent
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[none]
+* 1b. AddressBook detects email content exceeds word limit.
++
+
+[none]
+** 1b1. AddressBook rejects command and displays error message.
++
+Use case ends
+
+[discrete]
+=== Use case: Auto Grouping
+*Precondition*
+
+1.  Group's exist in the AddressBook
+
+*MSS*
+
+1.  User requests to create N groups of students distributed via gender or nationality
+2.  AddressBook confirms with user that N groups have been created
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[none]
+* 1b. AddressBook detects student count < N.
++
+
+[none]
+** 1b1. AddressBook outputs results using best-fit N value.
++
+Use case ends
+
+[discrete]
+=== Use case: Attendance List Creation
+*Precondition*
+
+1.  User has selected a group of students
+
+*MSS*
+
+1.  User requests AddressBook to generate Attendance List(.docx) of group
+2.  AddressBook confirms with user that document has been generated
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[none]
+* 2b. AddressBook detects microsoft Word is not installed in computer.
++
+
+[none]
+** 2b1. AddressBook outputs Attendance List on GUI.
++
+Use case ends
+
+[discrete]
+=== Use case: Create Discussion ChatBox
+*Precondition*
+
+1.  User has selected a group of students
+
+*MSS*
+
+1.  User requests AddressBook to open a ChatBox
+2.  AddressBook opens ChatBox
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+
+[discrete]
+=== Use case: Automatically Adding/Deleting Tags
+*Precondition*
+
+1.  AddressBook has generated a list of students
+
+*MSS*
+
+1.  User requests tags to be added
+2.  AddressBook confirms tags has been added
++
+Use case ends
+
 _{More to be added}_
 
 [appendix]
