@@ -46,11 +46,11 @@ Responsibilities: Dev Ops + Threading
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Mario Gustavo Gonzaelz Munoz
+image::t0roloco.png[width="150", align="left"]
+{empty}[https://github.com/T0roloco[github]]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Code Standards and Quality
 
 '''
