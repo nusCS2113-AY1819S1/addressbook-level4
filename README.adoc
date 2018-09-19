@@ -1,7 +1,7 @@
 = Timetable Deconflicter (TBC)
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
-https://travis-ci.org/CS2113-AY1819S1-W13-1/main[image:https://travis-ci.org/se-edu/CS2113-AY1819S1-W13-1/main?branch=master[Build Status]]
+image:https://travis-ci.org/CS2113-AY1819S1-W13-1/main.svg?branch=master["Build Status", link="https://travis-ci.org/CS2113-AY1819S1-W13-1/main"]
 https://ci.appveyor.com/project/nianfei97/main/branch/master[image:https://ci.appveyor.com/api/projects/status/7py8jwp3sgjoj3dj/branch/master?svg=true[Build Status]]
 https://coveralls.io/github/CS2113-AY1819S1-W13-1/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-W13-1/main/badge.svg?branch=master[Coverage Status]]
 
