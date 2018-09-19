@@ -164,6 +164,7 @@ public class Trie {
         // Traverse upwards the trie
         while (!pointer.isEndNode() && pointer.getChildrenSize() == 0) {
             TrieNode parent = pointer.getParent();
+            parent.removeChild(pointer);
             pointer = parent;
         }
     }
