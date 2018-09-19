@@ -14,6 +14,7 @@ import seedu.address.model.person.Person;
 public class GenListCommand extends Command {
 
     public static final String COMMAND_WORD = "genlist";
+    public static final String COMMAND_WORD_2 = "gl";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
