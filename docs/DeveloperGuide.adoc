@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+﻿= AddressBook Level 4 - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -877,7 +877,139 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+=== Use case: Log into system
+
+*MSS*
+
+1.  Address book asks user for user ID and password
+2.  User types in user ID and password
+3.  Address book queries and authorize user full access to address book
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. User types in wrong password
++
+[none]
+** 2a1. Address book displays error message and exits application
++
+Use case ends.
+
+* 2b. User types in user ID for a non-existent user account
++
+[none]
+** 2b1. Address book displays error message and exits application
++
+Use case ends
+
+=== Use case: Create new user accounts
+
+*MSS*
+
+1.  User types a command to indicate intention of creating a new account
+2.  Address book asks user to type in master password for enabling option to create new accounts
+3.  User types in master password
+4.  Address book authorizes the master password input as correct and shows successful message
+5.  User types in command to create a new account with relevant user ID and password
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. User decides not to create a new account and types command to indicate so
++
+[none]
+** 2a1. Address book cancels process of new account creation
++
+Use case ends.
++
+* 2b. User types in the wrong master password
++
+[none]
+** 2b1. Address book shows error message to user and cancels process of new account creation
++
+Use case ends.
++
+* 2c. User creates a new account with a user ID which already exists
++
+[none]
+** 2c1. Address book shows error message to user and cancels process of new account creation
++
+Use case ends.
+
+=== Use case: Delete current user accounts
+
+*MSS*
+
+1.  User requests to delete an existing account and types in command to do so
+2.  Address book asks for confirmation to delete account with associated user ID
+3.  User types command to express desire to delete account
+4.  Address book deletes account associated with input user ID and respective password
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. User decides not to delete an account and types command to indicate so
++
+[none]
+** 2a1. Address book cancels process of deleting existing account
++
+Use case ends.
++
+
+* 2b. User types in the wrong current password associated with the user ID
++
+[none]
+** 2b1. Address book shows error message to user and cancels process of deleting existing account
++
+Use case ends.
+
+* 2c. User wants to delete a non-existent user account
++
+[none]
+** 2c1. Address book shows error message and cancels process of deleting account
++
+Use case ends.
+
+=== Use case: Changing password of current user accounts
+
+*MSS*
+
+1.  User requests to change the password of existing user account and types in command to do so
+2.  Address book asks for confirmation of password change
+3.  User types command to express desire to change account password
+4.  Address book changes password of account associated with input user ID and new password
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. User decides not to change the password of the account and types command to indicate so
++
+[none]
+** 2a1. Address book cancels process of changing password of account
++
+Use case ends.
+
+* 2b. User types in the wrong current password associated with the user ID
++
+[none]
+** 2b1. Address book shows error message to user and cancels process of changing password of account
++
+Use case ends.
+
+* 2c. User wants to change the password of a non-existent user account
++
+[none]
+** 2c1. Address book shows error message and cancels process of changing password of account
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
