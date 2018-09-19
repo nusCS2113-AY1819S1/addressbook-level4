@@ -24,6 +24,9 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    //Timetable field (Currently only one)
+    private TimeTable weekly;
+
     /**
      * Every field must be present and not null.
      */
