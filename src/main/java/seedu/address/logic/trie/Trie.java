@@ -92,7 +92,7 @@ public class Trie {
 
     /**
      * Remove the input string value from the class instance
-     * @param value
+     * @param value the value to remove
      */
     public void remove(String value) {
         // Check if this value exists
@@ -111,7 +111,7 @@ public class Trie {
      * If the remove of this node does not affect any chidren node
      * (ie the node has no children), remove the whole word
      *
-     * @param value
+     * @param value the value to remove
      */
     private void removeFromGraph(String value) {
         TrieNode pointer;
@@ -155,7 +155,7 @@ public class Trie {
      * Removes a word from the graph given the end node of that word
      * Removes every parent level node until a node that has more than one child
      * or it is an end node
-     * @param pointer
+     * @param pointer the first node in the graph to be removed
      */
     private void removeWordFromGraph(TrieNode pointer) {
         // Set this node as non-end node first
@@ -175,9 +175,7 @@ public class Trie {
         predictionsList = new ArrayList<>();
         StringBuilder charStack = new StringBuilder();
 
-        TrieNode ptr = root;
-
-        ptr = skipToStartNode(root, prefix);
+        TrieNode ptr = skipToStartNode(root, prefix);
 
         for (int i = 0; i < ptr.getChildren().size(); i++) {
             explore(charStack, ptr.getChildren().get(i));
