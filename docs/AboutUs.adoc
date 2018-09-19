@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
+NUSSU Connect was developed by https://se-edu.github.io/docs/Team.html[F09-1] team. +
 _{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
@@ -19,12 +19,12 @@ Role: Project Advisor
 
 '''
 
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+=== Boon Jun
+image::ladderinc.jpg[width="150", align="left"]
+{empty}[http://github.com/ladderinc[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead +
-Responsibilities: UI
+Role: TBC +
+Responsibilities: Search Pruning + Advanced Search and filter feature.
 
 '''
 
