@@ -174,10 +174,4 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
-    //=========== Command Auto Complete =====================================================================
-    @Override
-    public ArrayList<String> getNextPredictedList(String prefix) {
-        return commandTrie.getPredictList(prefix);
-    }
 }

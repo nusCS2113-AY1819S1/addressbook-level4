@@ -76,10 +76,4 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
-
-    /**
-     * Prints all the stored words in the Trie 
-     */
-    ArrayList<String> getNextPredictedList(String prefix);
-
 }

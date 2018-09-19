@@ -161,10 +161,6 @@ public class CommandBox extends UiPart<Region> {
      * Testing code
      */
     private void displayPredictions(String prefix) {
-        ArrayList<String> output = logic.getNextPredictedList(prefix);
         
-        for (String item : output) {
-            System.out.println(item);
-        }
     }
 }
