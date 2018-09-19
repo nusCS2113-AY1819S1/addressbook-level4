@@ -20,7 +20,7 @@ Role: Project Advisor
 '''
 
 === Boon Jun
-image::boonjun.jpg[width="150", align="left"]
+image::ladderinc.jpg[width="150", align="left"]
 {empty}[http://github.com/ladderinc[github]] [<<johndoe#, portfolio>>]
 
 Role: TBC +
