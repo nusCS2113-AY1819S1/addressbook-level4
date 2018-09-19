@@ -8,8 +8,9 @@ Student Planner was developed by the https://cs2113-ay1819s1-t13-1.github.io/mai
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
-//Alphabetical order : AT, CSG, I , LH , MGGM ???
+//Alphabetical order : AT, CSG, I , LH , MGGM
 //Image naming format : [yourgithubusername].jpg Example: QzSG.jpg
+//TODO: Portfolio for everyone
 === Adrian Tan Guo Hua
 image::qzsg.jpg[width="150", align="left"]
 {empty}[https://qz.sg[homepage]] [https://github.com/qzsg[github]]
@@ -21,7 +22,7 @@ Responsibilities: Devops, Integration, Scheduling and tracking
 
 === Chen Songjian
 image::chensongjian.jpg[width="150", align="left"]
-{empty}[http://github.com/ChenSongJian[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/ChenSongJian[github]]
 
 Role: Developer +
 Responsibilities: UI
@@ -39,10 +40,10 @@ Responsibilities: Data
 
 === Lu Han
 image::luhan02.jpg[width="150", align="left"]
-{empty}[https://github.com/luhan02[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/luhan02[github]]
 
 Role: Developer +
-Responsibilities:
+Responsibilities: Testing
 
 '''
 
