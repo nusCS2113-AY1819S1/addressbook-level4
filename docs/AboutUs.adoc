@@ -28,9 +28,9 @@ Responsibilities: UI
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Ian Tjahjono
+image::ian-tjahjono.jpg[width="150", align="left"]
+{empty}[http://github.com/ian-tjahjono[github]]
 
 Role: Developer +
 Responsibilities: Data
