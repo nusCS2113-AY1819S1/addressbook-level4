@@ -847,7 +847,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
 
-|`* *` |university lecturer |automatically distribute students into groups via criteria-based user options (gender/nationality) |efficiently from random groups
+|`* *` |university lecturer |automatically distribute students into groups via criteria-based user options (gender/nationality) |efficiently form random groups
 
 |`* *` |university lecturer |filter student contacts by their scores |generate a list of students who need my help
 
@@ -1142,7 +1142,7 @@ _{More to be added}_
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  Should be user friendly and must not require education to use teh software
+.  Should be user friendly and must not require education to use the software
 .  Should work with data provided from excel sheet
 .  Should work with 128 bit platforms
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
