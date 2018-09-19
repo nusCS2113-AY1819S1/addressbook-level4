@@ -19,23 +19,6 @@ public class Trie {
     private ArrayList<String> predictionsList;
 
     /**
-     * Command String constants
-     */
-    // TODO : Import these to all the command classes and trie class
-    private static final String COMMAND_ADD = "add";
-    private static final String COMMAND_CLEAR = "clear";
-    private static final String COMMAND_DELETE = "delete";
-    private static final String COMMAND_EDIT = "edit";
-    private static final String COMMAND_EXIT = "exit";
-    private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_HELP = "help";
-    private static final String COMMAND_HISTORY = "history";
-    private static final String COMMAND_LIST = "list";
-    private static final String COMMAND_REDO = "redo";
-    private static final String COMMAND_SELECT = "select";
-    private static final String COMMAND_UNDO = "undo";
-
-    /**
      * Class constants
      */
     private final char ROOT_CHAR = '.';
@@ -49,53 +32,20 @@ public class Trie {
     /**
      * Default constructor
      */
-    public Trie(AddressBook inputAddressBook) {
+    public Trie(ArrayList<String> inputList) {
         root = new TrieNode(ROOT_CHAR);
-        baseList = new ArrayList<>();
-        this.init(inputAddressBook);
-    }
-
-    public Trie() {
-        root = new TrieNode(ROOT_CHAR);
-        baseList = new ArrayList<>();
-        this.initWithCommandWords();
-    }
-
-    private void initWithCommandWords() {
-        this.insert(COMMAND_ADD);
-        this.insert(COMMAND_CLEAR);
-        this.insert(COMMAND_DELETE);
-        this.insert(COMMAND_EDIT);
-        this.insert(COMMAND_EXIT);
-        this.insert(COMMAND_FIND);
-        this.insert(COMMAND_HELP);
-        this.insert(COMMAND_HISTORY);
-        this.insert(COMMAND_LIST);
-        this.insert(COMMAND_REDO);
-        this.insert(COMMAND_SELECT);
-        this.insert(COMMAND_UNDO);
+        baseList = new ArrayList<>(inputList);
+        init();
     }
 
     /**
-     * Initialises a Trie graph with a list of words
-     * @param input
+     * Initialise the Trie instance with the items in baseList
      */
-    private void init(AddressBook inputAddressBook) {
-        ArrayList<String> input = getListFromAddressBook(inputAddressBook);
-        for (String item : input) {
+    private void init() {
+        for (String item : baseList) {
             this.insert(item);
         }
     }
-
-    public static ArrayList<String> getListFromAddressBook(AddressBook input) {
-        ArrayList<String> output = new ArrayList<String>();
-
-        for (Person person : input.getPersonList()) {
-            output.add(person.getName().fullName);
-        }
-
-        return output;
-    } 
 
     /**
      * Inserts the input string value to the class instance
