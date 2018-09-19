@@ -226,22 +226,22 @@ Format: `exit`
 
 === Accessing the password manager : `pVault`
 
-The password vault allows the user to convenient store and manage his/her passwords in a secure and convenient manner. +
+Enters the password manager program. This program stores and manages the user's passwords in a secure and convenient manner. +
 Format: `pVault`
 
 === Accessing the timeslot manager: `tSlot`
 
-Entering `tSlot` will bring you into the timeslot manager. The timeslot manager allows students to upload their timeslot, as well as their friends' and tutors' timeslots. This facilitates planning for meetups. +
+Enters the timeslot manager program. This program stores users' timeslots (which are uploaded), and other parties' timeslots (e.g. friends, tutors, etc), which facilitates the scheduling stage for meet-ups. +
 Format: `tSlot`
 
 === Accessing the consultation manager: `conslt`
 
-The consultation manager allows students to book consultation slots with their TAs. Note that the consulation manager makes use of the data entered in tSlot, in order to find the teaching assistant’s free timeslots. As such, the user should update timeslot manager first, before using the consultation manager. +
+Enters the consultation manager program. This program books consultation slots with their TAs on behalf of the user. This program makes use of the data entered in tSlot, in order to find the teaching assistant’s free timeslots. As such, the user should update timeslot manager first, before using the consultation manager. +
 Format: `conslt`
 
 === Accessing the notes manager: `notes`
 
-Entering notes will bring you into the notes manager. This allows you to conveniently download your notes, and even print them +
+Enters the notes manager program. This program downloads the user's notes from IVLE in a one-click process, and can be used to print the notes. +
 Format: `notes`
 
 === Saving the data
