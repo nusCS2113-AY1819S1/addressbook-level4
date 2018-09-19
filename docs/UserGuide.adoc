@@ -1,4 +1,4 @@
-﻿= AddressBook Level 4 - User Guide
+= AddressBook Level 4 - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,14 +12,13 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/CS2113-AY1819S1-F09-1/addressbook-level4
+:repoURL: https://github.com/se-edu/addressbook-level4
 
-By: `Team F09-1`      Since: `Sept 2018`
+By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
 AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
-NUSSU Connect is for the executive committee members of NUSSU who are comfortable with working with Command Line Interface (CLI).
 
 == Quick Start
 
@@ -53,154 +52,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Logging into system
-
-Format: `X1234567X` for user ID fields, where X can be any lower or upper case letter alphabet
-
-[NOTE]
-====
-Password is case-sensitive!
-====
-
-=== Creating a new user account: `create account`
-
-Creates a new user account in the address book. +
-Format: `create account USERID PASSWORD`
-
-****
-* USERID refers to student matriculation number
-* PASSWORD refers to any desired passphrases the new user wishes to have
-* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
-* USERID must not belong to an existing account
-****
-
-Examples:
-
-* create account X1234567X zaq1xsw2cde3 +
-Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
-
-=== Deleting an existing user account: `delete account`
-
-Deletes an existing account from the address book. +
-Format: `delete account USERID PASSWORD`
-
-****
-* USERID refers to student matriculation number
-* PASSWORD refers to passphrase associated with USERID of the account
-* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
-* USERID must belong to an existing account
-****
-
-Examples:
-
-* delete account X1234567X zaq1xsw2cde3 +
-Deletes the current account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
-
-=== Changing the password of an existing user account: `change password`
-
-Changes the password of an existing account from the address book. +
-Format: `change password USERID CURRENTPASSWORD NEWPASSWORD`
-
-****
-* USERID refers to student matriculation number
-* CURRENTPASSWORD refers to current passphrase associated with USERID of the account
-* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
-* USERID must belong to an existing account
-* NEWPASSWORD must be different from CURRENTPASSWORD
-****
-
-Examples:
-
-* change password X1234567X zaq1xsw2cde3 1qaz2wsx3edc +
-Changes the password of the current account with user ID as X1234567X, from "zaq1xsw2cde3" to "1qaz2wsx3edc" in the address book.
-
 === Viewing help : `help`
 
 Format: `help`
-
-=== Adding a proposal idea: `add proposal`
-
-Adds a proposal idea to the address book +
-Format: `add proposal MESSAGE`
-
-Examples:
-
-* add proposal `I want to hold a party`.
-
-=== Editing a proposal idea: `edit proposal`
-
-Edits the specified proposal from the address book. +
-Format: `edit INDEX MESSAGE`
-
-****
-* Edits the proposal at the specified `INDEX`.
-* The index refers to the index number shown in the displayed proposals list.
-* The index *must be a positive integer* 1, 2, 3, ...
-* MESSAGE is a string of words meant to replace the previous MESSAGE in proposal
-****
-
-Examples:
-
-* `list proposal` +
-`edit 2 This proposal is changed.` +
-Edits the 2nd proposal in the address book.
-
-=== Deleting a proposal : `delete proposal`
-
-Deletes the specified proposal from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the proposal at the specified `INDEX`.
-* The index refers to the index number shown in the displayed proposals list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list proposal` +
-`delete 2` +
-Deletes the 2nd proposal in the address book.
-
-=== Listing all proposals : `list proposal`
-
-Shows a list of all proposals in the address book. +
-
-=== Upvoting a proposal idea : `upvote proposal`
-
-upvotes the specified proposal from the address book. +
-Format: `upvote INDEX`
-
-****
-* Upvotes the proposal at the specified `INDEX`.
-* The index refers to the index number shown in the displayed proposals list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list proposal` +
-`upvote 2` +
-Upvotes the 2nd proposal in the address book.
-
-=== Searching proposals by keywords: `find proposal`
-
-Finds proposals whose tags contain any of the given keywords. +
-Format: `find proposal KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `enhance` will match `Enhance`
-* The order of the keywords does not matter. e.g. `enhance legitimacy` will match `legitimacy enhance`
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Proposals matching at least one keyword will be returned (i.e. `OR` search). e.g. `enhance legitimacy` will return `enhance participation`, `legitimacy event`
-****
-
-Examples:
-
-* `find proposal enhance` +
-Returns `this proposal seeks to enhance`
-* `find enhance legitimacy` +
-Returns any proposals having keywords `enhance` or `legitimacy`
 
 === Adding a person: `add`
 
@@ -388,17 +242,6 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add proposal* : `add proposal MESSAGE` +
-e.g. `add proposal I want to hold a party.`
-* *Edit proposal* : `edit INDEX MESSAGE` +
-e.g. `list proposal` +
-     `edit 2 This proposal is changed.`
-* *Delete proposal* : `delete INDEX` +
-e.g. `list proposal` +
-     `delete 2`
-* *List proposal* : `list proposal`
-* *Find proposals* : `find proposal KEYWORD [MORE_KEYWORDS]` +
-e.g. `find proposal enhance legitimacy`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
