@@ -34,6 +34,11 @@ public class CommandCompleter {
 
     public CommandCompleter(Model model) {
         this.model = model;
+        this.commandList = new ArrayList<>();
+        this.nameList = new ArrayList<>();
+        this.phoneList = new ArrayList<>();
+        this.emailList = new ArrayList<>();
+        this.addressList = new ArrayList<>();
         initLists();
         initTries();
     }
