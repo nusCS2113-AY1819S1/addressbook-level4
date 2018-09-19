@@ -813,15 +813,15 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
+*Target user profile*: University Lecturers
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage students and groups faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -838,6 +838,22 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |delete a person |remove entries that I no longer need
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+
+|`* * *` |university lecturer |create groups of students |have a list of all my students in a particular module/group
+
+|`* * *` |university lecturer |add groups to a calender |have a list of all my modules with their respective dates
+
+|`* * *` |university lecturer |send an email to all students in any group |make module specific announcements
+
+|`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
+
+|`* *` |university lecturer |automatically distribute students into groups via criteria-based user options (gender/nationality) |efficiently from random groups
+
+|`* *` |university lecturer |filter student contacts by their scores |generate a list of students who need my help
+
+|`* *` |university lecturer |automatically add tags for specific student groups |efficiently mark out weak students
+
+|`* *` |university lecturer |create a group chat for my students to have an open discussion |efficiently mediate discussions
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
@@ -877,6 +893,248 @@ Use case ends.
 +
 Use case resumes at step 2.
 
+[discrete]
+=== Use case: Create Groups (UC01)
+*Precondition*
+
+1.  Address Book is not empty
+
+*MSS*
+
+1.  User creates a group
+2.  AddressBook confirms that group is created
+3.  User adds students to group
+4.  AddressBook confirms that students were added
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command entered.
+[none]
+* 3a. AddressBook detects error in data entered.
++
+
+[none]
+** 3a1. AddressBook rejects command entered.
+[none]
+* 3b. AddressBook detects group is not created.
++
+
+[none]
+** 3b1. AddressBook asks user to create group.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Calendar (UC02)
+*Precondition*
+
+1.  Calender is created
+
+*MSS*
+
+1.  User adds group to date
+2.  AddressBook confirms that group is added
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command entered.
+[none]
+* 1b. AddressBook detects group is not created.
++
+
+[none]
+** 1b1. AddressBook rejects command entered.
+[none]
+** 1b2. AddressBook asks user to create group.
+[none]
+** 1b3. User creates group (UC01).
+
+[discrete]
+=== Use case: Grading Filter
+*Precondition*
+
+1.  Student scores exist in the AddressBook
+
+*MSS*
+
+1.  User requests AddressBook to generate a list of students that need extra help
+2.  AddressBook displays standard deviation of marks
+3.  User enters the filter standard
+4.  AddressBook outputs results
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[none]
+* 3a. AddressBook detects wrong standard set by user.
++
+
+[none]
+** 3a1. AddressBook rejects command and displays error message.
++
+Use case ends
+
+[discrete]
+=== Use case: Mass Email Communication
+*Precondition*
+
+1.  Group's exist in the AddressBook
+
+*MSS*
+
+1.  User requests to send email with specified content to a group
+2.  AddressBook confirms with user that email was sent
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[none]
+* 1b. AddressBook detects email content exceeds word limit.
++
+
+[none]
+** 1b1. AddressBook rejects command and displays error message.
++
+Use case ends
+
+[discrete]
+=== Use case: Auto Grouping
+*Precondition*
+
+1.  Group's exist in the AddressBook
+
+*MSS*
+
+1.  User requests to create N groups of students distributed via gender or nationality
+2.  AddressBook confirms with user that N groups have been created
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[none]
+* 1b. AddressBook detects student count < N.
++
+
+[none]
+** 1b1. AddressBook outputs results using best-fit N value.
++
+Use case ends
+
+[discrete]
+=== Use case: Attendance List Creation
+*Precondition*
+
+1.  User has selected a group of students
+
+*MSS*
+
+1.  User requests AddressBook to generate Attendance List(.docx) of group
+2.  AddressBook confirms with user that document has been generated
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[none]
+* 2b. AddressBook detects microsoft Word is not installed in computer.
++
+
+[none]
+** 2b1. AddressBook outputs Attendance List on GUI.
++
+Use case ends
+
+[discrete]
+=== Use case: Create Discussion ChatBox
+*Precondition*
+
+1.  User has selected a group of students
+
+*MSS*
+
+1.  User requests AddressBook to open a ChatBox
+2.  AddressBook opens ChatBox
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. AddressBook detects error in data entered.
++
+
+[none]
+** 1a1. AddressBook rejects command.
++
+Use case ends
+
+
+[discrete]
+=== Use case: Automatically Adding/Deleting Tags
+*Precondition*
+
+1.  AddressBook has generated a list of students
+
+*MSS*
+
+1.  User requests tags to be added
+2.  AddressBook confirms tags has been added
++
+Use case ends
+
 _{More to be added}_
 
 [appendix]
@@ -884,6 +1142,9 @@ _{More to be added}_
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be user friendly and must not require education to use teh software
+.  Should work with data provided from excel sheet
+.  Should work with 128 bit platforms
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 _{More to be added}_
