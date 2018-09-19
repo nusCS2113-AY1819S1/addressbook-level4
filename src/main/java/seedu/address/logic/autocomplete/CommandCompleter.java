@@ -2,6 +2,7 @@ package seedu.address.logic.autocomplete;
 
 import java.util.ArrayList;
 
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.trie.Trie;
 
 public class CommandCompleter {
@@ -9,20 +10,20 @@ public class CommandCompleter {
     /**
      * Trie instances for various commanda and arguments
      */
-    Trie commandTrie;
-    Trie nameTrie;
-    Trie phoneTrie;
-    Trie emailTrie;
-    Trie addressTrie;
+    private Trie commandTrie;
+    private Trie nameTrie;
+    private Trie phoneTrie;
+    private Trie emailTrie;
+    private Trie addressTrie;
 
     /**
      * Lists of strings used to instantiate Trie objects
      */
-    ArrayList<String> commandList;
-    ArrayList<String> nameList;
-    ArrayList<String> phoneList;
-    ArrayList<String> emailList;
-    ArrayList<String> addressList;
+    private ArrayList<String> commandList;
+    private ArrayList<String> nameList;
+    private ArrayList<String> phoneList;
+    private ArrayList<String> emailList;
+    private ArrayList<String> addressList;
 
     public CommandCompleter() {
         initLists();
@@ -31,6 +32,22 @@ public class CommandCompleter {
 
     private void initLists() {
         // TODO: A command to retrieve all list from Person
+        initCommands();
+    }
+
+    private void initCommands() {
+        commandList.add(CliSyntax.COMMAND_ADD);
+        commandList.add(CliSyntax.COMMAND_CLEAR);
+        commandList.add(CliSyntax.COMMAND_DELETE);
+        commandList.add(CliSyntax.COMMAND_EDIT);
+        commandList.add(CliSyntax.COMMAND_EXIT);
+        commandList.add(CliSyntax.COMMAND_FIND);
+        commandList.add(CliSyntax.COMMAND_HELP);
+        commandList.add(CliSyntax.COMMAND_HISTORY);
+        commandList.add(CliSyntax.COMMAND_LIST);
+        commandList.add(CliSyntax.COMMAND_REDO);
+        commandList.add(CliSyntax.COMMAND_SELECT);
+        commandList.add(CliSyntax.COMMAND_UNDO);
     }
 
     private void initTries() {
