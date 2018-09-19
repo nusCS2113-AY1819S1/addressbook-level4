@@ -51,6 +51,10 @@ public class TrieNode {
         return children.get(children.size()-1);
     }
 
+    public void removeChild(TrieNode child) {
+        children.remove(child);
+    }
+
     public boolean isEndNode() {
         return isEndNode;
     }
