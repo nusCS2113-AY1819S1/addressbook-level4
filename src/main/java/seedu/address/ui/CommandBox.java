@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -60,7 +61,7 @@ public class CommandBox extends UiPart<Region> {
             System.out.println("Tab pressed");
             commandTextField.requestFocus(); // Set the focus back on textfield
             commandTextField.selectEnd(); // Move cursor to the end of text
-            logic.printAllTrieWords();
+            displayPredictions(commandTextField.getText());
             break;
 
         default:
@@ -156,4 +157,14 @@ public class CommandBox extends UiPart<Region> {
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
+    /**
+     * Testing code
+     */
+    private void displayPredictions(String prefix) {
+        ArrayList<String> output = logic.getNextPredictedList(prefix);
+        
+        for (String item : output) {
+            System.out.println(item);
+        }
+    }
 }

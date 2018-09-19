@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
@@ -51,10 +52,9 @@ public class LogicManager extends ComponentManager implements Logic {
         return new ListElementPointer(history.getHistory());
     }
 
-    /**
-     * Testing code
-     */
-    public void printAllTrieWords() {
-        model.printAllTrieWords();
+    @Override
+    public ArrayList<String> getNextPredictedList(String prefix) {
+        return model.getNextPredictedList(prefix);
     }
+
 }

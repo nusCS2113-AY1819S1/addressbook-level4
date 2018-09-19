@@ -19,6 +19,23 @@ public class Trie {
     private ArrayList<String> predictionsList;
 
     /**
+     * Command String constants
+     */
+    // TODO : Import these to all the command classes and trie class
+    private static final String COMMAND_ADD = "add";
+    private static final String COMMAND_CLEAR = "clear";
+    private static final String COMMAND_DELETE = "delete";
+    private static final String COMMAND_EDIT = "edit";
+    private static final String COMMAND_EXIT = "exit";
+    private static final String COMMAND_FIND = "find";
+    private static final String COMMAND_HELP = "help";
+    private static final String COMMAND_HISTORY = "history";
+    private static final String COMMAND_LIST = "list";
+    private static final String COMMAND_REDO = "redo";
+    private static final String COMMAND_SELECT = "select";
+    private static final String COMMAND_UNDO = "undo";
+
+    /**
      * Class constants
      */
     private final char ROOT_CHAR = '.';
@@ -36,6 +53,27 @@ public class Trie {
         root = new TrieNode(ROOT_CHAR);
         baseList = new ArrayList<>();
         this.init(inputAddressBook);
+    }
+
+    public Trie() {
+        root = new TrieNode(ROOT_CHAR);
+        baseList = new ArrayList<>();
+        this.initWithCommandWords();
+    }
+
+    private void initWithCommandWords() {
+        this.insert(COMMAND_ADD);
+        this.insert(COMMAND_CLEAR);
+        this.insert(COMMAND_DELETE);
+        this.insert(COMMAND_EDIT);
+        this.insert(COMMAND_EXIT);
+        this.insert(COMMAND_FIND);
+        this.insert(COMMAND_HELP);
+        this.insert(COMMAND_HISTORY);
+        this.insert(COMMAND_LIST);
+        this.insert(COMMAND_REDO);
+        this.insert(COMMAND_SELECT);
+        this.insert(COMMAND_UNDO);
     }
 
     /**
@@ -114,7 +152,7 @@ public class Trie {
         removeFromGraph(value);
         baseList.remove(value);
     }
-
+ 
         /**
      * Remove the input string value from the actual graph implementation
      * Traverse from the root to the last character (End node) of the string
@@ -183,21 +221,42 @@ public class Trie {
     /**
      * Testing codes section
      */
-    public void printAllWords() {
+    public ArrayList<String> getPredictList(String prefix) {
         predictionsList = new ArrayList<>();
         StringBuilder charStack = new StringBuilder();
 
         TrieNode ptr = root;
 
+        ptr = skipToStartNode(root, prefix);
+
         for (int i = 0; i < ptr.getChildren().size(); i++) {
             explore(charStack, ptr.getChildren().get(i));
         }
 
-        for (String item : predictionsList) {
-            System.out.println(item);
+        return predictionsList;
+    }
+
+    private TrieNode skipToStartNode(TrieNode begin, String prefix) {
+        TrieNode current = begin;
+        boolean hasChar = false;
+
+        for (int i = 0; i < prefix.length(); i++) {
+            ArrayList<TrieNode> currList = current.getChildren();
+
+            for (int j = 0; j < currList.size(); j++) {
+                if (currList.get(j).getValue() == prefix.charAt(i)) {
+                    current = current.getChildren().get(j);
+                    hasChar = true;
+                    break;
+                }
+            }
+
+            if (!hasChar) {
+                break;
+            }
         }
 
-        return;
+        return current;
     }
 
     private void explore(StringBuilder charStack, TrieNode ptr) {

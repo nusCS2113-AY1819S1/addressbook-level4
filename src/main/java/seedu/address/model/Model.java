@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.function.Predicate;
+import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
@@ -79,17 +80,6 @@ public interface Model {
     /**
      * Prints all the stored words in the Trie 
      */
-    void printAllTrieWords();
+    ArrayList<String> getNextPredictedList(String prefix);
 
-    /**
-     * Add a String value to the Triew
-     * @param value
-     */
-    void addStringToTrie(String value);
-
-    /**
-     * Remove a String value from the Trie
-     * @param value
-     */
-    void removeStringFromTrie(String value);
 }
