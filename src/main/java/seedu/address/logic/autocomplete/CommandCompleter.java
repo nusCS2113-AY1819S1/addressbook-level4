@@ -2,10 +2,17 @@ package seedu.address.logic.autocomplete;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.trie.Trie;
+import seedu.address.model.AddressBook;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 public class CommandCompleter {
+
+    private Model model;
 
     /**
      * Trie instances for various commanda and arguments
@@ -25,17 +32,18 @@ public class CommandCompleter {
     private ArrayList<String> emailList;
     private ArrayList<String> addressList;
 
-    public CommandCompleter() {
+    public CommandCompleter(Model model) {
+        this.model = model;
         initLists();
         initTries();
     }
 
     private void initLists() {
-        // TODO: A command to retrieve all list from Person
-        initCommands();
+        initCommandsList();
+        initAttributesLists();
     }
 
-    private void initCommands() {
+    private void initCommandsList() {
         commandList.add(CliSyntax.COMMAND_ADD);
         commandList.add(CliSyntax.COMMAND_CLEAR);
         commandList.add(CliSyntax.COMMAND_DELETE);
@@ -48,6 +56,16 @@ public class CommandCompleter {
         commandList.add(CliSyntax.COMMAND_REDO);
         commandList.add(CliSyntax.COMMAND_SELECT);
         commandList.add(CliSyntax.COMMAND_UNDO);
+    }
+
+    private void initAttributesLists() {
+        ObservableList<Person> list = model.getAddressBook().getPersonList();
+        for (Person item : list) {
+            nameList.add(item.getName().fullName);
+            phoneList.add(item.getPhone().value);
+            emailList.add(item.getEmail().value);
+            addressList.add(item.getAddress().value);
+        }
     }
 
     private void initTries() {
