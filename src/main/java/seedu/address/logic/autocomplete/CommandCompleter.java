@@ -15,7 +15,7 @@ public class CommandCompleter {
     private Model model;
 
     /**
-     * Trie instances for various commanda and arguments
+     * Trie instances for various commanda and arguments.
      */
     private Trie commandTrie;
     private Trie nameTrie;
@@ -24,7 +24,7 @@ public class CommandCompleter {
     private Trie addressTrie;
 
     /**
-     * Lists of strings used to instantiate Trie objects
+     * Word lists of strings used to instantiate Trie objects.
      */
     private ArrayList<String> commandList;
     private ArrayList<String> nameList;
@@ -32,6 +32,10 @@ public class CommandCompleter {
     private ArrayList<String> emailList;
     private ArrayList<String> addressList;
 
+    /**
+     * Creates a command completer with the {@code model} data.
+     * @param model the data represented in the address book.
+     */
     public CommandCompleter(Model model) {
         this.model = model;
         this.commandList = new ArrayList<>();
@@ -43,11 +47,17 @@ public class CommandCompleter {
         initTries();
     }
 
+    /**
+     * Initialises all words lists.
+     */
     private void initLists() {
         initCommandsList();
         initAttributesLists();
     }
 
+    /**
+     * Initialises command words list with keywords in {@code CliSyntax}.
+     */
     private void initCommandsList() {
         commandList.add(CliSyntax.COMMAND_ADD);
         commandList.add(CliSyntax.COMMAND_CLEAR);
@@ -63,6 +73,9 @@ public class CommandCompleter {
         commandList.add(CliSyntax.COMMAND_UNDO);
     }
 
+    /**
+     * Initialises attributes words lists with attribute value in each {@code Person}.
+     */
     private void initAttributesLists() {
         ObservableList<Person> list = model.getAddressBook().getPersonList();
         for (Person item : list) {
@@ -73,6 +86,9 @@ public class CommandCompleter {
         }
     }
 
+    /**
+     * Initialises all Trie instances using the words lists.
+     */
     private void initTries() {
         commandTrie = new Trie(commandList);
         nameTrie = new Trie(nameList);
