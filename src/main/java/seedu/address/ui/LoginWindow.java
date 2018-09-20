@@ -28,8 +28,6 @@ public class LoginWindow {
      * Kick starts the log in process with pop-up login windows.
      */
     public static void initializeLoginProcess() {
-        //@@author Chocological-reused
-        //Reused from https://www.mkyong.com/java/java-properties-file-examples/ with minor modifications
         Properties loadLoginCredentials = new Properties();
         InputStream input = null;
         try {
@@ -46,10 +44,6 @@ public class LoginWindow {
                 }
             }
         }
-        //@@author
-
-        //@@author Chocological-reused
-        //Reused from https://stackoverflow.com/posts/8853170/revisions with minor modifications
         final JFrame userIdentity = new JFrame();
         final JFrame userPassword = new JFrame();
         JButton button = new JButton();
@@ -61,10 +55,7 @@ public class LoginWindow {
         userPassword.add(button);
         userPassword.pack();
         userPassword.setVisible(true);
-        //@@author
 
-        //@@author Chocological-reused
-        //Reused from https://www.boraji.com/how-to-iterate-properites-in-java with minor modifications
         Enumeration<String> loginUserId = (Enumeration<String>) loadLoginCredentials.propertyNames();
 
         String userId = JOptionPane.showInputDialog(userIdentity,
@@ -77,10 +68,7 @@ public class LoginWindow {
                 isUserIdExists = true;
             }
         }
-        //@@author
 
-        //@@author Chocological-reused
-        //Reused from https://stackoverflow.com/posts/8853170/revisions with minor modifications
         if (!isUserIdExists) {
             final JFrame wrongUserId = new JFrame();
             wrongUserId.add(button);
@@ -92,10 +80,7 @@ public class LoginWindow {
 
         String password = JOptionPane.showInputDialog(userPassword,
                 "Enter your password:", null);
-        //@@author
 
-        //@@author Chocological-reused
-        //Reused from https://www.boraji.com/how-to-iterate-properites-in-java with minor modifications
         Enumeration<String> loginPassword = (Enumeration<String>) loadLoginCredentials.propertyNames();
         // Loops through all key:value pairs in loginData until there are no more elements
         while (loginPassword.hasMoreElements()) {
@@ -107,10 +92,7 @@ public class LoginWindow {
                 break;
             }
         }
-        //@@author
 
-        //@@author Chocological-reused
-        //Reused from https://stackoverflow.com/posts/8853170/revisions with minor modifications
         if (!isLoginSuccessful) {
             final JFrame wrongPassword = new JFrame();
             wrongPassword.add(button);
@@ -119,7 +101,6 @@ public class LoginWindow {
             JOptionPane.showMessageDialog(null, "Wrong password!");
             System.exit(0);
         }
-        //@@author
     }
 
     public static void main(String[] args) {
