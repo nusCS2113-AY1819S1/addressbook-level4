@@ -188,6 +188,11 @@ public class Trie {
             return predictionsList;
         }
 
+        if (startNode.getChildrenSize() == 0) {
+            charStack.append(' ');
+            predictionsList.add(charStack.toString());
+        }
+
         // If the startNode has only ONE child, build the charStack to the first
         // node that has more than one child or the first mismatch character
         if (startNode.getChildrenSize() == 1) {
@@ -209,6 +214,11 @@ public class Trie {
             charStack.append(startNode.getFirstChild().getValue());
             startNode = startNode.getFirstChild();
         }
+
+        if (startNode.getChildrenSize() == 0) {
+            charStack.append(' ');
+        }
+
         return charStack;
     }
 
@@ -234,6 +244,10 @@ public class Trie {
             }
         }
 
+        if (current.getChildrenSize() == 0) {
+
+        }
+
         return current;
     }
 
@@ -245,6 +259,9 @@ public class Trie {
 
         // We have hit the end of a word but the branch continues or there are more branch
         if (ptr.isEndNode()) {
+            if (ptr.getChildrenSize() == 0) {
+                charStack.append(' ');
+            }
             predictionsList.add(charStack.toString());
         }
 
@@ -252,6 +269,10 @@ public class Trie {
         for (int i = 0; i < ptr.getChildren().size(); i++) {
             TrieNode neighbour = ptr.getChildren().get(i);
             explore(charStack, neighbour);
+        }
+
+        if (charStack.charAt(charStack.length()-1) == ' ') {
+            charStack.deleteCharAt(charStack.length()-1);
         }
 
         // Pop the last character out of stack
