@@ -24,7 +24,7 @@ Responsibilities: Search Pruning + Advanced Search and filter feature.
 image::Melvin.jpg[width="150", align="left"]
 {empty}[http://github.com/Chocological[github]] [<<johndoe#, portfolio>>]
 
-Role: TBC + 
+Role: TBC +
 Responsibilities: Login System
 
 ...
