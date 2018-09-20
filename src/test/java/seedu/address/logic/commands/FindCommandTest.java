@@ -20,6 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.TagContainsKeywordsPredicate;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
@@ -36,31 +37,49 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        FindCommand findFirstCommand = new FindCommand(firstPredicate);
-        FindCommand findSecondCommand = new FindCommand(secondPredicate);
+        TagContainsKeywordsPredicate thirdPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("third"));
+        TagContainsKeywordsPredicate fourthPredicate =
+                new TagContainsKeywordsPredicate(Collections.singletonList("fourth"));
+
+        FindCommand findFirstCommand = new FindPersonSubCommand(firstPredicate);
+        FindCommand findSecondCommand = new FindPersonSubCommand(secondPredicate);
+        FindCommand findThirdCommand = new FindTagSubCommand(thirdPredicate);
+        FindCommand findFourthCommand = new FindTagSubCommand(fourthPredicate);
 
         // same object -> returns true
         assertTrue(findFirstCommand.equals(findFirstCommand));
-
+        assertTrue(findThirdCommand.equals(findThirdCommand));
         // same values -> returns true
-        FindCommand findFirstCommandCopy = new FindCommand(firstPredicate);
+        FindCommand findFirstCommandCopy = new FindPersonSubCommand(firstPredicate);
         assertTrue(findFirstCommand.equals(findFirstCommandCopy));
+
+        FindCommand findThirdCommandCopy = new FindTagSubCommand(thirdPredicate);
+        assertTrue(findThirdCommand.equals(findThirdCommandCopy));
 
         // different types -> returns false
         assertFalse(findFirstCommand.equals(1));
+        assertFalse(findFourthCommand.equals(4));
 
         // null -> returns false
         assertFalse(findFirstCommand.equals(null));
+        assertFalse(findThirdCommand.equals(null));
 
         // different person -> returns false
         assertFalse(findFirstCommand.equals(findSecondCommand));
+
+        //different tag -> returns false
+        assertFalse(findFourthCommand.equals(findThirdCommand));
+
+        //different object -> returns false
+        assertFalse(findFirstCommand.equals(findThirdCommand));
     }
 
     @Test
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        FindCommand command = new FindCommand(predicate);
+        FindCommand command = new FindPersonSubCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -70,7 +89,7 @@ public class FindCommandTest {
     public void execute_multipleKeywords_multiplePersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
-        FindCommand command = new FindCommand(predicate);
+        FindCommand command = new FindPersonSubCommand(predicate);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
