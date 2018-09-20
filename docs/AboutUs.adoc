@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[T09-2] team. +
+INSERT APP NAME was developed by the https://se-edu.github.io/docs/Team.html[T09-2] team. +
 
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
@@ -12,16 +12,16 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Wang Shining
 image::SHININGGGG.jpg[width="150", align="left"]
-{empty}[http://github.com/SHININGGGG[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/SHININGGGG[github]] [<<shining#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: UI
+Responsibilities: 
 
 '''
 
 === Tay Ran Tian
 image::arty9.jpg[width="150", align="left"]
-{empty}[http://github.com/arty9[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/arty9[github]] [<<rantian#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Documentations
@@ -30,18 +30,18 @@ Responsibilities: Documentations
 
 === Xin Shenzi
 image::feijunzi.jpg[width="150", align="left"]
-{empty}[http://github.com/feijunzi[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/feijunzi[github]] [<<shenzi#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: 
 
 '''
 
 === Xiao Yunhan
 image::XiaoYunhan.jpg[width="150", align="left"]
-{empty}[http://github.com/XiaoYunhan[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/XiaoYunhan[github]] [<<yunhan#, portfolio>>]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: 
 
 '''
