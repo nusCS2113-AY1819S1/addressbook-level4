@@ -1,4 +1,4 @@
-= ProHelp - Developer Guide
+= iHelp - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
