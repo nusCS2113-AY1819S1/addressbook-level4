@@ -6,12 +6,10 @@ package seedu.address.model.person;
  */
 public class TimeTable {
 
-    //Is this even correct syntax, i cries java is hard
-    private TimeSlot[][] weeklyslots = new TimeSlot[7][24];
+    private TimeSlot[][] weeklyslots;
 
     public TimeTable() {
-        //FIX THIS?
-        //this.weeklyslots = new TimeSlot weeklyslots;
+        this.weeklyslots = new TimeSlot[7][24];
     }
 
     public void fillTimeSlot(int day, int hour) {
