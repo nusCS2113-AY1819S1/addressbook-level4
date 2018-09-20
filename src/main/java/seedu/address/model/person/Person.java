@@ -20,6 +20,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
+
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
@@ -37,6 +38,7 @@ public class Person {
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.weekly = new TimeTable();
     }
 
     public Name getName() {
