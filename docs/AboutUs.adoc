@@ -4,20 +4,13 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-NUSSU Connect was developed by https://se-edu.github.io/docs/Team.html[F09-1] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
+NUSSU Connect is an application developed to help NUSSU manage people and
+related functions relating to HR and Finance needs. It is currently a work in progress.
+https://se-edu.github.io/docs/Team.html[F09-1] team. +
+
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
-
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
-
-Role: Project Advisor
-
-'''
 
 === Boon Jun
 image::ladderinc.jpg[width="150", align="left"]
@@ -25,6 +18,15 @@ image::ladderinc.jpg[width="150", align="left"]
 
 Role: TBC +
 Responsibilities: Search Pruning + Advanced Search and filter feature.
+
+'''
+
+=== Jonathan Ng
+image::jonathan.png[width="150", align="left"]
+{empty}[http://github.com/derpyplops[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: HR & Roles
 
 '''
 
@@ -46,11 +48,3 @@ Responsibilities: Dev Ops + Threading
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: UI
-
-'''
