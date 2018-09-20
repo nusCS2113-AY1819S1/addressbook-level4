@@ -208,12 +208,6 @@ Format: `delete <NAME>`
 *	NAME *must be the full name* of the person that is saved in the RecruitBook `e.g. John Doe`
 *	The full name can be found using the find function when a partial keyword is entered
 
-==== Deleting a specific job offer
-Format: `delete <INDEX>`
-
-*	Deletes the job with the specified `INDEX`
-*	The index must be an index number shown in the displayed job list.
-
 Example to delete a candidate:
 
 Step 1.	`find Betsy` +
@@ -221,6 +215,12 @@ Step 1.	`find Betsy` +
 
 Step 2. `delete Betsy Rose` +
 (Deletes ‘Betsy Rose’ from the RecruitBook)
+
+==== Deleting a specific job offer
+Format: `delete <INDEX>`
+
+*	Deletes the job with the specified `INDEX`
+*	The index must be an index number shown in the displayed job list.
 
 Example to delete a job:
 
