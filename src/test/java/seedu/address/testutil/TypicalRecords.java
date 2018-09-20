@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 

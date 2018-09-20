@@ -11,9 +11,10 @@ public class Date {
 
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Date parameter should be in the format of dd-mm-yyyy with dd and mm being 2 digits, and yyyy being 4 digits.";
+            "Date parameter should be in the format of dd-mm-yyyy "
+            + "with dd and mm being 2 digits, and yyyy being 4 digits.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
-    public String value;
+    public final String value;
     private String day;
 
     private String month;

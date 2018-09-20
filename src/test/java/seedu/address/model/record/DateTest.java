@@ -41,6 +41,6 @@ public class DateTest {
 
         // valid day parameters
         assertTrue(Date.isValidDate("11-11-1911")); // exactly in the form dd-mm-yyyy
-        assertTrue(Date.isValidDate("1-1-1911"));   // dd or mm can be 1 digit
+        assertTrue(Date.isValidDate("1-1-1911")); // dd or mm can be 1 digit
     }
 }

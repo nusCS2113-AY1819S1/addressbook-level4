@@ -4,10 +4,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
 import org.junit.Test;
@@ -36,7 +36,8 @@ public class EditRecordDescriptorTest {
         assertFalse(DESC_AMY.equals(DESC_BOB));
 
         // different name -> returns false
-        EditCommand.EditRecordDescriptor editedAmy = new EditRecordDescriptorBuilder(DESC_AMY).withName(VALID_NAME_BOB).build();
+        EditCommand.EditRecordDescriptor editedAmy = new EditRecordDescriptorBuilder(DESC_AMY)
+                .withName(VALID_NAME_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different day params -> returns false

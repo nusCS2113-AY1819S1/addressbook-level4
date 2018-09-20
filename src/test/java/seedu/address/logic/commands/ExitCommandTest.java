@@ -15,8 +15,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.junit.rules.ExpectedException;
+
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
@@ -95,7 +95,8 @@ public class ExitCommandTest {
 
         @Test
         public void getDataFromFile_validFile_validResult() throws Exception {
-            AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
+            AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class)
+                    .toModelType();
             assertEquals(9, dataFromFile.getRecordList().size());
         }
 
@@ -149,7 +150,8 @@ public class ExitCommandTest {
             FileUtil.createFile(TEMP_FILE);
             XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
             XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-            XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+            XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile
+                    (TEMP_FILE, XmlSerializableAddressBook.class);
             assertEquals(dataToWrite, dataFromFile);
 
             AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
@@ -162,7 +164,8 @@ public class ExitCommandTest {
         }
 
         /**
-         * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedRecord}
+         * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to
+         * {@code XmlAdaptedRecord}
          * objects.
          */
         @XmlRootElement(name = "record")

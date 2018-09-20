@@ -9,9 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Income {
 
-    public static final String MESSAGE_INCOME_CONSTRAINTS = "Income should consist of only digits and/or decimal points ('.')."
+    public static final String MESSAGE_INCOME_CONSTRAINTS =
+            "Income should consist of only digits and/or decimal points ('.')."
             + "It must be of the following form <number>.<number>:\n"
-            + "1. <number> cannot start from '0' unless it has only 1 digit. There must be at least 1 digit in this field.\n"
+            + "1. <number> cannot start from '0' unless it has only 1 digit. "
+            + "There must be at least 1 digit in this field.\n"
             + "2. At most 1 decimal point can be present. Decimal point is optional."
             + "If decimal point is present, it must have at least 1 digit after it";
 

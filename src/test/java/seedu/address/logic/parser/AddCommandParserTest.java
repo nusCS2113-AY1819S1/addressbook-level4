@@ -1,27 +1,27 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EXPENSE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.INCOME_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EXPENSE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INCOME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -32,11 +32,11 @@ import static seedu.address.testutil.TypicalRecords.BOB;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.record.Date;
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
-import seedu.address.model.record.Date;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.RecordBuilder;
 

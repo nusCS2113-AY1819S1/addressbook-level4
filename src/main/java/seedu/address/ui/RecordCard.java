@@ -31,8 +31,7 @@ public class RecordCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label date
-            ;
+    private Label date;
     @FXML
     private Label expense;
     @FXML

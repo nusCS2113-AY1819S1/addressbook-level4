@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 
@@ -16,10 +15,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.record.Date;
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
 import seedu.address.model.record.Name;
-import seedu.address.model.record.Date;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
