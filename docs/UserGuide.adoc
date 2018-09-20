@@ -12,9 +12,9 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/CS2113-AY1819S1-F09-1/NUSSU-Connect/
+:repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
