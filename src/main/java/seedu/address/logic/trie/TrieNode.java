@@ -56,7 +56,7 @@ public class TrieNode {
     }
 
     public TrieNode getFirstChild() {
-        children.get(0);
+        return children.get(0);
     }
 
     public boolean isEndNode() {

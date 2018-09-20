@@ -42,9 +42,16 @@ public class Trie {
      * Initialise the Trie instance with the items in baseList
      */
     private void init() {
+
+        for (int i = 0; i < baseList.size(); i++) {
+            this.insertToGraph(baseList.get(i));
+        }
+
+        /*
         for (String item : baseList) {
             this.insert(item);
         }
+        */
     }
 
     /**
@@ -177,9 +184,12 @@ public class Trie {
         StringBuilder charStack = new StringBuilder();
 
         TrieNode startNode = skipToStartNode(root, prefix);
+        if (startNode.equals(root)) {
+            return predictionsList;
+        }
 
         // If the startNode has only ONE child, build the charStack to the first
-        // node that has more than one child.
+        // node that has more than one child or the first mismatch character
         if (startNode.getChildrenSize() == 1) {
             charStack = buildSingleStack(startNode);
             predictionsList.add(charStack.toString());
@@ -196,7 +206,7 @@ public class Trie {
     private StringBuilder buildSingleStack(TrieNode startNode) {
         StringBuilder charStack = new StringBuilder();
         while(startNode.getChildrenSize() == 1) {
-            charStack.append(startNode.getFirstChild());
+            charStack.append(startNode.getFirstChild().getValue());
             startNode = startNode.getFirstChild();
         }
         return charStack;
@@ -208,6 +218,7 @@ public class Trie {
 
         for (int i = 0; i < prefix.length(); i++) {
             ArrayList<TrieNode> currList = current.getChildren();
+            hasChar = false;
 
             for (int j = 0; j < currList.size(); j++) {
                 if (currList.get(j).getValue() == prefix.charAt(i)) {
@@ -218,6 +229,7 @@ public class Trie {
             }
 
             if (!hasChar) {
+                current = root;
                 break;
             }
         }
@@ -230,7 +242,7 @@ public class Trie {
         if (ptr.getValue() != '.') {
             charStack.append(ptr.getValue());
         }
-        
+
         // We have hit the end of a word but the branch continues or there are more branch
         if (ptr.isEndNode()) {
             predictionsList.add(charStack.toString());

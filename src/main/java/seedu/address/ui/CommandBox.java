@@ -58,10 +58,9 @@ public class CommandBox extends UiPart<Region> {
             break;
         case TAB:
 //            keyEvent.consume();
-            System.out.println("Tab pressed");
+            predictCmd(commandTextField.getText());
             commandTextField.requestFocus(); // Set the focus back on textfield
             commandTextField.selectEnd(); // Move cursor to the end of text
-            displayPredictions(commandTextField.getText());
             break;
 
         default:
@@ -160,7 +159,19 @@ public class CommandBox extends UiPart<Region> {
     /**
      * Testing code
      */
-    private void displayPredictions(String prefix) {
-        
+    private void predictCmd(String prefix) {
+        ArrayList<String> output = logic.getCmdPrediction(prefix);
+        handlePredictions(output);
+    }
+
+    private void handlePredictions(ArrayList<String> input) {
+        if (input.size() == 1) {
+            commandTextField.appendText(input.get(0));
+        }
+        else {
+            for (String item : input) {
+                System.out.println(item);
+            }
+        }
     }
 }
