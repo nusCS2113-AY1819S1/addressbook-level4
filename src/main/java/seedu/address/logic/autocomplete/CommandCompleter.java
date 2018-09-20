@@ -14,6 +14,12 @@ public class CommandCompleter {
 
     private Model model;
 
+    private final String COMPLETE_COMMAND = "command";
+    private final String COMPLETE_NAME = "name";
+    private final String COMPLETE_PHONE = "phone";
+    private final String COMPLETE_EMAIL = "email";
+    private final String COMPLETE_ADDRESS = "address";
+
     /**
      * Trie instances for various commanda and arguments.
      */

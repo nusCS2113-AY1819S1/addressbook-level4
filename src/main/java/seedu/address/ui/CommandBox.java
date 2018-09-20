@@ -161,16 +161,16 @@ public class CommandBox extends UiPart<Region> {
      */
     private void predictCmd(String prefix) {
         ArrayList<String> output = logic.getCmdPrediction(prefix);
-        handlePredictions(output);
+        handlePredictions(output, prefix);
     }
 
-    private void handlePredictions(ArrayList<String> input) {
+    private void handlePredictions(ArrayList<String> input, String prefix) {
         if (input.size() == 1) {
             commandTextField.appendText(input.get(0));
         }
         else {
             for (String item : input) {
-                System.out.println(item);
+                System.out.println(prefix + item);
             }
         }
     }

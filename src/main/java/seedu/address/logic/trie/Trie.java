@@ -46,12 +46,6 @@ public class Trie {
         for (int i = 0; i < baseList.size(); i++) {
             this.insertToGraph(baseList.get(i));
         }
-
-        /*
-        for (String item : baseList) {
-            this.insert(item);
-        }
-        */
     }
 
     /**
@@ -65,7 +59,6 @@ public class Trie {
 
     /**
      * Insert the given string value to the Trie graph.
-     * 
      * @param keyString the string value to be inserted
      */
     private void insertToGraph(String keyString) {
@@ -90,7 +83,6 @@ public class Trie {
                 ptr = ptr.appendChild(new TrieNode(ch));
                 ptr.setParent(parent);
             }
-            
         }
 
         // Mark end of word node
@@ -109,7 +101,6 @@ public class Trie {
         removeFromGraph(value);
         baseList.remove(value);
     }
- 
         /**
      * Remove the input string value from the actual graph implementation
      * Traverse from the root to the last character (End node) of the string
