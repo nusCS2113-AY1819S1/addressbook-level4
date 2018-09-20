@@ -1,4 +1,6 @@
-package seedu.address.commons.util;
+package seedu.address.storage;
+
+import seedu.address.commons.util.Passwords;
 
 import java.io.IOException;
 import java.io.File;

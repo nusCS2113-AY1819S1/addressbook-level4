@@ -4,8 +4,8 @@ public class HammingDistanceUtil {
     private String left, right;
 
     public HammingDistanceUtil (String left, String right) {
-        this.left = left;
-        this.right = right;
+        this.left = left.toLowerCase();
+        this.right = right.toLowerCase();
     }
 
     public int getDistance () {
