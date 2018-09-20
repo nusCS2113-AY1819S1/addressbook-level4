@@ -1,4 +1,4 @@
-= Address Book (Level 4)
+= Something Daily
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/nusCS2113-AY1819S1/addressbook-level4[image:https://travis-ci.org/nusCS2113-AY1819S1/addressbook-level4.svg?branch=master[Build Status]]
