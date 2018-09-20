@@ -815,13 +815,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* Students who need to manage a significant number of daily tasks
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage daily tasks faster than Google calendar/handwritten notebook and become more productive
 
 [appendix]
 == User Stories
@@ -833,60 +833,71 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |forgetful student |add new task |keep track of my workload
 
-|`* * *` |user |delete a person |remove entries that I no longer need
-
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
-
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
-
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
 |=======================================================================
 
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `TaskBook` and the *Actor* is the `student`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add new task
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Student requests to add a new task
+2.  TB checks for its validity and adds the task to the list
 +
 Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The list is empty.
+* 2a. Student enters an invalid command format
+** 2a1. TB requests for a valid command
+** 2a2. Student enters a new add command
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. Student enters a duplicated task
+** 2b1. TB outputs an error message
 +
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
+Use case ends.
 
-_{More to be added}_
+[discrete]
+=== Use case: Add important deadline
+
+*MSS*
+
+1. Student selects the date of deadline
+2. TB sets the date correspondingly
+3. Student requests to add new task with deadline included
+4. TB asks for the number of weeks before to remind about deadline e.g. 1 week earlier
+5. Student provides the number of weeks for reminder(s).
+6. TB adds the task and its reminder(s) to the list
++
+Use case ends.
+
+*Extensions*
+
+* 3b. Student wants to add a deadline for an existing task i.e. duplicated task
+** 3b1. TB outputs an error message
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Should be able to respond within 2 seconds.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Will be offered free for students.
+.  Not built to contain sensitive information due to lack of password protection.
+.  Tasks dated as far as 10 years ago may be difficult to retrieve, unless data is backed up in the cloud storage.
 
-_{More to be added}_
 
 [appendix]
 == Glossary
