@@ -22,11 +22,12 @@ Responsibilities: Search Pruning + Advanced Search and filter feature.
 
 === Melvin Tan
 image::Melvin.jpg[width="150", align="left"]
-{empty}[http://github.com/Chocological[github]]
+{empty}[http://github.com/Chocological[github]] [<<johndoe#, portfolio>>]
 
 Role: TBC + 
 Responsibilities: Login System
 
+...
 
 === Johnny Doe
 image::yijinl.jpg[width="150", align="left"]
