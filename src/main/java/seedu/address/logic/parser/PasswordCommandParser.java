@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import seedu.address.commons.util.FileEncryptor;
 import seedu.address.storage.PasswordManager;
 import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,20 +26,25 @@ public class PasswordCommandParser implements Parser<PasswordCommand>{
 
         String[] credentials = trimmedArgs.split("\\s+");
 
-        if (credentials.length < 2) {
+        if (credentials.length < 1) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
         }
 
-        String message;
-        File f = new File("password.txt");
-        if(f.exists() && !f.isDirectory()) {
-            message = PasswordManager.authenticate(credentials[1], credentials[0]);
 
-        } else {
-            message = "Password stored successfully!";
-            message += "\nhash: " + PasswordManager.storePassword(credentials[1], credentials[0]);
-        }
+//        File f = new File("password.txt");
+//        if(f.exists() && !f.isDirectory()) {
+//            message = PasswordManager.authenticate(credentials[1], credentials[0]);
+//
+//
+//        } else {
+//            message = "Password stored successfully!";
+//            message += "\nhash: " + PasswordManager.storePassword(credentials[1], credentials[0]);
+//        }
+
+
+        FileEncryptor FE = new FileEncryptor(credentials[0]);
+        String message = FE.getMessage();
 
         return new PasswordCommand(message);
     }
