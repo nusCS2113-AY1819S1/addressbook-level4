@@ -38,7 +38,7 @@ Responsibilities: Documentation + Code Quality
 '''
 
 === Seah Ming Xun
-image::MingXunSeah.png[width="150", align="left"]
+image::mingxunseah.png[width="150", align="left"]
 {empty}[http://github.com/MingXunSeah[github]]
 
 Role: Developer +
