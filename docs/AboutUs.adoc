@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Nicholas Seah
-image::sxqnicholas96.jpg[width="150", align="left"]
+image::sxqnicholas96.png[width="150", align="left"]
 {empty}[https://github.com/sxqnicholas96[github]]
 
 Role: Team Lead + 
@@ -20,7 +20,7 @@ Responsibilities: Responsible for overall project coordination
 '''
 
 === Andrew Ong
-image::andrewome.jpg[width="150", align="left"]
+image::andrewome.png[width="150", align="left"]
 {empty}[http://github.com/andrewome[github]]
 
 Role: Developer +
@@ -29,7 +29,7 @@ Responsibilities: API expert
 '''
 
 === Rachel Lee
-image::leerachel.jpg[width="150", align="left"]
+image::leerachel.png[width="150", align="left"]
 {empty}[http://github.com/leerachel[github]] 
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Documentation + Code Quality
 '''
 
 === Seah Ming Xun
-image::MingXunSeah.jpg[width="150", align="left"]
+image::MingXunSeah.png[width="150", align="left"]
 {empty}[http://github.com/MingXunSeah[github]]
 
 Role: Developer +
@@ -47,7 +47,7 @@ Responsibilities: Integration
 '''
 
 === Tan Kian Meng
-image::kianmengtan.jpg[width="150", align="left"]
+image::kianmengtan.png[width="150", align="left"]
 {empty}[http://github.com/kianmengtan[github]]
 
 Role: Developer +
