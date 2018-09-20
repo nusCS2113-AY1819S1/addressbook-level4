@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.function.Predicate;
+import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
@@ -75,13 +76,4 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
-
-    /**
-     * Testing code
-     */
-    void printAllTrieWords();
-
-    void addWordToTrie(String value);
-
-    void removeWordFromTrie(String value);
 }

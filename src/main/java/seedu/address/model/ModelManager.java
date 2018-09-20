@@ -5,6 +5,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.ArrayList;
+
+import com.sun.xml.bind.v2.TODO;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,11 +28,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
 
     /**
-     * Testing variables
-     */
-    private Trie trie;
-
-    /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
@@ -40,9 +38,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-
-        trie = new Trie();
-        trie.init(Trie.translateList(versionedAddressBook));
     }
 
     public ModelManager() {
@@ -154,20 +149,5 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
-    }
-
-    /**
-     * Testing code
-     */
-    public void printAllTrieWords() {
-        trie.printAllWords();
-    }
-
-    public void addWordToTrie(String value) {
-        trie.insert(value);
-    }
-
-    public void removeWordFromTrie(String value) {
-        trie.remove(value);
     }
 }

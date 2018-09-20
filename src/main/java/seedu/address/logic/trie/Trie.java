@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.AddressBook;
 
 /**
  * A bi-directional Tree structure that stems from the root node
@@ -31,19 +32,26 @@ public class Trie {
     /**
      * Default constructor
      */
-    public Trie() {
+    public Trie(ArrayList<String> inputList) {
         root = new TrieNode(ROOT_CHAR);
-        baseList = new ArrayList<>();
+        baseList = new ArrayList<>(inputList);
+        init();
     }
 
     /**
-     * Initialises a Trie graph with a list of words
-     * @param input
+     * Initialise the Trie instance with the items in baseList
      */
-    public void init(ArrayList<String> input) {
-        for (String item : input) {
+    private void init() {
+
+        for (int i = 0; i < baseList.size(); i++) {
+            this.insertToGraph(baseList.get(i));
+        }
+
+        /*
+        for (String item : baseList) {
             this.insert(item);
         }
+        */
     }
 
     /**
@@ -91,7 +99,7 @@ public class Trie {
 
     /**
      * Remove the input string value from the class instance
-     * @param value
+     * @param value the value to remove
      */
     public void remove(String value) {
         // Check if this value exists
@@ -101,7 +109,7 @@ public class Trie {
         removeFromGraph(value);
         baseList.remove(value);
     }
-
+ 
         /**
      * Remove the input string value from the actual graph implementation
      * Traverse from the root to the last character (End node) of the string
@@ -110,7 +118,7 @@ public class Trie {
      * If the remove of this node does not affect any chidren node
      * (ie the node has no children), remove the whole word
      *
-     * @param value
+     * @param value the value to remove
      */
     private void removeFromGraph(String value) {
         TrieNode pointer;
@@ -154,7 +162,7 @@ public class Trie {
      * Removes a word from the graph given the end node of that word
      * Removes every parent level node until a node that has more than one child
      * or it is an end node
-     * @param pointer
+     * @param pointer the first node in the graph to be removed
      */
     private void removeWordFromGraph(TrieNode pointer) {
         // Set this node as non-end node first
@@ -163,6 +171,7 @@ public class Trie {
         // Traverse upwards the trie
         while (!pointer.isEndNode() && pointer.getChildrenSize() == 0) {
             TrieNode parent = pointer.getParent();
+            parent.removeChild(pointer);
             pointer = parent;
         }
     }
@@ -170,21 +179,76 @@ public class Trie {
     /**
      * Testing codes section
      */
-    public void printAllWords() {
+    public ArrayList<String> getPredictList(String prefix) {
         predictionsList = new ArrayList<>();
         StringBuilder charStack = new StringBuilder();
 
-        TrieNode ptr = root;
-
-        for (int i = 0; i < ptr.getChildren().size(); i++) {
-            explore(charStack, ptr.getChildren().get(i));
+        TrieNode startNode = skipToStartNode(root, prefix);
+        if (startNode.equals(root)) {
+            return predictionsList;
         }
 
-        for (String item : predictionsList) {
-            System.out.println(item);
+        if (startNode.getChildrenSize() == 0) {
+            charStack.append(' ');
+            predictionsList.add(charStack.toString());
         }
 
-        return;
+        // If the startNode has only ONE child, build the charStack to the first
+        // node that has more than one child or the first mismatch character
+        if (startNode.getChildrenSize() == 1) {
+            charStack = buildSingleStack(startNode);
+            predictionsList.add(charStack.toString());
+            return predictionsList;
+        }
+
+        for (int i = 0; i < startNode.getChildren().size(); i++) {
+            explore(charStack, startNode.getChildren().get(i));
+        }
+
+        return predictionsList;
+    }
+
+    private StringBuilder buildSingleStack(TrieNode startNode) {
+        StringBuilder charStack = new StringBuilder();
+        while(startNode.getChildrenSize() == 1) {
+            charStack.append(startNode.getFirstChild().getValue());
+            startNode = startNode.getFirstChild();
+        }
+
+        if (startNode.getChildrenSize() == 0) {
+            charStack.append(' ');
+        }
+
+        return charStack;
+    }
+
+    private TrieNode skipToStartNode(TrieNode begin, String prefix) {
+        TrieNode current = begin;
+        boolean hasChar = false;
+
+        for (int i = 0; i < prefix.length(); i++) {
+            ArrayList<TrieNode> currList = current.getChildren();
+            hasChar = false;
+
+            for (int j = 0; j < currList.size(); j++) {
+                if (currList.get(j).getValue() == prefix.charAt(i)) {
+                    current = current.getChildren().get(j);
+                    hasChar = true;
+                    break;
+                }
+            }
+
+            if (!hasChar) {
+                current = root;
+                break;
+            }
+        }
+
+        if (current.getChildrenSize() == 0) {
+
+        }
+
+        return current;
     }
 
     private void explore(StringBuilder charStack, TrieNode ptr) {
@@ -192,9 +256,12 @@ public class Trie {
         if (ptr.getValue() != '.') {
             charStack.append(ptr.getValue());
         }
-        
+
         // We have hit the end of a word but the branch continues or there are more branch
         if (ptr.isEndNode()) {
+            if (ptr.getChildrenSize() == 0) {
+                charStack.append(' ');
+            }
             predictionsList.add(charStack.toString());
         }
 
@@ -204,19 +271,14 @@ public class Trie {
             explore(charStack, neighbour);
         }
 
+        if (charStack.charAt(charStack.length()-1) == ' ') {
+            charStack.deleteCharAt(charStack.length()-1);
+        }
+
         // Pop the last character out of stack
         if (charStack.length() > 0) {
             charStack.deleteCharAt(charStack.length()-1);
         }
     }
 
-    public static ArrayList<String> translateList(ReadOnlyAddressBook input) {
-        ArrayList<String> output = new ArrayList<String>();
-
-        for (Person person : input.getPersonList()) {
-            output.add(person.getName().fullName);
-        }
-
-        return output;
-    }
 }

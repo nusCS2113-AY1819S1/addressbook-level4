@@ -1,16 +1,17 @@
 package seedu.address.logic;
 
 import java.util.logging.Logger;
+import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.autocomplete.CommandCompleter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.trie.Trie;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -23,11 +24,13 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
+    private CommandCompleter commandCompleter;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
+        commandCompleter = new CommandCompleter(model);
     }
 
     @Override
@@ -52,10 +55,8 @@ public class LogicManager extends ComponentManager implements Logic {
         return new ListElementPointer(history.getHistory());
     }
 
-    /**
-     * Testing code
-     */
-    public void printAllTrieWords() {
-        model.printAllTrieWords();
+    @Override
+    public ArrayList<String> getCmdPrediction(String prefix) {
+        return commandCompleter.predictText(prefix);
     }
 }
