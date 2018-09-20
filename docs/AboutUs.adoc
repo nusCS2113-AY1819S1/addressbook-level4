@@ -51,6 +51,6 @@ image::sanjukta99.jpg[width="150", align="left"]
 {empty}[http://github.com/sanjukta99[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Budgeting functionality
+Responsibilities: Budgeting functionality for treasurers
 
 '''
