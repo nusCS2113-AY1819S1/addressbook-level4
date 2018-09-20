@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Recruit Book - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,19 +12,19 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-F09-4/addressbook-level4
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F09-4`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+RecruitBook is a tool to help manage job candidates and available job offers for job agents and HR(Human Resources) department. RecruitBook is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). RecruitBook can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `recruitbook.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Recruit Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -33,9 +33,10 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list candidates`* : lists the names of all the candidates available
+* *`add candidate`* : adds a candidate to RecruitBook
+* *`add job`* : adds an available job to RecruitBook
+* **`delete`**`3` : deletes the 3rd job shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -47,27 +48,64 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Details labelled with “if any” must be filled in at least with `NA` if user finds it not applicable.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Gender can be specified by g/U (unrestricted), g/F (female) or g/M (male).
 ====
 
 === Viewing help : `help`
 
+Views help information of the various commands in RecruitBook. +
 Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+==== Adds a candidate to the RecruitBook
+Format: `add candidate` +
+Supported tags: `n/`, `p/`, `e/`, `a/`, `g/`, `x/`, `j/`, ` h/`, `s/`, `y/`, `c/`
 
-[TIP]
-A person can have any number of tags (including 0)
+Entering this command will prompt user the following: +
+*`Enter the following details of the candidate in the format:`* +
+`n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH`
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/A LEVEL s/1200`
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/NA`
+
+After keying in the details, user will be further prompted for details of job experience: +
+*`Enter job experience (if any) of the candidate in the following format:`* +
+`j/JOB y/YEARS_OF_EXPERIENCE c/COMPANY`
+
+Examples:
+
+* `j/Store Manager y/1 c/Mcdonalds`
+* `j/Cashier y/2 c/KFC`
+
+==== Adds a job offer to the RecruitBook 
+Format: `add job`
+
+Entering this command will prompt user the following: +
+*`Enter the following details of the job in the format:`* +
+`c/COMPANY j/JOB_TITLE`
+
+Examples:
+
+*	`c/Macdonalds j/Store Manager`
+*	`c/KFC j/Cashier`
+
+After keying in the details, user will be further prompted for details of job requirements: +
+*`Enter the job requirements in the format:`* +
+`x/MIN_AGE-MAX_AGE h/HIGHEST_EDUCATION s/MIN_SALARY-MAX_SALARY g/GENDER`
+
+Examples:
+
+* `x/18-60 h/PRIMARY s/1000-1200 g/U`
+*	`x/18-30 h/O LEVEL s/1500-2000 g/M`
+
+==== Exits from the add job and add candidate interface without adding to RecruitBook
+Format: `cancel`
+
 
 === Listing all persons : `list`
 
