@@ -55,6 +55,10 @@ public class TrieNode {
         children.remove(child);
     }
 
+    public TrieNode getFirstChild() {
+        children.get(0);
+    }
+
     public boolean isEndNode() {
         return isEndNode;
     }

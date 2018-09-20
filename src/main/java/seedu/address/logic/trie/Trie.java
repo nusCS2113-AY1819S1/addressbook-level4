@@ -176,13 +176,30 @@ public class Trie {
         predictionsList = new ArrayList<>();
         StringBuilder charStack = new StringBuilder();
 
-        TrieNode ptr = skipToStartNode(root, prefix);
+        TrieNode startNode = skipToStartNode(root, prefix);
 
-        for (int i = 0; i < ptr.getChildren().size(); i++) {
-            explore(charStack, ptr.getChildren().get(i));
+        // If the startNode has only ONE child, build the charStack to the first
+        // node that has more than one child.
+        if (startNode.getChildrenSize() == 1) {
+            charStack = buildSingleStack(startNode);
+            predictionsList.add(charStack.toString());
+            return predictionsList;
+        }
+
+        for (int i = 0; i < startNode.getChildren().size(); i++) {
+            explore(charStack, startNode.getChildren().get(i));
         }
 
         return predictionsList;
+    }
+
+    private StringBuilder buildSingleStack(TrieNode startNode) {
+        StringBuilder charStack = new StringBuilder();
+        while(startNode.getChildrenSize() == 1) {
+            charStack.append(startNode.getFirstChild());
+            startNode = startNode.getFirstChild();
+        }
+        return charStack;
     }
 
     private TrieNode skipToStartNode(TrieNode begin, String prefix) {
