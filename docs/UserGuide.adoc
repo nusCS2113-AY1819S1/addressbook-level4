@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/CS2113-AY1819S1-F09-1/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-F09-1/NUSSU-Connect/
 
 By: `Team F09-1`      Since: `Sept 2018`
 
