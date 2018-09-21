@@ -23,7 +23,7 @@ import javax.crypto.spec.PBEParameterSpec;
 public class FileEncryptor {
 
     private static String EXTENSION = ".encrypted";
-    private static String FILENAME = "test.md";
+    private static String FILENAME = "data/addressbook.xml";
     private static String MESSAGE = "";
 
     private static final byte[] salt = {
@@ -32,16 +32,18 @@ public class FileEncryptor {
     };
 
     public FileEncryptor (String password) {
-        File f = new File("test.md");
-        File f_encrypted = new File("test.md" + EXTENSION);
+        File f = new File(FILENAME);
+        File f_encrypted = new File(FILENAME + EXTENSION);
 
         try {
             if (f.exists() && !f.isDirectory()) {
                 encryptFile( FILENAME, password );
                 MESSAGE = "File encrypted!";
+                // TODO: Send a request to refresh the addressbook
             }else if (f_encrypted.exists() && !f_encrypted.isDirectory()) {
                 decryptFile( FILENAME, password);
                 MESSAGE = "File decrypted!";
+                // TODO: Send a request to refresh the addressbook
             }
 
         } catch (IOException e) {
