@@ -74,5 +74,9 @@ Multiple Inheritance (Multiple parent classes) is when a class inherits directly
 
 # Practices for good code quality
 1. Class names should start with upper case letter
+<<<<<<< HEAD
+2. Class names should be meaningful 
+=======
 2. Class names should be meaningful
+>>>>>>> 9498b3d734f0520d6c8b5bdc66e4afdeeba0123a
 3. Avoid magic numbers (Even if numbers are fixed, declare them as macros or global variables)

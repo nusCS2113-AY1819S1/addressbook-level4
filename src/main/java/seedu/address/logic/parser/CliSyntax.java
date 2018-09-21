@@ -25,4 +25,5 @@ public class CliSyntax {
     public static final String COMMAND_REDO = "redo";
     public static final String COMMAND_SELECT = "select";
     public static final String COMMAND_UNDO = "undo";
+    public static final String COMMAND_PASSWORD = "password";
 }
