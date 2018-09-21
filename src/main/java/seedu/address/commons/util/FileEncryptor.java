@@ -12,13 +12,14 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-
-// Sources: https://stackoverflow.com/questions/13673556/using-password-based-encryption-on-a-file-in-java
-
-
 // TODO: Parse username as salt and pad it to make it 8bytes long at least
 // TODO: Encrypt the actual data file and handle the error for sudden dissapearance
 
+/**
+ * File encryptor:
+ * Sources:
+ * https://stackoverflow.com/questions/13673556/using-password-based-encryption-on-a-file-in-java
+ */
 public class FileEncryptor {
 
     private static String extension = ".encrypted";
@@ -40,7 +41,7 @@ public class FileEncryptor {
 
         try {
             if (f.exists() && !f.isDirectory()) {
-                encryptFile(filename, password );
+                encryptFile(filename, password);
                 message = "File encrypted!";
                 // TODO: Send a request to refresh the addressbook
             } else if (fEncrypted.exists() && !fEncrypted.isDirectory()) {
@@ -104,7 +105,7 @@ public class FileEncryptor {
 
         int blockSize = 8;
         //Figure out how many bytes are padded
-        int paddedCount = blockSize - ( (int) inFile.length() % blockSize );
+        int paddedCount = blockSize - ((int) inFile.length() % blockSize);
 
         //Figure out full size including padding
         int padded = (int) inFile.length() + paddedCount;
@@ -117,7 +118,7 @@ public class FileEncryptor {
         inStream.close();
 
         //Write out padding bytes as per PKCS5 algorithm
-        for ( int i = (int) inFile.length(); i < padded; ++i ) {
+        for (int i = (int) inFile.length(); i < padded; ++i) {
             decData[i] = (byte) paddedCount;
         }
 
@@ -160,8 +161,8 @@ public class FileEncryptor {
         // Naive check, will fail if plaintext file actually contained
         // this at the end
         // For robust check, check that padCount bytes at the end have same value
-        if ( padCount >= 1 && padCount <= 8 ) {
-            decData = Arrays.copyOfRange( decData , 0, decData.length - padCount);
+        if (padCount >= 1 && padCount <= 8) {
+            decData = Arrays.copyOfRange(decData , 0, decData.length - padCount);
         }
 
         //Write the decrypted data to a new file:

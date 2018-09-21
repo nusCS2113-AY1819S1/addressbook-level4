@@ -3,6 +3,10 @@ package seedu.address.logic.commands;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
+/**
+ * Encrypts the XML data using a password and returns
+ * a message
+ */
 public class PasswordCommand extends Command {
     public static final String COMMAND_WORD = "password";
     public static final String MESSAGE_USAGE = COMMAND_WORD
