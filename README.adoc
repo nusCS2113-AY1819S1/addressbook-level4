@@ -1,40 +1,54 @@
-= Address Book (Level 4)
 ifdef::env-github,env-browser[:relfileprefix: docs/]
+ifdef::env-github,env-browser[:imagesDir: docs/images]
 
-https://travis-ci.org/se-edu/addressbook-level4[image:https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master[Build Status]]
-https://ci.appveyor.com/project/damithc/addressbook-level4[image:https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true[Build status]]
-https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master[Coverage Status]]
-https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
+= RecruitBook
 
-ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
-endif::[]
+Simplifying your job recruiting experience!
 
-ifndef::env-github[]
-image::images/Ui.png[width="600"]
-endif::[]
+image::Ui.png[]
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as the main programming language.
-* It is *written in OOP fashion*. It provides a *reasonably well-written* code example that is *significantly bigger* (around 6 KLoC)than what students usually write in beginner-level SE modules.
-* What's different from https://github.com/se-edu/addressbook-level3[level 3]:
-** A more sophisticated GUI that includes a list  panel and an in-built Browser.
-** More test cases, including automated GUI testing.
-** Support for _Build Automation_ using Gradle and for _Continuous Integration_ using Travis CI.
+Are you a job agent looking to keep track of interviewed candidates and available job offers?
+
+*Look no further.*
+
+RecruitBook contains many features that is designed specifically to aid job agents:
+
+* Candidates:
+
+** Add candidates with customisable tags
+
+** Filter and sort candidates based on expected salary, education level etc
+
+** Shortlist candidates
+
+** Blacklist candidates
+
+** Automated email feature
+
+* Job Offers:
+
+** Add jobs offers with customisable tags
+
+** Filter and sort job offers based on expected salary, minimum education level etc.
+
+** List jobs based on urgency
 
 == Site Map
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
 
 == Acknowledgements
 
-* Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
-_Marco Jakob_.
-* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
+* Some parts of this application was inspired by the excellent
+http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by Marco Jakob
 
-== Licence : link:LICENSE[MIT]
+* RecruitBook was created by a SE-EDU initiative at https://github.com/se-edu/
 
+== Contact Us
+
+* *Bug reports, Suggestions* : Post in our https://github.com/se-edu/addressbook-level3/issues[issue tracker]
+if you noticed bugs or have suggestions on how to improve.
+* *Contributing* : We welcome pull requests. Follow the process described https://github.com/oss-generic/process[here]

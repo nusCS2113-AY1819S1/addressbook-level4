@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= RecruitBook - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Setting up
 
@@ -813,9 +813,9 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
+*Target user profile*: Job Agents, Recruit executives, Human Resources executives
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of contacts and job offers
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
@@ -829,37 +829,128 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |User |Add a new person |
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |User |Delete a person |Remove entries that I no longer need
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |User |Find a person by name |Locate details of persons without having to go through the entire list
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |Job agent |List offers and employees |Access these information readily
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |Job agent |List job offers based on urgency |Prioritize job offers to fulfill
+
+|`* * *` |Job agent |Email job candidates |Reach out to job seekers regarding relevant job offers
+
+|`* * *` |Job agent |Filter a list of candidates based on certain criteria |See relevant candidates based on the criteria
+
+|`* * *` |Job agent |Blacklist problematic candidates |Avoid assigning undesirable candidates to job
+
+|`* * *` |Job agent |Sort jobs of different nature (such as internships, part-time jobs) |There are more options for employees to choose.
+
+|`* * *` |Job agent |Find relevant details to a specific job candidate |Assign the most suitable job to him/her
+
+|`* *` |User |Hide <<private-contact-detail,private contact details>> by default |Minimize chance of someone else seeing them by accident
+
+|`* *`|Job agent|Shortlist the best candidates for a specific job offer|See the best available candidates
+
+|`* *`|Job agent|Share profiles of prospective candidates with employers|Recommend employees to the respective companies
+
+|`* *`|Job agent|Edit the details of listed candidates|Update changes of the details
+
+|`* *`|Job agent|Delete candidate|
+
+|`*`|Job agent|List the best employees for each sector|I can recommend them to potential employers
+
+|`*` |User with many persons in the address book |Sort persons by name |Locate a person easily
 |=======================================================================
+
+
 
 _{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `RecruitBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add candidate
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a candidate
+2.  RecruitBook prompts user to enter relevant details of job candidate
+3.  User enters the relevant details
+4.  RecruitBook prompts user to enter relevant job experience of job candidate
+5.  User enters the relevant details
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User enters invalid details or used the wrong format.
++
+[none]
+** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
+** 3a2. Prompts user to reenter fields in correct format or to exit add command
++
+Use case resumes at step 3.
+
+[none]
+* 3b. User enters a duplicate entry.
++
+[none]
+** 3b1. RecruitBook informs user of existing entry
+** 3b2. Prompts user to enter a new entry or to exit add command
++
+Use case resumes at step 3.
+
+[discrete]
+=== Use case: Add job
+
+*MSS*
+
+1.  User requests to add a job offer
+2.  RecruitBook prompts user to enter relevant details of job offer
+3.  User enters the relevant details
+4.  RecruitBook prompts user to enter job requirements
+5.  User enters the relevant details
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User enters invalid details or used the wrong format.
++
+[none]
+** 1a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
+** 1a2. Prompts user to re-enter fields in correct format or to exit add command
++
+Use case resumes at step 3.
+
+[none]
+* 3a. User enters a duplicate entry
++
+[none]
+** 3a1. RecruitBook informs user of existing entry
+** 3a2. Prompts user to enter a new entry or to exit add command
++
+Use case resumes at step 3.
+
+[discrete]
+=== Use case: List candidate
+
+*MSS*
+
+1.  User requests to list candidates
+2.  RecruitBook displays a list of all candidates
 +
 Use case ends.
 
@@ -870,12 +961,204 @@ Use case ends.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+[discrete]
+=== Use case: List job
+
+*MSS*
+
+1.  User requests to list jobs
+2.  RecruitBook displays a list of all jobs
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+[discrete]
+=== Use case: Edit candidate
+
+*MSS*
+
+1.  User requests to edit details of a candidate
+2.  RecruitBook displays successful edit message
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The name of candidate to edit is invalid
 +
 [none]
-** 3a1. AddressBook shows an error message.
+**  1a1.  RecruitBook displays an error message
 +
-Use case resumes at step 2.
+Use case ends.
+
+[none]
+* 1b. The tags to edit are invalid
++
+[none]
+** 1b1. RecruitBook displays an error message
++
+Use case ends.
+
+[discrete]
+=== Use case: Edit job
+
+*MSS*
+
+1.  User requests to list job offers
+2.  RecruitBook displays a list of all submitted job offers
+3.  User requests to edit a job offer
+4.  RecruitBook displays successful edit message
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+[none]
+* 4a. The index number requested for edit is invalid.
++
+[none]
+**  4a1.  RecruitBook displays an error message
++
+Use case ends.
+
+[none]
+* 4b. The tags to edit are invalid
++
+[none]
+**  4b1.  RecruitBook displays an error message
++
+Use case ends.
+
+
+[discrete]
+=== Use case: Find Candidate
+
+*MSS*
+
+1.  User requests to find a person based on a keyword of their attributes (name/email/phone number/address)
+2.  RecruitBook lists out people whose keyword matches the attribute criteria
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Filter tag is invalid
++
+[none]
+** 2a1. RecruitBook informs the user of the tag error
++
+** 2a2. If there is only one tag in the search request and it is invalid
++
+[none]
+*** 2a2.1. Inform the user of the invalid filter tag, do not search anything
++
+*** Use case ends
++
+** 2a3. If there are other valid tags in the search request as well
++
+[none]
+*** 2a3.1. Inform the user of the invalid filter tag, ignore the invalid filter tag, but still search based on the valid filter tags
++
+*** 2a3.2. List out people whose keyword matches the criteria
++
+*** Use case ends
++
+[none]
+* 2b. No candidates matches with the find criteria
++
+[none]
+** 2b1. Inform the user that no users have been matched with the search criteria.
+
+Use case ends.
+
+[discrete]
+=== Use case: Filter Candidate
+
+*MSS*
+
+1.  User requests the details of the candidates to sorted by a specified tag
+2.  RecruitBook shows all the names of the candidates that fit into the searched criteria
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The filter tag is invalid
++
+[none]
+** 1a1. RecruitBook informs user of the error and show the specified tags that the filter function supports together with examples
++
+** 1a2. RecruitBook then prompts user to re-enter fields that is supported or to exit filter command
++
+[none]
+* 1b. The searched field is invalid
++
+[none]
+** 1a1. RecruitBook informs user of the error and shows the specified fields that is currently being recorded in the system
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Delete Candidate
+
+*MSS*
+
+1.  User  requests to delete a candidate
+2.  RecruitBook prompts user to enter name of candidate to be deleted
+3.  User enters name of candidate
+4.  RecruitBook displays message that name of candidate is successfully deleted
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User enters invalid format or details
++
+[none]
+** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
++
+** 3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
++
+Use case resumes at step 3.
+
+[discrete]
+=== Use case: Delete Job
+
+*MSS*
+
+1.  User requests to delete a job
+2.  RecruitBook lists all the job available together with the index number of the job
+3.  User proceeds to delete the index of the job that is to be deleted
+4.  RecruitBook displays message that the job is successfully deleted
++
+Use case ends.
+
+*Extensions*
+[none]
+
+* 3a. User enters invalid format or details
++
+[none]
+** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
++
+** 3a2. RecruitBook prompts user to re-enter fields in correct format or to exit delete command
++
+Use case resumes at step 3.
 
 _{More to be added}_
 
