@@ -207,30 +207,20 @@ public class Trie {
 
     private TrieNode skipToStartNode(TrieNode begin, String prefix) {
         TrieNode current = begin;
-        boolean hasChar = false;
 
         for (int i = 0; i < prefix.length(); i++) {
-            ArrayList<TrieNode> currList = current.getChildren();
-            hasChar = false;
+            char ch = prefix.charAt(i);
+            ArrayList<TrieNode> currentNodeChildren = current.getChildren();
 
-            for (int j = 0; j < currList.size(); j++) {
-                if (currList.get(j).getValue() == prefix.charAt(i)) {
-                    current = current.getChildren().get(j);
-                    hasChar = true;
-                    break;
-                }
+            // If the node representing current character exists, move to that node
+            if (currentNodeChildren.contains(new TrieNode(ch))) {
+                current = currentNodeChildren.get(currentNodeChildren.indexOf(new TrieNode(ch)));
             }
-
-            if (!hasChar) {
-                current = root;
-                break;
+            // If a character does not exist, just return the root node
+            else {
+                return root;
             }
         }
-
-        if (current.getChildrenSize() == 0) {
-
-        }
-
         return current;
     }
 
