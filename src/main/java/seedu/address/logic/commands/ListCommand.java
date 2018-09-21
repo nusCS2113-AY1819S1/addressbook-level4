@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 
 /**
@@ -11,7 +12,7 @@ import seedu.address.model.Model;
  */
 public class ListCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = CliSyntax.COMMAND_LIST;
 
     public static final String MESSAGE_SUCCESS = "Listed all persons";
 
