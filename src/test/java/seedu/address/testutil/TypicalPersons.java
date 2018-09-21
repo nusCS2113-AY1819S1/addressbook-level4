@@ -28,7 +28,7 @@ public class TypicalPersons {
             .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withNote("Alice sample note")
+            .withNote("Sample note")
             .withTags("friends")
             .build();
     public static final Person BENSON = new PersonBuilder()
