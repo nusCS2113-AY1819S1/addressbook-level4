@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import javafx.collections.ObservableList;
+
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
@@ -19,11 +20,11 @@ public class ClosestMatchList {
     private Map<String, Integer> discoveredNames = new TreeMap<String, Integer>();
 
 
-    static class pair {
+    static class Pair {
         private int dist;
         private String nameSegment;
 
-        void pair(int a, String b) {
+        public Pair(int a, String b) {
             this.dist = a;
             this.nameSegment = b;
         }
@@ -45,9 +46,9 @@ public class ClosestMatchList {
         }
     }
 
-    Set <pair> nameMap = new TreeSet<pair>(new Comparator<pair>() {
+    Set <Pair> nameMap = new TreeSet<Pair>(new Comparator<Pair>() {
         @Override
-        public int compare(pair o1, pair o2) {
+        public int compare(Pair o1, Pair o2) {
             if (o1.getDist() - o2.getDist() == 0) {
                 if (o1.getDist() == o2.getDist()) {
                     return 1;
@@ -77,7 +78,7 @@ public class ClosestMatchList {
     }
 
     private void addToApprovedNamesList() {
-        for (ClosestMatchList.pair pair: nameMap) {
+        for (Pair pair: nameMap) {
             if (pair.getDist() - lowestDist > 1) {
                 // Break the loop when distances get too far
                 return;
@@ -100,7 +101,7 @@ public class ClosestMatchList {
                     lowestDist = dist;
                 }
 
-                pair distNamePair = new pair();
+                Pair distNamePair = new Pair();
                 distNamePair.setDist(dist);
                 distNamePair.setNameSegment(nameSegment);
 
@@ -108,7 +109,7 @@ public class ClosestMatchList {
                 if (!discoveredNames.containsKey(nameSegment)) {
                     nameMap.add(distNamePair);
                     discoveredNames.put(nameSegment, dist);
-                } else if (discoveredNames.get(nameSegment) > dist){
+                } else if (discoveredNames.get(nameSegment) > dist) {
                     discoveredNames.replace(nameSegment, dist); // Replace with the new dist
                     nameMap.add(distNamePair); // Check to see if this will replace
                 }
