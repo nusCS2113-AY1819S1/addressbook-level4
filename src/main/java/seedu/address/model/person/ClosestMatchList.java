@@ -8,11 +8,15 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.TreeSet;
 import java.util.Comparator;
+import java.util.Map;
+import java.util.TreeMap;
+
 
 public class ClosestMatchList {
     private int lowestDist = Integer.MAX_VALUE;
     private ObservableList<Person> listToFilter;
     private List<String> approvedNames = new ArrayList<String>();
+    private Map<String, Integer> discoveredNames = new TreeMap<String, Integer>();
 
 
     static class Pair {
@@ -39,7 +43,6 @@ public class ClosestMatchList {
         }
     });
 
-
     public ClosestMatchList (Model model, String argument, String[] names) {
         this.listToFilter = model.getAddressBook().getPersonList();
 
@@ -59,9 +62,11 @@ public class ClosestMatchList {
 
     private void addToApprovedNamesList() {
         for (Pair pair: nameMap) {
-            if (pair.dist - lowestDist <= 1) {
-                approvedNames.add(pair.nameSegment);
+            if (pair.dist - lowestDist > 1) {
+                // Break the loop when distances get too far
+                return;
             }
+            approvedNames.add(pair.nameSegment);
         }
     }
 
@@ -74,15 +79,23 @@ public class ClosestMatchList {
             for (String nameArg: names) {
                 int dist = LevenshteinDistanceUtil.levenshteinDistance(nameArg.toLowerCase(),
                         nameSegment.toLowerCase());
+
                 if (dist < lowestDist) {
                     lowestDist = dist;
                 }
-                System.out.println(nameSegment + " " + dist);
+
                 Pair distNamePair = new Pair();
                 distNamePair.dist = dist;
                 distNamePair.nameSegment = nameSegment;
 
-                nameMap.add(distNamePair);
+
+                if (!discoveredNames.containsKey(nameSegment)) {
+                    nameMap.add(distNamePair);
+                    discoveredNames.put(nameSegment, dist);
+                } else if (discoveredNames.get(nameSegment) > dist){
+                    discoveredNames.replace(nameSegment, dist); // Replace with the new dist
+                    nameMap.add(distNamePair); // Check to see if this will replace
+                }
             }
 
         }
