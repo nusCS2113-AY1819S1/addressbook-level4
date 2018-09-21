@@ -15,14 +15,14 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * A list of events that enforces uniqueness between its elements and does not allow nulls.
  * A event is considered unique by comparing using {@code Event#isSameEvent(Event)}. As such, adding and updating of
  * persons uses Event#isSameEvent(Event) for equality so as to ensure that the event being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a event uses Event#equals(Object) so
+ * unique in terms of identity in the UniqueEventList. However, the removal of a event uses Event#equals(Object) so
  * as to ensure that the event with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Event#isSameEvent(Event)
  */
-public class UniquePersonList implements Iterable<Event> {
+public class UniqueEventList implements Iterable<Event> {
 
     private final ObservableList<Event> internalList = FXCollections.observableArrayList();
 
@@ -77,7 +77,7 @@ public class UniquePersonList implements Iterable<Event> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -110,8 +110,8 @@ public class UniquePersonList implements Iterable<Event> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueEventList // instanceof handles nulls
+                        && internalList.equals(((UniqueEventList) other).internalList));
     }
 
     @Override
