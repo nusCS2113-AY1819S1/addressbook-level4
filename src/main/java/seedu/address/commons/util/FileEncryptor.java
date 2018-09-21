@@ -3,7 +3,6 @@ package seedu.address.commons.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
@@ -22,9 +21,9 @@ import javax.crypto.spec.PBEParameterSpec;
 
 public class FileEncryptor {
 
-    private static String EXTENSION = ".encrypted";
-    private static String FILENAME = "data/addressbook.xml";
-    private static String MESSAGE = "";
+    private static String extension = ".encrypted";
+    private static String filename = "data/addressbook.xml";
+    private static String message = "";
 
     private static final byte[] salt = {
             (byte) 0x43, (byte) 0x76, (byte) 0x95, (byte) 0xc7,
@@ -32,31 +31,31 @@ public class FileEncryptor {
     };
 
     public FileEncryptor (String password) {
-        File f = new File(FILENAME);
-        File f_encrypted = new File(FILENAME + EXTENSION);
+        File f = new File(filename);
+        File f_encrypted = new File(filename + extension);
 
         try {
             if (f.exists() && !f.isDirectory()) {
-                encryptFile( FILENAME, password );
-                MESSAGE = "File encrypted!";
+                encryptFile(filename, password );
+                message = "File encrypted!";
                 // TODO: Send a request to refresh the addressbook
-            }else if (f_encrypted.exists() && !f_encrypted.isDirectory()) {
-                decryptFile( FILENAME, password);
-                MESSAGE = "File decrypted!";
+            } else if (f_encrypted.exists() && !f_encrypted.isDirectory()) {
+                decryptFile(filename, password);
+                message = "File decrypted!";
                 // TODO: Send a request to refresh the addressbook
             }
 
         } catch (IOException e) {
-            MESSAGE = e.getMessage();
+            message = e.getMessage();
         } catch (GeneralSecurityException e) {
-//            MESSAGE = e.getMessage();
-            MESSAGE = "Password mismatch!";
+            // message = e.getMessage();
+            message = "Password mismatch!";
         }
     }
 
 
 
-    private static Cipher makeCipher(String pass, Boolean decryptMode) throws GeneralSecurityException{
+    private static Cipher makeCipher(String pass, Boolean decryptMode) throws GeneralSecurityException {
 
         //Use a KeyFactory to derive the corresponding key from the passphrase:
         PBEKeySpec keySpec = new PBEKeySpec(pass.toCharArray());
@@ -67,13 +66,13 @@ public class FileEncryptor {
         PBEParameterSpec pbeParamSpec = new PBEParameterSpec(salt, 42);
 
         /*Dump the key to a file for testing: */
-//        FileEncryptor.keyToFile(key);
+        // FileEncryptor.keyToFile(key);
 
         //Set up the cipher:
         Cipher cipher = Cipher.getInstance("PBEWithMD5AndDES");
 
         //Set the cipher mode to decryption or encryption:
-        if(decryptMode){
+        if (decryptMode) {
             cipher.init(Cipher.ENCRYPT_MODE, key, pbeParamSpec);
         } else {
             cipher.init(Cipher.DECRYPT_MODE, key, pbeParamSpec);
@@ -85,7 +84,7 @@ public class FileEncryptor {
 
     /**Encrypts one file to a second file using a key derived from a passphrase:**/
     public static void encryptFile(String fileName, String pass)
-            throws IOException, GeneralSecurityException{
+            throws IOException, GeneralSecurityException {
         byte[] decData;
         byte[] encData;
         File inFile = new File(fileName);
@@ -97,10 +96,10 @@ public class FileEncryptor {
 
         int blockSize = 8;
         //Figure out how many bytes are padded
-        int paddedCount = blockSize - ((int)inFile.length()  % blockSize );
+        int paddedCount = blockSize - ( (int) inFile.length() % blockSize );
 
         //Figure out full size including padding
-        int padded = (int)inFile.length() + paddedCount;
+        int padded = (int) inFile.length() + paddedCount;
 
         decData = new byte[padded];
 
@@ -110,8 +109,8 @@ public class FileEncryptor {
         inStream.close();
 
         //Write out padding bytes as per PKCS5 algorithm
-        for( int i = (int)inFile.length(); i < padded; ++i ) {
-            decData[i] = (byte)paddedCount;
+        for ( int i = (int) inFile.length(); i < padded; ++i ) {
+            decData[i] = (byte) paddedCount;
         }
 
         //Encrypt the file data:
@@ -119,7 +118,7 @@ public class FileEncryptor {
 
 
         //Write the encrypted data to a new file:
-        FileOutputStream outStream = new FileOutputStream(new File(fileName + EXTENSION));
+        FileOutputStream outStream = new FileOutputStream(new File(fileName + extension));
         outStream.write(encData);
         inFile.delete();
         outStream.close();
@@ -127,18 +126,18 @@ public class FileEncryptor {
 
 
     /**Decrypts one file to a second file using a key derived from a passphrase:**/
-    public static void decryptFile(String fileName, String pass)
-            throws GeneralSecurityException, IOException{
+    public static void decryptFile (String fileName, String pass)
+            throws GeneralSecurityException, IOException {
         byte[] encData;
         byte[] decData;
-        File inFile = new File(fileName + EXTENSION);
+        File inFile = new File(fileName + extension);
 
         //Generate the cipher using pass:
         Cipher cipher = FileEncryptor.makeCipher(pass, false);
 
         //Read in the file:
-        FileInputStream inStream = new FileInputStream(inFile );
-        encData = new byte[(int)inFile.length()];
+        FileInputStream inStream = new FileInputStream(inFile);
+        encData = new byte[(int) inFile.length()];
         inStream.read(encData);
         inStream.close();
         //Decrypt the file data:
@@ -146,7 +145,7 @@ public class FileEncryptor {
 
         //Figure out how much padding to remove
 
-        int padCount = (int)decData[decData.length - 1];
+        int padCount = (int) decData[decData.length - 1];
 
         //Naive check, will fail if plaintext file actually contained
         //this at the end
@@ -157,31 +156,13 @@ public class FileEncryptor {
 
         //Write the decrypted data to a new file:
 
-
-
         FileOutputStream target = new FileOutputStream(new File(fileName));
         target.write(decData);
         inFile.delete();
         target.close();
     }
 
-    /**Record the key to a text file for testing:**/
-    private static void keyToFile(SecretKey key){
-        try {
-            File keyFile = new File("keyfile.txt");
-            FileWriter keyStream = new FileWriter(keyFile);
-            String encodedKey = "\n" + "Encoded version of key:  " + key.getEncoded().toString();
-            keyStream.write(key.toString());
-            keyStream.write(encodedKey);
-            keyStream.close();
-        } catch (IOException e) {
-            System.err.println("Failure writing key to file");
-            e.printStackTrace();
-        }
-
-    }
-
     public String getMessage () {
-        return this.MESSAGE;
+        return this.message;
     }
 }

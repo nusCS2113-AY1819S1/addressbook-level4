@@ -1,15 +1,13 @@
 package seedu.address.logic.parser;
 
 import seedu.address.commons.util.FileEncryptor;
-import seedu.address.storage.PasswordManager;
 import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import java.io.File;
-
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-public class PasswordCommandParser implements Parser<PasswordCommand>{
+
+
+public class PasswordCommandParser implements Parser<PasswordCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
@@ -32,19 +30,9 @@ public class PasswordCommandParser implements Parser<PasswordCommand>{
         }
 
 
-//        File f = new File("password.txt");
-//        if(f.exists() && !f.isDirectory()) {
-//            message = PasswordManager.authenticate(credentials[1], credentials[0]);
-//
-//
-//        } else {
-//            message = "Password stored successfully!";
-//            message += "\nhash: " + PasswordManager.storePassword(credentials[1], credentials[0]);
-//        }
 
-
-        FileEncryptor FE = new FileEncryptor(credentials[0]);
-        String message = FE.getMessage();
+        FileEncryptor fe = new FileEncryptor(credentials[0]);
+        String message = fe.getMessage();
 
         return new PasswordCommand(message);
     }
