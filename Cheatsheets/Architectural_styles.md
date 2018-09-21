@@ -1,4 +1,4 @@
-# Types of arhchitectural styles 
+# Types of arhchitectural styles
 
 1. **n-tier style:** In the n-tier style, higher layers make use of services provided by lower layers. Lower layers are independent of higher layers. Other names: multi-layered, layered.
 
@@ -9,4 +9,4 @@
 4. **Transaction processing style:** The transaction processing style divides the workload of the system down to a number of transactions which are then given to a dispatcher that controls the execution of each transaction. Task queuing, ordering, undo etc. are handled by the dispatcher.
 
 
-5. **Service oriented style:** The service-oriented architecture (SOA) style builds applications by combining functionalities packaged as programmatically accessible services. 
+5. **Service oriented style:** The service-oriented architecture (SOA) style builds applications by combining functionalities packaged as programmatically accessible services.
