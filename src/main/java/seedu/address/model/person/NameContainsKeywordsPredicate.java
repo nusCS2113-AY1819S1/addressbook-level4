@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import java.util.List;
 import java.util.function.Predicate;
+
 import seedu.address.commons.util.StringUtil;
 
 /**
@@ -9,7 +10,6 @@ import seedu.address.commons.util.StringUtil;
  */
 public class NameContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
-    private final int SIMILARITY = 2;
 
     public NameContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;

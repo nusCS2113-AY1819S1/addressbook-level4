@@ -2,6 +2,9 @@ package seedu.address.logic.trie;
 
 import java.util.ArrayList;
 
+/**
+ * A TrieNode instance represents a node in the Trie structure
+ */
 public class TrieNode {
 
     private boolean isEndNode;
@@ -41,10 +44,27 @@ public class TrieNode {
         return children;
     }
 
+    public int getChildrenSize() {
+        return children.size();
+    }
+
+    /**
+     * Adds a child to the {@code TrieNode} instance.
+     * @param child child node to be added
+     * @return the newly added child
+     */
     public TrieNode appendChild(TrieNode child) {
         children.add(child);
-        children.get(children.size()-1).setParent(this);
-        return children.get(children.size()-1);
+        children.get(children.size() - 1).setParent(this);
+        return children.get(children.size() - 1);
+    }
+
+    public void removeChild(TrieNode child) {
+        children.remove(child);
+    }
+
+    public TrieNode getFirstChild() {
+        return children.get(0);
     }
 
     public boolean isEndNode() {
@@ -55,4 +75,9 @@ public class TrieNode {
         isEndNode = value;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        TrieNode other = (TrieNode) obj;
+        return this.value == other.value;
+    }
 }
