@@ -144,7 +144,7 @@ public class Trie {
     /**
      * Removes a word from the graph given the end node of that word.
      * Removes every parent level node until a node that has more than one child
-     * or it is an end node
+     * or it is an end node.
      * @param pointer the first node in the graph to be removed
      */
     private void removeWordFromGraph(TrieNode pointer) {
@@ -160,23 +160,29 @@ public class Trie {
     }
 
     /**
-     * Testing codes section
+     * Returns a list of strings that are predicted to complete the {@code prefix}.
+     * @param prefix string prefix to be predicted
+     * @return a list of string predictions
      */
     public ArrayList<String> getPredictList(String prefix) {
         predictionsList = new ArrayList<>();
         StringBuilder charStack = new StringBuilder();
 
+        // skipToStartNode returns root node if the prefix does not exist in the Trie
         TrieNode startNode = skipToStartNode(root, prefix);
+
+        // startNode is root node, return an empty predictionsList
         if (startNode.equals(root)) {
             return predictionsList;
         }
 
+        // If startNode is already the end node of a branch, just add a single whitespace
         if (startNode.getChildrenSize() == 0) {
             charStack.append(' ');
             predictionsList.add(charStack.toString());
         }
 
-        // If the startNode has only ONE child, build the charStack to the first
+        // If startNode has ONE child, build the charStack to the first
         // node that has more than one child or the first mismatch character
         if (startNode.getChildrenSize() == 1) {
             charStack = buildSingleStack(startNode);
@@ -184,6 +190,7 @@ public class Trie {
             return predictionsList;
         }
 
+        // If startNode has more than one child, explore all possible strings
         for (int i = 0; i < startNode.getChildren().size(); i++) {
             explore(charStack, startNode.getChildren().get(i));
         }
@@ -191,13 +198,23 @@ public class Trie {
         return predictionsList;
     }
 
+    /**
+     * Returns a string that represents the only possible substring from a starting node.
+     *
+     * Given a starting node, traverse to the next neighbour node until there is more than one neighbouring
+     * node or there is none. If each node only has one neighbour, this means there are no other possible
+     * string combinations.
+     * @param startNode the starting node
+     * @return the only possible substring
+     */
     private StringBuilder buildSingleStack(TrieNode startNode) {
         StringBuilder charStack = new StringBuilder();
-        while(startNode.getChildrenSize() == 1) {
+        while (startNode.getChildrenSize() == 1) {
             charStack.append(startNode.getFirstChild().getValue());
             startNode = startNode.getFirstChild();
         }
 
+        // If this node is the last node of a branch, add a single whitespace to the returning string
         if (startNode.getChildrenSize() == 0) {
             charStack.append(' ');
         }
@@ -233,6 +250,11 @@ public class Trie {
         return current;
     }
 
+    /**
+     * Traverses through the whole Trie structure to find all possible strings
+     * @param charStack StringBuilder to build a possible strings
+     * @param ptr the starting node to traverse from
+     */
     private void explore(StringBuilder charStack, TrieNode ptr) {
         // Push the character of current node to stack
         if (ptr.getValue() != '.') {
