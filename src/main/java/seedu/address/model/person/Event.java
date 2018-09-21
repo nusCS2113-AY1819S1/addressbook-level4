@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Event in the address book.
+ * Represents a Event in the event manager.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
@@ -61,10 +61,10 @@ public class Event {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both events of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two events.
      */
-    public boolean isSamePerson(Event otherEvent) {
+    public boolean isSameEvent(Event otherEvent) {
         if (otherEvent == this) {
             return true;
         }
@@ -75,8 +75,8 @@ public class Event {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both events have the same identity and data fields.
+     * This defines a stronger notion of equality between two events.
      */
     @Override
     public boolean equals(Object other) {

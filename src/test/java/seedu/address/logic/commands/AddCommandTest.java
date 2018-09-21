@@ -168,7 +168,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Event event) {
             requireNonNull(event);
-            return this.event.isSamePerson(event);
+            return this.event.isSameEvent(event);
         }
     }
 
@@ -181,7 +181,7 @@ public class AddCommandTest {
         @Override
         public boolean hasPerson(Event event) {
             requireNonNull(event);
-            return personsAdded.stream().anyMatch(event::isSamePerson);
+            return personsAdded.stream().anyMatch(event::isSameEvent);
         }
 
         @Override
