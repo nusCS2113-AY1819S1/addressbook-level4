@@ -15,7 +15,7 @@ image::SHININGGGG.jpg[width="150", align="left"]
 {empty}[http://github.com/SHININGGGG[github]] [<<SHININGGGG#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: 
+Responsibilities: Expenditure tracker & Calender coding, UGDG update 
 
 '''
 
@@ -45,3 +45,4 @@ Role: Developer +
 Responsibilities: 
 
 '''
+
