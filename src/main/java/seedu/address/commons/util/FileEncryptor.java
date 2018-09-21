@@ -32,14 +32,14 @@ public class FileEncryptor {
 
     public FileEncryptor (String password) {
         File f = new File(filename);
-        File f_encrypted = new File(filename + extension);
+        File fEncrypted = new File(filename + extension);
 
         try {
             if (f.exists() && !f.isDirectory()) {
                 encryptFile(filename, password );
                 message = "File encrypted!";
                 // TODO: Send a request to refresh the addressbook
-            } else if (f_encrypted.exists() && !f_encrypted.isDirectory()) {
+            } else if (fEncrypted.exists() && !fEncrypted.isDirectory()) {
                 decryptFile(filename, password);
                 message = "File decrypted!";
                 // TODO: Send a request to refresh the addressbook
@@ -147,10 +147,10 @@ public class FileEncryptor {
 
         int padCount = (int) decData[decData.length - 1];
 
-        //Naive check, will fail if plaintext file actually contained
-        //this at the end
-        //For robust check, check that padCount bytes at the end have same value
-        if( padCount >= 1 && padCount <= 8 ) {
+        // Naive check, will fail if plaintext file actually contained
+        // this at the end
+        // For robust check, check that padCount bytes at the end have same value
+        if ( padCount >= 1 && padCount <= 8 ) {
             decData = Arrays.copyOfRange( decData , 0, decData.length - padCount);
         }
 

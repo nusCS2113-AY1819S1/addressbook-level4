@@ -1,8 +1,6 @@
 package seedu.address.model.person;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.util.LevenshteinDistanceUtil;
-import seedu.address.model.Model;
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
@@ -11,6 +9,8 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
+import seedu.address.commons.util.LevenshteinDistanceUtil;
+import seedu.address.model.Model;
 
 public class ClosestMatchList {
     private int lowestDist = Integer.MAX_VALUE;
@@ -19,27 +19,43 @@ public class ClosestMatchList {
     private Map<String, Integer> discoveredNames = new TreeMap<String, Integer>();
 
 
-    static class Pair {
-        public int dist;
-        public String nameSegment;
+    static class pair {
+        private int dist;
+        private String nameSegment;
 
-        void Pair(int a, String b) {
+        void pair(int a, String b) {
             this.dist = a;
             this.nameSegment = b;
         }
+
+        public int getDist () {
+            return this.dist;
+        }
+
+        public String getNameSegment () {
+            return nameSegment;
+        }
+
+        public void setNameSegment (String nameSegment) {
+            this.nameSegment = nameSegment;
+        }
+
+        public void setDist (int dist) {
+            this.dist = dist;
+        }
     }
 
-    Set <Pair> nameMap = new TreeSet<Pair>(new Comparator<Pair>() {
+    Set <pair> nameMap = new TreeSet<pair>(new Comparator<pair>() {
         @Override
-        public int compare(Pair o1, Pair o2) {
-            if(o1.dist - o2.dist == 0)
-            {
-                if(o1.dist == o2.dist)
+        public int compare(pair o1, pair o2) {
+            if (o1.getDist() - o2.getDist() == 0) {
+                if (o1.getDist() == o2.getDist()) {
                     return 1;
-                else
-                    return o1.nameSegment.compareTo(o2.nameSegment);
+                } else {
+                    return o1.getNameSegment().compareTo(o2.getNameSegment());
+                }
             }
-            return o1.dist - o2.dist;
+            return o1.getDist() - o2.getDist();
         }
     });
 
@@ -61,12 +77,12 @@ public class ClosestMatchList {
     }
 
     private void addToApprovedNamesList() {
-        for (Pair pair: nameMap) {
-            if (pair.dist - lowestDist > 1) {
+        for (ClosestMatchList.pair pair: nameMap) {
+            if (pair.getDist() - lowestDist > 1) {
                 // Break the loop when distances get too far
                 return;
             }
-            approvedNames.add(pair.nameSegment);
+            approvedNames.add(pair.getNameSegment());
         }
     }
 
@@ -84,9 +100,9 @@ public class ClosestMatchList {
                     lowestDist = dist;
                 }
 
-                Pair distNamePair = new Pair();
-                distNamePair.dist = dist;
-                distNamePair.nameSegment = nameSegment;
+                pair distNamePair = new pair();
+                distNamePair.setDist(dist);
+                distNamePair.setNameSegment(nameSegment);
 
 
                 if (!discoveredNames.containsKey(nameSegment)) {
