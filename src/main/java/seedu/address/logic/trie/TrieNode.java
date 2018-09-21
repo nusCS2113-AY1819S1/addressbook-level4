@@ -67,4 +67,9 @@ public class TrieNode {
         isEndNode = value;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        TrieNode other = (TrieNode) obj;
+        return this.value == other.value;
+    }
 }

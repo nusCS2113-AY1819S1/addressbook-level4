@@ -53,8 +53,11 @@ public class Trie {
      * @param value
      */
     public void insert(String value) {
-        insertToGraph(value);
-        baseList.add(value);
+        // Check if this value exists
+        if (!baseList.contains(value)) {
+            insertToGraph(value);
+            baseList.add(value);
+        }
     }
 
     /**
@@ -62,31 +65,27 @@ public class Trie {
      * @param keyString the string value to be inserted
      */
     private void insertToGraph(String keyString) {
-        TrieNode ptr = root; // A TrieNode as pointer to traverse through the tree
+        // A TrieNode as pointer to traverse through the tree
+        TrieNode pointer = root;
 
         // Run through all characters in the given key string
         for (int i = 0; i < keyString.length(); i++) {
             char ch = keyString.charAt(i);
+            ArrayList<TrieNode> children = pointer.getChildren();
 
-            boolean hasChar = false;
-            // Run through all children of this node
-            for (int j = 0; j < ptr.getChildrenSize(); j++) {
-                if (ptr.getChildren().get(j).getValue() == ch) {
-                    hasChar = true;
-                    ptr = ptr.getChildren().get(j);
-                    break;
-                }
+            if (children.contains(new TrieNode(ch))) {
+                // Set the pointer to that node
+                pointer = children.get(children.indexOf(new TrieNode(ch)));
             }
-
-            if (!hasChar) {
-                TrieNode parent = ptr;
-                ptr = ptr.appendChild(new TrieNode(ch));
-                ptr.setParent(parent);
+            else {
+                // Create a new node
+                TrieNode parent = pointer;
+                pointer = pointer.appendChild(new TrieNode(ch));
+                pointer.setParent(parent);
             }
         }
-
         // Mark end of word node
-        ptr.setEndNode(true);
+        pointer.setEndNode(true);
     }
 
     /**
@@ -95,11 +94,10 @@ public class Trie {
      */
     public void remove(String value) {
         // Check if this value exists
-        if (!baseList.contains(value)) {
-            return;
+        if (baseList.contains(value)) {
+            removeFromGraph(value);
+            baseList.remove(value);
         }
-        removeFromGraph(value);
-        baseList.remove(value);
     }
         /**
      * Remove the input string value from the actual graph implementation
