@@ -21,7 +21,7 @@ public class CommandCompleter {
     private final String COMPLETE_ADDRESS = "address";
 
     /**
-     * Trie instances for various commanda and arguments.
+     * Trie instances for various commands and arguments.
      */
     private Trie commandTrie;
     private Trie nameTrie;
