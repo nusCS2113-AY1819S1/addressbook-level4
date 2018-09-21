@@ -1,7 +1,5 @@
 package seedu.address.model.person;
 
-import javafx.collections.ObservableList;
-
 import java.util.Set;
 import java.util.List;
 import java.util.ArrayList;
@@ -9,6 +7,8 @@ import java.util.TreeSet;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
+
+import javafx.collections.ObservableList;
 
 import seedu.address.commons.util.LevenshteinDistanceUtil;
 import seedu.address.model.Model;
@@ -38,7 +38,7 @@ public class ClosestMatchList {
         }
     }
 
-    Set <Pair> nameMap = new TreeSet<Pair>(new Comparator<Pair>() {
+    private Set <Pair> nameMap = new TreeSet<Pair>(new Comparator<Pair>() {
         @Override
         public int compare(Pair o1, Pair o2) {
             if (o1.getDist() - o2.getDist() == 0) {
@@ -59,8 +59,7 @@ public class ClosestMatchList {
 
             if (argument == "NAME") {
                 generateNameMapFromNames(names, person);
-            }
-            else if (argument == "PHONE") {
+            } else if (argument == "PHONE") {
                 // TODO: Add argument to filter by phone number as well
             }
         }
