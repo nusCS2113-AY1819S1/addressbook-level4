@@ -8,6 +8,9 @@ import seedu.address.logic.trie.Trie;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
+/**
+ * Completes the command for the user by predicting the possible substrings
+ */
 public class CommandCompleter {
 
     /** Model instance to access data */

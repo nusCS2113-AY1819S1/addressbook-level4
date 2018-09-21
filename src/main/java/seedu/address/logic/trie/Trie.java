@@ -17,8 +17,8 @@ public class Trie {
     /**
      * Class constants
      */
-    private final char CHAR_ROOT = '.';
-    private final char CHAR_SPACE = ' ';
+    private static final char CHAR_ROOT = '.';
+    private static final char CHAR_SPACE = ' ';
 
     /**
      * Class variables
