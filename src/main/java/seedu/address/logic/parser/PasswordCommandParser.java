@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.util.PasswordManager;
+import seedu.address.storage.PasswordManager;
 import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import java.io.File;
