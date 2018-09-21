@@ -23,7 +23,7 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsFindCommand() {
         // no leading and trailing whitespaces
-        String names[] = {"Alice", "Bob"};
+        String[] names = {"Alice", "Bob"};
         FindCommand expectedFindCommand =
                 new FindCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), names);
         assertParseSuccess(parser, "Alice Bob", expectedFindCommand);

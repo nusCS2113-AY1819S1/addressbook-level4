@@ -36,8 +36,8 @@ public class FindCommandTest {
         NameContainsKeywordsPredicate secondPredicate =
                 new NameContainsKeywordsPredicate(Collections.singletonList("second"));
 
-        String namesFirst[] = {"first"};
-        String namesSecond[] = {"second"};
+        String[] namesFirst = {"first"};
+        String[] namesSecond = {"second"};
         FindCommand findFirstCommand = new FindCommand(firstPredicate, namesFirst);
         FindCommand findSecondCommand = new FindCommand(secondPredicate, namesSecond);
 
@@ -62,7 +62,7 @@ public class FindCommandTest {
     public void execute_zeroKeywords_noPersonFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate predicate = preparePredicate(" ");
-        String names[] = {};
+        String[] names = {};
         FindCommand command = new FindCommand(predicate, names);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate predicate = preparePredicate("Kurz Elle Kunz");
 
-        String names[] = {"Kurz", "Elle", " Kunz"};
+        String[] names = {"Kurz", "Elle", " Kunz"};
         FindCommand command = new FindCommand(predicate, names);
         expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
