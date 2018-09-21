@@ -1,10 +1,6 @@
 package seedu.address.logic.trie;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.AddressBook;
 
 /**
  * A bi-directional Tree structure that stems from the root node
@@ -21,7 +17,8 @@ public class Trie {
     /**
      * Class constants
      */
-    private final char ROOT_CHAR = '.';
+    private final char CHAR_ROOT = '.';
+    private final char CHAR_SPACE = ' ';
 
     /**
      * Class variables
@@ -33,7 +30,7 @@ public class Trie {
      * Default constructor
      */
     public Trie(ArrayList<String> inputList) {
-        root = new TrieNode(ROOT_CHAR);
+        root = new TrieNode(CHAR_ROOT);
         baseList = new ArrayList<>(inputList);
         init();
     }
@@ -178,7 +175,7 @@ public class Trie {
 
         // If startNode is already the end node of a branch, just add a single whitespace
         if (startNode.getChildrenSize() == 0) {
-            charStack.append(' ');
+            charStack.append(CHAR_SPACE);
             predictionsList.add(charStack.toString());
         }
 
@@ -216,7 +213,7 @@ public class Trie {
 
         // If this node is the last node of a branch, add a single whitespace to the returning string
         if (startNode.getChildrenSize() == 0) {
-            charStack.append(' ');
+            charStack.append(CHAR_SPACE);
         }
 
         return charStack;
@@ -253,33 +250,34 @@ public class Trie {
     /**
      * Traverses through the whole Trie structure to find all possible strings
      * @param charStack StringBuilder to build a possible strings
-     * @param ptr the starting node to traverse from
+     * @param pointer the starting node to traverse from
      */
-    private void explore(StringBuilder charStack, TrieNode ptr) {
+    private void explore(StringBuilder charStack, TrieNode pointer) {
         // Push the character of current node to stack
-        if (ptr.getValue() != '.') {
-            charStack.append(ptr.getValue());
+        if (pointer.getValue() != CHAR_ROOT) {
+            charStack.append(pointer.getValue());
         }
 
-        // We have hit the end of a word but the branch continues or there are more branch
-        if (ptr.isEndNode()) {
-            if (ptr.getChildrenSize() == 0) {
-                charStack.append(' ');
+        // We have hit the end of a word but the branch continues or there are more branches
+        if (pointer.isEndNode()) {
+            if (pointer.getChildrenSize() == 0) {
+                charStack.append(CHAR_SPACE);
             }
             predictionsList.add(charStack.toString());
         }
 
         // Explore all other neighbours
-        for (int i = 0; i < ptr.getChildren().size(); i++) {
-            TrieNode neighbour = ptr.getChildren().get(i);
+        for (int i = 0; i < pointer.getChildren().size(); i++) {
+            TrieNode neighbour = pointer.getChildren().get(i);
             explore(charStack, neighbour);
         }
 
-        if (charStack.charAt(charStack.length()-1) == ' ') {
+        // Delete the whitespace at the last character space
+        if (charStack.charAt(charStack.length()-1) == CHAR_SPACE) {
             charStack.deleteCharAt(charStack.length()-1);
         }
 
-        // Pop the last character out of stack
+        // Delete the last character out of string
         if (charStack.length() > 0) {
             charStack.deleteCharAt(charStack.length()-1);
         }
