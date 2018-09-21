@@ -1,7 +1,9 @@
 package seedu.address.commons.util;
 
+/**
+ * Computes levenshteinDistance from strings
+ */
 public interface LevenshteinDistanceUtil {
-
     /**
      * Computes levenshteinDistance from strings
      */

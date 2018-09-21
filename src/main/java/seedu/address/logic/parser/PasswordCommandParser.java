@@ -6,7 +6,9 @@ import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
+/**
+ * Password command parser class
+ */
 public class PasswordCommandParser implements Parser<PasswordCommand> {
 
     /**

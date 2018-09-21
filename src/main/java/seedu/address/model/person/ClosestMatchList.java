@@ -13,13 +13,18 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.util.LevenshteinDistanceUtil;
 import seedu.address.model.Model;
 
+/**
+ * To generate a list of closest matches
+ */
 public class ClosestMatchList {
     private int lowestDist = Integer.MAX_VALUE;
     private ObservableList<Person> listToFilter;
     private List<String> approvedNames = new ArrayList<String>();
     private Map<String, Integer> discoveredNames = new TreeMap<String, Integer>();
 
-
+    /**
+     * Pair of integer and string
+     */
     static class Pair {
         private int dist;
         private String nameSegment;
