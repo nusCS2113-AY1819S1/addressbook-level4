@@ -124,7 +124,7 @@ public class Trie {
     }
 
     /**
-     * Traverse the Trie from the start character to the end character of the given string value
+     * Traverse the Trie from the start character to the end character of the given string value.
      * @param value the given value
      * @return the TrieNode referencing the end node
      */
@@ -142,7 +142,7 @@ public class Trie {
     }
 
     /**
-     * Removes a word from the graph given the end node of that word
+     * Removes a word from the graph given the end node of that word.
      * Removes every parent level node until a node that has more than one child
      * or it is an end node
      * @param pointer the first node in the graph to be removed
@@ -205,8 +205,17 @@ public class Trie {
         return charStack;
     }
 
-    private TrieNode skipToStartNode(TrieNode begin, String prefix) {
-        TrieNode current = begin;
+    /**
+     * Returns a {@code TrieNode} object that corresponds to the last character of a given string.
+     *
+     * From a starting node, the method traverse through all nodes that corresponds to every character
+     * in the given string up until the last character.
+     * @param start the starting node to traverse from
+     * @param prefix the given string to traverse with
+     * @return a TrieNode instance that holds a value equal to the last character of the {@code prefix}
+     */
+    private TrieNode skipToStartNode(TrieNode start, String prefix) {
+        TrieNode current = start;
 
         for (int i = 0; i < prefix.length(); i++) {
             char ch = prefix.charAt(i);
