@@ -30,6 +30,10 @@ public class FileEncryptor {
         (byte) 0x5b, (byte) 0xd7, (byte) 0x45, (byte) 0x17
     };
 
+    /**
+     * Encrypts or decrypts file with password
+     * will also check if file is present first
+     */
     public FileEncryptor (String password) {
         File f = new File(filename);
         File fEncrypted = new File(filename + extension);
@@ -54,7 +58,9 @@ public class FileEncryptor {
     }
 
 
-
+    /**
+     * Makes cipher
+     */
     private static Cipher makeCipher(String pass, Boolean decryptMode) throws GeneralSecurityException {
 
         //Use a KeyFactory to derive the corresponding key from the passphrase:
@@ -82,7 +88,9 @@ public class FileEncryptor {
     }
 
 
-    /**Encrypts one file to a second file using a key derived from a passphrase:**/
+    /**
+     * Encrypts file with password
+     */
     public static void encryptFile(String fileName, String pass)
             throws IOException, GeneralSecurityException {
         byte[] decData;
@@ -125,7 +133,9 @@ public class FileEncryptor {
     }
 
 
-    /**Decrypts one file to a second file using a key derived from a passphrase:**/
+    /**
+     * Decrypts file with password
+     */
     public static void decryptFile (String fileName, String pass)
             throws GeneralSecurityException, IOException {
         byte[] encData;
@@ -162,6 +172,9 @@ public class FileEncryptor {
         target.close();
     }
 
+    /**
+     * Gets return message
+     */
     public String getMessage () {
         return this.message;
     }

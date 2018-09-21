@@ -13,6 +13,9 @@ public class PasswordCommand extends Command {
     // public static final String MESSAGE_SUCCESS = "Command executed";
     private String message;
 
+    /**
+     * Parses the message from FileEncryptor to be displayed
+     */
     public PasswordCommand (String message) {
         this.message = message;
     }

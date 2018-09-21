@@ -1,12 +1,12 @@
 package seedu.address.model.person;
 
-import java.util.Set;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.TreeSet;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 
 import javafx.collections.ObservableList;
 
@@ -52,6 +52,10 @@ public class ClosestMatchList {
         }
     });
 
+    /**
+     * Filters and generates maps from names from model
+     * and arguments
+     */
     public ClosestMatchList (Model model, String argument, String[] names) {
         this.listToFilter = model.getAddressBook().getPersonList();
 
@@ -68,6 +72,9 @@ public class ClosestMatchList {
         addToApprovedNamesList();
     }
 
+    /**
+     * Add the contenst in the tree to a name list
+     */
     private void addToApprovedNamesList() {
         for (Pair pair: nameMap) {
             if (pair.getDist() - lowestDist > 1) {
@@ -78,6 +85,11 @@ public class ClosestMatchList {
         }
     }
 
+    /**
+     * Bulk of the computation
+     * Runs thru model and generates a tree out of
+     * similarity indexes using levensthein distances
+     */
     private void generateNameMapFromNames(String[] names, Person person) {
         String fullName = person.getName().fullName;
         String[] nameSplited = fullName.split("\\s+");
@@ -108,7 +120,9 @@ public class ClosestMatchList {
     }
 
 
-
+    /**
+     * Gets the approved list
+     */
     public String[] getApprovedList () {
         String [] output = approvedNames.toArray(new String[approvedNames.size()]);
         return output;
