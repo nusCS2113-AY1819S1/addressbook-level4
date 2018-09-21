@@ -1,7 +1,7 @@
 package seedu.address.logic;
 
-import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
@@ -56,7 +56,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ArrayList<String> getCmdPrediction(String prefix) {
-        return commandCompleter.predictText(prefix);
+    public ArrayList<String> getCmdPrediction(String textInput) {
+        return commandCompleter.predictText(textInput);
     }
 }

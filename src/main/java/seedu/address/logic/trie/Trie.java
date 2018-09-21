@@ -1,10 +1,6 @@
 package seedu.address.logic.trie;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
-import seedu.address.model.AddressBook;
 
 /**
  * A bi-directional Tree structure that stems from the root node
@@ -14,26 +10,23 @@ import seedu.address.model.AddressBook;
 public class Trie {
 
     /**
-     * Testing variables
-     */
-    private ArrayList<String> predictionsList;
-
-    /**
      * Class constants
      */
-    private final char ROOT_CHAR = '.';
+    private static final char CHAR_ROOT = '.';
+    private static final char CHAR_SPACE = ' ';
 
     /**
      * Class variables
      */
     private TrieNode root;
     private ArrayList<String> baseList;
+    private ArrayList<String> predictionsList;
 
     /**
      * Default constructor
      */
     public Trie(ArrayList<String> inputList) {
-        root = new TrieNode(ROOT_CHAR);
+        root = new TrieNode(CHAR_ROOT);
         baseList = new ArrayList<>(inputList);
         init();
     }
@@ -46,12 +39,6 @@ public class Trie {
         for (int i = 0; i < baseList.size(); i++) {
             this.insertToGraph(baseList.get(i));
         }
-
-        /*
-        for (String item : baseList) {
-            this.insert(item);
-        }
-        */
     }
 
     /**
@@ -59,42 +46,38 @@ public class Trie {
      * @param value
      */
     public void insert(String value) {
-        insertToGraph(value);
-        baseList.add(value);
+        // Check if this value exists
+        if (!baseList.contains(value)) {
+            insertToGraph(value);
+            baseList.add(value);
+        }
     }
 
     /**
      * Insert the given string value to the Trie graph.
-     * 
      * @param keyString the string value to be inserted
      */
     private void insertToGraph(String keyString) {
-        TrieNode ptr = root; // A TrieNode as pointer to traverse through the tree
+        // A TrieNode as pointer to traverse through the tree
+        TrieNode pointer = root;
 
         // Run through all characters in the given key string
         for (int i = 0; i < keyString.length(); i++) {
             char ch = keyString.charAt(i);
+            ArrayList<TrieNode> children = pointer.getChildren();
 
-            boolean hasChar = false;
-            // Run through all children of this node
-            for (int j = 0; j < ptr.getChildrenSize(); j++) {
-                if (ptr.getChildren().get(j).getValue() == ch) {
-                    hasChar = true;
-                    ptr = ptr.getChildren().get(j);
-                    break;
-                }
+            if (children.contains(new TrieNode(ch))) {
+                // Set the pointer to that node
+                pointer = children.get(children.indexOf(new TrieNode(ch)));
+            } else {
+                // Create a new node
+                TrieNode parent = pointer;
+                pointer = pointer.appendChild(new TrieNode(ch));
+                pointer.setParent(parent);
             }
-
-            if (!hasChar) {
-                TrieNode parent = ptr;
-                ptr = ptr.appendChild(new TrieNode(ch));
-                ptr.setParent(parent);
-            }
-            
         }
-
         // Mark end of word node
-        ptr.setEndNode(true);
+        pointer.setEndNode(true);
     }
 
     /**
@@ -103,14 +86,12 @@ public class Trie {
      */
     public void remove(String value) {
         // Check if this value exists
-        if (!baseList.contains(value)) {
-            return;
+        if (baseList.contains(value)) {
+            removeFromGraph(value);
+            baseList.remove(value);
         }
-        removeFromGraph(value);
-        baseList.remove(value);
     }
- 
-        /**
+    /**
      * Remove the input string value from the actual graph implementation
      * Traverse from the root to the last character (End node) of the string
      * Prerequisites: the value must exist in the Trie
@@ -128,14 +109,13 @@ public class Trie {
         // Check for the conditions for removal or setting of end node
         if (pointer.getChildrenSize() == 0) {
             removeWordFromGraph(pointer);
-        }
-        else {
+        } else {
             pointer.setEndNode(false);
         }
     }
 
     /**
-     * Traverse the Trie from the start character to the end character of the given string value
+     * Traverse the Trie from the start character to the end character of the given string value.
      * @param value the given value
      * @return the TrieNode referencing the end node
      */
@@ -144,24 +124,18 @@ public class Trie {
 
         // Run through all characters in the string and reaches the end node
         for (int i = 0; i < value.length(); i++) {
+            char ch = value.charAt(i);
             ArrayList<TrieNode> children = pointer.getChildren();
-
-            // Run through all children of this node
-            for (int j = 0; j < pointer.getChildrenSize(); j++) {
-                if (children.get(j).getValue() == value.charAt(i)) {
-                    pointer = children.get(j);
-                    break;
-                }
-            }
+            pointer = children.get(children.indexOf(new TrieNode(ch)));
         }
 
         return pointer;
     }
 
     /**
-     * Removes a word from the graph given the end node of that word
+     * Removes a word from the graph given the end node of that word.
      * Removes every parent level node until a node that has more than one child
-     * or it is an end node
+     * or it is an end node.
      * @param pointer the first node in the graph to be removed
      */
     private void removeWordFromGraph(TrieNode pointer) {
@@ -177,23 +151,29 @@ public class Trie {
     }
 
     /**
-     * Testing codes section
+     * Returns a list of strings that are predicted to complete the {@code prefix}.
+     * @param prefix string prefix to be predicted
+     * @return a list of string predictions
      */
     public ArrayList<String> getPredictList(String prefix) {
         predictionsList = new ArrayList<>();
         StringBuilder charStack = new StringBuilder();
 
+        // skipToStartNode returns root node if the prefix does not exist in the Trie
         TrieNode startNode = skipToStartNode(root, prefix);
+
+        // startNode is root node, return an empty predictionsList
         if (startNode.equals(root)) {
             return predictionsList;
         }
 
+        // If startNode is already the end node of a branch, just add a single whitespace
         if (startNode.getChildrenSize() == 0) {
-            charStack.append(' ');
+            charStack.append(CHAR_SPACE);
             predictionsList.add(charStack.toString());
         }
 
-        // If the startNode has only ONE child, build the charStack to the first
+        // If startNode has ONE child, build the charStack to the first
         // node that has more than one child or the first mismatch character
         if (startNode.getChildrenSize() == 1) {
             charStack = buildSingleStack(startNode);
@@ -201,6 +181,7 @@ public class Trie {
             return predictionsList;
         }
 
+        // If startNode has more than one child, explore all possible strings
         for (int i = 0; i < startNode.getChildren().size(); i++) {
             explore(charStack, startNode.getChildren().get(i));
         }
@@ -208,76 +189,90 @@ public class Trie {
         return predictionsList;
     }
 
+    /**
+     * Returns a string that represents the only possible substring from a starting node.
+     *
+     * Given a starting node, traverse to the next neighbour node until there is more than one neighbouring
+     * node or there is none. If each node only has one neighbour, this means there are no other possible
+     * string combinations.
+     * @param startNode the starting node
+     * @return the only possible substring
+     */
     private StringBuilder buildSingleStack(TrieNode startNode) {
         StringBuilder charStack = new StringBuilder();
-        while(startNode.getChildrenSize() == 1) {
+        while (startNode.getChildrenSize() == 1) {
             charStack.append(startNode.getFirstChild().getValue());
             startNode = startNode.getFirstChild();
         }
 
+        // If this node is the last node of a branch, add a single whitespace to the returning string
         if (startNode.getChildrenSize() == 0) {
-            charStack.append(' ');
+            charStack.append(CHAR_SPACE);
         }
 
         return charStack;
     }
 
-    private TrieNode skipToStartNode(TrieNode begin, String prefix) {
-        TrieNode current = begin;
-        boolean hasChar = false;
+    /**
+     * Returns a {@code TrieNode} object that corresponds to the last character of a given string.
+     *
+     * From a starting node, the method traverse through all nodes that corresponds to every character
+     * in the given string up until the last character.
+     * @param start the starting node to traverse from
+     * @param prefix the given string to traverse with
+     * @return a TrieNode instance that holds a value equal to the last character of the {@code prefix}
+     */
+    private TrieNode skipToStartNode(TrieNode start, String prefix) {
+        TrieNode current = start;
 
         for (int i = 0; i < prefix.length(); i++) {
-            ArrayList<TrieNode> currList = current.getChildren();
-            hasChar = false;
+            char ch = prefix.charAt(i);
+            ArrayList<TrieNode> currentNodeChildren = current.getChildren();
 
-            for (int j = 0; j < currList.size(); j++) {
-                if (currList.get(j).getValue() == prefix.charAt(i)) {
-                    current = current.getChildren().get(j);
-                    hasChar = true;
-                    break;
-                }
-            }
-
-            if (!hasChar) {
-                current = root;
-                break;
+            if (currentNodeChildren.contains(new TrieNode(ch))) {
+                // If the node representing current character exists, move to that node
+                current = currentNodeChildren.get(currentNodeChildren.indexOf(new TrieNode(ch)));
+            } else {
+                // If a character does not exist, just return the root node
+                return root;
             }
         }
-
-        if (current.getChildrenSize() == 0) {
-
-        }
-
         return current;
     }
 
-    private void explore(StringBuilder charStack, TrieNode ptr) {
+    /**
+     * Traverses through the whole Trie structure to find all possible strings
+     * @param charStack StringBuilder to build a possible strings
+     * @param pointer the starting node to traverse from
+     */
+    private void explore(StringBuilder charStack, TrieNode pointer) {
         // Push the character of current node to stack
-        if (ptr.getValue() != '.') {
-            charStack.append(ptr.getValue());
+        if (pointer.getValue() != CHAR_ROOT) {
+            charStack.append(pointer.getValue());
         }
 
-        // We have hit the end of a word but the branch continues or there are more branch
-        if (ptr.isEndNode()) {
-            if (ptr.getChildrenSize() == 0) {
-                charStack.append(' ');
+        // We have hit the end of a word but the branch continues or there are more branches
+        if (pointer.isEndNode()) {
+            if (pointer.getChildrenSize() == 0) {
+                charStack.append(CHAR_SPACE);
             }
             predictionsList.add(charStack.toString());
         }
 
         // Explore all other neighbours
-        for (int i = 0; i < ptr.getChildren().size(); i++) {
-            TrieNode neighbour = ptr.getChildren().get(i);
+        for (int i = 0; i < pointer.getChildren().size(); i++) {
+            TrieNode neighbour = pointer.getChildren().get(i);
             explore(charStack, neighbour);
         }
 
-        if (charStack.charAt(charStack.length()-1) == ' ') {
-            charStack.deleteCharAt(charStack.length()-1);
+        // Delete the whitespace at the last character space
+        if (charStack.charAt(charStack.length() - 1) == CHAR_SPACE) {
+            charStack.deleteCharAt(charStack.length() - 1);
         }
 
-        // Pop the last character out of stack
+        // Delete the last character out of string
         if (charStack.length() > 0) {
-            charStack.deleteCharAt(charStack.length()-1);
+            charStack.deleteCharAt(charStack.length() - 1);
         }
     }
 

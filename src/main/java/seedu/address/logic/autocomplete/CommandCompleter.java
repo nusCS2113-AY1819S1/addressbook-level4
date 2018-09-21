@@ -5,17 +5,26 @@ import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.trie.Trie;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
+/**
+ * Completes the command for the user by predicting the possible substrings
+ */
 public class CommandCompleter {
 
+    /** Constants for Trie matching */
+    private static final String COMPLETE_ADDRESS = "address";
+    private static final String COMPLETE_COMMAND = "command";
+    private static final String COMPLETE_EMAIL = "email";
+    private static final String COMPLETE_NAME = "name";
+    private static final String COMPLETE_PHONE = "phone";
+
+    /** Model instance to access data */
     private Model model;
 
     /**
-     * Trie instances for various commanda and arguments.
+     * Trie instances for various commands and arguments.
      */
     private Trie commandTrie;
     private Trie nameTrie;
@@ -100,10 +109,10 @@ public class CommandCompleter {
     /**
      * TODO: Mimic bash behaviour of auto completing some text first
      * Predict the next possible list of text
-     * @param prefix
+     * @param textInput the string to be parsed
      * @return predicted list of text
      */
-    public ArrayList<String> predictText(String prefix) {
-        return commandTrie.getPredictList(prefix);
+    public ArrayList<String> predictText(String textInput) {
+        return commandTrie.getPredictList(textInput);
     }
 }
