@@ -165,13 +165,16 @@ public class CommandBox extends UiPart<Region> {
     }
 
     private void handlePredictions(ArrayList<String> input, String textInput) {
-        if (input.size() == 1) {
+
+        if (input.size() <= 1) {
             commandTextField.appendText(input.get(0));
         }
         else {
+            String output = "";
             for (String item : input) {
-                System.out.println(textInput + item);
+                output += textInput + item + "\n";
             }
+            raise(new NewResultAvailableEvent(output));
         }
     }
 }
