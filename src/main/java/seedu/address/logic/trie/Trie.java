@@ -10,15 +10,15 @@ import java.util.ArrayList;
 public class Trie {
 
     /**
-     * Testing variables
-     */
-    private ArrayList<String> predictionsList;
-
-    /**
      * Class constants
      */
     private static final char CHAR_ROOT = '.';
     private static final char CHAR_SPACE = ' ';
+    
+    /**
+     * Testing variables
+     */
+    private ArrayList<String> predictionsList;
 
     /**
      * Class variables

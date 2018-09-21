@@ -13,15 +13,15 @@ import seedu.address.model.person.Person;
  */
 public class CommandCompleter {
 
-    /** Model instance to access data */
-    private Model model;
-
     /** Constants for Trie matching */
     private static final String COMPLETE_ADDRESS = "address";
     private static final String COMPLETE_COMMAND = "command";
     private static final String COMPLETE_EMAIL = "email";
     private static final String COMPLETE_NAME = "name";
     private static final String COMPLETE_PHONE = "phone";
+
+    /** Model instance to access data */
+    private Model model;
 
     /**
      * Trie instances for various commands and arguments.
