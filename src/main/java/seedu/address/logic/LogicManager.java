@@ -1,7 +1,7 @@
 package seedu.address.logic;
 
-import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;

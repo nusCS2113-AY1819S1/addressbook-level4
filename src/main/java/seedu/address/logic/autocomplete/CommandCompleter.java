@@ -5,20 +5,20 @@ import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.trie.Trie;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 
 public class CommandCompleter {
 
+    /** Model instance to access data */
     private Model model;
 
-    private final String COMPLETE_COMMAND = "command";
-    private final String COMPLETE_NAME = "name";
-    private final String COMPLETE_PHONE = "phone";
-    private final String COMPLETE_EMAIL = "email";
-    private final String COMPLETE_ADDRESS = "address";
+    /** Constants for Trie matching */
+    private static final String COMPLETE_COMMAND = "command";
+    private static final String COMPLETE_NAME = "name";
+    private static final String COMPLETE_PHONE = "phone";
+    private static final String COMPLETE_EMAIL = "email";
+    private static final String COMPLETE_ADDRESS = "address";
 
     /**
      * Trie instances for various commands and arguments.

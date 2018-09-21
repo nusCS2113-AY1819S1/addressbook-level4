@@ -73,8 +73,7 @@ public class Trie {
             if (children.contains(new TrieNode(ch))) {
                 // Set the pointer to that node
                 pointer = children.get(children.indexOf(new TrieNode(ch)));
-            }
-            else {
+            } else {
                 // Create a new node
                 TrieNode parent = pointer;
                 pointer = pointer.appendChild(new TrieNode(ch));
@@ -96,7 +95,7 @@ public class Trie {
             baseList.remove(value);
         }
     }
-        /**
+    /**
      * Remove the input string value from the actual graph implementation
      * Traverse from the root to the last character (End node) of the string
      * Prerequisites: the value must exist in the Trie
@@ -114,8 +113,7 @@ public class Trie {
         // Check for the conditions for removal or setting of end node
         if (pointer.getChildrenSize() == 0) {
             removeWordFromGraph(pointer);
-        }
-        else {
+        } else {
             pointer.setEndNode(false);
         }
     }
@@ -273,13 +271,13 @@ public class Trie {
         }
 
         // Delete the whitespace at the last character space
-        if (charStack.charAt(charStack.length()-1) == CHAR_SPACE) {
-            charStack.deleteCharAt(charStack.length()-1);
+        if (charStack.charAt(charStack.length() - 1) == CHAR_SPACE) {
+            charStack.deleteCharAt(charStack.length() - 1);
         }
 
         // Delete the last character out of string
         if (charStack.length() > 0) {
-            charStack.deleteCharAt(charStack.length()-1);
+            charStack.deleteCharAt(charStack.length() - 1);
         }
     }
 

@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.util.function.Predicate;
-import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
