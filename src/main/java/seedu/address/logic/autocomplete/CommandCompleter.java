@@ -106,10 +106,10 @@ public class CommandCompleter {
     /**
      * TODO: Mimic bash behaviour of auto completing some text first
      * Predict the next possible list of text
-     * @param prefix
+     * @param textInput the string to be parsed
      * @return predicted list of text
      */
-    public ArrayList<String> predictText(String prefix) {
-        return commandTrie.getPredictList(prefix);
+    public ArrayList<String> predictText(String textInput) {
+        return commandTrie.getPredictList(textInput);
     }
 }

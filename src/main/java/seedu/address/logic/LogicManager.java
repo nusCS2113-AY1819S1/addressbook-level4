@@ -56,7 +56,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ArrayList<String> getCmdPrediction(String prefix) {
-        return commandCompleter.predictText(prefix);
+    public ArrayList<String> getCmdPrediction(String textInput) {
+        return commandCompleter.predictText(textInput);
     }
 }
