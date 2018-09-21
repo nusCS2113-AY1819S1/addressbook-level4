@@ -959,3 +959,7 @@ _{ more test cases ... }_
 .. _{explain how to simulate a missing/corrupted file and the expected behavior}_
 
 _{ more test cases ... }_
+
+=== Password storage and authentication
+Password handling is done in the PasswordManager class in the utils package. +
+Handle the decrypting of json in there.

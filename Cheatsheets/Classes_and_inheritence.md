@@ -23,7 +23,7 @@ class Bar{
     }
 }
 ```
-Dependencies are represented by a dashed arrow. [Foo] ---> [Bar]
+Dependencies are represented by a dashed arrow. [Foo] ---> [Bar] dotted arrow without a triangle  
 
 # Composition
 
@@ -48,7 +48,7 @@ Aggregation represents a container-contained relationship. It is a weaker relati
 ## Aggregation vs Composition
 Aggregation association is when the containee (subject) can still exist even after the container is destroyed.
 
-UML uses the same symbol as *Composition*
+UML uses the same symbol as *Composition* because it doesnt really matter if its there or not. 
 
 # Inheritence
 ```
@@ -59,6 +59,7 @@ Triangle points to the parent class
 
 Multiple Inheritance (Multiple parent classes) is when a class inherits directly from multiple classes. - *Not allowed in Java*
 
+A Java interface is a bit like a class, except a Java interface can only contain method signatures and fields. An Java interface cannot contain an implementation of the methods, only the signature (name, parameters and exceptions) of the method. You can use interfaces in Java as a way to achieve polymorphism.
 
 
 1. Child must always be able to do what the parent can do
