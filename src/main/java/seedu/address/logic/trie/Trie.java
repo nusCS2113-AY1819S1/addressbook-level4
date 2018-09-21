@@ -133,15 +133,9 @@ public class Trie {
 
         // Run through all characters in the string and reaches the end node
         for (int i = 0; i < value.length(); i++) {
+            char ch = value.charAt(i);
             ArrayList<TrieNode> children = pointer.getChildren();
-
-            // Run through all children of this node
-            for (int j = 0; j < pointer.getChildrenSize(); j++) {
-                if (children.get(j).getValue() == value.charAt(i)) {
-                    pointer = children.get(j);
-                    break;
-                }
-            }
+            pointer = children.get(children.indexOf(new TrieNode(ch)));
         }
 
         return pointer;
