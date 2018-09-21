@@ -1,79 +1,82 @@
 # Single Responsibility Principle
-If a class has only one responsibility, it needs to change only when there is a change to that responsibility. 
-Not all classes have to follow this principle 
+If a class has only one responsibility, it needs to change only when there is a change to that responsibility.
+Not all classes have to follow this principle
 
 
-# Dependencies 
+# Dependencies
 Dependencies are objects that are not directly linked in the object network can still interact with each other.
-These are a weaker form of associations we call dependencies.  
+These are a weaker form of associations we call dependencies.
 
 ```java
 class Foo{
-    // Foo has a dependency on Bar class 
+    // Foo has a dependency on Bar class
     int calculate(Bar bar){
-        return bar.getValue(); // Note that Bar class is not stored as a parameter in class Foo 
+        return bar.getValue(); // Note that Bar class is not stored as a parameter in class Foo
     }
 }
 
 class Bar{
     int value;
-    
+
     int getValue(){
         return value;
     }
 }
 ```
-Dependencies are represented by a dashed arrow. [Foo] ---> [Bar] dotted arrow without a triangle  
+Dependencies are represented by a dashed arrow. [Foo] ---> [Bar]
 
-# Composition 
+# Composition
 
-1. Strong *whole-part* relationship 
-2. Cannot have cyclical links 
+1. Strong *whole-part* relationship
+2. Cannot have cyclical links
 3. Ideally, the ‘part’ object may not even be visible to clients of the ‘whole’ object.
 
 ```java
-// When email is destroyed, subject will be destroyed too 
+// When email is destroyed, subject will be destroyed too
 class Email {
     private Subject subject;
   ...
 }
 ```
-UML uses a solid diamond pointing at the *whole* class 
+UML uses a solid diamond pointing at the *whole* class
 
 
 # Aggregation
-Aggregation represents a container-contained relationship. It is a weaker relationship than composition.  
+Aggregation represents a container-contained relationship. It is a weaker relationship than composition.
 
 
 ## Aggregation vs Composition
-Aggregation association is when the containee (subject) can still exist even after the container is destroyed.  
+Aggregation association is when the containee (subject) can still exist even after the container is destroyed.
 
-UML uses the same symbol as *Composition* because it doesnt really matter if its there or not. 
+UML uses the same symbol as *Composition*
 
-# Inheritence 
+# Inheritence
 ```
 eg. Animal <-- Bird <-- Eagle
 
 ```
-Triangle points to the parent class  
+Triangle points to the parent class
 
-Multiple Inheritance (Multiple parent classes) is when a class inherits directly from multiple classes. - *Not allowed in Java*  
-
-A Java interface is a bit like a class, except a Java interface can only contain method signatures and fields. An Java interface cannot contain an implementation of the methods, only the signature (name, parameters and exceptions) of the method. You can use interfaces in Java as a way to achieve polymorphism.
+Multiple Inheritance (Multiple parent classes) is when a class inherits directly from multiple classes. - *Not allowed in Java*
 
 
-1. Child must always be able to do what the parent can do 
+
+1. Child must always be able to do what the parent can do
 2. Arrow points to the parent
 3. Inheritence is extending
-4. Can form an inheritence tree. 
-5. In Java all classes inherit from the Object class 
+4. Can form an inheritence tree.
+5. In Java all classes inherit from the Object class
 6. Java disallows multiple inheritance in a class
-7. Abstraction and encapsulation 
+7. Abstraction and encapsulation
 
 
 
 
 # Practices for good code quality
 1. Class names should start with upper case letter
+<<<<<<< HEAD
 2. Class names should be meaningful 
+=======
+2. Class names should be meaningful
+>>>>>>> 9498b3d734f0520d6c8b5bdc66e4afdeeba0123a
 3. Avoid magic numbers (Even if numbers are fixed, declare them as macros or global variables)

@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,4 +26,6 @@ public interface Logic {
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
+
+    ArrayList<String> getCmdPrediction(String prefix);
 }
