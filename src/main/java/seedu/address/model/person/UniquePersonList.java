@@ -12,7 +12,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of events that enforces uniqueness between its elements and does not allow nulls.
  * A event is considered unique by comparing using {@code Event#isSameEvent(Event)}. As such, adding and updating of
  * persons uses Event#isSameEvent(Event) for equality so as to ensure that the event being added or updated is
  * unique in terms of identity in the UniquePersonList. However, the removal of a event uses Event#equals(Object) so
