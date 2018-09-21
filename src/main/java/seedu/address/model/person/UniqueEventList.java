@@ -51,7 +51,7 @@ public class UniqueEventList implements Iterable<Event> {
      * {@code target} must exist in the list.
      * The event identity of {@code editedEvent} must not be the same as another existing event in the list.
      */
-    public void setPerson(Event target, Event editedEvent) {
+    public void setEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
         int index = internalList.indexOf(target);
@@ -77,7 +77,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
     }
 
-    public void setPersons(UniqueEventList replacement) {
+    public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -86,9 +86,9 @@ public class UniqueEventList implements Iterable<Event> {
      * Replaces the contents of this list with {@code events}.
      * {@code events} must not contain duplicate events.
      */
-    public void setPersons(List<Event> events) {
+    public void setEvents(List<Event> events) {
         requireAllNonNull(events);
-        if (!personsAreUnique(events)) {
+        if (!eventsAreUnique(events)) {
             throw new DuplicatePersonException();
         }
 
@@ -122,7 +122,7 @@ public class UniqueEventList implements Iterable<Event> {
     /**
      * Returns true if {@code events} contains only unique events.
      */
-    private boolean personsAreUnique(List<Event> events) {
+    private boolean eventsAreUnique(List<Event> events) {
         for (int i = 0; i < events.size() - 1; i++) {
             for (int j = i + 1; j < events.size(); j++) {
                 if (events.get(i).isSameEvent(events.get(j))) {

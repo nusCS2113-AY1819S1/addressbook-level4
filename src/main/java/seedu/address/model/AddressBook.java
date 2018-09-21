@@ -44,7 +44,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * {@code events} must not contain duplicate events.
      */
     public void setPersons(List<Event> events) {
-        this.persons.setPersons(events);
+        this.persons.setEvents(events);
     }
 
     /**
@@ -82,7 +82,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void updatePerson(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
 
-        persons.setPerson(target, editedEvent);
+        persons.setEvent(target, editedEvent);
     }
 
     /**

@@ -67,25 +67,25 @@ public class UniqueEventListTest {
     @Test
     public void setPerson_nullTargetPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueEventList.setPerson(null, ALICE);
+        uniqueEventList.setEvent(null, ALICE);
     }
 
     @Test
     public void setPerson_nullEditedPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueEventList.setPerson(ALICE, null);
+        uniqueEventList.setEvent(ALICE, null);
     }
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
         thrown.expect(PersonNotFoundException.class);
-        uniqueEventList.setPerson(ALICE, ALICE);
+        uniqueEventList.setEvent(ALICE, ALICE);
     }
 
     @Test
     public void setPerson_editedPersonIsSamePerson_success() {
         uniqueEventList.add(ALICE);
-        uniqueEventList.setPerson(ALICE, ALICE);
+        uniqueEventList.setEvent(ALICE, ALICE);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(ALICE);
         assertEquals(expectedUniqueEventList, uniqueEventList);
@@ -96,7 +96,7 @@ public class UniqueEventListTest {
         uniqueEventList.add(ALICE);
         Event editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniqueEventList.setPerson(ALICE, editedAlice);
+        uniqueEventList.setEvent(ALICE, editedAlice);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(editedAlice);
         assertEquals(expectedUniqueEventList, uniqueEventList);
@@ -105,7 +105,7 @@ public class UniqueEventListTest {
     @Test
     public void setPerson_editedPersonHasDifferentIdentity_success() {
         uniqueEventList.add(ALICE);
-        uniqueEventList.setPerson(ALICE, BOB);
+        uniqueEventList.setEvent(ALICE, BOB);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(BOB);
         assertEquals(expectedUniqueEventList, uniqueEventList);
@@ -116,7 +116,7 @@ public class UniqueEventListTest {
         uniqueEventList.add(ALICE);
         uniqueEventList.add(BOB);
         thrown.expect(DuplicatePersonException.class);
-        uniqueEventList.setPerson(ALICE, BOB);
+        uniqueEventList.setEvent(ALICE, BOB);
     }
 
     @Test
@@ -142,7 +142,7 @@ public class UniqueEventListTest {
     @Test
     public void setPersons_nullUniquePersonList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueEventList.setPersons((UniqueEventList) null);
+        uniqueEventList.setEvents((UniqueEventList) null);
     }
 
     @Test
@@ -150,21 +150,21 @@ public class UniqueEventListTest {
         uniqueEventList.add(ALICE);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(BOB);
-        uniqueEventList.setPersons(expectedUniqueEventList);
+        uniqueEventList.setEvents(expectedUniqueEventList);
         assertEquals(expectedUniqueEventList, uniqueEventList);
     }
 
     @Test
     public void setPersons_nullList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueEventList.setPersons((List<Event>) null);
+        uniqueEventList.setEvents((List<Event>) null);
     }
 
     @Test
     public void setPersons_list_replacesOwnListWithProvidedList() {
         uniqueEventList.add(ALICE);
         List<Event> eventList = Collections.singletonList(BOB);
-        uniqueEventList.setPersons(eventList);
+        uniqueEventList.setEvents(eventList);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(BOB);
         assertEquals(expectedUniqueEventList, uniqueEventList);
@@ -174,7 +174,7 @@ public class UniqueEventListTest {
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Event> listWithDuplicateEvents = Arrays.asList(ALICE, ALICE);
         thrown.expect(DuplicatePersonException.class);
-        uniqueEventList.setPersons(listWithDuplicateEvents);
+        uniqueEventList.setEvents(listWithDuplicateEvents);
     }
 
     @Test
