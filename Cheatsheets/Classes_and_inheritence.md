@@ -42,11 +42,11 @@ UML uses a solid diamond pointing at the *whole* class
 
 
 # Aggregation
-Aggregation represents a container-contained relationship. It is a weaker relationship than composition. 
+Aggregation represents a container-contained relationship. It is a weaker relationship than composition.
 
 
 ## Aggregation vs Composition
-Aggregation association is when the containee (subject) can still exist even after the container is destroyed. 
+Aggregation association is when the containee (subject) can still exist even after the container is destroyed.
 
 UML uses the same symbol as *Composition*
 

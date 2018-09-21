@@ -4,7 +4,7 @@
 In the forking workflow, the 'official' version of the software is kept in a remote repo designated as the 'main repo'. All team members fork the main repo create pull requests from their fork to the main repo.
 
 ## Centralized revision control
-Uses a central remote repo that is shared by the team. Team members download (‘pull’) and upload (‘push’) changes between their own local repositories and the central repository. 
+Uses a central remote repo that is shared by the team. Team members download (‘pull’) and upload (‘push’) changes between their own local repositories and the central repository.
 Similar to what we did for CG1112 when we all don't know how to use github to its fullest extent
 
 ## Distributed (Decentralised) RCS
