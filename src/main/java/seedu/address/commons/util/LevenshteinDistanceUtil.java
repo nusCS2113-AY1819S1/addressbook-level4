@@ -5,7 +5,6 @@ public interface LevenshteinDistanceUtil {
     /**
      * Computes levenshteinDistance from strings
      */
-    
     public static int levenshteinDistance (CharSequence lhs, CharSequence rhs) {
         int len0 = lhs.length() + 1;
         int len1 = rhs.length() + 1;
