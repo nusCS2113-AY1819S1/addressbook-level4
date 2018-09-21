@@ -1,17 +1,17 @@
 # Overloading
 
-Method overloading is when there are multiple methods with the same name but different type signatures.  
-Overloading must be done on the same class. 
+Method overloading is when there are multiple methods with the same name but different type signatures.
+Overloading must be done on the same class.
 
 ```java
-void calculate(String); 
-void calculate(int); 
+void calculate(String);
+void calculate(int);
 ```
 
 
 # Polymorphism
 ```
-Polymorphism allows you to write code targeting superclass objects, use that code on subclass objects, and achieve possibly different results based on the actual class of the object.  
+Polymorphism allows you to write code targeting superclass objects, use that code on subclass objects, and achieve possibly different results based on the actual class of the object.
 ```
 
 Allows you to do this
@@ -55,9 +55,10 @@ public class PetShelter2 {
 ```
 
 
-# Abstract classes 
+# Abstract classes
 
-In Java, an abstract method is declared with the keyword **abstract** and given without an implementation. If a class includes abstract methods, then the class itself must be declared abstract.  
+In Java, an abstract method is declared with the keyword **abstract** and given without an implementation. If a class includes abstract methods, then the class itself must be declared abstract.
+
 
 - Abstract classes cannot have methods with body (unless it is static).  
 - As one method of the class is **abstract**, the class itself is abstract.
@@ -67,7 +68,7 @@ In Java, an abstract method is declared with the keyword **abstract** and given 
 public abstract class Account {
     int number;
     public abstract String speak (); // Method signature
-    static void testFunc () {/* do something*/} // Legal 
+    static void testFunc () {/* do something*/} // Legal
     void testFuncIllegal () {/*Do something*/} // Illegal 
 }
 ```
@@ -91,7 +92,7 @@ Account a = new Account() {
 # Interfaces
 
 ## Behaviour
-- An interface is a behavior specification i.e. a collection of method specifications . If a class implements the interface, it means the class is able to support the behaviors specified by the said interface.  
+- An interface is a behavior specification i.e. a collection of method specifications . If a class implements the interface, it means the class is able to support the behaviors specified by the said interface.
 
 - If something is related to behaviour, we usually use an interface. eg. catClass vs Movable, do we subclass catClass from Movable? Or is it better to implement Movable interface
 
