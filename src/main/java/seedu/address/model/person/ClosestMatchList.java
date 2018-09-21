@@ -36,14 +36,6 @@ public class ClosestMatchList {
         public String getNameSegment () {
             return nameSegment;
         }
-
-        public void setNameSegment (String nameSegment) {
-            this.nameSegment = nameSegment;
-        }
-
-        public void setDist (int dist) {
-            this.dist = dist;
-        }
     }
 
     Set <Pair> nameMap = new TreeSet<Pair>(new Comparator<Pair>() {
@@ -101,9 +93,7 @@ public class ClosestMatchList {
                     lowestDist = dist;
                 }
 
-                Pair distNamePair = new Pair();
-                distNamePair.setDist(dist);
-                distNamePair.setNameSegment(nameSegment);
+                Pair distNamePair = new Pair(dist, nameSegment);
 
 
                 if (!discoveredNames.containsKey(nameSegment)) {
