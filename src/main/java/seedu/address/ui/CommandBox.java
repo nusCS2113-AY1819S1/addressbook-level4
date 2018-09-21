@@ -57,12 +57,7 @@ public class CommandBox extends UiPart<Region> {
             navigateToNextInput();
             break;
         case TAB:
-<<<<<<< HEAD
-            // keyEvent.consume();
-            System.out.println("Tab pressed");
-=======
             predictCmd(commandTextField.getText());
->>>>>>> 9498b3d734f0520d6c8b5bdc66e4afdeeba0123a
             commandTextField.requestFocus(); // Set the focus back on textfield
             commandTextField.selectEnd(); // Move cursor to the end of text
             break;
