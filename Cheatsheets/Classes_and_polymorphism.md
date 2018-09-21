@@ -60,7 +60,7 @@ public class PetShelter2 {
 In Java, an abstract method is declared with the keyword **abstract** and given without an implementation. If a class includes abstract methods, then the class itself must be declared abstract.
 
 
-- Abstract classes cannot have methods with body (unless it is static).  
+- Abstract classes cannot have methods with body (unless it is static).
 - As one method of the class is **abstract**, the class itself is abstract.
 - **A class that cannot be instantiated** it can only be referenced, you cannot create an object out of that class
 
@@ -69,12 +69,12 @@ public abstract class Account {
     int number;
     public abstract String speak (); // Method signature
     static void testFunc () {/* do something*/} // Legal
-    void testFuncIllegal () {/*Do something*/} // Illegal 
+    void testFuncIllegal () {/*Do something*/} // Illegal
 }
 ```
 
 ```java
-// Declaration  
+// Declaration
 Account a; // Acceptable
 Account a = new Account(); // Will give compilation error
 
@@ -96,7 +96,7 @@ Account a = new Account() {
 
 - If something is related to behaviour, we usually use an interface. eg. catClass vs Movable, do we subclass catClass from Movable? Or is it better to implement Movable interface
 
-- Interface can extend from another interface 
+- Interface can extend from another interface
 
 - Interfaces cannot be instantiated—they can only be implemented by classes
 
@@ -108,14 +108,14 @@ Account a = new Account() {
 
 - Interfaces can also contain constants and static methods.
 
-- All methods in interfaces are **public**. 
+- All methods in interfaces are **public**.
 
 
-## Syntax and symbol 
+## Syntax and symbol
 - An interface is shown similar to a class with an additional keyword ```<< interface >>``` . When a class implements an interface, it is shown similar to class inheritance except a dashed line is used instead of a solid line.
 
 
-Sample: 
+Sample:
 ```java
 public interface AnimalClassAddon {
     int CONSTANT = 10;
