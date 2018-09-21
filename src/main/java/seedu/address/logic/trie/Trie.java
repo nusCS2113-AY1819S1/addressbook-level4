@@ -14,17 +14,13 @@ public class Trie {
      */
     private static final char CHAR_ROOT = '.';
     private static final char CHAR_SPACE = ' ';
-    
-    /**
-     * Testing variables
-     */
-    private ArrayList<String> predictionsList;
 
     /**
      * Class variables
      */
     private TrieNode root;
     private ArrayList<String> baseList;
+    private ArrayList<String> predictionsList;
 
     /**
      * Default constructor
