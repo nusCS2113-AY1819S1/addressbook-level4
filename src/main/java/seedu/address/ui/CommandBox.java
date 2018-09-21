@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
-import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -57,7 +57,6 @@ public class CommandBox extends UiPart<Region> {
             navigateToNextInput();
             break;
         case TAB:
-//            keyEvent.consume();
             predictCmd(commandTextField.getText());
             commandTextField.requestFocus(); // Set the focus back on textfield
             commandTextField.selectEnd(); // Move cursor to the end of text
@@ -164,12 +163,15 @@ public class CommandBox extends UiPart<Region> {
         handlePredictions(output, textInput);
     }
 
+    /**
+     * Processes the prediction output from {@code CommandCompleter}
+     * @param input
+     * @param textInput
+     */
     private void handlePredictions(ArrayList<String> input, String textInput) {
-
         if (input.size() <= 1) {
             commandTextField.appendText(input.get(0));
-        }
-        else {
+        } else {
             String output = "";
             for (String item : input) {
                 output += textInput + item + "\n";

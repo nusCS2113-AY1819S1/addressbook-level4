@@ -48,6 +48,11 @@ public class TrieNode {
         return children.size();
     }
 
+    /**
+     * Adds a child to the {@code TrieNode} instance.
+     * @param child child node to be added
+     * @return the newly added child
+     */
     public TrieNode appendChild(TrieNode child) {
         children.add(child);
         children.get(children.size() - 1).setParent(this);

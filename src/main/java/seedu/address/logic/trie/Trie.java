@@ -233,12 +233,11 @@ public class Trie {
             char ch = prefix.charAt(i);
             ArrayList<TrieNode> currentNodeChildren = current.getChildren();
 
-            // If the node representing current character exists, move to that node
             if (currentNodeChildren.contains(new TrieNode(ch))) {
+                // If the node representing current character exists, move to that node
                 current = currentNodeChildren.get(currentNodeChildren.indexOf(new TrieNode(ch)));
-            }
-            // If a character does not exist, just return the root node
-            else {
+            } else {
+                // If a character does not exist, just return the root node
                 return root;
             }
         }
