@@ -52,11 +52,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `t/TASK m/MODULE`, `m/MODULE t/TASK` is also acceptable.
 ====
 
-*TDL Command:*
-=== Viewing help : `help`
+=== Viewing help : `TDL help`
 
 Shows a list of commands
-Format: `help`
+Format: `TDL help`
 
 === Adding a task: `TDL add`
 
