@@ -129,5 +129,3 @@ public interface AnimalClassAddon {
 
 }
 ```
-
-
