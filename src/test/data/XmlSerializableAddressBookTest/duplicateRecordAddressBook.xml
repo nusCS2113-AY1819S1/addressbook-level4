@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+
+    <records>
+        <name>Alice Pauline</name>
+        <date>10-3-2000</date>
+        <income>40.60</income>
+        <expense>39.60</expense>
+        <tagged>friends</tagged>
+    </records>
+
+    <!-- Record with same identity as Alice Pauline -->
+    <records>
+        <name>Alice Pauline</name>
+        <date>10-3-2000</date>
+        <income>40.60</income>
+        <expense>39.60</expense>
+    </records>
+
+</addressbook>

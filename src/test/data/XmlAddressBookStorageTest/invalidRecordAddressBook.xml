@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Record with invalid name field -->
+    <records>
+        <name>Ha!ns Mu@ster</name>
+        <date isPrivate="false">10-12-1994</date>
+        <income isPrivate="false">11.99</income>
+        <expense isPrivate="false">10.99</expense>
+    </records>
+</addressbook>

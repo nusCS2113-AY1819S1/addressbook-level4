@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- AddressBook save file which contains the same Record values as in TypicalRecords#getTypicalAddressBook() -->
+<addressbook>
+    <records>
+        <name>Alice Pauline</name>
+        <date>18-9-2012</date>
+        <income>40.60</income>
+        <expense>39.60</expense>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Benson Meier</name>
+        <date>18-12-2012</date>
+        <income>26.80</income>
+        <expense>25.80</expense>
+        <tagged>owesMoney</tagged>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Carl Kurz</name>
+        <date>10-12-2012</date>
+        <income>26.90</income>
+        <expense>25.90</expense>
+    </records>
+    <records>
+        <name>Daniel Meier</name>
+        <date>10-1-2012</date>
+        <income>31.50</income>
+        <expense>30.50</expense>
+        <tagged>friends</tagged>
+    </records>
+    <records>
+        <name>Elle Meyer</name>
+        <date>10-1-2003</date>
+        <income>50.99</income>
+        <expense>49.99</expense>
+    </records>
+    <records>
+        <name>Fiona Kunz</name>
+        <date>31-12-1996</date>
+        <income>26.89</income>
+        <expense>25.89</expense>
+    </records>
+    <records>
+        <name>George Best</name>
+        <date>23-10-2010</date>
+        <income>4.50</income>
+        <expense>3.50</expense>
+    </records>
+</addressbook>
