@@ -23,17 +23,15 @@ public class Income extends MoneyFlow{
     private static final String INCOME_VALIDATION_REGEX = "^" + INCOME_SIGN_REGEX
             + "(" + UNSIGNED_MONEYFLOW_VALIDATION_REGEX + ")";
 
-    public final String value;
-
     /**
      * Constructs an {@code Income}.
      *
      * @param income A valid income.
      */
     public Income(String income) {
+        super(income);
         requireNonNull(income);
         checkArgument(isValidIncome(income), MESSAGE_INCOME_CONSTRAINTS);
-        value = income;
     }
 
     /**
@@ -44,9 +42,7 @@ public class Income extends MoneyFlow{
     }
 
     @Override
-    public String toString() {
-        return value;
-    }
+    public String toString() { return value; }
 
     @Override
     public boolean equals(Object other) {

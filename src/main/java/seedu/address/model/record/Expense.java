@@ -22,7 +22,6 @@ public class Expense extends MoneyFlow {
     private static final String EXPENSE_VALIDATION_REGEX = "^" + EXPENSE_SIGN_REGEX
             + "(" + UNSIGNED_MONEYFLOW_VALIDATION_REGEX + ")";
 
-    public final String value;
 
     /**
      * Constructs an {@code Expense}.
@@ -30,9 +29,9 @@ public class Expense extends MoneyFlow {
      * @param expense A valid expense.
      */
     public Expense(String expense) {
+        super(expense);
         requireNonNull(expense);
-        checkArgument(isValidExpense(expense), MESSAGE_MONEY_FLOW_CONSTRAINTS);
-        value = expense;
+        checkArgument(isValidExpense(expense), MESSAGE_EXPENSE_CONSTRAINTS);
     }
 
     /**
@@ -43,9 +42,7 @@ public class Expense extends MoneyFlow {
     }
 
     @Override
-    public String toString() {
-        return value;
-    }
+    public String toString() { return value; }
 
     @Override
     public boolean equals(Object other) {

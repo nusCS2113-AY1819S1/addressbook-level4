@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.record.Date;
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.tag.Tag;
 
@@ -66,33 +67,21 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String expense} into an {@code Expense}.
+     * Parses a {@code String moneyFlow} into an {@code Income} or an {@code Expense}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code Expense} is invalid.
+     * @throws ParseException if the given {@code MoneyFlow} is invalid.
      */
-    public static Expense parseExpense(String expense) throws ParseException {
-        requireNonNull(expense);
-        String trimmedExpense = expense.trim();
-        if (!Expense.isValidExpense(trimmedExpense)) {
+    public static MoneyFlow parseMoneyFlow(String moneyFlow) throws ParseException {
+        requireNonNull(moneyFlow);
+        String trimmedMoneyFlow = moneyFlow.trim();
+        if (!Expense.isValidExpense(trimmedMoneyFlow)) {
             throw new ParseException(Expense.MESSAGE_EXPENSE_CONSTRAINTS);
         }
-        return new Expense(trimmedExpense);
-    }
-
-    /**
-     * Parses a {@code String income} into an {@code Income}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code income} is invalid.
-     */
-    public static Income parseIncome(String income) throws ParseException {
-        requireNonNull(income);
-        String trimmedIncome = income.trim();
-        if (!Income.isValidIncome(trimmedIncome)) {
-            throw new ParseException(Income.MESSAGE_INCOME_CONSTRAINTS);
+        if (Expense.isValidExpense(trimmedMoneyFlow)) {
+            return new Expense(trimmedMoneyFlow);
         }
-        return new Income(trimmedIncome);
+        return new Income(trimmedMoneyFlow);
     }
 
     /**

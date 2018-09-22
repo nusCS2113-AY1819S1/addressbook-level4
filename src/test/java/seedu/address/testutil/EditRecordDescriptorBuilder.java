@@ -36,7 +36,7 @@ public class EditRecordDescriptorBuilder {
         descriptor.setName(record.getName());
         descriptor.setDate(record.getDate());
         descriptor.setIncome(record.getIncome());
-        descriptor.setExpense(record.getExpense());
+        descriptor.setMoneyFlow(record.getExpense());
         descriptor.setTags(record.getTags());
     }
 
@@ -68,7 +68,7 @@ public class EditRecordDescriptorBuilder {
      * Sets the {@code Expense} of the {@code EditRecordDescriptor} that we are building.
      */
     public EditRecordDescriptorBuilder withExpense(String expense) {
-        descriptor.setExpense(new Expense(expense));
+        descriptor.setMoneyFlow(new Expense(expense));
         return this;
     }
 

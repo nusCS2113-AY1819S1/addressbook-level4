@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.record.Date;
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
@@ -97,11 +98,10 @@ public class EditCommand extends Command {
 
         Name updatedName = editRecordDescriptor.getName().orElse(recordToEdit.getName());
         Date updatedDate = editRecordDescriptor.getDate().orElse(recordToEdit.getDate());
-        Income updatedIncome = editRecordDescriptor.getIncome().orElse(recordToEdit.getIncome());
-        Expense updatedExpense = editRecordDescriptor.getExpense().orElse(recordToEdit.getExpense());
+        MoneyFlow updatedMoneyFlow = editRecordDescriptor.getMoneyFlow().orElse(recordToEdit.getMoneyFlow());
         Set<Tag> updatedTags = editRecordDescriptor.getTags().orElse(recordToEdit.getTags());
 
-        return new Record(updatedName, updatedDate, updatedIncome, updatedExpense, updatedTags);
+        return new Record(updatedName, updatedDate, updatedMoneyFlow, updatedTags);
     }
 
     @Override
@@ -129,8 +129,7 @@ public class EditCommand extends Command {
     public static class EditRecordDescriptor {
         private Name name;
         private Date date;
-        private Income income;
-        private Expense expense;
+        private MoneyFlow moneyFlow;
         private Set<Tag> tags;
 
         public EditRecordDescriptor() {}
@@ -142,8 +141,7 @@ public class EditCommand extends Command {
         public EditRecordDescriptor(EditRecordDescriptor toCopy) {
             setName(toCopy.name);
             setDate(toCopy.date);
-            setIncome(toCopy.income);
-            setExpense(toCopy.expense);
+            setMoneyFlow(toCopy.moneyFlow);
             setTags(toCopy.tags);
         }
 
@@ -151,7 +149,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date, income, expense, tags);
+            return CollectionUtil.isAnyNonNull(name, date, moneyFlow, tags);
         }
 
         public void setName(Name name) {
@@ -170,20 +168,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(date);
         }
 
-        public void setIncome(Income income) {
-            this.income = income;
+        public void setMoneyFlow(MoneyFlow moneyFlow) {
+            this.moneyFlow = moneyFlow;
         }
 
-        public Optional<Income> getIncome() {
-            return Optional.ofNullable(income);
-        }
-
-        public void setExpense(Expense expense) {
-            this.expense = expense;
-        }
-
-        public Optional<Expense> getExpense() {
-            return Optional.ofNullable(expense);
+        public Optional<MoneyFlow> getMoneyFlow() {
+            return Optional.ofNullable(moneyFlow);
         }
 
         /**
@@ -220,8 +210,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getDate().equals(e.getDate())
-                    && getIncome().equals(e.getIncome())
-                    && getExpense().equals(e.getExpense())
+                    && getMoneyFlow().equals(e.getMoneyFlow())
                     && getTags().equals(e.getTags());
         }
     }

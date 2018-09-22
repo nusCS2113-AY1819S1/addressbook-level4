@@ -1,5 +1,8 @@
 package seedu.address.model.record;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents any form of money flow in a record in the addressbook
  * Guarantees: immutable; is valid as declared in {@link #isValidMoneyFlow(String)}
@@ -31,6 +34,13 @@ public abstract class MoneyFlow {
     public static final String MONEYFLOW_VALIDATION_REGEX = "^" + MONEYFLOW_SIGN_PART_REGEX
             + UNSIGNED_MONEYFLOW_VALIDATION_REGEX;
 
+    public final String value;
+
+    public MoneyFlow(String moneyFlow) {
+        requireNonNull(moneyFlow);
+        checkArgument(isValidMoneyFlow(moneyFlow), MESSAGE_MONEY_FLOW_CONSTRAINTS);
+        this.value = moneyFlow;
+    }
 
     /**
      * Returns if a given string is a valid income.

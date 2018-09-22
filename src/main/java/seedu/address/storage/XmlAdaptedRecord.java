@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.record.Date;
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
@@ -29,9 +30,7 @@ public class XmlAdaptedRecord {
     @XmlElement(required = true)
     private String date;
     @XmlElement(required = true)
-    private String income;
-    @XmlElement(required = true)
-    private String expense;
+    private String moneyFlow;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,11 +44,10 @@ public class XmlAdaptedRecord {
     /**
      * Constructs an {@code XmlAdaptedRecord} with the given record details.
      */
-    public XmlAdaptedRecord(String name, String date, String income, String expense, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedRecord(String name, String date, String moneyFlow, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.date = date;
-        this.income = income;
-        this.expense = expense;
+        this.moneyFlow = moneyFlow;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -63,8 +61,7 @@ public class XmlAdaptedRecord {
     public XmlAdaptedRecord(Record source) {
         name = source.getName().fullName;
         date = source.getDate().value;
-        income = source.getIncome().value;
-        expense = source.getExpense().value;
+        moneyFlow = source.getMoneyFlow().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -97,24 +94,32 @@ public class XmlAdaptedRecord {
         }
         final Date modelDate = new Date(date);
 
-        if (income == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Income.class.getSimpleName()));
+        if (moneyFlow == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MoneyFlow.class.getSimpleName()));
         }
-        if (!Income.isValidIncome(income)) {
-            throw new IllegalValueException(Income.MESSAGE_INCOME_CONSTRAINTS);
+        if (!MoneyFlow.isValidMoneyFlow(moneyFlow)) {
+            throw new IllegalValueException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
         }
-        final Income modelIncome = new Income(income);
-
-        if (expense == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Expense.class.getSimpleName()));
+        // This is a temporary variable to store moneyFlow which will be later assigned to final
+        MoneyFlow tempMoneyFlow = null;
+        try {
+            if (Income.isValidIncome(moneyFlow)) {
+                tempMoneyFlow = new Income(moneyFlow);
+            }
+            if (Expense.isValidExpense(moneyFlow)) {
+                tempMoneyFlow = new Expense(moneyFlow);
+            }
         }
-        if (!Expense.isValidExpense(expense)) {
-            throw new IllegalValueException(Expense.MESSAGE_EXPENSE_CONSTRAINTS);
+        catch (IllegalArgumentException e) {
+            throw e;
         }
-        final Expense modelExpense = new Expense(expense);
+        if (tempMoneyFlow == null) {
+            throw new IllegalValueException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+        }
+        final MoneyFlow modelMoneyFlow = tempMoneyFlow;
 
         final Set<Tag> modelTags = new HashSet<>(recordTags);
-        return new Record(modelName, modelDate, modelIncome, modelExpense, modelTags);
+        return new Record(modelName, modelDate, modelMoneyFlow, modelTags);
     }
 
     @Override
@@ -130,8 +135,7 @@ public class XmlAdaptedRecord {
         XmlAdaptedRecord otherRecord = (XmlAdaptedRecord) other;
         return Objects.equals(name, otherRecord.name)
                 && Objects.equals(date, otherRecord.date)
-                && Objects.equals(income, otherRecord.income)
-                && Objects.equals(expense, otherRecord.expense)
+                && Objects.equals(moneyFlow, otherRecord.moneyFlow)
                 && tagged.equals(otherRecord.tagged);
     }
 }

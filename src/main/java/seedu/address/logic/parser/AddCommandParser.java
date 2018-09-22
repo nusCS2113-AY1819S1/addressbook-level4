@@ -15,6 +15,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.record.Date;
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
@@ -33,18 +34,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_INCOME, PREFIX_EXPENSE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EXPENSE, PREFIX_DATE, PREFIX_INCOME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_EXPENSE, PREFIX_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Income income = ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get());
-        Expense expense = ParserUtil.parseExpense(argMultimap.getValue(PREFIX_EXPENSE).get());
+        MoneyFlow moneyFlow = ParserUtil.parseMoneyFlow(argMultimap.getValue(PREFIX_EXPENSE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Record record = new Record(name, date, income, expense, tagList);
+        Record record = new Record(name, date, moneyFlow, tagList);
 
         return new AddCommand(record);
     }

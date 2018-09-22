@@ -32,7 +32,7 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_INCOME, PREFIX_EXPENSE, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DATE, PREFIX_EXPENSE, PREFIX_TAG);
 
         Index index;
 
@@ -49,11 +49,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editRecordDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
-        if (argMultimap.getValue(PREFIX_INCOME).isPresent()) {
-            editRecordDescriptor.setIncome(ParserUtil.parseIncome(argMultimap.getValue(PREFIX_INCOME).get()));
-        }
         if (argMultimap.getValue(PREFIX_EXPENSE).isPresent()) {
-            editRecordDescriptor.setExpense(ParserUtil.parseExpense(argMultimap.getValue(PREFIX_EXPENSE).get()));
+            editRecordDescriptor.setMoneyFlow(ParserUtil.parseMoneyFlow(argMultimap.getValue(PREFIX_EXPENSE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editRecordDescriptor::setTags);
 
