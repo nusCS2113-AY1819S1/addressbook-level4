@@ -27,7 +27,7 @@ public class TypicalPersons {
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withNote("BENSON sample note")
+            .withNote("Benson sample note")
             .withTags("owesMoney", "friends")
             .build();
     public static final Person CARL = new PersonBuilder()
@@ -49,19 +49,21 @@ public class TypicalPersons {
             .withName("Elle Meyer")
             .withPhone("9482224")
             .withEmail("werner@example.com")
-            .withNote("Alice sample note")
             .withAddress("michegan ave")
+            .withNote("Elle sample note")
             .build();
     public static final Person FIONA = new PersonBuilder()
             .withName("Fiona Kunz")
             .withPhone("9482427")
             .withEmail("lydia@example.com")
+            .withNote("No notes for this contact")
             .withAddress("little tokyo").build();
     public static final Person GEORGE = new PersonBuilder()
             .withName("George Best")
             .withPhone("9482442")
             .withEmail("anna@example.com")
             .withAddress("4th street")
+            .withNote("No notes for this contact")
             .build();
 
     // Manually added
