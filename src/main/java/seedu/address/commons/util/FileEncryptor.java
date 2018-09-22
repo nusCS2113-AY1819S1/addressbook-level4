@@ -14,11 +14,13 @@ import javax.crypto.spec.PBEParameterSpec;
 
 // TODO: Parse username as salt and pad it to make it 8bytes long at least
 // TODO: Encrypt the actual data file and handle the error for sudden dissapearance
+// TODO: Remove the sample generator for when no xml is present
 
 /**
  * File encryptor:
  * Sources:
  * https://stackoverflow.com/questions/13673556/using-password-based-encryption-on-a-file-in-java
+ * Description: Encrypts the file using PBEWithMD5AndDES
  */
 public class FileEncryptor {
 

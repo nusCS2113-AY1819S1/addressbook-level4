@@ -15,6 +15,11 @@ import seedu.address.model.Model;
 
 /**
  * To generate a list of closest matches
+ * Description: We run thru all arguments given together will all the names
+ * (First and last)
+ * Then attach a Levensthein distance to each of them to form a pair
+ * The pairs are then stored in a treemap which we will generate another list
+ * from the first few
  */
 public class ClosestMatchList {
     private int lowestDist = Integer.MAX_VALUE;
@@ -78,7 +83,7 @@ public class ClosestMatchList {
     }
 
     /**
-     * Add the contenst in the tree to a name list
+     * Add the contents in the tree to a name list
      */
     private void addToApprovedNamesList() {
         for (Pair pair: nameMap) {
@@ -92,8 +97,8 @@ public class ClosestMatchList {
 
     /**
      * Bulk of the computation
-     * Runs thru model and generates a tree out of
-     * similarity indexes using levensthein distances
+     * Runs thru model and stores the pairs in a tree out of
+     * similarity indexes using levensthein distances together with nameSegment
      */
     private void generateNameMapFromNames(String[] names, Person person) {
         String fullName = person.getName().fullName;

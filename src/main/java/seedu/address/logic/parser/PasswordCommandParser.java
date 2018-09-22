@@ -2,12 +2,12 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.commands.PasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Password command parser class
+ * Description: Parses the arguments to PasswordCommand class
  */
 public class PasswordCommandParser implements Parser<PasswordCommand> {
 
@@ -31,12 +31,7 @@ public class PasswordCommandParser implements Parser<PasswordCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, PasswordCommand.MESSAGE_USAGE));
         }
 
-
-
-        FileEncryptor fe = new FileEncryptor(credentials[0]);
-        String message = fe.getMessage();
-
-        return new PasswordCommand(message);
+        return new PasswordCommand(credentials);
     }
 
 

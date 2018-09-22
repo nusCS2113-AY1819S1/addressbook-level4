@@ -1,11 +1,12 @@
 package seedu.address.logic.commands;
 
+import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
 /**
- * Encrypts the XML data using a password and returns
- * a message
+ * Encrypts the XML data using a password and returns a message
+ * Message will be displayed on CommandResult
  */
 public class PasswordCommand extends Command {
     public static final String COMMAND_WORD = "password";
@@ -18,9 +19,12 @@ public class PasswordCommand extends Command {
     private String message;
 
     /**
-     * Parses the message from FileEncryptor to be displayed
+     * Executes the FileEncryptor and obtains a message
      */
-    public PasswordCommand (String message) {
+    public PasswordCommand (String[] credentials) {
+        FileEncryptor fe = new FileEncryptor(credentials[0]);
+        String message = fe.getMessage();
+
         this.message = message;
     }
 
@@ -29,6 +33,5 @@ public class PasswordCommand extends Command {
 
         return new CommandResult(this.message);
     }
-
 
 }
