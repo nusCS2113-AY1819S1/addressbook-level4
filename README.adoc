@@ -37,3 +37,4 @@ _Marco Jakob_.
 
 == Licence : link:LICENSE[MIT]
 
+* This is a Travis Documentation Test
