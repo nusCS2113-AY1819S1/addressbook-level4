@@ -31,15 +31,6 @@ public class CommandParserTestUtil {
         }
     }
 
-    public static void assertParseSuccess(String userInput, AddCommand expectedCommand){
-        try {
-            AddCommand read = new AddCommandParser().parse(userInput);
-            assertEquals(expectedCommand.peekPerson(), read.peekPerson());
-        } catch (ParseException pe){
-            throw new IllegalArgumentException("Invalid userInput.", pe);
-        }
-    }
-
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is unsuccessful and the error message
      * equals to {@code expectedMessage}.

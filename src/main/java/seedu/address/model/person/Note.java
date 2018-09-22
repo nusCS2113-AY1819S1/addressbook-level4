@@ -29,6 +29,13 @@ public class Note {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Note // instanceof handles nulls
+                && value.equals(((Note) other).value)); // state check
+    }
+
+    @Override
     public int hashCode() {
         return value.hashCode();
     }
