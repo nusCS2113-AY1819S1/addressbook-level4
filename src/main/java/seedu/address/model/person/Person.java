@@ -117,7 +117,7 @@ public class Person {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
-                .append(" Description: ")
+                .append(" Note: ")
                 .append(getNote())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

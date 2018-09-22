@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
+
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -96,8 +98,7 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-    public static Note parseNote(String note) throws ParseException {
-        requireNonNull(note);
+    public static Note parseNote(String note) throws ParseException, NoSuchElementException{
         String trimmedNote = note.trim();
         if (!Note.isValidNote(trimmedNote)) {
             throw new ParseException(Note.MESSAGE_NOTE_CONSTRAINTS);

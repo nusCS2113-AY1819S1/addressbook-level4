@@ -118,15 +118,16 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final Note modelNote;
         if (note == null) {
-            note = "No note added.";
+            modelNote = new Note();
         }
-        if (!Note.isValidNote(note)) {
+        else if (!Note.isValidNote(note)) {
             throw new IllegalValueException(Note.MESSAGE_NOTE_CONSTRAINTS);
         }
-        final Note modelNote = new Note(note);
-
-
+        else{
+            modelNote = new Note(note);
+        }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNote, modelTags);

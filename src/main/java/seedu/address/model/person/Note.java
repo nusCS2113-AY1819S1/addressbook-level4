@@ -4,10 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 public class Note {
-    public static final String MESSAGE_NOTE_CONSTRAINTS = "The note should be alphanumeric";
-    public static final String DESCRIPTION_VALIDATION_REGEX = "^[A-Za-z0-9- -.]+$";
-
+    public static final String MESSAGE_NOTE_CONSTRAINTS = "Notes or Descriptions should only contain alphanumeric characters and spaces";
+    public static final String NOTE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String NOTE_NOT_PROVIDED = "No notes for this contact";
     public final String value;
+
+    public Note(){
+        value = NOTE_NOT_PROVIDED;
+    }
 
     public Note(String note){
         requireNonNull(note);
@@ -16,7 +20,7 @@ public class Note {
     }
 
     public static boolean isValidNote (String test) {
-        return test.matches(DESCRIPTION_VALIDATION_REGEX);
+        return test.matches(NOTE_VALIDATION_REGEX);
     }
 
     @Override

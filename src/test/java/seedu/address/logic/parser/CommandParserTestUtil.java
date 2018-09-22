@@ -2,6 +2,14 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -19,6 +27,15 @@ public class CommandParserTestUtil {
             Command command = parser.parse(userInput);
             assertEquals(expectedCommand, command);
         } catch (ParseException pe) {
+            throw new IllegalArgumentException("Invalid userInput.", pe);
+        }
+    }
+
+    public static void assertParseSuccess(String userInput, AddCommand expectedCommand){
+        try {
+            AddCommand read = new AddCommandParser().parse(userInput);
+            assertEquals(expectedCommand.peekPerson(), read.peekPerson());
+        } catch (ParseException pe){
             throw new IllegalArgumentException("Invalid userInput.", pe);
         }
     }

@@ -46,6 +46,13 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
+    /**
+     * Peeks at the person to add {@code Person}
+     */
+    public String peekPerson(){
+        return toAdd.toString();
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
