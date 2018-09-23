@@ -24,7 +24,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -124,7 +124,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getPersonList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
         /* --------------------- Performing edit operation while a event card is selected -------------------------- */
 
@@ -153,7 +153,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredPersonList().size() + 1;
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
         /* Case: missing index -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + NAME_DESC_BOB,
@@ -235,7 +235,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
             Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
         expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedEvent);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_EVENTS);
 
         assertCommandSuccess(command, expectedModel,
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedEvent), expectedSelectedCardIndex);
@@ -266,7 +266,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_EVENTS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {

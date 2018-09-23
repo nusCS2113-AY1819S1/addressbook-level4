@@ -1,9 +1,9 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getPerson;
@@ -33,7 +33,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased() + "       ";
         Event deletedEvent = removePerson(expectedModel, INDEX_FIRST_PERSON);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedEvent);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last event in the list -> deleted */
@@ -70,7 +70,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getPersonList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
         /* --------------------- Performing delete operation while a event card is selected ------------------------ */
 
@@ -82,7 +82,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         selectPerson(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         deletedEvent = removePerson(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedEvent);
+        expectedResultMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
@@ -99,7 +99,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         Index outOfBoundsIndex = Index.fromOneBased(
                 getModel().getAddressBook().getPersonList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
-        assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(command, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
@@ -129,7 +129,7 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
         Event deletedEvent = removePerson(expectedModel, toDelete);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedEvent);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvent);
 
         assertCommandSuccess(
                 DeleteCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel, expectedResultMessage);

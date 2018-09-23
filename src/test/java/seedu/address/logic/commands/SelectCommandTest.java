@@ -47,7 +47,7 @@ public class SelectCommandTest {
     public void execute_invalidIndexUnfilteredList_failure() {
         Index outOfBoundsIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -67,7 +67,7 @@ public class SelectCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
-        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
 
     @Test
@@ -98,7 +98,7 @@ public class SelectCommandTest {
      */
     private void assertExecutionSuccess(Index index) {
         SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS, index.getOneBased());
+        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_EVENT_SUCCESS, index.getOneBased());
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 
