@@ -61,14 +61,14 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
         /* Case: filtered event list, delete index within bounds of address book and event list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredEventList().size());
         assertCommandSuccess(index);
 
         /* Case: filtered event list, delete index within bounds of address book but out of bounds of event list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getEventManager().getEventList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
@@ -97,7 +97,7 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getPersonList().size() + 1);
+                getModel().getEventManager().getEventList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
@@ -117,7 +117,7 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
      */
     private Event removePerson(Model model, Index index) {
         Event targetEvent = getPerson(model, index);
-        model.deletePerson(targetEvent);
+        model.deleteEvent(targetEvent);
         return targetEvent;
     }
 

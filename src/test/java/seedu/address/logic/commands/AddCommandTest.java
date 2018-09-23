@@ -18,7 +18,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.PersonBuilder;
 
@@ -89,67 +89,67 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Event event) {
+        public void addEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyEventManager newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyEventManager getEventManager() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Event event) {
+        public boolean hasEvent(Event event) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Event target) {
+        public void deleteEvent(Event target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Event target, Event editedEvent) {
+        public void updateEvent(Event target, Event editedEvent) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Event> getFilteredPersonList() {
+        public ObservableList<Event> getFilteredEventList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Event> predicate) {
+        public void updateFilteredEventList(Predicate<Event> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoEventManager() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoEventManager() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoEventManager() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoEventManager() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEventManager() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -166,7 +166,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Event event) {
+        public boolean hasEvent(Event event) {
             requireNonNull(event);
             return this.event.isSameEvent(event);
         }
@@ -179,24 +179,24 @@ public class AddCommandTest {
         final ArrayList<Event> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Event event) {
+        public boolean hasEvent(Event event) {
             requireNonNull(event);
             return personsAdded.stream().anyMatch(event::isSameEvent);
         }
 
         @Override
-        public void addPerson(Event event) {
+        public void addEvent(Event event) {
             requireNonNull(event);
             personsAdded.add(event);
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitEventManager() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyEventManager getEventManager() {
             return new EventManager();
         }
     }

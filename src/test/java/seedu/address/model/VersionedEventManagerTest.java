@@ -18,10 +18,10 @@ import seedu.address.testutil.AddressBookBuilder;
 
 public class VersionedEventManagerTest {
 
-    private final ReadOnlyAddressBook addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyAddressBook addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyAddressBook addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyAddressBook emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyEventManager addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
+    private final ReadOnlyEventManager addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
+    private final ReadOnlyEventManager addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
+    private final ReadOnlyEventManager emptyAddressBook = new AddressBookBuilder().build();
 
     @Test
     public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
@@ -241,9 +241,9 @@ public class VersionedEventManagerTest {
      * and states after {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
      */
     private void assertAddressBookListStatus(VersionedEventManager versionedAddressBook,
-                                             List<ReadOnlyAddressBook> expectedStatesBeforePointer,
-                                             ReadOnlyAddressBook expectedCurrentState,
-                                             List<ReadOnlyAddressBook> expectedStatesAfterPointer) {
+                                             List<ReadOnlyEventManager> expectedStatesBeforePointer,
+                                             ReadOnlyEventManager expectedCurrentState,
+                                             List<ReadOnlyEventManager> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
         assertEquals(new EventManager(versionedAddressBook), expectedCurrentState);
 
@@ -253,13 +253,13 @@ public class VersionedEventManagerTest {
         }
 
         // check states before pointer are correct
-        for (ReadOnlyAddressBook expectedAddressBook : expectedStatesBeforePointer) {
+        for (ReadOnlyEventManager expectedAddressBook : expectedStatesBeforePointer) {
             assertEquals(expectedAddressBook, new EventManager(versionedAddressBook));
             versionedAddressBook.redo();
         }
 
         // check states after pointer are correct
-        for (ReadOnlyAddressBook expectedAddressBook : expectedStatesAfterPointer) {
+        for (ReadOnlyEventManager expectedAddressBook : expectedStatesAfterPointer) {
             versionedAddressBook.redo();
             assertEquals(expectedAddressBook, new EventManager(versionedAddressBook));
         }
@@ -275,7 +275,7 @@ public class VersionedEventManagerTest {
      * Creates and returns a {@code VersionedEventManager} with the {@code addressBookStates} added into it, and the
      * {@code VersionedEventManager#currentStatePointer} at the end of list.
      */
-    private VersionedEventManager prepareAddressBookList(ReadOnlyAddressBook... addressBookStates) {
+    private VersionedEventManager prepareAddressBookList(ReadOnlyEventManager... addressBookStates) {
         assertFalse(addressBookStates.length == 0);
 
         VersionedEventManager versionedAddressBook = new VersionedEventManager(addressBookStates[0]);

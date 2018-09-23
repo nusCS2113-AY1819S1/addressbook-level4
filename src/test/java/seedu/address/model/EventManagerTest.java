@@ -32,7 +32,7 @@ public class EventManagerTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), eventManager.getPersonList());
+        assertEquals(Collections.emptyList(), eventManager.getEventList());
     }
 
     @Test
@@ -54,7 +54,7 @@ public class EventManagerTest {
         Event editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Event> newEvents = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newEvents);
+        EventManagerStub newData = new EventManagerStub(newEvents);
 
         thrown.expect(DuplicatePersonException.class);
         eventManager.resetData(newData);
@@ -88,21 +88,21 @@ public class EventManagerTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        eventManager.getPersonList().remove(0);
+        eventManager.getEventList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose events list can violate interface constraints.
+     * A stub ReadOnlyEventManager whose events list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class EventManagerStub implements ReadOnlyEventManager {
         private final ObservableList<Event> events = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Event> events) {
+        EventManagerStub(Collection<Event> events) {
             this.events.setAll(events);
         }
 
         @Override
-        public ObservableList<Event> getPersonList() {
+        public ObservableList<Event> getEventList() {
             return events;
         }
     }

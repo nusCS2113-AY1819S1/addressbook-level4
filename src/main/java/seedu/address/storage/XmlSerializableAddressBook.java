@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.EventManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 
 /**
@@ -34,9 +34,9 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableAddressBook(ReadOnlyEventManager src) {
         this();
-        events.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        events.addAll(src.getEventList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**

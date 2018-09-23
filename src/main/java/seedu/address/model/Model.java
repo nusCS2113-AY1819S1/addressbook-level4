@@ -13,66 +13,66 @@ public interface Model {
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyEventManager newData);
 
     /** Returns the EventManager */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyEventManager getEventManager();
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the address book.
+     * Returns true if a event with the same identity as {@code event} exists in the event manager.
      */
-    boolean hasPerson(Event event);
+    boolean hasEvent(Event event);
 
     /**
      * Deletes the given event.
-     * The event must exist in the address book.
+     * The event must exist in the event manager.
      */
-    void deletePerson(Event target);
+    void deleteEvent(Event target);
 
     /**
      * Adds the given event.
-     * {@code event} must not already exist in the address book.
+     * {@code event} must not already exist in the event manager.
      */
-    void addPerson(Event event);
+    void addEvent(Event event);
 
     /**
      * Replaces the given event {@code target} with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * {@code target} must exist in the event manager.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the event manager.
      */
-    void updatePerson(Event target, Event editedEvent);
+    void updateEvent(Event target, Event editedEvent);
 
     /** Returns an unmodifiable view of the filtered event list */
-    ObservableList<Event> getFilteredPersonList();
+    ObservableList<Event> getFilteredEventList();
 
     /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Event> predicate);
+    void updateFilteredEventList(Predicate<Event> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous event manager states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoEventManager();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone event manager states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoEventManager();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's event manager to its previous state.
      */
-    void undoAddressBook();
+    void undoEventManager();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's event manager to its previously undone state.
      */
-    void redoAddressBook();
+    void redoEventManager();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current event manager state for undo/redo.
      */
-    void commitAddressBook();
+    void commitEventManager();
 }

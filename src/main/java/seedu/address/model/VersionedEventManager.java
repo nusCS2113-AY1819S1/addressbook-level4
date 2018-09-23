@@ -8,10 +8,10 @@ import java.util.List;
  */
 public class VersionedEventManager extends EventManager {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private final List<ReadOnlyEventManager> addressBookStateList;
     private int currentStatePointer;
 
-    public VersionedEventManager(ReadOnlyAddressBook initialState) {
+    public VersionedEventManager(ReadOnlyEventManager initialState) {
         super(initialState);
 
         addressBookStateList = new ArrayList<>();

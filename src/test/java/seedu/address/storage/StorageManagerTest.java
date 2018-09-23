@@ -17,7 +17,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.EventManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
@@ -65,7 +65,7 @@ public class StorageManagerTest {
          */
         EventManager original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        ReadOnlyEventManager retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new EventManager(retrieved));
     }
 
@@ -94,7 +94,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        public void saveAddressBook(ReadOnlyEventManager addressBook, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
