@@ -22,7 +22,7 @@ public class PasswordCommand extends Command {
      * Executes the FileEncryptor and obtains a message
      */
     public PasswordCommand (String[] credentials) {
-        FileEncryptor fe = new FileEncryptor(credentials[0]);
+        FileEncryptor fe = new FileEncryptor(credentials[0], "data/addressbook.xml");
         String message = fe.getMessage();
 
         this.message = message;

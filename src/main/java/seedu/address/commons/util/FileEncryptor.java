@@ -25,7 +25,7 @@ import javax.crypto.spec.PBEParameterSpec;
 public class FileEncryptor {
 
     private static String extension = ".encrypted";
-    private static String filename = "data/addressbook.xml";
+    private static String filename = "";
     private static String message = "";
 
     private static final byte[] salt = {
@@ -37,7 +37,9 @@ public class FileEncryptor {
      * Encrypts or decrypts file with password
      * will also check if file is present first
      */
-    public FileEncryptor (String password) {
+    public FileEncryptor (String password, String inputFileName) {
+        this.filename = inputFileName;
+
         File f = new File(filename);
         File fEncrypted = new File(filename + extension);
 
