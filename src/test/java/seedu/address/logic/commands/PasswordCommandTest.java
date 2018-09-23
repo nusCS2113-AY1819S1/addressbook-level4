@@ -18,36 +18,31 @@ import seedu.address.commons.util.FileEncryptor;
 public class PasswordCommandTest {
 
     private String password = "test1234";
-    private String tempFileName = "test";
-    private String tempFileSuffix = ".tmp";
+    private String tempFileName = "test.tmp";
     private String toWrite = "Hello";
 
     /**
      * Encryption and decryption test command
      */
     @Test
-    public void encryptDecryptTest () {
-        try {
-            File tmpFile = new File(tempFileName, tempFileSuffix);
-            FileWriter writer = new FileWriter(tmpFile);
-            writer.write(toWrite);
-            writer.close();
+    public void encryptDecryptTest () throws IOException{
+        File tmpFile = new File(tempFileName);
+        FileWriter writer = new FileWriter(tmpFile);
+        writer.write(toWrite);
+        writer.close();
 
-            FileEncryptor feEncrypt = new FileEncryptor(password, tempFileName + tempFileSuffix);
-            assertEquals("File encrypted!", feEncrypt.getMessage());
-
-
-            FileEncryptor feDecrypt = new FileEncryptor(password, tempFileName + tempFileSuffix);
-            assertEquals("File decrypted!", feDecrypt.getMessage());
+        FileEncryptor feEncrypt = new FileEncryptor(password, tempFileName);
+        assertEquals("File encrypted!", feEncrypt.getMessage());
 
 
-            BufferedReader reader = new BufferedReader(new FileReader(tempFileName + tempFileSuffix));
-            assertEquals(toWrite, reader.readLine());
-            reader.close();
+        FileEncryptor feDecrypt = new FileEncryptor(password, tempFileName);
+        assertEquals("File decrypted!", feDecrypt.getMessage());
 
-            tmpFile.delete(); // Delete and end off
-        } catch (IOException ioe) {
 
-        }
+        BufferedReader reader = new BufferedReader(new FileReader(tempFileName));
+        assertEquals(toWrite, reader.readLine());
+        reader.close();
+
+        tmpFile.delete(); // Delete and end off
     }
 }
