@@ -49,10 +49,10 @@ Responsibilities: UI
 '''
 
 === Jomari Cruz
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+image::jomcruz93.jpg[width="150", align="left"]
+{empty}[http://github.com/jomcruz93[github]] [<<jomcruz93#, portfolio>>]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: TBD
 
 '''
