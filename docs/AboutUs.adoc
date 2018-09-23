@@ -25,7 +25,7 @@ Responsibilities: Ensure product deliverables are up to scratch, and that all de
 image::harriuscai.jpg[width="150", align="left"]
 {empty}[https://github.com/harriuscai[github]] [<<harriuscai#, portfolio>>]
 
-Role: Developer
+Role: Developer +
 Responsibilities: TBD
 
 '''
