@@ -28,8 +28,10 @@ public class AutoCompleteParser {
 
         if (arguments.isEmpty()) {
             return CommandCompleter.COMPLETE_COMMAND;
+        } else {
+
         }
 
-        return CommandCompleter.COMPLETE_ADDRESS;
+        return arguments;
     }
 }

@@ -117,13 +117,18 @@ public class CommandCompleter {
      * @return predicted list of text
      */
     public ArrayList<String> predictText(String textInput) {
-        String out;
+        String out = "";
         try {
             out = parser.parseCommand(textInput);
             System.out.println("out = " + out);
         } catch (ParseException e) {
             System.out.print("Wrong command format");
         }
-        return commandTrie.getPredictList(textInput);
+
+        if (out.equals(COMPLETE_COMMAND)) {
+            return commandTrie.getPredictList(textInput);
+        }
+
+        return addressTrie.getPredictList(out.trim());
     }
 }
