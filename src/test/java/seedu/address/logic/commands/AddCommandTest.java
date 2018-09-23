@@ -56,7 +56,7 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithPerson(validEvent);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_EVENT);
         addCommand.execute(modelStub, commandHistory);
     }
 

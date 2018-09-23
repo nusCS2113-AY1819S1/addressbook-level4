@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Event;
 
 /**
- * Selects a event identified using it's displayed index from the address book.
+ * Selects a event identified using it's displayed index from the event manager.
  */
 public class SelectCommand extends Command {
 
@@ -25,7 +25,7 @@ public class SelectCommand extends Command {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Event: %1$s";
+    public static final String MESSAGE_SELECT_EVENT_SUCCESS = "Selected Event: %1$s";
 
     private final Index targetIndex;
 
@@ -40,11 +40,11 @@ public class SelectCommand extends Command {
         List<Event> filteredEventList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= filteredEventList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_SELECT_EVENT_SUCCESS, targetIndex.getOneBased()));
 
     }
 
