@@ -20,6 +20,8 @@ but cannot inherit from multiple classes/ abstract classes
 
 - java interfaces do not allow you to create private methods/ attributes unlike classes
 
+- Both interface and abstract classes **cannot be instantiated**
+
 ### Abstract vs concrete classes
 #### Abstract class
 - A class can be an abstract class without having any methods inside it. But if it has any methods inside it, 
@@ -33,6 +35,10 @@ it must have at least one abstract method. This rule does not apply to static me
 
 #### Concrete class
 A concrete class is complete in itself and can extend and can be extended by any class.
+
+- Static members are also allowed
+
+- Does not allow **method signatures** unlike abstract classes
 
 - The only condition is that all the methods have to be implemented (if it extends or implements others) 
 in order for it to qualify as a concrete class.
