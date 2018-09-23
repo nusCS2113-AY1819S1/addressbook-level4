@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Record in the expense book.
+ * Represents a Record in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Record {

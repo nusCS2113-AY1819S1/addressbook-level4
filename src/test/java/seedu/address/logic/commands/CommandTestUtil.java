@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -38,14 +38,14 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_AMY;
     public static final String DATE_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_BOB;
-    public static final String MONEYFLOW_INCOME_DESC_AMY = " " + PREFIX_EXPENSE + VALID_MONEYFLOW_INCOME_AMY;
-    public static final String MONEYFLOW_EXPENSE_DESC_BOB = " " + PREFIX_EXPENSE + VALID_MONEYFLOW_EXPENSE_BOB;
+    public static final String MONEYFLOW_INCOME_DESC_AMY = " " + PREFIX_MONEYFLOW + VALID_MONEYFLOW_INCOME_AMY;
+    public static final String MONEYFLOW_EXPENSE_DESC_BOB = " " + PREFIX_MONEYFLOW + VALID_MONEYFLOW_EXPENSE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "911a"; // alphabets not allowed in date
-    public static final String INVALID_MONEYFLOW_DESC = " " + PREFIX_EXPENSE + "11."; // missing digit after decimal point
+    public static final String INVALID_MONEYFLOW_DESC = " " + PREFIX_MONEYFLOW + "11."; // missing digit after decimal point
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

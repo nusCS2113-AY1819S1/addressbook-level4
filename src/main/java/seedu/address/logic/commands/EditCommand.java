@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECORDS;
@@ -39,16 +38,15 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_INCOME + "INCOME] "
-            + "[" + PREFIX_EXPENSE + "EXPENSE] "
+            + "[" + PREFIX_MONEYFLOW + "MONEYFLOW] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "91234567 "
-            + PREFIX_INCOME + "4.50";
+            + PREFIX_DATE + "10-10-2017 "
+            + PREFIX_MONEYFLOW + "+4.50";
 
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited Record: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the expense book.";
+    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the address book.";
 
     private final Index index;
     private final EditRecordDescriptor editRecordDescriptor;
