@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.trie.Trie;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -14,14 +15,16 @@ import seedu.address.model.person.Person;
 public class CommandCompleter {
 
     /** Constants for Trie matching */
-    private static final String COMPLETE_ADDRESS = "address";
-    private static final String COMPLETE_COMMAND = "command";
-    private static final String COMPLETE_EMAIL = "email";
-    private static final String COMPLETE_NAME = "name";
-    private static final String COMPLETE_PHONE = "phone";
+    public static final String COMPLETE_ADDRESS = "address";
+    public static final String COMPLETE_COMMAND = "command";
+    public static final String COMPLETE_EMAIL = "email";
+    public static final String COMPLETE_NAME = "name";
+    public static final String COMPLETE_PHONE = "phone";
 
     /** Model instance to access data */
     private Model model;
+
+    private AutoCompleteParser parser;
 
     /**
      * Trie instances for various commands and arguments.
@@ -47,6 +50,7 @@ public class CommandCompleter {
      */
     public CommandCompleter(Model model) {
         this.model = model;
+        this.parser = new AutoCompleteParser();
         this.commandList = new ArrayList<>();
         this.nameList = new ArrayList<>();
         this.phoneList = new ArrayList<>();
@@ -113,6 +117,13 @@ public class CommandCompleter {
      * @return predicted list of text
      */
     public ArrayList<String> predictText(String textInput) {
+        String out;
+        try {
+            out = parser.parseCommand(textInput);
+            System.out.println("out = " + out);
+        } catch (ParseException e) {
+            System.out.print("Wrong command format");
+        }
         return commandTrie.getPredictList(textInput);
     }
 }

@@ -169,7 +169,7 @@ public class CommandBox extends UiPart<Region> {
      * @param textInput the prefix to the predictions to concatenate with
      */
     private void handlePredictions(ArrayList<String> input, String textInput) {
-        if (input.size() <= 1) {
+        if (input.size() == 1) {
             commandTextField.appendText(input.get(0));
         } else {
             StringBuilder output = new StringBuilder();
