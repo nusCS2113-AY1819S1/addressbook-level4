@@ -46,8 +46,8 @@ public class UniqueRecordListTest {
     @Test
     public void contains_recordWithSameIdentityFieldsInList_returnsTrue() {
         uniqueRecordList.add(INDO);
-        Record editedAlice = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
+        Record editedAlice = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(uniqueRecordList.contains(editedAlice));
     }
 

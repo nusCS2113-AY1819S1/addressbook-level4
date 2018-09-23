@@ -65,8 +65,7 @@ public class RecordBuilder {
     public RecordBuilder withMoneyFlow(String moneyFlow) {
         if (Expense.isValidExpense(moneyFlow)) {
             this.moneyFlow = new Expense(moneyFlow);
-        }
-        else if (Income.isValidIncome(moneyFlow)) {
+        } else if (Income.isValidIncome(moneyFlow)) {
             this.moneyFlow = new Income(moneyFlow);
         }
         return this;

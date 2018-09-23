@@ -45,7 +45,8 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "911a"; // alphabets not allowed in date
-    public static final String INVALID_MONEYFLOW_DESC = " " + PREFIX_MONEYFLOW + "11."; // missing digit after decimal point
+    public static final String INVALID_MONEYFLOW_DESC = " "
+            + PREFIX_MONEYFLOW + "11."; // missing digit after decimal point
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -58,8 +59,8 @@ public class CommandTestUtil {
         DESC_AMY = new EditRecordDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withDate(VALID_DATE_AMY).withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditRecordDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withDate(VALID_DATE_BOB).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-                .build();
+                .withDate(VALID_DATE_BOB).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
+                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**

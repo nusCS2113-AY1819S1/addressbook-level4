@@ -45,7 +45,8 @@ public class RecordUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.value).append(" "));
-        descriptor.getMoneyFlow().ifPresent(moneyFlow -> sb.append(PREFIX_MONEYFLOW).append(moneyFlow.value).append(" "));
+        descriptor.getMoneyFlow().ifPresent(moneyFlow -> sb.append(PREFIX_MONEYFLOW)
+                .append(moneyFlow.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

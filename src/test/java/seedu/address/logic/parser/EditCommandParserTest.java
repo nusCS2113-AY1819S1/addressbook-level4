@@ -77,11 +77,13 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_DATE_DESC, Date.MESSAGE_DATE_CONSTRAINTS); // invalid date
-        assertParseFailure(parser, "1" + INVALID_MONEYFLOW_DESC, Income.MESSAGE_MONEY_FLOW_CONSTRAINTS); // invalid moneyflow
+        assertParseFailure(parser, "1"
+                + INVALID_MONEYFLOW_DESC, Income.MESSAGE_MONEY_FLOW_CONSTRAINTS); // invalid moneyflow
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
         // invalid date followed by valid income
-        assertParseFailure(parser, "1" + INVALID_DATE_DESC + MONEYFLOW_INCOME_DESC_AMY, Date.MESSAGE_DATE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + INVALID_DATE_DESC + MONEYFLOW_INCOME_DESC_AMY,
+                Date.MESSAGE_DATE_CONSTRAINTS);
 
         // valid date followed by invalid date. The test case for invalid date followed by valid date
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
@@ -89,12 +91,15 @@ public class EditCommandParserTest {
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Record} being edited,
         // parsing it together with a valid tag results in error
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_TAG_CONSTRAINTS);
-        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_DESC_HUSBAND + TAG_EMPTY,
+                Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_DESC_FRIEND + TAG_EMPTY + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND,
+                Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MONEYFLOW_DESC  + VALID_DATE_AMY,
+        assertParseFailure(parser, "1" + INVALID_NAME_DESC + INVALID_MONEYFLOW_DESC + VALID_DATE_AMY,
                 Name.MESSAGE_NAME_CONSTRAINTS);
     }
 

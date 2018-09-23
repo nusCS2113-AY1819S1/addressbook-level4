@@ -93,7 +93,8 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         index = INDEX_SECOND_RECORD;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + DATE_DESC_AMY
                 + MONEYFLOW_INCOME_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedRecord = new RecordBuilder(BOB).withDate(VALID_DATE_AMY).withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).build();
+        editedRecord = new RecordBuilder(BOB).withDate(VALID_DATE_AMY)
+                .withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).build();
         assertCommandSuccess(command, index, editedRecord);
 
         /* Case: clear tags -> cleared */

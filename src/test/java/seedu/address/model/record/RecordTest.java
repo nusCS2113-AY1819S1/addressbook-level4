@@ -35,7 +35,8 @@ public class RecordTest {
         assertFalse(INDO.isSameRecord(null));
 
         // different date parameter and income -> returns false
-        Record editedIndo = new RecordBuilder(INDO).withDate(VALID_DATE_BOB).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB).build();
+        Record editedIndo = new RecordBuilder(INDO).withDate(VALID_DATE_BOB)
+                .withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB).build();
         assertFalse(INDO.isSameRecord(editedIndo));
 
         // different name -> returns false
