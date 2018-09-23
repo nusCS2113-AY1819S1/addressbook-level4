@@ -12,7 +12,7 @@ import seedu.address.model.event.UniqueEventList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameEvent comparison)
  */
-public class EventManager implements ReadOnlyAddressBook {
+public class EventManager implements ReadOnlyEventManager {
 
     private final UniqueEventList events;
 
@@ -32,7 +32,7 @@ public class EventManager implements ReadOnlyAddressBook {
     /**
      * Creates an EventManager using the Events in the {@code toBeCopied}
      */
-    public EventManager(ReadOnlyAddressBook toBeCopied) {
+    public EventManager(ReadOnlyEventManager toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,7 +50,7 @@ public class EventManager implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code EventManager} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyEventManager newData) {
         requireNonNull(newData);
 
         setEvents(newData.getPersonList());

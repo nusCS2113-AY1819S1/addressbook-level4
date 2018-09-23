@@ -13,10 +13,10 @@ public interface Model {
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyEventManager newData);
 
     /** Returns the EventManager */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyEventManager getAddressBook();
 
     /**
      * Returns true if a event with the same identity as {@code event} exists in the address book.
