@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Timetable Deconflicter (TBC) - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,9 +12,9 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-W13-1/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `W13-1`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
