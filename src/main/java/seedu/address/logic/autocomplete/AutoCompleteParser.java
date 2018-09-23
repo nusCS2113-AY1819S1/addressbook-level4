@@ -17,6 +17,15 @@ public class AutoCompleteParser {
      */
     private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    AutoCompleteArgumentsParser argumentsParser;
+
+    /**
+     * Default constructor
+     */
+    public AutoCompleteParser() {
+        argumentsParser = new AutoCompleteArgumentsParser();
+    }
+
     public String parseCommand(String textInput) throws ParseException{
         final Matcher matcher = COMMAND_INPUT_FORMAT.matcher(textInput);
         if (!matcher.matches()) {
@@ -29,7 +38,8 @@ public class AutoCompleteParser {
         if (arguments.isEmpty()) {
             return CommandCompleter.COMPLETE_COMMAND;
         } else {
-
+            String output = argumentsParser.parseArguments(arguments);
+            System.out.println(output);
         }
 
         return arguments;

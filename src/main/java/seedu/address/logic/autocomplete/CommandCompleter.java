@@ -120,7 +120,6 @@ public class CommandCompleter {
         String out = "";
         try {
             out = parser.parseCommand(textInput);
-            System.out.println("out = " + out);
         } catch (ParseException e) {
             System.out.print("Wrong command format");
         }
