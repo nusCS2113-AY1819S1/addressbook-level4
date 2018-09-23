@@ -31,11 +31,11 @@ Responsibilities: Data
 '''
 
 === Gian Zhi Cai
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+image::zackyboi.png[width="150", align="left"]
+{empty}[https://github.com/zhicaizack[github]] [<<zhicaizack#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: Help out with Git and IntelliJ, making sure the project can run on everyone's PC.
 
 '''
 
