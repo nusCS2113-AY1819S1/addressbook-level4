@@ -225,8 +225,8 @@ public class VersionedEventManagerTest {
         assertFalse(versionedAddressBook.equals(1));
 
         // different state list -> returns false
-        VersionedEventManager differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
-        assertFalse(versionedAddressBook.equals(differentAddressBookList));
+        VersionedEventManager differentEManagerList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
+        assertFalse(versionedAddressBook.equals(differentEManagerList));
 
         // different current pointer index -> returns false
         VersionedEventManager differentCurrentStatePointer = prepareAddressBookList(
