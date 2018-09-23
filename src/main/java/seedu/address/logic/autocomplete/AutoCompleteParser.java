@@ -1,13 +1,13 @@
 package seedu.address.logic.autocomplete;
 
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses the text input for auto completing the command
