@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.EventManager;
 import seedu.address.model.event.Event;
 
 /**
@@ -60,12 +60,12 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code EventManager} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static EventManager getTypicalAddressBook() {
+        EventManager ab = new EventManager();
         for (Event event : getTypicalPersons()) {
-            ab.addPerson(event);
+            ab.addEvent(event);
         }
         return ab;
     }
