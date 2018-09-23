@@ -31,7 +31,7 @@ Responsibilities: Data
 '''
 
 === Gian Zhi Cai
-image::zackyboi.png[width="150", align="left"]
+image::zhicaizack.png[width="150", align="left"]
 {empty}[https://github.com/zhicaizack[github]] [<<zhicaizack#, portfolio>>]
 
 Role: Developer +
