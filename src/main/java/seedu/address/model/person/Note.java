@@ -8,7 +8,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidNote(String)}
  */
 public class Note {
-    public static final String MESSAGE_NOTE_CONSTRAINTS = "Notes or Descriptions should only contain alphanumeric characters and spaces";
+
+    public static final String MESSAGE_NOTE_CONSTRAINTS =
+            "Notes or Descriptions should only contain alphanumeric characters and spaces";
     public static final String NOTE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public static final String NOTE_NOT_PROVIDED = "No notes for this contact";
 
