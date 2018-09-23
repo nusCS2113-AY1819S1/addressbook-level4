@@ -121,11 +121,11 @@ public class CommandCompleter {
         try {
             AutoCompleteParserPair pair = parser.parseCommand(textInput);
             switch(pair.parseType) {
-                case COMPLETE_COMMAND:
-                    return commandTrie.getPredictList(pair.parseValue);
-                case COMPLETE_NAME:
-                    return nameTrie.getPredictList(pair.parseValue);
-                default:
+            case COMPLETE_COMMAND:
+                return commandTrie.getPredictList(pair.parseValue);
+            case COMPLETE_NAME:
+                return nameTrie.getPredictList(pair.parseValue);
+            default:
             }
         } catch (ParseException e) {
             System.out.print("Wrong command format");

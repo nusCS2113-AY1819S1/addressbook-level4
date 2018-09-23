@@ -27,7 +27,13 @@ public class AutoCompleteParser {
         argumentsParser = new AutoCompleteArgumentsParser();
     }
 
-    public AutoCompleteParserPair parseCommand(String textInput) throws ParseException{
+    /**
+     * Parses the command to be used for auto completing of commands
+     * @param textInput text to be parsed
+     * @return a pair of values to be used to determine the Trie to use for auto complete
+     * @throws ParseException if the user input does not conform the expected format
+     */
+    public AutoCompleteParserPair parseCommand(String textInput) throws ParseException {
         final Matcher matcher = COMMAND_INPUT_FORMAT.matcher(textInput);
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

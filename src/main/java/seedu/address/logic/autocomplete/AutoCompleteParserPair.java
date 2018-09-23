@@ -1,6 +1,9 @@
 package seedu.address.logic.autocomplete;
 
-public class AutoCompleteParserPair {
+/**
+ * Pair object used in parsing of commands for auto complete functionality
+ */
+public class AutoCompleteParserPair{
     public final String parseType;
     public final String parseValue;
 
