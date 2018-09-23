@@ -22,20 +22,20 @@ Responsibilities: Ensure product deliverables are up to scratch, and that all de
 '''
 
 === Tan Yuan Cai
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+image::harriuscai.jpg[width="150", align="left"]
+{empty}[https://github.com/harriuscai[github]] [<<harriuscai#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: TBD
 
 '''
 
 === Gian Zhi Cai
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+image::zhicaizack.png[width="150", align="left"]
+{empty}[https://github.com/zhicaizack[github]] [<<zhicaizack#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: Help out with Git and IntelliJ, making sure the project can run on everyone's PC.
 
 '''
 
