@@ -48,7 +48,8 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String note, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address,
+                            String note, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -119,13 +120,13 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Note modelNote;
+
+        //TODO refactor this?
         if (note == null) {
             modelNote = new Note();
-        }
-        else if (!Note.isValidNote(note)) {
+        } else if (!Note.isValidNote(note)) {
             throw new IllegalValueException(Note.MESSAGE_NOTE_CONSTRAINTS);
-        }
-        else{
+        } else {
             modelNote = new Note(note);
         }
 

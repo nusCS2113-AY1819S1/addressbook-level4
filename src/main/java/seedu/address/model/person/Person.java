@@ -54,7 +54,9 @@ public class Person {
         return address;
     }
 
-    public Note getNote() { return note; }
+    public Note getNote() {
+        return note;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

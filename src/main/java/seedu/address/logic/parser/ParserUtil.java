@@ -7,14 +7,13 @@ import java.util.HashSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
 
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
-import seedu.address.model.person.Note;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -98,12 +97,18 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-    public static Note parseNote(String note) throws ParseException, NoSuchElementException{
+    /**
+     * Parses a {@code String note} into an {@code Note}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code note} is invalid.
+     */
+    public static Note parseNote(String note) throws ParseException {
         String trimmedNote = note.trim();
         if (!Note.isValidNote(trimmedNote)) {
             throw new ParseException(Note.MESSAGE_NOTE_CONSTRAINTS);
         }
-        return new Note((trimmedNote));
+        return new Note(trimmedNote);
     }
 
     /**
