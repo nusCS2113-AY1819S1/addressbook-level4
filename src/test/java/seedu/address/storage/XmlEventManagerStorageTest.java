@@ -85,14 +85,14 @@ public class XmlEventManagerStorageTest {
         assertEquals(original, new EventManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
+        original.addEvent(HOON);
+        original.removeEvent(ALICE);
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new EventManager(readBack));
 
         //Save and read without specifying file path
-        original.addPerson(IDA);
+        original.addEvent(IDA);
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
         assertEquals(original, new EventManager(readBack));

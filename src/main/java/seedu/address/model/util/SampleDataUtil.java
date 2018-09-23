@@ -43,7 +43,7 @@ public class SampleDataUtil {
     public static ReadOnlyAddressBook getSampleEventManager() {
         EventManager sampleAb = new EventManager();
         for (Event sampleEvent : getSampleEvents()) {
-            sampleAb.addPerson(sampleEvent);
+            sampleAb.addEvent(sampleEvent);
         }
         return sampleAb;
     }

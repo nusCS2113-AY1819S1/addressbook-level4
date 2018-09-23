@@ -14,7 +14,7 @@ import seedu.address.model.event.UniqueEventList;
  */
 public class EventManager implements ReadOnlyAddressBook {
 
-    private final UniqueEventList persons;
+    private final UniqueEventList events;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -24,13 +24,13 @@ public class EventManager implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniqueEventList();
+        events = new UniqueEventList();
     }
 
     public EventManager() {}
 
     /**
-     * Creates an EventManager using the Persons in the {@code toBeCopied}
+     * Creates an EventManager using the Events in the {@code toBeCopied}
      */
     public EventManager(ReadOnlyAddressBook toBeCopied) {
         this();
@@ -43,8 +43,8 @@ public class EventManager implements ReadOnlyAddressBook {
      * Replaces the contents of the event list with {@code events}.
      * {@code events} must not contain duplicate events.
      */
-    public void setPersons(List<Event> events) {
-        this.persons.setEvents(events);
+    public void setEvents(List<Event> events) {
+        this.events.setEvents(events);
     }
 
     /**
@@ -53,7 +53,7 @@ public class EventManager implements ReadOnlyAddressBook {
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setEvents(newData.getPersonList());
     }
 
     //// event-level operations
@@ -61,60 +61,60 @@ public class EventManager implements ReadOnlyAddressBook {
     /**
      * Returns true if a event with the same identity as {@code event} exists in the address book.
      */
-    public boolean hasPerson(Event event) {
+    public boolean hasEvent(Event event) {
         requireNonNull(event);
-        return persons.contains(event);
+        return events.contains(event);
     }
 
     /**
-     * Adds a event to the address book.
-     * The event must not already exist in the address book.
+     * Adds a event to the event manager.
+     * The event must not already exist in the event manager.
      */
-    public void addPerson(Event p) {
-        persons.add(p);
+    public void addEvent(Event p) {
+        events.add(p);
     }
 
     /**
      * Replaces the given event {@code target} in the list with {@code editedEvent}.
-     * {@code target} must exist in the address book.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the address book.
+     * {@code target} must exist in the event manager.
+     * The event identity of {@code editedEvent} must not be the same as another existing event in the event manager.
      */
-    public void updatePerson(Event target, Event editedEvent) {
+    public void updateEvent(Event target, Event editedEvent) {
         requireNonNull(editedEvent);
 
-        persons.setEvent(target, editedEvent);
+        events.setEvent(target, editedEvent);
     }
 
     /**
      * Removes {@code key} from this {@code EventManager}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the event manager.
      */
-    public void removePerson(Event key) {
-        persons.remove(key);
+    public void removeEvent(Event key) {
+        events.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
+        return events.asUnmodifiableObservableList().size() + " events";
         // TODO: refine later
     }
 
     @Override
     public ObservableList<Event> getPersonList() {
-        return persons.asUnmodifiableObservableList();
+        return events.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof EventManager // instanceof handles nulls
-                && persons.equals(((EventManager) other).persons));
+                && events.equals(((EventManager) other).events));
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return events.hashCode();
     }
 }

@@ -63,26 +63,26 @@ public class EventManagerTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        eventManager.hasPerson(null);
+        eventManager.hasEvent(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(eventManager.hasPerson(ALICE));
+        assertFalse(eventManager.hasEvent(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        eventManager.addPerson(ALICE);
-        assertTrue(eventManager.hasPerson(ALICE));
+        eventManager.addEvent(ALICE);
+        assertTrue(eventManager.hasEvent(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        eventManager.addPerson(ALICE);
+        eventManager.addEvent(ALICE);
         Event editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(eventManager.hasPerson(editedAlice));
+        assertTrue(eventManager.hasEvent(editedAlice));
     }
 
     @Test

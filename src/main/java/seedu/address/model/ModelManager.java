@@ -59,18 +59,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasPerson(Event event) {
         requireNonNull(event);
-        return versionedAddressBook.hasPerson(event);
+        return versionedAddressBook.hasEvent(event);
     }
 
     @Override
     public void deletePerson(Event target) {
-        versionedAddressBook.removePerson(target);
+        versionedAddressBook.removeEvent(target);
         indicateAddressBookChanged();
     }
 
     @Override
     public void addPerson(Event event) {
-        versionedAddressBook.addPerson(event);
+        versionedAddressBook.addEvent(event);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_EVENTS);
         indicateAddressBookChanged();
     }
@@ -79,7 +79,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updatePerson(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
-        versionedAddressBook.updatePerson(target, editedEvent);
+        versionedAddressBook.updateEvent(target, editedEvent);
         indicateAddressBookChanged();
     }
 

@@ -49,10 +49,10 @@ public class XmlSerializableAddressBook {
         EventManager eventManager = new EventManager();
         for (XmlAdaptedPerson p : events) {
             Event event = p.toModelType();
-            if (eventManager.hasPerson(event)) {
+            if (eventManager.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            eventManager.addPerson(event);
+            eventManager.addEvent(event);
         }
         return eventManager;
     }

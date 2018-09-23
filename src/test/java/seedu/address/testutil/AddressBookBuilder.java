@@ -24,7 +24,7 @@ public class AddressBookBuilder {
      * Adds a new {@code Event} to the {@code EventManager} that we are building.
      */
     public AddressBookBuilder withPerson(Event event) {
-        eventManager.addPerson(event);
+        eventManager.addEvent(event);
         return this;
     }
 

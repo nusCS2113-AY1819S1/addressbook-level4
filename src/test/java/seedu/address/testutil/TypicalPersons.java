@@ -65,7 +65,7 @@ public class TypicalPersons {
     public static EventManager getTypicalAddressBook() {
         EventManager ab = new EventManager();
         for (Event event : getTypicalPersons()) {
-            ab.addPerson(event);
+            ab.addEvent(event);
         }
         return ab;
     }
