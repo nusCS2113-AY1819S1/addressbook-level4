@@ -1,16 +1,16 @@
 package seedu.address.logic.autocomplete;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses the arguments of a command text input for auto completing the command
