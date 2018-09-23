@@ -24,8 +24,8 @@ public class TagCommand extends Command {
 
     private final TagsContainsKeywords tagsKeywords;
 
-    public TagCommand(TagsContainsKeywords TagsKeywords) {
-        this.tagsKeywords = TagsKeywords;
+    public TagCommand(TagsContainsKeywords tagsKeywords) {
+        this.tagsKeywords = tagsKeywords;
     }
 
     @Override

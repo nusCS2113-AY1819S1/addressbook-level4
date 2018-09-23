@@ -12,10 +12,13 @@ import seedu.address.model.person.Person;
 public class TagsContainsKeywords implements Predicate<Person> {
     private final Set<Tag> tagKeywords;
 
-    public TagsContainsKeywords(Set<Tag> tagKeywords) { this.tagKeywords = tagKeywords; }
+    public TagsContainsKeywords(Set<Tag> tagKeywords) {
+        this.tagKeywords = tagKeywords;
+    }
 
     @Override
     public boolean test(Person person) {
         return !Collections.disjoint(person.getTags(), tagKeywords);
     }
+
 }

@@ -15,6 +15,11 @@ import seedu.address.model.tag.TagsContainsKeywords;
  */
 public class TagCommandParser implements Parser<TagCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the TagCommand
+     * and returns an TagCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public TagCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
@@ -23,9 +28,9 @@ public class TagCommandParser implements Parser<TagCommand> {
         }
 
         String[] tagKeywords = trimmedArgs.split("\\s+");
-        Collection<String> C = Arrays.asList(tagKeywords); // Passing it a collection
+        Collection<String> tagSet = Arrays.asList(tagKeywords); // Passing it a collection
 
-        return new TagCommand(new TagsContainsKeywords(ParserUtil.parseTags(C)));
+        return new TagCommand(new TagsContainsKeywords(ParserUtil.parseTags(tagSet)));
     }
 
 }
