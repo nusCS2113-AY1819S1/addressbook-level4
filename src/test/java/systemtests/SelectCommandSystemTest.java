@@ -58,7 +58,7 @@ public class SelectCommandSystemTest extends EventManagerSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getEventList().size();
+        int invalidIndex = getModel().getEventManager().getEventList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
         /* Case: filtered event list, select index within bounds of address book and event list -> selected */

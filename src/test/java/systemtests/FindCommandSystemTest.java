@@ -82,7 +82,7 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: find same persons in address book after deleting 1 of them -> 1 event found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getAddressBook().getEventList().contains(BENSON));
+        assertFalse(getModel().getEventManager().getEventList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);

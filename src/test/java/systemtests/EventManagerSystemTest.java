@@ -143,7 +143,7 @@ public abstract class EventManagerSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getEventList().size(), getModel().getFilteredEventList().size());
+        assertEquals(getModel().getEventManager().getEventList().size(), getModel().getFilteredEventList().size());
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class EventManagerSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredEventList().size() < getModel().getAddressBook().getEventList().size());
+        assertTrue(getModel().getFilteredEventList().size() < getModel().getEventManager().getEventList().size());
     }
 
     /**
@@ -167,7 +167,7 @@ public abstract class EventManagerSystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getEventList().size());
+        assertEquals(0, getModel().getEventManager().getEventList().size());
     }
 
     /**
@@ -179,7 +179,7 @@ public abstract class EventManagerSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new EventManager(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new EventManager(expectedModel.getEventManager()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredEventList());
     }
 

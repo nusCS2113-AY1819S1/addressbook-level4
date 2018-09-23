@@ -83,7 +83,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a event with new values same as another event's values but with different name -> edited */
-        assertTrue(getModel().getAddressBook().getEventList().contains(BOB));
+        assertTrue(getModel().getEventManager().getEventList().contains(BOB));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredEventList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -122,7 +122,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getEventList().size();
+        int invalidIndex = getModel().getEventManager().getEventList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
@@ -185,7 +185,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: edit a event with new values same as another event's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
-        assertTrue(getModel().getAddressBook().getEventList().contains(BOB));
+        assertTrue(getModel().getEventManager().getEventList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredEventList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

@@ -15,25 +15,25 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.event.Event;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the event manager data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedEventManager versionedAddressBook;
+    private final VersionedEventManager versionedEManager;
     private final FilteredList<Event> filteredEvents;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given eventManager and userPrefs.
      */
-    public ModelManager(ReadOnlyEventManager addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyEventManager eventManager, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(eventManager, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + eventManager + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedEventManager(addressBook);
-        filteredEvents = new FilteredList<>(versionedAddressBook.getEventList());
+        versionedEManager = new VersionedEventManager(eventManager);
+        filteredEvents = new FilteredList<>(versionedEManager.getEventList());
     }
 
     public ModelManager() {
@@ -42,52 +42,52 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyEventManager newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+        versionedEManager.resetData(newData);
+        indicateEManagerChanged();
     }
 
     @Override
-    public ReadOnlyEventManager getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyEventManager getEventManager() {
+        return versionedEManager;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateEManagerChanged() {
+        raise(new AddressBookChangedEvent(versionedEManager));
     }
 
     @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
-        return versionedAddressBook.hasEvent(event);
+        return versionedEManager.hasEvent(event);
     }
 
     @Override
     public void deleteEvent(Event target) {
-        versionedAddressBook.removeEvent(target);
-        indicateAddressBookChanged();
+        versionedEManager.removeEvent(target);
+        indicateEManagerChanged();
     }
 
     @Override
     public void addEvent(Event event) {
-        versionedAddressBook.addEvent(event);
+        versionedEManager.addEvent(event);
         updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-        indicateAddressBookChanged();
+        indicateEManagerChanged();
     }
 
     @Override
     public void updateEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
-        versionedAddressBook.updateEvent(target, editedEvent);
-        indicateAddressBookChanged();
+        versionedEManager.updateEvent(target, editedEvent);
+        indicateEManagerChanged();
     }
 
     //=========== Filtered Event List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedEManager}
      */
     @Override
     public ObservableList<Event> getFilteredEventList() {
@@ -104,29 +104,29 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean canUndoEventManager() {
-        return versionedAddressBook.canUndo();
+        return versionedEManager.canUndo();
     }
 
     @Override
     public boolean canRedoEventManager() {
-        return versionedAddressBook.canRedo();
+        return versionedEManager.canRedo();
     }
 
     @Override
     public void undoEventManager() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+        versionedEManager.undo();
+        indicateEManagerChanged();
     }
 
     @Override
     public void redoEventManager() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+        versionedEManager.redo();
+        indicateEManagerChanged();
     }
 
     @Override
     public void commitEventManager() {
-        versionedAddressBook.commit();
+        versionedEManager.commit();
     }
 
     @Override
@@ -143,7 +143,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedEManager.equals(other.versionedEManager)
                 && filteredEvents.equals(other.filteredEvents);
     }
 

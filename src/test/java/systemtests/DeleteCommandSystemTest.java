@@ -68,7 +68,7 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getEventList().size();
+        int invalidIndex = getModel().getEventManager().getEventList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
@@ -97,7 +97,7 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getAddressBook().getEventList().size() + 1);
+                getModel().getEventManager().getEventList().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 

@@ -36,7 +36,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
 
@@ -60,7 +60,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
         showNoPerson(expectedModel);
@@ -74,7 +74,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEventList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEventManager().getEventList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -85,7 +85,7 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();
 
@@ -124,7 +124,7 @@ public class DeleteCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_PERSON.getZeroBased());

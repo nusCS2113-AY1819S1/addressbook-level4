@@ -45,7 +45,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(new EventManager(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
         expectedModel.updateEvent(model.getFilteredEventList().get(0), editedEvent);
         expectedModel.commitEventManager();
 
@@ -67,7 +67,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(new EventManager(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
         expectedModel.updateEvent(lastEvent, editedEvent);
         expectedModel.commitEventManager();
 
@@ -81,7 +81,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(new EventManager(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
         expectedModel.commitEventManager();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -98,7 +98,7 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedEvent);
 
-        Model expectedModel = new ModelManager(new EventManager(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
         expectedModel.updateEvent(model.getFilteredEventList().get(0), editedEvent);
         expectedModel.commitEventManager();
 
@@ -119,7 +119,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit event in filtered list into a duplicate in address book
-        Event eventInList = model.getAddressBook().getEventList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Event eventInList = model.getEventManager().getEventList().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(eventInList).build());
 
@@ -144,7 +144,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getEventList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getEventManager().getEventList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -158,7 +158,7 @@ public class EditCommandTest {
         Event eventToEdit = model.getFilteredEventList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new EventManager(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
         expectedModel.updateEvent(eventToEdit, editedEvent);
         expectedModel.commitEventManager();
 
@@ -200,7 +200,7 @@ public class EditCommandTest {
         Event editedEvent = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new EventManager(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Event eventToEdit = model.getFilteredEventList().get(INDEX_FIRST_PERSON.getZeroBased());

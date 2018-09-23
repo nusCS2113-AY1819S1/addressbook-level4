@@ -16,7 +16,7 @@ public interface Model {
     void resetData(ReadOnlyEventManager newData);
 
     /** Returns the EventManager */
-    ReadOnlyEventManager getAddressBook();
+    ReadOnlyEventManager getEventManager();
 
     /**
      * Returns true if a event with the same identity as {@code event} exists in the event manager.
@@ -52,12 +52,12 @@ public interface Model {
     void updateFilteredEventList(Predicate<Event> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous event manager states to restore.
      */
     boolean canUndoEventManager();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone event manager states to restore.
      */
     boolean canRedoEventManager();
 

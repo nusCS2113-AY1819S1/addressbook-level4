@@ -99,7 +99,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyEventManager getAddressBook() {
+        public ReadOnlyEventManager getEventManager() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyEventManager getAddressBook() {
+        public ReadOnlyEventManager getEventManager() {
             return new EventManager();
         }
     }
