@@ -36,7 +36,7 @@ public class RecordCard extends UiPart<Region> {
     private Label moneyFlow;
     @FXML
     private FlowPane tags;
-    
+
     // TODO: Refactor this next time
     public RecordCard(Record record, int displayedIndex) {
         super(FXML);

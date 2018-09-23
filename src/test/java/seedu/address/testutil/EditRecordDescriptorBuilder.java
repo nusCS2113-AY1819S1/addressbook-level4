@@ -35,8 +35,7 @@ public class EditRecordDescriptorBuilder {
         descriptor = new EditCommand.EditRecordDescriptor();
         descriptor.setName(record.getName());
         descriptor.setDate(record.getDate());
-        descriptor.setIncome(record.getIncome());
-        descriptor.setMoneyFlow(record.getExpense());
+        descriptor.setMoneyFlow(record.getMoneyFlow());
         descriptor.setTags(record.getTags());
     }
 
@@ -57,18 +56,15 @@ public class EditRecordDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Income} of the {@code EditRecordDescriptor} that we are building.
+     * Sets the {@code MoneyFlow} of the {@code EditRecordDescriptor} that we are building.
      */
-    public EditRecordDescriptorBuilder withIncome(String income) {
-        descriptor.setIncome(new Income(income));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Expense} of the {@code EditRecordDescriptor} that we are building.
-     */
-    public EditRecordDescriptorBuilder withExpense(String expense) {
-        descriptor.setMoneyFlow(new Expense(expense));
+    public EditRecordDescriptorBuilder withMoneyFlow(String moneyFlow) {
+        if (Expense.isValidExpense(moneyFlow)) {
+            descriptor.setMoneyFlow(new Expense(moneyFlow));
+        }
+        if (Income.isValidIncome(moneyFlow)) {
+            descriptor.setMoneyFlow(new Income(moneyFlow));
+        }
         return this;
     }
 

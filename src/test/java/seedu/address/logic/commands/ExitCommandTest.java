@@ -60,10 +60,9 @@ public class ExitCommandTest {
 
         private static final String INVALID_DATE = "9482asf424";
 
-        private static final String VALID_NAME = "Hans Muster";
+        private static final String VALID_NAME = "Payment for HM";
         private static final String VALID_DATE = "23-10-2010";
-        private static final String VALID_INCOME = "11.99";
-        private static final String VALID_EXPENSE = "10.99";
+        private static final String VALID_MONEYFLOW = "-11.99";
         private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
         @Rule
@@ -105,7 +104,7 @@ public class ExitCommandTest {
             XmlAdaptedRecord actualRecord = XmlUtil.getDataFromFile(
                     MISSING_RECORD_FIELD_FILE, XmlAdaptedRecordWithRootElement.class);
             XmlAdaptedRecord expectedRecord = new XmlAdaptedRecord(
-                    null, VALID_DATE, VALID_INCOME, VALID_EXPENSE, VALID_TAGS);
+                    null, VALID_DATE, VALID_MONEYFLOW, VALID_TAGS);
             assertEquals(expectedRecord, actualRecord);
         }
 
@@ -114,7 +113,7 @@ public class ExitCommandTest {
             XmlAdaptedRecord actualRecord = XmlUtil.getDataFromFile(
                     INVALID_RECORD_FIELD_FILE, XmlAdaptedRecordWithRootElement.class);
             XmlAdaptedRecord expectedRecord = new XmlAdaptedRecord(
-                    VALID_NAME, INVALID_DATE, VALID_INCOME, VALID_EXPENSE, VALID_TAGS);
+                    VALID_NAME, INVALID_DATE, VALID_MONEYFLOW, VALID_TAGS);
             assertEquals(expectedRecord, actualRecord);
         }
 
@@ -123,7 +122,7 @@ public class ExitCommandTest {
             XmlAdaptedRecord actualRecord = XmlUtil.getDataFromFile(
                     VALID_RECORD_FILE, XmlAdaptedRecordWithRootElement.class);
             XmlAdaptedRecord expectedRecord = new XmlAdaptedRecord(
-                    VALID_NAME, VALID_DATE, VALID_INCOME, VALID_EXPENSE, VALID_TAGS);
+                    VALID_NAME, VALID_DATE, VALID_MONEYFLOW, VALID_TAGS);
             assertEquals(expectedRecord, actualRecord);
         }
 

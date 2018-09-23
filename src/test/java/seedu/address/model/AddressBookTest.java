@@ -3,9 +3,9 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MONEYFLOW_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalRecords.ALICE;
+import static seedu.address.testutil.TypicalRecords.INDO;
 import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -23,7 +23,7 @@ import seedu.address.model.record.Record;
 import seedu.address.model.record.exceptions.DuplicateRecordException;
 import seedu.address.testutil.RecordBuilder;
 
-public class ExpenseBookTest {
+public class AddressBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -51,9 +51,9 @@ public class ExpenseBookTest {
     @Test
     public void resetData_withDuplicateRecords_throwsDuplicateRecordException() {
         // Two records with the same identity fields
-        Record editedAlice = new RecordBuilder(ALICE).withExpense(VALID_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        List<Record> newRecords = Arrays.asList(ALICE, editedAlice);
+        Record editedIndo = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        List<Record> newRecords = Arrays.asList(INDO, editedIndo);
         AddressBookStub newData = new AddressBookStub(newRecords);
 
         thrown.expect(DuplicateRecordException.class);
@@ -68,21 +68,21 @@ public class ExpenseBookTest {
 
     @Test
     public void hasRecord_recordNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasRecord(ALICE));
+        assertFalse(addressBook.hasRecord(INDO));
     }
 
     @Test
     public void hasRecord_recordInAddressBook_returnsTrue() {
-        addressBook.addRecord(ALICE);
-        assertTrue(addressBook.hasRecord(ALICE));
+        addressBook.addRecord(INDO);
+        assertTrue(addressBook.hasRecord(INDO));
     }
 
     @Test
     public void hasRecord_recordWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addRecord(ALICE);
-        Record editedAlice = new RecordBuilder(ALICE).withExpense(VALID_EXPENSE_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(addressBook.hasRecord(editedAlice));
+        addressBook.addRecord(INDO);
+        Record editedIndo = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
+                .withTags(VALID_TAG_HUSBAND).build();
+        assertTrue(addressBook.hasRecord(editedIndo));
     }
 
     @Test

@@ -13,7 +13,7 @@ import seedu.address.model.record.Record;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
-public class SampleDataTest extends ExpenseBookSystemTest {
+public class SampleDataTest extends AddressBookSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */

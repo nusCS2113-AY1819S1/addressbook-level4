@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <record>
-    <name>Hans Muster</name>
+    <name>Payment for HM</name>
     <date>23-10-2010</date>
-    <income>11.99</income>
-    <expense>10.99</expense>
+    <moneyFlow>-11.99</moneyFlow>
     <tagged>friends</tagged>
 </record>

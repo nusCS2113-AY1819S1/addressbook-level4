@@ -2,19 +2,17 @@
 <addressbook>
 
     <records>
-        <name>Alice Pauline</name>
+        <name>Payment for Indo</name>
         <date>10-3-2000</date>
-        <income>40.60</income>
-        <expense>39.60</expense>
+        <moneyFlow>-5.80</moneyFlow>
         <tagged>friends</tagged>
     </records>
 
-    <!-- Record with same identity as Alice Pauline -->
+    <!-- Record with same identity as Payment for Indo -->
     <records>
-        <name>Alice Pauline</name>
+        <name>Payment for Indo</name>
         <date>10-3-2000</date>
-        <income>40.60</income>
-        <expense>39.60</expense>
+        <moneyFlow>+40.60</moneyFlow>
     </records>
 
 </addressbook>

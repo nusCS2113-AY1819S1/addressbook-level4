@@ -2,13 +2,12 @@ package seedu.address.model.record;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.model.record.MoneyFlow.UNSIGNED_MONEYFLOW_VALIDATION_REGEX;
 
 /**
  * Represents a Record's income in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidIncome(String)}
  */
-public class Income extends MoneyFlow{
+public class Income extends MoneyFlow {
 
     public static final String MESSAGE_INCOME_CONSTRAINTS =
             "Any form of income should consist of '+', "
@@ -42,7 +41,9 @@ public class Income extends MoneyFlow{
     }
 
     @Override
-    public String toString() { return value; }
+    public String toString() {
+        return value;
+    }
 
     @Override
     public boolean equals(Object other) {

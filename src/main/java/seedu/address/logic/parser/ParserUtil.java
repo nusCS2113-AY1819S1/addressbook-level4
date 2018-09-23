@@ -75,13 +75,16 @@ public class ParserUtil {
     public static MoneyFlow parseMoneyFlow(String moneyFlow) throws ParseException {
         requireNonNull(moneyFlow);
         String trimmedMoneyFlow = moneyFlow.trim();
-        if (!Expense.isValidExpense(trimmedMoneyFlow)) {
-            throw new ParseException(Expense.MESSAGE_EXPENSE_CONSTRAINTS);
+        if (!MoneyFlow.isValidMoneyFlow(trimmedMoneyFlow)) {
+            throw new ParseException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
         }
-        if (Expense.isValidExpense(trimmedMoneyFlow)) {
+        if (Income.isValidIncome(trimmedMoneyFlow)) {
+            return new Income(trimmedMoneyFlow);
+        } else if (Expense.isValidExpense(trimmedMoneyFlow)) {
             return new Expense(trimmedMoneyFlow);
+        } else {
+            throw new ParseException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
         }
-        return new Income(trimmedMoneyFlow);
     }
 
     /**

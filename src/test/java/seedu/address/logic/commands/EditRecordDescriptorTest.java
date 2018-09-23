@@ -5,8 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EXPENSE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_INCOME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MONEYFLOW_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -44,12 +43,8 @@ public class EditRecordDescriptorTest {
         editedAmy = new EditRecordDescriptorBuilder(DESC_AMY).withDate(VALID_DATE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different income -> returns false
-        editedAmy = new EditRecordDescriptorBuilder(DESC_AMY).withIncome(VALID_INCOME_BOB).build();
-        assertFalse(DESC_AMY.equals(editedAmy));
-
-        // different expense -> returns false
-        editedAmy = new EditRecordDescriptorBuilder(DESC_AMY).withExpense(VALID_EXPENSE_BOB).build();
+        // different money flow -> returns false
+        editedAmy = new EditRecordDescriptorBuilder(DESC_AMY).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false

@@ -42,7 +42,9 @@ public class Expense extends MoneyFlow {
     }
 
     @Override
-    public String toString() { return value; }
+    public String toString() {
+        return value;
+    }
 
     @Override
     public boolean equals(Object other) {

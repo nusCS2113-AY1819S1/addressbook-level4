@@ -42,7 +42,9 @@ public class Record {
         return date;
     }
 
-    public MoneyFlow getMoneyFlow() { return moneyFlow; }
+    public MoneyFlow getMoneyFlow() {
+        return moneyFlow;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

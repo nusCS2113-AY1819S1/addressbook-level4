@@ -16,16 +16,14 @@ import seedu.address.model.record.Record;
 public class RecordCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
-    private static final String EXPENSE_FIELD_ID = "#expense";
+    private static final String MONEYFLOW_FIELD_ID = "#moneyFlow";
     private static final String DATE_FIELD_ID = "#date";
-    private static final String INCOME_FIELD_ID = "#income";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
     private final Label nameLabel;
-    private final Label expenseLabel;
+    private final Label moneyFlowLabel;
     private final Label dateLabel;
-    private final Label incomeLabel;
     private final List<Label> tagLabels;
 
     public RecordCardHandle(Node cardNode) {
@@ -33,9 +31,8 @@ public class RecordCardHandle extends NodeHandle<Node> {
 
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
-        expenseLabel = getChildNode(EXPENSE_FIELD_ID);
         dateLabel = getChildNode(DATE_FIELD_ID);
-        incomeLabel = getChildNode(INCOME_FIELD_ID);
+        moneyFlowLabel = getChildNode(MONEYFLOW_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -53,16 +50,12 @@ public class RecordCardHandle extends NodeHandle<Node> {
         return nameLabel.getText();
     }
 
-    public String getExpense() {
-        return expenseLabel.getText();
+    public String getMoneyFlow() {
+        return moneyFlowLabel.getText();
     }
 
     public String getDate() {
         return dateLabel.getText();
-    }
-
-    public String getIncome() {
-        return incomeLabel.getText();
     }
 
     public List<String> getTags() {
@@ -77,9 +70,8 @@ public class RecordCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(Record record) {
         return getName().equals(record.getName().fullName)
-                && getExpense().equals(record.getExpense().value)
+                && getMoneyFlow().equals(record.getMoneyFlow().value)
                 && getDate().equals(record.getDate().value)
-                && getIncome().equals(record.getIncome().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(record.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));

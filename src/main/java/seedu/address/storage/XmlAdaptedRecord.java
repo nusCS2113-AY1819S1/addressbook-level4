@@ -95,23 +95,19 @@ public class XmlAdaptedRecord {
         final Date modelDate = new Date(date);
 
         if (moneyFlow == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MoneyFlow.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, MoneyFlow
+                    .class.getSimpleName()));
         }
         if (!MoneyFlow.isValidMoneyFlow(moneyFlow)) {
             throw new IllegalValueException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
         }
         // This is a temporary variable to store moneyFlow which will be later assigned to final
         MoneyFlow tempMoneyFlow = null;
-        try {
-            if (Income.isValidIncome(moneyFlow)) {
-                tempMoneyFlow = new Income(moneyFlow);
-            }
-            if (Expense.isValidExpense(moneyFlow)) {
-                tempMoneyFlow = new Expense(moneyFlow);
-            }
+        if (Income.isValidIncome(moneyFlow)) {
+            tempMoneyFlow = new Income(moneyFlow);
         }
-        catch (IllegalArgumentException e) {
-            throw e;
+        if (Expense.isValidExpense(moneyFlow)) {
+            tempMoneyFlow = new Expense(moneyFlow);
         }
         if (tempMoneyFlow == null) {
             throw new IllegalValueException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
