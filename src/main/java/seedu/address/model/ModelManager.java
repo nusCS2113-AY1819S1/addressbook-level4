@@ -57,6 +57,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void createAccount(LoginDetails details) {
+        versionedAddressBook.createAccount(details);
+    }
+
+    @Override
+    public boolean hasAccount(LoginDetails details) {
+        requireNonNull(details);
+        return versionedAddressBook.hasAccount(details);
+    }
+
+    @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
         return versionedAddressBook.hasPerson(person);

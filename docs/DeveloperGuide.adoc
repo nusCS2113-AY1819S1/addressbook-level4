@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/CS2113-AY1819S1-F09-1/NUSSU-Connect/
+:repoURL: https://github.com/CS2113-AY1819S1-F09-1/main/
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -881,62 +881,57 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  Address book asks user for user ID and password
-2.  User types in user ID and password
-3.  Address book queries and authorize user full access to address book
+1.  Address book asks for command to indicate user’s desire to either login normally, create new account, delete account or change account password
+2.  User types in command to choose normal login
+3.  Address book asks user for user ID and password
+4.  User types in user ID and password
+5.  Address book queries and authorize user full access to address book
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User types in wrong password
+* 4a. User types in wrong password
 +
 [none]
-** 2a1. Address book displays error message and exits application
+** 4a1. Address book displays error message and returns to step 1
 +
 Use case ends.
 
-* 2b. User types in user ID for a non-existent user account
+* 4b. User types in user ID for a non-existent user account
 +
 [none]
-** 2b1. Address book displays error message and exits application
+** 4b1. Address book displays error message and returns to step 1
 +
-Use case ends
+Use case ends.
 
 === Use case: Create new user accounts
 
 *MSS*
 
-1.  User types a command to indicate intention of creating a new account
-2.  Address book asks user to type in master password for enabling option to create new accounts
-3.  User types in master password
-4.  Address book authorizes the master password input as correct and shows successful message
-5.  User types in command to create a new account with relevant user ID and password
+1.  Address book asks for command to indicate user’s desire to either login normally, create new account, delete account or change account password
+2.  User types in command to indicate intention of creating new account
+3.  Address book displays message and user input field asking for account creation details
+4.  User types in command to create a new account with relevant user ID and password
+5.  Address book creates new account with login details, shows message and returns to step 1
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to create a new account and types command to indicate so
+* 4a. User decides not to create new account and types command to indicate so
 +
 [none]
-** 2a1. Address book cancels process of new account creation
+** 4a1. Address book cancels process of new account creation and returns to step 1
 +
 Use case ends.
 +
-* 2b. User types in the wrong master password
+* 4b. User creates a new account with a user ID which already exists
 +
 [none]
-** 2b1. Address book shows error message to user and cancels process of new account creation
-+
-Use case ends.
-+
-* 2c. User creates a new account with a user ID which already exists
-+
-[none]
-** 2c1. Address book shows error message to user and cancels process of new account creation
+** 4b1. Address book shows error message to user and returns to step 1
 +
 Use case ends.
 
@@ -944,79 +939,80 @@ Use case ends.
 
 *MSS*
 
-1.  User requests to delete an existing account and types in command to do so
-2.  Address book asks for confirmation to delete account with associated user ID
-3.  User types command to express desire to delete account
-4.  Address book deletes account associated with input user ID and respective password
+1.  Address book asks for command to indicate user’s desire to either login normally, create new account, delete account or change account password
+2.  User types in command to indicate intention of deleting existing account
+3.  Address book displays input field to allow user to input account details to be deleted
+4.  User types command with relevant credentials to delete account
+5.  Address book deletes account associated with input user ID and respective password, shows message and
+returns to step 1
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to delete an account and types command to indicate so
+* 4a. User decides not to delete an account and types command to indicate so
 +
 [none]
-** 2a1. Address book cancels process of deleting existing account
+** 4a1. Address book cancels process of deleting existing account and returns to step 1
 +
 Use case ends.
 +
-
-* 2b. User types in the wrong current password associated with the user ID
+* 4b. User types in the wrong current password associated with the user ID
 +
 [none]
-** 2b1. Address book shows error message to user and cancels process of deleting existing account
+** 4b1. Address book shows error message to user and returns to step 1
 +
 Use case ends.
-
-* 2c. User wants to delete a non-existent user account
+* 4c. User wants to delete a non-existent user account
 +
 [none]
-** 2c1. Address book shows error message and cancels process of deleting account
+** 4c1. Address book shows error message to user and returns to step 1
 +
 Use case ends.
-
 === Use case: Changing password of current user accounts
 
 *MSS*
 
-1.  User requests to change the password of existing user account and types in command to do so
-2.  Address book asks for confirmation of password change
-3.  User types command to express desire to change account password
-4.  Address book changes password of account associated with input user ID and new password
+1.  Address book asks for command to indicate user’s desire to either login normally, create new account, delete account or change account password
+2.  User types in command to indicate intention of changing password of existing account
+3.  Address book displays message and input field to the user
+4.  User types command with the relevant credentials to change account password
+5.  Address book changes password of account associated with input user ID and new password, shows message and
+returns to step 1
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to change the password of the account and types command to indicate so
+* 4a. User decides not to change password of the account and types command to indicate so
 +
 [none]
-** 2a1. Address book cancels process of changing password of account
+** 4a1. Address book cancels process of changing password of account and returns to step 1
 +
 Use case ends.
-
-* 2b. User types in the wrong current password associated with the user ID
+* 4b. User types in the wrong current password associated with the user ID
 +
 [none]
-** 2b1. Address book shows error message to user and cancels process of changing password of account
+** 4b1. Address book shows error message to user and returns to step 1
 +
 Use case ends.
-
-* 2c. User wants to change the password of a non-existent user account
+* 4c. User wants to change the password of a non-existent user account
 +
 [none]
-** 2c1. Address book shows error message and cancels process of changing password of account
+** 4c1. Address book shows error message and returns to step 1
 +
 Use case ends.
 
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Must be able to accommodate the contact details of everyone in NUSSU + 1000 extra contact details.
+.  All exco members of NUSSU should be able to create an account.
+.  Passwords must be salted and hashed with md5.
+.  All commands must be completed within 1 second.
+.  The single and multi-input commands phrases should be easy to remember and intuitive to understand what they mean.
 
 _{More to be added}_
 

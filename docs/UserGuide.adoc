@@ -52,9 +52,16 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Logging into system
+=== Logging into system: `login`
 
+Logs into application using relevant credentials. +
 Format: `X1234567X` for user ID fields, where X can be any lower or upper case letter alphabet
+
+Examples:
+
+* `login` +
+`X1234567X zaq1xsw2cde3` +
+Logs into Address book with user ID as X1234567X and password as zaq1xsw2cde3.
 
 [NOTE]
 ====
@@ -64,7 +71,7 @@ Password is case-sensitive!
 === Creating a new user account: `create account`
 
 Creates a new user account in the address book. +
-Format: `create account USERID PASSWORD`
+Format: `USERID PASSWORD`
 
 ****
 * USERID refers to student matriculation number
@@ -75,13 +82,14 @@ Format: `create account USERID PASSWORD`
 
 Examples:
 
-* create account X1234567X zaq1xsw2cde3 +
+* `create account` +
+`X1234567X zaq1xsw2cde3` +
 Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
 === Deleting an existing user account: `delete account`
 
 Deletes an existing account from the address book. +
-Format: `delete account USERID PASSWORD`
+Format: `USERID PASSWORD`
 
 ****
 * USERID refers to student matriculation number
@@ -92,13 +100,14 @@ Format: `delete account USERID PASSWORD`
 
 Examples:
 
-* delete account X1234567X zaq1xsw2cde3 +
+* `delete account` +
+`X1234567X zaq1xsw2cde3` +
 Deletes the current account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
 === Changing the password of an existing user account: `change password`
 
 Changes the password of an existing account from the address book. +
-Format: `change password USERID CURRENTPASSWORD NEWPASSWORD`
+Format: `USERID CURRENTPASSWORD NEWPASSWORD`
 
 ****
 * USERID refers to student matriculation number
@@ -110,7 +119,8 @@ Format: `change password USERID CURRENTPASSWORD NEWPASSWORD`
 
 Examples:
 
-* change password X1234567X zaq1xsw2cde3 1qaz2wsx3edc +
+* `change password` +
+`X1234567X zaq1xsw2cde3 1qaz2wsx3edc` +
 Changes the password of the current account with user ID as X1234567X, from "zaq1xsw2cde3" to "1qaz2wsx3edc" in the address book.
 
 === Viewing help : `help`
@@ -303,6 +313,18 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
+* *Login* : `USERID PASSWORD`
+e.g. `login` +
+    `A01234567M zaq1xsw2cde3`
+* *Create Account* : `USERID PASSWORD` +
+e.g. `create account` +
+    `A01234567M zaq1xsw2cde3`
+* *Delete Account* : `USERID PASSWORD` +
+e.g. `delete account` +
+    `A01234567M zaq1xsw2cde3`
+* *Change Password* : `USERID CURRENTPASSWORD NEWPASSWORD` +
+e.g. `change password` +
+    `A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`

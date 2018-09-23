@@ -12,6 +12,29 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    /**
+     * Creates an account for address book.
+     * The account must not already exist in the address book.
+     */
+    void createAccount(LoginDetails create);
+
+    /**
+     * Deletes an existing account in the address book.
+     * The account must exist in the address book.
+     */
+    //void deleteAccount(LoginDetails delete);
+
+    /**
+     * Changes the password of an existing account in the address book.
+     * The account must exist in the address book.
+     */
+    //void changePassword(LoginDetails change);
+
+    /**
+     * Returns true if an account with the same user ID as {@code account} exists in the address book.
+     */
+    boolean hasAccount(LoginDetails credentials);
+
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 

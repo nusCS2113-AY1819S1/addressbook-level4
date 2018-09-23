@@ -14,6 +14,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
+    private final UniqueAccountList accounts;
     private final UniquePersonList persons;
 
     /*
@@ -27,7 +28,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+        accounts = new UniqueAccountList();
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -54,6 +57,24 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+    }
+
+    //// login-level operations
+
+    /**
+     * Creates an account for the address book.
+     * The account must not already exist in the address book.
+     */
+    public void createAccount(LoginDetails details) {
+        accounts.add(details);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasAccount(LoginDetails details) {
+        requireNonNull(details);
+        return accounts.contains(details);
     }
 
     //// person-level operations
