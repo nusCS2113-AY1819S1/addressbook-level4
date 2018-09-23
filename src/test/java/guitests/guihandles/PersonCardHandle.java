@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Event;
+import seedu.address.model.event.Event;
 
 /**
  * Provides a handle to a event card in the event list panel.

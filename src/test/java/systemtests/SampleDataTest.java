@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import org.junit.Test;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.person.Event;
+import seedu.address.model.event.Event;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
@@ -45,7 +45,7 @@ public class SampleDataTest extends AddressBookSystemTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() {
-        Event[] expectedList = SampleDataUtil.getSamplePersons();
+        Event[] expectedList = SampleDataUtil.getSampleEvents();
         assertListMatching(getPersonListPanel(), expectedList);
     }
 }
