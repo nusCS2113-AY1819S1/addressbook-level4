@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Record with an invalid date field -->
+<record>
+    <name>Hans Muster</name>
+    <date>9482asf424</date>
+    <income>11.99</income>
+    <expense>10.99</expense>
+    <tagged>friends</tagged>
+</record>

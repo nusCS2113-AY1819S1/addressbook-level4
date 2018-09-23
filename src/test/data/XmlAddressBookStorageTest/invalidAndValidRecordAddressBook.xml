@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Valid Record -->
+    <records>
+        <name>Hans Muster</name>
+        <date isPrivate="false">10-12-1994</date>
+        <income isPrivate="false">1.90</income>
+        <expense isPrivate="false">0.90</expense>
+    </records>
+    <!-- Record with invalid date field -->
+    <records>
+
+        <name>Hans Muster</name>
+        <date isPrivate="false">948asdf2424</date>
+        <income isPrivate="false">11.99</income>
+        <expense isPrivate="false">10.99</expense>
+    </records>
+</addressbook>

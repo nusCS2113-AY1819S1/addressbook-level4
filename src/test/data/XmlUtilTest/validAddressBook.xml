@@ -1,57 +1,57 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <persons>
+    <records>
         <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
+        <date isPrivate="false">01-13-1400</date>
+        <income isPrivate="false">21.40</income>
+        <expense isPrivate="false">20.40</expense>
+    </records>
+    <records>
         <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
-        <email isPrivate="false">ruth@example.com</email>
-        <address isPrivate="false">81th street</address>
-    </persons>
-    <persons>
+        <date isPrivate="false">01-19-1400</date>
+        <income isPrivate="false">35.59</income>
+        <expense isPrivate="false">34.59</expense>
+    </records>
+    <records>
         <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
-        <email isPrivate="false">heinz@example.com</email>
-        <address isPrivate="false">wall street</address>
-    </persons>
-    <persons>
+        <date isPrivate="false">9-3-3003</date>
+        <income isPrivate="false">20.30</income>
+        <expense isPrivate="false">19.30</expense>
+    </records>
+    <records>
         <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
-        <email isPrivate="false">cornelia@example.com</email>
-        <address isPrivate="false">10th street</address>
-    </persons>
-    <persons>
+        <date isPrivate="false">10-4-2005</date>
+        <income isPrivate="false">30.40</income>
+        <expense isPrivate="false">29.40</expense>
+    </records>
+    <records>
         <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
-        <email isPrivate="false">werner@example.com</email>
-        <address isPrivate="false">michegan ave</address>
-    </persons>
-    <persons>
+        <date isPrivate="false">17-9-2018</date>
+        <income isPrivate="false">39.50</income>
+        <expense isPrivate="false">38.50</expense>
+    </records>
+    <records>
         <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
-        <email isPrivate="false">lydia@example.com</email>
-        <address isPrivate="false">little tokyo</address>
-    </persons>
-    <persons>
+        <date isPrivate="false">18-10-2018</date>
+        <income isPrivate="false">91.99</income>
+        <expense isPrivate="false">90.99</expense>
+    </records>
+    <records>
         <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
-        <email isPrivate="false">anna@example.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
+        <date isPrivate="false">20-10-2018</date>
+        <income isPrivate="false">101</income>
+        <expense isPrivate="false">100</expense>
+    </records>
+    <records>
         <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
-        <email isPrivate="false">stefan@example.com</email>
-        <address isPrivate="false">little india</address>
-    </persons>
-    <persons>
+        <date isPrivate="false">23-5-2009</date>
+        <income isPrivate="false">10001</income>
+        <expense isPrivate="false">10000</expense>
+    </records>
+    <records>
         <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">chicago ave</address>
-    </persons>
+        <date isPrivate="false">27-10-2006</date>
+        <income isPrivate="false">1000001</income>
+        <expense isPrivate="false">1000000</expense>
+    </records>
 </addressbook>

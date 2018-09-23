@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Record with missing name field -->
+<record>
+    <date>23-10-2010</date>
+    <income>11.99</income>
+    <expense>10.99</expense>
+    <tagged>friends</tagged>
+</record>
