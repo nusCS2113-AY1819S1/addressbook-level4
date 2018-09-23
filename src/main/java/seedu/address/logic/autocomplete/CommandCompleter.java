@@ -20,6 +20,7 @@ public class CommandCompleter {
     public static final String COMPLETE_EMAIL = "email";
     public static final String COMPLETE_NAME = "name";
     public static final String COMPLETE_PHONE = "phone";
+    public static final String COMPLETE_INVALID = "invalid";
 
     /** Model instance to access data */
     private Model model;
@@ -117,17 +118,18 @@ public class CommandCompleter {
      * @return predicted list of text
      */
     public ArrayList<String> predictText(String textInput) {
-        String out = "";
         try {
-            out = parser.parseCommand(textInput);
+            AutoCompleteParserPair pair = parser.parseCommand(textInput);
+            switch(pair.parseType) {
+                case COMPLETE_COMMAND:
+                    return commandTrie.getPredictList(pair.parseValue);
+                case COMPLETE_NAME:
+                    return nameTrie.getPredictList(pair.parseValue);
+                default:
+            }
         } catch (ParseException e) {
             System.out.print("Wrong command format");
         }
-
-        if (out.equals(COMPLETE_COMMAND)) {
-            return commandTrie.getPredictList(textInput);
-        }
-
-        return addressTrie.getPredictList(out.trim());
+        return new ArrayList<>();
     }
 }
