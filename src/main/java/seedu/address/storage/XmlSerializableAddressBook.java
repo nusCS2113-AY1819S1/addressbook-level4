@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.EventManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.event.Event;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable EventManager that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
@@ -40,21 +40,21 @@ public class XmlSerializableAddressBook {
     }
 
     /**
-     * Converts this addressbook into the model's {@code AddressBook} object.
+     * Converts this addressbook into the model's {@code EventManager} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson}.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public EventManager toModelType() throws IllegalValueException {
+        EventManager eventManager = new EventManager();
         for (XmlAdaptedPerson p : events) {
             Event event = p.toModelType();
-            if (addressBook.hasPerson(event)) {
+            if (eventManager.hasPerson(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(event);
+            eventManager.addPerson(event);
         }
-        return addressBook;
+        return eventManager;
     }
 
     @Override

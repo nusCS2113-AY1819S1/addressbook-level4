@@ -20,7 +20,7 @@ import seedu.address.model.event.Event;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedEventManager versionedAddressBook;
     private final FilteredList<Event> filteredEvents;
 
     /**
@@ -32,12 +32,12 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedAddressBook = new VersionedEventManager(addressBook);
         filteredEvents = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new EventManager(), new UserPrefs());
     }
 
     @Override

@@ -1,34 +1,34 @@
 package seedu.address.testutil;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.EventManager;
 import seedu.address.model.event.Event;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code EventManager ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
-    private AddressBook addressBook;
+    private EventManager eventManager;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        eventManager = new EventManager();
     }
 
-    public AddressBookBuilder(AddressBook addressBook) {
-        this.addressBook = addressBook;
+    public AddressBookBuilder(EventManager eventManager) {
+        this.eventManager = eventManager;
     }
 
     /**
-     * Adds a new {@code Event} to the {@code AddressBook} that we are building.
+     * Adds a new {@code Event} to the {@code EventManager} that we are building.
      */
     public AddressBookBuilder withPerson(Event event) {
-        addressBook.addPerson(event);
+        eventManager.addPerson(event);
         return this;
     }
 
-    public AddressBook build() {
-        return addressBook;
+    public EventManager build() {
+        return eventManager;
     }
 }
