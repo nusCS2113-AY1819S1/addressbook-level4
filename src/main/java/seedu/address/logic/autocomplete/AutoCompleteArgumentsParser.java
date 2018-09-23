@@ -2,16 +2,35 @@ package seedu.address.logic.autocomplete;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 /**
  * Parses the arguments of a command text input for auto completing the command
  */
 public class AutoCompleteArgumentsParser {
     /**
+     * Regex used for Pattern instance
+     */
+    private static final String argumentRegex = "[" +
+            PREFIX_NAME.getPrefix() +
+            PREFIX_PHONE.getPrefix() +
+            PREFIX_EMAIL.getPrefix() +
+            PREFIX_ADDRESS.getPrefix() +
+            PREFIX_TAG.getPrefix() +
+            PREFIX_NOTE.getPrefix() +
+            "]";
+    /**
      * Pattern instance used to separate the arguments
      */
-    private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern ARGS_INPUT_FORMAT = Pattern.compile(argumentRegex);
 
     /**
      * Default constructor
@@ -19,6 +38,9 @@ public class AutoCompleteArgumentsParser {
     public AutoCompleteArgumentsParser() {}
 
     public String parseArguments(String argsInput) throws ParseException {
+        final Matcher matcher = ARGS_INPUT_FORMAT.matcher(argsInput.trim());
+
+
         return "argument parser test output";
     }
 }
