@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.EventManagerChangedEvent;
 import seedu.address.model.event.Event;
 
 /**
@@ -53,7 +53,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateEManagerChanged() {
-        raise(new AddressBookChangedEvent(versionedEManager));
+        raise(new EventManagerChangedEvent(versionedEManager));
     }
 
     @Override
