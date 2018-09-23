@@ -16,8 +16,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.UniqueEventList;
+import seedu.address.model.event.exceptions.DuplicatePersonException;
+import seedu.address.model.event.exceptions.PersonNotFoundException;
 import seedu.address.testutil.PersonBuilder;
 
 public class UniqueEventListTest {
