@@ -39,12 +39,12 @@ Responsibilities: Help out with Git and IntelliJ, making sure the project can ru
 
 '''
 
-=== Nur Tristy
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Nur Tristy Erna
+image::tristyxxnana.jpg[width="150", align="left"]
+{empty}[https://github.com/tristyxxnana[github]] [<<tristyxxnana#, portfolio>>]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: TBD
 
 '''
 
