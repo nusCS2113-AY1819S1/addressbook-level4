@@ -53,7 +53,7 @@ public class EventManager implements ReadOnlyEventManager {
     public void resetData(ReadOnlyEventManager newData) {
         requireNonNull(newData);
 
-        setEvents(newData.getPersonList());
+        setEvents(newData.getEventList());
     }
 
     //// event-level operations
@@ -102,7 +102,7 @@ public class EventManager implements ReadOnlyEventManager {
     }
 
     @Override
-    public ObservableList<Event> getPersonList() {
+    public ObservableList<Event> getEventList() {
         return events.asUnmodifiableObservableList();
     }
 

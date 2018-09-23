@@ -36,7 +36,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyEventManager src) {
         this();
-        events.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        events.addAll(src.getEventList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**

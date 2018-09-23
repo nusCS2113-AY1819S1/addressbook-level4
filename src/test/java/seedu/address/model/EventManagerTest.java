@@ -32,7 +32,7 @@ public class EventManagerTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), eventManager.getPersonList());
+        assertEquals(Collections.emptyList(), eventManager.getEventList());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class EventManagerTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        eventManager.getPersonList().remove(0);
+        eventManager.getEventList().remove(0);
     }
 
     /**
@@ -102,7 +102,7 @@ public class EventManagerTest {
         }
 
         @Override
-        public ObservableList<Event> getPersonList() {
+        public ObservableList<Event> getEventList() {
             return events;
         }
     }

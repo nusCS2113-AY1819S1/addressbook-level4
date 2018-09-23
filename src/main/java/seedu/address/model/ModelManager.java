@@ -33,7 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedEventManager(addressBook);
-        filteredEvents = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredEvents = new FilteredList<>(versionedAddressBook.getEventList());
     }
 
     public ModelManager() {
@@ -57,26 +57,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Event event) {
+    public boolean hasEvent(Event event) {
         requireNonNull(event);
         return versionedAddressBook.hasEvent(event);
     }
 
     @Override
-    public void deletePerson(Event target) {
+    public void deleteEvent(Event target) {
         versionedAddressBook.removeEvent(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void addPerson(Event event) {
+    public void addEvent(Event event) {
         versionedAddressBook.addEvent(event);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_EVENTS);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Event target, Event editedEvent) {
+    public void updateEvent(Event target, Event editedEvent) {
         requireAllNonNull(target, editedEvent);
 
         versionedAddressBook.updateEvent(target, editedEvent);
@@ -90,12 +90,12 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Event> getFilteredPersonList() {
+    public ObservableList<Event> getFilteredEventList() {
         return FXCollections.unmodifiableObservableList(filteredEvents);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Event> predicate) {
+    public void updateFilteredEventList(Predicate<Event> predicate) {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
     }
@@ -103,29 +103,29 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
+    public boolean canUndoEventManager() {
         return versionedAddressBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoEventManager() {
         return versionedAddressBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
+    public void undoEventManager() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void redoAddressBook() {
+    public void redoEventManager() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void commitAddressBook() {
+    public void commitEventManager() {
         versionedAddressBook.commit();
     }
 

@@ -32,8 +32,8 @@ public class AddCommandIntegrationTest {
         Event validEvent = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validEvent);
-        expectedModel.commitAddressBook();
+        expectedModel.addEvent(validEvent);
+        expectedModel.commitEventManager();
 
         assertCommandSuccess(new AddCommand(validEvent), model, commandHistory,
                 String.format(AddCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
@@ -41,7 +41,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Event eventInList = model.getAddressBook().getPersonList().get(0);
+        Event eventInList = model.getAddressBook().getEventList().get(0);
         assertCommandFailure(new AddCommand(eventInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_EVENT);
     }
