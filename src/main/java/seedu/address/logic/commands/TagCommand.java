@@ -1,8 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.tag.TagsContainsKeywords;
 
 /**
  * Find and display the persons with the same tag
@@ -18,8 +22,17 @@ public class TagCommand extends Command {
             + "the specified tags (case-sensitive) and displays them as a list with index numbers.\n"
             + "Example: " + COMMAND_WORD + " friends";
 
+    private final TagsContainsKeywords tagsKeywords;
+
+    public TagCommand(TagsContainsKeywords TagsKeywords) {
+        this.tagsKeywords = TagsKeywords;
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        return null;
+        requireNonNull(model);
+        model.updateFilteredPersonList(tagsKeywords);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 }

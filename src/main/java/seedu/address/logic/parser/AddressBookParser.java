@@ -99,7 +99,7 @@ public class AddressBookParser {
 
         case TagCommand.COMMAND_WORD:
         case TagCommand.COMMAND_WORD_ALIAS:
-            return new TagCommand();
+            return new TagCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
