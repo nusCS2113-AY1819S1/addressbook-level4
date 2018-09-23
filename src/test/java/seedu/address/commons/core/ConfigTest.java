@@ -20,7 +20,6 @@ public class ConfigTest {
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }
-    
 
     @Test
     public void equalsMethod() {
