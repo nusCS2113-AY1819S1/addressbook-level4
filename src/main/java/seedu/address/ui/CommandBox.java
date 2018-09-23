@@ -165,18 +165,18 @@ public class CommandBox extends UiPart<Region> {
 
     /**
      * Processes the prediction output from {@code CommandCompleter}
-     * @param input
-     * @param textInput
+     * @param input the list of predictions to display
+     * @param textInput the prefix to the predictions to concatenate with
      */
     private void handlePredictions(ArrayList<String> input, String textInput) {
         if (input.size() <= 1) {
             commandTextField.appendText(input.get(0));
         } else {
-            String output = "";
+            StringBuilder output = new StringBuilder();
             for (String item : input) {
-                output += textInput + item + "\n";
+                output.append(textInput).append(item).append("\n");
             }
-            raise(new NewResultAvailableEvent(output));
+            raise(new NewResultAvailableEvent(output.toString()));
         }
     }
 }
