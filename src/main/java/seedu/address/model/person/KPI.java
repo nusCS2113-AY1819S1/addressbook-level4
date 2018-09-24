@@ -12,6 +12,7 @@ public class KPI {
     //TODO change message KPI constraints
     public static final String MESSAGE_KPI_CONSTRAINTS = "Phone numbers should only contain numbers, "
             + "and it should be at least 3 digits long";
+    //TODO update regex to accept only floats from 0 to 5
     public static final String KPI_VALIDATION_REGEX = "\\d{2,}";
     public final String value;
     public final boolean doesExist;
