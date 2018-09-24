@@ -16,9 +16,9 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.BookInventoryInventory;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -94,12 +94,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyBookInventory newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyBookInventory getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,8 +196,8 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyBookInventory getAddressBook() {
+            return new BookInventoryInventory();
         }
     }
 
