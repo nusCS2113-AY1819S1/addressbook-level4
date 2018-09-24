@@ -155,8 +155,10 @@ public class CommandBox extends UiPart<Region> {
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
+    //@@author lekoook
     /**
-     * Testing code
+     * Invokes the methods to auto complete the command.
+     * @param textInput the text input from command box.
      */
     private void predictCmd(String textInput) {
         ArrayList<String> output = logic.getCmdPrediction(textInput);
@@ -164,9 +166,9 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Processes the prediction output from {@code CommandCompleter}
-     * @param input the list of predictions to display
-     * @param textInput the prefix to the predictions to concatenate with
+     * Processes the prediction output from {@code CommandCompleter}.
+     * @param input the list of predictions to display.
+     * @param textInput the prefix to the predictions to concatenate with.
      */
     private void handlePredictions(ArrayList<String> input, String textInput) {
         if (input.size() == 1) {
