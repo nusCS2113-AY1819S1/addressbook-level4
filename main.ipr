@@ -28,7 +28,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="main_main" options="--add-modules=javafx.graphics" />
+      <module name="main_main" options="--add-modules=javafx.graphics,javafx.controls,javafx.base" />
     </option>
   </component>
   <component name="ProjectModuleManager">
