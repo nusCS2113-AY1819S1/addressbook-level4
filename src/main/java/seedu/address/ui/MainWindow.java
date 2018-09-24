@@ -41,7 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
 
     @FXML
-    private StackPane browserPlaceholder;
+    private StackPane timetablePlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -120,7 +120,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
         timetablePanel = new TimetablePanel();
-        browserPlaceholder.getChildren().add(timetablePanel.getRoot());
+        timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
