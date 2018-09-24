@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.KPI;
+import seedu.address.model.person.Kpi;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -30,7 +30,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Position position;
-    private KPI score;
+    private Kpi kpi;
     private Note note;
     private Set<Tag> tags;
 
@@ -39,9 +39,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        //TODO add position and KPI to person builder
+        //TODO add position and Kpi to person builder
         position = null;
-        score = null;
+        kpi = null;
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
     }
@@ -55,7 +55,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         position = personToCopy.getPosition();
-        score = personToCopy.getKPI();
+        kpi = personToCopy.getKpi();
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -119,13 +119,13 @@ public class PersonBuilder {
     /**
      * Sets the {@code Note} of the {@code Person} that we are building.
      */
-    public PersonBuilder withKPI(String score) {
-        this.score = new KPI(score);
+    public PersonBuilder withKpi(String kpi) {
+        this.kpi = new Kpi(kpi);
         return this;
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, position, score, note, tags);
+        return new Person(name, phone, email, address, position, kpi, note, tags);
     }
 
 }

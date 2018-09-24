@@ -66,19 +66,19 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
-
+        //TODO Refactor this 2 methods, remove if null/empty
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
             editPersonDescriptor.setPosition(ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get()));
         }
         if (argMultimap.getValue(PREFIX_KPI).isPresent()) {
-            editPersonDescriptor.setKPI(ParserUtil.parseKPI(argMultimap.getValue(PREFIX_KPI).get()));
+            editPersonDescriptor.setKpi(ParserUtil.parseKpi(argMultimap.getValue(PREFIX_KPI).get()));
         }
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editPersonDescriptor.isAnyFieldEdited() && !editPersonDescriptor.removedOptionalFields) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 

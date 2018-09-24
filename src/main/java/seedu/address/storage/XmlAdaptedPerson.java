@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.KPI;
+import seedu.address.model.person.Kpi;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -38,7 +38,7 @@ public class XmlAdaptedPerson {
     @XmlElement
     private String position;
     @XmlElement
-    private String score;
+    private String kpi;
     @XmlElement
     private String note;
 
@@ -54,14 +54,14 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, String position, String score,
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String position, String kpi,
                             String note, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.position = position;
-        this.score = score;
+        this.kpi = kpi;
         this.note = note;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -81,8 +81,8 @@ public class XmlAdaptedPerson {
         if (source.positionDoesExist()) {
             position = source.getPosition().value;
         }
-        if (source.scoreDoesExist()) {
-            score = source.getKPI().value;
+        if (source.kpiDoesExist()) {
+            kpi = source.getKpi().value;
         }
         note = source.getNote().value;
         tagged = source.getTags().stream()
@@ -143,14 +143,14 @@ public class XmlAdaptedPerson {
             modelPosition = new Position(position);
         }
 
-        final KPI modelScore;
+        final Kpi modelKpi;
         //TODO refactor this? note to doesExist()?
-        if (score == null) {
-            modelScore = new KPI();
-        } else if (!KPI.isValidKPI(score)) {
-            throw new IllegalValueException(KPI.MESSAGE_KPI_CONSTRAINTS);
+        if (kpi == null) {
+            modelKpi = new Kpi();
+        } else if (!Kpi.isValidKpi(kpi)) {
+            throw new IllegalValueException(Kpi.MESSAGE_KPI_CONSTRAINTS);
         } else {
-            modelScore = new KPI(score);
+            modelKpi = new Kpi(kpi);
         }
 
         final Note modelNote;
@@ -170,7 +170,7 @@ public class XmlAdaptedPerson {
                 modelEmail,
                 modelAddress,
                 modelPosition,
-                modelScore,
+                modelKpi,
                 modelNote,
                 modelTags);
     }
@@ -191,7 +191,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
                 && Objects.equals(position, otherPerson.position)
-                && Objects.equals(score, otherPerson.score)
+                && Objects.equals(kpi, otherPerson.kpi)
                 && Objects.equals(note, otherPerson.note)
                 && tagged.equals(otherPerson.tagged);
     }

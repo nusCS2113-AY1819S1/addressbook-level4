@@ -17,7 +17,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.KPI;
+import seedu.address.model.person.Kpi;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -76,17 +76,17 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         /**
-         * Checks if KPI has been specified
+         * Checks if Kpi has been specified
          */
-        KPI score = new KPI();
+        Kpi kpi = new Kpi();
         if (arePrefixesPresent(argMultimap, PREFIX_KPI)) {
-            score = ParserUtil.parseKPI(argMultimap.getValue(PREFIX_KPI).get());
+            kpi = ParserUtil.parseKpi(argMultimap.getValue(PREFIX_KPI).get());
         }
 
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, position, score, note, tagList);
+        Person person = new Person(name, phone, email, address, position, kpi, note, tagList);
 
         return new AddCommand(person);
     }

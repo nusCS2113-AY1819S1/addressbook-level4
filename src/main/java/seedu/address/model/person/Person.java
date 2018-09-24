@@ -23,23 +23,23 @@ public class Person {
     // Data fields
     private final Address address;
     private final Position position;
-    private final KPI score;
+    private final Kpi kpi;
     private final Note note;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Position position, KPI score,
+    public Person(Name name, Phone phone, Email email, Address address, Position position, Kpi kpi,
                   Note note, Set<Tag> tags) {
-        //TODO check if position and KPI is non null in their respective object class
+        //TODO check if position and Kpi is non null in their respective object class
         requireAllNonNull(name, phone, email, address, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.position = position;
-        this.score = score;
+        this.kpi = kpi;
         this.note = note;
         this.tags.addAll(tags);
     }
@@ -67,11 +67,11 @@ public class Person {
         return new Position();
     }
 
-    public KPI getKPI() {
-        if (scoreDoesExist()) {
-            return score;
+    public Kpi getKpi() {
+        if (kpiDoesExist()) {
+            return kpi;
         }
-        return new KPI();
+        return new Kpi();
     }
 
     public Note getNote() {
@@ -121,7 +121,7 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getPosition().equals(getPosition())
-                && otherPerson.getKPI().equals(getKPI())
+                && otherPerson.getKpi().equals(getKpi())
                 && otherPerson.getNote().equals(getNote())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -129,7 +129,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, position, score, note, tags);
+        return Objects.hash(name, phone, email, address, position, kpi, note, tags);
     }
 
     @Override
@@ -146,8 +146,8 @@ public class Person {
             builder.append(" Position: ").append(getPosition());
         }
 
-        if (scoreDoesExist()) {
-            builder.append(" KPI: ").append(getKPI());
+        if (kpiDoesExist()) {
+            builder.append(" KPI: ").append(getKpi());
         }
         builder.append(" Note: ")
                 .append(getNote())
@@ -163,8 +163,8 @@ public class Person {
         return true;
     }
 
-    public boolean scoreDoesExist() {
-        if (score == null || ! score.doesExist()) {
+    public boolean kpiDoesExist() {
+        if (kpi == null || !kpi.doesExist()) {
             return false;
         }
         return true;

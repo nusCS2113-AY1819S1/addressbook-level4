@@ -5,13 +5,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's KPI(Key Performance Index) in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidKPI(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidKpi(String)}
  */
-public class KPI {
+public class Kpi {
 
     //TODO change message KPI constraints
-    public static final String MESSAGE_KPI_CONSTRAINTS = "Phone numbers should only contain numbers, "
-            + "and it should be at least 3 digits long";
+    public static final String MESSAGE_KPI_CONSTRAINTS = "KPI scores should only contain numbers, "
+            + "and it should be at least 2 digits long";
     //TODO update regex to accept only floats from 0 to 5
     public static final String KPI_VALIDATION_REGEX = "\\d{2,}";
     public final String value;
@@ -19,15 +19,15 @@ public class KPI {
     /**
      * Constructs a {@code KPI}.
      *
-     * @param score A valid KPI score.
+     * @param kpi A valid KPI score.
      */
-    public KPI(String score) {
-        requireNonNull(score);
-        checkArgument(isValidKPI(score), MESSAGE_KPI_CONSTRAINTS);
-        value = score;
+    public Kpi(String kpi) {
+        requireNonNull(kpi);
+        checkArgument(isValidKpi(kpi), MESSAGE_KPI_CONSTRAINTS);
+        value = kpi;
     }
 
-    public KPI(){
+    public Kpi(){
         this.value = null;
     }
 
@@ -44,7 +44,7 @@ public class KPI {
     /**
      * Returns true if a given string is a valid KPI score.
      */
-    public static boolean isValidKPI(String test) {
+    public static boolean isValidKpi(String test) {
         return test.matches(KPI_VALIDATION_REGEX);
     }
 
@@ -56,12 +56,12 @@ public class KPI {
     //TODO To resolve issue when one is null and the other is not
     @Override
     public boolean equals(Object other) {
-        if (!doesExist() && !((KPI) other).doesExist()) {
+        if (!doesExist() && !((Kpi) other).doesExist()) {
             return true;
         }
         return other == this // short circuit if same object
-                || (other instanceof KPI // instanceof handles nulls
-                && value.equals(((KPI) other).value)); // state check
+                || (other instanceof Kpi // instanceof handles nulls
+                && value.equals(((Kpi) other).value)); // state check
     }
 
     @Override

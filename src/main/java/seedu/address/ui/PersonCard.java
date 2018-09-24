@@ -58,12 +58,12 @@ public class PersonCard extends UiPart<Region> {
         //TODO find a btr way to find height
         information.setOrientation(Orientation.VERTICAL);
         int height = 0;
-        if (person.scoreDoesExist()) {
+        if (person.positionDoesExist()) {
             information.getChildren().add(new Label("Position: " + person.getPosition().value));
             height += LABEL_HEIGHT;
         }
-        if (person.positionDoesExist()) {
-            information.getChildren().add(new Label("KPI: " + person.getKPI().value));
+        if (person.kpiDoesExist()) {
+            information.getChildren().add(new Label("KPI: " + person.getKpi().value));
             height += LABEL_HEIGHT;
         }
         information.setMaxHeight(height);
