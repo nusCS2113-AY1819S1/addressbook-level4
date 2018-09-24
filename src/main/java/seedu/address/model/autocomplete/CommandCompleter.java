@@ -1,3 +1,4 @@
+//@@author lekoook
 package seedu.address.model.autocomplete;
 
 import java.util.ArrayList;
@@ -131,5 +132,16 @@ public class CommandCompleter {
             System.out.print("Wrong command format");
         }
         return new ArrayList<>();
+    }
+
+    /**
+     * Adds a Person's attributes to the respective Trie instances for auto complete
+     * @param person the attributes of a person to add
+     */
+    public void addPersonToTrie(Person person) {
+        nameTrie.insert(person.getName().fullName);
+        phoneTrie.insert(person.getPhone().value);
+        emailTrie.insert(person.getEmail().value);
+        addressTrie.insert(person.getAddress().value);
     }
 }

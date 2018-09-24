@@ -161,4 +161,12 @@ public class ModelManager extends ComponentManager implements Model {
     public ArrayList<String> getCmdPrediction(String textInput) {
         return commandCompleter.predictText(textInput);
     }
+
+    /**
+     * Adds a Person's attributes to the respective Trie instances for auto complete
+     * @param person the attributes of a person to add
+     */
+    public void addPersonToTrie(Person person) {
+        commandCompleter.addPersonToTrie(person);
+    }
 }

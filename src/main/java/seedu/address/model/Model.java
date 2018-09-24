@@ -84,4 +84,10 @@ public interface Model {
      * @return a list of predictions
      */
     ArrayList<String> getCmdPrediction(String textInput);
+
+    /**
+     * Adds a Person's attributes to the respective Trie instances for auto complete
+     * @param person the attributes of a person to add
+     */
+    public void addPersonToTrie(Person person);
 }
