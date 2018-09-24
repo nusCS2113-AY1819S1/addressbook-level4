@@ -17,7 +17,7 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.BookInventoryInventory;
+import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
 
 public class XmlBookInventoryStorageTest {
@@ -76,26 +76,26 @@ public class XmlBookInventoryStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
-        BookInventoryInventory original = getTypicalAddressBook();
+        BookInventory original = getTypicalAddressBook();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
 
         //Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         ReadOnlyBookInventory readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new BookInventoryInventory(readBack));
+        assertEquals(original, new BookInventory(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new BookInventoryInventory(readBack));
+        assertEquals(original, new BookInventory(readBack));
 
         //Save and read without specifying file path
         original.addPerson(IDA);
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
-        assertEquals(original, new BookInventoryInventory(readBack));
+        assertEquals(original, new BookInventory(readBack));
 
     }
 
@@ -120,7 +120,7 @@ public class XmlBookInventoryStorageTest {
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new BookInventoryInventory(), null);
+        saveAddressBook(new BookInventory(), null);
     }
 
 

@@ -12,7 +12,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class BookInventoryInventory implements ReadOnlyBookInventory {
+public class BookInventory implements ReadOnlyBookInventory {
 
     private final UniquePersonList persons;
 
@@ -27,12 +27,12 @@ public class BookInventoryInventory implements ReadOnlyBookInventory {
         persons = new UniquePersonList();
     }
 
-    public BookInventoryInventory() {}
+    public BookInventory() {}
 
     /**
-     * Creates an BookInventoryInventory using the Persons in the {@code toBeCopied}
+     * Creates an BookInventory using the Persons in the {@code toBeCopied}
      */
-    public BookInventoryInventory(ReadOnlyBookInventory toBeCopied) {
+    public BookInventory(ReadOnlyBookInventory toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,7 +48,7 @@ public class BookInventoryInventory implements ReadOnlyBookInventory {
     }
 
     /**
-     * Resets the existing data of this {@code BookInventoryInventory} with {@code newData}.
+     * Resets the existing data of this {@code BookInventory} with {@code newData}.
      */
     public void resetData(ReadOnlyBookInventory newData) {
         requireNonNull(newData);
@@ -86,7 +86,7 @@ public class BookInventoryInventory implements ReadOnlyBookInventory {
     }
 
     /**
-     * Removes {@code key} from this {@code BookInventoryInventory}.
+     * Removes {@code key} from this {@code BookInventory}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Person key) {
@@ -109,8 +109,8 @@ public class BookInventoryInventory implements ReadOnlyBookInventory {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BookInventoryInventory // instanceof handles nulls
-                && persons.equals(((BookInventoryInventory) other).persons));
+                || (other instanceof BookInventory // instanceof handles nulls
+                && persons.equals(((BookInventory) other).persons));
     }
 
     @Override

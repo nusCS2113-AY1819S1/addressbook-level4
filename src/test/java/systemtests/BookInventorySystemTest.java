@@ -38,14 +38,14 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.BookInventoryInventory;
+import seedu.address.model.BookInventory;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalPersons;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
 /**
- * A system test class for BookInventoryInventory, which provides access to handles of GUI components and helper methods
+ * A system test class for BookInventory, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
 public abstract class BookInventorySystemTest {
@@ -84,7 +84,7 @@ public abstract class BookInventorySystemTest {
     /**
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected BookInventoryInventory getInitialData() {
+    protected BookInventory getInitialData() {
         return TypicalPersons.getTypicalAddressBook();
     }
 
@@ -179,7 +179,7 @@ public abstract class BookInventorySystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new BookInventoryInventory(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new BookInventory(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

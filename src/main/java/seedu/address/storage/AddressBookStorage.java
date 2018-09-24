@@ -5,11 +5,11 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.BookInventoryInventory;
+import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
 
 /**
- * Represents a storage for {@link BookInventoryInventory}.
+ * Represents a storage for {@link BookInventory}.
  */
 public interface AddressBookStorage {
 
@@ -19,7 +19,7 @@ public interface AddressBookStorage {
     Path getAddressBookFilePath();
 
     /**
-     * Returns BookInventoryInventory data as a {@link ReadOnlyBookInventory}.
+     * Returns BookInventory data as a {@link ReadOnlyBookInventory}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.

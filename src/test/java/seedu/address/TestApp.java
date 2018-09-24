@@ -68,11 +68,11 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public BookInventoryInventory readStorageAddressBook() {
+    public BookInventory readStorageAddressBook() {
         try {
-            return new BookInventoryInventory(storage.readAddressBook().get());
+            return new BookInventory(storage.readAddressBook().get());
         } catch (DataConversionException dce) {
-            throw new AssertionError("Data is not in the BookInventoryInventory format.", dce);
+            throw new AssertionError("Data is not in the BookInventory format.", dce);
         } catch (IOException ioe) {
             throw new AssertionError("Storage file cannot be found.", ioe);
         }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.BookInventoryInventory;
+import seedu.address.model.BookInventory;
 import seedu.address.model.person.Person;
 
 /**
@@ -60,10 +60,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code BookInventoryInventory} with all the typical persons.
+     * Returns an {@code BookInventory} with all the typical persons.
      */
-    public static BookInventoryInventory getTypicalAddressBook() {
-        BookInventoryInventory ab = new BookInventoryInventory();
+    public static BookInventory getTypicalAddressBook() {
+        BookInventory ab = new BookInventory();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

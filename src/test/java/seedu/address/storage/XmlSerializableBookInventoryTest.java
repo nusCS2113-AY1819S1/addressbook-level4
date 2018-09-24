@@ -11,7 +11,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.BookInventoryInventory;
+import seedu.address.model.BookInventory;
 import seedu.address.testutil.TypicalPersons;
 
 public class XmlSerializableBookInventoryTest {
@@ -28,8 +28,8 @@ public class XmlSerializableBookInventoryTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableAddressBook.class);
-        BookInventoryInventory bookInventoryFromFile = dataFromFile.toModelType();
-        BookInventoryInventory typicalPersonsBookInventory = TypicalPersons.getTypicalAddressBook();
+        BookInventory bookInventoryFromFile = dataFromFile.toModelType();
+        BookInventory typicalPersonsBookInventory = TypicalPersons.getTypicalAddressBook();
         assertEquals(bookInventoryFromFile, typicalPersonsBookInventory);
     }
 
