@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.ui.LoginDialogBoxUserIdPassword;
+
 public class UserId {
 
     public static final String MESSAGE_USERID_CONSTRAINTS =
@@ -17,6 +19,7 @@ public class UserId {
     public final String fullUserId;
 
     public UserId(String id) {
+        id = LoginDialogBoxUserIdPassword.getUserId();
         requireNonNull(id);
         checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);
         fullUserId = id;

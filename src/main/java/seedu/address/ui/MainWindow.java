@@ -19,7 +19,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -119,8 +122,10 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Fills up all the placeholders of this window.
+     * @param model
+     * @param history
      */
-    void fillInnerParts() {
+    void fillInnerParts(Model model, CommandHistory history) throws CommandException {
         initializeLoginProcess(model, history);
         if (LoginWindow.getIsLoginSuccessful()) {
             browserPanel = new BrowserPanel();

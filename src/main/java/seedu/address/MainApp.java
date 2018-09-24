@@ -18,6 +18,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -180,7 +181,8 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+        CommandHistory history = new CommandHistory();
+        ui.start(primaryStage, model, history);
     }
 
     @Override

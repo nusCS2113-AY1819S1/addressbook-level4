@@ -8,6 +8,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.LoginDetails;
 import seedu.address.model.Model;
+import seedu.address.model.UserId;
+import seedu.address.model.UserPassword;
+import seedu.address.ui.LoginDialogBoxUserIdPassword;
 
 public class CreateAccountCommand extends Command{
 
@@ -19,11 +22,18 @@ public class CreateAccountCommand extends Command{
             + PREFIX_USERPASSWORD + "PASSWORD ";
 
     public static final String MESSAGE_SUCCESS = "New account created: %1$s";
-    public static final String MESSAGE_DUPLICATE_ACCOUNT= "This account already exists in the address book";
+    private static final String MESSAGE_DUPLICATE_ACCOUNT= "This account already exists in the address book";
 
-    private final LoginDetails toAdd;
+    private static LoginDetails toAdd;
 
+    /**
+     * Creates a CreateAccountCommand to add the specified {@code LoginDetails}
+     */
     public CreateAccountCommand(LoginDetails details) {
+        UserId id = new UserId(LoginDialogBoxUserIdPassword.getUserId());
+        UserPassword password = new UserPassword(LoginDialogBoxUserIdPassword.getUserPassword());
+        details.setUserId(id);
+        details.setUserPassword(password);
         requireNonNull(details);
         toAdd = details;
     }

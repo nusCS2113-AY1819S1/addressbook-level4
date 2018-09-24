@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.ui.LoginDialogBoxUserIdPassword;
+
 public class UserPassword {
 
     public static final String MESSAGE_USERPASSWORD_CONSTRAINTS =
@@ -16,10 +18,11 @@ public class UserPassword {
 
     public final String fullUserPassword;
 
-    public UserPassword(String password) {
-        requireNonNull(password);
-        checkArgument(isValidUserPassword(password), MESSAGE_USERPASSWORD_CONSTRAINTS);
-        fullUserPassword = password;
+    public UserPassword(String pass) {
+        pass = LoginDialogBoxUserIdPassword.getUserPassword();
+        requireNonNull(pass);
+        checkArgument(isValidUserPassword(pass), MESSAGE_USERPASSWORD_CONSTRAINTS);
+        fullUserPassword = pass;
     }
 
     /**

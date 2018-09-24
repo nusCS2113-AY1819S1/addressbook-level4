@@ -29,8 +29,8 @@ public class LoginDetails {
         this.userId = id;
     }
 
-    public void setUserPassword(UserId password) {
-        this.userId = password;
+    public void setUserPassword(UserPassword password) {
+        this.userPassword = password;
     }
 
     @Override
