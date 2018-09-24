@@ -6,7 +6,6 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.autocomplete.CommandCompleter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,13 +23,11 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
-    private CommandCompleter commandCompleter;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
-        commandCompleter = new CommandCompleter(model);
     }
 
     @Override
@@ -55,8 +52,14 @@ public class LogicManager extends ComponentManager implements Logic {
         return new ListElementPointer(history.getHistory());
     }
 
+    //@@author lekoook
+    /**
+     * Retrieves a list of possible predictions for a command box input
+     * @param textInput text input from command box
+     * @return a list of predictions
+     */
     @Override
     public ArrayList<String> getCmdPrediction(String textInput) {
-        return commandCompleter.predictText(textInput);
+        return model.getCmdPrediction(textInput);
     }
 }

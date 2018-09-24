@@ -21,6 +21,7 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         model.resetData(new AddressBook());
         model.commitAddressBook();
+        model.clearAllTries();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
