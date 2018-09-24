@@ -379,7 +379,6 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
 ==== Undoing previous command : `undo`
 
 Restores the event schedule to the state before the previous _undoable_ command was executed. +

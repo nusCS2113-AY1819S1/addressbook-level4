@@ -65,8 +65,7 @@ public class Event {
                 && (event.getDescription().equals(getDescription())
                 || event.getLocation().equals(getLocation())
                 || event.getStartTime().equals(getStartTime())
-                || event.getEndTime().equals(getEndTime())
-        );
+                || event.getEndTime().equals(getEndTime()));
     }
 
     @Override
