@@ -27,5 +27,11 @@ public interface Logic {
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
 
-    ArrayList<String> getCmdPrediction(String prefix);
+    //@@author lekoook
+    /**
+     * Retrieves a list of possible predictions for a command box input
+     * @param textInput text input from command box
+     * @return a list of predictions
+     */
+    ArrayList<String> getCmdPrediction(String textInput);
 }

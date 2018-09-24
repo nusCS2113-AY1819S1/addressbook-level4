@@ -1,4 +1,5 @@
-package seedu.address.logic.trie;
+//@@author lekoook
+package seedu.address.model.trie;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class Trie {
     }
 
     /**
-     * Initialise the Trie instance with the items in baseList
+     * Initialises the Trie instance with the items in baseList
      */
     private void init() {
 
@@ -54,7 +55,7 @@ public class Trie {
     }
 
     /**
-     * Insert the given string value to the Trie graph.
+     * Inserts the given string value to the Trie graph.
      * @param keyString the string value to be inserted
      */
     private void insertToGraph(String keyString) {
@@ -81,7 +82,15 @@ public class Trie {
     }
 
     /**
-     * Remove the input string value from the class instance
+     * Removes all string entries in the instance
+     */
+    public void clear() {
+        root = new TrieNode(CHAR_ROOT);
+        baseList = new ArrayList<>();
+    }
+
+    /**
+     * Removes the input string value from the class instance
      * @param value the value to remove
      */
     public void remove(String value) {
@@ -92,7 +101,7 @@ public class Trie {
         }
     }
     /**
-     * Remove the input string value from the actual graph implementation
+     * Removes the input string value from the actual graph implementation
      * Traverse from the root to the last character (End node) of the string
      * Prerequisites: the value must exist in the Trie
      *
@@ -115,7 +124,7 @@ public class Trie {
     }
 
     /**
-     * Traverse the Trie from the start character to the end character of the given string value.
+     * Traverses the Trie from the start character to the end character of the given string value.
      * @param value the given value
      * @return the TrieNode referencing the end node
      */

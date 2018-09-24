@@ -1,4 +1,4 @@
-package seedu.address.logic.autocomplete;
+package seedu.address.model.autocomplete;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;

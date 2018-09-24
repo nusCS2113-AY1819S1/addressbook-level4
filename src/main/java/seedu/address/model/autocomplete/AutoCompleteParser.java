@@ -1,4 +1,4 @@
-package seedu.address.logic.autocomplete;
+package seedu.address.model.autocomplete;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
@@ -28,6 +28,7 @@ public class AutoCompleteParser {
     }
 
     /**
+     * TODO: Change the parse exception message
      * Parses the command to be used for auto completing of commands
      * @param textInput text to be parsed
      * @return a pair of values to be used to determine the Trie to use for auto complete
@@ -44,9 +45,13 @@ public class AutoCompleteParser {
 
         if (arguments.isEmpty()) {
             return new AutoCompleteParserPair(CommandCompleter.COMPLETE_COMMAND, commandWord);
-        } else if (commandWord.equals(CliSyntax.COMMAND_FIND)) {
+        }
+
+        switch(commandWord) {
+        case CliSyntax.COMMAND_FIND:
+        case CliSyntax.COMMAND_SELECT:
             return new AutoCompleteParserPair(CommandCompleter.COMPLETE_NAME, arguments.trim());
-        } else {
+        default:
             return new AutoCompleteParserPair(CommandCompleter.COMPLETE_INVALID, arguments.trim());
         }
     }
