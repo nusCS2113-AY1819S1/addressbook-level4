@@ -87,7 +87,13 @@ public interface Model {
 
     /**
      * Adds a Person's attributes to the respective Trie instances for auto complete
-     * @param person the attributes of a person to add
+     * @param person the person to add
      */
-    public void addPersonToTrie(Person person);
+    void addPersonToTrie(Person person);
+
+    /**
+     * Deletes a Person's attributes from the respective Trie instances for auto complete
+     * @param person the person to delete
+     */
+    void deletePersonFromTrie(Person person);
 }

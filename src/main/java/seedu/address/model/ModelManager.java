@@ -164,9 +164,17 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Adds a Person's attributes to the respective Trie instances for auto complete
-     * @param person the attributes of a person to add
+     * @param person the person to add
      */
     public void addPersonToTrie(Person person) {
         commandCompleter.addPersonToTrie(person);
+    }
+
+    /**
+     * Deletes a Person's attributes from the respective Trie instances for auto complete
+     * @param person the person to delete
+     */
+    public void deletePersonFromTrie(Person person) {
+        commandCompleter.deletePersonFromTrie(person);
     }
 }

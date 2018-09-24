@@ -136,12 +136,23 @@ public class CommandCompleter {
 
     /**
      * Adds a Person's attributes to the respective Trie instances for auto complete
-     * @param person the attributes of a person to add
+     * @param person the person to add
      */
     public void addPersonToTrie(Person person) {
         nameTrie.insert(person.getName().fullName);
         phoneTrie.insert(person.getPhone().value);
         emailTrie.insert(person.getEmail().value);
         addressTrie.insert(person.getAddress().value);
+    }
+
+    /**
+     * Deletes a Person's attributes from the respective Trie instances for auto complete
+     * @param person the person to delete
+     */
+    public void deletePersonFromTrie(Person person) {
+        nameTrie.remove(person.getName().fullName);
+        phoneTrie.remove(person.getPhone().value);
+        emailTrie.remove(person.getEmail().value);
+        addressTrie.remove(person.getAddress().value);
     }
 }
