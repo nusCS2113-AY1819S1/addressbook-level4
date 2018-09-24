@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -75,4 +76,12 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    //@@author lekoook
+    /**
+     * Retrieves a list of possible predictions for a command box input
+     * @param textInput text input from command box
+     * @return a list of predictions
+     */
+    ArrayList<String> getCmdPrediction(String textInput);
 }

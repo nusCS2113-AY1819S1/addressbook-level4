@@ -1,11 +1,11 @@
-package seedu.address.logic.autocomplete;
+package seedu.address.model.autocomplete;
 
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.trie.Trie;
+import seedu.address.model.trie.Trie;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 

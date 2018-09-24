@@ -1,4 +1,4 @@
-package seedu.address.logic.trie;
+package seedu.address.model.trie;
 
 import java.util.ArrayList;
 
