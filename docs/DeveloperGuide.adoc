@@ -842,6 +842,18 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
+|`* * *` |teacher |add modules |manage my module matters more easily
+
+|`* * *` |teacher |edit modules |change the details of my modules after I have created them
+
+|`* * *` |teacher |delete modules |delete modules that I accidentally created
+
+|`* * *` |teacher |archive modules |remove modules that I am no longer actively teaching, and keep it as a historical record instead
+
+|`* * *` |teacher |find module by module code |check if I have already created the module, and view its details if it exists in the system
+
+|`* * *` |teacher |list all modules |see all the modules I am currently managing
 |=======================================================================
 
 _{More to be added}_
