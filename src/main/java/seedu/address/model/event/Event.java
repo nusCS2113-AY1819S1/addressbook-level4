@@ -62,10 +62,10 @@ public class Event {
         }
         return event != null
                 && event.getEventName().equals(getEventName())
-                && (event.getDescription().equals(getDescription()) ||
-                event.getLocation().equals(getLocation()) ||
-                event.getStartTime().equals(getStartTime()) ||
-                event.getEndTime().equals(getEndTime())
+                && (event.getDescription().equals(getDescription())
+                || event.getLocation().equals(getLocation())
+                || event.getStartTime().equals(getStartTime())
+                || event.getEndTime().equals(getEndTime())
         );
     }
 
