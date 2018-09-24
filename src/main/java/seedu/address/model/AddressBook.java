@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.login.LoginDetails;
+import seedu.address.model.login.UniqueAccountList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -57,24 +59,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
-    }
-
-    //// login-level operations
-
-    /**
-     * Creates an account for the address book.
-     * The account must not already exist in the address book.
-     */
-    public void createAccount(LoginDetails details) {
-        accounts.add(details);
-    }
-
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-     */
-    public boolean hasAccount(LoginDetails details) {
-        requireNonNull(details);
-        return accounts.contains(details);
     }
 
     //// person-level operations

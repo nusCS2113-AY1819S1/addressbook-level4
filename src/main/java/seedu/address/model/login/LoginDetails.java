@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.login;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 

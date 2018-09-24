@@ -8,9 +8,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.LoginDetails;
-import seedu.address.model.UserId;
-import seedu.address.model.UserPassword;
+import seedu.address.model.login.LoginDetails;
+import seedu.address.model.login.UserId;
+import seedu.address.model.login.UserPassword;
 
 /**
  * Parses input arguments and creates a new CreateAccountCommand object

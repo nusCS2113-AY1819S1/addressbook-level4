@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.login.LoginDetails;
+import seedu.address.model.login.UniqueAccountList;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private UniqueAccountList uniqueAccountList = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -57,14 +60,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void createAccount(LoginDetails details) {
-        versionedAddressBook.createAccount(details);
-    }
+    public void createAccount(LoginDetails details) {}
 
     @Override
     public boolean hasAccount(LoginDetails details) {
         requireNonNull(details);
-        return versionedAddressBook.hasAccount(details);
+        return uniqueAccountList.contains(details);
     }
 
     @Override
@@ -157,5 +158,4 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

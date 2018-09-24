@@ -6,10 +6,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERPASSWORD;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.LoginDetails;
+import seedu.address.model.ModelManager;
+import seedu.address.model.login.LoginDetails;
 import seedu.address.model.Model;
-import seedu.address.model.UserId;
-import seedu.address.model.UserPassword;
+import seedu.address.model.login.UserId;
+import seedu.address.model.login.UserPassword;
 import seedu.address.ui.LoginDialogBoxUserIdPassword;
 
 public class CreateAccountCommand extends Command{

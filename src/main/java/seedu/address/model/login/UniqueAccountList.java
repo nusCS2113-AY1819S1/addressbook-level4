@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.model.login;
 
 import static java.util.Objects.requireNonNull;
 
@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.login.exceptions.DuplicateAccountException;
 
 /**
  * A list of accounts that enforces uniqueness between its elements and does not allow nulls.
