@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.KPI;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
@@ -150,6 +151,20 @@ public class ParserUtil {
             throw new ParseException(Position.MESSAGE_POSITION_CONSTRAINTS);
         }
         return new Position(trimmedPosition);
+    }
+
+    /**
+     * Parses a {@code String position} into an {@code Position}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code position} is invalid.
+     */
+    public static KPI parseKPI(String score) throws ParseException {
+        String trimmedScore = score.trim();
+        if (!KPI.isValidKPI(trimmedScore)) {
+            throw new ParseException(KPI.MESSAGE_KPI_CONSTRAINTS);
+        }
+        return new KPI(trimmedScore);
     }
 
 }

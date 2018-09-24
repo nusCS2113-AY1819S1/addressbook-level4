@@ -22,21 +22,24 @@ public class Person {
 
     // Data fields
     private final Address address;
-    private final Note note;
     private final Position position;
+    private final KPI score;
+    private final Note note;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Note note, Position position, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, note, tags);
+    public Person(Name name, Phone phone, Email email, Address address, Position position, KPI score,
+                  Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, position, score, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.note = note;
         this.position = position;
+        this.score = score;
+        this.note = note;
         this.tags.addAll(tags);
     }
 
@@ -56,12 +59,16 @@ public class Person {
         return address;
     }
 
-    public Note getNote() {
-        return note;
-    }
-
     public Position getPosition() {
         return position;
+    }
+
+    public KPI getKPI() {
+        return score;
+    }
+
+    public Note getNote() {
+        return note;
     }
 
     /**
@@ -106,6 +113,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getPosition().equals(getPosition())
+                && otherPerson.getKPI().equals(getKPI())
                 && otherPerson.getNote().equals(getNote())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -113,7 +122,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, note, tags);
+        return Objects.hash(name, phone, email, address, position, score, note, tags);
     }
 
     @Override
@@ -126,6 +135,10 @@ public class Person {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Position: ")
+                .append(getPosition())
+                .append(" KPI: ")
+                .append(getKPI())
                 .append(" Note: ")
                 .append(getNote())
                 .append(" Tags: ");

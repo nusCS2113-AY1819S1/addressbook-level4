@@ -37,8 +37,16 @@ public class AddCommandParser implements Parser<AddCommand> {
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_NOTE, PREFIX_TAG, PREFIX_POSITION, PREFIX_KPI);
+                ArgumentTokenizer.tokenize(
+                        args,
+                        PREFIX_NAME,
+                        PREFIX_PHONE,
+                        PREFIX_EMAIL,
+                        PREFIX_ADDRESS,
+                        PREFIX_POSITION,
+                        PREFIX_KPI,
+                        PREFIX_NOTE,
+                        PREFIX_TAG);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -50,6 +58,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
 
+        //TODO update comments
         /**
          * Checks if note has been specified
          */
@@ -58,15 +67,26 @@ public class AddCommandParser implements Parser<AddCommand> {
             note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get());
         }
 
+        /**
+         * Checks if position has been specified
+         */
         Position position = new Position();
         if (arePrefixesPresent(argMultimap, PREFIX_POSITION)) {
             position = ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get());
         }
 
+        /**
+         * Checks if KPI has been specified
+         */
+        KPI score = new KPI();
+        if (arePrefixesPresent(argMultimap, PREFIX_KPI)) {
+            score = ParserUtil.parseKPI(argMultimap.getValue(PREFIX_KPI).get());
+        }
+
 
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, note, tagList);
+        Person person = new Person(name, phone, email, address, position, score, note, tagList);
 
         return new AddCommand(person);
     }

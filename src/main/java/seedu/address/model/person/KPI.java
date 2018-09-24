@@ -10,10 +10,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class KPI {
 
     //TODO change message KPI constraints
-    public static final String MESSAGE_KPI_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
+    public static final String MESSAGE_KPI_CONSTRAINTS = "Phone numbers should only contain numbers, "
+            + "and it should be at least 3 digits long";
     public static final String KPI_VALIDATION_REGEX = "\\d{2,}";
     public final String value;
+    public final boolean doesExist;
 
     /**
      * Constructs a {@code KPI}.
@@ -24,6 +25,13 @@ public class KPI {
         requireNonNull(score);
         checkArgument(isValidKPI(score), MESSAGE_KPI_CONSTRAINTS);
         value = score;
+        doesExist = true;
+
+    }
+
+    public KPI(){
+        this.value = null;
+        doesExist = false;
     }
 
     /**

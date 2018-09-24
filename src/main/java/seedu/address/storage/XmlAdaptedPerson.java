@@ -12,10 +12,12 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.KPI;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Position;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +36,10 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String address;
     @XmlElement
+    private String position;
+    @XmlElement
+    private String score;
+    @XmlElement
     private String note;
 
     @XmlElement
@@ -48,12 +54,14 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address,
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String position, String score,
                             String note, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.position = position;
+        this.score = score;
         this.note = note;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -70,6 +78,8 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        position = source.getPosition().value;
+        score = source.getKPI().value;
         note = source.getNote().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -119,9 +129,28 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Note modelNote;
+        final Position modelPosition;
+        //TODO refactor this? note to doesExist()?
+        if (position == null) {
+            modelPosition = new Position();
+        } else if (!Position.isValidPosition(position)) {
+            throw new IllegalValueException(Position.MESSAGE_POSITION_CONSTRAINTS);
+        } else {
+            modelPosition = new Position(position);
+        }
 
-        //TODO refactor this?
+        final KPI modelScore;
+        //TODO refactor this? note to doesExist()?
+        if (score == null) {
+            modelScore = new KPI();
+        } else if (!KPI.isValidKPI(score)) {
+            throw new IllegalValueException(KPI.MESSAGE_KPI_CONSTRAINTS);
+        } else {
+            modelScore = new KPI(score);
+        }
+
+        final Note modelNote;
+        //TODO refactor this? note to doesExist()?
         if (note == null) {
             modelNote = new Note();
         } else if (!Note.isValidNote(note)) {
@@ -131,7 +160,15 @@ public class XmlAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNote, modelTags);
+        return new Person(
+                modelName,
+                modelPhone,
+                modelEmail,
+                modelAddress,
+                modelPosition,
+                modelScore,
+                modelNote,
+                modelTags);
     }
 
     @Override
@@ -149,6 +186,8 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
+                && Objects.equals(position, otherPerson.position)
+                && Objects.equals(score, otherPerson.score)
                 && Objects.equals(note, otherPerson.note)
                 && tagged.equals(otherPerson.tagged);
     }

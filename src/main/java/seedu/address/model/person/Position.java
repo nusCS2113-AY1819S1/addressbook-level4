@@ -14,7 +14,8 @@ public class Position {
 
     public static final String POSITION_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String position;
+    public final String value;
+    public final boolean doesExist;
 
     /**
      * Constructs a {@code Position}.
@@ -24,7 +25,8 @@ public class Position {
     public Position(String position) {
         requireNonNull(position);
         checkArgument(isValidPosition(position), MESSAGE_POSITION_CONSTRAINTS);
-        this.position = position;
+        value = position;
+        doesExist = true;
     }
 
     /**
@@ -32,7 +34,8 @@ public class Position {
      */
     //TODO find a better solution to null.
     public Position(){
-        this.position = null;
+        value = null;
+        doesExist = false;
     }
 
     /**
@@ -42,21 +45,20 @@ public class Position {
         return test.matches(POSITION_VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
-        return position;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Position // instanceof handles nulls
-                && position.equals(((Position) other).position)); // state check
+                && value.equals(((Position) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return position.hashCode();
+        return value.hashCode();
     }
 }
