@@ -112,7 +112,7 @@ public class CommandCompleter {
     }
 
     /**
-     * TODO: Mimic bash behaviour of auto completing some text first
+     * TODO: Handle parse exception
      * Predict the next possible list of text
      * @param textInput the string to be parsed
      * @return predicted list of text
