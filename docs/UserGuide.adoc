@@ -58,18 +58,18 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-==== Adding an event: `add`
+==== Creating an event: `create`
 
-Adds an event to the address book, via a series of prompts +
-Adding events +
+Create an event to the address book, via a series of prompts +
+Creating events +
 Format/Prompts: +
-Enter a command: `add` +
+Enter a command: `create` +
 Enter event details: `n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION` +
 Enter departments to invite: `DEPARTMENT, [MORE DEPARTMENTS,]...` +
 Enter description or instructions: `INSTRUCTIONS`
 
 Example: +
-`add event` +
+`create event` +
 `n/CS2113 Event d/120918 t/1600 l/LT15` +
 `Profs, Tutors, Students` +
 Creates an event named CS2113 Event, inviting 3 departments to it.
@@ -257,20 +257,21 @@ Department Head can only access his own department’s event
 
 Format: `help`
 
-==== Adding an event: `add`
+==== Creating an event: `create`
 
-Adds an event to the address book, via a series of prompts +
-Adding events +
+Create an event to the address book, via a series of prompts +
+Creating events +
 Format/Prompts: +
-Enter a command: `add` +
+Enter a command: `create` +
 Enter event details: `n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION` +
 Enter departments to invite: `DEPARTMENT, [MORE DEPARTMENTS,]...` +
 Enter description or instructions: `INSTRUCTIONS`
 
 Example: +
-`add event` +
+`create event` +
 `n/CS2113 Event d/120918 t/1600 l/LT15` +
 `Profs, Tutors, Students` +
+Creates an event named CS2113 Event, inviting 3 departments to it.
 Creates an event named CS2113 Event, inviting 3 departments to it.
 
 ==== Listing all events: `schedule`
