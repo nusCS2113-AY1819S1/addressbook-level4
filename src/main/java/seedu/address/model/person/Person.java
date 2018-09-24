@@ -32,7 +32,8 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Position position, KPI score,
                   Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, position, score, note, tags);
+        //TODO check if position and KPI is non null in their respective object class
+        requireAllNonNull(name, phone, email, address, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,11 +61,17 @@ public class Person {
     }
 
     public Position getPosition() {
-        return position;
+        if (positionDoesExist()) {
+            return position;
+        }
+        return new Position();
     }
 
     public KPI getKPI() {
-        return score;
+        if (scoreDoesExist()) {
+            return score;
+        }
+        return new KPI();
     }
 
     public Note getNote() {
@@ -134,16 +141,33 @@ public class Person {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress())
-                .append(" Position: ")
-                .append(getPosition())
-                .append(" KPI: ")
-                .append(getKPI())
-                .append(" Note: ")
+                .append(getAddress());
+        if (positionDoesExist()) {
+            builder.append(" Position: ").append(getPosition());
+        }
+
+        if (scoreDoesExist()) {
+            builder.append(" KPI: ").append(getKPI());
+        }
+        builder.append(" Note: ")
                 .append(getNote())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    public boolean positionDoesExist() {
+        if (position == null || !position.doesExist()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean scoreDoesExist() {
+        if (score == null || ! score.doesExist()) {
+            return false;
+        }
+        return true;
     }
 
 }

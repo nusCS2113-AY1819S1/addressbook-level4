@@ -9,13 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Position {
     //TODO change constraints
-    public static final String MESSAGE_POSITION_CONSTRAINTS =
-            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
+    public static final String MESSAGE_POSITION_CONSTRAINTS = "Positions should only contain "
+            + "alphanumeric characters and spaces";
 
     public static final String POSITION_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String value;
-    public final boolean doesExist;
 
     /**
      * Constructs a {@code Position}.
@@ -26,7 +25,6 @@ public class Position {
         requireNonNull(position);
         checkArgument(isValidPosition(position), MESSAGE_POSITION_CONSTRAINTS);
         value = position;
-        doesExist = true;
     }
 
     /**
@@ -35,11 +33,20 @@ public class Position {
     //TODO find a better solution to null.
     public Position(){
         value = null;
-        doesExist = false;
     }
 
     /**
-     * Returns true if a given string is a valid name.
+     * Returns true if a position has been assigned to the person.
+     */
+    public boolean doesExist() {
+        if(value != null){
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if a given string is a valid position.
      */
     public static boolean isValidPosition(String test) {
         return test.matches(POSITION_VALIDATION_REGEX);
@@ -50,8 +57,12 @@ public class Position {
         return value;
     }
 
+    //TODO To resolve issue when one is null and the other is not
     @Override
     public boolean equals(Object other) {
+        if (!doesExist() && !((Position) other).doesExist()) {
+            return true;
+        }
         return other == this // short circuit if same object
                 || (other instanceof Position // instanceof handles nulls
                 && value.equals(((Position) other).value)); // state check

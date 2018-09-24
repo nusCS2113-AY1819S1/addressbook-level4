@@ -78,8 +78,12 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        position = source.getPosition().value;
-        score = source.getKPI().value;
+        if (source.positionDoesExist()) {
+            position = source.getPosition().value;
+        }
+        if (source.scoreDoesExist()) {
+            score = source.getKPI().value;
+        }
         note = source.getNote().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)

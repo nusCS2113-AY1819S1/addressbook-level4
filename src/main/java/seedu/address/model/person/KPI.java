@@ -15,7 +15,6 @@ public class KPI {
     //TODO update regex to accept only floats from 0 to 5
     public static final String KPI_VALIDATION_REGEX = "\\d{2,}";
     public final String value;
-    public final boolean doesExist;
 
     /**
      * Constructs a {@code KPI}.
@@ -26,13 +25,20 @@ public class KPI {
         requireNonNull(score);
         checkArgument(isValidKPI(score), MESSAGE_KPI_CONSTRAINTS);
         value = score;
-        doesExist = true;
-
     }
 
     public KPI(){
         this.value = null;
-        doesExist = false;
+    }
+
+    /**
+     * Returns true if a KPI has been assigned to the person.
+     */
+    public boolean doesExist() {
+        if(value != null){
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -47,8 +53,12 @@ public class KPI {
         return value;
     }
 
+    //TODO To resolve issue when one is null and the other is not
     @Override
     public boolean equals(Object other) {
+        if (!doesExist() && !((KPI) other).doesExist()) {
+            return true;
+        }
         return other == this // short circuit if same object
                 || (other instanceof KPI // instanceof handles nulls
                 && value.equals(((KPI) other).value)); // state check
