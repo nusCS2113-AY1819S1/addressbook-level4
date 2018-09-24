@@ -96,4 +96,9 @@ public interface Model {
      * @param person the person to delete
      */
     void deletePersonFromTrie(Person person);
+
+    /**
+     * Removes all entries in all Trie instances
+     */
+    void clearAllTries();
 }

@@ -177,4 +177,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void deletePersonFromTrie(Person person) {
         commandCompleter.deletePersonFromTrie(person);
     }
+
+    /**
+     * Removes all entries in all Trie instances
+     */
+    public void clearAllTries() {
+        commandCompleter.clearAllTries();
+    }
 }

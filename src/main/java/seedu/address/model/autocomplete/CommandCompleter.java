@@ -155,4 +155,14 @@ public class CommandCompleter {
         emailTrie.remove(person.getEmail().value);
         addressTrie.remove(person.getAddress().value);
     }
+
+    /**
+     * Removes all entries in all Trie instances
+     */
+    public void clearAllTries() {
+        nameTrie.clear();
+        phoneTrie.clear();
+        emailTrie.clear();
+        addressTrie.clear();
+    }
 }
