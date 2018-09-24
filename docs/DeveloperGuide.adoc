@@ -842,6 +842,18 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
+|`* * *` |teacher |add modules |manage my module matters more easily
+
+|`* * *` |teacher |edit modules |change the details of my modules after I have created them
+
+|`* * *` |teacher |delete modules |delete modules that I accidentally created
+
+|`* * *` |teacher |archive modules |remove modules that I am no longer actively teaching, and keep it as a historical record instead
+
+|`* * *` |teacher |find module by module code |check if I have already created the module, and view its details if it exists in the system
+
+|`* * *` |teacher |list all modules |see all the modules I am currently managing
 |=======================================================================
 
 _{More to be added}_
@@ -876,6 +888,233 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: Add module
+
+*MSS*
+
+1.  Teacher wants to add a module to the system.
+2.  System successfully adds the module.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. Teacher enters the wrong parameter prefix.
++
+[none]
+** 2b1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+[none]
+* 2c. Teacher enters a module code that already exists in the system.
++
+[none]
+** 2c1. System informs the user of the existence of the module.
++
+Use case resumes at step 1.
+
+[none]
+* 2d. Teacher fills in the prerequisites with module codes that don’t exist.
++
+[none]
+** 2d1. System informs the user of the non-existing module codes.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Edit module
+
+*MSS*
+
+1.  Teacher wants to edit a module to the system.
+2.  System successfully saves the changes made to the module.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. Teacher enters the wrong parameter prefix.
++
+[none]
+** 2b1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+[none]
+* 2c. Teacher enters a module code that doesn’t exist in the system.
++
+[none]
+** 2c1. System informs the user that the module doesn’t exist.
++
+Use case resumes at step 1.
+
+
+[none]
+* 2d. Teacher fills in the prerequisites with module codes that don’t exist.
++
+[none]
+** 2d1. System informs the user of the non-existing module codes.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Delete module
+
+*MSS*
+
+1.  Teacher wants to delete a module in the system.
+2.  System prompts for confirmation to delete the module.
+3.  Teacher confirms the deletion of the module.
+4.  System successfully deletes the module.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. Teacher enters the wrong parameter prefix.
++
+[none]
+** 2b1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+[none]
+* 2c. Teacher enters a module code that doesn’t exist in the system.
++
+[none]
+** 2c1. System informs the user that the module doesn’t exist.
++
+Use case resumes at step 1.
+
+[none]
+* 3a. Teacher rejects the confirmation to delete the module.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Archive module
+
+*MSS*
+
+1.  Teacher wants to archive a module in the system.
+2.  System prompts for confirmation to archive the module.
+3.  Teacher confirms archiving of the module.
+4.  System successfully archives the module.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. Teacher enters the wrong parameter prefix.
++
+[none]
+** 2b1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+[none]
+* 2c. Teacher enters a module code that doesn’t exist in the system.
++
+[none]
+** 2c1. System informs the user that the module doesn’t exist.
++
+Use case resumes at step 1.
+
+[none]
+* 3a. Teacher rejects the confirmation to delete the module.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Finding a module by module code
+
+*MSS*
+
+1.  Teacher searches for a module with some module codes as keywords.
+2.  System lists all the active modules that match any of the keywords.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. Teacher enters keywords that do not match any modules.
++
+[none]
+** 2b1. System informs the user that no active modules were found.
++
+Use case resumes at step 1.
+
+[none]
+* 2c. Teacher enters the `--all` option in the command
++
+[none]
+** 2c1. System displays all matching modules including archived modules.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Listing modules
+
+*MSS*
+
+1.  Teacher wants to see all the active modules in the system.
+2.  System lists all the active modules.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. Teacher enters the `--all` option in the command
++
+[none]
+** 2b1. System displays all matching modules including archived modules.
++
+Use case resumes at step 1.
 
 _{More to be added}_
 
