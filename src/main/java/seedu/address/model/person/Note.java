@@ -11,6 +11,7 @@ public class Note {
 
     public static final String MESSAGE_NOTE_CONSTRAINTS =
             "Notes or Descriptions should only contain alphanumeric characters and spaces";
+    //TODO check regex and update to include fullstops.
     public static final String NOTE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
     public static final String NOTE_NOT_PROVIDED = "No notes for this contact";
 

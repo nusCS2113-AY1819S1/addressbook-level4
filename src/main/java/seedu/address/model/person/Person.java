@@ -23,18 +23,20 @@ public class Person {
     // Data fields
     private final Address address;
     private final Note note;
+    private final Position position;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Note note, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Note note, Position position, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.note = note;
+        this.position = position;
         this.tags.addAll(tags);
     }
 
@@ -58,6 +60,10 @@ public class Person {
         return note;
     }
 
+    public Position getPosition() {
+        return position;
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -70,6 +76,7 @@ public class Person {
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
+    //TODO check for dups
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;

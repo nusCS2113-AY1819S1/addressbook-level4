@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Position;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -136,4 +137,19 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String position} into an {@code Position}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code position} is invalid.
+     */
+    public static Position parsePosition(String position) throws ParseException {
+        String trimmedPosition = position.trim();
+        if (!Position.isValidPosition(trimmedPosition)) {
+            throw new ParseException(Position.MESSAGE_POSITION_CONSTRAINTS);
+        }
+        return new Position(trimmedPosition);
+    }
+
 }
