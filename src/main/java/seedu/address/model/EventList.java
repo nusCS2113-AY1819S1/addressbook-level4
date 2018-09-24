@@ -1,37 +1,30 @@
 package seedu.address.model;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.person.Person;
-
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.UniqueEventList;
 
-public class EventList implements ReadOnlyEventList{
+/**
+ * Wraps all data at the event-list level
+ * Duplicates are not allowed (by .isSameEvent comparison)
+ */
+public class EventList implements ReadOnlyEventList {
     private final UniqueEventList events;
 
-    /*
-     * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
-     * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
-     *
-     * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
-     *   among constructors.
-     */ {
+    /**
+     * @param toBeCopied
+     */
+    public EventList(ReadOnlyEventList toBeCopied) {
         events = new UniqueEventList();
+        resetData(toBeCopied);
     }
 
     public EventList() {
-    }
-
-    /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
-     */
-    public EventList(ReadOnlyEventList toBeCopied) {
-        this();
-        resetData(toBeCopied);
+        events = new UniqueEventList();
     }
 
     //// list overwrite operations
@@ -49,8 +42,7 @@ public class EventList implements ReadOnlyEventList{
      */
     public void resetData(ReadOnlyEventList newData) {
         requireNonNull(newData);
-
-        setEvents(newData.getEventList());
+        this.setEvents(newData.getEventList());
     }
 
     //// person-level operations
@@ -115,3 +107,5 @@ public class EventList implements ReadOnlyEventList{
         return events.hashCode();
     }
 }
+
+
