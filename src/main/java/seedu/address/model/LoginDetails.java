@@ -25,6 +25,14 @@ public class LoginDetails {
         return userPassword;
     }
 
+    public void setUserId(UserId id) {
+        this.userId = id;
+    }
+
+    public void setUserPassword(UserId password) {
+        this.userId = password;
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own

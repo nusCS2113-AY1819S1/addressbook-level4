@@ -27,7 +27,7 @@ public class CreateAccountCommand extends Command{
         requireNonNull(details);
         toAdd = details;
     }
-
+    // add JOption input fields to get user details, then assign it to variables to be assigned to toAdd object
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);

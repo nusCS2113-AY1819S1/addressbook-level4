@@ -4,6 +4,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CreateAccountCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+
 /**
  * The login window. Provides the basic application layout containing
  * a simple text box for providing additional commands, a text field for
@@ -19,21 +24,18 @@ public class LoginWindow {
         return isLoginSuccessful;
     }
 
+    private static CreateAccountCommand createAccount;
+
     /**
      * Kick starts the log in process with pop-up login windows.
+     * @param model
+     * @param history
      */
-    public static void initializeLoginProcess() {
+    public static void initializeLoginProcess(Model model, CommandHistory history) throws CommandException {
 
-        //@@author Chocological-reused
-        //Reused from https://stackoverflow.com/posts/8853170/revisions with minor modifications
-        final JFrame initialLoginOptions = new JFrame();
-        JButton initialLoginButton = new JButton();
+        LoginDialogBox.setLoginDialogBox();
 
-        initialLoginOptions.add(initialLoginButton);
-        initialLoginOptions.pack();
-        initialLoginOptions.setVisible(true);
-
-        String loginSelection = JOptionPane.showInputDialog(initialLoginOptions,
+        String loginSelection = JOptionPane.showInputDialog(LoginDialogBox.getLoginFrame(),
                 "Please type in command to either login normally, create new account, " +
                         "delete account or change account password", null);
 
@@ -44,7 +46,7 @@ public class LoginWindow {
                 break;
             case "create account":
                 isSensitiveInformation = true;
-
+                createAccount.execute(model, history);
                 break;
             case "delete account":
                 isSensitiveInformation = true;
@@ -57,10 +59,7 @@ public class LoginWindow {
             default:
                 throw new IllegalArgumentException("Invalid command!" + loginSelection);
         }
-        //@@author
 
-        //@@author Chocological-reused
-        //Reused from https://stackoverflow.com/posts/8853170/revisions with minor modifications
         final JFrame userIdentity = new JFrame();
         final JFrame userPassword = new JFrame();
         JButton button = new JButton();
@@ -72,8 +71,6 @@ public class LoginWindow {
         userPassword.add(button);
         userPassword.pack();
         userPassword.setVisible(true);
-        //@@author
-
 
         String userId = JOptionPane.showInputDialog(userIdentity,
                 "Please enter student matriculation ID as user ID:", null);
@@ -106,7 +103,7 @@ public class LoginWindow {
         //@@author
     }
 
-    public static void main(String[] args) {
-        initializeLoginProcess();
+    public static void main(Model model, CommandHistory history) throws CommandException {
+        initializeLoginProcess(model, history);
     }
 }

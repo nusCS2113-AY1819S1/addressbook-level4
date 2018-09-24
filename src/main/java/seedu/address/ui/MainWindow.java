@@ -121,7 +121,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        initializeLoginProcess();
+        initializeLoginProcess(model, history);
         if (LoginWindow.getIsLoginSuccessful()) {
             browserPanel = new BrowserPanel();
             browserPlaceholder.getChildren().add(browserPanel.getRoot());
