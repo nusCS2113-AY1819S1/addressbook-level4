@@ -33,7 +33,7 @@ import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
 /**
- * The main entry point to the application. Test
+ * The main entry point to the application. Bestie
  */
 public class MainApp extends Application {
 
