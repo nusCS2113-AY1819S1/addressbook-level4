@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.BookInventoryInventory;
+import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.person.Person;
 
 /**
- * An Immutable BookInventoryInventory that is serializable to XML format
+ * An Immutable BookInventory that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
@@ -40,13 +40,13 @@ public class XmlSerializableAddressBook {
     }
 
     /**
-     * Converts this addressbook into the model's {@code BookInventoryInventory} object.
+     * Converts this addressbook into the model's {@code BookInventory} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson}.
      */
-    public BookInventoryInventory toModelType() throws IllegalValueException {
-        BookInventoryInventory bookInventory = new BookInventoryInventory();
+    public BookInventory toModelType() throws IllegalValueException {
+        BookInventory bookInventory = new BookInventory();
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
             if (bookInventory.hasPerson(person)) {

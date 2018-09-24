@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code BookInventoryInventory} that keeps track of its own history.
+ * {@code BookInventory} that keeps track of its own history.
  */
-public class VersionedBookInventoryInventory extends BookInventoryInventory {
+public class VersionedBookInventory extends BookInventory {
 
     private final List<ReadOnlyBookInventory> addressBookStateList;
     private int currentStatePointer;
 
-    public VersionedBookInventoryInventory(ReadOnlyBookInventory initialState) {
+    public VersionedBookInventory(ReadOnlyBookInventory initialState) {
         super(initialState);
 
         addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new BookInventoryInventory(initialState));
+        addressBookStateList.add(new BookInventory(initialState));
         currentStatePointer = 0;
     }
 
     /**
-     * Saves a copy of the current {@code BookInventoryInventory} state at the end of the state list.
+     * Saves a copy of the current {@code BookInventory} state at the end of the state list.
      * Undone states are removed from the state list.
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new BookInventoryInventory(this));
+        addressBookStateList.add(new BookInventory(this));
         currentStatePointer++;
     }
 
@@ -77,11 +77,11 @@ public class VersionedBookInventoryInventory extends BookInventoryInventory {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof VersionedBookInventoryInventory)) {
+        if (!(other instanceof VersionedBookInventory)) {
             return false;
         }
 
-        VersionedBookInventoryInventory otherVersionedAddressBook = (VersionedBookInventoryInventory) other;
+        VersionedBookInventory otherVersionedAddressBook = (VersionedBookInventory) other;
 
         // state check
         return super.equals(otherVersionedAddressBook)

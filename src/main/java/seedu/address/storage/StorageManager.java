@@ -16,7 +16,7 @@ import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of BookInventoryInventory data in local storage.
+ * Manages storage of BookInventory data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
@@ -49,7 +49,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ BookInventoryInventory methods ==============================
+    // ================ BookInventory methods ==============================
 
     @Override
     public Path getAddressBookFilePath() {

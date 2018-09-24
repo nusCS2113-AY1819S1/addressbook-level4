@@ -21,7 +21,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.*;
-import seedu.address.model.BookInventoryInventory;
+import seedu.address.model.BookInventory;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -51,7 +51,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing BookInventoryInventory ]===========================");
+        logger.info("=============================[ Initializing BookInventory ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -84,15 +84,15 @@ public class MainApp extends Application {
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample BookInventoryInventory");
+                logger.info("Data file not found. Will be starting with a sample BookInventory");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty BookInventoryInventory");
-            initialData = new BookInventoryInventory();
+            logger.warning("Data file not in the correct format. Will be starting with an empty BookInventory");
+            initialData = new BookInventory();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty BookInventoryInventory");
-            initialData = new BookInventoryInventory();
+            logger.warning("Problem while reading from the file. Will be starting with an empty BookInventory");
+            initialData = new BookInventory();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -156,7 +156,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty BookInventoryInventory");
+            logger.warning("Problem while reading from the file. Will be starting with an empty BookInventory");
             initializedPrefs = new UserPrefs();
         }
 
@@ -176,7 +176,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting BookInventoryInventory " + MainApp.VERSION);
+        logger.info("Starting BookInventory " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

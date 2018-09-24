@@ -15,7 +15,7 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyBookInventory newData);
 
-    /** Returns the BookInventoryInventory */
+    /** Returns the BookInventory */
     ReadOnlyBookInventory getAddressBook();
 
     /**

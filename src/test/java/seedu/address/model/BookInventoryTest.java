@@ -28,7 +28,7 @@ public class BookInventoryTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final BookInventoryInventory bookInventory = new BookInventoryInventory();
+    private final BookInventory bookInventory = new BookInventory();
 
     @Test
     public void constructor() {
@@ -43,7 +43,7 @@ public class BookInventoryTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        BookInventoryInventory newData = getTypicalAddressBook();
+        BookInventory newData = getTypicalAddressBook();
         bookInventory.resetData(newData);
         assertEquals(newData, bookInventory);
     }
