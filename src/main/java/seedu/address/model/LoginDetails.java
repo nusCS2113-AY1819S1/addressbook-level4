@@ -33,6 +33,18 @@ public class LoginDetails {
         this.userPassword = password;
     }
 
+    /**
+     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSameAccount(LoginDetails otherAccount) {
+        if (otherAccount == this) {
+            return true;
+        }
+
+        return otherAccount != null && otherAccount.getUserId().equals(getUserId());
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
