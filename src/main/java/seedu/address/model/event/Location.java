@@ -3,6 +3,11 @@ package seedu.address.model.event;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+
+/**
+ * Represents a Event's location in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
+ */
 public class Location {
     public static final String MESSAGE_LOCATION_CONSTRAINTS =
             "Event location should only contain alphanumeric characters and spaces, and it should not be blank";
@@ -22,7 +27,7 @@ public class Location {
      */
     public Location(String location) {
         requireNonNull(location);
-        checkArgument(isValidDescription(location), MESSAGE_LOCATION_CONSTRAINTS);
+        checkArgument(isValidLocation(location), MESSAGE_LOCATION_CONSTRAINTS);
         value = location;
     }
 
@@ -30,7 +35,7 @@ public class Location {
      * Returns true if a given string is a valid description.
      * Will implement this at a later date
      */
-    public static boolean isValidDescription(String test) {
+    public static boolean isValidLocation(String test) {
         return true;
     }
 

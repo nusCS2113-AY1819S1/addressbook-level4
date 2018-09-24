@@ -1,12 +1,15 @@
 package seedu.address.model.event;
 
-import seedu.address.model.person.Person;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import seedu.address.model.person.Person;
+
+/**
+ * Represents a the attendees in a event.
+ */
 public class Attendees {
-    ArrayList<Person> attendeesList;
+    private ArrayList<Person> attendeesList;
 
     public Attendees(Person... persons) {
         this.attendeesList = new ArrayList<Person>(Arrays.asList(persons));
@@ -29,6 +32,10 @@ public class Attendees {
         return other == this // short circuit if same object
                 || (other instanceof Attendees// instanceof handles nulls
                 && attendeesList.equals(((Attendees) other).attendeesList)); // state check
+    }
+
+    public ArrayList<Person> getAttendeesList() {
+        return attendeesList;
     }
 
     @Override

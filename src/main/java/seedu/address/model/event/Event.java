@@ -1,21 +1,14 @@
 package seedu.address.model.event;
 
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Event in the event list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-
 public class Event {
 
     // Identity fields
@@ -25,6 +18,10 @@ public class Event {
     private final Date endTime;
     private final Location location;
 
+
+    /**
+     * Every field must be present not null
+     */
     public Event(EventName eventName, Description description, Date startTime, Date endTime, Location location) {
         requireAllNonNull(eventName);
         this.eventName = eventName;
@@ -54,6 +51,11 @@ public class Event {
         return location;
     }
 
+
+    /**
+     * Returns true if both event of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two events.
+     */
     public boolean isSameEvent(Event event) {
         if (event == this) {
             return true;
