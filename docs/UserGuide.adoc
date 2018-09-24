@@ -56,18 +56,27 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a record: `add` [Vincent]
 
-Adds a person to the expense book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a record to the FinanceBook +
+Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
+
+MONEYFLOW denotes the money parameter of the financial activity. It can be either a debit(expense) or a credit(income).
+To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the money amount. +
+
+****
+* Typical format for a MONEYFLOW parameter :
+** Typical example of *expense*: add n/PhoneBill d/24-9-2018 m/*-4.50*
+** Typical example of *income*: add n/Allowance d/24-9-2018 m/*+50.00*
+****
 
 [TIP]
 A person can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/PaymentToJohn d/20-8-2018 m/-10`
+* `add n/PaymentFromBetty t/friend m/+10 d/10-11-2018 t/classmate`
 
 === Listing all persons : `list`
 
