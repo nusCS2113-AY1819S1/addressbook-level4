@@ -184,4 +184,13 @@ public class ModelManager extends ComponentManager implements Model {
     public void clearAllTries() {
         commandCompleter.clearAllTries();
     }
+
+    /**
+     * Edits a Person's attributes in each respective Trie instances for auto complete.
+     * @param personToEdit the original person.
+     * @param editedPerson the new person.
+     */
+    public void editPersonInTrie(Person personToEdit, Person editedPerson) {
+        commandCompleter.editPersonInTrie(personToEdit, editedPerson);
+    }
 }

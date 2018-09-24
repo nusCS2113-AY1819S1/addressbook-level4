@@ -101,4 +101,11 @@ public interface Model {
      * Removes all entries in all Trie instances
      */
     void clearAllTries();
+
+    /**
+     * Edits a Person's attributes in each respective Trie instances for auto complete.
+     * @param personToEdit the original person.
+     * @param editedPerson the new person.
+     */
+    void editPersonInTrie(Person personToEdit, Person editedPerson);
 }

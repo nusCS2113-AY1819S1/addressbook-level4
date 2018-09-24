@@ -165,4 +165,29 @@ public class CommandCompleter {
         emailTrie.clear();
         addressTrie.clear();
     }
+
+    /**
+     * Edits a Person's attributes in each respective Trie instances for auto complete.
+     * Compares the differences of attributes and only update the Trie instances for attributes that were changed.
+     * @param personToEdit the original person.
+     * @param editedPerson the new person.
+     */
+    public void editPersonInTrie(Person personToEdit, Person editedPerson) {
+        if (!personToEdit.getName().equals(editedPerson.getName())) {
+            nameTrie.remove(personToEdit.getName().fullName);
+            nameTrie.insert(editedPerson.getName().fullName);
+        }
+        if (!personToEdit.getEmail().equals(editedPerson.getEmail())) {
+            emailTrie.remove(personToEdit.getEmail().value);
+            emailTrie.insert(editedPerson.getEmail().value);
+        }
+        if (!personToEdit.getPhone().equals(editedPerson.getPhone())) {
+            phoneTrie.remove(personToEdit.getPhone().value);
+            phoneTrie.insert(editedPerson.getPhone().value);
+        }
+        if (!personToEdit.getAddress().equals(editedPerson.getAddress())) {
+            addressTrie.remove(personToEdit.getAddress().value);
+            addressTrie.insert(editedPerson.getAddress().value);
+        }
+    }
 }
