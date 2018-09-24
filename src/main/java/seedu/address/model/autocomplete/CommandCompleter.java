@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.trie.Trie;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.trie.Trie;
 
 /**
  * Completes the command for the user by predicting the possible substrings
