@@ -10,22 +10,22 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class FoodItem {
-    private final Name name;
-    private final Recipe recipe;
-    private Price price;
+    private final FoodName foodName;
+    private final FoodRecipe foodRecipe;
+    private FoodPrice foodPrice;
 
-    public FoodItem(Name name, Recipe recipe, Price price) {
+    public FoodItem(FoodName name, FoodRecipe recipe, FoodPrice price) {
         requireAllNonNull(name, recipe, price);
-        this.name = name;
-        this.recipe = recipe;
-        this.price = price;
+        this.foodName = name;
+        this.foodRecipe = recipe;
+        this.foodPrice = price;
     }
 
-    public Name getName() { return name; }
+    public FoodName getFoodName() { return foodName; }
 
-    public Recipe getRecipe() { return recipe; }
+    public FoodRecipe getFoodRecipe() { return foodRecipe; }
 
-    public Price getPrice() { return price; }
+    public FoodPrice getFoodPrice() { return foodPrice; }
 
 
     /**
@@ -38,8 +38,8 @@ public class FoodItem {
         }
 
         return otherFoodItem != null
-                && otherFoodItem.getName().equals(getName())
-                && otherFoodItem.getRecipe().equals(getRecipe());
+                && otherFoodItem.getFoodName().equals(getFoodName())
+                && otherFoodItem.getFoodRecipe().equals(getFoodRecipe());
     }
 
     /**
@@ -57,8 +57,8 @@ public class FoodItem {
         }
 
         FoodItem otherFoodItem = (FoodItem) other;
-        return otherFoodItem.getName().equals(getName())
-                && otherFoodItem.getRecipe().equals(getRecipe())
-                && otherFoodItem.getPrice().equals(getPrice());
+        return otherFoodItem.getFoodName().equals(getFoodName())
+                && otherFoodItem.getFoodRecipe().equals(getFoodRecipe())
+                && otherFoodItem.getFoodPrice().equals(getFoodPrice());
     }
 }
