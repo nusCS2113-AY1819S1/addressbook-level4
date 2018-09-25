@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final int LABEL_HEIGHT = 17;
+    private static final int LABEL_HEIGHT = 18;
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
