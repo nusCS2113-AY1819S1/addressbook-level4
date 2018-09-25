@@ -12,8 +12,8 @@ assert (var >= 0 && var < 2); // Ensures that the variable is within this, if no
 # Exception handling
 Use this for methods that could go wrong due to external uncontrollable factors.
 
-- Write throwables for methods that could go wrong 
-- Look at most specific first for catch blocks 
+- Write throwables for methods that could go wrong
+- Look at most specific first for catch blocks
 
 Syntax:
 ```Java

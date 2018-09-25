@@ -2,12 +2,12 @@
 
 Measure of number of dependencies between modules. A module is coupled to another module when it depends on it.
 ##Types of Coupling 
-1. **Content coupling** - one module modifies or relies on the internal workings of another module eg. 
+1. **Content coupling** - one module modifies or relies on the internal workings of another module eg.
 accessing local data of another module
 2. **Common/ global coupling** - two modules share the same global data
 3. **Control coupling** - one module passing a flag to another module
 4. **Data coupling** - one module sharing data with another module eg. passing params
-5. **External coupling** - two modules share an externally imposed convention eg. 
+5. **External coupling** - two modules share an externally imposed convention eg.
 communication protocols
 6. **Subclass coupling** - a class inherits from another class.
 Note that a child class is coupled to the parent class but not the other way around.
