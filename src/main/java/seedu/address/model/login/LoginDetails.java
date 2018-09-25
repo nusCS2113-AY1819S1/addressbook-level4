@@ -6,11 +6,15 @@ import java.util.Objects;
 
 /**
  * Represents user's login credentials.
+ * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class LoginDetails {
     private UserId userId;
     private UserPassword userPassword;
 
+    /**
+     * Every field must be present and not null.
+     */
     public LoginDetails(UserId userId, UserPassword userPassword) {
         requireAllNonNull(userId, userPassword);
         this.userId = userId;

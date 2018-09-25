@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CreateAccountCommand;
