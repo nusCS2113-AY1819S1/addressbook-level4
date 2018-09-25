@@ -1,4 +1,4 @@
-package seedu.address.logic.autocomplete;
+package seedu.address.model.autocomplete;
 
 /**
  * Pair object used in parsing of commands for auto complete functionality

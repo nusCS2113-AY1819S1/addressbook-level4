@@ -1,13 +1,14 @@
-package seedu.address.logic.autocomplete;
+//@@author lekoook
+package seedu.address.model.autocomplete;
 
 import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.trie.Trie;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.trie.Trie;
 
 /**
  * Completes the command for the user by predicting the possible substrings
@@ -112,7 +113,7 @@ public class CommandCompleter {
     }
 
     /**
-     * TODO: Mimic bash behaviour of auto completing some text first
+     * TODO: Handle parse exception
      * Predict the next possible list of text
      * @param textInput the string to be parsed
      * @return predicted list of text
@@ -131,5 +132,62 @@ public class CommandCompleter {
             System.out.print("Wrong command format");
         }
         return new ArrayList<>();
+    }
+
+    /**
+     * Adds a Person's attributes to the respective Trie instances for auto complete
+     * @param person the person to add
+     */
+    public void addPersonToTrie(Person person) {
+        nameTrie.insert(person.getName().fullName);
+        phoneTrie.insert(person.getPhone().value);
+        emailTrie.insert(person.getEmail().value);
+        addressTrie.insert(person.getAddress().value);
+    }
+
+    /**
+     * Deletes a Person's attributes from the respective Trie instances for auto complete
+     * @param person the person to delete
+     */
+    public void deletePersonFromTrie(Person person) {
+        nameTrie.remove(person.getName().fullName);
+        phoneTrie.remove(person.getPhone().value);
+        emailTrie.remove(person.getEmail().value);
+        addressTrie.remove(person.getAddress().value);
+    }
+
+    /**
+     * Removes all entries in all Trie instances
+     */
+    public void clearAllTries() {
+        nameTrie.clear();
+        phoneTrie.clear();
+        emailTrie.clear();
+        addressTrie.clear();
+    }
+
+    /**
+     * Edits a Person's attributes in each respective Trie instances for auto complete.
+     * Compares the differences of attributes and only update the Trie instances for attributes that were changed.
+     * @param personToEdit the original person.
+     * @param editedPerson the new person.
+     */
+    public void editPersonInTrie(Person personToEdit, Person editedPerson) {
+        if (!personToEdit.getName().equals(editedPerson.getName())) {
+            nameTrie.remove(personToEdit.getName().fullName);
+            nameTrie.insert(editedPerson.getName().fullName);
+        }
+        if (!personToEdit.getEmail().equals(editedPerson.getEmail())) {
+            emailTrie.remove(personToEdit.getEmail().value);
+            emailTrie.insert(editedPerson.getEmail().value);
+        }
+        if (!personToEdit.getPhone().equals(editedPerson.getPhone())) {
+            phoneTrie.remove(personToEdit.getPhone().value);
+            phoneTrie.insert(editedPerson.getPhone().value);
+        }
+        if (!personToEdit.getAddress().equals(editedPerson.getAddress())) {
+            addressTrie.remove(personToEdit.getAddress().value);
+            addressTrie.insert(editedPerson.getAddress().value);
+        }
     }
 }
