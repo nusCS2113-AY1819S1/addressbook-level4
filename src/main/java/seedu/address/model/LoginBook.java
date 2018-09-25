@@ -2,10 +2,11 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UniqueAccountList;
 
-public abstract class LoginBook implements ReadOnlyLoginBook{
+public class LoginBook implements ReadOnlyLoginBook{
 
     private final UniqueAccountList accounts;
 
@@ -43,5 +44,10 @@ public abstract class LoginBook implements ReadOnlyLoginBook{
     @Override
     public int hashCode() {
         return accounts.hashCode();
+    }
+
+    @Override
+    public ObservableList<LoginDetails> getLoginDetailsList() {
+        return null;
     }
 }

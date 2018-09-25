@@ -8,10 +8,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.LoginBook;
 import seedu.address.model.ReadOnlyLoginBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.login.LoginDetails;
 
 /**
  * An Immutable LoginBook that is serializable to XML format
@@ -46,16 +45,16 @@ public class XmlSerializableLoginBook {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAccount}.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
-        for (XmlAdaptedPerson p : persons) {
-            Person person = p.toModelType();
-            if (addressBook.hasPerson(person)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+    public LoginBook toModelType() throws IllegalValueException {
+        LoginBook loginBook = new LoginBook();
+        for (XmlAccount l : accounts) {
+            LoginDetails loginDetails = l.toModelType();
+            if (loginBook.hasLoginDetails(loginDetails)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ACCOUNT);
             }
-            addressBook.addPerson(person);
+            loginBook.createAccount(loginDetails);
         }
-        return addressBook;
+        return loginBook;
     }
 
     @Override
@@ -64,9 +63,9 @@ public class XmlSerializableLoginBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableLoginBook)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return accounts.equals(((XmlSerializableLoginBook) other).accounts);
     }
 }
