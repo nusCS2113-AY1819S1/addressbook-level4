@@ -48,7 +48,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code EventCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -64,7 +64,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Event} using a {@code EventCard}.
      */
     class PersonListViewCell extends ListCell<Event> {
         @Override
@@ -75,7 +75,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(event, getIndex() + 1).getRoot());
+                setGraphic(new EventCard(event, getIndex() + 1).getRoot());
             }
         }
     }

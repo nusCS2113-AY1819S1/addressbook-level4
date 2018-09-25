@@ -17,51 +17,51 @@ public class EventCardTest extends GuiUnitTest {
     public void display() {
         // no tags
         Event eventWithNoTags = new PersonBuilder().withTags(new String[0]).build();
-        PersonCard personCard = new PersonCard(eventWithNoTags, 1);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, eventWithNoTags, 1);
+        EventCard eventCard = new EventCard(eventWithNoTags, 1);
+        uiPartRule.setUiPart(eventCard);
+        assertCardDisplay(eventCard, eventWithNoTags, 1);
 
         // with tags
         Event eventWithTags = new PersonBuilder().build();
-        personCard = new PersonCard(eventWithTags, 2);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, eventWithTags, 2);
+        eventCard = new EventCard(eventWithTags, 2);
+        uiPartRule.setUiPart(eventCard);
+        assertCardDisplay(eventCard, eventWithTags, 2);
     }
 
     @Test
     public void equals() {
         Event event = new PersonBuilder().build();
-        PersonCard personCard = new PersonCard(event, 0);
+        EventCard eventCard = new EventCard(event, 0);
 
         // same event, same index -> returns true
-        PersonCard copy = new PersonCard(event, 0);
-        assertTrue(personCard.equals(copy));
+        EventCard copy = new EventCard(event, 0);
+        assertTrue(eventCard.equals(copy));
 
         // same object -> returns true
-        assertTrue(personCard.equals(personCard));
+        assertTrue(eventCard.equals(eventCard));
 
         // null -> returns false
-        assertFalse(personCard.equals(null));
+        assertFalse(eventCard.equals(null));
 
         // different types -> returns false
-        assertFalse(personCard.equals(0));
+        assertFalse(eventCard.equals(0));
 
         // different event, same index -> returns false
         Event differentEvent = new PersonBuilder().withName("differentName").build();
-        assertFalse(personCard.equals(new PersonCard(differentEvent, 0)));
+        assertFalse(eventCard.equals(new EventCard(differentEvent, 0)));
 
         // same event, different index -> returns false
-        assertFalse(personCard.equals(new PersonCard(event, 1)));
+        assertFalse(eventCard.equals(new EventCard(event, 1)));
     }
 
     /**
-     * Asserts that {@code personCard} displays the details of {@code expectedEvent} correctly and matches
+     * Asserts that {@code eventCard} displays the details of {@code expectedEvent} correctly and matches
      * {@code expectedId}.
      */
-    private void assertCardDisplay(PersonCard personCard, Event expectedEvent, int expectedId) {
+    private void assertCardDisplay(EventCard eventCard, Event expectedEvent, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(personCard.getRoot());
+        PersonCardHandle personCardHandle = new PersonCardHandle(eventCard.getRoot());
 
         // verify id is displayed correctly
         assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());
