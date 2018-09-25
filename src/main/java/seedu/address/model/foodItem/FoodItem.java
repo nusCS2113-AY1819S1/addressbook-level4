@@ -58,4 +58,15 @@ public class FoodItem {
                 && otherFoodItem.getFoodRecipe().equals(getFoodRecipe())
                 && otherFoodItem.getFoodPrice().equals(getFoodPrice());
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getFoodName())
+                .append(" Price: $")
+                .append(getFoodPrice())
+                .append(" Recipe: ")
+                .append(getFoodRecipe());
+        return builder.toString();
+    }
 }

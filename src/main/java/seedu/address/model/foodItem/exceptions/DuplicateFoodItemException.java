@@ -6,5 +6,7 @@ package seedu.address.model.foodItem.exceptions;
  */
 
 public class DuplicateFoodItemException extends RuntimeException {
-    public DuplicateFoodItemException() { super("Operation would result in duplicate persons"); }
+    public DuplicateFoodItemException() {
+        super("Operation would result in duplicate food items");
+    }
 }
