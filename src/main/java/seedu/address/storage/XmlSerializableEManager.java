@@ -16,7 +16,7 @@ import seedu.address.model.event.Event;
  * An Immutable EventManager that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableEventManager {
+public class XmlSerializableEManager {
 
     public static final String MESSAGE_DUPLICATE_EVENT = "Persons list contains duplicate event(s).";
 
@@ -24,17 +24,17 @@ public class XmlSerializableEventManager {
     private List<XmlAdaptedPerson> events;
 
     /**
-     * Creates an empty XmlSerializableEventManager.
+     * Creates an empty XmlSerializableEManager.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableEventManager() {
+    public XmlSerializableEManager() {
         events = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableEventManager(ReadOnlyEventManager src) {
+    public XmlSerializableEManager(ReadOnlyEventManager src) {
         this();
         events.addAll(src.getEventList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
@@ -63,9 +63,9 @@ public class XmlSerializableEventManager {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableEventManager)) {
+        if (!(other instanceof XmlSerializableEManager)) {
             return false;
         }
-        return events.equals(((XmlSerializableEventManager) other).events);
+        return events.equals(((XmlSerializableEManager) other).events);
     }
 }

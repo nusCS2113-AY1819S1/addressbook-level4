@@ -18,7 +18,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.EventManager;
 import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableEventManager;
+import seedu.address.storage.XmlSerializableEManager;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestUtil;
@@ -71,7 +71,7 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        EventManager dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableEventManager.class).toModelType();
+        EventManager dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableEManager.class).toModelType();
         assertEquals(9, dataFromFile.getEventList().size());
     }
 
@@ -123,17 +123,17 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
-        XmlSerializableEventManager dataToWrite = new XmlSerializableEventManager(new EventManager());
+        XmlSerializableEManager dataToWrite = new XmlSerializableEManager(new EventManager());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableEventManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableEventManager.class);
+        XmlSerializableEManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableEManager.class);
         assertEquals(dataToWrite, dataFromFile);
 
         AddressBookBuilder builder = new AddressBookBuilder(new EventManager());
-        dataToWrite = new XmlSerializableEventManager(
+        dataToWrite = new XmlSerializableEManager(
                 builder.withPerson(new PersonBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableEventManager.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableEManager.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 
