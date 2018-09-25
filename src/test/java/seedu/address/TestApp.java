@@ -73,7 +73,7 @@ public class TestApp extends MainApp {
      */
     public EventManager readStorageAddressBook() {
         try {
-            return new EventManager(storage.readAddressBook().get());
+            return new EventManager(storage.readEventManager().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the EventManager format.", dce);
         } catch (IOException ioe) {
@@ -85,7 +85,7 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getEventManagerFilePath();
     }
 
     /**

@@ -26,7 +26,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.EventManagerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -63,8 +63,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlEManagerStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        EventManagerStorage eventManagerStorage = new XmlEManagerStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(eventManagerStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -86,7 +86,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyEventManager> addressBookOptional;
         ReadOnlyEventManager initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readEventManager();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample EventManager");
             }

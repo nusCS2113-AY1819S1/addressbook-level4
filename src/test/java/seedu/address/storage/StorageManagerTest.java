@@ -64,14 +64,14 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link XmlEventManagerStorageTest} class.
          */
         EventManager original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyEventManager retrieved = storageManager.readAddressBook().get();
+        storageManager.saveEventManager(original);
+        ReadOnlyEventManager retrieved = storageManager.readEventManager().get();
         assertEquals(original, new EventManager(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getEventManagerFilePath());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyEventManager addressBook, Path filePath) throws IOException {
+        public void saveEventManager(ReadOnlyEventManager eventManager, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

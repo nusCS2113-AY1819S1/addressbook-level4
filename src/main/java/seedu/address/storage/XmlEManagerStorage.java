@@ -18,7 +18,7 @@ import seedu.address.model.ReadOnlyEventManager;
 /**
  * A class to access EventManager data stored as an xml file on the hard disk.
  */
-public class XmlEManagerStorage implements AddressBookStorage {
+public class XmlEManagerStorage implements EventManagerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlEManagerStorage.class);
 
@@ -28,21 +28,21 @@ public class XmlEManagerStorage implements AddressBookStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getEventManagerFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyEventManager> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyEventManager> readEventManager() throws DataConversionException, IOException {
+        return readEventManager(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readEventManager()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyEventManager> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyEventManager> readEventManager(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
@@ -61,20 +61,21 @@ public class XmlEManagerStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyEventManager addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveEventManager(ReadOnlyEventManager eventManager) throws IOException {
+        saveEventManager(eventManager, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyEventManager)}
+     * Similar to {@link #saveEventManager(ReadOnlyEventManager)}
+     * @param eventManager
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyEventManager addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveEventManager(ReadOnlyEventManager eventManager, Path filePath) throws IOException {
+        requireNonNull(eventManager);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableEManager(addressBook));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableEManager(eventManager));
     }
 
 }
