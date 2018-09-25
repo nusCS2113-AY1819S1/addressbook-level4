@@ -20,17 +20,17 @@ public class PasswordCommand extends Command {
 
     /**
      * Executes the FileEncryptor and obtains a message
+     * @param credentials will be obtained from parser
      */
     public PasswordCommand (String[] credentials) {
-        FileEncryptor fe = new FileEncryptor(credentials[0]);
+        FileEncryptor fe = new FileEncryptor(credentials[0], "data/addressbook.xml");
         String message = fe.getMessage();
-
         this.message = message;
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-
+    public CommandResult execute (Model model, CommandHistory history) {
+        // TODO: Reset the display locally, do not commit to changes
         return new CommandResult(this.message);
     }
 

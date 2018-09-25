@@ -13,19 +13,17 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
 // TODO: Parse username as salt and pad it to make it 8bytes long at least
-// TODO: Encrypt the actual data file and handle the error for sudden dissapearance
-// TODO: Remove the sample generator for when no xml is present
 
 /**
  * File encryptor:
  * Sources:
  * https://stackoverflow.com/questions/13673556/using-password-based-encryption-on-a-file-in-java
- * Description: Encrypts the file using PBEWithMD5AndDES
+ * Description: Encrypts the data file using PBEWithMD5AndDES
  */
 public class FileEncryptor {
 
     private static String extension = ".encrypted";
-    private static String filename = "data/addressbook.xml";
+    private static String filename = "";
     private static String message = "";
 
     private static final byte[] salt = {
@@ -36,8 +34,11 @@ public class FileEncryptor {
     /**
      * Encrypts or decrypts file with password
      * will also check if file is present first
+     * @param password is obtained from PasswordCommand class
      */
-    public FileEncryptor (String password) {
+    public FileEncryptor (String password, String inputFileName) {
+        this.filename = inputFileName;
+
         File f = new File(filename);
         File fEncrypted = new File(filename + extension);
 
@@ -62,7 +63,7 @@ public class FileEncryptor {
 
 
     /**
-     * Makes cipher
+     * Makes cipher using PBEWithMD5AndDES
      */
     private static Cipher makeCipher(String pass, Boolean decryptMode) throws GeneralSecurityException {
 
@@ -93,6 +94,7 @@ public class FileEncryptor {
 
     /**
      * Encrypts file with password
+     * @param fileName is obtained from PasswordCommand as well and it points to XML data path
      */
     public static void encryptFile(String fileName, String pass)
             throws IOException, GeneralSecurityException {
@@ -138,6 +140,7 @@ public class FileEncryptor {
 
     /**
      * Decrypts file with password
+     * @param fileName is obtained from PasswordCommand as well and it points to XML data path
      */
     public static void decryptFile (String fileName, String pass)
             throws GeneralSecurityException, IOException {
