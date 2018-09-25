@@ -883,17 +883,17 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |modify class attendance list |alter a wrongly-marked attendance for a specific student
 
-|`* * *` |teacher |create notes for my modules |keep track of important stuff regarding the module and also my own teaching progress
+|`* * *` |teacher |create notes for modules |keep track of important stuff regarding the module and also my own teaching progress
 
-|`* * *` |teacher |delete notes from my modules |remove completed tasks or discard those that are no longer needed
+|`* * *` |teacher |delete notes from modules |remove completed tasks or discard those that are no longer needed
 
-|`* * *` |teacher |view saved notes from my modules |easily check up on important things I could have forgotten
+|`* * *` |teacher |view saved notes from modules |easily check up on important things I could have forgotten
 
-|`* * *` |teacher |edit notes for my modules |efficiently make changes to my notes if needed without deleting and then adding a new one
+|`* * *` |teacher |edit notes for modules |efficiently make changes to my notes if needed without deleting and then adding a new one
 
-|`* *` |teacher |assign priorities to my notes |make effective planning by looking for notes with higher importance
+|`* *` |teacher |assign priorities to notes |make effective planning by looking for notes with higher importance
 
-|`* *` |teacher |attach deadlines to my notes |keep track of upcoming deadlines and important dates
+|`* *` |teacher |attach deadlines to notes |keep track of upcoming deadlines and important dates
 
 |=======================================================================
 
@@ -1530,7 +1530,9 @@ Module must exist in data file.
 *MSS*
 
 1.  Teacher wants to add a note to a module.
-2.  System displays message of successful addition of a note to the module.
+2.  System adds the note to the module and displays a message that it is successfully added.
++
+Use case ends.
 
 *Extensions*
 
@@ -1546,7 +1548,7 @@ Use case resumes at step 1.
 * 1b. The module does not exist.
 +
 [none]
-** 1b1. System informs the user that the module is not found.
+** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
@@ -1561,6 +1563,8 @@ Module must exist in data file.
 
 1.  Teacher wants to view the notes saved in a specific module.
 2.  System displays the complete list of notes saved in the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1576,7 +1580,7 @@ Use case resumes at step 1.
 * 1b. The module does not exist.
 +
 [none]
-** 1b1. System informs the user that the module is not found.
+** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
@@ -1584,7 +1588,7 @@ Use case resumes at step 1.
 * 2b. There are no saved entries of notes in the module.
 +
 [none]
-** 2b1. System informs the user that no notes were found.
+** 2b1. System displays a message that no entries are found.
 +
 Use case resumes at step 1.
 
@@ -1600,7 +1604,9 @@ Module must exist in data file.
 1.  Teacher wants to delete a note saved in a specific module.
 2.  System displays the full numbered list of notes from the module.
 3.  Teacher selects the note to be deleted.
-4.  System displays a message for the successful deletion.
+4.  System deletes the note and displays a message that it is successfully deleted.
++
+Use case ends.
 
 *Extensions*
 
@@ -1616,7 +1622,7 @@ Use case resumes at step 1.
 * 1b. The module does not exist.
 +
 [none]
-** 1b1. System informs the user that the module is not found.
+** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
@@ -1624,7 +1630,7 @@ Use case resumes at step 1.
 * 2a. There are no saved entries of notes in the module.
 +
 [none]
-** 2a1. System informs the user that no notes were found.
+** 2a1. System displays a message that no entries are found.
 +
 Use case resumes at step 1.
 
@@ -1650,7 +1656,9 @@ Module must exist in data file.
 3.  Teacher selects the note to be edited.
 4.  System prompts the teacher to enter the modifications.
 5.  Teacher can now modify the text.
-6.  System displays a message for the successful modification.
+6.  System saves the modified note and displays a message for the successful modification.
++
+Use case ends.
 
 *Extensions*
 
@@ -1666,7 +1674,7 @@ Use case resumes at step 1.
 * 1b. The module does not exist.
 +
 [none]
-** 1b1. System informs the user that the module is not found.
+** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
@@ -1674,7 +1682,7 @@ Use case resumes at step 1.
 * 2a. There are no saved entries of notes in the module.
 +
 [none]
-** 2a1. System informs the user that no notes were found.
+** 2a1. System displays a message that no entries are found.
 +
 Use case resumes at step 1.
 
