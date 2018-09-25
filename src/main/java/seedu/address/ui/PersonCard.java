@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
 
 import java.util.ArrayList;
@@ -68,7 +69,7 @@ public class PersonCard extends UiPart<Region> {
                 highPriorityTags.add(newLabel);
             }
             if (tag.priority == tag.PRIORITY_MEDIUM) {
-//                newLabel.setStyle("-fx-border-color:blue; -fx-background-color: blue;");
+                newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:yellow; -fx-background-color: yellow;");
                 mediumPriorityTags.add(newLabel);
             }
             if (tag.priority == tag.PRIORITY_LOW) {

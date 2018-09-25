@@ -10,7 +10,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-    //TODO what if no priority?
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric,"
             + "followed by its priority(optional)(1 - 2)";
     public static final String TAG_VALIDATION_REGEX = "(((\\p{Alnum})+)(\\s([1-2]{1}))?)";
@@ -67,9 +66,4 @@ public class Tag {
         }
         return '[' + fulltag + ']';
     }
-
-    public int getPriority() {
-        return priority;
-    }
-
 }
