@@ -29,7 +29,7 @@ public class CommandHistoryTest {
     @Test
     public void add() {
         final String validCommand = "clear";
-        final String invalidCommand = "adds Bob";
+        final String invalidCommand = "adds Bob's workout";
 
         history.add(validCommand);
         history.add(invalidCommand);
