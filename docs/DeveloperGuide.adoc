@@ -1,4 +1,4 @@
-﻿= AddressBook Level 4 - Developer Guide
+﻿= Trajectory - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `T16-1`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -831,17 +831,25 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |teacher|add students |keep track of students that are currently in the institution
 
-|`* * *` |user |add a new person |
+|`* * *` |teacher |remove students|remove students who have graduated or are no longer with the institution
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |teacher |find student by name|get relevant student details, such as contact information
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |teacher |list all students |look at all the students that are currently in the institution
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`*` |teacher |import students |import students from perhaps an existing LMS solution
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`*` |teacher |export students |have a copy of my students data set for possible import into another system
+
+|`* *` |teacher |add course |assign students to courses and keep track of who is in which course
+
+|`* *` |teacher |delete course |delete courses that may no longer be in use
+
+|`* *` |teacher |list courses |view all courses that exist within the institution
+
+|`* *` |teacher |list student list by course |view all students taking a certain course so I can plan my module enrollment better
 
 |`* * *` |teacher |add modules |manage my module matters more easily
 
