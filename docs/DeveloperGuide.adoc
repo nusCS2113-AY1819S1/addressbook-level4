@@ -1288,6 +1288,8 @@ Module code exists in data file.
 1.  User enters command to create classroom.
 2.  Classroom is created for the module.
 3.  System displays message of successful creation of class.
++
+Use case ends.
 
 *Extensions*
 
@@ -1311,6 +1313,8 @@ Module code exists in data file.
 1.  User enters command to delete a class from module.
 2.  Classroom is deleted from module.
 3.  System displays message of successful deletion of class from module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1340,6 +1344,8 @@ Student exists in data file.
 1.  User enters command to assign a student to class.
 2.  Student gets assigned to class.
 3.  System displays message of successful assignment of student to class.
++
+Use case ends.
 
 *Extensions*
 
@@ -1370,6 +1376,8 @@ Student exists in data file.
 1.  User enters command to unassign a student from class.
 2.  Student gets unassigned from class.
 3.  System displays message of successful unassignment of student from class.
++
+Use case ends.
 
 *Extensions*
 
@@ -1406,6 +1414,8 @@ Class must exist in data file.
 1.  User enters command to modify class enrollment limits.
 2.  Class enrollment limits gets updated.
 3.  System displays successful modification of class enrollment limits.
++
+Use case ends.
 
 *Extensions*
 
@@ -1428,6 +1438,8 @@ Class must exist in data file.
 
 1.  User enters command to view class attendance list.
 2.  System displays the class attendance list.
++
+Use case ends.
 
 *Extensions*
 
@@ -1451,6 +1463,8 @@ Class must exist in data file.
 1.  User enters command to mark class attendance.
 2.  Class attendance is marked for specified student.
 3.  System displays message of successful marking of class attendance list.
++
+Use case ends.
 
 *Extensions*
 
@@ -1480,6 +1494,8 @@ Class must exist in data file.
 1.  User enters command to modify class attendance list.
 2.  The class attendance list is updated.
 3.  System displays message of successful modification of class attendance list.
++
+Use case ends.
 
 *Extensions*
 
