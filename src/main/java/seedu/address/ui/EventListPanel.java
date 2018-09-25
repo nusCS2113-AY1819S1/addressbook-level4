@@ -16,16 +16,16 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.event.Event;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of events.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class EventListPanel extends UiPart<Region> {
+    private static final String FXML = "EventListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(EventListPanel.class);
 
     @FXML
     private ListView<Event> personListView;
 
-    public PersonListPanel(ObservableList<Event> eventList) {
+    public EventListPanel(ObservableList<Event> eventList) {
         super(FXML);
         setConnections(eventList);
         registerAsAnEventHandler(this);
