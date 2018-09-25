@@ -188,7 +188,7 @@ public class EditCommand extends Command {
             if (removeKpi || removePosition) {
                 return true;
             }
-            return  CollectionUtil.isAnyNonNull(name, phone, email, address,
+            return CollectionUtil.isAnyNonNull(name, phone, email, address,
                     position, kpi, note, tags);
         }
 
