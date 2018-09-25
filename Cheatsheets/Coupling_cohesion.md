@@ -1,7 +1,7 @@
 # Coupling
 
 Measure of number of dependencies between modules. A module is coupled to another module when it depends on it.
-##Types of Coupling 
+##Types of Coupling
 1. **Content coupling** - one module modifies or relies on the internal workings of another module eg.
 accessing local data of another module
 2. **Common/ global coupling** - two modules share the same global data
@@ -65,13 +65,13 @@ modules should be written so that they can be extended, without requiring them t
 Example:
 ```Java
 class Transaction{
-    
+
     //all fields are compulsory
     Person seller;
     Person buyer;
     Date date;
     String receiptNumber;
-    
+
     Marriage (Person seller, Person buyer, Date date, String receiptNumber){
         //set fields
     }

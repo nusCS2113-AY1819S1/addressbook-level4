@@ -52,6 +52,6 @@ specific/ more refined method for each of them.
 ### Example:
 ```Java
 Person p = new Student();
-p.read(); // Custom read overidden from Student class 
+p.read(); // Custom read overidden from Student class
 p.compare(); // Not overidden, obtained from the Person class
 ```

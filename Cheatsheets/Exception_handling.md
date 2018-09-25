@@ -32,7 +32,7 @@ public static void main(String a[]){
         iex.printStackTrace();
     } catch (Exception e) {
         // Always write the generic (less specific exception after the more specific one)
-        e.printStackTrace();    
+        e.printStackTrace();
     }
 }
 ```
