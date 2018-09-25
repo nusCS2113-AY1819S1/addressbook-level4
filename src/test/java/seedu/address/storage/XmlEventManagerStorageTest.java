@@ -36,7 +36,7 @@ public class XmlEventManagerStorageTest {
     }
 
     private java.util.Optional<ReadOnlyEventManager> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlEManagerStorage(Paths.get(filePath)).readEventManager(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -77,24 +77,24 @@ public class XmlEventManagerStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
         EventManager original = getTypicalAddressBook();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        XmlEManagerStorage xmlEManagerStorage = new XmlEManagerStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyEventManager readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlEManagerStorage.saveEventManager(original, filePath);
+        ReadOnlyEventManager readBack = xmlEManagerStorage.readEventManager(filePath).get();
         assertEquals(original, new EventManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addEvent(HOON);
         original.removeEvent(ALICE);
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlEManagerStorage.saveEventManager(original, filePath);
+        readBack = xmlEManagerStorage.readEventManager(filePath).get();
         assertEquals(original, new EventManager(readBack));
 
         //Save and read without specifying file path
         original.addEvent(IDA);
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        xmlEManagerStorage.saveEventManager(original); //file path not specified
+        readBack = xmlEManagerStorage.readEventManager().get(); //file path not specified
         assertEquals(original, new EventManager(readBack));
 
     }
@@ -110,8 +110,8 @@ public class XmlEventManagerStorageTest {
      */
     private void saveAddressBook(ReadOnlyEventManager addressBook, String filePath) {
         try {
-            new XmlAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new XmlEManagerStorage(Paths.get(filePath))
+                    .saveEventManager(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

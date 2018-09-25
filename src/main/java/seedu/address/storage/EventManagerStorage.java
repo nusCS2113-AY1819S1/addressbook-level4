@@ -11,12 +11,12 @@ import seedu.address.model.ReadOnlyEventManager;
 /**
  * Represents a storage for {@link EventManager}.
  */
-public interface AddressBookStorage {
+public interface EventManagerStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getEventManagerFilePath();
 
     /**
      * Returns EventManager data as a {@link ReadOnlyEventManager}.
@@ -24,23 +24,23 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyEventManager> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyEventManager> readEventManager() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getEventManagerFilePath()
      */
-    Optional<ReadOnlyEventManager> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyEventManager> readEventManager(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyEventManager} to the storage.
-     * @param addressBook cannot be null.
+     * @param eventManager cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyEventManager addressBook) throws IOException;
+    void saveEventManager(ReadOnlyEventManager eventManager) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyEventManager)
+     * @see #saveEventManager(ReadOnlyEventManager)
      */
-    void saveAddressBook(ReadOnlyEventManager addressBook, Path filePath) throws IOException;
+    void saveEventManager(ReadOnlyEventManager eventManager, Path filePath) throws IOException;
 
 }

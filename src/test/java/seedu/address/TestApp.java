@@ -17,7 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableEManager;
 import seedu.address.testutil.TestUtil;
 import systemtests.ModelHelper;
 
@@ -45,7 +45,7 @@ public class TestApp extends MainApp {
 
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
-            createDataFileWithData(new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+            createDataFileWithData(new XmlSerializableEManager(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
@@ -73,7 +73,7 @@ public class TestApp extends MainApp {
      */
     public EventManager readStorageAddressBook() {
         try {
-            return new EventManager(storage.readAddressBook().get());
+            return new EventManager(storage.readEventManager().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the EventManager format.", dce);
         } catch (IOException ioe) {
@@ -85,7 +85,7 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getEventManagerFilePath();
     }
 
     /**
