@@ -1128,6 +1128,138 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
+[discrete]
+=== Use case: Add grade component
+
+*MSS*
+
+1.  Teacher adds grade component
+2.  System successfully adds grade component.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Module code does not exist.
++
+[none]
+** 1a1. System outputs error in adding grade item due to wrong module code.
++
+Use case ends.
+
+[none]
+* 1b. Invalid command entered.
++
+[none]
+** 1b1. System outputs an example of a valid input to run the 'add grade' command.
++
+Use case ends.
+
+[discrete]
+=== Use case: Edit grade item
+
+*MSS*
+
+1.  Teacher edits grade item.
+2.  System successfully updates grade item.
+
+*Extensions*
+
+[none]
+* 1a. Module code does not exist.
++
+[none]
+** 1a1. System outputs error in editing grade item due to wrong module code.
++
+Use case ends.
+
+[none]
+* 1b. Invalid command entered.
++
+[none]
+** 1b1. System outputs an example of a valid input to run the 'edit grade' command.
++
+Use case ends.
+
+[discrete]
+=== Use case: Delete grade item
+
+*MSS*
+
+1.  Teacher deletes grade item.
+2.  System successfully deletes grade item.
+
+*Extensions*
+
+[none]
+* 1a. Module code does not exist.
++
+[none]
+** 1a1. System outputs error in deleting grade item due to wrong module code.
++
+Use case ends.
+
+[none]
+* 1b. Invalid command entered.
++
+[none]
+** 1b1. System outputs an example of a valid input to run the 'delete grade' command.
++
+Use case ends.
+
+[discrete]
+=== Use case: List grade items
+
+*MSS*
+
+1.  Teacher searches all grade item.
+2.  System successfully displays all grade item.
+
+*Extensions*
+
+[none]
+* 1a. Module code does not exist.
++
+[none]
+** 1a1. System outputs error in listing grade item due to wrong module code.
++
+Use case ends.
+
+[none]
+* 1b. Invalid command entered.
++
+[none]
+** 1b1. System outputs an example of a valid input to run the 'list grades' command.
++
+Use case ends.
+
+[discrete]
+=== Use case: Assigning marks to a student
+
+*MSS*
+
+1.  Teacher assigns marks to student.
+2.  System successfully saves the marks.
+
+*Extensions*
+
+[none]
+* 2a. Module code does not exist.
++
+[none]
+** 2a1. System outputs error in listing grade item due to wrong module code.
++
+Use case ends.
+
+[none]
+* 2b. Invalid command entered.
++
+[none]
+** 2b1. System outputs an example of a valid input to run the 'list grades' command.
++
+Use case resumes at step 1.
+
 _{More to be added}_
 
 [appendix]
