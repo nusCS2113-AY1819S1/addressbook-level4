@@ -13,14 +13,12 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
 // TODO: Parse username as salt and pad it to make it 8bytes long at least
-// TODO: Encrypt the actual data file and handle the error for sudden dissapearance
-// TODO: Remove the sample generator for when no xml is present
 
 /**
  * File encryptor:
  * Sources:
  * https://stackoverflow.com/questions/13673556/using-password-based-encryption-on-a-file-in-java
- * Description: Encrypts the file using PBEWithMD5AndDES
+ * Description: Encrypts the data file using PBEWithMD5AndDES
  */
 public class FileEncryptor {
 
@@ -36,6 +34,7 @@ public class FileEncryptor {
     /**
      * Encrypts or decrypts file with password
      * will also check if file is present first
+     * @param password is obtained from PasswordCommand class
      */
     public FileEncryptor (String password, String inputFileName) {
         this.filename = inputFileName;
@@ -64,7 +63,7 @@ public class FileEncryptor {
 
 
     /**
-     * Makes cipher
+     * Makes cipher using PBEWithMD5AndDES
      */
     private static Cipher makeCipher(String pass, Boolean decryptMode) throws GeneralSecurityException {
 
@@ -95,6 +94,7 @@ public class FileEncryptor {
 
     /**
      * Encrypts file with password
+     * @param fileName is obtained from PasswordCommand as well and it points to XML data path
      */
     public static void encryptFile(String fileName, String pass)
             throws IOException, GeneralSecurityException {
@@ -140,6 +140,7 @@ public class FileEncryptor {
 
     /**
      * Decrypts file with password
+     * @param fileName is obtained from PasswordCommand as well and it points to XML data path
      */
     public static void decryptFile (String fileName, String pass)
             throws GeneralSecurityException, IOException {
