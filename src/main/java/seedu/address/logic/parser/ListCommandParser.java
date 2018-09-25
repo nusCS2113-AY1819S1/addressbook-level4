@@ -35,6 +35,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
         Date startDate = ParserUtil.parseDate(argList[0]);
         Date endDate = ParserUtil.parseDate(argList[1]);
+        if (!isDateOrderValid(startDate, endDate)) {
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE)));
+        }
         return new ListCommand(startDate, endDate);
     }
 
@@ -50,5 +53,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         if (args.isEmpty()) return null;
         String[] argList = args.split("\\s+");
         return argList;
+    }
+
+    private static boolean isDateOrderValid(Date startDate, Date endDate) {
+        return startDate.isEarlierThan(endDate) || startDate.equals(endDate);
     }
 }

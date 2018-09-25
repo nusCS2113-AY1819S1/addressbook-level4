@@ -23,7 +23,9 @@ public class ListCommand extends Command {
 
     public static final String MESSAGE_USAGE = "Lists all records within a specific time period. "
             + "Parameters: "
-            + PREFIX_DATE + "START_DATE END_DATE";
+            + PREFIX_DATE + "START_DATE END_DATE\n"
+            + "END_DATE must be later than or equal to START_DATE.";
+
 
     public static final String MESSAGE_SUCCESS = "Listed all records";
 
