@@ -31,7 +31,7 @@ public class Position {
      * No position provided
      */
     //TODO find a better solution to null.
-    public Position(){
+    public Position() {
         value = null;
     }
 
@@ -39,7 +39,7 @@ public class Position {
      * Returns true if a position has been assigned to the person.
      */
     public boolean doesExist() {
-        if(value != null){
+        if (value != null) {
             return true;
         }
         return false;

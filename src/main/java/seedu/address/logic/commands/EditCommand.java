@@ -114,6 +114,13 @@ public class EditCommand extends Command {
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
+        if (editPersonDescriptor.removePosition) {
+            updatedPosition = null;
+        }
+        if (editPersonDescriptor.removeKpi) {
+            updatedKpi = null;
+        }
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedPosition, updatedKpi, updatedNote, updatedTags);
     }
@@ -149,9 +156,13 @@ public class EditCommand extends Command {
         private Kpi kpi;
         private Note note;
         private Set<Tag> tags;
-        public boolean removedOptionalFields = false;
+        private boolean removePosition;
+        private boolean removeKpi;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+            removePosition = false;
+            removeKpi = false;
+        }
 
         /**
          * Copy constructor.
@@ -166,12 +177,17 @@ public class EditCommand extends Command {
             setKpi(toCopy.kpi);
             setNote(toCopy.note);
             setTags(toCopy.tags);
+            removeKpi = toCopy.removeKpi;
+            removePosition = toCopy.removePosition;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
+            if (!removeKpi || !removePosition) {
+                return true;
+            }
             return  CollectionUtil.isAnyNonNull(name, phone, email, address,
                     position, kpi, note, tags);
         }
@@ -230,6 +246,14 @@ public class EditCommand extends Command {
 
         public Optional<Note> getNote() {
             return Optional.ofNullable(note);
+        }
+
+        public void setRemovePosition() {
+            removePosition = true;
+        }
+
+        public void setRemoveKpi() {
+            removeKpi = true;
         }
 
         /**

@@ -68,17 +68,25 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
         //TODO Refactor this 2 methods, remove if null/empty
         if (argMultimap.getValue(PREFIX_POSITION).isPresent()) {
-            editPersonDescriptor.setPosition(ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get()));
+            if (argMultimap.getValue(PREFIX_POSITION).get().isEmpty()) {
+                editPersonDescriptor.setRemovePosition();
+            } else {
+                editPersonDescriptor.setPosition(ParserUtil.parsePosition(argMultimap.getValue(PREFIX_POSITION).get()));
+            }
         }
         if (argMultimap.getValue(PREFIX_KPI).isPresent()) {
-            editPersonDescriptor.setKpi(ParserUtil.parseKpi(argMultimap.getValue(PREFIX_KPI).get()));
+            if (argMultimap.getValue(PREFIX_KPI).get().isEmpty()) {
+                editPersonDescriptor.setRemoveKpi();
+            } else {
+                editPersonDescriptor.setKpi(ParserUtil.parseKpi(argMultimap.getValue(PREFIX_KPI).get()));
+            }
         }
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited() && !editPersonDescriptor.removedOptionalFields) {
+        if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 

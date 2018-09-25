@@ -27,7 +27,7 @@ public class Kpi {
         value = kpi;
     }
 
-    public Kpi(){
+    public Kpi() {
         this.value = null;
     }
 
@@ -35,7 +35,7 @@ public class Kpi {
      * Returns true if a KPI has been assigned to the person.
      */
     public boolean doesExist() {
-        if(value != null){
+        if (value != null) {
             return true;
         }
         return false;

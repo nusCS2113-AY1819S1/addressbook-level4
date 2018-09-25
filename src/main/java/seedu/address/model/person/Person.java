@@ -156,6 +156,9 @@ public class Person {
         return builder.toString();
     }
 
+    /**
+     * Returns true if the person has a position
+     */
     public boolean positionDoesExist() {
         if (position == null || !position.doesExist()) {
             return false;
@@ -163,6 +166,9 @@ public class Person {
         return true;
     }
 
+    /**
+     * Returns true if the person has a KPI score
+     */
     public boolean kpiDoesExist() {
         if (kpi == null || !kpi.doesExist()) {
             return false;
