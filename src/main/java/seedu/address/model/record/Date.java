@@ -15,10 +15,10 @@ public class Date {
             + "with dd and mm being 2 digits, and yyyy being 4 digits.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
     public final String value;
-    private String day;
+    private int day;
 
-    private String month;
-    private String year;
+    private int month;
+    private int year;
 
     /**
      * Constructs a {@code Date}.
@@ -28,7 +28,6 @@ public class Date {
     public Date(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_DATE_CONSTRAINTS);
-        // TODO: Change this part to split dates into dd, mm, yyyy.
         value = date;
         splitDate(date);
     }
@@ -40,9 +39,9 @@ public class Date {
      */
     private void splitDate(String date) {
         String[] dateParams = date.split("-");
-        day = dateParams[0];
-        month = dateParams[1];
-        year = dateParams[2];
+        day = Integer.parseInt(dateParams[0]);
+        month = Integer.parseInt(dateParams[1]);
+        year = Integer.parseInt(dateParams[2]);
     }
 
 
@@ -65,21 +64,57 @@ public class Date {
                 && value.equals(((Date) other).value)); // state check
     }
 
+    /**
+     * Checks whether the current object {@code Date} is later than the given {@code Date}
+     * @param other
+     * @return True if date is later and False if date is earlier
+     */
+    public boolean isLaterThan(Date other) {
+        if (this.year > other.getYear()) {
+            return true;
+        } else if (this.year == other.getYear()) {
+            if (this.month > other.getMonth()) {
+                return true;
+            } else if (this.month == other.getMonth()) {
+                return this.day > other.getDay();
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks whether the current object {@code Date} is earlier than the given {@code Date}
+     * @param other
+     * @return True if date is earlier and False if date is later
+     */
+    public boolean isEarlierThan(Date other) {
+        if (this.year < other.getYear()) {
+            return true;
+        } else if (this.year == other.getYear()) {
+            if (this.month < other.getMonth()) {
+                return true;
+            } else if (this.month == other.getMonth()) {
+                return this.day < other.getDay();
+            }
+        }
+        return false;
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();
     }
 
     // TODO: Decide as a group whether we want days/month/year to be accessed separately
-    public String getDay() {
+    public int getDay() {
         return day;
     }
 
-    public String getMonth() {
+    public int getMonth() {
         return month;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 }
