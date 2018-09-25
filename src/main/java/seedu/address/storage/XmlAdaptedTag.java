@@ -34,6 +34,9 @@ public class XmlAdaptedTag {
      */
     public XmlAdaptedTag(Tag source) {
         tagName = source.tagName;
+        if (source.priority != source.PRIORITY_LOW) {
+            tagName += " " + source.priority;
+        }
     }
 
     /**

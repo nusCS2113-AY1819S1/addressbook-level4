@@ -3,14 +3,16 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.StringTokenizer;
+
 /**
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
-
-    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String TAG_VALIDATION_REGEX = "[\\p{Alnum}]+";
+    public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric,"
+            + "followed by its priority(optional)(1 - 2)";
+    public static final String TAG_VALIDATION_REGEX = "(((\\p{Alnum})+)(\\s([1-2]{1}))?)";
     public static final int PRIORITY_HIGH = 2;
     public static final int PRIORITY_MEDIUM = 1;
     public static final int PRIORITY_LOW = 0;
@@ -26,8 +28,13 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_TAG_CONSTRAINTS);
-        this.priority = PRIORITY_LOW;
-        this.tagName = tagName;
+        StringTokenizer st = new StringTokenizer(tagName);
+        this.tagName = st.nextToken();
+        if (st.hasMoreTokens()) {
+            this.priority = Integer.parseInt(st.nextToken());
+        } else {
+            this.priority = PRIORITY_LOW;
+        }
     }
 
     /**
@@ -46,14 +53,17 @@ public class Tag {
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return (priority + tagName).hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        String fulltag = tagName;
+        if (!(priority == PRIORITY_LOW)) {
+            fulltag += " " + priority;
+        }
+        return '[' + fulltag + ']';
     }
-
 }
