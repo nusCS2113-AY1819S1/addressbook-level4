@@ -127,11 +127,11 @@ public class XmlAdaptedEvent {
             return false;
         }
 
-        XmlAdaptedEvent otherPerson = (XmlAdaptedEvent) other;
-        return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email)
-                && Objects.equals(address, otherPerson.address)
-                && tagged.equals(otherPerson.tagged);
+        XmlAdaptedEvent otherEvent = (XmlAdaptedEvent) other;
+        return Objects.equals(name, otherEvent.name)
+                && Objects.equals(phone, otherEvent.phone)
+                && Objects.equals(email, otherEvent.email)
+                && Objects.equals(address, otherEvent.address)
+                && tagged.equals(otherEvent.tagged);
     }
 }
