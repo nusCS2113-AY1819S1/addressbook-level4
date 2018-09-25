@@ -1,9 +1,9 @@
 package seedu.address.model.tag;
 
-import java.util.StringTokenizer;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import java.util.StringTokenizer;
 
 /**
  * Represents a Tag in the address book.

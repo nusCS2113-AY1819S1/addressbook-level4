@@ -1,16 +1,17 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import javafx.scene.paint.Color;
 import seedu.address.model.person.Person;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * An UI component that displays information of a {@code Person}.
@@ -63,19 +64,21 @@ public class PersonCard extends UiPart<Region> {
         List<Label> mediumPriorityTags = new ArrayList<>();;
         List<Label> lowPriorityTags = new ArrayList<>();;
         person.getTags().forEach(tag -> {
-            Label newLabel = new Label(tag.tagName);
-            if (tag.priority == tag.PRIORITY_HIGH) {
-                newLabel.setStyle("-fx-border-color:red; -fx-background-color: red;");
-                highPriorityTags.add(newLabel);
+                Label newLabel = new Label(tag.tagName);
+                if (tag.priority == tag.PRIORITY_HIGH) {
+                    newLabel.setStyle("-fx-border-color:red; -fx-background-color: red;");
+                    highPriorityTags.add(newLabel);
+                }
+                if (tag.priority == tag.PRIORITY_MEDIUM) {
+                    newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:yellow; -fx-background-color: yellow;");
+                    mediumPriorityTags.add(newLabel);
+                }
+                if (tag.priority == tag.PRIORITY_LOW) {
+                    newLabel.setStyle("-fx-border-color:green; -fx-background-color: green;");
+                    lowPriorityTags.add(newLabel);
+                }
             }
-            if (tag.priority == tag.PRIORITY_MEDIUM) {
-                newLabel.setStyle("-fx-text-fill:Black; -fx-border-color:yellow; -fx-background-color: yellow;");
-                mediumPriorityTags.add(newLabel);
-            }
-            if (tag.priority == tag.PRIORITY_LOW) {
-                newLabel.setStyle("-fx-border-color:green; -fx-background-color: green;");
-                lowPriorityTags.add(newLabel);
-            } });
+        );
         for (Label label : highPriorityTags) {
             tags.getChildren().add(label);
         }
