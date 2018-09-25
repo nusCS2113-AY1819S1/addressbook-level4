@@ -897,7 +897,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |view saved notes from modules |easily check up on important things I could have forgotten
 
-|`* * *` |teacher |edit notes for modules |efficiently make changes to my notes if needed without deleting and then adding a new one
+|`* * *` |teacher |edit notes from modules |efficiently make changes to my notes if needed without deleting and then adding a new one
 
 |`* *` |teacher |assign priorities to notes |make effective planning by looking for notes with higher importance
 
@@ -1835,7 +1835,7 @@ Module must exist in data file.
 *MSS*
 
 1.  Teacher wants to delete a note saved in a specific module.
-2.  System displays the full numbered list of notes from the module.
+2.  System displays the complete numbered list of notes from the module.
 3.  Teacher selects the note to be deleted.
 4.  System deletes the note and displays a message that it is successfully deleted.
 +
@@ -1885,7 +1885,7 @@ Module must exist in data file.
 *MSS*
 
 1.  Teacher wants to edit an existing note in a specific module.
-2.  System displays the full numbered list of notes from the module.
+2.  System displays the complete numbered list of notes from the module.
 3.  Teacher selects the note to be edited.
 4.  System prompts the teacher to enter the modifications.
 5.  Teacher can now modify the text.
