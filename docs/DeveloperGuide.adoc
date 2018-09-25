@@ -1312,7 +1312,6 @@ Module code exists in data file.
 2.  Classroom is deleted from module.
 3.  System displays message of successful deletion of class from module.
 
-
 *Extensions*
 
 [none]
