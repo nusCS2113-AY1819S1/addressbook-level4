@@ -81,6 +81,7 @@ public class EditCommandParser implements Parser<EditCommand> {
                 editPersonDescriptor.setKpi(ParserUtil.parseKpi(argMultimap.getValue(PREFIX_KPI).get()));
             }
         }
+        //TODO to reset notes if empty field
         if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE).get()));
         }

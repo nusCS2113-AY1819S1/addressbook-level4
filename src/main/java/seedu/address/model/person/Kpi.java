@@ -9,11 +9,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Kpi {
 
-    //TODO change message KPI constraints
-    public static final String MESSAGE_KPI_CONSTRAINTS = "KPI scores should only contain numbers, "
-            + "and it should be at least 2 digits long";
-    //TODO update regex to accept only floats from 0 to 5
-    public static final String KPI_VALIDATION_REGEX = "\\d{2,}";
+    public static final String MESSAGE_KPI_CONSTRAINTS = "KPI score should be a number from 0 - 5";
+    public static final String KPI_VALIDATION_REGEX = "([0-4]{1}(\\.[0-9]+)?)|([5]{1}(\\.[0]+)?)";
     public final String value;
 
     /**

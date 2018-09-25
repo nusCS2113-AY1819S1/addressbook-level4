@@ -185,7 +185,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            if (!removeKpi || !removePosition) {
+            if (removeKpi || removePosition) {
                 return true;
             }
             return  CollectionUtil.isAnyNonNull(name, phone, email, address,
