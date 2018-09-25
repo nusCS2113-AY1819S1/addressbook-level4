@@ -14,6 +14,10 @@ public class LoginBook implements ReadOnlyLoginBook{
         accounts = new UniqueAccountList();
     }
 
+    public LoginBook(ReadOnlyLoginBook initialState) {
+        this();
+    }
+
     //// login-level operations
 
     /**
