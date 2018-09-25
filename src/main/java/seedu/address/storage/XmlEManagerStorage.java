@@ -18,13 +18,13 @@ import seedu.address.model.ReadOnlyEventManager;
 /**
  * A class to access EventManager data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlEManagerStorage implements AddressBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlEManagerStorage.class);
 
     private Path filePath;
 
-    public XmlAddressBookStorage(Path filePath) {
+    public XmlEManagerStorage(Path filePath) {
         this.filePath = filePath;
     }
 
