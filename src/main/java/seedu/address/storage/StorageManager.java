@@ -81,7 +81,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(EventManagerChangedEvent event) {
+    public void handleEManagerChangedEvent(EventManagerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveEventManager(event.data);

@@ -21,7 +21,7 @@ public class XmlSerializableEManager {
     public static final String MESSAGE_DUPLICATE_EVENT = "Persons list contains duplicate event(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> events;
+    private List<XmlAdaptedEvent> events;
 
     /**
      * Creates an empty XmlSerializableEManager.
@@ -36,18 +36,18 @@ public class XmlSerializableEManager {
      */
     public XmlSerializableEManager(ReadOnlyEventManager src) {
         this();
-        events.addAll(src.getEventList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        events.addAll(src.getEventList().stream().map(XmlAdaptedEvent::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this addressbook into the model's {@code EventManager} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * {@code XmlAdaptedEvent}.
      */
     public EventManager toModelType() throws IllegalValueException {
         EventManager eventManager = new EventManager();
-        for (XmlAdaptedPerson p : events) {
+        for (XmlAdaptedEvent p : events) {
             Event event = p.toModelType();
             if (eventManager.hasEvent(event)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
