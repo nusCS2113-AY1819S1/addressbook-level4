@@ -26,8 +26,8 @@ public class XmlSerializableEventManagerTest {
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableEventManager dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
+                XmlSerializableEventManager.class);
         EventManager eventManagerFromFile = dataFromFile.toModelType();
         EventManager typicalPersonsEventManager = TypicalPersons.getTypicalAddressBook();
         assertEquals(eventManagerFromFile, typicalPersonsEventManager);
@@ -35,18 +35,18 @@ public class XmlSerializableEventManagerTest {
 
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableEventManager dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
+                XmlSerializableEventManager.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }
 
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableEventManager dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
+                XmlSerializableEventManager.class);
         thrown.expect(IllegalValueException.class);
-        thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(XmlSerializableEventManager.MESSAGE_DUPLICATE_EVENT);
         dataFromFile.toModelType();
     }
 

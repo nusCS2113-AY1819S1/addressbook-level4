@@ -22,7 +22,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.event.Event;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableEventManager;
 
 public class EventListPanelTest extends GuiUnitTest {
     private static final ObservableList<Event> TYPICAL_EVENTS =
@@ -81,8 +81,8 @@ public class EventListPanelTest extends GuiUnitTest {
      */
     private ObservableList<Event> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
+        XmlSerializableEventManager xmlAddressBook =
+                XmlUtil.getDataFromFile(xmlFile, XmlSerializableEventManager.class);
         return FXCollections.observableArrayList(xmlAddressBook.toModelType().getEventList());
     }
 
