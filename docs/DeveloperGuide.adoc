@@ -855,7 +855,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |list all modules |see all the modules I am currently managing
 
-|`* * *` |teacher |add grade componenents |differentiate the grade componenets in a module (E.g. mid term test, finals examination) 
+|`* * *` |teacher |add grade componenents |differentiate the grade componenets in a module (E.g. mid term test, finals examination)
 
 |`* * *` |teacher |edit grades of students |change students marks after reviewing
 
@@ -865,7 +865,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |teacher |list all grade components |view all the grade components that I have added to my module
 
-|`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students  
+|`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students
 |=======================================================================
 
 _{More to be added}_
