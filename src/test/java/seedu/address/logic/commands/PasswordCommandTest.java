@@ -2,13 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 
-import org.junit.Test;
-
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+
+import org.junit.Test;
 
 import seedu.address.commons.util.FileEncryptor;
 
@@ -25,7 +25,7 @@ public class PasswordCommandTest {
      * Encryption and decryption test command
      */
     @Test
-    public void encryptDecryptTest () throws IOException{
+    public void encryptDecryptTest () throws IOException {
         File tmpFile = new File(tempFileName);
         FileWriter writer = new FileWriter(tmpFile);
         writer.write(toWrite);
