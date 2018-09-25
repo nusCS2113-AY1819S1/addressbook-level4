@@ -22,18 +22,24 @@ public class Person {
 
     // Data fields
     private final Address address;
+    private final Position position;
+    private final Kpi kpi;
     private final Note note;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Note note, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Position position, Kpi kpi,
+                  Note note, Set<Tag> tags) {
+        //TODO check if position and Kpi is non null in their respective object class
         requireAllNonNull(name, phone, email, address, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.position = position;
+        this.kpi = kpi;
         this.note = note;
         this.tags.addAll(tags);
     }
@@ -54,6 +60,20 @@ public class Person {
         return address;
     }
 
+    public Position getPosition() {
+        if (positionDoesExist()) {
+            return position;
+        }
+        return new Position();
+    }
+
+    public Kpi getKpi() {
+        if (kpiDoesExist()) {
+            return kpi;
+        }
+        return new Kpi();
+    }
+
     public Note getNote() {
         return note;
     }
@@ -70,6 +90,7 @@ public class Person {
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
+    //TODO check for dups
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
             return true;
@@ -99,6 +120,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getPosition().equals(getPosition())
+                && otherPerson.getKpi().equals(getKpi())
                 && otherPerson.getNote().equals(getNote())
                 && otherPerson.getTags().equals(getTags());
     }
@@ -106,7 +129,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, note, tags);
+        return Objects.hash(name, phone, email, address, position, kpi, note, tags);
     }
 
     @Override
@@ -118,12 +141,39 @@ public class Person {
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
-                .append(getAddress())
-                .append(" Note: ")
+                .append(getAddress());
+        if (positionDoesExist()) {
+            builder.append(" Position: ").append(getPosition());
+        }
+
+        if (kpiDoesExist()) {
+            builder.append(" KPI: ").append(getKpi());
+        }
+        builder.append(" Note: ")
                 .append(getNote())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
+    }
+
+    /**
+     * Returns true if the person has a position
+     */
+    public boolean positionDoesExist() {
+        if (position == null || !position.doesExist()) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Returns true if the person has a KPI score
+     */
+    public boolean kpiDoesExist() {
+        if (kpi == null || !kpi.doesExist()) {
+            return false;
+        }
+        return true;
     }
 
 }

@@ -10,9 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Tag {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
-    public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String TAG_VALIDATION_REGEX = "[\\p{Alnum}]+";
+    public static final int PRIORITY_HIGH = 2;
+    public static final int PRIORITY_MEDIUM = 1;
+    public static final int PRIORITY_LOW = 0;
 
     public final String tagName;
+    public final int priority;
 
     /**
      * Constructs a {@code Tag}.
@@ -22,6 +26,7 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_TAG_CONSTRAINTS);
+        this.priority = PRIORITY_LOW;
         this.tagName = tagName;
     }
 
