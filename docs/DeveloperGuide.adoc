@@ -839,9 +839,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |list all students |look at all the students that are currently in the institution
 
-|`*` |teacher |import students |import students from perhaps an existing LMS solution
+|`* *` |teacher |import students |import students from perhaps an existing LMS solution
 
-|`*` |teacher |export students |have a copy of my students data set for possible import into another system
+|`* *` |teacher |export students |have a copy of my students data set for possible import into another system
 
 |`* *` |teacher |add course |assign students to courses and keep track of who is in which course
 
@@ -924,6 +924,231 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+
+=== Use case: Add student
+
+*MSS*
+
+1.  Teacher adds student to system
+2.  System adds student to system, and show a confirmation message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Student already exists in system.
++
+[none]
+** 2c1. System shows 'duplicate student' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Remove student
+
+*MSS*
+
+1.  Teacher removes student from system
+2.  System removes student to system, and show a confirmation message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Student not found in system.
++
+[none]
+** 2c1. System shows 'invalid student' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Find student
+
+*MSS*
+
+1.  Teacher finds student with entered details
+2.  System locates student details and displays it to the teacher.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Student not found in system.
++
+[none]
+** 2c1. System shows 'invalid student' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: List students
+
+*MSS*
+
+1.  Teacher lists students
+2.  System displays list of all students by default
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. There are no students in the system.
++
+[none]
+** 2c1. System shows 'no students in system' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Export all students to file
+
+*MSS*
+
+1.  Teacher exports all students to file.
+2.  System exports all students to file and display confirmation message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Invalid save location.
++
+[none]
+** 2c1. System shows 'invalid save location' message.
++
+Use case resumes at step 1.
+[none]
+* 2d. No students to export.
++
+[none]
+** 2d1. System shows 'no students to export' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Import students from file
+
+*MSS*
+
+1.  Teacher imports students from file.
+2.  System imports students from file and display confirmation message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Invalid file location.
++
+[none]
+** 2c1. System shows 'invalid file location' message.
++
+Use case resumes at step 1.
+[none]
+* 2d. File in invalid format.
++
+[none]
+** 2d1. System shows 'invalid file format' message.
++
+Use case resumes at step 1.
+
 
 [discrete]
 === Use case: Add module
