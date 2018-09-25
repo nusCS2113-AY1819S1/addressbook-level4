@@ -1,8 +1,5 @@
 package seedu.address.model.foodItem;
 
-
-import seedu.address.model.person.Name;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**

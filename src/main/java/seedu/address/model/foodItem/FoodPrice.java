@@ -7,12 +7,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Food Item's price in the address book.
  * Guarantees: Is valid as declared in {@link #isValidPrice(String)}
  */
-
 public class FoodPrice {
 
     public static final String MESSAGE_PRICE_CONSTRAINTS =
-            "Price should be at least 1 digit long and may contain up to 1 decimal point " +
-                    "with a maximum of 2 digits after the decimal point";
+            "Price should contain only numbers and at most 1 decimal point. " +
+                    "It must be least 1 digit long with a maximum of 2 digits after the decimal point";
     public static final String PRICE_VALIDATION_REGEX = "[0-9]+([.][0-9]{1,2})?";
     public final String foodPrice;
 
@@ -28,7 +27,7 @@ public class FoodPrice {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid price.
      */
     public static boolean isValidPrice(String test) {
         return test.matches(PRICE_VALIDATION_REGEX);

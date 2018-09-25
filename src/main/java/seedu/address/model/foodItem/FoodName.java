@@ -1,7 +1,5 @@
 package seedu.address.model.foodItem;
 
-import seedu.address.model.person.Name;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -54,8 +52,6 @@ public class FoodName {
     }
 
     @Override
-    public int hashCode() {
-        return foodName.hashCode();
-    }
+    public int hashCode() { return foodName.hashCode(); }
 
 }
