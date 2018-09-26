@@ -886,7 +886,7 @@ Use case ends.
 
 * 2a. Student enters an invalid command format
 ** 2a1. TB requests for a valid command
-** 2a2. Student enters a new add command
+** 2a2. Student enters a new complete command
 +
 Use case ends.
 
@@ -911,7 +911,7 @@ Use case ends.
 
 * 2a. Student enters an invalid command format
 ** 2a1. TB requests for a valid command
-** 2a2. Student enters a new add command
+** 2a2. Student enters a new sort command
 +
 Use case ends.
 
