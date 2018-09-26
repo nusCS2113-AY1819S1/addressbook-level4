@@ -12,7 +12,6 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeTable;
 
-import java.net.URL;
 import java.util.logging.Logger;
 
 /**
@@ -26,17 +25,17 @@ import java.util.logging.Logger;
  * We need a dynamic timetable, but following the AB4 convention will only give us a static timetable.
  */
 
-public class TimeTablePanelGrid extends UiPart<Region> {
+public class TimeTablePanelMainGrid extends UiPart<Region> {
 
     // TODO ALEXIS: fxml file: need to tweak!
-    private static final String FXML = "TimeTablePanelGrid.fxml";
+    private static final String FXML = "TimeTablePanelMainGrid.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private GridPane timeTableGrid;
 
-    public TimeTablePanelGrid() {
+    public TimeTablePanelMainGrid() {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.

@@ -1,19 +1,16 @@
 package seedu.address.ui;
 
-import java.net.URL;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
-import javafx.scene.web.WebView;
-import seedu.address.MainApp;
+import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.TimeTable;
 
 /**
  * TODO ALEXIS: currently morphing this from BrowserPanel into a TimeTablePanel.
@@ -27,7 +24,7 @@ import seedu.address.model.person.Person;
  *  |       |-*TimeTablePanelTimingMarker (visually the timing markers at the top of the grid; eg: 0900 or 1500)
  *  |
  *  |-PanelBottom (just a divider in javafx )
- *  |   |-TimeTablePanelGrid (visually the gridlines in the timetable)
+ *  |   |-TimeTablePanelMainGrid (visually the gridlines in the timetable)
  *  |       |---*TimeTablePanelTimeSlot (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
  *  |       |---*TimeTablePanelDaySlot (represents a day marker on the leftmost column of timetable; visually a square that contains the day of the week)
  *  |
@@ -39,16 +36,20 @@ import seedu.address.model.person.Person;
 
 public class TimeTablePanel extends UiPart<Region> {
 
-    public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
-
     private static final String FXML = "TimeTablePanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+    //TODO ALEXIS: time
+    //private  TimeTablePanelTimingGrid timeTablePanelTimingGrid;
+
+    private  TimeTablePanelMainGrid timeTablePanelMainGrid;
+
     @FXML
-    private WebView browser;
+    private StackPane timeTablePanelTimingGridPlaceholder;
+
+    @FXML
+    private StackPane timeTablePanelMainGridPlaceholder;
 
     public TimeTablePanel() {
         super(FXML);
@@ -56,36 +57,48 @@ public class TimeTablePanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
-        loadDefaultPage();
+        fillInnerParts();
+
+        loadTimeTable(); // TODO ALEXIS: does nothing now
         registerAsAnEventHandler(this);
     }
 
-    private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+    /**
+     * Fills up all the placeholders of this TimeTablePanel.
+     */
+    void fillInnerParts() {
+        //TODO ALEXIS
+        //timingGrid = new TimeTablePanelTimingGrid();
+        //timingGridPlaceholder.getChildren().add(timingGrid.getRoot());
+
+        timeTablePanelMainGrid  = new TimeTablePanelMainGrid();
+        timeTablePanelMainGridPlaceholder.getChildren().add(timeTablePanelMainGrid.getRoot());
     }
 
-    public void loadPage(String url) {
-        Platform.runLater(() -> browser.getEngine().load(url));
+
+    /** TODO ALEXIS:
+     * Loads a TimeTable visually from the TimeTable object it is given.
+     */
+    private void loadTimeTable(TimeTable timeTable) {
+
     }
 
     /**
-     * Loads a default HTML file with a background that matches the general theme.
+     * Loads empty TimeTable.
      */
-    private void loadDefaultPage() {
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
-        loadPage(defaultPage.toExternalForm());
+    private void loadTimeTable() {
+
     }
 
-    /**
-     * Frees resources allocated to the browser.
-     */
-    public void freeResources() {
-        browser = null;
+    //TODO ALEXIS: decide if this is necessary or not?
+    public void freeResources(){
+
     }
+
 
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
+        loadTimeTable(event.getNewSelection().getTimeTable());
     }
 }
