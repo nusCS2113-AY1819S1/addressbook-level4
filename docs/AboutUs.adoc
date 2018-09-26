@@ -38,7 +38,7 @@ Responsibilities: Date features
 '''
 
 === Chan Chun Cheong
-image::m133225.jpg[width="150", align="left"]
+image::ChanChunCheong.jpeg[width="150", align="left"]
 {empty}[https://github.com/ChanChunCheong[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
