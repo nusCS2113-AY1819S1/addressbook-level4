@@ -30,8 +30,8 @@ public class TimeTablePanelTimeslot extends UiPart<Region> {
     private Label name; //name of timeSlot
     @FXML
     private Label id; //index of timeSlot in current TimeTableGrid
-    @FXML
-    private FlowPane tags; //TODO ALEXIS: tag for this timeSlot (necessary or not? )
+    //@FXML
+    //private FlowPane tags; //TODO ALEXIS: tag for this timeSlot (necessary or not? )
 
     public TimeTablePanelTimeslot(TimeSlot timeSlot, int displayedIndex) {
         super(FXML);
