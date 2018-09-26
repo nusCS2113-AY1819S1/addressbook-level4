@@ -223,6 +223,136 @@ Examples:
 * `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10` +
 Assigns 10 marks to CS2040C student with matric number A0168111.
 
+=======
+=== Class Management
+==== Creating a class : `class create`
+Creates a class and assigns it to a module for the system. +
+Format: `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT`
+
+****
+* Module code must exist before creating a class for the module
+****
+
+Examples:
+
+* `class create c/T16 m/CG1111 e/20` +
+Creates a class T16, assigns it to the module CG1111 with the max enrollment size of 20
+
+==== Deleting a class : `class delete`
+Deletes a class with students assigned to it for a module for the system. +
+Format: `class delete c/CLASS_NAME m/MODULE_CODE`
+
+****
+* Class must exist in order to be deleted
+* Module code must exist and have a specified class assigned to it before deleting a class for the module
+****
+
+Examples:
+
+* `class delete c/T16 m/CG1111` +
+Deletes the class T16 from the module CG1111
+
+==== Assigning a student to class : `class addstudent`
+Assigns a student to a class for the system. +
+Format: `class addstudent c/CLASS_NAME m/MODULE_CODE`
+
+****
+* Class must exist before assigning a student to the class
+****
+
+Examples:
+
+* `class addstudent c/T16 i/A6942069M` +
+Adds a student of the admission number A6942069M to the class T16
+
+==== Unassigning a student from class : `class delstudent`
+Unassigns a student from the class for the system. +
+Format: `class delstudent c/CLASS_NAME i/ADMISSION_NO`
+
+****
+* Class must exist before unassigning a student from the class
+* Student must be assigned to class in order to unassign them from the class
+****
+
+Examples:
+
+* `class delstudent c/T16 i/A6942069M` +
+Removes a student of the admission number A6942069M from the class T16
+
+==== Modifying class enrollment limits : `class maxenroll`
+Modifies the max enrollment size for a class for the system. +
+Format: `class maxenroll  c/CLASS_NAME e/NEW_MAX_ENROLLMENT_SIZE`
+
+****
+* Class must exist before being able to modify the class enrollment limits
+****
+
+Examples:
+
+* `class maxenroll c/T16 e/20` +
+Modifies the new max class enrollment size for the class T16 to be 20
+
+==== Accessing class attendance list : `class listattend`
+Access the class attendance list for the system. +
+Format: `class listattend c/CLASS_NAME`
+
+****
+* Class must exist before being able to access the class attendance list
+****
+
+Examples:
+
+* `class listattend c/T16` +
+Displays the class attendance list for the class T16
+
+==== Marking class attendance list : `class markattend`
+Mark the class attendance list for a specified student for the system. +
+Format: `class markattend c/CLASS_NAME i/ADMISSION_NO`
+
+****
+* Class must exist before being able to mark student available for class attendance
+* Student must be in the specified class in order to mark student present
+****
+
+Examples:
+
+* `class markattend c/T16 i/A6942069M` +
+Marks the attendance of the student of the admission number A6942069M for the class T16
+
+==== Modifying class attendance list : `class modattend`
+Modifies the class attendance list for the system. +
+Format: `class modattend c/CLASS_NAME i/ADMISSION_NO`
+
+****
+* Class must exist before modifying a student’s attendance
+* If current student is present, modifying will mark student as absent, vice versa
+****
+
+Examples:
+
+* `class modattend c/T16 i/A6942069M` +
+Modifies the attendance of the student of the admission number A6942069M for the class T16
+
+=== Selecting a person : `select`
+
+Selects the person identified by the index number used in the displayed person list. +
+Format: `select INDEX`
+
+****
+* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd person in the address book.
+* `find Betsy` +
+`select 1` +
+Selects the 1st person in the results of the `find` command.
+
 
 === Listing entered commands : `history`
 
@@ -304,6 +434,100 @@ There is no need to save manually.
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
+
+=== Notes Management
+
+==== Adding a note : `note add`
+Adds a note to a module. +
+Format: `note add m/MODULE_CODE [p/PRIORITY_LEVEL] [d/DATE]`
+
+NOTE: `*The optional parameters PRIORITY_LEVEL and DATE will be available from v1.3*` +
+- PRIORITY_LEVEL = { 1 = LOW, 2 = MEDIUM, 3 = HIGH } +
+- If the PRIORITY_LEVEL is omitted, a default value of 1 (LOW) will be assigned to the created note. +
+- The DATE parameter follows the `DD.MM.YYYY` formatting only.
+
+****
+* Upon entering the `note add` command, the system will prompt the user to type his/her note.
+* The user can choose to cancel anytime during the note editing stage.
+****
+
+Example(s):
+
+* `note add m/CS2113` +
+This tells the system that the note is to be saved in the CS2113 module with a LOW priority and it has no date.
+* `note add m/CS2113 p/2 d/31.12.2113` +
+This tells the system that the note is to be saved in the CS2113 module with a MEDIUM priority and a date (31 Dec 2113).
+
+{sp} +
+
+==== Listing all notes from a module : `note list`
+Shows a list of all notes saved in the module. +
+Format: `note list m/MODULE_CODE [P]`
+
+NOTE: `*The optional parameter P will be available from v1.3*` +
+- Adding the `P` parameter allows the user to view notes based on their assigned PRIORITY_LEVEL from highest to lowest. +
+- It is not case-sensitive, hence the user can use either lowercase or uppercase. +
+- If `P` is omitted, the list displayed is sorted by the order of creation.
+
+Example(s):
+
+* `note list m/CS1231` +
+This will list all the existing notes from the CS1231 module in the order of their creation.
+* `note list m/CS1231 p` +
+This is similar to the previous example, except that the system will display the list from highest to lowest PRIORITY_LEVEL.
+
+
+{sp} +
+
+==== Deleting a note : `note delete` `[Coming in v1.2]`
+Deletes a specific note. +
+Format: `note delete m/MODULE_CODE INDEX`
+
+* Deletes the note with the specified INDEX.
+* The INDEX refers to the corresponding number of each note when `note list` command is used.
+
+Example(s):
+
+* `note list m/CS2040C` +
+A list of all notes saved in CS2040C module is displayed. +
+`note delete m/CS2040C 1` +
+Deletes the note that corresponds to INDEX=1 in the list.
+
+{sp} +
+
+==== Editing a note : `note edit` `[Coming in v1.3]`
+Edits an existing note. +
+Format: `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]`
+
+* Edits the note with the specified INDEX.
+* The INDEX refers to the corresponding number of each note when `note list` command is used.
+* Upon entering the `note edit` command, the system will prompt the user to type his/her modifications to the note.
+* The user can choose to cancel anytime during the note editing stage.
+
+Example(s):
+
+* `note list m/CS1010` +
+A list of all notes saved in CS1010 module is displayed. +
+`note edit m/CS1010 3 d/10.10.2019` +
+The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its assigned DATE changed to 10/10/2019 while its PRIORITY_LEVEL remains unchanged.
+
+{sp} +
+
+==== Finding a note : `note find` `[Coming in v1.2]`
+Search and display existing notes from a module using keywords. +
+Format: `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..`
+
+* Multiple keywords can be accepted.
+* A minimum of one keyword is required for the command to work.
+* Keywords are not case-sensitive.
+* Each keyword must consist only of a single word.
+
+Example(s):
+
+* `note find m/CS2113 k/git k/OOP` +
+Lists all notes from CS2113 module which contain both keywords "git" and "OOP".
+
+{sp} +
 
 == FAQ
 
