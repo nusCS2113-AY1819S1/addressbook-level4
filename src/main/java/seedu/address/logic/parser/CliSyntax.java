@@ -29,4 +29,5 @@ public class CliSyntax {
     public static final String COMMAND_BACKUP = "backup";
     public static final String COMMAND_RESTORE = "restore";
     public static final String COMMAND_IMPORT = "import";
+    public static final String COMMAND_EXPORT = "export";
 }
