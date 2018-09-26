@@ -39,7 +39,7 @@ Responsibilities: Storage
 
 === Chan Chun Cheong
 image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/ChanChunCheong[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
