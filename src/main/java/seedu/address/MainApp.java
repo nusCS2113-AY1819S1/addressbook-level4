@@ -1,5 +1,7 @@
 package seedu.address;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -40,7 +42,7 @@ import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 import seedu.address.ui.UiPart;
 
-import static java.util.Objects.requireNonNull;
+
 
 /**
  * The main entry point to the application.
@@ -50,6 +52,8 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 6, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+    public static final String FXML_FILE_FOLDER = "/view/";
+    public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
 
     static public Ui ui;
     protected Logic logic;
@@ -57,7 +61,10 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    //author @tianhang
+    private final FXMLLoader fxmlLoader = new FXMLLoader();
 
+    //author @tianhang
 
     @Override
     public void init() throws Exception {
@@ -183,11 +190,7 @@ public class MainApp extends Application {
     private void initEventsCenter() {
         EventsCenter.getInstance().registerHandler(this);
     }
-    //author @tianhang
-    private final FXMLLoader fxmlLoader = new FXMLLoader();
-    public static final String FXML_FILE_FOLDER = "/view/";
-    public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
-    //author @tianhang
+
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
