@@ -67,6 +67,24 @@ Examples:
 
 * `add t/Complete 2113 Tutorial d/Wed w/2`
 
+=== Complete a task: `complete`
+
+Complete a task in the task book +
+Format: `complete t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
+
+Examples:
+
+* `complete t/Complete 2113 Tutorial d/Wed w/2`
+
+=== Sort the taskbook: `sort`
+
+Sort the tasks in the task book +
+Format: `sort t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
+
+Examples:
+
+* `sort t/Complete 2113 Tutorial d/Wed w/2`
+
 === Adding a deadline: `deadline`
 
 Adds an important task with deadline to the task book +
