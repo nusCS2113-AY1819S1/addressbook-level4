@@ -26,7 +26,7 @@ import seedu.address.model.person.Person;
  * >TimetableGrid (visually the gridlines in the timetable)
  * >TimetableTimings (visually the timing markers at the top of the grid; eg: 0900 or 1500)
  * >TimetableDay (represents a day marker on the leftmost column of timetable; visually a square that contains the day of the week)
- * >TimetableTimeslot (represents a timeslot; visually a square inside the timetable, just like in NUSMODS)
+ * >TimetableTimeslot (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
  *
  * UI logic:
  * >TimetableLogic (this will handle logic for THIS specific instance of timetable.)
