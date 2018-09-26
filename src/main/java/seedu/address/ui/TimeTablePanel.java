@@ -16,7 +16,10 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 
 /**
- * TODO: currently morphing this from browserpanel into a timetablepanel.
+ * TODO ALEXIS: currently morphing this from BrowserPanel into a TimeTablePanel.
+ *
+ * TODO ALEXIS: update the below morphing-direction comments. it is now outdated.
+ *
  * This is timetable panel, it is an object  that contains the other parts of the timetable:
  * (visually a bounding box.)
  *
@@ -35,20 +38,20 @@ import seedu.address.model.person.Person;
  * >>> etc..
  * __________________________________
  */
-public class TimetablePanel extends UiPart<Region> {
+public class TimeTablePanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
-    private static final String FXML = "TimetablePanel.fxml";
+    private static final String FXML = "TimeTablePanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private WebView browser;
 
-    public TimetablePanel() {
+    public TimeTablePanel() {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.

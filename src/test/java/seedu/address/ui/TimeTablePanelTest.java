@@ -4,7 +4,7 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.ui.TimetablePanel.DEFAULT_PAGE;
+import static seedu.address.ui.TimeTablePanel.DEFAULT_PAGE;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 
 import java.net.URL;
@@ -16,17 +16,17 @@ import guitests.guihandles.TimetablePanelHandle;
 import seedu.address.MainApp;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 
-public class TimetablePanelTest extends GuiUnitTest {
+public class TimeTablePanelTest extends GuiUnitTest {
     private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
-    private TimetablePanel timetablePanel;
+    private TimeTablePanel timetablePanel;
     private TimetablePanelHandle timetablePanelHandle;
 
     @Before
     public void setUp() {
         selectionChangedEventStub = new PersonPanelSelectionChangedEvent(ALICE);
 
-        guiRobot.interact(() -> timetablePanel = new TimetablePanel());
+        guiRobot.interact(() -> timetablePanel = new TimeTablePanel());
         uiPartRule.setUiPart(timetablePanel);
 
         timetablePanelHandle = new TimetablePanelHandle(timetablePanel.getRoot());
@@ -40,7 +40,7 @@ public class TimetablePanelTest extends GuiUnitTest {
 
         // associated web page of a person
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(TimetablePanel.SEARCH_PAGE_URL + ALICE.getName().fullName.replaceAll(" ", "%20"));
+        URL expectedPersonUrl = new URL(TimeTablePanel.SEARCH_PAGE_URL + ALICE.getName().fullName.replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(timetablePanelHandle);
         assertEquals(expectedPersonUrl, timetablePanelHandle.getLoadedUrl());

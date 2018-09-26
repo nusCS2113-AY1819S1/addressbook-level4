@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private TimetablePanel timetablePanel;
+    private TimeTablePanel timetablePanel;
     private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
@@ -119,7 +119,7 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        timetablePanel = new TimetablePanel();
+        timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());

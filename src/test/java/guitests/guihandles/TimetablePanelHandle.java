@@ -9,7 +9,7 @@ import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 /**
- * A handler for the {@code TimetablePanel} of the UI.
+ * A handler for the {@code TimeTablePanel} of the UI.
  */
 public class TimetablePanelHandle extends NodeHandle<Node> {
 
