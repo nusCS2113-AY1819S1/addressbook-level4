@@ -24,22 +24,22 @@ BookInventory is catered for a variety of users, ranging from inventory keeper, 
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Downloading the program.
-* *Visit https://github.com/CS2113-AY1819S1-W13-4/main and click on "Clone or download" as circled in the screenshot below.
+* Visit https://github.com/CS2113-AY1819S1-W13-4/main and click on "Clone or download" as circled in the screenshot below.
 +
 image::download.png
 +
-* *If you are a github user, clone the repository.
-* *However, it is encouraged that you "Download ZIP" in the drop-down menu.
-* *Once it is downloaded, unzip the file.
+* If you are a github user, clone the repository.
+* However, it is encouraged that you "Download ZIP" in the drop-down menu.
+* Once it is downloaded, unzip the file.
 . Input Commands
-* *Type the command in the command box and press kbd:[Enter] to execute it. +
+* Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-* *Some example commands you can try:
+* Some example commands you can try:
 
 ** *`help`* : view all commands available
-** *'list'* : list all books
+** *`list`* : list all books
 ** **`add`**`n/Harry Potter i/987-76-54321-32-1 p/60.70 q/100 c/30.90` : adds a book named `Harry Potter` to the Inventory List.
-** *'clear'* : clears the entire list
+** *`clear`* : clears the entire list
 ** *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -53,7 +53,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Harry Potter`.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Harry Potter t/cs2113t` or as `n/Harry Potter`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Items in brackets are *required* and always private e.g. 'q/QUANTITY (c/COST)'
+* Items in brackets are *required* and always *private* e.g. `q/QUANTITY (c/COST)`
 * Items in arrow brackets are commands that are commands available depending on the user e.g. <Accountant> means command only usable by accountant.
 ====
 
@@ -79,21 +79,23 @@ Examples:
 Shows a list of all books in the inventory list. +
 Format: `list`
 
-=== Locating book by iSBN13: 'find'
+=== Locating book by iSBN13: `find`
 
 Finds book with the iSBN13 from the inventory. +
-Format: 'find i/iSBN13'
+Format: `find i/iSBN13`
 
 Example:
-* 'find i/987-76-54321-32-1'
 
-=== Locating book by tags: 'search'
+* `find i/987-76-54321-32-1`
+
+=== Locating book by tags: `search`
 
 Search for books by tags from the inventory
-Format: 'search TAG'
+Format: `search TAG`
 
 Example:
-* 'search cs2113t'
+
+* `search cs2113t`
 
 ****
 * The search is case insensitive. e.g `cs2113t` will match `CS2113T`
@@ -104,7 +106,7 @@ Example:
 === Decrease Book Quantity (Items Sold) : `sell`
 
 Decrease an existing book quantity in the inventory list. +
-Format: `sell INDEX QUANTITY` OR 'sell ISBN13 QUANTITY'
+Format: `sell INDEX QUANTITY` OR `sell ISBN13 QUANTITY`
 
 ****
 * Decrease the quantity at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
@@ -113,7 +115,7 @@ Format: `sell INDEX QUANTITY` OR 'sell ISBN13 QUANTITY'
 
 Examples:
 
-* 'list' +
+* `list` +
 `sell 1 5` +
 Decrease the quantity available of the 1st book by 5.
 * `sell 987-76-54321-32-1 4` +
@@ -122,29 +124,29 @@ Decrease the quantity available for the book with the corresponding ISBN13 by 4.
 === Increase Book Quantity (Ordered more books): `stock`
 
 Increase an existing book quantity in the inventory list. +
-Format: `stock INDEX QUANTITY` OR 'stock ISBN13 QUANTITY'
+Format: `stock INDEX QUANTITY` OR `stock ISBN13 QUANTITY`
 
 ****
-* Increase the stock at the specified 'INDEX'. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Increase the stock at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
 * Existing quantity will be increase by the input value.
 ****
 
 Examples:
 
-* 'list' +
+* `list` +
 `stock 2 6` +
 Increase the quantity available of the 2nd book by 6.
 * `stock 987-76-54321-32-1 5` +
 Increase the quantity available for the book with the corresponding ISBN13 by 5.
 
-=== Check Inventory: 'check'
+=== Check Inventory: `check`
 
 Finds books with quantity less than or equal to the given input value.
-Format: 'check QUANTITY'
+Format: `check QUANTITY`
 
 Example:
 
-* 'check 4' +
+* `check 4` +
 Displays list of all books with quantity less than or equal to 4.
 
 === Deleting a book : `delete`
@@ -154,7 +156,7 @@ Format: `delete i/ISBN13`
 
 Examples:
 
-* 'delete i/987-76-54321-32-1' +
+* `delete i/987-76-54321-32-1` +
 Deletes the book with the corresponding iSBN13 from the inventory list.
 
 === Requesting for a book : `request`
@@ -168,13 +170,13 @@ Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 
 Examples:
 
-* `request i/987-76-54321-32-1 e/johnd@gmail.com q/5' +
+* `request i/987-76-54321-32-1 e/johnd@gmail.com q/5` +
 Requests for 5 same books with the corresponding iSBN13 with requester's email johnd@gmail.com
 
-=== Viewing of Requests : 'viewrequests'
+=== Viewing of Requests : `viewrequests`
 
 Views all the requests for books. +
-Format: 'viewrequests'
+Format: `viewrequests`
 
 === Listing entered commands : `history`
 
@@ -194,7 +196,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the inventory book's content (`add`, `delete`, `increase`, 'decrease' and `clear`).
+Undoable commands: those commands that modify the inventory book's content (`add`, `delete`, `increase`, `decrease` and `clear`).
 ====
 
 Examples:
@@ -236,18 +238,18 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Display account data : 'showdata'
+=== Display account data : `showdata`
 
 Displays accounting data
-Format: 'showdata'
+Format: `showdata`
 
-=== Next Page : 'next'
-Displays next set of accounting data.
-Format: 'next'
+=== Next Page : `next`
+Displays next set of accounting data. +
+Format: `next`
 
-=== Previous Page : 'previous'
-Displays the previous set of accounting data
-Format: 'previous'
+=== Previous Page : `previous`
+Displays the previous set of accounting data. +
+Format: `previous`
 
 === Clearing all entries : `clear`
 
@@ -283,21 +285,21 @@ _{explain how the user can enable/disable data encryption}_
 
 * *Add* : `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...` +
 e.g. `add n/Harry Potter i/987-76-54321-32-1 p/60.70 q/100 c/30/90 t/difficult`
-* *Find* : 'find i/ISBN13' +
-e.g. 'find i/987-76-54321-32-1'
-* *Search* : 'search TAG' +
-e.g. 'search cs2113t'
-* *Sell* : 'sell INDEX QUANTITY' OR 'sell i/ISBN13 QUANTITY' +
-e.g. 'sell 1 8' OR 'sell i/987-76-54321-32-1 8'
-* *Stock* : 'stock INDEX ISBN13' OR 'stock i/ISBN13 8' +
-e.g. 'stock 1 8' OR 'stock i/978-76-54321-32-1 8'
-* *Check* : 'check QUANTITY' +
-e.g. 'check 4'
-* *Request* : 'request i/ISBN13 e/EMAIL q/QUANTITY' +
-e.g. 'request i/987-76-54321-32-1 e/johnd@gmail.com q/5'
-* *View Request* : 'viewrequests'
-* *Display data* : 'showdata'
-* *Next* : 'next'
+* *Find* : `find i/ISBN13` +
+e.g. `find i/987-76-54321-32-1`
+* *Search* : `search TAG` +
+e.g. `search cs2113t`
+* *Sell* : `sell INDEX QUANTITY` OR `sell i/ISBN13 QUANTITY` +
+e.g. `sell 1 8` OR `sell i/987-76-54321-32-1 8`
+* *Stock* : `stock INDEX ISBN13` OR `stock i/ISBN13 8` +
+e.g. `stock 1 8` OR `stock i/978-76-54321-32-1 8`
+* *Check* : `check QUANTITY` +
+e.g. `check 4`
+* *Request* : `request i/ISBN13 e/EMAIL q/QUANTITY` +
+e.g. `request i/987-76-54321-32-1 e/johnd@gmail.com q/5`
+* *View Request* : `viewrequests`
+* *Display data* : `showdata`
+* *Next* : `next`
 * *Clear* : `clear`
 * *Delete* : `delete i/ISBN13` +
 e.g. `delete i/987-76-54321-32-1`
@@ -306,4 +308,4 @@ e.g. `delete i/987-76-54321-32-1`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Exit* : 'exit'
+* *Exit* : `exit`
