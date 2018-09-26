@@ -13,17 +13,4 @@ import java.util.TreeMap;
 
 public class FoodRecipe {
 
-    TreeMap<Float, FoodName> foodRecipe = new TreeMap<>();
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FoodRecipe // instanceof handles nulls
-                && foodRecipe.equals(((FoodRecipe) other).foodRecipe));
-    }
-
-    @Override
-    public int hashCode() {
-        return foodRecipe.hashCode();
-    }
 }

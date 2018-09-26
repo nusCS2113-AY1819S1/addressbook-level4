@@ -49,5 +49,4 @@ public class FoodPrice {
     public int hashCode() {
         return foodPrice.hashCode();
     }
-
 }

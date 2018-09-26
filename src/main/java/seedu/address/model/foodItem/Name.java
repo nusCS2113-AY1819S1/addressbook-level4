@@ -4,15 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Ingredient's name in the address book.
+ * Represents a Name in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
  */
-
-// To be replaced with a extends once I understand more
-
-public class IngredientName {
+public class Name {
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Ingredient names should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Names should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -20,17 +17,17 @@ public class IngredientName {
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String ingredientName;
+    public final String name;
 
     /**
      * Constructs a {@code Name}.
      *
-     * @param name A valid name.
+     * @param input A valid name.
      */
-    public IngredientName(String name) {
-        requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_NAME_CONSTRAINTS);
-        ingredientName = name;
+    public Name(String input) {
+        requireNonNull(input);
+        checkArgument(isValidName(input), MESSAGE_NAME_CONSTRAINTS);
+        name = input;
     }
 
     /**
@@ -40,20 +37,18 @@ public class IngredientName {
         return test.matches(NAME_VALIDATION_REGEX);
     }
 
-
     @Override
     public String toString() {
-        return ingredientName;
+        return name;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof IngredientName // instanceof handles nulls
-                && ingredientName.equals(((IngredientName) other).ingredientName)); // state check
+                || (other instanceof Name // instanceof handles nulls
+                && name.equals(((Name) other).name)); // state check
     }
 
     @Override
-    public int hashCode() { return ingredientName.hashCode(); }
-
+    public int hashCode() { return name.hashCode(); }
 }
