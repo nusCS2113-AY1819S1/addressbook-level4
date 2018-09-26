@@ -836,6 +836,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |forgetful student |add new task |keep track of my workload
 
 |`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
+
+|`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
+
+|`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
 |=======================================================================
 
 
@@ -885,6 +889,33 @@ Use case ends.
 
 * 3b. Student wants to add a deadline for an existing task i.e. duplicated task
 ** 3b1. TB outputs an error message
++
+Use case ends.
+
+[discrete]
+=== Use case: View today's date
+
+*MSS*
+
+1. Student enters the view command
+2. TB returns today's date in d/DAY w/WEEK m/MONTH format
++
+Use case ends.
+
+[discrete]
+=== Use case: Select a date
+
+*MSS*
+
+1. Student enters the select command and the date required
+2. TB checks for its validity and changes to the required date
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Date entered by the student is not valid e.g. d/Tues w/5 m/9
+** 2a1. TB prompts student to enter a correct date
 +
 Use case ends.
 
