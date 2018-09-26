@@ -18,26 +18,24 @@ import seedu.address.model.person.Person;
 /**
  * TODO ALEXIS: currently morphing this from BrowserPanel into a TimeTablePanel.
  *
- * TODO ALEXIS: update the below morphing-direction comments. it is now outdated.
+ * This is TimeTablePanel, it is a panel where the TimeTable elements reside in:
+ * Contains these Classes:
  *
- * This is timetable panel, it is an object  that contains the other parts of the timetable:
- * (visually a bounding box.)
+ * TimeTablePanel
+ *  |-PanelTop (just a divider in javafx )
+ *  |   |-TimetableTimings (visually the timing markers at the top of the grid; eg: 0900 or 1500)
+ *  |
+ *  |-PanelBottom (just a divider in javafx )
+ *  |   |-TimetableGrid (visually the gridlines in the timetable)
+ *  |       |---TimetableTimeslot (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
+ *  |       |---TimetableDay (represents a day marker on the leftmost column of timetable; visually a square that contains the day of the week)
+ *  |
+ *  |-UI logic:  (just to handle the logic of RENDERING/SCALING and ADDING/REMOVAL of timeslots and HANDLING TIMESLOT INDEXES, ETC)
  *
- * Encapsulates these Classes:
- * __________________________________
- * UI objects:
- * >TimetableGrid (visually the gridlines in the timetable)
- * >TimetableTimings (visually the timing markers at the top of the grid; eg: 0900 or 1500)
- * >TimetableDay (represents a day marker on the leftmost column of timetable; visually a square that contains the day of the week)
- * >TimetableTimeslot (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
- *
- * UI logic:
- * >TimetableLogic (this will handle logic for THIS specific instance of timetable.)
- * >>> it can vary the dimensions of the timetable based on input parameters, start-end time, etc)
- * >>> it will handle the adding and removal of timeslots.
- * >>> etc..
- * __________________________________
+ *  
+ *____________________
  */
+
 public class TimeTablePanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
