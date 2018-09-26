@@ -890,6 +890,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |teacher |mark class attendance list |mark the attendance for every present student
 
 |`* * *` |teacher |modify class attendance list |alter a wrongly-marked attendance for a specific student
+
+|`* * *` |teacher |create notes for modules |keep track of important stuff regarding the module and also my own teaching progress
+
+|`* * *` |teacher |delete notes from modules |remove completed tasks or discard those that are no longer needed
+
+|`* * *` |teacher |view saved notes from modules |easily check up on important things I could have forgotten
+
+|`* * *` |teacher |edit notes from modules |efficiently make changes to my notes if needed without deleting and then adding a new one
+
+|`* *` |teacher |assign priorities to notes |make effective planning by looking for notes with higher importance
+
+|`* *` |teacher |attach deadlines to notes |keep track of upcoming deadlines and important dates
+
 |=======================================================================
 
 _{More to be added}_
@@ -1740,8 +1753,216 @@ Use case ends.
 +
 Use case resumes at step 1.
 
+[discrete]
+=== Use case: Add a note to a module
+
+*Pre-condition*
+
+Module must exist in data file.
+
+*MSS*
+
+1.  Teacher requests to add a note to a module.
+2.  System prompts the teacher to enter his/her note.
+3.  Teacher types the note.
+4.  System adds the note to the module and displays a message that it is successfully added.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Teacher enters an invalid command.
++
+[none]
+** 1a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 1b. The module does not exist.
++
+[none]
+** 1b1. System displays a message that the module is not found.
++
+Use case resumes at step 1.
+
+[none]
+* 3a. The teacher decides to cancel.
++
+Use case ends.
+
+[discrete]
+=== Use case: Viewing notes
+
+*Pre-condition*
+
+Module must exist in data file.
+
+*MSS*
+
+1.  Teacher requests to view the notes saved in a specific module.
+2.  System displays the complete numbered list of notes saved in the module.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Teacher enters an invalid command.
++
+[none]
+** 1a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 1b. The module does not exist.
++
+[none]
+** 1b1. System displays a message that the module is not found.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. There are no saved entries of notes in the module.
++
+[none]
+** 2b1. System displays a message that no entries are found.
++
+Use case ends.
+
+[discrete]
+=== Use case: Deleting a note
+
+*Pre-condition*
+
+Module must exist in data file.
+
+*MSS*
+
+1.  Teacher requests to list all notes in a module.
+2.  System displays the complete numbered list of notes saved in the module.
+3.  Teacher requests to delete a specific note in the list.
+4.  System deletes the note and displays a message that it is successfully deleted.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Teacher enters an invalid command.
++
+[none]
+** 1a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 1b. The module does not exist.
++
+[none]
+** 1b1. System displays a message that the module is not found.
++
+Use case resumes at step 1.
+
+[none]
+* 2a. There are no saved entries of notes in the module.
++
+[none]
+** 2a1. System displays a message that no entries are found.
++
+Use case ends.
+
+[none]
+* 3a. Teacher enters an invalid command.
++
+[none]
+** 3a1. System displays the list of valid commands.
++
+Use case resumes at step 3.
+
+[none]
+* 3b. The given index is invalid.
++
+[none]
+** 3b1. System informs the user that the input is invalid.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Editing a note
+
+*Pre-condition*
+
+Module must exist in data file.
+
+*MSS*
+
+1.  Teacher requests to list all notes in a module.
+2.  System displays the complete numbered list of notes saved in the module.
+3.  Teacher requests to edit a specific note in the list.
+4.  System prompts the teacher to enter the modifications.
+5.  Teacher can now modify the text.
+6.  System saves the modified note and displays a message for the successful modification.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Teacher gives an invalid command.
++
+[none]
+** 1a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 1b. The module does not exist.
++
+[none]
+** 1b1. System displays a message that the module is not found.
++
+Use case resumes at step 1.
+
+[none]
+* 2a. There are no saved entries of notes in the module.
++
+[none]
+** 2a1. System displays a message that no entries are found.
++
+Use case ends.
+
+[none]
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. System informs the user that the input is invalid.
++
+Use case resumes at step 2.
+
+[none]
+* 5a. The teacher decides to cancel.
++
+[none]
+** 5a1. System cancels the editing process.
++
+Use case ends.
+
+[none]
+* 5b. The modified note is an empty text.
++
+[none]
+** 5b1. System informs the user that the input is invalid.
++
+Use case resumes at step 4.
+
+{sp} +
 
 _{More to be added}_
+
+{sp} +
 
 [appendix]
 == Non Functional Requirements
