@@ -29,11 +29,11 @@ Responsibilities: Logic
 '''
 
 === Beh Kha Sim
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+image::behkhasim.jpeg[width="150", align="left"]
+{empty}[https://github.com/emobeany[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Storage
+Responsibilities: Date features
 
 '''
 
