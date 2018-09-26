@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T16-1/main
 
 By: `T16-1`      Since: `Aug 2018`      Licence: `MIT`
 
@@ -23,21 +23,13 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the program link:{repoURL}/releases[here]. [red]*(NOT AVAILABLE AT THIS TIME)*
+.  Copy the `.jar` file to your desired location.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
-
+.  You may start using the app. Use `help` command for a brief listing of all commands.
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
@@ -47,13 +39,14 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Items in square brackets are optional e.g `c/MODULE_CODE [p/PREREQUISITES]` can be used as `c/CS2113 p/CS2040C` or as `c/CS2113`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[p/PREREQUISITES]...` can be used as `{nbsp}` (i.e. 0 times), `p/CS2040C`, `p/CS2040C p/CS1010` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
+Shows the help page +
 Format: `help`
 
 === Adding a person: `add`
