@@ -1,4 +1,4 @@
-﻿= AddressBook Level 4 - Developer Guide
+﻿= Trajectory - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `T16-1`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -831,17 +831,25 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |teacher|add students |keep track of students that are currently in the institution
 
-|`* * *` |user |add a new person |
+|`* * *` |teacher |remove students|remove students who have graduated or are no longer with the institution
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |teacher |find student by name|get relevant student details, such as contact information
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |teacher |list all students |look at all the students that are currently in the institution
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |teacher |import students |import students from perhaps an existing LMS solution
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* *` |teacher |export students |have a copy of my students data set for possible import into another system
+
+|`* *` |teacher |add course |assign students to courses and keep track of who is in which course
+
+|`* *` |teacher |delete course |delete courses that may no longer be in use
+
+|`* *` |teacher |list courses |view all courses that exist within the institution
+
+|`* *` |teacher |list student list by course |view all students taking a certain course so I can plan my module enrollment better
 
 |`* * *` |teacher |add modules |manage my module matters more easily
 
@@ -866,6 +874,22 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |teacher |list all grade components |view all the grade components that I have added to my module
 
 |`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students
+
+|`* * *` |teacher |create a class |assign students to the class
+
+|`* * *` |teacher |delete a class |remove a class that is created wrongly
+
+|`* * *` |teacher |assign student to class |add students to a class in the event that some students still have not signed up for a slot when classes begin
+
+|`* * *` |teacher |unassign student from class |remove a student from a class to prevent clashes in his/her timetable, or the student has dropped out of school, or if he/she has not paid his/her school fees
+
+|`* * *` |teacher |modify class enrollment limit |set class enrollment limits so that the classes that I’m teaching or my TAs are teaching are not over-subscribed.
+
+|`* * *` |teacher |access class attendance list |access and view the class attendance to see which students are present/absent
+
+|`* * *` |teacher |mark class attendance list |mark the attendance for every present student
+
+|`* * *` |teacher |modify class attendance list |alter a wrongly-marked attendance for a specific student
 |=======================================================================
 
 _{More to be added}_
@@ -900,6 +924,231 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
+[discrete]
+
+=== Use case: Add student
+
+*MSS*
+
+1.  Teacher adds student to system
+2.  System adds student to system, and show a confirmation message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Student already exists in system.
++
+[none]
+** 2c1. System shows 'duplicate student' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Remove student
+
+*MSS*
+
+1.  Teacher removes student from system
+2.  System removes student to system, and show a confirmation message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Student not found in system.
++
+[none]
+** 2c1. System shows 'invalid student' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Find student
+
+*MSS*
+
+1.  Teacher finds student with entered details
+2.  System locates student details and displays it to the teacher.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Student not found in system.
++
+[none]
+** 2c1. System shows 'invalid student' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: List students
+
+*MSS*
+
+1.  Teacher lists students
+2.  System displays list of all students by default
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. There are no students in the system.
++
+[none]
+** 2c1. System shows 'no students in system' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Export all students to file
+
+*MSS*
+
+1.  Teacher exports all students to file.
+2.  System exports all students to file and display confirmation message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Invalid save location.
++
+[none]
+** 2c1. System shows 'invalid save location' message.
++
+Use case resumes at step 1.
+[none]
+* 2d. No students to export.
++
+[none]
+** 2d1. System shows 'no students to export' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Import students from file
+
+*MSS*
+
+1.  Teacher imports students from file.
+2.  System imports students from file and display confirmation message.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Teacher enters an invalid command.
++
+[none]
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+[none]
+* 2b. Teacher enters improperly formatted command.
++
+[none]
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+[none]
+* 2c. Invalid file location.
++
+[none]
+** 2c1. System shows 'invalid file location' message.
++
+Use case resumes at step 1.
+[none]
+* 2d. File in invalid format.
++
+[none]
+** 2d1. System shows 'invalid file format' message.
++
+Use case resumes at step 1.
+
 
 [discrete]
 === Use case: Add module
@@ -1259,6 +1508,238 @@ Use case ends.
 ** 2b1. System outputs an example of a valid input to run the 'list grades' command.
 +
 Use case resumes at step 1.
+
+[discrete]
+=== Use case: Creating a class
+
+*Pre-condition*
+
+Module code exists in data file.
+
+*MSS*
+
+1.  User enters command to create classroom.
+2.  Classroom is created for the module.
+3.  System displays message of successful creation of class.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User entered invalid command.
++
+[none]
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Deleting a class
+
+*Pre-condition*
+
+Module code exists in data file.
+
+*MSS*
+
+1.  User enters command to delete a class from module.
+2.  Classroom is deleted from module.
+3.  System displays message of successful deletion of class from module.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User entered invalid command.
++
+[none]
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+* 1b. Specified class does not belong to module.
++
+[none]
+** 1b1. System displays specified class does not belong to module error.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Assigning a student to class
+
+*Pre-condition*
+
+Student exists in data file.
+
+*MSS*
+
+1.  User enters command to assign a student to class.
+2.  Student gets assigned to class.
+3.  System displays message of successful assignment of student to class.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User entered invalid command.
++
+[none]
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
++
+* 1b. Class doesn’t exist.
++
+[none]
+** 1b1. System displays class not found error.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Unassigning a student from class
+
+*Pre-condition*
+
+Student exists in data file.
+
+*MSS*
+
+1.  User enters command to unassign a student from class.
+2.  Student gets unassigned from class.
+3.  System displays message of successful unassignment of student from class.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User entered invalid command.
++
+[none]
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
++
+* 1b.  Module code doesn’t exist.
++
+[none]
+** 1b1. System displays module not found error.
++
+Use case resumes at step 1.
+* 1c.  Specified student does not belong to class.
++
+[none]
+** 1c1. System displays specified student does not belong to class error.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Modifying class enrollment limits
+
+*Pre-condition*
+
+Class must exist in data file.
+
+*MSS*
+
+1.  User enters command to modify class enrollment limits.
+2.  Class enrollment limits gets updated.
+3.  System displays successful modification of class enrollment limits.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User entered invalid command.
++
+[none]
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Accessing class attendance list
+
+*Pre-condition*
+
+Class must exist in data file.
+
+*MSS*
+
+1.  User enters command to view class attendance list.
+2.  System displays the class attendance list.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User entered invalid command.
++
+[none]
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Marking class attendance list
+
+*Pre-condition*
+
+Class must exist in data file.
+
+*MSS*
+
+1.  User enters command to mark class attendance.
+2.  Class attendance is marked for specified student.
+3.  System displays message of successful marking of class attendance list.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User entered invalid command.
++
+[none]
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+* 1b. Specified student does not belong to class.
++
+[none]
+** 1b1. System displays specified student does not belong to class error.
++
+Use case resumes at step 1.
+
+[discrete]
+=== Use case: Modifying class attendance list
+
+*Pre-condition*
+
+Class must exist in data file.
+
+*MSS*
+
+1.  User enters command to modify class attendance list.
+2.  The class attendance list is updated.
+3.  System displays message of successful modification of class attendance list.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User entered invalid command.
++
+[none]
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+
 
 _{More to be added}_
 
