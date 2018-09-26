@@ -19,16 +19,17 @@ import seedu.address.model.person.Person;
  * TODO ALEXIS: currently morphing this from BrowserPanel into a TimeTablePanel.
  *
  * This is TimeTablePanel, it is a panel where the TimeTable elements reside in:
- * Contains these Classes:
+ * Contains these Classes: (where * represents any number of)
  *
  * TimeTablePanel
  *  |-PanelTop (just a divider in javafx )
- *  |   |-TimetableTimings (visually the timing markers at the top of the grid; eg: 0900 or 1500)
+ *  |   |-TimeTablePanelTimingGrid (invisible grid to hold the timing objects)
+ *  |       |-*TimeTablePanelTimingMarker (visually the timing markers at the top of the grid; eg: 0900 or 1500)
  *  |
  *  |-PanelBottom (just a divider in javafx )
- *  |   |-TimetableGrid (visually the gridlines in the timetable)
- *  |       |---TimetableTimeslot (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
- *  |       |---TimetableDay (represents a day marker on the leftmost column of timetable; visually a square that contains the day of the week)
+ *  |   |-TimeTablePanelGrid (visually the gridlines in the timetable)
+ *  |       |---*TimeTablePanelTimeSlot (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
+ *  |       |---*TimeTablePanelDaySlot (represents a day marker on the leftmost column of timetable; visually a square that contains the day of the week)
  *  |
  *  |-UI logic:  (just to handle the logic of RENDERING/SCALING and ADDING/REMOVAL of timeslots and HANDLING TIMESLOT INDEXES, ETC)
  *
