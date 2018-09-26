@@ -835,11 +835,17 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful student |add new task |keep track of my workload
 
+|`* * *` |student |completed a task |keep track of my incomplete tasks
+
+|`* * *` |student with many tasks in the address book |sort tasks by decreasing importance/categorise in module codes| complete tasks with more urgent deadlines first/ focus on modules with heavier workloads
+
 |`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
 
 |`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
 
 |`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
+
+
 |=======================================================================
 
 
