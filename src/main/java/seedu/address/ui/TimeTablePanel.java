@@ -40,8 +40,7 @@ public class TimeTablePanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    //TODO ALEXIS: time
-    //private  TimeTablePanelTimingGrid timeTablePanelTimingGrid;
+    private  TimeTablePanelTimingGrid timeTablePanelTimingGrid;
 
     private  TimeTablePanelMainGrid timeTablePanelMainGrid;
 
@@ -68,8 +67,8 @@ public class TimeTablePanel extends UiPart<Region> {
      */
     void fillInnerParts() {
         //TODO ALEXIS
-        //timingGrid = new TimeTablePanelTimingGrid();
-        //timingGridPlaceholder.getChildren().add(timingGrid.getRoot());
+        timeTablePanelTimingGrid = new TimeTablePanelTimingGrid();
+        timeTablePanelTimingGridPlaceholder.getChildren().add(timeTablePanelTimingGrid.getRoot());
 
         timeTablePanelMainGrid  = new TimeTablePanelMainGrid();
         timeTablePanelMainGridPlaceholder.getChildren().add(timeTablePanelMainGrid.getRoot());
