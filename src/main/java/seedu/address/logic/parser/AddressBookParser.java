@@ -89,6 +89,7 @@ public class AddressBookParser {
             return new RedoCommand();
 
         case GroupCommand.COMMAND_WORD:
+        case GroupCommand.COMMAND_WORD_2:
             return new GroupCommand();
 
         default:

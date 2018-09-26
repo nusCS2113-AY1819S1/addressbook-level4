@@ -11,7 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 public class GroupCommand extends Command {
 
     public static final String COMMAND_WORD = "group";
-
+    public static final String COMMAND_WORD_2 = "grp";
 
     public static final String SECTION_UNDER_CONSTRUCTION = "section under construction";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group the address book. "
