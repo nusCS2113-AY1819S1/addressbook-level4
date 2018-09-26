@@ -7,12 +7,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.TimeSlot;
 
-/** ALEXIS TODO: conversion into a timeSlot (visually a square in the TimetableGrid)
+/** TODO ALEXIS: conversion into a timeSlot (visually a square in the TimetableGrid)
  * An UI component that displays information of a {@code Person}.
  */
 public class TimeTablePanelTimeslot extends UiPart<Region> {
 
-    private static final String FXML = "TimeTablePanelTimeslot.fxml";
+    private static final String FXML = "TimeTablePanelTimeSlot.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -31,15 +31,15 @@ public class TimeTablePanelTimeslot extends UiPart<Region> {
     @FXML
     private Label id; //index of timeSlot in current TimeTableGrid
     @FXML
-    private FlowPane tags; //TODO: tag for this timeSlot (necessary or not? )
+    private FlowPane tags; //TODO ALEXIS: tag for this timeSlot (necessary or not? )
 
     public TimeTablePanelTimeslot(TimeSlot timeSlot, int displayedIndex) {
         super(FXML);
         this.timeSlot = timeSlot;
         id.setText(displayedIndex + ". ");
-        //ALEXIS TODO: pls verify the below line cannot be further OOP-fied/ optimised
+        //TODO ALEXIS: pls verify the below line cannot be further OOP-fied/ optimised
         name.setText(timeSlot.getModName());
-        //ALEXIS TODO: create public getTags function in getName
+        //TODO ALEXIS: create public getTags function in getName
         //timeSlot.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
@@ -58,6 +58,6 @@ public class TimeTablePanelTimeslot extends UiPart<Region> {
         // state check
         TimeTablePanelTimeslot card = (TimeTablePanelTimeslot) other;
         return id.getText().equals(card.id.getText())
-                && timeSlot.equals(card.timeSlot); // ALEXIS TODO: pls verify this whole function makes sense.
+                && timeSlot.equals(card.timeSlot); // TODO ALEXIS: pls verify this whole function makes sense.
     }
 }
