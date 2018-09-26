@@ -30,8 +30,13 @@ public class EventList implements ReadOnlyEventList {
     //// list overwrite operations
 
     /**
+<<<<<<< HEAD
      * Replaces the contents of the person list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
+=======
+     * Replaces the contents of the event list with {@code events}.
+     * {@code events} must not contain duplicate events.
+>>>>>>> upstream/master
      */
     public void setEvents(List<Event> events) {
         this.events.setEvents(events);
@@ -48,37 +53,37 @@ public class EventList implements ReadOnlyEventList {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if an event with the same identity as {@code event} exists in the address book.
      */
-    public boolean hasPerson(Event event) {
+    public boolean hasEvent(Event event) {
         requireNonNull(event);
         return events.contains(event);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds an event to the address book.
+     * The event must not already exist in the event list.
      */
-    public void addPerson(Event e) {
+    public void addEvent(Event e) {
         events.add(e);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given event {@code target} in the list with {@code editedEvent}.
+     * {@code target} must exist in the event list.
+     * The identity of {@code editedEvent} must not be the same as another existing event in the event list.
      */
-    public void updateEvent(Event target, Event editedPerson) {
-        requireNonNull(editedPerson);
+    public void updateEvent(Event target, Event editedEvent) {
+        requireNonNull(editedEvent);
 
-        events.setEvent(target, editedPerson);
+        events.setEvent(target, editedEvent);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code EventList}.
+     * {@code key} must exist in the event list.
      */
-    public void removePerson(Event key) {
+    public void removeEvent(Event key) {
         events.remove(key);
     }
 
@@ -86,7 +91,7 @@ public class EventList implements ReadOnlyEventList {
 
     @Override
     public String toString() {
-        return events.asUnmodifiableObservableList().size() + " persons";
+        return events.asUnmodifiableObservableList().size() + " events";
         // TODO: refine later
     }
 
