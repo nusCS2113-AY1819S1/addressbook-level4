@@ -29,13 +29,29 @@ public class Student extends Person {
      * @param tags
      */
 
-    private final String courseCode;
-    private final String matricNo;
+    private String courseCode;
+    private String matricNo;
 
     public Student(Name name, Phone phone, Email email, Address address,
                    Set<Tag> tags, String courseCode, String matricNo) {
         super(name, phone, email, address, tags);
         this.courseCode = courseCode;
+        this.matricNo = matricNo;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public String getMatricNo() {
+        return matricNo;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+    }
+
+    public void setMatricNo(String matricNo) {
         this.matricNo = matricNo;
     }
 }
