@@ -872,6 +872,56 @@ Use case ends.
 Use case ends.
 
 [discrete]
+
+=== Use case: Complete task
+
+*MSS*
+
+1.  Student requests to complete a new task
+2.  TB checks for its validity , change the status of the task to completed
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Student enters an invalid command format
+** 2a1. TB requests for a valid command
+** 2a2. Student enters a new add command
++
+Use case ends.
+
+* 2b. Student request to complete a non-existent task
+** 2b1. TB outputs an error message
++
+Use case ends.
+
+[discrete]
+
+=== Use case: Sort tasks in taskbook
+
+*MSS*
+
+1.  Student requests to sort task in taskbook
+2.  Student enters the format as to he wants the task to be sorted
+3.  TB checks for its validity and display the sorted task list
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Student enters an invalid command format
+** 2a1. TB requests for a valid command
+** 2a2. Student enters a new add command
++
+Use case ends.
+
+* 2b. Student requested to sort an empty taskbook
+** 2b1. TB outputs an error message
++
+Use case ends.
+
+[discrete]
+
 === Use case: Add important deadline
 
 *MSS*
