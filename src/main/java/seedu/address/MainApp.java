@@ -52,10 +52,10 @@ public class MainApp extends Application {
     public static final Version VERSION = new Version(0, 6, 0, true);
 
     public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
-
+    public static Ui ui;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    public static Ui ui;
+
 
     protected Logic logic;
     protected Storage storage;
@@ -201,7 +201,7 @@ public class MainApp extends Application {
         //author @tianhang
     }
     //author @tianhang
-    private void showLoginPage(URL fxmlLoginFileUrl,Stage primaryStage){
+    private void showLoginPage(URL fxmlLoginFileUrl, Stage primaryStage) {
         Parent root = loadFxmlFile(fxmlLoginFileUrl, primaryStage);
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root));
@@ -212,13 +212,13 @@ public class MainApp extends Application {
         requireNonNull(location);
         fxmlLoader.setLocation(location);
         Parent rooting = null;
-            try {
-                 rooting = fxmlLoader.load();
+        try {
+            rooting = fxmlLoader.load();
 
-            } catch (IOException e) {
-                System.out.println("the exception is " + e);
-                //throw new AssertionError(e);
-            }
+        } catch (IOException e) {
+            System.out.println("the exception is " + e);
+            //throw new AssertionError(e);
+        }
         return rooting;
     }
     //@author tianhang
