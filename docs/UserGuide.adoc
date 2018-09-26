@@ -1,6 +1,7 @@
 = Trajectory - Developer Guide
 :site-section: UserGuide
 :toc:
+:toclevels: 3
 :toc-title:
 :toc-placement: preamble
 :sectnums:
@@ -12,7 +13,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T16-1/main
 
 By: `T16-1`      Since: `Aug 2018`      Licence: `MIT`
 
@@ -23,21 +24,13 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the program link:{repoURL}/releases[here]. [red]*(NOT AVAILABLE AT THIS TIME)*
+.  Copy the `.jar` file to your desired location.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
-
+.  You may start using the app. Use `help` command for a brief listing of all commands.
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
@@ -47,15 +40,15 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Items in square brackets are optional e.g `c/MODULE_CODE [p/PREREQUISITES]` can be used as `c/CS2113 p/CS2040C` or as `c/CS2113`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[p/PREREQUISITES]...` can be used as `{nbsp}` (i.e. 0 times), `p/CS2040C`, `p/CS2040C p/CS1010` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
-Format: `help` +
-Shows the help page.
+Shows the help page +
+Format: `help`
 
 === Student Management
 ==== Add Student : `student add`
@@ -137,91 +130,127 @@ Exports all students in .csv format to the 'export' folder in C drive.
 * There must be at least 1 student in the system
 ****
 
-=== Grade Management
-==== Add Grade Component
-Adds a grade item to a module code. +
-Format: `gradebook add c/MODULE_CODE i/GRADE_ITEM  m/MAX_MARKS p/PERCENTAGE OF GRADE`
+=== Module Management
+==== Adding a module :  `module add`
+Adds a module to the system. +
+Format: `module add n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]...`
 
 ****
-* Given percentage cannot exceed total available percentage
-* No duplicate grade items allowed
-****
-
-Examples:
-
-* `gradebook add c/CS2040C i/Assignment 1 m/10 p/10` +
-Adds grade component, Assignment 1, to module CS2040C with a maximum of 10 marks and constitutes 10% of overall marks
-* `gradebook add c/CS2040C i/Final Examinations m/100 p/60` +
-Adds grade component, Assignment 2, to module CS2040C with a maximum of 100 marks and constitutes 60% of overall marks
-
-==== Edit Grade Item
-Modifies a grade item. +
-Format: `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE`
-
-****
-* Module must exist.
+* Module code must be unique.
+* Prerequisite modules should be specified with the respective module codes.
+* Prerequisite modules must exist in the system.
 ****
 
 Examples:
 
-* `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10` +
-Updated overall marks of CS2040C Assignment 1 to 20 marks instead of 10 marks (with reference to 'Add Grade Item Example 1')
-* `gradebook add c/CS2040C i/Final Examinations m/100 p/50` +
-Updated Final Examinations grade percentage to 50% instead of 60% (with reference to 'Add Grade Item Example 2')
+* `module add n/EPP1 c/CG1111`
+* `module add n/Software Engineering c/CS2113 p/CS2040C`
 
-==== Delete Grade Component
-Removes a grade item to a module code. +
-Format: `gradebook remove c/MODULE_CODE i/GRADE_ITEM'
+==== Editing a module : `module edit`
+Edits an existing module in the system. +
+Format: `module edit c/MODULE_CODE [n/MODULE_NAME] [p/PREREQUISITES]...`
 
 ****
-* Module must exist.
-****
-
-Examples:
-
-* `gradebook remove m/CS2040C i/Assignment 1` +
-Deletes Assignment 1 component from module CS2040C.
-
-==== List Grade Components
-Lists all the grade items in a certain module. +
-Format: `gradebook list components c/MODULE_CODE'
-
-****
-* Module must exist.
+* Edits a module with the specified module code. The module code must exist in the system.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing the module prerequisites, the existing prerequisites of the module will be removed i.e adding of prerequisites is not cumulative.
+* You can remove all of the module’s prerequisites by typing `p/` without specifying any prerequisites after it.
 ****
 
 Examples:
 
-* `gradebook list components c/CS2040C` +
-Lists all the grade items for the module with module code CS2040C.
+* `module edit c/CG1111 n/Engineering Principles and Practices 1` +
+Edits the module name to `Engineering Principles and Practices 1`.
+* `module edit c/CS2113 p/` +
+Clears all existing prerequisites for the module.
 
-==== List Grades of Students
-Lists grades of all students enrolled in the module. +
-Format: `gradebook list grades c/MODULE_CODE'
+==== Deleting a module : `module delete`
+Deletes a module from the system. +
+Format: `module delete c/MODULE_CODE`
 
 ****
-* Module must exist.
-* Student must be enrolled in the module.
+* The module must already exist in the system.
+* The user will be prompted to confirm the deletion of the module to prevent accidents.
+****
+
+Example:
+
+* `module delete c/CS2113` +
+Deletes the module with module code `CS2113`
+
+==== Archiving a module : `module archive`
+Archives a module that is no longer being taught to keep it as a historical record. +
+Format: `module archive c/MODULE_CODE`
+
+****
+* The archived module will no longer show up using the base module list command.
+* The module must already exist in the system.
+* The user will be prompted to confirm archiving the module to prevent accidents.
+****
+
+Example:
+
+* `module archive c/CS2113` +
+Archives the module with module code `CS2113`.
+
+==== Finding a module by module code : `module find`
+Finds modules whose module codes contain any of the given keywords. This is useful for checking if certain module exists in the system. +
+Format: `module find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The archived module will no longer show up using the base module list command.
+* The module must already exist in the system.
+* The user will be prompted to confirm archiving the module to prevent accidents.
 ****
 
 Examples:
 
-* `gradebook list grades c/CS2040C` +
-Lists all grades obtained by students in CS2040C module.
+* `module find cs2113` +
+Returns `CS2113`.
+* `module find cs2113 CS2040c` +
+Returns `CS2113` and `CS2040C`.
 
-==== Assign Grades
-Assigns marks to a student. +
-Format: `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS'
+==== Listing all modules : `module list`
+Shows a list of all modules in the system. +
+Format: `module list`
+
+==== Enrolling students : `module enrol`
+Enrols students into the specified module using their matriculation numbers or email addresses. +
+Format: `module enrol [i/MATRIC_NUMBER]... [e/EMAIL]...`
 
 ****
-* Student must be enrolled in the module.
-* Given marks must not exceed maximum marks.
+* At least one of the optional fields must be provided.
+* The student(s) must already exist in the system.
 ****
 
 Examples:
 
-* `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10` +
-Assigns 10 marks to CS2040C student with matric number A0168111.
+* `module enrol i/A0161234B` +
+Enrols a student with matric no. `A0161234B`.
+* `module enrol i/A0167263X A0179821B` +
+Enrols two students with matric no. `A0167263X` and `A0179821B`.
+* `module enrol e/e0191122@u.nus.edu` +
+Enrols a student with email `e0191122@u.nus.edu`.
+* `module enrol e/e0191234@u.nus.edu e0161234@u.nus.edu` +
+Enrols two students with email `e0191234@u.nus.edu` and `e0161234@u.nus.edu`.
+
+==== Assigning a TA : `module assign [coming in v2.0]`
+Assigns a student as a TA of the module. +
+Format: `module assign [i/MATRIC_NUMBER] [e/EMAIL]`
+
+****
+* At least one of the optional fields must be provided.
+* The student must already exist in the system.
+* There can be many TAs in a module, or none at all.
+****
+
+Examples:
+
+* `module assign i/A0171234B` +
+Assigns the student with matric no. `A0171234B` as a TA.
+* `module assign e/e0191234@u.nus.edu` +
+Assigns the student with email `e0191234@u.nus.edu` as a TA.
 
 =======
 === Class Management
@@ -230,7 +259,7 @@ Creates a class and assigns it to a module for the system. +
 Format: `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT`
 
 ****
-* Module code must exist before creating a class for the module
+* Module code must exist before creating a class for the module.
 ****
 
 Examples:
@@ -332,6 +361,92 @@ Examples:
 
 * `class modattend c/T16 i/A6942069M` +
 Modifies the attendance of the student of the admission number A6942069M for the class T16
+
+=== Grade Management
+==== Add Grade Component
+Adds a grade item to a module code. +
+Format: `gradebook add c/MODULE_CODE i/GRADE_ITEM  m/MAX_MARKS p/PERCENTAGE OF GRADE`
+
+****
+* Given percentage cannot exceed total available percentage
+* No duplicate grade items allowed
+****
+
+Examples:
+
+* `gradebook add c/CS2040C i/Assignment 1 m/10 p/10` +
+Adds grade component, Assignment 1, to module CS2040C with a maximum of 10 marks and constitutes 10% of overall marks
+* `gradebook add c/CS2040C i/Final Examinations m/100 p/60` +
+Adds grade component, Assignment 2, to module CS2040C with a maximum of 100 marks and constitutes 60% of overall marks
+
+==== Edit Grade Item
+Modifies a grade item. +
+Format: `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE`
+
+****
+* Module must exist.
+****
+
+Examples:
+
+* `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10` +
+Updated overall marks of CS2040C Assignment 1 to 20 marks instead of 10 marks (with reference to 'Add Grade Item Example 1')
+* `gradebook add c/CS2040C i/Final Examinations m/100 p/50` +
+Updated Final Examinations grade percentage to 50% instead of 60% (with reference to 'Add Grade Item Example 2')
+
+==== Delete Grade Component
+Removes a grade item to a module code. +
+Format: `gradebook remove c/MODULE_CODE i/GRADE_ITEM'
+
+****
+* Module must exist.
+****
+
+Examples:
+
+* `gradebook remove m/CS2040C i/Assignment 1` +
+Deletes Assignment 1 component from module CS2040C.
+
+==== List Grade Components
+Lists all the grade items in a certain module. +
+Format: `gradebook list components c/MODULE_CODE'
+
+****
+* Module must exist.
+****
+
+Examples:
+
+* `gradebook list components c/CS2040C` +
+Lists all the grade items for the module with module code CS2040C.
+
+==== List Grades of Students
+Lists grades of all students enrolled in the module. +
+Format: `gradebook list grades c/MODULE_CODE'
+
+****
+* Module must exist.
+* Student must be enrolled in the module.
+****
+
+Examples:
+
+* `gradebook list grades c/CS2040C` +
+Lists all grades obtained by students in CS2040C module.
+
+==== Assign Grades
+Assigns marks to a student. +
+Format: `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS'
+
+****
+* Student must be enrolled in the module.
+* Given marks must not exceed maximum marks.
+****
+
+Examples:
+
+* `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10` +
+Assigns 10 marks to CS2040C student with matric number A0168111.
 
 === Selecting a person : `select`
 
