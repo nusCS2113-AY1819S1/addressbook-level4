@@ -6,17 +6,15 @@
 <?import javafx.geometry.Insets?>
 
 <StackPane xmlns:fx="http://javafx.com/fxml/1">
-      <SplitPane fx:id="splitPane" dividerPositions="0.23039215686274508" focusTraversable="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-        <StackPane fx:id="timeTablePanelTimingGridPlaceholder" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-        </StackPane>
+  <StackPane fx:id="timeTablePanelTimingGridPlaceholder" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+    <padding>
+      <Insets top="10" right="10" bottom="10" left="10" />
+    </padding>
+  </StackPane>
 
-        <StackPane fx:id="timeTablePanelMainGridPlaceholder" prefHeight="340" >
-          <padding>
-            <Insets top="10" right="10" bottom="10" left="10" />
-          </padding>
-        </StackPane>
-      </SplitPane>
+  <StackPane fx:id="timeTablePanelMainGridPlaceholder" prefHeight="340" >
+    <padding>
+      <Insets top="10" right="10" bottom="10" left="10" />
+    </padding>
+  </StackPane>
 </StackPane>
