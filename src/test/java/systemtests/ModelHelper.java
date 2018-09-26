@@ -6,34 +6,34 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.record.Record;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.
  */
 public class ModelHelper {
-    private static final Predicate<Person> PREDICATE_MATCHING_NO_PERSONS = unused -> false;
+    private static final Predicate<Record> PREDICATE_MATCHING_NO_RECORDS = unused -> false;
 
     /**
      * Updates {@code model}'s filtered list to display only {@code toDisplay}.
      */
-    public static void setFilteredList(Model model, List<Person> toDisplay) {
-        Optional<Predicate<Person>> predicate =
+    public static void setFilteredList(Model model, List<Record> toDisplay) {
+        Optional<Predicate<Record>> predicate =
                 toDisplay.stream().map(ModelHelper::getPredicateMatching).reduce(Predicate::or);
-        model.updateFilteredPersonList(predicate.orElse(PREDICATE_MATCHING_NO_PERSONS));
+        model.updateFilteredRecordList(predicate.orElse(PREDICATE_MATCHING_NO_RECORDS));
     }
 
     /**
      * @see ModelHelper#setFilteredList(Model, List)
      */
-    public static void setFilteredList(Model model, Person... toDisplay) {
+    public static void setFilteredList(Model model, Record... toDisplay) {
         setFilteredList(model, Arrays.asList(toDisplay));
     }
 
     /**
-     * Returns a predicate that evaluates to true if this {@code Person} equals to {@code other}.
+     * Returns a predicate that evaluates to true if this {@code Record} equals to {@code other}.
      */
-    private static Predicate<Person> getPredicateMatching(Person other) {
-        return person -> person.equals(other);
+    private static Predicate<Record> getPredicateMatching(Record other) {
+        return record -> record.equals(other);
     }
 }
