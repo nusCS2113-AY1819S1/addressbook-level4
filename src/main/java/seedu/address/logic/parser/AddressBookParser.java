@@ -81,6 +81,9 @@ public class AddressBookParser {
         case RestoreCommand.COMMAND_WORD:
             return new RestoreCommand();
 
+        case ImportCommand.COMMAND_WORD:
+            return new ImportCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
