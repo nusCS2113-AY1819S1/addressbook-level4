@@ -1,0 +1,33 @@
+//@@author m-aslam-mj2
+package seedu.address.model.student;
+
+import seedu.address.model.person.*;
+import seedu.address.model.tag.Tag;
+
+import java.util.Set;
+
+/**
+ * Represents a student in the LMS.
+ *
+ */
+
+public class Student extends Person {
+    /**
+     * Every field must be present and not null.
+     *
+     * @param name
+     * @param phone
+     * @param email
+     * @param address
+     * @param tags
+     */
+
+    private final String courseCode;
+    private final String matricNo;
+
+    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String courseCode, String matricNo) {
+        super(name, phone, email, address, tags);
+        this.courseCode = courseCode;
+        this.matricNo = matricNo;
+    }
+}
