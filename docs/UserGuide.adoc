@@ -60,12 +60,27 @@ Format: `help`
 Adds a task to the task book +
 Format: `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
 
-[TIP]
-A person can have any number of tags (including 0)
-
 Examples:
 
 * `add t/Complete 2113 Tutorial d/Wed w/2`
+
+=== Complete a task: `complete`
+
+Complete a task in the task book +
+Format: `complete t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
+
+Examples:
+
+* `complete t/Complete 2113 Tutorial d/Wed w/2`
+
+=== Sort the taskbook: `sort`
+
+Sort the tasks in the task book +
+Format: `sort t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
+
+Examples:
+
+* `sort t/Complete 2113 Tutorial d/Wed w/2`
 
 === Adding a deadline: `deadline`
 
