@@ -56,7 +56,7 @@ public class LoginController {
 
         boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword, salt);
         boolean usernameMatch = username.equals("tianhang");
-        if(passwordMatch && usernameMatch) { 
+        if(passwordMatch && usernameMatch) {
             Stage stageTheLabelBelongs = (Stage) passwordF.getScene().getWindow();
             stageTheLabelBelongs.close();
             ui.start(stageTheLabelBelongs);
