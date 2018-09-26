@@ -321,6 +321,100 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+=== Notes Management
+
+==== Adding a note : `note add`
+Adds a note to a module. +
+Format: `note add m/MODULE_CODE [p/PRIORITY_LEVEL] [d/DATE]`
+
+NOTE: `*The optional parameters PRIORITY_LEVEL and DATE will be available from v1.3*` +
+- PRIORITY_LEVEL = { 1 = LOW, 2 = MEDIUM, 3 = HIGH } +
+- If the PRIORITY_LEVEL is omitted, a default value of 1 (LOW) will be assigned to the created note. +
+- The DATE parameter follows the `DD.MM.YYYY` formatting only.
+
+****
+* Upon entering the `note add` command, the system will prompt the user to type his/her note.
+* The user can choose to cancel anytime during the note editing stage.
+****
+
+Example(s):
+
+* `note add m/CS2113` +
+This tells the system that the note is to be saved in the CS2113 module with a LOW priority and it has no date.
+* `note add m/CS2113 p/2 d/31.12.2113` +
+This tells the system that the note is to be saved in the CS2113 module with a MEDIUM priority and a date (31 Dec 2113).
+
+{sp} +
+
+==== Listing all notes from a module : `note list`
+Shows a list of all notes saved in the module. +
+Format: `note list m/MODULE_CODE [P]`
+
+NOTE: `*The optional parameter P will be available from v1.3*` +
+- Adding the `P` parameter allows the user to view notes based on their assigned PRIORITY_LEVEL from highest to lowest. +
+- It is not case-sensitive, hence the user can use either lowercase or uppercase. +
+- If `P` is omitted, the list displayed is sorted by the order of creation.
+
+Example(s):
+
+* `note list m/CS1231` +
+This will list all the existing notes from the CS1231 module in the order of their creation.
+* `note list m/CS1231 p` +
+This is similar to the previous example, except that the system will display the list from highest to lowest PRIORITY_LEVEL.
+
+
+{sp} +
+
+==== Deleting a note : `note delete` `[Coming in v1.2]`
+Deletes a specific note. +
+Format: `note delete m/MODULE_CODE INDEX`
+
+* Deletes the note with the specified INDEX.
+* The INDEX refers to the corresponding number of each note when `note list` command is used.
+
+Example(s):
+
+* `note list m/CS2040C` +
+A list of all notes saved in CS2040C module is displayed. +
+`note delete m/CS2040C 1` +
+Deletes the note that corresponds to INDEX=1 in the list.
+
+{sp} +
+
+==== Editing a note : `note edit` `[Coming in v1.3]`
+Edits an existing note. +
+Format: `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]`
+
+* Edits the note with the specified INDEX.
+* The INDEX refers to the corresponding number of each note when `note list` command is used.
+* Upon entering the `note edit` command, the system will prompt the user to type his/her modifications to the note.
+* The user can choose to cancel anytime during the note editing stage.
+
+Example(s):
+
+* `note list m/CS1010` +
+A list of all notes saved in CS1010 module is displayed. +
+`note edit m/CS1010 3 d/10.10.2019` +
+The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its assigned DATE changed to 10/10/2019 while its PRIORITY_LEVEL remains unchanged.
+
+{sp} +
+
+==== Finding a note : `note find` `[Coming in v1.2]`
+Search and display existing notes from a module using keywords. +
+Format: `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..`
+
+* Multiple keywords can be accepted.
+* A minimum of one keyword is required for the command to work.
+* Keywords are not case-sensitive.
+* Each keyword must consist only of a single word.
+
+Example(s):
+
+* `note find m/CS2113 k/git k/OOP` +
+Lists all notes from CS2113 module which contain both keywords "git" and "OOP".
+
+{sp} +
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
