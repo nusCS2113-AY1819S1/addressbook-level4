@@ -1,10 +1,17 @@
 //@@author m-aslam-mj2
 package seedu.address.model.student;
 
-import seedu.address.model.person.*;
+import java.util.Set;
+
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-import java.util.Set;
+
+
 
 /**
  * Represents a student in the LMS.
@@ -25,7 +32,8 @@ public class Student extends Person {
     private final String courseCode;
     private final String matricNo;
 
-    public Student(Name name, Phone phone, Email email, Address address, Set<Tag> tags, String courseCode, String matricNo) {
+    public Student(Name name, Phone phone, Email email, Address address,
+                   Set<Tag> tags, String courseCode, String matricNo) {
         super(name, phone, email, address, tags);
         this.courseCode = courseCode;
         this.matricNo = matricNo;
