@@ -1762,8 +1762,10 @@ Module must exist in data file.
 
 *MSS*
 
-1.  Teacher wants to add a note to a module.
-2.  System adds the note to the module and displays a message that it is successfully added.
+1.  Teacher requests to add a note to a module.
+2.  System prompts the teacher to enter his/her note.
+3.  Teacher types the note.
+4.  System adds the note to the module and displays a message that it is successfully added.
 +
 Use case ends.
 
@@ -1785,6 +1787,11 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
+[none]
+* 3a. The teacher decides to cancel.
++
+Use case ends.
+
 [discrete]
 === Use case: Viewing notes
 
@@ -1794,8 +1801,8 @@ Module must exist in data file.
 
 *MSS*
 
-1.  Teacher wants to view the notes saved in a specific module.
-2.  System displays the complete list of notes saved in the module.
+1.  Teacher requests to view the notes saved in a specific module.
+2.  System displays the complete numbered list of notes saved in the module.
 +
 Use case ends.
 
@@ -1823,7 +1830,7 @@ Use case resumes at step 1.
 [none]
 ** 2b1. System displays a message that no entries are found.
 +
-Use case resumes at step 1.
+Use case ends.
 
 [discrete]
 === Use case: Deleting a note
@@ -1834,9 +1841,9 @@ Module must exist in data file.
 
 *MSS*
 
-1.  Teacher wants to delete a note saved in a specific module.
-2.  System displays the complete numbered list of notes from the module.
-3.  Teacher selects the note to be deleted.
+1.  Teacher requests to list all notes in a module.
+2.  System displays the complete numbered list of notes saved in the module.
+3.  Teacher requests to delete a specific note in the list.
 4.  System deletes the note and displays a message that it is successfully deleted.
 +
 Use case ends.
@@ -1865,15 +1872,23 @@ Use case resumes at step 1.
 [none]
 ** 2a1. System displays a message that no entries are found.
 +
-Use case resumes at step 1.
+Use case ends.
 
 [none]
-* 4a. The given index is invalid.
+* 3a. Teacher enters an invalid command.
 +
 [none]
-** 4a1. System informs the user that the input is invalid.
+** 3a1. System displays the list of valid commands.
 +
-Use case resumes at step 1.
+Use case resumes at step 3.
+
+[none]
+* 3b. The given index is invalid.
++
+[none]
+** 3b1. System informs the user that the input is invalid.
++
+Use case resumes at step 2.
 
 [discrete]
 === Use case: Editing a note
@@ -1884,9 +1899,9 @@ Module must exist in data file.
 
 *MSS*
 
-1.  Teacher wants to edit an existing note in a specific module.
-2.  System displays the complete numbered list of notes from the module.
-3.  Teacher selects the note to be edited.
+1.  Teacher requests to list all notes in a module.
+2.  System displays the complete numbered list of notes saved in the module.
+3.  Teacher requests to edit a specific note in the list.
 4.  System prompts the teacher to enter the modifications.
 5.  Teacher can now modify the text.
 6.  System saves the modified note and displays a message for the successful modification.
@@ -1917,43 +1932,37 @@ Use case resumes at step 1.
 [none]
 ** 2a1. System displays a message that no entries are found.
 +
-Use case resumes at step 1.
+Use case ends.
 
 [none]
-* 3a. The teacher wishes to cancel the deletion.
+* 3a. The given index is invalid.
 +
 [none]
-** 3a1. System cancels the deletion process.
+** 3a1. System informs the user that the input is invalid.
 +
-Use case resumes at step 1.
+Use case resumes at step 2.
 
 [none]
-* 3b. The given index is invalid.
+* 5a. The teacher decides to cancel.
 +
 [none]
-** 3b1. System informs the user that the input is invalid.
+** 5a1. System cancels the editing process.
 +
-Use case resumes at step 1.
+Use case ends.
 
 [none]
-* 6a. The teacher wishes to cancel the modification.
+* 5b. The modified note is an empty text.
 +
 [none]
-** 6a1. System cancels the editing process.
+** 5b1. System informs the user that the input is invalid.
 +
-Use case resumes at step 1.
+Use case resumes at step 4.
 
-[none]
-* 6b. The modified note is an empty text.
-+
-[none]
-** 6b1. System informs the user that the input is invalid.
-+
-Use case resumes at step 5.
-
-
+{sp} +
 
 _{More to be added}_
+
+{sp} +
 
 [appendix]
 == Non Functional Requirements
