@@ -4,12 +4,17 @@ package seedu.address.authentication;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
+
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Random;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 
+/**
+ * A container for password utilities
+ */
 public class PasswordUtils {
 
     private static final Random RANDOM = new SecureRandom();
@@ -17,6 +22,11 @@ public class PasswordUtils {
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
 
+    /**
+     * generate a salt that encrypt and decrypt the password based on length
+     * @param length
+     * @return
+     */
     public static String getSalt(int length) {
         StringBuilder returnValue = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -24,6 +34,13 @@ public class PasswordUtils {
         }
         return new String(returnValue);
     }
+
+    /**
+     * It hash password
+     * @param password
+     * @param salt complexity of hashed password
+     * @return
+     */
     public static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
@@ -36,6 +53,13 @@ public class PasswordUtils {
             spec.clearPassword();
         }
     }
+
+    /**
+     *
+     * @param password
+     * @param salt
+     * @return hashed password
+     */
     public static String generateSecurePassword(String password, String salt) {
         String returnValue = null;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
@@ -45,9 +69,15 @@ public class PasswordUtils {
         return returnValue;
     }
 
+    /**
+     * Verify password Input
+     * @param providedPassword
+     * @param securedPassword
+     * @param salt
+     * @return
+     */
     public static boolean verifyUserPassword(String providedPassword,
-                                             String securedPassword, String salt)
-    {
+                                             String securedPassword, String salt) {
         boolean returnValue = false;
 
         // Generate New secure password with the same salt

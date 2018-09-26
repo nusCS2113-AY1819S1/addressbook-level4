@@ -51,11 +51,12 @@ public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 6, 0, true);
 
-    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
-    public static final String FXML_FILE_FOLDER = "/view/";
     public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
 
-    static public Ui ui;
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+
+    public static Ui ui;
+
     protected Logic logic;
     protected Storage storage;
     protected Model model;
@@ -196,7 +197,7 @@ public class MainApp extends Application {
         logger.info("Starting AddressBook " + MainApp.VERSION);
         //author @tianhang
         URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
-        showLoginPage(fxmlLoginFileUrl,primaryStage);
+        showLoginPage(fxmlLoginFileUrl , primaryStage);
         //author @tianhang
     }
     //author @tianhang
@@ -211,13 +212,13 @@ public class MainApp extends Application {
         requireNonNull(location);
         fxmlLoader.setLocation(location);
         Parent rooting = null;
-        try {
-             rooting = fxmlLoader.load();
+            try {
+                 rooting = fxmlLoader.load();
 
-        } catch (IOException e) {
-            System.out.println("the exception is " + e);
-            //throw new AssertionError(e);
-        }
+            } catch (IOException e) {
+                System.out.println("the exception is " + e);
+                //throw new AssertionError(e);
+            }
         return rooting;
     }
     //@author tianhang

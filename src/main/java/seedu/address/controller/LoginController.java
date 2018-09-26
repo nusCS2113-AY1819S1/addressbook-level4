@@ -1,5 +1,11 @@
 package seedu.address.controller;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.MainApp.ui;
+
+import java.io.IOException;
+import java.net.URL;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,25 +16,30 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seedu.address.authentication.PasswordUtils;
 
-import java.io.IOException;
-import java.net.URL;
-import static java.util.Objects.requireNonNull;
-import static seedu.address.MainApp.ui;
 
+
+/**
+ * Manger event on LoginPage.fxml
+ */
 public class LoginController {
-    private final FXMLLoader fxmlLoader = new FXMLLoader();
-    public static final String FXML_FILE_FOLDER = "/view/";
-   // private Ui ui;
+
+
     @FXML
     private javafx.scene.control.TextField usernameF;
     @FXML
     private PasswordField passwordF;
     @FXML
     private javafx.scene.control.Label label;
+
+    private final FXMLLoader fxmlLoader = new FXMLLoader();
+
+    /**
+     * Check for password when login is clicked
+     * @param e
+     * @throws Exception
+     */
     @FXML
-    private Button button;
-    @FXML
-    public void handleButtonAction(ActionEvent e) throws Exception{
+    public void handleButtonAction(ActionEvent e) throws Exception {
 
         String username = usernameF.getText();
         String password = passwordF.getText();
@@ -37,16 +48,15 @@ public class LoginController {
 
         String providedPassword = password;
 
-        // Encrypted and Base64 encoded password read from database
+        //Encrypted and Base64 encoded password read from database
         String securePassword = "HhaNvzTsVYwS/x/zbYXlLOE3ETMXQgllqrDaJY9PD/U=";
 
-        // Salt value stored in database
+        //Salt value stored in database
         String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
 
         boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword, salt);
         boolean usernameMatch = username.equals("tianhang");
-        if(passwordMatch && usernameMatch)
-        {
+        if(passwordMatch && usernameMatch) { 
             Stage stageTheLabelBelongs = (Stage) passwordF.getScene().getWindow();
             stageTheLabelBelongs.close();
             ui.start(stageTheLabelBelongs);
@@ -58,19 +68,11 @@ public class LoginController {
 
 
     }
-    private Parent loadFxmlFile(URL location, Stage root) {
-        requireNonNull(location);
-        fxmlLoader.setLocation(location);
-        Parent rooting = null;
-        try {
-            rooting = fxmlLoader.load();
 
-        } catch (IOException e) {
-            System.out.println("the exception is " + e);
-            //throw new AssertionError(e);
-        }
-        return rooting;
-    }
+    /**
+     * Close window
+     * @param e
+     */
     @FXML
     private void handleClose(MouseEvent e){
         System.exit(0);
