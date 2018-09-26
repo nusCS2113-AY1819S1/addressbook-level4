@@ -833,9 +833,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |teacher|add students |keep track of students that are currently in the institution
 
-|`* * *` |teacher |remove students|remove students who have graduated or are no longer with the institution
+|`* * *` |teacher |remove students |remove students who have graduated or are no longer with the institution
 
-|`* * *` |teacher |find student by name|get relevant student details, such as contact information
+|`* * *` |teacher |find student by name |get relevant student details, such as contact information
 
 |`* * *` |teacher |list all students |look at all the students that are currently in the institution
 
@@ -863,18 +863,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |list all modules |see all the modules I am currently managing
 
-|`* * *` |teacher |add grade componenents |differentiate the grade componenets in a module (E.g. mid term test, finals examination)
-
-|`* * *` |teacher |edit grades of students |change students marks after reviewing
-
-|`* * *` |teacher |delete grade item |remove after an incorrect input of grade item
-
-|`* * *` |teacher |list grades of students |monitor my students progress
-
-|`* *` |teacher |list all grade components |view all the grade components that I have added to my module
-
-|`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students
-
 |`* * *` |teacher |create a class |assign students to the class
 
 |`* * *` |teacher |delete a class |remove a class that is created wrongly
@@ -891,6 +879,18 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |modify class attendance list |alter a wrongly-marked attendance for a specific student
 
+|`* * *` |teacher |add grade components |differentiate the grade components in a module (E.g. mid term test, finals examination)
+
+|`* * *` |teacher |edit grades of students |change students marks after reviewing
+
+|`* * *` |teacher |delete grade item |remove after an incorrect input of grade item
+
+|`* * *` |teacher |list grades of students |monitor my students progress
+
+|`* *` |teacher |list all grade components |view all the grade components that I have added to my module
+
+|`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students
+
 |`* * *` |teacher |create notes for modules |keep track of important stuff regarding the module and also my own teaching progress
 
 |`* * *` |teacher |delete notes from modules |remove completed tasks or discard those that are no longer needed
@@ -905,41 +905,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
-_{More to be added}_
-
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `Trajectory` and the *Actor* is the `teacher`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
-
-*MSS*
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. The list is empty.
-+
-Use case ends.
-
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
-
-[discrete]
-
 === Use case: Add student
 
 *MSS*
@@ -1170,6 +1141,8 @@ Use case resumes at step 1.
 
 1.  Teacher wants to add a module to the system.
 2.  System successfully adds the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1212,6 +1185,8 @@ Use case resumes at step 1.
 
 1.  Teacher wants to edit a module to the system.
 2.  System successfully saves the changes made to the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1257,6 +1232,8 @@ Use case resumes at step 1.
 2.  System prompts for confirmation to delete the module.
 3.  Teacher confirms the deletion of the module.
 4.  System successfully deletes the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1298,6 +1275,8 @@ Use case resumes at step 1.
 2.  System prompts for confirmation to archive the module.
 3.  Teacher confirms archiving of the module.
 4.  System successfully archives the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1337,6 +1316,8 @@ Use case resumes at step 1.
 
 1.  Teacher searches for a module with some module codes as keywords.
 2.  System lists all the active modules that match any of the keywords.
++
+Use case ends.
 
 *Extensions*
 
@@ -1371,6 +1352,8 @@ Use case resumes at step 1.
 
 1.  Teacher wants to see all the active modules in the system.
 2.  System lists all the active modules.
++
+Use case ends.
 
 *Extensions*
 
@@ -1425,6 +1408,8 @@ Use case ends.
 
 1.  Teacher edits grade item.
 2.  System successfully updates grade item.
++
+Use case ends.
 
 *Extensions*
 
@@ -1451,6 +1436,8 @@ Use case ends.
 
 1.  Teacher deletes grade item.
 2.  System successfully deletes grade item.
++
+Use case ends.
 
 *Extensions*
 
@@ -1477,6 +1464,8 @@ Use case ends.
 
 1.  Teacher searches all grade item.
 2.  System successfully displays all grade item.
++
+Use case ends.
 
 *Extensions*
 
@@ -1503,6 +1492,8 @@ Use case ends.
 
 1.  Teacher assigns marks to student.
 2.  System successfully saves the marks.
++
+Use case ends.
 
 *Extensions*
 
@@ -1958,20 +1949,19 @@ Use case ends.
 +
 Use case resumes at step 4.
 
-{sp} +
-
-_{More to be added}_
-
-{sp} +
-
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  Privacy
+   *  Students’ and faculty members' <<private-contact-detail,private contact details>> shouldn’t be disseminated without prior consent.
+.  Data Retention
+   *  User data shouldn’t be retained after a certain amount of time after a student graduates to protect their personal data.
+.  Cross-platform
+   *  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
+.  Responsiveness
+   *  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Ease of Use
+   *  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 [appendix]
 == Glossary
