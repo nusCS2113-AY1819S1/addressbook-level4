@@ -863,6 +863,10 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |list all modules |see all the modules I am currently managing
 
+|`* * *` |teacher |enrol students in a module |keep track of the students taking my various modules
+
+|`* *` |teacher |assign a TA |get assistance in managing the module
+
 |`* * *` |teacher |create a class |assign students to the class
 
 |`* * *` |teacher |delete a class |remove a class that is created wrongly
