@@ -1,57 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
     <records>
-        <name>Hans Muster</name>
+        <name>Payment for earphone</name>
         <date isPrivate="false">01-13-1400</date>
-        <income isPrivate="false">21.40</income>
-        <expense isPrivate="false">20.40</expense>
+        <moneyFlow isPrivate="false">-20.40</moneyFlow>
     </records>
     <records>
-        <name>Ruth Mueller</name>
+        <name>Payment for western</name>
         <date isPrivate="false">01-19-1400</date>
-        <income isPrivate="false">35.59</income>
-        <expense isPrivate="false">34.59</expense>
+        <moneyFlow isPrivate="false">-35.59</moneyFlow>
     </records>
     <records>
-        <name>Heinz Kurz</name>
+        <name>Payment for concert</name>
         <date isPrivate="false">9-3-3003</date>
-        <income isPrivate="false">20.30</income>
-        <expense isPrivate="false">19.30</expense>
+        <moneyFlow isPrivate="false">-20.30</moneyFlow>
     </records>
     <records>
-        <name>Cornelia Meier</name>
+        <name>Phone bill</name>
         <date isPrivate="false">10-4-2005</date>
-        <income isPrivate="false">30.40</income>
-        <expense isPrivate="false">29.40</expense>
+        <moneyFlow isPrivate="false">-30.40</moneyFlow>
     </records>
     <records>
-        <name>Werner Meyer</name>
+        <name>Payment for bag</name>
         <date isPrivate="false">17-9-2018</date>
-        <income isPrivate="false">39.50</income>
-        <expense isPrivate="false">38.50</expense>
+        <moneyFlow isPrivate="false">-39.50</moneyFlow>
     </records>
     <records>
-        <name>Lydia Kunz</name>
+        <name>Weekly allowance</name>
         <date isPrivate="false">18-10-2018</date>
-        <income isPrivate="false">91.99</income>
-        <expense isPrivate="false">90.99</expense>
+        <moneyFlow isPrivate="false">+91.99</moneyFlow>
     </records>
     <records>
-        <name>Anna Best</name>
+        <name>TA Pay</name>
         <date isPrivate="false">20-10-2018</date>
-        <income isPrivate="false">101</income>
-        <expense isPrivate="false">100</expense>
+        <moneyFlow isPrivate="false">+101</moneyFlow>
     </records>
     <records>
-        <name>Stefan Meier</name>
+        <name>Bursary from school</name>
         <date isPrivate="false">23-5-2009</date>
-        <income isPrivate="false">10001</income>
-        <expense isPrivate="false">10000</expense>
+        <moneyFlow isPrivate="false">+1000</moneyFlow>
     </records>
     <records>
-        <name>Martin Mueller</name>
+        <name>I wish this was true</name>
         <date isPrivate="false">27-10-2006</date>
-        <income isPrivate="false">1000001</income>
-        <expense isPrivate="false">1000000</expense>
+        <moneyFlow isPrivate="false">+1000001</moneyFlow>
     </records>
 </addressbook>

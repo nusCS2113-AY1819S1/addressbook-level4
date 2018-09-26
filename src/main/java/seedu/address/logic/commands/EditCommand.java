@@ -2,8 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECORDS;
@@ -21,8 +20,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.record.Date;
-import seedu.address.model.record.Expense;
-import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
@@ -40,16 +38,15 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_DATE + "DATE] "
-            + "[" + PREFIX_INCOME + "INCOME] "
-            + "[" + PREFIX_EXPENSE + "EXPENSE] "
+            + "[" + PREFIX_MONEYFLOW + "MONEYFLOW] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE + "91234567 "
-            + PREFIX_INCOME + "4.50";
+            + PREFIX_DATE + "10-10-2017 "
+            + PREFIX_MONEYFLOW + "+4.50";
 
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited Record: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the expense book.";
+    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the address book.";
 
     private final Index index;
     private final EditRecordDescriptor editRecordDescriptor;
@@ -97,11 +94,10 @@ public class EditCommand extends Command {
 
         Name updatedName = editRecordDescriptor.getName().orElse(recordToEdit.getName());
         Date updatedDate = editRecordDescriptor.getDate().orElse(recordToEdit.getDate());
-        Income updatedIncome = editRecordDescriptor.getIncome().orElse(recordToEdit.getIncome());
-        Expense updatedExpense = editRecordDescriptor.getExpense().orElse(recordToEdit.getExpense());
+        MoneyFlow updatedMoneyFlow = editRecordDescriptor.getMoneyFlow().orElse(recordToEdit.getMoneyFlow());
         Set<Tag> updatedTags = editRecordDescriptor.getTags().orElse(recordToEdit.getTags());
 
-        return new Record(updatedName, updatedDate, updatedIncome, updatedExpense, updatedTags);
+        return new Record(updatedName, updatedDate, updatedMoneyFlow, updatedTags);
     }
 
     @Override
@@ -129,8 +125,7 @@ public class EditCommand extends Command {
     public static class EditRecordDescriptor {
         private Name name;
         private Date date;
-        private Income income;
-        private Expense expense;
+        private MoneyFlow moneyFlow;
         private Set<Tag> tags;
 
         public EditRecordDescriptor() {}
@@ -142,8 +137,7 @@ public class EditCommand extends Command {
         public EditRecordDescriptor(EditRecordDescriptor toCopy) {
             setName(toCopy.name);
             setDate(toCopy.date);
-            setIncome(toCopy.income);
-            setExpense(toCopy.expense);
+            setMoneyFlow(toCopy.moneyFlow);
             setTags(toCopy.tags);
         }
 
@@ -151,7 +145,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, date, income, expense, tags);
+            return CollectionUtil.isAnyNonNull(name, date, moneyFlow, tags);
         }
 
         public void setName(Name name) {
@@ -170,20 +164,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(date);
         }
 
-        public void setIncome(Income income) {
-            this.income = income;
+        public void setMoneyFlow(MoneyFlow moneyFlow) {
+            this.moneyFlow = moneyFlow;
         }
 
-        public Optional<Income> getIncome() {
-            return Optional.ofNullable(income);
-        }
-
-        public void setExpense(Expense expense) {
-            this.expense = expense;
-        }
-
-        public Optional<Expense> getExpense() {
-            return Optional.ofNullable(expense);
+        public Optional<MoneyFlow> getMoneyFlow() {
+            return Optional.ofNullable(moneyFlow);
         }
 
         /**
@@ -220,8 +206,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getDate().equals(e.getDate())
-                    && getIncome().equals(e.getIncome())
-                    && getExpense().equals(e.getExpense())
+                    && getMoneyFlow().equals(e.getMoneyFlow())
                     && getTags().equals(e.getTags());
         }
     }

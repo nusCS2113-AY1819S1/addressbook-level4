@@ -1,7 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
-public class ClearCommandSystemTest extends ExpenseBookSystemTest {
+public class ClearCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void clear() {
@@ -44,7 +44,7 @@ public class ClearCommandSystemTest extends ExpenseBookSystemTest {
 
         /* Case: filters the record list before clearing -> entire address book cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original address book
-        showRecordsWithName(KEYWORD_MATCHING_MEIER);
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 
@@ -60,9 +60,9 @@ public class ClearCommandSystemTest extends ExpenseBookSystemTest {
      * Executes {@code command} and verifies that the command box displays an empty string, the result display
      * box displays {@code ClearCommand#MESSAGE_SUCCESS} and the model related components equal to an empty model.
      * These verifications are done by
-     * {@code ExpenseBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the command box has the default style class and the status bar's sync status changes.
-     * @see ExpenseBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command) {
         assertCommandSuccess(command, ClearCommand.MESSAGE_SUCCESS, new ModelManager());
@@ -84,10 +84,10 @@ public class ClearCommandSystemTest extends ExpenseBookSystemTest {
      * Executes {@code command} and verifies that the command box displays {@code command}, the result display
      * box displays {@code expectedResultMessage} and the model related components equal to the current model.
      * These verifications are done by
-     * {@code ExpenseBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
      * error style.
-     * @see ExpenseBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

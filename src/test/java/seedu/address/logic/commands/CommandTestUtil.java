@@ -3,8 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -26,14 +25,12 @@ import seedu.address.testutil.EditRecordDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_AMY = "Amy Bee";
-    public static final String VALID_NAME_BOB = "Bob Choo";
+    public static final String VALID_NAME_AMY = "Payment from Amy";
+    public static final String VALID_NAME_BOB = "Payment from Bob";
     public static final String VALID_DATE_AMY = "11-10-2004";
     public static final String VALID_DATE_BOB = "11-02-2004";
-    public static final String VALID_INCOME_AMY = "10.90";
-    public static final String VALID_INCOME_BOB = "11.50";
-    public static final String VALID_EXPENSE_AMY = "10.90";
-    public static final String VALID_EXPENSE_BOB = "11.50";
+    public static final String VALID_MONEYFLOW_INCOME_AMY = "+10.90";
+    public static final String VALID_MONEYFLOW_EXPENSE_BOB = "-11.50";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -41,17 +38,15 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String DATE_DESC_AMY = " " + PREFIX_DATE + VALID_DATE_AMY;
     public static final String DATE_DESC_BOB = " " + PREFIX_DATE + VALID_DATE_BOB;
-    public static final String INCOME_DESC_AMY = " " + PREFIX_INCOME + VALID_INCOME_AMY;
-    public static final String INCOME_DESC_BOB = " " + PREFIX_INCOME + VALID_INCOME_BOB;
-    public static final String EXPENSE_DESC_AMY = " " + PREFIX_EXPENSE + VALID_EXPENSE_AMY;
-    public static final String EXPENSE_DESC_BOB = " " + PREFIX_EXPENSE + VALID_EXPENSE_BOB;
+    public static final String MONEYFLOW_INCOME_DESC_AMY = " " + PREFIX_MONEYFLOW + VALID_MONEYFLOW_INCOME_AMY;
+    public static final String MONEYFLOW_EXPENSE_DESC_BOB = " " + PREFIX_MONEYFLOW + VALID_MONEYFLOW_EXPENSE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_DATE_DESC = " " + PREFIX_DATE + "911a"; // alphabets not allowed in date
-    public static final String INVALID_INCOME_DESC = " " + PREFIX_INCOME + "11."; // missing digit after decimal point
-    public static final String INVALID_EXPENSE_DESC = " " + PREFIX_EXPENSE; // empty string not allowed for expenses
+    public static final String INVALID_MONEYFLOW_DESC = " "
+            + PREFIX_MONEYFLOW + "11."; // missing digit after decimal point
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -62,10 +57,9 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditRecordDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withDate(VALID_DATE_AMY).withIncome(VALID_INCOME_AMY).withExpense(VALID_EXPENSE_AMY)
-                .withTags(VALID_TAG_FRIEND).build();
+                .withDate(VALID_DATE_AMY).withMoneyFlow(VALID_MONEYFLOW_INCOME_AMY).withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditRecordDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withDate(VALID_DATE_BOB).withIncome(VALID_INCOME_BOB).withExpense(VALID_EXPENSE_BOB)
+                .withDate(VALID_DATE_BOB).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
@@ -119,6 +113,7 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the record at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
+    // TODO: Look at this code again
     public static void showRecordAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredRecordList().size());
 

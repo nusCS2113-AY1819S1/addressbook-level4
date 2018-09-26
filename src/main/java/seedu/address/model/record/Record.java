@@ -10,29 +10,27 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Record in the expense book.
+ * Represents a Record in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Record {
 
     // Identity fields
     private final Name name;
-    private final Date date;
-    private final Income income;
 
     // Data fields
-    private final Expense expense;
+    private final Date date;
+    private final MoneyFlow moneyFlow;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Record(Name name, Date date, Income income, Expense expense, Set<Tag> tags) {
-        requireAllNonNull(name, date, income, expense, tags);
+    public Record(Name name, Date date, MoneyFlow moneyFlow, Set<Tag> tags) {
+        requireAllNonNull(name, date, moneyFlow, tags);
         this.name = name;
         this.date = date;
-        this.income = income;
-        this.expense = expense;
+        this.moneyFlow = moneyFlow;
         this.tags.addAll(tags);
     }
 
@@ -44,12 +42,8 @@ public class Record {
         return date;
     }
 
-    public Income getIncome() {
-        return income;
-    }
-
-    public Expense getExpense() {
-        return expense;
+    public MoneyFlow getMoneyFlow() {
+        return moneyFlow;
     }
 
     /**
@@ -71,7 +65,7 @@ public class Record {
 
         return otherRecord != null
                 && otherRecord.getName().equals(getName())
-                && (otherRecord.getDate().equals(getDate()) || otherRecord.getIncome().equals(getIncome()));
+                && (otherRecord.getDate().equals(getDate()) || otherRecord.getMoneyFlow().equals(getMoneyFlow()));
     }
 
     /**
@@ -91,27 +85,24 @@ public class Record {
         Record otherRecord = (Record) other;
         return otherRecord.getName().equals(getName())
                 && otherRecord.getDate().equals(getDate())
-                && otherRecord.getIncome().equals(getIncome())
-                && otherRecord.getExpense().equals(getExpense())
+                && otherRecord.getMoneyFlow().equals(getMoneyFlow())
                 && otherRecord.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, income, expense, tags);
+        return Objects.hash(name, date, moneyFlow, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Day : ")
+                .append(" Date: ")
                 .append(getDate())
-                .append(" Income: ")
-                .append(getIncome())
-                .append(" Expense: ")
-                .append(getExpense())
+                .append(" MoneyFlow:")
+                .append(getMoneyFlow())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

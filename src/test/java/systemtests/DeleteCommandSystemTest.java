@@ -8,7 +8,7 @@ import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getRecord;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
-import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.record.Record;
 
-public class DeleteCommandSystemTest extends ExpenseBookSystemTest {
+public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
@@ -56,10 +56,16 @@ public class DeleteCommandSystemTest extends ExpenseBookSystemTest {
         Index middleRecordIndex = getMidIndex(getModel());
         assertCommandSuccess(middleRecordIndex);
 
+        // Undo previous operation to prepare for further tests
+
+        command = UndoCommand.COMMAND_WORD;
+        expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
+
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered record list, delete index within bounds of address book and record list -> deleted */
-        showRecordsWithName(KEYWORD_MATCHING_MEIER);
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
         Index index = INDEX_FIRST_RECORD;
         assertTrue(index.getZeroBased() < getModel().getFilteredRecordList().size());
         assertCommandSuccess(index);
@@ -67,7 +73,7 @@ public class DeleteCommandSystemTest extends ExpenseBookSystemTest {
         /* Case: filtered record list, delete index within bounds of address book but out of bounds of record list
          * -> rejected
          */
-        showRecordsWithName(KEYWORD_MATCHING_MEIER);
+        showRecordsWithName(KEYWORD_MATCHING_BURSARY);
         int invalidIndex = getModel().getAddressBook().getRecordList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
@@ -143,8 +149,8 @@ public class DeleteCommandSystemTest extends ExpenseBookSystemTest {
      * 4. Asserts that the status bar's sync status changes.<br>
      * 5. Asserts that the command box has the default style class.<br>
      * Verifications 1 and 2 are performed by
-     * {@code ExpenseBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
-     * @see ExpenseBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         assertCommandSuccess(command, expectedModel, expectedResultMessage, null);
@@ -154,7 +160,7 @@ public class DeleteCommandSystemTest extends ExpenseBookSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
      * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
-     * @see ExpenseBookSystemTest#assertSelectedCardChanged(Index)
+     * @see AddressBookSystemTest#assertSelectedCardChanged(Index)
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
@@ -178,8 +184,8 @@ public class DeleteCommandSystemTest extends ExpenseBookSystemTest {
      * 3. Asserts that the browser url, selected card and status bar remain unchanged.<br>
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
-     * {@code ExpenseBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see ExpenseBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

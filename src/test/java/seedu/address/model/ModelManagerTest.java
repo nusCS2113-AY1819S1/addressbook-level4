@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECORDS;
-import static seedu.address.testutil.TypicalRecords.ALICE;
-import static seedu.address.testutil.TypicalRecords.BENSON;
+import static seedu.address.testutil.TypicalRecords.CAIFAN;
+import static seedu.address.testutil.TypicalRecords.INDO;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -30,13 +30,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasRecord_recordNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasRecord(ALICE));
+        assertFalse(modelManager.hasRecord(INDO));
     }
 
     @Test
     public void hasRecord_recordInAddressBook_returnsTrue() {
-        modelManager.addRecord(ALICE);
-        assertTrue(modelManager.hasRecord(ALICE));
+        modelManager.addRecord(INDO);
+        assertTrue(modelManager.hasRecord(INDO));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withRecord(ALICE).withRecord(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder().withRecord(INDO).withRecord(CAIFAN).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -69,7 +69,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getName().fullName.split("\\s+");
+        String[] keywords = INDO.getName().fullName.split("\\s+");
         modelManager.updateFilteredRecordList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 

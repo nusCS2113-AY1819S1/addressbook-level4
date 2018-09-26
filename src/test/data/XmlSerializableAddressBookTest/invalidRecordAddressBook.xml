@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <!-- Record with invalid income field -->
+    <!-- Record with invalid moneyFlow field -->
     <records>
-        <name>Hans Muster</name>
-        <date isPrivate="false">10-12-1994</date>
-        <income isPrivate="false">11.1.19</income>
-        <expense isPrivate="false">10.99</expense>
+        <name>Payment for HM</name>
+        <date>isPrivate="false">10-12-1994</date>
+        <moneyFlow>isPrivate="false">11.1.19</moneyFlow>
     </records>
 </addressbook>

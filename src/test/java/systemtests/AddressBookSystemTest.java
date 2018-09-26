@@ -48,7 +48,7 @@ import seedu.address.ui.CommandBox;
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
-public abstract class ExpenseBookSystemTest {
+public abstract class AddressBookSystemTest {
     @ClassRule
     public static ClockRule clockRule = new ClockRule();
 

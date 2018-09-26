@@ -1,8 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXPENSE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INCOME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -32,8 +31,7 @@ public class RecordUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + record.getName().fullName + " ");
         sb.append(PREFIX_DATE + record.getDate().value + " ");
-        sb.append(PREFIX_INCOME + record.getIncome().value + " ");
-        sb.append(PREFIX_EXPENSE + record.getExpense().value + " ");
+        sb.append(PREFIX_MONEYFLOW + record.getMoneyFlow().value + " ");
         record.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -47,8 +45,8 @@ public class RecordUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.value).append(" "));
-        descriptor.getIncome().ifPresent(income -> sb.append(PREFIX_INCOME).append(income.value).append(" "));
-        descriptor.getExpense().ifPresent(expense -> sb.append(PREFIX_EXPENSE).append(expense.value).append(" "));
+        descriptor.getMoneyFlow().ifPresent(moneyFlow -> sb.append(PREFIX_MONEYFLOW)
+                .append(moneyFlow.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

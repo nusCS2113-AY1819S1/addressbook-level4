@@ -23,16 +23,16 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
-    private static final String INVALID_NAME = "R@chel";
+    private static final String INVALID_NAME = "P@yment from R@chel";
     private static final String INVALID_DATE = "+651234";
     private static final String INVALID_EXPENSE = " ";
     private static final String INVALID_INCOME = "example.com";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = "Rachel Walker";
+    private static final String VALID_NAME = "Payment from Rachel";
     private static final String VALID_DATE = "12-07-2007";
-    private static final String VALID_EXPENSE = "15.70";
-    private static final String VALID_INCOME = "16.70";
+    private static final String VALID_EXPENSE = "-15.70";
+    private static final String VALID_INCOME = "+16.70";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
@@ -110,49 +110,44 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseAddress_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseExpense((String) null));
+    public void parseMoneyFlow_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseMoneyFlow((String) null));
     }
 
     @Test
-    public void parseExpense_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseExpense(INVALID_EXPENSE));
+    public void parseMoneyFlow_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseMoneyFlow(INVALID_EXPENSE));
     }
 
     @Test
     public void parseExpense_validValueWithoutWhitespace_returnsExpense() throws Exception {
         Expense expectedExpense = new Expense(VALID_EXPENSE);
-        assertEquals(expectedExpense, ParserUtil.parseExpense(VALID_EXPENSE));
+        assertEquals(expectedExpense, ParserUtil.parseMoneyFlow(VALID_EXPENSE));
     }
 
     @Test
     public void parseExpense_validValueWithWhitespace_returnsTrimmedExpense() throws Exception {
         String expenseWithWhitespace = WHITESPACE + VALID_EXPENSE + WHITESPACE;
         Expense expectedExpense = new Expense(VALID_EXPENSE);
-        assertEquals(expectedExpense, ParserUtil.parseExpense(expenseWithWhitespace));
-    }
-
-    @Test
-    public void parseIncome_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIncome((String) null));
+        assertEquals(expectedExpense, ParserUtil.parseMoneyFlow(expenseWithWhitespace));
     }
 
     @Test
     public void parseIncome_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIncome(INVALID_INCOME));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseMoneyFlow(INVALID_INCOME));
     }
 
     @Test
     public void parseIncome_validValueWithoutWhitespace_returnsIncome() throws Exception {
         Income expectedIncome = new Income(VALID_INCOME);
-        assertEquals(expectedIncome, ParserUtil.parseIncome(VALID_INCOME));
+        assertEquals(expectedIncome, ParserUtil.parseMoneyFlow(VALID_INCOME));
     }
 
     @Test
     public void parseIncome_validValueWithWhitespace_returnsTrimmedIncome() throws Exception {
         String incomeWithWhitespace = WHITESPACE + VALID_INCOME + WHITESPACE;
         Income expectedIncome = new Income(VALID_INCOME);
-        assertEquals(expectedIncome, ParserUtil.parseIncome(incomeWithWhitespace));
+        assertEquals(expectedIncome, ParserUtil.parseMoneyFlow(incomeWithWhitespace));
     }
 
     @Test
