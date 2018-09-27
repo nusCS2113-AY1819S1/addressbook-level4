@@ -269,7 +269,7 @@ public class Trie {
         }
 
         // Delete the whitespace at the last character space
-        if (charStack.charAt(charStack.length() - 1) == CHAR_SPACE) {
+        if (charStack.length() > 0 && charStack.charAt(charStack.length() - 1) == CHAR_SPACE) {
             charStack.deleteCharAt(charStack.length() - 1);
         }
 
