@@ -291,7 +291,7 @@ e.g. `find i/987-76-54321-32-1`
 e.g. `search cs2113t`
 * *Sell* : `sell INDEX QUANTITY` OR `sell i/ISBN13 QUANTITY` +
 e.g. `sell 1 8` OR `sell i/987-76-54321-32-1 8`
-* *Stock* : `stock INDEX ISBN13` OR `stock i/ISBN13 8` +
+* *Stock* : `stock INDEX QUANTITY` OR `stock i/ISBN13 QUANTITY` +
 e.g. `stock 1 8` OR `stock i/978-76-54321-32-1 8`
 * *Check* : `check QUANTITY` +
 e.g. `check 4`
