@@ -130,7 +130,7 @@ public class XmlUtilTest {
     @Test
     public void xmlAccountFromFile_fileWithValidLoginDetails_validResult() throws Exception {
         XmlAccount actualLoginDetail = XmlUtil.getDataFromFile(
-                VALID_LOGIN_FILE, XmlAccountWithRootElement.class);
+                VALID_LOGINDETAILS_FILE, XmlAccountWithRootElement.class);
         XmlAccount expectedLoginDetail = new XmlAccount(VALID_USERID, VALID_USERPASSWORD);
         assertEquals(expectedLoginDetail, actualLoginDetail);
     }
