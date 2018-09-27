@@ -1,12 +1,9 @@
 //@@author lekoook
 package seedu.address.model.autocomplete;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_AUTOCOMPLETE_FORMAT;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 
