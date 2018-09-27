@@ -20,8 +20,6 @@ public class LoginWindow {
     private static boolean isLoginSuccessful = false;
     public static boolean isSensitiveInformation;
 
-    private static LoginDetails details;
-
     public static boolean getIsLoginSuccessful() {
         return isLoginSuccessful;
     }
@@ -55,8 +53,7 @@ public class LoginWindow {
                 userIdPassword.loginDialogBoxUserIdPassword();
                 UserId id = new UserId(userIdPassword.getUserId());
                 UserPassword password = new UserPassword(userIdPassword.getUserPassword());
-                details.setUserId(id);
-                details.setUserPassword(password);
+                LoginDetails details = new LoginDetails(id, password);
                 CreateAccountCommand createAccount = new CreateAccountCommand(details);
                 createAccount.execute(model, history);
                 break;

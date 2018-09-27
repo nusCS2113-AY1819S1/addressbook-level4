@@ -24,7 +24,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-    private UniqueAccountList uniqueAccountList = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -65,6 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasAccount(LoginDetails details) {
         requireNonNull(details);
+        UniqueAccountList uniqueAccountList = new UniqueAccountList();
         return uniqueAccountList.contains(details);
     }
 
