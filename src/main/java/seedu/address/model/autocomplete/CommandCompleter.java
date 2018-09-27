@@ -119,19 +119,15 @@ public class CommandCompleter {
      * @return predicted list of text
      */
     public ArrayList<String> predictText(String textInput) {
-        try {
-            AutoCompleteParserPair pair = parser.parseCommand(textInput);
-            switch(pair.parseType) {
-            case COMPLETE_COMMAND:
-                return commandTrie.getPredictList(pair.parseValue);
-            case COMPLETE_NAME:
-                return nameTrie.getPredictList(pair.parseValue);
-            default:
-            }
-        } catch (ParseException e) {
-            System.out.print("Wrong command format");
+        AutoCompleteParserPair pair = parser.parseCommand(textInput);
+        switch (pair.parseType) {
+        case COMPLETE_COMMAND:
+            return commandTrie.getPredictList(pair.parseValue);
+        case COMPLETE_NAME:
+            return nameTrie.getPredictList(pair.parseValue);
+        default:
+            return new ArrayList<>();
         }
-        return new ArrayList<>();
     }
 
     /**

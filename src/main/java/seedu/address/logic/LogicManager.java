@@ -38,7 +38,6 @@ public class LogicManager extends ComponentManager implements Logic {
             return command.execute(model, history);
         } finally {
             history.add(commandText);
-
         }
     }
 

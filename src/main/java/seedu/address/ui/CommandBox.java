@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
@@ -171,7 +172,10 @@ public class CommandBox extends UiPart<Region> {
      * @param textInput the prefix to the predictions to concatenate with.
      */
     private void handlePredictions(ArrayList<String> input, String textInput) {
-        if (input.size() == 1) {
+        if (input.size() == 0) {
+            logger.info(Messages.MESSAGE_INVALID_AUTOCOMPLETE_FORMAT);
+        }
+        else if (input.size() == 1) {
             commandTextField.appendText(input.get(0));
         } else {
             StringBuilder output = new StringBuilder();
