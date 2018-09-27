@@ -42,12 +42,11 @@ public class LoginWindow {
 
         switch (loginSelection) {
             case "login":
-
+                
                 isSensitiveInformation = true;
 
                 break;
             case "create account":
-                isLoginSuccessful = true;
                 isSensitiveInformation = true;
                 LoginDialogBoxUserIdPassword userIdPassword = new LoginDialogBoxUserIdPassword();
                 userIdPassword.loginDialogBoxUserIdPassword();
@@ -56,6 +55,7 @@ public class LoginWindow {
                 LoginDetails details = new LoginDetails(id, password);
                 CreateAccountCommand createAccount = new CreateAccountCommand(details);
                 createAccount.execute(model, history);
+                isSensitiveInformation = false;
                 break;
             case "delete account":
                 isSensitiveInformation = true;
