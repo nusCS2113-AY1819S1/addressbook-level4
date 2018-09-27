@@ -106,6 +106,7 @@ Removes a deadline from an existing task
 Format: `remove_deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
 
 Examples:
+
 * `remove_deadline t/Complete 2113 Milestone w/1 m/8`
 
 === Viewing today's date : `view`
