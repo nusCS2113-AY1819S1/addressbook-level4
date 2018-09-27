@@ -64,20 +64,10 @@ Examples:
 
 * `add t/Complete 2113 Tutorial d/Wed w/2`
 
-=== Adding a deadline: `deadline`
-
-Adds an important task with deadline to the task book +
-Format: `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
-
-Examples:
-
-* `deadline t/Complete 2113 Milestone w/1 m/8`
-
 === Complete a task: `complete`
 
 Complete a task in the task book +
 Format: `complete t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
->>>>>>> upstream/master
 
 Examples:
 
@@ -100,6 +90,15 @@ Format: `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
 Examples:
 
 * `deadline t/Complete 2113 Milestone w/1 m/8`
+
+=== Deferring a deadline: `deadline`
+
+Defers a deadline for a task +
+Format: `defer_deadline t/ACTION w/WEEKS_OF_DEFERMENT`
+
+Examples:
+
+* `defer_deadline t/Complete 2113 Milestone w/1`
 
 === Removing a deadline : `remove_deadline`
 
@@ -217,6 +216,8 @@ e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
 * *Clear* : `clear`
 * *Deadline* : `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`
+* *Defer deadline* : `deadline t/ACTION w/WEEKS_OF_DEFERMENT` +
+e.g. `defer_deadline t/Complete 2113 Tutorial w/1`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`
