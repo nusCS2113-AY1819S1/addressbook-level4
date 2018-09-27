@@ -879,18 +879,6 @@ Use case ends.
 +
 Use case ends.
 
-[discrete]
-=== Use case: Add important deadline
-
-*MSS*
-
-1. Student selects the date of deadline
-2. TB sets the date correspondingly
-3. Student requests to add new task with deadline included
-4. TB asks for the number of weeks before to remind about deadline e.g. 1 week earlier
-5. Student provides the number of weeks for reminder(s).
-6. TB adds the task and its reminder(s) to the list
-
 === Use case: Complete task
 
 *MSS*
