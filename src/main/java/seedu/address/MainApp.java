@@ -53,7 +53,6 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-    protected XmlLoginBookStorage xmlLoginBookStorage;
 
     @Override
     public void init() throws Exception {
@@ -65,7 +64,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        LoginBookStorage loginBookStorage = new XmlLoginBookStorage(xmlLoginBookStorage.getLoginBookFilePath());
+        LoginBookStorage loginBookStorage = new XmlLoginBookStorage(userPrefs.getLoginBookFilePath());
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(loginBookStorage, addressBookStorage, userPrefsStorage);
 
