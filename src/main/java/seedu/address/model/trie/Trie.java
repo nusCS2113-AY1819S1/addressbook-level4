@@ -176,12 +176,6 @@ public class Trie {
             return predictionsList;
         }
 
-        // If startNode is already the end node of a branch, just add a single whitespace
-        if (startNode.getChildrenSize() == 0) {
-            charStack.append(CHAR_SPACE);
-            predictionsList.add(charStack.toString());
-        }
-
         // If startNode has ONE child, build the charStack to the first
         // node that has more than one child or the first mismatch character
         if (startNode.getChildrenSize() == 1) {
