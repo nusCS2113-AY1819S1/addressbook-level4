@@ -841,7 +841,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
 
-|`* *` |flexible student |remove self imposed deadlines for certain tasks |shift my priorities to other tasks
+|`* * *` |busy student |defer deadlines |allow for a more flexible schedule when workload becomes too heavy
+
+|`* *` |flexible student |remove self imposed deadlines |shift my priorities to other tasks
 
 |`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
 
@@ -878,6 +880,16 @@ Use case ends.
 Use case ends.
 
 [discrete]
+=== Use case: Add important deadline
+
+*MSS*
+
+1. Student selects the date of deadline
+2. TB sets the date correspondingly
+3. Student requests to add new task with deadline included
+4. TB asks for the number of weeks before to remind about deadline e.g. 1 week earlier
+5. Student provides the number of weeks for reminder(s).
+6. TB adds the task and its reminder(s) to the list
 
 === Use case: Complete task
 
@@ -944,6 +956,28 @@ Use case ends.
 *Extensions*
 
 * 3b. Student wants to add a deadline for an existing task i.e. duplicated task
+** 3b1. TB outputs an error message
++
+Use case ends.
+
+[discrete]
+
+=== Use case: Defer deadlines
+
+*MSS*
+
+1. Student selects the date of deadline
+2. TB sets the date
+3. Student requests to defer deadline for a task
+4. TB asks for the number of weeks to defer
+5. Student provides the number of weeks for deferment
+6. TB defers deadline
++
+Use case ends.
+
+*Extensions*
+
+* 3b. Student wants to defer a deadline for a task without deadline
 ** 3b1. TB outputs an error message
 +
 Use case ends.

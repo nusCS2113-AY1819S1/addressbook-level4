@@ -91,6 +91,15 @@ Examples:
 
 * `deadline t/Complete 2113 Milestone w/1 m/8`
 
+=== Deferring a deadline: `deadline`
+
+Defers a deadline for a task +
+Format: `defer_deadline t/ACTION w/WEEKS_OF_DEFERMENT`
+
+Examples:
+
+* `defer_deadline t/Complete 2113 Milestone w/1`
+
 === Removing a deadline : `remove_deadline`
 
 Removes a deadline from an existing task
@@ -98,7 +107,6 @@ Format: `remove_deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
 
 Examples:
 * `remove_deadline t/Complete 2113 Milestone w/1 m/8`
-
 
 === Viewing today's date : `view`
 
@@ -208,6 +216,8 @@ e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
 * *Clear* : `clear`
 * *Deadline* : `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`
+* *Defer deadline* : `deadline t/ACTION w/WEEKS_OF_DEFERMENT` +
+e.g. `defer_deadline t/Complete 2113 Tutorial w/1`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`
