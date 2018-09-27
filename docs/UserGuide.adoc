@@ -74,6 +74,14 @@ Examples:
 Shows a list of all persons in the address book. +
 Format: `list`
 
+=== Removing a deadline : `remove_deadline`
+
+Removes a deadline from an existing task
+Format: `remove_deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
+
+Examples:
+* `remove_deadline t/Complete 2113 Milestone w/1 m/8`
+
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
@@ -251,6 +259,8 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Remove Deadline* : `remove_deadline t\ACTION d\DAY [w\WEEK] [m\MONTH]...` +
++ e.g. `remove_deadline t\Complete 2113 Tutorial d\Wed w\2`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
