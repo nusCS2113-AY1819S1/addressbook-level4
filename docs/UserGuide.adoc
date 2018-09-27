@@ -26,7 +26,7 @@ BookInventory is catered for a variety of users, ranging from inventory keeper, 
 .  Downloading the program.
 * Visit https://github.com/CS2113-AY1819S1-W13-4/main and click on "Clone or download" as circled in the screenshot below.
 +
-image::download.png
+image::download.png[width="150", align="left"]
 +
 * If you are a github user, clone the repository.
 * However, it is encouraged that you "Download ZIP" in the drop-down menu.
