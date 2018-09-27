@@ -39,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
+    //initialise the a new address book with new user prefs
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
