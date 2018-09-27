@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import seedu.address.model.event.NameContainsKeywordsPredicate;
 import seedu.address.testutil.PersonBuilder;
 
 public class NameContainsKeywordsPredicateTest {
@@ -34,7 +35,7 @@ public class NameContainsKeywordsPredicateTest {
         // null -> returns false
         assertFalse(firstPredicate.equals(null));
 
-        // different person -> returns false
+        // different event -> returns false
         assertFalse(firstPredicate.equals(secondPredicate));
     }
 

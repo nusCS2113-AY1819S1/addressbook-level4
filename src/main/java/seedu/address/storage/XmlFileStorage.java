@@ -15,22 +15,22 @@ public class XmlFileStorage {
     /**
      * Saves the given addressbook data to the specified file.
      */
-    public static void saveDataToFile(Path file, XmlSerializableAddressBook addressBook)
+    public static void saveDataToFile(Path file, XmlSerializableEManager addressBook)
             throws FileNotFoundException {
         try {
             XmlUtil.saveDataToFile(file, addressBook);
         } catch (JAXBException e) {
-            throw new AssertionError("Unexpected exception " + e.getMessage());
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }
     }
 
     /**
      * Returns address book in the file or an empty address book
      */
-    public static XmlSerializableAddressBook loadDataFromSaveFile(Path file) throws DataConversionException,
+    public static XmlSerializableEManager loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableAddressBook.class);
+            return XmlUtil.getDataFromFile(file, XmlSerializableEManager.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }

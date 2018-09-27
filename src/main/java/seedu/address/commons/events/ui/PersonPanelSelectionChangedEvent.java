@@ -1,26 +1,26 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.event.Event;
 
 /**
- * Represents a selection change in the Person List Panel
+ * Represents a selection change in the Event List Panel
  */
 public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
 
-    private final Person newSelection;
+    private final Event newSelection;
 
-    public PersonPanelSelectionChangedEvent(Person newSelection) {
+    public PersonPanelSelectionChangedEvent(Event newSelection) {
         this.newSelection = newSelection;
     }
 
     @Override
     public String toString() {
-        return this.getClass().getSimpleName();
+        return getClass().getSimpleName();
     }
 
-    public Person getNewSelection() {
+    public Event getNewSelection() {
         return newSelection;
     }
 }
