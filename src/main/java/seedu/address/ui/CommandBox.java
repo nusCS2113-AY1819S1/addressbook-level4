@@ -175,8 +175,7 @@ public class CommandBox extends UiPart<Region> {
         if (input.size() == 0) {
             logger.info(Messages.MESSAGE_INVALID_AUTOCOMPLETE_FORMAT);
             raise(new NewResultAvailableEvent(Messages.MESSAGE_EMPTY_STRING));
-        }
-        else if (input.size() == 1) {
+        } else if (input.size() == 1) {
             commandTextField.appendText(input.get(0));
         } else {
             StringBuilder output = new StringBuilder();

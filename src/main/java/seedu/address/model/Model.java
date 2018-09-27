@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 
 /**
@@ -84,7 +83,7 @@ public interface Model {
      * @param textInput text input from command box
      * @return a list of predictions
      */
-    ArrayList<String> getCmdPrediction(String textInput) ;
+    ArrayList<String> getCmdPrediction(String textInput);
 
     /**
      * Adds a Person's attributes to the respective Trie instances for auto complete
