@@ -81,18 +81,6 @@ public class StorageManager extends ComponentManager implements Storage {
         loginBookStorage.saveLoginBook(loginBook, filePath);
     }
 
-
-    @Override
-    @Subscribe
-    public void handleLoginBookChangedEvent(LoginBookChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
-        try {
-            saveLoginBook(event.data);
-        } catch (IOException e) {
-            raise(new DataSavingExceptionEvent(e));
-        }
-    }
-
     // ================ AddressBook methods ==============================
 
     @Override
@@ -115,6 +103,9 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
         saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
+
+    @Override
+    public void handleLoginBookChangedEvent(LoginBookChangedEvent abce) {}
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
