@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 
 public class CreateAccountCommand extends Command{
 
-    public static final String COMMAND_WORD = "create";
+    public static final String COMMAND_WORD = "create account";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account for the address book. "
             + "Parameters: "
