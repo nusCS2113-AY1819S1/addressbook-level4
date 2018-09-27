@@ -90,7 +90,7 @@ public class AddressBookParser {
 
         case GroupCommand.COMMAND_WORD:
         case GroupCommand.COMMAND_WORD_2:
-            return new GroupCommand();
+            return new GroupCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
