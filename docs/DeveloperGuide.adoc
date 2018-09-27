@@ -866,227 +866,30 @@ _{More to be added}_
 (For all use cases below, the *System* is `JalilEnterprises` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Add
+=== Use case: Delete person
 
 *MSS*
 
-1.  User requests to add an item
-2.  JalilEnterprises shows the format to add an item
-3.  User keys in the name and quantity of the item and to use it on which lab session.
-4.  JalilEnterprises shows the message of successfully added the item
+1.  User requests to list persons
+2.  AddressBook shows a list of persons
+3.  User requests to delete a specific person in the list
+4.  AddressBook deletes the person
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 3a. The item already exists
+* 2a. The list is empty.
 +
 Use case ends.
 
-=== Use case: Incremental Search
-
-*MSS*
-
-1.  User types first 3 letters of item
-2.  JalilEnterprises shows list of items
-3.  User continues typing
-4.  JalilEnterprises updates the list with every character keyed
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. No such item
+* 3a. The given index is invalid.
 +
 [none]
-** 2a1. JalilEnterprises shows error message
+** 3a1. AddressBook shows an error message.
 +
-Use case resumes at step 1.
-
-=== Use case: Update
-
-*MSS*
-
-1.  User types the command with name and at least one of the followings: quantity, minimum quantity, tag
-2.  JalilEnterprises shows the information is successfully updated
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. No such item or missing values
-+
-[none]
-** 2a1. JalilEnterprises shows error message
-+
-Use case resumes at step 1.
-
-=== Use case: Delete
-
-*MSS*
-
-1.  User enters name and quantity of item to be deleted
-2.  JalilEnterprises shows that the information is successfully deleted
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. Item to be deleted does not exist
-+
-[none]
-** 2a1. JalilEnterprises shows error message
-+
-Use case resumes at step 1.
-
-=== Use case: All
-
-*MSS*
-
-1.  User requests to see all items
-2.  JalilEnterprises shows every item in the list
-+
-Use case ends.
-
-=== Use case: Find
-
-*MSS*
-
-1.  User requests to find a specific item by name
-2.  JalilEnterprises shows the information of the item
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. JalilEnterprises cannot find the item
-+
-[none]
-** 2a1. JalilEnterprises shows error message and asks for a new name to search for
-+
-Use case resumes at step 1.
-
-=== Use case: Check
-
-*MSS*
-
-1.  User requests for list of understocked items
-2.  JalilEnterprises shows list
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. List is empty
-+
-Use case ends
-
-=== Use case: List by tags
-
-*MSS*
-
-1.  User keys in session name
-2.  JalilEnterprises lists all materials required for the session
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. No such session
-+
-[none]
-** 2a1. JalilEnterprises shows error message
-+
-Use case resumes at step 1.
-
-=== Use case: Withdraw
-
-*MSS*
-
-1.  User requests to go back to the previous edition
-2.  JalilEnterprises requests confirmation
-3.  User confirms the decision
-4.  JalilEnterprises finishes going back to the previous edition and shows a message
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 4a. JalilEnterprises detects there is no previous edition
-+
-[none]
-** 4a1. JalilEnterprises warns the user and shows a message that it is currently in the most original edition
-+
-Use case ends.
-
-=== Use case: Change Status
-
-*MSS*
-
-1.  User keys in name of item
-2.  JalilEnterprises shows item
-3.  User keys in command and updated status
-4.  JalilEnterprises shows updated status of item
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. No such item
-+
-[none]
-** 2a1. JalilEnterprises shows error message
-+
-Use case resumes at step 1.
-
-[none]
-* 4a. Invalid status
-+
-[none]
-** 4a1. JalilEnterprises shows invalid status message
-+
-Use case resumes at step 4.
-
-=== Use case: Loan List
-
-*MSS*
-
-1.  User requests to create loan list
-2.  JalilEnterprises shows list of items
-3.  User requests to add specific items into loan list
-4.  JalilEnterprises shows created loan list
-+
-Use case ends.
-
-=== Use case: Archive
-
-*MSS*
-
-1.  User requests to archive the status of items
-2.  JalilEnterprises requests the name of this archive
-3.  User keys in the name of this archive
-4.  JalilEnterprises finishes the archive and shows a message
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 4a. JalilEnterprises detects the new name conflicts with existing archive's names
-+
-[none]
-** 4a1. JalilEnterprises warns the user and requests a new name
-+
-Use case resumes at step 3.
+Use case resumes at step 2.
 
 _{More to be added}_
 
