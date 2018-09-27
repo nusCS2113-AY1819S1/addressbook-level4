@@ -841,11 +841,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
 
+|`* *` |flexible student |remove self imposed deadlines for certain tasks |shift my priorities to other tasks
+
 |`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
 
 |`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
-
-
 |=======================================================================
 
 
@@ -949,12 +949,31 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: View today's date
+=== Use case: Remove deadline
+
+*MSS*
+
+1. Student selects the task
+2. TB displays the deadline for the task
+3. Student requests to delete deadline for the task
+4. TB asks for confirmation
+5. Student provides confirmation
+6. TB removes deadline from the task
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Student selects a task with no existing deadline
+** 1a1. TB outputs an error message
+
+[discrete]
+=== Use case: View date
 
 *MSS*
 
 1. Student enters the view command
-2. TB returns today's date in d/DAY w/WEEK m/MONTH format
+2. TB returns the date in d/DAY w/WEEK m/MONTH format
 +
 Use case ends.
 
@@ -963,7 +982,7 @@ Use case ends.
 
 *MSS*
 
-1. Student enters the select command and the date required
+1. Student requests to select date required
 2. TB checks for its validity and changes to the required date
 +
 Use case ends.
