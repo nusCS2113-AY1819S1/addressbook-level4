@@ -25,7 +25,7 @@ public class GenListCommand extends Command {
         ObservableList<Person> lastShownList = model.getFilteredPersonList();
         stage=new AttendanceStage(lastShownList);
         stage.generateAttendance();
-        stage.printAttendanceList();
+        stage.printResizedTable();
         return new CommandResult(String.format(Messages.MESSAGE_GENERATE_ATTENDANCE_LIST));
     }
 }
