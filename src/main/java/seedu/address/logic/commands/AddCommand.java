@@ -42,7 +42,7 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public AddCommand(Person person) {
+    public AddCommand(Person person) {//a line of input
         requireNonNull(person);
         toAdd = person;
     }
