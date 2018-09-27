@@ -174,6 +174,7 @@ public class CommandBox extends UiPart<Region> {
     private void handlePredictions(ArrayList<String> input, String textInput) {
         if (input.size() == 0) {
             logger.info(Messages.MESSAGE_INVALID_AUTOCOMPLETE_FORMAT);
+            raise(new NewResultAvailableEvent(Messages.MESSAGE_EMPTY_STRING));
         }
         else if (input.size() == 1) {
             commandTextField.appendText(input.get(0));

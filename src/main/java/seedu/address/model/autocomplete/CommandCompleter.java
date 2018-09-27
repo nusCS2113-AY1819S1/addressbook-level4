@@ -113,7 +113,6 @@ public class CommandCompleter {
     }
 
     /**
-     * TODO: Handle parse exception
      * Predict the next possible list of text
      * @param textInput the string to be parsed
      * @return predicted list of text
