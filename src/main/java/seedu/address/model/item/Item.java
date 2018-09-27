@@ -1,14 +1,15 @@
-package seedu.address.model.person;
+package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,6 +17,11 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Item {
+
+    // Magic numbers
+    final static public int STATUS_READY = 0;
+    final static public int STATUS_ONLOAN = 1;
+    final static public int STATUS_FAULTY = 2;
 
     // Identity fields
 //    private final Name name;
@@ -27,7 +33,7 @@ public class Item {
 
     // Data fields
 //    private final Address address;
-    private final ArrayList<Integer> status = new ArrayList<>();
+    private final List<Integer> status = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -46,9 +52,9 @@ public class Item {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status.add(quantity);
-        this.status.add(0);
-        this.status.add(0);
+        status.set(STATUS_READY, quantity);
+        status.set(STATUS_ONLOAN, 0);
+        status.set(STATUS_FAULTY, 0);
         this.tags.addAll(tags);
     }
 
@@ -77,8 +83,8 @@ public class Item {
 
     public Integer getMinQuantity() { return minQuantity; }
 
-    public ArrayList<Integer> getStatus() {
-        return status;
+    public List<Integer> getStatus() {
+        return Collections.unmodifiableList(status);
     }
 
     /**
@@ -151,14 +157,20 @@ public class Item {
                 .append(" Minimum Quantity Required In Stocks: ")
                 .append(getMinQuantity())
                 .append(" Status: Ready | ")
-                .append(getStatus().get(0))
+                .append(getStatus().get(STATUS_READY))
                 .append(", On-Loan | ")
-                .append(getStatus().get(1))
+                .append(getStatus().get(STATUS_ONLOAN))
                 .append(", Faulty | ")
-                .append(getStatus().get(2))
+                .append(getStatus().get(STATUS_FAULTY))
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
 
+//    public void changeStatus(Integer ready, Integer onLoan, Integer faulty) {
+//        status.set(STATUS_READY, ready);
+//        status.set(STATUS_ONLOAN, onLoan);
+//        status.set(STATUS_FAULTY, faulty);
+//        return;
+//    }
 }
