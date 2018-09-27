@@ -835,6 +835,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |add a new person |
 
+<<<<<<< Updated upstream
 |`* * *` |user |delete a person |remove entries that I no longer need
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
@@ -842,6 +843,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
+=======
+|`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
+
+|`* *` |flexible student |remove self imposed deadlines for certain tasks |shift my priorities to other tasks
+>>>>>>> Stashed changes
 |=======================================================================
 
 _{More to be added}_
@@ -878,6 +884,25 @@ Use case ends.
 Use case resumes at step 2.
 
 _{More to be added}_
+
+[discrete]
+=== Use case: Remove deadline
+
+*MSS*
+
+1. Student selects the task
+2. TB displays the deadline for the task
+3. Student requests to delete deadline for the task
+4. TB asks for confirmation
+5. Student provides confirmation
+6. TB removes deadline from the task
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Student selects a task with no existing deadline
+** 1a1. TB outputs an error message
 
 [appendix]
 == Non Functional Requirements
