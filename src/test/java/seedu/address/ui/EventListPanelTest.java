@@ -92,7 +92,7 @@ public class EventListPanelTest extends GuiUnitTest {
     private Path createXmlFileWithPersons(int personCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<addressbook>\n");
+        builder.append("<eventmanager>\n");
         for (int i = 0; i < personCount; i++) {
             builder.append("<persons>\n");
             builder.append("<name>").append(i).append("a</name>\n");
@@ -101,7 +101,7 @@ public class EventListPanelTest extends GuiUnitTest {
             builder.append("<address>a</address>\n");
             builder.append("</persons>\n");
         }
-        builder.append("</addressbook>\n");
+        builder.append("</eventmanager>\n");
 
         Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
         FileUtil.createFile(manyPersonsFile);

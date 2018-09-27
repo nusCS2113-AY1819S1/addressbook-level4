@@ -15,10 +15,10 @@ import seedu.address.model.event.Event;
 /**
  * An Immutable EventManager that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "eventmanager")
 public class XmlSerializableEManager {
 
-    public static final String MESSAGE_DUPLICATE_EVENT = "Persons list contains duplicate event(s).";
+    public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
 
     @XmlElement
     private List<XmlAdaptedEvent> events;
