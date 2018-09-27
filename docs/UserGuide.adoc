@@ -667,13 +667,13 @@ e.g.`select 2`
 e.g. `gradebook add c/CS2040C i/Assignment 1 m/10 p/10`
 * *Edit Grade Item* : `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE` +
 e.g. `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10`
-* *Delete Grade Component* : `gradebook remove c/MODULE_CODE i/GRADE_ITEM' +
+* *Delete Grade Component* : `gradebook remove c/MODULE_CODE i/GRADE_ITEM` +
 e.g. `gradebook remove m/CS2040C i/Assignment 1`
-* *List Grade Components* : `gradebook list components c/MODULE_CODE' +
+* *List Grade Components* : `gradebook list components c/MODULE_CODE` +
 e.g. `gradebook list components c/CS2040C`
-* *List Grade Components* : `gradebook list grades c/MODULE_CODE' +
+* *List Grade Components* : `gradebook list grades c/MODULE_CODE` +
 e.g. `gradebook list grades c/CS2040C`
-* *Assign Grades* : `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS' +
+* *Assign Grades* : `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS` +
 e.g. `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10`
 * *Creating a class* `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT` +
 e.g. `class create c/T16 m/CG1111 e/20`
