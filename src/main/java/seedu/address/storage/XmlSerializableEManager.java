@@ -18,7 +18,7 @@ import seedu.address.model.event.Event;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableEManager {
 
-    public static final String MESSAGE_DUPLICATE_EVENT = "Persons list contains duplicate event(s).";
+    public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
 
     @XmlElement
     private List<XmlAdaptedEvent> events;
