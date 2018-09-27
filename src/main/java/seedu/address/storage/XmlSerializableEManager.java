@@ -15,7 +15,7 @@ import seedu.address.model.event.Event;
 /**
  * An Immutable EventManager that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "eventmanager")
 public class XmlSerializableEManager {
 
     public static final String MESSAGE_DUPLICATE_EVENT = "Events list contains duplicate event(s).";
