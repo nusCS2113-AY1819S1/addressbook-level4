@@ -66,8 +66,17 @@ public interface Model {
      */
     void updatePerson(Person target, Person editedPerson);
 
+    /** Returns an unmodifiable view of the filtered login details list */
+    ObservableList<LoginDetails> getFilteredLoginDetailsList();
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Updates the filter of the filtered login details list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate);
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
