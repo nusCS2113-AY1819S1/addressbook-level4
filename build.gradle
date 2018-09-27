@@ -82,7 +82,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'addressbook.jar'
+    archiveName = 'eventmanager.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
