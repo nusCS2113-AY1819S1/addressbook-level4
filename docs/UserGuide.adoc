@@ -71,9 +71,10 @@ Password is case-sensitive!
 === Creating a new user account: `create account`
 
 Creates a new user account in the address book. +
-Format: `USERID PASSWORD`
+Format: `user/USERID pass/PASSWORD`
 
 ****
+* user/ and pass/ are required prefixes before USERID and PASSWORD
 * USERID refers to student matriculation number
 * PASSWORD refers to any desired passphrases the new user wishes to have
 * The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
@@ -83,7 +84,7 @@ Format: `USERID PASSWORD`
 Examples:
 
 * `create account` +
-`X1234567X zaq1xsw2cde3` +
+`user/X1234567X pass/zaq1xsw2cde3` +
 Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
 === Deleting an existing user account: `delete account`

@@ -8,18 +8,18 @@ import seedu.address.ui.LoginDialogBoxUserIdPassword;
 public class UserId {
 
     public static final String MESSAGE_USERID_CONSTRAINTS =
-            "User ID should only contain 9 alphanumeric characters, and it should not be blank and not have any spaces";
+            "There must be a user/ prefix before the user ID. User ID should only contain 9 alphanumeric characters, " +
+                    "and it should not be blank and not have any spaces";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String USERID_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String USERID_VALIDATION_REGEX = "[user/\\w\\w\\w\\w\\w\\w\\w\\w\\w]*";
 
     public final String fullUserId;
 
     public UserId(String id) {
-        id = LoginDialogBoxUserIdPassword.getUserId();
         requireNonNull(id);
         checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);
         fullUserId = id;

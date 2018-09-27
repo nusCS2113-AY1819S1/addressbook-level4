@@ -126,25 +126,24 @@ public class MainWindow extends UiPart<Stage> {
      * @param history
      */
     void fillInnerParts(Model model, CommandHistory history) throws CommandException {
-        initializeLoginProcess(model, history);
-        if (LoginWindow.getIsLoginSuccessful()) {
-            browserPanel = new BrowserPanel();
-            browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        do {
+            initializeLoginProcess(model, history);
+        } while (!(LoginWindow.getIsLoginSuccessful()));
 
-            personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-            personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        browserPanel = new BrowserPanel();
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-            ResultDisplay resultDisplay = new ResultDisplay();
-            resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-            StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
-            statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-            CommandBox commandBox = new CommandBox(logic);
-            commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-        } else {
-            System.exit(0);
-        }
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     void hide() {

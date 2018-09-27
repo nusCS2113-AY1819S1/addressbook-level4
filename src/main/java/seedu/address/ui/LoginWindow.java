@@ -6,6 +6,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.login.LoginDetails;
+import seedu.address.model.login.UserId;
+import seedu.address.model.login.UserPassword;
 
 /**
  * The login window. Provides the basic application layout containing
@@ -17,11 +20,11 @@ public class LoginWindow {
     private static boolean isLoginSuccessful = false;
     public static boolean isSensitiveInformation;
 
+    private static LoginDetails details;
+
     public static boolean getIsLoginSuccessful() {
         return isLoginSuccessful;
     }
-
-    private static CreateAccountCommand createAccount = null;
 
     /**
      * Kick starts the log in process with pop-up login windows.
@@ -41,11 +44,20 @@ public class LoginWindow {
 
         switch (loginSelection) {
             case "login":
+
                 isSensitiveInformation = true;
 
                 break;
             case "create account":
+                isLoginSuccessful = true;
                 isSensitiveInformation = true;
+                LoginDialogBoxUserIdPassword userIdPassword = new LoginDialogBoxUserIdPassword();
+                userIdPassword.loginDialogBoxUserIdPassword();
+                UserId id = new UserId(userIdPassword.getUserId());
+                UserPassword password = new UserPassword(userIdPassword.getUserPassword());
+                details.setUserId(id);
+                details.setUserPassword(password);
+                CreateAccountCommand createAccount = new CreateAccountCommand(details);
                 createAccount.execute(model, history);
                 break;
             case "delete account":
@@ -60,5 +72,4 @@ public class LoginWindow {
                 throw new IllegalArgumentException("Invalid command!" + loginSelection);
         }
     }
-
 }

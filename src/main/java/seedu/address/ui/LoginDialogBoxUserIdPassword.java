@@ -9,8 +9,17 @@ public class LoginDialogBoxUserIdPassword {
     private static JTextField userId = new JTextField(5);
     private static JTextField userPassword = new JTextField(5);
 
-    public  LoginDialogBoxUserIdPassword() {
+    LoginDialogBoxUserIdPassword() {}
 
+    String getUserId() {
+        return userId.getText();
+    }
+
+    String getUserPassword() {
+        return userPassword.getText();
+    }
+
+    void loginDialogBoxUserIdPassword() {
         JPanel loginDetails = new JPanel();
         loginDetails.add(new JLabel("user ID:"));
         loginDetails.add(userId);
@@ -21,12 +30,4 @@ public class LoginDialogBoxUserIdPassword {
         JOptionPane.showInputDialog(loginDetails, "Please enter user ID and Password: ", null);
     }
     //@@author
-
-    public static String getUserId() {
-        return userId.getText();
-    }
-
-    public static String getUserPassword() {
-        return userPassword.getText();
-    }
 }

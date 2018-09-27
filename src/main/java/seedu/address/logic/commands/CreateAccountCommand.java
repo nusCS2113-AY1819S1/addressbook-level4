@@ -6,12 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERPASSWORD;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.ModelManager;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.Model;
-import seedu.address.model.login.UserId;
-import seedu.address.model.login.UserPassword;
-import seedu.address.ui.LoginDialogBoxUserIdPassword;
 
 public class CreateAccountCommand extends Command{
 
@@ -31,14 +27,10 @@ public class CreateAccountCommand extends Command{
      * Creates a CreateAccountCommand to add the specified {@code LoginDetails}
      */
     public CreateAccountCommand(LoginDetails details) {
-        UserId id = new UserId(LoginDialogBoxUserIdPassword.getUserId());
-        UserPassword password = new UserPassword(LoginDialogBoxUserIdPassword.getUserPassword());
-        details.setUserId(id);
-        details.setUserPassword(password);
         requireNonNull(details);
         toAdd = details;
     }
-    // add JOption input fields to get user details, then assign it to variables to be assigned to toAdd object
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
