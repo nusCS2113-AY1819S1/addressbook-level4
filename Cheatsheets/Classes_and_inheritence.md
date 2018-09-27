@@ -68,15 +68,13 @@ Multiple Inheritance (Multiple parent classes) is when a class inherits directly
 5. In Java all classes inherit from the Object class
 6. Java disallows multiple inheritance in a class
 7. Abstraction and encapsulation
+8. Child class will override parent class metohd as long as same method name is declared in child
+9. Child class can also access public attribs of parent class
 
 
 
 
 # Practices for good code quality
 1. Class names should start with upper case letter
-<<<<<<< HEAD
 2. Class names should be meaningful
-=======
-2. Class names should be meaningful
->>>>>>> 9498b3d734f0520d6c8b5bdc66e4afdeeba0123a
 3. Avoid magic numbers (Even if numbers are fixed, declare them as macros or global variables)

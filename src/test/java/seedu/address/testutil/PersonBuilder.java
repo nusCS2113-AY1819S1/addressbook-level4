@@ -5,10 +5,12 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Kpi;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Position;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,6 +29,8 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
+    private Position position;
+    private Kpi kpi;
     private Note note;
     private Set<Tag> tags;
 
@@ -35,6 +39,9 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        //TODO add position and Kpi to person builder
+        position = null;
+        kpi = null;
         note = new Note(DEFAULT_NOTE);
         tags = new HashSet<>();
     }
@@ -47,6 +54,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        position = personToCopy.getPosition();
+        kpi = personToCopy.getKpi();
         note = personToCopy.getNote();
         tags = new HashSet<>(personToCopy.getTags());
     }
@@ -99,8 +108,24 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withPosition(String position) {
+        this.position = new Position(position);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Note} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withKpi(String kpi) {
+        this.kpi = new Kpi(kpi);
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, note, tags);
+        return new Person(name, phone, email, address, position, kpi, note, tags);
     }
 
 }

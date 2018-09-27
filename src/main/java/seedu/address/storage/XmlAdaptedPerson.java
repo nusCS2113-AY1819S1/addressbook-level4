@@ -12,10 +12,12 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Kpi;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Position;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +36,10 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String address;
     @XmlElement
+    private String position;
+    @XmlElement
+    private String kpi;
+    @XmlElement
     private String note;
 
     @XmlElement
@@ -48,12 +54,14 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address,
+    public XmlAdaptedPerson(String name, String phone, String email, String address, String position, String kpi,
                             String note, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.position = position;
+        this.kpi = kpi;
         this.note = note;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -70,6 +78,12 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        if (source.positionDoesExist()) {
+            position = source.getPosition().value;
+        }
+        if (source.kpiDoesExist()) {
+            kpi = source.getKpi().value;
+        }
         note = source.getNote().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -119,9 +133,28 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final Note modelNote;
+        final Position modelPosition;
+        //TODO refactor this? note to doesExist()?
+        if (position == null) {
+            modelPosition = new Position();
+        } else if (!Position.isValidPosition(position)) {
+            throw new IllegalValueException(Position.MESSAGE_POSITION_CONSTRAINTS);
+        } else {
+            modelPosition = new Position(position);
+        }
 
-        //TODO refactor this?
+        final Kpi modelKpi;
+        //TODO refactor this? note to doesExist()?
+        if (kpi == null) {
+            modelKpi = new Kpi();
+        } else if (!Kpi.isValidKpi(kpi)) {
+            throw new IllegalValueException(Kpi.MESSAGE_KPI_CONSTRAINTS);
+        } else {
+            modelKpi = new Kpi(kpi);
+        }
+
+        final Note modelNote;
+        //TODO refactor this? note to doesExist()?
         if (note == null) {
             modelNote = new Note();
         } else if (!Note.isValidNote(note)) {
@@ -131,7 +164,15 @@ public class XmlAdaptedPerson {
         }
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelNote, modelTags);
+        return new Person(
+                modelName,
+                modelPhone,
+                modelEmail,
+                modelAddress,
+                modelPosition,
+                modelKpi,
+                modelNote,
+                modelTags);
     }
 
     @Override
@@ -149,6 +190,8 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
+                && Objects.equals(position, otherPerson.position)
+                && Objects.equals(kpi, otherPerson.kpi)
                 && Objects.equals(note, otherPerson.note)
                 && tagged.equals(otherPerson.tagged);
     }
