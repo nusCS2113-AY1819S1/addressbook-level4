@@ -16,7 +16,7 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 * This is a desktop Task Book application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is an app for busy students to *manage their daily tasks* and ultimately, *lead a more productive life*.
+* It is an app for busy students to manage their daily tasks and ultimately, lead a more productive life.
 * If you can type fast, TB can get your management of tasks done *faster than traditional paper notebooks or a mobile application*.
 
 

@@ -91,6 +91,15 @@ Examples:
 
 * `deadline t/Complete 2113 Milestone w/1 m/8`
 
+=== Removing a deadline : `remove_deadline`
+
+Removes a deadline from an existing task
+Format: `remove_deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
+
+Examples:
+* `remove_deadline t/Complete 2113 Milestone w/1 m/8`
+
+
 === Viewing today's date : `view`
 
 Shows the date today. +
@@ -105,46 +114,6 @@ Examples:
 
 * `select d/Mon`
 * `select d/Mon w/2 m/1`
-
-=== Deleting a person : `delete`
-
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
-
-=== Selecting a person : `select`
-
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
 
 === Listing entered commands : `history`
 
@@ -239,13 +208,13 @@ e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
 * *Clear* : `clear`
 * *Deadline* : `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`
-* *View* : `view`
-* *Select* : `select d/DAY [w/WEEK] [m/MONTH]` +
-e.g. `select d/Mon w/2 m/1`
 * *List* : `list`
 * *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
 * *History* : `history`
+* *Select* : `select d/DAY [w/WEEK] [m/MONTH]` +
+e.g. `select d/Mon w/2 m/1`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Remove Deadline* : `remove_deadline t\ACTION d\DAY [w\WEEK] [m\MONTH]...` +
+e.g. `remove_deadline t\Complete 2113 Tutorial d\Wed w\2`
+* *View* : `view`
