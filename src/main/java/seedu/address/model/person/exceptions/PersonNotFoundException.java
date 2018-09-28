@@ -1,6 +1,6 @@
-package seedu.address.model.person.exceptions;
+package seedu.address.model.item.exceptions;
 
 /**
- * Signals that the operation is unable to find the specified person.
+ * Signals that the operation is unable to find the specified item.
  */
-public class PersonNotFoundException extends RuntimeException {}
+public class ItemNotFoundException extends RuntimeException {}
