@@ -461,7 +461,7 @@ Examples:
 * `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10` +
 Assigns 10 marks to CS2040C student with matric number A0168111.
 
-==== Viewing help : `help`
+=== Viewing help : `help`
 
 Shows the help page +
 Format: `help`
