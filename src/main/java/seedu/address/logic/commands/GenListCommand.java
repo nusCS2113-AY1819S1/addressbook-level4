@@ -17,11 +17,10 @@ public class GenListCommand extends Command {
     public static final String COMMAND_WORD = "genlist";
     public static final String COMMAND_WORD_2 = "gl";
 
-    private AttendanceStage stage;
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        AttendanceStage stage;
         ObservableList<Person> lastShownList = model.getFilteredPersonList();
         stage = new AttendanceStage(lastShownList);
         stage.generateAttendance();

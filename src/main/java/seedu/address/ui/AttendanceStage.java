@@ -22,7 +22,7 @@ public class AttendanceStage extends UiPart<Stage> {
 
     private static final String FXML = "AttendanceStage.fxml";
 
-    private Stage secondaryStage;
+    //private Stage secondaryStage;
 
     private ObservableList<Person> Persons;
 
@@ -56,7 +56,7 @@ public class AttendanceStage extends UiPart<Stage> {
      */
     public AttendanceStage(Stage newStage) {
         super(FXML, newStage);
-        secondaryStage = newStage;
+        //secondaryStage = newStage;
         newStage.setMaximized(true);
         newStage.show();
         registerAsAnEventHandler(this);
@@ -86,7 +86,8 @@ public class AttendanceStage extends UiPart<Stage> {
 
     public void printResizedTable() {
         Printer printer = Printer.getDefaultPrinter();
-        PageLayout pageLayout=printer.createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
+        PageLayout pageLayout = printer.createPageLayout(
+                Paper.A4, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
         PrinterJob job = PrinterJob.createPrinterJob();
 
         double scaleX = pageLayout.getPrintableWidth() / PersonTable.getBoundsInParent().getWidth();
