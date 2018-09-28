@@ -65,6 +65,14 @@ public class ParserUtil {
         return new Phone(trimmedPhone);
     }
 
+    public static Integer parseQty(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedQty = quantity.trim();
+        if (!Phone.isValidPhone(trimmedPhone)) {
+            throw new ParseException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        }
+        return new Phone(trimmedPhone);
+    }
     /**
      * Parses a {@code String address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
