@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.item.Item;
 import seedu.address.model.person.Person;
 
 /**
@@ -57,9 +58,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+    public boolean hasItem(Item item) {
+        requireNonNull(item);
+        return versionedAddressBook.hasItem(item);
     }
 
     @Override
