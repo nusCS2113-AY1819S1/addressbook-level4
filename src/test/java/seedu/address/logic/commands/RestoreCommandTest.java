@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.parser.ParserUtil;
@@ -10,14 +13,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.backup.BackupList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class RestoreCommandTest {
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void execute_snapshots_success() {
@@ -27,7 +25,7 @@ class RestoreCommandTest {
     }
 
     @Test
-    public void execute_index_success() throws Exception{
+    public void execute_index_success() throws Exception {
         Index index = ParserUtil.parseIndex("1");
         CommandResult result = new RestoreCommand(index).execute(model, commandHistory);
         assertEquals(RestoreCommand.MESSAGE_INDEX_SUCCESS, result.feedbackToUser);
