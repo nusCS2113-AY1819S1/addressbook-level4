@@ -31,6 +31,7 @@ public class RestoreCommand extends Command {
         this.flag = 2;
     }
 
+    @Override
     public CommandResult execute(Model model, CommandHistory history) {
         if (flag == 1) {
             return new CommandResult(MESSAGE_BACKUP_LIST_SUCCESS);
