@@ -10,11 +10,13 @@ import seedu.address.commons.util.StringUtil;
  */
 public class UserIdContainsKeywordsPredicate implements Predicate<LoginDetails> {
 
-    private final List<String> keywords;
+    private List<String> keywords;
 
     public UserIdContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
+
+    public UserIdContainsKeywordsPredicate(String trimmedArgs) {}
 
     @Override
     public boolean test(LoginDetails loginDetails) {

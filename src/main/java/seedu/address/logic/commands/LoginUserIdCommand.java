@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.LoginCommand;
 import seedu.address.model.Model;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 
@@ -17,6 +16,7 @@ public class LoginUserIdCommand extends LoginCommand {
     private final UserIdContainsKeywordsPredicate predicate;
 
     public LoginUserIdCommand(UserIdContainsKeywordsPredicate predicate) {
+        super();
         this.predicate = predicate;
     }
 
