@@ -13,6 +13,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TimeSlot;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -120,5 +121,26 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     *
+     * Parses a {@code String timeslot} into a {@code timeslot}
+     *
+     */
+    public static TimeSlot parseTimeSlot (String timeslot) throws ParseException {
+        requireNonNull(timeslot);
+        String trimmedTimeSlot = timeslot.trim();
+        if (!TimeSlot.isValidTimeSlot(trimmedTimeSlot)) {
+            throw new ParseException(TimeSlot.MESSAGE_TIMESLOT_CONSTRAINTS);
+        }
+
+
+        int hour = Integer.parseInt(trimmedTimeSlot.substring(2, 4));
+        int day = Character.getNumericValue(trimmedTimeSlot.charAt(0));
+
+        TimeSlot timeslotObject = new TimeSlot (hour, day);
+        timeslotObject.setIsFilled();
+        return timeslotObject;
     }
 }

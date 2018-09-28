@@ -25,6 +25,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TimeSlot;
+import seedu.address.model.person.TimeTable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -100,8 +102,15 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        TimeTable timeTable = personToEdit.getTimeTable();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        //Edits the copy of the timetable, currently only allow one timeSlot edit per command
+        if (editPersonDescriptor.getTimeSlot().isPresent()) {
+            timeTable.fillTimeSlot(editPersonDescriptor.getTimeSlotObject().getDay(),
+                    editPersonDescriptor.getTimeSlotObject().getHour());
+        }
+
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable);
     }
 
     @Override
@@ -132,6 +141,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private TimeSlot timeSlot;
 
         public EditPersonDescriptor() {}
 
@@ -145,13 +155,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setTimeSlot(toCopy.timeSlot);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, timeSlot);
         }
 
         public void setName(Name name) {
@@ -201,6 +212,18 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        public Optional<TimeSlot> getTimeSlot() {
+            return Optional.ofNullable(timeSlot);
+        }
+
+        public TimeSlot getTimeSlotObject() {
+            return this.timeSlot;
+        }
+
+        public void setTimeSlot(TimeSlot timeSlot) {
+            this.timeSlot = timeSlot;
         }
 
         @Override

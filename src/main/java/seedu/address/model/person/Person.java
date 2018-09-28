@@ -31,14 +31,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, TimeTable timeTable) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.weekly = new TimeTable();
+        this.weekly = timeTable;
     }
 
     public Name getName() {
@@ -56,6 +56,8 @@ public class Person {
     public Address getAddress() {
         return address;
     }
+
+    public TimeTable getTimeTable() { return weekly; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

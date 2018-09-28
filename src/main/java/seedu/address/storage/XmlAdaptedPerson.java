@@ -15,6 +15,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TimeTable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -114,7 +115,9 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        TimeTable timeTable = new TimeTable();
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, timeTable);
     }
 
     @Override

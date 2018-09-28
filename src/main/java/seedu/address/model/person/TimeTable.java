@@ -6,13 +6,20 @@ package seedu.address.model.person;
  */
 public class TimeTable {
 
+
     private TimeSlot[][] weeklyslots;
 
     public TimeTable() {
         this.weeklyslots = new TimeSlot[7][24];
     }
 
+    /**
+     *  Sets the timeslot as filled
+     * @param day
+     * @param hour
+     */
     public void fillTimeSlot(int day, int hour) {
+        weeklyslots[day][hour] = new TimeSlot(day, hour);
         weeklyslots[day][hour].setIsFilled();
     }
 
