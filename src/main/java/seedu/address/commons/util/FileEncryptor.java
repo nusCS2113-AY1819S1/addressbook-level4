@@ -22,7 +22,7 @@ import javax.crypto.spec.PBEParameterSpec;
  */
 public class FileEncryptor {
 
-    public static String extension = ".encrypted";
+    private static String extension = ".encrypted";
     private static String filename = "";
     private static String message = "";
 
@@ -183,5 +183,10 @@ public class FileEncryptor {
      */
     public String getMessage () {
         return this.message;
+    }
+
+    //@@author lekoook
+    public static String getExtension() {
+        return extension;
     }
 }

@@ -48,7 +48,7 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
-        encryptedFilePath = Paths.get(filePath.toString() + FileEncryptor.extension);
+        encryptedFilePath = Paths.get(filePath.toString() + FileEncryptor.getExtension());
 
         if (!Files.exists(filePath) && !Files.exists(encryptedFilePath)) {
             logger.info("AddressBook file " + filePath + " not found");
