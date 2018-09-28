@@ -1,21 +1,22 @@
-package seedu.address.logic.commands;
+package seedu.address.logic;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.Model;
-import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 
 /**
- * Queries the login book to see if there is a user ID that matches input user ID. Used for the login process.
- * Keyword matching is case insensitive.
+ * Queries the login book to see if there is a password that matches input password. Used for the login process.
+ * Keyword matching is case sensitive.
  */
-public class LoginUserIdCommand extends FindCommand {
+public class LoginUserPasswordCommand extends FindCommand {
 
-    private final UserIdContainsKeywordsPredicate predicate;
+    private final UserPasswordContainsKeywordsPredicate predicate;
 
-    public LoginUserIdCommand(UserIdContainsKeywordsPredicate predicate) {
+    public LoginUserPasswordCommand(UserPasswordContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -31,7 +32,7 @@ public class LoginUserIdCommand extends FindCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof LoginUserIdCommand // instanceof handles nulls
-                && predicate.equals(((LoginUserIdCommand) other).predicate)); // state check
+                || (other instanceof LoginUserPasswordCommand // instanceof handles nulls
+                && predicate.equals(((LoginUserPasswordCommand) other).predicate)); // state check
     }
 }

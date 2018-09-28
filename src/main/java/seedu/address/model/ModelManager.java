@@ -95,6 +95,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public ObservableList<LoginDetails> getFilteredLoginDetailsList() {
+        return null;
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
