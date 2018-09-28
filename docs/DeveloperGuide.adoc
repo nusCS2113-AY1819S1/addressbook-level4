@@ -843,8 +843,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |dislike a thread under a target module | express my change in opinion on a thread which I previously indicated as useful
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
-
 |`*` |user whom prefer to read the most liked threads |sort threads by the number of likes |locate threads which are liked the most by other users for a given module
 |=======================================================================
 
