@@ -144,7 +144,7 @@ public class ParserUtil {
      * Parses {@code String Snapshots} into a {@code Snapshots}.
      * @throws ParseException if the argument is invalid (not "list").
      */
-    public static BackupList parseBackup(String backupList){
+    public static BackupList parseBackup(String backupList) {
         requireNonNull(backupList);
         return new BackupList("Parser works for now");
     }

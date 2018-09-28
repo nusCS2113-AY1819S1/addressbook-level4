@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
+import java.nio.file.Path;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
-
-import java.nio.file.Path;
 
 /**
  * Exports CSV file into a directory from the address book.
