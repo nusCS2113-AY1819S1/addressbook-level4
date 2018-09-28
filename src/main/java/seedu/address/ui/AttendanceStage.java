@@ -6,7 +6,6 @@ import javafx.print.PageLayout;
 import javafx.print.PageOrientation;
 import javafx.print.Paper;
 import javafx.print.Printer;
-import javafx.print.PrinterAttributes;
 import javafx.print.PrinterJob;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,20 +13,14 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
 
-import java.util.logging.Logger;
+/**
+ * The UI Component to the Attendance List.
+ */
+public class AttendanceStage extends UiPart<Stage> {
 
-import static java.lang.Math.max;
-
-
-public class AttendanceStage extends UiPart<Stage>  {
-
-    private static final String stageName = "Attendance List";
     private static final String FXML = "AttendanceStage.fxml";
-
-    private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage secondaryStage;
 
@@ -37,33 +30,33 @@ public class AttendanceStage extends UiPart<Stage>  {
     private TableView<Person> PersonTable;
 
     @FXML
-    private TableColumn<Person,String> nameColumn;
+    private TableColumn<Person, String> nameColumn;
 
     @FXML
-    private TableColumn<Person,String> phoneColumn;
+    private TableColumn<Person, String> phoneColumn;
 
     @FXML
-    private TableColumn<Person,String> addressColumn;
+    private TableColumn<Person, String> addressColumn;
 
     @FXML
-    private TableColumn<Person,String> EmailColumn;
+    private TableColumn<Person, String> EmailColumn;
 
 
     /**
      * Create new Stage for AttendanceList.
      */
-    public AttendanceStage(ObservableList<Person> Persons){
+    public AttendanceStage(ObservableList<Person> Persons) {
         this(new Stage());
-        this.Persons=Persons;
+        this.Persons = Persons;
     }
 
 
     /**
      * Setup the Stage for AttendanceList.
      */
-    public AttendanceStage(Stage newStage){
-        super(FXML,newStage);
-        this.secondaryStage=newStage;
+    public AttendanceStage(Stage newStage) {
+        super(FXML, newStage);
+        secondaryStage = newStage;
         newStage.setMaximized(true);
         newStage.show();
         registerAsAnEventHandler(this);
@@ -88,25 +81,24 @@ public class AttendanceStage extends UiPart<Stage>  {
     /**
      *
      * Resize the TableView to fit A4 Size Paper for printing
-     * Retrived from https://stackoverflow.com/questions/31231021/javafx8-print-api-how-to-set-correctly-the-printable-area
+     * https://stackoverflow.com/questions/31231021/javafx8-print-api-how-to-set-correctly-the-printable-area
      */
 
-    public void printResizedTable(){
+    public void printResizedTable() {
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout=printer.createPageLayout(Paper.A4, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
-        PrinterAttributes attributes = printer.getPrinterAttributes();
         PrinterJob job = PrinterJob.createPrinterJob();
 
-        double scaleX = pageLayout.getPrintableWidth() / PersonTable.getBoundsInParent().getWidth() ;
+        double scaleX = pageLayout.getPrintableWidth() / PersonTable.getBoundsInParent().getWidth();
         double scaleY = pageLayout.getPrintableHeight() / PersonTable.getBoundsInParent().getHeight();
 
-        Scale scale = new Scale(scaleX,scaleY);
+        Scale scale = new Scale(scaleX, scaleY);
 
         PersonTable.getTransforms().add(scale);
 
-        if( job!=null && job.showPrintDialog(PersonTable.getScene().getWindow())){
-            boolean success = job.printPage(pageLayout,PersonTable);
-            if(success) {
+        if (job != null && job.showPrintDialog(PersonTable.getScene().getWindow())) {
+            boolean success = job.printPage(pageLayout, PersonTable);
+            if (success) {
                 job.endJob();
             }
         }

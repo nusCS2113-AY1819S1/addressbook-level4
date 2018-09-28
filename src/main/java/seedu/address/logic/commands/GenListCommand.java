@@ -23,7 +23,7 @@ public class GenListCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         ObservableList<Person> lastShownList = model.getFilteredPersonList();
-        stage=new AttendanceStage(lastShownList);
+        stage = new AttendanceStage(lastShownList);
         stage.generateAttendance();
         stage.printResizedTable();
         return new CommandResult(String.format(Messages.MESSAGE_GENERATE_ATTENDANCE_LIST));
