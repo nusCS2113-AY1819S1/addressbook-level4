@@ -120,14 +120,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoAddressBook() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
+        //@@author lekoook
         commandCompleter = new CommandCompleter(this);
+        //@@author
     }
 
     @Override
     public void redoAddressBook() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
+        //@@author lekoook
         commandCompleter = new CommandCompleter(this);
+        //@@author
     }
 
     @Override

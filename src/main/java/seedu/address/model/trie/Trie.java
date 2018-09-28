@@ -148,10 +148,10 @@ public class Trie {
      * @param pointer the first node in the graph to be removed
      */
     private void removeWordFromGraph(TrieNode pointer) {
-        // Set this node as non-end node first
+        // Set this node as non-end node first.
         pointer.setEndNode(false);
 
-        // Traverse upwards the trie
+        // Traverse upwards the trie.
         while (!pointer.isEndNode() && pointer.getChildrenSize() == 0) {
             TrieNode parent = pointer.getParent();
             parent.removeChild(pointer);
@@ -168,29 +168,22 @@ public class Trie {
         predictionsList = new ArrayList<>();
         StringBuilder charStack = new StringBuilder();
 
-        // skipToStartNode returns root node if the prefix does not exist in the Trie
+        // skipToStartNode returns root node if the prefix does not exist in the Trie.
         TrieNode startNode = skipToStartNode(root, prefix);
 
-        // startNode is root node, return an empty predictionsList
         if (startNode.equals(root)) {
             return predictionsList;
         }
 
-        // If startNode is already the end node of a branch, just add a single whitespace
-        if (startNode.getChildrenSize() == 0) {
-            charStack.append(CHAR_SPACE);
-            predictionsList.add(charStack.toString());
-        }
-
-        // If startNode has ONE child, build the charStack to the first
-        // node that has more than one child or the first mismatch character
+        // If startNode has ONLY ONE child, the only possible text prediction is one that has characters up
+        // till the character that has more than one child.
         if (startNode.getChildrenSize() == 1) {
             charStack = buildSingleStack(startNode);
             predictionsList.add(charStack.toString());
             return predictionsList;
         }
 
-        // If startNode has more than one child, explore all possible strings
+        // If startNode has more than one child, explore all possible strings.
         for (int i = 0; i < startNode.getChildren().size(); i++) {
             explore(charStack, startNode.getChildren().get(i));
         }
@@ -214,7 +207,7 @@ public class Trie {
             startNode = startNode.getFirstChild();
         }
 
-        // If this node is the last node of a branch, add a single whitespace to the returning string
+        // End of a branch
         if (startNode.getChildrenSize() == 0) {
             charStack.append(CHAR_SPACE);
         }
@@ -255,31 +248,30 @@ public class Trie {
      * @param pointer the starting node to traverse from
      */
     private void explore(StringBuilder charStack, TrieNode pointer) {
-        // Push the character of current node to stack
-        if (pointer.getValue() != CHAR_ROOT) {
+        if (!pointer.equals(root)) {
             charStack.append(pointer.getValue());
         }
 
-        // We have hit the end of a word but the branch continues or there are more branches
+        // End character of the word
         if (pointer.isEndNode()) {
+            // Branch end, so it is the last character of a word
             if (pointer.getChildrenSize() == 0) {
                 charStack.append(CHAR_SPACE);
             }
             predictionsList.add(charStack.toString());
         }
 
-        // Explore all other neighbours
+        // Explore all neighbour nodes
         for (int i = 0; i < pointer.getChildren().size(); i++) {
             TrieNode neighbour = pointer.getChildren().get(i);
             explore(charStack, neighbour);
         }
 
-        // Delete the whitespace at the last character space
-        if (charStack.charAt(charStack.length() - 1) == CHAR_SPACE) {
+        // Delete the whitespace that is appended after the end node of a branch
+        if (pointer.isEndNode() && pointer.getChildrenSize() == 0) {
             charStack.deleteCharAt(charStack.length() - 1);
         }
 
-        // Delete the last character out of string
         if (charStack.length() > 0) {
             charStack.deleteCharAt(charStack.length() - 1);
         }

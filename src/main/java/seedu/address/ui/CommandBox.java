@@ -9,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
@@ -155,8 +156,10 @@ public class CommandBox extends UiPart<Region> {
         styleClass.add(ERROR_STYLE_CLASS);
     }
 
+    //@@author lekoook
     /**
-     * Testing code
+     * Invokes the methods to auto complete the command.
+     * @param textInput the text input from command box.
      */
     private void predictCmd(String textInput) {
         ArrayList<String> output = logic.getCmdPrediction(textInput);
@@ -164,12 +167,15 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Processes the prediction output from {@code CommandCompleter}
-     * @param input the list of predictions to display
-     * @param textInput the prefix to the predictions to concatenate with
+     * Processes the prediction output from {@code CommandCompleter}.
+     * @param input the list of predictions to display.
+     * @param textInput the prefix to the predictions to concatenate with.
      */
     private void handlePredictions(ArrayList<String> input, String textInput) {
-        if (input.size() == 1) {
+        if (input.size() == 0) {
+            logger.info(Messages.MESSAGE_INVALID_AUTOCOMPLETE_FORMAT);
+            raise(new NewResultAvailableEvent(Messages.MESSAGE_EMPTY_STRING));
+        } else if (input.size() == 1) {
             commandTextField.appendText(input.get(0));
         } else {
             StringBuilder output = new StringBuilder();
