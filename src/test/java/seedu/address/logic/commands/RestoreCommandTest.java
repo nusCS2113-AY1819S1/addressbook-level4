@@ -1,10 +1,8 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.TestCase.assertEquals;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
