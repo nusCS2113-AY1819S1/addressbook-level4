@@ -5,6 +5,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ImportCommandTest {
@@ -13,7 +16,14 @@ class ImportCommandTest {
 
     @Test
     public void execute_success() {
+        Path path = Paths.get("C:\\Users\\USER\\Desktop\\main\\build");
+        CommandResult result = new ImportCommand(path).execute(model, commandHistory);
+        assertEquals(ImportCommand.MESSAGE_SUCCESS, result.feedbackToUser);
+    }
+
+    @Test
+    public void execute_empty() {
         CommandResult result = new ImportCommand().execute(model, commandHistory);
-        assertEquals(ImportCommand.MESSAGE_UPDATE, result.feedbackToUser);
+        assertEquals(ImportCommand.MESSAGE_USAGE, result.feedbackToUser);
     }
 }
