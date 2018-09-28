@@ -1,4 +1,4 @@
-package seedu.address.model.item;
+package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Item in the stock list.
+ * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Item {
+public class Person {
 
     // Identity fields
     private final Name name;
@@ -27,7 +27,7 @@ public class Item {
     /**
      * Every field must be present and not null.
      */
-    public Item(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -61,22 +61,22 @@ public class Item {
     }
 
     /**
-     * Returns true if both items of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two items.
+     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSameItem(Item otherItem) {
-        if (otherItem == this) {
+    public boolean isSamePerson(Person otherPerson) {
+        if (otherPerson == this) {
             return true;
         }
 
-        return otherItem != null
-                && otherItem.getName().equals(getName())
-                && (otherItem.getPhone().equals(getPhone()) || otherItem.getEmail().equals(getEmail()));
+        return otherPerson != null
+                && otherPerson.getName().equals(getName())
+                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
     }
 
     /**
-     * Returns true if both items have the same identity and data fields.
-     * This defines a stronger notion of equality between two items.
+     * Returns true if both persons have the same identity and data fields.
+     * This defines a stronger notion of equality between two persons.
      */
     @Override
     public boolean equals(Object other) {
@@ -84,16 +84,16 @@ public class Item {
             return true;
         }
 
-        if (!(other instanceof Item)) {
+        if (!(other instanceof Person)) {
             return false;
         }
 
-        Item otherItem = (Item) other;
-        return otherItem.getName().equals(getName())
-                && otherItem.getPhone().equals(getPhone())
-                && otherItem.getEmail().equals(getEmail())
-                && otherItem.getAddress().equals(getAddress())
-                && otherItem.getTags().equals(getTags());
+        Person otherPerson = (Person) other;
+        return otherPerson.getName().equals(getName())
+                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getEmail().equals(getEmail())
+                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getTags().equals(getTags());
     }
 
     @Override

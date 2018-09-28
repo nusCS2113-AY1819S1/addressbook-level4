@@ -14,53 +14,53 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.ReadOnlyStockList;
+import seedu.address.model.ReadOnlyAddressBook;
 
 /**
- * A class to access StockList data stored as an xml file on the hard disk.
+ * A class to access AddressBook data stored as an xml file on the hard disk.
  */
-public class XmlStockListStorage implements StockListStorage {
+public class XmlAddressBookStorage implements AddressBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlStockListStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
 
     private final Path filePath;
     private final Path backupFilePath;
 
     /**
-     * Reused from https://github.com/se-edu/stocklist-level4 solutions
+     * Reused from https://github.com/se-edu/addressbook-level4 solutions
      * @param filePath
      */
-    public XmlStockListStorage(Path filePath) {
+    public XmlAddressBookStorage(Path filePath) {
         this.filePath = filePath;
         this.backupFilePath = Paths.get(filePath.toString() + ".backup");
     }
 
-    public Path getStockListFilePath() {
+    public Path getAddressBookFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyStockList> readStockList() throws DataConversionException, IOException {
-        return readStockList(filePath);
+    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+        return readAddressBook(filePath);
     }
 
     /**
-     * Similar to {@link #readStockList()}
+     * Similar to {@link #readAddressBook()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyStockList> readStockList(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
-            logger.info("StockList file " + filePath + " not found");
+            logger.info("AddressBook file " + filePath + " not found");
             return Optional.empty();
         }
 
-        XmlSerializableStockList xmlStockList = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableAddressBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
         try {
-            return Optional.of(xmlStockList.toModelType());
+            return Optional.of(xmlAddressBook.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -68,24 +68,24 @@ public class XmlStockListStorage implements StockListStorage {
     }
 
     @Override
-    public void saveStockList(ReadOnlyStockList stockList) throws IOException {
-        saveStockList(stockList, filePath);
+    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveAddressBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveStockList(ReadOnlyStockList)}
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveStockList(ReadOnlyStockList stockList, Path filePath) throws IOException {
-        requireNonNull(stockList);
+    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+        requireNonNull(addressBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableStockList(stockList));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(addressBook));
     }
 
     @Override
-    public void backupStockList(ReadOnlyStockList stockList) throws IOException {
-        saveStockList(stockList, backupFilePath);
+    public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveAddressBook(addressBook, backupFilePath);
     }
 }

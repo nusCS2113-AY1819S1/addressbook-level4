@@ -8,53 +8,53 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.StockList;
-import seedu.address.model.ReadOnlyStockList;
-import seedu.address.model.item.Item;
+import seedu.address.model.AddressBook;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Person;
 
 /**
- * An Immutable StockList that is serializable to XML format
+ * An Immutable AddressBook that is serializable to XML format
  */
-@XmlRootElement(name = "stocklist")
-public class XmlSerializableStockList {
+@XmlRootElement(name = "addressbook")
+public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_ITEM = "Items list contains duplicate item(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     @XmlElement
-    private List<XmlAdaptedItem> items;
+    private List<XmlAdaptedPerson> persons;
 
     /**
-     * Creates an empty XmlSerializableStockList.
+     * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableStockList() {
-        items = new ArrayList<>();
+    public XmlSerializableAddressBook() {
+        persons = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableStockList(ReadOnlyStockList src) {
+    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        items.addAll(src.getItemList().stream().map(XmlAdaptedItem::new).collect(Collectors.toList()));
+        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this stocklist into the model's {@code StockList} object.
+     * Converts this addressbook into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedItem}.
+     * {@code XmlAdaptedPerson}.
      */
-    public StockList toModelType() throws IllegalValueException {
-        StockList stockList = new StockList();
-        for (XmlAdaptedItem p : items) {
-            Item item = p.toModelType();
-            if (stockList.hasItem(item)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_ITEM);
+    public AddressBook toModelType() throws IllegalValueException {
+        AddressBook addressBook = new AddressBook();
+        for (XmlAdaptedPerson p : persons) {
+            Person person = p.toModelType();
+            if (addressBook.hasPerson(person)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            stockList.addItem(item);
+            addressBook.addPerson(person);
         }
-        return stockList;
+        return addressBook;
     }
 
     @Override
@@ -63,9 +63,9 @@ public class XmlSerializableStockList {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableStockList)) {
+        if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return items.equals(((XmlSerializableStockList) other).items);
+        return persons.equals(((XmlSerializableAddressBook) other).persons);
     }
 }

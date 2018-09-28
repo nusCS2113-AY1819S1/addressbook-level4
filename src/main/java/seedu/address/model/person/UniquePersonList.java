@@ -1,4 +1,4 @@
-package seedu.address.model.item;
+package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -8,110 +8,110 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.item.exceptions.DuplicateItemException;
-import seedu.address.model.item.exceptions.ItemNotFoundException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * A list of items that enforces uniqueness between its elements and does not allow nulls.
- * A item is considered unique by comparing using {@code Item#isSameItem(Item)}. As such, adding and updating of
- * items uses Item#isSameItem(Item) for equality so as to ensure that the item being added or updated is
- * unique in terms of identity in the UniqueItemList. However, the removal of a item uses Item#equals(Object) so
- * as to ensure that the item with exactly the same fields will be removed.
+ * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
+ * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
+ * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
+ * as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Item#isSameItem(Item)
+ * @see Person#isSamePerson(Person)
  */
-public class UniqueItemList implements Iterable<Item> {
+public class UniquePersonList implements Iterable<Person> {
 
-    private final ObservableList<Item> internalList = FXCollections.observableArrayList();
+    private final ObservableList<Person> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent item as the given argument.
+     * Returns true if the list contains an equivalent person as the given argument.
      */
-    public boolean contains(Item toCheck) {
+    public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSameItem);
+        return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
     /**
-     * Adds a item to the list.
-     * The item must not already exist in the list.
+     * Adds a person to the list.
+     * The person must not already exist in the list.
      */
-    public void add(Item toAdd) {
+    public void add(Person toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateItemException();
+            throw new DuplicatePersonException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Replaces the item {@code target} in the list with {@code editedItem}.
+     * Replaces the person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the list.
-     * The item identity of {@code editedItem} must not be the same as another existing item in the list.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
-    public void setItem(Item target, Item editedItem) {
-        requireAllNonNull(target, editedItem);
+    public void setPerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new ItemNotFoundException();
+            throw new PersonNotFoundException();
         }
 
-        if (!target.isSameItem(editedItem) && contains(editedItem)) {
-            throw new DuplicateItemException();
+        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
+            throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedItem);
+        internalList.set(index, editedPerson);
     }
 
     /**
-     * Removes the equivalent item from the list.
-     * The item must exist in the list.
+     * Removes the equivalent person from the list.
+     * The person must exist in the list.
      */
-    public void remove(Item toRemove) {
+    public void remove(Person toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new ItemNotFoundException();
+            throw new PersonNotFoundException();
         }
     }
 
-    public void setItems(UniqueItemList replacement) {
+    public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code items}.
-     * {@code items} must not contain duplicate items.
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
      */
-    public void setItems(List<Item> items) {
-        requireAllNonNull(items);
-        if (!itemsAreUnique(items)) {
-            throw new DuplicateItemException();
+    public void setPersons(List<Person> persons) {
+        requireAllNonNull(persons);
+        if (!personsAreUnique(persons)) {
+            throw new DuplicatePersonException();
         }
 
-        internalList.setAll(items);
+        internalList.setAll(persons);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
-    public ObservableList<Item> asUnmodifiableObservableList() {
+    public ObservableList<Person> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
     @Override
-    public Iterator<Item> iterator() {
+    public Iterator<Person> iterator() {
         return internalList.iterator();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniqueItemList // instanceof handles nulls
-                        && internalList.equals(((UniqueItemList) other).internalList));
+                || (other instanceof UniquePersonList // instanceof handles nulls
+                        && internalList.equals(((UniquePersonList) other).internalList));
     }
 
     @Override
@@ -120,12 +120,12 @@ public class UniqueItemList implements Iterable<Item> {
     }
 
     /**
-     * Returns true if {@code items} contains only unique items.
+     * Returns true if {@code persons} contains only unique persons.
      */
-    private boolean itemsAreUnique(List<Item> items) {
-        for (int i = 0; i < items.size() - 1; i++) {
-            for (int j = i + 1; j < items.size(); j++) {
-                if (items.get(i).isSameItem(items.get(j))) {
+    private boolean personsAreUnique(List<Person> persons) {
+        for (int i = 0; i < persons.size() - 1; i++) {
+            for (int j = i + 1; j < persons.size(); j++) {
+                if (persons.get(i).isSamePerson(persons.get(j))) {
                     return false;
                 }
             }

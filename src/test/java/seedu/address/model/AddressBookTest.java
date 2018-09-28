@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalItems.ALICE;
-import static seedu.address.testutil.TypicalItems.getTypicalStockList;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -19,91 +19,91 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.item.Item;
-import seedu.address.model.item.exceptions.DuplicateItemException;
-import seedu.address.testutil.ItemBuilder;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.PersonBuilder;
 
-public class StockListTest {
+public class AddressBookTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final StockList stockList = new StockList();
+    private final AddressBook addressBook = new AddressBook();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), stockList.getItemList());
+        assertEquals(Collections.emptyList(), addressBook.getPersonList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        stockList.resetData(null);
+        addressBook.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyStockList_replacesData() {
-        StockList newData = getTypicalStockList();
-        stockList.resetData(newData);
-        assertEquals(newData, stockList);
+    public void resetData_withValidReadOnlyAddressBook_replacesData() {
+        AddressBook newData = getTypicalAddressBook();
+        addressBook.resetData(newData);
+        assertEquals(newData, addressBook);
     }
 
     @Test
-    public void resetData_withDuplicateItems_throwsDuplicateItemException() {
-        // Two items with the same identity fields
-        Item editedAlice = new ItemBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+        // Two persons with the same identity fields
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Item> newItems = Arrays.asList(ALICE, editedAlice);
-        StockListStub newData = new StockListStub(newItems);
+        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        AddressBookStub newData = new AddressBookStub(newPersons);
 
-        thrown.expect(DuplicateItemException.class);
-        stockList.resetData(newData);
+        thrown.expect(DuplicatePersonException.class);
+        addressBook.resetData(newData);
     }
 
     @Test
-    public void hasItem_nullItem_throwsNullPointerException() {
+    public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        stockList.hasItem(null);
+        addressBook.hasPerson(null);
     }
 
     @Test
-    public void hasItem_itemNotInStockList_returnsFalse() {
-        assertFalse(stockList.hasItem(ALICE));
+    public void hasPerson_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasItem_itemInStockList_returnsTrue() {
-        stockList.addItem(ALICE);
-        assertTrue(stockList.hasItem(ALICE));
+    public void hasPerson_personInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasItem_itemWithSameIdentityFieldsInStockList_returnsTrue() {
-        stockList.addItem(ALICE);
-        Item editedAlice = new ItemBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(stockList.hasItem(editedAlice));
+        assertTrue(addressBook.hasPerson(editedAlice));
     }
 
     @Test
-    public void getItemList_modifyList_throwsUnsupportedOperationException() {
+    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        stockList.getItemList().remove(0);
+        addressBook.getPersonList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyStockList whose items list can violate interface constraints.
+     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
-    private static class StockListStub implements ReadOnlyStockList {
-        private final ObservableList<Item> items = FXCollections.observableArrayList();
+    private static class AddressBookStub implements ReadOnlyAddressBook {
+        private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        StockListStub(Collection<Item> items) {
-            this.items.setAll(items);
+        AddressBookStub(Collection<Person> persons) {
+            this.persons.setAll(persons);
         }
 
         @Override
-        public ObservableList<Item> getItemList() {
-            return items;
+        public ObservableList<Person> getPersonList() {
+            return persons;
         }
     }
 

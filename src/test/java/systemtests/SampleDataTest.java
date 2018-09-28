@@ -8,17 +8,17 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import seedu.address.model.StockList;
-import seedu.address.model.item.Item;
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
-public class SampleDataTest extends StockListSystemTest {
+public class SampleDataTest extends AddressBookSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected StockList getInitialData() {
+    protected AddressBook getInitialData() {
         return null;
     }
 
@@ -44,8 +44,8 @@ public class SampleDataTest extends StockListSystemTest {
     }
 
     @Test
-    public void stockList_dataFileDoesNotExist_loadSampleData() {
-        Item[] expectedList = SampleDataUtil.getSampleItems();
-        assertListMatching(getItemListPanel(), expectedList);
+    public void addressBook_dataFileDoesNotExist_loadSampleData() {
+        Person[] expectedList = SampleDataUtil.getSamplePersons();
+        assertListMatching(getPersonListPanel(), expectedList);
     }
 }
