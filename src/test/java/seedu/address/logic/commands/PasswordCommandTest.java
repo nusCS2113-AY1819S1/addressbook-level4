@@ -31,11 +31,13 @@ public class PasswordCommandTest {
         writer.write(toWrite);
         writer.close();
 
-        FileEncryptor feEncrypt = new FileEncryptor(password, tempFileName);
+        FileEncryptor feEncrypt = new FileEncryptor(tempFileName);
+        feEncrypt.process(password);
         assertEquals("File encrypted!", feEncrypt.getMessage());
 
 
-        FileEncryptor feDecrypt = new FileEncryptor(password, tempFileName);
+        FileEncryptor feDecrypt = new FileEncryptor(tempFileName);
+        feDecrypt.process(password);
         assertEquals("File decrypted!", feDecrypt.getMessage());
 
 

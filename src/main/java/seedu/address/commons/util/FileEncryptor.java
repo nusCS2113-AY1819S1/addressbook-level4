@@ -22,28 +22,43 @@ import javax.crypto.spec.PBEParameterSpec;
  */
 public class FileEncryptor {
 
+    public static final String MESSAGE_ADDRESS_BOOK_LOCKED = "Address book is locked, "
+            + "please key in password";
+    public static final String MESSAGE_ADDRESS_BOOK_REFRESHED = "Address book needs to be restarted";
+
     private static String extension = ".encrypted";
     private static String filename = "";
     private static String message = "";
 
+    private static boolean isExited = true;
+
     private static final byte[] salt = {
-        (byte) 0x43, (byte) 0x76, (byte) 0x95, (byte) 0xc7,
-        (byte) 0x5b, (byte) 0xd7, (byte) 0x45, (byte) 0x17
+            (byte) 0x43, (byte) 0x76, (byte) 0x95, (byte) 0xc7,
+            (byte) 0x5b, (byte) 0xd7, (byte) 0x45, (byte) 0x17
     };
+
+    public FileEncryptor (String inputFileName) {
+        this.filename = inputFileName;
+    }
+
 
     /**
      * Encrypts or decrypts file with password
      * will also check if file is present first
      * @param password is obtained from PasswordCommand class
      */
-    public FileEncryptor (String password, String inputFileName) {
-        this.filename = inputFileName;
+    public void process (String password) {
 
         File f = new File(filename);
         File fEncrypted = new File(filename + extension);
+        isExited = false;
 
         try {
-            if (f.exists() && !f.isDirectory()) {
+            if (fEncrypted.exists() && !fEncrypted.isDirectory() && f.exists() && !f.isDirectory()) {
+                // TODO: Locks the user from other commands until file has been decrypted
+                message = "File not decrypted, existing encrypted file already exist\n"
+                        + "Please delete the newly created XML file";
+            } else if (f.exists() && !f.isDirectory()) {
                 encryptFile(filename, password);
                 message = "File encrypted!";
                 // TODO: Send a request to refresh the addressbook
@@ -61,6 +76,27 @@ public class FileEncryptor {
         }
     }
 
+    /**
+     * Checks the current status of the encryption
+     */
+    public Boolean isLocked () {
+        File f = new File(filename);
+        File fEncrypted = new File(filename + extension);
+
+        if (fEncrypted.exists() && !fEncrypted.isDirectory()) {
+            return true;
+        } else if (f.exists() && !f.isDirectory()) {
+            return false;
+        }
+        return false;
+    }
+
+    /**
+     * Checks the to see if the addressbook was exited after processing
+     */
+    public Boolean isExitedStatus () {
+        return isExited;
+    }
 
     /**
      * Makes cipher using PBEWithMD5AndDES
