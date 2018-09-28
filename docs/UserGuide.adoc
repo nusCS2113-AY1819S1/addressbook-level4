@@ -239,6 +239,24 @@ There is no need to save manually.
 Encrypts the data file with your password. +
 Format: `password YOURPASSWORD`
 
+=== Text prediction
+
+The command box is able to do smart prediction on the current text in the box. +
+This is similar to text prediction on shell programs and can be invoked by pressing the `Tab` key on the keyboard. +
+If there are more than one prediction, the predictions will be listed in results window. +
+
+For example, typing `c` in the box and pressing `Tab` will auto complete to the `clear` command. +
+Typing `e` in the box and pressing `Tab` will list `edit` and `exit` in results window. +
+
+In general, text prediction works on all commands. +
+In particular, text prediction also works on the following attributes of a contact: +
+
+* `name` (flag: `n/`) +
+
+This feature is supported by the `find` command. When using `find`, first input the attribute's flag, followed by the argument, then pressing `Tab` will invoke this feature. +
+
+For example in an address book consisting a contact with the name `Alex Yeoh`, typing `find n/ A` and pressing `Tab` will auto complete to `find n/ Alex Yeoh`. +
+If no flags are given, be default, names are assumed to be predicted.
 
 == FAQ
 
