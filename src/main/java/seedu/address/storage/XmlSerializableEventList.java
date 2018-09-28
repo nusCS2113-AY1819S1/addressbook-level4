@@ -40,7 +40,7 @@ public class XmlSerializableEventList {
     }
 
     /**
-     * Converts this addressbook into the model's {@code AddressBook} object.
+     * Converts this XML event list into the model's {@code EventList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson}.
@@ -49,12 +49,12 @@ public class XmlSerializableEventList {
         EventList eventList = new EventList();
         for (XmlAdaptedEvent e : events) {
             Event event = e.toModelType();
-            if (eventList.hasPerson(event)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            if (eventList.hasEvent(event)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_EVENT);
             }
-            addressBook.addPerson(person);
+            eventList.addEvent(event);
         }
-        return addressBook;
+        return eventList;
     }
 
     @Override
@@ -63,9 +63,9 @@ public class XmlSerializableEventList {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableEventList)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return events.equals(((XmlSerializableEventList) other).events);
     }
 }

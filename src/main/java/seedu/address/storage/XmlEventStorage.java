@@ -28,7 +28,7 @@ public class XmlEventStorage implements EventStorage {
         this.filePath = filePath;
     }
 
-    public Path getEventFilePath() {
+    public Path getEventListFilePath() {
         return filePath;
     }
 
@@ -42,7 +42,7 @@ public class XmlEventStorage implements EventStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyEventList> readOnlyEventList(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyEventList> readEventList(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
 
@@ -51,7 +51,7 @@ public class XmlEventStorage implements EventStorage {
             return Optional.empty();
         }
 
-        XmlSerializableAddressBook xmlEventList = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableEventList xmlEventList = XmlFileStorage.loadEventDataFromSaveFile(filePath);
         try {
             return Optional.of(xmlEventList.toModelType());
         } catch (IllegalValueException ive) {
@@ -69,13 +69,12 @@ public class XmlEventStorage implements EventStorage {
      * Similar to {@link #saveEventList(ReadOnlyEventList)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyEventList eventList, Path filePath) throws IOException {
+    public void saveEventList(ReadOnlyEventList eventList, Path filePath) throws IOException {
         requireNonNull(eventList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableEventList(eventList));
     }
-
 }
 
