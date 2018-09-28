@@ -10,7 +10,6 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.XmlAddressBookStorage;
@@ -21,8 +20,6 @@ import seedu.address.storage.XmlAddressBookStorage;
  * Message will be displayed on CommandResult
  */
 public class PasswordCommand extends Command {
-    private static final Logger logger = LogsCenter.getLogger(PasswordCommand.class);
-
     public static final String COMMAND_WORD = "password";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Hashes file using password.\n"
@@ -30,6 +27,8 @@ public class PasswordCommand extends Command {
             + "Example: " + COMMAND_WORD + " myPassword";
 
     // public static final String MESSAGE_SUCCESS = "Command executed";
+
+    private static final Logger logger = LogsCenter.getLogger(PasswordCommand.class);
     private String message;
 
     /**
