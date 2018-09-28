@@ -45,9 +45,11 @@ public class AddCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
+
     public AddCommand(Item item) {
         requireNonNull(item);
         toAdd = item;
+
     }
 
     @Override
