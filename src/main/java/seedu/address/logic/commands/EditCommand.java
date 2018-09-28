@@ -1,19 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -22,11 +21,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Address;
-import seedu.address.model.item.Email;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,12 +94,11 @@ public class EditCommand extends Command {
         assert itemToEdit != null;
 
         Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
-        Phone updatedPhone = editItemDescriptor.getPhone().orElse(itemToEdit.getPhone());
-        Email updatedEmail = editItemDescriptor.getEmail().orElse(itemToEdit.getEmail());
-        Address updatedAddress = editItemDescriptor.getAddress().orElse(itemToEdit.getAddress());
+        Integer updatedQuantity = editItemDescriptor.getQuantity().orElse(itemToEdit.getQuantity());
+        Integer updatedMinQuantity = editItemDescriptor.getMinQuantity().orElse(itemToEdit.getMinQuantity());
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
 
-        return new Item(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedTags);
     }
 
     @Override
@@ -130,9 +125,9 @@ public class EditCommand extends Command {
      */
     public static class EditItemDescriptor {
         private Name name;
-        private Phone phone;
-        private Email email;
-        private Address address;
+        private Integer quantity;
+        private Integer minQuantity;
+        private List<Integer> status;
         private Set<Tag> tags;
 
         public EditItemDescriptor() {}
@@ -143,9 +138,9 @@ public class EditCommand extends Command {
          */
         public EditItemDescriptor(EditItemDescriptor toCopy) {
             setName(toCopy.name);
-            setPhone(toCopy.phone);
-            setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setQuantity(toCopy.quantity);
+            setMinQuantity(toCopy.minQuantity);
+            setStatus(toCopy.status);
             setTags(toCopy.tags);
         }
 
@@ -153,7 +148,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, quantity, minQuantity, tags);
         }
 
         public void setName(Name name) {
@@ -164,28 +159,28 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setPhone(Phone phone) {
-            this.phone = phone;
+        public void setQuantity(Integer quantity) {
+            this.quantity = quantity;
         }
 
-        public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+        public Optional<Integer> getQuantity() {
+            return Optional.ofNullable(quantity);
         }
 
-        public void setEmail(Email email) {
-            this.email = email;
+        public void setMinQuantity(Integer minQuantity) {
+            this.minQuantity = minQuantity;
         }
 
-        public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+        public Optional<Integer> getMinQuantity() {
+            return Optional.ofNullable(minQuantity);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setStatus(List<Integer> status) {
+            this.status = (status !=  null) ? new ArrayList<>(status) : null;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<List<Integer>> getStatus() {
+            return (status != null) ? Optional.of(Collections.unmodifiableList(status)) : Optional.empty();
         }
 
         /**
@@ -221,9 +216,9 @@ public class EditCommand extends Command {
             EditItemDescriptor e = (EditItemDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getQuantity().equals(e.getQuantity())
+                    && getMinQuantity().equals(e.getMinQuantity())
+                    && getStatus().equals(e.getStatus())
                     && getTags().equals(e.getTags());
         }
     }

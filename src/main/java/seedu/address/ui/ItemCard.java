@@ -5,14 +5,14 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.item.Item;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Item}.
  */
-public class PersonCard extends UiPart<Region> {
+public class ItemCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ItemListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -22,7 +22,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Person person;
+    public final Item item;
 
     @FXML
     private HBox cardPane;
@@ -31,23 +31,29 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label quantity;
     @FXML
-    private Label address;
+    private Label minQuantity;
     @FXML
-    private Label email;
+    private Label statusReady;
+    @FXML
+    private Label statusOnLoan;
+    @FXML
+    private Label statusFaulty;
     @FXML
     private FlowPane tags;
 
-    public PersonCard(Person person, int displayedIndex) {
+    public ItemCard(Item item, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.item = item;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        name.setText(item.getName().fullName);
+        quantity.setText(item.getQuantity()+"");
+        minQuantity.setText(item.getMinQuantity()+"");
+        statusReady.setText(item.getStatus().get(0)+"");
+        statusOnLoan.setText(item.getStatus().get(1)+"");
+        statusFaulty.setText(item.getStatus().get(2)+"");
+        item.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -58,13 +64,13 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof ItemCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        ItemCard card = (ItemCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && item.equals(card.item);
     }
 }
