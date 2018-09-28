@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.backup.BackupList;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Kpi;
@@ -140,6 +141,14 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code String Snapshots} into a {@code Snapshots}.
+     * @throws ParseException if the argument is invalid (not "list").
+     */
+    public static BackupList parseBackup(String backupList) {
+        requireNonNull(backupList);
+        return new BackupList("Parser works for now");
+    }
+    /**
      * Parses a {@code String position} into an {@code Position}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -166,5 +175,4 @@ public class ParserUtil {
         }
         return new Kpi(trimmedScore);
     }
-
 }
