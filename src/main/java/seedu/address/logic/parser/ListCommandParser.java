@@ -30,11 +30,17 @@ public class ListCommandParser implements Parser<ListCommand> {
         }
         String dateIntervalString = argMultimap.getValue(PREFIX_DATE).get();
         String[] argList = splitByWhitespace(dateIntervalString);
-        if (argList.length != ListCommand.ARG_COUNT) {
+        Date startDate;
+        Date endDate;
+        if (argList.length == ListCommand.DUO_ARG_MODE_COUNT) {
+            startDate = ParserUtil.parseDate(argList[0]);
+            endDate = ParserUtil.parseDate(argList[1]);
+        } else if (argList.length == ListCommand.SINGLE_ARG_MODE_COUNT) {
+            startDate = ParserUtil.parseDate(argList[0]);
+            endDate = ParserUtil.parseDate(argList[0]);
+        } else {
             throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE)));
         }
-        Date startDate = ParserUtil.parseDate(argList[0]);
-        Date endDate = ParserUtil.parseDate(argList[1]);
         if (!isDateOrderValid(startDate, endDate)) {
             throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE)));
         }

@@ -19,7 +19,9 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final int ARG_COUNT = 2;
+    public static final int DUO_ARG_MODE_COUNT = 2;
+    public static final int SINGLE_ARG_MODE_COUNT = 1;
+
 
     public static final String MESSAGE_USAGE = "Lists all records within a specific time period. "
             + "Parameters: "
