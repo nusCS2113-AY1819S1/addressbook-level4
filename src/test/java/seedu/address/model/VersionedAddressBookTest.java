@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalItems.AMY;
-import static seedu.address.testutil.TypicalItems.BOB;
-import static seedu.address.testutil.TypicalItems.CARL;
+import static seedu.address.testutil.TypicalPersons.AMY;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,285 +14,285 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.StockListBuilder;
+import seedu.address.testutil.AddressBookBuilder;
 
-public class VersionedStockListTest {
+public class VersionedAddressBookTest {
 
-    private final ReadOnlyStockList stockListWithAmy = new StockListBuilder().withItem(AMY).build();
-    private final ReadOnlyStockList stockListWithBob = new StockListBuilder().withItem(BOB).build();
-    private final ReadOnlyStockList stockListWithCarl = new StockListBuilder().withItem(CARL).build();
-    private final ReadOnlyStockList emptyStockList = new StockListBuilder().build();
+    private final ReadOnlyAddressBook addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
+    private final ReadOnlyAddressBook addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
+    private final ReadOnlyAddressBook addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
+    private final ReadOnlyAddressBook emptyAddressBook = new AddressBookBuilder().build();
 
     @Test
-    public void commit_singleStockList_noStatesRemovedCurrentStateSaved() {
-        VersionedStockList versionedStockList = prepareStockListList(emptyStockList);
+    public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
 
-        versionedStockList.commit();
-        assertStockListListStatus(versionedStockList,
-                Collections.singletonList(emptyStockList),
-                emptyStockList,
+        versionedAddressBook.commit();
+        assertAddressBookListStatus(versionedAddressBook,
+                Collections.singletonList(emptyAddressBook),
+                emptyAddressBook,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleStockListPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
+    public void commit_multipleAddressBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
 
-        versionedStockList.commit();
-        assertStockListListStatus(versionedStockList,
-                Arrays.asList(emptyStockList, stockListWithAmy, stockListWithBob),
-                stockListWithBob,
+        versionedAddressBook.commit();
+        assertAddressBookListStatus(versionedAddressBook,
+                Arrays.asList(emptyAddressBook, addressBookWithAmy, addressBookWithBob),
+                addressBookWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleStockListPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 2);
+    public void commit_multipleAddressBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
 
-        versionedStockList.commit();
-        assertStockListListStatus(versionedStockList,
-                Collections.singletonList(emptyStockList),
-                emptyStockList,
+        versionedAddressBook.commit();
+        assertAddressBookListStatus(versionedAddressBook,
+                Collections.singletonList(emptyAddressBook),
+                emptyAddressBook,
                 Collections.emptyList());
     }
 
     @Test
-    public void canUndo_multipleStockListPointerAtEndOfStateList_returnsTrue() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
+    public void canUndo_multipleAddressBookPointerAtEndOfStateList_returnsTrue() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
 
-        assertTrue(versionedStockList.canUndo());
+        assertTrue(versionedAddressBook.canUndo());
     }
 
     @Test
-    public void canUndo_multipleStockListPointerAtStartOfStateList_returnsTrue() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 1);
+    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
 
-        assertTrue(versionedStockList.canUndo());
+        assertTrue(versionedAddressBook.canUndo());
     }
 
     @Test
-    public void canUndo_singleStockList_returnsFalse() {
-        VersionedStockList versionedStockList = prepareStockListList(emptyStockList);
+    public void canUndo_singleAddressBook_returnsFalse() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
 
-        assertFalse(versionedStockList.canUndo());
+        assertFalse(versionedAddressBook.canUndo());
     }
 
     @Test
-    public void canUndo_multipleStockListPointerAtStartOfStateList_returnsFalse() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 2);
+    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsFalse() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
 
-        assertFalse(versionedStockList.canUndo());
+        assertFalse(versionedAddressBook.canUndo());
     }
 
     @Test
-    public void canRedo_multipleStockListPointerNotAtEndOfStateList_returnsTrue() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 1);
+    public void canRedo_multipleAddressBookPointerNotAtEndOfStateList_returnsTrue() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
 
-        assertTrue(versionedStockList.canRedo());
+        assertTrue(versionedAddressBook.canRedo());
     }
 
     @Test
-    public void canRedo_multipleStockListPointerAtStartOfStateList_returnsTrue() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 2);
+    public void canRedo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
 
-        assertTrue(versionedStockList.canRedo());
+        assertTrue(versionedAddressBook.canRedo());
     }
 
     @Test
-    public void canRedo_singleStockList_returnsFalse() {
-        VersionedStockList versionedStockList = prepareStockListList(emptyStockList);
+    public void canRedo_singleAddressBook_returnsFalse() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
 
-        assertFalse(versionedStockList.canRedo());
+        assertFalse(versionedAddressBook.canRedo());
     }
 
     @Test
-    public void canRedo_multipleStockListPointerAtEndOfStateList_returnsFalse() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
+    public void canRedo_multipleAddressBookPointerAtEndOfStateList_returnsFalse() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
 
-        assertFalse(versionedStockList.canRedo());
+        assertFalse(versionedAddressBook.canRedo());
     }
 
     @Test
-    public void undo_multipleStockListPointerAtEndOfStateList_success() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
+    public void undo_multipleAddressBookPointerAtEndOfStateList_success() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
 
-        versionedStockList.undo();
-        assertStockListListStatus(versionedStockList,
-                Collections.singletonList(emptyStockList),
-                stockListWithAmy,
-                Collections.singletonList(stockListWithBob));
+        versionedAddressBook.undo();
+        assertAddressBookListStatus(versionedAddressBook,
+                Collections.singletonList(emptyAddressBook),
+                addressBookWithAmy,
+                Collections.singletonList(addressBookWithBob));
     }
 
     @Test
-    public void undo_multipleStockListPointerNotAtStartOfStateList_success() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 1);
+    public void undo_multipleAddressBookPointerNotAtStartOfStateList_success() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
 
-        versionedStockList.undo();
-        assertStockListListStatus(versionedStockList,
+        versionedAddressBook.undo();
+        assertAddressBookListStatus(versionedAddressBook,
                 Collections.emptyList(),
-                emptyStockList,
-                Arrays.asList(stockListWithAmy, stockListWithBob));
+                emptyAddressBook,
+                Arrays.asList(addressBookWithAmy, addressBookWithBob));
     }
 
     @Test
-    public void undo_singleStockList_throwsNoUndoableStateException() {
-        VersionedStockList versionedStockList = prepareStockListList(emptyStockList);
+    public void undo_singleAddressBook_throwsNoUndoableStateException() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
 
-        assertThrows(VersionedStockList.NoUndoableStateException.class, versionedStockList::undo);
+        assertThrows(VersionedAddressBook.NoUndoableStateException.class, versionedAddressBook::undo);
     }
 
     @Test
-    public void undo_multipleStockListPointerAtStartOfStateList_throwsNoUndoableStateException() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 2);
+    public void undo_multipleAddressBookPointerAtStartOfStateList_throwsNoUndoableStateException() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
 
-        assertThrows(VersionedStockList.NoUndoableStateException.class, versionedStockList::undo);
+        assertThrows(VersionedAddressBook.NoUndoableStateException.class, versionedAddressBook::undo);
     }
 
     @Test
-    public void redo_multipleStockListPointerNotAtEndOfStateList_success() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 1);
+    public void redo_multipleAddressBookPointerNotAtEndOfStateList_success() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
 
-        versionedStockList.redo();
-        assertStockListListStatus(versionedStockList,
-                Arrays.asList(emptyStockList, stockListWithAmy),
-                stockListWithBob,
+        versionedAddressBook.redo();
+        assertAddressBookListStatus(versionedAddressBook,
+                Arrays.asList(emptyAddressBook, addressBookWithAmy),
+                addressBookWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void redo_multipleStockListPointerAtStartOfStateList_success() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 2);
+    public void redo_multipleAddressBookPointerAtStartOfStateList_success() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
 
-        versionedStockList.redo();
-        assertStockListListStatus(versionedStockList,
-                Collections.singletonList(emptyStockList),
-                stockListWithAmy,
-                Collections.singletonList(stockListWithBob));
+        versionedAddressBook.redo();
+        assertAddressBookListStatus(versionedAddressBook,
+                Collections.singletonList(emptyAddressBook),
+                addressBookWithAmy,
+                Collections.singletonList(addressBookWithBob));
     }
 
     @Test
-    public void redo_singleStockList_throwsNoRedoableStateException() {
-        VersionedStockList versionedStockList = prepareStockListList(emptyStockList);
+    public void redo_singleAddressBook_throwsNoRedoableStateException() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
 
-        assertThrows(VersionedStockList.NoRedoableStateException.class, versionedStockList::redo);
+        assertThrows(VersionedAddressBook.NoRedoableStateException.class, versionedAddressBook::redo);
     }
 
     @Test
-    public void redo_multipleStockListPointerAtEndOfStateList_throwsNoRedoableStateException() {
-        VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, stockListWithAmy, stockListWithBob);
+    public void redo_multipleAddressBookPointerAtEndOfStateList_throwsNoRedoableStateException() {
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(
+                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
 
-        assertThrows(VersionedStockList.NoRedoableStateException.class, versionedStockList::redo);
+        assertThrows(VersionedAddressBook.NoRedoableStateException.class, versionedAddressBook::redo);
     }
 
     @Test
     public void equals() {
-        VersionedStockList versionedStockList = prepareStockListList(stockListWithAmy, stockListWithBob);
+        VersionedAddressBook versionedAddressBook = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
 
         // same values -> returns true
-        VersionedStockList copy = prepareStockListList(stockListWithAmy, stockListWithBob);
-        assertTrue(versionedStockList.equals(copy));
+        VersionedAddressBook copy = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
+        assertTrue(versionedAddressBook.equals(copy));
 
         // same object -> returns true
-        assertTrue(versionedStockList.equals(versionedStockList));
+        assertTrue(versionedAddressBook.equals(versionedAddressBook));
 
         // null -> returns false
-        assertFalse(versionedStockList.equals(null));
+        assertFalse(versionedAddressBook.equals(null));
 
         // different types -> returns false
-        assertFalse(versionedStockList.equals(1));
+        assertFalse(versionedAddressBook.equals(1));
 
         // different state list -> returns false
-        VersionedStockList differentStockListList = prepareStockListList(stockListWithBob, stockListWithCarl);
-        assertFalse(versionedStockList.equals(differentStockListList));
+        VersionedAddressBook differentAddressBookList = prepareAddressBookList(addressBookWithBob, addressBookWithCarl);
+        assertFalse(versionedAddressBook.equals(differentAddressBookList));
 
         // different current pointer index -> returns false
-        VersionedStockList differentCurrentStatePointer = prepareStockListList(
-                stockListWithAmy, stockListWithBob);
-        shiftCurrentStatePointerLeftwards(versionedStockList, 1);
-        assertFalse(versionedStockList.equals(differentCurrentStatePointer));
+        VersionedAddressBook differentCurrentStatePointer = prepareAddressBookList(
+                addressBookWithAmy, addressBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+        assertFalse(versionedAddressBook.equals(differentCurrentStatePointer));
     }
 
     /**
-     * Asserts that {@code versionedStockList} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedStockList#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedStockList#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * Asserts that {@code versionedAddressBook} is currently pointing at {@code expectedCurrentState},
+     * states before {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
+     * and states after {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
      */
-    private void assertStockListListStatus(VersionedStockList versionedStockList,
-                                             List<ReadOnlyStockList> expectedStatesBeforePointer,
-                                             ReadOnlyStockList expectedCurrentState,
-                                             List<ReadOnlyStockList> expectedStatesAfterPointer) {
+    private void assertAddressBookListStatus(VersionedAddressBook versionedAddressBook,
+                                             List<ReadOnlyAddressBook> expectedStatesBeforePointer,
+                                             ReadOnlyAddressBook expectedCurrentState,
+                                             List<ReadOnlyAddressBook> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
-        assertEquals(new StockList(versionedStockList), expectedCurrentState);
+        assertEquals(new AddressBook(versionedAddressBook), expectedCurrentState);
 
         // shift pointer to start of state list
-        while (versionedStockList.canUndo()) {
-            versionedStockList.undo();
+        while (versionedAddressBook.canUndo()) {
+            versionedAddressBook.undo();
         }
 
         // check states before pointer are correct
-        for (ReadOnlyStockList expectedStockList : expectedStatesBeforePointer) {
-            assertEquals(expectedStockList, new StockList(versionedStockList));
-            versionedStockList.redo();
+        for (ReadOnlyAddressBook expectedAddressBook : expectedStatesBeforePointer) {
+            assertEquals(expectedAddressBook, new AddressBook(versionedAddressBook));
+            versionedAddressBook.redo();
         }
 
         // check states after pointer are correct
-        for (ReadOnlyStockList expectedStockList : expectedStatesAfterPointer) {
-            versionedStockList.redo();
-            assertEquals(expectedStockList, new StockList(versionedStockList));
+        for (ReadOnlyAddressBook expectedAddressBook : expectedStatesAfterPointer) {
+            versionedAddressBook.redo();
+            assertEquals(expectedAddressBook, new AddressBook(versionedAddressBook));
         }
 
         // check that there are no more states after pointer
-        assertFalse(versionedStockList.canRedo());
+        assertFalse(versionedAddressBook.canRedo());
 
         // revert pointer to original position
-        expectedStatesAfterPointer.forEach(unused -> versionedStockList.undo());
+        expectedStatesAfterPointer.forEach(unused -> versionedAddressBook.undo());
     }
 
     /**
-     * Creates and returns a {@code VersionedStockList} with the {@code stockListStates} added into it, and the
-     * {@code VersionedStockList#currentStatePointer} at the end of list.
+     * Creates and returns a {@code VersionedAddressBook} with the {@code addressBookStates} added into it, and the
+     * {@code VersionedAddressBook#currentStatePointer} at the end of list.
      */
-    private VersionedStockList prepareStockListList(ReadOnlyStockList... stockListStates) {
-        assertFalse(stockListStates.length == 0);
+    private VersionedAddressBook prepareAddressBookList(ReadOnlyAddressBook... addressBookStates) {
+        assertFalse(addressBookStates.length == 0);
 
-        VersionedStockList versionedStockList = new VersionedStockList(stockListStates[0]);
-        for (int i = 1; i < stockListStates.length; i++) {
-            versionedStockList.resetData(stockListStates[i]);
-            versionedStockList.commit();
+        VersionedAddressBook versionedAddressBook = new VersionedAddressBook(addressBookStates[0]);
+        for (int i = 1; i < addressBookStates.length; i++) {
+            versionedAddressBook.resetData(addressBookStates[i]);
+            versionedAddressBook.commit();
         }
 
-        return versionedStockList;
+        return versionedAddressBook;
     }
 
     /**
-     * Shifts the {@code versionedStockList#currentStatePointer} by {@code count} to the left of its list.
+     * Shifts the {@code versionedAddressBook#currentStatePointer} by {@code count} to the left of its list.
      */
-    private void shiftCurrentStatePointerLeftwards(VersionedStockList versionedStockList, int count) {
+    private void shiftCurrentStatePointerLeftwards(VersionedAddressBook versionedAddressBook, int count) {
         for (int i = 0; i < count; i++) {
-            versionedStockList.undo();
+            versionedAddressBook.undo();
         }
     }
 }

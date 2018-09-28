@@ -13,7 +13,7 @@ import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Item in the stock list.
+ * Represents a Person in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Item {
@@ -39,7 +39,7 @@ public class Item {
     /**
      * Every field must be present and not null.
      */
-//    public Item(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+//    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
 //        requireAllNonNull(name, phone, email, address, tags);
 //        this.name = name;
 //        this.phone = phone;
@@ -55,6 +55,17 @@ public class Item {
         status.set(STATUS_READY, quantity);
         status.set(STATUS_ONLOAN, 0);
         status.set(STATUS_FAULTY, 0);
+        this.tags.addAll(tags);
+    }
+
+    public Item(Name name, Integer quantity, Integer minQuantity, List<Integer> status, Set<Tag> tags) {
+        requireAllNonNull(name, quantity, minQuantity, status, tags);
+        this.name = name;
+        this.quantity = quantity;
+        this.minQuantity = minQuantity;
+        this.status.set(STATUS_READY, status.get(STATUS_READY));
+        this.status.set(STATUS_ONLOAN, status.get(STATUS_ONLOAN));
+        this.status.set(STATUS_FAULTY, status.get(STATUS_FAULTY));
         this.tags.addAll(tags);
     }
 
@@ -99,7 +110,6 @@ public class Item {
      * Returns true if both items of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two items.
      */
-  
     public boolean isSameItem(Item otherItem) {
         if (otherItem == this) {
             return true;

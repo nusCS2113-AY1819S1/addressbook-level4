@@ -6,16 +6,16 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.Item;
-import seedu.address.model.item.UniqueItemList;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
 
 /**
  * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSameItem comparison)
+ * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class StockList implements ReadOnlyStockList {
+public class AddressBook implements ReadOnlyAddressBook {
 
-    private final UniqueItemList items;
+    private final UniquePersonList persons;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -25,15 +25,15 @@ public class StockList implements ReadOnlyStockList {
      *   among constructors.
      */
     {
-        items = new UniqueItemList();
+        persons = new UniquePersonList();
     }
 
-    public StockList() {}
+    public AddressBook() {}
 
     /**
-     * Creates an StockList using the Items in the {@code toBeCopied}
+     * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public StockList(ReadOnlyStockList toBeCopied) {
+    public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -41,81 +41,81 @@ public class StockList implements ReadOnlyStockList {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the item list with {@code items}.
-     * {@code items} must not contain duplicate items.
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
      */
-    public void setItems(List<Item> items) {
-        this.items.setItems(items);
+    public void setPersons(List<Person> persons) {
+        this.persons.setPersons(persons);
     }
 
     /**
-     * Resets the existing data of this {@code StockList} with {@code newData}.
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyStockList newData) {
+    public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
-        setItems(newData.getItemList());
+        setPersons(newData.getPersonList());
     }
 
-    //// item-level operations
+    //// person-level operations
 
     /**
-     * Returns true if a item with the same identity as {@code item} exists in the stock list.
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
     public boolean hasItem(Item item) {
         requireNonNull(item);
-        return items.contains(item);
+        return persons.contains(item);
     }
 
     /**
-     * Adds a item to the stock list.
-     * The item must not already exist in the stock list.
+     * Adds a person to the address book.
+     * The person must not already exist in the address book.
      */
-    public void addItem(Item p) {
-        items.add(p);
+    public void addPerson(Person p) {
+        persons.add(p);
     }
 
     /**
-     * Replaces the given item {@code target} in the list with {@code editedItem}.
-     * {@code target} must exist in the stock list.
-     * The item identity of {@code editedItem} must not be the same as another existing item in the stock list.
+     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    public void updateItem(Item target, Item editedItem) {
-        requireNonNull(editedItem);
+    public void updatePerson(Person target, Person editedPerson) {
+        requireNonNull(editedPerson);
 
-        items.setItem(target, editedItem);
+        persons.setPerson(target, editedPerson);
     }
 
     /**
-     * Removes {@code key} from this {@code StockList}.
-     * {@code key} must exist in the stock list.
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
      */
-    public void removeItem(Item key) {
-        items.remove(key);
+    public void removePerson(Person key) {
+        persons.remove(key);
     }
 
     //// util methods
 
     @Override
     public String toString() {
-        return items.asUnmodifiableObservableList().size() + " items";
+        return persons.asUnmodifiableObservableList().size() + " persons";
         // TODO: refine later
     }
 
     @Override
-    public ObservableList<Item> getItemList() {
-        return items.asUnmodifiableObservableList();
+    public ObservableList<Person> getPersonList() {
+        return persons.asUnmodifiableObservableList();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof StockList // instanceof handles nulls
-                && items.equals(((StockList) other).items));
+                || (other instanceof AddressBook // instanceof handles nulls
+                && persons.equals(((AddressBook) other).persons));
     }
 
     @Override
     public int hashCode() {
-        return items.hashCode();
+        return persons.hashCode();
     }
 }

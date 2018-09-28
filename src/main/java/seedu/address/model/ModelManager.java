@@ -33,7 +33,6 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with stock list: " + stockList + " and user prefs " + userPrefs);
 
         versionedStockList = new VersionedStockList(stockList);
-      
         filteredItems = new FilteredList<>(versionedStockList.getItemList());
     }
 

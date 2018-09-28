@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Reverts the {@code model}'s stock list to its previous state.
+ * Reverts the {@code model}'s address book to its previous state.
  */
 public class UndoCommand extends Command {
 
@@ -20,12 +20,12 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoStockList()) {
+        if (!model.canUndoAddressBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoStockList();
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.undoAddressBook();
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -31,9 +31,9 @@ public interface Storage extends StockListStorage, UserPrefsStorage {
     void saveStockList(ReadOnlyStockList stockList) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the Stock List to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleStockListChangedEvent(StockListChangedEvent abce);
+    void handleStockListChangedEvent(StockListChangedEvent stockList);
 }

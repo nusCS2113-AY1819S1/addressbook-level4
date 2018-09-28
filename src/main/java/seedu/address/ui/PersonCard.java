@@ -5,24 +5,24 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.item.Item;
+import seedu.address.model.person.Person;
 
 /**
- * An UI component that displays information of a {@code Item}.
+ * An UI component that displays information of a {@code Person}.
  */
-public class ItemCard extends UiPart<Region> {
+public class PersonCard extends UiPart<Region> {
 
-    private static final String FXML = "ItemListCard.fxml";
+    private static final String FXML = "PersonListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/stocklist-level4/issues/336">The issue on StockList level 4</a>
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Item item;
+    public final Person person;
 
     @FXML
     private HBox cardPane;
@@ -39,15 +39,15 @@ public class ItemCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public ItemCard(Item item, int displayedIndex) {
+    public PersonCard(Person person, int displayedIndex) {
         super(FXML);
-        this.item = item;
+        this.person = person;
         id.setText(displayedIndex + ". ");
-        name.setText(item.getName().fullName);
-        phone.setText(item.getPhone().value);
-        address.setText(item.getAddress().value);
-        email.setText(item.getEmail().value);
-        item.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        name.setText(person.getName().fullName);
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
+        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -58,13 +58,13 @@ public class ItemCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ItemCard)) {
+        if (!(other instanceof PersonCard)) {
             return false;
         }
 
         // state check
-        ItemCard card = (ItemCard) other;
+        PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
-                && item.equals(card.item);
+                && person.equals(card.person);
     }
 }

@@ -6,11 +6,8 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.StockList;
 import seedu.address.model.ReadOnlyStockList;
-import seedu.address.model.item.Address;
-import seedu.address.model.item.Email;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,33 +16,16 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Item[] getSampleItems() {
         return new Item[] {
-            new Item(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
-                getTagSet("friends")),
-            new Item(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                getTagSet("colleagues", "friends")),
-            new Item(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours")),
-            new Item(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                getTagSet("family")),
-            new Item(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
-                getTagSet("classmates")),
-            new Item(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
+            new Item(new Name("Arduino"), 10, 5, getTagSet("Lab1"))
         };
     }
 
     public static ReadOnlyStockList getSampleStockList() {
-        StockList sampleAb = new StockList();
+        StockList sampleSl = new StockList();
         for (Item sampleItem : getSampleItems()) {
-            sampleAb.addItem(sampleItem);
+            sampleSl.addItem(sampleItem);
         }
-        return sampleAb;
+        return sampleSl;
     }
 
     /**

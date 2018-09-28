@@ -3,12 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -22,88 +20,88 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Address;
-import seedu.address.model.item.Email;
-import seedu.address.model.item.Name;
-import seedu.address.model.item.Item;
-import seedu.address.model.item.Phone;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing item in the stock list.
+ * Edits the details of an existing person in the address book.
  */
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the item identified "
-            + "by the index number used in the displayed item list. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
+            + "by the index number used in the displayed person list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_QUANTITY + "QUANTITY] "
-            + "[" + PREFIX_MIN_QUANTITY + "MIN QUANTITY] "
+            + "[" + PREFIX_PHONE + "PHONE] "
+            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_QUANTITY + "25 "
-            + PREFIX_TAG + "Lab7 "
-            + PREFIX_TAG + "Lab8";
+            + PREFIX_PHONE + "91234567 "
+            + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the stock list.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
     private final Index index;
-    private final EditItemDescriptor editItemDescriptor;
+    private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the item in the filtered item list to edit
-     * @param editItemDescriptor details to edit the item with
+     * @param index of the person in the filtered person list to edit
+     * @param editPersonDescriptor details to edit the person with
      */
-    public EditCommand(Index index, EditItemDescriptor editItemDescriptor) {
+    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
-        requireNonNull(editItemDescriptor);
+        requireNonNull(editPersonDescriptor);
 
         this.index = index;
-        this.editItemDescriptor = new EditItemDescriptor(editItemDescriptor);
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Item> lastShownList = model.getFilteredItemList();
+        List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        Item itemToEdit = lastShownList.get(index.getZeroBased());
-        Item editedItem = createEditedItem(itemToEdit, editItemDescriptor);
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!itemToEdit.isSameItem(editedItem) && model.hasItem(editedItem)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ITEM);
+        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updateItem(itemToEdit, editedItem);
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        model.commitStockList();
-        return new CommandResult(String.format(MESSAGE_EDIT_ITEM_SUCCESS, editedItem));
+        model.updatePerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 
     /**
-     * Creates and returns a {@code Item} with the details of {@code itemToEdit}
-     * edited with {@code editItemDescriptor}.
+     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * edited with {@code editPersonDescriptor}.
      */
-    private static Item createEditedItem(Item itemToEdit, EditItemDescriptor editItemDescriptor) {
-        assert itemToEdit != null;
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+        assert personToEdit != null;
 
-        Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
-        Phone updatedPhone = editItemDescriptor.getPhone().orElse(itemToEdit.getPhone());
-        Email updatedEmail = editItemDescriptor.getEmail().orElse(itemToEdit.getEmail());
-        Address updatedAddress = editItemDescriptor.getAddress().orElse(itemToEdit.getAddress());
-        Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
+        Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Item(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -121,27 +119,27 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editItemDescriptor.equals(e.editItemDescriptor);
+                && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
     /**
-     * Stores the details to edit the item with. Each non-empty field value will replace the
-     * corresponding field value of the item.
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
      */
-    public static class EditItemDescriptor {
+    public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Set<Tag> tags;
 
-        public EditItemDescriptor() {}
+        public EditPersonDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditItemDescriptor(EditItemDescriptor toCopy) {
+        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
@@ -213,12 +211,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditItemDescriptor)) {
+            if (!(other instanceof EditPersonDescriptor)) {
                 return false;
             }
 
             // state check
-            EditItemDescriptor e = (EditItemDescriptor) other;
+            EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
