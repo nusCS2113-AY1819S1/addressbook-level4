@@ -11,123 +11,123 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.model.item.Item;
-import seedu.address.model.person.Person;
+import seedu.address.model.item.Item;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the stock list data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
-    private final FilteredList<Person> filteredPersons;
+    private final VersionedStockList versionedStockList;
+    private final FilteredList<Item> filteredItems;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given stockList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyStockList stockList, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(stockList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with stock list: " + stockList + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        versionedStockList = new VersionedStockList(stockList);
+        filteredItems = new FilteredList<>(versionedStockList.getItemList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new StockList(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyStockList newData) {
+        versionedStockList.resetData(newData);
+        indicateStockListChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyStockList getStockList() {
+        return versionedStockList;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateStockListChanged() {
+        raise(new StockListChangedEvent(versionedStockList));
     }
 
     @Override
     public boolean hasItem(Item item) {
         requireNonNull(item);
-        return versionedAddressBook.hasItem(item);
+        return versionedStockList.hasItem(item);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+    public void deleteItem(Item target) {
+        versionedStockList.removeItem(target);
+        indicateStockListChanged();
     }
 
     @Override
-    public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+    public void addItem(Item item) {
+        versionedStockList.addItem(item);
+        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        indicateStockListChanged();
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void updateItem(Item target, Item editedItem) {
+        requireAllNonNull(target, editedItem);
 
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
+        versionedStockList.updateItem(target, editedItem);
+        indicateStockListChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Item List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Item} backed by the internal list of
+     * {@code versionedStockList}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+    public ObservableList<Item> getFilteredItemList() {
+        return FXCollections.unmodifiableObservableList(filteredItems);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredItemList(Predicate<Item> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredItems.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoStockList() {
+        return versionedStockList.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoStockList() {
+        return versionedStockList.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoStockList() {
+        versionedStockList.undo();
+        indicateStockListChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoStockList() {
+        versionedStockList.redo();
+        indicateStockListChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitStockList() {
+        versionedStockList.commit();
     }
 
     @Override
@@ -144,8 +144,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+        return versionedStockList.equals(other.versionedStockList)
+                && filteredItems.equals(other.filteredItems);
     }
 
 }

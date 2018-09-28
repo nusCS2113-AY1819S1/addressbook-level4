@@ -3,70 +3,70 @@ package seedu.address.ui;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysItem;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.PersonBuilder;
+import guitests.guihandles.ItemCardHandle;
+import seedu.address.model.item.Item;
+import seedu.address.testutil.ItemBuilder;
 
-public class PersonCardTest extends GuiUnitTest {
+public class ItemCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
         // no tags
-        Person personWithNoTags = new PersonBuilder().withTags(new String[0]).build();
-        PersonCard personCard = new PersonCard(personWithNoTags, 1);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, personWithNoTags, 1);
+        Item itemWithNoTags = new ItemBuilder().withTags(new String[0]).build();
+        ItemCard itemCard = new ItemCard(itemWithNoTags, 1);
+        uiPartRule.setUiPart(itemCard);
+        assertCardDisplay(itemCard, itemWithNoTags, 1);
 
         // with tags
-        Person personWithTags = new PersonBuilder().build();
-        personCard = new PersonCard(personWithTags, 2);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, personWithTags, 2);
+        Item itemWithTags = new ItemBuilder().build();
+        itemCard = new ItemCard(itemWithTags, 2);
+        uiPartRule.setUiPart(itemCard);
+        assertCardDisplay(itemCard, itemWithTags, 2);
     }
 
     @Test
     public void equals() {
-        Person person = new PersonBuilder().build();
-        PersonCard personCard = new PersonCard(person, 0);
+        Item item = new ItemBuilder().build();
+        ItemCard itemCard = new ItemCard(item, 0);
 
-        // same person, same index -> returns true
-        PersonCard copy = new PersonCard(person, 0);
-        assertTrue(personCard.equals(copy));
+        // same item, same index -> returns true
+        ItemCard copy = new ItemCard(item, 0);
+        assertTrue(itemCard.equals(copy));
 
         // same object -> returns true
-        assertTrue(personCard.equals(personCard));
+        assertTrue(itemCard.equals(itemCard));
 
         // null -> returns false
-        assertFalse(personCard.equals(null));
+        assertFalse(itemCard.equals(null));
 
         // different types -> returns false
-        assertFalse(personCard.equals(0));
+        assertFalse(itemCard.equals(0));
 
-        // different person, same index -> returns false
-        Person differentPerson = new PersonBuilder().withName("differentName").build();
-        assertFalse(personCard.equals(new PersonCard(differentPerson, 0)));
+        // different item, same index -> returns false
+        Item differentItem = new ItemBuilder().withName("differentName").build();
+        assertFalse(itemCard.equals(new ItemCard(differentItem, 0)));
 
-        // same person, different index -> returns false
-        assertFalse(personCard.equals(new PersonCard(person, 1)));
+        // same item, different index -> returns false
+        assertFalse(itemCard.equals(new ItemCard(item, 1)));
     }
 
     /**
-     * Asserts that {@code personCard} displays the details of {@code expectedPerson} correctly and matches
+     * Asserts that {@code itemCard} displays the details of {@code expectedItem} correctly and matches
      * {@code expectedId}.
      */
-    private void assertCardDisplay(PersonCard personCard, Person expectedPerson, int expectedId) {
+    private void assertCardDisplay(ItemCard itemCard, Item expectedItem, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(personCard.getRoot());
+        ItemCardHandle itemCardHandle = new ItemCardHandle(itemCard.getRoot());
 
         // verify id is displayed correctly
-        assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());
+        assertEquals(Integer.toString(expectedId) + ". ", itemCardHandle.getId());
 
-        // verify person details are displayed correctly
-        assertCardDisplaysPerson(expectedPerson, personCardHandle);
+        // verify item details are displayed correctly
+        assertCardDisplaysItem(expectedItem, itemCardHandle);
     }
 }

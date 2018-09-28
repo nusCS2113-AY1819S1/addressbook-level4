@@ -5,43 +5,43 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyStockList;
 
 /**
- * Represents a storage for {@link seedu.address.model.AddressBook}.
+ * Represents a storage for {@link seedu.address.model.StockList}.
  */
-public interface AddressBookStorage {
+public interface StockListStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getStockListFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns StockList data as a {@link ReadOnlyStockList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyStockList> readStockList() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getStockListFilePath()
      */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyStockList> readStockList(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyAddressBook} to the storage.
-     * @param addressBook cannot be null.
+     * Saves the given {@link ReadOnlyStockList} to the storage.
+     * @param stockList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveStockList(ReadOnlyStockList stockList) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyAddressBook)
+     * @see #saveStockList(ReadOnlyStockList)
      */
-    void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
+    void saveStockList(ReadOnlyStockList stockList, Path filePath) throws IOException;
 
-    void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void backupStockList(ReadOnlyStockList stockList) throws IOException;
 
 }
