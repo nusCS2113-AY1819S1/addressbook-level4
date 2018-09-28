@@ -74,7 +74,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addRecord(Record record) {
         versionedAddressBook.addRecord(record);
-        tagsBook.addTags(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateAddressBookChanged();
     }
