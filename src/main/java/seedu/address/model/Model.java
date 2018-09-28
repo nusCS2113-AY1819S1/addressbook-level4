@@ -3,76 +3,76 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.item.Item;
+import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Item> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyStockList newData);
+    void resetData(ReadOnlyAddressBook newData);
 
-    /** Returns the StockList */
-    ReadOnlyStockList getStockList();
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getAddressBook();
 
     /**
-     * Returns true if a item with the same identity as {@code item} exists in the stock list.
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
-    boolean hasItem(Item item);
+    boolean hasPerson(Person person);
 
     /**
-     * Deletes the given item.
-     * The item must exist in the stock list.
+     * Deletes the given person.
+     * The person must exist in the address book.
      */
-    void deleteItem(Item target);
+    void deletePerson(Person target);
 
     /**
-     * Adds the given item.
-     * {@code item} must not already exist in the stock list.
+     * Adds the given person.
+     * {@code person} must not already exist in the address book.
      */
-    void addItem(Item item);
+    void addPerson(Person person);
 
     /**
-     * Replaces the given item {@code target} with {@code editedItem}.
-     * {@code target} must exist in the stock list.
-     * The item identity of {@code editedItem} must not be the same as another existing item in the stock list.
+     * Replaces the given person {@code target} with {@code editedPerson}.
+     * {@code target} must exist in the address book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
      */
-    void updateItem(Item target, Item editedItem);
+    void updatePerson(Person target, Person editedPerson);
 
-    /** Returns an unmodifiable view of the filtered item list */
-    ObservableList<Item> getFilteredItemList();
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered item list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredItemList(Predicate<Item> predicate);
+    void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if the model has previous stock list states to restore.
+     * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoStockList();
+    boolean canUndoAddressBook();
 
     /**
-     * Returns true if the model has undone stock list states to restore.
+     * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoStockList();
+    boolean canRedoAddressBook();
 
     /**
-     * Restores the model's stock list to its previous state.
+     * Restores the model's address book to its previous state.
      */
-    void undoStockList();
+    void undoAddressBook();
 
     /**
-     * Restores the model's stock list to its previously undone state.
+     * Restores the model's address book to its previously undone state.
      */
-    void redoStockList();
+    void redoAddressBook();
 
     /**
-     * Saves the current stock list state for undo/redo.
+     * Saves the current address book state for undo/redo.
      */
-    void commitStockList();
+    void commitAddressBook();
 }
