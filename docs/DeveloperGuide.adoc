@@ -961,5 +961,6 @@ _{ more test cases ... }_
 _{ more test cases ... }_
 
 === Password storage and authentication
-Password handling is done in the PasswordManager class in the utils package. +
-Handle the decrypting of json in there.
+Password handling is done in `PasswordCommand` class. +
+Credentials obtained from the argument is then parsed to the `FileEncryptor` class. +
+Encryption of the XML data file is done in `FileEncryptor` class using the credentials obtained earlier.

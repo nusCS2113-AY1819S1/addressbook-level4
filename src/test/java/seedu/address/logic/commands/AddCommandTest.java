@@ -152,6 +152,32 @@ public class AddCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        //@@author lekoook
+        @Override
+        public ArrayList<String> getCmdPrediction(String textInput) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addPersonToTrie(Person person) {
+        }
+
+        @Override
+        public void deletePersonFromTrie(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearAllTries() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editPersonInTrie(Person personToEdit, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+        //@@author
     }
 
     /**
