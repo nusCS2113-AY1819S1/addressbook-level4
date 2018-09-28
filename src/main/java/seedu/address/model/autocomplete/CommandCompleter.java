@@ -85,6 +85,7 @@ public class CommandCompleter {
         commandList.add(CliSyntax.COMMAND_REDO);
         commandList.add(CliSyntax.COMMAND_SELECT);
         commandList.add(CliSyntax.COMMAND_UNDO);
+        commandList.add(CliSyntax.COMMAND_PASSWORD);
     }
 
     /**
