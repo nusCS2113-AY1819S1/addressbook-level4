@@ -1,16 +1,16 @@
 package seedu.address.model.event;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
-import java.util.Iterator;
-import java.util.List;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.person.exceptions.PersonNotFoundException;
 
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 
 /**
@@ -19,7 +19,7 @@ import seedu.address.model.person.exceptions.PersonNotFoundException;
  * events uses Event#isSameEvent(Event) for equality so as to ensure that the event being added or updated is
  * unique in terms of identity in the UniqueEventList. However, the removal of a event uses Event#equals(Object) so
  * as to ensure that the Event with exactly the same fields will be removed.
- *
+ * <p>
  * Supports a minimal set of list operations.
  *
  * @see Event#isSameEvent(Event)
@@ -95,6 +95,12 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.setAll(events);
+    }
+
+    public List<Event> getSortedEventList() {
+        List<Event> result = this.internalList;
+        Collections.sort(result);
+        return result;
     }
 
     /**

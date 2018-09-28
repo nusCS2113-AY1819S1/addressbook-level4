@@ -1,12 +1,12 @@
 package seedu.address.model;
 
-import static java.util.Objects.requireNonNull;
-
-import java.util.List;
-
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
+
+import java.util.List;
+
+import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the event-list level
@@ -80,6 +80,10 @@ public class EventList implements ReadOnlyEventList {
      */
     public void removeEvent(Event key) {
         events.remove(key);
+    }
+
+    public List<Event> getSortedEventList() {
+        return events.getSortedEventList();
     }
 
     //// util methods

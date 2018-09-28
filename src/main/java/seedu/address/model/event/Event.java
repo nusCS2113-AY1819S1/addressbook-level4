@@ -1,15 +1,15 @@
 package seedu.address.model.event;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Date;
 import java.util.Objects;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a Event in the event list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Event {
+public class Event implements Comparable<Event> {
 
     // Identity fields
     private final EventName eventName;
@@ -91,5 +91,10 @@ public class Event {
                     .append(getEndTime());
         }
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        return this.getStartTime().compareTo(other.getStartTime()) < 0 ? -1 : 1;
     }
 }
