@@ -23,12 +23,10 @@ public class ExportCommandParser implements Parser<ExportCommand> {
         args = args.trim();
         Path path = Paths.get(args);
         if (args.isEmpty()) {
+            throw new ParseException(ExportCommand.MESSAGE_USAGE);
+        } else if (Files.notExists(path)) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_USAGE));
-        }
-        else if (Files.notExists(path)) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_UPDATE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportCommand.MESSAGE_FAILURE));
         }
         return new ExportCommand(path);
     }
