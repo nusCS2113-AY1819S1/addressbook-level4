@@ -45,40 +45,36 @@ image::Ui.png[width="790"]
 * Parameters can be in any order e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== Student Management
+==== Adding a student : `add`
 
-Shows the help page +
-Format: `help`
-
-=== Adding a person: `add`
-
-Adds a person to the address book +
+Adds a student to the address book +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
-A person can have any number of tags (including 0)
+A student can have any number of tags (including 0)
 
 Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+==== Listing all students : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all students in the address book. +
 Format: `list`
 
-=== Editing a person : `edit`
+==== Editing a student : `edit`
 
-Edits an existing person in the address book. +
+Edits an existing student in the address book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the student at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the student will be removed i.e adding of tags is not cumulative.
+* You can remove all the student's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
@@ -88,9 +84,9 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+==== Locating students by name: `find`
 
-Finds persons whose names contain any of the given keywords. +
+Finds students whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -108,13 +104,13 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete`
+==== Deleting a student : `delete`
 
-Deletes the specified person from the address book. +
+Deletes the specified student from the address book. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
+* Deletes the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
@@ -123,13 +119,33 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
+Deletes the 2nd student in the address book.
 * `find Betsy` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st student in the results of the `find` command.
+
+==== Selecting a student : `select`
+
+Selects the student identified by the index number used in the displayed person list. +
+Format: `select INDEX`
+
+****
+* Selects the student and loads the Google search page the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd student in the address book.
+* `find Betsy` +
+`select 1` +
+Selects the 1st student in the results of the `find` command.
 
 === Module Management
-==== Adding a module :  `module add`
+==== Adding a module : `module add`
 Adds a module to the system. +
 Format: `module add n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]...`
 
@@ -360,7 +376,7 @@ Examples:
 Modifies the attendance of the student of the admission number A6942069M for the class T16
 
 === Grade Management
-==== Add Grade Component
+==== Add Grade Component : `gradebook add`
 Adds a grade item to a module code. +
 Format: `gradebook add c/MODULE_CODE i/GRADE_ITEM  m/MAX_MARKS p/PERCENTAGE OF GRADE`
 
@@ -376,7 +392,7 @@ Adds grade component, Assignment 1, to module CS2040C with a maximum of 10 marks
 * `gradebook add c/CS2040C i/Final Examinations m/100 p/60` +
 Adds grade component, Assignment 2, to module CS2040C with a maximum of 100 marks and constitutes 60% of overall marks
 
-==== Edit Grade Item
+==== Edit Grade Item : `gradebook edit` `[Coming in v1.3]`
 Modifies a grade item. +
 Format: `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE`
 
@@ -391,7 +407,7 @@ Updated overall marks of CS2040C Assignment 1 to 20 marks instead of 10 marks (w
 * `gradebook add c/CS2040C i/Final Examinations m/100 p/50` +
 Updated Final Examinations grade percentage to 50% instead of 60% (with reference to 'Add Grade Item Example 2')
 
-==== Delete Grade Component
+==== Delete Grade Component : `gradebook remove`
 Removes a grade item to a module code. +
 Format: `gradebook remove c/MODULE_CODE i/GRADE_ITEM'
 
@@ -404,7 +420,7 @@ Examples:
 * `gradebook remove m/CS2040C i/Assignment 1` +
 Deletes Assignment 1 component from module CS2040C.
 
-==== List Grade Components
+==== List Grade Components : `gradebook list components` `[Coming in v1.2]`
 Lists all the grade items in a certain module. +
 Format: `gradebook list components c/MODULE_CODE'
 
@@ -417,7 +433,7 @@ Examples:
 * `gradebook list components c/CS2040C` +
 Lists all the grade items for the module with module code CS2040C.
 
-==== List Grades of Students
+==== List Grades of Students : `gradebook list grades` `[Coming in v1.2]`
 Lists grades of all students enrolled in the module. +
 Format: `gradebook list grades c/MODULE_CODE'
 
@@ -431,7 +447,7 @@ Examples:
 * `gradebook list grades c/CS2040C` +
 Lists all grades obtained by students in CS2040C module.
 
-==== Assign Grades
+==== Assign Grades : `gradebook assign` `[Coming in v1.3]`
 Assigns marks to a student. +
 Format: `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS'
 
@@ -445,25 +461,10 @@ Examples:
 * `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10` +
 Assigns 10 marks to CS2040C student with matric number A0168111.
 
-=== Selecting a person : `select`
+=== Viewing help : `help`
 
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+Shows the help page +
+Format: `help`
 
 === Listing entered commands : `history`
 
