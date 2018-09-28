@@ -835,7 +835,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful student |add new task |keep track of my workload
 
+|`* * *` |student |complete a task |keep track of my incomplete tasks
+
+|`* * *` |organized student |sort tasks by decreasing importance/categorise in module codes| complete tasks with more urgent deadlines first/ focus on modules with heavier workloads
+
 |`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
+
+|`* * *` |busy student |defer deadlines |allow for a more flexible schedule when workload becomes too heavy
+
+|`* *` |flexible student |remove self imposed deadlines |shift my priorities to other tasks
+
+|`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
+
+|`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
 |=======================================================================
 
 
@@ -867,7 +879,55 @@ Use case ends.
 +
 Use case ends.
 
+=== Use case: Complete task
+
+*MSS*
+
+1.  Student requests to complete a new task
+2.  TB checks for its validity, change the status of the task to completed
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Student provided an invalid command
+** 1a1. TB requests for a valid command
+** 1a2. Student returns a new Complete command
++
+Use case ends.
+
+* 1b. Student requests to complete a non-existent task
+** 1b1. TB outputs an error message
++
+Use case ends.
+
 [discrete]
+
+=== Use case: Sort tasks
+
+*MSS*
+
+1.  Student requests to sort his or her tasks for the day
+2.  Student returns the method to sort the tasks
+3.  TB checks for its validity and display the sorted task list
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Student provided an invalid command format
+** 2a1. TB requests for a valid command
+** 2a2. Student enters a new Sort command
++
+Use case ends.
+
+* 2b. Student requested to sort an empty taskbook
+** 2b1. TB outputs an error message
++
+Use case ends.
+
+[discrete]
+
 === Use case: Add important deadline
 
 *MSS*
@@ -885,6 +945,74 @@ Use case ends.
 
 * 3b. Student wants to add a deadline for an existing task i.e. duplicated task
 ** 3b1. TB outputs an error message
++
+Use case ends.
+
+[discrete]
+
+=== Use case: Defer deadlines
+
+*MSS*
+
+1. Student selects the date of deadline
+2. TB sets the date
+3. Student requests to defer deadline for a task
+4. TB asks for the number of weeks to defer
+5. Student provides the number of weeks for deferment
+6. TB defers deadline
++
+Use case ends.
+
+*Extensions*
+
+* 3b. Student wants to defer a deadline for a task without deadline
+** 3b1. TB outputs an error message
++
+Use case ends.
+
+[discrete]
+=== Use case: Remove deadline
+
+*MSS*
+
+1. Student selects the task
+2. TB displays the deadline for the task
+3. Student requests to delete deadline for the task
+4. TB asks for confirmation
+5. Student provides confirmation
+6. TB removes deadline from the task
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Student selects a task with no existing deadline
+** 1a1. TB outputs an error message
+
+[discrete]
+=== Use case: View date
+
+*MSS*
+
+1. Student enters the view command
+2. TB returns the date in d/DAY w/WEEK m/MONTH format
++
+Use case ends.
+
+[discrete]
+=== Use case: Select a date
+
+*MSS*
+
+1. Student requests to select date required
+2. TB checks for its validity and changes to the required date
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Date entered by the student is not valid e.g. d/Tues w/5 m/9
+** 2a1. TB prompts student to enter a correct date
 +
 Use case ends.
 
