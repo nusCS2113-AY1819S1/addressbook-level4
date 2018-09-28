@@ -18,7 +18,7 @@ By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Event Manager is made with the residents of the Residential Colleges of the National University of Singapore in mind. The application is for those who prefer to use a desktop application for managing events and guests. Moreover, Event Manager offers a faster workflow *for those who prefer working with a Command Line Interface* while still retaining the benefits of having a Graphical User Interface. If you can type fast, you can work even faster with Event Manager to manager the various events in your Residential College. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
