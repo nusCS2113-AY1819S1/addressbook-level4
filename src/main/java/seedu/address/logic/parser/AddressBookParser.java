@@ -49,7 +49,7 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            return new AddCommandParser().parse(arguments); // return AddCommand(person) which is a subclass of Command
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
