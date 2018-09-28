@@ -23,7 +23,8 @@ public class PasswordCommand extends Command {
      * @param credentials will be obtained from parser
      */
     public PasswordCommand (String[] credentials) {
-        FileEncryptor fe = new FileEncryptor(credentials[0], "data/addressbook.xml");
+        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+        fe.process(credentials[0]);
         String message = fe.getMessage();
         this.message = message;
     }
