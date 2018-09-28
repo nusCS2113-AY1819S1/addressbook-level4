@@ -16,7 +16,7 @@ import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
 import t13g2.forum.commons.events.model.AddressBookChangedEvent;
-import t13g2.forum.model.AddressBook;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.testutil.EventsUtil;
 
 public class StatusBarFooterTest extends GuiUnitTest {
@@ -24,7 +24,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Path STUB_SAVE_LOCATION = Paths.get("Stub");
     private static final Path RELATIVE_PATH = Paths.get(".");
 
-    private static final AddressBookChangedEvent EVENT_STUB = new AddressBookChangedEvent(new AddressBook());
+    private static final AddressBookChangedEvent EVENT_STUB = new AddressBookChangedEvent(new ForumBook());
 
     private static final Clock originalClock = StatusBarFooter.getClock();
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());

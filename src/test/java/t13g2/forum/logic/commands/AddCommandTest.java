@@ -16,9 +16,9 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import t13g2.forum.logic.CommandHistory;
 import t13g2.forum.logic.commands.exceptions.CommandException;
-import t13g2.forum.model.AddressBook;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.model.Model;
-import t13g2.forum.model.ReadOnlyAddressBook;
+import t13g2.forum.model.ReadOnlyForumBook;
 import t13g2.forum.model.person.Person;
 import t13g2.forum.testutil.PersonBuilder;
 
@@ -94,12 +94,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyForumBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyForumBook getForumBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -129,27 +129,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoForumBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoForumBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoForumBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoForumBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitForumBook() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -191,13 +191,13 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitForumBook() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyForumBook getForumBook() {
+            return new ForumBook();
         }
     }
 

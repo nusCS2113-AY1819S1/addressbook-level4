@@ -3,7 +3,7 @@ package t13g2.forum.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import t13g2.forum.logic.CommandHistory;
-import t13g2.forum.model.AddressBook;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.model.Model;
 
 /**
@@ -18,8 +18,8 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.resetData(new AddressBook());
-        model.commitAddressBook();
+        model.resetData(new ForumBook());
+        model.commitForumBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

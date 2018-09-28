@@ -7,13 +7,13 @@ import java.util.Optional;
 import t13g2.forum.commons.events.model.AddressBookChangedEvent;
 import t13g2.forum.commons.events.storage.DataSavingExceptionEvent;
 import t13g2.forum.commons.exceptions.DataConversionException;
-import t13g2.forum.model.ReadOnlyAddressBook;
+import t13g2.forum.model.ReadOnlyForumBook;
 import t13g2.forum.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends ForumBookStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -22,13 +22,13 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getForumBookFilePath();
 
     @Override
-    Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyForumBook> readForumBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    void saveForumBook(ReadOnlyForumBook addressBook) throws IOException;
 
     /**
      * Saves the current version of the Address Book to the hard disk.

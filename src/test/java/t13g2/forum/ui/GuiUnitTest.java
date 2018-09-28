@@ -12,7 +12,7 @@ import t13g2.forum.commons.core.EventsCenter;
 import t13g2.forum.ui.testutil.UiPartRule;
 
 /**
- * A GUI unit test class for AddressBook.
+ * A GUI unit test class for ForumBook.
  */
 public abstract class GuiUnitTest {
     @Rule

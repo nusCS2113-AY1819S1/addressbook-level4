@@ -20,18 +20,11 @@ import t13g2.forum.commons.util.ConfigUtil;
 import t13g2.forum.commons.util.StringUtil;
 import t13g2.forum.logic.Logic;
 import t13g2.forum.logic.LogicManager;
-import t13g2.forum.model.AddressBook;
-import t13g2.forum.model.Model;
-import t13g2.forum.model.ModelManager;
-import t13g2.forum.model.ReadOnlyAddressBook;
-import t13g2.forum.model.UserPrefs;
+import t13g2.forum.model.*;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.model.util.SampleDataUtil;
-import t13g2.forum.storage.AddressBookStorage;
-import t13g2.forum.storage.JsonUserPrefsStorage;
-import t13g2.forum.storage.Storage;
-import t13g2.forum.storage.StorageManager;
-import t13g2.forum.storage.UserPrefsStorage;
-import t13g2.forum.storage.XmlAddressBookStorage;
+import t13g2.forum.storage.*;
+import t13g2.forum.storage.XmlForumBookStorage;
 import t13g2.forum.ui.Ui;
 import t13g2.forum.ui.UiManager;
 
@@ -54,7 +47,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing ForumBook ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -62,8 +55,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        ForumBookStorage forumBookStorage = new XmlForumBookStorage(userPrefs.getForumBookFilePath());
+        storage = new StorageManager(forumBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -82,20 +75,20 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyForumBook> forumBookOptional;
+        ReadOnlyForumBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            forumBookOptional = storage.readForumBook();
+            if (!forumBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample ForumBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = forumBookOptional.orElseGet(SampleDataUtil::getSampleForumBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty ForumBook");
+            initialData = new ForumBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty ForumBook");
+            initialData = new ForumBook();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -159,7 +152,7 @@ public class MainApp extends Application {
                     + "Using default user prefs");
             initializedPrefs = new UserPrefs();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            logger.warning("Problem while reading from the file. Will be starting with an empty ForumBook");
             initializedPrefs = new UserPrefs();
         }
 
@@ -179,7 +172,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting ForumBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 

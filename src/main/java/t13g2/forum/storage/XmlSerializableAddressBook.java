@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import t13g2.forum.commons.exceptions.IllegalValueException;
-import t13g2.forum.model.AddressBook;
-import t13g2.forum.model.ReadOnlyAddressBook;
+import t13g2.forum.model.ForumBook;
+import t13g2.forum.model.ReadOnlyForumBook;
 import t13g2.forum.model.person.Person;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable ForumBook that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
@@ -34,19 +34,19 @@ public class XmlSerializableAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableAddressBook(ReadOnlyForumBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this addressbook into the model's {@code AddressBook} object.
+     * Converts this addressbook into the model's {@code ForumBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedPerson}.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public ForumBook toModelType() throws IllegalValueException {
+        ForumBook addressBook = new ForumBook();
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
             if (addressBook.hasPerson(person)) {

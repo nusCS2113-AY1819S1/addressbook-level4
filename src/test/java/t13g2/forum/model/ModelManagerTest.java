@@ -46,8 +46,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(TypicalPersons.BENSON).build();
-        AddressBook differentAddressBook = new AddressBook();
+        ForumBook addressBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(TypicalPersons.BENSON).build();
+        ForumBook differentAddressBook = new ForumBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
@@ -77,7 +77,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setForumBookFilePath(Paths.get("differentFilePath"));
         assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 }

@@ -13,12 +13,12 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import t13g2.forum.commons.exceptions.DataConversionException;
-import t13g2.forum.model.AddressBook;
-import t13g2.forum.model.ReadOnlyAddressBook;
+import t13g2.forum.model.ForumBook;
+import t13g2.forum.model.ReadOnlyForumBook;
 import t13g2.forum.testutil.TypicalPersons;
 
-public class XmlAddressBookStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlAddressBookStorageTest");
+public class XmlForumBookStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlForumBookStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -32,8 +32,8 @@ public class XmlAddressBookStorageTest {
         readAddressBook(null);
     }
 
-    private java.util.Optional<ReadOnlyAddressBook> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyForumBook> readAddressBook(String filePath) throws Exception {
+        return new XmlForumBookStorage(Paths.get(filePath)).readForumBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -73,26 +73,26 @@ public class XmlAddressBookStorageTest {
     @Test
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
-        AddressBook original = TypicalPersons.getTypicalAddressBook();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        ForumBook original = TypicalPersons.getTypicalAddressBook();
+        XmlForumBookStorage xmlAddressBookStorage = new XmlForumBookStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyAddressBook readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        xmlAddressBookStorage.saveForumBook(original, filePath);
+        ReadOnlyForumBook readBack = xmlAddressBookStorage.readForumBook(filePath).get();
+        assertEquals(original, new ForumBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(TypicalPersons.HOON);
         original.removePerson(TypicalPersons.ALICE);
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
-        assertEquals(original, new AddressBook(readBack));
+        xmlAddressBookStorage.saveForumBook(original, filePath);
+        readBack = xmlAddressBookStorage.readForumBook(filePath).get();
+        assertEquals(original, new ForumBook(readBack));
 
         //Save and read without specifying file path
         original.addPerson(TypicalPersons.IDA);
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
-        assertEquals(original, new AddressBook(readBack));
+        xmlAddressBookStorage.saveForumBook(original); //file path not specified
+        readBack = xmlAddressBookStorage.readForumBook().get(); //file path not specified
+        assertEquals(original, new ForumBook(readBack));
 
     }
 
@@ -105,10 +105,10 @@ public class XmlAddressBookStorageTest {
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+    private void saveAddressBook(ReadOnlyForumBook addressBook, String filePath) {
         try {
-            new XmlAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new XmlForumBookStorage(Paths.get(filePath))
+                    .saveForumBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -117,7 +117,7 @@ public class XmlAddressBookStorageTest {
     @Test
     public void saveAddressBook_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new AddressBook(), null);
+        saveAddressBook(new ForumBook(), null);
     }
 
 

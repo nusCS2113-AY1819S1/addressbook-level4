@@ -13,10 +13,10 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyForumBook newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the ForumBook */
+    ReadOnlyForumBook getForumBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -54,25 +54,25 @@ public interface Model {
     /**
      * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoForumBook();
 
     /**
      * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoForumBook();
 
     /**
      * Restores the model's address book to its previous state.
      */
-    void undoAddressBook();
+    void undoForumBook();
 
     /**
      * Restores the model's address book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoForumBook();
 
     /**
      * Saves the current address book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitForumBook();
 }

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import t13g2.forum.model.AddressBook;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.model.person.Person;
 
 /**
@@ -60,10 +60,10 @@ public class TypicalPersons {
     private TypicalPersons() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code ForumBook} with all the typical persons.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static ForumBook getTypicalAddressBook() {
+        ForumBook ab = new ForumBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }

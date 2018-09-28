@@ -21,34 +21,34 @@ import t13g2.forum.commons.util.CollectionUtil;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedForumBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyForumBook addressBook, UserPrefs userPrefs) {
         super();
         CollectionUtil.requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedAddressBook = new VersionedForumBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new ForumBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyForumBook newData) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyForumBook getForumBook() {
         return versionedAddressBook;
     }
 
@@ -104,29 +104,29 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
+    public boolean canUndoForumBook() {
         return versionedAddressBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
+    public boolean canRedoForumBook() {
         return versionedAddressBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
+    public void undoForumBook() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void redoAddressBook() {
+    public void redoForumBook() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
     }
 
     @Override
-    public void commitAddressBook() {
+    public void commitForumBook() {
         versionedAddressBook.commit();
     }
 

@@ -1,14 +1,14 @@
 package t13g2.forum.commons.events.model;
 
 import t13g2.forum.commons.events.BaseEvent;
-import t13g2.forum.model.ReadOnlyAddressBook;
+import t13g2.forum.model.ReadOnlyForumBook;
 
-/** Indicates the AddressBook in the model has changed*/
+/** Indicates the ForumBook in the model has changed*/
 public class AddressBookChangedEvent extends BaseEvent {
 
-    public final ReadOnlyAddressBook data;
+    public final ReadOnlyForumBook data;
 
-    public AddressBookChangedEvent(ReadOnlyAddressBook data) {
+    public AddressBookChangedEvent(ReadOnlyForumBook data) {
         this.data = data;
     }
 

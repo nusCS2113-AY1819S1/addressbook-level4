@@ -13,41 +13,41 @@ import t13g2.forum.commons.core.LogsCenter;
 import t13g2.forum.commons.exceptions.DataConversionException;
 import t13g2.forum.commons.exceptions.IllegalValueException;
 import t13g2.forum.commons.util.FileUtil;
-import t13g2.forum.model.ReadOnlyAddressBook;
+import t13g2.forum.model.ReadOnlyForumBook;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access ForumBook data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlForumBookStorage implements ForumBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlForumBookStorage.class);
 
     private Path filePath;
 
-    public XmlAddressBookStorage(Path filePath) {
+    public XmlForumBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getForumBookFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyForumBook> readForumBook() throws DataConversionException, IOException {
+        return readForumBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readForumBook()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyForumBook> readForumBook(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
-            logger.info("AddressBook file "  + filePath + " not found");
+            logger.info("ForumBook file "  + filePath + " not found");
             return Optional.empty();
         }
 
@@ -61,15 +61,15 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveForumBook(ReadOnlyForumBook addressBook) throws IOException {
+        saveForumBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook)}
+     * Similar to {@link #saveForumBook(ReadOnlyForumBook)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveForumBook(ReadOnlyForumBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 

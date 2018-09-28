@@ -6,7 +6,7 @@ import t13g2.forum.model.person.Person;
 /**
  * Unmodifiable view of an address book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyForumBook {
 
     /**
      * Returns an unmodifiable view of the persons list.

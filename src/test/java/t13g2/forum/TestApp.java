@@ -11,11 +11,8 @@ import t13g2.forum.commons.core.GuiSettings;
 import t13g2.forum.commons.exceptions.DataConversionException;
 import t13g2.forum.commons.util.FileUtil;
 import t13g2.forum.commons.util.XmlUtil;
-import t13g2.forum.model.AddressBook;
-import t13g2.forum.model.Model;
-import t13g2.forum.model.ModelManager;
-import t13g2.forum.model.ReadOnlyAddressBook;
-import t13g2.forum.model.UserPrefs;
+import t13g2.forum.model.*;
+import t13g2.forum.model.ReadOnlyForumBook;
 import t13g2.forum.storage.UserPrefsStorage;
 import t13g2.forum.storage.XmlSerializableAddressBook;
 import t13g2.forum.testutil.TestUtil;
@@ -32,13 +29,13 @@ public class TestApp extends MainApp {
 
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
-    protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
+    protected Supplier<ReadOnlyForumBook> initialDataSupplier = () -> null;
     protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
 
     public TestApp() {
     }
 
-    public TestApp(Supplier<ReadOnlyAddressBook> initialDataSupplier, Path saveFileLocation) {
+    public TestApp(Supplier<ReadOnlyForumBook> initialDataSupplier, Path saveFileLocation) {
         super();
         this.initialDataSupplier = initialDataSupplier;
         this.saveFileLocation = saveFileLocation;
@@ -64,18 +61,18 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setAddressBookFilePath(saveFileLocation);
+        userPrefs.setForumBookFilePath(saveFileLocation);
         return userPrefs;
     }
 
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public AddressBook readStorageAddressBook() {
+    public ForumBook readStorageAddressBook() {
         try {
-            return new AddressBook(storage.readAddressBook().get());
+            return new ForumBook(storage.readForumBook().get());
         } catch (DataConversionException dce) {
-            throw new AssertionError("Data is not in the AddressBook format.", dce);
+            throw new AssertionError("Data is not in the ForumBook format.", dce);
         } catch (IOException ioe) {
             throw new AssertionError("Storage file cannot be found.", ioe);
         }
@@ -85,14 +82,14 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getForumBookFilePath();
     }
 
     /**
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
+        Model copy = new ModelManager((model.getForumBook()), new UserPrefs());
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
     }

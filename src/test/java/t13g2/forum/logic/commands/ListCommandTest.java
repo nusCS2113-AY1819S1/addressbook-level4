@@ -22,7 +22,7 @@ public class ListCommandTest {
     @Before
     public void setUp() {
         model = new ModelManager(TypicalPersons.getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getForumBook(), new UserPrefs());
     }
 
     @Test

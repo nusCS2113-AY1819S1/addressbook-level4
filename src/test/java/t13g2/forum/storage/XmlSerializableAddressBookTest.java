@@ -11,7 +11,7 @@ import org.junit.rules.ExpectedException;
 
 import t13g2.forum.commons.exceptions.IllegalValueException;
 import t13g2.forum.commons.util.XmlUtil;
-import t13g2.forum.model.AddressBook;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.testutil.TypicalPersons;
 
 public class XmlSerializableAddressBookTest {
@@ -28,8 +28,8 @@ public class XmlSerializableAddressBookTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableAddressBook.class);
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        ForumBook addressBookFromFile = dataFromFile.toModelType();
+        ForumBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 

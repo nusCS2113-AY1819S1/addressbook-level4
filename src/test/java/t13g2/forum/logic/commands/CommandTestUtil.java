@@ -15,7 +15,7 @@ import java.util.List;
 import t13g2.forum.commons.core.index.Index;
 import t13g2.forum.logic.CommandHistory;
 import t13g2.forum.logic.commands.exceptions.CommandException;
-import t13g2.forum.model.AddressBook;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.model.Model;
 import t13g2.forum.model.person.NameContainsKeywordsPredicate;
 import t13g2.forum.model.person.Person;
@@ -99,7 +99,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        ForumBook expectedAddressBook = new ForumBook(actualModel.getForumBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -109,7 +109,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedAddressBook, actualModel.getForumBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
@@ -135,7 +135,7 @@ public class CommandTestUtil {
     public static void deleteFirstPerson(Model model) {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
-        model.commitAddressBook();
+        model.commitForumBook();
     }
 
 }

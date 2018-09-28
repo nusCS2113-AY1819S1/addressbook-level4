@@ -28,11 +28,11 @@ public class UndoCommandTest {
     @Test
     public void execute() {
         // multiple undoable states in model
-        expectedModel.undoAddressBook();
+        expectedModel.undoForumBook();
         CommandTestUtil.assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single undoable state in model
-        expectedModel.undoAddressBook();
+        expectedModel.undoForumBook();
         CommandTestUtil.assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no undoable states in model

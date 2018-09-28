@@ -8,7 +8,7 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import t13g2.forum.model.AddressBook;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.model.person.Person;
 import t13g2.forum.model.util.SampleDataUtil;
 import t13g2.forum.testutil.TestUtil;
@@ -18,7 +18,7 @@ public class SampleDataTest extends AddressBookSystemTest {
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected AddressBook getInitialData() {
+    protected ForumBook getInitialData() {
         return null;
     }
 

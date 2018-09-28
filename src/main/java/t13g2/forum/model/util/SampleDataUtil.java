@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import t13g2.forum.model.AddressBook;
-import t13g2.forum.model.ReadOnlyAddressBook;
+import t13g2.forum.model.ForumBook;
+import t13g2.forum.model.ReadOnlyForumBook;
 import t13g2.forum.model.person.Address;
 import t13g2.forum.model.person.Email;
 import t13g2.forum.model.person.Name;
@@ -14,7 +14,7 @@ import t13g2.forum.model.person.Phone;
 import t13g2.forum.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code ForumBook} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -40,8 +40,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyForumBook getSampleForumBook() {
+        ForumBook sampleAb = new ForumBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }

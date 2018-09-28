@@ -27,7 +27,7 @@ public class AddressBookTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final ForumBook addressBook = new ForumBook();
 
     @Test
     public void constructor() {
@@ -42,7 +42,7 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = TypicalPersons.getTypicalAddressBook();
+        ForumBook newData = TypicalPersons.getTypicalAddressBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
@@ -53,7 +53,7 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(TypicalPersons.ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(TypicalPersons.ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        ForumBookStub newData = new ForumBookStub(newPersons);
 
         thrown.expect(DuplicatePersonException.class);
         addressBook.resetData(newData);
@@ -91,12 +91,12 @@ public class AddressBookTest {
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyForumBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class ForumBookStub implements ReadOnlyForumBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        ForumBookStub(Collection<Person> persons) {
             this.persons.setAll(persons);
         }
 

@@ -38,14 +38,14 @@ import t13g2.forum.logic.commands.ClearCommand;
 import t13g2.forum.logic.commands.FindCommand;
 import t13g2.forum.logic.commands.ListCommand;
 import t13g2.forum.logic.commands.SelectCommand;
-import t13g2.forum.model.AddressBook;
+import t13g2.forum.model.ForumBook;
 import t13g2.forum.model.Model;
 import t13g2.forum.testutil.TypicalPersons;
 import t13g2.forum.ui.BrowserPanel;
 import t13g2.forum.ui.CommandBox;
 
 /**
- * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
+ * A system test class for ForumBook, which provides access to handles of GUI components and helper methods
  * for test verification.
  */
 public abstract class AddressBookSystemTest {
@@ -84,7 +84,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
-    protected AddressBook getInitialData() {
+    protected ForumBook getInitialData() {
         return TypicalPersons.getTypicalAddressBook();
     }
 
@@ -143,7 +143,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getPersonList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getForumBook().getPersonList().size(), getModel().getFilteredPersonList().size());
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getAddressBook().getPersonList().size());
+        assertTrue(getModel().getFilteredPersonList().size() < getModel().getForumBook().getPersonList().size());
     }
 
     /**
@@ -167,7 +167,7 @@ public abstract class AddressBookSystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getPersonList().size());
+        assertEquals(0, getModel().getForumBook().getPersonList().size());
     }
 
     /**
@@ -179,7 +179,7 @@ public abstract class AddressBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new ForumBook(expectedModel.getForumBook()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

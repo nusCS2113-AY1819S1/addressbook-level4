@@ -12,22 +12,22 @@ import t13g2.forum.commons.core.LogsCenter;
 import t13g2.forum.commons.events.model.AddressBookChangedEvent;
 import t13g2.forum.commons.events.storage.DataSavingExceptionEvent;
 import t13g2.forum.commons.exceptions.DataConversionException;
-import t13g2.forum.model.ReadOnlyAddressBook;
+import t13g2.forum.model.ReadOnlyForumBook;
 import t13g2.forum.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of ForumBook data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private ForumBookStorage forumBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(ForumBookStorage forumBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.forumBookStorage = forumBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -49,33 +49,33 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ ForumBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getForumBookFilePath() {
+        return forumBookStorage.getForumBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyForumBook> readForumBook() throws DataConversionException, IOException {
+        return readForumBook(forumBookStorage.getForumBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyForumBook> readForumBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return forumBookStorage.readForumBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveForumBook(ReadOnlyForumBook addressBook) throws IOException {
+        saveForumBook(addressBook, forumBookStorage.getForumBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
+    public void saveForumBook(ReadOnlyForumBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        forumBookStorage.saveForumBook(addressBook, filePath);
     }
 
 
@@ -84,7 +84,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveForumBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
