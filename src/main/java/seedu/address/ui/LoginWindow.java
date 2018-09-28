@@ -18,6 +18,8 @@ import seedu.address.model.login.UserPassword;
 public class LoginWindow {
 
     private static boolean isLoginSuccessful = false;
+    private static boolean isValidUserId = false;
+    private static boolean isValidUserPassword = false;
     public static boolean isSensitiveInformation;
 
     public static boolean getIsLoginSuccessful() {
@@ -42,28 +44,34 @@ public class LoginWindow {
 
         switch (loginSelection) {
             case "login":
-                
                 isSensitiveInformation = true;
-
+                LoginDialogBoxUserIdPassword loginUserIdPassword = new LoginDialogBoxUserIdPassword();
+                loginUserIdPassword.loginDialogBoxUserIdPassword();
+                UserId loginId = new UserId(loginUserIdPassword.getUserId());
+                UserPassword loginPassword = new UserPassword(loginUserIdPassword.getUserPassword());
+                LoginDetails loginDetails = new LoginDetails(loginId, loginPassword);
+                isSensitiveInformation = false;
                 break;
             case "create account":
                 isSensitiveInformation = true;
-                LoginDialogBoxUserIdPassword userIdPassword = new LoginDialogBoxUserIdPassword();
-                userIdPassword.loginDialogBoxUserIdPassword();
-                UserId id = new UserId(userIdPassword.getUserId());
-                UserPassword password = new UserPassword(userIdPassword.getUserPassword());
-                LoginDetails details = new LoginDetails(id, password);
-                CreateAccountCommand createAccount = new CreateAccountCommand(details);
+                LoginDialogBoxUserIdPassword createUserIdPassword = new LoginDialogBoxUserIdPassword();
+                createUserIdPassword.loginDialogBoxUserIdPassword();
+                UserId createId = new UserId(createUserIdPassword.getUserId());
+                UserPassword createPassword = new UserPassword(createUserIdPassword.getUserPassword());
+                LoginDetails createDetails = new LoginDetails(createId, createPassword);
+                CreateAccountCommand createAccount = new CreateAccountCommand(createDetails);
                 createAccount.execute(model, history);
                 isSensitiveInformation = false;
                 break;
             case "delete account":
                 isSensitiveInformation = true;
 
+                isSensitiveInformation = false;
                 break;
             case "change password":
                 isSensitiveInformation = true;
 
+                isSensitiveInformation = false;
                 break;
             default:
                 throw new IllegalArgumentException("Invalid command!" + loginSelection);

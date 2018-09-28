@@ -1,10 +1,9 @@
-package seedu.address.model;
+package seedu.address.model.login;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
-import seedu.address.model.login.LoginDetails;
 
 /**
  * Tests that a {@code LoginDetails}'s {@code UserPassword} matches the input password given.

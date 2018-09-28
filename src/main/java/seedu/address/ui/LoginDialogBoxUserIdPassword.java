@@ -30,4 +30,14 @@ public class LoginDialogBoxUserIdPassword {
         JOptionPane.showInputDialog(loginDetails, "Please enter user ID and Password: ", null);
     }
     //@@author
+
+    void showMessageDeleteAccount() {
+        JOptionPane.showMessageDialog(null, "Please enter user ID and password of existing " +
+                                                                   "account to be deleted");
+    }
+
+    void showMessageChangePassword() {
+        JOptionPane.showMessageDialog(null, "Please enter user ID, current password and new " +
+                                                                   "password of desired account to change password");
+    }
 }
