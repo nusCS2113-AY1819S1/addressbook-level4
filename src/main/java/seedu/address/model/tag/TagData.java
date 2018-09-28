@@ -12,19 +12,26 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class TagData {
 
     private final Name name;
-
-    // Data fields
     private final Date date;
     private final MoneyFlow moneyFlow;
-    private final Set<Tag> tags = new HashSet<>();
 
-    public TagData(Name name, Date date, MoneyFlow moneyFlow, Set<Tag> tags) {
-        requireAllNonNull(name, date, moneyFlow, tags);
+    public TagData(Name name, Date date, MoneyFlow moneyFlow) {
+        requireAllNonNull(name, date, moneyFlow);
         this.name = name;
         this.date = date;
         this.moneyFlow = moneyFlow;
-        this.tags.addAll(tags);
     }
 
+    public Name getName() {
+        return name;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public MoneyFlow getMoneyFlow() {
+        return moneyFlow;
+    }
 
 }
