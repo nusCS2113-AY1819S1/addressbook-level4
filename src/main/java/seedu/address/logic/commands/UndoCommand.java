@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
@@ -20,6 +21,13 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+
+        if (fe.isLocked()) {
+            throw new CommandException(fe.MESSAGE_ADDRESS_BOOK_LOCKED);
+        }
+
 
         if (!model.canUndoAddressBook()) {
             throw new CommandException(MESSAGE_FAILURE);

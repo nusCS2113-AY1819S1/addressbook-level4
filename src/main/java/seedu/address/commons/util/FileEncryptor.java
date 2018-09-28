@@ -30,8 +30,6 @@ public class FileEncryptor {
     private static String filename = "";
     private static String message = "";
 
-    private static boolean isExited = true;
-
     private static final byte[] salt = {
         (byte) 0x43, (byte) 0x76, (byte) 0x95, (byte) 0xc7,
         (byte) 0x5b, (byte) 0xd7, (byte) 0x45, (byte) 0x17
@@ -40,7 +38,6 @@ public class FileEncryptor {
     public FileEncryptor (String inputFileName) {
         this.filename = inputFileName;
     }
-
 
     /**
      * Encrypts or decrypts file with password
@@ -51,7 +48,6 @@ public class FileEncryptor {
 
         File f = new File(filename);
         File fEncrypted = new File(filename + extension);
-        isExited = false;
 
         try {
             if (fEncrypted.exists() && !fEncrypted.isDirectory() && f.exists() && !f.isDirectory()) {
@@ -91,12 +87,6 @@ public class FileEncryptor {
         return false;
     }
 
-    /**
-     * Checks the to see if the addressbook was exited after processing
-     */
-    public Boolean isExitedStatus () {
-        return isExited;
-    }
 
     /**
      * Makes cipher using PBEWithMD5AndDES
