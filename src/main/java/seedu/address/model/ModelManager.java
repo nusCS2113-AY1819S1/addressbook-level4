@@ -24,15 +24,15 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Item> filteredItems;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given stockList and userPrefs.
      */
-    public ModelManager(ReadOnlyStockList addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyStockList stockList, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(stockList, userPrefs);
 
-        logger.fine("Initializing with stock list: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with stock list: " + stockList + " and user prefs " + userPrefs);
 
-        versionedStockList = new VersionedStockList(addressBook);
+        versionedStockList = new VersionedStockList(stockList);
         filteredItems = new FilteredList<>(versionedStockList.getItemList());
     }
 
@@ -71,7 +71,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addItem(Item item) {
         versionedStockList.addItem(item);
-        updateFilteredItemList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         indicateStockListChanged();
     }
 
