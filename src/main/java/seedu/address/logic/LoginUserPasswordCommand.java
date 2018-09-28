@@ -3,10 +3,10 @@ package seedu.address.logic;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.Model;
+import seedu.address.model.UserPasswordContainsKeywordsPredicate;
 
 /**
  * Queries the login book to see if there is a password that matches input password. Used for the login process.
