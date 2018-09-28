@@ -483,8 +483,6 @@ This tells the system that the note is to be saved in the CS2113 module with a L
 * `note add m/CS2113 p/2 d/31.12.2113` +
 This tells the system that the note is to be saved in the CS2113 module with a MEDIUM priority and a date (31 Dec 2113).
 
-{sp} +
-
 ==== Listing all notes from a module : `note list`
 Shows a list of all notes saved in the module. +
 Format: `note list m/MODULE_CODE [P]`
@@ -501,9 +499,6 @@ This will list all the existing notes from the CS1231 module in the order of the
 * `note list m/CS1231 p` +
 This is similar to the previous example, except that the system will display the list from highest to lowest PRIORITY_LEVEL.
 
-
-{sp} +
-
 ==== Deleting a note : `note delete` `[Coming in v1.2]`
 Deletes a specific note. +
 Format: `note delete m/MODULE_CODE INDEX`
@@ -517,8 +512,6 @@ Example(s):
 A list of all notes saved in CS2040C module is displayed. +
 `note delete m/CS2040C 1` +
 Deletes the note that corresponds to INDEX=1 in the list.
-
-{sp} +
 
 ==== Editing a note : `note edit` `[Coming in v1.3]`
 Edits an existing note. +
@@ -536,8 +529,6 @@ A list of all notes saved in CS1010 module is displayed. +
 `note edit m/CS1010 3 d/10.10.2019` +
 The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its assigned DATE changed to 10/10/2019 while its PRIORITY_LEVEL remains unchanged.
 
-{sp} +
-
 ==== Finding a note : `note find` `[Coming in v1.2]`
 Search and display existing notes from a module using keywords. +
 Format: `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..`
@@ -551,8 +542,6 @@ Example(s):
 
 * `note find m/CS2113 k/git k/OOP` +
 Lists all notes from CS2113 module which contain both keywords "git" and "OOP".
-
-{sp} +
 
 === Viewing help : `help`
 
