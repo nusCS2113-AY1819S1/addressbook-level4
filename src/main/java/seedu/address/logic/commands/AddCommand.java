@@ -70,12 +70,12 @@ public class AddCommand extends Command {
         requireNonNull(model);
         FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
-
         if (fe.isLocked()) {
             throw new CommandException(fe.MESSAGE_ADDRESS_BOOK_LOCKED);
+        }
+
+        if (model.hasPerson(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(toAdd);
