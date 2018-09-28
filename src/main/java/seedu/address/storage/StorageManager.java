@@ -9,25 +9,25 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.StockListChangedEvent;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyStockList;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of StockList data in local storage.
+ * Manages storage of AddressBook data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private StockListStorage stockListStorage;
+    private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(StockListStorage stockListStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.stockListStorage = stockListStorage;
+        this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -49,47 +49,47 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ StockList methods ==============================
+    // ================ AddressBook methods ==============================
 
     @Override
-    public Path getStockListFilePath() {
-        return stockListStorage.getStockListFilePath();
+    public Path getAddressBookFilePath() {
+        return addressBookStorage.getAddressBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyStockList> readStockList() throws DataConversionException, IOException {
-        return readStockList(stockListStorage.getStockListFilePath());
+    public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
+        return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyStockList> readStockList(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return stockListStorage.readStockList(filePath);
+        return addressBookStorage.readAddressBook(filePath);
     }
 
     @Override
-    public void saveStockList(ReadOnlyStockList stockList) throws IOException {
-        saveStockList(stockList, stockListStorage.getStockListFilePath());
+    public void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
     }
 
     @Override
-    public void saveStockList(ReadOnlyStockList stockList, Path filePath) throws IOException {
+    public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        stockListStorage.saveStockList(stockList, filePath);
+        addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
     @Override
-    public void backupStockList(ReadOnlyStockList stockList) throws IOException {
-        stockListStorage.backupStockList(stockList);
+    public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        addressBookStorage.backupAddressBook(addressBook);
     }
 
 
     @Override
     @Subscribe
-    public void handleStockListChangedEvent(StockListChangedEvent event) {
+    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveStockList(event.data);
+            saveAddressBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

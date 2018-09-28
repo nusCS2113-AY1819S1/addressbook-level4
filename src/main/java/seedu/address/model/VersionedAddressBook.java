@@ -4,69 +4,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code StockList} that keeps track of its own history.
+ * {@code AddressBook} that keeps track of its own history.
  */
-public class VersionedStockList extends StockList {
+public class VersionedAddressBook extends AddressBook {
 
-    private final List<ReadOnlyStockList> stockListStateList;
+    private final List<ReadOnlyAddressBook> addressBookStateList;
     private int currentStatePointer;
 
-    public VersionedStockList(ReadOnlyStockList initialState) {
+    public VersionedAddressBook(ReadOnlyAddressBook initialState) {
         super(initialState);
 
-        stockListStateList = new ArrayList<>();
-        stockListStateList.add(new StockList(initialState));
+        addressBookStateList = new ArrayList<>();
+        addressBookStateList.add(new AddressBook(initialState));
         currentStatePointer = 0;
     }
 
     /**
-     * Saves a copy of the current {@code StockList} state at the end of the state list.
+     * Saves a copy of the current {@code AddressBook} state at the end of the state list.
      * Undone states are removed from the state list.
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        stockListStateList.add(new StockList(this));
+        addressBookStateList.add(new AddressBook(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        stockListStateList.subList(currentStatePointer + 1, stockListStateList.size()).clear();
+        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
     }
 
     /**
-     * Restores the stock list to its previous state.
+     * Restores the address book to its previous state.
      */
     public void undo() {
         if (!canUndo()) {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(stockListStateList.get(currentStatePointer));
+        resetData(addressBookStateList.get(currentStatePointer));
     }
 
     /**
-     * Restores the stock list to its previously undone state.
+     * Restores the address book to its previously undone state.
      */
     public void redo() {
         if (!canRedo()) {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(stockListStateList.get(currentStatePointer));
+        resetData(addressBookStateList.get(currentStatePointer));
     }
 
     /**
-     * Returns true if {@code undo()} has stock list states to undo.
+     * Returns true if {@code undo()} has address book states to undo.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
     }
 
     /**
-     * Returns true if {@code redo()} has stock list states to redo.
+     * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < stockListStateList.size() - 1;
+        return currentStatePointer < addressBookStateList.size() - 1;
     }
 
     @Override
@@ -77,16 +77,16 @@ public class VersionedStockList extends StockList {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof VersionedStockList)) {
+        if (!(other instanceof VersionedAddressBook)) {
             return false;
         }
 
-        VersionedStockList otherVersionedStockList = (VersionedStockList) other;
+        VersionedAddressBook otherVersionedAddressBook = (VersionedAddressBook) other;
 
         // state check
-        return super.equals(otherVersionedStockList)
-                && stockListStateList.equals(otherVersionedStockList.stockListStateList)
-                && currentStatePointer == otherVersionedStockList.currentStatePointer;
+        return super.equals(otherVersionedAddressBook)
+                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
+                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
     }
 
     /**
@@ -94,7 +94,7 @@ public class VersionedStockList extends StockList {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of stockListState list, unable to undo.");
+            super("Current state pointer at start of addressBookState list, unable to undo.");
         }
     }
 
@@ -103,7 +103,7 @@ public class VersionedStockList extends StockList {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of stockListState list, unable to redo.");
+            super("Current state pointer at end of addressBookState list, unable to redo.");
         }
     }
 }

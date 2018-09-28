@@ -8,12 +8,12 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.item.Item;
+import seedu.address.model.person.Person;
 
 /**
- * Provides a handle to a item card in the item list panel.
+ * Provides a handle to a person card in the person list panel.
  */
-public class ItemCardHandle extends NodeHandle<Node> {
+public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
@@ -28,7 +28,7 @@ public class ItemCardHandle extends NodeHandle<Node> {
     private final Label emailLabel;
     private final List<Label> tagLabels;
 
-    public ItemCardHandle(Node cardNode) {
+    public PersonCardHandle(Node cardNode) {
         super(cardNode);
 
         idLabel = getChildNode(ID_FIELD_ID);
@@ -73,14 +73,14 @@ public class ItemCardHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if this handle contains {@code item}.
+     * Returns true if this handle contains {@code person}.
      */
-    public boolean equals(Item item) {
-        return getName().equals(item.getName().fullName)
-                && getAddress().equals(item.getAddress().value)
-                && getPhone().equals(item.getPhone().value)
-                && getEmail().equals(item.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(item.getTags().stream()
+    public boolean equals(Person person) {
+        return getName().equals(person.getName().fullName)
+                && getAddress().equals(person.getAddress().value)
+                && getPhone().equals(person.getPhone().value)
+                && getEmail().equals(person.getEmail().value)
+                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
     }

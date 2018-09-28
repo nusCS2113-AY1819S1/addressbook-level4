@@ -7,5 +7,5 @@
       "y" : 100
     }
   },
-  "stockListFilePath" : "stocklist.xml"
+  "addressBookFilePath" : "addressbook.xml"
 }
