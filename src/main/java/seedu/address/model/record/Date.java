@@ -1,11 +1,14 @@
 package seedu.address.model.record;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+import seedu.address.commons.util.DateUtil;
 
 /**
  * Represents a Record's date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDateFormat(String)}
  */
 public class Date {
 
@@ -13,6 +16,10 @@ public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date parameter should be in the format of dd-mm-yyyy "
             + "with dd and mm being 2 digits, and yyyy being 4 digits.";
+    public static final String MESSAGE_DATE_LOGICAL_CONSTRAINTS =
+            "Date should follow the modern calendar. Day parameter must fit within the constraints of each month. \n"
+            + "For e.g, February has only 28 days so the day parameter must be less than or equal to 28 if the month "
+            + "parameter is 2.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
     public final String value;
     private int day;
@@ -27,9 +34,12 @@ public class Date {
      */
     public Date(String date) {
         requireNonNull(date);
-        checkArgument(isValidDate(date), MESSAGE_DATE_CONSTRAINTS);
+        checkArgument(isValidDateFormat(date), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MESSAGE_DATE_CONSTRAINTS));
         value = date;
         splitDate(date);
+        checkArgument(DateUtil.isValidDate(day, month), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                MESSAGE_DATE_LOGICAL_CONSTRAINTS));
     }
 
     /**
@@ -46,9 +56,9 @@ public class Date {
 
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if a given string is in a valid date format.
      */
-    public static boolean isValidDate(String test) {
+    public static boolean isValidDateFormat(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
     }
 
