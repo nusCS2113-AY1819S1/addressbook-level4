@@ -184,4 +184,9 @@ public class FileEncryptor {
     public String getMessage () {
         return this.message;
     }
+
+    //@@author lekoook
+    public static String getExtension() {
+        return extension;
+    }
 }
