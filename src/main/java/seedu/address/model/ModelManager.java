@@ -13,7 +13,6 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.Item;
 
 /**
  * Represents the in-memory model of the stock list data.
@@ -34,6 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with stock list: " + stockList + " and user prefs " + userPrefs);
 
         versionedStockList = new VersionedStockList(stockList);
+      
         filteredItems = new FilteredList<>(versionedStockList.getItemList());
     }
 

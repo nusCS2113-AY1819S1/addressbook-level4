@@ -95,50 +95,43 @@ public class Item {
         return Collections.unmodifiableSet(tags);
     }
 
-//    /**
-//     * Returns true if both items of the same name have at least one other identity field that is the same.
-//     * This defines a weaker notion of equality between two items.
-//     */
-//    public boolean isSameItem(Item otherItem) {
-//        if (otherItem == this) {
-//            return true;
-//        }
-//
-//        return otherItem != null
-//                && otherItem.getName().equals(getName())
-//                && (otherItem.getPhone().equals(getPhone()) || otherItem.getEmail().equals(getEmail()));
-//    }
-
+    /**
+     * Returns true if both items of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two items.
+     */
+  
     public boolean isSameItem(Item otherItem) {
         if (otherItem == this) {
             return true;
         }
 
         return otherItem != null
-                && otherItem.getName().equals((getName()));
+                && otherItem.getName().equals((getName()))
+                && (otherItem.getQuantity().equals(getQuantity()) || otherItem.getMinQuantity().equals(getMinQuantity())
+                || otherItem.getStatus().equals((getStatus())));
     }
 
-//    /**
-//     * Returns true if both items have the same identity and data fields.
-//     * This defines a stronger notion of equality between two items.
-//     */
-//    @Override
-//    public boolean equals(Object other) {
-//        if (other == this) {
-//            return true;
-//        }
-//
-//        if (!(other instanceof Item)) {
-//            return false;
-//        }
-//
-//        Item otherItem = (Item) other;
-//        return otherItem.getName().equals(getName())
-//                && otherItem.getPhone().equals(getPhone())
-//                && otherItem.getEmail().equals(getEmail())
-//                && otherItem.getAddress().equals(getAddress())
-//                && otherItem.getTags().equals(getTags());
-//    }
+    /**
+     * Returns true if both items have the same identity and data fields.
+     * This defines a stronger notion of equality between two items.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Item)) {
+            return false;
+        }
+
+        Item otherItem = (Item) other;
+        return otherItem.getName().equals(getName())
+                && otherItem.getQuantity().equals(getQuantity())
+                && otherItem.getMinQuantity().equals(getMinQuantity())
+                && otherItem.getStatus().equals(getStatus())
+                && otherItem.getTags().equals(getTags());
+    }
 
     @Override
     public int hashCode() {
