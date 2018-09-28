@@ -8,7 +8,7 @@ import seedu.address.model.backup.BackupList;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new RestoreCommand object
  */
 public class RestoreCommandParser implements Parser<RestoreCommand> {
     public static final String ARGUMENT_SNAPSHOTS = "snapshots";
