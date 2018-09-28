@@ -1,25 +1,25 @@
 package systemtests;
 
 import static org.junit.Assert.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static t13g2.forum.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static t13g2.forum.testutil.TypicalPersons.BENSON;
+import static t13g2.forum.testutil.TypicalPersons.CARL;
+import static t13g2.forum.testutil.TypicalPersons.DANIEL;
+import static t13g2.forum.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import t13g2.forum.commons.core.index.Index;
+import t13g2.forum.logic.commands.DeleteCommand;
+import t13g2.forum.logic.commands.FindCommand;
+import t13g2.forum.logic.commands.RedoCommand;
+import t13g2.forum.logic.commands.UndoCommand;
+import t13g2.forum.model.Model;
+import t13g2.forum.model.tag.Tag;
 
 public class FindCommandSystemTest extends AddressBookSystemTest {
 
