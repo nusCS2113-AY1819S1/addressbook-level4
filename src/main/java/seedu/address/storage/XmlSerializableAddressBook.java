@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -18,17 +18,17 @@ import seedu.address.model.person.Person;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate candidate(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedPerson> candidates;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-        persons = new ArrayList<>();
+        candidates = new ArrayList<>();
     }
 
     /**
@@ -36,7 +36,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        candidates.addAll(src.getCandidatelist().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ public class XmlSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (XmlAdaptedPerson p : persons) {
-            Person person = p.toModelType();
-            if (addressBook.hasPerson(person)) {
+        for (XmlAdaptedPerson p : candidates) {
+            Candidate candidate = p.toModelType();
+            if (addressBook.hasPerson(candidate)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.addPerson(candidate);
         }
         return addressBook;
     }
@@ -66,6 +66,6 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return candidates.equals(((XmlSerializableAddressBook) other).candidates);
     }
 }

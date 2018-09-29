@@ -165,13 +165,13 @@ Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 Examples:
 
 * `find n/john` +
-(Returns any person having the name John)
+(Returns any candidate having the name John)
 
 * `find p/98` +
-(Returns any person having phone number with 98 inside)
+(Returns any candidate having phone number with 98 inside)
 
 * `find e/helloworld@example.com` +
-(Returns any persons having email helloworld@example.com)
+(Returns any candidates having email helloworld@example.com)
 
 === Filtering by a specific tag : `filter`
 
@@ -201,11 +201,11 @@ Format: `cancel`
 
 === Deleting a candidate / job : `delete`
 
-==== Deleting a specific person
+==== Deleting a specific candidate
 Format: `delete <NAME>`
 
-*	Deletes the person with the specified `NAME`
-*	NAME *must be the full name* of the person that is saved in the RecruitBook `e.g. John Doe`
+*	Deletes the candidate with the specified `NAME`
+*	NAME *must be the full name* of the candidate that is saved in the RecruitBook `e.g. John Doe`
 *	The full name can be found using the find function when a partial keyword is entered
 
 Example to delete a candidate:

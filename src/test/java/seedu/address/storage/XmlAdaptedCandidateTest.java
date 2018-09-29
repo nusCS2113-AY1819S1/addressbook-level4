@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.candidate.Address;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
 import seedu.address.testutil.Assert;
 
-public class XmlAdaptedPersonTest {
+public class XmlAdaptedCandidateTest {
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";

@@ -72,7 +72,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
+        assertEquals(9, dataFromFile.getCandidatelist().size());
     }
 
     @Test
@@ -141,6 +141,6 @@ public class XmlUtilTest {
      * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
      * objects.
      */
-    @XmlRootElement(name = "person")
+    @XmlRootElement(name = "candidate")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
 }

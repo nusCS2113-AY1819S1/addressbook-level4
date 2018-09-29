@@ -15,10 +15,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 
 /**
- * Adds a person to the address book.
+ * Adds a candidate to the address book.
  */
 public class AddCandidateCommand extends Command {
 
@@ -50,17 +50,17 @@ public class AddCandidateCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the address book";
 
-    private final Person toAdd;
+    private final Candidate toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Candidate}
      */
 
-    public AddCandidateCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCandidateCommand(Candidate candidate) {
+        requireNonNull(candidate);
+        toAdd = candidate;
     }
 
     @Override

@@ -10,31 +10,31 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCandidateCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Candidate.
  */
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code candidate}.
      */
-    public static String getAddCandidateCommand(Person person) {
-        return AddCandidateCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCandidateCommand(Candidate candidate) {
+        return AddCandidateCommand.COMMAND_WORD + " " + getPersonDetails(candidate);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code candidate}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Candidate candidate) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
+        sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + candidate.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + candidate.getAddress().value + " ");
+        candidate.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
