@@ -12,6 +12,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+
+/**
+ * Helper function for sending emails.
+ */
 public class EmailUtil {
 
     private String mailServerHost = "smtp.gmail.com";
@@ -19,22 +23,45 @@ public class EmailUtil {
     private String userEmailAddress = "placeholder@gmail.com";
     private String userEmailPassword = "password";
 
+    /**
+     * Sets the SMTP server host.
+     * @param mailServerHost
+     */
     public void setMailServerHost(String mailServerHost) {
         this.mailServerHost = mailServerHost;
     }
 
+    /**
+     * Sets the SMTP server port.
+     * @param mailServerPort
+     */
     public void setMailServerPort(String mailServerPort) {
         this.mailServerPort = mailServerPort;
     }
 
+    /**
+     * Sets the email address for the email account.
+     * @param userEmailAddress
+     */
     public void setUserEmailAddress(String userEmailAddress) {
         this.userEmailAddress = userEmailAddress;
     }
 
+    /**
+     * Sets the password for the email account.
+     * @param userEmailPassword the password of the email account.
+     */
     public void setUserEmailPassword(String userEmailPassword) {
         this.userEmailPassword = userEmailPassword;
     }
 
+    /**
+     * Sends an email to the recipients with subject and message.
+     * @param recipient the list of recipient email addresses.
+     * @param subject the subject of the email.
+     * @param message the content of the email.
+     * @throws MessagingException If an error occurs during message sending.
+     */
     public void sendEmail(String[] recipient, String subject, String message) throws MessagingException {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", mailServerHost);
@@ -52,7 +79,7 @@ public class EmailUtil {
 
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(userEmailAddress));
-        for(String addressee: recipient){
+        for (String addressee: recipient) {
             InternetAddress[] current = { new InternetAddress(addressee) };
             msg.addRecipients(Message.RecipientType.TO, current);
         }
