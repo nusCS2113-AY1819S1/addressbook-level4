@@ -1,4 +1,4 @@
-= Trajectory - Developer Guide
+= Trajectory - User Guide
 :site-section: UserGuide
 :toc:
 :toclevels: 3
@@ -476,7 +476,7 @@ NOTE: `*The optional parameters PRIORITY_LEVEL and DATE will be available from v
 * The user can choose to cancel anytime during the note editing stage.
 ****
 
-Example(s):
+Examples:
 
 * `note add m/CS2113` +
 This tells the system that the note is to be saved in the CS2113 module with a LOW priority and it has no date.
@@ -492,7 +492,7 @@ NOTE: `*The optional parameter P will be available from v1.3*` +
 - It is not case-sensitive, hence the user can use either lowercase or uppercase. +
 - If `P` is omitted, the list displayed is sorted by the order of creation.
 
-Example(s):
+Examples:
 
 * `note list m/CS1231` +
 This will list all the existing notes from the CS1231 module in the order of their creation.
@@ -506,7 +506,7 @@ Format: `note delete m/MODULE_CODE INDEX`
 * Deletes the note with the specified INDEX.
 * The INDEX refers to the corresponding number of each note when `note list` command is used.
 
-Example(s):
+Examples:
 
 * `note list m/CS2040C` +
 A list of all notes saved in CS2040C module is displayed. +
@@ -522,7 +522,7 @@ Format: `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]`
 * Upon entering the `note edit` command, the system will prompt the user to type his/her modifications to the note.
 * The user can choose to cancel anytime during the note editing stage.
 
-Example(s):
+Examples:
 
 * `note list m/CS1010` +
 A list of all notes saved in CS1010 module is displayed. +
@@ -538,7 +538,7 @@ Format: `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..`
 * Keywords are not case-sensitive.
 * Each keyword must consist only of a single word.
 
-Example(s):
+Examples:
 
 * `note find m/CS2113 k/git k/OOP` +
 Lists all notes from CS2113 module which contain both keywords "git" and "OOP".
@@ -680,3 +680,13 @@ e.g. `class listattend c/T16`
 e.g. `class markattend c/T16 i/A6942069M`
 * *Modifying class attendance list* `class modattend c/CLASS_NAME i/ADMISSION_NO` +
 e.g. `class modattend c/T16 i/A6942069M`
+* *Add a note* `note add m/MODULE_CODE` +
+e.g. `note add m/CS2040C`
+* *List notes* `note list m/MODULE_CODE` +
+e.g. `note list m/CS2040C`
+* *Delete a note* `note delete m/MODULE_CODE INDEX` `[Coming in v1.2]` +
+e.g. `note delete m/CS2040C 8`
+* *Edit a note* `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]` `[Coming in v1.3] +
+e.g. `note edit m/CS2040C 5 p/3`
+* *Find a note* `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..` `[Coming in v1.2]` +
+e.g. `note find m/CS2040C k/bubble`
