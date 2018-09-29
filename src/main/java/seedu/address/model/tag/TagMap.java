@@ -5,38 +5,45 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import seedu.address.model.record.exceptions.DuplicateRecordException;
 
-import java.util.List;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class TagMap {
 
-    private final ObservableMap<Tag, ObservableTagList> internalTagList = FXCollections.observableHashMap();
+    private final ObservableMap<Tag, ObservableList<TagData>> internalMap = FXCollections.observableHashMap();
 
     public boolean contains(Tag tag, TagData toCheck) {
         requireAllNonNull(tag, toCheck);
-        return internalTagList.get(tag).contains(toCheck);
+        return internalMap.get(tag).stream().anyMatch(toCheck::isSameTag);
     }
 
     public void add(Tag tag, TagData toAdd) {
         requireAllNonNull(tag, toAdd);
-        internalTagList.get(tag).add(toAdd); // FIXME: ALWAYS CRASHES AT THIS LINE
+        if (contains(tag, toAdd)) {
+            throw new DuplicateRecordException();
+        }
+        internalMap.get(tag).add(toAdd);
     }
 
-    public ObservableList<TagData> get(Tag tag) {
-        return internalTagList.get(tag).asUnmodifiableObservableList();
+    public ObservableList<TagData> asUnmodifiableObservableList(Tag tag) {
+        return FXCollections.unmodifiableObservableList(internalMap.get(tag));
+    }
+
+    @Override
+    public String toString() {
+        return internalMap.size() + " records";
+        // TODO: refine later
     }
 
     @Override
     public int hashCode() {
-        return internalTagList.hashCode();
+        return internalMap.hashCode();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TagMap // instanceof handles nulls
-                && internalTagList.equals(((TagMap) other).internalTagList));
+                && internalMap.equals(((TagMap) other).internalMap));
     }
 
 }

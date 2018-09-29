@@ -26,8 +26,14 @@ public class TagsBook implements ReadOnlyTagsBook {
     }
 
     @Override
+    public String toString() {
+        return tagMap.toString();
+        // TODO: refine later
+    }
+
+    @Override
     public ObservableList<TagData> getRecordList(Tag tag) {
-        return tagMap.get(tag);
+        return tagMap.asUnmodifiableObservableList(tag);
     }
 
     @Override
