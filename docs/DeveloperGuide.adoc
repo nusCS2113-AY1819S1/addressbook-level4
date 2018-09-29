@@ -1969,7 +1969,7 @@ Notes must exist in data file.
 
 *MSS*
 
-1.  Teacher requests to find notes that from a module which contains a set of keywords.
+1.  Teacher requests to find notes which contains a set of keywords from a module.
 2.  System displays the complete numbered list of notes found with the keyword(s).
 +
 Use case ends.
