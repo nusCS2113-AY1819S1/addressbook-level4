@@ -26,8 +26,9 @@ public class GenListCommand extends Command {
         AttendanceStage stage;
         ObservableList<Person> lastShownList = model.getFilteredPersonList();
 
-        if (lastShownList.isEmpty())
+        if (lastShownList.isEmpty()) {
             throw new CommandException(MESSAGE_EMPTY_LIST);
+        }
 
         stage = new AttendanceStage(lastShownList);
         stage.generateAttendance();

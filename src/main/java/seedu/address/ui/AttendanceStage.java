@@ -24,10 +24,10 @@ public class AttendanceStage extends UiPart<Stage> {
 
     //private Stage secondaryStage;
 
-    private ObservableList<Person> Persons;
+    private ObservableList<Person> persons;
 
     @FXML
-    private TableView<Person> PersonTable;
+    private TableView<Person> personTable;
 
     @FXML
     private TableColumn<Person, String> nameColumn;
@@ -45,9 +45,9 @@ public class AttendanceStage extends UiPart<Stage> {
     /**
      * Create new Stage for AttendanceList.
      */
-    public AttendanceStage(ObservableList<Person> Persons) {
+    public AttendanceStage(ObservableList<Person> persons) {
         this(new Stage());
-        this.Persons = Persons;
+        this.persons = persons;
     }
 
 
@@ -67,7 +67,7 @@ public class AttendanceStage extends UiPart<Stage> {
      */
     @FXML
     public void generateAttendance() {
-        PersonTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        personTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
         // Initialize the person table with all the data
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -75,7 +75,7 @@ public class AttendanceStage extends UiPart<Stage> {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
-        PersonTable.setItems(Persons);
+        personTable.setItems(persons);
     }
 
     /**
@@ -90,19 +90,19 @@ public class AttendanceStage extends UiPart<Stage> {
                 Paper.A4, PageOrientation.LANDSCAPE, Printer.MarginType.DEFAULT);
         PrinterJob job = PrinterJob.createPrinterJob();
 
-        double scaleX = pageLayout.getPrintableWidth() / PersonTable.getBoundsInParent().getWidth();
-        double scaleY = pageLayout.getPrintableHeight() / PersonTable.getBoundsInParent().getHeight();
+        double scaleX = pageLayout.getPrintableWidth() / personTable.getBoundsInParent().getWidth();
+        double scaleY = pageLayout.getPrintableHeight() / personTable.getBoundsInParent().getHeight();
 
         Scale scale = new Scale(scaleX, scaleY);
 
-        PersonTable.getTransforms().add(scale);
+        personTable.getTransforms().add(scale);
 
-        if (job != null && job.showPrintDialog(PersonTable.getScene().getWindow())) {
-            boolean success = job.printPage(pageLayout, PersonTable);
+        if (job != null && job.showPrintDialog(personTable.getScene().getWindow())) {
+            boolean success = job.printPage(pageLayout, personTable);
             if (success) {
                 job.endJob();
             }
         }
-        PersonTable.getTransforms().remove(scale);
+        personTable.getTransforms().remove(scale);
     }
 }
