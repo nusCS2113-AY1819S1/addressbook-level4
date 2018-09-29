@@ -1,9 +1,6 @@
 package seedu.address;
 
-import static java.util.Objects.requireNonNull;
-
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -12,9 +9,6 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
@@ -40,9 +34,6 @@ import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
-import seedu.address.ui.UiPart;
-
-
 
 /**
  * The main entry point to the application.
@@ -51,21 +42,15 @@ public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 6, 0, true);
 
-    public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
-    public static Ui ui;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-
-
+    protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-    //author @tianhang
-    private final FXMLLoader fxmlLoader = new FXMLLoader();
 
-    //author @tianhang
 
     @Override
     public void init() throws Exception {
@@ -195,33 +180,9 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        //author @tianhang
-        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
-        showLoginPage(fxmlLoginFileUrl , primaryStage);
-        //author @tianhang
+        ui.start(primaryStage);
     }
-    //author @tianhang
-    private void showLoginPage(URL fxmlLoginFileUrl, Stage primaryStage) {
-        Parent root = loadFxmlFile(fxmlLoginFileUrl, primaryStage);
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
-    }
-    private Parent loadFxmlFile(URL location, Stage root) {
-        System.out.println(location);
-        requireNonNull(location);
-        fxmlLoader.setLocation(location);
-        Parent rooting = null;
-        try {
-            rooting = fxmlLoader.load();
 
-        } catch (IOException e) {
-            System.out.println("the exception is " + e);
-            //throw new AssertionError(e);
-        }
-        return rooting;
-    }
-    //@author tianhang
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
