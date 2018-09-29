@@ -13,7 +13,11 @@ public class TagMap {
 
     public boolean contains(Tag tag, TagData toCheck) {
         requireAllNonNull(tag, toCheck);
-        return internalMap.get(tag).stream().anyMatch(toCheck::isSameTag); // FIXME: CRASHES HERE NOW
+        ObservableList<TagData> observableList = internalMap.get(tag);
+        if (observableList != null)
+            return internalMap.get(tag).stream().anyMatch(toCheck::isSameTag); // FIXME: CRASHES HERE NOW
+        else return false;
+
     }
 
     public void add(Tag tag, TagData toAdd) {
@@ -21,7 +25,19 @@ public class TagMap {
         if (contains(tag, toAdd)) {
             throw new DuplicateRecordException();
         }
-        internalMap.get(tag).add(toAdd);
+
+        ObservableList<TagData> observableList = internalMap.get(tag);
+
+        if (!internalMap.containsKey(tag) || observableList.size() == 0) {
+            ObservableList<TagData> newList = FXCollections.observableArrayList();
+            newList.add(toAdd);
+            internalMap.put(tag, newList);
+        }
+
+        else {
+            observableList.add(toAdd);
+        }
+
     }
 
     public ObservableList<TagData> asUnmodifiableObservableList(Tag tag) {
