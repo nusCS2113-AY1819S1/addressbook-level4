@@ -5,7 +5,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 
 /**
  * Adds group to the Address Book.
@@ -16,12 +16,12 @@ public class GroupCommand extends Command {
     public static final String COMMAND_WORD = "group";
     public static final String COMMAND_WORD_2 = "grp";
 
-    public static final String COMMAND_ARGS = "Name: %1$s";
+    public static final String COMMAND_ARGS = "Group Name: %1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group the address book. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
+            + PREFIX_GROUP + "NAME "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "CS2113 ";
+            + PREFIX_GROUP + "CS2113 ";
 
     private final String name;
 
@@ -35,4 +35,18 @@ public class GroupCommand extends Command {
         throw new CommandException(String.format(COMMAND_ARGS, name));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        // if same object means return true
+        if (other == this) {
+            return true;
+        }
+        // instanceof will handle nulls
+        if (!(other instanceof GroupCommand)) {
+            return false;
+        }
+        // state check
+        GroupCommand e = (GroupCommand) other;
+        return name.equals(e.name);
+    }
 }
