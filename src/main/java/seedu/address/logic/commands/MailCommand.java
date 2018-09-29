@@ -1,6 +1,9 @@
 //@@author lekoook
 package seedu.address.logic.commands;
 
+import java.awt.Desktop;
+import java.io.IOException;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
@@ -25,6 +28,18 @@ public class MailCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        Desktop desktop;
+        if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+        } else {
+            throw new CommandException("Not supported");
+        }
+
+        try {
+            desktop.mail();
+        } catch (UnsupportedOperationException | IOException | SecurityException e) {
+            throw new CommandException(e.getMessage());
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 }
