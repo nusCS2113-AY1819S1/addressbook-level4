@@ -1,17 +1,22 @@
 package seedu.address.logic.parser;
 
-import org.junit.Test;
-import seedu.address.logic.commands.AddCandidateCommand;
-import seedu.address.model.candidate.*;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
+
+import org.junit.Test;
+
+import seedu.address.logic.commands.AddCandidateCommand;
+import seedu.address.model.candidate.Address;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
+import seedu.address.model.tag.Tag;
+import seedu.address.testutil.PersonBuilder;
 
 public class AddCandidateCommandParserTest {
     private AddCandidateCommandParser parser = new AddCandidateCommandParser();

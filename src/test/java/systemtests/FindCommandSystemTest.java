@@ -41,7 +41,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find candidate where candidate list is not displaying the candidate we are finding -> 1 candidate found */
+        /** Case: find candidate where candidate list is not
+         *  displaying the candidate we are finding -> 1 candidate found */
         command = FindCommand.COMMAND_WORD + " Carl";
         ModelHelper.setFilteredList(expectedModel, CARL);
         assertCommandSuccess(command, expectedModel);
