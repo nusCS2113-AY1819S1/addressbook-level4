@@ -49,7 +49,7 @@ public class XmlSerializableLoginBook {
         LoginBook loginBook = new LoginBook();
         for (XmlAccount l : accounts) {
             LoginDetails loginDetails = l.toModelType();
-            if (loginBook.hasLoginDetails(loginDetails)) {
+            if (loginBook.hasAccount(loginDetails)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ACCOUNT);
             }
             loginBook.createAccount(loginDetails);

@@ -38,8 +38,7 @@ public class LoginDetails {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if and only if both accounts are of the same user ID.
      */
     public boolean isSameAccount(LoginDetails otherAccount) {
         if (otherAccount == this) {

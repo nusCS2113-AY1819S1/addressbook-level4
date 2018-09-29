@@ -32,8 +32,8 @@ public class UniqueAccountList implements Iterable<LoginDetails>{
     }
 
     /**
-     * Adds a person to the list.
-     * The person must not already exist in the list.
+     * Adds an account to the list.
+     * The account must not already exist in the list.
      */
     public void add(LoginDetails toAdd) {
         requireNonNull(toAdd);
@@ -45,7 +45,7 @@ public class UniqueAccountList implements Iterable<LoginDetails>{
 
     @Override
     public Iterator<LoginDetails> iterator() {
-        return null;
+        return internalLoginList.iterator();
     }
 
     @Override
@@ -58,5 +58,9 @@ public class UniqueAccountList implements Iterable<LoginDetails>{
     @Override
     public int hashCode() {
         return internalLoginList.hashCode();
+    }
+
+    public ObservableList<LoginDetails> asUnmodifiableObservableList() {
+        return FXCollections.unmodifiableObservableList(internalLoginList);
     }
 }

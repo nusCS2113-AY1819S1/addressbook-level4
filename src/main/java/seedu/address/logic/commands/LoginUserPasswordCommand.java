@@ -16,6 +16,7 @@ public class LoginUserPasswordCommand extends LoginCommand {
     private final UserPasswordContainsKeywordsPredicate predicate;
 
     public LoginUserPasswordCommand(UserPasswordContainsKeywordsPredicate predicate) {
+        super();
         this.predicate = predicate;
     }
 
@@ -26,6 +27,12 @@ public class LoginUserPasswordCommand extends LoginCommand {
         return new CommandResult(
                 String.format(Messages.MESSAGE_LOGINDETAILS_LISTED_OVERVIEW, model.getFilteredLoginDetailsList().size()));
 
+    }
+
+    public boolean isUserPasswordExists(Model model) {
+        requireNonNull(model);
+        model.updateFilteredLoginDetailsList(predicate);
+        return model.getFilteredLoginDetailsList().size() != 0;
     }
 
     @Override

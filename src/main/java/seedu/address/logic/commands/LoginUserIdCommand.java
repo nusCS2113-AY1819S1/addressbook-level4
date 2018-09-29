@@ -29,6 +29,12 @@ public class LoginUserIdCommand extends LoginCommand {
 
     }
 
+    public boolean isUserIdExists(Model model) {
+        requireNonNull(model);
+        model.updateFilteredLoginDetailsList(predicate);
+        return model.getFilteredLoginDetailsList().size() != 0;
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

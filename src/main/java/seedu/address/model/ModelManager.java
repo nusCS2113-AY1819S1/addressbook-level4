@@ -24,22 +24,24 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<LoginDetails> filteredLoginDetails;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyLoginBook loginBook, ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(loginBook, addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredLoginDetails = new FilteredList<>(loginBook.getLoginDetailsList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new LoginBook(), new AddressBook(), new UserPrefs());
     }
 
     @Override
@@ -59,7 +61,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void createAccount(LoginDetails details) {}
+    public void createAccount(LoginDetails details) {
+        LoginBook loginBook = new LoginBook();
+        loginBook.createAccount(details);
+        updateFilteredLoginDetailsList(PREDICATE_SHOW_ALL_ACCOUNTS);
+    }
 
     @Override
     public boolean hasAccount(LoginDetails details) {
@@ -97,7 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public ObservableList<LoginDetails> getFilteredLoginDetailsList() {
-        return null;
+        return FXCollections.unmodifiableObservableList(filteredLoginDetails);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -112,7 +118,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {}
+    public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {
+        requireNonNull(predicate);
+        filteredLoginDetails.setPredicate(predicate);
+    }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {

@@ -13,11 +13,12 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
+    Predicate<LoginDetails> PREDICATE_SHOW_ALL_ACCOUNTS = unused -> false;
     /**
      * Creates an account for address book.
      * The account must not already exist in the address book.
      */
-    void createAccount(LoginDetails create);
+    void createAccount(LoginDetails loginDetails);
 
     /**
      * Deletes an existing account in the address book.

@@ -22,9 +22,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -85,8 +87,22 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+        Optional<ReadOnlyLoginBook> loginBookOptional;
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        ReadOnlyLoginBook initialLoginData = new LoginBook();
         ReadOnlyAddressBook initialData;
+        try {
+            loginBookOptional = storage.readLoginBook();
+            if (!loginBookOptional.isPresent()) {
+                logger.info("Login data file not found. Will be starting with a new LoginBook");
+            }
+        } catch (DataConversionException e) {
+            logger.warning("Login data file not in the correct format. Will be starting with an empty LoginBook");
+            initialLoginData = new LoginBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty LoginBook");
+            initialLoginData = new LoginBook();
+        }
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -101,7 +117,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialLoginData, initialData, userPrefs);
     }
 
     private void initLogging(Config config) {

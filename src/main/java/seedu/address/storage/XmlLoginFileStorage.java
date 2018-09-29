@@ -25,7 +25,7 @@ public class XmlLoginFileStorage {
     }
 
     /**
-     * Returns login book in the file or an empty address book
+     * Returns login book in the file or an empty login book
      */
     public static XmlSerializableLoginBook loadDataFromSaveFile(Path file) throws DataConversionException,
             FileNotFoundException {

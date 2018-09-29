@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static seedu.address.ui.LoginWindow.initializeLoginProcess;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -125,7 +126,7 @@ public class MainWindow extends UiPart<Stage> {
      * @param model
      * @param history
      */
-    void fillInnerParts(Model model, CommandHistory history) throws CommandException {
+    void fillInnerParts(Model model, CommandHistory history) throws CommandException, IOException {
         do {
             initializeLoginProcess(model, history);
         } while (!(LoginWindow.getIsLoginSuccessful()));
