@@ -34,7 +34,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list candidates`* : lists the names of all the candidates available
-* *`add candidate`* : adds a candidate to RecruitBook
+* *`addc`* : add a job candidate to RecruitBook
 * *`add job`* : adds an available job to RecruitBook
 * **`delete`**`3` : deletes the 3rd job shown in the current list
 * *`exit`* : exits the app
@@ -61,7 +61,7 @@ Format: `help`
 === Adding a candidate / job : `add`
 
 ==== Adds a candidate to the RecruitBook
-Format: `add candidate` +
+Format: `addc` +
 Supported tags: `n/`, `p/`, `e/`, `a/`, `g/`, `x/`, `j/`, `h/`, `s/`, `y/`, `c/`
 
 Entering this command will prompt user the following: +
@@ -83,7 +83,7 @@ Examples:
 * `j/Cashier y/2 c/KFC`
 
 ==== Adds a job offer to the RecruitBook
-Format: `add job`
+Format: `addj`
 
 Entering this command will prompt user the following: +
 *`Enter the following details of the job in the format:`* +
