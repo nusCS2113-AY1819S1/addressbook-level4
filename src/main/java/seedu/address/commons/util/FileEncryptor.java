@@ -16,7 +16,8 @@ import javax.crypto.spec.PBEParameterSpec;
 
 /**
  * File encryptor:
- * Sources:
+ * @author Esailija
+ * Solution below adapted from:
  * https://stackoverflow.com/questions/13673556/using-password-based-encryption-on-a-file-in-java
  * Description: Encrypts the data file using PBEWithMD5AndDES
  */
