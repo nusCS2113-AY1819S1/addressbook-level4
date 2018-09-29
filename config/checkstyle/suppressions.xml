@@ -6,10 +6,10 @@
 
 <suppressions>
   <suppress checks="JavadocType" files=".*Test\.java"/>
-  <suppress checks="UnusedImports" files=".*Test\.java"/>
-  <suppress checks="CommentsIndentation" files=".*Test\.java"/>
-  <suppress checks="LineLength" files=".*Test\.java"/>
-  <suppress checks="AvoidStarImport" files=".*Test\.java"/>
-  <suppress checks="AvoidStarImportCheck" files=".*Test\.java"/>
-
+  <suppress checks="UnusedImports" files="[\\/]test[\\/]*"/>
+  <suppress checks="CommentsIndentation" files="[\\/]test[\\/]*"/>
+  <suppress checks="LineLength" files="[\\/]test[\\/]*"/>
+  <suppress checks="AvoidStarImport" files="[\\/]test[\\/]*"/>
+  <suppress checks="CustomImportOrderCheck" files="[\\/]test[\\/]*"/>
+  <suppress checks="AvoidStarImportCheck" files="[\\/]test[\\/]*"/>
 </suppressions>
