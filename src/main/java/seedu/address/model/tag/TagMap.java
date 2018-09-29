@@ -18,7 +18,7 @@ public class TagMap {
 
     public void add(Tag tag, TagData toAdd) {
         requireAllNonNull(tag, toAdd);
-        if (contains(tag, toAdd)) {
+        if (contains(tag, toAdd)) { // FIXME: CRASHES HERE NOW
             throw new DuplicateRecordException();
         }
         internalMap.get(tag).add(toAdd);
