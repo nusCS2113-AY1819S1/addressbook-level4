@@ -59,12 +59,6 @@ Format: `help`
 
 Adds a task to the task book +
 Format: `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
-<<<<<<< HEAD
-
-[TIP]
-A person can have any number of tags (including 0)
-=======
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
 
 Examples:
 
@@ -80,43 +74,10 @@ Examples:
 * `complete t/Complete 2113 Tutorial d/Wed w/2`
 
 === Sort the taskbook: `sort`
-<<<<<<< HEAD
-
-Sort the tasks in the task book +
-Format: `sort t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
-=======
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
 
 Sort the tasks in the task book +
 Format: `sort t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
 
-<<<<<<< HEAD
-* `sort t/Complete 2113 Tutorial d/Wed w/2`
-
-=== Adding a deadline: `deadline`
-
-Adds an important task with deadline to the task book +
-Format: `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
-
-Examples:
-
-* `deadline t/Complete 2113 Milestone w/1 m/8`
-
-=== Viewing today's date : `view`
-
-Shows the date today. +
-Format: `view`
-
-=== Selecting a date: `select`
-
-Chooses a particular date. +
-Format: `select d/DAY [w/WEEK] [m/MONTH]`
-
-Examples:
-
-* `select d/Mon`
-* `select d/Mon w/2 m/1`
-=======
 Examples:
 
 * `sort t/Complete 2113 Tutorial d/Wed w/2`
@@ -129,7 +90,6 @@ Format: `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
 Examples:
 
 * `deadline t/Complete 2113 Milestone w/1 m/8`
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
 
 === Deferring a deadline: `deadline`
 
@@ -257,14 +217,8 @@ e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
 * *Clear* : `clear`
 * *Deadline* : `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`
-<<<<<<< HEAD
-* *View* : `view`
-* *Select* : `select d/DAY [w/WEEK] [m/MONTH]` +
-e.g. `select d/Mon w/2 m/1`
-=======
 * *Defer deadline* : `deadline t/ACTION w/WEEKS_OF_DEFERMENT` +
 e.g. `defer_deadline t/Complete 2113 Tutorial w/1`
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`

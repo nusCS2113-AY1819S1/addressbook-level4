@@ -835,19 +835,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |forgetful student |add new task |keep track of my workload
 
-<<<<<<< HEAD
-|`* * *` |student |completed a task |keep track of my incomplete tasks
-
-|`* * *` |student with many tasks in the address book |sort tasks by decreasing importance/categorise in module codes| complete tasks with more urgent deadlines first/ focus on modules with heavier workloads
-
-|`* * *` |forgetful student |add project deadlines |view tasks which remind me to complete the assignments a few days before the deadline
-
-|`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
-
-|`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
-
-
-=======
 |`* * *` |student |complete a task |keep track of my incomplete tasks
 
 |`* * *` |organized student |sort tasks by decreasing importance/categorise in module codes| complete tasks with more urgent deadlines first/ focus on modules with heavier workloads
@@ -861,7 +848,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
 
 |`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
 |=======================================================================
 
 
@@ -869,8 +855,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 == Use Cases
 
 (For all use cases below, the *System* is the `TaskBook` and the *Actor* is the `student`, unless specified otherwise)
-<<<<<<< HEAD
-
 [discrete]
 === Use case: Add new task
 
@@ -882,98 +866,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 Use case ends.
 
 *Extensions*
-
-* 2a. Student enters an invalid command format
-** 2a1. TB requests for a valid command
-** 2a2. Student enters a new add command
-+
-Use case ends.
-
-* 2b. Student enters a duplicated task
-** 2b1. TB outputs an error message
-+
-Use case ends.
-
-[discrete]
-
-=== Use case: Complete task
-
-*MSS*
-
-1.  Student requests to complete a new task
-2.  TB checks for its validity , change the status of the task to completed
-+
-Use case ends.
-
-*Extensions*
-
-* 2a. Student enters an invalid command format
-** 2a1. TB requests for a valid command
-** 2a2. Student enters a new complete command
-+
-Use case ends.
-
-* 2b. Student request to complete a non-existent task
-** 2b1. TB outputs an error message
-+
-Use case ends.
-
-[discrete]
-
-=== Use case: Sort tasks in taskbook
-
-*MSS*
-
-1.  Student requests to sort task in taskbook
-2.  Student enters the format as to he wants the task to be sorted
-3.  TB checks for its validity and display the sorted task list
-+
-Use case ends.
-
-*Extensions*
-
-* 2a. Student enters an invalid command format
-** 2a1. TB requests for a valid command
-** 2a2. Student enters a new sort command
-+
-Use case ends.
-
-* 2b. Student requested to sort an empty taskbook
-** 2b1. TB outputs an error message
-+
-Use case ends.
-
-[discrete]
-
-=== Use case: Add important deadline
-
-*MSS*
-
-1. Student selects the date of deadline
-2. TB sets the date correspondingly
-3. Student requests to add new task with deadline included
-4. TB asks for the number of weeks before to remind about deadline e.g. 1 week earlier
-5. Student provides the number of weeks for reminder(s).
-6. TB adds the task and its reminder(s) to the list
-=======
-
-[discrete]
-=== Use case: Add new task
-
-*MSS*
-
-1.  Student requests to add a new task
-2.  TB checks for its validity and adds the task to the list
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
-+
-Use case ends.
-
-*Extensions*
-
-<<<<<<< HEAD
-* 3b. Student wants to add a deadline for an existing task i.e. duplicated task
-** 3b1. TB outputs an error message
-=======
 * 1a. Student enters an invalid command format
 ** 1a1. TB requests for a valid command
 ** 1a2. Student enters a new add command
@@ -982,30 +874,11 @@ Use case resumes at step 2.
 
 * 1b. Student enters a duplicated task
 ** 1b1. TB outputs an error message
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
+
 +
 Use case ends.
 
 [discrete]
-<<<<<<< HEAD
-=== Use case: View today's date
-
-*MSS*
-
-1. Student enters the view command
-2. TB returns today's date in d/DAY w/WEEK m/MONTH format
-+
-Use case ends.
-
-[discrete]
-=== Use case: Select a date
-
-*MSS*
-
-1. Student enters the select command and the date required
-2. TB checks for its validity and changes to the required date
-=======
-
 === Use case: Complete task
 
 *MSS*
@@ -1020,18 +893,9 @@ Use case ends.
 * 1a. Student provided an invalid command
 ** 1a1. TB requests for a valid command
 ** 1a2. Student returns a new Complete command
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
 +
 Use case ends.
 
-<<<<<<< HEAD
-*Extensions*
-
-* 2a. Date entered by the student is not valid e.g. d/Tues w/5 m/9
-** 2a1. TB prompts student to enter a correct date
-+
-Use case ends.
-=======
 * 1b. Student requests to complete a non-existent task
 ** 1b1. TB outputs an error message
 +
@@ -1155,7 +1019,6 @@ Use case ends.
 ** 1a1. TB prompts student to enter a correct date
 +
 Use case resumes at step 2.
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
 
 [appendix]
 == Non Functional Requirements

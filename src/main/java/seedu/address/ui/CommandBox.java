@@ -101,12 +101,8 @@ public class CommandBox extends UiPart<Region> {
     @FXML
     private void handleCommandEntered() {
         try {
-<<<<<<< HEAD
-            CommandResult commandResult = logic.execute(commandTextField.getText()); // This will get back CommandResult(String.format(MESSAGE_SUCCESS, toAdd)); when add command is added
-=======
             // This will get back CommandResult(String.format(MESSAGE_SUCCESS, toAdd)); when add command is added
             CommandResult commandResult = logic.execute(commandTextField.getText());
->>>>>>> d95ae71f6e690c0a17d70f59c123d554f92b25a6
             initHistory();
             historySnapshot.next();
             // process result of the command
