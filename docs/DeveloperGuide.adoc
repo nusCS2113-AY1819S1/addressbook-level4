@@ -826,7 +826,9 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == User Stories
 
-Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*`
+Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (unlikely to have) - `*` +
+
+Functional Requirements:
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
@@ -839,12 +841,52 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
+|`* * *` |user who values time |autocomplete my commands |execute commands faster.
+
+|`* * *` |forgetful user |look at the photos of my contacts |recognise the person.
+
+|`* * *` |forgetful user |approximate my search input |get the closest output suggestions I need.
+
+|`* * *` |employee |access the full profile of my clients |retrieve their information when required.
+
+|`* * *` |organized user |create groups |mass contact easily.
+
+|`* * *` |meticulous supervisor |access my team’s profiles easily |I can keep track of each member conveniently.
+
+|`* * *` |overworked employee |i need a backup file |information is not immediately lost when i accidentally delete contacts.
+
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
+|`* *` |organised user |can sort my contacts based on rank/position |respond to them appropriately.
+
+|`* *` |efficient user |send mass emails with a single command |email large groups quickly.
+
+|`* *` |meticulous employee |add notes along with my contacts |keep track of my working relations
+
+|`* *` |supervisor |access my subordinate’s Key-Performance-Index |keep track of their work quality.
+
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
+|`*` |user |schedule tasks in a calendar |notified of my appointments.
+
+|`*` |user |schedule tasks in a calendar |notified of when tasks are due.
 |=======================================================================
 
-_{More to be added}_
+Non-Functional Requirements:
+
+[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
+|=======================================================================
+|Priority |As a ... |I want to ... |So that I can...
+|`* * *` |busy employee |get information from the address book fast |I can get back to my work.
+
+|`* * *` |secretary |information to be accurate |able to contact or refer to them.
+
+|`* *` |busy employee |access information fast |can get back to what I am doing.
+
+|`* *` |boss |keep my information in the address book safe |confidential information about employees will not be disclosed.
+
+|`*` |efficient worker |address book to have a small and compact size |transfer information between machines easily.
+|=======================================================================
 
 [appendix]
 == Use Cases

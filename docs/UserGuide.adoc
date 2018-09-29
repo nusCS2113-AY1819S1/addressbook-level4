@@ -218,6 +218,22 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+=== Backing up all data : `backup`
+Backup the data into a “.backup” folder which is invisible to users so as to enhance security. +
+Format: `backup`
+
+=== Restore data from backup : `restore`
+Restores data from a chosen backup snapshot from the ".backup" folder. +
+Format: `restore INDEX`
+
+=== Exports the address book to a directory : `export`
+Export the data to a designated directory with choice of filters. +
+Format: `export [-d OUTPUT_PATH] [-f FILTER_FIELD]`
+
+=== Imports the address book from a directory : `import`
+Import the data from a designated directory with choice of filters. +
+Format: `import [-d TARGET_PATH] [-f FILTER_FIELD]`
+
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
