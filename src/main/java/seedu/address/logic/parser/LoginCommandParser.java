@@ -9,11 +9,13 @@ import java.util.stream.Stream;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LoginUserIdCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
+import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPassword;
 
 /**
@@ -36,15 +38,8 @@ public class LoginCommandParser implements Parser<LoginCommand> {
         }
 
         UserId userId = ParserUtil.parseUserId(argMultimap.getValue(PREFIX_USERID).get());
-        UserPassword userPassword = ParserUtil.parseUserPassword(argMultimap.getValue(PREFIX_USERPASSWORD).get());
-        LoginDetails details = new LoginDetails(userId, userPassword);
 
-        return new LoginCommand(details) {
-            @Override
-            public CommandResult execute(Model model, CommandHistory history) {
-                return null;
-            }
-        };
+        return new LoginUserIdCommand(new UserIdContainsKeywordsPredicate(String.valueOf(userId)));
     }
 
     /**

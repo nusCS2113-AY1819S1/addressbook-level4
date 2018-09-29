@@ -1,8 +1,10 @@
 package seedu.address.model.login;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,6 +45,19 @@ public class UniqueAccountList implements Iterable<LoginDetails>{
         internalLoginList.add(toAdd);
     }
 
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setLoginDetails(List<LoginDetails> loginDetails) {
+        requireAllNonNull(loginDetails);
+        if (!loginDetailsAreUnique(loginDetails)) {
+            throw new DuplicateAccountException();
+        }
+
+        internalLoginList.setAll(loginDetails);
+    }
+
     @Override
     public Iterator<LoginDetails> iterator() {
         return internalLoginList.iterator();
@@ -62,5 +77,19 @@ public class UniqueAccountList implements Iterable<LoginDetails>{
 
     public ObservableList<LoginDetails> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalLoginList);
+    }
+
+    /**
+     * Returns true if {@code persons} contains only unique persons.
+     */
+    private boolean loginDetailsAreUnique(List<LoginDetails> loginDetails) {
+        for (int i = 0; i < loginDetails.size() - 1; i++) {
+            for (int j = i + 1; j < loginDetails.size(); j++) {
+                if (loginDetails.get(i).isSameAccount(loginDetails.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

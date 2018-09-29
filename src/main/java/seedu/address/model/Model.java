@@ -40,6 +40,9 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
+    /** Returns the LoginBook */
+    ReadOnlyLoginBook getLoginBook();
+
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 

@@ -89,13 +89,14 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyLoginBook> loginBookOptional;
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyLoginBook initialLoginData = new LoginBook();
+        ReadOnlyLoginBook initialLoginData;
         ReadOnlyAddressBook initialData;
         try {
             loginBookOptional = storage.readLoginBook();
             if (!loginBookOptional.isPresent()) {
                 logger.info("Login data file not found. Will be starting with a new LoginBook");
             }
+            initialLoginData = loginBookOptional.orElseGet(SampleDataUtil::getSampleLoginBook);
         } catch (DataConversionException e) {
             logger.warning("Login data file not in the correct format. Will be starting with an empty LoginBook");
             initialLoginData = new LoginBook();

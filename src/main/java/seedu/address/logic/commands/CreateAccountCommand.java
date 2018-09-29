@@ -11,17 +11,20 @@ import seedu.address.model.Model;
 
 public class CreateAccountCommand extends Command{
 
-    public static final String COMMAND_WORD = "create account";
+    public static final String COMMAND_WORD = "createaccount";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account for the address book. "
             + "Parameters: "
             + PREFIX_USERID + "USERID "
-            + PREFIX_USERPASSWORD + "PASSWORD ";
+            + PREFIX_USERPASSWORD + "PASSWORD "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_USERID + "A1234567M "
+            + PREFIX_USERPASSWORD + "zaq1xsw2cde3";
 
     public static final String MESSAGE_SUCCESS = "New account created: %1$s";
     private static final String MESSAGE_DUPLICATE_ACCOUNT= "This account already exists in the address book";
 
-    private static LoginDetails toAdd;
+    private final LoginDetails toAdd;
 
     /**
      * Creates a CreateAccountCommand to add the specified {@code LoginDetails}
@@ -41,5 +44,12 @@ public class CreateAccountCommand extends Command{
 
         model.createAccount(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof CreateAccountCommand // instanceof handles nulls
+                && toAdd.equals(((CreateAccountCommand) other).toAdd));
     }
 }

@@ -1,14 +1,12 @@
 package seedu.address.model;
 
-import java.nio.file.Path;
-
 import javafx.collections.ObservableList;
 import seedu.address.model.login.LoginDetails;
 
 /**
  * Unmodifiable view of the login book
  */
-public interface ReadOnlyLoginBook extends Path {
+public interface ReadOnlyLoginBook {
 
     /**
      * Returns an unmodifiable view of the persons list.

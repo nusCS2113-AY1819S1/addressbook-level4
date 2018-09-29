@@ -15,7 +15,7 @@ public class UserId {
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String USERID_VALIDATION_REGEX = "[user/\\w\\w\\w\\w\\w\\w\\w\\w\\w]*";
+    public static final String USERID_VALIDATION_REGEX = "[\\w]{9}";
 
     public final String fullUserId;
 

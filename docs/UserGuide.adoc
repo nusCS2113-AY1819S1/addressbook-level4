@@ -1,4 +1,4 @@
-﻿= AddressBook Level 4 - User Guide
+﻿= NUSSU Connect - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -18,7 +18,7 @@ By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+NUSSU Connect is for the executive committee members of NUSSU who are comfortable with working with Command Line Interface (CLI). It is meant for fast typers within NUSSU and it could help them perform their daily tasks such as managing recruitment, contacts, budgets and projects much more efficiently.
 
 == Quick Start
 
@@ -174,17 +174,15 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating persons: `find`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds persons whose names/tags contain any of the given keywords. +
+Format: `find [\tag tags]  KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Only full words will be matched e.g. `Han` will not match `Hans`	
 ****
 
 Examples:
@@ -193,16 +191,21 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
+* `find \tag President` +
+Returns any person with the tag `President`
+* `find \tag President Vice_President` +
+Returns any person with the tag `President` OR `Vice_President`.
 
-=== Deleting a person : `delete`
+=== Deleting: `delete`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Deletes a specific person from the address book. +
+Format: `delete [-a all] [INDEX]`
 
 ****
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* If -a option is selected, all contacts on the list will be deleted and INDEX will be ignored.
 ****
 
 Examples:
@@ -213,6 +216,10 @@ Deletes the 2nd person in the address book.
 * `find Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
+* `list` +
+`delete -a` +
+Deletes everyone in the results of the `find` command.
+
 
 === Selecting a person : `select`
 
@@ -299,6 +306,39 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+=== Submitting data for budget allocation: `data`
+Submits the data about number of events, expected turnout etc. +
+Format: `data e/NUMBER OF EVENTS t/TURNOUT`
+Example: +
+`data e/5 t/200`
+=== Viewing the allocated budget : `viewbudget`
+Shows the allocated budget to the user +
+Format: `viewbudget`
+=== Submitting grant request : `request`
+Submits data about amount of grant needed, the reason and tags the importance level
+Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL
+Example: +
+`request m/1000 r/for booking auditorium t/medium`
+=== Viewing grant request : `viewrequest`
+Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
+Format: `viewrequest`
+=== Accepting grant request: `accept`
+Approves a specific grant request from the list of grants.
+Format: `accept [-a all] [INDEX]
+****
+* Approves the request at the specified `INDEX`.
+* The index refers to the index number shown in the displayed requests list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* If -a option is selected, all requests on the list will be approved and INDEX will be ignored.
+****
+Example:
+* `viewrequest` +
+`accept 2` +
+Approves the 2nd request in the list of grant requests.
+* `viewrequest` +
+`accept -a` +
+Approves all the requests in the list.
+
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -335,14 +375,14 @@ e.g. `delete account` +
 e.g. `change password` +
     `A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
+* *Delete* : `delete [-a all][INDEX]` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Find* : `find [\tag tags] KEYWORD [MORE_KEYWORDS]` +
+e.g. `find James Jake` +
+e.g `find \tag President`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +

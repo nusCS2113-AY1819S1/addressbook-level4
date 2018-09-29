@@ -43,7 +43,7 @@ public class XmlLoginBookStorage implements LoginBookStorage{
      * @throws DataConversionException if the file is not in the correct format.
      */
     public Optional<ReadOnlyLoginBook> readLoginBook(Path loginFilePath) throws DataConversionException,
-            FileNotFoundException {
+                                                                                FileNotFoundException {
         requireNonNull(loginFilePath);
 
         if (!Files.exists(loginFilePath)) {

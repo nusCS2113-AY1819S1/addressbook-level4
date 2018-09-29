@@ -28,7 +28,7 @@ public class XmlLoginFileStorage {
      * Returns login book in the file or an empty login book
      */
     public static XmlSerializableLoginBook loadDataFromSaveFile(Path file) throws DataConversionException,
-            FileNotFoundException {
+                                                                                  FileNotFoundException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableLoginBook.class);
         } catch (JAXBException e) {

@@ -2,14 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.io.IOException;
-import java.net.URI;
-import java.nio.file.FileSystem;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
+import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.login.LoginDetails;
@@ -21,6 +14,33 @@ public class LoginBook implements ReadOnlyLoginBook{
 
     public LoginBook() {
         accounts = new UniqueAccountList();
+    }
+
+    /**
+     * Creates a LoginBook using the LoginDetails in the {@code toBeCopied}
+     */
+    public LoginBook(ReadOnlyLoginBook toBeCopied) {
+        this();
+        resetData(toBeCopied);
+    }
+
+    //// list overwrite operations
+
+    /**
+     * Replaces the contents of the person list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
+    public void setLoginDetails(List<LoginDetails> accounts) {
+        this.accounts.setLoginDetails(accounts);
+    }
+
+    /**
+     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetData(ReadOnlyLoginBook newData) {
+        requireNonNull(newData);
+
+        setLoginDetails(newData.getLoginDetailsList());
     }
 
     //// login-level operations
@@ -43,102 +63,16 @@ public class LoginBook implements ReadOnlyLoginBook{
 
     //// util methods
 
-
-    @Override
-    public FileSystem getFileSystem() {
-        return null;
-    }
-
-    @Override
-    public boolean isAbsolute() {
-        return false;
-    }
-
-    @Override
-    public Path getRoot() {
-        return null;
-    }
-
-    @Override
-    public Path getFileName() {
-        return null;
-    }
-
-    @Override
-    public Path getParent() {
-        return null;
-    }
-
-    @Override
-    public int getNameCount() {
-        return 0;
-    }
-
-    @Override
-    public Path getName(int index) {
-        return null;
-    }
-
-    @Override
-    public Path subpath(int beginIndex, int endIndex) {
-        return null;
-    }
-
-    @Override
-    public boolean startsWith(Path other) {
-        return false;
-    }
-
-    @Override
-    public boolean endsWith(Path other) {
-        return false;
-    }
-
-    @Override
-    public Path normalize() {
-        return null;
-    }
-
-    @Override
-    public Path resolve(Path other) {
-        return null;
-    }
-
-    @Override
-    public Path relativize(Path other) {
-        return null;
-    }
-
-    @Override
-    public URI toUri() {
-        return null;
-    }
-
-    @Override
-    public Path toAbsolutePath() {
-        return null;
-    }
-
-    @Override
-    public Path toRealPath(LinkOption... options) throws IOException {
-        return null;
-    }
-
-    @Override
-    public WatchKey register(WatchService watcher, WatchEvent.Kind<?>[] events, WatchEvent.Modifier... modifiers) throws IOException {
-        return null;
-    }
-
-    @Override
-    public int compareTo(Path other) {
-        return 0;
-    }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LoginBook // instanceof handles nulls
                 && accounts.equals(((LoginBook) other).accounts));
+    }
+
+    @Override
+    public String toString() {
+        return accounts.asUnmodifiableObservableList().size() + " accounts";
     }
 
     @Override

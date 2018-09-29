@@ -29,10 +29,6 @@ public class LoginDetails {
         return userPassword;
     }
 
-    public void setUserId(UserId id) {
-        this.userId = id;
-    }
-
     public void setUserPassword(UserPassword password) {
         this.userPassword = password;
     }
@@ -47,6 +43,25 @@ public class LoginDetails {
 
         return otherAccount != null && otherAccount.getUserId().equals(getUserId());
     }
+
+    /**
+     * Returns true if both accounts have the same user ID and passwords.
+     * This defines a stronger notion of equality between two accounts.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof LoginDetails)) {
+            return false;
+        }
+
+        LoginDetails otherAccount = (LoginDetails) other;
+        return otherAccount.getUserId().equals(getUserId()) && otherAccount.getUserPassword().equals(getUserPassword());
+    }
+
 
     @Override
     public int hashCode() {

@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.LoginBookChangedEvent;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UniqueAccountList;
 import seedu.address.model.person.Person;
@@ -22,6 +23,7 @@ import seedu.address.model.person.Person;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private final VersionedLoginBook versionedLoginBook;
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<LoginDetails> filteredLoginDetails;
@@ -35,9 +37,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
+        versionedLoginBook = new VersionedLoginBook(loginBook);
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-        filteredLoginDetails = new FilteredList<>(loginBook.getLoginDetailsList());
+        filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
     }
 
     public ModelManager() {
@@ -51,6 +54,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public ReadOnlyLoginBook getLoginBook() {
+        return versionedLoginBook;
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
     }
@@ -60,11 +68,15 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
 
+    private void indicateLoginBookChanged() {
+        raise(new LoginBookChangedEvent(versionedLoginBook));
+    }
+
     @Override
     public void createAccount(LoginDetails details) {
-        LoginBook loginBook = new LoginBook();
-        loginBook.createAccount(details);
+        versionedLoginBook.createAccount(details);
         updateFilteredLoginDetailsList(PREDICATE_SHOW_ALL_ACCOUNTS);
+        indicateLoginBookChanged();
     }
 
     @Override

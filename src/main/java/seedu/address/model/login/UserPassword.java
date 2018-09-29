@@ -8,14 +8,14 @@ import seedu.address.ui.LoginDialogBoxUserIdPassword;
 public class UserPassword {
 
     public static final String MESSAGE_USERPASSWORD_CONSTRAINTS =
-            "There must be a pass/ prefix before the password. User password is case-sensitive, " +
+            "There must be a pa/ prefix before the password. User password is case-sensitive, " +
                     "and it should not be blank and not have any spaces";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String USERPASSWORD_VALIDATION_REGEX = "[pass/.]*";
+    public static final String USERPASSWORD_VALIDATION_REGEX = "[\\S]*";
 
     public final String fullUserPassword;
 

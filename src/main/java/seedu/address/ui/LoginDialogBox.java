@@ -11,11 +11,11 @@ public class LoginDialogBox {
 
     public LoginDialogBox(){}
 
-    static JFrame getLoginFrame() {
+    public static JFrame getLoginFrame() {
         return login;
     }
 
-    static void setLoginDialogBox() {
+    public static void setLoginDialogBox() {
         login.add(loginButton);
         login.pack();
         login.setVisible(true);

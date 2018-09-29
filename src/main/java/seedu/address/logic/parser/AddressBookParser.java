@@ -6,6 +6,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.*;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -22,6 +24,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.ui.LoginDialogBox;
 
 /**
  * Parses user input.
@@ -54,7 +57,19 @@ public class AddressBookParser {
             return new LoginCommandParser().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
-            return new CreateAccountCommandParser().parse(arguments);
+            //@@author Chocological-reused
+            //Reused from https://stackoverflow.com/posts/6555051/revisions with minor modifications
+            LoginDialogBox.setLoginDialogBox();
+
+            String loginSelection = JOptionPane.showInputDialog(LoginDialogBox.getLoginFrame(),
+                    "Please type in master password", null);
+            //@@author
+            switch (loginSelection) {
+                case "123456789":
+                    return new CreateAccountCommandParser().parse(arguments);
+                default:
+                    throw new IllegalArgumentException("Wrong master password!");
+            }
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
