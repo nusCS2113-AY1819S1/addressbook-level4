@@ -815,13 +815,14 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* faculty members of any education institutions
+* has a need to manage a significant number of students
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage students faster than a typical mouse/GUI driven app
 
 [appendix]
 == User Stories
@@ -863,17 +864,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |list all modules |see all the modules I am currently managing
 
-|`* * *` |teacher |add grade componenents |differentiate the grade componenets in a module (E.g. mid term test, finals examination)
+|`* * *` |teacher |enrol students in a module |keep track of the students taking my various modules
 
-|`* * *` |teacher |edit grades of students |change students marks after reviewing
-
-|`* * *` |teacher |delete grade item |remove after an incorrect input of grade item
-
-|`* * *` |teacher |list grades of students |monitor my students progress
-
-|`* *` |teacher |list all grade components |view all the grade components that I have added to my module
-
-|`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students
+|`* *` |teacher |assign a TA |get assistance in managing the module
 
 |`* * *` |teacher |create a class |assign students to the class
 
@@ -891,6 +884,18 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |modify class attendance list |alter a wrongly-marked attendance for a specific student
 
+|`* * *` |teacher |add grade components |differentiate the grade components in a module (E.g. mid term test, finals examination)
+
+|`* * *` |teacher |edit grades of students |change students marks after reviewing
+
+|`* * *` |teacher |delete grade item |remove after an incorrect input of grade item
+
+|`* * *` |teacher |list grades of students |monitor my students progress
+
+|`* *` |teacher |list all grade components |view all the grade components that I have added to my module
+
+|`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students
+
 |`* * *` |teacher |create notes for modules |keep track of important stuff regarding the module and also my own teaching progress
 
 |`* * *` |teacher |delete notes from modules |remove completed tasks or discard those that are no longer needed
@@ -903,43 +908,16 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |teacher |attach deadlines to notes |keep track of upcoming deadlines and important dates
 
-|=======================================================================
+|`* *` |teacher |find specific notes | search for notes quickly without having to go through an entire list
 
-_{More to be added}_
+|=======================================================================
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `Trajectory` and the *Actor* is the `teacher`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
-
-*MSS*
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. The list is empty.
-+
-Use case ends.
-
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
-
-[discrete]
-
 === Use case: Add student
 
 *MSS*
@@ -1170,6 +1148,8 @@ Use case resumes at step 1.
 
 1.  Teacher wants to add a module to the system.
 2.  System successfully adds the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1212,6 +1192,8 @@ Use case resumes at step 1.
 
 1.  Teacher wants to edit a module to the system.
 2.  System successfully saves the changes made to the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1257,6 +1239,8 @@ Use case resumes at step 1.
 2.  System prompts for confirmation to delete the module.
 3.  Teacher confirms the deletion of the module.
 4.  System successfully deletes the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1298,6 +1282,8 @@ Use case resumes at step 1.
 2.  System prompts for confirmation to archive the module.
 3.  Teacher confirms archiving of the module.
 4.  System successfully archives the module.
++
+Use case ends.
 
 *Extensions*
 
@@ -1337,6 +1323,8 @@ Use case resumes at step 1.
 
 1.  Teacher searches for a module with some module codes as keywords.
 2.  System lists all the active modules that match any of the keywords.
++
+Use case ends.
 
 *Extensions*
 
@@ -1371,6 +1359,8 @@ Use case resumes at step 1.
 
 1.  Teacher wants to see all the active modules in the system.
 2.  System lists all the active modules.
++
+Use case ends.
 
 *Extensions*
 
@@ -1425,6 +1415,8 @@ Use case ends.
 
 1.  Teacher edits grade item.
 2.  System successfully updates grade item.
++
+Use case ends.
 
 *Extensions*
 
@@ -1451,6 +1443,8 @@ Use case ends.
 
 1.  Teacher deletes grade item.
 2.  System successfully deletes grade item.
++
+Use case ends.
 
 *Extensions*
 
@@ -1477,6 +1471,8 @@ Use case ends.
 
 1.  Teacher searches all grade item.
 2.  System successfully displays all grade item.
++
+Use case ends.
 
 *Extensions*
 
@@ -1503,6 +1499,8 @@ Use case ends.
 
 1.  Teacher assigns marks to student.
 2.  System successfully saves the marks.
++
+Use case ends.
 
 *Extensions*
 
@@ -1797,7 +1795,8 @@ Use case ends.
 
 *Pre-condition*
 
-Module must exist in data file.
+Module must exist in data file. +
+Notes must exist in data file.
 
 *MSS*
 
@@ -1837,7 +1836,8 @@ Use case ends.
 
 *Pre-condition*
 
-Module must exist in data file.
+Module must exist in data file. +
+Note must exist in data file.
 
 *MSS*
 
@@ -1895,7 +1895,8 @@ Use case resumes at step 2.
 
 *Pre-condition*
 
-Module must exist in data file.
+Module must exist in data file. +
+Note must exist in data file.
 
 *MSS*
 
@@ -1958,20 +1959,60 @@ Use case ends.
 +
 Use case resumes at step 4.
 
-{sp} +
+[discrete]
+=== Use case: Finding notes
 
-_{More to be added}_
+*Pre-condition*
 
-{sp} +
+Module must exist in data file. +
+Notes must exist in data file.
+
+*MSS*
+
+1.  Teacher requests to find notes which contains a set of keywords from a module.
+2.  System displays the complete numbered list of notes found with the keyword(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Teacher enters an invalid command.
++
+[none]
+** 1a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 1b. The module does not exist.
++
+[none]
+** 1b1. System displays a message that the module is not found.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. There are no entries found with the entered keyword(s).
++
+[none]
+** 2b1. System displays a message that no entries are found.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  Privacy
+   *  Students’ and faculty members' <<private-contact-detail,private contact details>> shouldn’t be disseminated without prior consent.
+.  Data Retention
+   *  User data shouldn’t be retained after a certain amount of time after a student graduates to protect their personal data.
+.  Cross-platform
+   *  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
+.  Responsiveness
+   *  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+.  Ease of Use
+   *  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 
 [appendix]
 == Glossary

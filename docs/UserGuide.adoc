@@ -1,6 +1,7 @@
-= Trajectory - Developer Guide
+= Trajectory - User Guide
 :site-section: UserGuide
 :toc:
+:toclevels: 3
 :toc-title:
 :toc-placement: preamble
 :sectnums:
@@ -12,7 +13,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T16-1/main
 
 By: `T16-1`      Since: `Aug 2018`      Licence: `MIT`
 
@@ -23,21 +24,13 @@ Trajectory is a lightweight management system for those who need a no-frills sol
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the program link:{repoURL}/releases[here]. [red]*(NOT AVAILABLE AT THIS TIME)*
+.  Copy the `.jar` file to your desired location.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
-e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
-
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
-
+.  You may start using the app. Use `help` command for a brief listing of all commands.
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
@@ -47,15 +40,14 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Items in square brackets are optional e.g `c/MODULE_CODE [p/PREREQUISITES]` can be used as `c/CS2113 p/CS2040C` or as `c/CS2113`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[p/PREREQUISITES]...` can be used as `{nbsp}` (i.e. 0 times), `p/CS2040C`, `p/CS2040C p/CS1010` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
-Format: `help` +
-Shows the help page.
+Format: `help`
 
 === Student Management
 ==== Add Student : `student add`
@@ -137,91 +129,147 @@ Exports all students in .csv format to the 'export' folder in C drive.
 * There must be at least 1 student in the system
 ****
 
-=== Grade Management
-==== Add Grade Component
-Adds a grade item to a module code. +
-Format: `gradebook add c/MODULE_CODE i/GRADE_ITEM  m/MAX_MARKS p/PERCENTAGE OF GRADE`
+==== Selecting a student : `select`
+
+Selects the student identified by the index number used in the displayed person list. +
+Format: `select INDEX`
 
 ****
-* Given percentage cannot exceed total available percentage
-* No duplicate grade items allowed
-****
-
-Examples:
-
-* `gradebook add c/CS2040C i/Assignment 1 m/10 p/10` +
-Adds grade component, Assignment 1, to module CS2040C with a maximum of 10 marks and constitutes 10% of overall marks
-* `gradebook add c/CS2040C i/Final Examinations m/100 p/60` +
-Adds grade component, Assignment 2, to module CS2040C with a maximum of 100 marks and constitutes 60% of overall marks
-
-==== Edit Grade Item
-Modifies a grade item. +
-Format: `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE`
-
-****
-* Module must exist.
+* Selects the student and loads the Google search page the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
 Examples:
 
-* `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10` +
-Updated overall marks of CS2040C Assignment 1 to 20 marks instead of 10 marks (with reference to 'Add Grade Item Example 1')
-* `gradebook add c/CS2040C i/Final Examinations m/100 p/50` +
-Updated Final Examinations grade percentage to 50% instead of 60% (with reference to 'Add Grade Item Example 2')
+* `list` +
+`select 2` +
+Selects the 2nd student in the address book.
+* `find Betsy` +
+`select 1` +
+Selects the 1st student in the results of the `find` command.
 
-==== Delete Grade Component
-Removes a grade item to a module code. +
-Format: `gradebook remove c/MODULE_CODE i/GRADE_ITEM'
-
-****
-* Module must exist.
-****
-
-Examples:
-
-* `gradebook remove m/CS2040C i/Assignment 1` +
-Deletes Assignment 1 component from module CS2040C.
-
-==== List Grade Components
-Lists all the grade items in a certain module. +
-Format: `gradebook list components c/MODULE_CODE'
+=== Module Management
+==== Adding a module : `module add`
+Adds a module to the system. +
+Format: `module add n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]...`
 
 ****
-* Module must exist.
+* Module code must be unique.
+* Prerequisite modules should be specified with the respective module codes.
+* Prerequisite modules must exist in the system.
 ****
 
 Examples:
 
-* `gradebook list components c/CS2040C` +
-Lists all the grade items for the module with module code CS2040C.
+* `module add n/EPP1 c/CG1111`
+* `module add n/Software Engineering c/CS2113 p/CS2040C`
 
-==== List Grades of Students
-Lists grades of all students enrolled in the module. +
-Format: `gradebook list grades c/MODULE_CODE'
-
-****
-* Module must exist.
-* Student must be enrolled in the module.
-****
-
-Examples:
-
-* `gradebook list grades c/CS2040C` +
-Lists all grades obtained by students in CS2040C module.
-
-==== Assign Grades
-Assigns marks to a student. +
-Format: `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS'
+==== Editing a module : `module edit`
+Edits an existing module in the system. +
+Format: `module edit c/MODULE_CODE [n/MODULE_NAME] [p/PREREQUISITES]...`
 
 ****
-* Student must be enrolled in the module.
-* Given marks must not exceed maximum marks.
+* Edits a module with the specified module code. The module code must exist in the system.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing the module prerequisites, the existing prerequisites of the module will be removed i.e adding of prerequisites is not cumulative.
+* You can remove all of the module’s prerequisites by typing `p/` without specifying any prerequisites after it.
 ****
 
 Examples:
 
-* `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10` +
-Assigns 10 marks to CS2040C student with matric number A0168111.
+* `module edit c/CG1111 n/Engineering Principles and Practices 1` +
+Edits the module name to `Engineering Principles and Practices 1`.
+* `module edit c/CS2113 p/` +
+Clears all existing prerequisites for the module.
+
+==== Deleting a module : `module delete`
+Deletes a module from the system. +
+Format: `module delete c/MODULE_CODE`
+
+****
+* The module must already exist in the system.
+* The user will be prompted to confirm the deletion of the module to prevent accidents.
+****
+
+Example:
+
+* `module delete c/CS2113` +
+Deletes the module with module code `CS2113`
+
+==== Archiving a module : `module archive`
+Archives a module that is no longer being taught to keep it as a historical record. +
+Format: `module archive c/MODULE_CODE`
+
+****
+* The archived module will no longer show up using the base module list command.
+* The module must already exist in the system.
+* The user will be prompted to confirm archiving the module to prevent accidents.
+****
+
+Example:
+
+* `module archive c/CS2113` +
+Archives the module with module code `CS2113`.
+
+==== Finding a module by module code : `module find`
+Finds modules whose module codes contain any of the given keywords. This is useful for checking if certain module exists in the system. +
+Format: `module find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The archived module will no longer show up using the base module list command.
+* The module must already exist in the system.
+* The user will be prompted to confirm archiving the module to prevent accidents.
+****
+
+Examples:
+
+* `module find cs2113` +
+Returns `CS2113`.
+* `module find cs2113 CS2040c` +
+Returns `CS2113` and `CS2040C`.
+
+==== Listing all modules : `module list`
+Shows a list of all modules in the system. +
+Format: `module list`
+
+==== Enrolling students : `module enrol`
+Enrols students into the specified module using their matriculation numbers or email addresses. +
+Format: `module enrol [i/MATRIC_NUMBER]... [e/EMAIL]...`
+
+****
+* At least one of the optional fields must be provided.
+* The student(s) must already exist in the system.
+****
+
+Examples:
+
+* `module enrol i/A0161234B` +
+Enrols a student with matric no. `A0161234B`.
+* `module enrol i/A0167263X A0179821B` +
+Enrols two students with matric no. `A0167263X` and `A0179821B`.
+* `module enrol e/e0191122@u.nus.edu` +
+Enrols a student with email `e0191122@u.nus.edu`.
+* `module enrol e/e0191234@u.nus.edu e0161234@u.nus.edu` +
+Enrols two students with email `e0191234@u.nus.edu` and `e0161234@u.nus.edu`.
+
+==== Assigning a TA : `module assign [coming in v2.0]`
+Assigns a student as a TA of the module. +
+Format: `module assign [i/MATRIC_NUMBER] [e/EMAIL]`
+
+****
+* At least one of the optional fields must be provided.
+* The student must already exist in the system.
+* There can be many TAs in a module, or none at all.
+****
+
+Examples:
+
+* `module assign i/A0171234B` +
+Assigns the student with matric no. `A0171234B` as a TA.
+* `module assign e/e0191234@u.nus.edu` +
+Assigns the student with email `e0191234@u.nus.edu` as a TA.
 
 =======
 === Class Management
@@ -230,7 +278,7 @@ Creates a class and assigns it to a module for the system. +
 Format: `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT`
 
 ****
-* Module code must exist before creating a class for the module
+* Module code must exist before creating a class for the module.
 ****
 
 Examples:
@@ -333,26 +381,178 @@ Examples:
 * `class modattend c/T16 i/A6942069M` +
 Modifies the attendance of the student of the admission number A6942069M for the class T16
 
-=== Selecting a person : `select`
-
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
+=== Grade Management
+==== Add Grade Component : `gradebook add`
+Adds a grade item to a module code. +
+Format: `gradebook add c/MODULE_CODE i/GRADE_ITEM  m/MAX_MARKS p/PERCENTAGE OF GRADE`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
+* Given percentage cannot exceed total available percentage
+* No duplicate grade items allowed
 ****
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+* `gradebook add c/CS2040C i/Assignment 1 m/10 p/10` +
+Adds grade component, Assignment 1, to module CS2040C with a maximum of 10 marks and constitutes 10% of overall marks
+* `gradebook add c/CS2040C i/Final Examinations m/100 p/60` +
+Adds grade component, Assignment 2, to module CS2040C with a maximum of 100 marks and constitutes 60% of overall marks
 
+==== Edit Grade Item : `gradebook edit` `[Coming in v1.3]`
+Modifies a grade item. +
+Format: `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE`
+
+****
+* Module must exist.
+****
+
+Examples:
+
+* `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10` +
+Updated overall marks of CS2040C Assignment 1 to 20 marks instead of 10 marks (with reference to 'Add Grade Item Example 1')
+* `gradebook add c/CS2040C i/Final Examinations m/100 p/50` +
+Updated Final Examinations grade percentage to 50% instead of 60% (with reference to 'Add Grade Item Example 2')
+
+==== Delete Grade Component : `gradebook remove`
+Removes a grade item to a module code. +
+Format: `gradebook remove c/MODULE_CODE i/GRADE_ITEM'
+
+****
+* Module must exist.
+****
+
+Examples:
+
+* `gradebook remove m/CS2040C i/Assignment 1` +
+Deletes Assignment 1 component from module CS2040C.
+
+==== List Grade Components : `gradebook list components` `[Coming in v1.2]`
+Lists all the grade items in a certain module. +
+Format: `gradebook list components c/MODULE_CODE'
+
+****
+* Module must exist.
+****
+
+Examples:
+
+* `gradebook list components c/CS2040C` +
+Lists all the grade items for the module with module code CS2040C.
+
+==== List Grades of Students : `gradebook list grades` `[Coming in v1.2]`
+Lists grades of all students enrolled in the module. +
+Format: `gradebook list grades c/MODULE_CODE'
+
+****
+* Module must exist.
+* Student must be enrolled in the module.
+****
+
+Examples:
+
+* `gradebook list grades c/CS2040C` +
+Lists all grades obtained by students in CS2040C module.
+
+==== Assign Grades : `gradebook assign` `[Coming in v1.3]`
+Assigns marks to a student. +
+Format: `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS'
+
+****
+* Student must be enrolled in the module.
+* Given marks must not exceed maximum marks.
+****
+
+Examples:
+
+* `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10` +
+Assigns 10 marks to CS2040C student with matric number A0168111.
+
+=== Notes Management
+==== Adding a note : `note add`
+Adds a note to a module. +
+Format: `note add m/MODULE_CODE [p/PRIORITY_LEVEL] [d/DATE]`
+
+NOTE: `*The optional parameters PRIORITY_LEVEL and DATE will be available from v1.3*` +
+- PRIORITY_LEVEL = { 1 = LOW, 2 = MEDIUM, 3 = HIGH } +
+- If the PRIORITY_LEVEL is omitted, a default value of 1 (LOW) will be assigned to the created note. +
+- The DATE parameter follows the `DD.MM.YYYY` formatting only.
+
+****
+* Upon entering the `note add` command, the system will prompt the user to type his/her note.
+* The user can choose to cancel anytime during the note editing stage.
+****
+
+Examples:
+
+* `note add m/CS2113` +
+This tells the system that the note is to be saved in the CS2113 module with a LOW priority and it has no date.
+* `note add m/CS2113 p/2 d/31.12.2113` +
+This tells the system that the note is to be saved in the CS2113 module with a MEDIUM priority and a date (31 Dec 2113).
+
+==== Listing all notes from a module : `note list`
+Shows a list of all notes saved in the module. +
+Format: `note list m/MODULE_CODE [P]`
+
+NOTE: `*The optional parameter P will be available from v1.3*` +
+- Adding the `P` parameter allows the user to view notes based on their assigned PRIORITY_LEVEL from highest to lowest. +
+- It is not case-sensitive, hence the user can use either lowercase or uppercase. +
+- If `P` is omitted, the list displayed is sorted by the order of creation.
+
+Examples:
+
+* `note list m/CS1231` +
+This will list all the existing notes from the CS1231 module in the order of their creation.
+* `note list m/CS1231 p` +
+This is similar to the previous example, except that the system will display the list from highest to lowest PRIORITY_LEVEL.
+
+==== Deleting a note : `note delete` `[Coming in v1.2]`
+Deletes a specific note. +
+Format: `note delete m/MODULE_CODE INDEX`
+
+* Deletes the note with the specified INDEX.
+* The INDEX refers to the corresponding number of each note when `note list` command is used.
+
+Examples:
+
+* `note list m/CS2040C` +
+A list of all notes saved in CS2040C module is displayed. +
+`note delete m/CS2040C 1` +
+Deletes the note that corresponds to INDEX=1 in the list.
+
+==== Editing a note : `note edit` `[Coming in v1.3]`
+Edits an existing note. +
+Format: `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]`
+
+* Edits the note with the specified INDEX.
+* The INDEX refers to the corresponding number of each note when `note list` command is used.
+* Upon entering the `note edit` command, the system will prompt the user to type his/her modifications to the note.
+* The user can choose to cancel anytime during the note editing stage.
+
+Examples:
+
+* `note list m/CS1010` +
+A list of all notes saved in CS1010 module is displayed. +
+`note edit m/CS1010 3 d/10.10.2019` +
+The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its assigned DATE changed to 10/10/2019 while its PRIORITY_LEVEL remains unchanged.
+
+==== Finding a note : `note find` `[Coming in v1.2]`
+Search and display existing notes from a module using keywords. +
+Format: `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..`
+
+* Multiple keywords can be accepted.
+* A minimum of one keyword is required for the command to work.
+* Keywords are not case-sensitive.
+* Each keyword must consist only of a single word.
+
+Examples:
+
+* `note find m/CS2113 k/git k/OOP` +
+Lists all notes from CS2113 module which contain both keywords "git" and "OOP".
+
+=== Viewing help : `help`
+
+Shows the help page +
+Format: `help`
 
 === Listing entered commands : `history`
 
@@ -365,7 +565,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== (TO BE REVISED) Undoing previous command : `undo`
+=== Undoing previous command : `undo`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -391,7 +591,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== (TO BE REVISED) Redoing the previously undone command : `redo`
+=== Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -414,7 +614,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== (TO BE REVISED) Clearing all entries : `clear`
+=== Clearing all entries : `clear`
 
 Clears all entries from the address book. +
 Format: `clear`
@@ -434,100 +634,6 @@ There is no need to save manually.
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
-
-=== Notes Management
-
-==== Adding a note : `note add`
-Adds a note to a module. +
-Format: `note add m/MODULE_CODE [p/PRIORITY_LEVEL] [d/DATE]`
-
-NOTE: `*The optional parameters PRIORITY_LEVEL and DATE will be available from v1.3*` +
-- PRIORITY_LEVEL = { 1 = LOW, 2 = MEDIUM, 3 = HIGH } +
-- If the PRIORITY_LEVEL is omitted, a default value of 1 (LOW) will be assigned to the created note. +
-- The DATE parameter follows the `DD.MM.YYYY` formatting only.
-
-****
-* Upon entering the `note add` command, the system will prompt the user to type his/her note.
-* The user can choose to cancel anytime during the note editing stage.
-****
-
-Example(s):
-
-* `note add m/CS2113` +
-This tells the system that the note is to be saved in the CS2113 module with a LOW priority and it has no date.
-* `note add m/CS2113 p/2 d/31.12.2113` +
-This tells the system that the note is to be saved in the CS2113 module with a MEDIUM priority and a date (31 Dec 2113).
-
-{sp} +
-
-==== Listing all notes from a module : `note list`
-Shows a list of all notes saved in the module. +
-Format: `note list m/MODULE_CODE [P]`
-
-NOTE: `*The optional parameter P will be available from v1.3*` +
-- Adding the `P` parameter allows the user to view notes based on their assigned PRIORITY_LEVEL from highest to lowest. +
-- It is not case-sensitive, hence the user can use either lowercase or uppercase. +
-- If `P` is omitted, the list displayed is sorted by the order of creation.
-
-Example(s):
-
-* `note list m/CS1231` +
-This will list all the existing notes from the CS1231 module in the order of their creation.
-* `note list m/CS1231 p` +
-This is similar to the previous example, except that the system will display the list from highest to lowest PRIORITY_LEVEL.
-
-
-{sp} +
-
-==== Deleting a note : `note delete` `[Coming in v1.2]`
-Deletes a specific note. +
-Format: `note delete m/MODULE_CODE INDEX`
-
-* Deletes the note with the specified INDEX.
-* The INDEX refers to the corresponding number of each note when `note list` command is used.
-
-Example(s):
-
-* `note list m/CS2040C` +
-A list of all notes saved in CS2040C module is displayed. +
-`note delete m/CS2040C 1` +
-Deletes the note that corresponds to INDEX=1 in the list.
-
-{sp} +
-
-==== Editing a note : `note edit` `[Coming in v1.3]`
-Edits an existing note. +
-Format: `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]`
-
-* Edits the note with the specified INDEX.
-* The INDEX refers to the corresponding number of each note when `note list` command is used.
-* Upon entering the `note edit` command, the system will prompt the user to type his/her modifications to the note.
-* The user can choose to cancel anytime during the note editing stage.
-
-Example(s):
-
-* `note list m/CS1010` +
-A list of all notes saved in CS1010 module is displayed. +
-`note edit m/CS1010 3 d/10.10.2019` +
-The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its assigned DATE changed to 10/10/2019 while its PRIORITY_LEVEL remains unchanged.
-
-{sp} +
-
-==== Finding a note : `note find` `[Coming in v1.2]`
-Search and display existing notes from a module using keywords. +
-Format: `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..`
-
-* Multiple keywords can be accepted.
-* A minimum of one keyword is required for the command to work.
-* Keywords are not case-sensitive.
-* Each keyword must consist only of a single word.
-
-Example(s):
-
-* `note find m/CS2113 k/git k/OOP` +
-Lists all notes from CS2113 module which contain both keywords "git" and "OOP".
-
-{sp} +
 
 == FAQ
 
@@ -550,14 +656,40 @@ e.g. `student export C:\export`
 e.g. `gradebook add c/CS2040C i/Assignment 1 m/10 p/10`
 * *Edit Grade Item* : `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE` +
 e.g. `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10`
-* *Delete Grade Component* : `gradebook remove c/MODULE_CODE i/GRADE_ITEM' +
+* *Delete Grade Component* : `gradebook remove c/MODULE_CODE i/GRADE_ITEM` +
 e.g. `gradebook remove m/CS2040C i/Assignment 1`
-* *List Grade Components* : `gradebook list components c/MODULE_CODE' +
+* *List Grade Components* : `gradebook list components c/MODULE_CODE` +
 e.g. `gradebook list components c/CS2040C`
-* *List Grade Components* : `gradebook list grades c/MODULE_CODE' +
+* *List Grade Components* : `gradebook list grades c/MODULE_CODE` +
 e.g. `gradebook list grades c/CS2040C`
-* *Assign Grades* : `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS' +
+* *Assign Grades* : `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS` +
 e.g. `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10`
+* *Creating a class* `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT` +
+e.g. `class create c/T16 m/CG1111 e/20`
+* *Deleting a class* `class delete c/CLASS_NAME m/MODULE_CODE` +
+e.g. `class delete c/T16 m/CG1111`
+* *Assigning a student to class* `class addstudent c/CLASS_NAME m/MODULE_CODE` +
+e.g. `class addstudent c/T16 i/A6942069M`
+* *Unassigning a student from class* `class delstudent c/CLASS_NAME i/ADMISSION_NO` +
+e.g. `class delstudent c/T16 i/A6942069M`
+* *Modifying class enrollment limits* `class maxenroll c/CLASS_NAME e/NEW_MAX_ENROLLMENT_SIZE` +
+e.g. `class maxenroll c/T16 e/20`
+* *Accessing class attendance list* `class listattend c/CLASS_NAME` +
+e.g. `class listattend c/T16`
+* *Marking class attendance list* `class markattend c/CLASS_NAME i/ADMISSION_NO` +
+e.g. `class markattend c/T16 i/A6942069M`
+* *Modifying class attendance list* `class modattend c/CLASS_NAME i/ADMISSION_NO` +
+e.g. `class modattend c/T16 i/A6942069M`
+* *Add a note* `note add m/MODULE_CODE` +
+e.g. `note add m/CS2040C`
+* *List notes* `note list m/MODULE_CODE` +
+e.g. `note list m/CS2040C`
+* *Delete a note* `note delete m/MODULE_CODE INDEX` `[Coming in v1.2]` +
+e.g. `note delete m/CS2040C 8`
+* *Edit a note* `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]` `[Coming in v1.3] +
+e.g. `note edit m/CS2040C 5 p/3`
+* *Find a note* `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..` `[Coming in v1.2]` +
+e.g. `note find m/CS2040C k/bubble`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`

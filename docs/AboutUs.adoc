@@ -43,8 +43,8 @@ Responsibilities: Help out with Git and IntelliJ, making sure the project can ru
 image::tristyxxnana.jpg[width="150", align="left"]
 {empty}[https://github.com/tristyxxnana[github]] [<<tristyxxnana#, portfolio>>]
 
-Role: Developer +
-Responsibilities: TBD
+Role: Documentation +
+Responsibilities: Ensures all documentations are filled appropriately without any errors.
 
 '''
 

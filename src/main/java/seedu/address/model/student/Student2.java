@@ -29,8 +29,10 @@ public class Student extends Person {
      * @param tags
      */
 
-    private String courseCode;
-    private String matricNo;
+    private final String courseCode;
+    private final String matricNo;
+
+
 
     public Student(Name name, Phone phone, Email email, Address address,
                    Set<Tag> tags, String courseCode, String matricNo) {
@@ -47,11 +49,5 @@ public class Student extends Person {
         return matricNo;
     }
 
-    public void setCourseCode(String courseCode) {
-        this.courseCode = courseCode;
-    }
 
-    public void setMatricNo(String matricNo) {
-        this.matricNo = matricNo;
-    }
 }
