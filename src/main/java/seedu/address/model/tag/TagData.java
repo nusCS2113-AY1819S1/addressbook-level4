@@ -73,8 +73,7 @@ public class TagData {
                 .append(" Date: ")
                 .append(getDate())
                 .append(" MoneyFlow:")
-                .append(getMoneyFlow())
-                .append(" Tags: ");
+                .append(getMoneyFlow());
         return builder.toString();
     }
 

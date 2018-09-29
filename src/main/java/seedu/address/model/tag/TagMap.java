@@ -9,32 +9,34 @@ import java.util.List;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-public class TagList {
+public class TagMap {
 
-    private final ObservableMap<Tag, ObservableList<TagData>> internalTagList = FXCollections.observableHashMap();
+    private final ObservableMap<Tag, ObservableTagList> internalTagList = FXCollections.observableHashMap();
 
     public boolean contains(Tag tag, TagData toCheck) {
         requireAllNonNull(tag, toCheck);
-        List<TagData> TagList = internalTagList.get(tag);
-        return TagList.contains(toCheck);
+        return internalTagList.get(tag).contains(toCheck);
     }
 
     public void add(Tag tag, TagData toAdd) {
         requireAllNonNull(tag, toAdd);
-        List<TagData> TagList = internalTagList.get(tag);
-        if (contains(tag, toAdd)) {
-            throw new DuplicateRecordException();
-        }
-        TagList.add(toAdd);
+        internalTagList.get(tag).add(toAdd); // FIXME: ALWAYS CRASHES AT THIS LINE
     }
 
     public ObservableList<TagData> get(Tag tag) {
-        return internalTagList.get(tag);
+        return internalTagList.get(tag).asUnmodifiableObservableList();
     }
 
     @Override
     public int hashCode() {
         return internalTagList.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TagMap // instanceof handles nulls
+                && internalTagList.equals(((TagMap) other).internalTagList));
     }
 
 }

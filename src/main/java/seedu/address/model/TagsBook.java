@@ -1,18 +1,17 @@
 package seedu.address.model;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagData;
-import seedu.address.model.tag.TagList;
+import seedu.address.model.tag.TagMap;
 
 public class TagsBook implements ReadOnlyTagsBook {
 
-    private final TagList records;
+    private final TagMap tagMap;
 
     {
-        records = new TagList();
+        tagMap = new TagMap();
     }
 
     public void addTags(Record toAdd) {
@@ -23,22 +22,22 @@ public class TagsBook implements ReadOnlyTagsBook {
     }
 
     public void convertTags(Tag tag, TagData tagData) {
-        records.add(tag, tagData);
+        tagMap.add(tag, tagData);
     }
 
     @Override
     public ObservableList<TagData> getRecordList(Tag tag) {
-        return FXCollections.unmodifiableObservableList(records.get(tag));
+        return tagMap.get(tag);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TagsBook // instanceof handles nulls
-                && records.equals(((TagsBook) other).records));
+                && tagMap.equals(((TagsBook) other).tagMap));
     }
 
     @Override
-    public int hashCode() { return records.hashCode(); }
+    public int hashCode() { return tagMap.hashCode(); }
 
 }
