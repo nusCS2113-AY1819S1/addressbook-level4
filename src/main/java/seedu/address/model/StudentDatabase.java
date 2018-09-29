@@ -7,22 +7,22 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
-import seedu.address.model.student.Student;
+import seedu.address.model.student.Student2;
 
 
 /**
  *  The class holds students' data for use by the system.
  */
-public class StudentsData {
+public class StudentDatabase {
     // THIS IS A CUSTOM IMPLEMENTATION THAT OPERATES OUTSIDE THE BOUNDS OF HOW AB4 STORES ADDRESS BOOK DATA.
-    private static ArrayList<Student> studentsList;
+    private static ArrayList<Student2> studentDB;
 
     public void setupStudentData() {
 
-        studentsList = new ArrayList<Student>();
+        studentDB = new ArrayList<Student2>();
 
         // PLACEHOLDER
-        studentsList.add(new Student(new Name("Megan Nicole") , new Phone("91234567") ,
+        studentDB.add(new Student2(new Name("Megan Nicole") , new Phone("91234567") ,
                 new Email("megannicole@outlook.com"),
                 new Address("1 Park Avenue") , null , "CEG1" , "A1"));
 

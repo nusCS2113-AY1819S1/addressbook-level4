@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
  *
  */
 
-public class Student extends Person {
+public class Student2 extends Person {
     /**
      * Every field must be present and not null.
      *
@@ -34,9 +34,9 @@ public class Student extends Person {
 
 
 
-    public Student(Name name, Phone phone, Email email, Address address,
+    public Student2(Name name, Phone phone, Email email, Address address,
                    Set<Tag> tags, String courseCode, String matricNo) {
-        super(name, phone, email, address, tags);
+        super(name, phone, email, address, tags, courseCode, matricNo);
         this.courseCode = courseCode;
         this.matricNo = matricNo;
     }

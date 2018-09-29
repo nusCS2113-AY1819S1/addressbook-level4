@@ -20,11 +20,15 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_MATRIC_NO = "A0001";
+    public static final String DEFAULT_COURSE_CODE = "CEG1";
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
+    private String courseCode;
+    private String matricNo;
     private Set<Tag> tags;
 
     public PersonBuilder() {
@@ -32,6 +36,8 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        courseCode = DEFAULT_COURSE_CODE;
+        matricNo = DEFAULT_MATRIC_NO;
         tags = new HashSet<>();
     }
 
@@ -43,6 +49,8 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        courseCode = personToCopy.getCourseCode();
+        matricNo = personToCopy.getMatricNo();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -86,8 +94,22 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code CourseCocde} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withCourseCode(String courseCode) {
+        this.courseCode = courseCode;
+        return this;
+    }
+    /**
+     * Sets the {@code MatricNo} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withMatricNo(String phone) {
+        this.matricNo = matricNo;
+        return this;
+    }
     public Person build() {
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, address, tags, courseCode, matricNo);
     }
 
 }

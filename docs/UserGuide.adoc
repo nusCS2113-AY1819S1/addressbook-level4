@@ -61,7 +61,7 @@ Examples:
 
 ==== Editing a student : `student edit`
 Edits an existing student in the system. +
-Format: student edit INDEX [n/NAME] [i/ADMIN_NUMBER] [c/CLASS] [p/MOBILE_NUMBER] [e/EMAIL a/ADDRESS]
+Format: student edit INDEX [n/NAME] [i/ADMIN_NUMBER] [c/COURSE_CODE] [p/MOBILE_NUMBER] [e/EMAIL a/ADDRESS]
 
 Examples:
 
@@ -71,12 +71,12 @@ Edits the phone number and home address of the 1st person to be 99887890 and 14 
 Edits only the address of the 2nd person to be 14 Jurong East Street 91.
 
 ****
-* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed student list. The index must be a must be a positive integer 1,2,3,...
+* Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list. The index must be a must be a positive integer 1,2,3,...
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 ****
 
-==== Find a student by name/matric no : `student find`
+==== Find a student by name/matric no : `student find` [Coming in v1.2]
 Find student(s) whose names contain any of the given keywords. +
 Format:  find [n/STUDENT_NAME] [i/MATRIC_NO]
 
@@ -115,7 +115,7 @@ Deletes the 2nd person in the system
 * The index must be a must be a positive integer 1,2,3,...
 ****
 
-==== Export students : `student export`
+==== Export students : `student export`  [Coming in v1.3]
 Exports students to a .csv file +
 Format: student export LOCATION
 
@@ -271,7 +271,6 @@ Assigns the student with matric no. `A0171234B` as a TA.
 * `module assign e/e0191234@u.nus.edu` +
 Assigns the student with email `e0191234@u.nus.edu` as a TA.
 
-=======
 === Class Management
 ==== Creating a class : `class create`
 Creates a class and assigns it to a module for the system. +
