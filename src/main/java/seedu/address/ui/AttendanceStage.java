@@ -39,7 +39,7 @@ public class AttendanceStage extends UiPart<Stage> {
     private TableColumn<Person, String> addressColumn;
 
     @FXML
-    private TableColumn<Person, String> EmailColumn;
+    private TableColumn<Person, String> emailColumn;
 
 
     /**
@@ -72,7 +72,7 @@ public class AttendanceStage extends UiPart<Stage> {
         // Initialize the person table with all the data
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("address"));
-        EmailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         phoneColumn.setCellValueFactory(new PropertyValueFactory<>("phone"));
 
         PersonTable.setItems(Persons);
