@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 
 public class Gender {
-    public static final String GENDER_VALIDATION_REGEX = "[FM]*";
+    public static final String GENDER_VALIDATION_REGEX = "[FM]";
 
     public static final String MESSAGE_GENDER_CONSTRAINTS =
-            "Genders are restricted to either M(Male) or F(Female), and it should not be blank ";
+            "Gender is restricted to either M(Male) or F(Female), and it should not be blank ";
 
     public final String gender;
 

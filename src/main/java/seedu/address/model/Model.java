@@ -38,7 +38,8 @@ public interface Model {
     /**
      * Replaces the given candidate {@code target} with {@code editedCandidate}.
      * {@code target} must exist in the address book.
-     * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the address book.
+     * The candidate identity of {@code editedCandidate} must not be the same as another existing candidate in the
+     * address book.
      */
     void updatePerson(Candidate target, Candidate editedCandidate);
 
