@@ -9,21 +9,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 
 public class Gender {
+    public static final String NAME_VALIDATION_REGEX = "[AM]*";
+
+    public static final String MESSAGE_GENDER_CONSTRAINTS =
+            "Genders are restricted to either M(Male) or F(Female), and it should not be blank ";
+
     public Gender(String gender){
-
-        public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-
-        public static final String MESSAGE_GENDER_CONSTRAINTS =
-                "Genders are restricted to either M(Male) or F(Female), and it should not be blank ";
-                requireNonNull(gender);
-                checkArgument(isValidGender(gender), MESSAGE_GENDER_CONSTRAINTS);
+        requireNonNull(gender);
+        checkArgument(isValidGender(gender), MESSAGE_GENDER_CONSTRAINTS);
     }
 
     /**
      * Returns true if a given string is a valid gender.
      */
     public static boolean isValidGender(String test) {
-//        return test.matches(NAME_VALIDATION_REGEX);
         return true;
     }
 }
