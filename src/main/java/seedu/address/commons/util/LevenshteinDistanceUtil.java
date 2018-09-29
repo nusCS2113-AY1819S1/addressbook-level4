@@ -1,13 +1,15 @@
 package seedu.address.commons.util;
 
 /**
+ * Solution below adapted from:
+ * https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Levenshtein_distance#Java
  * Computes levenshteinDistance from strings
  */
 public interface LevenshteinDistanceUtil {
     /**
      * Computes levenshteinDistance from strings
      */
-    public static int levenshteinDistance (CharSequence lhs, CharSequence rhs) {
+    static int levenshteinDistance (CharSequence lhs, CharSequence rhs) {
         int len0 = lhs.length() + 1;
         int len1 = rhs.length() + 1;
 
