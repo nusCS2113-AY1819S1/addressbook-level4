@@ -908,6 +908,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |teacher |attach deadlines to notes |keep track of upcoming deadlines and important dates
 
+|`* *` |teacher |find specific notes | search for notes quickly without having to go through an entire list
+
 |=======================================================================
 
 [appendix]
@@ -1793,7 +1795,8 @@ Use case ends.
 
 *Pre-condition*
 
-Module must exist in data file.
+Module must exist in data file. +
+Notes must exist in data file.
 
 *MSS*
 
@@ -1833,7 +1836,8 @@ Use case ends.
 
 *Pre-condition*
 
-Module must exist in data file.
+Module must exist in data file. +
+Note must exist in data file.
 
 *MSS*
 
@@ -1891,7 +1895,8 @@ Use case resumes at step 2.
 
 *Pre-condition*
 
-Module must exist in data file.
+Module must exist in data file. +
+Note must exist in data file.
 
 *MSS*
 
@@ -1953,6 +1958,47 @@ Use case ends.
 ** 5b1. System informs the user that the input is invalid.
 +
 Use case resumes at step 4.
+
+[discrete]
+=== Use case: Finding notes
+
+*Pre-condition*
+
+Module must exist in data file. +
+Notes must exist in data file.
+
+*MSS*
+
+1.  Teacher requests to find notes that from a module which contains a set of keywords.
+2.  System displays the complete numbered list of notes found with the keyword(s).
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Teacher enters an invalid command.
++
+[none]
+** 1a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+[none]
+* 1b. The module does not exist.
++
+[none]
+** 1b1. System displays a message that the module is not found.
++
+Use case resumes at step 1.
+
+[none]
+* 2b. There are no entries found with the entered keyword(s).
++
+[none]
+** 2b1. System displays a message that no entries are found.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
