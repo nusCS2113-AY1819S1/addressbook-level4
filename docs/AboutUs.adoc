@@ -15,16 +15,16 @@ image::chelseyong.jpeg[width="150", align="left"]
 {empty} [https://github.com/chelseyong[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: UI
+Responsibilities: Deadline & Task features
 
 '''
 
 === Jeremy Aw
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+image::jeremyaw.JPG[width="150", align="left"]
+{empty}[http://github.com/jeremyinelysium[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead +
-Responsibilities: Logic
+Role: Developer +
+Responsibilities: Deadline features
 
 '''
 
@@ -42,7 +42,7 @@ image::ChanChunCheong.jpeg[width="150", align="left"]
 {empty}[https://github.com/ChanChunCheong[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Task features
 
 '''
 
