@@ -855,6 +855,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 == Use Cases
 
 (For all use cases below, the *System* is the `TaskBook` and the *Actor* is the `student`, unless specified otherwise)
+
 [discrete]
 === Use case: Add new task
 
@@ -866,6 +867,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 Use case ends.
 
 *Extensions*
+
 * 1a. Student enters an invalid command format
 ** 1a1. TB requests for a valid command
 ** 1a2. Student enters a new add command
@@ -874,11 +876,11 @@ Use case resumes at step 2.
 
 * 1b. Student enters a duplicated task
 ** 1b1. TB outputs an error message
-
 +
 Use case ends.
 
 [discrete]
+
 === Use case: Complete task
 
 *MSS*
@@ -886,7 +888,7 @@ Use case ends.
 1.  Student requests to complete a new task
 2.  TB checks for its validity, change the status of the task to completed
 +
-Use case ends.
+Use case resumes at step 2.
 
 *Extensions*
 
