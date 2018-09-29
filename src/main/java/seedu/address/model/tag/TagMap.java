@@ -13,12 +13,12 @@ public class TagMap {
 
     public boolean contains(Tag tag, TagData toCheck) {
         requireAllNonNull(tag, toCheck);
-        return internalMap.get(tag).stream().anyMatch(toCheck::isSameTag);
+        return internalMap.get(tag).stream().anyMatch(toCheck::isSameTag); // FIXME: CRASHES HERE NOW
     }
 
     public void add(Tag tag, TagData toAdd) {
         requireAllNonNull(tag, toAdd);
-        if (contains(tag, toAdd)) { // FIXME: CRASHES HERE NOW
+        if (contains(tag, toAdd)) {
             throw new DuplicateRecordException();
         }
         internalMap.get(tag).add(toAdd);
