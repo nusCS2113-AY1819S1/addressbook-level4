@@ -20,8 +20,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.candidate.*;
+import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.Name;
+import seedu.address.model.candidate.Phone;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -13,10 +13,10 @@ import seedu.address.model.candidate.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A candidate is considered unique by comparing using {@code Candidate#isSamePerson(Candidate)}. As such, adding and updating of
- * persons uses Candidate#isSamePerson(Candidate) for equality so as to ensure that the candidate being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a candidate uses Candidate#equals(Object) so
- * as to ensure that the candidate with exactly the same fields will be removed.
+ * A candidate is considered unique by comparing using {@code Candidate#isSamePerson(Candidate)}. As such, adding and
+ * updating of persons uses Candidate#isSamePerson(Candidate) for equality so as to ensure that the candidate being
+ * added or updated is unique in terms of identity in the UniquePersonList. However, the removal of a candidate uses
+ * Candidate#equals(Object) so as to ensure that the candidate with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
