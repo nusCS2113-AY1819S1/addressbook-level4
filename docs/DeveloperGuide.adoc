@@ -1392,10 +1392,10 @@ Use case resumes at step 1.
 
 *MSS* :
 [none]
-* 1. Teacher creates grade component.
-* 2. System requests for confirmation by displaying input.
-* 3. Teacher confirms request.
-* 4. System indicates success message.
+* 1. Teacher creates grade component. +
+* 2. System requests for confirmation by displaying input. +
+* 3. Teacher confirms request. +
+* 4. System indicates success message. +
 * Use case ends.
 
 *Extensions* :
