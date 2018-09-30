@@ -14,11 +14,22 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCandidateCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.candidate.NameContainsKeywordsPredicate;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -32,7 +43,8 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Candidate candidate = new PersonBuilder().build();
-        AddCandidateCommand command = (AddCandidateCommand) parser.parseCommand(PersonUtil.getAddCandidateCommand(candidate));
+        AddCandidateCommand command =
+                (AddCandidateCommand) parser.parseCommand(PersonUtil.getAddCandidateCommand(candidate));
         assertEquals(new AddCandidateCommand(candidate), command);
     }
 
