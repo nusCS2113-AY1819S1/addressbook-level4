@@ -19,11 +19,13 @@ public class GuiRobot extends FxRobot {
 
     private static final String PROPERTY_TESTFX_HEADLESS = "testfx.headless";
 
+
     private final boolean isHeadlessMode;
 
     public GuiRobot() {
         String headlessPropertyValue = System.getProperty(PROPERTY_TESTFX_HEADLESS);
-        isHeadlessMode = headlessPropertyValue != null && headlessPropertyValue.equals("true");
+        isHeadlessMode = headlessPropertyValue !=
+                null && headlessPropertyValue.equals("true");
     }
 
     /**
