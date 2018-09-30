@@ -58,7 +58,7 @@ public class TagsContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_TagsDoNotContainKeywords_returnsFalse() {
+    public void test_tagsDoNotContainKeywords_returnsFalse() {
         // Zero keywords
         TagsContainsKeywordsPredicate predicate = new TagsContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new RecordBuilder().withTags("Alice").build()));

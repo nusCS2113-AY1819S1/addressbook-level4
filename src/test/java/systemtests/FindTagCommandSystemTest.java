@@ -4,9 +4,9 @@ import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.TypicalRecords.CAIFAN;
-import static seedu.address.testutil.TypicalRecords.ZT;
-import static seedu.address.testutil.TypicalRecords.INDO;
 import static seedu.address.testutil.TypicalRecords.IDA;
+import static seedu.address.testutil.TypicalRecords.INDO;
+import static seedu.address.testutil.TypicalRecords.ZT;
 
 import org.junit.Test;
 
