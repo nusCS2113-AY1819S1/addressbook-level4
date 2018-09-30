@@ -84,14 +84,14 @@ Shows a list of all records in the address book which fulfills a certain criteri
 There are 3 modes, default mode, single argument mode and dual argument mode. +
 Format: +
 Default mode: `list` +
-Single argument mode: `list d/ [DATE]`
-Dual argument mode: `list d/ [START_DATE] [END_DATE]`
+Single argument mode: `list d/DATE`
+Dual argument mode: `list d/START_DATE END_DATE`
 
 *****
 * The default mode will list down all records in the addressbook. +
-* The single argument mode will list down all records with the date equal to [DATE] specified in the format. +
-* The dual argument mode will list down all records with date equal to or later than [START_DATE]
-and earlier than or equal to [END_DATE] +
+* The single argument mode will list down all records with the date equal to DATE specified in the format. +
+* The dual argument mode will list down all records with date equal to or later than START_DATE
+and earlier than or equal to END_DATE +
 *****
 
 Examples:
