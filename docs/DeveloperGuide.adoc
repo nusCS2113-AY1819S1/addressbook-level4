@@ -919,34 +919,37 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 [discrete]
 === Use case: Add student
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher adds student to system
 2.  System adds student to system, and show a confirmation message.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
-[none]
+
 * 2b. Teacher enters improperly formatted command.
 +
-[none]
 ** 2b1. System displays the proper format for usage of the command.
 +
 Use case resumes at step 1.
-[none]
+
 * 2c. Student already exists in system.
 +
-[none]
 ** 2c1. System shows 'duplicate student' message.
 +
 Use case resumes at step 1.
@@ -954,34 +957,37 @@ Use case resumes at step 1.
 
 [discrete]
 === Use case: Remove student
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher removes student from system
 2.  System removes student to system, and show a confirmation message.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
-[none]
+
 * 2b. Teacher enters improperly formatted command.
 +
-[none]
 ** 2b1. System displays the proper format for usage of the command.
 +
 Use case resumes at step 1.
-[none]
+
 * 2c. Student not found in system.
 +
-[none]
 ** 2c1. System shows 'invalid student' message.
 +
 Use case resumes at step 1.
@@ -989,34 +995,37 @@ Use case resumes at step 1.
 
 [discrete]
 === Use case: Find student
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher finds student with entered details
 2.  System locates student details and displays it to the teacher.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
-[none]
+
 * 2b. Teacher enters improperly formatted command.
 +
-[none]
 ** 2b1. System displays the proper format for usage of the command.
 +
 Use case resumes at step 1.
-[none]
+
 * 2c. Student not found in system.
 +
-[none]
 ** 2c1. System shows 'invalid student' message.
 +
 Use case resumes at step 1.
@@ -1024,34 +1033,37 @@ Use case resumes at step 1.
 
 [discrete]
 === Use case: List students
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher lists students
 2.  System displays list of all students by default
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
-[none]
+
 * 2b. Teacher enters improperly formatted command.
 +
-[none]
 ** 2b1. System displays the proper format for usage of the command.
 +
 Use case resumes at step 1.
-[none]
+
 * 2c. There are no students in the system.
 +
-[none]
 ** 2c1. System shows 'no students in system' message.
 +
 Use case resumes at step 1.
@@ -1059,41 +1071,43 @@ Use case resumes at step 1.
 
 [discrete]
 === Use case: Export all students to file
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher exports all students to file.
 2.  System exports all students to file and display confirmation message.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
-[none]
+
 * 2b. Teacher enters improperly formatted command.
 +
-[none]
 ** 2b1. System displays the proper format for usage of the command.
 +
 Use case resumes at step 1.
-[none]
+
 * 2c. Invalid save location.
 +
-[none]
 ** 2c1. System shows 'invalid save location' message.
 +
 Use case resumes at step 1.
-[none]
+
 * 2d. No students to export.
 +
-[none]
 ** 2d1. System shows 'no students to export' message.
 +
 Use case resumes at step 1.
@@ -1101,41 +1115,43 @@ Use case resumes at step 1.
 
 [discrete]
 === Use case: Import students from file
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher imports students from file.
 2.  System imports students from file and display confirmation message.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
-[none]
+
 * 2b. Teacher enters improperly formatted command.
 +
-[none]
 ** 2b1. System displays the proper format for usage of the command.
 +
 Use case resumes at step 1.
-[none]
+
 * 2c. Invalid file location.
 +
-[none]
 ** 2c1. System shows 'invalid file location' message.
 +
 Use case resumes at step 1.
-[none]
+
 * 2d. File in invalid format.
 +
-[none]
 ** 2d1. System shows 'invalid file format' message.
 +
 Use case resumes at step 1.
@@ -1143,97 +1159,103 @@ Use case resumes at step 1.
 
 [discrete]
 === Use case: Add module
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher wants to add a module to the system.
 2.  System successfully adds the module.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 2b. Teacher enters the wrong parameter prefix.
 +
-[none]
 ** 2b1. System displays the correct format for the command.
 +
 Use case resumes at step 1.
 
-[none]
 * 2c. Teacher enters a module code that already exists in the system.
 +
-[none]
 ** 2c1. System informs the user of the existence of the module.
 +
 Use case resumes at step 1.
 
-[none]
 * 2d. Teacher fills in the prerequisites with module codes that don’t exist.
 +
-[none]
 ** 2d1. System informs the user of the non-existing module codes.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Edit module
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher wants to edit a module to the system.
 2.  System successfully saves the changes made to the module.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 2b. Teacher enters the wrong parameter prefix.
 +
-[none]
 ** 2b1. System displays the correct format for the command.
 +
 Use case resumes at step 1.
 
-[none]
 * 2c. Teacher enters a module code that doesn’t exist in the system.
 +
-[none]
 ** 2c1. System informs the user that the module doesn’t exist.
 +
 Use case resumes at step 1.
 
-
-[none]
 * 2d. Teacher fills in the prerequisites with module codes that don’t exist.
 +
-[none]
 ** 2d1. System informs the user of the non-existing module codes.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Delete module
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher wants to delete a module in the system.
 2.  System prompts for confirmation to delete the module.
@@ -1242,41 +1264,42 @@ Use case resumes at step 1.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 2b. Teacher enters the wrong parameter prefix.
 +
-[none]
 ** 2b1. System displays the correct format for the command.
 +
 Use case resumes at step 1.
 
-[none]
 * 2c. Teacher enters a module code that doesn’t exist in the system.
 +
-[none]
 ** 2c1. System informs the user that the module doesn’t exist.
 +
 Use case resumes at step 1.
 
-[none]
 * 3a. Teacher rejects the confirmation to delete the module.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Archive module
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher wants to archive a module in the system.
 2.  System prompts for confirmation to archive the module.
@@ -1285,97 +1308,96 @@ Use case resumes at step 1.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 2b. Teacher enters the wrong parameter prefix.
 +
-[none]
 ** 2b1. System displays the correct format for the command.
 +
 Use case resumes at step 1.
 
-[none]
 * 2c. Teacher enters a module code that doesn’t exist in the system.
 +
-[none]
 ** 2c1. System informs the user that the module doesn’t exist.
 +
 Use case resumes at step 1.
 
-[none]
 * 3a. Teacher rejects the confirmation to delete the module.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Finding a module by module code
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NONE IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher searches for a module with some module codes as keywords.
 2.  System lists all the active modules that match any of the keywords.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 2b. Teacher enters keywords that do not match any modules.
 +
-[none]
 ** 2b1. System informs the user that no active modules were found.
 +
 Use case resumes at step 1.
 
-[none]
 * 2c. Teacher enters the `--all` option in the command
 +
-[none]
 ** 2c1. System displays all matching modules including archived modules.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Listing modules
+*Precondition(s)* :
 
-*MSS*
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher wants to see all the active modules in the system.
 2.  System lists all the active modules.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 2a. Teacher enters an invalid command.
 +
-[none]
 ** 2a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 2b. Teacher enters the `--all` option in the command
 +
-[none]
 ** 2b1. System displays all matching modules including archived modules.
 +
 Use case resumes at step 1.
@@ -1383,7 +1405,7 @@ Use case resumes at step 1.
 
 [discrete]
 === Use case: Create grade component
-*Precondition* :
+*Precondition(s)* :
 
 * Module code must exist.
 
@@ -1421,7 +1443,7 @@ Use case ends.
 
 [discrete]
 === Use case: Remove grade component
-*Precondition* :
+*Precondition(s)* :
 
 * Grade component must exist.
 * Corresponding module must exist.
@@ -1460,7 +1482,7 @@ Use case ends.
 
 [discrete]
 === Use case: Update grade component
-*Precondition* :
+*Precondition(s)* :
 
 * Grade component and corresponding module code must exist.
 * Percentage of grade must not exceed 100%.
@@ -1497,9 +1519,10 @@ Use case resumes from step 2.
 +
 Use case ends.
 
+
 [discrete]
 === Use case: List grade component
-*Precondition* :
+*Precondition(s)* :
 
 * Module must exist.
 
@@ -1535,7 +1558,7 @@ Use case ends.
 
 [discrete]
 === Use case: List students grades
-*Precondition* :
+*Precondition(s)* :
 
 * Students must be enrolled to the module.
 
@@ -1571,7 +1594,7 @@ Use case ends.
 
 [discrete]
 === Use case: Assigning students grade
-*Precondition* :
+*Precondition(s)* :
 
 * Students must be enrolled to the module
 * Grade item details(MAX_MARKS, PERCENTAGE OF GRADE) must exist.
@@ -1607,9 +1630,10 @@ Use case resumes from step 2.
 +
 Use case ends.
 
+
 [discrete]
 === Use case: Find Grade Component
-*Precondition* :
+*Precondition(s)* :
 
 * Grade component must exist.
 
@@ -1646,11 +1670,15 @@ Use case ends.
 [discrete]
 === Use case: Creating a class
 
-*Pre-condition*
+*Precondition(s)* :
 
-Module code exists in data file.
+* Module code exists in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  User enters command to create classroom.
 2.  Classroom is created for the module.
@@ -1658,24 +1686,27 @@ Module code exists in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. User entered invalid command.
 +
-[none]
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Deleting a class
 
-*Pre-condition*
+*Precondition(s)* :
 
-Module code exists in data file.
+* Module code exists in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  User enters command to delete a class from module.
 2.  Classroom is deleted from module.
@@ -1683,30 +1714,33 @@ Module code exists in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. User entered invalid command.
 +
-[none]
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
+
 * 1b. Specified class does not belong to module.
 +
-[none]
 ** 1b1. System displays specified class does not belong to module error.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Assigning a student to class
 
-*Pre-condition*
+*Precondition(s)* :
 
-Student exists in data file.
+* Student exists in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  User enters command to assign a student to class.
 2.  Student gets assigned to class.
@@ -1714,31 +1748,33 @@ Student exists in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. User entered invalid command.
 +
-[none]
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
-+
+
 * 1b. Class doesn’t exist.
 +
-[none]
 ** 1b1. System displays class not found error.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Unassigning a student from class
 
-*Pre-condition*
+*Precondition(s)* :
 
-Student exists in data file.
+* Student exists in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  User enters command to unassign a student from class.
 2.  Student gets unassigned from class.
@@ -1746,37 +1782,39 @@ Student exists in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. User entered invalid command.
 +
-[none]
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
-+
+
 * 1b.  Module code doesn’t exist.
 +
-[none]
 ** 1b1. System displays module not found error.
 +
 Use case resumes at step 1.
+
 * 1c.  Specified student does not belong to class.
 +
-[none]
 ** 1c1. System displays specified student does not belong to class error.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Modifying class enrollment limits
 
-*Pre-condition*
+*Precondition(s)* :
 
-Class must exist in data file.
+* Class must exist in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  User enters command to modify class enrollment limits.
 2.  Class enrollment limits gets updated.
@@ -1784,12 +1822,10 @@ Class must exist in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. User entered invalid command.
 +
-[none]
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
@@ -1797,35 +1833,42 @@ Use case resumes at step 1.
 [discrete]
 === Use case: Accessing class attendance list
 
-*Pre-condition*
+*Precondition(s)* :
 
-Class must exist in data file.
+* Class must exist in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  User enters command to view class attendance list.
 2.  System displays the class attendance list.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. User entered invalid command.
 +
-[none]
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Marking class attendance list
 
-*Pre-condition*
+*Precondition(s)* :
 
-Class must exist in data file.
+* Class must exist in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  User enters command to mark class attendance.
 2.  Class attendance is marked for specified student.
@@ -1833,30 +1876,33 @@ Class must exist in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. User entered invalid command.
 +
-[none]
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
+
 * 1b. Specified student does not belong to class.
 +
-[none]
 ** 1b1. System displays specified student does not belong to class error.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Modifying class attendance list
 
-*Pre-condition*
+*Precondition(s)* :
 
-Class must exist in data file.
+* Class must exist in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  User enters command to modify class attendance list.
 2.  The class attendance list is updated.
@@ -1864,24 +1910,27 @@ Class must exist in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. User entered invalid command.
 +
-[none]
 ** 1a1. System shows ‘invalid format’ error.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Add a note to a module
 
-*Pre-condition*
+*Precondition(s)*
 
-Module must exist in data file.
+* Module must exist in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher requests to add a note to a module.
 2.  System prompts the teacher to enter his/her note.
@@ -1890,79 +1939,74 @@ Module must exist in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. Teacher enters an invalid command.
 +
-[none]
 ** 1a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 1b. The module does not exist.
 +
-[none]
 ** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
-[none]
 * 3a. The teacher decides to cancel.
 +
 Use case ends.
 
+
 [discrete]
 === Use case: Viewing notes
 
-*Pre-condition*
+*Precondition(s)* :
 
-Module must exist in data file. +
-Notes must exist in data file.
+* Module must exist in data file.
+* Notes must exist in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher requests to view the notes saved in a specific module.
 2.  System displays the complete numbered list of notes saved in the module.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. Teacher enters an invalid command.
 +
-[none]
 ** 1a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 1b. The module does not exist.
 +
-[none]
 ** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
-[none]
 * 2b. There are no saved entries of notes in the module.
 +
-[none]
 ** 2b1. System displays a message that no entries are found.
 +
 Use case ends.
 
+
 [discrete]
 === Use case: Deleting a note
 
-*Pre-condition*
+*Precondition(s)* :
 
-Module must exist in data file. +
-Note must exist in data file.
+* Module must exist in data file.
+* Note must exist in data file.
 
-*MSS*
+*MSS* :
 
 1.  Teacher requests to list all notes in a module.
 2.  System displays the complete numbered list of notes saved in the module.
@@ -1971,57 +2015,52 @@ Note must exist in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. Teacher enters an invalid command.
 +
-[none]
 ** 1a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 1b. The module does not exist.
 +
-[none]
 ** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
-[none]
 * 2a. There are no saved entries of notes in the module.
 +
-[none]
 ** 2a1. System displays a message that no entries are found.
 +
 Use case ends.
 
-[none]
 * 3a. Teacher enters an invalid command.
 +
-[none]
 ** 3a1. System displays the list of valid commands.
 +
 Use case resumes at step 3.
 
-[none]
 * 3b. The given index is invalid.
 +
-[none]
 ** 3b1. System informs the user that the input is invalid.
 +
 Use case resumes at step 2.
 
+
 [discrete]
 === Use case: Editing a note
 
-*Pre-condition*
+*Precondition(s)* :
 
-Module must exist in data file. +
-Note must exist in data file.
+* Module must exist in data file.
+* Note must exist in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher requests to list all notes in a module.
 2.  System displays the complete numbered list of notes saved in the module.
@@ -2032,96 +2071,84 @@ Note must exist in data file.
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. Teacher gives an invalid command.
 +
-[none]
 ** 1a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 1b. The module does not exist.
 +
-[none]
 ** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
-[none]
 * 2a. There are no saved entries of notes in the module.
 +
-[none]
 ** 2a1. System displays a message that no entries are found.
 +
 Use case ends.
 
-[none]
 * 3a. The given index is invalid.
 +
-[none]
 ** 3a1. System informs the user that the input is invalid.
 +
 Use case resumes at step 2.
 
-[none]
 * 5a. The teacher decides to cancel.
 +
-[none]
 ** 5a1. System cancels the editing process.
 +
 Use case ends.
 
-[none]
 * 5b. The modified note is an empty text.
 +
-[none]
 ** 5b1. System informs the user that the input is invalid.
 +
 Use case resumes at step 4.
 
+
 [discrete]
 === Use case: Finding notes
 
-*Pre-condition*
+*Precondition(s)* :
 
-Module must exist in data file. +
-Notes must exist in data file.
+* Module must exist in data file.
+* Notes must exist in data file.
 
-*MSS*
+*Guarantees* :
+
+* TBC
+
+*MSS* :
 
 1.  Teacher requests to find notes which contains a set of keywords from a module.
 2.  System displays the complete numbered list of notes found with the keyword(s).
 +
 Use case ends.
 
-*Extensions*
+*Extensions* :
 
-[none]
 * 1a. Teacher enters an invalid command.
 +
-[none]
 ** 1a1. System displays the list of valid commands.
 +
 Use case resumes at step 1.
 
-[none]
 * 1b. The module does not exist.
 +
-[none]
 ** 1b1. System displays a message that the module is not found.
 +
 Use case resumes at step 1.
 
-[none]
 * 2b. There are no entries found with the entered keyword(s).
 +
-[none]
 ** 2b1. System displays a message that no entries are found.
 +
 Use case ends.
+
 
 [appendix]
 == Non Functional Requirements
