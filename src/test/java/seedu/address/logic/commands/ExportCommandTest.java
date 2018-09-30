@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 class ExportCommandTest {
-    private final static Logger logger = Logger.getLogger(ExportCommand.class.getName());
+    private static final Logger logger = Logger.getLogger(ExportCommand.class.getName());
 
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
