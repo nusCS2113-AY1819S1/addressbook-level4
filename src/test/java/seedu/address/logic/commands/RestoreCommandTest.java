@@ -16,10 +16,10 @@ import seedu.address.model.backup.BackupList;
 
 
 class RestoreCommandTest {
+    private final static Logger logger = Logger.getLogger(ImportCommand.class.getName());
+
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
-
-    private final static Logger logger = Logger.getLogger(ImportCommand.class.getName());
 
     @Test
     public void execute_snapshots_success() {
