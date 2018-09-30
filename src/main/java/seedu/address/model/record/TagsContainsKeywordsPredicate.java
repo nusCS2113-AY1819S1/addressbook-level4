@@ -6,6 +6,9 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Tests that a {@code Record}'s {@code Tags} matches any of the keywords given.
+ */
 public class TagsContainsKeywordsPredicate implements Predicate<Record> {
     private final List<String> keywords;
 
@@ -13,9 +16,12 @@ public class TagsContainsKeywordsPredicate implements Predicate<Record> {
         this.keywords = keywords;
     }
 
-    public boolean testIfSetContainsString(Record record){
-        for (Tag x : record.getTags()){
-            if (keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(x.tagName, keyword))){
+    /**
+     * Tests that each of a {@code Record}'s {@code Tags} matches any of the keywords given.
+     */
+    public boolean testIfSetContainsString(Record record) {
+        for (Tag x : record.getTags()) {
+            if (keywords.stream().anyMatch(keyword -> StringUtil.containsWordIgnoreCase(x.tagName, keyword))) {
                 return true;
             }
         }
