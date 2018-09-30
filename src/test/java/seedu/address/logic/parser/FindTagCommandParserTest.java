@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-
 import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.model.record.TagsContainsKeywordsPredicate;
 
@@ -18,7 +17,8 @@ public class FindTagCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
     }
 
     @Test

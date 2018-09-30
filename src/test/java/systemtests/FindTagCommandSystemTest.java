@@ -3,12 +3,10 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalRecords.*;
-import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+import static seedu.address.testutil.TypicalRecords.CAIFAN;
 import static seedu.address.testutil.TypicalRecords.ZT;
-
-import java.util.ArrayList;
-import java.util.List;
+import static seedu.address.testutil.TypicalRecords.INDO;
+import static seedu.address.testutil.TypicalRecords.IDA;
 
 import org.junit.Test;
 
@@ -18,9 +16,8 @@ import seedu.address.logic.commands.FindTagCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
 
-public class FindTagCommandSystemTest extends AddressBookSystemTest{
+public class FindTagCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void find() {

@@ -65,7 +65,7 @@ public class TagsContainsKeywordsPredicateTest {
 
         // Non-matching keyword
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("Carol"));
-        assertFalse(predicate.test(new RecordBuilder().withTags("Alice",  "Bob").build()));
+        assertFalse(predicate.test(new RecordBuilder().withTags("Alice", "Bob").build()));
 
         // Keywords match name parameters, money flow and date but not tags
         predicate = new TagsContainsKeywordsPredicate(Arrays.asList("12-3-1945", "11.24", "Main", "-10.24"));
