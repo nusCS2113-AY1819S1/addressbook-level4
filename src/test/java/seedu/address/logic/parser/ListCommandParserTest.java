@@ -15,8 +15,9 @@ import seedu.address.model.record.Date;
 
 public class ListCommandParserTest {
 
-    private final String WHITESPACE = "\t \n \r";
-    private final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE);
+    private static final String WHITESPACE = "\t \n \r";
+    private static final String MESSAGE_INVALID_FORMAT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            ListCommand.MESSAGE_USAGE);
 
     private final ListCommandParser parser = new ListCommandParser();
 
@@ -32,7 +33,7 @@ public class ListCommandParserTest {
     }
 
     @Test
-    public void parse_oneArgument_success(){
+    public void parse_oneArgument_success() {
         assertParseSuccess(parser, " " + PREFIX_DATE + WHITESPACE
                 + TYPICAL_START_DATE, new ListCommand(TYPICAL_START_DATE, TYPICAL_START_DATE));
     }
