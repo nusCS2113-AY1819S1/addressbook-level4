@@ -20,10 +20,12 @@ public class ListCommandParser implements Parser<ListCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     // TODO: Make the switch a bit cleaner
-    public ListCommand parse(String args) throws ParseException{
+    public ListCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         // If no argument is specified, default is list all
-        if (trimmedArgs.isEmpty()) return new ListCommand();
+        if (trimmedArgs.isEmpty()) {
+            return new ListCommand();
+        }
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
@@ -55,8 +57,15 @@ public class ListCommandParser implements Parser<ListCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+    /**
+     * Splits a string using whitespace as delimiters
+     * @param args
+     * @return array of split strings
+     */
     private static String[] splitByWhitespace(String args) {
-        if (args.isEmpty()) return null;
+        if (args.isEmpty()) {
+            return null;
+        }
         String[] argList = args.split("\\s+");
         return argList;
     }

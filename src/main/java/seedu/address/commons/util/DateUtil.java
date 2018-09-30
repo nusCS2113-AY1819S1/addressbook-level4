@@ -31,26 +31,26 @@ public class DateUtil {
     public static boolean isValidDate(int day, int month) {
         boolean isValid;
         switch(month) {
-            case JAN:
-            case MAR:
-            case MAY:
-            case JUL:
-            case AUG:
-            case OCT:
-            case DEC:
-                isValid = day <= THIRTYONEDAYS;
-                break;
-            case FEB:
-                isValid = day <= TWENTYEIGHTDAYS;
-                break;
-            case APR:
-            case JUN:
-            case SEP:
-            case NOV:
-                isValid = day <= THIRTYDAYS;
-                break;
-            default:
-                isValid = false;
+        case JAN:
+        case MAR:
+        case MAY:
+        case JUL:
+        case AUG:
+        case OCT:
+        case DEC:
+            isValid = day <= THIRTYONEDAYS;
+            break;
+        case FEB:
+            isValid = day <= TWENTYEIGHTDAYS;
+            break;
+        case APR:
+        case JUN:
+        case SEP:
+        case NOV:
+            isValid = day <= THIRTYDAYS;
+            break;
+        default:
+            isValid = false;
         }
         return isValid;
     }
