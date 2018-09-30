@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
 
+import java.util.logging.Logger;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -12,13 +14,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.backup.BackupList;
 
-import java.util.logging.Logger;
 
 class RestoreCommandTest {
-    private final static Logger logger = Logger.getLogger(ImportCommand.class.getName());
-
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
+
+    private final static Logger logger = Logger.getLogger(ImportCommand.class.getName());
 
     @Test
     public void execute_snapshots_success() {

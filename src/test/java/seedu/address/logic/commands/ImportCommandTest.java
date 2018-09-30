@@ -2,9 +2,9 @@ package seedu.address.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
 
-import java.util.logging.Logger;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +14,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 class ImportCommandTest {
-    private final static Logger logger = Logger.getLogger(ImportCommand.class.getName());
-
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
+
+    private final static Logger logger = Logger.getLogger(ImportCommand.class.getName());
 
     @Test
     public void execute_success() {
