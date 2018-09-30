@@ -171,8 +171,8 @@ public class AddCandidateCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCandidateCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "add" +
-                " " + PersonUtil.getPersonDetails(toAdd);
+        command = "add"
+                + " " + PersonUtil.getPersonDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */

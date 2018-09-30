@@ -19,8 +19,8 @@ import seedu.address.testutil.Assert;
 
 public class XmlAdaptedCandidateTest {
     private static final String INVALID_NAME = "R@chel";
-    private static final String INVALID_GENDER = "U";
-    private static final String INVALID_AGE= "123";
+    //private static final String INVALID_GENDER = "U";
+    //private static final String INVALID_AGE = "123";
     private static final String INVALID_PHONE = "+651234";
 
     private static final String INVALID_ADDRESS = " ";
