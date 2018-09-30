@@ -381,56 +381,58 @@ Examples:
 Modifies the attendance of the student of the admission number A6942069M for the class T16
 
 === Grade Management
-==== Add Grade Component : `gradebook add`
-Adds a grade item to a module code. +
-Format: `gradebook add c/MODULE_CODE i/GRADE_ITEM  m/MAX_MARKS p/PERCENTAGE OF GRADE`
+==== Create Grade Component : `gradebook add`
+Creates a grade item to a module code. +
+Format: `gradebook add c/MODULE_CODE g/GRADE_ITEM [m/MARKS_MAX] [p/GRADE_PERCENTAGE]`
 
 ****
-* Given percentage cannot exceed total available percentage
-* No duplicate grade items allowed
-****
-
-Examples:
-
-* `gradebook add c/CS2040C i/Assignment 1 m/10 p/10` +
-Adds grade component, Assignment 1, to module CS2040C with a maximum of 10 marks and constitutes 10% of overall marks
-* `gradebook add c/CS2040C i/Final Examinations m/100 p/60` +
-Adds grade component, Assignment 2, to module CS2040C with a maximum of 100 marks and constitutes 60% of overall marks
-
-==== Edit Grade Item : `gradebook edit` `[Coming in v1.3]`
-Modifies a grade item. +
-Format: `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE`
-
-****
-* Module must exist.
+* Given percentage cannot exceed total available percentage.
+* No duplicate grade items allowed.
 ****
 
 Examples:
 
-* `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10` +
-Updated overall marks of CS2040C Assignment 1 to 20 marks instead of 10 marks (with reference to 'Add Grade Item Example 1')
-* `gradebook add c/CS2040C i/Final Examinations m/100 p/50` +
-Updated Final Examinations grade percentage to 50% instead of 60% (with reference to 'Add Grade Item Example 2')
+* `gradebook add c/CS2040C g/Assignment 1 m/10 p/10` +
+Adds grade component, Assignment 1, to module CS2040C with a maximum of 10 marks and constitutes 10% of overall marks.
+* `gradebook add c/CS2040C g/Final Examinations` +
+Adds grade component, Final Examinations, to module CS2040C.
 
-==== Delete Grade Component : `gradebook remove`
+==== Remove Grade Component : `gradebook remove`
 Removes a grade item to a module code. +
-Format: `gradebook remove c/MODULE_CODE i/GRADE_ITEM'
+Format: `gradebook remove c/MODULE_CODE g/GRADE_ITEM'
 
 ****
-* Module must exist.
+* Module and grade item must exist.
 ****
 
 Examples:
 
-* `gradebook remove m/CS2040C i/Assignment 1` +
+* `gradebook remove m/CS2040C g/Assignment 1` +
 Deletes Assignment 1 component from module CS2040C.
+
+==== Update Grade Item : `gradebook update` `[Coming in v1.3]`
+Updates a grade item. +
+Format: `gradebook update c/MODULE_CODE g/GRADE_ITEM [m/MARKS_MAX] [p/GRADE_PERCENTAGE]`
+
+****
+* Grade component and module code must exist.
+* Percentage of grade must not exceed 100%.
+* Total sum of weightage for all grade components must not exceed 100%.
+****
+
+Examples:
+
+* `gradebook edit c/CS2040C g/Assignment 1 m/20` +
+Updated overall marks of CS2040C Assignment 1 to 20 marks.
+* `gradebook add c/CS2040C g/Final Examinations p/50` +
+Updated Final Examinations grade percentage to 50%.
 
 ==== List Grade Components : `gradebook list components` `[Coming in v1.2]`
 Lists all the grade items in a certain module. +
 Format: `gradebook list components c/MODULE_CODE'
 
 ****
-* Module must exist.
+* Module code must exist.
 ****
 
 Examples:
@@ -438,33 +440,46 @@ Examples:
 * `gradebook list components c/CS2040C` +
 Lists all the grade items for the module with module code CS2040C.
 
-==== List Grades of Students : `gradebook list grades` `[Coming in v1.2]`
+==== List Grades of Students : `gradebook list students` `[Coming in v1.2]`
 Lists grades of all students enrolled in the module. +
-Format: `gradebook list grades c/MODULE_CODE'
+Format: `gradebook list students c/MODULE_CODE'
 
 ****
-* Module must exist.
 * Student must be enrolled in the module.
 ****
 
 Examples:
 
-* `gradebook list grades c/CS2040C` +
+* `gradebook list students c/CS2040C` +
 Lists all grades obtained by students in CS2040C module.
 
 ==== Assign Grades : `gradebook assign` `[Coming in v1.3]`
 Assigns marks to a student. +
-Format: `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS'
+Format: `gradebook assign c/MODULE_CODE g/GRADE_ITEM i/MATRIC_NUMBER m/MARKS'
 
 ****
-* Student must be enrolled in the module.
-* Given marks must not exceed maximum marks.
+* Students must be enrolled to the module.
+* Grade item details (MAX_MARKS, PERCENTAGE OF GRADE) must exist.
+* Marks assigned must not exceed MAX_MARKS
 ****
 
 Examples:
 
-* `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10` +
+* `gradebook assign c/CS2040C g/Assignment 1 i/A0168111 m/10` +
 Assigns 10 marks to CS2040C student with matric number A0168111.
+
+==== Find Grade Component : `gradebook find` `[Coming in v1.2]`
+Assigns marks to a student. +
+Format: `gradebook find c/MODULE_CODE g/GRADE_ITEM'
+
+****
+* Grade component must exist.
+****
+
+Examples:
+
+* `gradebook find c/CS2040C g/Assignment 1` +
+Finds Assignment 1 component in module CS2040C.
 
 === Notes Management
 ==== Adding a note : `note add`
