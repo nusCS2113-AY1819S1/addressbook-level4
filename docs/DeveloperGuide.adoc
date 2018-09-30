@@ -852,32 +852,297 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== 1.  Use case: Input expense for a certain activity.
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to insert a spending amount
+2.  FinancialPlanner requests the amount of money
+3.  User enters the amount of money spent
+4.  FinancialPlanner requests for confirmation from user.
+5.  User confirms the amount.
+6.  FinancialPlanner requests the description of the item/activity that money was spent on
+7.  User enters the description of the item he spent on
+8.  FinancialPlanner requests for confirmation from user.
+9.  User confirms the description.
+10. FinancialPlanner processes the input and stores the information.
+11. FinancialPlanner shows the status update of the operation.
 +
 Use case ends.
 
 *Extensions*
 
-[none]
-* 2a. The list is empty.
+* 3a. User’s input is of invalid form.
+    FinancialPlanner throws invalid format error and shows the format needed.
+    Use case resumes at step 2.
+
+* 5a. User declines the confirmation.
+** Use case resumes at step 2.
+
+* 7a. User’s input is of invalid form.
+** FinancialPlanner throws invalid format error.
+** Use case resumes at step 6.
+
+* 9a. User declines the confirmation.
+** Use case resumes at step 6.
+
+[discrete]
+=== 2.  Use case: Delete expense entry.
+
+*MSS*
+
+1.  User requests to delete an entry
+2.  FinancialPlanner requests for date of entry to be deleted
+3.  User enters the date entry was added
+4.  FinancialPlanner shows list of entries and requests for entry to be deleted
+5.  User enters entry to be deleted
+6.  FinancialPlanner entry confirms entry to be deleted
+7.  User confirms the deletion
+8.  FinancialPlanner deletes the entry
 +
 Use case ends.
 
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
+*Extensions*
 
-_{More to be added}_
+* 1a. There are no entries to be delete.
+** FinancialPlanner throws no entry error.
+** Use Case Ends
+* 3a. User’s input is invalid.
+** FinancialPlanner throws invalid format error and shows format needed.
+** Use case resumes at step 2.
+* 3b User’s input date has no entries
+** FinancialPlanner throws no entry error.
+** Use case resumes at step 2.
+* 5a User’s input is not a valid entry.
+** FinancialPlanner throws invalid data error and resumes at step 4.
+* 7a User declines the confirmation.
+** Use case resumes at step 4.
+
+[discrete]
+=== 3.  Use case: See history of expenses for a certain period
+
+*MSS*
+
+1.  User requests to see history.
+2.  FinancialPlanner requests for the period intended
+3.  User enters the intended period.
+4.  FinancialPlanner requests for confirmation from user.
+5.  User confirms the period.
+6.  FinancialPlanner returns the history of all expenses within the period.
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User’s input is of invalid form.
+** FinancialPlanner throws invalid format error and shows the format needed.
+** Use case resumes at step 2.
+* 5a. User declines the confirmation.
+** Use case resumes at step 2.
+* 6a. There is no history.
+** FinancialPlanner notifies that there is no history.
+** Use case ends.
+** Use case resumes at step 6.
+
+[discrete]
+=== 4.  Use case: Clear history of expenses
+
+*MSS*
+
+1.  User requests to clear history of expenses.
+2.  FinancialPlanner requests for period of time of expenses to clear.
+3.  User enters period of time to clear expenses for.
+4.  FinancialPlanner deletes all entries within specific time period.
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User’s input is not a valid period of time
+** FinancialPlanner throws invalid input command
+** Use case continues from step 2
+
+[discrete]
+=== 5.  Use case: Plan the total expenses for a period of time
+
+*MSS*
+
+1.  User requests to plan expenses
+2.  FinancialPlanner requests for amount of money to be allocated
+3.  User inputs amount of money
+4.  FinancialPlanner requests for period of time for amount of money to be allocated
+5.  User inputs period of time
+6.  FinancialPlanner records amount of money for time period specified.
++
+Use case ends.
+
+*Extensions*
+
+* 3a User’s input is not a valid amount of money
+** FinancialPlanner throws invalid input command
+** Use case continues from step 2
+* 5a User’s input is not a valid period of time
+** FinancialPlanner throws invalid input command
+** Use case continues from step 4
+
+
+[discrete]
+=== 6.  Use case: Search expenses based on category
+
+*MSS*
+
+1.  User requests to search for expenses by category
+2.  FinancialPlanner requests for category of expenditure
+3.  User enters category desired
+4.  FinancialPlanner displays each expenditure with name category and the total expenditure.
++
+Use case ends.
+
+*Extensions*
+
+* 3a User’s input category cannot be found.
+** FinancialPlanner shows no expenditure for selected category
+
+[discrete]
+=== 7.  Use case: Summary of expenditure by category
+
+*MSS*
+
+1.  User requests for Expenditure summary
+2.  FinancialPlanner requests for date of entry the user want to see
+3.  User enters the date they want to see
+4.  FinancialPlanner requests for confimation from the user
+5.  User confirms the date
+6.  FinancialDisplay displays the list of catrgories expenditure.
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User’s input is of invalid form.
+** FinancialPlanner throws invalid format error and shows the format needed.
+** Use case resumes at step 2.
+
+[discrete]
+=== 8.  Use case: Usage Instructions guide
+
+*MSS*
+
+1.  User requests for usage instructions
+2.  FinancialPlanner displays different commands
+3.  User inputs which command he wants to find out about
+4.  Financial displays infomration on selected command
++
+Use case ends.
+
+*Extensions*
+
+* 3a User enter invalid command
+** FinancialPlanner throws invalid command error.
+** Use case resumes at step 2.
+
+[discrete]
+=== 9.  Use case: Undo expense entry
+
+*MSS*
+
+1.  User requests for undo
+2.  FinancialPlanner confirms the undo request
+3.  User enter the item they would like to undo
+4.  FinancialPlanner undo the deleted item
++
+Use case ends.
+
+*Extensions*
+
+* 3a User enter invalid command
+** FinancialPlanner throws invalid command error.
+** Use case resumes at step 2
+
+[discrete]
+=== 10. Use case: Add notes to each expense
+
+*MSS*
+
+1.  User requests for adding notes
+2.  Financial Planner request for the date of entry and confirm the request
+3.  User enter the notes
++
+Use case ends.
+
+*Extensions*
+
+* 3a User enter invalid command
+** FinancialPlanner throws invalid command error.
+** Use case resumes at step 2
+
+[discrete]
+=== 11. Use case: Create daily limit for expenses
+
+*MSS*
+
+1.  User requests to create daily limit for expenses
+2.  FinancialPlanner requests for the maximum amount for the day
+3.  User enters the amount.
+4.  FinancialPlanner confirms amount with user.
+5.  User confirms the amount.
+6.  FinancialPlanner records the amount in the hard drive
++
+Use case ends.
+
+*Extensions*
+
+* 6a. The location for the record is invalid.
+** FinancialPlanner throws invalid location error and prompts for new location.
+** User enters a new location.
+** FinancialPlanner requests for confirmation.
+** User confirms the location
+** Use case ends.
+
+[discrete]
+=== 12. Use case: Export expenses into another format
+
+*MSS*
+
+1.  User requests export format.
+2.  FinancialPlanner shows list of possible formats for export.
+3.  User enters preferred export format.
+4.  FinancialPlanner exports the file in specified format.
+
+*Extensions*
+
+* 3a User input unsupported file format
+** FinancialPlanner throws unsupported format error
+** Use case resumes at step 2.
+
+[discrete]
+=== 13. Use case: Freely edit expenses tags
+
+*MSS*
+
+1.  User requests to edit expenses tags.
+2.  FinancialPlanner requests for date of entry to edit tags
+3.  User enters date to edit entry for
+4.  FinancialPlanner shows list of entries on specified date
+5.  User enters entry to edit.
+6.  FinancialPlanner shows current tags of selected entry.
+7.  User enters tag to remove
+8.  FinancialPlanner removes tag entered.
+
+*Extensions*
+
+* 3a User inputs invalid date
+** FinancialPlanner throws invalid date error.
+** Use case resumes at step 2.
+* 3b Date input has no entries to edit
+** FinancialPlanner throws no entry error.
+** Use case resumes at step 2.
+* 5a User’s input is not a valid entry.
+** FinancialPlanner throws invalid data error and resumes at step 4.
+* 5a User’s input entry has no tags.
+** FinancialPlanner displays ‘No tags’ and continues to step 7.
+* 7a User’s input tag does not exist
+** FinancialPlanner adds tag to entry.
 
 [appendix]
 == Non Functional Requirements
