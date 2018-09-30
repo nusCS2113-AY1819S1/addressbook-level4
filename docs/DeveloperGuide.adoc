@@ -1382,188 +1382,232 @@ Use case resumes at step 1.
 
 [discrete]
 === Use case: Create grade component
-*Precondition* : Module code must exist. +
-*Guarantees* : TBC +
-*MSS* : +
-1. Teacher creates grade component. +
-2. System requests for confirmation by displaying input. +
-3. Teacher confirms request. +
-4. System indicates success message. +
-Use case ends.
+*Precondition* :
+
+* Module code must exist.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+[none]
+* 1. Teacher creates grade component.
+* 2. System requests for confirmation by displaying input.
+* 3. Teacher confirms request.
+* 4. System indicates success message.
+* Use case ends.
 
 *Extensions* :
-
 [none]
-* 1a. System detects an error in the entered data. +
+* 1a. System detects an error in the entered data.
 [none]
-** 1a1. System displays message and format corresponding to error. +
-** 1a2. Teacher enters new data. +
-Steps 1a1-1a2 are repeated until the data entered is correct. +
-Use case resumes from step 2.
-
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
+** Steps 1a1-1a2 are repeated until the data entered is correct.
+** Use case resumes from step 2.
 [none]
-* *a. At any time, teacher chooses to cancel creating a grade component. +
-* *a1. System requests to confirm the cancellation. +
-* *a2. Teacher confirms request. +
-Use case ends.
+* *a. At any time, teacher chooses to cancel creating a grade component.
+[none]
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
+** Use case ends.
 
 [discrete]
 === Use case: Remove grade component
-*Precondition* : Grade component and corresponding module must exist. +
-*Guarantees* : Deleting grade component will also delete any grade items associated to it. +
-*MSS* : +
-1. Teacher removes grade component. +
-2. System requests for confirmation by displaying input. +
-3. Teacher confirms request. +
-4. System indicates success message. +
-Use case ends.
+*Precondition* :
+
+* Grade component must exist.
+* Corresponding module must exist.
+
+*Guarantees* :
+
+* Deleting grade component will also delete any grade items associated to it.
+
+*MSS* :
+[none]
+* 1. Teacher removes grade component.
+* 2. System requests for confirmation by displaying input.
+* 3. Teacher confirms request.
+* 4. System indicates success message.
+* Use case ends.
 
 *Extensions* :
-
 [none]
-* 1a. System detects an error in the entered data. +
+* 1a. System detects an error in the entered data.
 [none]
-** 1a1. System displays message and format corresponding to error. +
-** 1a2. Teacher enters new data. +
-Steps 1a1-1a2 are repeated until the data entered is correct. +
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel removing a grade component. +
-* *a1. System requests to confirm the cancellation. +
-* *a2. Teacher confirms request. +
-Use case ends.
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
+** Steps 1a1-1a2 are repeated until the data entered is correct.
+** Use case resumes from step 2.
+[none]
+* *a. At any time, teacher chooses to cancel removing a grade component.
+[none]
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
+** Use case ends.
 
 [discrete]
 === Use case: Update grade component
 *Precondition* :
 
-* Grade component and corresponding module code must exist. +
-* Percentage of grade must not exceed 100%. +
-* Total sum of weightage for all grade components must not exceed 100%. +
+* Grade component and corresponding module code must exist.
+* Percentage of grade must not exceed 100%.
+* Total sum of weightage for all grade components must not exceed 100%.
 
-*Guarantees* : TBC +
-*MSS* : +
-1. Teacher updates grade component. +
-2. System requests for confirmation by displaying input. +
-3. Teacher confirms request. +
-4. System indicates success message. +
-Use case ends.
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+[none]
+* 1. Teacher updates grade component.
+* 2. System requests for confirmation by displaying input.
+* 3. Teacher confirms request.
+* 4. System indicates success message.
+* Use case ends.
 
 *Extensions* :
-
 [none]
-* 1a. System detects an error in the entered data. +
+* 1a. System detects an error in the entered data.
 [none]
-** 1a1. System displays message and format corresponding to error. +
-** 1a2. Teacher enters new data. +
-Steps 1a1-1a2 are repeated until the data entered is correct. +
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel updating a grade component. +
-* *a1. System requests to confirm the cancellation. +
-* *a2. Teacher confirms request. +
-Use case ends.
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
+** Steps 1a1-1a2 are repeated until the data entered is correct.
+** Use case resumes from step 2.
+[none]
+* *a. At any time, teacher chooses to cancel updating a grade component.
+[none]
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
+** Use case ends.
 
 [discrete]
 === Use case: List grade component
-*Precondition* : Module must exist. +
-*Guarantees* : TBC +
-*MSS* : +
-1. Teacher lists grade component. +
-2. System displays list.
-Use case ends.
+*Precondition* :
+
+* Module must exist.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+[none]
+* 1. Teacher lists grade component.
+* 2. System displays list.
+* Use case ends.
 
 *Extensions* :
-
 [none]
-* 1a. System detects an error in the entered data. +
+* 1a. System detects an error in the entered data.
 [none]
-** 1a1. System displays message and format corresponding to error. +
-** 1a2. Teacher enters new data. +
-Steps 1a1-1a2 are repeated until the data entered is correct. +
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel listing a grade component. +
-* *a1. System requests to confirm the cancellation. +
-* *a2. Teacher confirms request. +
-Use case ends.
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
+** Steps 1a1-1a2 are repeated until the data entered is correct.
+** Use case resumes from step 2.
+[none]
+* *a. At any time, teacher chooses to cancel listing a grade component.
+[none]
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
+** Use case ends.
 
 [discrete]
 === Use case: List students grades
-*Precondition* : Students must be enrolled to the module. +
-*Guarantees* : TBC +
-*MSS* : +
-1. Teacher lists students grades. +
-2. System displays list.
-Use case ends.
+*Precondition* :
+
+* Students must be enrolled to the module.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+[none]
+* 1. Teacher lists students grades.
+* 2. System displays list.
+* Use case ends.
 
 *Extensions* :
-
 [none]
-* 1a. System detects an error in the entered data. +
+* 1a. System detects an error in the entered data.
 [none]
-** 1a1. System displays message and format corresponding to error. +
-** 1a2. Teacher enters new data. +
-Steps 1a1-1a2 are repeated until the data entered is correct. +
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel listing students grades. +
-* *a1. System requests to confirm the cancellation. +
-* *a2. Teacher confirms request. +
-Use case ends.
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
+** Steps 1a1-1a2 are repeated until the data entered is correct.
+** Use case resumes from step 2.
+[none]
+* *a. At any time, teacher chooses to cancel listing students grades.
+[none]
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
+** Use case ends.
 
 [discrete]
 === Use case: Assigning students grade
-*Precondition* : Students must be enrolled to the module and grade item details(MAX_MARKS, PERCENTAGE OF GRADE) must
-exist. +
-*Guarantees* : TBC +
+*Precondition* :
 
-*MSS* : +
-1. Teacher assigns student a mark. +
-2. System requests for confirmation. +
-3. Teacher confirms request. +
-4. System indicates success message. +
-Use case ends.
+* Students must be enrolled to the module
+* Grade item details(MAX_MARKS, PERCENTAGE OF GRADE) must exist.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+[none]
+* 1. Teacher assigns student a mark.
+* 2. System requests for confirmation.
+* 3. Teacher confirms request.
+* 4. System indicates success message.
+* Use case ends.
 
 *Extensions* :
-
 [none]
-* 1a. System detects an error in the entered data. +
+* 1a. System detects an error in the entered data.
 [none]
-** 1a1. System displays message and format corresponding to error. +
-** 1a2. Teacher enters new data. +
-Steps 1a1-1a2 are repeated until the data entered is correct. +
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel assigning students grades. +
-* *a1. System requests to confirm the cancellation. +
-* *a2. Teacher confirms request. +
-Use case ends.
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
+** Steps 1a1-1a2 are repeated until the data entered is correct.
+** Use case resumes from step 2.
+[none]
+* *a. At any time, teacher chooses to cancel assigning students grades.
+[none]
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
+** Use case ends.
 
 [discrete]
 === Use case: Find Grade Component
-*Precondition* : Grade component must exist. +
-*Guarantees* : TBC +
+*Precondition* :
 
-*MSS* : +
-1. Teacher finds grade component. +
-2. System displays details on selected grade component. +
-Use case ends.
+* Grade component must exist.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+[none]
+* 1. Teacher finds grade component.
+* 2. System displays details on selected grade component.
+* Use case ends.
 
 *Extensions* :
-
 [none]
-* 1a. System detects an error in the entered data. +
+* 1a. System detects an error in the entered data.
 [none]
-** 1a1. System displays message and format corresponding to error. +
-** 1a2. Teacher enters new data. +
-Steps 1a1-1a2 are repeated until the data entered is correct. +
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel finding grade component. +
-* *a1. System requests to confirm the cancellation. +
-* *a2. Teacher confirms request. +
-Use case ends.
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
+** Steps 1a1-1a2 are repeated until the data entered is correct.
+** Use case resumes from step 2.
+[none]
+* *a. At any time, teacher chooses to cancel finding grade component.
+[none]
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
+** Use case ends.
 
 [discrete]
 === Use case: Creating a class
