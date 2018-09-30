@@ -32,6 +32,10 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String courseCode;
+    @XmlElement(required = true)
+    private String matricNo;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,11 +49,14 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address,
+                            List<XmlAdaptedTag> tagged, String courseCode, String matricNo) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.matricNo = matricNo;
+        this.courseCode = courseCode;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -65,6 +72,8 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        matricNo = source.getMatricNo();
+        courseCode = source.getCourseCode();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -114,7 +123,7 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, courseCode, matricNo);
     }
 
     @Override
@@ -132,6 +141,8 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
+                && Objects.equals(courseCode, otherPerson.courseCode)
+                && Objects.equals(matricNo, otherPerson.matricNo)
                 && tagged.equals(otherPerson.tagged);
     }
 }

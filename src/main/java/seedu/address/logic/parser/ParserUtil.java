@@ -81,6 +81,30 @@ public class ParserUtil {
     }
 
     /**
+     * TBC
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static String parseMatric(String matricNo) throws ParseException {
+        requireNonNull(matricNo);
+        return matricNo.trim();
+    }
+
+    /**
+     * TBC
+     * Parses a {@code String address} into an {@code Address}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code address} is invalid.
+     */
+    public static String parseCourseCode(String courseCode) throws ParseException {
+        requireNonNull(courseCode);
+        return courseCode.trim();
+    }
+
+    /**
      * Parses a {@code String email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *

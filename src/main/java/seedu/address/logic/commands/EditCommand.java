@@ -100,8 +100,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        String updatedCourseCode = editPersonDescriptor.getCourseCode().orElse(personToEdit.getCourseCode());
+        String updatedMatricNo = editPersonDescriptor.getMatricNo().orElse(personToEdit.getMatricNo());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                updatedTags, updatedCourseCode, updatedMatricNo);
     }
 
     @Override
@@ -132,6 +135,8 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private String courseCode;
+        private String matricNo;
 
         public EditPersonDescriptor() {}
 
@@ -145,6 +150,8 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setCourseCode(courseCode);
+            setMatricNo(matricNo);
         }
 
         /**
@@ -172,6 +179,22 @@ public class EditCommand extends Command {
 
         public void setEmail(Email email) {
             this.email = email;
+        }
+
+        public Optional<String> getCourseCode() {
+            return Optional.ofNullable(courseCode);
+        }
+
+        public void setCourseCode(String courseCode) {
+            this.courseCode = courseCode;
+        }
+
+        public Optional<String> getMatricNo() {
+            return Optional.ofNullable(matricNo);
+        }
+
+        public void setMatricNo(String matricNo) {
+            this.matricNo = matricNo;
         }
 
         public Optional<Email> getEmail() {

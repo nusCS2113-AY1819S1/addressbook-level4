@@ -24,16 +24,23 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
+    // Student-specific fields
+    private final String courseCode;
+    private final String matricNo;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, String courseCode, String matricNo) {
+        requireAllNonNull(name, phone, email, address, tags, courseCode, matricNo);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.courseCode = courseCode;
+        this.matricNo = matricNo;
     }
 
     public Name getName() {
@@ -50,6 +57,14 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public String getMatricNo() {
+        return matricNo;
     }
 
     /**
@@ -71,7 +86,8 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+                && (otherPerson.getPhone().equals(getPhone())
+                || otherPerson.getEmail().equals(getEmail()));
     }
 
     /**
@@ -93,7 +109,9 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getMatricNo().equals(getMatricNo())
+                && otherPerson.getCourseCode().equals(getCourseCode());
     }
 
     @Override
@@ -114,6 +132,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append("Course Code: ").append(getCourseCode()).append("Matric No: ").append(getMatricNo());
         return builder.toString();
     }
 

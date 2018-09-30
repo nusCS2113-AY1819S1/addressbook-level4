@@ -6,4 +6,6 @@
     <email>hans@example</email>
     <address>4th street</address>
     <tagged>friends</tagged>
+	<courseCode>1</courseCode>
+    <matricNo>1</matricNo>
 </person>
