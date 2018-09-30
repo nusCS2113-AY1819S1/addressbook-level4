@@ -5,7 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.Arrays;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClosestMatchList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -33,7 +35,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(final Model model, final CommandHistory history) {
+    public CommandResult execute(final Model model, final CommandHistory history) throws CommandException {
+
+        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+
+        if (fe.isLocked()) {
+            throw new CommandException(fe.MESSAGE_ADDRESS_BOOK_LOCKED);
+        }
+
         requireNonNull(model);
 
         ClosestMatchList closestMatch = new ClosestMatchList(model, "NAME", nameKeywords);
