@@ -1380,6 +1380,7 @@ Use case resumes at step 1.
 +
 Use case resumes at step 1.
 
+
 [discrete]
 === Use case: Create grade component
 *Precondition* :
@@ -1391,27 +1392,32 @@ Use case resumes at step 1.
 * TBC
 
 *MSS* :
-[none]
-* 1. Teacher creates grade component. +
-* 2. System requests for confirmation by displaying input. +
-* 3. Teacher confirms request. +
-* 4. System indicates success message. +
-* Use case ends.
+
+1. Teacher creates grade component.
+2. System requests for confirmation by displaying input.
+3. Teacher confirms request.
+4. System indicates success message.
++
+Use case ends.
 
 *Extensions* :
-[none]
+
 * 1a. System detects an error in the entered data.
-[none]
++
 ** 1a1. System displays message and format corresponding to error.
 ** 1a2. Teacher enters new data.
-** Steps 1a1-1a2 are repeated until the data entered is correct.
-** Use case resumes from step 2.
-[none]
++
+Steps 1a1-1a2 are repeated until the data entered is correct.
++
+Use case resumes from step 2.
+
 * *a. At any time, teacher chooses to cancel creating a grade component.
-[none]
++
 ** *a1. System requests to confirm the cancellation.
++
 ** *a2. Teacher confirms request.
-** Use case ends.
++
+Use case ends.
 
 [discrete]
 === Use case: Remove grade component
