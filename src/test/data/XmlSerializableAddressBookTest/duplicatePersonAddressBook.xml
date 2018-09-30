@@ -4,6 +4,7 @@
     <candidates>
         <name>Alice Pauline</name>
         <gender>F</gender>
+        <age>31</age>
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
@@ -14,6 +15,7 @@
     <candidates>
         <name>Alice Pauline</name>
         <gender>F</gender>
+        <age>31</age>
         <phone>94351253</phone>
         <email>pauline@example.com</email>
         <address>4th street</address>

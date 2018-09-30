@@ -23,12 +23,14 @@ public class PersonBuilder {
     //MUST EDIT
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_GENDER = "F";
+    public static final String DEFAULT_AGE = "21";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Gender gender;
+    private Age age;
     private Phone phone;
     private Email email;
     private Address address;
@@ -37,6 +39,7 @@ public class PersonBuilder {
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
         gender = new Gender(DEFAULT_GENDER);
+        age = new Age(DEFAULT_AGE);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
@@ -49,6 +52,7 @@ public class PersonBuilder {
     public PersonBuilder(Candidate candidateToCopy) {
         name = candidateToCopy.getName();
         gender = candidateToCopy.getGender();
+        age = candidateToCopy.getAge();
         phone = candidateToCopy.getPhone();
         email = candidateToCopy.getEmail();
         address = candidateToCopy.getAddress();
@@ -68,6 +72,14 @@ public class PersonBuilder {
      */
     public PersonBuilder withGender(String gender) {
         this.gender = new Gender(gender);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Age} of the {@code Candidate} that we are building.
+     */
+    public PersonBuilder withAge(String age) {
+        this.age = new Age(age);
         return this;
     }
 
@@ -104,7 +116,7 @@ public class PersonBuilder {
     }
 
     public Candidate build() {
-        return new Candidate(name, gender, phone, email, address, tags);
+        return new Candidate(name, gender, age, phone, email, address, tags);
     }
 
 }

@@ -14,12 +14,12 @@ public class Job {
     public static final String MESSAGE_JOB_CONSTRAINTS =
             "Desired job should only contain alphabetical and should not be blank ";
 
-    public final String job;
+    public final String value;
 
     public Job(String jobInput) {
         requireNonNull(jobInput);
         checkArgument(isValidJob(jobInput), MESSAGE_JOB_CONSTRAINTS);
-        job = jobInput;
+        value = jobInput;
     }
 
     /**
@@ -30,15 +30,18 @@ public class Job {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Job // instanceof handles nulls
-                && job.equals(((Job) other).job)); // state check
+    public String toString() {
+        return value;
     }
 
     @Override
-    public int hashCode() {
-        return job.hashCode();
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Job // instanceof handles nulls
+                && value.equals(((Job) other).value)); // state check
     }
+
+    @Override
+    public int hashCode() { return value.hashCode(); }
 
 }

@@ -11,12 +11,17 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.candidate.Address;
+import seedu.address.model.candidate.Age;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
+import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Salary;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * JAXB-friendly version of the Candidate.
@@ -30,6 +35,8 @@ public class XmlAdaptedPerson {
     private String name;
     @XmlElement(required = true)
     private String gender;
+    @XmlElement(required = true)
+    private String age;
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
@@ -50,8 +57,10 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given candidate details.
      */
     //MUST EDIT
-    public XmlAdaptedPerson(String name, String gender, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String gender, String age, String phone, String email, String address,
+                            List<XmlAdaptedTag> tagged) {
         this.name = name;
+        this.age = age;
         this.gender = gender;
         this.phone = phone;
         this.email = email;
@@ -70,6 +79,7 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson(Candidate source) {
         name = source.getName().fullName;
         gender = source.getGender().value;
+        age = source.getAge().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -109,6 +119,16 @@ public class XmlAdaptedPerson {
 
         final Gender modelGender = new Gender(gender);
 
+        if (age == null){
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
+        }
+
+        if(!Age.isValidAge(age)){
+            throw new IllegalValueException(Age.MESSAGE_AGE_CONSTRAINTS);
+        }
+
+        final Age modelAge = new Age(age);
+
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
@@ -134,7 +154,7 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Candidate(modelName, modelGender, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Candidate(modelName, modelGender, modelAge, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
     //MUST EDIT
@@ -151,6 +171,7 @@ public class XmlAdaptedPerson {
         XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(gender, otherPerson.gender)
+                && Objects.equals(age, otherPerson.age)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)

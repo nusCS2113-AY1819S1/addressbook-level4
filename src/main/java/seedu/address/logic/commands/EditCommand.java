@@ -21,11 +21,15 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Address;
+import seedu.address.model.candidate.Age;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
+import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -103,8 +107,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(candidateToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(candidateToEdit.getTags());
         Gender updatedGender = new Gender("to be implemented");
+        Age updatedAge = new Age("to be implemented");
 
-        return new Candidate(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Candidate(updatedName, updatedGender, updatedAge, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override

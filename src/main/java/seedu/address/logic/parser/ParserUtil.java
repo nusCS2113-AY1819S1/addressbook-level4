@@ -72,6 +72,21 @@ public class ParserUtil {
         return new Gender(trimmedGender);
     }
 
+    /**
+     * Parses a {@code String age} into a {@code Age}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code age} is invalid.
+     */
+    public static Age parseAge(String age) throws ParseException {
+        requireNonNull(age);
+        String trimmedAge = age.trim();
+        if (!Age.isValidAge(trimmedAge)) {
+            throw new ParseException(Age.MESSAGE_AGE_CONSTRAINTS);
+        }
+        return new Age(trimmedAge);
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
@@ -116,6 +131,51 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String job} into an {@code Job}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code job} is invalid.
+     */
+    public static Job parseJob(String job) throws ParseException {
+        requireNonNull(job);
+        String trimmedJob = job.trim();
+        if (!Job.isValidJob(trimmedJob)) {
+            throw new ParseException(Job.MESSAGE_JOB_CONSTRAINTS);
+        }
+        return new Job(trimmedJob);
+    }
+
+    /**
+     * Parses a {@code String education} into an {@code Education}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code education} is invalid.
+     */
+    public static Education parseEducation(String education) throws ParseException {
+        requireNonNull(education);
+        String trimmedEducation = education.trim();
+        if (!Education.isValidEducation(trimmedEducation)) {
+            throw new ParseException(Education.MESSAGE_EDUCATION_CONSTRAINTS);
+        }
+        return new Education(trimmedEducation);
+    }
+
+    /**
+     * Parses a {@code String salary} into an {@code Salary}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code salary} is invalid.
+     */
+    public static Salary parseSalary(String salary) throws ParseException {
+        requireNonNull(salary);
+        String trimmedSalary = salary.trim();
+        if (!Salary.isValidSalary(trimmedSalary)) {
+            throw new ParseException(Salary.MESSAGE_SALARY_CONSTRAINTS);
+        }
+        return new Salary(trimmedSalary);
     }
 
     /**

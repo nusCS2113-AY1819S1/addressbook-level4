@@ -14,12 +14,12 @@ public class Salary {
     public static final String MESSAGE_SALARY_CONSTRAINTS =
             "Desired salary should contain digits only and it should not be blank ";
 
-    public final String salary;
+    public final String value;
 
     public Salary(String salaryInput) {
         requireNonNull(salaryInput);
         checkArgument(isValidSalary(salaryInput), MESSAGE_SALARY_CONSTRAINTS);
-        salary = salaryInput;
+        value = salaryInput;
     }
 
     /**
@@ -30,15 +30,20 @@ public class Salary {
     }
 
     @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Salary // instanceof handles nulls
-                && salary.equals(((Salary) other).salary)); // state check
+                && value.equals(((Salary) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return salary.hashCode();
+        return value.hashCode();
     }
 
 }

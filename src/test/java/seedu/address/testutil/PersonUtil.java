@@ -37,6 +37,7 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
         sb.append(PREFIX_GENDER + candidate.getGender().value + " ");
+        sb.append(PREFIX_AGE + candidate.getAge().value + " ");
         sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + candidate.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + candidate.getAddress().value + " ");

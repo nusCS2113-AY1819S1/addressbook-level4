@@ -14,12 +14,12 @@ public class Education {
     public static final String MESSAGE_EDUCATION_CONSTRAINTS =
             "Education level should only contain alphabetical letters and it should not be blank ";
 
-    public final String education;
+    public final String value;
 
     public Education(String educationInput) {
         requireNonNull(educationInput);
         checkArgument(isValidEducation(educationInput), MESSAGE_EDUCATION_CONSTRAINTS);
-        education = educationInput;
+        value = educationInput;
     }
 
     /**
@@ -30,14 +30,19 @@ public class Education {
     }
 
     @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Education // instanceof handles nulls
-                && education.equals(((Education) other).education)); // state check
+                && value.equals(((Education) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return education.hashCode();
+        return value.hashCode();
     }
 }

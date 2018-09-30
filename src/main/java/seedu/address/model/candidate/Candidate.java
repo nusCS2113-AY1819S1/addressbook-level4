@@ -22,16 +22,19 @@ public class Candidate {
     private final Gender gender;
 
     // Data fields
+    private final Age age;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Candidate(Name name, Gender gender, Phone phone, Email email, Address address, Set<Tag> tags) {
+    //MUST EDIT
+    public Candidate(Name name, Gender gender, Age age, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, gender, phone, email, address, tags);
         this.name = name;
         this.gender = gender;
+        this.age = age;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -43,6 +46,8 @@ public class Candidate {
     }
 
     public Gender getGender() { return gender; }
+
+    public Age getAge() { return age; }
 
     public Phone getPhone() {
         return phone;
@@ -83,6 +88,8 @@ public class Candidate {
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
+
+    //MUST EDIT
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -96,6 +103,7 @@ public class Candidate {
         Candidate otherCandidate = (Candidate) other;
         return otherCandidate.getName().equals(getName())
                 && otherCandidate.getGender().equals(getGender())
+                && otherCandidate.getAge().equals(getAge())
                 && otherCandidate.getPhone().equals(getPhone())
                 && otherCandidate.getEmail().equals(getEmail())
                 && otherCandidate.getAddress().equals(getAddress())
@@ -105,7 +113,7 @@ public class Candidate {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, phone, email, address, tags);
+        return Objects.hash(name, gender, age, phone, email, address, tags);
     }
 
     @Override
@@ -114,6 +122,8 @@ public class Candidate {
         builder.append(getName())
                 .append(" Gender: ")
                 .append(getGender())
+                .append(" Age: ")
+                .append(getAge())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
