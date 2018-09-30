@@ -38,6 +38,7 @@ public class ListCommandParserTest {
                 + TYPICAL_START_DATE, new ListCommand(TYPICAL_START_DATE, TYPICAL_START_DATE));
     }
 
+
     @Test
     public void parse_twoArgumentWithDatePrefixInCorrectOrder_success() {
         ListCommand expectedListCommand = new ListCommand(TYPICAL_START_DATE, TYPICAL_END_DATE);

@@ -39,7 +39,6 @@ public class DateTest {
         assertFalse(Date.isValidDateFormat("93-215-34")); // 'mm' parameter has more than 2 digits
         assertFalse(Date.isValidDateFormat("93--34")); // 'mm' parameter has less than 1 digit
         assertFalse(Date.isValidDateFormat("93-21-34")); // 'yyyy' does not have exactly 4 digits
-        assertFalse(Date.isValidDateFormat("29-2-2018"));
 
         // valid date format
         assertTrue(Date.isValidDateFormat("11-11-1911")); // exactly in the form dd-mm-yyyy
