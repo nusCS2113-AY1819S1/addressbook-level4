@@ -852,7 +852,7 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== 1.  Use case: Input expense for a certain activity.
+=== 1.  Use case: Input expense for a certain activity. [Vincent]
 
 *MSS*
 
@@ -887,7 +887,7 @@ Use case ends.
 ** Use case resumes at step 6.
 
 [discrete]
-=== 2.  Use case: Delete expense entry.
+=== 2.  Use case: Delete expense entry. [Linh Chi]
 
 *MSS*
 
@@ -986,7 +986,7 @@ Use case ends.
 
 
 [discrete]
-=== 6.  Use case: Search expenses based on category
+=== 6.  Use case: Search expenses based on category [Zhi Thon]
 
 *MSS*
 
@@ -1003,7 +1003,7 @@ Use case ends.
 ** FinancialPlanner shows no expenditure for selected category
 
 [discrete]
-=== 7.  Use case: Summary of expenditure by category
+=== 7.  Use case: Summary of expenditure by category [Vincent]
 
 *MSS*
 
@@ -1076,7 +1076,7 @@ Use case ends.
 ** Use case resumes at step 2
 
 [discrete]
-=== 11. Use case: Create daily limit for expenses
+=== 11. Use case: Create daily limit for expenses [Oscar]
 
 *MSS*
 
