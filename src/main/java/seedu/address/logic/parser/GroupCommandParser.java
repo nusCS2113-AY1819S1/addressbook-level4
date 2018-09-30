@@ -2,6 +2,10 @@ package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.Name;
+
+import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -19,8 +23,24 @@ public class GroupCommandParser implements Parser<GroupCommand> {
 
     public GroupCommand parse(String args) throws ParseException{
         requireNonNull(args);
-        ArgumentMultimap argumentMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP);
-        String name = argumentMultimap.getValue(PREFIX_GROUP).orElseThrow(()->new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE)));
-        return new GroupCommand(name);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_GROUP)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE));
+        }
+
+
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_GROUP).orElseThrow(()->new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE))));
+        Group group = new Group(name);
+        return new GroupCommand(group);
     }
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
 }
