@@ -14,12 +14,12 @@ public class Gender {
     public static final String MESSAGE_GENDER_CONSTRAINTS =
             "Gender is restricted to either M(Male) or F(Female), and it should not be blank ";
 
-    public final String gender;
+    public final String value;
 
-    public Gender(String genderInput) {
-        requireNonNull(genderInput);
-        checkArgument(isValidGender(genderInput), MESSAGE_GENDER_CONSTRAINTS);
-        gender = genderInput;
+    public Gender(String gender) {
+        requireNonNull(gender);
+        checkArgument(isValidGender(gender), MESSAGE_GENDER_CONSTRAINTS);
+        value = gender;
     }
 
     /**
@@ -30,14 +30,19 @@ public class Gender {
     }
 
     @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Gender // instanceof handles nulls
-                && gender.equals(((Gender) other).gender)); // state check
+                && value.equals(((Gender) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return gender.hashCode();
+        return value.hashCode();
     }
 }

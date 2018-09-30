@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.Gender;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
 import seedu.address.model.tag.Tag;
@@ -34,6 +35,7 @@ public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
 
+    //MUST EDIT
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the candidate identified "
             + "by the index number used in the displayed candidate list. "
             + "Existing values will be overwritten by the input values.\n"
@@ -100,8 +102,9 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(candidateToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(candidateToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(candidateToEdit.getTags());
+        Gender updatedGender = new Gender("to be implemented");
 
-        return new Candidate(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Candidate(updatedName, updatedGender, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override
@@ -126,6 +129,7 @@ public class EditCommand extends Command {
      * Stores the details to edit the candidate with. Each non-empty field value will replace the
      * corresponding field value of the candidate.
      */
+
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;

@@ -14,12 +14,12 @@ public class Age {
     public static final String MESSAGE_AGE_CONSTRAINTS =
             "Age has to be a number 0 - 99, and it should not be blank ";
 
-    public final String age;
+    public final String value;
 
     public Age(String ageInput) {
         requireNonNull(ageInput);
         checkArgument(isValidAge(ageInput), MESSAGE_AGE_CONSTRAINTS);
-        age = ageInput;
+        value = ageInput;
     }
 
     /**
@@ -33,11 +33,11 @@ public class Age {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Age // instanceof handles nulls
-                && age.equals(((Age) other).age)); // state check
+                && value.equals(((Age) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return age.hashCode();
+        return value.hashCode();
     }
 }

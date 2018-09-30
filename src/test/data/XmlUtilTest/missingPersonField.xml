@@ -2,6 +2,7 @@
 <!-- Candidate with missing name field -->
 <candidate>
     <phone>9482424</phone>
+    <gender>M</gender>
     <email>hans@example</email>
     <address>4th street</address>
     <tagged>friends</tagged>

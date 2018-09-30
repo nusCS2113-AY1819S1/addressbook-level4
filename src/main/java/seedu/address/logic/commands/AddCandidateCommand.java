@@ -38,7 +38,7 @@ public class AddCandidateCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "John Doe "
-            //+ PREFIX_GENDER + "M "
+            + PREFIX_GENDER + "M "
             //+ PREFIX_AGE + "21 "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "

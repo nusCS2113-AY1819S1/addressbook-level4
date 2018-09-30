@@ -10,14 +10,21 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Address;
+import seedu.address.model.candidate.Age;
+import seedu.address.model.candidate.Candidate;
+import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Email;
+import seedu.address.model.candidate.Gender;
+import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.candidate.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
+//MUST EDIT
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
@@ -49,6 +56,22 @@ public class ParserUtil {
         }
         return new Name(trimmedName);
     }
+
+    /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_GENDER_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
 
     /**
      * Parses a {@code String phone} into a {@code Phone}.
