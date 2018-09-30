@@ -12,7 +12,7 @@ public class Job {
     public static final String JOB_VALIDATION_REGEX = "[\\p{Alpha}]+";
 
     public static final String MESSAGE_JOB_CONSTRAINTS =
-            "Desired job should only contain alphabetical and should not be blank ";
+            "Desired job should only contain alphabetical characters and should not be blank ";
 
     public final String value;
 

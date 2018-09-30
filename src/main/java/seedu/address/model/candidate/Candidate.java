@@ -24,20 +24,27 @@ public class Candidate {
     // Data fields
     private final Age age;
     private final Address address;
+    private final Job job;
+    private final Education education;
+    private final Salary salary;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     //MUST EDIT
-    public Candidate(Name name, Gender gender, Age age, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, gender, phone, email, address, tags);
+    public Candidate(Name name, Gender gender, Age age, Phone phone, Email email, Address address,
+                     Job job, Education education, Salary salary, Set<Tag> tags) {
+        requireAllNonNull(name, gender, phone, email, address, job, education,salary,tags);
         this.name = name;
         this.gender = gender;
         this.age = age;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.job = job;
+        this.education = education;
+        this.salary = salary;
         this.tags.addAll(tags);
     }
 
@@ -60,6 +67,12 @@ public class Candidate {
     public Address getAddress() {
         return address;
     }
+
+    public Job getJob() { return job;}
+
+    public Education getEducation() { return education; }
+
+    public Salary getSalary() { return salary; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
@@ -107,13 +120,16 @@ public class Candidate {
                 && otherCandidate.getPhone().equals(getPhone())
                 && otherCandidate.getEmail().equals(getEmail())
                 && otherCandidate.getAddress().equals(getAddress())
+                && otherCandidate.getJob().equals(getJob())
+                && otherCandidate.getEducation().equals(getEducation())
+                && otherCandidate.getSalary().equals(getSalary())
                 && otherCandidate.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, age, phone, email, address, tags);
+        return Objects.hash(name, gender, age, phone, email, address, job, education, salary, tags);
     }
 
     @Override
@@ -130,6 +146,12 @@ public class Candidate {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Job: ")
+                .append(getJob())
+                .append(" Education: ")
+                .append(getEducation())
+                .append(" Salary: ")
+                .append(getSalary())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

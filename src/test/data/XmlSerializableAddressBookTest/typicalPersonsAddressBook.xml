@@ -8,6 +8,9 @@
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
         <tagged>friends</tagged>
     </candidates>
     <candidates>
@@ -17,6 +20,9 @@
         <phone>98765432</phone>
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </candidates>
@@ -27,6 +33,9 @@
         <phone>95352563</phone>
         <email>heinz@example.com</email>
         <address>wall street</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
     </candidates>
     <candidates>
         <name>Daniel Meier</name>
@@ -35,6 +44,9 @@
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
         <address>10th street</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
         <tagged>friends</tagged>
     </candidates>
     <candidates>
@@ -44,6 +56,9 @@
         <phone>9482224</phone>
         <email>werner@example.com</email>
         <address>michegan ave</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
     </candidates>
     <candidates>
         <name>Fiona Kunz</name>
@@ -52,6 +67,9 @@
         <phone>9482427</phone>
         <email>lydia@example.com</email>
         <address>little tokyo</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
     </candidates>
     <candidates>
         <name>George Best</name>
@@ -60,5 +78,8 @@
         <phone>9482442</phone>
         <email>anna@example.com</email>
         <address>4th street</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
     </candidates>
 </addressbook>

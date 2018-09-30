@@ -42,6 +42,12 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
+    private String job;
+    @XmlElement(required = true)
+    private String education;
+    @XmlElement(required = true)
+    private String salary;
+    @XmlElement(required = true)
     private String address;
 
     @XmlElement
@@ -58,13 +64,16 @@ public class XmlAdaptedPerson {
      */
     //MUST EDIT
     public XmlAdaptedPerson(String name, String gender, String age, String phone, String email, String address,
-                            List<XmlAdaptedTag> tagged) {
+                            String job, String education, String salary, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.age = age;
         this.gender = gender;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.job = job;
+        this.education = education;
+        this.salary = salary;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -83,6 +92,10 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        job = source.getJob().value;
+        education = source.getEducation().value;
+        salary = source.getSalary().value;
+
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -109,21 +122,21 @@ public class XmlAdaptedPerson {
         }
         final Name modelName = new Name(name);
 
-        if (gender == null){
+        if (gender == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
 
-        if(!Gender.isValidGender(gender)){
+        if(!Gender.isValidGender(gender)) {
             throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
         }
 
         final Gender modelGender = new Gender(gender);
 
-        if (age == null){
+        if (age == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
         }
 
-        if(!Age.isValidAge(age)){
+        if(!Age.isValidAge(age)) {
             throw new IllegalValueException(Age.MESSAGE_AGE_CONSTRAINTS);
         }
 
@@ -153,8 +166,40 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (job == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Job.class.getSimpleName()));
+        }
+
+        if(!Job.isValidJob(job)) {
+            throw new IllegalValueException(Job.MESSAGE_JOB_CONSTRAINTS);
+        }
+
+        final Job modelJob = new Job(job);
+
+        if (education == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                Education.class.getSimpleName()));
+        }
+
+        if(!Education.isValidEducation(education)) {
+            throw new IllegalValueException(Education.MESSAGE_EDUCATION_CONSTRAINTS);
+        }
+
+        final Education modelEducation = new Education(education);
+
+        if (salary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
+        }
+
+        if(!Salary.isValidSalary(salary)) {
+            throw new IllegalValueException(Salary.MESSAGE_SALARY_CONSTRAINTS);
+        }
+
+        final Salary modelSalary = new Salary(salary);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Candidate(modelName, modelGender, modelAge, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Candidate(modelName, modelGender, modelAge, modelPhone, modelEmail, modelAddress, modelJob,
+            modelEducation, modelSalary, modelTags);
     }
 
     //MUST EDIT
@@ -175,6 +220,9 @@ public class XmlAdaptedPerson {
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
+                && Objects.equals(job, otherPerson.job)
+                && Objects.equals(education, otherPerson.education)
+                && Objects.equals(salary, otherPerson.salary)
                 && tagged.equals(otherPerson.tagged);
     }
 }

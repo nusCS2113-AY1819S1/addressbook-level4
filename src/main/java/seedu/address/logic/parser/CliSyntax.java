@@ -13,7 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_JOB = new Prefix("j/");
-    public static final Prefix PREFIX_EDUCATION_LEVEL = new Prefix("h/");
+    public static final Prefix PREFIX_EDUCATION = new Prefix("h/");
     public static final Prefix PREFIX_SALARY = new Prefix("s/");
 
     public static final Prefix PREFIX_TAG = new Prefix("t/");

@@ -103,13 +103,18 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(candidateToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(candidateToEdit.getPhone());
+        Gender updatedGender = new Gender("M"); //to be implemented
+        Age updatedAge = new Age("12"); //to be implemented
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(candidateToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(candidateToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(candidateToEdit.getTags());
-        Gender updatedGender = new Gender("to be implemented");
-        Age updatedAge = new Age("to be implemented");
+        Job updatedJob = new Job("job"); //to be implemented
+        Education updatedEducation = new Education("education"); //to be implemented
+        Salary updatedSalary = new Salary("1000"); //to be implemented
 
-        return new Candidate(updatedName, updatedGender, updatedAge, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+
+        return new Candidate(updatedName, updatedGender, updatedAge, updatedPhone, updatedEmail, updatedAddress,
+            updatedJob, updatedEducation, updatedSalary, updatedTags);
     }
 
     @Override

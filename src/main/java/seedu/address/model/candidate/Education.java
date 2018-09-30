@@ -9,10 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 
 public class Education {
-    public static final String EDUCATION_VALIDATION_REGEX = "[\\p{Alpha}]+";
+    public static final String EDUCATION_VALIDATION_REGEX = "[\\p{ASCII}]+";
 
     public static final String MESSAGE_EDUCATION_CONSTRAINTS =
-            "Education level should only contain alphabetical letters and it should not be blank ";
+            "Education level should not be blank ";
 
     public final String value;
 

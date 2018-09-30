@@ -3,8 +3,13 @@
     <!-- Candidate with invalid name field -->
     <candidates>
         <name>Ha!ns Mu@ster</name>
+        <gender>M</gender>
+        <age>21</age>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
     </candidates>
 </addressbook>

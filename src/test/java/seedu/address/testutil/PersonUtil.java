@@ -2,7 +2,7 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
@@ -41,6 +41,9 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
         sb.append(PREFIX_EMAIL + candidate.getEmail().value + " ");
         sb.append(PREFIX_ADDRESS + candidate.getAddress().value + " ");
+        sb.append(PREFIX_JOB + candidate.getJob().value + " ");
+        sb.append(PREFIX_EDUCATION + candidate.getEducation().value + " ");
+        sb.append(PREFIX_SALARY + candidate.getSalary().value + " ");
         candidate.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
