@@ -38,7 +38,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 ** *`help`* : view all commands available
 ** *`list`* : list all books
-** **`add`**`n/Harry Potter i/987-76-54321-32-1 p/60.70 q/100 c/30.90` : adds a book named `Harry Potter` to the Inventory List.
+** **`add`**`n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30.90` : adds a book named `Harry Potter` to the Inventory List.
 ** *`clear`* : clears the entire list
 ** *`exit`* : exits the app
 
@@ -71,8 +71,8 @@ A book can have any number of tags (including 0)
 
 Examples:
 
-* `add n/Harry Potter i/987-76-54321-32-1 p/60.70 q/100 c/30.90 t/difficult`
-* `add n/Lord of the Rings i/550-24-19520-42-1 p/59.90 q/271 c/20.99`
+* `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30.90 t/difficult`
+* `add n/Lord of the Rings i/978-2-12-345123-3 p/59.90 q/271 c/20.99`
 
 === Listing all books : `list`
 
@@ -86,7 +86,7 @@ Format: `find i/iSBN13`
 
 Example:
 
-* `find i/987-76-54321-32-1`
+* `find i/978-2-12-345680-3`
 
 === Locating book by tags: `search`
 
@@ -118,7 +118,7 @@ Examples:
 * `list` +
 `sell 1 5` +
 Decrease the quantity available of the 1st book by 5.
-* `sell 987-76-54321-32-1 4` +
+* `sell 978-2-12-345680-3 4` +
 Decrease the quantity available for the book with the corresponding ISBN13 by 4.
 
 === Increase Book Quantity (Ordered more books): `stock`
@@ -136,7 +136,7 @@ Examples:
 * `list` +
 `stock 2 6` +
 Increase the quantity available of the 2nd book by 6.
-* `stock 987-76-54321-32-1 5` +
+* `stock 978-2-12-345680-3 5` +
 Increase the quantity available for the book with the corresponding ISBN13 by 5.
 
 === Check Inventory: `check`
@@ -156,7 +156,7 @@ Format: `delete i/ISBN13`
 
 Examples:
 
-* `delete i/987-76-54321-32-1` +
+* `delete i/978-2-12-345680-3` +
 Deletes the book with the corresponding iSBN13 from the inventory list.
 
 === Requesting for a book : `request`
@@ -170,7 +170,7 @@ Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 
 Examples:
 
-* `request i/987-76-54321-32-1 e/johnd@gmail.com q/5` +
+* `request i/978-2-12-345680-3 e/johnd@gmail.com q/5` +
 Requests for 5 same books with the corresponding iSBN13 with requester's email johnd@gmail.com
 
 === Viewing of Requests : `viewrequests`
@@ -201,19 +201,19 @@ Undoable commands: those commands that modify the inventory book's content (`add
 
 Examples:
 
-* `delete i/987-76-54321-32-1` +
+* `delete i/978-2-12-345680-3` +
 `list` +
-`undo` (reverses the `delete i/987-76-54321-32-1` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
 
 * `check 4` +
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete i/987-76-54321-32-1` +
+* `delete i/978-2-12-345680-3` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete i/987-76-54321-32-1` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -222,19 +222,19 @@ Format: `redo`
 
 Examples:
 
-* `delete i/987-76-54321-32-1` +
-`undo` (reverses the `delete i/987-76-54321-32-1` command) +
-`redo` (reapplies the `delete i/987-76-54321-32-1` command) +
+* `delete i/978-2-12-345680-3` +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
 
-* `delete i/987-76-54321-32-1` +
+* `delete i/978-2-12-345680-3` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete i/987-76-54321-32-1` +
+* `delete i/978-2-12-345680-3` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete i/987-76-54321-32-1` command) +
-`redo` (reapplies the `delete i/987-76-54321-32-1` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
@@ -263,7 +263,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+BookInventory data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -284,25 +284,25 @@ _{explain how the user can enable/disable data encryption}_
 == Command Summary
 
 * *Add* : `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...` +
-e.g. `add n/Harry Potter i/987-76-54321-32-1 p/60.70 q/100 c/30/90 t/difficult`
+e.g. `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30/90 t/difficult`
 * *Find* : `find i/ISBN13` +
-e.g. `find i/987-76-54321-32-1`
+e.g. `find i/978-2-12-345680-3`
 * *Search* : `search TAG` +
 e.g. `search cs2113t`
 * *Sell* : `sell INDEX QUANTITY` OR `sell i/ISBN13 QUANTITY` +
-e.g. `sell 1 8` OR `sell i/987-76-54321-32-1 8`
+e.g. `sell 1 8` OR `sell i/978-2-12-345680-3 8`
 * *Stock* : `stock INDEX QUANTITY` OR `stock i/ISBN13 QUANTITY` +
-e.g. `stock 1 8` OR `stock i/978-76-54321-32-1 8`
+e.g. `stock 1 8` OR `stock i/978-2-12-345680-3 8`
 * *Check* : `check QUANTITY` +
 e.g. `check 4`
 * *Request* : `request i/ISBN13 e/EMAIL q/QUANTITY` +
-e.g. `request i/987-76-54321-32-1 e/johnd@gmail.com q/5`
+e.g. `request i/978-2-12-345680-3 e/johnd@gmail.com q/5`
 * *View Request* : `viewrequests`
 * *Display data* : `showdata`
 * *Next* : `next`
 * *Clear* : `clear`
 * *Delete* : `delete i/ISBN13` +
-e.g. `delete i/987-76-54321-32-1`
+e.g. `delete i/978-2-12-345680-3`
 * *List* : `list`
 * *Help* : `help`
 * *History* : `history`
