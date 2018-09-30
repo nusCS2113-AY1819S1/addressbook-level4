@@ -126,7 +126,7 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
         }
 
-        if(!Gender.isValidGender(gender)) {
+        if (!Gender.isValidGender(gender)) {
             throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
         }
 
@@ -136,7 +136,7 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Age.class.getSimpleName()));
         }
 
-        if(!Age.isValidAge(age)) {
+        if (!Age.isValidAge(age)) {
             throw new IllegalValueException(Age.MESSAGE_AGE_CONSTRAINTS);
         }
 
@@ -170,7 +170,7 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Job.class.getSimpleName()));
         }
 
-        if(!Job.isValidJob(job)) {
+        if (!Job.isValidJob(job)) {
             throw new IllegalValueException(Job.MESSAGE_JOB_CONSTRAINTS);
         }
 
@@ -181,7 +181,7 @@ public class XmlAdaptedPerson {
                 Education.class.getSimpleName()));
         }
 
-        if(!Education.isValidEducation(education)) {
+        if (!Education.isValidEducation(education)) {
             throw new IllegalValueException(Education.MESSAGE_EDUCATION_CONSTRAINTS);
         }
 
@@ -191,7 +191,7 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
         }
 
-        if(!Salary.isValidSalary(salary)) {
+        if (!Salary.isValidSalary(salary)) {
             throw new IllegalValueException(Salary.MESSAGE_SALARY_CONSTRAINTS);
         }
 

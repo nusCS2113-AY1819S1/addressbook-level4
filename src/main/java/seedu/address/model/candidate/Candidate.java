@@ -35,7 +35,7 @@ public class Candidate {
     //MUST EDIT
     public Candidate(Name name, Gender gender, Age age, Phone phone, Email email, Address address,
                      Job job, Education education, Salary salary, Set<Tag> tags) {
-        requireAllNonNull(name, gender, phone, email, address, job, education,salary,tags);
+        requireAllNonNull(name, gender, phone, email, address, job, education, salary, tags);
         this.name = name;
         this.gender = gender;
         this.age = age;
@@ -52,9 +52,13 @@ public class Candidate {
         return name;
     }
 
-    public Gender getGender() { return gender; }
+    public Gender getGender() {
+        return gender;
+    }
 
-    public Age getAge() { return age; }
+    public Age getAge() {
+        return age;
+    }
 
     public Phone getPhone() {
         return phone;
@@ -68,11 +72,17 @@ public class Candidate {
         return address;
     }
 
-    public Job getJob() { return job;}
+    public Job getJob() {
+        return job;
+    }
 
-    public Education getEducation() { return education; }
+    public Education getEducation() {
+        return education;
+    }
 
-    public Salary getSalary() { return salary; }
+    public Salary getSalary() {
+        return salary;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

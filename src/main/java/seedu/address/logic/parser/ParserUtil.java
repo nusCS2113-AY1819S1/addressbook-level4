@@ -11,7 +11,6 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Age;
-import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
