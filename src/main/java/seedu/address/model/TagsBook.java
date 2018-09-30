@@ -1,9 +1,12 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.List;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagData;
 import seedu.address.model.tag.TagMap;
 
 public class TagsBook implements ReadOnlyTagsBook {
@@ -14,14 +17,15 @@ public class TagsBook implements ReadOnlyTagsBook {
         tagMap = new TagMap();
     }
 
+    public TagsBook() {}
+
     public void addTags(Record toAdd) {
-        TagData tagData = new TagData(toAdd.getName(), toAdd.getDate(), toAdd.getMoneyFlow());
         for (Tag r : toAdd.getTags()){
-            convertTags(r, tagData);
+            addTags(r, toAdd);
         }
     }
 
-    public void convertTags(Tag tag, TagData tagData) {
+    public void addTags(Tag tag, Record tagData) {
         tagMap.add(tag, tagData);
     }
 
@@ -32,7 +36,7 @@ public class TagsBook implements ReadOnlyTagsBook {
     }
 
     @Override
-    public ObservableList<TagData> getRecordList(Tag tag) {
+    public ObservableList<Record> getRecordList(Tag tag) {
         return tagMap.asUnmodifiableObservableList(tag);
     }
 

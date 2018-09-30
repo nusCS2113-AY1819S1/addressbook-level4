@@ -48,14 +48,12 @@ public class XmlSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        TagsBook tagsBook = new TagsBook();
         for (XmlAdaptedRecord p : records) {
             Record record = p.toModelType();
             if (addressBook.hasRecord(record)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
             }
             addressBook.addRecord(record);
-            tagsBook.addTags(record);
         }
         return addressBook;
     }
