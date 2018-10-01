@@ -59,7 +59,7 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommandGroup() throws Exception {
-        final Name name  = new Name("test");
+        final Name name = new Name("test");
         GroupCommand command = (GroupCommand) parser.parseCommand(
                 GroupCommand.COMMAND_WORD + " " + PREFIX_GROUP + name);
         assertEquals(new GroupCommand(new Group(name)), command);
