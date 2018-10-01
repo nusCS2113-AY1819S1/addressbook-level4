@@ -50,5 +50,7 @@ public class Name {
     }
 
     @Override
-    public int hashCode() { return name.hashCode(); }
+    public int hashCode() {
+        return name.hashCode();
+    }
 }

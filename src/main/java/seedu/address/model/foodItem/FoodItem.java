@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  * Represents a Food Item in the address book.
  * Guarantees: details are present and not null, field values are validated.
  */
+
 public class FoodItem {
     private final FoodName foodName;
     private final FoodRecipe foodRecipe;

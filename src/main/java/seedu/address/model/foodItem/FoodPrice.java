@@ -26,7 +26,7 @@ public class FoodPrice {
         foodPrice = Float.parseFloat(price);
     }
 
-    public float getPrice(){
+    public float getPrice() {
         return foodPrice;
     }
 
@@ -44,7 +44,9 @@ public class FoodPrice {
     }
 
     @Override
-    public String toString() { return (Float.toString(foodPrice)); }
+    public String toString() {
+        return (Float.toString(foodPrice));
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -54,6 +56,8 @@ public class FoodPrice {
     }
 
     @Override
-    public int hashCode() { return Float.hashCode(foodPrice); }
+    public int hashCode() {
+        return Float.hashCode(foodPrice);
+    }
 
 }
