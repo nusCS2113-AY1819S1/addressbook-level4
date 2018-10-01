@@ -27,8 +27,7 @@ public class TimeTablePanelTimingGrid extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
-    private GridPane timingGrid;
-
+    private GridPane timingGridPlaceholder;
 
     public TimeTablePanelTimingGrid() {
         super(FXML);
