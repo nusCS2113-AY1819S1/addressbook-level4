@@ -51,15 +51,21 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `t/TASK m/MODULE`, `m/MODULE t/TASK` is also acceptable.
 ====
 
-=== Viewing help : `TDL help`
+=== Viewing help : `help`
 
 Shows a list of commands + 
-Format: `TDL help`
+Format: `help`
 
 === Adding a task: `TDL add`
 
 Adds a task to the to-do list +
 Format: `TDL add t/TASK m/MODULE [d/DATE] [p/PRIORITY]`
+
+****
+* The format for `m/` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed.
+* The format for `d/` tag must be `DD-MM`.
+* The `p/` tag only accepts integer 1, 2 or 3, where `1` refers to highest importance and `3` refers to lowest importance.
+****
 
 Examples:
 
@@ -150,32 +156,32 @@ Examples:
 * `TDL sort by deadline` +
 The tasks are now sorted by deadlines, where tasks without deadlines are at the bottom of the list.
 
-=== Undoing previous command : `TDL undo`
+=== Undoing previous command : `undo`
 
-Restores the to-do list to the state before the previous _undoable_ command was executed. +
-Format: `TDL undo`
+Restores the application to the state before the previous _undoable_ command was executed. +
+Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the to-do list's content (`add`, `delete`, `edit` and `complete`).
+Undoable commands: those commands that modify the application's content (`add`, `delete`, `edit` and `complete`).
 ====
 
 Examples:
 
 * `TDL complete 3` +
 `TDL view completed` +
-`TDL undo` (reverses the `TDL complete 3` command) +
+`undo` (reverses the `TDL complete 3` command) +
 
-=== Redoing the previously undone command : `TDL redo`
+=== Redoing the previously undone command : `redo`
 
-Reverses the most recent `TDL undo` command. +
-Format: `TDL redo`
+Reverses the most recent `undo` command. +
+Format: `redo`
 
 Examples:
 
 * `TDL complete 3` +
-`TDL undo` (reverses the `TDL complete 3` command) +
-`TDL redo` (reapplies the `TDL complete 3` command) +
+`undo` (reverses the `TDL complete 3` command) +
+`redo` (reapplies the `TDL complete 3` command) +
 
 === Exiting the program : `exit`
 
@@ -201,7 +207,7 @@ There is no need to save manually.
 * *Delete* : `TDL delete INDEX` 
 * *Edit* : `TDL edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]` 
 * *Sort* : `TDL sort by PARAMETER`
-* *Help* : `TDL help`
+* *Help* : `help`
 * *Exit* : `exit` 
 * *View* : `TDL view PARAMETER`
 * *Undo* : `undo`
