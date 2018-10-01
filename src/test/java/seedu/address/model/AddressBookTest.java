@@ -13,7 +13,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import guitests.GuiRobot;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
