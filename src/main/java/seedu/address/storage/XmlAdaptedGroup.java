@@ -1,10 +1,12 @@
 package seedu.address.storage;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.*;
+import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
-import java.util.Objects;
+
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.Name;
 
 /**
  * JAXB-friendly version of the Group.
