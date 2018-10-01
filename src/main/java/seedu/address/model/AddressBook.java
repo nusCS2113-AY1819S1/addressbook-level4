@@ -117,7 +117,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons" + groups.asUnmodifiableObservableList().size() + " groups";
+        return persons.asUnmodifiableObservableList().size() + " persons"
+                + groups.asUnmodifiableObservableList().size() + " groups";
         // TODO: refine later
     }
 
@@ -135,7 +136,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons)&&groups.equals(((AddressBook) other).groups));
+                && persons.equals(((AddressBook) other).persons) && groups.equals(((AddressBook) other).groups));
     }
 
     @Override

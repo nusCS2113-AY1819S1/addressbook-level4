@@ -21,7 +21,7 @@ public class GroupCommandParser implements Parser<GroupCommand> {
      * and returns an GroupCommand object for execution.
      */
 
-    public GroupCommand parse(String args) throws ParseException{
+    public GroupCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_GROUP);
 
@@ -31,7 +31,8 @@ public class GroupCommandParser implements Parser<GroupCommand> {
         }
 
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_GROUP).orElseThrow(()->new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE))));
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_GROUP).
+                orElseThrow(()->new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE))));
         Group group = new Group(name);
         return new GroupCommand(group);
     }

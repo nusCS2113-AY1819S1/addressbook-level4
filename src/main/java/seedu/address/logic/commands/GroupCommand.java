@@ -29,7 +29,7 @@ public class GroupCommand extends Command {
 
     private final Group toAdd;
 
-    public GroupCommand(Group group){
+    public GroupCommand(Group group) {
         requireAllNonNull(group);
         this.toAdd = group;
     }

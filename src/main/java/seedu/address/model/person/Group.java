@@ -15,7 +15,7 @@ public class Group {
     /**
      * Every field must be present and not null.
      */
-    public Group(Name name){
+    public Group(Name name) {
         this.name = name;
     }
 
