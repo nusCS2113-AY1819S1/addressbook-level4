@@ -93,8 +93,9 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_remark() throws Exception {
         assertTrue(parser.parseCommand(SetTimeTable.COMMAND_WORD) instanceof SetTimeTable);
+    }
 
-    @Test  
+    @Test
     public void parseCommandAlias_edit() throws Exception {
         Person person = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(person).build();
