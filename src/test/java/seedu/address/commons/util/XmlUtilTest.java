@@ -79,7 +79,8 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        CandidateBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableCandidateBook.class).toModelType();
+        CandidateBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableCandidateBook.class)
+                .toModelType();
         assertEquals(9, dataFromFile.getCandidatelist().size());
     }
 
@@ -136,7 +137,8 @@ public class XmlUtilTest {
         FileUtil.createFile(TEMP_FILE);
         XmlSerializableCandidateBook dataToWrite = new XmlSerializableCandidateBook(new CandidateBook());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableCandidateBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableCandidateBook.class);
+        XmlSerializableCandidateBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE,
+                XmlSerializableCandidateBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
         AddressBookBuilder builder = new AddressBookBuilder(new CandidateBook());
@@ -149,8 +151,8 @@ public class XmlUtilTest {
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedCandidate}
-     * objects.
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling
+     * of .xml data to {@code XmlAdaptedCandidate} objects.
      */
     @XmlRootElement(name = "candidate")
     private static class XmlAdaptedCandidateWithRootElement extends XmlAdaptedCandidate {}

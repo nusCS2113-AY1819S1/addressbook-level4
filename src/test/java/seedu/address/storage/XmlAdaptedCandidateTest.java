@@ -108,8 +108,8 @@ public class XmlAdaptedCandidateTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        XmlAdaptedCandidate person = new XmlAdaptedCandidate(VALID_NAME, VALID_GENDER, VALID_AGE, VALID_PHONE, VALID_EMAIL,
-                null, VALID_JOB, VALID_EDUCATION, VALID_SALARY, VALID_TAGS);
+        XmlAdaptedCandidate person = new XmlAdaptedCandidate(VALID_NAME, VALID_GENDER, VALID_AGE, VALID_PHONE,
+                VALID_EMAIL, null, VALID_JOB, VALID_EDUCATION, VALID_SALARY, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
