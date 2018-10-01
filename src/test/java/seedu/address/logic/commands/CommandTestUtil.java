@@ -77,7 +77,7 @@ public class CommandTestUtil {
     public static final String INVALID_GROUP_LOC_DESC =
             " " + PREFIX_GROUP_LOCATION + "[E1-06-05]"; //'[' & ']' NOT ALLOWED IN GROUP LOCATION
     public static final String INVALID_GROUP_TAG =
-            " " + PREFIX_TAG + "CS2113 Experts";  // ' ' not allowed in tags
+            " " + PREFIX_TAG + "CS2113" + "Experts";  // ' ' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t \r \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
