@@ -72,11 +72,14 @@ public class CommandTestUtil {
     public static final String TAG_DESC_TUT = " " + PREFIX_TAG + VALID_TAG_TUT;
     public static final String TAG_DESC_LAB = " " + PREFIX_TAG + VALID_TAG_LAB;
 
-    public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "TUT[E01]!"; //'!' NOT ALLOWED IN GROUP NAMES
-    public static final String INVALID_GROUP_LOC_DESC = " " + PREFIX_GROUP_LOCATION + "[E1-06-05]"; //'[' & ']' NOT ALLOWED IN GROUP LOCATION
-    public static final String INVALID_GROUP_TAG = " " + PREFIX_TAG + "CS2113 Experts";  // ' ' not allowed in tags
+    public static final String INVALID_GROUP_NAME_DESC =
+            " " + PREFIX_NAME + "TUT[E01]!"; //'!' NOT ALLOWED IN GROUP NAMES
+    public static final String INVALID_GROUP_LOC_DESC =
+            " " + PREFIX_GROUP_LOCATION + "[E1-06-05]"; //'[' & ']' NOT ALLOWED IN GROUP LOCATION
+    public static final String INVALID_GROUP_TAG =
+            " " + PREFIX_TAG + "CS2113 Experts";  // ' ' not allowed in tags
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
+    public static final String PREAMBLE_WHITESPACE = "\t \r \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;

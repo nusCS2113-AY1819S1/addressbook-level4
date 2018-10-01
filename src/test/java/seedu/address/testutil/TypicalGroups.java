@@ -1,6 +1,12 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_TUT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_DIFFICULTY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TUT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,7 +73,7 @@ public class TypicalGroups {
             .withTags(VALID_TAG_LAB, VALID_TAG_DIFFICULTY)
             .build();
 
-//    public static final String KEYWORD_MATCHING_MA1508E = "MA1508e"; // A keyword that matches MEIER
+    //public static final String KEYWORD_MATCHING_MA1508E = "MA1508e"; // A keyword that matches MEIER
 
     private TypicalGroups() {} // prevents instantiation
 
