@@ -1,0 +1,29 @@
+diff a/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java b/src/test/java/seedu/address/logic/parser/AddressBookParserTest.java	(rejected hunks)
+@@ -61,13 +61,20 @@
+         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+     }
+ 
+-    @Test
+-    public void parseCommandGroup() throws Exception {
+-        final Name name = new Name("test");
+-        GroupCommand command = (GroupCommand) parser.parseCommand(
+-                GroupCommand.COMMAND_WORD + " " + PREFIX_GROUP + name);
+-        assertEquals(new GroupCommand(new Group(name)), command);
+-    }
++    //TODO
++    //    @Test
++    //    public void parseCommand_createGroup() throws Exception {
++    //        String groupName = "Testing";
++    //        String groupLocation = "E1-05-01";
++    //        String groupTags = "HelloWorld";
++    //        CreateGroupCommand command = (CreateGroupCommand) parser.parseCommand(
++    //                CreateGroupCommand.COMMAND_WORD + " "
++    //                        + PREFIX_NAME + groupName
++    //                        + PREFIX_GROUP_LOCATION + groupLocation
++    //                        + PREFIX_TAG + groupTags);
++    //        Set<Tag> convertTag = (Set<Tag>) new Tag(groupTags);
++    //        assertEquals(new CreateGroupCommand(new Group(groupName, groupLocation, convertTag)), command);
++    //    }
+ 
+     @Test
+     public void parseCommand_delete() throws Exception {
