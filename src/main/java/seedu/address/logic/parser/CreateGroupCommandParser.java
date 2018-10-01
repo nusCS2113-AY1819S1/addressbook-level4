@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
-
 import java.util.Set;
 import java.util.stream.Stream;
 
