@@ -5,8 +5,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 
-/** TODO ALEXIS: morph this into a daySlot (visually a square on left column in the TimetableGrid)
- * An UI component that displays information of a {@code Person}.
+/** TODO ALEXIS: currently unused, untested.
+ * An UI component that shows the Day of that row.
+ * Lives only on the left-most column of TimeTablePanelMainGrid.
  */
 public class TimeTablePanelDaySlot extends UiPart<Region> {
 

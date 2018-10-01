@@ -6,8 +6,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.TimeSlot;
 
-/** TODO ALEXIS: morph this into a timeSlot (visually a square in the TimetableGrid)
- * An UI component that displays information of a {@code Person}.
+/** TODO ALEXIS: currently unused, untested.
+ * An UI component that displays information of a {@code TimeSlot}.
+ * Lives in the TimeTablePanelMainGrid.
+ *
+ * Will be used to implement normal TimeSlots, and free-TimeSlots.
  */
 public class TimeTablePanelTimeSlot extends UiPart<Region> {
 
