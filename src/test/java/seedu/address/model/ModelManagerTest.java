@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalEvents.EVENT_2;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
-
 import java.nio.file.Paths;
 import java.util.Arrays;
 

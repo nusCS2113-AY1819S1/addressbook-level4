@@ -34,6 +34,9 @@ public class TypicalEvents {
             new Location("Test Location 3")
     );
 
+    /**
+     * Returns test event list.
+     */
     public static EventList getTypicalEventList() {
         EventList eventList = new EventList();
 
