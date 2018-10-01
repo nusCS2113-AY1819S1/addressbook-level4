@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 is currently being developed by the https://github.com/orgs/CS2113-AY1819S1-T13-4/teams[T13-4] team. +
+Student Management System is currently being developed by the https://github.com/orgs/CS2113-AY1819S1-T13-4/teams[T13-4] team. +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
