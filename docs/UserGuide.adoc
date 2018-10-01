@@ -62,9 +62,9 @@ Adds a task to the to-do list +
 Format: `TDL add t/TASK m/MODULE [d/DATE] [p/PRIORITY]`
 
 ****
-* The format for `m/` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed.
-* The format for `d/` tag must be `DD-MM`.
-* The `p/` tag only accepts integer 1, 2 or 3, where `1` refers to highest importance and `3` refers to lowest importance.
+* The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed.
+* The format for `d/DATE` tag must be `DD-MM`.
+* The `p/PRIORITY` tag only accepts integer 1, 2 or 3, where `1` refers to highest importance and `3` refers to lowest importance.
 ****
 
 Examples:
@@ -90,7 +90,7 @@ Edits the task name and module code of the 1st task to be `Tutorial 2` and `CS21
 * `TDL edit 2 t/Tutorial 2 d/ p/` +
 Edits the task name of the 2nd task to be `Tutorial 2` and clears all existing deadlines and priority tags associated with this task.
 
-=== Deleting a person : `TDL delete`
+=== Deleting a task : `TDL delete`
 
 Deletes the specified task from the to-do list. +
 Format: `TDL delete INDEX`
@@ -116,7 +116,7 @@ Format: `TDL complete INDEX`
 ****
 * Mark the task at the specified `INDEX` as `completed`.
 * The index refers to the index number shown in the displayed uncompleted tasks list.
-* The index *must be a positive integer* `1, 2, 3, ...`
+* The index *must be a positive integer* 1, 2, 3, ...
 ****
 
 Examples:
