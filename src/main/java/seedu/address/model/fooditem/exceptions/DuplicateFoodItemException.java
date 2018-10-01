@@ -1,4 +1,4 @@
-package seedu.address.model.foodItem.exceptions;
+package seedu.address.model.fooditem.exceptions;
 
 /**
  * Signals that the operation will result in duplicate Food Items (Food Items are considered duplicates if

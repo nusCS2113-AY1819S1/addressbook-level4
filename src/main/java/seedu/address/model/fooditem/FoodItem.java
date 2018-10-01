@@ -1,4 +1,4 @@
-package seedu.address.model.foodItem;
+package seedu.address.model.fooditem;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
