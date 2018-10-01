@@ -18,6 +18,8 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Group;
+import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -45,10 +47,10 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_group() throws Exception {
-        final String name  = "test";
+        final Name name  = new Name("test");
         GroupCommand command = (GroupCommand) parser.parseCommand(
                 GroupCommand.COMMAND_WORD + " " + PREFIX_GROUP + name);
-        assertEquals(new GroupCommand(name), command);
+        assertEquals(new GroupCommand(new Group(name)), command);
     }
 
     @Test

@@ -31,8 +31,9 @@ public class GroupCommandParser implements Parser<GroupCommand> {
         }
 
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_GROUP).
-                orElseThrow(()->new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE))));
+        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_GROUP)
+                .orElseThrow(()->new ParseException(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE))));
         Group group = new Group(name);
         return new GroupCommand(group);
     }
