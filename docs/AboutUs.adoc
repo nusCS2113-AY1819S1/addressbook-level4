@@ -20,10 +20,10 @@ Responsibilities: Deadline & Task features
 '''
 
 === Jeremy Aw
-image::jeremyaw.jpg[width="150", align="left"]
+image::jeremyaw.JPG[width="150", align="left"]
 {empty}[http://github.com/jeremyinelysium[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead +
+Role: Developer +
 Responsibilities: Deadline features
 
 '''
