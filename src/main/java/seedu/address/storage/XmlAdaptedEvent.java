@@ -32,8 +32,8 @@ public class XmlAdaptedEvent {
     //TODO: IMPLEMENT LIST OF ATTENDEES
     //TODO: CREATE XMLATTENDEES
 
-   /* @XmlElement
-    private List<XmlAttendees> attendees = new ArrayList<>();*/
+    /* @XmlElement
+      private List<XmlAttendees> attendees = new ArrayList<>();*/
 
     /**
      * Constructs an XmlAdaptedEvent.
@@ -67,7 +67,7 @@ public class XmlAdaptedEvent {
         startTime = source.getStartTime().toString();
         endTime = source.getEndTime().toString();
         location = source.getLocation().value;
-       /* attendees = source.getAttendees().stream()
+        /* attendees = source.getAttendees().stream()
                 .map(XmlAttendees::new)
                 .collect(Collectors.toList());*/
     }
@@ -84,7 +84,8 @@ public class XmlAdaptedEvent {
         }*/
 
         if (eventName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EventName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    EventName.class.getSimpleName()));
         }
         if (!EventName.isValidName(eventName)) {
             throw new IllegalValueException(EventName.MESSAGE_EVENT_CONSTRAINTS);
@@ -92,7 +93,8 @@ public class XmlAdaptedEvent {
         final EventName modelEventName = new EventName(eventName);
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
@@ -112,7 +114,8 @@ public class XmlAdaptedEvent {
 
 
         if (location == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Location.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Location.class.getSimpleName()));
         }
         if (!Location.isValidLocation(location)) {
             throw new IllegalValueException(Location.MESSAGE_LOCATION_CONSTRAINTS);
