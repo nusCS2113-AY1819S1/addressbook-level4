@@ -57,7 +57,9 @@ public class Person {
         return address;
     }
 
-    public TimeTable getTimeTable() { return weekly; }
+    public TimeTable getTimeTable() {
+        return weekly;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
