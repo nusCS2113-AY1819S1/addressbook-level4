@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+
+    <candidates>
+        <name>Alice Pauline</name>
+        <gender>F</gender>
+        <age>31</age>
+        <phone>94351253</phone>
+        <email>alice@example.com</email>
+        <address>123, Jurong West Ave 6, #08-111</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
+        <tagged>friends</tagged>
+    </candidates>
+
+    <!-- Candidate with same identity as Alice Pauline -->
+    <candidates>
+        <name>Alice Pauline</name>
+        <gender>F</gender>
+        <age>31</age>
+        <phone>94351253</phone>
+        <email>pauline@example.com</email>
+        <address>4th street</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
+    </candidates>
+
+</addressbook>

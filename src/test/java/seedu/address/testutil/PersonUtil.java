@@ -1,40 +1,50 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddCandidateCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.person.Person;
+import seedu.address.model.candidate.Candidate;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class for Person.
+ * A utility class for Candidate.
  */
 public class PersonUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code candidate}.
      */
-    public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+    public static String getAddCandidateCommand(Candidate candidate) {
+        return AddCandidateCommand.COMMAND_WORD + " " + getPersonDetails(candidate);
     }
 
     /**
-     * Returns the part of command string for the given {@code person}'s details.
+     * Returns the part of command string for the given {@code candidate}'s details.
      */
-    public static String getPersonDetails(Person person) {
+    public static String getPersonDetails(Candidate candidate) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + person.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + person.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + person.getAddress().value + " ");
-        person.getTags().stream().forEach(
+        sb.append(PREFIX_NAME + candidate.getName().fullName + " ");
+        sb.append(PREFIX_GENDER + candidate.getGender().value + " ");
+        sb.append(PREFIX_AGE + candidate.getAge().value + " ");
+        sb.append(PREFIX_PHONE + candidate.getPhone().value + " ");
+        sb.append(PREFIX_EMAIL + candidate.getEmail().value + " ");
+        sb.append(PREFIX_ADDRESS + candidate.getAddress().value + " ");
+        sb.append(PREFIX_JOB + candidate.getJob().value + " ");
+        sb.append(PREFIX_EDUCATION + candidate.getEducation().value + " ");
+        sb.append(PREFIX_SALARY + candidate.getSalary().value + " ");
+        candidate.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();

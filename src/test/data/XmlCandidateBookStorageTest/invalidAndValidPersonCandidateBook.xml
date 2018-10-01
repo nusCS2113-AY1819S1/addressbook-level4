@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Valid Candidate -->
+    <candidates>
+        <name>Hans Muster</name>
+        <phone isPrivate="false">9482424</phone>
+        <email isPrivate="false">hans@example.com</email>
+        <address isPrivate="false">4th street</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
+    </candidates>
+    <!-- Candidate with invalid phone field -->
+    <candidates>
+        <name>Hans Muster</name>
+        <phone isPrivate="false">948asdf2424</phone>
+        <email isPrivate="false">hans@example.com</email>
+        <address isPrivate="false">4th street</address>
+        <job>Waiter</job>
+        <education>O level</education>
+        <salary>1000</salary>
+    </candidates>
+</addressbook>
