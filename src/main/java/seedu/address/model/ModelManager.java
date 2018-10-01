@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.EventListChangedEvent;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,10 +25,13 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
 
+    private final VersionedEventList versionedEventList;
+    private final FilteredList<Event> filteredEvents;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyEventList eventList, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -34,24 +39,29 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+
+        versionedEventList = new VersionedEventList(eventList);
+        filteredEvents = new FilteredList<>(versionedEventList.getEventList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new EventList(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyAddressBook newData, ReadOnlyEventList newEventList) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
+
+    //=========== Address Book Methods =======================================================================
 
     @Override
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /** Raises an event to indicate the addressbook model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
@@ -129,6 +139,58 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
+    //=========== EventList Methods ==========================================================================
+
+    @Override
+    public ReadOnlyEventList getEventList() {
+        return versionedEventList;
+    }
+
+    /** Raises an event to indicate the eventlist model has changed */
+    private void indicateEventListChanged() {
+        raise(new EventListChangedEvent(versionedEventList));
+    }
+
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return versionedEventList.hasEvent(event);
+    }
+
+    @Override
+    public void deleteEvent(Event target) {
+        versionedEventList.removeEvent(target);
+        indicateEventListChanged();
+    }
+
+    @Override
+    public void addEvent(Event event) {
+        versionedEventList.addEvent(event);
+        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        indicateEventListChanged();
+    }
+
+    @Override
+    public void updateEvent(Event target, Event editedEvent) {
+        requireAllNonNull(target, editedEvent);
+
+        versionedEventList.updateEvent(target, editedEvent);
+        indicateEventListChanged();
+    }
+
+    @Override
+    public ObservableList<Event> getFilteredEventList() {
+        return FXCollections.unmodifiableObservableList(filteredEvents);
+    }
+
+    @Override
+    public void updateFilteredEventList(Predicate<Event> predicate) {
+        requireNonNull(predicate);
+        filteredEvents.setPredicate(predicate);
+    }
+
+    //=========== Object Methods =============================================================================
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -144,7 +206,8 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && versionedEventList.equals(other.versionedEventList)
+                && filteredEvents.equals(other.filteredEvents);
     }
-
 }
