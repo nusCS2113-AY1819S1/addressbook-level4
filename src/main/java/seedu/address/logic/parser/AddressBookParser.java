@@ -50,64 +50,64 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-            case AddCommand.COMMAND_WORD:
-            case AddCommand.COMMAND_WORD_2:
-                return new AddCommandParser().parse(arguments);
+        case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_WORD_2:
+            return new AddCommandParser().parse(arguments);
 
-            case CreateGroupCommand.COMMAND_WORD:
-            case CreateGroupCommand.COMMAND_WORD_2:
-                return new CreateGroupCommandParser().parse(arguments);
+        case CreateGroupCommand.COMMAND_WORD:
+        case CreateGroupCommand.COMMAND_WORD_2:
+            return new CreateGroupCommandParser().parse(arguments);
 
-            case EditCommand.COMMAND_WORD:
-            case EditCommand.COMMAND_WORD_2:
-                return new EditCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_WORD_2:
+            return new EditCommandParser().parse(arguments);
 
-            case SelectCommand.COMMAND_WORD:
-            case SelectCommand.COMMAND_WORD_2:
-                return new SelectCommandParser().parse(arguments);
+        case SelectCommand.COMMAND_WORD:
+        case SelectCommand.COMMAND_WORD_2:
+            return new SelectCommandParser().parse(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-            case DeleteCommand.COMMAND_WORD_2:
-                return new DeleteCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+        case DeleteCommand.COMMAND_WORD_2:
+            return new DeleteCommandParser().parse(arguments);
 
-            case ClearCommand.COMMAND_WORD:
-            case ClearCommand.COMMAND_WORD_2:
-                return new ClearCommand();
+        case ClearCommand.COMMAND_WORD:
+        case ClearCommand.COMMAND_WORD_2:
+            return new ClearCommand();
 
-            case FindCommand.COMMAND_WORD:
-            case FindCommand.COMMAND_WORD_2:
-                return new FindCommandParser().parse(arguments);
+        case FindCommand.COMMAND_WORD:
+        case FindCommand.COMMAND_WORD_2:
+            return new FindCommandParser().parse(arguments);
 
-            case GenListCommand.COMMAND_WORD:
-            case GenListCommand.COMMAND_WORD_2:
-                return new GenListCommand();
+        case GenListCommand.COMMAND_WORD:
+        case GenListCommand.COMMAND_WORD_2:
+            return new GenListCommand();
 
-            case ListCommand.COMMAND_WORD:
-            case ListCommand.COMMAND_WORD_2:
-                return new ListCommand();
+        case ListCommand.COMMAND_WORD:
+        case ListCommand.COMMAND_WORD_2:
+            return new ListCommand();
 
-            case HistoryCommand.COMMAND_WORD:
-            case HistoryCommand.COMMAND_WORD_2:
-                return new HistoryCommand();
+        case HistoryCommand.COMMAND_WORD:
+        case HistoryCommand.COMMAND_WORD_2:
+            return new HistoryCommand();
 
-            case ExitCommand.COMMAND_WORD:
-            case ExitCommand.COMMAND_WORD_2:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+        case ExitCommand.COMMAND_WORD_2:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD:
-            case HelpCommand.COMMAND_WORD_2:
-                return new HelpCommand();
+        case HelpCommand.COMMAND_WORD:
+        case HelpCommand.COMMAND_WORD_2:
+            return new HelpCommand();
 
-            case UndoCommand.COMMAND_WORD:
-            case UndoCommand.COMMAND_WORD_2:
-                return new UndoCommand();
+        case UndoCommand.COMMAND_WORD:
+        case UndoCommand.COMMAND_WORD_2:
+            return new UndoCommand();
 
-            case RedoCommand.COMMAND_WORD:
-            case RedoCommand.COMMAND_WORD_2:
-                return new RedoCommand();
+        case RedoCommand.COMMAND_WORD:
+        case RedoCommand.COMMAND_WORD_2:
+            return new RedoCommand();
 
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
