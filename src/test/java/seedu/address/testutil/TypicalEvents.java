@@ -8,6 +8,9 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 
+/**
+ * Returns test event list.
+ */
 public class TypicalEvents {
 
     public static final Event EVENT_1 = new Event(
