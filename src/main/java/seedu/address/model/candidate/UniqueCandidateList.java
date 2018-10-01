@@ -15,14 +15,14 @@ import seedu.address.model.candidate.exceptions.PersonNotFoundException;
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
  * A candidate is considered unique by comparing using {@code Candidate#isSamePerson(Candidate)}. As such, adding and
  * updating of persons uses Candidate#isSamePerson(Candidate) for equality so as to ensure that the candidate being
- * added or updated is unique in terms of identity in the UniquePersonList. However, the removal of a candidate uses
+ * added or updated is unique in terms of identity in the UniqueCandidateList. However, the removal of a candidate uses
  * Candidate#equals(Object) so as to ensure that the candidate with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see Candidate#isSamePerson(Candidate)
  */
-public class UniquePersonList implements Iterable<Candidate> {
+public class UniqueCandidateList implements Iterable<Candidate> {
 
     private final ObservableList<Candidate> internalList = FXCollections.observableArrayList();
 
@@ -77,7 +77,7 @@ public class UniquePersonList implements Iterable<Candidate> {
         }
     }
 
-    public void setPersons(UniquePersonList replacement) {
+    public void setPersons(UniqueCandidateList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -110,8 +110,8 @@ public class UniquePersonList implements Iterable<Candidate> {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                || (other instanceof UniqueCandidateList // instanceof handles nulls
+                        && internalList.equals(((UniqueCandidateList) other).internalList));
     }
 
     @Override

@@ -32,7 +32,7 @@ public class Candidate {
     /**
      * Every field must be present and not null.
      */
-    //MUST EDIT
+
     public Candidate(Name name, Gender gender, Age age, Phone phone, Email email, Address address,
                      Job job, Education education, Salary salary, Set<Tag> tags) {
         requireAllNonNull(name, gender, phone, email, address, job, education, salary, tags);
@@ -112,7 +112,7 @@ public class Candidate {
      * This defines a stronger notion of equality between two persons.
      */
 
-    //MUST EDIT
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

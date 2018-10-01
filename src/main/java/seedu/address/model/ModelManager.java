@@ -20,34 +20,34 @@ import seedu.address.model.candidate.Candidate;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedCandidateBook versionedAddressBook;
     private final FilteredList<Candidate> filteredCandidates;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyCandidateBook addressBook, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedAddressBook = new VersionedCandidateBook(addressBook);
         filteredCandidates = new FilteredList<>(versionedAddressBook.getCandidatelist());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new CandidateBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyCandidateBook newData) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyCandidateBook getAddressBook() {
         return versionedAddressBook;
     }
 
