@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Group;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,7 +54,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
@@ -75,19 +77,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void addPerson(Person person) {
         versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return versionedAddressBook.hasGroup(group);
-    }
-
-    @Override
-    public void addGroup(Group group) {
-        versionedAddressBook.addGroup(group);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         indicateAddressBookChanged();
     }
 
@@ -119,7 +108,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Group List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Group} backed by the internal list of
      * {@code versionedAddressBook}
      */
     @Override
@@ -163,6 +152,19 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasGroup(Group checkGroup) {
+        requireNonNull(checkGroup);
+        return versionedAddressBook.hasGroup(checkGroup);
+    }
+
+    @Override
+    public void createGroup(Group createGroup) {
+        versionedAddressBook.createGroup(createGroup);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -177,7 +179,8 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons) && filteredGroups.equals(other.filteredGroups);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredGroups.equals(other.filteredGroups);
     }
 
 }
