@@ -12,7 +12,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
-
 import seedu.address.model.person.Person;
 
 /**
