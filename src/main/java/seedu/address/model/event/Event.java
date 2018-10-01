@@ -3,7 +3,6 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -27,8 +26,8 @@ public class Event implements Comparable<Event> {
 
     // Data fields
     private final Description description;
-    private final Date startTime; // date format: "2007-12-03"
-    private final Date endTime; // date format: "2007-12-03"
+    private final LocalDate startTime; // date format: "2007-12-03"
+    private final LocalDate endTime; // date format: "2007-12-03"
     private final Location location;
 
     // TODO: WILL BE IMPLEMENT IN THE NEXT VERSION FOR ADDING OF EMPOLYEES
@@ -38,7 +37,7 @@ public class Event implements Comparable<Event> {
      * Every field must be present not null
      */
 
-    public Event(EventName eventName, Description description, Date startTime, Date endTime, Location location) {
+    public Event(EventName eventName, Description description, LocalDate startTime, LocalDate endTime, Location location) {
         requireAllNonNull(eventName);
 
         this.eventName = eventName;
@@ -58,11 +57,11 @@ public class Event implements Comparable<Event> {
         return description;
     }
 
-    public Date getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 

@@ -29,7 +29,6 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.model.util.SampleEventUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.EventStorage;
 import seedu.address.storage.JsonUserPrefsStorage;

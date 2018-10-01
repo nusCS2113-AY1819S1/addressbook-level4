@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -16,24 +17,24 @@ public class TypicalEvents {
     public static final Event EVENT_1 = new Event(
             new EventName("Test Event 1"),
             new Description("Test Description 1"),
-            new Date(100000),
-            new Date(100000),
+            LocalDate.parse("2018-9-28"),
+            LocalDate.parse("2018-11-9"),
             new Location("Test Location 1")
     );
 
     public static final Event EVENT_2 = new Event(
             new EventName("Test Event 2"),
             new Description("Test Description 2"),
-            new Date(110000),
-            new Date(110000),
+            LocalDate.parse("2018-9-28"),
+            LocalDate.parse("2018-11-9"),
             new Location("Test Location 2")
     );
 
     public static final Event EVENT_3 = new Event(
             new EventName("Test Event 3"),
             new Description("Test Description 3"),
-            new Date(120000),
-            new Date(120000),
+            LocalDate.parse("2018-9-28"),
+            LocalDate.parse("2018-11-9"),
             new Location("Test Location 3")
     );
 
