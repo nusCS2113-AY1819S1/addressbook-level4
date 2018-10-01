@@ -1,9 +1,11 @@
 package seedu.address.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import seedu.address.model.person.Person;
 
 /**
@@ -108,4 +110,8 @@ public interface Model {
      * @param editedPerson the new person.
      */
     void editPersonInTrie(Person personToEdit, Person editedPerson);
+
+    void setSelectedPersons(List<Person> personListView);
+
+    List<Person> getSelectedPersons();
 }

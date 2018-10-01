@@ -37,7 +37,8 @@ public class MailCommand extends Command {
         URI uriToMail;
         if (Desktop.isDesktopSupported()) {
             desktop = Desktop.getDesktop();
-            ArrayList<String> emailList = retrieveEmails(model.getFilteredPersonList());
+            List<Person> list = model.getSelectedPersons();
+            ArrayList<String> emailList = retrieveEmails(list);
             uriToMail = createUri(emailList);
 
         } else {
