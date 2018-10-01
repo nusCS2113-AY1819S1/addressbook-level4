@@ -21,7 +21,8 @@
 //    @Test
 //    public void execute() {
 //        final Name name = new Name("test");
-//        assertCommandFailure(new GroupCommand(new Group(name)), model, new CommandHistory(), String.format(COMMAND_ARGS, name));
+//        assertCommandFailure(new GroupCommand(
+//                new Group(name)), model, new CommandHistory(), String.format(COMMAND_ARGS, name));
 //    }
 //
 //    @Test

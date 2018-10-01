@@ -109,7 +109,9 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Group> getGroupList() {return groups;}
+        public ObservableList<Group> getGroupList() {
+            return groups;
+        }
     }
 
 }
