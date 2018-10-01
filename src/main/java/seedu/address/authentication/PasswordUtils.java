@@ -1,6 +1,5 @@
 package seedu.address.authentication;
 
-
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;

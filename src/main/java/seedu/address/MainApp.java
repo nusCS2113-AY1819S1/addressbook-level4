@@ -24,6 +24,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.controller.LoginController;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -50,13 +51,11 @@ import seedu.address.ui.UiPart;
 public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 6, 0, true);
-
     public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
-    public static Ui ui;
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
 
-
+    protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
@@ -198,9 +197,17 @@ public class MainApp extends Application {
         //author @tianhang
         URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
         showLoginPage(fxmlLoginFileUrl , primaryStage);
+        LoginController loginController = new LoginController ();
+        loginController.passInMainWindow (ui);
         //author @tianhang
     }
     //author @tianhang
+
+    /**
+     *
+     * @param fxmlLoginFileUrl
+     * @param primaryStage
+     */
     private void showLoginPage(URL fxmlLoginFileUrl, Stage primaryStage) {
         Parent root = loadFxmlFile(fxmlLoginFileUrl, primaryStage);
         primaryStage.setTitle("Hello World");
@@ -225,7 +232,7 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
-        ui.stop();
+        
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
