@@ -10,7 +10,7 @@ public class GroupCommandParserTest {
     private GroupCommandParser parser = new GroupCommandParser();
 
     @Test
-    public void parse_noParameters_failure(){
+    public void parseNoParametersFailure(){
         String expectedOutput = String.format(MESSAGE_INVALID_COMMAND_FORMAT, GroupCommand.MESSAGE_USAGE);
 
         //  without any parameters
