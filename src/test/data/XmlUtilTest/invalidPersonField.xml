@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Person with an invalid phone field -->
-<person>
+<!-- Candidate with an invalid phone field -->
+<candidate>
     <name>Hans Muster</name>
+    <gender>M</gender>
+    <age>21</age>
     <phone>9482asf424</phone>
     <email>hans@example</email>
     <address>4th street</address>
+    <job>Waiter</job>
+    <education>O level</education>
+    <salary>1000</salary>
     <tagged>friends</tagged>
-</person>
+</candidate>

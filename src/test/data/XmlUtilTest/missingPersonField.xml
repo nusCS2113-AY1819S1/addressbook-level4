@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Person with missing name field -->
-<person>
+<!-- Candidate with missing name field -->
+<candidate>
     <phone>9482424</phone>
+    <gender>M</gender>
+    <age>21</age>
     <email>hans@example</email>
     <address>4th street</address>
+    <job>Waiter</job>
+    <education>O level</education>
+    <salary>1000</salary>
     <tagged>friends</tagged>
-</person>
+</candidate>
