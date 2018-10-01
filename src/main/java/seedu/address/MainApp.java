@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
@@ -62,7 +63,8 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
     //author @tianhang
-    private final FXMLLoader fxmlLoader = new FXMLLoader();
+    protected Stage window;
+    private FXMLLoader fxmlLoader;
 
     //author @tianhang
 
@@ -87,6 +89,7 @@ public class MainApp extends Application {
 
         ui = new UiManager(logic, config, userPrefs);
 
+        fxmlLoader = new FXMLLoader();
         initEventsCenter();
     }
 
@@ -193,27 +196,39 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        window = primaryStage;
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        //author @tianhang
-        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
-        showLoginPage(fxmlLoginFileUrl , primaryStage);
-        LoginController loginController = new LoginController ();
-        loginController.passInMainWindow (ui);
-        //author @tianhang
+        //@@author tianhang
+        showLoginPage();
     }
-    //author @tianhang
+    //@@author tianhang
 
     /**
-     *
-     * @param fxmlLoginFileUrl
-     * @param primaryStage
+     * Start Login scene
      */
-    private void showLoginPage(URL fxmlLoginFileUrl, Stage primaryStage) {
-        Parent root = loadFxmlFile(fxmlLoginFileUrl, primaryStage);
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root));
-        primaryStage.show();
+    private void showLoginPage() {
+        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
+        Parent root = loadFxmlFile(fxmlLoginFileUrl, window);
+        window.initStyle(StageStyle.UNDECORATED);
+        window.setTitle("Login Page");
+        window.setScene(new Scene(root));
+        window.show();
+        passInMainInterface();
     }
+
+    /**
+     * Pass {@code ui} to login page
+     */
+    private void passInMainInterface() {
+        LoginController loginController = new LoginController ();
+        loginController.mainWindowInterface (ui);
+    }
+    /**
+     * load the file from {@code location} and set {@code root}
+     * @param location
+     * @param root
+     * @return root of primary stage
+     */
     private Parent loadFxmlFile(URL location, Stage root) {
         System.out.println(location);
         requireNonNull(location);
@@ -223,21 +238,20 @@ public class MainApp extends Application {
             rooting = fxmlLoader.load();
 
         } catch (IOException e) {
-            System.out.println("the exception is " + e);
-            //throw new AssertionError(e);
+            //System.out.println("the exception is " + e);
+            throw new AssertionError(e);
         }
         return rooting;
     }
-    //@author tianhang
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
-        
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+        window.close ();
         Platform.exit();
         System.exit(0);
     }
