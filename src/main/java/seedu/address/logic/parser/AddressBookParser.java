@@ -25,6 +25,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.LoginDialogBox;
+import seedu.address.ui.LoginWindow;
 
 /**
  * Parses user input.
@@ -54,7 +55,10 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case LoginCommand.COMMAND_WORD:
-            return new LoginCommandParser().parse(arguments);
+            if (!(LoginWindow.isExistUserId)) {
+
+            }
+            return new LoginUserIdCommandParser().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
             //@@author Chocological-reused

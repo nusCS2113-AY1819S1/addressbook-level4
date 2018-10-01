@@ -6,6 +6,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
+import seedu.address.ui.LoginWindow;
 
 /**
  * Queries the login book to see if there is a password that matches input password. Used for the login process.
@@ -24,15 +25,12 @@ public class LoginUserPasswordCommand extends LoginCommand {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredLoginDetailsList(predicate);
+        if (model.getFilteredLoginDetailsList().size() != 0) {
+            LoginWindow.isExistUserPassword = true;
+        }
         return new CommandResult(
                 String.format(Messages.MESSAGE_LOGINDETAILS_LISTED_OVERVIEW, model.getFilteredLoginDetailsList().size()));
 
-    }
-
-    public boolean isUserPasswordExists(Model model) {
-        requireNonNull(model);
-        model.updateFilteredLoginDetailsList(predicate);
-        return model.getFilteredLoginDetailsList().size() != 0;
     }
 
     @Override

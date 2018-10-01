@@ -13,8 +13,8 @@ import javax.swing.*;
 public class LoginWindow {
 
     private static boolean isLoginSuccessful = false;
-    private static boolean isValidUserId = false;
-    private static boolean isValidUserPassword = false;
+    public static boolean isExistUserId = false;
+    public static boolean isExistUserPassword = false;
     static boolean isNormalLogin = false;
     static boolean isCreateAccount = false;
     private static boolean isDeleteAccount = false;

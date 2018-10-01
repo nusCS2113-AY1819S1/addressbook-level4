@@ -10,7 +10,6 @@ public abstract class LoginCommand extends Command {
     public static final String COMMAND_WORD = "login";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Login into addressbook with input user ID and password."
-            + "There must be a user/ prefix before user ID and pass/ prefix before user password.\n"
-            + "Parameters: user/USERID pass/PASSWORD\n"
-            + "Example: " + COMMAND_WORD + " user/A3583758X pass/passphrase";
+            + "Parameters: USERID PASSWORD\n"
+            + "Example: " + COMMAND_WORD + " A3583758X pass/passphrase";
 }

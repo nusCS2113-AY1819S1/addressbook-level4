@@ -113,9 +113,17 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    //=========== Filtered Account List Accessors =============================================================
+
     @Override
     public ObservableList<LoginDetails> getFilteredLoginDetailsList() {
         return FXCollections.unmodifiableObservableList(filteredLoginDetails);
+    }
+
+    @Override
+    public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {
+        requireNonNull(predicate);
+        filteredLoginDetails.setPredicate(predicate);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -127,12 +135,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
-    }
-
-    @Override
-    public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {
-        requireNonNull(predicate);
-        filteredLoginDetails.setPredicate(predicate);
     }
 
     @Override

@@ -10,6 +10,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LoginUserIdCommand;
+import seedu.address.logic.commands.LoginUserPasswordCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -17,11 +18,13 @@ import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPassword;
+import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
+import seedu.address.ui.LoginWindow;
 
 /**
  * Parses input arguments and creates a new LoginUserIdCommand object
  */
-public class LoginCommandParser implements Parser<LoginCommand> {
+public class LoginUserIdCommandParser implements Parser<LoginCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the CreateAccountCommand
@@ -29,24 +32,16 @@ public class LoginCommandParser implements Parser<LoginCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public LoginCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_USERID, PREFIX_USERPASSWORD);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_USERID, PREFIX_USERPASSWORD)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         }
 
-        UserId userId = ParserUtil.parseUserId(argMultimap.getValue(PREFIX_USERID).get());
-
-        return new LoginUserIdCommand(new UserIdContainsKeywordsPredicate(String.valueOf(userId)));
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+        if (LoginWindow.isExistUserId) {
+            return new LoginUserPasswordCommand(new UserPasswordContainsKeywordsPredicate());
+        } else {
+            return new LoginUserIdCommand(new UserIdContainsKeywordsPredicate());
+        }
     }
 }
