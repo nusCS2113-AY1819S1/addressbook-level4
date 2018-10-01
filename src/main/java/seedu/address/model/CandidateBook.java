@@ -6,15 +6,15 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.candidate.UniquePersonList;
+import seedu.address.model.candidate.UniqueCandidateList;
 
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class CandidateBook implements ReadOnlyCandidateBook {
 
-    private final UniquePersonList persons;
+    private final UniqueCandidateList persons;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -24,15 +24,15 @@ public class AddressBook implements ReadOnlyAddressBook {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueCandidateList();
     }
 
-    public AddressBook() {}
+    public CandidateBook() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates an CandidateBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public CandidateBook(ReadOnlyCandidateBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code CandidateBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyCandidateBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getCandidatelist());
@@ -87,7 +87,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
+     * Removes {@code key} from this {@code CandidateBook}.
      * {@code key} must exist in the address book.
      */
     public void removePerson(Candidate key) {
@@ -110,8 +110,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+                || (other instanceof CandidateBook // instanceof handles nulls
+                && persons.equals(((CandidateBook) other).persons));
     }
 
     @Override

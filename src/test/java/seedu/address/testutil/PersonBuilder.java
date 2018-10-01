@@ -20,7 +20,7 @@ import seedu.address.model.util.SampleDataUtil;
  * A utility class to help with building Candidate objects.
  */
 public class PersonBuilder {
-    //MUST EDIT
+
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_GENDER = "F";
     public static final String DEFAULT_AGE = "21";

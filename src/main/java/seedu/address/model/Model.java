@@ -13,10 +13,10 @@ public interface Model {
     Predicate<Candidate> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyCandidateBook newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the CandidateBook */
+    ReadOnlyCandidateBook getAddressBook();
 
     /**
      * Returns true if a candidate with the same identity as {@code candidate} exists in the address book.

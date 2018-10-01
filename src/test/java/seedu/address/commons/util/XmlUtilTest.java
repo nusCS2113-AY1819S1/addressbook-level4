@@ -15,10 +15,10 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.AddressBook;
-import seedu.address.storage.XmlAdaptedPerson;
+import seedu.address.model.CandidateBook;
+import seedu.address.storage.XmlAdaptedCandidate;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableCandidateBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestUtil;
@@ -56,7 +56,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.getDataFromFile(null, AddressBook.class);
+        XmlUtil.getDataFromFile(null, CandidateBook.class);
     }
 
     @Test
@@ -68,26 +68,27 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, AddressBook.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, CandidateBook.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_dataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, AddressBook.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, CandidateBook.class);
     }
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
+        CandidateBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableCandidateBook.class)
+                .toModelType();
         assertEquals(9, dataFromFile.getCandidatelist().size());
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedCandidate actualPerson = XmlUtil.getDataFromFile(
+                MISSING_PERSON_FIELD_FILE, XmlAdaptedCandidateWithRootElement.class);
+        XmlAdaptedCandidate expectedPerson = new XmlAdaptedCandidate(
                 null, VALID_GENDER, VALID_AGE, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_JOB,
                 VALID_EDUCATION, VALID_SALARY, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
@@ -95,9 +96,9 @@ public class XmlUtilTest {
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedCandidate actualPerson = XmlUtil.getDataFromFile(
+                INVALID_PERSON_FIELD_FILE, XmlAdaptedCandidateWithRootElement.class);
+        XmlAdaptedCandidate expectedPerson = new XmlAdaptedCandidate(
                 VALID_NAME, VALID_GENDER, VALID_AGE, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_JOB,
                 VALID_EDUCATION, VALID_SALARY, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
@@ -105,9 +106,9 @@ public class XmlUtilTest {
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
-        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
-        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+        XmlAdaptedCandidate actualPerson = XmlUtil.getDataFromFile(
+                VALID_PERSON_FILE, XmlAdaptedCandidateWithRootElement.class);
+        XmlAdaptedCandidate expectedPerson = new XmlAdaptedCandidate(
                 VALID_NAME, VALID_GENDER, VALID_AGE, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_JOB,
                 VALID_EDUCATION, VALID_SALARY, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
@@ -116,7 +117,7 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.saveDataToFile(null, new AddressBook());
+        XmlUtil.saveDataToFile(null, new CandidateBook());
     }
 
     @Test
@@ -128,30 +129,31 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new AddressBook());
+        XmlUtil.saveDataToFile(MISSING_FILE, new CandidateBook());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
-        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
+        XmlSerializableCandidateBook dataToWrite = new XmlSerializableCandidateBook(new CandidateBook());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        XmlSerializableCandidateBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE,
+                XmlSerializableCandidateBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
-        dataToWrite = new XmlSerializableAddressBook(
+        AddressBookBuilder builder = new AddressBookBuilder(new CandidateBook());
+        dataToWrite = new XmlSerializableCandidateBook(
                 builder.withPerson(new PersonBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableCandidateBook.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
-     * objects.
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling
+     * of .xml data to {@code XmlAdaptedCandidate} objects.
      */
     @XmlRootElement(name = "candidate")
-    private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
+    private static class XmlAdaptedCandidateWithRootElement extends XmlAdaptedCandidate {}
 }

@@ -26,11 +26,11 @@ import seedu.address.model.tag.Tag;
 /**
  * JAXB-friendly version of the Candidate.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedCandidate {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Candidate's %s field is missing!";
 
-    //MUST EDIT
+
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
@@ -54,17 +54,17 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedCandidate.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedCandidate() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given candidate details.
+     * Constructs an {@code XmlAdaptedCandidate} with the given candidate details.
      */
-    //MUST EDIT
-    public XmlAdaptedPerson(String name, String gender, String age, String phone, String email, String address,
-                            String job, String education, String salary, List<XmlAdaptedTag> tagged) {
+
+    public XmlAdaptedCandidate(String name, String gender, String age, String phone, String email, String address,
+                               String job, String education, String salary, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.age = age;
         this.gender = gender;
@@ -82,10 +82,10 @@ public class XmlAdaptedPerson {
     /**
      * Converts a given Candidate into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedCandidate
      */
-    //MUST EDIT
-    public XmlAdaptedPerson(Candidate source) {
+
+    public XmlAdaptedCandidate(Candidate source) {
         name = source.getName().fullName;
         gender = source.getGender().value;
         age = source.getAge().value;
@@ -106,7 +106,7 @@ public class XmlAdaptedPerson {
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted candidate
      */
-    //MUST EDIT
+
     public Candidate toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
@@ -202,18 +202,18 @@ public class XmlAdaptedPerson {
             modelEducation, modelSalary, modelTags);
     }
 
-    //MUST EDIT
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedCandidate)) {
             return false;
         }
 
-        XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
+        XmlAdaptedCandidate otherPerson = (XmlAdaptedCandidate) other;
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(gender, otherPerson.gender)
                 && Objects.equals(age, otherPerson.age)
