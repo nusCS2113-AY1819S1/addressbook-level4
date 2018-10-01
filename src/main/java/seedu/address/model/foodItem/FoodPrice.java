@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class FoodPrice {
 
     public static final String MESSAGE_PRICE_CONSTRAINTS =
-            "Price should contain only numbers and at most 1 decimal point. " +
-                    "It must be least 1 digit long with a maximum of 2 digits after the decimal point";
+            "Price should contain only numbers and at most 1 decimal point. "
+                    + "It must be least 1 digit long with a maximum of 2 digits after the decimal point";
     public static final String PRICE_VALIDATION_REGEX = "[0-9]+([.][0-9]{1,2})?";
     private float foodPrice;
 
@@ -55,4 +55,5 @@ public class FoodPrice {
 
     @Override
     public int hashCode() { return Float.hashCode(foodPrice); }
+
 }

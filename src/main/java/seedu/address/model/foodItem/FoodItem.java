@@ -18,11 +18,17 @@ public class FoodItem {
         this.foodPrice = price;
     }
 
-    public FoodName getFoodName() { return foodName; }
+    public FoodName getFoodName() {
+        return foodName;
+    }
 
-    public FoodRecipe getFoodRecipe() { return foodRecipe; }
+    public FoodRecipe getFoodRecipe() {
+        return foodRecipe;
+    }
 
-    public FoodPrice getFoodPrice() { return foodPrice; }
+    public FoodPrice getFoodPrice() {
+        return foodPrice;
+    }
 
 
     /**
