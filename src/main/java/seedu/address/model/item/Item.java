@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-
-import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -52,20 +50,23 @@ public class Item {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        status.set(STATUS_READY, quantity);
-        status.set(STATUS_ONLOAN, 0);
-        status.set(STATUS_FAULTY, 0);
+        this.status.add(quantity);
+        this.status.add(0);
+        this.status.add(0);
         this.tags.addAll(tags);
     }
 
     public Item(Name name, Integer quantity, Integer minQuantity, List<Integer> status, Set<Tag> tags) {
-        requireAllNonNull(name, quantity, minQuantity, status, tags);
+        requireAllNonNull(name, quantity, minQuantity, tags);
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status.set(STATUS_READY, status.get(STATUS_READY));
-        this.status.set(STATUS_ONLOAN, status.get(STATUS_ONLOAN));
-        this.status.set(STATUS_FAULTY, status.get(STATUS_FAULTY));
+        this.status.add(quantity);
+        this.status.add(0);
+        this.status.add(0);
+//        this.status.set(STATUS_READY, status.get(STATUS_READY));
+//        this.status.set(STATUS_ONLOAN, status.get(STATUS_ONLOAN));
+//        this.status.set(STATUS_FAULTY, status.get(STATUS_FAULTY));
         this.tags.addAll(tags);
     }
 
