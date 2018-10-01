@@ -20,7 +20,7 @@ By: `Team T09-2`      Since: `Sep 2018`      Licence: `MIT`
 
 Something Daily (SD) is for those who *prefer to use a desktop app to manage a significant number of academic tasks and keep track on expenditures*. More importantly, SD is *optimized for those who prefer to work with a Command Line Interface* while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SD can get your daily schedule management tasks and expenditure track done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
-== Quick Start
+== Quick Start (not updated yet)
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
@@ -46,47 +46,49 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Our product will be divided to two sub-parts which are called `To-do List` and `Expenditure Tracker`. For each part, please remember add the domain command TDL which represents To-do List or ET which represents Expenditure Tracker. E.g. in `ET check status`, ET is the domain command that leads you to Expenditure Tracker.
+* Our product will be divided to two sub-parts which are called `To-do List` and `Expenditure Tracker`. For each part, do remember to add the domain command `TDL` (which represents To-do List) or `ET` (which represents Expenditure Tracker). E.g. in `ET check status`, `ET` is the domain command that leads you to Expenditure Tracker.
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `TDL add t/TASK`, `TASK` is a parameter which can be used as `add t/Homework`.
-* Items in square brackets are optional e.g. `t/TASK [d/DATE]` can be used as t/Homework d/12-09 or as t/Homework.
+* Items in square brackets are optional e.g. `t/TASK [d/DATE]` can be used as `t/Homework d/12-09` or as `t/Homework`.
 * Parameters can be in any order e.g. if the command specifies `t/TASK m/MODULE`, `m/MODULE t/TASK` is also acceptable.
 ====
 
 === Viewing help : `TDL help`
 
-Shows a list of commands
+Shows a list of commands + 
 Format: `TDL help`
 
 === Adding a task: `TDL add`
 
 Adds a task to the to-do list +
 Format: `TDL add t/TASK m/MODULE [d/DATE] [p/PRIORITY]`
+
 Examples:
-* TDL add t/Tutorial 5 m/CS2101 d/12-09 p/1
+
+* `TDL add t/Tutorial 5 m/CS2101 d/12-09 p/1`
 
 === Editing a task : `TDL edit`
 
 Edits an existing task in the to-do list. +
-Format: `edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
+Format: `TDL edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
 
 ****
 * Edits the task at the specified `INDEX`. The index refers to the index number shown in the displayed uncompleted tasks list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* You can remove any task’s date or priority by typing d/ or p/ without specifying any fields after it.
+* You can remove any task’s date or priority by typing `d/` or `p/` without specifying any fields after it.
 ****
 
 Examples:
 
-* `edit 1 t/Tutorial 2 m/CS2113` +
-Edits the task name and module code of the 1st task to be ‘Tutorial 2’ and ‘CS2113’ respectively.
-* `edit 2 t/Tutorial 2 d/ p/` +
-Edits the task name of the 2nd task to be ‘Tutorial 2’ and clears all existing deadlines and priority tags associated with this task.
+* `TDL edit 1 t/Tutorial 2 m/CS2113` +
+Edits the task name and module code of the 1st task to be `Tutorial 2` and `CS2113` respectively.
+* `TDL edit 2 t/Tutorial 2 d/ p/` +
+Edits the task name of the 2nd task to be `Tutorial 2` and clears all existing deadlines and priority tags associated with this task.
 
 === Deleting a person : `TDL delete`
 
 Deletes the specified task from the to-do list. +
-Format: `delete INDEX`
+Format: `TDL delete INDEX`
 
 ****
 * Deletes the task at the specified `INDEX`.
@@ -96,18 +98,18 @@ Format: `delete INDEX`
 
 Examples:
 
-* `delete 2` +
+* `TDL delete 2` +
 Deletes the 2nd task in the to-do list.
-* `delete 1` +
+* `TDL delete 1` +
 Deletes the 1st task in the to-do list.
 
 === Completing a task : `TDL complete`
 
 Mark a task in the to-do list as completed. +
-Format: `complete INDEX`
+Format: `TDL complete INDEX`
 
 ****
-* Mark the task at the specified INDEX as `completed`.
+* Mark the task at the specified `INDEX` as `completed`.
 * The index refers to the index number shown in the displayed uncompleted tasks list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -115,7 +117,7 @@ Format: `complete INDEX`
 Examples:
 
 * `TDL complete 3` +
-The 3rd task in the to-do list is now marked as completed and will be moved to the ‘completed tasks’ list.
+The 3rd task in the to-do list is now marked as completed and will be moved to the _completed tasks_ list.
 
 === View all tasks : `TDL view`
 
@@ -123,9 +125,9 @@ Shows a list of uncompleted or completed tasks in the to-do list. +
 Format: `TDL view PARAMETER`
 
 ****
-* PARAMETER is either ‘completed’ or ‘uncompleted.
-* The default view for the todo list is ‘uncompleted task’.
-* Performing view uncompleted on todo list with the list already at ‘uncompleted task’ will not result in any changes. The same is applied to ‘completed task’ list with view completed command.
+* PARAMETER is either `completed` or `uncompleted`.
+* The default view for the todo list is _uncompleted tasks_.
+* Performing `TDL view uncompleted` on to-do list with the list already at _uncompleted tasks_ will not result in any changes. The same is applied to _completed tasks_ list with `TDL view completed` command.
 * The GUI should allow the user to understand which list they are currently looking at.
 ****
 
@@ -140,8 +142,8 @@ Sorts and displays the to-do list by a certain tag.
 Format: `TDL sort by PARAMETER`
 
 ****
-* PARAMETER is either ‘mod’ for module, ‘ddl’ for deadline or ‘impt’ for importance/priority.
-* Tasks without the d/DATE or p/PRIORITY tags will be at the bottom of the list when doing sorting by these tags.
+* PARAMETER is either `mod` for module, `ddl` for deadline or `impt` for importance/priority.
+* Tasks without the `d/DATE` or `p/PRIORITY` tags will be at the bottom of the list when doing sorting by these tags.
 ****
 
 Examples:
@@ -173,8 +175,8 @@ Format: `TDL redo`
 Examples:
 
 * `TDL complete 3` +
-`TDL undo` (reverses the `complete 3` command) +
-`TDL redo` (reapplies the `complete 3` command) +
+`TDL undo` (reverses the `TDL complete 3` command) +
+`TDL redo` (reapplies the `TDL complete 3` command) +
 
 === Exiting the program : `TDL exit`
 
