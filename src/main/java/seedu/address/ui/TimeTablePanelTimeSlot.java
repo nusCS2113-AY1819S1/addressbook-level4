@@ -6,7 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.TimeSlot;
 
-/** TODO ALEXIS: conversion into a timeSlot (visually a square in the TimetableGrid)
+/** TODO ALEXIS: morph this into a timeSlot (visually a square in the TimetableGrid)
  * An UI component that displays information of a {@code Person}.
  */
 public class TimeTablePanelTimeSlot extends UiPart<Region> {
@@ -29,17 +29,12 @@ public class TimeTablePanelTimeSlot extends UiPart<Region> {
     private Label name; //name of timeSlot
     @FXML
     private Label id; //index of timeSlot in current TimeTableGrid
-    //@FXML
-    //private FlowPane tags; //TODO ALEXIS: tag for this timeSlot (necessary or not? )
 
     public TimeTablePanelTimeSlot(TimeSlot timeSlot, int displayedIndex) {
         super(FXML);
         this.timeSlot = timeSlot;
         id.setText(displayedIndex + ". ");
-        //TODO ALEXIS: pls verify the below line cannot be further OOP-fied/ optimised
         name.setText(timeSlot.getModName());
-        //TODO ALEXIS: create public getTags function in getName
-        //timeSlot.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -55,8 +50,9 @@ public class TimeTablePanelTimeSlot extends UiPart<Region> {
         }
 
         // state check
+        // TODO ALEXIS: pls verify this whole function makes sense.
         TimeTablePanelTimeSlot card = (TimeTablePanelTimeSlot) other;
         return id.getText().equals(card.id.getText())
-                && timeSlot.equals(card.timeSlot); // TODO ALEXIS: pls verify this whole function makes sense.
+                && timeSlot.equals(card.timeSlot);
     }
 }

@@ -192,7 +192,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     void releaseResources() {
-        timetablePanel.freeResources();
+        //timetablePanel.freeResources(); TODO: do the equivalent of releasing resources of browserPanel webview?
     }
 
     @Subscribe

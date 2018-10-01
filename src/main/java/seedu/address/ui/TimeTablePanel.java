@@ -25,12 +25,13 @@ import seedu.address.model.person.TimeTable;
  *  |
  *  |-PanelBottom (just a divider in javafx )
  *  |   |-TimeTablePanelMainGrid (visually the gridlines in the timetable)
- *  |       |---*TimeTablePanelTimeSlot (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
- *  |       |---*TimeTablePanelDaySlot (represents a day marker on the leftmost column of timetable; visually a square that contains the day of the week)
+ *  |       |---*TimeTablePanelTimeSlot
+ *  |       |       (represents a timeSlot; visually a square inside the timetable, just like in NUSMODS)
+ *  |       |---*TimeTablePanelDaySlot
+ *  |               (represents a daySlot on the leftmost column of timetable; visually a square)
  *  |
- *  |-UI logic:  (just to handle the logic of RENDERING/SCALING and ADDING/REMOVAL of timeslots and HANDLING TIMESLOT INDEXES, ETC)
+ *  |-UI logic:  (handles logic such as: SCALING of grid, ADDING/REMOVAL of timeslots, HANDLING TIMESLOT INDEXES, etc)
  *
- *  
  *____________________
  */
 
@@ -40,9 +41,9 @@ public class TimeTablePanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private  TimeTablePanelTimingGrid timeTablePanelTimingGrid;
+    private TimeTablePanelTimingGrid timeTablePanelTimingGrid;
 
-    private  TimeTablePanelMainGrid timeTablePanelMainGrid;
+    private TimeTablePanelMainGrid timeTablePanelMainGrid;
 
     @FXML
     private StackPane timeTablePanelTimingGridPlaceholder;
@@ -70,13 +71,12 @@ public class TimeTablePanel extends UiPart<Region> {
         timeTablePanelTimingGrid = new TimeTablePanelTimingGrid();
         timeTablePanelTimingGridPlaceholder.getChildren().add(timeTablePanelTimingGrid.getRoot());
 
-        timeTablePanelMainGrid  = new TimeTablePanelMainGrid();
+        timeTablePanelMainGrid = new TimeTablePanelMainGrid();
         timeTablePanelMainGridPlaceholder.getChildren().add(timeTablePanelMainGrid.getRoot());
     }
 
-
     /** TODO ALEXIS:
-     * Loads a TimeTable visually from the TimeTable object it is given.
+     * Loads a TimeTable from the TimeTable object it is given.
      */
     private void loadTimeTable(TimeTable timeTable) {
 
@@ -88,12 +88,6 @@ public class TimeTablePanel extends UiPart<Region> {
     private void loadTimeTable() {
 
     }
-
-    //TODO ALEXIS: decide if this is necessary or not?
-    public void freeResources(){
-
-    }
-
 
     @Subscribe
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {

@@ -121,6 +121,6 @@ public class Person {
     }
 
     public TimeTable getTimeTable() {
-        return  weekly;
+        return weekly;
     }
 }
