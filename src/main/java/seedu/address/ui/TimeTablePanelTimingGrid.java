@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
@@ -27,7 +28,7 @@ public class TimeTablePanelTimingGrid extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
-    private GridPane timingGridPlaceholder;
+    private GridPane timingGrid;
 
     public TimeTablePanelTimingGrid() {
         super(FXML);
@@ -36,6 +37,20 @@ public class TimeTablePanelTimingGrid extends UiPart<Region> {
         getRoot().setOnKeyPressed(Event::consume);
 
         //TODO ALEXIS: resizer, add, init functions.
+
+        populateTimings();
     }
 
+    /**
+     * Populates the timings on the top row from 1000 to 1800
+     */
+    private void populateTimings() {
+        int start_time = 1000;
+        int end_time = 1800;
+
+        for (int temp = start_time,col = 0; temp <= end_time; temp += 100, col++) {
+            String myLabel = Integer.toString(temp);
+            timingGrid.add(new Label(myLabel), col, 0);
+        }
+    }
 }
