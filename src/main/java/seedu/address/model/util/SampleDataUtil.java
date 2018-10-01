@@ -16,7 +16,8 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Item[] getSampleItems() {
         return new Item[] {
-            new Item(new Name("Arduino"), 10, 5, getTagSet("Lab1"))
+            new Item(new Name("Arduino"), 10, 5, getTagSet("Lab1")),
+            new Item(new Name("Raspberry Pi"), 10, 6, getTagSet("Lab2"))
         };
     }
 

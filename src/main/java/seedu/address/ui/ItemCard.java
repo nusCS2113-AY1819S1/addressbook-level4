@@ -13,6 +13,11 @@ import seedu.address.model.item.Item;
 public class ItemCard extends UiPart<Region> {
 
     private static final String FXML = "ItemListCard.fxml";
+    private static final String QUANTITY_TEXT = "Quantity : ";
+    private static final String MIN_QUANTITY_TEXT = "Minimum Quantity : ";
+    private static final String STATUS_READY_TEXT = "Status-Ready : ";
+    private static final String STATUS_ON_LOAN_TEXT = "Status-On_Loan : ";
+    private static final String STATUS_FAULTY_TEXT = "Status-Faulty : ";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -41,6 +46,16 @@ public class ItemCard extends UiPart<Region> {
     @FXML
     private Label statusFaulty;
     @FXML
+    private Label quantityText;
+    @FXML
+    private Label minQuantityText;
+    @FXML
+    private Label statusReadyText;
+    @FXML
+    private Label statusOnLoanText;
+    @FXML
+    private Label statusFaultyText;
+    @FXML
     private FlowPane tags;
 
     public ItemCard(Item item, int displayedIndex) {
@@ -49,11 +64,16 @@ public class ItemCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(item.getName().fullName);
         quantity.setText(item.getQuantity()+"");
-        minQuantity.setText(item.getMinQuantity()+"");
-        statusReady.setText(item.getStatus().get(0)+"");
-        statusOnLoan.setText(item.getStatus().get(1)+"");
-        statusFaulty.setText(item.getStatus().get(2)+"");
+        minQuantity.setText(item.getMinQuantity().toString());
+        statusReady.setText(item.getStatus().get(0).toString());
+        statusOnLoan.setText(item.getStatus().get(1).toString());
+        statusFaulty.setText(item.getStatus().get(2).toString());
         item.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        quantityText.setText(QUANTITY_TEXT);
+        minQuantityText.setText(MIN_QUANTITY_TEXT);
+        statusReadyText.setText(STATUS_READY_TEXT);
+        statusOnLoanText.setText(STATUS_ON_LOAN_TEXT);
+        statusFaultyText.setText(STATUS_FAULTY_TEXT);
     }
 
     @Override
