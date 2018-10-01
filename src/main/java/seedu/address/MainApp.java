@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
+
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
@@ -21,19 +22,23 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.EventList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleEventUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.EventStorage;
+import seedu.address.storage.EventStorageManager;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlEventStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+
 
 /**
  * The main entry point to the application.
@@ -62,8 +67,10 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
+        //TODO: Convert addressbookstorage to person storage
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        EventStorage eventStorage = new XmlEventStorage(userPrefs.getEventlistPath());
+        storage = new EventStorageManager(eventStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -82,20 +89,20 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyEventList> eventListOptional;
+        ReadOnlyEventList initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            eventListOptional = storage.readEventList();
+            if (!eventListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample EventList");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = eventListOptional.orElseGet(SampleEventUtil::getSampleEventList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty EventList");
+            initialData = new EventList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty EventList");
+            initialData = new EventList();
         }
 
         return new ModelManager(initialData, userPrefs);
