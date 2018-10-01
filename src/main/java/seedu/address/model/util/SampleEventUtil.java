@@ -13,6 +13,9 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.tag.Tag;
 
+/**
+ * Contains utility methods for populating {@code EventList} with sample data.
+ */
 public class SampleEventUtil {
     public static Event[] getSampleEvents() {
         return new Event[]{

@@ -25,14 +25,16 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.EventList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleEventUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.EventStorage;
-import seedu.address.storage.EventStorageManager;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.storage.XmlEventStorage;
@@ -59,7 +61,7 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        logger.info("=============================[ Initializing AddressBook ]===========================");
+        logger.info("=============================[ Initializing ProManage ]===========================");
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
@@ -70,7 +72,7 @@ public class MainApp extends Application {
         //TODO: Convert addressbookstorage to person storage
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         EventStorage eventStorage = new XmlEventStorage(userPrefs.getEventlistPath());
-        storage = new EventStorageManager(eventStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, eventStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -89,23 +91,34 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+        Optional<ReadOnlyAddressBook> addressBookOptional;
+        ReadOnlyAddressBook initialAddressBookData;
         Optional<ReadOnlyEventList> eventListOptional;
-        ReadOnlyEventList initialData;
+        ReadOnlyEventList initialEventListData;
         try {
-            eventListOptional = storage.readEventList();
-            if (!eventListOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample EventList");
+            addressBookOptional = storage.readAddressBook();
+            if (!addressBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = eventListOptional.orElseGet(SampleEventUtil::getSampleEventList);
+            eventListOptional = storage.readEventList();
+//            if (!eventListOptional.isPresent()) {
+//                logger.info("Data file not found. Will be starting with a sample EventList");
+//            }
+            initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialEventListData = eventListOptional.orElseGet(SampleEventUtil::getSampleEventList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty EventList");
-            initialData = new EventList();
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            initialAddressBookData = new AddressBook();
+//            logger.warning("Data file not in the correct format. Will be starting with an empty EventList");
+//            initialEventListData = new EventList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty EventList");
-            initialData = new EventList();
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initialAddressBookData = new AddressBook();
+//            logger.warning("Problem while reading from the file. Will be starting with an empty EventList");
+//            initialEventListData = new EventList();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialAddressBookData, userPrefs);
     }
 
     private void initLogging(Config config) {

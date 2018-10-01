@@ -8,12 +8,13 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface StorageAddress extends AddressBookStorage, UserPrefsStorage {
+public interface StorageAddress extends AddressBookStorage, EventStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -36,4 +37,5 @@ public interface StorageAddress extends AddressBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+
 }

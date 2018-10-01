@@ -13,7 +13,7 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private Path addressBookFilePath = Paths.get("data", "addressbook.xml");
-    private Path eventlistPath = Paths.get("data", "eventlist.xml");
+    private Path eventListPath = Paths.get("data", "eventlist.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -36,7 +36,7 @@ public class UserPrefs {
     }
 
     public Path getEventlistPath() {
-        return eventlistPath;
+        return eventListPath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
@@ -44,7 +44,7 @@ public class UserPrefs {
     }
 
     public void setEventlistPath(Path eventlistPath) {
-        this.eventlistPath = eventlistPath;
+        this.eventListPath = eventlistPath;
     }
 
     @Override
