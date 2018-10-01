@@ -76,14 +76,21 @@ E.g. sendmail CS2113T Please be reminded to bring your calculator tomorrow.
 
 
 
-=== List a group of students: 'scorefilter'
-List out the standard deviation of the score data set from all students.
-Example: scorefilter
+=== List a group of students: 'scorefilter a/56 or b/56'
+List out  students who score above/below certain grade.
+Example: scorefilter a/66
 Show the Standard deviation of the students exam score
 Format: scoreFilter [filter_standard]
-Example: scorefilter 56
-This will query all the students who score below 56 into a new group, allowing the lecturer to help these people in need.
+Example: scorefilter a/66
+This will list all the students who score above 56 in a new grade list
 
+=== Summary of students: 'summaryGrade'
+show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test.
+Example: summaryGrade
+
+Format: summaryGrade
+Example: summaryGrade
+show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test
 
 === Adding/deleting tags automatically: 'addtag/deletetag'
 Add/delete certain tags for certain group of people (e.g student perform excellent;  students need to meet later; student need extra help)) automatically
@@ -127,7 +134,7 @@ Format: `list`
 === Editing a person : `edit`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
