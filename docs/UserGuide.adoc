@@ -18,9 +18,9 @@ By: `Team T09-2`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 
-Something Daily (SD) is for those who *prefer to use a desktop app to manage a significant number of academic tasks and keep track on expenditures*. More importantly, SD is *optimized for those who prefer to work with a Command Line Interface* while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SD can get your daily schedule management tasks and expenditure track done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Something Daily (SD) is for those who *prefer to use a desktop app to manage a significant number of academic tasks and keep track on expenditures*. More importantly, SD is *optimized for those who prefer to work with a Command Line Interface* while still having the benefits of a Graphical User Interface (GUI). If you can type fast, SD can get your tasks management and expenditure tracking done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
-== Quick Start (not updated yet)
+== Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
@@ -33,9 +33,8 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* **`TDL add`**`t/Tutorial 5 m/CS2101 d/12-09 p/1` : adds a task named `Tutorial 5` to the To-do List.
+* **`TDL delete`**`3` : deletes the 3rd task in the To-do List
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -138,7 +137,7 @@ The list is now populated with tasks marked as completed.
 
 === Sort all tasks listed : `TDL sort`
 
-Sorts and displays the to-do list by a certain tag.
+Sorts and displays the to-do list by a certain tag. +
 Format: `TDL sort by PARAMETER`
 
 ****
@@ -178,10 +177,10 @@ Examples:
 `TDL undo` (reverses the `TDL complete 3` command) +
 `TDL redo` (reapplies the `TDL complete 3` command) +
 
-=== Exiting the program : `TDL exit`
+=== Exiting the program : `exit`
 
 Exits the program +
-Format: `TDL exit`
+Format: `exit`
 
 === Saving the data
 
@@ -203,7 +202,7 @@ There is no need to save manually.
 * *Edit* : `TDL edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]` 
 * *Sort* : `TDL sort by PARAMETER`
 * *Help* : `TDL help`
-* *Exit* : `TDL exit` 
+* *Exit* : `exit` 
 * *View* : `TDL view PARAMETER`
 * *Undo* : `undo`
 * *Redo* : `redo`
