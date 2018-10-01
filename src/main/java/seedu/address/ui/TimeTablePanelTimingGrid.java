@@ -45,10 +45,10 @@ public class TimeTablePanelTimingGrid extends UiPart<Region> {
      * Populates the timings on the top row from 1000 to 1800
      */
     private void populateTimings() {
-        int start_time = 1000;
-        int end_time = 1800;
+        int startTime = 1000;
+        int endTime = 1800;
 
-        for (int temp = start_time,col = 0; temp <= end_time; temp += 100, col++) {
+        for (int temp = startTime, col = 0; temp <= endTime; temp += 100, col++) {
             String myLabel = Integer.toString(temp);
             timingGrid.add(new Label(myLabel), col, 0);
         }
