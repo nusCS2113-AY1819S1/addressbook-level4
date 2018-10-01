@@ -52,3 +52,11 @@ Role: Developer +
 Responsibilities: UI
 
 '''
+=== Ler Wei Sheng
+image::lws.jpeg[width="150", align="left"]
+{empty}[https://github.com/lws803[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Search + Security
+
+'''
