@@ -18,7 +18,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.book.exceptions.DuplicateBookException;
 import seedu.address.model.book.exceptions.BookNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.BookBuilder;
 
 public class UniqueBookListTest {
     @Rule
@@ -46,7 +46,7 @@ public class UniqueBookListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueBookList.add(ALICE);
-        Book editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Book editedAlice = new BookBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueBookList.contains(editedAlice));
     }
@@ -94,7 +94,7 @@ public class UniqueBookListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueBookList.add(ALICE);
-        Book editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Book editedAlice = new BookBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueBookList.setPerson(ALICE, editedAlice);
         UniqueBookList expectedUniqueBookList = new UniqueBookList();

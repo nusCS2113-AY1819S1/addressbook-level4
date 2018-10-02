@@ -9,7 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.book.ISBN;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
 import seedu.address.model.book.Quantity;
@@ -51,18 +51,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code ISBN}.
+     * Parses a {@code String phone} into a {@code Isbn}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static ISBN parsePhone(String phone) throws ParseException {
+    public static Isbn parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!ISBN.isValidPhone(trimmedPhone)) {
-            throw new ParseException(ISBN.ISBN_NUMBERS_CONSTRAINTS);
+        if (!Isbn.isValidIsbn(trimmedPhone)) {
+            throw new ParseException(Isbn.ISBN_NUMBERS_CONSTRAINTS);
         }
-        return new ISBN(trimmedPhone);
+        return new Isbn(trimmedPhone);
     }
 
     /**

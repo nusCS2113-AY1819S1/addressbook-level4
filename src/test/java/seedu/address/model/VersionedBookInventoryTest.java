@@ -14,14 +14,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.BookInventoryBuilder;
 
 public class VersionedBookInventoryTest {
 
-    private final ReadOnlyBookInventory addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyBookInventory addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyBookInventory addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyBookInventory emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyBookInventory addressBookWithAmy = new BookInventoryBuilder().withPerson(AMY).build();
+    private final ReadOnlyBookInventory addressBookWithBob = new BookInventoryBuilder().withPerson(BOB).build();
+    private final ReadOnlyBookInventory addressBookWithCarl = new BookInventoryBuilder().withPerson(CARL).build();
+    private final ReadOnlyBookInventory emptyAddressBook = new BookInventoryBuilder().build();
 
     @Test
     public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {

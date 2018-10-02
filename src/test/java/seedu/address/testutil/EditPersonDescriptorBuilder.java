@@ -45,10 +45,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code ISBN} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Isbn} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setIsbn(new ISBN(phone));
+        descriptor.setIsbn(new Isbn(phone));
         return this;
     }
 

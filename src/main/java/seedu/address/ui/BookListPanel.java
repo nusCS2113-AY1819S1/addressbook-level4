@@ -18,14 +18,14 @@ import seedu.address.model.book.Book;
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class BookListPanel extends UiPart<Region> {
+    private static final String FXML = "BookListPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     @FXML
     private ListView<Book> personListView;
 
-    public PersonListPanel(ObservableList<Book> bookList) {
+    public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
         setConnections(bookList);
         registerAsAnEventHandler(this);
@@ -48,7 +48,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code BookCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -64,7 +64,7 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code BookCard}.
      */
     class PersonListViewCell extends ListCell<Book> {
         @Override
@@ -75,7 +75,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(book, getIndex() + 1).getRoot());
+                setGraphic(new BookCard(book, getIndex() + 1).getRoot());
             }
         }
     }
