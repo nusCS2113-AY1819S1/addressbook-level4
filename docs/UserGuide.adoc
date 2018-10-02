@@ -55,6 +55,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Viewing help : `help` (`h`)
 
+Displays the userguide from within the app.
 Format: `help`
 
 === Adding a person : `add` (`a`)
