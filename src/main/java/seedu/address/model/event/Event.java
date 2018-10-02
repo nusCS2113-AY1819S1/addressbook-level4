@@ -38,7 +38,7 @@ public class Event implements Comparable<Event> {
 
     public Event(EventName eventName, Description description,
                  LocalDate startTime, LocalDate endTime, Location location) {
-        requireAllNonNull(eventName);
+        requireAllNonNull(eventName, description, startTime, endTime, location);
 
         this.eventName = eventName;
         this.description = description;

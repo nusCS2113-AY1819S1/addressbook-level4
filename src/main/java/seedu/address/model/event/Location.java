@@ -36,7 +36,7 @@ public class Location {
      * Will implement this at a later date
      */
     public static boolean isValidLocation(String test) {
-        return true;
+        return test.matches(LOCATION_VALIDATION_REGEX);
     }
 
     @Override
