@@ -29,6 +29,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleEventUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.EventStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -96,23 +97,38 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyEventList> eventListOptional;
+        ReadOnlyAddressBook initialAddressData;
         ReadOnlyEventList initialEventListData;
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressData = new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialAddressData = new AddressBook();
         }
 
-        return new ModelManager(initialData, new EventList(), userPrefs);
+        try {
+            eventListOptional = storage.readEventList();
+            if (!eventListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample EventList");
+            }
+            initialEventListData = eventListOptional.orElseGet(SampleEventUtil::getSampleEventList);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty EventList");
+            initialEventListData = new EventList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty EventList");
+            initialEventListData = new EventList();
+        }
+
+        return new ModelManager(initialAddressData, initialEventListData, userPrefs);
     }
 
     private void initLogging(Config config) {
