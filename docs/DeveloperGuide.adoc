@@ -1020,6 +1020,10 @@ Use case ends.
 1. User requests to decrypt addressbook with password
 2. Addressbook shows decrypted message
 +
+Use case ends.
+
+*Extensions*
+
 [none]
 * 1a. Addressbook is already decrypted.
 +
