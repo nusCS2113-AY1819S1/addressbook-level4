@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.model.person.Person;
 
 
+
 /**
  * Represents a Event in the event list.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -36,6 +37,7 @@ public class Event implements Comparable<Event> {
     /**
      * Every field must be present not null
      */
+
 
     public Event(EventName eventName, Description description,
                  LocalDate startTime, LocalDate endTime, Location location) {

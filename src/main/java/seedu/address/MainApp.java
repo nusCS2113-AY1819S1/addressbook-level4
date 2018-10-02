@@ -29,6 +29,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleEventUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.EventStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -46,7 +47,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 1, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -89,30 +90,49 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
-     */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+
+        Optional<ReadOnlyEventList> eventListOptional;
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        ReadOnlyAddressBook initialDataAddressBook;
         ReadOnlyEventList initialEventListData;
+
+        try {
+            eventListOptional = storage.readEventList();
+            if (!eventListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample EventList");
+            }
+            initialEventListData = eventListOptional.orElseGet(SampleEventUtil::getSampleEventList);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty EventList");
+            initialEventListData = new EventList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty EventList");
+            initialEventListData = new EventList();
+        }
+
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialDataAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialDataAddressBook = new AddressBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
+            initialDataAddressBook = new AddressBook();
         }
 
-        return new ModelManager(initialData, new EventList(), userPrefs);
+        //Testing on saving a sample event list xml
+        try {
+            storage.saveEventList(initialEventListData);
+        } catch (IOException e) {
+            System.err.println("Error saving event list!");
+        }
+
+        return new ModelManager(initialDataAddressBook, initialEventListData, userPrefs);
     }
 
     private void initLogging(Config config) {
