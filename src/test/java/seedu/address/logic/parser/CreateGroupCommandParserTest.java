@@ -59,7 +59,7 @@ public class CreateGroupCommandParserTest {
         assertParseSuccess(parser, GROUP_NAME_DESC_LAB + GROUP_LOC_DESC_LAB,
                 new CreateGroupCommand(expectedGroup));
         */
-     }
+    }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
