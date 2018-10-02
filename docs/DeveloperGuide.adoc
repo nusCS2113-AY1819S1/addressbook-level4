@@ -872,22 +872,6 @@ Functional Requirements:
 |`*` |user |schedule tasks in a calendar |notified of when tasks are due.
 |=======================================================================
 
-Non-Functional Requirements:
-
-[width="59%",cols="22%,<23%,<25%,<30%",options="header",]
-|=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
-|`* * *` |busy employee |get information from the address book fast |I can get back to my work.
-
-|`* * *` |secretary |information to be accurate |able to contact or refer to them.
-
-|`* *` |busy employee |access information fast |can get back to what I am doing.
-
-|`* *` |boss |keep my information in the address book safe |confidential information about employees will not be disclosed.
-
-|`*` |efficient worker |address book to have a small and compact size |transfer information between machines easily.
-|=======================================================================
-
 [appendix]
 == Use Cases
 
@@ -919,7 +903,80 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-_{More to be added}_
+[discrete]
+=== Use case: Back Up data
+
+*MSS*
+
+1.  User requests to back up data
+2.  AddressBook shows that data has been backed up
++
+Use case ends.
+
+[discrete]
+=== Use case: Restore data
+
+*MSS*
+
+1.  User requests to list snapshots of all backups
+2.  AddressBook shows a list of snapshots
+3.  User requests to restore a specific snapshot in the list
+4.  AddressBook is restored to the time and date of the restored backup.
+
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. AddressBook shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Export data to a directory
+
+*MSS*
+
+1.  User requests to export the data to the directory
+2.  AddressBook shows that the file has been exported
+
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Directory does not exist
+[none]
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
+
+[discrete]
+=== Use case: Import data from a directory
+
+*MSS*
+
+1.  User requests to import the data from a directory
+2.  AddressBook shows that the file has been imported
+3.  AddressBook will include the imported data.
+
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Directory does not exist
+[none]
+** 2a1. AddressBook shows an error message.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
@@ -927,8 +984,11 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  A busy employee should be able to get back to work quickly using an intuitive interface to get information from the address book fast.
+.  A secretary should be able to refer and contact different people with accurate information.
+.  A busy employee should be able to get back to work fast by having quick access to information required.
+.  Should have a way to keep information confidential and safe from any unauthenticated personnel.
+.  Should be able to transfer information between machines easily by making the address book small and compact
 
 [appendix]
 == Glossary

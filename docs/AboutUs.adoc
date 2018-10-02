@@ -28,7 +28,7 @@ Responsibilities: UI
 
 === Lim Ming Hong
 image::MingHong.jpg[width="150", align="left"]
-{empty}[https://github.com/Limminghong[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/Limminghong[github]]
 
 Role: Developer +
 Responsibilities: Data
