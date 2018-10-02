@@ -104,10 +104,10 @@ Finds persons whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is not case insensitive.
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
+* Partial words or words with typos will be matched too eg. 'Hangs' will be matched to 'Hans'
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
@@ -254,7 +254,8 @@ There is no need to save manually.
 
 Encrypts the data file with your password. +
 Format: `password YOURPASSWORD` +
-All commands will be disabled during encryption.
+All commands will be disabled during encryption, your data will be safely protected. +
+Please close the application after encrypting to clear the application and prevent others from accessing your data.
 
 === Text prediction
 
