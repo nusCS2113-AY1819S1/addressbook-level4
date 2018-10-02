@@ -14,6 +14,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_KPI = new Prefix("k/");
     public static final Prefix PREFIX_POSITION = new Prefix("r/");
+    public static final Prefix PREFIX_ALL = new Prefix("all/");
 
     /* Command keywords */
     public static final String COMMAND_ADD = "add";
@@ -33,4 +34,5 @@ public class CliSyntax {
     public static final String COMMAND_RESTORE = "restore";
     public static final String COMMAND_IMPORT = "import";
     public static final String COMMAND_EXPORT = "export";
+    public static final String COMMAND_MAIL = "mail";
 }
