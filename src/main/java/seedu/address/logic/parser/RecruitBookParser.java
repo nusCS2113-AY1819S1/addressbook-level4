@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCandidateCommand;
+import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -20,6 +21,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.joboffer.JobOffer;
 
 /**
  * Parses user input.
@@ -50,6 +52,9 @@ public class RecruitBookParser {
 
         case AddCandidateCommand.COMMAND_WORD:
             return new AddCandidateCommandParser().parse(arguments);
+
+        case AddJobCommand.COMMAND_WORD:
+            return new AddJobCommand(new JobOffer("ab", "cd"));
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

@@ -1,10 +1,10 @@
-package seedu.address.model.candidate;
+package seedu.address.model.joboffer;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Candidate's desired job in the address book.
+ * Represents a Candidate's desired job/job offered in the candidate book/job book.
  * Guarantees: immutable; is valid as declared in {@link #isValidJob(String)}
  */
 

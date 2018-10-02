@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
@@ -55,7 +56,7 @@ public class AddCandidateCommand extends Command {
     private final Candidate toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Candidate}
+     * Creates an AddCandidateCommand to add the specified {@code Candidate}
      */
 
     public AddCandidateCommand(Candidate candidate) {
