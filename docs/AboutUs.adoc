@@ -21,6 +21,15 @@ Responsibilities: Search Pruning + Advanced Search and filter feature.
 
 '''
 
+=== Melvin Tan
+image::Melvin.jpg[width="150", align="left"]
+{empty}[http://github.com/Chocological[github]] [<<johndoe#, portfolio>>]
+
+Role: TBC +
+Responsibilities: Login System
+
+...
+
 === Jonathan Ng
 image::jonathan.png[width="150", align="left"]
 {empty}[http://github.com/derpyplops[github]] [<<johndoe#, portfolio>>]
@@ -30,21 +39,11 @@ Responsibilities: HR & Roles
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Sanjukta Saha
+image::sanjukta99.jpg[width="150", align="left"]
+{empty}[http://github.com/sanjukta99[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Budgeting functionality for NUSSU and club treasurers
 
 '''
-
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: Dev Ops + Threading
-
-'''
-
