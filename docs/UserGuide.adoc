@@ -18,7 +18,10 @@ By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing their finances*. More
+importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
+having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your finance management
+tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -33,9 +36,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all records
+* **`add`**`n/Grocery shoppings m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Address Book.
+* **`delete`**`3` : deletes the 3rd record shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,10 +49,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter
+which can be used as `add n/Grocery shopping`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Grocery shopping t/friend` or as
+`n/Grocery shopping`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}`
+(i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME m/MONEYFLOW`, `m/MONEYFLOW n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -62,7 +68,8 @@ Adds a record to the FinanceBook +
 Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
 
 MONEYFLOW denotes the money parameter of the financial activity. It can be either a debit(expense) or a credit(income).
-To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the money amount. +
+To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
+money amount. +
 
 ****
 * Typical format for a MONEYFLOW parameter :
@@ -71,7 +78,7 @@ To distinguish between an expense and an income, the user will need to enter a p
 ****
 
 [TIP]
-A person can have any number of tags (including 0)
+A record can have any number of tags (including 0)
 
 Examples:
 
