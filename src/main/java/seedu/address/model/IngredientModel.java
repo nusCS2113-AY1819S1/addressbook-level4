@@ -7,7 +7,6 @@ import seedu.address.model.ingredient.IngredientQuantity;
 
 
 // TODO: add more methods
-
 /**
  * The API of the Ingredient Model component.
  */
@@ -17,13 +16,14 @@ public interface IngredientModel {
      * Clears existing backing model and replaces with the provided new data.
      * TODO: use the new data to replace original data
      */
-    void resetData ();
+    void resetData();
 
     /**
      * @return the list of ingredients
      * TODO: supposed to be ReadOnlyIngredientList - to be added
      */
-    List<Ingredient> getAllIngredientsList ();
+
+    List<Ingredient> getAllIngredientsList();
 
     /**
      * Adds the given ingredient.
@@ -35,13 +35,13 @@ public interface IngredientModel {
      * Updates the quantity of the given {@code ingredient}.
      * {@code quantity} should have an integer value that is positive or 0.
      */
-    void updateIngredientQuantity(Ingredient ingredient , IngredientQuantity quantity);
+    void updateIngredientQuantity(Ingredient ingredient, IngredientQuantity quantity);
 
     /**
      * Decrements the quantity of the given {@code ingredient} by stated quantity.
      * {@code quantity} should have an integer value that is greater than 0.
      */
-    void decrementIngredientQuantity(Ingredient ingredient , IngredientQuantity quantity);
+    void decrementIngredientQuantity(Ingredient ingredient, IngredientQuantity quantity);
 
     /**
      * Deletes given ingredient.

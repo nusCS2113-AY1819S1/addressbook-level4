@@ -23,10 +23,11 @@ public class IngredientManager implements IngredientModel {
     private List<Topping> toppings;
     private List<IceCream> iceCreams;
 
-    public IngredientManager () {
+
+    public IngredientManager() {
         // TODO: for now, always create new lists (i.e. doesn't save data yet)
-        toppings = new ArrayList<> ();
-        iceCreams = new ArrayList<> ();
+        toppings = new ArrayList<>();
+        iceCreams = new ArrayList<>();
     }
 
 
@@ -40,6 +41,7 @@ public class IngredientManager implements IngredientModel {
     public List<Ingredient> getAllIngredientsList() {
         // TODO: return an immutable list in the future
         List<Ingredient> allIngredients = new ArrayList<> ();
+
         allIngredients.addAll(iceCreams);
         allIngredients.addAll(toppings);
 
@@ -50,14 +52,14 @@ public class IngredientManager implements IngredientModel {
     public void addIngredient(Ingredient ingredient) {
         // check if it is duplicate
         if (containsIngredient(ingredient)) {
-            throw new DuplicateIngredientException ();
+            throw new DuplicateIngredientException();
         }
 
         if (ingredient instanceof IceCream) {
-            IceCream ingredientAsIceCream = ( IceCream ) ingredient;
+            IceCream ingredientAsIceCream = (IceCream) ingredient;
             iceCreams.add(ingredientAsIceCream);
         } else if (ingredient instanceof Topping) {
-            Topping ingredientAsTopping = ( Topping ) ingredient;
+            Topping ingredientAsTopping = (Topping) ingredient;
             toppings.add(ingredientAsTopping);
         } else {
             assert false;
@@ -85,7 +87,7 @@ public class IngredientManager implements IngredientModel {
     @Override
     public void updateIngredientQuantity(Ingredient ingredient, IngredientQuantity quantity) {
         if (!containsIngredient(ingredient)) {
-            throw new IngredientNotFoundException ();
+            throw new IngredientNotFoundException();
         }
 
         Ingredient ingredientRef = findIngredientByName(ingredient);
@@ -95,7 +97,7 @@ public class IngredientManager implements IngredientModel {
     @Override
     public void decrementIngredientQuantity(Ingredient ingredient, IngredientQuantity quantity) {
         if (!containsIngredient(ingredient)) {
-            throw new IngredientNotFoundException ();
+            throw new IngredientNotFoundException();
         }
 
         Ingredient ingredientRef = findIngredientByName(ingredient);
@@ -107,7 +109,7 @@ public class IngredientManager implements IngredientModel {
     @Override
     public void deleteIngredient(Ingredient ingredient) {
         if (!containsIngredient(ingredient)) {
-            throw new IngredientNotFoundException ();
+            throw new IngredientNotFoundException();
         }
 
         Ingredient ingredientRef = findIngredientByName(ingredient);

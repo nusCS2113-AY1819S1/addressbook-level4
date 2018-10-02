@@ -45,13 +45,12 @@ public abstract class Ingredient {
         if (ingredient == this) {
             return true;
         }
+
         return ingredient != null
                 && ingredient.getName().equals(getName());
-        // && (ingredient.getQuantity().equals(getQuantity()));
-        // TODO: consider whether this is necessary
+                // && (ingredient.getQuantity().equals(getQuantity()));
+                // TODO: consider whether this is necessary
     }
-
-
     @Override
     public abstract boolean equals(Object other);
 
