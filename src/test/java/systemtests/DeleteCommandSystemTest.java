@@ -171,7 +171,7 @@ public class DeleteCommandSystemTest extends CandidateBookSystemTest {
         }
 
         assertCommandBoxShowsDefaultStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
+        assertStatusBarChangedExceptSaveLocation();
     }
 
     /**
