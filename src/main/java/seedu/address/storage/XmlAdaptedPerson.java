@@ -40,7 +40,8 @@ public class XmlAdaptedPerson {
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedPerson() {
+    }
 
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
