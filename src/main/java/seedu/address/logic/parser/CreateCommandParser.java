@@ -20,7 +20,7 @@ import seedu.address.model.event.Location;
 /**
  * Parses input arguments and creates a new CreateCommand object
  */
-public class CreateCommandParser implements Parser<CreateCommand>{
+public class CreateCommandParser implements Parser<CreateCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
