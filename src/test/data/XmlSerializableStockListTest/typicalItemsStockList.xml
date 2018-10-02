@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- StockList save file which contains the same Item values as in TypicalItems#getTypicalAddressBook() -->
+<stocklist>
+    <items>
+        <name>Arduino</name>
+        <quantity>20</quantity>
+        <minQuantity>5</minQuantity>
+        <statusReady>20</statusReady>
+        <statusOnLoan>0</statusOnLoan>
+        <statusFaulty>0</statusFaulty>
+        <tagged>lab1</tagged>
+    </items>
+    <items>
+        <name>Raspberry Pi</name>
+        <quantity>50</quantity>
+        <minQuantity>15</minQuantity>
+        <statusReady>50</statusReady>
+        <statusOnLoan>0</statusOnLoan>
+        <statusFaulty>0</statusFaulty>
+        <tagged>lab2</tagged>
+    </items>
+    <items>
+        <name>RPLidar</name>
+        <quantity>30</quantity>
+        <minQuantity>10</minQuantity>
+        <statusReady>30</statusReady>
+        <statusOnLoan>0</statusOnLoan>
+        <statusFaulty>0</statusFaulty>
+        <tagged>lab3</tagged>
+    </items>
+</stocklist>

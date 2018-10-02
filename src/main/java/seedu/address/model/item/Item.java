@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 public class Item {
 
     // Magic numbers
-    public final static int STATUS_READY = 0;
+    public static final int STATUS_READY = 0;
     public static final int STATUS_ONLOAN = 1;
     public static final int STATUS_FAULTY = 2;
 
