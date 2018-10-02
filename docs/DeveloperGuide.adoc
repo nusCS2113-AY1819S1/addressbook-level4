@@ -852,7 +852,7 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Add task
+=== Use case 1: Add task
 *System*
 To-do list
 
@@ -860,9 +860,9 @@ To-do list
 
 1.  User enters ‘add’ command and keys in the task
 2.  To-do list shows the task entered in the list
-+
+
 [discrete]
-=== Use case :Delete task
+=== Use case 2:Delete task
 *System*
 To-do list
 
@@ -872,7 +872,9 @@ To-do list
 2.  To-do list confirms task is present in the list
 3.  User enter relevant contents
 4.  To-do list shows the updated task in the list
+
 *Extensions*
+
   2a. The list is empty.
   2b. The given index is invalid.
     2b1. To-do list shows an error message
