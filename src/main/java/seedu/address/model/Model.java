@@ -3,53 +3,53 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.book.Book;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Book> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyBookInventory newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the BookInventory */
+    ReadOnlyBookInventory getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasPerson(Book book);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given book.
+     * The book must exist in the address book.
      */
-    void deletePerson(Person target);
+    void deletePerson(Book target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given book.
+     * {@code book} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addPerson(Book book);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given book {@code target} with {@code editedBook}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The book identity of {@code editedBook} must not be the same as another existing book in the address book.
      */
-    void updatePerson(Person target, Person editedPerson);
+    void updatePerson(Book target, Book editedBook);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered book list */
+    ObservableList<Book> getFilteredPersonList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered book list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredPersonList(Predicate<Book> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.

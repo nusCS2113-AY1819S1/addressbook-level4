@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= BookInventory - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,31 +12,35 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: http://github.com/CS2113-AY1819S1-W13-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+BookInventory is catered for a variety of users, ranging from inventory keeper, accountant to students. Inventory Keeper is able to increase/decrease stocks for each book. The accountant is able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, BookInventory is optimized for those who prefer to work with Command Line Interface (CLI) while stil having the benefits of a GraphicalUser Interface (GUI). Enjoy!
 
-== Quick Start
+== Getting Started
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Downloading the program.
+* Visit https://github.com/CS2113-AY1819S1-W13-4/main and click on "Clone or download" as circled in the screenshot below.
 +
-image::Ui.png[width="790"]
+image::download.png[width="450", align="left"]
 +
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+* If you are a github user, clone the repository.
+* However, it is encouraged that you "Download ZIP" in the drop-down menu.
+* Once it is downloaded, unzip the file.
+. Input Commands
+* Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
-.  Some example commands you can try:
+* Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+** *`help`* : view all commands available
+** *`list`* : list all books
+** **`add`**`n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30.90` : adds a book named `Harry Potter` to the Inventory List.
+** *`clear`* : clears the entire list
+** *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
 
@@ -46,113 +50,133 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Harry Potter`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Harry Potter t/cs2113t` or as `n/Harry Potter`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Items in brackets are *required* and always *private* e.g. `q/QUANTITY (c/COST)`
+* Items in arrow brackets are commands that are commands available depending on the user e.g. <Accountant> means command only usable by accountant.
 ====
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a book: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a book to the inventory list +
+Format: `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...`
 
 [TIP]
-A person can have any number of tags (including 0)
+A book can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30.90 t/difficult`
+* `add n/Lord of the Rings i/978-2-12-345123-3 p/59.90 q/271 c/20.99`
 
-=== Listing all persons : `list`
+=== Listing all books : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all books in the inventory list. +
 Format: `list`
 
-=== Editing a person : `edit`
+=== Locating book by iSBN13: `find`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Finds book with the iSBN13 from the inventory. +
+Format: `find i/iSBN13`
 
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+Example:
 
-Examples:
+* `find i/978-2-12-345680-3`
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+=== Locating book by tags: `search`
 
-=== Locating persons by name: `find`
+Search for books by tags from the inventory
+Format: `search TAG`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Example:
+
+* `search cs2113t`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case insensitive. e.g `cs2113t` will match `CS2113T`
+* Only the tag is searched.
+* Only full words will be matched e.g. `cs2113` will not match `cs2113t`
 ****
 
-Examples:
+=== Decrease Book Quantity (Items Sold) : `sell`
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a person : `delete`
-
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Decrease an existing book quantity in the inventory list. +
+Format: `sell INDEX QUANTITY` OR `sell ISBN13 QUANTITY`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* Decrease the quantity at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Existing quantity will be decrease by the input value.
 ****
 
 Examples:
 
 * `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+`sell 1 5` +
+Decrease the quantity available of the 1st book by 5.
+* `sell 978-2-12-345680-3 4` +
+Decrease the quantity available for the book with the corresponding ISBN13 by 4.
 
-=== Selecting a person : `select`
+=== Increase Book Quantity (Ordered more books): `stock`
 
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
+Increase an existing book quantity in the inventory list. +
+Format: `stock INDEX QUANTITY` OR `stock ISBN13 QUANTITY`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
+* Increase the stock at the specified `INDEX`. The index refers to the index number shown in the displayed inventory list. The index *must be a positive integer* 1, 2, 3, ...
+* Existing quantity will be increase by the input value.
 ****
 
 Examples:
 
 * `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+`stock 2 6` +
+Increase the quantity available of the 2nd book by 6.
+* `stock 978-2-12-345680-3 5` +
+Increase the quantity available for the book with the corresponding ISBN13 by 5.
+
+=== Check Inventory: `check`
+
+Finds books with quantity less than or equal to the given input value.
+Format: `check QUANTITY`
+
+Example:
+
+* `check 4` +
+Displays list of all books with quantity less than or equal to 4.
+
+=== Deleting a book : `delete`
+
+Deletes the specified book from the inventory list. +
+Format: `delete i/ISBN13`
+
+Examples:
+
+* `delete i/978-2-12-345680-3` +
+Deletes the book with the corresponding iSBN13 from the inventory list.
+
+=== Requesting for a book : `request`
+
+Requests to buy a book in the inventory. +
+Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
+
+****
+* The price is for inventory keeper to confirm order with requester.
+****
+
+Examples:
+
+* `request i/978-2-12-345680-3 e/johnd@gmail.com q/5` +
+Requests for 5 same books with the corresponding iSBN13 with requester's price johnd@gmail.com
+
+=== Viewing of Requests : `viewrequests`
+
+Views all the requests for books. +
+Format: `viewrequests`
 
 === Listing entered commands : `history`
 
@@ -167,29 +191,29 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the inventory book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the inventory book's content (`add`, `delete`, `increase`, `decrease` and `clear`).
 ====
 
 Examples:
 
-* `delete 1` +
+* `delete i/978-2-12-345680-3` +
 `list` +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
 
-* `select 1` +
+* `check 4` +
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `delete i/978-2-12-345680-3` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
 
 === Redoing the previously undone command : `redo`
 
@@ -198,25 +222,38 @@ Format: `redo`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `delete i/978-2-12-345680-3` +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
 
-* `delete 1` +
+* `delete i/978-2-12-345680-3` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `delete i/978-2-12-345680-3` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+`undo` (reverses the `delete i/978-2-12-345680-3` command) +
+`redo` (reapplies the `delete i/978-2-12-345680-3` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+=== Display account data : `showdata`
+
+Displays accounting data
+Format: `showdata`
+
+=== Next Page : `next`
+Displays next set of accounting data. +
+Format: `next`
+
+=== Previous Page : `previous`
+Displays the previous set of accounting data. +
+Format: `previous`
+
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the BookInventory. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -226,7 +263,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+BookInventory data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -238,23 +275,37 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Inventory Book folder. +
+*Q*: How to install Java +
+*A*: Visit https://docs.oracle.com/javase/10/install/overview-jdk-10-and-jre-10-installation.html for more information +
+*Q*: How do I get the latest version? +
+*A*: Watch us on github [https://github.com/CS2113-AY1819S1-W13-4] to get the latest updates
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* : `add n/NAME i/ISBN13 p/PRICE q/QUANTITY (c/COST) [t/TAG]...` +
+e.g. `add n/Harry Potter i/978-2-12-345680-3 p/60.70 q/100 c/30/90 t/difficult`
+* *Find* : `find i/ISBN13` +
+e.g. `find i/978-2-12-345680-3`
+* *Search* : `search TAG` +
+e.g. `search cs2113t`
+* *Sell* : `sell INDEX QUANTITY` OR `sell i/ISBN13 QUANTITY` +
+e.g. `sell 1 8` OR `sell i/978-2-12-345680-3 8`
+* *Stock* : `stock INDEX QUANTITY` OR `stock i/ISBN13 QUANTITY` +
+e.g. `stock 1 8` OR `stock i/978-2-12-345680-3 8`
+* *Check* : `check QUANTITY` +
+e.g. `check 4`
+* *Request* : `request i/ISBN13 e/EMAIL q/QUANTITY` +
+e.g. `request i/978-2-12-345680-3 e/johnd@gmail.com q/5`
+* *View Request* : `viewrequests`
+* *Display data* : `showdata`
+* *Next* : `next`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Delete* : `delete i/ISBN13` +
+e.g. `delete i/978-2-12-345680-3`
 * *List* : `list`
 * *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Exit* : `exit`
