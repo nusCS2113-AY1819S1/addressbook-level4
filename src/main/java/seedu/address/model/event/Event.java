@@ -9,14 +9,23 @@ import java.util.Set;
 
 import seedu.address.model.person.Person;
 
+
+
 /**
  * Represents a Event in the event list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Event {
+public class Event implements Comparable<Event> {
+
+    public static final String MESSAGE_DESCRIPTION = " Description: ";
+    public static final String MESSAGE_LOCATION = " Location: ";
+    public static final String MESSAGE_START_TIME = " Start time: ";
+    public static final String MESSAGE_END_TIME = " End time: ";
 
     // Identity fields
     private final EventName eventName;
+
+    // Data fields
     private final Description description;
     private final LocalDate startTime; // date format: "2007-12-03"
     private final LocalDate endTime; // date format: "2007-12-03"
@@ -28,8 +37,12 @@ public class Event {
     /**
      * Every field must be present not null
      */
-    public Event(EventName eventName, Description description, LocalDate startTime, LocalDate endTime, Location location) {
+
+
+    public Event(EventName eventName, Description description,
+                 LocalDate startTime, LocalDate endTime, Location location) {
         requireAllNonNull(eventName);
+
         this.eventName = eventName;
         this.description = description;
         this.startTime = startTime;
@@ -90,18 +103,19 @@ public class Event {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getEventName())
-                .append(" Desciption: ")
+                .append(MESSAGE_DESCRIPTION)
                 .append(getDescription())
-                .append(" Location: ")
-                .append(getLocation());
-        if (startTime != null) {
-            builder.append(" Start time: ")
-                    .append(getStartTime());
-        }
-        if (endTime != null) {
-            builder.append(" End time: ")
-                    .append(getEndTime());
-        }
+                .append(MESSAGE_LOCATION)
+                .append(getLocation())
+                .append(MESSAGE_START_TIME)
+                .append(getStartTime())
+                .append(MESSAGE_END_TIME)
+                .append(getEndTime());
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        return this.getStartTime().compareTo(other.getStartTime()) < 0 ? -1 : 1;
     }
 }

@@ -13,6 +13,7 @@ import seedu.address.model.UserPrefs;
 /**
  * API of the Storage component
  */
+
 public interface StorageAddress extends AddressBookStorage, UserPrefsStorage {
 
     @Override
@@ -36,4 +37,5 @@ public interface StorageAddress extends AddressBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+
 }

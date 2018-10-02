@@ -1,3 +1,4 @@
+/*
 package seedu.address.storage;
 
 import java.io.IOException;
@@ -15,10 +16,12 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyEventList;
 import seedu.address.model.UserPrefs;
 
+*/
 /**
  * Manages storage of AddressBook data in local storage.
- */
-public class EventStorageManager extends ComponentManager implements Storage {
+ *//*
+
+public class EventStorageManager extends ComponentManager implement Storage{
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private EventStorage eventStorage;
@@ -79,7 +82,7 @@ public class EventStorageManager extends ComponentManager implements Storage {
     }
 
 
-    /*@Override
+    @Override
     @Subscribe
     public void handleEventListChangedEvent(EventListChangeEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
@@ -88,6 +91,7 @@ public class EventStorageManager extends ComponentManager implements Storage {
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
-    }*/
+    }
 
 }
+*/

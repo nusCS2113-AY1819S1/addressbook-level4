@@ -37,6 +37,7 @@ public class XmlFileStorage {
     }
 
     /**
+
      * Saves the given eventList data to the specified file.
      */
     public static void saveDataToFile(Path file, XmlSerializableEventList eventList)
@@ -47,6 +48,7 @@ public class XmlFileStorage {
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }
     }
+
 
     /**
      * Returns eventList in the file or an empty address book
