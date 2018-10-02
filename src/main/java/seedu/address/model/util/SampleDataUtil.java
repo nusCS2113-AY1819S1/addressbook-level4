@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.StockList;
 import seedu.address.model.ReadOnlyStockList;
-import seedu.address.model.item.Name;
+import seedu.address.model.StockList;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**

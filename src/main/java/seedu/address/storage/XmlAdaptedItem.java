@@ -10,8 +10,8 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.item.Name;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,7 +42,8 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String name, Integer quantity, Integer minQuantity, List<Integer> status, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedItem(String name, Integer quantity, Integer minQuantity, List<Integer> status,
+                          List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;

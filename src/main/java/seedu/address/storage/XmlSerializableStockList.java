@@ -8,8 +8,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.StockList;
 import seedu.address.model.ReadOnlyStockList;
+import seedu.address.model.StockList;
 import seedu.address.model.item.Item;
 
 /**
