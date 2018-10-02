@@ -1,6 +1,5 @@
 package seedu.address.authentication;
-
-
+//@@author tianhang
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -14,6 +13,7 @@ import javax.crypto.spec.PBEKeySpec;
 
 /**
  * A container for password utilities
+ * code learn from http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
  */
 public class PasswordUtils {
 

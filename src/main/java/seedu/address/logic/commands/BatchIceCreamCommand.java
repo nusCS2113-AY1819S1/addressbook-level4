@@ -10,10 +10,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
+import seedu.address.model.IngredientModel;
+
 import seedu.address.model.ingredient.IceCream;
-import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.person.Person;
+
 
 /**
  * Adds a person to the address book.
@@ -37,8 +37,7 @@ public class BatchIceCreamCommand extends BatchCommand {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New IceCream added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
-
+    public static final String MESSAGE_DUPLICATE_ICE_CREAM = "This ice cream has already been added";
     private final IceCream toAdd;
 
     /**
@@ -50,15 +49,16 @@ public class BatchIceCreamCommand extends BatchCommand {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-//        requireNonNull(model);
-//
-//        if (model.hasPerson(toAdd)) {
-//            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-//        }
-//
-//        model.addPerson(toAdd);
-//        model.commitAddressBook();
+    public CommandResult execute(IngredientModel ingredientModel, CommandHistory history) throws CommandException {
+        requireNonNull(ingredientModel);
+
+        if (ingredientModel.hasIngredient(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ICE_CREAM);
+        }
+
+        ingredientModel.addIngredient (toAdd);
+        //TODO: this is for version format
+        //model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

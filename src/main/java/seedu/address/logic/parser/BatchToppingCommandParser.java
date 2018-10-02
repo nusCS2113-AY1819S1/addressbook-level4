@@ -2,18 +2,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_TOPPING;
 
-import java.sql.SQLOutput;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.BatchIceCreamCommand;
 import seedu.address.logic.commands.BatchToppingCommand;
-import seedu.address.logic.commands.exceptions.BatchCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ingredient.IceCream;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.Topping;
 
@@ -35,12 +29,9 @@ public class BatchToppingCommandParser implements Parser<BatchToppingCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchToppingCommand.MESSAGE_USAGE));
         }
-        IngredientName ingredientName = ParserUtil.parseIngredientName (argMultimap.getValue (PREFIX_INGREDIENT_TOPPING).get());
-//        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-//        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-//        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-//        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-//        Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        IngredientName ingredientName = ParserUtil
+                .parseIngredientName (argMultimap.getValue (PREFIX_INGREDIENT_TOPPING).get());
+
 
         Topping topping = new Topping (ingredientName);
 

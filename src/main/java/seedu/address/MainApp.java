@@ -21,6 +21,8 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.IngredientManager;
+import seedu.address.model.IngredientModel;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -69,7 +71,8 @@ public class MainApp extends Application {
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model);
+        IngredientModel ingredientModel = new IngredientManager ();
+        logic = new LogicManager(ingredientModel, model);
 
         ui = new UiManager(logic, config, userPrefs);
 
