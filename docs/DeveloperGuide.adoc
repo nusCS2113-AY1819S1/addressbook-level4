@@ -894,6 +894,7 @@ To-do list
    2a. The list is empty.
    2b. The given index is invalid
      2b1. To-do list shows an error message
+
 [discrete]
 === Use case 4: Check tasks for a module
 *System*
@@ -1023,13 +1024,16 @@ Author: ...
 
 Pros:
 
-* ...
-* ...
+1. Clean UI that is user friendly
+2. Able to add deadlines for every tasks at hand
+3. Able to create custom tags for tagging tasks
 
 Cons:
 
-* ...
-* ...
+1. Not specialized for students
+2. Unable to sort tasks by tags 
+3. Lack of a reminder feature 
+
 
 [appendix]
 == Instructions for Manual Testing
