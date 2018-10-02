@@ -126,4 +126,7 @@ public class Person {
         return builder.toString();
     }
 
+    public TimeTable getTimeTable() {
+        return weekly;
+    }
 }
