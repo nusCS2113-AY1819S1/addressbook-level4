@@ -31,11 +31,27 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
+    private Label type;
+    @FXML
+    private Label duration;
+    @FXML
+    private Label difficulty;
+    @FXML
+    private Label equipment;
+    @FXML
+    private Label muscle;
+    @FXML
+    private Label calories;
+    @FXML
+    private Label instruction;
+/*
+    @FXML
     private Label phone;
     @FXML
     private Label address;
     @FXML
     private Label email;
+*/
     @FXML
     private FlowPane tags;
 
@@ -44,9 +60,16 @@ public class PersonCard extends UiPart<Region> {
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        type.setText(person.getType().fullType);
+        duration.setText(person.getDuration().fullDuration);
+        difficulty.setText(person.getDifficulty().fullDifficulty);
+        equipment.setText(person.getEquipment().fullEquipment);
+        muscle.setText(person.getMuscle().fullMuscle);
+        calories.setText(person.getCalories().fullCalories);
+        instruction.setText(person.getInstruction().fullInstruction);
+//        phone.setText(person.getPhone().value);
+//        address.setText(person.getAddress().value);
+//        email.setText(person.getEmail().value);
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

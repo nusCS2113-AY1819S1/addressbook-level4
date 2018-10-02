@@ -4,21 +4,22 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.WorkoutBook;
+import seedu.address.model.ReadOnlyWorkoutBook;
+import seedu.address.model.workout.*;
 import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
-    public static Person[] getSamplePersons() {
-        return new Person[] {
+    public static Workout[] getSampleWorkouts() {
+        return new Workout[] {
+            new Workout(new Name("alex yeoh's workout"), new Type("strength"), new Duration("20m"),
+                 new Difficulty("beginner"), new Equipment("dumbbell"), new Muscle("tricep"),
+                 new Calories("150"), new Instruction("set1: tricep extension reps: 4-6"),
+                 getTagSet("heavy", "morning"))
+            /*
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
                 getTagSet("friends")),
@@ -37,13 +38,14 @@ public class SampleDataUtil {
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
+           */
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Person samplePerson : getSamplePersons()) {
-            sampleAb.addPerson(samplePerson);
+    public static ReadOnlyWorkoutBook getSampleWorkoutBook() {
+        WorkoutBook sampleAb = new WorkoutBook();
+        for (Workout samplePerson : getSampleWorkouts()) {
+            sampleAb.addWorkout(samplePerson);
         }
         return sampleAb;
     }

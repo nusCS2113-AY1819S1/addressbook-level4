@@ -11,122 +11,122 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.commons.events.model.WorkoutBookChangedEvent;
+import seedu.address.model.workout.Workout;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the workout book data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
-    private final FilteredList<Person> filteredPersons;
+    private final VersionedWorkoutBook versionedWorkoutBook;
+    private final FilteredList<Workout> filteredWorkouts;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given workoutBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyWorkoutBook workoutBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(workoutBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with workout book: " + workoutBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        versionedWorkoutBook = new VersionedWorkoutBook(workoutBook);
+        filteredWorkouts = new FilteredList<>(versionedWorkoutBook.getWorkoutList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new WorkoutBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyWorkoutBook newData) {
+        versionedWorkoutBook.resetData(newData);
+        indicateWorkoutBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyWorkoutBook getWorkoutBook() {
+        return versionedWorkoutBook;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateWorkoutBookChanged() {
+        raise(new WorkoutBookChangedEvent(versionedWorkoutBook));
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+    public boolean hasWorkout(Workout workout) {
+        requireNonNull(workout);
+        return versionedWorkoutBook.hasWorkout(workout);
     }
 
     @Override
-    public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+    public void deleteWorkout(Workout target) {
+        versionedWorkoutBook.removeWorkout(target);
+        indicateWorkoutBookChanged();
     }
 
     @Override
-    public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+    public void addWorkout(Workout workout) {
+        versionedWorkoutBook.addWorkout(workout);
+        updateFilteredWorkoutList(PREDICATE_SHOW_ALL_WORKOUTS);
+        indicateWorkoutBookChanged();
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void updateWorkout(Workout target, Workout editedWorkout) {
+        requireAllNonNull(target, editedWorkout);
 
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
+        versionedWorkoutBook.updateWorkout(target, editedWorkout);
+        indicateWorkoutBookChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Workout List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Workout} backed by the internal list of
+     * {@code versionedWorkoutBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+    public ObservableList<Workout> getFilteredWorkoutList() {
+        return FXCollections.unmodifiableObservableList(filteredWorkouts);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredWorkoutList(Predicate<Workout> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredWorkouts.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoWorkoutBook() {
+        return versionedWorkoutBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoWorkoutBook() {
+        return versionedWorkoutBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoWorkoutBook() {
+        versionedWorkoutBook.undo();
+        indicateWorkoutBookChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoWorkoutBook() {
+        versionedWorkoutBook.redo();
+        indicateWorkoutBookChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitWorkoutBook() {
+        versionedWorkoutBook.commit();
     }
 
     @Override
@@ -143,8 +143,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+        return versionedWorkoutBook.equals(other.versionedWorkoutBook)
+                && filteredWorkouts.equals(other.filteredWorkouts);
     }
 
 }
