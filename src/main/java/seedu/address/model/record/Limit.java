@@ -20,6 +20,7 @@ public class Limit {
       this.limit_money=limit_money;
   }
 
+  //public boolean isExceeded ()
   public Date getDate_start (){ return date_start;}
 
   public Date getDate_end (){return date_end;}

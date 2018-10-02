@@ -5,6 +5,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
+import seedu.address.model.record.Limit;
 import seedu.address.model.record.Record;
 
 import static java.util.Objects.requireNonNull;
@@ -27,7 +28,7 @@ public class LimitCommand extends Command {
             + PREFIX_MONEYFLOW + "100 ";
 
     //public static Limit limit;
-    public static Record dummy;
+    public static Limit limit;
 
     public static final String MESSAGE_SUCCESS = "Limit has been set: %1$s";
 
@@ -38,15 +39,15 @@ public class LimitCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasRecord(dummy)) {
+        if (model.hasRecord(limit)) {
             throw new CommandException(MESSAGE_DUPLICATE_LIMIT);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, dummy));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, limit));
     }
     @Override
     public boolean equals (Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LimitCommand // instanceof handles nulls
-                && dummy.equals(((LimitCommand) other).dummy));
+                && limit.equals(((LimitCommand) other).limit));
     }
 }
