@@ -12,22 +12,22 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T09-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `T09-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing their finances*. More
-importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
-having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your finance management
+FinancialPlanner (FP) is for those who *prefer to use a desktop app for managing their finances*. More
+importantly, FP is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
+having the benefits of a Graphical User Interface (GUI). If you can type fast, FP can get your finance management
 tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Copy the file to the folder you want to use as the home folder for your Financial Planner.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -37,7 +37,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * *`list`* : lists all records
-* **`add`**`n/Grocery shoppings m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Address Book.
+* **`add`**`n/Grocery shoppings m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Financial Planner.
 * **`delete`**`3` : deletes the 3rd record shown in the current list
 * *`exit`* : exits the app
 
@@ -87,7 +87,7 @@ Examples:
 
 === Listing all records satisfying some criteria : list [Vincent]
 
-Shows a list of all records in the address book which fulfills a certain criteria. +
+Shows a list of all records in the record book which fulfills a certain criteria. +
 There are 3 modes, default mode, single argument mode and dual argument mode. +
 Format: +
 Default mode: `list` +
@@ -95,7 +95,7 @@ Single argument mode: `list d/DATE` +
 Dual argument mode: `list d/START_DATE END_DATE`
 
 ****
-* The default mode will list down all records in the addressbook. +
+* The default mode will list down all records in the Financial Planner. +
 * The single argument mode will list down all records with the date equal to DATE specified in the format. +
 * The dual argument mode will list down all records with date equal to or later than START_DATE
 and earlier than or equal to END_DATE +
