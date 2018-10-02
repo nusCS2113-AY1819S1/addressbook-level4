@@ -105,7 +105,7 @@ public class MainApp extends Application {
             initialEventListData = eventListOptional.orElseGet(SampleEventUtil::getSampleEventList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty EventList");
-            initialEventListData= new EventList();
+            initialEventListData = new EventList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty EventList");
             initialEventListData = new EventList();
