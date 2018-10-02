@@ -40,8 +40,9 @@ public class TypicalRecords {
     // Manually added
     public static final Record BURSARY = new RecordBuilder().withName("Income from bursary").withDate("26-9-2018")
             .withMoneyFlow("+11.50").build();
+
     public static final Record IDA = new RecordBuilder().withName("Payment to Ida").withDate("27-9-2018")
-            .withMoneyFlow("-12.30").build();
+            .withMoneyFlow("-12.30").withTags("work").build();
 
     // Manually added - Record's details found in {@code CommandTestUtil}
     public static final Record AMY = new RecordBuilder().withName(VALID_NAME_AMY).withDate(VALID_DATE_AMY)
