@@ -1,54 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <!--//@@author tianhang-->
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.controller.LoginController">
-    <columnConstraints>
-        <ColumnConstraints />
-    </columnConstraints>
-    <rowConstraints>
-        <RowConstraints />
-    </rowConstraints>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.address.controller.LoginController">
     <children>
-        <AnchorPane prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #20120F;">
-            <children>
-                <ImageView fitHeight="400.0" fitWidth="700.0" pickOnBounds="true" preserveRatio="true">
-                </ImageView>
-                <AnchorPane layoutX="344.0" layoutY="39.0" prefHeight="299.0" prefWidth="298.0" style="-fx-background-color: #9C2827;">
-                    <children>
-                        <Label layoutX="109.0" layoutY="14.0" text="Sign in" textFill="#f2efef">
-                            <font>
-                                <Font size="19.0" />
-                            </font>
-                        </Label>
-                        <TextField fx:id="usernameF" layoutX="75.0" layoutY="80.0" />
-                        <Button layoutX="124.0" layoutY="213.0" mnemonicParsing="false" onAction="#handleButtonAction" text="Button" />
-                        <PasswordField fx:id="passwordF" layoutX="75.0" layoutY="116.0" />
-                        <Label fx:id="label" layoutX="88.0" layoutY="172.0" prefHeight="26.0" prefWidth="98.0" textFill="#f2eeee" />
-                  <Label fx:id="label" layoutX="124.0" layoutY="177.0" text="Label" />
-                    </children>
-                </AnchorPane>
-                <Label layoutX="113.0" layoutY="92.0" prefHeight="47.0" prefWidth="142.0" text="Welcome to ..." textFill="#f2ecec" />
-                <Button alignment="CENTER" layoutX="59.0" layoutY="238.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="188.0" style="-fx-background-color: #9C2827;" text="Sign up" textFill="#fdf8f8" />
-                <Label layoutX="650.0" layoutY="6.0" onMouseClicked="#handleClose" text="X" textFill="#ede8e8">
-                    <font>
-                        <Font size="28.0" />
-                    </font>
-                </Label>
-                <Label layoutX="125.0" layoutY="38.0" prefHeight="56.0" prefWidth="142.0" text="Label" />
-            </children>
-        </AnchorPane>
+        <ImageView fitHeight="416.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/login_page_pic_1.jpg" />
+            </image>
+        </ImageView>
+        <TextField fx:id="usernameField" layoutX="382.0" layoutY="200.0" />
+        <Label layoutX="398.0" layoutY="85.0" text="Welcome to" textFill="#ed0505">
+            <font>
+                <Font name="Lucida Console" size="20.0" />
+            </font>
+        </Label>
+        <Label layoutX="347.0" layoutY="114.0" text="FROZEN BOOK" textFill="#3b33e2">
+            <font>
+                <Font name="Marlett" size="33.0" />
+            </font>
+        </Label>
+        <Label layoutX="381.0" layoutY="169.0" text="Username">
+            <font>
+                <Font name="Arial Black" size="12.0" />
+            </font>
+        </Label>
+        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
+        <Label layoutX="383.0" layoutY="234.0" text="Password">
+            <font>
+                <Font name="Arial Black" size="12.0" />
+            </font>
+        </Label>
+        <Button layoutX="420.0" layoutY="289.0" mnemonicParsing="false" onAction="#handleButtonAction" prefHeight="26.0" prefWidth="54.0" style="-fx-background-color: #6fa1f2;" text="Login" />
+        <ImageView fitHeight="79.0" fitWidth="149.0" layoutX="383.0" layoutY="315.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../images/login_page_pic_3.jpg" />
+            </image>
+        </ImageView>
+        <ImageView fitHeight="109.0" fitWidth="54.0" layoutX="516.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: -20;">
+            <image>
+                <Image url="@../images/login_page_pic_2.jpg" />
+            </image>
+        </ImageView>
+        <Label fx:id="loginError" layoutX="460.0" layoutY="234.0" textFill="#fa0c0c" />
+        <PasswordField fx:id="passwordField" layoutX="381.0" layoutY="263.0" />
+        <Label layoutX="584.0" layoutY="1.0" onMouseClicked="#handleClose" prefHeight="18.0" prefWidth="19.0" text="x" textFill="#e20505">
+            <font>
+                <Font size="17.0" />
+            </font>
+        </Label>
     </children>
-</GridPane>
+</AnchorPane>
