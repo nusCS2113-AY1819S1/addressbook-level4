@@ -140,6 +140,7 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //@@author Limminghong
     /**
      * Parses {@code String Snapshots} into a {@code Snapshots}.
      * @throws ParseException if the argument is invalid (not "list").
@@ -148,6 +149,8 @@ public class ParserUtil {
         requireNonNull(backupList);
         return new BackupList("Parser works for now");
     }
+
+    //@@author
     /**
      * Parses a {@code String position} into an {@code Position}.
      * Leading and trailing whitespaces will be trimmed.

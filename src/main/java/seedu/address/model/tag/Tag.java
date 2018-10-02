@@ -1,3 +1,4 @@
+//@@author LowGinWee
 package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
@@ -28,6 +29,8 @@ public class Tag {
     public Tag(String tagName) {
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_TAG_CONSTRAINTS);
+        //TODO to refactor this method
+        //@@author LowGinWee
         StringTokenizer st = new StringTokenizer(tagName);
         this.tagName = st.nextToken();
         if (st.hasMoreTokens()) {
@@ -35,6 +38,7 @@ public class Tag {
         } else {
             this.priority = PRIORITY_LOW;
         }
+        //@@author
     }
 
     /**
@@ -60,10 +64,10 @@ public class Tag {
      * Format state as text for viewing.
      */
     public String toString() {
-        String fulltag = tagName;
+        String fullTag = tagName;
         if (!(priority == PRIORITY_LOW)) {
-            fulltag += " " + priority;
+            fullTag += " " + priority;
         }
-        return '[' + fulltag + ']';
+        return '[' + fullTag + ']';
     }
 }

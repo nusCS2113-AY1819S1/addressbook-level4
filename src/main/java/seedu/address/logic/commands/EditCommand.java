@@ -168,10 +168,12 @@ public class EditCommand extends Command {
         private boolean removePosition;
         private boolean removeKpi;
 
+        //@@author LowGinWee
         public EditPersonDescriptor() {
             removePosition = false;
             removeKpi = false;
         }
+        //@@author
 
         /**
          * Copy constructor.
@@ -233,6 +235,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        //@@author LowGinWee
         public void setPosition(Position position) {
             this.position = position;
         }
@@ -264,6 +267,7 @@ public class EditCommand extends Command {
         public void setRemoveKpi() {
             removeKpi = true;
         }
+        //@@author
 
         /**
          * Sets {@code tags} to this object's {@code tags}.
