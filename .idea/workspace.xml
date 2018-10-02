@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaa45706-3920-4871-845e-262e2ad45ef9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/docs/stylesheets/coderay-asciidoctor.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/docs/stylesheets/coderay-asciidoctor.css" afterDir="false" />
-    </list>
+    <list default="true" id="aaa45706-3920-4871-845e-262e2ad45ef9" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +19,7 @@
     <session id="1388815692">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.26" value="1" />
           <entry key="project.open.time.4" value="1" />
           <entry key="project.open.time.8" value="1" />
@@ -755,16 +753,15 @@
       <updated>1538039458612</updated>
       <workItem from="1538039462503" duration="1499000" />
       <workItem from="1538374914040" duration="10393000" />
-      <workItem from="1538474782181" duration="112000" />
+      <workItem from="1538474782181" duration="265000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12004000" />
+    <option name="totallyTimeSpent" value="12157000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1292" height="702" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17961165" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
