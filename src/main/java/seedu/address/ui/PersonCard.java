@@ -60,6 +60,7 @@ public class PersonCard extends UiPart<Region> {
         email.setText(person.getEmail().value);
         note.setText(person.getNote().value);
 
+        //@@author LowGinWee
         List<Label> highPriorityTags = new ArrayList<>();
         List<Label> mediumPriorityTags = new ArrayList<>();;
         List<Label> lowPriorityTags = new ArrayList<>();;
@@ -100,6 +101,7 @@ public class PersonCard extends UiPart<Region> {
             height += LABEL_HEIGHT;
         }
         information.setMaxHeight(height);
+        //@@author
     }
 
     @Override

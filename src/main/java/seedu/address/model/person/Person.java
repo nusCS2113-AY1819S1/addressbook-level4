@@ -60,6 +60,7 @@ public class Person {
         return address;
     }
 
+    //@@author LowGinWee
     public Position getPosition() {
         if (positionDoesExist()) {
             return position;
@@ -77,6 +78,7 @@ public class Person {
     public Note getNote() {
         return note;
     }
+    //@@author
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}

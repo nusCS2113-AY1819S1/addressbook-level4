@@ -210,12 +210,8 @@ The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* Stores a `Tag` list in the `Address Book`, which `Person` can reference. This allows `Address Book` to only require one `Tag`object per unique `Tag`.
 * does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -876,6 +872,22 @@ Functional Requirements:
 == Use Cases
 
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+
+[discrete]
+=== Use case: Add person
+*MSS*
+1.  User requests to Add a person with the relevant details.
+2.  AddressBook adds the person into the list and shows a success message.
++
+Use case ends.
+
+*Extensions*
+[none]
+* 1a. Given details are invalid.
+[none]
+** 1a1. AddressBook shows an error message.
++
+Use case resumes at step 1.
 
 [discrete]
 === Use case: Delete person

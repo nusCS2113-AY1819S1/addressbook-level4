@@ -78,6 +78,7 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        //@@author LowGinWee
         if (source.positionDoesExist()) {
             position = source.getPosition().value;
         }
@@ -85,6 +86,7 @@ public class XmlAdaptedPerson {
             kpi = source.getKpi().value;
         }
         note = source.getNote().value;
+        //@@author
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -132,7 +134,7 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         final Address modelAddress = new Address(address);
-
+        //@@author LowGinWee
         final Position modelPosition;
         //TODO refactor this? note to doesExist()?
         if (position == null) {
@@ -162,7 +164,7 @@ public class XmlAdaptedPerson {
         } else {
             modelNote = new Note(note);
         }
-
+        //@@author
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(
                 modelName,
