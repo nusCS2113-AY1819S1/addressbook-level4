@@ -103,7 +103,7 @@ Examples:
 === Editing a record : `edit`
 
 Edits an existing record in the expense book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [m/MONEYFLOW] [d/DATE] [t/TAG]...`
 
 ****
 * Edits the record at the specified `INDEX`. The index refers to the index number shown in the displayed record list. The index *must be a positive integer* 1, 2, 3, ...
@@ -115,14 +115,14 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and income expense of the 1st record to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd record to be `Betsy Crower` and clears all existing tags.
+* `edit 1 m/+33 d/28-2-2018` +
+Edits the money flow and date of the 1st record to be `+33` and `28-2-2018` respectively.
+* `edit 2 n/Shopping for clothes t/` +
+Edits the name of the 2nd record to be `Shopping for clothes` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating records by name: `find`
 
-Finds persons whose names contain any of the given keywords. +
+Finds records whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -130,15 +130,15 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Records matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find Family` +
+Returns `dinner with family` and `family party`
+* `find family food shopping` +
+Returns all records having `family`, `food`, or `shopping` in their name
 
 === Deleting a record : `delete`
 
@@ -156,7 +156,7 @@ Examples:
 * `list` +
 `delete 2` +
 Deletes the 2nd record in the expense book.
-* `find Betsy` +
+* `find Dinner` +
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
@@ -176,11 +176,11 @@ Examples:
 * `list` +
 `select 2` +
 Selects the 2nd record in the expense book.
-* `find Betsy` +
+* `find Dinner` +
 `select 1` +
 Selects the 1st record in the results of the `find` command.
 
-=== Locating records by tag: `find`
+=== Locating records by tag: `findtag`
 
 Finds records with tags that match any of the given keywords. +
 Format: `findtag KEYWORD [MORE_KEYWORDS]`
@@ -288,8 +288,8 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
+e.g. `add n/Dinner with family d/20-12-2017 m/-10 t/food t/family`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
@@ -297,10 +297,16 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list`
+* *List* : `list [d/DATE] [DATE]` +
+e.g. +
+.  `list`
+. `list d/20-12-2017`
+. `list d/20-12-2017 31-09-2018`
 * *Help* : `help`
 * *Select* : `select INDEX` +
-e.g.`select 2`
+e.g. `select 2`
+* *Find Tag* : `findtag KEYWORD [MORE_KEYWORDS]` +
+e.g. `findtag friend`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
