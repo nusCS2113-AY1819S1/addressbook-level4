@@ -1,11 +1,13 @@
 package seedu.address.testutil;
 
+import java.time.LocalDate;
+
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 
-import java.time.LocalDate;
+
 
 /**
  * A utility class to help with building Event objects.
