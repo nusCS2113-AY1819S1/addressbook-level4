@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Quantity {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Addresses can take any values, and it should not be blank";
+            "Quantity can take any values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -18,7 +18,7 @@ public class Quantity {
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
+    public String value;
 
     /**
      * Constructs an {@code Quantity}.
@@ -29,6 +29,14 @@ public class Quantity {
         requireNonNull(address);
         checkArgument(isValidAddress(address), MESSAGE_ADDRESS_CONSTRAINTS);
         value = address;
+    }
+
+    public void Increase(int amount) {
+        this.value = Integer.toString(Integer.parseInt(value) + amount);
+    }
+
+    public int toInteger(){
+        return Integer.parseInt(value);
     }
 
     /**
@@ -42,6 +50,7 @@ public class Quantity {
     public String toString() {
         return value;
     }
+
 
     @Override
     public boolean equals(Object other) {
