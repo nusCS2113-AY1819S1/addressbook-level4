@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aaa45706-3920-4871-845e-262e2ad45ef9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/AddCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/AddCommand.java" afterDir="false" />
-    </list>
+    <list default="true" id="aaa45706-3920-4871-845e-262e2ad45ef9" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/build/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -81,7 +79,7 @@
           <entry key="css" value="5" />
           <entry key="html" value="4" />
           <entry key="java" value="1710" />
-          <entry key="xml" value="14" />
+          <entry key="xml" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
@@ -89,7 +87,7 @@
           <entry key="CSS" value="5" />
           <entry key="HTML" value="4" />
           <entry key="JAVA" value="1710" />
-          <entry key="XML" value="14" />
+          <entry key="XML" value="15" />
         </counts>
       </usages-collector>
     </session>
@@ -123,8 +121,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="438">
-              <caret line="1043" lean-forward="true" selection-start-line="1043" selection-end-line="1043" />
+            <state relative-caret-position="424">
+              <caret line="1042" lean-forward="true" selection-start-line="1042" selection-end-line="1042" />
             </state>
           </provider>
         </entry>
@@ -796,12 +794,12 @@
       <workItem from="1538374914040" duration="10393000" />
       <workItem from="1538474782181" duration="265000" />
       <workItem from="1538476848724" duration="1031000" />
-      <workItem from="1538478224847" duration="1282000" />
+      <workItem from="1538478224847" duration="1523000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14470000" />
+    <option name="totallyTimeSpent" value="14711000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-6" y="-6" width="1292" height="702" extended-state="6" />
@@ -983,8 +981,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="438">
-          <caret line="1043" lean-forward="true" selection-start-line="1043" selection-end-line="1043" />
+        <state relative-caret-position="424">
+          <caret line="1042" lean-forward="true" selection-start-line="1042" selection-end-line="1042" />
         </state>
       </provider>
     </entry>
