@@ -316,9 +316,13 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag::dataencryption[]
-=== [Proposed] Data Encryption
+=== Data Encryption
 
-_{Explain here how the data encryption feature will be implemented}_
+Password handling is done in `PasswordCommand` class. +
+Credentials obtained from the argument is then parsed to the `FileEncryptor` class. +
+Encryption of the XML data file is done in `FileEncryptor` class using the credentials obtained earlier.
+
+* The data file path must be manually set for now and will be developed in future to support user config.
 
 // end::dataencryption[]
 
@@ -1015,6 +1019,51 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+=== Use case: Encrypt addressbook
+*MSS*
+
+1. User requests to encrypt addressbook with password
+2. Addressbook shows encrypted message
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Addressbook is already encrypted.
++
+[none]
+** 1a1. Address book will decrypt the data instead with the given password.
++
+Use case ends.
+
+[discrete]
+=== Use case: Decrypt addressbook
+*MSS*
+
+1. User requests to decrypt addressbook with password
+2. Addressbook shows decrypted message
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Addressbook is already decrypted.
++
+[none]
+** 1a1. Address book will encrypt the data instead with the given password.
++
+[none]
+* 1b. Incorrect password entered.
++
+[none]
+** 1b1. Addressbook will display incorrect password message.
++
+Use case ends.
+
+
 [appendix]
 == Non Functional Requirements
 
@@ -1099,7 +1148,3 @@ _{ more test cases ... }_
 
 _{ more test cases ... }_
 
-=== Password storage and authentication
-Password handling is done in `PasswordCommand` class. +
-Credentials obtained from the argument is then parsed to the `FileEncryptor` class. +
-Encryption of the XML data file is done in `FileEncryptor` class using the credentials obtained earlier.
