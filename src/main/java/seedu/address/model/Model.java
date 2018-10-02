@@ -21,35 +21,35 @@ public interface Model {
     /**
      * Returns true if a book with the same identity as {@code book} exists in the address book.
      */
-    boolean hasPerson(Book book);
+    boolean hasBook(Book book);
 
     /**
      * Deletes the given book.
      * The book must exist in the address book.
      */
-    void deletePerson(Book target);
+    void deleteBook(Book target);
 
     /**
      * Adds the given book.
      * {@code book} must not already exist in the address book.
      */
-    void addPerson(Book book);
+    void addBook(Book book);
 
     /**
      * Replaces the given book {@code target} with {@code editedBook}.
      * {@code target} must exist in the address book.
      * The book identity of {@code editedBook} must not be the same as another existing book in the address book.
      */
-    void updatePerson(Book target, Book editedBook);
+    void updateBook(Book target, Book editedBook);
 
     /** Returns an unmodifiable view of the filtered book list */
-    ObservableList<Book> getFilteredPersonList();
+    ObservableList<Book> getFilteredBookList();
 
     /**
      * Updates the filter of the filtered book list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Book> predicate);
+    void updateFilteredBookList(Predicate<Book> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -74,5 +74,5 @@ public interface Model {
     /**
      * Saves the current address book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitBookInventory();
 }

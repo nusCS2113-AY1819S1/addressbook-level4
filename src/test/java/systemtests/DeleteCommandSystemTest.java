@@ -61,7 +61,7 @@ public class DeleteCommandSystemTest extends BookInventorySystemTest {
         /* Case: filtered book list, delete index within bounds of address book and book list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         Index index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
         assertCommandSuccess(index);
 
         /* Case: filtered book list, delete index within bounds of address book but out of bounds of book list
@@ -117,7 +117,7 @@ public class DeleteCommandSystemTest extends BookInventorySystemTest {
      */
     private Book removePerson(Model model, Index index) {
         Book targetBook = getPerson(model, index);
-        model.deletePerson(targetBook);
+        model.deleteBook(targetBook);
         return targetBook;
     }
 

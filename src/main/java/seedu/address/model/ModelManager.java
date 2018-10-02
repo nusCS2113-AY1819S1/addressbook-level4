@@ -57,26 +57,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Book book) {
+    public boolean hasBook(Book book) {
         requireNonNull(book);
         return versionedAddressBook.hasPerson(book);
     }
 
     @Override
-    public void deletePerson(Book target) {
+    public void deleteBook(Book target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void addPerson(Book book) {
+    public void addBook(Book book) {
         versionedAddressBook.addPerson(book);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredBookList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Book target, Book editedBook) {
+    public void updateBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
 
         versionedAddressBook.updatePerson(target, editedBook);
@@ -90,12 +90,12 @@ public class ModelManager extends ComponentManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Book> getFilteredPersonList() {
+    public ObservableList<Book> getFilteredBookList() {
         return FXCollections.unmodifiableObservableList(filteredBooks);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Book> predicate) {
+    public void updateFilteredBookList(Predicate<Book> predicate) {
         requireNonNull(predicate);
         filteredBooks.setPredicate(predicate);
     }
@@ -125,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void commitAddressBook() {
+    public void commitBookInventory() {
         versionedAddressBook.commit();
     }
 

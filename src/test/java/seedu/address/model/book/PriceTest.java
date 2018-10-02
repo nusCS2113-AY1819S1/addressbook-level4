@@ -23,40 +23,40 @@ public class PriceTest {
     @Test
     public void isValidEmail() {
         // null email
-        Assert.assertThrows(NullPointerException.class, () -> Price.isValidEmail(null));
+        Assert.assertThrows(NullPointerException.class, () -> Price.isValidPrice(null));
 
         // blank email
-        assertFalse(Price.isValidEmail("")); // empty string
-        assertFalse(Price.isValidEmail(" ")); // spaces only
+        assertFalse(Price.isValidPrice("")); // empty string
+        assertFalse(Price.isValidPrice(" ")); // spaces only
 
         // missing parts
-        assertFalse(Price.isValidEmail("@example.com")); // missing local part
-        assertFalse(Price.isValidEmail("peterjackexample.com")); // missing '@' symbol
-        assertFalse(Price.isValidEmail("peterjack@")); // missing domain name
+        assertFalse(Price.isValidPrice("@example.com")); // missing local part
+        assertFalse(Price.isValidPrice("peterjackexample.com")); // missing '@' symbol
+        assertFalse(Price.isValidPrice("peterjack@")); // missing domain name
 
         // invalid parts
-        assertFalse(Price.isValidEmail("peterjack@-")); // invalid domain name
-        assertFalse(Price.isValidEmail("peterjack@exam_ple.com")); // underscore in domain name
-        assertFalse(Price.isValidEmail("peter jack@example.com")); // spaces in local part
-        assertFalse(Price.isValidEmail("peterjack@exam ple.com")); // spaces in domain name
-        assertFalse(Price.isValidEmail(" peterjack@example.com")); // leading space
-        assertFalse(Price.isValidEmail("peterjack@example.com ")); // trailing space
-        assertFalse(Price.isValidEmail("peterjack@@example.com")); // double '@' symbol
-        assertFalse(Price.isValidEmail("peter@jack@example.com")); // '@' symbol in local part
-        assertFalse(Price.isValidEmail("peterjack@example@com")); // '@' symbol in domain name
-        assertFalse(Price.isValidEmail("peterjack@.example.com")); // domain name starts with a period
-        assertFalse(Price.isValidEmail("peterjack@example.com.")); // domain name ends with a period
-        assertFalse(Price.isValidEmail("peterjack@-example.com")); // domain name starts with a hyphen
-        assertFalse(Price.isValidEmail("peterjack@example.com-")); // domain name ends with a hyphen
+        assertFalse(Price.isValidPrice("peterjack@-")); // invalid domain name
+        assertFalse(Price.isValidPrice("peterjack@exam_ple.com")); // underscore in domain name
+        assertFalse(Price.isValidPrice("peter jack@example.com")); // spaces in local part
+        assertFalse(Price.isValidPrice("peterjack@exam ple.com")); // spaces in domain name
+        assertFalse(Price.isValidPrice(" peterjack@example.com")); // leading space
+        assertFalse(Price.isValidPrice("peterjack@example.com ")); // trailing space
+        assertFalse(Price.isValidPrice("peterjack@@example.com")); // double '@' symbol
+        assertFalse(Price.isValidPrice("peter@jack@example.com")); // '@' symbol in local part
+        assertFalse(Price.isValidPrice("peterjack@example@com")); // '@' symbol in domain name
+        assertFalse(Price.isValidPrice("peterjack@.example.com")); // domain name starts with a period
+        assertFalse(Price.isValidPrice("peterjack@example.com.")); // domain name ends with a period
+        assertFalse(Price.isValidPrice("peterjack@-example.com")); // domain name starts with a hyphen
+        assertFalse(Price.isValidPrice("peterjack@example.com-")); // domain name ends with a hyphen
 
         // valid email
-        assertTrue(Price.isValidEmail("PeterJack_1190@example.com"));
-        assertTrue(Price.isValidEmail("a@bc")); // minimal
-        assertTrue(Price.isValidEmail("test@localhost")); // alphabets only
-        assertTrue(Price.isValidEmail("!#$%&'*+/=?`{|}~^.-@example.org")); // special characters local part
-        assertTrue(Price.isValidEmail("123@145")); // numeric local part and domain name
-        assertTrue(Price.isValidEmail("a1+be!@example1.com")); // mixture of alphanumeric and special characters
-        assertTrue(Price.isValidEmail("peter_jack@very-very-very-long-example.com")); // long domain name
-        assertTrue(Price.isValidEmail("if.you.dream.it_you.can.do.it@example.com")); // long local part
+        assertTrue(Price.isValidPrice("PeterJack_1190@example.com"));
+        assertTrue(Price.isValidPrice("a@bc")); // minimal
+        assertTrue(Price.isValidPrice("test@localhost")); // alphabets only
+        assertTrue(Price.isValidPrice("!#$%&'*+/=?`{|}~^.-@example.org")); // special characters local part
+        assertTrue(Price.isValidPrice("123@145")); // numeric local part and domain name
+        assertTrue(Price.isValidPrice("a1+be!@example1.com")); // mixture of alphanumeric and special characters
+        assertTrue(Price.isValidPrice("peter_jack@very-very-very-long-example.com")); // long domain name
+        assertTrue(Price.isValidPrice("if.you.dream.it_you.can.do.it@example.com")); // long local part
     }
 }

@@ -69,7 +69,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Book> lastShownList = model.getFilteredPersonList();
+        List<Book> lastShownList = model.getFilteredBookList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -78,13 +78,13 @@ public class EditCommand extends Command {
         Book bookToEdit = lastShownList.get(index.getZeroBased());
         Book editedBook = createEditedPerson(bookToEdit, editPersonDescriptor);
 
-        if (!bookToEdit.isSamePerson(editedBook) && model.hasPerson(editedBook)) {
+        if (!bookToEdit.isSamePerson(editedBook) && model.hasBook(editedBook)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updatePerson(bookToEdit, editedBook);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.updateBook(bookToEdit, editedBook);
+        model.updateFilteredBookList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitBookInventory();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedBook));
     }
 

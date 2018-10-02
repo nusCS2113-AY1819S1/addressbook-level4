@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Hello World "
-            + PREFIX_ID + "943-13-41893-31-1 "
+            + PREFIX_ID + "9431341893311 "
             + PREFIX_PRICE + "19.99 "
             + PREFIX_QUANTITY + "50 "
             + PREFIX_TAG + "cs2113t "
@@ -52,12 +52,12 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasBook(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         }
 
-        model.addPerson(toAdd);
-        model.commitAddressBook();
+        model.addBook(toAdd);
+        model.commitBookInventory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
