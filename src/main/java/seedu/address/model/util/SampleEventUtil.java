@@ -13,14 +13,20 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 import seedu.address.model.tag.Tag;
 
+
 /**
  * Contains utility methods for populating {@code EventList} with sample data.
  */
 public class SampleEventUtil {
     public static Event[] getSampleEvents() {
-        return new Event[]{new Event(new EventName("CS2113 Lecture"), new Description("Very Hard"),
-                LocalDate.of(2018, 9, 18), LocalDate.of(2018, 9, 19),
-                new Location("LT 100"))
+
+        return new Event[]{
+            new Event(new EventName("CS2113 Lecture"), new Description("Very Hard"),
+                      LocalDate.parse("2018-09-28"), LocalDate.parse("2018-11-09"), new Location("LT 100")),
+            new Event(new EventName("CS2113 Tutorial"), new Description("Can i skip this?"),
+                      LocalDate.parse("2018-10-28"), LocalDate.parse("2018-11-09"), new Location("Tut room 1000")),
+            new Event(new EventName("CS2113 Java session"), new Description("Java Camp help!"),
+                      LocalDate.parse("2018-09-28"), LocalDate.parse("2018-09-30"), new Location("Utown")),
         };
     }
 

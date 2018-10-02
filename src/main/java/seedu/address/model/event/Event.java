@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.model.person.Person;
 
-
 /**
  * Represents a Event in the event list.
  * Guarantees: details are present and not null, field values are validated, immutable.
