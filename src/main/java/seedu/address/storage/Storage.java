@@ -16,7 +16,6 @@ import seedu.address.model.UserPrefs;
 //import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 
 
-
 /**
  * API of the Storage component
  */
