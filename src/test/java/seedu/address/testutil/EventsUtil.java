@@ -6,15 +6,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import guitests.GuiRobot;
 import javafx.application.Platform;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.logic.commands.CreateCommand;
 import seedu.address.model.event.Event;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Helper methods related to events.
@@ -55,7 +55,10 @@ public class EventsUtil {
         return sb.toString();
     }
 
-    public static String formatDate(LocalDate date){
+    /**
+     * Returns formatted string based on LocalDate.
+     */
+    public static String formatDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedString = date.format(formatter);
         return formattedString;
