@@ -125,6 +125,13 @@ public class MainApp extends Application {
             initialDataAddressBook = new AddressBook();
         }
 
+        //Testing on saving a sample event list xml
+        try {
+            storage.saveEventList(initialEventListData);
+        } catch (IOException e) {
+            System.err.println("Error saving event list!");
+        }
+
         return new ModelManager(initialDataAddressBook, initialEventListData, userPrefs);
     }
 

@@ -52,6 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyAddressBook newData, ReadOnlyEventList newEventList) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
+        indicateEventListChanged();
     }
 
     //=========== Address Book Methods =======================================================================
