@@ -35,7 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             Command command = addressBookParser.parseCommand(commandText);
-        return command.execute(model, history);
+            return command.execute(model, history);
         } finally {
             history.add(commandText);
         }

@@ -58,12 +58,11 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
-            model.setSelectedPersons(
-                    mainWindow.
-                    getPersonListPanel().
-                    getPersonListView().
-                    getSelectionModel().
-                    getSelectedItems());
+            model.setSelectedPersons(mainWindow
+                    .getPersonListPanel()
+                    .getPersonListView()
+                    .getSelectionModel()
+                    .getSelectedItems());
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);

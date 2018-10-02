@@ -23,8 +23,6 @@ public class MailCommand extends Command {
     public static final String COMMAND_WORD = CliSyntax.COMMAND_MAIL;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Emails the person using default application.";
-    private static final String MESSAGE_SUCCESS = "Mailing to: ";
-    private static final String MESSAGE_UNSUPPORTED = "System mail application is unsupported.";
 
     /**
      * Determine which contacts to mail to.
@@ -32,6 +30,9 @@ public class MailCommand extends Command {
     public static final int TYPE_SELECTION = 1;
     public static final int TYPE_GROUPS = 2;
     public static final int TYPE_ALL = 3;
+
+    private static final String MESSAGE_SUCCESS = "Mailing to: ";
+    private static final String MESSAGE_UNSUPPORTED = "System mail application is unsupported.";
 
     /**
      * Instance variables
@@ -49,13 +50,13 @@ public class MailCommand extends Command {
 
     public MailCommand(int mailType) {
         this.mailType = mailType;
-            desktop = Desktop.getDesktop();
+        desktop = Desktop.getDesktop();
     }
 
     public MailCommand(int mailType, String mailArgs) {
         this.mailType = mailType;
         this.mailArgs = mailArgs;
-            desktop = Desktop.getDesktop();
+        desktop = Desktop.getDesktop();
     }
 
     @Override

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
 import seedu.address.model.person.Person;
 
 /**

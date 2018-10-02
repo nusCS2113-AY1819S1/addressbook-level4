@@ -8,6 +8,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses the arguments to be use by MailCommand.
  */
 public class MailCommandParser implements Parser<MailCommand> {
+    /**
+     * Parses the arguments of a mail command.
+     * @param args the arguments to be parsed.
+     * @return the resulting MailCommand instance.
+     * @throws ParseException if the format of the argument is incorrect.
+     */
     public MailCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_ALL, CliSyntax.PREFIX_TAG);
 

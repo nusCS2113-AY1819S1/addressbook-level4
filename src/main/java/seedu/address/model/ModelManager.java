@@ -11,7 +11,6 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.scene.control.ListView;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
@@ -27,7 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private CommandCompleter commandCompleter;
-    private  List<Person> selectedPersons;
+    private List<Person> selectedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
