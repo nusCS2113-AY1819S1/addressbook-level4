@@ -90,15 +90,15 @@ public class XmlAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ISBN.class.getSimpleName()));
         }
         if (!ISBN.isValidPhone(phone)) {
-            throw new IllegalValueException(ISBN.MESSAGE_PHONE_CONSTRAINTS);
+            throw new IllegalValueException(ISBN.ISBN_NUMBERS_CONSTRAINTS);
         }
         final ISBN modelISBN = new ISBN(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
-        if (!Price.isValidEmail(email)) {
-            throw new IllegalValueException(Price.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!Price.isValidPrice(email)) {
+            throw new IllegalValueException(Price.PRICE_CONSTRAINTS);
         }
         final Price modelPrice = new Price(email);
 

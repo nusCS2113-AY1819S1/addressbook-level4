@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Book's email in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
  */
 public class Price {
 
     private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
-    public static final String MESSAGE_EMAIL_CONSTRAINTS = "Emails should be of the format local-part@domain "
+    public static final String PRICE_CONSTRAINTS = "Emails should be of the format local-part@domain "
             + "and adhere to the following constraints:\n"
             + "1. The local-part should only contain alphanumeric characters and these special characters, excluding "
             + "the parentheses, (" + SPECIAL_CHARACTERS + ") .\n"
@@ -20,31 +20,29 @@ public class Price {
             + "    - start and end with alphanumeric characters\n"
             + "    - consist of alphanumeric characters, a period or a hyphen for the characters in between, if any.";
     // alphanumeric and special characters
-    private static final String LOCAL_PART_REGEX = "^[\\w" + SPECIAL_CHARACTERS + "]+";
-    private static final String DOMAIN_FIRST_CHARACTER_REGEX = "[^\\W_]"; // alphanumeric characters except underscore
-    private static final String DOMAIN_MIDDLE_REGEX = "[a-zA-Z0-9.-]*"; // alphanumeric, period and hyphen
-    private static final String DOMAIN_LAST_CHARACTER_REGEX = "[^\\W_]$";
-    public static final String EMAIL_VALIDATION_REGEX = LOCAL_PART_REGEX + "@"
-            + DOMAIN_FIRST_CHARACTER_REGEX + DOMAIN_MIDDLE_REGEX + DOMAIN_LAST_CHARACTER_REGEX;
+    private static final String DOLLAR_REGEX = "\\d{1,}";
+    private static final String CENT_REGEX = "\\d{2,}"; // alphanumeric characters except underscore
+    public static final String PRICE_VALIDATION_REGEX = DOLLAR_REGEX + "."
+            + CENT_REGEX;
 
     public final String value;
 
     /**
      * Constructs an {@code Price}.
      *
-     * @param email A valid email address.
+     * @param price A valid price address.
      */
-    public Price(String email) {
-        requireNonNull(email);
-        checkArgument(isValidEmail(email), MESSAGE_EMAIL_CONSTRAINTS);
-        value = email;
+    public Price(String price) {
+        requireNonNull(price);
+        checkArgument(isValidPrice(price), PRICE_CONSTRAINTS);
+        value = price;
     }
 
     /**
      * Returns if a given string is a valid email.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidPrice(String test) {
+        return test.matches(PRICE_VALIDATION_REGEX);
     }
 
     @Override

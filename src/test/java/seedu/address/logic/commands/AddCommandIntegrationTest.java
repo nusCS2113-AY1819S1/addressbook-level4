@@ -32,8 +32,8 @@ public class AddCommandIntegrationTest {
         Book validBook = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.addPerson(validBook);
-        expectedModel.commitAddressBook();
+        expectedModel.addBook(validBook);
+        expectedModel.commitBookInventory();
 
         assertCommandSuccess(new AddCommand(validBook), model, commandHistory,
                 String.format(AddCommand.MESSAGE_SUCCESS, validBook), expectedModel);

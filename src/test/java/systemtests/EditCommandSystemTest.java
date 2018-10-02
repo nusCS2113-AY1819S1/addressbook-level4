@@ -70,8 +70,8 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         /* Case: redo editing the last book in the list -> last book edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.updatePerson(
-                getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedBook);
+        model.updateBook(
+                getModel().getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased()), editedBook);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a book with new values same as existing values -> edited */
@@ -82,7 +82,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         /* Case: edit a book with new values same as another book's values but with different name -> edited */
         assertTrue(getModel().getAddressBook().getBookList().contains(BOB));
         index = INDEX_SECOND_PERSON;
-        assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
+        assertNotEquals(getModel().getFilteredBookList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedBook = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
@@ -100,7 +100,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        Book bookToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
+        Book bookToEdit = getModel().getFilteredBookList().get(index.getZeroBased());
         editedBook = new PersonBuilder(bookToEdit).withTags().build();
         assertCommandSuccess(command, index, editedBook);
 
@@ -109,9 +109,9 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         /* Case: filtered book list, edit index within bounds of address book and book list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
-        bookToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
+        bookToEdit = getModel().getFilteredBookList().get(index.getZeroBased());
         editedBook = new PersonBuilder(bookToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedBook);
 
@@ -148,7 +148,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredPersonList().size() + 1;
+        invalidIndex = getModel().getFilteredBookList().size() + 1;
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -166,11 +166,11 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
 
         /* Case: invalid phone -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,
-                ISBN.MESSAGE_PHONE_CONSTRAINTS);
+                ISBN.ISBN_NUMBERS_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_EMAIL_DESC,
-                Price.MESSAGE_EMAIL_CONSTRAINTS);
+                Price.PRICE_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ADDRESS_DESC,
@@ -184,7 +184,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         executeCommand(PersonUtil.getAddCommand(BOB));
         assertTrue(getModel().getAddressBook().getBookList().contains(BOB));
         index = INDEX_FIRST_PERSON;
-        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
+        assertFalse(getModel().getFilteredBookList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
@@ -231,8 +231,8 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
     private void assertCommandSuccess(String command, Index toEdit, Book editedBook,
             Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedBook);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateBook(expectedModel.getFilteredBookList().get(toEdit.getZeroBased()), editedBook);
+        expectedModel.updateFilteredBookList(PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(command, expectedModel,
                 String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedBook), expectedSelectedCardIndex);
@@ -263,7 +263,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredBookList(PREDICATE_SHOW_ALL_PERSONS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {

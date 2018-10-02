@@ -143,7 +143,7 @@ public abstract class BookInventorySystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getBookList().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getAddressBook().getBookList().size(), getModel().getFilteredBookList().size());
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class BookInventorySystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getAddressBook().getBookList().size());
+        assertTrue(getModel().getFilteredBookList().size() < getModel().getAddressBook().getBookList().size());
     }
 
     /**
@@ -180,7 +180,7 @@ public abstract class BookInventorySystemTest {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new BookInventory(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+        assertListMatching(getPersonListPanel(), expectedModel.getFilteredBookList());
     }
 
     /**
@@ -276,7 +276,7 @@ public abstract class BookInventorySystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
+        assertListMatching(getPersonListPanel(), getModel().getFilteredBookList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
