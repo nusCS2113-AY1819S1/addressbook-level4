@@ -890,6 +890,7 @@ To-do list
 2. To-do list confirms task is present and deletes the task
 
 *Extensions*
+
    2a. The list is empty.
    2b. The given index is invalid
      2b1. To-do list shows an error message
@@ -912,6 +913,7 @@ To-do list
 
 1. User enters ‘sort by ddl’ command
 2. To-do list shows the all uncompleted modules sorted by deadlines, the task with latest deadline is the first task
+
 [discrete]                
 === Use case 6: Checking tasks with high importance
 *System* 
@@ -951,6 +953,7 @@ To-do list
 2. To-do list marks task as completed and moves the task to a separate list of completed tasks
 
 *Extensions*
+
    2a. The list is empty.
    2b. The given index is invalid
 	2b1. To-do list shows an error message 
@@ -971,6 +974,7 @@ To-do list
 Expenditure Tracker & Calendar
 
 *MSS*   
+
 1. User enter ‘add’ command followed by the amount of money
 2. Expenditure tracker receives information and shows the dates to be added
 3. User choose the date
