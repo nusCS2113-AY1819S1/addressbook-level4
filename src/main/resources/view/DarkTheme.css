@@ -183,6 +183,10 @@
     -fx-background-color: derive(#1d1d1d, 30%);
 }
 
+.timetable-pane {
+    -fx-background-color: #e2e2e2;
+}
+
 .context-menu {
     -fx-background-color: derive(#1d1d1d, 50%);
 }
