@@ -19,11 +19,11 @@ import seedu.address.storage.Comments;
  */
 public class AddCommand extends Command {
 
-    Comments comment = new Comments();
+    private Comments comment = new Comments();
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the event manager. "
+    public final static String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the event manager. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -38,8 +38,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New event added: %1$s";
-    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event manager";
+    public final static String MESSAGE_SUCCESS = "New event added: %1$s";
+    public final static String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event manager";
 
     private final Event toAdd;
 
@@ -61,7 +61,7 @@ public class AddCommand extends Command {
 
         model.addEvent(toAdd);
         model.commitEventManager();
-        comment.createHtml(comment.getFilePath(),comment.getFileName());
+        comment.createHtml(comment.getFilePath(), comment.getFileName());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
