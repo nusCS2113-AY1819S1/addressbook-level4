@@ -879,6 +879,8 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+
 === Use case: Complete task
 
 *MSS*
@@ -894,7 +896,7 @@ Use case ends.
 ** 1a1. TB requests for a valid command
 ** 1a2. Student returns a new Complete command
 +
-Use case ends.
+Use case resumes at step 2.
 
 * 1b. Student requests to complete a non-existent task
 ** 1b1. TB outputs an error message
@@ -971,6 +973,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
+
 === Use case: Remove deadline
 
 *MSS*
@@ -990,6 +993,7 @@ Use case ends.
 ** 1a1. TB outputs an error message
 
 [discrete]
+
 === Use case: View date
 
 *MSS*
@@ -1000,6 +1004,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
+
 === Use case: Select a date
 
 *MSS*
