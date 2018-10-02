@@ -880,7 +880,7 @@ To-do list
     2b1. To-do list shows an error message
 
 [discrete]
-===Use case 3: Delete task
+=== Use case 3: Delete task
 *System*
 To-do list
 
@@ -894,7 +894,7 @@ To-do list
    2b. The given index is invalid
      2b1. To-do list shows an error message
 [discrete]
-===Use case 4: Check tasks for a module
+=== Use case 4: Check tasks for a module
 *System*
 To-do list
 
@@ -904,7 +904,7 @@ To-do list
 2. To-do list shows a sorted list of tasks grouped by modules
 
 [discrete]
-===Use case 5: Check for urgent tasks
+=== Use case 5: Check for urgent tasks
 *System* 
 To-do list
 
@@ -913,7 +913,7 @@ To-do list
 1. User enters ‘sort by ddl’ command
 2. To-do list shows the all uncompleted modules sorted by deadlines, the task with latest deadline is the first task
 [discrete]                
-===Use case 6: Checking tasks with high importance
+=== Use case 6: Checking tasks with high importance
 *System* 
 To-do list
 
@@ -922,7 +922,7 @@ To-do list
 1. User enters ‘sort by impt’ command
 2. To-do list shows a sorted list of tasks grouped by priority level in descending order
 [discrete]
-===Use case 7: Check completed tasks
+=== Use case 7: Check completed tasks
 *System*
 To-do list
 
@@ -932,7 +932,7 @@ To-do list
 2. To-do list shows a list of tasks that has been marked as completed
 
 [discrete]
-===Use case 8: Check uncompleted tasks
+=== Use case 8: Check uncompleted tasks
 *System*
 To-do list
 
@@ -941,7 +941,7 @@ To-do list
 1. User enters ‘ view uncompleted’ command
 2. To-do list shows a list of tasks that have not been marked as completed
 [discrete]
-===Use case 9: Marking a task as completed
+=== Use case 9: Marking a task as completed
 *System*
 To-do list
 
@@ -956,7 +956,7 @@ To-do list
 	2b1. To-do list shows an error message 
 
 [discrete]         
-===Use case 10: Receiving reminders for a task
+=== Use case 10: Receiving reminders for a task
 *System*
 To-do list
 
@@ -966,7 +966,7 @@ To-do list
 2. User receives and acknowledges the reminder
 
 [discrete]
-===Use case 11: Add expenditure / income
+=== Use case 11: Add expenditure / income
 *System*
 Expenditure Tracker & Calendar
 
@@ -979,7 +979,7 @@ Expenditure Tracker & Calendar
 6. Expenditure Tracker record and display the income / outcome on calendar
 
 [discrete]
-===Use case 12: Check expenditure / income status
+=== Use case 12: Check expenditure / income status
 *System*
 Expenditure Tracker & Calendar
 	
