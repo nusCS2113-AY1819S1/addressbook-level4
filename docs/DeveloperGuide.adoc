@@ -862,7 +862,7 @@ To-do list
 2.  To-do list shows the task entered in the list
 
 [discrete]
-=== Use case 2:Delete task
+=== Use case 2:Edit or Update task
 *System*
 To-do list
 
@@ -878,6 +878,118 @@ To-do list
   2a. The list is empty.
   2b. The given index is invalid.
     2b1. To-do list shows an error message
+
+[discrete]
+===Use case 3: Delete task
+*System*
+To-do list
+
+*MSS*
+
+1. User enters ‘delete’ command followed by index number
+2. To-do list confirms task is present and deletes the task
+
+*Extensions*
+   2a. The list is empty.
+   2b. The given index is invalid
+     2b1. To-do list shows an error message
+[discrete]
+===Use case 4: Check tasks for a module
+*System*
+To-do list
+
+*MSS*
+
+1. User enters ‘sort by mod’ command
+2. To-do list shows a sorted list of tasks grouped by modules
+
+[discrete]
+===Use case 5: Check for urgent tasks
+*System* 
+To-do list
+
+*MSS*
+
+1. User enters ‘sort by ddl’ command
+2. To-do list shows the all uncompleted modules sorted by deadlines, the task with latest deadline is the first task
+[discrete]                
+===Use case 6: Checking tasks with high importance
+*System* 
+To-do list
+
+*MSS*
+
+1. User enters ‘sort by impt’ command
+2. To-do list shows a sorted list of tasks grouped by priority level in descending order
+[discrete]
+===Use case 7: Check completed tasks
+*System*
+To-do list
+
+*MSS*
+
+1. User enters ‘view completed’ command
+2. To-do list shows a list of tasks that has been marked as completed
+
+[discrete]
+===Use case 8: Check uncompleted tasks
+*System*
+To-do list
+
+*MSS*
+
+1. User enters ‘ view uncompleted’ command
+2. To-do list shows a list of tasks that have not been marked as completed
+[discrete]
+===Use case 9: Marking a task as completed
+*System*
+To-do list
+
+*MSS*
+
+1. User enters ‘complete’ command followed by index number
+2. To-do list marks task as completed and moves the task to a separate list of completed tasks
+
+*Extensions*
+   2a. The list is empty.
+   2b. The given index is invalid
+	2b1. To-do list shows an error message 
+
+[discrete]         
+===Use case 10: Receiving reminders for a task
+*System*
+To-do list
+
+*MSS*
+
+1. To-do list notifies user of task close to deadline
+2. User receives and acknowledges the reminder
+
+[discrete]
+===Use case 11: Add expenditure / income
+*System*
+Expenditure Tracker & Calendar
+
+*MSS*   
+1. User enter ‘add’ command followed by the amount of money
+2. Expenditure tracker receives information and shows the dates to be added
+3. User choose the date
+4. Expenditure tracker notifies user to pick category
+5. User choose the category to be added
+6. Expenditure Tracker record and display the income / outcome on calendar
+
+[discrete]
+===Use case 12: Check expenditure / income status
+*System*
+Expenditure Tracker & Calendar
+	
+*MSS*
+
+1. User enter ‘check status’ command
+2. Expenditure tracker asks user to choose whether to check in the visual calendar or key in the starting date and closing date of a particular period
+3. User keys in ‘visual’ command or ‘manual’ command
+4. Calendar shows the expenditure / income for each day visually or Expenditure 
+5. Tracker shows the expenditure / income status by displaying the amount of money.
 
 
 [appendix]
