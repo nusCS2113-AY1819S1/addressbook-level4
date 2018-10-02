@@ -1,6 +1,9 @@
 package seedu.address;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -9,7 +12,11 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
@@ -18,6 +25,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.controller.LoginController;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -34,6 +42,9 @@ import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
+import seedu.address.ui.UiPart;
+
+
 
 /**
  * The main entry point to the application.
@@ -41,8 +52,9 @@ import seedu.address.ui.UiManager;
 public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 6, 0, true);
-
+    public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+
 
     protected Ui ui;
     protected Logic logic;
@@ -50,7 +62,11 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
+    //author @tianhang
+    protected Stage window;
+    private FXMLLoader fxmlLoader;
 
+    //author @tianhang
 
     @Override
     public void init() throws Exception {
@@ -73,6 +89,7 @@ public class MainApp extends Application {
 
         ui = new UiManager(logic, config, userPrefs);
 
+        fxmlLoader = new FXMLLoader();
         initEventsCenter();
     }
 
@@ -179,19 +196,62 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        window = primaryStage;
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+        //@@author tianhang
+        showLoginPage();
+    }
+    //@@author tianhang
+
+    /**
+     * Start Login scene
+     */
+    private void showLoginPage() {
+        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
+        Parent root = loadFxmlFile(fxmlLoginFileUrl, window);
+        window.initStyle(StageStyle.UNDECORATED);
+        window.setTitle("Login Page");
+        window.setScene(new Scene(root));
+        window.show();
+        passInMainInterface();
     }
 
+    /**
+     * Pass {@code ui} to login page
+     */
+    private void passInMainInterface() {
+        LoginController loginController = new LoginController ();
+        loginController.mainWindowInterface (ui);
+    }
+    /**
+     * load the file from {@code location} and set {@code root}
+     * @param location
+     * @param root
+     * @return root of primary stage
+     */
+    private Parent loadFxmlFile(URL location, Stage root) {
+        System.out.println(location);
+        requireNonNull(location);
+        fxmlLoader.setLocation(location);
+        Parent rooting = null;
+        try {
+            rooting = fxmlLoader.load();
+
+        } catch (IOException e) {
+            //System.out.println("the exception is " + e);
+            throw new AssertionError(e);
+        }
+        return rooting;
+    }
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
-        ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
+        window.close ();
         Platform.exit();
         System.exit(0);
     }
