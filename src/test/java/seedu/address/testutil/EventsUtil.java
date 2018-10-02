@@ -51,7 +51,7 @@ public class EventsUtil {
         sb.append(PREFIX_DESCRIPTION + event.getDescription().value + " ");
         sb.append(PREFIX_START_DATE + formatDate(event.getStartTime()) + " ");
         sb.append(PREFIX_END_DATE + formatDate(event.getEndTime()) + " ");
-        sb.append(PREFIX_LOCATION + event.getLocation().value + " ");
+        sb.append(PREFIX_LOCATION + event.getLocation().value);
         return sb.toString();
     }
 
@@ -61,6 +61,7 @@ public class EventsUtil {
     public static String formatDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedString = date.format(formatter);
-        return formattedString;
+        String trimmedFormattedString = formattedString.trim();
+        return trimmedFormattedString;
     }
 }
