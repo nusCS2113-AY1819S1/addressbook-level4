@@ -26,6 +26,9 @@ public class MailCommand extends Command {
     private static final String MESSAGE_SUCCESS = "Mailing to: ";
     private static final String MESSAGE_UNSUPPORTED = "System mail application is unsupported.";
 
+    /**
+     * Determine which contacts to mail to.
+     */
     public static final int TYPE_SELECTION = 1;
     public static final int TYPE_GROUPS = 2;
     public static final int TYPE_ALL = 3;
@@ -84,6 +87,12 @@ public class MailCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
+    /**
+     * Creates an URI that consists of email address from selected contacts.
+     * @param model containing the contacts.
+     * @return the URI consisting of extracted email addresses.
+     * @throws CommandException if there is error in creating URI.
+     */
     private URI mailToSelection(Model model) throws CommandException {
         List<Person> list = model.getSelectedPersons();
         ArrayList<String> emailList = retrieveEmails(list);
@@ -91,10 +100,10 @@ public class MailCommand extends Command {
     }
 
     /**
-     * Creates an URI that consists of email address from given groups
-     * @param model containing the groups
-     * @return the URI consisting of extracted email addresses
-     * @throws CommandException if there is error in creating URI
+     * Creates an URI that consists of email address from given groups.
+     * @param model containing the contacts.
+     * @return the URI consisting of extracted email addresses.
+     * @throws CommandException if there is error in creating URI.
      */
     private URI mailToGroups(Model model, Tag tag) throws CommandException {
         ArrayList<String> emailList = retrieveEmailsFromGroups(model.getFilteredPersonList(), tag);
@@ -102,10 +111,10 @@ public class MailCommand extends Command {
     }
 
     /**
-     * Creates an URI that consists of email address from all contacts
-     * @param model containing the contacts
-     * @return the URI consisting of extracted email addresses
-     * @throws CommandException if there is error in creating URI
+     * Creates an URI that consists of email address from all contacts.
+     * @param model containing the contacts.
+     * @return the URI consisting of extracted email addresses.
+     * @throws CommandException if there is error in creating URI.
      */
     private URI mailToAll(Model model) throws CommandException {
         ArrayList<String> emailList = retrieveEmails(model.getFilteredPersonList());
@@ -125,6 +134,12 @@ public class MailCommand extends Command {
         return emailList;
     }
 
+    /**
+     * Extracts all emails given a specified Tag.
+     * @param personList the list of Person.
+     * @param tag the Tag to extract emails from.
+     * @return the list of extracted emails.
+     */
     private ArrayList<String> retrieveEmailsFromGroups(List<Person> personList, Tag tag) {
         ArrayList<String> emailList = new ArrayList<>();
         for (Person person : personList) {
