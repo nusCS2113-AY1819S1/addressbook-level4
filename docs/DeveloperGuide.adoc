@@ -1011,7 +1011,7 @@ Use case ends.
 [none]
 ** 1a1. Address book will decrypt the data instead with the given password.
 +
-** Use case ends.
+Use case ends.
 
 [discrete]
 === Use case: Decrypt addressbook
@@ -1020,6 +1020,11 @@ Use case ends.
 1. User requests to decrypt addressbook with password
 2. Addressbook shows decrypted message
 +
+Use case ends.
+
+*Extensions*
+
+[none]
 * 1a. Addressbook is already decrypted.
 +
 [none]
@@ -1030,7 +1035,8 @@ Use case ends.
 +
 [none]
 ** 1b1. Addressbook will display incorrect password message.
-** Use case ends.
++
+Use case ends.
 
 
 [appendix]
