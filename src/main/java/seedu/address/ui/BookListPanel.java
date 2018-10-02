@@ -23,7 +23,7 @@ public class BookListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(BookListPanel.class);
 
     @FXML
-    private ListView<Book> personListView;
+    private ListView<Book> bookListView;
 
     public BookListPanel(ObservableList<Book> bookList) {
         super(FXML);
@@ -32,13 +32,13 @@ public class BookListPanel extends UiPart<Region> {
     }
 
     private void setConnections(ObservableList<Book> bookList) {
-        personListView.setItems(bookList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        bookListView.setItems(bookList);
+        bookListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        bookListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in book list panel changed to : '" + newValue + "'");
@@ -52,8 +52,8 @@ public class BookListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            bookListView.scrollTo(index);
+            bookListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
