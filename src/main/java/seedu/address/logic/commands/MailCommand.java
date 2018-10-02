@@ -8,6 +8,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
@@ -62,6 +63,12 @@ public class MailCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         URI uriToMail;
+
+        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+
+        if (fe.isLocked()) {
+            throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
+        }
 
         // Unsupported desktops will lead to error and crash
         if (!Desktop.isDesktopSupported()) {
