@@ -19,8 +19,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.book.Book;
+import seedu.address.model.book.exceptions.DuplicateBookException;
 import seedu.address.testutil.PersonBuilder;
 
 public class BookInventoryTest {
@@ -32,7 +32,7 @@ public class BookInventoryTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), bookInventory.getPersonList());
+        assertEquals(Collections.emptyList(), bookInventory.getBookList());
     }
 
     @Test
@@ -50,13 +50,13 @@ public class BookInventoryTest {
 
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
-        // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        // Two books with the same identity fields
+        Book editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        BookInventoryStub newData = new BookInventoryStub(newPersons);
+        List<Book> newBooks = Arrays.asList(ALICE, editedAlice);
+        BookInventoryStub newData = new BookInventoryStub(newBooks);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateBookException.class);
         bookInventory.resetData(newData);
     }
 
@@ -80,7 +80,7 @@ public class BookInventoryTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         bookInventory.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Book editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(bookInventory.hasPerson(editedAlice));
     }
@@ -88,22 +88,22 @@ public class BookInventoryTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        bookInventory.getPersonList().remove(0);
+        bookInventory.getBookList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyBookInventory whose persons list can violate interface constraints.
+     * A stub ReadOnlyBookInventory whose books list can violate interface constraints.
      */
     private static class BookInventoryStub implements ReadOnlyBookInventory {
-        private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Book> books = FXCollections.observableArrayList();
 
-        BookInventoryStub(Collection<Person> persons) {
-            this.persons.setAll(persons);
+        BookInventoryStub(Collection<Book> books) {
+            this.books.setAll(books);
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
-            return persons;
+        public ObservableList<Book> getBookList() {
+            return books;
         }
     }
 

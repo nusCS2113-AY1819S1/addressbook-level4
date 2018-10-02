@@ -11,7 +11,7 @@ import seedu.address.model.ReadOnlyBookInventory;
 /**
  * Represents a storage for {@link BookInventory}.
  */
-public interface AddressBookStorage {
+public interface BookInventoryStorage {
 
     /**
      * Returns the file path of the data file.

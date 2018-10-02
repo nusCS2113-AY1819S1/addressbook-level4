@@ -4,16 +4,16 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.BookInventoryChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.UserPrefs;
 
 /**
- * API of the Storage component
+ * API of the InventoryStorage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface InventoryStorage extends BookInventoryStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -31,9 +31,9 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     void saveAddressBook(ReadOnlyBookInventory addressBook) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the Quantity Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleAddressBookChangedEvent(BookInventoryChangedEvent abce);
 }

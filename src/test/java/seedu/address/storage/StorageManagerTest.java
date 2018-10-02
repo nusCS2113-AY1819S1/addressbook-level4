@@ -14,7 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.BookInventoryChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
@@ -28,13 +28,13 @@ public class StorageManagerTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private StorageManager storageManager;
+    private InventoryStorageManager storageManager;
 
     @Before
     public void setUp() {
-        XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
+        XmlBookInventoryStorage addressBookStorage = new XmlBookInventoryStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new InventoryStorageManager(addressBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -45,7 +45,7 @@ public class StorageManagerTest {
     @Test
     public void prefsReadSave() throws Exception {
         /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
+         * Note: This is an integration test that verifies the InventoryStorageManager is properly wired to the
          * {@link JsonUserPrefsStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
          */
@@ -59,8 +59,8 @@ public class StorageManagerTest {
     @Test
     public void addressBookReadSave() throws Exception {
         /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
+         * Note: This is an integration test that verifies the InventoryStorageManager is properly wired to the
+         * {@link XmlBookInventoryStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlBookInventoryStorageTest} class.
          */
         BookInventory original = getTypicalAddressBook();
@@ -76,10 +76,10 @@ public class StorageManagerTest {
 
     @Test
     public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
-        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+        // Create a InventoryStorageManager while injecting a stub that  throws an exception when the save method is called
+        InventoryStorage storage = new InventoryStorageManager(new XmlBookInventoryStorageExceptionThrowingStub(Paths.get("dummy")),
                                              new JsonUserPrefsStorage(Paths.get("dummy")));
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new BookInventory()));
+        storage.handleAddressBookChangedEvent(new BookInventoryChangedEvent(new BookInventory()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -87,9 +87,9 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage {
+    class XmlBookInventoryStorageExceptionThrowingStub extends XmlBookInventoryStorage {
 
-        public XmlAddressBookStorageExceptionThrowingStub(Path filePath) {
+        public XmlBookInventoryStorageExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 

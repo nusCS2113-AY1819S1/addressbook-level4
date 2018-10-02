@@ -36,7 +36,7 @@ public class XmlBookInventoryStorageTest {
     }
 
     private java.util.Optional<ReadOnlyBookInventory> readAddressBook(String filePath) throws Exception {
-        return new XmlAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlBookInventoryStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -77,7 +77,7 @@ public class XmlBookInventoryStorageTest {
     public void readAndSaveAddressBook_allInOrder_success() throws Exception {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
         BookInventory original = getTypicalAddressBook();
-        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        XmlBookInventoryStorage xmlAddressBookStorage = new XmlBookInventoryStorage(filePath);
 
         //Save in new file and read back
         xmlAddressBookStorage.saveAddressBook(original, filePath);
@@ -110,7 +110,7 @@ public class XmlBookInventoryStorageTest {
      */
     private void saveAddressBook(ReadOnlyBookInventory addressBook, String filePath) {
         try {
-            new XmlAddressBookStorage(Paths.get(filePath))
+            new XmlBookInventoryStorage(Paths.get(filePath))
                     .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);

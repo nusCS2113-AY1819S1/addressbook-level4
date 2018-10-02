@@ -5,10 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.book.Book;
 
 /**
- * An UI component that displays information of a {@code Person}.
+ * An UI component that displays information of a {@code Book}.
  */
 public class PersonCard extends UiPart<Region> {
 
@@ -22,7 +22,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on BookInventory level 4</a>
      */
 
-    public final Person person;
+    public final Book book;
 
     @FXML
     private HBox cardPane;
@@ -31,23 +31,23 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label ISBN;
     @FXML
-    private Label address;
+    private Label quantity;
     @FXML
-    private Label email;
+    private Label price;
     @FXML
     private FlowPane tags;
 
-    public PersonCard(Person person, int displayedIndex) {
+    public PersonCard(Book book, int displayedIndex) {
         super(FXML);
-        this.person = person;
+        this.book = book;
         id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        name.setText(book.getName().fullName);
+        ISBN.setText(book.getISBN().value);
+        quantity.setText(book.getQuantity().value);
+        price.setText(book.getPrice().value);
+        book.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
     @Override
@@ -65,6 +65,6 @@ public class PersonCard extends UiPart<Region> {
         // state check
         PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
+                && book.equals(card.book);
     }
 }

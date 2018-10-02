@@ -5,8 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.book.Book;
+import seedu.address.model.book.UniqueBookList;
 
 /**
  * Wraps all data at the address-book level
@@ -14,7 +14,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class BookInventory implements ReadOnlyBookInventory {
 
-    private final UniquePersonList persons;
+    private final UniqueBookList persons;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -24,7 +24,7 @@ public class BookInventory implements ReadOnlyBookInventory {
      *   among constructors.
      */
     {
-        persons = new UniquePersonList();
+        persons = new UniqueBookList();
     }
 
     public BookInventory() {}
@@ -40,11 +40,11 @@ public class BookInventory implements ReadOnlyBookInventory {
     //// list overwrite operations
 
     /**
-     * Replaces the contents of the person list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of the book list with {@code books}.
+     * {@code books} must not contain duplicate books.
      */
-    public void setPersons(List<Person> persons) {
-        this.persons.setPersons(persons);
+    public void setPersons(List<Book> books) {
+        this.persons.setPersons(books);
     }
 
     /**
@@ -53,43 +53,43 @@ public class BookInventory implements ReadOnlyBookInventory {
     public void resetData(ReadOnlyBookInventory newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getBookList());
     }
 
-    //// person-level operations
+    //// book-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in the address book.
      */
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return persons.contains(person);
+    public boolean hasPerson(Book book) {
+        requireNonNull(book);
+        return persons.contains(book);
     }
 
     /**
-     * Adds a person to the address book.
-     * The person must not already exist in the address book.
+     * Adds a book to the address book.
+     * The book must not already exist in the address book.
      */
-    public void addPerson(Person p) {
+    public void addPerson(Book p) {
         persons.add(p);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}.
+     * Replaces the given book {@code target} in the list with {@code editedBook}.
      * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * The book identity of {@code editedBook} must not be the same as another existing book in the address book.
      */
-    public void updatePerson(Person target, Person editedPerson) {
-        requireNonNull(editedPerson);
+    public void updatePerson(Book target, Book editedBook) {
+        requireNonNull(editedBook);
 
-        persons.setPerson(target, editedPerson);
+        persons.setPerson(target, editedBook);
     }
 
     /**
      * Removes {@code key} from this {@code BookInventory}.
      * {@code key} must exist in the address book.
      */
-    public void removePerson(Person key) {
+    public void removePerson(Book key) {
         persons.remove(key);
     }
 
@@ -102,7 +102,7 @@ public class BookInventory implements ReadOnlyBookInventory {
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<Book> getBookList() {
         return persons.asUnmodifiableObservableList();
     }
 
