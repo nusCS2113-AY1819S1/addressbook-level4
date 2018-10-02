@@ -26,8 +26,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.book.Book;
+import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -39,7 +39,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Book editedBook = new PersonBuilder().build();
+        Book editedBook = new BookBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedBook).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -57,7 +57,7 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredBookList().size());
         Book lastBook = model.getFilteredBookList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastBook);
+        BookBuilder personInList = new BookBuilder(lastBook);
         Book editedBook = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
@@ -92,7 +92,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Book bookInFilteredList = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Book editedBook = new PersonBuilder(bookInFilteredList).withName(VALID_NAME_BOB).build();
+        Book editedBook = new BookBuilder(bookInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
@@ -154,7 +154,7 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Book editedBook = new PersonBuilder().build();
+        Book editedBook = new BookBuilder().build();
         Book bookToEdit = model.getFilteredBookList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedBook).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
@@ -197,7 +197,7 @@ public class EditCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
-        Book editedBook = new PersonBuilder().build();
+        Book editedBook = new BookBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedBook).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new BookInventory(model.getAddressBook()), new UserPrefs());

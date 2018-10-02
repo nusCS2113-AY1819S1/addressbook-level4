@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.book.NameContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.BookInventoryBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -47,7 +47,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        BookInventory bookInventory = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        BookInventory bookInventory = new BookInventoryBuilder().withPerson(ALICE).withPerson(BENSON).build();
         BookInventory differentBookInventory = new BookInventory();
         UserPrefs userPrefs = new UserPrefs();
 

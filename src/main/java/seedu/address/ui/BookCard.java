@@ -10,7 +10,7 @@ import seedu.address.model.book.Book;
 /**
  * An UI component that displays information of a {@code Book}.
  */
-public class PersonCard extends UiPart<Region> {
+public class BookCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
@@ -31,7 +31,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label ISBN;
+    private Label isbn;
     @FXML
     private Label quantity;
     @FXML
@@ -39,12 +39,12 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(Book book, int displayedIndex) {
+    public BookCard(Book book, int displayedIndex) {
         super(FXML);
         this.book = book;
         id.setText(displayedIndex + ". ");
         name.setText(book.getName().fullName);
-        ISBN.setText(book.getIsbn().value);
+        isbn.setText(book.getIsbn().value);
         quantity.setText(book.getQuantity().value);
         price.setText(book.getPrice().value);
         book.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -58,12 +58,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof BookCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        BookCard card = (BookCard) other;
         return id.getText().equals(card.id.getText())
                 && book.equals(card.book);
     }

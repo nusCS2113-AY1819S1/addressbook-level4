@@ -20,11 +20,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.book.Book;
-import seedu.address.model.book.ISBN;
-import seedu.address.model.book.Name;
-import seedu.address.model.book.Price;
-import seedu.address.model.book.Quantity;
+import seedu.address.model.book.*;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,7 +93,7 @@ public class EditCommand extends Command {
         assert bookToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(bookToEdit.getName());
-        ISBN updatedIsbn = editPersonDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
+        Isbn updatedIsbn = editPersonDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
         Price updatedPrice = editPersonDescriptor.getPrice().orElse(bookToEdit.getPrice());
         Quantity updatedQuantity = editPersonDescriptor.getQuantity().orElse(bookToEdit.getQuantity());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(bookToEdit.getTags());
@@ -128,7 +125,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private ISBN isbn;
+        private Isbn isbn;
         private Price price;
         private Quantity quantity;
         private Set<Tag> tags;
@@ -162,11 +159,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setIsbn(ISBN isbn) {
+        public void setIsbn(Isbn isbn) {
             this.isbn = isbn;
         }
 
-        public Optional<ISBN> getIsbn() {
+        public Optional<Isbn> getIsbn() {
             return Optional.ofNullable(isbn);
         }
 

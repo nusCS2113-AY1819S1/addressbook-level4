@@ -9,59 +9,59 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.model.book.Book;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.BookBuilder;
 
 public class BookCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
         // no tags
-        Book bookWithNoTags = new PersonBuilder().withTags(new String[0]).build();
-        PersonCard personCard = new PersonCard(bookWithNoTags, 1);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, bookWithNoTags, 1);
+        Book bookWithNoTags = new BookBuilder().withTags(new String[0]).build();
+        BookCard bookCard = new BookCard(bookWithNoTags, 1);
+        uiPartRule.setUiPart(bookCard);
+        assertCardDisplay(bookCard, bookWithNoTags, 1);
 
         // with tags
-        Book bookWithTags = new PersonBuilder().build();
-        personCard = new PersonCard(bookWithTags, 2);
-        uiPartRule.setUiPart(personCard);
-        assertCardDisplay(personCard, bookWithTags, 2);
+        Book bookWithTags = new BookBuilder().build();
+        bookCard = new BookCard(bookWithTags, 2);
+        uiPartRule.setUiPart(bookCard);
+        assertCardDisplay(bookCard, bookWithTags, 2);
     }
 
     @Test
     public void equals() {
-        Book book = new PersonBuilder().build();
-        PersonCard personCard = new PersonCard(book, 0);
+        Book book = new BookBuilder().build();
+        BookCard bookCard = new BookCard(book, 0);
 
         // same book, same index -> returns true
-        PersonCard copy = new PersonCard(book, 0);
-        assertTrue(personCard.equals(copy));
+        BookCard copy = new BookCard(book, 0);
+        assertTrue(bookCard.equals(copy));
 
         // same object -> returns true
-        assertTrue(personCard.equals(personCard));
+        assertTrue(bookCard.equals(bookCard));
 
         // null -> returns false
-        assertFalse(personCard.equals(null));
+        assertFalse(bookCard.equals(null));
 
         // different types -> returns false
-        assertFalse(personCard.equals(0));
+        assertFalse(bookCard.equals(0));
 
         // different book, same index -> returns false
-        Book differentBook = new PersonBuilder().withName("differentName").build();
-        assertFalse(personCard.equals(new PersonCard(differentBook, 0)));
+        Book differentBook = new BookBuilder().withName("differentName").build();
+        assertFalse(bookCard.equals(new BookCard(differentBook, 0)));
 
         // same book, different index -> returns false
-        assertFalse(personCard.equals(new PersonCard(book, 1)));
+        assertFalse(bookCard.equals(new BookCard(book, 1)));
     }
 
     /**
-     * Asserts that {@code personCard} displays the details of {@code expectedBook} correctly and matches
+     * Asserts that {@code bookCard} displays the details of {@code expectedBook} correctly and matches
      * {@code expectedId}.
      */
-    private void assertCardDisplay(PersonCard personCard, Book expectedBook, int expectedId) {
+    private void assertCardDisplay(BookCard bookCard, Book expectedBook, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(personCard.getRoot());
+        PersonCardHandle personCardHandle = new PersonCardHandle(bookCard.getRoot());
 
         // verify id is displayed correctly
         assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());

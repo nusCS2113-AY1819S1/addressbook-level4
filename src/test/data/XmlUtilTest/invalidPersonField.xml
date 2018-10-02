@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Book with an invalid ISBN field -->
+<!-- Book with an invalid Isbn field -->
 <book>
     <name>Hans Muster</name>
     <ISBN>9482asf424</ISBN>

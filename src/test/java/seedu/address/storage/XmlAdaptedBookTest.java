@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Price;
 import seedu.address.model.book.Quantity;
 import seedu.address.model.book.Name;
-import seedu.address.model.book.ISBN;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedBookTest {
@@ -57,14 +57,14 @@ public class XmlAdaptedBookTest {
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         XmlAdaptedBook person =
                 new XmlAdaptedBook(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = ISBN.ISBN_NUMBERS_CONSTRAINTS;
+        String expectedMessage = Isbn.ISBN_NUMBERS_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
         XmlAdaptedBook person = new XmlAdaptedBook(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ISBN.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
