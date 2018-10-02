@@ -35,6 +35,7 @@
           <entry key="css" value="1" />
           <entry key="fxml" value="1" />
           <entry key="html" value="1" />
+          <entry key="ipr" value="1" />
           <entry key="iws" value="1" />
           <entry key="java" value="71" />
           <entry key="yml" value="1" />
@@ -44,6 +45,7 @@
         <counts>
           <entry key="CSS" value="1" />
           <entry key="HTML" value="1" />
+          <entry key="IDEA_PROJECT" value="1" />
           <entry key="IDEA_WORKSPACE" value="1" />
           <entry key="JAVA" value="71" />
           <entry key="PLAIN_TEXT" value="5" />
@@ -54,12 +56,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="adoc" value="6842" />
+          <entry key="ipr" value="1" />
           <entry key="iws" value="1" />
           <entry key="java" value="1658" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
+          <entry key="IDEA_PROJECT" value="1" />
           <entry key="IDEA_WORKSPACE" value="1" />
           <entry key="JAVA" value="1658" />
           <entry key="PLAIN_TEXT" value="6842" />
@@ -130,7 +134,16 @@
         <entry file="file://$PROJECT_DIR$/main.iws">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="349">
-              <caret line="1400" lean-forward="true" selection-start-line="1400" selection-end-line="1400" />
+              <caret line="1414" lean-forward="true" selection-start-line="1414" selection-end-line="1414" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.ipr">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="349">
+              <caret line="395" lean-forward="true" selection-start-line="395" selection-end-line="395" />
             </state>
           </provider>
         </entry>
@@ -662,6 +675,7 @@
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/storage/AddressBookStorage.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/storage/StorageManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/storage/XmlAddressBookStorage.java" />
+        <option value="$PROJECT_DIR$/main.ipr" />
         <option value="$PROJECT_DIR$/main.iws" />
       </list>
     </option>
@@ -904,7 +918,7 @@
       <workItem from="1537694234190" duration="943000" />
       <workItem from="1537695320200" duration="13724000" />
       <workItem from="1537970320678" duration="19702000" />
-      <workItem from="1538457489967" duration="2325000" />
+      <workItem from="1538457489967" duration="2790000" />
     </task>
     <servers />
   </component>
@@ -917,7 +931,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44060000" />
+    <option name="totallyTimeSpent" value="44525000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -988,13 +1002,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/VersionedBookInventory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="98" column="4" selection-start-line="98" selection-start-column="4" selection-end-line="98" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.adoc">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
@@ -1353,10 +1360,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main.ipr">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="349">
+          <caret line="395" lean-forward="true" selection-start-line="395" selection-end-line="395" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.iws">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
-          <caret line="1400" lean-forward="true" selection-start-line="1400" selection-end-line="1400" />
+          <caret line="1414" lean-forward="true" selection-start-line="1414" selection-end-line="1414" />
         </state>
       </provider>
     </entry>
