@@ -9,11 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.record.Date;
-import seedu.address.model.record.Expense;
-import seedu.address.model.record.Income;
-import seedu.address.model.record.MoneyFlow;
-import seedu.address.model.record.Name;
+import seedu.address.model.record.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -112,5 +108,16 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    /**
+     * Parses {@code String money} into a {@code Money}.
+     */
+    public static Money parseMoney(String money) throws ParseException {
+        requireNonNull(money);
+        String trimmedMoney = money.trim();
+        if (!Money.isValidMoneyName(trimmedMoney)) {
+            throw new ParseException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        }
+        return new Money(trimmedMoney);
     }
 }

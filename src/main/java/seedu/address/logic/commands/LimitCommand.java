@@ -35,13 +35,17 @@ public class LimitCommand extends Command {
 
     public static final String MESSAGE_DUPLICATE_LIMIT = "There is already a limit for this period ";
 
+    public  LimitCommand (Limit limitin){
+        requireNonNull(limitin);
+        limit=limitin;
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
         //if (model.hasRecord(dummy)) {
-        if (true) {
+        if (false) {
             throw new CommandException(MESSAGE_DUPLICATE_LIMIT);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, limit));
