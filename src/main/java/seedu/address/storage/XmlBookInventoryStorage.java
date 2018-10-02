@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -23,9 +24,11 @@ public class XmlBookInventoryStorage implements BookInventoryStorage {
     private static final Logger logger = LogsCenter.getLogger(XmlBookInventoryStorage.class);
 
     private Path filePath;
+    private Path backupFilePath;
 
     public XmlBookInventoryStorage(Path filePath) {
         this.filePath = filePath;
+        backupFilePath = Paths.get(filePath.toString() + ".backup");
     }
 
     public Path getAddressBookFilePath() {
@@ -77,4 +80,7 @@ public class XmlBookInventoryStorage implements BookInventoryStorage {
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(addressBook));
     }
 
+    public void backupInventoryBook(ReadOnlyBookInventory addressBook) throws IOException {
+        saveAddressBook(addressBook, backupFilePath);
+    }
 }

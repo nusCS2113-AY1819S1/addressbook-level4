@@ -43,4 +43,8 @@ public interface BookInventoryStorage {
      */
     void saveAddressBook(ReadOnlyBookInventory addressBook, Path filePath) throws IOException;
 
+    /**
+     * BookInventory can be saved in a fixed temporary place
+     */
+    void backupInventoryBook(ReadOnlyBookInventory addressBook) throws IOException;
 }
