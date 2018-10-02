@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.record.Limit;
 import seedu.address.model.record.Record;
 
 /**
@@ -61,6 +62,14 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(record);
         return versionedAddressBook.hasRecord(record);
     }
+    /*
+    * to check whether the limit has already been set.
+    * */
+   /* @Override
+    public boolean hasLimit (Limit limit){
+        requireAllNonNull(limit);
+        return versionedAddressBook.hasLimit(limit);
+    }*/
 
     @Override
     public void deleteRecord(Record target) {

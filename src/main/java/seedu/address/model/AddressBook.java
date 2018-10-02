@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.record.Limit;
 import seedu.address.model.record.Record;
 import seedu.address.model.record.UniqueRecordList;
 
@@ -65,6 +66,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(record);
         return records.contains(record);
     }
+
+  /*  public boolean hasLimit (Limit limit){
+        requireNonNull(limit);
+        return limit.contains(limit);
+    }*/
 
     /**
      * Adds a record to the address book.

@@ -30,6 +30,7 @@ public class LimitCommand extends Command {
     //public static Limit limit;
     public static Limit limit;
 
+
     public static final String MESSAGE_SUCCESS = "Limit has been set: %1$s";
 
     public static final String MESSAGE_DUPLICATE_LIMIT = "There is already a limit for this period ";
@@ -39,7 +40,8 @@ public class LimitCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasRecord(limit)) {
+        //if (model.hasRecord(dummy)) {
+        if (true) {
             throw new CommandException(MESSAGE_DUPLICATE_LIMIT);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, limit));

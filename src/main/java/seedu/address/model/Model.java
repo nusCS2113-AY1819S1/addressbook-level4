@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.record.Limit;
 import seedu.address.model.record.Record;
 
 /**
@@ -17,6 +18,10 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+    /*
+    * Returns true if limit already inside the FP.
+    * */
+   // boolean hasLimit (Limit limit);
 
     /**
      * Returns true if a record with the same identity as {@code record} exists in the address book.
