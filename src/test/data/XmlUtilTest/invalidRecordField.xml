@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Record with an invalid date field -->
+<record>
+    <name>Payment for HM</name>
+    <date>9482asf424</date>
+    <moneyFlow>-11.99</moneyFlow>
+    <tagged>friends</tagged>
+</record>

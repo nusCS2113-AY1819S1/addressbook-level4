@@ -1,57 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <persons>
-        <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Ruth Mueller</name>
-        <phone isPrivate="false">87249245</phone>
-        <email isPrivate="false">ruth@example.com</email>
-        <address isPrivate="false">81th street</address>
-    </persons>
-    <persons>
-        <name>Heinz Kurz</name>
-        <phone isPrivate="false">95352563</phone>
-        <email isPrivate="false">heinz@example.com</email>
-        <address isPrivate="false">wall street</address>
-    </persons>
-    <persons>
-        <name>Cornelia Meier</name>
-        <phone isPrivate="false">87652533</phone>
-        <email isPrivate="false">cornelia@example.com</email>
-        <address isPrivate="false">10th street</address>
-    </persons>
-    <persons>
-        <name>Werner Meyer</name>
-        <phone isPrivate="false">9482224</phone>
-        <email isPrivate="false">werner@example.com</email>
-        <address isPrivate="false">michegan ave</address>
-    </persons>
-    <persons>
-        <name>Lydia Kunz</name>
-        <phone isPrivate="false">9482427</phone>
-        <email isPrivate="false">lydia@example.com</email>
-        <address isPrivate="false">little tokyo</address>
-    </persons>
-    <persons>
-        <name>Anna Best</name>
-        <phone isPrivate="false">9482442</phone>
-        <email isPrivate="false">anna@example.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <persons>
-        <name>Stefan Meier</name>
-        <phone isPrivate="false">8482424</phone>
-        <email isPrivate="false">stefan@example.com</email>
-        <address isPrivate="false">little india</address>
-    </persons>
-    <persons>
-        <name>Martin Mueller</name>
-        <phone isPrivate="false">8482131</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">chicago ave</address>
-    </persons>
+    <records>
+        <name>Payment for earphone</name>
+        <date isPrivate="false">01-13-1400</date>
+        <moneyFlow isPrivate="false">-20.40</moneyFlow>
+    </records>
+    <records>
+        <name>Payment for western</name>
+        <date isPrivate="false">01-19-1400</date>
+        <moneyFlow isPrivate="false">-35.59</moneyFlow>
+    </records>
+    <records>
+        <name>Payment for concert</name>
+        <date isPrivate="false">9-3-3003</date>
+        <moneyFlow isPrivate="false">-20.30</moneyFlow>
+    </records>
+    <records>
+        <name>Phone bill</name>
+        <date isPrivate="false">10-4-2005</date>
+        <moneyFlow isPrivate="false">-30.40</moneyFlow>
+    </records>
+    <records>
+        <name>Payment for bag</name>
+        <date isPrivate="false">17-9-2018</date>
+        <moneyFlow isPrivate="false">-39.50</moneyFlow>
+    </records>
+    <records>
+        <name>Weekly allowance</name>
+        <date isPrivate="false">18-10-2018</date>
+        <moneyFlow isPrivate="false">+91.99</moneyFlow>
+    </records>
+    <records>
+        <name>TA Pay</name>
+        <date isPrivate="false">20-10-2018</date>
+        <moneyFlow isPrivate="false">+101</moneyFlow>
+    </records>
+    <records>
+        <name>Bursary from school</name>
+        <date isPrivate="false">23-5-2009</date>
+        <moneyFlow isPrivate="false">+1000</moneyFlow>
+    </records>
+    <records>
+        <name>I wish this was true</name>
+        <date isPrivate="false">27-10-2006</date>
+        <moneyFlow isPrivate="false">+1000001</moneyFlow>
+    </records>
 </addressbook>
