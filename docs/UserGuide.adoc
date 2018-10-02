@@ -14,11 +14,11 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-W13-1/main
 
-By: `W13-1`      Since: `Jun 2016`      Licence: `MIT`
+By: `W13-1`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Timetable Deconflicter (TBC) is a desktop app that allows you to *find free timeslots to meet team members for projects*. More specifically, it helps you identify the times in which everyone is available, based on your selection. Timetable Deconflicter is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -55,9 +55,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Viewing help : `help` (`h`)
 
+Displays the userguide from within the app.
 Format: `help`
 
-=== Adding a person: `add` (`a`)
+=== Adding a person : `add` (`a`)
 
 Adds a person to the address book +
 Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
@@ -95,7 +96,7 @@ Edits the phone number and email address of the 1st person to be `91234567` and 
 * `edit 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find` (`f`)
+=== Locating persons by name : `find` (`f`)
 
 Finds persons whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
