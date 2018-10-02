@@ -853,29 +853,30 @@ _{More to be added}_
 
 [discrete]
 === Use case: Add task
+*System*
+To-do list
 
 *MSS*
 
 1.  User enters ‘add’ command and keys in the task
 2.  To-do list shows the task entered in the list
 +
-Use case ends.
 
+=== Use case :Delete task
+*System*
+To-do list
+
+*MSS*
+
+1.  User enters ‘edit’ command followed by index number
+2.  To-do list confirms task is present in the list
+3.  User enter relevant contents
+4.  To-do list shows the updated task in the list
 *Extensions*
-
-[none]
-* 2a. The list is empty.
+  2a. The list is empty.
+  2b. The given index is invalid.
+    2b1. To-do list shows an error message
 +
-Use case ends.
-
-* 3a. The given index is invalid.
-+
-[none]
-** 3a1. AddressBook shows an error message.
-+
-Use case resumes at step 2.
-
-_{More to be added}_
 
 [appendix]
 == Non Functional Requirements
