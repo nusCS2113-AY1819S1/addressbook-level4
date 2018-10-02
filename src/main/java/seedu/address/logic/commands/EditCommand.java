@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -20,8 +20,11 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.book.*;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.ISBN;
+import seedu.address.model.book.Name;
+import seedu.address.model.book.Price;
+import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -93,12 +96,12 @@ public class EditCommand extends Command {
         assert bookToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(bookToEdit.getName());
-        ISBN updatedISBN = editPersonDescriptor.getISBN().orElse(bookToEdit.getISBN());
+        ISBN updatedIsbn = editPersonDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
         Price updatedPrice = editPersonDescriptor.getPrice().orElse(bookToEdit.getPrice());
         Quantity updatedQuantity = editPersonDescriptor.getQuantity().orElse(bookToEdit.getQuantity());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(bookToEdit.getTags());
 
-        return new Book(updatedName, updatedISBN, updatedPrice, updatedQuantity, updatedTags);
+        return new Book(updatedName, updatedIsbn, updatedPrice, updatedQuantity, updatedTags);
     }
 
     @Override
@@ -125,7 +128,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private ISBN ISBN;
+        private ISBN isbn;
         private Price price;
         private Quantity quantity;
         private Set<Tag> tags;
@@ -138,7 +141,7 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
-            setISBN(toCopy.ISBN);
+            setIsbn(toCopy.isbn);
             setPrice(toCopy.price);
             setQuantity(toCopy.quantity);
             setTags(toCopy.tags);
@@ -148,7 +151,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, ISBN, price, quantity, tags);
+            return CollectionUtil.isAnyNonNull(name, isbn, price, quantity, tags);
         }
 
         public void setName(Name name) {
@@ -159,12 +162,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setISBN(ISBN ISBN) {
-            this.ISBN = ISBN;
+        public void setIsbn(ISBN isbn) {
+            this.isbn = isbn;
         }
 
-        public Optional<ISBN> getISBN() {
-            return Optional.ofNullable(ISBN);
+        public Optional<ISBN> getIsbn() {
+            return Optional.ofNullable(isbn);
         }
 
         public void setPrice(Price price) {
@@ -216,7 +219,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getISBN().equals(e.getISBN())
+                    && getIsbn().equals(e.getIsbn())
                     && getPrice().equals(e.getPrice())
                     && getQuantity().equals(e.getQuantity())
                     && getTags().equals(e.getTags());
