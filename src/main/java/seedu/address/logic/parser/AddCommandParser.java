@@ -12,11 +12,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.book.*;
+import seedu.address.model.book.Book;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,14 +36,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ID).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_PRICE).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_QUANTITY).get());
+        ISBN ISBN = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ID).get());
+        Price price = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_PRICE).get());
+        Quantity quantity = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_QUANTITY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList);
+        Book book = new Book(name, ISBN, price, quantity, tagList);
 
-        return new AddCommand(person);
+        return new AddCommand(book);
     }
 
     /**

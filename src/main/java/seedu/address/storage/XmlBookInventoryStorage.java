@@ -19,14 +19,14 @@ import seedu.address.model.ReadOnlyBookInventory;
 /**
  * A class to access BookInventory data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlBookInventoryStorage implements BookInventoryStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlBookInventoryStorage.class);
 
     private Path filePath;
     private Path backupFilePath;
 
-    public XmlAddressBookStorage(Path filePath) {
+    public XmlBookInventoryStorage(Path filePath) {
         this.filePath = filePath;
         backupFilePath = Paths.get(filePath.toString() + ".backup");
     }

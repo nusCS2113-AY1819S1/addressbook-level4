@@ -10,10 +10,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.book.Book;
 
 /**
- * Adds a person to the address book.
+ * Adds a book to the address book.
  */
 public class AddCommand extends Command {
 
@@ -38,14 +38,14 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New book added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the inventory list";
 
-    private final Person toAdd;
+    private final Book toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Book}
      */
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
+    public AddCommand(Book book) {
+        requireNonNull(book);
+        toAdd = book;
     }
 
     @Override
