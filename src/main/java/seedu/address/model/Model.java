@@ -10,7 +10,7 @@ import seedu.address.model.book.Book;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Book> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Book> PREDICATE_SHOW_ALL_BOOKS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyBookInventory newData);
