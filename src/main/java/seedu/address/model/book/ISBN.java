@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class ISBN {
 
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS =
-            "ISBN numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String PHONE_VALIDATION_REGEX = "\\d{3,}";
+    public static final String ISBN_NUMBERS_CONSTRAINTS =
+            "ISBN numbers should only contain numbers, and it should be at 10 or 13 digits long";
+    public static final String PHONE_VALIDATION_REGEX = "\\d{10,}";
     public final String value;
 
     /**
@@ -22,7 +22,7 @@ public class ISBN {
      */
     public ISBN(String phone) {
         requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_PHONE_CONSTRAINTS);
+        checkArgument(isValidPhone(phone), ISBN_NUMBERS_CONSTRAINTS);
         value = phone;
     }
 

@@ -89,7 +89,7 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Book book) {
+        public void addBook(Book book) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -104,27 +104,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Book book) {
+        public boolean hasBook(Book book) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Book target) {
+        public void deleteBook(Book target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Book target, Book editedBook) {
+        public void updateBook(Book target, Book editedBook) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Book> getFilteredPersonList() {
+        public ObservableList<Book> getFilteredBookList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Book> predicate) {
+        public void updateFilteredBookList(Predicate<Book> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -149,7 +149,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitBookInventory() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -166,7 +166,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Book book) {
+        public boolean hasBook(Book book) {
             requireNonNull(book);
             return this.book.isSamePerson(book);
         }
@@ -179,19 +179,19 @@ public class AddCommandTest {
         final ArrayList<Book> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Book book) {
+        public boolean hasBook(Book book) {
             requireNonNull(book);
             return personsAdded.stream().anyMatch(book::isSamePerson);
         }
 
         @Override
-        public void addPerson(Book book) {
+        public void addBook(Book book) {
             requireNonNull(book);
             personsAdded.add(book);
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitBookInventory() {
             // called by {@code AddCommand#execute()}
         }
 

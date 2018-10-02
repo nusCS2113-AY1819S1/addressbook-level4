@@ -66,7 +66,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(toAdd);
+        model.addBook(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
@@ -159,11 +159,11 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
 
         /* Case: invalid phone -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, ISBN.MESSAGE_PHONE_CONSTRAINTS);
+        assertCommandFailure(command, ISBN.ISBN_NUMBERS_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY;
-        assertCommandFailure(command, Price.MESSAGE_EMAIL_CONSTRAINTS);
+        assertCommandFailure(command, Price.PRICE_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC;
@@ -200,7 +200,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
      */
     private void assertCommandSuccess(String command, Book toAdd) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(toAdd);
+        expectedModel.addBook(toAdd);
         String expectedResultMessage = String.format(AddCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
