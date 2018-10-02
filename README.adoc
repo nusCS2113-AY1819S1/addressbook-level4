@@ -17,7 +17,7 @@ endif::[]
 
 == About App
 FrozenBook is a comprehensive management solution targeted at small icecream shop businesses.
-It provides small businesses with a inventory management system along with a accounting system to make running an icecream shop a breeze. 
+It provides small businesses with a inventory management system along with a accounting system to make running an icecream shop a breeze.
 
 == Site Map
 
