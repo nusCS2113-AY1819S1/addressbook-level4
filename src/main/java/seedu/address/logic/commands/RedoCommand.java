@@ -25,7 +25,7 @@ public class RedoCommand extends Command {
         FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
 
         if (fe.isLocked()) {
-            throw new CommandException(fe.MESSAGE_ADDRESS_BOOK_LOCKED);
+            throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
         }
 
         if (!model.canRedoAddressBook()) {

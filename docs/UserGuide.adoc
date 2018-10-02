@@ -250,10 +250,11 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Encrypting data files `password`
+=== Encrypting data files: `password`
 
 Encrypts the data file with your password. +
-Format: `password YOURPASSWORD`
+Format: `password YOURPASSWORD` +
+All commands will be disabled during encryption.
 
 === Text prediction
 
