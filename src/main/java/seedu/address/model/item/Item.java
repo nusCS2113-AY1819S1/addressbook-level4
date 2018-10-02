@@ -18,9 +18,9 @@ import seedu.address.model.tag.Tag;
 public class Item {
 
     // Magic numbers
-    final public int STATUS_READY = 0;
-    final public int STATUS_ONLOAN = 1;
-    final public int STATUS_FAULTY = 2;
+    public final static int STATUS_READY = 0;
+    public static final int STATUS_ONLOAN = 1;
+    public static final int STATUS_FAULTY = 2;
 
     // Identity fields
     private final Name name;
@@ -64,7 +64,9 @@ public class Item {
         return quantity;
     }
 
-    public Integer getMinQuantity() { return minQuantity; }
+    public Integer getMinQuantity() {
+        return minQuantity;
+    }
 
     public List<Integer> getStatus() {
         return Collections.unmodifiableList(status);
