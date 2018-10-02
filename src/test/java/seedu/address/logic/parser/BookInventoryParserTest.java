@@ -30,8 +30,8 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.NameContainsKeywordsPredicate;
+import seedu.address.testutil.BookBuilder;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class BookInventoryParserTest {
@@ -42,7 +42,7 @@ public class BookInventoryParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Book book = new PersonBuilder().build();
+        Book book = new BookBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(book));
         assertEquals(new AddCommand(book), command);
     }
@@ -62,7 +62,7 @@ public class BookInventoryParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Book book = new PersonBuilder().build();
+        Book book = new BookBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(book).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));

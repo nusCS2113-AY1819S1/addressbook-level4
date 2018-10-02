@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -36,12 +36,12 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_ID + "PHONE] "
+            + "[" + PREFIX_ISBN + "PHONE] "
             + "[" + PREFIX_PRICE + "EMAIL] "
             + "[" + PREFIX_QUANTITY + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ID + "91234567 "
+            + PREFIX_ISBN + "91234567 "
             + PREFIX_PRICE + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Book: %1$s";
@@ -93,12 +93,12 @@ public class EditCommand extends Command {
         assert bookToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(bookToEdit.getName());
-        ISBN updatedISBN = editPersonDescriptor.getISBN().orElse(bookToEdit.getISBN());
+        Isbn updatedIsbn = editPersonDescriptor.getISBN().orElse(bookToEdit.getIsbn());
         Price updatedPrice = editPersonDescriptor.getPrice().orElse(bookToEdit.getPrice());
         Quantity updatedQuantity = editPersonDescriptor.getQuantity().orElse(bookToEdit.getQuantity());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(bookToEdit.getTags());
 
-        return new Book(updatedName, updatedISBN, updatedPrice, updatedQuantity, updatedTags);
+        return new Book(updatedName, updatedIsbn, updatedPrice, updatedQuantity, updatedTags);
     }
 
     @Override
@@ -125,7 +125,7 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
-        private ISBN ISBN;
+        private Isbn ISBN;
         private Price price;
         private Quantity quantity;
         private Set<Tag> tags;
@@ -159,11 +159,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setISBN(ISBN ISBN) {
+        public void setISBN(Isbn ISBN) {
             this.ISBN = ISBN;
         }
 
-        public Optional<ISBN> getISBN() {
+        public Optional<Isbn> getISBN() {
             return Optional.ofNullable(ISBN);
         }
 

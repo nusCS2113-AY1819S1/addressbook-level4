@@ -59,7 +59,7 @@ public class XmlAdaptedBook {
      */
     public XmlAdaptedBook(Book source) {
         name = source.getName().fullName;
-        phone = source.getISBN().value;
+        phone = source.getIsbn().value;
         email = source.getPrice().value;
         address = source.getQuantity().value;
         tagged = source.getTags().stream()
@@ -87,12 +87,12 @@ public class XmlAdaptedBook {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ISBN.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName()));
         }
-        if (!ISBN.isValidPhone(phone)) {
-            throw new IllegalValueException(ISBN.MESSAGE_PHONE_CONSTRAINTS);
+        if (!Isbn.isValidPhone(phone)) {
+            throw new IllegalValueException(Isbn.MESSAGE_PHONE_CONSTRAINTS);
         }
-        final ISBN modelISBN = new ISBN(phone);
+        final Isbn modelIsbn = new Isbn(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
@@ -111,7 +111,7 @@ public class XmlAdaptedBook {
         final Quantity modelQuantity = new Quantity(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Book(modelName, modelISBN, modelPrice, modelQuantity, modelTags);
+        return new Book(modelName, modelIsbn, modelPrice, modelQuantity, modelTags);
     }
 
     @Override

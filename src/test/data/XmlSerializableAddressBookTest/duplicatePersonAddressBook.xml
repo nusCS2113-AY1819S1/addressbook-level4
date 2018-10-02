@@ -3,7 +3,7 @@
 
     <books>
         <name>Alice Pauline</name>
-        <ISBN>94351253</ISBN>
+        <isbn>94351253</isbn>
         <price>alice@example.com</price>
         <quantity>123, Jurong West Ave 6, #08-111</quantity>
         <tagged>friends</tagged>
@@ -12,7 +12,7 @@
     <!-- Book with same identity as Alice Pauline -->
     <books>
         <name>Alice Pauline</name>
-        <ISBN>94351253</ISBN>
+        <isbn>94351253</isbn>
         <price>pauline@example.com</price>
         <quantity>4th street</quantity>
     </books>

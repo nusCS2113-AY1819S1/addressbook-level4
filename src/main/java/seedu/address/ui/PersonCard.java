@@ -31,7 +31,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label ISBN;
+    private Label isbn;
     @FXML
     private Label quantity;
     @FXML
@@ -44,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
         this.book = book;
         id.setText(displayedIndex + ". ");
         name.setText(book.getName().fullName);
-        ISBN.setText(book.getISBN().value);
+        isbn.setText(book.getIsbn().value);
         quantity.setText(book.getQuantity().value);
         price.setText(book.getPrice().value);
         book.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

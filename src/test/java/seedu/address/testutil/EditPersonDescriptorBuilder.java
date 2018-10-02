@@ -30,7 +30,7 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Book book) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(book.getName());
-        descriptor.setISBN(book.getISBN());
+        descriptor.setISBN(book.getIsbn());
         descriptor.setPrice(book.getPrice());
         descriptor.setQuantity(book.getQuantity());
         descriptor.setTags(book.getTags());
@@ -45,10 +45,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code ISBN} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Isbn} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setISBN(new ISBN(phone));
+        descriptor.setISBN(new Isbn(phone));
         return this;
     }
 

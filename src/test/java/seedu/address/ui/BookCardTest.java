@@ -9,20 +9,20 @@ import org.junit.Test;
 
 import guitests.guihandles.PersonCardHandle;
 import seedu.address.model.book.Book;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.BookBuilder;
 
 public class BookCardTest extends GuiUnitTest {
 
     @Test
     public void display() {
         // no tags
-        Book bookWithNoTags = new PersonBuilder().withTags(new String[0]).build();
+        Book bookWithNoTags = new BookBuilder().withTags(new String[0]).build();
         PersonCard personCard = new PersonCard(bookWithNoTags, 1);
         uiPartRule.setUiPart(personCard);
         assertCardDisplay(personCard, bookWithNoTags, 1);
 
         // with tags
-        Book bookWithTags = new PersonBuilder().build();
+        Book bookWithTags = new BookBuilder().build();
         personCard = new PersonCard(bookWithTags, 2);
         uiPartRule.setUiPart(personCard);
         assertCardDisplay(personCard, bookWithTags, 2);
@@ -30,7 +30,7 @@ public class BookCardTest extends GuiUnitTest {
 
     @Test
     public void equals() {
-        Book book = new PersonBuilder().build();
+        Book book = new BookBuilder().build();
         PersonCard personCard = new PersonCard(book, 0);
 
         // same book, same index -> returns true
@@ -47,7 +47,7 @@ public class BookCardTest extends GuiUnitTest {
         assertFalse(personCard.equals(0));
 
         // different book, same index -> returns false
-        Book differentBook = new PersonBuilder().withName("differentName").build();
+        Book differentBook = new BookBuilder().withName("differentName").build();
         assertFalse(personCard.equals(new PersonCard(differentBook, 0)));
 
         // same book, different index -> returns false

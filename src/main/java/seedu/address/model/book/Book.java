@@ -17,7 +17,7 @@ public class Book {
 
     // Identity fields
     private final Name name;
-    private final ISBN ISBN;
+    private final Isbn isbn;
     private final Price price;
 
     // Data fields
@@ -27,10 +27,10 @@ public class Book {
     /**
      * Every field must be present and not null.
      */
-    public Book(Name name, ISBN ISBN, Price price, Quantity quantity, Set<Tag> tags) {
-        requireAllNonNull(name, ISBN, price, quantity, tags);
+    public Book(Name name, Isbn isbn, Price price, Quantity quantity, Set<Tag> tags) {
+        requireAllNonNull(name, isbn, price, quantity, tags);
         this.name = name;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
         this.price = price;
         this.quantity = quantity;
         this.tags.addAll(tags);
@@ -40,8 +40,8 @@ public class Book {
         return name;
     }
 
-    public ISBN getISBN() {
-        return ISBN;
+    public Isbn getIsbn() {
+        return isbn;
     }
 
     public Price getPrice() {
@@ -71,7 +71,7 @@ public class Book {
 
         return otherBook != null
                 && otherBook.getName().equals(getName())
-                && (otherBook.getISBN().equals(getISBN()) || otherBook.getPrice().equals(getPrice()));
+                && (otherBook.getIsbn().equals(getIsbn()) || otherBook.getPrice().equals(getPrice()));
     }
 
     /**
@@ -90,7 +90,7 @@ public class Book {
 
         Book otherBook = (Book) other;
         return otherBook.getName().equals(getName())
-                && otherBook.getISBN().equals(getISBN())
+                && otherBook.getIsbn().equals(getIsbn())
                 && otherBook.getPrice().equals(getPrice())
                 && otherBook.getQuantity().equals(getQuantity())
                 && otherBook.getTags().equals(getTags());
@@ -99,15 +99,15 @@ public class Book {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, ISBN, price, quantity, tags);
+        return Objects.hash(name, isbn, price, quantity, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" ISBN: ")
-                .append(getISBN())
+                .append(" Isbn: ")
+                .append(getIsbn())
                 .append(" Price: ")
                 .append(getPrice())
                 .append(" Quantity: ")

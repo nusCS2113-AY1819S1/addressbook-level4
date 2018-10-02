@@ -11,7 +11,7 @@ import seedu.address.model.util.SampleDataUtil;
 /**
  * A utility class to help with building Book objects.
  */
-public class PersonBuilder {
+public class BookBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
@@ -19,25 +19,25 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private ISBN ISBN;
+    private Isbn isbn;
     private Price price;
     private Quantity quantity;
     private Set<Tag> tags;
 
-    public PersonBuilder() {
+    public BookBuilder() {
         name = new Name(DEFAULT_NAME);
-        ISBN = new ISBN(DEFAULT_PHONE);
+        isbn = new Isbn(DEFAULT_PHONE);
         price = new Price(DEFAULT_EMAIL);
         quantity = new Quantity(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code bookToCopy}.
+     * Initializes the BookBuilder with the data of {@code bookToCopy}.
      */
-    public PersonBuilder(Book bookToCopy) {
+    public BookBuilder(Book bookToCopy) {
         name = bookToCopy.getName();
-        ISBN = bookToCopy.getISBN();
+        isbn = bookToCopy.getIsbn();
         price = bookToCopy.getPrice();
         quantity = bookToCopy.getQuantity();
         tags = new HashSet<>(bookToCopy.getTags());
@@ -46,7 +46,7 @@ public class PersonBuilder {
     /**
      * Sets the {@code Name} of the {@code Book} that we are building.
      */
-    public PersonBuilder withName(String name) {
+    public BookBuilder withName(String name) {
         this.name = new Name(name);
         return this;
     }
@@ -54,7 +54,7 @@ public class PersonBuilder {
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Book} that we are building.
      */
-    public PersonBuilder withTags(String ... tags) {
+    public BookBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
         return this;
     }
@@ -62,29 +62,29 @@ public class PersonBuilder {
     /**
      * Sets the {@code Quantity} of the {@code Book} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
+    public BookBuilder withAddress(String address) {
         this.quantity = new Quantity(address);
         return this;
     }
 
     /**
-     * Sets the {@code ISBN} of the {@code Book} that we are building.
+     * Sets the {@code Isbn} of the {@code Book} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.ISBN = new ISBN(phone);
+    public BookBuilder withPhone(String phone) {
+        this.isbn = new Isbn(phone);
         return this;
     }
 
     /**
      * Sets the {@code Price} of the {@code Book} that we are building.
      */
-    public PersonBuilder withEmail(String email) {
+    public BookBuilder withEmail(String email) {
         this.price = new Price(email);
         return this;
     }
 
     public Book build() {
-        return new Book(name, ISBN, price, quantity, tags);
+        return new Book(name, isbn, price, quantity, tags);
     }
 
 }

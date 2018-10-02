@@ -3,7 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -31,7 +31,7 @@ public class PersonUtil {
     public static String getPersonDetails(Book book) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + book.getName().fullName + " ");
-        sb.append(PREFIX_ID + book.getISBN().value + " ");
+        sb.append(PREFIX_ISBN + book.getIsbn().value + " ");
         sb.append(PREFIX_PRICE + book.getPrice().value + " ");
         sb.append(PREFIX_QUANTITY + book.getQuantity().value + " ");
         book.getTags().stream().forEach(
@@ -46,7 +46,7 @@ public class PersonUtil {
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getISBN().ifPresent(phone -> sb.append(PREFIX_ID).append(phone.value).append(" "));
+        descriptor.getISBN().ifPresent(phone -> sb.append(PREFIX_ISBN).append(phone.value).append(" "));
         descriptor.getPrice().ifPresent(email -> sb.append(PREFIX_PRICE).append(email.value).append(" "));
         descriptor.getQuantity().ifPresent(address -> sb.append(PREFIX_QUANTITY).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {

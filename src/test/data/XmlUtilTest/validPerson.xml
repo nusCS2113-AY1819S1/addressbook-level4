@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <book>
     <name>Hans Muster</name>
-    <ISBN>9482424</ISBN>
+    <isbn>9482424</isbn>
     <price>hans@example</price>
     <quantity>4th street</quantity>
     <tagged>friends</tagged>
