@@ -9,6 +9,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class MailCommandParser implements Parser<MailCommand> {
     public MailCommand parse(String args) throws ParseException {
-        return new MailCommand();
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_ALL, CliSyntax.PREFIX_TAG);
+
+        if (argMultimap.getValue(CliSyntax.PREFIX_ALL).isPresent()) {
+            return new MailCommand(MailCommand.TYPE_ALL);
+        } else if (argMultimap.getValue(CliSyntax.PREFIX_TAG).isPresent()) {
+            return new MailCommand(MailCommand.TYPE_GROUPS, argMultimap.getValue(CliSyntax.PREFIX_TAG).get());
+        } else {
+            return new MailCommand(MailCommand.TYPE_SELECTION);
+        }
     }
 }
