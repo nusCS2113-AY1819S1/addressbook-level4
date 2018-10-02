@@ -25,7 +25,6 @@ public class FileEncryptor {
 
     public static final String MESSAGE_ADDRESS_BOOK_LOCKED = "Address book is locked, "
             + "please key in password";
-    public static final String MESSAGE_ADDRESS_BOOK_REFRESHED = "Address book needs to be restarted";
 
     private static String extension = ".encrypted";
     private static String filename = "";
@@ -37,7 +36,7 @@ public class FileEncryptor {
     };
 
     public FileEncryptor (String inputFileName) {
-        this.filename = inputFileName;
+        FileEncryptor.filename = inputFileName;
     }
 
     /**
@@ -52,7 +51,6 @@ public class FileEncryptor {
 
         try {
             if (fEncrypted.exists() && !fEncrypted.isDirectory() && f.exists() && !f.isDirectory()) {
-                // TODO: Locks the user from other commands until file has been decrypted
                 message = "File not decrypted, existing encrypted file already exist\n"
                         + "Please delete the newly created XML file";
             } else if (f.exists() && !f.isDirectory()) {
@@ -62,7 +60,6 @@ public class FileEncryptor {
             } else if (fEncrypted.exists() && !fEncrypted.isDirectory()) {
                 decryptFile(filename, password);
                 message = "File decrypted!";
-                // TODO: Send a request to refresh the addressbook
             }
 
         } catch (IOException e) {
