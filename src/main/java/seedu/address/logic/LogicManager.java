@@ -12,6 +12,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.IngredientManager;
 import seedu.address.model.IngredientModel;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -21,13 +22,13 @@ import seedu.address.model.person.Person;
  */
 public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
-    private final IngredientModel ingredientModel;
     private final Model model;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
+    private IngredientModel ingredientModel;
 
-    public LogicManager(IngredientModel ingredientModel, Model model) {
-        this.ingredientModel = ingredientModel;
+    public LogicManager(Model model) {
+        ingredientModel = new IngredientManager ();
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
