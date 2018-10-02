@@ -21,7 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
-import seedu.address.model.book.ISBN;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
 import seedu.address.model.book.Quantity;
@@ -96,7 +96,7 @@ public class EditCommand extends Command {
         assert bookToEdit != null;
 
         Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
-        ISBN updatedISBN = editBookDescriptor.getISBN().orElse(bookToEdit.getISBN());
+        Isbn updatedIsbn = editBookDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
         Price updatedPrice = editBookDescriptor.getPrice().orElse(bookToEdit.getPrice());
         Quantity updatedQuantity = editBookDescriptor.getQuantity().orElse(bookToEdit.getQuantity());
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
@@ -128,7 +128,7 @@ public class EditCommand extends Command {
      */
     public static class EditBookDescriptor {
         private Name name;
-        private ISBN isbn;
+        private Isbn isbn;
         private Price price;
         private Quantity quantity;
         private Set<Tag> tags;
@@ -162,11 +162,11 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setIsbn(ISBN isbn) {
+        public void setIsbn(Isbn isbn) {
             this.isbn = isbn;
         }
 
-        public Optional<ISBN> getIsbn() {
+        public Optional<Isbn> getIsbn() {
             return Optional.ofNullable(isbn);
         }
 

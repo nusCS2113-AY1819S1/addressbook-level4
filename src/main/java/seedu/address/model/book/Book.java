@@ -17,7 +17,7 @@ public class Book {
 
     // Identity fields
     private final Name name;
-    private final ISBN isbn;
+    private final Isbn isbn;
     private final Price price;
 
     // Data fields
@@ -27,7 +27,7 @@ public class Book {
     /**
      * Every field must be present and not null.
      */
-    public Book(Name name, ISBN isbn, Price price, Quantity quantity, Set<Tag> tags) {
+    public Book(Name name, Isbn isbn, Price price, Quantity quantity, Set<Tag> tags) {
         requireAllNonNull(name, isbn, price, quantity, tags);
         this.name = name;
         this.isbn = isbn;
@@ -40,7 +40,7 @@ public class Book {
         return name;
     }
 
-    public ISBN getIsbn() {
+    public Isbn getIsbn() {
         return isbn;
     }
 
@@ -112,7 +112,7 @@ public class Book {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" ISBN: ")
+                .append(" Isbn: ")
                 .append(getIsbn())
                 .append(" Price: ")
                 .append(getPrice())

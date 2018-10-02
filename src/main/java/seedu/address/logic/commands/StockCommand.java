@@ -32,14 +32,13 @@ public class StockCommand extends Command {
             + "by the index number used in the displayed book list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX(must be a positive integer) "
-            + "[" + PREFIX_PRICE + "PRICE] "
             + "[" + PREFIX_QUANTITY + "QUANTITY] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_QUANTITY + "5";
 
     public static final String MESSAGE_STOCK_PERSON_SUCCESS = "Stocked Book: %1$s";
-    public static final String MESSAGE_NOT_STOCKED = "At least one field to stock must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the quantity book.";
+    public static final String MESSAGE_NOT_STOCKED = "Increase to stock quantity must be provided.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the book inventory.";
 
     private final Index index;
     private final StockBookDescriptor stockBookDescriptor;
@@ -86,12 +85,12 @@ public class StockCommand extends Command {
         assert bookToStock != null;
 
         Name updatedName = (bookToStock.getName());
-        ISBN updatedISBN = (bookToStock.getISBN());
+        Isbn updatedIsbn = (bookToStock.getIsbn());
         Price updatedPrice = stockBookDescriptor.getPrice().orElse(bookToStock.getPrice());
         Quantity updatedQuantity = bookToStock.IncreaseQuantity(stockBookDescriptor.getQuantity());
         Set<Tag> updatedTags = (bookToStock.getTags());
 
-        return new Book(updatedName, updatedISBN, updatedPrice, updatedQuantity, updatedTags);
+        return new Book(updatedName, updatedIsbn, updatedPrice, updatedQuantity, updatedTags);
     }
 
     @Override
@@ -118,7 +117,7 @@ public class StockCommand extends Command {
      */
     public static class StockBookDescriptor {
         private Name name;
-        private ISBN ISBN;
+        private Isbn ISBN;
         private Price price;
         private Quantity quantity;
         private Set<Tag> tags;
@@ -152,11 +151,11 @@ public class StockCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setISBN(ISBN ISBN) {
+        public void setISBN(Isbn ISBN) {
             this.ISBN = ISBN;
         }
 
-        public Optional<ISBN> getISBN() {
+        public Optional<Isbn> getISBN() {
             return Optional.ofNullable(ISBN);
         }
 

@@ -19,14 +19,14 @@ public class PersonBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
-    private ISBN ISBN;
+    private Isbn ISBN;
     private Price price;
     private Quantity quantity;
     private Set<Tag> tags;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
-        ISBN = new ISBN(DEFAULT_PHONE);
+        ISBN = new Isbn(DEFAULT_PHONE);
         price = new Price(DEFAULT_EMAIL);
         quantity = new Quantity(DEFAULT_ADDRESS);
         tags = new HashSet<>();
@@ -68,10 +68,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code ISBN} of the {@code Book} that we are building.
+     * Sets the {@code Isbn} of the {@code Book} that we are building.
      */
     public PersonBuilder withPhone(String phone) {
-        this.ISBN = new ISBN(phone);
+        this.ISBN = new Isbn(phone);
         return this;
     }
 

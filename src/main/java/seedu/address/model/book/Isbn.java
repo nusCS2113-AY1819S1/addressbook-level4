@@ -7,20 +7,20 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Book's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class ISBN {
+public class Isbn {
 
 
     public static final String ISBN_NUMBERS_CONSTRAINTS =
-            "ISBN numbers should only contain numbers, and it should be at 10 or 13 digits long";
+            "Isbn numbers should only contain numbers, and it should be at 10 or 13 digits long";
     public static final String PHONE_VALIDATION_REGEX = "\\d{10,}";
     public final String value;
 
     /**
-     * Constructs a {@code ISBN}.
+     * Constructs a {@code Isbn}.
      *
      * @param phone A valid phone number.
      */
-    public ISBN(String phone) {
+    public Isbn(String phone) {
         requireNonNull(phone);
         checkArgument(isValidPhone(phone), ISBN_NUMBERS_CONSTRAINTS);
         value = phone;
@@ -41,8 +41,8 @@ public class ISBN {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ISBN // instanceof handles nulls
-                && value.equals(((ISBN) other).value)); // state check
+                || (other instanceof Isbn // instanceof handles nulls
+                && value.equals(((Isbn) other).value)); // state check
     }
 
     @Override

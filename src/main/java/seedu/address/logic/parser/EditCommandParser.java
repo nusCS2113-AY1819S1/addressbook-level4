@@ -42,12 +42,12 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditCommand.EditBookDescriptor editBookDescriptor = new EditBookDescriptor();
+        EditBookDescriptor editBookDescriptor = new EditBookDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editBookDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            editBookDescriptor.setISBN(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ID).get()));
+            editBookDescriptor.setIsbn(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ID).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             editBookDescriptor.setPrice(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_PRICE).get()));

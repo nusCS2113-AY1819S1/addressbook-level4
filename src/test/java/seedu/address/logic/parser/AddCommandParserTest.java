@@ -32,11 +32,8 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.book.Quantity;
-import seedu.address.model.book.Price;
-import seedu.address.model.book.Name;
-import seedu.address.model.book.Book;
-import seedu.address.model.book.ISBN;
+import seedu.address.model.book.*;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
@@ -115,7 +112,7 @@ public class AddCommandParserTest {
 
         // invalid phone
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_PHONE_DESC + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, ISBN.ISBN_NUMBERS_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Isbn.ISBN_NUMBERS_CONSTRAINTS);
 
         // invalid email
         assertParseFailure(parser, NAME_DESC_BOB + PHONE_DESC_BOB + INVALID_EMAIL_DESC + ADDRESS_DESC_BOB

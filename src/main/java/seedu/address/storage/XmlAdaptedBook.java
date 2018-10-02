@@ -10,11 +10,8 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.book.Book;
-import seedu.address.model.book.ISBN;
-import seedu.address.model.book.Name;
-import seedu.address.model.book.Price;
-import seedu.address.model.book.Quantity;
+import seedu.address.model.book.*;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -90,12 +87,12 @@ public class XmlAdaptedBook {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ISBN.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName()));
         }
-        if (!ISBN.isValidPhone(phone)) {
-            throw new IllegalValueException(ISBN.ISBN_NUMBERS_CONSTRAINTS);
+        if (!Isbn.isValidPhone(phone)) {
+            throw new IllegalValueException(Isbn.ISBN_NUMBERS_CONSTRAINTS);
         }
-        final ISBN modelIsbn = new ISBN(phone);
+        final Isbn modelIsbn = new Isbn(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
