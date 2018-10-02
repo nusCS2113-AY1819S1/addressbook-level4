@@ -1063,6 +1063,38 @@ Use case ends.
 +
 Use case ends.
 
+[discrete]
+=== Use case: Text prediction
+*MSS*
+
+1. User input some characters. +
+2. User requests text prediction with `Tab`. +
+3. Address book auto completes user input with closest prediction. +
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. There is more than one prediction.
+[none]
+** 2a1. Address book lists multiple predictions. +
+** 2a2. Use case resumes from step 1. +
+
+[discrete]
+=== Use case: Send email
+*MSS*
+
+1. User requests to send email with mail command. +
+2. Address book opens email application with appropriate recipients. +
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Input command has invalid format.
+[none]
+** 1a1. Address book displays format error. +
+Use case ends.
 
 [appendix]
 == Non Functional Requirements

@@ -18,7 +18,7 @@ By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+This address book is optimised and made for corporate users. It is able to store essential and critical information of each contact and boasts a friendly user interface for efficiency. Autocompletion and an ability to approximate word search allows for productivity when information is needed fast. It features proper tagging and groupings for better organisation of contacts. It is also able to store confidential information securely and has a backup file to prevent any accidental deletion.
 
 == Quick Start
 
@@ -250,12 +250,23 @@ Address book data are saved in the hard disk automatically after any command tha
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Encrypting data files: `password`
+=== Encrypting data files : `password`
 
 Encrypts the data file with your password. +
 Format: `password YOURPASSWORD` +
 All commands will be disabled during encryption, your data will be safely protected. +
 Please close the application after encrypting to clear the application and prevent others from accessing your data.
+
+=== Email contacts : `mail`
+
+Opens your system's default email application. +
+Format: `mail all/` or `mail t/TAG` or `mail`
+
+`all/` flag can be specified to open the email application with all contacts as recipients. +
+
+`t/TAG` flag can specified with a tag to open the email applications with all contacts belonging to that tag as recipients. +
+
+If no flags are specified, selected contacts are chosen as recipients.
 
 === Text prediction
 
@@ -264,17 +275,17 @@ This is similar to text prediction on shell programs and can be invoked by press
 If there are more than one prediction, the predictions will be listed in results window. +
 
 For example, typing `c` in the box and pressing `Tab` will auto complete to the `clear` command. +
-Typing `e` in the box and pressing `Tab` will list `edit` and `exit` in results window. +
+Typing `e` in the box and pressing `Tab` will list `edit`, `exit` and `export` in results window. +
 
 In general, text prediction works on all commands. +
 In particular, text prediction also works on the following attributes of a contact: +
 
-* `name` (flag: `n/`) +
+* `name` +
 
-This feature is supported by the `find` command. When using `find`, first input the attribute's flag, followed by the argument, then pressing `Tab` will invoke this feature. +
+This feature is supported by the `find` command. When using `find`, first input the command, followed by any string of characters, then pressing `Tab` will invoke this feature. +
 
-For example in an address book consisting a contact with the name `Alex Yeoh`, typing `find n/ A` and pressing `Tab` will auto complete to `find n/ Alex Yeoh`. +
-If no flags are given, be default, names are assumed to be predicted.
+For example in an address book consisting of a contact with the name `Alex Yeoh`, typing `find A` and pressing `Tab` will auto complete to `find Alex Yeoh`. +
+If no flags are given, by default, names are assumed to be predicted.
 
 == FAQ
 
@@ -299,4 +310,10 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Backup* : `backup`
+* *Restore* : `restore`
+* *Export* : `export`
+* *Import* : `import`
 * *Password* : `password`
+* *Email* : `mail` +
+e.g. `mail all/` or `mail t/TAG`

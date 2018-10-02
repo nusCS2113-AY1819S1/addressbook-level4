@@ -28,7 +28,7 @@ Responsibilities: Code quality assurance
 '''
 
 === Lim Pei Ying
-image::peiying.jpg[width="150", align="left"]
+image::peiying.jpeg[width="150", align="left"]
 {empty}[http://github.com/m133225[github]]
 
 Role: Developer +
