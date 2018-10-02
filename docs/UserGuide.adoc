@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Recruit Book - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,19 +12,19 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-F09-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F09-4`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+RecruitBook is a tool to help manage job candidates and available job offers for job agents and HR(Human Resources) department. RecruitBook is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). RecruitBook can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `recruitbook.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Recruit Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -33,9 +33,10 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list candidates`* : lists the names of all the candidates available
+* *`addc`* : add a job candidate to RecruitBook
+* *`add job`* : adds an available job to RecruitBook
+* **`delete`**`3` : deletes the 3rd job shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -47,176 +48,191 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 *Command Format*
 
 * Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Details labelled with “if any” must be filled in at least with `NA` if user finds it not applicable.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Gender can be specified by g/U (unrestricted), g/F (female) or g/M (male).
 ====
 
 === Viewing help : `help`
 
+Views help information of the various commands in RecruitBook. +
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a candidate / job : `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+==== Adds a candidate to the RecruitBook
+Format: `addc` +
+Supported tags: `n/`, `p/`, `e/`, `a/`, `g/`, `x/`, `j/`, `h/`, `s/`, `y/`, `c/`
 
-[TIP]
-A person can have any number of tags (including 0)
-
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-=== Listing all persons : `list`
-
-Shows a list of all persons in the address book. +
-Format: `list`
-
-=== Editing a person : `edit`
-
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+Entering this command will prompt user the following: +
+*`Enter the following details of the candidate in the format:`* +
+`n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/A LEVEL s/1200`
+* `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/NA`
 
-=== Locating persons by name: `find`
+After keying in the details, user will be further prompted for details of job experience: +
+*`Enter job experience (if any) of the candidate in the following format:`* +
+`j/JOB y/YEARS_OF_EXPERIENCE c/COMPANY`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Examples:
+
+* `j/Store Manager y/1 c/Mcdonalds`
+* `j/Cashier y/2 c/KFC`
+
+==== Adds a job offer to the RecruitBook
+Format: `addj`
+
+Entering this command will prompt user the following: +
+*`Enter the following details of the job in the format:`* +
+`c/COMPANY j/JOB_TITLE`
+
+Examples:
+
+*	`c/Macdonalds j/Store Manager`
+*	`c/KFC j/Cashier`
+
+After keying in the details, user will be further prompted for details of job requirements: +
+*`Enter the job requirements in the format:`* +
+`x/MIN_AGE-MAX_AGE h/HIGHEST_EDUCATION s/MIN_SALARY-MAX_SALARY g/GENDER`
+
+Examples:
+
+* `x/18-60 h/PRIMARY s/1000-1200 g/U`
+*	`x/18-30 h/O LEVEL s/1500-2000 g/M`
+
+==== Exits from the add job and add candidate interface without adding to RecruitBook
+Format: `cancel`
+
+=== Listing all : `list`
+
+==== Shows a list of all candidates interviewed by job agent +
+Format: `list candidates`
+
+Examples:
+
+* `John Doe p/91234567 e/johndoe@example.com a/72 Kent Ridge Rd j/Writer h/Business Degree s/$5000 j/Marketing assistant y/2 c/NUS`
+*	`Betsy Crower p/98765432 e/betsycrower@example.com ...`
+*	`Chris Lee p/91238765 e/chrislee@example.com ...`
+
+==== Shows a list of all job offers available at the moment +
+Format: `list jobs`
+
+Examples:
+
+*	`j/Software Engineer c/NUS ar/25-40 h/Computing Degree s/$6000-$8000 g/U`
+*	`j/Writer c/Singapore Press Holdings ar/25-30 h/A levels s/$5000-$6000 g/F`
+*	`j/Research Assistant c/A*STAR ar/25-50 h/Computing Degree s/$4000-$6000 g/M`
+
+=== Editing a candidate / job : `edit`
+
+==== Edits attributes of the candidate at the specified key `<NAME>`
+Format: `edit <NAME>`
+
+`<NAME>` must be the *full name* that was inserted using the `add` command
+
+Example:
+
+*	`edit John Doe p/91234567 e/johndoe@example.com` +
+(Edits the phone number and email address of John Doe to be 91234567 and johndoe@example.com respectively)
+
+*	`edit Betsy Crower t/` +
+(Edits and clears all existing tags belonging to Betsy Crower)
+
+==== Edits details of a job offer
+Format: `edit <INDEX>`
+
+Examples:
+
+*	`edit 1 x/20-30`
+(Edits the MIN_AGE-MAX_AGE attribute to be from 20 to 30 years of age for the first job offer)
+
+=== Locating candidates by search parameter : `find`
+
+Finds names of candidates from RecruitBook with a given search parameter. +
+Format: `find <tag>/KEYWORD` +
+Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find n/john` +
+(Returns any candidate having the name John)
 
-=== Deleting a person : `delete`
+* `find p/98` +
+(Returns any candidate having phone number with 98 inside)
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
+* `find e/helloworld@example.com` +
+(Returns any candidates having email helloworld@example.com)
 
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+=== Filtering by a specific tag : `filter`
 
-Examples:
+==== Filters and lists out the names of the people that falls within the category of the searched field
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Format: `filter <tag>/KEYWORD` +
+Supported tags: `h/`, `j/`, `s/`, `x/`
 
-=== Selecting a person : `select`
-
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+Searched field *must be of the full length* that is being recorded in the system
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+*	`filter h/O LEVEL` +
+(Returns any candidate with `O LEVEL` as the highest education level)
 
-=== Listing entered commands : `history`
+*	`filter j/Librarian` +
+(Returns any candidate searching for the job `Librarian`)
 
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+*	`filter s/$4000` +
+(Returns any candidate that expects a salary of $4000)
 
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
+*	`filter x/18` +
+(Returns any candidate that is aged 18)
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
+==== Exits from the filter interface and system proceeds to ask for next command
+Format: `cancel`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+=== Deleting a candidate / job : `delete`
 
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
+==== Deleting a specific candidate
+Format: `delete <NAME>`
 
-Examples:
+*	Deletes the candidate with the specified `NAME`
+*	NAME *must be the full name* of the candidate that is saved in the RecruitBook `e.g. John Doe`
+*	The full name can be found using the find function when a partial keyword is entered
 
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
+Example to delete a candidate:
 
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
+Step 1.	`find Betsy` +
+(Shows all saved candidates named Betsy)
 
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+Step 2. `delete Betsy Rose` +
+(Deletes ‘Betsy Rose’ from the RecruitBook)
 
-=== Redoing the previously undone command : `redo`
+==== Deleting a specific job offer
+Format: `delete <INDEX>`
 
-Reverses the most recent `undo` command. +
-Format: `redo`
+*	Deletes the job with the specified `INDEX`
+*	The index must be an index number shown in the displayed job list.
 
-Examples:
+Example to delete a job:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+Step 1.	`list jobs` +
+(Shows all available jobs)
 
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
+Step 2. `delete 5` +
+(Deletes the 5th job in the job list)
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the RecruitBook. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -226,7 +242,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+RecruitBook data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -238,23 +254,21 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous RecruitBook folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+*	*Help* : `help`
+*	*Add* : `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …` +
+            e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
+*	*List* : `list [jobs /candidates]`
+*	*Edit* : `edit <NAME> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `edit <INDEX>` +
+            e.g. `edit James Lee e/jameslee@example.com`, `edit 5`
+*	*Find* : `find <tag>/KEYWORD [MORE_KEYWORDS]` +
+            e.g. `find n/James n/Jake`
+*	*Filter* : `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
+            e.g. `filter h/O LEVEL`
+*	*Delete* : `delete <NAME>` or `delete <INDEX>` +
+            e.g. `delete James Lee`, `delete 5`
+*	*Clear* : `clear`
+*	*Exit* : `exit`
