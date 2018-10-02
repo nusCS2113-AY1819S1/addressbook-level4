@@ -13,6 +13,9 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.logic.commands.CreateCommand;
 import seedu.address.model.event.Event;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Helper methods related to events.
  */
@@ -46,9 +49,15 @@ public class EventsUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + event.getEventName().fullName + " ");
         sb.append(PREFIX_DESCRIPTION + event.getDescription().value + " ");
-        sb.append(PREFIX_START_DATE + event.getStartTime().toString() + " ");
-        sb.append(PREFIX_END_DATE + event.getEndTime().toString() + " ");
+        sb.append(PREFIX_START_DATE + formatDate(event.getStartTime()) + " ");
+        sb.append(PREFIX_END_DATE + formatDate(event.getEndTime()) + " ");
         sb.append(PREFIX_LOCATION + event.getLocation().value + " ");
         return sb.toString();
+    }
+
+    public static String formatDate(LocalDate date){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedString = date.format(formatter);
+        return formattedString;
     }
 }
