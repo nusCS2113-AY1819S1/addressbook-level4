@@ -35,6 +35,23 @@ public abstract class Ingredient {
         this.quantity = quantity;
     }
 
+    /**
+     * @param ingredient is the ingredient to check.
+     * @return true if both ingredients of the same name have
+     * at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two persons.
+     */
+    public boolean isSameIngredient(Ingredient ingredient) {
+        if (ingredient == this) {
+            return true;
+        }
+
+        return ingredient != null
+                && ingredient.getName().equals(getName());
+                // && (ingredient.getQuantity().equals(getQuantity()));
+                // TODO: consider whether this is necessary
+    }
+
     @Override
     public abstract boolean equals(Object other);
 
