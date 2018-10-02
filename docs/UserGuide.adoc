@@ -42,47 +42,92 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Features]]
 == Features
-Command Format: Follows the upstream addressbook
+====
+*Command Format*
 
-=== creating a group: 'group'
-Creates a group in the address book
-Format: group n/NAME
-Creates a group with the specified NAME
-Example: group n/CS2113
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+====
 
-=== Adding a group: 'cal'
-Adds a group to a date on the calendar
-Format: cal n/NAME d/DATE
-Adds a group with a specified NAME to a specified DATE (DDMMYY) on the calendar
-Example: cal n/CS2113 d/231018
+=== Creating a group: `group` `grp`
+Creates a group in the address book +
+Format: `group p/NAME` +
+Shortcut Format: `grp p/NAME` +
+****
+* Creates a group with the specified NAME
+****
 
-=== Populating a group: 'pop'
-Adds person(s) to a group
-Format: pop n/NAME INDEX [MORE_INDICES]
-Adds a person at specified INDEX(s) to group at specified NAME. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
-Example: pop n/CS2113 2 3 4 5
+Examples:
 
+* `group g/CS2113`
+* `grp g/CS2113`
 
-=== Create N number of group, distributed equally based on nationality or gender or both: 'makegroup'
-Make multiple groups of N determined by the user, with a group name which will enumerate from 1 and user is able to select the condition to distribute equally via Gender & Nationally.
-Format: makegroup gn/GROUP_NAME n/NthGROUP g/GENDER l/LOCAL
-Create N number of equally distributed groups based on gender & nationality. GROUP_NAME is specified in String format, which a number will enumerate from 1 at the end of the string. N must be a positive integer to tell the system the number of group to be created. GENDER & LOCAL are boolean flags to enable the system to distribute equally based on.
-Example: makegroup gn/T13- n/5 g/true l/true
+=== Adding a group: `cal`
+Adds a group to a date on the calendar +
+Format: `cal n/NAME d/DATE` +
+****
+* Adds a group with a specified NAME to a specified DATE (DDMMYY) on the calendar
+* Not implemented as of yet
+****
 
-=== Sending Email to Group of Persons: 'sendmail'
-Sends an email to all persons belonging to a group.
-Format: sendmail gn/GROUP_NAME t/EMAIL_TITLE [b/EMAIL_BODY]
-E.g. sendmail CS2113T Please be reminded to bring your calculator tomorrow.
+Examples:
 
+* cal n/CS2113 d/231018
 
+=== Populating a group: `pop`
+Adds person(s) to a group +
+Format: `pop n/NAME INDEX [MORE_INDICES]` +
+****
+* Adds a person at specified INDEX(s) to group at specified NAME.
+* The index refers to the index number shown in the displayed person list.
+* The index must be a positive integer 1, 2, 3, …​
+****
 
+Examples:
+
+* pop n/CS2113 2 3 4 5
+
+<<<<<<< HEAD
 === List a group of students: 'scorefilter a/56 or b/56'
 List out  students who score above/below certain grade.
-Example: scorefilter a/66
-Show the Standard deviation of the students exam score
+
 Format: scoreFilter [filter_standard]
 Example: scorefilter a/66
 This will list all the students who score above 56 in a new grade list
+=======
+
+=== Create N number of group, distributed equally based on nationality or gender or both: `makegroup`
+Make multiple groups of N determined by the user, with a group name which will enumerate from 1 and user is able to select the condition to distribute equally via Gender & Nationally +
+Format: `makegroup gn/GROUP_NAME n/NthGROUP g/GENDER l/LOCAL` +
+****
+* Create N number of equally distributed groups based on gender & nationality.
+* GROUP_NAME is specified in String format, which a number will enumerate from 1 at the end of the string.
+* N must be a positive integer to tell the system the number of group to be created.
+* GENDER & LOCAL are boolean flags to enable the system to distribute equally based on.
+****
+
+Examples:
+
+* makegroup gn/T13- n/5 g/true l/true
+
+=== Sending Email to Group of Persons: `sendmail`
+Sends an email to all persons belonging to a group +
+Format: `sendmail gn/GROUP_NAME t/EMAIL_TITLE [b/EMAIL_BODY]` +
+
+Examples:
+
+* sendmail CS2113T Please be reminded to bring your calculator tomorrow.
+
+=== List a group of students: `scorefilter`
+List out the standard deviation of the score data set from all students +
+Format: `scoreFilter [filter_standard]` +
+
+Examples:
+
+* scorefilter 56
+>>>>>>> 1b29d41f1daa8018b906db3069dfb16be5b504ac
 
 === Summary of students: 'summaryGrade'
 show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test.
@@ -93,30 +138,26 @@ Example: summaryGrade
 show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test
 
 === Adding/deleting tags automatically: 'addtag/deletetag'
-Add/delete certain tags for certain group of people (e.g student perform excellent;  students need to meet later; student need extra help)) automatically
-Format: addtag GROUP_NAME  tag/
-Format: deletetag  GROUP_NAME  tag/
-Example: addtag TAG_STRING tag/need more attention
-Example: deletetag TAG_STRING  tag/need more attention
-It will add a tag which is need more attention to all the students in the       studentScoreLow group
+Add/delete certain tags for certain group of people +
+Format: `addtag GROUP_NAME  tag/` +
+Format: `deletetag  GROUP_NAME  tag/` +
 
-====
-*Command Format*
+Examples:
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-====
+* addtag TAG_STRING tag/need more attention
+* deletetag TAG_STRING  tag/need more attention
 
-=== Viewing help : `help`
 
-Format: `help`
+=== Viewing help : `help` `h`
 
-=== Adding a person: `add`
+Format: `help` +
+Shortcut Format: `h`
+
+=== Adding a person: `add` `a`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+Shortcut Format: `a n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 
 [TIP]
 A person can have any number of tags (including 0)
@@ -124,17 +165,23 @@ A person can have any number of tags (including 0)
 Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `a n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
-=== Listing all persons : `list`
+=== Listing all persons : `list` `l`
 
 Shows a list of all persons in the address book. +
-Format: `list`
+Format: `list` +
+Shortcut Format: `l`
 
-=== Editing a person : `edit`
+=== Editing a person : `edit` `e`
 
 Edits an existing person in the address book. +
+<<<<<<< HEAD
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
+=======
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+Shortcut Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+>>>>>>> 1b29d41f1daa8018b906db3069dfb16be5b504ac
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
@@ -148,13 +195,14 @@ Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
+* `e 2 n/Betsy Crower t/` +
 Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating persons by name: `find` `f`
 
 Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find KEYWORD [MORE_KEYWORDS]` +
+Shortcut Format: `f KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -168,13 +216,14 @@ Examples:
 
 * `find John` +
 Returns `john` and `John Doe`
-* `find Betsy Tim John` +
+* `f Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete`
+=== Deleting a person : `delete` `d`
 
 Deletes the specified person from the address book. +
-Format: `delete INDEX`
+Format: `delete INDEX` +
+Shortcut Format: `d INDEX`
 
 ****
 * Deletes the person at the specified `INDEX`.
@@ -188,13 +237,14 @@ Examples:
 `delete 2` +
 Deletes the 2nd person in the address book.
 * `find Betsy` +
-`delete 1` +
+`d 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Selecting a person : `select`
+=== Selecting a person : `select` `s`
 
 Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
+Format: `select INDEX` +
+Shortcut Format: `s INDEX`
 
 ****
 * Selects the person and loads the Google search page the person at the specified `INDEX`.
@@ -208,13 +258,14 @@ Examples:
 `select 2` +
 Selects the 2nd person in the address book.
 * `find Betsy` +
-`select 1` +
+`s 1` +
 Selects the 1st person in the results of the `find` command.
 
-=== Listing entered commands : `history`
+=== Listing entered commands : `history` `his`
 
 Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Format: `history` +
+Shortcut Format: `his`
 
 [NOTE]
 ====
@@ -222,10 +273,11 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+=== Undoing previous command : `undo` `u`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Format: `undo` +
+Shortcut Format: `u`
 
 [NOTE]
 ====
@@ -246,12 +298,13 @@ The `undo` command fails as there are no undoable commands executed previously.
 * `delete 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`u` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+=== Redoing the previously undone command : `redo` `r`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+Format: `redo` +
+Shortcut Format: `r`
 
 Examples:
 
@@ -268,18 +321,20 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 `redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
+`r` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clear` `c`
 
 Clears all entries from the address book. +
-Format: `clear`
+Format: `clear` +
+Shortcut Format: `c`
 
-=== Exiting the program : `exit`
+=== Exiting the program : `exit` `ex`
 
 Exits the program. +
-Format: `exit`
+Format: `exit` +
+Shortcut Format: `ex`
 
 === Saving the data
 
