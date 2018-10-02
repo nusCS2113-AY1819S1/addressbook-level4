@@ -1020,6 +1020,7 @@ Use case ends.
 1. User requests to decrypt addressbook with password
 2. Addressbook shows decrypted message
 +
+[none]
 * 1a. Addressbook is already decrypted.
 +
 [none]
@@ -1030,6 +1031,7 @@ Use case ends.
 +
 [none]
 ** 1b1. Addressbook will display incorrect password message.
++
 ** Use case ends.
 
 
