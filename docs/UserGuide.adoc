@@ -1,4 +1,4 @@
-= iHelp - User Guide
+= ProManage - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -18,7 +18,7 @@ By: `Team 16-2`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-iHelp is *professional desktop application* for managing complex projects. More importantly, iHelp is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). iHelp can help you manage project scheduling effectively. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+ProManage is *professional desktop application* for managing complex projects. More importantly, iHelp is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). iHelp can help you manage project scheduling effectively. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -257,7 +257,7 @@ Department Head can only access his own department’s event
 
 Format: `help`
 
-==== Adding an event: `add`
+==== Adding an event: `create`
 
 Adds an event to the address book, via a series of prompts +
 Adding events +
