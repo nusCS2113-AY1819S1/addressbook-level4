@@ -20,7 +20,7 @@ import seedu.address.model.tag.Tag;
 public class SampleEventUtil {
     public static Event[] getSampleEvents() {
         return new Event[]{new Event(new EventName("CS2113 Lecture"), new Description("Very Hard"),
-                LocalDate.parse("2018-9-28"), LocalDate.parse("2018-11-9"), new Location("LT 100"))
+                LocalDate.parse("2018-09-28"), LocalDate.parse("2018-11-09"), new Location("LT 100"))
 
         };
     }
