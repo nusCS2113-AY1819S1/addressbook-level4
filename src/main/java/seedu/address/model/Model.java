@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -108,4 +109,8 @@ public interface Model {
      * @param editedPerson the new person.
      */
     void editPersonInTrie(Person personToEdit, Person editedPerson);
+
+    void setSelectedPersons(List<Person> personListView);
+
+    List<Person> getSelectedPersons();
 }
