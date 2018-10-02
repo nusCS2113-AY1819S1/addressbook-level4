@@ -46,7 +46,7 @@ public class PersonUtil {
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getISBN().ifPresent(phone -> sb.append(PREFIX_ID).append(phone.value).append(" "));
+        descriptor.getIsbn().ifPresent(phone -> sb.append(PREFIX_ID).append(phone.value).append(" "));
         descriptor.getPrice().ifPresent(email -> sb.append(PREFIX_PRICE).append(email.value).append(" "));
         descriptor.getQuantity().ifPresent(address -> sb.append(PREFIX_QUANTITY).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
