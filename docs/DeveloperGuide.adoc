@@ -861,7 +861,7 @@ To-do list
 1.  User enters ‘add’ command and keys in the task
 2.  To-do list shows the task entered in the list
 +
-
+[discrete]
 === Use case :Delete task
 *System*
 To-do list
@@ -876,7 +876,7 @@ To-do list
   2a. The list is empty.
   2b. The given index is invalid.
     2b1. To-do list shows an error message
-+
+
 
 [appendix]
 == Non Functional Requirements
