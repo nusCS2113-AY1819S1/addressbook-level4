@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.book.Book;
 
 /**
  * Panel containing the list of persons.
@@ -23,16 +23,16 @@ public class PersonListPanel extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML
-    private ListView<Person> personListView;
+    private ListView<Book> personListView;
 
-    public PersonListPanel(ObservableList<Person> personList) {
+    public PersonListPanel(ObservableList<Book> bookList) {
         super(FXML);
-        setConnections(personList);
+        setConnections(bookList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Person> personList) {
-        personListView.setItems(personList);
+    private void setConnections(ObservableList<Book> bookList) {
+        personListView.setItems(bookList);
         personListView.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
@@ -41,7 +41,7 @@ public class PersonListPanel extends UiPart<Region> {
         personListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
-                        logger.fine("Selection in person list panel changed to : '" + newValue + "'");
+                        logger.fine("Selection in book list panel changed to : '" + newValue + "'");
                         raise(new PersonPanelSelectionChangedEvent(newValue));
                     }
                 });
@@ -64,18 +64,18 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Book} using a {@code PersonCard}.
      */
-    class PersonListViewCell extends ListCell<Person> {
+    class PersonListViewCell extends ListCell<Book> {
         @Override
-        protected void updateItem(Person person, boolean empty) {
-            super.updateItem(person, empty);
+        protected void updateItem(Book book, boolean empty) {
+            super.updateItem(book, empty);
 
-            if (empty || person == null) {
+            if (empty || book == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(book, getIndex() + 1).getRoot());
             }
         }
     }

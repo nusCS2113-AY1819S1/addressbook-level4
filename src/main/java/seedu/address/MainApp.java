@@ -23,12 +23,8 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.*;
 import seedu.address.model.BookInventory;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.*;
+import seedu.address.storage.InventoryStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -43,7 +39,7 @@ public class MainApp extends Application {
 
     protected Ui ui;
     protected Logic logic;
-    protected Storage storage;
+    protected InventoryStorage storage;
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
@@ -59,8 +55,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        BookInventoryStorage bookInventoryStorage = new XmlBookInventoryStorage(userPrefs.getBookInventoryFilePath());
+        storage = new InventoryStorageManager(bookInventoryStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -78,7 +74,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    private Model initModelManager(InventoryStorage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyBookInventory> addressBookOptional;
         ReadOnlyBookInventory initialData;
         try {
@@ -182,7 +178,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping Quantity Book ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

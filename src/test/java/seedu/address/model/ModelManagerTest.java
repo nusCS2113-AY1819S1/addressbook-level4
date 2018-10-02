@@ -13,7 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.book.NameContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -78,7 +78,7 @@ public class ModelManagerTest {
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
+        differentUserPrefs.setBookInventoryFilePath(Paths.get("differentFilePath"));
         assertTrue(modelManager.equals(new ModelManager(bookInventory, differentUserPrefs)));
     }
 }

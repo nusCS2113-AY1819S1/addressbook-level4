@@ -10,19 +10,16 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.book.*;
+import seedu.address.model.book.Book;
 import seedu.address.model.tag.Tag;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Book.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedBook {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Book's %s field is missing!";
 
     @XmlElement(required = true)
     private String name;
@@ -37,15 +34,15 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedBook.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedBook() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedBook} with the given book details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedBook(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -56,26 +53,26 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Book into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedBook
      */
-    public XmlAdaptedPerson(Person source) {
+    public XmlAdaptedBook(Book source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        phone = source.getISBN().value;
+        email = source.getPrice().value;
+        address = source.getQuantity().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted book object into the model's Book object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted book
      */
-    public Person toModelType() throws IllegalValueException {
+    public Book toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -90,31 +87,31 @@ public class XmlAdaptedPerson {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ISBN.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_PHONE_CONSTRAINTS);
+        if (!ISBN.isValidPhone(phone)) {
+            throw new IllegalValueException(ISBN.MESSAGE_PHONE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final ISBN modelISBN = new ISBN(phone);
 
         if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!Price.isValidEmail(email)) {
+            throw new IllegalValueException(Price.MESSAGE_EMAIL_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Price modelPrice = new Price(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        if (!Quantity.isValidAddress(address)) {
+            throw new IllegalValueException(Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Quantity modelQuantity = new Quantity(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Book(modelName, modelISBN, modelPrice, modelQuantity, modelTags);
     }
 
     @Override
@@ -123,11 +120,11 @@ public class XmlAdaptedPerson {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedBook)) {
             return false;
         }
 
-        XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
+        XmlAdaptedBook otherPerson = (XmlAdaptedBook) other;
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)

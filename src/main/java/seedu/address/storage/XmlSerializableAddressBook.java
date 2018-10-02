@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
-import seedu.address.model.person.Person;
+import seedu.address.model.book.Book;
 
 /**
  * An Immutable BookInventory that is serializable to XML format
@@ -18,10 +18,10 @@ import seedu.address.model.person.Person;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate book(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedBook> persons;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -36,23 +36,23 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyBookInventory src) {
         this();
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(src.getBookList().stream().map(XmlAdaptedBook::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this addressbook into the model's {@code BookInventory} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * {@code XmlAdaptedBook}.
      */
     public BookInventory toModelType() throws IllegalValueException {
         BookInventory bookInventory = new BookInventory();
-        for (XmlAdaptedPerson p : persons) {
-            Person person = p.toModelType();
-            if (bookInventory.hasPerson(person)) {
+        for (XmlAdaptedBook p : persons) {
+            Book book = p.toModelType();
+            if (bookInventory.hasPerson(book)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            bookInventory.addPerson(person);
+            bookInventory.addPerson(book);
         }
         return bookInventory;
     }
