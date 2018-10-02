@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.storage.Comments;
 
+
 /**
  * Adds a event to the event manager.
  */
