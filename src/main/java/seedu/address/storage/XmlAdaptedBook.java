@@ -10,8 +10,11 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.book.*;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.ISBN;
+import seedu.address.model.book.Name;
+import seedu.address.model.book.Price;
+import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -59,7 +62,7 @@ public class XmlAdaptedBook {
      */
     public XmlAdaptedBook(Book source) {
         name = source.getName().fullName;
-        phone = source.getISBN().value;
+        phone = source.getIsbn().value;
         email = source.getPrice().value;
         address = source.getQuantity().value;
         tagged = source.getTags().stream()
@@ -92,7 +95,7 @@ public class XmlAdaptedBook {
         if (!ISBN.isValidPhone(phone)) {
             throw new IllegalValueException(ISBN.ISBN_NUMBERS_CONSTRAINTS);
         }
-        final ISBN modelISBN = new ISBN(phone);
+        final ISBN modelIsbn = new ISBN(phone);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
@@ -103,7 +106,9 @@ public class XmlAdaptedBook {
         final Price modelPrice = new Price(email);
 
         if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName())
+            );
         }
         if (!Quantity.isValidAddress(address)) {
             throw new IllegalValueException(Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
@@ -111,7 +116,7 @@ public class XmlAdaptedBook {
         final Quantity modelQuantity = new Quantity(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Book(modelName, modelISBN, modelPrice, modelQuantity, modelTags);
+        return new Book(modelName, modelIsbn, modelPrice, modelQuantity, modelTags);
     }
 
     @Override
