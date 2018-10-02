@@ -78,30 +78,47 @@ Examples:
 * `add n/PaymentToJohn d/20-8-2018 m/-10`
 * `add n/PaymentFromBetty t/friend m/+10 d/10-11-2018 t/classmate`
 
-=== Listing all persons : `list`
+=== Listing all records satisfying some criteria : list [Vincent]
 
-Shows a list of all persons in the expense book. +
-Format: `list`
+Shows a list of all records in the address book which fulfills a certain criteria. +
+There are 3 modes, default mode, single argument mode and dual argument mode. +
+Format: +
+Default mode: `list` +
+Single argument mode: `list d/DATE` +
+Dual argument mode: `list d/START_DATE END_DATE`
 
-=== Editing a person : `edit`
+****
+* The default mode will list down all records in the addressbook. +
+* The single argument mode will list down all records with the date equal to DATE specified in the format. +
+* The dual argument mode will list down all records with date equal to or later than START_DATE
+and earlier than or equal to END_DATE +
+****
 
-Edits an existing person in the expense book. +
+Examples:
+
+* `list`
+* `list d/10-11-2018`
+* `list d/10-11-2018 11-11-2018`
+
+=== Editing a record : `edit`
+
+Edits an existing record in the expense book. +
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the displayed record list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the record will be removed i.e adding of tags is not cumulative.
+* You can remove all the record's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and income expense of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+Edits the phone number and income expense of the 1st record to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Edits the name of the 2nd record to be `Betsy Crower` and clears all existing tags.
 
 === Locating persons by name: `find`
 
@@ -123,14 +140,14 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
-=== Deleting a person : `delete`
+=== Deleting a record : `delete`
 
-Deletes the specified person from the expense book. +
+Deletes the specified record from the expense book. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the record at the specified `INDEX`.
+* The index refers to the index number shown in the displayed record list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -138,19 +155,19 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the expense book.
+Deletes the 2nd record in the expense book.
 * `find Betsy` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st record in the results of the `find` command.
 
-=== Selecting a person : `select`
+=== Selecting a record : `select`
 
-Selects the person identified by the index number used in the displayed person list. +
+Selects the record identified by the index number used in the displayed record list. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Selects the record and loads the Google search page the record at the specified `INDEX`.
+* The index refers to the index number shown in the displayed record list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
@@ -158,10 +175,30 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the expense book.
+Selects the 2nd record in the expense book.
 * `find Betsy` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st record in the results of the `find` command.
+
+=== Locating records by tag: `find`
+
+Finds records with tags that match any of the given keywords. +
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the tags are searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Records with tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `findtag friend` +
+Returns any record with `\*friend*`
+* `findtag friend food shopping` +
+Returns all records having tags `\*friend*`, `\*food*`, or `\*shopping*`
 
 === Listing entered commands : `history`
 
