@@ -892,7 +892,7 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== 1.  Use case: Input expense for a certain activity.
+=== 1.  Use case: Input expense for a certain activity. [Vincent]
 
 *MSS*
 
@@ -927,7 +927,7 @@ Use case ends.
 ** Use case resumes at step 6.
 
 [discrete]
-=== 2.  Use case: Delete expense entry.
+=== 2.  Use case: Delete expense entry. [Linh Chi]
 
 *MSS*
 
@@ -959,30 +959,29 @@ Use case ends.
 ** Use case resumes at step 4.
 
 [discrete]
-=== 3.  Use case: See history of expenses for a certain period
+=== 3.  Use case: See history of expenses for a certain period [Vincent]
 
 *MSS*
 
-1.  User requests to see history.
-2.  FinancialPlanner requests for the period intended
-3.  User enters the intended period.
-4.  FinancialPlanner requests for confirmation from user.
-5.  User confirms the period.
-6.  FinancialPlanner returns the history of all expenses within the period.
+1.  User requests to see history within a certain date period.
+2.  FinancialPlanner returns the history of all expenses within the period.
 +
 Use case ends.
 
 *Extensions*
 
-* 3a. User’s input is of invalid form.
-** FinancialPlanner throws invalid format error and shows the format needed.
-** Use case resumes at step 2.
-* 5a. User declines the confirmation.
-** Use case resumes at step 2.
-* 6a. There is no history.
-** FinancialPlanner notifies that there is no history.
+* 1a. User’s command is of invalid form.
+** FinancialPlanner throws invalid command error.
+** Use case resumes at step 1.
+* 1a. User does not specify any arguments.
+** FinancialPlanner returns all records in the FinancialPlanner.
 ** Use case ends.
-** Use case resumes at step 6.
+* 1a. The arguments are of incorrect format
+** FinancialPlanner throws invalid command error and shows an example of a correct command
+** Use case resumes at step 1.
+* 2a. There is no history.
+** FinancialPlanner shows a blank list.
+** Use case ends.
 
 [discrete]
 === 4.  Use case: Clear history of expenses
@@ -1027,7 +1026,7 @@ Use case ends.
 
 
 [discrete]
-=== 6.  Use case: Search expenses based on category
+=== 6.  Use case: Search expenses based on category [Zhi Thon]
 
 *MSS*
 
@@ -1044,7 +1043,7 @@ Use case ends.
 ** FinancialPlanner shows no expenditure for selected category
 
 [discrete]
-=== 7.  Use case: Summary of expenditure by category
+=== 7.  Use case: Summary of expenditure by category [Vincent]
 
 *MSS*
 
@@ -1117,7 +1116,7 @@ Use case ends.
 ** Use case resumes at step 2
 
 [discrete]
-=== 11. Use case: Create daily limit for expenses
+=== 11. Use case: Create daily limit for expenses [Oscar]
 
 *MSS*
 
