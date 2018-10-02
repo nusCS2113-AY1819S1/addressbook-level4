@@ -1,19 +1,24 @@
 package seedu.address.model;
 
-import javafx.collections.ObservableList;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.UniqueEventList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.UniqueEventList;
 
 /**
  * Wraps all data at the event-list level
  * Duplicates are not allowed (by .isSameEvent comparison)
  */
 public class EventList implements ReadOnlyEventList {
+
     private final UniqueEventList events;
+
+    public EventList() {
+        events = new UniqueEventList();
+    }
 
     /**
      * @param toBeCopied
@@ -21,10 +26,6 @@ public class EventList implements ReadOnlyEventList {
     public EventList(ReadOnlyEventList toBeCopied) {
         events = new UniqueEventList();
         resetData(toBeCopied);
-    }
-
-    public EventList() {
-        events = new UniqueEventList();
     }
 
     //// list overwrite operations
@@ -45,7 +46,7 @@ public class EventList implements ReadOnlyEventList {
         this.setEvents(newData.getEventList());
     }
 
-    //// person-level operations
+    //// event-level operations
 
     /**
      * Returns true if an event with the same identity as {@code event} exists in the address book.

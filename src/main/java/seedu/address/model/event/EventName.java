@@ -8,6 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable;
  */
 public class EventName {
+
     public static final String MESSAGE_EVENT_CONSTRAINTS =
             "Event should only contain alphanumeric characters and spaces, and it should not be blank";
 
