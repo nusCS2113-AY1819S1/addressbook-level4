@@ -51,15 +51,15 @@ public class CreateGroupCommandParserTest {
          */
     }
 
-        @Test
-        public void parse_optionalFieldsMissing_success() {
-            // No tags
-            /** TODO
-            Group expectedGroup = new GroupBuilder(LAB).withTags().build();
-            assertParseSuccess(parser, GROUP_NAME_DESC_LAB + GROUP_LOC_DESC_LAB,
-                    new CreateGroupCommand(expectedGroup));
-            */
-         }
+    @Test
+    public void parse_optionalFieldsMissing_success() {
+        // No tags
+        /** TODO require to fix testing
+        Group expectedGroup = new GroupBuilder(LAB).withTags().build();
+        assertParseSuccess(parser, GROUP_NAME_DESC_LAB + GROUP_LOC_DESC_LAB,
+                new CreateGroupCommand(expectedGroup));
+        */
+     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
