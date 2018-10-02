@@ -29,9 +29,9 @@ Responsibilities: UI
 
 '''
 
-=== Ash
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Ashley Teo
+image::20170610_111528.jpg[width="150", align="left"]
+{empty}[http://github.com/iashcole[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
