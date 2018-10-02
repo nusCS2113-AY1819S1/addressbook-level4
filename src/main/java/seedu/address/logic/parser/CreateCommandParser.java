@@ -23,8 +23,8 @@ import seedu.address.model.event.Location;
 public class CreateCommandParser implements Parser<CreateCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the CreateCommand
+     * and returns an CreateCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public CreateCommand parse(String args) throws ParseException {
