@@ -956,7 +956,7 @@ To-do list
 
    2a. The list is empty.
    2b. The given index is invalid
-	2b1. To-do list shows an error message 
+     2b1. To-do list shows an error message 
 
 [discrete]         
 === Use case 10: Receiving reminders for a task
