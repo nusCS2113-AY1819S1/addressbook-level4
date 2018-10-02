@@ -1,13 +1,14 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class CreateCommandTest {
 
@@ -43,4 +44,7 @@ public class CreateCommandTest {
         // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
+
+    // TODO: ADD MORE TESTS FOR CREATE COMMAND
+
 }
