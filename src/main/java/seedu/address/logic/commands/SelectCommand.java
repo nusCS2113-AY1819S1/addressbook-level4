@@ -8,8 +8,10 @@ import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -18,7 +20,7 @@ import seedu.address.model.person.Person;
  */
 public class SelectCommand extends Command {
 
-    public static final String COMMAND_WORD = "select";
+    public static final String COMMAND_WORD = CliSyntax.COMMAND_SELECT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects the person identified by the index number used in the displayed person list.\n"
@@ -35,6 +37,12 @@ public class SelectCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+
+        if (fe.isLocked()) {
+            throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
+        }
+
         requireNonNull(model);
 
         List<Person> filteredPersonList = model.getFilteredPersonList();
