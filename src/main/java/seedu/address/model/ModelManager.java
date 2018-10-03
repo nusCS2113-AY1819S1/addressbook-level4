@@ -12,7 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+
+import seedu.address.model.distributor.Distributor;
+
 import seedu.address.model.person.Product;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -21,7 +25,11 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedAddressBook versionedAddressBook;
+
+    private final FilteredList<Distributor> filteredDistributors;
+
     private final FilteredList<Product> filteredProducts;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -33,7 +41,11 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
+
+        filteredDistributors = new FilteredList<>(versionedAddressBook.getDistributorList());
+
         filteredProducts = new FilteredList<>(versionedAddressBook.getPersonList());
+
     }
 
     public ModelManager() {
@@ -57,6 +69,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasDistributor(Distributor distributor) {
+        requireNonNull(distributor);
+        return versionedAddressBook.hasDistributor(distributor);
+    }
+
+    @Override
     public boolean hasPerson(Product product) {
         requireNonNull(product);
         return versionedAddressBook.hasPerson(product);
@@ -69,6 +87,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteDistributor(Distributor target) {
+        versionedAddressBook.removeDistributor(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public void addPerson(Product product) {
         versionedAddressBook.addPerson(product);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -76,10 +100,23 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void addDistributor(Distributor distributor) {
+        versionedAddressBook.addDistributor(distributor);
+        updateFilteredDistributorList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+    }
+
     public void updatePerson(Product target, Product editedProduct) {
         requireAllNonNull(target, editedProduct);
-
         versionedAddressBook.updatePerson(target, editedProduct);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateDistributor(Distributor target, Distributor editedDistributor) {
+        requireAllNonNull(target, editedDistributor);
+
+        versionedAddressBook.updateDistributor(target, editedDistributor);
         indicateAddressBookChanged();
     }
 
@@ -89,6 +126,18 @@ public class ModelManager extends ComponentManager implements Model {
      * Returns an unmodifiable view of the list of {@code Product} backed by the internal list of
      * {@code versionedAddressBook}
      */
+
+
+    @Override
+    public ObservableList<Distributor> getFilteredDistributorList() {
+        return FXCollections.unmodifiableObservableList(filteredDistributors);
+    }
+
+    @Override
+    public void updateFilteredDistributorList(Predicate<Distributor> predicate) {
+        requireNonNull(predicate);
+        filteredDistributors.setPredicate(predicate);
+
     @Override
     public ObservableList<Product> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredProducts);
@@ -98,6 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<Product> predicate) {
         requireNonNull(predicate);
         filteredProducts.setPredicate(predicate);
+
     }
 
     //=========== Undo/Redo =================================================================================
@@ -142,8 +192,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         // state check
+        // MERGE CONFLICT HERE, INTEGRATED BOTH
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
+                && filteredDistributors.equals(other.filteredDistributors);
                 && filteredProducts.equals(other.filteredProducts);
     }
 

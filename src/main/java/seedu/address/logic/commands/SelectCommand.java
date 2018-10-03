@@ -42,6 +42,7 @@ public class SelectCommand extends Command {
         List<Product> filteredProductList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= filteredProductList.size()) {
+
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
