@@ -12,5 +12,6 @@ public class GradebookAddParser implements Parser<GradebookAddCommand> {
     public GradebookAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_GB_ITEM,
                 + PREFIX_GB_MAXMARKS, PREFIX_GB_WEIGHTAGE);
+        return new GradebookAddCommand(component);
     }
 }
