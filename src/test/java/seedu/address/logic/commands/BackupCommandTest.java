@@ -1,32 +1,28 @@
 package seedu.address.logic.commands;
 
-import org.junit.*;
-import seedu.address.commons.core.*;
-import seedu.address.commons.util.*;
-import seedu.address.logic.*;
-import seedu.address.logic.commands.exceptions.*;
-import seedu.address.model.*;
-
-import java.io.File;
-import java.nio.file.*;
-import java.util.logging.*;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import seedu.address.logic.CommandHistory;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
  */
 public class BackupCommandTest {
 
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "BackupCommandTest");
     private Model model;
     private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "BackupCommandTest");
-
 
     @Before
     public void setUp() {
