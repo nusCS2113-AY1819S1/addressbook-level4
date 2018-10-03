@@ -44,12 +44,27 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     /**
+     * Gets the URL with parameters
+     */
+    public static URL getSearchPageUrlWithoutName() {
+        return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+    }
+
+    /**
+     * Formats HTML file path into string
+     */
+    private String formatEventPageUrl(Event event) {
+        URL searchPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+        String searchPageString = searchPage.toString() + "?name=" + event.getName();
+
+        return searchPageString;
+    }
+
+    /**
      * Loads a HTML file with variables passed into it
      */
     private void loadEventPage(Event event) throws MalformedURLException {
-        URL searchPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
-        String searchPageString = searchPage.toString() + "?name=" + event.getName();
-        searchPage = new URL(searchPageString);
+        URL searchPage = new URL(formatEventPageUrl(event));
         loadPage(searchPage.toExternalForm());
     }
 
