@@ -20,7 +20,7 @@ import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 
 public class AddCommandTest {
 
@@ -40,7 +40,7 @@ public class AddCommandTest {
     @Test
     public void execute_personAcceptedByModel_addSuccessful() throws Exception {
         ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Event validEvent = new PersonBuilder().build();
+        Event validEvent = new EventBuilder().build();
 
         CommandResult commandResult = new AddCommand(validEvent).execute(modelStub, commandHistory);
 
@@ -51,7 +51,7 @@ public class AddCommandTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Event validEvent = new PersonBuilder().build();
+        Event validEvent = new EventBuilder().build();
         AddCommand addCommand = new AddCommand(validEvent);
         ModelStub modelStub = new ModelStubWithPerson(validEvent);
 
@@ -62,8 +62,8 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Event alice = new PersonBuilder().withName("Alice").build();
-        Event bob = new PersonBuilder().withName("Bob").build();
+        Event alice = new EventBuilder().withName("Alice").build();
+        Event bob = new EventBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
 

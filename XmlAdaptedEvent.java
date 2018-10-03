@@ -10,12 +10,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
-import seedu.address.model.event.Email;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
+import seedu.address.model.event.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -28,13 +23,13 @@ public class XmlAdaptedEvent {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
+    private String contact;
+    @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
     private String address;
-    @XmlElement(required = true)
-    private String attendance;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -48,13 +43,12 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
-    public XmlAdaptedEvent(String name, String phone, String email, String address, Attendance attendance,
-                           List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedEvent(String name, String contact, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
+        this.contact = contact;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.attendance = attendance.toString();
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -67,10 +61,10 @@ public class XmlAdaptedEvent {
      */
     public XmlAdaptedEvent(Event source) {
         name = source.getName().fullName;
+        contact = source.getContact().fullContactName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
-        attendance = Boolean.toString(source.getAttendance().value);
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -94,6 +88,11 @@ public class XmlAdaptedEvent {
             throw new IllegalValueException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
         final Name modelName = new Name(name);
+
+        if (contact == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        }
+        final Contact modelContact = new Contact(contact);
 
         if (phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
@@ -119,17 +118,8 @@ public class XmlAdaptedEvent {
         }
         final Address modelAddress = new Address(address);
 
-        if (attendance == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    Attendance.class.getSimpleName()));
-        }
-        if (!Attendance.isValidAttendance(attendance)) {
-            throw new IllegalValueException(Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
-        }
-        final Attendance modelAttendance = new Attendance(attendance);
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Event(modelName, modelPhone, modelEmail, modelAddress, modelAttendance, modelTags);
+        return new Event(modelName, modelContact, modelPhone, modelEmail, modelAddress, modelTags);
     }
 
     @Override
@@ -144,6 +134,7 @@ public class XmlAdaptedEvent {
 
         XmlAdaptedEvent otherEvent = (XmlAdaptedEvent) other;
         return Objects.equals(name, otherEvent.name)
+                && Objects.equals(contact, otherEvent.contact)
                 && Objects.equals(phone, otherEvent.phone)
                 && Objects.equals(email, otherEvent.email)
                 && Objects.equals(address, otherEvent.address)
