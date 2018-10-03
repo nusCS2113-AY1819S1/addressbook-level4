@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalDouble;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -21,8 +20,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Name;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -176,7 +175,7 @@ public class EditCommand extends Command {
         }
 
         public void setStatus(List<Integer> status) {
-            this.status = (status !=  null) ? new ArrayList<>(status) : null;
+            this.status = (status != null) ? new ArrayList<>(status) : null;
         }
 
         public Optional<List<Integer>> getStatus() {

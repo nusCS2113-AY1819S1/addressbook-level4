@@ -63,7 +63,7 @@ public class ItemCard extends UiPart<Region> {
         this.item = item;
         id.setText(displayedIndex + ". ");
         name.setText(item.getName().fullName);
-        quantity.setText(item.getQuantity()+"");
+        quantity.setText(item.getQuantity().toString());
         minQuantity.setText(item.getMinQuantity().toString());
         statusReady.setText(item.getStatus().get(0).toString());
         statusOnLoan.setText(item.getStatus().get(1).toString());

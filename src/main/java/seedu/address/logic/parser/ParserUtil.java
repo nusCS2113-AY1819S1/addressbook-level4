@@ -18,6 +18,9 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_QUANTITY = "Quantity is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_MIN_QUANTITY =
+            "Minimum Quantity is not a non-zero unsigned integer.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -48,30 +51,23 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     *
+     * Parses a {@code String quantity} into an {@code Integer quantity}
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException
      */
-    public static String parseStatus(String status) throws ParseException {
-        requireNonNull(status);
-        String trimmedStatus = status.trim();
-        /*
-        if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_PHONE_CONSTRAINTS);
-        }
-        */
-        return trimmedStatus;
-    }
-
     public static Integer parseQuantity(String quantity) throws ParseException {
         requireNonNull(quantity);
         String trimmedQuantity = quantity.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedQuantity)) {
+            throw new ParseException(MESSAGE_INVALID_QUANTITY);
+        }
         return Integer.parseInt(trimmedQuantity);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code String minQuantity} into an {@code Integer minQuantity}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
@@ -79,6 +75,9 @@ public class ParserUtil {
     public static Integer parseMinQuantity(String minQuantity) throws ParseException {
         requireNonNull(minQuantity);
         String trimmedMinQuantity = minQuantity.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedMinQuantity)) {
+            throw new ParseException(MESSAGE_INVALID_MIN_QUANTITY);
+        }
         return Integer.parseInt(trimmedMinQuantity);
     }
 
