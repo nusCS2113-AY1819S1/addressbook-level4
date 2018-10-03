@@ -17,8 +17,8 @@ image::icedcoffeeboy.jpg[width="150", align="left"]
 **Role:** Developer +
 **Responsibilities:** Code Quality Assurance
 
-
 '''
+
 
 === Jie Liang Ang
 image::jieliangang.jpg[width="150", align="left"]
@@ -29,12 +29,14 @@ image::jieliangang.jpg[width="150", align="left"]
 
 '''
 
+
 === Jeevan Neralakere Somashekhar
 image::jeevz10.jpg[width="150", align="left"]
 {empty}[https://github.com/Jeevz10[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
 **Responsibilities:** Documentation
+
 
 '''
 
