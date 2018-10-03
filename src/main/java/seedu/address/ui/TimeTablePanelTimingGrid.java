@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
+import javafx.geometry.VPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
@@ -21,16 +23,16 @@ import seedu.address.commons.core.LogsCenter;
  */
 
 public class TimeTablePanelTimingGrid extends UiPart<Region> {
-
-    // TODO ALEXIS: fxml file: need to tweak!
     private static final String FXML = "TimeTablePanelTimingGrid.fxml";
+    private static final int DEFAULT_START_HOUR = 10;
+    private static final int DEFAULT_END_HOUR = 18;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private GridPane timingGrid;
 
-    public TimeTablePanelTimingGrid() {
+    public TimeTablePanelTimingGrid(int startHour, int endHour) {
         super(FXML);
 
         // To prevent triggering events for typing inside the TimeTablePanelTimingGrid
@@ -38,19 +40,27 @@ public class TimeTablePanelTimingGrid extends UiPart<Region> {
 
         //TODO ALEXIS: resizer, add, init functions.
 
-        populateTimings();
+        populateTimings(startHour, endHour);
+    }
+
+    public TimeTablePanelTimingGrid() {
+        this(DEFAULT_START_HOUR, DEFAULT_END_HOUR);
     }
 
     /**
      * Populates the timings on the top row from 1000 to 1800
      */
-    private void populateTimings() {
-        int startTime = 1000;
-        int endTime = 1800;
+    private void populateTimings(int startHour, int endHour) {
+        for (int currHour = startHour, col = 1; currHour < endHour; currHour++, col += 2) {
+            Label hourLabel = new Label(Integer.toString(currHour));
+            GridPane.setHalignment(hourLabel, HPos.RIGHT);
+            GridPane.setValignment(hourLabel, VPos.BOTTOM);
+            timingGrid.add(hourLabel, col, 0);
 
-        for (int temp = startTime, col = 0; temp <= endTime; temp += 100, col++) {
-            String myLabel = Integer.toString(temp);
-            timingGrid.add(new Label(myLabel), col, 0);
+            Label minuteLabel = new Label("00");
+            GridPane.setHalignment(minuteLabel, HPos.LEFT);
+            GridPane.setValignment(minuteLabel, VPos.BOTTOM);
+            timingGrid.add(minuteLabel, col + 1, 0);
         }
     }
 }

@@ -9,13 +9,13 @@
   <VBox>
     <StackPane fx:id="timeTablePanelTimingGridPlaceholder" SplitPane.resizableWithParent="false">
       <padding>
-        <Insets top="10" right="10" bottom="10" left="10" />
+        <Insets top="10" right="10" bottom="0" left="10" />
       </padding>
     </StackPane>
 
     <StackPane fx:id="timeTablePanelMainGridPlaceholder">
       <padding>
-        <Insets top="10" right="10" bottom="10" left="10" />
+        <Insets top="0" right="10" bottom="10" left="10" />
       </padding>
     </StackPane>
   </VBox>
