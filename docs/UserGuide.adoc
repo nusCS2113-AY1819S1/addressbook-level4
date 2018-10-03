@@ -130,7 +130,7 @@ Returns any event having names `Sports Day`, `Comp Sci Workshop`, or `Good Day`
 
 === Deleting a event : `delete`
 
-AdminL: Deletes the specified event from the Event Manager. +
+Admin: Deletes the specified event from the Event Manager. +
 Format: `delete INDEX`
 
 ****
@@ -150,7 +150,7 @@ Deletes the 1st event in the results of the `find` command.
 
 === Selecting a event : `select`
 
-Selects the event identified by the index number used in the displayed event list. +
+Admin/User: Selects the event identified by the index number used in the displayed event list. +
 Format: `select INDEX`
 
 ****
@@ -170,7 +170,7 @@ Selects the 1st event in the results of the `find` command.
 
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological order. +
+Admin/User: Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
 
 [NOTE]
@@ -230,12 +230,42 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the Event Manager. +
+Admin: Clears all entries from the Event Manager. +
 Format: `clear`
+
+=== Register for event : `register`
+
+User: RSVPs for an event. +
+Format: `register INDEX`
+
+=== Remove registration from event : `unregister`
+
+User: Removes RSVPs for an event. +
+Format: `unregister INDEX`
+
+=== View participant list : `viewParticipants`
+
+Admin/User: View names and total number of event attendees  +
+Format: `viewParticipants INDEX`
+
+=== Set reminders : `setReminder`
+
+Admin/User: Sets a reminder for the event identified by the index number used in the displayed event list. Reminder will alert the user 1 hour before the commencement time of the event. +
+Format: `setReminder INDEX`
+
+=== Clear reminders : `setReminder`
+
+Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list. +
+Format: `removeReminder INDEX`
+
+=== Clear reminders : `showReminders`
+
+Admin/User: Show all events with reminders set +
+Format: `showReminders`
 
 === Exiting the program : `exit`
 
-Exits the program. +
+Admin/User: Exits the program. +
 Format: `exit`
 
 === Saving the data
