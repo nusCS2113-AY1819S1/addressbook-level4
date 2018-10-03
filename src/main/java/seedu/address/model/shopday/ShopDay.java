@@ -11,20 +11,22 @@ import java.util.Set;
 import java.util.Iterator;
 
 public class ShopDay {
-    private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+    private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private static LocalDateTime time;
 
     private TreeMap<String,Transaction> shopDayRecord;
+    private TreeMap<String,Reminder> reminderRecord;
     private String date;
     private boolean isActiveDay;
 
     private void initialise() {
         this.shopDayRecord = new TreeMap<>();
+        this.reminderRecord = new TreeMap<>();
         this.openDay();
     }
 
     public ShopDay() {
-        this.date = timeFormatter.format(time.now());
+        this.date = dayFormat.format(time.now());
         this.initialise();
     }
 
@@ -44,6 +46,9 @@ public class ShopDay {
         else {
             shopDayRecord.put(transactionTime,transaction);
         }
+    }
+
+    public void addReminder() {
     }
 
     public String getDaysTransactions() {
