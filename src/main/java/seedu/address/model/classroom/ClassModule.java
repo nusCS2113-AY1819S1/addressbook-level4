@@ -1,11 +1,14 @@
 package seedu.address.model.classroom;
 
+import javax.xml.bind.annotation.XmlElement;
+
 import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a module code in the app.
  */
 public class ClassModule {
+    @XmlElement
     private String value;
 
     public ClassModule() {
