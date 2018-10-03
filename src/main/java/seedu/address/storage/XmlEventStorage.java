@@ -16,7 +16,6 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyEventList;
 
 
-
 /**
  * A class to access EventList data stored as an xml file on the hard disk.
  */
@@ -41,7 +40,6 @@ public class XmlEventStorage implements EventStorage {
 
     /**
      * Similar to {@link #readEventList()}
-     *
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
@@ -70,7 +68,6 @@ public class XmlEventStorage implements EventStorage {
 
     /**
      * Similar to {@link #saveEventList(ReadOnlyEventList)}
-     *
      * @param filePath location of the data. Cannot be null
      */
     public void saveEventList(ReadOnlyEventList eventList, Path filePath) throws IOException {

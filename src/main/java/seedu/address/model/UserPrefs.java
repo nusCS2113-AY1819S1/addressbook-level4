@@ -13,9 +13,7 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private Path addressBookFilePath = Paths.get("data", "addressbook.xml");
-
     private Path eventListPath = Paths.get("data", "eventlist.xml");
-
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);

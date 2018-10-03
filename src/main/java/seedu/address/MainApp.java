@@ -91,11 +91,23 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-
-        Optional<ReadOnlyEventList> eventListOptional;
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialDataAddressBook;
+        Optional<ReadOnlyEventList> eventListOptional;
+        ReadOnlyAddressBook initialAddressData;
         ReadOnlyEventList initialEventListData;
+        try {
+            addressBookOptional = storage.readAddressBook();
+            if (!addressBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            }
+            initialAddressData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+            initialAddressData = new AddressBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+            initialAddressData = new AddressBook();
+        }
 
         try {
             eventListOptional = storage.readEventList();
@@ -111,28 +123,7 @@ public class MainApp extends Application {
             initialEventListData = new EventList();
         }
 
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            initialDataAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialDataAddressBook = new AddressBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialDataAddressBook = new AddressBook();
-        }
-
-        //Testing on saving a sample event list xml
-        try {
-            storage.saveEventList(initialEventListData);
-        } catch (IOException e) {
-            System.err.println("Error saving event list!");
-        }
-
-        return new ModelManager(initialDataAddressBook, initialEventListData, userPrefs);
+        return new ModelManager(initialAddressData, initialEventListData, userPrefs);
     }
 
     private void initLogging(Config config) {
