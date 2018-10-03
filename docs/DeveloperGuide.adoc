@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Financial Planner - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T09-4/main
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
