@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.item.Name;
+import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -57,13 +58,13 @@ public class ParserUtil {
      *
      * @throws ParseException
      */
-    public static Integer parseQuantity(String quantity) throws ParseException {
+    public static Quantity parseQuantity(String quantity) throws ParseException {
         requireNonNull(quantity);
         String trimmedQuantity = quantity.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedQuantity)) {
+        if (!Quantity.isValidQuantity(Integer.parseInt(trimmedQuantity))) {
             throw new ParseException(MESSAGE_INVALID_QUANTITY);
         }
-        return Integer.parseInt(trimmedQuantity);
+        return new Quantity(Integer.parseInt(trimmedQuantity));
     }
 
     /**
@@ -72,13 +73,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Integer parseMinQuantity(String minQuantity) throws ParseException {
+    public static Quantity parseMinQuantity(String minQuantity) throws ParseException {
         requireNonNull(minQuantity);
         String trimmedMinQuantity = minQuantity.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedMinQuantity)) {
+        if (!Quantity.isValidQuantity(Integer.parseInt(trimmedMinQuantity))) {
             throw new ParseException(MESSAGE_INVALID_MIN_QUANTITY);
         }
-        return Integer.parseInt(trimmedMinQuantity);
+        return new Quantity(Integer.parseInt(trimmedMinQuantity));
     }
 
     /**

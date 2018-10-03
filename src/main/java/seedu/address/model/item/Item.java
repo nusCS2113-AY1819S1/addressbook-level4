@@ -24,8 +24,8 @@ public class Item {
 
     // Identity fields
     private final Name name;
-    private final Integer quantity;
-    private final Integer minQuantity;
+    private final Quantity quantity;
+    private final Quantity minQuantity;
 
     // Data fields
     private final List<Integer> status = new ArrayList<>();
@@ -34,23 +34,23 @@ public class Item {
     /**
      * Every field must be present and not null.
      */
-    public Item(Name name, Integer quantity, Integer minQuantity, Set<Tag> tags) {
+    public Item(Name name, Quantity quantity, Quantity minQuantity, Set<Tag> tags) {
         requireAllNonNull(name, quantity, minQuantity, tags);
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status.add(quantity);
+        this.status.add(quantity.toInteger());
         this.status.add(0);
         this.status.add(0);
         this.tags.addAll(tags);
     }
 
-    public Item(Name name, Integer quantity, Integer minQuantity, List<Integer> status, Set<Tag> tags) {
+    public Item(Name name, Quantity quantity, Quantity minQuantity, List<Integer> status, Set<Tag> tags) {
         requireAllNonNull(name, quantity, minQuantity, tags);
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status.add(quantity);
+        this.status.add(quantity.toInteger());
         this.status.add(0);
         this.status.add(0);
         this.tags.addAll(tags);
@@ -60,11 +60,11 @@ public class Item {
         return name;
     }
 
-    public Integer getQuantity() {
+    public Quantity getQuantity() {
         return quantity;
     }
 
-    public Integer getMinQuantity() {
+    public Quantity getMinQuantity() {
         return minQuantity;
     }
 
