@@ -1,14 +1,17 @@
 package seedu.address.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.note.Note;
 
 /**
-This class is a storage controller for the other datasets that work alongside the main student list.
+ * This class is a storage controller for the other datasets that work alongside the main student list.
  */
 public class StorageController {
 
@@ -22,12 +25,17 @@ public class StorageController {
     private static ArrayList<Module> moduleStorage = new ArrayList<Module>();
     private static ArrayList<Classroom> classesStorage = new ArrayList<Classroom>();
     private static ArrayList<Course> gradebookStorage = new ArrayList<Course>();
-    private static ArrayList<Course> noteStorage = new ArrayList<Course>();
+    private static ArrayList<Note> noteStorage = new ArrayList<Note>();
+
+
+
 
     /**
      * This method retrieves all datasets saved locally.
      */
     public static void retrieveData() {
+        createFiles();
+
         try {
             CourseManager cm = XmlUtil.getDataFromFile(Paths.get(STORAGE_COURSES), CourseManager.class);
             courseStorage = cm.getList();
@@ -38,14 +46,38 @@ public class StorageController {
             ClassroomManager crm = (ClassroomManager) XmlUtil.getDataFromFile(
                     Paths.get(STORAGE_CLASSES), ClassroomManager.class);
             classesStorage = crm.getList();
+
+            NotesManager nm = (NotesManager) XmlUtil.getDataFromFile(Paths.get(STORAGE_NOTES), NotesManager.class);
+            noteStorage = nm.getList();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * This method stores all data within the arraylists above to local storage.
+     This method creates files for all datasets if they do not exist on the local filesystem.
      */
+    private static void createFiles() {
+        File gradebook = new File(STORAGE_GRADEBOOK);
+        File classes = new File(STORAGE_CLASSES);
+        File courses = new File(STORAGE_COURSES);
+        File modules = new File(STORAGE_MODULES);
+        File notes = new File(STORAGE_NOTES);
+        try {
+            gradebook.createNewFile();
+            classes.createNewFile();
+            courses.createNewFile();
+            modules.createNewFile();
+            notes.createNewFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+  This method stores all data within the arraylists above to local storage.
+   */
     public static void storeData() {
         try {
             CourseManager cm = new CourseManager();
@@ -59,6 +91,10 @@ public class StorageController {
             ClassroomManager crm = new ClassroomManager();
             crm.setClassroomList(classesStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_CLASSES), crm);
+
+            NotesManager nm = new NotesManager();
+            nm.setNotesList(noteStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_NOTES), nm);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,11 +132,11 @@ public class StorageController {
         StorageController.gradebookStorage = gradebookStorage;
     }
 
-    public static ArrayList<Course> getNoteStorage() {
+    public static ArrayList<Note> getNoteStorage() {
         return noteStorage;
     }
 
-    public static void setNoteStorage(ArrayList<Course> noteStorage) {
+    public static void setNoteStorage(ArrayList<Note> noteStorage) {
         StorageController.noteStorage = noteStorage;
     }
 }
