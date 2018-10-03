@@ -15,7 +15,7 @@ image::icedcoffeeboy.jpg[width="150", align="left"]
 {empty}[https://github.com/IcedCoffeeBoy[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Storage
+**Responsibilities:** Code Quality Assurance
 
 
 '''
@@ -25,7 +25,7 @@ image::jieliangang.jpg[width="150", align="left"]
 {empty}[https://github.com/jieliangang[github]] [<<#, portfolio>>]
 
 **Role:** Team Lead +
-**Responsibilities:** UI
+**Responsibilities:** Scheduling and Tracking
 
 '''
 
@@ -34,7 +34,7 @@ image::jeevz10.jpg[width="150", align="left"]
 {empty}[https://github.com/Jeevz10[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Logic
+**Responsibilities:** Documentation
 
 '''
 
@@ -43,7 +43,7 @@ image::perrythewang.jpg[width="150", align="left"]
 {empty}[https://github.com/perrythewang[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Event Model
+**Responsibilities:** Testing
 
 '''
 
@@ -52,6 +52,6 @@ image::fr3ddy4.jpg[width="150", align="left"]
 {empty}[https://github.com/fr3ddy4[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Logic
+**Responsibilities:** Integration
 
 '''

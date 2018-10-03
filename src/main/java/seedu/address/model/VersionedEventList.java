@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code AddressBook} that keeps track of its own history.
+ * {@code EventList} that keeps track of its own history.
  */
 public class VersionedEventList extends EventList {
 
@@ -20,7 +20,7 @@ public class VersionedEventList extends EventList {
     }
 
     /**
-     * Saves a copy of the current {@code AddressBook} state at the end of the state list.
+     * Saves a copy of the current {@code EventList} state at the end of the state list.
      * Undone states are removed from the state list.
      */
     public void commit() {
@@ -34,7 +34,7 @@ public class VersionedEventList extends EventList {
     }
 
     /**
-     * Restores the address book to its previous state.
+     * Restores the event list to its previous state.
      */
     public void undo() {
         if (!canUndo()) {
@@ -45,7 +45,7 @@ public class VersionedEventList extends EventList {
     }
 
     /**
-     * Restores the address book to its previously undone state.
+     * Restores the event list to its previously undone state.
      */
     public void redo() {
         if (!canRedo()) {
@@ -56,14 +56,14 @@ public class VersionedEventList extends EventList {
     }
 
     /**
-     * Returns true if {@code undo()} has address book states to undo.
+     * Returns true if {@code undo()} has event list states to undo.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
     }
 
     /**
-     * Returns true if {@code redo()} has address book states to redo.
+     * Returns true if {@code redo()} has event list states to redo.
      */
     public boolean canRedo() {
         return currentStatePointer < eventListStateList.size() - 1;
