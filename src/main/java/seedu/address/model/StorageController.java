@@ -31,7 +31,8 @@ public class StorageController {
         try {
             CourseManager cm = (CourseManager) XmlUtil.getDataFromFile(Paths.get(STORAGE_COURSES), CourseManager.class);
             courseStorage = cm.getList();
-            ClassroomManager crm = (ClassroomManager) XmlUtil.getDataFromFile(Paths.get(STORAGE_CLASSES), ClassroomManager.class);
+            ClassroomManager crm = (ClassroomManager) XmlUtil.getDataFromFile(
+                    Paths.get(STORAGE_CLASSES), ClassroomManager.class);
             classesStorage = crm.getList();
         } catch (Exception e) {
             e.printStackTrace();
