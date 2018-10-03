@@ -30,6 +30,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.classroom.ClassModule;
+import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -141,7 +142,9 @@ public class AddressBookParserTest {
                 + " " + PREFIX_CLASSNAME + className
                 + " " + PREFIX_MODULECODE + moduleCode
                 + " " + PREFIX_MAXENROLLMENT + maxEnrollment);
-        assertEquals(new ClassCreateCommand(new Classroom(className), new ClassModule(moduleCode), new Enrollment(maxEnrollment)), command);
+        assertEquals(new ClassCreateCommand(new Classroom(new ClassName(className),
+                new ClassModule(moduleCode),
+                new Enrollment(maxEnrollment))), command);
     }
 
     @Test

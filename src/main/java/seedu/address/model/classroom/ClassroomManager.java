@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  This classroom manager stores classroom for Trajectory.
  */
+@XmlRootElement(namespace = "seedu.address.model")
 public class ClassroomManager {
     @XmlElementWrapper(name = "classrooms")
     @XmlElement(name = "class")

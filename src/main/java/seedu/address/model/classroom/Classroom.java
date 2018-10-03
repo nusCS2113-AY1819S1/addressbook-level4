@@ -4,15 +4,21 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 
 /**
  * Represents a classroom in the app.
  */
+@XmlRootElement(name = "class")
 public class Classroom {
     //class-specific fields
-    private final ClassName className;
-    private final ClassModule moduleCode;
-    private final Enrollment maxEnrollment;
+    private ClassName className;
+    private ClassModule moduleCode;
+    private Enrollment maxEnrollment;
+
+    public Classroom() {
+    }
 
     public Classroom(ClassName className, ClassModule moduleCode, Enrollment maxEnrollment) {
         requireNonNull(className);
