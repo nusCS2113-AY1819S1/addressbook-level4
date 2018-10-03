@@ -20,11 +20,8 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.book.Book;
+import seedu.address.model.book.*;
 import seedu.address.model.book.Isbn;
-import seedu.address.model.book.Name;
-import seedu.address.model.book.Price;
-import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -47,9 +44,9 @@ public class EditCommand extends Command {
             + PREFIX_ID + "91234567 "
             + PREFIX_PRICE + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the quantity book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the quantity book.";
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
@@ -76,23 +73,23 @@ public class EditCommand extends Command {
         }
 
         Book bookToEdit = lastShownList.get(index.getZeroBased());
-        Book editedBook = createEditedBook(bookToEdit, editBookDescriptor);
+        Book editedBook = createEditedPerson(bookToEdit, editBookDescriptor);
 
         if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
-            throw new CommandException(MESSAGE_DUPLICATE_BOOK);
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.updateBook(bookToEdit, editedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
-        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedBook));
     }
 
     /**
      * Creates and returns a {@code Book} with the details of {@code bookToEdit}
      * edited with {@code editBookDescriptor}.
      */
-    private static Book createEditedBook(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
+    private static Book createEditedPerson(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
         assert bookToEdit != null;
 
         Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());

@@ -40,8 +40,8 @@ import seedu.address.model.Model;
 import seedu.address.model.book.*;
 import seedu.address.model.book.Book;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.BookBuilder;
+import seedu.address.testutil.BookUtil;
 
 public class AddCommandSystemTest extends BookInventorySystemTest {
 
@@ -71,7 +71,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a book with all fields same as another book in the address book except name -> added */
-        toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
+        toAdd = new BookBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
@@ -79,8 +79,8 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
         /* Case: add a book with all fields same as another book in the address book except phone and email
          * -> added
          */
-        toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new BookBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        command = BookUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty address book -> added */
@@ -111,26 +111,26 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
         /* Case: add a duplicate book -> rejected */
-        command = PersonUtil.getAddCommand(HOON);
+        command = BookUtil.getAddCommand(HOON);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
         /* Case: add a duplicate book except with different phone -> rejected */
-        toAdd = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new BookBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
+        command = BookUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
         /* Case: add a duplicate book except with different email -> rejected */
-        toAdd = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new BookBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
+        command = BookUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
         /* Case: add a duplicate book except with different address -> rejected */
-        toAdd = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
-        command = PersonUtil.getAddCommand(toAdd);
+        toAdd = new BookBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        command = BookUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
         /* Case: add a duplicate book except with different tags -> rejected */
-        command = PersonUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
+        command = BookUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
         /* Case: missing name -> rejected */
@@ -150,7 +150,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "adds " + PersonUtil.getPersonDetails(toAdd);
+        command = "adds " + BookUtil.getPersonDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */
@@ -181,7 +181,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
      * {@code toAdd}.<br>
-     * 4. {@code InventoryStorage} and {@code PersonListPanel} equal to the corresponding components in
+     * 4. {@code InventoryStorage} and {@code BookListPanel} equal to the corresponding components in
      * the current model added with {@code toAdd}.<br>
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
@@ -190,7 +190,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
      * @see BookInventorySystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Book toAdd) {
-        assertCommandSuccess(PersonUtil.getAddCommand(toAdd), toAdd);
+        assertCommandSuccess(BookUtil.getAddCommand(toAdd), toAdd);
     }
 
     /**
@@ -210,7 +210,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Book)} except asserts that
      * the,<br>
      * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code InventoryStorage} and {@code PersonListPanel} equal to the corresponding components in
+     * 2. {@code InventoryStorage} and {@code BookListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
      * @see AddCommandSystemTest#assertCommandSuccess(String, Book)
      */
@@ -227,7 +227,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code InventoryStorage} and {@code PersonListPanel} remain unchanged.<br>
+     * 4. {@code InventoryStorage} and {@code BookListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code BookInventorySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Price;
 import seedu.address.model.book.Quantity;
 import seedu.address.model.book.Name;
-import seedu.address.model.book.Isbn;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedBookTest {

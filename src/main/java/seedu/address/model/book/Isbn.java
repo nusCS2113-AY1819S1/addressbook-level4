@@ -5,32 +5,32 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Book's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidIsbn(String)}
  */
 public class Isbn {
 
 
     public static final String ISBN_NUMBERS_CONSTRAINTS =
             "Isbn numbers should only contain numbers, and it should be at 10 or 13 digits long";
-    public static final String PHONE_VALIDATION_REGEX = "\\d{10,}";
+    public static final String ISBN_VALIDATION_REGEX = "\\d{10,}";
     public final String value;
 
     /**
      * Constructs a {@code Isbn}.
      *
-     * @param phone A valid phone number.
+     * @param isbn A valid Isbn number.
      */
-    public Isbn(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidPhone(phone), ISBN_NUMBERS_CONSTRAINTS);
-        value = phone;
+    public Isbn(String isbn) {
+        requireNonNull(isbn);
+        checkArgument(isValidIsbn(isbn), ISBN_NUMBERS_CONSTRAINTS);
+        value = isbn;
     }
 
     /**
      * Returns true if a given string is a valid phone number.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidIsbn(String test) {
+        return test.matches(ISBN_VALIDATION_REGEX);
     }
 
     @Override

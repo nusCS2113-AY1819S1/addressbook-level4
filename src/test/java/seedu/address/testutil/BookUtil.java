@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class for Book.
  */
-public class PersonUtil {
+public class BookUtil {
 
     /**
      * Returns an add command string for adding the {@code book}.
@@ -31,7 +31,7 @@ public class PersonUtil {
     public static String getPersonDetails(Book book) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + book.getName().fullName + " ");
-        sb.append(PREFIX_ID + book.getISBN().value + " ");
+        sb.append(PREFIX_ID + book.getIsbn().value + " ");
         sb.append(PREFIX_PRICE + book.getPrice().value + " ");
         sb.append(PREFIX_QUANTITY + book.getQuantity().value + " ");
         book.getTags().stream().forEach(

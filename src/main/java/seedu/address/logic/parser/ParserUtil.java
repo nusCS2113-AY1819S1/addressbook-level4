@@ -59,7 +59,7 @@ public class ParserUtil {
     public static Isbn parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Isbn.isValidPhone(trimmedPhone)) {
+        if (!Isbn.isValidIsbn(trimmedPhone)) {
             throw new ParseException(Isbn.ISBN_NUMBERS_CONSTRAINTS);
         }
         return new Isbn(trimmedPhone);

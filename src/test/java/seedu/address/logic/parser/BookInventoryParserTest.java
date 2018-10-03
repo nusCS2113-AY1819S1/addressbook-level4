@@ -31,8 +31,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Book;
 import seedu.address.model.book.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.BookBuilder;
+import seedu.address.testutil.BookUtil;
 
 public class BookInventoryParserTest {
     @Rule
@@ -42,8 +42,8 @@ public class BookInventoryParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Book book = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(book));
+        Book book = new BookBuilder().build();
+        AddCommand command = (AddCommand) parser.parseCommand(BookUtil.getAddCommand(book));
         assertEquals(new AddCommand(book), command);
     }
 
@@ -62,10 +62,10 @@ public class BookInventoryParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Book book = new PersonBuilder().build();
+        Book book = new BookBuilder().build();
         EditBookDescriptor descriptor = new EditPersonDescriptorBuilder(book).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + BookUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

@@ -21,8 +21,8 @@ Responsibilities: Dispatching jobs
 '''
 
 === Lee Gui Yong
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/koh[github]] [<<johndoe#, portfolio>>]
+image::leeguiyong.jpg[width="150", align="left"]
+{empty}[https://github.com/guiyong96[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI

@@ -185,7 +185,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Quantity Book ] =============================");
+        logger.info("============================ [ Stopping BookInventory ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

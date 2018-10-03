@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditBookDescriptor;
 import seedu.address.model.book.*;
 import seedu.address.model.book.Book;
 import seedu.address.model.tag.Tag;
@@ -18,10 +17,10 @@ public class EditPersonDescriptorBuilder {
     private EditCommand.EditBookDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
-        descriptor = new EditBookDescriptor();
+        descriptor = new EditCommand.EditBookDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditBookDescriptor descriptor) {
+    public EditPersonDescriptorBuilder(EditCommand.EditBookDescriptor descriptor) {
         this.descriptor = new EditCommand.EditBookDescriptor(descriptor);
     }
 
@@ -29,7 +28,7 @@ public class EditPersonDescriptorBuilder {
      * Returns an {@code EditBookDescriptor} with fields containing {@code book}'s details
      */
     public EditPersonDescriptorBuilder(Book book) {
-        descriptor = new EditBookDescriptor();
+        descriptor = new EditCommand.EditBookDescriptor();
         descriptor.setName(book.getName());
         descriptor.setIsbn(book.getISBN());
         descriptor.setPrice(book.getPrice());

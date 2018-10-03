@@ -42,8 +42,8 @@ import seedu.address.model.Model;
 import seedu.address.model.book.*;
 import seedu.address.model.book.Book;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.BookBuilder;
+import seedu.address.testutil.BookUtil;
 
 public class EditCommandSystemTest extends BookInventorySystemTest {
 
@@ -59,7 +59,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         Index index = INDEX_FIRST_PERSON;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Book editedBook = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Book editedBook = new BookBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedBook);
 
         /* Case: undo editing the last book in the list -> last book restored */
@@ -85,7 +85,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         assertNotEquals(getModel().getFilteredBookList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedBook = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
+        editedBook = new BookBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedBook);
 
         /* Case: edit a book with new values same as another book's values but with different phone and email
@@ -94,14 +94,14 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         index = INDEX_SECOND_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedBook = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedBook = new BookBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedBook);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
         Book bookToEdit = getModel().getFilteredBookList().get(index.getZeroBased());
-        editedBook = new PersonBuilder(bookToEdit).withTags().build();
+        editedBook = new BookBuilder(bookToEdit).withTags().build();
         assertCommandSuccess(command, index, editedBook);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
@@ -112,7 +112,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         bookToEdit = getModel().getFilteredBookList().get(index.getZeroBased());
-        editedBook = new PersonBuilder(bookToEdit).withName(VALID_NAME_BOB).build();
+        editedBook = new BookBuilder(bookToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedBook);
 
         /* Case: filtered book list, edit index within bounds of address book but out of bounds of book list
@@ -181,7 +181,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a book with new values same as another book's values -> rejected */
-        executeCommand(PersonUtil.getAddCommand(BOB));
+        executeCommand(BookUtil.getAddCommand(BOB));
         assertTrue(getModel().getAddressBook().getBookList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredBookList().get(index.getZeroBased()).equals(BOB));

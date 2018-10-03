@@ -19,8 +19,8 @@ import seedu.address.model.BookInventory;
 import seedu.address.storage.XmlAdaptedBook;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.BookBuilder;
+import seedu.address.testutil.BookInventoryBuilder;
 import seedu.address.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -128,9 +128,9 @@ public class XmlUtilTest {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new BookInventory());
+        BookInventoryBuilder builder = new BookInventoryBuilder(new BookInventory());
         dataToWrite = new XmlSerializableAddressBook(
-                builder.withPerson(new PersonBuilder().build()).build());
+                builder.withPerson(new BookBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
