@@ -14,4 +14,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_MATRIC = new Prefix("i/");
     public static final Prefix PREFIX_COURSECODE = new Prefix("c/");
 
+    public static final Prefix PREFIX_NOTE_MODULECODE = new Prefix("m/");
+    public static final Prefix PREFIX_NOTE_TEXT = new Prefix("t/");
 }
