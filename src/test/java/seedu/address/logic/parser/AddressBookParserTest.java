@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClassCreateCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -126,6 +127,11 @@ public class AddressBookParserTest {
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
         assertTrue(parser.parseCommand("undo 3") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_classCreate() throws Exception {
+        assertTrue(parser.parseCommand(ClassCreateCommand.COMMAND_WORD) instanceof ClassCreateCommand);
     }
 
     @Test
