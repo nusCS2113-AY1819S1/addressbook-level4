@@ -78,4 +78,9 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Backup current address book to storage.
+     */
+    void backupAddressBook();
 }
