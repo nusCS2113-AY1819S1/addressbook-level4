@@ -6,7 +6,10 @@ import static java.util.Objects.requireNonNull;
  * Represents a module code in the app.
  */
 public class ClassModule {
-    public final String value;
+    public String value;
+
+    public ClassModule() {
+    }
 
     public ClassModule(String moduleCode) {
         requireNonNull(moduleCode);

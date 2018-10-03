@@ -6,7 +6,10 @@ import static java.util.Objects.requireNonNull;
  * Represents a classname.
  */
 public class ClassName {
-    public final String value;
+    public String value;
+
+    public ClassName() {
+    }
 
     public ClassName(String className) {
         requireNonNull(className);

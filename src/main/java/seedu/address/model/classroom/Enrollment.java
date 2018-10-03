@@ -6,7 +6,10 @@ import static java.util.Objects.requireNonNull;
  * Represents an enrollment size for the class in the app.
  */
 public class Enrollment {
-    public final String value;
+    public String value;
+
+    public Enrollment() {
+    }
 
     public Enrollment(String className) {
         requireNonNull(className);
