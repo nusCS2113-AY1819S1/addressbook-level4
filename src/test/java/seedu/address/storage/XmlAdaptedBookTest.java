@@ -25,7 +25,7 @@ public class XmlAdaptedBookTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getISBN().toString();
+    private static final String VALID_PHONE = BENSON.getIsbn().toString();
     private static final String VALID_EMAIL = BENSON.getPrice().toString();
     private static final String VALID_ADDRESS = BENSON.getQuantity().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()

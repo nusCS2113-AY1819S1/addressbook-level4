@@ -45,7 +45,7 @@ public class BookCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(book.getName().fullName);
         isbn.setText(book.getIsbn().value);
-        quantity.setText(book.getQuantity().value);
+        quantity.setText(book.getQuantity().getValue());
         price.setText(book.getPrice().value);
         book.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
