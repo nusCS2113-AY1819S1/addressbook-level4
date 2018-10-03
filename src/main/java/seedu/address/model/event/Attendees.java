@@ -20,7 +20,7 @@ public class Attendees {
         StringBuilder builder = new StringBuilder();
         int i = 1;
         for (Person person : attendeesList) {
-            builder.append(String.format("%i: ", i));
+            builder.append(String.format("%i: ", i++));
             builder.append(person.getName());
             builder.append("\n");
         }

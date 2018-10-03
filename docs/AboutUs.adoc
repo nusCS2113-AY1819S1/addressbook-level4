@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-%Project name% was developed by the https://github.com/orgs/CS2113-AY1819S1-T16-2/teams/developers[T16-2] team. +
+ProManage was developed by the https://github.com/orgs/CS2113-AY1819S1-T16-2/teams/developers[T16-2] team. +
  +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
@@ -15,26 +15,28 @@ image::icedcoffeeboy.jpg[width="150", align="left"]
 {empty}[https://github.com/IcedCoffeeBoy[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** TBD
-
+**Responsibilities:** Code Quality Assurance
 
 '''
+
 
 === Jie Liang Ang
 image::jieliangang.jpg[width="150", align="left"]
 {empty}[https://github.com/jieliangang[github]] [<<#, portfolio>>]
 
 **Role:** Team Lead +
-**Responsibilities:** TBD
+**Responsibilities:** Scheduling and Tracking
 
 '''
+
 
 === Jeevan Neralakere Somashekhar
 image::jeevz10.jpg[width="150", align="left"]
 {empty}[https://github.com/Jeevz10[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** TBD
+**Responsibilities:** Documentation
+
 
 '''
 
@@ -43,7 +45,7 @@ image::perrythewang.jpg[width="150", align="left"]
 {empty}[https://github.com/perrythewang[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** TBD
+**Responsibilities:** Testing
 
 '''
 
@@ -52,6 +54,6 @@ image::fr3ddy4.jpg[width="150", align="left"]
 {empty}[https://github.com/fr3ddy4[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** TBD
+**Responsibilities:** Integration
 
 '''

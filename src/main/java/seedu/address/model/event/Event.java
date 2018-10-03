@@ -2,34 +2,52 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import seedu.address.model.person.Person;
 
 /**
  * Represents a Event in the event list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Event {
+public class Event implements Comparable<Event> {
+
+    public static final String MESSAGE_DESCRIPTION = " Description: ";
+    public static final String MESSAGE_LOCATION = " Location: ";
+    public static final String MESSAGE_START_TIME = " Start time: ";
+    public static final String MESSAGE_END_TIME = " End time: ";
 
     // Identity fields
     private final EventName eventName;
+
+    // Data fields
     private final Description description;
-    private final Date startTime;
-    private final Date endTime;
+    private final LocalDate startTime; // date format: "2007-12-03"
+    private final LocalDate endTime; // date format: "2007-12-03"
     private final Location location;
 
+    // TODO: WILL BE IMPLEMENT IN THE NEXT VERSION FOR ADDING OF EMPOLYEES
+    private final Set<Person> attendees = new HashSet<>();
 
     /**
      * Every field must be present not null
      */
-    public Event(EventName eventName, Description description, Date startTime, Date endTime, Location location) {
-        requireAllNonNull(eventName);
+
+    public Event(EventName eventName, Description description,
+                 LocalDate startTime, LocalDate endTime, Location location) {
+        requireAllNonNull(eventName, description, startTime, endTime, location);
+
         this.eventName = eventName;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
     }
+
+
 
     public EventName getEventName() {
         return eventName;
@@ -39,16 +57,20 @@ public class Event {
         return description;
     }
 
-    public Date getStartTime() {
+    public LocalDate getStartTime() {
         return startTime;
     }
 
-    public Date getEndTime() {
+    public LocalDate getEndTime() {
         return endTime;
     }
 
     public Location getLocation() {
         return location;
+    }
+
+    public Set<Person> getAttendees() {
+        return attendees;
     }
 
 
@@ -78,18 +100,19 @@ public class Event {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getEventName())
-                .append(" Desciption: ")
+                .append(MESSAGE_DESCRIPTION)
                 .append(getDescription())
-                .append(" Location: ")
-                .append(getLocation());
-        if (startTime != null) {
-            builder.append(" Start time: ")
-                    .append(getStartTime());
-        }
-        if (endTime != null) {
-            builder.append(" End time: ")
-                    .append(getEndTime());
-        }
+                .append(MESSAGE_LOCATION)
+                .append(getLocation())
+                .append(MESSAGE_START_TIME)
+                .append(getStartTime())
+                .append(MESSAGE_END_TIME)
+                .append(getEndTime());
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        return this.getStartTime().compareTo(other.getStartTime()) < 0 ? -1 : 1;
     }
 }

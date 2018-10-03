@@ -15,6 +15,11 @@ import seedu.address.model.tag.Tag;
  */
 public class Person {
 
+    public static final String MESSAGE_PHONE = " Phone: ";
+    public static final String MESSAGE_EMAIL = " Email: ";
+    public static final String MESSAGE_ADDRESS = " Address: ";
+    public static final String MESSAGE_TAG = " Tags: ";
+
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -106,13 +111,13 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
+                .append(MESSAGE_PHONE)
                 .append(getPhone())
-                .append(" Email: ")
+                .append(MESSAGE_EMAIL)
                 .append(getEmail())
-                .append(" Address: ")
+                .append(MESSAGE_ADDRESS)
                 .append(getAddress())
-                .append(" Tags: ");
+                .append(MESSAGE_TAG);
         getTags().forEach(builder::append);
         return builder.toString();
     }
