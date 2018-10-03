@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -22,7 +21,6 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.GroupCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -30,8 +28,6 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Group;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -57,14 +53,28 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-    @Test
-    public void parseCommandGroup() throws Exception {
-        final Name name = new Name("test");
-        GroupCommand command = (GroupCommand) parser.parseCommand(
-                GroupCommand.COMMAND_WORD + " " + PREFIX_GROUP + name);
-        assertEquals(new GroupCommand(new Group(name)), command);
-    }
+    //TODO
+    //    @Test
+    //    public void parseCommandGroup() throws Exception {
+    //        final Name name = new Name("test");
+    //        CreateGroupCommand command = (CreateGroupCommand) parser.parseCommand(
+    //                CreateGroupCommand.COMMAND_WORD + " " + PREFIX_NAME + name);
+    //        assertEquals(new CreateGroupCommand(new Group(name)), command);
+    //    }
 
+    //    @Test
+    //    public void parseCommand_createGroup() throws Exception {
+    //        String groupName = "Testing";
+    //        String groupLocation = "E1-05-01";
+    //        String groupTags = "HelloWorld";
+    //        CreateGroupCommand command = (CreateGroupCommand) parser.parseCommand(
+    //                CreateGroupCommand.COMMAND_WORD + " "
+    //                        + PREFIX_NAME + groupName
+    //                        + PREFIX_GROUP_LOCATION + groupLocation
+    //                        + PREFIX_TAG + groupTags);
+    //        Set<Tag> convertTag = (Set<Tag>) new Tag(groupTags);
+    //        assertEquals(new CreateGroupCommand(new Group(groupName, groupLocation, convertTag)), command);
+    //    }
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(

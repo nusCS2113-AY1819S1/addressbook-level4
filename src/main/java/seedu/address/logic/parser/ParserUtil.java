@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.GroupLocation;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Grade;
@@ -26,6 +28,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -94,6 +97,36 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String groupName} into a {@code groupName}.
+     * TODO add description of groupName parser
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedGroupName = groupName.trim();
+        if (!GroupName.isValidGroupName(trimmedGroupName)) {
+            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
+        }
+        return new GroupName(trimmedGroupName);
+    }
+
+    /**
+     * Parses a {@code String groupLocation} into a {@code groupLocation}.
+     * // TODO add description of groupLocation parser
+     *
+     * @throws ParseException if the given {@code groupLocation} is invalid.
+     */
+    public static GroupLocation parseGroupLocation(String groupLocation) throws ParseException {
+        requireNonNull(groupLocation);
+        String trimmedGroupLocation = groupLocation.trim();
+        if (!GroupLocation.isValidGroupLocation(trimmedGroupLocation)) {
+            throw new ParseException(GroupLocation.MESSAGE_GROUP_LOCATION_CONSTRAINTS);
+        }
+        return new GroupLocation(trimmedGroupLocation);
     }
 
     /**

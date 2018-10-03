@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -36,8 +37,6 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
-    public static final String VALID_GROUP_NAME = "CS1231";
-    public static final String VALID_GROUP_NAME_2 = "CS2040C";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -56,7 +55,31 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
+    public static final String VALID_GROUP_NAME_CS1231 = "CS1231";
+    public static final String VALID_GROUP_NAME_CS2040C = "CS2040C";
+    public static final String VALID_GROUP_NAME_TUT = "TUT[TE3]";
+    public static final String VALID_GROUP_NAME_LAB = "LAB[01]";
+    public static final String VALID_GROUP_LOCATION_TUT = "E1-06-04";
+    public static final String VALID_GROUP_LOCATION_LAB = "E4-03-07";
+    public static final String VALID_TAG_TUT = "Weekly";
+    public static final String VALID_TAG_LAB = "OddWeeks";
+    public static final String VALID_TAG_DIFFICULTY = "Tough";
+
+    public static final String GROUP_NAME_DESC_TUT = " " + PREFIX_NAME + VALID_GROUP_NAME_TUT;
+    public static final String GROUP_NAME_DESC_LAB = " " + PREFIX_NAME + VALID_GROUP_NAME_LAB;
+    public static final String GROUP_LOC_DESC_TUT = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_TUT;
+    public static final String GROUP_LOC_DESC_LAB = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_LAB;
+    public static final String TAG_DESC_TUT = " " + PREFIX_TAG + VALID_TAG_TUT;
+    public static final String TAG_DESC_LAB = " " + PREFIX_TAG + VALID_TAG_LAB;
+
+    public static final String INVALID_GROUP_NAME_DESC =
+            " " + PREFIX_NAME + "TUT[E01]!"; //'!' NOT ALLOWED IN GROUP NAMES
+    public static final String INVALID_GROUP_LOC_DESC =
+            " " + PREFIX_GROUP_LOCATION + "[E1-06-05]"; //'[' & ']' NOT ALLOWED IN GROUP LOCATION
+    public static final String INVALID_GROUP_TAG =
+            " " + PREFIX_TAG + "CS2113 Experts"; //' ' not allowed in tags
+
+    public static final String PREAMBLE_WHITESPACE = "\t \r \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
