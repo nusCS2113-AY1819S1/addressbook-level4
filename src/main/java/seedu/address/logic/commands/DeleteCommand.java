@@ -10,6 +10,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.storage.Comments;
+
 
 /**
  * Deletes a event identified using it's displayed index from the event manager.
@@ -27,6 +29,8 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    private Comments comment = new Comments();
+
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -41,6 +45,7 @@ public class DeleteCommand extends Command {
         }
 
         Event eventToDelete = lastShownList.get(targetIndex.getZeroBased());
+        comment.deleteHtml(comment.getFile(), comment.getFilePath(), targetIndex.getZeroBased());
         model.deleteEvent(eventToDelete);
         model.commitEventManager();
         return new CommandResult(String.format(MESSAGE_DELETE_EVENT_SUCCESS, eventToDelete));
