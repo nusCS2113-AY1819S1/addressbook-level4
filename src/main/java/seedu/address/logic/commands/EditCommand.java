@@ -44,9 +44,9 @@ public class EditCommand extends Command {
             + PREFIX_ID + "91234567 "
             + PREFIX_PRICE + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Book: %1$s";
+    public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the quantity book.";
+    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the quantity book.";
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;
@@ -76,13 +76,13 @@ public class EditCommand extends Command {
         Book editedBook = createEditedPerson(bookToEdit, editBookDescriptor);
 
         if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         }
 
         model.updateBook(bookToEdit, editedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
     }
 
     /**

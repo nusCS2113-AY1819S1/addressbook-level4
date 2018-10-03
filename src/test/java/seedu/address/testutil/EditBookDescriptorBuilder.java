@@ -12,25 +12,25 @@ import seedu.address.model.tag.Tag;
 /**
  * A utility class to help with building EditBookDescriptor objects.
  */
-public class EditPersonDescriptorBuilder {
+public class EditBookDescriptorBuilder {
 
     private EditCommand.EditBookDescriptor descriptor;
 
-    public EditPersonDescriptorBuilder() {
+    public EditBookDescriptorBuilder() {
         descriptor = new EditCommand.EditBookDescriptor();
     }
 
-    public EditPersonDescriptorBuilder(EditCommand.EditBookDescriptor descriptor) {
+    public EditBookDescriptorBuilder(EditCommand.EditBookDescriptor descriptor) {
         this.descriptor = new EditCommand.EditBookDescriptor(descriptor);
     }
 
     /**
      * Returns an {@code EditBookDescriptor} with fields containing {@code book}'s details
      */
-    public EditPersonDescriptorBuilder(Book book) {
+    public EditBookDescriptorBuilder(Book book) {
         descriptor = new EditCommand.EditBookDescriptor();
         descriptor.setName(book.getName());
-        descriptor.setIsbn(book.getISBN());
+        descriptor.setIsbn(book.getIsbn());
         descriptor.setPrice(book.getPrice());
         descriptor.setQuantity(book.getQuantity());
         descriptor.setTags(book.getTags());
@@ -39,7 +39,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Name} of the {@code EditBookDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withName(String name) {
+    public EditBookDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));
         return this;
     }
@@ -47,7 +47,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Isbn} of the {@code EditBookDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withPhone(String phone) {
+    public EditBookDescriptorBuilder withPhone(String phone) {
         descriptor.setIsbn(new Isbn(phone));
         return this;
     }
@@ -55,7 +55,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Price} of the {@code EditBookDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withEmail(String email) {
+    public EditBookDescriptorBuilder withEmail(String email) {
         descriptor.setPrice(new Price(email));
         return this;
     }
@@ -63,7 +63,7 @@ public class EditPersonDescriptorBuilder {
     /**
      * Sets the {@code Quantity} of the {@code EditBookDescriptor} that we are building.
      */
-    public EditPersonDescriptorBuilder withAddress(String address) {
+    public EditBookDescriptorBuilder withAddress(String address) {
         descriptor.setQuantity(new Quantity(address));
         return this;
     }
@@ -72,7 +72,7 @@ public class EditPersonDescriptorBuilder {
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditBookDescriptor}
      * that we are building.
      */
-    public EditPersonDescriptorBuilder withTags(String... tags) {
+    public EditBookDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
         return this;
