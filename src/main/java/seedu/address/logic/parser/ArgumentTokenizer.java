@@ -145,4 +145,16 @@ public class ArgumentTokenizer {
         }
     }
 
+    public static Prefix findLastPrefix(String arguments, Prefix... prefixes) {
+        List<PrefixPosition> positionList = findAllPrefixPositions(arguments, prefixes);
+        int max = 0;
+        Prefix prefix = CliSyntax.PREFIX_INVALID;
+        for (PrefixPosition position : positionList) {
+            if (position.startPosition >= max) {
+                max = position.startPosition;
+                prefix = position.prefix;
+            }
+        }
+        return prefix;
+    }
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.trie.Trie;
@@ -15,12 +16,14 @@ import seedu.address.model.trie.Trie;
 public class CommandCompleter {
 
     /** Constants for Trie matching */
-    public static final String COMPLETE_ADDRESS = "address";
-    public static final String COMPLETE_COMMAND = "command";
-    public static final String COMPLETE_EMAIL = "email";
-    public static final String COMPLETE_NAME = "name";
-    public static final String COMPLETE_PHONE = "phone";
-    public static final String COMPLETE_INVALID = "invalid";
+    public static final int COMPLETE_ADDRESS = 0;
+    public static final int COMPLETE_EMAIL = 1;
+    public static final int COMPLETE_NAME = 2;
+    public static final int COMPLETE_PHONE = 3;
+    public static final int COMPLETE_TAG = 4;
+    public static final int COMPLETE_COMMAND = 5;
+    public static final int COMPLETE_INVALID = 6;
+    public static final String STRING_COMMAND = "command";
 
     /** Model instance to access data */
     private Model model;
@@ -124,11 +127,20 @@ public class CommandCompleter {
      */
     public ArrayList<String> predictText(String textInput) {
         AutoCompleteParserPair pair = parser.parseCommand(textInput);
-        switch (pair.parseType) {
+        int prefixType = getPrefixType(pair);
+        switch (prefixType) {
         case COMPLETE_COMMAND:
-            return commandTrie.getPredictList(pair.parseValue);
+            return commandTrie.getPredictList(pair.prefixValue);
         case COMPLETE_NAME:
-            return nameTrie.getPredictList(pair.parseValue);
+            return nameTrie.getPredictList(pair.prefixValue);
+        case COMPLETE_ADDRESS:
+            return addressTrie.getPredictList(pair.prefixValue);
+        case COMPLETE_PHONE:
+            return phoneTrie.getPredictList(pair.prefixValue);
+        case COMPLETE_EMAIL:
+            return emailTrie.getPredictList(pair.prefixValue);
+        case COMPLETE_TAG:
+            // TODO: create Tag trie
         default:
             return new ArrayList<>();
         }
@@ -188,6 +200,29 @@ public class CommandCompleter {
         if (!personToEdit.getAddress().equals(editedPerson.getAddress())) {
             addressTrie.remove(personToEdit.getAddress().value);
             addressTrie.insert(editedPerson.getAddress().value);
+        }
+    }
+
+    /**
+     * Determines the type of prefix to predict it's arguments.
+     * @param pair containing the prefix.
+     * @return the type of prefix.
+     */
+    private int getPrefixType(AutoCompleteParserPair pair) {
+        if (pair.prefixType.equals(CliSyntax.PREFIX_TAG)) {
+            return COMPLETE_TAG;
+        } else if (pair.prefixType.equals(CliSyntax.PREFIX_EMAIL)) {
+            return COMPLETE_EMAIL;
+        } else if (pair.prefixType.equals(CliSyntax.PREFIX_ADDRESS)) {
+            return COMPLETE_ADDRESS;
+        } else if (pair.prefixType.equals(CliSyntax.PREFIX_PHONE)) {
+            return COMPLETE_PHONE;
+        } else if (pair.prefixType.equals(CliSyntax.PREFIX_NAME)) {
+            return COMPLETE_NAME;
+        } else if (pair.prefixType.equals(CliSyntax.PREFIX_COMMAND)) {
+            return COMPLETE_COMMAND;
+        } else {
+            return COMPLETE_INVALID;
         }
     }
 }
