@@ -46,13 +46,17 @@ public class Event {
         return phone;
     }
 
-    public Email getEmail() { return email; }
+    public Email getEmail() {
+        return email;
+    }
 
     public Address getAddress() {
         return address;
     }
 
-    public Attendance getAttendance() { return attendance; }
+    public Attendance getAttendance() {
+        return attendance;
+    }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
