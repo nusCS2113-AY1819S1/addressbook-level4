@@ -74,17 +74,18 @@ public class AutoCompleteParser {
         // TODO: Add or remove command support as necessary
         switch(commandWord) {
         case CliSyntax.COMMAND_FIND:
-            return getFindCommandPair(arguments, argMultimap);
+            return getFindParserPair(arguments, argMultimap);
         case CliSyntax.COMMAND_SELECT:
         case CliSyntax.COMMAND_DELETE:
         case CliSyntax.COMMAND_IMPORT:
         case CliSyntax.COMMAND_MAIL:
+            return getMailParserPair(arguments, argMultimap);
         default:
             return new AutoCompleteParserPair(PREFIX_INVALID, arguments.trim());
         }
     }
 
-    private AutoCompleteParserPair getFindCommandPair(String arguments, ArgumentMultimap argMultimap) {
+    private AutoCompleteParserPair getFindParserPair(String arguments, ArgumentMultimap argMultimap) {
         Prefix lastPrefix = ArgumentTokenizer.findLastPrefix(
                 arguments,
                 PREFIX_NAME,
@@ -98,5 +99,20 @@ public class AutoCompleteParser {
         }
         // Default text prediction is on names
         return new AutoCompleteParserPair(PREFIX_NAME, arguments);
+    }
+
+    /**
+     * Creates a AutoCompleteParserPair instance based on the last Prefix found in user input.
+     * @param arguments the user input to search.
+     * @param argMultimap used to retrieve the values of the prefix keys.
+     * @return the appropriate AutoCompleteParserPair instance.
+     */
+    private AutoCompleteParserPair getMailParserPair(String arguments, ArgumentMultimap argMultimap) {
+        Prefix lastPrefix = ArgumentTokenizer.findLastPrefix(arguments, PREFIX_TAG, PREFIX_NAME);
+        if (argMultimap.getValue(lastPrefix).isPresent()) {
+            return new AutoCompleteParserPair(lastPrefix, argMultimap.getValue(lastPrefix).get());
+        }
+        // Default text prediction is on names
+        return  new AutoCompleteParserPair(PREFIX_NAME, arguments);
     }
 }
