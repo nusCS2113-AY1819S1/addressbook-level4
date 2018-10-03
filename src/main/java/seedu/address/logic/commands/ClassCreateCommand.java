@@ -1,15 +1,20 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
-public class ClassCreateCommand extends Command{
+/**
+ * Creates a class for a module.
+ */
+public class ClassCreateCommand extends Command {
     public static final String COMMAND_WORD = "classcreate";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a class and assigns it to a module "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a class and assigns it to a module"
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASSNAME + "CLASS_NAME "
