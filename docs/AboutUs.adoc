@@ -13,7 +13,7 @@ This project is a deliverable for the module "Software Engineering & Object-Orie
 == Project Team
 
 === Teh Nian Fei
-image::nianfei97.jpg[width="150", align="left"]
+image::nianfei97.png[width="150", align="left"]
 {empty}[https://github.com/nianfei97[github]]
 
 Role: Team Lead, Code Quality +
@@ -22,7 +22,7 @@ Responsibilities: Managing Logic
 '''
 
 === Benjamin Chong Zhi Yi
-image::bennchong.jpg[width="150", align="left"]
+image::bennchong.png[width="150", align="left"]
 {empty}[http://github.com/bennchong[github]]
 
 Role: +
@@ -31,7 +31,7 @@ Responsibilities: Managing Model
 '''
 
 === Cheng Jin Ting
-image::cjinting-nus.jpg[width="150", align="left"]
+image::cjinting-nus.png[width="150", align="left"]
 {empty}[http://github.com/cjinting-nus[github]]
 
 Role: Deliverables +
@@ -40,7 +40,7 @@ Responsibilities: Managing Users
 '''
 
 === Khoo Yuan Hui
-image::alexiscatnip.jpg[width="150", align="left"]
+image::alexiscatnip.png[width="150", align="left"]
 {empty}[http://github.com/alexiscatnip[github]]
 
 Role: +
@@ -49,7 +49,7 @@ Responsibilities: Managing UI
 '''
 
 === Akshay Narayan
-image::okkhoy.jpg[width="150", align=:"left"]
+image::okkhoy.png[width="150", align=:"left"]
 {empty}[http://github.com/okkhoy[github]]
 
 Role: Module Coordinator, Instructor
