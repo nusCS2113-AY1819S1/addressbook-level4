@@ -18,8 +18,6 @@ import seedu.address.storage.Comments;
  */
 public class AddCommand extends Command {
 
-    private Comments comments = new Comments();
-
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an event to the event manager. "
@@ -41,6 +39,8 @@ public class AddCommand extends Command {
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event manager";
 
     private final Event toAdd;
+
+    private Comments comments = new Comments();
 
     /**
      * Creates an AddCommand to add the specified {@code Event}
