@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -14,7 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ClassCreateCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -28,6 +29,10 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.classroom.ClassModule;
+import seedu.address.model.classroom.ClassName;
+import seedu.address.model.classroom.Classroom;
+import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -126,6 +131,20 @@ public class AddressBookParserTest {
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
         assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD) instanceof UndoCommand);
         assertTrue(parser.parseCommand("undo 3") instanceof UndoCommand);
+    }
+
+    @Test
+    public void parseCommand_classCreate() throws Exception {
+        final String className = "T16";
+        final String moduleCode = "CG1111";
+        final String maxEnrollment = "20";
+        ClassCreateCommand command = (ClassCreateCommand) parser.parseCommand(ClassCreateCommand.COMMAND_WORD
+                + " " + PREFIX_CLASSNAME + className
+                + " " + PREFIX_MODULECODE + moduleCode
+                + " " + PREFIX_MAXENROLLMENT + maxEnrollment);
+        assertEquals(new ClassCreateCommand(new Classroom(new ClassName(className),
+                new ClassModule(moduleCode),
+                new Enrollment(maxEnrollment))), command);
     }
 
     @Test
