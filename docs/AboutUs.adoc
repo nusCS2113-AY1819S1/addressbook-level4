@@ -25,8 +25,8 @@ Responsibilities: Ensure product deliverables are up to scratch, and that all de
 image::harriuscai.jpg[width="150", align="left"]
 {empty}[https://github.com/harriuscai[github]] [<<harriuscai#, portfolio>>]
 
-Role: Developer +
-Responsibilities: TBD
+Role: Code Quality & Integration +
+Responsibilities: Ensure that the code written by the team is of good quality; In charge of reviewing Pull Requests and merging them
 
 '''
 
