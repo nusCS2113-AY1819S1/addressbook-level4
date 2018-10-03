@@ -12,7 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.EventSelectionChangedEvent;
 import seedu.address.model.event.Event;
 
 /**
@@ -43,12 +43,14 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Loads a HTML file with variables passed into it
+     */
     private void loadEventPage(Event event) throws MalformedURLException {
         URL searchPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
         String searchPageString = searchPage.toString() + "?name=" + event.getName();
-        URL searchPageURL = new URL(searchPageString);
-        loadPage(searchPageURL.toExternalForm());
-        //loadPage(SEARCH_PAGE_URL + event.getName().fullName);
+        searchPage = new URL(searchPageString);
+        loadPage(searchPage.toExternalForm());
     }
 
     public void loadPage(String url) {
@@ -71,7 +73,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) throws MalformedURLException {
+    private void handleEventSelectionChangedEvent(EventSelectionChangedEvent event) throws MalformedURLException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadEventPage(event.getNewSelection());
     }
