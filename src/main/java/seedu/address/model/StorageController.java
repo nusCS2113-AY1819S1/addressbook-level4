@@ -22,7 +22,7 @@ public class StorageController {
     private static final String STORAGE_NOTES = "notes.xml";
 
     private static ArrayList<Course> courseStorage = new ArrayList<Course>();
-    private static ArrayList<Course> moduleStorage = new ArrayList<Course>();
+    private static ArrayList<Module> moduleStorage = new ArrayList<Module>();
     private static ArrayList<Classroom> classesStorage = new ArrayList<Classroom>();
     private static ArrayList<Course> gradebookStorage = new ArrayList<Course>();
     private static ArrayList<Note> noteStorage = new ArrayList<Note>();
@@ -37,8 +37,11 @@ public class StorageController {
         createFiles();
 
         try {
-            CourseManager cm = (CourseManager) XmlUtil.getDataFromFile(Paths.get(STORAGE_COURSES), CourseManager.class);
+            CourseManager cm = XmlUtil.getDataFromFile(Paths.get(STORAGE_COURSES), CourseManager.class);
             courseStorage = cm.getList();
+
+            ModuleManager moduleManager = XmlUtil.getDataFromFile(Paths.get(STORAGE_MODULES), ModuleManager.class);
+            moduleStorage = moduleManager.getModules();
 
             ClassroomManager crm = (ClassroomManager) XmlUtil.getDataFromFile(
                     Paths.get(STORAGE_CLASSES), ClassroomManager.class);
@@ -75,12 +78,15 @@ public class StorageController {
     /**
   This method stores all data within the arraylists above to local storage.
    */
-
     public static void storeData() {
         try {
             CourseManager cm = new CourseManager();
             cm.setCourseList(courseStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_COURSES), cm);
+          
+            ModuleManager moduleManager = new ModuleManager();
+            moduleManager.setModules(moduleStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_MODULES), moduleManager);
 
             ClassroomManager crm = new ClassroomManager();
             crm.setClassroomList(classesStorage);
@@ -102,11 +108,11 @@ public class StorageController {
         StorageController.courseStorage = courseStorage;
     }
 
-    public static ArrayList<Course> getModuleStorage() {
+    public static ArrayList<Module> getModuleStorage() {
         return moduleStorage;
     }
 
-    public static void setModuleStorage(ArrayList<Course> moduleStorage) {
+    public static void setModuleStorage(ArrayList<Module> moduleStorage) {
         StorageController.moduleStorage = moduleStorage;
     }
 

@@ -15,6 +15,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_COURSECODE = new Prefix("c/");
     public static final Prefix PREFIX_COURSENAME = new Prefix("n/");
     public static final Prefix PREFIX_FACULTY = new Prefix("f/");
+    public static final Prefix PREFIX_MODULE_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_MODULE_CODE = new Prefix("c/");
     public static final Prefix PREFIX_CLASSNAME = new Prefix("c/");
     public static final Prefix PREFIX_MODULECODE = new Prefix("m/");
     public static final Prefix PREFIX_MAXENROLLMENT = new Prefix("e/");
