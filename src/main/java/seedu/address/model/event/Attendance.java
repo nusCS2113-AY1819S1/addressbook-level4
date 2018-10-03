@@ -31,7 +31,7 @@ public class Attendance {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid attendance status.
      */
     public static boolean isValidAttendance(String test) {
         return Boolean.toString(true).equals(test) || Boolean.toString(false).equals(test);

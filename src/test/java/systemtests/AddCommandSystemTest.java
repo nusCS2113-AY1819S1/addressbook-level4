@@ -43,7 +43,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class AddCommandSystemTest extends EventManagerSystemTest {
@@ -74,7 +74,7 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: add a event with all fields same as another event in the address book except name -> added */
-        toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
+        toAdd = new EventBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
@@ -82,7 +82,7 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         /* Case: add a event with all fields same as another event in the address book except phone and email
          * -> added
          */
-        toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+        toAdd = new EventBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
@@ -118,17 +118,17 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_EVENT);
 
         /* Case: add a duplicate event except with different phone -> rejected */
-        toAdd = new PersonBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
+        toAdd = new EventBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_EVENT);
 
         /* Case: add a duplicate event except with different email -> rejected */
-        toAdd = new PersonBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
+        toAdd = new EventBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_EVENT);
 
         /* Case: add a duplicate event except with different address -> rejected */
-        toAdd = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        toAdd = new EventBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_EVENT);
 
