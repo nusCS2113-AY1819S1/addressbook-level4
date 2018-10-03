@@ -22,7 +22,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.person.Person;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.addressbook.XmlSerializableAddressBook;
 
 public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
@@ -95,10 +95,16 @@ public class PersonListPanelTest extends GuiUnitTest {
         builder.append("<addressbook>\n");
         for (int i = 0; i < personCount; i++) {
             builder.append("<persons>\n");
+            builder.append("<employeeId>000000</employeeId>\n");
             builder.append("<name>").append(i).append("a</name>\n");
+            builder.append("<dateOfBirth>12/12/1995</dateOfBirth>\n");
             builder.append("<phone>000</phone>\n");
             builder.append("<email>a@aa</email>\n");
+            builder.append("<department>Human Resource</department>\n");
+            builder.append("<position>Staff</position>\n");
             builder.append("<address>a</address>\n");
+            builder.append("<salary>1000.00</salary>\n");
+            builder.append("<bonus>0.0</bonus>\n");
             builder.append("</persons>\n");
         }
         builder.append("</addressbook>\n");
