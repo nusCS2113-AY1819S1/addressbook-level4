@@ -12,6 +12,6 @@ public class AutoCompleteParserPair {
 
     public AutoCompleteParserPair(Prefix prefixType, String prefixValue) {
         this.prefixType = prefixType;
-        this.prefixValue = prefixValue;
+        this.prefixValue = prefixValue.trim();
     }
 }

@@ -11,7 +11,9 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INVALID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_KPI;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -48,7 +50,7 @@ public class AutoCompleteParser {
         final Matcher matcher = COMMAND_INPUT_FORMAT.matcher(textInput);
 
         if (!matcher.matches()) {
-            return new AutoCompleteParserPair(CliSyntax.PREFIX_INVALID, CliSyntax.PREFIX_INVALID.getPrefix());
+            return new AutoCompleteParserPair(PREFIX_INVALID, PREFIX_INVALID.getPrefix());
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
@@ -66,7 +68,7 @@ public class AutoCompleteParser {
         final String arguments = matcher.group("arguments");
 
         if (arguments.isEmpty()) {
-            return new AutoCompleteParserPair(CliSyntax.PREFIX_COMMAND, commandWord);
+            return new AutoCompleteParserPair(PREFIX_COMMAND, commandWord);
         }
 
         // TODO: Add or remove command support as necessary
@@ -78,7 +80,7 @@ public class AutoCompleteParser {
         case CliSyntax.COMMAND_IMPORT:
         case CliSyntax.COMMAND_MAIL:
         default:
-            return new AutoCompleteParserPair(CliSyntax.PREFIX_INVALID, arguments.trim());
+            return new AutoCompleteParserPair(PREFIX_INVALID, arguments.trim());
         }
     }
 
@@ -87,6 +89,7 @@ public class AutoCompleteParser {
         if (argMultimap.getValue(lastPrefix).isPresent()) {
             return new AutoCompleteParserPair(lastPrefix, argMultimap.getValue(lastPrefix).get());
         }
-        return new AutoCompleteParserPair(CliSyntax.PREFIX_INVALID, arguments);
+        // Default text prediction is on names
+        return new AutoCompleteParserPair(PREFIX_NAME, arguments);
     }
 }
