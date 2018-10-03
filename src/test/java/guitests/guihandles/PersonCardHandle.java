@@ -57,7 +57,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return addressLabel.getText();
     }
 
-    public String getPhone() {
+    public String getSerialNumber() {
         return phoneLabel.getText();
     }
 
@@ -78,7 +78,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     public boolean equals(Person person) {
         return getName().equals(person.getName().fullName)
                 && getProductInfo().equals(person.getProductInfo().value)
-                && getPhone().equals(person.getPhone().value)
+                && getSerialNumber().equals(person.getSerialNumber().value)
                 && getDistributor()().equals(person.getDistributor()().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
                         .map(tag -> tag.tagName)

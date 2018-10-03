@@ -96,7 +96,7 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+        Phone updatedPhone = editPersonDescriptor.getSerialNumber().orElse(personToEdit.getSerialNumber());
         Email updatedEmail = editPersonDescriptor.getDistributor().orElse(personToEdit.getDistributor());
         Address updatedAddress = editPersonDescriptor.getProductInfo().orElse(personToEdit.getProductInfo());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
             this.phone = phone;
         }
 
-        public Optional<Phone> getPhone() {
+        public Optional<Phone> getSerialNumber() {
             return Optional.ofNullable(phone);
         }
 
@@ -219,7 +219,7 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
-                    && getPhone().equals(e.getPhone())
+                    && getSerialNumber().equals(e.getSerialNumber())
                     && getDistributor().equals(e.getDistributor())
                     && getProductInfo().equals(e.getProductInfo())
                     && getTags().equals(e.getTags());

@@ -40,7 +40,7 @@ public class Person {
         return name;
     }
 
-    public Phone getPhone() {
+    public Phone getSerialNumber() {
         return phone;
     }
 
@@ -71,7 +71,7 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getDistributor().equals(getDistributor()));
+                && (otherPerson.getSerialNumber().equals(getSerialNumber()) || otherPerson.getDistributor().equals(getDistributor()));
     }
 
     /**
@@ -90,7 +90,7 @@ public class Person {
 
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getSerialNumber().equals(getSerialNumber())
                 && otherPerson.getDistributor().equals(getDistributor())
                 && otherPerson.getProductInfo().equals(getProductInfo())
                 && otherPerson.getTags().equals(getTags());
@@ -107,7 +107,7 @@ public class Person {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" Serial number: ")
-                .append(getPhone())
+                .append(getSerialNumber())
                 .append(" Distributor: ")
                 .append(getDistributor())
                 .append(" Product info: ")

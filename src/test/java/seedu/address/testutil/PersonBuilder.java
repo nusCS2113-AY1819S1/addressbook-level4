@@ -40,7 +40,7 @@ public class PersonBuilder {
      */
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
-        phone = personToCopy.getPhone();
+        phone = personToCopy.getSerialNumber();
         email = personToCopy.getDistributor()();
         address = personToCopy.getProductInfo();
         tags = new HashSet<>(personToCopy.getTags());

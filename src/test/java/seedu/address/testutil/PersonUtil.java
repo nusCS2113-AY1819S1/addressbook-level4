@@ -31,7 +31,7 @@ public class PersonUtil {
     public static String getPersonDetails(Person person) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
-        sb.append(PREFIX_SERIAL_NR + person.getPhone().value + " ");
+        sb.append(PREFIX_SERIAL_NR + person.getSerialNumber().value + " ");
         sb.append(PREFIX_DISTRIBUTOR + person.getDistributor()().value + " ");
         sb.append(PREFIX_PRODUCT_INFO + person.getProductInfo().value + " ");
         person.getTags().stream().forEach(
@@ -46,7 +46,7 @@ public class PersonUtil {
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_SERIAL_NR).append(phone.value).append(" "));
+        descriptor.getSerialNumber().ifPresent(phone -> sb.append(PREFIX_SERIAL_NR).append(phone.value).append(" "));
         descriptor.getDistributor()().ifPresent(email -> sb.append(PREFIX_DISTRIBUTOR).append(email.value).append(" "));
         descriptor.getProductInfo().ifPresent(address -> sb.append(PREFIX_PRODUCT_INFO).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {

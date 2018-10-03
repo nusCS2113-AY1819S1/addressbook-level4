@@ -62,7 +62,7 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(Person source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
+        phone = source.getSerialNumber().value;
         email = source.getDistributor().value;
         address = source.getProductInfo().value;
         tagged = source.getTags().stream()

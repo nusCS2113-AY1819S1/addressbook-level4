@@ -22,7 +22,7 @@ public class GuiTestAssert {
         assertEquals(expectedCard.getProductInfo(), actualCard.getProductInfo());
         assertEquals(expectedCard.getDistributor()(), actualCard.getDistributor()());
         assertEquals(expectedCard.getName(), actualCard.getName());
-        assertEquals(expectedCard.getPhone(), actualCard.getPhone());
+        assertEquals(expectedCard.getSerialNumber(), actualCard.getSerialNumber());
         assertEquals(expectedCard.getTags(), actualCard.getTags());
     }
 
@@ -31,7 +31,7 @@ public class GuiTestAssert {
      */
     public static void assertCardDisplaysPerson(Person expectedPerson, PersonCardHandle actualCard) {
         assertEquals(expectedPerson.getName().fullName, actualCard.getName());
-        assertEquals(expectedPerson.getPhone().value, actualCard.getPhone());
+        assertEquals(expectedPerson.getSerialNumber().value, actualCard.getSerialNumber());
         assertEquals(expectedPerson.getDistributor()().value, actualCard.getDistributor()());
         assertEquals(expectedPerson.getProductInfo().value, actualCard.getProductInfo());
         assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),

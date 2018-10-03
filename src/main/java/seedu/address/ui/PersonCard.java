@@ -42,11 +42,11 @@ public class PersonCard extends UiPart<Region> {
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getProductInfo().value);
-        email.setText(person.getDistributor().value);
+        id.setText(displayedIndex + "." + "\n");
+        name.setText("Name: " + person.getName().fullName);
+        phone.setText("Serial Number: " + person.getSerialNumber().value);
+        address.setText("Product Info: " + person.getProductInfo().value);
+        email.setText("Distributor: " + person.getDistributor().value);
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
