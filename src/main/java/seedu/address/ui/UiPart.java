@@ -26,7 +26,7 @@ public abstract class UiPart<T> {
      * The FXML file must not specify the {@code fx:controller} attribute.
      */
     public UiPart(URL fxmlFileUrl) {
-        loadFxmlFile(fxmlFileUrl, null);
+        loadFxmlFile(fxmlFileUrl, getRoot());
     }
 
     /**

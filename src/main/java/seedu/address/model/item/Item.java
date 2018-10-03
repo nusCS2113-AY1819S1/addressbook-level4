@@ -4,12 +4,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.person.Name;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,69 +18,55 @@ import seedu.address.model.tag.Tag;
 public class Item {
 
     // Magic numbers
-    final static public int STATUS_READY = 0;
-    final static public int STATUS_ONLOAN = 1;
-    final static public int STATUS_FAULTY = 2;
+    public static final int STATUS_READY = 0;
+    public static final int STATUS_ONLOAN = 1;
+    public static final int STATUS_FAULTY = 2;
 
     // Identity fields
-//    private final Name name;
-//    private final Phone phone;
-//    private final Email email;
     private final Name name;
-    private final Integer quantity;
-    private final Integer minQuantity;
+    private final Quantity quantity;
+    private final Quantity minQuantity;
 
     // Data fields
-//    private final Address address;
     private final List<Integer> status = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-//    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-//        requireAllNonNull(name, phone, email, address, tags);
-//        this.name = name;
-//        this.phone = phone;
-//        this.email = email;
-//        this.address = address;
-//        this.tags.addAll(tags);
-//    }
-    public Item(Name name, Integer quantity, Integer minQuantity, Set<Tag> tags) {
+    public Item(Name name, Quantity quantity, Quantity minQuantity, Set<Tag> tags) {
         requireAllNonNull(name, quantity, minQuantity, tags);
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        status.set(STATUS_READY, quantity);
-        status.set(STATUS_ONLOAN, 0);
-        status.set(STATUS_FAULTY, 0);
+        this.status.add(quantity.toInteger());
+        this.status.add(0);
+        this.status.add(0);
         this.tags.addAll(tags);
     }
 
-//    public Name getName() {
-//        return name;
-//    }
-//
-//    public Phone getPhone() {
-//        return phone;
-//    }
-//
-//    public Email getEmail() {
-//        return email;
-//    }
-//
-//    public Address getAddress() {
-//        return address;
-//    }
+    public Item(Name name, Quantity quantity, Quantity minQuantity, List<Integer> status, Set<Tag> tags) {
+        requireAllNonNull(name, quantity, minQuantity, tags);
+        this.name = name;
+        this.quantity = quantity;
+        this.minQuantity = minQuantity;
+        this.status.add(quantity.toInteger());
+        this.status.add(0);
+        this.status.add(0);
+        this.tags.addAll(tags);
+    }
+
     public Name getName() {
         return name;
     }
 
-    public Integer getQuantity() {
+    public Quantity getQuantity() {
         return quantity;
     }
 
-    public Integer getMinQuantity() { return minQuantity; }
+    public Quantity getMinQuantity() {
+        return minQuantity;
+    }
 
     public List<Integer> getStatus() {
         return Collections.unmodifiableList(status);
@@ -158,11 +143,4 @@ public class Item {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
-//    public void changeStatus(Integer ready, Integer onLoan, Integer faulty) {
-//        status.set(STATUS_READY, ready);
-//        status.set(STATUS_ONLOAN, onLoan);
-//        status.set(STATUS_FAULTY, faulty);
-//        return;
-//    }
 }
