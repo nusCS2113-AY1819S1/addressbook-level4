@@ -15,6 +15,9 @@ public class Comments {
 
     private int getLastFile(File folder) {
         File[] listOfFiles = folder.listFiles();
+        if (listOfFiles.length==0) {
+            return 0;
+        }
         String lastFile = listOfFiles[listOfFiles.length - 1].getName();
         return Integer.parseInt(lastFile.substring(0, lastFile.length() - 5));
     }
@@ -47,5 +50,9 @@ public class Comments {
             //catch any exceptions here
             System.out.println("failed");
         }
+    }
+    public static void main(String[] args){
+        Comments comment = new Comments();
+        comment.createHtml(comment.getFilePath(),comment.getFileName());
     }
 }
