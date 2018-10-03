@@ -27,23 +27,26 @@ public class Comments {
     public int getFileName() {
         return this.fileName;
     }
+    public File getFile() {
+        return this.file;
+    }
 
     /**
      * Makes a Html file to store comments.
      */
-    public void createHtml(String commentsDirectoryString, int x) {
+    public void createHtml(String commentsDirectoryString, int index) {
         FileWriter fWriter = null;
         BufferedWriter writer = null;
         try {
-            File f = new File(commentsDirectoryString + "/" + Integer.toString(x) + ".html");
+            File f = new File(commentsDirectoryString + "/" + Integer.toString(index) + ".html");
             if (f.exists()) {
                 this.fileName++;
                 createHtml(commentsDirectoryString, this.fileName);
                 return;
             }
-            fWriter = new FileWriter(commentsDirectoryString + "/" + Integer.toString(x) + ".html");
+            fWriter = new FileWriter(commentsDirectoryString + "/" + Integer.toString(index) + ".html");
             writer = new BufferedWriter(fWriter);
-            writer.write("<span>This iss your html content here</span>");
+            writer.write("<span>Comments Section</span>");
             writer.newLine(); //this is not actually needed for html files - can make your code more readable though
             writer.close(); //make sure you close the writer object
         } catch (Exception e) {
@@ -51,11 +54,26 @@ public class Comments {
             System.out.println("failed");
         }
     }
+
+    /**
+     *  Deletes the Html file associated with the event
+     */
+    public void deleteHtml(File folder, String commentsDirectory, int index) {
+        File[] listOfFiles = folder.listFiles();
+        if (index > listOfFiles.length) {
+            System.out.println("error");
+            //put exception here or a try catch
+        }
+        File file= new File(commentsDirectory + "/" + listOfFiles[index].getName());
+        file.delete();
+    }
+
     /**
      * Test code.
      */
     public static void main(String[] args) {
         Comments comment = new Comments();
-        comment.createHtml(comment.getFilePath(), comment.getFileName());
+        //comment.deleteHtml(comment.getFile(), comment.getFilePath(),7);
+        //comment.createHtml(comment.getFilePath(), comment.getFileName());
     }
 }
