@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -40,12 +40,12 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_SERIAL_NR + "Serial Number] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
+            + "[" + PREFIX_DISTRIBUTOR + "EMAIL] "
             + "[" + PREFIX_PRODUCT_INFO + "PRODUCT INFO] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SERIAL_NR + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_DISTRIBUTOR + "johndoe@example.com";
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Product: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";

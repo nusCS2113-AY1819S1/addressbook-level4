@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -19,22 +19,22 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a product to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a product to Inventarie PRO. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_SERIAL_NR + "SERIAL NUMBER "
-            + PREFIX_EMAIL + "DISTRIBUTOR "
-            + PREFIX_PRODUCT_INFO + "ADDRESS "
+            + PREFIX_DISTRIBUTOR + "DISTRIBUTOR "
+            + PREFIX_PRODUCT_INFO + "PRODUCT INFO "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "John Doe "
+            + PREFIX_NAME + "Apple "
             + PREFIX_SERIAL_NR + "98765432 "
-            + PREFIX_EMAIL + "ALFRED "
+            + PREFIX_DISTRIBUTOR + "Alfred "
             + PREFIX_PRODUCT_INFO + "CONTAINS CHIKEN ETC "
             + PREFIX_TAG + "fruit ";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This product already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This product already exists in the Product list";
 
     private final Person toAdd;
 
