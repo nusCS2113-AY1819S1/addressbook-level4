@@ -6,9 +6,13 @@ import static java.util.Objects.requireNonNull;
  * Represents an enrollment size for the class in the app.
  */
 public class Enrollment {
-    public String value;
+    private String value;
 
     public Enrollment() {
+    }
+
+    public String getValue() {
+        return value;
     }
 
     public Enrollment(String className) {

@@ -6,9 +6,13 @@ import static java.util.Objects.requireNonNull;
  * Represents a module code in the app.
  */
 public class ClassModule {
-    public String value;
+    private String value;
 
     public ClassModule() {
+    }
+
+    public String getValue() {
+        return value;
     }
 
     public ClassModule(String moduleCode) {
