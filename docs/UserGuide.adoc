@@ -55,17 +55,17 @@ Format: `inventory`
 
 Lists all products offered by the store in alphabetical order
 
-=== Search for a product: `search`
+=== Search for a product: `find`
 
-Format: `search <product name>`            
-            
+Format: `find <product name>`
+
 Displays the product and basic information related to it
 The search is case insensitive e.g ‘potato’ will match ‘POTATO’
 All products containing the name searched for will appear.
 
 === Add a product: `add product name`
 
-Format: `add product name <product name>`  
+Format: `add product name <product name>`
 
 Adds a product to the list of products offered by the store
 
@@ -75,9 +75,9 @@ Format: `listD`
 
 List all distributors the store is in touch with
 
-=== Search for a distributor: `search`
+=== Search for a distributor: `find`
 
-Format: `search <distributor_name>`
+Format: `find <distributor_name>`
 
 Displays the distributor and basic information related to it
 Adds a distributor to the address book.
@@ -92,7 +92,7 @@ Adds a distributor to the list of distributors engaged with the store.
 
 Format: `contacts`
 
-This command lists all the contacts in alphabetical order of the first name, and whether they are distributors or customers. 
+This command lists all the contacts in alphabetical order of the first name, and whether they are distributors or customers.
 
 === Show best selling product: `top selling`
 
@@ -123,8 +123,8 @@ _{explain how the user can enable/disable data encryption}_
 
 == FAQ
 
-*Q*: Why is the product called Inventarie Pro?
-*A*: We have Swedish developer on our team. Inventarie is the Swedish word for inventory.
+Q: Why is the product called Inventarie Pro?
+A: We have Swedish developer on our team. Inventarie is the Swedish word for inventory.
 
 Q: How do I transfer my data to another computer?
 A: Install the application on another computer and copy the file “data”  from the old computer to the new computer and place it in the folder that belong to the program.
