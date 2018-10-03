@@ -37,7 +37,7 @@ public class BookBuilder {
      */
     public BookBuilder(Book bookToCopy) {
         name = bookToCopy.getName();
-        isbn = bookToCopy.getISBN();
+        isbn = bookToCopy.getIsbn();
         price = bookToCopy.getPrice();
         quantity = bookToCopy.getQuantity();
         tags = new HashSet<>(bookToCopy.getTags());
