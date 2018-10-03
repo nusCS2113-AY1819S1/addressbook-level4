@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
@@ -26,10 +28,14 @@ public class StorageController {
     private static ArrayList<Note> noteStorage = new ArrayList<Note>();
 
 
+
+
     /**
      * This method retrieves all datasets saved locally.
      */
     public static void retrieveData() {
+        createFiles();
+
         try {
             CourseManager cm = (CourseManager) XmlUtil.getDataFromFile(Paths.get(STORAGE_COURSES), CourseManager.class);
             courseStorage = cm.getList();
@@ -46,8 +52,30 @@ public class StorageController {
     }
 
     /**
-     * This method stores all data within the arraylists above to local storage.
+     This method creates files for all datasets if they do not exist on the local filesystem.
      */
+    private static void createFiles() {
+        File gradebook = new File(STORAGE_GRADEBOOK);
+        File classes = new File(STORAGE_CLASSES);
+        File courses = new File(STORAGE_COURSES);
+        File modules = new File(STORAGE_MODULES);
+        File notes = new File(STORAGE_NOTES);
+        try {
+            gradebook.createNewFile();
+            classes.createNewFile();
+            courses.createNewFile();
+            modules.createNewFile();
+            notes.createNewFile();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+  This method stores all data within the arraylists above to local storage.
+   */
+
     public static void storeData() {
         try {
             CourseManager cm = new CourseManager();
