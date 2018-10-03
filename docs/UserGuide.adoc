@@ -400,11 +400,19 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Register* : `register INDEX`
-* *Unregister* : `unregister INDEX`
-* *Set Reminders* : `setReminder INDEX`
-* *View Reminders* : `reminders`
-* *showComments* : `showComments INDEX`
-* *addComment* : `addCeomment INDEX STRING`
-* *replyComment* : `replyComment EVENTINDEX LINEINDEX STRING`
-* *deleteComment* : `deleteComment EVENT INDEX LINEINDEX STRING`
+* *Register* : `register INDEX` +
+e.g. `register 1`
+* *Unregister* : `unregister INDEX` +
+e.g. `unregister 1`
+* *Set reminders* : `setReminder INDEX`+
+e.g. `setReminder 1`
+* *View Reminders* : `reminders` +
+e.g. `reminder`
+* *showComments* : `showComments INDEX` +
+e.g. `showComments 1`
+* *addComment* : `addCeomment INDEX STRING` +
+e.g. `add Comments 1 "HELLO"`
+* *replyComment* : `replyComment EVENTINDEX LINEINDEX STRING` +
+e.g. `replyComments 1 2 "Hello"`
+* *deleteComment* : `deleteComment EVENT INDEX LINEINDEX STRING` +
+e.g. `deleteComment 1 2`
