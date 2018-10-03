@@ -55,12 +55,19 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Signing up for an account : `signup`
 
 User: Creates a *user* account +
-Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD`
+Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD`+
+Examples:
+
+* `signup n/Gerald Chua p/password12345 c/password12345`
+* `signup n/James Yaputra p/drowssap12345 c/drowssap12345`
 
 === Signing up for an account : `login`
 
 User: Logs in to account +
-Format: `login n/USERNAME p/PASSWORD`
+Format: `login n/USERNAME p/PASSWORD`+
+Examples:
+* `login n/Gerald Chua p/password12345`
+* `login n/James Yaputra p/drowssap12345`
 
 === Viewing help : `help`
 
@@ -306,8 +313,10 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Sign up* : `signup n/USERNAME p/PASSWORD c/CONFIRM_PASSWORD`
-* *Login* : `login n/USERNAME p/PASSWORD`
+* *Sign up* : `signup n/USERNAME p/PASSWORD c/CONFIRM_PASSWORD` +
+e.g. `signup n/Gerald Chua p/password12345 c/password12345`
+* *Login* : `login n/USERNAME p/PASSWORD` +
+e.g. `login n/Gerald Chua p/password12345`
 * *Add* `add n/EVENT p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/Sports Day p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
