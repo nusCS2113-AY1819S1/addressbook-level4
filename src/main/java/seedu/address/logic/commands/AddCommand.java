@@ -1,23 +1,18 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_QTY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QTY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
-import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a item to the stock list.
  */
 public class AddCommand extends Command {
 
@@ -26,13 +21,13 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a item to the stock list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_QTY + "QUANTITY"
-            + PREFIX_MIN_QTY + "MINIMUM QUANTITY"
+            + PREFIX_QUANTITY + "QUANTITY"
+            + PREFIX_MIN_QUANTITY + "MINIMUM QUANTITY"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Arduino "
-            + PREFIX_QTY + "20 "
-            + PREFIX_MIN_QTY + "5 "
+            + PREFIX_QUANTITY + "20 "
+            + PREFIX_MIN_QUANTITY + "5 "
             + PREFIX_TAG + "Lab1 "
             + PREFIX_TAG + "Lab2";
 
@@ -43,13 +38,11 @@ public class AddCommand extends Command {
     private final Item toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Item}
      */
-
     public AddCommand(Item item) {
         requireNonNull(item);
         toAdd = item;
-
     }
 
     @Override

@@ -14,18 +14,19 @@ import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 
 /**
- * Selects a person identified using it's displayed index from the address book.
+ * Selects a item identified using it's displayed index from the stock list.
  */
 public class SelectCommand extends Command {
 
     public static final String COMMAND_WORD = "select";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the item identified by the index number used in the displayed stock list.\n"
+            + ": Selects the item identified by the index number used in the displayed item list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Item: %1$s";
+    public static final String MESSAGE_SELECT_ITEM_SUCCESS = "Selected Item: %1$s";
+
 
     private final Index targetIndex;
 
@@ -37,14 +38,15 @@ public class SelectCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        List<Item> FilteredItemList = model.getFilteredItemList();
+        List<Item> filteredItemList = model.getFilteredItemList();
 
-        if (targetIndex.getZeroBased() >= FilteredItemList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        if (targetIndex.getZeroBased() >= filteredItemList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_SELECT_ITEM_SUCCESS, targetIndex.getOneBased()));
 
     }
 
