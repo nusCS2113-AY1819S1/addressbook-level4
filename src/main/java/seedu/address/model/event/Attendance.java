@@ -4,45 +4,49 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Event's phone number in the event manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Event's attendance in the event manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidAttendance(String)}
  */
-public class Phone {
+public class Attendance {
 
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS =
-            "Phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String PHONE_VALIDATION_REGEX = "\\d{3,}";
-    public final String value;
+    public static final String MESSAGE_ATTENDANCE_CONSTRAINTS =
+            "Attendance should be a Boolean value of 'true' or 'false'.";
+    public final Boolean value;
 
     /**
-     * Constructs a {@code Phone}.
+     * Constructs an {@code Attendance}.
      *
-     * @param phone A valid phone number.
+     * @param attendance A valid attendance.
      */
-    public Phone(String phone) {
-        requireNonNull(phone);
-        checkArgument(isValidPhone(phone), MESSAGE_PHONE_CONSTRAINTS);
-        value = phone;
+    public Attendance(String attendance) {
+        requireNonNull(attendance);
+        checkArgument(isValidAttendance(attendance), MESSAGE_ATTENDANCE_CONSTRAINTS);
+        value = Boolean.valueOf(attendance);
+    }
+
+    public Attendance(Boolean attendance) {
+        requireNonNull(attendance);
+        value = attendance;
     }
 
     /**
      * Returns true if a given string is a valid phone number.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidAttendance(String test) {
+        return Boolean.toString(true).equals(test) || Boolean.toString(false).equals(test);
     }
 
     @Override
     public String toString() {
-        return value;
+        return Boolean.toString(value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Phone // instanceof handles nulls
-                && value.equals(((Phone) other).value)); // state check
+                || (other instanceof Attendance // instanceof handles nulls
+                && value.equals(((Attendance) other).value)); // state check
     }
 
     @Override

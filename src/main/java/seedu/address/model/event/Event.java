@@ -23,16 +23,18 @@ public class Event {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Attendance attendance;
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Event(Name name, Phone phone, Email email, Address address, Attendance attendance, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.attendance = attendance;
         this.tags.addAll(tags);
     }
 
@@ -44,13 +46,13 @@ public class Event {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
-    }
+    public Email getEmail() { return email; }
 
     public Address getAddress() {
         return address;
     }
+
+    public Attendance getAttendance() { return attendance; }
 
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
