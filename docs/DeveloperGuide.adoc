@@ -836,9 +836,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |remove students |remove students who have graduated or are no longer with the institution
 
-|`* * *` |teacher |find student by name |get relevant student details, such as contact information
+|`* * *` |teacher |find students |get relevant student details, such as contact information
 
-|`* * *` |teacher |list all students |look at all the students that are currently in the institution
+|`* * *` |teacher |list students |look at all the students that are currently in the institution
 
 |`* *` |teacher |import students |import students from perhaps an existing LMS solution
 
@@ -854,15 +854,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |add modules |manage my module matters more easily
 
-|`* * *` |teacher |edit modules |change the details of my modules after I have created them
+|`* * *` |teacher |update modules |change the details of my modules after I have created them
 
-|`* * *` |teacher |delete modules |delete modules that I accidentally created
+|`* * *` |teacher |remove modules |delete modules that I accidentally created
 
 |`* * *` |teacher |archive modules |remove modules that I am no longer actively teaching, and keep it as a historical record instead
 
-|`* * *` |teacher |find module by module code |check if I have already created the module, and view its details if it exists in the system
+|`* * *` |teacher |find modules |check if I have already created the module, and view its details if it exists in the system
 
-|`* * *` |teacher |list all modules |see all the modules I am currently managing
+|`* * *` |teacher |list modules |see all the modules I am currently managing
 
 |`* * *` |teacher |enrol students in a module |keep track of the students taking my various modules
 
@@ -918,7 +918,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 (For all use cases below, the *System* is `Trajectory` and the *Actor* is the `teacher`, unless specified otherwise)
 
 [discrete]
-=== Use case: Add student
+=== Use case: Add Student
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -929,7 +929,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 *MSS* :
 
-1.  Teacher adds student to system
+1.  Teacher adds student to system.
 2.  System adds student to system, and show a confirmation message.
 +
 Use case ends.
@@ -956,7 +956,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Remove student
+=== Use case: Remove Student
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -967,7 +967,7 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1.  Teacher removes student from system
+1.  Teacher removes student from system.
 2.  System removes student to system, and show a confirmation message.
 +
 Use case ends.
@@ -994,7 +994,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Find student
+=== Use case: Find Student
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1005,7 +1005,7 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1.  Teacher finds student with entered details
+1.  Teacher finds student with entered details.
 2.  System locates student details and displays it to the teacher.
 +
 Use case ends.
@@ -1032,7 +1032,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: List students
+=== Use case: List Students
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1043,8 +1043,8 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1.  Teacher lists students
-2.  System displays list of all students by default
+1.  Teacher lists students.
+2.  System displays list of all students by default.
 +
 Use case ends.
 
@@ -1070,7 +1070,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Export all students to file
+=== Use case: Export All Students To File
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1114,7 +1114,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Import students from file
+=== Use case: Import Students From File
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1158,7 +1158,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Add module
+=== Use case: Add Module
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1202,7 +1202,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Edit module
+=== Use case: Update Module
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1246,7 +1246,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Delete module
+=== Use case: Remove Module
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1285,6 +1285,76 @@ Use case resumes at step 1.
 Use case resumes at step 1.
 
 * 3a. Teacher rejects the confirmation to delete the module.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Find Module
+*Precondition(s)* :
+
+* TO BE INSERTED | STATE NONE IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher searches for a module with some module codes as keywords.
+2.  System lists all the active modules that match any of the keywords.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters keywords that do not match any modules.
++
+** 2b1. System informs the user that no active modules were found.
++
+Use case resumes at step 1.
+
+* 2c. Teacher enters the `--all` option in the command
++
+** 2c1. System displays all matching modules including archived modules.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: List Modules
+*Precondition(s)* :
+
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher wants to see all the active modules in the system.
+2.  System lists all the active modules.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters the `--all` option in the command
++
+** 2b1. System displays all matching modules including archived modules.
 +
 Use case resumes at step 1.
 
@@ -1334,77 +1404,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Finding a module by module code
-*Precondition(s)* :
-
-* TO BE INSERTED | STATE NONE IF NONE
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1.  Teacher searches for a module with some module codes as keywords.
-2.  System lists all the active modules that match any of the keywords.
-+
-Use case ends.
-
-*Extensions* :
-
-* 2a. Teacher enters an invalid command.
-+
-** 2a1. System displays the list of valid commands.
-+
-Use case resumes at step 1.
-
-* 2b. Teacher enters keywords that do not match any modules.
-+
-** 2b1. System informs the user that no active modules were found.
-+
-Use case resumes at step 1.
-
-* 2c. Teacher enters the `--all` option in the command
-+
-** 2c1. System displays all matching modules including archived modules.
-+
-Use case resumes at step 1.
-
-
-[discrete]
-=== Use case: Listing modules
-*Precondition(s)* :
-
-* TO BE INSERTED | STATE NIL IF NONE
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1.  Teacher wants to see all the active modules in the system.
-2.  System lists all the active modules.
-+
-Use case ends.
-
-*Extensions* :
-
-* 2a. Teacher enters an invalid command.
-+
-** 2a1. System displays the list of valid commands.
-+
-Use case resumes at step 1.
-
-* 2b. Teacher enters the `--all` option in the command
-+
-** 2b1. System displays all matching modules including archived modules.
-+
-Use case resumes at step 1.
-
-
-[discrete]
-=== Use case: Create grade component
+=== Use case: Add Grade Component
 *Precondition(s)* :
 
 * Module code must exist.
@@ -1442,46 +1442,7 @@ Use case ends.
 
 
 [discrete]
-=== Use case: Remove grade component
-*Precondition(s)* :
-
-* Grade component must exist.
-* Corresponding module must exist.
-
-*Guarantees* :
-
-* Deleting grade component will also delete any grade items associated to it.
-
-*MSS* :
-
-1. Teacher removes grade component.
-2. System requests for confirmation by displaying input.
-3. Teacher confirms request.
-4. System indicates success message.
-+
-Use case ends.
-
-*Extensions* :
-
-* 1a. System detects an error in the entered data.
-+
-** 1a1. System displays message and format corresponding to error.
-** 1a2. Teacher enters new data.
-+
-Steps 1a1-1a2 are repeated until the data entered is correct.
-+
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel removing a grade component.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
-+
-Use case ends.
-
-
-[discrete]
-=== Use case: Update grade component
+=== Use case: Update Grade Component
 *Precondition(s)* :
 
 * Grade component and corresponding module code must exist.
@@ -1521,92 +1482,20 @@ Use case ends.
 
 
 [discrete]
-=== Use case: List grade component
+=== Use case: Remove Grade Component
 *Precondition(s)* :
 
-* Module must exist.
+* Grade component must exist.
+* Corresponding module must exist.
 
 *Guarantees* :
 
-* TBC
+* Deleting grade component will also delete any grade items associated to it.
 
 *MSS* :
 
-1. Teacher lists grade component.
-2. System displays list.
-+
-Use case ends.
-
-*Extensions* :
-
-* 1a. System detects an error in the entered data.
-+
-** 1a1. System displays message and format corresponding to error.
-** 1a2. Teacher enters new data.
-+
-Steps 1a1-1a2 are repeated until the data entered is correct.
-+
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel listing a grade component.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
-+
-Use case ends.
-
-
-[discrete]
-=== Use case: List students grades
-*Precondition(s)* :
-
-* Students must be enrolled to the module.
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1. Teacher lists students grades.
-2. System displays list.
-+
-Use case ends.
-
-*Extensions* :
-
-* 1a. System detects an error in the entered data.
-+
-** 1a1. System displays message and format corresponding to error.
-** 1a2. Teacher enters new data.
-+
-Steps 1a1-1a2 are repeated until the data entered is correct.
-+
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel listing students grades.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
-+
-Use case ends.
-
-
-[discrete]
-=== Use case: Assigning students grade
-*Precondition(s)* :
-
-* Students must be enrolled to the module
-* Grade item details(MAX_MARKS, PERCENTAGE OF GRADE) must exist.
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1. Teacher assigns student a mark.
-2. System requests for confirmation.
+1. Teacher removes grade component.
+2. System requests for confirmation by displaying input.
 3. Teacher confirms request.
 4. System indicates success message.
 +
@@ -1623,7 +1512,7 @@ Steps 1a1-1a2 are repeated until the data entered is correct.
 +
 Use case resumes from step 2.
 
-* *a. At any time, teacher chooses to cancel assigning students grades.
+* *a. At any time, teacher chooses to cancel removing a grade component.
 +
 ** *a1. System requests to confirm the cancellation.
 ** *a2. Teacher confirms request.
@@ -1668,7 +1557,118 @@ Use case ends.
 
 
 [discrete]
-=== Use case: Creating a class
+=== Use case: List Grade Components
+*Precondition(s)* :
+
+* Module must exist.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1. Teacher lists grade component.
+2. System displays list.
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. System detects an error in the entered data.
++
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
++
+Steps 1a1-1a2 are repeated until the data entered is correct.
++
+Use case resumes from step 2.
+
+* *a. At any time, teacher chooses to cancel listing a grade component.
++
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
++
+Use case ends.
+
+
+[discrete]
+=== Use case: List Students Grades
+*Precondition(s)* :
+
+* Students must be enrolled to the module.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1. Teacher lists students grades.
+2. System displays list.
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. System detects an error in the entered data.
++
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
++
+Steps 1a1-1a2 are repeated until the data entered is correct.
++
+Use case resumes from step 2.
+
+* *a. At any time, teacher chooses to cancel listing students grades.
++
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
++
+Use case ends.
+
+
+[discrete]
+=== Use case: Assign Student Grade
+*Precondition(s)* :
+
+* Students must be enrolled to the module.
+* Grade item details(MAX_MARKS, PERCENTAGE OF GRADE) must exist.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1. Teacher assigns student a mark.
+2. System requests for confirmation.
+3. Teacher confirms request.
+4. System indicates success message.
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. System detects an error in the entered data.
++
+** 1a1. System displays message and format corresponding to error.
+** 1a2. Teacher enters new data.
++
+Steps 1a1-1a2 are repeated until the data entered is correct.
++
+Use case resumes from step 2.
+
+* *a. At any time, teacher chooses to cancel assigning students grades.
++
+** *a1. System requests to confirm the cancellation.
+** *a2. Teacher confirms request.
++
+Use case ends.
+
+
+[discrete]
+=== Use case: Add Class
 
 *Precondition(s)* :
 
@@ -1696,7 +1696,63 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Deleting a class
+=== Use case: Update Class Enrollment Limits
+
+*Precondition(s)* :
+
+* Class must exist in data file.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  User enters command to modify class enrollment limits.
+2.  Class enrollment limits gets updated.
+3.  System displays successful modification of class enrollment limits.
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. User entered invalid command.
++
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Update Class Attendance List
+
+*Precondition(s)* :
+
+* Class must exist in data file.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  User enters command to modify class attendance list.
+2.  The class attendance list is updated.
+3.  System displays message of successful modification of class attendance list.
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. User entered invalid command.
++
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Remove Class
 
 *Precondition(s)* :
 
@@ -1730,7 +1786,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Assigning a student to class
+=== Use case: Assign Student To Class
 
 *Precondition(s)* :
 
@@ -1764,7 +1820,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Unassigning a student from class
+=== Use case: Unassign Student From Class
 
 *Precondition(s)* :
 
@@ -1804,61 +1860,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Modifying class enrollment limits
-
-*Precondition(s)* :
-
-* Class must exist in data file.
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1.  User enters command to modify class enrollment limits.
-2.  Class enrollment limits gets updated.
-3.  System displays successful modification of class enrollment limits.
-+
-Use case ends.
-
-*Extensions* :
-
-* 1a. User entered invalid command.
-+
-** 1a1. System shows ‘invalid format’ error.
-+
-Use case resumes at step 1.
-
-[discrete]
-=== Use case: Accessing class attendance list
-
-*Precondition(s)* :
-
-* Class must exist in data file.
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1.  User enters command to view class attendance list.
-2.  System displays the class attendance list.
-+
-Use case ends.
-
-*Extensions* :
-
-* 1a. User entered invalid command.
-+
-** 1a1. System shows ‘invalid format’ error.
-+
-Use case resumes at step 1.
-
-
-[discrete]
-=== Use case: Marking class attendance list
+=== Use case: Mark Class Attendance List
 
 *Precondition(s)* :
 
@@ -1892,7 +1894,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Modifying class attendance list
+=== Use case: Access Class Attendance List
 
 *Precondition(s)* :
 
@@ -1904,9 +1906,8 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1.  User enters command to modify class attendance list.
-2.  The class attendance list is updated.
-3.  System displays message of successful modification of class attendance list.
+1.  User enters command to view class attendance list.
+2.  System displays the class attendance list.
 +
 Use case ends.
 
@@ -1920,7 +1921,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Add a note to a module
+=== Use case: Add Note
 
 *Precondition(s)*
 
@@ -1959,7 +1960,7 @@ Use case ends.
 
 
 [discrete]
-=== Use case: Viewing notes
+=== Use case: View Note
 
 *Precondition(s)* :
 
@@ -1999,57 +2000,7 @@ Use case ends.
 
 
 [discrete]
-=== Use case: Deleting a note
-
-*Precondition(s)* :
-
-* Module must exist in data file.
-* Note must exist in data file.
-
-*MSS* :
-
-1.  Teacher requests to list all notes in a module.
-2.  System displays the complete numbered list of notes saved in the module.
-3.  Teacher requests to delete a specific note in the list.
-4.  System deletes the note and displays a message that it is successfully deleted.
-+
-Use case ends.
-
-*Extensions* :
-
-* 1a. Teacher enters an invalid command.
-+
-** 1a1. System displays the list of valid commands.
-+
-Use case resumes at step 1.
-
-* 1b. The module does not exist.
-+
-** 1b1. System displays a message that the module is not found.
-+
-Use case resumes at step 1.
-
-* 2a. There are no saved entries of notes in the module.
-+
-** 2a1. System displays a message that no entries are found.
-+
-Use case ends.
-
-* 3a. Teacher enters an invalid command.
-+
-** 3a1. System displays the list of valid commands.
-+
-Use case resumes at step 3.
-
-* 3b. The given index is invalid.
-+
-** 3b1. System informs the user that the input is invalid.
-+
-Use case resumes at step 2.
-
-
-[discrete]
-=== Use case: Editing a note
+=== Use case: Update Note
 
 *Precondition(s)* :
 
@@ -2111,7 +2062,57 @@ Use case resumes at step 4.
 
 
 [discrete]
-=== Use case: Finding notes
+=== Use case: Remove Note
+
+*Precondition(s)* :
+
+* Module must exist in data file.
+* Note must exist in data file.
+
+*MSS* :
+
+1.  Teacher requests to list all notes in a module.
+2.  System displays the complete numbered list of notes saved in the module.
+3.  Teacher requests to delete a specific note in the list.
+4.  System deletes the note and displays a message that it is successfully deleted.
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. Teacher enters an invalid command.
++
+** 1a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 1b. The module does not exist.
++
+** 1b1. System displays a message that the module is not found.
++
+Use case resumes at step 1.
+
+* 2a. There are no saved entries of notes in the module.
++
+** 2a1. System displays a message that no entries are found.
++
+Use case ends.
+
+* 3a. Teacher enters an invalid command.
++
+** 3a1. System displays the list of valid commands.
++
+Use case resumes at step 3.
+
+* 3b. The given index is invalid.
++
+** 3b1. System informs the user that the input is invalid.
++
+Use case resumes at step 2.
+
+
+[discrete]
+=== Use case: Find Note
 
 *Precondition(s)* :
 
