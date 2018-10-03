@@ -10,6 +10,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ClassCreateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.classroom.ClassModule;
+import seedu.address.model.classroom.Classroom;
+import seedu.address.model.classroom.Enrollment;
 
 /**
  * Parses input arguments and creates a new ClassCreateCommand object
@@ -36,7 +39,7 @@ public class ClassCreateCommandParser implements Parser<ClassCreateCommand> {
         String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
         String maxEnrollment = argMultimap.getValue(PREFIX_MAXENROLLMENT).get();
 
-        return new ClassCreateCommand(className, moduleCode, maxEnrollment);
+        return new ClassCreateCommand(new Classroom(className), new ClassModule(moduleCode), new Enrollment(maxEnrollment));
     }
 
     /**

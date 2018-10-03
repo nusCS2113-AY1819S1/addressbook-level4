@@ -1,13 +1,14 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.classroom.ClassModule;
+import seedu.address.model.classroom.Classroom;
+import seedu.address.model.classroom.Enrollment;
 
 /**
  * Creates a class for a module.
@@ -28,16 +29,16 @@ public class ClassCreateCommand extends Command {
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Class create command not implemented yet.";
 
-    public static final String MESSAGE_ARGUMENTS = "Class name: %1$s, Module code: %2$s, Enrollment size: %3$s";
-    private final String className;
-    private final String moduleCode;
-    private final String maxEnrollment;
+    public static final String MESSAGE_ARGUMENTS = "Class name: %1$s, ClassModule code: %2$s, Enrollment size: %3$s";
+    private final Classroom className;
+    private final ClassModule moduleCode;
+    private final Enrollment maxEnrollment;
 
     /**
      * @param index  of the person in the filtered person list to edit the remark
      * @param remark of the person to be updated to
      */
-    public ClassCreateCommand(String className, String moduleCode, String maxEnrollment) {
+    public ClassCreateCommand(Classroom className, ClassModule moduleCode, Enrollment maxEnrollment) {
         requireAllNonNull(className, moduleCode, maxEnrollment);
         this.className = className;
         this.moduleCode = moduleCode;

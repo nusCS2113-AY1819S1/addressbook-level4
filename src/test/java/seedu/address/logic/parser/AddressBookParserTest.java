@@ -4,9 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -31,6 +29,9 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.classroom.ClassModule;
+import seedu.address.model.classroom.Classroom;
+import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -140,7 +141,7 @@ public class AddressBookParserTest {
                 + " " + PREFIX_CLASSNAME + className
                 + " " + PREFIX_MODULECODE + moduleCode
                 + " " + PREFIX_MAXENROLLMENT + maxEnrollment);
-        assertEquals(new ClassCreateCommand(className, moduleCode, maxEnrollment), command);
+        assertEquals(new ClassCreateCommand(new Classroom(className), new ClassModule(moduleCode), new Enrollment(maxEnrollment)), command);
     }
 
     @Test
