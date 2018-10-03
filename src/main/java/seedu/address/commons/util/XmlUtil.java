@@ -33,9 +33,9 @@ public class XmlUtil {
         requireNonNull(file);
         requireNonNull(classToConvert);
 
-//        if (!FileUtil.isFileExists(file)) {
-//            throw new FileNotFoundException("File not found : " + file.toAbsolutePath());
-//        }
+        if (!FileUtil.isFileExists(file)) {
+            throw new FileNotFoundException("File not found : " + file.toAbsolutePath());
+        }
 
         JAXBContext context = JAXBContext.newInstance(classToConvert);
         Unmarshaller um = context.createUnmarshaller();
@@ -57,9 +57,9 @@ public class XmlUtil {
         requireNonNull(file);
         requireNonNull(data);
 
-//        if (!Files.exists(file)) {
-//            throw new FileNotFoundException("File not found : " + file.toAbsolutePath());
-//        }
+        if (!Files.exists(file)) {
+            throw new FileNotFoundException("File not found : " + file.toAbsolutePath());
+        }
 
         JAXBContext context = JAXBContext.newInstance(data.getClass());
         Marshaller m = context.createMarshaller();
