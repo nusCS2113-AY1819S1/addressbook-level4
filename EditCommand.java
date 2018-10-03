@@ -94,13 +94,13 @@ public class EditCommand extends Command {
         assert eventToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(eventToEdit.getName());
-        //Contact updatedContact = editPersonDescriptor.getContact().orElse(eventToEdit.getContact());
+        Contact updatedContact = editPersonDescriptor.getContact().orElse(eventToEdit.getContact());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(eventToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(eventToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(eventToEdit.getTags());
 
-        return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedAddress, updatedTags);
     }
 
     @Override

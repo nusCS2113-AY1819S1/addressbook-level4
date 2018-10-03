@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Event event = new Event(name, phone, email, address, tagList);
+        Event event = new Event(name, contact, phone, email, address, tagList);
 
         return new AddCommand(event);
     }
