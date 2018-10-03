@@ -6,12 +6,12 @@ import seedu.address.model.event.Event;
 /**
  * Represents a selection change in the Event List Panel
  */
-public class PersonPanelSelectionChangedEvent extends BaseEvent {
+public class EventSelectionChangedEvent extends BaseEvent {
 
 
     private final Event newSelection;
 
-    public PersonPanelSelectionChangedEvent(Event newSelection) {
+    public EventSelectionChangedEvent(Event newSelection) {
         this.newSelection = newSelection;
     }
 

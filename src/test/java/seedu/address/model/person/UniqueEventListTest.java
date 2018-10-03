@@ -20,7 +20,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.event.exceptions.DuplicatePersonException;
 import seedu.address.model.event.exceptions.PersonNotFoundException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 
 public class UniqueEventListTest {
     @Rule
@@ -48,7 +48,7 @@ public class UniqueEventListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(ALICE);
-        Event editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Event editedAlice = new EventBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueEventList.contains(editedAlice));
     }
@@ -96,7 +96,7 @@ public class UniqueEventListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueEventList.add(ALICE);
-        Event editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Event editedAlice = new EventBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueEventList.setEvent(ALICE, editedAlice);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
