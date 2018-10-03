@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns2:notesManager xmlns:ns2="seedu.address.model">
-    <notes>
-        <notes>
-            <note>test test..test</note>
-            <ModuleCode>CS2113</ModuleCode>
-        </notes>
-    </notes>
+    <notes/>
 </ns2:notesManager>
