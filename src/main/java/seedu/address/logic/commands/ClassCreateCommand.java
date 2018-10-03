@@ -8,9 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.classroom.ClassModule;
 import seedu.address.model.classroom.Classroom;
-import seedu.address.model.classroom.Enrollment;
 
 /**
  * Creates a class for a module.
@@ -32,19 +30,15 @@ public class ClassCreateCommand extends Command {
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Class create command not implemented yet.";
 
     public static final String MESSAGE_ARGUMENTS = "Class name: %1$s, ClassModule code: %2$s, Enrollment size: %3$s";
-    private final Classroom className;
-    private final ClassModule moduleCode;
-    private final Enrollment maxEnrollment;
+
+    private final Classroom classToCreate;
 
     /**
-     * @param index  of the person in the filtered person list to edit the remark
-     * @param remark of the person to be updated to
+     * Command creates a classroom to be added.
      */
-    public ClassCreateCommand(Classroom className, ClassModule moduleCode, Enrollment maxEnrollment) {
-        requireAllNonNull(className, moduleCode, maxEnrollment);
-        this.className = className;
-        this.moduleCode = moduleCode;
-        this.maxEnrollment = maxEnrollment;
+    public ClassCreateCommand(Classroom classRoom) {
+        requireAllNonNull(classRoom);
+        this.classToCreate = classRoom;
     }
 
     /**
@@ -57,23 +51,15 @@ public class ClassCreateCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, className, moduleCode, maxEnrollment));
+        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        //TBC
     }
 
     @Override
     public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-        // instanceof handles nulls
-        if (!(other instanceof ClassCreateCommand)) {
-            return false;
-        }
-        // state check
-        ClassCreateCommand e = (ClassCreateCommand) other;
-        return className.equals(e.className)
-                && moduleCode.equals(e.moduleCode)
-                && maxEnrollment.equals(e.maxEnrollment);
+        return other == this // short circuit if same object
+                || (other instanceof ClassCreateCommand // instanceof handles nulls
+                && classToCreate.equals(((ClassCreateCommand) other).classToCreate));
+
     }
 }
