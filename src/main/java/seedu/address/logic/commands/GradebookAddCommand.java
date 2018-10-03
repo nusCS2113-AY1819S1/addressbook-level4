@@ -8,12 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GB_WEIGHTAGE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.gradebook.Component;
 
 /**
  * Adds a gradebook component to the address book.
  */
-public class GradebookAddCommand {
+public class GradebookAddCommand extends Command {
 
     public static final String COMMAND_WORD = "gradebook add";
 
