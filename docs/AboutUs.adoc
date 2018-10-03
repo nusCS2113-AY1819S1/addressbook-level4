@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-<Placeholder name> was developed by Team <team name placeholder>. +
+FrozenBook was developed by Team CS2113-AY1819S1-W12-4. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
@@ -19,8 +19,8 @@ Role: Project Advisor
 '''
 
 === Jin Minjia
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+image::bluein-green.jpg[width="150", align="left"]
+{empty}[http://github.com/bluein-green[github]] [<<johndoe#, portfolio>>]
 
 Role: <tbc> +
 Responsibilities: <tbc>
@@ -28,8 +28,8 @@ Responsibilities: <tbc>
 '''
 
 === Li Jiawei
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+image::scottljw.jpg[width="150", align="left"]
+{empty}[http://github.com/scottljw[github]] [<<johndoe#, portfolio>>]
 
 Role: <tbc> +
 Responsibilities: <tbc>
@@ -37,17 +37,17 @@ Responsibilities: <tbc>
 '''
 
 === Lim Xuan Hao
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+image::Lunastryke.jpg[width="150", align="left"]
+{empty}[http://github.com/Lunastryke[github]] [<<johndoe#, portfolio>>]
 
-Role: <tbc> +
-Responsibilities: <tbc>
+Role: Documentation +
+Responsibilities: Git Expert
 
 '''
 
 === Liu Tianhang
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+image::LIU-TIANHANG.jpg[width="150", align="left"]
+{empty}[http://github.com/LIU-TIANHANG[github]] [<<johndoe#, portfolio>>]
 
 Role: <tbc> +
 Responsibilities: <tbc>

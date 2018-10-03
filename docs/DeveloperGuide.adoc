@@ -815,13 +815,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has the need to manage a small ice cream store
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: Manage a store from inventory management to accounting better than using separate software
 
 [appendix]
 == User Stories
@@ -849,33 +849,51 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `FrozenBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add Transaction
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add specific item to sales list
+2.  System requests for confirmation
+3.  User confirms
+4.  System responds with successful add message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. User enters a non-existing item.
++
+[none]
+**   2a1. System responds that the item does not exist and requests for next command.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. User enters a item that is already sold out
 +
 [none]
-** 3a1. AddressBook shows an error message.
+**	2b1. System responds that the item is sold out and requests for the next command.
 +
-Use case resumes at step 2.
+Use case ends.
+
+* 2c. User specified a quantity that is larger than the available stock
++
+[none]
+**	2c1. System prompts user to enter a valid sales number
++
+Use case resumes from 1.
+
+
+
+* 3a. User cancels procedure.
++
+[none]
++
+** Use case ends.
 
 _{More to be added}_
 
