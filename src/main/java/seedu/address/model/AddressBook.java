@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.gradebook.Component;
+import seedu.address.model.gradebook.UniqueComponentList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -15,6 +17,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueComponentList components;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        components = new UniqueComponentList();
     }
 
     public AddressBook() {}
@@ -91,6 +95,20 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removePerson(Person key) {
         persons.remove(key);
+    }
+
+    // gradebook-level operations
+
+    /**
+     * Returns true if gradebook component with the same identity as {@code component} exists in Trajectory.
+     */
+    public boolean hasComponent(Component component) {
+        requireNonNull(component);
+        return components.contains(component);
+    }
+
+    public void addComponent(Component c) {
+        components.add(c);
     }
 
     //// util methods
