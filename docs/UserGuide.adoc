@@ -54,31 +54,29 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Signing up for an account : `signup`
 
-User    : Creates a *user* account
-
-Format  : `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD`
+User: Creates a *user* account +
+Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD`
 
 === Signing up for an account : `login`
 
-User    : Logs in to account
-
-Format  : `login n/USERNAME p/PASSWORD`
+User: Logs in to account +
+Format: `login n/USERNAME p/PASSWORD`
 
 === Viewing help : `help`
 
-Admin: Shows Admin commands
-
+Admin: Shows Admin commands +
 User: Shows User commands
 
 Format: `help`
 
 === Adding a event: `add`
 
+Admin: Adds an event to tthe Event Manager +
 Adds a event to the Event Manager +
 Format: `add n/EVENT p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
-A event can have any number of tags (including 0)
+An event can have any number of tags (including 0)
 
 Examples:
 
@@ -87,12 +85,12 @@ Examples:
 
 === Listing all events : `list`
 
-Shows a list of all events in the Event Manager. +
+User/Admin: Shows a list of all events in the Event Manager. +
 Format: `list`
 
 === Editing a event : `edit`
 
-Edits an existing event in the Event Manager. +
+Admin: Edits an existing event in the Event Manager. +
 Format: `edit INDEX [n/EVENT] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
@@ -112,7 +110,7 @@ Edits the name of the 2nd event to be `Sports Day` and clears all existing tags.
 
 === Locating events by name: `find`
 
-Finds events whose names contain any of the given keywords. +
+Admin/User: Finds events whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -132,7 +130,7 @@ Returns any event having names `Sports Day`, `Comp Sci Workshop`, or `Good Day`
 
 === Deleting a event : `delete`
 
-Deletes the specified event from the Event Manager. +
+AdminL: Deletes the specified event from the Event Manager. +
 Format: `delete INDEX`
 
 ****
@@ -146,7 +144,7 @@ Examples:
 * `list` +
 `delete 2` +
 Deletes the 2nd event in the Event Manager.
-* `find Betsy` +
+* `find Sports` +
 `delete 1` +
 Deletes the 1st event in the results of the `find` command.
 
@@ -166,7 +164,7 @@ Examples:
 * `list` +
 `select 2` +
 Selects the 2nd event in the Event Manager.
-* `find Betsy` +
+* `find Sports` +
 `select 1` +
 Selects the 1st event in the results of the `find` command.
 
