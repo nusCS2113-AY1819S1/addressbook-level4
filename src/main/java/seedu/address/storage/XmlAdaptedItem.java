@@ -91,12 +91,12 @@ public class XmlAdaptedItem {
         if (quantity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "quantity"));
         }
-        final Quantity modelQuantity = new Quantity(quantity);
+        final Quantity modelQuantity = new Quantity(quantity.toString());
 
         if (minQuantity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "minQuantity"));
         }
-        final Quantity modelMinQuantity = new Quantity(minQuantity);
+        final Quantity modelMinQuantity = new Quantity(minQuantity.toString());
 
         final Set<Tag> modelTags = new HashSet<>(itemTags);
         return new Item(modelName, modelQuantity, modelMinQuantity, status, modelTags);

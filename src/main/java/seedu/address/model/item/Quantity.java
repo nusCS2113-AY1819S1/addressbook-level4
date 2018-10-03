@@ -21,17 +21,17 @@ public class Quantity {
      *
      * @param inputQuantity A valid quantity.
      */
-    public Quantity(Integer inputQuantity) {
+    public Quantity(String inputQuantity) {
         requireNonNull(inputQuantity);
         checkArgument(isValidQuantity(inputQuantity), MESSAGE_QUANTITY_CONSTRAINTS);
-        quantity = inputQuantity;
+        quantity = Integer.parseInt(inputQuantity);
     }
 
     /**
      * Returns true if a given integer is a valid quantity.
      */
-    public static boolean isValidQuantity(Integer test) {
-        return StringUtil.isNonZeroUnsignedInteger(test.toString());
+    public static boolean isValidQuantity(String test) {
+        return StringUtil.isNonZeroUnsignedInteger(test);
     }
 
     @Override
@@ -39,7 +39,9 @@ public class Quantity {
         return quantity.toString();
     }
 
-    public Integer toInteger() { return quantity; }
+    public Integer toInteger() {
+        return quantity;
+    }
 
     @Override
     public boolean equals(Object other) {

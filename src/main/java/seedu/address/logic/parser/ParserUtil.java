@@ -61,10 +61,10 @@ public class ParserUtil {
     public static Quantity parseQuantity(String quantity) throws ParseException {
         requireNonNull(quantity);
         String trimmedQuantity = quantity.trim();
-        if (!Quantity.isValidQuantity(Integer.parseInt(trimmedQuantity))) {
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
             throw new ParseException(MESSAGE_INVALID_QUANTITY);
         }
-        return new Quantity(Integer.parseInt(trimmedQuantity));
+        return new Quantity(trimmedQuantity);
     }
 
     /**
@@ -76,10 +76,10 @@ public class ParserUtil {
     public static Quantity parseMinQuantity(String minQuantity) throws ParseException {
         requireNonNull(minQuantity);
         String trimmedMinQuantity = minQuantity.trim();
-        if (!Quantity.isValidQuantity(Integer.parseInt(trimmedMinQuantity))) {
+        if (!Quantity.isValidQuantity(trimmedMinQuantity)) {
             throw new ParseException(MESSAGE_INVALID_MIN_QUANTITY);
         }
-        return new Quantity(Integer.parseInt(trimmedMinQuantity));
+        return new Quantity(trimmedMinQuantity);
     }
 
     /**
