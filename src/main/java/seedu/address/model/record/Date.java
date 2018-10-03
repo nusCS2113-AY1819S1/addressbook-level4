@@ -13,7 +13,7 @@ public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date parameter should be in the format of dd-mm-yyyy "
             + "with dd and mm being 2 digits, and yyyy being 4 digits."
-            + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
+            + " Please take note that inappropriate date will result in errors, for example: 30-02-2018";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
     public final String value;
     private String day;
@@ -102,7 +102,7 @@ public class Date {
         return value.hashCode();
     }
 
-    // TODO: Decide as a group whether we want days/month/year to be accessed separately
+    // TODO: Decide as a group whether we want days-month-year to be accessed separately
     public String getDay() {
         return day;
     }

@@ -96,11 +96,13 @@ public class UniqueRecordList implements Iterable<Record> {
         internalList.setAll(records);
     }
 
+    /*
     public Index searchByDate(List<Record> records) {
         for (int i = 0; i < records.size(); i++){
 
         }
     }
+    */
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.

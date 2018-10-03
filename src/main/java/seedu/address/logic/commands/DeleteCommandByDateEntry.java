@@ -16,8 +16,8 @@ public class DeleteCommandByDateEntry extends Command{
 
     public static final String MESSAGE_USAGE = COMMAND_WORD +
             ": Delete the all records identified by the date number used in the displayed record list.\n"  +
-            "PARAMERERS: DATE (Must follow the format dd/mm/yyyy.\n" +
-            "Example: " + COMMAND_WORD + "31/03/1999";
+            "PARAMERERS: DATE (Must follow the format dd-mm-yyyy.\n" +
+            "Example: " + COMMAND_WORD + "31-03-1999";
 
     public static final String MESSAGE_DELETE_RECORD_SUCCESS = "Deleted all records whose date is %1$s";
 
