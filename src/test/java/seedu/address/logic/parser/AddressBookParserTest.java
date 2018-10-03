@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -14,7 +17,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClassCreateCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -131,7 +133,14 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_classCreate() throws Exception {
-        assertTrue(parser.parseCommand(ClassCreateCommand.COMMAND_WORD) instanceof ClassCreateCommand);
+        final String className = "T16";
+        final String moduleCode = "CG1111";
+        final String maxEnrollment = "20";
+        ClassCreateCommand command = (ClassCreateCommand) parser.parseCommand(ClassCreateCommand.COMMAND_WORD
+                + " " + PREFIX_CLASSNAME + className
+                + " " + PREFIX_MODULECODE + moduleCode
+                + " " + PREFIX_MAXENROLLMENT + maxEnrollment);
+        assertEquals(new ClassCreateCommand(className, moduleCode, maxEnrollment), command);
     }
 
     @Test

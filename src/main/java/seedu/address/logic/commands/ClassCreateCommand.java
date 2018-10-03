@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
@@ -18,7 +19,7 @@ public class ClassCreateCommand extends Command {
             + " for the system. "
             + "Parameters: "
             + PREFIX_CLASSNAME + "CLASS_NAME "
-            + PREFIX_MODULECODE + "COURSE_NAME "
+            + PREFIX_MODULECODE + "MODULE_NAME "
             + PREFIX_MAXENROLLMENT + "ENROLLMENT_SIZE\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASSNAME + "T16 "
@@ -26,6 +27,22 @@ public class ClassCreateCommand extends Command {
             + PREFIX_MAXENROLLMENT + "20";
 
     public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Class create command not implemented yet.";
+
+    public static final String MESSAGE_ARGUMENTS = "Class name: %1$s, Module code: %2$s, Enrollment size: %3$s";
+    private final String className;
+    private final String moduleCode;
+    private final String maxEnrollment;
+
+    /**
+     * @param index  of the person in the filtered person list to edit the remark
+     * @param remark of the person to be updated to
+     */
+    public ClassCreateCommand(String className, String moduleCode, String maxEnrollment) {
+        requireAllNonNull(className, moduleCode, maxEnrollment);
+        this.className = className;
+        this.moduleCode = moduleCode;
+        this.maxEnrollment = maxEnrollment;
+    }
 
     /**
      * Executes the command and returns the result message.
@@ -37,6 +54,23 @@ public class ClassCreateCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(MESSAGE_NOT_IMPLEMENTED_YET);
+        throw new CommandException(String.format(MESSAGE_ARGUMENTS, className, moduleCode, maxEnrollment));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof ClassCreateCommand)) {
+            return false;
+        }
+        // state check
+        ClassCreateCommand e = (ClassCreateCommand) other;
+        return className.equals(e.className)
+                && moduleCode.equals(e.moduleCode)
+                && maxEnrollment.equals(e.maxEnrollment);
     }
 }
