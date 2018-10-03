@@ -13,7 +13,7 @@ import seedu.address.model.gradebook.Component;
 /**
  * Adds a gradebook component to the address book.
  */
-public class GradebookAddCommand extends Command {
+public class GradebookAddCommand {
 
     public static final String COMMAND_WORD = "gradebook add";
 
