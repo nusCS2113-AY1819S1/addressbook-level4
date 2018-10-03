@@ -34,8 +34,8 @@ Responsibilities: TBD
 image::zhicaizack.png[width="150", align="left"]
 {empty}[https://github.com/zhicaizack[github]] [<<zhicaizack#, portfolio>>]
 
-Role: Developer +
-Responsibilities: Help out with Git and IntelliJ, making sure the project can run on everyone's PC.
+Role: Testing +
+Responsibilities: Help out with Testing and CI for Git, making sure the test are up to standards.
 
 '''
 
