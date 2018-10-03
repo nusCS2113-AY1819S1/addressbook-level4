@@ -15,7 +15,7 @@ public class ClassroomManager {
     public ArrayList<Classroom> getList() {
         return classroomList;
     }
-    public void setCourseList(ArrayList<Classroom> classroomList) {
+    public void setClassroomList(ArrayList<Classroom> classroomList) {
         this.classroomList = classroomList;
     }
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -13,8 +14,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "class")
 public class Classroom {
     //class-specific fields
+    @XmlElement(name = "classname")
     private ClassName className;
+    @XmlElement(name = "modulecode")
     private ClassModule moduleCode;
+    @XmlElement(name = "maxenrollment")
     private Enrollment maxEnrollment;
 
     public Classroom() {
