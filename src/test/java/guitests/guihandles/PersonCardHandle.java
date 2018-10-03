@@ -8,10 +8,10 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Product;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a product card in the product list panel.
  */
 public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
@@ -73,14 +73,14 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if this handle contains {@code person}.
+     * Returns true if this handle contains {@code product}.
      */
-    public boolean equals(Person person) {
-        return getName().equals(person.getName().fullName)
-                && getProductInfo().equals(person.getProductInfo().value)
-                && getSerialNumber().equals(person.getSerialNumber().value)
-                && getDistributor()().equals(person.getDistributor()().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
+    public boolean equals(Product product) {
+        return getName().equals(product.getName().fullName)
+                && getProductInfo().equals(product.getProductInfo().value)
+                && getSerialNumber().equals(product.getSerialNumber().value)
+                && getDistributor()().equals(product.getDistributor()().value)
+                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(product.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
     }

@@ -10,10 +10,10 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Product in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Person {
+public class Product {
 
     // Identity fields
     private final Name name;
@@ -27,7 +27,7 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Product(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -64,14 +64,14 @@ public class Person {
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Person otherPerson) {
-        if (otherPerson == this) {
+    public boolean isSamePerson(Product otherProduct) {
+        if (otherProduct == this) {
             return true;
         }
 
-        return otherPerson != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getSerialNumber().equals(getSerialNumber()) || otherPerson.getDistributor().equals(getDistributor()));
+        return otherProduct != null
+                && otherProduct.getName().equals(getName())
+                && (otherProduct.getSerialNumber().equals(getSerialNumber()) || otherProduct.getDistributor().equals(getDistributor()));
     }
 
     /**
@@ -84,16 +84,16 @@ public class Person {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof Product)) {
             return false;
         }
 
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getSerialNumber().equals(getSerialNumber())
-                && otherPerson.getDistributor().equals(getDistributor())
-                && otherPerson.getProductInfo().equals(getProductInfo())
-                && otherPerson.getTags().equals(getTags());
+        Product otherProduct = (Product) other;
+        return otherProduct.getName().equals(getName())
+                && otherProduct.getSerialNumber().equals(getSerialNumber())
+                && otherProduct.getDistributor().equals(getDistributor())
+                && otherProduct.getProductInfo().equals(getProductInfo())
+                && otherProduct.getTags().equals(getTags());
     }
 
     @Override
