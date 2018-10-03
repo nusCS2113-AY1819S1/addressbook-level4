@@ -122,19 +122,6 @@ Note <<UsingTravis#, how the AddressBook app uses Travis to perform Continuous I
 
 * https://se-edu.github.io/se-book/integration/buildAutomation/continuousIntegrationDeployment/[se-edu/se-book: Implementation: Integration: Build Automation: CI & CD]
 
-=== Exercise: Use Travis in your own project
-
-* Set up Travis to perform CI on your own fork.
-
-
-'''
-
-== Use Code Coverage `[LO-CodeCoverage]`
-
-Note how our CI server <<UsingTravis#, Travis uses Coveralls to report code coverage>>. (https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master[Coverage Status]]) After <<UsingCoveralls#, setting up Coveralls>> for your project, you can visit Coveralls website to find details about the coverage of code pushed to your repo. https://coveralls.io/github/se-edu/addressbook-level4?branch=master[Here] is an example.
-
-*Resources*
-
 * https://se-edu.github.io/se-book/testing/testCoverage/[se-edu/se-book: QA: Testing: Test Coverage]
 
 === Exercise: Use the IDE to measure coverage locally
