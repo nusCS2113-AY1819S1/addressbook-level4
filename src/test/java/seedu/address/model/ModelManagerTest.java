@@ -1,10 +1,11 @@
 package seedu.address.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.*;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -14,7 +15,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.PersonBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -43,6 +47,28 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void deleteTag_nonExistentTag_modelUnchanged() throws Exception {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        UserPrefs userPrefs = new UserPrefs();
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.deleteTag(new Tag(VALID_TAG_UNUSED));
+        assertEquals(new ModelManager(addressBook, userPrefs), modelManager);
+    }
+    @Test
+    public void deleteTag_tagUsedByMultiplePersons_tagRemoved() throws Exception {
+        AddressBook addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        UserPrefs userPrefs = new UserPrefs();
+        ModelManager modelManager = new ModelManager(addressBook, userPrefs);
+        modelManager.deleteTag(new Tag(VALID_TAG_FRIEND));
+        ModelManager expectedModelManager = new ModelManager(addressBook, userPrefs);
+        Person amyWithoutFriendTag = new PersonBuilder(AMY).withTags().build();
+        Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        expectedModelManager.updatePerson(AMY, amyWithoutFriendTag);
+        expectedModelManager.updatePerson(BOB, bobWithoutFriendTag);
+        assertEquals(expectedModelManager, modelManager);
     }
 
     @Test
