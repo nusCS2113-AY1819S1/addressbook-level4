@@ -85,7 +85,14 @@ public class AutoCompleteParser {
     }
 
     private AutoCompleteParserPair getFindCommandPair(String arguments, ArgumentMultimap argMultimap) {
-        Prefix lastPrefix = ArgumentTokenizer.findLastPrefix(arguments, PREFIX_NAME);
+        Prefix lastPrefix = ArgumentTokenizer.findLastPrefix(
+                arguments,
+                PREFIX_NAME,
+                PREFIX_EMAIL,
+                PREFIX_PHONE,
+                PREFIX_ADDRESS,
+                PREFIX_TAG);
+
         if (argMultimap.getValue(lastPrefix).isPresent()) {
             return new AutoCompleteParserPair(lastPrefix, argMultimap.getValue(lastPrefix).get());
         }

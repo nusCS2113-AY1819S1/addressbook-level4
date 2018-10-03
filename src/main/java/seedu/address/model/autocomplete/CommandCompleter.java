@@ -140,7 +140,7 @@ public class CommandCompleter {
         case COMPLETE_EMAIL:
             return emailTrie.getPredictList(pair.prefixValue);
         case COMPLETE_TAG:
-            // TODO: create Tag trie
+            // TODO: support Tags prediction, create Tag trie
         default:
             return new ArrayList<>();
         }
