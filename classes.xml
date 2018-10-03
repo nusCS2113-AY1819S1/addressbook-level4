@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ns2:classroomManager xmlns:ns2="seedu.address.model">
+    <classrooms>
+        <class>
+            <classname>
+                <value>T17</value>
+            </classname>
+            <modulecode>
+                <value>CG1111</value>
+            </modulecode>
+            <maxenrollment>
+                <value>20</value>
+            </maxenrollment>
+        </class>
+    </classrooms>
+</ns2:classroomManager>
