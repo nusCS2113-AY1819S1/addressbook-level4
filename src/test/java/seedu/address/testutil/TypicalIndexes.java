@@ -13,7 +13,6 @@ import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
  */
 public class TypicalIndexes {
     private static Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
 
     public static final Index INDEX_FIRST_RECORD = Index.fromOneBased(1);
     public static final Index INDEX_SECOND_RECORD = Index.fromOneBased(2);

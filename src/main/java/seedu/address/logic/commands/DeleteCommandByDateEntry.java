@@ -38,7 +38,6 @@ public class DeleteCommandByDateEntry extends Command{
                 model.deleteRecord(targetRecord);
                 model.commitAddressBook();
                 targetRecordExist = true;
-
             }
         }
         if (!targetRecordExist) {
