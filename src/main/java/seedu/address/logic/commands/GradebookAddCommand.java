@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GB_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GB_COMPONENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GB_MAXMARKS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GB_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GB_WEIGHTAGE;
 
 import seedu.address.logic.CommandHistory;
@@ -33,30 +33,30 @@ public class GradebookAddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New gradebook added: %1$s";
     public static final String MESSAGE_DUPLICATE_COMPONENT = "Grade component already exist in Trajectory.";
 
-    private final Component addGBComponent;
+    private final Component addComponent;
 
     public GradebookAddCommand (Component component) {
         requireNonNull(component);
-        addGBComponent = component;
+        addComponent = component;
     }
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if(model.hasComponent(addGBComponent)) {
+        if (model.hasComponent(addComponent)) {
             throw new CommandException(MESSAGE_DUPLICATE_COMPONENT);
         }
 
-        model.addComponent(addGBComponent);
+        model.addComponent(addComponent);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, addGBComponent));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, addComponent));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this //short circuit if same object
                 || (other instanceof GradebookAddCommand //instanceof handles nulls
-                && addGBComponent.equals(((GradebookAddCommand) other).addGBComponent));
+                && addComponent.equals(((GradebookAddCommand) other).addComponent));
     }
 }

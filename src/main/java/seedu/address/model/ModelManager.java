@@ -23,7 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-//    private final FilteredList<Component> filteredComponents;
+    //  private final FilteredList<Component> filteredComponents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -67,7 +67,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addComponent(Component component) {
         versionedAddressBook.addComponent(component);
-//        updateFilteredComponentList(PREDICATE_SHOW_ALL_COMPONENT);
+        //updateFilteredComponentList(PREDICATE_SHOW_ALL_COMPONENT);
         indicateAddressBookChanged();
     }
 
@@ -115,16 +115,18 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-//    @Override
-//    public ObservableList<Component> getFilteredComponentList() {
-//        return FXCollections.unmodifiableObservableList(filteredComponents);
-//    }
-//
-//    @Override
-//    public void updateFilteredComponentList(Predicate<Component> predicate) {
-//        requireNonNull(predicate);
-//        filteredComponents.setPredicate(predicate);
-//    }
+    /*
+    @Override
+    public ObservableList<Component> getFilteredComponentList() {
+        return FXCollections.unmodifiableObservableList(filteredComponents);
+    }
+
+    @Override
+    public void updateFilteredComponentList(Predicate<Component> predicate) {
+        requireNonNull(predicate);
+        filteredComponents.setPredicate(predicate);
+    }
+    */
 
     //=========== Undo/Redo =================================================================================
 

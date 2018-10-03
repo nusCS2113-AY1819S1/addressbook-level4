@@ -107,7 +107,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         return components.contains(component);
     }
 
-    public void addComponent(Component c) { components.add(c); }
+    public void addComponent(Component c) {
+        components.add(c);
+    }
 
     //// util methods
 
