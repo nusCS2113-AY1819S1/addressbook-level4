@@ -78,6 +78,10 @@ public class StorageManager extends ComponentManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+    @Override
+    public void backupAddressBook(ReadOnlyAddressBook addressBook, Path backupFilePath) throws IOException {
+        addressBookStorage.backupAddressBook(addressBook, backupFilePath);
+    }
 
     @Override
     @Subscribe
