@@ -41,8 +41,8 @@ public class PersonBuilder {
     public PersonBuilder(Person personToCopy) {
         name = personToCopy.getName();
         phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
+        email = personToCopy.getDistributor()();
+        address = personToCopy.getProductInfo();
         tags = new HashSet<>(personToCopy.getTags());
     }
 

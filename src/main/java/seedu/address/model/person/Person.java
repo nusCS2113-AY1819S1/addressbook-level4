@@ -44,11 +44,11 @@ public class Person {
         return phone;
     }
 
-    public Email getEmail() {
+    public Email getDistributor() {
         return email;
     }
 
-    public Address getAddress() {
+    public Address getProductInfo() {
         return address;
     }
 
@@ -71,7 +71,7 @@ public class Person {
 
         return otherPerson != null
                 && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getDistributor().equals(getDistributor()));
     }
 
     /**
@@ -91,8 +91,8 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
+                && otherPerson.getDistributor().equals(getDistributor())
+                && otherPerson.getProductInfo().equals(getProductInfo())
                 && otherPerson.getTags().equals(getTags());
     }
 
@@ -106,12 +106,12 @@ public class Person {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
+                .append(" Serial number: ")
                 .append(getPhone())
-                .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
+                .append(" Distributor: ")
+                .append(getDistributor())
+                .append(" Product info: ")
+                .append(getProductInfo())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -53,7 +53,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return nameLabel.getText();
     }
 
-    public String getAddress() {
+    public String getProductInfo() {
         return addressLabel.getText();
     }
 
@@ -61,7 +61,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return phoneLabel.getText();
     }
 
-    public String getEmail() {
+    public String getDistributor()() {
         return emailLabel.getText();
     }
 
@@ -77,9 +77,9 @@ public class PersonCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(Person person) {
         return getName().equals(person.getName().fullName)
-                && getAddress().equals(person.getAddress().value)
+                && getProductInfo().equals(person.getProductInfo().value)
                 && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
+                && getDistributor()().equals(person.getDistributor()().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));

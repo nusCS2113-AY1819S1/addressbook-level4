@@ -16,7 +16,7 @@ public interface Model {
     void resetData(ReadOnlyAddressBook newData);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyAddressBook getProductInfoBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.

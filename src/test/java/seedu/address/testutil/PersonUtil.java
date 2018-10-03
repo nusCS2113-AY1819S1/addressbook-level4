@@ -32,8 +32,8 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + person.getName().fullName + " ");
         sb.append(PREFIX_SERIAL_NR + person.getPhone().value + " ");
-        sb.append(PREFIX_DISTRIBUTOR + person.getEmail().value + " ");
-        sb.append(PREFIX_PRODUCT_INFO + person.getAddress().value + " ");
+        sb.append(PREFIX_DISTRIBUTOR + person.getDistributor()().value + " ");
+        sb.append(PREFIX_PRODUCT_INFO + person.getProductInfo().value + " ");
         person.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -47,8 +47,8 @@ public class PersonUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_SERIAL_NR).append(phone.value).append(" "));
-        descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_DISTRIBUTOR).append(email.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_PRODUCT_INFO).append(address.value).append(" "));
+        descriptor.getDistributor()().ifPresent(email -> sb.append(PREFIX_DISTRIBUTOR).append(email.value).append(" "));
+        descriptor.getProductInfo().ifPresent(address -> sb.append(PREFIX_PRODUCT_INFO).append(address.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

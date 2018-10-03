@@ -40,7 +40,7 @@ public class EditCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_SERIAL_NR + "Serial Number] "
-            + "[" + PREFIX_DISTRIBUTOR + "EMAIL] "
+            + "[" + PREFIX_DISTRIBUTOR + "Distributor] "
             + "[" + PREFIX_PRODUCT_INFO + "PRODUCT INFO] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -97,8 +97,8 @@ public class EditCommand extends Command {
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Email updatedEmail = editPersonDescriptor.getDistributor().orElse(personToEdit.getDistributor());
+        Address updatedAddress = editPersonDescriptor.getProductInfo().orElse(personToEdit.getProductInfo());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
@@ -174,7 +174,7 @@ public class EditCommand extends Command {
             this.email = email;
         }
 
-        public Optional<Email> getEmail() {
+        public Optional<Email> getDistributor() {
             return Optional.ofNullable(email);
         }
 
@@ -182,7 +182,7 @@ public class EditCommand extends Command {
             this.address = address;
         }
 
-        public Optional<Address> getAddress() {
+        public Optional<Address> getProductInfo() {
             return Optional.ofNullable(address);
         }
 
@@ -220,8 +220,8 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
-                    && getEmail().equals(e.getEmail())
-                    && getAddress().equals(e.getAddress())
+                    && getDistributor().equals(e.getDistributor())
+                    && getProductInfo().equals(e.getProductInfo())
                     && getTags().equals(e.getTags());
         }
     }
