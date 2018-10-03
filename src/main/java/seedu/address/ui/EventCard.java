@@ -37,7 +37,7 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label description;
     @FXML
-    private Label location;
+    private Label eventLocation;
     @FXML
     private Label startTime;
     @FXML
@@ -49,7 +49,7 @@ public class EventCard extends UiPart<Region> {
         eventId.setText(displayedIndex + ". ");
         eventName.setText(event.getEventName().fullName);
         description.setText(event.getDescription().value);
-        location.setText(event.getLocation().value);
+        eventLocation.setText(event.getLocation().value);
         startTime.setText(formatDate(event.getStartTime()));
         endTime.setText(formatDate(event.getEndTime()));
     }

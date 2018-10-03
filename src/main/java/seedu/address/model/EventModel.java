@@ -13,38 +13,38 @@ public interface EventModel {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
-    /** Returns the AddressBook */
+    /** Returns the EventList */
     ReadOnlyEventList getEventList();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code event} exists in the event list.
      */
-    boolean hasEvent(Event person);
+    boolean hasEvent(Event event);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given event.
+     * The event must exist in the address book.
      */
     void deleteEvent(Event target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given event.
+     * {@code event} must not already exist in the eventList.
      */
-    void addEvent(Event person);
+    void addEvent(Event event);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given event {@code target} with {@code editedEvent}.
+     * {@code target} must exist in the event list.
+     * The event identity of {@code editedPerson} must not be the same as another existing event in the event list.
      */
     void updateEvent(Event target, Event editedEvent);
 
-    /** Returns an unmodifiable view of the filtered person list */
+    /** Returns an unmodifiable view of the filtered event list */
     ObservableList<Event> getFilteredEventList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
