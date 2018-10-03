@@ -35,5 +35,28 @@ public class XmlFileStorage {
             throw new DataConversionException(e);
         }
     }
+    /**
+     * Saves the given user database data to the specified file.
+     */
+    public static void saveUsersToFile(Path file, XmlSerializableUserDatabase userDatabase)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, userDatabase);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage());
+        }
+    }
+
+    /**
+     * Returns user database in the file or an empty address book
+     */
+    public static XmlSerializableUserDatabase loadUsersFromSaveFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableUserDatabase.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
 
 }

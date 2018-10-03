@@ -12,6 +12,12 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.login.Password;
+import seedu.address.model.login.UniqueList;
+import seedu.address.model.login.User;
+import seedu.address.model.login.Username;
+import seedu.address.model.login.exceptions.DuplicateUserException;
+import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Person;
 
 /**
@@ -146,5 +152,78 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
+    //============== UserDatabase Modifiers =============================================================
 
+    @Override
+    public ReadOnlyAddressBook getUserDatabase() {
+        return addressBook;
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateUserDatabaseChanged() {
+        raise(new UserDatabaseChangedEvent(userDatabase));
+    }
+
+    /** Raises an event to indicate a user has been deleted */
+    private void indicateUserDeleted(User user) {
+        raise(new UserDeletedEvent(user));
+    }
+
+
+    @Override
+    public synchronized void deleteUser(User target) throws UserNotFoundException {
+        userDatabase.removeUser(target);
+        indicateUserDatabaseChanged();
+        indicateUserDeleted(target);
+    }
+
+    @Override
+    public synchronized void addUser(User person) throws DuplicateUserException {
+        userDatabase.addUser(person);
+        indicateUserDatabaseChanged();
+    }
+
+    @Override
+    public boolean checkLoginCredentials(Username username, Password password) throws AlreadyLoggedInException {
+        boolean result = userDatabase.checkLoginCredentials(username, password);
+        if (hasLoggedIn() && result) {
+            reloadAddressBook(username);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean checkCredentials(Username username, Password password) throws AlreadyLoggedInException {
+        boolean result = userDatabase.checkCredentials(username, password);
+        return result;
+    }
+
+    @Override
+    public void updateUserPassword(User target, User userWithNewPassword)
+            throws UserNotFoundException {
+        requireAllNonNull(target, userWithNewPassword);
+        userDatabase.updateUserPassword(target, userWithNewPassword);
+        indicateUserDatabaseChanged();
+    }
+
+    @Override
+    public User getLoggedInUser() {
+        return userDatabase.getLoggedInUser();
+    }
+
+
+    @Override
+    public boolean hasLoggedIn() {
+        return userDatabase.hasLoggedIn();
+    }
+
+    @Override
+    public void setLoginStatus(boolean status) {
+        userDatabase.setLoginStatus(status);
+    }
+
+    @Override
+    public void setUsersList(UniqueList uniqueUserList) {
+        userDatabase.setUniqueUserList(uniqueUserList);
+    }
 }
