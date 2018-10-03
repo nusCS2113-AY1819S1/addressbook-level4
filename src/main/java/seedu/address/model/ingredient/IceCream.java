@@ -33,4 +33,13 @@ public class IceCream extends Ingredient {
     public int hashCode() {
         return Objects.hash(name, quantity);
     }
+    //author @tianhang
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getName());
+        return builder.toString();
+    }
+    //author @tianhang
+
 }

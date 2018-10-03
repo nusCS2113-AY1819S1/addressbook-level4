@@ -5,6 +5,7 @@ import java.util.List;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientQuantity;
 
+
 // TODO: add more methods
 /**
  * The API of the Ingredient Model component.
@@ -21,6 +22,7 @@ public interface IngredientModel {
      * @return the list of ingredients
      * TODO: supposed to be ReadOnlyIngredientList - to be added
      */
+
     List<Ingredient> getAllIngredientsList();
 
     /**

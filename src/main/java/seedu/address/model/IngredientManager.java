@@ -15,12 +15,14 @@ import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 
 
 
+
 /**
  * Represents the list of ingredients in the store
  */
 public class IngredientManager implements IngredientModel {
     private List<Topping> toppings;
     private List<IceCream> iceCreams;
+
 
     public IngredientManager() {
         // TODO: for now, always create new lists (i.e. doesn't save data yet)
@@ -38,7 +40,8 @@ public class IngredientManager implements IngredientModel {
     @Override
     public List<Ingredient> getAllIngredientsList() {
         // TODO: return an immutable list in the future
-        List<Ingredient> allIngredients = new ArrayList<>();
+        List<Ingredient> allIngredients = new ArrayList<> ();
+
         allIngredients.addAll(iceCreams);
         allIngredients.addAll(toppings);
 

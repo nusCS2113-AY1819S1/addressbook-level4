@@ -51,7 +51,6 @@ public abstract class Ingredient {
                 // && (ingredient.getQuantity().equals(getQuantity()));
                 // TODO: consider whether this is necessary
     }
-
     @Override
     public abstract boolean equals(Object other);
 
