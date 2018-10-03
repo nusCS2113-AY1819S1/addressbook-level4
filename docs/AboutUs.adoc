@@ -17,12 +17,12 @@ Role: Comment Section Architect
 
 '''
 
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
+=== James Arista Yaputra
+image::james.jpg[width="150", align="left"]
 {empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead +
-Responsibilities: UI
+Role: Developer +
+Responsibilities: User Authentication
 
 '''
 
