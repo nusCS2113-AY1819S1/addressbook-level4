@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Gerald Chua Deng Xiang
 image::myphoto.jpg[width="300", align="left"]
-{empty}[https://www.comp.nus.edu.sg/~geraldc/website2-0/index.html[homepage]] [https://github.com/Geraldcdx[github]] [<<johndoe#, portfolio>>]
+{empty}[https://www.comp.nus.edu.sg/~geraldc/website2-0/index.html[homepage]] [https://github.com/Geraldcdx[github]] [<<GCDX#, portfolio>>]
 
 Role: Comment Section Architect
 
