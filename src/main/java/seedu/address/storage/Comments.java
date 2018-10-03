@@ -64,7 +64,7 @@ public class Comments {
             System.out.println("error");
             //put exception here or a try catch
         }
-        File file= new File(commentsDirectory + "/" + listOfFiles[index].getName());
+        File file = new File(commentsDirectory + "/" + listOfFiles[index].getName());
         file.delete();
     }
 

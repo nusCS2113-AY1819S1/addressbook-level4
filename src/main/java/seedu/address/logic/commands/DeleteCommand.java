@@ -12,7 +12,6 @@ import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 import seedu.address.storage.Comments;
 
-import javax.xml.stream.events.Comment;
 
 /**
  * Deletes a event identified using it's displayed index from the event manager.
