@@ -9,6 +9,15 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
+=== Chia Xiang Rong
+image::xr_photo.jpg[width="150", align="left"]
+{empty}[http://github.com/chiaxr[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: RSVP/Attendance
+
+'''
+
 === Gerald Chua Deng Xiang
 image::myphoto.jpg[width="300", align="left"]
 {empty}[https://www.comp.nus.edu.sg/~geraldc/website2-0/index.html[homepage]] [https://github.com/Geraldcdx[github]] [<<GCDX#, portfolio>>]
