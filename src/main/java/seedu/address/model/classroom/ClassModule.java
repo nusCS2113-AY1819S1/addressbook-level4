@@ -1,8 +1,8 @@
 package seedu.address.model.classroom;
 
-import javax.xml.bind.annotation.XmlElement;
-
 import static java.util.Objects.requireNonNull;
+
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * Represents a module code in the app.

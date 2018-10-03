@@ -83,7 +83,6 @@ public class StorageController {
             CourseManager cm = new CourseManager();
             cm.setCourseList(courseStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_COURSES), cm);
-          
             ModuleManager moduleManager = new ModuleManager();
             moduleManager.setModules(moduleStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_MODULES), moduleManager);

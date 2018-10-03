@@ -1115,47 +1115,6 @@ Use case resumes at step 1.
 
 [discrete]
 
-=== Use case: Import Students From File
-
-=== Use case: Add course
-*Precondition(s)* :
-
-* NIL
-
-*Guarantees* :
-
-* TBC
-
-*MSS* :
-
-1.  Teacher adds course.
-2.  System adds course to system, and show a confirmation message.
-+
-Use case ends.
-
-*Extensions* :
-
-* 2a. Teacher enters an invalid command.
-+
-** 2a1. System displays the list of valid commands.
-+
-Use case resumes at step 1.
-
-* 2b. Teacher enters improperly formatted command.
-+
-** 2b1. System displays the proper format for usage of the command.
-+
-Use case resumes at step 1.
-
-* 2c. Course already exists in system.
-+
-** 2c1. System shows 'duplicate course' message.
-+
-Use case resumes at step 1.
-
-
-[discrete]
-
 === Use case: Import students from file
 
 *Precondition(s)* :
@@ -1202,7 +1161,46 @@ Use case resumes at step 1.
 
 [discrete]
 
-=== Use case: Add Module
+
+=== Use case: Add course
+*Precondition(s)* :
+
+* NIL
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher adds course.
+2.  System adds course to system, and show a confirmation message.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters improperly formatted command.
++
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+
+* 2c. Course already exists in system.
++
+** 2c1. System shows 'duplicate course' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+
 
 === Use case: List courses
 *Precondition(s)* :
