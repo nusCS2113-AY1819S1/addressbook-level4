@@ -18,23 +18,34 @@ By: `Team 16-2`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-ProManage is *professional desktop application* for managing complex projects. More importantly, iHelp is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). iHelp can help you manage project scheduling effectively. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+ProManage is a *professional desktop application* for companies that specialises in executing projects that undergoes a
+long and tedious planning phase, prior to their event. This is particularly useful for companies that have a distinct structure
+and chain of command. For each project, there is a project team, which is usually led by a *Manager*. The planning
+committee consists of various branches: *Admin, Logistics, Programmes, Finance, Publicity, Marketing and Safety*.
+
+Our application aims to ease the mode of task, event allocation and management by providing an all-in-one platform for
+the project team. It saves companies' time and money. Our customers will feel at ease communicating with one another in
+their project team setting. There is no better way to work than a CLI application that facilitates workflow than ProManage!
+More importantly, ProManage is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
+having the benefits of a Graphical User Interface (GUI). ProManage can help you manage project scheduling effectively.
+Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your iHelp App.
+.  Copy the file to the folder you want to use as the home folder for your ProManage App.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+* *`list`* : lists all employees and employers in our contact list
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named
+ `John Doe` to the Address Book.
+* **`delete`**`3` : deletes the 3rd person shown in the contact list list
+* *`exit`* : exits the application
 
 .  Refer to <<Features>> for details of each command.
 
@@ -44,33 +55,77 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Some Meeting`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which
+  can be used as `add n/Some Meeting`.
 * Items in square brackets are optional e.g `DEPT, [MORE_DEPTS,]` can be used as `Dept1, Dept2` or as `Dept1`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[MORE_DEPTS,]...` can be used as `{nbsp}` (i.e. 0 times), `Dept1`, `Dept1, Dept2` etc.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[MORE_DEPTS,]...` can be used as
+ `{nbsp}` (i.e. 0 times), `Dept1`, `Dept1, Dept2` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME t/TIME`, `t/TIME n/NAME` is also acceptable.
 ====
 
 === *Project Manager*
 
+[NOTE]
+====
+This section is meant for Project Managers'. Some of the following commands are exclusive to the Project Manager.
+Project Managers have full jurisdriction to view all information and events.
+====
+
 ==== Viewing help : `help`
 
 Format: `help`
 
-==== Adding an event: `create`
+==== Adding an employee : 'add'
 
-Adds an event to the address book, via a series of prompts +
-Adding events +
+Adds an employee to ProManage +
 Format/Prompts: +
 Enter a command: `add` +
+Enter employee details: `n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
+
+Example: +
+`add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 dep/ADMIN`
+
+==== Listing all personnel of the company : 'list'
+
+Shows a list of personnel in the company +
+Format/Prompts: +
+Enter a command: `list`
+
+==== Editing an employee : 'edit'
+
+Edits the details of the employee: +
+Format/Prompts: +
+Enter a command: `edit LIST_INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
+
+****
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
+index *must be a positive integer* 1, 2, 3, ... +
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person’s tags by typing t/ without specifying any tags after it.
+****
+
+==== Deleting an employee : 'delete'
+
+Delete an employee from ProManage: +
+Format/Prompts: +
+Enter a command: `delete LIST_INDEX`
+
+==== Adding an event: `create`
+
+Adds an event to ProManage, via a series of prompts +
+Format/Prompts: +
+Enter a command: `create` +
 Enter event details: `n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION` +
 Enter departments to invite: `DEPARTMENT, [MORE DEPARTMENTS,]...` +
 Enter description or instructions: `INSTRUCTIONS`
 
 Example: +
-`add event` +
-`n/CS2113 Event d/120918 t/1600 l/LT15` +
-`Profs, Tutors, Students` +
-Creates an event named CS2113 Event, inviting 3 departments to it.
+`create` +
+`n/Budget Review d/120918 t/1600 l/Conference Room 1` +
+`Finance, Admin, Marketing` +
+Creates an event named Budget Review, inviting 3 departments to it.
 
 ==== Listing all events: `schedule`
 
@@ -78,35 +133,39 @@ Display the full list of events in the project. +
 Format: `schedule`
 
 ==== Invite employees: `invite`
+
 Add employees to the project event. +
-Format: `invite EVENT_INDEX  n/NAME`  +
+Format: `invite SCHEDULE_INDEX  n/NAME`  +
 Example: invite 10 n/John Doe
 
 ==== Remove employee: `remove`
+
 Removes an employee from the project event. +
-Format/Prompts: `remove EVENT_INDEX  n/NAME` +
+Format/Prompts: `remove SCHEDULE_INDEX  n/NAME` +
 Example: remove 10 n/John Doe
 
 
-==== Editing an event: `edit`
+==== Modifying an event: `modify`
 
-Edits the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The index must be a positive integer 1, 2, 3, …​
+Modifying the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The
+index must be a positive integer 1, 2, 3... +
 Input nil if it is not the field to be changed. +
-Format: +
-Enter a command: `edit [index]` +
+Format/Prompts: +
+Enter a command: `modify SCHEDULE_INDEX` +
 Enter event details: `n/NAME d/DATE t/TIME l/LOCATION or nil` +
 Enter departments to invite: `DEPARTMENT [MORE DEPARTMENTS,]...or nil`
 
 ****
-* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
+index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 ****
 
 Examples:
-* Enter a command: `edit 10`  +
-Enter event details: `n/CS2113 Lecture d/Sept 2018  t/1600  l/LT 17`
-Enter departments to invite: `HR`
+* Enter a command: `modify 10`  +
+Enter event details: `n/Food Sampling d/120918  t/1600  l/Conference Room 1`
+Enter departments to invite: `Admin, Programmes`
 
 ==== Locating events by name: `find`
 
@@ -114,24 +173,25 @@ Finds the event whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `cs2113` will match `CS2113`
-* The order of the keywords does not matter. e.g. `CS2113 Lecture` will match `Lecture CS2113`
+* The search is case insensitive. e.g `Budget Review` will match `budget review`
+* The order of the keywords does not matter. e.g. `Budget Review` will match `Review Budget`
 * Only the name is searched.
-* Only full words will be matched e.g. `CS211` will not match `CS2113`
-* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `CS2113 LECTURE` will return `CS2113`, `LECTURE`
+* Only full words will be matched e.g. `Budget` will not match `Budg`
+* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `Budget Review` will return `Budget`, `Review`
 ****
 
 Examples:
 
-* `find CS2113` +
-Returns `CS2113 LECTURE` and `CS2113 TUTORIAL`
-* `find CS2113 CS2030` +
-Returns any event having names `CS2113` or `CS2030`
+* `find Budget` +
+Returns `Budget Review` and `Budget Press Release`
+* `find Budget Review` +
+Returns any event having names `Budget` or `Review`
 
-==== Deleting an event : `delete`
+==== Deleting an event : `cancel`
 
 Delete the event at the specified INDEX. +
-Format: `delete INDEX`
+Format/Prompts: +
+Enter a command: `cancel SCHEDULE_INDEX`
 
 ****
 * Deletes the event at the specified `INDEX`.
@@ -142,17 +202,18 @@ Format: `delete INDEX`
 Examples:
 
 * `schedule` +
-`delete 2` +
-Deletes the 2nd event in the address book.
+`cancel 2` +
+Cancels the 2nd event in the address book.
 * `find Meeting` +
-`delete 1` +
-Deletes the 1st event in the results of the `find` command.
+`cancel 1` +
+Cancels the 1st event in the results of the `find` command.
 
 
 ==== Selecting an event: `select`
 
 Selects the event identified by the index number used in the displayed event list. +
-Format: `select INDEX`
+Format/Prompts: +
+Enter a command: `select SCHEDULE_INDEX`
 
 ****
 * Selects the event and loads the full description of the event at the specified `INDEX`.
@@ -172,7 +233,8 @@ Selects the 1st event in the results of the `find` command.
 ==== Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Format/Prompts: +
+Enter a command: `history`
 
 [NOTE]
 ====
@@ -183,7 +245,8 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ==== Undoing previous command : `undo`
 
 Restores the event schedule to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Format/Prompts: +
+Enter a command: `undo`
 
 [NOTE]
 ====
@@ -192,7 +255,7 @@ Undoable commands: those commands that modify the event schedule's content (`add
 
 Examples:
 
-* `delete 1` +
+* `cancel 1` +
 `list` +
 `undo` (reverses the `delete 1` command) +
 
@@ -201,7 +264,7 @@ Examples:
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `cancel 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
@@ -209,67 +272,70 @@ The `undo` command fails as there are no undoable commands executed previously.
 ==== Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+Format/Prompts: +
+Enter a command: `redo`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `cancel 1` +
+`undo` (reverses the `cancel 1` command) +
+`redo` (reapplies the `cancel 1` command) +
 
-* `delete 1` +
+* `cancel 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `cancel 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+`undo` (reverses the `cancel 1` command) +
+`redo` (reapplies the `cancel 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
 ==== Clearing all entries : `clear`
 
 Clears all entries from the event schedule. +
-Format: `clear`
+Format/Prompts: +
+Enter a command: `clear`
 
 ==== Exiting the program : `exit`
 
 Exits the program. +
-Format: `exit`
+Format/Prompts: +
+Enter a command: `exit`
 
 ==== Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+ProManage data saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 === *Department Head*
 
 [NOTE]
 ====
-Department Head can only access his own department’s event
+This section is meant for Department Heads'.
+Department Heads can only access his/her own department’s events.
 ====
-
+//TODO confirm that department heads cannot add people?
 ==== Viewing help : `help`
 
 Format: `help`
 
 ==== Adding an event: `create`
 
-Adds an event to the address book, via a series of prompts +
-Adding events +
+Adds an event to ProManage, via a series of prompts +
 Format/Prompts: +
-Enter a command: `add` +
+Enter a command: `create` +
 Enter event details: `n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION` +
 Enter departments to invite: `DEPARTMENT, [MORE DEPARTMENTS,]...` +
 Enter description or instructions: `INSTRUCTIONS`
 
 Example: +
-`add event` +
-`n/CS2113 Event d/120918 t/1600 l/LT15` +
-`Profs, Tutors, Students` +
-Creates an event named CS2113 Event, inviting 3 departments to it.
+`create` +
+`n/Budget Review d/120918 t/1600 l/Conference Room 1` +
+`Finance, Admin, Marketing` +
+Creates an event named Budget Review, inviting 3 departments to it.
 
 ==== Listing all events: `schedule`
 
@@ -277,34 +343,39 @@ Display the full list of events in the project. +
 Format: `schedule`
 
 ==== Invite employees: `invite`
+
 Add employees to the project event. +
-Format: `invite EVENT_INDEX  n/NAME`  +
+Format: `invite SCHEDULE_INDEX  n/NAME`  +
 Example: invite 10 n/John Doe
 
 ==== Remove employee: `remove`
-Add employees to the project event. +
-Format/Prompts: `invite EVENT_INDEX  n/NAME` +
-Example: invite 10 n/John Doe
 
-==== Editing an event: `edit`
+Removes an employee from the project event. +
+Format/Prompts: `remove SCHEDULE_INDEX  n/NAME` +
+Example: remove 10 n/John Doe
 
-Edits the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The index must be a positive integer 1, 2, 3, …​
+
+==== Modifying an event: `modify`
+
+Modifying the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The
+index must be a positive integer 1, 2, 3... +
 Input nil if it is not the field to be changed. +
-Format: +
-Enter a command: `edit [index]` +
+Format/Prompts: +
+Enter a command: `modify SCHEDULE_INDEX` +
 Enter event details: `n/NAME d/DATE t/TIME l/LOCATION or nil` +
 Enter departments to invite: `DEPARTMENT [MORE DEPARTMENTS,]...or nil`
 
 ****
-* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
+index *must be a positive integer* 1, 2, 3, ... +
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 ****
 
 Examples:
-* Enter a command: `edit 10`  +
-Enter event details: `n/CS2113 Lecture d/Sept 2018  t/1600  l/LT 17`
-Enter departments to invite: `HR`
+* Enter a command: `modify 10`  +
+Enter event details: `n/Food Sampling d/120918  t/1600  l/Conference Room 1`
+Enter departments to invite: `Admin, Programmes`
 
 ==== Locating events by name: `find`
 
@@ -312,24 +383,25 @@ Finds the event whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `cs2113` will match `CS2113`
-* The order of the keywords does not matter. e.g. `CS2113 Lecture` will match `Lecture CS2113`
+* The search is case insensitive. e.g `Budget Review` will match `budget review`
+* The order of the keywords does not matter. e.g. `Budget Review` will match `Review Budget`
 * Only the name is searched.
-* Only full words will be matched e.g. `CS211` will not match `CS2113`
-* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `CS2113 LECTURE` will return `CS2113`, `LECTURE`
+* Only full words will be matched e.g. `Budget` will not match `Budg`
+* Events matching at least one keyword will be returned (i.e. `OR` search). e.g. `Budget Review` will return `Budget`, `Review`
 ****
 
 Examples:
 
-* `find CS2113` +
-Returns `CS2113 LECTURE` and `CS2113 TUTORIAL`
-* `find CS2113 CS2030` +
-Returns any event having names `CS2113` or `CS2030`
+* `find Budget` +
+Returns `Budget Review` and `Budget Press Release`
+* `find Budget Review` +
+Returns any event having names `Budget` or `Review`
 
-==== Deleting an event : `delete`
+==== Deleting an event : `cancel`
 
 Delete the event at the specified INDEX. +
-Format: `delete INDEX`
+Format/Prompts: +
+Enter a command: `cancel SCHEDULE_INDEX`
 
 ****
 * Deletes the event at the specified `INDEX`.
@@ -340,20 +412,21 @@ Format: `delete INDEX`
 Examples:
 
 * `schedule` +
-`delete 2` +
-Deletes the 2nd event in the address book.
-* `find Meeting1` +
-`delete 1` +
-Deletes the 1st event in the results of the `find` command.
+`cancel 2` +
+Cancels the 2nd event in the address book.
+* `find Meeting` +
+`cancel 1` +
+Cancels the 1st event in the results of the `find` command.
 
 
 ==== Selecting an event: `select`
 
 Selects the event identified by the index number used in the displayed event list. +
-Format: `select INDEX`
+Format/Prompts: +
+Enter a command: `select SCHEDULE_INDEX`
 
 ****
-* Selects the event and loads the Google search page the event at the specified `INDEX`.
+* Selects the event and loads the full description of the event at the specified `INDEX`.
 * The index refers to the index number shown in the displayed event list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -370,17 +443,20 @@ Selects the 1st event in the results of the `find` command.
 ==== Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Format/Prompts: +
+Enter a command: `history`
 
 [NOTE]
 ====
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::undoredo[]
 ==== Undoing previous command : `undo`
 
 Restores the event schedule to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Format/Prompts: +
+Enter a command: `undo`
 
 [NOTE]
 ====
@@ -389,7 +465,7 @@ Undoable commands: those commands that modify the event schedule's content (`add
 
 Examples:
 
-* `delete 1` +
+* `cancel 1` +
 `list` +
 `undo` (reverses the `delete 1` command) +
 
@@ -398,7 +474,7 @@ Examples:
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `cancel 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
@@ -406,54 +482,62 @@ The `undo` command fails as there are no undoable commands executed previously.
 ==== Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+Format/Prompts: +
+Enter a command: `redo`
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `cancel 1` +
+`undo` (reverses the `cancel 1` command) +
+`redo` (reapplies the `cancel 1` command) +
 
-* `delete 1` +
+* `cancel 1` +
 `redo` +
 The `redo` command fails as there are no `undo` commands executed previously.
 
-* `delete 1` +
+* `cancel 1` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+`undo` (reverses the `cancel 1` command) +
+`redo` (reapplies the `cancel 1` command) +
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
 ==== Clearing all entries : `clear`
 
-Clears all entries from the event . +
-Format: `clear`
+Clears all entries from the event schedule. +
+Format/Prompts: +
+Enter a command: `clear`
 
 ==== Exiting the program : `exit`
 
 Exits the program. +
-Format: `exit`
+Format/Prompts: +
+Enter a command: `exit`
 
 ==== Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+ProManage data saves data in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
-
 
 === *Employee*
 
-==== Request a schedule: `schedule`
+[NOTE]
+====
+This section is meant for Employees.
+Employees can only access his/her own departments' events.
+====
 
-Example:
+==== Listing all events: `schedule`
 
-* `schedule` +
-Displays all assigned events
+Display the full list of events in the project. +
+Format/Prompts: `schedule`
 
 
 ==== Requests for a statistics of a week or get a suggested common meeting time by analysing multiple users’ calendars: `query`
-
+Format/Prompts: +
+Enter a command: `query'
+//TODO Finalise what this section does
 Examples:
 
 * `query stats` +
@@ -478,37 +562,38 @@ Task with id 1 is submitted as complete.
 
 == Command Summary
 
-* *Help* : `help`
-* *Add* +
-Enter event details: `n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION` +
-Enter departments to invite: `DEPARTMENT, [MORE DEPARTMENTS,]...` +
-Enter description or instructions: `INSTRUCTIONS` +
-e.g. +
-`add event` +
-`n/CS2113 Event d/120918 t/1600 l/LT15` +
-`Profs, Tutors, Students`
+* *Add*: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT [t/TAG]...`
+
+* *List* : `list`
+
+* *Edit* : `edit LIST_INDEX n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS dep/DEPARTMENT t/TAG…​`
+
+* *Delete* : `delete LIST_INDEX`
+
+* *Create* : `create n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION dep/DEPARTMENT, [MORE DEPARTMENTS,]...` +
+// TODO figure this out! Enter description or instructions: `INSTRUCTIONS`
+
 * *Schedule* : `schedule`
-* *Invite*: ‘invite EVENT_INDEX  n/NAME’ +
-e.g. `invite 10 n/John Doe`
-* *Remove*: remove EVENT_INDEX  n/NAME’ +
-e.g. `remove 10 n/John Doe`
-* *Edit* : +
-Enter a command: `edit [index]` +
-Enter event details: `n/NAME d/DATE t/TIME l/LOCATION or nil` +
-Enter departments to invite: `DEPARTMENT [MORE DEPARTMENTS,]...or nil` +
-e.g. +
-`Enter a command: edit 10  +
-Enter event details: n/CS2113 Lecture d/Sept 2018  t/1600  l/LT 17
-Enter departments to invite: HR`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find CS2113`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Select* : `select INDEX` +
-e.g.`select 2`
+
+* *Invite* : `invite SCHEDULE_INDEX  n/NAME`
+
+* *Remove* : `remove SCHEDULE_INDEX  n/NAME`
+
+* *Modify* : `modify SCHEDULE_INDEX n/NAME d/DATE t/TIME l/LOCATION or nil`
+
+* *Find* : `find KEYWORD [MORE_KEYWORDS]`
+
+* *Cancel* : `cancel SCHEDULE_INDEX`
+
+* *Select* : `select SCHEDULE_INDEX`
+
 * *History* : `history`
-* *Clear* : `clear`
+
 * *Undo* : `undo`
+
 * *Redo* : `redo`
 
+* *Clear* : `clear`
+
+* *Exit* : `exit`
 
