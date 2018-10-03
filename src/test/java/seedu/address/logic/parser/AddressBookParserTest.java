@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADD_INFO_NRIC;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPT_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HISTORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDICAL_REPORT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -14,7 +18,11 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.commands.AddApptCommand;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddHistCommand;
+import seedu.address.logic.commands.AddInfoCommand;
+import seedu.address.logic.commands.AddMedicalReportCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -28,8 +36,12 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.medicalreport.MedicalReport;
+import seedu.address.model.person.MedHistory;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
+import seedu.address.model.timetable.Appt;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -67,6 +79,15 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+    }
+
+    @Test
+    public void parseCommandRemark() throws Exception {
+        final MedicalReport report = new MedicalReport("Some remark.");
+        AddMedicalReportCommand command =
+                (AddMedicalReportCommand) parser.parseCommand(AddMedicalReportCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_MEDICAL_REPORT + report.value);
+        assertEquals(new AddMedicalReportCommand(INDEX_FIRST_PERSON, report), command);
     }
 
     @Test
@@ -139,5 +160,32 @@ public class AddressBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
+    }
+    @Test
+    public void parseCommandaddhist() throws Exception {
+        final MedHistory medhistory = new MedHistory("Some medical history");
+        AddHistCommand command = (AddHistCommand) parser.parseCommand(AddHistCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_HISTORY + medhistory.value);
+        assertEquals(new AddHistCommand(INDEX_FIRST_PERSON, medhistory), command);
+    }
+
+    @Test
+    public void parseCommand_addInfo() throws Exception {
+        final Nric nric = new Nric("S8010517G");
+
+        AddInfoCommand command = (AddInfoCommand) parser.parseCommand(AddInfoCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_ADD_INFO_NRIC + nric.value);
+
+        assertEquals(new AddInfoCommand(INDEX_FIRST_PERSON, nric), command);
+
+    }
+
+    // Tests for appt timetable commands
+    @Test
+    public void parseCommand_addAppt() throws Exception {
+        final Appt appt = new Appt("Some appt");
+        AddApptCommand command = (AddApptCommand) parser.parseCommand(AddApptCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_APPT_INFO + appt.value);
+        assertEquals(new AddApptCommand(INDEX_FIRST_PERSON, appt), command);
     }
 }

@@ -61,7 +61,13 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(person);
         return versionedAddressBook.hasPerson(person);
     }
-
+    /**
+    @Override
+    public boolean hasReport(MedicalReport report) {
+        requireNonNull(report);
+        return versionedAddressBook.hasReport(report);
+    }
+    */
     @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
