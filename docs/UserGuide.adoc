@@ -253,7 +253,7 @@ Format: `viewParticipants INDEX`
 Admin/User: Sets a reminder for the event identified by the index number used in the displayed event list. Reminder will alert the user 1 hour before the commencement time of the event. +
 Format: `setReminder INDEX`
 
-=== Clear reminders : `setReminder`
+=== Clear reminders : `removeReminder`
 
 Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list. +
 Format: `removeReminder INDEX`
@@ -262,6 +262,26 @@ Format: `removeReminder INDEX`
 
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
+
+=== View Comments : `showComments`
+
+Admin/User: Show event comment section +
+Format: `showComments INDEX`
+
+=== Adds Comment : `addComment`
+
+Admin/User: Add comment into event comment section +
+Format: `addComment INDEX STRING`
+
+=== Reply Comment : `replyComment`
+
+Admin/User: Replies a comment +
+Format: `replyComments EVENTINDEX LINEINDEX STRING`
+
+=== Delete Comment : `deleteComment`
+
+Admin: Deletes a comment +
+Format: `deleteComment EVENTINDEX LINEINDEX`
 
 === Exiting the program : `exit`
 
@@ -286,6 +306,8 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
+* *Sign up* : `signup n/USERNAME p/PASSWORD c/CONFIRM_PASSWORD`
+* *Login* : `login n/USERNAME p/PASSWORD`
 * *Add* `add n/EVENT p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/Sports Day p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
@@ -302,3 +324,11 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Register* : `register INDEX`
+* *Unregister* : `unregister INDEX`
+* *Set Reminders* : `setReminder INDEX`
+* *View Reminders* : `reminders`
+* *showComments* : `showComments INDEX`
+* *addComment* : `addCeomment INDEX STRING`
+* *replyComment* : `replyComment EVENTINDEX LINEINDEX STRING`
+* *deleteComment* : `deleteComment EVENT INDEX LINEINDEX STRING`
