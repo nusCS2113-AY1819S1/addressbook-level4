@@ -12,7 +12,7 @@ public class EnrollmentTest {
         // same object -> returns true
         assertTrue(maxEnrollment.equals(maxEnrollment));
         // same values -> returns true
-        Enrollment maxEnrollmentCopy = new Enrollment(maxEnrollment.value);
+        Enrollment maxEnrollmentCopy = new Enrollment(maxEnrollment.getValue());
         assertTrue(maxEnrollment.equals(maxEnrollmentCopy));
         // different types -> returns false
         assertFalse(maxEnrollment.equals(1));

@@ -12,7 +12,7 @@ public class ClassNameTest {
         // same object -> returns true
         assertTrue(className.equals(className));
         // same values -> returns true
-        ClassName classNameCopy = new ClassName(className.value);
+        ClassName classNameCopy = new ClassName(className.getValue());
         assertTrue(className.equals(classNameCopy));
         // different types -> returns false
         assertFalse(className.equals(1));
