@@ -7,7 +7,7 @@ import seedu.address.commons.util.StringUtil;
 
 /**
  * Represents an Item's quantity in the stock list.
- * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(Integer)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
  */
 public class Quantity {
 
