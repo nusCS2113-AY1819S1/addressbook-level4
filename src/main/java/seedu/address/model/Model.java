@@ -10,69 +10,69 @@ import seedu.address.model.person.Person;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyTaskBook newData);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyTaskBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the task book.
      */
-    boolean hasPerson(Person person);
+    boolean hasTask(Person person);
 
     /**
      * Deletes the given person.
-     * The person must exist in the address book.
+     * The person must exist in the task book.
      */
-    void deletePerson(Person target);
+    void deleteTask(Person target);
 
     /**
      * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * {@code person} must not already exist in the task book.
      */
-    void addPerson(Person person);
+    void addTask(Person person);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * {@code target} must exist in the task book.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the task book.
      */
-    void updatePerson(Person target, Person editedPerson);
+    void updateTask(Person target, Person editedPerson);
 
     /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Person> getFilteredTaskList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredTaskList(Predicate<Person> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous task book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoTaskBook();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone task book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoTaskBook();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's task book to its previous state.
      */
-    void undoAddressBook();
+    void undoTaskBook();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's task book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoTaskBook();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current task book state for undo/redo.
      */
-    void commitAddressBook();
+    void commitTaskBook();
 }

@@ -22,7 +22,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.person.Person;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableTaskBook;
 
 public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
@@ -81,9 +81,9 @@ public class PersonListPanelTest extends GuiUnitTest {
      */
     private ObservableList<Person> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
+        XmlSerializableTaskBook xmlAddressBook =
+                XmlUtil.getDataFromFile(xmlFile, XmlSerializableTaskBook.class);
+        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getTaskList());
     }
 
     /**

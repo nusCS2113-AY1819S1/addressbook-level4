@@ -32,7 +32,7 @@ public class AddressBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getTaskList());
     }
 
     @Test
@@ -88,13 +88,13 @@ public class AddressBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getPersonList().remove(0);
+        addressBook.getTaskList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
+     * A stub ReadOnlyTaskBook whose persons list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyTaskBook {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons) {
@@ -102,7 +102,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Person> getPersonList() {
+        public ObservableList<Person> getTaskList() {
             return persons;
         }
     }

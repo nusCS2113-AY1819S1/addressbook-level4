@@ -12,7 +12,7 @@ import seedu.address.model.person.UniquePersonList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class AddressBook implements ReadOnlyTaskBook {
 
     private final UniquePersonList persons;
 
@@ -32,7 +32,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public AddressBook(ReadOnlyTaskBook toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -50,10 +50,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyTaskBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getPersonList());
+        setPersons(newData.getTaskList());
     }
 
     //// person-level operations
@@ -102,7 +102,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Person> getPersonList() {
+    public ObservableList<Person> getTaskList() {
         return persons.asUnmodifiableObservableList();
     }
 
