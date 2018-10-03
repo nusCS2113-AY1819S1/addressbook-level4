@@ -40,7 +40,7 @@ public class UserPrefs {
     }
 
     public Path getAddressBookBackupFilePath() {
-        return addressBookFilePath;
+        return addressBookBackupFilePath;
     }
 
     public void setAddressBookBackupFilePath(Path addressBookBackupFilePath) {
