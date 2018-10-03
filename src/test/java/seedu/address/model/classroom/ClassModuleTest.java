@@ -12,7 +12,7 @@ public class ClassModuleTest {
         // same object -> returns true
         assertTrue(moduleCode.equals(moduleCode));
         // same values -> returns true
-        ClassModule moduleCodeCopy = new ClassModule(moduleCode.value);
+        ClassModule moduleCodeCopy = new ClassModule(moduleCode.getValue());
         assertTrue(moduleCode.equals(moduleCodeCopy));
         // different types -> returns false
         assertFalse(moduleCode.equals(1));
