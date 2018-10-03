@@ -12,6 +12,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
+import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -60,8 +61,8 @@ public class XmlAdaptedItem {
      */
     public XmlAdaptedItem(Item source) {
         name = source.getName().fullName;
-        quantity = source.getQuantity();
-        minQuantity = source.getMinQuantity();
+        quantity = source.getQuantity().toInteger();
+        minQuantity = source.getMinQuantity().toInteger();
         status = source.getStatus();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -90,12 +91,12 @@ public class XmlAdaptedItem {
         if (quantity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "quantity"));
         }
-        final Integer modelQuantity = quantity;
+        final Quantity modelQuantity = new Quantity(quantity.toString());
 
         if (minQuantity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "minQuantity"));
         }
-        final Integer modelMinQuantity = minQuantity;
+        final Quantity modelMinQuantity = new Quantity(minQuantity.toString());
 
         final Set<Tag> modelTags = new HashSet<>(itemTags);
         return new Item(modelName, modelQuantity, modelMinQuantity, status, modelTags);

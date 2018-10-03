@@ -8,6 +8,7 @@ import seedu.address.model.ReadOnlyStockList;
 import seedu.address.model.StockList;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
+import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -16,8 +17,8 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Item[] getSampleItems() {
         return new Item[] {
-            new Item(new Name("Arduino"), 10, 5, getTagSet("Lab1")),
-            new Item(new Name("Raspberry Pi"), 10, 6, getTagSet("Lab2"))
+            new Item(new Name("Arduino"), new Quantity("20"), new Quantity("5"), getTagSet("Lab1")),
+            new Item(new Name("Raspberry Pi"), new Quantity("50"), new Quantity("15"), getTagSet("Lab2"))
         };
     }
 

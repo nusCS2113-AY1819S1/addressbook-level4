@@ -22,6 +22,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
+import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -95,8 +96,8 @@ public class EditCommand extends Command {
         assert itemToEdit != null;
 
         Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
-        Integer updatedQuantity = editItemDescriptor.getQuantity().orElse(itemToEdit.getQuantity());
-        Integer updatedMinQuantity = editItemDescriptor.getMinQuantity().orElse(itemToEdit.getMinQuantity());
+        Quantity updatedQuantity = editItemDescriptor.getQuantity().orElse(itemToEdit.getQuantity());
+        Quantity updatedMinQuantity = editItemDescriptor.getMinQuantity().orElse(itemToEdit.getMinQuantity());
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
 
         return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedTags);
@@ -126,8 +127,8 @@ public class EditCommand extends Command {
      */
     public static class EditItemDescriptor {
         private Name name;
-        private Integer quantity;
-        private Integer minQuantity;
+        private Quantity quantity;
+        private Quantity minQuantity;
         private List<Integer> status;
         private Set<Tag> tags;
 
@@ -160,19 +161,19 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setQuantity(Integer quantity) {
+        public void setQuantity(Quantity quantity) {
             this.quantity = quantity;
         }
 
-        public Optional<Integer> getQuantity() {
+        public Optional<Quantity> getQuantity() {
             return Optional.ofNullable(quantity);
         }
 
-        public void setMinQuantity(Integer minQuantity) {
+        public void setMinQuantity(Quantity minQuantity) {
             this.minQuantity = minQuantity;
         }
 
-        public Optional<Integer> getMinQuantity() {
+        public Optional<Quantity> getMinQuantity() {
             return Optional.ofNullable(minQuantity);
         }
 
