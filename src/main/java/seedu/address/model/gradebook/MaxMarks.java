@@ -1,4 +1,4 @@
 package seedu.address.model.gradebook;
 
-public class MarksMax {
+public class MaxMarks {
 }
