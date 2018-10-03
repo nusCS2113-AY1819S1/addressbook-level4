@@ -54,17 +54,21 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Signing up for an account : `signup`
 
-User    :Creates a *user* account
+User    : Creates a *user* account
 
-Format  :signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD
+Format  : `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD`
 
 === Signing up for an account : `login`
 
-User    :Logs in to account
+User    : Logs in to account
 
-Format  :login n/USERNAME p/PASSWORD
+Format  : `login n/USERNAME p/PASSWORD`
 
 === Viewing help : `help`
+
+Admin: Shows Admin commands
+
+User: Shows User commands
 
 Format: `help`
 
