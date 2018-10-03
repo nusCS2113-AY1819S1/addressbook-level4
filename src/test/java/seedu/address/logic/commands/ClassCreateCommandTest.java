@@ -3,7 +3,11 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.ClassCreateCommand.MESSAGE_ARGUMENTS;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_T16;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_ENROLLMENT;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;

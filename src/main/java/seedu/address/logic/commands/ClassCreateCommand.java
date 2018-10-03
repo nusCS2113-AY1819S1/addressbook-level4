@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;

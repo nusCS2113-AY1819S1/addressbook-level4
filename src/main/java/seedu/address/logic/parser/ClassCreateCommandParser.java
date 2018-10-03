@@ -39,7 +39,10 @@ public class ClassCreateCommandParser implements Parser<ClassCreateCommand> {
         String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
         String maxEnrollment = argMultimap.getValue(PREFIX_MAXENROLLMENT).get();
 
-        return new ClassCreateCommand(new Classroom(className), new ClassModule(moduleCode), new Enrollment(maxEnrollment));
+        return new ClassCreateCommand(
+                new Classroom(className),
+                new ClassModule(moduleCode),
+                new Enrollment(maxEnrollment));
     }
 
     /**
