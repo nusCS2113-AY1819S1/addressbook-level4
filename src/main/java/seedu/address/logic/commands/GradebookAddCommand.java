@@ -13,12 +13,12 @@ public class GradebookAddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a gradebook component to Trajectory. "
             + "Parameters: "
-            + PREFIX_MODULE_NAME + "MODULE NAME "
+            + PREFIX_MODULE + "MODULE NAME "
             + PREFIX_GB_COMPONENT + "COMPONENT "
             + PREFIX_GB_MAXMARKS + "MAX. MARKS "
             + PREFIX_GB_WEIGHTAGE + "WEIGHTAGE IN PERCENT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MODULE_NAME + "CS2113 "
+            + PREFIX_MODULE + "CS2113 "
             + PREFIX_GB_ITEM + "Assignment 1 "
             + PREFIX_GB_MAXMARKS + "10 "
             + PREFIX_GB_WEIGHTAGE + "10 ";
