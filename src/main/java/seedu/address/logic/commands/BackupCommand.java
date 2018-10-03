@@ -1,12 +1,10 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.*;
-import seedu.address.commons.events.model.*;
-import seedu.address.logic.*;
-import seedu.address.model.*;
-
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import seedu.address.logic.CommandHistory;
+import seedu.address.model.Model;
+
 
 /**
  * Lists all persons in the address book to the user.
