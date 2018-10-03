@@ -11,15 +11,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.storage.Comments;
-
 
 /**
  * Adds a event to the event manager.
  */
 public class AddCommand extends Command {
-
-    private Comments comment = new Comments();
 
     public static final String COMMAND_WORD = "add";
 
@@ -61,7 +57,6 @@ public class AddCommand extends Command {
 
         model.addEvent(toAdd);
         model.commitEventManager();
-        comment.createHtml(comment.getFilePath(), comment.getFileName());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

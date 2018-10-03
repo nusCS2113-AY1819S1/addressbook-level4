@@ -85,7 +85,6 @@ ul,ol,ul.no-bullet,ol.no-bullet{margin-left:1.5em}
 ul li ul,ul li ol{margin-left:1.25em;margin-bottom:0;font-size:1em}
 ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
 ul.square{list-style-type:square}
-
 ul.circle{list-style-type:circle}
 ul.disc{list-style-type:disc}
 ul.no-bullet{list-style:none}
