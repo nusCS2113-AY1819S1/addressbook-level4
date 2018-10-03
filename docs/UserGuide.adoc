@@ -69,9 +69,9 @@ Format: `add product name <product name>`
 
 Adds a product to the list of products offered by the store
 
-=== List all distributors: `distributors`
+=== List all distributors: `listD`
 
-Format: `distributors`
+Format: `listD`
 
 List all distributors the store is in touch with
 
@@ -82,9 +82,9 @@ Format: `search <distributor_name>`
 Displays the distributor and basic information related to it
 Adds a distributor to the address book.
 
-=== Add a distributor: `add distributor name`
+=== Add a distributor: `addD name`
 
-Format: `add distributor name <distributor name>`
+Format: `addD d/<distributor name> p/<distributor phone>`
 
 Adds a distributor to the list of distributors engaged with the store.
 

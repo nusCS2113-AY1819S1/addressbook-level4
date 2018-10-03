@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+/*package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -29,7 +29,7 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
- */
+
 public class EditCommand extends Command {
 
     public static final String COMMAND_WORD = "edit";
@@ -57,7 +57,7 @@ public class EditCommand extends Command {
     /**
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
-     */
+
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
@@ -91,7 +91,7 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
-     */
+
     private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
@@ -125,7 +125,7 @@ public class EditCommand extends Command {
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
-     */
+
     public static class EditPersonDescriptor {
         private Name name;
         private Phone phone;
@@ -138,7 +138,7 @@ public class EditCommand extends Command {
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
-         */
+
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
@@ -149,7 +149,7 @@ public class EditCommand extends Command {
 
         /**
          * Returns true if at least one field is edited.
-         */
+
         public boolean isAnyFieldEdited() {
             return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
         }
@@ -189,7 +189,7 @@ public class EditCommand extends Command {
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
-         */
+
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
         }
@@ -198,7 +198,7 @@ public class EditCommand extends Command {
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
-         */
+
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
@@ -226,3 +226,4 @@ public class EditCommand extends Command {
         }
     }
 }
+*/
