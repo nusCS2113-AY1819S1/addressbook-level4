@@ -14,13 +14,9 @@ public class ListCommandParser implements Parser<ListCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TAG);
 
         if (argMultimap.getValue(CliSyntax.PREFIX_TAG).isPresent()) {
-            return new ListCommand(ListCommand.TYPE_TAG, extractArgs(argMultimap.getValue(CliSyntax.PREFIX_TAG)));
+            return new ListCommand(ListCommand.TYPE_TAG, ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG)));
         } else {
             return new ListCommand(ListCommand.TYPE_ALL, new ArrayList<>());
         }
-    }
-
-    private List<String> extractArgs(Optional<String> args) {
-        return new ArrayList<>();
     }
 }
