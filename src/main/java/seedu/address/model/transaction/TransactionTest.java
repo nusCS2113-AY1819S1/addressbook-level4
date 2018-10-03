@@ -12,11 +12,11 @@ public class TransactionTest {
 		System.out.println(transaction.getTime());
 		try {
 		    for (char i = 'a'; i < 'a' + 5; i++) {
-		        transaction.addItem(""+i);
-		        transaction.addItem(""+i);
+		        transaction.addProduct(""+i);
+		        transaction.addProduct(""+i);
             }
             transaction.closeTransaction();
-		    transaction.addItem("should not add");
+		    transaction.addProduct("should not add");
         } catch (ClosedTransactionException c) {
 		    System.out.println("Successfully caught ClosedTransactionException");
         }

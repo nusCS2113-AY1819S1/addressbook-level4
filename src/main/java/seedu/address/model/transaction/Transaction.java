@@ -1,6 +1,6 @@
 package seedu.address.model.transaction;
-import seedu.address.model.transaction.exceptions.ClosedTransactionException;
 
+import seedu.address.model.transaction.exceptions.ClosedTransactionException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
@@ -31,14 +31,13 @@ public class Transaction {
         return transactionTime;
     }
 
-    public void addItem(String itemName) throws ClosedTransactionException{
-        this.addItem(itemName,1);
+    public void addProduct(String itemName) throws ClosedTransactionException{
+        this.addProduct(itemName,1);
     }
 
-    public void addItem(String itemName, int quantity) throws ClosedTransactionException {
-        if (!isActiveTransaction) {
-            throw new ClosedTransactionException();
-        } else if (transactionRecord.containsKey(itemName))
+    public void addProduct(String itemName, int quantity) throws ClosedTransactionException {
+        if (!isActiveTransaction) throw new ClosedTransactionException();
+        else if (transactionRecord.containsKey(itemName))
             transactionRecord.replace(itemName, transactionRecord.get(itemName)+quantity);
         else
             transactionRecord.put(itemName,quantity);
