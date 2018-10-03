@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.AddCommand;
+
 import seedu.address.logic.commands.exceptions.LimitCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.record.Date;
@@ -24,10 +24,10 @@ public class LimitCommandParser  implements Parser<LimitCommand> {
     @Override
     public LimitCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MONEY, PREFIX_DATE, PREFIX_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DATE,PREFIX_MONEY );
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MONEY,PREFIX_DATE)
-                || !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)||
+                 !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
         }
 
