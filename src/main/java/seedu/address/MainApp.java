@@ -115,6 +115,16 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample EventList");
             }
             initialEventListData = eventListOptional.orElseGet(SampleEventUtil::getSampleEventList);
+
+            //TODO: Remove this part of the code when event centre have been properly implemented
+            // Saving a sample of event list. Will remove this part of the code after event centre have been implemented
+            // Use this sample to generate the IU for the app 
+            try {
+                storage.saveEventList(initialEventListData);
+            } catch (IOException ioe) {
+                System.err.println("Unable to save a copy of sample event list");
+            }
+
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty EventList");
             initialEventListData = new EventList();
