@@ -67,7 +67,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Person>> {
      */
     public void navigateToCard(Person person) {
         if (!getRootNode().getItems().contains(person)) {
-            throw new IllegalArgumentException("Person does not exist.");
+            throw new IllegalArgumentException("Product does not exist.");
         }
 
         guiRobot.interact(() -> {
