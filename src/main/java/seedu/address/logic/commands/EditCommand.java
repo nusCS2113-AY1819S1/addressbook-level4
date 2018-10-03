@@ -68,6 +68,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Item> lastShownList = model.getFilteredItemList();
 
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
@@ -83,6 +84,7 @@ public class EditCommand extends Command {
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
         return new CommandResult(String.format(MESSAGE_EDIT_ITEM_SUCCESS, editedItem));
+
     }
 
     /**

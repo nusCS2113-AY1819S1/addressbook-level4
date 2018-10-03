@@ -27,6 +27,7 @@ public class SelectCommand extends Command {
 
     public static final String MESSAGE_SELECT_ITEM_SUCCESS = "Selected Item: %1$s";
 
+
     private final Index targetIndex;
 
     public SelectCommand(Index targetIndex) {
@@ -41,6 +42,7 @@ public class SelectCommand extends Command {
 
         if (targetIndex.getZeroBased() >= filteredItemList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
