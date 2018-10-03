@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.util.regex.Pattern;
 
+/**
+ * This is a parser.
+ */
 public class TrajectoryParser {
 
     private static final Pattern BASIC_COMMAND_FORMAT =

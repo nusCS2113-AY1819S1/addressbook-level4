@@ -1,10 +1,14 @@
 package seedu.address.model.note;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+/**
+ * This represents a note.
+ */
 @XmlRootElement(name = "note")
 
 public class Note {
@@ -36,13 +40,16 @@ public class Note {
         this.moduleCode = moduleCode;
     }
 
-    public String getNote() { return note; }
+    public String getNote() {
+        return note;
+    }
 
     public void editNote(String note) {
         this.note = note;
     }
 
-    public String getModuleCode() { return moduleCode; }
+    public String getModuleCode() {
+        return moduleCode; }
 
     public void editModuleCode(String moduleCode) {
         this.moduleCode = moduleCode;
