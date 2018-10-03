@@ -22,7 +22,8 @@ Responsibilities: RSVP/Attendance
 image::myphoto.jpg[width="300", align="left"]
 {empty}[https://www.comp.nus.edu.sg/~geraldc/website2-0/index.html[homepage]] [https://github.com/Geraldcdx[github]] [<<GCDX#, portfolio>>]
 
-Role: Comment Section Architect
+Role: Developer +
+Responsibilities: Comment Section Architect
 
 '''
 
@@ -32,6 +33,15 @@ image::james.jpg[width="150", align="left"]
 
 Role: Developer +
 Responsibilities: User Authentication
+
+'''
+
+=== Chuang Qin Kai
+image::QK_photo.png[width="150", align="left"]
+{empty}[http://github.com/cqinkai[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Event Reminders
 
 '''
 
