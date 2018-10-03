@@ -58,16 +58,20 @@ User: Creates a *user* account +
 Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD`+
 Examples:
 
-* `signup n/Gerald Chua p/password12345 c/password12345`
-* `signup n/James Yaputra p/drowssap12345 c/drowssap12345`
+* `signup n/Gerald Chua p/password12345 c/password12345` +
+Creates account for Gerald Chua
+* `signup n/James Yaputra p/drowssap12345 c/drowssap12345` +
+Creates account for James Yaputra
 
 === Signing up for an account : `login`
 
 User: Logs in to account +
 Format: `login n/USERNAME p/PASSWORD`+
 Examples:
-* `login n/Gerald Chua p/password12345`
-* `login n/James Yaputra p/drowssap12345`
+* `login n/Gerald Chua p/password12345` +
+Logs in Gerald Chua
+* `login n/James Yaputra p/drowssap12345` +
+Logs in James Yaputra
 
 === Viewing help : `help`
 
@@ -245,27 +249,62 @@ Format: `clear`
 User: RSVPs for an event. +
 Format: `register INDEX`
 
+Examples:
+
+* `register 1` +
+Registers User to event 1
+* `register 5` +
+Registers User to event 5
+
 === Remove registration from event : `unregister`
 
 User: Removes RSVPs for an event. +
 Format: `unregister INDEX`
+
+Examples:
+
+* `unregister 1` +
+Unregisters User from event 1
+* `unregister 5` +
+Unregisters User from event 5
 
 === View participant list : `viewParticipants`
 
 Admin/User: View names and total number of event attendees  +
 Format: `viewParticipants INDEX`
 
+Examples:
+
+* `viewParticipants 1` +
+Shows total and names of all participants going to event 1
+* `viewParticipants 5` +
+Shows total and names of all participants going to event 5
+
 === Set reminders : `setReminder`
 
 Admin/User: Sets a reminder for the event identified by the index number used in the displayed event list. Reminder will alert the user 1 hour before the commencement time of the event. +
 Format: `setReminder INDEX`
+
+Examples:
+
+* `setReminder 1` +
+Sets a reminder for user for event 1
+* `setReminder 5` +
+Sets a reminder for user for event 5
 
 === Clear reminders : `removeReminder`
 
 Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list. +
 Format: `removeReminder INDEX`
 
-=== Clear reminders : `showReminders`
+Examples:
+
+* `removesReminder 1` +
+Removes a reminder for user for event 1
+* `removesReminder 5` +
+Removes a reminder for user for event 5
+
+=== show reminders : `showReminders`
 
 Admin/User: Show all events with reminders set +
 Format: `showReminders`
@@ -275,20 +314,48 @@ Format: `showReminders`
 Admin/User: Show event comment section +
 Format: `showComments INDEX`
 
+Examples:
+
+* `showComments 1` +
+Shows comments section for event 1
+* `showComments 5` +
+Shows comments section for event 5
+
 === Adds Comment : `addComment`
 
 Admin/User: Add comment into event comment section +
 Format: `addComment INDEX STRING`
+
+Examples:
+
+* `addComments 1 "What is the attire to wear for the event?` +
+Adds "What is the attire to wear for the event?" into event 1 comment section
+* `addComments 5 "What is the attire to wear for this event?` +
+Adds "What is the attire to wear for this event?" into event 5 comment section
 
 === Reply Comment : `replyComment`
 
 Admin/User: Replies a comment +
 Format: `replyComments EVENTINDEX LINEINDEX STRING`
 
+Examples:
+
+* `replyComments 1 5 "What is the attire to wear for the event?` +
+Adds "What is the attire to wear for the event?" into event 1 comment section at line 5
+* `replyComments 2 2 "What is the attire to wear for the event?` +
+Adds "What is the attire to wear for the event?" into event 2 comment section at line 2
+
 === Delete Comment : `deleteComment`
 
 Admin: Deletes a comment +
 Format: `deleteComment EVENTINDEX LINEINDEX`
+
+Examples:
+
+* `deleteComment 1 5` +
+Deletes comment of event 1 at line 5
+* `deleteComment 2 2` +
+Deletes comment of event 2 at line 2
 
 === Exiting the program : `exit`
 
