@@ -45,43 +45,62 @@ image::Ui.png[width="790"]
 * Parameters can be in any order e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 ====
 
+
 === Student Management
+
+=== Viewing help : `help`
+
+Format: `help`
+
+=== Student and Course Management
+
 ==== Add Student : `student add`
 Adds a student to the system. +
 Format: student add n/NAME i/ADMIN_NUMBER c/COURSE_CODE p/MOBILE_NUMBER e/EMAIL a/ADDRESS
 
 Examples:
 
-* `student add n/Tristy i/A0169999Z c/CS p/90002334 e/E0111342@u.nus.edu a/522 Tampines North 1`
-* `student add n/Megan Nicole c/CEG e/E0169113@u.nus.edu a/14 Changi South i/A0177897E p/92667921`
+* `student add n/Tristy i/A0169999Z c/CS1 p/90002334 e/E0111342@u.nus.edu a/522 Tampines North 1`
+* `student add n/Megan Nicole c/CEG1 e/E0169113@u.nus.edu a/14 Changi South i/A0177897E p/92667921`
 
 ==== Update Student : `student edit`
 Edits an existing student in the system. +
 Format: student edit INDEX [n/NAME] [i/ADMIN_NUMBER] [c/COURSE_CODE] [p/MOBILE_NUMBER] [e/EMAIL a/ADDRESS]
-
-Examples:
-
-* `student edit 1 p/99887890 a/14 Simei Avenue 1`
-Edits the phone number and home address of the 1st person to be 99887890 and 14 Simei Avenue 1 respectively.
-* `student edit 2 a/14 Jurong East Street 91`
-Edits only the address of the 2nd person to be 14 Jurong East Street 91.
-
 ****
 * Edits the student at the specified INDEX. The index refers to the index number shown in the displayed student list. The index must be a must be a positive integer 1,2,3,...
 * At least one of the optional fields must be provided
 * Existing values will be updated to the input values
 ****
+Examples:
+
 
 ==== Select Student : `select`
 
 Selects the student identified by the index number used in the displayed person list. +
 Format: `select INDEX`
 
+* `student edit 1 p/99887890 a/14 Simei Avenue 1`
+Edits the phone number and home address of the 1st student to be 99887890 and 14 Simei Avenue 1 respectively.
+* `student edit 2 a/14 Jurong East Street 91`
+Edits only the address of the 2nd student to be 14 Jurong East Street 91.
+
+
+==== Find a student by name/matric no : `student find` [Coming in v1.2]
+Find student(s) whose names contain any of the given keywords. +
+Format:  find [n/STUDENT_NAME] [i/MATRIC_NO]
 ****
 * Selects the student and loads the Google search page the student at the specified `INDEX`.
 * The index refers to the index number shown in the displayed student list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
+Examples:
+
+* `find student n/Rachel`
+Returns students whose first name or last name contains 'Rachel'.
+* `find student i/A0168000L`
+Return the student whose matriculation no matches 'A0168000L'.
+
+
 
 Examples:
 
@@ -134,16 +153,50 @@ Format: list students
 ==== Export Student : `student export`  [Coming in v1.3]
 Exports students to a .csv file +
 Format: student export LOCATION
-
+****
+* Directory must be writable.
+* There must be at least 1 student in the system.
+****
 Examples:
 
 * `student export C:\export`
 Exports all students in .csv format to the 'export' folder in C drive.
 
+
+
+
+==== Selecting a student : `select`
+
+Selects the student identified by the index number used in the displayed person list. +
+Format: `select INDEX`
+
 ****
-* Directory must be writable.
-* There must be at least 1 student in the system
+* Selects the student and loads the Google search page the student at the specified `INDEX`.
+* The index refers to the index number shown in the displayed student list.
+* The index *must be a positive integer* `1, 2, 3, ...`
 ****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd student in the address book.
+* `find Betsy` +
+`select 1` +
+Selects the 1st student in the results of the `find` command.
+
+==== Add a course : `course add`
+Adds a student to the system. +
+Format: course_add n/COURSE_NAME c/COURSE_CODE f/FACULTY_NAME
+
+Examples:
+
+* `course add n/Computer Engineering c/CEG1 f/School of Computing`
+* `course add n/Computer Science c/CS1 f/School of Computing`
+
+==== List all courses : `course list`
+Shows a list of all courses in the system. +
+Format: course list
 
 === Module Management
 ==== Add Module : `module add`

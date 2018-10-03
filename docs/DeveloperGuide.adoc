@@ -921,7 +921,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 === Use case: Add Student
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* NIL
 
 *Guarantees* :
 
@@ -959,7 +959,7 @@ Use case resumes at step 1.
 === Use case: Remove Student
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* Student must exist in the system.
 
 *Guarantees* :
 
@@ -997,7 +997,7 @@ Use case resumes at step 1.
 === Use case: Find Student
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* NIL
 
 *Guarantees* :
 
@@ -1035,7 +1035,7 @@ Use case resumes at step 1.
 === Use case: List Students
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* NIL
 
 *Guarantees* :
 
@@ -1073,7 +1073,7 @@ Use case resumes at step 1.
 === Use case: Export All Students To File
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* There should be at least 1 student.
 
 *Guarantees* :
 
@@ -1114,10 +1114,53 @@ Use case resumes at step 1.
 
 
 [discrete]
+
 === Use case: Import Students From File
+
+=== Use case: Add course
 *Precondition(s)* :
 
-* TO BE INSERTED | STATE NIL IF NONE
+* NIL
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher adds course.
+2.  System adds course to system, and show a confirmation message.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters improperly formatted command.
++
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+
+* 2c. Course already exists in system.
++
+** 2c1. System shows 'duplicate course' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+
+=== Use case: Import students from file
+
+*Precondition(s)* :
+
+* A file containing properly formatted data should exist.
 
 *Guarantees* :
 
@@ -1158,7 +1201,49 @@ Use case resumes at step 1.
 
 
 [discrete]
+
 === Use case: Add Module
+
+=== Use case: List courses
+*Precondition(s)* :
+
+* NIL
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher lists courses.
+2.  System displays list of all courses.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters improperly formatted command.
++
+** 2b1. System displays the proper format for usage of the command.
++
+Use case resumes at step 1.
+
+* 2c. There are no courses in the system.
++
+** 2c1. System shows 'no courses in system' message.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Add module
+
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
