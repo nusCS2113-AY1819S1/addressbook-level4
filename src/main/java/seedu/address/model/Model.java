@@ -4,6 +4,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Product;
+import seedu.address.model.login.Password;
+import seedu.address.model.login.Username;
+import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.person.Person;
 
 /**
  * The API of the Model component.
@@ -75,4 +79,8 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException;
+
+
 }
