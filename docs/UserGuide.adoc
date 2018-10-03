@@ -52,6 +52,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
+=== Signing up for an account : `signup`
+
+User: Creates a *user* account
+
+Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD
+
 === Viewing help : `help`
 
 Format: `help`
