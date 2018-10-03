@@ -4,8 +4,12 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.login.Password;
+import seedu.address.model.login.UniqueList;
+import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.login.exceptions.DuplicateUserException;
+import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Person;
 
 /**
@@ -54,6 +58,7 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
+
     /**
      * Returns true if the model has previous address book states to restore.
      */
@@ -79,7 +84,25 @@ public interface Model {
      */
     void commitAddressBook();
 
+    void setUsersList(UniqueList uniqueUserList);
+
+    /**
+     * Returns the UserDatabase
+     */
+    ReadOnlyAddressBook getUserDatabase();
+
+    void deleteUser(User target) throws UserNotFoundException;
+
+    void addUser(User person) throws DuplicateUserException;
+
     boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException;
 
+    boolean checkCredentials(Username username, Password password) throws AuthenticatedException;
+
+    boolean hasLoggedIn();
+
+    boolean setLoginStatus(boolean status);
+
+    User getLoggedInUser();
 
 }
