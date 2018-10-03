@@ -27,8 +27,6 @@ ProManage is *professional desktop application* for managing complex projects. M
 .  Copy the file to the folder you want to use as the home folder for your iHelp App.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
-+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
@@ -58,7 +56,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-==== Adding an event: `add`
+==== Adding an event: `create`
 
 Adds an event to the address book, via a series of prompts +
 Adding events +
