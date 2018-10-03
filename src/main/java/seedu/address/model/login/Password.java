@@ -10,6 +10,7 @@ public class Password {
             "Password only accepts alphanumeric characters, not empty and no spaces";
 
     public static final String PASSWORD_VALIDATION_REGEX = "[\\p{Alnum}]*";
+
     public final String password;
 
     public Password(String password) {
@@ -27,7 +28,17 @@ public class Password {
         return password;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Password
+                && this.password.equals(((Password) other).password));
+    }
 
+    @Override
+    public int hashCode() {
+        return password.hashCode();
+    }
 
 
 

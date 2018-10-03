@@ -8,7 +8,7 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 
 
-public class LoginCommand extends Command {
+public abstract  class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
 
@@ -30,8 +30,6 @@ public class LoginCommand extends Command {
         this.username = username;
         this.password = password;
     }
-
-    @Override
     public CommandResult execute() throws CommandException {
         requireNonNull(username);
         requireNonNull(password);
