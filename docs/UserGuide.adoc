@@ -45,9 +45,6 @@ image::Ui.png[width="790"]
 * Parameters can be in any order e.g. if the command specifies `n/NAME e/EMAIL`, `e/EMAIL n/NAME` is also acceptable.
 ====
 
-
-=== Student Management
-
 === Viewing help : `help`
 
 Format: `help`

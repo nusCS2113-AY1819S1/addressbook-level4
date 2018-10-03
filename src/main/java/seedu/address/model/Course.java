@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -8,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "course")
 
 public class Course {
+
     private String courseCode;
     private String courseName;
     private String facultyName;
@@ -21,6 +23,7 @@ public class Course {
         this.facultyName = originFaculty;
     }
 
+    @XmlElement(name = "courseCode")
     public String getCourseCode() {
         return courseCode;
     }
@@ -29,6 +32,7 @@ public class Course {
         this.courseCode = courseCode;
     }
 
+    @XmlElement(name = "courseName")
     public String getCourseName() {
         return courseName;
     }
@@ -37,6 +41,7 @@ public class Course {
         this.courseName = courseName;
     }
 
+    @XmlElement(name = "facultyName")
     public String getFacultyName() {
         return facultyName;
     }
