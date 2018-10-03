@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= ProManage - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,8 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
-
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+:repoURL: https://github.com/CS2113-AY1819S1-T16-2/main
+By: `T16-2`      Since: `September 2018`      Licence: `NUS`
 
 == Setting up
 
@@ -815,13 +814,36 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* Companies have project management teams. Delegation of tasks and events can become complicated.
+* Project teams comprises of project managers, and the various sub branches : Admin, Logistics, Programmes, Publicity, Marketing and Safety.
+* This application aims to provide an all in one platform to ease the mode of task and event allocation.
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+**Project Manager:**
+
+* In charge of overall project.
+* He/She has the autonomy to add/edit/view/delete all of the events and tasks of his/her employees.
+
+**Department Head:**
+
+* In charge of his/her department .
+* He/she has the autonomy to communicate with
+  other department heads within the system.
+* He/she has the autonomy to add/edit/view/delete all of
+  the events of his/her employees within the department.
+
+**Employees:**
+
+  * He/she is only entitled to add/edit/view/delete all of the events of himself/herself within
+    the department.
+
+*Value proposition*:
+
+* Facilitates workflow faster than a typical mouse/GUI driven app.
+* Saves consumers' efficiency, money and time tremendously.
 
 [appendix]
 == User Stories
