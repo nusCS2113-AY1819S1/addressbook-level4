@@ -83,6 +83,7 @@ public class JsonUserPrefsStorageTest {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(1000, 500, 300, 100);
         userPrefs.setAddressBookFilePath(Paths.get("addressbook.xml"));
+        userPrefs.setAddressBookBackupFilePath(Paths.get("addressbook.bak"));
         return userPrefs;
     }
 
@@ -116,8 +117,8 @@ public class JsonUserPrefsStorageTest {
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(1200, 200, 0, 2);
 
-        Path pefsFilePath = testFolder.getRoot().toPath().resolve("TempPrefs.json");
-        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(pefsFilePath);
+        Path prefsFilePath = testFolder.getRoot().toPath().resolve("TempPrefs.json");
+        JsonUserPrefsStorage jsonUserPrefsStorage = new JsonUserPrefsStorage(prefsFilePath);
 
         //Try writing when the file doesn't exist
         jsonUserPrefsStorage.saveUserPrefs(original);
