@@ -14,11 +14,19 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
+<<<<<<< HEAD
 By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
 NUSSU-Connect is an application for executive committee (exco) members of the NUS Student Union (NUSSU) to help them perform their daily tasks including managing recruitment, contacts, budgets and projects efficiently.
+=======
+By: `Team F09-1`  	Since: `Sept 2018`
+
+== Introduction
+
+NUSSU Connect is for the executive committee members of NUSSU who are comfortable with working with Command Line Interface (CLI). It is meant for fast typers within NUSSU and it could help them perform their daily tasks such as managing recruitment, contacts, budgets and projects much more efficiently.
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 
 == Quick Start
 
@@ -55,6 +63,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Logging into system: `login`
 
 Logs into application using relevant credentials. +
+<<<<<<< HEAD
 Format: `login USERID PASSWORD`
 
 ****
@@ -68,6 +77,15 @@ Examples:
 
 * `login X1234567X zaq1xsw2cde3` +
 Logs into Address book with user ID as X1234567X and password as zaq1xsw2cde3.
+=======
+Format: `X1234567X` for user ID fields, where X can be any lower or upper case letter alphabet
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
+
+Examples:
+
+* `login` +
+`X1234567X zaq1xsw2cde3` +
+Logs into Address book with user ID as X1234567X and password as zaq1xsw2cde3.
 
 [NOTE]
 ====
@@ -77,7 +95,11 @@ Password is case-sensitive!
 === Creating a new user account: `createaccount`
 
 Creates a new user account in the address book. +
+<<<<<<< HEAD
 Format: `createaccount user/USERID pass/PASSWORD`
+=======
+Format: `user/USERID pass/PASSWORD`
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 
 ****
 * user/ and pass/ are required prefixes before USERID and PASSWORD
@@ -89,13 +111,22 @@ Format: `createaccount user/USERID pass/PASSWORD`
 
 Examples:
 
+<<<<<<< HEAD
 * `createaccount user/X1234567X pass/zaq1xsw2cde3` +
+=======
+* `create account` +
+`user/X1234567X pass/zaq1xsw2cde3` +
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
 === Deleting an existing user account: `deleteaccount`
 
 Deletes an existing account from the address book. +
+<<<<<<< HEAD
 Format: `deleteaccount USERID PASSWORD`
+=======
+Format: `USERID PASSWORD`
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 
 ****
 * USERID refers to student matriculation number
@@ -106,13 +137,22 @@ Format: `deleteaccount USERID PASSWORD`
 
 Examples:
 
+<<<<<<< HEAD
 * `deleteaccount X1234567X zaq1xsw2cde3` +
+=======
+* `delete account` +
+`X1234567X zaq1xsw2cde3` +
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 Deletes the current account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
 === Changing the password of an existing user account: `changepassword`
 
 Changes the password of an existing account from the address book. +
+<<<<<<< HEAD
 Format: `changepassword USERID CURRENTPASSWORD NEWPASSWORD`
+=======
+Format: `USERID CURRENTPASSWORD NEWPASSWORD`
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 
 ****
 * USERID refers to student matriculation number
@@ -124,7 +164,12 @@ Format: `changepassword USERID CURRENTPASSWORD NEWPASSWORD`
 
 Examples:
 
+<<<<<<< HEAD
 * `changepassword X1234567X zaq1xsw2cde3 1qaz2wsx3edc` +
+=======
+* `change password` +
+`X1234567X zaq1xsw2cde3 1qaz2wsx3edc` +
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 Changes the password of the current account with user ID as X1234567X, from "zaq1xsw2cde3" to "1qaz2wsx3edc" in the address book.
 
 === Viewing help : `help`
@@ -177,11 +222,16 @@ Format: `find [\tag tags]  KEYWORD [MORE_KEYWORDS]`
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+<<<<<<< HEAD
 * Only full words will be matched e.g. `Han` will not match `Hans`	
+=======
+* Only full words will be matched e.g. `Han` will not match `Hans`
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 ****
 
 Examples:
 
+* `find John` +
 * `find John` +
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
@@ -191,7 +241,11 @@ Returns any person with the tag `President`
 * `find \tag President Vice_President` +
 Returns any person with the tag `President` OR `Vice_President`.
 
+<<<<<<< HEAD
 === Deleting: `delete`
+=======
+=== Deleting : `delete`
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 
 Deletes a specific person from the address book. +
 Format: `delete [-a all] [INDEX]`
@@ -302,6 +356,7 @@ Clears all entries from the address book. +
 Format: `clear`
 
 === Submitting data for budget allocation: `data`
+<<<<<<< HEAD
 Submits the data about number of events, expected turnout etc. +
 Format: `data e/NUMBER OF EVENTS t/TURNOUT`
 Example: +
@@ -320,6 +375,38 @@ Format: `viewrequest`
 === Accepting grant request: `accept`
 Approves a specific grant request from the list of grants.
 Format: `accept [-a all] [INDEX]
+=======
+
+Submits the data about number of events, expected turnout etc. +
+Format: `data e/NUMBER OF EVENTS t/TURNOUT`
+
+Example: +
+`data e/5 t/200`
+
+=== Viewing the allocated budget : `viewbudget`
+
+Shows the allocated budget to the user +
+Format: `viewbudget`
+
+=== Submitting grant request : `request`
+
+Submits data about amount of grant needed, the reason and tags the importance level
+Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL
+
+Example: +
+`request m/1000 r/for booking auditorium t/medium`
+
+=== Viewing grant request : `viewrequest`
+
+Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
+Format: `viewrequest`
+
+=== Accepting grant request: `accept`
+
+Approves a specific grant request from the list of grants.
+Format: `accept [-a all] [INDEX]
+
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 ****
 * Approves the request at the specified `INDEX`.
 * The index refers to the index number shown in the displayed requests list.
@@ -327,6 +414,10 @@ Format: `accept [-a all] [INDEX]
 * If -a option is selected, all requests on the list will be approved and INDEX will be ignored.
 ****
 Example:
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 * `viewrequest` +
 `accept 2` +
 Approves the 2nd request in the list of grant requests.
@@ -357,6 +448,7 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
+<<<<<<< HEAD
 * *Login* : `login USERID PASSWORD`
 e.g. `login A1234567M zaq1xsw2cde3`
 * *Create Account* : `createaccount USERID PASSWORD` +
@@ -366,6 +458,20 @@ e.g. `deleteaccount A01234567M zaq1xsw2cde3`
 * *Change Password* : `changepassword USERID CURRENTPASSWORD NEWPASSWORD` +
 e.g. `changepassword A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+=======
+* *Login* : `USERID PASSWORD`
+e.g. `login` +
+	`A01234567M zaq1xsw2cde3`
+* *Create Account* : `USERID PASSWORD` +
+e.g. `create account` +
+	`A01234567M zaq1xsw2cde3`
+* *Delete Account* : `USERID PASSWORD` +
+e.g. `delete account` +
+	`A01234567M zaq1xsw2cde3`
+* *Change Password* : `USERID CURRENTPASSWORD NEWPASSWORD` +
+e.g. `change password` +
+	`A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
+>>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 * *Clear* : `clear`
 * *Delete* : `delete [-a all][INDEX]` +
 e.g. `delete 3`
