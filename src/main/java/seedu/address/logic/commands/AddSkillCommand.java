@@ -7,6 +7,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Skill;
 
 /**
  * Adds a skill for a person in the Addressbook.
@@ -27,12 +28,12 @@ public class AddSkillCommand extends Command {
 
     public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
     private final Index index;
-    private final String skill;
+    private final Skill skill;
     /**
      * @param index of the person in the filtered person list to edit the remark
      * @param skill of the person to be updated to
      */
-    public AddSkillCommand(Index index, String skill) {
+    public AddSkillCommand(Index index, Skill skill) {
         requireAllNonNull(index, skill);
         this.index = index;
         this.skill = skill;

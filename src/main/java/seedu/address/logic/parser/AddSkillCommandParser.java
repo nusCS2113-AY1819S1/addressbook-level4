@@ -6,6 +6,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddSkillCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Skill;
+
 /**
  * Parses input arguments and creates a new {@code AddSkillCommand} object
  */
@@ -25,6 +27,6 @@ public class AddSkillCommandParser implements Parser<AddSkillCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddSkillCommand.MESSAGE_USAGE), ive);
         }
         String skill = argMultimap.getValue(PREFIX_SKILL).orElse("");
-        return new AddSkillCommand(index, skill);
+        return new AddSkillCommand(index, new Skill(skill));
     }
 }
