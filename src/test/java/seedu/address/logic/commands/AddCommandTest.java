@@ -95,16 +95,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addGradebookComponent(GradebookComponent gradebookComponent) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasComponent(GradebookComponent gradebookComponent) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void resetData(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
