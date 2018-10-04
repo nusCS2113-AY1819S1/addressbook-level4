@@ -11,8 +11,9 @@ public class Isbn {
 
 
     public static final String MESSAGE_PHONE_CONSTRAINTS =
-            "Isbn numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String PHONE_VALIDATION_REGEX = "\\d{3,}";
+            "ISBN should be a valid 13-digit number (with hyphens).";
+    // A total of 4 hyphens + 13 digits (17 char in total)
+    public static final String PHONE_VALIDATION_REGEX = "(978|979)[-\\d]{14}";
     public final String value;
 
     /**
