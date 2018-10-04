@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.ClosestMatchList;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.PhoneContainsKeywordPredicate;
 
 
 /**
@@ -42,15 +43,25 @@ public class FindCommand extends Command {
         if (fe.isLocked()) {
             throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
         }
-
         requireNonNull(model);
 
-        ClosestMatchList closestMatch = new ClosestMatchList(model, "NAME", nameKeywords);
 
+        String arg = "NAME";
+        ClosestMatchList closestMatch = new ClosestMatchList(model, arg, nameKeywords);
         String[] approvedList = closestMatch.getApprovedList();
 
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(approvedList)));
-        // Updates the list of people to be displayed
+        // TODO: create new predicates here
+        // TODO: Accept the command for weather we want phone number or name or etc here
+        if (arg.compareTo("PHONENUMBER") == 0) {
+            model.updateFilteredPersonList(new PhoneContainsKeywordPredicate(Arrays.asList(approvedList)));
+            // Updates the list of people to be displayed
+
+        } else if (arg.compareTo("NAME") == 0) {
+            model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(approvedList)));
+            // Updates the list of people to be displayed
+
+        }
+
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));

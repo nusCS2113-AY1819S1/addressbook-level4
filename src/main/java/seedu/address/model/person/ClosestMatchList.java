@@ -31,20 +31,20 @@ public class ClosestMatchList {
     /**
      * Pair of integer and string
      */
-    static class Pair {
+    private static class Pair {
         private int dist;
         private String nameSegment;
 
-        public Pair(int a, String b) {
+        private Pair(int a, String b) {
             this.dist = a;
             this.nameSegment = b;
         }
 
-        public int getDist () {
+        private int getDist () {
             return this.dist;
         }
 
-        public String getNameSegment () {
+        private String getNameSegment () {
             return nameSegment;
         }
     }
@@ -64,23 +64,83 @@ public class ClosestMatchList {
     });
 
     /**
-     * Filters and generates maps from names from model
-     * and arguments
+     * Enumerator for attributes of a person
      */
-    public ClosestMatchList (Model model, String argument, String[] names) {
-        this.listToFilter = model.getAddressBook().getPersonList();
+    private enum personAttribute {
+        NAME, PHONENUMER, EMAIL, ADDRESS, TAGS
+    }
 
-        for (Person person: listToFilter) {
+    /**
+     * Obtains the argument in string form and translates it to enumerator personAttribute
+     * @param argument obtains the string argument from findCommand class
+     * @return personAttribute
+     */
+    // TODO: Add the complete list of attribs
+    private personAttribute obtainAttribute (String argument) {
+        if (argument.compareTo("NAME") == 0) {
+            return personAttribute.NAME;
+        } else if (argument.compareTo("PHONENUMBER") == 0) {
+            return personAttribute.PHONENUMER;
+        }
+        return personAttribute.NAME;
+    }
 
-            if (argument == "NAME") {
-                generateNameMapFromNames(names, person);
-            } else if (argument == "PHONE") {
-                // TODO: Add argument to filter by phone number as well
-            }
+    /**
+     * Bulk of the computation
+     * Runs thru model and stores the pairs in a tree out of
+     * similarity indexes using levensthein distances together with nameSegment
+     */
+    private void generateNameMapFromAttrib (String[] searchKey, Person person, personAttribute attribute) {
+        String compareString = person.getName().fullName;
+        switch (attribute) {
+            case NAME:
+                compareString = person.getName().fullName;
+                break;
+            case PHONENUMER:
+                compareString = person.getPhone().value;
+                break;
+            case ADDRESS:
+                compareString = person.getAddress().value;
+                break;
+            case EMAIL:
+                compareString = person.getEmail().value;
+                break;
         }
 
+        generateNameMap(searchKey, compareString);
+    }
 
-        addToApprovedNamesList();
+
+    /**
+     * Generate the namemap from the compareString provided
+     * @param searchKey obtained from arguments in FindCommand
+     * @param compareString obtained from personList as per attribute
+     */
+    // TODO: Add it such that when accurate names are typed out, the results wont show the rest.
+    private void generateNameMap(String[] searchKey, String compareString) {
+        String[] stringSplitted = compareString.split("\\s+");
+        for (String nameSegment: stringSplitted) {
+
+            for (String nameArg: searchKey) {
+                int dist = LevenshteinDistanceUtil.levenshteinDistance(nameArg.toLowerCase(),
+                        nameSegment.toLowerCase());
+
+                if (dist < lowestDist) {
+                    lowestDist = dist;
+                }
+
+                Pair distNamePair = new Pair(dist, nameSegment);
+
+                if (!discoveredNames.containsKey(nameSegment)) {
+                    nameMap.add(distNamePair);
+                    discoveredNames.put(nameSegment, dist);
+                } else if (discoveredNames.get(nameSegment) > dist) {
+                    discoveredNames.replace(nameSegment, dist); // Replace with the new dist
+                    nameMap.add(distNamePair); // Check to see if this will replace
+                }
+            }
+
+        }
     }
 
     /**
@@ -97,46 +157,24 @@ public class ClosestMatchList {
     }
 
     /**
-     * Bulk of the computation
-     * Runs thru model and stores the pairs in a tree out of
-     * similarity indexes using levensthein distances together with nameSegment
+     * Filters and generates maps from names from model
+     * and arguments
      */
-    private void generateNameMapFromNames(String[] names, Person person) {
-        String fullName = person.getName().fullName;
-        String[] nameSplited = fullName.split("\\s+");
+    public ClosestMatchList (Model model, String argument, String[] searchKeys) {
+        this.listToFilter = model.getAddressBook().getPersonList();
 
-        for (String nameSegment: nameSplited) {
-
-            for (String nameArg: names) {
-                int dist = LevenshteinDistanceUtil.levenshteinDistance(nameArg.toLowerCase(),
-                        nameSegment.toLowerCase());
-
-                if (dist < lowestDist) {
-                    lowestDist = dist;
-                }
-
-                Pair distNamePair = new Pair(dist, nameSegment);
-
-
-                if (!discoveredNames.containsKey(nameSegment)) {
-                    nameMap.add(distNamePair);
-                    discoveredNames.put(nameSegment, dist);
-                } else if (discoveredNames.get(nameSegment) > dist) {
-                    discoveredNames.replace(nameSegment, dist); // Replace with the new dist
-                    nameMap.add(distNamePair); // Check to see if this will replace
-                }
-            }
-
+        for (Person person: listToFilter) {
+            generateNameMapFromAttrib(searchKeys, person, obtainAttribute(argument));
         }
-    }
 
+        addToApprovedNamesList();
+    }
 
     /**
      * Gets the approved list
      */
     public String[] getApprovedList () {
-        String [] output = approvedNames.toArray(new String[approvedNames.size()]);
-        return output;
+        return approvedNames.toArray(new String[0]);
     }
 
 }
