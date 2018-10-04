@@ -63,11 +63,18 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_clearAlias() throws Exception {
+<<<<<<< HEAD
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_ALIAS) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_ALIAS + " 3") instanceof ClearCommand);
     }
 
 
+=======
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_INITIAL) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_INITIAL + " 3") instanceof ClearCommand);
+    }
+
+>>>>>>> feature1
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
