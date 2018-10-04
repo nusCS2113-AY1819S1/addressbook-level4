@@ -395,3 +395,14 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Submitting data for budget* : `data e/NUMBER OF EVENTS t/TURNOUT` +
+e.g. `data e/5 t/200`
+* *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
+e.g. `request m/1000 r/for booking auditorium t/medium`
+* *Viewing grant request* : `viewrequest`
+* *Accepting a grant request* : `accept [-a all] [INDEX]` +
+e.g. `viewrequest` +
+       `accept 2` +
+e.g. `viewrequest` +
+     `accept -a`
+
