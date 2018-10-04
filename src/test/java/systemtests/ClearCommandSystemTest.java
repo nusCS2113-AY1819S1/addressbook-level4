@@ -77,7 +77,7 @@ public class ClearCommandSystemTest extends CandidateBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
-        assertStatusBarChangedExceptSaveLocation();
+        assertStatusBarUnchangedExceptSyncStatus();
     }
 
     /**
