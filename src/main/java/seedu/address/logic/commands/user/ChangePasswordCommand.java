@@ -24,7 +24,7 @@ public class ChangePasswordCommand extends Command {
             + PREFIX_NEW_PASSWORD + "newPassword ";
 
     public static final String MESSAGE_SUCCESS = "Password has successfully changed to: %1$s";
-
+    public static final String MESSAGE_WRONG_PASSWORD = "THe old password is wrong";
     private final String newPassword;
     private final String oldPassword;
 
@@ -41,18 +41,16 @@ public class ChangePasswordCommand extends Command {
     public CommandResult execute(LoginInfoList loginInfoList, CommandHistory history) {
         requireNonNull(loginInfoList);
 
-//        if (model.hasPerson(toAdd)) {
-//                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-//        }
-//
-//        model.addPerson(toAdd);
-//        model.commitAddressBook();
         String username = CurrentUser.getUserName ();
-        String hashedOldPassword  = loginInfoList.getLoginInfo (username).getPassword ();
+        String hashedOldPassword = loginInfoList.getLoginInfo (username).getPassword ();
         boolean isPasswordCorrect = PasswordUtils.verifyUserPassword (oldPassword, hashedOldPassword);
         if (isPasswordCorrect){
+            System.out.println ("here");
             String newHashedPassword = PasswordUtils.generateSecurePassword (newPassword);
             loginInfoList.changePassword (username, newHashedPassword);
+        } else {
+            System.out.println ("there");
+            return new CommandResult(MESSAGE_WRONG_PASSWORD);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, newPassword));
     }
