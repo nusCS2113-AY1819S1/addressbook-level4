@@ -60,7 +60,7 @@ public class ParserUtil {
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
-        if (!Date.isValidDate(trimmedDate)) {
+        if (!Date.isValidDateFormat(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
         return new Date(trimmedDate);

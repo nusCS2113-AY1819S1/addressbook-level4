@@ -19,9 +19,6 @@ public abstract class MoneyFlow {
                     + "If decimal point is present, it must have at least 1 digit after it";
 
     // Any form of money flow entered must follow the format defined above
-    // TODO: CHANGE THIS TO FIT THE NEW +- SCHEME
-    // TODO: REFACTOR THIS TO MAKE IT LESS COMPLICATED
-
     private static final String MONEYFLOW_WHOLE_NUMBER_ZERO_REGEX = "0";
     private static final String MONEYFLOW_WHOLE_NUMBER_NONZERO_REGEX = "[1-9]{1}\\d*";
     private static final String MONEYFLOW_DECIMAL_PART_REGEX = ".\\d+";
