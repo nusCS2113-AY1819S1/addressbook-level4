@@ -833,19 +833,41 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |log into the application with the relevant credentials |gain secure access to the application
+|`* * *` |executive officer of NUSSU |view which other committees my applicant has applied for |deconflict with the other members of the Executive Committee
 
-|`* * *` |user |create a new account for the application |gain access to certain features of the application relevant to my role when I log in
+|`* * *` |executive officer of NUSSU |view the number of applicants with the relevant skills |assign them to the relevant subcommittees
 
-|`* * *` |user |delete an existing account from the application |clear my login credentials from the application when I am not using it anymore
+|`* * *` |member of NUSSU |find out how to contact another member within NUSSU |work more efficiently with them
 
-|`* * *` |user |change the password of an existing account |feel more secure about my account login credentials
+|`* * *` |someone that takes charge of sponsors for events hosted by NUSSU |filter my search such that I would be only looking at the list of sponsors |not need to look through the whole list of addressbook
+
+|`* * *` |event organizer that is trying to find the contact details of some very specific group of people |have a search and filter function that is flexible enough |find all the search requirements can be done on the application without needing me to look through the whole list
+
+|`* * *` |member of the NUSSU treasury |have a budgeting function |fairly allocate budgets to the different clubs/projects
+
+|`* * *` |treasurer of a club |view the budget allocated to our club |discuss with my teammates and seek more funds if necessary
+
+|`* * *` |treasurer of a club |be able to store the data about how many members there are in my club, how many events we are planning to hold, and the expected turn out |be allocated a fair budget by the NUSSU treasury
+
+|`* * *` |treasurer of a club |use a budgeting function |plan the internal events of my club efficiently
+
+|`* * *` |member of the NUSSU treasury |view requests for grants from the clubs |allocate them the grant if the request is accepted by the NUSSU
+
+|`* * *` |executive member of NUSSU |log into the application with the relevant credentials |gain secure access to the application
+
+|`* * *` |executive member of NUSSU |create a new account for the application |gain access to certain features of the application relevant to my role when I log in
+
+|`* * *` |executive member of NUSSU |delete an existing account from the application |clear my login credentials from the application when I am not using it anymore
+
+|`* * *` |executive member of NUSSU |change the password of an existing account |feel more secure about my account login credentials
 
 |`* * *` |user |add a new person |
 
 |`* * *` |user |delete a person |remove entries that I no longer need
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+
+|`* *` |general secretary of NUSSU |have the option to backup all, or even specific segments of application data into a data file |recover the required segments of data when there is an accidental deletion of data
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
@@ -884,6 +906,155 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+
+=== Use case: Sort by suitability by skill
+
+*MSS*
+
+1.  User indicates he wants to sort by skills
+2.  NUSSU-Connect lists available skills, asks the user what he wants to sort by.
+3.  User indicates what he wants by selecting 
+4.  NUSSU-Connect all skills.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. User can sort by ascending or descending order
++
+Use case ends.
+* 2b. User can see all above a certain threshold
++
+Use case ends.
+
+=== Use case: Add Skill
+
+*MSS*
+
+1.  User indicates he wants to add skill
+2.  NUSSU-Connect lists available persons
+3.  User indicates person, skill, and skill level to add
+4.  NUSSU-Connect confirms addition
++
+Use case ends.
+
+=== Use case: Filter search according to tag
+
+*MSS*
+
+1.  User requests to find person
+2.  User indicates he want to filter according to tags
+3.  User types the keyword in.
+4.  NUSSU-Connect lists all contact details that has tags containing the keyword.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. User indicates he want to create a list that doesn't include the keywords
++
+[none]
+** 2a1. User types the keyword in.
+** 2a2. NUSSU-Connect lists all contact details that has tags that does not contain the keyword.
++
+Use case ends.
+
+=== Use case: Delete all according to tag
+
+*MSS*
+
+1.  User requests to delete
+2.  User indicates he want to filter according to tags
+3.  User types the keyword in.
+4.  NUSSU-Connect lists all contact details that has tags containing the keyword.
+5.  NUSSU-Connect asks for confirmation if everyone in the lists has to be deleted
+6.  User indicates delete all
+7.  NUSSU-Connect deletes all users with the relevant tags
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 6a. User indicates don’t delete
++
+Use case ends.
+
+=== Use case: Submitting data for budget allocation
+
+*MSS*
+
+1.  Club Treasurer logs in with club treasurer credentials
+2.  Club Treasurer types command for submitting budgeting data
+3.  Club Treasurer enters data about how many events their club wants to hold and expected turn out for events
+4.  NUSSU-Connect asks for confirmation about entered data
+5.  Club Treasurer types command for confirming the data
+6.  NUSSU-Connect stores the data
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 4a. Club Treasurer types command for editing data
++
+[none]
+** 4a1. Club Treasurer enters data edited data about how many events their club wants to hold and expected turn out.
++
+Use case ends.
+
+=== Use case: Viewing allocated budget
+
+*MSS*
+
+1.  Club Treasurer logs in with club treasurer credentials
+2.  Club Treasurer types command to view their allocated budget
+3.  NUSSU-Connect asks for confirmation to accept allocated budget
+4.  Club Treasurer types command to accept the allocated budget
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. Club Treasurer types command to request for grant
++
+[none]
+** 3a1. NUSSU-Connect asks for grant amount, reason and level of importance
+** 3a2. Club Treasurer enters data for grant amount, reason and level of importance
+** 3a3. NUSSU-Connect asks for confirmation about entered data
+** 3a4. Treasurer types command to confirm data
+** 3a5. NUSSU-Connect shows message that the user’s request will be processed
++
+Use case ends.
+
+=== Use case: Viewing grant requests
+
+*MSS*
+
+1.  NUSSU Treasurer logs in with NUSSU treasury credentials
+2.  NUSSU Treasurer views grant requests (and their reason) sorted by level of importance
+3.  NUSSU Treasurer types command to approve a specific grant request
+4.  NUSSU-Connect asks for confirmation on the approval for grant request.
+5.  NUSSU Treasurer types command to confirm approval
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. Club Treasurer types command to request for grant
++
+[none]
+** 3a1. NUSSU-Connect asks for grant amount, reason and level of importance
+** 3a2. Club Treasurer enters data for grant amount, reason and level of importance
+** 3a3. Address book asks for confirmation about entered data
+** 3a4. Treasurer types command to confirm data
+** 3a5. Address book shows message that the user’s request will be processed
++
+Use case ends.
 
 === Use case: Log into system
 
