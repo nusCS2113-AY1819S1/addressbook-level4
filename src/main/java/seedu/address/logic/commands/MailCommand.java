@@ -34,6 +34,7 @@ public class MailCommand extends Command {
 
     private static final String MESSAGE_SUCCESS = "Mailing to: ";
     private static final String MESSAGE_UNSUPPORTED = "System mail application is unsupported.";
+    private static final String MESSAGE_EMPTY_SELECTION = "No contacts selected! Select one or more and try again.";
 
     /**
      * Instance variables
@@ -167,8 +168,13 @@ public class MailCommand extends Command {
     private URI createUri(ArrayList<String> emailList) throws CommandException {
         StringBuilder uriToMail = new StringBuilder("mailto:");
         URI uri;
-        for (String email : emailList) {
-            uriToMail.append(email).append(",");
+
+        if (emailList.size() == 0) {
+            throw new CommandException(MESSAGE_EMPTY_SELECTION);
+        } else {
+            for (String email : emailList) {
+                uriToMail.append(email).append(",");
+            }
         }
 
         try {
