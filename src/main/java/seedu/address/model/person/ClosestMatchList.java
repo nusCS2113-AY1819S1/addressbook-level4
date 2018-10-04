@@ -17,7 +17,6 @@ import java.util.TreeSet;
 import javafx.collections.ObservableList;
 
 import seedu.address.commons.util.LevenshteinDistanceUtil;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 

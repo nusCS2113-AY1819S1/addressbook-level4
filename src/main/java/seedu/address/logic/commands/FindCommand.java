@@ -31,9 +31,9 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+            + "the specified keywords and displays them as a list with index numbers.\n"
+            + "Parameters: PREFIX/KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_NAME + "alice bob charlie";
 
     private final NameContainsKeywordsPredicate predicate;
     private String[] nameKeywords;
@@ -60,11 +60,8 @@ public class FindCommand extends Command {
 
         if (type == PREFIX_PHONE) {
             model.updateFilteredPersonList(new PhoneContainsKeywordPredicate(Arrays.asList(approvedList)));
-            // Updates the list of people to be displayed
-
         } else if (type == PREFIX_NAME) {
             model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(approvedList)));
-            // Updates the list of people to be displayed
         } else if (type == PREFIX_ADDRESS) {
             model.updateFilteredPersonList(new AddressContainsKeywordsPredicate(Arrays.asList(approvedList)));
         } else if (type == PREFIX_EMAIL) {
