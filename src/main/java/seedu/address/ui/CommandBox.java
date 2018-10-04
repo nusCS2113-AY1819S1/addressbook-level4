@@ -108,7 +108,6 @@ public class CommandBox extends UiPart<Region> {
                 loginInput = JOptionPane.showInputDialog("Please login first by entering login credentials:");
             }
             if (!(MainWindow.getIsLoginSuccessful())) {
-                System.out.println("hi");
                 CommandResult commandResultLogin = logic.execute(loginInput);
                 raise(new NewResultAvailableEvent(commandResultLogin.feedbackToUser));
             } else {
