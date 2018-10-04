@@ -27,15 +27,25 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label gender;
+    @FXML
+    private Label age;
     @FXML
     private Label phone;
     @FXML
+    private Label email;
+    @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label desired_job;
+    @FXML
+    private Label education;
+    @FXML
+    private Label salary;
     @FXML
     private FlowPane tags;
 
@@ -44,9 +54,14 @@ public class PersonCard extends UiPart<Region> {
         this.candidate = candidate;
         id.setText(displayedIndex + ". ");
         name.setText(candidate.getName().fullName);
+        gender.setText(candidate.getGender().value);
+        age.setText(candidate.getAge().value);
         phone.setText(candidate.getPhone().value);
-        address.setText(candidate.getAddress().value);
         email.setText(candidate.getEmail().value);
+        address.setText(candidate.getAddress().value);
+        desired_job.setText(candidate.getJob().value);
+        education.setText(candidate.getEducation().value);
+        salary.setText(candidate.getSalary().value);
         candidate.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
