@@ -2,14 +2,22 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
 import java.util.Arrays;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
+import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.ClosestMatchList;
+import seedu.address.model.person.EmailContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.PhoneContainsKeywordPredicate;
 
@@ -29,10 +37,12 @@ public class FindCommand extends Command {
 
     private final NameContainsKeywordsPredicate predicate;
     private String[] nameKeywords;
+    private Prefix type;
 
-    public FindCommand(NameContainsKeywordsPredicate predicate, String[] names) {
+    public FindCommand(NameContainsKeywordsPredicate predicate, String[] names, Prefix type) {
         this.predicate = predicate;
         this.nameKeywords = names;
+        this.type = type;
     }
 
     @Override
@@ -45,23 +55,21 @@ public class FindCommand extends Command {
         }
         requireNonNull(model);
 
-
-        String arg = "NAME";
-        ClosestMatchList closestMatch = new ClosestMatchList(model, arg, nameKeywords);
+        ClosestMatchList closestMatch = new ClosestMatchList(model, type, nameKeywords);
         String[] approvedList = closestMatch.getApprovedList();
 
-        // TODO: create new predicates here
-        // TODO: Accept the command for weather we want phone number or name or etc here
-        if (arg.compareTo("PHONENUMBER") == 0) {
+        if (type == PREFIX_PHONE) {
             model.updateFilteredPersonList(new PhoneContainsKeywordPredicate(Arrays.asList(approvedList)));
             // Updates the list of people to be displayed
 
-        } else if (arg.compareTo("NAME") == 0) {
+        } else if (type == PREFIX_NAME) {
             model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(approvedList)));
             // Updates the list of people to be displayed
-
+        } else if (type == PREFIX_ADDRESS) {
+            model.updateFilteredPersonList(new AddressContainsKeywordsPredicate(Arrays.asList(approvedList)));
+        } else if (type == PREFIX_EMAIL) {
+            model.updateFilteredPersonList(new EmailContainsKeywordsPredicate(Arrays.asList(approvedList)));
         }
-
 
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));

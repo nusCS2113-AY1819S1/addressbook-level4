@@ -1,6 +1,11 @@
 //@@author lws803
 package seedu.address.model.person;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -12,6 +17,8 @@ import java.util.TreeSet;
 import javafx.collections.ObservableList;
 
 import seedu.address.commons.util.LevenshteinDistanceUtil;
+import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 
 /**
@@ -63,66 +70,39 @@ public class ClosestMatchList {
         }
     });
 
-    /**
-     * Enumerator for attributes of a person
-     */
-    private enum PersonAttribute {
-        NAME, PHONENUMER, EMAIL, ADDRESS, TAGS
-    }
 
     /**
      * Filters and generates maps from names from model
      * and arguments
      */
-    public ClosestMatchList (Model model, String argument, String[] searchKeys) {
+    public ClosestMatchList (Model model, Prefix type, String[] searchKeys) {
         this.listToFilter = model.getAddressBook().getPersonList();
 
         for (Person person: listToFilter) {
-            generateNameMapFromAttrib(searchKeys, person, obtainAttribute(argument));
+            generateNameMapFromAttrib(searchKeys, person, type);
         }
 
         addToApprovedNamesList();
     }
 
-    /**
-     * Obtains the argument in string form and translates it to enumerator PersonAttribute
-     * @param argument obtains the string argument from findCommand class
-     * @return PersonAttribute
-     */
-    // TODO: Add the complete list of attribs
-    private PersonAttribute obtainAttribute (String argument) {
-        if (argument.compareTo("NAME") == 0) {
-            return PersonAttribute.NAME;
-        } else if (argument.compareTo("PHONENUMBER") == 0) {
-            return PersonAttribute.PHONENUMER;
-        }
-        return PersonAttribute.NAME;
-    }
 
     /**
      * Bulk of the computation
      * Runs thru model and stores the pairs in a tree out of
      * similarity indexes using levensthein distances together with nameSegment
      */
-    private void generateNameMapFromAttrib (String[] searchKey, Person person, PersonAttribute attribute) {
+    private void generateNameMapFromAttrib (String[] searchKey, Person person, Prefix myPrefix) {
         String compareString = person.getName().fullName;
-        switch (attribute) {
-        case NAME:
-            compareString = person.getName().fullName;
-            break;
-        case PHONENUMER:
-            compareString = person.getPhone().value;
-            break;
-        case ADDRESS:
-            compareString = person.getAddress().value;
-            break;
-        case EMAIL:
-            compareString = person.getEmail().value;
-            break;
-        default:
-            compareString = person.getName().fullName;
-        }
 
+        if (myPrefix == PREFIX_NAME) {
+            compareString = person.getName().fullName;
+        } else if (myPrefix == PREFIX_PHONE) {
+            compareString = person.getPhone().value;
+        } else if (myPrefix == PREFIX_EMAIL) {
+            compareString = person.getEmail().value;
+        } else if (myPrefix == PREFIX_ADDRESS) {
+            compareString = person.getAddress().value;
+        }
         generateNameMap(searchKey, compareString);
     }
 
