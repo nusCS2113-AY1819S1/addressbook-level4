@@ -7,11 +7,11 @@ import seedu.address.logic.parser.Prefix;
  * Pair object used in parsing of commands for auto complete functionality
  */
 public class AutoCompleteParserPair {
-    public final Prefix prefixType;
+    public final Prefix predictionType;
     public final String prefixValue;
 
-    public AutoCompleteParserPair(Prefix prefixType, String prefixValue) {
-        this.prefixType = prefixType;
+    public AutoCompleteParserPair(Prefix predictionType, String prefixValue) {
+        this.predictionType = predictionType;
         this.prefixValue = prefixValue.trim();
     }
 }
