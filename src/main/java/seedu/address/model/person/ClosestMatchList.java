@@ -66,23 +66,37 @@ public class ClosestMatchList {
     /**
      * Enumerator for attributes of a person
      */
-    private enum personAttribute {
+    private enum PersonAttribute {
         NAME, PHONENUMER, EMAIL, ADDRESS, TAGS
     }
 
     /**
-     * Obtains the argument in string form and translates it to enumerator personAttribute
+     * Filters and generates maps from names from model
+     * and arguments
+     */
+    public ClosestMatchList (Model model, String argument, String[] searchKeys) {
+        this.listToFilter = model.getAddressBook().getPersonList();
+
+        for (Person person: listToFilter) {
+            generateNameMapFromAttrib(searchKeys, person, obtainAttribute(argument));
+        }
+
+        addToApprovedNamesList();
+    }
+
+    /**
+     * Obtains the argument in string form and translates it to enumerator PersonAttribute
      * @param argument obtains the string argument from findCommand class
-     * @return personAttribute
+     * @return PersonAttribute
      */
     // TODO: Add the complete list of attribs
-    private personAttribute obtainAttribute (String argument) {
+    private PersonAttribute obtainAttribute (String argument) {
         if (argument.compareTo("NAME") == 0) {
-            return personAttribute.NAME;
+            return PersonAttribute.NAME;
         } else if (argument.compareTo("PHONENUMBER") == 0) {
-            return personAttribute.PHONENUMER;
+            return PersonAttribute.PHONENUMER;
         }
-        return personAttribute.NAME;
+        return PersonAttribute.NAME;
     }
 
     /**
@@ -90,21 +104,23 @@ public class ClosestMatchList {
      * Runs thru model and stores the pairs in a tree out of
      * similarity indexes using levensthein distances together with nameSegment
      */
-    private void generateNameMapFromAttrib (String[] searchKey, Person person, personAttribute attribute) {
+    private void generateNameMapFromAttrib (String[] searchKey, Person person, PersonAttribute attribute) {
         String compareString = person.getName().fullName;
         switch (attribute) {
-            case NAME:
-                compareString = person.getName().fullName;
-                break;
-            case PHONENUMER:
-                compareString = person.getPhone().value;
-                break;
-            case ADDRESS:
-                compareString = person.getAddress().value;
-                break;
-            case EMAIL:
-                compareString = person.getEmail().value;
-                break;
+        case NAME:
+            compareString = person.getName().fullName;
+            break;
+        case PHONENUMER:
+            compareString = person.getPhone().value;
+            break;
+        case ADDRESS:
+            compareString = person.getAddress().value;
+            break;
+        case EMAIL:
+            compareString = person.getEmail().value;
+            break;
+        default:
+            compareString = person.getName().fullName;
         }
 
         generateNameMap(searchKey, compareString);
@@ -154,20 +170,6 @@ public class ClosestMatchList {
             }
             approvedNames.add(pair.getNameSegment());
         }
-    }
-
-    /**
-     * Filters and generates maps from names from model
-     * and arguments
-     */
-    public ClosestMatchList (Model model, String argument, String[] searchKeys) {
-        this.listToFilter = model.getAddressBook().getPersonList();
-
-        for (Person person: listToFilter) {
-            generateNameMapFromAttrib(searchKeys, person, obtainAttribute(argument));
-        }
-
-        addToApprovedNamesList();
     }
 
     /**
