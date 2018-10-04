@@ -29,18 +29,18 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
         String key;
         switch (trimmedArgs) {
-            case (KEY_NAME):
-                key = KEY_NAME;
-                break;
-            case (KEY_STARTTIME):
-                key = KEY_STARTTIME;
-                break;
-            case (KEY_ENDTIME):
-                key = KEY_ENDTIME;
-                break;
-            default:
-                throw new ParseException(
-                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
+        case (KEY_NAME):
+            key = KEY_NAME;
+            break;
+        case (KEY_STARTTIME):
+            key = KEY_STARTTIME;
+            break;
+        case (KEY_ENDTIME):
+            key = KEY_ENDTIME;
+            break;
+        default:
+             throw new ParseException(
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }
         return new SortCommand(key);
     }
