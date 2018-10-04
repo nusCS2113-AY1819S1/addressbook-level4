@@ -16,6 +16,7 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyUserDatabase;
 
 public class XmlUserDatabaseStorage implements UserDatabaseStorage {
+
     private static final Logger logger = LogsCenter.getLogger(XmlUserDatabaseStorage.class);
 
     private Path filePath;

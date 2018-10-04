@@ -53,7 +53,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, UserDatab
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleUserDeletedEvent(UserDeletedEvent event);
+    void handleUserDeletedEvent(UserDeletedEvent event) throws IOException;
 
     @Override
     Path getUserDatabaseFilePath();
@@ -71,7 +71,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, UserDatab
     void saveUserDatabase(ReadOnlyUserDatabase userDatabase, Path filePath) throws IOException;
 
     @Override
-    void deleteAddressBook(User user);
+    void deleteAddressBook(User user) throws IOException;
 
     void update(User user);
 }

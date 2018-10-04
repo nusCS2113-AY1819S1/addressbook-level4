@@ -128,7 +128,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void deleteAddressBook(User user) {
+    public void deleteAddressBook(User user) throws IOException {
         logger.fine("Attempting to delete to data file: " + user.getAddressBookFilePath());
         addressBookStorage.deleteAddressBook(user);
     }
@@ -146,7 +146,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
-    public void handleUserDeletedEvent(UserDeletedEvent event) {
+    public void handleUserDeletedEvent(UserDeletedEvent event) throws IOException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "User has been deleted, deleting files"));
         deleteAddressBook(event.data);
     }

@@ -10,7 +10,7 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 
 
-public abstract  class LoginCommand extends Command {
+public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
 
@@ -32,11 +32,10 @@ public abstract  class LoginCommand extends Command {
         this.username = username;
         this.password = password;
     }
+    @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(username);
         requireNonNull(password);
-        requireNonNull(model);
-
         try {
             if (model.checkLoginCredentials(this.username, this.password)) {
                 return new CommandResult(MESSAGE_AUTHENTICATION_SUCCESS);
@@ -48,5 +47,12 @@ public abstract  class LoginCommand extends Command {
         }
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LoginCommand // instanceof handles nulls
+                && this.username.equals(((LoginCommand) other).username)
+                && this.password.equals(((LoginCommand) other).password));
 
+    }
 }
