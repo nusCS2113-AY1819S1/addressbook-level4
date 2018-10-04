@@ -21,7 +21,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 
 public class EventManagerTest {
 
@@ -51,7 +51,7 @@ public class EventManagerTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two events with the same identity fields
-        Event editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Event editedAlice = new EventBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Event> newEvents = Arrays.asList(ALICE, editedAlice);
         EventManagerStub newData = new EventManagerStub(newEvents);
@@ -80,7 +80,7 @@ public class EventManagerTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         eventManager.addEvent(ALICE);
-        Event editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Event editedAlice = new EventBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(eventManager.hasEvent(editedAlice));
     }

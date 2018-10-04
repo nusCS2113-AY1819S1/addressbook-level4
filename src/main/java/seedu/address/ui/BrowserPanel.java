@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -11,7 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.commons.events.ui.EventSelectionChangedEvent;
 import seedu.address.model.event.Event;
 
 /**
@@ -20,8 +21,8 @@ import seedu.address.model.event.Event;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+    public static final String SEARCH_PAGE = "EventSearchPage.html";
+
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -40,8 +41,30 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void loadPersonPage(Event event) {
-        loadPage(SEARCH_PAGE_URL + event.getName().fullName);
+    /**
+     * Gets the URL without parameters
+     */
+    public static URL getSearchPageUrlWithoutName() {
+        return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+    }
+
+    /**
+     * Formats HTML file path into string
+     */
+    private String formatEventPageUrl(Event event) {
+        URL searchPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
+        String searchPageString = searchPage.toString()
+                + "?name=" + event.getName();
+
+        return searchPageString;
+    }
+
+    /**
+     * Loads a HTML file with variables passed into it
+     */
+    private void loadEventPage(Event event) throws MalformedURLException {
+        URL searchPage = new URL(formatEventPageUrl(event));
+        loadPage(searchPage.toExternalForm());
     }
 
     public void loadPage(String url) {
@@ -64,8 +87,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleEventSelectionChangedEvent(EventSelectionChangedEvent event) throws MalformedURLException {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadPersonPage(event.getNewSelection());
+        loadEventPage(event.getNewSelection());
     }
 }

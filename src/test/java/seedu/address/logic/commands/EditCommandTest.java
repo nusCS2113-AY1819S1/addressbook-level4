@@ -27,7 +27,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -39,7 +39,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Event editedEvent = new PersonBuilder().build();
+        Event editedEvent = new EventBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
@@ -57,7 +57,7 @@ public class EditCommandTest {
         Index indexLastPerson = Index.fromOneBased(model.getFilteredEventList().size());
         Event lastEvent = model.getFilteredEventList().get(indexLastPerson.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastEvent);
+        EventBuilder personInList = new EventBuilder(lastEvent);
         Event editedEvent = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
 
@@ -92,7 +92,7 @@ public class EditCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         Event eventInFilteredList = model.getFilteredEventList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Event editedEvent = new PersonBuilder(eventInFilteredList).withName(VALID_NAME_BOB).build();
+        Event editedEvent = new EventBuilder(eventInFilteredList).withName(VALID_NAME_BOB).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
@@ -154,7 +154,7 @@ public class EditCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Event editedEvent = new PersonBuilder().build();
+        Event editedEvent = new EventBuilder().build();
         Event eventToEdit = model.getFilteredEventList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
@@ -197,7 +197,7 @@ public class EditCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
-        Event editedEvent = new PersonBuilder().build();
+        Event editedEvent = new EventBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedEvent).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new EventManager(model.getEventManager()), new UserPrefs());
