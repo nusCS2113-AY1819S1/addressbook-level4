@@ -3,6 +3,8 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.IOException;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueList;
 import seedu.address.model.login.User;
@@ -22,6 +25,7 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
 
 /**
@@ -96,6 +100,27 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedPerson);
         versionedAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
+    }
+
+    private void reloadAddressBook(Username username) {
+        Optional<ReadOnlyAddressBook> addressBookOptional;
+        ReadOnlyAddressBook newData;
+
+        storage.update(userDatabase.getUser(username));
+        try {
+            addressBookOptional = storage.readAddressBook();
+            if (!addressBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample AddressBook");
+            }
+            newData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+        } catch (DataConversionException e) {
+            newData = new AddressBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+        } catch (IOException e) {
+            newData = new AddressBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+        }
+        versionedAddressBook.resetData(newData);
     }
     //============== UserDatabase Modifiers =============================================================
 

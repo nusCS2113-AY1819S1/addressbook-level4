@@ -43,5 +43,5 @@ public interface AddressBookStorage {
      */
     void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException;
 
-    void deleteAddressBook(User user);
+    void deleteAddressBook(User user) throws IOException;
 }

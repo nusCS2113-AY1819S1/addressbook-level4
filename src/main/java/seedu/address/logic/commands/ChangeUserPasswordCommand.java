@@ -63,7 +63,7 @@ public class ChangeUserPasswordCommand extends Command {
                 || (other instanceof ChangeUserPasswordCommand
                 && this.username.equals(((ChangeUserPasswordCommand) other).username)
                 && this.password.equals(((ChangeUserPasswordCommand) other).password))
-                && this.newPassword.equals(((ChangeUserPasswordCommand) other).newPassword); 
+                && this.newPassword.equals(((ChangeUserPasswordCommand) other).newPassword);
     }
 
 }

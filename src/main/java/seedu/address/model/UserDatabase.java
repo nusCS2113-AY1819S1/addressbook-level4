@@ -10,6 +10,7 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
@@ -60,7 +61,6 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         return loggedInUser;
     }
 
-    //@@author kaisertanqr
     /**
      * Returns the login status of the user.
      */
@@ -92,7 +92,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      */
     public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
-                AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX);
+                Paths.get(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for login");
 
         if (hasLoggedIn) {
@@ -118,7 +118,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      */
     public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
-                AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX);
+                Paths.get(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for permissions.");
         if (!hasLoggedIn) {
             return users.contains(toCheck);
