@@ -101,7 +101,7 @@ public interface Model {
 
     boolean hasLoggedIn();
 
-    boolean setLoginStatus(boolean status);
+    void setLoginStatus(boolean status);
 
     User getLoggedInUser();
 

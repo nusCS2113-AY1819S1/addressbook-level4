@@ -4,8 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
+import seedu.address.logic.CommandHistory;
+import seedu.address.model.Model;
 import seedu.address.model.login.User;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.login.exceptions.DuplicateUserException;
 
 public class CreateUserCommand extends Command {
 
@@ -31,7 +34,7 @@ public class CreateUserCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         try {
             model.addUser(toCreate);

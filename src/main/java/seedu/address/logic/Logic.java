@@ -5,6 +5,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.login.User;
 import seedu.address.model.person.Person;
 
 /**
@@ -30,5 +31,7 @@ public interface Logic {
     CommandResult executeNoLoginCommands(String commandText, Command command) throws CommandException;
 
     /** Returns whether given user is logged in successfully */
-    boolean isAuthenticated();
+    boolean hasLoggedIn();
+
+    User getLoggedInUser();
 }

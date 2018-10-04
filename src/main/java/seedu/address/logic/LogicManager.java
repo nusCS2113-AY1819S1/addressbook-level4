@@ -60,7 +60,7 @@ public class LogicManager extends ComponentManager implements Logic {
                     || commandText.split(" ")[0].equals(CreateUserCommand.COMMAND_WORD)
                     || commandText.split(" ")[0].equals(DeleteUserCommand.COMMAND_WORD)
                     || commandText.split(" ")[0].equals(ChangeUserPasswordCommand.COMMAND_WORD)) {
-                result = command.execute();
+                result = command.execute(model, history);
             } else {
                 result = null;
             }

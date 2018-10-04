@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
@@ -33,7 +35,7 @@ public class DeleteUserCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws CommandException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         try {
             if (model.checkCredentials(this.username, this.password) && !model.hasLoggedIn()) {
