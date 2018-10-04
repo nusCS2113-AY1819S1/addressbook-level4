@@ -1,6 +1,8 @@
 package seedu.address.model.login;
 
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -13,25 +15,25 @@ public class User {
 
     private Username username;
     private Password password;
-    private String addressBookFilePath;
+    private Path addressBookFilePath;
 
     public User() {
         this.username = new Username("default");
         this.password = new Password("password");
-        this.addressBookFilePath = "data/addressbook-default.xml";
+        this.addressBookFilePath = Paths.get("data/addressbook-default.xml");
     }
 
     /**
      * Creates a user instance
      */
     public User(Username username, Password password) {
-        this(username, password, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX);
+        this(username, password,Paths.get(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
     }
 
     /**
      * Creates a user instance with a specific address book file path {@code addressBookFilePath}
      */
-    public User(Username username, Password password, String addressBookFilePath) {
+    public User(Username username, Password password, Path addressBookFilePath) {
         requireAllNonNull(username, password, addressBookFilePath);
         this.username = username;
         this.password = password;
@@ -50,7 +52,7 @@ public class User {
         return password;
     }
 
-    public String getAddressBookFilePath() {
+    public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }
 

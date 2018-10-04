@@ -16,6 +16,9 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
+    public abstract CommandResult execute() throws CommandException;
 
+    public void setData(Model model, CommandHistory history) {
+        this.model = model;
+    }
 }
