@@ -44,15 +44,15 @@ public class SortCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ReadOnlyEventList events = model.getEventList();
         switch (key) {
-            case (KEY_NAME):
-                events.sortByName();
-                break;
-            case (KEY_STARTTIME):
-                events.sortByStartTime();
-                break;
-            case (KEY_ENDTIME):
-                events.sortByEndTime();
-                break;
+        case (KEY_NAME):
+            events.sortByName();
+            break;
+        case (KEY_STARTTIME):
+            events.sortByStartTime();
+            break;
+        case (KEY_ENDTIME):
+            events.sortByEndTime();
+            break;
         }
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, key));
