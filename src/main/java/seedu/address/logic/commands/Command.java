@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-
-import java.io.IOException;
-import java.security.GeneralSecurityException;
 
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
