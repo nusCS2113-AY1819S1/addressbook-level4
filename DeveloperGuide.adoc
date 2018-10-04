@@ -913,7 +913,7 @@ Use case resumes at step 2.
 
 1.  User indicates he wants to sort by skills
 2.  NUSSU-Connect lists available skills, asks the user what he wants to sort by.
-3.  User indicates what he wants by selecting 
+3.  User indicates what he wants by selecting
 4.  NUSSU-Connect all skills.
 +
 Use case ends.
