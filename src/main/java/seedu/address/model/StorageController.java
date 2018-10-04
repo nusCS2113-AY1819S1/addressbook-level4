@@ -28,8 +28,6 @@ public class StorageController {
     private static ArrayList<Note> noteStorage = new ArrayList<Note>();
 
 
-
-
     /**
      * This method retrieves all datasets saved locally.
      */
@@ -55,7 +53,7 @@ public class StorageController {
     }
 
     /**
-     This method creates files for all datasets if they do not exist on the local filesystem.
+     * This method creates files for all datasets if they do not exist on the local filesystem.
      */
     private static void createFiles() {
         File gradebook = new File(STORAGE_GRADEBOOK);
@@ -63,26 +61,27 @@ public class StorageController {
         File courses = new File(STORAGE_COURSES);
         File modules = new File(STORAGE_MODULES);
         File notes = new File(STORAGE_NOTES);
+
         try {
             gradebook.createNewFile();
             classes.createNewFile();
             courses.createNewFile();
             modules.createNewFile();
             notes.createNewFile();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-  This method stores all data within the arraylists above to local storage.
-   */
+     * This method stores all data within the arraylists above to local storage.
+     */
     public static void storeData() {
         try {
             CourseManager cm = new CourseManager();
             cm.setCourseList(courseStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_COURSES), cm);
+
             ModuleManager moduleManager = new ModuleManager();
             moduleManager.setModules(moduleStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_MODULES), moduleManager);
