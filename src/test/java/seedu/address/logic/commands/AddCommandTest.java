@@ -19,7 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.gradebook.Component;
+import seedu.address.model.gradebook.GradebookComponent;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -95,12 +95,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addComponent(Component component) {
+        public void addGradebookComponent(GradebookComponent gradebookComponent) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasComponent(Component component) {
+        public boolean hasComponent(GradebookComponent gradebookComponent) {
             throw new AssertionError("This method should not be called.");
         }
 

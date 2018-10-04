@@ -14,10 +14,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_MATRIC = new Prefix("i/");
     public static final Prefix PREFIX_COURSECODE = new Prefix("c/");
 
-    public static final Prefix PREFIX_GB_MODULE = new Prefix("i/");
-    public static final Prefix PREFIX_GB_COMPONENT = new Prefix("i/");
-    public static final Prefix PREFIX_GB_MAXMARKS = new Prefix("m/");
-    public static final Prefix PREFIX_GB_WEIGHTAGE = new Prefix("p/");
+    public static final Prefix PREFIX_GRADEBOOK_MODULE = new Prefix("c/");
+    public static final Prefix PREFIX_GRADEBOOK_ITEM = new Prefix("i/");
 
     public static final Prefix PREFIX_COURSENAME = new Prefix("n/");
     public static final Prefix PREFIX_FACULTY = new Prefix("f/");

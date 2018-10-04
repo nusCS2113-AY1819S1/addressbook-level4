@@ -3,7 +3,6 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.gradebook.Component;
 import seedu.address.model.person.Person;
 
 /**
@@ -12,8 +11,6 @@ import seedu.address.model.person.Person;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
-    Predicate<Component> PREDICATE_SHOW_ALL_COMPONENT = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -78,15 +75,4 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
-
-    /**
-     * Returns true if a component with the same identity as {@code person} exists in the Trajectory.
-     */
-    boolean hasComponent(Component component);
-
-    /**
-     * Adds the given component.
-     * {@code component} must not already exist in Trajectory.
-     */
-    void addComponent(Component component);
 }

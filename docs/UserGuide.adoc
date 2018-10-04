@@ -465,18 +465,18 @@ Format: `gradebook add c/MODULE_CODE g/GRADE_ITEM [m/MARKS_MAX] [p/GRADE_PERCENT
 Examples:
 
 * `gradebook add c/CS2040C g/Assignment 1 m/10 p/10` +
-Adds grade component, Assignment 1, to module CS2040C with a maximum of 10 marks and constitutes 10% of overall marks.
+Adds grade gradebookComponent, Assignment 1, to module CS2040C with a maximum of 10 marks and constitutes 10% of overall marks.
 * `gradebook add c/CS2040C g/Final Examinations` +
-Adds grade component, Final Examinations, to module CS2040C.
+Adds grade gradebookComponent, Final Examinations, to module CS2040C.
 
 ==== Update Grade Component : `gradebook update` `[Coming in v1.3]`
 Updates a grade item. +
 Format: `gradebook update c/MODULE_CODE g/GRADE_ITEM [m/MARKS_MAX] [p/GRADE_PERCENTAGE]`
 
 ****
-* Grade component and module code must exist.
+* Grade gradebookComponent and module code must exist.
 * Percentage of grade must not exceed 100%.
-* Total sum of weightage for all grade components must not exceed 100%.
+* Total sum of weightage for all grade gradebookComponents must not exceed 100%.
 ****
 
 Examples:
@@ -497,24 +497,24 @@ Format: `gradebook remove c/MODULE_CODE g/GRADE_ITEM'
 Examples:
 
 * `gradebook remove m/CS2040C g/Assignment 1` +
-Deletes Assignment 1 component from module CS2040C.
+Deletes Assignment 1 gradebookComponent from module CS2040C.
 
 ==== Find Grade Component : `gradebook find` `[Coming in v1.2]`
 Assigns marks to a student. +
 Format: `gradebook find c/MODULE_CODE g/GRADE_ITEM'
 
 ****
-* Grade component must exist.
+* Grade gradebookComponent must exist.
 ****
 
 Examples:
 
 * `gradebook find c/CS2040C g/Assignment 1` +
-Finds Assignment 1 component in module CS2040C.
+Finds Assignment 1 gradebookComponent in module CS2040C.
 
-==== List Grade Components : `gradebook list components` `[Coming in v1.2]`
+==== List Grade Components : `gradebook list gradebookComponents` `[Coming in v1.2]`
 Lists all the grade items in a certain module. +
-Format: `gradebook list components c/MODULE_CODE'
+Format: `gradebook list gradebookComponents c/MODULE_CODE'
 
 ****
 * Module code must exist.
@@ -522,7 +522,7 @@ Format: `gradebook list components c/MODULE_CODE'
 
 Examples:
 
-* `gradebook list components c/CS2040C` +
+* `gradebook list gradebookComponents c/CS2040C` +
 Lists all the grade items for the module with module code CS2040C.
 
 ==== List Students Grades : `gradebook list students` `[Coming in v1.2]`
@@ -744,8 +744,8 @@ e.g. `gradebook add c/CS2040C i/Assignment 1 m/10 p/10`
 e.g. `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10`
 * *Delete Grade Component* : `gradebook remove c/MODULE_CODE i/GRADE_ITEM` +
 e.g. `gradebook remove m/CS2040C i/Assignment 1`
-* *List Grade Components* : `gradebook list components c/MODULE_CODE` +
-e.g. `gradebook list components c/CS2040C`
+* *List Grade Components* : `gradebook list gradebookComponents c/MODULE_CODE` +
+e.g. `gradebook list gradebookComponents c/CS2040C`
 * *List Grade Components* : `gradebook list grades c/MODULE_CODE` +
 e.g. `gradebook list grades c/CS2040C`
 * *Assign Grades* : `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS` +

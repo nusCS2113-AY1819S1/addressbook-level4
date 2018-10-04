@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.gradebook.Component;
+import seedu.address.model.gradebook.GradebookComponent;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,7 +23,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-    //  private final FilteredList<Component> filteredComponents;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -56,19 +55,6 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
-    }
-
-    @Override
-    public boolean hasComponent(Component component) {
-        requireNonNull(component);
-        return versionedAddressBook.hasComponent(component);
-    }
-
-    @Override
-    public void addComponent(Component component) {
-        versionedAddressBook.addComponent(component);
-        //updateFilteredComponentList(PREDICATE_SHOW_ALL_COMPONENT);
-        indicateAddressBookChanged();
     }
 
     @Override
@@ -117,12 +103,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     /*
     @Override
-    public ObservableList<Component> getFilteredComponentList() {
+    public ObservableList<GradebookComponent> getFilteredComponentList() {
         return FXCollections.unmodifiableObservableList(filteredComponents);
     }
 
     @Override
-    public void updateFilteredComponentList(Predicate<Component> predicate) {
+    public void updateFilteredComponentList(Predicate<GradebookComponent> predicate) {
         requireNonNull(predicate);
         filteredComponents.setPredicate(predicate);
     }
