@@ -1,14 +1,13 @@
 package seedu.address.logic.commands;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-
 import seedu.address.commons.core.Email;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 public class EmailCommand extends Command {
 
