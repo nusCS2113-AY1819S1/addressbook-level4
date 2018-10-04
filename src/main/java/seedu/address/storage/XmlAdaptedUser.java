@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import java.nio.file.Path;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -16,7 +17,7 @@ public class XmlAdaptedUser {
     @XmlElement(required = true)
     private String password;
     @XmlElement(required = true)
-    private String addressbookfilepath;
+    private Path addressbookfilepath;
 
     /**
      * Constructs an XmlAdaptedUser.
@@ -27,7 +28,7 @@ public class XmlAdaptedUser {
     /**
      * Constructs an {@code XmlAdaptedUser} with the given person details.
      */
-    public XmlAdaptedUser(String username, String password, String addressbookfilepath) {
+    public XmlAdaptedUser(String username, String password, Path addressbookfilepath) {
         this.username = username;
         this.password = password;
         this.addressbookfilepath = addressbookfilepath;
@@ -75,7 +76,7 @@ public class XmlAdaptedUser {
             throw new IllegalValueException(User.MESSAGE_AB_FILEPATH_CONSTRAINTS);
         }
 
-        final String addressBookFilePath = this.addressbookfilepath;
+        final Path addressBookFilePath = this.addressbookfilepath;
 
         return new User(username, password, addressBookFilePath);
     }

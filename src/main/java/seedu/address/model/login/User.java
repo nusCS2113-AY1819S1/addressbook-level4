@@ -40,8 +40,8 @@ public class User {
         this.addressBookFilePath = addressBookFilePath;
     }
 
-    public static boolean isValidAddressBookFilePath(String test, String username) {
-        return test.matches(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX) && !test.equals("");
+    public static boolean isValidAddressBookFilePath(Path test, String username) {
+        return test.equals(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX) && !test.equals("");
     }
 
     public Username getUsername() {

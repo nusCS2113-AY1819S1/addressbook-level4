@@ -20,7 +20,6 @@ public class LoginCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an LoginCommand object for execution.
-     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public LoginCommand parse(String args) throws ParseException {
@@ -29,7 +28,8 @@ public class LoginCommandParser {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME, PREFIX_PASSWORD)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_LOGIN_FORMAT, LoginCommand.MESSAGE_USAGE));
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_LOGIN_FORMAT, LoginCommand.MESSAGE_USAGE));
         }
 
         try {
