@@ -16,8 +16,6 @@ public class UserPasswordContainsKeywordsPredicate implements Predicate<LoginDet
         this.keywords = keywords;
     }
 
-    public UserPasswordContainsKeywordsPredicate(String userPassword) {}
-
     @Override
     public boolean test(LoginDetails loginDetails) {
         return keywords.stream()

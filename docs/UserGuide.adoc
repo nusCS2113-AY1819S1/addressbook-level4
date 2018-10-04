@@ -18,7 +18,7 @@ By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
-NUSSU Connect is for the executive committee members of NUSSU who are comfortable with working with Command Line Interface (CLI). It is meant for fast typers within NUSSU and it could help them perform their daily tasks such as managing recruitment, contacts, budgets and projects much more efficiently.
+NUSSU-Connect is an application for executive committee (exco) members of the NUS Student Union (NUSSU) to help them perform their daily tasks including managing recruitment, contacts, budgets and projects efficiently.
 
 == Quick Start
 
@@ -55,10 +55,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Logging into system: `login`
 
 Logs into application using relevant credentials. +
-Format: `user/USERID pass/PASSWORD`
+Format: `login USERID PASSWORD`
 
 ****
-* user/ and pass/ are required prefixes before USERID and PASSWORD
 * USERID refers to student matriculation number
 * PASSWORD refers to the password associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
@@ -67,8 +66,7 @@ Format: `user/USERID pass/PASSWORD`
 
 Examples:
 
-* `login` +
-`user/X1234567X pass/zaq1xsw2cde3` +
+* `login X1234567X zaq1xsw2cde3` +
 Logs into Address book with user ID as X1234567X and password as zaq1xsw2cde3.
 
 [NOTE]
@@ -76,10 +74,10 @@ Logs into Address book with user ID as X1234567X and password as zaq1xsw2cde3.
 Password is case-sensitive!
 ====
 
-=== Creating a new user account: `create account`
+=== Creating a new user account: `createaccount`
 
 Creates a new user account in the address book. +
-Format: `user/USERID pass/PASSWORD`
+Format: `createaccount user/USERID pass/PASSWORD`
 
 ****
 * user/ and pass/ are required prefixes before USERID and PASSWORD
@@ -91,14 +89,13 @@ Format: `user/USERID pass/PASSWORD`
 
 Examples:
 
-* `create account` +
-`user/X1234567X pass/zaq1xsw2cde3` +
+* `createaccount user/X1234567X pass/zaq1xsw2cde3` +
 Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
-=== Deleting an existing user account: `delete account`
+=== Deleting an existing user account: `deleteaccount`
 
 Deletes an existing account from the address book. +
-Format: `USERID PASSWORD`
+Format: `deleteaccount USERID PASSWORD`
 
 ****
 * USERID refers to student matriculation number
@@ -109,14 +106,13 @@ Format: `USERID PASSWORD`
 
 Examples:
 
-* `delete account` +
-`X1234567X zaq1xsw2cde3` +
+* `deleteaccount X1234567X zaq1xsw2cde3` +
 Deletes the current account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
-=== Changing the password of an existing user account: `change password`
+=== Changing the password of an existing user account: `changepassword`
 
 Changes the password of an existing account from the address book. +
-Format: `USERID CURRENTPASSWORD NEWPASSWORD`
+Format: `changepassword USERID CURRENTPASSWORD NEWPASSWORD`
 
 ****
 * USERID refers to student matriculation number
@@ -128,8 +124,7 @@ Format: `USERID CURRENTPASSWORD NEWPASSWORD`
 
 Examples:
 
-* `change password` +
-`X1234567X zaq1xsw2cde3 1qaz2wsx3edc` +
+* `changepassword X1234567X zaq1xsw2cde3 1qaz2wsx3edc` +
 Changes the password of the current account with user ID as X1234567X, from "zaq1xsw2cde3" to "1qaz2wsx3edc" in the address book.
 
 === Viewing help : `help`
@@ -362,18 +357,14 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Login* : `USERID PASSWORD`
-e.g. `login` +
-    `A01234567M zaq1xsw2cde3`
-* *Create Account* : `USERID PASSWORD` +
-e.g. `create account` +
-    `A01234567M zaq1xsw2cde3`
-* *Delete Account* : `USERID PASSWORD` +
-e.g. `delete account` +
-    `A01234567M zaq1xsw2cde3`
-* *Change Password* : `USERID CURRENTPASSWORD NEWPASSWORD` +
-e.g. `change password` +
-    `A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
+* *Login* : `login USERID PASSWORD`
+e.g. `login A1234567M zaq1xsw2cde3`
+* *Create Account* : `createaccount USERID PASSWORD` +
+e.g. `createaccount user/A1234567M pass/zaq1xsw2cde3`
+* *Delete Account* : `deleteaccount USERID PASSWORD` +
+e.g. `deleteaccount A01234567M zaq1xsw2cde3`
+* *Change Password* : `changepassword USERID CURRENTPASSWORD NEWPASSWORD` +
+e.g. `changepassword A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 * *Clear* : `clear`
 * *Delete* : `delete [-a all][INDEX]` +

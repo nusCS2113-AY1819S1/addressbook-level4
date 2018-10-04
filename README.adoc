@@ -15,9 +15,7 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-NUSSU AddressBook is for the executive committee members of NUSSU who are comfortable with working with Command Line Interface (CLI).
-It is meant for fast typers within NUSSU and it could help them perform their daily tasks such as managing recruitment, contacts,
-budgets and projects much more efficiently.
+NUSSU-Connect is an application for executive committee (exco) members of the NUS Student Union (NUSSU) to help them perform their daily tasks including managing recruitment, contacts, budgets and projects efficiently. 
 
 
 == Site Map

@@ -1,8 +1,5 @@
 package seedu.address.ui;
 
-import static seedu.address.ui.LoginWindow.initializeLoginProcess;
-
-import java.io.IOException;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -20,11 +17,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 
 /**

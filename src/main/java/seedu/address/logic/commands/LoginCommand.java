@@ -11,5 +11,5 @@ public abstract class LoginCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Login into addressbook with input user ID and password."
             + "Parameters: USERID PASSWORD\n"
-            + "Example: " + COMMAND_WORD + " A3583758X pass/passphrase";
+            + "Example: " + COMMAND_WORD + " A3583758X passphrase";
 }

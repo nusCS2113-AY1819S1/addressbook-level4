@@ -833,6 +833,14 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
+|`* * *` |user |log into the application with the relevant credentials |gain secure access to the application
+
+|`* * *` |user |create a new account for the application |gain access to certain features of the application relevant to my role when I log in
+
+|`* * *` |user |delete an existing account from the application |clear my login credentials from the application when I am not using it anymore
+
+|`* * *` |user |change the password of an existing account |feel more secure about my account login credentials
+
 |`* * *` |user |add a new person |
 
 |`* * *` |user |delete a person |remove entries that I no longer need
@@ -881,28 +889,18 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  Address book asks for command to indicate user’s desire to either login normally, create new account, delete account or change account password
-2.  User types in command to choose normal login
-3.  Address book asks user for user ID and password
-4.  User types in user ID and password
-5.  Address book queries and authorize user full access to address book
+1.  User chooses normal login and types in user ID and password
+2.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 4a. User types in wrong password
+* 1a. User types in wrong password or user ID
 +
 [none]
-** 4a1. Address book displays error message and returns to step 1
-+
-Use case ends.
-
-* 4b. User types in user ID for a non-existent user account
-+
-[none]
-** 4b1. Address book displays error message and returns to step 1
+** 1a1. NUSSU-Connect displays error message and continues disabling access to user
 +
 Use case ends.
 
@@ -910,28 +908,18 @@ Use case ends.
 
 *MSS*
 
-1.  Address book asks for command to indicate user’s desire to either login normally, create new account, delete account or change account password
-2.  User types in command to indicate intention of creating new account
-3.  Address book displays message and user input field asking for account creation details
-4.  User types in command to create a new account with relevant user ID and password
-5.  Address book creates new account with login details, shows message and returns to step 1
+1.  User types in command to create a new account with chosen user ID and password
+2.  NUSSU-Connect creates new account with chosen login details, and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 4a. User decides not to create new account and types command to indicate so
+* 1a. User creates a new account with a user ID which already exists
 +
 [none]
-** 4a1. Address book cancels process of new account creation and returns to step 1
-+
-Use case ends.
-+
-* 4b. User creates a new account with a user ID which already exists
-+
-[none]
-** 4b1. Address book shows error message to user and returns to step 1
+** 1a1. NUSSU-Connect shows error message to user and does not create a new account
 +
 Use case ends.
 
@@ -939,69 +927,55 @@ Use case ends.
 
 *MSS*
 
-1.  Address book asks for command to indicate user’s desire to either login normally, create new account, delete account or change account password
-2.  User types in command to indicate intention of deleting existing account
-3.  Address book displays input field to allow user to input account details to be deleted
-4.  User types command with relevant credentials to delete account
-5.  Address book deletes account associated with input user ID and respective password, shows message and
-returns to step 1
+1.  User types command together with user ID and password to delete account associated with input user ID and password
+2.  NUSSU-Connect account associated with input user ID and respective password and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 4a. User decides not to delete an account and types command to indicate so
+* 1a. User types in the wrong current password associated with the user ID
 +
 [none]
-** 4a1. Address book cancels process of deleting existing account and returns to step 1
+** 1a1. NUSSU-Connect shows error message to user and cancels deletion of account
 +
 Use case ends.
-+
-* 4b. User types in the wrong current password associated with the user ID
+* 1b. User wants to delete a non-existent user account
 +
 [none]
-** 4b1. Address book shows error message to user and returns to step 1
+** 1b1. NUSSU-Connect shows error message to user and cancels deletion of account
 +
 Use case ends.
-* 4c. User wants to delete a non-existent user account
-+
-[none]
-** 4c1. Address book shows error message to user and returns to step 1
-+
-Use case ends.
+
 === Use case: Changing password of current user accounts
 
 *MSS*
 
-1.  Address book asks for command to indicate user’s desire to either login normally, create new account, delete account or change account password
-2.  User types in command to indicate intention of changing password of existing account
-3.  Address book displays message and input field to the user
-4.  User types command with the relevant credentials to change account password
-5.  Address book changes password of account associated with input user ID and new password, shows message and
-returns to step 1
+1.  User types command with the relevant credentials of an existing account to change that account's password
+2.  NUSSU-Connect changes password of account associated with input user ID and new password and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 4a. User decides not to change password of the account and types command to indicate so
+* 1a. User types in the wrong current password associated with the user ID
 +
 [none]
-** 4a1. Address book cancels process of changing password of account and returns to step 1
+** 1a1. NUSSU-Connect shows error message to user and cancels changing of password of account
 +
 Use case ends.
-* 4b. User types in the wrong current password associated with the user ID
+* 1b. User wants to change the password of a non-existent user account
 +
 [none]
-** 4b1. Address book shows error message to user and returns to step 1
+** 1b1. NUSSU-Connect shows error message to user and cancels changing of password of account
 +
 Use case ends.
-* 4c. User wants to change the password of a non-existent user account
+* 1c. User types in new password that matches current old password
 +
 [none]
-** 4c1. Address book shows error message and returns to step 1
+** 1c1. NUSSU-Connect shows error message to user and cancels changing of password of account
 +
 Use case ends.
 
