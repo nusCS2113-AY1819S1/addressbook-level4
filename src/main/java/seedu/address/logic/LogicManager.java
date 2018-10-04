@@ -13,6 +13,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
 
+import javax.mail.MessagingException;
+
 /**
  * The main LogicManager of the app.
  */
@@ -30,7 +32,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText) throws CommandException, ParseException, MessagingException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             Command command = recruitBookParser.parseCommand(commandText);
