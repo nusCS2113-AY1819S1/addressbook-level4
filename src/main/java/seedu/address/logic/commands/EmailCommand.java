@@ -21,10 +21,12 @@ public class EmailCommand extends Command {
         MimeMessage email;
         String result;
         try {
-            email = Email.createEmail("cs2113f094@gmail.com", "cs2113f094@gmail.com", "testing123", "Hello, I am testing!");
+            email = Email.createEmail("cs2113f094@gmail.com", "cs2113f094@gmail.com",
+                    "testing123", "Hello, I am testing!");
             Email.sendMessage(Email.init(), "me", email);
             result = EMAIL_SUCCESS;
-        } catch(MessagingException | IOException e) {
+
+        } catch (MessagingException | IOException e) {
                 e.printStackTrace();
                 result = EMAIL_FAILURE;
         }
