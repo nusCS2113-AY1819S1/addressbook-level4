@@ -33,5 +33,21 @@
             <gradeItemName>Assignment 1</gradeItemName>
             <moduleCode>CS2113</moduleCode>
         </gradeItem>
+        <gradeItem>
+            <gradeItemName>Assignment 1</gradeItemName>
+            <moduleCode>CS2113</moduleCode>
+        </gradeItem>
+        <gradeItem>
+            <gradeItemName>assignment 2</gradeItemName>
+            <moduleCode>cg2271</moduleCode>
+        </gradeItem>
+        <gradeItem>
+            <gradeItemName>Mid Term</gradeItemName>
+            <moduleCode>CG2271</moduleCode>
+        </gradeItem>
+        <gradeItem>
+            <gradeItemName>Mid Term Test</gradeItemName>
+            <moduleCode>CS2113</moduleCode>
+        </gradeItem>
     </gradebook>
 </ns2:gradebookManager>

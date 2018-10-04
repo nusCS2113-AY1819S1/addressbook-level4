@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.gradebook.GradebookComponent;
 import seedu.address.model.gradebook.UniqueComponentList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;

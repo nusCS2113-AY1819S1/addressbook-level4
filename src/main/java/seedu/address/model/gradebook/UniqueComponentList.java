@@ -1,22 +1,17 @@
 package seedu.address.model.gradebook;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Iterator;
-import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import seedu.address.model.gradebook.exceptions.DuplicateComponentException;
-
 /**
  * A list of components that enforces uniqueness between its elements and does not allow nulls.
- * A component is considered unique by comparing using {@code GradebookComponent#isSameComponent(GradebookComponent)}. As such, adding and
- * updating of components uses GradebookComponent#isSameComponent(GradebookComponent) for equality so as to ensure that the component
- * being added or updated is unique in terms of identity in the UniqueComponentList. However, the removal of a component
- * uses GradebookComponent#equals(Object) so as to ensure that the component with exactly the same fields will be removed.
+ * A component is considered unique by comparing using {@code GradebookComponent#isSameComponent(GradebookComponent)}.
+ * As such, adding and updating of components uses GradebookComponent#isSameComponent(GradebookComponent) for equality
+ * so as to ensure that the component being added or updated is unique in terms of identity in the UniqueComponentList.
+ * However, the removal of a component uses GradebookComponent#equals(Object) so as to ensure that the component with
+ * exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
