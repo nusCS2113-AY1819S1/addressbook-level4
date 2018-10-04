@@ -5,7 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.LinkedList;
 import java.util.List;
 
-import seedu.address.ui.LoginWindow;
+import seedu.address.ui.MainWindow;
+
 
 /**
  * Stores the history of commands executed.
@@ -26,9 +27,9 @@ public class CommandHistory {
      */
     public void add(String userInput) {
         requireNonNull(userInput);
-        if (LoginWindow.isSensitiveInformation) {
+        if (MainWindow.isSensitiveInformation) {
             userInputHistory.add("Sensitive information!");
-            LoginWindow.isSensitiveInformation = false;
+            MainWindow.isSensitiveInformation = false;
         } else {
             userInputHistory.add(userInput);
         }

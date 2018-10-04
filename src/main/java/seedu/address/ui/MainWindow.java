@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javax.swing.*;
+
 import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
@@ -27,6 +29,9 @@ import seedu.address.model.UserPrefs;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+
+    private static boolean isLoginSuccessful = false;
+    public static boolean isSensitiveInformation = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -115,10 +120,20 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    public static boolean getIsLoginSuccessful() {
+        return isLoginSuccessful;
+    }
+
+    public static void setIsLoginSuccessful(boolean setLoginSuccessful) {
+        isLoginSuccessful = setLoginSuccessful;
+    }
+
     /**
      * TO IMPLEMENT: hide all ui except commandbox and resultdisplay unless successfully logged in. Can create account
      * with/without logging in, but must type in correct master password given only to NUSSU exco members
-     * issues: does not check for duplicate accounts during account creation
+     * issues: does not check for duplicate accounts during account creation. The fillInnerParts() method only runs
+     * once, when app is started. I need it to run multiple times to check the MainWindow.getIsLoginSuccessful()
+     * condition to see if it is true or false.
      */
     void fillInnerParts() {
         CommandBox commandBox = new CommandBox(logic);

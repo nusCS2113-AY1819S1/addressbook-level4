@@ -7,7 +7,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
-import seedu.address.ui.LoginWindow;
+import seedu.address.ui.MainWindow;
 
 /**
  * Queries the login book to see if there is a user ID and password that matches input user ID and password.
@@ -32,9 +32,9 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
         model.updateFilteredLoginDetailsList(idPredicate);
         model.updateFilteredLoginDetailsList(passwordPredicate);
         if (model.getFilteredLoginDetailsList().size() != 0) {
-            LoginWindow.isLoginSuccessful = true;
+            MainWindow.setIsLoginSuccessful(true);
         } else {
-            LoginWindow.isLoginSuccessful = false;
+            MainWindow.setIsLoginSuccessful(false);
             System.exit(0);
         }
         return new CommandResult(

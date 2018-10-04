@@ -889,18 +889,20 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User chooses normal login and types in user ID and password
-2.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
+1.  User types a command to access a certain functionality in NUSSU-Connect
+2.  NUSSU-Connect prompts user to login first by entering login credentials
+3.  User types in login credentials along with the login command
+4.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. User types in wrong password or user ID
+* 3a. User types in wrong password or user ID
 +
 [none]
-** 1a1. NUSSU-Connect displays error message and continues disabling access to user
+** 3a1. NUSSU-Connect displays error message and continues to prompt user for login credentials before doing anything else
 +
 Use case ends.
 
@@ -909,7 +911,9 @@ Use case ends.
 *MSS*
 
 1.  User types in command to create a new account with chosen user ID and password
-2.  NUSSU-Connect creates new account with chosen login details, and shows successful execution message
+2.  NUSSU prompts user to type in master password for creation of new account
+3.  User types in the correct master password
+4.  NUSSU-Connect creates new account with chosen login details, and shows successful execution message
 +
 Use case ends.
 
@@ -920,6 +924,12 @@ Use case ends.
 +
 [none]
 ** 1a1. NUSSU-Connect shows error message to user and does not create a new account
++
+Use case ends.
+* 3a. User types in the wrong master password
++
+[none]
+** 3a1. NUSSU-Connect shows error message to user and and does not create a new account
 +
 Use case ends.
 
