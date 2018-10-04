@@ -48,7 +48,6 @@ public class Event implements Comparable<Event> {
     }
 
 
-
     public EventName getEventName() {
         return eventName;
     }
@@ -113,6 +112,15 @@ public class Event implements Comparable<Event> {
 
     @Override
     public int compareTo(Event other) {
-        return this.getStartTime().compareTo(other.getStartTime()) < 0 ? -1 : 1;
+        return this.getEventName().fullName.compareTo(other.getEventName().fullName);
+    }
+
+
+    public int compareStartTimeTo(Event other) {
+        return this.getStartTime().compareTo(other.getStartTime());
+    }
+
+    public int compareEndTimeTo(Event other) {
+        return this.getEndTime().compareTo(other.getEndTime());
     }
 }

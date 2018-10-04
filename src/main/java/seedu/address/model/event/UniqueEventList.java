@@ -141,4 +141,16 @@ public class UniqueEventList implements Iterable<Event> {
         return true;
     }
 
+    public void sortByName() {
+        internalList.sort((Event e1, Event e2) -> e1.compareTo(e2));
+    }
+
+    public void sortByStartTime() {
+        internalList.sort((Event e1, Event e2) -> e1.compareStartTimeTo(e2));
+    }
+
+    public void sortByEndTime() {
+        internalList.sort((Event e1, Event e2) -> e1.compareEndTimeTo(e2));
+    }
+
 }

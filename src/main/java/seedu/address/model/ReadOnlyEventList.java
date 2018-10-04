@@ -12,4 +12,11 @@ public interface ReadOnlyEventList {
      * This list will not contain any duplicate events.
      */
     ObservableList<Event> getEventList();
+
+    void sortByName();
+
+    void sortByStartTime();
+
+    void sortByEndTime();
+
 }
