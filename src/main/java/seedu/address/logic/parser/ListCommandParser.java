@@ -1,8 +1,10 @@
 package seedu.address.logic.parser;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_KPI;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.ArrayList;;
 
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -11,10 +13,16 @@ public class ListCommandParser implements Parser<ListCommand> {
 
     @Override
     public ListCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, CliSyntax.PREFIX_NAME, CliSyntax.PREFIX_TAG);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(
+                args,
+                PREFIX_NAME,
+                PREFIX_TAG,
+                PREFIX_KPI);
 
-        if (argMultimap.getValue(CliSyntax.PREFIX_TAG).isPresent()) {
-            return new ListCommand(ListCommand.TYPE_TAG, ParserUtil.parseTags(argMultimap.getAllValues(CliSyntax.PREFIX_TAG)));
+        if (argMultimap.getValue(PREFIX_TAG).isPresent()) {
+            return new ListCommand(ListCommand.TYPE_TAG, ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
+        } else if (argMultimap.getValue(PREFIX_KPI).isPresent()) {
+            return new ListCommand(ListCommand.TYPE_KPI, argMultimap.getAllValues(PREFIX_KPI));
         } else {
             return new ListCommand(ListCommand.TYPE_ALL, new ArrayList<>());
         }

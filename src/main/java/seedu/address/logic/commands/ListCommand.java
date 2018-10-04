@@ -8,13 +8,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
@@ -28,6 +25,7 @@ public class ListCommand extends Command {
 
     public static final int TYPE_ALL = 0;
     public static final int TYPE_TAG = 1;
+    public static final int TYPE_KPI = 2;
 
     public static final String MESSAGE_SUCCESS = "Listed: ";
 
@@ -61,7 +59,9 @@ public class ListCommand extends Command {
         switch(listType) {
         case TYPE_TAG:
             predicateToUse = showTagsPredicate(inputTags);
-            System.out.println("tag");
+            break;
+        case TYPE_KPI:
+            predicateToUse = showKpiPredicate(predicatesList);
             break;
         default:
             predicateToUse = PREDICATE_SHOW_ALL_PERSONS;
@@ -73,5 +73,9 @@ public class ListCommand extends Command {
 
     private Predicate<Person> showTagsPredicate(Set<Tag> inputTags) {
         return p -> !Collections.disjoint(p.getTags(), inputTags);
+    }
+
+    private Predicate<Person> showKpiPredicate(List<String> predicatesList) {
+        return p -> predicatesList.contains(p.getKpi().value);
     }
 }
