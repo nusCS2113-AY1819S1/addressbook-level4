@@ -14,9 +14,9 @@ import seedu.address.model.util.SampleDataUtil;
 public class BookBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_ISBN = "85355255";
-    public static final String DEFAULT_PRICE = "alice@gmail.com";
-    public static final String DEFAULT_QUANTITY = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_ISBN = "8535525555";
+    public static final String DEFAULT_PRICE = "9.99";
+    public static final String DEFAULT_QUANTITY = "1";
 
     private Name name;
     private Isbn isbn;
@@ -62,7 +62,7 @@ public class BookBuilder {
     /**
      * Sets the {@code Quantity} of the {@code Book} that we are building.
      */
-    public BookBuilder withAddress(String address) {
+    public BookBuilder withQuantity(String address) {
         this.quantity = new Quantity(address);
         return this;
     }
@@ -70,7 +70,7 @@ public class BookBuilder {
     /**
      * Sets the {@code Isbn} of the {@code Book} that we are building.
      */
-    public BookBuilder withPhone(String phone) {
+    public BookBuilder withIsbn(String phone) {
         this.isbn = new Isbn(phone);
         return this;
     }
@@ -78,7 +78,7 @@ public class BookBuilder {
     /**
      * Sets the {@code Price} of the {@code Book} that we are building.
      */
-    public BookBuilder withEmail(String email) {
+    public BookBuilder withPrice(String email) {
         this.price = new Price(email);
         return this;
     }

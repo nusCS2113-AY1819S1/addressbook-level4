@@ -51,7 +51,7 @@ public class BookInventoryTest {
     @Test
     public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two books with the same identity fields
-        Book editedAlice = new BookBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Book editedAlice = new BookBuilder(ALICE).withQuantity(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Book> newBooks = Arrays.asList(ALICE, editedAlice);
         BookInventoryStub newData = new BookInventoryStub(newBooks);
@@ -80,7 +80,7 @@ public class BookInventoryTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         bookInventory.addPerson(ALICE);
-        Book editedAlice = new BookBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Book editedAlice = new BookBuilder(ALICE).withQuantity(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(bookInventory.hasPerson(editedAlice));
     }

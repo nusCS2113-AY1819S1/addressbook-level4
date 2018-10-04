@@ -94,7 +94,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         index = INDEX_SECOND_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedBook = new BookBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedBook = new BookBuilder(BOB).withIsbn(VALID_PHONE_AMY).withPrice(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedBook);
 
         /* Case: clear tags -> cleared */
