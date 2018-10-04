@@ -111,6 +111,21 @@ public class EventList implements ReadOnlyEventList {
     public int hashCode() {
         return events.hashCode();
     }
+
+    @Override
+    public void sortByName() {
+        events.sortByName();
+    }
+
+    @Override
+    public void sortByStartTime() {
+        events.sortByStartTime();
+    }
+
+    @Override
+    public void sortByEndTime() {
+        events.sortByEndTime();
+    }
 }
 
 

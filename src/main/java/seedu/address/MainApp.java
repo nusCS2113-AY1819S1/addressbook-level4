@@ -109,6 +109,7 @@ public class MainApp extends Application {
             initialAddressData = new AddressBook();
         }
 
+
         try {
             eventListOptional = storage.readEventList();
             if (!eventListOptional.isPresent()) {
@@ -122,7 +123,7 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty EventList");
             initialEventListData = new EventList();
         }
-
+        initialEventListData.sortByName();
         return new ModelManager(initialAddressData, initialEventListData, userPrefs);
     }
 
