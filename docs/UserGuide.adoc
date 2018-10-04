@@ -14,19 +14,12 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
-<<<<<<< HEAD
+=======
 By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
 
 NUSSU-Connect is an application for executive committee (exco) members of the NUS Student Union (NUSSU) to help them perform their daily tasks including managing recruitment, contacts, budgets and projects efficiently.
-=======
-By: `Team F09-1`  	Since: `Sept 2018`
-
-== Introduction
-
-NUSSU Connect is for the executive committee members of NUSSU who are comfortable with working with Command Line Interface (CLI). It is meant for fast typers within NUSSU and it could help them perform their daily tasks such as managing recruitment, contacts, budgets and projects much more efficiently.
->>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
 
 == Quick Start
 
