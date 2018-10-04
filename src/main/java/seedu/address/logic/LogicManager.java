@@ -13,7 +13,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
-import seedu.address.ui.LoginWindow;
 
 /**
  * The main LogicManager of the app.
