@@ -2,9 +2,14 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
@@ -45,9 +50,14 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_GENDER + "GENDER] "
+            + "[" + PREFIX_AGE + "AGE] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_JOB + "JOB] "
+            + "[" + PREFIX_EDUCATION + "EDUCATION] "
+            + "[" + PREFIX_SALARY + "SALARY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -102,16 +112,15 @@ public class EditCommand extends Command {
         assert candidateToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(candidateToEdit.getName());
+        Gender updatedGender = editPersonDescriptor.getGender().orElse(candidateToEdit.getGender());
+        Age updatedAge = editPersonDescriptor.getAge().orElse(candidateToEdit.getAge());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(candidateToEdit.getPhone());
-        Gender updatedGender = new Gender("M"); //to be implemented
-        Age updatedAge = new Age("12"); //to be implemented
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(candidateToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(candidateToEdit.getAddress());
+        Job updatedJob = editPersonDescriptor.getJob().orElse(candidateToEdit.getJob());
+        Education updatedEducation = editPersonDescriptor.getEducation().orElse(candidateToEdit.getEducation());
+        Salary updatedSalary = editPersonDescriptor.getSalary().orElse(candidateToEdit.getSalary());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(candidateToEdit.getTags());
-        Job updatedJob = new Job("job"); //to be implemented
-        Education updatedEducation = new Education("education"); //to be implemented
-        Salary updatedSalary = new Salary("1000"); //to be implemented
-
 
         return new Candidate(updatedName, updatedGender, updatedAge, updatedPhone, updatedEmail, updatedAddress,
             updatedJob, updatedEducation, updatedSalary, updatedTags);
@@ -142,9 +151,14 @@ public class EditCommand extends Command {
 
     public static class EditPersonDescriptor {
         private Name name;
+        private Gender gender;
+        private Age age;
         private Phone phone;
         private Email email;
         private Address address;
+        private Job job;
+        private Education education;
+        private Salary salary;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -155,9 +169,14 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setGender(toCopy.gender);
+            setAge(toCopy.age);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setJob(toCopy.job);
+            setEducation(toCopy.education);
+            setSalary(toCopy.salary);
             setTags(toCopy.tags);
         }
 
@@ -165,7 +184,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, gender, age, phone, email, address, job, education, salary, tags);
         }
 
         public void setName(Name name) {
@@ -174,6 +193,22 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+
+        public void setAge(Age age) {
+            this.age = age;
+        }
+
+        public Optional<Age> getAge() {
+            return Optional.ofNullable(age);
         }
 
         public void setPhone(Phone phone) {
@@ -198,6 +233,30 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setJob(Job job) {
+            this.job = job;
+        }
+
+        public Optional<Job> getJob() {
+            return Optional.ofNullable(job);
+        }
+
+        public void setEducation(Education education) {
+            this.education = education;
+        }
+
+        public Optional<Education> getEducation() {
+            return Optional.ofNullable(education);
+        }
+
+        public void setSalary(Salary salary) {
+            this.salary = salary;
+        }
+
+        public Optional<Salary> getSalary() {
+            return Optional.ofNullable(salary);
         }
 
         /**
@@ -233,9 +292,14 @@ public class EditCommand extends Command {
             EditPersonDescriptor e = (EditPersonDescriptor) other;
 
             return getName().equals(e.getName())
+                    && getGender().equals(e.getGender())
+                    && getAge().equals(e.getAge())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getJob().equals(e.getJob())
+                    && getEducation().equals(e.getEducation())
+                    && getSalary().equals(e.getSalary())
                     && getTags().equals(e.getTags());
         }
     }

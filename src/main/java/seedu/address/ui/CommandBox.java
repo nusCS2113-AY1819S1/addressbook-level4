@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -109,7 +111,7 @@ public class CommandBox extends UiPart<Region> {
             logger.info("Result: " + commandResult.feedbackToUser);
             raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
-        } catch (CommandException | ParseException e) {
+        } catch (CommandException | ParseException | GeneralSecurityException | IOException e) {
             initHistory();
             // handle command failure
             setStyleToIndicateCommandFailure();
