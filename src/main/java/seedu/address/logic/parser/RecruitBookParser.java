@@ -19,7 +19,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -84,9 +83,6 @@ public class RecruitBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-
-        case EmailCommand.COMMAND_WORD:
-            return new EmailCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -6,8 +6,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Candidate;
 
-import javax.mail.MessagingException;
-
 /**
  * API of the Logic component
  */
@@ -19,7 +17,7 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException, MessagingException;
+    CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /** Returns an unmodifiable view of the filtered list of persons */
     ObservableList<Candidate> getFilteredPersonList();
