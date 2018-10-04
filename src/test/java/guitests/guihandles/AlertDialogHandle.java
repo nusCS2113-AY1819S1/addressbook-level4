@@ -1,8 +1,9 @@
 package guitests.guihandles;
 
+import com.t13g2.forum.ui.UiManager;
+
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
-import t13g2.forum.ui.UiManager;
 
 /**
  * A handle for the {@code AlertDialog} of the UI.

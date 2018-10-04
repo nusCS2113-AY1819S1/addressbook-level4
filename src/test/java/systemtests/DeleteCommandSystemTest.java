@@ -1,24 +1,24 @@
 package systemtests;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static com.t13g2.forum.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static com.t13g2.forum.testutil.TestUtil.getLastIndex;
+import static com.t13g2.forum.testutil.TestUtil.getMidIndex;
+import static com.t13g2.forum.testutil.TestUtil.getPerson;
+import static com.t13g2.forum.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static com.t13g2.forum.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static org.junit.Assert.assertTrue;
-import static t13g2.forum.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static t13g2.forum.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
-import static t13g2.forum.testutil.TestUtil.getLastIndex;
-import static t13g2.forum.testutil.TestUtil.getMidIndex;
-import static t13g2.forum.testutil.TestUtil.getPerson;
-import static t13g2.forum.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static t13g2.forum.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import t13g2.forum.commons.core.Messages;
-import t13g2.forum.commons.core.index.Index;
-import t13g2.forum.logic.commands.DeleteCommand;
-import t13g2.forum.logic.commands.RedoCommand;
-import t13g2.forum.logic.commands.UndoCommand;
-import t13g2.forum.model.Model;
-import t13g2.forum.model.person.Person;
+import com.t13g2.forum.commons.core.Messages;
+import com.t13g2.forum.commons.core.index.Index;
+import com.t13g2.forum.logic.commands.DeleteCommand;
+import com.t13g2.forum.logic.commands.RedoCommand;
+import com.t13g2.forum.logic.commands.UndoCommand;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.person.Person;
 
 public class DeleteCommandSystemTest extends AddressBookSystemTest {
 

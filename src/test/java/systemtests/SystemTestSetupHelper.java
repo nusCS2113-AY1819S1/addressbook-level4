@@ -6,10 +6,11 @@ import java.util.function.Supplier;
 
 import org.testfx.api.FxToolkit;
 
+import com.t13g2.forum.TestApp;
+import com.t13g2.forum.model.ReadOnlyForumBook;
 import guitests.guihandles.MainWindowHandle;
+
 import javafx.stage.Stage;
-import t13g2.forum.TestApp;
-import t13g2.forum.model.ReadOnlyForumBook;
 
 /**
  * Contains helper methods that system tests require.
