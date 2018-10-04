@@ -215,12 +215,8 @@ Format: `find [\tag tags]  KEYWORD [MORE_KEYWORDS]`
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-<<<<<<< HEAD
-* Only full words will be matched e.g. `Han` will not match `Hans`	
-=======
 * Only full words will be matched e.g. `Han` will not match `Hans`
->>>>>>> 2f7a6ea839020be207f2f8ff0ea12cd40f91ac2c
-****
+
 
 Examples:
 
