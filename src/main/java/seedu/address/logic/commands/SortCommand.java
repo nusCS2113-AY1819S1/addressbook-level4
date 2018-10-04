@@ -22,9 +22,9 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully sort by %s";
 
-    private final String KEY_NAME = "name";
-    private final String KEY_STARTTIME = "starttime";
-    private final String KEY_ENDTIME = "endtime";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_STARTTIME = "starttime";
+    private static final String KEY_ENDTIME = "endtime";
 
     private final String key;
 
@@ -52,6 +52,8 @@ public class SortCommand extends Command {
             break;
         case (KEY_ENDTIME):
             events.sortByEndTime();
+            break;
+        default:
             break;
         }
         model.commitAddressBook();
