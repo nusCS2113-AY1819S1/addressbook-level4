@@ -1,4 +1,10 @@
+//@@author lws803
 package seedu.address.model.person;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,6 +17,7 @@ import java.util.TreeSet;
 import javafx.collections.ObservableList;
 
 import seedu.address.commons.util.LevenshteinDistanceUtil;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 
 /**
@@ -30,20 +37,20 @@ public class ClosestMatchList {
     /**
      * Pair of integer and string
      */
-    static class Pair {
+    private static class Pair {
         private int dist;
         private String nameSegment;
 
-        public Pair(int a, String b) {
+        private Pair(int a, String b) {
             this.dist = a;
             this.nameSegment = b;
         }
 
-        public int getDist () {
+        private int getDist () {
             return this.dist;
         }
 
-        public String getNameSegment () {
+        private String getNameSegment () {
             return nameSegment;
         }
     }
@@ -62,24 +69,73 @@ public class ClosestMatchList {
         }
     });
 
+
     /**
      * Filters and generates maps from names from model
      * and arguments
      */
-    public ClosestMatchList (Model model, String argument, String[] names) {
+    public ClosestMatchList (Model model, Prefix type, String[] searchKeys) {
         this.listToFilter = model.getAddressBook().getPersonList();
 
         for (Person person: listToFilter) {
-
-            if (argument == "NAME") {
-                generateNameMapFromNames(names, person);
-            } else if (argument == "PHONE") {
-                // TODO: Add argument to filter by phone number as well
-            }
+            generateNameMapFromAttrib(searchKeys, person, type);
         }
 
-
         addToApprovedNamesList();
+    }
+
+
+    /**
+     * Bulk of the computation
+     * Runs thru model and stores the pairs in a tree out of
+     * similarity indexes using levensthein distances together with nameSegment
+     */
+    private void generateNameMapFromAttrib (String[] searchKey, Person person, Prefix myPrefix) {
+        String compareString = person.getName().fullName;
+
+        if (myPrefix == PREFIX_NAME) {
+            compareString = person.getName().fullName;
+        } else if (myPrefix == PREFIX_PHONE) {
+            compareString = person.getPhone().value;
+        } else if (myPrefix == PREFIX_EMAIL) {
+            compareString = person.getEmail().value;
+        } else if (myPrefix == PREFIX_ADDRESS) {
+            compareString = person.getAddress().value;
+        }
+        generateNameMap(searchKey, compareString);
+    }
+
+
+    /**
+     * Generate the namemap from the compareString provided
+     * @param searchKey obtained from arguments in FindCommand
+     * @param compareString obtained from personList as per attribute
+     */
+    // TODO: Add it such that when accurate names are typed out, the results wont show the rest.
+    private void generateNameMap(String[] searchKey, String compareString) {
+        String[] stringSplitted = compareString.split("\\s+");
+        for (String nameSegment: stringSplitted) {
+
+            for (String nameArg: searchKey) {
+                int dist = LevenshteinDistanceUtil.levenshteinDistance(nameArg.toLowerCase(),
+                        nameSegment.toLowerCase());
+
+                if (dist < lowestDist) {
+                    lowestDist = dist;
+                }
+
+                Pair distNamePair = new Pair(dist, nameSegment);
+
+                if (!discoveredNames.containsKey(nameSegment)) {
+                    nameMap.add(distNamePair);
+                    discoveredNames.put(nameSegment, dist);
+                } else if (discoveredNames.get(nameSegment) > dist) {
+                    discoveredNames.replace(nameSegment, dist); // Replace with the new dist
+                    nameMap.add(distNamePair); // Check to see if this will replace
+                }
+            }
+
+        }
     }
 
     /**
@@ -96,46 +152,10 @@ public class ClosestMatchList {
     }
 
     /**
-     * Bulk of the computation
-     * Runs thru model and stores the pairs in a tree out of
-     * similarity indexes using levensthein distances together with nameSegment
-     */
-    private void generateNameMapFromNames(String[] names, Person person) {
-        String fullName = person.getName().fullName;
-        String[] nameSplited = fullName.split("\\s+");
-
-        for (String nameSegment: nameSplited) {
-
-            for (String nameArg: names) {
-                int dist = LevenshteinDistanceUtil.levenshteinDistance(nameArg.toLowerCase(),
-                        nameSegment.toLowerCase());
-
-                if (dist < lowestDist) {
-                    lowestDist = dist;
-                }
-
-                Pair distNamePair = new Pair(dist, nameSegment);
-
-
-                if (!discoveredNames.containsKey(nameSegment)) {
-                    nameMap.add(distNamePair);
-                    discoveredNames.put(nameSegment, dist);
-                } else if (discoveredNames.get(nameSegment) > dist) {
-                    discoveredNames.replace(nameSegment, dist); // Replace with the new dist
-                    nameMap.add(distNamePair); // Check to see if this will replace
-                }
-            }
-
-        }
-    }
-
-
-    /**
      * Gets the approved list
      */
     public String[] getApprovedList () {
-        String [] output = approvedNames.toArray(new String[approvedNames.size()]);
-        return output;
+        return approvedNames.toArray(new String[0]);
     }
 
 }
