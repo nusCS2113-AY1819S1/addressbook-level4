@@ -13,7 +13,6 @@ import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Prefix;
-import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses the arguments of a command text input for auto completing the command
@@ -24,7 +23,6 @@ public class AutoCompleteArgumentsParser {
      * Parses the arguments to be used for auto completing of commands
      * @param arguments the full string of arguments to parse
      * @return the prefix that will be used for the prediction
-     * @throws ParseException if the user input does not conform the expected format
      */
     public static AutoCompleteParserPair parse(String command, String arguments, ArgumentMultimap argMultimap) {
         if (arguments.isEmpty()) {
@@ -43,9 +41,14 @@ public class AutoCompleteArgumentsParser {
             default:
                 return new AutoCompleteParserPair(PREFIX_INVALID, arguments.trim());
         }
-
     }
 
+    /**
+     * Creates a AutoCompleteParserPair instance based on the last Prefix found in user input.
+     * @param arguments the user input to search.
+     * @param argMultimap used to retrieve the values of the prefix keys.
+     * @return the appropriate AutoCompleteParserPair instance.
+     */
     private static AutoCompleteParserPair getFindParserPair(String arguments, ArgumentMultimap argMultimap) {
         Prefix lastPrefix = ArgumentTokenizer.findLastPrefix(
                 arguments,
@@ -58,7 +61,7 @@ public class AutoCompleteArgumentsParser {
         if (argMultimap.getValue(lastPrefix).isPresent()) {
             return new AutoCompleteParserPair(lastPrefix, argMultimap.getValue(lastPrefix).get());
         }
-        // Default text prediction is on names
+        // Default text prediction is names
         return new AutoCompleteParserPair(PREFIX_NAME, arguments);
     }
 
@@ -73,7 +76,7 @@ public class AutoCompleteArgumentsParser {
         if (argMultimap.getValue(lastPrefix).isPresent()) {
             return new AutoCompleteParserPair(lastPrefix, argMultimap.getValue(lastPrefix).get());
         }
-        // Default text prediction is on names
+        // Default text prediction is names
         return  new AutoCompleteParserPair(PREFIX_NAME, arguments);
     }
 }

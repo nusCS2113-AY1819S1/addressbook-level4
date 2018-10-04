@@ -8,6 +8,7 @@ import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.trie.Trie;
 
 /**
@@ -23,7 +24,6 @@ public class CommandCompleter {
     public static final int COMPLETE_TAG = 4;
     public static final int COMPLETE_COMMAND = 5;
     public static final int COMPLETE_INVALID = 6;
-    public static final String STRING_COMMAND = "command";
 
     /** Model instance to access data */
     private Model model;
@@ -38,6 +38,7 @@ public class CommandCompleter {
     private Trie phoneTrie;
     private Trie emailTrie;
     private Trie addressTrie;
+    private Trie tagTrie;
 
     /**
      * Word lists of strings used to instantiate Trie objects.
@@ -47,6 +48,7 @@ public class CommandCompleter {
     private ArrayList<String> phoneList;
     private ArrayList<String> emailList;
     private ArrayList<String> addressList;
+    private ArrayList<String> tagList;
 
     /**
      * Creates a command completer with the {@code model} data.
@@ -60,6 +62,7 @@ public class CommandCompleter {
         this.phoneList = new ArrayList<>();
         this.emailList = new ArrayList<>();
         this.addressList = new ArrayList<>();
+        this.tagList = new ArrayList<>();
         initLists();
         initTries();
     }
@@ -100,12 +103,17 @@ public class CommandCompleter {
      * Initialises attributes words lists with attribute value in each {@code Person}.
      */
     private void initAttributesLists() {
+        // TODO: prevent duplicates from being added to lists
         ObservableList<Person> list = model.getAddressBook().getPersonList();
         for (Person item : list) {
             nameList.add(item.getName().fullName);
             phoneList.add(item.getPhone().value);
             emailList.add(item.getEmail().value);
             addressList.add(item.getAddress().value);
+            // TODO: find a better way to do this
+            for (Tag tag : item.getTags()) {
+                tagList.add(tag.toString());
+            }
         }
     }
 
@@ -118,6 +126,7 @@ public class CommandCompleter {
         phoneTrie = new Trie(phoneList);
         emailTrie = new Trie(emailList);
         addressTrie = new Trie(addressList);
+        tagTrie = new Trie(tagList);
     }
 
     /**
@@ -140,7 +149,7 @@ public class CommandCompleter {
         case COMPLETE_EMAIL:
             return emailTrie.getPredictList(pair.prefixValue);
         case COMPLETE_TAG:
-            // TODO: support Tags prediction, create Tag trie
+            return tagTrie.getPredictList(pair.prefixValue);
         default:
             return new ArrayList<>();
         }
@@ -155,6 +164,10 @@ public class CommandCompleter {
         phoneTrie.insert(person.getPhone().value);
         emailTrie.insert(person.getEmail().value);
         addressTrie.insert(person.getAddress().value);
+        // TODO: find a better way to do this
+        for (Tag tag : person.getTags()) {
+            tagTrie.insert(tag.toString());
+        }
     }
 
     /**
@@ -166,6 +179,7 @@ public class CommandCompleter {
         phoneTrie.remove(person.getPhone().value);
         emailTrie.remove(person.getEmail().value);
         addressTrie.remove(person.getAddress().value);
+        // TODO: find a way to delete single occurrence tags
     }
 
     /**
@@ -176,6 +190,7 @@ public class CommandCompleter {
         phoneTrie.clear();
         emailTrie.clear();
         addressTrie.clear();
+        tagTrie.clear();
     }
 
     /**
@@ -200,6 +215,9 @@ public class CommandCompleter {
         if (!personToEdit.getAddress().equals(editedPerson.getAddress())) {
             addressTrie.remove(personToEdit.getAddress().value);
             addressTrie.insert(editedPerson.getAddress().value);
+        }
+        if (!personToEdit.getTags().equals(editedPerson.getTags())) {
+            // TODO: find a way to edit the tags data structure
         }
     }
 
