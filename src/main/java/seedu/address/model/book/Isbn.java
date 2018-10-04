@@ -13,7 +13,7 @@ public class Isbn {
     public static final String MESSAGE_PHONE_CONSTRAINTS =
             "ISBN should be a valid 13-digit number (with hyphens).";
     // A total of 4 hyphens + 13 digits (17 char in total)
-    public static final String PHONE_VALIDATION_REGEX = "(978|979)[-\\d]{14}";
+    public static final String ISBN_VALIDATION_REGEX = "(978|979)[-\\d]{14}";
     public final String value;
 
     /**
@@ -31,7 +31,7 @@ public class Isbn {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+        return test.matches(ISBN_VALIDATION_REGEX);
     }
 
     @Override

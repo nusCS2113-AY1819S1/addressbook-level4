@@ -10,13 +10,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Quantity {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Addresses can take any values, and it should not be blank";
+            "Quantity can take any values, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
+     * Quantity only accepts from 0 to 999
      */
-    public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
+    public static final String QUANTITY_VALIDATION_REGEX = "\\d{1,3}";
 
     public final String value;
 
@@ -35,7 +34,7 @@ public class Quantity {
      * Returns true if a given string is a valid email.
      */
     public static boolean isValidAddress(String test) {
-        return test.matches(ADDRESS_VALIDATION_REGEX);
+        return test.matches(QUANTITY_VALIDATION_REGEX);
     }
 
     @Override
