@@ -22,9 +22,9 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully sort by %s";
 
-    private static final String KEY_NAME = "name";
-    private static final String KEY_STARTTIME = "starttime";
-    private static final String KEY_ENDTIME = "endtime";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_STARTTIME = "starttime";
+    public static final String KEY_ENDTIME = "endtime";
 
     private final String key;
 

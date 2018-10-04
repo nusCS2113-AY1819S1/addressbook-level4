@@ -10,11 +10,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class SortCommandParser implements Parser<SortCommand> {
 
-    private static final String KEY_NAME = "name";
-    private static final String KEY_STARTTIME = "starttime";
-    private static final String KEY_ENDTIME = "endtime";
-
-
     /**
      * Parses the given {@code String} of arguments in the context of the CreateCommand
      * and returns an CreateCommand object for execution.
@@ -29,14 +24,14 @@ public class SortCommandParser implements Parser<SortCommand> {
         }
         String key;
         switch (trimmedArgs) {
-        case (KEY_NAME):
-            key = KEY_NAME;
+        case (SortCommand.KEY_NAME):
+            key = SortCommand.KEY_NAME;
             break;
-        case (KEY_STARTTIME):
-            key = KEY_STARTTIME;
+        case (SortCommand.KEY_STARTTIME):
+            key = SortCommand.KEY_STARTTIME;
             break;
-        case (KEY_ENDTIME):
-            key = KEY_ENDTIME;
+        case (SortCommand.KEY_ENDTIME):
+            key = SortCommand.KEY_ENDTIME;
             break;
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
