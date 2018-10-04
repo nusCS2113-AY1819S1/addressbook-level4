@@ -9,15 +9,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.BatchCommand;
+import seedu.address.logic.commands.AddIngredientCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parse command under batch
  */
-public class BatchCommandParser {
+public class AddIngredientParser {
     public static final Pattern ICE_CREAM_CHECKER = Pattern.compile ("(?<iceCream>i/)");
-    public static final Pattern TOPPING_CHECKER = Pattern.compile ("(?<topping>to/)");
+    public static final Pattern TOPPING_CHECKER = Pattern.compile ("(?<topping>t/)");
 
     /**
      * Split command into individual parsers
@@ -25,29 +25,29 @@ public class BatchCommandParser {
      * @return the result of the command execution
      * @throws ParseException If an error occurs during parsing.
      */
-    public BatchCommand split (String args) throws ParseException {
+    public AddIngredientCommand split (String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_INGREDIENT_ICECREAM, PREFIX_INGREDIENT_TOPPING);
 
         if ((!arePrefixesPresent(argMultimap, PREFIX_INGREDIENT_ICECREAM)
                 && !arePrefixesPresent(argMultimap, PREFIX_INGREDIENT_TOPPING))
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BatchCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
         }
         Matcher m = ICE_CREAM_CHECKER.matcher (args);
         System.out.println (m);
         if (m.find ()) {
             System.out.println (1);
-            return new BatchIceCreamCommandParser().parse (args);
+            return new AddIceCreamCommandParser ().parse (args);
         }
         m = TOPPING_CHECKER.matcher (args);
         System.out.println (m);
         if (m.find ()) {
             System.out.println (2);
-            return new BatchToppingCommandParser ().parse (args);
+            return new AddToppingCommandParser ().parse (args);
         }
 
-        return new BatchCommand ();
+        return new AddIngredientCommand ();
     }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

@@ -7,7 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.BatchCommand;
+import seedu.address.logic.commands.AddIngredientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -20,7 +20,10 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+//import seedu.address.logic.commands.user.ChangePasswordCommand;
+import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.user.ChangePasswordCommandParser;
 
 /**
  * Parses user input.
@@ -48,11 +51,14 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case BatchCommand.COMMAND_WORD:
-            return new BatchCommandParser ().split (arguments);
+        case AddIngredientCommand.COMMAND_WORD:
+            return new AddIngredientParser ().split (arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case ChangePasswordCommand.COMMAND_WORD:
+            return new ChangePasswordCommandParser ().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);

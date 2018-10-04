@@ -16,7 +16,7 @@ import javax.crypto.spec.PBEKeySpec;
  * code learn from http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
  */
 public class PasswordUtils {
-
+    private static final String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
     private static final Random RANDOM = new SecureRandom();
     private static final String ALPHABET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final int ITERATIONS = 10000;
@@ -41,7 +41,7 @@ public class PasswordUtils {
      * @param salt complexity of hashed password
      * @return
      */
-    public static byte[] hash(char[] password, byte[] salt) {
+    private static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
         try {
@@ -57,10 +57,9 @@ public class PasswordUtils {
     /**
      *
      * @param password
-     * @param salt
      * @return hashed password
      */
-    public static String generateSecurePassword(String password, String salt) {
+    public static String generateSecurePassword(String password) {
         String returnValue = null;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
 
@@ -73,15 +72,14 @@ public class PasswordUtils {
      * Verify password Input
      * @param providedPassword
      * @param securedPassword
-     * @param salt
      * @return
      */
     public static boolean verifyUserPassword(String providedPassword,
-                                             String securedPassword, String salt) {
+                                             String securedPassword) {
         boolean returnValue = false;
 
         // Generate New secure password with the same salt
-        String newSecurePassword = generateSecurePassword(providedPassword, salt);
+        String newSecurePassword = generateSecurePassword(providedPassword);
 
         // Check if two passwords are equal
         returnValue = newSecurePassword.equalsIgnoreCase(securedPassword);

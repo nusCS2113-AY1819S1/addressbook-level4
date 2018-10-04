@@ -18,7 +18,7 @@ import seedu.address.model.ingredient.IceCream;
 /**
  * Adds a person to the address book.
  */
-public class BatchIceCreamCommand extends BatchCommand {
+public class AddIngredientIceCreamCommand extends AddIngredientCommand {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
@@ -43,7 +43,7 @@ public class BatchIceCreamCommand extends BatchCommand {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public BatchIceCreamCommand (IceCream iceCream) {
+    public AddIngredientIceCreamCommand (IceCream iceCream) {
         requireNonNull (iceCream);
         toAdd = iceCream;
     }
@@ -65,8 +65,8 @@ public class BatchIceCreamCommand extends BatchCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BatchIceCreamCommand // instanceof handles nulls
-                && toAdd.equals(((BatchIceCreamCommand) other).toAdd));
+                || (other instanceof AddIngredientIceCreamCommand // instanceof handles nulls
+                && toAdd.equals((( AddIngredientIceCreamCommand ) other).toAdd));
     }
 
 

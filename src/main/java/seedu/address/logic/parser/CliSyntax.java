@@ -12,8 +12,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_INGREDIENT_ICECREAM = new Prefix ("i/");
-    public static final Prefix PREFIX_INGREDIENT_TOPPING = new Prefix("to/");
-
+    public static final Prefix PREFIX_INGREDIENT_TOPPING = new Prefix("t/");
+    public static final Prefix PREFIX_OLD_PASSWORD = new Prefix("o/");
+    public static final Prefix PREFIX_NEW_PASSWORD = new Prefix("n/");
 
 
 }

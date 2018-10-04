@@ -11,7 +11,7 @@ import seedu.address.model.ingredient.Topping;
 /**
  * Adds a person to the address book.
  */
-public class BatchToppingCommand extends BatchCommand {
+public class AddIngredientToppingCommand extends AddIngredientCommand {
 
 
 
@@ -23,7 +23,7 @@ public class BatchToppingCommand extends BatchCommand {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public BatchToppingCommand (Topping topping) {
+    public AddIngredientToppingCommand (Topping topping) {
         requireNonNull (topping);
         toAdd = topping;
     }
@@ -45,8 +45,8 @@ public class BatchToppingCommand extends BatchCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BatchToppingCommand // instanceof handles nulls
-                && toAdd.equals(((BatchToppingCommand) other).toAdd));
+                || (other instanceof AddIngredientToppingCommand // instanceof handles nulls
+                && toAdd.equals((( AddIngredientToppingCommand ) other).toAdd));
     }
 
 

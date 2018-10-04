@@ -5,9 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seedu.address.authentication.PasswordUtils;
+import seedu.address.commons.core.CurrentUser;
+import seedu.address.commons.core.LoginInfo;
+import seedu.address.model.LoginInfoList;
 import seedu.address.ui.Ui;
 
 
@@ -15,8 +20,8 @@ import seedu.address.ui.Ui;
  * Manger event on LoginPage.fxml
  */
 public class LoginController {
-
     protected static Ui ui;
+    protected static LoginInfoList loginInfoList;
     @FXML
     private javafx.scene.control.TextField usernameField;
     @FXML
@@ -24,9 +29,9 @@ public class LoginController {
     @FXML
     private javafx.scene.control.Label loginError;
 
-
-    private final FXMLLoader fxmlLoader = new FXMLLoader();
-
+    public void getLoginInfoList (LoginInfoList loginInfoList){
+        this.loginInfoList = loginInfoList;
+    }
     /**
      * set ui as mainWindow ui of address book
      * @param ui
@@ -39,37 +44,56 @@ public class LoginController {
     }
 
     /**
-     * Check for password when login is clicked
+     * handle when user press enter on login textfield or passwordField
+     * @param key the key enter by user
+     */
+    public void handleEnterPressed(KeyEvent key){
+        if( key.getCode() == KeyCode.ENTER ){
+            verifyLoginInfo ();
+        }
+    }
+    /**
+     * handle event when Login is clicked
+     * @param clicked mouse event clicked
+     */
+    public void handleLoginButtonClick( ActionEvent clicked){
+        verifyLoginInfo ();
+    }
+    /**
+     * Check for Login information such as username and password
      * @throws Exception
      */
     @FXML
-    public void handleButtonAction(ActionEvent e) throws Exception {
+    public void verifyLoginInfo (){
 
         String username = usernameField.getText();
         String password = passwordField.getText();
-        System.out.println(username);
-        System.out.println(password);
+        username = username.trim ();
+        password = password.trim ();
+        if (username.equals ("")){
+            loginError.setText("Please enter username");
+            System.out.println("Please enter username");
+            return;
+        }
+        if (password.equals ("")){
+            loginError.setText("Please enter password");
+            System.out.println("Please enter password");
+            return;
+        }
 
         String providedPassword = password;
+        String securePassword = loginInfoList.getLoginInfo (username).getPassword ();
 
-        //Encrypted and Base64 encoded password read from database
-        //will change this to a array of key value pair
-        String securePassword = "HhaNvzTsVYwS/x/zbYXlLOE3ETMXQgllqrDaJY9PD/U=";
 
-        //Salt value stored in database
-        String salt = "EqdmPh53c9x33EygXpTpcoJvc4VXLK";
-
-        boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword, salt);
+        boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword);
         boolean usernameMatch = username.matches("tianhang|minjia|scoot|xuanhao");
         if (passwordMatch && usernameMatch) {
             Stage stageTheLabelBelongs = (Stage) passwordField.getScene().getWindow();
             stageTheLabelBelongs.close();
-            try {
-                ui.start(stageTheLabelBelongs);
-            } catch (Exception e1) {
-                System.out.println ("the exception is " + e1);
-                e1.printStackTrace ();
-            }
+            CurrentUser currentUser = new CurrentUser (loginInfoList.getLoginInfo (username).getUserName (),
+                                                        loginInfoList.getLoginInfo (username).getAuthenticationLevel ());
+            ui.start(stageTheLabelBelongs);
+
         } else {
             loginError.setText("wrong password");
             System.out.println("Provided password is incorrect");

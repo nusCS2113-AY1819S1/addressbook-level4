@@ -17,7 +17,7 @@ import seedu.address.model.Model;
 /**
  * Adds a person to the address book.
  */
-public class BatchCommand extends Command {
+public class AddIngredientCommand extends Command {
 
     public static final String COMMAND_WORD = "addIngredient";
 
@@ -34,7 +34,7 @@ public class BatchCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public BatchCommand () {
+    public AddIngredientCommand () {
 
     }
 
