@@ -9,6 +9,9 @@ import java.util.ArrayList;;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+/**
+ * Parses the list command arguments to determine which attributes to filter for listing.
+ */
 public class ListCommandParser implements Parser<ListCommand> {
 
     @Override

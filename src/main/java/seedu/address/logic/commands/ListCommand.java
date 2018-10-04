@@ -17,16 +17,22 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists persons in the address book using specified arguments as filter.
  */
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = CliSyntax.COMMAND_LIST;
 
+    /**
+     * Type definitions for attributes to list.
+     */
     public static final int TYPE_ALL = 0;
     public static final int TYPE_TAG = 1;
     public static final int TYPE_KPI = 2;
 
+    /**
+     * Messages to be displayed
+     */
     public static final String MESSAGE_SUCCESS = "Listed: ";
 
     /**
@@ -36,11 +42,21 @@ public class ListCommand extends Command {
     private List<String> predicatesList;
     private Set<Tag> inputTags;
 
+    /**
+     * Constructor for list command unrelated to Tags.
+     * @param listType the type of attribute to filter.
+     * @param predicatesList the list of attributes to filter.
+     */
     public ListCommand(int listType, List<String> predicatesList) {
         this.listType = listType;
         this.predicatesList = predicatesList;
     }
 
+    /**
+     * Constructor for list command related to Tags.
+     * @param listType the type of attribute to filter.
+     * @param inputTags the Set of Tags to filter.
+     */
     public ListCommand(int listType, Set<Tag> inputTags) {
         this.listType = listType;
         this.inputTags = inputTags;
@@ -71,10 +87,20 @@ public class ListCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /**
+     * Returns the Predicate that filters specified Tags.
+     * @param inputTags the Tags to filter.
+     * @return the appropriate predicate.
+     */
     private Predicate<Person> showTagsPredicate(Set<Tag> inputTags) {
         return p -> !Collections.disjoint(p.getTags(), inputTags);
     }
 
+    /**
+     * Returns the Predicate that filters specified KPI.
+     * @param predicatesList the list of KPI to filter.
+     * @return the appropriate predicate.
+     */
     private Predicate<Person> showKpiPredicate(List<String> predicatesList) {
         return p -> predicatesList.contains(p.getKpi().value);
     }
