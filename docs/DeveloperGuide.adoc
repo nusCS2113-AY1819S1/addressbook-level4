@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Something Daily - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T09-2`      Since: `Sep 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -815,13 +815,14 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* NUS SoC students
+* Has a need to manage a significant number of academic tasks
+* Has a need to keep track on expenditures
+* Prefer desktop applications over mobile platforms
+* Prefers typing over mouse input
+* Is reasonably comfortable using CLI applications
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: To assist students in managing all of their academic work and spendings
 
 [appendix]
 == User Stories
@@ -833,42 +834,75 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |student |add a new task to the to-do list |
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |student |edit a task on the to-do list |keep my tasks updated and correct
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |student |delete a task on the to-do list |remove any entries that I no longer need
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |student |archive completed tasks |have a history of all tasks completed earlier throughout the school semester
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`*` |student with multiple modules |tag each task with a module code |identify all tasks specific to a particular module
+
+|`*` |student with multiple tasks |classify tasks and search tasks by their class names |
+
+|`*` |student with multiple tasks |tag each task with a deadline |identify all tasks that are time sensitive
+
+|`*` |student with multiple tasks |tag each task with different levels of importance/priority |identify all tasks that requires more attention
+
+|`*` |student with multiple tasks |sort the todo list by deadline |view which task is due the earliest
+
+|`*` |student with tasks may last for a long time |easily record and view my progress with progress bar |
+
+|`*` |student with multiple tasks |sort the todo list by importance/priority |view which tasks are more important than the other
+
+|`*` |student |delete all archived completed tasks after the semester is done | get ready for the next semester
+
+|`*` |student with multiple projects |have a separate project window |view all tasks specific only to projects
+
+|`*` |student with difficulty in remembering all deadlines |get notified at a certain time before deadline based on my choice |submit my work on time
+
+|`*` |student with multiple tasks to complete in one day |let the system automatically generate the to-do list |start working on the tasks
+
+|`*` |student who is not capable of managing expenditure |see and check where did I spend my money and how much did I spend for each expenditure with the corresponding date |
+
+|`*` |student who wants to know how to save my money |obtain advices from the Expenditure Tracker by checking the categories which I mainly spent my money on |
+
+|`*` |student who does not record their money spending regularly |notified by the Expenditure Tracker to note down the amount of money spent on food, snacks or other categories respectively everyday |
+
+|`*` |student who wants to know how much money did I spend and how much income did I get for a certain period |see the amount of spendings and income respectively by keying in the starting date and end date of a particular period |
+
+|`*` |student who likes to tag events information for everyday to remind myself |choose the corresponding date directly on the Calendar and key in the events that are going to happen on that day |
+
+|`*` |student with a desire to have a scheduled semester |mark every significant day such as the midterm / final exam date, recess week, reading week or even statutory holidays |
+
+|`*` |student who wants to arrange studying time properly |tag every study plan for every single day on Calendar in more details |
 |=======================================================================
 
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case 1: Add task
-*System*
+*System:*
 To-do list
 
 *MSS*
 
-1.  User enters ‘add’ command and keys in the task
+1.  User enters `add` command and keys in the task
 2.  To-do list shows the task entered in the list
 
 [discrete]
 === Use case 2:Edit or Update task
-*System*
+*System:*
 To-do list
 
 *MSS*
 
-1.  User enters ‘edit’ command followed by index number
+1.  User enters `edit` command followed by index number
 2.  To-do list confirms task is present in the list
 3.  User enter relevant contents
 4.  To-do list shows the updated task in the list
@@ -881,12 +915,12 @@ To-do list
 
 [discrete]
 === Use case 3: Delete task
-*System*
+*System:*
 To-do list
 
 *MSS*
 
-1. User enters ‘delete’ command followed by index number
+1. User enters `delete` command followed by index number
 2. To-do list confirms task is present and deletes the task
 
 *Extensions*
@@ -897,60 +931,62 @@ To-do list
 
 [discrete]
 === Use case 4: Check tasks for a module
-*System*
+*System:*
 To-do list
 
 *MSS*
 
-1. User enters ‘sort by mod’ command
+1. User enters `sort by mod` command
 2. To-do list shows a sorted list of tasks grouped by modules
 
 [discrete]
 === Use case 5: Check for urgent tasks
-*System* 
+*System:*
 To-do list
 
 *MSS*
 
-1. User enters ‘sort by ddl’ command
+1. User enters `sort by ddl` command
 2. To-do list shows the all uncompleted modules sorted by deadlines, the task with latest deadline is the first task
 
 [discrete]                
 === Use case 6: Checking tasks with high importance
-*System* 
+*System:*
 To-do list
 
 *MSS*
 
-1. User enters ‘sort by impt’ command
+1. User enters `sort by impt` command
 2. To-do list shows a sorted list of tasks grouped by priority level in descending order
+
 [discrete]
 === Use case 7: Check completed tasks
-*System*
+*System:*
 To-do list
 
 *MSS*
 
-1. User enters ‘view completed’ command
+1. User enters `view completed` command
 2. To-do list shows a list of tasks that has been marked as completed
 
 [discrete]
 === Use case 8: Check uncompleted tasks
-*System*
+*System:*
 To-do list
 
 *MSS*
 
-1. User enters ‘ view uncompleted’ command
+1. User enters `view uncompleted` command
 2. To-do list shows a list of tasks that have not been marked as completed
+
 [discrete]
 === Use case 9: Marking a task as completed
-*System*
+*System:*
 To-do list
 
 *MSS*
 
-1. User enters ‘complete’ command followed by index number
+1. User enters `complete` command followed by index number
 2. To-do list marks task as completed and moves the task to a separate list of completed tasks
 
 *Extensions*
@@ -961,7 +997,7 @@ To-do list
 
 [discrete]         
 === Use case 10: Receiving reminders for a task
-*System*
+*System:*
 To-do list
 
 *MSS*
@@ -971,12 +1007,12 @@ To-do list
 
 [discrete]
 === Use case 11: Add expenditure / income
-*System*
+*System:*
 Expenditure Tracker & Calendar
 
 *MSS*   
 
-1. User enter ‘add’ command followed by the amount of money
+1. User enter `add` command followed by the amount of money
 2. Expenditure tracker receives information and shows the dates to be added
 3. User choose the date
 4. Expenditure tracker notifies user to pick category
@@ -985,26 +1021,24 @@ Expenditure Tracker & Calendar
 
 [discrete]
 === Use case 12: Check expenditure / income status
-*System*
+*System:*
 Expenditure Tracker & Calendar
 	
 *MSS*
 
-1. User enter ‘check status’ command
+1. User enter `check status` command
 2. Expenditure tracker asks user to choose whether to check in the visual calendar or key in the starting date and closing date of a particular period
-3. User keys in ‘visual’ command or ‘manual’ command
-4. Calendar shows the expenditure / income for each day visually or Expenditure 
-5. Tracker shows the expenditure / income status by displaying the amount of money.
+3. User keys in `visual` command or `manual` command
+4. Calendar shows the expenditure / income for each day visually or Expenditure Tracker shows the expenditure / income status by displaying the amount of money.
 
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should be able to hold up to 500 tasks without a noticeable sluggishness in performance for typical usage.
+.  Command-line commands should be simple and easy to remember.
 
-_{More to be added}_
 
 [appendix]
 == Glossary
@@ -1012,15 +1046,14 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
 
 [appendix]
 == Product Survey
 
-*Product Name*
+*Things* +
+A to-do list mobile application
 
-Author: ...
+Author: Ran Tian (arty9)
 
 Pros:
 
