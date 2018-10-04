@@ -21,19 +21,19 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final CommandHistory history;
-    private final StockListParser StockListParser;
+    private final StockListParser stockListParser;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
-        StockListParser = new StockListParser();
+        stockListParser = new StockListParser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = StockListParser.parseCommand(commandText);
+            Command command = stockListParser.parseCommand(commandText);
             return command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -42,6 +42,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public ObservableList<Item> getFilteredItemList() {
+
         return model.getFilteredItemList();
     }
 

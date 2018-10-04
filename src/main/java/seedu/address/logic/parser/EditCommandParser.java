@@ -49,7 +49,9 @@ public class EditCommandParser implements Parser<EditCommand> {
             editItemDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
         if (argMultimap.getValue(PREFIX_MIN_QUANTITY).isPresent()) {
-            editItemDescriptor.setMinQuantity(ParserUtil.parseMinQuantity(argMultimap.getValue(PREFIX_MIN_QUANTITY).get()));
+            editItemDescriptor.setMinQuantity(
+                    ParserUtil.parseMinQuantity(argMultimap.getValue(PREFIX_MIN_QUANTITY).get())
+            );
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editItemDescriptor::setTags);
 

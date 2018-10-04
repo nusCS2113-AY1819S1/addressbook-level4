@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalDouble;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
@@ -21,8 +20,9 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.item.Name;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
+import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -69,6 +69,7 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Item> lastShownList = model.getFilteredItemList();
 
+
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
@@ -84,6 +85,7 @@ public class EditCommand extends Command {
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitStockList();
         return new CommandResult(String.format(MESSAGE_EDIT_ITEM_SUCCESS, editedItem));
+
     }
 
     /**
@@ -94,8 +96,8 @@ public class EditCommand extends Command {
         assert itemToEdit != null;
 
         Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
-        Integer updatedQuantity = editItemDescriptor.getQuantity().orElse(itemToEdit.getQuantity());
-        Integer updatedMinQuantity = editItemDescriptor.getMinQuantity().orElse(itemToEdit.getMinQuantity());
+        Quantity updatedQuantity = editItemDescriptor.getQuantity().orElse(itemToEdit.getQuantity());
+        Quantity updatedMinQuantity = editItemDescriptor.getMinQuantity().orElse(itemToEdit.getMinQuantity());
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
 
         return new Item(updatedName, updatedQuantity, updatedMinQuantity, updatedTags);
@@ -125,8 +127,8 @@ public class EditCommand extends Command {
      */
     public static class EditItemDescriptor {
         private Name name;
-        private Integer quantity;
-        private Integer minQuantity;
+        private Quantity quantity;
+        private Quantity minQuantity;
         private List<Integer> status;
         private Set<Tag> tags;
 
@@ -159,24 +161,24 @@ public class EditCommand extends Command {
             return Optional.ofNullable(name);
         }
 
-        public void setQuantity(Integer quantity) {
+        public void setQuantity(Quantity quantity) {
             this.quantity = quantity;
         }
 
-        public Optional<Integer> getQuantity() {
+        public Optional<Quantity> getQuantity() {
             return Optional.ofNullable(quantity);
         }
 
-        public void setMinQuantity(Integer minQuantity) {
+        public void setMinQuantity(Quantity minQuantity) {
             this.minQuantity = minQuantity;
         }
 
-        public Optional<Integer> getMinQuantity() {
+        public Optional<Quantity> getMinQuantity() {
             return Optional.ofNullable(minQuantity);
         }
 
         public void setStatus(List<Integer> status) {
-            this.status = (status !=  null) ? new ArrayList<>(status) : null;
+            this.status = (status != null) ? new ArrayList<>(status) : null;
         }
 
         public Optional<List<Integer>> getStatus() {
