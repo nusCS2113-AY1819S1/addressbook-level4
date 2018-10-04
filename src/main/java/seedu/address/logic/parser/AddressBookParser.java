@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearSearchHistoryCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -88,9 +89,28 @@ public class AddressBookParser {
         case AddSkillCommand.COMMAND_WORD:
             return new AddSkillCommandParser().parse(arguments);
 
+        case ClearSearchHistoryCommand.COMMAND_WORD:
+            return new ClearSearchHistoryCommand();
+
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    /**
+     * A simpler version of parseCommand without execution
+     *
+     * @param input anyStringInput
+     * @return commandWord if command format is valid.
+     */
+    public static String basicParseCommand(String input) {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
+        if (!matcher.matches()) {
+            return null;
+        }
+        final String commandWord = matcher.group("commandWord");
+        return commandWord;
     }
 
 }
