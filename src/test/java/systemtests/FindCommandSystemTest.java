@@ -1,32 +1,32 @@
 package systemtests;
 
 import static org.junit.Assert.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalRecords.CAIFAN;
-import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
-import static seedu.address.testutil.TypicalRecords.RANDOM;
-import static seedu.address.testutil.TypicalRecords.WORK;
-import static seedu.address.testutil.TypicalRecords.ZT;
+import static seedu.planner.commons.core.Messages.MESSAGE_RECORDS_LISTED_OVERVIEW;
+import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.planner.testutil.TypicalRecords.CAIFAN;
+import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+import static seedu.planner.testutil.TypicalRecords.RANDOM;
+import static seedu.planner.testutil.TypicalRecords.WORK;
+import static seedu.planner.testutil.TypicalRecords.ZT;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import seedu.planner.commons.core.index.Index;
+import seedu.planner.logic.commands.DeleteCommand;
+import seedu.planner.logic.commands.FindCommand;
+import seedu.planner.logic.commands.RedoCommand;
+import seedu.planner.logic.commands.UndoCommand;
+import seedu.planner.model.Model;
+import seedu.planner.model.tag.Tag;
 
-public class FindCommandSystemTest extends AddressBookSystemTest {
+public class FindCommandSystemTest extends FinancialPlannerSystemTest {
 
     @Test
     public void find() {
-        /* Case: find multiple records in address book, command with leading spaces and trailing spaces
+        /* Case: find multiple records in planner book, command with leading spaces and trailing spaces
          * -> 2 records found
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_BURSARY + "   ";
@@ -48,24 +48,24 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple records in address book, 2 keywords -> 2 records found */
+        /* Case: find multiple records in planner book, 2 keywords -> 2 records found */
         command = FindCommand.COMMAND_WORD + " ZT caifan";
         ModelHelper.setFilteredList(expectedModel, CAIFAN, ZT);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple records in address book, 2 keywords in reversed order -> 2 records found */
+        /* Case: find multiple records in planner book, 2 keywords in reversed order -> 2 records found */
         command = FindCommand.COMMAND_WORD + " caifan ZT";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple records in address book, 2 keywords with 1 repeat -> 2 records found */
+        /* Case: find multiple records in planner book, 2 keywords with 1 repeat -> 2 records found */
         command = FindCommand.COMMAND_WORD + " work ZT work";
         ModelHelper.setFilteredList(expectedModel, ZT, WORK);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple records in address book, 2 matching keywords and 1 non-matching keyword
+        /* Case: find multiple records in planner book, 2 matching keywords and 1 non-matching keyword
          * -> 2 records found
          */
         command = FindCommand.COMMAND_WORD + " work ZT NonMatchingKeyWord";
@@ -82,48 +82,48 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: find same records in address book after deleting 1 of them -> 1 record found */
+        /* Case: find same records in planner book after deleting 1 of them -> 1 record found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getAddressBook().getRecordList().contains(WORK));
+        assertFalse(getModel().getFinancialPlanner().getRecordList().contains(WORK));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_BURSARY;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, RANDOM);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find record in address book, keyword is same as name but of different case -> 1 record found */
+        /* Case: find record in planner book, keyword is same as name but of different case -> 1 record found */
         command = FindCommand.COMMAND_WORD + " rAndOm";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find record in address book, keyword is substring of name -> 0 records found */
+        /* Case: find record in planner book, keyword is substring of name -> 0 records found */
         command = FindCommand.COMMAND_WORD + " ran";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find record in address book, name is substring of keyword -> 0 records found */
+        /* Case: find record in planner book, name is substring of keyword -> 0 records found */
         command = FindCommand.COMMAND_WORD + " inc";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find record not in address book -> 0 records found */
+        /* Case: find record not in planner book -> 0 records found */
         command = FindCommand.COMMAND_WORD + " Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find date of record in address book -> 0 records found */
+        /* Case: find date of record in planner book -> 0 records found */
         command = FindCommand.COMMAND_WORD + " " + ZT.getDate().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find money flow of record in address book -> 0 records found */
+        /* Case: find money flow of record in planner book -> 0 records found */
         command = FindCommand.COMMAND_WORD + " " + ZT.getMoneyFlow().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of record in address book -> 0 records found */
+        /* Case: find tags of record in planner book -> 0 records found */
         List<Tag> tags = new ArrayList<>(ZT.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
@@ -138,7 +138,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
-        /* Case: find record in empty address book -> 0 records found */
+        /* Case: find record in empty planner book -> 0 records found */
         deleteAllRecords();
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_BURSARY;
         expectedModel = getModel();
@@ -156,10 +156,10 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
      * box displays {@code Messages#MESSAGE_RECORDS_LISTED_OVERVIEW} with the number of people in the filtered list,
      * and the model related components equal to {@code expectedModel}.
      * These verifications are done by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the status bar remains unchanged, and the command box has the default style class, and the
      * selected card updated accordingly, depending on {@code cardStatus}.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
         String expectedResultMessage = String.format(
@@ -176,10 +176,10 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
      * Executes {@code command} and verifies that the command box displays {@code command}, the result display
      * box displays {@code expectedResultMessage} and the model related components equal to the current model.
      * These verifications are done by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
      * error style.
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see FinancialPlannerSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

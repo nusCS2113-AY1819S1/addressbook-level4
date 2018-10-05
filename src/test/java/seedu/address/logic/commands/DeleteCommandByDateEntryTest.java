@@ -15,6 +15,8 @@ import seedu.address.testutil.TypicalDates;
 import seedu.address.testutil.TypicalIndexes;
 
 import javax.lang.model.element.TypeParameterElement;
+import seedu.planner.logic.commands.CommandTestUtil;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -28,7 +30,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RECORD;
 import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
 
 public class DeleteCommandByDateEntryTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypical, new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
