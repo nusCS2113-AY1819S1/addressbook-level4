@@ -175,9 +175,9 @@ public class Trie {
             return predictionsList;
         }
 
-        // If startNode has ONLY ONE child, the only possible text prediction is one that has characters up
-        // till the character that has more than one child.
-        if (startNode.getChildrenSize() == 1) {
+        // If startNode has ONE child OR LESS, the only possible text prediction is one that has characters
+        // up till the character that has more than one child or this is the end of the branch.
+        if (startNode.getChildrenSize() <= 1) {
             charStack = buildSingleStack(startNode);
             predictionsList.add(charStack.toString());
             return predictionsList;
