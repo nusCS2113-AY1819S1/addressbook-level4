@@ -72,25 +72,25 @@ public class ReplyCommentCommand extends Command {
         this.Line = Line;
         this.Comment = Comment;
         this.editCommentDescriptor = new EditCommentDescriptor();
-        //editCommentDescriptor.setName(name);
+        editCommentDescriptor.setName(name);
     }
 
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Event> lastShownList = model.getFilteredEventList();
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+        List<Event> filteredEventList = model.getFilteredEventList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        Event eventToEdit = lastShownList.get(index.getZeroBased());
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+
+        Event eventToEdit = filteredEventList.get(index.getZeroBased());
         Event editedEvent = createEditedComment(eventToEdit, editCommentDescriptor);
 
         model.updateEvent(eventToEdit, editedEvent);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventManager();
 
         return new CommandResult(String.format(MESSAGE_REPLY_COMMENT_SUCCESS, index.getOneBased(),editedEvent.getName()));

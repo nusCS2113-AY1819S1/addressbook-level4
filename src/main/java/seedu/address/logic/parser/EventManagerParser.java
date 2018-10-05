@@ -77,6 +77,7 @@ public class EventManagerParser {
 
             case ReplyCommentCommand.COMMAND_WORD:
                 return new ReplyCommentCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
