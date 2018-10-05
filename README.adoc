@@ -1,4 +1,4 @@
-= Jalil Enterprise
+= Jalil Enterprise Stock List
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-T12-3/main[image:https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master[Build Status]]
@@ -6,7 +6,7 @@ https://ci.appveyor.com/project/damithc/addressbook-level4[image:https://ci.appv
 https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master[Coverage Status]]
 https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
-ifdef::env-github[]
+ifndef::env-github[]
 image::docs/images/Ui.png[width="600"]
 endif::[]
 
@@ -14,7 +14,7 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop CG Stock Taking application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* This is a desktop Jalil Enterprise Stock Taking application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * It is a Java application intended for CG lab managers searching for experiment apparatus.
 * It is *written in OOP fashion*. It provides a *reasonably well-written* code example that is *significantly bigger* (around 6 KLoC)than what students usually write in beginner-level SE modules.
 
