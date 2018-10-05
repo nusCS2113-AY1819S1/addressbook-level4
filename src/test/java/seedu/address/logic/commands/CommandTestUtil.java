@@ -124,7 +124,6 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredRecordList().size());
     }
 
-    //TODO: create another method almost same as showRecordAtIndex (seems might have problems)
     public static void showRecordAtIndex(Model model, int targetIndexInt){
         assertTrue((targetIndexInt <model.getFilteredRecordList().size()));
 

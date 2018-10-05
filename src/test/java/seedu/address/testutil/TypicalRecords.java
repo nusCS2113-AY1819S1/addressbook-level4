@@ -37,7 +37,7 @@ public class TypicalRecords {
             .withMoneyFlow("+14.50").build();
 
     // Manually added
-    public static final Record BURSARY = new RecordBuilder().withName("Income from bursary").withDate("31-4-2080")
+    public static final Record BURSARY = new RecordBuilder().withName("Income from bursary").withDate("3-4-2080")
             .withMoneyFlow("+11.50").build();
     public static final Record IDA = new RecordBuilder().withName("Payment to Ida").withDate("4-10-2030")
             .withMoneyFlow("-12.30").withTags("work").build();

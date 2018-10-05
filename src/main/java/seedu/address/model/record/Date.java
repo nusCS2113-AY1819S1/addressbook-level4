@@ -52,16 +52,16 @@ public class Date {
      */
     //TODO: add more constraint to the Date
     public static boolean isValidDate(String test) {
-        if (test.matches(DATE_VALIDATION_REGEX)){
+        if (test.matches(DATE_VALIDATION_REGEX)) {
             String[] dateParams = test.split("-");
             int day = Integer.parseInt(dateParams[0]);
             int month = Integer.parseInt(dateParams[1]);
             int year = Integer.parseInt(dateParams[2]);
-            if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0){
+            if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0) {
                 return false;
-            } else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11){
-                if (day <= 30){
-                    if (month == 2 && day > 28 && isLeapYear(year)){
+            } else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11) {
+                if (day <= 30) {
+                    if (month == 2 && day > 28 && isLeapYear(year)) {
                         return false;
                     } else {
                         return true;
@@ -74,6 +74,11 @@ public class Date {
         return false;
     }
 
+    /**
+     * Check if this year is Leap year or not
+     * @param year
+     * @return
+     */
     public static boolean isLeapYear (int year) {
         if (year % 400 == 0) {
             return true;
@@ -81,8 +86,9 @@ public class Date {
             return false;
         } else if (year % 4 == 0) {
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     @Override
