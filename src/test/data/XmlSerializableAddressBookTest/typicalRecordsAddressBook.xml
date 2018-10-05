@@ -3,41 +3,41 @@
 <addressbook>
     <records>
         <name>Indo</name>
-        <date>18-9-2012</date>
+        <date>25-9-2018</date>
         <moneyFlow>-5.6</moneyFlow>
         <tagged>friends</tagged>
     </records>
     <records>
         <name>caifan</name>
-        <date>18-12-2012</date>
+        <date>26-9-2018</date>
         <moneyFlow>-3.80</moneyFlow>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </records>
     <records>
         <name>Income from work</name>
-        <date>10-12-2012</date>
+        <date>27-9-2018</date>
         <moneyFlow>+60.0</moneyFlow>
     </records>
     <records>
         <name>Payment from ZT</name>
-        <date>10-1-2012</date>
+        <date>25-9-2018</date>
         <moneyFlow>+5.90</moneyFlow>
         <tagged>friends</tagged>
     </records>
     <records>
         <name>Payment for mala</name>
-        <date>10-1-2003</date>
+        <date>26-9-2018</date>
         <moneyFlow>-10.50</moneyFlow>
     </records>
     <records>
         <name>Payment for chicken rice</name>
-        <date>31-12-1996</date>
+        <date>27-9-2018</date>
         <moneyFlow>-0.90</moneyFlow>
     </records>
     <records>
         <name>Random income</name>
-        <date>23-10-2010</date>
+        <date>25-9-2018</date>
         <moneyFlow>+14.50</moneyFlow>
     </records>
 </addressbook>

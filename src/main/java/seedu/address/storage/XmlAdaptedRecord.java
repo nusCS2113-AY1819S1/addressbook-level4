@@ -89,7 +89,7 @@ public class XmlAdaptedRecord {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
-        if (!Date.isValidDate(date)) {
+        if (!Date.isValidDateFormat(date)) {
             throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
         final Date modelDate = new Date(date);
