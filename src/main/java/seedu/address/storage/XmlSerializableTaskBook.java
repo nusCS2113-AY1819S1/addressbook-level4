@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyTaskBook;
-import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -18,10 +18,10 @@ import seedu.address.model.person.Person;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableTaskBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate task(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> tasks;
+    private List<XmlAdaptedTask> tasks;
 
     /**
      * Creates an empty XmlSerializableTaskBook.
@@ -36,7 +36,7 @@ public class XmlSerializableTaskBook {
      */
     public XmlSerializableTaskBook(ReadOnlyTaskBook src) {
         this();
-        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,12 +47,12 @@ public class XmlSerializableTaskBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (XmlAdaptedPerson p : tasks) {
-            Person person = p.toModelType();
-            if (addressBook.hasPerson(person)) {
+        for (XmlAdaptedTask p : tasks) {
+            Task task = p.toModelType();
+            if (addressBook.hasTask(task)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addPerson(person);
+            addressBook.addTask(task);
         }
         return addressBook;
     }

@@ -3,14 +3,14 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyTaskBook newData);
@@ -19,37 +19,37 @@ public interface Model {
     ReadOnlyTaskBook getAddressBook();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the task book.
+     * Returns true if a task with the same identity as {@code task} exists in the task book.
      */
-    boolean hasTask(Person person);
+    boolean hasTask(Task task);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the task book.
+     * Deletes the given task.
+     * The task must exist in the task book.
      */
-    void deleteTask(Person target);
+    void deleteTask(Task target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the task book.
+     * Adds the given task.
+     * {@code task} must not already exist in the task book.
      */
-    void addTask(Person person);
+    void addTask(Task task);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
+     * Replaces the given task {@code target} with {@code editedTask}.
      * {@code target} must exist in the task book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the task book.
+     * The task identity of {@code editedTask} must not be the same as another existing task in the task book.
      */
-    void updateTask(Person target, Person editedPerson);
+    void updateTask(Task target, Task editedTask);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredTaskList();
+    /** Returns an unmodifiable view of the filtered task list */
+    ObservableList<Task> getFilteredTaskList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered task list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredTaskList(Predicate<Person> predicate);
+    void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
      * Returns true if the model has previous task book states to restore.

@@ -12,7 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the task book data.
@@ -21,7 +21,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedTaskBook versionedTaskBook;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given taskBook and userPrefs.
@@ -33,7 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task book: " + taskBook + " and user prefs " + userPrefs);
 
         versionedTaskBook = new VersionedTaskBook(taskBook);
-        filteredPersons = new FilteredList<>(versionedTaskBook.getTaskList());
+        filteredTasks = new FilteredList<>(versionedTaskBook.getTaskList());
     }
 
     public ModelManager() {
@@ -58,47 +58,47 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasTask(Person person) {
+    public boolean hasTask(Task person) {
         requireNonNull(person);
-        return versionedTaskBook.hasPerson(person);
+        return versionedTaskBook.hasTask(person);
     }
 
     @Override
-    public void deleteTask(Person target) {
-        versionedTaskBook.removePerson(target);
+    public void deleteTask(Task target) {
+        versionedTaskBook.removeTask(target);
         indicateTaskBookChanged();
     }
 
     @Override
-    public void addTask(Person person) {
-        versionedTaskBook.addPerson(person);
+    public void addTask(Task person) {
+        versionedTaskBook.addTask(person);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateTaskBookChanged();
     }
 
     @Override
-    public void updateTask(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
+    public void updateTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
 
-        versionedTaskBook.updatePerson(target, editedPerson);
+        versionedTaskBook.updateTask(target, editedTask);
         indicateTaskBookChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    //=========== Filtered Task List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
      * {@code versionedTaskBook}
      */
     @Override
-    public ObservableList<Person> getFilteredTaskList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+    public ObservableList<Task> getFilteredTaskList() {
+        return FXCollections.unmodifiableObservableList(filteredTasks);
     }
 
     @Override
-    public void updateFilteredTaskList(Predicate<Person> predicate) {
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredTasks.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -145,7 +145,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedTaskBook.equals(other.versionedTaskBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredTasks.equals(other.filteredTasks);
     }
 
 }

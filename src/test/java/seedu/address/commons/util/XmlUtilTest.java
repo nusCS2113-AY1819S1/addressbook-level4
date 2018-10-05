@@ -16,7 +16,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.AddressBook;
-import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableTaskBook;
 import seedu.address.testutil.AddressBookBuilder;
@@ -141,6 +140,6 @@ public class XmlUtilTest {
      * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
      * objects.
      */
-    @XmlRootElement(name = "person")
+    @XmlRootElement(name = "task")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
 }
