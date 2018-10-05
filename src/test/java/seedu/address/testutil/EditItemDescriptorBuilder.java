@@ -8,9 +8,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
-import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.model.item.Quantity;
-import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -57,7 +55,7 @@ public class EditItemDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code minQuantity} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code MinQuantity} of the {@code EditItemDescriptor} that we are building.
      */
     public EditItemDescriptorBuilder withMinQuantity(String minQuantity) {
         descriptor.setMinQuantity(new Quantity(minQuantity));
@@ -65,18 +63,15 @@ public class EditItemDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Status} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Status} of the {@code EditItemDescriptor} that we are building.
      */
-
-
     public EditItemDescriptorBuilder withStatus(List<Integer> status) {
         descriptor.setStatus(status);
         return this;
     }
 
-
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditItemDescriptor}
      * that we are building.
      */
     public EditItemDescriptorBuilder withTags(String... tags) {
