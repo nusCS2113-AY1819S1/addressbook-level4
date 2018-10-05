@@ -1,11 +1,10 @@
-package seedu.address.logic.parser;
+package seedu.planner.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.logic.commands.DeleteCommandByDateEntry;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.record.Date;
-
+import seedu.planner.logic.commands.DeleteCommandByDateEntry;
+import seedu.planner.logic.parser.exceptions.ParseException;
+import seedu.planner.model.record.Date;
 
 /**
  * Parses input arguments and creates a new DeleteCommandByDateEntry object

@@ -842,7 +842,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |be able to undo |Revert any unwanted changes
 
 |`*` |user with many persons in the expense book |sort persons by name |locate a person easily
-=======
+
 |`* * *` |user |be able to clear history |to reduce the clutter in the app
 
 |`* * *` |user |be able to see a summary expenditure of each category | see the areas where I am spending the most
