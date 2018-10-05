@@ -29,7 +29,7 @@ Responsibilities: Comment Section Architect
 
 === James Arista Yaputra
 image::jamesyaputra.png[width="150", align="left"]
-{empty}[http://github.com/jamesyaputra[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/jamesyaputra[github]] [<<jamesyaputra#, portfolio>>]
 
 Role: Developer +
 Responsibilities: User Authentication
