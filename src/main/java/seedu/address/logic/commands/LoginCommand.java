@@ -28,7 +28,7 @@ public class LoginCommand extends Command {
     private final User toLogin;
 
     /**
-     * Creates an LoginCommand to add the specified {@code Event}
+     * Creates an LoginCommand to add the specified {@code User}
      */
     public LoginCommand(User user) {
         requireNonNull(user);

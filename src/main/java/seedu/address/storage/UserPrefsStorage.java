@@ -8,14 +8,14 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.UserPrefs;
 
 /**
- * Represents a storage for {@link seedu.address.model.AccountInfo}.
+ * Represents a storage for {@link seedu.address.model.UserPrefs}.
  */
-public interface AccountInfoStorage {
+public interface UserPrefsStorage {
 
     /**
      * Returns the file path of the UserPrefs data file.
      */
-    Path getAccountInfoFilePath();
+    Path getUserPrefsFilePath();
 
     /**
      * Returns UserPrefs data from storage.
@@ -23,13 +23,13 @@ public interface AccountInfoStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<UserPrefs> readAccountInfo() throws DataConversionException, IOException;
+    Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link seedu.address.model.UserPrefs} to the storage.
      * @param userPrefs cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAccountInfo(UserPrefs userPrefs) throws IOException;
+    void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
 }
