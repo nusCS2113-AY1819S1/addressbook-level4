@@ -126,9 +126,8 @@ Format: `scoreFilter [filter_standard]` +
 Examples:
 
 * scorefilter 56
->>>>>>> 1b29d41f1daa8018b906db3069dfb16be5b504ac
 
-=== Summary of students: 'summaryGrade'
+=== Summary of students' grade: 'summaryGrade'
 show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test.
 Example: summaryGrade
 
