@@ -45,7 +45,8 @@ public class EditCandidateCommandParser implements Parser<EditCandidateCommand> 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCandidateCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCandidateCommand.MESSAGE_USAGE),
+                    pe);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
