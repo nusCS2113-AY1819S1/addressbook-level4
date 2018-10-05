@@ -127,7 +127,7 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseExpense_validValueWithWhitespace_returnsMoneyFlow() throws Exception {
+    public void parseMoneyFlow_validValueWithWhitespace_returnsMoneyFlow() throws Exception {
         String expenseWithWhitespace = WHITESPACE + VALID_EXPENSE + WHITESPACE;
         String incomeWithWhitespace = WHITESPACE + VALID_INCOME + WHITESPACE;
         MoneyFlow expectedExpense = new MoneyFlow(VALID_EXPENSE);
