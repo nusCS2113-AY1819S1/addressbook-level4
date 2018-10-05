@@ -10,8 +10,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.record.Date;
-import seedu.address.model.record.Expense;
-import seedu.address.model.record.Income;
 import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.tag.Tag;
@@ -67,7 +65,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String moneyFlow} into an {@code Income} or an {@code Expense}.
+     * Parses a {@code String moneyFlow} into an {@code MoneyFlow}
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code MoneyFlow} is invalid.
@@ -78,13 +76,7 @@ public class ParserUtil {
         if (!MoneyFlow.isValidMoneyFlow(trimmedMoneyFlow)) {
             throw new ParseException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
         }
-        if (Income.isValidIncome(trimmedMoneyFlow)) {
-            return new Income(trimmedMoneyFlow);
-        } else if (Expense.isValidExpense(trimmedMoneyFlow)) {
-            return new Expense(trimmedMoneyFlow);
-        } else {
-            throw new ParseException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
-        }
+        return new MoneyFlow(trimmedMoneyFlow);
     }
 
     /**

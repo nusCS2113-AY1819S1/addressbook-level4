@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents any form of money flow in a record in the addressbook
  * Guarantees: immutable; is valid as declared in {@link #isValidMoneyFlow(String)}
  */
-public abstract class MoneyFlow {
+public class MoneyFlow {
 
     public static final String MESSAGE_MONEY_FLOW_CONSTRAINTS =
             "Any form of money flow should consist of '+' or '-', "
@@ -40,15 +40,19 @@ public abstract class MoneyFlow {
     }
 
     /**
-     * Returns if a given string is a valid income.
+     * Returns if a given string is a valid moneyflow parameter.
      */
     public static boolean isValidMoneyFlow(String test) {
         return test.matches(MONEYFLOW_VALIDATION_REGEX);
     }
 
-    public abstract String toString();
+    public String toString(){ return value; }
 
-    public abstract boolean equals(Object other);
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof MoneyFlow // instanceof handles nulls
+                && value.equals(((MoneyFlow) other).value)); // state check
+    }
 
-    public abstract int hashCode();
+    public int hashCode() { return value.hashCode(); }
 }

@@ -32,7 +32,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditRecordDescriptor;
 import seedu.address.model.record.Date;
-import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditRecordDescriptorBuilder;
@@ -78,7 +78,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_DATE_DESC, Date.MESSAGE_DATE_CONSTRAINTS); // invalid date
         assertParseFailure(parser, "1"
-                + INVALID_MONEYFLOW_DESC, Income.MESSAGE_MONEY_FLOW_CONSTRAINTS); // invalid moneyflow
+                + INVALID_MONEYFLOW_DESC, MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS); // invalid moneyflow
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
         // invalid date followed by valid income

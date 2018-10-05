@@ -7,8 +7,7 @@ import java.util.stream.Collectors;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.record.Date;
-import seedu.address.model.record.Expense;
-import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
@@ -19,17 +18,17 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Record[] getSampleRecords() {
         return new Record[] {
-            new Record(new Name("Alex Yeoh"), new Date("17-9-2004"), new Income("+101.30"),
+            new Record(new Name("Alex Yeoh"), new Date("17-9-2004"), new MoneyFlow("+101.30"),
                 getTagSet("friends")),
-            new Record(new Name("Bernice Yu"), new Date("23-4-1869"), new Expense("-140.40"),
+            new Record(new Name("Bernice Yu"), new Date("23-4-1869"), new MoneyFlow("-140.40"),
                 getTagSet("colleagues", "friends")),
-            new Record(new Name("Charlotte Oliveiro"), new Date("29-5-1999"), new Income("+24.49"),
+            new Record(new Name("Charlotte Oliveiro"), new Date("29-5-1999"), new MoneyFlow("+24.49"),
                 getTagSet("neighbours")),
-            new Record(new Name("David Li"), new Date("30-6-2014"), new Expense("-437.49"),
+            new Record(new Name("David Li"), new Date("30-6-2014"), new MoneyFlow("-437.49"),
                 getTagSet("family")),
-            new Record(new Name("Irfan Ibrahim"), new Date("30-9-2010"), new Expense("-437.58"),
+            new Record(new Name("Irfan Ibrahim"), new Date("30-9-2010"), new MoneyFlow("-437.58"),
                 getTagSet("classmates")),
-            new Record(new Name("Roy Balakrishnan"), new Date("15-7-2005"), new Income("+24.50"),
+            new Record(new Name("Roy Balakrishnan"), new Date("15-7-2005"), new MoneyFlow("+24.50"),
                 getTagSet("colleagues"))
         };
     }

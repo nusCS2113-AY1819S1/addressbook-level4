@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.record.Date;
-import seedu.address.model.record.Expense;
-import seedu.address.model.record.Income;
 import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
@@ -63,11 +61,7 @@ public class RecordBuilder {
      * Sets the {@code MoneyFlow} of the {@code Record} that we are building.
      */
     public RecordBuilder withMoneyFlow(String moneyFlow) {
-        if (Expense.isValidExpense(moneyFlow)) {
-            this.moneyFlow = new Expense(moneyFlow);
-        } else if (Income.isValidIncome(moneyFlow)) {
-            this.moneyFlow = new Income(moneyFlow);
-        }
+        this.moneyFlow = new MoneyFlow(moneyFlow);
         return this;
     }
 

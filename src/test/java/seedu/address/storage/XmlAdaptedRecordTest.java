@@ -12,7 +12,6 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.record.Date;
-import seedu.address.model.record.Income;
 import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.testutil.Assert;
@@ -70,7 +69,7 @@ public class XmlAdaptedRecordTest {
     public void toModelType_invalidMoneyFlow_throwsIllegalValueException() {
         XmlAdaptedRecord record =
                 new XmlAdaptedRecord(VALID_NAME, VALID_DATE, INVALID_MONEYFLOW, VALID_TAGS);
-        String expectedMessage = Income.MESSAGE_MONEY_FLOW_CONSTRAINTS;
+        String expectedMessage = MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, record::toModelType);
     }
 

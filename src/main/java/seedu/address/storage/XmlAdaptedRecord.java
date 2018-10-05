@@ -11,8 +11,6 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.record.Date;
-import seedu.address.model.record.Expense;
-import seedu.address.model.record.Income;
 import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.record.Record;
@@ -101,21 +99,10 @@ public class XmlAdaptedRecord {
         if (!MoneyFlow.isValidMoneyFlow(moneyFlow)) {
             throw new IllegalValueException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
         }
-        // This is a temporary variable to store moneyFlow which will be later assigned to final
-        MoneyFlow tempMoneyFlow = null;
-        if (Income.isValidIncome(moneyFlow)) {
-            tempMoneyFlow = new Income(moneyFlow);
-        }
-        if (Expense.isValidExpense(moneyFlow)) {
-            tempMoneyFlow = new Expense(moneyFlow);
-        }
-        if (tempMoneyFlow == null) {
-            throw new IllegalValueException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
-        }
-        final MoneyFlow modelMoneyFlow = tempMoneyFlow;
+        final MoneyFlow modelMoney = new MoneyFlow(moneyFlow);
 
         final Set<Tag> modelTags = new HashSet<>(recordTags);
-        return new Record(modelName, modelDate, modelMoneyFlow, modelTags);
+        return new Record(modelName, modelDate, modelMoney, modelTags);
     }
 
     @Override

@@ -16,8 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.record.Date;
-import seedu.address.model.record.Expense;
-import seedu.address.model.record.Income;
+import seedu.address.model.record.MoneyFlow;
 import seedu.address.model.record.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
@@ -121,14 +120,14 @@ public class ParserUtilTest {
 
     @Test
     public void parseExpense_validValueWithoutWhitespace_returnsExpense() throws Exception {
-        Expense expectedExpense = new Expense(VALID_EXPENSE);
+        MoneyFlow expectedExpense = new MoneyFlow(VALID_EXPENSE);
         assertEquals(expectedExpense, ParserUtil.parseMoneyFlow(VALID_EXPENSE));
     }
 
     @Test
     public void parseExpense_validValueWithWhitespace_returnsTrimmedExpense() throws Exception {
         String expenseWithWhitespace = WHITESPACE + VALID_EXPENSE + WHITESPACE;
-        Expense expectedExpense = new Expense(VALID_EXPENSE);
+        MoneyFlow expectedExpense = new MoneyFlow(VALID_EXPENSE);
         assertEquals(expectedExpense, ParserUtil.parseMoneyFlow(expenseWithWhitespace));
     }
 
