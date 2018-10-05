@@ -120,8 +120,10 @@ public class ArgumentTokenizer {
 
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());
-
-        return value.trim();
+        if (value.trim().isEmpty()) {
+            value = value.trim();
+        }
+        return value;
     }
 
     /**
