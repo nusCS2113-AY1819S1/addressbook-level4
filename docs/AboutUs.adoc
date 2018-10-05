@@ -45,7 +45,7 @@ Responsibilities: Event Reminders
 
 '''
 
-=== Johnny Doe
+=== Ho Phi Long
 image::yijinl.jpg[width="150", align="left"]
 {empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
 
