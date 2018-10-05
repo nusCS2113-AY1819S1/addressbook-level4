@@ -7,7 +7,7 @@ package seedu.address.logic;
 public class LogicState {
     public final String nextCommand;
 
-    LogicState(String nextCommand){
+    public LogicState(String nextCommand){
         this.nextCommand = nextCommand;
     }
 }
