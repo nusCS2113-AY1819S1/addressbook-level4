@@ -16,7 +16,7 @@ import seedu.planner.model.record.Limit;
     * */
     public class LimitCommand extends Command {
     public static final String COMMAND_WORD= "limit";
-    public static final String MESSAGE_USAGE= COMMAND_WORD + ": Set a limit for a period of time. "
+    public static final String MESSAGE_USAGE= COMMAND_WORD + ": Check the limit for a period of time. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START "
             + PREFIX_DATE + "DATE_END "
@@ -26,7 +26,7 @@ import seedu.planner.model.record.Limit;
 
             + PREFIX_DATE + "18-9-2018 "
             + PREFIX_DATE + "20-9-2018 "
-            + PREFIX_MONEYFLOW + "100 ";
+            + PREFIX_MONEYFLOW + "-100 ";
 
     //public static Limit limit;
 

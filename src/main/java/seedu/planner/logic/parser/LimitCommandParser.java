@@ -1,10 +1,10 @@
 package seedu.planner.logic.parser;
 
-import java.util.stream.Stream;
-
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
+
+import java.util.stream.Stream;
 
 import seedu.planner.logic.commands.LimitCommand;
 
