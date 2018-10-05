@@ -115,7 +115,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void deleteListRecord(List<Record> targetList){
+        public void deleteListRecord(List<Record> targetList) {
             throw new AssertionError("This method should not be called.");
         }
 
