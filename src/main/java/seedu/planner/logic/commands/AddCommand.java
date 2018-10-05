@@ -25,7 +25,7 @@ public class AddCommand extends Command {
             + PREFIX_MONEYFLOW + "MONEYFLOW "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Payment for caifan "
+            + PREFIX_NAME + "Payment for Caifan "
             + PREFIX_DATE + "18-9-2018 "
             + PREFIX_MONEYFLOW + "-3.50 "
             + PREFIX_TAG + "food "

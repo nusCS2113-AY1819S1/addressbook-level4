@@ -1,5 +1,14 @@
 package seedu.planner.logic.commands;
 
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -14,14 +23,7 @@ import seedu.planner.model.record.Record;
 import seedu.planner.testutil.TypicalDates;
 import seedu.planner.testutil.TypicalIndexes;
 
-import java.util.ArrayList;
-import java.util.List;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 public class DeleteCommandByDateEntryTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
@@ -30,23 +32,27 @@ public class DeleteCommandByDateEntryTest {
     @Test
     public void execute_validDateUnfilteredList_success() {
         List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
-        DeleteCommandByDateEntry deleteCommandByDateEntry = new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
+        DeleteCommandByDateEntry deleteCommandByDateEntry =
+                new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
 
-        String expectedMessage = String.format(DeleteCommandByDateEntry.MESSAGE_DELETE_RECORD_SUCCESS, TypicalDates.DATE_FIRST_INDEX_DATE);
+        String expectedMessage =
+                String.format(
+                        DeleteCommandByDateEntry.MESSAGE_DELETE_RECORD_SUCCESS, TypicalDates.DATE_FIRST_INDEX_DATE);
 
         ModelManager expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
         expectedModel.deleteListRecord(recordsToDelete);
         expectedModel.commitFinancialPlanner();
         showNoRecord(expectedModel);
 
-        CommandTestUtil.assertCommandSuccess(deleteCommandByDateEntry, model, commandHistory, expectedMessage, expectedModel);
+        CommandTestUtil.assertCommandSuccess(
+                deleteCommandByDateEntry, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException(){
+    public void execute_invalidIndexFilteredList_throwsCommandException() {
         List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
 
-        for (int i = 0; i < recordsToDelete.size() - 1; i++){
+        for (int i = 0; i < recordsToDelete.size() - 1; i++) {
             //ensure that only one record exists accordingly to the index
             List<Record> records = filteredRecordList(model);
             //TODO: you have to create another method almost same as (CommandTestUtils.showRecordAtIndex)
@@ -58,8 +64,8 @@ public class DeleteCommandByDateEntryTest {
             //ensure that outOfBoundIndex is still in bound of address book list
             assertTrue(outOfBoundIndex.getOneBased() < model.getFinancialPlanner().getRecordList().size());
 
-            DeleteCommandByDateEntry deleteCommandByDateEntry = new DeleteCommandByDateEntry
-                    (records.get(outOfBoundIndex.getZeroBased()).getDate());
+            DeleteCommandByDateEntry deleteCommandByDateEntry = new DeleteCommandByDateEntry(
+                    records.get(outOfBoundIndex.getZeroBased()).getDate());
 
             CommandTestUtil.assertCommandFailure(
                     deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
@@ -71,7 +77,8 @@ public class DeleteCommandByDateEntryTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
 
-        DeleteCommandByDateEntry deleteCommandByDateEntry = new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
+        DeleteCommandByDateEntry deleteCommandByDateEntry =
+                new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
         expectedModel.deleteListRecord(recordsToDelete);
         expectedModel.commitFinancialPlanner();
@@ -81,20 +88,23 @@ public class DeleteCommandByDateEntryTest {
 
         //undo -> reverts addressBook back to the prebious state and filtered record list to show all records
         expectedModel.undoFinancialPlanner();
-        CommandTestUtil.assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(
+                new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         //redo -> same first record deleted again
         expectedModel.redoFinancialPlanner();
-        CommandTestUtil.assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(
+                new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
-    public void executeUndoRedo_invalidIndexUnfilteredList_failure(){
+    public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Date outOfBoundIndexDate = TypicalDates.DATE_LAST_INDEX_DATE;
         DeleteCommandByDateEntry deleteCommandByDateEntry = new DeleteCommandByDateEntry(outOfBoundIndexDate);
 
         //execution failed -> address book state not added into model
-        CommandTestUtil.assertCommandFailure(deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
+        CommandTestUtil.assertCommandFailure(
+                deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
 
         //single address book state in model -> undoCommand and redoCommand fail
         CommandTestUtil.assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -110,8 +120,10 @@ public class DeleteCommandByDateEntryTest {
      */
 
     @Test
-    public void executeUndoRedo_validIndexFilteredList_sameRecordDeleted() throws Exception {
-        DeleteCommandByDateEntry deleteCommandByDateEntry = new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
+    public void executeUndoRedo_validIndexFilteredList_sameRecordDeleted()
+            throws Exception {
+        DeleteCommandByDateEntry deleteCommandByDateEntry =
+                new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
         List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
 
@@ -175,7 +187,7 @@ public class DeleteCommandByDateEntryTest {
     }
 
 
-    public List<Record> filteredRecordList(Model model){
+    public List<Record> filteredRecordList(Model model) {
         return model.getFilteredRecordList();
     }
 
@@ -185,11 +197,11 @@ public class DeleteCommandByDateEntryTest {
      * @param dateToDelete Date you require.
      * @return the list of records whose date is required.
      */
-    public List<Record> listAllRecordToDelete (Model model, Date dateToDelete){
+    public List<Record> listAllRecordToDelete (Model model, Date dateToDelete) {
         List<Record> records = filteredRecordList(model);
         List<Record> recordsToDelete = new ArrayList<>();
-        for (Record recordToDelete : records){
-            if (dateToDelete == recordToDelete.getDate()){
+        for (Record recordToDelete : records) {
+            if (dateToDelete == recordToDelete.getDate()) {
                 recordsToDelete.add(recordToDelete);
             }
         }
@@ -200,7 +212,7 @@ public class DeleteCommandByDateEntryTest {
      * Updates {@code model}'s filtered list to show no one.
      * @param model
      */
-    public void showNoRecord (Model model){
+    public void showNoRecord (Model model) {
         model.updateFilteredRecordList(p -> false);
         assertTrue (model.getFilteredRecordList().isEmpty());
     }
