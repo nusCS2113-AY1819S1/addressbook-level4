@@ -16,9 +16,9 @@ public class Enrollment {
     public Enrollment() {
     }
 
-    public Enrollment(String className) {
-        requireNonNull(className);
-        value = className;
+    public Enrollment(String maxEnrollment) {
+        requireNonNull(maxEnrollment);
+        value = maxEnrollment;
     }
 
     public String getValue() {

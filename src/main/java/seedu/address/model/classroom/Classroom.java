@@ -14,11 +14,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "class")
 public class Classroom {
     //class-specific fields
-    @XmlElement(name = "classname")
+    @XmlElement(name = "className")
     private ClassName className;
-    @XmlElement(name = "modulecode")
+    @XmlElement(name = "moduleCode")
     private ClassModule moduleCode;
-    @XmlElement(name = "maxenrollment")
+    @XmlElement(name = "maxEnrollment")
     private Enrollment maxEnrollment;
 
     public Classroom() {
