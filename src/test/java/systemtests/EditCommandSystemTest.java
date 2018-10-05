@@ -92,7 +92,7 @@ public class EditCommandSystemTest extends StockListSystemTest {
          * -> edited
          */
         index = INDEX_SECOND_ITEM;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO + EMAIL_DESC_AMY
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
                 + TAG_DESC_LAB2;
         editedItem = new ItemBuilder(ARDUINO).withTags(VALID_TAG_LAB2).build();
         assertCommandSuccess(command, index, editedItem);
