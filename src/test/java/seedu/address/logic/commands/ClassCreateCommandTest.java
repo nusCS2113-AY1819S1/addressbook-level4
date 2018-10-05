@@ -4,15 +4,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.ClassCreateCommand.MESSAGE_ARGUMENTS;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CLASS_T16;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MODULE_CODE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MAX_ENROLLMENT;
+import static seedu.address.logic.commands.ClassCreateCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -23,11 +22,20 @@ import seedu.address.model.classroom.Enrollment;
 
 
 public class ClassCreateCommandTest {
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute() {
-        //TBC
+        final String className = "T16";
+        final String moduleCode = "CG1111";
+        final String maxEnrollment = "20";
+
+        assertCommandSuccess(new ClassCreateCommand(new Classroom(new ClassName(className),
+                        new ClassModule(moduleCode), new Enrollment(maxEnrollment))), model, new CommandHistory(),
+                String.format(MESSAGE_SUCCESS, className),
+                model);
     }
+
     @Test
     public void equals() {
         final ClassCreateCommand standardCommand = new ClassCreateCommand
