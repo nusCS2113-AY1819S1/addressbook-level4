@@ -139,7 +139,7 @@ public abstract class StockListSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all items in the address book.
      */
     protected void showAllItems() {
         executeCommand(ListCommand.COMMAND_WORD);
@@ -147,7 +147,7 @@ public abstract class StockListSystemTest {
     }
 
     /**
-     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     * Displays all items with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showItemsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
@@ -155,7 +155,7 @@ public abstract class StockListSystemTest {
     }
 
     /**
-     * Selects the person at {@code index} of the displayed list.
+     * Selects the item at {@code index} of the displayed list.
      */
     protected void selectItem(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
@@ -163,7 +163,7 @@ public abstract class StockListSystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all items in the address book.
      */
     protected void deleteAllItems() {
         executeCommand(ClearCommand.COMMAND_WORD);
@@ -172,8 +172,8 @@ public abstract class StockListSystemTest {
 
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
-     * {@code expectedResultMessage}, the storage contains the same person objects as {@code expectedModel}
-     * and the person list panel displays the persons in the model correctly.
+     * {@code expectedResultMessage}, the storage contains the same item objects as {@code expectedModel}
+     * and the item list panel displays the items in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
@@ -197,7 +197,7 @@ public abstract class StockListSystemTest {
 
     /**
      * Asserts that the previously selected card is now deselected and the browser's url remains displaying the details
-     * of the previously selected person.
+     * of the previously selected item.
      * @see BrowserPanelHandle#isUrlChanged()
      */
     protected void assertSelectedCardDeselected() {
@@ -206,7 +206,7 @@ public abstract class StockListSystemTest {
     }
 
     /**
-     * Asserts that the browser's url is changed to display the details of the person in the person list panel at
+     * Asserts that the browser's url is changed to display the details of the item in the item list panel at
      * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
      * @see ItemListPanelHandle#isSelectedItemCardChanged()
@@ -226,7 +226,7 @@ public abstract class StockListSystemTest {
     }
 
     /**
-     * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
+     * Asserts that the browser's url and the selected card in the item list panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
      * @see ItemListPanelHandle#isSelectedItemCardChanged()
      */

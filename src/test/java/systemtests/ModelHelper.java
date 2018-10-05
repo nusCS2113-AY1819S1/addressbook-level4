@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
-import seedu.address.model.person.Person;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.
@@ -32,7 +31,7 @@ public class ModelHelper {
     }
 
     /**
-     * Returns a predicate that evaluates to true if this {@code Person} equals to {@code other}.
+     * Returns a predicate that evaluates to true if this {@code Item} equals to {@code other}.
      */
     private static Predicate<Item> getPredicateMatching(Item other) {
         return item -> item.equals(other);
