@@ -15,19 +15,19 @@ public interface Model {
     Predicate<Record> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyFinancialPlanner newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the FinancialPlanner */
+    ReadOnlyFinancialPlanner getFinancialPlanner();
 
     /**
-     * Returns true if a record with the same identity as {@code record} exists in the address book.
+     * Returns true if a record with the same identity as {@code record} exists in the financial planner.
      */
     boolean hasRecord(Record record);
 
     /**
      * Deletes the given record.
-     * The record must exist in the address book.
+     * The record must exist in the financial planner.
      */
     void deleteRecord(Record target);
 
@@ -35,14 +35,14 @@ public interface Model {
 
     /**
      * Adds the given record.
-     * {@code record} must not already exist in the address book.
+     * {@code record} must not already exist in the financial planner.
      */
     void addRecord(Record record);
 
     /**
      * Replaces the given record {@code target} with {@code editedRecord}.
-     * {@code target} must exist in the address book.
-     * The record identity of {@code editedRecord} must not be the same as another existing record in the address book.
+     * {@code target} must exist in the financial planner.
+     * The record identity of {@code editedRecord} must not be the same as another existing record in the financial planner.
      */
     void updateRecord(Record target, Record editedRecord);
 
@@ -56,27 +56,27 @@ public interface Model {
     void updateFilteredRecordList(Predicate<Record> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous financial planner states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoFinancialPlanner();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone financial planner states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoFinancialPlanner();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's financial planner to its previous state.
      */
-    void undoAddressBook();
+    void undoFinancialPlanner();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's financial planner to its previously undone state.
      */
-    void redoAddressBook();
+    void redoFinancialPlanner();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current financial planner state for undo/redo.
      */
-    void commitAddressBook();
+    void commitFinancialPlanner();
 }

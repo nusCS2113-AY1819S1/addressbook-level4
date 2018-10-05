@@ -5,7 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showRecordAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 import static seedu.address.testutil.TypicalRecords.TYPICAL_END_DATE;
 import static seedu.address.testutil.TypicalRecords.TYPICAL_START_DATE;
-import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import java.util.function.Predicate;
 
@@ -15,12 +15,12 @@ import org.junit.Test;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyFinancialPlanner;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.record.Date;
 import seedu.address.model.record.DateIsWithinIntervalPredicate;
 import seedu.address.model.record.Record;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.FinancialPlannerBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for ListCommand.
@@ -35,10 +35,10 @@ public class ListCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        ReadOnlyAddressBook emptyAddressBook = new AddressBookBuilder().build();
-        emptyModel = new ModelManager(emptyAddressBook, new UserPrefs());
+        model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
+        expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
+        ReadOnlyFinancialPlanner emptyFinancialPlanner = new FinancialPlannerBuilder().build();
+        emptyModel = new ModelManager(emptyFinancialPlanner, new UserPrefs());
         expectedEmptyModel = emptyModel;
     }
 

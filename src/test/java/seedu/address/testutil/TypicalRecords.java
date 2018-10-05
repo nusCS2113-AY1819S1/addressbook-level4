@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.FinancialPlanner;
 import seedu.address.model.record.Date;
 import seedu.address.model.record.Record;
 
@@ -58,10 +58,10 @@ public class TypicalRecords {
     private TypicalRecords() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical records.
+     * Returns an {@code FinancialPlanner} with all the typical records.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static FinancialPlanner getTypicalFinancialPlanner() {
+        FinancialPlanner ab = new FinancialPlanner();
         for (Record record : getTypicalRecords()) {
             ab.addRecord(record);
         }

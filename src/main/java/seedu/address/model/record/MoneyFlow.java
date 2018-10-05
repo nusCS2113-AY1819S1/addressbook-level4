@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents any form of money flow in a record in the addressbook
+ * Represents any form of money flow in a record in the financialplanner
  * Guarantees: immutable; is valid as declared in {@link #isValidMoneyFlow(String)}
  */
 public abstract class MoneyFlow {

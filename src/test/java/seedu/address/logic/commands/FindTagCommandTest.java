@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalRecords.CAIFAN;
 import static seedu.address.testutil.TypicalRecords.INDO;
 import static seedu.address.testutil.TypicalRecords.ZT;
-import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -25,8 +25,8 @@ import seedu.address.model.record.TagsContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindTagCommand}.
  */
 public class FindTagCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

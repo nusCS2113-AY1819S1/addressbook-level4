@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.FinancialPlanner;
+import seedu.address.model.ReadOnlyFinancialPlanner;
 import seedu.address.model.record.Date;
 import seedu.address.model.record.Expense;
 import seedu.address.model.record.Income;
@@ -14,7 +14,7 @@ import seedu.address.model.record.Record;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code FinancialPlanner} with sample data.
  */
 public class SampleDataUtil {
     public static Record[] getSampleRecords() {
@@ -34,8 +34,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyFinancialPlanner getSampleFinancialPlanner() {
+        FinancialPlanner sampleAb = new FinancialPlanner();
         for (Record sampleRecord : getSampleRecords()) {
             sampleAb.addRecord(sampleRecord);
         }

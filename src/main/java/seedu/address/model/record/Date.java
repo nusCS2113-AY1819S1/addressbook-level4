@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import seedu.address.commons.util.DateUtil;
 
 /**
- * Represents a Record's date in the address book.
+ * Represents a Record's date in the financial planner.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateFormat(String)}
  */
 public class Date {

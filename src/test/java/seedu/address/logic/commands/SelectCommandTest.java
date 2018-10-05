@@ -9,7 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showRecordAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RECORD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_RECORD;
-import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class SelectCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -65,7 +65,7 @@ public class SelectCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND_RECORD;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getRecordList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getFinancialPlanner().getRecordList().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
     }

@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showRecordAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RECORD;
-import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
 
@@ -26,7 +26,7 @@ import seedu.address.model.record.Record;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -36,9 +36,9 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RECORD_SUCCESS, recordToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
         expectedModel.deleteRecord(recordToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -60,9 +60,9 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_RECORD_SUCCESS, recordToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
         expectedModel.deleteRecord(recordToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
         showNoRecord(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -74,7 +74,7 @@ public class DeleteCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND_RECORD;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRecordList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getFinancialPlanner().getRecordList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
 
@@ -85,19 +85,19 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Record recordToDelete = model.getFilteredRecordList().get(INDEX_FIRST_RECORD.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RECORD);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
         expectedModel.deleteRecord(recordToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         // delete -> first record deleted
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered record list to show all records
-        expectedModel.undoAddressBook();
+        // undo -> reverts financialplanner back to previous state and filtered record list to show all records
+        expectedModel.undoFinancialPlanner();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first record deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoFinancialPlanner();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -124,23 +124,23 @@ public class DeleteCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameRecordDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_RECORD);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
 
         showRecordAtIndex(model, INDEX_SECOND_RECORD);
         Record recordToDelete = model.getFilteredRecordList().get(INDEX_FIRST_RECORD.getZeroBased());
         expectedModel.deleteRecord(recordToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         // delete -> deletes second record in unfiltered record list / first record in filtered record list
         deleteCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered record list to show all records
-        expectedModel.undoAddressBook();
+        // undo -> reverts financialplanner back to previous state and filtered record list to show all records
+        expectedModel.undoFinancialPlanner();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(recordToDelete, model.getFilteredRecordList().get(INDEX_FIRST_RECORD.getZeroBased()));
         // redo -> deletes same second record in unfiltered record list
-        expectedModel.redoAddressBook();
+        expectedModel.redoFinancialPlanner();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

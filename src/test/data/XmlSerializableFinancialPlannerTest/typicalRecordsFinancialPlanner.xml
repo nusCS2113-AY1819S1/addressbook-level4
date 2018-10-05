@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- AddressBook save file which contains the same Record values as in TypicalRecords#getTypicalAddressBook() -->
-<addressbook>
+<!-- FinancialPlanner save file which contains the same Record values as in TypicalRecords#getTypicalFinancialPlanner() -->
+<financialplanner>
     <records>
         <name>Indo</name>
         <date>25-9-2018</date>
@@ -40,4 +40,4 @@
         <date>25-9-2018</date>
         <moneyFlow>+14.50</moneyFlow>
     </records>
-</addressbook>
+</financialplanner>

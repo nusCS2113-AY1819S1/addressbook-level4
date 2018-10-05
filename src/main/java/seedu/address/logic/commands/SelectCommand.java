@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.record.Record;
 
 /**
- * Selects a record identified using it's displayed index from the address book.
+ * Selects a record identified using it's displayed index from the financial planner.
  */
 public class SelectCommand extends Command {
 

@@ -22,7 +22,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.record.Record;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableFinancialPlanner;
 
 public class RecordListPanelTest extends GuiUnitTest {
     private static final ObservableList<Record> TYPICAL_RECORDS =
@@ -81,9 +81,9 @@ public class RecordListPanelTest extends GuiUnitTest {
      */
     private ObservableList<Record> createBackingList(int recordCount) throws Exception {
         Path xmlFile = createXmlFileWithRecords(recordCount);
-        XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getRecordList());
+        XmlSerializableFinancialPlanner xmlFinancialPlanner =
+                XmlUtil.getDataFromFile(xmlFile, XmlSerializableFinancialPlanner.class);
+        return FXCollections.observableArrayList(xmlFinancialPlanner.toModelType().getRecordList());
     }
 
     /**
@@ -92,7 +92,7 @@ public class RecordListPanelTest extends GuiUnitTest {
     private Path createXmlFileWithRecords(int recordCount) throws Exception {
         StringBuilder builder = new StringBuilder();
         builder.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n");
-        builder.append("<addressbook>\n");
+        builder.append("<financialplanner>\n");
         for (int i = 0; i < recordCount; i++) {
             builder.append("<records>\n");
             builder.append("<name>").append(i).append("a</name>\n");
@@ -100,7 +100,7 @@ public class RecordListPanelTest extends GuiUnitTest {
             builder.append("<moneyFlow>-1.1</moneyFlow>\n");
             builder.append("</records>\n");
         }
-        builder.append("</addressbook>\n");
+        builder.append("</financialplanner>\n");
 
         Path manyRecordsFile = Paths.get(TEST_DATA_FOLDER + "manyRecords.xml");
         FileUtil.createFile(manyRecordsFile);

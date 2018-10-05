@@ -23,11 +23,11 @@ import seedu.address.testutil.RecordBuilder;
 import seedu.address.testutil.RecordUtil;
 import seedu.address.testutil.TypicalDates;
 
-public class AddressBookParserTest {
+public class FinancialPlannerParserTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final FinancialPlannerParser parser = new FinancialPlannerParser();
 
     @Test
     public void parseCommand_add() throws Exception {

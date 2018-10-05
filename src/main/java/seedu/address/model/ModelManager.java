@@ -12,61 +12,61 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.address.model.record.Record;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the financial planner data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given financialPlanner and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyFinancialPlanner financialPlanner, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(financialPlanner, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with financial planner: " + financialPlanner + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredRecords = new FilteredList<>(versionedAddressBook.getRecordList());
+        versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
+        filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new FinancialPlanner(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyFinancialPlanner newData) {
+        versionedFinancialPlanner.resetData(newData);
+        indicateFinancialPlannerChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyFinancialPlanner getFinancialPlanner() {
+        return versionedFinancialPlanner;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateFinancialPlannerChanged() {
+        raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
     }
 
     @Override
     public boolean hasRecord(Record record) {
         requireNonNull(record);
-        return versionedAddressBook.hasRecord(record);
+        return versionedFinancialPlanner.hasRecord(record);
     }
 
     @Override
     public void deleteRecord(Record target) {
-        versionedAddressBook.removeRecord(target);
-        indicateAddressBookChanged();
+        versionedFinancialPlanner.removeRecord(target);
+        indicateFinancialPlannerChanged();
     }
 
     @Override
@@ -79,24 +79,24 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addRecord(Record record) {
-        versionedAddressBook.addRecord(record);
+        versionedFinancialPlanner.addRecord(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
-        indicateAddressBookChanged();
+        indicateFinancialPlannerChanged();
     }
 
     @Override
     public void updateRecord(Record target, Record editedRecord) {
         requireAllNonNull(target, editedRecord);
 
-        versionedAddressBook.updateRecord(target, editedRecord);
-        indicateAddressBookChanged();
+        versionedFinancialPlanner.updateRecord(target, editedRecord);
+        indicateFinancialPlannerChanged();
     }
 
     //=========== Filtered Record List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Record} backed by the internal list of
-     * {@code versionedAddressBook}
+     * {@code versionedFinancialPlanner}
      */
     @Override
     public ObservableList<Record> getFilteredRecordList() {
@@ -113,30 +113,30 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoFinancialPlanner() {
+        return versionedFinancialPlanner.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoFinancialPlanner() {
+        return versionedFinancialPlanner.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoFinancialPlanner() {
+        versionedFinancialPlanner.undo();
+        indicateFinancialPlannerChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoFinancialPlanner() {
+        versionedFinancialPlanner.redo();
+        indicateFinancialPlannerChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitFinancialPlanner() {
+        versionedFinancialPlanner.commit();
     }
 
     @Override
@@ -153,7 +153,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedFinancialPlanner.equals(other.versionedFinancialPlanner)
                 && filteredRecords.equals(other.filteredRecords);
     }
 

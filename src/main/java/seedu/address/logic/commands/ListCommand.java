@@ -13,7 +13,7 @@ import seedu.address.model.record.DateIsWithinIntervalPredicate;
 import seedu.address.model.record.Record;
 
 /**
- * Lists all records in the address book to the user.
+ * Lists all records in the financial planner to the user.
  */
 public class ListCommand extends Command {
 
