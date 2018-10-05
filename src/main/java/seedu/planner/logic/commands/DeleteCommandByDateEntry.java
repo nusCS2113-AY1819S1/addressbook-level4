@@ -1,15 +1,15 @@
-package seedu.address.logic.commands;
+package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.record.Date;
-import seedu.address.model.record.Record;
+import seedu.planner.commons.core.Messages;
+import seedu.planner.logic.CommandHistory;
+import seedu.planner.logic.commands.exceptions.CommandException;
+import seedu.planner.model.Model;
+import seedu.planner.model.record.Date;
+import seedu.planner.model.record.Record;
 
 /**
  * Delete the records whose date is required.
@@ -18,7 +18,7 @@ public class DeleteCommandByDateEntry extends Command {
     public static final String COMMAND_WORD = "delete_date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Delete the all records identified by the date number used in the displayed record list.\n"
-            + "PARAMERERS: DATE (Must follow the format dd-mm-yyyy.\n"
+            + "PARAMERERS: DATE (Must follow the format dd-mm-yyyy).\n"
             + "Example: "
             + COMMAND_WORD
             + "31-03-1999";
@@ -47,7 +47,7 @@ public class DeleteCommandByDateEntry extends Command {
         if (!targetRecordExist) {
             throw new CommandException(Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
         } else {
-            return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, targetDate));
+            return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, targetDate.value));
         }
     }
 
