@@ -43,6 +43,9 @@ public class RecordListPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in record list panel changed to : '" + newValue + "'");
                         raise(new RecordPanelSelectionChangedEvent(newValue));
+                    } else {
+                        logger.fine("Selection in record list panel unselected");
+                        raise(new RecordPanelSelectionChangedEvent(null));
                     }
                 });
     }
