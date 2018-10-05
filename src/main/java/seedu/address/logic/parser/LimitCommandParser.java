@@ -24,9 +24,9 @@ public class LimitCommandParser  implements Parser<LimitCommand> {
     @Override
     public LimitCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_DATE,PREFIX_MONEY );
+                ArgumentTokenizer.tokenize(args,  PREFIX_DATE,PREFIX_MONEY );
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE)||
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_MONEY)||
                  !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
         }

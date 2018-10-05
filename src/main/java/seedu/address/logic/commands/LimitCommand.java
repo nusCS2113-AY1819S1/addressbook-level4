@@ -17,13 +17,13 @@ public class LimitCommand extends Command {
             + "Parameters: "
             + PREFIX_DATE + "DATE_START "
             + PREFIX_DATE + "DATE_END "
-            + PREFIX_MONEYFLOW + "LIMIT_MONEY "
+            + PREFIX_MONEY + "LIMIT_MONEY "
 
             + "Example: " + COMMAND_WORD + " "
 
             + PREFIX_DATE + "18-9-2018 "
             + PREFIX_DATE + "20-9-2018 "
-            + PREFIX_MONEYFLOW + "100 ";
+            + PREFIX_MONEY + "100 ";
 
     //public static Limit limit;
     private static Limit limit;
@@ -42,7 +42,7 @@ public class LimitCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        //if (model.hasRecord(dummy)) {
+        //if (model.hasRecord(limit)) {
         if (false) {
             throw new CommandException(MESSAGE_DUPLICATE_LIMIT);
         }

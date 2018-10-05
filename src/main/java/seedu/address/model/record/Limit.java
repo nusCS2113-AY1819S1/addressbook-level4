@@ -12,13 +12,18 @@ public class Limit {
     private Date date_end;
     private Money limit_money;
     private MoneyFlow Latest;
+    public final static String LIMIT_FORMAT= "%s %s %s";
 
-  public Limit (Date date_start ,Date date_end, Money limit_money) {
+
+    public Limit (Date date_start ,Date date_end, Money limit_money) {
       requireAllNonNull(date_end, date_start, limit_money );
       this.date_start=date_start;
       this.date_end=date_end;
       this.limit_money=limit_money;
   }
+
+  @Override
+    public String toString () {return String.format("LIMIT_FORMAT",date_start,date_end,limit_money);}
 
   //public boolean isExceeded ()
   public Date getDate_start (){ return date_start;}
