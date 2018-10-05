@@ -26,7 +26,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Path STUB_SAVE_LOCATION = Paths.get("Stub");
     private static final Path RELATIVE_PATH = Paths.get(".");
 
-    private static final FinancialPlannerChangedEvent EVENT_STUB = new FinancialPlannerChangedEvent(new FinancialPlanner());
+    private static final FinancialPlannerChangedEvent EVENT_STUB =
+            new FinancialPlannerChangedEvent(new FinancialPlanner());
 
     private static final Clock originalClock = StatusBarFooter.getClock();
     private static final Clock injectedClock = Clock.fixed(Instant.now(), ZoneId.systemDefault());

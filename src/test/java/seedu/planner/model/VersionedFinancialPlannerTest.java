@@ -18,10 +18,14 @@ import seedu.planner.testutil.FinancialPlannerBuilder;
 
 public class VersionedFinancialPlannerTest {
 
-    private final ReadOnlyFinancialPlanner financialPlannerWithAmy = new FinancialPlannerBuilder().withRecord(AMY).build();
-    private final ReadOnlyFinancialPlanner financialPlannerWithBob = new FinancialPlannerBuilder().withRecord(BOB).build();
-    private final ReadOnlyFinancialPlanner financialPlannerWithIndo = new FinancialPlannerBuilder().withRecord(INDO).build();
-    private final ReadOnlyFinancialPlanner emptyFinancialPlanner = new FinancialPlannerBuilder().build();
+    private final ReadOnlyFinancialPlanner financialPlannerWithAmy =
+            new FinancialPlannerBuilder().withRecord(AMY).build();
+    private final ReadOnlyFinancialPlanner financialPlannerWithBob =
+            new FinancialPlannerBuilder().withRecord(BOB).build();
+    private final ReadOnlyFinancialPlanner financialPlannerWithIndo =
+            new FinancialPlannerBuilder().withRecord(INDO).build();
+    private final ReadOnlyFinancialPlanner emptyFinancialPlanner =
+            new FinancialPlannerBuilder().build();
 
     @Test
     public void commit_singleFinancialPlanner_noStatesRemovedCurrentStateSaved() {
@@ -209,7 +213,8 @@ public class VersionedFinancialPlannerTest {
 
     @Test
     public void equals() {
-        VersionedFinancialPlanner versionedFinancialPlanner = prepareFinancialPlannerList(financialPlannerWithAmy, financialPlannerWithBob);
+        VersionedFinancialPlanner versionedFinancialPlanner =
+                prepareFinancialPlannerList(financialPlannerWithAmy, financialPlannerWithBob);
 
         // same values -> returns true
         VersionedFinancialPlanner copy = prepareFinancialPlannerList(financialPlannerWithAmy, financialPlannerWithBob);
@@ -225,7 +230,8 @@ public class VersionedFinancialPlannerTest {
         assertFalse(versionedFinancialPlanner.equals(1));
 
         // different state list -> returns false
-        VersionedFinancialPlanner differentFinancialPlannerList = prepareFinancialPlannerList(financialPlannerWithBob, financialPlannerWithIndo);
+        VersionedFinancialPlanner differentFinancialPlannerList =
+                prepareFinancialPlannerList(financialPlannerWithBob, financialPlannerWithIndo);
         assertFalse(versionedFinancialPlanner.equals(differentFinancialPlannerList));
 
         // different current pointer index -> returns false
@@ -237,8 +243,9 @@ public class VersionedFinancialPlannerTest {
 
     /**
      * Asserts that {@code versionedFinancialPlanner} is currently pointing at {@code expectedCurrentState},
-     * states before {@code versionedFinancialPlanner#currentStatePointer} is equal to {@code expectedStatesBeforePointer},
-     * and states after {@code versionedFinancialPlanner#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * states before {@code versionedFinancialPlanner#currentStatePointer} is equal
+     * to {@code expectedStatesBeforePointer} and states after {@code versionedFinancialPlanner#currentStatePointer}
+     * is equal to {@code expectedStatesAfterPointer}.
      */
     private void assertFinancialPlannerListStatus(VersionedFinancialPlanner versionedFinancialPlanner,
                                              List<ReadOnlyFinancialPlanner> expectedStatesBeforePointer,
@@ -272,8 +279,8 @@ public class VersionedFinancialPlannerTest {
     }
 
     /**
-     * Creates and returns a {@code VersionedFinancialPlanner} with the {@code financialPlannerStates} added into it, and the
-     * {@code VersionedFinancialPlanner#currentStatePointer} at the end of list.
+     * Creates and returns a {@code VersionedFinancialPlanner} with the {@code financialPlannerStates} added into it,
+     * and the {@code VersionedFinancialPlanner#currentStatePointer} at the end of list.
      */
     private VersionedFinancialPlanner prepareFinancialPlannerList(ReadOnlyFinancialPlanner... financialPlannerStates) {
         assertFalse(financialPlannerStates.length == 0);

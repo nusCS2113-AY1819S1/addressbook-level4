@@ -143,7 +143,8 @@ public abstract class FinancialPlannerSystemTest {
      */
     protected void showAllRecords() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getFinancialPlanner().getRecordList().size(), getModel().getFilteredRecordList().size());
+        assertEquals(getModel().getFinancialPlanner().getRecordList().size(),
+                getModel().getFilteredRecordList().size());
     }
 
     /**
@@ -151,7 +152,8 @@ public abstract class FinancialPlannerSystemTest {
      */
     protected void showRecordsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredRecordList().size() < getModel().getFinancialPlanner().getRecordList().size());
+        assertTrue(getModel().getFilteredRecordList().size() <
+                getModel().getFinancialPlanner().getRecordList().size());
     }
 
     /**
@@ -277,7 +279,8 @@ public abstract class FinancialPlannerSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getRecordListPanel(), getModel().getFilteredRecordList());
-        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
+        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
+                getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());

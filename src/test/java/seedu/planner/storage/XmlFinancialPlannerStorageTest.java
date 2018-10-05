@@ -21,7 +21,8 @@ import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 
 public class XmlFinancialPlannerStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlFinancialPlannerStorageTest");
+    private static final Path TEST_DATA_FOLDER =
+            Paths.get("src", "test", "data", "XmlFinancialPlannerStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -36,7 +37,8 @@ public class XmlFinancialPlannerStorageTest {
     }
 
     private java.util.Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(String filePath) throws Exception {
-        return new XmlFinancialPlannerStorage(Paths.get(filePath)).readFinancialPlanner(addToTestDataPathIfNotNull(filePath));
+        return new XmlFinancialPlannerStorage(Paths.get(filePath))
+                .readFinancialPlanner(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -68,7 +70,8 @@ public class XmlFinancialPlannerStorageTest {
     }
 
     @Test
-    public void readFinancialPlanner_invalidAndValidRecordFinancialPlanner_throwDataConversionException() throws Exception {
+    public void readFinancialPlanner_invalidAndValidRecordFinancialPlanner_throwDataConversionException()
+            throws Exception {
         thrown.expect(DataConversionException.class);
         readFinancialPlanner("invalidAndValidRecordFinancialPlanner.xml");
     }
