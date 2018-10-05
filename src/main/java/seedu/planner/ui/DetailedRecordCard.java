@@ -1,4 +1,4 @@
-package seedu.address.ui;
+package seedu.planner.ui;
 
 import java.util.logging.Logger;
 
@@ -8,9 +8,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.RecordPanelSelectionChangedEvent;
-import seedu.address.model.record.Record;
+import seedu.planner.commons.core.LogsCenter;
+import seedu.planner.commons.events.ui.RecordPanelSelectionChangedEvent;
+import seedu.planner.model.record.Record;
 
 /**
  * This UI component is responsible for displaying detailed information for each record
