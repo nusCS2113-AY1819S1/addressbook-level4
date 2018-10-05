@@ -40,7 +40,7 @@ Responsibilities: Help out with Testing and CI for Git, making sure the test are
 '''
 
 === Nur Tristy Erna
-image::tristyxxnana.jpg[width="150", align="left"]
+image::tristyxxnana.png[width="150", align="left"]
 {empty}[https://github.com/tristyxxnana[github]] [<<tristyxxnana#, portfolio>>]
 
 Role: Documentation +

@@ -26,3 +26,4 @@ public class GradebookListCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS + "\n" + sb.toString());
     }
 }
+
