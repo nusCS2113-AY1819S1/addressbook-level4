@@ -37,7 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final Storage storage;
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-    private final UserDatabase userDatabase;
+    private final UserDatabase versionedUserDatabase;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -51,7 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
         + " and user database " + userDatabase);
 
         this.storage = storage;
-        this.userDatabase = new UserDatabase(userDatabase);
+        versionedUserDatabase = new UserDatabase(userDatabase);
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
     }
@@ -106,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook newData;
 
-        storage.update(userDatabase.getUser(username));
+        storage.update(versionedUserDatabase.getUser(username));
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -131,7 +131,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateUserDatabaseChanged() {
-        raise(new UserDatabaseChangedEvent(userDatabase));
+        raise(new UserDatabaseChangedEvent(versionedUserDatabase));
     }
 
     /** Raises an event to indicate a user has been deleted */
@@ -142,20 +142,20 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public synchronized void deleteUser(User target) throws UserNotFoundException {
-        userDatabase.removeUser(target);
+        versionedUserDatabase.removeUser(target);
         indicateUserDatabaseChanged();
         indicateUserDeleted(target);
     }
 
     @Override
     public synchronized void addUser(User person) throws DuplicateUserException {
-        userDatabase.addUser(person);
+        versionedUserDatabase.addUser(person);
         indicateUserDatabaseChanged();
     }
 
     @Override
     public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
-        boolean result = userDatabase.checkLoginCredentials(username, password);
+        boolean result = versionedUserDatabase.checkLoginCredentials(username, password);
         if (hasLoggedIn() && result) {
             reloadAddressBook(username);
         }
@@ -164,37 +164,36 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
-        boolean result = userDatabase.checkCredentials(username, password);
-        return result;
+        return versionedUserDatabase.checkCredentials(username, password);
     }
 
     @Override
     public void updateUserPassword(User target, User userWithNewPassword)
             throws UserNotFoundException {
         requireAllNonNull(target, userWithNewPassword);
-        userDatabase.updateUserPassword(target, userWithNewPassword);
+        versionedUserDatabase.updateUserPassword(target, userWithNewPassword);
         indicateUserDatabaseChanged();
     }
 
     @Override
     public User getLoggedInUser() {
-        return userDatabase.getLoggedInUser();
+        return versionedUserDatabase.getLoggedInUser();
     }
 
 
     @Override
     public boolean hasLoggedIn() {
-        return userDatabase.hasLoggedIn();
+        return versionedUserDatabase.hasLoggedIn();
     }
 
     @Override
     public void setLoginStatus(boolean status) {
-        userDatabase.setLoginStatus(status);
+        versionedUserDatabase.setLoginStatus(status);
     }
 
     @Override
     public void setUsersList(UniqueList uniqueUserList) {
-        userDatabase.setUniqueUserList(uniqueUserList);
+        versionedUserDatabase.setUniqueUserList(uniqueUserList);
     }
 
     //=========== Filtered Person List Accessors =============================================================

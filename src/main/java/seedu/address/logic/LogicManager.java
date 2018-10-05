@@ -34,7 +34,16 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             Command command = addressBookParser.parseCommand(commandText);
-            return command.execute(model, history);
+            command.setData(model, history);
+            CommandResult result;
+            if (model.hasLoggedIn()) {
+                result = command.execute(model, history);
+            } else {
+                logger.info("User attempts to use a command without logging in first.");
+                result = executeNoLoginCommands(commandText, command);
+                history.clear();
+            }
+            return result;
         } finally {
             history.add(commandText);
         }

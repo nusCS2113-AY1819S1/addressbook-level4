@@ -75,8 +75,8 @@ public class AddressBookParser {
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
 
-        //case LogoutCommand.COMMAND_WORD:
-        //    return new LogoutCommand();
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
 
         case CreateUserCommand.COMMAND_WORD:
             return new CreateUserCommandParser().parse(arguments);

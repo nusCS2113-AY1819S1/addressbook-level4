@@ -27,6 +27,10 @@ public class CommandHistory {
         userInputHistory.add(userInput);
     }
 
+    public void clear() {
+        userInputHistory.clear();
+    }
+
     /**
      * Returns a defensive copy of {@code userInputHistory}.
      */
