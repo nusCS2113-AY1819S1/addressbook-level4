@@ -1,5 +1,7 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -7,7 +9,6 @@ import seedu.address.model.joboffer.JobOffer;
 import seedu.address.model.joboffer.UniqueJobList;
 
 
-import static java.util.Objects.requireNonNull;
 
 /**
  * Wraps all data at the JobBook level
