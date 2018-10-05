@@ -27,7 +27,7 @@ public class RecordBuilder {
     public RecordBuilder() {
         name = new Name(DEFAULT_NAME);
         date = new Date(DEFAULT_DATE);
-        moneyFlow = new Income(DEFAULT_MONEYFLOW);
+        moneyFlow = new MoneyFlow(DEFAULT_MONEYFLOW);
         tags = new HashSet<>();
     }
 

@@ -34,22 +34,6 @@ public class MoneyFlowTest {
         assertTrue(MoneyFlow.isValidMoneyFlow("-123.0011")); // moneyflow with decimal places greater than 2
     }
 
-    // TODO: Should i repeat the previous tests???
-    @Test
-    public void isValidIncome() {
-        // Invalid
-        assertFalse(Income.isValidIncome("-1.50")); // income cannot start with '-'
+    // TODO: Check whether the data has been parsed correctly
 
-        // Valid
-        assertTrue(Income.isValidIncome("+1.50")); // valid income
-    }
-
-    @Test
-    public void isValidExpense() {
-        // Invalid
-        assertFalse(Expense.isValidExpense("+1.50")); // expense cannot start with '+'
-
-        // Valid
-        assertTrue(Expense.isValidExpense("-1.50")); // valid expense
-    }
 }
