@@ -39,7 +39,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_LAB2 = " " + PREFIX_TAG + VALID_TAG_LAB2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Arduino&"; // '&' not allowed in names
-    public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "20a"; // 'a' not allowed in qty
+    public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "-1"; // '-' not allowed in qty; cannot be negative
     public static final String INVALID_MIN_QUANTITY_DESC = " " + PREFIX_MIN_QUANTITY + "5!"; // '!' not allowed in min qty
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "Lab1*"; // '*' not allowed in tags
 

@@ -68,12 +68,11 @@ public class EditItemDescriptorBuilder {
      * Sets the {@code Status} of the {@code EditPersonDescriptor} that we are building.
      */
 
-    /*
-    public EditItemDescriptorBuilder withStatus(String status) {
-        descriptor.setStatus(new List<Integer>(status));
+
+    public EditItemDescriptorBuilder withStatus(List<Integer> status) {
+        descriptor.setStatus(status);
         return this;
     }
-    */
 
 
     /**
