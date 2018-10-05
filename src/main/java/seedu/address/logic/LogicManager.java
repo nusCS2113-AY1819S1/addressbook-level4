@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -30,7 +32,8 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult execute(String commandText) throws CommandException, ParseException {
+    public CommandResult execute(String commandText)
+            throws CommandException, ParseException, IOException, GeneralSecurityException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             Command command = recruitBookParser.parseCommand(commandText);
