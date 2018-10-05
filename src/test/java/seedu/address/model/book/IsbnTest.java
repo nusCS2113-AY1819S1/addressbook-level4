@@ -23,19 +23,19 @@ public class IsbnTest {
     @Test
     public void isValidPhone() {
         // null phone number
-        Assert.assertThrows(NullPointerException.class, () -> Isbn.isValidPhone(null));
+        Assert.assertThrows(NullPointerException.class, () -> Isbn.isValidIsbn(null));
 
         // invalid phone numbers
-        assertFalse(Isbn.isValidPhone("")); // empty string
-        assertFalse(Isbn.isValidPhone(" ")); // spaces only
-        assertFalse(Isbn.isValidPhone("91")); // less than 3 numbers
-        assertFalse(Isbn.isValidPhone("phone")); // non-numeric
-        assertFalse(Isbn.isValidPhone("9011p041")); // alphabets within digits
-        assertFalse(Isbn.isValidPhone("9312 1534")); // spaces within digits
+        assertFalse(Isbn.isValidIsbn("")); // empty string
+        assertFalse(Isbn.isValidIsbn(" ")); // spaces only
+        assertFalse(Isbn.isValidIsbn("91")); // less than 3 numbers
+        assertFalse(Isbn.isValidIsbn("phone")); // non-numeric
+        assertFalse(Isbn.isValidIsbn("9011p041")); // alphabets within digits
+        assertFalse(Isbn.isValidIsbn("9312 1534")); // spaces within digits
 
         // valid phone numbers
-        assertTrue(Isbn.isValidPhone("911")); // exactly 3 numbers
-        assertTrue(Isbn.isValidPhone("93121534"));
-        assertTrue(Isbn.isValidPhone("124293842033123")); // long phone numbers
+        assertTrue(Isbn.isValidIsbn("911")); // exactly 3 numbers
+        assertTrue(Isbn.isValidIsbn("93121534"));
+        assertTrue(Isbn.isValidIsbn("124293842033123")); // long phone numbers
     }
 }

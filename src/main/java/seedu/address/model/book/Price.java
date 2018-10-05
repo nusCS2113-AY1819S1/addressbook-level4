@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Book's email in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
  */
 public class Price {
 
@@ -20,18 +20,18 @@ public class Price {
     /**
      * Constructs an {@code Price}.
      *
-     * @param email A valid email address.
+     * @param price A valid price.
      */
-    public Price(String email) {
-        requireNonNull(email);
-        checkArgument(isValidPhone(email), MESSAGE_PRICE_CONSTRAINTS);
-        value = email;
+    public Price(String price) {
+        requireNonNull(price);
+        checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
+        value = price;
     }
 
     /**
      * Returns if a given string is a valid email.
      */
-    public static boolean isValidPhone(String test) {
+    public static boolean isValidPrice(String test) {
         return test.matches(PRICE_VALIDATION_REGEX);
     }
 

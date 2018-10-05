@@ -59,8 +59,8 @@ public class ParserUtil {
     public static Isbn parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
-        if (!Isbn.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Isbn.MESSAGE_PHONE_CONSTRAINTS);
+        if (!Isbn.isValidIsbn(trimmedPhone)) {
+            throw new ParseException(Isbn.MESSAGE_ISBN_CONSTRAINTS);
         }
         return new Isbn(trimmedPhone);
     }
@@ -89,7 +89,7 @@ public class ParserUtil {
     public static Price parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Price.isValidPhone(trimmedEmail)) {
+        if (!Price.isValidPrice(trimmedEmail)) {
             throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
         return new Price(trimmedEmail);

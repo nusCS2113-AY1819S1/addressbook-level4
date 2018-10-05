@@ -22,16 +22,16 @@ public class Quantity {
     /**
      * Constructs an {@code Quantity}.
      *
-     * @param address A valid address.
+     * @param quantity A valid quantity.
      */
-    public Quantity(String address) {
-        requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_ADDRESS_CONSTRAINTS);
-        value = address;
+    public Quantity(String quantity) {
+        requireNonNull(quantity);
+        checkArgument(isValidAddress(quantity), MESSAGE_ADDRESS_CONSTRAINTS);
+        value = quantity;
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid quantity.
      */
     public static boolean isValidAddress(String test) {
         return test.matches(QUANTITY_VALIDATION_REGEX);
