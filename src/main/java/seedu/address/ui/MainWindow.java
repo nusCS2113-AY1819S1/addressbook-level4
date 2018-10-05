@@ -126,6 +126,10 @@ public class MainWindow extends UiPart<Stage> {
         return isLoginSuccessful;
     }
 
+    public static void setIsSensitiveInformation(boolean setSensitiveInformation) {
+        isSensitiveInformation = setSensitiveInformation;
+    }
+
     public static void setIsLoginSuccessful(boolean setLoginSuccessful) {
         isLoginSuccessful = setLoginSuccessful;
     }
