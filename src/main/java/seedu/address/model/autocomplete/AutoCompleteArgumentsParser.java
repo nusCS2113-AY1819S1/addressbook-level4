@@ -1,6 +1,10 @@
 //@@author lekoook
 package seedu.address.model.autocomplete;
 
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Prefix;
+
 import static seedu.address.logic.parser.CliSyntax.COMMAND_DELETE;
 import static seedu.address.logic.parser.CliSyntax.COMMAND_FIND;
 import static seedu.address.logic.parser.CliSyntax.COMMAND_IMPORT;
@@ -14,10 +18,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INVALID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Prefix;
 
 /**
  * Parses the arguments of a command text input for auto completing the command
@@ -36,17 +36,17 @@ public class AutoCompleteArgumentsParser {
 
         // TODO: Add or remove command support as necessary
         switch(command) {
-            case COMMAND_FIND:
-                return getFindParserPair(arguments, argMultimap);
-            case COMMAND_LIST:
-                return getListParserPair(arguments, argMultimap);
-            case COMMAND_SELECT:
-            case COMMAND_DELETE:
-            case COMMAND_IMPORT:
-            case COMMAND_MAIL:
-                return getMailParserPair(arguments, argMultimap);
-            default:
-                return new AutoCompleteParserPair(PREFIX_INVALID, arguments.trim());
+        case COMMAND_FIND:
+            return getFindParserPair(arguments, argMultimap);
+        case COMMAND_LIST:
+            return getListParserPair(arguments, argMultimap);
+        case COMMAND_SELECT:
+        case COMMAND_DELETE:
+        case COMMAND_IMPORT:
+        case COMMAND_MAIL:
+            return getMailParserPair(arguments, argMultimap);
+        default:
+            return new AutoCompleteParserPair(PREFIX_INVALID, arguments.trim());
         }
     }
 
