@@ -90,9 +90,7 @@ public class Item {
         }
 
         return otherItem != null
-                && otherItem.getName().equals((getName()))
-                && (otherItem.getQuantity().equals(getQuantity()) || otherItem.getMinQuantity().equals(getMinQuantity())
-                || otherItem.getStatus().equals((getStatus())));
+                && (otherItem.getName().fullName.toLowerCase()).equals(getName().fullName.toLowerCase());
     }
 
     /**
@@ -110,11 +108,7 @@ public class Item {
         }
 
         Item otherItem = (Item) other;
-        return otherItem.getName().equals(getName())
-                && otherItem.getQuantity().equals(getQuantity())
-                && otherItem.getMinQuantity().equals(getMinQuantity())
-                && otherItem.getStatus().equals(getStatus())
-                && otherItem.getTags().equals(getTags());
+        return (otherItem.getName().fullName.toLowerCase()).equals(getName().fullName.toLowerCase());
     }
 
     @Override
