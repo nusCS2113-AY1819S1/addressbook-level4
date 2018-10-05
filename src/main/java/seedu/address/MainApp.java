@@ -26,7 +26,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyCandidateBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CandidateBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -62,8 +62,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlCandidateBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CandidateBookStorage candidateBookStorage = new XmlCandidateBookStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(candidateBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -85,7 +85,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyCandidateBook> addressBookOptional;
         ReadOnlyCandidateBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readCandidateBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample CandidateBook");
             }

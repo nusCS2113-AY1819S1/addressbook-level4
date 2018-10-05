@@ -9,7 +9,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.CandidateBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyCandidateBook;
@@ -21,13 +21,13 @@ import seedu.address.model.UserPrefs;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private CandidateBookStorage candidateBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(CandidateBookStorage candidateBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.candidateBookStorage = candidateBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -52,39 +52,40 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ CandidateBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+    public Path getCandidateBookFilePath() {
+        return candidateBookStorage.getCandidateBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyCandidateBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyCandidateBook> readCandidateBook() throws DataConversionException, IOException {
+        return readCandidateBook(candidateBookStorage.getCandidateBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyCandidateBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyCandidateBook> readCandidateBook(Path filePath)
+            throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return candidateBookStorage.readCandidateBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyCandidateBook addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+    public void saveCandidateBook(ReadOnlyCandidateBook addressBook) throws IOException {
+        saveCandidateBook(addressBook, candidateBookStorage.getCandidateBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyCandidateBook addressBook, Path filePath) throws IOException {
+    public void saveCandidateBook(ReadOnlyCandidateBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        candidateBookStorage.saveCandidateBook(addressBook, filePath);
     }
 
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+    public void handleCandidateBookChangedEvent(CandidateBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveCandidateBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

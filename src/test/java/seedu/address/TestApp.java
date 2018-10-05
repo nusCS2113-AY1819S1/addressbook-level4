@@ -73,7 +73,7 @@ public class TestApp extends MainApp {
      */
     public CandidateBook readStorageAddressBook() {
         try {
-            return new CandidateBook(storage.readAddressBook().get());
+            return new CandidateBook(storage.readCandidateBook().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the CandidateBook format.", dce);
         } catch (IOException ioe) {
@@ -85,7 +85,7 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getCandidateBookFilePath();
     }
 
     /**
