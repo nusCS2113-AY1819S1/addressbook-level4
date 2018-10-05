@@ -42,7 +42,8 @@ public interface Model {
     /**
      * Replaces the given record {@code target} with {@code editedRecord}.
      * {@code target} must exist in the financial planner.
-     * The record identity of {@code editedRecord} must not be the same as another existing record in the financial planner.
+     * The record identity of {@code editedRecord}
+     * must not be the same as another existing record in the financial planner.
      */
     void updateRecord(Record target, Record editedRecord);
 

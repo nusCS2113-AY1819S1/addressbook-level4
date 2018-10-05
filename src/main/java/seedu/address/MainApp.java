@@ -62,7 +62,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        FinancialPlannerStorage financialPlannerStorage = new XmlFinancialPlannerStorage(userPrefs.getFinancialPlannerFilePath());
+        FinancialPlannerStorage financialPlannerStorage =
+                new XmlFinancialPlannerStorage(userPrefs.getFinancialPlannerFilePath());
         storage = new StorageManager(financialPlannerStorage, userPrefsStorage);
 
         initLogging(config);
@@ -78,8 +79,10 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s financial planner and {@code userPrefs}. <br>
-     * The data from the sample financial planner will be used instead if {@code storage}'s financial planner is not found,
-     * or an empty financial planner will be used instead if errors occur when reading {@code storage}'s financial planner.
+     * The data from the sample financial planner will be used instead
+     * if {@code storage}'s financial planner is not found,
+     * or an empty financial planner will be used instead if errors occur
+     * when reading {@code storage}'s financial planner.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyFinancialPlanner> financialPlannerOptional;

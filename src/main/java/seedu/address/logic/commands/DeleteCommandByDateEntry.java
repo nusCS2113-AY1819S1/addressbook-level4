@@ -11,17 +11,6 @@ import seedu.address.model.Model;
 import seedu.address.model.record.Date;
 import seedu.address.model.record.Record;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-
-public class DeleteCommandByDateEntry extends Command{
-    public static final String COMMAND_WORD = "delete_date";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD +
-            ": Delete the all records identified by the date number used in the displayed record list.\n"  +
-            "PARAMERERS: DATE (Must follow the format dd/mm/yyyy.\n" +
-            "Example: " + COMMAND_WORD + "31/03/1999";
 /**
  * Delete the records whose date is required.
  */
@@ -51,7 +40,7 @@ public class DeleteCommandByDateEntry extends Command {
             Date date = targetRecord.getDate();
             if (date == targetDate) {
                 model.deleteRecord(targetRecord);
-                model.commitAddressBook();
+                model.commitFinancialPlanner();
                 targetRecordExist = true;
             }
         }

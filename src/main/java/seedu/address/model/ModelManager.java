@@ -72,9 +72,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteListRecord(List<Record> targetList) {
         for (Record target : targetList) {
-            versionedAddressBook.removeRecord(target);
+            versionedFinancialPlanner.removeRecord(target);
         }
-        indicateAddressBookChanged();
+        indicateFinancialPlannerChanged();
     }
 
     @Override

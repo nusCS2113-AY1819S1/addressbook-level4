@@ -19,7 +19,8 @@ public class RecordCard extends UiPart<Region> {
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
      *
-     * @see <a href="https://github.com/se-edu/financialplanner-level4/issues/336">The issue on FinancialPlanner level 4</a>
+     * @see <a href="https://github.com/se-edu/financialplanner-level4/issues/336">
+     *     The issue on FinancialPlanner level 4</a>
      */
 
     public final Record record;

@@ -8,7 +8,6 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.record.exceptions.DuplicateRecordException;
 import seedu.address.model.record.exceptions.RecordNotFoundException;
 
