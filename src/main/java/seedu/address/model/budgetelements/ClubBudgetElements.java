@@ -35,11 +35,11 @@ public class ClubBudgetElements {
         return clubname;
     }
 
-    public ExpectedTurnout getExpectedturnout() {
+    public ExpectedTurnout getExpectedTurnout() {
         return expectedturnout;
     }
 
-    public NumberOfEvents getNumberofevents() {
+    public NumberOfEvents getNumberOfEvents() {
         return numberofevents;
     }
 
@@ -98,9 +98,9 @@ public class ClubBudgetElements {
         final StringBuilder builder = new StringBuilder();
         builder.append(getClubName())
                 .append(" Expected Turnout: ")
-                .append(getExpectedturnout())
+                .append(getExpectedTurnout())
                 .append(" Number of Events: ")
-                .append(getNumberofevents());
+                .append(getNumberOfEvents());
         return builder.toString();
     }
 
