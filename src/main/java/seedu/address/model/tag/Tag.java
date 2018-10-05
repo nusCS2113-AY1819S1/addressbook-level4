@@ -68,6 +68,6 @@ public class Tag {
         if (!(priority == PRIORITY_LOW)) {
             fullTag += " " + priority;
         }
-        return '[' + fullTag + ']';
+        return fullTag;
     }
 }

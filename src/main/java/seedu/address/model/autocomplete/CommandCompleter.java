@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.trie.Trie;
 
 /**
@@ -14,17 +15,14 @@ import seedu.address.model.trie.Trie;
  */
 public class CommandCompleter {
 
-    /** Constants for Trie matching */
-    public static final String COMPLETE_ADDRESS = "address";
-    public static final String COMPLETE_COMMAND = "command";
-    public static final String COMPLETE_EMAIL = "email";
-    public static final String COMPLETE_NAME = "name";
-    public static final String COMPLETE_PHONE = "phone";
-    public static final String COMPLETE_INVALID = "invalid";
-
-    /** Model instance to access data */
+    /**
+     * Model instance to access data.
+     */
     private Model model;
 
+    /**
+     * Text prediction parser to parse user input.
+     */
     private AutoCompleteParser parser;
 
     /**
@@ -35,6 +33,7 @@ public class CommandCompleter {
     private Trie phoneTrie;
     private Trie emailTrie;
     private Trie addressTrie;
+    private Trie tagTrie;
 
     /**
      * Word lists of strings used to instantiate Trie objects.
@@ -44,6 +43,7 @@ public class CommandCompleter {
     private ArrayList<String> phoneList;
     private ArrayList<String> emailList;
     private ArrayList<String> addressList;
+    private ArrayList<String> tagList;
 
     /**
      * Creates a command completer with the {@code model} data.
@@ -57,6 +57,7 @@ public class CommandCompleter {
         this.phoneList = new ArrayList<>();
         this.emailList = new ArrayList<>();
         this.addressList = new ArrayList<>();
+        this.tagList = new ArrayList<>();
         initLists();
         initTries();
     }
@@ -87,18 +88,27 @@ public class CommandCompleter {
         commandList.add(CliSyntax.COMMAND_UNDO);
         commandList.add(CliSyntax.COMMAND_PASSWORD);
         commandList.add(CliSyntax.COMMAND_MAIL);
+        commandList.add(CliSyntax.COMMAND_BACKUP);
+        commandList.add(CliSyntax.COMMAND_RESTORE);
+        commandList.add(CliSyntax.COMMAND_IMPORT);
+        commandList.add(CliSyntax.COMMAND_EXPORT);
     }
 
     /**
      * Initialises attributes words lists with attribute value in each {@code Person}.
      */
     private void initAttributesLists() {
+        // TODO: prevent duplicates from being added to lists
         ObservableList<Person> list = model.getAddressBook().getPersonList();
         for (Person item : list) {
             nameList.add(item.getName().fullName);
             phoneList.add(item.getPhone().value);
             emailList.add(item.getEmail().value);
             addressList.add(item.getAddress().value);
+            // TODO: find a better way to do this
+            for (Tag tag : item.getTags()) {
+                tagList.add(tag.toString());
+            }
         }
     }
 
@@ -111,6 +121,7 @@ public class CommandCompleter {
         phoneTrie = new Trie(phoneList);
         emailTrie = new Trie(emailList);
         addressTrie = new Trie(addressList);
+        tagTrie = new Trie(tagList);
     }
 
     /**
@@ -120,11 +131,20 @@ public class CommandCompleter {
      */
     public ArrayList<String> predictText(String textInput) {
         AutoCompleteParserPair pair = parser.parseCommand(textInput);
-        switch (pair.parseType) {
-        case COMPLETE_COMMAND:
-            return commandTrie.getPredictList(pair.parseValue);
-        case COMPLETE_NAME:
-            return nameTrie.getPredictList(pair.parseValue);
+        PredictionType predictionType = getPredictionType(pair);
+        switch (predictionType) {
+        case PREDICT_COMMAND:
+            return commandTrie.getPredictList(pair.prefixValue);
+        case PREDICT_NAME:
+            return nameTrie.getPredictList(pair.prefixValue);
+        case PREDICT_ADDRESS:
+            return addressTrie.getPredictList(pair.prefixValue);
+        case PREDICT_PHONE:
+            return phoneTrie.getPredictList(pair.prefixValue);
+        case PREDICT_EMAIL:
+            return emailTrie.getPredictList(pair.prefixValue);
+        case PREDICT_TAG:
+            return tagTrie.getPredictList(pair.prefixValue);
         default:
             return new ArrayList<>();
         }
@@ -139,6 +159,10 @@ public class CommandCompleter {
         phoneTrie.insert(person.getPhone().value);
         emailTrie.insert(person.getEmail().value);
         addressTrie.insert(person.getAddress().value);
+        // TODO: find a better way to do this
+        for (Tag tag : person.getTags()) {
+            tagTrie.insert(tag.toString());
+        }
     }
 
     /**
@@ -150,6 +174,7 @@ public class CommandCompleter {
         phoneTrie.remove(person.getPhone().value);
         emailTrie.remove(person.getEmail().value);
         addressTrie.remove(person.getAddress().value);
+        // TODO: find a way to delete single occurrence tags
     }
 
     /**
@@ -160,6 +185,7 @@ public class CommandCompleter {
         phoneTrie.clear();
         emailTrie.clear();
         addressTrie.clear();
+        tagTrie.clear();
     }
 
     /**
@@ -185,5 +211,44 @@ public class CommandCompleter {
             addressTrie.remove(personToEdit.getAddress().value);
             addressTrie.insert(editedPerson.getAddress().value);
         }
+        if (!personToEdit.getTags().equals(editedPerson.getTags())) {
+            // TODO: find a way to edit the tags data structure
+        }
+    }
+
+    /**
+     * Determines the type of prefix to predict it's arguments.
+     * @param pair containing the prefix.
+     * @return the type of prefix.
+     */
+    private PredictionType getPredictionType(AutoCompleteParserPair pair) {
+        if (pair.predictionType.equals(CliSyntax.PREFIX_TAG)) {
+            return PredictionType.PREDICT_TAG;
+        } else if (pair.predictionType.equals(CliSyntax.PREFIX_EMAIL)) {
+            return PredictionType.PREDICT_EMAIL;
+        } else if (pair.predictionType.equals(CliSyntax.PREFIX_ADDRESS)) {
+            return PredictionType.PREDICT_ADDRESS;
+        } else if (pair.predictionType.equals(CliSyntax.PREFIX_PHONE)) {
+            return PredictionType.PREDICT_PHONE;
+        } else if (pair.predictionType.equals(CliSyntax.PREFIX_NAME)) {
+            return PredictionType.PREDICT_NAME;
+        } else if (pair.predictionType.equals(CliSyntax.PREFIX_COMMAND)) {
+            return PredictionType.PREDICT_COMMAND;
+        } else {
+            return PredictionType.PREDICT_INVALID;
+        }
+    }
+
+    /**
+     * Used to determine which Trie data structure to text predict from.
+     */
+    private enum PredictionType {
+        PREDICT_ADDRESS,
+        PREDICT_EMAIL,
+        PREDICT_NAME ,
+        PREDICT_PHONE,
+        PREDICT_TAG,
+        PREDICT_COMMAND,
+        PREDICT_INVALID
     }
 }

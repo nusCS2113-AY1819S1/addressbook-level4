@@ -1,15 +1,17 @@
 //@@author lekoook
 package seedu.address.model.autocomplete;
 
+import seedu.address.logic.parser.Prefix;
+
 /**
  * Pair object used in parsing of commands for auto complete functionality
  */
 public class AutoCompleteParserPair {
-    public final String parseType;
-    public final String parseValue;
+    public final Prefix predictionType;
+    public final String prefixValue;
 
-    public AutoCompleteParserPair(String parseType, String parseValue) {
-        this.parseType = parseType;
-        this.parseValue = parseValue;
+    public AutoCompleteParserPair(Prefix predictionType, String prefixValue) {
+        this.predictionType = predictionType;
+        this.prefixValue = prefixValue;
     }
 }
