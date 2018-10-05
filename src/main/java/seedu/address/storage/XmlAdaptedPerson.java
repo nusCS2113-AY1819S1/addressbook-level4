@@ -119,8 +119,8 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         if (department == null) {
-            throw new IllegalValueException
-            (String.format(MISSING_FIELD_MESSAGE_FORMAT, Department.class.getSimpleName()));
+            throw new IllegalValueException(
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, Department.class.getSimpleName()));
         }
         if (!Department.isValidDepartment(department)) {
             throw new IllegalValueException(Department.MESSAGE_DEPARTMENT_CONSTRAINTS);
