@@ -8,6 +8,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
+import seedu.address.model.user.User;
 
 /**
  * Logs user into the Event Manager Application
@@ -24,14 +25,14 @@ public class LoginCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Logged in successfully!";
     public static final String MESSAGE_FAILURE = "Incorrect account credentials!";
 
-    private final Event toLogin;
+    private final User toLogin;
 
     /**
      * Creates an LoginCommand to add the specified {@code Event}
      */
-    public LoginCommand(Event event) {
-        requireNonNull(event);
-        toLogin = event;
+    public LoginCommand(User user) {
+        requireNonNull(user);
+        toLogin = user;
     }
 
     @Override
