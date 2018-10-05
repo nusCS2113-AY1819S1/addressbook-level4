@@ -26,7 +26,7 @@ public class CreateCommand extends Command {
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_LOCATION + "LOCATION "
             + PREFIX_START_DATE + "START DATE "
-            + PREFIX_END_DATE + "END DATE "
+            + PREFIX_END_DATE + "END DATE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "CS2113 Project Meeting "
             + PREFIX_DESCRIPTION + "Weekly Meetup "
