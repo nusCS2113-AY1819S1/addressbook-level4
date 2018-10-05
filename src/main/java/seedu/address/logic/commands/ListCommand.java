@@ -33,8 +33,8 @@ public class ListCommand extends Command {
     /**
      * Messages to be displayed
      */
-    public static final String MESSAGE_SUCCESS_SINGULAR = "List: %d person.";
-    public static final String MESSAGE_SUCCESS = "List: %d persons.";
+    public static final String MESSAGE_SUCCESS_SINGULAR = "%d person listed!";
+    public static final String MESSAGE_SUCCESS = "%d persons listed!";
 
     /**
      * Instance variables
