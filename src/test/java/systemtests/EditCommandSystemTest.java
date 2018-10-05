@@ -3,46 +3,46 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DATE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MONEYFLOW_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.MONEYFLOW_EXPENSE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.MONEYFLOW_INCOME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MONEYFLOW_INCOME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECORDS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RECORD;
-import static seedu.address.testutil.TypicalRecords.AMY;
-import static seedu.address.testutil.TypicalRecords.BOB;
-import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+import static seedu.planner.logic.commands.CommandTestUtil.DATE_DESC_AMY;
+import static seedu.planner.logic.commands.CommandTestUtil.DATE_DESC_BOB;
+import static seedu.planner.logic.commands.CommandTestUtil.INVALID_DATE_DESC;
+import static seedu.planner.logic.commands.CommandTestUtil.INVALID_MONEYFLOW_DESC;
+import static seedu.planner.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.planner.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.planner.logic.commands.CommandTestUtil.MONEYFLOW_EXPENSE_DESC_BOB;
+import static seedu.planner.logic.commands.CommandTestUtil.MONEYFLOW_INCOME_DESC_AMY;
+import static seedu.planner.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.planner.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.planner.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.planner.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.planner.logic.commands.CommandTestUtil.VALID_DATE_AMY;
+import static seedu.planner.logic.commands.CommandTestUtil.VALID_MONEYFLOW_INCOME_AMY;
+import static seedu.planner.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.planner.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.planner.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.planner.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
+import static seedu.planner.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
+import static seedu.planner.testutil.TypicalIndexes.INDEX_SECOND_RECORD;
+import static seedu.planner.testutil.TypicalRecords.AMY;
+import static seedu.planner.testutil.TypicalRecords.BOB;
+import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.record.Date;
-import seedu.address.model.record.Income;
-import seedu.address.model.record.Name;
-import seedu.address.model.record.Record;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.RecordBuilder;
-import seedu.address.testutil.RecordUtil;
+import seedu.planner.commons.core.Messages;
+import seedu.planner.commons.core.index.Index;
+import seedu.planner.logic.commands.EditCommand;
+import seedu.planner.logic.commands.RedoCommand;
+import seedu.planner.logic.commands.UndoCommand;
+import seedu.planner.model.Model;
+import seedu.planner.model.record.Date;
+import seedu.planner.model.record.MoneyFlow;
+import seedu.planner.model.record.Name;
+import seedu.planner.model.record.Record;
+import seedu.planner.model.tag.Tag;
+import seedu.planner.testutil.RecordBuilder;
+import seedu.planner.testutil.RecordUtil;
 
 public class EditCommandSystemTest extends FinancialPlannerSystemTest {
 
@@ -106,7 +106,7 @@ public class EditCommandSystemTest extends FinancialPlannerSystemTest {
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
-        /* Case: filtered record list, edit index within bounds of address book and record list -> edited */
+        /* Case: filtered record list, edit index within bounds of planner book and record list -> edited */
         showRecordsWithName(KEYWORD_MATCHING_BURSARY);
         index = INDEX_FIRST_RECORD;
         assertTrue(index.getZeroBased() < getModel().getFilteredRecordList().size());
@@ -115,7 +115,7 @@ public class EditCommandSystemTest extends FinancialPlannerSystemTest {
         editedRecord = new RecordBuilder(recordToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedRecord);
 
-        /* Case: filtered record list, edit index within bounds of address book but out of bounds of record list
+        /* Case: filtered record list, edit index within bounds of planner book but out of bounds of record list
          * -> rejected
          */
         showRecordsWithName(KEYWORD_MATCHING_BURSARY);
@@ -170,7 +170,7 @@ public class EditCommandSystemTest extends FinancialPlannerSystemTest {
 
         /* Case: invalid money flow -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased()
-                + INVALID_MONEYFLOW_DESC, Income.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+                + INVALID_MONEYFLOW_DESC, MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased()

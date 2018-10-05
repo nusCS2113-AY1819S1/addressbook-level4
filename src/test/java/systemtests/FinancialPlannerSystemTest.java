@@ -4,11 +4,11 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.planner.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.planner.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static seedu.planner.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.planner.ui.UiPart.FXML_FILE_FOLDER;
+import static seedu.planner.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -30,19 +30,19 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.RecordListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.MainApp;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.FinancialPlanner;
-import seedu.address.model.Model;
-import seedu.address.testutil.TypicalRecords;
-import seedu.address.ui.BrowserPanel;
-import seedu.address.ui.CommandBox;
+import seedu.planner.MainApp;
+import seedu.planner.TestApp;
+import seedu.planner.commons.core.EventsCenter;
+import seedu.planner.commons.core.index.Index;
+import seedu.planner.logic.commands.ClearCommand;
+import seedu.planner.logic.commands.FindCommand;
+import seedu.planner.logic.commands.ListCommand;
+import seedu.planner.logic.commands.SelectCommand;
+import seedu.planner.model.FinancialPlanner;
+import seedu.planner.model.Model;
+import seedu.planner.testutil.TypicalRecords;
+import seedu.planner.ui.BrowserPanel;
+import seedu.planner.ui.CommandBox;
 
 /**
  * A system test class for FinancialPlanner, which provides access to handles of GUI components and helper methods
@@ -139,11 +139,12 @@ public abstract class FinancialPlannerSystemTest {
     }
 
     /**
-     * Displays all records in the address book.
+     * Displays all records in the planner book.
      */
     protected void showAllRecords() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getFinancialPlanner().getRecordList().size(), getModel().getFilteredRecordList().size());
+        assertEquals(getModel().getFinancialPlanner().getRecordList().size(),
+                getModel().getFilteredRecordList().size());
     }
 
     /**
@@ -151,7 +152,8 @@ public abstract class FinancialPlannerSystemTest {
      */
     protected void showRecordsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredRecordList().size() < getModel().getFinancialPlanner().getRecordList().size());
+        assertTrue(getModel().getFilteredRecordList().size() < getModel()
+                .getFinancialPlanner().getRecordList().size());
     }
 
     /**
@@ -163,7 +165,7 @@ public abstract class FinancialPlannerSystemTest {
     }
 
     /**
-     * Deletes all records in the address book.
+     * Deletes all records in the planner book.
      */
     protected void deleteAllRecords() {
         executeCommand(ClearCommand.COMMAND_WORD);
@@ -277,7 +279,8 @@ public abstract class FinancialPlannerSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getRecordListPanel(), getModel().getFilteredRecordList());
-        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
+        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
+                getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
