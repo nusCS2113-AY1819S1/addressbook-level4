@@ -6,6 +6,7 @@ import java.util.Set;
 
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
+import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -15,19 +16,19 @@ import seedu.address.model.util.SampleDataUtil;
 public class ItemBuilder {
 
     public static final String DEFAULT_NAME = "Arduino";
-    public static final Integer DEFAULT_QUANTITY = 20;
-    public static final Integer DEFAULT_MIN_QUANTITY = 5;
+    public static final String DEFAULT_QUANTITY = "20";
+    public static final String DEFAULT_MIN_QUANTITY = "5";
 
     private Name name;
-    private Integer quantity;
-    private Integer minQuantity;
+    private Quantity quantity;
+    private Quantity minQuantity;
     private List<Integer> status;
     private Set<Tag> tags;
 
     public ItemBuilder() {
         name = new Name(DEFAULT_NAME);
-        quantity = DEFAULT_QUANTITY;
-        minQuantity = DEFAULT_MIN_QUANTITY;
+        quantity = new Quantity(DEFAULT_QUANTITY);
+        minQuantity = new Quantity(DEFAULT_MIN_QUANTITY);
         tags = new HashSet<>();
     }
 
@@ -59,18 +60,18 @@ public class ItemBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Item} that we are building.
+     * Sets the {@code Quantity} of the {@code Item} that we are building.
      */
-    public ItemBuilder withQuantity(Integer quantity) {
-        this.quantity = quantity;
+    public ItemBuilder withQuantity(String quantity) {
+        this.quantity = new Quantity(quantity);
         return this;
     }
 
     /**
      * Sets the {@code Phone} of the {@code Item} that we are building.
      */
-    public ItemBuilder withMinQuantity(Integer minQuantity) {
-        this.minQuantity = minQuantity;
+    public ItemBuilder withMinQuantity(String minQuantity) {
+        this.minQuantity = new Quantity(minQuantity);
         return this;
     }
 

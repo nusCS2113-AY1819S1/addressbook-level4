@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_QUANTITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.List;
 import java.util.Set;
+
+import org.controlsfx.control.PrefixSelectionChoiceBox;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
@@ -31,9 +34,11 @@ public class ItemUtil {
     public static String getItemDetails(Item item) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + item.getName().fullName + " ");
-        sb.append(PREFIX_QUANTITY + String.valueOf(item.getQuantity()) + " ");
-        sb.append(PREFIX_MIN_QUANTITY + String.valueOf(item.getMinQuantity()) + " ");
-        sb.append(PREFIX_STATUS + String.valueOf(item.getStatus()) + " ");
+        sb.append(PREFIX_QUANTITY + item.getQuantity().toString() + " ");
+        sb.append(PREFIX_MIN_QUANTITY + item.getMinQuantity().toString() + " ");
+        item.getStatus().stream().forEach(
+                s -> sb.append(PREFIX_STATUS + s.toString() + " ")
+        );
         item.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -41,14 +46,22 @@ public class ItemUtil {
     }
 
     /**
-     * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
+     * Returns the part of command string for the given {@code EditItemDescriptor}'s details.
      */
     public static String getEditItemDescriptorDetails(EditItemDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getQuantity().ifPresent(quantity -> sb.append(PREFIX_QUANTITY).append(quantity).append(" "));
         descriptor.getMinQuantity().ifPresent(minQuantity -> sb.append(PREFIX_MIN_QUANTITY).append(minQuantity).append(" "));
-        descriptor.getStatus().ifPresent(status -> sb.append(PREFIX_STATUS).append(status).append(" "));
+        if (descriptor.getStatus().isPresent()) {
+            List<Integer> status = descriptor.getStatus().get();
+            if (status.isEmpty()) {
+                sb.append(PREFIX_STATUS);
+            }
+            else {
+                status.forEach(s -> sb.append(PREFIX_STATUS).append(s).append(" "));
+            }
+        }
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
