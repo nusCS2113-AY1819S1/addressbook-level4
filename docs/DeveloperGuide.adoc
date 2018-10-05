@@ -84,14 +84,39 @@ As someone that records what was discussed in a meeting, I would like to be able
 
 As someone that constantly sends email to other members of NUSSU/ Sponsors/ Public, I would like to have an access to multiple different templates of emails so that I can focus more on writing the content of the email instead of spending too much time on crafting the overall structure.
 
-As someone that takes care of finances, I would like to have an alert system when we are running out of $$$ so that I know when I need to seek for more $$$.
+|`* * *` |executive officer of NUSSU |view which other committees my applicant has applied for |deconflict with the other members of the Executive Committee
 
-As the treasurer of a club I would like to have a function that calculates the expected turnout for an event based on turnout data for similar events that we have held in the past so that I can help the NUSSU to allocate budget to my club more efficiently.
+|`* * *` |executive officer of NUSSU |view the number of applicants with the relevant skills |assign them to the relevant subcommittees
 
-As a member of NUSSU treasury I would like to get and store the expenditure reports and bills from the sun organizations so that I can present it to auditors if need be.
+|`* * *` |member of NUSSU |find out how to contact another member within NUSSU |work more efficiently with them
 
-As the treasurer of my club I would like to be able to view whether my request for a grant has been approved so that I can use those funds effectively.
+|`* * *` |someone that takes charge of sponsors for events hosted by NUSSU |filter my search such that I would be only looking at the list of sponsors |not need to look through the whole list of addressbook
 
+|`* * *` |event organizer that is trying to find the contact details of some very specific group of people |have a search and filter function that is flexible enough |find all the search requirements can be done on the application without needing me to look through the whole list
+
+|`* * *` |member of the NUSSU treasury |have a budgeting function |fairly allocate budgets to the different clubs/projects
+
+|`* * *` |treasurer of a club |view the budget allocated to our club |discuss with my teammates and seek more funds if necessary
+
+|`* * *` |treasurer of a club |be able to store the data about how many members there are in my club, how many events we are planning to hold, and the expected turn out |be allocated a fair budget by the NUSSU treasury
+
+|`* * *` |treasurer of a club |use a budgeting function |plan the internal events of my club efficiently
+
+|`* * *` |member of the NUSSU treasury |view requests for grants from the clubs |allocate them the grant if the request is accepted by the NUSSU
+
+|`* * *` |executive member of NUSSU |log into the application with the relevant credentials |gain secure access to the application
+
+|`* * *` |executive member of NUSSU |create a new account for the application |gain access to certain features of the application relevant to my role when I log in
+
+|`* * *` |executive member of NUSSU |delete an existing account from the application |clear my login credentials from the application when I am not using it anymore
+
+|`* * *` |executive member of NUSSU |change the password of an existing account |feel more secure about my account login credentials
+
+|`* * *` |user |add a new person |
+
+|`* *` |general secretary of NUSSU |have the option to backup all, or even specific segments of application data into a data file |recover the required segments of data when there is an accidental deletion of data
+
+|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 == Use Cases
 
@@ -123,66 +148,200 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-=== Use case: Log into system
+=== Use case: Sort by suitability by skill
 
 *MSS*
 
-1.  Address book asks user for user ID and password
-2.  User types in user ID and password
-3.  Address book queries and authorize user full access to address book
+1.  User indicates he wants to sort by skills
+2.  NUSSU-Connect lists available skills, asks the user what he wants to sort by.
+3.  User indicates what he wants by selecting
+4.  NUSSU-Connect all skills.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User types in wrong password
+* 2a. User can sort by ascending or descending order
 +
-[none]
-** 2a1. Address book displays error message and exits application
+Use case ends.
+* 2b. User can see all above a certain threshold
 +
 Use case ends.
 
-* 2b. User types in user ID for a non-existent user account
+=== Use case: Add Skill
+
+*MSS*
+
+1.  User indicates he wants to add skill
+2.  NUSSU-Connect lists available persons
+3.  User indicates person, skill, and skill level to add
+4.  NUSSU-Connect confirms addition
++
+Use case ends.
+
+=== Use case: Filter search according to tag
+
+*MSS*
+
+1.  User requests to find person
+2.  User indicates he want to filter according to tags
+3.  User types the keyword in.
+4.  NUSSU-Connect lists all contact details that has tags containing the keyword.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. User indicates he want to create a list that doesn't include the keywords
 +
 [none]
-** 2b1. Address book displays error message and exits application
+** 2a1. User types the keyword in.
+** 2a2. NUSSU-Connect lists all contact details that has tags that does not contain the keyword.
 +
-Use case ends
+Use case ends.
+
+=== Use case: Delete all according to tag
+
+*MSS*
+
+1.  User requests to delete
+2.  User indicates he want to filter according to tags
+3.  User types the keyword in.
+4.  NUSSU-Connect lists all contact details that has tags containing the keyword.
+5.  NUSSU-Connect asks for confirmation if everyone in the lists has to be deleted
+6.  User indicates delete all
+7.  NUSSU-Connect deletes all users with the relevant tags
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 6a. User indicates don’t delete
++
+Use case ends.
+
+=== Use case: Submitting data for budget allocation
+
+*MSS*
+
+1.  Club Treasurer logs in with club treasurer credentials
+2.  Club Treasurer types command for submitting budgeting data
+3.  Club Treasurer enters data about how many events their club wants to hold and expected turn out for events
+4.  NUSSU-Connect asks for confirmation about entered data
+5.  Club Treasurer types command for confirming the data
+6.  NUSSU-Connect stores the data
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 4a. Club Treasurer types command for editing data
++
+[none]
+** 4a1. Club Treasurer enters data edited data about how many events their club wants to hold and expected turn out.
++
+Use case ends.
+
+=== Use case: Viewing allocated budget
+
+*MSS*
+
+1.  Club Treasurer logs in with club treasurer credentials
+2.  Club Treasurer types command to view their allocated budget
+3.  NUSSU-Connect asks for confirmation to accept allocated budget
+4.  Club Treasurer types command to accept the allocated budget
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. Club Treasurer types command to request for grant
++
+[none]
+** 3a1. NUSSU-Connect asks for grant amount, reason and level of importance
+** 3a2. Club Treasurer enters data for grant amount, reason and level of importance
+** 3a3. NUSSU-Connect asks for confirmation about entered data
+** 3a4. Treasurer types command to confirm data
+** 3a5. NUSSU-Connect shows message that the user’s request will be processed
++
+Use case ends.
+
+=== Use case: Viewing grant requests
+
+*MSS*
+
+1.  NUSSU Treasurer logs in with NUSSU treasury credentials
+2.  NUSSU Treasurer views grant requests (and their reason) sorted by level of importance
+3.  NUSSU Treasurer types command to approve a specific grant request
+4.  NUSSU-Connect asks for confirmation on the approval for grant request.
+5.  NUSSU Treasurer types command to confirm approval
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. Club Treasurer types command to request for grant
++
+[none]
+** 3a1. NUSSU-Connect asks for grant amount, reason and level of importance
+** 3a2. Club Treasurer enters data for grant amount, reason and level of importance
+** 3a3. Address book asks for confirmation about entered data
+** 3a4. Treasurer types command to confirm data
+** 3a5. Address book shows message that the user’s request will be processed
++
+Use case ends.
+
+=== Use case: Log into system
+
+*MSS*
+
+1.  User types a command to access a certain functionality in NUSSU-Connect
+2.  NUSSU-Connect prompts user to login first by entering login credentials
+3.  User types in login credentials along with the login command
+4.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User types in wrong password or user ID
++
+[none]
+** 3a1. NUSSU-Connect displays error message and continues to prompt user for login credentials before doing anything else
++
+Use case ends.
 
 === Use case: Create new user accounts
 
 *MSS*
 
-1.  User types a command to indicate intention of creating a new account
-2.  Address book asks user to type in master password for enabling option to create new accounts
-3.  User types in master password
-4.  Address book authorizes the master password input as correct and shows successful message
-5.  User types in command to create a new account with relevant user ID and password
+1.  User types in command to create a new account with chosen user ID and password
+2.  NUSSU prompts user to type in master password for creation of new account
+3.  User types in the correct master password
+4.  NUSSU-Connect creates new account with chosen login details, and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to create a new account and types command to indicate so
+* 1a. User creates a new account with a user ID which already exists
 +
 [none]
-** 2a1. Address book cancels process of new account creation
+** 1a1. NUSSU-Connect shows error message to user and does not create a new account
 +
 Use case ends.
-+
-* 2b. User types in the wrong master password
-+
-[none]
-** 2b1. Address book shows error message to user and cancels process of new account creation
-+
-Use case ends.
-+
-* 2c. User creates a new account with a user ID which already exists
+* 3a. User types in the wrong master password
 +
 [none]
-** 2c1. Address book shows error message to user and cancels process of new account creation
+** 3a1. NUSSU-Connect shows error message to user and and does not create a new account
 +
 Use case ends.
 
@@ -190,35 +349,24 @@ Use case ends.
 
 *MSS*
 
-1.  User requests to delete an existing account and types in command to do so
-2.  Address book asks for confirmation to delete account with associated user ID
-3.  User types command to express desire to delete account
-4.  Address book deletes account associated with input user ID and respective password
+1.  User types command together with user ID and password to delete account associated with input user ID and password
+2.  NUSSU-Connect account associated with input user ID and respective password and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to delete an account and types command to indicate so
+* 1a. User types in the wrong current password associated with the user ID
 +
 [none]
-** 2a1. Address book cancels process of deleting existing account
+** 1a1. NUSSU-Connect shows error message to user and cancels deletion of account
 +
 Use case ends.
-+
-
-* 2b. User types in the wrong current password associated with the user ID
+* 1b. User wants to delete a non-existent user account
 +
 [none]
-** 2b1. Address book shows error message to user and cancels process of deleting existing account
-+
-Use case ends.
-
-* 2c. User wants to delete a non-existent user account
-+
-[none]
-** 2c1. Address book shows error message and cancels process of deleting account
+** 1b1. NUSSU-Connect shows error message to user and cancels deletion of account
 +
 Use case ends.
 
@@ -226,36 +374,42 @@ Use case ends.
 
 *MSS*
 
-1.  User requests to change the password of existing user account and types in command to do so
-2.  Address book asks for confirmation of password change
-3.  User types command to express desire to change account password
-4.  Address book changes password of account associated with input user ID and new password
+1.  User types command with the relevant credentials of an existing account to change that account's password
+2.  NUSSU-Connect changes password of account associated with input user ID and new password and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to change the password of the account and types command to indicate so
+* 1a. User types in the wrong current password associated with the user ID
 +
 [none]
-** 2a1. Address book cancels process of changing password of account
+** 1a1. NUSSU-Connect shows error message to user and cancels changing of password of account
++
+Use case ends.
+* 1b. User wants to change the password of a non-existent user account
++
+[none]
+** 1b1. NUSSU-Connect shows error message to user and cancels changing of password of account
++
+Use case ends.
+* 1c. User types in new password that matches current old password
++
+[none]
+** 1c1. NUSSU-Connect shows error message to user and cancels changing of password of account
 +
 Use case ends.
 
-* 2b. User types in the wrong current password associated with the user ID
-+
-[none]
-** 2b1. Address book shows error message to user and cancels process of changing password of account
-+
-Use case ends.
 
-* 2c. User wants to change the password of a non-existent user account
-+
-[none]
-** 2c1. Address book shows error message and cancels process of changing password of account
-+
-Use case ends.
+[appendix]
+== Non Functional Requirements
+
+.  Must be able to accommodate the contact details of everyone in NUSSU + 1000 extra contact details.
+.  All exco members of NUSSU should be able to create an account.
+.  Passwords must be salted and hashed with md5.
+.  All commands must be completed within 1 second.
+.  The single and multi-input commands phrases should be easy to remember and intuitive to understand what they mean.
 
 _{More to be added}_
 [appendix]

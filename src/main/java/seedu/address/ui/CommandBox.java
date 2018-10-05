@@ -2,6 +2,8 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
+import javax.swing.JOptionPane;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -99,15 +101,24 @@ public class CommandBox extends UiPart<Region> {
      * Handles the Enter button pressed event.
      */
     @FXML
-    private void handleCommandEntered() {
+    void handleCommandEntered() {
+        String loginInput = "false";
         try {
-            CommandResult commandResult = logic.execute(commandTextField.getText());
+            if (!(MainWindow.getIsLoginSuccessful())) {
+                loginInput = JOptionPane.showInputDialog("Please login first by entering login credentials:");
+            }
+            if (!(MainWindow.getIsLoginSuccessful())) {
+                CommandResult commandResultLogin = logic.execute(loginInput);
+                raise(new NewResultAvailableEvent(commandResultLogin.feedbackToUser));
+            } else {
+                CommandResult commandResult = logic.execute(commandTextField.getText());
+                logger.info("Result: " + commandResult.feedbackToUser);
+                raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            }
             initHistory();
             historySnapshot.next();
             // process result of the command
             commandTextField.setText("");
-            logger.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
 
         } catch (CommandException | ParseException e) {
             initHistory();
