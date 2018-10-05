@@ -67,7 +67,7 @@ Creates account for James Yaputra
 
 User: Logs in to account +
 Format: `login u/USERNAME p/PASSWORD` +
-Examples: 
+Examples:
 
 * `login n/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
