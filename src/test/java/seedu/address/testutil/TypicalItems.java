@@ -20,7 +20,7 @@ public class TypicalItems {
 
     // Manually added
     public static final Item RPLIDAR = new ItemBuilder().withName("RP Lidar").withQuantity("25")
-            .withMinQuantity("10").build();
+            .withMinQuantity("10").withTags("Lab 1").build();
     public static final Item MOTOR = new ItemBuilder().withName("Motor").withQuantity("100")
             .withMinQuantity("20").build();
 

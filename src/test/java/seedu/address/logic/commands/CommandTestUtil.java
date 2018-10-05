@@ -32,6 +32,10 @@ public class CommandTestUtil {
     public static final String VALID_TAG_LAB1 = "Lab1";
     public static final String VALID_TAG_LAB2 = "Lab2";
 
+    public static final String VALID_NAME_RPLIDAR = "RP Lidar";
+    public static final String VALID_QUANTITY_RPLIDAR = "30";
+    public static final String VALID_MIN_QUANTITY_RPLIDAR = "10";
+
     public static final String NAME_DESC_ARDUINO = " " + PREFIX_NAME + VALID_NAME_ARDUINO;
     public static final String QUANTITY_DESC_ARDUINO = " " + PREFIX_QUANTITY + VALID_QUANTITY_ARDUINO;
     public static final String MIN_QUANTITY_DESC_ARDUINO = " " + PREFIX_MIN_QUANTITY + VALID_MIN_QUANTITY_ARDUINO;
