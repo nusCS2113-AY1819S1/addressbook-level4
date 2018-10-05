@@ -19,7 +19,7 @@ Responsibilities: RSVP/Attendance
 '''
 
 === Gerald Chua Deng Xiang
-image::myphoto.jpg[width="300", align="left"]
+image::geraldcdx.png[width="250", align="left"]
 {empty}[https://www.comp.nus.edu.sg/~geraldc/website2-0/index.html[homepage]] [https://github.com/Geraldcdx[github]] [<<GCDX#, portfolio>>]
 
 Role: Developer +
