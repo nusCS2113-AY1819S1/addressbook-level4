@@ -25,6 +25,8 @@ public class LogicManager extends ComponentManager implements Logic {
     private final CommandHistory history;
     private final RecruitBookParser recruitBookParser;
 
+    private static LogicState state = new LogicState("Primary");
+
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
@@ -36,7 +38,7 @@ public class LogicManager extends ComponentManager implements Logic {
             throws CommandException, ParseException, IOException, GeneralSecurityException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = recruitBookParser.parseCommand(commandText);
+            Command command = recruitBookParser.parseCommand(commandText, state);
             return command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -51,5 +53,9 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
+    }
+
+    public static void setLogicState(String newState){
+        state = new LogicState(newState);
     }
 }

@@ -6,8 +6,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.AddCandidateCommand;
 import seedu.address.logic.commands.AddJobCommand;
+import seedu.address.logic.commands.AddJobDetailsCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -21,6 +24,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.LogicState;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.joboffer.JobOffer;
@@ -35,6 +39,7 @@ public class RecruitBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+
     /**
      * Parses user input into command for execution.
      *
@@ -42,7 +47,16 @@ public class RecruitBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, LogicState state) throws ParseException {
+        if(state.nextCommand != "Primary"){
+            switch(state.nextCommand){
+                case AddJobDetailsCommand.COMMAND_WORD:
+                    return new AddJobDetailsCommand();
+                default:
+                    LogicManager.setLogicState("Primary");
+            }
+        }
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -56,7 +70,7 @@ public class RecruitBookParser {
             return new AddCandidateCommandParser().parse(arguments);
 
         case AddJobCommand.COMMAND_WORD:
-            return new AddJobCommand(new JobOffer("ab", "cd"));
+            return new AddJobCommand();
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -98,5 +112,6 @@ public class RecruitBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
 
 }
