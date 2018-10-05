@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -25,42 +26,33 @@ import seedu.address.testutil.EditItemDescriptorBuilder;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_NAME_LED_RED = "LED Red";
-    public static final String VALID_NAME_LED_YELLOW = "LED Yellow";
-    public static final Integer VALID_QUANTITY_LED_RED = 11111111;
-    public static final Integer VALID_QUANTITY_LED_YELLOW = 22222222;
-    public static final Integer VALID_MIN_QUANTITY_LED_RED = 1;
-    public static final Integer VALID_MIN_QUANTITY_LED_YELLOW = 2;
-    public static final String VALID_TAG_LAB1 = "lab1";
-    public static final String VALID_TAG_LAB2 = "lab2";
+    public static final String VALID_NAME_ARDUINO = "Arduino";
+    public static final String VALID_QUANTITY_ARDUINO = "20";
+    public static final String VALID_MIN_QUANTITY_ARDUINO = "5";
+    public static final String VALID_TAG_LAB1 = "Lab1";
+    public static final String VALID_TAG_LAB2 = "Lab2";
 
-    public static final String NAME_DESC_LED_RED = " " + PREFIX_NAME + VALID_NAME_LED_RED;
-    public static final String NAME_DESC_LED_YELLOW = " " + PREFIX_NAME + VALID_NAME_LED_YELLOW;
-    public static final String QUANTITY_DESC_LED_RED = " " + PREFIX_QUANTITY + VALID_QUANTITY_LED_RED;
-    public static final String QUANTITY_DESC_LED_YELLOW = " " + PREFIX_QUANTITY + VALID_QUANTITY_LED_YELLOW;
-    public static final String MIN_QUANTITY_DESC_LED_RED = " " + PREFIX_MIN_QUANTITY + VALID_MIN_QUANTITY_LED_RED;
-    public static final String MIN_QUANTITY_DESC_LED_YELLOW = " " + PREFIX_MIN_QUANTITY + VALID_MIN_QUANTITY_LED_YELLOW;
+    public static final String NAME_DESC_ARDUINO = " " + PREFIX_NAME + VALID_NAME_ARDUINO;
+    public static final String QUANTITY_DESC_ARDUINO = " " + PREFIX_QUANTITY + VALID_QUANTITY_ARDUINO;
+    public static final String MIN_QUANTITY_DESC_ARDUINO = " " + PREFIX_MIN_QUANTITY + VALID_MIN_QUANTITY_ARDUINO;
     public static final String TAG_DESC_LAB1 = " " + PREFIX_TAG + VALID_TAG_LAB1;
     public static final String TAG_DESC_LAB2 = " " + PREFIX_TAG + VALID_TAG_LAB2;
 
-    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "911a"; // 'a' not allowed in quantities
-    public static final String INVALID_MIN_QUANTITY_DESC = " " + PREFIX_MIN_QUANTITY + "911b"; // 'b' not allowed in min quantities
-    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Arduino&"; // '&' not allowed in names
+    public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "-1"; // '-' not allowed in qty; cannot be negative
+    public static final String INVALID_MIN_QUANTITY_DESC = " " + PREFIX_MIN_QUANTITY + "5!"; // '!' not allowed in min qty
+    public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "Lab1*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditItemDescriptor DESC_LED_RED;
-    public static final EditCommand.EditItemDescriptor DESC_LED_YELLOW;
+    public static final EditCommand.EditItemDescriptor DESC_ARDUINO;
+
 
     static {
-        DESC_LED_RED = new EditItemDescriptorBuilder().withName(VALID_NAME_LED_RED)
-                .withQuantity(VALID_QUANTITY_LED_RED).withMinQuantity(VALID_MIN_QUANTITY_LED_RED)
+        DESC_ARDUINO = new EditItemDescriptorBuilder().withName(VALID_NAME_ARDUINO)
+                .withQuantity(VALID_QUANTITY_ARDUINO).withMinQuantity(VALID_MIN_QUANTITY_ARDUINO)
                 .withTags(VALID_TAG_LAB1).build();
-        DESC_LED_YELLOW = new EditItemDescriptorBuilder().withName(VALID_NAME_LED_YELLOW)
-                .withQuantity(VALID_QUANTITY_LED_YELLOW).withEmail(VALID_MIN_QUANTITY_LED_YELLOW)
-                .withTags(VALID_TAG_LAB2, VALID_TAG_LAB1).build();
     }
 
     /**
@@ -110,21 +102,22 @@ public class CommandTestUtil {
     }
 
     /**
-     * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * Updates {@code model}'s filtered list to show only the item at the given {@code targetIndex} in the
+     * {@code model}'s stock list.
      */
     public static void showItemAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredItemList().size());
 
-        Item person = model.getFilteredItemList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
+        Item item = model.getFilteredItemList().get(targetIndex.getZeroBased());
+        final String[] splitName = item.getName().fullName.split("\\s+");
+
         model.updateFilteredItemList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredItemList().size());
     }
 
     /**
-     * Deletes the first person in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first item in {@code model}'s filtered list from {@code model}'s stock list.
      */
     public static void deleteFirstItem(Model model) {
         Item firstItem = model.getFilteredItemList().get(0);
