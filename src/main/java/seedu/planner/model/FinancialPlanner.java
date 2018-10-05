@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
 
@@ -65,6 +66,11 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(record);
         return records.contains(record);
     }
+
+  /*  public boolean hasLimit (Limit limit){
+        requireNonNull(limit);
+        return limit.contains(limit);
+    }*/
 
     /**
      * Adds a record to the financial planner.

@@ -10,9 +10,11 @@ import seedu.planner.commons.core.index.Index;
 import seedu.planner.commons.util.StringUtil;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.Money;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.tag.Tag;
+
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -104,5 +106,16 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+    /**
+     * Parses {@code String money} into a {@code Money}.
+     */
+    public static Money parseMoney(String money) throws ParseException {
+        requireNonNull(money);
+        String trimmedMoney = money.trim();
+        if (!Money.isValidMoneyName(trimmedMoney)) {
+            throw new ParseException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        }
+        return new Money(trimmedMoney);
     }
 }
