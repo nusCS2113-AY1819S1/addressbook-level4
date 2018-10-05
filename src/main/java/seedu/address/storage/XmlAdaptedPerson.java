@@ -1,21 +1,12 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.*;
+import seedu.address.model.tag.Tag;
 
 import javax.xml.bind.annotation.XmlElement;
-
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * JAXB-friendly version of the Person.
@@ -32,6 +23,10 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String skill;
+
+
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -65,6 +60,7 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        skill = source.getSkill().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -113,8 +109,15 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (skill == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Skill.class.getSimpleName()));
+        }
+
+        final Skill modelSkill = new Skill(skill);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSkill, modelTags);
+
     }
 
     @Override
