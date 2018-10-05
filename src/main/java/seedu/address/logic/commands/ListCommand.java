@@ -33,7 +33,8 @@ public class ListCommand extends Command {
     /**
      * Messages to be displayed
      */
-    public static final String MESSAGE_SUCCESS = "Listed: ";
+    public static final String MESSAGE_SUCCESS_SINGULAR = "%d person listed!";
+    public static final String MESSAGE_SUCCESS = "%d persons listed!";
 
     /**
      * Instance variables
@@ -84,7 +85,11 @@ public class ListCommand extends Command {
         }
 
         model.updateFilteredPersonList(predicateToUse);
-        return new CommandResult(MESSAGE_SUCCESS);
+        int listCount = model.getFilteredPersonList().size();
+        if (listCount <= 1) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS_SINGULAR, listCount));
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, listCount));
     }
 
     /**
