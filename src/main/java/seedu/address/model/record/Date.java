@@ -15,7 +15,8 @@ public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date parameter should be in the format of dd-mm-yyyy "
-            + "with dd and mm being 2 digits, and yyyy being 4 digits.";
+            + "with dd and mm being 2 digits, and yyyy being 4 digits."
+            + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
     public static final String MESSAGE_DATE_LOGICAL_CONSTRAINTS =
             "Date should follow the modern calendar. Day parameter must fit within the constraints of each month. \n"
             + "For e.g, February has only 28 days so the day parameter must be less than or equal to 28 if the month "
@@ -58,6 +59,40 @@ public class Date {
     /**
      * Returns true if a given string is in a valid date format.
      */
+    //TODO: add more constraint to the Date
+    public static boolean isValidDate(String test) {
+        if (test.matches(DATE_VALIDATION_REGEX)){
+            String[] dateParams = test.split("-");
+            int day = Integer.parseInt(dateParams[0]);
+            int month = Integer.parseInt(dateParams[1]);
+            int year = Integer.parseInt(dateParams[2]);
+            if (day <= 0 || day > 31 || month <= 0 || month > 12 || year <= 0){
+                return false;
+            } else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11){
+                if (day <= 30){
+                    if (month == 2 && day > 28 && isLeapYear(year)){
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }
+            } else {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static boolean isLeapYear (int year) {
+        if (year % 400 == 0) {
+            return true;
+        } else if (year % 100 == 0) {
+            return false;
+        } else if (year % 4 == 0) {
+            return true;
+        } else
+            return false;
+
     public static boolean isValidDateFormat(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
     }
@@ -120,11 +155,29 @@ public class Date {
         return day;
     }
 
+    public int getDayInt() {
+        return Integer.parseInt(day);
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public int getMonthInt() {
+        return Integer.parseInt(month);
+    }
+
+    public String getYear() {
+    
     public int getMonth() {
         return month;
     }
 
     public int getYear() {
         return year;
+    }
+
+    public int getYearInt() {
+        return Integer.parseInt(year);
     }
 }

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -34,7 +35,6 @@ public class DeleteCommandByDateEntryTest {
     @Test
     public void execute_validDateUnfilteredList_success() {
         List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
-
         DeleteCommandByDateEntry deleteCommandByDateEntry = new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
 
         String expectedMessage = String.format(DeleteCommandByDateEntry.MESSAGE_DELETE_RECORD_SUCCESS, TypicalDates.DATE_FIRST_INDEX_DATE);
@@ -54,19 +54,19 @@ public class DeleteCommandByDateEntryTest {
         for (int i = 0; i < recordsToDelete.size() - 1; i++){
             //ensure that only one record exists accordingly to the index
             List<Record> records = filteredRecordList(model);
-
             //TODO: you have to create another method almost same as (CommandTestUtils.showRecordAtIndex)
             int targetIndexInt = records.indexOf(recordsToDelete.get(i));
-
+          
             CommandTestUtil.showRecordAtIndex(model, targetIndexInt);
-
+            
             Index outOfBoundIndex = TypicalIndexes.INDEX_LAST_RECORD;
             //ensure that outOfBoundIndex is still in bound of address book list
             assertTrue(outOfBoundIndex.getOneBased() < model.getAddressBook().getRecordList().size());
 
             DeleteCommandByDateEntry deleteCommandByDateEntry = new DeleteCommandByDateEntry
                                                                 (records.get(outOfBoundIndex.getZeroBased()).getDate());
-
+            CommandTestUtil.assertCommandFailure(deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
+        }
             CommandTestUtil.assertCommandFailure(
                     deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
         }

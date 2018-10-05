@@ -140,7 +140,7 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredRecordList().size());
     }
 
-    /**
+   /**
      * Deletes the first record in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstRecord(Model model) {
