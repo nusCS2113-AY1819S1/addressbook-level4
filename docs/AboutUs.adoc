@@ -28,7 +28,7 @@ Responsibilities: Comment Section Architect
 '''
 
 === James Arista Yaputra
-image::james.jpg[width="150", align="left"]
+image::jamesyaputra.png[width="150", align="left"]
 {empty}[http://github.com/jamesyaputra[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -51,23 +51,5 @@ image::yijinl.jpg[width="150", align="left"]
 
 Role: Developer +
 Responsibilities: Data
-
-'''
-
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: Dev Ops + Threading
-
-'''
-
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: UI
 
 '''
