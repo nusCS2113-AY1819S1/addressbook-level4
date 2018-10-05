@@ -6,7 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -52,7 +52,6 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-
         case LoginCommand.COMMAND_WORD:
             return new LoginUserIdPasswordCommandParser().parse(arguments);
 
@@ -65,10 +64,10 @@ public class AddressBookParser {
                     "Please type in master password", null);
             //@@author
             switch (loginSelection) {
-                case "123456789":
-                    return new CreateAccountCommandParser().parse(arguments);
-                default:
-                    throw new IllegalArgumentException("Wrong master password!");
+            case "123456789":
+                return new CreateAccountCommandParser().parse(arguments);
+            default:
+                throw new IllegalArgumentException("Wrong master password!");
             }
 
         case AddCommand.COMMAND_WORD:

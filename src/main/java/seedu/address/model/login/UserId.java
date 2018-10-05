@@ -3,12 +3,15 @@ package seedu.address.model.login;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-
+/**
+ * Represents an account's user ID in the login book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidUserId(String)}
+ */
 public class UserId {
 
     public static final String MESSAGE_USERID_CONSTRAINTS =
-            "There must be a user/ prefix before the user ID. User ID should only contain 9 alphanumeric characters, " +
-                    "and it should not be blank and not have any spaces";
+            "There must be a user/ prefix before the user ID. User ID should only contain 9 alphanumeric characters, "
+                    + "and it should not be blank and not have any spaces";
 
     /*
      * The first character of the address must not be a whitespace,

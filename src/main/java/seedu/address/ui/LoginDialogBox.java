@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
 
+/**
+ * Provides the pop-up window that asks for user's input.
+ */
 public class LoginDialogBox {
 
     //@@author Chocological-reused

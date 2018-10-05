@@ -26,19 +26,18 @@ public class ModelHelper {
     }
 
     /**
+     * @see ModelHelper#setFilteredList(Model, List)
+     */
+    public static void setFilteredList(Model model, Person... toDisplay) {
+        setFilteredList(model, Arrays.asList(toDisplay));
+    }
+    /**
      * Updates {@code model}'s filtered list to display only {@code toDisplay}.
      */
     public static void setFilteredLoginList(Model model, List<LoginDetails> toDisplay) {
         Optional<Predicate<LoginDetails>> predicate =
                 toDisplay.stream().map(ModelHelper::getLoginPredicateMatching).reduce(Predicate::or);
         model.updateFilteredLoginDetailsList(predicate.orElse(PREDICATE_MATCHING_NO_LOGINDETAILS));
-    }
-
-    /**
-     * @see ModelHelper#setFilteredList(Model, List)
-     */
-    public static void setFilteredList(Model model, Person... toDisplay) {
-        setFilteredList(model, Arrays.asList(toDisplay));
     }
 
     /**

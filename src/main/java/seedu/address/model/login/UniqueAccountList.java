@@ -12,16 +12,17 @@ import seedu.address.model.login.exceptions.DuplicateAccountException;
 
 /**
  * A list of accounts that enforces uniqueness between its elements and does not allow nulls.
- * An account is considered unique by comparing using {@code LoginDetails#isSameAccount(LoginDetails)}. As such, adding and updating of
- * accounts uses LoginDetails#isSameAccount(LoginDetails) for equality so as to ensure that the account being added or updated is
- * unique in terms of details in the UniqueAccountList. However, the removal of an account uses LoginDetails#equals(Object) so
+ * An account is considered unique by comparing using {@code LoginDetails#isSameAccount(LoginDetails)}.
+ * As such, adding and updating of accounts uses LoginDetails#isSameAccount(LoginDetails)
+ * for equality so as to ensure that the account being added or updated is unique in terms of details
+ * in the UniqueAccountList. However, the removal of an account uses LoginDetails#equals(Object) so
  * as to ensure that the account with exactly the same user ID and password will be removed.
  *
  * Supports a minimal set of list operations.
  *
  * @see LoginDetails#isSameAccount(LoginDetails)
  */
-public class UniqueAccountList implements Iterable<LoginDetails>{
+public class UniqueAccountList implements Iterable<LoginDetails> {
 
     private final ObservableList<LoginDetails> internalLoginList = FXCollections.observableArrayList();
 

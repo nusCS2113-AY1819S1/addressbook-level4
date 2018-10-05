@@ -18,7 +18,7 @@ import seedu.address.model.ReadOnlyLoginBook;
 /**
  * A class to access LoginBook data stored as an xml file on the hard disk.
  */
-public class XmlLoginBookStorage implements LoginBookStorage{
+public class XmlLoginBookStorage implements LoginBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlLoginBookStorage.class);
 

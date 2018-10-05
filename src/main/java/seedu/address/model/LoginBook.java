@@ -8,7 +8,11 @@ import javafx.collections.ObservableList;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UniqueAccountList;
 
-public class LoginBook implements ReadOnlyLoginBook{
+/**
+ * Wraps all data at the login-book level
+ * Duplicates are not allowed (by .isSameAccount comparison)
+ */
+public class LoginBook implements ReadOnlyLoginBook {
 
     private final UniqueAccountList accounts;
 

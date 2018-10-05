@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javax.swing.*;
-
 import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
@@ -30,8 +28,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private static boolean isSensitiveInformation = false;
     private static boolean isLoginSuccessful = false;
-    public static boolean isSensitiveInformation = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -118,6 +116,10 @@ public class MainWindow extends UiPart<Stage> {
                 event.consume();
             }
         });
+    }
+
+    public static boolean getIsSensitiveInformation() {
+        return isSensitiveInformation;
     }
 
     public static boolean getIsLoginSuccessful() {

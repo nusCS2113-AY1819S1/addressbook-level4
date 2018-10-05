@@ -2,7 +2,7 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

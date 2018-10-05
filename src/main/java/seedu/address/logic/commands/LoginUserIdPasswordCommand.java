@@ -38,7 +38,7 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
             System.exit(0);
         }
         return new CommandResult(
-                String.format(Messages.MESSAGE_LOGINDETAILS_LISTED_OVERVIEW, model.getFilteredLoginDetailsList().size()));
+                String.format(Messages.MESSAGE_LOGIN_LISTED_OVERVIEW, model.getFilteredLoginDetailsList().size()));
 
     }
 

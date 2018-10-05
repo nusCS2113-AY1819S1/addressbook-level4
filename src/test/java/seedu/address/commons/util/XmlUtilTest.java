@@ -35,9 +35,9 @@ public class XmlUtilTest {
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
     private static final Path VALID_LOGIN_FILE = TEST_DATA_FOLDER.resolve("validLoginBook.xml");
     private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validAddressBook.xml");
-    private static final Path MISSING_LOGINDETAILS_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingLoginDetailsField.xml");
+    private static final Path MISSING_LOGINDETAILS_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingLoginDetailField.xml");
     private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingPersonField.xml");
-    private static final Path INVALID_LOGINDETAILS_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidLoginDetailsField.xml");
+    private static final Path INVALID_LOGINDETAILS_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidLoginDetailField.xml");
     private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidPersonField.xml");
     private static final Path VALID_LOGINDETAILS_FILE = TEST_DATA_FOLDER.resolve("validLoginDetails.xml");
     private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
@@ -87,7 +87,8 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        LoginBook dataFromLoginFile = XmlUtil.getDataFromFile(VALID_LOGIN_FILE, XmlSerializableLoginBook.class).toModelType();
+        LoginBook dataFromLoginFile = XmlUtil.getDataFromFile(VALID_LOGIN_FILE,
+                XmlSerializableLoginBook.class).toModelType();
         assertEquals(9, dataFromLoginFile.getLoginDetailsList().size());
         AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
@@ -171,7 +172,8 @@ public class XmlUtilTest {
         FileUtil.createFile(TEMP_LOGIN_FILE);
         XmlSerializableLoginBook loginDataToWrite = new XmlSerializableLoginBook(new LoginBook());
         XmlUtil.saveDataToFile(TEMP_LOGIN_FILE, loginDataToWrite);
-        XmlSerializableLoginBook loginDataFromFile = XmlUtil.getDataFromFile(TEMP_LOGIN_FILE, XmlSerializableLoginBook.class);
+        XmlSerializableLoginBook loginDataFromFile = XmlUtil.getDataFromFile(TEMP_LOGIN_FILE,
+                XmlSerializableLoginBook.class);
         assertEquals(loginDataToWrite, loginDataFromFile);
         FileUtil.createFile(TEMP_FILE);
         XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());

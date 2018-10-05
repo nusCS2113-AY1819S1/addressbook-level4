@@ -6,10 +6,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERPASSWORD;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.login.LoginDetails;
 import seedu.address.model.Model;
+import seedu.address.model.login.LoginDetails;
 
-public class CreateAccountCommand extends Command{
+/**
+ * Adds an account to the login book
+ */
+public class CreateAccountCommand extends Command {
 
     public static final String COMMAND_WORD = "createaccount";
 
@@ -22,7 +25,7 @@ public class CreateAccountCommand extends Command{
             + PREFIX_USERPASSWORD + "zaq1xsw2cde3";
 
     public static final String MESSAGE_SUCCESS = "New account created: %1$s";
-    private static final String MESSAGE_DUPLICATE_ACCOUNT= "This account already exists in the address book";
+    private static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the address book";
 
     private final LoginDetails toAdd;
 

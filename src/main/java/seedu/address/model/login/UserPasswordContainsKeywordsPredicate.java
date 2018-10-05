@@ -18,8 +18,8 @@ public class UserPasswordContainsKeywordsPredicate implements Predicate<LoginDet
 
     @Override
     public boolean test(LoginDetails loginDetails) {
-        return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordCheckCase(loginDetails.getUserPassword().fullUserPassword, keyword));
+        return keywords.stream().anyMatch(keyword ->
+                StringUtil.containsWordCheckCase(loginDetails.getUserPassword().fullUserPassword, keyword));
     }
 
     @Override

@@ -1,9 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -11,7 +8,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
-import seedu.address.model.person.Phone;
 
 /**
  * JAXB-friendly version of the Account.
@@ -64,7 +60,8 @@ public class XmlAccount {
         final UserId modelUserId = new UserId(userId);
 
         if (userPassword == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UserPassword.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                                                          UserPassword.class.getSimpleName()));
         }
         if (!UserPassword.isValidUserPassword(userPassword)) {
             throw new IllegalValueException(UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS);
