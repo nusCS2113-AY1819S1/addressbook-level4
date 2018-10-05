@@ -68,4 +68,13 @@ public class LoginDetails {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(userId, userPassword);
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getUserId())
+                .append(" User password: ")
+                .append(getUserPassword());
+        return builder.toString();
+    }
 }
