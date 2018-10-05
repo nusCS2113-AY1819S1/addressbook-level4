@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.record.exceptions.DuplicateRecordException;
 import seedu.address.model.record.exceptions.RecordNotFoundException;
 
@@ -93,6 +94,12 @@ public class UniqueRecordList implements Iterable<Record> {
         }
 
         internalList.setAll(records);
+    }
+
+    public Index searchByDate(List<Record> records) {
+        for (int i = 0; i < records.size(); i++){
+
+        }
     }
 
     /**

@@ -124,6 +124,9 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredRecordList().size());
     }
 
+    //TODO: create another method almost same as showRecordAtIndex (seems might have problems)
+
+    
     /**
      * Deletes the first record in {@code model}'s filtered list from {@code model}'s address book.
      */
