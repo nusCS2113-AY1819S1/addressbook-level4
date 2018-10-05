@@ -40,7 +40,7 @@ public class DeleteCommandByDateEntry extends Command {
             Date date = targetRecord.getDate();
             if (date == targetDate) {
                 model.deleteRecord(targetRecord);
-                model.commitAddressBook();
+                model.commitFinancialPlanner();
                 targetRecordExist = true;
             }
         }

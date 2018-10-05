@@ -6,7 +6,6 @@ import seedu.address.logic.commands.DeleteCommandByDateEntry;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.record.Date;
 
-
 /**
  * Parses input arguments and creates a new DeleteCommandByDateEntry object
  */

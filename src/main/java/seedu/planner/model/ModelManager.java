@@ -3,6 +3,7 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -69,6 +70,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteListRecord(List<Record> targetList) {
+        for (Record target : targetList) {
+            versionedFinancialPlanner.removeRecord(target);
+        }
+        indicateFinancialPlannerChanged();
+    }
+
+    @Override
     public void addRecord(Record record) {
         versionedFinancialPlanner.addRecord(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
@@ -94,6 +103,7 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredRecords);
     }
 
+    //show all the records
     @Override
     public void updateFilteredRecordList(Predicate<Record> predicate) {
         requireNonNull(predicate);
