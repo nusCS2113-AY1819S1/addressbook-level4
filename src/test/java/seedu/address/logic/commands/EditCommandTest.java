@@ -13,7 +13,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showRecordAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RECORD;
-import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Test;
 
@@ -21,7 +21,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.EditCommand.EditRecordDescriptor;
-import seedu.address.model.AddressBook;
+import seedu.address.model.FinancialPlanner;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -34,7 +34,7 @@ import seedu.address.testutil.RecordBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -45,9 +45,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FinancialPlanner(model.getFinancialPlanner()), new UserPrefs());
         expectedModel.updateRecord(model.getFilteredRecordList().get(0), editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -67,9 +67,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FinancialPlanner(model.getFinancialPlanner()), new UserPrefs());
         expectedModel.updateRecord(lastRecord, editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -81,8 +81,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new FinancialPlanner(model.getFinancialPlanner()), new UserPrefs());
+        expectedModel.commitFinancialPlanner();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -98,9 +98,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FinancialPlanner(model.getFinancialPlanner()), new UserPrefs());
         expectedModel.updateRecord(model.getFilteredRecordList().get(0), editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -119,7 +119,7 @@ public class EditCommandTest {
         showRecordAtIndex(model, INDEX_FIRST_RECORD);
 
         // edit record in filtered list into a duplicate in address book
-        Record recordInList = model.getAddressBook().getRecordList().get(INDEX_SECOND_RECORD.getZeroBased());
+        Record recordInList = model.getFinancialPlanner().getRecordList().get(INDEX_SECOND_RECORD.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RECORD,
                 new EditRecordDescriptorBuilder(recordInList).build());
 
@@ -144,7 +144,7 @@ public class EditCommandTest {
         showRecordAtIndex(model, INDEX_FIRST_RECORD);
         Index outOfBoundIndex = INDEX_SECOND_RECORD;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRecordList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getFinancialPlanner().getRecordList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
                 new EditRecordDescriptorBuilder().withName(VALID_NAME_BOB).build());
@@ -158,19 +158,19 @@ public class EditCommandTest {
         Record recordToEdit = model.getFilteredRecordList().get(INDEX_FIRST_RECORD.getZeroBased());
         EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder(editedRecord).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RECORD, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FinancialPlanner(model.getFinancialPlanner()), new UserPrefs());
         expectedModel.updateRecord(recordToEdit, editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         // edit -> first record edited
         editCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered record list to show all records
-        expectedModel.undoAddressBook();
+        // undo -> reverts financialplanner back to previous state and filtered record list to show all records
+        expectedModel.undoFinancialPlanner();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first record edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoFinancialPlanner();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -200,23 +200,23 @@ public class EditCommandTest {
         Record editedRecord = new RecordBuilder().build();
         EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder(editedRecord).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_RECORD, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new FinancialPlanner(model.getFinancialPlanner()), new UserPrefs());
 
         showRecordAtIndex(model, INDEX_SECOND_RECORD);
         Record recordToEdit = model.getFilteredRecordList().get(INDEX_FIRST_RECORD.getZeroBased());
         expectedModel.updateRecord(recordToEdit, editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         // edit -> edits second record in unfiltered record list / first record in filtered record list
         editCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered record list to show all records
-        expectedModel.undoAddressBook();
+        // undo -> reverts financialplanner back to previous state and filtered record list to show all records
+        expectedModel.undoFinancialPlanner();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredRecordList().get(INDEX_FIRST_RECORD.getZeroBased()), recordToEdit);
         // redo -> edits same second record in unfiltered record list
-        expectedModel.redoAddressBook();
+        expectedModel.redoFinancialPlanner();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

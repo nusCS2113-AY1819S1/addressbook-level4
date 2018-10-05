@@ -21,13 +21,13 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.AddressBook;
+import seedu.address.model.FinancialPlanner;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.storage.XmlAdaptedRecord;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.storage.XmlSerializableFinancialPlanner;
+import seedu.address.testutil.FinancialPlannerBuilder;
 import seedu.address.testutil.RecordBuilder;
 import seedu.address.testutil.TestUtil;
 import seedu.address.ui.testutil.EventsCollectorRule;
@@ -52,11 +52,11 @@ public class ExitCommandTest {
         private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlUtilTest");
         private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.xml");
         private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
-        private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validAddressBook.xml");
+        private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validFinancialPlanner.xml");
         private static final Path MISSING_RECORD_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingRecordField.xml");
         private static final Path INVALID_RECORD_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidRecordField.xml");
         private static final Path VALID_RECORD_FILE = TEST_DATA_FOLDER.resolve("validRecord.xml");
-        private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
+        private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempFinancialPlanner.xml");
 
         private static final String INVALID_DATE = "9482asf424";
 
@@ -71,7 +71,7 @@ public class ExitCommandTest {
         @Test
         public void getDataFromFile_nullFile_throwsNullPointerException() throws Exception {
             thrown.expect(NullPointerException.class);
-            XmlUtil.getDataFromFile(null, AddressBook.class);
+            XmlUtil.getDataFromFile(null, FinancialPlanner.class);
         }
 
         @Test
@@ -83,18 +83,18 @@ public class ExitCommandTest {
         @Test
         public void getDataFromFile_missingFile_fileNotFoundException() throws Exception {
             thrown.expect(FileNotFoundException.class);
-            XmlUtil.getDataFromFile(MISSING_FILE, AddressBook.class);
+            XmlUtil.getDataFromFile(MISSING_FILE, FinancialPlanner.class);
         }
 
         @Test
         public void getDataFromFile_emptyFile_dataFormatMismatchException() throws Exception {
             thrown.expect(JAXBException.class);
-            XmlUtil.getDataFromFile(EMPTY_FILE, AddressBook.class);
+            XmlUtil.getDataFromFile(EMPTY_FILE, FinancialPlanner.class);
         }
 
         @Test
         public void getDataFromFile_validFile_validResult() throws Exception {
-            AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class)
+            FinancialPlanner dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableFinancialPlanner.class)
                     .toModelType();
             assertEquals(9, dataFromFile.getRecordList().size());
         }
@@ -129,7 +129,7 @@ public class ExitCommandTest {
         @Test
         public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {
             thrown.expect(NullPointerException.class);
-            XmlUtil.saveDataToFile(null, new AddressBook());
+            XmlUtil.saveDataToFile(null, new FinancialPlanner());
         }
 
         @Test
@@ -141,24 +141,24 @@ public class ExitCommandTest {
         @Test
         public void saveDataToFile_missingFile_fileNotFoundException() throws Exception {
             thrown.expect(FileNotFoundException.class);
-            XmlUtil.saveDataToFile(MISSING_FILE, new AddressBook());
+            XmlUtil.saveDataToFile(MISSING_FILE, new FinancialPlanner());
         }
 
         @Test
         public void saveDataToFile_validFile_dataSaved() throws Exception {
             FileUtil.createFile(TEMP_FILE);
-            XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
+            XmlSerializableFinancialPlanner dataToWrite = new XmlSerializableFinancialPlanner(new FinancialPlanner());
             XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-            XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile
-                    (TEMP_FILE, XmlSerializableAddressBook.class);
+            XmlSerializableFinancialPlanner dataFromFile = XmlUtil.getDataFromFile
+                    (TEMP_FILE, XmlSerializableFinancialPlanner.class);
             assertEquals(dataToWrite, dataFromFile);
 
-            AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
-            dataToWrite = new XmlSerializableAddressBook(
+            FinancialPlannerBuilder builder = new FinancialPlannerBuilder(new FinancialPlanner());
+            dataToWrite = new XmlSerializableFinancialPlanner(
                     builder.withRecord(new RecordBuilder().build()).build());
 
             XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-            dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+            dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableFinancialPlanner.class);
             assertEquals(dataToWrite, dataFromFile);
         }
 

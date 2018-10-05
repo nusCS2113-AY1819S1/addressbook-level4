@@ -12,7 +12,7 @@ import seedu.address.model.record.UniqueRecordList;
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSameRecord comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     private final UniqueRecordList records;
 
@@ -27,12 +27,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         records = new UniqueRecordList();
     }
 
-    public AddressBook() {}
+    public FinancialPlanner() {}
 
     /**
-     * Creates an AddressBook using the Records in the {@code toBeCopied}
+     * Creates an FinancialPlanner using the Records in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public FinancialPlanner(ReadOnlyFinancialPlanner toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -48,9 +48,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code FinancialPlanner} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyFinancialPlanner newData) {
         requireNonNull(newData);
 
         setRecords(newData.getRecordList());
@@ -59,7 +59,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// record-level operations
 
     /**
-     * Returns true if a record with the same identity as {@code record} exists in the address book.
+     * Returns true if a record with the same identity as {@code record} exists in the financial planner.
      */
     public boolean hasRecord(Record record) {
         requireNonNull(record);
@@ -67,8 +67,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a record to the address book.
-     * The record must not already exist in the address book.
+     * Adds a record to the financial planner.
+     * The record must not already exist in the financial planner.
      */
     public void addRecord(Record p) {
         records.add(p);
@@ -76,8 +76,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given record {@code target} in the list with {@code editedRecord}.
-     * {@code target} must exist in the address book.
-     * The record identity of {@code editedRecord} must not be the same as another existing record in the address book.
+     * {@code target} must exist in the financial planner.
+     * The record identity of {@code editedRecord} must not be the same as another existing record in the financial planner.
      */
     public void updateRecord(Record target, Record editedRecord) {
         requireNonNull(editedRecord);
@@ -86,8 +86,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code FinancialPlanner}.
+     * {@code key} must exist in the financial planner.
      */
     public void removeRecord(Record key) {
         records.remove(key);
@@ -109,8 +109,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && records.equals(((AddressBook) other).records));
+                || (other instanceof FinancialPlanner // instanceof handles nulls
+                && records.equals(((FinancialPlanner) other).records));
     }
 
     @Override

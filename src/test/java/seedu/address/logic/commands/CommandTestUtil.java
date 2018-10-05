@@ -14,7 +14,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.FinancialPlanner;
 import seedu.address.model.Model;
 import seedu.address.model.record.NameContainsKeywordsPredicate;
 import seedu.address.model.record.Record;
@@ -99,7 +99,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        FinancialPlanner expectedFinancialPlanner = new FinancialPlanner(actualModel.getFinancialPlanner());
         List<Record> expectedFilteredList = new ArrayList<>(actualModel.getFilteredRecordList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -109,7 +109,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedFinancialPlanner, actualModel.getFinancialPlanner());
             assertEquals(expectedFilteredList, actualModel.getFilteredRecordList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
@@ -136,7 +136,7 @@ public class CommandTestUtil {
     public static void deleteFirstRecord(Model model) {
         Record firstRecord = model.getFilteredRecordList().get(0);
         model.deleteRecord(firstRecord);
-        model.commitAddressBook();
+        model.commitFinancialPlanner();
     }
 
 }

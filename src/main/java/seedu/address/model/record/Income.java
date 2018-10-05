@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Record's income in the address book.
+ * Represents a Record's income in the financial planner.
  * Guarantees: immutable; is valid as declared in {@link #isValidIncome(String)}
  */
 public class Income extends MoneyFlow {

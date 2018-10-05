@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.record.Record;
 
 /**
- * Deletes a record identified using it's displayed index from the address book.
+ * Deletes a record identified using it's displayed index from the financial planner.
  */
 public class DeleteCommand extends Command {
 
@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
 
         Record recordToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteRecord(recordToDelete);
-        model.commitAddressBook();
+        model.commitFinancialPlanner();
         return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, recordToDelete));
     }
 

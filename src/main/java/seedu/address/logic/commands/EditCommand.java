@@ -46,7 +46,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited Record: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the financial planner.";
 
     private final Index index;
     private final EditRecordDescriptor editRecordDescriptor;
@@ -81,7 +81,7 @@ public class EditCommand extends Command {
 
         model.updateRecord(recordToEdit, editedRecord);
         model.updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
-        model.commitAddressBook();
+        model.commitFinancialPlanner();
         return new CommandResult(String.format(MESSAGE_EDIT_RECORD_SUCCESS, editedRecord));
     }
 

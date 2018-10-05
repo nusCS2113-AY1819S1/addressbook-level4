@@ -8,15 +8,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.FinancialPlanner;
+import seedu.address.model.ReadOnlyFinancialPlanner;
 import seedu.address.model.record.Record;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable FinancialPlanner that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook {
+@XmlRootElement(name = "financialplanner")
+public class XmlSerializableFinancialPlanner {
 
     public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
 
@@ -24,37 +24,37 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedRecord> records;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableFinancialPlanner.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
+    public XmlSerializableFinancialPlanner() {
         records = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
         this();
         records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this addressbook into the model's {@code AddressBook} object.
+     * Converts this financialplanner into the model's {@code FinancialPlanner} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedRecord}.
      */
-    public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+    public FinancialPlanner toModelType() throws IllegalValueException {
+        FinancialPlanner financialPlanner = new FinancialPlanner();
         for (XmlAdaptedRecord p : records) {
             Record record = p.toModelType();
-            if (addressBook.hasRecord(record)) {
+            if (financialPlanner.hasRecord(record)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
             }
-            addressBook.addRecord(record);
+            financialPlanner.addRecord(record);
         }
-        return addressBook;
+        return financialPlanner;
     }
 
     @Override
@@ -63,9 +63,9 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableFinancialPlanner)) {
             return false;
         }
-        return records.equals(((XmlSerializableAddressBook) other).records);
+        return records.equals(((XmlSerializableFinancialPlanner) other).records);
     }
 }

@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.record.TagsContainsKeywordsPredicate;
 
 /**
- * Finds and lists all records in address book whose tags contains any of the argument keywords.
+ * Finds and lists all records in financial planner whose tags contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FindTagCommand extends Command {

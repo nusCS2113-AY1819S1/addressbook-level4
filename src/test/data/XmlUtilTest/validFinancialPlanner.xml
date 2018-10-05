@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<financialplanner>
     <records>
         <name>Payment for earphone</name>
         <date isPrivate="false">01-10-1400</date>
@@ -45,4 +45,4 @@
         <date isPrivate="false">27-10-2006</date>
         <moneyFlow isPrivate="false">+1000001</moneyFlow>
     </records>
-</addressbook>
+</financialplanner>

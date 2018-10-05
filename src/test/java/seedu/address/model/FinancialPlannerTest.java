@@ -6,7 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MONEYFLOW_EXPENSE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalRecords.INDO;
-import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,29 +23,29 @@ import seedu.address.model.record.Record;
 import seedu.address.model.record.exceptions.DuplicateRecordException;
 import seedu.address.testutil.RecordBuilder;
 
-public class AddressBookTest {
+public class FinancialPlannerTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private final AddressBook addressBook = new AddressBook();
+    private final FinancialPlanner financialPlanner = new FinancialPlanner();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getRecordList());
+        assertEquals(Collections.emptyList(), financialPlanner.getRecordList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.resetData(null);
+        financialPlanner.resetData(null);
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+    public void resetData_withValidReadOnlyFinancialPlanner_replacesData() {
+        FinancialPlanner newData = getTypicalFinancialPlanner();
+        financialPlanner.resetData(newData);
+        assertEquals(newData, financialPlanner);
     }
 
     @Test
@@ -54,50 +54,50 @@ public class AddressBookTest {
         Record editedIndo = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         List<Record> newRecords = Arrays.asList(INDO, editedIndo);
-        AddressBookStub newData = new AddressBookStub(newRecords);
+        FinancialPlannerStub newData = new FinancialPlannerStub(newRecords);
 
         thrown.expect(DuplicateRecordException.class);
-        addressBook.resetData(newData);
+        financialPlanner.resetData(newData);
     }
 
     @Test
     public void hasRecord_nullRecord_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        addressBook.hasRecord(null);
+        financialPlanner.hasRecord(null);
     }
 
     @Test
-    public void hasRecord_recordNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasRecord(INDO));
+    public void hasRecord_recordNotInFinancialPlanner_returnsFalse() {
+        assertFalse(financialPlanner.hasRecord(INDO));
     }
 
     @Test
-    public void hasRecord_recordInAddressBook_returnsTrue() {
-        addressBook.addRecord(INDO);
-        assertTrue(addressBook.hasRecord(INDO));
+    public void hasRecord_recordInFinancialPlanner_returnsTrue() {
+        financialPlanner.addRecord(INDO);
+        assertTrue(financialPlanner.hasRecord(INDO));
     }
 
     @Test
-    public void hasRecord_recordWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addRecord(INDO);
+    public void hasRecord_recordWithSameIdentityFieldsInFinancialPlanner_returnsTrue() {
+        financialPlanner.addRecord(INDO);
         Record editedIndo = new RecordBuilder(INDO).withMoneyFlow(VALID_MONEYFLOW_EXPENSE_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(addressBook.hasRecord(editedIndo));
+        assertTrue(financialPlanner.hasRecord(editedIndo));
     }
 
     @Test
     public void getRecordList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        addressBook.getRecordList().remove(0);
+        financialPlanner.getRecordList().remove(0);
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose records list can violate interface constraints.
+     * A stub ReadOnlyFinancialPlanner whose records list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class FinancialPlannerStub implements ReadOnlyFinancialPlanner {
         private final ObservableList<Record> records = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Record> records) {
+        FinancialPlannerStub(Collection<Record> records) {
             this.records.setAll(records);
         }
 

@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,16 +24,16 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     }
 
     @Test
     public void execute_newRecord_success() {
         Record validRecord = new RecordBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
         expectedModel.addRecord(validRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitFinancialPlanner();
 
         assertCommandSuccess(new AddCommand(validRecord), model, commandHistory,
                 String.format(AddCommand.MESSAGE_SUCCESS, validRecord), expectedModel);
@@ -41,7 +41,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicateRecord_throwsCommandException() {
-        Record recordInList = model.getAddressBook().getRecordList().get(0);
+        Record recordInList = model.getFinancialPlanner().getRecordList().get(0);
         assertCommandFailure(new AddCommand(recordInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_RECORD);
     }

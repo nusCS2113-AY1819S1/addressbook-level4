@@ -12,13 +12,13 @@ import seedu.address.model.Model;
 import seedu.address.model.record.Record;
 
 /**
- * Adds a record to the address book.
+ * Adds a record to the financial planner.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a record to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a record to the financial planner. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_DATE + "DATE "
@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "Techno";
 
     public static final String MESSAGE_SUCCESS = "New record added: %1$s";
-    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the financial planner";
 
     private final Record toAdd;
 
@@ -53,7 +53,7 @@ public class AddCommand extends Command {
         }
 
         model.addRecord(toAdd);
-        model.commitAddressBook();
+        model.commitFinancialPlanner();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
