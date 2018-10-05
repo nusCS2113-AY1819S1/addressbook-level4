@@ -22,7 +22,7 @@ public class LogicManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    private Model model = new ModelManager();
+    private Model model = new ModelManager(new TestStorage());
     private Logic logic = new LogicManager(model);
 
     @Test

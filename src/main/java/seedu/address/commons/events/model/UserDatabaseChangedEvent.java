@@ -1,10 +1,10 @@
 package seedu.address.commons.events.model;
 
-
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyUserDatabase;
 
 public class UserDatabaseChangedEvent extends BaseEvent {
+
     public final ReadOnlyUserDatabase data;
 
     public UserDatabaseChangedEvent(ReadOnlyUserDatabase data) {
