@@ -32,7 +32,7 @@ import seedu.planner.commons.core.index.Index;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.EditCommand.EditRecordDescriptor;
 import seedu.planner.model.record.Date;
-import seedu.planner.model.record.Income;
+import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.tag.Tag;
 import seedu.planner.testutil.EditRecordDescriptorBuilder;
@@ -78,7 +78,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_DATE_DESC, Date.MESSAGE_DATE_CONSTRAINTS); // invalid date
         assertParseFailure(parser, "1"
-                + INVALID_MONEYFLOW_DESC, Income.MESSAGE_MONEY_FLOW_CONSTRAINTS); // invalid moneyflow
+                + INVALID_MONEYFLOW_DESC, MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS); // invalid moneyflow
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
         // invalid date followed by valid income

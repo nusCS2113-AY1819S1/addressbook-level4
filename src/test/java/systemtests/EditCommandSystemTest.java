@@ -37,7 +37,7 @@ import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
-import seedu.planner.model.record.Income;
+import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.tag.Tag;
@@ -170,7 +170,7 @@ public class EditCommandSystemTest extends FinancialPlannerSystemTest {
 
         /* Case: invalid money flow -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased()
-                + INVALID_MONEYFLOW_DESC, Income.MESSAGE_MONEY_FLOW_CONSTRAINTS);
+                + INVALID_MONEYFLOW_DESC, MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RECORD.getOneBased()

@@ -7,8 +7,7 @@ import java.util.stream.Stream;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.EditCommand.EditRecordDescriptor;
 import seedu.planner.model.record.Date;
-import seedu.planner.model.record.Expense;
-import seedu.planner.model.record.Income;
+import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.tag.Tag;
@@ -59,12 +58,7 @@ public class EditRecordDescriptorBuilder {
      * Sets the {@code MoneyFlow} of the {@code EditRecordDescriptor} that we are building.
      */
     public EditRecordDescriptorBuilder withMoneyFlow(String moneyFlow) {
-        if (Expense.isValidExpense(moneyFlow)) {
-            descriptor.setMoneyFlow(new Expense(moneyFlow));
-        }
-        if (Income.isValidIncome(moneyFlow)) {
-            descriptor.setMoneyFlow(new Income(moneyFlow));
-        }
+        descriptor.setMoneyFlow(new MoneyFlow(moneyFlow));
         return this;
     }
 

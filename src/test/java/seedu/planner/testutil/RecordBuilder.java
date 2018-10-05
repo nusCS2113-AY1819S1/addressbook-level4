@@ -4,8 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.planner.model.record.Date;
-import seedu.planner.model.record.Expense;
-import seedu.planner.model.record.Income;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.record.Record;
@@ -29,7 +27,7 @@ public class RecordBuilder {
     public RecordBuilder() {
         name = new Name(DEFAULT_NAME);
         date = new Date(DEFAULT_DATE);
-        moneyFlow = new Income(DEFAULT_MONEYFLOW);
+        moneyFlow = new MoneyFlow(DEFAULT_MONEYFLOW);
         tags = new HashSet<>();
     }
 
@@ -63,11 +61,7 @@ public class RecordBuilder {
      * Sets the {@code MoneyFlow} of the {@code Record} that we are building.
      */
     public RecordBuilder withMoneyFlow(String moneyFlow) {
-        if (Expense.isValidExpense(moneyFlow)) {
-            this.moneyFlow = new Expense(moneyFlow);
-        } else if (Income.isValidIncome(moneyFlow)) {
-            this.moneyFlow = new Income(moneyFlow);
-        }
+        this.moneyFlow = new MoneyFlow(moneyFlow);
         return this;
     }
 

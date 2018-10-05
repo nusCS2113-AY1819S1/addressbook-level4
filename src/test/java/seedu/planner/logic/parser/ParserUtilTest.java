@@ -16,8 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
-import seedu.planner.model.record.Expense;
-import seedu.planner.model.record.Income;
+import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.tag.Tag;
 import seedu.planner.testutil.Assert;
@@ -120,33 +119,20 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseExpense_validValueWithoutWhitespace_returnsExpense() throws Exception {
-        Expense expectedExpense = new Expense(VALID_EXPENSE);
+    public void parseMoneyFlow_validValueWithoutWhitespace_returnsMoneyFlow() throws Exception {
+        MoneyFlow expectedExpense = new MoneyFlow(VALID_EXPENSE);
+        MoneyFlow expectedIncome = new MoneyFlow(VALID_INCOME);
         assertEquals(expectedExpense, ParserUtil.parseMoneyFlow(VALID_EXPENSE));
-    }
-
-    @Test
-    public void parseExpense_validValueWithWhitespace_returnsTrimmedExpense() throws Exception {
-        String expenseWithWhitespace = WHITESPACE + VALID_EXPENSE + WHITESPACE;
-        Expense expectedExpense = new Expense(VALID_EXPENSE);
-        assertEquals(expectedExpense, ParserUtil.parseMoneyFlow(expenseWithWhitespace));
-    }
-
-    @Test
-    public void parseIncome_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseMoneyFlow(INVALID_INCOME));
-    }
-
-    @Test
-    public void parseIncome_validValueWithoutWhitespace_returnsIncome() throws Exception {
-        Income expectedIncome = new Income(VALID_INCOME);
         assertEquals(expectedIncome, ParserUtil.parseMoneyFlow(VALID_INCOME));
     }
 
     @Test
-    public void parseIncome_validValueWithWhitespace_returnsTrimmedIncome() throws Exception {
+    public void parseMoneyFlow_validValueWithWhitespace_returnsMoneyFlow() throws Exception {
+        String expenseWithWhitespace = WHITESPACE + VALID_EXPENSE + WHITESPACE;
         String incomeWithWhitespace = WHITESPACE + VALID_INCOME + WHITESPACE;
-        Income expectedIncome = new Income(VALID_INCOME);
+        MoneyFlow expectedExpense = new MoneyFlow(VALID_EXPENSE);
+        assertEquals(expectedExpense, ParserUtil.parseMoneyFlow(expenseWithWhitespace));
+        MoneyFlow expectedIncome = new MoneyFlow(VALID_INCOME);
         assertEquals(expectedIncome, ParserUtil.parseMoneyFlow(incomeWithWhitespace));
     }
 
