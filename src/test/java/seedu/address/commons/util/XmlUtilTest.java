@@ -44,6 +44,7 @@ public class XmlUtilTest {
     private static final Path TEMP_LOGIN_FILE = TestUtil.getFilePathInSandboxFolder("tempLoginBook.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
 
+    private static final String INVALID_USERID = "AA234567M";
     private static final String INVALID_PHONE = "9482asf424";
 
     private static final String VALID_USERID = "A1234567M";
@@ -89,7 +90,7 @@ public class XmlUtilTest {
     public void getDataFromFile_validFile_validResult() throws Exception {
         LoginBook dataFromLoginFile = XmlUtil.getDataFromFile(VALID_LOGIN_FILE,
                 XmlSerializableLoginBook.class).toModelType();
-        assertEquals(9, dataFromLoginFile.getLoginDetailsList().size());
+        assertEquals(4, dataFromLoginFile.getLoginDetailsList().size());
         AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
     }
@@ -98,7 +99,7 @@ public class XmlUtilTest {
     public void xmlAccountFromFile_fileWithMissingLoginDetailsField_validResult() throws Exception {
         XmlAccount actualLoginDetail = XmlUtil.getDataFromFile(
                 MISSING_LOGINDETAILS_FIELD_FILE, XmlAccountWithRootElement.class);
-        XmlAccount expectedLoginDetail = new XmlAccount(VALID_USERID, VALID_USERPASSWORD);
+        XmlAccount expectedLoginDetail = new XmlAccount(null, VALID_USERPASSWORD);
         assertEquals(expectedLoginDetail, actualLoginDetail);
     }
 
@@ -115,7 +116,7 @@ public class XmlUtilTest {
     public void xmlAccountFromFile_fileWithInvalidLoginDetailsField_validResult() throws Exception {
         XmlAccount actualLoginDetail = XmlUtil.getDataFromFile(
                 INVALID_LOGINDETAILS_FIELD_FILE, XmlAccountWithRootElement.class);
-        XmlAccount expectedLoginDetail = new XmlAccount(VALID_USERID, VALID_USERPASSWORD);
+        XmlAccount expectedLoginDetail = new XmlAccount(INVALID_USERID, VALID_USERPASSWORD);
         assertEquals(expectedLoginDetail, actualLoginDetail);
     }
 
@@ -201,6 +202,6 @@ public class XmlUtilTest {
      * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAccount}
      * objects.
      */
-    @XmlRootElement(name = "loginDetail")
+    @XmlRootElement(name = "logindetail")
     private static class XmlAccountWithRootElement extends XmlAccount {}
 }
