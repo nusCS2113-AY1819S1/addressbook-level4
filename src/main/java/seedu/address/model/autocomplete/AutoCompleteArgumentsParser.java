@@ -1,10 +1,6 @@
 //@@author lekoook
 package seedu.address.model.autocomplete;
 
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Prefix;
-
 import static seedu.address.logic.parser.CliSyntax.COMMAND_DELETE;
 import static seedu.address.logic.parser.CliSyntax.COMMAND_FIND;
 import static seedu.address.logic.parser.CliSyntax.COMMAND_IMPORT;
@@ -18,6 +14,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INVALID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Prefix;
 
 /**
  * Parses the arguments of a command text input for auto completing the command
