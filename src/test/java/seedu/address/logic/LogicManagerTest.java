@@ -3,6 +3,7 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -41,8 +42,9 @@ public class LogicManagerTest {
 
     @Test
     public void execute_validCommand_success() {
+        String expectedMessage = String.format(ListCommand.MESSAGE_SUCCESS_SINGULAR, 0);
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        assertCommandSuccess(listCommand, expectedMessage, model);
         assertHistoryCorrect(listCommand);
     }
 

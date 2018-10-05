@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 
 import java.util.ArrayList;
 
@@ -32,21 +33,25 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
+        String expectedMessage =
+                String.format(ListCommand.MESSAGE_SUCCESS, getTypicalPersons().size());
         assertCommandSuccess(
                 new ListCommand(ListCommand.TYPE_ALL, new ArrayList<>()),
                 model,
                 commandHistory,
-                ListCommand.MESSAGE_SUCCESS,
+                expectedMessage,
                 expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
+        String expectedMessage =
+                String.format(ListCommand.MESSAGE_SUCCESS, getTypicalPersons().size());
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         assertCommandSuccess(
                 new ListCommand(ListCommand.TYPE_ALL, new ArrayList<>()),
                 model,
                 commandHistory,
-                ListCommand.MESSAGE_SUCCESS, expectedModel);
+                expectedMessage, expectedModel);
     }
 }
