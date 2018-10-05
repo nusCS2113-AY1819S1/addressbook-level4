@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import seedu.address.testutil.Assert;
 
-public class QuantityTest {
+public class MinQuantityTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
