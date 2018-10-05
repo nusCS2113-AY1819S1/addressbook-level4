@@ -2,10 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -53,14 +49,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code priority} is invalid.
      */
-    public static String parsePriority(String priority) throws ParseException {
+    public static PriorityLevel parsePriority(String priority) throws ParseException {
         requireNonNull(priority);
         String trimmedPriority = priority.trim();
         if (!PriorityLevel.isValidPriorityLevel(trimmedPriority)) {
             throw new ParseException(PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
         }
         //        return new PriorityLevel(trimmedPriority);
-        return null;
+        return new PriorityLevel(trimmedPriority);
     }
 
     /**

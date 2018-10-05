@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
 /**
@@ -28,7 +29,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
         String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        String priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
+        PriorityLevel priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
 
         Task task = new Task(title, description, priority);
 

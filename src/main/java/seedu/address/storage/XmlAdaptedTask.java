@@ -1,11 +1,6 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -53,7 +48,7 @@ public class XmlAdaptedTask {
         deadline = source.getDeadline();
         title = source.getTitle();
         description = source.getDescription();
-        priority = source.getPriorityLevel();
+        priority = source.getPriorityLevel().toString();
     }
 
     /**
@@ -89,8 +84,7 @@ public class XmlAdaptedTask {
         if (!PriorityLevel.isValidPriorityLevel(priority)) {
             throw new IllegalValueException(PriorityLevel.MESSAGE_PRIORITY_CONSTRAINTS);
         }
-        //TODO: Change String to PriorityLevel
-        final String modelPriority = priority; //new PriorityLevel(priority);
+        final PriorityLevel modelPriority = new PriorityLevel(priority);
 
         return new Task(modelDeadline, modelTitle, modelDescription, modelPriority);
     }

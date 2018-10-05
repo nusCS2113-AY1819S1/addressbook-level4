@@ -1,11 +1,8 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyTaskBook;
+import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
 /**
@@ -15,7 +12,7 @@ import seedu.address.model.task.Task;
 public class SampleDataUtil {
     public static Task[] getSampleTasks() {
         return new Task[] {
-            new Task("1/1", "Complete code refactoring", "refer to notes", "high"),
+            new Task("1/1", "Complete code refactoring", "refer to notes", new PriorityLevel("high")),
         };
     }
 

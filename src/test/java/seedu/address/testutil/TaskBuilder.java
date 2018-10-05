@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
 /**
@@ -15,13 +16,13 @@ public class TaskBuilder {
     private String deadline;
     private String title;
     private String description;
-    private String priority;
+    private PriorityLevel priority;
 
     public TaskBuilder() {
         this.deadline = DEFAULT_DEADLINE;
         this.title = DEFAULT_TITLE;
         this.description = DEFAULT_DESCRIPTION;
-        this.priority = DEFAULT_PRIORITY;
+        this.priority = new PriorityLevel(DEFAULT_PRIORITY);
     }
 
     /**
@@ -61,7 +62,7 @@ public class TaskBuilder {
      * Sets the {@code Priority} of the {@code Task} that we are building.
      */
     public TaskBuilder withPriority(String priority) {
-        this.priority = priority;
+        this.priority = new PriorityLevel(priority);
         return this;
     }
 

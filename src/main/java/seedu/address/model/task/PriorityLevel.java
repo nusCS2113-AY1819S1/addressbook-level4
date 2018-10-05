@@ -21,7 +21,7 @@ public class PriorityLevel {
     public PriorityLevel(String priority) {
         requireNonNull(priority);
         checkArgument(isValidPriorityLevel(priority), MESSAGE_PRIORITY_CONSTRAINTS);
-        priorityLevel = priority;
+        priorityLevel = priority.toLowerCase();
     }
 
     /**

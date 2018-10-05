@@ -11,16 +11,16 @@ public class Task {
     private final String deadline;
     private final String title;
     private final String description;
-    private final String priorityLevel;
+    private final PriorityLevel priorityLevel;
 
-    public Task(String deadline, String title, String description, String priorityLevel) {
+    public Task(String deadline, String title, String description, PriorityLevel priorityLevel) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
     }
 
-    public Task(String title, String description, String priorityLevel) {
+    public Task(String title, String description, PriorityLevel priorityLevel) {
         this.deadline = PLACEHOLDER_DEADLINE;
         this.title = title;
         this.description = description;
@@ -39,7 +39,7 @@ public class Task {
         return description;
     }
 
-    public String getPriorityLevel() {
+    public PriorityLevel getPriorityLevel() {
         return priorityLevel;
     }
 
