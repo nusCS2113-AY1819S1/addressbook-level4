@@ -89,8 +89,8 @@ public class ParserUtil {
     public static Price parseEmail(String email) throws ParseException {
         requireNonNull(email);
         String trimmedEmail = email.trim();
-        if (!Price.isValidEmail(trimmedEmail)) {
-            throw new ParseException(Price.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!Price.isValidPhone(trimmedEmail)) {
+            throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
         return new Price(trimmedEmail);
     }
