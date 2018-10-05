@@ -42,8 +42,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_QUANTITY + "25 "
-            + PREFIX_TAG + "Lab7 "
-            + PREFIX_TAG + "Lab8";
+            + PREFIX_TAG + "Lab1 "
+            + PREFIX_TAG + "Lab2";
 
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
