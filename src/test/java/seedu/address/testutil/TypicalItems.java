@@ -19,7 +19,7 @@ import seedu.address.model.item.Item;
 public class TypicalItems {
 
     // Manually added
-    public static final Item RPLIDAR = new ItemBuilder().withName("RP Lidar").withQuantity("25")
+    public static final Item RPLIDAR = new ItemBuilder().withName("RPLidar").withQuantity("25")
             .withMinQuantity("10").build();
     public static final Item MOTOR = new ItemBuilder().withName("Motor").withQuantity("100")
             .withMinQuantity("20").build();
@@ -30,7 +30,7 @@ public class TypicalItems {
             .withQuantity("20")
             .withTags("friends").build();
 
-    public static final String KEYWORD_MATCHING_ARDUINO = "Arduino"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_AR = "ar"; // A keyword that matches "ar"
 
     private TypicalItems() {} // prevents instantiation
 

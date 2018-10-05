@@ -71,7 +71,7 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the address book data stored inside the storage file.
      */
-    public StockList readStorageAddressBook() {
+    public StockList readStorageStockList() {
         try {
             return new StockList(storage.readStockList().get());
         } catch (DataConversionException dce) {
