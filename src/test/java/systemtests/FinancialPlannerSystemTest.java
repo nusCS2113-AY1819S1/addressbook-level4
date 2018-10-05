@@ -152,8 +152,8 @@ public abstract class FinancialPlannerSystemTest {
      */
     protected void showRecordsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredRecordList().size() <
-                getModel().getFinancialPlanner().getRecordList().size());
+        assertTrue(getModel().getFilteredRecordList().size() < getModel()
+                .getFinancialPlanner().getRecordList().size());
     }
 
     /**
