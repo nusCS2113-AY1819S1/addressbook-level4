@@ -130,7 +130,6 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredRecordList().size());
     }
 
-<<<<<<< HEAD:src/test/java/seedu/address/logic/commands/CommandTestUtil.java
     public static void showRecordAtIndex(Model model, int targetIndexInt){
         assertTrue((targetIndexInt <model.getFilteredRecordList().size()));
 
@@ -141,12 +140,8 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredRecordList().size());
     }
 
-   /**
-     * Deletes the first record in {@code model}'s filtered list from {@code model}'s address book.
-=======
     /**
      * Deletes the first record in {@code model}'s filtered list from {@code model}'s planner book.
->>>>>>> 936a266304811392cda80acfbf3d1820aac87fed:src/test/java/seedu/planner/logic/commands/CommandTestUtil.java
      */
     public static void deleteFirstRecord(Model model) {
         Record firstRecord = model.getFilteredRecordList().get(0);
