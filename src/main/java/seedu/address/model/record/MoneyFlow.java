@@ -46,13 +46,18 @@ public class MoneyFlow {
         return test.matches(MONEYFLOW_VALIDATION_REGEX);
     }
 
-    public String toString(){ return value; }
+    public String toString() {
+        return value;
+    }
 
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MoneyFlow // instanceof handles nulls
                 && value.equals(((MoneyFlow) other).value)); // state check
     }
 
-    public int hashCode() { return value.hashCode(); }
+    public int hashCode() {
+        return value.hashCode();
+    }
 }
