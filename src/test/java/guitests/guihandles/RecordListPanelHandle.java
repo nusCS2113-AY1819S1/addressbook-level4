@@ -6,7 +6,7 @@ import java.util.Set;
 
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.record.Record;
+import seedu.planner.model.record.Record;
 
 /**
  * Provides a handle for {@code RecordListPanel} containing the list of {@code RecordCard}.

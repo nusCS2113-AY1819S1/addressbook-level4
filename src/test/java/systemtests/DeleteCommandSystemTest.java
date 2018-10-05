@@ -1,24 +1,24 @@
 package systemtests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_RECORD_SUCCESS;
-import static seedu.address.testutil.TestUtil.getLastIndex;
-import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getRecord;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
-import static seedu.address.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
+import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX;
+import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.planner.logic.commands.DeleteCommand.MESSAGE_DELETE_RECORD_SUCCESS;
+import static seedu.planner.testutil.TestUtil.getLastIndex;
+import static seedu.planner.testutil.TestUtil.getMidIndex;
+import static seedu.planner.testutil.TestUtil.getRecord;
+import static seedu.planner.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
+import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.record.Record;
+import seedu.planner.commons.core.Messages;
+import seedu.planner.commons.core.index.Index;
+import seedu.planner.logic.commands.DeleteCommand;
+import seedu.planner.logic.commands.RedoCommand;
+import seedu.planner.logic.commands.UndoCommand;
+import seedu.planner.model.Model;
+import seedu.planner.model.record.Record;
 
 public class DeleteCommandSystemTest extends FinancialPlannerSystemTest {
 
@@ -64,13 +64,13 @@ public class DeleteCommandSystemTest extends FinancialPlannerSystemTest {
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered record list, delete index within bounds of address book and record list -> deleted */
+        /* Case: filtered record list, delete index within bounds of planner book and record list -> deleted */
         showRecordsWithName(KEYWORD_MATCHING_BURSARY);
         Index index = INDEX_FIRST_RECORD;
         assertTrue(index.getZeroBased() < getModel().getFilteredRecordList().size());
         assertCommandSuccess(index);
 
-        /* Case: filtered record list, delete index within bounds of address book but out of bounds of record list
+        /* Case: filtered record list, delete index within bounds of planner book but out of bounds of record list
          * -> rejected
          */
         showRecordsWithName(KEYWORD_MATCHING_BURSARY);
@@ -118,7 +118,7 @@ public class DeleteCommandSystemTest extends FinancialPlannerSystemTest {
     }
 
     /**
-     * Removes the {@code Record} at the specified {@code index} in {@code model}'s address book.
+     * Removes the {@code Record} at the specified {@code index} in {@code model}'s planner book.
      * @return the removed record
      */
     private Record removeRecord(Model model, Index index) {

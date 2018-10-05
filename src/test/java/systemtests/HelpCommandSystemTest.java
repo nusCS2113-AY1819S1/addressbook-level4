@@ -4,18 +4,18 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.planner.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
+import static seedu.planner.ui.testutil.GuiTestAssert.assertListMatching;
 
 import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.ui.BrowserPanel;
-import seedu.address.ui.StatusBarFooter;
+import seedu.planner.logic.commands.DeleteCommand;
+import seedu.planner.logic.commands.HelpCommand;
+import seedu.planner.logic.commands.SelectCommand;
+import seedu.planner.ui.BrowserPanel;
+import seedu.planner.ui.StatusBarFooter;
 
 /**
  * A system test class for the help window, which contains interaction with other UI components.
