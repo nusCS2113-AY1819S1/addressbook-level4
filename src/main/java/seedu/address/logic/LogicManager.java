@@ -8,10 +8,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.TaskBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The main LogicManager of the app.
@@ -21,19 +21,19 @@ public class LogicManager extends ComponentManager implements Logic {
 
     private final Model model;
     private final CommandHistory history;
-    private final AddressBookParser addressBookParser;
+    private final TaskBookParser taskBookParser;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
-        addressBookParser = new AddressBookParser();
+        taskBookParser = new TaskBookParser();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = addressBookParser.parseCommand(commandText); // Command command = AddCommand(person)
+            Command command = taskBookParser.parseCommand(commandText); // Command command = AddCommand(task)
             //AddCommand.execute(model, history) which will return CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
             return command.execute(model, history);
         } finally {
@@ -42,8 +42,8 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
     }
 
     @Override

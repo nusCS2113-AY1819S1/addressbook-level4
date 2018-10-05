@@ -6,16 +6,16 @@ import java.util.List;
 /**
  * {@code AddressBook} that keeps track of its own history.
  */
-public class VersionedAddressBook extends AddressBook {
+public class VersionedTaskBook extends AddressBook {
 
-    private final List<ReadOnlyAddressBook> addressBookStateList;
+    private final List<ReadOnlyTaskBook> taskBookStateList;
     private int currentStatePointer;
 
-    public VersionedAddressBook(ReadOnlyAddressBook initialState) {
+    public VersionedTaskBook(ReadOnlyTaskBook initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new AddressBook(initialState));
+        taskBookStateList = new ArrayList<>();
+        taskBookStateList.add(new AddressBook(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,12 +25,12 @@ public class VersionedAddressBook extends AddressBook {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new AddressBook(this));
+        taskBookStateList.add(new AddressBook(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        taskBookStateList.subList(currentStatePointer + 1, taskBookStateList.size()).clear();
     }
 
     /**
@@ -41,7 +41,7 @@ public class VersionedAddressBook extends AddressBook {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(taskBookStateList.get(currentStatePointer));
     }
 
     /**
@@ -52,7 +52,7 @@ public class VersionedAddressBook extends AddressBook {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(taskBookStateList.get(currentStatePointer));
     }
 
     /**
@@ -66,7 +66,7 @@ public class VersionedAddressBook extends AddressBook {
      * Returns true if {@code redo()} has address book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < taskBookStateList.size() - 1;
     }
 
     @Override
@@ -77,16 +77,16 @@ public class VersionedAddressBook extends AddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof VersionedAddressBook)) {
+        if (!(other instanceof VersionedTaskBook)) {
             return false;
         }
 
-        VersionedAddressBook otherVersionedAddressBook = (VersionedAddressBook) other;
+        VersionedTaskBook otherVersionedTaskBook = (VersionedTaskBook) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedTaskBook)
+                && taskBookStateList.equals(otherVersionedTaskBook.taskBookStateList)
+                && currentStatePointer == otherVersionedTaskBook.currentStatePointer;
     }
 
     /**
