@@ -3,7 +3,7 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_LED_YELLOW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB2;
 import static seedu.address.testutil.TypicalItems.LED_RED;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
