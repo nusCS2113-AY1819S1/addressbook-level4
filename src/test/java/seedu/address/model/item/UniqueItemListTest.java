@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB1;
-import static seedu.address.testutil.TypicalItems.ALICE;
-import static seedu.address.testutil.TypicalItems.BOB;
+import static seedu.address.testutil.TypicalItems.ARDUINO;
+import static seedu.address.testutil.TypicalItems.RPLIDAR;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,19 +34,19 @@ public class UniqueItemListTest {
 
     @Test
     public void contains_itemNotInList_returnsFalse() {
-        assertFalse(uniqueItemList.contains(ALICE));
+        assertFalse(uniqueItemList.contains(ARDUINO));
     }
 
     @Test
     public void contains_itemInList_returnsTrue() {
-        uniqueItemList.add(ALICE);
-        assertTrue(uniqueItemList.contains(ALICE));
+        uniqueItemList.add(ARDUINO);
+        assertTrue(uniqueItemList.contains(ARDUINO));
     }
 
     @Test
     public void contains_itemWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueItemList.add(ALICE);
-        Item editedAlice = new ItemBuilder(ALICE).withAddress(VALID_QUANTITY_ARDUINO).withTags(VALID_TAG_LAB1)
+        uniqueItemList.add(ARDUINO);
+        Item editedAlice = new ItemBuilder(ARDUINO).withQuantity(VALID_QUANTITY_ARDUINO).withTags(VALID_TAG_LAB1)
                 .build();
         assertTrue(uniqueItemList.contains(editedAlice));
     }
@@ -59,44 +59,44 @@ public class UniqueItemListTest {
 
     @Test
     public void add_duplicateItem_throwsDuplicateItemException() {
-        uniqueItemList.add(ALICE);
+        uniqueItemList.add(ARDUINO);
         thrown.expect(DuplicateItemException.class);
-        uniqueItemList.add(ALICE);
+        uniqueItemList.add(ARDUINO);
     }
 
     @Test
     public void setItem_nullTargetItem_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueItemList.setItem(null, ALICE);
+        uniqueItemList.setItem(null, ARDUINO);
     }
 
     @Test
     public void setItem_nullEditedItem_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueItemList.setItem(ALICE, null);
+        uniqueItemList.setItem(ARDUINO, null);
     }
 
     @Test
     public void setItem_targetItemNotInList_throwsItemNotFoundException() {
         thrown.expect(ItemNotFoundException.class);
-        uniqueItemList.setItem(ALICE, ALICE);
+        uniqueItemList.setItem(ARDUINO, ARDUINO);
     }
 
     @Test
     public void setItem_editedItemIsSameItem_success() {
-        uniqueItemList.add(ALICE);
-        uniqueItemList.setItem(ALICE, ALICE);
+        uniqueItemList.add(ARDUINO);
+        uniqueItemList.setItem(ARDUINO, ARDUINO);
         UniqueItemList expectedUniqueItemList = new UniqueItemList();
-        expectedUniqueItemList.add(ALICE);
+        expectedUniqueItemList.add(ARDUINO);
         assertEquals(expectedUniqueItemList, uniqueItemList);
     }
 
     @Test
     public void setItem_editedItemHasSameIdentity_success() {
-        uniqueItemList.add(ALICE);
-        Item editedAlice = new ItemBuilder(ALICE).withAddress(VALID_QUANTITY_ARDUINO).withTags(VALID_TAG_LAB1)
+        uniqueItemList.add(ARDUINO);
+        Item editedAlice = new ItemBuilder(ARDUINO).withQuantity(VALID_QUANTITY_ARDUINO).withTags(VALID_TAG_LAB1)
                 .build();
-        uniqueItemList.setItem(ALICE, editedAlice);
+        uniqueItemList.setItem(ARDUINO, editedAlice);
         UniqueItemList expectedUniqueItemList = new UniqueItemList();
         expectedUniqueItemList.add(editedAlice);
         assertEquals(expectedUniqueItemList, uniqueItemList);
@@ -104,19 +104,19 @@ public class UniqueItemListTest {
 
     @Test
     public void setItem_editedItemHasDifferentIdentity_success() {
-        uniqueItemList.add(ALICE);
-        uniqueItemList.setItem(ALICE, BOB);
+        uniqueItemList.add(ARDUINO);
+        uniqueItemList.setItem(ARDUINO, RPLIDAR);
         UniqueItemList expectedUniqueItemList = new UniqueItemList();
-        expectedUniqueItemList.add(BOB);
+        expectedUniqueItemList.add(RPLIDAR);
         assertEquals(expectedUniqueItemList, uniqueItemList);
     }
 
     @Test
     public void setItem_editedItemHasNonUniqueIdentity_throwsDuplicateItemException() {
-        uniqueItemList.add(ALICE);
-        uniqueItemList.add(BOB);
+        uniqueItemList.add(ARDUINO);
+        uniqueItemList.add(RPLIDAR);
         thrown.expect(DuplicateItemException.class);
-        uniqueItemList.setItem(ALICE, BOB);
+        uniqueItemList.setItem(ARDUINO, RPLIDAR);
     }
 
     @Test
@@ -128,13 +128,13 @@ public class UniqueItemListTest {
     @Test
     public void remove_itemDoesNotExist_throwsItemNotFoundException() {
         thrown.expect(ItemNotFoundException.class);
-        uniqueItemList.remove(ALICE);
+        uniqueItemList.remove(ARDUINO);
     }
 
     @Test
     public void remove_existingItem_removesItem() {
-        uniqueItemList.add(ALICE);
-        uniqueItemList.remove(ALICE);
+        uniqueItemList.add(ARDUINO);
+        uniqueItemList.remove(ARDUINO);
         UniqueItemList expectedUniqueItemList = new UniqueItemList();
         assertEquals(expectedUniqueItemList, uniqueItemList);
     }
@@ -147,9 +147,9 @@ public class UniqueItemListTest {
 
     @Test
     public void setItems_uniqueItemList_replacesOwnListWithProvidedUniqueItemList() {
-        uniqueItemList.add(ALICE);
+        uniqueItemList.add(ARDUINO);
         UniqueItemList expectedUniqueItemList = new UniqueItemList();
-        expectedUniqueItemList.add(BOB);
+        expectedUniqueItemList.add(RPLIDAR);
         uniqueItemList.setItems(expectedUniqueItemList);
         assertEquals(expectedUniqueItemList, uniqueItemList);
     }
@@ -162,17 +162,17 @@ public class UniqueItemListTest {
 
     @Test
     public void setItems_list_replacesOwnListWithProvidedList() {
-        uniqueItemList.add(ALICE);
-        List<Item> itemList = Collections.singletonList(BOB);
+        uniqueItemList.add(ARDUINO);
+        List<Item> itemList = Collections.singletonList(RPLIDAR);
         uniqueItemList.setItems(itemList);
         UniqueItemList expectedUniqueItemList = new UniqueItemList();
-        expectedUniqueItemList.add(BOB);
+        expectedUniqueItemList.add(RPLIDAR);
         assertEquals(expectedUniqueItemList, uniqueItemList);
     }
 
     @Test
     public void setItems_listWithDuplicateItems_throwsDuplicateItemException() {
-        List<Item> listWithDuplicateItems = Arrays.asList(ALICE, ALICE);
+        List<Item> listWithDuplicateItems = Arrays.asList(ARDUINO, ARDUINO);
         thrown.expect(DuplicateItemException.class);
         uniqueItemList.setItems(listWithDuplicateItems);
     }

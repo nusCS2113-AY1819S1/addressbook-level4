@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.testutil.TypicalItems.AMY;
-import static seedu.address.testutil.TypicalItems.BOB;
-import static seedu.address.testutil.TypicalItems.CARL;
+import static seedu.address.testutil.TypicalItems.ARDUINO;
+import static seedu.address.testutil.TypicalItems.RASPBERRY_PI;
+import static seedu.address.testutil.TypicalItems.RPLIDAR;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,9 +18,9 @@ import seedu.address.testutil.StockListBuilder;
 
 public class VersionedStockListTest {
 
-    private final ReadOnlyStockList addressBookWithAmy = new StockListBuilder().withItem(AMY).build();
-    private final ReadOnlyStockList addressBookWithBob = new StockListBuilder().withItem(BOB).build();
-    private final ReadOnlyStockList addressBookWithCarl = new StockListBuilder().withItem(CARL).build();
+    private final ReadOnlyStockList addressBookWithAmy = new StockListBuilder().withItem(ARDUINO).build();
+    private final ReadOnlyStockList addressBookWithBob = new StockListBuilder().withItem(RASPBERRY_PI).build();
+    private final ReadOnlyStockList addressBookWithCarl = new StockListBuilder().withItem(RPLIDAR).build();
     private final ReadOnlyStockList emptyStockList = new StockListBuilder().build();
 
     @Test

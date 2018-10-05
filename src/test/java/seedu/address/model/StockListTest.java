@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB2;
-import static seedu.address.testutil.TypicalItems.LED_RED;
+import static seedu.address.testutil.TypicalItems.ARDUINO;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
 import java.util.Arrays;
@@ -51,9 +51,9 @@ public class StockListTest {
     /*@Test
     public void resetData_withDuplicateItems_throwsDuplicateItemException() {
         // Two items with the same identity fields
-        Item editedLED_RED = new ItemBuilder(LED_RED).withAddress(VALID_QUANTITY_LED_YELLOW).withTags(VALID_TAG_LAB2)
+        Item editedARDUINO = new ItemBuilder(ARDUINO).withAddress(VALID_QUANTITY_LED_YELLOW).withTags(VALID_TAG_LAB2)
                 .build();
-        List<Item> newItems = Arrays.asList(LED_RED, editedLED_RED);
+        List<Item> newItems = Arrays.asList(ARDUINO, editedARDUINO);
         StockListStub newData = new StockListStub(newItems);
 
         thrown.expect(DuplicateItemException.class);
@@ -69,21 +69,21 @@ public class StockListTest {
 
     @Test
     public void hasItem_itemNotInStockList_returnsFalse() {
-        assertFalse(stockList.hasItem(LED_RED));
+        assertFalse(stockList.hasItem(ARDUINO));
     }
 
     @Test
     public void hasItem_itemInStockList_returnsTrue() {
-        stockList.addItem(LED_RED);
-        assertTrue(stockList.hasItem(LED_RED));
+        stockList.addItem(ARDUINO);
+        assertTrue(stockList.hasItem(ARDUINO));
     }
 /*
     @Test
     public void hasItem_itemWithSameIdentityFieldsInStockList_returnsTrue() {
-        stockList.addItem(LED_RED);
-        Item editedLED_RED = new ItemBuilder(LED_RED).withQuantity(VALID_QUANTITY_LED_YELLOW).withTags(VALID_TAG_LAB2)
+        stockList.addItem(ARDUINO);
+        Item editedARDUINO = new ItemBuilder(ARDUINO).withQuantity(VALID_QUANTITY_LED_YELLOW).withTags(VALID_TAG_LAB2)
                 .build();
-        assertTrue(stockList.hasItem(editedLED_RED));
+        assertTrue(stockList.hasItem(editedARDUINO));
     }
 */
     @Test
