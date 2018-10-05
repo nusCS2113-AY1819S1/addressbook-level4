@@ -56,10 +56,4 @@ public class CommandHistory {
         return userInputHistory.hashCode();
     }
 
-    /**
-     * Returns the previous line of commandInput
-     */
-    public String getPrevious(){
-        return userInputHistory.peekLast();
-    }
 }

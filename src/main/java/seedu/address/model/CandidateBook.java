@@ -9,7 +9,7 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.UniqueCandidateList;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the CandidateBook level
  * Duplicates are not allowed (by .isSamePerson comparison)
  */
 public class CandidateBook implements ReadOnlyCandidateBook {
@@ -30,7 +30,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     public CandidateBook() {}
 
     /**
-     * Creates an CandidateBook using the Persons in the {@code toBeCopied}
+     * Creates a CandidateBook using the Persons in the {@code toBeCopied}
      */
     public CandidateBook(ReadOnlyCandidateBook toBeCopied) {
         this();

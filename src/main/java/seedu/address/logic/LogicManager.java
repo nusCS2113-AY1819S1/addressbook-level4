@@ -19,13 +19,14 @@ import seedu.address.model.candidate.Candidate;
  * The main LogicManager of the app.
  */
 public class LogicManager extends ComponentManager implements Logic {
+
+    private static LogicState state = new LogicState("Primary");
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final CommandHistory history;
     private final RecruitBookParser recruitBookParser;
-
-    private static LogicState state = new LogicState("Primary");
 
     public LogicManager(Model model) {
         this.model = model;
@@ -55,7 +56,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return new ListElementPointer(history.getHistory());
     }
 
-    public static void setLogicState(String newState){
+    public static void setLogicState(String newState) {
         state = new LogicState(newState);
     }
 }

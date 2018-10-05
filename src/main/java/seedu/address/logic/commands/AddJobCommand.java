@@ -8,7 +8,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds a job offer to the job book.
+ *  Starts the 2-step process of adding a job offer
  */
 
 public class AddJobCommand extends Command {

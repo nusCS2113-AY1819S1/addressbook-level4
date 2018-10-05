@@ -6,8 +6,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.LogicManager;
+import seedu.address.logic.LogicState;
 import seedu.address.logic.commands.AddCandidateCommand;
 import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.commands.AddJobDetailsCommand;
@@ -24,10 +24,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.LogicState;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.joboffer.JobOffer;
 
 /**
  * Parses user input.
@@ -48,12 +46,12 @@ public class RecruitBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput, LogicState state) throws ParseException {
-        if(state.nextCommand != "Primary"){
-            switch(state.nextCommand){
-                case AddJobDetailsCommand.COMMAND_WORD:
-                    return new AddJobDetailsCommand();
-                default:
-                    LogicManager.setLogicState("Primary");
+        if (state.nextCommand != "Primary") {
+            switch(state.nextCommand)   {
+            case AddJobDetailsCommand.COMMAND_WORD:
+                return new AddJobDetailsCommand();
+            default:
+                LogicManager.setLogicState("Primary");
             }
         }
 

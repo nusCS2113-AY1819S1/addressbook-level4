@@ -12,7 +12,7 @@ public class JobOffer {
     private final Company company;
     private final Job job;
 
-    public JobOffer(String company, String job){
+    public JobOffer(String company, String job) {
         this.company = new Company (company);
         this.job = new Job (job);
     }
@@ -28,8 +28,8 @@ public class JobOffer {
     /**
      * Returns true if both job offers are of the same company and offer the same job
      */
-    public boolean isSameJobOffer(JobOffer otherJobOffer){
-        if(otherJobOffer == this){
+    public boolean isSameJobOffer(JobOffer otherJobOffer) {
+        if (otherJobOffer == this) {
             return true;
         }
 
@@ -39,8 +39,8 @@ public class JobOffer {
     }
 
     @Override
-    public int hashCode(){
-        return Objects.hash(company,job);
+    public int hashCode() {
+        return Objects.hash(company, job);
     }
 
     @Override
