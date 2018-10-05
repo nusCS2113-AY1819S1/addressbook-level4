@@ -11,32 +11,25 @@
 
 <GridPane styleClass="detail-pane_background" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="400"/>
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints vgrow="SOMETIMES" minHeight="300"/>
    </rowConstraints>
-   <VBox prefHeight="400.0" prefWidth="600.0" styleClass="detail-pane_background">
+   <VBox styleClass="detail-pane_background" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS">
       <Label fx:id="name" styleClass="detail-pane_title_label" text="\$name">
-         </Label>
-
-      <FlowPane fx:id="biggerTags" prefHeight="33.0" prefWidth="600.0">
+      </Label>
+      <FlowPane fx:id="biggerTags">
          <VBox.margin>
             <Insets bottom="5.0" left="10.0" right="10.0" top="10.0" />
-         </VBox.margin></FlowPane>
+         </VBox.margin>
+      </FlowPane>
+
       <GridPane>
-         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.199951171875" minWidth="10.0" prefWidth="81.8" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="500.99999999999994" minWidth="10.0" prefWidth="496.99999999999994" />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-         </rowConstraints>
-         <Label fx:id="dateLabel" alignment="CENTER" styleClass="detail-pane_bold_label" text="date:" />
-         <Label fx:id="date" alignment="CENTER" styleClass="detail-pane_small_label" text="\$date" underline="true" GridPane.columnIndex="1">
+         <Label fx:id="dateLabel" alignment="TOP_LEFT" minHeight="20" minWidth="50" prefWidth="175.0" styleClass="detail-pane_bold_label" text="date:" />
+         <Label fx:id="date" alignment="TOP_LEFT" styleClass="detail-pane_small_label" text="\$date" underline="true" GridPane.columnIndex="1">
          </Label>
-         <Label fx:id="moneyFlowLabel" styleClass="detail-pane_bold_label" text="money:" GridPane.rowIndex="1" />
+         <Label fx:id="moneyFlowLabel" alignment="TOP_LEFT" styleClass="detail-pane_bold_label" text="money:" GridPane.rowIndex="1" />
          <Label fx:id="moneyFlow" alignment="BOTTOM_LEFT" styleClass="detail-pane_small_label" text="moneyFlow" underline="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
          </Label>
          <VBox.margin>
@@ -49,7 +42,8 @@
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <TextArea prefHeight="200.0" prefWidth="200.0" promptText="Enter details here..." styleClass="detail-pane_note" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In ut nisl pretium, maximus risus lobortis, pharetra neque. Etiam non justo ac mauris vestibulum hendrerit in sed ex. Phasellus in feugiat orci. In a aliquet magna. Nullam nulla magna, egestas ac sem a, pharetra faucibus quam. Aliquam et neque est. Quisque interdum ipsum nulla, quis viverra arcu varius ac. Aliquam tristique mattis egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed imperdiet non risus vitae rhoncus. Proin porta, risus ultrices rutrum semper, dui nibh tincidunt mauris, ac tincidunt est orci sit amet orci. Sed vehicula lectus tortor, id pulvinar elit porttitor in." wrapText="true">
+
+      <TextArea promptText="Enter your notes here..." styleClass="detail-pane_note" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </VBox.margin>
