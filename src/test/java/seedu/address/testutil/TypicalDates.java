@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalRecords.getTypicalAddressBook;
 
 public class TypicalDates {
     private static Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
 
     public static final Date DATE_FIRST_INDEX_DATE = model.getFilteredRecordList().get(TypicalIndexes.INDEX_FIRST_RECORD.getZeroBased()).getDate();
     public static final Date DATE_LAST_INDEX_DATE = model.getFilteredRecordList().get(TypicalIndexes.INDEX_SECOND_RECORD.getZeroBased()).getDate();

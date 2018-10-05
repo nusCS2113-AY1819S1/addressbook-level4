@@ -130,10 +130,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredRecordList().size());
     }
 
-    //TODO: create another method almost same as showRecordAtIndex (seems might have problems)
+    public static void showRecordAtIndex(Model model, int targetIndexInt){
+        assertTrue((targetIndexInt <model.getFilteredRecordList().size()));
 
-    
-    /**
+        Record record = model.getFilteredRecordList().get(targetIndexInt);
+        final String[] splitName = record.getName().fullName.split("\\s+");
+        model.updateFilteredRecordList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredRecordList().size());
+    }
+
+   /**
      * Deletes the first record in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstRecord(Model model) {

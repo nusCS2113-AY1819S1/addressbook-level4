@@ -10,7 +10,7 @@ import seedu.address.model.record.Record;
  * The API of the Model component.
  */
 
-public interface  Model {
+public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Record> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
 
