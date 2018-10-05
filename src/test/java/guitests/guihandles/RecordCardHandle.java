@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.record.Record;
+import seedu.planner.model.record.Record;
 
 /**
  * Provides a handle to a record card in the record list panel.
