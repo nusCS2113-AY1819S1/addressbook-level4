@@ -27,7 +27,7 @@ public class SampleDataUtil {
                 getTagSet("neighbours")),
             new Record(new Name("David Li"), new Date("30-6-2014"), new Expense("-437.49"),
                 getTagSet("family")),
-            new Record(new Name("Irfan Ibrahim"), new Date("31-9-2010"), new Expense("-437.58"),
+            new Record(new Name("Irfan Ibrahim"), new Date("30-9-2010"), new Expense("-437.58"),
                 getTagSet("classmates")),
             new Record(new Name("Roy Balakrishnan"), new Date("15-7-2005"), new Income("+24.50"),
                 getTagSet("colleagues"))
