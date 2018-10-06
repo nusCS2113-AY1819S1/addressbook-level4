@@ -4,6 +4,7 @@ package seedu.address.logic.commands;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.sql.Timestamp;
 
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
@@ -21,14 +22,13 @@ public class BackUpCommand extends Command {
     public static final String ERROR = "error";
 
     private static final String SOURCE_PATH = "data/addressbook.xml";
-    private static final String DEST_PATH = ".backup/backup.xml";
-    private static final String BACKUP_PATH = ".backup";
+    private static final String DEST_PATH = ".backup";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         FileEncryptor fe = new FileEncryptor(SOURCE_PATH );
         File source = new File(SOURCE_PATH);
-        File backupDest = new File(BACKUP_PATH);
+        File backupDest = new File(DEST_PATH);
 
         if (fe.isLocked()) {
             throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
@@ -36,9 +36,10 @@ public class BackUpCommand extends Command {
 
         try {
             if (!backupDest.exists()) {
-                new File(BACKUP_PATH).mkdir();
+                new File(DEST_PATH).mkdir();
             }
-            File dest = new File(DEST_PATH);
+            String fileName = Long.toString(System.currentTimeMillis());
+            File dest = new File(DEST_PATH + "/" + fileName + ".xml");
             Files.copy(source.toPath(), dest.toPath());
             return new CommandResult(MESSAGE_SUCCESS);
         } catch(IOException io) {
