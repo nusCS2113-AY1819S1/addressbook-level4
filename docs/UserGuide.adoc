@@ -91,7 +91,7 @@ Entering this command will prompt user the following: +
 
 Examples:
 
-*	`c/Macdonalds j/Store Manager`
+*	`c/Mcdonalds j/Store Manager`
 *	`c/KFC j/Cashier`
 
 After keying in the details, user will be further prompted for details of job requirements: +
@@ -126,28 +126,32 @@ Examples:
 *	`j/Writer c/Singapore Press Holdings ar/25-30 h/A levels s/$5000-$6000 g/F`
 *	`j/Research Assistant c/A*STAR ar/25-50 h/Computing Degree s/$4000-$6000 g/M`
 
-=== Editing a candidate / job : `edit`
+=== Editing a candidate / job : `editc`
 
-==== Edits attributes of the candidate at the specified key `<NAME>`
-Format: `edit <NAME>`
+==== Edits attributes of the candidate at the specified index `<INDEX>`
+Format: `editc <INDEX>`
 
-`<NAME>` must be the *full name* that was inserted using the `add` command
+Edits the candidate with the specified `INDEX`.
+The index must be an index number shown in the displayed candidates list.
 
 Example:
 
-*	`edit John Doe p/91234567 e/johndoe@example.com` +
-(Edits the phone number and email address of John Doe to be 91234567 and johndoe@example.com respectively)
+*	`editc 1 n/John Doe p/91234567 e/johndoe@example.com` +
+(Edits the name, phone number and email address of the candidate with index 1 to be John Doe, 91234567 and johndoe@example.com respectively)
 
-*	`edit Betsy Crower t/` +
-(Edits and clears all existing tags belonging to Betsy Crower)
+*	`editc 3 t/` +
+(Edits and clears all existing tags belonging to the candidate at index 3)
 
 ==== Edits details of a job offer
-Format: `edit <INDEX>`
+Format: `editj <INDEX>`
+
+Edits the job with the specified `INDEX`.
+The index must be an index number shown in the displayed job list.
 
 Examples:
 
-*	`edit 1 x/20-30`
-(Edits the MIN_AGE-MAX_AGE attribute to be from 20 to 30 years of age for the first job offer)
+*	`editj 1 x/20-30`
+(Edits the MIN_AGE-MAX_AGE attribute to be from 20 to 30 years of age for the 1st job offer)
 
 === Locating candidates by search parameter : `find`
 
@@ -202,10 +206,10 @@ Format: `cancel`
 === Deleting a candidate / job : `delete`
 
 ==== Deleting a specific candidate
-Format: `delete <NAME>`
+Format: `deletec <INDEX>`
 
-*	Deletes the candidate with the specified `NAME`
-*	NAME *must be the full name* of the candidate that is saved in the RecruitBook `e.g. John Doe`
+*	Deletes the candidate with the specified `INDEX`
+*	The index must be an index number shown in the displayed candidate list.
 *	The full name can be found using the find function when a partial keyword is entered
 
 Example to delete a candidate:
@@ -213,11 +217,11 @@ Example to delete a candidate:
 Step 1.	`find Betsy` +
 (Shows all saved candidates named Betsy)
 
-Step 2. `delete Betsy Rose` +
-(Deletes ‘Betsy Rose’ from the RecruitBook)
+Step 2. `deletec 1` +
+(Deletes the candidate with index 1 from the RecruitBook(based on most recent list))
 
 ==== Deleting a specific job offer
-Format: `delete <INDEX>`
+Format: `deletej <INDEX>`
 
 *	Deletes the job with the specified `INDEX`
 *	The index must be an index number shown in the displayed job list.
@@ -227,7 +231,7 @@ Example to delete a job:
 Step 1.	`list jobs` +
 (Shows all available jobs)
 
-Step 2. `delete 5` +
+Step 2. `deletej 5` +
 (Deletes the 5th job in the job list)
 
 === Clearing all entries : `clear`
@@ -259,16 +263,16 @@ _{explain how the user can enable/disable data encryption}_
 == Command Summary
 
 *	*Help* : `help`
-*	*Add* : `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …` +
-            e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
+*	*Add* : `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …` +
+            e.g. `addc n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
 *	*List* : `list [jobs /candidates]`
-*	*Edit* : `edit <NAME> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `edit <INDEX>` +
-            e.g. `edit James Lee e/jameslee@example.com`, `edit 5`
+*	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `edit <INDEX>` +
+            e.g. `editc 2 e/jameslee@example.com`, `editj 5`
 *	*Find* : `find <tag>/KEYWORD [MORE_KEYWORDS]` +
             e.g. `find n/James n/Jake`
 *	*Filter* : `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
             e.g. `filter h/O LEVEL`
-*	*Delete* : `delete <NAME>` or `delete <INDEX>` +
-            e.g. `delete James Lee`, `delete 5`
+*	*Delete* : `deletec <INDEX>` or `deletej <INDEX>` +
+            e.g. `deletec 1 `, `deletej 5`
 *	*Clear* : `clear`
 *	*Exit* : `exit`
