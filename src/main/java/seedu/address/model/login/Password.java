@@ -11,12 +11,12 @@ public class Password {
 
     public static final String PASSWORD_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String password;
+    public final String fullPassword;
 
     public Password(String password) {
         requireNonNull(password);
         checkArgument(isValidPassword(password), MESSAGE_PASSWORD_CONSTRAINTS);
-        this.password = password;
+        fullPassword = password;
     }
 
     public static boolean isValidPassword(String test) {
@@ -25,19 +25,19 @@ public class Password {
 
     @Override
     public String toString() {
-        return password;
+        return fullPassword;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Password
-                && this.password.equals(((Password) other).password));
+                && fullPassword.equals(((Password) other).fullPassword));
     }
 
     @Override
     public int hashCode() {
-        return password.hashCode();
+        return fullPassword.hashCode();
     }
 
 

@@ -18,7 +18,4 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
 
-    public void setData(Model model, CommandHistory history) {
-        this.model = model;
-    }
 }

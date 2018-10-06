@@ -10,12 +10,12 @@ public class Username {
 
     public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String username;
+    public final String fullUsername;
 
     public Username(String username) {
         requireNonNull(username);
         checkArgument(isValidUsername(username), USERNAME_VALIDATION_REGEX);
-        this.username = username;
+        fullUsername = username;
     }
 
     public static boolean isValidUsername(String test) {
@@ -24,18 +24,18 @@ public class Username {
 
     @Override
     public String toString() {
-        return username;
+        return fullUsername;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this //
                 || (other instanceof Username
-                && this.username.equals(((Username) other).username));
+                && this.fullUsername.equals(((Username) other).fullUsername));
     }
 
     @Override
     public int hashCode() {
-        return username.hashCode();
+        return fullUsername.hashCode();
     }
 }
