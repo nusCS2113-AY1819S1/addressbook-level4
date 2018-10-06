@@ -18,12 +18,11 @@ import seedu.planner.model.record.Record;
  */
 public class DetailedRecordCard extends UiPart<Region> {
 
-    private static String FXML = "DetailedRecordCard.fxml";
+    private static final String FXML = "DetailedRecordCard.fxml";
+    private static final String DATE_LABEL = "Date:";
+    private static final String MONEYFLOW_LABEL = "Credit(+)/Debit(-):";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
-
-    private final String DATE_LABEL = "Date:";
-    private final String MONEYFLOW_LABEL = "Credit(+)/Debit(-):";
 
     @FXML
     private GridPane detailedCard;
