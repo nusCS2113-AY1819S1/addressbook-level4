@@ -44,7 +44,7 @@ public class AddTaskCommandTest {
         CommandResult commandResult = new AddTaskCommand(validTask).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddTaskCommand.MESSAGE_SUCCESS, validTask), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validTask), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validTask), modelStub.tasksAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
@@ -175,18 +175,18 @@ public class AddTaskCommandTest {
      * A Model stub that always accept the task being added.
      */
     private class ModelStubAcceptingTaskAdded extends AddTaskCommandTest.ModelStub {
-        final ArrayList<Task> personsAdded = new ArrayList<>();
+        final ArrayList<Task> tasksAdded = new ArrayList<>();
 
         @Override
         public boolean hasTask(Task task) {
             requireNonNull(task);
-            return personsAdded.stream().anyMatch(task::isSameTask);
+            return tasksAdded.stream().anyMatch(task::isSameTask);
         }
 
         @Override
         public void addTask(Task task) {
             requireNonNull(task);
-            personsAdded.add(task);
+            tasksAdded.add(task);
         }
 
         @Override

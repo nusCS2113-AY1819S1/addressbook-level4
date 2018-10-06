@@ -12,12 +12,14 @@ public class Task {
     private final String title;
     private final String description;
     private final PriorityLevel priorityLevel;
+    private boolean isCompleted;
 
     public Task(String deadline, String title, String description, PriorityLevel priorityLevel) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
+        this.isCompleted = false;
     }
 
     public Task(String title, String description, PriorityLevel priorityLevel) {
@@ -25,6 +27,7 @@ public class Task {
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
+        this.isCompleted = false;
     }
 
     public String getDeadline() {
@@ -41,6 +44,23 @@ public class Task {
 
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
+    }
+    public boolean isCompleted() {
+        return isCompleted;
+    }
+
+    /**
+     * Marks the task as completed by
+     * setting @code {isCompleted} to true
+     * If task is already completed, return false.
+     */
+    public boolean completed() {
+        if (isCompleted) {
+            return false;
+        } else {
+            this.isCompleted = true;
+            return true;
+        }
     }
 
     /**
@@ -75,13 +95,14 @@ public class Task {
         return otherTask.getTitle().equals(getTitle())
                 && otherTask.getDeadline().equals(getTitle())
                 && otherTask.getDescription().equals(getDescription())
-                && otherTask.getPriorityLevel().equals(getPriorityLevel());
+                && otherTask.getPriorityLevel().equals(getPriorityLevel())
+                && otherTask.isCompleted() == isCompleted();
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(deadline, title, description, priorityLevel);
+        return Objects.hash(deadline, title, description, priorityLevel, isCompleted);
     }
 
     @Override
@@ -94,6 +115,11 @@ public class Task {
                 .append(getDescription())
                 .append(" Priority: ")
                 .append(getPriorityLevel());
+        if (isCompleted) {
+            builder.append(" => Completed!");
+        } else {
+            builder.append(" => Not completed!");
+        }
         return builder.toString();
     }
 }
