@@ -17,6 +17,7 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.security.Security;
 
 /**
  * The manager of the UI component.
@@ -35,13 +36,15 @@ public class UiManager extends ComponentManager implements Ui {
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
+    private Security user;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs, Security user) {
         super();
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
+        this.user = user;
     }
 
     @Override
@@ -54,7 +57,13 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
-            mainWindow.fillInnerParts();
+            //TODO: Entry point for user authentication
+            if (user.getAuthentication()) {
+                mainWindow.fillInnerParts();
+            }
+            else {
+                //Ask to show Relogin
+            }
 
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
