@@ -74,7 +74,8 @@ public class RecruitBookParserTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(candidate).build();
         EditCandidateCommand command = (EditCandidateCommand) parser.parseCommand(
                 EditCandidateCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
+                new LogicState("primary"));
         assertEquals(new EditCandidateCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 

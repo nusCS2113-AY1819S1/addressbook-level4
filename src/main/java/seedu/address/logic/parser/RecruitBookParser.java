@@ -68,6 +68,9 @@ public class RecruitBookParser {
         case AddCandidateCommand.COMMAND_WORD:
             return new AddCandidateCommandParser().parse(arguments);
 
+        case AddJobCommand.COMMAND_WORD:
+            return new AddJobCommand();
+
         case EditCandidateCommand.COMMAND_WORD:
             return new EditCandidateCommandParser().parse(arguments);
 

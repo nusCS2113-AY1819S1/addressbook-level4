@@ -84,7 +84,7 @@ public class EditCandidateCommandTest {
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptor());
-        Candidate editedCandidate = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Candidate editedCandidate = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCandidateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate);
 
@@ -129,7 +129,7 @@ public class EditCandidateCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit candidate in filtered list into a duplicate in address book
-        Candidate candidateInList = model.getAddressBook().getCandidatelist().get(INDEX_SECOND_PERSON.getZeroBased());
+        Candidate candidateInList = model.getCandidateBook().getCandidatelist().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(candidateInList).build());
 
@@ -171,9 +171,10 @@ public class EditCandidateCommandTest {
         Candidate candidateToEdit = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCandidate).build();
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new CandidateBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(candidateToEdit, editedCandidate);
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new JobBook(),
+                new UserPrefs());
+        expectedModel.updateCandidate(candidateToEdit, editedCandidate);
+        expectedModel.commitCandidateBook();
 
         // edit -> first candidate edited
         EditCandidateCommand.execute(model, commandHistory);
@@ -214,7 +215,8 @@ public class EditCandidateCommandTest {
         Candidate editedCandidate = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCandidate).build();
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new CandidateBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new JobBook(),
+                new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Candidate candidateToEdit = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
