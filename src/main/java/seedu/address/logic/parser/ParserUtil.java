@@ -19,7 +19,8 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_QUANTITY = "Quantities should only contain non-zero unsigned integers, and it should not be blank";
+    public static final String MESSAGE_INVALID_QUANTITY =
+            "Quantities should only contain non-zero unsigned integers, and it should not be blank";
     public static final String MESSAGE_INVALID_MIN_QUANTITY =
             "Minimum Quantities should only contain non-zero unsigned integers, and it should not be blank";
 

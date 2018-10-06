@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.item.Quantity;
 import seedu.address.model.item.Name;
+import seedu.address.model.item.Quantity;
 import seedu.address.testutil.Assert;
 
 //    public static final Item INVALID_ARDUINO = new ItemBuilder().withName("Ardu@ino")
@@ -57,14 +57,14 @@ public class XmlAdaptedItemTest {
     @Test
     public void toModelType_invalidQuantity_throwsIllegalValueException() {
         XmlAdaptedItem item =
-                new XmlAdaptedItem(VALID_NAME, INVALID_QUANTITY, VALID_MIN_QUANTITY, VALID_STATUS,  VALID_TAGS);
+                new XmlAdaptedItem(VALID_NAME, INVALID_QUANTITY, VALID_MIN_QUANTITY, VALID_STATUS, VALID_TAGS);
         String expectedMessage = Quantity.MESSAGE_QUANTITY_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, item::toModelType);
     }
 
     @Test
     public void toModelType_nullQuantity_throwsIllegalValueException() {
-        XmlAdaptedItem item = new XmlAdaptedItem(VALID_NAME, null,  VALID_MIN_QUANTITY, VALID_STATUS,VALID_TAGS);
+        XmlAdaptedItem item = new XmlAdaptedItem(VALID_NAME, null, VALID_MIN_QUANTITY, VALID_STATUS, VALID_TAGS);
         String expectedMessage = String.format(Quantity.MESSAGE_QUANTITY_CONSTRAINTS, Quantity.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, item::toModelType);
     }
@@ -81,8 +81,9 @@ public class XmlAdaptedItemTest {
     @Test
 
     public void toModelType_nullMinQuantity_throwsIllegalValueException() {
-        XmlAdaptedItem item = new XmlAdaptedItem(VALID_NAME, VALID_QUANTITY,  null, VALID_STATUS,VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Minimum " + Quantity.class.getSimpleName());
+        XmlAdaptedItem item = new XmlAdaptedItem(VALID_NAME, VALID_QUANTITY, null, VALID_STATUS, VALID_TAGS);
+        String expectedMessage =
+                String.format(MISSING_FIELD_MESSAGE_FORMAT, "Minimum " + Quantity.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, item::toModelType);
     }
 
@@ -91,7 +92,7 @@ public class XmlAdaptedItemTest {
         List<XmlAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
         XmlAdaptedItem item =
-                new XmlAdaptedItem(VALID_NAME, VALID_QUANTITY,  VALID_MIN_QUANTITY, VALID_STATUS, invalidTags);
+                new XmlAdaptedItem(VALID_NAME, VALID_QUANTITY, VALID_MIN_QUANTITY, VALID_STATUS, invalidTags);
         Assert.assertThrows(IllegalValueException.class, item::toModelType);
     }
 

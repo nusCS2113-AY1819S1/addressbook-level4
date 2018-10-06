@@ -1,23 +1,22 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MIN_QUANTITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_RPLIDAR;
+import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB1;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB2;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MIN_QUANTITY_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MIN_QUANTITY_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_MIN_QUANTITY_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_RPLIDAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB2;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -33,7 +32,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
 import seedu.address.model.item.Name;
-import seedu.address.model.item.Item;
 import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditItemDescriptorBuilder;
@@ -77,8 +75,10 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS); // invalid name
-        assertParseFailure(parser, "1" + INVALID_MIN_QUANTITY_DESC, Quantity.MESSAGE_MIN_QUANTITY_CONSTRAINTS); // invalid email
-        assertParseFailure(parser, "1" + INVALID_QUANTITY_DESC, Quantity.MESSAGE_QUANTITY_CONSTRAINTS); // invalid address
+        assertParseFailure(parser, "1" + INVALID_MIN_QUANTITY_DESC,
+                Quantity.MESSAGE_MIN_QUANTITY_CONSTRAINTS); // invalid email
+        assertParseFailure(parser, "1" + INVALID_QUANTITY_DESC,
+                Quantity.MESSAGE_QUANTITY_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Item} being edited,
@@ -98,7 +98,8 @@ public class EditCommandParserTest {
         String userInput = targetIndex.getOneBased() + NAME_DESC_RPLIDAR
                 + QUANTITY_DESC_RPLIDAR + MIN_QUANTITY_DESC_RPLIDAR + TAG_DESC_LAB1;
 
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR).withQuantity(VALID_QUANTITY_RPLIDAR).withMinQuantity(VALID_MIN_QUANTITY_RPLIDAR)
+        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR)
+                .withQuantity(VALID_QUANTITY_RPLIDAR).withMinQuantity(VALID_MIN_QUANTITY_RPLIDAR)
                 .withTags(VALID_TAG_LAB1).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -153,7 +154,8 @@ public class EditCommandParserTest {
                 + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO + TAG_DESC_LAB2;
 
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder()
-                .withMinQuantity(VALID_MIN_QUANTITY_ARDUINO).withQuantity(VALID_QUANTITY_ARDUINO).withTags(VALID_TAG_LAB1, VALID_TAG_LAB2)
+                .withMinQuantity(VALID_MIN_QUANTITY_ARDUINO).withQuantity(VALID_QUANTITY_ARDUINO)
+                .withTags(VALID_TAG_LAB1, VALID_TAG_LAB2)
                 .build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
@@ -170,9 +172,11 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + MIN_QUANTITY_DESC_ARDUINO + INVALID_QUANTITY_DESC + QUANTITY_DESC_ARDUINO
+        userInput = targetIndex.getOneBased() + MIN_QUANTITY_DESC_ARDUINO + INVALID_QUANTITY_DESC
+                + QUANTITY_DESC_ARDUINO
                 + QUANTITY_DESC_ARDUINO;
-        descriptor = new EditItemDescriptorBuilder().withQuantity(VALID_QUANTITY_ARDUINO).withMinQuantity(VALID_MIN_QUANTITY_ARDUINO).build();
+        descriptor = new EditItemDescriptorBuilder().withQuantity(VALID_QUANTITY_ARDUINO)
+                .withMinQuantity(VALID_MIN_QUANTITY_ARDUINO).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

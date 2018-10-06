@@ -1,24 +1,18 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_MIN_QUANTITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB1;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB2;
-
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_MIN_QUANTITY_DESC;
-
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MIN_QUANTITY_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB2;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
 import static seedu.address.testutil.TypicalItems.KEYWORD_MATCHING_AR;
@@ -33,9 +27,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
-import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.model.item.Quantity;
-import seedu.address.model.item.UniqueItemList;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ItemBuilder;
 import seedu.address.testutil.ItemUtil;
@@ -69,13 +61,15 @@ public class AddCommandSystemTest extends StockListSystemTest {
 
         /* Case: add an item with all fields same as another item in the stock list except name -> added */
         toAdd = new ItemBuilder(ARDUINO).withName(VALID_NAME_ARDUINO).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO + TAG_DESC_LAB1;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO
+                + MIN_QUANTITY_DESC_ARDUINO + TAG_DESC_LAB1;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an item with all fields same as another item in the stock list except quantity and minQuantity
          * -> added
          */
-        toAdd = new ItemBuilder(ARDUINO).withQuantity(VALID_QUANTITY_ARDUINO).withMinQuantity(VALID_MIN_QUANTITY_ARDUINO).build();
+        toAdd = new ItemBuilder(ARDUINO).withQuantity(VALID_QUANTITY_ARDUINO)
+                .withMinQuantity(VALID_MIN_QUANTITY_ARDUINO).build();
         command = ItemUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
@@ -85,7 +79,8 @@ public class AddCommandSystemTest extends StockListSystemTest {
 
         /* Case: add an item with tags, command with parameters in random order -> added */
         toAdd = ARDUINO;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_LAB1 + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO + NAME_DESC_ARDUINO
+        command = AddCommand.COMMAND_WORD + TAG_DESC_LAB1 + QUANTITY_DESC_ARDUINO
+                + MIN_QUANTITY_DESC_ARDUINO + NAME_DESC_ARDUINO
                 + TAG_DESC_LAB2;
         assertCommandSuccess(command, toAdd);
 

@@ -3,15 +3,11 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB2;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -20,8 +16,6 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.exceptions.DuplicateItemException;
-import seedu.address.testutil.ItemBuilder;
 
 public class StockListTest {
 
@@ -77,7 +71,7 @@ public class StockListTest {
         stockList.addItem(ARDUINO);
         assertTrue(stockList.hasItem(ARDUINO));
     }
-/*
+    /*
     @Test
     public void hasItem_itemWithSameIdentityFieldsInStockList_returnsTrue() {
         stockList.addItem(ARDUINO);
@@ -85,7 +79,7 @@ public class StockListTest {
                 .build();
         assertTrue(stockList.hasItem(editedARDUINO));
     }
-*/
+    */
     @Test
     public void getItemList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
