@@ -4,30 +4,24 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MIN_QUANTITY_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB1;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB2;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB1;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_MIN_QUANTITY_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_RPLIDAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB2;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_ITEM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ITEM;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
-import static seedu.address.testutil.TypicalItems.RPLIDAR;
-import static seedu.address.testutil.TypicalItems.MOTOR;
 import static seedu.address.testutil.TypicalItems.KEYWORD_MATCHING_AR;
 
 import org.junit.Test;
@@ -58,7 +52,7 @@ public class EditCommandSystemTest extends StockListSystemTest {
          */
         Index index = INDEX_FIRST_ITEM;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_ARDUINO + "  "
-                + QUANTITY_DESC_ARDUINO + " " + MIN_QUANTITY_DESC_ARDUINO + "  " + TAG_DESC_LAB1 + " " ;
+                + QUANTITY_DESC_ARDUINO + " " + MIN_QUANTITY_DESC_ARDUINO + "  " + TAG_DESC_LAB1 + " ";
         Item editedItem = new ItemBuilder(ARDUINO).withTags(VALID_TAG_LAB1).build();
         assertCommandSuccess(command, index, editedItem);
 
@@ -75,7 +69,8 @@ public class EditCommandSystemTest extends StockListSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a item with new values same as existing values -> edited */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
                 + TAG_DESC_LAB1;
         assertCommandSuccess(command, index, ARDUINO);
 
@@ -83,7 +78,8 @@ public class EditCommandSystemTest extends StockListSystemTest {
         assertTrue(getModel().getStockList().getItemList().contains(ARDUINO));
         index = INDEX_SECOND_ITEM;
         assertNotEquals(getModel().getFilteredItemList().get(index.getZeroBased()), ARDUINO);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
                 + TAG_DESC_LAB1;
         editedItem = new ItemBuilder(ARDUINO).withName("Rplidar").build();
         assertCommandSuccess(command, index, editedItem);
@@ -92,7 +88,8 @@ public class EditCommandSystemTest extends StockListSystemTest {
          * -> edited
          */
         index = INDEX_SECOND_ITEM;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
                 + TAG_DESC_LAB2;
         editedItem = new ItemBuilder(ARDUINO).withTags(VALID_TAG_LAB2).build();
         assertCommandSuccess(command, index, editedItem);
@@ -131,7 +128,8 @@ public class EditCommandSystemTest extends StockListSystemTest {
         showAllItems();
         index = INDEX_FIRST_ITEM;
         selectItem(index);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
                 + TAG_DESC_LAB1;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new item's name
@@ -169,7 +167,8 @@ public class EditCommandSystemTest extends StockListSystemTest {
                 Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
 
         /* Case: invalid minQuantity -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_ITEM.getOneBased() + INVALID_MIN_QUANTITY_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " "
+                        + INDEX_FIRST_ITEM.getOneBased() + INVALID_MIN_QUANTITY_DESC,
                 Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
@@ -181,22 +180,26 @@ public class EditCommandSystemTest extends StockListSystemTest {
         assertTrue(getModel().getStockList().getItemList().contains(ARDUINO));
         index = INDEX_FIRST_ITEM;
         assertFalse(getModel().getFilteredItemList().get(index.getZeroBased()).equals(ARDUINO));
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
                 + TAG_DESC_LAB1;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ITEM);
 
         /* Case: edit a item with new values same as another item's values but with different tags -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO
                 + TAG_DESC_LAB2;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ITEM);
 
         /* Case: edit a item with new values same as another item's values but with different quantity ->  rejected*/
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_ARDUINO + QUANTITY_DESC_RPLIDAR + MIN_QUANTITY_DESC_ARDUINO
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_ARDUINO + QUANTITY_DESC_RPLIDAR + MIN_QUANTITY_DESC_ARDUINO
                 + TAG_DESC_LAB1;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ITEM);
 
         /* Case: edit a item with new values same as another item's values but with different minQuantity -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + NAME_DESC_ARDUINO
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased()
+                + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + NAME_DESC_ARDUINO
             + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_RPLIDAR + TAG_DESC_LAB1;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_ITEM);
     }

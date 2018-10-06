@@ -19,12 +19,11 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StockList;
-import seedu.address.model.item.Quantity;
 import seedu.address.storage.XmlAdaptedItem;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableStockList;
-import seedu.address.testutil.StockListBuilder;
 import seedu.address.testutil.ItemBuilder;
+import seedu.address.testutil.StockListBuilder;
 import seedu.address.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -43,7 +42,7 @@ public class XmlUtilTest {
     private static final String VALID_NAME = "Arduino";
     private static final String VALID_QUANTITY = "20";
     private static final String VALID_MIN_QUANTITY = "5";
-    private static final List<Integer> VALID_STATUS = new ArrayList<>(Arrays.asList(20,0,0));
+    private static final List<Integer> VALID_STATUS = new ArrayList<>(Arrays.asList(20, 0, 0));
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("Lab1"));
 
     @Rule

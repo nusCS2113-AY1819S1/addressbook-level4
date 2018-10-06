@@ -1,38 +1,39 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_RPLIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_ARDUINO;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
+
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_MIN_QUANTITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_RPLIDAR;
+import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.MIN_QUANTITY_DESC_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB1;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB2;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MIN_QUANTITY_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_ARDUINO;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB2;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalItems.RPLIDAR;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.item.Name;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ItemBuilder;
+
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

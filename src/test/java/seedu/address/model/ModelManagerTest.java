@@ -16,7 +16,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.testutil.StockListBuilder;
 
-public class ModelManagerTest {    @Rule
+public class ModelManagerTest { @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     private ModelManager modelManager = new ModelManager();

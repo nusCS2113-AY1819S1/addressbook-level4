@@ -3,8 +3,8 @@ package seedu.address.model.item;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_RPLIDAR;
-import static seedu.address.testutil.TypicalItems.RPLIDAR;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
+import static seedu.address.testutil.TypicalItems.RPLIDAR;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,8 +36,8 @@ public class ItemTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Item ArduinoCopy = new ItemBuilder(ARDUINO).build();
-        assertTrue(ARDUINO.equals(ArduinoCopy));
+        Item arduinoCopy = new ItemBuilder(ARDUINO).build();
+        assertTrue(ARDUINO.equals(arduinoCopy));
 
         // same object -> returns true
         assertTrue(ARDUINO.equals(ARDUINO));

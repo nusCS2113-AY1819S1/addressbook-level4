@@ -35,7 +35,8 @@ public class EditItemDescriptorTest {
         assertFalse(DESC_ARDUINO.equals(DESC_RPLIDAR));
 
         // different name -> returns false
-        EditItemDescriptor editedArduino = new EditItemDescriptorBuilder(DESC_ARDUINO).withName(VALID_NAME_RPLIDAR).build();
+        EditItemDescriptor editedArduino =
+                new EditItemDescriptorBuilder(DESC_ARDUINO).withName(VALID_NAME_RPLIDAR).build();
         assertFalse(DESC_ARDUINO.equals(editedArduino));
 
         // different quantity -> returns false
