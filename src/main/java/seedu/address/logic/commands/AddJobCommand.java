@@ -24,7 +24,7 @@ public class AddJobCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         LogicManager.setLogicState("AddJobDetails");
-        return new CommandResult("Add Job");
+        return new CommandResult(AddJobDetailsCommand.MESSAGE_USAGE);
     };
 
 

@@ -43,23 +43,23 @@ public class XmlJobBookStorage implements JobBookStorage {
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
+    @Override
     public Optional<ReadOnlyJobBook> readJobBook(Path filePath) throws DataConversionException,
             FileNotFoundException {
-//        requireNonNull(filePath);
-//
-//        if (!Files.exists(filePath)) {
-//            logger.info("JobBook file "  + filePath + " not found");
-//            return Optional.empty();
-//        }
-//
-//        XmlSerializableJobBook xmlAddressBook = XmlFileStorage.loadCandidateBookFromSaveFile(filePath);
-//        try {
-//            return Optional.of(xmlAddressBook.toModelType());
-//        } catch (IllegalValueException ive) {
-//            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-//            throw new DataConversionException(ive);
-//        }
-        return Optional.empty();
+        requireNonNull(filePath);
+
+        if (!Files.exists(filePath)) {
+            logger.info("JobBook file "  + filePath + " not found");
+            return Optional.empty();
+        }
+
+        XmlSerializableJobBook xmlAddressBook = XmlFileStorage.loadJobBookFromSaveFile(filePath);
+        try {
+            return Optional.of(xmlAddressBook.toModelType());
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            throw new DataConversionException(ive);
+        }
     }
 
     @Override
@@ -71,12 +71,12 @@ public class XmlJobBookStorage implements JobBookStorage {
      * Similar to {@link #saveJobBook(ReadOnlyJobBook)}
      * @param filePath location of the data. Cannot be null
      */
+    @Override
     public void saveJobBook(ReadOnlyJobBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
-
         FileUtil.createIfMissing(filePath);
-//        XmlFileStorage.saveCandidateBookToFile(filePath, new XmlSerializableJobBook(addressBook));
+        XmlFileStorage.saveJobBookToFile(filePath, new XmlSerializableJobBook(addressBook));
     }
 
 }

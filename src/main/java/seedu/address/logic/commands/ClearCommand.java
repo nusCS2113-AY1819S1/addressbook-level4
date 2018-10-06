@@ -18,8 +18,8 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.resetData(new CandidateBook());
-        model.commitAddressBook();
+        model.resetCandidateData(new CandidateBook());
+        model.commitCandidateBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
