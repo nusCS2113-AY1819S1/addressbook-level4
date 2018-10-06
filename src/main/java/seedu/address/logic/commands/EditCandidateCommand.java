@@ -40,9 +40,9 @@ import seedu.address.model.tag.Tag;
 /**
  * Edits the details of an existing candidate in the address book.
  */
-public class EditCommand extends Command {
+public class EditCandidateCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editc";
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the candidate identified "
@@ -74,7 +74,7 @@ public class EditCommand extends Command {
      * @param index of the candidate in the filtered candidate list to edit
      * @param editPersonDescriptor details to edit the candidate with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCandidateCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -134,12 +134,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCandidateCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditCandidateCommand e = (EditCandidateCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }

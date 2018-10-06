@@ -18,8 +18,8 @@ import seedu.address.logic.LogicState;
 import seedu.address.logic.commands.AddCandidateCommand;
 import seedu.address.logic.commands.ClearCandidateBookCommand;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCandidateCommand;
+import seedu.address.logic.commands.EditCandidateCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -72,10 +72,10 @@ public class RecruitBookParserTest {
     public void parseCommand_edit() throws Exception {
         Candidate candidate = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(candidate).build();
-        EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor),
-                state);
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+        EditCandidateCommand command = (EditCandidateCommand) parser.parseCommand(
+                EditCandidateCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
+        assertEquals(new EditCandidateCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test

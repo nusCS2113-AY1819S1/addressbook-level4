@@ -15,7 +15,7 @@ import seedu.address.logic.commands.ClearCandidateBookCommand;
 import seedu.address.logic.commands.ClearJobBookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditCandidateCommand;
 import seedu.address.logic.commands.EmailCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -68,11 +68,8 @@ public class RecruitBookParser {
         case AddCandidateCommand.COMMAND_WORD:
             return new AddCandidateCommandParser().parse(arguments);
 
-        case AddJobCommand.COMMAND_WORD:
-            return new AddJobCommand();
-
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditCandidateCommand.COMMAND_WORD:
+            return new EditCandidateCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
