@@ -9,7 +9,7 @@ public class Password {
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
             "Password only accepts alphanumeric characters, not empty and no spaces";
 
-    public static final String PASSWORD_VALIDATION_REGEX = "[\\p{Alnum}]*";
+    public static final String PASSWORD_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String password;
 

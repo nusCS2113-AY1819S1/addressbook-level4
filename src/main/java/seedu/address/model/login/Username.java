@@ -8,7 +8,7 @@ public class Username {
     public static final String MESSAGE_USERNAME_CONSTRAINTS =
             "Username only accepts alphanumeric characters, not empty and no spaces";
 
-    public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}]*";
+    public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String username;
 

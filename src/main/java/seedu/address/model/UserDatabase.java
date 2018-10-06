@@ -152,20 +152,15 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     /**
      * Removes {@code key} from this {@code UserDatabase}.
-     * @throws UserNotFoundException if the {@code key} is not in this {@code UserDatabase}.
      */
-    public boolean removeUser(User key) throws UserNotFoundException { users.remove(key); return true;}
+    public void removeUser(User key) { users.remove(key); }
 
     /**
      * Resets the existing user list of this {@code UserDatabase} with {@code newData}.
      */
     private void resetData(ReadOnlyUserDatabase newData) {
         requireNonNull(newData);
-        try {
             setUsers(newData.getUsersList());
-        } catch (DuplicateUserException e) {
-            throw new AssertionError("UserDatabase should not have duplicate persons");
-        }
     }
 
     @Override
@@ -180,6 +175,6 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     @Override
     public int hashCode() {
-        return Objects.hash(users);
+        return users.hashCode();
     }
 }

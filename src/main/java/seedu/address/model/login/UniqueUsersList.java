@@ -71,7 +71,7 @@ public class UniqueUsersList implements Iterable<User> {
      *
      * @throws UserNotFoundException if no such user could be found in the list.
      */
-    public void remove(User toRemove) throws UserNotFoundException {
+    public void remove(User toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new UserNotFoundException();
@@ -79,16 +79,17 @@ public class UniqueUsersList implements Iterable<User> {
     }
 
     public void setUsers(UniqueUsersList replacement) {
+        requireNonNull(replacement);
         this.internalList.setAll(replacement.internalList);
     }
 
     public void setUsers(List<User> users) throws DuplicateUserException {
         requireAllNonNull(users);
-        final UniqueUsersList replacement = new UniqueUsersList();
-        for (User user : users) {
-            replacement.add(user);
+        if (!usersAreUnique(users)) {
+            throw new DuplicateUserException();
         }
-        setUsers(replacement);
+
+        internalList.setAll(users);
     }
 
     /**
@@ -108,6 +109,17 @@ public class UniqueUsersList implements Iterable<User> {
         return other == this
                 || (other instanceof UniqueUsersList
                 && this.internalList.equals(((UniqueUsersList) other).internalList));
+    }
+
+    private boolean usersAreUnique(List<User> persons) {
+        for (int i = 0; i < persons.size() - 1; i++) {
+            for (int j = i + 1; j < persons.size(); j++) {
+                if (persons.get(i).isSameUser(persons.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     @Override
