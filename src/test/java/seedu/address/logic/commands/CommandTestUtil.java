@@ -31,9 +31,6 @@ public class CommandTestUtil {
     public static final String VALID_MIN_QUANTITY_ARDUINO = "5";
     public static final String VALID_TAG_LAB1 = "Lab1";
     public static final String VALID_TAG_LAB2 = "Lab2";
-    public static final String VALID_NAME_RPLIDAR = "Rplidar";
-    public static final String VALID_QUANTITY_RPLIDAR = "30";
-    public static final String VALID_MIN_QUANTITY_RPLIDAR = "10";
 
     public static final String VALID_NAME_RPLIDAR = "RP Lidar";
     public static final String VALID_QUANTITY_RPLIDAR = "30";

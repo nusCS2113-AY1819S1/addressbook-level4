@@ -42,18 +42,18 @@ public class NameContainsKeywordsPredicateTest {
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
         NameContainsKeywordsPredicate predicate = new NameContainsKeywordsPredicate(Collections.singletonList("Arduino"));
-        assertTrue(predicate.test(new ItemBuilder().withName("Arduino Breadboard").build()));
+        assertTrue(predicate.test(new ItemBuilder().withName("Arduino").build()));
 
         // Multiple keywords
         predicate = new NameContainsKeywordsPredicate(Arrays.asList("Arduino", "Breadboard"));
         assertTrue(predicate.test(new ItemBuilder().withName("Arduino Breadboard").build()));
 
         // Only one matching keyword
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Breadboard", "Charger"));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("Breadboard", "Arduino"));
         assertTrue(predicate.test(new ItemBuilder().withName("Arduino Charger").build()));
 
         // Mixed-case keywords
-        predicate = new NameContainsKeywordsPredicate(Arrays.asList("aLIce", "bOB"));
+        predicate = new NameContainsKeywordsPredicate(Arrays.asList("arduino", "breadboard"));
         assertTrue(predicate.test(new ItemBuilder().withName("Arduino Breadboard").build()));
     }
 

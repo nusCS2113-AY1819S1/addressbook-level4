@@ -13,6 +13,9 @@ public class Quantity {
 
     public static final String MESSAGE_QUANTITY_CONSTRAINTS =
             "Quantities should only contain non-zero unsigned integers, and it should not be blank";
+    public static final String MESSAGE_MIN_QUANTITY_CONSTRAINTS =
+            "Minimum Quantities should only contain non-zero unsigned integers, and it should not be blank";
+
 
     public final Integer quantity;
 
