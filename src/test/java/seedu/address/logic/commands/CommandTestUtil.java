@@ -31,6 +31,9 @@ public class CommandTestUtil {
     public static final String VALID_MIN_QUANTITY_ARDUINO = "5";
     public static final String VALID_TAG_LAB1 = "Lab1";
     public static final String VALID_TAG_LAB2 = "Lab2";
+    public static final String VALID_NAME_RPLIDAR = "Rplidar";
+    public static final String VALID_QUANTITY_RPLIDAR = "30";
+    public static final String VALID_MIN_QUANTITY_RPLIDAR = "10";
 
     public static final String VALID_NAME_RPLIDAR = "RP Lidar";
     public static final String VALID_QUANTITY_RPLIDAR = "30";
@@ -41,6 +44,9 @@ public class CommandTestUtil {
     public static final String MIN_QUANTITY_DESC_ARDUINO = " " + PREFIX_MIN_QUANTITY + VALID_MIN_QUANTITY_ARDUINO;
     public static final String TAG_DESC_LAB1 = " " + PREFIX_TAG + VALID_TAG_LAB1;
     public static final String TAG_DESC_LAB2 = " " + PREFIX_TAG + VALID_TAG_LAB2;
+    public static final String NAME_DESC_RPLIDAR = " " + PREFIX_NAME + VALID_NAME_RPLIDAR;
+    public static final String QUANTITY_DESC_RPLIDAR = " " + PREFIX_MIN_QUANTITY + VALID_QUANTITY_RPLIDAR;
+    public static final String MIN_QUANTITY_DESC_RPLIDAR = " " + PREFIX_MIN_QUANTITY + VALID_MIN_QUANTITY_RPLIDAR;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Arduino&"; // '&' not allowed in names
     public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "-1"; // '-' not allowed in qty; cannot be negative
@@ -51,11 +57,15 @@ public class CommandTestUtil {
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditItemDescriptor DESC_ARDUINO;
+    public static final EditCommand.EditItemDescriptor DESC_RPLIDAR;
 
 
     static {
         DESC_ARDUINO = new EditItemDescriptorBuilder().withName(VALID_NAME_ARDUINO)
                 .withQuantity(VALID_QUANTITY_ARDUINO).withMinQuantity(VALID_MIN_QUANTITY_ARDUINO)
+                .withTags(VALID_TAG_LAB1).build();
+        DESC_RPLIDAR = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR)
+                .withQuantity(VALID_QUANTITY_RPLIDAR).withMinQuantity(VALID_MIN_QUANTITY_RPLIDAR)
                 .withTags(VALID_TAG_LAB1).build();
     }
 
