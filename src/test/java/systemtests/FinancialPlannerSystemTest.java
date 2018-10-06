@@ -1,17 +1,12 @@
 package systemtests;
 
-import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.planner.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.planner.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.planner.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.planner.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.planner.ui.testutil.GuiTestAssert.assertListMatching;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -23,7 +18,6 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
-import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.DetailedRecordCardHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -32,7 +26,6 @@ import guitests.guihandles.RecordCardHandle;
 import guitests.guihandles.RecordListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.planner.MainApp;
 import seedu.planner.TestApp;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.core.index.Index;
@@ -42,11 +35,8 @@ import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.SelectCommand;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
-import seedu.planner.model.record.Record;
 import seedu.planner.testutil.TypicalRecords;
-import seedu.planner.ui.BrowserPanel;
 import seedu.planner.ui.CommandBox;
-import seedu.planner.ui.DetailedRecordCard;
 
 /**
  * A system test class for FinancialPlanner, which provides access to handles of GUI components and helper methods
@@ -187,8 +177,8 @@ public abstract class FinancialPlannerSystemTest {
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code RecordListPanelHandle} and {@code StatusBarFooterHandle} to remember
-     * their current state.
+     * Calls {@code DetailedRecordCardHandle}, {@code RecordListPanelHandle} and {@code StatusBarFooterHandle}
+     * to remember their current state.
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
@@ -210,7 +200,7 @@ public abstract class FinancialPlannerSystemTest {
     /**
      * Asserts that the detailed record card panel is changed to display the details of the record in the record list
      * panel at {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
-     * @see BrowserPanelHandle#isUrlChanged()
+     * @see DetailedRecordCardHandle#isDetailedRecordCardChanged()
      * @see RecordListPanelHandle#isSelectedRecordCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
@@ -228,7 +218,7 @@ public abstract class FinancialPlannerSystemTest {
 
     /**
      * Asserts that the browser's url and the selected card in the record list panel remain unchanged.
-     * @see BrowserPanelHandle#isUrlChanged()
+     * @see DetailedRecordCardHandle#isDetailedRecordCardChanged()
      * @see RecordListPanelHandle#isSelectedRecordCardChanged()
      */
     protected void assertSelectedCardUnchanged() {

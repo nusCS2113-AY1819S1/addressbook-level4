@@ -1,12 +1,6 @@
 package seedu.planner.ui;
 
-import static seedu.planner.model.record.MoneyFlow.CURRENCY;
-import static seedu.planner.model.record.MoneyFlow.MONEYFLOW_NO_SIGN_REGEX;
-import static seedu.planner.model.record.MoneyFlow.SIGN_REGEX;
-
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -17,7 +11,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.RecordPanelSelectionChangedEvent;
-import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
 
 /**

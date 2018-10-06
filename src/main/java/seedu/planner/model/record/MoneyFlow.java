@@ -1,14 +1,10 @@
 package seedu.planner.model.record;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import seedu.planner.logic.commands.HelpCommand;
-import seedu.planner.logic.parser.exceptions.ParseException;
 
 /**
  * Represents any form of money flow in a record in the financialplanner
