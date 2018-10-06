@@ -32,6 +32,11 @@ public class TypicalItems {
             .withQuantity("20")
             .withTags("friends").build();
 
+    public static final Item INVALID_ARDUINO = new ItemBuilder().withName("Ardu@ino")
+            .withTags("#Lab1").withMinQuantity("-3")
+            .withQuantity("-4")
+            .withTags("#friends").build();
+
     public static final String KEYWORD_MATCHING_AR = "ar"; // A keyword that matches "ar"
 
     private TypicalItems() {} // prevents instantiation

@@ -51,4 +51,5 @@ public class EditItemDescriptorTest {
         editedSensor = new EditItemDescriptorBuilder(DESC_SENSOR).withTags(VALID_TAG_LAB1).build();
         assertFalse(DESC_SENSOR.equals(editedSensor));
     }
+
 }
