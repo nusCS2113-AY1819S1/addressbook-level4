@@ -31,7 +31,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCandidateCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand)
+ * and unit tests for EditCandidateCommand.
  */
 @Ignore
 public class EditCandidateCommandTest {
@@ -78,7 +79,8 @@ public class EditCandidateCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON, new EditPersonDescriptor());
+        EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON,
+                new EditPersonDescriptor());
         Candidate editedCandidate = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCandidateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate);
@@ -113,7 +115,8 @@ public class EditCandidateCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstCandidate).build();
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(EditCandidateCommand, model, commandHistory, EditCandidateCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(EditCandidateCommand, model, commandHistory,
+                EditCandidateCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -125,7 +128,8 @@ public class EditCandidateCommandTest {
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(candidateInList).build());
 
-        assertCommandFailure(EditCandidateCommand, model, commandHistory, EditCandidateCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(EditCandidateCommand, model, commandHistory,
+                EditCandidateCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -134,7 +138,8 @@ public class EditCandidateCommandTest {
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(EditCandidateCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(EditCandidateCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     /**
@@ -151,7 +156,8 @@ public class EditCandidateCommandTest {
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
-        assertCommandFailure(EditCandidateCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(EditCandidateCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
@@ -183,7 +189,8 @@ public class EditCandidateCommandTest {
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(EditCandidateCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(EditCandidateCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);

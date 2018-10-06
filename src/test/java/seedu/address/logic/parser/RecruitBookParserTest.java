@@ -65,7 +65,8 @@ public class RecruitBookParserTest {
     public void parseCommand_edit() throws Exception {
         Candidate candidate = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(candidate).build();
-        EditCandidateCommand command = (EditCandidateCommand) parser.parseCommand(EditCandidateCommand.COMMAND_WORD + " "
+        EditCandidateCommand command = (EditCandidateCommand) parser.parseCommand(
+                EditCandidateCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCandidateCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
