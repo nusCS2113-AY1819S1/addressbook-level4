@@ -18,7 +18,7 @@ import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueList;
+import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
@@ -192,7 +192,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void setUsersList(UniqueList uniqueUserList) {
+    public void setUsersList(UniqueUsersList uniqueUserList) {
         versionedUserDatabase.setUniqueUserList(uniqueUserList);
     }
 

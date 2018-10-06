@@ -11,7 +11,8 @@ import java.util.List;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-public class UniqueList implements Iterable<User> {
+public class UniqueUsersList implements Iterable<User> {
+
     private final ObservableList<User> internalList = FXCollections.observableArrayList();
 
     /**
@@ -19,7 +20,7 @@ public class UniqueList implements Iterable<User> {
      */
     public boolean contains(User toCheck) {
         requireNonNull(toCheck);
-        return internalList.contains(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameUser);
     }
 
     /**
@@ -29,10 +30,8 @@ public class UniqueList implements Iterable<User> {
      */
     public void add(User toAdd) throws DuplicateUserException {
         requireNonNull(toAdd);
-        for (User user : internalList) {
-            if (user.getUsername().equals(toAdd.getUsername())) {
-                throw new DuplicateUserException();
-            }
+        if (contains(toAdd)) {
+            throw new DuplicateUserException();
         }
         internalList.add(toAdd);
     }
@@ -45,11 +44,14 @@ public class UniqueList implements Iterable<User> {
      */
     public void setUser(User target, User editedUser)
             throws UserNotFoundException {
-        requireNonNull(editedUser);
+        requireAllNonNull(target, editedUser);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new UserNotFoundException();
+        }
+        if (!target.isSameUser(editedUser) && contains(editedUser)) {
+            throw new DuplicateUserException();
         }
 
         internalList.set(index, editedUser);
@@ -69,22 +71,20 @@ public class UniqueList implements Iterable<User> {
      *
      * @throws UserNotFoundException if no such user could be found in the list.
      */
-    public boolean remove(User toRemove) throws UserNotFoundException {
+    public void remove(User toRemove) throws UserNotFoundException {
         requireNonNull(toRemove);
-        final boolean userFoundAndDeleted = internalList.remove(toRemove);
-        if (!userFoundAndDeleted) {
+        if (!internalList.remove(toRemove)) {
             throw new UserNotFoundException();
         }
-        return userFoundAndDeleted;
     }
 
-    public void setUsers(UniqueList replacement) {
+    public void setUsers(UniqueUsersList replacement) {
         this.internalList.setAll(replacement.internalList);
     }
 
     public void setUsers(List<User> users) throws DuplicateUserException {
         requireAllNonNull(users);
-        final UniqueList replacement = new UniqueList();
+        final UniqueUsersList replacement = new UniqueUsersList();
         for (User user : users) {
             replacement.add(user);
         }
@@ -106,8 +106,8 @@ public class UniqueList implements Iterable<User> {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof UniqueList
-                && this.internalList.equals(((UniqueList) other).internalList));
+                || (other instanceof UniqueUsersList
+                && this.internalList.equals(((UniqueUsersList) other).internalList));
     }
 
     @Override

@@ -8,8 +8,9 @@ import java.util.Objects;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class User {
-    public static final String AB_FILEPATH_PREFIX = "data/addressbook-";
-    public static final String AB_FILEPATH_POSTFIX = ".xml";
+
+    private static final String AB_FILEPATH_PREFIX = "data/addressbook-";
+    private static final String AB_FILEPATH_POSTFIX = ".xml";
     public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
 
 
@@ -27,7 +28,7 @@ public class User {
      * Creates a user instance
      */
     public User(Username username, Password password) {
-        this(username, password,Paths.get(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+        this(username, password, Paths.get(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
     }
 
     /**
@@ -55,6 +56,18 @@ public class User {
     public Path getAddressBookFilePath() {
         return addressBookFilePath;
     }
+
+    public boolean isSameUser(User otherUser) {
+        if (otherUser == this) {
+            return true;
+        }
+
+        return otherUser != null
+                && otherUser.getUsername().equals(getUsername())
+                && (otherUser.getPassword().equals(getPassword())
+                || otherUser.getAddressBookFilePath().equals(getAddressBookFilePath()));
+    }
+
 
     @Override
     public boolean equals(Object other) {

@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueList;
+import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
@@ -84,7 +84,7 @@ public interface Model {
      */
     void commitAddressBook();
 
-    void setUsersList(UniqueList uniqueUserList);
+    void setUsersList(UniqueUsersList uniqueUserList);
 
     /**
      * Returns the UserDatabase

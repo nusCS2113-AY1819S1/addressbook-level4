@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -22,10 +23,12 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You have not logged in yet. Please log in.";
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
+    private MainWindow mainWindow;
 
     @FXML
     private TextField commandTextField;
@@ -95,6 +98,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.positionCaret(commandTextField.getText().length());
     }
 
+
     /**
      * Handles the Enter button pressed event.
      */
@@ -106,8 +110,13 @@ public class CommandBox extends UiPart<Region> {
             historySnapshot.next();
             // process result of the command
             commandTextField.setText("");
-            logger.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            if (commandResult != null) {
+                logger.info("Result: " + commandResult.feedbackToUser);
+                raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
+            } else {
+                logger.info("Result: " + "User is not logged in yet.");
+                raise(new NewResultAvailableEvent(MESSAGE_NOT_LOGGED_IN));
+            }
 
         } catch (CommandException | ParseException e) {
             initHistory();

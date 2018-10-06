@@ -62,13 +62,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, UserDatab
     Optional<ReadOnlyUserDatabase> readUserDatabase() throws DataConversionException, IOException;
 
     @Override
-    Optional<ReadOnlyUserDatabase> readUserDatabase(Path filePath) throws DataConversionException, IOException;
-
-    @Override
     void saveUserDatabase(ReadOnlyUserDatabase userDatabase) throws IOException;
-
-    @Override
-    void saveUserDatabase(ReadOnlyUserDatabase userDatabase, Path filePath) throws IOException;
 
     @Override
     void deleteAddressBook(User user) throws IOException;

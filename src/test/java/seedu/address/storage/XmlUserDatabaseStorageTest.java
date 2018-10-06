@@ -41,9 +41,9 @@ public class XmlUserDatabaseStorageTest {
         return new XmlUserDatabaseStorage(Paths.get(filePath)).readUserDatabase(addToTestDataPathIfNotNull(filePath));
     }
 
-    private String addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
+    private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
         return prefsFileInTestDataFolder != null
-                ? TEST_DATA_FOLDER + prefsFileInTestDataFolder
+                ? TEST_DATA_FOLDER.resolve(prefsFileInTestDataFolder)
                 : null;
     }
 

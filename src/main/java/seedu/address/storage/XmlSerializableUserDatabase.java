@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserDatabase;
 
+@XmlRootElement(name = "users")
 public class XmlSerializableUserDatabase {
+
     @XmlElement
     private List<XmlAdaptedUser> users;
 
     /**
-     * Creates an empty XmlSerializableUserDatabase.
+     * Creates an empty XmlSerializableUserDatabase
+     * This empty constructor is required for marshalling.
      */
     public XmlSerializableUserDatabase() {
         users = new ArrayList<>();
@@ -51,8 +55,6 @@ public class XmlSerializableUserDatabase {
         if (!(other instanceof XmlSerializableUserDatabase)) {
             return false;
         }
-
-        XmlSerializableUserDatabase otherUd = (XmlSerializableUserDatabase) other;
-        return users.equals(otherUd.users);
+        return users.equals(((XmlSerializableUserDatabase) other).users);
     }
 }

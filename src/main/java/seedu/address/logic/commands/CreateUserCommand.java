@@ -35,6 +35,7 @@ public class CreateUserCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
         try {
             model.addUser(toCreate);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate.getUsername().toString()));

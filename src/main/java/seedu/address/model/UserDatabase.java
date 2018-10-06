@@ -3,7 +3,7 @@ package seedu.address.model;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.login.Password;
-import seedu.address.model.login.UniqueList;
+import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
@@ -24,12 +24,12 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     private static final String AB_FILEPATH_PREFIX = "data/addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
-    private UniqueList users;
+    private UniqueUsersList users;
 
     private boolean hasLoggedIn;
     private User loggedInUser;
 
-    { users = new UniqueList(); }
+    { users = new UniqueUsersList(); }
 
     public UserDatabase() {
         hasLoggedIn = false;
@@ -79,7 +79,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     /**
      * Sets the unique users list to {@code uniqueUserList}
      */
-    public void setUniqueUserList(UniqueList uniqueUserList) {
+    public void setUniqueUserList(UniqueUsersList uniqueUserList) {
         users = uniqueUserList;
     }
 
@@ -127,18 +127,14 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         }
     }
 
-    public void setUsers(List<User> users) throws DuplicateUserException {
-        this.users.setUsers(users);
-    }
+    public void setUsers(List<User> users) throws DuplicateUserException { this.users.setUsers(users); }
 
     /**
      * Adds a user to the User Database.
      *
      * @throws DuplicateUserException if an equivalent user already exists.
      */
-    public void addUser(User user) throws DuplicateUserException {
-        users.add(user);
-    }
+    public void addUser(User user) throws DuplicateUserException { users.add(user); }
 
     /**
      * Replaces the given user {@code target} in the list with {@code editedUser}.
@@ -158,31 +154,22 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * Removes {@code key} from this {@code UserDatabase}.
      * @throws UserNotFoundException if the {@code key} is not in this {@code UserDatabase}.
      */
-    public boolean removeUser(User key) throws UserNotFoundException {
-        if (users.remove(key)) {
-            return true;
-        } else {
-            throw new UserNotFoundException();
-        }
-    }
+    public boolean removeUser(User key) throws UserNotFoundException { users.remove(key); return true;}
 
     /**
      * Resets the existing user list of this {@code UserDatabase} with {@code newData}.
      */
     private void resetData(ReadOnlyUserDatabase newData) {
         requireNonNull(newData);
-        List<User> userList = newData.getUsersList().stream().collect(Collectors.toList());
         try {
-            setUsers(userList);
+            setUsers(newData.getUsersList());
         } catch (DuplicateUserException e) {
             throw new AssertionError("UserDatabase should not have duplicate persons");
         }
     }
 
     @Override
-    public ObservableList<User> getUsersList() {
-        return users.asObservableList();
-    }
+    public ObservableList<User> getUsersList() { return users.asObservableList(); }
 
     @Override
     public boolean equals(Object other) {
