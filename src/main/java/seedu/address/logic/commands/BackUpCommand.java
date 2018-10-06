@@ -4,7 +4,6 @@ package seedu.address.logic.commands;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.Timestamp;
 
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
