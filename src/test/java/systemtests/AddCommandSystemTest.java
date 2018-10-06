@@ -69,8 +69,7 @@ public class AddCommandSystemTest extends StockListSystemTest {
 
         /* Case: add an item with all fields same as another item in the stock list except name -> added */
         toAdd = new ItemBuilder(ARDUINO).withName(VALID_NAME_ARDUINO).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO +
-                + TAG_DESC_LAB1;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_ARDUINO + QUANTITY_DESC_ARDUINO + MIN_QUANTITY_DESC_ARDUINO + TAG_DESC_LAB1;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an item with all fields same as another item in the stock list except quantity and minQuantity
@@ -81,7 +80,7 @@ public class AddCommandSystemTest extends StockListSystemTest {
         assertCommandSuccess(command, toAdd);
 
         /* Case: add to empty stock list -> added */
-        deleteAllPersons();
+        deleteAllItems();
         assertCommandSuccess(ARDUINO);
 
         /* Case: add an item with tags, command with parameters in random order -> added */
@@ -99,11 +98,11 @@ public class AddCommandSystemTest extends StockListSystemTest {
         showItemsWithName(KEYWORD_MATCHING_AR);
         assertCommandSuccess(ARDUINO);
 
-        /* ------------------------ Perform add operation while a person card is selected --------------------------- */
+        /* ------------------------ Perform add operation while a item card is selected --------------------------- */
 
         /* Case: selects first card in the stock list, add an item -> added, card selection remains unchanged */
-        selectPerson(Index.fromOneBased(1));
-        assertCommandSuccess(ARUDINO);
+        selectItem(Index.fromOneBased(1));
+        assertCommandSuccess(ARDUINO);
 
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
@@ -165,12 +164,12 @@ public class AddCommandSystemTest extends StockListSystemTest {
      * 2. Command box has the default style class.<br>
      * 3. Result display box displays the success message of executing {@code AddCommand} with the details of
      * {@code toAdd}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 4. {@code Storage} and {@code ItemListPanel} equal to the corresponding components in
      * the current model added with {@code toAdd}.<br>
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code StockListSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see StockListSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Item toAdd) {
@@ -194,7 +193,7 @@ public class AddCommandSystemTest extends StockListSystemTest {
      * Performs the same verification as {@code assertCommandSuccess(String, Item)} except asserts that
      * the,<br>
      * 1. Result display box displays {@code expectedResultMessage}.<br>
-     * 2. {@code Storage} and {@code PersonListPanel} equal to the corresponding components in
+     * 2. {@code Storage} and {@code ItemListPanel} equal to the corresponding components in
      * {@code expectedModel}.<br>
      * @see AddCommandSystemTest#assertCommandSuccess(String, Item)
      */
@@ -211,7 +210,7 @@ public class AddCommandSystemTest extends StockListSystemTest {
      * 1. Command box displays {@code command}.<br>
      * 2. Command box has the error style class.<br>
      * 3. Result display box displays {@code expectedResultMessage}.<br>
-     * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
+     * 4. {@code Storage} and {@code ItemListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
      * {@code StockListSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>

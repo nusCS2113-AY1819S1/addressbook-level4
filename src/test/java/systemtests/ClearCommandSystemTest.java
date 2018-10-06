@@ -1,7 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalItems.KEYWORD_MATCHING_ARDUINO;
+import static seedu.address.testutil.TypicalItems.KEYWORD_MATCHING_AR;
 
 import org.junit.Test;
 
@@ -44,7 +44,7 @@ public class ClearCommandSystemTest extends StockListSystemTest {
 
         /* Case: filters the item list before clearing -> entire stock list cleared */
         executeCommand(UndoCommand.COMMAND_WORD); // restores the original stock list
-        showItemsWithName(KEYWORD_MATCHING_ARDUINO);
+        showItemsWithName(KEYWORD_MATCHING_AR);
         assertCommandSuccess(ClearCommand.COMMAND_WORD);
         assertSelectedCardUnchanged();
 

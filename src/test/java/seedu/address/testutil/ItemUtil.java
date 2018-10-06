@@ -36,9 +36,9 @@ public class ItemUtil {
         sb.append(PREFIX_NAME + item.getName().fullName + " ");
         sb.append(PREFIX_QUANTITY + item.getQuantity().toString() + " ");
         sb.append(PREFIX_MIN_QUANTITY + item.getMinQuantity().toString() + " ");
-        item.getStatus().stream().forEach(
-                s -> sb.append(PREFIX_STATUS + s.toString() + " ")
-        );
+//        item.getStatus().stream().forEach(
+//                s -> sb.append(PREFIX_STATUS + s.toString() + " ")
+//        );
         item.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -53,15 +53,15 @@ public class ItemUtil {
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getQuantity().ifPresent(quantity -> sb.append(PREFIX_QUANTITY).append(quantity).append(" "));
         descriptor.getMinQuantity().ifPresent(minQuantity -> sb.append(PREFIX_MIN_QUANTITY).append(minQuantity).append(" "));
-        if (descriptor.getStatus().isPresent()) {
-            List<Integer> status = descriptor.getStatus().get();
-            if (status.isEmpty()) {
-                sb.append(PREFIX_STATUS);
-            }
-            else {
-                status.forEach(s -> sb.append(PREFIX_STATUS).append(s).append(" "));
-            }
-        }
+//        if (descriptor.getStatus().isPresent()) {
+//            List<Integer> status = descriptor.getStatus().get();
+//            if (status.isEmpty()) {
+//                sb.append(PREFIX_STATUS);
+//            }
+//            else {
+//                status.forEach(s -> sb.append(PREFIX_STATUS).append(s).append(" "));
+//            }
+//        }
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
