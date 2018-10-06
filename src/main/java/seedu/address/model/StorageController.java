@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.model.gradebook.GradebookComponent;
+import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.model.note.Note;
 
 /**
@@ -24,7 +26,7 @@ public class StorageController {
     private static ArrayList<Course> courseStorage = new ArrayList<Course>();
     private static ArrayList<Module> moduleStorage = new ArrayList<Module>();
     private static ArrayList<Classroom> classesStorage = new ArrayList<Classroom>();
-    private static ArrayList<Course> gradebookStorage = new ArrayList<Course>();
+    private static ArrayList<GradebookComponent> gradebookStorage = new ArrayList<GradebookComponent>();
     private static ArrayList<Note> noteStorage = new ArrayList<Note>();
 
 
@@ -49,6 +51,10 @@ public class StorageController {
 
             NotesManager nm = (NotesManager) XmlUtil.getDataFromFile(Paths.get(STORAGE_NOTES), NotesManager.class);
             noteStorage = nm.getList();
+
+            GradebookManager gradeManager = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADEBOOK),
+                    GradebookManager.class);
+            gradebookStorage = gradeManager.getList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -94,6 +100,10 @@ public class StorageController {
             NotesManager nm = new NotesManager();
             nm.setNotesList(noteStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_NOTES), nm);
+
+            GradebookManager gm = new GradebookManager();
+            gm.setGradebookComponentList(gradebookStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_GRADEBOOK), gm);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -123,11 +133,11 @@ public class StorageController {
         StorageController.classesStorage = classesStorage;
     }
 
-    public static ArrayList<Course> getGradebookStorage() {
+    public static ArrayList<GradebookComponent> getGradebookStorage() {
         return gradebookStorage;
     }
 
-    public static void setGradebookStorage(ArrayList<Course> gradebookStorage) {
+    public static void setGradebookStorage(ArrayList<GradebookComponent> gradebookStorage) {
         StorageController.gradebookStorage = gradebookStorage;
     }
 
