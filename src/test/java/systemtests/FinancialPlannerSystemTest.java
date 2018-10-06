@@ -25,8 +25,10 @@ import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.DetailedRecordCardHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.RecordCardHandle;
 import guitests.guihandles.RecordListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
@@ -40,9 +42,11 @@ import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.SelectCommand;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
+import seedu.planner.model.record.Record;
 import seedu.planner.testutil.TypicalRecords;
 import seedu.planner.ui.BrowserPanel;
 import seedu.planner.ui.CommandBox;
+import seedu.planner.ui.DetailedRecordCard;
 
 /**
  * A system test class for FinancialPlanner, which provides access to handles of GUI components and helper methods
@@ -71,7 +75,6 @@ public abstract class FinancialPlannerSystemTest {
         testApp = setupHelper.setupApplication(this::getInitialData, getDataFileLocation());
         mainWindowHandle = setupHelper.setupMainWindowHandle();
 
-        waitUntilBrowserLoaded(getBrowserPanel());
         assertApplicationStartingStateIsCorrect();
     }
 
@@ -111,8 +114,8 @@ public abstract class FinancialPlannerSystemTest {
         return mainWindowHandle.getMainMenu();
     }
 
-    public BrowserPanelHandle getBrowserPanel() {
-        return mainWindowHandle.getBrowserPanel();
+    public DetailedRecordCardHandle getDetailedRecordCardPanel() {
+        return mainWindowHandle.getDetailedRecordCard();
     }
 
     public StatusBarFooterHandle getStatusBarFooter() {
@@ -134,8 +137,6 @@ public abstract class FinancialPlannerSystemTest {
         clockRule.setInjectedClockToCurrentTime();
 
         mainWindowHandle.getCommandBox().run(command);
-
-        waitUntilBrowserLoaded(getBrowserPanel());
     }
 
     /**
@@ -191,39 +192,37 @@ public abstract class FinancialPlannerSystemTest {
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
-        getBrowserPanel().rememberUrl();
+        getDetailedRecordCardPanel().rememberDetailedRecordCard();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
         getRecordListPanel().rememberSelectedRecordCard();
     }
 
     /**
-     * Asserts that the previously selected card is now deselected and the browser's url remains displaying the details
-     * of the previously selected record.
-     * @see BrowserPanelHandle#isUrlChanged()
+     * Asserts that the previously selected card is now deselected and the detailed card panel is now invisible
+     * @see DetailedRecordCardHandle#isVisible()
      */
     protected void assertSelectedCardDeselected() {
-        assertFalse(getBrowserPanel().isUrlChanged());
+        assertFalse(getDetailedRecordCardPanel().isVisible());
         assertFalse(getRecordListPanel().isAnyCardSelected());
     }
 
     /**
-     * Asserts that the browser's url is changed to display the details of the record in the record list panel at
-     * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
+     * Asserts that the detailed record card panel is changed to display the details of the record in the record list
+     * panel at {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
      * @see RecordListPanelHandle#isSelectedRecordCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getRecordListPanel().navigateToCard(getRecordListPanel().getSelectedCardIndex());
         String selectedCardName = getRecordListPanel().getHandleToSelectedCard().getName();
-        URL expectedUrl;
+        RecordCardHandle expectedRecordCard;
         try {
-            expectedUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + selectedCardName.replaceAll(" ", "%20"));
-        } catch (MalformedURLException mue) {
-            throw new AssertionError("URL expected to be valid.", mue);
+            expectedRecordCard = getRecordListPanel().getRecordCardHandle(getRecordListPanel().getSelectedCardIndex());
+        } catch (IllegalStateException e) {
+            throw new AssertionError("Record card cannot be found", e);
         }
-        assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
-
+        assertTrue(getDetailedRecordCardPanel().equals(expectedRecordCard));
         assertEquals(expectedSelectedCardIndex.getZeroBased(), getRecordListPanel().getSelectedCardIndex());
     }
 
@@ -233,7 +232,7 @@ public abstract class FinancialPlannerSystemTest {
      * @see RecordListPanelHandle#isSelectedRecordCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
-        assertFalse(getBrowserPanel().isUrlChanged());
+        assertFalse(getDetailedRecordCardPanel().isDetailedRecordCardChanged());
         assertFalse(getRecordListPanel().isSelectedRecordCardChanged());
     }
 
@@ -279,8 +278,7 @@ public abstract class FinancialPlannerSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getRecordListPanel(), getModel().getFilteredRecordList());
-        assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE),
-                getBrowserPanel().getLoadedUrl());
+        assertFalse(getDetailedRecordCardPanel().isVisible());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
