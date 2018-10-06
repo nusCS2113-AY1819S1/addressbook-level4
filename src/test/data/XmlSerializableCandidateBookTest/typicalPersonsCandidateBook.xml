@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- CandidateBook save file which contains the same Candidate values as in TypicalPersons#getTypicalAddressBook() -->
-<addressbook>
+<candidatebook>
     <candidates>
         <name>Alice Pauline</name>
         <gender>F</gender>
@@ -82,4 +82,4 @@
         <education>O level</education>
         <salary>1000</salary>
     </candidates>
-</addressbook>
+</candidatebook>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<candidatebook>
 
     <candidates>
         <name>Alice Pauline</name>
@@ -27,4 +27,4 @@
         <salary>1000</salary>
     </candidates>
 
-</addressbook>
+</candidatebook>

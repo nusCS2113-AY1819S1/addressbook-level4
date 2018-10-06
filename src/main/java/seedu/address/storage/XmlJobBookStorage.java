@@ -52,7 +52,7 @@ public class XmlJobBookStorage implements JobBookStorage {
 //            return Optional.empty();
 //        }
 //
-//        XmlSerializableJobBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+//        XmlSerializableJobBook xmlAddressBook = XmlFileStorage.loadCandidateBookFromSaveFile(filePath);
 //        try {
 //            return Optional.of(xmlAddressBook.toModelType());
 //        } catch (IllegalValueException ive) {
@@ -76,7 +76,7 @@ public class XmlJobBookStorage implements JobBookStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-//        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableJobBook(addressBook));
+//        XmlFileStorage.saveCandidateBookToFile(filePath, new XmlSerializableJobBook(addressBook));
     }
 
 }

@@ -60,7 +60,7 @@ public class UserPrefs {
 
         return Objects.equals(guiSettings, o.guiSettings)
                 && Objects.equals(candidateBookFilePath, o.candidateBookFilePath)
-                && Objects.equals(jobBookFilePath,o.jobBookFilePath);
+                && Objects.equals(jobBookFilePath, o.jobBookFilePath);
     }
 
     @Override

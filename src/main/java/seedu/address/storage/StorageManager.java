@@ -100,7 +100,7 @@ public class StorageManager extends ComponentManager implements Storage {
     // ========================== JobBook methods ==============================
 
     @Override
-    public Path getJobBookFilePath(){
+    public Path getJobBookFilePath() {
         return jobBookStorage.getJobBookFilePath();
     };
 

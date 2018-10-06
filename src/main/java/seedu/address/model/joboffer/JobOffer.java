@@ -12,9 +12,9 @@ public class JobOffer {
     private final Company company;
     private final Job job;
 
-    public JobOffer(String company, String job) {
-        this.company = new Company (company);
-        this.job = new Job (job);
+    public JobOffer(Company company, Job job) {
+        this.company = company;
+        this.job = job;
     }
 
     public Company getCompany() {

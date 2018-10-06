@@ -51,7 +51,7 @@ public class XmlCandidateBookStorage implements CandidateBookStorage {
             return Optional.empty();
         }
 
-        XmlSerializableCandidateBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableCandidateBook xmlAddressBook = XmlFileStorage.loadCandidateBookFromSaveFile(filePath);
         try {
             return Optional.of(xmlAddressBook.toModelType());
         } catch (IllegalValueException ive) {
@@ -74,7 +74,7 @@ public class XmlCandidateBookStorage implements CandidateBookStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableCandidateBook(addressBook));
+        XmlFileStorage.saveCandidateBookToFile(filePath, new XmlSerializableCandidateBook(addressBook));
     }
 
 }
