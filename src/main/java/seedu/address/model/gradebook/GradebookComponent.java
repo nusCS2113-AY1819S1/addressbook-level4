@@ -8,12 +8,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 @XmlRootElement(name = "gradebook")
-
 public class GradebookComponent {
-
+    @XmlElement(name = "gradeItemName", required = true, nillable = true)
     private String gradeItemName;
+    @XmlElement(name = "moduleCode", required = true, nillable = true)
     private String moduleCode;
-
     public GradebookComponent() {
 
     }
@@ -21,20 +20,15 @@ public class GradebookComponent {
         this.gradeItemName = gradeItemName;
         this.moduleCode = moduleCode;
     }
-    @XmlElement(name = "gradeItemName")
     public String getGradeItemName() {
         return gradeItemName;
     }
-
     public void setGradeItemName(String gradeItemName) {
         this.gradeItemName = gradeItemName;
     }
-
-    @XmlElement(name = "moduleCode")
     public String getModuleCode() {
         return moduleCode;
     }
-
     public void setModuleCode(String moduleCode) {
         this.moduleCode = moduleCode;
     }

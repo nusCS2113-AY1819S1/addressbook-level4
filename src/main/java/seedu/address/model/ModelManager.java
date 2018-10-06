@@ -100,19 +100,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    /*
-    @Override
-    public ObservableList<GradebookComponent> getFilteredComponentList() {
-        return FXCollections.unmodifiableObservableList(filteredComponents);
-    }
-
-    @Override
-    public void updateFilteredComponentList(Predicate<GradebookComponent> predicate) {
-        requireNonNull(predicate);
-        filteredComponents.setPredicate(predicate);
-    }
-    */
-
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -159,5 +146,4 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }
