@@ -10,9 +10,11 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.CandidateBookChangedEvent;
+import seedu.address.commons.events.model.JobBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyCandidateBook;
+import seedu.address.model.ReadOnlyJobBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -22,11 +24,14 @@ public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private CandidateBookStorage candidateBookStorage;
+    private JobBookStorage jobBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(CandidateBookStorage candidateBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(CandidateBookStorage candidateBookStorage, JobBookStorage jobBookStorage,
+                          UserPrefsStorage userPrefsStorage) {
         super();
+        this.jobBookStorage = jobBookStorage;
         this.candidateBookStorage = candidateBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -64,7 +69,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public Optional<ReadOnlyCandidateBook> readCandidateBook(Path filePath)
             throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read candidatebook data from file: " + filePath);
         return candidateBookStorage.readCandidateBook(filePath);
     }
 
@@ -75,7 +80,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveCandidateBook(ReadOnlyCandidateBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write to candidatebook data file: " + filePath);
         candidateBookStorage.saveCandidateBook(addressBook, filePath);
     }
 
@@ -83,12 +88,58 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleCandidateBookChangedEvent(CandidateBookChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Local candidatebook changed, saving to file"));
         try {
             saveCandidateBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+
+    // ========================== JobBook methods ==============================
+
+    @Override
+    public Path getJobBookFilePath(){
+        return jobBookStorage.getJobBookFilePath();
+    };
+
+    @Override
+    public Optional<ReadOnlyJobBook> readJobBook() throws DataConversionException, IOException {
+        return readJobBook(jobBookStorage.getJobBookFilePath());
+    };
+
+    @Override
+    public Optional<ReadOnlyJobBook> readJobBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read jobbook data from file: " + filePath);
+        return jobBookStorage.readJobBook(filePath);
+    }
+
+    @Override
+    public void saveJobBook(ReadOnlyJobBook jobBook) throws IOException {
+        saveJobBook(jobBook, jobBookStorage.getJobBookFilePath());
+    }
+
+    @Override
+    public void saveJobBook(ReadOnlyJobBook jobBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write jobbook to data file: " + filePath);
+        jobBookStorage.saveJobBook(jobBook, filePath);
+    }
+
+
+
+    /**
+     * Saves the current version of the Job Book to the hard disk.
+     *   Creates the data file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    public void handleJobBookChangedEvent(JobBookChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local jobbook changed, saving to file"));
+        try {
+            saveJobBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    };
 
 }

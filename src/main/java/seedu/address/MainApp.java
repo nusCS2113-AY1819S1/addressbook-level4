@@ -27,11 +27,13 @@ import seedu.address.model.ReadOnlyCandidateBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.CandidateBookStorage;
+import seedu.address.storage.JobBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlCandidateBookStorage;
+import seedu.address.storage.XmlJobBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -62,8 +64,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        CandidateBookStorage candidateBookStorage = new XmlCandidateBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(candidateBookStorage, userPrefsStorage);
+        CandidateBookStorage candidateBookStorage = new XmlCandidateBookStorage(userPrefs.getCandidateBookFilePath());
+        JobBookStorage jobBookStorage = new XmlJobBookStorage(userPrefs.getJobBookFilePath());
+        storage = new StorageManager(candidateBookStorage, jobBookStorage, userPrefsStorage);
 
         initLogging(config);
 
