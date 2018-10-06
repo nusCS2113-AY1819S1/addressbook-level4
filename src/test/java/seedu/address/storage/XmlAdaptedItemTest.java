@@ -3,6 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedItem.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
+import static seedu.address.testutil.TypicalItems.INVALID_ARDUINO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +17,11 @@ import seedu.address.model.item.Name;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedItemTest {
-    private static final String INVALID_NAME = "Ardui@no";
-    private static final Quantity INVALID_QUANTITY = new Quantity("-3");
-    private static final Quantity INVALID_MIN_QUANTITY = new Quantity("q");
-    private static final List<Integer> INVALID_STATUS = new ArrayList<>();
-    private static final List<XmlAdaptedTag> INVALID_TAGS = ARDUINO.getTags().stream()
+    private static final String INVALID_NAME = INVALID_ARDUINO.getName().toString();
+    private static final Quantity INVALID_QUANTITY = INVALID_ARDUINO.getQuantity();
+    private static final Quantity INVALID_MIN_QUANTITY = INVALID_ARDUINO.getMinQuantity();
+    private static final List<Integer> INVALID_STATUS = INVALID_ARDUINO.getStatus();
+    private static final List<XmlAdaptedTag> INVALID_TAGS = INVALID_ARDUINO.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 

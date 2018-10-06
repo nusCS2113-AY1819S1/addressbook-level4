@@ -25,9 +25,9 @@ public class XmlAdaptedItem {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private Integer quantity;
+    private Quantity quantity;
     @XmlElement(required = true)
-    private Integer minQuantity;
+    private Quantity minQuantity;
     @XmlElement(required = true)
     private List<Integer> status;
 
@@ -43,7 +43,7 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String name, Integer quantity, Integer minQuantity, List<Integer> status,
+    public XmlAdaptedItem(String name, Quantity quantity, Quantity minQuantity, List<Integer> status,
                           List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.quantity = quantity;
@@ -61,8 +61,8 @@ public class XmlAdaptedItem {
      */
     public XmlAdaptedItem(Item source) {
         name = source.getName().fullName;
-        quantity = source.getQuantity().toInteger();
-        minQuantity = source.getMinQuantity().toInteger();
+        quantity = source.getQuantity();
+        minQuantity = source.getMinQuantity();
         status = source.getStatus();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
