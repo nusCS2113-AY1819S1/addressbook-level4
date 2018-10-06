@@ -25,7 +25,7 @@ public class BackUpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        FileEncryptor fe = new FileEncryptor(SOURCE_PATH );
+        FileEncryptor fe = new FileEncryptor(SOURCE_PATH);
         File source = new File(SOURCE_PATH);
         File backupDest = new File(DEST_PATH);
 
@@ -41,7 +41,7 @@ public class BackUpCommand extends Command {
             File dest = new File(DEST_PATH + "/" + fileName + ".xml");
             Files.copy(source.toPath(), dest.toPath());
             return new CommandResult(MESSAGE_SUCCESS);
-        } catch(IOException io) {
+        } catch (IOException io) {
             throw new CommandException(ERROR);
         }
     }
