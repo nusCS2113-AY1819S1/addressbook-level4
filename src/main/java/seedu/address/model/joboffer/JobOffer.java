@@ -2,6 +2,9 @@ package seedu.address.model.joboffer;
 
 import java.util.Objects;
 
+import seedu.address.model.candidate.Education;
+import seedu.address.model.candidate.Gender;
+
 /**
  * Represents a job offer in the job book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -9,12 +12,23 @@ import java.util.Objects;
 
 public class JobOffer {
 
+    // Job Identity fields
     private final Company company;
     private final Job job;
+    private final Gender gender;
 
-    public JobOffer(Company company, Job job) {
+    // Data fields
+    private final AgeRange ageRange;
+    private final Education education;
+    private final Salary salary;
+
+    public JobOffer(Company company, Job job, Gender gender, AgeRange ageRange, Education education, Salary salary) {
         this.company = company;
         this.job = job;
+        this.ageRange = ageRange;
+        this.education = education;
+        this.salary = salary;
+        this.gender = gender;
     }
 
     public Company getCompany() {
@@ -25,8 +39,24 @@ public class JobOffer {
         return job;
     }
 
+    public AgeRange getAgeRange() {
+        return ageRange;
+    }
+
+    public Education getEducation() {
+        return education;
+    }
+
+    public Salary getSalary() {
+        return salary;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
     /**
-     * Returns true if both job offers are of the same company and offer the same job
+     * Returns true if both job offers have the same job identity fields
      */
     public boolean isSameJobOffer(JobOffer otherJobOffer) {
         if (otherJobOffer == this) {
@@ -35,12 +65,13 @@ public class JobOffer {
 
         return otherJobOffer != null
                 && otherJobOffer.getCompany().equals(getCompany())
-                && otherJobOffer.getJob().equals(getJob());
+                && otherJobOffer.getJob().equals(getJob())
+                && otherJobOffer.getGender().equals(getGender());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(company, job);
+        return Objects.hash(company, job, gender, ageRange, education, salary);
     }
 
     @Override
@@ -49,7 +80,17 @@ public class JobOffer {
         builder.append("Company: ")
                 .append(getCompany())
                 .append(" Job: ")
-                .append(getJob());
+                .append(getJob())
+                .append(" Gender: ")
+                .append(getGender())
+                .append(" Age range: ")
+                .append(getAgeRange())
+                .append(" Education: ")
+                .append(getEducation())
+                .append(" Salary: ")
+                .append(getSalary());
+
+
         return builder.toString();
     }
 }

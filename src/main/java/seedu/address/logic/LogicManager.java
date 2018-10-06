@@ -20,7 +20,7 @@ import seedu.address.model.candidate.Candidate;
  */
 public class LogicManager extends ComponentManager implements Logic {
 
-    private static LogicState state = new LogicState("Primary");
+    private static LogicState state = new LogicState("primary");
 
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 

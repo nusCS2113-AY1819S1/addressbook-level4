@@ -5,9 +5,13 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.candidate.Education;
+import seedu.address.model.candidate.Gender;
+import seedu.address.model.joboffer.AgeRange;
 import seedu.address.model.joboffer.Company;
 import seedu.address.model.joboffer.Job;
 import seedu.address.model.joboffer.JobOffer;
+import seedu.address.model.joboffer.Salary;
 
 /**
  * JAXB-friendly version of the JobOffer.
@@ -20,6 +24,14 @@ public class XmlAdaptedJobOffer {
     private String job;
     @XmlElement(required = true)
     private String company;
+    @XmlElement(required = true)
+    private String gender;
+    @XmlElement(required = true)
+    private String ageRange;
+    @XmlElement(required = true)
+    private String education;
+    @XmlElement(required = true)
+    private String salary;
 
 
     /**
@@ -32,9 +44,15 @@ public class XmlAdaptedJobOffer {
      * Constructs an {@code XmlAdaptedJobOffer} with the given job offer details.
      */
 
-    public XmlAdaptedJobOffer(String job, String company) {
-        this.job = job;
+    public XmlAdaptedJobOffer(String company, String job, String gender, String ageRange, String education,
+                              String salary) {
         this.company = company;
+        this.job = job;
+        this.gender = gender;
+        this.ageRange = ageRange;
+        this.education = education;
+        this.salary = salary;
+
     }
 
     /**
@@ -45,8 +63,12 @@ public class XmlAdaptedJobOffer {
 
     public XmlAdaptedJobOffer(JobOffer source) {
 
-        job = source.getJob().value;
         company = source.getCompany().value;
+        job = source.getJob().value;
+        gender = source.getGender().value;
+        ageRange = source.getAgeRange().value;
+        education = source.getEducation().value;
+        salary = source.getSalary().value;
     }
 
     /**
@@ -78,8 +100,50 @@ public class XmlAdaptedJobOffer {
 
         final Job modelJob = new Job(job);
 
+        if (gender == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Gender.class.getSimpleName()));
+        }
 
-        return new JobOffer(modelCompany, modelJob);
+        if (!Gender.isValidGender(gender)) {
+            throw new IllegalValueException(Gender.MESSAGE_GENDER_CONSTRAINTS);
+        }
+
+        final Gender modelGender = new Gender(gender);
+
+        if (ageRange == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    AgeRange.class.getSimpleName()));
+        }
+
+        if (!AgeRange.isValidAgeRange(ageRange)) {
+            throw new IllegalValueException(AgeRange.MESSAGE_AGE_RANGE_CONSTRAINTS);
+        }
+
+        final AgeRange modelAgeRange = new AgeRange(ageRange);
+
+        if (education == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Education.class.getSimpleName()));
+        }
+
+        if (!Education.isValidEducation(education)) {
+            throw new IllegalValueException(Education.MESSAGE_EDUCATION_CONSTRAINTS);
+        }
+
+        final Education modelEducation = new Education(education);
+
+        if (salary == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Salary.class.getSimpleName()));
+        }
+
+        if (!Salary.isValidSalary(salary)) {
+            throw new IllegalValueException(Salary.MESSAGE_SALARY_CONSTRAINTS);
+        }
+
+        final Salary modelSalary = new Salary(salary);
+
+
+        return new JobOffer(modelCompany, modelJob, modelGender, modelAgeRange, modelEducation, modelSalary);
     }
 
 

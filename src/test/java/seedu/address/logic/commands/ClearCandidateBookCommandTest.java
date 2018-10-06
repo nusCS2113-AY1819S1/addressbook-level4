@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
-public class ClearCommandTest {
+public class ClearCandidateBookCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -22,7 +22,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.commitCandidateBook();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCandidateBookCommand(), model, commandHistory,
+                ClearCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -32,7 +33,8 @@ public class ClearCommandTest {
         expectedModel.resetCandidateData(new CandidateBook());
         expectedModel.commitCandidateBook();
 
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCandidateBookCommand(), model, commandHistory,
+                ClearCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

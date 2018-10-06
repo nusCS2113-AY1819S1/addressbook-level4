@@ -133,6 +133,9 @@ public class StorageManager extends ComponentManager implements Storage {
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
+
+    @Override
+    @Subscribe
     public void handleJobBookChangedEvent(JobBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local jobbook changed, saving to file"));
         try {

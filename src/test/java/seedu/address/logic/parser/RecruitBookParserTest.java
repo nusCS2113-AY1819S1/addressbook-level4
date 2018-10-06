@@ -16,7 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.LogicState;
 import seedu.address.logic.commands.AddCandidateCommand;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearCandidateBookCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -41,7 +41,7 @@ public class RecruitBookParserTest {
     public ExpectedException thrown = ExpectedException.none();
 
     // dummy LogicState stub
-    private LogicState state = new LogicState("Primary");
+    private LogicState state = new LogicState("primary");
 
     private final RecruitBookParser parser = new RecruitBookParser();
 
@@ -55,8 +55,10 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD, state) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3", state) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD, state)
+                instanceof ClearCandidateBookCommand);
+        assertTrue(parser.parseCommand(ClearCandidateBookCommand.COMMAND_WORD + " 3", state)
+                instanceof ClearCandidateBookCommand);
     }
 
     @Test

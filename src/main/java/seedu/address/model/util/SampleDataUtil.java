@@ -16,6 +16,7 @@ import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
+import seedu.address.model.joboffer.AgeRange;
 import seedu.address.model.joboffer.Company;
 import seedu.address.model.joboffer.Job;
 import seedu.address.model.joboffer.JobOffer;
@@ -60,8 +61,10 @@ public class SampleDataUtil {
 
     public static JobOffer[] getSampleJobOffers() {
         return new JobOffer[]{
-            new JobOffer(new Company("Mcdonalds"), new Job("Cashier")),
-            new JobOffer(new Company("KFC"), new Job("Cook")),
+            new JobOffer(new Company("Mcdonalds"), new Job("Cashier"), new Gender("M"),
+                new AgeRange("20-30"), new Education("O levels"), new Salary("1000")),
+            new JobOffer(new Company("KFC"), new Job("Cook"), new Gender("F"),
+                    new AgeRange("20-30"), new Education("O levels"), new Salary("1000")),
         };
     }
 
