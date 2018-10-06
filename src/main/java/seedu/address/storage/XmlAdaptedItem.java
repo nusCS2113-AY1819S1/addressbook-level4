@@ -25,9 +25,9 @@ public class XmlAdaptedItem {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private Quantity quantity;
+    private String quantity;
     @XmlElement(required = true)
-    private Quantity minQuantity;
+    private String minQuantity;
     @XmlElement(required = true)
     private List<Integer> status;
 
@@ -43,7 +43,7 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String name, Quantity quantity, Quantity minQuantity, List<Integer> status,
+    public XmlAdaptedItem(String name, String quantity, String minQuantity, List<Integer> status,
                           List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.quantity = quantity;
@@ -61,8 +61,8 @@ public class XmlAdaptedItem {
      */
     public XmlAdaptedItem(Item source) {
         name = source.getName().fullName;
-        quantity = source.getQuantity();
-        minQuantity = source.getMinQuantity();
+        quantity = source.getQuantity().toString();
+        minQuantity = source.getMinQuantity().toString();
         status = source.getStatus();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -88,13 +88,13 @@ public class XmlAdaptedItem {
         }
         final Name modelName = new Name(name);
 
-        if (quantity == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "quantity"));
+        if (quantity == null || Integer.parseInt(quantity) <= 0) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Quantity"));
         }
         final Quantity modelQuantity = new Quantity(quantity.toString());
 
-        if (minQuantity == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "minQuantity"));
+        if (minQuantity == null || Integer.parseInt(minQuantity) <= 0) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Minimum Quantity"));
         }
         final Quantity modelMinQuantity = new Quantity(minQuantity.toString());
 

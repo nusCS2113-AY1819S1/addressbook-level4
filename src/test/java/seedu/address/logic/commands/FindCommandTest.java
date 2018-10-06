@@ -3,11 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_ItemS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalItems.LED;
-import static seedu.address.testutil.TypicalItems.COIL;
-import static seedu.address.testutil.TypicalItems.OSCILLOSCOPE;
+import static seedu.address.testutil.TypicalItems.ARDUINO;
+import static seedu.address.testutil.TypicalItems.RPLIDAR;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
 import java.util.Arrays;
@@ -68,12 +67,12 @@ public class FindCommandTest {
 
     @Test
     public void execute_multipleKeywords_multipleItemsFound() {
-        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 3);
-        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz COIL Kunz");
+        String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 2);
+        NameContainsKeywordsPredicate predicate = preparePredicate("Kurz ar Kunz");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredItemList(predicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(LED, COIL, OSCILLOSCOPE), model.getFilteredItemList());
+        assertEquals(Arrays.asList(ARDUINO, RPLIDAR), model.getFilteredItemList());
     }
 
     /**

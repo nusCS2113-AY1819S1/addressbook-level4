@@ -78,7 +78,7 @@ public class CommandBoxTest extends GuiUnitTest {
         // one command
         commandBoxHandle.run(COMMAND_THAT_SUCCEEDS);
         assertInputHistory(KeyCode.UP, COMMAND_THAT_SUCCEEDS);
-        assertInputHistory(KeyCode.DOWN, "");
+        assertInputHistory(KeyCode.DOWN, COMMAND_THAT_SUCCEEDS);
 
         // two commands (latest command is failure)
         commandBoxHandle.run(COMMAND_THAT_FAILS);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- StockList save file which contains the same Item values as in TypicalItems#getTypicalAddressBook() -->
+<!-- StockList save file which contains the same Item values as in TypicalItems#getTypicalStockList() -->
 <stocklist>
     <items>
         <name>Arduino</name>
@@ -8,7 +8,7 @@
         <statusReady>20</statusReady>
         <statusOnLoan>0</statusOnLoan>
         <statusFaulty>0</statusFaulty>
-        <tagged>lab1</tagged>
+        <tagged>Lab1</tagged>
     </items>
     <items>
         <name>Raspberry Pi</name>
