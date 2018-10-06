@@ -68,6 +68,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return versionedAddressBook.hasGroup(group);
+    }
+
+    @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
@@ -77,6 +83,13 @@ public class ModelManager extends ComponentManager implements Model {
     public void addPerson(Person person) {
         versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void createGroup(Group group) {
+        versionedAddressBook.createGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         indicateAddressBookChanged();
     }
 
@@ -149,19 +162,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitAddressBook() {
         versionedAddressBook.commit();
-    }
-
-    @Override
-    public boolean hasGroup(Group checkGroup) {
-        requireNonNull(checkGroup);
-        return versionedAddressBook.hasGroup(checkGroup);
-    }
-
-    @Override
-    public void createGroup(Group createGroup) {
-        versionedAddressBook.createGroup(createGroup);
-        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
-        indicateAddressBookChanged();
     }
 
     @Override

@@ -94,14 +94,14 @@ public interface Model {
 
     /**
      * Creates the given group.
-     * {@code createGroup} must not already exist in the system.
+     * {@code group} must not already exist in the system.
      */
-    void createGroup(Group createGroup);
+    void createGroup(Group group);
 
     /**
      * return true if there exist another group with the same name.
      */
-    boolean hasGroup(Group checkGroup);
+    boolean hasGroup(Group group);
 
     /**
      * Returns an unmodifiable view of the filtered group list
@@ -109,7 +109,7 @@ public interface Model {
     ObservableList<Group> getFilteredGroupList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered group list to filter by the given {@code predicate}.
      *
      * @throws NullPointerException if {@code predicate} is null.
      */

@@ -40,9 +40,9 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         GroupLocation groupLocation = ParserUtil.parseGroupLocation(argMultimap.getValue(PREFIX_GROUP_LOCATION).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Group newGroup = new Group(groupName, groupLocation, tagList);
+        Group group = new Group(groupName, groupLocation, tagList);
 
-        return new CreateGroupCommand(newGroup);
+        return new CreateGroupCommand(group);
     }
 
     /**

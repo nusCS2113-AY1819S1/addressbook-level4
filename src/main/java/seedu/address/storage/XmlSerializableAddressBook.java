@@ -20,6 +20,7 @@ import seedu.address.model.person.Person;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Groups list contains duplicate groups(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
@@ -49,7 +50,7 @@ public class XmlSerializableAddressBook {
      * Converts this addressbook into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     *                               {@code XmlAdaptedPerson}.
+     * {@code XmlAdaptedPerson} or {@code XmlAdaptedGroup}.
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
@@ -61,12 +62,12 @@ public class XmlSerializableAddressBook {
             addressBook.addPerson(person);
         }
 
-        for (XmlAdaptedGroup group : groups) {
-            Group newGroup = group.toModelType();
-            if (addressBook.hasGroup(newGroup)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+        for (XmlAdaptedGroup g : groups) {
+            Group group = g.toModelType();
+            if (addressBook.hasGroup(group)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }
-            addressBook.createGroup(newGroup);
+            addressBook.createGroup(group);
         }
         return addressBook;
     }
