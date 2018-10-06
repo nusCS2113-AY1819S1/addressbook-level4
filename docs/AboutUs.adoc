@@ -4,13 +4,13 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-CG Stock Taking was developed by the https://github.com/CS2113-AY1819S1-T12-3[CS2113-AY1819S1-T12-3] team. +
+Jalil Enterprise was developed by the https://github.com/CS2113-AY1819S1-T12-3[CS2113-AY1819S1-T12-3] team. +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
 === Chew Kin Whye
-image::chewkinwhye.jpg[width="150", align="left"]
+image::chewkinwhye.png[width="150", align="left"]
 {empty} [https://github.com/ChewKinWhye[github]]
 
 Role: Team Lead, Scheduling and tracking +
@@ -19,7 +19,7 @@ Responsibilities: Logic
 '''
 
 === Gao Qi Kai
-image::gaoqikai.jpg[width="150", align="left"]
+image::gaoqikai.png[width="150", align="left"]
 {empty}[https://github.com/gaoqikai[github]]
 
 Role: Developer, Testing +
@@ -28,7 +28,7 @@ Responsibilities: UI
 '''
 
 === Kelvin Tan
-image::kelvintankaiboon.jpg[width="150", align="left"]
+image::kelvintankaiboon.png[width="150", align="left"]
 {empty}[https://github.com/kelvintankaiboon[github]]
 
 Role: Developer, Documentation +
@@ -37,7 +37,7 @@ Responsibilities: Data
 '''
 
 === He Hao Wei
-image::hehaowei.jpg[width="150", align="left"]
+image::hehaowei.png[width="150", align="left"]
 {empty}[https://github.com/HeHaowei[github]]
 
 Role: Developer, Code quality +
@@ -46,7 +46,7 @@ Responsibilities: Models
 '''
 
 === Davindran
-image::davindran.jpg[width="150", align="left"]
+image::davindran.png[width="150", align="left"]
 {empty}[https://github.com/Davindran[github]]
 
 Role: Developer, Deliverables and deadlines +
