@@ -13,6 +13,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -66,7 +67,8 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+        UserPrefs userPref = new UserPrefs();
+        FileEncryptor fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
         Predicate<Person> predicateToUse;
 
         if (fe.isLocked()) {
