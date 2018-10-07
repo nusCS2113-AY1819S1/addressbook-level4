@@ -62,19 +62,6 @@ public class StorageManagerTest {
         assertEquals(original, retrieved);
     }
 
-    @Test
-    public void handleAddressBookAndEventListChangedEvent_exceptionThrown_eventRaised() {
-        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
-        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
-                new XmlEventStorageExceptionThrowingStub(Paths.get("dummy")),
-                new JsonUserPrefsStorage(Paths.get("dummy")));
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
-        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
-        storage.handleEventListChangedEvent(new EventListChangedEvent(new EventList()));
-        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
-    }
-
-
     // ================ AddressBook tests ==============================
 
     @Test
@@ -111,14 +98,24 @@ public class StorageManagerTest {
         }
     }
 
+    @Test
+    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlEventStorageExceptionThrowingStub(Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
+        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
+
 
     // ================ EventList tests ==============================
     @Test
     public void eventListReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlAddressBookStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
+         * {@link XmlEventListStorage} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlEventListStorage} class.
          */
         EventList original = getTypicalEventList();
         storageManager.saveEventList(original);
@@ -145,6 +142,16 @@ public class StorageManagerTest {
         public void saveEventList(ReadOnlyEventList eventList, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
+    }
+
+    @Test
+    public void handleEventListChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
+                new XmlEventStorageExceptionThrowingStub(Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
+        storage.handleEventListChangedEvent(new EventListChangedEvent(new EventList()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
 }
