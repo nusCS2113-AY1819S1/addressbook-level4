@@ -12,7 +12,7 @@
 <?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-         minWidth="450" minHeight="600" onCloseRequest="#handleExit">
+         minWidth="840" minHeight="600" onCloseRequest="#handleExit">
   <icons>
     <Image url="@/images/address_book_32.png" />
   </icons>
@@ -54,7 +54,7 @@
             <StackPane fx:id="recordListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="browserPlaceholder" prefWidth="340" >
+          <StackPane fx:id="detailedRecordCardPlaceholder" prefWidth="340">
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
