@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
 
-=======
+
 By: `Team F09-1`      Since: `Sept 2018`
 
 == Introduction
@@ -180,6 +180,7 @@ Format: `find [\tag tags]  KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * For back-to-back find commands, the most recent find command will search according to the previous find command
+****
 
 Examples:
 
@@ -333,23 +334,25 @@ Format: `clear`
 Submits the data about number of events, expected turnout etc. +
 Format: `data e/NUMBER OF EVENTS t/TURNOUT`
 Example: +
-`data e/5 t/200`
+`data e/5 t/200` +
+
 === Viewing the allocated budget : `viewbudget`
 Shows the allocated budget to the user +
-Format: `viewbudget`
+Format: `viewbudget` +
+
 === Submitting grant request : `request`
 Submits data about amount of grant needed, the reason and tags the importance level
 Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL
 Example: +
-`request m/1000 r/for booking auditorium t/medium`
+`request m/1000 r/for booking auditorium t/medium` +
+
 === Viewing grant request : `viewrequest`
 Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
-Format: `viewrequest`
+Format: `viewrequest` +
+
 === Accepting grant request: `accept`
 Approves a specific grant request from the list of grants.
-Format: `accept [-a all] [INDEX]
-=======
-
+Format: `accept [-a all] [INDEX] +
 ****
 * Approves the request at the specified `INDEX`.
 * The index refers to the index number shown in the displayed requests list.
