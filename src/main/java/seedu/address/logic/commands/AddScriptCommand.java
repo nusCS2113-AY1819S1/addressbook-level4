@@ -17,6 +17,9 @@ import java.util.stream.Stream;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Adds multiple persons to the address book.
+ */
 public class AddScriptCommand extends Command {
     public static final String COMMAND_WORD = "addscript";
     public static final String COMMAND_WORD_2 = "as";
@@ -25,7 +28,7 @@ public class AddScriptCommand extends Command {
             + ": Run multiple add commands based on the text file selected.\n"
             + "Parameters: TEXTFILE\n"
             + "Example: " + COMMAND_WORD + " StudentList.txt\n"
-            + "Example: " + COMMAND_WORD_2  + " Studentlist.txt";
+            + "Example: " + COMMAND_WORD_2 + " Studentlist.txt";
 
     public static final String MESSAGE_SUCCESS = "All persons from the text file %s has been added";
     public static final String MESSAGE_UNABLE_TO_READ_FILE = "%s is not able to be read";
@@ -36,7 +39,7 @@ public class AddScriptCommand extends Command {
 
     public AddScriptCommand(String fileName) {
         requireNonNull(fileName);
-        textFileName = fileName.replaceAll("^\\s+","");
+        textFileName = fileName.replaceAll("^\\s+", "");
         this.path = FileUtil.getPath(textFileName);
     }
 
@@ -45,17 +48,17 @@ public class AddScriptCommand extends Command {
         requireNonNull(model);
         AddressBookParser scriptParser = new AddressBookParser();
         List<String> addCommands = new ArrayList<>();
-        try (Stream<String> stream = Files.lines(path,Charset.defaultCharset())) {
+        try (Stream<String> stream = Files.lines(path, Charset.defaultCharset())) {
             stream.forEachOrdered(addCommands::add);
-            for(String s : addCommands) {
+            for (String s : addCommands) {
                 Command command = scriptParser.parseCommand(s);
-                CommandResult commandResult = command.execute(model,history);
+                CommandResult commandResult = command.execute(model, history);
             }
         } catch (IOException ioe) {
             return new CommandResult(String.format(MESSAGE_UNABLE_TO_READ_FILE, textFileName));
         } catch (ParseException pe) {
             return new CommandResult(MESSAGE_ADD_COMMAND_FAIL);
-        }  catch (CommandException ce) {
+        } catch (CommandException ce) {
             return new CommandResult(MESSAGE_ADD_COMMAND_FAIL);
         }
 

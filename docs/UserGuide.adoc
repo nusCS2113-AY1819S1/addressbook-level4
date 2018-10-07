@@ -174,13 +174,13 @@ Shortcut Format: `as TextFileName` +
 
 ****
 * TextFileName is the text file name that is located at base of the project.
-* The TextFileName *must contain .txt* extension at the end of the String
+* The TextFileName *must contain .txt* extension at the end of the String.
 ****
 
 Examples:
+
 * `addscript abc.txt`
 * `as abc.txt`
-
 
 === Listing all persons : `list` `l`
 
