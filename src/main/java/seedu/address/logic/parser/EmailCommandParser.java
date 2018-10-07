@@ -13,6 +13,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
 
+
+/**
+ * Parses input arguments and creates a new EmailCommand object
+ */
 public class EmailCommandParser implements Parser<EmailCommand> {
 
     public EmailCommand parse(String args) throws ParseException {
@@ -38,6 +42,10 @@ public class EmailCommandParser implements Parser<EmailCommand> {
         return new EmailCommand(index, subject, message);
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }

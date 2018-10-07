@@ -68,7 +68,8 @@ public class EmailUtil {
      * @param message the content of the email.
      * @throws MessagingException If an error occurs during message sending.
      */
-    public static void sendEmail(List<Person> recipient, Subject subject, seedu.address.model.email.Message message) throws MessagingException {
+    public static void sendEmail(List<Person> recipient, Subject subject, seedu.address.model.email.Message message)
+            throws MessagingException {
         Properties properties = new Properties();
         properties.put("mail.smtp.host", mailServerHost);
         properties.put("mail.smtp.port", mailServerPort);

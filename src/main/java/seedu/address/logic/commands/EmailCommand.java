@@ -19,18 +19,22 @@ import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
 import seedu.address.model.person.Person;
 
+
+/**
+ * Sends an email to a person identified using it's displayed index from the address book.
+ */
 public class EmailCommand extends Command {
 
     public static final String COMMAND_WORD = "sendmail";
     public static final String COMMAND_WORD_2 = "sm";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends an email to the recipient identified " +
-            "by the index number used in the displayed person list\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sends an email to the recipient identified "
+            + "by the index number used in the displayed person list\n"
             + "Parameters: "
             + "INDEX (must be a positive integer) "
             + PREFIX_SUBJECT + "SUBJECT "
             + PREFIX_MESSAGE + "MESSAGE\n"
-            +"Example: " + COMMAND_WORD + " 1 "
+            + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SUBJECT + "Tutorial location "
             + PREFIX_MESSAGE + "Dear students, tutorial location has been changed to E01-04";
 
@@ -56,7 +60,7 @@ public class EmailCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if(targetIndex.getZeroBased() >= lastShownList.size()) {
+        if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 

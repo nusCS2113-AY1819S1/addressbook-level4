@@ -182,7 +182,7 @@ public class ParserUtil {
     public static Subject parseSubject(String subject) throws ParseException {
         requireNonNull(subject);
         String trimmedSubject = subject.trim();
-        if(!Subject.isValidSubject(trimmedSubject)) {
+        if (!Subject.isValidSubject(trimmedSubject)) {
             throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
         }
         return new Subject(trimmedSubject);
@@ -197,7 +197,7 @@ public class ParserUtil {
     public static Message parseMessage(String message) throws ParseException {
         requireNonNull(message);
         String trimmedMessage = message.trim();
-        if(!Message.isValidMessage(trimmedMessage)) {
+        if (!Message.isValidMessage(trimmedMessage)) {
             throw new ParseException(Message.MESSAGE_MESSAGE_CONSTRAINTS);
         }
         return new Message(trimmedMessage);

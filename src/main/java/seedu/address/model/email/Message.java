@@ -3,6 +3,9 @@ package seedu.address.model.email;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a email message for EmailUtil.
+ */
 public class Message {
 
     public static final String MESSAGE_MESSAGE_CONSTRAINTS =
@@ -24,10 +27,14 @@ public class Message {
     /**
      * Returns true if a given string is a valid message.
      */
-    public static boolean isValidMessage(String test) { return test.matches(MESSAGE_VALIDATION_REGEX); }
+    public static boolean isValidMessage(String test) {
+        return test.matches(MESSAGE_VALIDATION_REGEX);
+    }
 
     @Override
-    public String toString() { return value; }
+    public String toString() {
+        return value;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -37,6 +44,8 @@ public class Message {
     }
 
     @Override
-    public int hashCode() { return value.hashCode(); }
+    public int hashCode() {
+        return value.hashCode();
+    }
 
 }
