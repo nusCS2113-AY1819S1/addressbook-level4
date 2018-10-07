@@ -85,7 +85,9 @@ public class XmlAdaptedPerson {
         if (source.kpiDoesExist()) {
             kpi = source.getKpi().value;
         }
-        note = source.getNote().value;
+        if (source.noteDoesExist()) {
+            note = source.getNote().value;
+        }
         //@@author
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)

@@ -61,8 +61,10 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
+    public static final String MESSAGE_EDIT_ALL_SUCCESS = "Edited %d Person(s)";
 
     private final Index index;
+    private final Boolean editAll;
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
@@ -74,13 +76,20 @@ public class EditCommand extends Command {
         requireNonNull(editPersonDescriptor);
 
         this.index = index;
+        this.editAll = false;
+        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    }
+    public EditCommand(EditPersonDescriptor editPersonDescriptor) {
+        requireNonNull(editPersonDescriptor);
+
+        this.index = null;
+        this.editAll = true;
         this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
 
         FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
 
@@ -88,7 +97,37 @@ public class EditCommand extends Command {
             throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
         }
 
+        if (editAll) {
+            return editAllEntries(model);
+        }
 
+        return editSingleEntry(model);
+    }
+
+    private CommandResult editAllEntries(Model model) throws CommandException{
+        final List<Person> lastShownList = model.getFilteredPersonList();
+        System.out.println("size is " + lastShownList.size());
+
+        for (Person personToEdit : lastShownList) {
+            Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+
+            if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
+                throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            }
+
+            model.updatePerson(personToEdit, editedPerson);
+            //TODO to enquire and merge with lekoook
+            //model.editPersonInTrie(personToEdit, editedPerson);
+        }
+        System.out.println("size is after " + lastShownList.size());
+        model.commitAddressBook();
+        //TODO change this to show only edited stuff and format
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, lastShownList.size()));
+    }
+
+    private CommandResult editSingleEntry(Model model) throws CommandException{
+        List<Person> lastShownList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
@@ -101,11 +140,13 @@ public class EditCommand extends Command {
         }
 
         model.updatePerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
         model.editPersonInTrie(personToEdit, editedPerson);
+
+        model.commitAddressBook();
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
+
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
@@ -129,7 +170,9 @@ public class EditCommand extends Command {
         if (editPersonDescriptor.removeKpi) {
             updatedKpi = null;
         }
-
+        if (editPersonDescriptor.removeNote) {
+            updatedNote = null;
+        }
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 updatedPosition, updatedKpi, updatedNote, updatedTags);
     }
@@ -152,6 +195,16 @@ public class EditCommand extends Command {
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
+    public static class FieldEdited {
+        private boolean phone;
+        private boolean email;
+        private boolean address;
+        private boolean position;
+        private boolean kpi;
+        private boolean note;
+        private boolean tags;
+    }
+
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
      * corresponding field value of the person.
@@ -167,11 +220,13 @@ public class EditCommand extends Command {
         private Set<Tag> tags;
         private boolean removePosition;
         private boolean removeKpi;
+        private boolean removeNote;
 
         //@@author LowGinWee
         public EditPersonDescriptor() {
             removePosition = false;
             removeKpi = false;
+            removeNote = false;
         }
         //@@author
 
@@ -190,13 +245,14 @@ public class EditCommand extends Command {
             setTags(toCopy.tags);
             removeKpi = toCopy.removeKpi;
             removePosition = toCopy.removePosition;
+            removeNote = toCopy.removeNote;
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            if (removeKpi || removePosition) {
+            if (removeKpi || removePosition || removeNote) {
                 return true;
             }
             return CollectionUtil.isAnyNonNull(name, phone, email, address,
@@ -266,6 +322,10 @@ public class EditCommand extends Command {
 
         public void setRemoveKpi() {
             removeKpi = true;
+        }
+
+        public void setRemoveNote() {
+            removeNote = true;
         }
         //@@author
 

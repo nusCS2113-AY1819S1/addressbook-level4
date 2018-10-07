@@ -15,7 +15,6 @@ public class Note {
 
     //TODO check regex and update to include fullstops.
     public static final String NOTE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
-    public static final String NOTE_NOT_PROVIDED = "No notes for this contact";
 
     public final String value;
 
@@ -24,7 +23,17 @@ public class Note {
      * Constructs a {@code Note}
      */
     public Note() {
-        value = NOTE_NOT_PROVIDED;
+        value = null;
+    }
+
+    /**
+     * Returns true if a Note has been assigned to the person.
+     */
+    public boolean doesExist() {
+        if (value != null) {
+            return true;
+        }
+        return false;
     }
 
 
