@@ -6,12 +6,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 
+import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.XmlAddressBookStorage;
 
@@ -37,7 +39,8 @@ public class PasswordCommand extends Command {
      * @param credentials will be obtained from parser
      */
     public PasswordCommand (String[] credentials) {
-        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+        UserPrefs userPref = new UserPrefs();
+        FileEncryptor fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
         fe.process(credentials[0]);
         String message = fe.getMessage();
         this.message = message;
