@@ -10,6 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.backup.BackupList;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Parses input arguments and creates a new RestoreCommand object
@@ -35,6 +36,9 @@ public class RestoreCommandParser implements Parser<RestoreCommand> {
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, RestoreCommand.MESSAGE_USAGE), pe);
+        } catch (IOException io) {
+            throw new ParseException(
+                    String.format(BackupList.MESSAGE_BACKUP_CONSTRAINTS));
         }
     }
 

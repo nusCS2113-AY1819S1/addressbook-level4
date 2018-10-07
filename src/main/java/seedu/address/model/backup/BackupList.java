@@ -4,6 +4,7 @@ package seedu.address.model.backup;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -20,14 +21,18 @@ public class BackupList {
 
     private List<String> fileNames = new ArrayList<>();
 
-    public BackupList(File backupDir) {
+    public BackupList(File backupDir) throws IOException {
         for (File snapshots : backupDir.listFiles()) {
             String millis = snapshots.getName();
             millis = millis.substring(0, millis.length() - 4);
             String fileName = millisToDateAndTime(millis);
             fileNames.add(fileName);
         }
-        Collections.reverse(fileNames);
+        if (fileNames.size() == 0) {
+            throw new IOException(MESSAGE_BACKUP_CONSTRAINTS);
+        } else {
+            Collections.reverse(fileNames);
+        }
     }
 
     public List<String> getFileNames() {
