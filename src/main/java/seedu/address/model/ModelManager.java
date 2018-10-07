@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.person.Person;
 
 /**
@@ -80,6 +81,14 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedPerson);
 
         versionedAddressBook.updatePerson(target, editedPerson);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Submitting Budget Data =====================================================================
+
+    @Override
+    public void addClub(ClubBudgetElements club) {
+        versionedAddressBook.addClub(club);
         indicateAddressBookChanged();
     }
 

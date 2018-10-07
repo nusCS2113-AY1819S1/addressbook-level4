@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.person.Person;
 
 /**
@@ -75,4 +76,10 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Adds the given club.
+     * @code club} must not already exist in the address book.
+     */
+    void addClub(ClubBudgetElements club);
 }

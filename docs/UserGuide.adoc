@@ -329,10 +329,10 @@ Format: `clear`
 === Submitting data for budget allocation: `data`
 
 Submits the data about number of events, expected turnout etc. +
-Format: `data e/NUMBER OF EVENTS t/TURNOUT`
+Format: `data c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
 
 Example: +
-`data e/5 t/200`
+`data c/Computing Club t/200 e/5`
 
 === Viewing the allocated budget : `viewbudget`
 
@@ -342,7 +342,7 @@ Format: `viewbudget`
 === Submitting grant request : `request`
 
 Submits data about amount of grant needed, the reason and tags the importance level
-Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL
+Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL`
 
 Example: +
 `request m/1000 r/for booking auditorium t/medium`
@@ -355,7 +355,7 @@ Format: `viewrequest`
 === Accepting grant request: `accept`
 
 Approves a specific grant request from the list of grants.
-Format: `accept [-a all] [INDEX]
+Format: `accept [-a all] [INDEX]`
 
 ****
 * Approves the request at the specified `INDEX`.
@@ -422,8 +422,8 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Submitting data for budget* : `data e/NUMBER OF EVENTS t/TURNOUT` +
-e.g. `data e/5 t/200`
+* *Submitting data for budget* : `data c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS` +
+e.g. `data c/Computing Club t/200 e/5`
 * *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
 e.g. `request m/1000 r/for booking auditorium t/medium`
 * *Viewing grant request* : `viewrequest`
