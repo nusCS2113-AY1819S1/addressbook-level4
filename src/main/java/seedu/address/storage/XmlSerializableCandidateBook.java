@@ -15,10 +15,10 @@ import seedu.address.model.candidate.Candidate;
 /**
  * An Immutable CandidateBook that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "candidatebook")
 public class XmlSerializableCandidateBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate candidate(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Candidate list contains duplicate candidate(s).";
 
     @XmlElement
     private List<XmlAdaptedCandidate> candidates;
@@ -40,7 +40,7 @@ public class XmlSerializableCandidateBook {
     }
 
     /**
-     * Converts this addressbook into the model's {@code CandidateBook} object.
+     * Converts this candidatebook into the model's {@code CandidateBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedCandidate}.

@@ -36,7 +36,7 @@ public class XmlCandidateBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyCandidateBook> readAddressBook(String filePath) throws Exception {
-        return new XmlCandidateBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlCandidateBookStorage(Paths.get(filePath)).readCandidateBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -80,21 +80,21 @@ public class XmlCandidateBookStorageTest {
         XmlCandidateBookStorage xmlCandidateBookStorage = new XmlCandidateBookStorage(filePath);
 
         //Save in new file and read back
-        xmlCandidateBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyCandidateBook readBack = xmlCandidateBookStorage.readAddressBook(filePath).get();
+        xmlCandidateBookStorage.saveCandidateBook(original, filePath);
+        ReadOnlyCandidateBook readBack = xmlCandidateBookStorage.readCandidateBook(filePath).get();
         assertEquals(original, new CandidateBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        xmlCandidateBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlCandidateBookStorage.readAddressBook(filePath).get();
+        xmlCandidateBookStorage.saveCandidateBook(original, filePath);
+        readBack = xmlCandidateBookStorage.readCandidateBook(filePath).get();
         assertEquals(original, new CandidateBook(readBack));
 
         //Save and read without specifying file path
         original.addPerson(IDA);
-        xmlCandidateBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlCandidateBookStorage.readAddressBook().get(); //file path not specified
+        xmlCandidateBookStorage.saveCandidateBook(original); //file path not specified
+        readBack = xmlCandidateBookStorage.readCandidateBook().get(); //file path not specified
         assertEquals(original, new CandidateBook(readBack));
 
     }
@@ -111,7 +111,7 @@ public class XmlCandidateBookStorageTest {
     private void saveAddressBook(ReadOnlyCandidateBook addressBook, String filePath) {
         try {
             new XmlCandidateBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveCandidateBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

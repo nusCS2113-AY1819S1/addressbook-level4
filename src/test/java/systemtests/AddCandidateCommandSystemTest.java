@@ -80,7 +80,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(toAdd);
+        model.addCandidate(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
@@ -227,7 +227,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
      */
     private void assertCommandSuccess(String command, Candidate toAdd) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(toAdd);
+        expectedModel.addCandidate(toAdd);
         String expectedResultMessage = String.format(AddCandidateCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);

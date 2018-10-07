@@ -19,7 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.CandidateBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyCandidateBook;
+import seedu.address.model.ReadOnlyJobBook;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.joboffer.JobOffer;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCandidateCommandTest {
@@ -89,67 +91,132 @@ public class AddCandidateCommandTest {
      */
     private class ModelStub implements Model {
         @Override
-        public void addPerson(Candidate candidate) {
+        public void addCandidate(Candidate candidate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void resetData(ReadOnlyCandidateBook newData) {
+        public void resetCandidateData(ReadOnlyCandidateBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyCandidateBook getAddressBook() {
+        public ReadOnlyCandidateBook getCandidateBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasPerson(Candidate candidate) {
+        public boolean hasCandidate(Candidate candidate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deletePerson(Candidate target) {
+        public void deleteCandidate(Candidate target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updatePerson(Candidate target, Candidate editedCandidate) {
+        public void updateCandidate(Candidate target, Candidate editedCandidate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<Candidate> getFilteredPersonList() {
+        public ObservableList<Candidate> getFilteredCandidateList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredPersonList(Predicate<Candidate> predicate) {
+        public void updateFilteredCandidateList(Predicate<Candidate> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoCandidateBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoCandidateBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoCandidateBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoCandidateBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitCandidateBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetJobOfferData(ReadOnlyJobBook newData) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public ReadOnlyJobBook getJobBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasJobOffer(JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteJobOffer(JobOffer target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addJobOffer(JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<JobOffer> getFilteredJobList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredJobOfferList(Predicate<JobOffer> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoJobBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoJobBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoJobBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoJobBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitJobBook() {
             throw new AssertionError("This method should not be called.");
         }
     }
@@ -166,7 +233,7 @@ public class AddCandidateCommandTest {
         }
 
         @Override
-        public boolean hasPerson(Candidate candidate) {
+        public boolean hasCandidate(Candidate candidate) {
             requireNonNull(candidate);
             return this.candidate.isSamePerson(candidate);
         }
@@ -179,24 +246,24 @@ public class AddCandidateCommandTest {
         final ArrayList<Candidate> personsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Candidate candidate) {
+        public boolean hasCandidate(Candidate candidate) {
             requireNonNull(candidate);
             return personsAdded.stream().anyMatch(candidate::isSamePerson);
         }
 
         @Override
-        public void addPerson(Candidate candidate) {
+        public void addCandidate(Candidate candidate) {
             requireNonNull(candidate);
             personsAdded.add(candidate);
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitCandidateBook() {
             // called by {@code AddCandidateCommand#execute()}
         }
 
         @Override
-        public ReadOnlyCandidateBook getAddressBook() {
+        public ReadOnlyCandidateBook getCandidateBook() {
             return new CandidateBook();
         }
     }

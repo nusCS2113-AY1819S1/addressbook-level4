@@ -9,5 +9,6 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "candidatebook.xml"
+  "candidateBookFilePath" : "candidatebook.xml",
+  "jobBookFilePath" : "jobbook.xml"
 }

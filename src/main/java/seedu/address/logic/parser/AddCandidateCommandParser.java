@@ -23,10 +23,10 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
-import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.Salary;
+import seedu.address.model.joboffer.Job;
+import seedu.address.model.joboffer.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
