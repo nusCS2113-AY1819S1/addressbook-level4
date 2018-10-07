@@ -8,23 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.LogicState;
-import seedu.address.logic.commands.AddCandidateCommand;
-import seedu.address.logic.commands.AddJobCommand;
-import seedu.address.logic.commands.AddJobDetailsCommand;
-import seedu.address.logic.commands.ClearCandidateBookCommand;
-import seedu.address.logic.commands.ClearJobBookCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCandidateCommand;
-import seedu.address.logic.commands.EmailCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.*;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -109,6 +93,9 @@ public class RecruitBookParser {
 
         case EmailCommand.COMMAND_WORD:
             return new EmailCommand();
+
+        case EmailSelectContentsCommand.COMMAND_WORD:
+            return new EmailSelectContentsCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

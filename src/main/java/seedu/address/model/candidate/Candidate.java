@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.RecruitBookEntries;
 import seedu.address.model.joboffer.Job;
 import seedu.address.model.joboffer.Salary;
 import seedu.address.model.tag.Tag;
@@ -15,7 +16,7 @@ import seedu.address.model.tag.Tag;
  * Represents a Candidate in the candidate book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Candidate {
+public class Candidate extends RecruitBookEntries {
 
     // Identity fields
     private final Name name;
