@@ -1,12 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddScriptCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateGroupCommand;
@@ -22,6 +17,12 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 /**
  * Parses user input.
@@ -53,6 +54,10 @@ public class AddressBookParser {
         case AddCommand.COMMAND_WORD:
         case AddCommand.COMMAND_WORD_2:
             return new AddCommandParser().parse(arguments);
+
+        case AddScriptCommand.COMMAND_WORD:
+        case AddScriptCommand.COMMAND_WORD_2:
+            return new AddScriptCommand(arguments);
 
         case CreateGroupCommand.COMMAND_WORD:
         case CreateGroupCommand.COMMAND_WORD_2:
