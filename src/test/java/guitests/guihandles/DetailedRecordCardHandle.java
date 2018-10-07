@@ -23,6 +23,9 @@ public class DetailedRecordCardHandle extends NodeHandle<Node> {
     private static final String MONEYFLOW_FIELD_ID = "#moneyFlow";
     private static final String TAGS_FIELD_ID = "#biggerTags";
 
+    private static final Pattern MONEY_PATTERN = Pattern.compile(SIGN_REGEX + "\\" + CURRENCY
+            + MONEYFLOW_NO_SIGN_REGEX);
+
     private final Label nameLabel;
     private final Label dateLabel;
     private final Label moneyFlowLabel;
@@ -32,8 +35,6 @@ public class DetailedRecordCardHandle extends NodeHandle<Node> {
     private String lastRememberedDate;
     private String lastRememberedMoneyFlow;
     private List<String> lastRememberedTags;
-
-    private final Pattern MONEY_PATTERN = Pattern.compile(SIGN_REGEX + "\\" + CURRENCY + MONEYFLOW_NO_SIGN_REGEX);
 
     public DetailedRecordCardHandle(Node cardNode) {
         super(cardNode);
