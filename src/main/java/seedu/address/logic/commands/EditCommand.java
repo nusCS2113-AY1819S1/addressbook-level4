@@ -22,8 +22,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -98,12 +100,14 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+        Gender updateGender = editPersonDescriptor.getGender().orElse(personToEdit.getGender());
+        Nationality updateNationality = editPersonDescriptor.getNationality().orElse(personToEdit.getNationality());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,updatedGrade);
+        return new Person(updatedName, updateGender, updateNationality, updatedPhone, updatedEmail, updatedAddress, updatedGrade ,updatedTags);
     }
 
     @Override
@@ -130,6 +134,8 @@ public class EditCommand extends Command {
      */
     public static class EditPersonDescriptor {
         private Name name;
+        private Gender gender;
+        private Nationality nationality;
         private Phone phone;
         private Email email;
         private Address address;
@@ -144,6 +150,8 @@ public class EditCommand extends Command {
          */
         public EditPersonDescriptor(EditPersonDescriptor toCopy) {
             setName(toCopy.name);
+            setGender(toCopy.gender);
+            setNationality(toCopy.nationality);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
@@ -155,7 +163,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, gender, nationality, phone, email, address, tags);
         }
 
         public void setName(Name name) {
@@ -164,6 +172,22 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setGender(Gender gender) {
+            this.gender = gender;
+        }
+
+        public Optional<Gender> getGender() {
+            return Optional.ofNullable(gender);
+        }
+
+        public void setNationality(Nationality nationality) {
+            this.nationality = nationality;
+        }
+
+        public Optional<Nationality> getNationality() {
+            return Optional.ofNullable(nationality);
         }
 
         public void setPhone(Phone phone) {
@@ -233,6 +257,8 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
+                    && getGender().equals(e.getGender())
+                    && getNationality().equals(e.getNationality())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getTags().equals(e.getTags())
