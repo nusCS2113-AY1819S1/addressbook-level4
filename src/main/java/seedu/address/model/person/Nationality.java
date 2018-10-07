@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Nationality {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Country Code should only contain 2 characters and valid. It should not be blank";
+            "Country Code should only contain 2 UPPERCASE characters and valid. It should not be blank";
 
     /**
      * The regex follow closely to the ISO 3166-1 alpha-2 Country Code

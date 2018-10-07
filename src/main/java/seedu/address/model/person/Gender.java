@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Gender can only be 1 character long. 'M' for Male and 'F' for Female. It should not be blank";
+            "Gender can input as 'M' or \"Male\" for Male and 'F' or \"Female\" for Female. It should not be blank";
 
     public static final String VALID_GENDER_MALE = "MALE";
     public static final String VALID_GENDER_FEMALE = "FEMALE";
