@@ -10,6 +10,8 @@ import seedu.address.logic.LogicManager;
 import seedu.address.logic.LogicState;
 import seedu.address.logic.commands.*;
 
+import seedu.address.logic.commands.EmailCommand.EmailInitialiseCommand;
+import seedu.address.logic.commands.EmailCommand.EmailSelectContentsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -33,6 +35,7 @@ public class RecruitBookParser {
     public Command parseCommand(String userInput, LogicState state) throws ParseException {
         if (state.nextCommand != "primary") {
             switch(state.nextCommand)   {
+
             case AddJobDetailsCommand.COMMAND_WORD:
                 return new AddJobDetailsCommandParser().parse(userInput);
             default:
@@ -91,8 +94,8 @@ public class RecruitBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case EmailCommand.COMMAND_WORD:
-            return new EmailCommand();
+        case EmailInitialiseCommand.COMMAND_WORD:
+            return new EmailInitialiseCommand();
 
         case EmailSelectContentsCommand.COMMAND_WORD:
             return new EmailSelectContentsCommand();
