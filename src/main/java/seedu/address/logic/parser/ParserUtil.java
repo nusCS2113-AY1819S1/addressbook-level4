@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FileLocation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeSlot;
@@ -142,5 +143,20 @@ public class ParserUtil {
         TimeSlot timeslotObject = new TimeSlot (hour, day);
         timeslotObject.setIsFilled();
         return timeslotObject;
+    }
+
+    /**
+     *
+     * Parses a {@code String fileLocation} into a {@code fileLocation}
+     *
+     */
+    public static FileLocation parseFileLocation (String fileLocation) throws ParseException {
+        requireNonNull(fileLocation);
+        String trimmedFileLocation = fileLocation.trim();
+        if (!FileLocation.isValidFileLocation(trimmedFileLocation)) {
+            throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
+        }
+
+        return new FileLocation(fileLocation);
     }
 }
