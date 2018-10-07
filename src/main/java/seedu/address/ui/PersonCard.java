@@ -29,6 +29,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label gender;
+    @FXML
+    private Label nationality;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
@@ -37,15 +41,17 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
-    @FXML
     private Label grade;
+    @FXML
+    private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
         super(FXML);
         this.person = person;
         id.setText(displayedIndex + ". ");
         name.setText(person.getName().fullName);
+        gender.setText(person.getGender().gender);
+        nationality.setText(person.getNationality().countryCode);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
