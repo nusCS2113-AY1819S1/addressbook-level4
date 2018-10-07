@@ -22,14 +22,12 @@ import seedu.planner.model.record.Record;
     public static final String COMMAND_WORD= "limit";
     public static final String MESSAGE_USAGE= COMMAND_WORD + ": Check the limit for a period of time. "
             + "Parameters: "
-            + PREFIX_DATE + "DATE_START "
-            + PREFIX_DATE + "DATE_END "
+            + PREFIX_DATE + "DATE_START " + "DATE_END "
             + PREFIX_MONEYFLOW + "LIMIT_MONEY "
 
             + "Example: " + COMMAND_WORD + " "
 
-            + PREFIX_DATE + "18-9-2018 "
-            + PREFIX_DATE + "20-9-2018 "
+            + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
             + PREFIX_MONEYFLOW + "-100 ";
 
     //public static Limit limit;
