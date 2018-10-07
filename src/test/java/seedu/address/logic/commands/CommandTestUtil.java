@@ -56,11 +56,22 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String GROUP_NAME_DESC_TUT_1 = " " + PREFIX_NAME + VALID_GROUP_NAME_TUT_1;
+    public static final String GROUP_NAME_DESC_CS1010 = " " + PREFIX_NAME + VALID_GROUP_NAME_CS1010;
+    public static final String GROUP_LOCATION_DESC_TUT_1 = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_TUT_1;
+    public static final String GROUP_LOCATION_DESC_CS1010 = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_CS1010;
+    public static final String GROUP_TAG_DESC_TUT_1 = " " + PREFIX_TAG + VALID_GROUP_TAG_TUT_1;
+    public static final String GROUP_TAG_DESC_CS1010 = " " + PREFIX_TAG + VALID_GROUP_TAG_CS1010;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "TUT1*"; // '*' not allowed in group names
+    public static final String INVALID_GROUP_LOCATION_DESC = " " + PREFIX_GROUP_LOCATION + "E1/01/01"; // '/' not allowed in group names
+    public static final String INVALID_GROUP_TAG_DESC = " " + PREFIX_TAG + "morning*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t \r \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

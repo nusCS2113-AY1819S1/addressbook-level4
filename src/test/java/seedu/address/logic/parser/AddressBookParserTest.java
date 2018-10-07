@@ -53,28 +53,6 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
-    //TODO
-    //    @Test
-    //    public void parseCommandGroup() throws Exception {
-    //        final Name name = new Name("test");
-    //        CreateGroupCommand command = (CreateGroupCommand) parser.parseCommand(
-    //                CreateGroupCommand.COMMAND_WORD + " " + PREFIX_NAME + name);
-    //        assertEquals(new CreateGroupCommand(new Group(name)), command);
-    //    }
-
-    //    @Test
-    //    public void parseCommand_createGroup() throws Exception {
-    //        String groupName = "Testing";
-    //        String groupLocation = "E1-05-01";
-    //        String groupTags = "HelloWorld";
-    //        CreateGroupCommand command = (CreateGroupCommand) parser.parseCommand(
-    //                CreateGroupCommand.COMMAND_WORD + " "
-    //                        + PREFIX_NAME + groupName
-    //                        + PREFIX_GROUP_LOCATION + groupLocation
-    //                        + PREFIX_TAG + groupTags);
-    //        Set<Tag> convertTag = (Set<Tag>) new Tag(groupTags);
-    //        assertEquals(new CreateGroupCommand(new Group(groupName, groupLocation, convertTag)), command);
-    //    }
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
