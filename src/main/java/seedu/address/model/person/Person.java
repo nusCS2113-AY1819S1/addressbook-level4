@@ -40,8 +40,8 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.tags.addAll(tags);
         this.grade = grade;
+        this.tags.addAll(tags);
     }
 
     public Name getName() {
@@ -114,14 +114,15 @@ public class Person {
                 && otherPerson.getNationality().equals(getNationality())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags())
-                && otherPerson.getGrade().equals(getGrade());
+                && otherPerson.getGrade().equals(getGrade())
+                && otherPerson.getTags().equals(getTags());
+
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, countryCode, phone, email, address, tags, grade);
+        return Objects.hash(name, gender, countryCode, phone, email, address, grade, tags);
     }
 
     @Override
