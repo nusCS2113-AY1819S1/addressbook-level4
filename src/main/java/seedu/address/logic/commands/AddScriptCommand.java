@@ -52,7 +52,7 @@ public class AddScriptCommand extends Command {
             stream.forEachOrdered(addCommands::add);
             for (String s : addCommands) {
                 Command command = scriptParser.parseCommand(s);
-                CommandResult commandResult = command.execute(model, history);
+                command.execute(model, history);
             }
         } catch (IOException ioe) {
             return new CommandResult(String.format(MESSAGE_UNABLE_TO_READ_FILE, textFileName));
