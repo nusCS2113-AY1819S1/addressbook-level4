@@ -35,7 +35,7 @@ import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.ClearCandidateBookCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -144,7 +144,8 @@ public abstract class CandidateBookSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getCandidatelist().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getCandidateBook().getCandidatelist().size(),
+                getModel().getFilteredCandidateList().size());
     }
 
     /**
@@ -152,7 +153,8 @@ public abstract class CandidateBookSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getAddressBook().getCandidatelist().size());
+        assertTrue(getModel().getFilteredCandidateList().size()
+                < getModel().getCandidateBook().getCandidatelist().size());
     }
 
     /**
@@ -167,8 +169,8 @@ public abstract class CandidateBookSystemTest {
      * Deletes all persons in the address book.
      */
     protected void deleteAllPersons() {
-        executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getCandidatelist().size());
+        executeCommand(ClearCandidateBookCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getCandidateBook().getCandidatelist().size());
     }
 
     /**
@@ -180,8 +182,8 @@ public abstract class CandidateBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new CandidateBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+        assertEquals(new CandidateBook(expectedModel.getCandidateBook()), testApp.readStorageAddressBook());
+        assertListMatching(getPersonListPanel(), expectedModel.getFilteredCandidateList());
     }
 
     /**
@@ -285,7 +287,7 @@ public abstract class CandidateBookSystemTest {
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
         String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
-        final int totalPersons = testApp.getModel().getAddressBook().getCandidatelist().size();
+        final int totalPersons = testApp.getModel().getCandidateBook().getCandidatelist().size();
         assertEquals(String.format(TOTAL_PERSONS_STATUS, totalPersons), handle.getTotalPersonsStatus());
         assertFalse(handle.isSaveLocationChanged());
     }
@@ -296,12 +298,12 @@ public abstract class CandidateBookSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
+        assertListMatching(getPersonListPanel(), getModel().getFilteredCandidateList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getAddressBook().getCandidatelist().size()),
+        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getCandidateBook().getCandidatelist().size()),
                 getStatusBarFooter().getTotalPersonsStatus());
     }
 

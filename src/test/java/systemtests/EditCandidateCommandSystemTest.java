@@ -76,8 +76,8 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: redo editing the last candidate in the list -> last candidate edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.updatePerson(
-                getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedCandidate);
+        model.updateCandidate(
+                getModel().getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased()), editedCandidate);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a candidate with new values same as existing values -> edited */
@@ -86,9 +86,9 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a candidate with new values same as another candidate's values but with different name -> edited*/
-        assertTrue(getModel().getAddressBook().getCandidatelist().contains(BOB));
+        assertTrue(getModel().getCandidateBook().getCandidatelist().contains(BOB));
         index = INDEX_SECOND_PERSON;
-        assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
+        assertNotEquals(getModel().getFilteredCandidateList().get(index.getZeroBased()), BOB);
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedCandidate = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
@@ -106,7 +106,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        Candidate candidateToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
+        Candidate candidateToEdit = getModel().getFilteredCandidateList().get(index.getZeroBased());
         editedCandidate = new PersonBuilder(candidateToEdit).withTags().build();
         assertCommandSuccess(command, index, editedCandidate);
 
@@ -115,9 +115,9 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: filtered candidate list, edit index within bounds of address book and candidate list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredCandidateList().size());
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
-        candidateToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
+        candidateToEdit = getModel().getFilteredCandidateList().get(index.getZeroBased());
         editedCandidate = new PersonBuilder(candidateToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedCandidate);
 
@@ -125,7 +125,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getCandidatelist().size();
+        int invalidIndex = getModel().getCandidateBook().getCandidatelist().size();
         assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -154,7 +154,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCandidateCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredPersonList().size() + 1;
+        invalidIndex = getModel().getFilteredCandidateList().size() + 1;
         assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -188,9 +188,9 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: edit a candidate with new values same as another candidate's values -> rejected */
         executeCommand(PersonUtil.getAddCandidateCommand(BOB));
-        assertTrue(getModel().getAddressBook().getCandidatelist().contains(BOB));
+        assertTrue(getModel().getCandidateBook().getCandidatelist().contains(BOB));
         index = INDEX_FIRST_PERSON;
-        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
+        assertFalse(getModel().getFilteredCandidateList().get(index.getZeroBased()).equals(BOB));
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCandidateCommand.MESSAGE_DUPLICATE_PERSON);
@@ -241,8 +241,9 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
     private void assertCommandSuccess(String command, Index toEdit, Candidate editedCandidate,
             Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedCandidate);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateCandidate(expectedModel.getFilteredCandidateList().get(toEdit.getZeroBased()),
+                editedCandidate);
+        expectedModel.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(command, expectedModel,
                 String.format(EditCandidateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate),
@@ -274,7 +275,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
@@ -293,7 +294,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
      * {@code CandidateBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see CandidateBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see CandidateBookSystemTest#assertApplicationDisplaysExpected(Stri  ng, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

@@ -55,4 +55,5 @@ public class CommandHistory {
     public int hashCode() {
         return userInputHistory.hashCode();
     }
+
 }

@@ -6,8 +6,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.LogicManager;
+import seedu.address.logic.LogicState;
 import seedu.address.logic.commands.AddCandidateCommand;
-import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.AddJobCommand;
+import seedu.address.logic.commands.AddJobDetailsCommand;
+import seedu.address.logic.commands.CancelCommand;
+import seedu.address.logic.commands.ClearCandidateBookCommand;
+import seedu.address.logic.commands.ClearJobBookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCandidateCommand;
@@ -33,6 +39,7 @@ public class RecruitBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+
     /**
      * Parses user input into command for execution.
      *
@@ -40,7 +47,19 @@ public class RecruitBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput, LogicState state) throws ParseException {
+        if (!state.nextCommand.equals("primary")) {
+            if (userInput.equals(CancelCommand.COMMAND_WORD)) {
+                return new CancelCommand(state.nextCommand);
+            }
+            switch(state.nextCommand)   {
+            case AddJobDetailsCommand.COMMAND_WORD:
+                return new AddJobDetailsCommandParser().parse(userInput);
+            default:
+                LogicManager.setLogicState("primary");
+            }
+        }
+
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -53,6 +72,9 @@ public class RecruitBookParser {
         case AddCandidateCommand.COMMAND_WORD:
             return new AddCandidateCommandParser().parse(arguments);
 
+        case AddJobCommand.COMMAND_WORD:
+            return new AddJobCommand();
+
         case EditCandidateCommand.COMMAND_WORD:
             return new EditCandidateCommandParser().parse(arguments);
 
@@ -62,8 +84,11 @@ public class RecruitBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+        case ClearCandidateBookCommand.COMMAND_WORD:
+            return new ClearCandidateBookCommand();
+
+        case ClearJobBookCommand.COMMAND_WORD:
+            return new ClearJobBookCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -93,5 +118,6 @@ public class RecruitBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
 
 }

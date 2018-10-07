@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
@@ -50,12 +51,12 @@ public class AddCandidateCommand extends Command {
             + PREFIX_TAG + "owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the CandidateBook";
 
     private final Candidate toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Candidate}
+     * Creates an AddCandidateCommand to add the specified {@code Candidate}
      */
 
     public AddCandidateCommand(Candidate candidate) {
@@ -67,12 +68,12 @@ public class AddCandidateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasCandidate(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
-        model.commitAddressBook();
+        model.addCandidate(toAdd);
+        model.commitCandidateBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

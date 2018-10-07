@@ -7,10 +7,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.joboffer.Job;
+import seedu.address.model.joboffer.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Candidate in the address book.
+ * Represents a Candidate in the candidate book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Candidate {
@@ -93,7 +95,7 @@ public class Candidate {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * Returns true if both persons of the same name and gender have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
     public boolean isSamePerson(Candidate otherCandidate) {

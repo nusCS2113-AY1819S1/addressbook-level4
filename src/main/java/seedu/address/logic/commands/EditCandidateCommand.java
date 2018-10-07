@@ -31,10 +31,10 @@ import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
-import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
 import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.Salary;
+import seedu.address.model.joboffer.Job;
+import seedu.address.model.joboffer.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -85,7 +85,7 @@ public class EditCandidateCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Candidate> lastShownList = model.getFilteredPersonList();
+        List<Candidate> lastShownList = model.getFilteredCandidateList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -94,13 +94,13 @@ public class EditCandidateCommand extends Command {
         Candidate candidateToEdit = lastShownList.get(index.getZeroBased());
         Candidate editedCandidate = createEditedPerson(candidateToEdit, editPersonDescriptor);
 
-        if (!candidateToEdit.isSamePerson(editedCandidate) && model.hasPerson(editedCandidate)) {
+        if (!candidateToEdit.isSamePerson(editedCandidate) && model.hasCandidate(editedCandidate)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updatePerson(candidateToEdit, editedCandidate);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.updateCandidate(candidateToEdit, editedCandidate);
+        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitCandidateBook();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate));
     }
 
