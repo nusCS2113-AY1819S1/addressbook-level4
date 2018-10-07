@@ -64,7 +64,7 @@ public class DeleteCommandSystemTest extends FinancialPlannerSystemTest {
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
-        /* Case: filtered record list, delete index within bounds of planner book and record list -> deleted */
+        /* Case: filtered record list, delete index within bounds of financial planner and record list -> deleted */
         showRecordsWithName(KEYWORD_MATCHING_BURSARY);
         Index index = INDEX_FIRST_RECORD;
         assertTrue(index.getZeroBased() < getModel().getFilteredRecordList().size());
@@ -157,8 +157,9 @@ public class DeleteCommandSystemTest extends FinancialPlannerSystemTest {
     }
 
     /**
-     * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the browser url
-     * and selected card are expected to update accordingly depending on the card at {@code expectedSelectedCardIndex}.
+     * Performs the same verification as {@code assertCommandSuccess(String, Model, String)} except that the detail card
+     * panel and selected card are expected to update accordingly depending on the card at
+     * {@code expectedSelectedCardIndex}.
      * @see DeleteCommandSystemTest#assertCommandSuccess(String, Model, String)
      * @see FinancialPlannerSystemTest#assertSelectedCardChanged(Index)
      */

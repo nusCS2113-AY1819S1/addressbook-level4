@@ -14,7 +14,6 @@ import guitests.guihandles.HelpWindowHandle;
 import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.HelpCommand;
 import seedu.planner.logic.commands.SelectCommand;
-import seedu.planner.ui.BrowserPanel;
 import seedu.planner.ui.StatusBarFooter;
 
 /**
@@ -43,9 +42,9 @@ public class HelpCommandSystemTest extends FinancialPlannerSystemTest {
         getMainMenu().openHelpWindowUsingAccelerator();
         assertHelpWindowOpen();
 
-        getBrowserPanel().click();
+        getDetailedRecordCardPanel().click();
         getMainMenu().openHelpWindowUsingAccelerator();
-        assertHelpWindowNotOpen();
+        assertHelpWindowOpen();
 
         //use menu button
         getMainMenu().openHelpWindowUsingMenu();
@@ -64,7 +63,7 @@ public class HelpCommandSystemTest extends FinancialPlannerSystemTest {
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());
-        assertNotEquals(BrowserPanel.DEFAULT_PAGE, getBrowserPanel().getLoadedUrl());
+        assertNotEquals(getRecordListPanel().getSelectedCardIndex(), getDetailedRecordCardPanel());
         assertListMatching(getRecordListPanel(), getModel().getFilteredRecordList());
 
         // assert that the status bar too is updated correctly while the help window is open
