@@ -1,11 +1,7 @@
 package seedu.address.model.budgetelements;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-import seedu.address.model.tag.Tag;
 
 /**
  * Represents the budget elements of a club in the address book.
