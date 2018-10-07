@@ -109,7 +109,7 @@ public class XmlAdaptedPersonTest {
         List<XmlAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
         XmlAdaptedPerson person =
-                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags,VALID_GRADE);
+                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, VALID_GRADE);
         Assert.assertThrows(IllegalValueException.class, person::toModelType);
     }
 

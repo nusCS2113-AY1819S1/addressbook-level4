@@ -5,10 +5,12 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
-import guitests.guihandles.PersonCardHandle;
 import org.junit.Test;
+
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+
+import guitests.guihandles.PersonCardHandle;
 
 public class PersonCardTest extends GuiUnitTest {
 
