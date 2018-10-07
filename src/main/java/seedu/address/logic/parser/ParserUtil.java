@@ -145,7 +145,7 @@ public class ParserUtil {
     //@@author Limminghong
     /**
      * Parses {@code String Snapshots} into a {@code Snapshots}.
-     * @throws ParseException if the argument is invalid (not "list").
+     * @throws IOException if the ".backup" directory does not exist.
      */
     public static BackupList parseBackup(String backupList) throws IOException {
         requireNonNull(backupList);

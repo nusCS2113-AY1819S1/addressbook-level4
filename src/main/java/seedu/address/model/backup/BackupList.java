@@ -39,6 +39,10 @@ public class BackupList {
         return this.fileNames;
     }
 
+    /**
+     * Parses a (@code String millis) into an (@code String)
+     * @return A converted and formatted form of date and time.
+     */
     public String millisToDateAndTime(String millis) {
         long timestamp = Long.parseLong(millis);
         LocalDateTime dateTime = LocalDateTime.ofInstant(
