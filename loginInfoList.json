@@ -1,19 +1,23 @@
 {
   "loginInfoList" : [ {
     "userName" : "tianhang",
-    "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=",
+    "password" : "UgoydIK6V3t3iMXySCrbeFKlcUc/u3ylo1gmElyQAmQ=",
     "authenticationLevel" : "admin"
   }, {
     "userName" : "hello",
-    "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=",
+    "password" : "UgoydIK6V3t3iMXySCrbeFKlcUc/u3ylo1gmElyQAmQ=",
     "authenticationLevel" : "master"
   }, {
     "userName" : "minjia",
-    "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=",
+    "password" : "UgoydIK6V3t3iMXySCrbeFKlcUc/u3ylo1gmElyQAmQ=",
     "authenticationLevel" : "admin"
   }, {
     "userName" : "xuanhao",
-    "password" : "ZU1K7e2C9tGc3YqqGc3iL4diwQAQffpnqhTM73kvbIo=",
+    "password" : "UgoydIK6V3t3iMXySCrbeFKlcUc/u3ylo1gmElyQAmQ=",
+    "authenticationLevel" : "admin"
+  }, {
+    "userName" : "scott",
+    "password" : "s8kEw4p417dKy5rnCny0kyZiVZtZP/6tPvjCr/LbAGc=",
     "authenticationLevel" : "admin"
   } ]
 }

@@ -16,6 +16,7 @@ public class Config {
     private String appTitle = "Address App";
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
+    private Path userLoginInfoFilePath = Paths.get("loginInfoManager.json");
 
     public String getAppTitle() {
         return appTitle;
@@ -41,6 +42,10 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
+    public Path getUserLoginInfoilePath() { return userLoginInfoFilePath; }
+
+    public void setUserLoginInfoilePath(Path userLoginInfoFilePath) { this.userLoginInfoFilePath = userLoginInfoFilePath; };
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -54,12 +59,13 @@ public class Config {
 
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
-                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath);
+                && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
+                && Objects.equals (userLoginInfoFilePath,o.userLoginInfoFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(appTitle, logLevel, userPrefsFilePath);
+        return Objects.hash(appTitle, logLevel, userPrefsFilePath, userLoginInfoFilePath);
     }
 
     @Override
@@ -68,6 +74,7 @@ public class Config {
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
         sb.append("\nPreference file Location : " + userPrefsFilePath);
+        sb.append ("\nLogin info file Location : " + userLoginInfoFilePath);
         return sb.toString();
     }
 

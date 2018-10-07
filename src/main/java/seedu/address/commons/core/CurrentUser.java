@@ -9,12 +9,14 @@ public class CurrentUser {
         this.authenticationLevel = authenticationLevel;
     }
 
-    public static String getUserName () {
-
-        return userName;
-    }
+    public static String getUserName () { return userName; }
 
     public static String getAuthenticationLevel () {
         return authenticationLevel;
+    }
+
+    public static LoginInfo getCurrentUser (){
+        LoginInfo currentUser = new LoginInfo (userName, authenticationLevel);
+        return currentUser;
     }
 }

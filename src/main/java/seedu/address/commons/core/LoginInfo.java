@@ -19,6 +19,7 @@ public class LoginInfo {
         this.password = password;
         this.authenticationLevel = authenticationLevel;
     }
+
     public void setPassword (String password) {
         this.password = password;
     }

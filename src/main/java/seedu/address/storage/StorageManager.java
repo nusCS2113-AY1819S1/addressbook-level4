@@ -12,9 +12,10 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.LoginInfoList;
+import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.storage.loginInfo.LoginInfoStorage;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -34,7 +35,7 @@ public class StorageManager extends ComponentManager implements Storage {
         this.loginInfoStorage = loginInfoStorage;
     }
 
-    // ================ LoginInfoList methods ==============================
+    // ================ LoginInfoManager methods ==============================
 
     @Override
     public Path getLoginInfoFilePath() {
@@ -42,13 +43,13 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional< LoginInfoList > readLoginInfo() throws DataConversionException, IOException {
+    public Optional<LoginInfoManager> readLoginInfo() throws DataConversionException, IOException {
         return loginInfoStorage.readLoginInfo ();
     }
 
     @Override
-    public void saveLoginInfo(LoginInfoList loginInfoList) throws IOException {
-        loginInfoStorage.saveLoginInfo (loginInfoList);
+    public void saveLoginInfo(LoginInfoManager loginInfoManager) throws IOException {
+        loginInfoStorage.saveLoginInfo (loginInfoManager);
     }
     // ================ UserPrefs methods ==============================
 

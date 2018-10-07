@@ -9,10 +9,10 @@ import seedu.address.commons.core.LoginInfo;
 /**
  * Represents Login information such as userName,password and authentication right
  */
-public class LoginInfoList {
+public class LoginInfoManager {
     private ArrayList< LoginInfo > loginInfoList;
 
-    public LoginInfoList (){
+    public LoginInfoManager (){
         loginInfoList = null;
     }
     public LoginInfo getLoginInfo(String userName){
@@ -47,6 +47,7 @@ public class LoginInfoList {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         for (LoginInfo loginInfo: loginInfoList){
+
             sb.append("\nuserName : " + loginInfo.getUserName ());
             sb.append ("\npassword : " + loginInfo.getPassword ());
             sb.append ("\nauthenticationLevel" + loginInfo.getAuthenticationLevel ());

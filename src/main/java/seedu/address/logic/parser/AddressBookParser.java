@@ -6,27 +6,14 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.Ingredient.IngredientCommand;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
-//import seedu.address.logic.commands.user.ChangePasswordCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateUserCommand;
-import seedu.address.logic.parser.Ingredient.AddIngredientParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.ChangePasswordCommandParser;
 import seedu.address.logic.parser.user.CreateUserCommandParser;
+import seedu.address.logic.parser.validationCheck.UserAuthenticationCheck;
+import seedu.address.logic.parser.validationCheck.UserAuthenticationCheckUtils;
 
 /**
  * Parses user input.
@@ -51,19 +38,23 @@ public class AddressBookParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
-        final String commandWord = matcher.group("commandWord");
+        String commandWord = matcher.group("commandWord");
+        UserAuthenticationCheck userAuthenticationCheck = new UserAuthenticationCheckUtils (commandWord);
+        commandWord = userAuthenticationCheck.checkAuthentication ();
+
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
-        case IngredientCommand.COMMAND_WORD:
-            return new AddIngredientParser ().split (arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case ChangePasswordCommand.COMMAND_WORD:
             return new ChangePasswordCommandParser ().parse(arguments);
+
         case CreateUserCommand.COMMAND_WORD:
             return new CreateUserCommandParser ().parse (arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
@@ -97,6 +88,8 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
+        case UnAuthorisedCommand.COMMAND_WORD:
+            return new UnAuthorisedCommand ();
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

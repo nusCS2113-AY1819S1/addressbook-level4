@@ -19,7 +19,7 @@ import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
 /**
- * The manager of the UI component.
+ * The MANAGER of the UI component.
  */
 public class UiManager extends ComponentManager implements Ui {
 

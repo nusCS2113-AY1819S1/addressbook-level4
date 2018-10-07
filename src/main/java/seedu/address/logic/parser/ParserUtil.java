@@ -35,20 +35,26 @@ public class ParserUtil {
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
     }
-    //@@author tianhang
-
     /**
-     * Parse a {@code String ingredientName} into a {@code IngredientName}
-     * @throws ParseException if the given {@code ingredientName} is invalid.
+     * Trim userName
+     * Leading and trailing whitespaces will be trimmed.
      */
-    public static IngredientName parseIngredientName(String ingredientName) throws ParseException {
-        requireNonNull(ingredientName);
-        String trimmedName = ingredientName.trim();
-        if (!IngredientName.isValidName(trimmedName)) {
-            throw new ParseException(IngredientName.MESSAGE_NAME_CONSTRAINTS);
-        }
-        return new IngredientName(trimmedName);
+    public static String userName(String userName) {
+        requireNonNull(userName);
+        String trimmedName = userName.trim();
+        return trimmedName;
     }
+    /**
+     * Trim passWord
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String password(String password) {
+        requireNonNull(password);
+        String trimmedPassword = password.trim();
+        return trimmedPassword;
+    }
+
+
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.

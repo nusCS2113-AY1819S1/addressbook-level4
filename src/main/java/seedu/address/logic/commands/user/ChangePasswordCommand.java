@@ -7,10 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.LoginInfoList;
+import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
 /**
  * Adds a person to the address book.
@@ -39,16 +38,16 @@ public class ChangePasswordCommand extends UserCommand {
         this.oldPassword = oldPassword;
     }
     @Override
-    public CommandResult execute(LoginInfoList loginInfoList, CommandHistory history) {
-        requireNonNull(loginInfoList);
+    public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) {
+        requireNonNull(loginInfoManager);
 
         String username = CurrentUser.getUserName ();
-        String hashedOldPassword = loginInfoList.getLoginInfo (username).getPassword ();
+        String hashedOldPassword = loginInfoManager.getLoginInfo (username).getPassword ();
         boolean isPasswordCorrect = PasswordUtils.verifyUserPassword (oldPassword, hashedOldPassword);
         if (isPasswordCorrect){
             System.out.println ("here");
             String newHashedPassword = PasswordUtils.generateSecurePassword (newPassword);
-            loginInfoList.changePassword (username, newHashedPassword);
+            loginInfoManager.changePassword (username, newHashedPassword);
         } else {
             System.out.println ("there");
             return new CommandResult(MESSAGE_WRONG_PASSWORD);

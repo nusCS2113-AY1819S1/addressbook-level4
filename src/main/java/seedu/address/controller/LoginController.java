@@ -3,7 +3,6 @@ package seedu.address.controller;
 //@@author tianhang
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.PasswordField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -11,8 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.commons.core.CurrentUser;
-import seedu.address.commons.core.LoginInfo;
-import seedu.address.model.LoginInfoList;
+import seedu.address.model.LoginInfoManager;
 import seedu.address.ui.Ui;
 
 
@@ -21,7 +19,7 @@ import seedu.address.ui.Ui;
  */
 public class LoginController {
     protected static Ui ui;
-    protected static LoginInfoList loginInfoList;
+    protected static LoginInfoManager loginInfoManager;
     @FXML
     private javafx.scene.control.TextField usernameField;
     @FXML
@@ -29,8 +27,8 @@ public class LoginController {
     @FXML
     private javafx.scene.control.Label loginError;
 
-    public void getLoginInfoList (LoginInfoList loginInfoList){
-        this.loginInfoList = loginInfoList;
+    public void getLoginInfoList (LoginInfoManager loginInfoManager){
+        this.loginInfoManager = loginInfoManager;
     }
     /**
      * set ui as mainWindow ui of address book
@@ -82,7 +80,7 @@ public class LoginController {
         }
 
         String providedPassword = password;
-        String securePassword = loginInfoList.getLoginInfo (username).getPassword ();
+        String securePassword = loginInfoManager.getLoginInfo (username).getPassword ();
 
 
         boolean passwordMatch = PasswordUtils.verifyUserPassword(providedPassword, securePassword);
@@ -90,8 +88,8 @@ public class LoginController {
         if (passwordMatch && usernameMatch) {
             Stage stageTheLabelBelongs = (Stage) passwordField.getScene().getWindow();
             stageTheLabelBelongs.close();
-            CurrentUser currentUser = new CurrentUser (loginInfoList.getLoginInfo (username).getUserName (),
-                                                        loginInfoList.getLoginInfo (username).getAuthenticationLevel ());
+            CurrentUser currentUser = new CurrentUser (loginInfoManager.getLoginInfo (username).getUserName (),
+                                                        loginInfoManager.getLoginInfo (username).getAuthenticationLevel ());
             ui.start(stageTheLabelBelongs);
 
         } else {

@@ -28,8 +28,8 @@ public class ChangePasswordCommandParser implements Parser< ChangePasswordComman
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ChangePasswordCommand.MESSAGE_USAGE));
         }
 
-        String newPassword = argMultimap.getValue(PREFIX_NEW_PASSWORD).get();
-        String oldPassword = argMultimap.getValue (PREFIX_OLD_PASSWORD).get ();
+        String newPassword = ParserUtil.password (argMultimap.getValue(PREFIX_NEW_PASSWORD).get());
+        String oldPassword = ParserUtil.password (argMultimap.getValue (PREFIX_OLD_PASSWORD).get ());
         return new ChangePasswordCommand(oldPassword, newPassword );
     }
 

@@ -19,11 +19,11 @@ public class CliSyntax {
     public static final Prefix PREFIX_OLD_PASSWORD = new Prefix("o/");
     public static final Prefix PREFIX_NEW_PASSWORD = new Prefix("n/");
 
-    /* user hierarchy*/
-
-    public static final String AUTHENTICATION_LEVEL_ADMIN = "admin";
-    public static final String AUTHENTICATION_LEVEL_MANAGER = "manager";
-    public static final String AUTHENTICATION_LEVEL_SERVER = "server";
-    public static final String AUTHENTICATION_LEVEL_STOCK_TAKER = "stockTaker";
+//    /* user hierarchy*/
+//
+//    public static final String AUTHENTICATION_LEVEL_ADMIN = "ADMIN";
+//    public static final String AUTHENTICATION_LEVEL_MANAGER = "MANAGER";
+//    public static final String AUTHENTICATION_LEVEL_ACCOUNTANT = "Accountant";
+//    public static final String AUTHENTICATION_LEVEL_STOCK_TAKER = "STOCK_TAKER";
 
 }

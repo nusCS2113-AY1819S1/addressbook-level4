@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -32,9 +31,9 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.*;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonLoginInfoStorage;
+import seedu.address.storage.loginInfo.JsonLoginInfoStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.LoginInfoStorage;
+import seedu.address.storage.loginInfo.LoginInfoStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
@@ -64,10 +63,8 @@ public class MainApp extends Application {
     //author @tianhang
     protected Stage window;
     private FXMLLoader fxmlLoader;
-    private Path LOGININFO_PATH = Paths.get ("loginInfoList.json");
-    private LoginInfoList loginInfoList;
+    private LoginInfoManager loginInfoList;
     private LoginController loginController;
-    private IngredientModel ingredientModel;
     //author @tianhang
 
     @Override
@@ -77,25 +74,22 @@ public class MainApp extends Application {
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
-
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        LoginInfoStorage loginInfoStorage = new JsonLoginInfoStorage (LOGININFO_PATH);
+        LoginInfoStorage loginInfoStorage = new JsonLoginInfoStorage (config.getUserLoginInfoilePath ());
         loginInfoList = initLoginInfo (loginInfoStorage);
-        ingredientModel = new IngredientManager ();
+        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
 
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
-        logic = new LogicManager(model, ingredientModel,loginInfoList);
+        logic = new LogicManager(model, loginInfoList);
 
         ui = new UiManager(logic, config, userPrefs);
 
         fxmlLoader = new FXMLLoader();
         initEventsCenter();
-
 
     }
 
@@ -164,35 +158,35 @@ public class MainApp extends Application {
         return initializedConfig;
     }
     /**
-     * Returns a {@code LoginInfoList} using the hardcoded file path,
-     * or a new {@code LoginInfoList} with default configuration if errors occur when
+     * Returns a {@code LoginInfoManager} using the hardcoded file path,
+     * or a new {@code LoginInfoManager} with default configuration if errors occur when
      * reading from the file.
      */
-    protected LoginInfoList initLoginInfo(LoginInfoStorage storage) {
-        Path loginInfoFilePath = LOGININFO_PATH;
+    protected LoginInfoManager initLoginInfo(LoginInfoStorage storage) {
+        Path loginInfoFilePath = storage.getLoginInfoFilePath ();
         logger.info("Using Login information file : " + loginInfoFilePath);
 
-        LoginInfoList initLoginInfoList;
+        LoginInfoManager initLoginInfoManager;
         try {
-            Optional< LoginInfoList > loginInfoOptional = storage.readLoginInfo();
-            initLoginInfoList = loginInfoOptional.orElse(new LoginInfoList ());
+            Optional<LoginInfoManager> loginInfoOptional = storage.readLoginInfo();
+            initLoginInfoManager = loginInfoOptional.orElse(new LoginInfoManager ());
         } catch (DataConversionException e) {
             logger.warning("Login Info file at " + loginInfoFilePath + " is not in the correct format. "
                     + "Using empty database");
-            initLoginInfoList = new LoginInfoList ();
+            initLoginInfoManager = new LoginInfoManager ();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Please find admin");
-            initLoginInfoList = new LoginInfoList ();
+            logger.warning("Problem while reading from the file. Please find ADMIN");
+            initLoginInfoManager = new LoginInfoManager ();
         }
 
         //Update prefs file in case it was missing to begin with or there are new/unused fields
         try {
-            storage.saveLoginInfo (initLoginInfoList);
+            storage.saveLoginInfo (initLoginInfoManager);
         } catch (IOException e) {
-            logger.warning("Failed to save LoginInfoList file : " + StringUtil.getDetails(e));
+            logger.warning("Failed to save LoginInfoManager file : " + StringUtil.getDetails(e));
         }
 
-        return initLoginInfoList;
+        return initLoginInfoManager;
     }
 
     /**
@@ -268,7 +262,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * pass the loginInfoList to controller
+     * pass the loginInfoManager to controller
      */
     private void passInLoginList(){
         loginController.getLoginInfoList (loginInfoList);

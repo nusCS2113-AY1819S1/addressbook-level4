@@ -5,16 +5,13 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-//import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.Ingredient.IngredientCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.user.UserCommand;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.IngredientModel;
-import seedu.address.model.LoginInfoList;
+import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -24,13 +21,11 @@ import seedu.address.model.person.Person;
 public class LogicManager extends ComponentManager implements Logic {
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Model model;
+    private LoginInfoManager loginInfoManager;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
-    private IngredientModel ingredientModel;
-    private LoginInfoList loginInfoList;
-    public LogicManager(Model model, IngredientModel ingredientModel, LoginInfoList loginInfoList) {
-        this.loginInfoList = loginInfoList;
-        this.ingredientModel = ingredientModel;
+    public LogicManager(Model model, LoginInfoManager loginInfoManager) {
+        this.loginInfoManager = loginInfoManager;
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
@@ -41,13 +36,10 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             Command command = addressBookParser.parseCommand(commandText);
-            if (command instanceof IngredientCommand) {
-                IngredientCommand command1 = ( IngredientCommand ) command;
-                return command1.execute (ingredientModel , history);
-            }
+
             if (command instanceof UserCommand){
                 UserCommand command2 = (UserCommand) command;
-                return command2.execute (loginInfoList, history);
+                return command2.execute (loginInfoManager, history);
             }
             return command.execute(model, history);
         } finally {
