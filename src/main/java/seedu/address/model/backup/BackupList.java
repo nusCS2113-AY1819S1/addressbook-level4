@@ -1,8 +1,6 @@
 //@@author Limminghong
 package seedu.address.model.backup;
 
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Instant;

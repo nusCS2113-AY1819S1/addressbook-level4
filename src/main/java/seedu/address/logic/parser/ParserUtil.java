@@ -150,7 +150,7 @@ public class ParserUtil {
     public static BackupList parseBackup(String backupList) throws IOException {
         requireNonNull(backupList);
         File backupDir = new File(".backup");
-        if(!backupDir.exists()) {
+        if (!backupDir.exists()) {
             throw new IOException(BackupList.MESSAGE_BACKUP_CONSTRAINTS);
         }
         return new BackupList(backupDir);

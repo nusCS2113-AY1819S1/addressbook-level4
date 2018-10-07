@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import seedu.address.MainApp;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;

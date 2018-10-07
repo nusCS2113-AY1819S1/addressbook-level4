@@ -28,7 +28,7 @@ class RestoreCommandTest {
         BackupList backupList = ParserUtil.parseBackup("snapshots");
         try {
             CommandResult result = new RestoreCommand(backupList).execute(model, commandHistory);
-            assertEquals(RestoreCommand.MESSAGE_BACKUP_LIST, result.feedbackToUser);
+            assertEquals(RestoreCommand.getBackupNames(), result.feedbackToUser);
         } catch (CommandException ce) {
             logger.severe(ce.getMessage());
         }
