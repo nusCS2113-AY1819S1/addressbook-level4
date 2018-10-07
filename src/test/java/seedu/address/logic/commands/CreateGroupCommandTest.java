@@ -10,8 +10,8 @@
 //
 //import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertTrue;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME;
-//import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_2;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS1231;
+//import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS2040C;
 //import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 //import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 //
@@ -27,10 +27,10 @@
 //
 //    @Test
 //    public void equals(){
-//        final GroupCommand normalCommand = new GroupCommand(Group(new Name(VALID_GROUP_NAME)));
+//        final GroupCommand normalCommand = new GroupCommand(Group(new Name(VALID_GROUP_NAME_CS1231)));
 //
 //        // same values means returns true
-//        GroupCommand normalCommand2 = new GroupCommand(VALID_GROUP_NAME);
+//        GroupCommand normalCommand2 = new GroupCommand(VALID_GROUP_NAME_CS1231);
 //        assertTrue(normalCommand.equals(normalCommand2));
 //        // same object means returns true
 //        assertTrue(normalCommand.equals(normalCommand));
@@ -39,6 +39,6 @@
 //        // different types means returns false
 //        assertFalse(normalCommand.equals(new ClearCommand()));
 //        // different group name means returns false
-//        assertFalse(normalCommand.equals(new GroupCommand(VALID_GROUP_NAME_2)));
+//        assertFalse(normalCommand.equals(new GroupCommand(VALID_GROUP_NAME_CS2040C)));
 //    }
 //}

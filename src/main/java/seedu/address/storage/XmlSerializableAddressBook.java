@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.person.Group;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -20,11 +20,9 @@ import seedu.address.model.person.Person;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
-    public static final String MESSAGE_DUPLICATE_GROUP = "Groups list contains duplicate group(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
-
     @XmlElement
     private List<XmlAdaptedGroup> groups;
 
@@ -33,11 +31,10 @@ public class XmlSerializableAddressBook {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
-
         persons = new ArrayList<>();
         groups = new ArrayList<>();
-
     }
+
 
     /**
      * Conversion
@@ -52,7 +49,7 @@ public class XmlSerializableAddressBook {
      * Converts this addressbook into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}{@code XmlAdaptedGroup}.
+     *                               {@code XmlAdaptedPerson}.
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
@@ -63,12 +60,13 @@ public class XmlSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-        for (XmlAdaptedGroup g : groups) {
-            Group group = g.toModelType();
-            if (addressBook.hasGroup(group)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
+
+        for (XmlAdaptedGroup group : groups) {
+            Group newGroup = group.toModelType();
+            if (addressBook.hasGroup(newGroup)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            addressBook.addGroup(group);
+            addressBook.createGroup(newGroup);
         }
         return addressBook;
     }

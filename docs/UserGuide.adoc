@@ -89,6 +89,13 @@ Examples:
 
 * pop n/CS2113 2 3 4 5
 
+=== List a group of students: 'scorefilter a/56 or b/56'
+List out  students who score above/below certain grade.
+
+Format: scoreFilter [filter_standard]
+Example: scorefilter a/66
+This will list all the students who score above 56 in a new grade list
+
 
 === Create N number of group, distributed equally based on nationality or gender or both: `makegroup`
 Make multiple groups of N determined by the user, with a group name which will enumerate from 1 and user is able to select the condition to distribute equally via Gender & Nationally +
@@ -120,6 +127,13 @@ Examples:
 
 * scorefilter 56
 
+=== Summary of students: 'summaryGrade'
+show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test.
+Example: summaryGrade
+
+Format: summaryGrade
+Example: summaryGrade
+show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test
 
 === Adding/deleting tags automatically: 'addtag/deletetag'
 Add/delete certain tags for certain group of people +
@@ -160,8 +174,8 @@ Shortcut Format: `l`
 === Editing a person : `edit` `e`
 
 Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-Shortcut Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...` +
+Shortcut Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...

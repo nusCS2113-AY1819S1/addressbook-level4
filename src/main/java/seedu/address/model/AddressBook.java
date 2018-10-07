@@ -5,9 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Group;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniqueGroupList;
 import seedu.address.model.person.UniquePersonList;
 
 /**
@@ -19,19 +19,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniquePersonList persons;
     private final UniqueGroupList groups;
 
-    /*
+     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
         groups = new UniqueGroupList();
     }
 
-    public AddressBook() {}
+    public AddressBook() {
+    }
 
     /**
      * Creates an AddressBook using the Persons in the {@code toBeCopied}
@@ -79,7 +79,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a group with the same identity as {@code group} exists in the address book.
+     * Returns true if a group with the same group as {@code checkGroup} exists in the address book.
      */
     public boolean hasGroup(Group group) {
         requireNonNull(group);
@@ -87,11 +87,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a group to the address book.
+     * Create a group into the address book.
      * The group must not already exist in the address book.
      */
-    public void addGroup(Group g) {
-        groups.add(g);
+    public void createGroup(Group toCreate) {
+        groups.createGroup(toCreate);
     }
 
     /**
@@ -126,6 +126,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+    // TODO
 
     @Override
     public ObservableList<Group> getGroupList() {

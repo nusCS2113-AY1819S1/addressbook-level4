@@ -11,8 +11,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
+import seedu.address.model.group.GroupLocation;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
@@ -27,6 +30,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -98,6 +102,36 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String groupName} into a {@code groupName}.
+     * TODO add description of groupName parser
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
+    public static GroupName parseGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedGroupName = groupName.trim();
+        if (!GroupName.isValidGroupName(trimmedGroupName)) {
+            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
+        }
+        return new GroupName(trimmedGroupName);
+    }
+
+    /**
+     * Parses a {@code String groupLocation} into a {@code groupLocation}.
+     * // TODO add description of groupLocation parser
+     *
+     * @throws ParseException if the given {@code groupLocation} is invalid.
+     */
+    public static GroupLocation parseGroupLocation(String groupLocation) throws ParseException {
+        requireNonNull(groupLocation);
+        String trimmedGroupLocation = groupLocation.trim();
+        if (!GroupLocation.isValidGroupLocation(trimmedGroupLocation)) {
+            throw new ParseException(GroupLocation.MESSAGE_GROUP_LOCATION_CONSTRAINTS);
+        }
+        return new GroupLocation(trimmedGroupLocation);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -110,6 +144,21 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_TAG_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String Grade} into a {@code Grade}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code grade} is invalid.
+     */
+    public static Grade parseGrade(String grade) throws ParseException {
+        requireNonNull(grade);
+        String trimmedGrade = grade.trim();
+        if (!Grade.isValidGrade(trimmedGrade)) {
+            throw new ParseException(Grade.MESSAGE_GRADE_CONSTRAINTS);
+        }
+        return new Grade(trimmedGrade);
     }
 
     /**
