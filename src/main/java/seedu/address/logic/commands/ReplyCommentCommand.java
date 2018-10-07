@@ -54,14 +54,14 @@ public class ReplyCommentCommand extends Command {
 
     private final Index index;
     private final EditCommentDescriptor editCommentDescriptor;
-    private static int line = 0;
-    private static String comment = null;
+    private int line = 0;
+    private String comment = null;
 
     /**
      * @param index of the event in the filtered event list to edit
      * @param editCommentDescriptor details to edit the event with
      */
-    public ReplyCommentCommand(Index index, int line, String comment, Name name ){
+    public ReplyCommentCommand(Index index, int line, String comment, Name name) {
         requireNonNull(index);
         requireNonNull(line);
         requireNonNull(comment);
