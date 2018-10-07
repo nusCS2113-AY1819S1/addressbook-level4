@@ -1,6 +1,7 @@
 package seedu.address.model.expenditureinfo;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.Objects;
 
 /**
@@ -24,11 +25,19 @@ public class ExpenditureInfo {
         return date;
     }
 
+    /**
+     *
+     * @return
+     */
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(money, date);
     }
 
+    /**
+     *
+     * @return
+     */
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getMoney())
