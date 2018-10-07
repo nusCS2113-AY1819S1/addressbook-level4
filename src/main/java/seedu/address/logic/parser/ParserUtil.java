@@ -9,6 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.email.Message;
+import seedu.address.model.email.Subject;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +122,35 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code String subject} into a {@code Subject}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code subject} is invalid.
+     */
+    public static Subject parseSubject(String subject) throws ParseException {
+        requireNonNull(subject);
+        String trimmedSubject = subject.trim();
+        if(!Subject.isValidSubject(trimmedSubject)) {
+            throw new ParseException(Subject.MESSAGE_SUBJECT_CONSTRAINTS);
+        }
+        return new Subject(trimmedSubject);
+    }
+
+    /**
+     * Parses {@code String message} into a {@code Message}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code message} is invalid.
+     */
+    public static Message parseMessage(String message) throws ParseException {
+        requireNonNull(message);
+        String trimmedMessage = message.trim();
+        if(!Message.isValidMessage(trimmedMessage)) {
+            throw new ParseException(Message.MESSAGE_MESSAGE_CONSTRAINTS);
+        }
+        return new Message(trimmedMessage);
     }
 }
