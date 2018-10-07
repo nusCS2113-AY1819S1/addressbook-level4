@@ -2,7 +2,6 @@
 package seedu.address.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
-import static seedu.address.logic.parser.RestoreCommandParser.ARGUMENT_SNAPSHOTS;
 
 import java.util.logging.Logger;
 
