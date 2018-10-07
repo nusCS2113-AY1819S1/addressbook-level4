@@ -50,7 +50,7 @@ public class ClubBudgetElements {
      */
 
 
-    public boolean isSameClubBudgetElements(ClubBudgetElements otherClubBudgetElements) {
+    public boolean isSameClub(ClubBudgetElements otherClubBudgetElements) {
         if (otherClubBudgetElements == this) {
             return true;
         }
@@ -75,7 +75,7 @@ public class ClubBudgetElements {
         if (!(other instanceof ClubBudgetElements)) {
             return false;
         }
- 
+
         ClubBudgetElements otherClubBudgetElements = (ClubBudgetElements) other;
         return otherClubBudgetElements.getClubName().equals(getClubName());
     }
