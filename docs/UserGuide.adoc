@@ -29,8 +29,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 .  Once prompted, enter your username and password. This will be your permanent username and password for subsequent uses.
 
 +
-image::UiNew.png[width="790"]
-+
+image::UiNew.png[width="790"] 
 
 == Features
 
