@@ -32,6 +32,8 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 image::UiNew.png[width="790"]
 +
 
+== Features
+
 ====
 *Command Format*
 
@@ -135,7 +137,7 @@ Format: `login u/USERNAME p/PASSWORD`
 
 ==== Logout: `logout`
 
-Logs the user out of the application.
+Logs the user out of the application. +
 Format: `logout`
 
 // end::authentication[]
