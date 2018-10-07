@@ -40,8 +40,8 @@ public class ParserUtil {
      * trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static int parseLine(String Line) throws ParseException {
-        String trimmedLine = Line.trim();
+    public static int parseLine(String line) throws ParseException {
+        String trimmedLine = line.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedLine)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
@@ -114,9 +114,9 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static String parseComment(String Comment) throws ParseException {
-        requireNonNull(Comment);
-        String trimmedComment = Comment.trim();
+    public static String parseComment(String comment) throws ParseException {
+        requireNonNull(comment);
+        String trimmedComment = comment.trim();
         return trimmedComment;
     }
 

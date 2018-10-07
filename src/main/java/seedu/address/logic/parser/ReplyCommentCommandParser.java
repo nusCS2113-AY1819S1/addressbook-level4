@@ -2,20 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Optional;
-import java.util.Set;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ReplyCommentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Name;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -33,33 +27,33 @@ public class ReplyCommentCommandParser implements Parser<ReplyCommentCommand> {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_LINE, PREFIX_COMMENT, PREFIX_NAME);
 
-        int Line;
-        String Comment;
+        int line;
+        String comment;
         Name name;
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE), pe);
         }
 
         if (!argMultimap.getValue(PREFIX_LINE).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE));
         }
-        Line = ParserUtil.parseLine(argMultimap.getValue(PREFIX_LINE).get());
+        line = ParserUtil.parseLine(argMultimap.getValue(PREFIX_LINE).get());
 
         if (!argMultimap.getValue(PREFIX_COMMENT).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE));
         }
-        Comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get());
+        comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get());
 
 
         if ( !argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE));
         }
         //editCommentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        return new ReplyCommentCommand(index , Line , Comment, name);
+        return new ReplyCommentCommand(index , line , comment, name);
     }
 }

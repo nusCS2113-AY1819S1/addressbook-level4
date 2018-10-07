@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -37,7 +36,7 @@ public class ReplyCommentCommand extends Command {
 
     public static final String COMMAND_WORD = "replyComment";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the event identified "
+    public static final String MESSAGE = COMMAND_WORD + ": Edits the details of the event identified "
             + "by the index number used in the displayed event list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
@@ -50,27 +49,27 @@ public class ReplyCommentCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_REPLY_COMMENT_SUCCESS = "Comment replied for Event %1$s at Line %2$s";
+    public static final String MESSAGE_REPLY_COMMENT = "Comment replied for Event %1$s at Line %2$s";
     public static final String MESSAGE_NOT_REPLY_COMMENT = "At least one field to edit must be provided.";
 
     private final Index index;
     private final EditCommentDescriptor editCommentDescriptor;
-    private int Line = 0;
-    private String Comment = null;
+    private static int line = 0;
+    private static String comment = null;
 
     /**
      * @param index of the event in the filtered event list to edit
      * @param editCommentDescriptor details to edit the event with
      */
-    public ReplyCommentCommand(Index index, int Line, String Comment, Name name ) {
+    public ReplyCommentCommand(Index index, int line, String comment, Name name ){
         requireNonNull(index);
-        requireNonNull(Line);
-        requireNonNull(Comment);
+        requireNonNull(line);
+        requireNonNull(comment);
         requireNonNull(name);
 
         this.index = index;
-        this.Line = Line;
-        this.Comment = Comment;
+        this.line = line;
+        this.comment = comment;
         this.editCommentDescriptor = new EditCommentDescriptor();
         editCommentDescriptor.setName(name);
     }
@@ -93,7 +92,7 @@ public class ReplyCommentCommand extends Command {
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
 
-        return new CommandResult(String.format(MESSAGE_REPLY_COMMENT_SUCCESS, index.getOneBased(),editedEvent.getName()));
+        return new CommandResult(String.format(MESSAGE_REPLY_COMMENT, index.getOneBased(), editedEvent.getName()));
     }
 
 
