@@ -26,19 +26,25 @@ import seedu.planner.model.record.MoneyFlow;
      * @throws ParseException if the user input does not conform the expected format
      */
 
+    private String [] datesIn ; //the string is used to divide two the whole strings into two substrings.
+    private String dateStartString;
+    private String getDateEndString;
+
     @Override
     public LimitCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_MONEYFLOW);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_MONEYFLOW)||
-                 !argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_MONEYFLOW)
+                || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
         }
 
         MoneyFlow money = ParserUtil.parseMoneyFlow(argMultimap.getValue(PREFIX_MONEYFLOW).get());
-        Date dateStart = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Date dateEnd = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
+
+        Date dateStart = ParserUtil.parseDate(datesIn[0]);
+        Date dateEnd = ParserUtil.parseDate(datesIn[1]);
         Limit limit = new Limit(dateStart, dateEnd, money);
 
 

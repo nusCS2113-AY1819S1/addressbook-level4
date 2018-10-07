@@ -50,21 +50,21 @@ import seedu.planner.model.record.Record;
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-      
+
        while (countRecord < model.getFinancialPlanner().getRecordList().size()) {
            recordNow = model.getFinancialPlanner().getRecordList().get(countRecord++);
 
            if ((recordNow.getDate().isEarlierThan(limit.getDate_end() )
-                   &&recordNow.getDate().isLaterThan(limit.getDate_start() )
+                   && recordNow.getDate().isLaterThan(limit.getDate_start() )
                     || recordNow.getDate().equals(limit.getDate_start())
                         || recordNow.getDate().equals(limit.getDate_end()) ) )
                sumOfSpend += recordNow.getMoneyFlow().toDouble();
 
        }
-       //if (limit.getLimit_moneyFlow().isSmaller(sumOfSpend))
-        //return new CommandResult(String.format(MESSAGE_EXCEED, sumOfSpend));
-       //else
-       return new CommandResult(String.format(MESSAGE_NOT_EXCEED, sumOfSpend));
+       if (limit.getLimit_moneyFlow().isSmaller(sumOfSpend))
+        return new CommandResult(String.format(MESSAGE_NOT_EXCEED, sumOfSpend));
+       else
+       return new CommandResult(String.format(MESSAGE_EXCEED, sumOfSpend));
     }
     @Override
     public boolean equals (Object other) {
