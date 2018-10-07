@@ -44,7 +44,7 @@ public class ChangePasswordCommand extends UserCommand {
         String username = CurrentUser.getUserName ();
         String hashedOldPassword = loginInfoManager.getLoginInfo (username).getPassword ();
         boolean isPasswordCorrect = PasswordUtils.verifyUserPassword (oldPassword, hashedOldPassword);
-        if (isPasswordCorrect){
+        if (isPasswordCorrect) {
             System.out.println ("here");
             String newHashedPassword = PasswordUtils.generateSecurePassword (newPassword);
             loginInfoManager.changePassword (username, newHashedPassword);

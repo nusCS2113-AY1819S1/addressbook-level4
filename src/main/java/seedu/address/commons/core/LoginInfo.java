@@ -1,6 +1,10 @@
 package seedu.address.commons.core;
 //@@author tianhang
 import java.util.Objects;
+
+/**
+ * This contains the login information of user
+ */
 public class LoginInfo {
 
     protected String userName;
@@ -10,11 +14,11 @@ public class LoginInfo {
     public LoginInfo(){
 
     }
-    public LoginInfo (String userName, String authenticationLevel){
+    public LoginInfo (String userName, String authenticationLevel) {
         this.userName = userName;
         this.authenticationLevel = authenticationLevel;
     }
-    public LoginInfo (String userName, String password, String authenticationLevel){
+    public LoginInfo (String userName, String password, String authenticationLevel) {
         this.userName = userName;
         this.password = password;
         this.authenticationLevel = authenticationLevel;

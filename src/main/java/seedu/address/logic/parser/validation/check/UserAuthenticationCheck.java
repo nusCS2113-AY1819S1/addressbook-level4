@@ -1,4 +1,4 @@
-package seedu.address.logic.parser.validationCheck;
+package seedu.address.logic.parser.validation.check;
 
 import seedu.address.commons.core.LoginInfo;
 

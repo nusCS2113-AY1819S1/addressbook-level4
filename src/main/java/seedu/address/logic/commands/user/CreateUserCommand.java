@@ -1,10 +1,12 @@
 package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.authentication.PasswordUtils;
-import seedu.address.commons.loginAuthentication.AuthenticationLevel;
+import seedu.address.commons.login.authenication.AuthenticationLevel;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -49,7 +51,7 @@ public class CreateUserCommand extends UserCommand {
     @Override
     public CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) {
         requireNonNull(loginInfoManager);
-        if (!isAuthenticationLevelValid(authenticationLevel)){
+        if (!isAuthenticationLevelValid(authenticationLevel)) {
             return new CommandResult (String.format (MESSAGE_WRONG_AUTHENTICATION_LEVEL,
                     MESSAGE_AUTHENTICATION_LEVEL_FORMAT));
         }
@@ -61,11 +63,18 @@ public class CreateUserCommand extends UserCommand {
     public CommandResult execute (Model model , CommandHistory history) throws CommandException {
         return null;
     }
-    private static boolean isAuthenticationLevelValid(String authenticationLevel){
+
+    /**
+     * Returns true if authentication level is enum.
+     *
+     * @param authenticationLevel User input when create account
+     * @return
+     */
+    private static boolean isAuthenticationLevelValid(String authenticationLevel) {
         if (authenticationLevel.equals (AuthenticationLevel.ADMIN)
                 || authenticationLevel.equals (AuthenticationLevel.MANAGER)
                 || authenticationLevel.equals (AuthenticationLevel.ACCOUNTANT)
-                || authenticationLevel.equals (AuthenticationLevel.STOCK_TAKER)){
+                || authenticationLevel.equals (AuthenticationLevel.STOCK_TAKER)) {
             return true;
         }
         return false;

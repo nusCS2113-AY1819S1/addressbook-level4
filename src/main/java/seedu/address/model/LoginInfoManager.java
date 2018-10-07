@@ -12,29 +12,43 @@ import seedu.address.commons.core.LoginInfo;
 public class LoginInfoManager {
     private ArrayList< LoginInfo > loginInfoList;
 
-    public LoginInfoManager (){
+    public LoginInfoManager () {
         loginInfoList = null;
     }
-    public LoginInfo getLoginInfo(String userName){
-        for (LoginInfo loginInfo : loginInfoList){
-            if (loginInfo.getUserName ().equals (userName)){
-               return loginInfo;
+    public LoginInfo getLoginInfo(String userName) {
+        for (LoginInfo loginInfo : loginInfoList) {
+            if (loginInfo.getUserName ().equals (userName)) {
+                return loginInfo;
             }
         }
         return new LoginInfo ();
     }
-    public void changePassword(String userName, String newHashedPassword){
-        for (int i= 0; i< loginInfoList.size (); i++){
-            loginInfoList.get (i).setPassword (newHashedPassword);
+
+    /**
+     * Enable
+     * @param userName
+     * @param newHashedPassword
+     */
+    public void changePassword(String userName, String newHashedPassword) {
+        for (int i = 0; i < loginInfoList.size (); i++) {
+            if (loginInfoList.get (i).getUserName ().equals (userName)) {
+                loginInfoList.get (i).setPassword (newHashedPassword);
+            }
         }
     }
 
-    public void createNewAccount(String userName, String password, String authenticationLevel){
+    /**
+     * Add in a new account to the list
+     * @param userName
+     * @param password
+     * @param authenticationLevel
+     */
+    public void createNewAccount(String userName, String password, String authenticationLevel) {
         LoginInfo newAccount = new LoginInfo (userName, password, authenticationLevel);
         loginInfoList.add (newAccount);
     }
 
-    public ArrayList< LoginInfo > getLoginInfoList(){
+    public ArrayList< LoginInfo > getLoginInfoList() {
         return loginInfoList;
     }
 
@@ -46,7 +60,7 @@ public class LoginInfoManager {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (LoginInfo loginInfo: loginInfoList){
+        for (LoginInfo loginInfo: loginInfoList) {
 
             sb.append("\nuserName : " + loginInfo.getUserName ());
             sb.append ("\npassword : " + loginInfo.getPassword ());

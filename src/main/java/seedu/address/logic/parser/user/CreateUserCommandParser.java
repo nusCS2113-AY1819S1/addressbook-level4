@@ -1,11 +1,13 @@
 package seedu.address.logic.parser.user;
 //@@author tianhang
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AUTHENTICATION_LEVEL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.stream.Stream;
 //@@author tianhang
+
 import seedu.address.logic.commands.user.CreateUserCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -43,7 +45,8 @@ public class CreateUserCommandParser implements Parser< CreateUserCommand > {
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
      * {@code ArgumentMultimap}.
      */
-    private static boolean arePrefixesPresent (ArgumentMultimap argumentMultimap , Prefix prefixUsername , Prefix prefixes , Prefix prefixNewPassword) {
+    private static boolean arePrefixesPresent (ArgumentMultimap argumentMultimap ,
+                                               Prefix prefixUsername , Prefix prefixes , Prefix prefixNewPassword) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 

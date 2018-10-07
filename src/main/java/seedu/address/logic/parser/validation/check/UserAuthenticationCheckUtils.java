@@ -1,8 +1,8 @@
-package seedu.address.logic.parser.validationCheck;
+package seedu.address.logic.parser.validation.check;
 
 import seedu.address.commons.core.CurrentUser;
 import seedu.address.commons.core.LoginInfo;
-import seedu.address.commons.loginAuthentication.AuthenticationLevel;
+import seedu.address.commons.login.authenication.AuthenticationLevel;
 import seedu.address.logic.commands.UnAuthorisedCommand;
 
 /**
@@ -11,7 +11,7 @@ import seedu.address.logic.commands.UnAuthorisedCommand;
 public class UserAuthenticationCheckUtils implements UserAuthenticationCheck {
     private String commandWord;
 
-    public UserAuthenticationCheckUtils(String commandWord){
+    public UserAuthenticationCheckUtils(String commandWord) {
         this.commandWord = commandWord;
     }
 
@@ -20,9 +20,9 @@ public class UserAuthenticationCheckUtils implements UserAuthenticationCheck {
      * @return same command if passed
      * else return UnAuthorisedCommand.COMMAND_WORD
      */
-    public String checkAuthentication(){
+    public String checkAuthentication() {
         LoginInfo currentUser = CurrentUser.getCurrentUser ();
-        if (isAuthenticationValid (currentUser)){
+        if (isAuthenticationValid (currentUser)) {
             return commandWord;
         }
         //pass in relevant unAuthorised command
@@ -32,8 +32,8 @@ public class UserAuthenticationCheckUtils implements UserAuthenticationCheck {
     }
     @Override
     public boolean isAuthenticationValid (LoginInfo loginInfo) {
-        for (String commandAllow : AuthenticationLevel.ADMIN.commandAvailable ("ADMIN")){
-            if (commandAllow.equals (commandWord)){
+        for (String commandAllow : AuthenticationLevel.ADMIN.commandAvailable ("ADMIN")) {
+            if (commandAllow.equals (commandWord)) {
                 return true;
             }
         }

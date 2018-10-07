@@ -42,9 +42,13 @@ public class Config {
         this.userPrefsFilePath = userPrefsFilePath;
     }
 
-    public Path getUserLoginInfoilePath() { return userLoginInfoFilePath; }
+    public Path getUserLoginInfoilePath() {
+        return userLoginInfoFilePath;
+    }
 
-    public void setUserLoginInfoilePath(Path userLoginInfoFilePath) { this.userLoginInfoFilePath = userLoginInfoFilePath; };
+    public void setUserLoginInfoilePath(Path userLoginInfoFilePath) {
+        this.userLoginInfoFilePath = userLoginInfoFilePath;
+    };
 
     @Override
     public boolean equals(Object other) {
@@ -60,7 +64,7 @@ public class Config {
         return Objects.equals(appTitle, o.appTitle)
                 && Objects.equals(logLevel, o.logLevel)
                 && Objects.equals(userPrefsFilePath, o.userPrefsFilePath)
-                && Objects.equals (userLoginInfoFilePath,o.userLoginInfoFilePath);
+                && Objects.equals (userLoginInfoFilePath, o.userLoginInfoFilePath);
     }
 
     @Override

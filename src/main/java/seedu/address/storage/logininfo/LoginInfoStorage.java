@@ -1,4 +1,4 @@
-package seedu.address.storage.loginInfo;
+package seedu.address.storage.logininfo;
 
 import java.io.IOException;
 import java.nio.file.Path;

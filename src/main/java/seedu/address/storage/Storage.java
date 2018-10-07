@@ -10,7 +10,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.storage.loginInfo.LoginInfoStorage;
+import seedu.address.storage.logininfo.LoginInfoStorage;
 
 /**
  * API of the Storage component

@@ -19,6 +19,7 @@ public abstract class UserCommand extends Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(LoginInfoManager loginInfoManager, CommandHistory history) throws CommandException;
+    public abstract CommandResult execute(LoginInfoManager loginInfoManager,
+                                          CommandHistory history) throws CommandException;
 
 }

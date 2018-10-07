@@ -37,7 +37,7 @@ public class LogicManager extends ComponentManager implements Logic {
         try {
             Command command = addressBookParser.parseCommand(commandText);
 
-            if (command instanceof UserCommand){
+            if (command instanceof UserCommand) {
                 UserCommand command2 = (UserCommand) command;
                 return command2.execute (loginInfoManager, history);
             }
