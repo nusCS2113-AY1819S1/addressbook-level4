@@ -5,11 +5,13 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import static java.nio.file.Paths.get;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class User {
 
-    private static final String AB_FILEPATH_PREFIX = "data/addressbook-";
+    private static final String AB_FILEPATH_FOLDER = "data/";
+    private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
     public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
 
@@ -21,14 +23,14 @@ public class User {
     public User() {
         this.username = new Username("default");
         this.password = new Password("password");
-        this.addressBookFilePath = Paths.get("data/addressbook-default.xml");
+        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER,"addressbook-default.xml");
     }
 
     /**
      * Creates a user instance
      */
     public User(Username username, Password password) {
-        this(username, password, Paths.get(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+        this(username, password, Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
     }
 
     /**
@@ -42,7 +44,7 @@ public class User {
     }
 
     public static boolean isValidAddressBookFilePath(Path test, String username) {
-        return test.equals(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX) && !test.equals("");
+        return test.equals(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX) && !test.equals("");
     }
 
     public Username getUsername() {

@@ -22,7 +22,8 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     private static final Logger logger = LogsCenter.getLogger(UserDatabase.class);
 
-    private static final String AB_FILEPATH_PREFIX = "data/addressbook-";
+    private static final String AB_FILEPATH_FOLDER = "data/";
+    private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
     private UniqueUsersList users;
 
@@ -50,6 +51,11 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         this();
         resetData(toBeLoaded);
         hasLoggedIn = loggedin;
+    }
+
+    public boolean hasUser(User user) {
+        requireNonNull(user);
+        return users.contains(user);
     }
 
 
@@ -91,8 +97,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @throws AuthenticatedException is the user is already logged in.
      */
     public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
-        User toCheck = new User(username, password,
-                Paths.get(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+        User toCheck = new User(username, password, Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for login");
 
         if (hasLoggedIn) {
@@ -118,7 +123,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      */
     public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
-                Paths.get(AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+                Paths.get(AB_FILEPATH_FOLDER,AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for permissions.");
         if (!hasLoggedIn) {
             return users.contains(toCheck);

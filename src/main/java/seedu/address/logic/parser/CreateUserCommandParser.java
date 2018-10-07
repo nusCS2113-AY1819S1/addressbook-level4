@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.CreateUserCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.Password;
@@ -28,15 +27,11 @@ public class CreateUserCommandParser implements Parser<CreateUserCommand>{
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateUserCommand.MESSAGE_USAGE));
         }
 
-        try {
-            Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME)).get();
-            Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD)).get();
+        Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
+        Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
 
-            User user = new User(username, password);
-            return new CreateUserCommand(user);
-        } catch (IllegalValueException ive) {
-            throw new ParseException(ive.getMessage(), ive);
-        }
+        User user = new User(username, password);
+        return new CreateUserCommand(user);
     }
 
     /**

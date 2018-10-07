@@ -91,6 +91,8 @@ public interface Model {
      */
     ReadOnlyAddressBook getUserDatabase();
 
+    boolean hasUser(User user);
+
     void deleteUser(User target) throws UserNotFoundException;
 
     void addUser(User person) throws DuplicateUserException;
@@ -108,4 +110,5 @@ public interface Model {
     void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException;
 
 
+    void commitUserDatabase();
 }

@@ -33,8 +33,8 @@ public class LoginCommandParser {
         }
 
         try {
-            Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME)).get();
-            Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD)).get();
+            Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
+            Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
 
             return new LoginCommand(username, password);
         } catch (IllegalValueException ive) {

@@ -36,13 +36,14 @@ public class CreateUserCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        try {
-            model.addUser(toCreate);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate.getUsername().toString()));
-        } catch (DuplicateUserException e) {
+
+        if (model.hasUser(toCreate)) {
             throw new CommandException(MESSAGE_DUPLICATE_USER);
         }
 
+        model.addUser(toCreate);
+        model.commitUserDatabase();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 
     @Override

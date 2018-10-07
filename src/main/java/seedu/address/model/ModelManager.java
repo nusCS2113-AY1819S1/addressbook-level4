@@ -37,7 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final Storage storage;
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-    private final UserDatabase versionedUserDatabase;
+    private final VersionedUserDatabase versionedUserDatabase;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -51,7 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
         + " and user database " + userDatabase);
 
         this.storage = storage;
-        versionedUserDatabase = new UserDatabase(userDatabase);
+        versionedUserDatabase = new VersionedUserDatabase(userDatabase);
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
     }
@@ -132,6 +132,12 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateUserDatabaseChanged() {
         raise(new UserDatabaseChangedEvent(versionedUserDatabase));
+    }
+
+    @Override
+    public boolean hasUser(User user) {
+        requireNonNull(user);
+        return versionedUserDatabase.hasUser(user);
     }
 
     /** Raises an event to indicate a user has been deleted */
@@ -240,6 +246,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitAddressBook() {
         versionedAddressBook.commit();
+    }
+
+    @Override
+    public void commitUserDatabase() {
+        versionedUserDatabase.commit();
     }
 
     @Override

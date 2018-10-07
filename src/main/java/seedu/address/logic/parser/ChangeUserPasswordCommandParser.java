@@ -30,9 +30,9 @@ public class ChangeUserPasswordCommandParser implements Parser<ChangeUserPasswor
         }
 
         try {
-            Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME)).get();
-            Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD)).get();
-            Password newPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_NEW_PASSWORD)).get();
+            Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
+            Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
+            Password newPassword = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_NEW_PASSWORD).get());
 
             return new ChangeUserPasswordCommand(username, password, newPassword);
         } catch (IllegalValueException ive) {
