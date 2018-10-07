@@ -32,11 +32,13 @@ public class MoneyFlow {
             + UNSIGNED_MONEYFLOW_VALIDATION_REGEX;
 
     public final String value;
+    public final double valueDouble;
 
     public MoneyFlow(String moneyFlow) {
         requireNonNull(moneyFlow);
         checkArgument(isValidMoneyFlow(moneyFlow), MESSAGE_MONEY_FLOW_CONSTRAINTS);
         this.value = moneyFlow;
+        valueDouble = Double.valueOf(moneyFlow);
     }
 
     /**
@@ -49,6 +51,10 @@ public class MoneyFlow {
     public String toString() {
         return value;
     }
+
+    public double toDouble () { return valueDouble; }
+
+    public boolean isSmaller (double moneyin) { return (moneyin> valueDouble); }
 
     @Override
     public boolean equals(Object other) {

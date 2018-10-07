@@ -44,9 +44,9 @@ import seedu.planner.model.record.Limit;
         requireNonNull(model);
 
         //if (model.hasRecord(limit)) {
-        if (false) {
+       /* if (false) {
             throw new CommandException(MESSAGE_DUPLICATE_LIMIT);
-        }
+        }*/
         return new CommandResult(String.format(MESSAGE_SUCCESS, limit));
     }
     @Override
