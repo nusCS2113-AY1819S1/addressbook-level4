@@ -19,18 +19,22 @@ public class Person {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    private final Grade grade;
+    private final Gender gender;
+    private final Nationality countryCode;
 
     // Data fields
+    private final Grade grade;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,Grade grade) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Gender gender, Nationality countryCode, Phone phone, Email email, Address address, Grade grade, Set<Tag> tags) {
+        requireAllNonNull(name, gender, countryCode, phone, email, address, grade, tags);
         this.name = name;
+        this.gender = gender;
+        this.countryCode = countryCode;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -58,6 +62,13 @@ public class Person {
         return address;
     }
 
+    public Nationality getNationality() {
+        return countryCode;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
@@ -97,6 +108,8 @@ public class Person {
         Person otherPerson = (Person) other;
         return otherPerson.getName().equals(getName())
                 && otherPerson.getPhone().equals(getPhone())
+                && otherPerson.getGender().equals(getGender())
+                && otherPerson.getNationality().equals(getNationality())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
@@ -106,13 +119,17 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, grade);
+        return Objects.hash(name, gender, countryCode, phone, email, address, tags, grade);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Gender: ")
+                .append(getGender())
+                .append(" Nationality: ")
+                .append(getNationality())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
