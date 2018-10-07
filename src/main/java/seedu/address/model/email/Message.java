@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a email message for EmailUtil.
+ * Guarantees: immutable; is valid as declared in {@link #isValidMessage(String)}
  */
 public class Message {
 
