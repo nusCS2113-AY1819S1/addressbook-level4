@@ -8,10 +8,26 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.LogicState;
-import seedu.address.logic.commands.*;
-
+import seedu.address.logic.commands.AddCandidateCommand;
+import seedu.address.logic.commands.AddJobCommand;
+import seedu.address.logic.commands.AddJobDetailsCommand;
+import seedu.address.logic.commands.CancelCommand;
+import seedu.address.logic.commands.ClearCandidateBookCommand;
+import seedu.address.logic.commands.ClearJobBookCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.EditCandidateCommand;
 import seedu.address.logic.commands.EmailCommand.EmailInitialiseCommand;
 import seedu.address.logic.commands.EmailCommand.EmailSelectContentsCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -33,7 +49,10 @@ public class RecruitBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput, LogicState state) throws ParseException {
-        if (state.nextCommand != "primary") {
+        if (!state.nextCommand.equals("primary")) {
+            if (userInput.equals(CancelCommand.COMMAND_WORD)) {
+                return new CancelCommand(state.nextCommand);
+            }
             switch(state.nextCommand)   {
 
             case AddJobDetailsCommand.COMMAND_WORD:
