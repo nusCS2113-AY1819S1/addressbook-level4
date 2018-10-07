@@ -19,6 +19,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCandidateCommand;
 import seedu.address.logic.commands.EmailCommand.EmailInitialiseCommand;
 import seedu.address.logic.commands.EmailCommand.EmailSelectContentsCommand;
+import seedu.address.logic.commands.EmailCommand.EmailSelectRecipientsCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -49,80 +50,113 @@ public class RecruitBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput, LogicState state) throws ParseException {
-        if (!state.nextCommand.equals("primary")) {
-            if (userInput.equals(CancelCommand.COMMAND_WORD)) {
-                return new CancelCommand(state.nextCommand);
-            }
-            switch(state.nextCommand)   {
-
-            case AddJobDetailsCommand.COMMAND_WORD:
-                return new AddJobDetailsCommandParser().parse(userInput);
-            default:
-                LogicManager.setLogicState("primary");
-            }
-        }
-
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            if(!state.nextCommand.equals("primary")) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            } else {
+                throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            }
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
 
-        case AddCandidateCommand.COMMAND_WORD:
-            return new AddCandidateCommandParser().parse(arguments);
+        if (!state.nextCommand.equals("primary")) {
+            if (commandWord.equals(CancelCommand.COMMAND_WORD)) {
+                return new CancelCommand(state.nextCommand);
+            }
 
-        case AddJobCommand.COMMAND_WORD:
-            return new AddJobCommand();
+            if(state.nextCommand.equals(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE)) {
+                switch (commandWord) {
 
-        case EditCandidateCommand.COMMAND_WORD:
-            return new EditCandidateCommandParser().parse(arguments);
+                case FindCommand.COMMAND_WORD:
+                    return new FindCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+                case ListCommand.COMMAND_WORD:
+                    return new ListCommand();
+                }
+            } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
+                    && EmailInitialiseCommand.areRecipientsCandidates) {
+                switch (commandWord) {
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+                    case FindCommand.COMMAND_WORD:
+                        return new FindCommandParser().parse(arguments);
 
-        case ClearCandidateBookCommand.COMMAND_WORD:
-            return new ClearCandidateBookCommand();
+                    case ListCommand.COMMAND_WORD:
+                        return new ListCommand();
+                }
+            } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
+                    && !EmailInitialiseCommand.areRecipientsCandidates) {
+                switch (commandWord) {
 
-        case ClearJobBookCommand.COMMAND_WORD:
-            return new ClearJobBookCommand();
+                    case FindCommand.COMMAND_WORD:
+                        return new FindCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+                    case ListCommand.COMMAND_WORD:
+                        return new ListCommand();
+                }
+            } else {
+                switch (state.nextCommand) {
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+                case AddJobDetailsCommand.COMMAND_WORD:
+                    return new AddJobDetailsCommandParser().parse(userInput);
 
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
+                default:
+                    LogicManager.setLogicState("primary");
+                }
+            }
+        } else {
+            switch (commandWord) {
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case AddCandidateCommand.COMMAND_WORD:
+                return new AddCandidateCommandParser().parse(arguments);
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case AddJobCommand.COMMAND_WORD:
+                return new AddJobCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            case EditCandidateCommand.COMMAND_WORD:
+                return new EditCandidateCommandParser().parse(arguments);
 
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
 
-        case EmailInitialiseCommand.COMMAND_WORD:
-            return new EmailInitialiseCommand();
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-        case EmailSelectContentsCommand.COMMAND_WORD:
-            return new EmailSelectContentsCommand();
+            case ClearCandidateBookCommand.COMMAND_WORD:
+                return new ClearCandidateBookCommand();
 
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            case ClearJobBookCommand.COMMAND_WORD:
+                return new ClearJobBookCommand();
+
+            case FindCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
+
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
+
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
+
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
+
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
+
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
+
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
+
+            case EmailInitialiseCommand.COMMAND_WORD:
+                return new EmailInitialiseCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
         }
     }
-
-
 }

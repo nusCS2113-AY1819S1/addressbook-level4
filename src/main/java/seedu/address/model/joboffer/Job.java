@@ -1,7 +1,5 @@
 package seedu.address.model.joboffer;
 
-import seedu.address.model.RecruitBookEntries;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -10,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidJob(String)}
  */
 
-public class Job extends RecruitBookEntries {
+public class Job {
     public static final String JOB_VALIDATION_REGEX = "[\\p{Alpha}]+";
 
     public static final String MESSAGE_JOB_CONSTRAINTS =
