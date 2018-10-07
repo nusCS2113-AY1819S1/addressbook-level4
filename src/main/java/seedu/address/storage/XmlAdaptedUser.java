@@ -12,6 +12,9 @@ import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 
+/**
+ * JAXB-friendly version of the User.
+ */
 public class XmlAdaptedUser {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "User's %s field is missing!";
 
@@ -38,9 +41,9 @@ public class XmlAdaptedUser {
     }
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given User into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedUser
      */
     public XmlAdaptedUser(User source) {
         username = source.getUsername().fullUsername;
@@ -49,7 +52,7 @@ public class XmlAdaptedUser {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted person object into the model's User object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */

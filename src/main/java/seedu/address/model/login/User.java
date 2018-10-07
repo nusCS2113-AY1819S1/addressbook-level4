@@ -8,13 +8,16 @@ import java.util.Objects;
 import static java.nio.file.Paths.get;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a User in the user database.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class User {
 
     private static final String AB_FILEPATH_FOLDER = "data/";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
     public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
-
 
     private Username username;
     private Password password;
@@ -34,7 +37,7 @@ public class User {
     }
 
     /**
-     * Creates a user instance with a specific address book file path {@code addressBookFilePath}
+     * Every field must be present and not null.
      */
     public User(Username username, Password password, Path addressBookFilePath) {
         requireAllNonNull(username, password, addressBookFilePath);
@@ -59,6 +62,10 @@ public class User {
         return addressBookFilePath;
     }
 
+    /**
+     * Returns true if both user of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two persons.
+     */
     public boolean isSameUser(User otherUser) {
         if (otherUser == this) {
             return true;
@@ -70,7 +77,10 @@ public class User {
                 || otherUser.getAddressBookFilePath().equals(getAddressBookFilePath()));
     }
 
-
+    /**
+     * Returns true if both persons have the same identity and data fields.
+     * This defines a stronger notion of equality between two persons.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

@@ -15,6 +15,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.ReadOnlyUserDatabase;
 
+/**
+ * A class to access UserDatabase data stored as an xml file on the hard disk.
+ */
 public class XmlUserDatabaseStorage implements UserDatabaseStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlUserDatabaseStorage.class);
