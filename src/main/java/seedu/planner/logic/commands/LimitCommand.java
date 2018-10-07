@@ -54,10 +54,11 @@ import seedu.planner.model.record.Record;
        while (countRecord < model.getFinancialPlanner().getRecordList().size()) {
            recordNow = model.getFinancialPlanner().getRecordList().get(countRecord++);
 
-           if ((recordNow.getDate().isEarlierThan(limit.getDate_end() )
-                   && recordNow.getDate().isLaterThan(limit.getDate_start() ) ) )
-                   // || recordNow.getDate().equals(limit.getDate_start())
-                     //   || recordNow.getDate().equals(limit.getDate_end()))
+           if (//(recordNow.getDate().isEarlierThan(limit.getDate_end() )
+                   //&&
+                        recordNow.getDate().isLaterThan(limit.getDate_start() ) )
+                   // || recordNow.getDate().equals(limit.getDate_start()) )
+                   //     || recordNow.getDate().equals(limit.getDate_end()) )
                sumOfSpend += recordNow.getMoneyFlow().toDouble();
 
        }
