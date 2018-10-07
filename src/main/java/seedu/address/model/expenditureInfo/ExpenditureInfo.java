@@ -1,29 +1,43 @@
-package seedu.address.model.expenditureInfo;
+package seedu.address.model.expenditureinfo;
+
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
+/**
+ *
+ */
 public class ExpenditureInfo {
     private final Money money;
     private final Date date;
 
-    public ExpenditureInfo(Money money, Date date){
+    public ExpenditureInfo(Money money, Date date) {
         requireAllNonNull(money, date);
         this.money = money;
         this.date = date;
     }
 
-    public Money getMoney() { return money; }
-    public Date getDate() { return date; }
+    public Money getMoney() {
+        return money;
+    }
 
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     *
+     * @return
+     */
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(money, date);
     }
 
+    /**
+     *
+     * @return
+     */
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getMoney())
