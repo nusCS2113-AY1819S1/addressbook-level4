@@ -14,8 +14,8 @@ import seedu.address.logic.commands.AddJobDetailsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Gender;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.joboffer.AgeRange;
-import seedu.address.model.joboffer.Company;
 import seedu.address.model.joboffer.Job;
 import seedu.address.model.joboffer.JobOffer;
 import seedu.address.model.joboffer.Salary;
@@ -42,14 +42,14 @@ public class AddJobDetailsCommandParser implements Parser<AddJobDetailsCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobDetailsCommand.MESSAGE_USAGE));
         }
 
-        Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
+        CompanyName companyName = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
         Job job = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         AgeRange ageRange = ParserUtil.parseAgeRange(argMultimap.getValue(PREFIX_AGE_RANGE).get());
         Education education = ParserUtil.parseEducation(argMultimap.getValue(PREFIX_EDUCATION).get());
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
 
-        JobOffer jobOffer = new JobOffer(company, job, gender, ageRange, education, salary);
+        JobOffer jobOffer = new JobOffer(companyName, job, gender, ageRange, education, salary);
 
         return new AddJobDetailsCommand(jobOffer);
     }

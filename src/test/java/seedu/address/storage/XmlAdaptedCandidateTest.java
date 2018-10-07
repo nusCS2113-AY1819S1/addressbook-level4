@@ -11,10 +11,10 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.candidate.Address;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedCandidateTest {

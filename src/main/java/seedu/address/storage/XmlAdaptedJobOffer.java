@@ -7,8 +7,8 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Gender;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.joboffer.AgeRange;
-import seedu.address.model.joboffer.Company;
 import seedu.address.model.joboffer.Job;
 import seedu.address.model.joboffer.JobOffer;
 import seedu.address.model.joboffer.Salary;
@@ -63,7 +63,7 @@ public class XmlAdaptedJobOffer {
 
     public XmlAdaptedJobOffer(JobOffer source) {
 
-        company = source.getCompany().value;
+        company = source.getCompanyName().value;
         job = source.getJob().value;
         gender = source.getGender().value;
         ageRange = source.getAgeRange().value;
@@ -83,11 +83,11 @@ public class XmlAdaptedJobOffer {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Job.class.getSimpleName()));
         }
 
-        if (!Company.isValidCompany(company)) {
-            throw new IllegalValueException(Company.MESSAGE_COMPANY_CONSTRAINTS);
+        if (!CompanyName.isValidCompany(company)) {
+            throw new IllegalValueException(CompanyName.MESSAGE_COMPANY_CONSTRAINTS);
         }
 
-        final Company modelCompany = new Company(company);
+        final CompanyName modelCompanyName = new CompanyName(company);
 
 
         if (job == null) {
@@ -143,7 +143,7 @@ public class XmlAdaptedJobOffer {
         final Salary modelSalary = new Salary(salary);
 
 
-        return new JobOffer(modelCompany, modelJob, modelGender, modelAgeRange, modelEducation, modelSalary);
+        return new JobOffer(modelCompanyName, modelJob, modelGender, modelAgeRange, modelEducation, modelSalary);
     }
 
 

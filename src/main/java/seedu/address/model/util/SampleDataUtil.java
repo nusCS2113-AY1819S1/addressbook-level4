@@ -8,16 +8,16 @@ import seedu.address.model.CandidateBook;
 import seedu.address.model.JobBook;
 import seedu.address.model.ReadOnlyCandidateBook;
 import seedu.address.model.ReadOnlyJobBook;
-import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Age;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Education;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.joboffer.AgeRange;
-import seedu.address.model.joboffer.Company;
 import seedu.address.model.joboffer.Job;
 import seedu.address.model.joboffer.JobOffer;
 import seedu.address.model.joboffer.Salary;
@@ -61,9 +61,9 @@ public class SampleDataUtil {
 
     public static JobOffer[] getSampleJobOffers() {
         return new JobOffer[]{
-            new JobOffer(new Company("Mcdonalds"), new Job("Cashier"), new Gender("M"),
+            new JobOffer(new CompanyName("Mcdonalds"), new Job("Cashier"), new Gender("M"),
                 new AgeRange("20-30"), new Education("O levels"), new Salary("1000")),
-            new JobOffer(new Company("KFC"), new Job("Cook"), new Gender("F"),
+            new JobOffer(new CompanyName("KFC"), new Job("Cook"), new Gender("F"),
                     new AgeRange("20-30"), new Education("O levels"), new Salary("1000")),
         };
     }
