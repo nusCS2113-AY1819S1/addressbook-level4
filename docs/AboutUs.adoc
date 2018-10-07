@@ -13,7 +13,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::novin997.png[width="150", align="left"]
 {empty}[https://github.com/novin997[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Leader + Lead Developer +
+Role: Developer + Moderator +
 Responsibilities: Development of features, scheduling and tracking of tasks
 
 '''
@@ -22,7 +22,7 @@ Responsibilities: Development of features, scheduling and tracking of tasks
 image::rajdeepsh.png[width="150", align="left"]
 {empty}[https://github.com/rajdeepsh[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer + Documentation +
+Role: Team Leader + Documentation +
 Responsibilities: Development of features and ensuring document correctness
 
 '''
@@ -31,7 +31,7 @@ Responsibilities: Development of features and ensuring document correctness
 image::e0176882.png[width="150", align="left"]
 {empty}[https://github.com/E0176882[github]] [<<johndoe#, portfolio>>]
 
-Role: Developer + Quality Assurance +
+Role: Lead Developer + Quality Assurance +
 Responsibilities: Development of features and ensuring good quality of application
 
 '''
