@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Chelsey Ong
-image::chelseyong.jpeg[width="150", align="left"]
+image::chelseyong.png[width="150", align="left"]
 {empty} [https://github.com/chelseyong[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
@@ -20,7 +20,7 @@ Responsibilities: Deadline & Task features
 '''
 
 === Jeremy Aw
-image::jeremyaw.jpg[width="150", align="left"]
+image::jeremyaw.png[width="150", align="left"]
 {empty}[http://github.com/jeremyinelysium[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
@@ -29,7 +29,7 @@ Responsibilities: Deadline features
 '''
 
 === Beh Kha Sim
-image::behkhasim.jpeg[width="150", align="left"]
+image::behkhasim.png[width="150", align="left"]
 {empty}[https://github.com/emobeany[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Date features
 '''
 
 === Chan Chun Cheong
-image::ChanChunCheong.jpeg[width="150", align="left"]
+image::ChanChunCheong.png[width="150", align="left"]
 {empty}[https://github.com/ChanChunCheong[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
