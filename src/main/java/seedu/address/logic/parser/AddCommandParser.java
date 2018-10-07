@@ -36,12 +36,12 @@ public class AddCommandParser implements Parser<AddCommand> {
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         Nationality nationality = ParserUtil.parseNationality(argMultimap.getValue(PREFIX_NATIONALITY).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Grade grade = ParserUtil.parseGrade(argMultimap.getValue(PREFIX_GRADE).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, tagList,grade);
+        Person person = new Person(name, gender, nationality, phone, email, address, grade, tagList);
 
         return new AddCommand(person);
     }
