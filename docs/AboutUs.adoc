@@ -15,7 +15,7 @@ image::SHININGGGG.jpg[width="150", align="left"]
 {empty}[http://github.com/SHININGGGG[github]] [<<SHININGGGG#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: Expenditure tracker & Calender coding, UGDG update 
+Responsibilities: Expenditure tracker & Calender coding, UGDG update
 
 '''
 
@@ -33,7 +33,7 @@ image::feijunzi.jpg[width="150", align="left"]
 {empty}[http://github.com/feijunzi[github]] [<<feijunzi#, portfolio>>]
 
 Role: Developer +
-Responsibilities: 
+Responsibilities:
 
 '''
 
@@ -42,7 +42,7 @@ image::XiaoYunhan.jpg[width="150", align="left"]
 {empty}[http://github.com/XiaoYunhan[github]] [<<XiaoYunhan#, portfolio>>]
 
 Role: Developer +
-Responsibilities: 
+Responsibilities:
 
 '''
 

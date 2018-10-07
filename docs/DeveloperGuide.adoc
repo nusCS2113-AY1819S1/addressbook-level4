@@ -949,7 +949,7 @@ To-do list
 1. User enters `sort by ddl` command
 2. To-do list shows the all uncompleted modules sorted by deadlines, the task with latest deadline is the first task
 
-[discrete]                
+[discrete]
 === Use case 6: Checking tasks with high importance
 *System:*
 To-do list
@@ -993,9 +993,9 @@ To-do list
 
    2a. The list is empty.
    2b. The given index is invalid
-     2b1. To-do list shows an error message 
+     2b1. To-do list shows an error message
 
-[discrete]         
+[discrete]
 === Use case 10: Receiving reminders for a task
 *System:*
 To-do list
@@ -1010,7 +1010,7 @@ To-do list
 *System:*
 Expenditure Tracker & Calendar
 
-*MSS*   
+*MSS*
 
 1. User enter `add` command followed by the amount of money
 2. Expenditure tracker receives information and shows the dates to be added
@@ -1023,7 +1023,7 @@ Expenditure Tracker & Calendar
 === Use case 12: Check expenditure / income status
 *System:*
 Expenditure Tracker & Calendar
-	
+
 *MSS*
 
 1. User enter `check status` command
@@ -1064,8 +1064,8 @@ Pros:
 Cons:
 
 1. Not specialized for students
-2. Unable to sort tasks by tags 
-3. Lack of a reminder feature 
+2. Unable to sort tasks by tags
+3. Lack of a reminder feature
 
 
 [appendix]
