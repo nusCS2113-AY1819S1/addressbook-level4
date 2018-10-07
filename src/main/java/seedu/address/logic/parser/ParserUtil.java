@@ -13,8 +13,10 @@ import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -52,6 +54,24 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!trimmedGender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new Gender(trimmedGender);
+    }
+
+    public static Nationality parseNationality(String nationalityCode) {
+        requireNonNull(nationalityCode);
+        String trimmedNationalityCode = nationalityCode.trim();
+        if (!trimmedNationalityCode.isValidCode(trimmedNationalityCode)) {
+            throw new ParseException(Nationality.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new Nationality(trimmedNationalityCode);
     }
 
     /**
@@ -170,4 +190,6 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+
 }
