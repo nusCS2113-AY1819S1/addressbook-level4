@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.Gender.inputTransform;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -59,16 +60,21 @@ public class ParserUtil {
     public static Gender parseGender(String gender) throws ParseException {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
-        if (!trimmedGender.isValidGender(trimmedGender)) {
+        if(!Gender.isInputAccepted(trimmedGender)){
             throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
         }
+        if (!Gender.isValidGender(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
+        }
+        trimmedGender = inputTransform(trimmedGender);
+        requireNonNull(trimmedGender);
         return new Gender(trimmedGender);
     }
 
-    public static Nationality parseNationality(String nationalityCode) {
+    public static Nationality parseNationality(String nationalityCode) throws ParseException {
         requireNonNull(nationalityCode);
         String trimmedNationalityCode = nationalityCode.trim();
-        if (!trimmedNationalityCode.isValidCode(trimmedNationalityCode)) {
+        if (!Nationality.isValidCountryCode(trimmedNationalityCode)) {
             throw new ParseException(Nationality.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Nationality(trimmedNationalityCode);
