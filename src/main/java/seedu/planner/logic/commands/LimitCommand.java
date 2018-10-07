@@ -5,15 +5,19 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_MONEYFLOW;
 
+
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
+
 import seedu.planner.model.record.Limit;
+import seedu.planner.model.record.Record;
 
     /*
     * This Command is used as a limit function, Currently the user can input two Date and one MoneyFlow,
     * and the command will check whether the the total expense during this period has exceeded the limit.
     * */
+
     public class LimitCommand extends Command {
     public static final String COMMAND_WORD= "limit";
     public static final String MESSAGE_USAGE= COMMAND_WORD + ": Check the limit for a period of time. "
@@ -30,24 +34,37 @@ import seedu.planner.model.record.Limit;
 
     //public static Limit limit;
 
-    public static final String MESSAGE_SUCCESS = "Limit has been set: %1$s";
-    public static final String MESSAGE_DUPLICATE_LIMIT = "There is already a limit for this period ";
-    private static Limit limit;
+    public static final String MESSAGE_EXCEED = "Your spend (%f) exceeded the limit. ";//%l$s";
+    public static final String MESSAGE_NOT_EXCEED = "Your spend (%f) did not exceed the limit.";
+    private Limit limit;
+    private Record recordNow;
+    private int countRecord = 0;
+    private double sumOfSpend= 0;
 
     public LimitCommand (Limit limitin) {
         requireNonNull(limitin);
         limit= limitin;
+
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+       // sumOfSpend += model.getFinancialPlanner().getRecordList().get(countRecord).getMoneyFlow().toDouble();
+       while (countRecord < model.getFinancialPlanner().getRecordList().size()) {
+           recordNow = model.getFinancialPlanner().getRecordList().get(countRecord++);
 
-        //if (model.hasRecord(limit)) {
-       /* if (false) {
-            throw new CommandException(MESSAGE_DUPLICATE_LIMIT);
-        }*/
-        return new CommandResult(String.format(MESSAGE_SUCCESS, limit));
+           if ((recordNow.getDate().isEarlierThan(limit.getDate_end() )
+                   && recordNow.getDate().isLaterThan(limit.getDate_start() ) ) )
+                   // || recordNow.getDate().equals(limit.getDate_start())
+                     //   || recordNow.getDate().equals(limit.getDate_end()))
+               sumOfSpend += recordNow.getMoneyFlow().toDouble();
+
+       }
+       //if (limit.getLimit_moneyFlow().isSmaller(sumOfSpend))
+        //return new CommandResult(String.format(MESSAGE_EXCEED, sumOfSpend));
+       //else
+       return new CommandResult(String.format(MESSAGE_NOT_EXCEED, sumOfSpend));
     }
     @Override
     public boolean equals (Object other) {

@@ -37,9 +37,9 @@ import seedu.planner.model.record.MoneyFlow;
         }
 
         MoneyFlow money = ParserUtil.parseMoneyFlow(argMultimap.getValue(PREFIX_MONEYFLOW).get());
-        Date date1 = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Date date2 = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Limit limit = new Limit(date1, date2, money);
+        Date dateStart = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Date dateEnd = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Limit limit = new Limit(dateStart, dateEnd, money);
 
 
         return new LimitCommand(limit);

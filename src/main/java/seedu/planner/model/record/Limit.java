@@ -10,25 +10,25 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
     public static final String LIMIT_FORMAT= "%s %s %s";
     private Date date_start;
     private Date date_end;
-    private MoneyFlow limit_money;
+    private MoneyFlow limit_moneyFlow;
 
 
 
 
-    public Limit (Date date_start , Date date_end, MoneyFlow limit_money) {
-      requireAllNonNull(date_end, date_start, limit_money );
+    public Limit (Date date_start , Date date_end, MoneyFlow limit_moneyFlow) {
+      requireAllNonNull(date_end, date_start, limit_moneyFlow );
       this.date_start= date_start;
       this.date_end= date_end;
-      this.limit_money= limit_money;
+      this.limit_moneyFlow= limit_moneyFlow;
   }
 
   @Override
-    public String toString () { return String.format("LIMIT_FORMAT", date_start, date_end, limit_money);}
+    public String toString () { return String.format("LIMIT_FORMAT", date_start, date_end, limit_moneyFlow);}
 
 
   public Date getDate_start (){ return date_start;}
 
   public Date getDate_end (){ return date_end;}
 
-  public MoneyFlow getLimit_money() { return limit_money; }
+  public MoneyFlow getLimit_moneyFlow() { return limit_moneyFlow; }
 }
