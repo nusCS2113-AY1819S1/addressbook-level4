@@ -176,7 +176,7 @@ The `UI` component uses JavaFx UI framework. The layout of these UI parts are de
 The `UI` component,
 
 * Executes user commands using the `Logic` component.
-* Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
+* Binds itself to some data in the `Model` component so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
 [[Design-Logic]]
