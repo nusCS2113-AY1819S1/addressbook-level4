@@ -2,6 +2,7 @@
 package seedu.address.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
+import static seedu.address.logic.parser.RestoreCommandParser.ARGUMENT_SNAPSHOTS;
 
 import java.util.logging.Logger;
 
@@ -23,11 +24,11 @@ class RestoreCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_snapshots_success() {
-        BackupList backupList = new BackupList("Success");
+    public void execute_snapshots_success() throws Exception {
+        BackupList backupList = ParserUtil.parseBackup("snapshots");
         try {
             CommandResult result = new RestoreCommand(backupList).execute(model, commandHistory);
-            assertEquals(RestoreCommand.MESSAGE_BACKUP_LIST_SUCCESS, result.feedbackToUser);
+            assertEquals(RestoreCommand.MESSAGE_BACKUP_LIST, result.feedbackToUser);
         } catch (CommandException ce) {
             logger.severe(ce.getMessage());
         }

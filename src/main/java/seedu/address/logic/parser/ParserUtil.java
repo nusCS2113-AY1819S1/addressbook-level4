@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -145,9 +146,13 @@ public class ParserUtil {
      * Parses {@code String Snapshots} into a {@code Snapshots}.
      * @throws ParseException if the argument is invalid (not "list").
      */
-    public static BackupList parseBackup(String backupList) {
+    public static BackupList parseBackup(String backupList) throws ParseException {
         requireNonNull(backupList);
-        return new BackupList("Parser works for now");
+        File backupDir = new File(".backup");
+        if(!backupDir.exists()) {
+            throw new ParseException(BackupList.MESSAGE_BACKUP_CONSTRAINTS);
+        }
+        return new BackupList(backupDir);
     }
 
     //@@author

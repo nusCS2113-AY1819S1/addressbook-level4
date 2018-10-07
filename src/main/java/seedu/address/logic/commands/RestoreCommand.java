@@ -9,6 +9,8 @@ import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.backup.BackupList;
 
+import java.util.List;
+
 /**
  * Restores the address book to a snapshot of choice.
  */
@@ -18,15 +20,30 @@ public class RestoreCommand extends Command {
             + ": Restores the address book to a snapshot of choice.\n"
             + "Parameters:" + " snapshots"
             + " or" + " DD/MM/YYYY" + " time";
-    public static final String MESSAGE_BACKUP_LIST_SUCCESS = "Parser for list works :)";
     public static final String MESSAGE_INDEX_SUCCESS = "Parser for index works :)";
+
+    public static final String NUMBER_OF_SNAPSHOTS_PLURAL = " snapshots listed!";
+    public static final String NUMBER_OF_SNAPSHOTS = " snapshot listed!";
+
+    public static String MESSAGE_BACKUP_LIST;
+
     private int flag;
+    private List<String> fileNames;
 
     public RestoreCommand() {
         this.flag = 0;
     }
 
     public RestoreCommand(BackupList backupList) {
+        fileNames = backupList.getFileNames();
+        if(fileNames.size() == 1) {
+            MESSAGE_BACKUP_LIST = Integer.toString(fileNames.size()) + NUMBER_OF_SNAPSHOTS +"\n";
+        } else {
+            MESSAGE_BACKUP_LIST = Integer.toString(fileNames.size()) + NUMBER_OF_SNAPSHOTS_PLURAL+ "\n";
+        }
+        for (int i = 1; i <= fileNames.size(); i++) {
+            MESSAGE_BACKUP_LIST += Integer.toString(i) + ". " + fileNames.get(i - 1) + "\n";
+        }
         this.flag = 1;
     }
 
@@ -43,7 +60,7 @@ public class RestoreCommand extends Command {
         }
 
         if (flag == 1) {
-            return new CommandResult(MESSAGE_BACKUP_LIST_SUCCESS);
+            return new CommandResult(MESSAGE_BACKUP_LIST);
         } else if (flag == 2) {
             return new CommandResult(MESSAGE_INDEX_SUCCESS);
         } else {
