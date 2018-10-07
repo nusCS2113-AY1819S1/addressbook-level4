@@ -52,7 +52,7 @@ public class ClubBudgetElements {
         }
 
         return otherClubBudgetElements != null
-                && otherClubBudgetElements.getClubName().equals(getClubName())
+                && otherClubBudgetElements.getClubName().equals(getClubName());
     }
 
 
@@ -60,8 +60,6 @@ public class ClubBudgetElements {
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
-
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
