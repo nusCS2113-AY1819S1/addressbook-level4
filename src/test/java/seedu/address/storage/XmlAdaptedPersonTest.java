@@ -22,6 +22,7 @@ public class XmlAdaptedPersonTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
+    private static final String INVALID_TAG = "&";
 
     private static final String VALID_NAME = BENSON.getName().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
@@ -98,13 +99,13 @@ public class XmlAdaptedPersonTest {
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
-//    @Test
-//    public void toModelType_invalidTags_throwsIllegalValueException() {
-//        List<XmlAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
-//        invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
-//        XmlAdaptedPerson person =
-//                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, INVALID_TAGS, VALID_GRADE);
-//        Assert.assertThrows(IllegalValueException.class, person::toModelType);
-//    }
+    @Test
+    public void toModelType_invalidTags_throwsIllegalValueException() {
+        List<XmlAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
+        invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
+        XmlAdaptedPerson person =
+                new XmlAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, invalidTags, VALID_GRADE);
+        Assert.assertThrows(IllegalValueException.class, person::toModelType);
+    }
 
 }

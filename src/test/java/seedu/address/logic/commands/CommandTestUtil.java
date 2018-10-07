@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -37,6 +38,8 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_GRADE_BOB = "100";
+    public static final String VALID_GRADE_AMY = "99";
 
     public static final String VALID_GROUP_NAME_TUT_1 = "TUT[1]";
     public static final String VALID_GROUP_NAME_CS1010 = "CS1010";
@@ -55,6 +58,8 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_GRADE_BOB;
+    public static final String GRADE_DESC_AMY = " " + PREFIX_GRADE + VALID_GRADE_AMY;
 
     public static final String GROUP_NAME_DESC_TUT_1 = " " + PREFIX_NAME + VALID_GROUP_NAME_TUT_1;
     public static final String GROUP_NAME_DESC_CS1010 = " " + PREFIX_NAME + VALID_GROUP_NAME_CS1010;
@@ -68,6 +73,7 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "10*"; // '*' not allowed in tags
 
     public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "TUT1*"; // '*' not allowed in group names
     public static final String INVALID_GROUP_LOCATION_DESC = " " + PREFIX_GROUP_LOCATION + "E1/01/01"; // '/' not allowed in group names

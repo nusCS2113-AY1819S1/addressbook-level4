@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <groups>
+        <groupName>TUT[1]</groupName>
+        <groupLocation>E1-01-01</groupLocation>
+        <tagged>morning</tagged>
+    </groups>
+    <groups>
+        <groupName>CS1010</groupName>
+        <groupLocation>VCR</groupLocation>
+        <tagged>night</tagged>
+    </groups>
+    <groups>
+        <groupName>TUT[2]</groupName>
+        <groupLocation>E2-02-02</groupLocation>
+    </groups>
+    <groups>
+        <groupName>TUT[3]</groupName>
+        <groupLocation>E3-03-03</groupLocation>
+        <tagged>afternoon</tagged>
+    </groups>
+    <groups>
+        <groupName>TUT[4]</groupName>
+        <groupLocation>E4-04-04</groupLocation>
+        <tagged>morning</tagged>
+        <tagged>afternoon</tagged>
+    </groups>
+</addressbook>
