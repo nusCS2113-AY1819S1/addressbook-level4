@@ -9,4 +9,6 @@ public static IngredientName parseIngredientName(String ingredientName) throws P
         throw new ParseException(IngredientName.MESSAGE_NAME_CONSTRAINTS);
         }
         return new IngredientName(trimmedName);
-        }
+}
+
+
