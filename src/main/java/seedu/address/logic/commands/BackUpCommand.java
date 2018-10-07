@@ -26,9 +26,9 @@ public class BackUpCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        UserPrefs userPrefs = new UserPrefs();
-        FileEncryptor fe = new FileEncryptor(userPrefs.getAddressBookFilePath().toString());
-        File source = new File(userPrefs.getAddressBookFilePath().toString());
+        UserPrefs userPref = new UserPrefs();
+        FileEncryptor fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
+        File source = new File(userPref.getAddressBookFilePath().toString());
         File backupDest = new File(DEST_PATH);
 
         if (fe.isLocked()) {
