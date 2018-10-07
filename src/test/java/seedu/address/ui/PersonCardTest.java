@@ -5,9 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
-import org.junit.Test;
-
 import guitests.guihandles.PersonCardHandle;
+import org.junit.Test;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -60,6 +59,7 @@ public class PersonCardTest extends GuiUnitTest {
      */
     private void assertCardDisplay(PersonCard personCard, Person expectedPerson, int expectedId) {
         guiRobot.pauseForHuman();
+
 
         PersonCardHandle personCardHandle = new PersonCardHandle(personCard.getRoot());
 
