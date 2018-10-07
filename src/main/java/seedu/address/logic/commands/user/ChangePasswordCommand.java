@@ -1,7 +1,8 @@
 package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_OLD_PASSWORD;
 
 import seedu.address.authentication.PasswordUtils;
 import seedu.address.commons.core.CurrentUser;
@@ -14,7 +15,7 @@ import seedu.address.model.Model;
 /**
  * Adds a person to the address book.
  */
-public class ChangePasswordCommand extends Command {
+public class ChangePasswordCommand extends UserCommand {
 
     public static final String COMMAND_WORD = "changePassword";
 
@@ -37,7 +38,7 @@ public class ChangePasswordCommand extends Command {
         this.newPassword = newPassword;
         this.oldPassword = oldPassword;
     }
-
+    @Override
     public CommandResult execute(LoginInfoList loginInfoList, CommandHistory history) {
         requireNonNull(loginInfoList);
 

@@ -10,15 +10,19 @@ public class LoginInfo {
     public LoginInfo(){
 
     }
-
-    public void setPassword (String password) {
-        this.password = password;
-    }
-
     public LoginInfo (String userName, String authenticationLevel){
         this.userName = userName;
         this.authenticationLevel = authenticationLevel;
     }
+    public LoginInfo (String userName, String password, String authenticationLevel){
+        this.userName = userName;
+        this.password = password;
+        this.authenticationLevel = authenticationLevel;
+    }
+    public void setPassword (String password) {
+        this.password = password;
+    }
+
 
     @Override
     public int hashCode() {

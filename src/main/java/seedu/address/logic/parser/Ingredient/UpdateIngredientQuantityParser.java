@@ -1,21 +1,20 @@
-//author @tianhang
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.Ingredient;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_ICECREAM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_TOPPING;
+import seedu.address.logic.commands.Ingredient.IngredientCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddIngredientCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_ICECREAM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_TOPPING;
 
-/**
- * Parse command under batch
- */
-public class AddIngredientParser {
+public class UpdateIngredientQuantityParser {
     public static final Pattern ICE_CREAM_CHECKER = Pattern.compile ("(?<iceCream>i/)");
     public static final Pattern TOPPING_CHECKER = Pattern.compile ("(?<topping>t/)");
 
@@ -25,14 +24,14 @@ public class AddIngredientParser {
      * @return the result of the command execution
      * @throws ParseException If an error occurs during parsing.
      */
-    public AddIngredientCommand split (String args) throws ParseException {
+    public IngredientCommand split (String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_INGREDIENT_ICECREAM, PREFIX_INGREDIENT_TOPPING);
 
         if ((!arePrefixesPresent(argMultimap, PREFIX_INGREDIENT_ICECREAM)
                 && !arePrefixesPresent(argMultimap, PREFIX_INGREDIENT_TOPPING))
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddIngredientCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, IngredientCommand.MESSAGE_USAGE_ADD_INGREDIENT));
         }
         Matcher m = ICE_CREAM_CHECKER.matcher (args);
         System.out.println (m);
@@ -47,7 +46,7 @@ public class AddIngredientParser {
             return new AddToppingCommandParser ().parse (args);
         }
 
-        return new AddIngredientCommand ();
+        return new IngredientCommand ();
     }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given
@@ -56,5 +55,4 @@ public class AddIngredientParser {
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
-
 }

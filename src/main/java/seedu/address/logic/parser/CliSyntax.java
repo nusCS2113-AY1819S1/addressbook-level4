@@ -13,8 +13,17 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_INGREDIENT_ICECREAM = new Prefix ("i/");
     public static final Prefix PREFIX_INGREDIENT_TOPPING = new Prefix("t/");
+    public static final Prefix PREFIX_USERNAME = new Prefix("u/");
+    public static final Prefix PREFIX_PASSWORD = new Prefix("p/");
+    public static final Prefix PREFIX_AUTHENTICATION_LEVEL = new Prefix("a/");
     public static final Prefix PREFIX_OLD_PASSWORD = new Prefix("o/");
     public static final Prefix PREFIX_NEW_PASSWORD = new Prefix("n/");
 
+    /* user hierarchy*/
+
+    public static final String AUTHENTICATION_LEVEL_ADMIN = "admin";
+    public static final String AUTHENTICATION_LEVEL_MANAGER = "manager";
+    public static final String AUTHENTICATION_LEVEL_SERVER = "server";
+    public static final String AUTHENTICATION_LEVEL_STOCK_TAKER = "stockTaker";
 
 }

@@ -29,6 +29,11 @@ public class LoginInfoList {
         }
     }
 
+    public void createNewAccount(String userName, String password, String authenticationLevel){
+        LoginInfo newAccount = new LoginInfo (userName, password, authenticationLevel);
+        loginInfoList.add (newAccount);
+    }
+
     public ArrayList< LoginInfo > getLoginInfoList(){
         return loginInfoList;
     }
