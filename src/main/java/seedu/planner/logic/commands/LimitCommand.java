@@ -48,7 +48,7 @@ import seedu.planner.model.record.Record;
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
+    //TODO: to convert this into a function and call this function and follow the SLAP
        while (countRecord < model.getFinancialPlanner().getRecordList().size()) {
            recordNow = model.getFinancialPlanner().getRecordList().get(countRecord++);
 
@@ -59,6 +59,8 @@ import seedu.planner.model.record.Record;
                sumOfSpend += recordNow.getMoneyFlow().toDouble();
 
        }
+
+       //TODO: to modify the conditional check that only for positive integer input.
        if (limit.getLimit_moneyFlow().isSmaller(sumOfSpend))
         return new CommandResult(String.format(MESSAGE_NOT_EXCEED, sumOfSpend));
        else

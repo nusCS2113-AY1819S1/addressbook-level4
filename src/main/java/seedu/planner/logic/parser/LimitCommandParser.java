@@ -39,7 +39,7 @@ import seedu.planner.model.record.MoneyFlow;
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
         }
-
+        //TODO: change the scan function to read only the integer, add a "-" manually before the integer.
         MoneyFlow money = ParserUtil.parseMoneyFlow(argMultimap.getValue(PREFIX_MONEYFLOW).get());
         datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
 
