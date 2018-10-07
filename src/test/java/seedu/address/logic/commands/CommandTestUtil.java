@@ -38,6 +38,13 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_GROUP_NAME_TUT_1 = "TUT[1]";
+    public static final String VALID_GROUP_NAME_CS1010 = "CS1010";
+    public static final String VALID_GROUP_LOCATION_TUT_1 = "E1-01-01";
+    public static final String VALID_GROUP_LOCATION_CS1010 = "VCR";
+    public static final String VALID_GROUP_TAG_TUT_1 = "morning";
+    public static final String VALID_GROUP_TAG_CS1010 = "night";
+
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -54,30 +61,6 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
-
-    public static final String VALID_GROUP_NAME_CS1231 = "CS1231";
-    public static final String VALID_GROUP_NAME_CS2040C = "CS2040C";
-    public static final String VALID_GROUP_NAME_TUT = "TUT[TE3]";
-    public static final String VALID_GROUP_NAME_LAB = "LAB[01]";
-    public static final String VALID_GROUP_LOCATION_TUT = "E1-06-04";
-    public static final String VALID_GROUP_LOCATION_LAB = "E4-03-07";
-    public static final String VALID_TAG_TUT = "Weekly";
-    public static final String VALID_TAG_LAB = "OddWeeks";
-    public static final String VALID_TAG_DIFFICULTY = "Tough";
-
-    public static final String GROUP_NAME_DESC_TUT = " " + PREFIX_NAME + VALID_GROUP_NAME_TUT;
-    public static final String GROUP_NAME_DESC_LAB = " " + PREFIX_NAME + VALID_GROUP_NAME_LAB;
-    public static final String GROUP_LOC_DESC_TUT = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_TUT;
-    public static final String GROUP_LOC_DESC_LAB = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_LAB;
-    public static final String TAG_DESC_TUT = " " + PREFIX_TAG + VALID_TAG_TUT;
-    public static final String TAG_DESC_LAB = " " + PREFIX_TAG + VALID_TAG_LAB;
-
-    public static final String INVALID_GROUP_NAME_DESC =
-            " " + PREFIX_NAME + "TUT[E01]!"; //'!' NOT ALLOWED IN GROUP NAMES
-    public static final String INVALID_GROUP_LOC_DESC =
-            " " + PREFIX_GROUP_LOCATION + "[E1-06-05]"; //'[' & ']' NOT ALLOWED IN GROUP LOCATION
-    public static final String INVALID_GROUP_TAG =
-            " " + PREFIX_TAG + "CS2113 Experts"; //' ' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t \r \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
