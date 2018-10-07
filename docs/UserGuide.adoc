@@ -53,7 +53,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Viewing help : `help`
 
-Shows a list of commands + 
+Shows a list of commands +
 Format: `help`
 
 === Adding a task: `TDL add`
@@ -197,18 +197,18 @@ There is no need to save manually.
 
 == FAQ
 
-*Q*: 
-*A*: 
+*Q*:
+*A*:
 
 == Command Summary
 
-* *Add* `TDL add t/TASK m/MODULE [d/DATE] [p/PRIORITY]` 
+* *Add* `TDL add t/TASK m/MODULE [d/DATE] [p/PRIORITY]`
 * *Complete* : `TDL complete INDEX`
-* *Delete* : `TDL delete INDEX` 
-* *Edit* : `TDL edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]` 
+* *Delete* : `TDL delete INDEX`
+* *Edit* : `TDL edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
 * *Sort* : `TDL sort by PARAMETER`
 * *Help* : `help`
-* *Exit* : `exit` 
+* *Exit* : `exit`
 * *View* : `TDL view PARAMETER`
 * *Undo* : `undo`
 * *Redo* : `redo`

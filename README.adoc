@@ -14,7 +14,7 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 * This is a desktop task and expenditure tracker application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java application intended to assist students in managing all of their academic work and spendings. 
+* It is a Java application intended to assist students in managing all of their academic work and spendings.
 * It is *written in OOP fashion*. It provides a *reasonably well-written* code that is based on https://github.com/se-edu/addressbook-level4[Address Book L4], a Java sample application intended for students in learning Software Engineering while using Java as the main programming language.
 * Features:
 ** A more sophisticated GUI that includes a list  panel and an in-built Browser.
