@@ -57,13 +57,16 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
     public static Gender parseGender(String gender) throws ParseException {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
         if(!Gender.isInputAccepted(trimmedGender)){
-            throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
-        }
-        if (!Gender.isValidGender(trimmedGender)) {
             throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
         }
         trimmedGender = inputTransform(trimmedGender);
@@ -71,13 +74,19 @@ public class ParserUtil {
         return new Gender(trimmedGender);
     }
 
-    public static Nationality parseNationality(String nationalityCode) throws ParseException {
-        requireNonNull(nationalityCode);
-        String trimmedNationalityCode = nationalityCode.trim();
-        if (!Nationality.isValidCountryCode(trimmedNationalityCode)) {
+    /**
+     * Parses a {@code String countryCode} into a {@code Nationality}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code countryCode} is invalid.
+     */
+    public static Nationality parseNationality(String countryCode) throws ParseException {
+        requireNonNull(countryCode);
+        String trimmedCountryCode = countryCode.trim();
+        if (!Nationality.isValidCountryCode(trimmedCountryCode)) {
             throw new ParseException(Nationality.MESSAGE_NAME_CONSTRAINTS);
         }
-        return new Nationality(trimmedNationalityCode);
+        return new Nationality(trimmedCountryCode);
     }
 
     /**

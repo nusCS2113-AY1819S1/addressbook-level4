@@ -3,12 +3,15 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a Person's Gender in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isInputAccepted(String)}
+ */
 public class Gender {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
             "Gender can only be 1 character long. 'M' for Male and 'F' for Female. It should not be blank";
 
-    public static final String GENDER_VALIDATION_REGEX = "^[\\\\\fM\\\\F\\\\A\\\\L\\\\E]*$";
     public static final String VALID_GENDER_MALE = "MALE";
     public static final String VALID_GENDER_FEMALE = "FEMALE";
     public static final String VALID_GENDER_ABBREVIATION_MALE = "M";
@@ -16,16 +19,28 @@ public class Gender {
 
     public final String gender;
 
+    /**
+     * Constructs a {@code Gender}.
+     * Conducts an input check {@link #isInputAccepted(String)}
+     *
+     * @param gender A valid gender
+     */
     public Gender(String gender) {
         requireNonNull(gender);
-        checkArgument(isValidGender(gender), MESSAGE_NAME_CONSTRAINTS);
+        checkArgument(isInputAccepted(gender), MESSAGE_NAME_CONSTRAINTS);
+        gender = inputTransform(gender);
+        requireNonNull(gender);
         this.gender = gender;
     }
-    
-    public static boolean isValidGender(String input){
-        return input.matches(GENDER_VALIDATION_REGEX);
-    }
 
+    /**
+     * Returns true if a given string is a valid name.
+     * Accepted Valid Strings are : "MALE"
+     *                              "FEMALE"
+     *                              "M"
+     *                              "F"
+     *
+     */
     public static boolean isInputAccepted(String input){
         String testInput = input.toUpperCase();
         switch (testInput) {
@@ -39,6 +54,11 @@ public class Gender {
         }
     }
 
+    /**
+     * Returns a static string for the program to register Male or Female
+     * Program will determine Male via "MALE" string
+     * Program will determine Female via "FEMALE" string
+     */
     public static String inputTransform(String input){
         input = input.toUpperCase();
         switch (input) {
