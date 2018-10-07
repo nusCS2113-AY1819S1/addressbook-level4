@@ -21,10 +21,35 @@ public class Gender {
         checkArgument(isValidGender(gender), MESSAGE_NAME_CONSTRAINTS);
         this.gender = gender;
     }
-
-
+    
     public static boolean isValidGender(String input){
         return input.matches(GENDER_VALIDATION_REGEX);
+    }
+
+    public static boolean isInputAccepted(String input){
+        String testInput = input.toUpperCase();
+        switch (testInput) {
+            case VALID_GENDER_MALE :
+            case VALID_GENDER_FEMALE :
+            case VALID_GENDER_ABBREVIATION_MALE:
+            case VALID_GENDER_ABBREVIATION_FEMALE:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    public static String inputTransform(String input){
+        input = input.toUpperCase();
+        switch (input) {
+            case VALID_GENDER_MALE :
+            case VALID_GENDER_ABBREVIATION_MALE:
+                return VALID_GENDER_MALE;
+            case VALID_GENDER_FEMALE :
+            case VALID_GENDER_ABBREVIATION_FEMALE:
+                return VALID_GENDER_FEMALE;
+        }
+        return null;
     }
 
     @Override
