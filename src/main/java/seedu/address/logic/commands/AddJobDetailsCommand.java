@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.joboffer.JobOffer;
 
 /**
+ * Intermediate Command of AddJobCommand
  * Adds a job offer to the JobBook with the relevant fields
  */
 

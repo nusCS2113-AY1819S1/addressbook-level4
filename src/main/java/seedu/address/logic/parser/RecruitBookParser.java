@@ -11,6 +11,7 @@ import seedu.address.logic.LogicState;
 import seedu.address.logic.commands.AddCandidateCommand;
 import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.commands.AddJobDetailsCommand;
+import seedu.address.logic.commands.CancelCommand;
 import seedu.address.logic.commands.ClearCandidateBookCommand;
 import seedu.address.logic.commands.ClearJobBookCommand;
 import seedu.address.logic.commands.Command;
@@ -47,7 +48,10 @@ public class RecruitBookParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public Command parseCommand(String userInput, LogicState state) throws ParseException {
-        if (state.nextCommand != "primary") {
+        if (!state.nextCommand.equals("primary")) {
+            if (userInput.equals(CancelCommand.COMMAND_WORD)) {
+                return new CancelCommand(state.nextCommand);
+            }
             switch(state.nextCommand)   {
             case AddJobDetailsCommand.COMMAND_WORD:
                 return new AddJobDetailsCommandParser().parse(userInput);
