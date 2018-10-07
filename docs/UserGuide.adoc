@@ -32,8 +32,6 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 image::UiNew.png[width="790"]
 +
 
-== Features
-
 ====
 *Command Format*
 
@@ -120,6 +118,27 @@ There is no need to save manually.
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
+
+// tag::authentication[]
+=== User Authentication
+
+==== Create new user : `create`
+
+Creates a new user account in the application. +
+Format: `create u/USERNAME p/PASSWORD`
+e.g. `create u/John p/pass`
+
+==== Login : `login`
+
+Logs the user into the application. +
+Format: `login u/USERNAME p/PASSWORD`
+
+==== Logout: `logout`
+
+Logs the user out of the application.
+Format: `logout`
+
+// end::authentication[]
 
 == FAQ
 
