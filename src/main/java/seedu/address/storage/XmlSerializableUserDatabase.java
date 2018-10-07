@@ -9,9 +9,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserDatabase;
+import seedu.address.model.login.User;
 
 @XmlRootElement(name = "users")
 public class XmlSerializableUserDatabase {
+
+    public static final String MESSAGE_DUPLICATE_USER = "Users list contains duplicate user(s).";
 
     @XmlElement
     private List<XmlAdaptedUser> users;
@@ -36,12 +39,16 @@ public class XmlSerializableUserDatabase {
      * Converts this addressbook into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson} or {@code XmlAdaptedTag}.
+     * {@code XmlAdaptedUser}
      */
     public UserDatabase toModelType() throws IllegalValueException {
         UserDatabase userDatabase = new UserDatabase();
-        for (XmlAdaptedUser user : users) {
-            userDatabase.addUser(user.toModelType());
+        for (XmlAdaptedUser u : users) {
+            User user = u.toModelType();
+            if (userDatabase.hasUser(user)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_USER);
+            }
+            userDatabase.addUser(user);
         }
         return userDatabase;
     }

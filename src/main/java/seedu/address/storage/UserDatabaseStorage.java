@@ -8,6 +8,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyUserDatabase;
 
 public interface UserDatabaseStorage {
+
     /**
      * Returns the file path of the data file.
      */

@@ -8,6 +8,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.login.User;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.login.exceptions.DuplicateUserException;
+import seedu.address.storage.XmlAdaptedUser;
+
+import java.util.List;
 
 public class CreateUserCommand extends Command {
 
@@ -35,13 +39,13 @@ public class CreateUserCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.hasUser(toCreate)) {
+        try {
+            model.addUser(toCreate);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate.getUsername().fullUsername));
+        } catch (DuplicateUserException e) {
             throw new CommandException(MESSAGE_DUPLICATE_USER);
         }
 
-        model.addUser(toCreate);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 
     @Override

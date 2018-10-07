@@ -109,6 +109,4 @@ public interface Model {
 
     void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException;
 
-
-    void commitUserDatabase();
 }

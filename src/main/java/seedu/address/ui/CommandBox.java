@@ -28,7 +28,6 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
-    private MainWindow mainWindow;
 
     @FXML
     private TextField commandTextField;

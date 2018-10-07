@@ -1,6 +1,9 @@
 package seedu.address.storage;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -17,7 +20,7 @@ public class XmlAdaptedUser {
     @XmlElement(required = true)
     private String password;
     @XmlElement(required = true)
-    private Path addressbookfilepath;
+    private String addressbookfilepath;
 
     /**
      * Constructs an XmlAdaptedUser.
@@ -28,7 +31,7 @@ public class XmlAdaptedUser {
     /**
      * Constructs an {@code XmlAdaptedUser} with the given person details.
      */
-    public XmlAdaptedUser(String username, String password, Path addressbookfilepath) {
+    public XmlAdaptedUser(String username, String password, String addressbookfilepath) {
         this.username = username;
         this.password = password;
         this.addressbookfilepath = addressbookfilepath;
@@ -40,9 +43,9 @@ public class XmlAdaptedUser {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedUser(User source) {
-        username = source.getUsername().toString();
-        password = source.getPassword().toString();
-        addressbookfilepath = source.getAddressBookFilePath();
+        username = source.getUsername().fullUsername;
+        password = source.getPassword().fullPassword;
+        addressbookfilepath = source.getAddressBookFilePath().toString();
     }
 
     /**
@@ -51,34 +54,34 @@ public class XmlAdaptedUser {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public User toModelType() throws IllegalValueException {
-        if (this.username == null) {
+        if (username == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Username.class.getSimpleName()));
         }
-        if (!Username.isValidUsername(this.username)) {
+        if (!Username.isValidUsername(username)) {
             throw new IllegalValueException(Username.MESSAGE_USERNAME_CONSTRAINTS);
         }
-        final Username username = new Username(this.username);
+        final Username modelUsername = new Username(username);
 
-        if (this.password == null) {
+        if (password == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Password.class.getSimpleName()));
         }
-        if (!Password.isValidPassword(this.password)) {
+        if (!Password.isValidPassword(password)) {
             throw new IllegalValueException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
         }
-        final Password password = new Password(this.password);
+        final Password modelPassword = new Password(password);
 
-        if (this.addressbookfilepath == null) {
+        if (addressbookfilepath == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "AddressBook file path"));
         }
-        if (!User.isValidAddressBookFilePath(this.addressbookfilepath, this.username)) {
+        if (!User.isValidAddressBookFilePath(Paths.get(addressbookfilepath), username)) {
             throw new IllegalValueException(User.MESSAGE_AB_FILEPATH_CONSTRAINTS);
         }
 
-        final Path addressBookFilePath = this.addressbookfilepath;
+        final Path modelAddressBookFilePath = Paths.get(addressbookfilepath);
 
-        return new User(username, password, addressBookFilePath);
+        return new User(modelUsername, modelPassword, modelAddressBookFilePath);
     }
 
     @Override
