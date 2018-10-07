@@ -96,12 +96,12 @@ public class User {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getUsername())
-                .append(" Username: ")
-                .append(getPassword())
+        builder.append(" Username: ")
+                .append(getUsername())
                 .append(" Password: ")
-                .append(getAddressBookFilePath())
-                .append(" File Path: ");
+                .append(getPassword())
+                .append(" File Path: ")
+                .append(getAddressBookFilePath());
         return builder.toString();
     }
 }

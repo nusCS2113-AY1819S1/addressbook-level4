@@ -8,7 +8,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.login.User;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.login.exceptions.DuplicateUserException;
 
 public class CreateUserCommand extends Command {
 
@@ -26,7 +25,7 @@ public class CreateUserCommand extends Command {
     private final User toCreate;
 
     /**
-     * Creates an CreateUserCommand to add the specified {@code User}
+     * Creates a CreateUserCommand to add the specified {@code User}
      */
     public CreateUserCommand(User user) {
         requireNonNull(user);
@@ -42,7 +41,6 @@ public class CreateUserCommand extends Command {
         }
 
         model.addUser(toCreate);
-        model.commitUserDatabase();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 

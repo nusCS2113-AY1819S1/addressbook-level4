@@ -30,7 +30,9 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     private boolean hasLoggedIn;
     private User loggedInUser;
 
-    { users = new UniqueUsersList(); }
+    {
+        users = new UniqueUsersList();
+    }
 
     public UserDatabase() {
         hasLoggedIn = false;
