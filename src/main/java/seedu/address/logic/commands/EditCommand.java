@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.Collections;
@@ -20,12 +16,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
-import seedu.address.model.event.Email;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
+import seedu.address.model.event.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,28 +34,31 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]\n"
+            + "[" + PREFIX_DATETIME + "YY/MM/DD/HH/MM\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Event: %1$s";
+
+    public static final String MESSAGE_EDIT_EVENT_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This event already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the address book.";
 
     private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    private final EditEventDescriptor editEventDescriptor;
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editPersonDescriptor details to edit the event with
+     * @param editEventDescriptor details to edit the event with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCommand(Index index, EditEventDescriptor editEventDescriptor) {
         requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
+        requireNonNull(editEventDescriptor);
 
         this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+        this.editEventDescriptor = new EditEventDescriptor(editEventDescriptor);
     }
 
     @Override
@@ -77,23 +71,23 @@ public class EditCommand extends Command {
         }
 
         Event eventToEdit = lastShownList.get(index.getZeroBased());
-        Event editedEvent = createEditedPerson(eventToEdit, editPersonDescriptor);
+        Event editedEvent = createEditedPerson(eventToEdit, editEventDescriptor);
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
 
         model.updateEvent(eventToEdit, editedEvent);
         model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
         model.commitEventManager();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedEvent));
+        return new CommandResult(String.format(MESSAGE_EDIT_EVENT_SUCCESS, editedEvent));
     }
 
     /**
      * Creates and returns a {@code Event} with the details of {@code eventToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Event createEditedPerson(Event eventToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Event createEditedPerson(Event eventToEdit, EditEventDescriptor editPersonDescriptor) {
         assert eventToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(eventToEdit.getName());
@@ -101,9 +95,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(eventToEdit.getAddress());
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(eventToEdit.getAttendance());
+        DateTime updateDateTime = editPersonDescriptor.getDate().orElse(eventToEdit.getDateTime());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(eventToEdit.getTags());
 
-        return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAttendance, updatedTags);
+        return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                            updatedAttendance, updateDateTime, updatedTags);
     }
 
     @Override
@@ -121,41 +117,43 @@ public class EditCommand extends Command {
         // state check
         EditCommand e = (EditCommand) other;
         return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+                && editEventDescriptor.equals(e.editEventDescriptor);
     }
 
     /**
      * Stores the details to edit the event with. Each non-empty field value will replace the
      * corresponding field value of the event.
      */
-    public static class EditPersonDescriptor {
+    public static class EditEventDescriptor {
         private Name name;
         private Phone phone;
         private Email email;
         private Address address;
         private Attendance attendance;
+        private DateTime dateTime;
         private Set<Tag> tags;
 
-        public EditPersonDescriptor() {}
+        public EditEventDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditPersonDescriptor(EditPersonDescriptor toCopy) {
+        public EditEventDescriptor(EditEventDescriptor toCopy) {
             setName(toCopy.name);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setAttendance(toCopy.attendance);
             setTags(toCopy.tags);
+            setDate(toCopy.dateTime);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, attendance, dateTime, tags);
         }
 
         public void setName(Name name) {
@@ -198,6 +196,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(attendance);
         }
 
+        public void setDate(DateTime dateTime) {
+            this.dateTime = dateTime;
+        }
+
+        public Optional<DateTime> getDate () {
+            return Optional.ofNullable(dateTime);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -223,17 +229,19 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditPersonDescriptor)) {
+            if (!(other instanceof EditEventDescriptor)) {
                 return false;
             }
 
             // state check
-            EditPersonDescriptor e = (EditPersonDescriptor) other;
+            EditEventDescriptor e = (EditEventDescriptor) other;
 
             return getName().equals(e.getName())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
+                    && getAttendance().equals(e.getAttendance())
+                    && getDate().equals(e.getDate())
                     && getTags().equals(e.getTags());
         }
     }

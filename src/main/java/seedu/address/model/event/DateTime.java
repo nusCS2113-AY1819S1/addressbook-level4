@@ -15,14 +15,17 @@ public class DateTime {
     public final int Minute;
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date should have all value and should be in the format\n" +
-                    "YY/MM/DD/HH/MM with each is a number within\n" +
+                    "YYYY/MM/DD/HH/MM with each is a number within\n" +
                     "Year: 0 - 3000\n" +
                     "Month: 1 - 12\n" +
                     "Date: 1 - 31\n" +
                     "Hour: 0-23\n" +
                     "Minute: 0-59\n";
 
+
     public DateTime(String dateTimeAsString){
+        assert dateTimeAsString.length() <= 12;
+
         String[] parts = dateTimeAsString.split("/");
         Integer year = Integer.valueOf(parts[0]);
         Integer month = Integer.valueOf(parts[1]);
