@@ -49,43 +49,37 @@ public class ClubBudgetElements {
      * This defines a weaker notion of equality between two persons.
      */
 
-    /**
+
     public boolean isSameClubBudgetElements(ClubBudgetElements otherClubBudgetElements) {
         if (otherClubBudgetElements == this) {
             return true;
         }
-        // HERE !!!
+
         return otherClubBudgetElements != null
-                && otherPerson.getName().equals(getName())
-                && (otherPerson.getPhone().equals(getPhone()) || otherPerson.getEmail().equals(getEmail()));
+                && otherClubBudgetElements.getClubName().equals(getClubName())
     }
-     */
+
 
     /**
      * Returns true if both persons have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
 
-    /**
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
         }
 
-        if (!(other instanceof Person)) {
+        if (!(other instanceof ClubBudgetElements)) {
             return false;
         }
-
-        Person otherPerson = (Person) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPhone().equals(getPhone())
-                && otherPerson.getEmail().equals(getEmail())
-                && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+ 
+        ClubBudgetElements otherClubBudgetElements = (ClubBudgetElements) other;
+        return otherClubBudgetElements.getClubName().equals(getClubName());
     }
 
-     */
 
     @Override
     public int hashCode() {
