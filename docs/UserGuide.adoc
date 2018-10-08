@@ -158,7 +158,9 @@ Format: `add n/NAME g/GENDER nat/NATIONALITY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t
 Shortcut Format: `a n/NAME g/GENDER nat/NATIONALITY p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 
 [TIP]
-A person can have any number of tags (including 0)
+A person can have any number of tags (including 0) +
+A person gender can only be Male or Female +
+You can use `g/M` or `g/m` or `g/male` to specify a male gender. (Not Case-sensitive)
 
 Examples:
 
