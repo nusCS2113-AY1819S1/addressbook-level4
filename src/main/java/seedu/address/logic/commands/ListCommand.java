@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.Comparators.DateTimeComparator;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
@@ -21,13 +22,7 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all events";
-
-//    ObservableList<Event> SortEvent(ObservableList<Event>) {
-//        ObservableList<Event> sortedList;
-//
-//        return sortedList;
-//    }
+    public static final String MESSAGE_SUCCESS = "Listed all events\n";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {

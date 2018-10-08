@@ -13,7 +13,7 @@ public class User {
         this.password = password;
     }
 
-    public Username getUsername() { return username };
+    public Username getUsername() { return username; }
 
-    public Password getPassword() { return password };
+    public Password getPassword() { return password; }
 }

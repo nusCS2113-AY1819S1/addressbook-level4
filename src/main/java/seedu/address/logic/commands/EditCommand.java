@@ -35,7 +35,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]\n"
-            + "[" + PREFIX_DATETIME + "YY/MM/DD/HH/MM\n"
+            + "[" + PREFIX_DATETIME + "dd/MM/yyyy/hh/mm\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -95,7 +95,7 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(eventToEdit.getAddress());
         Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(eventToEdit.getAttendance());
-        DateTime updateDateTime = editPersonDescriptor.getDate().orElse(eventToEdit.getDateTime());
+        DateTime updateDateTime = editPersonDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(eventToEdit.getTags());
 
         return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress,
@@ -200,7 +200,7 @@ public class EditCommand extends Command {
             this.dateTime = dateTime;
         }
 
-        public Optional<DateTime> getDate () {
+        public Optional<DateTime> getDateTime() {
             return Optional.ofNullable(dateTime);
         }
 
@@ -241,7 +241,7 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getAttendance().equals(e.getAttendance())
-                    && getDate().equals(e.getDate())
+                    && getDateTime().equals(e.getDateTime())
                     && getTags().equals(e.getTags());
         }
     }

@@ -14,7 +14,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
-
+    //Todo: add contact field
     // Identity fields
     private final Name name;
     private final Phone phone;
@@ -103,13 +103,14 @@ public class Event {
                 && otherEvent.getPhone().equals(getPhone())
                 && otherEvent.getEmail().equals(getEmail())
                 && otherEvent.getAddress().equals(getAddress())
+                && otherEvent.getDateTime().equals(getDateTime())
                 && otherEvent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, dateTime, tags);
     }
 
     @Override
@@ -122,6 +123,8 @@ public class Event {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Time: ")
+                .append(getDateTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
