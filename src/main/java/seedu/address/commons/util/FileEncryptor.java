@@ -25,6 +25,7 @@ public class FileEncryptor {
 
     public static final String MESSAGE_ADDRESS_BOOK_LOCKED = "Address book is locked, "
             + "please key in password";
+    public static final String MESSAGE_PASSWORD_ALNUM = "Password must be alpha numeric";
 
     private static String extension = ".encrypted";
     private static String filename = "";
@@ -208,6 +209,22 @@ public class FileEncryptor {
     public String getMessage () {
         return this.message;
     }
+
+
+    /**
+     * Check for alphanumeric
+     * @param str
+     * @return
+     */
+    public boolean isAlphanumeric (String str) {
+        for (int i=0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (c < 0x30 || (c >= 0x3a && c <= 0x40) || (c > 0x5a && c <= 0x60) || c > 0x7a)
+                return false;
+        }
+        return true;
+    }
+
 
     //@@author lekoook
     public static String getExtension() {

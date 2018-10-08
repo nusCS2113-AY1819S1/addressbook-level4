@@ -10,6 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
@@ -31,7 +32,8 @@ public class PasswordCommand extends Command {
     // public static final String MESSAGE_SUCCESS = "Command executed";
 
     private static final Logger logger = LogsCenter.getLogger(PasswordCommand.class);
-    private String message;
+    private String password;
+    private FileEncryptor fe;
 
     /**
      * Executes the FileEncryptor and obtains a message
@@ -39,17 +41,25 @@ public class PasswordCommand extends Command {
      */
     public PasswordCommand (String[] credentials) {
         UserPrefs userPref = new UserPrefs();
-        FileEncryptor fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
-        fe.process(credentials[0]);
-        String message = fe.getMessage();
-        this.message = message;
+        fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
+        this.password = credentials[0];
     }
 
     @Override
-    public CommandResult execute (Model model, CommandHistory history) {
-        // TODO: Reset the display locally, do not commit to changes
-        Path path = Paths.get("data/addressbook.xml");
+    public CommandResult execute (Model model, CommandHistory history) throws CommandException {
+
+        UserPrefs userPref = new UserPrefs();
+        Path path = Paths.get(userPref.getAddressBookFilePath().toString());
         XmlAddressBookStorage storage = new XmlAddressBookStorage(path);
+
+        if (!fe.isAlphanumeric(this.password)) {
+            throw new CommandException(FileEncryptor.MESSAGE_PASSWORD_ALNUM);
+        }
+        // TODO: Let FE throw the error instead of getting the message from it.
+        fe.process(this.password);
+        String message = fe.getMessage();
+
+
         ReadOnlyAddressBook initialData;
         try {
             initialData = storage.readAddressBook().orElseGet(SampleDataUtil::getSampleAddressBook);
@@ -60,7 +70,7 @@ public class PasswordCommand extends Command {
             logger.warning(dataE.getMessage());
         }
 
-        return new CommandResult(this.message);
+        return new CommandResult(message);
     }
 
 }
