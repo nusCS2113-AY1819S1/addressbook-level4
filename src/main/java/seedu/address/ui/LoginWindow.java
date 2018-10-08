@@ -5,6 +5,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.security.Security;
 
 /***
  * Controller for the login
@@ -12,6 +13,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 public class LoginWindow extends UiPart<Stage> {
 
     private static final String FXML = "LoginWindow.fxml";
+    private Security user;
     @FXML
     private TextField usernameTextField;
     @FXML
@@ -25,6 +27,7 @@ public class LoginWindow extends UiPart<Stage> {
     public LoginWindow(Stage root) {
         super(FXML, root);
 
+
         root.setTitle("Login");
         root.initModality(Modality.APPLICATION_MODAL);
         root.setMinWidth(250);
@@ -34,8 +37,9 @@ public class LoginWindow extends UiPart<Stage> {
     /**
      * Creates a new LoginWindow.
      */
-    public LoginWindow() {
+    public LoginWindow(Security user) {
         this(new Stage());
+        this.user = user;
     }
 
     /**

@@ -55,7 +55,7 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, user);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.handleLogin();
             //TODO: Entry point for user authentication
