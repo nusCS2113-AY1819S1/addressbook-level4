@@ -27,6 +27,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.security.Security;
+import seedu.address.security.SecurityManager;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
@@ -73,7 +74,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        user = new Security();
+        user = new SecurityManager();
 
         ui = new UiManager(logic, config, userPrefs, user);
 

@@ -59,12 +59,8 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.handleLogin();
             //TODO: Entry point for user authentication
-            if (user.getAuthentication()) {
-                mainWindow.fillInnerParts();
-            } else {
-                //Ask to show Relogin
-            }
-
+            //while(!user.getAuthentication());
+            //mainWindow.fillInnerParts();
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
