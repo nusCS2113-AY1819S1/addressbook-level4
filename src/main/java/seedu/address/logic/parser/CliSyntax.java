@@ -14,9 +14,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_GRADE = new Prefix("d/");
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
     public static final Prefix PREFIX_MESSAGE = new Prefix("m/");
-    public static final Prefix PREFIX_GROUP_LOCATION = new Prefix("loc/");
     public static final Prefix PREFIX_GENDER = new Prefix("g/");
     public static final Prefix PREFIX_NATIONALITY = new Prefix("nat/");
-
+    public static final Prefix PREFIX_GROUP_LOCATION = new Prefix("l/");
 
 }

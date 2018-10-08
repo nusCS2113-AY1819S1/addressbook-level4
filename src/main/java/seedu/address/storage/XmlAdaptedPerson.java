@@ -86,6 +86,7 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        grade = source.getGrade().value;
     }
 
     /**

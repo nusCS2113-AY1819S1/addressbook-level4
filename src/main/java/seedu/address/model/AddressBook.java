@@ -52,12 +52,21 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
+     * Replaces the contents of the group list with {@code groups}.
+     * {@code groups} must not contain duplicate groups.
+     */
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
+
+    /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setGroups(newData.getGroupList());
     }
 
     //// person and group - level operations
@@ -79,7 +88,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a group with the same group as {@code checkGroup} exists in the address book.
+     * Returns true if a group with the same group as {@code group} exists in the address book.
      */
     public boolean hasGroup(Group group) {
         requireNonNull(group);
@@ -87,11 +96,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Create a group into the address book.
+     * Creates a group in the address book.
      * The group must not already exist in the address book.
      */
-    public void createGroup(Group toCreate) {
-        groups.createGroup(toCreate);
+    public void createGroup(Group g) {
+        groups.createGroup(g);
     }
 
     /**
@@ -119,14 +128,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return persons.asUnmodifiableObservableList().size() + " persons"
                 + groups.asUnmodifiableObservableList().size() + " groups";
-        // TODO: refine later
     }
 
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
-    // TODO
 
     @Override
     public ObservableList<Group> getGroupList() {

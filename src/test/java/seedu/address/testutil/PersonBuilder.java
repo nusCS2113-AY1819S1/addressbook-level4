@@ -25,7 +25,7 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_GRADE = "99";
+    public static final String DEFAULT_GRADE = "100";
 
     private Name name;
     private Gender gender;
@@ -33,8 +33,8 @@ public class PersonBuilder {
     private Email email;
     private Phone phone;
     private Address address;
-    private Set<Tag> tags;
     private Grade grade;
+    private Set<Tag> tags;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -43,6 +43,7 @@ public class PersonBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        grade = new Grade(DEFAULT_GRADE);
         tags = new HashSet<>();
         grade = new Grade(DEFAULT_GRADE);
     }
@@ -57,6 +58,7 @@ public class PersonBuilder {
         phone = personToCopy.getPhone();
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
+        grade = personToCopy.getGrade();
         tags = new HashSet<>(personToCopy.getTags());
     }
 

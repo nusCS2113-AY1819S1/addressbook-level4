@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
@@ -20,6 +21,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -39,6 +42,15 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
+    public static final String VALID_GRADE_BOB = "100";
+    public static final String VALID_GRADE_AMY = "99";
+
+    public static final String VALID_GROUP_NAME_TUT_1 = "TUT[1]";
+    public static final String VALID_GROUP_NAME_CS1010 = "CS1010";
+    public static final String VALID_GROUP_LOCATION_TUT_1 = "E1-01-01";
+    public static final String VALID_GROUP_LOCATION_CS1010 = "VCR";
+    public static final String VALID_GROUP_TAG_TUT_1 = "morning";
+    public static final String VALID_GROUP_TAG_CS1010 = "night";
 
     public static final String VALID_GENDER_MALE = "MALE";
     public static final String VALID_GENDER_FEMALE = "FEMALE";
@@ -65,6 +77,15 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_GRADE_BOB;
+    public static final String GRADE_DESC_AMY = " " + PREFIX_GRADE + VALID_GRADE_AMY;
+
+    public static final String GROUP_NAME_DESC_TUT_1 = " " + PREFIX_NAME + VALID_GROUP_NAME_TUT_1;
+    public static final String GROUP_NAME_DESC_CS1010 = " " + PREFIX_NAME + VALID_GROUP_NAME_CS1010;
+    public static final String GROUP_LOCATION_DESC_TUT_1 = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_TUT_1;
+    public static final String GROUP_LOCATION_DESC_CS1010 = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_CS1010;
+    public static final String GROUP_TAG_DESC_TUT_1 = " " + PREFIX_TAG + VALID_GROUP_TAG_TUT_1;
+    public static final String GROUP_TAG_DESC_CS1010 = " " + PREFIX_TAG + VALID_GROUP_TAG_CS1010;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Male1"; // '1' not allowed in Gender
@@ -73,30 +94,12 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "10*"; // '*' not allowed in tags
 
-    public static final String VALID_GROUP_NAME_CS1231 = "CS1231";
-    public static final String VALID_GROUP_NAME_CS2040C = "CS2040C";
-    public static final String VALID_GROUP_NAME_TUT = "TUT[TE3]";
-    public static final String VALID_GROUP_NAME_LAB = "LAB[01]";
-    public static final String VALID_GROUP_LOCATION_TUT = "E1-06-04";
-    public static final String VALID_GROUP_LOCATION_LAB = "E4-03-07";
-    public static final String VALID_TAG_TUT = "Weekly";
-    public static final String VALID_TAG_LAB = "OddWeeks";
-    public static final String VALID_TAG_DIFFICULTY = "Tough";
-
-    public static final String GROUP_NAME_DESC_TUT = " " + PREFIX_NAME + VALID_GROUP_NAME_TUT;
-    public static final String GROUP_NAME_DESC_LAB = " " + PREFIX_NAME + VALID_GROUP_NAME_LAB;
-    public static final String GROUP_LOC_DESC_TUT = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_TUT;
-    public static final String GROUP_LOC_DESC_LAB = " " + PREFIX_GROUP_LOCATION + VALID_GROUP_LOCATION_LAB;
-    public static final String TAG_DESC_TUT = " " + PREFIX_TAG + VALID_TAG_TUT;
-    public static final String TAG_DESC_LAB = " " + PREFIX_TAG + VALID_TAG_LAB;
-
-    public static final String INVALID_GROUP_NAME_DESC =
-            " " + PREFIX_NAME + "TUT[E01]!"; //'!' NOT ALLOWED IN GROUP NAMES
-    public static final String INVALID_GROUP_LOC_DESC =
-            " " + PREFIX_GROUP_LOCATION + "[E1-06-05]"; //'[' & ']' NOT ALLOWED IN GROUP LOCATION
-    public static final String INVALID_GROUP_TAG =
-            " " + PREFIX_TAG + "CS2113 Experts"; //' ' not allowed in tags
+    public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "TUT1*"; // '*' not allowed in group names
+    public static final String INVALID_GROUP_LOCATION_DESC = " "
+            + PREFIX_GROUP_LOCATION + "E1/01/01"; // '/' not allowed in group names
+    public static final String INVALID_GROUP_TAG_DESC = " " + PREFIX_TAG + "morning*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t \r \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
@@ -171,6 +174,20 @@ public class CommandTestUtil {
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the group at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showGroupAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredGroupList().size());
+
+        Group group = model.getFilteredGroupList().get(targetIndex.getZeroBased());
+        final String[] splitGroupName = group.getGroupName().groupName.split("\\s+");
+        model.updateFilteredGroupList(new GroupNameContainsKeywordsPredicate(Arrays.asList(splitGroupName[0])));
+
+        assertEquals(1, model.getFilteredGroupList().size());
     }
 
     /**

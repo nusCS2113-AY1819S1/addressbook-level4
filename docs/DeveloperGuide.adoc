@@ -841,8 +841,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |create groups of students |have a list of all my students in a particular module/group
 
-|`* * *` |university lecturer |add groups to a calender |have a list of all my modules with their respective dates
-
 |`* * *` |university lecturer |send an email to all students in any group |make module specific announcements
 
 |`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
@@ -894,7 +892,7 @@ Use case ends.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: Create Groups (UC01)
+=== Use case: Create Groups
 *Precondition*
 
 1.  Address Book is not empty
@@ -917,6 +915,12 @@ Use case ends
 [none]
 ** 1a1. AddressBook rejects command entered.
 [none]
+* 1b. AddressBook detects duplicate group.
++
+
+[none]
+** 1b1. AddressBook rejects command entered.
+[none]
 * 3a. AddressBook detects error in data entered.
 +
 
@@ -927,41 +931,9 @@ Use case ends
 +
 
 [none]
-** 3b1. AddressBook asks user to create group.
-+
-Use case resumes at step 1.
-
-[discrete]
-=== Use case: Calendar (UC02)
-*Precondition*
-
-1.  Calender is created
-
-*MSS*
-
-1.  User adds group to date
-2.  AddressBook confirms that group is added
-+
-Use case ends
-
-*Extensions*
-
-[none]
-* 1a. AddressBook detects error in data entered.
+** 3b1. AddressBook rejects command entered.
 +
 
-[none]
-** 1a1. AddressBook rejects command entered.
-[none]
-* 1b. AddressBook detects group is not created.
-+
-
-[none]
-** 1b1. AddressBook rejects command entered.
-[none]
-** 1b2. AddressBook asks user to create group.
-[none]
-** 1b3. User creates group (UC01).
 
 [discrete]
 === Use case: Grading Filter
@@ -1032,7 +1004,7 @@ Use case ends
 Use case ends
 
 [discrete]
-=== Use case: Auto Grouping
+=== Use case: Group Distribution
 *Precondition*
 
 1.  Group's exist in the AddressBook
