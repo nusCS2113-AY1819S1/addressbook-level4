@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 
 public class BudgetCommand extends Command{
-    public static final String COMMAND_WORD = "data";
+    public static final String COMMAND_WORD = "budget";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Submits the data for calculating the budget for a club. "
             + "Parameters: "

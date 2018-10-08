@@ -326,13 +326,13 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
-=== Submitting data for budget allocation: `data`
+=== Submitting data for budget allocation: `budget`
 
 Submits the data about number of events, expected turnout etc. +
-Format: `data c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
+Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
 
 Example: +
-`data c/Computing Club t/200 e/5`
+`budget c/Computing Club t/200 e/5`
 
 === Viewing the allocated budget : `viewbudget`
 
@@ -422,8 +422,8 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Submitting data for budget* : `data c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS` +
-e.g. `data c/Computing Club t/200 e/5`
+* *Submitting data for budget* : `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS` +
+e.g. `budget c/Computing Club t/200 e/5`
 * *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
 e.g. `request m/1000 r/for booking auditorium t/medium`
 * *Viewing grant request* : `viewrequest`
