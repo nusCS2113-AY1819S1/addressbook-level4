@@ -1,7 +1,9 @@
 package seedu.address.ui;
 
+import javafx.fxml.FXML;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import seedu.address.commons.events.ui.ExitAppRequestEvent;
 
 /***
  * Controller for the login
@@ -66,5 +68,13 @@ public class LoginWindow extends UiPart<Stage> {
      */
     public void focus() {
         getRoot().requestFocus();
+    }
+
+    /**
+     * Closes the application.
+     */
+    @FXML
+    private void handleExit() {
+        raise(new ExitAppRequestEvent());
     }
 }
