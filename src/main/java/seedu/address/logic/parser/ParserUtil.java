@@ -102,10 +102,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String groupName} into a {@code groupName}.
-     * TODO add description of groupName parser
+     * Parses a {@code String groupName} into a {@code GroupName}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code groupName} is invalid.
+     * @throws ParseException if the given {@code GroupName} is invalid.
      */
     public static GroupName parseGroupName(String groupName) throws ParseException {
         requireNonNull(groupName);
@@ -117,10 +117,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String groupLocation} into a {@code groupLocation}.
-     * // TODO add description of groupLocation parser
+     * Parses a {@code String groupLocation} into a {@code GroupLocation}.
+     * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code groupLocation} is invalid.
+     * @throws ParseException if the given {@code GroupLocation} is invalid.
      */
     public static GroupLocation parseGroupLocation(String groupLocation) throws ParseException {
         requireNonNull(groupLocation);

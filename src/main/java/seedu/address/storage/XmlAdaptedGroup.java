@@ -56,7 +56,7 @@ public class XmlAdaptedGroup {
      */
     public XmlAdaptedGroup(Group source) {
         groupName = source.getGroupName().groupName;
-        groupLocation = source.getGroupLocation().groupLocation;
+        groupLocation = source.getGroupLocation().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -74,7 +74,8 @@ public class XmlAdaptedGroup {
         }
 
         if (groupName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GroupName.class.getSimpleName()));
         }
         if (!GroupName.isValidGroupName(groupName)) {
             throw new IllegalValueException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
@@ -82,8 +83,8 @@ public class XmlAdaptedGroup {
         final GroupName modelGroupName = new GroupName(groupName);
 
         if (groupLocation == null) {
-            String input = String.format(MISSING_FIELD_MESSAGE_FORMAT, GroupLocation.class.getSimpleName());
-            throw new IllegalValueException(input);
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    GroupLocation.class.getSimpleName()));
         }
         if (!GroupLocation.isValidGroupLocation(groupLocation)) {
             throw new IllegalValueException(GroupLocation.MESSAGE_GROUP_LOCATION_CONSTRAINTS);
