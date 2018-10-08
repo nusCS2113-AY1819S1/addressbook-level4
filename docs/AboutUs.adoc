@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 //Image naming format : [yourgithubusername].jpg Example: QzSG.jpg
 //TODO: Portfolio for everyone
 === Adrian Tan Guo Hua
-image::qzsg.jpg[width="150", align="left"]
+image::qzsg.png[width="150", align="left"]
 {empty}[https://qz.sg[homepage]] [https://github.com/qzsg[github]]
 
 Role: Team Lead, Developer, Git Expert +
@@ -21,7 +21,7 @@ Responsibilities: Devops, Integration, Scheduling and tracking
 '''
 
 === Chen Songjian
-image::chensongjian.jpg[width="150", align="left"]
+image::chensongjian.png[width="150", align="left"]
 {empty}[http://github.com/ChenSongJian[github]]
 
 Role: Developer +
@@ -30,7 +30,7 @@ Responsibilities: UI
 '''
 
 === Ian Tjahjono
-image::ian-tjahjono.jpg[width="150", align="left"]
+image::ian-tjahjono.png[width="150", align="left"]
 {empty}[http://github.com/ian-tjahjono[github]]
 
 Role: Developer +
@@ -39,7 +39,7 @@ Responsibilities: Data
 '''
 
 === Lu Han
-image::luhan02.jpg[width="150", align="left"]
+image::luhan02.png[width="150", align="left"]
 {empty}[https://github.com/luhan02[github]]
 
 Role: Developer +
