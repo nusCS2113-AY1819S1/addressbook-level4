@@ -1004,7 +1004,7 @@ Use case ends
 Use case ends
 
 [discrete]
-=== Use case: Auto Grouping
+=== Use case: Group Distribution
 *Precondition*
 
 1.  Group's exist in the AddressBook

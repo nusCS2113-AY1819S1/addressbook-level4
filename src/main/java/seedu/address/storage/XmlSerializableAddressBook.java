@@ -61,7 +61,6 @@ public class XmlSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-
         for (XmlAdaptedGroup g : groups) {
             Group group = g.toModelType();
             if (addressBook.hasGroup(group)) {
