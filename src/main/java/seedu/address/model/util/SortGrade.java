@@ -49,15 +49,15 @@ public class SortGrade { //from lowest to highest
             }
 
 
-            if (swapped == false)
-                break;
+           // if (swapped == false)
+           //     break;
         }
         return personList;
     }
 
-    private Person compareGrade(Person a, Person b){
-        return Integer.parseInt(a.getGrade().value) < Integer.parseInt(b.getGrade().value) ? b : a;
-    }
+//    private Person compareGrade(Person a, Person b){
+//        return Integer.parseInt(a.getGrade().value) < Integer.parseInt(b.getGrade().value) ? b : a;
+//    }
 
 
 }

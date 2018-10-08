@@ -46,9 +46,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         sortGrade.sortingFromLowesttoHighest(persons);
 
         Calculator cal = new Calculator();
-        cal.find_25th(persons);
+        cal.find25th(persons);
 
-        cal.find_75th(persons);
+        cal.find75th(persons);
         cal.calculateMedian(persons);
 
     }

@@ -31,7 +31,7 @@ public class Calculator {
         return maximum;
     }
 
-    public ArrayList<Person> find_25th(UniquePersonList personList){    // Find students in top 25th
+    public ArrayList<Person> find25th(UniquePersonList personList){    // Find students in top 25th
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
 
@@ -53,7 +53,7 @@ public class Calculator {
 
     }
 
-    public ArrayList<Person> find_75th(UniquePersonList personList){    // Find students below 75th
+    public ArrayList<Person> find75th(UniquePersonList personList){    // Find students below 75th
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
 
