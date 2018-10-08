@@ -9,6 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.budgetelements.ClubName;
+import seedu.address.model.budgetelements.ExpectedTurnout;
+import seedu.address.model.budgetelements.NumberOfEvents;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +123,50 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String clubname} into a {@code ClubName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code clubname} is invalid.
+     */
+    public static ClubName parseClubName(String clubname) throws ParseException {
+        requireNonNull(clubname);
+        String trimmedClubName = clubname.trim();
+        if (!ClubName.isValidClubName(trimmedClubName)) {
+            throw new ParseException(ClubName.MESSAGE_CLUB_NAME_CONSTRAINTS);
+        }
+        return new ClubName(trimmedClubName);
+    }
+
+    /**
+     * Parses a {@code String expectedturnout} into a {@code ExpectedTurnout}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code expectedturnout} is invalid.
+     */
+    public static ExpectedTurnout parseExpectedTurnout(String expectedturnout) throws ParseException {
+        requireNonNull(expectedturnout);
+        String trimmedExpectedTurnout = expectedturnout.trim();
+        if (!ExpectedTurnout.isValidExpectedTurnout(trimmedExpectedTurnout)) {
+            throw new ParseException(ExpectedTurnout.MESSAGE_EXPECTED_TURNOUT_CONSTRAINTS);
+        }
+        return new ExpectedTurnout(trimmedExpectedTurnout);
+    }
+
+    /**
+     * Parses a {@code String numberofevents} into a {@code NumberOfEvents}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code numberofevents} is invalid.
+     */
+    public static NumberOfEvents parseNumberOfEvents(String numberofevents) throws ParseException {
+        requireNonNull(numberofevents);
+        String trimmedNumberOfEvents = numberofevents.trim();
+        if (!NumberOfEvents.isValidNumberOfEvents(trimmedNumberOfEvents)) {
+            throw new ParseException(NumberOfEvents.MESSAGE_NUMBER_OF_EVENTS_CONSTRAINTS);
+        }
+        return new NumberOfEvents(trimmedNumberOfEvents);
     }
 }
