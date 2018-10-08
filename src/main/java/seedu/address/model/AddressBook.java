@@ -9,6 +9,8 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.util.Calculator;
+import seedu.address.model.util.SortGrade;
 
 /**
  * Wraps all data at the address-book level
@@ -39,6 +41,13 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
+
+        SortGrade sortGrade = new SortGrade();
+        sortGrade.sortingFromHightestToLowest(persons);
+
+        Calculator cal = new Calculator();
+        cal.Find_25th(persons);
+
     }
 
     //// list overwrite operations
