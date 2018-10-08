@@ -37,11 +37,11 @@ public class ImportCommand extends Command {
             + PREFIX_FILELOCATION + "FILE_LOCATION \n"
             + "Example: " + COMMAND_WORD
             + " 1 "
-            + PREFIX_FILELOCATION + "C:\\Users\\happycat96\\Downloads\\nusmods_calendar.ics"
-            ;
+            + PREFIX_FILELOCATION + "C:\\Users\\happycat96\\Downloads\\nusmods_calendar.ics";
 
     public static final String MESSAGE_SUCCESS = "Imported timetable for %1$s.";
-    public static final String MESSAGE_IO_ERROR = "IO error: Ensure your path is correct, and that your .ics file has not been corrupted.";
+    public static final String MESSAGE_IO_ERROR =
+            "IO error: Ensure your path is correct, and that your .ics file has not been corrupted.";
 
     private final Index index;
     private final FileLocation fileLocation;
@@ -74,7 +74,7 @@ public class ImportCommand extends Command {
     /**
      * Attempts to read the file at the path specified. Returns a timetable object.
      */
-    private TimeTable ics2TimeTable(FileLocation fileLocation) throws CommandException{ //is this naming ok? It clear but a little unprofessional looking :(
+    private TimeTable ics2TimeTable(FileLocation fileLocation) throws CommandException { //improve name pls
         if (false /*file is invalid/ unreadable*/) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
