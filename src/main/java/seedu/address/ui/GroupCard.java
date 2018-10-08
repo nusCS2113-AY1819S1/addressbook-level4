@@ -23,7 +23,7 @@ public class GroupCard extends UiPart<Region> {
 
     public final Group group;
 
-    @javafx.fxml.FXML
+    @FXML
     private HBox cardPane;
     @FXML
     private Label groupName;
