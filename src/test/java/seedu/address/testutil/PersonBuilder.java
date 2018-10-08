@@ -30,6 +30,7 @@ public class PersonBuilder {
     private Address address;
     private Grade grade;
     private Set<Tag> tags;
+    private Grade grade;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -38,6 +39,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         grade = new Grade(DEFAULT_GRADE);
         tags = new HashSet<>();
+        grade = new Grade(DEFAULT_GRADE);
     }
 
     /**

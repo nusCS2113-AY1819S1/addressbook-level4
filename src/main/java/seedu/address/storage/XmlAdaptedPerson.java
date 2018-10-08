@@ -70,6 +70,7 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        grade = source.getGrade().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -128,7 +129,7 @@ public class XmlAdaptedPerson {
         final Grade modelGrade = new Grade(grade);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags,modelGrade);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelGrade);
     }
 
     @Override
