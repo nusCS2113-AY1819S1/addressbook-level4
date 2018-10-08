@@ -78,7 +78,8 @@ public class CommandTestUtil {
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "10*"; // '*' not allowed in tags
 
     public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "TUT1*"; // '*' not allowed in group names
-    public static final String INVALID_GROUP_LOCATION_DESC = " " + PREFIX_GROUP_LOCATION + "E1/01/01"; // '/' not allowed in group names
+    public static final String INVALID_GROUP_LOCATION_DESC = " "
+            + PREFIX_GROUP_LOCATION + "E1/01/01"; // '/' not allowed in group names
     public static final String INVALID_GROUP_TAG_DESC = " " + PREFIX_TAG + "morning*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t \r \n";

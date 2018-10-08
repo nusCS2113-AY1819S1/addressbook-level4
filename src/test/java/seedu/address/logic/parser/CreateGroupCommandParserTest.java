@@ -49,7 +49,8 @@ public class CreateGroupCommandParserTest {
                 + GROUP_TAG_DESC_TUT_1, new CreateGroupCommand(expectedGroup));
 
         // multiple tags - all accepted
-        Group expectedGroupMultipleTags = new GroupBuilder(TUT_1).withTags(VALID_GROUP_TAG_TUT_1, VALID_GROUP_TAG_CS1010).build();
+        Group expectedGroupMultipleTags = new GroupBuilder(TUT_1).withTags(VALID_GROUP_TAG_TUT_1,
+                VALID_GROUP_TAG_CS1010).build();
         assertParseSuccess(parser, GROUP_NAME_DESC_TUT_1 + GROUP_LOCATION_DESC_TUT_1
                 + GROUP_TAG_DESC_TUT_1 + GROUP_TAG_DESC_CS1010, new CreateGroupCommand(expectedGroupMultipleTags));
     }

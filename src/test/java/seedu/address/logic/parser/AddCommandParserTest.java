@@ -142,7 +142,8 @@ public class AddCommandParserTest {
                 + TAG_DESC_HUSBAND + INVALID_GRADE_DESC, Grade.MESSAGE_GRADE_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + GRADE_DESC_BOB,
+        assertParseFailure(parser, INVALID_NAME_DESC + PHONE_DESC_BOB
+                        + EMAIL_DESC_BOB + INVALID_ADDRESS_DESC + GRADE_DESC_BOB,
                 Name.MESSAGE_NAME_CONSTRAINTS);
 
         // non-empty preamble

@@ -13,7 +13,7 @@ import seedu.address.model.group.Group;
 /**
  * Provides a handle to a group card in the person list panel.
  */
-public class GroupCardHandle extends NodeHandle<Node>{
+public class GroupCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String GROUP_NAME_FIELD_ID = "#groupName";
     private static final String GROUP_LOCATION_FIELD_ID = "#groupLocation";

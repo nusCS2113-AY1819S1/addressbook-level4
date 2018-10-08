@@ -39,7 +39,8 @@ public class CreateGroupCommandTest {
 
     @Test
     public void execute_groupAcceptedByModel_addSuccessful() throws Exception {
-        CreateGroupCommandTest.ModelStubAcceptingGroupCreated modelStub = new CreateGroupCommandTest.ModelStubAcceptingGroupCreated();
+        CreateGroupCommandTest.ModelStubAcceptingGroupCreated modelStub =
+                new CreateGroupCommandTest.ModelStubAcceptingGroupCreated();
         Group validGroup = new GroupBuilder().build();
 
         CommandResult commandResult = new CreateGroupCommand(validGroup).execute(modelStub, commandHistory);

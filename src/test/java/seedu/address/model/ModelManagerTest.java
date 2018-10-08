@@ -74,7 +74,9 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).withGroup(TUT_1).withGroup(CS1010).build();
+        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
+                .withPerson(BENSON).withGroup(TUT_1)
+                .withGroup(CS1010).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

@@ -11,7 +11,7 @@ import seedu.address.model.group.Group;
 /**
  * Provides a handle for {@code GroupListPanel} containing the list of {@code GroupCard}.
  */
-public class GroupListPanelHandle extends NodeHandle<ListView<Group>>{
+public class GroupListPanelHandle extends NodeHandle<ListView<Group>> {
     public static final String GROUP_LIST_VIEW_ID = "#groupListView";
 
     private static final String CARD_PANE_ID = "#cardPane";

@@ -44,14 +44,16 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a person
         postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + ALICE.getName().fullName.replaceAll(" ", "%20"));
+        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
+                + ALICE.getName().fullName.replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());
 
         // associated web page of a group
         postNow(selectionChangedEventGroupStub);
-        URL expectedGroupUrl = new URL(BrowserPanel.SEARCH_PAGE_URL + TUT_1.getGroupName().groupName.replaceAll(" ", "%20"));
+        URL expectedGroupUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
+                + TUT_1.getGroupName().groupName.replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedGroupUrl, browserPanelHandle.getLoadedUrl());

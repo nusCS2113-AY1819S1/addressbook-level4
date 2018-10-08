@@ -73,6 +73,14 @@ public class GuiTestAssert {
     }
 
     /**
+     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
+     * in the correct order.
+     */
+    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Person> persons) {
+        assertListMatching(personListPanelHandle, persons.toArray(new Person[0]));
+    }
+
+    /**
      * Asserts that the list in {@code groupListPanelHandle} displays the details of {@code groups} correctly and
      * in the correct order.
      */
@@ -81,14 +89,6 @@ public class GuiTestAssert {
             groupListPanelHandle.navigateToCard(i);
             assertCardDisplaysGroup(groups[i], groupListPanelHandle.getGroupCardHandle(i));
         }
-    }
-
-    /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
-     * in the correct order.
-     */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Person> persons) {
-        assertListMatching(personListPanelHandle, persons.toArray(new Person[0]));
     }
 
     /**

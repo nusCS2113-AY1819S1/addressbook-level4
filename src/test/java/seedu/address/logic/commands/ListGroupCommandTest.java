@@ -29,13 +29,15 @@ public class ListGroupCommandTest {
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        assertCommandSuccess(new ListGroupCommand(), model, commandHistory, ListGroupCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListGroupCommand(), model,
+                commandHistory, ListGroupCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
         showGroupAtIndex(model, INDEX_FIRST_GROUP);
-        assertCommandSuccess(new ListGroupCommand(), model, commandHistory, ListGroupCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListGroupCommand(), model,
+                commandHistory, ListGroupCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

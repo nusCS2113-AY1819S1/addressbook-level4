@@ -31,7 +31,9 @@ public class MainWindowHandle extends StageHandle {
         return personListPanel;
     }
 
-    public GroupListPanelHandle getGroupListPanel() { return groupListPanel; }
+    public GroupListPanelHandle getGroupListPanel() {
+        return groupListPanel;
+    }
 
     public ResultDisplayHandle getResultDisplay() {
         return resultDisplay;

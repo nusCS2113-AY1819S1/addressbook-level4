@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
-import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalGroups.CS1010;
+import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalGroups.TUT_2;
 
 import java.util.Arrays;
@@ -48,9 +48,11 @@ public class UniqueGroupListTest {
     @Test
     public void contains_groupWithSameIdentityFieldsInList_returnsTrue() {
         uniqueGroupList.createGroup(TUT_1);
-        Group editedTUT_1 = new GroupBuilder(TUT_1).withGroupLocation(VALID_GROUP_LOCATION_TUT_1).withTags(VALID_GROUP_TAG_CS1010)
+        Group editedTut1 = new GroupBuilder(TUT_1)
+                .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
+                .withTags(VALID_GROUP_TAG_CS1010)
                 .build();
-        assertTrue(uniqueGroupList.contains(editedTUT_1));
+        assertTrue(uniqueGroupList.contains(editedTut1));
     }
 
     @Test
@@ -96,11 +98,13 @@ public class UniqueGroupListTest {
     @Test
     public void setGroup_editedGroupHasSameIdentity_success() {
         uniqueGroupList.createGroup(TUT_1);
-        Group editedTUT_1 = new GroupBuilder(TUT_1).withGroupLocation(VALID_GROUP_LOCATION_CS1010).withTags(VALID_GROUP_TAG_CS1010)
+        Group editedTut1 = new GroupBuilder(TUT_1)
+                .withGroupLocation(VALID_GROUP_LOCATION_CS1010)
+                .withTags(VALID_GROUP_TAG_CS1010)
                 .build();
-        uniqueGroupList.setGroup(TUT_1, editedTUT_1);
+        uniqueGroupList.setGroup(TUT_1, editedTut1);
         UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.createGroup(editedTUT_1);
+        expectedUniqueGroupList.createGroup(editedTut1);
         assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
