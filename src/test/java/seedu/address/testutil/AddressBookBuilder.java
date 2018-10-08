@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
 /**
@@ -25,6 +26,14 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withPerson(Person person) {
         addressBook.addPerson(person);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Group} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withGroup(Group group) {
+        addressBook.createGroup(group);
         return this;
     }
 

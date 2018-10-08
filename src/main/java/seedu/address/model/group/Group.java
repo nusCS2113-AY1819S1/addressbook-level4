@@ -18,6 +18,8 @@ public class Group {
     // Identity fields
     private final GroupName groupName;
     private final GroupLocation groupLocation;
+
+    //Data Fields
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -47,8 +49,8 @@ public class Group {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both groups of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two groups.
      */
     public boolean isSameGroup(Group otherGroup) {
         if (otherGroup == this) {
@@ -60,15 +62,23 @@ public class Group {
     }
 
     /**
-     * Returns true if both group exist
+     * Returns true if both groups have the same identity and data fields.
+     * This defines a stronger notion of equality between two persons.
      */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
-        } else {
+        }
+
+        if (!(other instanceof Group)) {
             return false;
         }
+
+        Group otherGroup = (Group) other;
+        return otherGroup.getGroupName().equals(getGroupName())
+                && otherGroup.getGroupLocation().equals(getGroupLocation())
+                && otherGroup.getTags().equals(getTags());
     }
 
     @Override

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Group with an missing groupName field -->
+<groups>
+    <groupLocation>E1-01-01</groupLocation>
+    <tagged>maths</tagged>
+</groups>

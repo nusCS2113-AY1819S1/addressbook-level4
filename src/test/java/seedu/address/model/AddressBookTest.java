@@ -4,7 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -20,8 +23,10 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddressBookTest {
@@ -34,6 +39,7 @@ public class AddressBookTest {
     @Test
     public void constructor() {
         assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), addressBook.getGroupList());
     }
 
     @Test
@@ -55,9 +61,24 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Group> newGroups = Arrays.asList(TUT_1);
+        AddressBookStub newData = new AddressBookStub(newPersons, newGroups);
 
         thrown.expect(DuplicatePersonException.class);
+        addressBook.resetData(newData);
+    }
+
+    @Test
+    public void resetData_withDuplicateGroups_throwsDuplicateGroupException() {
+        // Two groups with the same identity fields
+        Group editedTut1 = new GroupBuilder(TUT_1).withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
+                .withTags(VALID_GROUP_TAG_CS1010)
+                .build();
+        List<Person> newPersons = Arrays.asList(ALICE);
+        List<Group> newGroups = Arrays.asList(TUT_1, editedTut1);
+        AddressBookStub newData = new AddressBookStub(newPersons, newGroups);
+
+        thrown.expect(DuplicateGroupException.class);
         addressBook.resetData(newData);
     }
 
@@ -68,14 +89,31 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasGroup_nullGroup_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.hasGroup(null);
+    }
+
+    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasGroup(TUT_1));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
         assertTrue(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasGroup_groupInAddressBook_returnsTrue() {
+        addressBook.createGroup(TUT_1);
+        assertTrue(addressBook.hasGroup(TUT_1));
     }
 
     @Test
@@ -87,9 +125,25 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasGroup_groupWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.createGroup(TUT_1);
+        Group editedTut1 = new GroupBuilder(TUT_1)
+                .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
+                .withTags(VALID_GROUP_TAG_CS1010)
+                .build();
+        assertTrue(addressBook.hasGroup(editedTut1));
+    }
+
+    @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getPersonList().remove(0);
+    }
+
+    @Test
+    public void getGroupList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getGroupList().remove(0);
     }
 
     /**
@@ -99,8 +153,9 @@ public class AddressBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Group> groups = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<Group> groups) {
             this.persons.setAll(persons);
+            this.groups.setAll(groups);
         }
 
         @Override
