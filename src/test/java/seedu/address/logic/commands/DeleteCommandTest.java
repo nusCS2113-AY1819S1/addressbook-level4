@@ -15,7 +15,7 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.JobBook;
+import seedu.address.model.CompanyBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -27,7 +27,7 @@ import seedu.address.model.candidate.Candidate;
  */
 public class DeleteCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new JobBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -37,7 +37,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, candidateToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getCandidateBook(), new JobBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
         expectedModel.commitCandidateBook();
 
@@ -61,7 +61,7 @@ public class DeleteCommandTest {
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, candidateToDelete);
 
-        Model expectedModel = new ModelManager(model.getCandidateBook(), model.getJobBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
         expectedModel.commitCandidateBook();
         showNoPerson(expectedModel);
@@ -86,7 +86,7 @@ public class DeleteCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getCandidateBook(), model.getJobBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
         expectedModel.commitCandidateBook();
 
@@ -125,7 +125,7 @@ public class DeleteCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
-        Model expectedModel = new ModelManager(model.getCandidateBook(), new JobBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());

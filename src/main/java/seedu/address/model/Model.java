@@ -4,7 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.joboffer.JobOffer;
+import seedu.address.model.company.Company;
 
 /**
  * The API of the Model component.
@@ -12,7 +12,7 @@ import seedu.address.model.joboffer.JobOffer;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Candidate> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-    Predicate<JobOffer> PREDICATE_SHOW_ALL_JOB_OFFERS = unused -> true;
+    Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
 
     // ================================== CandidateBook functions ====================================== //
     /** Clears existing backing model and replaces with the provided new data. */
@@ -80,70 +80,70 @@ public interface Model {
      */
     void commitCandidateBook();
 
-    // ================================== JobBook functions ===================================== //
+    // ================================== CompanyBook functions ===================================== //
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetJobOfferData(ReadOnlyJobBook newData);
+    void resetCompanyData(ReadOnlyCompanyBook newData);
 
-    /** Returns the JobBook */
-    ReadOnlyJobBook getJobBook();
+    /** Returns the CompanyBook */
+    ReadOnlyCompanyBook getCompanyBook();
 
     /**
-     * Returns true if a jobOffer with the same identity as {@code jobOffer} exists in the address book.
+     * Returns true if a company with the same identity as {@code company} exists in the CompanyBook.
      */
-    boolean hasJobOffer(JobOffer jobOffer);
+    boolean hasCompany(Company company);
 
     /**
-     * Deletes the given jobOffer.
-     * The jobOffer must exist in the address book.
+     * Deletes the given company.
+     * The company must exist in the CompanyBook.
      */
-    void deleteJobOffer(JobOffer target);
+    void deleteCompany(Company target);
 
     /**
-     * Adds the given jobOffer.
-     * {@code jobOffer} must not already exist in the address book.
+     * Adds the given company.
+     * {@code company} must not already exist in the CompanyBook.
      */
-    void addJobOffer(JobOffer jobOffer);
+    void addCompany(Company company);
 
     /**
-     * Replaces the given jobOffer {@code target} with {@code editedJobOffer}.
-     * {@code target} must exist in the JobBook.
-     * The jobOffer identity of {@code editedJobOffer} must not be the same as another existing jobOffer in the
-     * address book.
+     * Replaces the given company {@code target} with {@code editedCompany}.
+     * {@code target} must exist in the CompanyBook.
+     * The company identity of {@code editedCompany} must not be the same as another existing company in the
+     * CompanyBook.
      */
-    void updateJobOffer(JobOffer target, JobOffer editedJobOffer);
+    void updateCompany(Company target, Company editedCompany);
 
-    /** Returns an unmodifiable view of the filtered jobOffer list */
-    ObservableList<JobOffer> getFilteredJobList();
+    /** Returns an unmodifiable view of the filtered company list */
+    ObservableList<Company> getFilteredCompanyList();
 
     /**
-     * Updates the filter of the filtered jobOffer list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered company list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredJobOfferList(Predicate<JobOffer> predicate);
+    void updateFilteredCompanyList(Predicate<Company> predicate);
 
     /**
-     * Returns true if the model has previous JobBook states to restore.
+     * Returns true if the model has previous CompanyBook states to restore.
      */
-    boolean canUndoJobBook();
+    boolean canUndoCompanyBook();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone CompanyBook states to restore.
      */
-    boolean canRedoJobBook();
+    boolean canRedoCompanyBook();
 
     /**
-     * Restores the model's JobBook to its previous state.
+     * Restores the model's CompanyBook to its previous state.
      */
-    void undoJobBook();
+    void undoCompanyBook();
 
     /**
-     * Restores the model's JobBook to its previously undone state.
+     * Restores the model's CompanyBook to its previously undone state.
      */
-    void redoJobBook();
+    void redoCompanyBook();
 
     /**
-     * Saves the current JobBook state for undo/redo.
+     * Saves the current CompanyBook state for undo/redo.
      */
-    void commitJobBook();
+    void commitCompanyBook();
 }

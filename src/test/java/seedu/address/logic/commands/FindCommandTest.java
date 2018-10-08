@@ -16,7 +16,7 @@ import java.util.Collections;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.JobBook;
+import seedu.address.model.CompanyBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -26,8 +26,8 @@ import seedu.address.model.candidate.NameContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
 public class FindCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new JobBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new JobBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

@@ -36,10 +36,10 @@ import org.junit.Test;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCandidateCommand;
 import seedu.address.logic.commands.EditCandidateCommand.EditPersonDescriptor;
-import seedu.address.model.candidate.Address;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 

@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.LogicState;
 import seedu.address.logic.commands.AddCandidateCommand;
+import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.commands.AddJobDetailsCommand;
 import seedu.address.logic.commands.CancelCommand;
@@ -74,6 +75,9 @@ public class RecruitBookParser {
 
         case AddJobCommand.COMMAND_WORD:
             return new AddJobCommand();
+
+        case AddCompanyCommand.COMMAND_WORD:
+            return new AddCompanyCommandParser().parse(arguments);
 
         case EditCandidateCommand.COMMAND_WORD:
             return new EditCandidateCommandParser().parse(arguments);

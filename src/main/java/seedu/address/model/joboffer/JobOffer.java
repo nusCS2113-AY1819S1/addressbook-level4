@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Gender;
+import seedu.address.model.company.CompanyName;
 
 /**
  * Represents a job offer in the job book.
@@ -13,17 +14,18 @@ import seedu.address.model.candidate.Gender;
 public class JobOffer {
 
     // Job Identity fields
-    private final Company company;
+    private final CompanyName companyName;
     private final Job job;
     private final Gender gender;
+    private final Salary salary;
 
     // Data fields
     private final AgeRange ageRange;
     private final Education education;
-    private final Salary salary;
 
-    public JobOffer(Company company, Job job, Gender gender, AgeRange ageRange, Education education, Salary salary) {
-        this.company = company;
+    public JobOffer(CompanyName companyName, Job job, Gender gender, AgeRange ageRange, Education education,
+                    Salary salary) {
+        this.companyName = companyName;
         this.job = job;
         this.ageRange = ageRange;
         this.education = education;
@@ -31,8 +33,8 @@ public class JobOffer {
         this.gender = gender;
     }
 
-    public Company getCompany() {
-        return company;
+    public CompanyName getCompanyName() {
+        return companyName;
     }
 
     public Job getJob() {
@@ -64,21 +66,22 @@ public class JobOffer {
         }
 
         return otherJobOffer != null
-                && otherJobOffer.getCompany().equals(getCompany())
+                && otherJobOffer.getCompanyName().equals(getCompanyName())
                 && otherJobOffer.getJob().equals(getJob())
-                && otherJobOffer.getGender().equals(getGender());
+                && otherJobOffer.getGender().equals(getGender())
+                && otherJobOffer.getSalary().equals(getSalary());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(company, job, gender, ageRange, education, salary);
+        return Objects.hash(companyName, job, gender, ageRange, education, salary);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("Company: ")
-                .append(getCompany())
+        builder.append("CompanyName: ")
+                .append(getCompanyName())
                 .append(" Job: ")
                 .append(getJob())
                 .append(" Gender: ")

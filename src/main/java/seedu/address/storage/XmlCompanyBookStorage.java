@@ -13,47 +13,47 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.ReadOnlyJobBook;
+import seedu.address.model.ReadOnlyCompanyBook;
 
 /**
- * A class to access JobBook data stored as an xml file on the hard disk.
+ * A class to access CompanyBook data stored as an xml file on the hard disk.
  */
-public class XmlJobBookStorage implements JobBookStorage {
+public class XmlCompanyBookStorage implements CompanyBookStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlJobBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(XmlCompanyBookStorage.class);
 
     private Path filePath;
 
-    public XmlJobBookStorage(Path filePath) {
+    public XmlCompanyBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
     @Override
-    public Path getJobBookFilePath() {
+    public Path getCompanyBookFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyJobBook> readJobBook() throws DataConversionException, IOException {
-        return readJobBook(filePath);
+    public Optional<ReadOnlyCompanyBook> readCompanyBook() throws DataConversionException, IOException {
+        return readCompanyBook(filePath);
     }
 
     /**
-     * Similar to {@link #readJobBook()}
+     * Similar to {@link #readCompanyBook()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
     @Override
-    public Optional<ReadOnlyJobBook> readJobBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyCompanyBook> readCompanyBook(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
-            logger.info("JobBook file "  + filePath + " not found");
+            logger.info("CompanyBook file "  + filePath + " not found");
             return Optional.empty();
         }
 
-        XmlSerializableJobBook xmlAddressBook = XmlFileStorage.loadJobBookFromSaveFile(filePath);
+        XmlSerializableCompanyBook xmlAddressBook = XmlFileStorage.loadCompanyBookFromSaveFile(filePath);
         try {
             return Optional.of(xmlAddressBook.toModelType());
         } catch (IllegalValueException ive) {
@@ -63,20 +63,20 @@ public class XmlJobBookStorage implements JobBookStorage {
     }
 
     @Override
-    public void saveJobBook(ReadOnlyJobBook addressBook) throws IOException {
-        saveJobBook(addressBook, filePath);
+    public void saveCompanyBook(ReadOnlyCompanyBook addressBook) throws IOException {
+        saveCompanyBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveJobBook(ReadOnlyJobBook)}
+     * Similar to {@link #saveCompanyBook(ReadOnlyCompanyBook)}
      * @param filePath location of the data. Cannot be null
      */
     @Override
-    public void saveJobBook(ReadOnlyJobBook addressBook, Path filePath) throws IOException {
+    public void saveCompanyBook(ReadOnlyCompanyBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveJobBookToFile(filePath, new XmlSerializableJobBook(addressBook));
+        XmlFileStorage.saveCompanyBookToFile(filePath, new XmlSerializableCompanyBook(addressBook));
     }
 
 }

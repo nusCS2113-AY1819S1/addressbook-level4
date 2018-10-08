@@ -21,21 +21,21 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.CandidateBook;
-import seedu.address.model.JobBook;
+import seedu.address.model.CompanyBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyCandidateBook;
-import seedu.address.model.ReadOnlyJobBook;
+import seedu.address.model.ReadOnlyCompanyBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.CandidateBookStorage;
-import seedu.address.storage.JobBookStorage;
+import seedu.address.storage.CompanyBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlCandidateBookStorage;
-import seedu.address.storage.XmlJobBookStorage;
+import seedu.address.storage.XmlCompanyBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -67,8 +67,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
         CandidateBookStorage candidateBookStorage = new XmlCandidateBookStorage(userPrefs.getCandidateBookFilePath());
-        JobBookStorage jobBookStorage = new XmlJobBookStorage(userPrefs.getJobBookFilePath());
-        storage = new StorageManager(candidateBookStorage, jobBookStorage, userPrefsStorage);
+        CompanyBookStorage companyBookStorage = new XmlCompanyBookStorage(userPrefs.getJobBookFilePath());
+        storage = new StorageManager(candidateBookStorage, companyBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -88,9 +88,9 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyCandidateBook> candidateBookOptional;
-        Optional<ReadOnlyJobBook> jobBookOptional;
+        Optional<ReadOnlyCompanyBook> jobBookOptional;
         ReadOnlyCandidateBook initialCandidateData;
-        ReadOnlyJobBook initialJobOfferData;
+        ReadOnlyCompanyBook initialJobOfferData;
 
         try {
             candidateBookOptional = storage.readCandidateBook();
@@ -106,17 +106,17 @@ public class MainApp extends Application {
             initialCandidateData = new CandidateBook();
         }
         try {
-            jobBookOptional = storage.readJobBook();
+            jobBookOptional = storage.readCompanyBook();
             if (!jobBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sampleJobBook");
             }
-            initialJobOfferData = jobBookOptional.orElseGet(SampleDataUtil::getSampleJobBook);
+            initialJobOfferData = jobBookOptional.orElseGet(SampleDataUtil::getSampleCompanyBook);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty JobBook");
-            initialJobOfferData = new JobBook();
+            logger.warning("Data file not in the correct format. Will be starting with an empty CompanyBook");
+            initialJobOfferData = new CompanyBook();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty JobBook");
-            initialJobOfferData = new JobBook();
+            logger.warning("Problem while reading from the file. Will be starting with an empty CompanyBook");
+            initialJobOfferData = new CompanyBook();
         }
 
         return new ModelManager(initialCandidateData, initialJobOfferData, userPrefs);

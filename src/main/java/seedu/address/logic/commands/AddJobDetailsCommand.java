@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE_RANGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
@@ -17,7 +17,7 @@ import seedu.address.model.joboffer.JobOffer;
 
 /**
  * Intermediate Command of AddJobCommand
- * Adds a job offer to the JobBook with the relevant fields
+ * Adds a job offer to the CompanyBook with the relevant fields
  */
 
 public class AddJobDetailsCommand extends Command {
@@ -25,14 +25,14 @@ public class AddJobDetailsCommand extends Command {
     public static final String COMMAND_WORD = "AddJobDetails";
 
     public static final String MESSAGE_USAGE = "Enter the following details of the job in the format:\n"
-            + PREFIX_COMPANY + "COMPANY "
+            + PREFIX_COMPANY_NAME + "COMPANY "
             + PREFIX_JOB + "JOB_TITLE "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_AGE_RANGE + "AGE_RANGE "
             + PREFIX_EDUCATION + "EDUCATION "
             + PREFIX_SALARY + "SALARY\n"
             + "Example: "
-            + PREFIX_COMPANY + "McDonalds "
+            + PREFIX_COMPANY_NAME + "McDonalds "
             + PREFIX_JOB + "cashier "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE_RANGE + "20-30 "
@@ -42,7 +42,7 @@ public class AddJobDetailsCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "New added job offer: %1$s";
-    public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the JobBook";
+    public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the CompanyBook";
     private final JobOffer toAdd;
 
 
@@ -54,11 +54,12 @@ public class AddJobDetailsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasJobOffer(toAdd)) {
+        /** To be implemented
+        if (model.hasCompany(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
-        model.addJobOffer(toAdd);
-        model.commitJobBook();
+        model.addCompany(toAdd);
+        model.commitCompanyBook();*/
         LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     };

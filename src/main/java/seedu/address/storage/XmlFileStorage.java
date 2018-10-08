@@ -38,9 +38,9 @@ public class XmlFileStorage {
     }
 
     /**
-     * Saves the given JobBook data to the specified file.
+     * Saves the given CompanyBook data to the specified file.
      */
-    public static void saveJobBookToFile(Path file, XmlSerializableJobBook jobBook)
+    public static void saveCompanyBookToFile(Path file, XmlSerializableCompanyBook jobBook)
             throws FileNotFoundException {
         try {
             XmlUtil.saveDataToFile(file, jobBook);
@@ -52,10 +52,10 @@ public class XmlFileStorage {
     /**
      * Returns CandidateNook in the file or an empty address book
      */
-    public static XmlSerializableJobBook loadJobBookFromSaveFile(Path file) throws DataConversionException,
+    public static XmlSerializableCompanyBook loadCompanyBookFromSaveFile(Path file) throws DataConversionException,
             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableJobBook.class);
+            return XmlUtil.getDataFromFile(file, XmlSerializableCompanyBook.class);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }
