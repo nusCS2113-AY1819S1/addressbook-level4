@@ -50,6 +50,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         cal.find75th(persons);
         cal.calculateMedian(persons);
+        cal.calculateMedian(persons);
 
     }
 

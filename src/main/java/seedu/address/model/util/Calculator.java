@@ -12,12 +12,13 @@ public class Calculator {
 
 
     public int calculateMean(UniquePersonList personList) { //calculate the mean score of a test
-        int sum =0;
-        for(int i=0; i<personList.asUnmodifiableObservableList().size(); i++ ){
+        int sum = 0;
+        for (int i = 0; i < personList.asUnmodifiableObservableList().size(); i++) {
 
-            sum += Integer.parseInt(personList.asUnmodifiableObservableList().get(i).getGrade().value); //string to integer then calculate
+            sum += Integer.parseInt(personList.
+                    asUnmodifiableObservableList().get(i).getGrade().value);//string to integer then calculate
         }
-        int mean=sum/personList.asUnmodifiableObservableList().size();
+        int mean = sum / personList.asUnmodifiableObservableList().size();
         return mean;
     }
 
@@ -42,7 +43,7 @@ public class Calculator {
 
         System.out.println("25TH\n");
         System.out.println(sortedList.get(person25th));
-        for(int i=person25th;i<sortedList.size();i++){
+        for(int i = person25th;i < sortedList.size();i++){
             theList.add(sortedList.get(i));
             System.out.println(sortedList.get(i).getName()+" " + sortedList.get(i).getGrade());
 
@@ -64,7 +65,7 @@ public class Calculator {
 
         System.out.println("75TH\n");
         System.out.println(sortedList.get(person75th));
-        for(int i=0;i<person75th;i++){
+        for(int i = 0; i < person75th; i++){
             theList.add(sortedList.get(i));
             System.out.println(sortedList.get(i).getName()+" " + sortedList.get(i).getGrade());
 
@@ -76,15 +77,15 @@ public class Calculator {
     }
 
     public int calculateMedian(UniquePersonList personList) { //calculate the mean score of a test
-        int median=0;
+        int median = 0;
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
 
         int size = sortedList.size();
-        int index=(size/2)-1;
-        if(size %2 == 0){
+        int index = ( size / 2 ) - 1;
+        if(size % 2 == 0){
             median=(Integer.parseInt(sortedList.get(index).getGrade().value)+
-                    Integer.parseInt(sortedList.get(index+1).getGrade().value))/2;
+                    Integer.parseInt(sortedList.get(index+1).getGrade().value)) / 2;
         }
         else
             median=Integer.parseInt(sortedList.get(index+1).getGrade().value);

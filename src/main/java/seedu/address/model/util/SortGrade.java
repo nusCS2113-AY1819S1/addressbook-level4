@@ -21,7 +21,7 @@ public class SortGrade { //from lowest to highest
     {
         ArrayList<Person> personList = new ArrayList<Person>();
 
-        for(int i=0; list.asUnmodifiableObservableList().size()>i;i++){
+        for(int i = 0; list.asUnmodifiableObservableList().size() > i;i++){
             personList.add(list.asUnmodifiableObservableList().get(i));
         }
 
