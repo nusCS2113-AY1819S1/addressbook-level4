@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <person>
     <name>Hans Muster</name>
+    <gender>MALE</gender>
+    <nationality>UK</nationality>
     <phone>9482424</phone>
     <email>hans@example</email>
     <address>4th street</address>

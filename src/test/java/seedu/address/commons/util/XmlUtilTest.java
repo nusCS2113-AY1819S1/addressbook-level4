@@ -42,8 +42,8 @@ public class XmlUtilTest {
     private static final String INVALID_GROUP_LOCATION = "E1-01-01*";
 
     private static final String VALID_NAME = "Hans Muster";
-    private static final String VALID_GENDER = "M";
-    private static final String VALID_NATIONALITY = "MY";
+    private static final String VALID_GENDER = "MALE";
+    private static final String VALID_NATIONALITY = "UK";
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";

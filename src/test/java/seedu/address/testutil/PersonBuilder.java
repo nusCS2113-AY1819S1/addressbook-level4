@@ -45,7 +45,6 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         grade = new Grade(DEFAULT_GRADE);
         tags = new HashSet<>();
-        grade = new Grade(DEFAULT_GRADE);
     }
 
     /**

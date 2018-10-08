@@ -78,10 +78,9 @@ public class XmlAdaptedPersonTest {
     //TODO
     //TEST FOR INVALID GENDER
     //TEST FOR NULL GENDER
-
     //TEST FOR INVALID NATIONALITY
-
     //TEST FOR NULL NATIONALITY
+
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         XmlAdaptedPerson person = new XmlAdaptedPerson(VALID_NAME, VALID_GENDER, VALID_NATIONALITY, VALID_PHONE,

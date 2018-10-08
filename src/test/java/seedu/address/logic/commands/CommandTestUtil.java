@@ -58,16 +58,14 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_ABBREVATION_FEMALE = "F";
 
     public static final String VALID_NATIONALITY_SG = "SG";
-    public static final String VALID_NATIONALITY_US = "US";
-    public static final String VALID_NATIONALITY_AU = "AU";
     public static final String VALID_NATIONALITY_CN = "CN";
 
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_MALE;
-    public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_FEMALE;
-    public static final String NATIONALITY_DESC_AMY = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_AU;
+    public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_FEMALE;
+    public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_MALE;
+    public static final String NATIONALITY_DESC_AMY = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_SG;
     public static final String NATIONALITY_DESC_BOB = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_CN;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
     public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
@@ -109,9 +107,11 @@ public class CommandTestUtil {
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
+                .withGender(VALID_GENDER_FEMALE).withNationality(VALID_NATIONALITY_SG)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
+                .withGender(VALID_GENDER_MALE).withNationality(VALID_NATIONALITY_CN)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
