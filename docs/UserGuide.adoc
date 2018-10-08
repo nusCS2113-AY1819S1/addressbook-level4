@@ -126,7 +126,6 @@ Format: `scoreFilter [filter_standard]` +
 Examples:
 
 * scorefilter 56
->>>>>>> 1b29d41f1daa8018b906db3069dfb16be5b504ac
 
 === Summary of students: 'summaryGrade'
 show highest, lowest, mean, median, 25th 75th percentiles, %passes* of certain test.
@@ -191,12 +190,8 @@ Shortcut Format: `l`
 === Editing a person : `edit` `e`
 
 Edits an existing person in the address book. +
-<<<<<<< HEAD
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
-=======
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-Shortcut Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
->>>>>>> 1b29d41f1daa8018b906db3069dfb16be5b504ac
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...` +
+Shortcut Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
