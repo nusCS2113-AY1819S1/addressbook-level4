@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -11,6 +12,10 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 public class LoginWindow extends UiPart<Stage> {
 
     private static final String FXML = "LoginWindow.fxml";
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private TextField passwordTextField;
 
     /**
      * Creates a new LoginWindow.
@@ -76,6 +81,8 @@ public class LoginWindow extends UiPart<Stage> {
     public void handleLoginClick() {
         //TODO: find a way to link up to Security Module
         System.out.println("Login Button Click Example");
+        System.out.println(usernameTextField.getText());
+        System.out.println(passwordTextField.getText());
     }
 
     /**
