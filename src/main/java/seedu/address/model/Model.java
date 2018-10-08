@@ -78,6 +78,11 @@ public interface Model {
     void commitAddressBook();
 
     /**
+     * Returns true if a club with the same identity as {@code club} exists in the address book.
+     */
+    boolean hasClub(ClubBudgetElements club);
+
+    /**
      * Adds the given club.
      * @code club} must not already exist in the address book.
      */
