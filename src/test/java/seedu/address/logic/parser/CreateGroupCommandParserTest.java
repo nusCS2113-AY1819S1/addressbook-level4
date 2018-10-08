@@ -102,6 +102,4 @@ public class CreateGroupCommandParserTest {
                         + GROUP_TAG_DESC_TUT_1 + GROUP_TAG_DESC_CS1010,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE));
     }
-
-
 }
