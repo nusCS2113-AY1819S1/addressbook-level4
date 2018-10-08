@@ -34,7 +34,6 @@ public class ParserUtilTest {
 
     private static final String INVALID_GROUP_NAME = "TUT/1";
     private static final String INVALID_GROUP_LOCATION = "E1/01/01";
-    private static final String INVALID_GROUP_TAG = "#morning";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
