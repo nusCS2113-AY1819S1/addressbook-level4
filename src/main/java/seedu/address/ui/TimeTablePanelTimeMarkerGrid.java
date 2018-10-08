@@ -22,20 +22,20 @@ import seedu.address.commons.core.LogsCenter;
  * for now just a default size
  */
 
-public class TimeTablePanelTimingGrid extends UiPart<Region> {
-    private static final String FXML = "TimeTablePanelTimingGrid.fxml";
+public class TimeTablePanelTimeMarkerGrid extends UiPart<Region> {
+    private static final String FXML = "TimeTablePanelTimeMarkerGrid.fxml";
     private static final int DEFAULT_START_HOUR = 10;
-    private static final int DEFAULT_END_HOUR = 18;
+    private static final int DEFAULT_END_HOUR = 19;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     @FXML
     private GridPane timingGrid;
 
-    public TimeTablePanelTimingGrid(int startHour, int endHour) {
+    public TimeTablePanelTimeMarkerGrid(int startHour, int endHour) {
         super(FXML);
 
-        // To prevent triggering events for typing inside the TimeTablePanelTimingGrid
+        // To prevent triggering events for typing inside the TimeTablePanelTimeMarkerGrid
         getRoot().setOnKeyPressed(Event::consume);
 
         //TODO ALEXIS: resizer, add, init functions.
@@ -43,7 +43,7 @@ public class TimeTablePanelTimingGrid extends UiPart<Region> {
         populateTimings(startHour, endHour);
     }
 
-    public TimeTablePanelTimingGrid() {
+    public TimeTablePanelTimeMarkerGrid() {
         this(DEFAULT_START_HOUR, DEFAULT_END_HOUR);
     }
 
@@ -51,7 +51,7 @@ public class TimeTablePanelTimingGrid extends UiPart<Region> {
      * Populates the timings on the top row from 1000 to 1800
      */
     private void populateTimings(int startHour, int endHour) {
-        for (int currHour = startHour, col = 1; currHour < endHour; currHour++, col += 2) {
+        for (int currHour = startHour, col = 0; currHour < endHour; currHour++, col += 2) {
             Label hourLabel = new Label(Integer.toString(currHour));
             GridPane.setHalignment(hourLabel, HPos.RIGHT);
             GridPane.setValignment(hourLabel, VPos.BOTTOM);

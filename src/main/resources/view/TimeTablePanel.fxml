@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 
-<?import javafx.scene.layout.VBox?>
-<StackPane styleClass="timetable-pane" xmlns:fx="http://javafx.com/fxml/1" minWidth="800" minHeight="600">
-  <VBox>
-    <StackPane fx:id="timeTablePanelTimingGridPlaceholder" SplitPane.resizableWithParent="false">
-      <padding>
-        <Insets top="10" right="10" bottom="0" left="10" />
-      </padding>
-    </StackPane>
+<BorderPane minHeight="600" minWidth="800" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+  <left>
+    <GridPane fx:id="timeTablePanelDayMarkerGridPlaceholder" maxWidth="60.0" minWidth="60.0" prefWidth="60.0">
 
-    <StackPane fx:id="timeTablePanelMainGridPlaceholder">
-      <padding>
-        <Insets top="0" right="10" bottom="10" left="10" />
-      </padding>
-    </StackPane>
-  </VBox>
-</StackPane>
+    </GridPane>
+  </left>
+
+  <top>
+    <GridPane fx:id="timeTablePanelTimeMarkerGridPlaceholder" maxWidth="Infinity">
+
+    </GridPane>
+  </top>
+
+  <center>
+    <GridPane fx:id="timeTablePanelMainGridPlaceholder" maxWidth="Infinity" minWidth="0" prefWidth="900">
+
+    </GridPane>
+  </center>
+</BorderPane>

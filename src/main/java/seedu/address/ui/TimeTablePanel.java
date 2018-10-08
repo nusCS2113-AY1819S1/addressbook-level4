@@ -6,8 +6,8 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.StackPane;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.TimeTable;
@@ -20,7 +20,7 @@ import seedu.address.model.person.TimeTable;
  *
  * TimeTablePanel
  *  |-PanelTop (just a divider in javafx )
- *  |   |-TimeTablePanelTimingGrid (invisible grid to hold the timing objects)
+ *  |   |-TimeTablePanelTimeMarkerGrid (invisible grid to hold the timing objects)
  *  |       |-*TimeTablePanelTimingMarker (visually the timing markers at the top of the grid; eg: 0900 or 1500)
  *  |
  *  |-PanelBottom (just a divider in javafx )
@@ -36,20 +36,22 @@ import seedu.address.model.person.TimeTable;
  */
 
 public class TimeTablePanel extends UiPart<Region> {
-
     private static final String FXML = "TimeTablePanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
-    private TimeTablePanelTimingGrid timeTablePanelTimingGrid;
-
+    private TimeTablePanelTimeMarkerGrid timeTablePanelTimeMarkerGrid;
+    private TimeTablePanelDayMarkerGrid timeTablePanelDayMarkerGrid;
     private TimeTablePanelMainGrid timeTablePanelMainGrid;
 
     @FXML
-    private StackPane timeTablePanelTimingGridPlaceholder;
+    private GridPane timeTablePanelTimeMarkerGridPlaceholder;
 
     @FXML
-    private StackPane timeTablePanelMainGridPlaceholder;
+    private GridPane timeTablePanelDayMarkerGridPlaceholder;
+
+    @FXML
+    private GridPane timeTablePanelMainGridPlaceholder;
 
     public TimeTablePanel() {
         super(FXML);
@@ -59,7 +61,6 @@ public class TimeTablePanel extends UiPart<Region> {
 
         fillInnerParts();
 
-        loadTimeTable(); // TODO ALEXIS: does nothing now
         registerAsAnEventHandler(this);
     }
 
@@ -67,9 +68,11 @@ public class TimeTablePanel extends UiPart<Region> {
      * Fills up all the placeholders of this TimeTablePanel.
      */
     void fillInnerParts() {
-        //TODO ALEXIS
-        timeTablePanelTimingGrid = new TimeTablePanelTimingGrid();
-        timeTablePanelTimingGridPlaceholder.getChildren().add(timeTablePanelTimingGrid.getRoot());
+        timeTablePanelTimeMarkerGrid = new TimeTablePanelTimeMarkerGrid();
+        timeTablePanelTimeMarkerGridPlaceholder.getChildren().add(timeTablePanelTimeMarkerGrid.getRoot());
+
+        timeTablePanelDayMarkerGrid = new TimeTablePanelDayMarkerGrid();
+        timeTablePanelDayMarkerGridPlaceholder.getChildren().add(timeTablePanelDayMarkerGrid.getRoot());
 
         timeTablePanelMainGrid = new TimeTablePanelMainGrid();
         timeTablePanelMainGridPlaceholder.getChildren().add(timeTablePanelMainGrid.getRoot());
