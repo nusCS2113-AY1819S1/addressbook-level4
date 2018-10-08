@@ -56,8 +56,8 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
 
-    public XmlAdaptedPerson(String name, String gender, String nationality, String phone
-            , String email, String address, String grade, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String gender, String nationality, String phone,
+                            String email, String address, String grade, List<XmlAdaptedTag> tagged) {
 
         this.name = name;
         this.gender = gender;
