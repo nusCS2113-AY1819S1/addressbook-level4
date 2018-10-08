@@ -29,10 +29,10 @@ public class SortGrade { //from lowest to highest
         int i;
         int j;
         Person temp;
-        boolean swapped;
+       // boolean swapped;
         for (i = 0; i < n - 1; i++)
         {
-            swapped = false;
+            //swapped = false;
             for (j = 0; j < n - i - 1; j++)
             {
                 if (Integer.parseInt(personList.get(j).getGrade().value) >
@@ -44,7 +44,7 @@ public class SortGrade { //from lowest to highest
                     personList.set(j,personList.get(j+1));
 
                     personList.set(j+1,temp);
-                    swapped = true;
+                   // swapped = true;
                 }
             }
 
