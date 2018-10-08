@@ -87,6 +87,7 @@ public class LoginWindow extends UiPart<Stage> {
         System.out.println("Login Button Click Example");
         System.out.println(usernameTextField.getText());
         System.out.println(passwordTextField.getText());
+        user.login(usernameTextField.getText(), passwordTextField.getText());
     }
 
     /**

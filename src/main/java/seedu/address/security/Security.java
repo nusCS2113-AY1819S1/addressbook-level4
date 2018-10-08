@@ -12,7 +12,7 @@ public class Security {
 
 
     public Security() {
-        this.isAuthenticated = true; //Test for now
+        this.isAuthenticated = false; //Test for now
         this.username = "test";
         this.password = "test";
     }
@@ -32,6 +32,7 @@ public class Security {
             this.isAuthenticated = true;
             //TODO Implement Person class that this is linked to:
             //userPerson = user1;
+            System.out.println("Correct Password");
         } else {
             //TODO Raise and exception to prompt user to type again
             System.out.println("Incorrect password");
