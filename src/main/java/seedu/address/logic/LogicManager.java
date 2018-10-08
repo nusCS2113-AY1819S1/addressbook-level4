@@ -19,6 +19,9 @@ import seedu.address.model.candidate.Candidate;
  * The main LogicManager of the app.
  */
 public class LogicManager extends ComponentManager implements Logic {
+
+    private static LogicState state = new LogicState("primary");
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -36,7 +39,7 @@ public class LogicManager extends ComponentManager implements Logic {
             throws CommandException, ParseException, IOException, GeneralSecurityException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = recruitBookParser.parseCommand(commandText);
+            Command command = recruitBookParser.parseCommand(commandText, state);
             return command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -45,11 +48,15 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public ObservableList<Candidate> getFilteredPersonList() {
-        return model.getFilteredPersonList();
+        return model.getFilteredCandidateList();
     }
 
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
+    }
+
+    public static void setLogicState(String newState) {
+        state = new LogicState(newState);
     }
 }

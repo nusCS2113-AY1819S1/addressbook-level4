@@ -19,22 +19,22 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.commands.EditCandidateCommand;
+import seedu.address.logic.commands.EditCandidateCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Parses input arguments and creates a new EditCommand object
+ * Parses input arguments and creates a new EditCandidateCommand object
  */
-public class EditCommandParser implements Parser<EditCommand> {
+public class EditCandidateCommandParser implements Parser<EditCandidateCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditCommand
-     * and returns an EditCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditCandidateCommand
+     * and returns an EditCandidateCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditCommand parse(String args) throws ParseException {
+    public EditCandidateCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_GENDER, PREFIX_AGE, PREFIX_PHONE, PREFIX_EMAIL,
@@ -45,7 +45,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCandidateCommand.MESSAGE_USAGE),
+                    pe);
         }
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
@@ -79,10 +80,10 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(EditCandidateCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCandidateCommand(index, editPersonDescriptor);
     }
 
     /**

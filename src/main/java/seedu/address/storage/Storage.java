@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.CandidateBookChangedEvent;
+import seedu.address.commons.events.model.CompanyBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyCandidateBook;
+import seedu.address.model.ReadOnlyCompanyBook;
 import seedu.address.model.UserPrefs;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage {
+public interface Storage extends CandidateBookStorage, CompanyBookStorage, UserPrefsStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -21,19 +23,41 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
-    @Override
-    Path getAddressBookFilePath();
+    // ================ CandidateBook methods ==============================
 
     @Override
-    Optional<ReadOnlyCandidateBook> readAddressBook() throws DataConversionException, IOException;
+    Path getCandidateBookFilePath();
 
     @Override
-    void saveAddressBook(ReadOnlyCandidateBook addressBook) throws IOException;
+    Optional<ReadOnlyCandidateBook> readCandidateBook() throws DataConversionException, IOException;
+
+
+    @Override
+    void saveCandidateBook(ReadOnlyCandidateBook candidateBook) throws IOException;
+
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the Candidate Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleCandidateBookChangedEvent(CandidateBookChangedEvent event);
+
+    // ================ CompanyBook methods ==============================
+
+    @Override
+    Path getCompanyBookFilePath();
+
+    @Override
+    Optional<ReadOnlyCompanyBook> readCompanyBook() throws DataConversionException, IOException;
+
+    @Override
+    void saveCompanyBook(ReadOnlyCompanyBook jobBook) throws IOException;
+
+    /**
+     * Saves the current version of the Job Book to the hard disk.
+     *   Creates the data file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleCompanyBookChangedEvent(CompanyBookChangedEvent event);
 }

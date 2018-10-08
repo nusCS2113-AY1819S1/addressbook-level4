@@ -21,17 +21,21 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.CandidateBook;
+import seedu.address.model.CompanyBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyCandidateBook;
+import seedu.address.model.ReadOnlyCompanyBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.CandidateBookStorage;
+import seedu.address.storage.CompanyBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlCandidateBookStorage;
+import seedu.address.storage.XmlCompanyBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -62,8 +66,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlCandidateBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        CandidateBookStorage candidateBookStorage = new XmlCandidateBookStorage(userPrefs.getCandidateBookFilePath());
+        CompanyBookStorage companyBookStorage = new XmlCompanyBookStorage(userPrefs.getJobBookFilePath());
+        storage = new StorageManager(candidateBookStorage, companyBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -82,23 +87,39 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyCandidateBook> addressBookOptional;
-        ReadOnlyCandidateBook initialData;
+        Optional<ReadOnlyCandidateBook> candidateBookOptional;
+        Optional<ReadOnlyCompanyBook> jobBookOptional;
+        ReadOnlyCandidateBook initialCandidateData;
+        ReadOnlyCompanyBook initialJobOfferData;
+
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            candidateBookOptional = storage.readCandidateBook();
+            if (!candidateBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample CandidateBook");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialCandidateData = candidateBookOptional.orElseGet(SampleDataUtil::getSampleCandidateBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty CandidateBook");
-            initialData = new CandidateBook();
+            initialCandidateData = new CandidateBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty CandidateBook");
-            initialData = new CandidateBook();
+            initialCandidateData = new CandidateBook();
+        }
+        try {
+            jobBookOptional = storage.readCompanyBook();
+            if (!jobBookOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sampleJobBook");
+            }
+            initialJobOfferData = jobBookOptional.orElseGet(SampleDataUtil::getSampleCompanyBook);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty CompanyBook");
+            initialJobOfferData = new CompanyBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty CompanyBook");
+            initialJobOfferData = new CompanyBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialCandidateData, initialJobOfferData, userPrefs);
     }
 
     private void initLogging(Config config) {

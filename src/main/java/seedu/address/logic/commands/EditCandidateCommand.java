@@ -25,24 +25,24 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Age;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Education;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
-import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.Salary;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
+import seedu.address.model.joboffer.Job;
+import seedu.address.model.joboffer.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing candidate in the address book.
  */
-public class EditCommand extends Command {
+public class EditCandidateCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editc";
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the candidate identified "
@@ -74,7 +74,7 @@ public class EditCommand extends Command {
      * @param index of the candidate in the filtered candidate list to edit
      * @param editPersonDescriptor details to edit the candidate with
      */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
+    public EditCandidateCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
         requireNonNull(index);
         requireNonNull(editPersonDescriptor);
 
@@ -85,7 +85,7 @@ public class EditCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Candidate> lastShownList = model.getFilteredPersonList();
+        List<Candidate> lastShownList = model.getFilteredCandidateList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -94,13 +94,13 @@ public class EditCommand extends Command {
         Candidate candidateToEdit = lastShownList.get(index.getZeroBased());
         Candidate editedCandidate = createEditedPerson(candidateToEdit, editPersonDescriptor);
 
-        if (!candidateToEdit.isSamePerson(editedCandidate) && model.hasPerson(editedCandidate)) {
+        if (!candidateToEdit.isSamePerson(editedCandidate) && model.hasCandidate(editedCandidate)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updatePerson(candidateToEdit, editedCandidate);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        model.commitAddressBook();
+        model.updateCandidate(candidateToEdit, editedCandidate);
+        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitCandidateBook();
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate));
     }
 
@@ -134,12 +134,12 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof EditCandidateCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        EditCandidateCommand e = (EditCandidateCommand) other;
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }

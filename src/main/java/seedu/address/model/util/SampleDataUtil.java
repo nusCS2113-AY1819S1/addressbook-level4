@@ -5,17 +5,25 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.CandidateBook;
+import seedu.address.model.CompanyBook;
 import seedu.address.model.ReadOnlyCandidateBook;
-import seedu.address.model.candidate.Address;
+import seedu.address.model.ReadOnlyCompanyBook;
 import seedu.address.model.candidate.Age;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Education;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
-import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.Salary;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
+import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyName;
+import seedu.address.model.joboffer.AgeRange;
+import seedu.address.model.joboffer.Job;
+import seedu.address.model.joboffer.JobOffer;
+import seedu.address.model.joboffer.Salary;
+import seedu.address.model.joboffer.UniqueJobList;
+
 import seedu.address.model.tag.Tag;
 
 /**
@@ -24,7 +32,7 @@ import seedu.address.model.tag.Tag;
 
 
 public class SampleDataUtil {
-    public static Candidate[] getSamplePersons() {
+    public static Candidate[] getSampleCandidates() {
         return new Candidate[] {
             new Candidate(new Name("Alex Yeoh"), new Gender("M"), new Age ("20"), new Phone("87438807"),
                     new Email("alexyeoh@example.com"), new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -54,12 +62,39 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyCandidateBook getSampleAddressBook() {
+    private static UniqueJobList getSampleJobList() {
+        UniqueJobList jobList = new UniqueJobList();
+        jobList.add(new JobOffer(new CompanyName("Mcdonalds"), new Job("Cashier"), new Gender("M"),
+                new AgeRange("20-30"), new Education("O levels"),
+                new Salary("1000")));
+        jobList.add(new JobOffer(new CompanyName("KFC"), new Job("Cook"), new Gender("F"),
+                new AgeRange("20-30"), new Education("O levels"),
+                new Salary("1000")));
+        return jobList;
+    }
+
+    public static Company[] getSampleCompanies() {
+        return new Company[]{
+            new Company(new CompanyName("Mcdonalds"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+            new Email("mcdonalds@gmail.com"), new Phone("61116222"), getSampleJobList())
+        };
+    }
+
+
+    public static ReadOnlyCandidateBook getSampleCandidateBook() {
         CandidateBook sampleAb = new CandidateBook();
-        for (Candidate sampleCandidate : getSamplePersons()) {
+        for (Candidate sampleCandidate : getSampleCandidates()) {
             sampleAb.addPerson(sampleCandidate);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyCompanyBook getSampleCompanyBook() {
+        CompanyBook sampleCb = new CompanyBook();
+        for (Company sampleJobOffer : getSampleCompanies()) {
+            sampleCb.addCompany(sampleJobOffer);
+        }
+        return sampleCb;
     }
 
     /**

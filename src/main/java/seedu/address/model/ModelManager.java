@@ -11,8 +11,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.CandidateBookChangedEvent;
+import seedu.address.commons.events.model.CompanyBookChangedEvent;
 import seedu.address.model.candidate.Candidate;
+import seedu.address.model.company.Company;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -20,113 +22,28 @@ import seedu.address.model.candidate.Candidate;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedCandidateBook versionedAddressBook;
+    private final VersionedCandidateBook versionedCandidateBook;
+    private final VersionedCompanyBook versionedJobBook;
     private final FilteredList<Candidate> filteredCandidates;
+    private final FilteredList<Company> filteredCompanies;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given candidateBook and userPrefs.
      */
-    public ModelManager(ReadOnlyCandidateBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyCandidateBook candidateBook, ReadOnlyCompanyBook jobBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(candidateBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + candidateBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedCandidateBook(addressBook);
-        filteredCandidates = new FilteredList<>(versionedAddressBook.getCandidatelist());
+        versionedCandidateBook = new VersionedCandidateBook(candidateBook);
+        versionedJobBook = new VersionedCompanyBook(jobBook);
+        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
+        filteredCompanies = new FilteredList<>(versionedJobBook.getCompanyList());
     }
 
     public ModelManager() {
-        this(new CandidateBook(), new UserPrefs());
-    }
-
-    @Override
-    public void resetData(ReadOnlyCandidateBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public ReadOnlyCandidateBook getAddressBook() {
-        return versionedAddressBook;
-    }
-
-    /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
-    }
-
-    @Override
-    public boolean hasPerson(Candidate candidate) {
-        requireNonNull(candidate);
-        return versionedAddressBook.hasPerson(candidate);
-    }
-
-    @Override
-    public void deletePerson(Candidate target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void addPerson(Candidate candidate) {
-        versionedAddressBook.addPerson(candidate);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void updatePerson(Candidate target, Candidate editedCandidate) {
-        requireAllNonNull(target, editedCandidate);
-
-        versionedAddressBook.updatePerson(target, editedCandidate);
-        indicateAddressBookChanged();
-    }
-
-    //=========== Filtered Candidate List Accessors =============================================================
-
-    /**
-     * Returns an unmodifiable view of the list of {@code Candidate} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Candidate> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredCandidates);
-    }
-
-    @Override
-    public void updateFilteredPersonList(Predicate<Candidate> predicate) {
-        requireNonNull(predicate);
-        filteredCandidates.setPredicate(predicate);
-    }
-
-    //=========== Undo/Redo =================================================================================
-
-    @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
-    }
-
-    @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
-    }
-
-    @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+        this(new CandidateBook(), new CompanyBook(), new UserPrefs());
     }
 
     @Override
@@ -143,8 +60,193 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredCandidates.equals(other.filteredCandidates);
+        return versionedCandidateBook.equals(other.versionedCandidateBook)
+                && filteredCandidates.equals(other.filteredCandidates)
+                && versionedJobBook.equals(other.versionedJobBook)
+                && filteredCompanies.equals(other.filteredCompanies);
+    }
+
+    // ================================== CandidateBook functions ====================================== //
+
+    @Override
+    public void resetCandidateData(ReadOnlyCandidateBook newData) {
+        versionedCandidateBook.resetData(newData);
+        indicateCandidateBookChanged();
+    }
+
+    @Override
+    public ReadOnlyCandidateBook getCandidateBook() {
+        return versionedCandidateBook;
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateCandidateBookChanged() {
+        raise(new CandidateBookChangedEvent(versionedCandidateBook));
+    }
+
+    @Override
+    public boolean hasCandidate(Candidate candidate) {
+        requireNonNull(candidate);
+        return versionedCandidateBook.hasPerson(candidate);
+    }
+
+    @Override
+    public void deleteCandidate(Candidate target) {
+        versionedCandidateBook.removePerson(target);
+        indicateCandidateBookChanged();
+    }
+
+    @Override
+    public void addCandidate(Candidate candidate) {
+        versionedCandidateBook.addPerson(candidate);
+        updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateCandidateBookChanged();
+    }
+
+    @Override
+    public void updateCandidate(Candidate target, Candidate editedCandidate) {
+        requireAllNonNull(target, editedCandidate);
+
+        versionedCandidateBook.updatePerson(target, editedCandidate);
+        indicateCandidateBookChanged();
+    }
+
+    //=========== Filtered Candidate List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Candidate} backed by the internal list of
+     * {@code versionedCandidateBook}
+     */
+    @Override
+    public ObservableList<Candidate> getFilteredCandidateList() {
+        return FXCollections.unmodifiableObservableList(filteredCandidates);
+    }
+
+    @Override
+    public void updateFilteredCandidateList(Predicate<Candidate> predicate) {
+        requireNonNull(predicate);
+        filteredCandidates.setPredicate(predicate);
+    }
+
+    //=========== Undo/Redo =================================================================================
+
+    @Override
+    public boolean canUndoCandidateBook() {
+        return versionedCandidateBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoCandidateBook() {
+        return versionedCandidateBook.canRedo();
+    }
+
+    @Override
+    public void undoCandidateBook() {
+        versionedCandidateBook.undo();
+        indicateCandidateBookChanged();
+    }
+
+    @Override
+    public void redoCandidateBook() {
+        versionedCandidateBook.redo();
+        indicateCandidateBookChanged();
+    }
+
+    @Override
+    public void commitCandidateBook() {
+        versionedCandidateBook.commit();
+    }
+
+
+    // ================================== CompanyBook functions ===================================== //
+
+    @Override
+    public void resetCompanyData(ReadOnlyCompanyBook newData) {
+        versionedJobBook.resetData(newData);
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public ReadOnlyCompanyBook getCompanyBook() {
+        return versionedJobBook;
+    }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateCompanyBookChanged() {
+        raise(new CompanyBookChangedEvent(versionedJobBook));
+    }
+
+    @Override
+    public boolean hasCompany(Company jobOffer) {
+        requireNonNull(jobOffer);
+        return versionedJobBook.hasCompany(jobOffer);
+    }
+
+    @Override
+    public void deleteCompany(Company target) {
+        versionedJobBook.removeCompany(target);
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void addCompany(Company jobOffer) {
+        versionedJobBook.addCompany(jobOffer);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void updateCompany(Company target, Company editedCompany) {
+        requireAllNonNull(target, editedCompany);
+
+        versionedJobBook.updateCompany(target, editedCompany);
+        indicateCompanyBookChanged();
+    }
+
+    //=========== Filtered Company List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
+     * {@code versionedJobBook}
+     */
+    @Override
+    public ObservableList<Company> getFilteredCompanyList() {
+        return FXCollections.unmodifiableObservableList(filteredCompanies);
+    }
+
+    @Override
+    public void updateFilteredCompanyList(Predicate<Company> predicate) {
+        requireNonNull(predicate);
+        filteredCompanies.setPredicate(predicate);
+    }
+
+    //=========== Undo/Redo =================================================================================
+
+    @Override
+    public boolean canUndoCompanyBook() {
+        return versionedJobBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoCompanyBook() {
+        return versionedJobBook.canRedo();
+    }
+
+    @Override
+    public void undoCompanyBook() {
+        versionedJobBook.undo();
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void redoCompanyBook() {
+        versionedJobBook.redo();
+        indicateCompanyBookChanged();
+    }
+
+    @Override
+    public void commitCompanyBook() {
+        versionedJobBook.commit();
     }
 
 }

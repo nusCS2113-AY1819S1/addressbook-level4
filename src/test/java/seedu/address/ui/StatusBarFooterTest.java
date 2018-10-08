@@ -20,7 +20,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.CandidateBookChangedEvent;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class StatusBarFooterTest extends GuiUnitTest {
@@ -28,7 +28,7 @@ public class StatusBarFooterTest extends GuiUnitTest {
     private static final Path STUB_SAVE_LOCATION = Paths.get("Stub");
     private static final Path RELATIVE_PATH = Paths.get(".");
 
-    private static final AddressBookChangedEvent EVENT_STUB = new AddressBookChangedEvent(
+    private static final CandidateBookChangedEvent EVENT_STUB = new CandidateBookChangedEvent(
             new AddressBookBuilder().withPerson(ALICE).build());
 
     private static final int INITIAL_TOTAL_PERSONS = 0;

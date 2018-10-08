@@ -25,24 +25,24 @@ public class ModelManagerTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        modelManager.hasPerson(null);
+        modelManager.hasCandidate(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasPerson(ALICE));
+        assertFalse(modelManager.hasCandidate(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        modelManager.addPerson(ALICE);
-        assertTrue(modelManager.hasPerson(ALICE));
+        modelManager.addCandidate(ALICE);
+        assertTrue(modelManager.hasCandidate(ALICE));
     }
 
     @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        modelManager.getFilteredPersonList().remove(0);
+        modelManager.getFilteredCandidateList().remove(0);
     }
 
     @Test
@@ -52,8 +52,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(candidateBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(candidateBook, userPrefs);
+        modelManager = new ModelManager(candidateBook, new CompanyBook(), userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(candidateBook, new CompanyBook(), userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -66,19 +66,19 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different candidateBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentCandidateBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentCandidateBook, new CompanyBook(), userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
-        modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(candidateBook, userPrefs)));
+        modelManager.updateFilteredCandidateList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
+        assertFalse(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
-        differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(candidateBook, differentUserPrefs)));
+        differentUserPrefs.setCandidateBookFilePath(Paths.get("differentFilePath"));
+        assertTrue(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), differentUserPrefs)));
     }
 }

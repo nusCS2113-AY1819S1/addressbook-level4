@@ -18,7 +18,7 @@ import seedu.address.model.ReadOnlyCandidateBook;
 /**
  * A class to access CandidateBook data stored as an xml file on the hard disk.
  */
-public class XmlCandidateBookStorage implements AddressBookStorage {
+public class XmlCandidateBookStorage implements CandidateBookStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlCandidateBookStorage.class);
 
@@ -28,21 +28,21 @@ public class XmlCandidateBookStorage implements AddressBookStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getCandidateBookFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyCandidateBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyCandidateBook> readCandidateBook() throws DataConversionException, IOException {
+        return readCandidateBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readCandidateBook()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyCandidateBook> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyCandidateBook> readCandidateBook(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
@@ -51,7 +51,7 @@ public class XmlCandidateBookStorage implements AddressBookStorage {
             return Optional.empty();
         }
 
-        XmlSerializableCandidateBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableCandidateBook xmlAddressBook = XmlFileStorage.loadCandidateBookFromSaveFile(filePath);
         try {
             return Optional.of(xmlAddressBook.toModelType());
         } catch (IllegalValueException ive) {
@@ -61,20 +61,20 @@ public class XmlCandidateBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyCandidateBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveCandidateBook(ReadOnlyCandidateBook addressBook) throws IOException {
+        saveCandidateBook(addressBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyCandidateBook)}
+     * Similar to {@link #saveCandidateBook(ReadOnlyCandidateBook)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyCandidateBook addressBook, Path filePath) throws IOException {
+    public void saveCandidateBook(ReadOnlyCandidateBook addressBook, Path filePath) throws IOException {
         requireNonNull(addressBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableCandidateBook(addressBook));
+        XmlFileStorage.saveCandidateBookToFile(filePath, new XmlSerializableCandidateBook(addressBook));
     }
 
 }

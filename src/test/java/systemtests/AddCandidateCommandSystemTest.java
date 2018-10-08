@@ -47,11 +47,11 @@ import seedu.address.logic.commands.AddCandidateCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -80,7 +80,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(toAdd);
+        model.addCandidate(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
@@ -227,7 +227,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
      */
     private void assertCommandSuccess(String command, Candidate toAdd) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(toAdd);
+        expectedModel.addCandidate(toAdd);
         String expectedResultMessage = String.format(AddCandidateCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);

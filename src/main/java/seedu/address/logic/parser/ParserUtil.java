@@ -9,15 +9,17 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Age;
 import seedu.address.model.candidate.Education;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
-import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.Salary;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
+import seedu.address.model.company.CompanyName;
+import seedu.address.model.joboffer.AgeRange;
+import seedu.address.model.joboffer.Job;
+import seedu.address.model.joboffer.Salary;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -192,6 +194,7 @@ public class ParserUtil {
         return new Tag(trimmedTag);
     }
 
+
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
      */
@@ -203,4 +206,35 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String company} into a {@code CompanyName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code company} is invalid.
+     */
+    public static CompanyName parseCompanyName(String company) throws ParseException {
+        requireNonNull(company);
+        String trimmedCompany = company.trim();
+        if (!CompanyName.isValidCompanyName(trimmedCompany)) {
+            throw new ParseException(CompanyName.MESSAGE_COMPANY_CONSTRAINTS);
+        }
+        return new CompanyName(trimmedCompany);
+    }
+
+    /**
+     * Parses a {@code String ageRange} into a {@code AgeRange}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code ageRange} is invalid.
+     */
+    public static AgeRange parseAgeRange (String ageRange) throws ParseException {
+        requireNonNull(ageRange);
+        String trimmedAgeRange = ageRange.trim();
+        if (!AgeRange.isValidAgeRange(trimmedAgeRange)) {
+            throw new ParseException(AgeRange.MESSAGE_AGE_RANGE_CONSTRAINTS);
+        }
+        return new AgeRange(trimmedAgeRange);
+    }
+
 }

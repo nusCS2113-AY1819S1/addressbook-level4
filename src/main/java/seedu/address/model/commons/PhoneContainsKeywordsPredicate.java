@@ -1,9 +1,10 @@
-package seedu.address.model.candidate;
+package seedu.address.model.commons;
 
 import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.model.candidate.Candidate;
 
 /**
  * Tests that a {@code Candidate}'s {@code Phone} matches any of the keywords given.

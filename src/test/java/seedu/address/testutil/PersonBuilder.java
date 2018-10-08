@@ -3,16 +3,16 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Age;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.candidate.Education;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
-import seedu.address.model.candidate.Job;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
-import seedu.address.model.candidate.Salary;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
+import seedu.address.model.joboffer.Job;
+import seedu.address.model.joboffer.Salary;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 

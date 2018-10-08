@@ -64,7 +64,7 @@ public class TestApp extends MainApp {
         double x = Screen.getPrimary().getVisualBounds().getMinX();
         double y = Screen.getPrimary().getVisualBounds().getMinY();
         userPrefs.updateLastUsedGuiSetting(new GuiSettings(600.0, 600.0, (int) x, (int) y));
-        userPrefs.setAddressBookFilePath(saveFileLocation);
+        userPrefs.setCandidateBookFilePath(saveFileLocation);
         return userPrefs;
     }
 
@@ -73,7 +73,7 @@ public class TestApp extends MainApp {
      */
     public CandidateBook readStorageAddressBook() {
         try {
-            return new CandidateBook(storage.readAddressBook().get());
+            return new CandidateBook(storage.readCandidateBook().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the CandidateBook format.", dce);
         } catch (IOException ioe) {
@@ -85,15 +85,15 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getCandidateBookFilePath();
     }
 
     /**
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), new UserPrefs());
-        ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
+        Model copy = new ModelManager((model.getCandidateBook()), model.getCompanyBook(), new UserPrefs());
+        ModelHelper.setFilteredList(copy, model.getFilteredCandidateList());
         return copy;
     }
 

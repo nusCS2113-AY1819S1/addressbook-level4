@@ -14,7 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.CandidateBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.CandidateBook;
 import seedu.address.model.ReadOnlyCandidateBook;
@@ -32,9 +32,10 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlCandidateBookStorage addressBookStorage = new XmlCandidateBookStorage(getTempFilePath("ab"));
+        XmlCandidateBookStorage candidateBookStorage = new XmlCandidateBookStorage(getTempFilePath("ab"));
+        XmlCompanyBookStorage jobBookStorage = new XmlCompanyBookStorage(getTempFilePath("cd"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(candidateBookStorage, jobBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -64,22 +65,23 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link XmlCandidateBookStorageTest} class.
          */
         CandidateBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyCandidateBook retrieved = storageManager.readAddressBook().get();
+        storageManager.saveCandidateBook(original);
+        ReadOnlyCandidateBook retrieved = storageManager.readCandidateBook().get();
         assertEquals(original, new CandidateBook(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getCandidateBookFilePath());
     }
 
     @Test
     public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlCandidateBookStorageExceptionThrowingStub(Paths.get("dummy")),
-                                             new JsonUserPrefsStorage(Paths.get("dummy")));
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new CandidateBook()));
+                                            new XmlCompanyBookStorage(getTempFilePath("cd")),
+                                            new JsonUserPrefsStorage(Paths.get("dummy")));
+        storage.handleCandidateBookChangedEvent(new CandidateBookChangedEvent(new CandidateBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -94,7 +96,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyCandidateBook addressBook, Path filePath) throws IOException {
+        public void saveCandidateBook(ReadOnlyCandidateBook addressBook, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

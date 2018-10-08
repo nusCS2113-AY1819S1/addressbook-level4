@@ -84,8 +84,8 @@ public class CommandTestUtil {
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCandidateCommand.EditPersonDescriptor DESC_AMY;
+    public static final EditCandidateCommand.EditPersonDescriptor DESC_BOB;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -126,8 +126,8 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        CandidateBook expectedCandidateBook = new CandidateBook(actualModel.getAddressBook());
-        List<Candidate> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
+        CandidateBook expectedCandidateBook = new CandidateBook(actualModel.getCandidateBook());
+        List<Candidate> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCandidateList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -136,8 +136,8 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (IOException | GeneralSecurityException | CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedCandidateBook, actualModel.getAddressBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
+            assertEquals(expectedCandidateBook, actualModel.getCandidateBook());
+            assertEquals(expectedFilteredList, actualModel.getFilteredCandidateList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
@@ -147,22 +147,22 @@ public class CommandTestUtil {
      * {@code model}'s address book.
      */
     public static void showPersonAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredCandidateList().size());
 
-        Candidate candidate = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+        Candidate candidate = model.getFilteredCandidateList().get(targetIndex.getZeroBased());
         final String[] splitName = candidate.getName().fullName.split("\\s+");
-        model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredCandidateList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
-        assertEquals(1, model.getFilteredPersonList().size());
+        assertEquals(1, model.getFilteredCandidateList().size());
     }
 
     /**
      * Deletes the first candidate in {@code model}'s filtered list from {@code model}'s address book.
      */
     public static void deleteFirstPerson(Model model) {
-        Candidate firstCandidate = model.getFilteredPersonList().get(0);
-        model.deletePerson(firstCandidate);
-        model.commitAddressBook();
+        Candidate firstCandidate = model.getFilteredCandidateList().get(0);
+        model.deleteCandidate(firstCandidate);
+        model.commitCandidateBook();
     }
 
 }
