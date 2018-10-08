@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.JobBook;
+import seedu.address.model.CompanyBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -25,14 +25,14 @@ public class AddCandidateCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new JobBook(), new UserPrefs());
+        model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Candidate validCandidate = new PersonBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getCandidateBook(), new JobBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
         expectedModel.addCandidate(validCandidate);
         expectedModel.commitCandidateBook();
 

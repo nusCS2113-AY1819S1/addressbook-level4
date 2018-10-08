@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AGE_RANGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
@@ -14,8 +14,8 @@ import seedu.address.logic.commands.AddJobDetailsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.candidate.Education;
 import seedu.address.model.candidate.Gender;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.joboffer.AgeRange;
-import seedu.address.model.joboffer.Company;
 import seedu.address.model.joboffer.Job;
 import seedu.address.model.joboffer.JobOffer;
 import seedu.address.model.joboffer.Salary;
@@ -33,23 +33,23 @@ public class AddJobDetailsCommandParser implements Parser<AddJobDetailsCommand> 
     public AddJobDetailsCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(" " + args, PREFIX_COMPANY, PREFIX_JOB, PREFIX_GENDER,
+                ArgumentTokenizer.tokenize(" " + args, PREFIX_COMPANY_NAME, PREFIX_JOB, PREFIX_GENDER,
                         PREFIX_AGE_RANGE, PREFIX_EDUCATION, PREFIX_SALARY);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY, PREFIX_JOB, PREFIX_GENDER, PREFIX_AGE_RANGE,
+        if (!arePrefixesPresent(argMultimap, PREFIX_COMPANY_NAME, PREFIX_JOB, PREFIX_GENDER, PREFIX_AGE_RANGE,
                 PREFIX_EDUCATION, PREFIX_SALARY)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddJobDetailsCommand.MESSAGE_USAGE));
         }
 
-        Company company = ParserUtil.parseCompany(argMultimap.getValue(PREFIX_COMPANY).get());
+        CompanyName companyName = ParserUtil.parseCompanyName(argMultimap.getValue(PREFIX_COMPANY_NAME).get());
         Job job = ParserUtil.parseJob(argMultimap.getValue(PREFIX_JOB).get());
         Gender gender = ParserUtil.parseGender(argMultimap.getValue(PREFIX_GENDER).get());
         AgeRange ageRange = ParserUtil.parseAgeRange(argMultimap.getValue(PREFIX_AGE_RANGE).get());
         Education education = ParserUtil.parseEducation(argMultimap.getValue(PREFIX_EDUCATION).get());
         Salary salary = ParserUtil.parseSalary(argMultimap.getValue(PREFIX_SALARY).get());
 
-        JobOffer jobOffer = new JobOffer(company, job, gender, ageRange, education, salary);
+        JobOffer jobOffer = new JobOffer(companyName, job, gender, ageRange, education, salary);
 
         return new AddJobDetailsCommand(jobOffer);
     }

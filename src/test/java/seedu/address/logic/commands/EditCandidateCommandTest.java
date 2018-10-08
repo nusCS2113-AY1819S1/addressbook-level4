@@ -23,7 +23,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.EditCandidateCommand.EditPersonDescriptor;
 import seedu.address.model.CandidateBook;
-import seedu.address.model.JobBook;
+import seedu.address.model.CompanyBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -38,7 +38,7 @@ import seedu.address.testutil.PersonBuilder;
 @Ignore
 public class EditCandidateCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new JobBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -49,7 +49,7 @@ public class EditCandidateCommandTest {
 
         String expectedMessage = String.format(EditCandidateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate);
 
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getJobBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCandidate(model.getFilteredCandidateList().get(0), editedCandidate);
         expectedModel.commitCandidateBook();
@@ -72,7 +72,7 @@ public class EditCandidateCommandTest {
 
         String expectedMessage = String.format(EditCandidateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate);
 
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getJobBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCandidate(lastCandidate, editedCandidate);
         expectedModel.commitCandidateBook();
@@ -88,7 +88,7 @@ public class EditCandidateCommandTest {
 
         String expectedMessage = String.format(EditCandidateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate);
 
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getJobBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.commitCandidateBook();
 
@@ -106,7 +106,7 @@ public class EditCandidateCommandTest {
 
         String expectedMessage = String.format(EditCandidateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate);
 
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getJobBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), model.getCompanyBook(),
                 new UserPrefs());
         expectedModel.updateCandidate(model.getFilteredCandidateList().get(0), editedCandidate);
         expectedModel.commitCandidateBook();
@@ -171,7 +171,7 @@ public class EditCandidateCommandTest {
         Candidate candidateToEdit = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCandidate).build();
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new JobBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new CompanyBook(),
                 new UserPrefs());
         expectedModel.updateCandidate(candidateToEdit, editedCandidate);
         expectedModel.commitCandidateBook();
@@ -215,7 +215,7 @@ public class EditCandidateCommandTest {
         Candidate editedCandidate = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedCandidate).build();
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new JobBook(),
+        Model expectedModel = new ModelManager(new CandidateBook(model.getCandidateBook()), new CompanyBook(),
                 new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);

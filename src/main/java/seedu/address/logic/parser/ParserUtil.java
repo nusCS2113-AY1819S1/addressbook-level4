@@ -9,15 +9,15 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.candidate.Address;
 import seedu.address.model.candidate.Age;
 import seedu.address.model.candidate.Education;
-import seedu.address.model.candidate.Email;
 import seedu.address.model.candidate.Gender;
 import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
+import seedu.address.model.commons.Address;
+import seedu.address.model.commons.Email;
+import seedu.address.model.commons.Phone;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.joboffer.AgeRange;
-import seedu.address.model.joboffer.Company;
 import seedu.address.model.joboffer.Job;
 import seedu.address.model.joboffer.Salary;
 import seedu.address.model.tag.Tag;
@@ -208,18 +208,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String company} into a {@code Company}.
+     * Parses a {@code String company} into a {@code CompanyName}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code company} is invalid.
      */
-    public static Company parseCompany (String company) throws ParseException {
+    public static CompanyName parseCompanyName(String company) throws ParseException {
         requireNonNull(company);
         String trimmedCompany = company.trim();
-        if (!Company.isValidCompany(trimmedCompany)) {
-            throw new ParseException(Company.MESSAGE_COMPANY_CONSTRAINTS);
+        if (!CompanyName.isValidCompanyName(trimmedCompany)) {
+            throw new ParseException(CompanyName.MESSAGE_COMPANY_CONSTRAINTS);
         }
-        return new Company(trimmedCompany);
+        return new CompanyName(trimmedCompany);
     }
 
     /**
