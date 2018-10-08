@@ -165,6 +165,22 @@ Examples:
 * `add n/John Doe g/M nat/SG p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `a n/Betsy Crowe g/female nat/MY t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+=== Adding multiple persons into the Addressbook : `addscript` `as`
+
+Get all the add commands from a text file and execute them +
+Format: `addscript TextFileName` +
+Shortcut Format: `as TextFileName` +
+
+****
+* TextFileName is the text file name that is located at base of the project.
+* The TextFileName *must contain .txt* extension at the end of the String.
+****
+
+Examples:
+
+* `addscript abc.txt`
+* `as abc.txt`
+
 === Listing all persons : `list` `l`
 
 Shows a list of all persons in the address book. +
@@ -175,6 +191,7 @@ Shortcut Format: `l`
 
 Edits an existing person in the address book. +
 Format: `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
+
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...

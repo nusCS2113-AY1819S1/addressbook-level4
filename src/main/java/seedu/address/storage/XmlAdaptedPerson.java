@@ -55,10 +55,12 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String gender, String countryCode, String phone, String email, String address, String grade, List<XmlAdaptedTag> tagged) {
+
+    public XmlAdaptedPerson(String name, String gender, String nationality, String phone, String email, String address, String grade, List<XmlAdaptedTag> tagged) {
+
         this.name = name;
         this.gender = gender;
-        this.nationality = countryCode;
+        this.nationality = nationality;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -76,7 +78,7 @@ public class XmlAdaptedPerson {
     public XmlAdaptedPerson(Person source) {
         name = source.getName().fullName;
         gender = source.getGender().gender;
-        nationality = source.getNationality().countryCode;
+        nationality = source.getNationality().nationality;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -154,7 +156,9 @@ public class XmlAdaptedPerson {
         final Grade modelGrade = new Grade(grade);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(modelName, modelGender, modelNationality, modelPhone, modelEmail, modelAddress, modelGrade, modelTags);
+
     }
 
     @Override

@@ -20,7 +20,7 @@ public class Person {
     private final Phone phone;
     private final Email email;
     private final Gender gender;
-    private final Nationality countryCode;
+    private final Nationality nationality;
 
     // Data fields
     private final Grade grade;
@@ -30,13 +30,15 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Gender gender, Nationality countryCode, Phone phone,
+
+    public Person(Name name, Gender gender, Nationality nationality, Phone phone,
                   Email email, Address address, Grade grade, Set<Tag> tags) {
 
-        requireAllNonNull(name, gender, countryCode, phone, email, address, grade, tags);
+        requireAllNonNull(name, gender, nationality, phone, email, address, grade, tags);
+
         this.name = name;
         this.gender = gender;
-        this.countryCode = countryCode;
+        this.nationality = nationality;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -65,7 +67,7 @@ public class Person {
     }
 
     public Nationality getNationality() {
-        return countryCode;
+        return nationality;
     }
 
     public Gender getGender() {
@@ -122,7 +124,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, gender, countryCode, phone, email, address, grade, tags);
+        return Objects.hash(name, gender, nationality, phone, email, address, grade, tags);
     }
 
     @Override
