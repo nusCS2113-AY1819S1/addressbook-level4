@@ -87,6 +87,12 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Submitting Budget Data =====================================================================
 
     @Override
+    public boolean hasClub(ClubBudgetElements club) {
+        requireNonNull(club);
+        return versionedAddressBook.hasClub(club);
+    }
+
+    @Override
     public void addClub(ClubBudgetElements club) {
         versionedAddressBook.addClub(club);
         indicateAddressBookChanged();
