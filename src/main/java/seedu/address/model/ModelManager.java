@@ -122,6 +122,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         versionedAddressBook.resetData(newData);
     }
+
     //============== UserDatabase Modifiers =============================================================
 
     @Override
@@ -132,12 +133,6 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateUserDatabaseChanged() {
         raise(new UserDatabaseChangedEvent(versionedUserDatabase));
-    }
-
-    @Override
-    public boolean hasUser(User user) {
-        requireNonNull(user);
-        return versionedUserDatabase.hasUser(user);
     }
 
     /** Raises an event to indicate a user has been deleted */

@@ -58,7 +58,6 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-
     /**
      * Returns true if the model has previous address book states to restore.
      */
@@ -86,15 +85,19 @@ public interface Model {
 
     void setUsersList(UniqueUsersList uniqueUserList);
 
-    /**
-     * Returns the UserDatabase
-     */
+    /** Returns the UserDatabase */
     ReadOnlyAddressBook getUserDatabase();
 
-    boolean hasUser(User user);
-
+    /**
+     * Deletes the given user.
+     * The user must exist in the user database.
+     */
     void deleteUser(User target) throws UserNotFoundException;
 
+    /**
+     * Adds the given user.
+     * {@code user} must not already exist in the user database.
+     */
     void addUser(User person) throws DuplicateUserException;
 
     boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException;

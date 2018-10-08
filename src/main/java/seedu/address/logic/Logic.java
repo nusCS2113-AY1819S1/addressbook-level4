@@ -28,7 +28,7 @@ public interface Logic {
     ListElementPointer getHistorySnapshot();
 
     /** Returns the execution of the login function only, regardless of commandText */
-    CommandResult executeNoLoginCommands(String commandText, Command command) throws CommandException;
+    CommandResult executeUnauthenticatedCommands(String commandText, Command command) throws CommandException;
 
     /** Returns whether given user is logged in successfully */
     boolean hasLoggedIn();

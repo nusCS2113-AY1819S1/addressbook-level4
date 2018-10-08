@@ -27,6 +27,9 @@ public class DeleteUserCommand extends Command {
     private final Username username;
     private final Password password;
 
+    /**
+     * Creates a DeleteUserCommand to remove the specified {@code User}
+     */
     public DeleteUserCommand(Username username, Password password) {
         requireNonNull(username);
         requireNonNull(password);

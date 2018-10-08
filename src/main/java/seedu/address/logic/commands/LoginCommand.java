@@ -9,7 +9,6 @@ import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 
-
 public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
@@ -25,6 +24,9 @@ public class LoginCommand extends Command {
     private final Username username;
     private final Password password;
 
+    /**
+     * Creates a LoginCommand to authenticate the specified {@code User}
+     */
     public LoginCommand(Username username, Password password) {
         requireNonNull(username);
         requireNonNull(password);

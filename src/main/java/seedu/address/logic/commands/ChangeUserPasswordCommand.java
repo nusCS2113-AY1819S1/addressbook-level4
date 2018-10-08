@@ -20,7 +20,7 @@ public class ChangeUserPasswordCommand extends Command {
 
     public static final String MESSAGE_USAGE = "Changes the user password."
             + "with the parameters: u/USERNAME p/PASSWORD newp/NEWPASSWORD"
-            + "\nEXAMPLE: change-user-password u/slap p/123456 newp/543210";
+            + "\nEXAMPLE: change-pw u/inventarie p/123456 newp/543210";
 
     public static final String MESSAGE_SUCCESS = "Password updated for %1$s";
     public static final String MESSAGE_UPDATE_FAILURE = "Password update failed. Username or password is incorrect.";
@@ -31,6 +31,9 @@ public class ChangeUserPasswordCommand extends Command {
     private final Password password;
     private final Password newPassword;
 
+    /**
+     * Creates a ChangeUserPasswordCommand to modify the specified {@code User} password.
+     */
     public ChangeUserPasswordCommand(Username username, Password password, Password newPassword) {
         requireNonNull(username);
         requireNonNull(password);

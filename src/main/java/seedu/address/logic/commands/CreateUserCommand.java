@@ -9,9 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.login.User;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
-import seedu.address.storage.XmlAdaptedUser;
-
-import java.util.List;
 
 public class CreateUserCommand extends Command {
 

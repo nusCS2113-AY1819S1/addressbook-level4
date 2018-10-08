@@ -39,7 +39,7 @@ public class LogicManager extends ComponentManager implements Logic {
                 result = command.execute(model, history);
             } else {
                 logger.info("User attempts to use a command without logging in first.");
-                result = executeNoLoginCommands(commandText, command);
+                result = executeUnauthenticatedCommands(commandText, command);
                 history.clear();
             }
             return result;
@@ -59,7 +59,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public CommandResult executeNoLoginCommands (String commandText, Command command) throws CommandException {
+    public CommandResult executeUnauthenticatedCommands (String commandText, Command command) throws CommandException {
         CommandResult result;
         try {
             if (commandText.split(" ")[0].equals(LoginCommand.COMMAND_WORD)
