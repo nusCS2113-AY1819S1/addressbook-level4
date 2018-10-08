@@ -1,6 +1,8 @@
 package seedu.address.security;
 
 import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.events.security.SuccessfulLoginEvent;
+import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
 
 /***
  *  Implements a Security authentication that identifies user
@@ -30,9 +32,11 @@ public class SecurityManager extends ComponentManager implements Security {
             //TODO Implement Person class that this is linked to:
             //userPerson = user1;
             System.out.println("Correct Password");
+            raise(new SuccessfulLoginEvent());
         } else {
-            //TODO Raise and exception to prompt user to type again
+            //TODO Raise an exception to prompt user to type again
             System.out.println("Incorrect password");
+            raise(new UnsuccessfulLoginEvent());
         }
     }
 }

@@ -13,6 +13,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
@@ -58,9 +59,6 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic, user);
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.handleLogin();
-            //TODO: Entry point for user authentication
-            //while(!user.getAuthentication());
-            //mainWindow.fillInnerParts();
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
             showFatalErrorDialogAndShutdown("Fatal error during initializing", e);
@@ -121,5 +119,10 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
+    }
+
+    @Subscribe
+    public void handleSuccessfulLoginEvent(SuccessfulLoginEvent abce) {
+        mainWindow.fillInnerParts();
     }
 }

@@ -1,10 +1,14 @@
 package seedu.address.ui;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import seedu.address.commons.events.security.SuccessfulLoginEvent;
+import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.security.Security;
 
@@ -93,7 +97,17 @@ public class LoginWindow extends UiPart<Stage> {
         System.out.println(usernameTextField.getText());
         System.out.println(passwordTextField.getText());
         user.login(usernameTextField.getText(), passwordTextField.getText());
-        label.setText("test");
+    }
+
+    //TODO: Find a proper handler, method to handle this event
+    @Subscribe
+    public void handleSuccessfulLoginEvent(SuccessfulLoginEvent abce) {
+        getRoot().hide();
+    }
+
+    @Subscribe
+    public void handleUnsuccessfulLoginEvent(UnsuccessfulLoginEvent abce) {
+        label.setText("Incorrect Username/Password");
     }
 
     /**
