@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ public class LoginWindow extends UiPart<Stage> {
     private TextField usernameTextField;
     @FXML
     private TextField passwordTextField;
+    @FXML
+    private Label label;
 
     /**
      * Creates a new LoginWindow.
@@ -40,6 +43,8 @@ public class LoginWindow extends UiPart<Stage> {
     public LoginWindow(Security user) {
         this(new Stage());
         this.user = user;
+        //Links with eventsCenter I believe
+        registerAsAnEventHandler(this);
     }
 
     /**
@@ -88,6 +93,7 @@ public class LoginWindow extends UiPart<Stage> {
         System.out.println(usernameTextField.getText());
         System.out.println(passwordTextField.getText());
         user.login(usernameTextField.getText(), passwordTextField.getText());
+        label.setText("test");
     }
 
     /**
