@@ -70,6 +70,14 @@ public class LoginWindow extends UiPart<Stage> {
         getRoot().requestFocus();
     }
 
+    /***
+     * Runs whenever the login button is clicked
+     */
+    public void handleLoginClick() {
+        //TODO: find a way to link up to Security Module
+        System.out.println("Login Button Click Example");
+    }
+
     /**
      * Closes the application.
      */
