@@ -57,11 +57,11 @@ public class UiManager extends ComponentManager implements Ui {
         try {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic);
             mainWindow.show(); //This should be called before creating other UI parts
+            mainWindow.handleLogin();
             //TODO: Entry point for user authentication
             if (user.getAuthentication()) {
                 mainWindow.fillInnerParts();
-            }
-            else {
+            } else {
                 //Ask to show Relogin
             }
 

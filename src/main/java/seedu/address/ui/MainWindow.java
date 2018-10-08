@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private LoginWindow loginWindow;
 
     @FXML
     private StackPane timetablePlaceholder;
@@ -75,6 +76,7 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        loginWindow = new LoginWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -172,6 +174,18 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the Login Window.
+     */
+    @FXML
+    public void handleLogin() {
+        if (!loginWindow.isShowing()) {
+            loginWindow.show();
+        } else {
+            loginWindow.focus();
         }
     }
 
