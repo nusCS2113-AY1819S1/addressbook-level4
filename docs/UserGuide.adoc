@@ -214,7 +214,7 @@ image::ThirdList.png[align="left"]
 
 === Resetting Search History: `clearsearch`
 
-Resets search history back to the very initial stage before any find commands are executed
+Resets search history back to the very initial stage before any find commands are executed +
 Format: `clearsearch`
 ****
 * To be used together with the find command
