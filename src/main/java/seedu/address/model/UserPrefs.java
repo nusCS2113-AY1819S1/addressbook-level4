@@ -12,11 +12,13 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
-    private Path addressBookBackupFilePath = Paths.get("data" , "addressbook.bak");
+    private Path addressBookFilePath;
+    private Path addressBookBackupFilePath;
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
+        setAddressBookFilePath(Paths.get("data" , "addressbook.xml"));
+        setAddressBookBackupFilePath(Paths.get("data" , "addressbook.bak"));
     }
 
     public GuiSettings getGuiSettings() {
@@ -32,7 +34,7 @@ public class UserPrefs {
     }
 
     public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+        return addressBookFilePath == null ? Paths.get("data" , "addressbook.xml") : addressBookFilePath;
     }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
@@ -40,7 +42,7 @@ public class UserPrefs {
     }
 
     public Path getAddressBookBackupFilePath() {
-        return addressBookBackupFilePath;
+        return addressBookBackupFilePath == null ? Paths.get("data" , "addressbook.bak") : addressBookBackupFilePath;
     }
 
     public void setAddressBookBackupFilePath(Path addressBookBackupFilePath) {

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -160,7 +161,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void backupAddressBook() {
+        public void backupAddressBook(Path backupPath) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -94,7 +94,7 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
+    //@@author QzSG
     @Override
     @Subscribe
     public void handleAddressBookLocalBackupEvent(AddressBookLocalBackupEvent event) {

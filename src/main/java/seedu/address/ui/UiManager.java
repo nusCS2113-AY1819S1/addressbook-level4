@@ -29,6 +29,14 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE = "Could not save data";
     public static final String FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE = "Could not save data to file";
 
+    public static final String FILE_OPS_BACKUP_SUCCESS_DIALOG_STAGE_TITLE = "Backup Status";
+    public static final String FILE_OPS_BACKUP_SUCCESS_DIALOG_HEADER_MESSAGE = "Backup operation success";
+    public static final String FILE_OPS_BACKUP_SUCCESS_DIALOG_CONTENT_MESSAGE = "Data backup to %s";
+
+    public static final String FILE_OPS_BACKUP_ERROR_DIALOG_STAGE_TITLE = "Backup Status";
+    public static final String FILE_OPS_BACKUP_ERROR_DIALOG_HEADER_MESSAGE = "Backup operation failed";
+    public static final String FILE_OPS_BACKUP_ERROR_DIALOG_CONTENT_MESSAGE = "Could not backup data to %s";
+
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
 

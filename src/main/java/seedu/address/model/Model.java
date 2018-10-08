@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -82,5 +83,5 @@ public interface Model {
     /**
      * Backup current address book to storage.
      */
-    void backupAddressBook();
+    void backupAddressBook(Path backupPath);
 }
