@@ -4,8 +4,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_ABBREVATION_FEMALE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_ABBREVATION_MALE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_FEMALE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GENDER_MALE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GRADE_AMY;
@@ -74,10 +72,12 @@ public class TypicalPersons {
             .withGrade("100").build();
 
     // Manually added
-    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withGender("MALE").withNationality("SG")
-            .withPhone("8482424").withEmail("stefan@example.com").withAddress("little india").build();
-    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withGender("MALE").withNationality("US")
-            .withPhone("8482131").withEmail("hans@example.com").withAddress("chicago ave").build();
+    public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withGender("MALE")
+            .withNationality("SG").withPhone("8482424").withEmail("stefan@example.com")
+            .withAddress("little india").build();
+    public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withGender("MALE")
+            .withNationality("US").withPhone("8482131").withEmail("hans@example.com")
+            .withAddress("chicago ave").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder()

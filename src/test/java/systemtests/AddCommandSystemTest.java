@@ -162,7 +162,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing address -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY  + GENDER_DESC_AMY + NATIONALITY_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + NATIONALITY_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + GRADE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
