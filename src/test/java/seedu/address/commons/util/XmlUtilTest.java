@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.AddressBook;
+import seedu.address.storage.XmlAdaptedGroup;
 import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableAddressBook;
@@ -30,17 +31,25 @@ public class XmlUtilTest {
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
     private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validAddressBook.xml");
     private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingPersonField.xml");
+    private static final Path MISSING_GROUP_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingGroupField.xml");
     private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidPersonField.xml");
+    private static final Path INVALID_GROUP_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidGroupField.xml");
     private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
+    private static final Path VALID_GROUP_FILE = TEST_DATA_FOLDER.resolve("validGroup.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
 
     private static final String INVALID_PHONE = "9482asf424";
+    private static final String INVALID_GROUP_LOCATION = "E1-01-01*";
 
     private static final String VALID_NAME = "Hans Muster";
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
+    private static final String VALID_GRADE = "100";
+    private static final String VALID_GROUP_NAME = "TUT[1]";
+    private static final String VALID_GROUP_LOCATION = "E1-01-01";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedTag> VALID_GROUP_TAGS = Collections.singletonList(new XmlAdaptedTag("maths"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -73,6 +82,7 @@ public class XmlUtilTest {
     public void getDataFromFile_validFile_validResult() throws Exception {
         AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
+        assertEquals(5, dataFromFile.getGroupList().size());
     }
 
     @Test
@@ -80,8 +90,17 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_GRADE);
         assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void xmlAdaptedGroupFromFile_fileWithMissingGroupField_validResult() throws Exception {
+        XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
+                MISSING_GROUP_FIELD_FILE, XmlAdaptedGroupWithRootElement.class);
+        XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
+                null, VALID_GROUP_LOCATION, VALID_GROUP_TAGS);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
@@ -89,8 +108,17 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_GRADE);
         assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void xmlAdaptedGroupFromFile_fileWithInvalidGroupField_validResult() throws Exception {
+        XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
+                INVALID_GROUP_FIELD_FILE, XmlAdaptedGroupWithRootElement.class);
+        XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
+                VALID_GROUP_NAME, INVALID_GROUP_LOCATION, VALID_GROUP_TAGS);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
@@ -98,8 +126,17 @@ public class XmlUtilTest {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS, VALID_GRADE);
         assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void xmlAdaptedGroupFromFile_fileWithValidGroup_validResult() throws Exception {
+        XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
+                VALID_GROUP_FILE, XmlAdaptedGroupWithRootElement.class);
+        XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
+                VALID_GROUP_NAME, VALID_GROUP_LOCATION, VALID_GROUP_TAGS);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test
@@ -143,4 +180,11 @@ public class XmlUtilTest {
      */
     @XmlRootElement(name = "person")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
+
+    /**
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedGroup}
+     * objects.
+     */
+    @XmlRootElement(name = "groups")
+    private static class XmlAdaptedGroupWithRootElement extends XmlAdaptedGroup {}
 }

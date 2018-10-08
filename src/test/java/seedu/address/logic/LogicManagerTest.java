@@ -11,6 +11,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -40,16 +41,29 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_validCommand_success() {
+    public void execute_validListCommand_success() {
         String listCommand = ListCommand.COMMAND_WORD;
         assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
         assertHistoryCorrect(listCommand);
     }
 
     @Test
+    public void execute_validGroupListCommand_success() {
+        String listGroupCommand = ListGroupCommand.COMMAND_WORD;
+        assertCommandSuccess(listGroupCommand, ListGroupCommand.MESSAGE_SUCCESS, model);
+        assertHistoryCorrect(listGroupCommand);
+    }
+
+    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         logic.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void getFilteredGroupList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        logic.getFilteredGroupList().remove(0);
     }
 
     /**
