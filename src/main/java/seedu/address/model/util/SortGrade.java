@@ -2,15 +2,15 @@ package seedu.address.model.util;
 
 
 
-import java.lang.reflect.Array;
+//import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Comparator;
+//import java.util.Comparator;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
 public class SortGrade { //from lowest to highest
-    public SortGrade(){}
+
     public ArrayList<Person> sortingFromLowesttoHighest(UniquePersonList personList) {
             ArrayList<Person> pList = new ArrayList<>(bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
             System.out.println(pList.toString());
@@ -26,7 +26,8 @@ public class SortGrade { //from lowest to highest
         }
 
 
-        int i, j;
+        int i;
+        int j;
         Person temp;
         boolean swapped;
         for (i = 0; i < n - 1; i++)

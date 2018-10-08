@@ -46,9 +46,10 @@ public class AddressBook implements ReadOnlyAddressBook {
         sortGrade.sortingFromLowesttoHighest(persons);
 
         Calculator cal = new Calculator();
-        cal.Find_25th(persons);
-        cal.Find_75th(persons);
-        cal.CalculateMedian(persons);
+        cal.find_25th(persons);
+
+        cal.find_75th(persons);
+        cal.calculateMedian(persons);
 
     }
 

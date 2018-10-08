@@ -11,7 +11,7 @@ public class Calculator {
 
 
 
-    public int CalculateMean(UniquePersonList personList) { //calculate the mean score of a test
+    public int calculateMean(UniquePersonList personList) { //calculate the mean score of a test
         int sum =0;
         for(int i=0; i<personList.asUnmodifiableObservableList().size(); i++ ){
 
@@ -21,7 +21,7 @@ public class Calculator {
         return mean;
     }
 
-    public int FindHighest(UniquePersonList personList) {  //find highest score of the test
+    public int findHighest(UniquePersonList personList) {  //find highest score of the test
         int maximum =0;
         for(int i=0; i<personList.asUnmodifiableObservableList().size(); i++ ){
             int currentVal = Integer.parseInt(personList.asUnmodifiableObservableList().get(i).getGrade().value);
@@ -31,7 +31,7 @@ public class Calculator {
         return maximum;
     }
 
-    public ArrayList<Person> Find_25th(UniquePersonList personList){    // Find students in top 25th
+    public ArrayList<Person> find_25th(UniquePersonList personList){    // Find students in top 25th
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
 
@@ -53,7 +53,7 @@ public class Calculator {
 
     }
 
-    public ArrayList<Person> Find_75th(UniquePersonList personList){    // Find students below 75th
+    public ArrayList<Person> find_75th(UniquePersonList personList){    // Find students below 75th
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
 
@@ -75,7 +75,7 @@ public class Calculator {
 
     }
 
-    public int CalculateMedian(UniquePersonList personList) { //calculate the mean score of a test
+    public int calculateMedian(UniquePersonList personList) { //calculate the mean score of a test
         int median=0;
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
