@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.budgetelements.UniqueClubsList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -25,6 +27,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+    }
+
+    private final UniqueClubsList clubs;
+    {
+        clubs = new UniqueClubsList();
     }
 
     public AddressBook() {}
@@ -92,6 +99,23 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
+
+    /**
+     * Returns true if a club with the same identity as {@code club} exists in the address book.
+     */
+    public boolean hasClub(ClubBudgetElements club) {
+        requireNonNull(club);
+        return clubs.contains(club);
+    }
+
+    /**
+     * Adds a club to the address book.
+     * The person must not already exist in the address book.
+     */
+    public void addClub(ClubBudgetElements c) {
+        clubs.add(c);
+    }
+
 
     //// util methods
 
