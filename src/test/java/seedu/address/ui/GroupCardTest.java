@@ -11,7 +11,7 @@ import guitests.guihandles.GroupCardHandle;
 import seedu.address.model.group.Group;
 import seedu.address.testutil.GroupBuilder;
 
-public class GroupCardTest extends GuiUnitTest{
+public class GroupCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags

@@ -26,7 +26,7 @@ public class GroupUtil {
         sb.append(PREFIX_NAME + group.getGroupName().groupName + " ");
         sb.append(PREFIX_GROUP_LOCATION + group.getGroupLocation().value + " ");
         group.getTags().stream().forEach(
-                s -> sb.append(PREFIX_TAG + s.tagName + " ")
+            s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         return sb.toString();
     }

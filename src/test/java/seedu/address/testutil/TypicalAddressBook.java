@@ -13,7 +13,7 @@ import seedu.address.model.person.Person;
 public class TypicalAddressBook {
     private TypicalAddressBook() {} // prevents instantiation
 
-    public static AddressBook getTypicalAddressBook(){
+    public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
