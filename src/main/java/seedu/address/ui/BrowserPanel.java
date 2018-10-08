@@ -47,7 +47,9 @@ public class BrowserPanel extends UiPart<Region> {
         loadPage(SEARCH_PAGE_URL + person.getName().fullName);
     }
 
-    private void loadGroupPage(Group group) { loadPage(SEARCH_PAGE_URL + group.getGroupName().groupName); }
+    private void loadGroupPage(Group group) {
+        loadPage(SEARCH_PAGE_URL + group.getGroupName().groupName);
+    }
 
     public void loadPage(String url) {
         Platform.runLater(() -> browser.getEngine().load(url));

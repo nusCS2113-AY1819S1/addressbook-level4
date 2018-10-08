@@ -198,7 +198,9 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    public GroupListPanel getGroupListPanel() { return groupListPanel; }
+    public GroupListPanel getGroupListPanel() {
+        return groupListPanel;
+    }
 
     void releaseResources() {
         browserPanel.freeResources();

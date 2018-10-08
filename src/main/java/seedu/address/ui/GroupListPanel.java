@@ -18,7 +18,7 @@ import seedu.address.model.group.Group;
 /**
  * Panel containing the list of groups.
  */
-public class GroupListPanel extends UiPart<Region>{
+public class GroupListPanel extends UiPart<Region> {
     private static final String FXML = "GroupListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(GroupListPanel.class);
 

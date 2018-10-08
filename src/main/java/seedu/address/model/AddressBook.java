@@ -55,7 +55,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Replaces the contents of the group list with {@code groups}.
      * {@code groups} must not contain duplicate groups.
      */
-    public void setGroups(List<Group> groups) { this.groups.setGroups(groups); }
+    public void setGroups(List<Group> groups) {
+        this.groups.setGroups(groups);
+    }
 
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
@@ -97,7 +99,9 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Creates a group in the address book.
      * The group must not already exist in the address book.
      */
-    public void createGroup(Group g) { groups.createGroup(g); }
+    public void createGroup(Group g) {
+        groups.createGroup(g);
+    }
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.

@@ -46,10 +46,10 @@ public class UniqueGroupList implements Iterable<Group> {
         internalList.add(toCreate);
     }
 
-     /**
+    /**
      * Replaces the group {@code target} in the list with {@code editedGroup}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedGroup} must not be the same as another existing group in the list.
+     * The group identity of {@code editedGroup} must not be the same as another existing group in the list.
      */
     public void setGroup(Group target, Group editedGroup) {
         requireAllNonNull(target, editedGroup);

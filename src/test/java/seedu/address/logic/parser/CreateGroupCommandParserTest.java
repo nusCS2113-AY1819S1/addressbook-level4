@@ -103,4 +103,5 @@ public class CreateGroupCommandParserTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE));
     }
 
+
 }
