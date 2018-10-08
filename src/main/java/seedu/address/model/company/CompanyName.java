@@ -1,31 +1,31 @@
-package seedu.address.model.joboffer;
+package seedu.address.model.company;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents the company offering the job in the job book.
- * Guarantees: immutable; is valid as declared in {@link #isValidCompany(String)}
+ * Represents the name of the company offering the job in the job book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidCompanyName(String)}
  */
 
-public class Company {
+public class CompanyName {
     public static final String COMPANY_VALIDATION_REGEX = "[\\p{Alpha}]+";
 
     public static final String MESSAGE_COMPANY_CONSTRAINTS =
-            "Company should only contain alphabetical characters and should not be blank ";
+            "Company name should only contain alphabetical characters and should not be blank ";
 
     public final String value;
 
-    public Company(String companyInput) {
+    public CompanyName(String companyInput) {
         requireNonNull(companyInput);
-        checkArgument(isValidCompany(companyInput), MESSAGE_COMPANY_CONSTRAINTS);
+        checkArgument(isValidCompanyName(companyInput), MESSAGE_COMPANY_CONSTRAINTS);
         value = companyInput;
     }
 
     /**
      * Returns true if a given string is a valid company name.
      */
-    public static boolean isValidCompany(String test) {
+    public static boolean isValidCompanyName(String test) {
         return test.matches(COMPANY_VALIDATION_REGEX);
     }
 
@@ -37,8 +37,8 @@ public class Company {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Company // instanceof handles nulls
-                && value.equals(((Company) other).value)); // state check
+                || (other instanceof CompanyName // instanceof handles nulls
+                && value.equals(((CompanyName) other).value)); // state check
     }
 
     @Override

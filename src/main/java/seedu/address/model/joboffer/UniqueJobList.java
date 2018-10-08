@@ -28,6 +28,11 @@ public class UniqueJobList implements Iterable<JobOffer> {
 
     private final ObservableList<JobOffer> internalList = FXCollections.observableArrayList();
 
+
+    public ObservableList<JobOffer> getInternalList() {
+        return internalList;
+    }
+
     /**
      * Returns true if the list contains an equivalent job offer as the given argument.
      */
@@ -46,6 +51,7 @@ public class UniqueJobList implements Iterable<JobOffer> {
         }
         internalList.add(toAdd);
     }
+
 
     /**
      * Replaces the job offer {@code target} in the list with {@code editedJobOffer}.

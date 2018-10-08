@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.LogicState;
 import seedu.address.logic.commands.AddCandidateCommand;
+import seedu.address.logic.commands.AddCompanyCommand;
 import seedu.address.logic.commands.AddJobCommand;
 import seedu.address.logic.commands.AddJobDetailsCommand;
 import seedu.address.logic.commands.CancelCommand;
@@ -153,6 +154,9 @@ public class RecruitBookParser {
 
             case EmailInitialiseCommand.COMMAND_WORD:
                 return new EmailInitialiseCommand();
+
+            case AddCompanyCommand.COMMAND_WORD:
+                return new AddCompanyCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
