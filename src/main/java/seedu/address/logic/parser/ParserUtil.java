@@ -68,7 +68,7 @@ public class ParserUtil {
     public static Gender parseGender(String gender) throws ParseException {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
-        if(!Gender.isInputAccepted(trimmedGender)){
+        if (!Gender.isInputAccepted(trimmedGender)) {
             throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
         }
         trimmedGender = inputTransform(trimmedGender);

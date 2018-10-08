@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Gender {
 
     public static final String MESSAGE_NAME_CONSTRAINTS =
-            "Gender can input as 'M' or \"Male\" for Male and 'F' or \"Female\" for Female.\n" +
-                    "It is not case sensitive but it should not be blank";
+            "Gender can input as 'M' or \"Male\" for Male and 'F' or \"Female\" for Female.\n"
+                    + "It is not case sensitive but it should not be blank";
 
     public static final String VALID_GENDER_MALE = "MALE";
     public static final String VALID_GENDER_FEMALE = "FEMALE";
@@ -42,16 +42,16 @@ public class Gender {
      *                              "F"
      *
      */
-    public static boolean isInputAccepted(String input){
+    public static boolean isInputAccepted(String input) {
         String testInput = input.toUpperCase();
         switch (testInput) {
-            case VALID_GENDER_MALE :
-            case VALID_GENDER_FEMALE :
-            case VALID_GENDER_ABBREVIATION_MALE:
-            case VALID_GENDER_ABBREVIATION_FEMALE:
-                return true;
-            default:
-                return false;
+        case VALID_GENDER_MALE :
+        case VALID_GENDER_FEMALE :
+        case VALID_GENDER_ABBREVIATION_MALE:
+        case VALID_GENDER_ABBREVIATION_FEMALE:
+            return true;
+        default:
+            return false;
         }
     }
 
@@ -60,21 +60,22 @@ public class Gender {
      * Program will determine Male via "MALE" string
      * Program will determine Female via "FEMALE" string
      */
-    public static String inputTransform(String input){
+    public static String inputTransform(String input) {
         input = input.toUpperCase();
         switch (input) {
-            case VALID_GENDER_MALE :
-            case VALID_GENDER_ABBREVIATION_MALE:
-                return VALID_GENDER_MALE;
-            case VALID_GENDER_FEMALE :
-            case VALID_GENDER_ABBREVIATION_FEMALE:
-                return VALID_GENDER_FEMALE;
+        case VALID_GENDER_MALE :
+        case VALID_GENDER_ABBREVIATION_MALE:
+            return VALID_GENDER_MALE;
+        case VALID_GENDER_FEMALE :
+        case VALID_GENDER_ABBREVIATION_FEMALE:
+            return VALID_GENDER_FEMALE;
+        default:
+            return null;
         }
-        return null;
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return gender;
     }
 

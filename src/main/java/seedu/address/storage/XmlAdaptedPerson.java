@@ -56,7 +56,8 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
 
-    public XmlAdaptedPerson(String name, String gender, String nationality, String phone, String email, String address, String grade, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String gender, String nationality, String phone
+            , String email, String address, String grade, List<XmlAdaptedTag> tagged) {
 
         this.name = name;
         this.gender = gender;
@@ -117,7 +118,8 @@ public class XmlAdaptedPerson {
         final Gender modelGender = new Gender(gender);
 
         if (nationality == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nationality.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Nationality.class.getSimpleName()));
         }
         if (!Nationality.isValidCountryCode(nationality)) {
             throw new IllegalValueException(Nationality.MESSAGE_NAME_CONSTRAINTS);
@@ -158,7 +160,8 @@ public class XmlAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        return new Person(modelName, modelGender, modelNationality, modelPhone, modelEmail, modelAddress, modelGrade, modelTags);
+        return new Person(modelName, modelGender, modelNationality, modelPhone,
+                modelEmail, modelAddress, modelGrade, modelTags);
 
     }
 
