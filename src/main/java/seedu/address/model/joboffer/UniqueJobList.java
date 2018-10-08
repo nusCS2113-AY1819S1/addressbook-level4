@@ -34,6 +34,14 @@ public class UniqueJobList implements Iterable<JobOffer> {
     }
 
     /**
+     * Returns size of list
+     */
+
+    public int size() {
+        return internalList.size();
+    }
+
+    /**
      * Returns true if the list contains an equivalent job offer as the given argument.
      */
     public boolean contains(JobOffer toCheck) {

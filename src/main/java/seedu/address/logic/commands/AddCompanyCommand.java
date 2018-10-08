@@ -22,7 +22,7 @@ public class AddCompanyCommand  extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a company to the RecruitBook. "
             + "Parameters: "
-            + PREFIX_COMPANY_NAME + "COMPANY NAME "
+            + PREFIX_COMPANY_NAME + "UNIQUE_COMPANY_NAME "
             + PREFIX_ADDRESS + "ADDRESS "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_PHONE + "PHONE \n"
@@ -32,7 +32,7 @@ public class AddCompanyCommand  extends Command {
             + PREFIX_EMAIL + "kfc@gmail.com "
             + PREFIX_PHONE + "61231232 ";
 
-    public static final String MESSAGE_SUCCESS = "New added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New added company: %1$s";
     public static final String MESSAGE_DUPLICATE_COMPANY = "This company already exists in the CompanyBook";
 
     private final Company toAdd;

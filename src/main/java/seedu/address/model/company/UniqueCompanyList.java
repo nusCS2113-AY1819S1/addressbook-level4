@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.company.exceptions.CompanyNotFoundException;
 import seedu.address.model.company.exceptions.DuplicateCompanyException;
+import seedu.address.model.joboffer.JobOffer;
 
 /**
  * A list of companies that enforces uniqueness between its elements and does not allow nulls.
@@ -45,6 +46,35 @@ public class UniqueCompanyList implements Iterable<Company> {
             throw new DuplicateCompanyException();
         }
         internalList.add(toAdd);
+    }
+
+    /** Returns index of Company using @param companyName in UniqueCompanyList
+     *  Returns -1 if no such company with @param companyName in UniqueCompanyList
+     *  NOTE: CompanyName is enforced to be unique in CompanyBook
+     *  See {@code isSameCompany()}
+     */
+    public int getCompanyIndexFromName(CompanyName companyName) {
+        for(int index = 0; index < internalList.size(); index++ ){
+            if(internalList.get(index).getCompanyName().equals(companyName)){
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the company object with the given @param index
+     */
+
+    public Company getCompanyFromIndex(int index) {
+        return internalList.get(index);
+    }
+
+    /**
+     * Adds @param jobOffer to the company with name @param companyName
+     */
+    public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
+        internalList.get(getCompanyIndexFromName(companyName)).addJobOffer(jobOffer);
     }
 
     /**

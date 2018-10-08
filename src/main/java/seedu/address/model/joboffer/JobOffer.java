@@ -80,7 +80,7 @@ public class JobOffer {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("CompanyName: ")
+        builder.append("Company name: ")
                 .append(getCompanyName())
                 .append(" Job: ")
                 .append(getJob())

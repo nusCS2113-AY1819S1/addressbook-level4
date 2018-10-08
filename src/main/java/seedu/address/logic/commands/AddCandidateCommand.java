@@ -50,7 +50,7 @@ public class AddCandidateCommand extends Command {
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New added: %1$s";
+    public static final String MESSAGE_SUCCESS = "New added candidate: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This candidate already exists in the CandidateBook";
 
     private final Candidate toAdd;

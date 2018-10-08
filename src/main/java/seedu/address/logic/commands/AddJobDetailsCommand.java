@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SALARY;
 
+import seedu.address.commons.events.model.CompanyBookChangedEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,6 +44,8 @@ public class AddJobDetailsCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New added job offer: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the CompanyBook";
+    public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
+                                                          + "Please add the company to CompanyBook first";
     private final JobOffer toAdd;
 
 
@@ -53,13 +56,15 @@ public class AddJobDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        /** To be implemented
-        if (model.hasCompany(toAdd)) {
+        int companyIndex = model.getCompanyIndexFromName(toAdd.getCompanyName());
+        if (companyIndex == -1) {
+            throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);
+        }
+        if (model.getCompanyFromIndex(companyIndex).getJobOffers().contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
-        model.addCompany(toAdd);
-        model.commitCompanyBook();*/
+        model.addJobOffer(toAdd.getCompanyName(),toAdd);
+        model.commitCompanyBook();
         LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     };

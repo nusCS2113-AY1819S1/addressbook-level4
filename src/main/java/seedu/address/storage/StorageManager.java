@@ -129,7 +129,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
 
     /**
-     * Saves the current version of the Job Book to the hard disk.
+     * Saves the current version of the Company Book to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
@@ -137,7 +137,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleCompanyBookChangedEvent(CompanyBookChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local jobbook changed, saving to file"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local CompanyBook changed, saving to file"));
         try {
             saveCompanyBook(event.data);
         } catch (IOException e) {

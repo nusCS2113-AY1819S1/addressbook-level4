@@ -21,11 +21,12 @@ public class Company {
 
     // Identity fields
     private final CompanyName companyName;
-    private final Address address;
 
     // Data fields
+    private final Address address;
     private final Email email;
     private final Phone phone;
+
 
     // List of unique job offers
     private UniqueJobList jobOffers;
@@ -63,8 +64,12 @@ public class Company {
         return Collections.unmodifiableList(jobOffers.getInternalList());
     }
 
+    public void addJobOffer(JobOffer jobOffer) {
+        jobOffers.add(jobOffer);
+    }
+
     /**
-     * Returns true if both companies is of the same name and same address
+     * Returns true if both companies is of the same name
      * This defines a weaker notion of equality between two companies.
      */
     public boolean isSameCompany(Company otherCompany) {
@@ -73,8 +78,7 @@ public class Company {
         }
 
         return otherCompany != null
-                && otherCompany.getCompanyName().equals(getCompanyName())
-                && otherCompany.getAddress().equals(getAddress());
+                && otherCompany.getCompanyName().equals(getCompanyName());
     }
 
     /**

@@ -5,6 +5,8 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyName;
+import seedu.address.model.joboffer.JobOffer;
 
 /**
  * The API of the Model component.
@@ -116,6 +118,16 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered company list */
     ObservableList<Company> getFilteredCompanyList();
 
+    /** Returns index of Company using @param companyName
+     *  companyName is enforced to be unique in CompanyBook
+     */
+    int getCompanyIndexFromName(CompanyName companyName);
+
+    /** Returns the Company object based on @param index
+     */
+
+    public Company getCompanyFromIndex(int index);
+
     /**
      * Updates the filter of the filtered company list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -146,4 +158,16 @@ public interface Model {
      * Saves the current CompanyBook state for undo/redo.
      */
     void commitCompanyBook();
+
+    // ================================== Job Offer functions ===================================== //
+
+    /**
+     * Adds a given job offer to the specified company name
+     * @code companyName has to exist in the CompanyBook
+     * @code jobOffer must not already exist inside the job list of companyName
+     */
+
+    void addJobOffer(CompanyName companyName, JobOffer jobOffer);
+
+
 }

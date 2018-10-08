@@ -15,6 +15,8 @@ import seedu.address.commons.events.model.CandidateBookChangedEvent;
 import seedu.address.commons.events.model.CompanyBookChangedEvent;
 import seedu.address.model.candidate.Candidate;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyName;
+import seedu.address.model.joboffer.JobOffer;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,7 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedCandidateBook versionedCandidateBook;
-    private final VersionedCompanyBook versionedJobBook;
+    private final VersionedCompanyBook versionedCompanyBook;
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
 
@@ -37,9 +39,9 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + candidateBook + " and user prefs " + userPrefs);
 
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
-        versionedJobBook = new VersionedCompanyBook(jobBook);
+        versionedCompanyBook = new VersionedCompanyBook(jobBook);
         filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
-        filteredCompanies = new FilteredList<>(versionedJobBook.getCompanyList());
+        filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
     }
 
     public ModelManager() {
@@ -62,7 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedCandidateBook.equals(other.versionedCandidateBook)
                 && filteredCandidates.equals(other.filteredCandidates)
-                && versionedJobBook.equals(other.versionedJobBook)
+                && versionedCompanyBook.equals(other.versionedCompanyBook)
                 && filteredCompanies.equals(other.filteredCompanies);
     }
 
@@ -162,44 +164,54 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetCompanyData(ReadOnlyCompanyBook newData) {
-        versionedJobBook.resetData(newData);
+        versionedCompanyBook.resetData(newData);
         indicateCompanyBookChanged();
     }
 
     @Override
     public ReadOnlyCompanyBook getCompanyBook() {
-        return versionedJobBook;
+        return versionedCompanyBook;
     }
 
     /** Raises an event to indicate the model has changed */
     private void indicateCompanyBookChanged() {
-        raise(new CompanyBookChangedEvent(versionedJobBook));
+        raise(new CompanyBookChangedEvent(versionedCompanyBook));
     }
 
     @Override
-    public boolean hasCompany(Company jobOffer) {
-        requireNonNull(jobOffer);
-        return versionedJobBook.hasCompany(jobOffer);
+    public boolean hasCompany(Company company) {
+        requireNonNull(company);
+        return versionedCompanyBook.hasCompany(company);
     }
 
     @Override
     public void deleteCompany(Company target) {
-        versionedJobBook.removeCompany(target);
+        versionedCompanyBook.removeCompany(target);
         indicateCompanyBookChanged();
     }
 
     @Override
-    public void addCompany(Company jobOffer) {
-        versionedJobBook.addCompany(jobOffer);
+    public void addCompany(Company company) {
+        versionedCompanyBook.addCompany(company);
         updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
         indicateCompanyBookChanged();
+    }
+
+    @Override
+    public int getCompanyIndexFromName(CompanyName companyName) {
+        return versionedCompanyBook.getCompanyIndexFromName(companyName);
+    }
+
+    @Override
+    public Company getCompanyFromIndex(int index) {
+        return versionedCompanyBook.getCompanyFromIndex(index);
     }
 
     @Override
     public void updateCompany(Company target, Company editedCompany) {
         requireAllNonNull(target, editedCompany);
 
-        versionedJobBook.updateCompany(target, editedCompany);
+        versionedCompanyBook.updateCompany(target, editedCompany);
         indicateCompanyBookChanged();
     }
 
@@ -207,7 +219,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
-     * {@code versionedJobBook}
+     * {@code versionedCompanyBook}
      */
     @Override
     public ObservableList<Company> getFilteredCompanyList() {
@@ -224,29 +236,37 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean canUndoCompanyBook() {
-        return versionedJobBook.canUndo();
+        return versionedCompanyBook.canUndo();
     }
 
     @Override
     public boolean canRedoCompanyBook() {
-        return versionedJobBook.canRedo();
+        return versionedCompanyBook.canRedo();
     }
 
     @Override
     public void undoCompanyBook() {
-        versionedJobBook.undo();
+        versionedCompanyBook.undo();
         indicateCompanyBookChanged();
     }
 
     @Override
     public void redoCompanyBook() {
-        versionedJobBook.redo();
+        versionedCompanyBook.redo();
         indicateCompanyBookChanged();
     }
 
     @Override
     public void commitCompanyBook() {
-        versionedJobBook.commit();
+        versionedCompanyBook.commit();
+    }
+
+    // ================================== Job Offer functions ===================================== //
+
+    @Override
+    public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
+        requireAllNonNull(companyName, jobOffer);
+        versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
     }
 
 }

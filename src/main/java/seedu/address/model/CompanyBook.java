@@ -6,8 +6,9 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.company.Company;
+import seedu.address.model.company.CompanyName;
 import seedu.address.model.company.UniqueCompanyList;
-
+import seedu.address.model.joboffer.JobOffer;
 
 
 /**
@@ -70,6 +71,23 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     }
 
     /**
+     * Returns company index if company with @param companyName exists in CompanyBook
+     * and -1 otherwise
+     */
+    public int getCompanyIndexFromName(CompanyName companyName) {
+        return companyList.getCompanyIndexFromName(companyName);
+    }
+
+    /**
+     * Returns the company object with the given index
+     */
+
+    public Company getCompanyFromIndex(int index) {
+        return companyList.getCompanyFromIndex(index);
+    }
+
+
+    /**
      * Replaces the given company {@code target} in the list with {@code editedCompany}.
      * {@code target} must exist in the address book.
      * The company identity of {@code editedCompany} must not be the same as another existing company in the
@@ -87,6 +105,12 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      */
     public void removeCompany(Company key) {
         companyList.remove(key);
+    }
+
+    // job offer level operations
+
+    public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
+        companyList.addJobOfferToCompany(companyName, jobOffer);
     }
 
     //// util methods
@@ -113,5 +137,6 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public int hashCode() {
         return companyList.hashCode();
     }
+
 
 }
