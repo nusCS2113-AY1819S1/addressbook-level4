@@ -14,6 +14,6 @@ public class CompanyBookChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of job offers " + data.getCompanyList().size();
+        return "number of companies " + data.getCompanyList().size();
     }
 }

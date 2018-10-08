@@ -267,6 +267,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
         requireAllNonNull(companyName, jobOffer);
         versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
+        indicateCompanyBookChanged();
     }
 
 }

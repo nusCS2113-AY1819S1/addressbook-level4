@@ -43,7 +43,7 @@ public class AddJobDetailsCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "New added job offer: %1$s";
-    public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the CompanyBook";
+    public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the Company";
     public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
                                                           + "Please add the company to CompanyBook first";
     private final JobOffer toAdd;
@@ -60,7 +60,7 @@ public class AddJobDetailsCommand extends Command {
         if (companyIndex == -1) {
             throw new CommandException(MESSAGE_COMPANY_NOT_FOUND);
         }
-        if (model.getCompanyFromIndex(companyIndex).getJobOffers().contains(toAdd)) {
+        if (model.getCompanyFromIndex(companyIndex).getUniqueJobList().contains(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
         model.addJobOffer(toAdd.getCompanyName(),toAdd);

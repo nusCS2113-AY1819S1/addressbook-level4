@@ -64,6 +64,10 @@ public class Company {
         return Collections.unmodifiableList(jobOffers.getInternalList());
     }
 
+    public UniqueJobList getUniqueJobList() {
+        return jobOffers;
+    }
+
     public void addJobOffer(JobOffer jobOffer) {
         jobOffers.add(jobOffer);
     }
