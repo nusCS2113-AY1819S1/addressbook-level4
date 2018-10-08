@@ -30,7 +30,6 @@ public class PersonBuilder {
     private Address address;
     private Grade grade;
     private Set<Tag> tags;
-    private Grade grade;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
