@@ -11,6 +11,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TestStorage;
 
 public class ClearCommandSystemTest extends AddressBookSystemTest {
 
@@ -33,7 +34,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         /* Case: redo clearing address book -> cleared */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        assertCommandSuccess(command, expectedResultMessage, new ModelManager());
+        assertCommandSuccess(command, expectedResultMessage, new ModelManager(new TestStorage()));
         assertSelectedCardUnchanged();
 
         /* Case: selects first card in person list and clears address book -> cleared and no card selected */
@@ -65,7 +66,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(String command) {
-        assertCommandSuccess(command, ClearCommand.MESSAGE_SUCCESS, new ModelManager());
+        assertCommandSuccess(command, ClearCommand.MESSAGE_SUCCESS, new ModelManager(new TestStorage()));
     }
 
     /**
