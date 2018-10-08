@@ -11,7 +11,7 @@ import seedu.address.model.person.UniquePersonList;
 
 public class SortGrade { //from lowest to highest
     public SortGrade(){}
-    public ArrayList<Person> sortingFromHightestToLowest(UniquePersonList personList) {
+    public ArrayList<Person> sortingFromLowesttoHighest(UniquePersonList personList) {
             ArrayList<Person> pList = new ArrayList<>(bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
             System.out.println(pList.toString());
             return pList;

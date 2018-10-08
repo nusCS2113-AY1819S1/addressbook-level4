@@ -43,10 +43,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         resetData(toBeCopied);
 
         SortGrade sortGrade = new SortGrade();
-        sortGrade.sortingFromHightestToLowest(persons);
+        sortGrade.sortingFromLowesttoHighest(persons);
 
         Calculator cal = new Calculator();
         cal.Find_25th(persons);
+        cal.Find_75th(persons);
+        cal.CalculateMedian(persons);
 
     }
 

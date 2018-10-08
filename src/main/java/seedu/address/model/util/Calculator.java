@@ -76,13 +76,20 @@ public class Calculator {
     }
 
     public int CalculateMedian(UniquePersonList personList) { //calculate the mean score of a test
-        int sum =0;
-        for(int i=0; i<personList.asUnmodifiableObservableList().size(); i++ ){
+        int median=0;
+        ArrayList<Person> sortedList =
+                new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
 
-            sum += Integer.parseInt(personList.asUnmodifiableObservableList().get(i).getGrade().value); //string to integer then calculate
+        int size = sortedList.size();
+        int index=(size/2)-1;
+        if(size %2 == 0){
+            median=(Integer.parseInt(sortedList.get(index).getGrade().value)+
+                    Integer.parseInt(sortedList.get(index+1).getGrade().value))/2;
         }
-        int mean=sum/personList.asUnmodifiableObservableList().size();
-        return mean;
+        else
+            median=Integer.parseInt(sortedList.get(index+1).getGrade().value);
+        System.out.println(median);
+        return median;
     }
 
 
