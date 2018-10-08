@@ -4,12 +4,12 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
-import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.recruit.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.recruit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static seedu.recruit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.recruit.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
+import static seedu.recruit.ui.UiPart.FXML_FILE_FOLDER;
+import static seedu.recruit.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,19 +31,19 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.MainApp;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCandidateBookCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.CandidateBook;
-import seedu.address.model.Model;
-import seedu.address.testutil.TypicalPersons;
-import seedu.address.ui.BrowserPanel;
-import seedu.address.ui.CommandBox;
+import seedu.recruit.MainApp;
+import seedu.recruit.TestApp;
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.logic.commands.ClearCandidateBookCommand;
+import seedu.recruit.logic.commands.FindCommand;
+import seedu.recruit.logic.commands.ListCommand;
+import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.model.CandidateBook;
+import seedu.recruit.model.Model;
+import seedu.recruit.testutil.TypicalPersons;
+import seedu.recruit.ui.BrowserPanel;
+import seedu.recruit.ui.CommandBox;
 
 /**
  * A system test class for CandidateBook, which provides access to handles of GUI components and helper methods
@@ -140,7 +140,7 @@ public abstract class CandidateBookSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all persons in the recruit book.
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
@@ -166,7 +166,7 @@ public abstract class CandidateBookSystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all persons in the recruit book.
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCandidateBookCommand.COMMAND_WORD);
@@ -280,7 +280,7 @@ public abstract class CandidateBookSystemTest {
     /**
      * Asserts that the sync status in the status bar was changed to the timing of
      * {@code ClockRule#getInjectedClock()}, and total persons was changed to match the total
-     * number of persons in the address book, while the save location remains the same.
+     * number of persons in the recruit book, while the save location remains the same.
      */
     protected void assertStatusBarChangedExceptSaveLocation() {
         StatusBarFooterHandle handle = getStatusBarFooter();
