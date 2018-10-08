@@ -19,9 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.CandidateBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyCandidateBook;
-import seedu.address.model.ReadOnlyJobBook;
+import seedu.address.model.ReadOnlyCompanyBook;
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.joboffer.JobOffer;
+import seedu.address.model.company.Company;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCandidateCommandTest {
@@ -156,67 +156,67 @@ public class AddCandidateCommandTest {
         }
 
         @Override
-        public void resetJobOfferData(ReadOnlyJobBook newData) {
+        public void resetCompanyData(ReadOnlyCompanyBook newData) {
             throw new AssertionError("This method should not be called.");
         };
 
         @Override
-        public ReadOnlyJobBook getJobBook() {
+        public ReadOnlyCompanyBook getCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasJobOffer(JobOffer jobOffer) {
+        public boolean hasCompany(Company jobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteJobOffer(JobOffer target) {
+        public void deleteCompany(Company target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addJobOffer(JobOffer jobOffer) {
+        public void addCompany(Company jobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
+        public void updateCompany(Company target, Company editedJobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<JobOffer> getFilteredJobList() {
+        public ObservableList<Company> getFilteredCompanyList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateFilteredJobOfferList(Predicate<JobOffer> predicate) {
+        public void updateFilteredCompanyList(Predicate<Company> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canUndoJobBook() {
+        public boolean canUndoCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoJobBook() {
+        public boolean canRedoCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoJobBook() {
+        public void undoCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoJobBook() {
+        public void redoCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitJobBook() {
+        public void commitCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
     }

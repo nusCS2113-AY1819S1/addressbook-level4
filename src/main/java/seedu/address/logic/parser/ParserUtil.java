@@ -213,10 +213,10 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code company} is invalid.
      */
-    public static CompanyName parseCompany (String company) throws ParseException {
+    public static CompanyName parseCompanyName(String company) throws ParseException {
         requireNonNull(company);
         String trimmedCompany = company.trim();
-        if (!CompanyName.isValidCompany(trimmedCompany)) {
+        if (!CompanyName.isValidCompanyName(trimmedCompany)) {
             throw new ParseException(CompanyName.MESSAGE_COMPANY_CONSTRAINTS);
         }
         return new CompanyName(trimmedCompany);

@@ -19,7 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.candidate.Candidate;
 
 /**
- * Adds a candidate to the address book.
+ * Adds a candidate to the CandidateBook.
  */
 public class AddCandidateCommand extends Command {
 

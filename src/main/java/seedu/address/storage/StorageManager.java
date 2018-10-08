@@ -10,11 +10,11 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.CandidateBookChangedEvent;
-import seedu.address.commons.events.model.JobBookChangedEvent;
+import seedu.address.commons.events.model.CompanyBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyCandidateBook;
-import seedu.address.model.ReadOnlyJobBook;
+import seedu.address.model.ReadOnlyCompanyBook;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -24,14 +24,14 @@ public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private CandidateBookStorage candidateBookStorage;
-    private JobBookStorage jobBookStorage;
+    private CompanyBookStorage companyBookStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(CandidateBookStorage candidateBookStorage, JobBookStorage jobBookStorage,
+    public StorageManager(CandidateBookStorage candidateBookStorage, CompanyBookStorage companyBookStorage,
                           UserPrefsStorage userPrefsStorage) {
         super();
-        this.jobBookStorage = jobBookStorage;
+        this.companyBookStorage = companyBookStorage;
         this.candidateBookStorage = candidateBookStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -97,33 +97,33 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-    // ========================== JobBook methods ==============================
+    // ========================== CompanyBook methods ==============================
 
     @Override
-    public Path getJobBookFilePath() {
-        return jobBookStorage.getJobBookFilePath();
+    public Path getCompanyBookFilePath() {
+        return companyBookStorage.getCompanyBookFilePath();
     };
 
     @Override
-    public Optional<ReadOnlyJobBook> readJobBook() throws DataConversionException, IOException {
-        return readJobBook(jobBookStorage.getJobBookFilePath());
+    public Optional<ReadOnlyCompanyBook> readCompanyBook() throws DataConversionException, IOException {
+        return readCompanyBook(companyBookStorage.getCompanyBookFilePath());
     };
 
     @Override
-    public Optional<ReadOnlyJobBook> readJobBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyCompanyBook> readCompanyBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read jobbook data from file: " + filePath);
-        return jobBookStorage.readJobBook(filePath);
+        return companyBookStorage.readCompanyBook(filePath);
     }
 
     @Override
-    public void saveJobBook(ReadOnlyJobBook jobBook) throws IOException {
-        saveJobBook(jobBook, jobBookStorage.getJobBookFilePath());
+    public void saveCompanyBook(ReadOnlyCompanyBook jobBook) throws IOException {
+        saveCompanyBook(jobBook, companyBookStorage.getCompanyBookFilePath());
     }
 
     @Override
-    public void saveJobBook(ReadOnlyJobBook jobBook, Path filePath) throws IOException {
+    public void saveCompanyBook(ReadOnlyCompanyBook jobBook, Path filePath) throws IOException {
         logger.fine("Attempting to write jobbook to data file: " + filePath);
-        jobBookStorage.saveJobBook(jobBook, filePath);
+        companyBookStorage.saveCompanyBook(jobBook, filePath);
     }
 
 
@@ -136,10 +136,10 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     @Subscribe
-    public void handleJobBookChangedEvent(JobBookChangedEvent event) {
+    public void handleCompanyBookChangedEvent(CompanyBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local jobbook changed, saving to file"));
         try {
-            saveJobBook(event.data);
+            saveCompanyBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

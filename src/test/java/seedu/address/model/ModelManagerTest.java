@@ -52,8 +52,8 @@ public class ModelManagerTest {
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(candidateBook, new JobBook(), userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(candidateBook, new JobBook(), userPrefs);
+        modelManager = new ModelManager(candidateBook, new CompanyBook(), userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(candidateBook, new CompanyBook(), userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -66,12 +66,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different candidateBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentCandidateBook, new JobBook(), userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentCandidateBook, new CompanyBook(), userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredCandidateList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(candidateBook, new JobBook(), userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
@@ -79,6 +79,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setCandidateBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(candidateBook, new JobBook(), differentUserPrefs)));
+        assertTrue(modelManager.equals(new ModelManager(candidateBook, new CompanyBook(), differentUserPrefs)));
     }
 }

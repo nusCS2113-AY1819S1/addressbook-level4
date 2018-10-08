@@ -2,16 +2,19 @@ package seedu.address.model.company;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.commons.Address;
 import seedu.address.model.commons.Email;
 import seedu.address.model.commons.Phone;
+import seedu.address.model.joboffer.JobOffer;
 import seedu.address.model.joboffer.UniqueJobList;
 
 
 /**
- * Represents each Company in the JobBook
+ * Represents each Company in the CompanyBook
  */
 
 public class Company {
@@ -31,7 +34,7 @@ public class Company {
      * Every field must be present and not null.
      */
 
-    Company (CompanyName companyName, Address address, Email email, Phone phone, UniqueJobList jobOffers) {
+    public Company (CompanyName companyName, Address address, Email email, Phone phone, UniqueJobList jobOffers) {
         requireAllNonNull(companyName, address, email, phone);
         this.companyName = companyName;
         this.address = address;
@@ -54,6 +57,10 @@ public class Company {
 
     public Phone getPhone() {
         return phone;
+    }
+
+    public List<JobOffer> getJobOffers() {
+        return Collections.unmodifiableList(jobOffers.getInternalList());
     }
 
     /**

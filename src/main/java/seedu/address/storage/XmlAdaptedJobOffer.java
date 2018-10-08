@@ -23,7 +23,7 @@ public class XmlAdaptedJobOffer {
     @XmlElement(required = true)
     private String job;
     @XmlElement(required = true)
-    private String company;
+    private String companyName;
     @XmlElement(required = true)
     private String gender;
     @XmlElement(required = true)
@@ -44,9 +44,9 @@ public class XmlAdaptedJobOffer {
      * Constructs an {@code XmlAdaptedJobOffer} with the given job offer details.
      */
 
-    public XmlAdaptedJobOffer(String company, String job, String gender, String ageRange, String education,
+    public XmlAdaptedJobOffer(String companyName, String job, String gender, String ageRange, String education,
                               String salary) {
-        this.company = company;
+        this.companyName = companyName;
         this.job = job;
         this.gender = gender;
         this.ageRange = ageRange;
@@ -63,13 +63,14 @@ public class XmlAdaptedJobOffer {
 
     public XmlAdaptedJobOffer(JobOffer source) {
 
-        company = source.getCompanyName().value;
+        companyName = source.getCompanyName().value;
         job = source.getJob().value;
         gender = source.getGender().value;
         ageRange = source.getAgeRange().value;
         education = source.getEducation().value;
         salary = source.getSalary().value;
     }
+
 
     /**
      * Converts this jaxb-friendly adapted job offer object into the model's JobOffer object.
@@ -79,15 +80,15 @@ public class XmlAdaptedJobOffer {
 
     public JobOffer toModelType() throws IllegalValueException {
 
-        if (company == null) {
+        if (companyName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Job.class.getSimpleName()));
         }
 
-        if (!CompanyName.isValidCompany(company)) {
+        if (!CompanyName.isValidCompanyName(companyName)) {
             throw new IllegalValueException(CompanyName.MESSAGE_COMPANY_CONSTRAINTS);
         }
 
-        final CompanyName modelCompanyName = new CompanyName(company);
+        final CompanyName modelCompanyName = new CompanyName(companyName);
 
 
         if (job == null) {
@@ -158,7 +159,7 @@ public class XmlAdaptedJobOffer {
         }
 
         XmlAdaptedJobOffer otherPerson = (XmlAdaptedJobOffer) other;
-        return Objects.equals(company, otherPerson.company)
+        return Objects.equals(companyName, otherPerson.companyName)
                 && Objects.equals(job, otherPerson.job);
     }
 }

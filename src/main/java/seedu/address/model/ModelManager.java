@@ -12,9 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.CandidateBookChangedEvent;
-import seedu.address.commons.events.model.JobBookChangedEvent;
+import seedu.address.commons.events.model.CompanyBookChangedEvent;
 import seedu.address.model.candidate.Candidate;
-import seedu.address.model.joboffer.JobOffer;
+import seedu.address.model.company.Company;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -23,27 +23,27 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedCandidateBook versionedCandidateBook;
-    private final VersionedJobBook versionedJobBook;
+    private final VersionedCompanyBook versionedJobBook;
     private final FilteredList<Candidate> filteredCandidates;
-    private final FilteredList<JobOffer> filteredJobOffers;
+    private final FilteredList<Company> filteredCompanies;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.
      */
-    public ModelManager(ReadOnlyCandidateBook candidateBook, ReadOnlyJobBook jobBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyCandidateBook candidateBook, ReadOnlyCompanyBook jobBook, UserPrefs userPrefs) {
         super();
         requireAllNonNull(candidateBook, userPrefs);
 
         logger.fine("Initializing with address book: " + candidateBook + " and user prefs " + userPrefs);
 
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
-        versionedJobBook = new VersionedJobBook(jobBook);
+        versionedJobBook = new VersionedCompanyBook(jobBook);
         filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
-        filteredJobOffers = new FilteredList<>(versionedJobBook.getJobOfferList());
+        filteredCompanies = new FilteredList<>(versionedJobBook.getCompanyList());
     }
 
     public ModelManager() {
-        this(new CandidateBook(), new JobBook(), new UserPrefs());
+        this(new CandidateBook(), new CompanyBook(), new UserPrefs());
     }
 
     @Override
@@ -63,7 +63,7 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedCandidateBook.equals(other.versionedCandidateBook)
                 && filteredCandidates.equals(other.filteredCandidates)
                 && versionedJobBook.equals(other.versionedJobBook)
-                && filteredJobOffers.equals(other.filteredJobOffers);
+                && filteredCompanies.equals(other.filteredCompanies);
     }
 
     // ================================== CandidateBook functions ====================================== //
@@ -158,94 +158,94 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
 
-    // ================================== JobBook functions ===================================== //
+    // ================================== CompanyBook functions ===================================== //
 
     @Override
-    public void resetJobOfferData(ReadOnlyJobBook newData) {
+    public void resetCompanyData(ReadOnlyCompanyBook newData) {
         versionedJobBook.resetData(newData);
-        indicateJobBookChanged();
+        indicateCompanyBookChanged();
     }
 
     @Override
-    public ReadOnlyJobBook getJobBook() {
+    public ReadOnlyCompanyBook getCompanyBook() {
         return versionedJobBook;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateJobBookChanged() {
-        raise(new JobBookChangedEvent(versionedJobBook));
+    private void indicateCompanyBookChanged() {
+        raise(new CompanyBookChangedEvent(versionedJobBook));
     }
 
     @Override
-    public boolean hasJobOffer(JobOffer jobOffer) {
+    public boolean hasCompany(Company jobOffer) {
         requireNonNull(jobOffer);
-        return versionedJobBook.hasJobOffer(jobOffer);
+        return versionedJobBook.hasCompany(jobOffer);
     }
 
     @Override
-    public void deleteJobOffer(JobOffer target) {
-        versionedJobBook.removeJobOffer(target);
-        indicateJobBookChanged();
+    public void deleteCompany(Company target) {
+        versionedJobBook.removeCompany(target);
+        indicateCompanyBookChanged();
     }
 
     @Override
-    public void addJobOffer(JobOffer jobOffer) {
-        versionedJobBook.addJobOffer(jobOffer);
-        updateFilteredJobOfferList(PREDICATE_SHOW_ALL_JOB_OFFERS);
-        indicateJobBookChanged();
+    public void addCompany(Company jobOffer) {
+        versionedJobBook.addCompany(jobOffer);
+        updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        indicateCompanyBookChanged();
     }
 
     @Override
-    public void updateJobOffer(JobOffer target, JobOffer editedJobOffer) {
-        requireAllNonNull(target, editedJobOffer);
+    public void updateCompany(Company target, Company editedCompany) {
+        requireAllNonNull(target, editedCompany);
 
-        versionedJobBook.updateJobOffer(target, editedJobOffer);
-        indicateJobBookChanged();
+        versionedJobBook.updateCompany(target, editedCompany);
+        indicateCompanyBookChanged();
     }
 
-    //=========== Filtered JobOffer List Accessors =============================================================
+    //=========== Filtered Company List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code JobOffer} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Company} backed by the internal list of
      * {@code versionedJobBook}
      */
     @Override
-    public ObservableList<JobOffer> getFilteredJobList() {
-        return FXCollections.unmodifiableObservableList(filteredJobOffers);
+    public ObservableList<Company> getFilteredCompanyList() {
+        return FXCollections.unmodifiableObservableList(filteredCompanies);
     }
 
     @Override
-    public void updateFilteredJobOfferList(Predicate<JobOffer> predicate) {
+    public void updateFilteredCompanyList(Predicate<Company> predicate) {
         requireNonNull(predicate);
-        filteredJobOffers.setPredicate(predicate);
+        filteredCompanies.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoJobBook() {
+    public boolean canUndoCompanyBook() {
         return versionedJobBook.canUndo();
     }
 
     @Override
-    public boolean canRedoJobBook() {
+    public boolean canRedoCompanyBook() {
         return versionedJobBook.canRedo();
     }
 
     @Override
-    public void undoJobBook() {
+    public void undoCompanyBook() {
         versionedJobBook.undo();
-        indicateJobBookChanged();
+        indicateCompanyBookChanged();
     }
 
     @Override
-    public void redoJobBook() {
+    public void redoCompanyBook() {
         versionedJobBook.redo();
-        indicateJobBookChanged();
+        indicateCompanyBookChanged();
     }
 
     @Override
-    public void commitJobBook() {
+    public void commitCompanyBook() {
         versionedJobBook.commit();
     }
 

@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * {@code JobBook} that keeps track of its own history.
+ * {@code CompanyBook} that keeps track of its own history.
  */
-public class VersionedJobBook extends JobBook {
+public class VersionedCompanyBook extends CompanyBook {
 
-    private final List<ReadOnlyJobBook> jobBookStateList;
+    private final List<ReadOnlyCompanyBook> jobBookStateList;
     private int currentStatePointer;
 
-    public VersionedJobBook(ReadOnlyJobBook initialState) {
+    public VersionedCompanyBook(ReadOnlyCompanyBook initialState) {
         super(initialState);
 
         jobBookStateList = new ArrayList<>();
-        jobBookStateList.add(new JobBook(initialState));
+        jobBookStateList.add(new CompanyBook(initialState));
         currentStatePointer = 0;
     }
 
     /**
-     * Saves a copy of the current {@code JobBook} state at the end of the state list.
+     * Saves a copy of the current {@code CompanyBook} state at the end of the state list.
      * Undone states are removed from the state list.
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        jobBookStateList.add(new JobBook(this));
+        jobBookStateList.add(new CompanyBook(this));
         currentStatePointer++;
     }
 
@@ -77,11 +77,11 @@ public class VersionedJobBook extends JobBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof VersionedJobBook)) {
+        if (!(other instanceof VersionedCompanyBook)) {
             return false;
         }
 
-        VersionedJobBook otherVersionedJobBook = (VersionedJobBook) other;
+        VersionedCompanyBook otherVersionedJobBook = (VersionedCompanyBook) other;
 
         // state check
         return super.equals(otherVersionedJobBook)
