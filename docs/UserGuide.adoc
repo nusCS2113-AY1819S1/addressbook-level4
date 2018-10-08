@@ -221,6 +221,21 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+=== Import Timetable from a file : `import` (`i`)
+
+Imports a timetable from file. Currently only support (.ics) files exported from NUSMODS. +
+
+Format: `import INDEX file/FILE_LOCATION`
+
+Examples:
+
+* `import 1 file/C:\Users\happycat96\Downloads\nusmods_calendar.ics` +
+
+[TIP]
+You can import your NUSMODS timetable as a .ics file.
+
+image::importics.png[]
+
 === Exiting the program : `exit` (`x`)
 
 Exits the program. +
@@ -260,3 +275,4 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Import Timetable from a file* : `import INDEX file/FILE_LOCATION`
