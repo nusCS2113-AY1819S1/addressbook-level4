@@ -33,6 +33,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
+
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditItemDescriptorBuilder;
 
@@ -76,9 +77,9 @@ public class EditCommandParserTest {
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_MIN_QUANTITY_DESC,
-                Quantity.MESSAGE_MIN_QUANTITY_CONSTRAINTS); // invalid email
+                Quantity.MESSAGE_MIN_QUANTITY_CONSTRAINTS); // invalid min_quantity
         assertParseFailure(parser, "1" + INVALID_QUANTITY_DESC,
-                Quantity.MESSAGE_QUANTITY_CONSTRAINTS); // invalid address
+                Quantity.MESSAGE_QUANTITY_CONSTRAINTS); // invalid quantity
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Item} being edited,
@@ -95,12 +96,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_ITEM;
-        String userInput = targetIndex.getOneBased() + NAME_DESC_RPLIDAR
-                + QUANTITY_DESC_RPLIDAR + MIN_QUANTITY_DESC_RPLIDAR + TAG_DESC_LAB1;
+        String userInput = targetIndex.getOneBased() + QUANTITY_DESC_ARDUINO+TAG_DESC_LAB2
+                + MIN_QUANTITY_DESC_RPLIDAR + NAME_DESC_RPLIDAR + TAG_DESC_LAB1;
 
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR)
-                .withQuantity(VALID_QUANTITY_RPLIDAR).withMinQuantity(VALID_MIN_QUANTITY_RPLIDAR)
-                .withTags(VALID_TAG_LAB1).build();
+                .withQuantity(VALID_QUANTITY_ARDUINO).withMinQuantity(VALID_MIN_QUANTITY_RPLIDAR)
+                .withTags(VALID_TAG_LAB2,VALID_TAG_LAB1).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -121,7 +122,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_SECOND_ITEM;
+        Index targetIndex = INDEX_THIRD_ITEM;
         String userInput = targetIndex.getOneBased() + NAME_DESC_RPLIDAR;
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
