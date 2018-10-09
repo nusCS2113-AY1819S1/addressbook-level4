@@ -14,7 +14,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
+//import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -23,17 +23,17 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TaskBookStorage;
 import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlAddressBookStorage;
-import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
+import seedu.address.storage.XmlTaskBookStorage;
+//import seedu.address.ui.Ui;
+//import seedu.address.ui.UiManager;
 
 /**
  * The main entry point to the application.
@@ -44,7 +44,7 @@ public class MainApp extends Application {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    protected Ui ui;
+    //    protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
@@ -62,8 +62,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        TaskBookStorage taskBookStorage = new XmlTaskBookStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(taskBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -71,7 +71,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        ui = new UiManager(logic, config, userPrefs);
+        //        ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
     }
@@ -82,10 +82,10 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskBook> addressBookOptional;
+        ReadOnlyTaskBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
+            addressBookOptional = storage.readTaskBook();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
@@ -180,13 +180,13 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+        //        ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
-        ui.stop();
+        //        ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
@@ -196,11 +196,11 @@ public class MainApp extends Application {
         System.exit(0);
     }
 
-    @Subscribe
-    public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        stop();
-    }
+    //    @Subscribe
+    //    public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
+    //        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+    //        stop();
+    //    }
 
     public static void main(String[] args) {
         launch(args);

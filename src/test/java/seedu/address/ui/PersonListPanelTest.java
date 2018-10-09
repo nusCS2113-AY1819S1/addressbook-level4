@@ -21,11 +21,11 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.person.Person;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.model.person.Task;
+import seedu.address.storage.XmlSerializableTaskBook;
 
 public class PersonListPanelTest extends GuiUnitTest {
-    private static final ObservableList<Person> TYPICAL_PERSONS =
+    private static final ObservableList<Task> TYPICAL_PERSONS =
             FXCollections.observableList(getTypicalPersons());
 
     private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
@@ -42,10 +42,10 @@ public class PersonListPanelTest extends GuiUnitTest {
 
         for (int i = 0; i < TYPICAL_PERSONS.size(); i++) {
             personListPanelHandle.navigateToCard(TYPICAL_PERSONS.get(i));
-            Person expectedPerson = TYPICAL_PERSONS.get(i);
+            Task expectedTask = TYPICAL_PERSONS.get(i);
             PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
 
-            assertCardDisplaysPerson(expectedPerson, actualCard);
+            assertCardDisplaysPerson(expectedTask, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
         }
     }
@@ -67,23 +67,23 @@ public class PersonListPanelTest extends GuiUnitTest {
      */
     @Test
     public void performanceTest() throws Exception {
-        ObservableList<Person> backingList = createBackingList(10000);
+        ObservableList<Task> backingList = createBackingList(10000);
 
         assertTimeoutPreemptively(ofMillis(CARD_CREATION_AND_DELETION_TIMEOUT), () -> {
             initUi(backingList);
             guiRobot.interact(backingList::clear);
-        }, "Creation and deletion of person cards exceeded time limit");
+        }, "Creation and deletion of task cards exceeded time limit");
     }
 
     /**
      * Returns a list of persons containing {@code personCount} persons that is used to populate the
      * {@code PersonListPanel}.
      */
-    private ObservableList<Person> createBackingList(int personCount) throws Exception {
+    private ObservableList<Task> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableAddressBook xmlAddressBook =
-                XmlUtil.getDataFromFile(xmlFile, XmlSerializableAddressBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
+        XmlSerializableTaskBook xmlAddressBook =
+                XmlUtil.getDataFromFile(xmlFile, XmlSerializableTaskBook.class);
+        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getTaskList());
     }
 
     /**
@@ -114,7 +114,7 @@ public class PersonListPanelTest extends GuiUnitTest {
      * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}.
      * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
      */
-    private void initUi(ObservableList<Person> backingList) {
+    private void initUi(ObservableList<Task> backingList) {
         PersonListPanel personListPanel = new PersonListPanel(backingList);
         uiPartRule.setUiPart(personListPanel);
 
