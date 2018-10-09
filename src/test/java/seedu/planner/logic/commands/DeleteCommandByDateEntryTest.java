@@ -4,6 +4,7 @@ import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertNotEquals;
 import static seedu.planner.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
+
 import java.util.ArrayList;
 import java.util.List;
 

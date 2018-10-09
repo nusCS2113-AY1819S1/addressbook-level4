@@ -67,11 +67,7 @@ public class Date {
                 return false;
             } else if (month == 2 || month == 4 || month == 6 || month == 9 || month == 11) {
                 if (day <= 30) {
-                    if (month == 2 && day > 28 && isLeapYear(year)) {
-                        return false;
-                    } else {
-                        return true;
-                    }
+                    return month != 2 || day <= 28 || !isLeapYear(year);
                 }
             } else {
                 return false;
@@ -90,10 +86,8 @@ public class Date {
             return true;
         } else if (year % 100 == 0) {
             return false;
-        } else if (year % 4 == 0) {
-            return true;
         } else {
-            return false;
+            return year % 4 == 0;
         }
     }
 
