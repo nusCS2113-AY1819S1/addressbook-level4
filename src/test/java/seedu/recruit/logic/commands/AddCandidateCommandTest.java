@@ -42,7 +42,7 @@ public class AddCandidateCommandTest {
         CommandResult commandResult = new AddCandidateCommand(validCandidate).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddCandidateCommand.MESSAGE_SUCCESS, validCandidate), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validCandidate), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validCandidate), modelStub.candidatesAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
@@ -85,9 +85,7 @@ public class AddCandidateCommandTest {
     /**
      * A Model stub that contains a single candidate.
      */
-    private class ModelStubWithPerson extends CommandTestUtil.ModelStub
-
-    {
+    private class ModelStubWithPerson extends CommandTestUtil.ModelStub {
         private final Candidate candidate;
 
         ModelStubWithPerson(Candidate candidate) {
@@ -106,18 +104,18 @@ public class AddCandidateCommandTest {
      * A Model stub that always accept the candidate being added.
      */
     private class ModelStubAcceptingPersonAdded extends CommandTestUtil.ModelStub {
-        final ArrayList<Candidate> personsAdded = new ArrayList<>();
+        final ArrayList<Candidate> candidatesAdded = new ArrayList<>();
 
         @Override
         public boolean hasCandidate(Candidate candidate) {
             requireNonNull(candidate);
-            return personsAdded.stream().anyMatch(candidate::isSamePerson);
+            return candidatesAdded.stream().anyMatch(candidate::isSamePerson);
         }
 
         @Override
         public void addCandidate(Candidate candidate) {
             requireNonNull(candidate);
-            personsAdded.add(candidate);
+            candidatesAdded.add(candidate);
         }
 
         @Override
