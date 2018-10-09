@@ -4,8 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.ExportAllCommand.MESSAGE_ARGUMENTS;
-import static seedu.address.testutil.TypicalFiletypes.FILETYPE_CSV;
-import static seedu.address.testutil.TypicalFiletypes.FILETYPE_VCF;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
@@ -20,6 +18,9 @@ import seedu.address.model.UserPrefs;
  * Contains integration tests (interaction with the Model) and unit tests for ExportAllCommand.
  */
 public class ExportAllCommandTest {
+
+    private static final String FILETYPE_CSV = "csv";
+    private static final String FILETYPE_VCF = "vcf";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 

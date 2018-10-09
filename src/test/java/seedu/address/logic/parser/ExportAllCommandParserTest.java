@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalFiletypes.FILETYPE_CSV;
 
 import org.junit.Test;
 
@@ -16,7 +15,7 @@ public class ExportAllCommandParserTest {
 
     @Test
     public void parseFiletypeSuccess() {
-        String userInput = FILETYPE_CSV;
+        final String userInput = "csv";
         ExportAllCommand expectedCommand = new ExportAllCommand(userInput);
         assertParseSuccess(parser, userInput, expectedCommand);
     }
@@ -24,8 +23,8 @@ public class ExportAllCommandParserTest {
     @Test
     public void parseMissingNotNullFieldFailure() {
         // no parameters
-        String userInput = ExportAllCommand.COMMAND_WORD + " ";
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportAllCommand.MESSAGE_USAGE);
+        final String userInput = ExportAllCommand.COMMAND_WORD + " ";
+        final String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ExportAllCommand.MESSAGE_USAGE);
         assertParseFailure(parser, userInput, expectedMessage);
     }
 
