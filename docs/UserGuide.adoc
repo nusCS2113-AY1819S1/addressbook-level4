@@ -58,20 +58,20 @@ User: Creates a *user* account +
 Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD` +
 Examples:
 
-* `signup n/Gerald Chua p/password12345 c/password12345` +
+* `signup u/Gerald Chua p/password12345 c/password12345` +
 Creates account for Gerald Chua
-* `signup n/James Yaputra p/drowssap12345 c/drowssap12345` +
+* `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
 Creates account for James Yaputra
 
 === Signing up for an account : `login`
 
 User: Logs in to account +
-Format: `login n/USERNAME p/PASSWORD` +
-Examples: 
+Format: `login u/USERNAME p/PASSWORD` +
+Examples:
 
 * `login n/Gerald Chua p/password12345` +
 Logs in Gerald Chua +
-* `login n/James Yaputra p/drowssap12345` +
+* `login u/James Yaputra p/drowssap12345` +
 Logs in James Yaputra
 
 === Viewing help : `help`
