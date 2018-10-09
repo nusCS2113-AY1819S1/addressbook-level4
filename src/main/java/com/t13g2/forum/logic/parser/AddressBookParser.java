@@ -6,19 +6,7 @@ import static com.t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.t13g2.forum.logic.commands.AddCommand;
-import com.t13g2.forum.logic.commands.ClearCommand;
-import com.t13g2.forum.logic.commands.Command;
-import com.t13g2.forum.logic.commands.DeleteCommand;
-import com.t13g2.forum.logic.commands.EditCommand;
-import com.t13g2.forum.logic.commands.ExitCommand;
-import com.t13g2.forum.logic.commands.FindCommand;
-import com.t13g2.forum.logic.commands.HelpCommand;
-import com.t13g2.forum.logic.commands.HistoryCommand;
-import com.t13g2.forum.logic.commands.ListCommand;
-import com.t13g2.forum.logic.commands.RedoCommand;
-import com.t13g2.forum.logic.commands.SelectCommand;
-import com.t13g2.forum.logic.commands.UndoCommand;
+import com.t13g2.forum.logic.commands.*;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
 /**
@@ -83,6 +71,12 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case AnnounceCommand.COMMAND_WORD:
+            return new AnnounceCommandParser().parse(arguments);
+
+        case CheckAnnouncmentCommand.COMMAND_WORD:
+            return new CheckAnnouncmentCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

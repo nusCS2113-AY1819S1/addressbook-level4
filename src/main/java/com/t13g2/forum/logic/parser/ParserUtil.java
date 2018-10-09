@@ -9,6 +9,7 @@ import java.util.Set;
 import com.t13g2.forum.commons.core.index.Index;
 import com.t13g2.forum.commons.util.StringUtil;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
+import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.person.Address;
 import com.t13g2.forum.model.person.Email;
 import com.t13g2.forum.model.person.Name;
@@ -120,5 +121,16 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    public static Announcement parseAnnouncement(String title, String content) throws ParseException {
+        requireNonNull(title);
+        requireNonNull(content);
+        String trimmedTitle = title.trim();
+        String trimmedContent = content.trim();
+        if (!Announcement.isValidAnnouncement(trimmedTitle, trimmedContent)) {
+            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+        return new Announcement(trimmedTitle, trimmedContent);
     }
 }
