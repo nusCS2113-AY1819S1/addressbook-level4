@@ -9,7 +9,9 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents a list of all the snapshots of backups.
@@ -18,6 +20,7 @@ public class BackupList {
     public static final String MESSAGE_BACKUP_CONSTRAINTS = "There are no previous backups.";
 
     private List<String> fileNames = new ArrayList<>();
+    private Map<Integer, File> fileMap = new HashMap<>();
 
     public BackupList(File backupDir) throws IOException {
         for (File snapshots : backupDir.listFiles()) {
@@ -25,6 +28,7 @@ public class BackupList {
             millis = millis.substring(0, millis.length() - 4);
             String fileName = millisToDateAndTime(millis);
             fileNames.add(fileName);
+            fileMap.put(fileNames.indexOf(fileName), snapshots);
         }
         if (fileNames.size() == 0) {
             throw new IOException(MESSAGE_BACKUP_CONSTRAINTS);
@@ -35,6 +39,10 @@ public class BackupList {
 
     public List<String> getFileNames() {
         return this.fileNames;
+    }
+
+    public Map<Integer, File> getFileMap() {
+        return this.fileMap;
     }
 
     /**

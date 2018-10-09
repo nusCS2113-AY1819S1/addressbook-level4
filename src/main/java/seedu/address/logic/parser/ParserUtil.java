@@ -10,6 +10,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.BackUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.backup.BackupList;
 import seedu.address.model.person.Address;
@@ -149,7 +150,7 @@ public class ParserUtil {
      */
     public static BackupList parseBackup(String backupList) throws IOException {
         requireNonNull(backupList);
-        File backupDir = new File(".backup");
+        File backupDir = new File(BackUpCommand.DEST_PATH);
         if (!backupDir.exists()) {
             throw new IOException(BackupList.MESSAGE_BACKUP_CONSTRAINTS);
         }

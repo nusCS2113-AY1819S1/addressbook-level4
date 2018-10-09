@@ -1,8 +1,14 @@
 //@@author Limminghong
 package seedu.address.logic.commands;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
+import java.util.Map;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
@@ -21,38 +27,24 @@ public class RestoreCommand extends Command {
             + ": Restores the address book to a snapshot of choice.\n"
             + "Parameters:" + " snapshots"
             + " or" + " DD/MM/YYYY" + " time";
-    public static final String MESSAGE_INDEX_SUCCESS = "Parser for index works :)";
+    public static final String MESSAGE_RESTORED_SUCCESS = "AddressBook has been restored to that of %1$s";
 
-    public static final String NUMBER_OF_SNAPSHOTS_PLURAL = " snapshots listed!";
-    public static final String NUMBER_OF_SNAPSHOTS = " snapshot listed!";
+    /**
+     * Variables for BackupList
+     */
+    private Index index;
+    private Map<Integer, File> fileMap;
+    private List<String> fileName;
 
-    private static String backupNames;
-
-    private int flag;
 
     public RestoreCommand() {
-        this.flag = 0;
+
     }
 
-    public RestoreCommand(BackupList backupList) {
-        List<String> fileNames = backupList.getFileNames();
-        if (fileNames.size() == 1) {
-            backupNames = Integer.toString(fileNames.size()) + NUMBER_OF_SNAPSHOTS + "\n";
-        } else {
-            backupNames = Integer.toString(fileNames.size()) + NUMBER_OF_SNAPSHOTS_PLURAL + "\n";
-        }
-        for (int i = 1; i <= fileNames.size(); i++) {
-            backupNames += Integer.toString(i) + ". " + fileNames.get(i - 1) + "\n";
-        }
-        this.flag = 1;
-    }
-
-    public RestoreCommand(Index index) {
-        this.flag = 2;
-    }
-
-    public static String getBackupNames() {
-        return backupNames;
+    public RestoreCommand(BackupList backupList, Index index) {
+        this.fileMap = backupList.getFileMap();
+        this.fileName = backupList.getFileNames();
+        this.index = index;
     }
 
     @Override
@@ -64,12 +56,27 @@ public class RestoreCommand extends Command {
             throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
         }
 
-        if (flag == 1) {
-            return new CommandResult(backupNames);
-        } else if (flag == 2) {
-            return new CommandResult(MESSAGE_INDEX_SUCCESS);
-        } else {
-            return new CommandResult(MESSAGE_USAGE);
+        if (index.getZeroBased() >= fileMap.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SNAPSHOT_DISPLAYED_INDEX);
         }
+
+        try {
+            RestoreFileFromIndex(userPref, fileMap, index);
+            return new CommandResult(String.format(MESSAGE_RESTORED_SUCCESS, fileName.get(index.getZeroBased())));
+        } catch (IOException io) {
+            throw new CommandException(Messages.MESSAGE_INVALID_SNAPSHOT_DISPLAYED_INDEX);
+        }
+    }
+
+    /**
+     * @param userPrefs instance of the UserPref object to extract the AddressBook path
+     * @param fileMap a map of the snapshots with indexes as keys
+     * @param index the index of the file that is extracted
+     * @throws IOException if either of the path does not exist
+     */
+    private void RestoreFileFromIndex(UserPrefs userPrefs, Map<Integer, File> fileMap, Index index) throws IOException {
+        File newFile = fileMap.get(index.getZeroBased());
+        File dest = new File(userPrefs.getAddressBookFilePath().toString());
+        Files.copy(newFile.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 }

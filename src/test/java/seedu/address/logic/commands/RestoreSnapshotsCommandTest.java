@@ -1,14 +1,11 @@
 //@@author Limminghong
 package seedu.address.logic.commands;
 
-import static junit.framework.TestCase.assertEquals;
-
 import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.ParserUtil;
@@ -16,34 +13,25 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.backup.BackupList;
 
+import static junit.framework.TestCase.assertEquals;
 
-class RestoreCommandTest {
+
+class RestoreSnapshotsCommandTest {
     private static final Logger logger = Logger.getLogger(RestoreCommand.class.getName());
 
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_index_success() throws Exception {
+    public void execute_snapshots_success() throws Exception {
         try {
             BackupList backupList = ParserUtil.parseBackup("snapshots");
-            Index index = ParserUtil.parseIndex("1");
-            CommandResult result = new RestoreCommand(backupList, index).execute(model, commandHistory);
-            assertEquals(RestoreCommand.MESSAGE_RESTORED_SUCCESS, result.feedbackToUser);
+            CommandResult result = new RestoreSnapshotsCommand(backupList).execute(model, commandHistory);
+            assertEquals(RestoreSnapshotsCommand.getBackupNames(), result.feedbackToUser);
         } catch (CommandException ce) {
             logger.severe(ce.getMessage());
         } catch (IOException io) {
             logger.severe(io.getMessage());
-        }
-    }
-
-    @Test
-    public void execute_success() {
-        try {
-            CommandResult result = new RestoreCommand().execute(model, commandHistory);
-            assertEquals(RestoreCommand.MESSAGE_USAGE, result.feedbackToUser);
-        } catch (CommandException ce) {
-            logger.severe(ce.getMessage());
         }
     }
 }

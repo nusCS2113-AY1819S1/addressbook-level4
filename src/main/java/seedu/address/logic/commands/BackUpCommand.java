@@ -21,7 +21,7 @@ public class BackUpCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Address book has been backed up!";
     public static final String ERROR = "error";
 
-    private static final String DEST_PATH = ".backup";
+    public static final String DEST_PATH = ".backup";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
