@@ -65,7 +65,7 @@ public class Comments {
         }
         for (Element elem : divChildren) {
             v.add(elem.ownText());
-            System.out.println(elem.ownText());
+            //System.out.println(elem.ownText());
         }
         return v;
     }
@@ -76,7 +76,7 @@ public class Comments {
     public static void rewrite(Vector v, String input) {
         String commentSection="<span>Comment Section</span><div>";
         for(int i=0;i<v.size();i++) {
-            commentSection+="<p>"+v.get(i)+"</p>";
+            commentSection+="<p>" + v.get(i)+"</p>";
         }
         commentSection+="</div>";
         File savingFile = new File(input);
@@ -129,7 +129,7 @@ public class Comments {
 
             try {
                 Integer.parseInt(username);
-                comment.deleteComment(Integer.parseInt(username));
+                comment.deleteComment(Integer.parseInt(username)-1);
                 System.out.println("Comment at " + username + "deleted");
             } catch(NumberFormatException e) {
                 comment.addComment(username);
