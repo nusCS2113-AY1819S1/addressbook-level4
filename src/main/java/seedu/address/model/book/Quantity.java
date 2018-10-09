@@ -33,6 +33,14 @@ public class Quantity {
         return value;
     }
 
+    public void Increase(int amount) {
+        this.value = Integer.toString(Integer.parseInt(value) + amount);
+    }
+
+    public int toInteger(){
+        return Integer.parseInt(value);
+    }
+
     public void setValue(String value) {
         this.value = value;
     }

@@ -52,6 +52,12 @@ public class Book {
         return quantity;
     }
 
+    public Quantity IncreaseQuantity(Quantity amount) {
+        this.quantity.Increase(amount.toInteger());
+        return quantity;
+
+    }
+
     /**
      * calculates the updated quantity of books
      * @param selling quantity of books sold
@@ -90,7 +96,7 @@ public class Book {
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
      */
-    public boolean isSamePerson(Book otherBook) {
+    public boolean isSameBook(Book otherBook) {
         if (otherBook == this) {
             return true;
         }

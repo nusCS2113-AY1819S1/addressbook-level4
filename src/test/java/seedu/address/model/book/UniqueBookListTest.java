@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalBooks.ALICE;
+import static seedu.address.testutil.TypicalBooks.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,7 +46,7 @@ public class UniqueBookListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueBookList.add(ALICE);
-        Book editedAlice = new BookBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Book editedAlice = new BookBuilder(ALICE).withQuantity(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueBookList.contains(editedAlice));
     }
@@ -94,7 +94,7 @@ public class UniqueBookListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueBookList.add(ALICE);
-        Book editedAlice = new BookBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Book editedAlice = new BookBuilder(ALICE).withQuantity(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueBookList.setPerson(ALICE, editedAlice);
         UniqueBookList expectedUniqueBookList = new UniqueBookList();

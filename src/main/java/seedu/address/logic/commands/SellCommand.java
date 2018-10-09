@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.List;
 import java.util.Set;
@@ -60,7 +60,7 @@ public class SellCommand extends Command {
         List<Book> lastShownList = model.getFilteredBookList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
 
         Book bookToSell = lastShownList.get(index.getZeroBased());
@@ -72,7 +72,7 @@ public class SellCommand extends Command {
         }
 
         model.updateBook(bookToSell, sellBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
         return new CommandResult(String.format(MESSAGE_SELL_BOOK_SUCCESS, sellBook));
     }
