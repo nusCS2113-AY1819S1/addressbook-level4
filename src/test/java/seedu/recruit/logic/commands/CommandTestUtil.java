@@ -18,14 +18,21 @@ import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.ReadOnlyCandidateBook;
+import seedu.recruit.model.ReadOnlyCompanyBook;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
+import seedu.recruit.model.company.Company;
+import seedu.recruit.model.company.CompanyName;
+import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -163,6 +170,157 @@ public class CommandTestUtil {
         Candidate firstCandidate = model.getFilteredCandidateList().get(0);
         model.deleteCandidate(firstCandidate);
         model.commitCandidateBook();
+    }
+
+    /**
+     * A default model stub that have all of the methods failing.
+     */
+
+    public static class ModelStub implements Model {
+        @Override
+        public void addCandidate(Candidate candidate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetCandidateData(ReadOnlyCandidateBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyCandidateBook getCandidateBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasCandidate(Candidate candidate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteCandidate(Candidate target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateCandidate(Candidate target, Candidate editedCandidate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Candidate> getFilteredCandidateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCandidateList(Predicate<Candidate> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoCandidateBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoCandidateBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoCandidateBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoCandidateBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitCandidateBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetCompanyData(ReadOnlyCompanyBook newData) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public ReadOnlyCompanyBook getCompanyBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasCompany(Company company) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteCompany(Company target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addCompany(Company company) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateCompany(Company target, Company editedCompany) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getCompanyIndexFromName(CompanyName companyName) {
+            throw new AssertionError("This method should not be called.");
+        };
+
+        @Override
+        public Company getCompanyFromIndex(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Company> getFilteredCompanyList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredCompanyList(Predicate<Company> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoCompanyBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoCompanyBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoCompanyBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoCompanyBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitCompanyBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
 }
