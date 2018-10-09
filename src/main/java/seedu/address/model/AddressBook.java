@@ -39,6 +39,17 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
+
+        //SortGrade sortGrade = new SortGrade();
+        //sortGrade.sortingFromLowesttoHighest(persons);
+
+        //Calculator cal = new Calculator();
+        //cal.find25th(persons);
+
+        //cal.find75th(persons);
+        //cal.calculateMedian(persons);
+        //cal.calculateMedian(persons);
+
     }
 
     //// list overwrite operations
