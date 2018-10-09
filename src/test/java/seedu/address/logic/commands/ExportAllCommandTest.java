@@ -19,10 +19,10 @@ import seedu.address.model.UserPrefs;
  */
 public class ExportAllCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-
     private static final String FILETYPE_CSV = "csv";
     private static final String FILETYPE_VCF = "vcf";
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void execute() {
