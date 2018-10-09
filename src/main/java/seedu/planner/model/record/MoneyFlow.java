@@ -66,9 +66,13 @@ public class MoneyFlow {
         return matcher.group("sign") + CURRENCY + matcher.group("money");
     }
 
-    public double toDouble () { return valueDouble; }
+    public double toDouble () {
+        return valueDouble;
+    }
 
-    public boolean isNotLarger (double moneyin) { return (moneyin >= valueDouble); }
+    public boolean isNotLarger (double moneyin) {
+        return (moneyin >= valueDouble);
+    }
 
     @Override
     public boolean equals(Object other) {
