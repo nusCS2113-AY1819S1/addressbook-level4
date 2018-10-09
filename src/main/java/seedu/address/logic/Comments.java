@@ -29,8 +29,9 @@ public class Comments {
     /**
      *  Replies with the comment to event Comment section of index and line
      */
-    public void replyComment(String comment, int index, int line) {
-
+    public void replyComment(String comment, int line) {
+        v.add(line, "REPLY--->" + comment);
+        rewrite(v,input);
     }
 
     /**
@@ -132,7 +133,8 @@ public class Comments {
                 comment.deleteComment(Integer.parseInt(username)-1);
                 System.out.println("Comment at " + username + "deleted");
             } catch(NumberFormatException e) {
-                comment.addComment(username);
+                //comment.addComment(username);
+                comment.replyComment(username, 1);
                 System.out.println("Comment added!!");
             }
 
