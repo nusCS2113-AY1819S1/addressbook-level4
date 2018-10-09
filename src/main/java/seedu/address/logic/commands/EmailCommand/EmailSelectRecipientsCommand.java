@@ -21,18 +21,16 @@ public class EmailSelectRecipientsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        EmailCommand emailCommand = RecruitBookParser.getEmailCommand();
         String lastCommandUsed = history.getLast();
 
         if(lastCommandUsed.toUpperCase().contains("LISTC")) {
-            emailCommand.recipients = model.getFilteredCandidateList();
-            emailCommand.areRecipientsCandidates = true;
+            RecruitBookParser.emailCommand.setRecipients(model.getFilteredCandidateList());
+            RecruitBookParser.emailCommand.setAreRecipientsCandidates(true);
         } else {
-            emailCommand.recipients = model.getFilteredCompanyList();
-            emailCommand.areRecipientsCandidates = false;
+            RecruitBookParser.emailCommand.setRecipients(model.getFilteredCompanyList());
+            RecruitBookParser.emailCommand.setAreRecipientsCandidates(false);
         }
 
-        RecruitBookParser.setEmailCommand(emailCommand);
         LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(EmailSelectContentsCommand.COMMAND_WORD);
     }

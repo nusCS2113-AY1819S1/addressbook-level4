@@ -19,7 +19,7 @@ public class EmailInitialiseCommand {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        RecruitBookParser.setEmailCommand(new EmailCommand());
+        RecruitBookParser.emailCommand = new EmailCommand());
         LogicManager.setLogicState(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(EmailSelectRecipientsCommand.MESSAGE_USAGE);
     }
