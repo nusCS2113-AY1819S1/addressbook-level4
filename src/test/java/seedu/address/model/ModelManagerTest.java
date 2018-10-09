@@ -2,9 +2,9 @@ package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
+import static seedu.address.testutil.TypicalBooks.ALICE;
+import static seedu.address.testutil.TypicalBooks.BENSON;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -74,7 +74,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(bookInventory, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
-        modelManager.updateFilteredBookList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();

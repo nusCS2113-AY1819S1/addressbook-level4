@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedBook.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalBooks.BENSON;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +25,7 @@ public class XmlAdaptedBookTest {
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PHONE = BENSON.getISBN().toString();
+    private static final String VALID_PHONE = BENSON.getIsbn().toString();
     private static final String VALID_EMAIL = BENSON.getPrice().toString();
     private static final String VALID_ADDRESS = BENSON.getQuantity().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()

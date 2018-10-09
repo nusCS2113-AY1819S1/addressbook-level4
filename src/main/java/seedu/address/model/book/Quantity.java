@@ -18,8 +18,7 @@ public class Quantity {
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
 
-    public final String value;
-
+    private String value;
     /**
      * Constructs an {@code Quantity}.
      *
@@ -30,6 +29,22 @@ public class Quantity {
         checkArgument(isValidAddress(address), MESSAGE_ADDRESS_CONSTRAINTS);
         value = address;
     }
+    public String getValue() {
+        return value;
+    }
+
+    public void Increase(int amount) {
+        this.value = Integer.toString(Integer.parseInt(value) + amount);
+    }
+
+    public int toInteger(){
+        return Integer.parseInt(value);
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
 
     /**
      * Returns true if a given string is a valid email.

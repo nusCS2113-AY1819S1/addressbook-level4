@@ -6,8 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
-import seedu.address.model.book.*;
+import seedu.address.model.book.Book;
 import seedu.address.model.book.Isbn;
+import seedu.address.model.book.Name;
+import seedu.address.model.book.Price;
+import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
