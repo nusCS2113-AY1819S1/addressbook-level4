@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -150,6 +151,14 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public boolean hasClub(ClubBudgetElements club) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addClub(ClubBudgetElements club) {
             throw new AssertionError("This method should not be called.");
         }
     }
