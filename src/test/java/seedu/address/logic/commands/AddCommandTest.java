@@ -152,6 +152,26 @@ public class AddCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateSearchHistory(Predicate predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoSearchHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetSearchHistory() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate retrieveLatestSearch() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
