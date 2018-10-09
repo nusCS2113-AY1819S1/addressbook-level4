@@ -27,7 +27,7 @@ public class Filetype {
         csv, vcf
     }
 
-    public final String value;
+    private final String value;
 
     /**
      * Constructs an {@code Filetype}.
@@ -59,7 +59,7 @@ public class Filetype {
     // Check_if_enum_contains_a_given_string.html with minor modifications
 
     /**
-     * Returns true if an enum contains a specific string.
+     * Returns true if an {@code enumClass} contains a specific {@code value}.
      * @param enumClass
      * @param value
      */
