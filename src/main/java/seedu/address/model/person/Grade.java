@@ -11,7 +11,7 @@ public class Grade {
 
 
     public static final String MESSAGE_GRADE_CONSTRAINTS =
-            "grade should be < =100";
+            "grade should be <= 100";
     public static final String GRADE_VALIDATION_REGEX = "^([0-9]|[1-9][0-9]|100)$";
     public final String value;
 
