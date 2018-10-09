@@ -128,7 +128,7 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute__twoBackToBackFindCommand_() {
+    public void execute_twoBackToBackFindCommand_onePersonFound() {
         String firstExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         TagContainsKeywordsPredicate firstPredicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
         FindCommand firstCommand = new FindTagSubCommand(firstPredicate);
