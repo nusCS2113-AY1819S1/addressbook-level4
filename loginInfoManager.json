@@ -15,8 +15,13 @@
     "userName" : "scott",
     "password" : "s8kEw4p417dKy5rnCny0kyZiVZtZP/6tPvjCr/LbAGc=",
     "authenticationLevel" : "admin"
+  }, {
+    "userName" : "manager",
+    "password" : "UgoydIK6V3t3iMXySCrbeFKlcUc/u3ylo1gmElyQAmQ=",
+    "authenticationLevel" : "MANAGER"
+  }, {
+    "userName" : "stockTaker",
+    "password" : "Gcf70h4aWQ1T9NMxE03XM3nq3nCmFGihnO4xMzHMgP0=",
+    "authenticationLevel" : "STOCK_TAKER"
   } ]
-
 }
-
-

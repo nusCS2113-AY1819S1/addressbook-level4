@@ -53,7 +53,34 @@ public class ParserUtil {
         return trimmedPassword;
     }
 
-
+    /**
+     * Parses a {@code String itemName} into a {@code String itenName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseItemName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        //        if (!Name.isValidName(trimmedName)) {
+        //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        //        }
+        return name;
+    }
+    /**
+     * Parses a {@code String itemName} into a {@code String itenName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static String parseDefaultSellingPrice (String defaultSellingPrice) throws ParseException {
+        requireNonNull(defaultSellingPrice);
+        String trimmedName = defaultSellingPrice.trim();
+        //        if (!Name.isValidName(trimmedName)) {
+        //            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        //        }
+        return defaultSellingPrice;
+    }
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.

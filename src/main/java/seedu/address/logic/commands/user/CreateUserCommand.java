@@ -22,7 +22,7 @@ public class CreateUserCommand extends UserCommand {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": change current user password "
             + "Parameters: "
             + PREFIX_USERNAME + "username: "
-            + PREFIX_PASSWORD + "oldPassword: "
+            + PREFIX_PASSWORD + "Password: "
             + PREFIX_AUTHENTICATION_LEVEL + "authentication level: ";
 
     public static final String MESSAGE_SUCCESS = "new account has been created";
@@ -71,10 +71,10 @@ public class CreateUserCommand extends UserCommand {
      * @return
      */
     private static boolean isAuthenticationLevelValid(String authenticationLevel) {
-        if (authenticationLevel.equals (AuthenticationLevel.ADMIN)
-                || authenticationLevel.equals (AuthenticationLevel.MANAGER)
-                || authenticationLevel.equals (AuthenticationLevel.ACCOUNTANT)
-                || authenticationLevel.equals (AuthenticationLevel.STOCK_TAKER)) {
+        if (authenticationLevel.equals (AuthenticationLevel.ADMIN.toString ())
+                || authenticationLevel.equals (AuthenticationLevel.MANAGER.toString ())
+                || authenticationLevel.equals (AuthenticationLevel.ACCOUNTANT.toString ())
+                || authenticationLevel.equals (AuthenticationLevel.STOCK_TAKER.toString ())) {
             return true;
         }
         return false;

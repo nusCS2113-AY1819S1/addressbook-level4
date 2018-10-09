@@ -1,6 +1,7 @@
 package seedu.address.commons.login.authenication;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddItemCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -11,6 +12,7 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateUserCommand;
@@ -24,9 +26,11 @@ public enum AuthenticationLevel {
                             EditCommand.COMMAND_WORD , ExitCommand.COMMAND_WORD , FindCommand.COMMAND_WORD ,
                             HelpCommand.COMMAND_WORD , HistoryCommand.COMMAND_WORD , ListCommand.COMMAND_WORD ,
                             RedoCommand.COMMAND_WORD , SelectCommand.COMMAND_WORD , UndoCommand.COMMAND_WORD ,
-                            ChangePasswordCommand.COMMAND_WORD , CreateUserCommand.COMMAND_WORD}),
-    MANAGER (new String[] {"add" , "clear" , "other"}),
-    STOCK_TAKER (new String[] {"add" , "clear"});
+                            ChangePasswordCommand.COMMAND_WORD , CreateUserCommand.COMMAND_WORD,
+                            AddItemCommand.COMMAND_WORD, SellCommand.COMMAND_WORD}),
+    MANAGER (new String[] {AddItemCommand.COMMAND_WORD, CreateUserCommand.COMMAND_WORD,
+                           ChangePasswordCommand.COMMAND_WORD }),
+    STOCK_TAKER (new String[] {SellCommand.COMMAND_WORD});
 
     private String[] authenticationLevel;
 
