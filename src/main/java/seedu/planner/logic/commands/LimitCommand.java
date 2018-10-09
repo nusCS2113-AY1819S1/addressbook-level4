@@ -48,15 +48,15 @@ public class LimitCommand extends Command {
         while (countRecord < model.getFinancialPlanner().getRecordList().size()) {
             recordNow = model.getFinancialPlanner().getRecordList().get(countRecord++);
 
-            if ((recordNow.getDate().isEarlierThan(limit.getDate_end())
-                   && recordNow.getDate().isLaterThan(limit.getDate_start())
-                    || recordNow.getDate().equals(limit.getDate_start())
-                        || recordNow.getDate().equals(limit.getDate_end()))) {
+            if ((recordNow.getDate().isEarlierThan(limit.getDateEnd())
+                   && recordNow.getDate().isLaterThan(limit.getDateStart())
+                    || recordNow.getDate().equals(limit.getDateStart())
+                        || recordNow.getDate().equals(limit.getDateEnd()))) {
                 sumOfSpend += recordNow.getMoneyFlow().toDouble();
             }
         }
 
-        if (limit.getLimit_moneyFlow().isNotLarger(sumOfSpend)) {
+        if (limit.getLimitMoneyFlow().isNotLarger(sumOfSpend)) {
             return new CommandResult(String.format(MESSAGE_NOT_EXCEED, (-1 * sumOfSpend)));
         } else {
             return new CommandResult(String.format(MESSAGE_EXCEED, (-1 * sumOfSpend)));

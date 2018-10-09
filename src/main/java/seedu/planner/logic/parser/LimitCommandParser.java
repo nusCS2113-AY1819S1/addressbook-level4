@@ -16,17 +16,17 @@ import seedu.planner.model.record.MoneyFlow;
 
 
 
-    /*
-    * The Parser will parse those values in one format Limit and return back to LimitCommand.
-    * */
-    public class LimitCommandParser implements Parser<LimitCommand> {
+/**
+* The Parser will parse those values in one format Limit and return back to LimitCommand.
+* */
+public class LimitCommandParser implements Parser<LimitCommand> {
     /**
      * Parses the information required for the limit command.
      * and returns a limit object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
 
-    private String [] datesIn ; //the string is used to divide two the whole strings into two substrings.
+    private String [] datesIn; //the string is used to divide two the whole strings into two substrings.
     private String dateStartString;
     private String getDateEndString;
 
@@ -40,7 +40,7 @@ import seedu.planner.model.record.MoneyFlow;
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, LimitCommand.MESSAGE_USAGE));
         }
         //TODO: change the scan function to read only the integer, add a "-" manually before the integer.
-        MoneyFlow money = ParserUtil.parseMoneyFlow("-"+ argMultimap.getValue(PREFIX_MONEYFLOW).get());
+        MoneyFlow money = ParserUtil.parseMoneyFlow("-" + argMultimap.getValue(PREFIX_MONEYFLOW).get());
         datesIn = argMultimap.getValue(PREFIX_DATE).get().split("\\s+");
 
         Date dateStart = ParserUtil.parseDate(datesIn[0]);
