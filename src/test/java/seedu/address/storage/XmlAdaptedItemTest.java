@@ -65,7 +65,7 @@ public class XmlAdaptedItemTest {
     @Test
     public void toModelType_nullQuantity_throwsIllegalValueException() {
         XmlAdaptedItem item = new XmlAdaptedItem(VALID_NAME, null, VALID_MIN_QUANTITY, VALID_STATUS, VALID_TAGS);
-        String expectedMessage = String.format(Quantity.MESSAGE_QUANTITY_CONSTRAINTS, Quantity.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "Quantity");
         Assert.assertThrows(IllegalValueException.class, expectedMessage, item::toModelType);
     }
 
