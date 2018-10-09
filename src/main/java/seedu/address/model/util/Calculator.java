@@ -32,8 +32,9 @@ public class Calculator {
         int maximum = 0;
         for (int i = 0; i < personList.asUnmodifiableObservableList().size(); i++) {
             int currentVal = Integer.parseInt(personList.asUnmodifiableObservableList().get(i).getGrade().value);
-           maximum = max(currentVal, maximum);
+            maximum = max(currentVal, maximum);
         }
+
 
         return maximum;
     }
@@ -92,8 +93,8 @@ public class Calculator {
      */
     public int calculateMedian(UniquePersonList personList) { //calculate the mean score of a test
         int median = 0;
-        ArrayList<Person> sortedList = new ArrayList<Person>(SortGrade.
-                bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
+        ArrayList<Person> sortedList = new ArrayList<Person>(SortGrade
+                .bubbleSort(personList, personList.asUnmodifiableObservableList().size()));
 
         int size = sortedList.size();
         int index = (size / 2) - 1;
