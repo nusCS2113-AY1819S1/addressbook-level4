@@ -8,7 +8,7 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.candidate.Candidate;
+import seedu.recruit.model.candidate.Candidate;
 
 /**
  * Provides a handle to a candidate card in the candidate list panel.

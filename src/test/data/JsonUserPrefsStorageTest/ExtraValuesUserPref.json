@@ -10,5 +10,5 @@
     }
   },
   "candidateBookFilePath" : "candidatebook.xml",
-  "jobBookFilePath" : "jobbook.xml"
+  "companyBookFilePath" : "companybook.xml"
 }
