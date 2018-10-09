@@ -4,8 +4,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.ExportAllCommand.MESSAGE_ARGUMENTS;
-import static seedu.address.testutil.TypicalFiletypes.FILETYPE_CSV;
-import static seedu.address.testutil.TypicalFiletypes.FILETYPE_VCF;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
@@ -22,6 +20,9 @@ import seedu.address.model.UserPrefs;
 public class ExportAllCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    private static final String FILETYPE_CSV = "csv";
+    private static final String FILETYPE_VCF = "vcf";
 
     @Test
     public void execute() {
