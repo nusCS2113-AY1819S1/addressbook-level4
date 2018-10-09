@@ -42,15 +42,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         this();
         resetData(toBeCopied);
 
-        SortGrade sortGrade = new SortGrade();
-        sortGrade.sortingFromLowesttoHighest(persons);
+        //SortGrade sortGrade = new SortGrade();
+        //sortGrade.sortingFromLowesttoHighest(persons);
 
-        Calculator cal = new Calculator();
-        cal.find25th(persons);
+        //Calculator cal = new Calculator();
+        //cal.find25th(persons);
 
-        cal.find75th(persons);
-        cal.calculateMedian(persons);
-        cal.calculateMedian(persons);
+        //cal.find75th(persons);
+        //cal.calculateMedian(persons);
+        //cal.calculateMedian(persons);
 
     }
 

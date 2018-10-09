@@ -9,8 +9,6 @@ import seedu.address.model.person.UniquePersonList;
 
 public class Calculator {
 
-
-
     public int calculateMean(UniquePersonList personList) { //calculate the mean score of a test
         int sum = 0;
         for (int i = 0; i < personList.asUnmodifiableObservableList().size(); i++) {
@@ -31,7 +29,7 @@ public class Calculator {
 
         return maximum;
     }
-
+    //TODO
     public ArrayList<Person> find25th(UniquePersonList personList){    // Find students in top 25th
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
