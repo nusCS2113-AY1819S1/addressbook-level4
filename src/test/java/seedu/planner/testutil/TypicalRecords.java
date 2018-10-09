@@ -34,7 +34,7 @@ public class TypicalRecords {
             .withMoneyFlow("-10.50").build();
     public static final Record CHICKENRICE = new RecordBuilder().withName("Payment for chicken rice")
             .withDate("27-9-2018").withMoneyFlow("-0.90").build();
-    public static final Record RANDOM = new RecordBuilder().withName("Random income").withDate("25-9-2018")
+    public static final Record RANDOM = new RecordBuilder().withName("Random income").withDate("31-03-2018")
             .withMoneyFlow("+14.50").build();
 
     // Manually added
@@ -54,6 +54,8 @@ public class TypicalRecords {
 
     public static final Date TYPICAL_START_DATE = new Date("25-9-2018");
     public static final Date TYPICAL_END_DATE = new Date("26-9-2018");
+
+    public static final Date OUT_OF_BOUND_DATE = new Date ("30-03-2018");
 
     private TypicalRecords() {} // prevents instantiation
 

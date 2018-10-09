@@ -42,13 +42,8 @@ public interface Model {
     /**
      * Replaces the given record {@code target} with {@code editedRecord}.
      * {@code target} must exist in the financial planner.
-<<<<<<< HEAD:src/main/java/seedu/address/model/Model.java
-     * The record identity of {@code editedRecord}
-     * must not be the same as another existing record in the financial planner.
-=======
      * The record identity of {@code editedRecord} must not be the same as
      * another existing record in the financial planner.
->>>>>>> 936a266304811392cda80acfbf3d1820aac87fed:src/main/java/seedu/planner/model/Model.java
      */
     void updateRecord(Record target, Record editedRecord);
 

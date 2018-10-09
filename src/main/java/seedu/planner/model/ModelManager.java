@@ -31,7 +31,8 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         requireAllNonNull(financialPlanner, userPrefs);
 
-        logger.fine("Initializing with financial planner: " + financialPlanner + " and user prefs " + userPrefs);
+        logger.fine("Initializing with financial planner: " + financialPlanner
+                + " and user prefs " + userPrefs);
 
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
