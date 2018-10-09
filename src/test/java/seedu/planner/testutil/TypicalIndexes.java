@@ -12,8 +12,13 @@ import seedu.planner.model.UserPrefs;
  */
 public class TypicalIndexes {
     private static Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
-    public static final Index INDEX_FIRST_RECORD = Index.fromOneBased(1);
-    public static final Index INDEX_SECOND_RECORD = Index.fromOneBased(2);
-    public static final Index INDEX_THIRD_RECORD = Index.fromOneBased(3);
-    public static final Index INDEX_LAST_RECORD = Index.fromOneBased(model.getFilteredRecordList().size());
+    private static final int FIRST = 1;
+    private static final int SECOND = 2;
+    private static final int THIRD = 3;
+    private static final int LAST = model.getFilteredRecordList().size();
+
+    public static final Index INDEX_FIRST_RECORD = Index.fromOneBased(FIRST);
+    public static final Index INDEX_SECOND_RECORD = Index.fromOneBased(SECOND);
+    public static final Index INDEX_THIRD_RECORD = Index.fromOneBased(THIRD);
+    public static final Index INDEX_LAST_RECORD = Index.fromOneBased(LAST);
 }

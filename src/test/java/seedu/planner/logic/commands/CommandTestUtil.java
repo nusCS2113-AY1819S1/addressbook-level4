@@ -130,8 +130,14 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredRecordList().size());
     }
 
-    public static void showRecordAtIndex(Model model, int targetIndexInt){
-        assertTrue((targetIndexInt <model.getFilteredRecordList().size()));
+    /**
+     * Updates {@code model}'s filtered list to show only the record
+     * at the given {@code targetIndexInt} in the {@code model}'s planner book.
+     * @param model
+     * @param targetIndexInt
+     */
+    public static void showRecordAtIndex(Model model, int targetIndexInt) {
+        assertTrue((targetIndexInt < model.getFilteredRecordList().size()));
 
         Record record = model.getFilteredRecordList().get(targetIndexInt);
         final String[] splitName = record.getName().fullName.split("\\s+");
