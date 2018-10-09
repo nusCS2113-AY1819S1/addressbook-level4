@@ -67,11 +67,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         return records.contains(record);
     }
 
-  /*  public boolean hasLimit (Limit limit){
-        requireNonNull(limit);
-        return limit.contains(limit);
-    }*/
-
     /**
      * Adds a record to the financial planner.
      * The record must not already exist in the financial planner.
