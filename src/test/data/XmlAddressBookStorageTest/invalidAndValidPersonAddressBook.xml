@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
-    <!-- Valid Person -->
-    <persons>
+    <!-- Valid Book -->
+    <books>
         <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
-    <!-- Person with invalid phone field -->
-    <persons>
+        <isbn isPrivate="false">9482424</isbn>
+        <price isPrivate="false">hans@example.com</price>
+        <quantity isPrivate="false">4th street</quantity>
+    </books>
+    <!-- Book with invalid Isbn field -->
+    <books>
         <name>Hans Muster</name>
-        <phone isPrivate="false">948asdf2424</phone>
-        <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
-    </persons>
+        <isbn isPrivate="false">948asdf2424</isbn>
+        <price isPrivate="false">hans@example.com</price>
+        <quantity isPrivate="false">4th street</quantity>
+    </books>
 </addressbook>

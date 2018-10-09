@@ -16,10 +16,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
+import seedu.address.model.book.Isbn;
+import seedu.address.model.book.Price;
+import seedu.address.model.book.Quantity;
+import seedu.address.model.book.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
@@ -99,15 +99,15 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(VALID_PHONE));
+        Isbn expectedIsbn = new Isbn(VALID_PHONE);
+        assertEquals(expectedIsbn, ParserUtil.parsePhone(VALID_PHONE));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_PHONE + WHITESPACE;
-        Phone expectedPhone = new Phone(VALID_PHONE);
-        assertEquals(expectedPhone, ParserUtil.parsePhone(phoneWithWhitespace));
+        Isbn expectedIsbn = new Isbn(VALID_PHONE);
+        assertEquals(expectedIsbn, ParserUtil.parsePhone(phoneWithWhitespace));
     }
 
     @Test
@@ -122,15 +122,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
+        Quantity expectedQuantity = new Quantity(VALID_ADDRESS);
+        assertEquals(expectedQuantity, ParserUtil.parseAddress(VALID_ADDRESS));
     }
 
     @Test
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
-        Address expectedAddress = new Address(VALID_ADDRESS);
-        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+        Quantity expectedQuantity = new Quantity(VALID_ADDRESS);
+        assertEquals(expectedQuantity, ParserUtil.parseAddress(addressWithWhitespace));
     }
 
     @Test
@@ -145,15 +145,15 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(VALID_EMAIL));
+        Price expectedPrice = new Price(VALID_EMAIL);
+        assertEquals(expectedPrice, ParserUtil.parseEmail(VALID_EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
-        Email expectedEmail = new Email(VALID_EMAIL);
-        assertEquals(expectedEmail, ParserUtil.parseEmail(emailWithWhitespace));
+        Price expectedPrice = new Price(VALID_EMAIL);
+        assertEquals(expectedPrice, ParserUtil.parseEmail(emailWithWhitespace));
     }
 
     @Test
