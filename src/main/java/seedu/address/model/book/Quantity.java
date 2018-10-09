@@ -33,11 +33,11 @@ public class Quantity {
         return value;
     }
 
-    public void Increase(int amount) {
+    public void increase(int amount) {
         this.value = Integer.toString(Integer.parseInt(value) + amount);
     }
 
-    public int toInteger(){
+    public int toInteger() {
         return Integer.parseInt(value);
     }
 
