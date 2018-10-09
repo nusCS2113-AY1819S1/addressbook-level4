@@ -57,6 +57,12 @@ public class Filetype {
     // Reused from
     // http://www.java2s.com/Tutorials/Java/Data_Type_How_to/String/
     // Check_if_enum_contains_a_given_string.html with minor modifications
+
+    /**
+     * Returns true if an enum contains a specific string.
+     * @param enumClass
+     * @param value
+     */
     private static <E extends Enum<E>> boolean contains(Class<E> enumClass,
                                                        String value) {
         try {
