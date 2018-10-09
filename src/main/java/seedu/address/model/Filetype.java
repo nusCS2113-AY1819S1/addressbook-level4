@@ -12,7 +12,7 @@ import java.util.EnumSet;
 public class Filetype {
 
     public static final String MESSAGE_FILETYPE_CONSTRAINTS =
-            "Filetype can take either csv/CSV or vcf/VCF, and it should not be blank";
+            "Filetype can take either \"csv\" or \"vcf\", and it should not be blank";
 
     /*
      * The first character of the filetype must not be a whitespace,
@@ -20,8 +20,8 @@ public class Filetype {
      */
     public static final String FILETYPE_VALIDATION_REGEX = "[^\\s].*";
 
-    private enum Extension {
-        csv, CSV, vcf, VCF;
+    public enum Extension {
+        csv, vcf
     }
 
     public final String value;
