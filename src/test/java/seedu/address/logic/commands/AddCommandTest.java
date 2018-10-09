@@ -16,9 +16,9 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.StockList;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyStockList;
+import seedu.address.model.StockList;
 import seedu.address.model.item.Item;
 import seedu.address.testutil.ItemBuilder;
 
@@ -28,6 +28,7 @@ public class AddCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
 
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -56,7 +57,7 @@ public class AddCommandTest {
         ModelStub modelStub = new ModelStubWithItem(validItem);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_Item);
+        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_ITEM);
         addCommand.execute(modelStub, commandHistory);
     }
 
@@ -64,14 +65,14 @@ public class AddCommandTest {
     public void equals() {
         Item arduino = new ItemBuilder().withName("Arduino").build();
         Item lidar = new ItemBuilder().withName("Lidar").build();
-        AddCommand addArduinoCommand = new AddCommand(Arduino);
+        AddCommand addArduinoCommand = new AddCommand(arduino);
         AddCommand addLidarCommand = new AddCommand(lidar);
 
         // same object -> returns true
         assertTrue(addArduinoCommand.equals(addArduinoCommand));
 
         // same values -> returns true
-        AddCommand addArduinoCommandCopy = new AddCommand(Arduino);
+        AddCommand addArduinoCommandCopy = new AddCommand(arduino);
         assertTrue(addArduinoCommand.equals(addArduinoCommandCopy));
 
         // different types -> returns false

@@ -18,9 +18,9 @@ import seedu.address.testutil.StockListBuilder;
 
 public class VersionedStockListTest {
 
-    private final ReadOnlyStockList addressBookWithAmy = new StockListBuilder().withItem(ARDUINO).build();
-    private final ReadOnlyStockList addressBookWithBob = new StockListBuilder().withItem(MOTOR).build();
-    private final ReadOnlyStockList addressBookWithCarl = new StockListBuilder().withItem(RPLIDAR).build();
+    private final ReadOnlyStockList stockListWithAmy = new StockListBuilder().withItem(ARDUINO).build();
+    private final ReadOnlyStockList stockListWithBob = new StockListBuilder().withItem(MOTOR).build();
+    private final ReadOnlyStockList stockListWithCarl = new StockListBuilder().withItem(RPLIDAR).build();
     private final ReadOnlyStockList emptyStockList = new StockListBuilder().build();
 
     @Test
@@ -37,19 +37,19 @@ public class VersionedStockListTest {
     @Test
     public void commit_multipleStockListPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
 
         versionedStockList.commit();
         assertStockListListStatus(versionedStockList,
-                Arrays.asList(emptyStockList, addressBookWithAmy, addressBookWithBob),
-                addressBookWithBob,
+                Arrays.asList(emptyStockList, stockListWithAmy, stockListWithBob),
+                stockListWithBob,
                 Collections.emptyList());
     }
 
     @Test
     public void commit_multipleStockListPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 2);
 
         versionedStockList.commit();
@@ -62,7 +62,7 @@ public class VersionedStockListTest {
     @Test
     public void canUndo_multipleStockListPointerAtEndOfStateList_returnsTrue() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
 
         assertTrue(versionedStockList.canUndo());
     }
@@ -70,7 +70,7 @@ public class VersionedStockListTest {
     @Test
     public void canUndo_multipleStockListPointerAtStartOfStateList_returnsTrue() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 1);
 
         assertTrue(versionedStockList.canUndo());
@@ -86,7 +86,7 @@ public class VersionedStockListTest {
     @Test
     public void canUndo_multipleStockListPointerAtStartOfStateList_returnsFalse() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 2);
 
         assertFalse(versionedStockList.canUndo());
@@ -95,7 +95,7 @@ public class VersionedStockListTest {
     @Test
     public void canRedo_multipleStockListPointerNotAtEndOfStateList_returnsTrue() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 1);
 
         assertTrue(versionedStockList.canRedo());
@@ -104,7 +104,7 @@ public class VersionedStockListTest {
     @Test
     public void canRedo_multipleStockListPointerAtStartOfStateList_returnsTrue() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 2);
 
         assertTrue(versionedStockList.canRedo());
@@ -120,7 +120,7 @@ public class VersionedStockListTest {
     @Test
     public void canRedo_multipleStockListPointerAtEndOfStateList_returnsFalse() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
 
         assertFalse(versionedStockList.canRedo());
     }
@@ -128,26 +128,26 @@ public class VersionedStockListTest {
     @Test
     public void undo_multipleStockListPointerAtEndOfStateList_success() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
 
         versionedStockList.undo();
         assertStockListListStatus(versionedStockList,
                 Collections.singletonList(emptyStockList),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+                stockListWithAmy,
+                Collections.singletonList(stockListWithBob));
     }
 
     @Test
     public void undo_multipleStockListPointerNotAtStartOfStateList_success() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 1);
 
         versionedStockList.undo();
         assertStockListListStatus(versionedStockList,
                 Collections.emptyList(),
                 emptyStockList,
-                Arrays.asList(addressBookWithAmy, addressBookWithBob));
+                Arrays.asList(stockListWithAmy, stockListWithBob));
     }
 
     @Test
@@ -160,7 +160,7 @@ public class VersionedStockListTest {
     @Test
     public void undo_multipleStockListPointerAtStartOfStateList_throwsNoUndoableStateException() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 2);
 
         assertThrows(VersionedStockList.NoUndoableStateException.class, versionedStockList::undo);
@@ -169,27 +169,27 @@ public class VersionedStockListTest {
     @Test
     public void redo_multipleStockListPointerNotAtEndOfStateList_success() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 1);
 
         versionedStockList.redo();
         assertStockListListStatus(versionedStockList,
-                Arrays.asList(emptyStockList, addressBookWithAmy),
-                addressBookWithBob,
+                Arrays.asList(emptyStockList, stockListWithAmy),
+                stockListWithBob,
                 Collections.emptyList());
     }
 
     @Test
     public void redo_multipleStockListPointerAtStartOfStateList_success() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 2);
 
         versionedStockList.redo();
         assertStockListListStatus(versionedStockList,
                 Collections.singletonList(emptyStockList),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+                stockListWithAmy,
+                Collections.singletonList(stockListWithBob));
     }
 
     @Test
@@ -202,17 +202,17 @@ public class VersionedStockListTest {
     @Test
     public void redo_multipleStockListPointerAtEndOfStateList_throwsNoRedoableStateException() {
         VersionedStockList versionedStockList = prepareStockListList(
-                emptyStockList, addressBookWithAmy, addressBookWithBob);
+                emptyStockList, stockListWithAmy, stockListWithBob);
 
         assertThrows(VersionedStockList.NoRedoableStateException.class, versionedStockList::redo);
     }
 
     @Test
     public void equals() {
-        VersionedStockList versionedStockList = prepareStockListList(addressBookWithAmy, addressBookWithBob);
+        VersionedStockList versionedStockList = prepareStockListList(stockListWithAmy, stockListWithBob);
 
         // same values -> returns true
-        VersionedStockList copy = prepareStockListList(addressBookWithAmy, addressBookWithBob);
+        VersionedStockList copy = prepareStockListList(stockListWithAmy, stockListWithBob);
         assertTrue(versionedStockList.equals(copy));
 
         // same object -> returns true
@@ -225,12 +225,12 @@ public class VersionedStockListTest {
         assertFalse(versionedStockList.equals(1));
 
         // different state list -> returns false
-        VersionedStockList differentStockListList = prepareStockListList(addressBookWithBob, addressBookWithCarl);
+        VersionedStockList differentStockListList = prepareStockListList(stockListWithBob, stockListWithCarl);
         assertFalse(versionedStockList.equals(differentStockListList));
 
         // different current pointer index -> returns false
         VersionedStockList differentCurrentStatePointer = prepareStockListList(
-                addressBookWithAmy, addressBookWithBob);
+                stockListWithAmy, stockListWithBob);
         shiftCurrentStatePointerLeftwards(versionedStockList, 1);
         assertFalse(versionedStockList.equals(differentCurrentStatePointer));
     }
@@ -272,15 +272,15 @@ public class VersionedStockListTest {
     }
 
     /**
-     * Creates and returns a {@code VersionedStockList} with the {@code addressBookStates} added into it, and the
+     * Creates and returns a {@code VersionedStockList} with the {@code stockListStates} added into it, and the
      * {@code VersionedStockList#currentStatePointer} at the end of list.
      */
-    private VersionedStockList prepareStockListList(ReadOnlyStockList... addressBookStates) {
-        assertFalse(addressBookStates.length == 0);
+    private VersionedStockList prepareStockListList(ReadOnlyStockList... stockListStates) {
+        assertFalse(stockListStates.length == 0);
 
-        VersionedStockList versionedStockList = new VersionedStockList(addressBookStates[0]);
-        for (int i = 1; i < addressBookStates.length; i++) {
-            versionedStockList.resetData(addressBookStates[i]);
+        VersionedStockList versionedStockList = new VersionedStockList(stockListStates[0]);
+        for (int i = 1; i < stockListStates.length; i++) {
+            versionedStockList.resetData(stockListStates[i]);
             versionedStockList.commit();
         }
 

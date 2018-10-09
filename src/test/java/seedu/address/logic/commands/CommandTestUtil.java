@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MIN_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -15,10 +14,10 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.StockList;
 import seedu.address.model.Model;
-import seedu.address.model.item.NameContainsKeywordsPredicate;
+import seedu.address.model.StockList;
 import seedu.address.model.item.Item;
+import seedu.address.model.item.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditItemDescriptorBuilder;
 
 /**
@@ -31,9 +30,6 @@ public class CommandTestUtil {
     public static final String VALID_MIN_QUANTITY_ARDUINO = "5";
     public static final String VALID_TAG_LAB1 = "Lab1";
     public static final String VALID_TAG_LAB2 = "Lab2";
-    public static final String VALID_NAME_RPLIDAR = "Rplidar";
-    public static final String VALID_QUANTITY_RPLIDAR = "30";
-    public static final String VALID_MIN_QUANTITY_RPLIDAR = "10";
 
     public static final String VALID_NAME_RPLIDAR = "RP Lidar";
     public static final String VALID_QUANTITY_RPLIDAR = "30";
@@ -49,8 +45,10 @@ public class CommandTestUtil {
     public static final String MIN_QUANTITY_DESC_RPLIDAR = " " + PREFIX_MIN_QUANTITY + VALID_MIN_QUANTITY_RPLIDAR;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Arduino&"; // '&' not allowed in names
-    public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY + "-1"; // '-' not allowed in qty; cannot be negative
-    public static final String INVALID_MIN_QUANTITY_DESC = " " + PREFIX_MIN_QUANTITY + "5!"; // '!' not allowed in min qty
+    public static final String INVALID_QUANTITY_DESC =
+            " " + PREFIX_QUANTITY + "-1"; // '-' not allowed in qty; cannot be negative
+    public static final String INVALID_MIN_QUANTITY_DESC =
+            " " + PREFIX_MIN_QUANTITY + "5!"; // '!' not allowed in min qty
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "Lab1*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";

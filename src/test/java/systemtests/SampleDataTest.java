@@ -44,7 +44,7 @@ public class SampleDataTest extends StockListSystemTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadSampleData() {
+    public void stockList_dataFileDoesNotExist_loadSampleData() {
         Item[] expectedList = SampleDataUtil.getSampleItems();
         assertListMatching(getItemListPanel(), expectedList);
     }

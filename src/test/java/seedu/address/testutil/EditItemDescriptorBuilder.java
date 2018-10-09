@@ -34,7 +34,7 @@ public class EditItemDescriptorBuilder {
         descriptor.setName(item.getName());
         descriptor.setQuantity(item.getQuantity());
         descriptor.setMinQuantity(item.getMinQuantity());
-        descriptor.setStatus(item.getStatus());
+        //descriptor.setStatus(item.getStatus());
         descriptor.setTags(item.getTags());
     }
 

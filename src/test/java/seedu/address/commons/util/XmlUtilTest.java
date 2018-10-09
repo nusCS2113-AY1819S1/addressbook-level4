@@ -17,12 +17,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StockList;
 import seedu.address.storage.XmlAdaptedItem;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableStockList;
-import seedu.address.testutil.StockListBuilder;
 import seedu.address.testutil.ItemBuilder;
+import seedu.address.testutil.StockListBuilder;
 import seedu.address.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -36,13 +37,13 @@ public class XmlUtilTest {
     private static final Path VALID_ITEM_FILE = TEST_DATA_FOLDER.resolve("validItem.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempStockList.xml");
 
-    private static final Integer INVALID_QUANTITY = -1;
+    private static final String INVALID_QUANTITY = "-1";
 
     private static final String VALID_NAME = "Arduino";
-    private static final Integer VALID_QUANTITY = 20;
-    private static final Integer VALID_MIN_QUANTITY = 5;
-    private static final List<Integer> VALID_STATUS = new ArrayList<>(Arrays.asList(20,0,0));
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final String VALID_QUANTITY = "20";
+    private static final String VALID_MIN_QUANTITY = "5";
+    private static final List<Integer> VALID_STATUS = new ArrayList<>(Arrays.asList(20, 0, 0));
+    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("Lab1"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -74,13 +75,14 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         StockList dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableStockList.class).toModelType();
-        assertEquals(9, dataFromFile.getItemList().size());
+        assertEquals(3, dataFromFile.getItemList().size());
     }
 
     @Test
     public void xmlAdaptedItemFromFile_fileWithMissingItemField_validResult() throws Exception {
+        thrown.expect(NullPointerException.class);
         XmlAdaptedItem actualItem = XmlUtil.getDataFromFile(
-                MISSING_ITEM_FIELD_FILE, XmlAdaptedItemWithRootElement.class);
+                MISSING_ITEM_FIELD_FILE, XmlAdaptedItem.class);
         XmlAdaptedItem expectedItem = new XmlAdaptedItem(
                 null, VALID_QUANTITY, VALID_MIN_QUANTITY, VALID_STATUS, VALID_TAGS);
         assertEquals(expectedItem, actualItem);
@@ -88,6 +90,7 @@ public class XmlUtilTest {
 
     @Test
     public void xmlAdaptedItemFromFile_fileWithInvalidItemField_validResult() throws Exception {
+        thrown.expect(IllegalValueException.class);
         XmlAdaptedItem actualItem = XmlUtil.getDataFromFile(
                 INVALID_ITEM_FIELD_FILE, XmlAdaptedItemWithRootElement.class);
         XmlAdaptedItem expectedItem = new XmlAdaptedItem(

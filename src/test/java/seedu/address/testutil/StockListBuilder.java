@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.model.item.Item;
 import seedu.address.model.StockList;
+import seedu.address.model.item.Item;
 
 /**
  * A utility class to help with building Stocklist objects.

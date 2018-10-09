@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -15,7 +17,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class ItemBuilder {
 
-    public static final String DEFAULT_NAME = "Arduino";
+    public static final String DEFAULT_NAME = "Atmega";
     public static final String DEFAULT_QUANTITY = "20";
     public static final String DEFAULT_MIN_QUANTITY = "5";
 
@@ -29,6 +31,7 @@ public class ItemBuilder {
         name = new Name(DEFAULT_NAME);
         quantity = new Quantity(DEFAULT_QUANTITY);
         minQuantity = new Quantity(DEFAULT_MIN_QUANTITY);
+        status = new ArrayList<>(Arrays.asList(20, 0, 0));
         tags = new HashSet<>();
     }
 

@@ -15,6 +15,7 @@ import seedu.address.model.UserPrefs;
  */
 public interface Storage extends StockListStorage, UserPrefsStorage {
 
+
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
 

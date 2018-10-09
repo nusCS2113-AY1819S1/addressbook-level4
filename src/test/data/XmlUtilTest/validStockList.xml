@@ -7,7 +7,7 @@
         <statusReady>20</statusReady>
         <statusOnLoan>0</statusOnLoan>
         <statusFaulty>0</statusFaulty>
-        <tagged>lab1</tagged>
+        <tagged>Lab1</tagged>
     </items>
     <items>
         <name>Raspberry Pi</name>

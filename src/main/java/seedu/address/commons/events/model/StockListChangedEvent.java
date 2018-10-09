@@ -14,6 +14,6 @@ public class StockListChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getItemList().size();
+        return "number of items " + data.getItemList().size();
     }
 }

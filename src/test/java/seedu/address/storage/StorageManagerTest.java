@@ -16,8 +16,8 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.StockList;
 import seedu.address.model.ReadOnlyStockList;
+import seedu.address.model.StockList;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 

@@ -3,10 +3,10 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_SENSOR;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_LIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_LIDAR;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_LIDAR;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_ARDUINO;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_RPLIDAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_RPLIDAR;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_RPLIDAR;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_LAB1;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -21,9 +21,9 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.EditCommand.EditItemDescriptor;
-import seedu.address.model.StockList;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.StockList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.item.Item;
 import seedu.address.testutil.EditItemDescriptorBuilder;
@@ -58,11 +58,11 @@ public class EditCommandTest {
         Item lastItem = model.getFilteredItemList().get(indexLastItem.getZeroBased());
 
         ItemBuilder itemInList = new ItemBuilder(lastItem);
-        Item editedItem = itemInList.withName(VALID_NAME_LIDAR).withQuantity(VALID_QUANTITY_LIDAR)
+        Item editedItem = itemInList.withName(VALID_NAME_RPLIDAR).withQuantity(VALID_QUANTITY_RPLIDAR)
                 .withTags(VALID_TAG_LAB1).build();
 
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_LIDAR)
-                .withQuantity(VALID_QUANTITY_LIDAR).withTags(VALID_TAG_LAB1).build();
+        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR)
+                .withQuantity(VALID_QUANTITY_RPLIDAR).withTags(VALID_TAG_LAB1).build();
         EditCommand editCommand = new EditCommand(indexLastItem, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
@@ -92,9 +92,9 @@ public class EditCommandTest {
         showItemAtIndex(model, INDEX_FIRST_ITEM);
 
         Item itemInFilteredList = model.getFilteredItemList().get(INDEX_FIRST_ITEM.getZeroBased());
-        Item editedItem = new ItemBuilder(itemInFilteredList).withName(VALID_NAME_LIDAR).build();
+        Item editedItem = new ItemBuilder(itemInFilteredList).withName(VALID_NAME_RPLIDAR).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_ITEM,
-                new EditItemDescriptorBuilder().withName(VALID_NAME_LIDAR).build());
+                new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
@@ -129,7 +129,7 @@ public class EditCommandTest {
     @Test
     public void execute_invalidItemIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_LIDAR).build();
+        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
@@ -147,7 +147,7 @@ public class EditCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getStockList().getItemList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditItemDescriptorBuilder().withName(VALID_NAME_LIDAR).build());
+                new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
@@ -177,7 +177,7 @@ public class EditCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
-        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_LIDAR).build();
+        EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR).build();
         EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
@@ -222,10 +222,10 @@ public class EditCommandTest {
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_ITEM, DESC_SENSOR);
+        final EditCommand standardCommand = new EditCommand(INDEX_FIRST_ITEM, DESC_ARDUINO);
 
         // same values -> returns true
-        EditItemDescriptor copyDescriptor = new EditItemDescriptor(DESC_SENSOR);
+        EditItemDescriptor copyDescriptor = new EditItemDescriptor(DESC_ARDUINO);
         EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST_ITEM, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
@@ -239,10 +239,10 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ITEM, DESC_SENSOR)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND_ITEM, DESC_ARDUINO)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ITEM, DESC_LIDAR)));
+        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST_ITEM, DESC_RPLIDAR)));
     }
 
 }

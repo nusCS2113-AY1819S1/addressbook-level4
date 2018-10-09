@@ -3,8 +3,6 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalItems.ARDUINO;
-import static seedu.address.testutil.TypicalItems.RPLIDAR;
-import static seedu.address.testutil.TypicalItems.MOTOR;
 import static seedu.address.testutil.TypicalItems.getTypicalStockList;
 
 import java.io.IOException;
@@ -17,8 +15,8 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.StockList;
 import seedu.address.model.ReadOnlyStockList;
+import seedu.address.model.StockList;
 
 public class XmlStockListStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlStockListStorageTest");
@@ -62,15 +60,15 @@ public class XmlStockListStorageTest {
     }
 
     @Test
-    public void readStockList_invalidPersonStockList_throwDataConversionException() throws Exception {
+    public void readStockList_invalidItemStockList_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readStockList("invalidPersonStockList.xml");
+        readStockList("invalidItemStockList.xml");
     }
 
     @Test
-    public void readStockList_invalidAndValidPersonStockList_throwDataConversionException() throws Exception {
+    public void readStockList_invalidAndValidItemStockList_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readStockList("invalidAndValidPersonStockList.xml");
+        readStockList("invalidAndValidItemStockList.xml");
     }
 
     @Test
@@ -85,14 +83,13 @@ public class XmlStockListStorageTest {
         assertEquals(original, new StockList(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addItem(RPLIDAR);
         original.removeItem(ARDUINO);
         xmlStockListStorage.saveStockList(original, filePath);
         readBack = xmlStockListStorage.readStockList(filePath).get();
         assertEquals(original, new StockList(readBack));
 
         //Save and read without specifying file path
-        original.addItem(MOTOR);
+        original.addItem(ARDUINO);
         xmlStockListStorage.saveStockList(original); //file path not specified
         readBack = xmlStockListStorage.readStockList().get(); //file path not specified
         assertEquals(original, new StockList(readBack));
@@ -106,12 +103,12 @@ public class XmlStockListStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code stockList} at the specified {@code filePath}.
      */
-    private void saveStockList(ReadOnlyStockList addressBook, String filePath) {
+    private void saveStockList(ReadOnlyStockList stockList, String filePath) {
         try {
             new XmlStockListStorage(Paths.get(filePath))
-                    .saveStockList(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveStockList(stockList, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
