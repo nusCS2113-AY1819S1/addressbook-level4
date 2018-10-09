@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
 
 /**
@@ -79,38 +80,17 @@ public interface Model {
     void commitAddressBook();
 
     //@@author lekoook
-    /**
-     * Retrieves a list of possible predictions for a command box input
-     * @param textInput text input from command box
-     * @return a list of predictions
-     */
-    ArrayList<String> getCmdPrediction(String textInput);
+    TextPrediction getTextPrediction();
 
     /**
-     * Adds a Person's attributes to the respective Trie instances for auto complete
-     * @param person the person to add
+     * Initialises the list of selected Persons in address book.
+     * @param selectedPersons the list to initialise with.
      */
-    void addPersonToTrie(Person person);
+    void setSelectedPersons(List<Person> selectedPersons);
 
     /**
-     * Deletes a Person's attributes from the respective Trie instances for auto complete
-     * @param person the person to delete
+     * Returns the list of selected Persons in address book.
+     * @return the list of selected Persons.
      */
-    void deletePersonFromTrie(Person person);
-
-    /**
-     * Removes all entries in all Trie instances
-     */
-    void clearAllTries();
-
-    /**
-     * Edits a Person's attributes in each respective Trie instances for auto complete.
-     * @param personToEdit the original person.
-     * @param editedPerson the new person.
-     */
-    void editPersonInTrie(Person personToEdit, Person editedPerson);
-
-    void setSelectedPersons(List<Person> personListView);
-
     List<Person> getSelectedPersons();
 }
