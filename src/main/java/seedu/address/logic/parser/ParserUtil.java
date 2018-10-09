@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.Gender.inputTransform;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,8 +16,10 @@ import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Gender;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -54,6 +57,38 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String gender} into a {@code Gender}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code gender} is invalid.
+     */
+    public static Gender parseGender(String gender) throws ParseException {
+        requireNonNull(gender);
+        String trimmedGender = gender.trim();
+        if (!Gender.isInputAccepted(trimmedGender)) {
+            throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
+        }
+        trimmedGender = inputTransform(trimmedGender);
+        requireNonNull(trimmedGender);
+        return new Gender(trimmedGender);
+    }
+
+    /**
+     * Parses a {@code String nationality} into a {@code Nationality}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code nationality} is invalid.
+     */
+    public static Nationality parseNationality(String countryCode) throws ParseException {
+        requireNonNull(countryCode);
+        String trimmedCountryCode = countryCode.trim();
+        if (!Nationality.isValidCountryCode(trimmedCountryCode)) {
+            throw new ParseException(Nationality.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new Nationality(trimmedCountryCode);
     }
 
     /**
@@ -202,4 +237,5 @@ public class ParserUtil {
         }
         return new Message(trimmedMessage);
     }
+
 }

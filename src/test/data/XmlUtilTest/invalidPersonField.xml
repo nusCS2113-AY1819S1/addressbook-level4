@@ -2,6 +2,8 @@
 <!-- Person with an invalid phone field -->
 <person>
     <name>Hans Muster</name>
+    <gender>MALE</gender>
+    <nationality>UK</nationality>
     <phone>9482asf424</phone>
     <email>hans@example</email>
     <address>4th street</address>

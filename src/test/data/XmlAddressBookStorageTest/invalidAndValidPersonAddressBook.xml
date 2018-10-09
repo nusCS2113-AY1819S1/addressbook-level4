@@ -3,6 +3,8 @@
     <!-- Valid Person -->
     <persons>
         <name>Hans Muster</name>
+        <gender isPrivate="false">MALE</gender>
+        <nationality isPrivate="false">US</nationality>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
@@ -10,6 +12,8 @@
     <!-- Person with invalid phone field -->
     <persons>
         <name>Hans Muster</name>
+        <gender isPrivate="false">MALE</gender>
+        <nationality isPrivate="false">US</nationality>
         <phone isPrivate="false">948asdf2424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>

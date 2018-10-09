@@ -3,6 +3,8 @@
 <addressbook>
     <persons>
         <name>Alice Pauline</name>
+        <gender>FEMALE</gender>
+        <nationality>SG</nationality>
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
@@ -11,6 +13,8 @@
     </persons>
     <persons>
         <name>Benson Meier</name>
+        <gender>MALE</gender>
+        <nationality>MY</nationality>
         <phone>98765432</phone>
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
@@ -20,6 +24,8 @@
     </persons>
     <persons>
         <name>Carl Kurz</name>
+        <gender>MALE</gender>
+        <nationality>US</nationality>
         <phone>95352563</phone>
         <email>heinz@example.com</email>
         <address>wall street</address>
@@ -27,6 +33,8 @@
     </persons>
     <persons>
         <name>Daniel Meier</name>
+        <gender>MALE</gender>
+        <nationality>SG</nationality>
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
         <address>10th street</address>
@@ -35,6 +43,8 @@
     </persons>
     <persons>
         <name>Elle Meyer</name>
+        <gender>FEMALE</gender>
+        <nationality>SG</nationality>
         <phone>9482224</phone>
         <email>werner@example.com</email>
         <address>michegan ave</address>
@@ -42,6 +52,8 @@
     </persons>
     <persons>
         <name>Fiona Kunz</name>
+        <gender>FEMALE</gender>
+        <nationality>SG</nationality>
         <phone>9482427</phone>
         <email>lydia@example.com</email>
         <address>little tokyo</address>
@@ -49,6 +61,8 @@
     </persons>
     <persons>
         <name>George Best</name>
+        <gender>MALE</gender>
+        <nationality>US</nationality>
         <phone>9482442</phone>
         <email>anna@example.com</email>
         <address>4th street</address>
