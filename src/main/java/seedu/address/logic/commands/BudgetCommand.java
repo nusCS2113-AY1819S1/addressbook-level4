@@ -10,10 +10,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 
-public class BudgetCommand extends Command{
+/**
+ * Submits the data for budget allocation to the address book.
+ */
+public class BudgetCommand extends Command {
     public static final String COMMAND_WORD = "budget";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Submits the data for calculating the budget for a club. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Submits the data for calculating the budget of a"
+            + " club. "
             + "Parameters: "
             + PREFIX_CLUB_NAME + "CLUB NAME "
             + PREFIX_EXPECTED_TURNOUT + "EXPECTED TURNOUT "

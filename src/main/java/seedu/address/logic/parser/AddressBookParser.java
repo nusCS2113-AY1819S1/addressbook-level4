@@ -89,8 +89,8 @@ public class AddressBookParser {
         case ClearSearchHistoryCommand.COMMAND_WORD:
             return new ClearSearchHistoryCommand();
 
-            case BudgetCommand.COMMAND_WORD:
-                return new BudgetCommandParser().parse(arguments);
+        case BudgetCommand.COMMAND_WORD:
+            return new BudgetCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

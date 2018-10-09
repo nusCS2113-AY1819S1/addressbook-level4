@@ -35,8 +35,10 @@ public class BudgetCommandParser implements Parser<BudgetCommand> {
         }
 
         ClubName clubname = ParserUtil.parseClubName(argMultimap.getValue(PREFIX_CLUB_NAME).get());
-        ExpectedTurnout expectedturnout = ParserUtil.parseExpectedTurnout(argMultimap.getValue(PREFIX_EXPECTED_TURNOUT).get());
-        NumberOfEvents numberofevents = ParserUtil.parseNumberOfEvents(argMultimap.getValue(PREFIX_NUMBER_OF_EVENTS).get());
+        ExpectedTurnout expectedturnout = ParserUtil.parseExpectedTurnout(argMultimap.getValue(
+                PREFIX_EXPECTED_TURNOUT).get());
+        NumberOfEvents numberofevents = ParserUtil.parseNumberOfEvents(argMultimap.getValue(
+                PREFIX_NUMBER_OF_EVENTS).get());
 
         ClubBudgetElements club = new ClubBudgetElements(clubname, expectedturnout, numberofevents);
 
