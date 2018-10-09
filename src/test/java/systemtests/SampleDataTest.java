@@ -1,6 +1,6 @@
 package systemtests;
 
-import static t13g2.forum.ui.testutil.GuiTestAssert.assertListMatching;
+import static com.t13g2.forum.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,10 +8,10 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import t13g2.forum.model.ForumBook;
-import t13g2.forum.model.person.Person;
-import t13g2.forum.model.util.SampleDataUtil;
-import t13g2.forum.testutil.TestUtil;
+import com.t13g2.forum.model.ForumBook;
+import com.t13g2.forum.model.person.Person;
+import com.t13g2.forum.model.util.SampleDataUtil;
+import com.t13g2.forum.testutil.TestUtil;
 
 public class SampleDataTest extends AddressBookSystemTest {
     /**

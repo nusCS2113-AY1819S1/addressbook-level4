@@ -1,14 +1,14 @@
 package systemtests;
 
+import static com.t13g2.forum.ui.BrowserPanel.DEFAULT_PAGE;
+import static com.t13g2.forum.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static com.t13g2.forum.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static com.t13g2.forum.ui.UiPart.FXML_FILE_FOLDER;
+import static com.t13g2.forum.ui.testutil.GuiTestAssert.assertListMatching;
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static t13g2.forum.ui.BrowserPanel.DEFAULT_PAGE;
-import static t13g2.forum.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static t13g2.forum.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static t13g2.forum.ui.UiPart.FXML_FILE_FOLDER;
-import static t13g2.forum.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -23,6 +23,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
+import com.t13g2.forum.MainApp;
+import com.t13g2.forum.TestApp;
+import com.t13g2.forum.commons.core.EventsCenter;
+import com.t13g2.forum.commons.core.index.Index;
+import com.t13g2.forum.logic.commands.ClearCommand;
+import com.t13g2.forum.logic.commands.FindCommand;
+import com.t13g2.forum.logic.commands.ListCommand;
+import com.t13g2.forum.logic.commands.SelectCommand;
+import com.t13g2.forum.model.ForumBook;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.testutil.TypicalPersons;
+import com.t13g2.forum.ui.BrowserPanel;
+import com.t13g2.forum.ui.CommandBox;
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -30,19 +43,6 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import t13g2.forum.MainApp;
-import t13g2.forum.TestApp;
-import t13g2.forum.commons.core.EventsCenter;
-import t13g2.forum.commons.core.index.Index;
-import t13g2.forum.logic.commands.ClearCommand;
-import t13g2.forum.logic.commands.FindCommand;
-import t13g2.forum.logic.commands.ListCommand;
-import t13g2.forum.logic.commands.SelectCommand;
-import t13g2.forum.model.ForumBook;
-import t13g2.forum.model.Model;
-import t13g2.forum.testutil.TypicalPersons;
-import t13g2.forum.ui.BrowserPanel;
-import t13g2.forum.ui.CommandBox;
 
 /**
  * A system test class for ForumBook, which provides access to handles of GUI components and helper methods

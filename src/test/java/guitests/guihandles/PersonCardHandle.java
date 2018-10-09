@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableMultiset;
+import com.t13g2.forum.model.person.Person;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import t13g2.forum.model.person.Person;
 
 /**
  * Provides a handle to a person card in the person list panel.

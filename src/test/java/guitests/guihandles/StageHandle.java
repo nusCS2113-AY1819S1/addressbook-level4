@@ -6,11 +6,12 @@ import static org.junit.Assert.assertFalse;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import com.t13g2.forum.commons.core.LogsCenter;
 import guitests.GuiRobot;
 import guitests.guihandles.exceptions.NodeNotFoundException;
+
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import t13g2.forum.commons.core.LogsCenter;
 
 /**
  * Provides access to a stage in a JavaFx application for GUI testing purposes.
