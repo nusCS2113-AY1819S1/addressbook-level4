@@ -10,8 +10,11 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.book.*;
+import seedu.address.model.book.Book;
 import seedu.address.model.book.Isbn;
+import seedu.address.model.book.Name;
+import seedu.address.model.book.Price;
+import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -61,7 +64,7 @@ public class XmlAdaptedBook {
         name = source.getName().fullName;
         phone = source.getIsbn().value;
         email = source.getPrice().value;
-        address = source.getQuantity().value;
+        address = source.getQuantity().getValue();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());

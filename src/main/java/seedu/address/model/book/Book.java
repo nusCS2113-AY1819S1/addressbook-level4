@@ -59,6 +59,32 @@ public class Book {
     }
 
     /**
+     * calculates the updated quantity of books
+     * @param selling quantity of books sold
+     * @return the updated quantity value of books
+     */
+    private int calculateQuantity(Quantity selling) {
+        Integer original = Integer.valueOf(quantity.getValue());
+        Integer sold = Integer.valueOf(selling.getValue());
+        return original - sold;
+    }
+
+    /**
+     * checks if quantity sold is valid
+     * @param selling quantity of books sold
+     * @return updated quantity
+     */
+    public Quantity deductQuantity(Quantity selling) {
+        int after = calculateQuantity(selling);
+        if (after < 0) {
+            return quantity;
+        } else {
+            quantity.setValue(Integer.toString(after));
+            return quantity;
+        }
+    }
+
+    /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */

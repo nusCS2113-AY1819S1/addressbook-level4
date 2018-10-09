@@ -117,7 +117,7 @@ public class FindCommandSystemTest extends BookInventorySystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find address of book in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getQuantity().value;
+        command = FindCommand.COMMAND_WORD + " " + DANIEL.getQuantity().getValue();
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

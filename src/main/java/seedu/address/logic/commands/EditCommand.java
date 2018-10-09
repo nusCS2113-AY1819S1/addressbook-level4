@@ -20,12 +20,15 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.book.*;
+import seedu.address.model.book.Book;
 import seedu.address.model.book.Isbn;
+import seedu.address.model.book.Name;
+import seedu.address.model.book.Price;
+import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing book in the quantity book.
+ * Edits the details of an existing book in the inventory book.
  */
 public class EditCommand extends Command {
 
