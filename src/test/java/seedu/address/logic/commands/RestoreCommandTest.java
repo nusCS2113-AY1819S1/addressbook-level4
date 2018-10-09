@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 
 import static junit.framework.TestCase.assertEquals;
 
+import java.io.IOException;
 import java.util.logging.Logger;
 
 import org.junit.jupiter.api.Test;
@@ -17,19 +18,21 @@ import seedu.address.model.backup.BackupList;
 
 
 class RestoreCommandTest {
-    private static final Logger logger = Logger.getLogger(ImportCommand.class.getName());
+    private static final Logger logger = Logger.getLogger(RestoreCommand.class.getName());
 
     private Model model = new ModelManager();
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void execute_snapshots_success() throws Exception {
-        BackupList backupList = ParserUtil.parseBackup("snapshots");
         try {
+            BackupList backupList = ParserUtil.parseBackup("snapshots");
             CommandResult result = new RestoreCommand(backupList).execute(model, commandHistory);
             assertEquals(RestoreCommand.getBackupNames(), result.feedbackToUser);
         } catch (CommandException ce) {
             logger.severe(ce.getMessage());
+        } catch (IOException io) {
+            logger.severe(io.getMessage());
         }
     }
 
