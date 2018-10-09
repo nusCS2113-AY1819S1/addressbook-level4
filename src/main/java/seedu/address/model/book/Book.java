@@ -51,9 +51,12 @@ public class Book {
     public Quantity getQuantity() {
         return quantity;
     }
-
-    public Quantity IncreaseQuantity(Quantity amount) {
-        this.quantity.Increase(amount.toInteger());
+    /**
+     * @param amount number of books stock
+     * @return the updated quantity for books
+     */
+    public Quantity increaseQuantity(Quantity amount) {
+        this.quantity.increase(amount.toInteger());
         return quantity;
 
     }
