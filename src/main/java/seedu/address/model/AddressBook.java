@@ -9,8 +9,6 @@ import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.util.Calculator;
-import seedu.address.model.util.SortGrade;
 
 /**
  * Wraps all data at the address-book level
