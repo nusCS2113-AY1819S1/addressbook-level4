@@ -40,8 +40,8 @@ public class SortGrade { //from lowest to highest
         for (i = 0; i < n - 1; i++) {
             //swapped = false;
             for (j = 0; j < n - i - 1; j++) {
-                if (Integer.parseInt(personList.get(j).getGrade().value) >
-                        Integer.parseInt(personList.get(j + 1).getGrade().value)) {
+                if (Integer.parseInt(personList.get(j).getGrade().value)
+                        > Integer.parseInt(personList.get(j + 1).getGrade().value)) {
                     // swap arr[j] and arr[j+1]
                     temp = personList.get(j);
                     personList.set(j, personList.get(j + 1));
