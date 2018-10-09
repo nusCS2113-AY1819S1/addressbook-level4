@@ -5,7 +5,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.LoginBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLoginBook;
+import seedu.address.model.login.LoginDetails;
+import seedu.address.model.login.UserId;
+import seedu.address.model.login.UserPassword;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -14,7 +19,7 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code AddressBook} and {@code LoginBook} with sample data.
  */
 public class SampleDataUtil {
     public static Person[] getSamplePersons() {
@@ -40,12 +45,23 @@ public class SampleDataUtil {
         };
     }
 
+    public static LoginDetails getSampleLoginDetail() {
+        return new LoginDetails(new UserId("X1234567X"), new UserPassword("123456789"));
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyLoginBook getSampleLoginBook() {
+        LoginBook samplelb = new LoginBook();
+        samplelb.createAccount(getSampleLoginDetail());
+
+        return samplelb;
     }
 
     /**

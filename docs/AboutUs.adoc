@@ -4,7 +4,8 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-NUSSU Connect is an application developed to help NUSSU manage people and
+image::NUSSU-Connect-Banner.jpg[width="680", align=center"]
+NUSSU-Connect is an application developed to help NUSSU manage people and
 related functions relating to HR and Finance needs. It is currently a work in progress.
 https://se-edu.github.io/docs/Team.html[F09-1] team. +
 
@@ -13,37 +14,37 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Boon Jun
-image::ladderinc.jpg[width="150", align="left"]
-{empty}[http://github.com/ladderinc[github]] [<<johndoe#, portfolio>>]
+image::ladderinc.png[width="150", align="left"]
+{empty}[http://github.com/ladderinc[github]]
 
-Role: TBC +
+Role: Scheduling and Tracking, Deliverables and deadlines +
 Responsibilities: Search Pruning + Advanced Search and filter feature.
 
 '''
 
 === Melvin Tan
-image::Melvin.jpg[width="150", align="left"]
-{empty}[http://github.com/Chocological[github]] [<<johndoe#, portfolio>>]
+image::chocological.png[width="150", align="left"]
+{empty}[http://github.com/Chocological[github]]
 
-Role: TBC +
+Role: Integration and Testing +
 Responsibilities: Login System
 
-...
+'''
 
 === Jonathan Ng
-image::jonathan.png[width="150", align="left"]
-{empty}[http://github.com/derpyplops[github]] [<<johndoe#, portfolio>>]
+image::derpyplops.png[width="150", align="left"]
+{empty}[http://github.com/derpyplops[github]]
 
-Role: Developer +
+Role: Documentation and Team Lead +
 Responsibilities: HR & Roles
 
 '''
 
 === Sanjukta Saha
-image::sanjukta99.jpg[width="150", align="left"]
-{empty}[http://github.com/sanjukta99[github]] [<<johndoe#, portfolio>>]
+image::sanjukta99.png[width="150", align="left"]
+{empty}[http://github.com/sanjukta99[github]]
 
-Role: Developer +
+Role: Code Quality +
 Responsibilities: Budgeting functionality for NUSSU and club treasurers
 
 '''

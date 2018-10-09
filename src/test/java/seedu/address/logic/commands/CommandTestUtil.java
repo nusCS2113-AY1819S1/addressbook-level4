@@ -26,6 +26,14 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_ID_ACCOUNT1 = "A1234567M";
+    public static final String VALID_ID_ACCOUNT2 = "A1234568M";
+    public static final String VALID_PASSWORD_ACCOUNT1 = "zaq1xsw2cde3";
+    public static final String VALID_PASSWORD_ACCOUNT2 = "1qaz2wsx3edc";
+
+    public static final String INVALID_ACCOUNT_ID_DESC = " " + "AA234567M"; // '&' not allowed in names
+    public static final String INVALID_ACCOUNT_PASS_DESC = " " + "James&"; // '&' not allowed in names
+
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";
