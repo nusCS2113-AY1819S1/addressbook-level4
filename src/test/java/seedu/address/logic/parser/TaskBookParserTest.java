@@ -14,14 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.HelpCommand;
-import seedu.address.logic.commands.HistoryCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Task;
@@ -38,8 +31,8 @@ public class TaskBookParserTest {
     @Test
     public void parseCommand_add() throws Exception {
         Task task = new PersonBuilder().build();
-        AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(task));
-        assertEquals(new AddCommand(task), command);
+        AddTaskCommand command = (AddTaskCommand) parser.parseCommand(PersonUtil.getAddCommand(task));
+        assertEquals(new AddTaskCommand(task), command);
     }
 
     @Test
@@ -53,6 +46,10 @@ public class TaskBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    public void parseCommand_defer() throws Exception {
+        assertTrue(parser.parseCommand(DeferDeadlineCommand.COMMAND_WORD) instanceof DeferDeadlineCommand);
     }
 
     @Test

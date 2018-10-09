@@ -9,7 +9,7 @@ import seedu.address.model.Model;
  * Defer deadline of a specific task in the taskbook.
  */
 
-public class DeferDeadlines extends Command{
+public class DeferDeadlineCommand extends Command{
 
     public static final String COMMAND_WORD = "defer";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Defers the selected task in the taskbook"
