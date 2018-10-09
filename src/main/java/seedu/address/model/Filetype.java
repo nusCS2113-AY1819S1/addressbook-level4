@@ -20,6 +20,9 @@ public class Filetype {
      */
     public static final String FILETYPE_VALIDATION_REGEX = "[^\\s].*";
 
+    /**
+     * Filetypes that can be used to export contacts.
+     */
     public enum Extension {
         csv, vcf
     }
@@ -54,11 +57,11 @@ public class Filetype {
     // Reused from
     // http://www.java2s.com/Tutorials/Java/Data_Type_How_to/String/
     // Check_if_enum_contains_a_given_string.html with minor modifications
-    private static <E extends Enum<E>> boolean contains(Class<E> _enumClass,
+    private static <E extends Enum<E>> boolean contains(Class<E> enumClass,
                                                        String value) {
         try {
-            return EnumSet.allOf(_enumClass)
-                    .contains(Enum.valueOf(_enumClass, value));
+            return EnumSet.allOf(enumClass)
+                    .contains(Enum.valueOf(enumClass, value));
         } catch (Exception e) {
             return false;
         }
