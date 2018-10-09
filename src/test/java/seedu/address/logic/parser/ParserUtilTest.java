@@ -37,6 +37,8 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
 
+    private static final String VALID_FILETYPE = "csv";
+
     private static final String WHITESPACE = " \t\r\n";
 
     @Rule
@@ -204,5 +206,25 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseFiletype_invalidInput_throwsNullPointerException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseFiletype("abc");
+    }
+
+    @Test
+    public void parseFiletype_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseFiletype(null));
+    }
+
+    @Test
+    public void parseFiletype_validInput_success() throws Exception {
+        // No whitespaces
+        assertEquals(VALID_FILETYPE, ParserUtil.parseFiletype("csv"));
+
+        // Leading and trailing whitespaces
+        assertEquals(VALID_FILETYPE, ParserUtil.parseFiletype("  csv  "));
     }
 }
