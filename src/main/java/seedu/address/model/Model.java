@@ -79,6 +79,10 @@ public interface Model {
     void commitAddressBook();
 
     //@@author lekoook
+    /**
+     * Get the TextPrediction instance.
+     * @return the TextPrediction instance used for text prediction.
+     */
     TextPrediction getTextPrediction();
 
     /**
