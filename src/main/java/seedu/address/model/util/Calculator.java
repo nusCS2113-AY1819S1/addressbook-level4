@@ -15,8 +15,8 @@ public class Calculator {
         int sum = 0;
         for (int i = 0; i < personList.asUnmodifiableObservableList().size(); i++) {
 
-            sum += Integer.parseInt(personList.
-                    asUnmodifiableObservableList().get(i).getGrade().value);//string to integer then calculate
+            sum += Integer.parseInt(personList
+                    .asUnmodifiableObservableList().get(i).getGrade().value); //string to integer then calculate
         }
         int mean = sum / personList.asUnmodifiableObservableList().size();
         return mean;
