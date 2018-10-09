@@ -4,31 +4,31 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Group's Location in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * Represents a Group's location in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidGroupLocation(String)}
  */
 public class GroupLocation {
     public static final String MESSAGE_GROUP_LOCATION_CONSTRAINTS =
-            "GroupLocation should only contain alphanumeric characters and a symbol '-' is accepted";
+            "GroupLocation can take '-' and alphanumeric characters, and should not be blank";
 
-    /**
+    /*
      * The first character of the address must not be a whitespace,
-     * Allow user to input Group Location with '-' symbol and alphanumeric characters
-     * Example: E1-06-03
+     * otherwise " " (a blank string) becomes a valid input.
+     * Allow user to input '-' and alphanumeric characters
      */
     public static final String LOCATION_VALIDATION_REGEX = "[\\p{Alnum}\\-][\\p{Alnum}\\-]*";
 
-    public final String groupLocation;
+    public final String value;
 
     /**
-     * Constructs a {@code groupLocation}.
+     * Constructs a {@code GroupLocation}.
      *
-     * @param groupLocation A valid groupName.
+     * @param groupLocation A valid location.
      */
     public GroupLocation(String groupLocation) {
         requireNonNull(groupLocation);
         checkArgument(isValidGroupLocation(groupLocation), MESSAGE_GROUP_LOCATION_CONSTRAINTS);
-        this.groupLocation = groupLocation;
+        value = groupLocation;
     }
 
     public static boolean isValidGroupLocation(String test) {
@@ -37,19 +37,19 @@ public class GroupLocation {
 
     @Override
     public String toString() {
-        return groupLocation;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GroupLocation // instanceof handles nulls
-                && groupLocation.equals(((GroupLocation) other).groupLocation)); // state check
+                && value.equals(((GroupLocation) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return groupLocation.hashCode();
+        return value.hashCode();
     }
 
 }

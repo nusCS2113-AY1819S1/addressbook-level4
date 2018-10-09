@@ -32,6 +32,14 @@ public class FileUtil {
     }
 
     /**
+     * Returns the Path data that has been converted via {@link Paths#get(String)}
+     * @param path A string representing the file path. Cannot be null.
+     */
+    public static Path getPath(String path) throws InvalidPathException {
+        return Paths.get(path);
+    }
+
+    /**
      * Creates a file if it does not exist along with its missing parent directories.
      * @throws IOException if the file or directory cannot be created.
      */

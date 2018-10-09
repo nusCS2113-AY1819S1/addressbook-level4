@@ -1,115 +1,106 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_LOC_DESC_LAB;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_LOC_DESC_TUT;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_LAB;
-import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_TUT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_LOC_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_LOCATION_DESC_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_LOCATION_DESC_TUT_1;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_TUT_1;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_TAG_DESC_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_TAG_DESC_TUT_1;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_LOCATION_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_TAG;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_GROUP_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_LAB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_TUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_LAB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_LAB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_TUT_1;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_TUT_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.TypicalGroups.TUT_1;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.CreateGroupCommand;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.GroupBuilder;
 
 public class CreateGroupCommandParserTest {
     private CreateGroupCommandParser parser = new CreateGroupCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
-        /** TODO to be fixed!
-        Group expectedGroup = new GroupBuilder(LAB).withTags(VALID_TAG_DIFFICULTY).build();
+        Group expectedGroup = new GroupBuilder(TUT_1).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUP_NAME_DESC_TUT + GROUP_LOC_DESC_TUT
-                , new CreateGroupCommand(expectedGroup));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUP_NAME_DESC_TUT_1 + GROUP_LOCATION_DESC_TUT_1
+                + GROUP_TAG_DESC_TUT_1, new CreateGroupCommand(expectedGroup));
 
-        // multiple group names entered - last group name accepted
-        assertParseSuccess(parser, GROUP_NAME_DESC_TUT + GROUP_NAME_DESC_TUT + GROUP_LOC_DESC_TUT
-                + TAG_DESC_TUT, new CreateGroupCommand(expectedGroup));
+        // multiple group names - last group name accepted
+        assertParseSuccess(parser, GROUP_NAME_DESC_CS1010 + GROUP_NAME_DESC_TUT_1 + GROUP_LOCATION_DESC_TUT_1
+                + GROUP_TAG_DESC_TUT_1, new CreateGroupCommand(expectedGroup));
 
-        // multiple group location entered - last group location accepted
-        assertParseSuccess(parser, GROUP_NAME_DESC_TUT + GROUP_LOC_DESC_TUT + GROUP_LOC_DESC_TUT
-                + TAG_DESC_TUT, new CreateGroupCommand(expectedGroup));
+        // multiple group locations - last location accepted
+        assertParseSuccess(parser, GROUP_NAME_DESC_TUT_1 + GROUP_LOCATION_DESC_CS1010 + GROUP_LOCATION_DESC_TUT_1
+                + GROUP_TAG_DESC_TUT_1, new CreateGroupCommand(expectedGroup));
 
         // multiple tags - all accepted
-        Group expectedGroupMultipleTags = new GroupBuilder(LAB).withTags(VALID_TAG_TUT, VALID_TAG_LAB)
-                .build();
-        assertParseSuccess(parser, GROUP_NAME_DESC_TUT + GROUP_LOC_DESC_TUT + TAG_DESC_TUT
-                + TAG_DESC_LAB, new CreateGroupCommand(expectedGroupMultipleTags));
-         */
+        Group expectedGroupMultipleTags = new GroupBuilder(TUT_1).withTags(VALID_GROUP_TAG_TUT_1,
+                VALID_GROUP_TAG_CS1010).build();
+        assertParseSuccess(parser, GROUP_NAME_DESC_TUT_1 + GROUP_LOCATION_DESC_TUT_1
+                + GROUP_TAG_DESC_TUT_1 + GROUP_TAG_DESC_CS1010, new CreateGroupCommand(expectedGroupMultipleTags));
     }
 
     @Test
     public void parse_optionalFieldsMissing_success() {
-        // No tags
-        /** TODO require to fix testing
-        Group expectedGroup = new GroupBuilder(LAB).withTags().build();
-        assertParseSuccess(parser, GROUP_NAME_DESC_LAB + GROUP_LOC_DESC_LAB,
+        // zero tags
+        Group expectedGroup = new GroupBuilder(TUT_1).withTags().build();
+        assertParseSuccess(parser, GROUP_NAME_DESC_TUT_1 + GROUP_LOCATION_DESC_TUT_1,
                 new CreateGroupCommand(expectedGroup));
-        */
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE);
 
-        // missing group name prefix
-        assertParseFailure(parser, VALID_GROUP_LOCATION_TUT + GROUP_LOC_DESC_TUT,
+        // missing name prefix
+        assertParseFailure(parser, VALID_GROUP_NAME_TUT_1 + GROUP_LOCATION_DESC_TUT_1,
                 expectedMessage);
 
         // missing group location prefix
-        assertParseFailure(parser, GROUP_NAME_DESC_LAB + VALID_GROUP_LOCATION_LAB,
+        assertParseFailure(parser, GROUP_NAME_DESC_TUT_1 + VALID_GROUP_LOCATION_TUT_1,
                 expectedMessage);
 
-
         // all prefixes missing
-        assertParseFailure(parser, VALID_GROUP_NAME_LAB + VALID_GROUP_LOCATION_LAB,
+        assertParseFailure(parser, VALID_GROUP_NAME_TUT_1 + VALID_GROUP_LOCATION_TUT_1,
                 expectedMessage);
     }
 
     @Test
     public void parse_invalidValue_failure() {
         // invalid group name
-        assertParseFailure(parser, INVALID_GROUP_NAME_DESC + GROUP_LOC_DESC_LAB
-                + TAG_DESC_TUT + TAG_DESC_LAB, GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_GROUP_NAME_DESC + GROUP_LOCATION_DESC_TUT_1
+                + GROUP_TAG_DESC_TUT_1 + GROUP_TAG_DESC_CS1010, GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
 
         // invalid group location
-        assertParseFailure(parser, GROUP_NAME_DESC_LAB + INVALID_GROUP_LOC_DESC
-                + TAG_DESC_TUT + TAG_DESC_LAB, GroupLocation.MESSAGE_GROUP_LOCATION_CONSTRAINTS);
+        assertParseFailure(parser, GROUP_NAME_DESC_TUT_1 + INVALID_GROUP_LOCATION_DESC
+                + GROUP_TAG_DESC_TUT_1 + GROUP_TAG_DESC_CS1010, GroupLocation.MESSAGE_GROUP_LOCATION_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, GROUP_NAME_DESC_LAB + GROUP_LOC_DESC_LAB
-                + INVALID_GROUP_TAG + TAG_DESC_LAB, Tag.MESSAGE_TAG_CONSTRAINTS);
+        assertParseFailure(parser, GROUP_NAME_DESC_TUT_1 + GROUP_LOCATION_DESC_TUT_1
+                + INVALID_GROUP_TAG_DESC + VALID_GROUP_TAG_TUT_1, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        // invalid group name & invalid tag
-        assertParseFailure(parser, INVALID_GROUP_NAME_DESC + GROUP_LOC_DESC_LAB
-                + INVALID_GROUP_TAG + TAG_DESC_LAB, GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_GROUP_NAME_DESC + INVALID_GROUP_LOCATION_DESC,
+                GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + GROUP_NAME_DESC_TUT
-                        + GROUP_LOC_DESC_TUT,
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + GROUP_NAME_DESC_TUT_1 + GROUP_LOCATION_DESC_TUT_1
+                        + GROUP_TAG_DESC_TUT_1 + GROUP_TAG_DESC_CS1010,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE));
-    }
-
-    @Test
-    public void parseNoParametersFailure() {
-        String expectedOutput = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateGroupCommand.MESSAGE_USAGE);
-
-        //  without any parameters
-        assertParseFailure(parser, CreateGroupCommand.COMMAND_WORD, expectedOutput);
-        assertParseFailure(parser, CreateGroupCommand.COMMAND_WORD_2, expectedOutput);
     }
 }

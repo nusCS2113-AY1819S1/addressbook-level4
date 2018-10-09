@@ -12,14 +12,18 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
+import seedu.address.testutil.TypicalGroups;
 import seedu.address.testutil.TypicalPersons;
 
 public class XmlSerializableAddressBookTest {
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSerializableAddressBookTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.xml");
+    private static final Path TYPICAL_GROUPS_FILE = TEST_DATA_FOLDER.resolve("typicalGroupsAddressBook.xml");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.xml");
+    private static final Path INVALID_GROUP_FILE = TEST_DATA_FOLDER.resolve("invalidGroupAddressBook.xml");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.xml");
+    private static final Path DUPLICATE_GROUP_FILE = TEST_DATA_FOLDER.resolve("duplicateGroupAddressBook.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -34,8 +38,25 @@ public class XmlSerializableAddressBookTest {
     }
 
     @Test
+    public void toModelType_typicalGroupsFile_success() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_GROUPS_FILE,
+                XmlSerializableAddressBook.class);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalGroupsAddressBook = TypicalGroups.getTypicalAddressBook();
+        assertEquals(addressBookFromFile, typicalGroupsAddressBook);
+    }
+
+    @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
+                XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        dataFromFile.toModelType();
+    }
+
+    @Test
+    public void toModelType_invalidGroupFile_throwsIllegalValueException() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_GROUP_FILE,
                 XmlSerializableAddressBook.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
@@ -47,6 +68,15 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableAddressBook.class);
         thrown.expect(IllegalValueException.class);
         thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_PERSON);
+        dataFromFile.toModelType();
+    }
+
+    @Test
+    public void toModelType_duplicateGroups_throwsIllegalValueException() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_GROUP_FILE,
+                XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_GROUP);
         dataFromFile.toModelType();
     }
 

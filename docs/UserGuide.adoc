@@ -53,41 +53,29 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Creating a group: `group` `grp`
 Creates a group in the address book +
-Format: `group p/NAME` +
-Shortcut Format: `grp p/NAME` +
+Format: `group n/NAME l/LOCATION` +
+Shortcut Format: `grp n/NAME l/LOCATION` +
 ****
-* Creates a group with the specified NAME
-****
-
-Examples:
-
-* `group g/CS2113`
-* `grp g/CS2113`
-
-=== Adding a group: `cal`
-Adds a group to a date on the calendar +
-Format: `cal n/NAME d/DATE` +
-****
-* Adds a group with a specified NAME to a specified DATE (DDMMYY) on the calendar
-* Not implemented as of yet
+* Creates a group with the specified NAME and LOCATION
 ****
 
 Examples:
 
-* cal n/CS2113 d/231018
+* `group n/CS2113 l/LT15`
+* `grp n/CS2113 l/LT01`
 
 === Populating a group: `pop`
 Adds person(s) to a group +
-Format: `pop n/NAME INDEX [MORE_INDICES]` +
+Format: `pop n/NAME l/LOCATION i/INDEX [MORE_INDICES]` +
 ****
-* Adds a person at specified INDEX(s) to group at specified NAME.
+* Adds a person at specified INDEX(s) to group at specified NAME and LOCATION.
 * The index refers to the index number shown in the displayed person list.
 * The index must be a positive integer 1, 2, 3, …​
 ****
 
 Examples:
 
-* pop n/CS2113 2 3 4 5
+* pop n/CS2113 l/LT15 i/2 3 4 5
 
 === List a group of students: 'scorefilter a/56 or b/56'
 List out  students who score above/below certain grade.
@@ -165,6 +153,22 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * `a n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
 
+=== Adding multiple persons into the Addressbook : `addscript` `as`
+
+Get all the add commands from a text file and execute them +
+Format: `addscript TextFileName` +
+Shortcut Format: `as TextFileName` +
+
+****
+* TextFileName is the text file name that is located at base of the project.
+* The TextFileName *must contain .txt* extension at the end of the String.
+****
+
+Examples:
+
+* `addscript abc.txt`
+* `as abc.txt`
+
 === Listing all persons : `list` `l`
 
 Shows a list of all persons in the address book. +
@@ -174,12 +178,8 @@ Shortcut Format: `l`
 === Editing a person : `edit` `e`
 
 Edits an existing person in the address book. +
-<<<<<<< HEAD
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
-=======
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-Shortcut Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
->>>>>>> 1b29d41f1daa8018b906db3069dfb16be5b504ac
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...` +
+Shortcut Format: `e INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG] [g/GRADE]...`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...

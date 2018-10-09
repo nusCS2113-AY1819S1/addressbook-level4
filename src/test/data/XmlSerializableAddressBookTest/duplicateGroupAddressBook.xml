@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+
+    <groups>
+        <groupName>TUT[1]</groupName>
+        <groupLocation isPrivate="false">E1-01-01</groupLocation>
+        <tagged isPrivate="false">maths</tagged>
+    </groups>
+
+    <!-- Group with same identity as TUT[1] -->
+    <groups>
+        <groupName>TUT[1]</groupName>
+        <groupLocation isPrivate="false">E1-01-01</groupLocation>
+    </groups>
+
+</addressbook>
