@@ -6,9 +6,14 @@ import java.util.ArrayList;
 
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-
+/**
+ * calculate the values we used for gradesummary and scorefilter command.
+ */
 public class Calculator {
 
+    /**
+     * calculate the mean values of student's scores.
+     */
     public int calculateMean(UniquePersonList personList) { //calculate the mean score of a test
         int sum = 0;
         for (int i = 0; i < personList.asUnmodifiableObservableList().size(); i++) {
@@ -20,6 +25,9 @@ public class Calculator {
         return mean;
     }
 
+    /**
+     * find the highest score from student's scores.
+     */
     public int findHighest(UniquePersonList personList) {  //find highest score of the test
         int maximum =0;
         for(int i=0; i<personList.asUnmodifiableObservableList().size(); i++ ){
@@ -29,7 +37,9 @@ public class Calculator {
 
         return maximum;
     }
-    //TODO
+    /**
+     * find the top 25 percent student's name and scores.
+     */
     public ArrayList<Person> find25th(UniquePersonList personList){    // Find students in top 25th
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
@@ -51,7 +61,9 @@ public class Calculator {
         return theList;
 
     }
-
+    /**
+     * find the last 25 percent student's name and scores.
+     */
     public ArrayList<Person> find75th(UniquePersonList personList){    // Find students below 75th
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,personList.asUnmodifiableObservableList().size()));
@@ -73,7 +85,9 @@ public class Calculator {
         return theList;
 
     }
-
+    /**
+     * find the median of student's scores.
+     */
     public int calculateMedian(UniquePersonList personList) { //calculate the mean score of a test
         int median = 0;
         ArrayList<Person> sortedList =
