@@ -20,6 +20,7 @@ import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.SelectCommand;
 import seedu.planner.logic.commands.UndoCommand;
+import seedu.planner.logic.commands.LimitCommand;
 
 import seedu.planner.logic.parser.exceptions.ParseException;
 
