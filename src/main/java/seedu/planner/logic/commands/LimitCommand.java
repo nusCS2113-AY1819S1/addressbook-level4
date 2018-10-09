@@ -28,11 +28,11 @@ import seedu.planner.model.record.Record;
             + "Example: " + COMMAND_WORD + " "
 
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
-            + PREFIX_MONEYFLOW + "-100 ";
+            + PREFIX_MONEYFLOW + "100 ";
 
     //public static Limit limit;
 
-    public static final String MESSAGE_EXCEED = "Your spend (%f) exceeded the limit. ";//%l$s";
+    public static final String MESSAGE_EXCEED = "Your spend (%f) exceeded the limit. "; //%l$s";
     public static final String MESSAGE_NOT_EXCEED = "Your spend (%f) did not exceed the limit.";
     private Limit limit;
     private Record recordNow;
@@ -61,10 +61,10 @@ import seedu.planner.model.record.Record;
        }
 
        //TODO: to modify the conditional check that only for positive integer input.
-       if (limit.getLimit_moneyFlow().isSmaller(sumOfSpend))
-        return new CommandResult(String.format(MESSAGE_NOT_EXCEED, sumOfSpend));
+       if (limit.getLimit_moneyFlow().isNotLarger(sumOfSpend))
+        return new CommandResult(String.format(MESSAGE_NOT_EXCEED, (-1* sumOfSpend)));
        else
-       return new CommandResult(String.format(MESSAGE_EXCEED, sumOfSpend));
+       return new CommandResult(String.format(MESSAGE_EXCEED, (-1* sumOfSpend)));
     }
     @Override
     public boolean equals (Object other) {

@@ -68,7 +68,7 @@ public class MoneyFlow {
 
     public double toDouble () { return valueDouble; }
 
-    public boolean isSmaller (double moneyin) { return (moneyin> valueDouble); }
+    public boolean isNotLarger (double moneyin) { return (moneyin >= valueDouble); }
 
     @Override
     public boolean equals(Object other) {
