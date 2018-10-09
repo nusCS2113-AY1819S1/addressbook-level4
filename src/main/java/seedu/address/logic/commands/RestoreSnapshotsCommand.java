@@ -14,8 +14,8 @@ import java.util.List;
  * Restores the address book to a snapshot of choice.
  */
 public class RestoreSnapshotsCommand extends RestoreCommand {
-    public static final String NUMBER_OF_SNAPSHOTS_PLURAL = " snapshots listed!";
-    public static final String NUMBER_OF_SNAPSHOTS = " snapshot listed!";
+    private static final String NUMBER_OF_SNAPSHOTS_PLURAL = " snapshots listed!";
+    private static final String NUMBER_OF_SNAPSHOTS = " snapshot listed!";
 
     private static String backupNames;
 

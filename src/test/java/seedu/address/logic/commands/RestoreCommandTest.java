@@ -28,22 +28,13 @@ class RestoreCommandTest {
         try {
             BackupList backupList = ParserUtil.parseBackup("snapshots");
             Index index = ParserUtil.parseIndex("1");
+            String fileDate = backupList.getFileNames().get(index.getZeroBased());
             CommandResult result = new RestoreCommand(backupList, index).execute(model, commandHistory);
-            assertEquals(RestoreCommand.MESSAGE_RESTORED_SUCCESS, result.feedbackToUser);
+            assertEquals(String.format(RestoreCommand.MESSAGE_RESTORED_SUCCESS, fileDate), result.feedbackToUser);
         } catch (CommandException ce) {
             logger.severe(ce.getMessage());
         } catch (IOException io) {
             logger.severe(io.getMessage());
-        }
-    }
-
-    @Test
-    public void execute_success() {
-        try {
-            CommandResult result = new RestoreCommand().execute(model, commandHistory);
-            assertEquals(RestoreCommand.MESSAGE_USAGE, result.feedbackToUser);
-        } catch (CommandException ce) {
-            logger.severe(ce.getMessage());
         }
     }
 }

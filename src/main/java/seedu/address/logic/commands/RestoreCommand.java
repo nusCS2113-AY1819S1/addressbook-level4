@@ -36,10 +36,7 @@ public class RestoreCommand extends Command {
     private Map<Integer, File> fileMap;
     private List<String> fileName;
 
-
-    public RestoreCommand() {
-
-    }
+    public RestoreCommand() {}
 
     public RestoreCommand(BackupList backupList, Index index) {
         this.fileMap = backupList.getFileMap();
