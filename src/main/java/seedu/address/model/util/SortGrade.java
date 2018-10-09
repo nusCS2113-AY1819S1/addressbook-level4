@@ -22,39 +22,45 @@ public class SortGrade { //from lowest to highest
         return pList;
     }
 
+    /**
+     * implement bubblesort function.
+     */
+    public static ArrayList<Person> bubbleSort(UniquePersonList list, int n) {
+        ArrayList<Person> personList = new ArrayList<Person>();
 
-   public static ArrayList<Person> bubbleSort(UniquePersonList list, int n) {
-       ArrayList<Person> personList = new ArrayList<Person>();
+        for (int i = 0; list.asUnmodifiableObservableList().size() > i; i++) {
+            personList.add(list.asUnmodifiableObservableList().get(i));
+        }
 
-       for (int i = 0; list.asUnmodifiableObservableList().size() > i; i++) {
-           personList.add(list.asUnmodifiableObservableList().get(i));
-       }
 
-       int i;
-       int j;
-       Person temp;
-       // boolean swapped;
-       for (i = 0; i < n - 1; i++) {
-           //swapped = false;
-           for (j = 0; j < n - i - 1; j++) {
-               if (Integer.parseInt(personList.get(j).getGrade().value) >
-                       Integer.parseInt(personList.get(j + 1).getGrade().value)) {
-                   // swap arr[j] and arr[j+1]
-                   temp = personList.get(j);
-                   personList.set(j, personList.get(j + 1));
+        int i;
+        int j;
+        Person temp;
+        // boolean swapped;
+        for (i = 0; i < n - 1; i++) {
+            //swapped = false;
+            for (j = 0; j < n - i - 1; j++) {
+                if (Integer.parseInt(personList.get(j).getGrade().value) >
+                        Integer.parseInt(personList.get(j + 1).getGrade().value)) {
+                    // swap arr[j] and arr[j+1]
+                    temp = personList.get(j);
+                    personList.set(j, personList.get(j + 1));
 
-                   personList.set(j + 1, temp);
-                   // swapped = true;
-               }
-           }
+                    personList.set(j + 1, temp);
+                    // swapped = true;
+                }
 
-           // if (swapped == false)
-           //     break;
-       }
-       return personList;
-   }
+            }
 
+
+            // if (swapped == false)
+            //     break;
+        }
+        return personList;
+    }
 }
+
+
 
 
 
