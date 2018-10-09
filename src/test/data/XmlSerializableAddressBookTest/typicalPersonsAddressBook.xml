@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook() -->
+<!-- BookInventory save file which contains the same Book values as in TypicalPersons#getTypicalAddressBook() -->
 <addressbook>
-    <persons>
+    <books>
         <name>Alice Pauline</name>
-        <phone>94351253</phone>
-        <email>alice@example.com</email>
-        <address>123, Jurong West Ave 6, #08-111</address>
+        <ISBN>94351253</ISBN>
+        <price>alice@example.com</price>
+        <quantity>123, Jurong West Ave 6, #08-111</quantity>
         <tagged>friends</tagged>
-    </persons>
-    <persons>
+    </books>
+    <books>
         <name>Benson Meier</name>
-        <phone>98765432</phone>
-        <email>johnd@example.com</email>
-        <address>311, Clementi Ave 2, #02-25</address>
+        <ISBN>98765432</ISBN>
+        <price>johnd@example.com</price>
+        <quantity>311, Clementi Ave 2, #02-25</quantity>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
-    </persons>
-    <persons>
+    </books>
+    <books>
         <name>Carl Kurz</name>
-        <phone>95352563</phone>
-        <email>heinz@example.com</email>
-        <address>wall street</address>
-    </persons>
-    <persons>
+        <ISBN>95352563</ISBN>
+        <price>heinz@example.com</price>
+        <quantity>wall street</quantity>
+    </books>
+    <books>
         <name>Daniel Meier</name>
-        <phone>87652533</phone>
-        <email>cornelia@example.com</email>
-        <address>10th street</address>
+        <ISBN>87652533</ISBN>
+        <price>cornelia@example.com</price>
+        <quantity>10th street</quantity>
         <tagged>friends</tagged>
-    </persons>
-    <persons>
+    </books>
+    <books>
         <name>Elle Meyer</name>
-        <phone>9482224</phone>
-        <email>werner@example.com</email>
-        <address>michegan ave</address>
-    </persons>
-    <persons>
+        <ISBN>9482224</ISBN>
+        <price>werner@example.com</price>
+        <quantity>michegan ave</quantity>
+    </books>
+    <books>
         <name>Fiona Kunz</name>
-        <phone>9482427</phone>
-        <email>lydia@example.com</email>
-        <address>little tokyo</address>
-    </persons>
-    <persons>
+        <ISBN>9482427</ISBN>
+        <price>lydia@example.com</price>
+        <quantity>little tokyo</quantity>
+    </books>
+    <books>
         <name>George Best</name>
-        <phone>9482442</phone>
-        <email>anna@example.com</email>
-        <address>4th street</address>
-    </persons>
+        <ISBN>9482442</ISBN>
+        <price>anna@example.com</price>
+        <quantity>4th street</quantity>
+    </books>
 </addressbook>

@@ -4,53 +4,45 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
+BookInventory was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
 _{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Koh Jun Kiat
+image::kohjunkiat.jpg[width="150", align="left"]
+{empty}[https://www.youtube.com/watch?v=zWoHr_2GbY4&gl=SG&hl=en-GB[homepage]] [http://github.com/kohjunkiat[github]]
 
-Role: Project Advisor
+Role: Scheduler +
+Responsibilities: Dispatching jobs
 
 '''
 
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+=== Lee Gui Yong
+image::leeguiyong.jpg[width="150", align="left"]
+{empty}[https://github.com/guiyong96[github]] [<<johndoe#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: UI
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: Data
-
-'''
-
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Ashley Teo
+image::20170610_111528.jpg[width="150", align="left"]
+{empty}[http://github.com/iashcole[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Dev Ops + Threading
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Kenneth Chua
+image::kennethcsj.png[width="150", align="left"]
+{empty}[http://github.com/kennethcsj[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: UI
+Responsibilities: Documentation
 
 '''

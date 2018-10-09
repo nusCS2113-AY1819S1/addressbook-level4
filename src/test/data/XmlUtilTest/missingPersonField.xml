@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Person with missing name field -->
-<person>
-    <phone>9482424</phone>
-    <email>hans@example</email>
-    <address>4th street</address>
+<!-- Book with missing name field -->
+<book>
+    <ISBN>9482424</ISBN>
+    <price>hans@example</price>
+    <quantity>4th street</quantity>
     <tagged>friends</tagged>
-</person>
+</book>
