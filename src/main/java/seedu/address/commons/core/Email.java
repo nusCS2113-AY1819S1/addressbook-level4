@@ -27,12 +27,15 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
+import javafx.collections.ObservableList;
+
+import seedu.address.model.candidate.Candidate;
 
 /**
- * Class for using GMAIL on RecruitBook
+ * Functions for anything pertaining to emails
  */
 public class Email {
-    /**
+     /**
      * Global instance of the scopes required by this quickstart.
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
@@ -136,4 +139,5 @@ public class Email {
         message.setRaw(encodedEmail);
         return message;
     }
+
 }

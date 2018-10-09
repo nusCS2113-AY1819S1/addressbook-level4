@@ -18,7 +18,7 @@ import seedu.address.logic.commands.ClearJobBookCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCandidateCommand;
-import seedu.address.logic.commands.EmailCommand.EmailInitialiseCommand;
+import seedu.address.logic.commands.EmailCommand.EmailCommand;
 import seedu.address.logic.commands.EmailCommand.EmailSelectContentsCommand;
 import seedu.address.logic.commands.EmailCommand.EmailSelectRecipientsCommand;
 import seedu.address.logic.commands.ExitCommand;
@@ -42,6 +42,15 @@ public class RecruitBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    private EmailCommand emailCommand;
+
+    public static void setEmailCommand(EmailCommand emailCommand) {
+        this.emailCommand = emailCommand;
+    }
+
+    public static EmailCommand getEmailCommand() {
+        return this.emailCommand;
+    }
 
     /**
      * Parses user input into command for execution.
@@ -78,7 +87,7 @@ public class RecruitBookParser {
                     return new ListCommand();
                 }
             } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
-                    && EmailInitialiseCommand.areRecipientsCandidates) {
+                    && EmailCommand.areRecipientsCandidates) {
                 switch (commandWord) {
 
                     case FindCommand.COMMAND_WORD:
@@ -88,7 +97,7 @@ public class RecruitBookParser {
                         return new ListCommand();
                 }
             } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
-                    && !EmailInitialiseCommand.areRecipientsCandidates) {
+                    && !EmailCommand.areRecipientsCandidates) {
                 switch (commandWord) {
 
                     case FindCommand.COMMAND_WORD:
@@ -152,8 +161,8 @@ public class RecruitBookParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
-            case EmailInitialiseCommand.COMMAND_WORD:
-                return new EmailInitialiseCommand();
+            case EmailCommand.COMMAND_WORD:
+                return new EmailCommand();
 
             case AddCompanyCommand.COMMAND_WORD:
                 return new AddCompanyCommandParser().parse(arguments);
