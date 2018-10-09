@@ -22,6 +22,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final SearchHistoryManager searchHistoryManager;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        searchHistoryManager = new SearchHistoryManager();
     }
 
     public ModelManager() {
@@ -42,6 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
+        searchHistoryManager.clearSearchHistory();
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
@@ -129,6 +132,28 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
+    //=========== SearchHistory =================================================================================
+
+    @Override
+    public void updateSearchHistory(Predicate predicate) {
+        searchHistoryManager.addNewSearch(predicate);
+    }
+
+    @Override
+    public void undoSearchHistory() {
+        searchHistoryManager.revertLastSearch();
+    }
+
+    @Override
+    public void resetSearchHistory() {
+        searchHistoryManager.clearSearchHistory();
+    }
+
+    @Override
+    public Predicate retrieveLatestSearch() {
+        return searchHistoryManager.retrieveLastSearch();
+    }
+
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
@@ -144,7 +169,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && searchHistoryManager.equals(other.searchHistoryManager);
     }
-
 }

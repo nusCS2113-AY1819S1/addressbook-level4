@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.SearchHistoryManager;
 
 /**
  * Clears search history
@@ -14,7 +13,7 @@ public class ClearSearchHistoryCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        SearchHistoryManager.getInstance().clearSearchHistory();
+        model.resetSearchHistory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

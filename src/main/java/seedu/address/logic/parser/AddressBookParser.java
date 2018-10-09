@@ -92,20 +92,4 @@ public class AddressBookParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
-    /**
-     * A simpler version of parseCommand without execution
-     *
-     * @param input anyStringInput
-     * @return commandWord if command format is valid.
-     */
-    public static String basicParseCommand(String input) {
-        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(input.trim());
-        if (!matcher.matches()) {
-            return null;
-        }
-        final String commandWord = matcher.group("commandWord");
-        return commandWord;
-    }
-
 }
