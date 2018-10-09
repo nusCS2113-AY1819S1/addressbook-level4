@@ -22,6 +22,9 @@ import systemtests.ModelHelper;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
+
+
+
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for
  * testing
