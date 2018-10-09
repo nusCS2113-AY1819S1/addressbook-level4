@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 
 /**
@@ -26,17 +27,31 @@ public interface Model {
     boolean hasRecord(Record record);
 
     /**
+     * Returns true if a limit with the same dates exists.
+     */
+    boolean hasSameDateLimit(Limit limitin);
+    /**
      * Deletes the given record.
      * The record must exist in the financial planner.
      */
     void deleteRecord(Record target);
 
     /**
+     * To delete a existing limit.
+     * @param target
+     */
+    void deleteLimit(Limit target);
+    /**
      * Adds the given record.
      * {@code record} must not already exist in the financial planner.
      */
     void addRecord(Record record);
 
+    /**
+     * To add the limit.
+     * @param limitIn
+     */
+    void addLimit(Limit limitIn);
     /**
      * Replaces the given record {@code target} with {@code editedRecord}.
      * {@code target} must exist in the financial planner.

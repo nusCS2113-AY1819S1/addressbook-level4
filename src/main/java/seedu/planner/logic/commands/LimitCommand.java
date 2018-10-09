@@ -38,14 +38,16 @@ public class LimitCommand extends Command {
     private int countRecord = 0;
     private double sumOfSpend = 0;
 
-    public LimitCommand (Limit limitin) {
-        requireNonNull(limitin);
-        limit = limitin;
+    public LimitCommand (Limit limitIn) {
+        requireNonNull(limitIn);
+        limit = limitIn;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        model.addLimit(limit);
         while (countRecord < model.getFinancialPlanner().getRecordList().size()) {
             recordNow = model.getFinancialPlanner().getRecordList().get(countRecord++);
 

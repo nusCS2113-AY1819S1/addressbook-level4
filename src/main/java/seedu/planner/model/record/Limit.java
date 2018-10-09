@@ -21,7 +21,17 @@ public class Limit {
         return String.format("LIMIT_FORMAT", dateStart, dateEnd, limitMoneyFlow);
     }
 
-
+    /**
+     * This function is used to check whether
+     * @param limitin
+     * @return
+     */
+    public boolean isSameLimitDates (Limit limitIn) {
+        if (limitIn.dateEnd == dateEnd && limitIn.dateStart == dateStart) {
+            return true;
+        }
+        return false;
+    }
     public Date getDateStart() {
         return dateStart;
     }

@@ -3,6 +3,7 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Observable;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 
 /**
@@ -22,7 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
-
+    private final FilteredList<Limit> limits;
     /**
      * Initializes a ModelManager with the given financialPlanner and userPrefs.
      */
@@ -34,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
+        limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
     }
 
     public ModelManager() {
@@ -63,8 +66,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasSameDateLimit(Limit limitIn) {
+        requireNonNull(limitIn);
+        return versionedFinancialPlanner.hasSameDateLimit(limitIn);
+    }
+
+    @Override
     public void deleteRecord(Record target) {
         versionedFinancialPlanner.removeRecord(target);
+        indicateFinancialPlannerChanged();
+    }
+
+    @Override
+    public void deleteLimit(Limit target) {
+        versionedFinancialPlanner.removeLimit(target);
         indicateFinancialPlannerChanged();
     }
 
@@ -72,6 +87,13 @@ public class ModelManager extends ComponentManager implements Model {
     public void addRecord(Record record) {
         versionedFinancialPlanner.addRecord(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+        indicateFinancialPlannerChanged();
+    }
+
+    @Override
+    public void addLimit(Limit limitIn) {
+        versionedFinancialPlanner.addLimit(limitIn);
+
         indicateFinancialPlannerChanged();
     }
 

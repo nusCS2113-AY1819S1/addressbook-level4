@@ -6,6 +6,8 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 
+import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
 
@@ -16,7 +18,7 @@ import seedu.planner.model.record.UniqueRecordList;
 public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     private final UniqueRecordList records;
-
+    private final DateBasedLimitList limits;
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -26,6 +28,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     {
         records = new UniqueRecordList();
+        limits = new DateBasedLimitList();
     }
 
     public FinancialPlanner() {}
@@ -68,12 +71,29 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     }
 
     /**
+     * returns true if there are two limits share the same dates.
+     * @param limitin
+     * @return
+     */
+    public boolean hasSameDateLimit (Limit limitin) {
+        requireNonNull(limitin);
+        return limits.hasSameDatesLimit(limitin);
+    }
+
+    /**
      * Adds a record to the financial planner.
      * The record must not already exist in the financial planner.
      */
     public void addRecord(Record p) {
         records.add(p);
     }
+
+    /**
+     * Add a limit to the financial planner.
+     * The newly added limit can not share same dates with the rest.
+      * @param l
+     */
+    public void addLimit(Limit l) { limits.add(l);}
 
     /**
      * Replaces the given record {@code target} in the list with {@code editedRecord}.
@@ -95,6 +115,11 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         records.remove(key);
     }
 
+    /**
+     * Removes a limit from the list,
+     * @param limitin must already existed.
+     */
+    public void removeLimit(Limit limitin) { limits.remove(limitin);}
     //// util methods
 
     @Override
@@ -108,6 +133,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         return records.asUnmodifiableObservableList();
     }
 
+    @Override
+    public ObservableList<Limit> getLimitList () {return limits.asUnmodifiableObservableList();}
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

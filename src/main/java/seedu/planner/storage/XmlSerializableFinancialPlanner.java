@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 
 /**
@@ -19,15 +20,16 @@ import seedu.planner.model.record.Record;
 public class XmlSerializableFinancialPlanner {
 
     public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
-
+    public static final String MESSAGE_DUPLICATE_LIMIT = "There are redundant limits for the same period of time";
     @XmlElement
     private List<XmlAdaptedRecord> records;
-
+    private List<XmlAdaptedLimit> limits;
     /**
      * Creates an empty XmlSerializableFinancialPlanner.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableFinancialPlanner() {
+        limits = new ArrayList<>();
         records = new ArrayList<>();
     }
 
@@ -37,6 +39,8 @@ public class XmlSerializableFinancialPlanner {
     public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
         this();
         records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
+        limits.addAll(src.getLimitList().stream().map(XmlAdaptedLimit::new).collect(Collectors.toList()));
+        //TODO: understand the workflow of this part.
     }
 
     /**
@@ -53,6 +57,13 @@ public class XmlSerializableFinancialPlanner {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
             }
             financialPlanner.addRecord(record);
+        }
+        for (XmlAdaptedLimit l : limits) {
+            Limit limit = l.toModelType();
+            if (financialPlanner.hasSameDateLimit(limit)){
+                throw new IllegalValueException(MESSAGE_DUPLICATE_LIMIT);
+            }
+            financialPlanner.addLimit(limit);
         }
         return financialPlanner;
     }
