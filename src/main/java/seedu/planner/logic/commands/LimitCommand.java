@@ -28,7 +28,8 @@ public class LimitCommand extends Command {
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
             + PREFIX_MONEYFLOW + "100 ";
 
-    public static final String MESSAGE_BSSIC = "The limit you have set: %.2f \n" + "The total money you have spent: %.2f\n";
+    public static final String MESSAGE_BSSIC = "The limit you have set: %.2f \n"
+            + "The total money you have spent: %.2f\n";
 
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! "; //%l$s";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^";
@@ -58,10 +59,12 @@ public class LimitCommand extends Command {
 
         if (limit.getLimitMoneyFlow().isNotLarger(sumOfSpend)) {
             return new CommandResult(
-                    String.format(MESSAGE_BSSIC, -1 * limit.getLimitMoneyFlow().toDouble(),( -1 * sumOfSpend)) + MESSAGE_NOT_EXCEED);
+                    String.format(MESSAGE_BSSIC, -1 * limit.getLimitMoneyFlow().toDouble(), (-1 * sumOfSpend))
+                            + MESSAGE_NOT_EXCEED);
         } else {
             return new CommandResult(
-                    String.format(MESSAGE_BSSIC, -1 * limit.getLimitMoneyFlow().toDouble(), ( -1 * sumOfSpend)) + MESSAGE_EXCEED);
+                    String.format(MESSAGE_BSSIC, -1 * limit.getLimitMoneyFlow().toDouble(), (-1 * sumOfSpend))
+                            + MESSAGE_EXCEED);
 
         }
     }
