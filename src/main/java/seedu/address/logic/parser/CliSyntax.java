@@ -15,5 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TITLE = new Prefix("t/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
+    public static final Prefix PREFIX_MILESTONE = new Prefix("m/");
+    public static final Prefix PREFIX_ORDER = new Prefix("o/");
 
 }
