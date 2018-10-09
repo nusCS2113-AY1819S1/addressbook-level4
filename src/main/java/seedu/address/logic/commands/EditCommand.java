@@ -11,6 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -105,10 +107,13 @@ public class EditCommand extends Command {
     }
 
     private CommandResult editAllEntries(Model model) throws CommandException{
-        final List<Person> lastShownList = model.getFilteredPersonList();
-        System.out.println("size is " + lastShownList.size());
+        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Person> personsToCopy = new ArrayList<>();
 
-        for (Person personToEdit : lastShownList) {
+        for (Person person : lastShownList) {
+            personsToCopy.add(person);
+        }
+        for (Person personToEdit : personsToCopy){
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
             if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -119,11 +124,12 @@ public class EditCommand extends Command {
             //TODO to enquire and merge with lekoook
             //model.editPersonInTrie(personToEdit, editedPerson);
         }
-        System.out.println("size is after " + lastShownList.size());
+
         model.commitAddressBook();
+
         //TODO change this to show only edited stuff and format
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, lastShownList.size()));
+        return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, personsToCopy.size()));
     }
 
     private CommandResult editSingleEntry(Model model) throws CommandException{
@@ -195,15 +201,25 @@ public class EditCommand extends Command {
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
 
-    public static class FieldEdited {
-        private boolean phone;
-        private boolean email;
-        private boolean address;
-        private boolean position;
-        private boolean kpi;
-        private boolean note;
-        private boolean tags;
-    }
+    //TODO class to check which is edited.
+//    public static class FieldEdited {
+//
+//        public enum field {
+//            phone,
+//            email,
+//            address,
+//            position,
+//            kpi,
+//            note,
+//            tags
+//        }
+//
+//        public List<Boolean> isEditedList;
+//
+//        public FieldEdited(){
+//            isEditedList = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
+//        }
+//    }
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the
@@ -269,6 +285,7 @@ public class EditCommand extends Command {
 
         public void setPhone(Phone phone) {
             this.phone = phone;
+
         }
 
         public Optional<Phone> getPhone() {
