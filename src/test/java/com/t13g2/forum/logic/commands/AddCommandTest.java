@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
+import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.User;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -151,6 +153,26 @@ public class AddCommandTest {
 
         @Override
         public void commitForumBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAnnounceToStorage(Announcement announcement) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Announcement showAnnouncement() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isBlock(User user) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void blockUser(User toBlock) {
             throw new AssertionError("This method should not be called.");
         }
     }

@@ -11,6 +11,7 @@ public interface IUserRepository {
     void updateUser(User user);
 
     void deleteUser(User user);
+
     void deleteUser(int userId);
 
     User getUser(int userId);
