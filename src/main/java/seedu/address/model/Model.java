@@ -20,7 +20,7 @@ import seedu.address.model.distributor.Distributor;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
 
-    Predicate<Distributor> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Distributor> PREDICATE_SHOW_ALL_DISTRIBUTORS = unused -> true;
 
     Predicate<Product> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 

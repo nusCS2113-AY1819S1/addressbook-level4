@@ -22,7 +22,10 @@ public class XmlSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Product list contains duplicate product(s).";
 
     @XmlElement
-    private List<XmlAdaptedPerson> distributors;
+    private List<XmlAdaptedDistributor> distributors;
+
+    @XmlElement
+    private List<XmlAdaptedPerson> persons;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -30,6 +33,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook() {
         distributors = new ArrayList<>();
+        persons = new ArrayList<>();
     }
 
     /**
@@ -37,7 +41,8 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
-        distributors.addAll(src.getDistributorList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        distributors.addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new).collect(Collectors.toList()));
+        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
     /**
@@ -55,6 +60,7 @@ public class XmlSerializableAddressBook {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addDistributor(distributor);
+        }
 
         for (XmlAdaptedPerson p : persons) {
             Product product = p.toModelType();

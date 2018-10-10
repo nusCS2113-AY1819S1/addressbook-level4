@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DISTRIBUTORS;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -74,7 +74,7 @@ public class EditDCommand extends Command {
         }
 
         model.updateDistributor(distributorToEdit, editedDistributor);
-        model.updateFilteredDistributorList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_EDIT_DISTRIBUTOR_SUCCESS, editedDistributor));
     }

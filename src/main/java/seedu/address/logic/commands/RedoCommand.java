@@ -1,4 +1,4 @@
-/*package seedu.address.logic.commands;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -9,6 +9,7 @@ import seedu.address.model.Model;
 
 /**
  * Reverts the {@code model}'s address book to its previously undone state.
+*/
 
 public class RedoCommand extends Command {
 
@@ -29,4 +30,3 @@ public class RedoCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
-*/

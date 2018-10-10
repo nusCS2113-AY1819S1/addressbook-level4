@@ -43,10 +43,10 @@ public class EditDCommandParser implements Parser<EditDCommand> {
 
         EditDistributorDescriptor editDistributorDescriptor = new EditDistributorDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editDistributorDescriptor.setDistName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editDistributorDescriptor.setDistName(ParserUtil.parseDistName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editDistributorDescriptor.setDistPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editDistributorDescriptor.setDistPhone(ParserUtil.parseDistPhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
 
         return new EditDCommand(index, editDistributorDescriptor);
