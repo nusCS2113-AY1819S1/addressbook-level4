@@ -65,20 +65,16 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteRecord(Record target) {
         versionedFinancialPlanner.removeRecord(target);
+        versionedFinancialPlanner.removeRecordFromSummary(target);
         indicateFinancialPlannerChanged();
     }
 
     @Override
     public void addRecord(Record record) {
-        try {
-            versionedFinancialPlanner.addRecord(record);
-        } catch (Exception e) {
-            throw e;
-        } finally {
-            versionedFinancialPlanner.addRecordToSummary(record);
-            updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
-            indicateFinancialPlannerChanged();
-        }
+        versionedFinancialPlanner.addRecord(record);
+        versionedFinancialPlanner.addRecordToSummary(record);
+        updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+        indicateFinancialPlannerChanged();
     }
 
     @Override

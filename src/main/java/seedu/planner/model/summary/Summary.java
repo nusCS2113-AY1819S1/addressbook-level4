@@ -20,4 +20,8 @@ public class Summary {
     public void add(Record record) {
         // Does nothing
     }
+
+    public void delete(Record record) {
+        // Does nothing
+    }
 }

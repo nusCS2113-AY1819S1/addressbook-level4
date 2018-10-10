@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.record.exceptions.RecordNotFoundException;
 
 /**
  * This object represents the in memory model of a HashMap containing {@Summary} as values and
@@ -18,7 +19,7 @@ public class SummaryHashMap {
     }
 
     /**
-     * Adds the record into the summary hashMap
+     * Adds the record's moneyflow into the summary hashMap
      */
     public void add(Record record) {
         Date dateOfRecord = record.getDate();
@@ -26,6 +27,18 @@ public class SummaryHashMap {
             summaryMap.put(dateOfRecord, new Summary(record));
         }
         summaryMap.get(dateOfRecord).add(record);
+    }
+
+    /**
+     * Subtracts the record's moneyflow from the summary hashMap
+     * The {@date} date must exist in the hashMap.
+     */
+    public void remove(Record record) {
+        Date dateOfRecord = record.getDate();
+        if (!isDatePresentInMap(dateOfRecord)) {
+            throw new RecordNotFoundException();
+        }
+        summaryMap.remove(record);
     }
 
     private boolean isDatePresentInMap(Date date) {

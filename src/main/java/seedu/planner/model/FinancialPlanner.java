@@ -103,10 +103,14 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     //// summary update operations
 
     /**
-     * Adds the record to the summary map
+     * Add the record in the summary map
      */
     public void addRecordToSummary(Record p) {
         summaryMap.add(p);
+    }
+
+    public void removeRecordFromSummary(Record key) {
+        summaryMap.remove(key);
     }
 
     //// util methods
