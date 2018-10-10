@@ -270,22 +270,21 @@ If no flags are specified, selected contacts are chosen as recipients.
 
 === Text prediction
 
-The command box is able to do smart prediction on the current text in the box. +
-This is similar to text prediction on shell programs and can be invoked by pressing the `Tab` key on the keyboard. +
-If there are more than one prediction, the predictions will be listed in results window. +
+Text prediction feature allows you to complete your command faster with less typing. +
+Invoke this feature by pressing the _Tab_ key on the keyboard. +
 
-For example, typing `c` in the box and pressing `Tab` will auto complete to the `clear` command. +
-Typing `e` in the box and pressing `Tab` will list `edit`, `exit` and `export` in results window. +
+You can invoke this feature on: +
 
-In general, text prediction works on all commands. +
-In particular, text prediction also works on the following attributes of a contact: +
+* Command keywords (`mail`, `add`, `find`, etc.) .
+* Flag arguments (`n/`, `a/`, `t/`, etc.) .
 
-* `name` +
+Given an address book consisting of a contact with the name _Alex Yeoh_: +
+Typing `m` in the box and pressing _Tab_ will auto complete to the `mail` command. Then, typing `mail n/A` and pressing _Tab_ will auto complete to `mail n/Alex Yeoh` for you. +
 
-This feature is supported by the `find` command. When using `find`, first input the command, followed by any string of characters, then pressing `Tab` will invoke this feature. +
+Note: +
 
-For example in an address book consisting of a contact with the name `Alex Yeoh`, typing `find A` and pressing `Tab` will auto complete to `find Alex Yeoh`. +
-If no flags are given, by default, names are assumed to be predicted.
+* If there are multiple predicted values, they will be listed instead. +
+* If no argument flags are specified, the default value predicted is based on the command's default argument. +
 
 == FAQ
 
