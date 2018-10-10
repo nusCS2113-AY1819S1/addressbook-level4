@@ -1,51 +1,52 @@
-/*package seedu.address.logic.commands;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SERIAL_NR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
-//import seedu.address.model.distributor.Distributor;
+import seedu.address.model.person.Product;
 
 /**
- * Adds a person to the address book.
-
+ * Adds a product to the address book.
+ */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a distributor to the inventarie. "
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a product to Inventarie PRO. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL "
-            + PREFIX_ADDRESS + "ADDRESS "
-            + PREFIX_TAG + "TAGS "
-
+            + PREFIX_SERIAL_NR + "SERIAL NUMBER "
+            + PREFIX_DISTRIBUTOR + "DISTRIBUTOR "
+            + PREFIX_PRODUCT_INFO + "PRODUCT INFO "
+            + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Ah Bee Distributors"
-            + PREFIX_PHONE + "60123456 "
-            + PREFIX_EMAIL + "ahbee@distributors.com"
-            + PREFIX_ADDRESS + "Ah Bee Road"
-            + PREFIX_TAG + "sells plastic bags";
+            + PREFIX_NAME + "Apple "
+            + PREFIX_SERIAL_NR + "98765432 "
+            + PREFIX_DISTRIBUTOR + "Alfred "
+            + PREFIX_PRODUCT_INFO + "CONTAINS CHIKEN ETC "
+            + PREFIX_TAG + "fruit ";
 
-    public static final String MESSAGE_SUCCESS = "New distributor added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This distributor already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New product added: %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This product already exists in the Product list";
 
-    private final Person toAdd;
+
+    private final Product toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddCommand to add the specified {@code Product}
+     */
+    public AddCommand(Product product) {
+        requireNonNull(product);
+        toAdd = product;
 
-    public AddCommand(Person person) {
-        requireNonNull(person);
-        toAdd = person;
     }
 
     @Override
@@ -68,4 +69,3 @@ public class AddCommand extends Command {
                 && toAdd.equals(((AddCommand) other).toAdd));
     }
 }
-*/

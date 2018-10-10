@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.distributor.Distributor;
+import seedu.address.model.person.Product;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -18,7 +19,7 @@ import seedu.address.model.distributor.Distributor;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Product list contains duplicate product(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> distributors;
@@ -47,12 +48,20 @@ public class XmlSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
-        for (XmlAdaptedPerson p : distributors) {
-            Distributor distributor = p.toModelType();
+      
+        for (XmlAdaptedDistributor d : distributors) {
+            Distributor distributor = d.toModelType();
             if (addressBook.hasDistributor(distributor)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             addressBook.addDistributor(distributor);
+
+        for (XmlAdaptedPerson p : persons) {
+            Product product = p.toModelType();
+            if (addressBook.hasPerson(product)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            addressBook.addPerson(product);
         }
         return addressBook;
     }

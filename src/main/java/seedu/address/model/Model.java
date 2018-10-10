@@ -3,7 +3,11 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Product;
+import seedu.address.model.login.Password;
+import seedu.address.model.login.Username;
+import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.person.Product;
 import seedu.address.model.distributor.Distributor;
 
 /**
@@ -11,33 +15,29 @@ import seedu.address.model.distributor.Distributor;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
+
     Predicate<Distributor> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    Predicate<Product> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
     /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyAddressBook getProductInfoBook();
 
-    /*
-    /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
-
-    boolean hasPerson(Person person);
-    */
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getDistributorInfoBook();
 
     /**
      * Returns true if a distributor with the same identity as {@code distributor} exists in the Inventarie.
      */
     boolean hasDistributor(Distributor distributor);
 
-    /*
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
-
-    void deletePerson(Person target);
-    */
+     * Returns true if a product with the same identity as {@code product} exists in the address book.
+     */
+    boolean hasPerson(Product product);
 
     /**
      * Deletes the given distributor.
@@ -45,28 +45,23 @@ public interface Model {
      */
     void deleteDistributor(Distributor target);
 
-    /*
-    /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
-
-    void addPerson(Person person);
-    */
-
     /**
      * Adds the given distributor.
      * {@code distributor} must not already exist in the address book.
      */
     void addDistributor(Distributor distributor);
-
-    /*
+  
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Deletes the given product.
+     * The product must exist in the address book.
+     */
+    void deletePerson(Product target);
 
-    void updatePerson(Person target, Person editedPerson);
-    */
+    /**
+     * Adds the given product.
+     * {@code product} must not already exist in the address book.
+     */
+    void addPerson(Product product);
 
     /**
      * Replaces the given distributor {@code target} with {@code editedDistributor}.
@@ -75,27 +70,26 @@ public interface Model {
      */
     void updateDistributor(Distributor target, Distributor editedDistributor);
 
-    /*
+    
     /** Returns an unmodifiable view of the filtered person list
-    ObservableList<Person> getFilteredPersonList();
-    */
+     * The product identity of {@code editedProduct} must not be the same as another existing product in the address book.
+     */
+    void updatePerson(Product target, Product editedProduct);
+
+    /** Returns an unmodifiable view of the filtered product list */
+    ObservableList<Product> getFilteredPersonList();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Distributor> getFilteredDistributorList();
-
-    /*
-    /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-
-    void updateFilteredPersonList(Predicate<Person> predicate);
-    */
 
     /**
      * Updates the filter of the filtered distributor list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredDistributorList(Predicate<Distributor> predicate);
+
+    void updateFilteredPersonList(Predicate<Product> predicate);
+
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -121,4 +115,8 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException;
+
+
 }

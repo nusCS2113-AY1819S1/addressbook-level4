@@ -1,4 +1,4 @@
-/*package seedu.address.logic.commands;
+package seedu.address.logic.commands;
 
 
 import static java.util.Objects.requireNonNull;
@@ -9,12 +9,12 @@ import seedu.address.model.Model;
 
 /**
  * Lists all persons in the address book to the user.
-
+*/
 public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "listD";
+    public static final String MESSAGE_SUCCESS = "Listed all products";
 
-    public static final String MESSAGE_SUCCESS = "Listed all distributors";
 
 
     @Override
@@ -24,4 +24,3 @@ public class ListCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
-*/
