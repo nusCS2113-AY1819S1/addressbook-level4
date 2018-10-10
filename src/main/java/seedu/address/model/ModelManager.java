@@ -24,9 +24,10 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
-import seedu.address.model.person.Person;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.person.Product;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -36,8 +37,11 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final Storage storage;
     private final VersionedAddressBook versionedAddressBook;
-    private final FilteredList<Person> filteredPersons;
     private final VersionedUserDatabase versionedUserDatabase;
+
+    private final FilteredList<Distributor> filteredDistributors;
+    private final FilteredList<Product> filteredProducts;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -53,7 +57,10 @@ public class ModelManager extends ComponentManager implements Model {
         this.storage = storage;
         versionedUserDatabase = new VersionedUserDatabase(userDatabase);
         versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+
+        filteredDistributors = new FilteredList<>(versionedAddressBook.getDistributorList());
+        filteredProducts = new FilteredList<>(versionedAddressBook.getPersonList());
+
     }
 
     public ModelManager(Storage storage) {
@@ -67,7 +74,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyAddressBook getProductInfoBook() {
         return versionedAddressBook;
     }
 
@@ -77,28 +84,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasPerson(Person person) {
-        requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+    public boolean hasDistributor(Distributor distributor) {
+        requireNonNull(distributor);
+        return versionedAddressBook.hasDistributor(distributor);
     }
 
-    @Override
-    public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
-    }
 
     @Override
-    public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-        versionedAddressBook.updatePerson(target, editedPerson);
+    public void deleteDistributor(Distributor target) {
+        versionedAddressBook.removeDistributor(target);
         indicateAddressBookChanged();
     }
 
@@ -199,19 +193,55 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Person List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
-    @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+    public void addDistributor(Distributor distributor) {
+        versionedAddressBook.addDistributor(distributor);
+        updateFilteredDistributorList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
+    }
+
+    public void updatePerson(Product target, Product editedProduct) {
+        requireAllNonNull(target, editedProduct);
+        versionedAddressBook.updatePerson(target, editedProduct);
+        indicateAddressBookChanged();
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateDistributor(Distributor target, Distributor editedDistributor) {
+        requireAllNonNull(target, editedDistributor);
+
+        versionedAddressBook.updateDistributor(target, editedDistributor);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Filtered Product List Accessors =============================================================
+
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Product} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+
+
+    @Override
+    public ObservableList<Distributor> getFilteredDistributorList() {
+        return FXCollections.unmodifiableObservableList(filteredDistributors);
+    }
+
+    @Override
+    public void updateFilteredDistributorList(Predicate<Distributor> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredDistributors.setPredicate(predicate);
+
+    @Override
+    public ObservableList<Product> getFilteredPersonList() {
+        return FXCollections.unmodifiableObservableList(filteredProducts);
+    }
+
+    @Override
+    public void updateFilteredPersonList(Predicate<Product> predicate) {
+        requireNonNull(predicate);
+        filteredProducts.setPredicate(predicate);
+
     }
 
     //=========== Undo/Redo =================================================================================
@@ -256,8 +286,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         // state check
+        // MERGE CONFLICT HERE, INTEGRATED BOTH
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredDistributors.equals(other.filteredDistributors)
+                && filteredProducts.equals(other.filteredProducts);
     }
 }

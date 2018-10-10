@@ -5,15 +5,15 @@ https://travis-ci.org/CS2113-AY1819S1-T13-3/main[image:https://travis-ci.org/CS2
 https://coveralls.io/github/CS2113-AY1819S1-T13-3/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-T13-3/main/badge.svg?branch=master[Coverage Status]]
 
 ifdef::env-github[]
-image::docs/images/Ui.png[width="600"]
+image::docs/images/UiNew.png[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::images/Ui.png[width="600"]
+image::images/UiNew.png[width="600"]
 endif::[]
 
 * This is a desktop Address Book application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as the main programming language.
+* It is a Java sample application intended for students learning Software Engineering in Java.
 
 == Site Map
 
