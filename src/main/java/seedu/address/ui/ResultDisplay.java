@@ -37,7 +37,6 @@ public class ResultDisplay extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         Platform.runLater(() -> displayed.setValue(resultDisplay.getText() + event.message + "\n"));
         Platform.runLater(() -> resultDisplay.setScrollTop(Double.MAX_VALUE));
-
     }
 
 }
