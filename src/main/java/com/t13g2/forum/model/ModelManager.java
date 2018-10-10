@@ -135,8 +135,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addAnnounceToStorage(Announcement announcement) {
-        //TODO: add to storage
         requireNonNull(announcement);
+        //TODO: add to storage
     }
 
     @Override
@@ -150,12 +150,14 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isBlock(User user) {
+        //TODO: getIsBlock from storage
         return user.getIsBlock();
     }
 
     @Override
     public void blockUser(User toBlock) {
         requireNonNull(toBlock);
+        //TODO: set block through storage (UnitOfWork)
         toBlock.setIsBlock(true);
     }
 
