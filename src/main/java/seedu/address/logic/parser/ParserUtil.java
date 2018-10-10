@@ -90,7 +90,7 @@ public class ParserUtil {
         requireNonNull(email);
         String trimmedEmail = email.trim();
         if (!Price.isValidPrice(trimmedEmail)) {
-            throw new ParseException(Price.PRICE_CONSTRAINTS);
+            throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
         return new Price(trimmedEmail);
     }

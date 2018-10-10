@@ -101,7 +101,7 @@ public class XmlAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
         if (!Price.isValidPrice(email)) {
-            throw new IllegalValueException(Price.PRICE_CONSTRAINTS);
+            throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
         final Price modelPrice = new Price(email);
 

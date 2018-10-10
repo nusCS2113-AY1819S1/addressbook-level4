@@ -2,7 +2,7 @@
 <!-- Book with an invalid Isbn field -->
 <book>
     <name>Hans Muster</name>
-    <ISBN>9482asf424</ISBN>
+    <isbn>9482asf424</isbn>
     <price>hans@example</price>
     <quantity>4th street</quantity>
     <tagged>friends</tagged>

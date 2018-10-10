@@ -72,7 +72,7 @@ public class XmlAdaptedBookTest {
     public void toModelType_invalidEmail_throwsIllegalValueException() {
         XmlAdaptedBook person =
                 new XmlAdaptedBook(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Price.PRICE_CONSTRAINTS;
+        String expectedMessage = Price.MESSAGE_PRICE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

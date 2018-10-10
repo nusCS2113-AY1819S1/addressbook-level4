@@ -33,7 +33,7 @@ public class LogicManager extends ComponentManager implements Logic {
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = bookInventoryParser.parseCommand(commandText);
+            Command command = bookInventoryParser.parseCommand(commandText.toLowerCase());
             return command.execute(model, history);
         } finally {
             history.add(commandText);

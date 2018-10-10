@@ -15,28 +15,26 @@ import seedu.address.model.tag.Tag;
 
 /**
  * Contains utility methods for populating {@code BookInventory} with sample data.
+ * Sample data taken from https://www.abebooks.com/books/Textbooks/index.shtml
  */
 public class SampleDataUtil {
     public static Book[] getSamplePersons() {
         return new Book[] {
-            new Book(new Name("Alex Yeoh"), new Isbn("8743880700"), new Price("19.99"),
-                new Quantity("Blk 30 Geylang Street 29, #06-40"),
+            new Book(new Name("Biology: A Global Approach"), new Isbn("9780321775658"), new Price("73.76"),
+                new Quantity("4"),
                 getTagSet("friends")),
-            new Book(new Name("Bernice Yu"), new Isbn("9927275800"), new Price("19.99"),
-                new Quantity("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+            new Book(new Name("Elementary Statistics: Picturing the World"), new Isbn("9780321693624"), new Price("58.98"),
+                new Quantity("11"),
                 getTagSet("colleagues", "friends")),
-            new Book(new Name("Charlotte Oliveiro"), new Isbn("9321028300"), new Price("19.99"),
-                new Quantity("Blk 11 Ang Mo Kio Street 74, #11-04"),
+            new Book(new Name("Essentials of Sociology, A Down-to-Earth Approach (9th Edition)"), new Isbn("9780205763122"), new Price("59.99"),
+                new Quantity("7"),
                 getTagSet("neighbours")),
-            new Book(new Name("David Li"), new Isbn("9103128200"), new Price("19.99"),
-                new Quantity("Blk 436 Serangoon Gardens Street 26, #16-43"),
+            new Book(new Name("World of Art, A (6th Edition)"), new Isbn("9780205677207"), new Price("15.19"),
+                new Quantity("22"),
                 getTagSet("family")),
-            new Book(new Name("Irfan Ibrahim"), new Isbn("9249202100"), new Price("19.99"),
-                new Quantity("Blk 47 Tampines Street 20, #17-35"),
+            new Book(new Name("Chemistry: A Molecular Approach (2nd US Edition)"), new Isbn("9780321651785"), new Price("6.58"),
+                new Quantity("29"),
                 getTagSet("classmates")),
-            new Book(new Name("Roy Balakrishnan"), new Isbn("9262441700"), new Price("19.99"),
-                new Quantity("Blk 45 Aljunied Street 85, #11-31"),
-                getTagSet("colleagues"))
         };
     }
 
