@@ -16,7 +16,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 
-import javax.swing.*;
 
 /**
  * Represents the in-memory model of the address book data.

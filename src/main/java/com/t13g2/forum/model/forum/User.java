@@ -1,6 +1,9 @@
 package com.t13g2.forum.model.forum;
 
-public class User extends BaseModel{
+/**
+ * Represents user in ForumBook
+ */
+public class User extends BaseModel {
     private String username;
     private String password;
     private boolean isAdmin;

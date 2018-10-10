@@ -123,6 +123,9 @@ public class ParserUtil {
         return tagSet;
     }
 
+    /**
+     * Parses {@code title, content} into a {@code Announcement}
+     */
     public static Announcement parseAnnouncement(String title, String content) throws ParseException {
         requireNonNull(title);
         requireNonNull(content);

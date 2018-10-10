@@ -1,13 +1,15 @@
 package com.t13g2.forum.logic.parser;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ANNOUNCE_CONTENT;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ANNOUNCE_TITLE;
+
+import java.util.stream.Stream;
+
 import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.AnnounceCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.forum.Announcement;
 
-import java.util.stream.Stream;
-
-import static com.t13g2.forum.logic.parser.CliSyntax.*;
 
 /**
  * Parses input arguments and creates a new AnnounceCommand object
@@ -24,7 +26,8 @@ public class AnnounceCommandParser implements Parser<AnnounceCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_ANNOUNCE_TITLE, PREFIX_ANNOUNCE_CONTENT);
         if (!arePrefixesPresent(argMultimap, PREFIX_ANNOUNCE_TITLE, PREFIX_ANNOUNCE_CONTENT)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AnnounceCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    AnnounceCommand.MESSAGE_USAGE));
         }
 
         Announcement announcement = ParserUtil.parseAnnouncement(argMultimap.getValue(PREFIX_ANNOUNCE_TITLE).get(),

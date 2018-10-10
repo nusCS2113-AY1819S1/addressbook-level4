@@ -1,17 +1,15 @@
 package com.t13g2.forum.logic.commands;
 
-import com.t13g2.forum.logic.CommandHistory;
-import com.t13g2.forum.logic.commands.exceptions.CommandException;
-import com.t13g2.forum.model.Model;
-import com.t13g2.forum.model.forum.Announcement;
-
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ANNOUNCE_CONTENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ANNOUNCE_TITLE;
 import static java.util.Objects.requireNonNull;
 
+import com.t13g2.forum.logic.CommandHistory;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.forum.Announcement;
+
 /**
- * @Xiaolin
- * Shows announcement
+ * Announce new announcement.
  */
 public class AnnounceCommand extends Command {
 
@@ -30,7 +28,7 @@ public class AnnounceCommand extends Command {
     private final Announcement toAnnounce;
 
     /**
-     * Creates an AnnounceCommand to announce the specified {@code Announcement}
+     * Creates an AnnounceCommand to announce the specified {@code toAnnounce}.
      */
     public AnnounceCommand(Announcement toAnnounce) {
         requireNonNull(toAnnounce);

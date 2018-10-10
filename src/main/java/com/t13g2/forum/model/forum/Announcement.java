@@ -1,25 +1,33 @@
 package com.t13g2.forum.model.forum;
 
+import com.t13g2.forum.commons.util.AppUtil;
 import com.t13g2.forum.commons.util.CollectionUtil;
 
+/**
+ * Represents the announcement in ForumBook.
+ * Guarantees: is valid as declared in {@link #isValidAnnouncement(String, String)}
+ */
 public class Announcement extends BaseModel {
-    private String title;
-    private String content;
-
+    /**
+     * Show message if announcement is not valid
+     */
     public static final String MESSAGE_ANNOUNCEMENT_CONSTRAINTS =
-            "Announcement can take any values, and it should not be blank";
+        "Announcement can take any values, and it should not be blank";
 
-    /*
+    /**
      * The first character of the announcement must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ANNOUNCEMENT_VALIDATION_REGEX = "[^\\s].*";
+    private String title;
+    private String content;
 
     /**
      * Every field must be present and not null.
      */
     public Announcement(String title, String content) {
         CollectionUtil.requireAllNonNull(title, content);
+        AppUtil.checkArgument(isValidAnnouncement(title, content), MESSAGE_ANNOUNCEMENT_CONSTRAINTS);
         this.title = title;
         this.content = content;
     }
@@ -30,7 +38,6 @@ public class Announcement extends BaseModel {
     public static boolean isValidAnnouncement(String testTitle, String testContent) {
         return (testTitle.matches(ANNOUNCEMENT_VALIDATION_REGEX) || testContent.matches(ANNOUNCEMENT_VALIDATION_REGEX));
     }
-
     public String getTitle() {
         return title;
     }
