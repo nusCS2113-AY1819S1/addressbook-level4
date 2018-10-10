@@ -2,16 +2,22 @@ package seedu.address.ui;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.HashSet;
 import java.util.logging.Logger;
 import java.util.Set;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import org.jetbrains.annotations.NotNull;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -31,47 +37,50 @@ import seedu.address.ui.BrowserPanel;
  */
 public class EventPageFormatter {
 
-    private static String SEARCH_PAGE_PATH;
+    private static URI SEARCH_PAGE_PATH;
     private static String SEARCH_PAGE_STRING;
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    public EventPageFormatter() {
 
-    public EventPageFormatter() throws IOException {
-        this.SEARCH_PAGE_PATH = BrowserPanel.getSearchPageUrlWithoutName().toString();
-        this.SEARCH_PAGE_STRING = readFile(this.SEARCH_PAGE_PATH, StandardCharsets.UTF_8);
     }
 
-    private String readFile(String path, Charset encoding) throws IOException {
+    private static String readFile(URI path) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
-        return new String(encoded, encoding);
+        return new String(encoded, StandardCharsets.UTF_8);
     }
 
-    private String readFile(String path, Charset encoding) throws IOException {
-        byte[] encoded = Files.readAllBytes(Paths.get(path));
-        return new String(encoded, encoding);
+    private static void writeFile(URI path) throws IOException {
+        File f = new File(SEARCH_PAGE_PATH);
+        FileWriter fWriter = new FileWriter(f, false);
+        fWriter.write(SEARCH_PAGE_STRING);
+        fWriter.close();
     }
 
-    public void formatEvent(Event event) {
+    public static void formatEvent(Event event) throws IOException, URISyntaxException {
+        SEARCH_PAGE_PATH = BrowserPanel.getSearchPageUrlWithoutName().toURI();
+        SEARCH_PAGE_STRING = readFile(SEARCH_PAGE_PATH);
+        //formatName(event.getName());
+        writeFile(SEARCH_PAGE_PATH);
+    }
+
+    private static void formatName(Name name) {
+        SEARCH_PAGE_STRING =
+                SEARCH_PAGE_STRING.replaceAll("(<!-- Name -->)[^]*(<!-- /Name -->)", name.toString());
+    }
+
+    private static void formatPhone(Phone phone) {
 
     }
 
-    private void formatName() {
+    private static void formatEmail(Email email) {
 
     }
 
-    private void formatPhone() {
+    private static void formatAddress(Address address) {
 
     }
 
-    private void formatEmail() {
-
-    }
-
-    private void formatAddress() {
-
-    }
-
-    private void formatTags() {
+    private static void formatTags(Set<Tag> tags) {
 
     }
 }
