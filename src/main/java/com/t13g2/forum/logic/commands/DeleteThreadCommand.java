@@ -38,9 +38,9 @@ public class DeleteThreadCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
             try {
-                ForumThread forumThread =  unitOfWork.getForumThreadRepository().getThread(toDelete.getId());
+                ForumThread forumThread = unitOfWork.getForumThreadRepository().getThread(toDelete.getId());
                 unitOfWork.getForumThreadRepository().deleteThread(forumThread);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -19,7 +19,7 @@ public class CheckAnnouncmentCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         Announcement announcement = new Announcement();
-        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
             int newAnnouncementId = unitOfWork.getAnnouncementRepository().getLatestAnnouncement().getId();
             announcement = unitOfWork.getAnnouncementRepository().getAnnouncement(newAnnouncementId);
         } catch (Exception e) {
