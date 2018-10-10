@@ -1,6 +1,7 @@
 package com.t13g2.forum.storage.forum;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
@@ -22,7 +23,8 @@ public class ForumThreadRepository extends BaseRepository implements IForumThrea
 
     @Override
     public int addThread(ForumThread forumThread) {
-        return 0;
+        forumBookStorage.getForumThreads().getList().add(forumThread);
+        return forumThread.getId();
     }
 
     @Override
@@ -47,11 +49,13 @@ public class ForumThreadRepository extends BaseRepository implements IForumThrea
 
     @Override
     public void deleteThread(int forumThreadId) {
-
+        List<ForumThread> pointer = forumBookStorage.getForumThreads().getList();
+        Optional<ForumThread> toBeDeleted = pointer.stream().filter(forumThread -> forumThread.getId() == forumThreadId).findFirst();
+        toBeDeleted.ifPresent(pointer::remove);
     }
 
     @Override
     public void deleteThread(ForumThread forumThread) {
-
+        this.deleteThread(forumThread.getId());
     }
 }
