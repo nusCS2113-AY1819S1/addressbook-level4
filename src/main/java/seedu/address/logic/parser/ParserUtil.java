@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.distribute.DistributeGroupName;
 import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
 import seedu.address.model.group.GroupLocation;
@@ -29,6 +30,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static String groupName;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -238,4 +240,43 @@ public class ParserUtil {
         return new Message(trimmedMessage);
     }
 
+    public static int parseInteger(String value) throws ParseException {
+        String trimmedInt = value.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedInt)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Integer.parseInt(trimmedInt);
+    }
+
+    public static DistributeGroupName parseDistGroupName(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedGroupName = groupName.trim();
+        if (!DistributeGroupName.isValidGroupName(trimmedGroupName)) {
+            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
+        }
+        return new DistributeGroupName(trimmedGroupName);
+    }
+
+    public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
+        requireNonNull(isFlagged);
+        String trimmedFlaggedValue = isFlagged.trim();
+        switch(trimmedFlaggedValue) {
+            case "0":
+                trimmedFlaggedValue = "false";
+                break;
+            case "1":
+                trimmedFlaggedValue = "true";
+                break;
+            default:
+                throw new ParseException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
+        }
+        Boolean flag = Boolean.valueOf(trimmedFlaggedValue);
+        if (flag) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
 }
+
