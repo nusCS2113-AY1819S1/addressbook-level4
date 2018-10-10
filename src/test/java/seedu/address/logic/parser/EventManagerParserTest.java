@@ -31,7 +31,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.NameContainsKeywordsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class EventManagerParserTest {
@@ -42,7 +42,7 @@ public class EventManagerParserTest {
 
     @Test
     public void parseCommand_add() throws Exception {
-        Event event = new PersonBuilder().build();
+        Event event = new EventBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(event));
         assertEquals(new AddCommand(event), command);
     }
@@ -62,7 +62,7 @@ public class EventManagerParserTest {
 
     @Test
     public void parseCommand_edit() throws Exception {
-        Event event = new PersonBuilder().build();
+        Event event = new EventBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(event).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));

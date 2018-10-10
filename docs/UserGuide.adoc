@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Event Manager - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -18,13 +18,13 @@ By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Event Manager is made for the residents of the Residential Colleges (RC) in the National University of Singapore (NUS). This application is build for those who prefer to use a desktop application for managing events and attendees. Moreover, the Event Manager offers a faster workflow *for those who prefer working with a Command Line Interface* while still retaining the benefits of having a Graphical User Interface. If you can type fast, you can work even faster with Event Manager to manage the various events in your RC! All you need is a laptop/computer to run this application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `EventManager.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your EventManager.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -33,9 +33,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all events
+* **`add`**`n/Computer Science Workshop c/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `Computer Science` to the Event Manager.
+* **`delete`**`3` : deletes the 3rd event shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,38 +46,64 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/EVENT`, `EVENT` is a parameter which can be used as `add n/Computer Science Workshop`.
+* Items in square brackets are optional e.g `n/Comp Sci Workshop [t/TAG]` can be used as `n/Comp Sci Workshop t/sport` or as `n/Comp Sci Workshop`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
+=== Signing up for an account : `signup`
+
+User: Creates a *user* account +
+Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD` +
+Examples:
+
+* `signup u/Gerald Chua p/password12345 c/password12345` +
+Creates account for Gerald Chua
+* `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
+Creates account for James Yaputra
+
+=== Signing up for an account : `login`
+
+User: Logs in to account +
+Format: `login u/USERNAME p/PASSWORD` +
+Examples:
+
+* `login n/Gerald Chua p/password12345` +
+Logs in Gerald Chua +
+* `login u/James Yaputra p/drowssap12345` +
+Logs in James Yaputra
+
 === Viewing help : `help`
+
+Admin: Shows Admin commands +
+User: Shows User commands
 
 Format: `help`
 
 === Adding a event: `add`
 
-Adds a event to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Admin: Adds an event to tthe Event Manager +
+Adds a event to the Event Manager +
+Format: `add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 
 [TIP]
-A event can have any number of tags (including 0)
+An event can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Com Sci Workshop c/John Doe cp/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Sports Day c/Betsy Crow t/Sports e/betsycrowe@example.com a/COM2 #02-01 p/1234567 t/leisure`
 
 === Listing all events : `list`
 
-Shows a list of all events in the address book. +
+User/Admin: Shows a list of all events in the Event Manager. +
 Format: `list`
 
 === Editing a event : `edit`
 
-Edits an existing event in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Admin: Edits an existing event in the Event Manager. +
+Format: `edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
@@ -91,32 +117,32 @@ Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
 Edits the phone number and email address of the 1st event to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd event to be `Betsy Crower` and clears all existing tags.
+* `edit 2 n/Sports Day t/` +
+Edits the name of the 2nd event to be `Sports Day` and clears all existing tags.
 
 === Locating events by name: `find`
 
-Finds events whose names contain any of the given keywords. +
+Admin/User: Finds events whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* The search is case insensitive. e.g `sports` will match `Sports`
+* The order of the keywords does not matter. e.g. `Sports Day` will match `Day Sports`
+* Only the event name is searched.
+* Only full words will be matched e.g. `Sport` will not match `Sports`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Sports Day` will return `Sports games`, `Good Day`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any event having names `Betsy`, `Tim`, or `John`
+* `find Day` +
+Returns `Sports Day` and `Any day`
+* `find Sports Sci Day` +
+Returns any event having names `Sports Day`, `Comp Sci Workshop`, or `Good Day`
 
 === Deleting a event : `delete`
 
-Deletes the specified event from the address book. +
+Admin: Deletes the specified event from the Event Manager. +
 Format: `delete INDEX`
 
 ****
@@ -129,14 +155,14 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd event in the address book.
-* `find Betsy` +
+Deletes the 2nd event in the Event Manager.
+* `find Sports` +
 `delete 1` +
 Deletes the 1st event in the results of the `find` command.
 
 === Selecting a event : `select`
 
-Selects the event identified by the index number used in the displayed event list. +
+Admin/User: Selects the event identified by the index number used in the displayed event list. +
 Format: `select INDEX`
 
 ****
@@ -149,14 +175,14 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd event in the address book.
-* `find Betsy` +
+Selects the 2nd event in the Event Manager.
+* `find Sports` +
 `select 1` +
 Selects the 1st event in the results of the `find` command.
 
 === Listing entered commands : `history`
 
-Lists all the commands that you have entered in reverse chronological order. +
+Admin/User: Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
 
 [NOTE]
@@ -216,17 +242,130 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Admin: Clears all entries from the Event Manager. +
 Format: `clear`
+
+=== Register for event : `register`
+
+User: RSVPs for an event. +
+Format: `register INDEX`
+
+Examples:
+
+* `register 1` +
+Registers User to event 1
+* `register 5` +
+Registers User to event 5
+
+=== Remove registration from event : `unregister`
+
+User: Removes RSVPs for an event. +
+Format: `unregister INDEX`
+
+Examples:
+
+* `unregister 1` +
+Unregisters User from event 1
+* `unregister 5` +
+Unregisters User from event 5
+
+=== View participant list : `viewParticipants`
+
+Admin/User: View names and total number of event attendees  +
+Format: `viewParticipants INDEX`
+
+Examples:
+
+* `viewParticipants 1` +
+Shows total and names of all participants going to event 1
+* `viewParticipants 5` +
+Shows total and names of all participants going to event 5
+
+=== Set reminders : `setReminder`
+
+Admin/User: Sets a reminder for the event identified by the index number used in the displayed event list. Reminder will alert the user 1 hour before the commencement time of the event. +
+Format: `setReminder INDEX`
+
+Examples:
+
+* `setReminder 1` +
+Sets a reminder for user for event 1
+* `setReminder 5` +
+Sets a reminder for user for event 5
+
+=== Clear reminders : `removeReminder`
+
+Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list. +
+Format: `removeReminder INDEX`
+
+Examples:
+
+* `removeReminder 1` +
+Removes a reminder for user for event 1
+* `removeReminder 5` +
+Removes a reminder for user for event 5
+
+=== show reminders : `showReminders`
+
+Admin/User: Show all events with reminders set +
+Format: `showReminders`
+
+=== View Comments : `showComments`
+
+Admin/User: Show event comment section +
+Format: `showComments INDEX`
+
+Examples:
+
+* `showComments 1` +
+Shows comments section for event 1
+* `showComments 5` +
+Shows comments section for event 5
+
+=== Adds Comment : `addComment`
+
+Admin/User: Add comment into event comment section +
+Format: `addComment INDEX STRING`
+
+Examples:
+
+* `addComment 1 "What is the attire to wear for the event?` +
+Adds "What is the attire to wear for the event?" into event 1 comment section
+* `addComment 5 "What is the attire to wear for this event?` +
+Adds "What is the attire to wear for this event?" into event 5 comment section
+
+=== Reply Comment : `replyComment`
+
+Admin/User: Replies a comment +
+Format: `replyComment EVENTINDEX LINEINDEX STRING`
+
+Examples:
+
+* `replyComment 1 5 "What is the attire to wear for the event?` +
+Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5
+* `replyComment 2 2 "What is the attire to wear for the event?` +
+Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2
+
+=== Delete Comment : `deleteComment`
+
+Admin: Deletes a comment +
+Format: `deleteComment EVENTINDEX LINEINDEX`
+
+Examples:
+
+* `deleteComment 1 5` +
+Deletes comment of event 1 at line 5
+* `deleteComment 2 2` +
+Deletes comment of event 2 at line 2
 
 === Exiting the program : `exit`
 
-Exits the program. +
+Admin/User: Exits the program. +
 Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Event Manager data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -238,19 +377,23 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Event Manager folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Sign up* : `signup n/USERNAME p/PASSWORD c/CONFIRM_PASSWORD` +
+e.g. `signup n/Gerald Chua p/password12345 c/password12345`
+* *Login* : `login n/USERNAME p/PASSWORD` +
+e.g. `login n/Gerald Chua p/password12345`
+* *Add* `add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+e.g. `add n/Sports Day c/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *Edit* : `edit INDEX [n/EVENT] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+e.g. `edit 2 n/Good Day e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+e.g. `find Comp Sci Workshop`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
@@ -258,3 +401,19 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Register* : `register INDEX` +
+e.g. `register 1`
+* *Unregister* : `unregister INDEX` +
+e.g. `unregister 1`
+* *Set reminders* : `setReminder INDEX` +
+e.g. `setReminder 1`
+* *View Reminders* : `reminders` +
+e.g. `reminder`
+* *showComments* : `showComments INDEX` +
+e.g. `showComments 1`
+* *addComment* : `addCeomment INDEX STRING` +
+e.g. `add Comments 1 "HELLO"`
+* *replyComment* : `replyComment EVENTINDEX LINEINDEX STRING` +
+e.g. `replyComments 1 2 "Hello"`
+* *deleteComment* : `deleteComment EVENT INDEX LINEINDEX STRING` +
+e.g. `deleteComment 1 2`

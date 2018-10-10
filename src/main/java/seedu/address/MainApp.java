@@ -63,7 +63,7 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        EventManagerStorage eventManagerStorage = new XmlEManagerStorage(userPrefs.getAddressBookFilePath());
+        EventManagerStorage eventManagerStorage = new XmlEManagerStorage(userPrefs.getEventManagerFilePath());
         storage = new StorageManager(eventManagerStorage, userPrefsStorage);
 
         initLogging(config);
@@ -186,7 +186,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping EventManager ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

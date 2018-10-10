@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= Event Manager - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,7 +12,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T12-1/main/tree/master
 
 By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
@@ -831,23 +831,105 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |New user |See usage instructions |Refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new event |
+|`* * *` |New user |Create an account |RSVP for events
 
-|`* * *` |user |delete a event |remove entries that I no longer need
+|`* * *` |User |View event details | -
 
-|`* * *` |user |find a event by name |locate details of events without having to go through the entire list
+|`* * *` |User |V |Set reminders for events
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |Busy Student |List Events |View all events to keep track
 
-|`*` |user with many events in the address book |sort events by name |locate a event easily
+|`* * *` |Admin |Create new events |Users can RSVP to them
+
+|`* * *` |Admin/User |View all participants | Get overall attendance for event
+
+|`* * *` |Admin |Delete a event |Remove entries that I no longer need
+
+|`* * *` |User |find a event by name |locate details of events without having to go through the entire list
+
+|`* *` |User |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+
+|`* *` |Admin |Edit events |So changes can be made without me deleting and creating a new event
+
+|`* *` |User |Filter events | To list the types of events that are coming up
+
+|`* *` |User |See status of event |-
+
+|`* *` |User | Able to post questions | I clarify any doubts regarding the event
+
+|`* *` |Admin |Manage comment section | To prevent abuse by users in a comments section
+
+|`*` |user with many events in the Event Manager |sort events by name |locate a event easily
 |=======================================================================
 
 _{More to be added}_
 
 [appendix]
 == Use Cases
+
+For all the use cases below, System refers to the EventManager, Actor refers to the admin/user.
+
+*Use Case: Authentication* +
+MSS (main system success): +
+1. EventManager prompts user for username and password. +
+2. User inputs correct username and password. +
+3. EventManager grants access to User and displays welcome message. +
+Use case ends.
+
+Extensions: +
+     2a. User inputs incorrect password. +
+	2a1. EventManager denies access to user and displays error message. +
+Use Case resumes at step 1.
+
+*Use Case: View events, RSVP and Reminders* +
+MSS (main system success): +
+1. User requests for list of events. +
+2. EventManager displays list of events. +
+3. User selects event. +
+4. EventManager displays details of selected event. +
+5. User indicates attendance. +
+6. EventManager records attendance and displays confirmation message +
+Use case ends
+
+Extensions: +
+     1a) Display by filter: +
+	1a1) User selected filter (Date and time, Tags of events). +
+	1a2) Apply filter in the list. +
+     4a) User requests for list of attendees. +
+	4a1) EventManager displays list of attendees in alphabetical order +
+     5a) User sets reminder for event. +
+5a1) Reminder will alert user 1 hour before the commencement of the event if the user is logged in. +
+5a2) User removes reminder for event. +
+Use Case resumes at step 5.
+
+*Use Case: View event with reminders and remove reminder* +
+MSS (main system success): +
+1. User requests for list of events with reminder set. +
+2. EventManager displays list of events. +
+3. User selects event. +
+4. EventManager displays details of selected event. +
+5. User removes reminder on event. +
+6. EventManager removes reminder for the event and displays confirmation message. +
+Use case ends
+
+*Use Case: Comments*: +
+MSS (main system success): +
+1. User views the event information and types in “comment view” on CLI +
+2. EventManager displays a comment section +
+3. User inputs command of “comment x” +
+4. EventManager executes command based on what user keys in +
+5. Repeat 3 and 4 until User types “comment exit” +
+Use case ends
+
+Extensions: +
+3a) The commands used in comments: +
+     	   3a1) “comment reply INDEX STRING ” will reply to the comment at INDEX +
+     	   3a2) “comment add STRING “ will adds the STRING to the list of comments +
+   3a3) “comment delete INDEX”  (only for admin) it will delete the comment at            INDEX +
+Resume use case at step 4
+
 
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 

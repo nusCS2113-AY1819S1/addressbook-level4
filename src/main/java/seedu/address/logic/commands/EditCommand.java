@@ -21,6 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Address;
+import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
@@ -92,16 +93,17 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Event} with the details of {@code eventToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Event createEditedPerson(Event eventToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Event createEditedPerson(Event eventToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert eventToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(eventToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(eventToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(eventToEdit.getAddress());
+        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(eventToEdit.getAttendance());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(eventToEdit.getTags());
 
-        return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedAttendance, updatedTags);
     }
 
     @Override
@@ -131,6 +133,7 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Attendance attendance;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -144,6 +147,7 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setAttendance(toCopy.attendance);
             setTags(toCopy.tags);
         }
 
@@ -184,6 +188,14 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
+        }
+
+        public void setAttendance(Attendance attendance) {
+            this.attendance = attendance;
+        }
+
+        public Optional<Attendance> getAttendance() {
+            return Optional.ofNullable(attendance);
         }
 
         /**

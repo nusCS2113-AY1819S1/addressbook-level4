@@ -45,7 +45,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class EditCommandSystemTest extends EventManagerSystemTest {
@@ -62,7 +62,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         Index index = INDEX_FIRST_PERSON;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
-        Event editedEvent = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
+        Event editedEvent = new EventBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedEvent);
 
         /* Case: undo editing the last event in the list -> last event restored */
@@ -88,7 +88,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         assertNotEquals(getModel().getFilteredEventList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedEvent = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
+        editedEvent = new EventBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedEvent);
 
         /* Case: edit a event with new values same as another event's values but with different phone and email
@@ -97,14 +97,14 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         index = INDEX_SECOND_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedEvent = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        editedEvent = new EventBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedEvent);
 
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
         Event eventToEdit = getModel().getFilteredEventList().get(index.getZeroBased());
-        editedEvent = new PersonBuilder(eventToEdit).withTags().build();
+        editedEvent = new EventBuilder(eventToEdit).withTags().build();
         assertCommandSuccess(command, index, editedEvent);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
@@ -115,7 +115,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         assertTrue(index.getZeroBased() < getModel().getFilteredEventList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         eventToEdit = getModel().getFilteredEventList().get(index.getZeroBased());
-        editedEvent = new PersonBuilder(eventToEdit).withName(VALID_NAME_BOB).build();
+        editedEvent = new EventBuilder(eventToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedEvent);
 
         /* Case: filtered event list, edit index within bounds of address book but out of bounds of event list

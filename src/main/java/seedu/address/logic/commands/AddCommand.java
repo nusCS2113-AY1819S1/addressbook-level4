@@ -39,6 +39,7 @@ public class AddCommand extends Command {
 
     private final Event toAdd;
 
+
     /**
      * Creates an AddCommand to add the specified {@code Event}
      */
@@ -54,7 +55,6 @@ public class AddCommand extends Command {
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
-
         model.addEvent(toAdd);
         model.commitEventManager();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
