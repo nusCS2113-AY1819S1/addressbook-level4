@@ -40,7 +40,9 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     /**
      * Returns the text of the 'total persons' portion of the status bar.
      */
-    public String getTotalPersonsStatus() { return totalPersonsStatusNode.getText(); }
+    public String getTotalPersonsStatus() {
+        return totalPersonsStatusNode.getText();
+    }
 
     /**
      * Returns the text of the 'save location' portion of the status bar.
@@ -59,7 +61,9 @@ public class StatusBarFooterHandle extends NodeHandle<Node> {
     /**
      * Remembers the content of the 'total persons' portion of the status bar.
      */
-    public void rememberTotalPersonsStatus() { lastRememberedTotalPersonsStatus = getTotalPersonsStatus(); }
+    public void rememberTotalPersonsStatus() {
+        lastRememberedTotalPersonsStatus = getTotalPersonsStatus();
+    }
 
     /**
      * Returns true if the current content of the 'total persons' is different from the value remembered by the most
