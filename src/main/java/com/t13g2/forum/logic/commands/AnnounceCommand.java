@@ -16,12 +16,12 @@ public class AnnounceCommand extends Command {
     public static final String COMMAND_WORD = "announce";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Post new announcement. "
-            + "Parameters: "
-            + PREFIX_ANNOUNCE_TITLE + "TITLE "
-            + PREFIX_ANNOUNCE_CONTENT + "PHONE "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ANNOUNCE_TITLE + "Urgent!"
-            + PREFIX_ANNOUNCE_CONTENT + "System maintenance from tomorrow 3PM to 5PM.";
+        + "Parameters: "
+        + PREFIX_ANNOUNCE_TITLE + "TITLE "
+        + PREFIX_ANNOUNCE_CONTENT + "PHONE "
+        + "Example: " + COMMAND_WORD + " "
+        + PREFIX_ANNOUNCE_TITLE + "Urgent!"
+        + PREFIX_ANNOUNCE_CONTENT + "System maintenance from tomorrow 3PM to 5PM.";
 
     public static final String MESSAGE_SUCCESS = "New announcement posted: %1$s";
 
