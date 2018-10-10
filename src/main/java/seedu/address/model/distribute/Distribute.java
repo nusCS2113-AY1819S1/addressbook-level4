@@ -39,25 +39,6 @@ public class Distribute {
         return nationality;
     }
 
-    //    /**
-    //     * Returns true if both persons have the same identity and data fields.
-    //     * This defines a stronger notion of equality between two persons.
-    //     */
-    //    @Override
-    //    public boolean equals(Object other) {
-    //        if (other == this) {
-    //            return true;
-    //        }
-    //
-    //        if (!(other instanceof Distribute)) {
-    //            return false;
-    //        }
-    //
-    //        Distribute otherDist = (Distribute) other;
-    //        return otherDist.getGroupName().equals(getGroupName());
-    //
-    //    }
-
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -69,7 +50,7 @@ public class Distribute {
         final StringBuilder builder = new StringBuilder();
         builder.append(getIndex())
                 .append("Group Name: ")
-                .append(getGroupName())
+                .append(getGroupName().toString())
                 .append("Sort By Gender: ")
                 .append(getGender())
                 .append("Sort By Nationality: ")

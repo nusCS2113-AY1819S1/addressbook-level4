@@ -10,6 +10,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.distribute.Distribute;
+import seedu.address.model.distribute.DistributeAlgorithm;
 
 /**
  * Distribute will automatically split all persons into n number of groups based on user choice
@@ -36,15 +37,7 @@ public class DistributeCommand extends Command {
 
     public DistributeCommand(Distribute dist) {
         requireNonNull(dist);
-        int index = dist.getIndex();
-        String name = dist.getGroupName().toString();
-        boolean gender = dist.getGender();
-        boolean nationality = dist.getNationality();
-
-        System.out.println(index);
-        System.out.println(name);
-        System.out.println(gender);
-        System.out.println(nationality);
+        new DistributeAlgorithm(dist);
     }
 
     @Override
