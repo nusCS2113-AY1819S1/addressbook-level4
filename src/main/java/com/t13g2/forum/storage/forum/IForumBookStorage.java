@@ -6,6 +6,8 @@ package com.t13g2.forum.storage.forum;
 
 public interface IForumBookStorage {
 
+    void commit();
+
     void save(Class clazz);
     void load(Class clazz);
 
@@ -20,6 +22,10 @@ public interface IForumBookStorage {
 
     void saveUser();
     void loadUser();
+
+    void saveModule();
+
+    void loadModule();
 
     AnnouncementStorage getAnnouncements();
 

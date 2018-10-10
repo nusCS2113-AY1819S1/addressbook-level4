@@ -44,7 +44,9 @@ public class UnitOfWork implements IUnitOfWork,AutoCloseable {
 
     @Override
     public void commit() {
-        announcementRepository.commit();
+
+        forumBookStorage.saveAnnouncement();
+
     }
 
     @Override
