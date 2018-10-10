@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-//package t13g2.forum.logic.commands;
-//
-//import t13g2.forum.logic.CommandHistory;
-//import t13g2.forum.logic.commands.exceptions.CommandException;
-//import t13g2.forum.model.Model;
-//
-//public class DeleteThreadCommand extends Command{
-//
-//    @Override
-//    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-//        return null;
-//    }
-//}
-=======
 package com.t13g2.forum.logic.commands;
 
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
@@ -60,4 +45,3 @@ public class DeleteThreadCommand extends Command {
     }
 
 }
->>>>>>> 0eea9a0d6951d3fbaf45505b54df1300818d8eba

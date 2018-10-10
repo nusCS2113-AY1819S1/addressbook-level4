@@ -1,9 +1,9 @@
 package com.t13g2.forum.logic.commands;
 
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_INDEX;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_NAME;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_PHONE;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_TAG;
 import static java.util.Objects.requireNonNull;
 
@@ -21,16 +21,16 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
-            + PREFIX_MODULE + "NAME "
-            + PREFIX_THREAD + "PHONE "
-            + PREFIX_INDEX + "EMAIL "
-            + PREFIX_COMMENT + "ADDRESS "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_PHONE + "PHONE "
+            + PREFIX_EMAIL + "EMAIL "
+            + PREFIX_ADDRESS + "ADDRESS "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MODULE + "John Doe "
-            + PREFIX_THREAD + "98765432 "
-            + PREFIX_INDEX + "johnd@example.com "
-            + PREFIX_COMMENT + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_NAME + "John Doe "
+            + PREFIX_PHONE + "98765432 "
+            + PREFIX_EMAIL + "johnd@example.com "
+            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 
