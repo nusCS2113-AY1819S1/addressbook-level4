@@ -6,6 +6,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
@@ -15,7 +16,8 @@ import seedu.recruit.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of persons,
+ * and their details upon selection
  */
 public class PersonDetailsPanel extends UiPart<Region> {
     private static final String FXML = "PersonDetailsPanel.fxml";
@@ -23,6 +25,24 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Candidate> personDetailsView;
+    @FXML
+    private Label name;
+    @FXML
+    private Label gender;
+    @FXML
+    private Label age;
+    @FXML
+    private Label phone;
+    @FXML
+    private Label email;
+    @FXML
+    private Label address;
+    @FXML
+    private Label desired_job;
+    @FXML
+    private Label education;
+    @FXML
+    private Label salary;
 
     public PersonDetailsPanel(ObservableList<Candidate> candidateList) {
         super(FXML);
@@ -42,13 +62,30 @@ public class PersonDetailsPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in candidate details panel changed to : '" + newValue + "'");
                         raise(new PersonPanelSelectionChangedEvent(newValue));
+                        showDetailsOfSelectedCandidate();
                     }
                 });
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Expands {@code PersonCard} by listing all the details of the selected Candidate
      */
+    private void showDetailsOfSelectedCandidate() {
+        Candidate selectedPerson = personDetailsView.getSelectionModel().getSelectedItem();
+        name.setText(selectedPerson.getName().fullName);
+        gender.setText(selectedPerson.getGender().value);
+        age.setText(selectedPerson.getAge().value);
+        phone.setText(selectedPerson.getPhone().value);
+        email.setText(selectedPerson.getEmail().value);
+        address.setText(selectedPerson.getAddress().value);
+        desired_job.setText(selectedPerson.getJob().value);
+        education.setText(selectedPerson.getEducation().value);
+        salary.setText(selectedPerson.getSalary().value);
+    }
+
+        /**
+         * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+         */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
             personDetailsView.scrollTo(index);
@@ -74,9 +111,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonDetailsCard(candidate, getIndex() + 1).getRoot());
+                setGraphic(new PersonCard(candidate, getIndex() + 1).getRoot());
             }
         }
     }
-
 }

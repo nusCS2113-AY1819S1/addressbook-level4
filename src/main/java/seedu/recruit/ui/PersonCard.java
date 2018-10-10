@@ -8,7 +8,9 @@ import javafx.scene.layout.Region;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * An UI component that displays information of a {@code Candidate}.
+ * An UI component that displays the
+ * level of education, desired job and desired salary
+ * of a {@code Candidate}.
  */
 public class PersonCard extends UiPart<Region> {
 
