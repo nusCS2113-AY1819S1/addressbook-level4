@@ -168,6 +168,7 @@ public class XmlAdaptedPerson {
         }
         //@@author
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         return new Person(
                 modelName,
                 modelPhone,
