@@ -29,5 +29,7 @@ public interface IForumBookStorage {
 
     AnnouncementStorage getAnnouncements();
 
+    ForumThreadStorage getForumThreads();
+
 
 }

@@ -121,5 +121,10 @@ public class ForumBookStorage implements IForumBookStorage {
         return announcements;
     }
 
+    @Override
+    public ForumThreadStorage getForumThreads() {
+        return forumThreads;
+    }
+
 
 }
