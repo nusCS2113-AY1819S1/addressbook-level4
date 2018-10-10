@@ -221,7 +221,7 @@ public class EditCommand extends Command {
 
             return getName().equals(e.getName())
                     && getSerialNumber().equals(e.getSerialNumber())
-                    && getPerson().equals(e.getPerson())
+                    && getDistributor().equals(e.getDistributor())
                     && getProductInfo().equals(e.getProductInfo())
                     && getTags().equals(e.getTags());
         }

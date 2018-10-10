@@ -3,9 +3,9 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+//import seedu.address.model.person.Person;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-import seedu.address.model.person.Product;
+//import seedu.address.model.person.Product;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
