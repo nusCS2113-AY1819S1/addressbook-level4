@@ -19,7 +19,9 @@ public class JsonUserStorage implements UserStorage {
     }
 
     @Override
-    public Path getUserFilePath() { return filePath; }
+    public Path getUserFilePath() {
+        return filePath;
+    }
 
     @Override
     public Optional<User> readUser() throws DataConversionException {
