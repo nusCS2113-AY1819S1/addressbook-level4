@@ -1,14 +1,14 @@
 //@@author Limminghong
 package seedu.address.logic.commands;
 
+import java.util.List;
+
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.backup.BackupList;
-
-import java.util.List;
 
 /**
  * Restores the address book to a snapshot of choice.

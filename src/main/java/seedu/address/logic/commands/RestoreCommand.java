@@ -67,7 +67,7 @@ public class RestoreCommand extends Command {
         }
 
         try {
-            RestoreFileFromIndex(userPref, fileMap, index);
+            restoreFileFromIndex(userPref, fileMap, index);
             initialData = storage.readAddressBook().orElseGet(SampleDataUtil::getSampleAddressBook);
             model.resetData(initialData);
             return new CommandResult(String.format(MESSAGE_RESTORED_SUCCESS, fileName.get(index.getZeroBased())));
@@ -84,7 +84,7 @@ public class RestoreCommand extends Command {
      * @param index the index of the file that is extracted
      * @throws IOException if either of the path does not exist
      */
-    private void RestoreFileFromIndex(UserPrefs userPrefs, Map<Integer, File> fileMap, Index index) throws IOException {
+    private void restoreFileFromIndex(UserPrefs userPrefs, Map<Integer, File> fileMap, Index index) throws IOException {
         File newFile = fileMap.get(index.getZeroBased());
         File dest = new File(userPrefs.getAddressBookFilePath().toString());
         Files.copy(newFile.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
