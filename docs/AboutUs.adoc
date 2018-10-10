@@ -29,7 +29,7 @@ Responsibilities: UI
 '''
 
 === Tahir Gara
-image::grthr.jpg[width="150", align="left"]
+image::grthr.png[width="150", align="left"]
 {empty}[https://github.com/garagaristahir[github]]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Data
 '''
 
 === Amirul Maricar
-image::amrlmrcr.jpg[width="150", align="left"]
+image::amrlmrcr.png[width="150", align="left"]
 {empty}[https://github.com/amirulmaricar[github]]
 
 Role: Developer +
