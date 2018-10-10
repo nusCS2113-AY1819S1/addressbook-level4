@@ -3,15 +3,14 @@ package com.t13g2.forum.storage.forum;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.User;
 
 public class ForumBookStorage implements IForumBookStorage {
-    private IStorage underlyingStorage;
+    protected IStorage underlyingStorage;
 
-    private List<Announcement> announcements;
+    private AnnouncementStorage announcements;
     private List<Comment> comments;
     private List<ForumThread> forumThreads;
     private List<Module> modules;
@@ -20,7 +19,8 @@ public class ForumBookStorage implements IForumBookStorage {
     public ForumBookStorage(IStorage underlyingStorage) {
         this.underlyingStorage=underlyingStorage;
 
-        this.announcements = new ArrayList<>();
+        this.announcements = new AnnouncementStorage();
+        loadAnnouncement();
         this.comments = new ArrayList<>();
         this.forumThreads = new ArrayList<>();
         this.modules = new ArrayList<>();
@@ -39,12 +39,12 @@ public class ForumBookStorage implements IForumBookStorage {
 
     @Override
     public void saveAnnouncement() {
-
+        underlyingStorage.write(announcements);
     }
 
     @Override
     public void loadAnnouncement() {
-
+        announcements = (AnnouncementStorage) underlyingStorage.read(AnnouncementStorage.class);
     }
 
     @Override
@@ -78,27 +78,9 @@ public class ForumBookStorage implements IForumBookStorage {
     }
 
     @Override
-    public List<Announcement> getAnnouncements() {
+    public AnnouncementStorage getAnnouncements() {
         return announcements;
     }
 
-    @Override
-    public List<Comment> getComments() {
-        return comments;
-    }
 
-    @Override
-    public List<ForumThread> getForumThreads() {
-        return forumThreads;
-    }
-
-    @Override
-    public List<Module> getModules() {
-        return modules;
-    }
-
-    @Override
-    public List<User> getUsers() {
-        return users;
-    }
 }

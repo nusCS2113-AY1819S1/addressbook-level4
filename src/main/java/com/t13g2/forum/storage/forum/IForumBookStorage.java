@@ -3,12 +3,6 @@ package com.t13g2.forum.storage.forum;
 /**
  *
  */
-import java.util.List;
-
-import com.t13g2.forum.model.forum.Announcement;
-import com.t13g2.forum.model.forum.Comment;
-import com.t13g2.forum.model.forum.ForumThread;
-import com.t13g2.forum.model.forum.User;
 
 public interface IForumBookStorage {
 
@@ -27,11 +21,7 @@ public interface IForumBookStorage {
     void saveUser();
     void loadUser();
 
-    List<Announcement> getAnnouncements();
-    List<Comment> getComments();
-    List<ForumThread> getForumThreads();
-    List<Module> getModules();
-    List<User> getUsers();
+    AnnouncementStorage getAnnouncements();
 
 
 }

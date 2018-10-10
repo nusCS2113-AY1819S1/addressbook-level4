@@ -4,7 +4,7 @@ package com.t13g2.forum.storage.forum;
  *
  */
 public class UnitOfWork implements IUnitOfWork,AutoCloseable {
-    private IAnnouncementRepository announcementRepository;
+    private AnnouncementRepository announcementRepository;
     private ICommentRepository commentRepository;
     private IForumThreadRepository forumThreadRepository;
     private ModuleRepository moduleRepository;
@@ -40,7 +40,7 @@ public class UnitOfWork implements IUnitOfWork,AutoCloseable {
 
     @Override
     public void commit() {
-
+        announcementRepository.commit();
     }
 
     @Override

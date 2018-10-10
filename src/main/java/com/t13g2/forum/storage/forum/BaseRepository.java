@@ -4,7 +4,7 @@ package com.t13g2.forum.storage.forum;
  *
  */
 public abstract class BaseRepository {
-    private IForumBookStorage forumBookStorage;
+    protected IForumBookStorage forumBookStorage;
 
     public BaseRepository() {
         this.forumBookStorage = new ForumBookStorage(new FileStorage());

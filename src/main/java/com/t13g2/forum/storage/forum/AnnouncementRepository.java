@@ -5,7 +5,7 @@ import com.t13g2.forum.model.forum.Announcement;
 public class AnnouncementRepository extends BaseRepository implements IAnnouncementRepository {
     @Override
     public void commit() {
-
+        forumBookStorage.saveAnnouncement();
     }
 
     @Override
@@ -15,7 +15,8 @@ public class AnnouncementRepository extends BaseRepository implements IAnnouncem
 
     @Override
     public int addAnnouncement(Announcement announcement) {
-        return 0;
+        forumBookStorage.getAnnouncements().getList().add(announcement);
+        return announcement.getId();
     }
 
     @Override
