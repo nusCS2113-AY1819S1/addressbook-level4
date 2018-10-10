@@ -17,8 +17,6 @@ public class GradebookFindCommand extends Command {
     public static final String COMMAND_WORD = "gradebook find";
     public static final String MESSAGE_SUCCESS = "Successfully Found!";
     public static final String MESSAGE_FAIL = "Module Not Found!";
-
-
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a gradebook component to module code in"
             + " Trajectory. "
             + "Parameters: "

@@ -10,11 +10,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gradebook.GradebookComponent;
 
 /**
- * Parses input arguments and creates a new FindCommand object
+ * Parses input arguments and creates a new GradebookFindCommand object
  */
 public class GradebookFindCommandParser implements Parser<GradebookFindCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * Parses the given {@code String} of arguments in the context of the GradebookFindCommand
      * and returns an AddCommand object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format

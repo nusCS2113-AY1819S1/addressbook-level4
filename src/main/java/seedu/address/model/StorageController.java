@@ -29,9 +29,6 @@ public class StorageController {
     private static ArrayList<GradebookComponent> gradebookStorage = new ArrayList<GradebookComponent>();
     private static ArrayList<Note> noteStorage = new ArrayList<Note>();
 
-
-
-
     /**
      * This method retrieves all datasets saved locally.
      */
