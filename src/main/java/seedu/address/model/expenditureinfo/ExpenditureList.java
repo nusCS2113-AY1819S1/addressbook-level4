@@ -20,7 +20,7 @@ import javafx.collections.ObservableList;
  *
  * Supports a minimal set of list operations.
  *
- * @see
+ *
  */
 public class ExpenditureList implements Iterable<Expenditure> {
 
