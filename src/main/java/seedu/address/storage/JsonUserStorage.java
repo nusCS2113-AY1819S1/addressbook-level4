@@ -7,6 +7,9 @@ import seedu.address.model.user.User;
 import java.nio.file.Path;
 import java.util.Optional;
 
+/**
+ * A class to access Users stored in the hard disk as a JSON file.
+ */
 public class JsonUserStorage implements UserStorage {
 
     private Path filePath;

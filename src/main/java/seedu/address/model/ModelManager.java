@@ -13,7 +13,6 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.EventManagerChangedEvent;
 import seedu.address.model.event.Event;
-import seedu.address.model.user.User;
 
 /**
  * Represents the in-memory model of the event manager data.
@@ -56,11 +55,6 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateEManagerChanged() {
         raise(new EventManagerChangedEvent(versionedEManager));
     }
-
-//    @Override
-//    public void loginUser(User user) {
-//        requireNonNull(user);
-//    }
 
     @Override
     public boolean hasEvent(Event event) {

@@ -3,6 +3,9 @@ package seedu.address.model.user;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a user's username credential.
+ */
 public class Username {
 
     // TODO: SET PROPER USERNAME CONSTRAINTS

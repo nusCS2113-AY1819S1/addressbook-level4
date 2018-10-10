@@ -6,12 +6,15 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
-import java.util.stream.Stream;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
+import java.util.stream.Stream;
+
+/**
+ * Parses input arguments and creates a new LoginCommand object.
+ */
 public class LoginCommandParser implements Parser<LoginCommand> {
 
     /**

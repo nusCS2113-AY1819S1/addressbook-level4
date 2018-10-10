@@ -2,6 +2,9 @@ package seedu.address.model.user;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a user account.
+ */
 public class User {
 
     private final Username username;

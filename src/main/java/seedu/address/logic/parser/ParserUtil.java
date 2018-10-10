@@ -15,7 +15,6 @@ import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.Password;
-import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
 /**

@@ -4,7 +4,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
-import seedu.address.model.user.User;
 
 /**
  * The API of the Model component.
@@ -18,9 +17,6 @@ public interface Model {
 
     /** Returns the EventManager */
     ReadOnlyEventManager getEventManager();
-
-
-//    void loginUser(User user);
 
     /**
      * Returns true if a event with the same identity as {@code event} exists in the event manager.
