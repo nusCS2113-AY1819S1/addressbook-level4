@@ -3,7 +3,7 @@ package com.t13g2.forum.storage.forum;
 /**
  *
  */
-public class UnitOfWork implements IUnitOfWork,AutoCloseable {
+public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     private IAnnouncementRepository announcementRepository;
     private ICommentRepository commentRepository;
     private IForumThreadRepository forumThreadRepository;

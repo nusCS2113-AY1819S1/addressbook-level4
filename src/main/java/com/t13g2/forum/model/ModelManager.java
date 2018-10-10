@@ -134,34 +134,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addAnnounceToStorage(Announcement announcement) {
-        requireNonNull(announcement);
-        //TODO: add to storage
-    }
-
-    @Override
-    public Announcement showAnnouncement() {
-        //TODO: check from storage if there is new announcement
-        //get announcement from storage and return to user
-        //now only hardcode value
-        Announcement announcement = new Announcement("Urgent!", "System maintenance from 3PM to 5PM");
-        return announcement;
-    }
-
-    @Override
-    public boolean isBlock(User user) {
-        //TODO: getIsBlock from storage
-        return user.getIsBlock();
-    }
-
-    @Override
-    public void blockUser(User toBlock) {
-        requireNonNull(toBlock);
-        //TODO: set block through storage (UnitOfWork)
-        toBlock.setIsBlock(true);
-    }
-
-    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
