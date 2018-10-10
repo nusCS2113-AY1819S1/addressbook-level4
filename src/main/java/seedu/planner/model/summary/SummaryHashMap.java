@@ -31,7 +31,7 @@ public class SummaryHashMap {
 
     /**
      * Subtracts the record's moneyflow from the summary hashMap
-     * The {@date} date must exist in the hashMap.
+     * The date must exist in the hashMap.
      */
     public void remove(Record record) {
         Date dateOfRecord = record.getDate();
@@ -39,6 +39,15 @@ public class SummaryHashMap {
             throw new RecordNotFoundException();
         }
         summaryMap.remove(record);
+    }
+
+    /**
+     * Updates the summary map with the moneyflow of {@code target} and {@code editedRecord}
+     * Subtracts target's moneyflow from summary hashMap before adding editedRecord's moneyflow to summary hashMap
+     */
+    public void update(Record target, Record editedRecord) {
+        remove(target);
+        add(target);
     }
 
     private boolean isDatePresentInMap(Date date) {

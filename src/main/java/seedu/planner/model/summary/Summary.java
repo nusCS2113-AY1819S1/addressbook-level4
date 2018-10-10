@@ -21,7 +21,7 @@ public class Summary {
         // Does nothing
     }
 
-    public void delete(Record record) {
+    public void remove(Record record) {
         // Does nothing
     }
 }

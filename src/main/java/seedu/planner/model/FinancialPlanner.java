@@ -109,8 +109,18 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         summaryMap.add(p);
     }
 
+    /**
+     * Remove the record from the summary map
+     */
     public void removeRecordFromSummary(Record key) {
         summaryMap.remove(key);
+    }
+
+    /**
+     * Update summary map to reflect change in {@code records}
+     */
+    public void updateSummary(Record target, Record editedRecord) {
+        summaryMap.update(target, editedRecord);
     }
 
     //// util methods

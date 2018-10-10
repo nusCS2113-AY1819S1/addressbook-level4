@@ -82,6 +82,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedRecord);
 
         versionedFinancialPlanner.updateRecord(target, editedRecord);
+        versionedFinancialPlanner.updateSummary(target, editedRecord);
         indicateFinancialPlannerChanged();
     }
 
