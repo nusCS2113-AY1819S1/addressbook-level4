@@ -2,6 +2,8 @@ package com.t13g2.forum.model;
 
 import java.util.function.Predicate;
 
+import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 
 import javafx.collections.ObservableList;
@@ -76,4 +78,19 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitForumBook();
+
+    /**
+     * Announce the given announcement.
+     * {@code announcement} must not be null.
+     */
+    void addAnnounceToStorage(Announcement announcement);
+
+    /**
+     * Show current announcement to user
+     */
+    Announcement showAnnouncement();
+
+    boolean isBlock(User user);
+
+    void blockUser(User toBlock);
 }

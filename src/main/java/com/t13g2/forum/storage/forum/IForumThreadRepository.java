@@ -6,6 +6,9 @@ import com.sun.istack.NotNull;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 
+/**
+ *
+ */
 public interface IForumThreadRepository {
     int addThread(ForumThread forumThread);
 
