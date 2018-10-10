@@ -43,7 +43,6 @@ public class RecordCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    // TODO: Refactor this next time
     public RecordCard(Record record, int displayedIndex) {
         super(FXML);
         this.record = record;

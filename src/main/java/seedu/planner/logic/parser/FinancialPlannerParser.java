@@ -17,11 +17,14 @@ import seedu.planner.logic.commands.FindCommand;
 import seedu.planner.logic.commands.FindTagCommand;
 import seedu.planner.logic.commands.HelpCommand;
 import seedu.planner.logic.commands.HistoryCommand;
+import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.SelectCommand;
 import seedu.planner.logic.commands.UndoCommand;
+
 import seedu.planner.logic.parser.exceptions.ParseException;
+
 
 /**
  * Parses user input.
@@ -92,6 +95,8 @@ public class FinancialPlannerParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
+        case LimitCommand.COMMAND_WORD:
+            return new LimitCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

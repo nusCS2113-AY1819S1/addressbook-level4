@@ -14,6 +14,7 @@ import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
 import seedu.planner.model.tag.Tag;
 
+
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
@@ -105,4 +106,5 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+
 import seedu.planner.model.record.Record;
 
 /**
@@ -16,6 +17,7 @@ public interface Model {
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyFinancialPlanner newData);
+
 
     /** Returns the FinancialPlanner */
     ReadOnlyFinancialPlanner getFinancialPlanner();
