@@ -10,18 +10,18 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "gradebook")
 public class GradebookComponent {
 
-    @XmlElement(name = "gradeItemName", required = true, nillable = true)
-    private String gradeItemName;
     @XmlElement(name = "moduleCode", required = true, nillable = true)
     private String moduleCode;
+    @XmlElement(name = "gradeItemName", required = true, nillable = true)
+    private String gradeItemName;
 
     public GradebookComponent() {
 
     }
 
-    public GradebookComponent(String gradeItemName, String moduleCode) {
-        this.gradeItemName = gradeItemName;
+    public GradebookComponent(String moduleCode, String gradeItemName) {
         this.moduleCode = moduleCode;
+        this.gradeItemName = gradeItemName;
     }
 
     public GradebookComponent(String moduleCode) {

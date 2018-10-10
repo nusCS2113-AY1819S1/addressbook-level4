@@ -133,9 +133,6 @@ public class StorageController {
     public static ArrayList<GradebookComponent> getGradebookStorage() {
         return gradebookStorage;
     }
-
-
-
     public static void setGradebookStorage(ArrayList<GradebookComponent> gradebookStorage) {
         StorageController.gradebookStorage = gradebookStorage;
     }

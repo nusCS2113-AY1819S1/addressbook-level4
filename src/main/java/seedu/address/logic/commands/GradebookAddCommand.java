@@ -25,7 +25,7 @@ public class GradebookAddCommand extends Command {
             + PREFIX_GRADEBOOK_MODULE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
 
-    public static final String MESSAGE_SUCCESS = "\nSuccessfully Added! \nModule Code: %2$s \nGradebook Item: %1$s";
+    public static final String MESSAGE_SUCCESS = "\nSuccessfully Added! \nModule Code: %1$s \nGradebook Item: %2$s";
     public static final String MESSAGE_DUPLICATE_COMPONENT = "This grade component already exist in Trajectory.";
 
     private final GradebookComponent toAddGradebookItem;
@@ -38,11 +38,11 @@ public class GradebookAddCommand extends Command {
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         StorageController.retrieveData();
-        StorageController.getGradebookStorage().add(new GradebookComponent(toAddGradebookItem.getGradeItemName(),
-                toAddGradebookItem.getModuleCode()));
+        StorageController.getGradebookStorage().add(new GradebookComponent(toAddGradebookItem.getModuleCode(),
+                toAddGradebookItem.getGradeItemName()));
         StorageController.storeData();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddGradebookItem.getGradeItemName(),
-                toAddGradebookItem.getModuleCode()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAddGradebookItem.getModuleCode(),
+                toAddGradebookItem.getGradeItemName()));
     }
 
     @Override

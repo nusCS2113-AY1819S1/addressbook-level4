@@ -13,10 +13,9 @@ import seedu.address.model.gradebook.GradebookComponent;
  * Find all gradebook components for module in Trajectory to the user.
  */
 public class GradebookFindCommand extends Command {
-
     public static final String COMMAND_WORD = "gradebook find";
     public static final String MESSAGE_SUCCESS = "Successfully Found!";
-    public static final String MESSAGE_FAIL = "Module Not Found!";
+    public static final String MESSAGE_FAIL = "Module Code Not Found!";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a gradebook component to module code in"
             + " Trajectory. "
             + "Parameters: "
@@ -36,14 +35,12 @@ public class GradebookFindCommand extends Command {
         StorageController.retrieveData();
         StringBuilder sb = new StringBuilder();
         String result = MESSAGE_FAIL;
+        String module = toFindGradebookComponent.getModuleCode();
 
         for (GradebookComponent gc : StorageController.getGradebookStorage()) {
             if (toFindGradebookComponent.getModuleCode().equals(gc.getModuleCode())) {
-                sb.append("Module Code: ");
-                sb.append(gc.getModuleCode() + "\n");
-                sb.append("Grade Component: ");
                 sb.append(gc.getGradeItemName() + "\n");
-                result = MESSAGE_SUCCESS;
+                result = MESSAGE_SUCCESS + "\nGradebook components for: " + module;
             }
         }
         return new CommandResult ("\n" + result + "\n" + sb.toString());
