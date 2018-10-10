@@ -19,8 +19,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_GROUP_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_MEAN = new Prefix("mean/");
     public static final Prefix PREFIX_HIGHEST = new Prefix("highest/");
-    public static final Prefix PREFIX_25th = new Prefix("25/");
-    public static final Prefix PREFIX_75th = new Prefix("75/");
+    public static final Prefix PREFIX_TWENTY_FIVE = new Prefix("25/");
+    public static final Prefix PREFIX_SEVENTY_FIVE = new Prefix("75/");
     public static final Prefix PREFIX_MEDIAN = new Prefix("median/");
 
 }

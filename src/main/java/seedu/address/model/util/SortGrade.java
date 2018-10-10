@@ -17,7 +17,7 @@ public class SortGrade { //from lowest to highest
      * sort student in ascending order by their scores.
      */
     public ArrayList<Person> sortingFromLowesttoHighest(ObservableList<Person> personList) {
-        ArrayList<Person> pList = new ArrayList<>(bubbleSort(personList,personList.size()));
+        ArrayList<Person> pList = new ArrayList<>(bubbleSort(personList, personList.size()));
         //System.out.println(pList.toString());
         return pList;
     }
@@ -25,7 +25,7 @@ public class SortGrade { //from lowest to highest
     /**
      * implement bubblesort function.
      */
-    public static ArrayList<Person> bubbleSort(ObservableList<Person>  list, int n) {
+    public static ArrayList<Person> bubbleSort(ObservableList<Person> list, int n) {
         ArrayList<Person> personList = new ArrayList<Person>();
 
         for (int i = 0; list.size() > i; i++) {

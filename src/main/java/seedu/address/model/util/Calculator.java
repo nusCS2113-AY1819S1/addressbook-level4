@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+
 /**
  * calculate the values we used for gradesummary and scorefilter command.
  */
@@ -28,7 +28,7 @@ public class Calculator {
     /**
      * find the highest score from student's scores.
      */
-    public int findHighest(ObservableList<Person>  personList) {
+    public int findHighest(ObservableList<Person> personList) {
         int maximum = 0;
         for (int i = 0; i < personList.size(); i++) {
             int currentVal = Integer.parseInt(personList.get(i).getGrade().value);
@@ -41,7 +41,7 @@ public class Calculator {
     /**
      * find the top 25 percent student's name and scores.
      */
-    public ArrayList<Person> find25th(ObservableList<Person>  personList) {
+    public ArrayList<Person> find25th(ObservableList<Person> personList) {
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,
                         personList.size()));
@@ -90,7 +90,7 @@ public class Calculator {
     /**
      * find the median of student's scores.
      */
-    public int calculateMedian(ObservableList<Person>  personList) { //calculate the mean score of a test
+    public int calculateMedian(ObservableList<Person> personList) { //calculate the mean score of a test
         int median = 0;
         ArrayList<Person> sortedList = new ArrayList<Person>(SortGrade
                 .bubbleSort(personList, personList.size()));

@@ -1,18 +1,18 @@
 package seedu.address.logic.parser;
 
 
-import java.util.stream.Stream;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDIAN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SEVENTY_FIVE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TWENTY_FIVE;
 
 import seedu.address.logic.commands.GradeSummaryCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_25th;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_75th;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDIAN;
 
 
 /**
@@ -29,23 +29,23 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
     public GradeSummaryCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_25th,PREFIX_75th,PREFIX_HIGHEST,PREFIX_MEAN,PREFIX_MEDIAN);
+                ArgumentTokenizer.tokenize(args, PREFIX_TWENTY_FIVE, PREFIX_SEVENTY_FIVE, PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN);
 
         String commandToRun = "";
 
-        if(argMultimap.getValue(PREFIX_25th).isPresent()){
+        if (argMultimap.getValue(PREFIX_TWENTY_FIVE).isPresent()) {
             commandToRun = "25";
         }
-        if(argMultimap.getValue(PREFIX_75th).isPresent()){
+        if (argMultimap.getValue(PREFIX_SEVENTY_FIVE).isPresent()) {
             commandToRun = "75";
         }
-        if(argMultimap.getValue(PREFIX_HIGHEST).isPresent()){
+        if (argMultimap.getValue(PREFIX_HIGHEST).isPresent()) {
             commandToRun = "H";
         }
-        if(argMultimap.getValue(PREFIX_MEAN).isPresent()){
+        if (argMultimap.getValue(PREFIX_MEAN).isPresent()) {
             commandToRun = "MEAN";
         }
-        if(argMultimap.getValue(PREFIX_MEDIAN).isPresent()){
+        if (argMultimap.getValue(PREFIX_MEDIAN).isPresent()) {
             commandToRun = "MEDIAN";
         }
 
