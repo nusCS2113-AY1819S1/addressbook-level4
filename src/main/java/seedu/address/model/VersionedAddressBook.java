@@ -23,6 +23,7 @@ public class VersionedAddressBook extends AddressBook {
      * Saves a copy of the current {@code AddressBook} state at the end of the state list.
      * Undone states are removed from the state list.
      */
+
     public void commit() {
         removeStatesAfterCurrentPointer();
         addressBookStateList.add(new AddressBook(this));
