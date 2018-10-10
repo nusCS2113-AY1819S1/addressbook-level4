@@ -60,4 +60,5 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 
+
 }

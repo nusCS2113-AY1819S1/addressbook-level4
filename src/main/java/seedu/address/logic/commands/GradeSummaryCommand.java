@@ -88,4 +88,5 @@ public class GradeSummaryCommand extends Command {
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
+
 }
