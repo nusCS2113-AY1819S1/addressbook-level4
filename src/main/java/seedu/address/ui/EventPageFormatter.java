@@ -3,8 +3,8 @@ package seedu.address.ui;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -30,11 +30,17 @@ public class EventPageFormatter {
 
     }
 
+    /**
+     * Reads Event Search Page file from provided path
+     */
     private static String readFile(URI path) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, StandardCharsets.UTF_8);
     }
 
+    /**
+     * Overwrites Event Search Page file
+     */
     private static void writeFile(URI path) throws IOException {
         File f = new File(SEARCH_PAGE_PATH);
         FileWriter fWriter = new FileWriter(f, false);
