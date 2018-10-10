@@ -4,6 +4,7 @@ import static java.lang.Math.max;
 
 import java.util.ArrayList;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 /**
@@ -14,24 +15,23 @@ public class Calculator {
     /**
      * calculate the mean values of student's scores.
      */
-    public int calculateMean(UniquePersonList personList) { //calculate the mean score of a test
+    public int calculateMean(ObservableList<Person> personList) { //calculate the mean score of a test
         int sum = 0;
-        for (int i = 0; i < personList.asUnmodifiableObservableList().size(); i++) {
+        for (int i = 0; i < personList.size(); i++) {
 
-            sum += Integer.parseInt(personList
-                    .asUnmodifiableObservableList().get(i).getGrade().value); //string to integer then calculate
+            sum += Integer.parseInt(personList.get(i).getGrade().value); //string to integer then calculate
         }
-        int mean = sum / personList.asUnmodifiableObservableList().size();
+        int mean = sum / personList.size();
         return mean;
     }
 
     /**
      * find the highest score from student's scores.
      */
-    public int findHighest(UniquePersonList personList) {
+    public int findHighest(ObservableList<Person>  personList) {
         int maximum = 0;
-        for (int i = 0; i < personList.asUnmodifiableObservableList().size(); i++) {
-            int currentVal = Integer.parseInt(personList.asUnmodifiableObservableList().get(i).getGrade().value);
+        for (int i = 0; i < personList.size(); i++) {
+            int currentVal = Integer.parseInt(personList.get(i).getGrade().value);
             maximum = max(currentVal, maximum);
         }
 
@@ -41,10 +41,10 @@ public class Calculator {
     /**
      * find the top 25 percent student's name and scores.
      */
-    public ArrayList<Person> find25th(UniquePersonList personList) {
+    public ArrayList<Person> find25th(ObservableList<Person>  personList) {
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList,
-                        personList.asUnmodifiableObservableList().size()));
+                        personList.size()));
 
         ArrayList<Person> theList = new ArrayList<Person>();
         int getListSize = sortedList.size();
@@ -66,10 +66,9 @@ public class Calculator {
     /**
      * find the last 25 percent student's name and scores.
      */
-    public ArrayList<Person> find75th(UniquePersonList personList) {
+    public ArrayList<Person> find75th(ObservableList<Person>  personList) {
         ArrayList<Person> sortedList =
-                new ArrayList<Person>(SortGrade.bubbleSort(personList,
-                        personList.asUnmodifiableObservableList().size()));
+                new ArrayList<Person>(SortGrade.bubbleSort(personList, personList.size()));
 
         ArrayList<Person> theList = new ArrayList<Person>();
         int getListSize = sortedList.size();
@@ -91,10 +90,10 @@ public class Calculator {
     /**
      * find the median of student's scores.
      */
-    public int calculateMedian(UniquePersonList personList) { //calculate the mean score of a test
+    public int calculateMedian(ObservableList<Person>  personList) { //calculate the mean score of a test
         int median = 0;
         ArrayList<Person> sortedList = new ArrayList<Person>(SortGrade
-                .bubbleSort(personList, personList.asUnmodifiableObservableList().size()));
+                .bubbleSort(personList, personList.size()));
 
         int size = sortedList.size();
         int index = (size / 2) - 1;
