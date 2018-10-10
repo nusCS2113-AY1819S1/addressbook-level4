@@ -5,6 +5,9 @@ import java.util.List;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 
+/**
+ *
+ */
 public interface ICommentRepository {
     int addComment(Comment comment);
 
