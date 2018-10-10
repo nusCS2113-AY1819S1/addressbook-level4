@@ -14,6 +14,9 @@ public class Announcement extends BaseModel {
     public static final String MESSAGE_ANNOUNCEMENT_CONSTRAINTS =
         "Announcement can take any values, and it should not be blank";
 
+    public Announcement() {
+    }
+
     /**
      * The first character of the announcement must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
