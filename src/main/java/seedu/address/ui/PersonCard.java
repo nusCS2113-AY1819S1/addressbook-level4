@@ -17,8 +17,8 @@ import seedu.address.model.tag.Tag;
 public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final String[] TAG_COLORS =
-            { "red", "yellow", "blue", "orange", "brown", "green", "pink", "black", "grey", "purple" ,"maroon"};
+    private static final String[] TAG_COLOR_STYLES = { "teal", "red", "yellow", "blue", "orange", "brown", "green",
+            "pink", "black", "grey", "maroon", "navy"};
 
 
     /**
@@ -44,7 +44,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private FlowPane tags;
+    private FlowPane header;
     @FXML
     private FlowPane monday;
     @FXML
@@ -67,12 +67,12 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
-        
+
         for (String it: Tag.getHeader())
         {
             Label day = new Label(it);
             day.setPrefSize(61, 10);
-            tags.getChildren().add(day);
+            header.getChildren().add(day);
 
         }
         colourTag(person);
@@ -83,14 +83,14 @@ public class PersonCard extends UiPart<Region> {
 
 
 
-        }
-//Takes the mods for the day and adds them to the FlowPane
+    }
+    //Takes the mods for the day and adds them to the FlowPane
     private void getMod(String mods[], FlowPane day) {
         for (String it : mods) {
             Label slot = new Label(it);
             slot.setPrefSize(53, 25);
             if(it.charAt(5)=='m'||it.charAt(5)=='a'){
-                slot.getStyleClass().add("grey");
+                slot.getStyleClass().add("white");
                 slot.setText(" ");
 
             }
@@ -104,8 +104,8 @@ public class PersonCard extends UiPart<Region> {
     }
 
     //Returns a colour based on the module code
-    private String getColor(String tagName){
-        return TAG_COLORS[Math.abs(tagName.hashCode()) % TAG_COLORS.length];
+    public static String getColor(String tagName){
+        return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length];
     }
     //Reads tags from a person, changes them to labels and adds colour
     private void colourTag(Person person){
