@@ -190,6 +190,7 @@ public class MainApp extends Application {
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
+
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
         Platform.exit();

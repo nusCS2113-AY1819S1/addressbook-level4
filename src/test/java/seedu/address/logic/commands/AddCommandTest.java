@@ -22,6 +22,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -161,8 +162,23 @@ public class AddCommandTest {
         }
 
         @Override
+        public void backupAddressBook() {
+
+        }
+
+        @Override
         public void backupAddressBook(Path backupPath) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasTask(Task task) {
+            return false;
+        }
+
+        @Override
+        public void addTask(Task person) {
+
         }
     }
 
