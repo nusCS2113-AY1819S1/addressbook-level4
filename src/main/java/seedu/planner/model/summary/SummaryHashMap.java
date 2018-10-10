@@ -39,7 +39,7 @@ public class SummaryHashMap {
         if (!isDatePresentInMap(dateOfRecord)) {
             throw new RecordNotFoundException();
         }
-        summaryMap.remove(record);
+        summaryMap.get(dateOfRecord).remove(record);
     }
 
     /**

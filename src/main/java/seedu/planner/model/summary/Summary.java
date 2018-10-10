@@ -7,7 +7,6 @@ import seedu.planner.model.record.Record;
 /**
  * This object represents the in memory model of a summary of all financial activity within a day.
  */
-// TODO: refactor this such that it does not need to know how to add
 public class Summary {
     private Date date;
     private MoneyFlow totalExpense;
@@ -19,8 +18,10 @@ public class Summary {
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
             totalExpense = money;
+            totalIncome = new MoneyFlow("+0");
         } else {
             totalIncome = money;
+            totalExpense = new MoneyFlow("-0");
         } total = money;
     }
 
@@ -31,15 +32,15 @@ public class Summary {
     public void add(Record record) {
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
-            double newMoneyAmount = money.toDouble() + totalExpense.toDouble();
+            double newMoneyAmount = totalExpense.toDouble() + money.toDouble() ;
             String newMoneyString = String.format("%.2f", newMoneyAmount);
             totalExpense = new MoneyFlow(newMoneyString);
         } else {
-            double newMoneyAmount = money.toDouble() + totalExpense.toDouble();
+            double newMoneyAmount = totalIncome.toDouble() + money.toDouble();
             String newMoneyString = String.format("+%.2f", newMoneyAmount);
-            totalExpense = new MoneyFlow(newMoneyString);
+            totalIncome = new MoneyFlow(newMoneyString);
         }
-        double newTotalAmount = money.toDouble() + total.toDouble();
+        double newTotalAmount = total.toDouble() + money.toDouble();
         String newTotalString;
         if (newTotalAmount > 0) {
             newTotalString = String.format("+%.2f", newTotalAmount);
@@ -49,8 +50,32 @@ public class Summary {
         total = new MoneyFlow(newTotalString);
     }
 
+    /**
+     * Subtracts the record's moneyflow from totalExpense or totalIncome depending on the type of moneyflow
+     * and total
+     */
+    // TODO: Please refactor this and bring into Moneyflow class
     public void remove(Record record) {
-        // Does nothing
+        MoneyFlow money = record.getMoneyFlow();
+        if (isExpense(money)) {
+            double newMoneyAmount = totalExpense.toDouble() - money.toDouble();
+            assert(newMoneyAmount <= 0);
+            String newMoneyString = String.format("%.2f", newMoneyAmount);
+            totalExpense = new MoneyFlow(newMoneyString);
+        } else {
+            double newMoneyAmount = totalIncome.toDouble() - money.toDouble() ;
+            assert(newMoneyAmount >= 0);
+            String newMoneyString = String.format("+%.2f", newMoneyAmount);
+            totalIncome = new MoneyFlow(newMoneyString);
+        }
+        double newTotalAmount = total.toDouble() - money.toDouble();
+        String newTotalString;
+        if (newTotalAmount > 0) {
+            newTotalString = String.format("+%.2f", newTotalAmount);
+        } else {
+            newTotalString = String.format("%.2f", newTotalAmount);
+        }
+        total = new MoneyFlow(newTotalString);
     }
 
     private boolean isExpense(MoneyFlow money) {
