@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Item with an invalid quantity field -->
-<items>
+<item>
     <name>Arduino</name>
     <quantity>-1</quantity>
     <minQuantity>5</minQuantity>
@@ -8,4 +8,4 @@
     <statusOnLoan>0</statusOnLoan>
     <statusFaulty>0</statusFaulty>
     <tagged>Lab1</tagged>
-</items>
+</item>
