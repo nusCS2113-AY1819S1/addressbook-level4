@@ -13,6 +13,7 @@ public interface IModuleRepository {
     void removeModule(int moduleId);
 
     Module getModule(int moduleId);
+    Module getModuleByCode(String moduleCode);
 
     List<Module> getAllModule();
 }
