@@ -35,6 +35,10 @@ public class UnitOfWork implements IUnitOfWork,AutoCloseable {
         return userRepository;
     }
 
+/**
+ *
+ */
+public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     @Override
     public void commit() {
 

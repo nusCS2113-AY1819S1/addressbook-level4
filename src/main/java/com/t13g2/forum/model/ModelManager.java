@@ -9,11 +9,14 @@ import com.t13g2.forum.commons.core.ComponentManager;
 import com.t13g2.forum.commons.core.LogsCenter;
 import com.t13g2.forum.commons.events.model.AddressBookChangedEvent;
 import com.t13g2.forum.commons.util.CollectionUtil;
+import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+
 
 /**
  * Represents the in-memory model of the address book data.
@@ -128,6 +131,32 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitForumBook() {
         versionedAddressBook.commit();
+    }
+
+    @Override
+    public void addAnnounceToStorage(Announcement announcement) {
+        //TODO: add to storage
+        requireNonNull(announcement);
+    }
+
+    @Override
+    public Announcement showAnnouncement() {
+        //TODO: check from storage if there is new announcement
+        //get announcement from storage and return to user
+        //now only hardcode value
+        Announcement announcement = new Announcement("Urgent!", "System maintenance from 3PM to 5PM");
+        return announcement;
+    }
+
+    @Override
+    public boolean isBlock(User user) {
+        return user.getIsBlock();
+    }
+
+    @Override
+    public void blockUser(User toBlock) {
+        requireNonNull(toBlock);
+        toBlock.setIsBlock(true);
     }
 
     @Override
