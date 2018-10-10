@@ -10,12 +10,16 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.medicalreport.MedicalReport;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.MedHistory;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.timetable.Appt;
 
 /**
  * JAXB-friendly version of the Person.
@@ -32,6 +36,14 @@ public class XmlAdaptedPerson {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String nric;
+    @XmlElement(required = true)
+    private String report;
+    @XmlElement(required = true)
+    private String medhistory;
+    @XmlElement(required = true)
+    private String appt;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -65,6 +77,10 @@ public class XmlAdaptedPerson {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        nric = source.getNric().value;
+        report = source.getMedicalReport().value;
+        medhistory = source.getMedHistory().value;
+        appt = source.getAppt().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -113,8 +129,31 @@ public class XmlAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        if (nric == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Nric.class.getSimpleName()));
+        }
+        final Nric modelNric = new Nric(nric);
+
+        if (report == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MedicalReport.class.getSimpleName()));
+        }
+        final MedicalReport modelReport = new MedicalReport(report);
+
+        if (medhistory == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    MedHistory.class.getSimpleName()));
+        }
+        final MedHistory modelMedHistory = new MedHistory(medhistory);
+
+        if (appt == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Appt.class.getSimpleName()));
+        }
+        final Appt modelAppt = new Appt(appt);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelReport,
+                          modelMedHistory, modelAppt, modelNric, modelTags);
     }
 
     @Override

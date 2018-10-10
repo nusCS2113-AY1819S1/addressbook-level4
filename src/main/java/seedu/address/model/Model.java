@@ -24,6 +24,11 @@ public interface Model {
     boolean hasPerson(Person person);
 
     /**
+     * Returns true if a report with the same fields {@code report} exists in the address book.
+     */
+    //boolean hasReport(MedicalReport report);
+
+    /**
      * Deletes the given person.
      * The person must exist in the address book.
      */
@@ -34,6 +39,12 @@ public interface Model {
      * {@code person} must not already exist in the address book.
      */
     void addPerson(Person person);
+
+    /**
+     * Adds the given report
+     * {@code report} must not already exist in the address book.
+     */
+    //void addReport(MedicalReport report);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

@@ -12,9 +12,9 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2113-AY1819S1-T12-2/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T12-2`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -97,6 +97,20 @@ When you are ready to start coding,
 
 1. Get some sense of the overall design by reading <<Design-Architecture>>.
 2. Take a look at <<GetStartedProgramming>>.
+
+== Introduction
+
+Health Book (or some other name that we will be deciding later) is an address book application that is catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information all in one place. Command Line Interface is utilized mainly for the input, while GUI is used mainly to display the output. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
+
+=== User Profile
+
+Health Book is catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information all in one place.
+
+=== Value Proposition
+
+With many patients to attend to, healthcare professionals need to focus much of their attention and care on their patients and less on administrative matters. Health Book is a one-stop application for healthcare professionals to create, read, update or delete (CRUD) patient’s information, reducing the need for long and troublesome paperwork and simplifying administrative work.
+
+Command Line Interface is utilized mainly for the input, while GUI is used mainly to display the output. By combining these 2 interfaces, Health Book also aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
 
 == Design
 
@@ -813,15 +827,17 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 [appendix]
 == Product Scope
 
-*Target user profile*:
+Health Book is an address book application that is catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information all in one place. Command Line Interface is utilized mainly for the input, while GUI is used mainly to display the output. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
 
-* has a need to manage a significant number of contacts
+*Target user profile*: Health Book is catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information all in one place.
+
+* has a need to manage a significant number of patients
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: With many patients to attend to, healthcare professionals need to focus much of their attention and care on their patients and less on administrative matters. Health Book is a one-stop application for healthcare professionals to create, read, update or delete (CRUD) patient’s information, reducing the need for long and troublesome paperwork and simplifying administrative work.
 
 [appendix]
 == User Stories
@@ -831,62 +847,604 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |doctor |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |doctor |add, edit, and delete patients and their medical informaton |keep track of my patients and not prescribe them the wrong medication
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |doctor |find a patient by name |locate details of patients without having to go through the entire list
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |doctor |have a platform to view my patients' past medical history |compare with their current symptoms to predict future health risks
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |doctor |know my patient’s drug allergy if he/she has any |prescribe the drugs without causing other medical conditions
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |doctor |know if there is any follow-up actions for a particular patient, or if the medical case for the patient has closed |know if the patient has been discharged
+
+|`* * *` |doctor |have a sorted list of all my patients in terms of their personal particulars/medical information (allergies, blood type, address, last visited country) and past medical history |assess them more quickly and easily, and understand the past medical issues that my patients faced
+
+|`* * *` |doctor |import/export files to other computers |send patients’ data to other hospitals if the patient transfers there
+
+|`* * *` |doctor |see all my patient’s appointments if there is any |remind my patients to come for appointments days in advance
+
+|`* *` |doctor |have an inventory list |keep track and replenish stocks
+
+|`* *` |doctor |have image functionality in the feature (medical history) |view X-rays and scans where applicable to provide better diagnosis
+
+|`* *` |doctor |rank patients’ past illnesses in terms of severity (medical history) |efficiently perform certain checkups to ensure their condition is kept in check
+
+|`* *` |doctor |be able to see all appointments for the day and how many people have appointments |I can schedule appointments easily when people call in and request for an appointment, I can schedule them an empty timeslot
+
+|`* *` |doctor |be able to see where patients live on a map |I can do house visits easily and deliver medication to them
+
+|`* *` |doctor |see the patients' prescriptions given to them by previous doctors they have visited for each entry in their medical history (medical history) |understand how their medical condition is based on medication taken
+
+|`*` |doctor |encrypt all my patients’ info |my patients’ data will be protected from hackers
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Health Book`, unless specified otherwise)
 
-[discrete]
-=== Use case: Delete person
+=== Use case: Viewing of available commands: `help`
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to see a list of available commands.
+2.  System displays the list of commands that the user can enter.
++
+Use case ends.
+
+=== Use case: Adding a patient: `add`
+
+*MSS*
+
+1.  User requests to add a patient into the System.
+2.  System adds the patient into the System and displays a message that the addition is successful.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 1a. User uses the wrong format to add patient.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of adding a patient.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+=== Use case: Listing all patients: `list`
+
+*MSS*
+
+1.  User requests to see a list of all patients in the System.
+2.  System shows user a list of all patients.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. List is empty.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 2a1. System shows user a message that there are no patients entered yet and prompts user to add patient.
 +
-Use case resumes at step 2.
+Use case ends.
 
-_{More to be added}_
+=== Use case: Editing basic information of patient: `edit`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to edit a specific patient in the list with updated details.
+2.  System updates the patient’s information with the new details and displays a message that the edit is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to edit patient.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of editing a patient.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+=== Use case: Finding patients by categories: `find`
+
+*MSS*
+
+1.  User requests to find a patient in the list by categories. (eg. name, age, blood type, marital status)
+2.  System shows user a list of patients who are in requested category.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to find patient.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of finding a patient.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid category or keyword.
++
+[none]
+** 1b1. System shows an error message that category or keyword is invalid.
++
+Use case ends.
+
+=== Use case: Deleting a patient: `delete`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to delete a person in the list using the patient’s index.
+2.  System deletes the user who has that index and displays a message that deletion is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to delete patient.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of editing a patient.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+=== Use case: Adding an appointment into patient’s timetable: `addappt`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to add an appointment into patient’s timetable.
+2.  System adds the appointment into patient’s timetable and displays a message that the addition is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to add appointment.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of adding appointment.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+[none]
+* 1c. Patient’s timetable already has an appointment which overlaps with the new appointment in terms of timing.
++
+[none]
+** 1c1. System shows an error message that there is an overlapped appointment, and shows both the appointments which overlap each other.
++
+Use case ends.
+
+=== Use case: Viewing a patient’s appointments: `viewappts`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to view all appointments in the patient’s timetable.
+2.  System displays all appointments in the patient’s timetable.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to view appointments.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of viewing appointments.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+[none]
+* 1c. User requests to view all appointments of a patient who does not have any appointment.
++
+[none]
+** 1c1. System shows message that the patient does not have any appointments.
++
+Use case ends.
+
+=== Use case: Editing an appointment in a patient’s timetable: `editappt`
+Assume that user has already requested the System to view appointments for a patient.
+
+*MSS*
+
+1.  User requests to edit an appointment in the patient’s timetable with new details.
+2.  System updates the appointment in the patient’s timetable with the new details and displays a message that edit is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to edit appointment.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of editing appointment.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+[none]
+* 1c. Patient’s timetable already has an appointment which overlaps with the new appointment in terms of timing.
++
+[none]
+** 1c1. System shows an error message that there is an overlapped appointment, and shows both the appointments which overlap each other.
++
+Use case ends.
+
+=== Use case: Deleting an appointment in a patient’s timetable: `deleteappt`
+Assume that user has already requested the System to view appointments for a patient.
+
+*MSS*
+
+1.  User requests to delete an appointment in the patient’s timetable.
+2.  System deletes the appointment in the patient’s timetable and displays a message that deletion is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to delete appointment.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of deleting appointment.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+=== Use case: Adding optional information of patient: `addinfo`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to add optional information for patient.
+2.  System adds optional information for the patient and displays a message that entry for optional information is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to add optional information i.e. wrong command or invalid data for the fields.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of adding optional information. System will ignore invalid commands or data and process only the valid commands and data.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+=== Use case: Editing optional information of patient: `editinfo`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to edit optional information for patient.
+2.  System edits optional information for the patient and displays a message that edit for optional information is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to edit optional information i.e. wrong command or invalid data for the fields.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of adding optional information. System will ignore invalid commands or data and process only the valid commands and data.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+[none]
+* 1c. User requests to edit information that does not exist.
++
+[none]
+** 1c1. System shows an error message that the information does not exist. System will ignore the edit request for that field and process the valid edit requests for other fields
++
+Use case ends.
+
+=== Use case: Adding of Medical Report: `addreport`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to add medical report for patient.
+2.  System adds medical report for the patient and displays a message that addition of medical report is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to add medical report.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of adding medical report.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+=== Use case: Editing of Medical Report: `editreport`
+Assume that user has already requested the System to display a list of medical reports for a patient.
+
+*MSS*
+
+1.  User requests to edit medical report for patient.
+2.  System edits medical report for the patient and displays a message that edit of medical report is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to edit medical report.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of editing medical report.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+=== Use case: List of Medical Report: `listreport`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to view all medical reports for a patient.
+2.  System displays all medical reports for the patient.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User uses the wrong format to list medical reports.
++
+[none]
+** 1a1. System shows error message that format is wrong and gives user an example on the correct format of listing medical reports.
++
+Use case ends.
+
+[none]
+* 1b. User provides an invalid index for the list.
++
+[none]
+** 1b1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+[none]
+* 1c. User requests to view all medical reports for a patient who does not have any medical report.
++
+[none]
+** 1c1. System shows message that the patient does not have any medical report.
++
+Use case ends.
+
+=== Use case: Sort patients list: `sortlist`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User requests to sort the patients by a category and order.
+2.  System displays a sorted list of the patients and displays a message that the list is successfully sorted.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User chooses to sort by a category that does not exist (for example: the letter does not exist or refer to any category ie “z”, “3” or “-”).
++
+[none]
+** 1a1. System shows an error message that the category does not exist.
++
+Use case ends.
+
+[none]
+* 1b. User inputs an invalid order_index.
++
+[none]
+** 1b1. System shows an error message that the order index does not exist.
++
+Use case ends.
+
+=== Use case: Viewing information of patients: `view`
+Assume that user has already requested the System to display a list of patients.
+
+*MSS*
+
+1.  User chooses to view information of patient.
+2.  System requests for the details of information.
+3.  User enters the requested details.
+4.  System shows the requested information of patient.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User provides an invalid index for the list.
++
+[none]
+** 1a1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+[none]
+* 3a. System detects an error in the entered data.
++
+[none]
+** 3a1. System requests for the correct data.
+** 3a2. User enters new data.
+** Steps 3a1 and 3a2 are repeated until data entered is correct.
++
+Use case resumes at step 4.
+
+=== Use case: Import files to other computers: `import`
+
+*MSS*
+
+1.  User chooses to import patient info of a specific patient and specifies the directory and the text file where he wants to import it from.
+2.  System imports patient info from a txt file.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User provides an invalid index for the list.
++
+[none]
+** 1a1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+[none]
+* 1b. Directory information or text file name that user inputs is invalid.
++
+[none]
+** 1b1. System displays a message that the location given is invalid.
++
+Use case ends.
+
+=== Use case: Export files to other computers: `export`
+
+*MSS*
+
+1.  User chooses to export patient info of a specific patient and specifies the directory and file name which he wants to export to.
+2.  System exports patient into a txt file in the specified directory.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User provides an invalid index for the list.
++
+[none]
+** 1a1. System shows an error message that the index is invalid.
++
+Use case ends.
+
+[none]
+* 1b. Directory information or text file name that user inputs is invalid.
++
+[none]
+** 1b1. System displays a message that the location given is invalid.
++
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
 
+[discrete]
+=== Environment Requirements
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Should work on both 32-bit and 64-bit environments.
 
-_{More to be added}_
+[discrete]
+=== Business/Domain Rules
+.  Should be able to store up to 1000 patients' information without a noticeable sluggishness in performance for typical usage.
+
+[discrete]
+=== Constraints
+.  System data is only stored locally and not on the cloud.
+
+[discrete]
+=== Quality requirements
+.  The layout of the system will be simple and understandable by even doctors who are not proficient with computer systems.
+.  Might-have: all information will be encrypted.
+
+[discrete]
+=== Notes about project scope
+.  The product is not required to handle the printing of reports/profile pages.
 
 [appendix]
 == Glossary
