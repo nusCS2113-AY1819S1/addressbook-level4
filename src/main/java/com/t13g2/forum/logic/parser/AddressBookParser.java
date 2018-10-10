@@ -14,6 +14,7 @@ import com.t13g2.forum.logic.commands.ClearCommand;
 import com.t13g2.forum.logic.commands.Command;
 import com.t13g2.forum.logic.commands.CreateThreadCommand;
 import com.t13g2.forum.logic.commands.DeleteCommand;
+import com.t13g2.forum.logic.commands.LoginCommand;
 import com.t13g2.forum.logic.commands.EditCommand;
 import com.t13g2.forum.logic.commands.ExitCommand;
 import com.t13g2.forum.logic.commands.FindCommand;
@@ -24,7 +25,6 @@ import com.t13g2.forum.logic.commands.RedoCommand;
 import com.t13g2.forum.logic.commands.SelectCommand;
 import com.t13g2.forum.logic.commands.UndoCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
-import com.t13g2.forum.logic.commands.CreateThreadCommand;
 
 /**
  * Parses user input.
@@ -99,8 +99,10 @@ public class AddressBookParser {
             return new BlockUserFromPostingCommandParser().parse(arguments);
 
         case CreateThreadCommand.COMMAND_WORD:
-            return new CreateCommandParser().parse(arguments);
+            return new CreateThreadCommandParser().parse(arguments);
 
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

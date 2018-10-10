@@ -1,8 +1,14 @@
 package com.t13g2.forum.storage.forum;
 
+import java.util.Optional;
+
 import com.t13g2.forum.model.forum.Announcement;
 
 public class AnnouncementRepository extends BaseRepository implements IAnnouncementRepository {
+    public AnnouncementRepository(IForumBookStorage forumBookStorage) {
+        super(forumBookStorage);
+    }
+
     @Override
     public void commit() {
 
@@ -15,7 +21,8 @@ public class AnnouncementRepository extends BaseRepository implements IAnnouncem
 
     @Override
     public int addAnnouncement(Announcement announcement) {
-        return 0;
+        forumBookStorage.getAnnouncements().getList().add(announcement);
+        return announcement.getId();
     }
 
     @Override
@@ -34,7 +41,12 @@ public class AnnouncementRepository extends BaseRepository implements IAnnouncem
     }
 
     @Override
-    public Announcement getLatestAnnouncement() {
-        return null;
+    public Announcement getLatestAnnouncement() throws EntityDoesNotExistException {
+        Optional<Announcement> announcement = forumBookStorage.getAnnouncements().getList().stream()
+            .min((o1, o2) -> o1.getCreated().compareTo(o2.getCreated()));
+        if (!announcement.isPresent()) {
+            throw new EntityDoesNotExistException("No Announcement found");
+        }
+        return announcement.get();
     }
 }

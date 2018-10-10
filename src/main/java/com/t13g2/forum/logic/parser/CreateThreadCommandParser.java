@@ -16,7 +16,7 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class CreateCommandParser implements Parser<CreateThreadCommand> {
+public class CreateThreadCommandParser implements Parser<CreateThreadCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand

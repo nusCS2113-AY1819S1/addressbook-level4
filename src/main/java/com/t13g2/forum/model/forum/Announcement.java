@@ -1,5 +1,7 @@
 package com.t13g2.forum.model.forum;
 
+import java.io.Serializable;
+
 import com.t13g2.forum.commons.util.AppUtil;
 import com.t13g2.forum.commons.util.CollectionUtil;
 
@@ -7,12 +9,15 @@ import com.t13g2.forum.commons.util.CollectionUtil;
  * Represents the announcement in ForumBook.
  * Guarantees: is valid as declared in {@link #isValidAnnouncement(String, String)}
  */
-public class Announcement extends BaseModel {
+public class Announcement extends BaseModel implements Serializable {
     /**
      * Show message if announcement is not valid
      */
     public static final String MESSAGE_ANNOUNCEMENT_CONSTRAINTS =
         "Announcement can take any values, and it should not be blank";
+
+    public Announcement() {
+    }
 
     /**
      * The first character of the announcement must not be a whitespace,

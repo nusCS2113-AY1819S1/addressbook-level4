@@ -7,6 +7,7 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.UnitOfWork;
 
 
 /**
@@ -23,28 +24,41 @@ public class BlockUserFromPostingCommand extends Command {
         + PREFIX_USER_NAME + "john";
 
     public static final String MESSAGE_SUCCESS = "User blocked successfully: %1$s";
+    public static final String MESSAGE_INVALID_USER = "This user does not exist.";
     public static final String MESSAGE_DUPLICATE_BLOCK = "This user has already been blocked.";
 
-    private final User toBlock;
+    private final String userNameToBlock;
 
     /**
      * Creates an BlockUserFromPostingCommand to block the specified {@code User}
      */
-    public BlockUserFromPostingCommand(User userToBeBlocked) {
-        requireNonNull(userToBeBlocked);
-        toBlock = userToBeBlocked;
+    public BlockUserFromPostingCommand(String userName) {
+        requireNonNull(userName);
+        userNameToBlock = userName;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.isBlock(toBlock)) {
-            throw new CommandException(MESSAGE_DUPLICATE_BLOCK);
+        User user = new User();
+        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+            try {
+                user = unitOfWork.getUserRepository().getUserByUsername(userNameToBlock);
+                if(user.getIsBlock()) {
+                    throw new CommandException(MESSAGE_DUPLICATE_BLOCK);
+                }
+                else {
+                    user.setIsBlock(true);
+                    unitOfWork.commit();
+                }
+            } catch(Exception e){
+                e.printStackTrace();
+                throw new CommandException(MESSAGE_INVALID_USER);
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
-
-        model.blockUser(toBlock);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toBlock));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, user));
     }
 
 }

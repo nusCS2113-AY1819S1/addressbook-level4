@@ -7,6 +7,8 @@ import static java.util.Objects.requireNonNull;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.ForumThread;
+import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
  * Announce new announcement.
@@ -38,7 +40,13 @@ public class AnnounceCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.addAnnounceToStorage(toAnnounce);
+
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            unitOfWork.getAnnouncementRepository().addAnnouncement(toAnnounce);
+            unitOfWork.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAnnounce));
     }
 }

@@ -9,6 +9,8 @@ import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.storage.forum.UnitOfWork;
+import com.t13g2.forum.model.forum.ForumThread;
+import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
  * Delete a certain thread. Only admin could delete threads from others,
@@ -58,4 +60,5 @@ public class DeleteThreadCommand extends Command {
                 + "Thread Title: " + threadTitle + "\n";
         return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE));
     }
+
 }

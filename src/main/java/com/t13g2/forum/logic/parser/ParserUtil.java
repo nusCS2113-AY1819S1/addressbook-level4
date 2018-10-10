@@ -14,6 +14,7 @@ import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
+import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Address;
 import com.t13g2.forum.model.person.Email;
 import com.t13g2.forum.model.person.Name;

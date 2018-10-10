@@ -4,17 +4,15 @@ package com.t13g2.forum.storage.forum;
  *
  */
 public abstract class BaseRepository {
-    private IForumBookStorage forumBookStorage;
+    protected IForumBookStorage forumBookStorage;
 
-    public BaseRepository() {
-        this.forumBookStorage = new ForumBookStorage(new FileStorage());
+    public BaseRepository(IForumBookStorage forumBookStorage) {
+        this.forumBookStorage = forumBookStorage;
     }
 
-    public BaseRepository(IStorage underlyingStorage){
-        this.forumBookStorage = new ForumBookStorage(underlyingStorage);
-    }
-
+    @Deprecated
     public abstract void commit();
 
+    @Deprecated
     public abstract void rollback();
 }

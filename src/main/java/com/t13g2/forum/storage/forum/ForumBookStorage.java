@@ -1,30 +1,38 @@
 package com.t13g2.forum.storage.forum;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.t13g2.forum.model.forum.Announcement;
-import com.t13g2.forum.model.forum.Comment;
-import com.t13g2.forum.model.forum.ForumThread;
-import com.t13g2.forum.model.forum.User;
-
 public class ForumBookStorage implements IForumBookStorage {
-    private IStorage underlyingStorage;
+    protected IStorage underlyingStorage;
 
-    private List<Announcement> announcements;
-    private List<Comment> comments;
-    private List<ForumThread> forumThreads;
-    private List<Module> modules;
-    private List<User> users;
+    private AnnouncementStorage announcements;
+    private CommentStorage comments;
+    private ForumThreadStorage forumThreads;
+    private ModuleStorage modules;
+    private UserStorage users;
 
     public ForumBookStorage(IStorage underlyingStorage) {
         this.underlyingStorage=underlyingStorage;
 
-        this.announcements = new ArrayList<>();
-        this.comments = new ArrayList<>();
-        this.forumThreads = new ArrayList<>();
-        this.modules = new ArrayList<>();
-        this.users = new ArrayList<>();
+        this.announcements = new AnnouncementStorage();
+        this.comments = new CommentStorage();
+        this.forumThreads = new ForumThreadStorage();
+        this.modules = new ModuleStorage();
+        this.users = new UserStorage();
+
+        init();
+    }
+
+    private void init() {
+        loadAnnouncement();
+
+    }
+
+    @Override
+    public void commit() {
+        saveAnnouncement();
+        saveComment();
+        saveForumThread();
+        saveUser();
+        saveModule();
     }
 
     @Override
@@ -39,66 +47,79 @@ public class ForumBookStorage implements IForumBookStorage {
 
     @Override
     public void saveAnnouncement() {
-
+        underlyingStorage.write(announcements);
     }
 
     @Override
     public void loadAnnouncement() {
-
+        announcements = (AnnouncementStorage) underlyingStorage.read(AnnouncementStorage.class);
+        if (announcements == null) {
+            announcements = new AnnouncementStorage();
+            saveAnnouncement();
+        }
     }
 
     @Override
     public void saveComment() {
-
+        underlyingStorage.write(comments);
     }
 
     @Override
     public void loadComment() {
-
+        comments = (CommentStorage) underlyingStorage.read(CommentStorage.class);
+        if (comments == null) {
+            comments = new CommentStorage();
+            saveComment();
+        }
     }
 
     @Override
     public void saveForumThread() {
-
+        underlyingStorage.write(forumThreads);
     }
 
     @Override
     public void loadForumThread() {
-
+        forumThreads = (ForumThreadStorage) underlyingStorage.read(ForumThreadStorage.class);
+        if (forumThreads == null) {
+            forumThreads = new ForumThreadStorage();
+            saveForumThread();
+        }
     }
+
 
     @Override
     public void saveUser() {
-
+        underlyingStorage.write(users);
     }
 
     @Override
     public void loadUser() {
-
+        users = (UserStorage) underlyingStorage.read(UserStorage.class);
+        if (users == null) {
+            users = new UserStorage();
+            saveUser();
+        }
     }
 
     @Override
-    public List<Announcement> getAnnouncements() {
+    public void saveModule() {
+        underlyingStorage.write(modules);
+    }
+
+    @Override
+    public void loadModule() {
+        modules = (ModuleStorage) underlyingStorage.read(ModuleStorage.class);
+        if (modules == null) {
+            modules = new ModuleStorage();
+            saveModule();
+        }
+    }
+
+    @Override
+    public AnnouncementStorage getAnnouncements() {
         return announcements;
     }
 
-    @Override
-    public List<Comment> getComments() {
-        return comments;
-    }
 
-    @Override
-    public List<ForumThread> getForumThreads() {
-        return forumThreads;
-    }
-
-    @Override
-    public List<Module> getModules() {
-        return modules;
-    }
-
-    @Override
-    public List<User> getUsers() {
-        return users;
-    }
 }
