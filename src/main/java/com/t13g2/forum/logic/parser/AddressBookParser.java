@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import com.t13g2.forum.logic.commands.AddCommand;
 import com.t13g2.forum.logic.commands.AnnounceCommand;
+import com.t13g2.forum.logic.commands.BlockUserFromPostingCommand;
 import com.t13g2.forum.logic.commands.CheckAnnouncmentCommand;
 import com.t13g2.forum.logic.commands.ClearCommand;
 import com.t13g2.forum.logic.commands.Command;
@@ -91,6 +92,9 @@ public class AddressBookParser {
 
         case CheckAnnouncmentCommand.COMMAND_WORD:
             return new CheckAnnouncmentCommand();
+
+        case BlockUserFromPostingCommand.COMMAND_WORD:
+            return new BlockUserFromPostingCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

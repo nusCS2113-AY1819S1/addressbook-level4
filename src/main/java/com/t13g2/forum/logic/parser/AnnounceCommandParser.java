@@ -12,12 +12,12 @@ import com.t13g2.forum.model.forum.Announcement;
 
 
 /**
- * Parses input arguments and creates a new AnnounceCommand object
+ * Parses input arguments and creates a new AnnounceCommand object.
  */
 public class AnnounceCommandParser implements Parser<AnnounceCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AnnounceCommand
+     * Parses the given {@code String} of arguments in the context of the AnnounceCommand.
      * and returns an AnnounceCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
