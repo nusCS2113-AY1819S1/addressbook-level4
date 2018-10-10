@@ -32,7 +32,10 @@ public class ExpenditureList implements Iterable<Expenditure> {
         internalList.add(toAdd);
     }
 
-
+    /**
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
+     */
     public void setExpenditures(ExpenditureList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
