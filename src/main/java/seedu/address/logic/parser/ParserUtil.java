@@ -66,7 +66,7 @@ public class ParserUtil {
         }
         return new Password(trimmedPassword);
     }
-  
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
