@@ -20,7 +20,7 @@ Role: Project Advisor
 '''
 
 === Bhatt Paras Krishna
-image::bhttprskrshn.png[width="150", align="left"]
+image::parask26.png[width="150", align="left"]
 {empty}[https://github.com/ParasK26[github]]
 
 Role: Team Lead +
