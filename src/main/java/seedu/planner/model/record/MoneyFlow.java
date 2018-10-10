@@ -41,11 +41,13 @@ public class MoneyFlow {
     private static final Pattern MONEY_PATTERN = Pattern.compile(SIGN_REGEX + MONEYFLOW_NO_SIGN_REGEX);
 
     public final String value;
+    public final double valueDouble;
 
     public MoneyFlow(String moneyFlow) {
         requireNonNull(moneyFlow);
         checkArgument(isValidMoneyFlow(moneyFlow), MESSAGE_MONEY_FLOW_CONSTRAINTS);
         this.value = moneyFlow;
+        valueDouble = Double.valueOf(moneyFlow);
     }
 
     /**
@@ -62,6 +64,14 @@ public class MoneyFlow {
             throw new IllegalStateException();
         }
         return matcher.group("sign") + CURRENCY + matcher.group("money");
+    }
+
+    public double toDouble () {
+        return valueDouble;
+    }
+
+    public boolean isNotLarger (double moneyin) {
+        return (moneyin >= valueDouble);
     }
 
     @Override
