@@ -5,6 +5,10 @@ import java.util.List;
 import com.t13g2.forum.model.forum.Module;
 
 public class ModuleRepository extends BaseRepository implements IModuleRepository {
+    public ModuleRepository(IForumBookStorage forumBookStorage) {
+        super(forumBookStorage);
+    }
+
     @Override
     public void commit() {
 

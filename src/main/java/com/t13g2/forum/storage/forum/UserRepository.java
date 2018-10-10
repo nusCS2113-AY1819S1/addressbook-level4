@@ -3,6 +3,10 @@ package com.t13g2.forum.storage.forum;
 import com.t13g2.forum.model.forum.User;
 
 public class UserRepository extends BaseRepository implements IUserRepository {
+    public UserRepository(IForumBookStorage forumBookStorage) {
+        super(forumBookStorage);
+    }
+
     @Override
     public void commit() {
 

@@ -14,5 +14,5 @@ public interface IAnnouncementRepository {
 
     Announcement getAnnouncement(int announcementId);
 
-    Announcement getLatestAnnouncement();
+    Announcement getLatestAnnouncement() throws EntityDoesNotExistException;
 }

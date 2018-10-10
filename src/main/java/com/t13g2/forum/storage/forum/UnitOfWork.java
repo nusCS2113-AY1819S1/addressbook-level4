@@ -3,19 +3,23 @@ package com.t13g2.forum.storage.forum;
 /**
  *
  */
-public class UnitOfWork implements IUnitOfWork, AutoCloseable {
-    private IAnnouncementRepository announcementRepository;
+public class UnitOfWork implements IUnitOfWork,AutoCloseable {
+    private IForumBookStorage forumBookStorage;
+
+    private AnnouncementRepository announcementRepository;
     private ICommentRepository commentRepository;
     private IForumThreadRepository forumThreadRepository;
     private ModuleRepository moduleRepository;
     private UserRepository userRepository;
 
     public UnitOfWork() {
-        announcementRepository = new AnnouncementRepository();
-        commentRepository = new CommentRepository();
-        forumThreadRepository = new ForumThreadRepository();
-        moduleRepository = new ModuleRepository();
-        userRepository = new UserRepository();
+        forumBookStorage = new ForumBookStorage(new FileStorage());
+
+        announcementRepository = new AnnouncementRepository(forumBookStorage);
+        commentRepository = new CommentRepository(forumBookStorage);
+        forumThreadRepository = new ForumThreadRepository(forumBookStorage);
+        moduleRepository = new ModuleRepository(forumBookStorage);
+        userRepository = new UserRepository(forumBookStorage);
     }
 
     public IAnnouncementRepository getAnnouncementRepository() {
@@ -40,6 +44,8 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
 
     @Override
     public void commit() {
+
+        forumBookStorage.saveAnnouncement();
 
     }
 

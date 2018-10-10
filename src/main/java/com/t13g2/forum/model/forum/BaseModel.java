@@ -2,11 +2,13 @@ package com.t13g2.forum.model.forum;
 
 import java.util.Date;
 
+import com.t13g2.forum.storage.forum.RunningId;
+
 /**
  * Metadata for the other classes
  */
 public class BaseModel {
-    protected int id;
+    protected int id = RunningId.getInstance().nextId();
     protected Date created = new Date();
     protected Date modified;
     protected int createdByUserId;

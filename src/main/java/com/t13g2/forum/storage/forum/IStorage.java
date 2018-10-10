@@ -1,15 +1,12 @@
 package com.t13g2.forum.storage.forum;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-
 /**
  *
  */
 public interface IStorage {
-    void write(OutputStream outputStream);
+    void write(Object object);
 
-    void read(InputStream inputStream);
+    Object read(Class clazz);
 
     void handleSourceChange(IEvent changeEvent);
 }
