@@ -21,7 +21,6 @@ import org.junit.Test;
 
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.AddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class StatusBarFooterTest extends GuiUnitTest {
