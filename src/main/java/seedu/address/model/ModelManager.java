@@ -195,7 +195,7 @@ public class ModelManager extends ComponentManager implements Model {
         // MERGE CONFLICT HERE, INTEGRATED BOTH
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredDistributors.equals(other.filteredDistributors);
+                && filteredDistributors.equals(other.filteredDistributors)
                 && filteredProducts.equals(other.filteredProducts);
     }
 

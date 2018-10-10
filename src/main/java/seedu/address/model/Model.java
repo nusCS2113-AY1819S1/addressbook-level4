@@ -7,7 +7,7 @@ import seedu.address.model.person.Product;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
-import seedu.address.model.person.Person;
+import seedu.address.model.person.Product;
 import seedu.address.model.distributor.Distributor;
 
 /**
@@ -26,11 +26,15 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getProductInfoBook();
 
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getDistributorInfoBook();
+
     /**
      * Returns true if a distributor with the same identity as {@code distributor} exists in the Inventarie.
      */
     boolean hasDistributor(Distributor distributor);
-  
+
+    /**
      * Returns true if a product with the same identity as {@code product} exists in the address book.
      */
     boolean hasPerson(Product product);

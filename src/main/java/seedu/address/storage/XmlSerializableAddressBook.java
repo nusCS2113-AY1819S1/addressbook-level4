@@ -49,8 +49,8 @@ public class XmlSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
       
-        for (XmlAdaptedPerson p : distributors) {
-            Distributor distributor = p.toModelType();
+        for (XmlAdaptedDistributor d : distributors) {
+            Distributor distributor = d.toModelType();
             if (addressBook.hasDistributor(distributor)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }

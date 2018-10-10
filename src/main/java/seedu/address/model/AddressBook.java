@@ -18,7 +18,7 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    /*private final UniquePersonList persons;
+    private final UniquePersonList persons;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -26,10 +26,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
+     *   */
 
     {
         persons = new UniquePersonList();
-    }*/
+    }
 
     private final UniqueDistributorList distributors;
 
@@ -74,16 +75,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.distributors.setDistributors(distributors);
     }
 
-    /*
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
-
+    */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setDistributors(newData.getDistributorList());
     }
-    */
 
     //// product-level operations
 
@@ -168,7 +169,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     @Override
-    public String toDString() {
+    public String toString() {
         return distributors.asUnmodifiableObservableList().size() + " distributors";
         // TODO: refine later
     }
@@ -177,7 +178,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Product> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
-    */
 
     @Override
     public ObservableList<Distributor> getDistributorList() {
