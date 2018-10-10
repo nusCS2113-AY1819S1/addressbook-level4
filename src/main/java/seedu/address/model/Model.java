@@ -19,11 +19,8 @@ public interface Model {
     /** Returns the EventManager */
     ReadOnlyEventManager getEventManager();
 
-    /**
-     * Logs user in to event manager.
-     * {@code user} must already exist in the event manager.
-     */
-    void loginUser(User user);
+
+//    void loginUser(User user);
 
     /**
      * Returns true if a event with the same identity as {@code event} exists in the event manager.

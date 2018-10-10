@@ -57,11 +57,10 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new EventManagerChangedEvent(versionedEManager));
     }
 
-    @Override
-    public void loginUser(User user) {
-        requireNonNull(user);
-        
-    }
+//    @Override
+//    public void loginUser(User user) {
+//        requireNonNull(user);
+//    }
 
     @Override
     public boolean hasEvent(Event event) {
