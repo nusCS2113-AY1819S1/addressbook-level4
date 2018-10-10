@@ -70,9 +70,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addRecord(Record record) {
-        versionedFinancialPlanner.addRecord(record);
-        updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
-        indicateFinancialPlannerChanged();
+        try {
+            versionedFinancialPlanner.addRecord(record);
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            versionedFinancialPlanner.addRecordToSummary(record);
+            updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+            indicateFinancialPlannerChanged();
+        }
     }
 
     @Override
