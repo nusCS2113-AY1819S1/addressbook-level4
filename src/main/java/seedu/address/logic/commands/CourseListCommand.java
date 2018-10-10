@@ -10,7 +10,7 @@ import seedu.address.model.StorageController;
  */
 public class CourseListCommand extends Command {
 
-    public static final String COMMAND_WORD = "course_list";
+    public static final String COMMAND_WORD = "course list";
 
     public static final String MESSAGE_SUCCESS = "Listed all courses";
 
@@ -22,11 +22,11 @@ public class CourseListCommand extends Command {
         StringBuilder sb = new StringBuilder();
 
         for (Course c: StorageController.getCourseStorage()) {
-            sb.append("Course Name: ");
+            sb.append("Course Name:");
             sb.append(c.getCourseName() + "\n");
-            sb.append("Course Course: ");
+            sb.append("Course Code: ");
             sb.append(c.getCourseCode() + "\n");
-            sb.append("Faculty: ");
+            sb.append("School/Faculty: ");
             sb.append(c.getFacultyName() + "\n");
             sb.append("\n");
 
