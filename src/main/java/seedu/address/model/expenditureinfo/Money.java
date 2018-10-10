@@ -31,7 +31,7 @@ public class Money {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
+                || (other instanceof Money // instanceof handles nulls
                 && addingMoney.equals(((Money) other).addingMoney)); // state check
     }
 
