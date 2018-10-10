@@ -49,10 +49,10 @@ Responsibilities: Ensures all documentations are filled appropriately without an
 '''
 
 === Jomari Cruz
-image::jomcruz93.jpg[width="150", align="left"]
+image::jomcruz93.png[width="150", align="left"]
 {empty}[http://github.com/jomcruz93[github]] [<<jomcruz93#, portfolio>>]
 
-Role: Developer +
-Responsibilities: TBD
+Role: UI/UX +
+Responsibilities: Ensure that the user interface and user experience is intuitive and easy-to-use.
 
 '''
