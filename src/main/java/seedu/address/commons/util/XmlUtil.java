@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import java.io.FileNotFoundException;
+import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -66,6 +67,24 @@ public class XmlUtil {
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
         m.marshal(data, file.toFile());
+    }
+
+    /**
+     * Converts the data in the file to a sting.
+     *
+     * @throws JAXBException         Thrown if there is an error during converting the data
+     *                               into xml and returning the string.
+     */
+    public static <T> String convertContentToString(T data) throws JAXBException {
+        requireNonNull(data);
+
+        StringWriter stringWriter = new StringWriter();
+        JAXBContext context = JAXBContext.newInstance(data.getClass());
+        Marshaller m = context.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+        m.marshal(data, stringWriter);
+        return stringWriter.toString();
     }
 
 }

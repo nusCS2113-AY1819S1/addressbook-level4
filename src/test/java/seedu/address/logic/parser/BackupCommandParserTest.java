@@ -26,7 +26,7 @@ public class BackupCommandParserTest {
     @Test
     public void parse_emptyArg_parsesPasses() {
         BackupCommand expectedBackupCommand =
-                new BackupCommand(Optional.empty());
+                new BackupCommand(Optional.empty(), true, Optional.empty(), Optional.empty());
 
         assertParseSuccess(parser, "  ", expectedBackupCommand);
     }
@@ -37,7 +37,7 @@ public class BackupCommandParserTest {
         Path tempBackupFilePath = testFolder.getRoot().toPath().resolve("Temp.bak");
 
         BackupCommand expectedBackupCommand =
-                new BackupCommand(Optional.ofNullable(tempBackupFilePath));
+                new BackupCommand(Optional.ofNullable(tempBackupFilePath), true, Optional.empty(), Optional.empty());
         assertParseSuccess(parser, tempBackupFilePath.toString(), expectedBackupCommand);
     }
 }

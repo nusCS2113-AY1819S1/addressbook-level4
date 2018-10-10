@@ -43,9 +43,11 @@ public class BackupCommandTest {
     @Test
     public void execute_backupSuccess() {
         BackupCommand command = new BackupCommand(
-                Optional.ofNullable(model.getUserPrefs().getAddressBookBackupFilePath()));
+                Optional.ofNullable(model.getUserPrefs().getAddressBookBackupFilePath()), true,
+                Optional.empty(), Optional.empty());
         BackupCommand expectedCommand = new BackupCommand(
-                Optional.ofNullable(model.getUserPrefs().getAddressBookBackupFilePath()));
+                Optional.ofNullable(model.getUserPrefs().getAddressBookBackupFilePath()), true,
+                Optional.empty(), Optional.empty());
         CommandResult result = command.execute(model, new CommandHistory());
         CommandResult expectedResult = expectedCommand.execute(expectedModel, new CommandHistory());
         assertEquals(expectedResult.feedbackToUser, result.feedbackToUser);
