@@ -259,11 +259,13 @@ public class ParserUtil {
 
     public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
         requireNonNull(isFlagged);
-        String trimmedFlaggedValue = isFlagged.trim();
+        String trimmedFlaggedValue = isFlagged.trim().toLowerCase();
         switch(trimmedFlaggedValue) {
+            case "false":
             case "0":
                 trimmedFlaggedValue = "false";
                 break;
+            case "true":
             case "1":
                 trimmedFlaggedValue = "true";
                 break;

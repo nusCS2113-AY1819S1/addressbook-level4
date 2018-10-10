@@ -1007,7 +1007,8 @@ Use case ends
 === Use case: Group Distribution
 *Precondition*
 
-1.  Group's exist in the AddressBook
+1.  Student must exist in the AddressBook
+2.  Number of groups must be less than number of Students
 
 *MSS*
 
