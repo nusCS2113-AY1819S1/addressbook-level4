@@ -1,7 +1,5 @@
 package seedu.address.logic.parser;
 
-
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEDIAN;
@@ -11,9 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TWENTY_FIVE;
 import seedu.address.logic.commands.GradeSummaryCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-
-
-
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -29,7 +24,8 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
     public GradeSummaryCommand parse(String args) throws ParseException {
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_TWENTY_FIVE, PREFIX_SEVENTY_FIVE, PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN);
+                ArgumentTokenizer.tokenize(args, PREFIX_TWENTY_FIVE, PREFIX_SEVENTY_FIVE,
+                        PREFIX_HIGHEST, PREFIX_MEAN, PREFIX_MEDIAN);
 
         String commandToRun = "";
 
@@ -51,6 +47,5 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
 
         return new GradeSummaryCommand(commandToRun);
     }
-
 
 }

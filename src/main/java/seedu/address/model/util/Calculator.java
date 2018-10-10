@@ -66,7 +66,7 @@ public class Calculator {
     /**
      * find the last 25 percent student's name and scores.
      */
-    public ArrayList<Person> find75th(ObservableList<Person>  personList) {
+    public ArrayList<Person> find75th(ObservableList<Person> personList) {
         ArrayList<Person> sortedList =
                 new ArrayList<Person>(SortGrade.bubbleSort(personList, personList.size()));
 

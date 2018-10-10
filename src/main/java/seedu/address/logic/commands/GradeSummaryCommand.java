@@ -1,5 +1,8 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
+
 import java.util.ArrayList;
 
 import seedu.address.logic.CommandHistory;
@@ -10,8 +13,7 @@ import seedu.address.model.util.Calculator;
 
 import seedu.address.ui.DisplayGrade;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
+
 
 
 /**
@@ -75,7 +77,7 @@ public class GradeSummaryCommand extends Command {
             int mean = calc.calculateMean(model.getFilteredPersonList());
             return new CommandResult(String.format("The mean is " + mean));
         }
-        if("MEDIAN".equals(commandType)){
+        if ("MEDIAN".equals(commandType)) {
             int median = calc.calculateMedian(model.getFilteredPersonList());
             return new CommandResult(String.format("Median in class is " + median));
         }
