@@ -106,34 +106,34 @@ When you are ready to start coding,
 .Architecture Diagram
 image::Architecture.png[width="600"]
 
-The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each gradebookComponent.
+The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
 
-* At app launch: Initializes the gradebookComponents in the correct sequence, and connects them up with each other.
-* At shut down: Shuts down the gradebookComponents and invokes cleanup method where necessary.
+* At app launch: Initializes the components in the correct sequence, and connects them up with each other.
+* At shut down: Shuts down the components and invokes cleanup method where necessary.
 
-<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other gradebookComponents. Two of those classes play important roles at the architecture level.
+<<Design-Commons,*`Commons`*>> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.
 
-* `EventsCenter` : This class (written using https://github.com/google/guava/wiki/EventBusExplained[Google's Event Bus library]) is used by gradebookComponents to communicate with other gradebookComponents using events (i.e. a form of _Event Driven_ design)
+* `EventsCenter` : This class (written using https://github.com/google/guava/wiki/EventBusExplained[Google's Event Bus library]) is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
-The rest of the App consists of four gradebookComponents.
+The rest of the App consists of four components.
 
 * <<Design-Ui,*`UI`*>>: The UI of the App.
 * <<Design-Logic,*`Logic`*>>: The command executor.
 * <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
 * <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
 
-Each of the four gradebookComponents
+Each of the four components
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
 
-For example, the `Logic` gradebookComponent (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
+For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java` interface and exposes its functionality using the `LogicManager.java` class.
 
 .Class Diagram of the Logic Component
 image::LogicClassDiagram.png[width="800"]
@@ -141,7 +141,7 @@ image::LogicClassDiagram.png[width="800"]
 [discrete]
 ==== Events-Driven nature of the design
 
-The _Sequence Diagram_ below shows how the gradebookComponents interact for the scenario where the user issues the command `delete 1`.
+The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
 
 .Component interactions for `delete 1` command (part 1)
 image::SDforDeletePerson.png[width="800"]
@@ -155,12 +155,12 @@ The diagram below shows how the `EventsCenter` reacts to that event, which event
 image::SDforDeletePersonEventHandling.png[width="800"]
 
 [NOTE]
-Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between gradebookComponents.
+Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.
 
-The sections below give more details of each gradebookComponent.
+The sections below give more details of each component.
 
 [[Design-Ui]]
-=== UI gradebookComponent
+=== UI component
 
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
@@ -169,16 +169,16 @@ image::UiClassDiagram.png[width="800"]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` gradebookComponent uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
-The `UI` gradebookComponent,
+The `UI` component,
 
-* Executes user commands using the `Logic` gradebookComponent.
+* Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` change.
 * Responds to events raised from various parts of the App and updates the UI accordingly.
 
 [[Design-Logic]]
-=== Logic gradebookComponent
+=== Logic component
 
 [[fig-LogicClassDiagram]]
 .Structure of the Logic Component
@@ -192,13 +192,13 @@ link:{repoURL}/src/main/java/seedu/address/logic/Logic.java[`Logic.java`]
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
-Given below is the Sequence Diagram for interactions within the `Logic` gradebookComponent for the `execute("delete 1")` API call.
+Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.
 
 .Interactions Inside the Logic Component for the `delete 1` Command
 image::DeletePersonSdForLogic.png[width="800"]
 
 [[Design-Model]]
-=== Model gradebookComponent
+=== Model component
 
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
@@ -210,7 +210,7 @@ The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Address Book data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
-* does not depend on any of the other three gradebookComponents.
+* does not depend on any of the other three components.
 
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
@@ -218,14 +218,14 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
 image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
-=== Storage gradebookComponent
+=== Storage component
 
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/storage/Storage.java[`Storage.java`]
 
-The `Storage` gradebookComponent,
+The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
@@ -233,7 +233,7 @@ The `Storage` gradebookComponent,
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple gradebookComponents are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
 == Implementation
 
@@ -484,7 +484,7 @@ We have two types of tests:
 
 .  *GUI Tests* - These are tests involving the GUI. They include,
 .. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
-.. _Unit tests_ that test the individual gradebookComponents. These are in `seedu.address.ui` package.
+.. _Unit tests_ that test the individual components. These are in `seedu.address.ui` package.
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
 e.g. `seedu.address.commons.StringUtilTest`
@@ -538,22 +538,22 @@ b. Require developers to download those libraries manually (this creates extra w
 
 Suggested path for new programmers:
 
-1. First, add small local-impact (i.e. the impact of the change does not go beyond the gradebookComponent) enhancements to one gradebookComponent at a time. Some suggestions are given in <<GetStartedProgramming-EachComponent>>.
+1. First, add small local-impact (i.e. the impact of the change does not go beyond the component) enhancements to one component at a time. Some suggestions are given in <<GetStartedProgramming-EachComponent>>.
 
-2. Next, add a feature that touches multiple gradebookComponents to learn how to implement an end-to-end feature across all gradebookComponents. <<GetStartedProgramming-RemarkCommand>> explains how to go about adding such a feature.
+2. Next, add a feature that touches multiple components to learn how to implement an end-to-end feature across all components. <<GetStartedProgramming-RemarkCommand>> explains how to go about adding such a feature.
 
 [[GetStartedProgramming-EachComponent]]
-=== Improving each gradebookComponent
+=== Improving each component
 
-Each individual exercise in this section is gradebookComponent-based (i.e. you would not need to modify the other gradebookComponents to get it to work).
+Each individual exercise in this section is component-based (i.e. you would not need to modify the other components to get it to work).
 
 [discrete]
-==== `Logic` gradebookComponent
+==== `Logic` component
 
 *Scenario:* You are in charge of `logic`. During dog-fooding, your team realize that it is troublesome for the user to type the whole command in order to execute a command. Your team devise some strategies to help cut down the amount of typing necessary, and one of the suggestions was to implement aliases for the command words. Your job is to implement such aliases.
 
 [TIP]
-Do take a look at <<Design-Logic>> before attempting to modify the `Logic` gradebookComponent.
+Do take a look at <<Design-Logic>> before attempting to modify the `Logic` component.
 
 . Add a shorthand equivalent alias for each of the individual commands. For example, besides typing `clear`, the user can also type `c` to remove all persons in the list.
 +
@@ -569,12 +569,12 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` grade
 ****
 
 [discrete]
-==== `Model` gradebookComponent
+==== `Model` component
 
 *Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
-Do take a look at <<Design-Model>> before attempting to modify the `Model` gradebookComponent.
+Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
 . Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
 +
@@ -591,12 +591,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` grade
 ****
 
 [discrete]
-==== `Ui` gradebookComponent
+==== `Ui` component
 
 *Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last person in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
-Do take a look at <<Design-Ui>> before attempting to modify the `UI` gradebookComponent.
+Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
 
 . Use different colors for different tags inside person cards. For example, `friends` tags can be all in brown, and `colleagues` tags can be all in yellow.
 +
@@ -666,12 +666,12 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 
 [discrete]
-==== `Storage` gradebookComponent
+==== `Storage` component
 
 *Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
 
 [TIP]
-Do take a look at <<Design-Storage>> before attempting to modify the `Storage` gradebookComponent.
+Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
 . Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the address book can be saved in a fixed temporary location.
 +
@@ -686,7 +686,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` g
 [[GetStartedProgramming-RemarkCommand]]
 === Creating a new command: `remark`
 
-By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major gradebookComponents of the app.
+By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
 *Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
@@ -749,7 +749,7 @@ We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/s
 
 **Main:**
 
-. Add `Remark` to model gradebookComponent (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/address/model/person/Address.java[`Address`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
@@ -884,7 +884,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |modify class attendance list |alter a wrongly-marked attendance for a specific student
 
-|`* * *` |teacher |add grade gradebookComponents |differentiate the grade gradebookComponents in a module (E.g. mid term test, finals examination)
+|`* * *` |teacher |add grade components |differentiate the grade components in a module (E.g. mid term test, finals examination)
 
 |`* * *` |teacher |edit grades of students |change students marks after reviewing
 
@@ -892,7 +892,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |list grades of students |monitor my students progress
 
-|`* *` |teacher |list all grade gradebookComponents |view all the grade gradebookComponents that I have added to my module
+|`* *` |teacher |list all grade components |view all the grade components that I have added to my module
 
 |`* * *` |teacher |assign grades of students |keep track of the grades that I have given out to students
 
@@ -1285,7 +1285,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Update Module
+=== Use case: Update module
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1329,7 +1329,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Remove Module
+=== Use case: Remove module
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1373,7 +1373,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: Find Module
+=== Use case: Find module
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NONE IF NONE
@@ -1411,7 +1411,7 @@ Use case resumes at step 1.
 
 
 [discrete]
-=== Use case: List Modules
+=== Use case: List modules
 *Precondition(s)* :
 
 * TO BE INSERTED | STATE NIL IF NONE
@@ -1487,6 +1487,118 @@ Use case resumes at step 1.
 
 
 [discrete]
+=== Use case: Enrol students in modules
+*Precondition(s)* :
+
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher wants to enrol students in a module.
+2.  System successfully enrols the students in the module.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters the wrong parameter prefix.
++
+** 2b1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+* 2c. Teacher enters the wrong email format.
++
+** 2c1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+* 2d. Teacher enters the command without any matric no. and emails.
++
+** 2d1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+* 2e. Teacher enters a module code that doesn’t exist in the system.
++
+** 2e1. System informs the user that the module doesn’t exist in the system.
++
+Use case resumes at step 1.
+
+* 2f. Teacher wants to enrol a student that doesn’t exist in the system.
++
+** 2f1. System informs the user that the student doesn’t exist in the system.
++
+Use case resumes at step 1.
+
+
+[discrete]
+=== Use case: Assign a TA
+*Precondition(s)* :
+
+* TO BE INSERTED | STATE NIL IF NONE
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  Teacher assigns a student as a TA of a module.
+2.  System successfully assigns the student as a TA for the module.
++
+Use case ends.
+
+*Extensions* :
+
+* 2a. Teacher enters an invalid command.
++
+** 2a1. System displays the list of valid commands.
++
+Use case resumes at step 1.
+
+* 2b. Teacher enters the wrong parameter prefix.
++
+** 2b1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+* 2c. Teacher enters the wrong email format.
++
+** 2c1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+* 2d. Teacher enters the command without any matric no. and emails.
++
+** 2d1. System displays the correct format for the command.
++
+Use case resumes at step 1.
+
+* 2e. Teacher enters a module code that doesn’t exist in the system.
++
+** 2e1. System informs the user that the module doesn’t exist in the system.
++
+Use case resumes at step 1.
+
+* 2f. Teacher wants to enrol a student that doesn’t exist in the system.
++
+** 2f1. System informs the user that the student doesn’t exist in the system.
++
+Use case resumes at step 1.
+
+
+[discrete]
 === Use case: Add Grade Component
 *Precondition(s)* :
 
@@ -1498,7 +1610,7 @@ Use case resumes at step 1.
 
 *MSS* :
 
-1. Teacher creates grade gradebookComponent.
+1. Teacher creates grade component.
 2. System requests for confirmation by displaying input.
 3. Teacher confirms request.
 4. System indicates success message.
@@ -1516,7 +1628,7 @@ Steps 1a1-1a2 are repeated until the data entered is correct.
 +
 Use case resumes from step 2.
 
-* *a. At any time, teacher chooses to cancel creating a grade gradebookComponent.
+* *a. At any time, teacher chooses to cancel creating a grade component.
 +
 ** *a1. System requests to confirm the cancellation.
 ** *a2. Teacher confirms request.
@@ -1528,9 +1640,9 @@ Use case ends.
 === Use case: Update Grade Component
 *Precondition(s)* :
 
-* Grade gradebookComponent and corresponding module code must exist.
+* Grade component and corresponding module code must exist.
 * Percentage of grade must not exceed 100%.
-* Total sum of weightage for all grade gradebookComponents must not exceed 100%.
+* Total sum of weightage for all grade components must not exceed 100%.
 
 *Guarantees* :
 
@@ -1538,7 +1650,7 @@ Use case ends.
 
 *MSS* :
 
-1. Teacher updates grade gradebookComponent.
+1. Teacher updates grade component.
 2. System requests for confirmation by displaying input.
 3. Teacher confirms request.
 4. System indicates success message.
@@ -1556,7 +1668,7 @@ Steps 1a1-1a2 are repeated until the data entered is correct.
 +
 Use case resumes from step 2.
 
-* *a. At any time, teacher chooses to cancel updating a grade gradebookComponent.
+* *a. At any time, teacher chooses to cancel updating a grade component.
 +
 ** *a1. System requests to confirm the cancellation.
 ** *a2. Teacher confirms request.
@@ -1568,16 +1680,16 @@ Use case ends.
 === Use case: Remove Grade Component
 *Precondition(s)* :
 
-* Grade gradebookComponent must exist.
+* Grade component must exist.
 * Corresponding module must exist.
 
 *Guarantees* :
 
-* Deleting grade gradebookComponent will also delete any grade items associated to it.
+* Deleting grade component will also delete any grade items associated to it.
 
 *MSS* :
 
-1. Teacher removes grade gradebookComponent.
+1. Teacher removes grade component.
 2. System requests for confirmation by displaying input.
 3. Teacher confirms request.
 4. System indicates success message.
@@ -1595,7 +1707,7 @@ Steps 1a1-1a2 are repeated until the data entered is correct.
 +
 Use case resumes from step 2.
 
-* *a. At any time, teacher chooses to cancel removing a grade gradebookComponent.
+* *a. At any time, teacher chooses to cancel removing a grade component.
 +
 ** *a1. System requests to confirm the cancellation.
 ** *a2. Teacher confirms request.
@@ -1607,7 +1719,7 @@ Use case ends.
 === Use case: Find Grade Component
 *Precondition(s)* :
 
-* Grade gradebookComponent must exist.
+* Grade component must exist.
 
 *Guarantees* :
 
@@ -1615,8 +1727,8 @@ Use case ends.
 
 *MSS* :
 
-1. Teacher finds grade gradebookComponent.
-2. System displays details on selected grade gradebookComponent.
+1. Teacher finds grade component.
+2. System displays details on selected grade component.
 +
 Use case ends.
 
@@ -1631,7 +1743,7 @@ Steps 1a1-1a2 are repeated until the data entered is correct.
 +
 Use case resumes from step 2.
 
-* *a. At any time, teacher chooses to cancel finding grade gradebookComponent.
+* *a. At any time, teacher chooses to cancel finding grade component.
 +
 ** *a1. System requests to confirm the cancellation.
 ** *a2. Teacher confirms request.
@@ -1651,7 +1763,7 @@ Use case ends.
 
 *MSS* :
 
-1. Teacher lists grade gradebookComponent.
+1. Teacher lists grade component.
 2. System displays list.
 +
 Use case ends.
@@ -1667,7 +1779,7 @@ Steps 1a1-1a2 are repeated until the data entered is correct.
 +
 Use case resumes from step 2.
 
-* *a. At any time, teacher chooses to cancel listing a grade gradebookComponent.
+* *a. At any time, teacher chooses to cancel listing a grade component.
 +
 ** *a1. System requests to confirm the cancellation.
 ** *a2. Teacher confirms request.
