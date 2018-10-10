@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
+import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
@@ -166,8 +167,9 @@ public interface Model {
      * @code companyName has to exist in the CompanyBook
      * @code jobOffer must not already exist inside the job list of companyName
      */
-
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
+    /** Returns an unmodifiable view of the filtered company's job offer list */
+    ObservableList<JobOffer> getFilteredCompanyJobOfferList();
 
 }

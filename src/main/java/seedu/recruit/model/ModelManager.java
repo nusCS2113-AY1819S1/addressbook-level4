@@ -16,6 +16,7 @@ import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
+import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
@@ -28,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedCompanyBook versionedCompanyBook;
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
+    private final FilteredList<JobOffer> filteredJobOffers;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.
@@ -270,4 +272,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+   @Override
+    public ObservableList<JobOffer> getFilteredCompanyJobOfferList() {
+        return FXCollections.unmodifiableObservableList(filteredJobOffers);
+    }
 }

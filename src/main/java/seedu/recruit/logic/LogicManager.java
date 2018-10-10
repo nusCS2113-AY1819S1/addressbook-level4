@@ -14,6 +14,8 @@ import seedu.recruit.logic.parser.RecruitBookParser;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.JobOffer;
 
 /**
  * The main LogicManager of the app.
@@ -49,6 +51,16 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Candidate> getFilteredPersonList() {
         return model.getFilteredCandidateList();
+    }
+
+    @Override
+    public ObservableList<Company> getFilteredCompanyList() {
+        return model.getFilteredCompanyList();
+    }
+
+    @Override
+    public ObservableList<JobOffer> getFilteredCompanyJobOfferList() {
+        return model.getFilteredCompanyJobOfferList();
     }
 
     @Override

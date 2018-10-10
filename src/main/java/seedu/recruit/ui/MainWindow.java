@@ -11,7 +11,9 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
 import seedu.recruit.commons.core.Config;
 import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
@@ -40,6 +42,8 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private PersonDetailsPanel personDetailsPanel;
+    private SwitchPanel switchPanel;
+    private CompanyJobDetailsPanel companyJobDetailsPanel;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -54,7 +58,13 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
+    private BorderPane switchPanelPlaceholder;
+
+    @FXML
     private StackPane personDetailsPanelPlaceholder;
+
+    @FXML
+    private StackPane companyJobDetailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -126,11 +136,16 @@ public class MainWindow extends UiPart<Stage> {
         //browserPanel = new BrowserPanel();
         //browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personDetailsPanel = new PersonDetailsPanel(logic.getFilteredPersonList());
-        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
+        //personDetailsPanel = new PersonDetailsPanel(logic.getFilteredPersonList());
+        //personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        switchPanel = new SwitchPanel();
+        switchPanelPlaceholder.getChildren().add(switchPanel.getRoot());
+        //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        //personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(), logic.getFilteredCompanyJobOfferList());
+        companyJobDetailsPanelPlaceholder.getChildren().add(companyJobDetailsPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -195,11 +210,13 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
+    //public PersonListPanel getPersonListPanel() {
+        //return personListPanel;
+    //}
 
-    public PersonDetailsPanel getPersonDetailsPanel() {return personDetailsPanel;}
+    //public PersonDetailsPanel getPersonDetailsPanel() {return personDetailsPanel;}
+
+    public CompanyJobDetailsPanel getCompanyJobDetailsPanel() {return companyJobDetailsPanel;}
 
     void releaseResources() {
         browserPanel.freeResources();
