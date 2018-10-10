@@ -6,6 +6,8 @@ import static java.util.Objects.requireNonNull;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.forum.ForumThread;
+import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
  * Delete a certain thread. Only admin could delete threads from others,
@@ -23,12 +25,12 @@ public class DeleteThreadCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Thread deleted: %1$s";
     public static final String MESSAGE_INVALID_THREAD_ID = "Invalid Thread id";
 
-    private final Thread toDelete;
+    private final ForumThread toDelete;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an DeleteThreadCommand to add the specified {@code thread}
      */
-    public DeleteThreadCommand(Thread thread) {
+    public DeleteThreadCommand(ForumThread thread) {
         requireNonNull(thread);
         toDelete = thread;
     }
@@ -36,11 +38,17 @@ public class DeleteThreadCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        // if (model.hasThread(toDelete)) {
-        //     throw new CommandException(MESSAGE_INVALID_THREAD_ID);
-        // }
-        // model.deleteThread(toDelete);
+        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+            try {
+                ForumThread forumThread =  unitOfWork.getForumThreadRepository().getThread(toDelete.getId());
+                unitOfWork.getForumThreadRepository().deleteThread(forumThread);
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new CommandException(MESSAGE_INVALID_THREAD_ID);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toDelete));
     }
 

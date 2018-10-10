@@ -10,6 +10,7 @@ import com.t13g2.forum.commons.core.index.Index;
 import com.t13g2.forum.commons.util.StringUtil;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Address;
 import com.t13g2.forum.model.person.Email;
 import com.t13g2.forum.model.person.Name;
@@ -34,6 +35,19 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static String parseUserName(String userName) throws ParseException {
+        String trimmedUserName = userName.trim();
+        if (!User.isValidUserName(trimmedUserName)) {
+            throw new ParseException(User.MESSAGE_USER_NAME_CONSTRAINTS);
+        }
+        return trimmedUserName;
     }
 
     /**
@@ -132,7 +146,7 @@ public class ParserUtil {
         String trimmedTitle = title.trim();
         String trimmedContent = content.trim();
         if (!Announcement.isValidAnnouncement(trimmedTitle, trimmedContent)) {
-            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+            throw new ParseException(Announcement.MESSAGE_ANNOUNCEMENT_CONSTRAINTS);
         }
         return new Announcement(trimmedTitle, trimmedContent);
     }

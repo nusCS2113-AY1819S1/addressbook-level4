@@ -21,18 +21,13 @@ public class BlockUserFromPostingCommandParser implements Parser<BlockUserFromPo
      * @throws ParseException if the user input does not conform the expected format
      */
     public BlockUserFromPostingCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_USER_NAME);
-        if (!arePrefixesPresent(argMultimap, PREFIX_USER_NAME)
-            || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
-                BlockUserFromPostingCommand.MESSAGE_USAGE));
+        try {
+            String userName = ParserUtil.parseUserName(args);
+            return new BlockUserFromPostingCommand(userName);
+        } catch (ParseException pe) {
+            throw new ParseException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, BlockUserFromPostingCommand.MESSAGE_USAGE), pe);
         }
-
-        /*go to storage and get user id  bases on user name, then get user from user id*/
-        User userToBlock = new User();
-
-        return new BlockUserFromPostingCommand(userToBlock);
     }
 
     /**
