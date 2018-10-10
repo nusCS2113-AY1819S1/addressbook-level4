@@ -841,7 +841,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |create groups of students |have a list of all my students in a particular module/group
 
-|`* * *` |university lecturer |send an email to all students in any group |make module specific announcements
+|`* * *` |university lecturer |add groups to a calender |have a list of all my modules with their respective dates
+
+|`* * *` |university lecturer |send an email to a student, a group of students or students belonging to a group |make module specific announcements
 
 |`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
 
@@ -974,32 +976,41 @@ Use case ends
 === Use case: Mass Email Communication
 *Precondition*
 
-1.  Group's exist in the AddressBook
+1.  Student(s) or group's exist in the AddressBook
 
 *MSS*
 
-1.  User requests to send email with specified content to a group
-2.  AddressBook confirms with user that email was sent
+1.  User requests to send email with specified content to student(s) or group.
+2.  AddressBook sends email with specified content student(s) or group.
 +
 Use case ends
 
 *Extensions*
 
 [none]
-* 1a. AddressBook detects error in data entered.
+* 1a. AddressBook detects subject exceeds imposed word limit.
 +
 
 [none]
-** 1a1. AddressBook rejects command.
+** 1a1. AddressBook rejects command and displays error message.
 +
 Use case ends
 
 [none]
-* 1b. AddressBook detects email content exceeds word limit.
+* 1b. AddressBook detects email content exceeds size limit of 25mb.
 +
 
 [none]
 ** 1b1. AddressBook rejects command and displays error message.
++
+Use case ends
+
+[none]
+* 1c. AddressBook detects no login credential found in system.
++
+
+[none]
+** 1c1. AddressBook rejects command and displays error message.
 +
 Use case ends
 
