@@ -259,11 +259,11 @@ Step 1. The user launches the application for the first time. The `VersionedForu
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete m/CS2113 i/1` command to delete the 1st thread under module CS2113 in the forum Book. The `delete` command calls `Model#commitForumBook()`, causing the modified state of the forum Book after the `delete m/CS2113 i/1` command executes to be saved in the `ForumBookStateList`, and the `currentStatePointer` is shifted to the newly inserted forum Book state.
+Step 2. The user executes `delete m/CS2113 i/1` command to delete the 1st forumThread under module CS2113 in the forum Book. The `delete` command calls `Model#commitForumBook()`, causing the modified state of the forum Book after the `delete m/CS2113 i/1` command executes to be saved in the `ForumBookStateList`, and the `currentStatePointer` is shifted to the newly inserted forum Book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `reply m/CS2113 i/1 ...` to comment 1st thread under module CS2113 . The `reply` command also calls `Model#commitForumBook()`, causing another modified forum Book state to be saved into the `ForumBookStateList`.
+Step 3. The user executes `reply m/CS2113 i/1 ...` to comment 1st forumThread under module CS2113 . The `reply` command also calls `Model#commitForumBook()`, causing another modified forum Book state to be saved into the `ForumBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -828,15 +828,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new thread |
+|`* * *` |user |add a new forumThread |
 
-|`* * *` |user |delete his own thread |remove thread that I no longer relevant
+|`* * *` |user |delete his own forumThread |remove forumThread that I no longer relevant
 
-|`* * *` |user |find a thread under a target module by keyword |locate the desired threat without having to go through the entire list of thread under a given module
+|`* * *` |user |find a forumThread under a target module by keyword |locate the desired threat without having to go through the entire list of forumThread under a given module
 
-|`* *` |user |like a thread under a target module | indicate the usefulness of a thread under a given module
+|`* *` |user |like a forumThread under a target module | indicate the usefulness of a forumThread under a given module
 
-|`* *` |user |dislike a thread under a target module | express my change in opinion on a thread which I previously indicated as useful
+|`* *` |user |dislike a forumThread under a target module | express my change in opinion on a forumThread which I previously indicated as useful
 
 |`*` |user whom prefer to read the most liked threads |sort threads by the number of likes |locate threads which are liked the most by other users for a given module
 |=======================================================================
