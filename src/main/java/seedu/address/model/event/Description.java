@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a Event's description.
+ * Represents an Event's description.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Description {
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =
-            "Event description should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Event description can take any values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -33,10 +33,9 @@ public class Description {
 
     /**
      * Returns true if a given string is a valid description.
-     * Will implement this at a later date
      */
     public static boolean isValidDescription(String test) {
-        return true;
+        return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
     @Override

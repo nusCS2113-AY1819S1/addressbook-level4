@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class EventName {
 
     public static final String MESSAGE_EVENT_CONSTRAINTS =
-            "Event should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Event can take any values, and it should not be blank";
 
     /*
      * The first character of the event name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String NAME_VALIDATION_REGEX = "[^\\s].*";
 
     public final String fullName;
 

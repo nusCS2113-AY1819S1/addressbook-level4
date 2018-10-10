@@ -29,7 +29,7 @@ public class Event implements Comparable<Event> {
     private final LocalDate endTime; // date format: "2007-12-03"
     private final Location location;
 
-    // TODO: WILL BE IMPLEMENT IN THE NEXT VERSION FOR ADDING OF EMPOLYEES
+    // TODO: WILL BE IMPLEMENT IN THE NEXT VERSION FOR ADDING OF EMPLOYEES
     private final Set<Person> attendees = new HashSet<>();
 
     /**
@@ -135,6 +135,17 @@ public class Event implements Comparable<Event> {
     @Override
     public int compareTo(Event other) {
         return this.getEventName().fullName.compareTo(other.getEventName().fullName);
+    }
+
+
+    /**
+     * Returns true if events attendees contain person.
+     */
+    public boolean containPerson(Person person) {
+        if (attendees.isEmpty()) {
+            return false;
+        }
+        return (attendees.contains(person));
     }
 
 
