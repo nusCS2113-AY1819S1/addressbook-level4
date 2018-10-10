@@ -80,9 +80,8 @@ public class XmlUtilTest {
 
     @Test
     public void xmlAdaptedItemFromFile_fileWithMissingItemField_validResult() throws Exception {
-        thrown.expect(NullPointerException.class);
         XmlAdaptedItem actualItem = XmlUtil.getDataFromFile(
-                MISSING_ITEM_FIELD_FILE, XmlAdaptedItem.class);
+                MISSING_ITEM_FIELD_FILE, XmlAdaptedItemWithRootElement.class);
         XmlAdaptedItem expectedItem = new XmlAdaptedItem(
                 null, VALID_QUANTITY, VALID_MIN_QUANTITY, VALID_STATUS, VALID_TAGS);
         assertEquals(expectedItem, actualItem);
@@ -90,7 +89,6 @@ public class XmlUtilTest {
 
     @Test
     public void xmlAdaptedItemFromFile_fileWithInvalidItemField_validResult() throws Exception {
-        thrown.expect(IllegalValueException.class);
         XmlAdaptedItem actualItem = XmlUtil.getDataFromFile(
                 INVALID_ITEM_FIELD_FILE, XmlAdaptedItemWithRootElement.class);
         XmlAdaptedItem expectedItem = new XmlAdaptedItem(

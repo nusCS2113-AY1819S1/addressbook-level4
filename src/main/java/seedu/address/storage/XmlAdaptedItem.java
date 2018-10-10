@@ -29,7 +29,7 @@ public class XmlAdaptedItem {
     @XmlElement(required = true)
     private String minQuantity;
     @XmlElement(required = true)
-    private List<Integer> status;
+    private List<Integer> status = new ArrayList<>();
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -48,7 +48,9 @@ public class XmlAdaptedItem {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status = new ArrayList<>(status);
+        if(status != null) {
+            this.status = new ArrayList<>(status);
+        }
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
