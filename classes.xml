@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<ns2:classroomManager xmlns:ns2="seedu.address.model">
-    <classrooms/>
-</ns2:classroomManager>
