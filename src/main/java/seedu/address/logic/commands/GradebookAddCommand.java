@@ -25,7 +25,7 @@ public class GradebookAddCommand extends Command {
             + PREFIX_GRADEBOOK_MODULE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
 
-    public static final String MESSAGE_SUCCESS = "\nGradebook Item: %1$s \nModule Code: %2$s \nSuccessfully Added!";
+    public static final String MESSAGE_SUCCESS = "\nSuccessfully Added! \nModule Code: %2$s \nGradebook Item: %1$s";
     public static final String MESSAGE_DUPLICATE_COMPONENT = "This grade component already exist in Trajectory.";
 
     private final GradebookComponent toAddGradebookItem;
