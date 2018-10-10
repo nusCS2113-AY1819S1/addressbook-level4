@@ -96,12 +96,12 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_ITEM;
-        String userInput = targetIndex.getOneBased() + QUANTITY_DESC_ARDUINO+TAG_DESC_LAB2
-                + MIN_QUANTITY_DESC_RPLIDAR + NAME_DESC_RPLIDAR + TAG_DESC_LAB1;
+        String userInput = targetIndex.getOneBased() + QUANTITY_DESC_ARDUINO + TAG_DESC_LAB2 + MIN_QUANTITY_DESC_RPLIDAR
+                + NAME_DESC_RPLIDAR + TAG_DESC_LAB1;
 
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR)
                 .withQuantity(VALID_QUANTITY_ARDUINO).withMinQuantity(VALID_MIN_QUANTITY_RPLIDAR)
-                .withTags(VALID_TAG_LAB2,VALID_TAG_LAB1).build();
+                .withTags(VALID_TAG_LAB2, VALID_TAG_LAB1).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

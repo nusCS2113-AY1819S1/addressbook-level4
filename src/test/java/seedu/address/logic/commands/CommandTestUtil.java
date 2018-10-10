@@ -41,7 +41,7 @@ public class CommandTestUtil {
     public static final String TAG_DESC_LAB1 = " " + PREFIX_TAG + VALID_TAG_LAB1;
     public static final String TAG_DESC_LAB2 = " " + PREFIX_TAG + VALID_TAG_LAB2;
     public static final String NAME_DESC_RPLIDAR = " " + PREFIX_NAME + VALID_NAME_RPLIDAR;
-    public static final String QUANTITY_DESC_RPLIDAR = " " + PREFIX_MIN_QUANTITY + VALID_QUANTITY_RPLIDAR;
+    public static final String QUANTITY_DESC_RPLIDAR = " " + PREFIX_QUANTITY + VALID_QUANTITY_RPLIDAR;
     public static final String MIN_QUANTITY_DESC_RPLIDAR = " " + PREFIX_MIN_QUANTITY + VALID_MIN_QUANTITY_RPLIDAR;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "Arduino&"; // '&' not allowed in names

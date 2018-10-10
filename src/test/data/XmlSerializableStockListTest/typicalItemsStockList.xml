@@ -11,18 +11,18 @@
         <tagged>Lab1</tagged>
     </items>
     <items>
-        <name>Raspberry Pi</name>
-        <quantity>50</quantity>
-        <minQuantity>15</minQuantity>
+        <name>RPLidar</name>
+        <quantity>25</quantity>
+        <minQuantity>10</minQuantity>
         <statusReady>50</statusReady>
         <statusOnLoan>0</statusOnLoan>
         <statusFaulty>0</statusFaulty>
-        <tagged>lab2</tagged>
+        <tagged>lab1</tagged>
     </items>
     <items>
-        <name>RPLidar</name>
-        <quantity>30</quantity>
-        <minQuantity>10</minQuantity>
+        <name>Motor</name>
+        <quantity>100</quantity>
+        <minQuantity>20</minQuantity>
         <statusReady>30</statusReady>
         <statusOnLoan>0</statusOnLoan>
         <statusFaulty>0</statusFaulty>
