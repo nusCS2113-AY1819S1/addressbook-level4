@@ -5,26 +5,24 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_END_TRANSACTION;
+
+// TODO: To add transaction items with quantity.
+// import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import static java.util.Objects.requireNonNull;
 
 public class AddTransactionCommand extends Command {
 
-    private static final String COMMAND_WORD = "transaction";
-    private static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction. "
+    public static final String COMMAND_WORD = "transaction";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a transaction. "
             + "Parameters: "
             + PREFIX_PRODUCT + "PRODUCT NAME"
-            + PREFIX_QUANTITY + "PRODUCT QUANTITY"
-            + "..."
-            + PREFIX_END_TRANSACTION
-            + "\n Example: "
-            + PREFIX_PRODUCT + "Apples"
-            + PREFIX_QUANTITY + "3"
-            + PREFIX_PRODUCT + "Milk"
-            + PREFIX_QUANTITY + "2"
-            + PREFIX_END_TRANSACTION;
+            + PREFIX_PRODUCT + "PRODUCT NAME"
+            + "... \n"
+            + "Example: "
+            + PREFIX_PRODUCT + "Apples "
+            + PREFIX_PRODUCT + "Milk "
+            + PREFIX_PRODUCT + "Milk";
 
     private static final String MESSAGE_SUCCESS = "Transaction successfully recorded for time ";
     private final Transaction toAdd;

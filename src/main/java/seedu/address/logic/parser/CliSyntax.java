@@ -12,6 +12,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_PRODUCT = new Prefix("pr/");
-    public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
-    public static final Prefix PREFIX_END_TRANSACTION = new Prefix("end/");
+    // TODO: To add transaction items with quantity
+    // public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
 }
