@@ -9,9 +9,12 @@ public abstract class BaseRepository {
     public BaseRepository() {
         this.forumBookStorage = new ForumBookStorage(new FileStorage());
     }
+
     public BaseRepository(IStorage underlyingStorage){
         this.forumBookStorage = new ForumBookStorage(underlyingStorage);
     }
+
     public abstract void commit();
+
     public abstract void rollback();
 }

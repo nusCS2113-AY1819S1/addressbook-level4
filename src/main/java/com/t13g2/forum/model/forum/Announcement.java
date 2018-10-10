@@ -38,6 +38,7 @@ public class Announcement extends BaseModel {
     public static boolean isValidAnnouncement(String testTitle, String testContent) {
         return (testTitle.matches(ANNOUNCEMENT_VALIDATION_REGEX) || testContent.matches(ANNOUNCEMENT_VALIDATION_REGEX));
     }
+
     public String getTitle() {
         return title;
     }
@@ -50,9 +51,9 @@ public class Announcement extends BaseModel {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Title: ")
-                .append(getTitle())
-                .append(" Content: ")
-                .append(getContent());
+            .append(getTitle())
+            .append(" Content: ")
+            .append(getContent());
         return builder.toString();
     }
 }
