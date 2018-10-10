@@ -64,6 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteRecord(Record target) {
+        requireNonNull(target);
         versionedFinancialPlanner.removeRecord(target);
         versionedFinancialPlanner.removeRecordFromSummary(target);
         indicateFinancialPlannerChanged();
@@ -71,6 +72,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addRecord(Record record) {
+        requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);
         versionedFinancialPlanner.addRecordToSummary(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
