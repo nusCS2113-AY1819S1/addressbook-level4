@@ -38,8 +38,7 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given expenditure.
      */
     void addExpenditure(Expenditure expenditure);
 
