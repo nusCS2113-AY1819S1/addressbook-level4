@@ -87,11 +87,11 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Price parsePrice(String email) throws ParseException {
-        requireNonNull(email);
-        String trimmedPrice = email.trim();
+    public static Price parsePrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
         if (!Price.isValidPrice(trimmedPrice)) {
-            throw new ParseException(Price.PRICE_CONSTRAINTS);
+            throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
         return new Price(trimmedPrice);
     }
@@ -106,7 +106,7 @@ public class ParserUtil {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
         if (!Cost.isValidCost(trimmedCost)) {
-            throw new ParseException(Price.PRICE_CONSTRAINTS);
+            throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
     }

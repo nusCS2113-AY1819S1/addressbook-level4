@@ -9,15 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Price {
 
-    public static final String PRICE_CONSTRAINTS = "Price should be of the format 19.99 "
-            + "and adhere to the following constraints:\n"
-            + "1. The first 2 characters should only contain digits\n"
-            + "2. This is followed by a '.' and then 2 digits. ";
-    // digits
-    private static final String DOLLAR_REGEX = "\\d{1,}";
-    private static final String CENT_REGEX = "\\d{2,}"; // digits
-    public static final String PRICE_VALIDATION_REGEX = DOLLAR_REGEX + "."
-            + CENT_REGEX;
+    public static final String MESSAGE_PRICE_CONSTRAINTS = "Prices should be numerical and in 2 decimal places or none at all\n"
+            + "E.g. $4, $3.02";
+     // "$" can be omitted and is optional, prices can be in 2 decimal places or none at all
+     // e.g. $4 or $3.02 is accepted
+     public static final String PRICE_VALIDATION_REGEX = "(\\$)?\\d+(\\.\\d{2})?";
 
     public final String value;
 
@@ -28,7 +24,7 @@ public class Price {
      */
     public Price(String price) {
         requireNonNull(price);
-        checkArgument(isValidPrice(price), PRICE_CONSTRAINTS);
+        checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
         value = price;
     }
 

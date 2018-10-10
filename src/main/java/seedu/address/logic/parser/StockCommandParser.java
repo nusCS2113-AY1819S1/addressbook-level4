@@ -2,8 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
@@ -33,7 +34,7 @@ public class StockCommandParser implements Parser<StockCommand> {
     public StockCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ID, PREFIX_PRICE,
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ISBN, PREFIX_PRICE,
                         PREFIX_COST, PREFIX_QUANTITY, PREFIX_TAG);
 
         Index index;
@@ -48,8 +49,8 @@ public class StockCommandParser implements Parser<StockCommand> {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             stockBookDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_ID).isPresent()) {
-            stockBookDescriptor.setIsbn(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ID).get()));
+        if (argMultimap.getValue(PREFIX_ISBN).isPresent()) {
+            stockBookDescriptor.setIsbn(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ISBN).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             stockBookDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
