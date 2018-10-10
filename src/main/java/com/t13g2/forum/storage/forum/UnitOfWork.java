@@ -1,6 +1,9 @@
 package com.t13g2.forum.storage.forum;
 
-public class UnitOfWork implements IUnitOfWork,AutoCloseable {
+/**
+ *
+ */
+public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     @Override
     public void commit() {
 

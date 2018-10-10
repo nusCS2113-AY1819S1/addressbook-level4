@@ -2,6 +2,9 @@ package com.t13g2.forum.storage.forum;
 
 import com.t13g2.forum.model.forum.User;
 
+/**
+ *
+ */
 public interface IUserRepository {
     int addUser(User user);
 
