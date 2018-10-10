@@ -10,6 +10,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_ISBN = new Prefix("i/");
     public static final Prefix PREFIX_PRICE = new Prefix("p/");
     public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
+    public static final Prefix PREFIX_COST = new Prefix("c/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
 }

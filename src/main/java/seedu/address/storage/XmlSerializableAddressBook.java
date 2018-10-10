@@ -18,7 +18,7 @@ import seedu.address.model.book.Book;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableAddressBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate book(s).";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Book Inventory list contains duplicate book(s).";
 
     @XmlElement
     private List<XmlAdaptedBook> persons;
