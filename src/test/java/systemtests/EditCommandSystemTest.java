@@ -1,52 +1,52 @@
 package systemtests;
 
+import static com.t13g2.forum.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static com.t13g2.forum.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_TAG;
+import static com.t13g2.forum.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static com.t13g2.forum.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static com.t13g2.forum.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static com.t13g2.forum.testutil.TypicalPersons.AMY;
+import static com.t13g2.forum.testutil.TypicalPersons.BOB;
+import static com.t13g2.forum.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import com.t13g2.forum.commons.core.Messages;
+import com.t13g2.forum.commons.core.index.Index;
+import com.t13g2.forum.logic.commands.EditCommand;
+import com.t13g2.forum.logic.commands.RedoCommand;
+import com.t13g2.forum.logic.commands.UndoCommand;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.person.Address;
+import com.t13g2.forum.model.person.Email;
+import com.t13g2.forum.model.person.Name;
+import com.t13g2.forum.model.person.Person;
+import com.t13g2.forum.model.person.Phone;
+import com.t13g2.forum.model.tag.Tag;
+import com.t13g2.forum.testutil.PersonBuilder;
+import com.t13g2.forum.testutil.PersonUtil;
 
 public class EditCommandSystemTest extends AddressBookSystemTest {
 
@@ -83,7 +83,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a person with new values same as another person's values but with different name -> edited */
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
+        assertTrue(getModel().getForumBook().getPersonList().contains(BOB));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -122,7 +122,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getForumBook().getPersonList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -185,7 +185,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: edit a person with new values same as another person's values -> rejected */
         executeCommand(PersonUtil.getAddCommand(BOB));
-        assertTrue(getModel().getAddressBook().getPersonList().contains(BOB));
+        assertTrue(getModel().getForumBook().getPersonList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

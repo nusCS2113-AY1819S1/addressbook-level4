@@ -49,7 +49,7 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.address.MainApp` and try a few commands
+. Run the `MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
@@ -259,11 +259,11 @@ Step 1. The user launches the application for the first time. The `VersionedForu
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete m/CS2113 i/1` command to delete the 1st thread under module CS2113 in the forum Book. The `delete` command calls `Model#commitForumBook()`, causing the modified state of the forum Book after the `delete m/CS2113 i/1` command executes to be saved in the `ForumBookStateList`, and the `currentStatePointer` is shifted to the newly inserted forum Book state.
+Step 2. The user executes `delete m/CS2113 i/1` command to delete the 1st forumThread under module CS2113 in the forum Book. The `delete` command calls `Model#commitForumBook()`, causing the modified state of the forum Book after the `delete m/CS2113 i/1` command executes to be saved in the `ForumBookStateList`, and the `currentStatePointer` is shifted to the newly inserted forum Book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `reply m/CS2113 i/1 ...` to comment 1st thread under module CS2113 . The `reply` command also calls `Model#commitForumBook()`, causing another modified forum Book state to be saved into the `ForumBookStateList`.
+Step 3. The user executes `reply m/CS2113 i/1 ...` to comment 1st forumThread under module CS2113 . The `reply` command also calls `Model#commitForumBook()`, causing another modified forum Book state to be saved into the `ForumBookStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
@@ -399,10 +399,6 @@ If set, the name will be displayed near the top of the page.
 Setting this will add a "View on GitHub" link in the navigation bar.
 |_not set_
 
-|`site-seedu`
-|Define this attribute if the project is an official SE-EDU project.
-This will render the SE-EDU navigation bar at the top of the page, and add some SE-EDU-specific navigation items.
-|_not set_
 
 |===
 
@@ -426,7 +422,6 @@ Attributes left unset in `.adoc` files will use their *default value*, if any.
 This will cause the associated item in the navigation bar to be highlighted.
 One of: `UserGuide`, `DeveloperGuide`, ``LearningOutcomes``{asterisk}, `AboutUs`, `ContactUs`
 
-_{asterisk} Official SE-EDU projects only_
 |_not set_
 
 |`no-site-header`
@@ -489,9 +484,9 @@ We have two types of tests:
 ..  _Unit tests_ targeting the lowest level methods/classes. +
 e.g. `t13g2.forum.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `t13g2.forum.storage.StorageManagerTest`
+e.g. `StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
-e.g. `t13g2.forum.logic.LogicManagerTest`
+e.g. `LogicManagerTest`
 
 
 === Troubleshooting Testing
@@ -833,15 +828,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new thread |
+|`* * *` |user |add a new forumThread |
 
-|`* * *` |user |delete his own thread |remove thread that I no longer relevant
+|`* * *` |user |delete his own forumThread |remove forumThread that I no longer relevant
 
-|`* * *` |user |find a thread under a target module by keyword |locate the desired threat without having to go through the entire list of thread under a given module
+|`* * *` |user |find a forumThread under a target module by keyword |locate the desired threat without having to go through the entire list of forumThread under a given module
 
-|`* *` |user |like a thread under a target module | indicate the usefulness of a thread under a given module
+|`* *` |user |like a forumThread under a target module | indicate the usefulness of a forumThread under a given module
 
-|`* *` |user |dislike a thread under a target module | express my change in opinion on a thread which I previously indicated as useful
+|`* *` |user |dislike a forumThread under a target module | express my change in opinion on a forumThread which I previously indicated as useful
 
 |`*` |user whom prefer to read the most liked threads |sort threads by the number of likes |locate threads which are liked the most by other users for a given module
 |=======================================================================

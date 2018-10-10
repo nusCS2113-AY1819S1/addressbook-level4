@@ -1,25 +1,25 @@
 package systemtests;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static com.t13g2.forum.testutil.TypicalPersons.BENSON;
+import static com.t13g2.forum.testutil.TypicalPersons.CARL;
+import static com.t13g2.forum.testutil.TypicalPersons.DANIEL;
+import static com.t13g2.forum.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import com.t13g2.forum.commons.core.index.Index;
+import com.t13g2.forum.logic.commands.DeleteCommand;
+import com.t13g2.forum.logic.commands.FindCommand;
+import com.t13g2.forum.logic.commands.RedoCommand;
+import com.t13g2.forum.logic.commands.UndoCommand;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.tag.Tag;
 
 public class FindCommandSystemTest extends AddressBookSystemTest {
 
@@ -82,7 +82,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: find same persons in address book after deleting 1 of them -> 1 person found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getAddressBook().getPersonList().contains(BENSON));
+        assertFalse(getModel().getForumBook().getPersonList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);

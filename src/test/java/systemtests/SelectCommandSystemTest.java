@@ -1,22 +1,22 @@
 package systemtests;
 
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static com.t13g2.forum.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+import static com.t13g2.forum.testutil.TestUtil.getLastIndex;
+import static com.t13g2.forum.testutil.TestUtil.getMidIndex;
+import static com.t13g2.forum.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static com.t13g2.forum.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
-import static seedu.address.testutil.TestUtil.getLastIndex;
-import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
+import com.t13g2.forum.commons.core.index.Index;
+import com.t13g2.forum.logic.commands.RedoCommand;
+import com.t13g2.forum.logic.commands.SelectCommand;
+import com.t13g2.forum.logic.commands.UndoCommand;
+import com.t13g2.forum.model.Model;
 
 public class SelectCommandSystemTest extends AddressBookSystemTest {
     @Test
@@ -58,7 +58,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = getModel().getForumBook().getPersonList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered person list, select index within bounds of address book and person list -> selected */

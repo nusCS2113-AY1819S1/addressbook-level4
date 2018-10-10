@@ -34,8 +34,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
 * **`find m/CS2113 java`** : finding threads associated with content, `java`, under module `CS2113`
-* **`create m/CS2113 t/Is there mid-terms?`** : create a thread tittled as `Is there mid-terms?` under module `CS2113`.
-* **`like m/CS2113 i/1`** : like the thread with `index 1` in module `CS2113`
+* **`create m/CS2113 t/Is there mid-terms?`** : create a forumThread tittled as `Is there mid-terms?` under module `CS2113`.
+* **`like m/CS2113 i/1`** : like the forumThread with `index 1` in module `CS2113`
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -55,9 +55,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Creating a new thread : `create`
+=== Creating a new forumThread : `create`
 
-Create a new thread under a specific module +
+Create a new forumThread under a specific module +
 Format: `create m/MODULE_NAME t/THREAD_NAME [c/REPLY_MESSAGE]...`
 
 Examples:
@@ -65,9 +65,9 @@ Examples:
 * `create m/CS2113 t/what is this module like? c/I heard that the workload is very heavy`
 * `create m/CS2113 t/Is there mid-terms?`
 
-=== Replying to a thread : `reply`
+=== Replying to a forumThread : `reply`
 
-Reply to a thread under a specific thread. +
+Reply to a forumThread under a specific forumThread. +
 Format: `reply m/MODULE_NAME i/THREAD_INDEX c/REPLY_MESSAGE`
 
 Examples:
@@ -75,7 +75,7 @@ Examples:
 * `reply m/CS2113 i/1 c/It is Heavy but you get to learn a lot for it.`
 * `reply m/CS2113 i/2 c/I'm not too sure. I'm confused too!`
 
-=== Finding a thread : `find`
+=== Finding a forumThread : `find`
 
 Finds a list of threads that match the given arguments. +
 Format: `find [m/MOD_CODE] keywords`
@@ -89,17 +89,17 @@ Examples:
 * `find m/CS2113 java`
 * `find fun`
 
-=== Liking a thread : `like`
+=== Liking a forumThread : `like`
 
-Gives like to a thread under a specific module +
+Gives like to a forumThread under a specific module +
 Format: `like m/MODULE_NAME i/THREAD_INDEX`
 
 Examples:
 
 * `like m/CS2113 i/1` +
-give like to thread index 1 under module CS2113
+give like to forumThread index 1 under module CS2113
 
-=== Sorting a thread by most like : `sortdate`
+=== Sorting a forumThread by most like : `sortdate`
 
 Sort the threads under a specific module by date. +
 Format: `sortdate m/MODULE_NAME`
@@ -108,7 +108,7 @@ Examples:
 
 * `sortdate m/CS2113`
 
-=== Sorting a thread by most like : `sortlike`
+=== Sorting a forumThread by most like : `sortlike`
 
 Sort the threads under a specific module by date. +
 Format: `sortlike m/MODULE_NAME`

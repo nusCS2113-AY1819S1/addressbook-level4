@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.person.Person;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.

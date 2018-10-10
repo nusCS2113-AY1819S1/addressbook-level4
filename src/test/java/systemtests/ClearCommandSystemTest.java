@@ -1,16 +1,16 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static com.t13g2.forum.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static com.t13g2.forum.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import com.t13g2.forum.commons.core.index.Index;
+import com.t13g2.forum.logic.commands.ClearCommand;
+import com.t13g2.forum.logic.commands.RedoCommand;
+import com.t13g2.forum.logic.commands.UndoCommand;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.ModelManager;
 
 public class ClearCommandSystemTest extends AddressBookSystemTest {
 
