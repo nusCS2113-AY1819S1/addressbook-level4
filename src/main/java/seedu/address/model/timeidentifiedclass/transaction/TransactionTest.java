@@ -1,5 +1,5 @@
-package seedu.address.model.transaction;
-import seedu.address.model.transaction.exceptions.ClosedTransactionException;
+package seedu.address.model.timeidentifiedclass.transaction;
+import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTransactionException;
 
 /**
  *  This program checks if Transaction objects behave as they should. If all is well, it should output the current time

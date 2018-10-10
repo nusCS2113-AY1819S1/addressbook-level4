@@ -1,7 +1,7 @@
 package seedu.address.model.saleshistory;
 
 import seedu.address.model.saleshistory.exceptions.DuplicateDayException;
-import seedu.address.model.shopday.ShopDay;
+import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import java.util.NoSuchElementException;
 import java.util.TreeMap;
 

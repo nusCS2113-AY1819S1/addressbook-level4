@@ -1,8 +1,9 @@
-package seedu.address.model.shopday;
+package seedu.address.model.timeidentifiedclass.shopday;
 
-import seedu.address.model.shopday.exceptions.ClosedShopDayException;
-import seedu.address.model.shopday.exceptions.DuplicateTransactionException;
-import seedu.address.model.transaction.Transaction;
+import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -10,13 +11,13 @@ import java.util.TreeMap;
 import java.util.Set;
 import java.util.Iterator;
 
-public class ShopDay {
+public class ShopDay extends TimeIdentifiedClass {
     private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private static LocalDateTime time;
 
     private TreeMap<String,Transaction> shopDayRecord;
     private TreeMap<String,Reminder> reminderRecord;
-    private String date;
+    private final String date;
     private boolean isActiveDay;
 
     private void initialise() {
@@ -74,5 +75,13 @@ public class ShopDay {
 
     public void closeDay(){
         this.isActiveDay = false;
+    }
+
+    private boolean isValidDateFormat(String date) {
+        String[] splitDate = date.split("/");
+        if (isValidYear(splitDate[0]) && isValidMonth(splitDate[1]) && isValidDay(splitDate[2])) {
+            return true;
+        }
+        return false;
     }
 }

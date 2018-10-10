@@ -1,4 +1,4 @@
-package seedu.address.model.transaction.exceptions;
+package seedu.address.model.timeidentifiedclass.transaction.exceptions;
 import java.lang.Exception;
 
 public class ClosedTransactionException extends Exception {

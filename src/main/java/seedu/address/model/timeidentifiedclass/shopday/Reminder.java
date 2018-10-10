@@ -1,4 +1,4 @@
-package seedu.address.model.shopday;
+package seedu.address.model.timeidentifiedclass.shopday;
 
 public class Reminder {
     private String time;

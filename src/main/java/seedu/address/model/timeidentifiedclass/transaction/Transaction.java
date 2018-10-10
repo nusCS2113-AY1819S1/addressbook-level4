@@ -1,6 +1,7 @@
-package seedu.address.model.transaction;
+package seedu.address.model.timeidentifiedclass.transaction;
 
-import seedu.address.model.transaction.exceptions.ClosedTransactionException;
+import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTransactionException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
@@ -13,7 +14,7 @@ import java.util.Set;
  * objects in V1.2.
  */
 
-public class Transaction {
+public class Transaction extends TimeIdentifiedClass {
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private static LocalDateTime time;
 

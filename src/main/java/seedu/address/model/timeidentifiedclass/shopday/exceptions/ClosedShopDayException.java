@@ -1,4 +1,4 @@
-package seedu.address.model.shopday.exceptions;
+package seedu.address.model.timeidentifiedclass.shopday.exceptions;
 
 import java.lang.Exception;
 
