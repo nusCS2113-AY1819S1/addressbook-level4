@@ -1,15 +1,15 @@
-package t13g2.forum.logic.commands;
+package com.t13g2.forum.logic.commands;
 
-import t13g2.forum.logic.CommandHistory;
-import t13g2.forum.logic.commands.exceptions.CommandException;
-import t13g2.forum.model.Model;
-import t13g2.forum.model.person.Person;
+import com.t13g2.forum.logic.CommandHistory;
+import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.person.Person;
 
 import static java.util.Objects.requireNonNull;
-import static t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE;
-import static t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD;
-import static t13g2.forum.logic.parser.CliSyntax.PREFIX_INDEX;
-import static t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_INDEX;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT;
 
 /**
  * Create a new thread to the forum book under certain module.
@@ -17,7 +17,6 @@ import static t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT;
 /**
  * create m/MODULE_NAME t/THREAD_NAME [c/REPLY_MESSAGE]…​
  */
-create m/MODULE_NAME t/THREAD_NAME [c/REPLY_MESSAGE]…​
 
 public class CreateThreadCommand extends Command {
 
