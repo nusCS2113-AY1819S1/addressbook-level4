@@ -10,5 +10,5 @@ public class Module extends BaseModel {
     private String title;
     private String moduleCode;
 
-    private List<Thread> threads;
+    private List<ForumThread> forumThreads;
 }

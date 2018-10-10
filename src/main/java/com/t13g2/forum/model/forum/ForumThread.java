@@ -5,8 +5,7 @@ import java.util.List;
 /**
  * Represents thread under module in ForumBook
  */
-public class Thread extends BaseModel {
-
+public class ForumThread extends BaseModel {
     private int moduleId;
     private String title;
 

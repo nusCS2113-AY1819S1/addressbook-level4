@@ -7,7 +7,7 @@ import java.io.OutputStream;
  *
  */
 public interface IStorage {
-    public void writeToDisk(OutputStream outputStream);
-    public void readFromDisk(InputStream inputStream);
-    public void handleChange(IEvent changeEvent);
+    void write(OutputStream outputStream);
+    void read(InputStream inputStream);
+    void handleSourceChange(IEvent changeEvent);
 }
