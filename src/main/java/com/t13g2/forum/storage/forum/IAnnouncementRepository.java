@@ -13,4 +13,6 @@ public interface IAnnouncementRepository {
     void deleteAnnouncement(int announcementId);
 
     Announcement getAnnouncement(int announcementId);
+
+    Announcement getLatestAnnouncement();
 }
