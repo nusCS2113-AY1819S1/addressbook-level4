@@ -93,7 +93,7 @@ public class XmlAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName()));
         }
         if (!Isbn.isValidIsbn(phone)) {
-            throw new IllegalValueException(Isbn.ISBN_NUMBERS_CONSTRAINTS);
+            throw new IllegalValueException(Isbn.MESSAGE_ISBN_CONSTRAINTS);
         }
         final Isbn modelIsbn = new Isbn(phone);
 
