@@ -22,7 +22,7 @@ public class LoginCommand extends Command {
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD";
 
-    public static final String MESSAGE_SUCCESS = "Logged in successfully!";
+    public static final String MESSAGE_SUCCESS = "Logged in: %1$s";
     public static final String MESSAGE_FAILURE = "Incorrect account credentials!";
 
     private final User toLogin;
@@ -37,6 +37,11 @@ public class LoginCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        if (model.noUser(toLogin)) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
 
+        model.loginUser(toLogin);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin));
     }
 }
