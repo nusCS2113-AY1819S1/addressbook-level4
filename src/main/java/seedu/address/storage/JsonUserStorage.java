@@ -1,11 +1,11 @@
 package seedu.address.storage;
 
+import java.nio.file.Path;
+import java.util.Optional;
+
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.user.User;
-
-import java.nio.file.Path;
-import java.util.Optional;
 
 /**
  * A class to access Users stored in the hard disk as a JSON file.
