@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.book.Cost;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
@@ -86,13 +87,28 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code email} is invalid.
      */
-    public static Price parseEmail(String email) throws ParseException {
+    public static Price parsePrice(String email) throws ParseException {
         requireNonNull(email);
-        String trimmedEmail = email.trim();
-        if (!Price.isValidPrice(trimmedEmail)) {
+        String trimmedPrice = email.trim();
+        if (!Price.isValidPrice(trimmedPrice)) {
             throw new ParseException(Price.PRICE_CONSTRAINTS);
         }
-        return new Price(trimmedEmail);
+        return new Price(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String cost} into an {@code Cost}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code cost} is invalid.
+     */
+    public static Cost parseCost(String cost) throws ParseException {
+        requireNonNull(cost);
+        String trimmedCost = cost.trim();
+        if (!Cost.isValidCost(trimmedCost)) {
+            throw new ParseException(Price.PRICE_CONSTRAINTS);
+        }
+        return new Cost(trimmedCost);
     }
 
     /**

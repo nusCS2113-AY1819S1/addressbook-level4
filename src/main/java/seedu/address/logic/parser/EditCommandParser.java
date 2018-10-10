@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
@@ -50,7 +51,10 @@ public class EditCommandParser implements Parser<EditCommand> {
             editBookDescriptor.setIsbn(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ID).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
-            editBookDescriptor.setPrice(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_PRICE).get()));
+            editBookDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_COST).isPresent()) {
+            editBookDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
         }
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
             editBookDescriptor.setQuantity(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_QUANTITY).get()));

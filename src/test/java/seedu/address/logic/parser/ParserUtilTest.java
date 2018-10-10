@@ -17,9 +17,9 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Isbn;
+import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
 import seedu.address.model.book.Quantity;
-import seedu.address.model.book.Name;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
@@ -135,25 +135,25 @@ public class ParserUtilTest {
 
     @Test
     public void parseEmail_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseEmail((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePrice((String) null));
     }
 
     @Test
     public void parseEmail_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseEmail(INVALID_EMAIL));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parsePrice(INVALID_EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithoutWhitespace_returnsEmail() throws Exception {
         Price expectedPrice = new Price(VALID_EMAIL);
-        assertEquals(expectedPrice, ParserUtil.parseEmail(VALID_EMAIL));
+        assertEquals(expectedPrice, ParserUtil.parsePrice(VALID_EMAIL));
     }
 
     @Test
     public void parseEmail_validValueWithWhitespace_returnsTrimmedEmail() throws Exception {
         String emailWithWhitespace = WHITESPACE + VALID_EMAIL + WHITESPACE;
         Price expectedPrice = new Price(VALID_EMAIL);
-        assertEquals(expectedPrice, ParserUtil.parseEmail(emailWithWhitespace));
+        assertEquals(expectedPrice, ParserUtil.parsePrice(emailWithWhitespace));
     }
 
     @Test

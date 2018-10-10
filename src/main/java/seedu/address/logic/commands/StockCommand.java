@@ -17,6 +17,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.Cost;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
@@ -89,10 +90,11 @@ public class StockCommand extends Command {
         Name updatedName = (bookToStock.getName());
         Isbn updatedIsbn = (bookToStock.getIsbn());
         Price updatedPrice = stockBookDescriptor.getPrice().orElse(bookToStock.getPrice());
+        Cost updatedCost = bookToStock.getCost();
         Quantity updatedQuantity = bookToStock.increaseQuantity(stockBookDescriptor.getQuantity());
         Set<Tag> updatedTags = (bookToStock.getTags());
 
-        return new Book(updatedName, updatedIsbn, updatedPrice, updatedQuantity, updatedTags);
+        return new Book(updatedName, updatedIsbn, updatedPrice, updatedCost, updatedQuantity, updatedTags);
     }
 
     @Override
@@ -121,6 +123,7 @@ public class StockCommand extends Command {
         private Name name;
         private Isbn isbn;
         private Price price;
+        private Cost cost;
         private Quantity quantity;
         private Set<Tag> tags;
 
@@ -134,6 +137,7 @@ public class StockCommand extends Command {
             setName(toCopy.name);
             setIsbn(toCopy.isbn);
             setPrice(toCopy.price);
+            setCost(toCopy.cost);
             setQuantity(toCopy.quantity);
             setTags(toCopy.tags);
         }
@@ -167,6 +171,10 @@ public class StockCommand extends Command {
 
         public Optional<Price> getPrice() {
             return Optional.ofNullable(price);
+        }
+
+        public void setCost(Cost cost) {
+            this.cost = cost;
         }
 
         public void setQuantity(Quantity quantity) {

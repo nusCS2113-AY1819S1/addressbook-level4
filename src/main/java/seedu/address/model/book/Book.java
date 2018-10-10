@@ -18,20 +18,22 @@ public class Book {
     // Identity fields
     private final Name name;
     private final Isbn isbn;
-    private final Price price;
 
     // Data fields
+    private final Price price;
+    private final Cost cost;
     private final Quantity quantity;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Book(Name name, Isbn isbn, Price price, Quantity quantity, Set<Tag> tags) {
-        requireAllNonNull(name, isbn, price, quantity, tags);
+    public Book(Name name, Isbn isbn, Price price, Cost cost, Quantity quantity, Set<Tag> tags) {
+        requireAllNonNull(name, isbn, price, cost, quantity, tags);
         this.name = name;
         this.isbn = isbn;
         this.price = price;
+        this.cost = cost;
         this.quantity = quantity;
         this.tags.addAll(tags);
     }
@@ -46,6 +48,10 @@ public class Book {
 
     public Price getPrice() {
         return price;
+    }
+
+    public Cost getCost() {
+        return cost;
     }
 
     public Quantity getQuantity() {
@@ -127,6 +133,7 @@ public class Book {
         return otherBook.getName().equals(getName())
                 && otherBook.getIsbn().equals(getIsbn())
                 && otherBook.getPrice().equals(getPrice())
+                && otherBook.getCost().equals(getCost())
                 && otherBook.getQuantity().equals(getQuantity())
                 && otherBook.getTags().equals(getTags());
     }
@@ -134,7 +141,7 @@ public class Book {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, isbn, price, quantity, tags);
+        return Objects.hash(name, isbn, price, cost, quantity, tags);
     }
 
     @Override
@@ -145,6 +152,8 @@ public class Book {
                 .append(getIsbn())
                 .append(" Price: ")
                 .append(getPrice())
+                .append(" Cost: ")
+                .append(getCost())
                 .append(" Quantity: ")
                 .append(getQuantity())
                 .append(" Tags: ");

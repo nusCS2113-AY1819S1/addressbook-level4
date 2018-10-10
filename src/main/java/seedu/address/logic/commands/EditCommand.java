@@ -21,6 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.Cost;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
@@ -98,10 +99,11 @@ public class EditCommand extends Command {
         Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
         Isbn updatedIsbn = editBookDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
         Price updatedPrice = editBookDescriptor.getPrice().orElse(bookToEdit.getPrice());
+        Cost updatedCost = bookToEdit.getCost();
         Quantity updatedQuantity = editBookDescriptor.getQuantity().orElse(bookToEdit.getQuantity());
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
 
-        return new Book(updatedName, updatedIsbn, updatedPrice, updatedQuantity, updatedTags);
+        return new Book(updatedName, updatedIsbn, updatedPrice, updatedCost, updatedQuantity, updatedTags);
     }
 
     @Override
@@ -130,6 +132,7 @@ public class EditCommand extends Command {
         private Name name;
         private Isbn isbn;
         private Price price;
+        private Cost cost;
         private Quantity quantity;
         private Set<Tag> tags;
 
@@ -143,6 +146,7 @@ public class EditCommand extends Command {
             setName(toCopy.name);
             setIsbn(toCopy.isbn);
             setPrice(toCopy.price);
+            setCost(toCopy.cost);
             setQuantity(toCopy.quantity);
             setTags(toCopy.tags);
         }
@@ -176,6 +180,10 @@ public class EditCommand extends Command {
 
         public Optional<Price> getPrice() {
             return Optional.ofNullable(price);
+        }
+
+        public void setCost(Cost cost) {
+            this.cost = cost;
         }
 
         public void setQuantity(Quantity quantity) {
