@@ -16,7 +16,6 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.EventSelectionChangedEvent;
 import seedu.address.model.event.Event;
-import seedu.address.ui.EventPageFormatter;
 
 /**
  * The Browser Panel of the App.
@@ -65,16 +64,14 @@ public class BrowserPanel extends UiPart<Region> {
     /**
      * Loads a HTML file with variables passed into it
      */
-    private void loadEventPage(Event event) throws MalformedURLException{
+    private void loadEventPage(Event event) throws MalformedURLException {
         try {
             EventPageFormatter.formatEvent(event);
             URL searchPage = new URL(formatEventPageUrl(event));
             loadPage(searchPage.toExternalForm());
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             //TODO
-        }
-        catch (URISyntaxException e) {
+        } catch (URISyntaxException e) {
             //TODO
         }
     }

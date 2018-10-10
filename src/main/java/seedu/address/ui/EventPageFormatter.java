@@ -4,11 +4,11 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.Set;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Set;
 
 import seedu.address.model.event.Address;
 import seedu.address.model.event.Attendance;
@@ -42,6 +42,9 @@ public class EventPageFormatter {
         fWriter.close();
     }
 
+    /**
+     * Formats Event Search Page with data from event
+     */
     public static void formatEvent(Event event) throws IOException, URISyntaxException {
         SEARCH_PAGE_PATH = BrowserPanel.getSearchPageUrlWithoutName().toURI();
         SEARCH_PAGE_STRING = readFile(SEARCH_PAGE_PATH);
