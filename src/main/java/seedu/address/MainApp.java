@@ -38,7 +38,6 @@ import seedu.address.ui.UiManager;
 /**
  * The main entry point to the application.
  */
-//This is so I can PR
 public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 6, 0, true);
