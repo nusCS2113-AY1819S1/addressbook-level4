@@ -40,21 +40,33 @@ public class Event {
     }
 
     public Name getName() {
+
         return name;
+
     }
 
-    public Contact getContact() { return contact; }
+    public Contact getContact() {
+
+        return contact;
+
+    }
 
     public Phone getPhone() {
+
         return phone;
+
     }
 
     public Email getEmail() {
+
         return email;
+
     }
 
     public Address getAddress() {
+
         return address;
+        
     }
 
     /**
