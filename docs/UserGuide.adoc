@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= NUSync - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -14,11 +14,11 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team W12-2`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+NUSync is a program for NUS students who *strive to keep their lives organised, despite their busy schedules*. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -219,6 +219,97 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+=== Accessing the password manager : `pVault`
+
+Enters the password manager program. This program stores and manages the user's passwords in a secure and convenient manner. +
+Format: `pVault` +
+
+Sub-Functions in `pVault`:
+****
+* `pVault new <name> <password> <password>` +
+<name> is the given name for the password, +
+<password> is the new password that is to be stored. +
+Upon completing this, the user will be prompted to enter his pVault password, for the new password to be stored.
+* `pVault list` +
+Lists out all the passwords as well as the last updated time
+* `pVault delete <name>` +
+Deletes password from the password vault
+* `pVault clear` +
+Deletes all passwords from the password vault. The user will be prompted to re-enter the pVault password, before the command is executed
+* `pVault changePass <name> <new password>` +
+Changes the password used. User would have to re-enter the pVault password before the command is executed
+****
+
+=== Accessing the timeslot manager: `tSlot`
+
+Enters the timeslot manager program. This program stores users' timeslots (which are uploaded), and other parties' timeslots (e.g. friends, tutors, etc), which facilitates the scheduling stage for meet-ups. +
+Format: `tSlot`
+
+Sub-Functions in `tSlot`: +
+<time is expressed in 24 hours> +
+<* indicates optional input>
+
+****
+* `tSlot busyAdd <day 1-7> <timeStart> <timeEnd> <name>` +
+Adds a busy time slot for that day, for a friend. Enter "me" under name, if you are adding
+things under your own timeslot.
+* `tSlot list` +
+Lists out all the busy time slots. and unique index (id) would be displayed at the side for easier deletion
+* `tSlot delete <name/id>` +
+Deletes the specified busy timeslot +
+* `tSlot edit <name/id> <newDay> <timeStart> <timeEnd>` +
+Edits a current busy time slot +
+* `tSlot findTime <*day 1-7> <*timeStart> <*timeEnd> <duration>` +
+Finds the next available time slot. +
+If no fields entered for day→ Assumed to be today +
+If no fields entered for timeStart→ time starts at 0000 +
+If no fields entered for timeEnd→ time ends at 2359 +
+* `tSlot clear` +
+Clears all busy timeslots for all users. +
+This prompts user to enter 'Y' or 'N'. The command will be executed if 'Y' is entered
+****
+
+=== Accessing the consultation manager: `conslt`
+
+Enters the consultation manager program. This program books consultation slots with their TAs on behalf of the user. This program makes use of the data entered in tSlot, in order to find the teaching assistant’s free timeslots. As such, the user should update timeslot manager first, before using the consultation manager. +
+Format: `conslt`
+
+Sub-Functions in `conslt`:
+****
+* `conslt <TA> <date>` +
+<TA> refers to the name of the teaching assistant +
+<date> refers to the specified date, in a DDMMYY format +
+This lists out all available hours in that day, for that TA +
+* `conslt request <name> <TA> <date> <time> <duration>` +
+<TA> refers to the name of teaching assistant +
+<date> refers to the specified date, in a DDMMYY format +
+<time> refers to the specified time, in a 24H format, e.g. 1400 for 2pm +
+<duration> refers to the duration of the consultation in hours, e.g. 0.5 for a half an hour consultation +
+Will help to send a template email to the TA to request for the timeslot.
+****
+
+=== Accessing the notes manager: `notes`
+
+Enters the notes manager program. This program downloads the user's notes from IVLE in a one-click process, and can be used to print the notes. +
+Format: `notes`
+
+Sub-Functions in `notes`:
+****
+* `notePrint addSubject <name>` +
+After entering the name, the user would be prompted to add a path to the desired location to store the notes. ALL is blacklisted word for name +
+* `notePrint list` +
+Lists out all the subjects and the desired paths +
+* `notePrint fetch <name>` +
+Will fetch notes from IVLE, entering ALL will fetch all the notes +
+* `notePrint print <name>` +
+Prints using the default printer as selected. entering ALL print everything (extra confirmation will be prompted) +
+* `notePrint delete <name>` +
+Deletes the subject +
+* `notePrint clear` +
+Prompts user to enter Y/N. If Y, then all notes and paths are deleted
+
+****
+
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -245,16 +336,20 @@ _{explain how the user can enable/disable data encryption}_
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
+* *Consultation manager* : `conslt`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list`
 * *Help* : `help`
+* *History* : `history`
+* *List* : `list`
+* *Notes manager* : `notes`
+* *Password manager* : `pVault`
+* *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`
-* *History* : `history`
+* *Timeslot manager* : `tSlot`
 * *Undo* : `undo`
-* *Redo* : `redo`

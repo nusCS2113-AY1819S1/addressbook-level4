@@ -4,51 +4,43 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
+AddressBook - Level 4 was developed by the https://github.com/CS2113-AY1819S1-W12-2[W12-2] team. +
+
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
-
-Role: Project Advisor
-
-'''
-
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
+=== Lee Geng Yu
+image::https://github.com/CS2113-AY1819S1-W12-2/main/blob/master/docs/images/leegengyu.png[width="150", align="left"]
+{empty} [https://github.com/leegengyu[github]] [<<leegengyu#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: UI
+Responsibilities: Logic
 
 '''
 
-=== Johnny Doe
-image::yijinl.jpg[width="150", align="left"]
-{empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
+=== Low Wei Jie, Oscar
+image::https://github.com/CS2113-AY1819S1-W12-2/main/blob/master/docs/images/auskure.png[width="150", align="left"]
+{empty}[http://github.com/auskure[github]] [<<auskure#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Storage
 
 '''
 
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
+=== Hu Yiqing
+image::https://github.com/CS2113-AY1819S1-W12-2/main/blob/master/docs/images/bearperson1.png[width="150", align="left"]
+{empty}[http://github.com/BearPerson1[github]] [<<BearPerson1#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Dev Ops + Threading
+Responsibilities: Model
 
 '''
 
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
+=== Lim Zhi Hui Alden
+image::https://github.com/CS2113-AY1819S1-W12-2/main/blob/master/docs/images/e0201942.png[width="150", align="left"]
+{empty}[http://github.com/e0201942[github]] [<<e0201942#, portfolio>>]
 
 Role: Developer +
 Responsibilities: UI
