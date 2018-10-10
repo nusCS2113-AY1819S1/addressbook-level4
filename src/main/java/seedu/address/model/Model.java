@@ -3,11 +3,17 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.person.Product;
 import seedu.address.model.login.Password;
+import seedu.address.model.login.UniqueUsersList;
+import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
-import seedu.address.model.person.Person;
+import seedu.address.model.login.exceptions.DuplicateUserException;
+import seedu.address.model.login.exceptions.UserNotFoundException;
+import seedu.address.model.person.Product;
 import seedu.address.model.distributor.Distributor;
 
 /**
@@ -16,7 +22,7 @@ import seedu.address.model.distributor.Distributor;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
 
-    Predicate<Distributor> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Distributor> PREDICATE_SHOW_ALL_DISTRIBUTORS = unused -> true;
 
     Predicate<Product> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
@@ -26,11 +32,15 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getProductInfoBook();
 
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getDistributorInfoBook();
+
     /**
      * Returns true if a distributor with the same identity as {@code distributor} exists in the Inventarie.
      */
     boolean hasDistributor(Distributor distributor);
-  
+
+    /**
      * Returns true if a product with the same identity as {@code product} exists in the address book.
      */
     boolean hasPerson(Product product);
@@ -112,7 +122,55 @@ public interface Model {
      */
     void commitAddressBook();
 
+    /**
+     * Adds a transaction to the sales history
+     */
+    void addTransaction(Transaction transaction);
+
+    /**
+     * Returns a given day's transaction history
+     */
+    String getDaysHistory(String day);
+
+    /**
+     * Returns the active day's transaction history
+     */
+    String getActiveDayHistory();
+
+    /**
+     * Returns the latest transaction.
+     */
+    Transaction getLastTransaction();
+    
+    /**
+    * Sets the user list
+    */
+    void setUsersList(UniqueUsersList uniqueUserList);
+
+    /** Returns the UserDatabase */
+    ReadOnlyAddressBook getUserDatabase();
+
+    /**
+     * Deletes the given user.
+     * The user must exist in the user database.
+     */
+    void deleteUser(User target) throws UserNotFoundException;
+
+    /**
+     * Adds the given user.
+     * {@code user} must not already exist in the user database.
+     */
+    void addUser(User person) throws DuplicateUserException;
+
     boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException;
 
+    boolean checkCredentials(Username username, Password password) throws AuthenticatedException;
 
+    boolean hasLoggedIn();
+
+    void setLoginStatus(boolean status);
+
+    User getLoggedInUser();
+
+    void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException;
 }

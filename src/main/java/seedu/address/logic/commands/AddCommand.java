@@ -31,7 +31,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "Apple "
             + PREFIX_SERIAL_NR + "98765432 "
             + PREFIX_DISTRIBUTOR + "Alfred "
-            + PREFIX_PRODUCT_INFO + "CONTAINS CHIKEN ETC "
+            + PREFIX_PRODUCT_INFO + "Contains chicken etc "
             + PREFIX_TAG + "fruit ";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
@@ -68,4 +68,6 @@ public class AddCommand extends Command {
                 || (other instanceof AddCommand // instanceof handles nulls
                 && toAdd.equals(((AddCommand) other).toAdd));
     }
+
+
 }

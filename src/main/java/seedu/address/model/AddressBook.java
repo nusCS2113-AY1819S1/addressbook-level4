@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.distributor.Distributor;
@@ -10,6 +11,9 @@ import seedu.address.model.distributor.UniqueDistributorList;
 
 import seedu.address.model.person.Product;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.saleshistory.SalesHistory;
+import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 
 /**
@@ -18,18 +22,22 @@ import seedu.address.model.person.UniquePersonList;
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
-    /*private final UniquePersonList persons;
-
+    private final UniquePersonList persons;
+    private final SalesHistory salesHistory;
+    private Transaction lastTransaction;
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
+     *   */
 
     {
         persons = new UniquePersonList();
-    }*/
+        salesHistory = new SalesHistory();
+        lastTransaction = null;
+    }
 
     private final UniqueDistributorList distributors;
 
@@ -74,16 +82,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.distributors.setDistributors(distributors);
     }
 
-    /*
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
-
+    */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setDistributors(newData.getDistributorList());
     }
-    */
 
     //// product-level operations
 
@@ -149,6 +157,34 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     
     /**
+     * Adds a transaction to the active shopday.
+     */
+
+    public void addTransaction(Transaction transaction) {
+        salesHistory.addTransaction(transaction);
+        lastTransaction = transaction;
+    }
+
+    public String getDaysHistory(String day) {
+        ShopDay requiredDay;
+        try {
+            requiredDay = salesHistory.getDaysHistory(day);
+        } catch (NoSuchElementException e) {
+            return "Day does not exist\n";
+        }
+        return requiredDay.getDaysTransactions();
+    }
+
+    public String getActiveDayHistory() {
+        ShopDay activeDay = salesHistory.getActiveDay();
+        return activeDay.getDaysTransactions();
+    }
+
+    public Transaction getLastTransaction() {
+        return lastTransaction;
+    }
+
+    /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
@@ -168,7 +204,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     @Override
-    public String toDString() {
+    public String toString() {
         return distributors.asUnmodifiableObservableList().size() + " distributors";
         // TODO: refine later
     }
@@ -177,7 +213,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Product> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
-    */
 
     @Override
     public ObservableList<Distributor> getDistributorList() {

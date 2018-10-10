@@ -1,4 +1,4 @@
-/*package seedu.address.logic.commands;
+package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,6 +10,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
+*/
 
 public class FindCommand extends Command {
 
@@ -41,4 +42,4 @@ public class FindCommand extends Command {
                 && predicate.equals(((FindCommand) other).predicate)); // state check
     }
 }
-*/
+

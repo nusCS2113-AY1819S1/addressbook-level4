@@ -2,6 +2,10 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT_INFO;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DISTRIBUTOR;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -25,6 +29,16 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+
+    public static final String VALID_LOGIN_USERNAME = "slap";
+    public static final String VALID_LOGIN_PASSWORD = "password";
+
+    public static final String LOGIN_VALID_DESC_USERNAME = " " + PREFIX_USERNAME + VALID_LOGIN_USERNAME;
+    public static final String LOGIN_VALID_DESC_PASSWORD = " " + PREFIX_PASSWORD + VALID_LOGIN_PASSWORD;
+    public static final String LOGIN_INVALID_DESC_USERNAME = " " + PREFIX_USERNAME + VALID_LOGIN_USERNAME + "@@";
+    public static final String LOGIN_INVALID_DESC_PASSWORD = " " + PREFIX_PASSWORD + VALID_LOGIN_PASSWORD + "@@";
+    public static final String NEWPASS_VALID_DESC_PASSWORD = " " + PREFIX_NEW_PASSWORD + VALID_LOGIN_PASSWORD + "AA";
+    public static final String NEWPASS_INVALID_DESC_PASSWORD = " " + PREFIX_NEW_PASSWORD + VALID_LOGIN_PASSWORD + "AA@";
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
