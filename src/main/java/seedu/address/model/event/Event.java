@@ -66,7 +66,7 @@ public class Event {
     public Address getAddress() {
 
         return address;
-        
+
     }
 
     /**
