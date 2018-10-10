@@ -28,8 +28,10 @@ public class LimitCommand extends Command {
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
             + PREFIX_MONEYFLOW + "100 ";
 
-    public static final String MESSAGE_BSSIC = "The limit you have set: %.2f \n"
+    public static final String MESSAGE_BSSIC_SPEND = "The limit you have set: %.2f \n"
             + "The total money you have spent: %.2f\n";
+    public static final String MESSAGE_BSSIC_EARNED = "The limit you have set: %.2f \n"
+            + "The total money you have earned: %.2f\n";
 
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! "; //%l$s";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^";
@@ -37,7 +39,7 @@ public class LimitCommand extends Command {
     private Record recordNow;
     private int countRecord = 0;
     private double sumOfSpend = 0;
-
+    private String output;
     public LimitCommand (Limit limitIn) {
         requireNonNull(limitIn);
         limit = limitIn;
@@ -58,17 +60,21 @@ public class LimitCommand extends Command {
                 sumOfSpend += recordNow.getMoneyFlow().toDouble();
             }
         }
+        if (sumOfSpend >= 0) {
+            output = String.format(MESSAGE_BSSIC_EARNED, -1 * limit.getLimitMoneyFlow().toDouble(), sumOfSpend)
+                    + MESSAGE_NOT_EXCEED;
+        } else
+            if (limit.getLimitMoneyFlow().isNotLarger(sumOfSpend)) {
+                output = String.format(MESSAGE_BSSIC_SPEND, -1 * limit.getLimitMoneyFlow().toDouble(), (
+                        -1 * sumOfSpend)) + MESSAGE_NOT_EXCEED;
+            } else {
+                output = String.format(MESSAGE_BSSIC_SPEND, -1 * limit.getLimitMoneyFlow().toDouble(), (
+                        -1 * sumOfSpend)) + MESSAGE_EXCEED;
+            }
+        return new CommandResult(String.format("Date Period: %s -- %s  ", limit.getDateStart(), limit.getDateEnd())
+                + output);
 
-        if (limit.getLimitMoneyFlow().isNotLarger(sumOfSpend)) {
-            return new CommandResult(
-                    String.format(MESSAGE_BSSIC, -1 * limit.getLimitMoneyFlow().toDouble(), (-1 * sumOfSpend))
-                            + MESSAGE_NOT_EXCEED);
-        } else {
-            return new CommandResult(
-                    String.format(MESSAGE_BSSIC, -1 * limit.getLimitMoneyFlow().toDouble(), (-1 * sumOfSpend))
-                            + MESSAGE_EXCEED);
 
-        }
     }
     @Override
     public boolean equals (Object other) {
