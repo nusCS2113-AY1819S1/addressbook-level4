@@ -61,7 +61,7 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.trim();
         if (!Isbn.isValidIsbn(trimmedPhone)) {
-            throw new ParseException(Isbn.ISBN_NUMBERS_CONSTRAINTS);
+            throw new ParseException(Isbn.MESSAGE_ISBN_CONSTRAINTS);
         }
         return new Isbn(trimmedPhone);
     }
