@@ -15,7 +15,7 @@ public class SummaryHashMap {
     private HashMap<Date, Summary> summaryMap;
 
     public SummaryHashMap() {
-        summaryMap = new HashMap<Date, Summary>();
+        summaryMap = new HashMap();
     }
 
     /**
@@ -25,8 +25,9 @@ public class SummaryHashMap {
         Date dateOfRecord = record.getDate();
         if (!isDatePresentInMap(dateOfRecord)) {
             summaryMap.put(dateOfRecord, new Summary(record));
+        } else {
+            summaryMap.get(dateOfRecord).add(record);
         }
-        summaryMap.get(dateOfRecord).add(record);
     }
 
     /**

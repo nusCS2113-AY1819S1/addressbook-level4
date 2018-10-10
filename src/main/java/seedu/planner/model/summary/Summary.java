@@ -7,6 +7,7 @@ import seedu.planner.model.record.Record;
 /**
  * This object represents the in memory model of a summary of all financial activity within a day.
  */
+// TODO: refactor this such that the pattern is not needed here
 public class Summary {
     private Date date;
     private MoneyFlow totalExpense;
@@ -14,7 +15,13 @@ public class Summary {
     private MoneyFlow total;
 
     public Summary(Record record) {
-        // Does nothing
+        date = record.getDate();
+        MoneyFlow money = record.getMoneyFlow();
+        if (isExpense(money)) {
+            totalExpense = money;
+        } else {
+            totalIncome = money;
+        }
     }
 
     public void add(Record record) {
@@ -23,5 +30,9 @@ public class Summary {
 
     public void remove(Record record) {
         // Does nothing
+    }
+
+    private boolean isExpense(MoneyFlow money) {
+        return money.toDouble() < 0;
     }
 }
