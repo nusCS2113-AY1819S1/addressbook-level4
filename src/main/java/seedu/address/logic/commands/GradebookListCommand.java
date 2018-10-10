@@ -11,7 +11,7 @@ import seedu.address.model.gradebook.GradebookComponent;
 public class GradebookListCommand extends Command {
 
     public static final String COMMAND_WORD = "gradebook list";
-    public static final String MESSAGE_SUCCESS = "Successfully found module code! List of components in the module:";
+    public static final String MESSAGE_SUCCESS = "Success! List of components in the module:";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
@@ -23,7 +23,7 @@ public class GradebookListCommand extends Command {
             sb.append("List of Grade Component: ");
             sb.append(gc.getGradeItemName() + "\n");
         }
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + sb.toString());
+        return new CommandResult("\n" + MESSAGE_SUCCESS + "\n" + sb.toString());
     }
 }
 

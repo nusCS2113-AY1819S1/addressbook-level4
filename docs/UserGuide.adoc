@@ -358,6 +358,19 @@ Examples:
 * `class modattend c/T16 i/A6942069M` +
 Modifies the attendance of the student of the admission number A6942069M for the class T16
 
+==== List class : `class list`
+Lists class(es) with information of the class for the system. +
+Format: `class list`
+
+****
+* Class(es) must exist in order to be listed
+****
+
+Examples:
+
+* `class list` +
+Lists all the class(es) created.
+
 ==== Remove class : `class delete`
 Deletes a class with students assigned to it for a module for the system. +
 Format: `class delete c/CLASS_NAME m/MODULE_CODE`
@@ -483,7 +496,7 @@ Updated overall marks of CS2040C Assignment 1 to 20 marks.
 * `gradebook add c/CS2040C g/Final Examinations p/50` +
 Updated Final Examinations grade percentage to 50%.
 
-==== Remove Grade Component : `gradebook remove`
+==== Remove Grade Component : `gradebook remove` `[coming in v1.3]`
 Removes a grade item to a module code. +
 Format: `gradebook remove c/MODULE_CODE g/GRADE_ITEM'
 
@@ -766,6 +779,8 @@ e.g. `gradebook list grades c/CS2040C`
 e.g. `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10`
 * *Creating a class* `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT` +
 e.g. `class create c/T16 m/CG1111 e/20`
+* *List class* `class list` +
+e.g. `class list`
 * *Deleting a class* `class delete c/CLASS_NAME m/MODULE_CODE` +
 e.g. `class delete c/T16 m/CG1111`
 * *Assigning a student to class* `class addstudent c/CLASS_NAME m/MODULE_CODE` +

@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FACULTY;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CourseAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Course;
@@ -31,7 +30,7 @@ public class CourseAddCommandParser implements Parser<CourseAddCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_COURSECODE, PREFIX_FACULTY, PREFIX_COURSENAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CourseAddCommand.MESSAGE_USAGE));
         }
 
         String courseCode = argMultimap.getValue(PREFIX_COURSECODE).get();

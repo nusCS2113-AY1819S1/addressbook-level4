@@ -18,13 +18,13 @@ import seedu.address.model.StorageController;
  */
 public class CourseAddCommand extends Command {
 
-    public static final String COMMAND_WORD = "course_add";
+    public static final String COMMAND_WORD = "course add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a course into Trajectory. "
             + "Parameters: "
-            + PREFIX_COURSECODE + "CEG1"
-            + PREFIX_COURSENAME + "Computer Engineering"
-            + PREFIX_FACULTY + "School of Computing";
+            + PREFIX_COURSECODE + "CEG1 "
+            + PREFIX_COURSENAME + "Computer Engineering "
+            + PREFIX_FACULTY + "School of Computing ";
 
     public static final String MESSAGE_SUCCESS = "New course added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This course already exists in Trajectory";

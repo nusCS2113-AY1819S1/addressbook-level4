@@ -15,8 +15,8 @@ import seedu.address.model.gradebook.GradebookComponent;
  */
 public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the GradebookAddCommand
+     * and returns a GradebookAddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public GradebookAddCommand parse(String args) throws ParseException {

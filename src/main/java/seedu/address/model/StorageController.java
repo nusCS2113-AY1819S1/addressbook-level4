@@ -17,20 +17,18 @@ import seedu.address.model.note.Note;
  */
 public class StorageController {
 
-    private static final String STORAGE_COURSES = "courseList.xml";
-    private static final String STORAGE_MODULES = "modules.xml";
-    private static final String STORAGE_CLASSES = "classes.xml";
-    private static final String STORAGE_GRADEBOOK = "gradebook.xml";
-    private static final String STORAGE_NOTES = "notes.xml";
+    private static final String BASE_DIRECTORY = "data/";
+    private static final String STORAGE_COURSES = BASE_DIRECTORY + "courseList.xml";
+    private static final String STORAGE_MODULES = BASE_DIRECTORY + "modules.xml";
+    private static final String STORAGE_CLASSES = BASE_DIRECTORY + "classes.xml";
+    private static final String STORAGE_GRADEBOOK = BASE_DIRECTORY + "gradebook.xml";
+    private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
 
     private static ArrayList<Course> courseStorage = new ArrayList<Course>();
     private static ArrayList<Module> moduleStorage = new ArrayList<Module>();
     private static ArrayList<Classroom> classesStorage = new ArrayList<Classroom>();
     private static ArrayList<GradebookComponent> gradebookStorage = new ArrayList<GradebookComponent>();
     private static ArrayList<Note> noteStorage = new ArrayList<Note>();
-
-
-
 
     /**
      * This method retrieves all datasets saved locally.
@@ -136,6 +134,8 @@ public class StorageController {
     public static ArrayList<GradebookComponent> getGradebookStorage() {
         return gradebookStorage;
     }
+
+
 
     public static void setGradebookStorage(ArrayList<GradebookComponent> gradebookStorage) {
         StorageController.gradebookStorage = gradebookStorage;
