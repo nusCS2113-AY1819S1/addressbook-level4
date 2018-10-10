@@ -6,6 +6,10 @@ import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 
 public class CommentRepository extends BaseRepository implements ICommentRepository {
+    public CommentRepository(IForumBookStorage forumBookStorage) {
+        super(forumBookStorage);
+    }
+
     @Override
     public void commit() {
 

@@ -6,6 +6,10 @@ import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 
 public class ForumThreadRepository extends BaseRepository implements IForumThreadRepository {
+    public ForumThreadRepository(IForumBookStorage forumBookStorage) {
+        super(forumBookStorage);
+    }
+
     @Override
     public void commit() {
 

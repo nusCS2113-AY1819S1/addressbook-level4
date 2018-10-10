@@ -3,6 +3,10 @@ package com.t13g2.forum.storage.forum;
 import com.t13g2.forum.model.forum.Announcement;
 
 public class AnnouncementRepository extends BaseRepository implements IAnnouncementRepository {
+    public AnnouncementRepository(IForumBookStorage forumBookStorage) {
+        super(forumBookStorage);
+    }
+
     @Override
     public void commit() {
         forumBookStorage.saveAnnouncement();
