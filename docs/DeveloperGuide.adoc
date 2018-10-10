@@ -870,6 +870,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |teacher |create a class |assign students to the class
 
+|`* * *` |teacher |list a class |display information of the class
+
 |`* * *` |teacher |delete a class |remove a class that is created wrongly
 
 |`* * *` |teacher |assign student to class |add students to a class in the event that some students still have not signed up for a slot when classes begin
@@ -1945,6 +1947,32 @@ Use case ends.
 +
 Use case resumes at step 1.
 
+[discrete]
+=== Use case: List Class
+
+*Precondition(s)* :
+
+* Class(es) must exists in data file.
+
+*Guarantees* :
+
+* TBC
+
+*MSS* :
+
+1.  User enters command to list class(es).
+2.  All Classroom information is listed.
+3.  System displays message of successful listing of class(es).
++
+Use case ends.
+
+*Extensions* :
+
+* 1a. User entered invalid command.
++
+** 1a1. System shows ‘invalid format’ error.
++
+Use case resumes at step 1.
 
 [discrete]
 === Use case: Remove Class
