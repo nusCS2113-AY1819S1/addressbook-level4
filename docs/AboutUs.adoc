@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Yeo Su Yia, Denise
-image::ysydns.png[width="150", align="left"]
+image::dyeosy98.png[width="150", align="left"]
 {empty}[https://github.com/dyeosy98[github]]
 
 Role: Project Advisor
@@ -20,7 +20,7 @@ Role: Project Advisor
 '''
 
 === Bhatt Paras Krishna
-image::bhttprskrshn.png[width="150", align="left"]
+image::parask26.png[width="150", align="left"]
 {empty}[https://github.com/ParasK26[github]]
 
 Role: Team Lead +
@@ -29,7 +29,7 @@ Responsibilities: UI
 '''
 
 === Tahir Gara
-image::grthr.jpg[width="150", align="left"]
+image::garagaristahir.png[width="150", align="left"]
 {empty}[https://github.com/garagaristahir[github]]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Data
 '''
 
 === Amirul Maricar
-image::amrlmrcr.jpg[width="150", align="left"]
+image::amirulmaricar.png[width="150", align="left"]
 {empty}[https://github.com/amirulmaricar[github]]
 
 Role: Developer +
