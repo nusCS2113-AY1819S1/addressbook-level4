@@ -12,7 +12,7 @@ public abstract class TimeIdentifiedClass {
     private static final int NUMBER_OF_MINUTES_IN_HOUR = 60;
     private static final int NUMBER_OF_SECONDS_IN_HOUR = 60;
 
-    public boolean isValidMonth(String month) {
+    public static boolean isValidMonth(String month) {
         if (month.matches("\\d{2}")) {
             int monthValue = Integer.parseInt(month);
             if (monthValue <= NUMBER_OF_MONTHS_IN_YEAR && monthValue > 0) {
@@ -22,7 +22,7 @@ public abstract class TimeIdentifiedClass {
         return false;
     }
 
-    public boolean isValidDay(String day) {
+    public static boolean isValidDay(String day) {
         if (day.matches("\\d{2}")) {
             int dayValue = Integer.parseInt(day);
             if (dayValue <= MAXIMUM_NUMBER_OF_DAYS_IN_MONTH && dayValue > 0) {
@@ -32,7 +32,7 @@ public abstract class TimeIdentifiedClass {
         return false;
     }
 
-    public boolean isValidYear(String year) {
+    public static boolean isValidYear(String year) {
         if (year.matches("\\d{4}")) {
             return true;
         }

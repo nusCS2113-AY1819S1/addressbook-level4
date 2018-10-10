@@ -1,6 +1,7 @@
 package seedu.address.model.timeidentifiedclass.shopday;
 
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
@@ -32,17 +33,22 @@ public class ShopDay extends TimeIdentifiedClass {
         this.initialise();
     }
 
-    public ShopDay(String date) {
+    public ShopDay(String date) throws InvalidTimeFormatException {
         requireNonNull(date);
-        this.date = date;
-        this.initialise();
+        if (isValidDateFormat(date)) {
+            this.date = date;
+            this.initialise();
+        }
+        else {
+            throw new InvalidTimeFormatException();
+        }
     }
 
     public String getDay() {
         return this.date;
     }
 
-    public void addTransaction(Transaction transaction) throws ClosedShopDayException,DuplicateTransactionException {
+    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException, ClosedShopDayException,DuplicateTransactionException {
         String transactionTime = transaction.getTime();
         if (!this.isActiveDay) throw new ClosedShopDayException();
         else if (shopDayRecord.containsKey(transactionTime)) throw new DuplicateTransactionException();
@@ -51,6 +57,7 @@ public class ShopDay extends TimeIdentifiedClass {
         }
     }
 
+    // TODO: To be implemented.
     public void addReminder() {
     }
 
@@ -79,7 +86,7 @@ public class ShopDay extends TimeIdentifiedClass {
         this.isActiveDay = false;
     }
 
-    private boolean isValidDateFormat(String date) {
+    public static boolean isValidDateFormat(String date) {
         String[] splitDate = date.split("/");
         if (isValidYear(splitDate[0]) && isValidMonth(splitDate[1]) && isValidDay(splitDate[2])) {
             return true;

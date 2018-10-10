@@ -3,10 +3,14 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.saleshistory.SalesHistory;
+import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * Wraps all data at the address-book level
@@ -15,7 +19,7 @@ import seedu.address.model.person.UniquePersonList;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-
+    public final SalesHistory salesHistory;
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -25,6 +29,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        salesHistory = new SalesHistory();
     }
 
     public AddressBook() {}
@@ -83,6 +88,29 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedPerson);
 
         persons.setPerson(target, editedPerson);
+    }
+
+    /**
+     * Adds a transaction to the active shopday.
+     */
+
+    public void addTransaction(Transaction transaction) {
+        salesHistory.addTransaction(transaction);
+    }
+
+    public String getDaysHistory(String day) {
+        ShopDay requiredDay;
+        try {
+            requiredDay = salesHistory.getDaysHistory(day);
+        } catch (NoSuchElementException e) {
+            return "Day does not exist\n";
+        }
+        return requiredDay.getDaysTransactions();
+    }
+
+    public String getActiveDayHistory() {
+        ShopDay activeDay = salesHistory.getActiveDay();
+        return activeDay.getDaysTransactions();
     }
 
     /**

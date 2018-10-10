@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * The API of the Model component.
@@ -75,4 +76,19 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Adds a transaction to the sales history
+     */
+    void addTransaction(Transaction transaction);
+
+    /**
+     * Returns a given day's transaction history
+     */
+    String getDaysHistory(String day);
+
+    /**
+     * Returns the active day's transaction history
+     */
+    String getActiveDayHistory();
 }

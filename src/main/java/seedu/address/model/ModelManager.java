@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -147,4 +148,23 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //=========== Transaction methods ===================================================================
+
+
+    @Override
+    public String getActiveDayHistory() {
+        return versionedAddressBook.getActiveDayHistory();
+    }
+
+    @Override
+    public String getDaysHistory(String day) {
+        return versionedAddressBook.getDaysHistory(day);
+    }
+
+    @Override
+    public void addTransaction(Transaction transaction) {
+        versionedAddressBook.addTransaction(transaction);
+    }
 }
+
+

@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * A basic Transaction class, where the Product is taken to be a string. This will be updated with actual Product
- * objects in V1.2.
+ * objects in a later version.
  */
 
 public class Transaction extends TimeIdentifiedClass {
