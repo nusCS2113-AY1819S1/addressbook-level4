@@ -46,6 +46,8 @@ public class GradeSummaryCommandParser implements Parser<GradeSummaryCommand> {
         }
 
         return new GradeSummaryCommand(commandToRun);
+
     }
 
 }
+

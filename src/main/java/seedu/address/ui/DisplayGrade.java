@@ -63,9 +63,8 @@ public class DisplayGrade extends UiPart<Stage> {
         // Initialize the person table with all the data
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         gradeColumn.setCellValueFactory(new PropertyValueFactory<>("grade"));
-
-
         personTable.setItems(persons);
+
     }
 
 }
