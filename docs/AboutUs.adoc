@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Yeo Su Yia, Denise
-image::ysydns.png[width="150", align="left"]
+image::dyeosy98.png[width="150", align="left"]
 {empty}[https://github.com/dyeosy98[github]]
 
 Role: Project Advisor
@@ -29,7 +29,7 @@ Responsibilities: UI
 '''
 
 === Tahir Gara
-image::grthr.png[width="150", align="left"]
+image::garagaristahir.png[width="150", align="left"]
 {empty}[https://github.com/garagaristahir[github]]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Data
 '''
 
 === Amirul Maricar
-image::amrlmrcr.png[width="150", align="left"]
+image::amirulmaricar.png[width="150", align="left"]
 {empty}[https://github.com/amirulmaricar[github]]
 
 Role: Developer +
