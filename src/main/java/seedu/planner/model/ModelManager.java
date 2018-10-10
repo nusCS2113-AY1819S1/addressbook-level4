@@ -2,7 +2,9 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.planner.model.record.RecordComparator.compareNameAttribute;
 
+import java.util.Collections;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,6 +15,7 @@ import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.record.RecordComparator;
 
 /**
  * Represents the in-memory model of the financial planner data.
@@ -98,6 +101,20 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredRecordList(Predicate<Record> predicate) {
         requireNonNull(predicate);
         filteredRecords.setPredicate(predicate);
+    }
+
+    //=========== Modifying Record List Accessors =============================================================
+
+    @Override
+    public void sortFilteredRecordList(String category, Boolean ascending) {
+        requireAllNonNull(category, ascending);
+        filteredRecords.sort(RecordComparator.compareNameAttribute());
+        /*if (category == "name"){
+            filteredRecords.sort(RecordComparator.compareNameAttribute());
+        }
+        else {
+            filteredRecords.sort(RecordComparator.compareDateAttribute());
+        }*/
     }
 
     //=========== Undo/Redo =================================================================================

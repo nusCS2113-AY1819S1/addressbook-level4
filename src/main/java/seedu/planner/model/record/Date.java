@@ -110,6 +110,28 @@ public class Date {
         return false;
     }
 
+    public int dateComparator(Date other) {
+        if (this.year < other.getYear()) {
+            return -1;
+        } else if (this.year == other.getYear()) {
+            if (this.month < other.getMonth()) {
+                return -1;
+            } else if (this.month == other.getMonth()) {
+                if (this.day < other.getDay()){
+                    return -1;
+                } else if (this.day == other.getDay()){
+                    return 0;
+                } else {
+                    return 1;
+                }
+            } else {
+                return 1;
+            }
+        } else {
+            return 1;
+        }
+    }
+
     @Override
     public int hashCode() {
         return value.hashCode();
