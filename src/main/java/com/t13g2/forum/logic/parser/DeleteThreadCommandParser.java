@@ -8,12 +8,12 @@ import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new DeleteThreadCommand object
+ * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteThreadCommandParser implements Parser<DeleteThreadCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context ofrU the DeleteCommand
+     * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns an DeleteCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
@@ -23,7 +23,7 @@ public class DeleteThreadCommandParser implements Parser<DeleteThreadCommand> {
             return null;
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
         }
     }
 

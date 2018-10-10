@@ -29,7 +29,6 @@ public class Email {
             + DOMAIN_FIRST_CHARACTER_REGEX + DOMAIN_MIDDLE_REGEX + DOMAIN_LAST_CHARACTER_REGEX;
 
     public final String value;
-
     /**
      * Constructs an {@code Email}.
      *

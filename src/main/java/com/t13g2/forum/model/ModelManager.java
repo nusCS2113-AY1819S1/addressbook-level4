@@ -9,8 +9,6 @@ import com.t13g2.forum.commons.core.ComponentManager;
 import com.t13g2.forum.commons.core.LogsCenter;
 import com.t13g2.forum.commons.events.model.AddressBookChangedEvent;
 import com.t13g2.forum.commons.util.CollectionUtil;
-import com.t13g2.forum.model.forum.Announcement;
-import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 
 import javafx.collections.FXCollections;
