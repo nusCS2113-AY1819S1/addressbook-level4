@@ -2,22 +2,19 @@ package seedu.address.logic.commands;
 
 import java.util.ArrayList;
 
-import javafx.collections.ObservableList;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.util.Calculator;
-import seedu.address.ui.AttendanceStage;
+
 import seedu.address.ui.DisplayGrade;
-import seedu.address.ui.DisplayGrade;
+
 
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_25th;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_75th;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HIGHEST;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MEAN;
 
 /**
@@ -49,7 +46,7 @@ public class GradeSummaryCommand extends Command {
         requireNonNull(model);
         Calculator calc = new Calculator();
         DisplayGrade gradeDisplay;
-        if(commandType.equals("25")){
+        if("25".equals(commandType)){
             ArrayList<Person> studentList = calc.find25th(model.getFilteredPersonList());
 
 
@@ -61,7 +58,7 @@ public class GradeSummaryCommand extends Command {
             gradeDisplay.generateGradeList();
 
         }
-        if(commandType.equals("75")){
+        if("75".equals(commandType)){
             ArrayList<Person> studentList = calc.find75th(model.getFilteredPersonList());
 
 
@@ -73,15 +70,15 @@ public class GradeSummaryCommand extends Command {
             gradeDisplay.generateGradeList();
 
         }
-        if(commandType.equals("H")){
+        if("H".equals(commandType)){
             int highestScore = calc.findHighest(model.getFilteredPersonList());
             return new CommandResult(String.format("Highest Score in class is " + highestScore));
         }
-        if(commandType.equals("MEAN")){
+        if("MEAN".equals(commandType)){
             int mean = calc.calculateMean(model.getFilteredPersonList());
             return new CommandResult(String.format("The mean is " + mean));
         }
-        if(commandType.equals("MEDIAN")){
+        if("MEDIAN".equals(commandType)){
             int median = calc.calculateMedian(model.getFilteredPersonList());
             return new CommandResult(String.format("Median in class is " + median));
         }

@@ -22,7 +22,7 @@ public class DisplayGrade extends UiPart<Stage> {
 
     private static final String FXML = "DisplayGrade.fxml";
 
-    
+
 
     private ObservableList<Person> persons;
 
