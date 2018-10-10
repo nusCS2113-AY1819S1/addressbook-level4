@@ -61,8 +61,7 @@ public class AddressBookParserTest {
     public void parseCommand_create() throws Exception {
         Event event = new EventBuilder().build();
         CreateCommand command = (CreateCommand) parser.parseCommand(EventsUtil.getCreateCommand(event));
-        // TODO: Debug assertEquals(new CreateCommand(event), command)
-        assertEquals(command, command);
+        assertEquals(new CreateCommand(event), command);
     }
 
     @Test

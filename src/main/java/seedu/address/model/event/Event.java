@@ -149,6 +149,7 @@ public class Event implements Comparable<Event> {
     }
 
 
+
     public int compareStartTimeTo(Event other) {
         return this.getStartTime().compareTo(other.getStartTime());
     }
