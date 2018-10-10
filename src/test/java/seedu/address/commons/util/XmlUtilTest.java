@@ -17,7 +17,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StockList;
 import seedu.address.storage.XmlAdaptedItem;
 import seedu.address.storage.XmlAdaptedTag;
@@ -25,6 +24,7 @@ import seedu.address.storage.XmlSerializableStockList;
 import seedu.address.testutil.ItemBuilder;
 import seedu.address.testutil.StockListBuilder;
 import seedu.address.testutil.TestUtil;
+//import seedu.address.commons.exceptions.IllegalValueException;
 
 public class XmlUtilTest {
 
