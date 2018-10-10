@@ -18,11 +18,11 @@ public class BlockUserFromPostingCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Blocks a certain user from posting new thread."
         + "Parameters: "
-        + PREFIX_USER_NAME + "UID "
+        + PREFIX_USER_NAME + "USER NAME "
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_USER_NAME + "john";
 
-    public static final String MESSAGE_SUCCESS = "Blocked user: %1$s";
+    public static final String MESSAGE_SUCCESS = "User blocked successfully: %1$s";
     public static final String MESSAGE_DUPLICATE_BLOCK = "This user has already been blocked.";
 
     private final User toBlock;
