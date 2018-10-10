@@ -44,6 +44,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Product product = new Product(name, phone, email, address, tagList);
 
         return new AddCommand(product);
+
     }
 
     /**

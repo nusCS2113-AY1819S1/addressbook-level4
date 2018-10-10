@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.distributor.Distributor;
 import seedu.address.model.person.Product;
 
 /**
@@ -21,6 +22,9 @@ public class XmlSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_PERSON = "Product list contains duplicate product(s).";
 
     @XmlElement
+    private List<XmlAdaptedDistributor> distributors;
+
+    @XmlElement
     private List<XmlAdaptedPerson> persons;
 
     /**
@@ -28,6 +32,7 @@ public class XmlSerializableAddressBook {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
+        distributors = new ArrayList<>();
         persons = new ArrayList<>();
     }
 
@@ -36,6 +41,7 @@ public class XmlSerializableAddressBook {
      */
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
+        distributors.addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new).collect(Collectors.toList()));
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
     }
 
@@ -47,6 +53,15 @@ public class XmlSerializableAddressBook {
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
+      
+        for (XmlAdaptedDistributor d : distributors) {
+            Distributor distributor = d.toModelType();
+            if (addressBook.hasDistributor(distributor)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+            }
+            addressBook.addDistributor(distributor);
+        }
+
         for (XmlAdaptedPerson p : persons) {
             Product product = p.toModelType();
             if (addressBook.hasPerson(product)) {
@@ -66,6 +81,6 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return distributors.equals(((XmlSerializableAddressBook) other).distributors);
     }
 }

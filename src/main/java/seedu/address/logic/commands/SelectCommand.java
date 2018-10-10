@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -42,6 +41,7 @@ public class SelectCommand extends Command {
         List<Product> filteredProductList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= filteredProductList.size()) {
+
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 

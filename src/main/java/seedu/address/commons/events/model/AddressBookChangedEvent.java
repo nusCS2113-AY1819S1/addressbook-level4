@@ -12,6 +12,13 @@ public class AddressBookChangedEvent extends BaseEvent {
         this.data = data;
     }
 
+    /*
+    @Override
+    public String toDString() {
+        return "number of distributors " + data.getDistributorList().size();
+    }
+    */
+  
     @Override
     public String toString() {
         return "number of products " + data.getPersonList().size();

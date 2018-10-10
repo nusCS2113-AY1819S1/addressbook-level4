@@ -19,6 +19,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.login.Password;
+import seedu.address.model.login.UniqueUsersList;
+import seedu.address.model.login.User;
+import seedu.address.model.login.Username;
 import seedu.address.model.person.Product;
 import seedu.address.testutil.PersonBuilder;
 
@@ -150,6 +154,56 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasLoggedIn() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setLoginStatus(boolean status) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkLoginCredentials(Username username, Password password) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public User getLoggedInUser() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean checkCredentials(Username username, Password password) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateUserPassword(User target, User userWithNewPassword) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addUser(User person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteUser(User target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getUserDatabase() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setUsersList(UniqueUsersList uniqueUserList) {
             throw new AssertionError("This method should not be called.");
         }
     }

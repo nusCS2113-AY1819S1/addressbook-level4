@@ -6,6 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.distributor.DistributorName;
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorPhone;
 import seedu.address.model.person.*;
 import seedu.address.model.person.Product;
 import seedu.address.model.tag.Tag;
@@ -14,6 +19,20 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+    public static Distributor[] getSampleDistributors() {
+        return new Distributor[] {
+            new Distributor(new DistributorName("Alex Yeoh"), new DistributorPhone("87438807")),
+            new Distributor(new DistributorName("Bernice Yu"), new DistributorPhone("99272758")),
+            new Distributor(new DistributorName("Charlotte Oliveiro"), new DistributorPhone("93210283")),
+            new Distributor(new DistributorName("David Li"), new DistributorPhone("91031282")),
+            new Distributor(new DistributorName("Irfan Ibrahim"), new DistributorPhone("92492021")),
+            new Distributor(new DistributorName("Roy Balakrishnan"), new DistributorPhone("92624417"))
+        };
+    }
+   
+            
+
     public static Product[] getSamplePersons() {
         return new Product[] {
             new Product(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -34,20 +53,27 @@ public class SampleDataUtil {
             new Product(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Address("Blk 45 Aljunied Street 85, #11-31"),
                 getTagSet("colleagues"))
+
         };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
+
+        for (Distributor sampleDistributor : getSampleDistributors()) {
+            sampleAb.addDistributor(sampleDistributor);
+        }
+
         for (Product sampleProduct : getSamplePersons()) {
             sampleAb.addPerson(sampleProduct);
         }
         return sampleAb;
     }
 
+    
     /**
      * Returns a tag set containing the list of strings given.
-     */
+    */
     public static Set<Tag> getTagSet(String... strings) {
         return Arrays.stream(strings)
                 .map(Tag::new)

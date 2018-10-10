@@ -19,6 +19,7 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a product to Inventarie PRO. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
@@ -36,6 +37,7 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This product already exists in the Product list";
 
+
     private final Product toAdd;
 
     /**
@@ -44,6 +46,7 @@ public class AddCommand extends Command {
     public AddCommand(Product product) {
         requireNonNull(product);
         toAdd = product;
+
     }
 
     @Override
@@ -65,4 +68,6 @@ public class AddCommand extends Command {
                 || (other instanceof AddCommand // instanceof handles nulls
                 && toAdd.equals(((AddCommand) other).toAdd));
     }
+
+
 }
