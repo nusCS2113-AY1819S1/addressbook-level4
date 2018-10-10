@@ -8,7 +8,7 @@ import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
 
 /**
- * Parses input arguments and creates a new DeleteThreadCommand object
+ * Parses input arguments and creates a new DeleteCommand object
  */
 public class DeleteThreadCommandParser implements Parser<DeleteThreadCommand> {
 
