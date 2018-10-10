@@ -15,8 +15,8 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 * This is a desktop Jalil Enterprise Stock Taking application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* It is a Java application intended for CG1111 lab workers searching for experiment apparatus.
-* It can help CG1111 lab workers to check the status evey experiment items (the quantity and whether available in lab).
+* It is a Java application intended for CG lab workers searching for experiment apparatus.
+* It can help CG lab workers to check the status evey experiment items (the quantity and whether available in lab).
 * Also, it can help students who want to borrow the experiment apparatus to search easily.
 
 == Site Map
@@ -29,6 +29,7 @@ endif::[]
 == Acknowledgements
 
 * This application is inspired by our own experiences and we creat this application because we find it seems to be troublesome when we want to borrow or use some items from the lab.
+* CG lab represents module CG1111 and module CG1112, which are two important computer engineering modules.
 * Thus, we try to use the knowledge in AddressBook4 to make this application StockList.
 * Some parts of this sample application: StockList were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
