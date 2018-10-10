@@ -75,16 +75,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.distributors.setDistributors(distributors);
     }
 
-    /*
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
-
+    */
     public void resetData(ReadOnlyAddressBook newData) {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setDistributors(newData.getDistributorList());
     }
-    */
 
     //// product-level operations
 
@@ -169,7 +169,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// util methods
 
     @Override
-    public String toDString() {
+    public String toString() {
         return distributors.asUnmodifiableObservableList().size() + " distributors";
         // TODO: refine later
     }
@@ -178,7 +178,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Product> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
-    */
 
     @Override
     public ObservableList<Distributor> getDistributorList() {
