@@ -483,7 +483,7 @@ Updated overall marks of CS2040C Assignment 1 to 20 marks.
 * `gradebook add c/CS2040C g/Final Examinations p/50` +
 Updated Final Examinations grade percentage to 50%.
 
-==== Remove Grade Component : `gradebook remove`
+==== Remove Grade Component : `gradebook remove` `[coming in v1.3]`
 Removes a grade item to a module code. +
 Format: `gradebook remove c/MODULE_CODE g/GRADE_ITEM'
 
@@ -522,7 +522,7 @@ Examples:
 * `gradebook list` +
 Lists all the grade items for the module with module code CS2040C.
 
-==== List Students Grades : `gradebook list students` `[Coming in v1.2]`
+==== List Students Grades : `gradebook list students` `[Coming in v1.3]`
 Lists grades of all students enrolled in the module. +
 Format: `gradebook list students c/MODULE_CODE'
 
