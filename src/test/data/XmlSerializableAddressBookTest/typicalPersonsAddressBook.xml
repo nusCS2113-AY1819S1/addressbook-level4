@@ -6,7 +6,7 @@
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
-        <department>Finance</department>
+        <department>Admin</department>
         <tagged>friends</tagged>
     </persons>
     <persons>
@@ -14,7 +14,7 @@
         <phone>98765432</phone>
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
-        <department>Marketing</department>
+        <department>Admin</department>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </persons>
