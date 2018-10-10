@@ -25,5 +25,4 @@ public interface IForumThreadRepository {
     void deleteThread(ForumThread forumThread);
 
 
-
 }

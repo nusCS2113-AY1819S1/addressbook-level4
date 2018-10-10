@@ -15,9 +15,9 @@ import com.t13g2.forum.model.forum.User;
  */
 public class BlockUserFromPostingCommandParser implements Parser<BlockUserFromPostingCommand> {
     /**
-     *
      * Parses the given {@code String} of arguments in the context of the BlockUserFromPostingCommand.
      * and returns an BlockUserFromPostingCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public BlockUserFromPostingCommand parse(String args) throws ParseException {

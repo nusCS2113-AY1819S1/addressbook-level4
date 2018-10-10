@@ -18,5 +18,6 @@ public interface ICommentRepository {
     Comment getComment(int commentId);
 
     List<Comment> getCommentsByThread(int threadId);
+
     List<Comment> getCommentsByThread(ForumThread forumThread);
 }

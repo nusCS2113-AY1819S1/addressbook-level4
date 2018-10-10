@@ -8,6 +8,8 @@ import java.io.OutputStream;
  */
 public interface IStorage {
     void write(OutputStream outputStream);
+
     void read(InputStream inputStream);
+
     void handleSourceChange(IEvent changeEvent);
 }

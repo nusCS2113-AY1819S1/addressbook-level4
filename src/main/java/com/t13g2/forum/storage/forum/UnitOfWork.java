@@ -1,5 +1,8 @@
 package com.t13g2.forum.storage.forum;
 
+/**
+ *
+ */
 public class UnitOfWork implements IUnitOfWork,AutoCloseable {
     private IAnnouncementRepository announcementRepository;
     private ICommentRepository commentRepository;
@@ -8,11 +11,11 @@ public class UnitOfWork implements IUnitOfWork,AutoCloseable {
     private UserRepository userRepository;
 
     public UnitOfWork() {
-        announcementRepository=new AnnouncementRepository();
-        commentRepository=new CommentRepository();
-        forumThreadRepository =new ForumThreadRepository();
-        moduleRepository=new ModuleRepository();
-        userRepository=new UserRepository();
+        announcementRepository = new AnnouncementRepository();
+        commentRepository = new CommentRepository();
+        forumThreadRepository = new ForumThreadRepository();
+        moduleRepository = new ModuleRepository();
+        userRepository = new UserRepository();
     }
 
     public IAnnouncementRepository getAnnouncementRepository() {
@@ -35,10 +38,6 @@ public class UnitOfWork implements IUnitOfWork,AutoCloseable {
         return userRepository;
     }
 
-/**
- *
- */
-public class UnitOfWork implements IUnitOfWork, AutoCloseable {
     @Override
     public void commit() {
 
@@ -54,3 +53,4 @@ public class UnitOfWork implements IUnitOfWork, AutoCloseable {
 
     }
 }
+
