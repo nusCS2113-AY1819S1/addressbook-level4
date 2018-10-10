@@ -1,13 +1,10 @@
 package com.t13g2.forum.logic.parser;
 
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_NAME;
-
 import java.util.stream.Stream;
 
 import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.BlockUserFromPostingCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
-import com.t13g2.forum.model.forum.User;
 
 
 /**

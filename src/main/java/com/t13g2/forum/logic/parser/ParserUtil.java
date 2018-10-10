@@ -42,6 +42,20 @@ public class ParserUtil {
     }
 
     /**
+     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static String parseUserName(String userName) throws ParseException {
+        String trimmedUserName = userName.trim();
+        if (!User.isValidUserName(trimmedUserName)) {
+            throw new ParseException(User.MESSAGE_USER_NAME_CONSTRAINTS);
+        }
+        return trimmedUserName;
+    }
+
+    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *

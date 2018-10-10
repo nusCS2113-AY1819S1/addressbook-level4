@@ -1,5 +1,6 @@
 package com.t13g2.forum.model.forum;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.t13g2.forum.storage.forum.RunningId;
@@ -7,7 +8,8 @@ import com.t13g2.forum.storage.forum.RunningId;
 /**
  * Metadata for the other classes
  */
-public class BaseModel {
+public class BaseModel implements Serializable {
+
     protected int id = RunningId.getInstance().nextId();
     protected Date created = new Date();
     protected Date modified;

@@ -49,10 +49,16 @@ public class DeleteThreadCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        try(UnitOfWork unitOfWork = new UnitOfWork()){
-            unitOfWork.getForumThreadRepository().deleteThread(ThreadId);//delete the thread according to the ThreadId from the memory repository
-            unitOfWork.commit();//update to local database
-        }catch (Exception e){
+
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            try {
+                unitOfWork.getForumThreadRepository().deleteThread(ThreadId);//delete the thread according to the ThreadId from the memory repository
+                unitOfWork.commit();//update to local database
+            } catch (Exception e) {
+                e.printStackTrace();
+                throw new CommandException(MESSAGE_INVALID_THREAD_ID);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
         String MESSAGE = "\n"

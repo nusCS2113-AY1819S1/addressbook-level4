@@ -41,21 +41,20 @@ public class BlockUserFromPostingCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         User user = new User();
-        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
             try {
                 user = unitOfWork.getUserRepository().getUserByUsername(userNameToBlock);
-                if(user.getIsBlock()) {
+                if (user.getIsBlock()) {
                     throw new CommandException(MESSAGE_DUPLICATE_BLOCK);
-                }
-                else {
+                } else {
                     user.setIsBlock(true);
                     unitOfWork.commit();
                 }
-            } catch(Exception e){
+            } catch (Exception e) {
                 e.printStackTrace();
                 throw new CommandException(MESSAGE_INVALID_USER);
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, user));
