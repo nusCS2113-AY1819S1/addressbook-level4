@@ -1,139 +1,41 @@
-package seedu.address.ui;
+<?xml version="1.0" encoding="UTF-8"?>
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
-import seedu.address.model.tag.Tag;
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 
-
-
-
-/**
- * An UI component that displays information of a {@code Person}.
- */
-public class PersonCard extends UiPart<Region> {
-
-    private static final String FXML = "PersonListCard.fxml";
-    private static final String[] TAG_COLORS =
-            { "red", "yellow", "blue", "orange", "brown", "green", "pink", "black", "grey", "purple" ,"maroon"};
-
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
-
-    public final Person person;
-
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private Label name;
-    @FXML
-    private Label id;
-    @FXML
-    private Label phone;
-    @FXML
-    private Label address;
-    @FXML
-    private Label email;
-    @FXML
-    private FlowPane tags;
-    @FXML
-    private FlowPane monday;
-    @FXML
-    private FlowPane tuesday;
-    @FXML
-    private FlowPane wednesday;
-    @FXML
-    private FlowPane thursday;
-    @FXML
-    private FlowPane friday;
-
-
-
-
-    public PersonCard(Person person, int displayedIndex) {
-        super(FXML);
-        this.person = person;
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().fullName);
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
-        
-        for (String it: Tag.getHeader())
-        {
-            Label day = new Label(it);
-            day.setPrefSize(61, 10);
-            tags.getChildren().add(day);
-
-        }
-        colourTag(person);
-        getMod(Tag.getTue(), tuesday);
-        getMod(Tag.getWed(), wednesday);
-        getMod(Tag.getThu(), thursday);
-        getMod(Tag.getFri(), friday);
-
-
-
-        }
-//Takes the mods for the day and adds them to the FlowPane
-    private void getMod(String mods[], FlowPane day) {
-        for (String it : mods) {
-            Label slot = new Label(it);
-            slot.setPrefSize(53, 25);
-            if(it.charAt(5)=='m'||it.charAt(5)=='a'){
-                slot.getStyleClass().add("grey");
-                slot.setText(" ");
-
-            }
-            else {
-                slot.getStyleClass().add(getColor(it));
-            }
-
-
-            day.getChildren().add(slot);
-        }
-    }
-
-    //Returns a colour based on the module code
-    private String getColor(String tagName){
-        return TAG_COLORS[Math.abs(tagName.hashCode()) % TAG_COLORS.length];
-    }
-    //Reads tags from a person, changes them to labels and adds colour
-    private void colourTag(Person person){
-        person.getTags().forEach(tag->{
-            Label tagLabel = new Label(tag.tagName);
-            tagLabel.getStyleClass().add(getColor(tag.tagName));
-            tagLabel.setPrefSize(53, 25);
-            monday.getChildren().add(tagLabel);
-
-
-        });
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
-            return false;
-        }
-
-        // state check
-        PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
-    }
-}
+<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <GridPane HBox.hgrow="ALWAYS">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+        </columnConstraints>
+        <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
+            <padding>
+                <Insets top="5" right="5" bottom="5" left="15" />
+            </padding>
+            <HBox spacing="5" alignment="CENTER_LEFT">
+                <Label fx:id="id" styleClass="cell_big_label">
+                    <minWidth>
+                        <!-- Ensures that the label text is never truncated -->
+                        <Region fx:constant="USE_PREF_SIZE" />
+                    </minWidth>
+                </Label>
+                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
+            </HBox>
+            <FlowPane fx:id="header"  prefHeight="30"/>
+            <FlowPane id ="tags" fx:id="monday"  prefHeight="30"/>
+            <FlowPane id ="tags" fx:id="tuesday" prefHeight="30" />
+            <FlowPane id ="tags" fx:id="wednesday"  prefHeight="30"/>
+            <FlowPane id ="tags" fx:id="thursday"  prefHeight="30"/>
+            <FlowPane id ="tags" fx:id="friday"  prefHeight="30"/>
+            <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
+            <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+            <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
+        </VBox>
+    </GridPane>
+</HBox>
