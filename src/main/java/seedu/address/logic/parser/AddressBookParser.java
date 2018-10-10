@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import seedu.address.logic.commands.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -36,26 +35,26 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case AddDCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+        case EditDCommand.COMMAND_WORD:
+            return new EditDCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteDCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FindDCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+        case ListDCommand.COMMAND_WORD:
+            return new ListDCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
@@ -66,18 +65,33 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+        case UndoDCommand.COMMAND_WORD:
+            return new UndoDCommand();
 
         case AddTransactionCommand.COMMAND_WORD:
             return new AddTransactionCommandParser().parse(arguments);
-
+            
         case ViewLastTransaction.COMMAND_WORD:
             return new ViewLastTransaction();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+            
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
 
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
+
+        case CreateUserCommand.COMMAND_WORD:
+            return new CreateUserCommandParser().parse(arguments);
+
+        case DeleteUserCommand.COMMAND_WORD:
+            return new DeleteUserCommandParser().parse(arguments);
+
+        case ChangeUserPasswordCommand.COMMAND_WORD:
+            return new ChangeUserPasswordCommandParser().parse(arguments);
+            
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

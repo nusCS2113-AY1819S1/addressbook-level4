@@ -38,7 +38,6 @@ public class SalesHistory {
         } catch (InvalidTimeFormatException e) {
             throw e;
         }
-        salesHistory.put(day,toBeAdded);
     }
 
     public ShopDay getDaysHistory(String day) throws NoSuchElementException {
@@ -82,5 +81,6 @@ public class SalesHistory {
         } catch (DuplicateTransactionException e) {
 
         }
+
     }
 }
