@@ -5,12 +5,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 
 /**
- * Represents a Event's location in the address book.
+ * Represents a Event's location in the event list.
  * Guarantees: immutable; is valid as declared in {@link #isValidLocation(String)}
  */
 public class Location {
     public static final String MESSAGE_LOCATION_CONSTRAINTS =
-            "Event location should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Event location can take any values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -33,7 +33,6 @@ public class Location {
 
     /**
      * Returns true if a given string is a valid description.
-     * Will implement this at a later date
      */
     public static boolean isValidLocation(String test) {
         return test.matches(LOCATION_VALIDATION_REGEX);
