@@ -39,6 +39,11 @@ public class UserRepository extends BaseRepository implements IUserRepository {
     }
 
     @Override
+    public User getUserByUsername(String username) {
+        return null;
+    }
+
+    @Override
     public User authenticate(String username, String password) {
         return null;
     }

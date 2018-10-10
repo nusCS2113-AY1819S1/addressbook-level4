@@ -16,5 +16,9 @@ public interface IUserRepository {
 
     User getUser(int userId);
 
+    User getUserByUsername(String username);
+
+
     User authenticate(String username, String password);
+
 }
