@@ -4,14 +4,15 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import javafx.collections.ObservableList;
+import java.util.function.Predicate;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.EventModel;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEventList;
@@ -19,7 +20,6 @@ import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EventBuilder;
 
-import java.util.function.Predicate;
 
 public class CreateCommandTest {
 

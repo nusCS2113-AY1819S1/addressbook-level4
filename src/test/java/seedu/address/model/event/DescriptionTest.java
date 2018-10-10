@@ -32,7 +32,7 @@ public class DescriptionTest {
         // valid name
         assertTrue(Description.isValidDescription("-")); // short description
         assertTrue(Description.isValidDescription("Dress code: Smart Casual")); // with special characters
-        assertTrue(Description.isValidDescription("Please note that this is a formal event. " +
-                "Please refrain from wearing slippers and shorts.")); // long description
+        assertTrue(Description.isValidDescription("Please note that this is a formal event. "
+                + "Please refrain from wearing slippers and shorts.")); // long description
     }
 }

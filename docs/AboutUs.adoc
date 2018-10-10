@@ -11,27 +11,27 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Lee Ming Liang
-image::icedcoffeeboy.jpg[width="150", align="left"]
+image::icedcoffeeboy.png[width="150", align="left"]
 {empty}[https://github.com/IcedCoffeeBoy[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Code Quality Assurance
+**Responsibilities:** In charge of Storage
 
 '''
 
 
 === Jie Liang Ang
-image::jieliangang.jpg[width="150", align="left"]
+image::jieliangang.png[width="150", align="left"]
 {empty}[https://github.com/jieliangang[github]] [<<#, portfolio>>]
 
 **Role:** Team Lead +
-**Responsibilities:** Scheduling and Tracking
+**Responsibilities:** Integration, Scheduling and Tracking
 
 '''
 
 
 === Jeevan Neralakere Somashekhar
-image::jeevz10.jpg[width="150", align="left"]
+image::jeevz10.png[width="150", align="left"]
 {empty}[https://github.com/Jeevz10[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
@@ -41,7 +41,7 @@ image::jeevz10.jpg[width="150", align="left"]
 '''
 
 === Perry Wang Zhi Ming
-image::perrythewang.jpg[width="150", align="left"]
+image::perrythewang.png[width="150", align="left"]
 {empty}[https://github.com/perrythewang[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
@@ -50,10 +50,10 @@ image::perrythewang.jpg[width="150", align="left"]
 '''
 
 === Ruslan Farkhutdinov
-image::fr3ddy4.jpg[width="150", align="left"]
+image::fr3ddy4.png[width="150", align="left"]
 {empty}[https://github.com/fr3ddy4[github]] [<<#, portfolio>>]
 
 **Role:** Developer +
-**Responsibilities:** Integration
+**Responsibilities:** Code Quality Assurance
 
 '''
