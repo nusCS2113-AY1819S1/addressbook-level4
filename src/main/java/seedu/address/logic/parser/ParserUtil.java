@@ -14,6 +14,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskModule;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskPriority;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -41,13 +45,40 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
+    public static TaskName parseName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
-        if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        if (!TaskName.isValidName(trimmedName)) {
+            throw new ParseException(TaskName.MESSAGE_NAME_CONSTRAINTS);
         }
-        return new Name(trimmedName);
+        return new TaskName(trimmedName);
+    }
+
+    public static TaskModule parseModule(String module) throws ParseException {
+        requireNonNull(module);
+        String trimmedModule = module.trim();
+        if (!TaskModule.isValidModule(trimmedModule)) {
+            throw new ParseException(TaskModule.MESSAGE_MODULE_CONSTRAINTS);
+        }
+        return new TaskModule(trimmedModule);
+    }
+
+    public static TaskDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!TaskDate.isValidDate(trimmedDate)) {
+            throw new ParseException(TaskDate.MESSAGE_DATE_CONSTRAINTS);
+        }
+        return new TaskDate(trimmedDate);
+    }
+
+    public static TaskPriority parsePriority(String priority) throws ParseException {
+        requireNonNull(priority);
+        String trimmedPriority = priority.trim();
+        if (!TaskPriority.isValidPriority(trimmedPriority)) {
+            throw new ParseException(TaskPriority.MESSAGE_PRIORITY_CONSTRAINTS);
+        }
+        return new TaskPriority(trimmedPriority);
     }
 
     /**

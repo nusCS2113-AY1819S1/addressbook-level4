@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * The API of the Model component.
@@ -12,6 +13,7 @@ import seedu.address.model.tag.Tag;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -22,6 +24,8 @@ public interface Model {
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
+    boolean hasTask(Task task);
+
     boolean hasPerson(Person person);
 
     /**
@@ -34,6 +38,8 @@ public interface Model {
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
+    void addTask(Task task);
+
     void addPerson(Person person);
 
     /**
@@ -43,16 +49,21 @@ public interface Model {
      */
     void updatePerson(Person target, Person editedPerson);
 
+    void updateTask(Task target, Task editedTask);
+
     void deleteTag(Tag tag);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    ObservableList<Task> getFilteredTaskList();
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredTaskList(Predicate<Task> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.
