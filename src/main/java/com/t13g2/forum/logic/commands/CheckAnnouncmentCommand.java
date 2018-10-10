@@ -7,6 +7,9 @@ import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Allow user to check if there is any announcement
  */
@@ -21,6 +24,13 @@ public class CheckAnnouncmentCommand extends Command {
         Announcement announcement = new Announcement();
         try(UnitOfWork unitOfWork = new UnitOfWork()) {
             announcement = unitOfWork.getAnnouncementRepository().getLatestAnnouncement();
+            final String title = announcement.getTitle();
+            final String content = announcement.getContent();
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    JOptionPane.showMessageDialog(null, content, title, JOptionPane.PLAIN_MESSAGE);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }

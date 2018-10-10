@@ -10,6 +10,9 @@ import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * Announce new announcement.
  */
@@ -44,6 +47,11 @@ public class AnnounceCommand extends Command {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             unitOfWork.getAnnouncementRepository().addAnnouncement(toAnnounce);
             unitOfWork.commit();
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    JOptionPane.showMessageDialog(null, toAnnounce.getContent(), toAnnounce.getTitle(), JOptionPane.PLAIN_MESSAGE);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
