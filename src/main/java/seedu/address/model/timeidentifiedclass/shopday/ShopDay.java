@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.Set;
 import java.util.Iterator;
+import static java.util.Objects.requireNonNull;
 
 public class ShopDay extends TimeIdentifiedClass {
     private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -32,6 +33,7 @@ public class ShopDay extends TimeIdentifiedClass {
     }
 
     public ShopDay(String date) {
+        requireNonNull(date);
         this.date = date;
         this.initialise();
     }
