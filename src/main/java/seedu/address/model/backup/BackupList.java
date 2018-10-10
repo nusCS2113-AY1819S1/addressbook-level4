@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,9 @@ public class BackupList {
     private Map<Integer, File> fileMap = new HashMap<>();
 
     public BackupList(File backupDir) throws IOException {
-        for (File snapshots : backupDir.listFiles()) {
+        List<File> backupFiles = Arrays.asList(backupDir.listFiles());
+        Collections.reverse(backupFiles);
+        for (File snapshots : backupFiles) {
             String millis = snapshots.getName();
             millis = millis.substring(0, millis.length() - 4);
             String fileName = millisToDateAndTime(millis);
@@ -32,8 +35,6 @@ public class BackupList {
         }
         if (fileNames.size() == 0) {
             throw new IOException(MESSAGE_BACKUP_CONSTRAINTS);
-        } else {
-            Collections.reverse(fileNames);
         }
     }
 
