@@ -20,7 +20,7 @@ Responsibilities: Deadline & Task features
 '''
 
 === Jeremy Aw
-image::jeremyaw.png[width="150", align="left"]
+image::JeremyInElysium.png[width="150", align="left"]
 {empty}[http://github.com/jeremyinelysium[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
@@ -29,7 +29,7 @@ Responsibilities: Deadline features
 '''
 
 === Beh Kha Sim
-image::behkhasim.png[width="150", align="left"]
+image::emobeany.png[width="150", align="left"]
 {empty}[https://github.com/emobeany[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
