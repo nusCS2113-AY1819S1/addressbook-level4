@@ -48,7 +48,7 @@ public class XmlAdaptedItem {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        if(status != null) {
+        if (status != null) {
             this.status = new ArrayList<>(status);
         }
         if (tagged != null) {
@@ -93,7 +93,7 @@ public class XmlAdaptedItem {
         if (quantity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Quantity"));
         }
-        if(Integer.parseInt(quantity) <= 0) {
+        if (Integer.parseInt(quantity) <= 0) {
             throw new IllegalValueException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
         }
         final Quantity modelQuantity = new Quantity(quantity.toString());
@@ -101,7 +101,7 @@ public class XmlAdaptedItem {
         if (minQuantity == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Minimum Quantity"));
         }
-        if(Integer.parseInt(minQuantity) <= 0) {
+        if (Integer.parseInt(minQuantity) <= 0) {
             throw new IllegalValueException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
         }
         final Quantity modelMinQuantity = new Quantity(minQuantity.toString());
