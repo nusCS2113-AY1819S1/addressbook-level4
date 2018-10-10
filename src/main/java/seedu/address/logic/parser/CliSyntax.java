@@ -7,7 +7,7 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_ID = new Prefix("i/");
+    public static final Prefix PREFIX_ISBN = new Prefix("i/");
     public static final Prefix PREFIX_PRICE = new Prefix("p/");
     public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
