@@ -24,7 +24,7 @@ public class DisplayGrade extends UiPart<Stage> {
     @FXML
     private TableView<Person> personTable;
 
-
+    
     @FXML
     private TableColumn<Person, String> nameColumn;
 
