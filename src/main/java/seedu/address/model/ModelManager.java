@@ -14,6 +14,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.person.Person;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -293,4 +295,26 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredDistributors.equals(other.filteredDistributors)
                 && filteredProducts.equals(other.filteredProducts);
     }
+  
+    @Override
+    public String getActiveDayHistory() {
+        return versionedAddressBook.getActiveDayHistory();
+    }
+
+    @Override
+    public String getDaysHistory(String day) {
+        return versionedAddressBook.getDaysHistory(day);
+    }
+
+    @Override
+    public void addTransaction(Transaction transaction) {
+        versionedAddressBook.addTransaction(transaction);
+    }
+
+    @Override
+    public Transaction getLastTransaction() {
+        return versionedAddressBook.getLastTransaction();
+    }
 }
+
+

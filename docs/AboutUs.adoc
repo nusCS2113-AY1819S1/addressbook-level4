@@ -41,7 +41,7 @@ Responsibilities: Data
 image::amirulmaricar.png[width="150", align="left"]
 {empty}[https://github.com/amirulmaricar[github]]
 
-Role: Developer +
+Role: Developer/MVP + 
 Responsibilities: Dev Ops + Threading
 
 '''

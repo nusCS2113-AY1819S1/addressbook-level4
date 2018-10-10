@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.person.Person;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.person.Product;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUsersList;
@@ -120,6 +122,29 @@ public interface Model {
      */
     void commitAddressBook();
 
+    /**
+     * Adds a transaction to the sales history
+     */
+    void addTransaction(Transaction transaction);
+
+    /**
+     * Returns a given day's transaction history
+     */
+    String getDaysHistory(String day);
+
+    /**
+     * Returns the active day's transaction history
+     */
+    String getActiveDayHistory();
+
+    /**
+     * Returns the latest transaction.
+     */
+    Transaction getLastTransaction();
+    
+    /**
+    * Sets the user list
+    */
     void setUsersList(UniqueUsersList uniqueUserList);
 
     /** Returns the UserDatabase */
@@ -148,5 +173,4 @@ public interface Model {
     User getLoggedInUser();
 
     void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException;
-
 }
