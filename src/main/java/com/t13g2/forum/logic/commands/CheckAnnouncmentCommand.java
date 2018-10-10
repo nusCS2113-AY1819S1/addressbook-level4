@@ -19,9 +19,8 @@ public class CheckAnnouncmentCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         Announcement announcement = new Announcement();
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            int newAnnouncementId = unitOfWork.getAnnouncementRepository().getLatestAnnouncement().getId();
-            announcement = unitOfWork.getAnnouncementRepository().getAnnouncement(newAnnouncementId);
+        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+            announcement = unitOfWork.getAnnouncementRepository().getLatestAnnouncement();
         } catch (Exception e) {
             e.printStackTrace();
         }
