@@ -36,7 +36,9 @@ public class GradebookComponent {
         this.gradeItemName = gradeItemName;
     }
 
-    public String getModuleCode() { return moduleCode; }
+    public String getModuleCode() {
+        return moduleCode;
+    }
 
     public void setModuleCode(String moduleCode) {
         this.moduleCode = moduleCode;
