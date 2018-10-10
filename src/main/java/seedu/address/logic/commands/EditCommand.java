@@ -21,7 +21,12 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.*;
+import seedu.address.model.event.Address;
+import seedu.address.model.event.Contact;
+import seedu.address.model.event.Email;
+import seedu.address.model.event.Name;
+import seedu.address.model.event.Phone;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**

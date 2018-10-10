@@ -10,7 +10,12 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.*;
+import seedu.address.model.event.Address;
+import seedu.address.model.event.Contact;
+import seedu.address.model.event.Email;
+import seedu.address.model.event.Name;
+import seedu.address.model.event.Phone;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -43,7 +48,8 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
-    public XmlAdaptedEvent(String name, String contact, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedEvent(String name, String contact, String phone, String email, String address,
+                           List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.contact = contact;
         this.phone = phone;

@@ -30,6 +30,7 @@ public class Event {
      */
     public Event(Name name, Contact contact, Phone phone, Email email, Address address, Set<Tag> tags) {
         requireAllNonNull(name, contact, phone, email, address, tags);
+
         this.name = name;
         this.contact = contact;
         this.phone = phone;
