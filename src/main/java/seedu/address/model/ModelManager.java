@@ -102,7 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addDistributor(Distributor distributor) {
         versionedAddressBook.addDistributor(distributor);
-        updateFilteredDistributorList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
         indicateAddressBookChanged();
     }
 
@@ -137,6 +137,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredDistributorList(Predicate<Distributor> predicate) {
         requireNonNull(predicate);
         filteredDistributors.setPredicate(predicate);
+    }
 
     @Override
     public ObservableList<Product> getFilteredPersonList() {
