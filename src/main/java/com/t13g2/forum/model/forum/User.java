@@ -11,7 +11,25 @@ public class User extends BaseModel {
     private String email;
     private String phone;
 
-    //TODO: set from storage
+    public static final String MESSAGE_USER_NAME_CONSTRAINTS =
+        "User name can take any values, and it should not be blank";
+
+    /**
+     * The first character of the user name must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String USER_NAME_VALIDATION_REGEX = "[^\\s].*";
+
+    public User() {
+    }
+
+    /**
+     * Returns true if a given string is a valid email.
+     */
+    public static boolean isValidUserName(String testUserName) {
+        return (testUserName.matches(USER_NAME_VALIDATION_REGEX));
+    }
+
     public boolean getIsBlock() {
         return isBlock;
     }
@@ -72,7 +90,7 @@ public class User extends BaseModel {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" User ID: ")
-            // .append(id)
+            .append(id)
             .append(" User Name: ")
             .append(username);
         return builder.toString();

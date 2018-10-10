@@ -12,6 +12,10 @@ public class Comment extends BaseModel {
         return threadId;
     }
 
+    public void setThreadId(int threadId) {
+        this.threadId = threadId;
+    }
+
     public String getContent() {
         return content;
     }
