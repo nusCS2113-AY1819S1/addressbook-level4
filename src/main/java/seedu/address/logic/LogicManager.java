@@ -59,6 +59,6 @@ public class LogicManager extends ComponentManager implements Logic {
      */
     @Override
     public ArrayList<String> getCmdPrediction(String textInput) {
-        return model.getCmdPrediction(textInput);
+        return model.getTextPrediction().predictText(textInput);
     }
 }

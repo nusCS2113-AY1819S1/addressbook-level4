@@ -27,6 +27,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Kpi;
@@ -93,7 +94,8 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+        UserPrefs userPref = new UserPrefs();
+        FileEncryptor fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
 
         if (fe.isLocked()) {
             throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
@@ -146,10 +148,10 @@ public class EditCommand extends Command {
         }
 
         model.updatePerson(personToEdit, editedPerson);
-        model.editPersonInTrie(personToEdit, editedPerson);
 
         model.commitAddressBook();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.getTextPrediction().editPerson(personToEdit, editedPerson);
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
     }
 

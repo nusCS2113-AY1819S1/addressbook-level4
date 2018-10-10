@@ -11,6 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
+import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
 /**
@@ -38,7 +39,8 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        FileEncryptor fe = new FileEncryptor("data/addressbook.xml");
+        UserPrefs userPref = new UserPrefs();
+        FileEncryptor fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
 
         if (fe.isLocked()) {
             throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
@@ -52,7 +54,7 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePerson(personToDelete);
         model.commitAddressBook();
-        model.deletePersonFromTrie(personToDelete);
+        model.getTextPrediction().removePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
     }
 
