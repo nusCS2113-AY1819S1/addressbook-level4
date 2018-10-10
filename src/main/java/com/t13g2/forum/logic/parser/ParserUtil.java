@@ -174,7 +174,7 @@ public class ParserUtil {
     }
 
     /**
-     * comment
+     * comment content
      */
     public static String parseComment(String comment) throws ParseException{
         requireNonNull(comment);
@@ -184,7 +184,7 @@ public class ParserUtil {
         }
         return trimmedComment;
     }
-    //Returns true if a given string is a valid comment title.
+    //Returns true if a given string is a valid comment content.
     public static boolean isValidComment(String trimmedComment) {
         return trimmedComment.matches(Comment.COMMENT_VALIDATION_REGEX);
     }
