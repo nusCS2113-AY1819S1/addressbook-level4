@@ -1,10 +1,10 @@
-package seedu.address.logic.parser.exceptions;
+package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTransactionException;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRODUCT;
 
 public class AddTransactionCommandParser implements Parser<AddTransactionCommand> {

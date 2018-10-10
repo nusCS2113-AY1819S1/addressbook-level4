@@ -165,6 +165,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void addTransaction(Transaction transaction) {
         versionedAddressBook.addTransaction(transaction);
     }
+
+    @Override
+    public Transaction getLastTransaction() {
+        return versionedAddressBook.getLastTransaction();
+    }
 }
 
 

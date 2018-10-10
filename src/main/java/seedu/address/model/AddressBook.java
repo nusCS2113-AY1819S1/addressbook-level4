@@ -19,7 +19,8 @@ import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
-    public final SalesHistory salesHistory;
+    private final SalesHistory salesHistory;
+    private Transaction lastTransaction;
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -30,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         salesHistory = new SalesHistory();
+        lastTransaction = null;
     }
 
     public AddressBook() {}
@@ -96,6 +98,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public void addTransaction(Transaction transaction) {
         salesHistory.addTransaction(transaction);
+        lastTransaction = transaction;
     }
 
     public String getDaysHistory(String day) {
@@ -111,6 +114,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String getActiveDayHistory() {
         ShopDay activeDay = salesHistory.getActiveDay();
         return activeDay.getDaysTransactions();
+    }
+
+    public Transaction getLastTransaction() {
+        return lastTransaction;
     }
 
     /**

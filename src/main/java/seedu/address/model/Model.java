@@ -91,4 +91,9 @@ public interface Model {
      * Returns the active day's transaction history
      */
     String getActiveDayHistory();
+
+    /**
+     * Returns the latest transaction.
+     */
+    Transaction getLastTransaction();
 }
