@@ -22,7 +22,7 @@ Responsibilities: Ensure product deliverables are up to scratch, and that all de
 '''
 
 === Tan Yuan Cai
-image::harriuscai.jpg[width="150", align="left"]
+image::harriuscai.png[width="150", align="left"]
 {empty}[https://github.com/harriuscai[github]] [<<harriuscai#, portfolio>>]
 
 Role: Code Quality & Integration +
