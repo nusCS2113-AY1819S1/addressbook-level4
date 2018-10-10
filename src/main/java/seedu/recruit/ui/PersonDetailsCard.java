@@ -1,82 +1,85 @@
 package seedu.recruit.ui;
 
-import java.util.logging.Logger;
-
-import com.google.common.eventbus.Subscribe;
-import javafx.application.Platform;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.Label;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.recruit.commons.core.LogsCenter;
-import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
-import seedu.recruit.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * Panel containing the list of persons.
+ * An UI component that displays information of a {@code Candidate}.
  */
 public class PersonDetailsCard extends UiPart<Region> {
+
     private static final String FXML = "PersonDetailsCard.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonDetailsCard.class);
+
+    /**
+     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
+     * As a consequence, UI elements' variable names cannot be set to such keywords
+     * or an exception will be thrown by JavaFX during runtime.
+     *
+     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on CandidateBook level 4</a>
+     */
+
+    public final Candidate candidate;
 
     @FXML
-    private ListView<Candidate> personDetailsView;
+    private HBox cardPane;
+    @FXML
+    private Label id;
+    @FXML
+    private Label name;
+    @FXML
+    private Label gender;
+    @FXML
+    private Label age;
+    @FXML
+    private Label phone;
+    @FXML
+    private Label email;
+    @FXML
+    private Label address;
+    @FXML
+    private Label desired_job;
+    @FXML
+    private Label education;
+    @FXML
+    private Label salary;
+    @FXML
+    private FlowPane tags;
 
-    public PersonDetailsCard(ObservableList<Candidate> candidateList) {
+    public PersonDetailsCard(Candidate candidate, int displayedIndex) {
         super(FXML);
-        setConnections(candidateList);
-        registerAsAnEventHandler(this);
+        this.candidate = candidate;
+        id.setText(displayedIndex + ". ");
+        name.setText(candidate.getName().fullName);
+        gender.setText(candidate.getGender().value);
+        age.setText(candidate.getAge().value);
+        phone.setText(candidate.getPhone().value);
+        email.setText(candidate.getEmail().value);
+        address.setText(candidate.getAddress().value);
+        desired_job.setText(candidate.getJob().value);
+        education.setText(candidate.getEducation().value);
+        salary.setText(candidate.getSalary().value);
+        candidate.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
-    private void setConnections(ObservableList<Candidate> candidateList) {
-        personDetailsView.setItems(candidateList);
-        personDetailsView.setCellFactory(listView -> new PersonDetailsViewCell());
-        setEventHandlerForSelectionChangeEvent();
-    }
-
-    private void setEventHandlerForSelectionChangeEvent() {
-        personDetailsView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in candidate details panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
-                    }
-                });
-    }
-
-    /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
-     */
-    private void scrollTo(int index) {
-        Platform.runLater(() -> {
-            personDetailsView.scrollTo(index);
-            personDetailsView.getSelectionModel().clearAndSelect(index);
-        });
-    }
-
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
-    }
-
-    /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code PersonCard}.
-     */
-    class PersonDetailsViewCell extends ListCell<Candidate> {
-        @Override
-        protected void updateItem(Candidate candidate, boolean empty) {
-            super.updateItem(candidate, empty);
-
-            if (empty || candidate == null) {
-                setGraphic(null);
-                setText(null);
-            } else {
-                setGraphic(new PersonCard(candidate, getIndex() + 1).getRoot());
-            }
+    @Override
+    public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
         }
-    }
 
+        // instanceof handles nulls
+        if (!(other instanceof PersonDetailsCard)) {
+            return false;
+        }
+
+        // state check
+        PersonDetailsCard card = (PersonDetailsCard) other;
+        return id.getText().equals(card.id.getText())
+                && candidate.equals(card.candidate);
+    }
 }

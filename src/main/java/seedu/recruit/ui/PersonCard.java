@@ -54,11 +54,11 @@ public class PersonCard extends UiPart<Region> {
         this.candidate = candidate;
         id.setText(displayedIndex + ". ");
         name.setText(candidate.getName().fullName);
-        gender.setText(candidate.getGender().value);
-        age.setText(candidate.getAge().value);
-        phone.setText(candidate.getPhone().value);
-        email.setText(candidate.getEmail().value);
-        address.setText(candidate.getAddress().value);
+        //gender.setText(candidate.getGender().value);
+        //age.setText(candidate.getAge().value);
+        //phone.setText(candidate.getPhone().value);
+        //email.setText(candidate.getEmail().value);
+        //address.setText(candidate.getAddress().value);
         desired_job.setText(candidate.getJob().value);
         education.setText(candidate.getEducation().value);
         salary.setText(candidate.getSalary().value);

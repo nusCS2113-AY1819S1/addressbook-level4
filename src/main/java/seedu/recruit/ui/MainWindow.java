@@ -39,7 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private PersonDetailsCard personDetailsCard;
+    private PersonDetailsPanel personDetailsPanel;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -54,7 +54,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane personListPanelPlaceholder;
 
     @FXML
-    private StackPane personDetailsCardPlaceholder;
+    private StackPane personDetailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -126,8 +126,8 @@ public class MainWindow extends UiPart<Stage> {
         //browserPanel = new BrowserPanel();
         //browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personDetailsCard = new PersonDetailsCard(logic.getFilteredPersonList());
-        personDetailsCardPlaceholder.getChildren().add(personDetailsCard.getRoot());
+        personDetailsPanel = new PersonDetailsPanel(logic.getFilteredPersonList());
+        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
@@ -199,7 +199,7 @@ public class MainWindow extends UiPart<Stage> {
         return personListPanel;
     }
 
-    public PersonDetailsCard getPersonDetailsCard() {return personDetailsCard;}
+    public PersonDetailsPanel getPersonDetailsPanel() {return personDetailsPanel;}
 
     void releaseResources() {
         browserPanel.freeResources();
