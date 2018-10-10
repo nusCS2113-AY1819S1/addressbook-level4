@@ -197,9 +197,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
-        public void setDepartment(Department department) { this.department = department; }
+        public void setDepartment(Department department) {
+            this.department = department;
+        }
 
-        public Optional<Department> getDepartment() { return Optional.ofNullable(department); }
+        public Optional<Department> getDepartment() {
+            return Optional.ofNullable(department);
+        }
 
         /**
          * Sets {@code tags} to this object's {@code tags}.

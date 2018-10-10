@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Department {
 
     public static final String MESSAGE_DEPARTMENT_CONSTRAINTS =
-            "Department must be valid";
+            "Department must be valid and only consist of alphabets";
     public static final String DEPARTMENT_VALIDATION_REGEX = "^[A-Za-z]+$";
     public final String value;
 
