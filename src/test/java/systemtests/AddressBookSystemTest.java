@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
@@ -18,11 +19,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -30,6 +26,10 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
@@ -176,7 +176,7 @@ public abstract class AddressBookSystemTest {
      * and the person list panel displays the persons in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
-            Model expectedModel) {
+                                                     Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new AddressBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
@@ -191,6 +191,7 @@ public abstract class AddressBookSystemTest {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
+        statusBarFooterHandle.rememberTotalPersonsStatus();
         statusBarFooterHandle.rememberSyncStatus();
         getPersonListPanel().rememberSelectedPersonCard();
     }
@@ -198,6 +199,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Asserts that the previously selected card is now deselected and the browser's url remains displaying the details
      * of the previously selected person.
+     *
      * @see BrowserPanelHandle#isUrlChanged()
      */
     protected void assertSelectedCardDeselected() {
@@ -208,6 +210,7 @@ public abstract class AddressBookSystemTest {
     /**
      * Asserts that the browser's url is changed to display the details of the person in the person list panel at
      * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
+     *
      * @see BrowserPanelHandle#isUrlChanged()
      * @see PersonListPanelHandle#isSelectedPersonCardChanged()
      */
@@ -227,6 +230,7 @@ public abstract class AddressBookSystemTest {
 
     /**
      * Asserts that the browser's url and the selected card in the person list panel remain unchanged.
+     *
      * @see BrowserPanelHandle#isUrlChanged()
      * @see PersonListPanelHandle#isSelectedPersonCardChanged()
      */
@@ -255,18 +259,35 @@ public abstract class AddressBookSystemTest {
     protected void assertStatusBarUnchanged() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         assertFalse(handle.isSaveLocationChanged());
+        assertFalse(handle.isTotalPersonsStatusChanged());
         assertFalse(handle.isSyncStatusChanged());
     }
 
     /**
      * Asserts that only the sync status in the status bar was changed to the timing of
-     * {@code ClockRule#getInjectedClock()}, while the save location remains the same.
+     * {@code ClockRule#getInjectedClock()}, while the save location and the total person
+     * list remains the same.
      */
     protected void assertStatusBarUnchangedExceptSyncStatus() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
         String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
+        assertFalse(handle.isTotalPersonsStatusChanged());
+    }
+
+    /**
+     * Asserts that the sync status in the status bar was changed to the timing of
+     * {@code ClockRule#getInjectedClock()}, and total persons was changed to match the total
+     * number of persons in the address book, while the save location remains the same.
+     */
+    protected void assertStatusBarChangedExceptSaveLocation() {
+        StatusBarFooterHandle handle = getStatusBarFooter();
+        String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
+        String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
+        assertEquals(expectedSyncStatus, handle.getSyncStatus());
+        final int totalPersons = testApp.getModel().getAddressBook().getPersonList().size();
+        assertEquals(String.format(TOTAL_PERSONS_STATUS, totalPersons), handle.getTotalPersonsStatus());
         assertFalse(handle.isSaveLocationChanged());
     }
 
@@ -281,6 +302,8 @@ public abstract class AddressBookSystemTest {
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
+        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getAddressBook().getPersonList().size()),
+                getStatusBarFooter().getTotalPersonsStatus());
     }
 
     /**
