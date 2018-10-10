@@ -1,31 +1,31 @@
 package systemtests;
 
 import static org.junit.Assert.assertFalse;
-import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalPersons.BENSON;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.DANIEL;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.recruit.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.recruit.testutil.TypicalPersons.BENSON;
+import static seedu.recruit.testutil.TypicalPersons.CARL;
+import static seedu.recruit.testutil.TypicalPersons.DANIEL;
+import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.tag.Tag;
+import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.logic.commands.DeleteCommand;
+import seedu.recruit.logic.commands.FindCommand;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.model.Model;
+import seedu.recruit.model.tag.Tag;
 
 public class FindCommandSystemTest extends CandidateBookSystemTest {
 
     @Test
     public void find() {
-        /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
+        /* Case: find multiple persons in recruit book, command with leading spaces and trailing spaces
          * -> 2 persons found
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
@@ -48,23 +48,23 @@ public class FindCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords -> 2 persons found */
+        /* Case: find multiple persons in recruit book, 2 keywords -> 2 persons found */
         command = FindCommand.COMMAND_WORD + " Benson Daniel";
         ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords in reversed order -> 2 persons found */
+        /* Case: find multiple persons in recruit book, 2 keywords in reversed order -> 2 persons found */
         command = FindCommand.COMMAND_WORD + " Daniel Benson";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords with 1 repeat -> 2 persons found */
+        /* Case: find multiple persons in recruit book, 2 keywords with 1 repeat -> 2 persons found */
         command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 matching keywords and 1 non-matching keyword
+        /* Case: find multiple persons in recruit book, 2 matching keywords and 1 non-matching keyword
          * -> 2 persons found
          */
         command = FindCommand.COMMAND_WORD + " Daniel Benson NonMatchingKeyWord";
@@ -81,53 +81,53 @@ public class FindCommandSystemTest extends CandidateBookSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: find same persons in address book after deleting 1 of them -> 1 candidate found */
+        /* Case: find same persons in recruit book after deleting 1 of them -> 1 candidate found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getAddressBook().getCandidatelist().contains(BENSON));
+        assertFalse(getModel().getCandidateBook().getCandidatelist().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find candidate in address book, keyword is same as name but of different case -> 1 candidate found */
+        /* Case: find candidate in recruit book, keyword is same as name but of different case -> 1 candidate found */
         command = FindCommand.COMMAND_WORD + " MeIeR";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find candidate in address book, keyword is substring of name -> 0 persons found */
+        /* Case: find candidate in recruit book, keyword is substring of name -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Mei";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find candidate in address book, name is substring of keyword -> 0 persons found */
+        /* Case: find candidate in recruit book, name is substring of keyword -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Meiers";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find candidate not in address book -> 0 persons found */
+        /* Case: find candidate not in recruit book -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find phone number of candidate in address book -> 0 persons found */
+        /* Case: find phone number of candidate in recruit book -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " " + DANIEL.getPhone().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find address of candidate in address book -> 0 persons found */
+        /* Case: find recruit of candidate in recruit book -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " " + DANIEL.getAddress().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of candidate in address book -> 0 persons found */
+        /* Case: find email of candidate in recruit book -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of candidate in address book -> 0 persons found */
+        /* Case: find tags of candidate in recruit book -> 0 persons found */
         List<Tag> tags = new ArrayList<>(DANIEL.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
@@ -142,7 +142,7 @@ public class FindCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
-        /* Case: find candidate in empty address book -> 0 persons found */
+        /* Case: find candidate in empty recruit book -> 0 persons found */
         deleteAllPersons();
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
@@ -167,7 +167,7 @@ public class FindCommandSystemTest extends CandidateBookSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel) {
         String expectedResultMessage = String.format(
-                MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredPersonList().size());
+                MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredCandidateList().size());
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

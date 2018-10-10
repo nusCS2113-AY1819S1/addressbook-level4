@@ -3,51 +3,51 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.recruit.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.recruit.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_NAME_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.recruit.testutil.TypicalPersons.AMY;
+import static seedu.recruit.testutil.TypicalPersons.BOB;
+import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditCandidateCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.candidate.Address;
-import seedu.address.model.candidate.Candidate;
-import seedu.address.model.candidate.Email;
-import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.recruit.commons.core.Messages;
+import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.logic.commands.EditCandidateCommand;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.model.Model;
+import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.candidate.Name;
+import seedu.recruit.model.commons.Address;
+import seedu.recruit.model.commons.Email;
+import seedu.recruit.model.commons.Phone;
+import seedu.recruit.model.tag.Tag;
+import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.testutil.PersonUtil;
 
 @Ignore
 public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
@@ -76,8 +76,8 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: redo editing the last candidate in the list -> last candidate edited again */
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
-        model.updatePerson(
-                getModel().getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()), editedCandidate);
+        model.updateCandidate(
+                getModel().getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased()), editedCandidate);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a candidate with new values same as existing values -> edited */
@@ -86,9 +86,9 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a candidate with new values same as another candidate's values but with different name -> edited*/
-        assertTrue(getModel().getAddressBook().getCandidatelist().contains(BOB));
+        assertTrue(getModel().getCandidateBook().getCandidatelist().contains(BOB));
         index = INDEX_SECOND_PERSON;
-        assertNotEquals(getModel().getFilteredPersonList().get(index.getZeroBased()), BOB);
+        assertNotEquals(getModel().getFilteredCandidateList().get(index.getZeroBased()), BOB);
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedCandidate = new PersonBuilder(BOB).withName(VALID_NAME_AMY).build();
@@ -106,26 +106,26 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: clear tags -> cleared */
         index = INDEX_FIRST_PERSON;
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
-        Candidate candidateToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
+        Candidate candidateToEdit = getModel().getFilteredCandidateList().get(index.getZeroBased());
         editedCandidate = new PersonBuilder(candidateToEdit).withTags().build();
         assertCommandSuccess(command, index, editedCandidate);
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
-        /* Case: filtered candidate list, edit index within bounds of address book and candidate list -> edited */
+        /* Case: filtered candidate list, edit index within bounds of recruit book and candidate list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         index = INDEX_FIRST_PERSON;
-        assertTrue(index.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(index.getZeroBased() < getModel().getFilteredCandidateList().size());
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
-        candidateToEdit = getModel().getFilteredPersonList().get(index.getZeroBased());
+        candidateToEdit = getModel().getFilteredCandidateList().get(index.getZeroBased());
         editedCandidate = new PersonBuilder(candidateToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedCandidate);
 
-        /* Case: filtered candidate list, edit index within bounds of address book but out of bounds of candidate list
+        /* Case: filtered candidate list, edit index within bounds of recruit book but out of bounds of candidate list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getCandidatelist().size();
+        int invalidIndex = getModel().getCandidateBook().getCandidatelist().size();
         assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -154,7 +154,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCandidateCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredPersonList().size() + 1;
+        invalidIndex = getModel().getFilteredCandidateList().size() + 1;
         assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -178,7 +178,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        /* Case: invalid address -> rejected */
+        /* Case: invalid recruit -> rejected */
         assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                         + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
@@ -188,9 +188,9 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: edit a candidate with new values same as another candidate's values -> rejected */
         executeCommand(PersonUtil.getAddCandidateCommand(BOB));
-        assertTrue(getModel().getAddressBook().getCandidatelist().contains(BOB));
+        assertTrue(getModel().getCandidateBook().getCandidatelist().contains(BOB));
         index = INDEX_FIRST_PERSON;
-        assertFalse(getModel().getFilteredPersonList().get(index.getZeroBased()).equals(BOB));
+        assertFalse(getModel().getFilteredCandidateList().get(index.getZeroBased()).equals(BOB));
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCandidateCommand.MESSAGE_DUPLICATE_PERSON);
@@ -202,7 +202,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandFailure(command, EditCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
         /** Case: edit a candidate with new values same as another
-         *  candidate's values but with different address -> rejected */
+         *  candidate's values but with different recruit -> rejected */
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCandidateCommand.MESSAGE_DUPLICATE_PERSON);
@@ -241,8 +241,9 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
     private void assertCommandSuccess(String command, Index toEdit, Candidate editedCandidate,
             Index expectedSelectedCardIndex) {
         Model expectedModel = getModel();
-        expectedModel.updatePerson(expectedModel.getFilteredPersonList().get(toEdit.getZeroBased()), editedCandidate);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateCandidate(expectedModel.getFilteredCandidateList().get(toEdit.getZeroBased()),
+                editedCandidate);
+        expectedModel.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
 
         assertCommandSuccess(command, expectedModel,
                 String.format(EditCandidateCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedCandidate),
@@ -274,7 +275,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {
@@ -293,7 +294,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
      * 4. Asserts that the command box has the error style.<br>
      * Verifications 1 and 2 are performed by
      * {@code CandidateBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see CandidateBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * @see CandidateBookSystemTest#assertApplicationDisplaysExpected(Stri  ng, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();

@@ -1,60 +1,60 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.AGE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EDUCATION_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EDUCATION_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.JOB_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.JOB_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.recruit.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.AGE_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.AGE_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.EDUCATION_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.EDUCATION_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.recruit.logic.commands.CommandTestUtil.JOB_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.JOB_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.SALARY_DESC_AMY;
+import static seedu.recruit.logic.commands.CommandTestUtil.SALARY_DESC_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.recruit.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.recruit.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.recruit.testutil.TypicalPersons.ALICE;
+import static seedu.recruit.testutil.TypicalPersons.AMY;
+import static seedu.recruit.testutil.TypicalPersons.BOB;
+import static seedu.recruit.testutil.TypicalPersons.CARL;
+import static seedu.recruit.testutil.TypicalPersons.HOON;
+import static seedu.recruit.testutil.TypicalPersons.IDA;
+import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.AddCandidateCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.candidate.Address;
-import seedu.address.model.candidate.Candidate;
-import seedu.address.model.candidate.Email;
-import seedu.address.model.candidate.Name;
-import seedu.address.model.candidate.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
+import seedu.recruit.commons.core.Messages;
+import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.logic.commands.AddCandidateCommand;
+import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.model.Model;
+import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.candidate.Name;
+import seedu.recruit.model.commons.Address;
+import seedu.recruit.model.commons.Email;
+import seedu.recruit.model.commons.Phone;
+import seedu.recruit.model.tag.Tag;
+import seedu.recruit.testutil.PersonBuilder;
+import seedu.recruit.testutil.PersonUtil;
 
 public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
 
@@ -64,7 +64,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /** Case: add a candidate without tags to a non-empty address book, command with leading spaces and trailing
+        /** Case: add a candidate without tags to a non-empty recruit book, command with leading spaces and trailing
          * space -> added
          */
         Candidate toAdd = AMY;
@@ -80,18 +80,18 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: redo adding Amy to the list -> Amy added again */
         command = RedoCommand.COMMAND_WORD;
-        model.addPerson(toAdd);
+        model.addCandidate(toAdd);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add a candidate with all fields same as another candidate in the address book except name -> added */
+        /* Case: add a candidate with all fields same as another candidate in the recruit book except name -> added */
         toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCandidateCommand.COMMAND_WORD + NAME_DESC_BOB + GENDER_DESC_AMY + AGE_DESC_AMY +  PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + JOB_DESC_AMY + EDUCATION_DESC_AMY + SALARY_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a candidate with all fields same as another candidate in the address book except phone and email
+        /* Case: add a candidate with all fields same as another candidate in the recruit book except phone and email
          * -> added
          */
         toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
@@ -99,7 +99,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, toAdd);
 
 
-        /* Case: add to empty address book -> added */
+        /* Case: add to empty recruit book -> added */
         deleteAllPersons();
         assertCommandSuccess(ALICE);
 
@@ -141,7 +141,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
         command = PersonUtil.getAddCandidateCommand(toAdd);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: add a duplicate candidate except with different address -> rejected */
+        /* Case: add a duplicate candidate except with different recruit -> rejected */
         toAdd = new PersonBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = PersonUtil.getAddCandidateCommand(toAdd);
         assertCommandFailure(command, AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
@@ -165,7 +165,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
                 + ADDRESS_DESC_AMY + JOB_DESC_AMY + EDUCATION_DESC_AMY + SALARY_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCandidateCommand.MESSAGE_USAGE));
 
-        /* Case: missing address -> rejected */
+        /* Case: missing recruit -> rejected */
         command = AddCandidateCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + AGE_DESC_AMY
                 + PHONE_DESC_AMY + EMAIL_DESC_AMY + JOB_DESC_AMY + EDUCATION_DESC_AMY + SALARY_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCandidateCommand.MESSAGE_USAGE));
@@ -190,7 +190,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
                 + INVALID_EMAIL_DESC + ADDRESS_DESC_AMY + JOB_DESC_AMY + EDUCATION_DESC_AMY + SALARY_DESC_AMY;
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        /* Case: invalid address -> rejected */
+        /* Case: invalid recruit -> rejected */
         command = AddCandidateCommand.COMMAND_WORD + NAME_DESC_AMY + GENDER_DESC_AMY + AGE_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + INVALID_ADDRESS_DESC + JOB_DESC_AMY + EDUCATION_DESC_AMY + SALARY_DESC_AMY;
         assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
@@ -227,7 +227,7 @@ public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
      */
     private void assertCommandSuccess(String command, Candidate toAdd) {
         Model expectedModel = getModel();
-        expectedModel.addPerson(toAdd);
+        expectedModel.addCandidate(toAdd);
         String expectedResultMessage = String.format(AddCandidateCommand.MESSAGE_SUCCESS, toAdd);
 
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
