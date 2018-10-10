@@ -85,3 +85,11 @@ public class PersonCardHandle extends NodeHandle<Node> {
                         .collect(Collectors.toList())));
     }
 }
+    public List<String> getTagStyleClasses(String tag) {
+        return tagLabels
+                .stream()
+                .filter(label -> label.getText().equals(tag))
+                .map(Label::getStyleClass)
+                .findFirst()
+                .orElse(null);
+    }
