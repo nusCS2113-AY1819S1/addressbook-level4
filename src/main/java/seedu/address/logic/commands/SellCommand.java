@@ -14,6 +14,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.Cost;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
@@ -87,10 +88,11 @@ public class SellCommand extends Command {
         Name name = bookToSell.getName();
         Isbn isbn = bookToSell.getIsbn();
         Price price = bookToSell.getPrice();
+        Cost cost = bookToSell.getCost();
         Quantity updatedQuantity = bookToSell.deductQuantity(decreaseQuantity.getQuantity());
         Set<Tag> tags = bookToSell.getTags();
 
-        return new Book(name, isbn, price, updatedQuantity, tags);
+        return new Book(name, isbn, price, cost, updatedQuantity, tags);
     }
 
     @Override

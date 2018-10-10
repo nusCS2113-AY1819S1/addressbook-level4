@@ -4,11 +4,10 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Book's email in the address book.
+ * Represents a Book's price in the book inventory.
  * Guarantees: immutable; is valid as declared in {@link #isValidPrice(String)}
  */
 public class Price {
-
 
     public static final String MESSAGE_PRICE_CONSTRAINTS = "Prices should be numerical and in 2 decimal places or none at all\n"
             + "E.g. $4, $3.02";
@@ -30,7 +29,7 @@ public class Price {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid price.
      */
     public static boolean isValidPrice(String test) {
         return test.matches(PRICE_VALIDATION_REGEX);
