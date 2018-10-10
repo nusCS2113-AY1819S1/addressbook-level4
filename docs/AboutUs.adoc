@@ -13,16 +13,16 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 
 === Mohd Aslam
-image::m-aslam-mj2.jpg[width="150", align="left"]
+image::m-aslam-mj2.png[width="150", align="left"]
 {empty}[http://github.com/m-aslam-mj2[github]] [<<m-aslam-mj2#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: Ensure product deliverables are up to scratch, and that all deadlines are met.
+Responsibilities: Ensure that project deliverables are up to scratch, and that all deadlines are met in a timely fashion.
 
 '''
 
 === Tan Yuan Cai
-image::harriuscai.jpg[width="150", align="left"]
+image::harriuscai.png[width="150", align="left"]
 {empty}[https://github.com/harriuscai[github]] [<<harriuscai#, portfolio>>]
 
 Role: Code Quality & Integration +

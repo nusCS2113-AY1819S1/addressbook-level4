@@ -82,7 +82,7 @@ Edits the phone number and home address of the 1st student to be 99887890 and 14
 Edits only the address of the 2nd student to be 14 Jurong East Street 91.
 
 
-==== Find a student by name/matric no : `student find` [Coming in v1.2]
+==== Find a student by name/matric no : `student find [coming in v1.2]`
 Find student(s) whose names contain any of the given keywords. +
 Format:  find [n/STUDENT_NAME] [i/MATRIC_NO]
 ****
@@ -124,7 +124,7 @@ Deletes the 2nd person in the system
 * The index must be a must be a positive integer 1,2,3,...
 ****
 
-==== Find Student : `student find` [Coming in v1.2]
+==== Find Student : `student find [coming in v1.2]`
 Find student(s) whose names contain any of the given keywords. +
 Format:  find [n/STUDENT_NAME] [i/MATRIC_NO]
 
@@ -147,7 +147,7 @@ Return the student whose matriculation no matches 'A0168000L'.
 Shows a list of all students in the system. +
 Format: list students
 
-==== Export Student : `student export`  [Coming in v1.3]
+==== Export Student : `student export [coming in v1.3]`
 Exports students to a .csv file +
 Format: student export LOCATION
 ****
@@ -244,7 +244,7 @@ Example:
 * `module delete c/CS2113` +
 Deletes the module with module code `CS2113`
 
-==== Find Module : `module find`
+==== Find module : `module find`
 Finds modules whose module codes contain any of the given keywords. This is useful for checking if certain module exists in the system. +
 Format: `module find KEYWORD [MORE_KEYWORDS]`
 
@@ -261,11 +261,11 @@ Returns `CS2113`.
 * `module find cs2113 CS2040c` +
 Returns `CS2113` and `CS2040C`.
 
-==== List Modules : `module list`
+==== List modules : `module list`
 Shows a list of all modules in the system. +
 Format: `module list`
 
-==== Archive module : `module archive`
+==== Archive module : `module archive [coming in v1.3]`
 Archives a module that is no longer being taught to keep it as a historical record. +
 Format: `module archive c/MODULE_CODE`
 
@@ -280,7 +280,7 @@ Example:
 * `module archive c/CS2113` +
 Archives the module with module code `CS2113`.
 
-==== Enroll Student : `module enrol`
+==== Enrol Student : `module enrol [coming in v1.3]`
 Enrols students into the specified module using their matriculation numbers or email addresses. +
 Format: `module enrol [i/MATRIC_NUMBER]... [e/EMAIL]...`
 
@@ -293,11 +293,11 @@ Examples:
 
 * `module enrol i/A0161234B` +
 Enrols a student with matric no. `A0161234B`.
-* `module enrol i/A0167263X A0179821B` +
+* `module enrol i/A0167263X i/A0179821B` +
 Enrols two students with matric no. `A0167263X` and `A0179821B`.
 * `module enrol e/e0191122@u.nus.edu` +
 Enrols a student with email `e0191122@u.nus.edu`.
-* `module enrol e/e0191234@u.nus.edu e0161234@u.nus.edu` +
+* `module enrol e/e0191234@u.nus.edu e/e0161234@u.nus.edu` +
 Enrols two students with email `e0191234@u.nus.edu` and `e0161234@u.nus.edu`.
 
 ==== Assign TA : `module assign [coming in v2.0]`
@@ -358,6 +358,19 @@ Examples:
 * `class modattend c/T16 i/A6942069M` +
 Modifies the attendance of the student of the admission number A6942069M for the class T16
 
+==== List class : `class list`
+Lists class(es) with information of the class for the system. +
+Format: `class list`
+
+****
+* Class(es) must exist in order to be listed
+****
+
+Examples:
+
+* `class list` +
+Lists all the class(es) created.
+
 ==== Remove class : `class delete`
 Deletes a class with students assigned to it for a module for the system. +
 Format: `class delete c/CLASS_NAME m/MODULE_CODE`
@@ -399,7 +412,7 @@ Examples:
 * `class delstudent c/T16 i/A6942069M` +
 Removes a student of the admission number A6942069M from the class T16
 
-==== Modifying class enrollment limits : `class maxenroll` `[Coming in v1.2]`
+==== Modifying class enrollment limits : `class maxenroll [coming in v1.2]`
 Modifies the max enrollment size for a class for the system. +
 Format: `class maxenroll  c/CLASS_NAME e/NEW_MAX_ENROLLMENT_SIZE`
 
@@ -412,7 +425,7 @@ Examples:
 * `class maxenroll c/T16 e/20` +
 Modifies the new max class enrollment size for the class T16 to be 20
 
-==== Accessing class attendance list : `class listattend` `[Coming in v1.3]`
+==== Accessing class attendance list : `class listattend [coming in v1.3]`
 Access the class attendance list for the system. +
 Format: `class listattend c/CLASS_NAME`
 
@@ -425,7 +438,7 @@ Examples:
 * `class listattend c/T16` +
 Displays the class attendance list for the class T16
 
-==== Marking class attendance list : `class markattend` `[Coming in v1.3]`
+==== Marking class attendance list : `class markattend [coming in v1.3]`
 Mark the class attendance list for a specified student for the system. +
 Format: `class markattend c/CLASS_NAME i/ADMISSION_NO`
 
@@ -439,7 +452,7 @@ Examples:
 * `class markattend c/T16 i/A6942069M` +
 Marks the attendance of the student of the admission number A6942069M for the class T16
 
-==== Modifying class attendance list : `class modattend` `[Coming in v1.3]`
+==== Modifying class attendance list : `class modattend [coming in v1.3]`
 Modifies the class attendance list for the system. +
 Format: `class modattend c/CLASS_NAME i/ADMISSION_NO`
 
@@ -466,7 +479,7 @@ Examples:
 * `gradebook add c/CS2040C g/Assignment 1` +
 Adds gradebook component, Assignment 1, to module CS2040C.
 
-==== Update Grade Component : `gradebook update` `[Coming in v1.3]`
+==== Update Grade Component : `gradebook update [coming in v1.3]`
 Updates a grade item. +
 Format: `gradebook update c/MODULE_CODE g/GRADE_ITEM [m/MARKS_MAX] [p/GRADE_PERCENTAGE]`
 
@@ -496,7 +509,7 @@ Examples:
 * `gradebook remove m/CS2040C g/Assignment 1` +
 Deletes Assignment 1 gradebook component from module CS2040C.
 
-==== Find Grade Component : `gradebook find` `[Coming in v1.2]`
+==== Find Grade Component : `gradebook find [coming in v1.2]`
 Assigns marks to a student. +
 Format: `gradebook find c/MODULE_CODE g/GRADE_ITEM'
 
@@ -509,7 +522,7 @@ Examples:
 * `gradebook find c/CS2040C g/Assignment 1` +
 Finds Assignment 1 gradebook component in module CS2040C.
 
-==== List Grade Components : `gradebook list` `[Coming in v1.2]`
+==== List Grade Components : `gradebook list [coming in v1.2]`
 Lists all the grade items in a certain module. +
 Format: `gradebook list'
 
@@ -522,7 +535,7 @@ Examples:
 * `gradebook list` +
 Lists all the grade items for the module with module code CS2040C.
 
-==== List Students Grades : `gradebook list students` `[Coming in v1.3]`
+==== List Students Grades : `gradebook list students [coming in v1.2]`
 Lists grades of all students enrolled in the module. +
 Format: `gradebook list students c/MODULE_CODE'
 
@@ -535,7 +548,7 @@ Examples:
 * `gradebook list students c/CS2040C` +
 Lists all grades obtained by students in CS2040C module.
 
-==== Assign Student Grade : `gradebook assign` `[Coming in v1.3]`
+==== Assign Student Grade : `gradebook assign [coming in v1.3]`
 Assigns marks to a student. +
 Format: `gradebook assign c/MODULE_CODE g/GRADE_ITEM i/MATRIC_NUMBER m/MARKS'
 
@@ -572,7 +585,7 @@ This tells the system that the note is to be saved in the CS2113 module with a L
 * `note add m/CS2113 p/2 d/31.12.2113` +
 This tells the system that the note is to be saved in the CS2113 module with a MEDIUM priority and a date (31 Dec 2113).
 
-==== Update note : `note edit` `[Coming in v1.3]`
+==== Update note : `note edit [coming in v1.3]`
 Edits an existing note. +
 Format: `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]`
 
@@ -588,7 +601,7 @@ A list of all notes saved in CS1010 module is displayed. +
 `note edit m/CS1010 3 d/10.10.2019` +
 The user will now be able to edit the note that corresponds to INDEX=3 in the list. The modified note will be saved with its assigned DATE changed to 10/10/2019 while its PRIORITY_LEVEL remains unchanged.
 
-==== Remove note : `note delete` `[Coming in v1.2]`
+==== Remove note : `note delete [coming in v1.2]`
 Deletes a specific note. +
 Format: `note delete m/MODULE_CODE INDEX`
 
@@ -602,7 +615,7 @@ A list of all notes saved in CS2040C module is displayed. +
 `note delete m/CS2040C 1` +
 Deletes the note that corresponds to INDEX=1 in the list.
 
-==== Find note : `note find` `[Coming in v1.2]`
+==== Find note : `note find [coming in v1.2]`
 Search and display existing notes from a module using keywords. +
 Format: `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..`
 
@@ -735,6 +748,23 @@ e.g. `find student Megan Nicole`
 e.g. `student delete 2`
 * *Export students* : `student export` +
 e.g. `student export C:\export`
+
+* *Add module* : `module add n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]…​` +
+e.g. `module add n/Software Engineering c/CS2113 p/CS2040C`
+* *Update module* : `module edit n/MODULE_NAME c/MODULE_CODE [p/PREREQUISITES]…​` +
+e.g. `module edit c/CS2113 p/`
+* *Remove module* : `module delete c/MODULE_CODE​` +
+e.g. `module delete c/CS2113`
+* *Find module by module code* : `module find KEYWORD [MORE_KEYWORDS]​` +
+e.g. `module find cs2113`
+* *List modules* : `module list​` +
+* *Archive module* : `module archive c/MODULE_CODE​` +
+e.g. `module archive c/CS2113`
+* *Enrol student in module* : `module enrol [i/MATRIC_NUMBER]…​ [e/EMAIL]…​​` +
+e.g. `module enrol i/A0167263X i/A0179821B`
+* *Assign TA* : `module assign [i/MATRIC_NUMBER] [e/EMAIL]` +
+e.g. `module assign i/A0171234B`
+
 * *Add Grade Component* : `gradebook add c/MODULE_CODE i/GRADE_ITEM` +
 e.g. `gradebook add c/CS2040C i/Assignment 1`
 * *Edit Grade Item* : `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE` +
@@ -749,6 +779,8 @@ e.g. `gradebook list grades c/CS2040C`
 e.g. `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10`
 * *Creating a class* `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT` +
 e.g. `class create c/T16 m/CG1111 e/20`
+* *List class* `class list` +
+e.g. `class list`
 * *Deleting a class* `class delete c/CLASS_NAME m/MODULE_CODE` +
 e.g. `class delete c/T16 m/CG1111`
 * *Assigning a student to class* `class addstudent c/CLASS_NAME m/MODULE_CODE` +
