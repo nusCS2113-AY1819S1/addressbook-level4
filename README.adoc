@@ -30,7 +30,7 @@ endif::[]
 
 * This application is inspired by our own experiences and we creat this application because we find it seems to be troublesome when we want to borrow or use some items from the lab.
 * Thus, we try to use the knowledge in AddressBook4 to make this application StockList.
-* Some parts of this sample application of StockList were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
+* Some parts of this sample application: StockList were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 
