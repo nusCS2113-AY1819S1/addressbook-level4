@@ -15,8 +15,8 @@ public class SecurityManager extends ComponentManager implements Security {
     //Person userPerson;
 
 
-    public SecurityManager() {
-        this.isAuthenticated = false; //Test for now
+    public SecurityManager(boolean isTest) {
+        this.isAuthenticated = isTest; //Test for now
         this.username = "test";
         this.password = "test";
     }

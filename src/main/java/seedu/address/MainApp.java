@@ -74,7 +74,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        user = new SecurityManager();
+        user = new SecurityManager(false);
 
         ui = new UiManager(logic, config, userPrefs, user);
 
@@ -86,7 +86,7 @@ public class MainApp extends Application {
      * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+    protected Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
         try {
