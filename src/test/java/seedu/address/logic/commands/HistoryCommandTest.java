@@ -7,11 +7,12 @@ import org.junit.Test;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TestStorage;
 
 public class HistoryCommandTest {
     private CommandHistory history = new CommandHistory();
-    private Model model = new ModelManager();
-    private Model expectedModel = new ModelManager();
+    private Model model = new ModelManager(new TestStorage());
+    private Model expectedModel = new ModelManager(new TestStorage());
 
     @Test
     public void execute() {

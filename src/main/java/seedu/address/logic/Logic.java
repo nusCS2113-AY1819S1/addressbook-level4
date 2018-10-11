@@ -1,10 +1,13 @@
 package seedu.address.logic;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Person;
+import seedu.address.model.login.User;
+import seedu.address.model.person.Product;
+import seedu.address.model.distributor.Distributor;
 
 /**
  * API of the Logic component
@@ -20,8 +23,19 @@ public interface Logic {
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
     /** Returns an unmodifiable view of the filtered list of persons */
-    ObservableList<Person> getFilteredPersonList();
+    ObservableList<Product> getFilteredPersonList();
+
+    /** Returns an unmodifiable view of the filtered list of persons */
+    ObservableList<Distributor> getFilteredDistributorList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
+
+    /** Returns the execution of the login function only, regardless of commandText */
+    CommandResult executeUnauthenticatedCommands(String commandText, Command command) throws CommandException;
+
+    /** Returns whether given user is logged in successfully */
+    boolean hasLoggedIn();
+
+    User getLoggedInUser();
 }
