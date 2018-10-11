@@ -34,15 +34,18 @@ public class DistributeCommand extends Command {
             + PREFIX_GENDER + "1 "
             + PREFIX_NATIONALITY + "1 \n";
 
+    private final Distribute distribute;
+
 
     public DistributeCommand(Distribute dist) {
         requireNonNull(dist);
-        new DistributeAlgorithm(dist);
+        distribute = dist;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        new DistributeAlgorithm(model, distribute);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
