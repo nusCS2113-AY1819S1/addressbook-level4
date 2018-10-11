@@ -25,7 +25,7 @@ public class CommandTestUtil {
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_ISBN_AMY = "978-3-16-148410-0";
-    public static final String VALID_ISBN_BOB = "978-3-16-148410-0";
+    public static final String VALID_ISBN_BOB = "978-1-56619-909-4";
     public static final String VALID_PRICE_AMY = "19.97";
     public static final String VALID_PRICE_BOB = "98.21";
     public static final String VALID_COST_AMY = "19.60";

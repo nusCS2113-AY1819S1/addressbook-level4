@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <books>
+        <name>Hans Muster</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">4th street</quantity>
+    </books>
+    <books>
+        <name>Ruth Mueller</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">81th street</quantity>
+    </books>
+    <books>
+        <name>Heinz Kurz</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">wall street</quantity>
+    </books>
+    <books>
+        <name>Cornelia Meier</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">10th street</quantity>
+    </books>
+    <books>
+        <name>Werner Meyer</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">michegan ave</quantity>
+    </books>
+    <books>
+        <name>Lydia Kunz</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">little tokyo</quantity>
+    </books>
+    <books>
+        <name>Anna Best</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">4th street</quantity>
+    </books>
+    <books>
+        <name>Stefan Meier</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">little india</quantity>
+    </books>
+    <books>
+        <name>Martin Mueller</name>
+        <isbn isPrivate="false">978-1-56619-909-4</isbn>
+        <price isPrivate="false">7.90</price>
+        <cost isPrivate="false">7.90</cost>
+        <quantity isPrivate="false">chicago ave</quantity>
+    </books>
+</addressbook>

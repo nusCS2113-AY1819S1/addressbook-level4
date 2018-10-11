@@ -1,25 +1,7 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.QUANTITY_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PRICE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PRICE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_QUANTITY_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PRICE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ISBN_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.ISBN_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ISBN_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalBooks.ALICE;
 import static seedu.address.testutil.TypicalBooks.AMY;
@@ -56,7 +38,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
          */
         Book toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + ISBN_DESC_AMY + " "
-                + PRICE_DESC_AMY + "   " + QUANTITY_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + PRICE_DESC_AMY + "   " + COST_DESC_AMY + " " + QUANTITY_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -72,7 +54,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
 
         /* Case: add a book with all fields same as another book in the address book except name -> added */
         toAdd = new BookBuilder(AMY).withName(VALID_NAME_BOB).build();
-        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + ISBN_DESC_AMY + PRICE_DESC_AMY + QUANTITY_DESC_AMY
+        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + ISBN_DESC_AMY + PRICE_DESC_AMY + COST_DESC_AMY + QUANTITY_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 

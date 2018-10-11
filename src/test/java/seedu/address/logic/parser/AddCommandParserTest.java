@@ -85,31 +85,31 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid name
-        assertParseFailure(parser, INVALID_NAME_DESC + ISBN_DESC_BOB + PRICE_DESC_BOB + QUANTITY_DESC_BOB
+        assertParseFailure(parser, INVALID_NAME_DESC + ISBN_DESC_BOB + PRICE_DESC_BOB + COST_DESC_BOB + QUANTITY_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Name.MESSAGE_NAME_CONSTRAINTS);
 
-        // invalid phone
-        assertParseFailure(parser, NAME_DESC_BOB + INVALID_ISBN_DESC + PRICE_DESC_BOB + QUANTITY_DESC_BOB
+        // invalid isbn
+        assertParseFailure(parser, NAME_DESC_BOB + INVALID_ISBN_DESC + PRICE_DESC_BOB + QUANTITY_DESC_BOB + COST_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Isbn.MESSAGE_ISBN_CONSTRAINTS);
 
-        // invalid email
-        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + INVALID_PRICE_DESC + QUANTITY_DESC_BOB
+        // invalid price
+        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + INVALID_PRICE_DESC + QUANTITY_DESC_BOB + COST_DESC_BOB
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Price.MESSAGE_PRICE_CONSTRAINTS);
 
-        // invalid address
-        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + INVALID_QUANTITY_DESC
+        // invalid quantity
+        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + COST_DESC_BOB + INVALID_QUANTITY_DESC
                 + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
 
         // invalid tag
-        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + QUANTITY_DESC_BOB
+        assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + COST_DESC_BOB + QUANTITY_DESC_BOB
                 + INVALID_TAG_DESC + VALID_TAG_FRIEND, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, INVALID_NAME_DESC + ISBN_DESC_BOB + PRICE_DESC_BOB + INVALID_QUANTITY_DESC,
+        assertParseFailure(parser, INVALID_NAME_DESC + ISBN_DESC_BOB + PRICE_DESC_BOB + COST_DESC_BOB + INVALID_QUANTITY_DESC,
                 Name.MESSAGE_NAME_CONSTRAINTS);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB + COST_DESC_BOB
                 + QUANTITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
     }
