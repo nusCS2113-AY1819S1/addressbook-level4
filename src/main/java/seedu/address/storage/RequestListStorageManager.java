@@ -51,24 +51,24 @@ public class RequestListStorageManager extends ComponentManager implements Reque
     // ================ RequestList methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return requestListStorage.getAddressBookFilePath();
+    public Path getRequestListFilePath() {
+        return requestListStorage.getRequestListFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyRequests> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(requestListStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyRequests> readRequestList() throws DataConversionException, IOException {
+        return readRequestList(requestListStorage.getRequestListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyRequests> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyRequests> readRequestList(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return requestListStorage.readAddressBook(filePath);
+        return requestListStorage.readRequestList(filePath);
     }
 
     @Override
     public void saveRequestList(ReadOnlyRequests addressBook) throws IOException {
-        saveRequestList(addressBook, requestListStorage.getAddressBookFilePath());
+        saveRequestList(addressBook, requestListStorage.getRequestListFilePath());
     }
 
     @Override

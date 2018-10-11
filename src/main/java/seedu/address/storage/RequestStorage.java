@@ -22,10 +22,10 @@ public interface RequestStorage extends RequestListStorage, UserPrefsStorage {
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
     @Override
-    Path getAddressBookFilePath();
+    Path getRequestListFilePath();
 
     @Override
-    Optional<ReadOnlyRequests> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyRequests> readRequestList() throws DataConversionException, IOException;
 
     @Override
     void saveRequestList(ReadOnlyRequests requestList) throws IOException;

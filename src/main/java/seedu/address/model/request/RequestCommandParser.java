@@ -8,7 +8,7 @@ import seedu.address.model.book.Quantity;
 import java.util.stream.Stream;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.model.request.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.model.request.CliSyntax.PREFIX_QUANTITY;
 
@@ -24,14 +24,14 @@ public class RequestCommandParser implements RequestParser<RequestCommand> {
      */
     public RequestCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_QUANTITY, PREFIX_EMAIL);
+                ArgumentTokenizer.tokenize(args, PREFIX_ISBN, PREFIX_QUANTITY, PREFIX_EMAIL);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_QUANTITY, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_ISBN, PREFIX_QUANTITY, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RequestCommand.MESSAGE_USAGE));
         }
 
-        Isbn isbn = RequestParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ID).get());
+        Isbn isbn = RequestParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get());
         Quantity quantity = RequestParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         Email email = RequestParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
 

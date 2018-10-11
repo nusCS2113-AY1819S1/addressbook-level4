@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.model.request.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.model.request.CliSyntax.PREFIX_QUANTITY;
 
@@ -20,11 +20,11 @@ public class RequestCommand extends CommandSecondary {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Request a book. "
             + "Parameters: "
-            + PREFIX_ID + "ISBN "
+            + PREFIX_ISBN + "ISBN "
             + PREFIX_QUANTITY + "QUANTITY "
             + PREFIX_EMAIL + "EMAIL "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ID + "97865432214 "
+            + PREFIX_ISBN + "97865432214 "
             + PREFIX_QUANTITY + "42 "
             + PREFIX_EMAIL + "johnd@example.com ";
 

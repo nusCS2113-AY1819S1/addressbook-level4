@@ -28,21 +28,21 @@ public class XmlRequestListStorage implements RequestListStorage {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getRequestListFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyRequests> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyRequests> readRequestList() throws DataConversionException, IOException {
+        return readRequestList(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readRequestList()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyRequests> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyRequests> readRequestList(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
 

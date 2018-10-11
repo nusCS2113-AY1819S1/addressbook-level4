@@ -3,7 +3,7 @@
     <!-- Book with invalid name field -->
     <books>
         <name>Ha!ns Mu@ster</name>
-        <ISBN isPrivate="false">9482424</ISBN>
+        <isbn isPrivate="false">9482424</isbn>
         <price isPrivate="false">hans@example.com</price>
         <quantity isPrivate="false">4th street</quantity>
     </books>

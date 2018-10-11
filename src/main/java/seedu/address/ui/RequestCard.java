@@ -44,9 +44,9 @@ public class RequestCard extends UiPart<Region> {
         this.request = request;
         //id.setText(displayedIndex + ". ");
         name.setText("Request No. " + displayedIndex);
-        isbn.setText(request.getIsbn().value);
-        quantity.setText(request.getQuantity().getValue());
-        email.setText(request.getEmail().value);
+        isbn.setText("Isbn : " + request.getIsbn().value);
+        quantity.setText("Number in demand: " + request.getQuantity().getValue());
+        email.setText("Student's Email: " + request.getEmail().value);
     }
 
     @Override

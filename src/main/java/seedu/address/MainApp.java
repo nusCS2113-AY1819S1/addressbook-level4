@@ -102,15 +102,15 @@ public class MainApp extends Application {
         return new ModelManager(initialData, userPrefs);
     }
 
-    private RequestModel initModelManager(RequestListStorage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyRequests> addressBookOptional;
+    private RequestModel initModelManager(RequestListStorage requestStorage, UserPrefs userPrefs) {
+        Optional<ReadOnlyRequests> requestListOptional;
         ReadOnlyRequests initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            requestListOptional = requestStorage.readRequestList();
+            if (!requestListOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample BookInventory");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleRequestList);
+            initialData = requestListOptional.orElseGet(SampleDataUtil::getSampleRequestList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty BookInventory");
             initialData = new RequestList();

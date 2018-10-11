@@ -38,7 +38,7 @@ public class RequestParserUtil {
         requireNonNull(isbn);
         String trimmedIsbn = isbn.trim();
         if (!Isbn.isValidIsbn(trimmedIsbn)) {
-            throw new ParseException(Isbn.ISBN_NUMBERS_CONSTRAINTS);
+            throw new ParseException(Isbn.MESSAGE_ISBN_CONSTRAINTS);
         }
         return new Isbn(trimmedIsbn);
     }

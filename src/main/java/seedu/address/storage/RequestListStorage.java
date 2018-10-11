@@ -15,7 +15,7 @@ public interface RequestListStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getRequestListFilePath();
 
     /**
      * Returns RequestList data as a {@link ReadOnlyRequests}.
@@ -23,12 +23,12 @@ public interface RequestListStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyRequests> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyRequests> readRequestList() throws DataConversionException, IOException;
 
     /**
      * @see #getAddressBookFilePath()
      */
-    Optional<ReadOnlyRequests> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyRequests> readRequestList(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyRequests} to the storage.

@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.Collections;
@@ -29,42 +25,37 @@ import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing book in the inventory book.
+ * Stocks the details of an existing book in the quantity book.
  */
-public class EditCommand extends Command {
+public class StockCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "stock";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the book identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Stocks the book identified "
             + "by the index number used in the displayed book list. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_ISBN + "PHONE] "
-            + "[" + PREFIX_PRICE + "EMAIL] "
-            + "[" + PREFIX_QUANTITY + "ADDRESS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "Parameters: INDEX(must be a positive integer) "
+            + "[" + PREFIX_QUANTITY + "QUANTITY] "
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_ISBN + "91234567 "
-            + PREFIX_PRICE + "johndoe@example.com";
+            + PREFIX_QUANTITY + "5";
 
-    public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the quantity book.";
+    public static final String MESSAGE_STOCK_PERSON_SUCCESS = "Stocked Book: %1$s";
+    public static final String MESSAGE_NOT_STOCKED = "Increase to stock quantity must be provided.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This book already exists in the book inventory.";
 
     private final Index index;
-    private final EditBookDescriptor editBookDescriptor;
+    private final StockBookDescriptor stockBookDescriptor;
 
     /**
-     * @param index of the book in the filtered book list to edit
-     * @param editBookDescriptor details to edit the book with
+     * @param index of the book in the filtered book list to stock
+     * @param stockBookDescriptor details to stock the book with
      */
-    public EditCommand(Index index, EditBookDescriptor editBookDescriptor) {
+    public StockCommand(Index index, StockBookDescriptor stockBookDescriptor) {
         requireNonNull(index);
-        requireNonNull(editBookDescriptor);
+        requireNonNull(stockBookDescriptor);
 
         this.index = index;
-        this.editBookDescriptor = new EditBookDescriptor(editBookDescriptor);
+        this.stockBookDescriptor = new StockBookDescriptor(stockBookDescriptor);
     }
 
     @Override
@@ -76,32 +67,32 @@ public class EditCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
 
-        Book bookToEdit = lastShownList.get(index.getZeroBased());
-        Book editedBook = createEditedPerson(bookToEdit, editBookDescriptor);
+        Book bookToStock = lastShownList.get(index.getZeroBased());
+        Book stockedBook = createStockedBook(bookToStock, stockBookDescriptor);
 
-        if (!bookToEdit.isSameBook(editedBook) && model.hasBook(editedBook)) {
-            throw new CommandException(MESSAGE_DUPLICATE_BOOK);
+        if (!bookToStock.isSameBook(stockedBook) && model.hasBook(stockedBook)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.updateBook(bookToEdit, editedBook);
+        model.updateBook(bookToStock, stockedBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
-        return new CommandResult(String.format(MESSAGE_EDIT_BOOK_SUCCESS, editedBook));
+        return new CommandResult(String.format(MESSAGE_STOCK_PERSON_SUCCESS, stockedBook));
     }
 
     /**
-     * Creates and returns a {@code Book} with the details of {@code bookToEdit}
-     * edited with {@code editBookDescriptor}.
+     * Creates and returns a {@code Book} with the details of {@code bookToStock}
+     * stocked with {@code stockBookDescriptor}.
      */
-    private static Book createEditedPerson(Book bookToEdit, EditBookDescriptor editBookDescriptor) {
-        assert bookToEdit != null;
+    private static Book createStockedBook(Book bookToStock, StockBookDescriptor stockBookDescriptor) {
+        assert bookToStock != null;
 
-        Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
-        Isbn updatedIsbn = editBookDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
-        Price updatedPrice = editBookDescriptor.getPrice().orElse(bookToEdit.getPrice());
-        Cost updatedCost = bookToEdit.getCost();
-        Quantity updatedQuantity = editBookDescriptor.getQuantity().orElse(bookToEdit.getQuantity());
-        Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
+        Name updatedName = (bookToStock.getName());
+        Isbn updatedIsbn = (bookToStock.getIsbn());
+        Price updatedPrice = stockBookDescriptor.getPrice().orElse(bookToStock.getPrice());
+        Cost updatedCost = bookToStock.getCost();
+        Quantity updatedQuantity = bookToStock.increaseQuantity(stockBookDescriptor.getQuantity());
+        Set<Tag> updatedTags = (bookToStock.getTags());
 
         return new Book(updatedName, updatedIsbn, updatedPrice, updatedCost, updatedQuantity, updatedTags);
     }
@@ -114,21 +105,21 @@ public class EditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof StockCommand)) {
             return false;
         }
 
         // state check
-        EditCommand e = (EditCommand) other;
+        StockCommand e = (StockCommand) other;
         return index.equals(e.index)
-                && editBookDescriptor.equals(e.editBookDescriptor);
+                && stockBookDescriptor.equals(e.stockBookDescriptor);
     }
 
     /**
-     * Stores the details to edit the book with. Each non-empty field value will replace the
+     * Stores the details to stock the book with. Each non-empty field value will replace the
      * corresponding field value of the book.
      */
-    public static class EditBookDescriptor {
+    public static class StockBookDescriptor {
         private Name name;
         private Isbn isbn;
         private Price price;
@@ -136,13 +127,13 @@ public class EditCommand extends Command {
         private Quantity quantity;
         private Set<Tag> tags;
 
-        public EditBookDescriptor() {}
+        public StockBookDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public EditBookDescriptor(EditBookDescriptor toCopy) {
+        public StockBookDescriptor(StockBookDescriptor toCopy) {
             setName(toCopy.name);
             setIsbn(toCopy.isbn);
             setPrice(toCopy.price);
@@ -152,9 +143,9 @@ public class EditCommand extends Command {
         }
 
         /**
-         * Returns true if at least one field is edited.
+         * Returns true if at least one field is stocked.
          */
-        public boolean isAnyFieldEdited() {
+        public boolean isAnyFieldStocked() {
             return CollectionUtil.isAnyNonNull(name, isbn, price, quantity, tags);
         }
 
@@ -172,7 +163,6 @@ public class EditCommand extends Command {
 
         public Optional<Isbn> getIsbn() {
             return Optional.ofNullable(isbn);
-
         }
 
         public void setPrice(Price price) {
@@ -191,8 +181,8 @@ public class EditCommand extends Command {
             this.quantity = quantity;
         }
 
-        public Optional<Quantity> getQuantity() {
-            return Optional.ofNullable(quantity);
+        public Quantity getQuantity() {
+            return quantity;
         }
 
         /**
@@ -220,12 +210,12 @@ public class EditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof EditBookDescriptor)) {
+            if (!(other instanceof StockBookDescriptor)) {
                 return false;
             }
 
             // state check
-            EditBookDescriptor e = (EditBookDescriptor) other;
+            StockBookDescriptor e = (StockBookDescriptor) other;
 
             return getName().equals(e.getName())
                     && getIsbn().equals(e.getIsbn())

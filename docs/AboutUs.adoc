@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Koh Jun Kiat
-image::kjk.jpg[width="150", align="left"]
+image::kohjunkiat.jpg[width="150", align="left"]
 {empty}[https://www.youtube.com/watch?v=zWoHr_2GbY4&gl=SG&hl=en-GB[homepage]] [http://github.com/kohjunkiat[github]]
 
 Role: Scheduler +
