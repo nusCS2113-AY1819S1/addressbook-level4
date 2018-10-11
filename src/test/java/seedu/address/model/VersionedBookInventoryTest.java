@@ -18,9 +18,9 @@ import seedu.address.testutil.BookInventoryBuilder;
 
 public class VersionedBookInventoryTest {
 
-    private final ReadOnlyBookInventory addressBookWithAmy = new BookInventoryBuilder().withPerson(AMY).build();
-    private final ReadOnlyBookInventory addressBookWithBob = new BookInventoryBuilder().withPerson(BOB).build();
-    private final ReadOnlyBookInventory addressBookWithCarl = new BookInventoryBuilder().withPerson(CARL).build();
+    private final ReadOnlyBookInventory addressBookWithAmy = new BookInventoryBuilder().withBook(AMY).build();
+    private final ReadOnlyBookInventory addressBookWithBob = new BookInventoryBuilder().withBook(BOB).build();
+    private final ReadOnlyBookInventory addressBookWithCarl = new BookInventoryBuilder().withBook(CARL).build();
     private final ReadOnlyBookInventory emptyAddressBook = new BookInventoryBuilder().build();
 
     @Test

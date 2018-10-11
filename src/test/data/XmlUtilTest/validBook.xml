@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <book>
     <name>Hans Muster</name>
-    <isbn>9482424</isbn>
-    <price>hans@example</price>
-    <quantity>4th street</quantity>
+    <isbn>978-3-16-148410-0</isbn>
+    <price>6.90</price>
+    <cost>4.90</cost>
+    <quantity>4</quantity>
     <tagged>friends</tagged>
 </book>

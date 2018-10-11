@@ -82,7 +82,7 @@ public class FindCommandSystemTest extends BookInventorySystemTest {
 
         /* Case: find same persons in address book after deleting 1 of them -> 1 book found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getAddressBook().getBookList().contains(BENSON));
+        assertFalse(getModel().getBookInventory().getBookList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);

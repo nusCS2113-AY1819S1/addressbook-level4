@@ -18,7 +18,7 @@ import seedu.address.model.UserPrefs;
 
 public class JsonUserPrefsRequestStorageTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsRequestStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
