@@ -3,14 +3,14 @@
     <!-- Valid Book -->
     <books>
         <name>Hans Muster</name>
-        <ISBN isPrivate="false">9482424</ISBN>
+        <isbn isPrivate="false">9482424</isbn>
         <price isPrivate="false">hans@example.com</price>
         <quantity isPrivate="false">4th street</quantity>
     </books>
     <!-- Book with invalid Isbn field -->
     <books>
         <name>Hans Muster</name>
-        <ISBN isPrivate="false">948asdf2424</ISBN>
+        <isbn isPrivate="false">948asdf2424</isbn>
         <price isPrivate="false">hans@example.com</price>
         <quantity isPrivate="false">4th street</quantity>
     </books>

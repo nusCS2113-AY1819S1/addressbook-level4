@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.List;
 import java.util.Set;
@@ -14,6 +14,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.Cost;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
@@ -60,7 +61,7 @@ public class SellCommand extends Command {
         List<Book> lastShownList = model.getFilteredBookList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
         }
 
         Book bookToSell = lastShownList.get(index.getZeroBased());
@@ -72,7 +73,7 @@ public class SellCommand extends Command {
         }
 
         model.updateBook(bookToSell, sellBook);
-        model.updateFilteredBookList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
         return new CommandResult(String.format(MESSAGE_SELL_BOOK_SUCCESS, sellBook));
     }
@@ -87,10 +88,11 @@ public class SellCommand extends Command {
         Name name = bookToSell.getName();
         Isbn isbn = bookToSell.getIsbn();
         Price price = bookToSell.getPrice();
+        Cost cost = bookToSell.getCost();
         Quantity updatedQuantity = bookToSell.deductQuantity(decreaseQuantity.getQuantity());
         Set<Tag> tags = bookToSell.getTags();
 
-        return new Book(name, isbn, price, updatedQuantity, tags);
+        return new Book(name, isbn, price, cost, updatedQuantity, tags);
     }
 
     @Override

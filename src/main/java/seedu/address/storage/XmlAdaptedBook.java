@@ -11,6 +11,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.book.Book;
+import seedu.address.model.book.Cost;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
@@ -31,6 +32,8 @@ public class XmlAdaptedBook {
     @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
+    private String cost;
+    @XmlElement(required = true)
     private String address;
 
     @XmlElement
@@ -45,10 +48,12 @@ public class XmlAdaptedBook {
     /**
      * Constructs an {@code XmlAdaptedBook} with the given book details.
      */
-    public XmlAdaptedBook(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedBook(String name, String phone, String email,
+                          String cost, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.cost = cost;
         this.address = address;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -64,6 +69,7 @@ public class XmlAdaptedBook {
         name = source.getName().fullName;
         phone = source.getIsbn().value;
         email = source.getPrice().value;
+        cost = source.getCost().value;
         address = source.getQuantity().getValue();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -93,7 +99,7 @@ public class XmlAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName()));
         }
         if (!Isbn.isValidIsbn(phone)) {
-            throw new IllegalValueException(Isbn.ISBN_NUMBERS_CONSTRAINTS);
+            throw new IllegalValueException(Isbn.MESSAGE_ISBN_CONSTRAINTS);
         }
         final Isbn modelIsbn = new Isbn(phone);
 
@@ -101,9 +107,17 @@ public class XmlAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
         if (!Price.isValidPrice(email)) {
-            throw new IllegalValueException(Price.PRICE_CONSTRAINTS);
+            throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
         final Price modelPrice = new Price(email);
+
+        if (cost == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName()));
+        }
+        if (!Cost.isValidCost(cost)) {
+            throw new IllegalValueException(Cost.COST_CONSTRAINTS);
+        }
+        final Cost modelCost = new Cost(cost);
 
         if (address == null) {
             throw new IllegalValueException(
@@ -116,7 +130,7 @@ public class XmlAdaptedBook {
         final Quantity modelQuantity = new Quantity(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Book(modelName, modelIsbn, modelPrice, modelQuantity, modelTags);
+        return new Book(modelName, modelIsbn, modelPrice, modelCost, modelQuantity, modelTags);
     }
 
     @Override
@@ -133,6 +147,7 @@ public class XmlAdaptedBook {
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)
+                && Objects.equals(cost, otherPerson.cost)
                 && Objects.equals(address, otherPerson.address)
                 && tagged.equals(otherPerson.tagged);
     }

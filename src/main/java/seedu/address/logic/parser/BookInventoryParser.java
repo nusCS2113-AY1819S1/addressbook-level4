@@ -19,7 +19,9 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellCommand;
+import seedu.address.logic.commands.StockCommand;
 import seedu.address.logic.commands.UndoCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -66,6 +68,8 @@ public class BookInventoryParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case StockCommand.COMMAND_WORD:
+            return new StockCommandParser().parse(arguments);
         case ClearCommand.COMMAND_ALIAS:
 
         case ClearCommand.COMMAND_WORD:

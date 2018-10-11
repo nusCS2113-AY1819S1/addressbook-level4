@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
@@ -23,15 +25,16 @@ public class AddCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a book to the inventory list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
-            + PREFIX_ID + "ID "
+            + PREFIX_ISBN + "ID "
             + PREFIX_PRICE + "PRICE "
             + PREFIX_QUANTITY + "QUANTITY "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Hello World "
-            + PREFIX_ID + "9431341893311 "
+            + PREFIX_ISBN + "943-13-41893-31-1 "
             + PREFIX_PRICE + "19.99 "
             + PREFIX_QUANTITY + "50 "
+            + PREFIX_COST + "15.00 "
             + PREFIX_TAG + "cs2113t "
             + PREFIX_TAG + "coding";
 
