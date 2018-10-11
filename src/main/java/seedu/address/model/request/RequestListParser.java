@@ -1,20 +1,13 @@
 package seedu.address.model.request;
 
-import javafx.fxml.FXML;
-import javafx.scene.layout.StackPane;
-import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.logic.commands.*;
-import seedu.address.logic.parser.*;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.ui.BookListPanel;
-import seedu.address.ui.RequestListPanel;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
@@ -41,15 +34,14 @@ public class RequestListParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+        case RequestCommand.COMMAND_WORD:
+            return new RequestCommandParser().parse(arguments);
 
-            case RequestCommand.COMMAND_WORD:
-                return new RequestCommandParser().parse(arguments);
+        case ViewRequestCommand.COMMAND_WORD:
+            return new ViewRequestCommand();
 
-            case ViewRequestCommand.COMMAND_WORD:
-                return new ViewRequestCommand();
-
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 }

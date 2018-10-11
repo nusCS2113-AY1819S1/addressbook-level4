@@ -1,14 +1,17 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+import javax.xml.bind.annotation.XmlElement;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
 import seedu.address.model.request.Email;
 import seedu.address.model.request.Request;
 import seedu.address.model.tag.Tag;
-
-import javax.xml.bind.annotation.XmlElement;
-import java.util.*;
 
 /**
  * JAXB-friendly version of the Request.
@@ -49,7 +52,7 @@ public class XmlAdaptedRequest {
      */
     public XmlAdaptedRequest(Request source) {
         isbn = source.getIsbn().value;
-        quantity = source.getQuantity().value;
+        quantity = source.getQuantity().getValue();
         email = source.getEmail().value;
     }
 
@@ -73,7 +76,8 @@ public class XmlAdaptedRequest {
         final Isbn modelIsbn = new Isbn(isbn);
 
         if (quantity == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName()));
+            throw new IllegalValueException(String.format(
+                    MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName()));
         }
         if (!Quantity.isValidQuantity(quantity)) {
             throw new IllegalValueException(quantity.trim());

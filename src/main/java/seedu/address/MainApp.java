@@ -25,9 +25,21 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.request.*;
+import seedu.address.model.request.ReadOnlyRequests;
+import seedu.address.model.request.RequestList;
+import seedu.address.model.request.RequestModel;
+import seedu.address.model.request.RequestModelManager;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.*;
+import seedu.address.storage.BookInventoryStorage;
+import seedu.address.storage.InventoryStorage;
+import seedu.address.storage.InventoryStorageManager;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.RequestListStorage;
+import seedu.address.storage.RequestListStorageManager;
+import seedu.address.storage.RequestStorage;
+import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.XmlBookInventoryStorage;
+import seedu.address.storage.XmlRequestListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -79,8 +91,8 @@ public class MainApp extends Application {
 
     /**
      * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+     * The data from the sample inventory book will be used instead if {@code storage}'s inventory book is not found,
+     * or an empty inventory book will be used instead if errors occur when reading {@code storage}'s inventory book.
      */
     private Model initModelManager(InventoryStorage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyBookInventory> addressBookOptional;
@@ -102,6 +114,12 @@ public class MainApp extends Application {
         return new ModelManager(initialData, userPrefs);
     }
 
+    /**
+     * Returns a {@code RequestModelManager} with the data from
+     * {@code requestStorage}'s request list and {@code userPrefs}. <br>
+     * The data from the sample request list will be used instead if {@code requestStorage}'s request list is not found,
+     * or an empty request list will be used instead if errors occur when reading {@code storage}'s request list.
+     */
     private RequestModel initModelManager(RequestListStorage requestStorage, UserPrefs userPrefs) {
         Optional<ReadOnlyRequests> requestListOptional;
         ReadOnlyRequests initialData;

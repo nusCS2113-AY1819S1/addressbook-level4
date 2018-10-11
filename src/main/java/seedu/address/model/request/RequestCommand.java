@@ -1,15 +1,13 @@
 package seedu.address.model.request;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
+
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
-import static seedu.address.model.request.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.model.request.CliSyntax.PREFIX_QUANTITY;
 
 /**
  * Adds a request to the address book.

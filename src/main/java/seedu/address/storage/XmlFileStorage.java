@@ -24,6 +24,12 @@ public class XmlFileStorage {
         }
     }
 
+    /**
+     * saves request to the filr
+     * @param file storage
+     * @param requestList list of request in storage
+     * @throws FileNotFoundException unable to find found
+     */
     public static void saveRequestToFile(Path file, XmlSerializableRequestList requestList)
             throws FileNotFoundException {
         try {

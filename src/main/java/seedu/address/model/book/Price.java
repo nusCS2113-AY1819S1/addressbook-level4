@@ -9,11 +9,12 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Price {
 
-    public static final String MESSAGE_PRICE_CONSTRAINTS = "Prices should be numerical and in 2 decimal places or none at all\n"
+    public static final String MESSAGE_PRICE_CONSTRAINTS =
+            "Prices should be numerical and in 2 decimal places or none at all\n"
             + "E.g. $4, $3.02";
-     // "$" can be omitted and is optional, prices can be in 2 decimal places or none at all
-     // e.g. $4 or $3.02 is accepted
-     public static final String PRICE_VALIDATION_REGEX = "(\\$)?\\d+(\\.\\d{2})?";
+    // "$" can be omitted and is optional, prices can be in 2 decimal places or none at all
+    // e.g. $4 or $3.02 is accepted
+    public static final String PRICE_VALIDATION_REGEX = "(\\$)?\\d+(\\.\\d{2})?";
 
     public final String value;
 

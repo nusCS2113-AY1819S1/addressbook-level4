@@ -4,8 +4,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.book.Book;
-import seedu.address.model.request.ReadOnlyRequests;
-import seedu.address.model.request.Request;
 
 /**
  * The API of the Model component.

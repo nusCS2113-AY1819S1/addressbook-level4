@@ -4,10 +4,8 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -206,7 +204,9 @@ public class MainWindow extends UiPart<Stage> {
         return bookListPanel;
     }
 
-    public RequestListPanel getRequestListPanel() { return requestListPanel; }
+    public RequestListPanel getRequestListPanel() {
+        return requestListPanel;
+    }
     void releaseResources() {
         browserPanel.freeResources();
     }

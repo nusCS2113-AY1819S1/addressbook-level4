@@ -1,10 +1,10 @@
 package seedu.address.model.request;
 
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
 
 /**
  * Wraps all data at the address-book level
@@ -75,7 +75,8 @@ public class RequestList implements ReadOnlyRequests {
     /**
      * Replaces the given request {@code target} in the list with {@code editedRequest}.
      * {@code target} must exist in the address book.
-     * The request identity of {@code editedRequest} must not be the same as another existing request in the address book.
+     * The request identity of {@code editedRequest} must not be the same as
+     * another existing request in the address book.
      */
     public void updateRequest(Request target, Request editedRequest) {
         requireNonNull(editedRequest);

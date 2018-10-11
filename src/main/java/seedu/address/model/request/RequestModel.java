@@ -1,8 +1,8 @@
 package seedu.address.model.request;
 
-import javafx.collections.ObservableList;
-
 import java.util.function.Predicate;
+
+import javafx.collections.ObservableList;
 
 /**
  * The API of the RequestModel component.
@@ -37,7 +37,8 @@ public interface RequestModel {
     /**
      * Replaces the given request {@code target} with {@code editedRequest}.
      * {@code target} must exist in the address book.
-     * The request identity of {@code editedRequest} must not be the same as another existing request in the address book.
+     * The request identity of {@code editedRequest} must not be
+     * the same as another existing request in the address book.
      */
     void updateRequest(Request target, Request editedRequest);
 
