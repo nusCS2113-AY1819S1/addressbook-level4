@@ -29,7 +29,7 @@ public class XmlSerializableBookInventoryTest {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
                 XmlSerializableAddressBook.class);
         BookInventory bookInventoryFromFile = dataFromFile.toModelType();
-        BookInventory typicalPersonsBookInventory = TypicalBooks.getTypicalAddressBook();
+        BookInventory typicalPersonsBookInventory = TypicalBooks.getTypicalBookInventory();
         assertEquals(bookInventoryFromFile, typicalPersonsBookInventory);
     }
 

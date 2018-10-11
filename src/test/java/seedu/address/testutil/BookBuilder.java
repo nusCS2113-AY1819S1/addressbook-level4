@@ -17,8 +17,8 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class BookBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_ISBN = "8535525555";
+    public static final String DEFAULT_NAME = "Alices Pauline";
+    public static final String DEFAULT_ISBN = "978-3-16-148410-0";
     public static final String DEFAULT_PRICE = "9.99";
     public static final String DEFAULT_COST = "5.99";
     public static final String DEFAULT_QUANTITY = "1";

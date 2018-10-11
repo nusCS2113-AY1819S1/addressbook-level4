@@ -2,7 +2,8 @@
 <!-- Book with missing name field -->
 <book>
     <isbn>9482424</isbn>
-    <price>hans@example</price>
-    <quantity>4th street</quantity>
+    <price>4.90</price>
+    <cost>3.90</cost>
+    <quantity>4</quantity>
     <tagged>friends</tagged>
 </book>

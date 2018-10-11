@@ -85,7 +85,7 @@ public abstract class BookInventorySystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected BookInventory getInitialData() {
-        return TypicalBooks.getTypicalAddressBook();
+        return TypicalBooks.getTypicalBookInventory();
     }
 
     /**
@@ -143,7 +143,7 @@ public abstract class BookInventorySystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getBookList().size(), getModel().getFilteredBookList().size());
+        assertEquals(getModel().getBookInventory().getBookList().size(), getModel().getFilteredBookList().size());
     }
 
     /**
@@ -151,7 +151,7 @@ public abstract class BookInventorySystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredBookList().size() < getModel().getAddressBook().getBookList().size());
+        assertTrue(getModel().getFilteredBookList().size() < getModel().getBookInventory().getBookList().size());
     }
 
     /**
@@ -167,7 +167,7 @@ public abstract class BookInventorySystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getBookList().size());
+        assertEquals(0, getModel().getBookInventory().getBookList().size());
     }
 
     /**
@@ -179,7 +179,7 @@ public abstract class BookInventorySystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new BookInventory(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
+        assertEquals(new BookInventory(expectedModel.getBookInventory()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredBookList());
     }
 

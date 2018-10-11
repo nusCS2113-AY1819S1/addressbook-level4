@@ -52,7 +52,7 @@ public class XmlSerializableAddressBook {
             if (bookInventory.hasPerson(book)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            bookInventory.addPerson(book);
+            bookInventory.addBook(book);
         }
         return bookInventory;
     }
