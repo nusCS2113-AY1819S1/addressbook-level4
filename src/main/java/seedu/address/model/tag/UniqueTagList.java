@@ -3,12 +3,13 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
-
-//import seedu.address.model.person.exceptions.TagNotFoundException;
+import seedu.address.model.tag.TagNotFoundException;
 
 
 /**
@@ -29,6 +30,26 @@ public class UniqueTagList {
     }
 
     /**
+     * Returns the List of all unique tags.
+     */
+    public List<Tag> getUniqueTagList() {
+        if (internalList.isEmpty()) {
+            throw new TagNotFoundException();
+        }
+        return new ArrayList<>(internalList.keySet());
+    }
+
+    /**
+     * Returns the List of person associated with given tag.
+     */
+    public List<Person> getPersons(Tag tag) {
+        if (!contains(tag)) {
+            throw new TagNotFoundException();
+        }
+        return new ArrayList<>(internalList.get(tag).getPersons());
+    }
+
+    /**
      * Adds a tag to the list.
      * The tag must not already exist in the list.
      */
@@ -38,7 +59,7 @@ public class UniqueTagList {
     }
 
     /**
-     * Adds all tags that belong to the person to the list.
+     * Adds all tags that belong to the person to the Map as a Key and adds the person to its (@Code UniquePersonList).
      */
     //TODO refactor this
     public void add(Person person) {
@@ -53,7 +74,6 @@ public class UniqueTagList {
 
     }
 
-    //TODO change description
     /**
      * Replaces the tags of person {@code target} in the list with the tags of the edited person{@code editedPerson}.
      * {@code target} must exist in the list.
