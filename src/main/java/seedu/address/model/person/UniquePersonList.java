@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeMap;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +28,16 @@ public class UniquePersonList implements Iterable<Person> {
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
 
     /**
+     * A supporting data structure (Treemap) that helps keep the contacts in the contact list sorted, increasing
+     * usability.
+     * The names are sorted in an alphabetical order, with uppercase letters always being in front of lowercase letters.
+     * Therefore, a possible order of the list is "Alice, Bob, amy, andrew".
+     */
+
+    private TreeMap<String, Person> internalListHelper = new TreeMap<>();
+
+
+    /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(Person toCheck) {
@@ -40,10 +51,14 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void add(Person toAdd) {
         requireNonNull(toAdd);
+        String toAddName = nameFinder(toAdd);
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
-        internalList.add(toAdd);
+
+        internalListHelper.put(toAddName,toAdd);
+        updateInternalList();
+
     }
 
     /**
@@ -53,7 +68,8 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
+        String targetName = nameFinder(target);
+        String editedPersonName = nameFinder(editedPerson);
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
@@ -63,7 +79,9 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedPerson);
+        internalListHelper.remove(targetName);
+        internalListHelper.put(editedPersonName, editedPerson);
+        updateInternalList();
     }
 
     /**
@@ -72,14 +90,23 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
+        String toRemoveName = nameFinder(toRemove);
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+        internalListHelper.remove(toRemoveName);
+        updateInternalList();
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        String tempName;
+        internalListHelper.clear();
+        for(Person temp: replacement){
+            tempName = nameFinder(temp);
+            internalListHelper.put(tempName, temp);
+        }
+        updateInternalList();
     }
 
     /**
@@ -88,11 +115,16 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
+        String tempName;
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
-
-        internalList.setAll(persons);
+        internalListHelper.clear();
+        for(Person temp: persons){
+            tempName = nameFinder(temp);
+            internalListHelper.put(tempName, temp);
+        }
+        updateInternalList();
     }
 
     /**
@@ -111,7 +143,7 @@ public class UniquePersonList implements Iterable<Person> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniquePersonList // instanceof handles nulls
-                        && internalList.equals(((UniquePersonList) other).internalList));
+                && internalList.equals(((UniquePersonList) other).internalList));
     }
 
     @Override
@@ -131,5 +163,16 @@ public class UniquePersonList implements Iterable<Person> {
             }
         }
         return true;
+    }
+
+    private void updateInternalList(){
+        internalList.clear();
+        for(String key: internalListHelper.keySet()) {
+            internalList.add(internalListHelper.get(key));
+        }
+    }
+
+    private String nameFinder(Person person){
+        return person.getName().toString();
     }
 }
