@@ -11,19 +11,20 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 
 /**
- * A list of expenditures that enforces uniqueness between its elements and does not allow nulls.
- * A person is considered unique by comparing using {@code Person#isSamePerson(Person)}. As such, adding and updating of
- * persons uses Person#isSamePerson(Person) for equality so as to ensure that the person being added or updated is
- * unique in terms of identity in the UniquePersonList. However, the removal of a person uses Person#equals(Object) so
+ * A list of expenditures.
+ * The removal of a person uses Expenditure#equals(Object) so
  * as to ensure that the person with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
  *
- * @see Person#isSamePerson(Person)
  */
 public class ExpenditureList implements Iterable<Expenditure> {
 
     private final ObservableList<Expenditure> internalList = FXCollections.observableArrayList();
+
+    /**
+     * Adds an expenditure to the list.
+     */
 
     public void add(Expenditure toAdd) {
         requireNonNull(toAdd);
@@ -34,14 +35,14 @@ public class ExpenditureList implements Iterable<Expenditure> {
      * Replaces the contents of this list with {@code persons}.
      * {@code persons} must not contain duplicate persons.
      */
+
     public void setExpenditures(ExpenditureList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code expenditures}.
      */
 
     public void setExpenditures(List<Expenditure> expenditures) {
