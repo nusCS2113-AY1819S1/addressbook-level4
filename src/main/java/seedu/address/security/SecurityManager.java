@@ -31,11 +31,13 @@ public class SecurityManager extends ComponentManager implements Security {
             this.isAuthenticated = true;
             //TODO Implement Person class that this is linked to:
             //userPerson = user1;
-            System.out.println("Correct Password");
+            //TODO Implement logger
+            //System.out.println("Correct Password");
             raise(new SuccessfulLoginEvent());
         } else {
             //TODO Raise an exception to prompt user to type again
-            System.out.println("Incorrect password");
+            //TODO implement logger
+            //System.out.println("Incorrect password");
             raise(new UnsuccessfulLoginEvent());
         }
     }

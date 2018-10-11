@@ -60,7 +60,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Security user) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Security security) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -77,7 +77,7 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
-        loginWindow = new LoginWindow(user);
+        loginWindow = new LoginWindow(security);
     }
 
     public Stage getPrimaryStage() {

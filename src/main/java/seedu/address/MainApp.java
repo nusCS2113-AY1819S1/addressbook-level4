@@ -52,7 +52,7 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-    protected Security user;
+    protected Security security;
 
 
     @Override
@@ -74,9 +74,9 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        user = new SecurityManager(false);
+        security = new SecurityManager(false);
 
-        ui = new UiManager(logic, config, userPrefs, user);
+        ui = new UiManager(logic, config, userPrefs, security);
 
         initEventsCenter();
     }

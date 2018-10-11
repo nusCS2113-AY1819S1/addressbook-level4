@@ -37,15 +37,15 @@ public class UiManager extends ComponentManager implements Ui {
     private Logic logic;
     private Config config;
     private UserPrefs prefs;
-    private Security user;
+    private Security security;
     private MainWindow mainWindow;
 
-    public UiManager(Logic logic, Config config, UserPrefs prefs, Security user) {
+    public UiManager(Logic logic, Config config, UserPrefs prefs, Security security) {
         super();
         this.logic = logic;
         this.config = config;
         this.prefs = prefs;
-        this.user = user;
+        this.security = security;
     }
 
     @Override
@@ -56,10 +56,10 @@ public class UiManager extends ComponentManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, config, prefs, logic, user);
+            mainWindow = new MainWindow(primaryStage, config, prefs, logic, security);
             mainWindow.show(); //This should be called before creating other UI parts
             //Gets rid of the login window when testing
-            if (user.getAuthentication()) {
+            if (security.getAuthentication()) {
                 mainWindow.fillInnerParts();
             } else {
                 mainWindow.handleLogin();
