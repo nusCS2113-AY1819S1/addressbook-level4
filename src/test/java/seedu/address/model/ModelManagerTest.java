@@ -7,12 +7,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.testutil.TypicalExpenditures.CHICKEN;
+import static seedu.address.testutil.TypicalExpenditures.IPHONE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalExpenditures.CHICKEN;
-import static seedu.address.testutil.TypicalExpenditures.IPHONE;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -60,7 +60,8 @@ public class ModelManagerTest {
     @Test
     public void deleteTag_nonExistentTag_modelUnchanged() throws Exception {
         AddressBook addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
-        ExpenditureTracker expenditureTracker = new ExpenditureTrackerBuilder().withExpenditure(CHICKEN).withExpenditure(IPHONE).build();
+        ExpenditureTracker expenditureTracker = new ExpenditureTrackerBuilder().withExpenditure(CHICKEN)
+                .withExpenditure(IPHONE).build();
         UserPrefs userPrefs = new UserPrefs();
         ModelManager modelManager = new ModelManager(addressBook, expenditureTracker , userPrefs);
         modelManager.deleteTag(new Tag(VALID_TAG_UNUSED));
@@ -69,7 +70,8 @@ public class ModelManagerTest {
     @Test
     public void deleteTag_tagUsedByMultiplePersons_tagRemoved() throws Exception {
         AddressBook addressBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
-        ExpenditureTracker expenditureTracker = new ExpenditureTrackerBuilder().withExpenditure(CHICKEN).withExpenditure(IPHONE).build();
+        ExpenditureTracker expenditureTracker = new ExpenditureTrackerBuilder().withExpenditure(CHICKEN)
+                .withExpenditure(IPHONE).build();
         UserPrefs userPrefs = new UserPrefs();
         ModelManager modelManager = new ModelManager(addressBook, expenditureTracker, userPrefs);
         modelManager.deleteTag(new Tag(VALID_TAG_FRIEND));
@@ -84,7 +86,8 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
-        ExpenditureTracker expenditureTracker = new ExpenditureTrackerBuilder().withExpenditure(CHICKEN).withExpenditure(IPHONE).build();
+        ExpenditureTracker expenditureTracker = new ExpenditureTrackerBuilder().withExpenditure(CHICKEN)
+                .withExpenditure(IPHONE).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 

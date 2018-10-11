@@ -2,8 +2,8 @@ package seedu.address.testutil;
 
 import seedu.address.model.expenditureinfo.Category;
 import seedu.address.model.expenditureinfo.Date;
-import seedu.address.model.expenditureinfo.Money;
 import seedu.address.model.expenditureinfo.Expenditure;
+import seedu.address.model.expenditureinfo.Money;
 
 /**
  * A utility class to help with building Expenditure objects.
