@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.CreateCommand;
+import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
 import seedu.address.model.event.Event;
@@ -18,16 +18,17 @@ import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
 
 /**
- * Parses input arguments and creates a new CreateCommand object
+ * Parses input arguments and creates a new AddEventCommand object
  */
-public class CreateCommandParser implements Parser<CreateCommand> {
+public class AddEventCommandParser implements Parser<AddEventCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the CreateCommand
-     * and returns an CreateCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddEventCommand
+     * and returns an AddEventCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public CreateCommand parse(String args) throws ParseException {
+    public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION,
                         PREFIX_LOCATION, PREFIX_START_DATE, PREFIX_END_DATE);
@@ -35,7 +36,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION,
                 PREFIX_LOCATION, PREFIX_START_DATE, PREFIX_END_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
 
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
@@ -46,7 +47,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
 
         Event event = new Event(name, description, startDate, endDate, location);
 
-        return new CreateCommand(event);
+        return new AddEventCommand(event);
     }
 
     /**
