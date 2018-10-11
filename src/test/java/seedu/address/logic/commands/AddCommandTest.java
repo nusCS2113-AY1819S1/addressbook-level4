@@ -19,7 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -95,7 +97,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public void createAccount(LoginDetails loginDetails) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAccount(LoginDetails credentials) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void resetData(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyLoginBook getLoginBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -120,7 +137,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<LoginDetails> getFilteredLoginDetailsList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Person> getFilteredPersonList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

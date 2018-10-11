@@ -1,4 +1,4 @@
-﻿= AddressBook Level 4 - Developer Guide
+﻿= NUSSU Connect - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,9 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/CS2113-AY1819S1-F09-1/NUSSU-Connect/
+:repoURL: https://github.com/CS2113-AY1819S1-F09-1/main/
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team F09-1`      Since: `Sep 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -830,19 +830,102 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
-|Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |executive officer of NUSSU |view which other committees my applicant has applied for |deconflict with the other members of the Executive Committee
 
-|`* * *` |user |add a new person |
+|`* * *` |executive officer of NUSSU |view the number of applicants with the relevant skills |assign them to the relevant subcommittees
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |member of NUSSU |find out how to contact another member within NUSSU |work more efficiently with them
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |someone that takes charge of sponsors for events hosted by NUSSU |filter my search such that I would be only looking at the list of sponsors |not need to look through the whole list of addressbook
+
+|`* * *` |event organizer that is trying to find the contact details of some very specific group of people |have a search and filter function that is flexible enough |find all the search requirements can be done on the application without needing me to look through the whole list
+
+|`* * *` |member of the NUSSU treasury |have a budgeting function |fairly allocate budgets to the different clubs/projects
+
+|`* * *` |treasurer of a club |view the budget allocated to our club |discuss with my teammates and seek more funds if necessary
+
+|`* * *` |treasurer of a club |be able to store the data about how many members there are in my club, how many events we are planning to hold, and the expected turn out |be allocated a fair budget by the NUSSU treasury
+
+|`* * *` |treasurer of a club |use a budgeting function |plan the internal events of my club efficiently
+
+|`* * *` |member of the NUSSU treasury |view requests for grants from the clubs |allocate them the grant if the request is accepted by the NUSSU
+
+|`* * *` |executive member of NUSSU |log into the application with the relevant credentials |gain secure access to the application
+
+|`* * *` |executive member of NUSSU |create a new account for the application |gain access to certain features of the application relevant to my role when I log in
+
+|`* * *` |executive member of NUSSU |delete an existing account from the application |clear my login credentials from the application when I am not using it anymore
+
+|`* * *` |executive member of NUSSU |change the password of an existing account |feel more secure about my account login credentials
+
+|`* *` |general secretary of NUSSU |have the option to backup all, or even specific segments of application data into a data file |recover the required segments of data when there is an accidental deletion of data
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
-
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
 |=======================================================================
+
+**Others** +
+**Must haves**
+
+As an executive officer of NUSSU, I would like to view which other committees my applicant has applied for so that I deconflict with the other members of the Executive Committee.
+
+As an executive officer of NUSSU, I can log into the app with the required credentials, so that I can access certain functionalities of the app exclusive to my credentials only.
+
+As an executive member of NUSSU, I can create a new account for myself to log into the app, so that I can access the functionalities of the app.
+
+As an executive member of NUSSU, I can delete an existing account, so that the account that is redundant will be removed from the database.
+
+As an executive member of NUSSU, I can change the password of an existing account, so that I can make my account more secure.
+
+As a member of NUSSU, I would like to find out how to contact another member within NUSSU so that I can work more efficiently with them.
+
+As someone that is looking for the contact information of someone in else in a committee, I would like to filter my search such that I would only be looking through the lists of that specific committee so that I will not need to look through the whole list of NUSSU members.
+
+As someone that takes charge of sponsors for events hosted by NUSSU, I would like to filter my search such that I would be only looking at the list of sponsors so that I will not need to look through the whole list of addressbook.
+
+As the organizer of events, I would like to keep track of the contact information for all the helpers for that event so that I can keep them updated on the progress of the events.
+
+As an organizer of an event, I would like to remove all users that helped with the event from my contact list so that the address book will be less cluttered.
+
+As a member of the NUSSU treasury I would like to have a budgeting function so that I can fairly allocate budgets to the different clubs/projects
+
+As the treasurer of a club I would like to view the budget allocated to our club so I can discuss with my teammates and seek more funds if necessary.
+
+As the treasurer of a club I would like to be able to store the data about how many members there are in my club, how many events we are planning to hold, and the expected turn out so that we can be allocated a fair budget by the NUSSU treasury.
+
+As the treasurer of a club I would like to use a budgeting function so that I can plan the internal events of my club efficiently.
+
+As a member of the NUSSU treasury I would like to view requests for grants from the clubs so that I can allocate them the grant if the request is accepted by the NUSSU.
+
+As an event organizer that is trying to find the contact details of some very specific group of people, I would like to have a search and filter function that is flexible enough so that all the search requirements can be done on the application without needing me to look through the whole list.
+
+**Nice to have**
+
+As the general secretary of NUSSU, I would like to have the option to backup all, or even specific segments of application data into a data file, so that in the event where accidental deletion or corruption of data occurs, I can recover the required segments of data.
+
+As the general secretary of NUSSU, I would like to view a list of dates reserved for committee meetings planned beforehand, so that i can prepare for the meetings adequately.
+
+As an executive member of NUSSU, I can pitch in proposal ideas into the proposal suggestions section through the community proposal voting system, so that I can find out just how popular my proposals are through the number of upvotes it receives.
+
+As an executive member of NUSSU, I can edit current proposal ideas in the proposals section, so that i can have the option to refine current proposals.
+
+As an executive member of NUSSU, I can delete selected proposal ideas in the proposals section, so that i can have the option to remove irrelevant proposals.
+
+As a student in the student union of NUSSU, I want to view the list of proposals currently suggested in the proposals section and upvote those that I like, so that I can find out more about the current proposals in place and express my favor in a particular proposal.
+
+As a student in the student union of NUSSU, I would like to be able to filter and search for proposal ideas based on keywords, so that I do not have to waste time searching through all the proposals just to find the one I want.
+
+As the student welfare secretary of NUSSU, I would like to view statistics showing the number of students who signed up for student welfare packs, so that logistically wise, I can plan student welfare goodie events better.
+
+As the general secretary of NUSSU, I would like to keep track of a register containing details of all members serving in the union.
+
+As the student life secretary of NUSSU, I would like to keep track of updated statistics showing the number of students in each faculty, so that i can plan and balance the events geared towards a specific faculty, logistically and relevancy wise.
+
+As someone that keeps track of the finances for hosting events, I would like an application that helps me simplify the process(Excel) so that I can do my work efficiently.
+
+As someone that records what was discussed in a meeting, I would like to be able to keep a record of what everyone said, so that we can use it as a future reference for further discussion.
+
+As someone that constantly sends email to other members of NUSSU/ Sponsors/ Public, I would like to have an access to multiple different templates of emails so that I can focus more on writing the content of the email instead of spending too much time on crafting the overall structure.
+
 
 _{More to be added}_
 
@@ -877,66 +960,141 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-=== Use case: Log into system
+=== Use case: Sort by suitability by skill
 
 *MSS*
 
-1.  Address book asks user for user ID and password
-2.  User types in user ID and password
-3.  Address book queries and authorize user full access to address book
+1.  User indicates he wants to sort by skills
+2.  NUSSU-Connect lists available skills, asks the user what he wants to sort by.
+3.  User indicates what he wants by selecting
+4.  NUSSU-Connect all skills.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User types in wrong password
+* 2a. User can sort by ascending or descending order
 +
-[none]
-** 2a1. Address book displays error message and exits application
+Use case ends.
+* 2b. User can see all above a certain threshold
 +
 Use case ends.
 
-* 2b. User types in user ID for a non-existent user account
+=== Use case: Add Skill
+
+*MSS*
+
+1.  User indicates he wants to add skill
+2.  NUSSU-Connect lists available persons
+3.  User indicates person, skill, and skill level to add
+4.  NUSSU-Connect confirms addition
++
+Use case ends.
+
+=== Use case: Intuitive Filtering of Large Number of Contacts
+
+System: NUSSU Connect Application +
+Actor: Typical NUSSU member +
+*MSS*
+
+1.  User requests application to display list of contacts
+2.  System returns list of contacts
+3.  User requests to find a specific group of people from list of contacts
+4.  System returns new List of Contacts filtered according to previous List +
+Steps 3 - 4 are repeated until user found the desired group of people
+5. User found the group of people that he/she is looking for
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 4a. User makes an error and request to revert to previous List
 +
 [none]
-** 2b1. Address book displays error message and exits application
+** 4a1. System reverts and displays the previous List
 +
+Use case resumes at Step 3.
+
+* 3b. User request to revert List to initial state before filtering
++
+[none]
+** 3b1. System reverts List to initial state.
++
+Use case ends.
+
+=== Use case: Excluding specific people from Search List
+
+System: NUSSU Connect Application +
+Actor: Typical NUSSU member +
+*MSS*
+
+1.  User requests application to display list of contacts
+2.  System returns list of contacts
+3.  User requests to exclude a specific group of people from list of contacts
+4.  System returns new List of contacts according to the criteria set by the user +
+
 Use case ends
+
+=== Use case: Enforced criteria in Search List
+
+System: NUSSU Connect Application +
+Actor: Typical NUSSU member +
+*MSS*
+
+1.  User requests application to display list of contacts
+2.  System returns list of contacts
+3.  User requests System to display a list of users that MUST follow a certain criteria
+4.  System returns new List of contacts according to the criteria set by the user +
+
+Use case ends
+
+=== Use case: Log into system
+
+*MSS*
+
+1.  User types a command to access a certain functionality in NUSSU-Connect
+2.  NUSSU-Connect prompts user to login first by entering login credentials
+3.  User types in login credentials along with the login command
+4.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 3a. User types in wrong password or user ID
++
+[none]
+** 3a1. NUSSU-Connect displays error message and continues to prompt user for login credentials before doing anything else
++
+Use case ends.
 
 === Use case: Create new user accounts
 
 *MSS*
 
-1.  User types a command to indicate intention of creating a new account
-2.  Address book asks user to type in master password for enabling option to create new accounts
-3.  User types in master password
-4.  Address book authorizes the master password input as correct and shows successful message
-5.  User types in command to create a new account with relevant user ID and password
+1.  User types in command to create a new account with chosen user ID and password
+2.  NUSSU prompts user to type in master password for creation of new account
+3.  User types in the correct master password
+4.  NUSSU-Connect creates new account with chosen login details, and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to create a new account and types command to indicate so
+* 1a. User creates a new account with a user ID which already exists
 +
 [none]
-** 2a1. Address book cancels process of new account creation
+** 1a1. NUSSU-Connect shows error message to user and does not create a new account
 +
 Use case ends.
-+
-* 2b. User types in the wrong master password
-+
-[none]
-** 2b1. Address book shows error message to user and cancels process of new account creation
-+
-Use case ends.
-+
-* 2c. User creates a new account with a user ID which already exists
+* 3a. User types in the wrong master password
 +
 [none]
-** 2c1. Address book shows error message to user and cancels process of new account creation
+** 3a1. NUSSU-Connect shows error message to user and and does not create a new account
 +
 Use case ends.
 
@@ -944,35 +1102,24 @@ Use case ends.
 
 *MSS*
 
-1.  User requests to delete an existing account and types in command to do so
-2.  Address book asks for confirmation to delete account with associated user ID
-3.  User types command to express desire to delete account
-4.  Address book deletes account associated with input user ID and respective password
+1.  User types command together with user ID and password to delete account associated with input user ID and password
+2.  NUSSU-Connect account associated with input user ID and respective password and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to delete an account and types command to indicate so
+* 1a. User types in the wrong current password associated with the user ID
 +
 [none]
-** 2a1. Address book cancels process of deleting existing account
+** 1a1. NUSSU-Connect shows error message to user and cancels deletion of account
 +
 Use case ends.
-+
-
-* 2b. User types in the wrong current password associated with the user ID
+* 1b. User wants to delete a non-existent user account
 +
 [none]
-** 2b1. Address book shows error message to user and cancels process of deleting existing account
-+
-Use case ends.
-
-* 2c. User wants to delete a non-existent user account
-+
-[none]
-** 2c1. Address book shows error message and cancels process of deleting account
+** 1b1. NUSSU-Connect shows error message to user and cancels deletion of account
 +
 Use case ends.
 
@@ -980,43 +1127,44 @@ Use case ends.
 
 *MSS*
 
-1.  User requests to change the password of existing user account and types in command to do so
-2.  Address book asks for confirmation of password change
-3.  User types command to express desire to change account password
-4.  Address book changes password of account associated with input user ID and new password
+1.  User types command with the relevant credentials of an existing account to change that account's password
+2.  NUSSU-Connect changes password of account associated with input user ID and new password and shows successful execution message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. User decides not to change the password of the account and types command to indicate so
+* 1a. User types in the wrong current password associated with the user ID
 +
 [none]
-** 2a1. Address book cancels process of changing password of account
+** 1a1. NUSSU-Connect shows error message to user and cancels changing of password of account
++
+Use case ends.
+* 1b. User wants to change the password of a non-existent user account
++
+[none]
+** 1b1. NUSSU-Connect shows error message to user and cancels changing of password of account
++
+Use case ends.
+* 1c. User types in new password that matches current old password
++
+[none]
+** 1c1. NUSSU-Connect shows error message to user and cancels changing of password of account
 +
 Use case ends.
 
-* 2b. User types in the wrong current password associated with the user ID
-+
-[none]
-** 2b1. Address book shows error message to user and cancels process of changing password of account
-+
-Use case ends.
 
-* 2c. User wants to change the password of a non-existent user account
-+
-[none]
-** 2c1. Address book shows error message and cancels process of changing password of account
-+
-Use case ends.
+_{More to be added}_
 
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  Must be able to accommodate the contact details of everyone in NUSSU + 1000 extra contact details.
+.  All exco members of NUSSU should be able to create an account.
+.  Passwords must be salted and hashed with md5.
+.  All commands must be completed within 1 second.
+.  The single and multi-input commands phrases should be easy to remember and intuitive to understand what they mean.
 
 _{More to be added}_
 

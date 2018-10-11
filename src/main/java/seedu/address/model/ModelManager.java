@@ -12,7 +12,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.LoginBookChangedEvent;
 import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.login.LoginDetails;
+import seedu.address.model.login.UniqueAccountList;
 import seedu.address.model.person.Person;
 
 /**
@@ -21,30 +24,39 @@ import seedu.address.model.person.Person;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private final VersionedLoginBook versionedLoginBook;
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<LoginDetails> filteredLoginDetails;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyLoginBook loginBook, ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(loginBook, addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
+        versionedLoginBook = new VersionedLoginBook(loginBook);
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new LoginBook(), new AddressBook(), new UserPrefs());
     }
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public ReadOnlyLoginBook getLoginBook() {
+        return versionedLoginBook;
     }
 
     @Override
@@ -55,6 +67,24 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
+    }
+
+    private void indicateLoginBookChanged() {
+        raise(new LoginBookChangedEvent(versionedLoginBook));
+    }
+
+    @Override
+    public void createAccount(LoginDetails details) {
+        versionedLoginBook.createAccount(details);
+        updateFilteredLoginDetailsList(PREDICATE_SHOW_ALL_ACCOUNTS);
+        indicateLoginBookChanged();
+    }
+
+    @Override
+    public boolean hasAccount(LoginDetails details) {
+        requireNonNull(details);
+        UniqueAccountList uniqueAccountList = new UniqueAccountList();
+        return uniqueAccountList.contains(details);
     }
 
     @Override
@@ -96,6 +126,19 @@ public class ModelManager extends ComponentManager implements Model {
     public void addClub(ClubBudgetElements club) {
         versionedAddressBook.addClub(club);
         indicateAddressBookChanged();
+    }
+
+    //=========== Filtered Account List Accessors =============================================================
+
+    @Override
+    public ObservableList<LoginDetails> getFilteredLoginDetailsList() {
+        return FXCollections.unmodifiableObservableList(filteredLoginDetails);
+    }
+
+    @Override
+    public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {
+        requireNonNull(predicate);
+        filteredLoginDetails.setPredicate(predicate);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -161,5 +204,4 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
     }
-
 }

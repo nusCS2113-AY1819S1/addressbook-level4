@@ -12,6 +12,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.budgetelements.ClubName;
 import seedu.address.model.budgetelements.ExpectedTurnout;
 import seedu.address.model.budgetelements.NumberOfEvents;
+import seedu.address.model.login.UserId;
+import seedu.address.model.login.UserPassword;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -24,6 +26,37 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+
+    /**
+     * Parses a {@code String userId} into a {@code UserId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userId} is invalid.
+     */
+    public static UserId parseUserId(String userId) throws ParseException {
+        requireNonNull(userId);
+        String trimmeduserId = userId.trim();
+        if (!UserId.isValidUserId(trimmeduserId)) {
+            throw new ParseException(UserId.MESSAGE_USERID_CONSTRAINTS);
+        }
+        return new UserId(trimmeduserId);
+    }
+
+    /**
+     * Parses a {@code String userPassword} into a {@code UserPassword}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code userPassword} is invalid.
+     */
+    public static UserPassword parseUserPassword(String userPassword) throws ParseException {
+        requireNonNull(userPassword);
+        String trimmeduserPassword = userPassword.trim();
+        if (!UserPassword.isValidUserPassword(trimmeduserPassword)) {
+            throw new ParseException(UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS);
+        }
+        return new UserPassword(trimmeduserPassword);
+    }
+
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be

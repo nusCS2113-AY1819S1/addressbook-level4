@@ -1,0 +1,435 @@
+﻿= NUSSU Connect - User Guide
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/CS2113-AY1819S1-F09-1/main
+
+By: `Team F09-1`  	Since: `Sept 2018`
+
+== Introduction
+
+NUSSU Connect is for the executive committee members of NUSSU who are comfortable with working with Command Line Interface (CLI). It is meant for fast typers within NUSSU and it could help them perform their daily tasks such as managing recruitment, contacts, budgets and projects much more efficiently.
+
+== Quick Start
+
+.  Ensure you have Java version `9` or later installed in your Computer.
+.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Double-click the file to start the app. The GUI should appear in a few seconds.
++
+image::Ui.png[width="790"]
++
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Some example commands you can try:
+
+* *`list`* : lists all contacts
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`exit`* : exits the app
+
+.  Refer to <<Features>> for details of each command.
+
+[[Features]]
+== Features
+
+====
+*Command Format*
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+====
+
+=== Logging into system: `login`
+
+Logs into application using relevant credentials. +
+Format: `X1234567X` for user ID fields, where X can be any lower or upper case letter alphabet
+
+Examples:
+
+* `login` +
+`X1234567X zaq1xsw2cde3` +
+Logs into Address book with user ID as X1234567X and password as zaq1xsw2cde3.
+
+[NOTE]
+====
+Password is case-sensitive!
+====
+
+=== Creating a new user account: `create account`
+
+Creates a new user account in the address book. +
+Format: `user/USERID pass/PASSWORD`
+
+****
+* user/ and pass/ are required prefixes before USERID and PASSWORD
+* USERID refers to student matriculation number
+* PASSWORD refers to any desired passphrases the new user wishes to have
+* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
+* USERID must not belong to an existing account
+****
+
+Examples:
+
+* `create account` +
+`user/X1234567X pass/zaq1xsw2cde3` +
+Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
+
+=== Deleting an existing user account: `delete account`
+
+Deletes an existing account from the address book. +
+Format: `USERID PASSWORD`
+
+****
+* USERID refers to student matriculation number
+* PASSWORD refers to passphrase associated with USERID of the account
+* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
+* USERID must belong to an existing account
+****
+
+Examples:
+
+* `delete account` +
+`X1234567X zaq1xsw2cde3` +
+Deletes the current account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
+
+=== Changing the password of an existing user account: `change password`
+
+Changes the password of an existing account from the address book. +
+Format: `USERID CURRENTPASSWORD NEWPASSWORD`
+
+****
+* USERID refers to student matriculation number
+* CURRENTPASSWORD refers to current passphrase associated with USERID of the account
+* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
+* USERID must belong to an existing account
+* NEWPASSWORD must be different from CURRENTPASSWORD
+****
+
+Examples:
+
+* `change password` +
+`X1234567X zaq1xsw2cde3 1qaz2wsx3edc` +
+Changes the password of the current account with user ID as X1234567X, from "zaq1xsw2cde3" to "1qaz2wsx3edc" in the address book.
+
+=== Viewing help : `help`
+
+Format: `help`
+
+=== Adding a person: `add`
+
+Adds a person to the address book +
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+
+[TIP]
+A person can have any number of tags (including 0)
+
+Examples:
+
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
+=== Listing all persons : `list`
+
+Shows a list of all persons in the address book. +
+Format: `list`
+
+=== Editing a person : `edit`
+
+Edits an existing person in the address book. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
+****
+* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
+* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 p/91234567 e/johndoe@example.com` +
+Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` +
+Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+=== Locating persons: `find`
+
+Finds persons in the displayed list whose names/tags contain any of the given keywords. +
+Format: `find [\tag tags]  KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* For back-to-back find commands, the most recent find command will search according to the previous find command
+****
+
+Examples:
+
+* `find John` +
+* `find John` +
+Returns `john` and `John Doe`
+* `find Betsy Tim John` +
+Returns any person having names `Betsy`, `Tim`, or `John`
+* `find \tag President` +
+Returns any person with the tag `President`
+* `find \tag President Vice_President` +
+Returns any person with the tag `President` OR `Vice_President`.
+****
+**Executing back-to-back find commands:**
+
+Assume that the displayed list contains 3 person initially.
+
+image::InitialList.png[align="left"]
+
+After executing the command "find \tag VIP" +
+the displayed list will contain 2 person, both with the tag 'VIP'
+
+image::SecondList.png[align="left"]
+
+After executing the command "find \tag President" +
+it will filter according to the previous displayed list +
+the displayed list will contain 1 person, with the tag 'President' +
+
+
+image::ThirdList.png[align="left"]
+****
+
+=== Resetting Search History: `clearsearch`
+
+Resets search history back to the very initial stage before any find commands are executed
+Format: `clearsearch`
+****
+* To be used together with the find command
+****
+=== Deleting : `delete`
+
+Deletes a specific person from the address book. +
+Format: `delete [-a all] [INDEX]`
+
+****
+* Deletes the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* If -a option is selected, all contacts on the list will be deleted and INDEX will be ignored.
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd person in the address book.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st person in the results of the `find` command.
+* `list` +
+`delete -a` +
+Deletes everyone in the results of the `find` command.
+
+
+=== Selecting a person : `select`
+
+Selects the person identified by the index number used in the displayed person list. +
+Format: `select INDEX`
+
+****
+* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd person in the address book.
+* `find Betsy` +
+`select 1` +
+Selects the 1st person in the results of the `find` command.
+
+=== Listing entered commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
+
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+// tag::undoredo[]
+=== Undoing previous command : `undo`
+
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+====
+
+Examples:
+
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
+
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+
+=== Redoing the previously undone command : `redo`
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+
+* `delete 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+`redo` (reapplies the `clear` command) +
+// end::undoredo[]
+
+=== Clearing all entries : `clear`
+
+Clears all entries from the address book. +
+Format: `clear`
+
+=== Submitting data for budget allocation: `data`
+
+Submits the data about number of events, expected turnout etc. +
+Format: `data e/NUMBER OF EVENTS t/TURNOUT`
+
+Example: +
+`data e/5 t/200`
+
+=== Viewing the allocated budget : `viewbudget`
+
+Shows the allocated budget to the user +
+Format: `viewbudget`
+
+=== Submitting grant request : `request`
+
+Submits data about amount of grant needed, the reason and tags the importance level
+Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL
+
+Example: +
+`request m/1000 r/for booking auditorium t/medium`
+
+=== Viewing grant request : `viewrequest`
+
+Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
+Format: `viewrequest`
+
+=== Accepting grant request: `accept`
+
+Approves a specific grant request from the list of grants.
+Format: `accept [-a all] [INDEX]
+
+****
+* Approves the request at the specified `INDEX`.
+* The index refers to the index number shown in the displayed requests list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* If -a option is selected, all requests on the list will be approved and INDEX will be ignored.
+****
+Example:
+
+* `viewrequest` +
+`accept 2` +
+Approves the 2nd request in the list of grant requests.
+* `viewrequest` +
+`accept -a` +
+Approves all the requests in the list.
+
+=== Exiting the program : `exit`
+
+Exits the program. +
+Format: `exit`
+
+=== Saving the data
+
+Address book data are saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
+
+// tag::dataencryption[]
+=== Encrypting data files `[coming in v2.0]`
+
+_{explain how the user can enable/disable data encryption}_
+// end::dataencryption[]
+
+== FAQ
+
+*Q*: How do I transfer my data to another Computer? +
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+
+== Command Summary
+
+* *Login* : `USERID PASSWORD`
+e.g. `login` +
+	`A01234567M zaq1xsw2cde3`
+* *Create Account* : `USERID PASSWORD` +
+e.g. `create account` +
+	`A01234567M zaq1xsw2cde3`
+* *Delete Account* : `USERID PASSWORD` +
+e.g. `delete account` +
+	`A01234567M zaq1xsw2cde3`
+* *Change Password* : `USERID CURRENTPASSWORD NEWPASSWORD` +
+e.g. `change password` +
+	`A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
+* *Clear* : `clear`
+* *Delete* : `delete [-a all][INDEX]` +
+e.g. `delete 3`
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *Find* : `find [\tag tags] KEYWORD [MORE_KEYWORDS]` +
+e.g. `find James Jake` +
+e.g `find \tag President`
+* *List* : `list`
+* *Help* : `help`
+* *Select* : `select INDEX` +
+e.g.`select 2`
+* *History* : `history`
+* *Undo* : `undo`
+* *Redo* : `redo`
+* *Submitting data for budget* : `data e/NUMBER OF EVENTS t/TURNOUT` +
+e.g. `data e/5 t/200`
+* *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
+e.g. `request m/1000 r/for booking auditorium t/medium`
+* *Viewing grant request* : `viewrequest`
+* *Accepting a grant request* : `accept [-a all] [INDEX]` +
+e.g. `viewrequest` +
+       `accept 2` +
+e.g. `viewrequest` +
+     `accept -a`
+
