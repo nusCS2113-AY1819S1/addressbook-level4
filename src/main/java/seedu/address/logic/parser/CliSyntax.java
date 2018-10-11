@@ -16,4 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_NUMBER_OF_EVENTS = new Prefix("e/");
     public static final Prefix PREFIX_USERID = new Prefix("user/");
     public static final Prefix PREFIX_USERPASSWORD = new Prefix("pass/");
+
 }

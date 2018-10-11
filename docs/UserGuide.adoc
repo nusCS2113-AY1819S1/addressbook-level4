@@ -330,7 +330,6 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
-<<<<<<< HEAD
 === Submitting data for budget allocation: `budget`
 
 Submits the data about number of events, expected turnout etc. +
@@ -338,41 +337,29 @@ Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
 
 Example: +
 `budget c/Computing Club t/200 e/5`
-=======
-=== Submitting data for budget allocation: `data`
-Submits the data about number of events, expected turnout etc. +
-Format: `data e/NUMBER OF EVENTS t/TURNOUT`
-Example: +
-`data e/5 t/200` +
->>>>>>> cf7a3827e267177ab295da9ebeb181586aa9c55f
 
 === Viewing the allocated budget : `viewbudget`
+
 Shows the allocated budget to the user +
-Format: `viewbudget` +
+Format: `viewbudget`
 
 === Submitting grant request : `request`
+
 Submits data about amount of grant needed, the reason and tags the importance level
-<<<<<<< HEAD
 Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL`
 
-=======
-Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL
->>>>>>> cf7a3827e267177ab295da9ebeb181586aa9c55f
 Example: +
 `request m/1000 r/for booking auditorium t/medium` +
 
 === Viewing grant request : `viewrequest`
 Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
-Format: `viewrequest` +
+Format: `viewrequest`
 
 === Accepting grant request: `accept`
+
 Approves a specific grant request from the list of grants.
-<<<<<<< HEAD
 Format: `accept [-a all] [INDEX]`
 
-=======
-Format: `accept [-a all] [INDEX] +
->>>>>>> cf7a3827e267177ab295da9ebeb181586aa9c55f
 ****
 * Approves the request at the specified `INDEX`.
 * The index refers to the index number shown in the displayed requests list.
