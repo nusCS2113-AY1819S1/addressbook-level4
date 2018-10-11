@@ -57,7 +57,6 @@ public class TodoList implements ReadOnlyTodoList {
         setTasks(newData.getTaskList());
     }
 
-    
     //// task-level operations
 
     /**
