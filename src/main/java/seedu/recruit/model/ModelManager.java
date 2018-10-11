@@ -29,7 +29,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedCompanyBook versionedCompanyBook;
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
-    private final FilteredList<JobOffer> filteredJobOffers;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.
@@ -272,8 +271,4 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
-   @Override
-    public ObservableList<JobOffer> getFilteredCompanyJobOfferList() {
-        return FXCollections.unmodifiableObservableList(filteredJobOffers);
-    }
 }

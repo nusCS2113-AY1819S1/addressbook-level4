@@ -169,7 +169,4 @@ public interface Model {
      */
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
-    /** Returns an unmodifiable view of the filtered company's job offer list */
-    ObservableList<JobOffer> getFilteredCompanyJobOfferList();
-
 }

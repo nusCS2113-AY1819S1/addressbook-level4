@@ -8,6 +8,6 @@
       <Button mnemonicParsing="false" text="Candidates" BorderPane.alignment="CENTER" />
    </top>
    <left>
-      <Button mnemonicParsing="false" onAction="#handleButtonAction" text="Companies" BorderPane.alignment="CENTER" />
+      <Button mnemonicParsing="false" text="Companies" BorderPane.alignment="CENTER" />
    </left>
 </BorderPane>

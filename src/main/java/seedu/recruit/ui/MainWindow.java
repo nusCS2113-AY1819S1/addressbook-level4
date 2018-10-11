@@ -144,14 +144,14 @@ public class MainWindow extends UiPart<Stage> {
         //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         //personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(), logic.getFilteredCompanyJobOfferList());
+        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList());
         companyJobDetailsPanelPlaceholder.getChildren().add(companyJobDetailsPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getCandidateBookFilePath(),
-                logic.getFilteredPersonList().size());
+                logic.getFilteredCompanyList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);

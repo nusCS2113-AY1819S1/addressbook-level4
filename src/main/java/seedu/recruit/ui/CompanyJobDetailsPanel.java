@@ -27,30 +27,30 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Company> companyView;
-    @FXML
-    private ListView<JobOffer> companyJobDetailsView;
+    //@FXML
+    //private ListView<Company> companyJobDetailsView;
 
-    public CompanyJobDetailsPanel(ObservableList<Company> companyList, ObservableList<JobOffer> jobList) {
+    public CompanyJobDetailsPanel(ObservableList<Company> companyList) {
         super(FXML);
-        setConnections(companyList, jobList);
+        setConnections(companyList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Company> companyList, ObservableList<JobOffer> jobList) {
+    private void setConnections(ObservableList<Company> companyList) {
         companyView.setItems(companyList);
         companyView.setCellFactory(listView -> new CompanyViewCell());
-        companyJobDetailsView.setItems(jobList);
-        companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
-        setEventHandlerForSelectionChangeEvent(jobList);
+        //companyJobDetailsView.setItems(jobList);
+        //companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
+        setEventHandlerForSelectionChangeEvent();
     }
 
-    private void setEventHandlerForSelectionChangeEvent(ObservableList<JobOffer> jobList) {
+    private void setEventHandlerForSelectionChangeEvent() {
         companyView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in company job details panel changed to : '" + newValue + "'");
                         raise(new CompanyPanelSelectionChangedEvent(newValue));
-                        showJobDetailsOfSelectedCompany(jobList);
+                        showJobDetailsOfSelectedCompany();
                     }
                 });
     }
@@ -58,7 +58,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     /**
      * Expands {@code PersonCard} by listing all the details of the selected Candidate
      */
-    private void showJobDetailsOfSelectedCompany(ObservableList<JobOffer> jobList) {
+    private void showJobDetailsOfSelectedCompany() {
         Company selectedCompany = companyView.getSelectionModel().getSelectedItem();
         //selectedCompany.setItems(jobList);
         //selectedCompany.setCellFactory(listView -> new CompanyJobDetailsViewCell());
@@ -99,10 +99,10 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code PersonCard}.
-     */
-    class CompanyJobDetailsViewCell extends ListCell<JobOffer> {
+
+    class CompanyJobDetailsViewCell extends ListCell<Company> {
         @Override
-        protected void updateItem(JobOffer job, boolean empty) {
+        protected void updateItem(Company job, boolean empty) {
             super.updateItem(job, empty);
 
             if (empty || job == null) {
@@ -112,5 +112,5 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                 setGraphic(new JobCard(job, getIndex() + 1).getRoot());
             }
         }
-    }
+    }*/
 }

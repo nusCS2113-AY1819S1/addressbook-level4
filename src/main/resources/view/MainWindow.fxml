@@ -56,7 +56,7 @@
             <BorderPane fx:id="switchPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="CompanyJobDetailsPanelPlaceholder" prefWidth="340" >
+          <StackPane fx:id="companyJobDetailsPanelPlaceholder" prefWidth="340" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
