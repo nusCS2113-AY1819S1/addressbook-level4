@@ -123,6 +123,11 @@ public class AddCandidateCommandTest {
         }
 
         @Override
+        public void sortByName() {
+            throw new AssertionError( "This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Candidate> getFilteredCandidateList() {
             throw new AssertionError("This method should not be called.");
         }
