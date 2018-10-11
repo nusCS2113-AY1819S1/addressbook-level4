@@ -6,7 +6,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -19,31 +22,47 @@ public class Comments {
     public static String input;
 
     /**
+     *  Constructor to make sure that used Vector and path is initialised
+     */
+    public Comments () {
+        input = "C:/Users/Gerald/Desktop/test/1.html";
+        v = this.parseCommentSection(input);
+    }
+
+    /**
      *  Appends comment to the end of the current Comment Section of index
      */
-    public void addComment(String comment) {
+    public String addComment(String comment) {
         v.add(comment);
-        rewrite(v,input);
+        return rewrite(v,input);
     }
 
     /**
      *  Replies with the comment to event Comment section of index and line
      */
-    public void replyComment(String comment, int line) {
-        v.add(line, "REPLY--->" + comment);
-        rewrite(v,input);
+    public String replyComment(String comment, int line) {
+        try {
+            v.add(line, "REPLY--->" + comment);
+        } catch (Exception e) {
+            System.out.println("Line error");
+        }
+        return rewrite(v,input);
     }
 
     /**
      *  Admin only: Can delete comment given event Comment Section indexx and Line
      */
-    public void deleteComment(int line) {
-        v.remove(line);
-        rewrite(v,input);
+    public String deleteComment(int line) {
+        try {
+            v.remove(line);
+        } catch(Exception e) {
+            System.out.println("Line error");
+        }
+        return rewrite(v,input);
     }
 
     /**
-     *  Admin only: Can delete comment given event Comment Section indexx and Line
+     *  Runs a pre-processing to ensure that strings can be stored as a vector
      */
     public Vector parseCommentSection(String in) {
         String input = in;
@@ -52,10 +71,9 @@ public class Comments {
         try {
             htmlfile = Jsoup.parse(new File(input),null);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            e.printStackTrace();// This should return an error message in case it doesn't work
         }
-        Element element = htmlfile.select("div").first();
+        Element element = htmlfile.select("ol").first();
         Elements divChildren = element.children();
 
         Elements detachedDivChildren = new Elements();
@@ -66,20 +84,19 @@ public class Comments {
         }
         for (Element elem : divChildren) {
             v.add(elem.ownText());
-            //System.out.println(elem.ownText());
         }
         return v;
     }
 
     /**
-     *  Admin only: Can delete comment given event Comment Section indexx and Line
+     *  Rewrites String to after a change has happened
      */
-    public static void rewrite(Vector v, String input) {
-        String commentSection="<span>Comment Section</span><div>";
+    public static String rewrite(Vector v, String input) {
+        String commentSection="<span>Comment Section</span>\n<ol>";
         for(int i=0;i<v.size();i++) {
-            commentSection+="<p>" + v.get(i)+"</p>";
+            commentSection+= "\n" + "<li>" + v.get(i)+"</li>";
         }
-        commentSection+="</div>";
+        commentSection+="\n</ol>";
         File savingFile = new File(input);
         FileOutputStream fop = null;
         try {
@@ -106,6 +123,7 @@ public class Comments {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        return commentSection;
     }
 
     /**
@@ -113,16 +131,7 @@ public class Comments {
      */
     public static void main(String[] args) {
         Comments comment = new Comments();
-        input = "C:/Users/Gerald/Desktop/test/1.html";
-        Document htmlfile=null;
-        try {
-            htmlfile = Jsoup.parse(new File(input),null);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        v = comment.parseCommentSection(input);
-
+        String str;
         while(true){
             System.out.println("What Comment do you want to add?");
             Scanner SCANNER = new Scanner(System.in);
@@ -130,19 +139,16 @@ public class Comments {
 
             try {
                 Integer.parseInt(username);
-                comment.deleteComment(Integer.parseInt(username)-1);
+                str = comment.deleteComment(Integer.parseInt(username)-1);
                 System.out.println("Comment at " + username + "deleted");
+                System.out.println(str);
             } catch(NumberFormatException e) {
                 //comment.addComment(username);
-                comment.replyComment(username, 1);
+                str = comment.replyComment(username, 1);
                 System.out.println("Comment added!!");
+                System.out.println(str);
             }
-
-
-
-
         }
-
 
     }
 }
