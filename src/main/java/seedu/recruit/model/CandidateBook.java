@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.SortedList;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.UniqueCandidateList;
 
@@ -87,6 +88,13 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     }
 
     /**
+     * Sorts the candidate list
+     */
+    public void sortCandidateByName() {
+        persons.sortPersons();
+    }
+
+    /**
      * Removes {@code key} from this {@code CandidateBook}.
      * {@code key} must exist in the recruit book.
      */
@@ -103,7 +111,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     }
 
     @Override
-    public ObservableList<Candidate> getCandidatelist() {
+    public ObservableList<Candidate>    getCandidatelist() {
         return persons.asUnmodifiableObservableList();
     }
 

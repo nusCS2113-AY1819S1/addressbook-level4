@@ -113,6 +113,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCandidateBookChanged();
     }
 
+    @Override
+    public void sortByName() {
+        versionedCandidateBook.sortCandidateByName();
+        indicateCandidateBookChanged();
+    }
+
+
     //=========== Filtered Candidate List Accessors =============================================================
 
     /**

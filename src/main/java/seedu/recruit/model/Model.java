@@ -58,6 +58,11 @@ public interface Model {
     void updateFilteredCandidateList(Predicate<Candidate> predicate);
 
     /**
+     *  Sort the candidates in CandidateBook
+     */
+    void sortByName();
+
+    /**
      * Returns true if the model has previous CandidateBook states to restore.
      */
     boolean canUndoCandidateBook();

@@ -179,7 +179,7 @@ public class EditCandidateCommandTest {
         // edit -> first candidate edited
         EditCandidateCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered candidate list to show all persons
+        // undo -> reverts Candidatebook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
