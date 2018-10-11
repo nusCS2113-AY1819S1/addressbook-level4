@@ -6,8 +6,9 @@ package seedu.address.model.util;
 import java.util.ArrayList;
 //import java.util.Comparator;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
+//import seedu.address.model.person.UniquePersonList;
 /**
  * sort student in ascending order by scores.
  */
@@ -15,28 +16,27 @@ public class SortGrade { //from lowest to highest
     /**
      * sort student in ascending order by their scores.
      */
-    public ArrayList<Person> sortingFromLowesttoHighest(UniquePersonList personList) {
-        ArrayList<Person> pList = new ArrayList<>(bubbleSort(personList,
-                personList.asUnmodifiableObservableList().size()));
-        System.out.println(pList.toString());
+    public ArrayList<Person> sortingFromLowesttoHighest(ObservableList<Person> personList) {
+        ArrayList<Person> pList = new ArrayList<>(bubbleSort(personList, personList.size()));
+        //System.out.println(pList.toString());
         return pList;
     }
 
     /**
      * implement bubblesort function.
      */
-    public static ArrayList<Person> bubbleSort(UniquePersonList list, int n) {
+    public static ArrayList<Person> bubbleSort(ObservableList<Person> list, int n) {
         ArrayList<Person> personList = new ArrayList<Person>();
 
-        for (int i = 0; list.asUnmodifiableObservableList().size() > i; i++) {
-            personList.add(list.asUnmodifiableObservableList().get(i));
+        for (int i = 0; list.size() > i; i++) {
+            personList.add(list.get(i));
         }
 
 
         int i;
         int j;
         Person temp;
-        // boolean swapped;
+
         for (i = 0; i < n - 1; i++) {
             //swapped = false;
             for (j = 0; j < n - i - 1; j++) {
