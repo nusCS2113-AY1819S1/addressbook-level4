@@ -47,10 +47,6 @@ public class MailCommand extends Command {
     /**
      * Creates a default Mail command
      */
-    public MailCommand() {
-        desktop = Desktop.getDesktop();
-    }
-
     public MailCommand(int mailType) {
         this.mailType = mailType;
         desktop = Desktop.getDesktop();
@@ -80,56 +76,58 @@ public class MailCommand extends Command {
 
         switch(mailType) {
         case TYPE_SELECTION:
-            uriToMail = mailToSelection(model);
+            mailToSelection(model);
             break;
         case TYPE_GROUPS:
-            uriToMail = mailToGroups(model, new Tag(mailArgs.trim()));
+            mailToGroups(model, new Tag(mailArgs.trim()));
             break;
         default:
-            uriToMail = mailToAll(model);
-        }
-
-        try {
-            desktop.mail(uriToMail);
-        } catch (UnsupportedOperationException | IOException | SecurityException e) {
-            throw new CommandException(e.getMessage());
+            mailToAll(model);
         }
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
 
     /**
-     * Creates an URI that consists of email address from selected contacts.
+     * Opens system's default email application with selected contacts as recipients.
      * @param model containing the contacts.
-     * @return the URI consisting of extracted email addresses.
+     * @return the list of Persons mailed to.
      * @throws CommandException if there is error in creating URI.
      */
-    private URI mailToSelection(Model model) throws CommandException {
+    private List<Person> mailToSelection(Model model) throws CommandException {
         List<Person> list = model.getSelectedPersons();
         ArrayList<String> emailList = retrieveEmails(list);
-        return createUri(emailList);
+        URI uriToMail = createUri(emailList);
+        sendWithUri(uriToMail);
+        return list;
     }
 
     /**
-     * Creates an URI that consists of email address from given groups.
+     * Opens system's default email application with contacts belonging to specified Tag as recipients.
      * @param model containing the contacts.
-     * @return the URI consisting of extracted email addresses.
+     * @return the list of Persons mailed to.
      * @throws CommandException if there is error in creating URI.
      */
-    private URI mailToGroups(Model model, Tag tag) throws CommandException {
-        ArrayList<String> emailList = retrieveEmailsFromGroups(model.getFilteredPersonList(), tag);
-        return createUri(emailList);
+    private List<Person> mailToGroups(Model model, Tag tag) throws CommandException {
+        List<Person> list = model.getFilteredPersonList();
+        ArrayList<String> emailList = retrieveEmailsFromGroups(list, tag);
+        URI uriToMail = createUri(emailList);
+        sendWithUri(uriToMail);
+        return list;
     }
 
     /**
-     * Creates an URI that consists of email address from all contacts.
+     * Opens system's default email application with all contacts as recipients.
      * @param model containing the contacts.
-     * @return the URI consisting of extracted email addresses.
+     * @return the list of Persons mailed to.
      * @throws CommandException if there is error in creating URI.
      */
-    private URI mailToAll(Model model) throws CommandException {
+    private List<Person> mailToAll(Model model) throws CommandException {
+        List<Person> list = model.getFilteredPersonList();
         ArrayList<String> emailList = retrieveEmails(model.getFilteredPersonList());
-        return createUri(emailList);
+        URI uriToMail = createUri(emailList);
+        sendWithUri(uriToMail);
+        return list;
     }
 
     /**
@@ -185,5 +183,18 @@ public class MailCommand extends Command {
             throw new CommandException(e.getMessage());
         }
         return uri;
+    }
+
+    /**
+     * Opens the system's default email application given the specified URI.
+     * @param uriToMail URI specifying the recipients.
+     * @throws CommandException if unable to open the email application.
+     */
+    private void sendWithUri(URI uriToMail) throws CommandException {
+        try {
+            desktop.mail(uriToMail);
+        } catch (UnsupportedOperationException | IOException | SecurityException e) {
+            throw new CommandException(e.getMessage());
+        }
     }
 }
