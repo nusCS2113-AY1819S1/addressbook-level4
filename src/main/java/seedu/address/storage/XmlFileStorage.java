@@ -24,6 +24,14 @@ public class XmlFileStorage {
         }
     }
 
+    public static void saveRequestToFile(Path file, XmlSerializableRequestList requestList)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, requestList);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
     /**
      * Returns address book in the file or an empty address book
      */
@@ -36,4 +44,15 @@ public class XmlFileStorage {
         }
     }
 
+    /**
+     * Returns address book in the file or an empty address book
+     */
+    public static XmlSerializableRequestList loadRequestsFromSaveFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableRequestList.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
 }

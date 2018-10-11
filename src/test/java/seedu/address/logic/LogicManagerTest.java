@@ -16,6 +16,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.request.RequestModel;
+import seedu.address.model.request.RequestModelManager;
 
 
 public class LogicManagerTest {
@@ -23,7 +25,8 @@ public class LogicManagerTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private Model model = new ModelManager();
-    private Logic logic = new LogicManager(model);
+    private RequestModel requestModel = new RequestModelManager();
+    private Logic logic = new LogicManager(model, requestModel);
 
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {

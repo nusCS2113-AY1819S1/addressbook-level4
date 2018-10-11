@@ -6,6 +6,9 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.fxml.FXML;
+import javafx.scene.layout.StackPane;
+import seedu.address.logic.Logic;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -23,11 +26,26 @@ import seedu.address.logic.commands.StockCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.request.CommandSecondary;
+import seedu.address.model.request.RequestCommand;
+import seedu.address.model.request.RequestCommandParser;
+import seedu.address.model.request.ViewRequestCommand;
+import seedu.address.ui.BookListPanel;
+import seedu.address.ui.MainWindow;
+import seedu.address.ui.RequestListPanel;
 
 /**
  * Parses user input.
  */
 public class BookInventoryParser {
+
+
+    @FXML
+    StackPane personListPanelPlaceholder;
+
+    private Logic logic;
+    private BookListPanel bookListPanel;
+
 
     /**
      * Used for initial separation of command word and args.
@@ -49,6 +67,7 @@ public class BookInventoryParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_ALIAS:
@@ -100,5 +119,4 @@ public class BookInventoryParser {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

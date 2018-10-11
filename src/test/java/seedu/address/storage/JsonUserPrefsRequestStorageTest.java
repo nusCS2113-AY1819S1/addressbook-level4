@@ -16,9 +16,9 @@ import org.junit.rules.TemporaryFolder;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.UserPrefs;
 
-public class JsonUserPrefsStorageTest {
+public class JsonUserPrefsRequestStorageTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "JsonUserPrefsRequestStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

@@ -21,7 +21,7 @@ import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
-public class StorageManagerTest {
+public class RequestStorageManagerTest {
 
     @Rule
     public TemporaryFolder testFolder = new TemporaryFolder();
@@ -47,7 +47,7 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the InventoryStorageManager is properly wired to the
          * {@link JsonUserPrefsStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link JsonUserPrefsRequestStorageTest} class.
          */
         UserPrefs original = new UserPrefs();
         original.setGuiSettings(300, 600, 4, 6);
@@ -61,7 +61,7 @@ public class StorageManagerTest {
         /*
          * Note: This is an integration test that verifies the InventoryStorageManager is properly wired to the
          * {@link XmlBookInventoryStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlBookInventoryStorageTest} class.
+         * More extensive testing of UserPref saving/reading is done in {@link XmlBookInventoryRequestStorageTest} class.
          */
         BookInventory original = getTypicalAddressBook();
         storageManager.saveAddressBook(original);

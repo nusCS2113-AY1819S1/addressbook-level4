@@ -20,8 +20,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.BookInventory;
 import seedu.address.model.ReadOnlyBookInventory;
 
-public class XmlBookInventoryStorageTest {
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlBookInventoryStorageTest");
+public class XmlBookInventoryRequestStorageTest {
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlBookInventoryRequestStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
