@@ -56,6 +56,8 @@ public interface Model {
      * {@code distributor} must not already exist in the address book.
      */
     void addDistributor(Distributor distributor);
+
+    void getDistributor(Distributor distributor);
   
     /**
      * Deletes the given product.
@@ -67,7 +69,7 @@ public interface Model {
      * Adds the given product.
      * {@code product} must not already exist in the address book.
      */
-    void addPerson(Product product);
+    void addPerson(Product person);
 
     /**
      * Replaces the given distributor {@code target} with {@code editedDistributor}.
