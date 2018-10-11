@@ -12,7 +12,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -108,14 +107,17 @@ public class EditCommand extends Command {
         return editSingleEntry(model);
     }
 
-    private CommandResult editAllEntries(Model model) throws CommandException{
+    /**
+     * Edits all persons listed and returns a {@code CommandResult} with the total number of persons edited.
+     */
+    private CommandResult editAllEntries(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         List<Person> personsToCopy = new ArrayList<>();
 
         for (Person person : lastShownList) {
             personsToCopy.add(person);
         }
-        for (Person personToEdit : personsToCopy){
+        for (Person personToEdit : personsToCopy) {
             Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
             if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
@@ -124,7 +126,7 @@ public class EditCommand extends Command {
 
             model.updatePerson(personToEdit, editedPerson);
             //TODO to enquire and merge with lekoook
-            //model.editPersonInTrie(personToEdit, editedPerson);
+            //model.getTextPrediction().editPerson(personToEdit, editedPerson);
         }
 
         model.commitAddressBook();
@@ -134,7 +136,10 @@ public class EditCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_ALL_SUCCESS, personsToCopy.size()));
     }
 
-    private CommandResult editSingleEntry(Model model) throws CommandException{
+    /**
+     * Edits specified person by index and returns a {@code CommandResult} details of {@code editedPerson}
+     */
+    private CommandResult editSingleEntry(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -202,26 +207,6 @@ public class EditCommand extends Command {
         return index.equals(e.index)
                 && editPersonDescriptor.equals(e.editPersonDescriptor);
     }
-
-    //TODO class to check which is edited.
-//    public static class FieldEdited {
-//
-//        public enum field {
-//            phone,
-//            email,
-//            address,
-//            position,
-//            kpi,
-//            note,
-//            tags
-//        }
-//
-//        public List<Boolean> isEditedList;
-//
-//        public FieldEdited(){
-//            isEditedList = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
-//        }
-//    }
 
     /**
      * Stores the details to edit the person with. Each non-empty field value will replace the

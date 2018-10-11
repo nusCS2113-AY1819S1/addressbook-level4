@@ -18,24 +18,12 @@ public class Note {
 
     public final String value;
 
-
     /**
      * Constructs a {@code Note}
      */
     public Note() {
         value = null;
     }
-
-    /**
-     * Returns true if a Note has been assigned to the person.
-     */
-    public boolean doesExist() {
-        if (value != null) {
-            return true;
-        }
-        return false;
-    }
-
 
     /**
      * Constructs a {@code Tag}.
@@ -46,6 +34,16 @@ public class Note {
         requireNonNull(note);
         checkArgument(isValidNote(note), MESSAGE_NOTE_CONSTRAINTS);
         value = note;
+    }
+
+    /**
+     * Returns true if a Note has been assigned to the person.
+     */
+    public boolean doesExist() {
+        if (value != null) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -74,7 +72,6 @@ public class Note {
     public int hashCode() {
         return value.hashCode();
     }
-
 }
 
 

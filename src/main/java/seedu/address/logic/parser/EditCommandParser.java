@@ -50,10 +50,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         Index index = null;
         Boolean editAll = false;
 
+        //TODO check label if correct
         CheckPreamble: try {
             if (argMultimap.getValue(PREFIX_ALL).isPresent()) {
                 editAll = true;
-               break CheckPreamble;
+                break CheckPreamble;
             }
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {

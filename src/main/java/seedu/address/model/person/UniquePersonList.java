@@ -34,11 +34,11 @@ public class UniquePersonList implements Iterable<Person> {
         return internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
-    public int size(){
+    public int size() {
         return internalList.size();
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return internalList.isEmpty();
     }
 

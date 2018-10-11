@@ -3,18 +3,19 @@ package seedu.address.model.tag;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableMap;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.UniquePersonList;
+
 //import seedu.address.model.person.exceptions.TagNotFoundException;
 
 
 /**
  *
- * Supports a minimal set of list operations.
+ * //TODO write description
  *
- * @see
+ *
  */
 public class UniqueTagList {
     private final ObservableMap<Tag, UniquePersonList> internalList = FXCollections.observableHashMap();
@@ -51,11 +52,12 @@ public class UniqueTagList {
         }
 
     }
+
     //TODO change description
     /**
-     * Replaces the person {@code target} in the list with {@code editedPerson}.
+     * Replaces the tags of person {@code target} in the list with the tags of the edited person{@code editedPerson}.
      * {@code target} must exist in the list.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
+     * The person identity of {@code editedPerson} must not be the same as another existing person in the Map.
      */
     public void setTag(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -65,7 +67,7 @@ public class UniqueTagList {
     }
 
     /**
-     * Removes the equivalent person from the list.
+     * Removes the tags of the equivalent person from the Map.
      * The person must exist in the list.
      */
     public void remove(Person toRemove) {
@@ -79,10 +81,9 @@ public class UniqueTagList {
     }
 
     //TODO to edit description
-//    /**
-//     * Replaces the contents of this list with {@code persons}.
-//     * {@code persons} must not contain duplicate persons.
-//     */
+    /**
+     * Replaces the contents of this Map with {@code tagListMap}.
+     */
     public void setTags(ObservableMap <Tag, UniquePersonList> tagListMap) {
         requireAllNonNull(tagListMap);
 
@@ -102,11 +103,11 @@ public class UniqueTagList {
         return FXCollections.unmodifiableObservableMap(internalList);
     }
 
-    //TODO replace iterate
-//    @Override
-//    public Iterator<Tag> iterator() {
-//        return internalList.iterator();
-//    }
+    /*TODO replace iterate
+    @Override
+    public Iterator<Tag> iterator() {
+        return internalList.iterator();
+    }*/
 
     @Override
     public boolean equals(Object other) {
