@@ -78,20 +78,12 @@ public class MainApp extends Application {
     }
 
     /**
-<<<<<<< HEAD:src/main/java/seedu/address/MainApp.java
-     * Returns a {@code ModelManager} with the data from {@code storage}'s financial planner and {@code userPrefs}. <br>
-     * The data from the sample financial planner will be used instead
-     * if {@code storage}'s financial planner is not found,
-     * or an empty financial planner will be used instead if errors occur
-     * when reading {@code storage}'s financial planner.
-=======
      * Returns a {@code ModelManager} with the data from {@code storage}'s financial planner and {@code userPrefs}.
      * <br>
      * The data from the sample financial planner will be used instead if {@code storage}'s
      * financial planner is not found,
      * or an empty financial planner will be used instead if errors occur when reading
      * {@code storage}'s financial planner.
->>>>>>> 936a266304811392cda80acfbf3d1820aac87fed:src/main/java/seedu/planner/MainApp.java
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyFinancialPlanner> financialPlannerOptional;

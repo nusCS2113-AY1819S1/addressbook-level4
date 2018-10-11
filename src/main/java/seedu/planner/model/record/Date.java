@@ -17,7 +17,7 @@ public class Date {
             + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
     public static final String MESSAGE_DATE_LOGICAL_CONSTRAINTS =
             "Date should follow the modern calendar. Day parameter must fit within the constraints of each month. \n"
-            + "For e.g, February has only 28 days so the day parameter must be less than or equal to 28 if the month "
+            + "For e.g, February has only 28 days for the non-Leap year so the day parameter must be less than or equal to 28 if the month "
             + "parameter is 2.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
     public final String value;
@@ -39,6 +39,10 @@ public class Date {
         splitDate(date);
         checkArgument(DateUtil.isValidDate(day, month), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 MESSAGE_DATE_LOGICAL_CONSTRAINTS));
+    }
+
+    public String getValue() {
+        return value;
     }
 
     /**
@@ -149,7 +153,6 @@ public class Date {
         return value.hashCode();
     }
 
-    // TODO: Decide as a group whether we want days/month/year to be accessed separately
     public int getDay() {
         return day;
     }

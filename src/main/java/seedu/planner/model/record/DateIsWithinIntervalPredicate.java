@@ -16,6 +16,19 @@ public class DateIsWithinIntervalPredicate implements Predicate<Record> {
         this.endDate = endDate;
     }
 
+    public DateIsWithinIntervalPredicate(String startDate, String endDate) {
+        this.startDate = new Date (startDate);
+        this.endDate = new Date (endDate);
+    }
+
+    /**
+     * Check if Start Date is smaller than/equal to End Date
+     * @return the boolean if StartDate is smaller than/equal to End Date
+     */
+    public boolean isValidPredicate() {
+        return (startDate.isEarlierThan(endDate) || startDate.equals(endDate));
+    }
+
     @Override
     public boolean test(Record record) {
         Date recordDate = record.getDate();
