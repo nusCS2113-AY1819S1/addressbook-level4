@@ -26,31 +26,23 @@ import seedu.address.logic.commands.StockCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.request.CommandSecondary;
-import seedu.address.model.request.RequestCommand;
-import seedu.address.model.request.RequestCommandParser;
-import seedu.address.model.request.ViewRequestCommand;
 import seedu.address.ui.BookListPanel;
-import seedu.address.ui.MainWindow;
-import seedu.address.ui.RequestListPanel;
 
 /**
  * Parses user input.
  */
 public class BookInventoryParser {
 
-
-    @FXML
-    StackPane personListPanelPlaceholder;
-
-    private Logic logic;
-    private BookListPanel bookListPanel;
-
-
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+
+    @FXML
+    private StackPane personListPanelPlaceholder;
+
+    private Logic logic;
+    private BookListPanel bookListPanel;
 
     /**
      * Parses user input into command for execution.

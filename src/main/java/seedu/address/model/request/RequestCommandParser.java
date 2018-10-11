@@ -1,16 +1,21 @@
 package seedu.address.model.request;
 
-import seedu.address.logic.parser.*;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
+
+import java.util.stream.Stream;
+
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
 
-import java.util.stream.Stream;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
-import static seedu.address.model.request.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.model.request.CliSyntax.PREFIX_QUANTITY;
+
 
 /**
  * Parses input arguments and creates a new RequestCommand object

@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.request.ReadOnlyRequests;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.request.ReadOnlyRequests;
+
 /**
- * Represents a storage for {@link RequestList}.
+ * Represents a storage for {@link RequestListStorage}.
  */
 public interface RequestListStorage {
 
@@ -26,7 +26,7 @@ public interface RequestListStorage {
     Optional<ReadOnlyRequests> readRequestList() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #readRequestList(Path) ()
      */
     Optional<ReadOnlyRequests> readRequestList(Path filePath) throws DataConversionException, IOException;
 

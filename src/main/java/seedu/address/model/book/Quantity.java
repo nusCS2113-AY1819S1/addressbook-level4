@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Book's address in the address book.
+ * Represents a Book's quantity in the inventory book.
  * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
  */
 public class Quantity {
@@ -17,7 +17,7 @@ public class Quantity {
      */
     public static final String QUANTITY_VALIDATION_REGEX = "\\d{1,3}";
 
-    public static String value;
+    private static String value;
     /**
      * Constructs an {@code Quantity}.
      *

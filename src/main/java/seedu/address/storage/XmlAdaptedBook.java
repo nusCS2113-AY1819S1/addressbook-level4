@@ -28,13 +28,13 @@ public class XmlAdaptedBook {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String phone;
+    private String isbn;
     @XmlElement(required = true)
-    private String email;
+    private String price;
     @XmlElement(required = true)
     private String cost;
     @XmlElement(required = true)
-    private String address;
+    private String quantity;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -48,13 +48,13 @@ public class XmlAdaptedBook {
     /**
      * Constructs an {@code XmlAdaptedBook} with the given book details.
      */
-    public XmlAdaptedBook(String name, String phone, String email,
-                          String cost, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedBook(String name, String isbn, String price,
+                          String cost, String quantity, List<XmlAdaptedTag> tagged) {
         this.name = name;
-        this.phone = phone;
-        this.email = email;
+        this.isbn = isbn;
+        this.price = price;
         this.cost = cost;
-        this.address = address;
+        this.quantity = quantity;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -67,10 +67,10 @@ public class XmlAdaptedBook {
      */
     public XmlAdaptedBook(Book source) {
         name = source.getName().fullName;
-        phone = source.getIsbn().value;
-        email = source.getPrice().value;
+        isbn = source.getIsbn().value;
+        price = source.getPrice().value;
         cost = source.getCost().value;
-        address = source.getQuantity().getValue();
+        quantity = source.getQuantity().getValue();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -95,21 +95,21 @@ public class XmlAdaptedBook {
         }
         final Name modelName = new Name(name);
 
-        if (phone == null) {
+        if (isbn == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName()));
         }
-        if (!Isbn.isValidIsbn(phone)) {
+        if (!Isbn.isValidIsbn(isbn)) {
             throw new IllegalValueException(Isbn.MESSAGE_ISBN_CONSTRAINTS);
         }
-        final Isbn modelIsbn = new Isbn(phone);
+        final Isbn modelIsbn = new Isbn(isbn);
 
-        if (email == null) {
+        if (price == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
-        if (!Price.isValidPrice(email)) {
+        if (!Price.isValidPrice(price)) {
             throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
-        final Price modelPrice = new Price(email);
+        final Price modelPrice = new Price(price);
 
         if (cost == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName()));
@@ -119,15 +119,15 @@ public class XmlAdaptedBook {
         }
         final Cost modelCost = new Cost(cost);
 
-        if (address == null) {
+        if (quantity == null) {
             throw new IllegalValueException(
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName())
             );
         }
-        if (!Quantity.isValidQuantity(address)) {
+        if (!Quantity.isValidQuantity(quantity)) {
             throw new IllegalValueException(Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
         }
-        final Quantity modelQuantity = new Quantity(address);
+        final Quantity modelQuantity = new Quantity(quantity);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Book(modelName, modelIsbn, modelPrice, modelCost, modelQuantity, modelTags);
@@ -145,10 +145,10 @@ public class XmlAdaptedBook {
 
         XmlAdaptedBook otherPerson = (XmlAdaptedBook) other;
         return Objects.equals(name, otherPerson.name)
-                && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email)
+                && Objects.equals(isbn, otherPerson.isbn)
+                && Objects.equals(price, otherPerson.price)
                 && Objects.equals(cost, otherPerson.cost)
-                && Objects.equals(address, otherPerson.address)
+                && Objects.equals(quantity, otherPerson.quantity)
                 && tagged.equals(otherPerson.tagged);
     }
 }

@@ -44,10 +44,10 @@ public class SampleDataUtil {
     }
     public static Request[] getSampleRequests() {
         return new Request[] {
-                new Request(new Isbn("978-3-16-148410-0"), new Email("testing@gmail.com"),
-                        new Quantity("2")),
-                new Request(new Isbn("978-3-16-148410-0"), new Email("testing1@gmail.com"),
-                        new Quantity("3")),
+            new Request(new Isbn("978-3-16-148410-0"), new Email("testing@gmail.com"),
+                    new Quantity("2")),
+            new Request(new Isbn("978-3-16-148410-0"), new Email("testing1@gmail.com"),
+                    new Quantity("3")),
         };
     }
     public static ReadOnlyBookInventory getSampleAddressBook() {

@@ -31,37 +31,43 @@ public class Isbn {
     /**
      * Returns true if the last digit (check digit) of a 10-digit ISBN is correct
      */
-    private static boolean isValidCheckIsbn10(String str){
-        int[] arr = {10,9,8,7,6,5,4,3,2};
-        int sum=0;
+    private static boolean isValidCheckIsbn10(String str) {
+        int[] arr = {10, 9, 8, 7, 6, 5, 4, 3, 2};
+        int sum = 0;
         boolean isCorrect = true;
-        for(int i=0; i<9; i++) {
+        for (int i = 0; i < 9; i++) {
             sum += arr[i] * (str.charAt(i) - '0');
         }
         System.out.print(sum);
         sum %= 11;
-        if(sum != 0) {
+        if (sum != 0) {
             sum = 11 - sum;
         }
-        if (sum != str.charAt(9)-'0') isCorrect = false;
-        if (sum == 10 && (str.charAt(9) == 'X' || str.charAt(9) == 'x')) isCorrect = true; //Special case of X
+        if (sum != str.charAt(9) - '0') {
+            isCorrect = false;
+        }
+        if (sum == 10 && (str.charAt(9) == 'X' || str.charAt(9) == 'x')) {
+            isCorrect = true; //Special case of X
+        }
         return isCorrect;
     }
     /**
      * Returns true if the last digit (check digit) of a 13-digit ISBN is correct
      */
-    private static boolean isValidCheckIsbn13(String str){
-        int[] arr = {1,3,1,3,1,3,1,3,1,3,1,3};
-        int sum=0;
+    private static boolean isValidCheckIsbn13(String str) {
+        int[] arr = {1, 3, 1, 3, 1, 3, 1, 3, 1, 3, 1, 3};
+        int sum = 0;
         boolean isCorrect = true;
-        for(int i=0; i<12; i++) {
+        for (int i = 0; i < 12; i++) {
             sum += arr[i] * (str.charAt(i) - '0');
         }
         sum %= 10;
-        if(sum != 0) {
+        if (sum != 0) {
             sum = 10 - sum;
         }
-        if (sum != str.charAt(12)-'0') isCorrect = false;
+        if (sum != str.charAt(12) - '0') {
+            isCorrect = false;
+        }
         return isCorrect;
     }
     /**

@@ -1,9 +1,9 @@
 package seedu.address.model.request;
 
+import java.util.Objects;
+
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
-
-import java.util.Objects;
 
 /**
  * Represents a Request in the address book.
@@ -34,6 +34,11 @@ public class Request {
         return quantity;
     }
 
+    /**
+     * compares request made with existing request
+     * @param otherRequest request made by the user
+     * @return boolean by comparing results
+     */
     public boolean isSameRequest(Request otherRequest) {
         if (otherRequest == this) {
             return true;
@@ -46,12 +51,16 @@ public class Request {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Request request = (Request) o;
-        return Objects.equals(isbn, request.isbn) &&
-                Objects.equals(email, request.email) &&
-                Objects.equals(quantity, request.quantity);
+        return Objects.equals(isbn, request.isbn)
+                && Objects.equals(email, request.email)
+                && Objects.equals(quantity, request.quantity);
     }
 
     @Override
@@ -61,10 +70,10 @@ public class Request {
 
     @Override
     public String toString() {
-        return "Request{" +
-                "isbn=" + isbn +
-                ", email=" + email +
-                ", quantity=" + quantity +
-                '}';
+        return "Request{"
+                + "isbn=" + isbn
+                + ", email=" + email
+                + ", quantity=" + quantity
+                + '}';
     }
 }

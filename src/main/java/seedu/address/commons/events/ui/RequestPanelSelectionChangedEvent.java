@@ -1,8 +1,6 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.book.Book;
-import seedu.address.model.request.ReadOnlyRequests;
 import seedu.address.model.request.Request;
 
 /**

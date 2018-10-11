@@ -1,20 +1,21 @@
 package seedu.address.model.request;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.book.exceptions.BookNotFoundException;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.model.book.exceptions.BookNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
- * A request is considered unique by comparing using {@code Request#isSameRequest(Request)}. As such, adding and updating of
- * persons uses Request#isSameRequest(Request) for equality so as to ensure that the request being added or updated is
- * unique in terms of identity in the UniqueRequestList. However, the removal of a request uses Request#equals(Object) so
+ * A request is considered unique by comparing using {@code Request#isSameRequest(Request)}.
+ * As such, adding and updating of persons uses Request#isSameRequest(Request) for equality
+ * so as to ensure that the request being added or updated is unique in terms of identity in
+ * the UniqueRequestList. However, the removal of a request uses Request#equals(Object) so
  * as to ensure that the request with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -62,17 +63,6 @@ public class UniqueRequestList implements Iterable<Request> {
         internalRequestList.set(index, editedRequest);
     }
 
-    /**
-     * Removes the equivalent request from the list.
-     * The request must exist in the list.
-     */
-    public void remove(Request toRemove) {
-        requireNonNull(toRemove);
-        if (!internalRequestList.remove(toRemove)) {
-            throw new BookNotFoundException();
-        }
-    }
-
     public void setRequest(UniqueRequestList replacement) {
         requireNonNull(replacement);
         internalRequestList.setAll(replacement.internalRequestList);
@@ -85,10 +75,20 @@ public class UniqueRequestList implements Iterable<Request> {
     public void setRequests(List<Request> requests) {
         requireAllNonNull(requests);
         if (!requestsAreUnique(requests)) {
-        //    throw new BookNotFoundException();
+            //    throw new BookNotFoundException();
         }
 
         internalRequestList.setAll(requests);
+    }
+    /**
+     * Removes the equivalent request from the list.
+     * The request must exist in the list.
+     */
+    public void remove(Request toRemove) {
+        requireNonNull(toRemove);
+        if (!internalRequestList.remove(toRemove)) {
+            throw new BookNotFoundException();
+        }
     }
 
     /**
