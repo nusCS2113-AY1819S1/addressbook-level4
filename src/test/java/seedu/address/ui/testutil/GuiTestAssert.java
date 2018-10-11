@@ -9,6 +9,8 @@ import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.model.person.Person;
+import seedu.address.ui.PersonCard;
+import java.util.Arrays;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -36,7 +38,11 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
         assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
+        expectedPerson.getTags().stream().map(tag -> tag.tagName).forEach(tag ->
+                assertEquals(Arrays.asList("label", PersonCard.getColor(tag)),
+                        actualCard.getTagStyleClasses(tag)));
     }
+
 
     /**
      * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
