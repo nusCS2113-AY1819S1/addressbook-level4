@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team W12-2`      Since: `Jun 2016`      Licence: `MIT`
 
 == Setting up
 
@@ -831,6 +831,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
+|Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
 |`* * *` |user |add a new person |
@@ -839,9 +840,42 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
+|`* * *` |user |add a new password | keep it stored in this application
+
+|`* * *` |user |delete a password | remove entries that I no longer need
+
+|`* * *` |user |find a password by keyword | locate details related to the entry without having to go through the entire list
+
+|`* * *` |user |add a ‘busy’ time slot to my time table | keep my life organized
+
+|`* * *` |user |delete a ‘busy’ time slot from my time table | free up that particular time slot
+
+|`* * *` |user |find availability of provided time slot | decide on my next course of action with that information
+
+|`* * *` |user |download the notes of a specific module in one command | avoid downloading unnecessary notes
+
+|`* * *` |lazy IVLE user |download all my notes in one command | avoid the cumbersome experience of visiting IVLE
+
+|`* * *` |user |view the notes already downloaded | keep track of the notes that I already have
+
+|`* * *` |user |delete all downloaded notes | free up some space on my local drive
+
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
+|`* *` |user |find next ‘available’ time slot (from current time) |be aware of when my next available time period will be
+
+|`* *` |user |find next ‘busy’ time slot (from current time) |be aware of what is coming up for me next
+
+|`* *` |user |delete the notes of a specified module |keep my local drive organized
+
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
+|`*` |user who is security-oriented |reveal only parts of the password |have an additional layer of security defense, in the event that someone else had unauthorised access to this list; the person will have to guess the remaining letters and I will be alerted.
+
+|`*` |user who needs to arrange a time with a group of other users frequently |import other users’ ‘busy time slots |have a centralised record of our schedules for convenience to arrange a common time
+
+|`*` |user who needs to arrange a time with a group of other users frequently |find next ‘available’ time slot (from current time) |easily know when we can next meet up
+
 |=======================================================================
 
 _{More to be added}_
