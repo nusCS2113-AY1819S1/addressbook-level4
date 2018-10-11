@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.util.FileEncryptor;
@@ -60,8 +61,6 @@ public class MailCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        URI uriToMail;
-
         UserPrefs userPref = new UserPrefs();
         FileEncryptor fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
 
@@ -74,18 +73,19 @@ public class MailCommand extends Command {
             throw new CommandException(MESSAGE_UNSUPPORTED);
         }
 
+        ArrayList<Person> mailingList;
         switch(mailType) {
         case TYPE_SELECTION:
-            mailToSelection(model);
+            mailingList = mailToSelection(model);
             break;
         case TYPE_GROUPS:
-            mailToGroups(model, new Tag(mailArgs.trim()));
+            mailingList = mailToGroups(model, new Tag(mailArgs.trim()));
             break;
         default:
-            mailToAll(model);
+            mailingList = mailToAll(model);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     /**
@@ -94,8 +94,8 @@ public class MailCommand extends Command {
      * @return the list of Persons mailed to.
      * @throws CommandException if there is error in creating URI.
      */
-    private List<Person> mailToSelection(Model model) throws CommandException {
-        List<Person> list = model.getSelectedPersons();
+    private ArrayList<Person> mailToSelection(Model model) throws CommandException {
+        ArrayList<Person> list = new ArrayList<>(model.getSelectedPersons());
         ArrayList<String> emailList = retrieveEmails(list);
         URI uriToMail = createUri(emailList);
         sendWithUri(uriToMail);
@@ -108,9 +108,10 @@ public class MailCommand extends Command {
      * @return the list of Persons mailed to.
      * @throws CommandException if there is error in creating URI.
      */
-    private List<Person> mailToGroups(Model model, Tag tag) throws CommandException {
-        List<Person> list = model.getFilteredPersonList();
-        ArrayList<String> emailList = retrieveEmailsFromGroups(list, tag);
+    private ArrayList<Person> mailToGroups(Model model, Tag tag) throws CommandException {
+        ArrayList<Person> list = new ArrayList<>(model.getFilteredPersonList());
+        list.removeIf(person -> !person.getTags().contains(tag));
+        ArrayList<String> emailList = retrieveEmails(list);
         URI uriToMail = createUri(emailList);
         sendWithUri(uriToMail);
         return list;
@@ -122,8 +123,8 @@ public class MailCommand extends Command {
      * @return the list of Persons mailed to.
      * @throws CommandException if there is error in creating URI.
      */
-    private List<Person> mailToAll(Model model) throws CommandException {
-        List<Person> list = model.getFilteredPersonList();
+    private ArrayList<Person> mailToAll(Model model) throws CommandException {
+        ArrayList<Person> list = new ArrayList<>(model.getFilteredPersonList());
         ArrayList<String> emailList = retrieveEmails(model.getFilteredPersonList());
         URI uriToMail = createUri(emailList);
         sendWithUri(uriToMail);
@@ -139,22 +140,6 @@ public class MailCommand extends Command {
         ArrayList<String> emailList = new ArrayList<>();
         for (Person person : personList) {
             emailList.add(person.getEmail().value);
-        }
-        return emailList;
-    }
-
-    /**
-     * Extracts all emails given a specified Tag.
-     * @param personList the list of Person.
-     * @param tag the Tag to extract emails from.
-     * @return the list of extracted emails.
-     */
-    private ArrayList<String> retrieveEmailsFromGroups(List<Person> personList, Tag tag) {
-        ArrayList<String> emailList = new ArrayList<>();
-        for (Person person : personList) {
-            if (person.getTags().contains(tag)) {
-                emailList.add(person.getEmail().value);
-            }
         }
         return emailList;
     }
