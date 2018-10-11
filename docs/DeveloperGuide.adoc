@@ -222,6 +222,18 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
+[[Design-Security]]
+=== Security component
+
+.Structure of the Model Component
+image::SecurityClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/security/Security.java[`Security.java`]
+
+The `Security` component is an authentication module that ensures the users that are using the application are
+recognized, and an instance of a authenticated user will be created every time a user is logged in so as to allow
+the application to do user-specific tasks.
+
 [[Design-Storage]]
 === Storage component
 
