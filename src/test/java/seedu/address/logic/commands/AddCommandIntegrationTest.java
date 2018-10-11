@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalBooks.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,14 +24,14 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalBookInventory(), new UserPrefs());
     }
 
     @Test
     public void execute_newPerson_success() {
         Book validBook = new BookBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getBookInventory(), new UserPrefs());
         expectedModel.addBook(validBook);
         expectedModel.commitBookInventory();
 
@@ -41,7 +41,7 @@ public class AddCommandIntegrationTest {
 
     @Test
     public void execute_duplicatePerson_throwsCommandException() {
-        Book bookInList = model.getAddressBook().getBookList().get(0);
+        Book bookInList = model.getBookInventory().getBookList().get(0);
         assertCommandFailure(new AddCommand(bookInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_BOOK);
     }

@@ -2,11 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,30 +24,34 @@ public class CommandTestUtil {
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
-    public static final String VALID_PHONE_AMY = "11111111";
-    public static final String VALID_PHONE_BOB = "22222222";
-    public static final String VALID_EMAIL_AMY = "amy@example.com";
-    public static final String VALID_EMAIL_BOB = "bob@example.com";
-    public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
-    public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_ISBN_AMY = "978-3-16-148410-0";
+    public static final String VALID_ISBN_BOB = "978-1-56619-909-4";
+    public static final String VALID_PRICE_AMY = "19.97";
+    public static final String VALID_PRICE_BOB = "98.21";
+    public static final String VALID_COST_AMY = "19.60";
+    public static final String VALID_COST_BOB = "98.01";
+    public static final String VALID_QUANTITY_AMY = "1";
+    public static final String VALID_QUANTITY_BOB = "8";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-    public static final String PHONE_DESC_AMY = " " + PREFIX_ISBN + VALID_PHONE_AMY;
-    public static final String PHONE_DESC_BOB = " " + PREFIX_ISBN + VALID_PHONE_BOB;
-    public static final String EMAIL_DESC_AMY = " " + PREFIX_PRICE + VALID_EMAIL_AMY;
-    public static final String EMAIL_DESC_BOB = " " + PREFIX_PRICE + VALID_EMAIL_BOB;
-    public static final String ADDRESS_DESC_AMY = " " + PREFIX_QUANTITY + VALID_ADDRESS_AMY;
-    public static final String ADDRESS_DESC_BOB = " " + PREFIX_QUANTITY + VALID_ADDRESS_BOB;
+    public static final String ISBN_DESC_AMY = " " + PREFIX_ISBN + VALID_ISBN_AMY;
+    public static final String ISBN_DESC_BOB = " " + PREFIX_ISBN + VALID_ISBN_BOB;
+    public static final String PRICE_DESC_AMY = " " + PREFIX_PRICE + VALID_PRICE_AMY;
+    public static final String PRICE_DESC_BOB = " " + PREFIX_PRICE + VALID_PRICE_BOB;
+    public static final String COST_DESC_AMY = " " + PREFIX_COST + VALID_COST_AMY;
+    public static final String COST_DESC_BOB = " " + PREFIX_COST + VALID_COST_BOB;
+    public static final String QUANTITY_DESC_AMY = " " + PREFIX_QUANTITY + VALID_QUANTITY_AMY;
+    public static final String QUANTITY_DESC_BOB = " " + PREFIX_QUANTITY + VALID_QUANTITY_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
-    public static final String INVALID_PHONE_DESC = " " + PREFIX_ISBN + "911a"; // 'a' not allowed in phones
-    public static final String INVALID_EMAIL_DESC = " " + PREFIX_PRICE + "bob!yahoo"; // missing '@' symbol
-    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_QUANTITY; // empty string not allowed for addresses
+    public static final String INVALID_ISBN_DESC = " " + PREFIX_ISBN + "911a"; // 'a' not allowed in phones
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "bob!yahoo"; // missing '@' symbol
+    public static final String INVALID_QUANTITY_DESC = " " + PREFIX_QUANTITY; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -61,11 +61,19 @@ public class CommandTestUtil {
     public static final EditCommand.EditBookDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditBookDescriptorBuilder().withName(VALID_NAME_AMY)
-                .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+        DESC_AMY = new EditBookDescriptorBuilder()
+                .withName(VALID_NAME_AMY)
+                .withIsbn(VALID_ISBN_AMY)
+                .withPrice(VALID_PRICE_AMY)
+                .withCost(VALID_COST_AMY)
+                .withQuantity(VALID_QUANTITY_AMY)
                 .withTags(VALID_TAG_FRIEND).build();
-        DESC_BOB = new EditBookDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+        DESC_BOB = new EditBookDescriptorBuilder()
+                .withName(VALID_NAME_BOB)
+                .withIsbn(VALID_ISBN_BOB)
+                .withPrice(VALID_PRICE_BOB)
+                .withCost(VALID_COST_BOB)
+                .withQuantity(VALID_QUANTITY_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
@@ -99,7 +107,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        BookInventory expectedBookInventory = new BookInventory(actualModel.getAddressBook());
+        BookInventory expectedBookInventory = new BookInventory(actualModel.getBookInventory());
         List<Book> expectedFilteredList = new ArrayList<>(actualModel.getFilteredBookList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -109,7 +117,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedBookInventory, actualModel.getAddressBook());
+            assertEquals(expectedBookInventory, actualModel.getBookInventory());
             assertEquals(expectedFilteredList, actualModel.getFilteredBookList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }

@@ -24,15 +24,15 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Book> filteredBooks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given bookInventory and userPrefs.
      */
-    public ModelManager(ReadOnlyBookInventory addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyBookInventory bookInventory, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(bookInventory, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + bookInventory + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedBookInventory(addressBook);
+        versionedAddressBook = new VersionedBookInventory(bookInventory);
         filteredBooks = new FilteredList<>(versionedAddressBook.getBookList());
     }
 
@@ -47,7 +47,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ReadOnlyBookInventory getAddressBook() {
+    public ReadOnlyBookInventory getBookInventory() {
         return versionedAddressBook;
     }
 
@@ -70,7 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addBook(Book book) {
-        versionedAddressBook.addPerson(book);
+        versionedAddressBook.addBook(book);
         updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         indicateAddressBookChanged();
     }

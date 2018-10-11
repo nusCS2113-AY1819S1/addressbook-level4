@@ -99,7 +99,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyBookInventory getAddressBook() {
+        public ReadOnlyBookInventory getBookInventory() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -196,7 +196,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyBookInventory getAddressBook() {
+        public ReadOnlyBookInventory getBookInventory() {
             return new BookInventory();
         }
     }

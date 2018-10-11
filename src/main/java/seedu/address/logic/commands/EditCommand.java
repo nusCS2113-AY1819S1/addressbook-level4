@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
 
 import java.util.Collections;
@@ -40,8 +36,9 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_ISBN + "PHONE] "
-            + "[" + PREFIX_PRICE + "EMAIL] "
+            + "[" + PREFIX_ISBN + "ISBN] "
+            + "[" + PREFIX_PRICE + "PRICE] "
+            + "[" + PREFIX_COST + "COST] "
             + "[" + PREFIX_QUANTITY + "ADDRESS] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -99,7 +96,7 @@ public class EditCommand extends Command {
         Name updatedName = editBookDescriptor.getName().orElse(bookToEdit.getName());
         Isbn updatedIsbn = editBookDescriptor.getIsbn().orElse(bookToEdit.getIsbn());
         Price updatedPrice = editBookDescriptor.getPrice().orElse(bookToEdit.getPrice());
-        Cost updatedCost = bookToEdit.getCost();
+        Cost updatedCost = editBookDescriptor.getCost().orElse(bookToEdit.getCost());
         Quantity updatedQuantity = editBookDescriptor.getQuantity().orElse(bookToEdit.getQuantity());
         Set<Tag> updatedTags = editBookDescriptor.getTags().orElse(bookToEdit.getTags());
 
@@ -187,6 +184,10 @@ public class EditCommand extends Command {
             this.cost = cost;
         }
 
+        public Optional<Cost> getCost() {
+            return Optional.ofNullable(cost);
+        }
+
         public void setQuantity(Quantity quantity) {
             this.quantity = quantity;
         }
@@ -230,6 +231,7 @@ public class EditCommand extends Command {
             return getName().equals(e.getName())
                     && getIsbn().equals(e.getIsbn())
                     && getPrice().equals(e.getPrice())
+                    && getCost().equals(e.getCost())
                     && getQuantity().equals(e.getQuantity())
                     && getTags().equals(e.getTags());
         }

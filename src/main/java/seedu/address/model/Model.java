@@ -16,7 +16,7 @@ public interface Model {
     void resetData(ReadOnlyBookInventory newData);
 
     /** Returns the BookInventory */
-    ReadOnlyBookInventory getAddressBook();
+    ReadOnlyBookInventory getBookInventory();
 
     /**
      * Returns true if a book with the same identity as {@code book} exists in the address book.
