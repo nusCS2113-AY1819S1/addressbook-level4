@@ -68,24 +68,17 @@ Format: `add product name <product name>`
 
 Adds a product to the list of products offered by the store
 
-=== List all distributors: `listD`
-
-Format: `listD`
-
-List all distributors the store is in touch with
-
-=== Search for a distributor: `find`
-
-Format: `find <distributor_name>`
-
-Displays the distributor and basic information related to it
-Adds a distributor to the address book.
-
 === Add a distributor: `addD name`
 
-Format: `addD d/<distributor name> p/<distributor phone>`
+Format: `addD dn/<distributor name> dp/<distributor phone>`
 
 Adds a distributor to the list of distributors engaged with the store.
+
+=== Edit a distributor: `editD index`
+
+Format: `addD index dn/<distributor name> dp/<distributor phone>`
+
+Edits details of a distributor from the list of distributors engaged with the store.
 
 === Find all stored contact information (distributors and customers): `contacts`
 
@@ -158,13 +151,17 @@ A: There are numerous advantages to digitization of records. Do google ‘advant
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+* *Add Product* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+*  *Add Distributor* `addD dn/DIST_NAME dp/DIST_PHONE` +
+e.g. `addD dn/Ah Huat Distributors dp/61234567`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
+* *Edit Distributor* : `editD INDEX [dn/DIST_NAME] [dp/DIST_PHONE]` +
+e.g. `editD 2 dn/Distributors Huat Ah dp/67654321`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
 * *List* : `list`
