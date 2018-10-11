@@ -19,7 +19,7 @@ public class DateTime {
                     "Hour: 0-23\n" +
                     "Minute: 0-59\n";
     public final Date dateTime;
-    private final DateFormat dateFormat = new SimpleDateFormat("dd,MM,yyyy,hh,mm");
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy/hh/mm");
 
     //Create DateTime from the input
     public DateTime(String dateTimeAsString) {
@@ -35,6 +35,14 @@ public class DateTime {
         dateTime = dateTime1;
     }
 
+    public static boolean isValidDateTime (String dateTimeAsString) {
+        try{
+            dateFormat.parse(dateTimeAsString);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
     @Override
     public String toString() {

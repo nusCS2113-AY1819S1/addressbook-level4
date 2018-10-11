@@ -37,6 +37,6 @@ public class LoginCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-
+        return new CommandResult("boo");
     }
 }
