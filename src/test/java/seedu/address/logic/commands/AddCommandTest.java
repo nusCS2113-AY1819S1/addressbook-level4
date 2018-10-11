@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyLoginBook;
+import seedu.address.model.SearchHistoryManager;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -181,22 +182,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateSearchHistory(Predicate predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void undoSearchHistory() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void resetSearchHistory() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Predicate retrieveLatestSearch() {
+        public SearchHistoryManager getSearchHistoryManager() {
             throw new AssertionError("This method should not be called.");
         }
     }

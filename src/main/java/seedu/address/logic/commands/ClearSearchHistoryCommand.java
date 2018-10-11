@@ -13,7 +13,7 @@ public class ClearSearchHistoryCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        model.resetSearchHistory();
+        model.getSearchHistoryManager().clearSearchHistory();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
