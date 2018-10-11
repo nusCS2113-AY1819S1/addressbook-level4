@@ -1,28 +1,18 @@
 package seedu.recruit.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE_RANGE;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
-import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.testutil.PersonBuilder;
 
 /**
@@ -56,3 +46,4 @@ public class AddCandidateCommandIntegrationTest {
         assertCommandFailure(new AddCandidateCommand(candidateInList), model, commandHistory,
                 AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
     }
+}
