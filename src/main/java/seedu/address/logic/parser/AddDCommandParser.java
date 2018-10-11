@@ -23,15 +23,15 @@ public class AddDCommandParser implements Parser<AddDCommand> {
      */
     public AddDCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_DIST_NAME, PREFIX_DIST_PHONE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_DIST_NAME, PREFIX_DIST_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDCommand.MESSAGE_USAGE));
         }
 
-        DistributorName name = ParserUtil.parseDistName(argMultimap.getValue(PREFIX_NAME).get());
-        DistributorPhone phone = ParserUtil.parseDistPhone(argMultimap.getValue(PREFIX_PHONE).get());
+        DistributorName name = ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DIST_NAME).get());
+        DistributorPhone phone = ParserUtil.parseDistPhone(argMultimap.getValue(PREFIX_DIST_PHONE).get());
 
         Distributor distributor = new Distributor(name, phone);
 

@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
 //import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
@@ -22,11 +22,11 @@ public class AddDCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a distributor to the inventarie. "
             + "Parameters: "
-            + PREFIX_NAME + "NAME "
-            + PREFIX_PHONE + "PHONE "
+            + PREFIX_DIST_NAME + "DISTRIBUTOR NAME "
+            + PREFIX_DIST_PHONE + "DISTRIBUTOR PHONE "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Ah Bee Distributors"
-            + PREFIX_PHONE + "60123456 ";
+            + PREFIX_DIST_NAME + "Ah Bee Distributors"
+            + PREFIX_DIST_PHONE + "60123456 ";
 
     public static final String MESSAGE_SUCCESS = "New distributor added: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This distributor already exists in the address book";
