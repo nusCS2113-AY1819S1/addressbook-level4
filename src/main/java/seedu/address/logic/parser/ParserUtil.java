@@ -10,7 +10,6 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.distribute.DistributeGroupName;
 import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
 import seedu.address.model.group.GroupLocation;
@@ -248,14 +247,6 @@ public class ParserUtil {
         return Integer.parseInt(trimmedInt);
     }
 
-    public static DistributeGroupName parseDistGroupName(String groupName) throws ParseException {
-        requireNonNull(groupName);
-        String trimmedGroupName = groupName.trim();
-        if (!DistributeGroupName.isValidGroupName(trimmedGroupName)) {
-            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
-        }
-        return new DistributeGroupName(trimmedGroupName);
-    }
 
     public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
         requireNonNull(isFlagged);

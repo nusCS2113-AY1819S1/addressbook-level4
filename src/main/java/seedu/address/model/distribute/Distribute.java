@@ -4,10 +4,13 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
+
 public class Distribute {
 
     private final int index;
-    private final DistributeGroupName groupName;
+    private final GroupName groupName;
     private final Boolean gender;
     private final Boolean nationality;
 
@@ -15,7 +18,7 @@ public class Distribute {
      * Every field must be present and not null.
      */
 
-    public Distribute(int index, DistributeGroupName groupName, Boolean gender, Boolean nationality) {
+    public Distribute(int index, GroupName groupName, Boolean gender, Boolean nationality) {
         requireAllNonNull(index, groupName, gender, nationality);
         this.index = index;
         this.groupName = groupName;
@@ -27,7 +30,7 @@ public class Distribute {
         return index;
     }
 
-    public DistributeGroupName getGroupName() {
+    public GroupName getGroupName() {
         return groupName;
     }
 

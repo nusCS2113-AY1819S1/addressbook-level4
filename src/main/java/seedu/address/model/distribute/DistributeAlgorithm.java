@@ -18,6 +18,9 @@ public class DistributeAlgorithm {
         ArrayList<Group> groupArrayList = new ArrayList<Group>();
         groupArrayList.ensureCapacity(index);
 
+
+        System.out.println(groupName);
+
         if(!genderFlag && !nationalityFlag){
             NormalDistribution(groupArrayList);
         }else if(!genderFlag && nationalityFlag){

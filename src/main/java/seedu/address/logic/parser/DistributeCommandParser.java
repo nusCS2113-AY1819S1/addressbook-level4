@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.DistributeCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distribute.Distribute;
-import seedu.address.model.distribute.DistributeGroupName;
+import seedu.address.model.group.GroupName;
 
 /**
  * Parses input arguments and creates a new DistributeCommand object
@@ -37,7 +37,7 @@ public class DistributeCommandParser implements Parser<DistributeCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DistributeCommand.MESSAGE_USAGE));
         }
 
-        DistributeGroupName groupName = ParserUtil.parseDistGroupName(argMultimap.getValue(PREFIX_NAME).get());
+        GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get());
         Boolean isSortByGender = ParserUtil.parseIsFlagged(argMultimap.getValue(PREFIX_GENDER).get());
         Boolean isSortByNationality = ParserUtil.parseIsFlagged(argMultimap.getValue(PREFIX_NATIONALITY).get());
 
