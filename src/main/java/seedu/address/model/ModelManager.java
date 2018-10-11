@@ -14,7 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Person;
+//import seedu.address.model.person.Person;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
@@ -80,6 +80,11 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
+    @Override
+    public ReadOnlyAddressBook getDistributorInfoBook() {
+        return versionedAddressBook;
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
@@ -91,10 +96,22 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.hasDistributor(distributor);
     }
 
+    @Override
+    public boolean hasPerson(Product product) {
+        requireNonNull(product);
+        return versionedAddressBook.hasPerson(product);
+    }
+
 
     @Override
     public void deleteDistributor(Distributor target) {
         versionedAddressBook.removeDistributor(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void deletePerson(Product target) {
+        versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
     }
 
@@ -198,6 +215,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void addDistributor(Distributor distributor) {
         versionedAddressBook.addDistributor(distributor);
         updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
+        indicateAddressBookChanged();
+    }
+
+    public void addPerson(Product product) {
+        versionedAddressBook.addPerson(product);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
 
