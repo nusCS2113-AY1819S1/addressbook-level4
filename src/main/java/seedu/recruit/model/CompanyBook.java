@@ -34,6 +34,9 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public CompanyBook(ReadOnlyCompanyBook toBeCopied) {
         this();
         resetData(toBeCopied);
+        for (Company company:companyList) {
+            companyJobList.getInternalList().addAll(company.getJobOffers());
+        }
     }
 
     //// list overwrite operations
@@ -114,6 +117,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
 
     public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
         companyList.addJobOfferToCompany(companyName, jobOffer);
+        companyJobList.add(jobOffer);
     }
 
     //// util methods
