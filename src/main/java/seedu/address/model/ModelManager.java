@@ -29,7 +29,8 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyExpenditureTracker expenditureTracker, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook,
+                        ReadOnlyExpenditureTracker expenditureTracker, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, expenditureTracker, userPrefs);
 
