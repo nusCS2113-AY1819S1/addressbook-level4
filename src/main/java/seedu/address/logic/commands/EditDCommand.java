@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DISTRIBUTORS;
 
 import java.util.Collections;
@@ -27,7 +26,7 @@ import seedu.address.model.distributor.DistributorPhone;
  */
 public class EditDCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "editD";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the distributor identified "
             + "by the index number used in the displayed distributor list. "

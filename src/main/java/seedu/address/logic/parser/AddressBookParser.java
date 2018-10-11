@@ -36,25 +36,40 @@ public class AddressBookParser {
         switch (commandWord) {
 
         case AddDCommand.COMMAND_WORD:
+            return new AddDCommandParser().parse(arguments);
+
+        case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditDCommand.COMMAND_WORD:
             return new EditDCommandParser().parse(arguments);
 
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteDCommand.COMMAND_WORD:
+            return new DeleteDCommandParser().parse(arguments);
+
+        case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindDCommand.COMMAND_WORD:
+            return new FindDCommandParser().parse(arguments);
+
+        case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
         case ListDCommand.COMMAND_WORD:
             return new ListDCommand();
+
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
@@ -68,11 +83,17 @@ public class AddressBookParser {
         case UndoDCommand.COMMAND_WORD:
             return new UndoDCommand();
 
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
         case AddTransactionCommand.COMMAND_WORD:
             return new AddTransactionCommandParser().parse(arguments);
             
         case ViewLastTransaction.COMMAND_WORD:
             return new ViewLastTransaction();
+
+        case RedoDCommand.COMMAND_WORD:
+            return new RedoDCommand();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
