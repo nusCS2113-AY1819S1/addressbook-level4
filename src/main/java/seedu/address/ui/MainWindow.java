@@ -28,6 +28,9 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private static boolean isSensitiveInformation = false;
+    private static boolean isLoginSuccessful = false;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -115,24 +118,44 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    public static boolean getIsSensitiveInformation() {
+        return isSensitiveInformation;
+    }
+
+    public static boolean getIsLoginSuccessful() {
+        return isLoginSuccessful;
+    }
+
+    public static void setIsSensitiveInformation(boolean setSensitiveInformation) {
+        isSensitiveInformation = setSensitiveInformation;
+    }
+
+    public static void setIsLoginSuccessful(boolean setLoginSuccessful) {
+        isLoginSuccessful = setLoginSuccessful;
+    }
+
     /**
-     * Fills up all the placeholders of this window.
+     * TO IMPLEMENT: hide all ui except commandbox and resultdisplay unless successfully logged in. Can create account
+     * with/without logging in, but must type in correct master password given only to NUSSU exco members
+     * issues: does not check for duplicate accounts during account creation. The fillInnerParts() method only runs
+     * once, when app is started. I need it to run multiple times to check the MainWindow.getIsLoginSuccessful()
+     * condition to see if it is true or false.
      */
     void fillInnerParts() {
+        CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
-        CommandBox commandBox = new CommandBox(logic);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     void hide() {
