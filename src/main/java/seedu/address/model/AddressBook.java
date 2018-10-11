@@ -105,10 +105,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
         tags.remove(key);
+
     }
-    
+
     /**
-     * @return the List of Unique tags
+     * @return the List of Unique Tags.
      */
     public List<Tag> getUniqueTagList() {
         return tags.getUniqueTagList();
