@@ -24,7 +24,7 @@ public class AddCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB
-                + COST_DESC_BOB + QUANTITY_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedBook));
+                + COST_DESC_BOB + QUANTITY_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, new AddCommand(expectedBook));
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + ISBN_DESC_BOB + PRICE_DESC_BOB
@@ -53,7 +53,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Book expectedBook = new BookBuilder(AMY).withTags().build();
-        assertParseSuccess(parser, NAME_DESC_AMY + ISBN_DESC_AMY + PRICE_DESC_AMY + COST_DESC_AMY + QUANTITY_DESC_AMY,
+        assertParseSuccess(parser, NAME_DESC_AMY + ISBN_DESC_AMY + PRICE_DESC_AMY + COST_DESC_AMY + QUANTITY_DESC_AMY + TAG_DESC_FRIEND,
                 new AddCommand(expectedBook));
     }
 
