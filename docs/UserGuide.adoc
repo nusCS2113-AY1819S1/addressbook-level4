@@ -47,7 +47,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the fields to be specified by you! e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the fields to be specified by you! e.g. in `addc n/NAME`, `NAME` is a parameter which can be used as `addc n/John Doe`.
 * Details labelled with “if any” must be filled in at least with `NA` if you find it not applicable.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
@@ -96,7 +96,7 @@ Entering this command will prompt you the following: +
 *`Enter the following details of the job in the format:`* +
 `c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY`
 
-NOTE: COMPANY specified has to be added to RecruitBook first!
+Note: COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
@@ -106,14 +106,14 @@ Examples:
 === Exits from any intermediate command
 Format: `cancel`
 
-=== Listing all : `list`
+=== Listing details of candidates / jobs : `list`
 
-==== Shows a list of all candidates interviewed by job agent +
+==== Shows a list of all candidates present in the RecruitBook +
 Format: `list candidates`
 
 Examples:
 
-* `John Doe p/91234567 e/johndoe@example.com a/72 Kent Ridge Rd j/Writer h/Business Degree s/$5000 j/Marketing assistant y/2 c/NUS`
+*   `John Doe p/91234567 e/johndoe@example.com a/72 Kent Ridge Rd j/Writer h/Business Degree s/$5000 j/Marketing assistant y/2 c/NUS`
 *	`Betsy Crower p/98765432 e/betsycrower@example.com ...`
 *	`Chris Lee p/91238765 e/chrislee@example.com ...`
 
@@ -146,18 +146,18 @@ Example:
 Format: `editj <INDEX>`
 
 Edits the job with the specified `INDEX`.
-The index must be an index number shown in the displayed job list.
+This index must be an index number shown in the displayed job list.
 
 Examples:
 
-*	`editj 1 x/20-30`
-(Edits the MIN_AGE-MAX_AGE attribute to be from 20 to 30 years of age for the 1st job offer)
+*	`editj 1 x/20-30` +
+(Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
 === Locating candidates by search parameter : `find`
 
 Finds names of candidates from RecruitBook with a given search parameter. +
 Format: `find <tag>/KEYWORD` +
-Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
+Supported tags: `n/`, `p/`, `e/`, `a/`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -179,12 +179,12 @@ Examples:
 
 === Filtering by a specific tag : `filter`
 
-==== Filters and lists out the names of the people that falls within the category of the searched field
+==== Filters out the names of the people that falls under the searched category
 
 Format: `filter <tag>/KEYWORD` +
 Supported tags: `h/`, `j/`, `s/`, `x/`
 
-Searched field *must be of the full length* that is being recorded in the system
+Searched field *must be of the full length* that is recorded in the RecruitBook
 
 Examples:
 
@@ -209,7 +209,7 @@ Format: `cancel`
 Format: `deletec <INDEX>`
 
 *	Deletes the candidate with the specified `INDEX`
-*	The index must be an index number shown in the displayed candidate list.
+*	This index must be an index number shown in the displayed candidate list.
 *	The full name can be found using the find function when a partial keyword is entered
 
 Example to delete a candidate:
@@ -218,7 +218,7 @@ Step 1.	`find Betsy` +
 (Shows all saved candidates named Betsy)
 
 Step 2. `deletec 1` +
-(Deletes the candidate with index 1 from the RecruitBook(based on most recent list))
+(Deletes the 1st candidate on most recent list)
 
 ==== Deleting a specific job offer
 Format: `deletej <INDEX>`
@@ -268,7 +268,7 @@ _{explain how the user can enable/disable data encryption}_
 *	*List* : `list [jobs /candidates]`
 *	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `edit <INDEX>` +
             e.g. `editc 2 e/jameslee@example.com`, `editj 5`
-*	*Find* : `find <tag>/KEYWORD [MORE_KEYWORDS]` +
+*	*Find* : `find <tag>/KEYWORD` +
             e.g. `find n/James n/Jake`
 *	*Filter* : `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
             e.g. `filter h/O LEVEL`
