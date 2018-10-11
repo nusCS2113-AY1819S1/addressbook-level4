@@ -14,6 +14,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.AddressBookLocalBackupEvent;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -167,7 +168,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
+    @Override
+    public boolean hasEvent(Event event) {
+        requireNonNull(event);
+        return false;
+    }
 
+    @Override
+    public void addEvent(Event event) {
+
+    }
 
     @Override
     public boolean equals(Object obj) {

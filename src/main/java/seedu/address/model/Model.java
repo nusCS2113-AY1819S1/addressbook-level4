@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
 import seedu.address.model.task.Task;
 
@@ -97,4 +98,15 @@ public interface Model {
      * {@code task} must not already exist in the address book.
      */
     void addTask(Task person);
+
+    /**
+     * Returns true if an event with the same identity as {@code event} exists in the student planner.
+     */
+    boolean hasEvent(Event event);
+
+    /**
+     * Adds the given event.
+     * {@code event} must not already exist in the student planner.
+     */
+    void addEvent(Event event);
 }
