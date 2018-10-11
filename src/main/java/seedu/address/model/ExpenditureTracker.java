@@ -7,7 +7,6 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.ExpenditureList;
-//import seedu.address.model.tag.Tag;
 
 /**
  * Wraps all data at the address-book level
@@ -15,7 +14,7 @@ import seedu.address.model.expenditureinfo.ExpenditureList;
  */
 public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
 
-    private final ExpenditureList expenditures;
+    private final ExpenditureList expenditures = new ExpenditureList();
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -24,9 +23,7 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
      */
-    {
-        expenditures = new ExpenditureList();
-    }
+
 
     public ExpenditureTracker() {}
 
