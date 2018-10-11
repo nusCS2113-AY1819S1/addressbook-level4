@@ -23,15 +23,15 @@ public class QuantityTest {
     @Test
     public void isValidAddress() {
         // null address
-        Assert.assertThrows(NullPointerException.class, () -> Quantity.isValidAddress(null));
+        Assert.assertThrows(NullPointerException.class, () -> Quantity.isValidQuantity(null));
 
         // invalid addresses
-        assertFalse(Quantity.isValidAddress("")); // empty string
-        assertFalse(Quantity.isValidAddress(" ")); // spaces only
+        assertFalse(Quantity.isValidQuantity("")); // empty string
+        assertFalse(Quantity.isValidQuantity(" ")); // spaces only
 
         // valid addresses
-        assertTrue(Quantity.isValidAddress("Blk 456, Den Road, #01-355"));
-        assertTrue(Quantity.isValidAddress("-")); // one character
-        assertTrue(Quantity.isValidAddress("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
+        assertTrue(Quantity.isValidQuantity("Blk 456, Den Road, #01-355"));
+        assertTrue(Quantity.isValidQuantity("-")); // one character
+        assertTrue(Quantity.isValidQuantity("Leng Inc; 1234 Market St; San Francisco CA 2349879; USA")); // long address
     }
 }

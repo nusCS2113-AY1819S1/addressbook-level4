@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Book's address in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
  */
 public class Quantity {
 
@@ -18,30 +18,30 @@ public class Quantity {
      */
     public static final String ADDRESS_VALIDATION_REGEX = "[^\\s].*";
 
-    private String value;
+    public static String value;
     /**
      * Constructs an {@code Quantity}.
      *
-     * @param address A valid address.
+     * @param quantity A valid quantity.
      */
-    public Quantity(String address) {
-        requireNonNull(address);
-        checkArgument(isValidAddress(address), MESSAGE_ADDRESS_CONSTRAINTS);
-        value = address;
+    public Quantity(String quantity) {
+        requireNonNull(quantity);
+        checkArgument(isValidQuantity(quantity), MESSAGE_ADDRESS_CONSTRAINTS);
+        value = quantity;
     }
     public String getValue() {
         return value;
     }
 
-    public void setValue(String value) {
+    public String setValue(String value) {
         this.value = value;
+        return value;
     }
-
 
     /**
      * Returns true if a given string is a valid email.
      */
-    public static boolean isValidAddress(String test) {
+    public static boolean isValidQuantity(String test) {
         return test.matches(ADDRESS_VALIDATION_REGEX);
     }
 

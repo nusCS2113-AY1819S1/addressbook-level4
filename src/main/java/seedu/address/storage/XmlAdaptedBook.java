@@ -110,7 +110,7 @@ public class XmlAdaptedBook {
                     String.format(MISSING_FIELD_MESSAGE_FORMAT, Quantity.class.getSimpleName())
             );
         }
-        if (!Quantity.isValidAddress(address)) {
+        if (!Quantity.isValidQuantity(address)) {
             throw new IllegalValueException(Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         final Quantity modelQuantity = new Quantity(address);

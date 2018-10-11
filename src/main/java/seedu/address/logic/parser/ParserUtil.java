@@ -74,7 +74,7 @@ public class ParserUtil {
     public static Quantity parseAddress(String address) throws ParseException {
         requireNonNull(address);
         String trimmedAddress = address.trim();
-        if (!Quantity.isValidAddress(trimmedAddress)) {
+        if (!Quantity.isValidQuantity(trimmedAddress)) {
             throw new ParseException(Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
         }
         return new Quantity(trimmedAddress);
