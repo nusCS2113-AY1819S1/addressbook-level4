@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.company.Company;
 
@@ -24,7 +25,7 @@ public class JobCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on CandidateBook level 4</a>
      */
 
-    public final Company jobOffer;
+    public final JobOffer jobOffer;
 
     @FXML
     private HBox cardPane;
@@ -42,15 +43,15 @@ public class JobCard extends UiPart<Region> {
     private Label education;
 
 
-    public JobCard(Company jobOffer, int displayedIndex) {
+    public JobCard(JobOffer jobOffer, int displayedIndex) {
         super(FXML);
         this.jobOffer = jobOffer;
         id.setText(displayedIndex + ". ");
-        job.setText(jobOffer.getJobOffers().get(displayedIndex).getJob().value);
-        gender.setText(jobOffer.getJobOffers().get(displayedIndex).getGender().value);
-        ageRange.setText(jobOffer.getJobOffers().get(displayedIndex).getAgeRange().value);
-        salary.setText(jobOffer.getJobOffers().get(displayedIndex).getSalary().value);
-        education.setText(jobOffer.getJobOffers().get(displayedIndex).getEducation().value);
+        job.setText(jobOffer.getJob().value);
+        gender.setText(jobOffer.getGender().value);
+        ageRange.setText(jobOffer.getAgeRange().value);
+        salary.setText(jobOffer.getSalary().value);
+        education.setText(jobOffer.getEducation().value);
     }
 
     @Override

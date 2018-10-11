@@ -15,6 +15,7 @@ import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.CompanyPanelSelectionChangedEvent;
 import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
@@ -27,20 +28,21 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Company> companyView;
-    //@FXML
-    //private ListView<Company> companyJobDetailsView;
 
-    public CompanyJobDetailsPanel(ObservableList<Company> companyList) {
+    @FXML
+    private ListView<JobOffer> companyJobDetailsView;
+
+    public CompanyJobDetailsPanel(ObservableList<Company> companyList, ObservableList<JobOffer> companyJobList) {
         super(FXML);
-        setConnections(companyList);
+        setConnections(companyList, companyJobList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Company> companyList) {
+    private void setConnections(ObservableList<Company> companyList, ObservableList<JobOffer> companyJobList) {
         companyView.setItems(companyList);
         companyView.setCellFactory(listView -> new CompanyViewCell());
-        //companyJobDetailsView.setItems(jobList);
-        //companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
+        companyJobDetailsView.setItems(companyJobList);
+        companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -99,10 +101,10 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
 
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code PersonCard}.
-
-    class CompanyJobDetailsViewCell extends ListCell<Company> {
+    */
+    class CompanyJobDetailsViewCell extends ListCell<JobOffer> {
         @Override
-        protected void updateItem(Company job, boolean empty) {
+        protected void updateItem(JobOffer job, boolean empty) {
             super.updateItem(job, empty);
 
             if (empty || job == null) {
@@ -112,5 +114,5 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                 setGraphic(new JobCard(job, getIndex() + 1).getRoot());
             }
         }
-    }*/
+    }
 }

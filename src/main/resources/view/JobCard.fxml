@@ -2,51 +2,43 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
-    <GridPane HBox.hgrow="ALWAYS">
-        <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
-        </columnConstraints>
-        <VBox alignment="CENTER_LEFT" minHeight="105" prefHeight="145.0" prefWidth="361.0" GridPane.columnIndex="0">
-            <padding>
-                <Insets bottom="5" left="15" right="5" top="5" />
-            </padding>
-            <HBox alignment="CENTER_LEFT" spacing="5">
-                <Label fx:id="id" styleClass="cell_big_label" text="\$id">
-                    <minWidth>
-                        <!-- Ensures that the label text is never truncated -->
-                        <Region fx:constant="USE_PREF_SIZE" />
-                    </minWidth>
-                </Label>
-                <Label fx:id="job" styleClass="cell_big_label" text="\$job" />
-            </HBox>
-            <Label fx:id="gender" styleClass="cell_small_label" text="\$gender">
-                <graphic>
-                    <Label fx:id="gender1" styleClass="cell_small_label" text="Gender:" />
-                </graphic></Label>
-            <Label fx:id="ageRange" styleClass="cell_small_label" text="\$ageRange">
-                <graphic>
-                    <Label fx:id="ageRange1" styleClass="cell_small_label" text="Age Range:" />
-                </graphic></Label>
-            <Label fx:id="education" styleClass="cell_small_label" text="\$education">
-                <graphic>
-                    <Label fx:id="education1" styleClass="cell_small_label" text="Minimum Education Requirement:" />
-                </graphic></Label>
-         <Label fx:id="salary" layoutX="25.0" layoutY="96.0" styleClass="cell_small_label" text="\$salary">
-            <graphic>
-               <Label fx:id="salary1" styleClass="cell_small_label" text="Salary:" />
-            </graphic>
-         </Label>
-        </VBox>
-        <rowConstraints>
-            <RowConstraints />
-        </rowConstraints>
-    </GridPane>
+<HBox id="cardPane" fx:id="cardPane" prefHeight="145.0" prefWidth="413.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1">
+     <VBox alignment="CENTER_LEFT" minHeight="105" prefHeight="145.0" prefWidth="413.0">
+         <padding>
+             <Insets bottom="5" left="15" right="5" top="5" />
+         </padding>
+         <HBox alignment="CENTER_LEFT" spacing="5">
+             <Label fx:id="id" styleClass="cell_big_label" text="\$id">
+                 <minWidth>
+                     <!-- Ensures that the label text is never truncated -->
+                     <Region fx:constant="USE_PREF_SIZE" />
+                 </minWidth>
+             </Label>
+             <Label fx:id="job" styleClass="cell_big_label" text="\$job" />
+         </HBox>
+         <Label fx:id="gender" styleClass="cell_small_label" text="\$gender">
+             <graphic>
+                 <Label fx:id="gender1" styleClass="cell_small_label" text="Gender:" />
+             </graphic>
+      </Label>
+         <Label fx:id="ageRange" styleClass="cell_small_label" text="\$ageRange">
+             <graphic>
+                 <Label fx:id="ageRange1" styleClass="cell_small_label" text="Age Range:" />
+             </graphic>
+      </Label>
+         <Label fx:id="education" styleClass="cell_small_label" text="\$education">
+             <graphic>
+                 <Label fx:id="education1" styleClass="cell_small_label" text="Minimum Education Requirement:" />
+             </graphic>
+      </Label>
+      <Label fx:id="salary" layoutX="25.0" layoutY="96.0" styleClass="cell_small_label" text="\$salary">
+         <graphic>
+            <Label fx:id="salary1" styleClass="cell_small_label" text="Salary:" />
+         </graphic>
+      </Label>
+     </VBox>
 </HBox>

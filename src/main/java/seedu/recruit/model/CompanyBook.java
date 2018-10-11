@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.company.UniqueCompanyList;
+import seedu.recruit.model.joboffer.UniqueJobList;
 import seedu.recruit.model.joboffer.JobOffer;
 
 
@@ -18,9 +19,11 @@ import seedu.recruit.model.joboffer.JobOffer;
 
 public class CompanyBook implements ReadOnlyCompanyBook {
     private final UniqueCompanyList companyList;
+    private final UniqueJobList companyJobList;
 
     {
         companyList = new UniqueCompanyList();
+        companyJobList = new UniqueJobList();
     }
 
     public CompanyBook() {}
@@ -124,6 +127,11 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     @Override
     public ObservableList<Company> getCompanyList() {
         return companyList.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<JobOffer> getCompanyJobList() {
+        return companyJobList.asUnmodifiableObservableList();
     }
 
     @Override

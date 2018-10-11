@@ -16,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Candidate> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
+    Predicate<JobOffer> PREDICATE_SHOW_ALL_JOBOFFERS = unused -> true;
 
     // ================================== CandidateBook functions ====================================== //
     /** Clears existing backing model and replaces with the provided new data. */
@@ -168,5 +169,9 @@ public interface Model {
      * @code jobOffer must not already exist inside the job list of companyName
      */
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
+
+    ObservableList<JobOffer> getFilteredCompanyJobList();
+
+    void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
 
 }

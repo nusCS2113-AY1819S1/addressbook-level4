@@ -8,6 +8,7 @@ import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.model.company.Company;
 
@@ -30,6 +31,9 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of companies */
     ObservableList<Company> getFilteredCompanyList();
+
+    /** Returns an unmodifiable view of the filtered list of jobs */
+    ObservableList<JobOffer> getFilteredCompanyJobList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
