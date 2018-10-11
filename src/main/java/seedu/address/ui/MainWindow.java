@@ -29,7 +29,7 @@ public class MainWindow extends UiPart<Stage> {
     private static final String FXML = "MainWindow.fxml";
 
     private static boolean isSensitiveInformation = false;
-    private static boolean isLoginSuccessful = true;
+    private static boolean isLoginSuccessful = false;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
