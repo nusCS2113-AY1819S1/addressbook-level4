@@ -79,11 +79,9 @@ public class UniqueCandidateList implements Iterable<Candidate> {
         }
     }
 
-    public void setPersons(UniqueCandidateList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
+    /**
+     * Sorts candidates in CandidateBook by name
+     */
     public void sortPersons() {
         Collections.sort(internalList, new Comparator<Candidate>() {
             @Override
@@ -92,6 +90,12 @@ public class UniqueCandidateList implements Iterable<Candidate> {
             }
         });
     }
+    
+    public void setPersons(UniqueCandidateList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
     /**
      * Replaces the contents of this list with {@code candidates}.
      * {@code candidates} must not contain duplicate candidates.

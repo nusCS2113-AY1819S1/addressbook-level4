@@ -1,7 +1,6 @@
 package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;

@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.SortedList;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.UniqueCandidateList;
 
