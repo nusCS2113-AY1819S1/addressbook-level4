@@ -5,7 +5,7 @@ import java.util.Stack;
 import java.util.function.Predicate;
 
 /**
- * Represents in-memory model for Predicates used in Searching
+ * Represents in-memory model for Predicates containing system search logic
  */
 public class SearchHistoryManager {
 
@@ -15,19 +15,27 @@ public class SearchHistoryManager {
         return searchHistoryStack.peek();
     }
 
-    /**
-     * Resets the most recent search
+    /** Returns system search logic after reverting to its previous state
+     * @return a Predicate containing the system search logic after reverting
+     * @throws EmptyStackException If search history is empty and there is nothing to revert.
      */
     public Predicate revertLastSearch() throws EmptyStackException {
         removeLastPredicateFromStack();
         return retrievePredicateAtTopOfStack();
     }
-
+    /** Returns system search logic given a user-defined search logic
+     * @param predicate a Predicate containing the user-defined search logic
+     * @return a Predicate containing the system search logic
+     **/
     public Predicate executeNewSearch(Predicate predicate) {
         addNewPredicateToStack(predicate);
+        assert !searchHistoryStack.empty();
         return retrievePredicateAtTopOfStack();
     }
 
+    /** Updates system search logic to its next state given a user-defined search logic
+     * @param newPredicate a Predicate containing the user-defined search logic
+     **/
     private void addNewPredicateToStack(Predicate newPredicate) {
         try {
             Predicate updatedPredicate = retrievePredicateAtTopOfStack().and(newPredicate);
