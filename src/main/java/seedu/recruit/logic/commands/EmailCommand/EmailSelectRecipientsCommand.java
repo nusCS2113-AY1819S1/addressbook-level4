@@ -22,13 +22,14 @@ public class EmailSelectRecipientsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         String lastCommandUsed = history.getLast();
+        EmailCommand emailCommand = RecruitBookParser.getEmailCommand();
 
         if(lastCommandUsed.toUpperCase().contains("LISTC")) {
-            RecruitBookParser.emailCommand.setRecipients(model.getFilteredCandidateList());
-            RecruitBookParser.emailCommand.setAreRecipientsCandidates(true);
+            emailCommand.setRecipients(model.getFilteredCandidateList());
+            emailCommand.setAreRecipientsCandidates(true);
         } else {
-            RecruitBookParser.emailCommand.setRecipients(model.getFilteredCompanyList());
-            RecruitBookParser.emailCommand.setAreRecipientsCandidates(false);
+            emailCommand.setRecipients(model.getFilteredCompanyList());
+            emailCommand.setAreRecipientsCandidates(false);
         }
 
         LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);

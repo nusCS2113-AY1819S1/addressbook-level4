@@ -44,7 +44,15 @@ public class RecruitBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    public static EmailCommand emailCommand;
+    private static EmailCommand emailCommand;
+
+    public static EmailCommand getEmailCommand() {
+        return emailCommand;
+    }
+
+    public static void setEmailCommand(EmailCommand emailCommand) {
+        RecruitBookParser.emailCommand = emailCommand;
+    }
 
     /**
      * Parses user input into command for execution.

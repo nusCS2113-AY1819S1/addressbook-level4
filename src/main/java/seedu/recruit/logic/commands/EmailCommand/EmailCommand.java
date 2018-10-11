@@ -12,7 +12,8 @@ import seedu.recruit.commons.core.Email;
  * Stores variables pertaining to the EmailCommand multistep
  */
 public class EmailCommand {
-    public static Gmail service;
+
+    private static Gmail service;
     static {
         try {
             service = Email.init();
@@ -28,6 +29,9 @@ public class EmailCommand {
     private String bodyText;
     public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
 
+    /**
+     * Getters and Setters
+     */
     public static Gmail getService() {
         return service;
     }

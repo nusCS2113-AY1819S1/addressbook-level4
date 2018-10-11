@@ -20,11 +20,12 @@ public class EmailSelectContentsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        EmailCommand emailCommand = RecruitBookParser.getEmailCommand();
 
-        if(RecruitBookParser.emailCommand.isAreRecipientsCandidates()) {
-            RecruitBookParser.emailCommand.setContents(model.getFilteredJobList());
+        if(emailCommand.isAreRecipientsCandidates()) {
+            emailCommand.setContents(model.getFilteredJobList());
         } else {
-            RecruitBookParser.emailCommand.setContents(model.getFilteredCandidateList());
+            emailCommand.setContents(model.getFilteredCandidateList());
         }
 
         LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
