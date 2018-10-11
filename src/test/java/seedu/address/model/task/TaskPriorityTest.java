@@ -10,12 +10,12 @@ import seedu.address.testutil.Assert;
 public class TaskPriorityTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void constructorNullThrowsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new TaskPriority(null));
     }
 
     @Test
-    public void constructor_invalidPriority_throwsIllegalArgumentException() {
+    public void constructorInvalidPriorityThrowsIllegalArgumentException() {
         String invalidPriority = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new TaskPriority(invalidPriority));
     }

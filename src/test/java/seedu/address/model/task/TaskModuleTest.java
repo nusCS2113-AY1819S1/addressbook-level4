@@ -10,12 +10,12 @@ import seedu.address.testutil.Assert;
 public class TaskModuleTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void constructorNullThrowsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new TaskModule(null));
     }
 
     @Test
-    public void constructor_invalidModule_throwsIllegalArgumentException() {
+    public void constructorInvalidModuleThrowsIllegalArgumentException() {
         String invalidModule = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new TaskModule(invalidModule));
     }

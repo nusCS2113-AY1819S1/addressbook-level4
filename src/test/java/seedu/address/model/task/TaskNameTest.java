@@ -10,12 +10,12 @@ import seedu.address.testutil.Assert;
 public class TaskNameTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void constructorNullThrowsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new TaskName(null));
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructorInvalidNameThrowsIllegalArgumentException() {
         String invalidName = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new TaskName(invalidName));
     }
