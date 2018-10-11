@@ -52,24 +52,24 @@ public interface Model {
     void deleteDistributor(Distributor target);
 
     /**
-     * Adds the given distributor.
-     * {@code distributor} must not already exist in the address book.
-     */
-    void addDistributor(Distributor distributor);
-
-    void getDistributor(Distributor distributor);
-  
-    /**
      * Deletes the given product.
      * The product must exist in the address book.
      */
     void deletePerson(Product target);
 
     /**
+     * Adds the given distributor.
+     * {@code distributor} must not already exist in the address book.
+     */
+    void addDistributor(Distributor distributor);
+
+    //void getDistributor(Distributor distributor);
+
+    /**
      * Adds the given product.
      * {@code product} must not already exist in the address book.
      */
-    void addPerson(Product person);
+    void addPerson(Product product);
 
     /**
      * Replaces the given distributor {@code target} with {@code editedDistributor}.
