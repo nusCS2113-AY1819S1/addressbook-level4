@@ -84,8 +84,9 @@ public class MailCommand extends Command {
         default:
             mailingList = mailToAll(model);
         }
+        String recipients = buildRecipients(mailingList);
 
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_SUCCESS + recipients);
     }
 
     /**
@@ -181,5 +182,21 @@ public class MailCommand extends Command {
         } catch (UnsupportedOperationException | IOException | SecurityException e) {
             throw new CommandException(e.getMessage());
         }
+    }
+
+    /**
+     * Builds the string of names of recipients mailed to.
+     * @param mailingList the list of recipients.
+     * @return the string including all recipients.
+     */
+    private String buildRecipients(ArrayList<Person> mailingList) {
+        StringBuilder output = new StringBuilder();
+        for (int i = 0; i < mailingList.size(); i++) {
+            output.append(mailingList.get(i).getName().fullName);
+            if (i < mailingList.size() - 1) {
+                output.append(", ");
+            }
+        }
+        return output.toString();
     }
 }
