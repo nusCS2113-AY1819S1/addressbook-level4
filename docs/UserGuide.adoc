@@ -101,10 +101,10 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears current positio
 * `edit all/ t/friends k/1.0` +
 Replaces all listed persons' tag to be `friends` and edits their KPI to be `1.0`. +
 
-=== Locating persons by name: `find`
+=== Locating persons by attribute: `find`
 
 Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find PREFIX KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is not case insensitive.
@@ -116,10 +116,13 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find John` +
+* `find n/John` +
 Returns `john` and `John Doe`
-* `find Betsy Tim John` +
+* `find n/Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
+* `find e/example@domain.com` +
+Returns any person having the email `example@domain.com`
+
 
 === Deleting a person : `delete`
 
