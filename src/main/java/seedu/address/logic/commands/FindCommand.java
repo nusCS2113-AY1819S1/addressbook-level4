@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.SearchHistoryManager;
+import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.

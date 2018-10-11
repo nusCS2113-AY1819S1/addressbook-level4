@@ -16,6 +16,7 @@ import seedu.address.commons.events.model.LoginBookChangedEvent;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UniqueAccountList;
 import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
  * Represents the in-memory model of the address book data.

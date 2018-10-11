@@ -1,8 +1,10 @@
-package seedu.address.model;
+package seedu.address.model.searchhistory;
 
 import java.util.EmptyStackException;
 import java.util.Stack;
 import java.util.function.Predicate;
+
+import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 
 /**
  * Represents in-memory model for Predicates containing system search logic
@@ -17,10 +19,14 @@ public class SearchHistoryManager {
 
     /** Returns system search logic after reverting to its previous state
      * @return a Predicate containing the system search logic after reverting
-     * @throws EmptyStackException If search history is empty and there is nothing to revert.
+     * @throws EmptyStackException If search history is empty after revert.
      */
     public Predicate revertLastSearch() throws EmptyStackException {
-        removeLastPredicateFromStack();
+        try {
+            removeLastPredicateFromStack();
+        } catch (EmptyStackException e) {
+            throw new EmptyHistoryException();
+        }
         return retrievePredicateAtTopOfStack();
     }
     /** Returns system search logic given a user-defined search logic
@@ -46,9 +52,7 @@ public class SearchHistoryManager {
     }
 
     private void removeLastPredicateFromStack() {
-        if (!searchHistoryStack.empty()) {
-            searchHistoryStack.pop();
-        }
+        searchHistoryStack.pop();
     }
 
     public void clearSearchHistory() {
