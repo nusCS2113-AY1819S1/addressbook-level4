@@ -22,13 +22,13 @@ public class BookUtil {
      * Returns an add command string for adding the {@code book}.
      */
     public static String getAddCommand(Book book) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(book);
+        return AddCommand.COMMAND_WORD + " " + getBookDetails(book);
     }
 
     /**
      * Returns the part of command string for the given {@code book}'s details.
      */
-    public static String getPersonDetails(Book book) {
+    public static String getBookDetails(Book book) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + book.getName().fullName + " ");
         sb.append(PREFIX_ISBN + book.getIsbn().value + " ");

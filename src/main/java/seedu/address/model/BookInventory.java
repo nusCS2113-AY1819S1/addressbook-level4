@@ -70,7 +70,7 @@ public class BookInventory implements ReadOnlyBookInventory {
      * Adds a book to the address book.
      * The book must not already exist in the address book.
      */
-    public void addPerson(Book p) {
+    public void addBook(Book p) {
         persons.add(p);
     }
 

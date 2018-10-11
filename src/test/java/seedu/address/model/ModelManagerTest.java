@@ -47,7 +47,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        BookInventory bookInventory = new BookInventoryBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        BookInventory bookInventory = new BookInventoryBuilder().withBook(ALICE).withBook(BENSON).build();
         BookInventory differentBookInventory = new BookInventory();
         UserPrefs userPrefs = new UserPrefs();
 

@@ -32,6 +32,7 @@ public class EditBookDescriptorBuilder {
         descriptor.setName(book.getName());
         descriptor.setIsbn(book.getIsbn());
         descriptor.setPrice(book.getPrice());
+        descriptor.setCost(book.getCost());
         descriptor.setQuantity(book.getQuantity());
         descriptor.setTags(book.getTags());
     }
@@ -47,24 +48,31 @@ public class EditBookDescriptorBuilder {
     /**
      * Sets the {@code Isbn} of the {@code EditBookDescriptor} that we are building.
      */
-    public EditBookDescriptorBuilder withPhone(String phone) {
-        descriptor.setIsbn(new Isbn(phone));
+    public EditBookDescriptorBuilder withIsbn(String isbn) {
+        descriptor.setIsbn(new Isbn(isbn));
         return this;
     }
 
     /**
      * Sets the {@code Price} of the {@code EditBookDescriptor} that we are building.
      */
-    public EditBookDescriptorBuilder withEmail(String email) {
-        descriptor.setPrice(new Price(email));
+    public EditBookDescriptorBuilder withPrice(String price) {
+        descriptor.setPrice(new Price(price));
         return this;
     }
 
     /**
+     * Sets the {@code Cost} of the {@code EditBookDescriptor} that we are building.
+     */
+    public EditBookDescriptorBuilder withCost(String cost) {
+        descriptor.setCost(new Cost(cost));
+        return this;
+    }
+    /**
      * Sets the {@code Quantity} of the {@code EditBookDescriptor} that we are building.
      */
-    public EditBookDescriptorBuilder withAddress(String address) {
-        descriptor.setQuantity(new Quantity(address));
+    public EditBookDescriptorBuilder withQuantity(String quantity) {
+        descriptor.setQuantity(new Quantity(quantity));
         return this;
     }
 

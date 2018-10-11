@@ -18,10 +18,10 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_BOOKS;
@@ -80,7 +80,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a book with new values same as another book's values but with different name -> edited */
-        assertTrue(getModel().getAddressBook().getBookList().contains(BOB));
+        assertTrue(getModel().getBookInventory().getBookList().contains(BOB));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredBookList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -94,7 +94,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
         index = INDEX_SECOND_PERSON;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedBook = new BookBuilder(BOB).withIsbn(VALID_PHONE_AMY).withPrice(VALID_EMAIL_AMY).build();
+        editedBook = new BookBuilder(BOB).withIsbn(VALID_ISBN_AMY).withPrice(VALID_PRICE_AMY).build();
         assertCommandSuccess(command, index, editedBook);
 
         /* Case: clear tags -> cleared */
@@ -119,7 +119,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getBookList().size();
+        int invalidIndex = getModel().getBookInventory().getBookList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
 
@@ -182,7 +182,7 @@ public class EditCommandSystemTest extends BookInventorySystemTest {
 
         /* Case: edit a book with new values same as another book's values -> rejected */
         executeCommand(BookUtil.getAddCommand(BOB));
-        assertTrue(getModel().getAddressBook().getBookList().contains(BOB));
+        assertTrue(getModel().getBookInventory().getBookList().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredBookList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

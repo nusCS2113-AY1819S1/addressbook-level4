@@ -131,7 +131,7 @@ public class XmlUtilTest {
 
         BookInventoryBuilder builder = new BookInventoryBuilder(new BookInventory());
         dataToWrite = new XmlSerializableAddressBook(
-                builder.withPerson(new BookBuilder().build()).build());
+                builder.withBook(new BookBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);

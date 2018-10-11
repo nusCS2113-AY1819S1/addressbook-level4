@@ -16,10 +16,10 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ISBN_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalBooks.ALICE;
 import static seedu.address.testutil.TypicalBooks.AMY;
@@ -79,7 +79,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
         /* Case: add a book with all fields same as another book in the address book except phone and email
          * -> added
          */
-        toAdd = new BookBuilder(AMY).withIsbn(VALID_PHONE_BOB).withPrice(VALID_EMAIL_BOB).build();
+        toAdd = new BookBuilder(AMY).withIsbn(VALID_ISBN_BOB).withPrice(VALID_PRICE_BOB).build();
         command = BookUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
@@ -115,17 +115,17 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
         /* Case: add a duplicate book except with different phone -> rejected */
-        toAdd = new BookBuilder(HOON).withIsbn(VALID_PHONE_BOB).build();
+        toAdd = new BookBuilder(HOON).withIsbn(VALID_ISBN_BOB).build();
         command = BookUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
         /* Case: add a duplicate book except with different email -> rejected */
-        toAdd = new BookBuilder(HOON).withPrice(VALID_EMAIL_BOB).build();
+        toAdd = new BookBuilder(HOON).withPrice(VALID_PRICE_BOB).build();
         command = BookUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
         /* Case: add a duplicate book except with different address -> rejected */
-        toAdd = new BookBuilder(HOON).withQuantity(VALID_ADDRESS_BOB).build();
+        toAdd = new BookBuilder(HOON).withQuantity(VALID_QUANTITY_BOB).build();
         command = BookUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_BOOK);
 
@@ -150,7 +150,7 @@ public class AddCommandSystemTest extends BookInventorySystemTest {
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: invalid keyword -> rejected */
-        command = "adds " + BookUtil.getPersonDetails(toAdd);
+        command = "adds " + BookUtil.getBookDetails(toAdd);
         assertCommandFailure(command, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: invalid name -> rejected */

@@ -58,7 +58,7 @@ public class SelectCommandSystemTest extends BookInventorySystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getBookList().size();
+        int invalidIndex = getModel().getBookInventory().getBookList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
 
         /* Case: filtered book list, select index within bounds of address book and book list -> selected */

@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalBooks.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalBooks.getTypicalBookInventory;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -63,7 +63,7 @@ public class RequestStorageManagerTest {
          * {@link XmlBookInventoryStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlBookInventoryRequestStorageTest} class.
          */
-        BookInventory original = getTypicalAddressBook();
+        BookInventory original = getTypicalBookInventory();
         storageManager.saveAddressBook(original);
         ReadOnlyBookInventory retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new BookInventory(retrieved));
