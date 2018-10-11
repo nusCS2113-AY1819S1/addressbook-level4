@@ -15,7 +15,7 @@ It is like a bypass for us to bypass referencing getting a values from another c
 
 ## Unit testing
 
-Testing of individual components of code. Can test a function just with some predefined test cases. Unit tests are also great for preventing regressions.  
+Testing of individual components of code. Can test a function just with some predefined test cases. Unit tests are also great for preventing regressions.
 
 If there are dependencies then we create **stubs** to test the methods.
 
@@ -54,7 +54,7 @@ If there are dependencies then we create **stubs** to test the methods.
 
 ## Integration testing
 
-Testing of components are not isolated from others. Integration testing are usually slower and more complex.  
+Testing of components are not isolated from others. Integration testing are usually slower and more complex.
 
 WE replace the stubs with the actual objects
 
@@ -97,7 +97,7 @@ Test the dependencies first then use the dependencies to test the other methods.
 
 ## System testing
 
-Black box software testing. System testing can be of functional testing and non-functional testing. Test cases and test data are made and the production data is not used in this type of testing. In system integration testing we integrate the different modules and test the interface between them to check the data integrity.  
+Black box software testing. System testing can be of functional testing and non-functional testing. Test cases and test data are made and the production data is not used in this type of testing. In system integration testing we integrate the different modules and test the interface between them to check the data integrity.
 
 While execution of testing process the system correctness testing is performed by testers **(not end users)**.
 
@@ -129,7 +129,7 @@ While execution of testing process the system correctness testing is performed b
 
 ## Accpeptance testing
 
-Testing by end user. Testing with respect to user needs, requirements, and business processes conducted to determine whether or not a system satisfies the acceptance criteria and to check if the system is acceptable to the users.  
+Testing by end user. Testing with respect to user needs, requirements, and business processes conducted to determine whether or not a system satisfies the acceptance criteria and to check if the system is acceptable to the users.
 
 Sometimes known as business user testing
 
