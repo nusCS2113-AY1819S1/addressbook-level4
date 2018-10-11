@@ -24,6 +24,7 @@ import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UndoSearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.ui.LoginDialogBox;
 
@@ -109,6 +110,9 @@ public class AddressBookParser {
 
         case ClearSearchHistoryCommand.COMMAND_WORD:
             return new ClearSearchHistoryCommand();
+
+        case UndoSearchCommand.COMMAND_WORD:
+            return new UndoSearchCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
