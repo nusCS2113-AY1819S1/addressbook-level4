@@ -73,7 +73,11 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getTextPrediction().predictText(textInput);
     }
 
-
+    /**
+     * Check to see if commandText is a password command
+     * @param commandText
+     * @return true if commandText is password sensitive
+     */
     private boolean isSensitive (String commandText) {
         String[] splited = commandText.split("\\s+");
         if (splited.length > 1) {
@@ -83,6 +87,5 @@ public class LogicManager extends ComponentManager implements Logic {
         }
         return false;
     }
-
 
 }
