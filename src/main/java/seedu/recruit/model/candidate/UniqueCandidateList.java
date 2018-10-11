@@ -90,7 +90,7 @@ public class UniqueCandidateList implements Iterable<Candidate> {
             }
         });
     }
-    
+
     public void setPersons(UniqueCandidateList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
