@@ -51,7 +51,8 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
             return Optional.empty();
         }
 
-        XmlSerializableFinancialPlanner xmlFinancialPlanner = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableFinancialPlanner xmlFinancialPlanner = XmlFileStorage.loadDataFromSaveFile(filePath,
+                XmlSerializableFinancialPlanner.class);
         try {
             return Optional.of(xmlFinancialPlanner.toModelType());
         } catch (IllegalValueException ive) {
