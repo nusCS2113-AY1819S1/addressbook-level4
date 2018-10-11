@@ -34,13 +34,13 @@ public class XmlUtilTest {
     private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
 
-    private static final String INVALID_PHONE = "9482asf424";
+    private static final String INVALID_ISBN = "9482asf424";
 
     private static final String VALID_NAME = "Hans Muster";
-    private static final String VALID_PHONE = "9482424";
+    private static final String VALID_ISBN = "978-3-16-148410-0";
     private static final String VALID_COST = "19.99";
-    private static final String VALID_EMAIL = "hans@example";
-    private static final String VALID_ADDRESS = "4th street";
+    private static final String VALID_PRICE = "29.99";
+    private static final String VALID_QUANTITY = "4";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
     @Rule
@@ -81,7 +81,7 @@ public class XmlUtilTest {
         XmlAdaptedBook actualPerson = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedBookWithRootElement.class);
         XmlAdaptedBook expectedPerson = new XmlAdaptedBook(
-                null, VALID_PHONE, VALID_EMAIL, VALID_COST, VALID_ADDRESS, VALID_TAGS);
+                null, VALID_ISBN, VALID_PRICE, VALID_COST, VALID_QUANTITY, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -90,7 +90,7 @@ public class XmlUtilTest {
         XmlAdaptedBook actualPerson = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedBookWithRootElement.class);
         XmlAdaptedBook expectedPerson = new XmlAdaptedBook(
-                VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_COST, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, INVALID_ISBN, VALID_PRICE, VALID_COST, VALID_QUANTITY, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -99,7 +99,7 @@ public class XmlUtilTest {
         XmlAdaptedBook actualPerson = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedBookWithRootElement.class);
         XmlAdaptedBook expectedPerson = new XmlAdaptedBook(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_COST, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, VALID_ISBN, VALID_PRICE, VALID_COST, VALID_QUANTITY, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 

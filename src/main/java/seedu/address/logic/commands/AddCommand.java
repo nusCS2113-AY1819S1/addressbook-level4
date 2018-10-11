@@ -27,6 +27,7 @@ public class AddCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_ISBN + "ID "
             + PREFIX_PRICE + "PRICE "
+            + PREFIX_COST + "COST "
             + PREFIX_QUANTITY + "QUANTITY "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
