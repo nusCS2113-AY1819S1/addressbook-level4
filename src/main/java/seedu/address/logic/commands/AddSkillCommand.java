@@ -1,13 +1,23 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
-
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.Skill;
+
+import java.util.List;
+
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_SKILL;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+//@@author derpyplops-reused
+//{The implementation is a simple renaming of the "remark" example in the Dev Guide.
+// Code from it is also reused throughout the project.
+// Which will be extended later to other uses.}
 
 /**
  * Adds a skill for a person in the Addressbook.
@@ -26,7 +36,8 @@ public class AddSkillCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New skill added: %1$s";
 
-    public static final String MESSAGE_ARGUMENTS = "Index: %1$d, Remark: %2$s";
+    public static final String MESSAGE_ADD_SKILL_SUCCESS = "Added skill to person: %1$s";
+    public static final String MESSAGE_DELETE_SKILL_SUCCESS = "Remove skill to person: %1$s";
     private final Index index;
     private final Skill skill;
     /**
@@ -45,7 +56,25 @@ public class AddSkillCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, index.getOneBased(), skill));
+        List<Person> lastShownList = model.getFilteredPersonList();
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), skill, personToEdit.getTags());
+        model.updatePerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+        return new CommandResult(generateSuccessMessage(editedPerson));
+    }
+    /**
+     * Generates a command execution success message based on whether the remark is added to or removed from
+     * {@code personToEdit}.
+     */
+    private String generateSuccessMessage(Person personToEdit) {
+        String message = !skill.value.isEmpty() ? MESSAGE_ADD_SKILL_SUCCESS : MESSAGE_DELETE_SKILL_SUCCESS;
+        return String.format(message, personToEdit);
     }
     @Override
     public boolean equals(Object other) {
@@ -63,3 +92,5 @@ public class AddSkillCommand extends Command {
                 && skill.equals(e.skill);
     }
 }
+
+//@@author
