@@ -3,22 +3,37 @@ package seedu.address;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.function.Supplier;
+import java.util.logging.Logger;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Version;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.logic.Logic;
+import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.security.Security;
+import seedu.address.security.SecurityManager;
+import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.JsonUserPrefsStorage;
+import seedu.address.storage.Storage;
+import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
+import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
+import seedu.address.ui.Ui;
+import seedu.address.ui.UiManager;
 import systemtests.ModelHelper;
 
 /**
@@ -29,11 +44,19 @@ public class TestApp extends MainApp {
 
     public static final Path SAVE_LOCATION_FOR_TESTING = TestUtil.getFilePathInSandboxFolder("sampleData.xml");
     public static final String APP_TITLE = "Test App";
-
+    public static final Version VERSION = new Version(0, 6, 0, true);
     protected static final Path DEFAULT_PREF_FILE_LOCATION_FOR_TESTING =
             TestUtil.getFilePathInSandboxFolder("pref_testing.json");
+    private static final Logger logger = LogsCenter.getLogger(MainApp.class);
     protected Supplier<ReadOnlyAddressBook> initialDataSupplier = () -> null;
     protected Path saveFileLocation = SAVE_LOCATION_FOR_TESTING;
+    protected Ui ui;
+    protected Logic logic;
+    protected Storage storage;
+    protected Model model;
+    protected Config config;
+    protected UserPrefs userPrefs;
+    protected Security user;
 
     public TestApp() {
     }
@@ -49,6 +72,36 @@ public class TestApp extends MainApp {
                     this.saveFileLocation);
         }
     }
+
+    @Override
+    public void init() throws Exception {
+        logger.info("=============================[ Initializing AddressBook ]===========================");
+        super.init();
+
+        AppParameters appParameters = AppParameters.parse(getParameters());
+        config = initConfig(appParameters.getConfigPath());
+
+        UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+        userPrefs = initPrefs(userPrefsStorage);
+        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
+        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+
+        model = initModelManager(storage, userPrefs);
+
+        logic = new LogicManager(model);
+
+        user = new SecurityManager(true);
+
+        ui = new UiManager(logic, config, userPrefs, user);
+
+        initEventsCenter();
+    }
+
+    private void initEventsCenter() {
+        EventsCenter.getInstance().registerHandler(this);
+    }
+
+
 
     @Override
     protected Config initConfig(Path configFilePath) {

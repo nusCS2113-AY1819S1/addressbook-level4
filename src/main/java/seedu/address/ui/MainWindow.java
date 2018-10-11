@@ -19,6 +19,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.security.Security;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -39,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private LoginWindow loginWindow;
 
     @FXML
     private StackPane timetablePlaceholder;
@@ -58,7 +60,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
-    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
+    public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic, Security security) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -75,6 +77,7 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        loginWindow = new LoginWindow(security);
     }
 
     public Stage getPrimaryStage() {
@@ -172,6 +175,18 @@ public class MainWindow extends UiPart<Stage> {
             helpWindow.show();
         } else {
             helpWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the Login Window.
+     */
+    @FXML
+    public void handleLogin() {
+        if (!loginWindow.isShowing()) {
+            loginWindow.show();
+        } else {
+            loginWindow.focus();
         }
     }
 
