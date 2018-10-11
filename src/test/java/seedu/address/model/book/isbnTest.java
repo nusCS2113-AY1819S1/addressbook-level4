@@ -1,7 +1,6 @@
 package seedu.address.model.book;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
@@ -32,10 +31,11 @@ public class IsbnTest {
         assertFalse(Isbn.isValidIsbn("phone")); // non-numeric
         assertFalse(Isbn.isValidIsbn("9011p041")); // alphabets within digits
         assertFalse(Isbn.isValidIsbn("9312 1534")); // spaces within digits
-
+        /*
         // valid phone numbers
         assertTrue(Isbn.isValidIsbn("911")); // exactly 3 numbers
         assertTrue(Isbn.isValidIsbn("93121534"));
         assertTrue(Isbn.isValidIsbn("124293842033123")); // long phone numbers
+        */
     }
 }
