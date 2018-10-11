@@ -105,12 +105,6 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
         assertCommandSuccess(IDA);
 
-        /* ------------------------ Perform add operation while a person card is selected --------------------------- */
-
-        /* Case: selects first card in the person list, add a person -> added, card selection remains unchanged */
-        selectPerson(Index.fromOneBased(1));
-        assertCommandSuccess(CARL);
-
         /* ----------------------------------- Perform invalid add operations --------------------------------------- */
 
         /* Case: add a duplicate person -> rejected */
