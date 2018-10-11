@@ -24,7 +24,7 @@ public class FindPersonSubCommand extends FindCommand {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        Predicate updatedPredicate = getMostUpdatedPredicate(model, predicate);
+        Predicate updatedPredicate = getMostUpdatedPredicate(model.getSearchHistoryManager(), predicate);
         model.updateFilteredPersonList(updatedPredicate);
         return new CommandResult(
                 String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));

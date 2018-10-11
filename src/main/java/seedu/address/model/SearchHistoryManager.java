@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 import java.util.function.Predicate;
 
@@ -10,37 +11,38 @@ public class SearchHistoryManager {
 
     private Stack<Predicate> searchHistoryStack = new Stack<>();
 
-    /**
-     * Retrieves Predicate that executes the most recent search.
-     */
-    public Predicate retrieveLastSearch() {
-        if (searchHistoryStack.empty()) {
-            searchHistoryStack.push(newPredicate -> true);
-        }
+    private Predicate retrievePredicateAtTopOfStack() {
         return searchHistoryStack.peek();
-    }
-
-    /**
-     * Adds new Predicate Predicate to stack which will execute the next Search
-     */
-    public void addNewSearch(Predicate newPredicate) {
-        Predicate updatedPredicate = retrieveLastSearch().and(newPredicate);
-        searchHistoryStack.push(updatedPredicate);
     }
 
     /**
      * Resets the most recent search
      */
-    public Predicate revertLastSearch() {
+    public Predicate revertLastSearch() throws EmptyStackException {
+        removeLastPredicateFromStack();
+        return retrievePredicateAtTopOfStack();
+    }
+
+    public Predicate executeNewSearch(Predicate predicate) {
+        addNewPredicateToStack(predicate);
+        return retrievePredicateAtTopOfStack();
+    }
+
+    private void addNewPredicateToStack(Predicate newPredicate) {
+        try {
+            Predicate updatedPredicate = retrievePredicateAtTopOfStack().and(newPredicate);
+            searchHistoryStack.push(updatedPredicate);
+        } catch (EmptyStackException e) {
+            searchHistoryStack.push(newPredicate);
+        }
+    }
+
+    private void removeLastPredicateFromStack() {
         if (!searchHistoryStack.empty()) {
             searchHistoryStack.pop();
         }
-        return retrieveLastSearch();
     }
 
-    /**
-     * Resets all searches that had been done previously
-     */
     public void clearSearchHistory() {
         searchHistoryStack.clear();
     }
@@ -54,6 +56,7 @@ public class SearchHistoryManager {
         if (!(obj instanceof SearchHistoryManager)) {
             return false;
         }
+
         SearchHistoryManager other = (SearchHistoryManager) obj;
         return searchHistoryStack.size() == other.searchHistoryStack.size();
     }

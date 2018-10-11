@@ -175,26 +175,9 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
-    //=========== SearchHistory =================================================================================
-
     @Override
-    public void updateSearchHistory(Predicate predicate) {
-        searchHistoryManager.addNewSearch(predicate);
-    }
-
-    @Override
-    public void undoSearchHistory() {
-        searchHistoryManager.revertLastSearch();
-    }
-
-    @Override
-    public void resetSearchHistory() {
-        searchHistoryManager.clearSearchHistory();
-    }
-
-    @Override
-    public Predicate retrieveLatestSearch() {
-        return searchHistoryManager.retrieveLastSearch();
+    public SearchHistoryManager getSearchHistoryManager() {
+        return searchHistoryManager;
     }
 
     @Override

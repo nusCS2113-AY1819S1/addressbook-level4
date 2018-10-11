@@ -114,22 +114,7 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Update search history when given a new search condition.
+     * Returns the model's SearchHistoryManager
      */
-    void updateSearchHistory(Predicate predicate);
-
-    /**
-     * Undo the latest search and remove it from search history
-     */
-    void undoSearchHistory();
-
-    /**
-     * Clears all search history
-     */
-    void resetSearchHistory();
-
-    /**
-     * Retrieves the most recent search history state.
-     */
-    Predicate retrieveLatestSearch();
+    SearchHistoryManager getSearchHistoryManager();
 }

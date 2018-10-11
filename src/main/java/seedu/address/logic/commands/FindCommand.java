@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.Model;
+import seedu.address.model.SearchHistoryManager;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -17,8 +17,8 @@ public abstract class FindCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " alice bob charlie";
 
-    protected Predicate getMostUpdatedPredicate(Model model, Predicate predicate) {
-        model.updateSearchHistory(predicate);
-        return model.retrieveLatestSearch();
+    protected Predicate getMostUpdatedPredicate(SearchHistoryManager manager, Predicate predicate) {
+        Predicate updatedPredicate = manager.executeNewSearch(predicate);
+        return updatedPredicate;
     }
 }
