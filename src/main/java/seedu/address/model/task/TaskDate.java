@@ -4,21 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Task's deadline date in the to-do list.
+ * Represents a Task's due date in the to-do list.
  * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class TaskDate {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Dates should be of the format DD-MM, where DD and MM are numbers";
-    private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-";
-    // alphanumeric and special characters
-    private static final String LOCAL_PART_REGEX = "^[\\w" + SPECIAL_CHARACTERS + "]+";
-    private static final String DOMAIN_FIRST_CHARACTER_REGEX = "[^\\W_]"; // alphanumeric characters except underscore
-    private static final String DOMAIN_MIDDLE_REGEX = "[a-zA-Z0-9.-]*"; // alphanumeric, period and hyphen
-    private static final String DOMAIN_LAST_CHARACTER_REGEX = "[^\\W_]$";
-    public static final String DATE_VALIDATION_REGEX = LOCAL_PART_REGEX + "@"
-            + DOMAIN_FIRST_CHARACTER_REGEX + DOMAIN_MIDDLE_REGEX + DOMAIN_LAST_CHARACTER_REGEX;
+    public static final String DATE_VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}";
 
     public final String value;
 
@@ -34,7 +27,7 @@ public class TaskDate {
     }
 
     /**
-     * Returns if a given string is a valid email.
+     * Returns if a given string is a valid date.
      */
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);

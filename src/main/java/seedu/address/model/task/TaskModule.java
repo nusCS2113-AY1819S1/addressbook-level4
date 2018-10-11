@@ -4,19 +4,14 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Task's module in the to-do list.
+ * Represents a Task's module code in the to-do list.
  * Guarantees: immutable; is valid as declared in {@link #isValidModule(String)}
  */
 public class TaskModule {
 
     public static final String MESSAGE_MODULE_CONSTRAINTS =
-            "Module can take any values, and it should not be blank";
-
-    /*
-     * The first character of the module must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String MODULE_VALIDATION_REGEX = "[^\\s].*";
+            "Module code should be of the format XXNNNN, where X is an alphabetical character and N is a number";
+    public static final String MODULE_VALIDATION_REGEX = "[a-zA-Z]{2}[\\d]{4}";
 
     public final String value;
 
