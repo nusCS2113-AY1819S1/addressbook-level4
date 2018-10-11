@@ -12,6 +12,10 @@ import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Name;
 import seedu.address.model.book.Price;
 import seedu.address.model.book.Quantity;
+import seedu.address.model.request.Email;
+import seedu.address.model.request.ReadOnlyRequests;
+import seedu.address.model.request.Request;
+import seedu.address.model.request.RequestList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,13 +42,28 @@ public class SampleDataUtil {
                 getTagSet("classmates")),
         };
     }
-
+    public static Request[] getSampleRequests() {
+        return new Request[] {
+                new Request(new Isbn("978-3-16-148410-0"), new Email("testing@gmail.com"),
+                        new Quantity("2")),
+                new Request(new Isbn("978-3-16-148410-0"), new Email("testing1@gmail.com"),
+                        new Quantity("3")),
+        };
+    }
     public static ReadOnlyBookInventory getSampleAddressBook() {
         BookInventory sampleAb = new BookInventory();
         for (Book sampleBook : getSamplePersons()) {
             sampleAb.addPerson(sampleBook);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyRequests getSampleRequestList() {
+        RequestList requestAb = new RequestList();
+        for (Request sampleRequest : getSampleRequests()) {
+            requestAb.addRequest(sampleRequest);
+        }
+        return requestAb;
     }
 
     /**

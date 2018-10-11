@@ -25,13 +25,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.request.*;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.BookInventoryStorage;
-import seedu.address.storage.InventoryStorage;
-import seedu.address.storage.InventoryStorageManager;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlBookInventoryStorage;
+import seedu.address.storage.*;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -47,10 +43,11 @@ public class MainApp extends Application {
     protected Ui ui;
     protected Logic logic;
     protected InventoryStorage storage;
+    protected RequestStorage requestStorage;
     protected Model model;
+    protected RequestModel requestModel;
     protected Config config;
     protected UserPrefs userPrefs;
-
 
     @Override
     public void init() throws Exception {
@@ -64,12 +61,16 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         BookInventoryStorage bookInventoryStorage = new XmlBookInventoryStorage(userPrefs.getBookInventoryFilePath());
         storage = new InventoryStorageManager(bookInventoryStorage, userPrefsStorage);
-
+        RequestListStorage requestListStorage = new XmlRequestListStorage(userPrefs.getBookInventoryFilePath());
+        requestStorage = new RequestListStorageManager(requestListStorage, userPrefsStorage);
         initLogging(config);
 
         model = initModelManager(storage, userPrefs);
 
-        logic = new LogicManager(model);
+        requestModel = initModelManager(requestStorage, userPrefs);
+
+
+        logic = new LogicManager(model, requestModel);
 
         ui = new UiManager(logic, config, userPrefs);
 
@@ -99,6 +100,26 @@ public class MainApp extends Application {
         }
 
         return new ModelManager(initialData, userPrefs);
+    }
+
+    private RequestModel initModelManager(RequestListStorage requestStorage, UserPrefs userPrefs) {
+        Optional<ReadOnlyRequests> requestListOptional;
+        ReadOnlyRequests initialData;
+        try {
+            requestListOptional = requestStorage.readRequestList();
+            if (!requestListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample BookInventory");
+            }
+            initialData = requestListOptional.orElseGet(SampleDataUtil::getSampleRequestList);
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty BookInventory");
+            initialData = new RequestList();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty BookInventory");
+            initialData = new RequestList();
+        }
+
+        return new RequestModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -189,6 +210,7 @@ public class MainApp extends Application {
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
+            requestStorage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
@@ -205,4 +227,5 @@ public class MainApp extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+
 }

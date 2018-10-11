@@ -4,8 +4,10 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -36,6 +38,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private BookListPanel bookListPanel;
+    private RequestListPanel requestListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -51,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane personListPanelPlaceholder;
+
+    @FXML
+    private StackPane requestListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -74,7 +80,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
         registerAsAnEventHandler(this);
 
-        helpWindow = new HelpWindow();
+        //helpWindow = new HelpWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -116,14 +122,18 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Fills up all the placeholders of this window.
+     * Fills up all the
+     * placeholders of this window.
      */
     void fillInnerParts() {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         bookListPanel = new BookListPanel(logic.getFilteredBookList());
-        personListPanelPlaceholder.getChildren().add(bookListPanel.getRoot());
+        personListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
+
+        requestListPanel = new RequestListPanel(logic.getFilteredRequestList());
+        requestListPanelPlaceholder.getChildren().addAll(requestListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -133,6 +143,11 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    void showBookList () {
+        bookListPanel = new BookListPanel(logic.getFilteredBookList());
+        personListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
     }
 
     void hide() {
@@ -191,6 +206,7 @@ public class MainWindow extends UiPart<Stage> {
         return bookListPanel;
     }
 
+    public RequestListPanel getRequestListPanel() { return requestListPanel; }
     void releaseResources() {
         browserPanel.freeResources();
     }

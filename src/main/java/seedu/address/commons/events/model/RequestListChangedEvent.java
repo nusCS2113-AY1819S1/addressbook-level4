@@ -5,16 +5,16 @@ import seedu.address.model.ReadOnlyBookInventory;
 import seedu.address.model.request.ReadOnlyRequests;
 
 /** Indicates the BookInventory in the model has changed*/
-public class BookInventoryChangedEvent extends BaseEvent {
+public class RequestListChangedEvent extends BaseEvent {
 
-    public final ReadOnlyBookInventory data;
+    public final ReadOnlyRequests dataRequest;
 
-    public BookInventoryChangedEvent(ReadOnlyBookInventory data) {
-        this.data = data;
+    public RequestListChangedEvent(ReadOnlyRequests dataRequest) {
+        this.dataRequest = dataRequest;
     }
 
     @Override
     public String toString() {
-        return "number of persons " + data.getBookList().size();
+        return "number of persons ";
     }
 }
