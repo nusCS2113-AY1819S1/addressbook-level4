@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSkillCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ClearSearchHistoryCommand;
 import seedu.address.logic.commands.Command;
@@ -107,8 +108,12 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
+        case AddSkillCommand.COMMAND_WORD:
+            return new AddSkillCommandParser().parse(arguments);
+
         case ClearSearchHistoryCommand.COMMAND_WORD:
             return new ClearSearchHistoryCommand();
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
