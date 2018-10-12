@@ -127,7 +127,7 @@ public class UiManager extends ComponentManager implements Ui {
     }
 
     @Subscribe
-    public void handleSuccessfulLoginEvent(SuccessfulLoginEvent abce) {
+    public void handleSuccessfulLoginEvent(SuccessfulLoginEvent loginSuccess) {
         mainWindow.fillInnerParts();
     }
 }
