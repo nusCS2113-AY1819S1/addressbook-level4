@@ -42,7 +42,8 @@ public class DeleteCommandByDateEntry extends Command {
         boolean targetRecordExist = false;
         for (Record targetRecord : lastShownList) {
             logger.info(String.format(
-                    "The date required is: %1$s, the date shown is %2$s\n", targetDate.getValue(), targetRecord.getDate().getValue()));
+                    "The date required is: %1$s, the date shown is %2$s\n",
+                    targetDate.getValue(), targetRecord.getDate().getValue()));
             if (targetRecord.isSameDateRecord(targetDate)) {
                 model.deleteRecord(targetRecord);
                 model.commitFinancialPlanner();
