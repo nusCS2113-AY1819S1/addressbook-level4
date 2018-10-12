@@ -1,6 +1,7 @@
 package seedu.planner.model;
 
 import javafx.collections.ObservableList;
+
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 

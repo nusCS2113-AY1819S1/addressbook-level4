@@ -29,7 +29,7 @@ public class XmlSerializableFinancialPlanner {
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableFinancialPlanner() {
-        limits = new ArrayList<>();
+
         records = new ArrayList<>();
     }
 
@@ -39,8 +39,8 @@ public class XmlSerializableFinancialPlanner {
     public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
         this();
         records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
-        limits.addAll(src.getLimitList().stream().map(XmlAdaptedLimit::new).collect(Collectors.toList()));
-        //TODO: understand the workflow of this part.
+
+
     }
 
     /**
@@ -57,13 +57,6 @@ public class XmlSerializableFinancialPlanner {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
             }
             financialPlanner.addRecord(record);
-        }
-        for (XmlAdaptedLimit l : limits) {
-            Limit limit = l.toModelType();
-            if (financialPlanner.hasSameDateLimit(limit)){
-                throw new IllegalValueException(MESSAGE_DUPLICATE_LIMIT);
-            }
-            financialPlanner.addLimit(limit);
         }
         return financialPlanner;
     }
