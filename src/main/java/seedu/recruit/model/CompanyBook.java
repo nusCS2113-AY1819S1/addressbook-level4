@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.company.UniqueCompanyList;
+import seedu.recruit.model.joboffer.UniqueJobList;
 import seedu.recruit.model.joboffer.JobOffer;
 
 
@@ -18,9 +19,11 @@ import seedu.recruit.model.joboffer.JobOffer;
 
 public class CompanyBook implements ReadOnlyCompanyBook {
     private final UniqueCompanyList companyList;
+    private final UniqueJobList companyJobList;
 
     {
         companyList = new UniqueCompanyList();
+        companyJobList = new UniqueJobList();
     }
 
     public CompanyBook() {}
@@ -31,6 +34,9 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public CompanyBook(ReadOnlyCompanyBook toBeCopied) {
         this();
         resetData(toBeCopied);
+        for (Company company:companyList) {
+            companyJobList.getInternalList().addAll(company.getJobOffers());
+        }
     }
 
     //// list overwrite operations
@@ -111,6 +117,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
 
     public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
         companyList.addJobOfferToCompany(companyName, jobOffer);
+        companyJobList.add(jobOffer);
     }
 
     //// util methods
@@ -124,6 +131,11 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     @Override
     public ObservableList<Company> getCompanyList() {
         return companyList.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<JobOffer> getCompanyJobList() {
+        return companyJobList.asUnmodifiableObservableList();
     }
 
     @Override

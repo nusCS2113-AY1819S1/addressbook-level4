@@ -12,6 +12,7 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
 import seedu.recruit.commons.core.Config;
 import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
@@ -35,13 +36,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-
-    @FXML
-    private StackPane browserPlaceholder;
+    private CandidateDetailsPanel candidateDetailsPanel;
+    private CompanyJobDetailsPanel companyJobDetailsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -50,7 +49,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private MenuItem CompanyBook;
+
+    @FXML
+    private MenuItem CandidateBook;
+
+    @FXML
+    private StackPane panelViewPlaceHolder;
+
+    @FXML
+    private StackPane personDetailsPanelPlaceholder;
+
+    @FXML
+    private StackPane companyJobDetailsPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -115,21 +126,62 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    @FXML
+    private void handleChangeView(ActionEvent event) {
+        String menuItemID = ((MenuItem) event.getSource()).getId();
+        if (menuItemID.contentEquals("CandidateBook")) {
+            panelViewPlaceHolder.getChildren().add(candidateDetailsPanel.getRoot());
+            panelViewPlaceHolder = personDetailsPanelPlaceholder;
+            System.out.println("PersonDetails in handle");
+        }
+        else if (menuItemID.contentEquals("CompanyBook")) {
+            panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
+            panelViewPlaceHolder = companyJobDetailsPanelPlaceholder;
+            System.out.println("Company in handle");
+        }
+    }
+    /**
+    @FXML
+    public void handleChangeToCandidatePanelView(ActionEvent event) {
+        registerAsAnEventHandler(this);
+        //candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
+        panelView.getChildren().add(candidateDetailsPanel.getRoot());
+        panelView = personDetailsPanelPlaceholder;
+    }
+
+    @FXML
+    public void handleChangeToCompanyPanelView(ActionEvent event) {
+        String menuItemID = ((MenuItem) event.getSource()).getId();
+        System.out.println(menuItemID);
+        if (menuItemID.contentEquals("CompanyJobDetailsPanel")) {
+            registerAsAnEventHandler(this);
+            //companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(), logic.getFilteredCompanyJobList());
+            panelView.getChildren().add(companyJobDetailsPanel.getRoot());
+            panelView = companyJobDetailsPanelPlaceholder;
+        }
+    }*/
+
     /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+        candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
+        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(), logic.getFilteredCompanyJobList());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        if (panelViewPlaceHolder == personDetailsPanelPlaceholder) {
+            panelViewPlaceHolder.getChildren().add(candidateDetailsPanel.getRoot());
+            System.out.println("PersonDetails in fillInner");
+        }
+        else if (panelViewPlaceHolder == companyJobDetailsPanelPlaceholder) {
+            panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
+            System.out.println("CompnayDetails in fillInner");
+        }
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getCandidateBookFilePath(),
-                logic.getFilteredPersonList().size());
+                logic.getFilteredCompanyList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
@@ -188,9 +240,9 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
+    public CandidateDetailsPanel getCandidateDetailsPanel() {return candidateDetailsPanel;}
+
+    public CompanyJobDetailsPanel getCompanyJobDetailsPanel() {return companyJobDetailsPanel;}
 
     void releaseResources() {
         browserPanel.freeResources();

@@ -13,7 +13,7 @@ import seedu.recruit.model.candidate.Candidate;
 /**
  * Provides a handle to a candidate card in the candidate list panel.
  */
-public class PersonCardHandle extends NodeHandle<Node> {
+public class CandidateCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
@@ -28,7 +28,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label emailLabel;
     private final List<Label> tagLabels;
 
-    public PersonCardHandle(Node cardNode) {
+    public CandidateCardHandle(Node cardNode) {
         super(cardNode);
 
         idLabel = getChildNode(ID_FIELD_ID);
