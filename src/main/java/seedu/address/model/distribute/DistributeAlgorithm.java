@@ -67,9 +67,16 @@ public class DistributeAlgorithm {
             }
 
             groupArrayList.add(addPerson);
-            System.out.println(addPerson);
         }
+        
         // TODO: Add function that iterate groupArrayList and addMemebrs into the group
+        for(int i=0;i<groupArrayList.size();i++){
+            System.out.println("Group : " + i);
+            for(int j=0; j<groupArrayList.get(i).size();j++){
+                System.out.println(groupArrayList.get(i).get(j));
+            }
+        }
+        groupArrayList.clear();
     }
 
     private void NationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
@@ -79,6 +86,8 @@ public class DistributeAlgorithm {
     private void GenderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
         LinkedList<Person> maleLinkList = new LinkedList<>();
         LinkedList<Person> femaleLinkList = new LinkedList<>();
+        int loopCounter = 0;
+        int num = 0;
 
         for( Person p : allPersonArrayList){
             if(p.getGender().toString().equals(VALID_GENDER_MALE)){
@@ -90,10 +99,6 @@ public class DistributeAlgorithm {
             }
         }
 
-        //creates 7 groups in this for loop
-        //groupArrayList.ensureCapacity(index);
-        int loopCounter = 0;
-        int num = 0;
         while(maleLinkList.size()!=0 || femaleLinkList.size()!=0) {
             if(loopCounter%index == 0) num =0;
             while (num < index) {
@@ -102,27 +107,11 @@ public class DistributeAlgorithm {
                 ArrayList<Person> temp = new ArrayList<>();
 
                 if(maleLinkList.size()!=0){
-                    if(loopCounter>=index){
-                        temp = groupArrayList.get(num);
-                        temp.add(maleLinkList.getLast());
-                        groupArrayList.remove(num);
-                        groupArrayList.add(num,temp);
-                    }else{
-                        temp.add(maleLinkList.getLast());
-                        groupArrayList.add(num,temp);
-                    }
+                    genderDistributionCheck(index, groupArrayList, maleLinkList, loopCounter, num, temp);
                     maleLinkList.removeLast();
 
                 }else if(femaleLinkList.size()!=0){
-                    if(loopCounter>=index){
-                        temp = groupArrayList.get(num);
-                        temp.add(femaleLinkList.getLast());
-                        groupArrayList.remove(num);
-                        groupArrayList.add(num,temp);
-                    }else{
-                        temp.add(femaleLinkList.getLast());
-                        groupArrayList.add(num,temp);
-                    }
+                    genderDistributionCheck(index, groupArrayList, femaleLinkList, loopCounter, num, temp);
                     femaleLinkList.removeLast();
                 }
                 num++;
@@ -130,6 +119,7 @@ public class DistributeAlgorithm {
             }
         }
 
+        // TODO: Add function that iterate groupArrayList and addMemebrs into the group
         for(int i=0;i<groupArrayList.size();i++){
             System.out.println( "Group : " + i);
             for(int j=0;j<groupArrayList.get(i).size();j++){
@@ -137,6 +127,18 @@ public class DistributeAlgorithm {
             }
         }
         groupArrayList.clear();
+    }
+
+    private void genderDistributionCheck(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> femaleLinkList, int loopCounter, int num, ArrayList<Person> temp) {
+        if(loopCounter>=index){
+            temp = groupArrayList.get(num);
+            temp.add(femaleLinkList.getLast());
+            groupArrayList.remove(num);
+            groupArrayList.add(num,temp);
+        }else{
+            temp.add(femaleLinkList.getLast());
+            groupArrayList.add(num,temp);
+        }
     }
 
     private void StrictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
