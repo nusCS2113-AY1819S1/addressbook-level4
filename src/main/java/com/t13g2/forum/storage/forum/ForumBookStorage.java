@@ -24,7 +24,10 @@ public class ForumBookStorage implements IForumBookStorage {
 
     private void init() {
         loadAnnouncement();
-
+        loadComment();
+        loadForumThread();
+        loadUser();
+        loadModule();
     }
 
     @Override
