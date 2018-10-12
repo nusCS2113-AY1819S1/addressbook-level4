@@ -49,7 +49,7 @@ public class UnitOfWork implements IUnitOfWork,AutoCloseable {
     @Override
     public void commit() {
 
-        forumBookStorage.saveAnnouncement();
+        forumBookStorage.commit();
 
     }
 

@@ -40,8 +40,7 @@ public class LoginCommand extends Command {
         User exist = new User();
         try(UnitOfWork unitOfWork = new UnitOfWork()) {
             try {
-                exist= unitOfWork.getUserRepository().authenticate(userName,userPassword);
-
+                exist = unitOfWork.getUserRepository().authenticate(userName,userPassword);
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new CommandException(MESSAGE_FAIL);

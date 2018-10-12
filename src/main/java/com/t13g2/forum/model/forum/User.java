@@ -13,14 +13,25 @@ public class User extends BaseModel {
 
     public static final String MESSAGE_USER_NAME_CONSTRAINTS =
         "User name can take any values, and it should not be blank";
-
+    public static final String MESSAGE_USER_PASSWORD_CONSTRAINTS =
+            "User name can take any values, and it should not be blank";
     /**
      * The first character of the user name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String USER_NAME_VALIDATION_REGEX = "[^\\s].*";
+    public static final String USER_PASSWORD_VALIDATION_REGEX = "[^\\s].*";
 
     public User() {
+    }
+
+    public User(String username, String password, boolean isAdmin, boolean isBlock, String email, String phone) {
+        this.username = username;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        this.isBlock = isBlock;
+        this.email = email;
+        this.phone = phone;
     }
 
     /**
@@ -28,6 +39,10 @@ public class User extends BaseModel {
      */
     public static boolean isValidUserName(String testUserName) {
         return (testUserName.matches(USER_NAME_VALIDATION_REGEX));
+    }
+
+    public static boolean isValidUserPassword(String testUserName) {
+        return (testUserName.matches(USER_PASSWORD_VALIDATION_REGEX));
     }
 
     public boolean getIsBlock() {
