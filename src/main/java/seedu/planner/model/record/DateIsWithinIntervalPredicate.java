@@ -1,12 +1,16 @@
 package seedu.planner.model.record;
 
 import java.util.function.Predicate;
+import java.util.logging.Logger;
+
+import seedu.planner.commons.core.LogsCenter;
 
 /**
  * Tests that a {@code Record}'s {@code Date} falls within the time interval from {@code startDate} to {@code endDate}
  * This relationship is inclusive on both ends, meaning the date can be equal to {@code startDate} or {@code endDate}
  */
 public class DateIsWithinIntervalPredicate implements Predicate<Record> {
+    private Logger logger = LogsCenter.getLogger(DateIsWithinIntervalPredicate.class);
 
     private final Date startDate;
     private final Date endDate;
@@ -19,6 +23,14 @@ public class DateIsWithinIntervalPredicate implements Predicate<Record> {
     public DateIsWithinIntervalPredicate(String startDate, String endDate) {
         this.startDate = new Date (startDate);
         this.endDate = new Date (endDate);
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
     }
 
     /**
