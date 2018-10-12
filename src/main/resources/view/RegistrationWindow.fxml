@@ -37,7 +37,7 @@
                     <Label text="Email" GridPane.rowIndex="2" />
                     <Label text="Phone" GridPane.rowIndex="3" />
                     <Label text="Address" GridPane.rowIndex="4" />
-                    <TextField id="username" promptText="Username" GridPane.columnIndex="1">
+                    <TextField id="username" promptText="Username" GridPane.columnIndex="1" fx:id="usernameTextField">
                         <padding>
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </padding>
@@ -45,23 +45,23 @@
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </GridPane.margin>
                     </TextField>
-                    <TextField id="password" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <TextField id="password" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="passwordTextField">
                         <padding>
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </padding>
                     </TextField>
-                    <Button mnemonicParsing="false" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                    <TextField id="email" promptText="abs@nus.edu.sg" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                    <Button mnemonicParsing="false" text="Register" GridPane.columnIndex="1" GridPane.rowIndex="5" onAction="#handleRegister"/>
+                    <TextField id="email" promptText="abs@nus.edu.sg" GridPane.columnIndex="1" GridPane.rowIndex="2" fx:id="emailTextField">
                         <padding>
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </padding>
                     </TextField>
-                    <TextField id="phone" promptText="8888 8888" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                    <TextField id="phone" promptText="8888 8888" GridPane.columnIndex="1" GridPane.rowIndex="3" fx:id="phoneTextField">
                         <padding>
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </padding>
                     </TextField>
-                    <TextField id="address" promptText="38 Oxley Road" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                    <TextField id="address" promptText="38 Oxley Road" GridPane.columnIndex="1" GridPane.rowIndex="4" fx:id="addressTextField" onAction="#handleRegister">
                         <padding>
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </padding>
