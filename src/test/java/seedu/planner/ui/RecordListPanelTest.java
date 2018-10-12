@@ -22,7 +22,7 @@ import seedu.planner.commons.events.ui.JumpToListRequestEvent;
 import seedu.planner.commons.util.FileUtil;
 import seedu.planner.commons.util.XmlUtil;
 import seedu.planner.model.record.Record;
-import seedu.planner.storage.XmlSerializableFinancialPlanner;
+import seedu.planner.storage.xml_jaxb.XmlSerializableFinancialPlanner;
 
 public class RecordListPanelTest extends GuiUnitTest {
     private static final ObservableList<Record> TYPICAL_RECORDS =

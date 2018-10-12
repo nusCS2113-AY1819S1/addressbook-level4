@@ -1,4 +1,4 @@
-package seedu.planner.storage;
+package seedu.planner.storage.xml_jaxb;
 
 import java.util.ArrayList;
 import java.util.HashSet;

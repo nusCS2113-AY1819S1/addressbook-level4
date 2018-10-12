@@ -15,6 +15,7 @@ import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.commons.util.FileUtil;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.summary.SummaryMap;
+import seedu.planner.storage.xml_jaxb.XmlSerializableFinancialPlanner;
 
 /**
  * A class to access FinancialPlanner data stored as an xml file on the hard disk.
