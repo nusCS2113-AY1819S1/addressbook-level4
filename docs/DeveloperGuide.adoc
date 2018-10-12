@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= NUSync - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team W12-2`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team W12-2`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -840,12 +840,6 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
-|`* * *` |user |add a new password | keep it stored in this application
-
-|`* * *` |user |delete a password | remove entries that I no longer need
-
-|`* * *` |user |find a password by keyword | locate details related to the entry without having to go through the entire list
-
 |`* * *` |user |add a ‘busy’ time slot to my time table | keep my life organized
 
 |`* * *` |user |delete a ‘busy’ time slot from my time table | free up that particular time slot
@@ -859,6 +853,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |view the notes already downloaded | keep track of the notes that I already have
 
 |`* * *` |user |delete all downloaded notes | free up some space on my local drive
+
+|`* * *` |user |view my enrolled classes | store my notes according to the classes I am enrolled in
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
