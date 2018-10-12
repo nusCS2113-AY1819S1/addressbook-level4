@@ -1,19 +1,18 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
+
+import static java.util.Objects.requireNonNull;
+
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
-import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.storage.forum.UnitOfWork;
-
-import java.rmi.server.UnicastRemoteObject;
-
-import static java.util.Objects.requireNonNull;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
 
 /**
  * Create a new thread to the forum book under certain module
@@ -55,21 +54,24 @@ public class CreateThreadCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        try(UnitOfWork unitOfWork = new UnitOfWork()){
-            Module module = unitOfWork.getModuleRepository().getModuleByCode(moduleCode); //get the respective module by moduleCode
-            forumThread.setModuleId(module.getId());//pass the module ID to this forum thread
-            comment.setThreadId(forumThread.getId());//pass the thread ID to this comment
-            unitOfWork.getForumThreadRepository().addThread(forumThread);//add this forum thread to unitOfWork meaning save it to the memory repository
-            unitOfWork.getCommentRepository().addComment(comment);//add this comment to unitOfWork meaning save it to the memory repository
-            unitOfWork.commit();//commit meaning add the forum thread update to local database
-        }catch (Exception e){
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            //get the respective module by moduleCode
+            Module module = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
+            forumThread.setModuleId(module.getId()); //pass the module ID to this forum thread
+            comment.setThreadId(forumThread.getId()); //pass the thread ID to this comment
+            //add this forum thread to unitOfWork meaning save it to the memory repository
+            unitOfWork.getForumThreadRepository().addThread(forumThread);
+            //add this comment to unitOfWork meaning save it to the memory repository
+            unitOfWork.getCommentRepository().addComment(comment);
+            unitOfWork.commit(); //commit meaning add the forum thread update to local database
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        String MESSAGE = "\n"
+        String message = "\n"
                 + "Module: " + moduleCode + "\n"
                 + "Thread Title: " + forumThread.getTitle() + "\n"
                 + "Comment: " + comment.getContent();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, message));
     }
 
     @Override

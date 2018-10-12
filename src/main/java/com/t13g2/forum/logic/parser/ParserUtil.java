@@ -7,7 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import com.t13g2.forum.commons.core.index.Index;
-import com.t13g2.forum.commons.util.AppUtil;
 import com.t13g2.forum.commons.util.StringUtil;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.forum.Announcement;
@@ -54,6 +53,12 @@ public class ParserUtil {
         }
         return trimmedUserName;
     }
+
+    /**
+     * @param userPassword
+     * @return
+     * @throws ParseException
+     */
     public static String parseUserPassword(String userPassword) throws ParseException {
         String trimmedUserPassword = userPassword.trim();
         if (!User.isValidUserName(trimmedUserPassword)) {
@@ -165,7 +170,7 @@ public class ParserUtil {
     /**
      * moduleCode
      */
-    public static String parseModule(String module) throws ParseException{
+    public static String parseModule(String module) throws ParseException {
         requireNonNull(module);
         String trimmedModule = module.trim();
         if (!isValidModule(trimmedModule)) {
@@ -181,7 +186,7 @@ public class ParserUtil {
     /**
      * threadTitle
      */
-    public static String parseThread(String threadTitle) throws ParseException{
+    public static String parseThread(String threadTitle) throws ParseException {
         requireNonNull(threadTitle);
         String trimmedThreadTitle = threadTitle.trim();
         if (!isValidThreadTitle(trimmedThreadTitle)) {
@@ -197,7 +202,7 @@ public class ParserUtil {
     /**
      * threadId
      */
-    public static String parseThreadId(String threadId) throws ParseException{
+    public static String parseThreadId(String threadId) throws ParseException {
         requireNonNull(threadId);
         String trimmedThreadId = threadId.trim();
         if (!isValidThreadId(trimmedThreadId)) {
@@ -213,7 +218,7 @@ public class ParserUtil {
     /**
      * comment content
      */
-    public static String parseComment(String comment) throws ParseException{
+    public static String parseComment(String comment) throws ParseException {
         requireNonNull(comment);
         String trimmedComment = comment.trim();
         if (!isValidComment(trimmedComment)) {

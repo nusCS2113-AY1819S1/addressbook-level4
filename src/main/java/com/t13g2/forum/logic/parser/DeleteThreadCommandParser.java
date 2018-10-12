@@ -1,15 +1,14 @@
 package com.t13g2.forum.logic.parser;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
+
+import java.util.stream.Stream;
+
 import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.DeleteThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.UnitOfWork;
-
-import java.util.stream.Stream;
-
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
-
 
 /**
  * Parses input arguments and creates a new DeleteCommand object
@@ -28,12 +27,13 @@ public class DeleteThreadCommandParser implements Parser<DeleteThreadCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_THREAD_ID)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteThreadCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                 DeleteThreadCommand.MESSAGE_USAGE));
         }
-        String thread_Id = ParserUtil.parseThreadId(argMultimap.getValue(PREFIX_THREAD_ID).get());
-        int threadId = Integer.parseInt(thread_Id);
+        int threadId = Integer.parseInt(ParserUtil.parseThreadId(argMultimap.getValue(PREFIX_THREAD_ID).get()));
         UnitOfWork unitOfWork = new UnitOfWork();
-        ForumThread forumThread = unitOfWork.getForumThreadRepository().getThread(threadId);//get forum thread from repo by thread id
+        //get forum thread from repo by thread id
+        ForumThread forumThread = unitOfWork.getForumThreadRepository().getThread(threadId);
 
         return new DeleteThreadCommand(forumThread);
     }

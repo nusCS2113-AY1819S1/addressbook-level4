@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import com.t13g2.forum.model.forum.User;
 
+/**
+ *
+ */
 public class UserRepository extends BaseRepository implements IUserRepository {
     public UserRepository(IForumBookStorage forumBookStorage) {
         super(forumBookStorage);
@@ -47,7 +50,8 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 
     @Override
     public User getUserByUsername(String username) throws EntityDoesNotExistException {
-        Optional<User> userInDb = forumBookStorage.getUsers().getList().stream().filter(user -> user.getUsername().equals(username)).findFirst();
+        Optional<User> userInDb = forumBookStorage.getUsers().getList().stream()
+            .filter(user -> user.getUsername().equals(username)).findFirst();
         if (!userInDb.isPresent()) {
             throw new EntityDoesNotExistException("Username does not exist");
         }

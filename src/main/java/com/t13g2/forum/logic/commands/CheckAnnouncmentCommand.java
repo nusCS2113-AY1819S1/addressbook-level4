@@ -2,13 +2,13 @@ package com.t13g2.forum.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.awt.EventQueue;
+import javax.swing.JOptionPane;
+
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.storage.forum.UnitOfWork;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * Allow user to check if there is any announcement

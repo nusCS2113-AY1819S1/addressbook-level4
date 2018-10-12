@@ -15,7 +15,8 @@ public class FileStorage implements IStorage {
     @Override
     public void write(Object object) {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(StorageMapping.getInstance().getFileName(object.getClass()));
+            FileOutputStream fileOutputStream = new FileOutputStream(StorageMapping.getInstance()
+                .getFileName(object.getClass()));
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(object);
             objectOutputStream.close();

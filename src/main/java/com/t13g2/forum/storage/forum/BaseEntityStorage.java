@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *
+ * @param <T>
+ */
 public abstract class BaseEntityStorage<T> implements Serializable {
     protected boolean dirty;
     protected List<T> list = new ArrayList<>();

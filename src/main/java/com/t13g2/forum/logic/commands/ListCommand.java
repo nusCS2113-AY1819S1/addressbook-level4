@@ -4,9 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.model.Model;
-import com.t13g2.forum.model.forum.Announcement;
-import com.t13g2.forum.storage.forum.IAnnouncementRepository;
-import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
  * Lists all persons in the address book to the user.

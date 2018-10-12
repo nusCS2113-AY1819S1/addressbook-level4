@@ -1,5 +1,8 @@
 package com.t13g2.forum.storage.forum;
 
+/**
+ *
+ */
 public class ForumBookStorage implements IForumBookStorage {
     protected IStorage underlyingStorage;
 
@@ -11,7 +14,7 @@ public class ForumBookStorage implements IForumBookStorage {
 
 
     public ForumBookStorage(IStorage underlyingStorage) {
-        this.underlyingStorage=underlyingStorage;
+        this.underlyingStorage = underlyingStorage;
 
         this.announcements = new AnnouncementStorage();
         this.comments = new CommentStorage();
@@ -22,6 +25,9 @@ public class ForumBookStorage implements IForumBookStorage {
         init();
     }
 
+    /**
+     *
+     */
     private void init() {
         loadAnnouncement();
         loadComment();

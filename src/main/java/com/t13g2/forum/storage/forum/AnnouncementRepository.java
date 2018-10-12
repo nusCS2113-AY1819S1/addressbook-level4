@@ -4,6 +4,9 @@ import java.util.Optional;
 
 import com.t13g2.forum.model.forum.Announcement;
 
+/**
+ *
+ */
 public class AnnouncementRepository extends BaseRepository implements IAnnouncementRepository {
     public AnnouncementRepository(IForumBookStorage forumBookStorage) {
         super(forumBookStorage);
@@ -43,7 +46,7 @@ public class AnnouncementRepository extends BaseRepository implements IAnnouncem
     @Override
     public Announcement getLatestAnnouncement() throws EntityDoesNotExistException {
         Optional<Announcement> announcement = forumBookStorage.getAnnouncements().getList().stream()
-            .min((o1, o2) -> o1.getCreated().compareTo(o2.getCreated()));
+            .min((o1, o2) -> o2.getCreated().compareTo(o1.getCreated()));
         if (!announcement.isPresent()) {
             throw new EntityDoesNotExistException("No Announcement found");
         }

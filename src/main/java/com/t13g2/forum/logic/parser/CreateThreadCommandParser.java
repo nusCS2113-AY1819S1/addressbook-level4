@@ -1,16 +1,16 @@
 package com.t13g2.forum.logic.parser;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
+
+import java.util.stream.Stream;
+
 import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.CreateThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
-
-import java.util.stream.Stream;
-
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -28,15 +28,16 @@ public class CreateThreadCommandParser implements Parser<CreateThreadCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_COMMENT_CONTENT, PREFIX_THREAD_TITLE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, CreateThreadCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateThreadCommand.MESSAGE_USAGE));
         }
 
         String moduleCode = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         String threadTitle = ParserUtil.parseThread(argMultimap.getValue(PREFIX_THREAD_TITLE).get());
         String commentContent = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT_CONTENT).get());
 
-        ForumThread forumThread = new ForumThread();//instantiate a new forum thread
-        forumThread.setTitle(threadTitle);//pass the thread title to this new forum thread
+        ForumThread forumThread = new ForumThread(); //instantiate a new forum thread
+        forumThread.setTitle(threadTitle); //pass the thread title to this new forum thread
 
         Comment comment = new Comment();
         comment.setContent(commentContent);
