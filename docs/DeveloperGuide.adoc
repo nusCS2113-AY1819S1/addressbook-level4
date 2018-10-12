@@ -864,9 +864,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* *` |user |delete the notes of a specified module |keep my local drive organized
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
-
-|`*` |user who is security-oriented |reveal only parts of the password |have an additional layer of security defense, in the event that someone else had unauthorised access to this list; the person will have to guess the remaining letters and I will be alerted.
+|`*` |user with many persons in the address book |locate a person easily |not waste time when trying to locate a contact
 
 |`*` |user who needs to arrange a time with a group of other users frequently |import other users’ ‘busy time slots |have a centralised record of our schedules for convenience to arrange a common time
 
