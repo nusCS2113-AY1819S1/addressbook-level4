@@ -16,7 +16,7 @@ import seedu.planner.model.record.Record;
  * An Immutable FinancialPlanner that is serializable to XML format
  */
 @XmlRootElement(name = "financialplanner")
-public class XmlSerializableFinancialPlanner {
+public class XmlSerializableFinancialPlanner extends XmlSerializableClass<FinancialPlanner> {
 
     public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
 
