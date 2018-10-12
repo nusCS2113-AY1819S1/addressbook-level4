@@ -14,6 +14,7 @@ import seedu.planner.commons.events.storage.DataSavingExceptionEvent;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
+import seedu.planner.model.summary.SummaryMap;
 
 /**
  * Manages storage of FinancialPlanner data in local storage.
@@ -79,7 +80,6 @@ public class StorageManager extends ComponentManager implements Storage {
         financialPlannerStorage.saveFinancialPlanner(financialPlanner, filePath);
     }
 
-
     @Override
     @Subscribe
     public void handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent event) {
@@ -91,4 +91,26 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    // ================ SummaryMap storage methods ==============================
+
+    @Override
+    public Path getSummaryMapFilePath() {
+        return financialPlannerStorage.getSummaryMapFilePath();
+    }
+
+    @Override
+    public Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException {
+        return null;
+    }
+
+    @Override
+    public Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException, IOException {
+        return null;
+    }
+
+    @Override
+    public void saveSummaryMap(SummaryMap summaryMap) throws IOException {}
+
+    @Override
+    public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {}
 }

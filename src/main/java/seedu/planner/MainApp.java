@@ -63,7 +63,8 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
         FinancialPlannerStorage financialPlannerStorage =
-                new XmlFinancialPlannerStorage(userPrefs.getFinancialPlannerFilePath());
+                new XmlFinancialPlannerStorage(userPrefs.getFinancialPlannerFilePath(),
+                        userPrefs.getSummaryMapFilePath());
         storage = new StorageManager(financialPlannerStorage, userPrefsStorage);
 
         initLogging(config);

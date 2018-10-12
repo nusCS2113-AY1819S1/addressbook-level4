@@ -14,6 +14,7 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.commons.util.FileUtil;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.summary.SummaryMap;
 
 /**
  * A class to access FinancialPlanner data stored as an xml file on the hard disk.
@@ -22,19 +23,25 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlFinancialPlannerStorage.class);
 
-    private Path filePath;
+    private Path financialPlannerFilePath;
+    private Path summaryMapFilePath;
 
-    public XmlFinancialPlannerStorage(Path filePath) {
-        this.filePath = filePath;
+    public XmlFinancialPlannerStorage(Path financialPlannerFilePath, Path summaryMapFilePath) {
+        this.financialPlannerFilePath = financialPlannerFilePath;
+        this.summaryMapFilePath = summaryMapFilePath;
     }
 
     public Path getFinancialPlannerFilePath() {
-        return filePath;
+        return financialPlannerFilePath;
     }
+
+    public Path getSummaryMapFilePath() { return summaryMapFilePath; }
+
+    // ===================== Record List Storage methods ======================================
 
     @Override
     public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
-        return readFinancialPlanner(filePath);
+        return readFinancialPlanner(financialPlannerFilePath);
     }
 
     /**
@@ -63,7 +70,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     @Override
     public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
-        saveFinancialPlanner(financialPlanner, filePath);
+        saveFinancialPlanner(financialPlanner, financialPlannerFilePath);
     }
 
     /**
@@ -78,4 +85,31 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableFinancialPlanner(financialPlanner));
     }
 
+    // ===================== Summary Map Storage methods ======================================
+
+    @Override
+    public Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException {
+        return null;
+    }
+
+    /**
+     * Similar to {@link #readSummaryMap()} ()}
+     * @param filePath location of the data. Cannot be null
+     * @throws DataConversionException if the file is not in the correct format.
+     */
+    public Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException,
+            FileNotFoundException {
+        return null;
+    }
+
+    @Override
+    public void saveSummaryMap(SummaryMap summaryMap) throws IOException {
+    }
+
+    /**
+     * Similar to {@link #saveSummaryMap(SummaryMap)}}
+     * @param filePath location of the data. Cannot be null
+     */
+    public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {
+    }
 }

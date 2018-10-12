@@ -2,16 +2,12 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashMap;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-
-import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
-import seedu.planner.model.summary.Summary;
-import seedu.planner.model.summary.SummaryHashMap;
+import seedu.planner.model.summary.SummaryMap;
 
 /**
  * Wraps all data at the planner-book level
@@ -20,7 +16,7 @@ import seedu.planner.model.summary.SummaryHashMap;
 public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     private final UniqueRecordList records;
-    private SummaryHashMap summaryMap = new SummaryHashMap();
+    private SummaryMap summaryMap = new SummaryMap();
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication

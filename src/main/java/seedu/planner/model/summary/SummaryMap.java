@@ -10,11 +10,11 @@ import seedu.planner.model.record.exceptions.RecordNotFoundException;
  * This object represents the in memory model of a HashMap containing {@Summary} as values and
  * retrieved using {@Date} as keys. It supports the usual addition, deletion, editing and find operations
  */
-public class SummaryHashMap {
+public class SummaryMap {
 
     private HashMap<Date, Summary> summaryMap;
 
-    public SummaryHashMap() {
+    public SummaryMap() {
         summaryMap = new HashMap();
     }
 

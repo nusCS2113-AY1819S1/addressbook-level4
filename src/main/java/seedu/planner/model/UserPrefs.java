@@ -12,7 +12,9 @@ import seedu.planner.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
+
     private Path financialPlannerFilePath = Paths.get("data" , "financialplanner.xml");
+    private Path summaryMapFilePath = Paths.get("data", "summarymap.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -36,6 +38,14 @@ public class UserPrefs {
 
     public void setFinancialPlannerFilePath(Path financialPlannerFilePath) {
         this.financialPlannerFilePath = financialPlannerFilePath;
+    }
+
+    public Path getSummaryMapFilePath() {
+        return summaryMapFilePath;
+    }
+
+    public void setSummaryMapFilePath(Path summaryMapFilePath) {
+        this.summaryMapFilePath = summaryMapFilePath;
     }
 
     @Override
