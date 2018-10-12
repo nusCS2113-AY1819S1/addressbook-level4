@@ -132,6 +132,10 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         return records.asUnmodifiableObservableList();
     }
 
+    // TODO make it return a read only map
+    @Override
+    public SummaryMap getSummaryMap() { return summaryMap; }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

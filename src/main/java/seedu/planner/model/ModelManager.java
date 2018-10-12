@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
+import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.model.record.Record;
 
 /**
@@ -51,10 +52,19 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedFinancialPlanner;
     }
 
+    //=========== Event management methods =========================================================
+
     /** Raises an event to indicate the model has changed */
     private void indicateFinancialPlannerChanged() {
         raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
     }
+
+    /** Raises an event to indicate the summary map has changed */
+    private void indicateSummaryMapChanged() {
+        raise(new SummaryMapChangedEvent(versionedFinancialPlanner.getSummaryMap()));
+    }
+
+    //=========== Financial planner standard operations =============================================================
 
     @Override
     public boolean hasRecord(Record record) {
@@ -68,6 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.removeRecord(target);
         versionedFinancialPlanner.removeRecordFromSummary(target);
         indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
     }
 
     @Override
@@ -77,6 +88,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.addRecordToSummary(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
     }
 
     @Override
@@ -86,6 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.updateRecord(target, editedRecord);
         versionedFinancialPlanner.updateSummary(target, editedRecord);
         indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
     }
 
     //=========== Filtered Record List Accessors =============================================================

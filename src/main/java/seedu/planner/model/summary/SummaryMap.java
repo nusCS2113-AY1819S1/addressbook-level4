@@ -51,6 +51,10 @@ public class SummaryMap {
         add(target);
     }
 
+    public int size() {
+        return summaryMap.size();
+    }
+
     private boolean isDatePresentInMap(Date date) {
         return summaryMap.containsKey(date);
     }

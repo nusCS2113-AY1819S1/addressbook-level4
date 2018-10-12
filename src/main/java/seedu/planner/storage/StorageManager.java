@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
+import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.storage.DataSavingExceptionEvent;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
@@ -113,4 +114,11 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {}
+
+    @Override
+    @Subscribe
+    public void handleSummaryMapChangedEvent(SummaryMapChangedEvent event) {
+        // TODO: does nothing
+        return;
+    }
 }
