@@ -16,7 +16,6 @@ public class TodoList implements ReadOnlyTodoList {
 
     private final UniqueTaskList tasks = new UniqueTaskList();
 
-    
     public TodoList() {}
 
     /**
