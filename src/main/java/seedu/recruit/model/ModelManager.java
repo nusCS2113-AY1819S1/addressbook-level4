@@ -16,6 +16,7 @@ import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
+import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
@@ -28,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedCompanyBook versionedCompanyBook;
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
+    private final FilteredList<JobOffer> filteredJobs;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.
@@ -42,6 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook = new VersionedCompanyBook(companyBook);
         filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
+        filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
     }
 
     public ModelManager() {
@@ -268,6 +271,21 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(companyName, jobOffer);
         versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
         indicateCompanyBookChanged();
+    }
+
+    /**
+     * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
+     * {@code versionedCompanyBook}
+     */
+    @Override
+    public ObservableList<JobOffer> getFilteredCompanyJobList() {
+        return FXCollections.unmodifiableObservableList(filteredJobs);
+    }
+
+    @Override
+    public void updateFilteredCompanyJobList(Predicate<JobOffer> predicate) {
+        requireNonNull(predicate);
+        filteredJobs.setPredicate(predicate);
     }
 
 }

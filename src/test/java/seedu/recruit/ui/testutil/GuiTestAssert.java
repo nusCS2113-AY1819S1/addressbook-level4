@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
+import guitests.guihandles.CandidateCardHandle;
+import guitests.guihandles.CandidateDetailsPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import seedu.recruit.model.candidate.Candidate;
 
@@ -17,7 +17,7 @@ public class GuiTestAssert {
     /**
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
      */
-    public static void assertCardEquals(PersonCardHandle expectedCard, PersonCardHandle actualCard) {
+    public static void assertCardEquals(CandidateCardHandle expectedCard, CandidateCardHandle actualCard) {
         assertEquals(expectedCard.getId(), actualCard.getId());
         assertEquals(expectedCard.getAddress(), actualCard.getAddress());
         assertEquals(expectedCard.getEmail(), actualCard.getEmail());
@@ -29,7 +29,7 @@ public class GuiTestAssert {
     /**
      * Asserts that {@code actualCard} displays the details of {@code expectedCandidate}.
      */
-    public static void assertCardDisplaysPerson(Candidate expectedCandidate, PersonCardHandle actualCard) {
+    public static void assertCardDisplaysPerson(Candidate expectedCandidate, CandidateCardHandle actualCard) {
         assertEquals(expectedCandidate.getName().fullName, actualCard.getName());
         assertEquals(expectedCandidate.getPhone().value, actualCard.getPhone());
         assertEquals(expectedCandidate.getEmail().value, actualCard.getEmail());
@@ -39,29 +39,29 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code candidates} correctly and
+     * Asserts that the list in {@code candidateDetailsPanelHandle} displays the details of {@code candidates} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, Candidate... candidates) {
+    public static void assertListMatching(CandidateDetailsPanelHandle candidateDetailsPanelHandle, Candidate... candidates) {
         for (int i = 0; i < candidates.length; i++) {
-            personListPanelHandle.navigateToCard(i);
-            assertCardDisplaysPerson(candidates[i], personListPanelHandle.getPersonCardHandle(i));
+            candidateDetailsPanelHandle.navigateToCard(i);
+            assertCardDisplaysPerson(candidates[i], candidateDetailsPanelHandle.getCandidateCardHandle(i));
         }
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code candidates} correctly and
+     * Asserts that the list in {@code candidateDetailsPanelHandle} displays the details of {@code candidates} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Candidate> candidates) {
-        assertListMatching(personListPanelHandle, candidates.toArray(new Candidate[0]));
+    public static void assertListMatching(CandidateDetailsPanelHandle candidateDetailsPanelHandle, List<Candidate> candidates) {
+        assertListMatching(candidateDetailsPanelHandle, candidates.toArray(new Candidate[0]));
     }
 
     /**
-     * Asserts the size of the list in {@code personListPanelHandle} equals to {@code size}.
+     * Asserts the size of the list in {@code candidateDetailsPanelHandle} equals to {@code size}.
      */
-    public static void assertListSize(PersonListPanelHandle personListPanelHandle, int size) {
-        int numberOfPeople = personListPanelHandle.getListSize();
+    public static void assertListSize(CandidateDetailsPanelHandle candidateDetailsPanelHandle, int size) {
+        int numberOfPeople = candidateDetailsPanelHandle.getListSize();
         assertEquals(size, numberOfPeople);
     }
 
