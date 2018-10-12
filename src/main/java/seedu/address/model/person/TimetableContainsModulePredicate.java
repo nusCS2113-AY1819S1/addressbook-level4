@@ -1,4 +1,5 @@
 package seedu.address.model.person;
+
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.tag.Tag;
 
@@ -16,17 +17,18 @@ public class TimetableContainsModulePredicate implements Predicate<Person> {
     public boolean test(Person person) {
         for (Tag module : person.getTags()) {
             for (String check : keywords) {
-                check="["+check+"]";
+                check = "[" + check + "]";
                 if (check.equalsIgnoreCase(module.toString()))
                     return true;
             }
         }
         return false;
     }
-        @Override
-        public boolean equals (Object other){
-            return other == this // short circuit if same object
-                    || (other instanceof seedu.address.model.person.TimetableContainsModulePredicate // instanceof handles nulls
-                    && keywords.equals(((seedu.address.model.person.TimetableContainsModulePredicate) other).keywords)); // state check
-        }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof seedu.address.model.person.TimetableContainsModulePredicate // instanceof handles nulls
+                && keywords.equals(((seedu.address.model.person.TimetableContainsModulePredicate) other).keywords)); // state check
     }
+}
