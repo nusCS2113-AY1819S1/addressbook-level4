@@ -42,10 +42,10 @@ public class XmlAdaptedSummary {
      * @param summary
      */
     public XmlAdaptedSummary(Summary summary) {
-        this.date = summary.getDate().toString();
-        this.totalExpense = summary.getTotalExpense().toString();
-        this.totalIncome = summary.getTotalIncome().toString();
-        this.total = summary.getTotal().toString();
+        this.date = summary.getDate().value;
+        this.totalExpense = summary.getTotalExpense().value;
+        this.totalIncome = summary.getTotalIncome().value;
+        this.total = summary.getTotal().value;
     }
 
     @Override
