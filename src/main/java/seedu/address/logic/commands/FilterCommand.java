@@ -7,17 +7,23 @@ import seedu.address.model.person.TimetableContainsModulePredicate;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Finds and lists all persons in address book who has any of the modules or time slots inputted.
+ * Keyword matching is case insensitive.
+ */
 public class FilterCommand extends Command {
 
-    public static final String COMMAND_WORD ="filter";
+    public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Filters the list to all the people who take the modules inputted."
-            +"Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            +"Example: "+ COMMAND_WORD + " CS2101 CS2113";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "Filters the list to all the people who take the modules "
+            + "inputted." + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " CS2101 CS2113";
 
     private final TimetableContainsModulePredicate predicate;
 
-    public FilterCommand(TimetableContainsModulePredicate predicate){this.predicate = predicate;}
+    public FilterCommand(TimetableContainsModulePredicate predicate) {
+        this.predicate = predicate;
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
