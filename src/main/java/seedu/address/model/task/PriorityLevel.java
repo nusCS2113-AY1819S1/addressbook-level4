@@ -37,7 +37,6 @@ public class PriorityLevel {
         }
     }
 
-
     @Override
     public String toString() {
         return priorityLevel;

@@ -1,15 +1,12 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
-import java.util.Set;
-
-import seedu.address.model.person.Task;
-import seedu.address.model.tag.Tag;
+import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.model.task.Task;
 
 /**
  * A utility class for Task.
@@ -20,27 +17,25 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code task}.
      */
     public static String getAddCommand(Task task) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(task);
+        return AddTaskCommand.COMMAND_WORD + " " + getTaskDetails(task);
     }
 
     /**
      * Returns the part of command string for the given {@code task}'s details.
      */
-    public static String getPersonDetails(Task task) {
+    public static String getTaskDetails(Task task) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + task.getName().fullName + " ");
-        sb.append(PREFIX_PHONE + task.getPhone().value + " ");
-        sb.append(PREFIX_EMAIL + task.getEmail().value + " ");
-        sb.append(PREFIX_ADDRESS + task.getAddress().value + " ");
-        task.getTags().stream().forEach(
-            s -> sb.append(PREFIX_TAG + s.tagName + " ")
-        );
+        sb.append(PREFIX_DEADLINE + task.getDeadline() + " ");
+        sb.append(PREFIX_TITLE + task.getTitle() + " ");
+        sb.append(PREFIX_DESCRIPTION + task.getDescription() + " ");
+        sb.append(PREFIX_PRIORITY + task.getPriorityLevel().priorityLevel + " ");
         return sb.toString();
     }
 
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
+    /*
     public static String getEditPersonDescriptorDetails(EditPersonDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
@@ -57,4 +52,5 @@ public class PersonUtil {
         }
         return sb.toString();
     }
+    */
 }
