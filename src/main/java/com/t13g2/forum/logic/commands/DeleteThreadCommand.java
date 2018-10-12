@@ -7,9 +7,6 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.ForumThread;
-import com.t13g2.forum.model.forum.Module;
-import com.t13g2.forum.storage.forum.UnitOfWork;
-import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
@@ -23,9 +20,9 @@ import com.t13g2.forum.storage.forum.UnitOfWork;
 public class DeleteThreadCommand extends Command {
     public static final String COMMAND_WORD = "deleteThread";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a certain thread "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Delete a certain thread \n"
         + "Parameters: "
-        + PREFIX_THREAD_ID + "THREAD ID "
+        + PREFIX_THREAD_ID + "THREAD ID \n"
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_THREAD_ID + "1";
 
@@ -50,20 +47,21 @@ public class DeleteThreadCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            try {
+//        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            try(UnitOfWork unitOfWork = new UnitOfWork()) {
                 unitOfWork.getForumThreadRepository().deleteThread(ThreadId);//delete the thread according to the ThreadId from the memory repository
                 unitOfWork.commit();//update to local database
             } catch (Exception e) {
                 e.printStackTrace();
                 throw new CommandException(MESSAGE_INVALID_THREAD_ID);
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         String MESSAGE = "\n"
                 + "Thread ID: " + ThreadId + "\n"
                 + "Thread Title: " + threadTitle + "\n";
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE));
     }
 

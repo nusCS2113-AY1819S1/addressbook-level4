@@ -22,21 +22,6 @@ public class ListCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            unitOfWork.getAnnouncementRepository().addAnnouncement(new Announcement("a", "b"));
-            unitOfWork.commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            IAnnouncementRepository announcementRepository = unitOfWork.getAnnouncementRepository();
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -1,7 +1,6 @@
 package com.t13g2.forum.logic.parser;
 
 import com.t13g2.forum.commons.core.Messages;
-import com.t13g2.forum.logic.commands.AddCommand;
 import com.t13g2.forum.logic.commands.CreateThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 import com.t13g2.forum.model.forum.Comment;
@@ -29,7 +28,7 @@ public class CreateThreadCommandParser implements Parser<CreateThreadCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_COMMENT_CONTENT, PREFIX_THREAD_TITLE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, CreateThreadCommand.MESSAGE_USAGE));
         }
 
         String moduleCode = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE_CODE).get());
