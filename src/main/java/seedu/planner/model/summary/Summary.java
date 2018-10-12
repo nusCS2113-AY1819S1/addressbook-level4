@@ -94,9 +94,17 @@ public class Summary {
         total = new MoneyFlow(newTotalString);
     }
 
-
-
     private boolean isExpense(MoneyFlow money) {
         return money.toDouble() < 0;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return this == other // short circuit if same object
+                || (other instanceof Summary // instanceof handles nulls
+                    && date.equals(((Summary) other).date)
+                    && totalExpense.equals(((Summary) other).totalExpense)
+                    && totalIncome.equals(((Summary) other).totalIncome)
+                    && total.equals(((Summary) other).total));
     }
 }

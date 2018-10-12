@@ -42,4 +42,17 @@ public class XmlSerializableSummaryMap extends XmlSerializableClass<SummaryMap> 
     @Override
     public SummaryMap toModelType() { return null;
     }
+
+    //TODO: change this to follow the others
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof XmlSerializableSummaryMap)) {
+            return false;
+        }
+        return summaryMap.equals(((XmlSerializableSummaryMap) other).summaryMap);
+    }
 }

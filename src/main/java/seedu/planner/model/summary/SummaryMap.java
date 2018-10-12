@@ -63,4 +63,11 @@ public class SummaryMap {
     private boolean isDatePresentInMap(Date date) {
         return summaryMap.containsKey(date);
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof SummaryMap // instanceof handles nulls
+                    && summaryMap.equals(((SummaryMap) other).summaryMap));
+    }
 }
