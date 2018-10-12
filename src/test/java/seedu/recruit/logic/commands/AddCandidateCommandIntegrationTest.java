@@ -46,5 +46,4 @@ public class AddCandidateCommandIntegrationTest {
         assertCommandFailure(new AddCandidateCommand(candidateInList), model, commandHistory,
                 AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
     }
-
 }
