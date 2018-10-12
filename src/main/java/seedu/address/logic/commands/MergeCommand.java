@@ -2,8 +2,6 @@ package seedu.address.logic.commands;
 
 import seedu.address.commons.core.Messages;
 
-import java.util.HashSet;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -12,6 +10,7 @@ import seedu.address.model.tag.Tag;
 
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 
 import static java.util.Objects.requireNonNull;
 
