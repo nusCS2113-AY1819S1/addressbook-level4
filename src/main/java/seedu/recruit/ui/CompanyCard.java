@@ -5,16 +5,16 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
 
 /**
  * An UI component that displays the
  * level of education, desired job and desired salary
  * of a {@code Candidate}.
  */
-public class PersonCard extends UiPart<Region> {
+public class CompanyCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "CompanyCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -24,7 +24,7 @@ public class PersonCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on CandidateBook level 4</a>
      */
 
-    public final Candidate candidate;
+    public final Company company;
 
     @FXML
     private HBox cardPane;
@@ -33,38 +33,21 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label gender;
-    @FXML
-    private Label age;
-    @FXML
     private Label phone;
     @FXML
     private Label email;
     @FXML
     private Label address;
-    @FXML
-    private Label desired_job;
-    @FXML
-    private Label education;
-    @FXML
-    private Label salary;
-    @FXML
-    private FlowPane tags;
 
-    public PersonCard(Candidate candidate, int displayedIndex) {
+
+    public CompanyCard(Company company, int displayedIndex) {
         super(FXML);
-        this.candidate = candidate;
+        this.company = company;
         id.setText(displayedIndex + ". ");
-        name.setText(candidate.getName().fullName);
-        //gender.setText(candidate.getGender().value);
-        //age.setText(candidate.getAge().value);
-        //phone.setText(candidate.getPhone().value);
-        //email.setText(candidate.getEmail().value);
-        //address.setText(candidate.getAddress().value);
-        desired_job.setText(candidate.getJob().value);
-        education.setText(candidate.getEducation().value);
-        salary.setText(candidate.getSalary().value);
-        candidate.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        name.setText(company.getCompanyName().value);
+        phone.setText(company.getPhone().value);
+        email.setText(company.getEmail().value);
+        address.setText(company.getAddress().value);
     }
 
     @Override
@@ -75,13 +58,13 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof CompanyCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        CompanyCard card = (CompanyCard) other;
         return id.getText().equals(card.id.getText())
-                && candidate.equals(card.candidate);
+                && company.equals(card.company);
     }
 }
