@@ -67,7 +67,6 @@ public class DeleteCommandByDateEntryTest {
             CommandTestUtil.assertCommandFailure(
                     deleteCommandByDateEntry, model, commandHistory,
                     Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
-
         }
     }
 

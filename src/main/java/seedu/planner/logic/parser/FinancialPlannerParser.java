@@ -98,11 +98,6 @@ public class FinancialPlannerParser {
         case LimitCommand.COMMAND_WORD:
             return new LimitCommandParser().parse(arguments);
 
-        /*
-        case SummaryCommand.COMMAND_WORD:
-            return new SummaryCommandParser().parse(arguments);
-        */
-
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
