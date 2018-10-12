@@ -29,12 +29,12 @@ public class EmailSelectRecipientsCommand extends Command {
             emailUtil.setRecipients(model.getFilteredCandidateList());
             emailUtil.setAreRecipientsCandidates(true);
         } else {
-            emailUtil.setRecipients(model.getFilteredCompanyList());
+            emailUtil.setRecipients(model.getFilteredCompanyJobList());
             emailUtil.setAreRecipientsCandidates(false);
         }
 
         model.setEmailUtil(emailUtil);
         LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(EmailSelectContentsCommand.COMMAND_WORD);
+        return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
     }
 }

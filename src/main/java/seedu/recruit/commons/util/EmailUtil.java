@@ -50,26 +50,10 @@ public class EmailUtil {
     private String subject;
     private String bodyText;
     public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
-    private static Gmail service;
-    static {
-        try {
-            service = init();
-        } catch (IOException | GeneralSecurityException e) {
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Getters and Setters
      */
-    public static Gmail getService() {
-        return service;
-    }
-
-    public static void setService(Gmail service) {
-        EmailUtil.service = service;
-    }
-
     public ObservableList<?> getRecipients() {
         return recipients;
     }

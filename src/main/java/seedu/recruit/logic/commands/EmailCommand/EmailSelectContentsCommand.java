@@ -24,13 +24,13 @@ public class EmailSelectContentsCommand extends Command {
         EmailUtil emailUtil = model.getEmailUtil();
 
         if(emailUtil.isAreRecipientsCandidates()) {
-            emailUtil.setContents(model.getFilteredJobList());
+            emailUtil.setContents(model.getFilteredCompanyJobList());
         } else {
             emailUtil.setContents(model.getFilteredCandidateList());
         }
 
         model.setEmailUtil(emailUtil);
-        LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(EmailSendCommand.COMMAND_WORD);
+        LogicManager.setLogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
+        return new CommandResult(EmailSendCommand.MESSAGE_USAGE);
     }
 }

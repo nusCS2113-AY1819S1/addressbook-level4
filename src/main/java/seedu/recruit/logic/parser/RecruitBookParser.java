@@ -19,10 +19,10 @@ import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.DeleteCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
-import seedu.recruit.logic.commands.EmailCommand.EmailCommand;
 import seedu.recruit.logic.commands.EmailCommand.EmailInitialiseCommand;
 import seedu.recruit.logic.commands.EmailCommand.EmailSelectContentsCommand;
 import seedu.recruit.logic.commands.EmailCommand.EmailSelectRecipientsCommand;
+import seedu.recruit.logic.commands.EmailCommand.EmailSendCommand;
 import seedu.recruit.logic.commands.ExitCommand;
 import seedu.recruit.logic.commands.FindCommand;
 import seedu.recruit.logic.commands.HelpCommand;
@@ -32,9 +32,7 @@ import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.logic.commands.UndoCommand;
 
-
 import seedu.recruit.logic.parser.exceptions.ParseException;
-import seedu.recruit.model.Model;
 
 /**
  * Parses user input.
@@ -80,26 +78,53 @@ public class RecruitBookParser {
 
                 case ListCommand.COMMAND_WORD:
                     return new ListCommand();
+
+                case EmailSelectContentsCommand.COMMAND_WORD:
+                    return new EmailSelectRecipientsCommand();
+
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
             } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
                     && emailUtil.isAreRecipientsCandidates()) {
                 switch (commandWord) {
 
-                    case FindCommand.COMMAND_WORD:
-                        return new FindCommandParser().parse(arguments);
+                case FindCommand.COMMAND_WORD:
+                    return new FindCommandParser().parse(arguments);
 
-                    case ListCommand.COMMAND_WORD:
-                        return new ListCommand();
+                case ListCommand.COMMAND_WORD:
+                    return new ListCommand();
+
+                case EmailSelectContentsCommand.COMMAND_WORD:
+                    return new EmailSelectContentsCommand();
+
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
             } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
                     && !emailUtil.isAreRecipientsCandidates()) {
                 switch (commandWord) {
 
-                    case FindCommand.COMMAND_WORD:
-                        return new FindCommandParser().parse(arguments);
+                case FindCommand.COMMAND_WORD:
+                    return new FindCommandParser().parse(arguments);
 
-                    case ListCommand.COMMAND_WORD:
-                        return new ListCommand();
+                case ListCommand.COMMAND_WORD:
+                    return new ListCommand();
+
+                case EmailSelectContentsCommand.COMMAND_WORD:
+                    return new EmailSelectContentsCommand();
+
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+                }
+            } else if (state.nextCommand.equals(EmailSendCommand.COMMAND_LOGIC_STATE)) {
+                switch(commandWord) {
+
+                case EmailSendCommand.COMMAND_WORD:
+                    return new EmailSendCommand();
+
+                default:
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
             } else {
                 switch (state.nextCommand) {
@@ -109,6 +134,7 @@ public class RecruitBookParser {
 
                 default:
                     LogicManager.setLogicState("primary");
+                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
                 }
             }
         } else {
