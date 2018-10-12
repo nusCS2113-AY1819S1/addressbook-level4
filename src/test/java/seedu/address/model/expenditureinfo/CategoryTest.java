@@ -10,12 +10,12 @@ import seedu.address.testutil.Assert;
 public class CategoryTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void constructorNullThrowsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Category(null));
     }
 
     @Test
-    public void constructor_invalidCategory_throwsIllegalArgumentException() {
+    public void constructorInvalidCategoryThrowsIllegalArgumentException() {
         String invalidCategory = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Category(invalidCategory));
     }

@@ -10,12 +10,12 @@ import seedu.address.testutil.Assert;
 public class MoneyTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
+    public void constructorNullThrowsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Money(null));
     }
 
     @Test
-    public void constructor_invalidMoney_throwsIllegalArgumentException() {
+    public void constructorInvalidMoneyThrowsIllegalArgumentException() {
         String invalidMoney = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Money(invalidMoney));
     }
