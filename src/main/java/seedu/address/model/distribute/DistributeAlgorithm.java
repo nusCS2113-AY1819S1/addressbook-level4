@@ -8,9 +8,7 @@ import java.util.LinkedList;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.Parser;
 import seedu.address.model.Model;
-import seedu.address.model.person.Gender;
 import seedu.address.model.person.Person;
 
 public class DistributeAlgorithm {
@@ -93,28 +91,52 @@ public class DistributeAlgorithm {
         }
 
         //creates 7 groups in this for loop
-        groupArrayList.ensureCapacity(index);
-        ArrayList<Person> addPerson = new ArrayList<>();
-        while(maleLinkList.size() !=0 || femaleLinkList.size() !=0) {
-            for (int i = 0; i < index; i++) {
-                if (maleLinkList.size() > 0) {
-                    addPerson.add(maleLinkList.getLast());
-                    groupArrayList.add(i,addPerson);
+        //groupArrayList.ensureCapacity(index);
+        int loopCounter = 0;
+        int num = 0;
+        while(maleLinkList.size()!=0 || femaleLinkList.size()!=0) {
+            if(loopCounter%index == 0) num =0;
+            while (num < index) {
+                if(maleLinkList.size()==0 && femaleLinkList.size()==0) break;
+                //iterate from 0 to index to add once
+                ArrayList<Person> temp = new ArrayList<>();
+
+                if(maleLinkList.size()!=0){
+                    if(loopCounter>=index){
+                        temp = groupArrayList.get(num);
+                        temp.add(maleLinkList.getLast());
+                        groupArrayList.remove(num);
+                        groupArrayList.add(num,temp);
+                    }else{
+                        temp.add(maleLinkList.getLast());
+                        groupArrayList.add(num,temp);
+                    }
                     maleLinkList.removeLast();
-                } else if (femaleLinkList.size() > 0) {
-                    addPerson.add(femaleLinkList.getLast());
-                    groupArrayList.add(i,addPerson);
+
+                }else if(femaleLinkList.size()!=0){
+                    if(loopCounter>=index){
+                        temp = groupArrayList.get(num);
+                        temp.add(femaleLinkList.getLast());
+                        groupArrayList.remove(num);
+                        groupArrayList.add(num,temp);
+                    }else{
+                        temp.add(femaleLinkList.getLast());
+                        groupArrayList.add(num,temp);
+                    }
                     femaleLinkList.removeLast();
                 }
+                num++;
+                loopCounter++;
             }
         }
 
         for(int i=0;i<groupArrayList.size();i++){
-            System.out.println(groupArrayList.get(i));
+            System.out.println( "Group : " + i);
+            for(int j=0;j<groupArrayList.get(i).size();j++){
+                System.out.println(groupArrayList.get(i).get(j));
+            }
         }
-
-//        System.out.println(maleLinkList);
-//        System.out.println(femaleLinkList);
+        groupArrayList.clear();
     }
 
     private void StrictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
