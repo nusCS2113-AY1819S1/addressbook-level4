@@ -25,6 +25,22 @@ public class Summary {
         } total = money;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public MoneyFlow getTotalExpense() {
+        return totalExpense;
+    }
+
+    public MoneyFlow getTotalIncome() {
+        return totalIncome;
+    }
+
+    public MoneyFlow getTotal() {
+        return total;
+    }
+
     /**
      * Adds the record's moneyflow to totalExpense, totalIncome or total\
      */
@@ -77,6 +93,8 @@ public class Summary {
         }
         total = new MoneyFlow(newTotalString);
     }
+
+
 
     private boolean isExpense(MoneyFlow money) {
         return money.toDouble() < 0;

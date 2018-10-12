@@ -110,15 +110,24 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveSummaryMap(SummaryMap summaryMap) throws IOException {}
+    public void saveSummaryMap(SummaryMap summaryMap) throws IOException {
+        saveSummaryMap(summaryMap, financialPlannerStorage.getSummaryMapFilePath());
+    }
 
     @Override
-    public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {}
+    public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        financialPlannerStorage.saveSummaryMap(summaryMap, filePath);
+    }
 
     @Override
     @Subscribe
     public void handleSummaryMapChangedEvent(SummaryMapChangedEvent event) {
-        // TODO: does nothing
-        return;
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveSummaryMap(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
     }
 }

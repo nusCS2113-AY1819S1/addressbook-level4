@@ -16,6 +16,7 @@ import seedu.planner.commons.util.FileUtil;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xml_jaxb.XmlSerializableFinancialPlanner;
+import seedu.planner.storage.xml_jaxb.XmlSerializableSummaryMap;
 
 /**
  * A class to access FinancialPlanner data stored as an xml file on the hard disk.
@@ -105,6 +106,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     @Override
     public void saveSummaryMap(SummaryMap summaryMap) throws IOException {
+        saveSummaryMap(summaryMap, summaryMapFilePath);
     }
 
     /**
@@ -112,5 +114,10 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
      * @param filePath location of the data. Cannot be null
      */
     public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {
+        requireNonNull(summaryMap);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableSummaryMap(summaryMap));
     }
 }

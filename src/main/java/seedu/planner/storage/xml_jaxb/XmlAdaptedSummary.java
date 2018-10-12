@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import seedu.planner.model.summary.Summary;
+
 /**
  * A JAXB-friendly version of the {@code Summary}
  */
@@ -33,6 +35,17 @@ public class XmlAdaptedSummary {
         this.totalExpense = totalExpense;
         this.totalIncome = totalIncome;
         this.total = total;
+    }
+
+    /**
+     * Constructs an {@XmlAdaptedSummary} with the given summary object
+     * @param summary
+     */
+    public XmlAdaptedSummary(Summary summary) {
+        this.date = summary.getDate().toString();
+        this.totalExpense = summary.getTotalExpense().toString();
+        this.totalIncome = summary.getTotalIncome().toString();
+        this.total = summary.getTotal().toString();
     }
 
     @Override

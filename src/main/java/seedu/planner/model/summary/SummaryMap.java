@@ -1,6 +1,7 @@
 package seedu.planner.model.summary;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
@@ -53,6 +54,10 @@ public class SummaryMap {
 
     public int size() {
         return summaryMap.size();
+    }
+
+    public Map<Date, Summary> getMap() {
+        return summaryMap;
     }
 
     private boolean isDatePresentInMap(Date date) {
