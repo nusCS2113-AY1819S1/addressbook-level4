@@ -28,9 +28,9 @@ public class CreateThreadCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a thread to the forum book. "
             + "Parameters: "
-            + PREFIX_MODULE_CODE + "MODULE "
-            + PREFIX_THREAD_TITLE + "THREAD "
-            + "[" + PREFIX_COMMENT_CONTENT + "COMMENT]...\n"
+            + PREFIX_MODULE_CODE + "MODULE CODE "
+            + PREFIX_THREAD_TITLE + "THREAD TITILE "
+            + PREFIX_COMMENT_CONTENT + "COMMENT...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_THREAD_TITLE + "EXAM DISCUSSION "
@@ -42,7 +42,7 @@ public class CreateThreadCommand extends Command {
     private Comment comment;
 
     /**
-     * Creates a CreateThreadCommand to create the specified {@code Person}
+     * Creates a CreateThreadCommand to create the specified {@code ForumThread}
      */
     public CreateThreadCommand(String moduleCode, ForumThread forumThread, Comment comment) {
         requireNonNull(moduleCode);
