@@ -23,6 +23,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_USER_PASSWORD = new Prefix("uPass/");
     public static final Prefix PREFIX_USER_EMAIL = new Prefix("uEmail/");
     public static final Prefix PREFIX_USER_PHONE = new Prefix("uPhone/");
+    public static final Prefix PREFIX_USER_isAdmin = new Prefix("uAdmin/");
     /* Prefix for Module */
     public static final Prefix PREFIX_MODULE_TITLE = new Prefix("mTitle/");
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("mCode/");
