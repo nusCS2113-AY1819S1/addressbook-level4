@@ -1,4 +1,4 @@
-package seedu.recruit.commons.core;
+package seedu.recruit.commons.util;
 
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
@@ -14,6 +14,7 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
+import javafx.collections.ObservableList;
 
 import javax.mail.MessagingException;
 import javax.mail.Session;
@@ -28,11 +29,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
-/**
- * Functions for anything pertaining to emails
- */
-public class Email {
-     /**
+public class EmailUtil {
+    /**
      * Global instance of the scopes required by this quickstart.
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
@@ -42,6 +40,82 @@ public class Email {
     private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_COMPOSE);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
+    private static Gmail service;
+    static {
+        try {
+            service = init();
+        } catch (IOException | GeneralSecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private ObservableList<?> recipients;
+    private ObservableList<?> contents;
+    private boolean areRecipientsCandidates;
+    private String to;
+    private String subject;
+    private String bodyText;
+    public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
+
+    /**
+     * Getters and Setters
+     */
+    public static Gmail getService() {
+        return service;
+    }
+
+    public static void setService(Gmail service) {
+        EmailUtil.service = service;
+    }
+
+    public ObservableList<?> getRecipients() {
+        return recipients;
+    }
+
+    public void setRecipients(ObservableList<?> recipients) {
+        this.recipients = recipients;
+    }
+
+    public ObservableList<?> getContents() {
+        return contents;
+    }
+
+    public void setContents(ObservableList<?> contents) {
+        this.contents = contents;
+    }
+
+    public boolean isAreRecipientsCandidates() {
+        return areRecipientsCandidates;
+    }
+
+    public void setAreRecipientsCandidates(boolean areRecipientsCandidates) {
+        this.areRecipientsCandidates = areRecipientsCandidates;
+    }
+
+    public String getTo() {
+        return to;
+    }
+
+    public void setTo(String to) {
+        this.to = to;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public String getBodyText() {
+        return bodyText;
+    }
+
+    public void setBodyText(String bodyText) {
+        this.bodyText = bodyText;
+    }
+
     /**
      * Creates an authorized Credential object.
      * @param httpTransport The network HTTP Transport.
@@ -50,7 +124,7 @@ public class Email {
      */
     private static Credential getCredentials(final NetHttpTransport httpTransport) throws IOException {
         // Load client secrets.
-        InputStream in = Email.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
+        InputStream in = EmailUtil.class.getResourceAsStream(CREDENTIALS_FILE_PATH);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
         // Build flow and trigger user authorization request.
@@ -136,5 +210,4 @@ public class Email {
         message.setRaw(encodedEmail);
         return message;
     }
-
 }
