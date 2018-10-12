@@ -1,5 +1,7 @@
 package seedu.address.model.gradebook;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -8,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 @XmlRootElement(name = "gradebook")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class GradebookComponent {
 
     @XmlElement(name = "moduleCode", required = true, nillable = true)
@@ -22,10 +25,6 @@ public class GradebookComponent {
     public GradebookComponent(String moduleCode, String gradeItemName) {
         this.moduleCode = moduleCode;
         this.gradeItemName = gradeItemName;
-    }
-
-    public GradebookComponent(String moduleCode) {
-        this.moduleCode = moduleCode;
     }
 
     public String getGradeItemName() {

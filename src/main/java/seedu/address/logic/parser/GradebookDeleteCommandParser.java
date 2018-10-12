@@ -28,9 +28,9 @@ public class GradebookDeleteCommandParser {
                     GradebookDeleteCommand.MESSAGE_USAGE));
         }
 
-        String gradeItemNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
         String moduleCodeArg = argMultimap.getValue(PREFIX_GRADEBOOK_MODULE).get();
-        GradebookComponent gradebookComponent = new GradebookComponent(gradeItemNameArg, moduleCodeArg);
+        String gradeItemNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
+        GradebookComponent gradebookComponent = new GradebookComponent(moduleCodeArg, gradeItemNameArg);
         return new GradebookDeleteCommand(gradebookComponent);
     }
 
