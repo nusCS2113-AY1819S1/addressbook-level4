@@ -4,6 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
 
+import java.util.logging.Logger;
+
+import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.util.DateUtil;
 
 /**
@@ -16,11 +19,16 @@ public class Date {
             + "with dd and mm being 2 digits, and yyyy being 4 digits."
             + " Please take note that inappropriate date will result in errors, for example: 30/02/2018";
     public static final String MESSAGE_DATE_LOGICAL_CONSTRAINTS =
-            "Date should follow the modern calendar. Day parameter must fit within the constraints of each month. \n"
-            + "For e.g, February has only 28 days so the day parameter must be less than or equal to 28 if the month "
+            "Date should follow the modern calendar. "
+            + "Day parameter must fit within the constraints of each month. \n"
+            + "For e.g, February has only 28 days for the non-Leap year "
+            + "so the day parameter must be less than or equal to 28 if the month "
             + "parameter is 2.";
     public static final String DATE_VALIDATION_REGEX = "\\d{1,2}-\\d{1,2}-\\d{4}";
+
     public final String value;
+
+    private Logger logger = LogsCenter.getLogger(Date.class);
 
     private int day;
     private int month;
@@ -41,6 +49,38 @@ public class Date {
                 MESSAGE_DATE_LOGICAL_CONSTRAINTS));
     }
 
+    /**
+     * Change the (String)value to some Standard Value (follow the format dd-mm-yyyy)
+     * @return standard value Date
+     */
+    public String getStandardValue () {
+        String standardDay;
+        String standardMonth;
+        String standardYear;
+        if (day > 0 && day < 10 && String.valueOf(day).length() == 1) {
+            standardDay = "0" + String.valueOf(day);
+        } else {
+            standardDay = String.valueOf(day);
+        }
+        if (month > 0 && month < 10 && String.valueOf(month).length() == 1) {
+            standardMonth = "0" + String.valueOf(month);
+        } else {
+            standardMonth = String.valueOf(month);
+        }
+        standardYear = String.valueOf(year);
+        String standardValue =
+                String.format(standardDay + "-" + standardMonth + "-" + standardYear);
+        logger.info("Standard value is " + standardDay + "\n");
+        return standardValue;
+    }
+
+    /**
+     * Transform the Date into standard Date following the format dd-mm-yyyy
+     * @return standard Date
+     */
+    public Date getStandardDate() {
+        return new Date (getStandardValue());
+    }
     /**
      * Splits a date into the different parameters and assigns them to day,month,year
      * Format specified: dd-mm-yyyy
@@ -95,19 +135,6 @@ public class Date {
         return test.matches(DATE_VALIDATION_REGEX);
     }
 
-    @Override
-    public String toString() {
-        return value;
-    }
-
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && value.equals(((Date) other).value)); // state check
-    }
-
     /**
      * Checks whether the current object {@code Date} is later than the given {@code Date}
      * @param other
@@ -149,7 +176,10 @@ public class Date {
         return value.hashCode();
     }
 
-    // TODO: Decide as a group whether we want days/month/year to be accessed separately
+    public String getValue() {
+        return value;
+    }
+
     public int getDay() {
         return day;
     }
@@ -161,4 +191,19 @@ public class Date {
     public int getYear() {
         return year;
     }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Date // instanceof handles nulls
+                && day == ((Date) other).getDay()
+                && month == ((Date) other).getMonth()
+                && year == ((Date) other).getYear()); // state check
+    }
+
 }

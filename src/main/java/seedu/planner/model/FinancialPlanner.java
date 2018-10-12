@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
 
@@ -77,13 +78,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     /**
      * Replaces the given record {@code target} in the list with {@code editedRecord}.
      * {@code target} must exist in the financial planner.
-<<<<<<< HEAD:src/main/java/seedu/address/model/FinancialPlanner.java
      * The record identity of {@code editedRecord}
      * must not be the same as another existing record in the financial planner.
-=======
-     * The record identity of {@code editedRecord} must not be the same as another existing record
-     * in the financial planner.
->>>>>>> 936a266304811392cda80acfbf3d1820aac87fed:src/main/java/seedu/planner/model/FinancialPlanner.java
      */
     public void updateRecord(Record target, Record editedRecord) {
         requireNonNull(editedRecord);

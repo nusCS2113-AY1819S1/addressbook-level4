@@ -9,13 +9,13 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.commons.util.XmlUtil;
 
 /**
- * Stores financialplanner data in an XML file
+ * Stores any {@code XmlSerializableClass} data in an XML file
  */
 public class XmlFileStorage {
     /**
-     * Saves the given financialplanner data to the specified file.
+     * Saves the given object to the specified file.
      */
-    public static void saveDataToFile(Path file, XmlSerializableFinancialPlanner financialPlanner)
+    public static void saveDataToFile(Path file, XmlSerializableClass financialPlanner)
             throws FileNotFoundException {
         try {
             XmlUtil.saveDataToFile(file, financialPlanner);
@@ -25,12 +25,12 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns financial planner in the file or an empty financial planner
+     * Returns the {@code XmlSerializableClass} object serialized in the file or an empty object
      */
-    public static XmlSerializableFinancialPlanner loadDataFromSaveFile(Path file) throws DataConversionException,
+    public static <T> T loadDataFromSaveFile(Path file, Class<T> classToConvert) throws DataConversionException,
                                                                             FileNotFoundException {
         try {
-            return XmlUtil.getDataFromFile(file, XmlSerializableFinancialPlanner.class);
+            return XmlUtil.getDataFromFile(file, classToConvert);
         } catch (JAXBException e) {
             throw new DataConversionException(e);
         }

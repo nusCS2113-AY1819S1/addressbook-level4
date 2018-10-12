@@ -65,7 +65,7 @@ public class DeleteCommandByDateEntryTest {
                     records.get(outOfBoundIndex.getZeroBased()).getDate());
 
             CommandTestUtil.assertCommandFailure(
-                    deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
+                    deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
 
         }
     }
@@ -101,7 +101,7 @@ public class DeleteCommandByDateEntryTest {
 
         //execution failed -> address book state not added into model
         CommandTestUtil.assertCommandFailure(
-                deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
+                deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
 
         //single address book state in model -> undoCommand and redoCommand fail
         CommandTestUtil.assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);

@@ -23,25 +23,25 @@ import seedu.planner.model.record.Record;
 public class TypicalRecords {
 
     public static final Record INDO = new RecordBuilder().withName("Indo")
-            .withMoneyFlow("-5.6").withDate("25-9-2018").withTags("friends").build();
+            .withMoneyFlow("-5.6").withDate("28-2-2018").withTags("friends").build();
     public static final Record CAIFAN = new RecordBuilder().withName("caifan")
             .withMoneyFlow("-3.80").withDate("26-9-2018").withTags("owesMoney", "friends").build();
-    public static final Record WORK = new RecordBuilder().withName("Income from work").withDate("27-9-2018")
-            .withMoneyFlow("+60.0").build();
-    public static final Record ZT = new RecordBuilder().withName("Payment from ZT").withDate("25-9-2018")
-            .withMoneyFlow("+5.90").withTags("friends").build();
-    public static final Record MALA = new RecordBuilder().withName("Payment for mala").withDate("26-9-2018")
-            .withMoneyFlow("-10.50").build();
+    public static final Record WORK = new RecordBuilder().withName("Income from work")
+            .withMoneyFlow("+60.0").withDate("26-9-2018").build();
+    public static final Record ZT = new RecordBuilder().withName("Payment from ZT")
+            .withMoneyFlow("+5.90").withDate("25-9-2018").withTags("friends").build();
+    public static final Record MALA = new RecordBuilder().withName("Payment for mala")
+            .withMoneyFlow("-10.50").withDate("26-9-2018").build();
     public static final Record CHICKENRICE = new RecordBuilder().withName("Payment for chicken rice")
-            .withDate("27-9-2018").withMoneyFlow("-0.90").build();
-    public static final Record RANDOM = new RecordBuilder().withName("Random income").withDate("31-03-2018")
-            .withMoneyFlow("+14.50").build();
+            .withMoneyFlow("-0.90").withDate("27-9-2018").build();
+    public static final Record RANDOM = new RecordBuilder().withName("Random income")
+            .withMoneyFlow("+14.50").withDate("31-03-2018").build();
 
     // Manually added
-    public static final Record BURSARY = new RecordBuilder().withName("Income from bursary").withDate("26-9-2018")
-            .withMoneyFlow("+11.50").build();
-    public static final Record IDA = new RecordBuilder().withName("Payment to Lalaa").withDate("27-9-2018")
-            .withMoneyFlow("-12.30").withTags("work").build();
+    public static final Record BURSARY = new RecordBuilder().withName("Income from bursary")
+            .withMoneyFlow("+11.50").withDate("26-9-2018").build();
+    public static final Record IDA = new RecordBuilder().withName("Payment to Lalaa")
+            .withMoneyFlow("-12.30").withDate("27-9-2018").withTags("work").build();
 
     // Manually added - Record's details found in {@code CommandTestUtil}
     public static final Record AMY = new RecordBuilder().withName(VALID_NAME_AMY).withDate(VALID_DATE_AMY)

@@ -3,7 +3,9 @@ package seedu.planner.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
+import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
@@ -25,6 +27,8 @@ public class DeleteCommandByDateEntry extends Command {
 
     public static final String MESSAGE_DELETE_RECORD_SUCCESS = "Deleted all records whose date is %1$s";
 
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommandByDateEntry.class);
+
     private final Date targetDate;
 
     public DeleteCommandByDateEntry(Date targetDate) {
@@ -37,15 +41,18 @@ public class DeleteCommandByDateEntry extends Command {
         List<Record> lastShownList = model.getFilteredRecordList();
         boolean targetRecordExist = false;
         for (Record targetRecord : lastShownList) {
-            Date date = targetRecord.getDate();
-            if (date == targetDate) {
+            logger.info(String.format(
+                    "The date required is: %1$s, the date shown is %2$s\n",
+                    targetDate.getValue(), targetRecord.getDate().getValue()));
+            if (targetRecord.isSameDateRecord(targetDate)) {
                 model.deleteRecord(targetRecord);
                 model.commitFinancialPlanner();
                 targetRecordExist = true;
             }
         }
         if (!targetRecordExist) {
-            throw new CommandException(Messages.MESSAGE_INVALID_RECORD_DISPLAYED_DATE);
+            logger.info("The record does not exist.\n");
+            throw new CommandException(Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
         } else {
             return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, targetDate.value));
         }
