@@ -65,7 +65,8 @@ public class DeleteCommandByDateEntryTest {
                     records.get(outOfBoundIndex.getZeroBased()).getDate());
 
             CommandTestUtil.assertCommandFailure(
-                    deleteCommandByDateEntry, model, commandHistory, Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
+                    deleteCommandByDateEntry, model, commandHistory,
+                    Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
 
         }
     }
