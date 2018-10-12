@@ -12,14 +12,18 @@ public class UnitOfWork implements IUnitOfWork,AutoCloseable {
     private ModuleRepository moduleRepository;
     private UserRepository userRepository;
 
-    public UnitOfWork() {
-        forumBookStorage = new ForumBookStorage(new FileStorage());
+    public UnitOfWork(IStorage storage) {
+        forumBookStorage = new ForumBookStorage(storage);
 
         announcementRepository = new AnnouncementRepository(forumBookStorage);
         commentRepository = new CommentRepository(forumBookStorage);
         forumThreadRepository = new ForumThreadRepository(forumBookStorage);
         moduleRepository = new ModuleRepository(forumBookStorage);
         userRepository = new UserRepository(forumBookStorage);
+    }
+
+    public UnitOfWork() {
+        this(new FileStorage());
     }
 
     public IAnnouncementRepository getAnnouncementRepository() {
