@@ -23,7 +23,8 @@ import com.t13g2.forum.logic.commands.HelpCommand;
 import com.t13g2.forum.logic.commands.HistoryCommand;
 import com.t13g2.forum.logic.commands.ListCommand;
 import com.t13g2.forum.logic.commands.ListModuleCommand;
-import com.t13g2.forum.logic.commands.ListThreadCommand;
+import com.t13g2.forum.logic.commands.SelectModuleCommand;
+import com.t13g2.forum.logic.commands.SelectThreadCommand;
 import com.t13g2.forum.logic.commands.LoginCommand;
 import com.t13g2.forum.logic.commands.RedoCommand;
 import com.t13g2.forum.logic.commands.SelectCommand;
@@ -111,8 +112,11 @@ public class AddressBookParser {
         case ListModuleCommand.COMMAND_WORD:
             return new ListModuleCommand();
 
-        case ListThreadCommand.COMMAND_WORD:
-            return new ListThreadCommandParser().parse(arguments);
+        case SelectModuleCommand.COMMAND_WORD:
+            return new SelectModuleCommandParser().parse(arguments);
+
+        case SelectThreadCommand.COMMAND_WORD:
+            return new SelectThreadCommandParser().parse(arguments);
 
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);

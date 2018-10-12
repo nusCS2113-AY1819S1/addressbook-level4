@@ -13,8 +13,8 @@ import static java.util.Objects.requireNonNull;
 /**
  * List out all the threads under certain module in the forum book.
  */
-public class ListThreadCommand extends Command{
-    public static final String COMMAND_WORD = "listThread";
+public class SelectModuleCommand extends Command{
+    public static final String COMMAND_WORD = "selectModule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all the threads under certain module in the forum book.\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE_CODE + "CS2113";
@@ -22,14 +22,14 @@ public class ListThreadCommand extends Command{
     public static String MESSAGE;
     public static String moduleCode;
 
-    public ListThreadCommand(String moduleCode) {
+    public SelectModuleCommand(String moduleCode) {
         this.moduleCode = moduleCode;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String MESSAGE_SUCCESS = "Listed all threads under " + moduleCode + ":\n %1$s";
+        String MESSAGE_SUCCESS = "Listed all threads under module " + moduleCode + ":\n %1$s";
         try(UnitOfWork unitOfWork = new UnitOfWork()){
             Module module = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
             List<ForumThread> threadList=unitOfWork.getForumThreadRepository().getThreadsByModule(module);

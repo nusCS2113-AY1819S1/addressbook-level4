@@ -13,13 +13,13 @@ import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new CreateThreadCommand object
  */
 public class CreateThreadCommandParser implements Parser<CreateThreadCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the CreateThreadCommand
+     * and returns an CreateThreadCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public CreateThreadCommand parse(String args) throws ParseException {
