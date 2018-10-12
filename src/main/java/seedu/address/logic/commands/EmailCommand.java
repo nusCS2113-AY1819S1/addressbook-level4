@@ -10,6 +10,7 @@ import java.util.List;
 import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 
+import com.sun.mail.smtp.SMTPSendFailedException;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.EmailUtil;
@@ -41,6 +42,7 @@ public class EmailCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Email sent";
     public static final String MESSAGE_FAIL = "Unable to send email due to unforeseen error.";
+    public static final String MESSAGE_FAIL_DUE_TO_SPAM = "Unable to use this account to send more emails due to spam.";
     public static final String MESSAGE_NO_LOGIN = "No login credentials found. Please login using 'login' command";
     public static final String MESSAGE_AUTHENTICATION_FAIL = "Invalid login credentials entered";
 
@@ -99,6 +101,8 @@ public class EmailCommand extends Command {
             EmailUtil.sendEmail(toSend, toSubject, toMessage);
         } catch (AuthenticationFailedException afe) {
             throw new CommandException(MESSAGE_AUTHENTICATION_FAIL);
+        } catch (SMTPSendFailedException sfe) {
+            throw new CommandException(MESSAGE_FAIL_DUE_TO_SPAM);
         } catch (MessagingException e) {
             throw new CommandException(MESSAGE_FAIL);
         }
