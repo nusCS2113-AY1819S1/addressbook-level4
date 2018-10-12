@@ -74,6 +74,14 @@ public class LoginWindow extends UiPart<Stage> {
         getRoot().show();
     }
 
+    /***
+     * Hides the Login Window
+     */
+    public void hide() {
+        //logger.fine("Showing help page about the application.");
+        getRoot().hide();
+    }
+
     /**
      * Returns true if the help window is currently being shown.
      */
