@@ -36,10 +36,10 @@ public interface FinancialPlannerStorage {
      * @param financialPlanner cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
 
     /**
-     * @see #saveFinancialPlanner(ReadOnlyFinancialPlanner)
+     * @see #saveRecordList(ReadOnlyFinancialPlanner)
      */
     void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
 

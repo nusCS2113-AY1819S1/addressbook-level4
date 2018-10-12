@@ -96,7 +96,7 @@ public class XmlFinancialPlannerStorageTest {
 
         //Save and read without specifying file path
         original.addRecord(IDA);
-        xmlFinancialPlannerStorage.saveFinancialPlanner(original); //file path not specified
+        xmlFinancialPlannerStorage.saveRecordList(original); //file path not specified
         readBack = xmlFinancialPlannerStorage.readFinancialPlanner().get(); //file path not specified
         assertEquals(original, new FinancialPlanner(readBack));
 

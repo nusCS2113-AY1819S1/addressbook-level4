@@ -22,14 +22,14 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlFinancialPlannerStorage.class);
 
-    private Path filePath;
+    private Path recordfilePath;
 
     public XmlFinancialPlannerStorage(Path filePath) {
-        this.filePath = filePath;
+        this.recordfilePath = filePath;
     }
 
     public Path getFinancialPlannerFilePath() {
-        return filePath;
+        return recordfilePath;
     }
 
     @Override
@@ -62,20 +62,33 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     @Override
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
         saveFinancialPlanner(financialPlanner, filePath);
     }
 
     /**
-     * Similar to {@link #saveFinancialPlanner(ReadOnlyFinancialPlanner)}
+     * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
         requireNonNull(financialPlanner);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableFinancialPlanner(financialPlanner));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableRecordList(financialPlanner));
     }
 
+    /**
+     * save the updated limit list into the special xml file
+     * @param financialPlanner
+     * @param filePath
+     * @throws IOException
+     */
+    public void saveLimitList (ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+        requireNonNull(financialPlanner);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableRecordList(financialPlanner));
+    }
 }

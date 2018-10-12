@@ -28,7 +28,7 @@ public interface Storage extends FinancialPlannerStorage, UserPrefsStorage {
     Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException;
 
     @Override
-    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
 
     /**
      * Saves the current version of the Financial Planner to the hard disk.

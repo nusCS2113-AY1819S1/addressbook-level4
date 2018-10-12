@@ -10,25 +10,24 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
-import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 
 /**
  * An Immutable FinancialPlanner that is serializable to XML format
  */
 @XmlRootElement(name = "financialplanner")
-public class XmlSerializableFinancialPlanner extends XmlSerializableClass<FinancialPlanner> {
+public class XmlSerializableRecordList extends XmlSerializableClass<FinancialPlanner> {
 
     public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
-    public static final String MESSAGE_DUPLICATE_LIMIT = "There are redundant limits for the same period of time";
+
     @XmlElement
     private List<XmlAdaptedRecord> records;
-    private List<XmlAdaptedLimit> limits;
+
     /**
      * Creates an empty XmlSerializableFinancialPlanner.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableFinancialPlanner() {
+    public XmlSerializableRecordList() {
 
         records = new ArrayList<>();
     }
@@ -36,7 +35,7 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Financ
     /**
      * Conversion
      */
-    public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
+    public XmlSerializableRecordList(ReadOnlyFinancialPlanner src) {
         this();
         records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
 
@@ -67,9 +66,9 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Financ
             return true;
         }
 
-        if (!(other instanceof XmlSerializableFinancialPlanner)) {
+        if (!(other instanceof XmlSerializableRecordList)) {
             return false;
         }
-        return records.equals(((XmlSerializableFinancialPlanner) other).records);
+        return records.equals(((XmlSerializableRecordList) other).records);
     }
 }
