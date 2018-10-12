@@ -10,6 +10,10 @@ public class ForumThread extends BaseModel {
             "Thread should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String THREAD_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
+    public static final String MESSAGE_THREAD_ID_CONSTRAINTS =
+            "Thread ID should only contain an integer, and it should not be blank";
+    public static final String THREAD_ID_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+
     private int moduleId;
     private String title;
 
