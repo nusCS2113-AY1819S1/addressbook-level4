@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.TimetableContainsModulePredicate;
 
 import java.util.Arrays;
