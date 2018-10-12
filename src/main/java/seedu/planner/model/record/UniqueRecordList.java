@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
 import seedu.planner.model.record.exceptions.RecordNotFoundException;
 
@@ -93,6 +94,42 @@ public class UniqueRecordList implements Iterable<Record> {
         }
 
         internalList.setAll(records);
+    }
+
+    /**
+     * Sorts the contents of this list by {@code category} and in reverse if {@code ascending} is true.
+     * {@code records} must not contain duplicate records.
+     */
+    public void sortRecords(String category, Boolean ascending) {
+
+        switch (category) {
+
+            case SortCommand.CATEGORY_NAME:
+                if (!ascending) {
+                    internalList.sort(RecordComparator.compareNameAttribute().reversed());
+                } else {
+                    internalList.sort(RecordComparator.compareNameAttribute());
+                }
+                break;
+
+            case SortCommand.CATEGORY_DATE:
+                if (!ascending) {
+                    internalList.sort(RecordComparator.compareDateAttribute().reversed());
+                } else {
+                    internalList.sort(RecordComparator.compareDateAttribute());
+                }
+                break;
+
+            case SortCommand.CATEGORY_MONEYFLOW:
+            case SortCommand.CATEGORY_MONEY:
+                if (!ascending) {
+                    internalList.sort(RecordComparator.compareMoneyflowAttribute().reversed());
+                } else {
+                    internalList.sort(RecordComparator.compareMoneyflowAttribute());
+                }
+                break;
+        }
+
     }
 
     /**

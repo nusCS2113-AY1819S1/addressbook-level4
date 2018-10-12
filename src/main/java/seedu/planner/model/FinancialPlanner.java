@@ -95,6 +95,13 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         records.remove(key);
     }
 
+    /**
+     * Sorts the records in this {@code FinancialPlanner}.
+     */
+    public void sortRecords(String category, Boolean ascending) {
+        records.sortRecords(category, ascending);
+    }
+
     //// util methods
 
     @Override

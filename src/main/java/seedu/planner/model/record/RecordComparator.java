@@ -2,36 +2,22 @@ package seedu.planner.model.record;
 
 import java.util.Comparator;
 
+/**
+ * Comparator to sort {@code Record}s by name, date and moneyflow attributes.
+ */
 public class RecordComparator {
 
     public static Comparator<Record> compareNameAttribute() {
-        return Comparator.comparing(A -> A.getName().fullName);
+        return Comparator.comparing(A -> A.getName().fullName.toLowerCase());
     }
-
-    /*public static Comparator<Record> compareNameAttribute() {
-        return new Comparator<>() {
-            public int compare(Record A, Record B) {
-                return A.getName().fullName.compareTo(B.getName().fullName);
-            }
-        };
-    }*/
 
     public static Comparator<Record> compareDateAttribute() {
         return (A, B) -> A.getDate().dateComparator(B.getDate());
     }
 
-    /*public static Comparator<Record> compareDateAttribute() {
-        return new Comparator<Record>() {
-            public int compare(Record A, Record B) {
-                return A.getDate().dateComparator(B.getDate());
-            }
-        };
-    }*/
+    public static Comparator<Record> compareMoneyflowAttribute() {
+        return Comparator.comparing(A -> A.getMoneyFlow().valueDouble);
+    }
 
-    /*
-    static Comparator<Record> compareMoneyflowAttribute() {
-        return new Comparator<Record>() {
-        };
-    }*/
 }
 
