@@ -1,7 +1,6 @@
 package seedu.planner.model.record;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
@@ -27,10 +26,10 @@ public class DateIsWithinIntervalPredicateTest {
         Assert.assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values (different String arguments) -> return true
-        List<String> firstPredicateDate_Copy = Arrays.asList("31-3-1999", "31-3-2019");
+        List<String> firstPredicateDateCopy = Arrays.asList("31-3-1999", "31-3-2019");
         DateIsWithinIntervalPredicate firstPredicateCopy =
                 new DateIsWithinIntervalPredicate(
-                        firstPredicateDate_Copy.get(0), firstPredicateDate_Copy.get(1));
+                        firstPredicateDateCopy.get(0), firstPredicateDateCopy.get(1));
         Assert.assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> return false
