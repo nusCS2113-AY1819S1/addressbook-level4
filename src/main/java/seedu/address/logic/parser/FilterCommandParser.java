@@ -1,42 +1,25 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.parser;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
+import seedu.address.logic.commands.FilterCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.TimetableContainsModulePredicate;
 
-import static java.util.Objects.requireNonNull;
+import java.util.Arrays;
 
-public class FilterCommand extends Command {
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-    public static final String COMMAND_WORD = "filter";
+public class FilterCommandParser implements Parser<FilterCommand> {
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Filters the list to all the people who take the modules inputted."
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " CS2101 CS2113";
+    public FilterCommand parse(String args) throws ParseException {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty()) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
+        }
 
-    private final TimetableContainsModulePredicate predicate;
+        String[] moduleKeywords = trimmedArgs.split("\\s+");
 
-    public FilterCommand(TimetableContainsModulePredicate predicate) {
-        this.predicate = predicate;
-    }
 
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof FilterCommand // instanceof handles nulls
-                && predicate.equals(((FilterCommand) other).predicate)); // state check
+        return new FilterCommand(new TimetableContainsModulePredicate(Arrays.asList(moduleKeywords)));
     }
 }
-
-
-
-
