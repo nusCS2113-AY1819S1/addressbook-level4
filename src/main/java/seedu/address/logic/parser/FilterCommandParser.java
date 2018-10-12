@@ -1,26 +1,42 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.commands;
 
-import seedu.address.logic.commands.FilterCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.CommandHistory;
+import seedu.address.model.Model;
 import seedu.address.model.person.TimetableContainsModulePredicate;
 
-import java.util.Arrays;
+import static java.util.Objects.requireNonNull;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+public class FilterCommand extends Command {
 
-public class FilterCommandParser implements Parser<FilterCommand>{
+    public static final String COMMAND_WORD = "filter";
 
-    public FilterCommand parse(String args) throws ParseException {
-        String trimmedArgs = args.trim();
-        if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
-        }
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "Filters the list to all the people who take the modules inputted."
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " CS2101 CS2113";
 
-        String[] moduleKeywords = trimmedArgs.split("\\s+");
+    private final TimetableContainsModulePredicate predicate;
 
+    public FilterCommand(TimetableContainsModulePredicate predicate) {
+        this.predicate = predicate;
+    }
 
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) {
+        requireNonNull(model);
+        model.updateFilteredPersonList(predicate);
+        return new CommandResult(
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+    }
 
-        return new FilterCommand(new TimetableContainsModulePredicate(Arrays.asList(moduleKeywords)));
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof FilterCommand // instanceof handles nulls
+                && predicate.equals(((FilterCommand) other).predicate)); // state check
     }
 }
+
+
+
+
