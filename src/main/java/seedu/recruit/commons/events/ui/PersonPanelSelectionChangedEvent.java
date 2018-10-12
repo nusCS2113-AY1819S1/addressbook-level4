@@ -8,6 +8,7 @@ import seedu.recruit.model.candidate.Candidate;
  */
 public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
+
     private final Candidate newSelection;
 
     public PersonPanelSelectionChangedEvent(Candidate newSelection) {
