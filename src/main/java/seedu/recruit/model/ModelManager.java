@@ -13,6 +13,7 @@ import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
@@ -28,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedCompanyBook versionedCompanyBook;
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
+    public EmailUtil emailUtil;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.
@@ -42,6 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook = new VersionedCompanyBook(companyBook);
         filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
+        emailUtil = new EmailUtil();
     }
 
     public ModelManager() {
@@ -270,4 +273,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    public EmailUtil getEmailUtil() {
+        return emailUtil;
+    }
+
+    public void setEmailUtil(EmailUtil emailUtil) {
+        this.emailUtil = emailUtil;
+    }
 }

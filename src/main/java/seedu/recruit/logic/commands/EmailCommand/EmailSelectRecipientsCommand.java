@@ -2,6 +2,7 @@ package seedu.recruit.logic.commands.EmailCommand;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
@@ -22,16 +23,17 @@ public class EmailSelectRecipientsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         String lastCommandUsed = history.getLast();
-        EmailCommand emailCommand = RecruitBookParser.getEmailCommand();
+        EmailUtil emailUtil = model.getEmailUtil();
 
         if(lastCommandUsed.toUpperCase().contains("LISTC")) {
-            emailCommand.setRecipients(model.getFilteredCandidateList());
-            emailCommand.setAreRecipientsCandidates(true);
+            emailUtil.setRecipients(model.getFilteredCandidateList());
+            emailUtil.setAreRecipientsCandidates(true);
         } else {
-            emailCommand.setRecipients(model.getFilteredCompanyList());
-            emailCommand.setAreRecipientsCandidates(false);
+            emailUtil.setRecipients(model.getFilteredCompanyList());
+            emailUtil.setAreRecipientsCandidates(false);
         }
 
+        model.setEmailUtil(emailUtil);
         LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(EmailSelectContentsCommand.COMMAND_WORD);
     }

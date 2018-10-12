@@ -40,6 +40,16 @@ public class EmailUtil {
     private static final List<String> SCOPES = Collections.singletonList(GmailScopes.GMAIL_COMPOSE);
     private static final String CREDENTIALS_FILE_PATH = "/credentials.json";
 
+    /**
+     * Variables for Email Command
+     */
+    private ObservableList<?> recipients;
+    private ObservableList<?> contents;
+    private boolean areRecipientsCandidates;
+    private String to;
+    private String subject;
+    private String bodyText;
+    public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
     private static Gmail service;
     static {
         try {
@@ -48,14 +58,6 @@ public class EmailUtil {
             e.printStackTrace();
         }
     }
-
-    private ObservableList<?> recipients;
-    private ObservableList<?> contents;
-    private boolean areRecipientsCandidates;
-    private String to;
-    private String subject;
-    private String bodyText;
-    public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
 
     /**
      * Getters and Setters
@@ -139,13 +141,14 @@ public class EmailUtil {
     /**
      * Initialiser for Gmail Service
      */
-    public static Gmail init() throws IOException, GeneralSecurityException {
+    private static Gmail init() throws IOException, GeneralSecurityException {
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         // Create a new authorized Gmail API client
         return new Gmail.Builder(httpTransport, JSON_FACTORY, getCredentials(httpTransport))
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }
+
 
     /**
      * Create a MimeMessage using the parameters provided.

@@ -6,6 +6,7 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
@@ -33,6 +34,7 @@ import seedu.recruit.logic.commands.UndoCommand;
 
 
 import seedu.recruit.logic.parser.exceptions.ParseException;
+import seedu.recruit.model.Model;
 
 /**
  * Parses user input.
@@ -44,16 +46,6 @@ public class RecruitBookParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
-    private static EmailCommand emailCommand;
-
-    public static EmailCommand getEmailCommand() {
-        return emailCommand;
-    }
-
-    public static void setEmailCommand(EmailCommand emailCommand) {
-        RecruitBookParser.emailCommand = emailCommand;
-    }
-
     /**
      * Parses user input into command for execution.
      *
@@ -61,8 +53,9 @@ public class RecruitBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput, LogicState state) throws ParseException {
+    public Command parseCommand(String userInput, LogicState state, EmailUtil emailUtil) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+
         if (!matcher.matches()) {
             if(!state.nextCommand.equals("primary")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -89,7 +82,7 @@ public class RecruitBookParser {
                     return new ListCommand();
                 }
             } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
-                    && emailCommand.isAreRecipientsCandidates()) {
+                    && emailUtil.isAreRecipientsCandidates()) {
                 switch (commandWord) {
 
                     case FindCommand.COMMAND_WORD:
@@ -99,7 +92,7 @@ public class RecruitBookParser {
                         return new ListCommand();
                 }
             } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
-                    && !emailCommand.isAreRecipientsCandidates()) {
+                    && !emailUtil.isAreRecipientsCandidates()) {
                 switch (commandWord) {
 
                     case FindCommand.COMMAND_WORD:

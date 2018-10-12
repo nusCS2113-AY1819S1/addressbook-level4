@@ -1,5 +1,6 @@
 package seedu.recruit.logic.commands.EmailCommand;
 
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
@@ -20,14 +21,15 @@ public class EmailSelectContentsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        EmailCommand emailCommand = RecruitBookParser.getEmailCommand();
+        EmailUtil emailUtil = model.getEmailUtil();
 
-        if(emailCommand.isAreRecipientsCandidates()) {
-            emailCommand.setContents(model.getFilteredJobList());
+        if(emailUtil.isAreRecipientsCandidates()) {
+            emailUtil.setContents(model.getFilteredJobList());
         } else {
-            emailCommand.setContents(model.getFilteredCandidateList());
+            emailUtil.setContents(model.getFilteredCandidateList());
         }
 
+        model.setEmailUtil(emailUtil);
         LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(EmailSendCommand.COMMAND_WORD);
     }

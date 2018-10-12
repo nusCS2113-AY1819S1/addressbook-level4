@@ -3,6 +3,7 @@ package seedu.recruit.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
@@ -169,5 +170,7 @@ public interface Model {
 
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
+    EmailUtil getEmailUtil();
 
+    void setEmailUtil(EmailUtil emailUtil);
 }
