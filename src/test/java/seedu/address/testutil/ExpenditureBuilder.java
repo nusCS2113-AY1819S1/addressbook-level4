@@ -11,7 +11,7 @@ import seedu.address.model.expenditureinfo.Money;
 public class ExpenditureBuilder {
 
     public static final String DEFAULT_CATEGORY = "Chicken rice";
-    public static final String DEFAULT_DATE = "01/01/2018";
+    public static final String DEFAULT_DATE = "01-01-2018";
     public static final String DEFAULT_MONEY = "10";
 
     private Category category;

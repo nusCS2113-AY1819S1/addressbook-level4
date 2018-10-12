@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Money {
     public static final String MESSAGE_MONEY_CONSTRAINTS =
             "Dates should only contain alphanumeric characters and spaces, and it should not be blank";
-    public static final String MONEY_VALIDATION_REGEX = "[\\p{Punct}][\\d{1,}]";
+    public static final String MONEY_VALIDATION_REGEX = "[\\d]*";
 
     public final String addingMoney;
 
