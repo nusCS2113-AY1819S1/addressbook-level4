@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -21,8 +20,9 @@ import seedu.address.model.event.Event;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
+    public static final String SEARCH_PAGE_URL =
+            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
     public static final String SEARCH_PAGE = "EventSearchPage.html";
-
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -48,23 +48,9 @@ public class BrowserPanel extends UiPart<Region> {
         return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
     }
 
-    /**
-     * Formats HTML file path into string
-     */
-    private String formatEventPageUrl(Event event) {
-        URL searchPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
-        String searchPageString = searchPage.toString()
-                + "?name=" + event.getName();
 
-        return searchPageString;
-    }
-
-    /**
-     * Loads a HTML file with variables passed into it
-     */
-    private void loadEventPage(Event event) throws MalformedURLException {
-        URL searchPage = new URL(formatEventPageUrl(event));
-        loadPage(searchPage.toExternalForm());
+    private void loadPersonPage(Event event) {
+        loadPage(SEARCH_PAGE_URL + event.getName().fullName);
     }
 
     public void loadPage(String url) {
@@ -87,8 +73,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleEventSelectionChangedEvent(EventSelectionChangedEvent event) throws MalformedURLException {
+    private void handlePersonPanelSelectionChangedEvent(EventSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadEventPage(event.getNewSelection());
+        loadPersonPage(event.getNewSelection());
     }
 }

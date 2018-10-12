@@ -2,6 +2,9 @@ package seedu.address.model.user;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+/**
+ * Represents a user account.
+ */
 public class User {
 
     private final Username username;
@@ -13,7 +16,17 @@ public class User {
         this.password = password;
     }
 
+<<<<<<< HEAD
     public Username getUsername() { return username; }
 
     public Password getPassword() { return password; }
+=======
+    public Username getUsername() {
+        return username;
+    }
+
+    public Password getPassword() {
+        return password;
+    }
+>>>>>>> Travis_Test
 }

@@ -87,7 +87,11 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Event} with the details of {@code eventToEdit}
      * edited with {@code editPersonDescriptor}.
      */
+<<<<<<< HEAD
     private static Event createEditedPerson(Event eventToEdit, EditEventDescriptor editPersonDescriptor) {
+=======
+    public static Event createEditedPerson(Event eventToEdit, EditPersonDescriptor editPersonDescriptor) {
+>>>>>>> Travis_Test
         assert eventToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(eventToEdit.getName());
