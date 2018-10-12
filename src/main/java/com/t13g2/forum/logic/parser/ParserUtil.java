@@ -54,7 +54,13 @@ public class ParserUtil {
         }
         return trimmedUserName;
     }
-
+    public static String parseUserPassword(String userPassword) throws ParseException {
+        String trimmedUserPassword = userPassword.trim();
+        if (!User.isValidUserName(trimmedUserPassword)) {
+            throw new ParseException(User.MESSAGE_USER_PASSWORD_CONSTRAINTS);
+        }
+        return trimmedUserPassword;
+    }
     /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
