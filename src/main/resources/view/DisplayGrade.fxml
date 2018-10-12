@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.Scene?>
+<?import javafx.stage.Stage?>
+<fx:root maximized="false" title="grade table" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8.0.121"
+         xmlns:fx="http://javafx.com/fxml/1">
+    <scene>
+        <Scene>
+            <AnchorPane id="AnchorPane" maxHeight="1000" maxWidth="1000" minHeight="200" minWidth="200"
+                        prefHeight="288.0" prefWidth="293.0" xmlns:fx="http://javafx.com/fxml">
+                <children>
+                    <TableView fx:id="personTable" layoutX="35.0" layoutY="28.0" prefHeight="200.0" prefWidth="227.0"
+                               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <columns>
+                            <TableColumn prefWidth="300" text="Name" fx:id="nameColumn"/>
+                            <TableColumn prefWidth="300" text="scores" fx:id="gradeColumn"/>
+
+                        </columns>
+                    </TableView>
+                </children>
+            </AnchorPane>
+        </Scene>
+    </scene>
+</fx:root>
+
+
+
+
