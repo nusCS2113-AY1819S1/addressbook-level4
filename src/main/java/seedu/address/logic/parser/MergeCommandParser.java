@@ -27,7 +27,7 @@ public class MergeCommandParser implements Parser<MergeCommand> {
         List<String> indices = argMultimap.getAllValues(PREFIX_MERGE);
 
 
-        if(indices.size()<2){
+        if (indices.size() < 2) {
             throw new ParseException(MESSAGE_NOT_MERGED);
         }
 
