@@ -4,6 +4,16 @@ package com.t13g2.forum.model.forum;
  * Represents user in ForumBook
  */
 public class User extends BaseModel {
+    public static final String MESSAGE_USER_NAME_CONSTRAINTS =
+        "User name can take any values, and it should not be blank";
+    public static final String MESSAGE_USER_PASSWORD_CONSTRAINTS =
+        "User name can take any values, and it should not be blank";
+    /**
+     * The first character of the user name must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String USER_NAME_VALIDATION_REGEX = "[^\\s].*";
+    public static final String USER_PASSWORD_VALIDATION_REGEX = "[^\\s].*";
     private String username;
     private String password;
     private boolean isAdmin;
@@ -11,16 +21,6 @@ public class User extends BaseModel {
     private String email;
     private String phone;
 
-    public static final String MESSAGE_USER_NAME_CONSTRAINTS =
-        "User name can take any values, and it should not be blank";
-    public static final String MESSAGE_USER_PASSWORD_CONSTRAINTS =
-            "User name can take any values, and it should not be blank";
-    /**
-     * The first character of the user name must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String USER_NAME_VALIDATION_REGEX = "[^\\s].*";
-    public static final String USER_PASSWORD_VALIDATION_REGEX = "[^\\s].*";
 
     public User() {
     }

@@ -156,25 +156,6 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public void addAnnounceToStorage(Announcement announcement) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public Announcement showAnnouncement() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean isBlock(User user) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void blockUser(User toBlock) {
-            throw new AssertionError("This method should not be called.");
-        }
     }
 
     /**

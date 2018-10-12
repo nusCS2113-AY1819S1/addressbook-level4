@@ -4,6 +4,9 @@ import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ANNOUNCE_CONTENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_ANNOUNCE_TITLE;
 import static java.util.Objects.requireNonNull;
 
+import java.awt.EventQueue;
+import javax.swing.JOptionPane;
+
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Announcement;
@@ -19,9 +22,9 @@ public class AnnounceCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Post new announcement. "
         + "Parameters: "
         + PREFIX_ANNOUNCE_TITLE + "TITLE "
-        + PREFIX_ANNOUNCE_CONTENT + "PHONE "
+        + PREFIX_ANNOUNCE_CONTENT + "CONTENT "
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_ANNOUNCE_TITLE + "Urgent!"
+        + PREFIX_ANNOUNCE_TITLE + "Urgent! "
         + PREFIX_ANNOUNCE_CONTENT + "System maintenance from tomorrow 3PM to 5PM.";
 
     public static final String MESSAGE_SUCCESS = "New announcement posted: %1$s";
@@ -43,6 +46,12 @@ public class AnnounceCommand extends Command {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             unitOfWork.getAnnouncementRepository().addAnnouncement(toAnnounce);
             unitOfWork.commit();
+            EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    JOptionPane.showMessageDialog(null, toAnnounce.getContent(),
+                        toAnnounce.getTitle(), JOptionPane.PLAIN_MESSAGE);
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -1,18 +1,23 @@
 package com.t13g2.forum.logic.commands;
 
-import com.t13g2.forum.logic.CommandHistory;
-import com.t13g2.forum.logic.commands.exceptions.CommandException;
-import com.t13g2.forum.model.Model;
-import com.t13g2.forum.model.forum.User;
-import com.t13g2.forum.model.person.Person;
-import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
-import com.t13g2.forum.storage.forum.UnitOfWork;
-
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_NAME;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_PASSWORD;
 import static java.util.Objects.requireNonNull;
 
-public class AddUserCommand extends Command{
+import com.t13g2.forum.logic.CommandHistory;
+import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
+import com.t13g2.forum.storage.forum.UnitOfWork;
+
+/**
+ *
+ */
+public class AddUserCommand extends Command {
+    /**
+     *
+     */
     public static final String COMMAND_WORD = "addUser";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add user to forum book. "
             + "Parameters: "
@@ -38,30 +43,29 @@ public class AddUserCommand extends Command{
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        try(UnitOfWork unitOfWork = new UnitOfWork()) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
             boolean exist = false;
-            try{
+            try {
                 unitOfWork.getUserRepository().getUserByUsername(userToAdd.getUsername());
                 exist = true;
-            }catch (EntityDoesNotExistException ex){
+            } catch (EntityDoesNotExistException ex) {
                 ex.printStackTrace();
-
             }
-            if(!exist) {
+            if (!exist) {
                 unitOfWork.getUserRepository().addUser(userToAdd);
                 unitOfWork.commit();
             }
-//            try {
-//                if(unitOfWork.getUserRepository().getUserByUsername(this.userToAdd.getUsername()) == null) {
-//                    unitOfWork.getUserRepository().addUser(userToAdd);
-//                    unitOfWork.commit();
-//                }
-//                else {
-//                    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
+            // try {
+            //     if(unitOfWork.getUserRepository().getUserByUsername(this.userToAdd.getUsername()) == null) {
+            //         unitOfWork.getUserRepository().addUser(userToAdd);
+            //         unitOfWork.commit();
+            //     }
+            //     else {
+            //         throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            //     }
+            // } catch (Exception e) {
+            //     e.printStackTrace();
+            // }
         } catch (Exception e) {
             e.printStackTrace();
         }

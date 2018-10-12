@@ -6,6 +6,9 @@ import java.util.Optional;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 
+/**
+ *
+ */
 public class ForumThreadRepository extends BaseRepository implements IForumThreadRepository {
     public ForumThreadRepository(IForumBookStorage forumBookStorage) {
         super(forumBookStorage);
@@ -50,7 +53,8 @@ public class ForumThreadRepository extends BaseRepository implements IForumThrea
     @Override
     public void deleteThread(int forumThreadId) {
         List<ForumThread> pointer = forumBookStorage.getForumThreads().getList();
-        Optional<ForumThread> toBeDeleted = pointer.stream().filter(forumThread -> forumThread.getId() == forumThreadId).findFirst();
+        Optional<ForumThread> toBeDeleted = pointer.stream().filter(forumThread -> forumThread.getId()
+            == forumThreadId).findFirst();
         toBeDeleted.ifPresent(pointer::remove);
     }
 

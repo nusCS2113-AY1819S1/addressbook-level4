@@ -5,6 +5,9 @@ import java.util.List;
 import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 
+/**
+ *
+ */
 public class CommentRepository extends BaseRepository implements ICommentRepository {
     public CommentRepository(IForumBookStorage forumBookStorage) {
         super(forumBookStorage);

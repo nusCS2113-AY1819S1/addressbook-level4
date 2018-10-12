@@ -8,25 +8,23 @@ import com.t13g2.forum.commons.util.CollectionUtil;
  * Guarantees: is valid as declared in {@link #isValidAnnouncement(String, String)}
  */
 public class Announcement extends BaseModel {
-    private static final long serialVersionUID = 1L;
-
     /**
      * Show message if announcement is not valid
      */
     public static final String MESSAGE_ANNOUNCEMENT_CONSTRAINTS =
         "Announcement can take any values, and it should not be blank";
 
-    public Announcement() {
-    }
-
     /**
      * The first character of the announcement must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String ANNOUNCEMENT_VALIDATION_REGEX = "[^\\s].*";
+    private static final long serialVersionUID = 1L;
+
     private String title;
     private String content;
-
+    public Announcement() {
+    }
     /**
      * Every field must be present and not null.
      */
@@ -55,10 +53,10 @@ public class Announcement extends BaseModel {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Title: ")
-            .append(getTitle())
-            .append(" Content: ")
-            .append(getContent());
+        builder.append("\nTitle: ")
+            .append(title)
+            .append("\nContent: ")
+            .append(content);
         return builder.toString();
     }
 }

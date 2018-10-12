@@ -30,7 +30,7 @@ public class DeleteThreadCommand extends Command {
     public static final String MESSAGE_INVALID_THREAD_ID = "Invalid Thread id";
 
     private final ForumThread forumThread;
-    private final int ThreadId;
+    private final int threadId;
     private final String threadTitle;
 
     /**
@@ -39,30 +39,26 @@ public class DeleteThreadCommand extends Command {
     public DeleteThreadCommand(ForumThread forumThread) {
         requireNonNull(forumThread);
         this.forumThread = forumThread;
-        this.ThreadId = forumThread.getId();
+        this.threadId = forumThread.getId();
         this.threadTitle = forumThread.getTitle();
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-//        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            try(UnitOfWork unitOfWork = new UnitOfWork()) {
-                unitOfWork.getForumThreadRepository().deleteThread(ThreadId);//delete the thread according to the ThreadId from the memory repository
-                unitOfWork.commit();//update to local database
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new CommandException(MESSAGE_INVALID_THREAD_ID);
-            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-        String MESSAGE = "\n"
-                + "Thread ID: " + ThreadId + "\n"
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            //delete the thread according to the threadId from the memory repository
+            unitOfWork.getForumThreadRepository().deleteThread(threadId);
+            unitOfWork.commit(); //update to local database
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new CommandException(MESSAGE_INVALID_THREAD_ID);
+        }
+        String message = "\n"
+                + "Thread ID: " + threadId + "\n"
                 + "Thread Title: " + threadTitle + "\n";
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, message));
     }
 
 }
