@@ -1,22 +1,26 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.Messages;
-
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MERGE;
 
 import java.util.List;
 import java.util.Set;
 import java.util.HashSet;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.Messages;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.person.Address;
+import seedu.address.model.person.Email;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
+import seedu.address.model.tag.Tag;
 
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MERGE;
+
 
 /**
  * Merges the timetables of multiple people
@@ -81,7 +85,7 @@ public class MergeCommand extends Command {
     }
 
 
-    public Person mergeTimetables(Person person1, Person person2) {
+    private Person mergeTimetables(Person person1, Person person2) {
         Name mergedName = new Name(person1.getName().toString() + " and " + person2.getName().toString());
         Phone phone = new Phone("999");
         Email email = new Email("notimportant@no");
@@ -94,7 +98,7 @@ public class MergeCommand extends Command {
 
     }
 
-    public Set<Tag> mergeTimeSlots(Set<Tag> tags1, Set<Tag> tags2) {
+    private Set<Tag> mergeTimeSlots(Set<Tag> tags1, Set<Tag> tags2) {
         Tag[] array1 = tags1.toArray(new Tag[0]);
         Tag[] array2 = tags2.toArray(new Tag[0]);
         Set<Tag> finalTags = new HashSet<>();
