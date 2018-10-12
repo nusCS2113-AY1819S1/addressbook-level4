@@ -31,5 +31,7 @@ public interface IForumBookStorage {
 
     ForumThreadStorage getForumThreads();
 
+    UserStorage getUsers();
+
 
 }

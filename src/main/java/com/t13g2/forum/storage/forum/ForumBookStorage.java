@@ -9,6 +9,7 @@ public class ForumBookStorage implements IForumBookStorage {
     private ModuleStorage modules;
     private UserStorage users;
 
+
     public ForumBookStorage(IStorage underlyingStorage) {
         this.underlyingStorage=underlyingStorage;
 
@@ -124,6 +125,11 @@ public class ForumBookStorage implements IForumBookStorage {
     @Override
     public ForumThreadStorage getForumThreads() {
         return forumThreads;
+    }
+
+    @Override
+    public UserStorage getUsers() {
+        return users;
     }
 
 

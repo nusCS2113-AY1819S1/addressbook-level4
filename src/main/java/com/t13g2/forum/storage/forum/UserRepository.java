@@ -1,5 +1,7 @@
 package com.t13g2.forum.storage.forum;
 
+import java.util.Optional;
+
 import com.t13g2.forum.model.forum.User;
 
 public class UserRepository extends BaseRepository implements IUserRepository {
@@ -19,6 +21,7 @@ public class UserRepository extends BaseRepository implements IUserRepository {
 
     @Override
     public int addUser(User user) {
+        forumBookStorage.getUsers().getList().add(user);
         return 0;
     }
 
@@ -43,12 +46,20 @@ public class UserRepository extends BaseRepository implements IUserRepository {
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        return null;
+    public User getUserByUsername(String username) throws EntityDoesNotExistException {
+        Optional<User> userInDb = forumBookStorage.getUsers().getList().stream().filter(user -> user.getUsername().equals(username)).findFirst();
+        if (!userInDb.isPresent()) {
+            throw new EntityDoesNotExistException("Username does not exist");
+        }
+        return userInDb.get();
     }
 
     @Override
-    public User authenticate(String username, String password) {
+    public User authenticate(String username, String password) throws EntityDoesNotExistException {
+        User user = getUserByUsername(username);
+        if (user.getPassword().equals(password)) {
+            return user;
+        }
         return null;
     }
 }
