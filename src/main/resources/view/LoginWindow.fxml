@@ -44,6 +44,7 @@
                         </padding>
                     </TextField>
                     <Label text="Username:" />
+                    <Button mnemonicParsing="false" text="Register" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" onAction="#handleRegisterClick" />
                     <Button mnemonicParsing="false" text="Log In" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#handleLoginClick" />
                     <Label fx:id="label" textFill="RED" text="" GridPane.rowIndex="2" />
                 </children>

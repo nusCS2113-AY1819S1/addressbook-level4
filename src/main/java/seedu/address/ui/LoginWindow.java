@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.security.Security;
 
 /***
@@ -101,6 +102,15 @@ public class LoginWindow extends UiPart<Stage> {
      */
     public void handleLoginClick() {
         user.login(usernameTextField.getText(), passwordTextField.getText());
+    }
+
+
+    /***
+     * Runs whenever the login button is clicked
+     */
+    public void handleRegisterClick() {
+        //Raise Event to create new window
+        raise(new ShowRegisterEvent());
     }
 
     @Subscribe

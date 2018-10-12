@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
+import seedu.address.commons.events.ui.ExitRegisterEvent;
 import seedu.address.security.Security;
 
 /***
@@ -46,7 +47,7 @@ public class RegistrationWindow extends UiPart<Stage> {
     }
 
     /**
-     * Creates a new LoginWindow.
+     * Creates a new Registration Window.
      */
     public RegistrationWindow(Security user) {
         this(new Stage());
@@ -96,13 +97,21 @@ public class RegistrationWindow extends UiPart<Stage> {
      */
     public void handleRegister() {
         //TODO
-        user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
-                phoneTextField.getText(), addressTextField.getText());
+        //user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
+        //        phoneTextField.getText(), addressTextField.getText());
     }
 
     @Subscribe
     public void handleSuccessfulRegisterEvent(SuccessfulLoginEvent loginSuccess) {
         getRoot().hide();
+    }
+
+    /**
+     * Closes the register window and open the login window
+     */
+    @FXML
+    private void handleExit() {
+        raise(new ExitRegisterEvent());
     }
 
 }
