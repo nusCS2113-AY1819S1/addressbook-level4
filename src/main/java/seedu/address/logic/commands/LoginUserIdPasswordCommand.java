@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
+
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
@@ -29,13 +32,17 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredLoginDetailsList(idPredicate);
-        model.updateFilteredLoginDetailsList(passwordPredicate);
+        if (model.getFilteredLoginDetailsList().size() == 0) { // when user tries to login again after failed first try
+            model.updateFilteredLoginDetailsList(PREDICATE_SHOW_ALL_ACCOUNTS); // resets account list to show all
+        }
+        Predicate updatedIdPredicate = getMostUpdatedIdPredicate(idPredicate);
+        model.updateFilteredLoginDetailsList(updatedIdPredicate);
+        Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(passwordPredicate);
+        model.updateFilteredLoginDetailsList(updatedPasswordPredicate);
         if (model.getFilteredLoginDetailsList().size() != 0) {
             MainWindow.setIsLoginSuccessful(true);
         } else {
             MainWindow.setIsLoginSuccessful(false);
-            System.exit(0);
         }
         return new CommandResult(
                 String.format(Messages.MESSAGE_LOGIN_LISTED_OVERVIEW, model.getFilteredLoginDetailsList().size()));

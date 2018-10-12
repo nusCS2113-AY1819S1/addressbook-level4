@@ -14,7 +14,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.LoginBookChangedEvent;
 import seedu.address.model.login.LoginDetails;
-import seedu.address.model.login.UniqueAccountList;
 import seedu.address.model.person.Person;
 
 /**
@@ -82,8 +81,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasAccount(LoginDetails details) {
         requireNonNull(details);
-        UniqueAccountList uniqueAccountList = new UniqueAccountList();
-        return uniqueAccountList.contains(details);
+        return versionedLoginBook.hasAccount(details);
     }
 
     @Override

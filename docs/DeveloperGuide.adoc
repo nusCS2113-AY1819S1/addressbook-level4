@@ -239,6 +239,10 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Login system feature
+==== Current Implementation
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -850,13 +854,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |member of the NUSSU treasury |view requests for grants from the clubs |allocate them the grant if the request is accepted by the NUSSU
 
-|`* * *` |executive member of NUSSU |log into the application with the relevant credentials |gain secure access to the application
+|`* * *` |executive member of NUSSU |log into the application with the relevant credentials |gain secure access to the application and access features limited to my role only
 
-|`* * *` |executive member of NUSSU |create a new account for the application |gain access to certain features of the application relevant to my role when I log in
-
-|`* * *` |executive member of NUSSU |delete an existing account from the application |clear my login credentials from the application when I am not using it anymore
-
-|`* * *` |executive member of NUSSU |change the password of an existing account |feel more secure about my account login credentials
+|`* * *` |executive member of NUSSU |create a new account for the application with my relevant role |gain access to certain features of the application relevant to my role when I log in
 
 |`* *` |general secretary of NUSSU |have the option to backup all, or even specific segments of application data into a data file |recover the required segments of data when there is an accidental deletion of data
 
@@ -871,10 +871,6 @@ As an executive officer of NUSSU, I would like to view which other committees my
 As an executive officer of NUSSU, I can log into the app with the required credentials, so that I can access certain functionalities of the app exclusive to my credentials only.
 
 As an executive member of NUSSU, I can create a new account for myself to log into the app, so that I can access the functionalities of the app.
-
-As an executive member of NUSSU, I can delete an existing account, so that the account that is redundant will be removed from the database.
-
-As an executive member of NUSSU, I can change the password of an existing account, so that I can make my account more secure.
 
 As a member of NUSSU, I would like to find out how to contact another member within NUSSU so that I can work more efficiently with them.
 
@@ -1054,20 +1050,19 @@ Use case ends
 
 *MSS*
 
-1.  User types a command to access a certain functionality in NUSSU-Connect
-2.  NUSSU-Connect prompts user to login first by entering login credentials
-3.  User types in login credentials along with the login command
-4.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
+1.  NUSSU-Connect prompts user to login first by entering login credentials
+2.  User types in login credentials along with the login command
+3.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 3a. User types in wrong password or user ID
+* 2a. User types in wrong password or user ID
 +
 [none]
-** 3a1. NUSSU-Connect displays error message and continues to prompt user for login credentials before doing anything else
+** 2a1. NUSSU-Connect continues to prompt user for login credentials before giving access to user
 +
 Use case ends.
 
@@ -1097,63 +1092,6 @@ Use case ends.
 ** 3a1. NUSSU-Connect shows error message to user and and does not create a new account
 +
 Use case ends.
-
-=== Use case: Delete current user accounts
-
-*MSS*
-
-1.  User types command together with user ID and password to delete account associated with input user ID and password
-2.  NUSSU-Connect account associated with input user ID and respective password and shows successful execution message
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. User types in the wrong current password associated with the user ID
-+
-[none]
-** 1a1. NUSSU-Connect shows error message to user and cancels deletion of account
-+
-Use case ends.
-* 1b. User wants to delete a non-existent user account
-+
-[none]
-** 1b1. NUSSU-Connect shows error message to user and cancels deletion of account
-+
-Use case ends.
-
-=== Use case: Changing password of current user accounts
-
-*MSS*
-
-1.  User types command with the relevant credentials of an existing account to change that account's password
-2.  NUSSU-Connect changes password of account associated with input user ID and new password and shows successful execution message
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. User types in the wrong current password associated with the user ID
-+
-[none]
-** 1a1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-* 1b. User wants to change the password of a non-existent user account
-+
-[none]
-** 1b1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-* 1c. User types in new password that matches current old password
-+
-[none]
-** 1c1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-
 
 _{More to be added}_
 

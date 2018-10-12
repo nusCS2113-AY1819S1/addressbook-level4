@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <loginbook>
+    <!-- Valid account -->
     <accounts>
         <userId>A1234567M</userId>
         <userPassword>zaq1xsw2cde3</userPassword>
     </accounts>
+    <!-- account with invalid user ID field -->
     <accounts>
-        <userId>A1234568M</userId>
-        <userPassword>1qaz2wsx3edc</userPassword>
+        <userId>AA234567M</userId>
+        <userPassword>zaq1xsw2cde3</userPassword>
     </accounts>
 </loginbook>
