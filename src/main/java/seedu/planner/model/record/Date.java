@@ -135,7 +135,6 @@ public class Date {
         return test.matches(DATE_VALIDATION_REGEX);
     }
 
-
     /**
      * Checks whether the current object {@code Date} is later than the given {@code Date}
      * @param other
