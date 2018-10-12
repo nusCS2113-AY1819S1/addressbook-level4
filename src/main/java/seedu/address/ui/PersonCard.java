@@ -80,7 +80,7 @@ public class PersonCard extends UiPart<Region> {
     }
 
     //Takes the mods for the day and adds them to the FlowPane
-    private void getMod(String mods[], FlowPane day) {
+    private void getMod(String[] mods, FlowPane day) {
         for (String it : mods) {
             Label slot = new Label(it);
             slot.setPrefSize(53, 25);
@@ -102,7 +102,9 @@ public class PersonCard extends UiPart<Region> {
         return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length];
     }
 
-    //Reads tags from a person, changes them to labels and adds colour
+    /**
+     *Reads tags from a person, changes them to labels and adds colour
+     */
     private void colourTag(Person person) {
         person.getTags().forEach(tag -> {
             Label tagLabel = new Label(tag.tagName);
