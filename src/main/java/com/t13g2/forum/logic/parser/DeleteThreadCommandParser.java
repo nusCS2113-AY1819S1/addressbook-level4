@@ -1,10 +1,14 @@
 package com.t13g2.forum.logic.parser;
 
 import com.t13g2.forum.commons.core.Messages;
-import com.t13g2.forum.commons.core.index.Index;
-import com.t13g2.forum.logic.commands.DeleteCommand;
 import com.t13g2.forum.logic.commands.DeleteThreadCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
+import com.t13g2.forum.model.forum.ForumThread;
+import com.t13g2.forum.storage.forum.UnitOfWork;
+
+import java.util.stream.Stream;
+
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_ID;
 
 
 /**
@@ -18,13 +22,27 @@ public class DeleteThreadCommandParser implements Parser<DeleteThreadCommand> {
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteThreadCommand parse(String args) throws ParseException {
-        try {
-            Index index = ParserUtil.parseIndex(args);
-            return null;
-        } catch (ParseException pe) {
-            throw new ParseException(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(args, PREFIX_THREAD_ID);
+
+        if (!arePrefixesPresent(argMultimap, PREFIX_THREAD_ID)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteThreadCommand.MESSAGE_USAGE));
         }
+        String thread_Id = ParserUtil.parseThreadId(argMultimap.getValue(PREFIX_THREAD_ID).get());
+        int threadId = Integer.parseInt(thread_Id);
+        UnitOfWork unitOfWork = new UnitOfWork();
+        ForumThread forumThread = unitOfWork.getForumThreadRepository().getThread(threadId);//get forum thread from repo by thread id
+
+        return new DeleteThreadCommand(forumThread);
     }
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
 }

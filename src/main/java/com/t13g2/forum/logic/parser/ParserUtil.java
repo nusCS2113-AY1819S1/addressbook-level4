@@ -189,6 +189,22 @@ public class ParserUtil {
     }
 
     /**
+     * threadId
+     */
+    public static String parseThreadId(String threadId) throws ParseException{
+        requireNonNull(threadId);
+        String trimmedThreadId = threadId.trim();
+        if (!isValidThreadId(trimmedThreadId)) {
+            throw new ParseException(ForumThread.MESSAGE_THREAD_ID_CONSTRAINTS);
+        }
+        return trimmedThreadId;
+    }
+    //Returns true if a given string is a valid thread id.
+    public static boolean isValidThreadId(String trimmedThreadId) {
+        return trimmedThreadId.matches(ForumThread.THREAD_ID_VALIDATION_REGEX);
+    }
+
+    /**
      * comment content
      */
     public static String parseComment(String comment) throws ParseException{
