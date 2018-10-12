@@ -206,12 +206,18 @@ _{explain how the user can enable/disable data encryption}_
 
 == Security Feature
 
-Login popup
+The timetable content are 'locked', and a user is prompted with this login pop up box.
 
 image::Security.png[width="790"]
 
-Users will have to enter their credentials to show the hidden timetable content. Closing this popup
-box will close the entire program.
+Users will have to enter their credentials to show the hidden timetable contents
+which they have clearance to look at. +
+
+
+
+Closing this popup box will close the entire program. +
+
+
 
 
 == FAQ
