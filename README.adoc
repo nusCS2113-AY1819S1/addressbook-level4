@@ -20,6 +20,7 @@ endif::[]
 * *Student Management System* is suitable for any Lecturers who has students under their supervision.
 * *Student Management System* will organize all students in his or her teaching module to be in their respective tutorial class.
 * *Student Management System* also contains multiple useful functionalities to assist Lecturer in his teaching activities.
+* *Testing
 
 '''
 == Functionalities
