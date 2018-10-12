@@ -8,13 +8,13 @@ import javafx.scene.layout.Region;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * An UI component that displays the
+ * An UI component that displays the name and the
  * level of education, desired job and desired salary
  * of a {@code Candidate}.
  */
-public class PersonCard extends UiPart<Region> {
+public class CandidateCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "CandidateCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -51,16 +51,11 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public PersonCard(Candidate candidate, int displayedIndex) {
+    public CandidateCard(Candidate candidate, int displayedIndex) {
         super(FXML);
         this.candidate = candidate;
         id.setText(displayedIndex + ". ");
         name.setText(candidate.getName().fullName);
-        //gender.setText(candidate.getGender().value);
-        //age.setText(candidate.getAge().value);
-        //phone.setText(candidate.getPhone().value);
-        //email.setText(candidate.getEmail().value);
-        //address.setText(candidate.getAddress().value);
         desired_job.setText(candidate.getJob().value);
         education.setText(candidate.getEducation().value);
         salary.setText(candidate.getSalary().value);
@@ -75,12 +70,12 @@ public class PersonCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof CandidateCard)) {
             return false;
         }
 
         // state check
-        PersonCard card = (PersonCard) other;
+        CandidateCard card = (CandidateCard) other;
         return id.getText().equals(card.id.getText())
                 && candidate.equals(card.candidate);
     }

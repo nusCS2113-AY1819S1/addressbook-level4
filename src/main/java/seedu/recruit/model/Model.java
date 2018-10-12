@@ -170,8 +170,13 @@ public interface Model {
      */
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
+    /** Returns an unmodifiable view of the filtered job lists of all companies */
     ObservableList<JobOffer> getFilteredCompanyJobList();
 
+    /**
+     * Updates the filter of the filtered company job list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
     void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
 
 }

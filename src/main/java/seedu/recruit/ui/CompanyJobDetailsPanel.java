@@ -3,24 +3,25 @@ package seedu.recruit.ui;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
-import seedu.recruit.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.recruit.commons.events.ui.CompanyPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.CompanyDetailsPanelSelectionChangedEvent;
 import seedu.recruit.model.company.Company;
-import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
- * Panel containing the list of persons,
- * and their details upon selection
+ * Left side of the Panel containing the list of company.
+ * Upon selection, right side of the panel shows the
+ * list of job offers offered in that selected company.
  */
 public class CompanyJobDetailsPanel extends UiPart<Region> {
     private static final String FXML = "CompanyJobDetailsPanel.fxml";
@@ -51,23 +52,24 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in company job details panel changed to : '" + newValue + "'");
-                        raise(new CompanyPanelSelectionChangedEvent(newValue));
+                        raise(new CompanyDetailsPanelSelectionChangedEvent(newValue));
                         showJobDetailsOfSelectedCompany();
                     }
                 });
     }
 
     /**
-     * Expands {@code PersonCard} by listing all the details of the selected Candidate
+     * Right side of {@code CompanyJobDetailsPanel} shows the list of jobs
+     * and their details {@code JobCard} of the selected Company
      */
     private void showJobDetailsOfSelectedCompany() {
         Company selectedCompany = companyView.getSelectionModel().getSelectedItem();
-        //selectedCompany.setItems(jobList);
-        //selectedCompany.setCellFactory(listView -> new CompanyJobDetailsViewCell());
+        companyJobDetailsView.setItems(selectedCompany.getUniqueJobList().getInternalList());
+        companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code CompanyCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
@@ -83,7 +85,9 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a company in {@code companyView}
+     * on the left side of {@code CompanyJobDetailsPanel}
+     * using a {@code CompanyCard}.
      */
     class CompanyViewCell extends ListCell<Company> {
         @Override
@@ -100,7 +104,9 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a job in {@code companyJobDetailsView}
+     * on the right side of {@code CompanyJobDetailsPanel}
+     * using a {@code JobCard}.
     */
     class CompanyJobDetailsViewCell extends ListCell<JobOffer> {
         @Override

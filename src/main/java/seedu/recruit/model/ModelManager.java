@@ -273,6 +273,10 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    /**
+     * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
+     * {@code versionedCompanyBook}
+     */
     @Override
     public ObservableList<JobOffer> getFilteredCompanyJobList() {
         return FXCollections.unmodifiableObservableList(filteredJobs);
