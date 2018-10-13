@@ -12,6 +12,8 @@ import seedu.address.model.group.Group;
  */
 public class GroupCard extends UiPart<Region> {
     private static final String FXML = "GroupListCard.fxml";
+    private static final String[] TAG_COLOR_STYLES =
+            { "teal", "red", "yellow", "blue", "orange", "brown", "green", "pink", "black", "grey" };
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -40,8 +42,26 @@ public class GroupCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         groupName.setText(group.getGroupName().groupName);
         groupLocation.setText(group.getGroupLocation().value);
-        group.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        initTags(group);
+    }
 
+    /**
+     * Returns the color style for {@code tagName}'s label.
+     */
+    private String getTagColorStyleFor(String tagName) {
+        // we use the hash code of the tag name to generate a random color, so that the color remain consistent
+        // between different runs of the program while still making it random enough between tags.
+        return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length];
+    }
+    /**
+     * Creates the tag labels for {@code group}.
+     */
+    private void initTags(Group group) {
+        group.getTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.getStyleClass().add(getTagColorStyleFor(tag.tagName));
+            tags.getChildren().add(tagLabel);
+        });
     }
 
     @Override

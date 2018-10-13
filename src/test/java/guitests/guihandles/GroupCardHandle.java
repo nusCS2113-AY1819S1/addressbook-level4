@@ -58,6 +58,15 @@ public class GroupCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
+    public List<String> getTagStyleClasses(String tag) {
+        return tagLabels
+                .stream()
+                .filter(label -> label.getText().equals(tag))
+                .map(Label::getStyleClass)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No such tag."));
+    }
+
     /**
      * Returns true if this handle contains {@code group}.
      */
@@ -68,5 +77,4 @@ public class GroupCardHandle extends NodeHandle<Node> {
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));
     }
-
 }

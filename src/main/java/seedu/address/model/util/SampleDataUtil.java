@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupLocation;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -52,10 +55,37 @@ public class SampleDataUtil {
         };
     }
 
+    public static Group[] getSampleGroups() {
+        return new Group[] {
+
+            new Group(new GroupName("CS2113"), new GroupLocation("LT15"), getTagSet("java", "friday", "4pm", "afternoon")),
+
+            new Group(new GroupName("CS2040C"), new GroupLocation("LT15"), getTagSet("cpp", "tuesday", "5pm")),
+
+            new Group(new GroupName("MA1508"), new GroupLocation("E1-01-01"), getTagSet("maths","linear", "wednesday", "2pm")),
+
+            new Group(new GroupName("CG2027"), new GroupLocation("E2-02-02"), getTagSet("circuits", "monday", "12pm")),
+
+            new Group(new GroupName("TUT[01]"), new GroupLocation("E3-03-03"), getTagSet("MA1501", "monday", "6pm", "night")),
+
+            new Group(new GroupName("TUT[02]"), new GroupLocation("LT12"), getTagSet("physics", "thursday", "8am", "morning")),
+
+            new Group(new GroupName("TUT[03]"), new GroupLocation("LT12"), getTagSet("physics", "thursday", "10am")),
+
+            new Group(new GroupName("TUT[04]"), new GroupLocation("LT12"), getTagSet("physics", "thursday", "12pm")),
+
+            new Group(new GroupName("TUT[05]"), new GroupLocation("LT12"), getTagSet("physics", "thursday", "4pm")),
+
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
+        }
+        for (Group sampleGroup : getSampleGroups()) {
+            sampleAb.createGroup(sampleGroup);
         }
         return sampleAb;
     }
