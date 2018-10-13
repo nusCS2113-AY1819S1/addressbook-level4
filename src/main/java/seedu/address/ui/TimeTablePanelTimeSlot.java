@@ -37,7 +37,7 @@ public class TimeTablePanelTimeSlot extends UiPart<Region> {
         super(FXML);
         this.timeSlot = timeSlot;
         id.setText(displayedIndex + ". ");
-        name.setText(timeSlot.getModName());
+        name.setText(timeSlot.getLabel());
     }
 
     @Override

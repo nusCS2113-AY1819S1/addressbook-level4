@@ -1,64 +1,88 @@
 package seedu.address.model.person;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+
 /**
- * Represents a single hour in TimeTable Class
+ * Represents a single timeslot in TimeTable Class
  *
  */
 public class TimeSlot {
+    public static final String MESSAGE_NOT_ENOUGH_ARGUMENTS = "Accepted argument example: Monday 8-10";
+    public static final String MESSAGE_CANNOT_PARSE_DAY = "Accepted day format: MONDAY";
+    public static final String MESSAGE_CANNOT_PARSE_TIME = "Accepted time format: 8-10";
 
-    public static final String MESSAGE_TIMESLOT_CONSTRAINTS =
-            "TIMESLOT HAVE TO BE IN THIS FORMAT ...";
-    private static final String TIMESLOT_VALIDATION_REGEX = "[0-6][:]\\d{4,}";
+    private DayOfWeek dayOfWeek;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private String label;
 
-
-    private boolean isFilled;
-    private String modName;
-
-    //For the parser to label which timeslot it is
-    //0-23 hour of the day, 0-6 day of the week
-    private int hour;
-    private int day;
-
-
-    public TimeSlot(int hour, int day) {
-        this.isFilled = false;
-        this.modName = "";
-        this.hour = hour;
-        this.day = day;
+    public TimeSlot(DayOfWeek day, LocalTime start, LocalTime end) {
+        setStartTime(start);
+        setEndTime(end);
+        setDayOfWeek(day);
     }
 
-    public int getHour() {
-        return hour;
+    public LocalTime getStartTime() {
+        return startTime;
     }
 
-    public int getDay() {
-        return day;
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
     }
 
-    public void setIsFilled() {
-        this.isFilled = true;
+    public LocalTime getEndTime() {
+        return endTime;
     }
 
-    public boolean getIsFilled() {
-        return isFilled;
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 
-    public void removeIsFilled() {
-        this.isFilled = false;
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public void setModName(String name) {
-        modName = name;
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
-    public String getModName() {
-        return modName;
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
     }
 
     /**
-     * Returns true if a given string is a valid timeslot.
+     * Checks whether this TimeSlot overlaps with toCompare
+     *
+     * @param toCompare TimeSlot to compare against
+     * @return Whether this TimeSlot overlaps with toCompare
      */
-    public static boolean isValidTimeSlot(String test) {
-        return test.matches(TIMESLOT_VALIDATION_REGEX);
+    public boolean isOverlap(TimeSlot toCompare) {
+        boolean isSameDay = this.getDayOfWeek() == toCompare.getDayOfWeek();
+        boolean isOverlapTime = this.getStartTime().isBefore(toCompare.getEndTime())
+                                || toCompare.getStartTime().isBefore(this.getEndTime());
+
+        return isSameDay && isOverlapTime;
+    }
+
+    /**
+     * Concatenates two overlapping TimeSlots
+     * @param toConcat TimeSlot to be concatenated
+     * @return Concatenated TimeSlot
+     */
+    public TimeSlot concatTimeSlots(TimeSlot toConcat) {
+        assert isOverlap(toConcat);
+
+        LocalTime newStart = (this.getStartTime().isBefore(toConcat.getStartTime()))
+                             ? this.getStartTime() : toConcat.getStartTime();
+
+        LocalTime newEnd = (this.getEndTime().isAfter(toConcat.getEndTime()))
+                           ? this.getEndTime() : toConcat.getEndTime();
+
+        return new TimeSlot(this.getDayOfWeek(), newStart, newEnd);
     }
 }

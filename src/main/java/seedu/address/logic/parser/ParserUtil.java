@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DateTimeException;
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -131,16 +134,35 @@ public class ParserUtil {
     public static TimeSlot parseTimeSlot (String timeslot) throws ParseException {
         requireNonNull(timeslot);
         String trimmedTimeSlot = timeslot.trim();
-        if (!TimeSlot.isValidTimeSlot(trimmedTimeSlot)) {
-            throw new ParseException(TimeSlot.MESSAGE_TIMESLOT_CONSTRAINTS);
+
+        String[] splitArray = trimmedTimeSlot.split("\\s+");
+
+        if (splitArray.length != 2) {
+            throw new ParseException(TimeSlot.MESSAGE_NOT_ENOUGH_ARGUMENTS);
         }
 
+        String dayString = splitArray[0];
+        String timeRangeString = splitArray[1];
+        int startInt = Integer.parseInt(timeRangeString.split("-")[0]);
+        int endInt = Integer.parseInt(timeRangeString.split("-")[1]);
 
-        int hour = Integer.parseInt(trimmedTimeSlot.substring(2, 4));
-        int day = Character.getNumericValue(trimmedTimeSlot.charAt(0));
+        DayOfWeek day;
+        LocalTime start;
+        LocalTime end;
 
-        TimeSlot timeslotObject = new TimeSlot (hour, day);
-        timeslotObject.setIsFilled();
-        return timeslotObject;
+        try {
+            day = DayOfWeek.valueOf(dayString);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(TimeSlot.MESSAGE_CANNOT_PARSE_DAY);
+        }
+
+        try {
+            start = LocalTime.of(startInt, 0);
+            end = LocalTime.of(endInt, 0);
+        } catch (DateTimeException e){
+            throw new ParseException(TimeSlot.MESSAGE_CANNOT_PARSE_TIME);
+        }
+
+        return new TimeSlot(day, start, end);
     }
 }

@@ -1,5 +1,10 @@
 package seedu.address.ui;
 
+import java.time.format.TextStyle;
+import java.util.Locale;
+import java.util.logging.Logger;
+import java.time.DayOfWeek;
+
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.geometry.HPos;
@@ -7,8 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-
-import java.util.logging.Logger;
 
 /**
  * A invisible grid for the TimingMarkers to live in. It contains multiple TimeTablePanelTimingMarker(s)
@@ -23,14 +26,6 @@ public class TimeTablePanelDayMarkerGrid extends UiPart<Region> {
     private static final String FXML = "TimeTablePanelDayMarkerGrid.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
-
-    private enum Day {
-        MON,
-        TUE,
-        WED,
-        THU,
-        FRI
-    }
 
     @FXML
     private GridPane dayMarkerGrid;
@@ -50,12 +45,11 @@ public class TimeTablePanelDayMarkerGrid extends UiPart<Region> {
      * Populates the timings on the top row from 1000 to 1800
      */
     private void populateDays() {
-        int daysAdded = 0;
+        DayOfWeek[] days = DayOfWeek.values();
 
-        for (Day day : Day.values()) {
-            Label label = new Label(day.name());
-            dayMarkerGrid.add(label, 0, daysAdded);
-            daysAdded++;
+        for (int i = 0; i < 5; i++) {
+            Label label = new Label((days[i].getDisplayName(TextStyle.SHORT, Locale.ENGLISH)).toUpperCase());
+            dayMarkerGrid.add(label, 0, i);
             GridPane.setHalignment(label, HPos.CENTER);
         }
     }

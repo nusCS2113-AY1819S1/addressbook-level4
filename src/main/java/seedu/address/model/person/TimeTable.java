@@ -1,33 +1,57 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
 /**
  * Represents a timetable that is associated with a person
  *
  */
 public class TimeTable {
-
-
-    private TimeSlot[][] weeklyslots;
+    private Collection<TimeSlot> timeSlots;
 
     public TimeTable() {
-        this.weeklyslots = new TimeSlot[7][24];
+        timeSlots = new ArrayList<>();
+    }
+
+    public TimeTable(Collection<TimeSlot> input) {
+        timeSlots = input;
     }
 
     /**
-     *  Sets the timeslot as filled
-     * @param day
-     * @param hour
+     * Adds a TimeSlot to the TimeTable
+     *
+     * @param toAdd TimeSlot to be added
      */
-    public void fillTimeSlot(int day, int hour) {
-        weeklyslots[day][hour] = new TimeSlot(day, hour);
-        weeklyslots[day][hour].setIsFilled();
+    public void addTimeSlot(TimeSlot toAdd) {
+        Optional <TimeSlot> overlapTimeSlot = findOverlapTimeSlot(toAdd);
+
+        if (overlapTimeSlot.isPresent()) {
+            removeTimeSlot(overlapTimeSlot.get());
+            timeSlots.add(overlapTimeSlot.get().concatTimeSlots(toAdd));
+        } else {
+            timeSlots.add(toAdd);
+        }
     }
 
-    public void removeTimeSlot(int day, int hour) {
-        weeklyslots[day][hour].removeIsFilled();
+    public void removeTimeSlot (TimeSlot toRemove) {
+        timeSlots.remove(toRemove);
     }
 
-    public boolean checkTimeSlot(int day, int hour) {
-        return false;
+    /**
+     * Checks whether toCheck overlaps with any TimeSlot in the existing timetable
+     *
+     * @param toCheck the TimeSlot to be checked against
+     * @return Optional containing overlap TimeSlot
+     */
+    private Optional <TimeSlot> findOverlapTimeSlot(TimeSlot toCheck) {
+        for (TimeSlot timeSlot : timeSlots) {
+            if (timeSlot.isOverlap(toCheck)) {
+                return Optional.of(timeSlot);
+            }
+        }
+        return Optional.empty();
     }
 }

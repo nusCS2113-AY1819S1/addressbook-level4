@@ -105,12 +105,6 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         TimeTable timeTable = personToEdit.getTimeTable();
 
-        //Edits the copy of the timetable, currently only allow one timeSlot edit per command
-        if (editPersonDescriptor.getTimeSlot().isPresent()) {
-            timeTable.fillTimeSlot(editPersonDescriptor.getTimeSlotObject().getDay(),
-                    editPersonDescriptor.getTimeSlotObject().getHour());
-        }
-
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable);
     }
 
