@@ -2,6 +2,8 @@ package seedu.address.model.task;
 
 import java.util.Objects;
 
+import seedu.address.model.task.exceptions.TaskCompletedException;
+
 /**
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -52,15 +54,14 @@ public class Task {
     /**
      * Marks the task as completed by
      * setting @code {isCompleted} to true
-     * If task is already completed, return false.
+     * If task is already completed, {@throws TaskCompletedException}
      */
-    public boolean completed() {
+    public Task completed() {
         if (isCompleted) {
-            return false;
-        } else {
-            this.isCompleted = true;
-            return true;
+            throw new TaskCompletedException();
         }
+        this.isCompleted = true;
+        return this;
     }
 
     /**

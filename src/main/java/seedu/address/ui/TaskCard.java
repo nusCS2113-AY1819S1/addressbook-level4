@@ -33,6 +33,8 @@ public class TaskCard extends UiPart<Region> {
     private Label description;
     @FXML
     private Label priorityLevel;
+    @FXML
+    private Label status;
     /*
     @FXML
     private Label email;
@@ -47,6 +49,11 @@ public class TaskCard extends UiPart<Region> {
         title.setText(task.getTitle());
         description.setText(task.getDescription());
         priorityLevel.setText(task.getPriorityLevel().priorityLevel);
+        if (task.isCompleted()) {
+            status.setText("Completed!");
+        } else {
+            status.setText("Not completed :(");
+        }
         //email.setText(task.getEmail().value);
         //task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

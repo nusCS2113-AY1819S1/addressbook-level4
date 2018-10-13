@@ -1,14 +1,15 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.EventsCenter;
-//import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**
  * Terminates the program.
  */
-public class ExitCommand extends Command {
+public class ExitCommand extends Command implements CommandParser {
 
     public static final String COMMAND_WORD = "exit";
 
@@ -16,8 +17,17 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        //        EventsCenter.getInstance().post(new ExitAppRequestEvent());
+        EventsCenter.getInstance().post(new ExitAppRequestEvent());
         return new CommandResult(MESSAGE_EXIT_ACKNOWLEDGEMENT);
     }
 
+    @Override
+    public Command parse(String arguments) throws ParseException {
+        return new ExitCommand();
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 }

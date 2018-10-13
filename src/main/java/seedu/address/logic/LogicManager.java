@@ -5,8 +5,18 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.CompleteTaskCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.TaskBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -26,7 +36,16 @@ public class LogicManager extends ComponentManager implements Logic {
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
-        taskBookParser = new TaskBookParser();
+        taskBookParser = new TaskBookParser(new AddTaskCommand(),
+                new ClearCommand(),
+                new CompleteTaskCommand(),
+                new DeleteCommand(),
+                new ListCommand(),
+                new HelpCommand(),
+                new ExitCommand(),
+                new HistoryCommand(),
+                new UndoCommand(),
+                new RedoCommand());
     }
 
     @Override
