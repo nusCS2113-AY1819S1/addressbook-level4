@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Set;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
@@ -37,8 +37,7 @@ public class ShopDay extends TimeIdentifiedClass {
         if (isValidDateFormat(date)) {
             this.date = date;
             this.initialise();
-        }
-        else {
+        } else {
             throw new InvalidTimeFormatException();
         }
     }
@@ -52,11 +51,9 @@ public class ShopDay extends TimeIdentifiedClass {
         String transactionTime = transaction.getTime();
         if (!this.isActiveDay) {
             throw new ClosedShopDayException();
-        }
-        else if (shopDayRecord.containsKey(transactionTime)) {
+        } else if (shopDayRecord.containsKey(transactionTime)) {
             throw new DuplicateTransactionException();
-        }
-        else {
+        } else {
             shopDayRecord.put(transactionTime,transaction);
         }
     }
@@ -90,6 +87,11 @@ public class ShopDay extends TimeIdentifiedClass {
         this.isActiveDay = false;
     }
 
+    /**
+     *
+     * @param date
+     * @return
+     */
     public static boolean isValidDateFormat(String date) {
         String[] splitDate = date.split("/");
         if (isValidYear(splitDate[0]) && isValidMonth(splitDate[1]) && isValidDay(splitDate[2])) {

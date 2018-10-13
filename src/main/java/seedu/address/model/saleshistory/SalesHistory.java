@@ -88,6 +88,10 @@ public class SalesHistory {
         this.activeDay = salesHistory.get(day.getDay());
     }
 
+    /**
+     * TODO
+     * @param transaction
+     */
     public void addTransaction(Transaction transaction) {
         // TODO: Update the exception handling here.
 

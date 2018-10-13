@@ -2,10 +2,10 @@ package seedu.address.model.shopday;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Set;
 import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.model.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.shopday.exceptions.DuplicateTransactionException;
@@ -37,12 +37,22 @@ public class ShopDay {
         return this.date;
     }
 
-    public void addTransaction(Transaction transaction) throws ClosedShopDayException,DuplicateTransactionException {
+    /**
+     * todo
+     * @param transaction
+     * @throws ClosedShopDayException
+     * @throws DuplicateTransactionException
+     */
+    public void addTransaction(Transaction transaction) throws ClosedShopDayException, DuplicateTransactionException {
         String transactionTime = transaction.getTime();
-        if (!this.isActiveDay) throw new ClosedShopDayException();
-        else if (shopDayRecord.containsKey(transactionTime)) throw new DuplicateTransactionException();
+        if (!this.isActiveDay) {
+            throw new ClosedShopDayException();
+        }
+        else if (shopDayRecord.containsKey(transactionTime)) {
+            throw new DuplicateTransactionException();
+        }
         else {
-            shopDayRecord.put(transactionTime,transaction);
+            shopDayRecord.put(transactionTime, transaction);
         }
     }
 
@@ -70,7 +80,7 @@ public class ShopDay {
         this.isActiveDay = true;
     }
 
-    public void closeDay(){
+    public void closeDay() {
         this.isActiveDay = false;
     }
 

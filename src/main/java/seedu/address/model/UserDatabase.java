@@ -167,7 +167,9 @@ public class UserDatabase implements ReadOnlyUserDatabase {
     /**
      * Removes {@code key} from this {@code UserDatabase}.
      */
-    public void removeUser(User key) { users.remove(key); }
+    public void removeUser(User key) {
+        users.remove(key);
+    }
 
     /**
      * Resets the existing user list of this {@code UserDatabase} with {@code newData}.

@@ -19,7 +19,7 @@ public class DNameContainsKeywordsPredicate implements Predicate<Distributor> {
     public boolean test(Distributor distributor) {
         return keywords.stream()
                 .anyMatch(keyword
-                        -> StringUtil.containsWordIgnoreCase(distributor.getDistName().fullDistName, keyword));
+                    -> StringUtil.containsWordIgnoreCase(distributor.getDistName().fullDistName, keyword));
     }
 
     @Override

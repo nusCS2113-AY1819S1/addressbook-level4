@@ -5,8 +5,11 @@ import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTran
  *  This program checks if Transaction objects behave as they should. If all is well, it should output the current time
  *  as output on the terminal.
  */
-
 public class TransactionTest {
+	/**
+	 *
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Transaction transaction = new Transaction();
 		System.out.println(transaction.getTime());
