@@ -45,7 +45,7 @@ public class AddressBookParser {
      * Used to separate multiple command words and args
      */
     private static final Pattern ADVANCED_COMMAND_FORMAT =
-            Pattern.compile("(?<commandWords>.*?\\S*((?<=find)|(?=(?: [0-9]| [a-z]\\/))|$))(?<arguments>.*)");
+            Pattern.compile("(?<commandWords>.*?\\S+((?<=find)|(?=(?:\\s+[0-9]|\\s+[a-z]\\/))|$))(?<arguments>.*)");
 
     /**
      * Parses user input into command for execution.
