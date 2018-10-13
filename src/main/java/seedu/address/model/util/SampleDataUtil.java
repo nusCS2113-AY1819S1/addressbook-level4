@@ -63,13 +63,11 @@ public class SampleDataUtil {
         for (Distributor sampleDistributor : getSampleDistributors()) {
             sampleAb.addDistributor(sampleDistributor);
         }
-
-    //    for (Product sampleProduct : getSamplePersons()) {
-    //        sampleAb.addPerson(sampleProduct);
-    //    }
+        //    for (Product sampleProduct : getSamplePersons()) {
+        //        sampleAb.addPerson(sampleProduct);
+        //    }
         return sampleAb;
     }
-
 
     /**
      * Returns a tag set containing the list of strings given.
