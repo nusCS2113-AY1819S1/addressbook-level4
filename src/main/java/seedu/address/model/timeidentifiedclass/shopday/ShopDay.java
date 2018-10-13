@@ -1,32 +1,31 @@
 package seedu.address.model.timeidentifiedclass.shopday;
 
-import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
-import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
-import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
+import static java.util.Objects.requireNonNull;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.Set;
 import java.util.Iterator;
-import static java.util.Objects.requireNonNull;
 
+import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
+
+/**
+ *
+ */
 public class ShopDay extends TimeIdentifiedClass {
     private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private static LocalDateTime time;
 
-    private TreeMap<String,Transaction> shopDayRecord;
-    private TreeMap<String,Reminder> reminderRecord;
+    private TreeMap<String, Transaction> shopDayRecord;
+    private TreeMap<String, Reminder> reminderRecord;
     private final String date;
     private boolean isActiveDay;
-
-    private void initialise() {
-        this.shopDayRecord = new TreeMap<>();
-        this.reminderRecord = new TreeMap<>();
-        this.openDay();
-    }
 
     public ShopDay() {
         this.date = dayFormat.format(time.now());
@@ -48,10 +47,15 @@ public class ShopDay extends TimeIdentifiedClass {
         return this.date;
     }
 
-    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException, ClosedShopDayException,DuplicateTransactionException {
+    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
+            ClosedShopDayException,DuplicateTransactionException {
         String transactionTime = transaction.getTime();
-        if (!this.isActiveDay) throw new ClosedShopDayException();
-        else if (shopDayRecord.containsKey(transactionTime)) throw new DuplicateTransactionException();
+        if (!this.isActiveDay) {
+            throw new ClosedShopDayException();
+        }
+        else if (shopDayRecord.containsKey(transactionTime)) {
+            throw new DuplicateTransactionException();
+        }
         else {
             shopDayRecord.put(transactionTime,transaction);
         }
@@ -92,5 +96,11 @@ public class ShopDay extends TimeIdentifiedClass {
             return true;
         }
         return false;
+    }
+
+    private void initialise() {
+        this.shopDayRecord = new TreeMap<>();
+        this.reminderRecord = new TreeMap<>();
+        this.openDay();
     }
 }

@@ -8,8 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.distributor.exceptions.DuplicateDistributorException;
 import seedu.address.model.distributor.exceptions.DistributorNotFoundException;
+import seedu.address.model.distributor.exceptions.DuplicateDistributorException;
 
 /**
  * A list of distributors that enforces uniqueness between its elements and does not allow nulls.
@@ -50,7 +50,8 @@ public class UniqueDistributorList implements Iterable<Distributor> {
     /**
      * Replaces the distributor {@code target} in the list with {@code editedDistributor}.
      * {@code target} must exist in the list.
-     * The distributor identity of {@code editedDistributor} must not be the same as another existing distributor in the list.
+     * The distributor identity of {@code editedDistributor} must not be the same as
+     * another existing distributor in the list.
      */
     public void setDistributor(Distributor target, Distributor editedDistributor) {
         requireAllNonNull(target, editedDistributor);

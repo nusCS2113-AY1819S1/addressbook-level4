@@ -45,6 +45,9 @@ public class User {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    /**
+     * Returns true if user of the same name has the correct address book extension field.
+     */
     public static boolean isValidAddressBookFilePath(Path test, String username) {
         return test.equals(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX)
                 && !test.equals("");
@@ -64,7 +67,6 @@ public class User {
 
     /**
      * Returns true if both user of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameUser(User otherUser) {
         if (otherUser == this) {

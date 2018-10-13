@@ -1,8 +1,5 @@
 package seedu.address.model.shopday;
 
-import seedu.address.model.shopday.exceptions.ClosedShopDayException;
-import seedu.address.model.shopday.exceptions.DuplicateTransactionException;
-import seedu.address.model.transaction.Transaction;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
@@ -10,20 +7,21 @@ import java.util.TreeMap;
 import java.util.Set;
 import java.util.Iterator;
 
+import seedu.address.model.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.shopday.exceptions.DuplicateTransactionException;
+import seedu.address.model.transaction.Transaction;
+
+/**
+ * TODO
+ */
 public class ShopDay {
     private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private static LocalDateTime time;
 
-    private TreeMap<String,Transaction> shopDayRecord;
-    private TreeMap<String,Reminder> reminderRecord;
+    private TreeMap<String, Transaction> shopDayRecord;
+    private TreeMap<String, Reminder> reminderRecord;
     private String date;
     private boolean isActiveDay;
-
-    private void initialise() {
-        this.shopDayRecord = new TreeMap<>();
-        this.reminderRecord = new TreeMap<>();
-        this.openDay();
-    }
 
     public ShopDay() {
         this.date = dayFormat.format(time.now());
@@ -74,5 +72,11 @@ public class ShopDay {
 
     public void closeDay(){
         this.isActiveDay = false;
+    }
+
+    private void initialise() {
+        this.shopDayRecord = new TreeMap<>();
+        this.reminderRecord = new TreeMap<>();
+        this.openDay();
     }
 }

@@ -57,6 +57,9 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         hasLoggedIn = loggedin;
     }
 
+    /**
+     * Returns true if a user with the same identity as {@code user} exists in the user database.
+     */
     public boolean hasUser(User user) {
         requireNonNull(user);
         return users.contains(user);
@@ -144,7 +147,9 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * Adds a user to the User Database.
      * @throws DuplicateUserException if an equivalent user already exists.
      */
-    public void addUser(User user) throws DuplicateUserException { users.add(user); }
+    public void addUser(User user) throws DuplicateUserException {
+        users.add(user);
+    }
 
     /**
      * Replaces the given user {@code target} in the list with {@code editedUser}.
@@ -158,7 +163,6 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         requireNonNull(userWithNewPassword);
         users.setUser(target, userWithNewPassword);
     }
-
 
     /**
      * Removes {@code key} from this {@code UserDatabase}.

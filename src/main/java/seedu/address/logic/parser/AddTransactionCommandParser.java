@@ -12,6 +12,11 @@ import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTran
  */
 public class AddTransactionCommandParser implements Parser<AddTransactionCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddTransactionCommand
+     * and returns an AddTransactionCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public AddTransactionCommand parse(String args) throws ParseException {
         String[] productList = args.split(PREFIX_PRODUCT.toString());
         Transaction transaction = new Transaction();
