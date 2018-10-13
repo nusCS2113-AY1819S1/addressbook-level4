@@ -1,14 +1,18 @@
 package seedu.address.model.saleshistory;
 
+import java.util.NoSuchElementException;
+import java.util.TreeMap;
+
 import seedu.address.model.saleshistory.exceptions.DuplicateDayException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-import java.util.NoSuchElementException;
-import java.util.TreeMap;
 
+/**
+ * TODO
+ */
 public class SalesHistory {
     private TreeMap<String,ShopDay> salesHistory;
     private ShopDay activeDay;

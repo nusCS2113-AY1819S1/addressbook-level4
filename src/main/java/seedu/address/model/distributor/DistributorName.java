@@ -1,6 +1,5 @@
 package seedu.address.model.distributor;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -49,7 +48,7 @@ public class DistributorName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof seedu.address.model.distributor.DistributorName // instanceof handles nulls
-                && fullDistName.equals(((seedu.address.model.distributor.DistributorName) other).fullDistName)); // state check
+                && fullDistName.equals(((seedu.address.model.distributor.DistributorName) other).fullDistName));
     }
 
     @Override

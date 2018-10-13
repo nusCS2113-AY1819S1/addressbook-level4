@@ -1,8 +1,12 @@
 package seedu.address.model.login;
 
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+
+/**
+ * Represents a Password used to login to Inventarie Pro
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 
 public class Password {
 

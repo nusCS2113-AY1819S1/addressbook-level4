@@ -100,7 +100,9 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ UserDatabase methods ==============================
 
     @Override
-    public Path getUserDatabaseFilePath() { return userDatabaseStorage.getUserDatabaseFilePath(); }
+    public Path getUserDatabaseFilePath() {
+        return userDatabaseStorage.getUserDatabaseFilePath();
+    }
 
     @Override
     public Optional<ReadOnlyUserDatabase> readUserDatabase() throws DataConversionException, IOException {

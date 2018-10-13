@@ -13,6 +13,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
 
+/**
+ * Parses input arguments and creates a new ChangeUserPasswordCommand object
+ */
 public class ChangeUserPasswordCommandParser implements Parser<ChangeUserPasswordCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ChangeUserPasswordCommand
