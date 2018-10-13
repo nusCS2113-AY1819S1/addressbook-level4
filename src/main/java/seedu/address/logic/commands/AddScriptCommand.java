@@ -33,22 +33,22 @@ public class AddScriptCommand extends Command {
     public static final String MESSAGE_ADD_ERROR = "Line %s of %s cannot be executed";
     public static final String MESSAGE_UNABLE_TO_READ_FILE = "%s is not able to be read";
     public static final String MESSAGE_FILE_MISSING = "%s is not present in the folder";
-    public static final String MESSAGE_ADD_COMMAND_FAIL = "Add Command is not valid";
 
     private String textFileName;
     private Path path;
+    private AddScriptParser addScriptParser;
 
     public AddScriptCommand(String fileName) {
         requireNonNull(fileName);
         textFileName = fileName.replaceAll("^\\s+", "") + TEXT_EXTENSION ;
         this.path = FileUtil.getPath(textFileName);
+        this.addScriptParser = new AddScriptParser();
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        AddScriptParser addScriptParser = new AddScriptParser();
-        String multCommandError = new String();
+        String multCommandError;
 
         if (!FileUtil.isFileExists(path)) {
             return new CommandResult(String.format(MESSAGE_FILE_MISSING, textFileName));
@@ -78,9 +78,7 @@ public class AddScriptCommand extends Command {
             try {
                 Command command = addScriptParser.parseCommand(fullCommands);
                 command.execute(model, history);
-            } catch (ParseException pe) {
-                lineNumbers = lineNumbers + (commands.indexOf(fullCommands) + 1) + COMMA;
-            } catch (CommandException ce) {
+            } catch (ParseException | CommandException pe) {
                 lineNumbers = lineNumbers + (commands.indexOf(fullCommands) + 1) + COMMA;
             }
         }

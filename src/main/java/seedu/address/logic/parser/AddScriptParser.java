@@ -38,8 +38,7 @@ public class AddScriptParser extends AddressBookParser {
 
         if (commandWord.equals(AddCommand.COMMAND_WORD) || commandWord.equals(AddCommand.COMMAND_WORD_2)) {
             return new AddCommandParser().parse(arguments);
-        }
-        else {
+        } else {
             throw new ParseException(MESSAGE_WRONG_COMMAND);
         }
     }
