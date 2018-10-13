@@ -239,6 +239,11 @@ public class ParserUtil {
         return new Message(trimmedMessage);
     }
 
+    /** Checks if input value by the user is not Null or not 0
+     * @param value
+     * @return
+     * @throws ParseException
+     */
     public static int parseInteger(String value) throws ParseException {
         String trimmedInt = value.trim();
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedInt)) {
@@ -248,25 +253,33 @@ public class ParserUtil {
     }
 
 
+    /**
+     * Conducts the check of flags during user command input
+     * Accepts "true" or '1' to assert true
+     * Accepts "false" or '0' to assert false
+     * @param isFlagged
+     * @return
+     * @throws ParseException
+     */
     public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
         requireNonNull(isFlagged);
         String trimmedFlaggedValue = isFlagged.trim().toLowerCase();
         switch(trimmedFlaggedValue) {
-            case "false":
-            case "0":
-                trimmedFlaggedValue = "false";
-                break;
-            case "true":
-            case "1":
-                trimmedFlaggedValue = "true";
-                break;
-            default:
-                throw new ParseException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
+        case "false":
+        case "0":
+            trimmedFlaggedValue = "false";
+            break;
+        case "true":
+        case "1":
+            trimmedFlaggedValue = "true";
+            break;
+        default:
+            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
         }
         Boolean flag = Boolean.valueOf(trimmedFlaggedValue);
         if (flag) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

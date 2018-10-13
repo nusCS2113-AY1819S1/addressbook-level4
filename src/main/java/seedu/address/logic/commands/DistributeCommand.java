@@ -18,10 +18,10 @@ import seedu.address.model.distribute.DistributeAlgorithm;
  */
 public class DistributeCommand extends Command {
 
-    public final static String COMMAND_WORD = "distinto";
-    public final static String COMMAND_WORD_2 = "di";
+    public static final String COMMAND_WORD = "distinto";
+    public static final String COMMAND_WORD_2 = "di";
 
-    public final static String MESSAGE_SUCCESS = "Distribution Success";
+    public static final String MESSAGE_SUCCESS = "Distribution Success";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Distribute students equally into N groups.\n"
             + "Parameters: NUMBER OF GROUPS "

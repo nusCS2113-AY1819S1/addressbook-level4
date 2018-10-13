@@ -2,6 +2,8 @@ package seedu.address.model.distribute;
 
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toMap;
+import static seedu.address.model.person.Gender.VALID_GENDER_FEMALE;
+import static seedu.address.model.person.Gender.VALID_GENDER_MALE;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,11 +18,17 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 
+/**
+ * DistributeAlgorithm class contains all the algorithm that is based on distinto command flags
+ * This will contain 4 different types of Algorithm.
+ * First - normalDistribution
+ * Second - genderDistribution
+ * Third - nationalityDistribution
+ * Forth - Gender & Nationality Distribution
+ */
 public class DistributeAlgorithm {
 
     private static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
-    private static final String VALID_GENDER_MALE = "MALE";
-    private static final String VALID_GENDER_FEMALE = "FEMALE";
 
     public DistributeAlgorithm(Model model, Distribute dist) throws CommandException {
         requireNonNull(dist);
@@ -35,36 +43,33 @@ public class DistributeAlgorithm {
         // Get all person data via ObservableList
         ObservableList<Person> allPerson = model.getFilteredPersonList();
         requireNonNull(allPerson);
-        if(allPerson.size() < index){
+        if (allPerson.size() < index) {
             throw new CommandException(MESSAGE_INVALID_SIZE);
         }
 
         //Converts into ArrayList to use Randomizer via Collections
         LinkedList<Person> allPersonArrayList = new LinkedList<>(allPerson);
-        allPersonArrayList = Randomizer(allPersonArrayList);
+        allPersonArrayList = randomizer(allPersonArrayList);
 
-        if(!genderFlag && !nationalityFlag){
-            NormalDistribution(index, groupArrayList, allPersonArrayList);
-        }else if(!genderFlag && nationalityFlag){
-            NationalityDistribution(index, groupArrayList, allPersonArrayList);
-        }else if(genderFlag && !nationalityFlag){
-            GenderDistribution(index, groupArrayList, allPersonArrayList);
-        }else{
-            StrictDistribution(index, groupArrayList, allPersonArrayList);
+        if (!genderFlag && !nationalityFlag) {
+            normalDistribution(index, groupArrayList, allPersonArrayList, groupName);
+        } else if (!genderFlag && nationalityFlag) {
+            nationalityDistribution(index, groupArrayList, allPersonArrayList, groupName);
+        } else if (genderFlag && !nationalityFlag) {
+            genderDistribution(index, groupArrayList, allPersonArrayList, groupName);
+        } else {
+            strictDistribution(index, groupArrayList, allPersonArrayList, groupName);
         }
     }
 
-    private LinkedList<Person> Randomizer(LinkedList<Person> person){
-        requireNonNull(person);
-        Collections.shuffle(person);
-        return person;
-    }
-
-    private void NormalDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
-        for(int i=index; i>0; i--){                             //number of groups to add into the groupArrayList
+    /**
+     */
+    private void normalDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
+                                    LinkedList<Person> allPersonArrayList, String groupName) {
+        for (int i = index; i > 0; i--) { //number of groups to add into the groupArrayList
             ArrayList<Person> addPerson = new ArrayList<>();
-            int paxInAGroup = allPersonArrayList.size()/i;
-            while(paxInAGroup > 0){
+            int paxInAGroup = allPersonArrayList.size() / i;
+            while (paxInAGroup > 0) {
                 addPerson.add(allPersonArrayList.getLast());
                 allPersonArrayList.removeLast();
                 paxInAGroup--;
@@ -74,41 +79,51 @@ public class DistributeAlgorithm {
         }
 
         // TODO: Add function that iterate groupArrayList and addMemebrs into the group
-        for(int i=0;i<groupArrayList.size();i++){
-            System.out.println("Group : " + i);
-            for(int j=0; j<groupArrayList.get(i).size();j++){
+        for (int i = 0; i < groupArrayList.size(); i++) {
+            System.out.println(groupNameConcatenation(i, groupName));
+            for (int j = 0; j < groupArrayList.get(i).size(); j++) {
                 System.out.println(groupArrayList.get(i).get(j));
             }
         }
         groupArrayList.clear();
     }
 
-    private void NationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPerson) {
+    /**
+     */
+    private void nationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
+                                         LinkedList<Person> allPerson, String groupName) {
     //   LinkedList<Person> nationalityLinkList = CreateNationalityList(allPerson);
-    //        int numOfDifferentNationality = NumberOfDifferentNationality(allPerson);
+    //        int numOfDifferentNationality = numberOfDifferentNationality(allPerson);
 
     }
 
-    private void GenderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPerson) {
+    /**
+     */
+    private void genderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
+                                    LinkedList<Person> allPerson, String groupName) {
         LinkedList<Person> maleLinkList = new LinkedList<>();
         LinkedList<Person> femaleLinkList = new LinkedList<>();
         int loopCounter = 0;
         int num = 0;
 
-        maleLinkList = FilterGender(allPerson, maleLinkList, VALID_GENDER_MALE);
-        femaleLinkList = FilterGender(allPerson, femaleLinkList, VALID_GENDER_FEMALE);
+        maleLinkList = filterGender(allPerson, maleLinkList, VALID_GENDER_MALE);
+        femaleLinkList = filterGender(allPerson, femaleLinkList, VALID_GENDER_FEMALE);
 
-        while(maleLinkList.size()!=0 || femaleLinkList.size()!=0) {
-            if(loopCounter%index == 0) num =0;
+        while (maleLinkList.size() != 0 || femaleLinkList.size() != 0) {
+            if (loopCounter % index == 0) {
+                num = 0;
+            }
             while (num < index) {
-                if(maleLinkList.size()==0 && femaleLinkList.size()==0) break;
+                if (maleLinkList.size() == 0 && femaleLinkList.size() == 0) {
+                    break;
+                }
                 ArrayList<Person> temp = new ArrayList<>();
-                if(maleLinkList.size()!=0){
-                    GenderDistributionCheck(index, groupArrayList, maleLinkList, loopCounter, num, temp);
+                if (maleLinkList.size() != 0) {
+                    genderDistributionCheck(index, groupArrayList, maleLinkList, loopCounter, num, temp);
                     maleLinkList.removeLast();
 
-                }else if(femaleLinkList.size()!=0){
-                    GenderDistributionCheck(index, groupArrayList, femaleLinkList, loopCounter, num, temp);
+                } else if (femaleLinkList.size() != 0) {
+                    genderDistributionCheck(index, groupArrayList, femaleLinkList, loopCounter, num, temp);
                     femaleLinkList.removeLast();
                 }
                 num++;
@@ -117,25 +132,28 @@ public class DistributeAlgorithm {
         }
 
         // TODO: Add function that iterate groupArrayList and addMemebrs into the group
-        for(int i=0;i<groupArrayList.size();i++){
-            System.out.println( "Group : " + i);
-            for(int j=0;j<groupArrayList.get(i).size();j++){
-                System.out.println(groupArrayList.get(i).get(j));
+        for (int i = 0; i < groupArrayList.size(); i++) {
+            System.out.println(groupNameConcatenation(i, groupName));
+            for (int j = 0; j < groupArrayList.get(i).size(); j++) {
+                System.out.println (groupArrayList.get(i).get(j));
             }
         }
         groupArrayList.clear();
     }
 
-    private void StrictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
+    /**
+     */
+    private void strictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
+                                    LinkedList<Person> allPersons, String groupName) {
         System.out.println("Gender & Nationality Distribution");
     }
 
-    //--- MODULAR METHODS ---
+    /* --- MODULAR METHODS --- **/
 
     //    private LinkedList<Person> CreateNationalityList(LinkedList<Person> allPerson) {
     //        //number of different nationality
-    //        Map<Nationality, Long> counts = NumberOfDifferentNationality(allPerson);
-    //        Map<Nationality, Long> sortedCount = PaxPerNationality(counts);
+    //        Map<Nationality, Long> counts = numberOfDifferentNationality(allPerson);
+    //        Map<Nationality, Long> sortedCount = paxPerNationality(counts);
     //        LinkedList<Person> NationalityLinkList = new LinkedList<>();
     //
     //        System.out.println(counts.size());
@@ -150,13 +168,32 @@ public class DistributeAlgorithm {
     //        return NationalityLinkList;
     //    }
 
-    private Map<Nationality, Long> NumberOfDifferentNationality(LinkedList<Person> allPerson){
+    /**
+     * This function shuffles all the person inside the LinkedList.
+     * @param person
+     * @return
+     */
+    private LinkedList<Person> randomizer(LinkedList<Person> person) {
+        requireNonNull(person);
+        Collections.shuffle(person);
+        return person;
+    }
+
+
+    /**
+     * This function takes in the list of all person and calculate the total number of different nationalities.
+     * Returns a integer value which represent the number of different nationalities
+     */
+    private Map<Nationality, Long> numberOfDifferentNationality(LinkedList<Person> allPerson) {
         Map<Nationality, Long> numberOfNationality =
                 allPerson.stream().collect(Collectors.groupingBy(e -> e.getNationality(), Collectors.counting()));
         return numberOfNationality;
     }
 
-    private Map<Nationality, Long> PaxPerNationality(Map<Nationality, Long> numberOfNationality){
+    /**
+     * This function will sort the map that holds the number of people with different nationalities.
+     */
+    private Map<Nationality, Long> paxPerNationality(Map<Nationality, Long> numberOfNationality) {
         Map<Nationality, Long> sortedNumOfNationality =
                 numberOfNationality.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
                         .collect(toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
@@ -165,40 +202,43 @@ public class DistributeAlgorithm {
     }
 
     /**
-     *
-     * @param index
-     * @param groupArrayList
-     * @param femaleLinkList
-     * @param loopCounter
-     * @param num
-     * @param temp
+     * This function conducts the checks to add Persons into the group.
      */
-    private void GenderDistributionCheck(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> femaleLinkList, int loopCounter, int num, ArrayList<Person> temp) {
-        if(loopCounter>=index){
+    private void genderDistributionCheck(int index, ArrayList<ArrayList<Person>> groupArrayList,
+                                         LinkedList<Person> genderLinkList,
+                                         int loopCounter, int num, ArrayList<Person> temp) {
+        if (loopCounter >= index) {
             temp = groupArrayList.get(num);
-            temp.add(femaleLinkList.getLast());
+            temp.add(genderLinkList.getLast());
             groupArrayList.remove(num);
-            groupArrayList.add(num,temp);
-        }else{
-            temp.add(femaleLinkList.getLast());
-            groupArrayList.add(num,temp);
+            groupArrayList.add(num, temp);
+        } else {
+            temp.add(genderLinkList.getLast());
+            groupArrayList.add(num, temp);
         }
     }
 
     /**
-     *
-     * @param allPerson
-     * @param filteredGender
-     * @param gender
-     * @return
+     * This function runs through the allPerson list and add the specific gender required into an LinkedList
+     * @param allPerson the list of allPerson in the addressbook
      */
-    private LinkedList<Person> FilterGender(LinkedList<Person> allPerson, LinkedList<Person> filteredGender, String gender){
-        for( Person p : allPerson){
-            if(p.getGender().toString().equals(gender)){
+    private LinkedList<Person> filterGender(LinkedList<Person> allPerson,
+                                            LinkedList<Person> filteredGender, String gender) {
+        for (Person p : allPerson) {
+            if (p.getGender().toString().equals(gender)) {
                 filteredGender.add(p);
             }
         }
         return filteredGender;
+    }
+
+    /**
+     * This function concatenates the group index count behind the given group name.
+     * Index shown to user will start from 1.
+     */
+    private String groupNameConcatenation (int index, String groupName) {
+        int newIndex = index + 1;
+        return groupName + String.valueOf(newIndex);
     }
 
 }
