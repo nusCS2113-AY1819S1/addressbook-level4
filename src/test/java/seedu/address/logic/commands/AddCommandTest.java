@@ -19,11 +19,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.person.Product;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -98,6 +100,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateDistributor(Distributor target, Distributor editedDistributor) {
+
+        }
+
+        @Override
         public void resetData(ReadOnlyAddressBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -108,13 +115,33 @@ public class AddCommandTest {
         }
 
         @Override
+        public ReadOnlyAddressBook getDistributorInfoBook() {
+            return null;
+        }
+
+        @Override
+        public boolean hasDistributor(Distributor distributor) {
+            return false;
+        }
+
+        @Override
         public boolean hasPerson(Product product) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void deleteDistributor(Distributor target) {
+
+        }
+
+        @Override
         public void deletePerson(Product target) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addDistributor(Distributor distributor) {
+
         }
 
         @Override
@@ -125,6 +152,16 @@ public class AddCommandTest {
         @Override
         public ObservableList<Product> getFilteredPersonList() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Distributor> getFilteredDistributorList() {
+            return null;
+        }
+
+        @Override
+        public void updateFilteredDistributorList(Predicate<Distributor> predicate) {
+
         }
 
         @Override
@@ -158,6 +195,26 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addTransaction(Transaction transaction) {
+
+        }
+
+        @Override
+        public String getDaysHistory(String day) {
+            return null;
+        }
+
+        @Override
+        public String getActiveDayHistory() {
+            return null;
+        }
+
+        @Override
+        public Transaction getLastTransaction() {
+            return null;
+        }
+
+        @Override
         public boolean hasLoggedIn() {
             throw new AssertionError("This method should not be called.");
         }
@@ -185,6 +242,11 @@ public class AddCommandTest {
         @Override
         public void updateUserPassword(User target, User userWithNewPassword) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ReadOnlyAddressBook getAddressBook() {
+            return null;
         }
 
         @Override
