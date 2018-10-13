@@ -32,8 +32,8 @@ import seedu.address.storage.StorageManager;
 import seedu.address.storage.TaskBookStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlTaskBookStorage;
-//import seedu.address.ui.Ui;
-//import seedu.address.ui.UiManager;
+import seedu.address.ui.Ui;
+import seedu.address.ui.UiManager;
 
 /**
  * The main entry point to the application.
@@ -44,7 +44,7 @@ public class MainApp extends Application {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    //    protected Ui ui;
+    protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
@@ -71,7 +71,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        //        ui = new UiManager(logic, config, userPrefs);
+        ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
     }
@@ -180,13 +180,13 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        //        ui.start(primaryStage);
+        ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
-        //        ui.stop();
+        ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {

@@ -29,8 +29,8 @@ public class PriorityLevel {
      */
     public static boolean isValidPriorityLevel(String test) {
         String testInLowerCase = test.toLowerCase();
-        if (testInLowerCase == "low" || testInLowerCase == "medium"
-                || testInLowerCase == "high") {
+        if (testInLowerCase.equals("low") || testInLowerCase.equals("medium")
+                || testInLowerCase.equals("high")) {
             return true;
         } else {
             return false;
