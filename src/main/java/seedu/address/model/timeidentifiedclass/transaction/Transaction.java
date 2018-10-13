@@ -32,17 +32,24 @@ public class Transaction extends TimeIdentifiedClass {
         return transactionTime;
     }
 
-    public void addProduct(String itemName) throws ClosedTransactionException{
-        this.addProduct(itemName,1);
+    public void addProduct(String itemName) throws ClosedTransactionException {
+        this.addProduct(itemName, 1);
     }
 
+    /**
+     * todo
+     * @param itemName
+     * @param quantity
+     * @throws ClosedTransactionException
+     */
     public void addProduct(String itemName, int quantity) throws ClosedTransactionException {
         if (!isActiveTransaction) {
             throw new ClosedTransactionException();
         } else if (transactionRecord.containsKey(itemName)) {
-            transactionRecord.replace(itemName, transactionRecord.get(itemName)+ quantity);
-        } else
-            transactionRecord.put(itemName,quantity);
+            transactionRecord.replace(itemName, transactionRecord.get(itemName) + quantity);
+        } else {
+            transactionRecord.put(itemName, quantity);
+        }
     }
 
     public void closeTransaction() {

@@ -1,7 +1,10 @@
 package seedu.address.model.timeidentifiedclass.exceptions;
 
+/**
+ *
+ */
 public class InvalidTimeFormatException extends Exception {
-    private static String EXCEPTION_MESSAGE = "Invalid date/time format.";
+    private static final String EXCEPTION_MESSAGE = "Invalid date/time format.";
 
     public InvalidTimeFormatException(){}
 

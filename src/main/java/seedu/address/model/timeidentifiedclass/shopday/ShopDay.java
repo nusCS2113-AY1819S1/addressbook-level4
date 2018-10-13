@@ -46,15 +46,22 @@ public class ShopDay extends TimeIdentifiedClass {
         return this.date;
     }
 
+    /**
+     * todo
+     * @param transaction
+     * @throws InvalidTimeFormatException
+     * @throws ClosedShopDayException
+     * @throws DuplicateTransactionException
+     */
     public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
-            ClosedShopDayException,DuplicateTransactionException {
+            ClosedShopDayException, DuplicateTransactionException {
         String transactionTime = transaction.getTime();
         if (!this.isActiveDay) {
             throw new ClosedShopDayException();
         } else if (shopDayRecord.containsKey(transactionTime)) {
             throw new DuplicateTransactionException();
         } else {
-            shopDayRecord.put(transactionTime,transaction);
+            shopDayRecord.put(transactionTime, transaction);
         }
     }
 
@@ -83,7 +90,7 @@ public class ShopDay extends TimeIdentifiedClass {
         this.isActiveDay = true;
     }
 
-    public void closeDay(){
+    public void closeDay() {
         this.isActiveDay = false;
     }
 
