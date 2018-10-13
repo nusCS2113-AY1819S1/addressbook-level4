@@ -1,9 +1,9 @@
 package seedu.address.ui;
 
+import java.time.DayOfWeek;
 import java.time.format.TextStyle;
 import java.util.Locale;
 import java.util.logging.Logger;
-import java.time.DayOfWeek;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;

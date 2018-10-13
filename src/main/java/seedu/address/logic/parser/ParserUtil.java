@@ -159,7 +159,7 @@ public class ParserUtil {
         try {
             start = LocalTime.of(startInt, 0);
             end = LocalTime.of(endInt, 0);
-        } catch (DateTimeException e){
+        } catch (DateTimeException e) {
             throw new ParseException(TimeSlot.MESSAGE_CANNOT_PARSE_TIME);
         }
 
