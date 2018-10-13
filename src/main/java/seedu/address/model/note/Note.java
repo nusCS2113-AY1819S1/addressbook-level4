@@ -3,6 +3,8 @@ package seedu.address.model.note;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -10,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * This represents a note.
  */
 @XmlRootElement(name = "note")
-
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Note {
 
     public static final String MESSAGE_NOTE_CONSTRAINTS =
