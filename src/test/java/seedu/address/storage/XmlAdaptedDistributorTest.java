@@ -1,14 +1,16 @@
 package seedu.address.storage;
 
+import static org.junit.Assert.assertEquals;
+import static seedu.address.storage.XmlAdaptedDistributor.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.TypicalDistributors.AHB;
+
 import org.junit.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
 import seedu.address.testutil.Assert;
 
-import static org.junit.Assert.assertEquals;
-import static seedu.address.storage.XmlAdaptedDistributor.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalDistributors.AHB;
 
 public class XmlAdaptedDistributorTest {
 

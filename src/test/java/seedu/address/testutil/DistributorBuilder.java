@@ -1,10 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.model.distributor.*;
-import seedu.address.model.util.SampleDataUtil;
-
-import java.util.HashSet;
-import java.util.Set;
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorName;
+import seedu.address.model.distributor.DistributorPhone;
 
 /**
  * A utility class to help with building Product objects.

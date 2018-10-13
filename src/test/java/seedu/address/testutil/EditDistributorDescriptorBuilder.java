@@ -1,12 +1,9 @@
 package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditDCommand.EditDistributorDescriptor;
-import seedu.address.model.distributor.*;
-import seedu.address.model.tag.Tag;
-
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorName;
+import seedu.address.model.distributor.DistributorPhone;
 
 /**
  * A utility class to help with building EditDistributorDescriptor objects.

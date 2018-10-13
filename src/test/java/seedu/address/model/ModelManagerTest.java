@@ -66,12 +66,14 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, new UserDatabase(), new TestStorage())));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs,
+                new UserDatabase(), new TestStorage())));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, new UserDatabase(), new TestStorage())));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs,
+                new UserDatabase(), new TestStorage())));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -79,6 +81,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, new UserDatabase(), new TestStorage())));
+        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs,
+                new UserDatabase(), new TestStorage())));
     }
 }
