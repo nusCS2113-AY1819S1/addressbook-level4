@@ -1,12 +1,10 @@
 package seedu.address.model.login;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
-
-import static java.nio.file.Paths.get;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a User in the user database.
@@ -14,10 +12,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class User {
 
+    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
+
     private static final String AB_FILEPATH_FOLDER = "data/";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
-    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
 
     private Username username;
     private Password password;

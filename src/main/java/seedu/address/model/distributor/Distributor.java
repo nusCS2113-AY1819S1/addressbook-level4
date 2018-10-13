@@ -1,16 +1,8 @@
 package seedu.address.model.distributor;
 
-//package seedu.address.model.person;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
-
-import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.distributor.DistributorPhone;
 
 /**
  * Represents a Distributor in the address book.
@@ -67,7 +59,8 @@ public class Distributor {
             return false;
         }
 
-        seedu.address.model.distributor.Distributor otherDistributor = (seedu.address.model.distributor.Distributor) other;
+        seedu.address.model.distributor.Distributor otherDistributor =
+                (seedu.address.model.distributor.Distributor) other;
         return otherDistributor.getDistName().equals(getDistName())
                 && otherDistributor.getDistPhone().equals(getDistPhone());
     }

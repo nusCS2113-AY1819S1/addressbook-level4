@@ -5,7 +5,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
-
+/**
+ * Javadoc
+ */
 public class ViewLastTransaction extends Command {
 
     public static final String COMMAND_WORD = "latest";
@@ -15,8 +17,9 @@ public class ViewLastTransaction extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         Transaction latestTransaction = model.getLastTransaction();
-        if (latestTransaction == null)
+        if (latestTransaction == null) {
             return new CommandResult(NO_LATEST_TRANSACTION);
+        }
         return new CommandResult(latestTransaction.getTransactionRecord());
     }
 }

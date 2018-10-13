@@ -31,7 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     *   */
+     */
 
     {
         persons = new UniquePersonList();
@@ -147,7 +147,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Replaces the given distrbutor {@code target} in the list with {@code editedDistributor}.
      * {@code target} must exist in the address book.
-     * The distributor identity of {@code editedDistributor} must not be the same as another existing distributor in the Inventarie.
+     * The distributor identity of {@code editedDistributor} must not be the same as another existing distributor
+     * in the Inventarie.
      */
     public void updateDistributor(Distributor target, Distributor editedDistributor) {
         requireNonNull(editedDistributor);

@@ -14,11 +14,10 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-//import seedu.address.model.person.Person;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.commons.events.model.UserDatabaseChangedEvent;
 import seedu.address.commons.events.model.UserDeletedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
@@ -26,10 +25,10 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
+import seedu.address.model.person.Product;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
-import seedu.address.model.distributor.Distributor;
-import seedu.address.model.person.Product;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -52,17 +51,14 @@ public class ModelManager extends ComponentManager implements Model {
                         ReadOnlyUserDatabase userDatabase, Storage storage) {
         super();
         requireAllNonNull(addressBook, userPrefs, userDatabase);
-
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
         + " and user database " + userDatabase);
-
         this.storage = storage;
         versionedUserDatabase = new VersionedUserDatabase(userDatabase);
         versionedAddressBook = new VersionedAddressBook(addressBook);
 
         filteredDistributors = new FilteredList<>(versionedAddressBook.getDistributorList());
         filteredProducts = new FilteredList<>(versionedAddressBook.getPersonList());
-
     }
 
     public ModelManager(Storage storage) {

@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -10,8 +11,9 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Deletes a user identified using it's username and password from the user database.
+ */
 public class DeleteUserCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-user";
