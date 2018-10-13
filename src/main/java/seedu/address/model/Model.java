@@ -78,7 +78,7 @@ public interface Model {
      */
     void updateDistributor(Distributor target, Distributor editedDistributor);
 
-    
+
     /** Returns an unmodifiable view of the filtered person list
      * The product identity of {@code editedProduct} must not be the same as another existing product in the address book.
      */
@@ -143,7 +143,7 @@ public interface Model {
      * Returns the latest transaction.
      */
     Transaction getLastTransaction();
-    
+
     /**
     * Sets the user list
     */
