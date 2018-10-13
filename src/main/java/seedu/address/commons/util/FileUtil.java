@@ -1,10 +1,14 @@
 package seedu.address.commons.util;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
 
 /**
  * Writes and reads files
@@ -86,6 +90,23 @@ public class FileUtil {
      */
     public static void writeToFile(Path file, String content) throws IOException {
         Files.write(file, content.getBytes(CHARSET));
+    }
+
+    /**
+     * Read each of the file and store them into a list of string and return them
+     *
+     * Note: Try-Block is placed within the stream as the #close method is called on it,
+     * otherwise the underlying file handle is never closed until the garbage collector does it later
+     *
+     * @see <a href="https://stackoverflow.com/questions/5868369/how-to-read-a-large-text-file-line-by-line-using-java">
+     *     https://stackoverflow.com/questions/5868369/how-to-read-a-large-text-file-line-by-line-using-java</a>
+     */
+    public static List<String> readEachLineFromFile(Path file) throws IOException {
+        List list = new ArrayList<>();
+        try (Stream<String> stream = Files.lines(file, Charset.defaultCharset())) {
+            stream.forEachOrdered(list::add);
+        }
+        return list;
     }
 
 }
