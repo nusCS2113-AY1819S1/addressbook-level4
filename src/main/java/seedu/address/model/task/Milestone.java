@@ -10,21 +10,21 @@ public class Milestone extends Task {
     private final String milestone_description;
     private final Integer order;
 
-    public Milestone(String title, String milestone_description, Integer order){
+    public Milestone(String title, String milestone_description, Integer order) {
         this.title = title;
         this.milestone_description = milestone_description;
         this.order = order;
     }
 
-    public String getTitle(){
+    public String getTitle() {
         return title;
     }
 
-    public String getMileStoneDescription(){
+    public String getMileStoneDescription() {
         return milestone_description;
     }
 
-    public Integer getOrder(){
+    public Integer getOrder() {
         return order;
     }
 
