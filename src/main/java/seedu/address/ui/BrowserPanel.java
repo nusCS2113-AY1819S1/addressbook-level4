@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -22,7 +25,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?title=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -42,7 +45,19 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(Task task) {
-        loadPage(SEARCH_PAGE_URL + task.getTitle());
+        try {
+            URIBuilder uribuilder = new URIBuilder();
+            URL path = MainApp.class.getResource(FXML_FILE_FOLDER + "DummySearchPage.html");
+            uribuilder.addPath(path);
+            uribuilder.addQuery("title", task.getTitle());
+            uribuilder.addQuery("description", task.getDescription());
+            uribuilder.addQuery("priorityLevel", task.getPriorityLevel().toString());
+            logger.info(uribuilder.getURL());
+            loadPage(uribuilder.getURL());
+        } catch (MalformedURLException | UnsupportedEncodingException | URISyntaxException e) {
+            logger.warning(e.getMessage());
+        }
+        //        URL url = MainApp.class.getResource(FXML_FILE_FOLDER + "DummySearchPage.html");
     }
 
     public void loadPage(String url) {

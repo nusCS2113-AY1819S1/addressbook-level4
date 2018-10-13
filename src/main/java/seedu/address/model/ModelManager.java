@@ -70,8 +70,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addTask(Task person) {
-        versionedTaskBook.addTask(person);
+    public void addTask(Task task) {
+        versionedTaskBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateTaskBookChanged();
     }
