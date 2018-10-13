@@ -6,10 +6,6 @@ import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
 import seedu.address.testutil.Assert;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedDistributor.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalDistributors.AHB;
@@ -40,7 +36,7 @@ public class XmlAdaptedDistributorTest {
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        XmlAdaptedDistributor distributor = new XmlAdaptedPerson(null, VALID_PHONE);
+        XmlAdaptedDistributor distributor = new XmlAdaptedDistributor(null, VALID_PHONE);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DistributorName.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, distributor::toModelType);
     }
@@ -48,14 +44,14 @@ public class XmlAdaptedDistributorTest {
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
         XmlAdaptedDistributor distributor =
-                new XmlAdaptedPerson(VALID_NAME, INVALID_PHONE);
+                new XmlAdaptedDistributor(VALID_NAME, INVALID_PHONE);
         String expectedMessage = DistributorPhone.MESSAGE_PHONE_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, distributor::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        XmlAdaptedDistributor distributor = new XmlAdaptedPerson(VALID_NAME, null);
+        XmlAdaptedDistributor distributor = new XmlAdaptedDistributor(VALID_NAME, null);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DistributorPhone.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, distributor::toModelType);
     }

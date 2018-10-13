@@ -19,6 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.distributor.Distributor;
 import seedu.address.model.person.Product;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.PersonBuilder;
@@ -99,6 +100,11 @@ public class AddressBookTest {
 
         AddressBookStub(Collection<Product> products) {
             this.products.setAll(products);
+        }
+
+        @Override
+        public ObservableList<Distributor> getDistributorList() {
+            return null;
         }
 
         @Override

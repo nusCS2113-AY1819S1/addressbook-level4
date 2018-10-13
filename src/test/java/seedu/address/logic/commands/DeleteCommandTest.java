@@ -17,6 +17,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TestStorage;
+import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Product;
 
@@ -37,7 +39,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, productToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deletePerson(productToDelete);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -61,7 +63,7 @@ public class DeleteCommandTest {
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, productToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deletePerson(productToDelete);
         expectedModel.commitAddressBook();
         showNoPerson(expectedModel);
 
@@ -86,7 +88,7 @@ public class DeleteCommandTest {
         Product productToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.deletePerson(personToDelete);
+        expectedModel.deletePerson(productToDelete);
         expectedModel.commitAddressBook();
 
         // delete -> first product deleted
