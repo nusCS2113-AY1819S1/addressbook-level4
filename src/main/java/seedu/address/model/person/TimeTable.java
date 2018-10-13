@@ -3,6 +3,7 @@ package seedu.address.model.person;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
@@ -20,23 +21,36 @@ public class TimeTable {
         timeSlots = input;
     }
 
+    public Collection <TimeSlot> getTimeSlots() {
+        Collection <TimeSlot> toReturn = new ArrayList<>();
+        toReturn.addAll(timeSlots);
+        return toReturn;
+    }
+
     /**
      * Adds a TimeSlot to the TimeTable
      *
      * @param toAdd TimeSlot to be added
+     * @throws TimeSlotOverlapException if toAdd overlaps with an existing TimeSlot in the TimeTable
      */
     public void addTimeSlot(TimeSlot toAdd) throws TimeSlotOverlapException {
-        Collection <TimeSlot> overlapTimeSlot = findOverlapTimeSlot(toAdd);
-
-        if (overlapTimeSlot.isEmpty()) {
+        if (!findOverlapTimeSlot(toAdd).isEmpty()) {
             throw new TimeSlotOverlapException();
         } else {
             timeSlots.add(toAdd);
         }
     }
 
-    public void removeTimeSlot (TimeSlot toRemove) {
-        timeSlots.remove(toRemove);
+    /**
+     * Removes a TimeSlot from the TimeTable
+     *
+     * @param toRemove TimeSlot to be removed
+     * @throws TimeSlotDoesNotExistException if toRemove does not exist in the TimeTable
+     */
+    public void removeTimeSlot (TimeSlot toRemove) throws TimeSlotDoesNotExistException {
+        if (!timeSlots.remove(toRemove)) {
+            throw new TimeSlotDoesNotExistException();
+        }
     }
 
     /**

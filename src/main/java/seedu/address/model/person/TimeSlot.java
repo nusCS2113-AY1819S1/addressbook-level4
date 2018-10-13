@@ -7,14 +7,14 @@ import java.time.DayOfWeek;
 import java.time.LocalTime;
 
 /**
- * Represents a single timeslot in TimeTable Class
+ * Represents a single TimeSlot in TimeTable Class
  *
  */
 public class TimeSlot {
     public static final String MESSAGE_NOT_ENOUGH_ARGUMENTS = "Accepted argument example: Monday 8-10";
     public static final String MESSAGE_CANNOT_PARSE_DAY = "Accepted day format: MONDAY";
     public static final String MESSAGE_CANNOT_PARSE_TIME = "Accepted time format: 8-10";
-    public static final String MESSAGE_INVALID_TIMESLOT = "Invalid TimnSlot";
+    public static final String MESSAGE_INVALID_TIME_SLOT = "Invalid TimeSlot";
 
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
@@ -26,7 +26,7 @@ public class TimeSlot {
         requireNonNull(start);
         requireNonNull(end);
 
-        checkArgument(isValidTimeSlot(start, end), MESSAGE_INVALID_TIMESLOT);
+        checkArgument(isValidTimeSlot(start, end), MESSAGE_INVALID_TIME_SLOT);
 
         dayOfWeek = day;
         startTime = start;
@@ -51,29 +51,6 @@ public class TimeSlot {
 
     public static boolean isValidTimeSlot(LocalTime start, LocalTime end) {
         return !(start.equals(end) || start.isAfter(end));
-    }
-
-    /**
-     * Returns a printable string representing this TimeSlot
-     *
-     * @return Printable string representing this TimeSlot
-     */
-    public String getPrintableString() {
-        String toReturn = new String();
-
-        toReturn += this.getLabel();
-        toReturn += " (";
-
-        toReturn += this.getDayOfWeek().toString();
-        toReturn += " ";
-
-        toReturn += this.getStartTime().toString();
-        toReturn += "-";
-
-        toReturn += this.getEndTime().toString();
-        toReturn += ")";
-
-        return toReturn;
     }
 
     /**
