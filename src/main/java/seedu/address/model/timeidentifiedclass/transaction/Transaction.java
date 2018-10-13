@@ -4,8 +4,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTransactionException;
@@ -39,10 +39,9 @@ public class Transaction extends TimeIdentifiedClass {
     public void addProduct(String itemName, int quantity) throws ClosedTransactionException {
         if (!isActiveTransaction) {
             throw new ClosedTransactionException();
-        }
-        else if (transactionRecord.containsKey(itemName))
-            transactionRecord.replace(itemName, transactionRecord.get(itemName)+quantity);
-        else
+        } else if (transactionRecord.containsKey(itemName)) {
+            transactionRecord.replace(itemName, transactionRecord.get(itemName)+ quantity);
+        } else
             transactionRecord.put(itemName,quantity);
     }
 

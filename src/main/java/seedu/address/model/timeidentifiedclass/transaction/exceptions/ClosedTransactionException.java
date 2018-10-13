@@ -1,6 +1,8 @@
 package seedu.address.model.timeidentifiedclass.transaction.exceptions;
-import java.lang.Exception;
 
+/**
+ * TODO
+ */
 public class ClosedTransactionException extends Exception {
     private static final String EXCEPTION_MESSAGE = "Cannot edit a closed transaction.";
 
