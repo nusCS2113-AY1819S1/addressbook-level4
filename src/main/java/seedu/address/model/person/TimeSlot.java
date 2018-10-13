@@ -1,5 +1,8 @@
 package seedu.address.model.person;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
@@ -11,6 +14,7 @@ public class TimeSlot {
     public static final String MESSAGE_NOT_ENOUGH_ARGUMENTS = "Accepted argument example: Monday 8-10";
     public static final String MESSAGE_CANNOT_PARSE_DAY = "Accepted day format: MONDAY";
     public static final String MESSAGE_CANNOT_PARSE_TIME = "Accepted time format: 8-10";
+    public static final String MESSAGE_INVALID_TIMESLOT = "Invalid TimnSlot";
 
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
@@ -18,41 +22,58 @@ public class TimeSlot {
     private String label;
 
     public TimeSlot(DayOfWeek day, LocalTime start, LocalTime end) {
-        setStartTime(start);
-        setEndTime(end);
-        setDayOfWeek(day);
+        requireNonNull(day);
+        requireNonNull(start);
+        requireNonNull(end);
+
+        checkArgument(isValidTimeSlot(start, end), MESSAGE_INVALID_TIMESLOT);
+
+        dayOfWeek = day;
+        startTime = start;
+        endTime = end;
     }
 
     public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
     public LocalTime getEndTime() {
         return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
     }
 
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
     }
 
-    public void setDayOfWeek(DayOfWeek dayOfWeek) {
-        this.dayOfWeek = dayOfWeek;
-    }
-
     public String getLabel() {
         return label;
     }
 
-    public void setLabel(String label) {
-        this.label = label;
+    public static boolean isValidTimeSlot(LocalTime start, LocalTime end) {
+        return !(start.equals(end) || start.isAfter(end));
+    }
+
+    /**
+     * Returns a printable string representing this TimeSlot
+     *
+     * @return Printable string representing this TimeSlot
+     */
+    public String getPrintableString() {
+        String toReturn = new String();
+
+        toReturn += this.getLabel();
+        toReturn += " (";
+
+        toReturn += this.getDayOfWeek().toString();
+        toReturn += " ";
+
+        toReturn += this.getStartTime().toString();
+        toReturn += "-";
+
+        toReturn += this.getEndTime().toString();
+        toReturn += ")";
+
+        return toReturn;
     }
 
     /**
@@ -63,26 +84,11 @@ public class TimeSlot {
      */
     public boolean isOverlap(TimeSlot toCompare) {
         boolean isSameDay = this.getDayOfWeek() == toCompare.getDayOfWeek();
-        boolean isOverlapTime = this.getStartTime().isBefore(toCompare.getEndTime())
-                                || toCompare.getStartTime().isBefore(this.getEndTime());
+        boolean isNotOverlapTime = (this.getEndTime().isBefore(toCompare.getStartTime())
+                                    || this.getEndTime().equals(toCompare.getStartTime())
+                                    || toCompare.getEndTime().isBefore(this.getStartTime())
+                                    || toCompare.getEndTime().equals(this.getStartTime()));
 
-        return isSameDay && isOverlapTime;
-    }
-
-    /**
-     * Concatenates two overlapping TimeSlots
-     * @param toConcat TimeSlot to be concatenated
-     * @return Concatenated TimeSlot
-     */
-    public TimeSlot concatTimeSlots(TimeSlot toConcat) {
-        assert isOverlap(toConcat);
-
-        LocalTime newStart = (this.getStartTime().isBefore(toConcat.getStartTime()))
-                             ? this.getStartTime() : toConcat.getStartTime();
-
-        LocalTime newEnd = (this.getEndTime().isAfter(toConcat.getEndTime()))
-                           ? this.getEndTime() : toConcat.getEndTime();
-
-        return new TimeSlot(this.getDayOfWeek(), newStart, newEnd);
+        return isSameDay && !isNotOverlapTime;
     }
 }
