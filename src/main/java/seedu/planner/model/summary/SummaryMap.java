@@ -1,5 +1,7 @@
 package seedu.planner.model.summary;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -29,6 +31,15 @@ public class SummaryMap {
         } else {
             summaryMap.get(dateOfRecord).add(record);
         }
+    }
+
+    /**
+     * Adds a summary object into the summary hashMap
+     */
+    public void add(Summary summary) {
+        requireNonNull(summary);
+        Date dateOfSummary = summary.getDate();
+        summaryMap.put(dateOfSummary, summary);
     }
 
     /**

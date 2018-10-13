@@ -22,7 +22,15 @@ public class Summary {
         } else {
             totalIncome = money;
             totalExpense = new MoneyFlow("-0");
-        } total = money;
+        }
+        total = money;
+    }
+
+    public Summary(Date date, MoneyFlow totalExpense, MoneyFlow totalIncome, MoneyFlow total) {
+        this.date = date;
+        this.totalExpense = totalExpense;
+        this.totalIncome = totalIncome;
+        this.total = total;
     }
 
     public Date getDate() {

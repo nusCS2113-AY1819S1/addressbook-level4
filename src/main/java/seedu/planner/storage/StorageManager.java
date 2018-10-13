@@ -50,7 +50,6 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
     // ================ FinancialPlanner methods ==============================
 
     @Override
@@ -101,12 +100,13 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException {
-        return null;
+        return readSummaryMap(financialPlannerStorage.getSummaryMapFilePath());
     }
 
     @Override
     public Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException, IOException {
-        return null;
+        logger.fine("Attempting to read data from file: " + filePath);
+        return financialPlannerStorage.readSummaryMap(filePath);
     }
 
     @Override

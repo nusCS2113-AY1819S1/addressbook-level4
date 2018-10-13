@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.summary.Summary;
 import seedu.planner.model.summary.SummaryMap;
@@ -40,7 +41,17 @@ public class XmlSerializableSummaryMap extends XmlSerializableClass<SummaryMap> 
     }
 
     @Override
-    public SummaryMap toModelType() { return null;
+    public SummaryMap toModelType() throws IllegalValueException {
+        SummaryMap summaryMap = new SummaryMap();
+        for (String key : this.summaryMap.keySet()) {
+            if (key == null) {
+                throw new IllegalValueException(String.format(XmlAdaptedSummary.MISSING_FIELD_MESSAGE_FORMAT,
+                        Date.class.getSimpleName()));
+            }
+            Summary summary = this.summaryMap.get(key).toModelType();
+            summaryMap.add(summary);
+        }
+        return summaryMap;
     }
 
     //TODO: change this to follow the others

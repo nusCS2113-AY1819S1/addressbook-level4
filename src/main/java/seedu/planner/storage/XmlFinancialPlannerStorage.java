@@ -91,7 +91,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     @Override
     public Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException {
-        return null;
+        return readSummaryMap(summaryMapFilePath);
     }
 
     /**
@@ -101,7 +101,22 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
      */
     public Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException,
             FileNotFoundException {
-        return null;
+        requireNonNull(filePath);
+
+        if (!Files.exists(filePath)) {
+            logger.info("SummaryMap file " + filePath + " not found");
+            return Optional.empty();
+        }
+
+        XmlSerializableSummaryMap xmlSummaryMap = XmlFileStorage.loadDataFromSaveFile(filePath,
+                XmlSerializableSummaryMap.class);
+
+        try {
+            return Optional.of(xmlSummaryMap.toModelType());
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            throw new DataConversionException(ive);
+        }
     }
 
     @Override
