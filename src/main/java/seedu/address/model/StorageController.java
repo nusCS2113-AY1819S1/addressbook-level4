@@ -21,7 +21,6 @@ public class StorageController {
     private static final String STORAGE_MODULES = BASE_DIRECTORY + "modules.xml";
     private static final String STORAGE_CLASSES = BASE_DIRECTORY + "classes.xml";
     private static final String STORAGE_GRADEBOOK = BASE_DIRECTORY + "gradebook.xml";
-    private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
 
     private static ArrayList<Course> courseStorage = new ArrayList<Course>();
     private static ArrayList<Module> moduleStorage = new ArrayList<Module>();

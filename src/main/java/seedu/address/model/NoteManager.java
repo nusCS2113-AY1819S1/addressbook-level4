@@ -44,7 +44,7 @@ public class NoteManager {
 
     /**
      * Converts the notes XML file to the model representation for Note.
-     * Loads the model object to NoteMnager object
+     * Loads the model object to NoteManager object
      */
     public void getDataFromFile() {
         storage.retrieveNoteData();
