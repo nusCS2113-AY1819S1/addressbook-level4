@@ -2,11 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
@@ -153,10 +156,14 @@ public class ParserUtil {
     public static FileLocation parseFileLocation (String fileLocation) throws ParseException {
         requireNonNull(fileLocation);
         String trimmedFileLocation = fileLocation.trim();
-        if (!FileLocation.isValidFileLocation(trimmedFileLocation)) {
+
+        FileLocation newFileLocation = new FileLocation(fileLocation);
+        Path newFilePath = Paths.get(trimmedFileLocation);
+
+        if (!FileUtil.isFileExists(newFilePath)){ //possible bug? seems to work.
             throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
         }
 
-        return new FileLocation(fileLocation);
+        return newFileLocation;
     }
 }

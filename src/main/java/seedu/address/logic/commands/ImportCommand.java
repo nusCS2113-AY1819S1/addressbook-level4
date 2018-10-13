@@ -2,12 +2,16 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILELOCATION;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -66,26 +70,52 @@ public class ImportCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        TimeTable importedTimeTable = ics2TimeTable(fileLocation);
+        //imports from file data, into a TimeTable object
+        TimeTable importedTimeTable = icsToTimeTable(fileLocation);
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, importedTimeTable));
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person modifiedPerson = createModifiedPerson(personToEdit, importedTimeTable);
+
+        model.updatePerson(personToEdit, modifiedPerson);
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, modifiedPerson));
     }
 
     /**
-     * Attempts to read the file at the path specified. Returns a timetable object.
+     * Attempts to read the file at the path specified. Parses the file to return a timetable object.
      */
-    private TimeTable ics2TimeTable(FileLocation fileLocation) throws CommandException { //improve name pls
-        if (false /*file is invalid/ unreadable*/) {
+
+    private TimeTable icsToTimeTable(FileLocation fileLocation) throws CommandException{
+        if ( !fileLocation.isValidFileLocation()){
             throw new CommandException(MESSAGE_IO_ERROR);
         }
+
+        Path path = fileLocation.toPath();
+        String importstring = "";
+        try {
+            importstring = FileUtil.readFromFile(path);
+        }
+        catch (IOException e){
+            System.out.println ("error reading from file");
+        }
+
+        stringToTimeTable(importstring);
+
+        return new TimeTable();
+    }
+
+    private TimeTable stringToTimeTable(String string) {
+        System.out.println(string);
         return new TimeTable();
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * Only the TimeTable is changed in the new Person!
      */
-    private static Person createEditedPerson(Person personToEdit, TimeTable importedTimeTable) {
+    private static Person createModifiedPerson(Person personToEdit, TimeTable importedTimeTable) {
         assert personToEdit != null;
 
         Name updatedName = personToEdit.getName();
@@ -94,7 +124,7 @@ public class ImportCommand extends Command {
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
 
-        TimeTable timeTable = personToEdit.getTimeTable();
+        TimeTable timeTable = importedTimeTable;
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable);
     }

@@ -3,11 +3,13 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILELOCATION;
 
+import java.util.NoSuchElementException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.FileLocation;
-import seedu.address.model.person.TimeTable;
+//import seedu.address.model.person.TimeTable;
 
 /**
  * Parses input arguments and creates a new ImportCommand object
@@ -31,9 +33,13 @@ public class ImportCommandParser implements Parser<ImportCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), pe);
         }
 
-        TimeTable timeTable = new TimeTable();
-        FileLocation fileLocation = ParserUtil.parseFileLocation(argMultimap.getValue(PREFIX_FILELOCATION).get());
+        try {
+            FileLocation fileLocation = ParserUtil.parseFileLocation(argMultimap.getValue(PREFIX_FILELOCATION).get());
+            return new ImportCommand(index, fileLocation);
+        } catch (NoSuchElementException ee){
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ImportCommand.MESSAGE_USAGE), ee);
+        }
 
-        return new ImportCommand(index, fileLocation);
+
     }
 }

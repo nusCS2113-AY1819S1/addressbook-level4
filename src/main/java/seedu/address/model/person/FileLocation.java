@@ -3,11 +3,14 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import seedu.address.commons.util.FileUtil;
 
 /**
- * Represents a fileLocation. Notice that Java has its own "Path" class already...
- * Guarantees: immutable; is valid as declared in {@link #isValidFileLocation(String)}
+ * Represents a fileLocation.
+ * Guarantees: immutable; is valid as declared in {@link #isValidFileLocation(String test)}
  */
 public class FileLocation {
 
@@ -30,10 +33,23 @@ public class FileLocation {
     /**
      * Returns true if a given string is a valid file path.
      */
-    public static boolean isValidFileLocation(String test) {
+    public boolean isValidFileLocation(String test) {
         return FileUtil.isValidPath(test);
     }
 
+    /**
+     * Returns true if the file path of current object is valid.
+     */
+    public boolean isValidFileLocation() {
+        return FileUtil.isValidPath(fileLocation);
+    }
+
+    /**
+     * Returns the equivalent Path object.
+     */
+    public Path toPath() {
+        return Paths.get(fileLocation.toString());
+    }
 
     @Override
     public String toString() {
