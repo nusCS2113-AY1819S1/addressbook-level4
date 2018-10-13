@@ -38,7 +38,6 @@ import seedu.recruit.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class RecruitBookParser {
-
     /**
      * Used for initial separation of command word and args.
      */
@@ -70,72 +69,19 @@ public class RecruitBookParser {
                 return new CancelCommand(state.nextCommand);
             }
 
-            if(state.nextCommand.equals(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE)) {
-                switch (commandWord) {
+            switch (state.nextCommand) {
 
-                case FindCommand.COMMAND_WORD:
-                    return new FindCommandParser().parse(arguments);
+            case AddJobDetailsCommand.COMMAND_WORD:
+                return new AddJobDetailsCommandParser().parse(userInput);
 
-                case ListCommand.COMMAND_WORD:
-                    return new ListCommand();
+            case EmailSelectContentsCommand.COMMAND_LOGIC_STATE:
+            case EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE:
+            case EmailSendCommand.COMMAND_LOGIC_STATE:
+                return new EmailParser().parseCommand(commandWord, arguments, state, emailUtil);
 
-                case EmailSelectContentsCommand.COMMAND_WORD:
-                    return new EmailSelectRecipientsCommand();
-
-                default:
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-                }
-            } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
-                    && emailUtil.isAreRecipientsCandidates()) {
-                switch (commandWord) {
-
-                case FindCommand.COMMAND_WORD:
-                    return new FindCommandParser().parse(arguments);
-
-                case ListCommand.COMMAND_WORD:
-                    return new ListCommand();
-
-                case EmailSelectContentsCommand.COMMAND_WORD:
-                    return new EmailSelectContentsCommand();
-
-                default:
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-                }
-            } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
-                    && !emailUtil.isAreRecipientsCandidates()) {
-                switch (commandWord) {
-
-                case FindCommand.COMMAND_WORD:
-                    return new FindCommandParser().parse(arguments);
-
-                case ListCommand.COMMAND_WORD:
-                    return new ListCommand();
-
-                case EmailSelectContentsCommand.COMMAND_WORD:
-                    return new EmailSelectContentsCommand();
-
-                default:
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-                }
-            } else if (state.nextCommand.equals(EmailSendCommand.COMMAND_LOGIC_STATE)) {
-                switch(commandWord) {
-
-                case EmailSendCommand.COMMAND_WORD:
-                    return new EmailSendCommand();
-
-                default:
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-                }
-            } else {
-                switch (state.nextCommand) {
-
-                case AddJobDetailsCommand.COMMAND_WORD:
-                    return new AddJobDetailsCommandParser().parse(userInput);
-
-                default:
-                    LogicManager.setLogicState("primary");
-                    throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
-                }
+            default:
+                LogicManager.setLogicState("primary");
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
         } else {
             switch (commandWord) {
