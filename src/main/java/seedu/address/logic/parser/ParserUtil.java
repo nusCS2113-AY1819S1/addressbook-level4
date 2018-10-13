@@ -45,7 +45,16 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static TaskName parseName(String name) throws ParseException {
+    public static Name parseName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new Name(trimmedName);
+    }
+
+    public static TaskName parseTask(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!TaskName.isValidName(trimmedName)) {
