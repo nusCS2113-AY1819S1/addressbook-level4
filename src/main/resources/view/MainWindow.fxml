@@ -33,9 +33,6 @@
           </Menu>
         </MenuBar>
 
-
-
-
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
           <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
             <padding>
@@ -63,7 +60,6 @@
                   <Insets top="5" right="10" bottom="5" left="10" />
               </padding>
           </StackPane>
-
 
           <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
