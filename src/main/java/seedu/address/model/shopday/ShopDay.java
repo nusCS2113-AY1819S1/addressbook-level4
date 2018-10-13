@@ -47,11 +47,9 @@ public class ShopDay {
         String transactionTime = transaction.getTime();
         if (!this.isActiveDay) {
             throw new ClosedShopDayException();
-        }
-        else if (shopDayRecord.containsKey(transactionTime)) {
+        } else if (shopDayRecord.containsKey(transactionTime)) {
             throw new DuplicateTransactionException();
-        }
-        else {
+        } else {
             shopDayRecord.put(transactionTime, transaction);
         }
     }
