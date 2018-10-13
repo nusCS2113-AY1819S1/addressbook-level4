@@ -101,8 +101,8 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @throws AuthenticatedException is the user is already logged in.
      */
     public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
-        User toCheck = new User(username, password, Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX +
-                username + AB_FILEPATH_POSTFIX));
+        User toCheck = new User(username, password, Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX
+                + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for login");
 
         if (hasLoggedIn) {
@@ -127,7 +127,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      */
     public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
-                Paths.get(AB_FILEPATH_FOLDER,AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+                Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for permissions.");
         if (!hasLoggedIn) {
             return users.contains(toCheck);
@@ -136,7 +136,9 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         }
     }
 
-    public void setUsers(List<User> users) throws DuplicateUserException { this.users.setUsers(users); }
+    public void setUsers(List<User> users) throws DuplicateUserException {
+        this.users.setUsers(users);
+    }
 
     /**
      * Adds a user to the User Database.
@@ -168,11 +170,13 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      */
     private void resetData(ReadOnlyUserDatabase newData) {
         requireNonNull(newData);
-            setUsers(newData.getUsersList());
+        setUsers(newData.getUsersList());
     }
 
     @Override
-    public ObservableList<User> getUsersList() { return users.asObservableList(); }
+    public ObservableList<User> getUsersList() {
+        return users.asObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {

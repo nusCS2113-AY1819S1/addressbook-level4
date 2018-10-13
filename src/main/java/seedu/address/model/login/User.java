@@ -25,7 +25,7 @@ public class User {
     public User() {
         this.username = new Username("default");
         this.password = new Password("password");
-        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER,"addressbook-default.xml");
+        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER, "addressbook-default.xml");
     }
 
     /**
@@ -46,7 +46,8 @@ public class User {
     }
 
     public static boolean isValidAddressBookFilePath(Path test, String username) {
-        return test.equals(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX) && !test.equals("");
+        return test.equals(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX)
+                && !test.equals("");
     }
 
     public Username getUsername() {

@@ -10,6 +10,9 @@ import seedu.address.model.Model;
 import seedu.address.model.login.User;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 
+/**
+ * Adds a user to the user database.
+ */
 public class CreateUserCommand extends Command {
 
     public static final String COMMAND_WORD = "create";

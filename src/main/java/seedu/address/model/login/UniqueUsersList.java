@@ -122,6 +122,9 @@ public class UniqueUsersList implements Iterable<User> {
                 && this.internalList.equals(((UniqueUsersList) other).internalList));
     }
 
+    /**
+     * Returns true if {@code persons} contains only unique users.
+     */
     private boolean usersAreUnique(List<User> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {
