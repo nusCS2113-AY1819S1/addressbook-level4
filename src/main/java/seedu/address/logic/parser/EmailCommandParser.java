@@ -69,7 +69,6 @@ public class EmailCommandParser implements Parser<EmailCommand> {
      * Returns true if index argument contains more than 1 index separated by ",".
      */
     private static boolean isMultipleIndex(String arg) {
-        if (arg.contains(",")) return true;
-        else return false;
+        return (arg.contains(","));
     }
 }

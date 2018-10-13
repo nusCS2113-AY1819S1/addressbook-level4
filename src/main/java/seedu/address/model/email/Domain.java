@@ -1,5 +1,8 @@
 package seedu.address.model.email;
 
+/**
+ * Represents a the collection of Strings for EmailUtil.
+ */
 public class Domain {
 
     public static final String GMAIL = "@gmail";

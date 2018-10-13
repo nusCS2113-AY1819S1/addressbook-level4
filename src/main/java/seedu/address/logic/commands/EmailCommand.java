@@ -11,6 +11,7 @@ import javax.mail.AuthenticationFailedException;
 import javax.mail.MessagingException;
 
 import com.sun.mail.smtp.SMTPSendFailedException;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.EmailUtil;
@@ -46,7 +47,7 @@ public class EmailCommand extends Command {
     public static final String MESSAGE_NO_LOGIN = "No login credentials found. Please login using 'login' command";
     public static final String MESSAGE_AUTHENTICATION_FAIL = "Invalid login credentials entered";
 
-    private static boolean isSingleTarget;
+    private boolean isSingleTarget;
     private Index targetIndex;
     private List<Index> targetMultipleIndex;
     private List<Person> toSend = new ArrayList<>();
@@ -60,7 +61,7 @@ public class EmailCommand extends Command {
         this.targetIndex = targetIndex;
         this.toSubject = subject;
         this.toMessage = message;
-        isSingleTarget = true;
+        this.isSingleTarget = true;
     }
 
     /**
@@ -70,13 +71,15 @@ public class EmailCommand extends Command {
         this.targetMultipleIndex = targetMultipleIndex;
         this.toSubject = subject;
         this.toMessage = message;
-        isSingleTarget = false;
+        this.isSingleTarget = false;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if (!EmailUtil.hasLoginCredentials()) throw new CommandException(MESSAGE_NO_LOGIN);
+        if (!EmailUtil.hasLoginCredentials()) {
+            throw new CommandException(MESSAGE_NO_LOGIN);
+        }
 
         List<Person> lastShownList = model.getFilteredPersonList();
 
