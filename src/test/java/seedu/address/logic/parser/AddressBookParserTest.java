@@ -14,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.AddGroupCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateGroupCommand;
@@ -57,6 +58,11 @@ public class AddressBookParserTest {
         Group group = new GroupBuilder().build();
         CreateGroupCommand command = (CreateGroupCommand) parser.parseCommand(GroupUtil.getCreateGroupCommand(group));
         assertEquals(new CreateGroupCommand(group), command);
+    }
+
+    @Test
+    public void parseCommand_addGroup() throws Exception {
+        assertTrue(parser.parseCommand(AddGroupCommand.COMMAND_WORD) instanceof AddGroupCommand);
     }
 
     @Test
