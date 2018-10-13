@@ -1,5 +1,8 @@
 package seedu.address.model.shopday;
 
+/**
+ * TODO
+ */
 public class Reminder {
     private String time;
     private String reminderMessage;

@@ -1,5 +1,8 @@
 package seedu.address.model.shopday;
 
+/**
+ * TODO
+ */
 public class ShopDayTest {
     public static void main(String[] args) {
         ShopDay shopDay = new ShopDay();

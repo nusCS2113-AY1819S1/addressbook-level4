@@ -52,7 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         requireAllNonNull(addressBook, userPrefs, userDatabase);
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs
-        + " and user database " + userDatabase);
+                + " and user database " + userDatabase);
         this.storage = storage;
         versionedUserDatabase = new VersionedUserDatabase(userDatabase);
         versionedAddressBook = new VersionedAddressBook(addressBook);
@@ -64,6 +64,8 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(Storage storage) {
         this(new AddressBook(), new UserPrefs(), new UserDatabase(), storage);
     }
+
+    // ============== AddressBook Modifiers =============================================================
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
@@ -98,7 +100,6 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.hasPerson(product);
     }
 
-
     @Override
     public void deleteDistributor(Distributor target) {
         versionedAddressBook.removeDistributor(target);
@@ -111,6 +112,10 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    /**
+     * Updates the addressBook and its storage path using the {@code username} provided.
+     * @param username
+     */
     private void reloadAddressBook(Username username) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook newData;
@@ -208,18 +213,21 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Person List Accessors =============================================================
 
+    @Override
     public void addDistributor(Distributor distributor) {
         versionedAddressBook.addDistributor(distributor);
         updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
         indicateAddressBookChanged();
     }
 
+    @Override
     public void addPerson(Product product) {
         versionedAddressBook.addPerson(product);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
     }
 
+    @Override
     public void updatePerson(Product target, Product editedProduct) {
         requireAllNonNull(target, editedProduct);
         versionedAddressBook.updatePerson(target, editedProduct);
@@ -236,13 +244,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Product List Accessors =============================================================
 
-
     /**
      * Returns an unmodifiable view of the list of {@code Product} backed by the internal list of
      * {@code versionedAddressBook}
      */
-
-
     @Override
     public ObservableList<Distributor> getFilteredDistributorList() {
         return FXCollections.unmodifiableObservableList(filteredDistributors);

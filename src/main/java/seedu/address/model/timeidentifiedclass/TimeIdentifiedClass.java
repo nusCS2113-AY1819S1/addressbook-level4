@@ -4,7 +4,6 @@ package seedu.address.model.timeidentifiedclass;
  * Some of the classes, such as ShopDay and Transaction, are identified using their time of creation/
  * record.
  */
-
 public abstract class TimeIdentifiedClass {
     private static final int NUMBER_OF_MONTHS_IN_YEAR = 12;
     private static final int MAXIMUM_NUMBER_OF_DAYS_IN_MONTH = 31;
@@ -12,6 +11,11 @@ public abstract class TimeIdentifiedClass {
     private static final int NUMBER_OF_MINUTES_IN_HOUR = 60;
     private static final int NUMBER_OF_SECONDS_IN_HOUR = 60;
 
+    /**
+     *
+     * @param month
+     * @return
+     */
     public static boolean isValidMonth(String month) {
         if (month.matches("\\d{2}")) {
             int monthValue = Integer.parseInt(month);
@@ -22,6 +26,11 @@ public abstract class TimeIdentifiedClass {
         return false;
     }
 
+    /**
+     *
+     * @param day
+     * @return
+     */
     public static boolean isValidDay(String day) {
         if (day.matches("\\d{2}")) {
             int dayValue = Integer.parseInt(day);
@@ -32,6 +41,11 @@ public abstract class TimeIdentifiedClass {
         return false;
     }
 
+    /**
+     *
+     * @param year
+     * @return
+     */
     public static boolean isValidYear(String year) {
         if (year.matches("\\d{4}")) {
             return true;
@@ -39,6 +53,11 @@ public abstract class TimeIdentifiedClass {
         return false;
     }
 
+    /**
+     *
+     * @param hour
+     * @return
+     */
     public boolean isValidHour(String hour) {
         if (hour.matches("d{2}")) {
             int hourValue = Integer.parseInt(hour);
@@ -49,6 +68,11 @@ public abstract class TimeIdentifiedClass {
         return false;
     }
 
+    /**
+     *
+     * @param minute
+     * @return
+     */
     public boolean isValidMinute(String minute) {
         if (minute.matches("\\d{2}")) {
             int minuteValue = Integer.parseInt(minute);
@@ -59,6 +83,11 @@ public abstract class TimeIdentifiedClass {
         return false;
     }
 
+    /**
+     *
+     * @param second
+     * @return
+     */
     public boolean isValidSecond(String second) {
         if (second.matches("\\d{2}")) {
             int secondValue = Integer.parseInt(second);
