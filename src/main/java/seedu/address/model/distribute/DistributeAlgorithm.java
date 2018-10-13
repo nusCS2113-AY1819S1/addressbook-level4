@@ -68,7 +68,7 @@ public class DistributeAlgorithm {
 
             groupArrayList.add(addPerson);
         }
-        
+
         // TODO: Add function that iterate groupArrayList and addMemebrs into the group
         for(int i=0;i<groupArrayList.size();i++){
             System.out.println("Group : " + i);
@@ -83,35 +83,26 @@ public class DistributeAlgorithm {
         System.out.println("Nationality Distribution");
     }
 
-    private void GenderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
+    private void GenderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPerson) {
         LinkedList<Person> maleLinkList = new LinkedList<>();
         LinkedList<Person> femaleLinkList = new LinkedList<>();
         int loopCounter = 0;
         int num = 0;
 
-        for( Person p : allPersonArrayList){
-            if(p.getGender().toString().equals(VALID_GENDER_MALE)){
-                maleLinkList.add(p);
-
-            }else if(p.getGender().toString().equals(VALID_GENDER_FEMALE)){
-                femaleLinkList.add(p);
-
-            }
-        }
+        maleLinkList = FilterGender(allPerson, maleLinkList, VALID_GENDER_MALE);
+        femaleLinkList = FilterGender(allPerson, femaleLinkList, VALID_GENDER_FEMALE);
 
         while(maleLinkList.size()!=0 || femaleLinkList.size()!=0) {
             if(loopCounter%index == 0) num =0;
             while (num < index) {
                 if(maleLinkList.size()==0 && femaleLinkList.size()==0) break;
-                //iterate from 0 to index to add once
                 ArrayList<Person> temp = new ArrayList<>();
-
                 if(maleLinkList.size()!=0){
-                    genderDistributionCheck(index, groupArrayList, maleLinkList, loopCounter, num, temp);
+                    GenderDistributionCheck(index, groupArrayList, maleLinkList, loopCounter, num, temp);
                     maleLinkList.removeLast();
 
                 }else if(femaleLinkList.size()!=0){
-                    genderDistributionCheck(index, groupArrayList, femaleLinkList, loopCounter, num, temp);
+                    GenderDistributionCheck(index, groupArrayList, femaleLinkList, loopCounter, num, temp);
                     femaleLinkList.removeLast();
                 }
                 num++;
@@ -129,7 +120,11 @@ public class DistributeAlgorithm {
         groupArrayList.clear();
     }
 
-    private void genderDistributionCheck(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> femaleLinkList, int loopCounter, int num, ArrayList<Person> temp) {
+    private void StrictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
+        System.out.println("Gender & Nationality Distribution");
+    }
+
+    private void GenderDistributionCheck(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> femaleLinkList, int loopCounter, int num, ArrayList<Person> temp) {
         if(loopCounter>=index){
             temp = groupArrayList.get(num);
             temp.add(femaleLinkList.getLast());
@@ -141,8 +136,13 @@ public class DistributeAlgorithm {
         }
     }
 
-    private void StrictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
-        System.out.println("Gender & Nationality Distribution");
+    private LinkedList<Person> FilterGender(LinkedList<Person> allPerson, LinkedList<Person> filteredGender, String gender){
+        for( Person p : allPerson){
+            if(p.getGender().toString().equals(gender)){
+                filteredGender.add(p);
+            }
+        }
+        return filteredGender;
     }
 
 }
