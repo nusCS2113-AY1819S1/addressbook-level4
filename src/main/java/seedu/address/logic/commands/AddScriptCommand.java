@@ -50,8 +50,9 @@ public class AddScriptCommand extends Command {
         AddScriptParser addScriptParser = new AddScriptParser();
         String multCommandError = new String();
 
-        if(!FileUtil.isFileExists(path))
+        if (!FileUtil.isFileExists(path)) {
             return new CommandResult(String.format(MESSAGE_FILE_MISSING, textFileName));
+        }
 
         try {
             List<String> addCommands = FileUtil.readEachLineFromFile(path);
@@ -67,6 +68,9 @@ public class AddScriptCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, textFileName));
     }
 
+    /**
+     * This Method will execute multiple add commands.
+     */
     public String executeMultipleCommand(AddScriptParser addScriptParser, List<String> commands,
                                        Model model, CommandHistory history) {
         String lineNumbers = new String();
@@ -75,9 +79,9 @@ public class AddScriptCommand extends Command {
                 Command command = addScriptParser.parseCommand(fullCommands);
                 command.execute(model, history);
             } catch (ParseException pe) {
-                lineNumbers = lineNumbers + (commands.indexOf(fullCommands)+ 1) + COMMA;
+                lineNumbers = lineNumbers + (commands.indexOf(fullCommands) + 1) + COMMA;
             } catch (CommandException ce) {
-                lineNumbers = lineNumbers + (commands.indexOf(fullCommands)+ 1)  + COMMA;
+                lineNumbers = lineNumbers + (commands.indexOf(fullCommands) + 1) + COMMA;
             }
         }
         lineNumbers = lineNumbers.replaceAll(".$", "");
