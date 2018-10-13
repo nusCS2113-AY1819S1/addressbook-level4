@@ -23,7 +23,6 @@ public class AddGroupCommandTest {
         thrown.expect(NullPointerException.class);
         new AddGroupCommand(null,null);
     }
-
     @Test
     public void equals() {
         AddGroupCommand addGroupCommand1 = new AddGroupCommand(TUT_1.getGroupName(),getTypicalPersonIndexs());

@@ -50,22 +50,19 @@ public class GroupNameTest {
 
     @Test
     public void equals() {
-        Group group = TUT_1;
+        GroupName groupName = TUT_1.getGroupName();
         // same object -> returns true
-        assertTrue(group.equals(group));
+        assertTrue(groupName.equals(groupName));
         // same values -> returns true
-        Group groupCopy = new GroupBuilder()
-                .withGroupName(VALID_GROUP_NAME_TUT_1)
-                .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
-                .withTags(VALID_GROUP_TAG_TUT_1).build();
-        assertTrue(group.equals(groupCopy));
+        GroupName groupNameCopy = new GroupName(VALID_GROUP_NAME_TUT_1);
+        assertTrue(groupName.equals(groupNameCopy));
         // different types -> returns false
-        assertFalse(group.equals(1));
+        assertFalse(groupName.equals(1));
         // null -> returns false
-        assertFalse(group.equals(null));
+        assertFalse(groupName.equals(null));
         // different group -> returns false
-        Group differentGroup = CS1010;
-        assertFalse(group.equals(differentGroup));
+        GroupName differentGroupName = CS1010.getGroupName();
+        assertFalse(groupName.equals(differentGroupName));
     }
 
 

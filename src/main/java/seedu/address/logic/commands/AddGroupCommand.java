@@ -7,12 +7,16 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonIndex;
 
 public class AddGroupCommand extends Command {
@@ -42,9 +46,41 @@ public class AddGroupCommand extends Command {
         return Collections.unmodifiableSet(personIndexs);
     }
 
+    // TODO
+    // test
+    public boolean validPersonIndexsSet(int size) {
+        for (PersonIndex i : personIndexs){
+            if(Integer.parseInt(i.personIndex) > size || Integer.parseInt(i.personIndex) <= 0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // TODO
+    // test
+    public boolean validGroupName(List<Group> lastShownGroupList) {
+        for (Group i : lastShownGroupList){
+            if(groupName.equals(i.getGroupName())){
+                return true;
+            }
+        }
+        return false;
+    }
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        List<Person> lastShownPersonList = model.getFilteredPersonList();
+        List<Group> lastShownGroupList = model.getFilteredGroupList();
+
+        if (validGroupName(lastShownGroupList) == false) {
+            throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_NAME);
+        }else if (validPersonIndexsSet(lastShownPersonList.size()) == false) {
+            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
         throw new CommandException(String.format(MESSAGE_SUCCESS,this.toString()));
     }
 
