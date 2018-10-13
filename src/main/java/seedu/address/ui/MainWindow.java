@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
     private PersonListPanel personListPanel;
+    private FriendListPanel friendListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -50,6 +51,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane friendListPanelPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -127,6 +131,9 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        friendListPanel = new FriendListPanel(logic.getFilteredPersonList());
+        friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

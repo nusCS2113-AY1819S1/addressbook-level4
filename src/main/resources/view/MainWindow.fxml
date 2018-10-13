@@ -51,7 +51,16 @@
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="friendListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+
+            <SplitPane id="splitterPane" fx:id="splitterPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+              <VBox fx:id="nonFriendsList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+                <padding>
+                    <Insets top="10" right="20" bottom="10" />
+                </padding>
+                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+            </SplitPane>
           </VBox>
 
           <StackPane fx:id="timetablePlaceholder" prefWidth="340" >
@@ -59,7 +68,9 @@
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
           </StackPane>
+
         </SplitPane>
+
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
