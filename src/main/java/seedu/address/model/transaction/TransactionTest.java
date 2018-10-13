@@ -7,6 +7,9 @@ import seedu.address.model.transaction.exceptions.ClosedTransactionException;
  * as output on the terminal.
  */
 public class TransactionTest {
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         Transaction transaction = new Transaction();
         System.out.println(transaction.getTime());
