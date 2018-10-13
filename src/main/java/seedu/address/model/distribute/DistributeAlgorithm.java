@@ -18,7 +18,7 @@ import seedu.address.model.person.Person;
 
 public class DistributeAlgorithm {
 
-    public static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
+    private static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
     private static final String VALID_GENDER_MALE = "MALE";
     private static final String VALID_GENDER_FEMALE = "FEMALE";
 
