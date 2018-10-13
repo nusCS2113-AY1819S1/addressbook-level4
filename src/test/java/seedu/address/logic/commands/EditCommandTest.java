@@ -70,7 +70,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UserDatabase(), new TestStorage());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new UserDatabase(), new TestStorage());
         expectedModel.updatePerson(lastProduct, editedProduct);
         expectedModel.commitAddressBook();
 

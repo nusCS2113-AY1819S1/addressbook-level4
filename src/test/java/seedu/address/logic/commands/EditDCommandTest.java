@@ -10,11 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalDistributors.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalDistributors.getTypicalAddressBook;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -26,8 +27,8 @@ import seedu.address.model.TestStorage;
 import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.distributor.Distributor;
-import seedu.address.testutil.EditDistributorDescriptorBuilder;
 import seedu.address.testutil.DistributorBuilder;
+import seedu.address.testutil.EditDistributorDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
