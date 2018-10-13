@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -60,6 +61,8 @@ public class CommandTestUtil {
     public static final String VALID_NATIONALITY_SG = "SG";
     public static final String VALID_NATIONALITY_CN = "CN";
 
+    public static final String VALID_PERSON_INDEX_1 = "1";
+    public static final String VALID_PERSON_INDEX_2 = "2";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -77,6 +80,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
     public static final String GRADE_DESC_BOB = " " + PREFIX_GRADE + VALID_GRADE_BOB;
     public static final String GRADE_DESC_AMY = " " + PREFIX_GRADE + VALID_GRADE_AMY;
+    public static final String PERSON_INDEX_DESC_1 = " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_1;
+    public static final String PERSON_INDEX_DESC_2 = " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_2;
 
     public static final String GROUP_NAME_DESC_TUT_1 = " " + PREFIX_NAME + VALID_GROUP_NAME_TUT_1;
     public static final String GROUP_NAME_DESC_CS1010 = " " + PREFIX_NAME + VALID_GROUP_NAME_CS1010;
@@ -93,6 +98,7 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "10*"; // '*' not allowed in tags
+    public static final String INVALID_PERSON_INDEX_DESC = " " + PREFIX_PERSON_INDEX + "10*"; // '*' not allowed in person index
 
     public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "TUT1*"; // '*' not allowed in group names
     public static final String INVALID_GROUP_LOCATION_DESC = " "

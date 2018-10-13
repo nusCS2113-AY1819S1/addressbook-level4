@@ -20,6 +20,7 @@ import seedu.address.model.person.Gender;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
+import seedu.address.model.person.PersonIndex;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -182,6 +183,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String personIndex} into a {@code PersonIndex}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code personIndex} is invalid.
+     */
+    public static PersonIndex parsePersonIndex(String personIndex) throws ParseException {
+        requireNonNull(personIndex);
+        String trimmedPersonIndex = personIndex.trim();
+        if (!PersonIndex.isValidPersonIndex(trimmedPersonIndex)) {
+            throw new ParseException(PersonIndex.MESSAGE_PERSON_INDEX_CONSTRAINTS);
+        }
+        return new PersonIndex(trimmedPersonIndex);
+    }
+
+    /**
      * Parses a {@code String Grade} into a {@code Grade}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -206,6 +222,18 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses {@code Collection<String> personIndexs} into a {@code Set<PersonIndex>}.
+     */
+    public static Set<PersonIndex> parsePersonIndexs(Collection<String> personIndexs) throws ParseException {
+        requireNonNull(personIndexs);
+        final Set<PersonIndex> personIndexSet = new HashSet<>();
+        for (String personIndex : personIndexs) {
+            personIndexSet.add(parsePersonIndex(personIndex));
+        }
+        return personIndexSet;
     }
 
     /**

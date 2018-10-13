@@ -4,17 +4,23 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
+import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersonIndexs.INDEX_1;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.AddGroupCommand;
+import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateGroupCommand;
@@ -34,6 +40,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.PersonIndex;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.GroupBuilder;
 import seedu.address.testutil.GroupUtil;
@@ -62,7 +69,15 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_addGroup() throws Exception {
-        assertTrue(parser.parseCommand(AddGroupCommand.COMMAND_WORD) instanceof AddGroupCommand);
+        final  String index = INDEX_1;
+        final Set<PersonIndex> personIndexs = new HashSet<>();
+
+        personIndexs.add(new PersonIndex(index));
+
+        AddGroupCommand command = (AddGroupCommand) parser.parseCommand(AddGroupCommand.COMMAND_WORD + " "
+                + PREFIX_NAME + TUT_1.getGroupName()
+                + " " + PREFIX_PERSON_INDEX + index);
+        assertEquals(new AddGroupCommand(TUT_1.getGroupName(), personIndexs), command);
     }
 
     @Test
