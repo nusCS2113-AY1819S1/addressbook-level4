@@ -1,14 +1,19 @@
 package seedu.address.model.distribute;
 
 import static java.util.Objects.requireNonNull;
+import static java.util.stream.Collectors.toMap;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 
 public class DistributeAlgorithm {
@@ -47,7 +52,6 @@ public class DistributeAlgorithm {
         }else{
             StrictDistribution(index, groupArrayList, allPersonArrayList);
         }
-
     }
 
     private LinkedList<Person> Randomizer(LinkedList<Person> person){
@@ -79,8 +83,10 @@ public class DistributeAlgorithm {
         groupArrayList.clear();
     }
 
-    private void NationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPersonArrayList) {
-        System.out.println("Nationality Distribution");
+    private void NationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPerson) {
+    //   LinkedList<Person> nationalityLinkList = CreateNationalityList(allPerson);
+    //        int numOfDifferentNationality = NumberOfDifferentNationality(allPerson);
+
     }
 
     private void GenderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> allPerson) {
@@ -124,6 +130,49 @@ public class DistributeAlgorithm {
         System.out.println("Gender & Nationality Distribution");
     }
 
+    //--- MODULAR METHODS ---
+
+    //    private LinkedList<Person> CreateNationalityList(LinkedList<Person> allPerson) {
+    //        //number of different nationality
+    //        Map<Nationality, Long> counts = NumberOfDifferentNationality(allPerson);
+    //        Map<Nationality, Long> sortedCount = PaxPerNationality(counts);
+    //        LinkedList<Person> NationalityLinkList = new LinkedList<>();
+    //
+    //        System.out.println(counts.size());
+    //        System.out.println(sortedCount);
+    //
+    //        for (int i = 0; i < counts.size(); i++) {
+    //            String[] parseValue = sortedCount.entrySet().toArray()[i].toString().split("=");
+    ////            int value = Integer.parseInt(parseValue[1]);
+    //            System.out.print(sortedCount.keySet().toArray()[i] + " ");
+    ////            System.out.println(value);
+    //        }
+    //        return NationalityLinkList;
+    //    }
+
+    private Map<Nationality, Long> NumberOfDifferentNationality(LinkedList<Person> allPerson){
+        Map<Nationality, Long> numberOfNationality =
+                allPerson.stream().collect(Collectors.groupingBy(e -> e.getNationality(), Collectors.counting()));
+        return numberOfNationality;
+    }
+
+    private Map<Nationality, Long> PaxPerNationality(Map<Nationality, Long> numberOfNationality){
+        Map<Nationality, Long> sortedNumOfNationality =
+                numberOfNationality.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                        .collect(toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
+                                LinkedHashMap::new));
+        return sortedNumOfNationality;
+    }
+
+    /**
+     *
+     * @param index
+     * @param groupArrayList
+     * @param femaleLinkList
+     * @param loopCounter
+     * @param num
+     * @param temp
+     */
     private void GenderDistributionCheck(int index, ArrayList<ArrayList<Person>> groupArrayList, LinkedList<Person> femaleLinkList, int loopCounter, int num, ArrayList<Person> temp) {
         if(loopCounter>=index){
             temp = groupArrayList.get(num);
@@ -136,6 +185,13 @@ public class DistributeAlgorithm {
         }
     }
 
+    /**
+     *
+     * @param allPerson
+     * @param filteredGender
+     * @param gender
+     * @return
+     */
     private LinkedList<Person> FilterGender(LinkedList<Person> allPerson, LinkedList<Person> filteredGender, String gender){
         for( Person p : allPerson){
             if(p.getGender().toString().equals(gender)){
