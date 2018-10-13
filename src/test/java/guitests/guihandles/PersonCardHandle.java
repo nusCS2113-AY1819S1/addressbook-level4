@@ -61,7 +61,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return phoneLabel.getText();
     }
 
-    public String getDistributor()() {
+    public String getDistributor() {
         return emailLabel.getText();
     }
 
@@ -79,7 +79,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         return getName().equals(product.getName().fullName)
                 && getProductInfo().equals(product.getProductInfo().value)
                 && getSerialNumber().equals(product.getSerialNumber().value)
-                && getDistributor()().equals(product.getDistributor()().value)
+                && getDistributor().equals(product.getDistributor().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(product.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
