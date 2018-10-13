@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-
 
 /**
  * Represents a Group in the address book.
@@ -21,6 +21,7 @@ public class Group {
 
     //Data Fields
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Person> persons = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -30,6 +31,14 @@ public class Group {
         this.groupName = groupName;
         this.groupLocation = groupLocation;
         this.tags.addAll(tags);
+    }
+
+    public Set<Person> getPersons(){
+        return Collections.unmodifiableSet(persons);
+    }
+
+    public void setPersons(Set<Person> persons){
+        this.persons.addAll(persons);
     }
 
     public GroupName getGroupName() {

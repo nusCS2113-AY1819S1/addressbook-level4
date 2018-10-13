@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
+import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_3;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersonIndexs.INDEX_1;
@@ -77,7 +78,7 @@ public class AddressBookParserTest {
         AddGroupCommand command = (AddGroupCommand) parser.parseCommand(AddGroupCommand.COMMAND_WORD + " "
                 + PREFIX_NAME + TUT_1.getGroupName()
                 + " " + PREFIX_PERSON_INDEX + index);
-        assertEquals(new AddGroupCommand(TUT_1.getGroupName(), personIndexs), command);
+        assertEquals(new AddGroupCommand(ADD_GROUP_3), command);
     }
 
     @Test

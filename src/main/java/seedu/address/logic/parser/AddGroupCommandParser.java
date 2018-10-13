@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.GroupName;
 import seedu.address.model.person.PersonIndex;
 
@@ -33,8 +34,8 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand>{
 
         GroupName groupName = ParserUtil.parseGroupName(argMultimap.getValue(PREFIX_NAME).get());
         Set<PersonIndex> personIndexList = ParserUtil.parsePersonIndexs(argMultimap.getAllValues(PREFIX_PERSON_INDEX));
-
-        return new AddGroupCommand(groupName, personIndexList);
+        AddGroup addGroup = new AddGroup(groupName,personIndexList);
+        return new AddGroupCommand(addGroup);
     }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

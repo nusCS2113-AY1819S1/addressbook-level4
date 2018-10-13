@@ -21,6 +21,7 @@ import seedu.address.model.group.GroupName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.PersonIndex;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
@@ -35,6 +36,10 @@ public class ParserUtilTest {
     private static final String INVALID_GROUP_NAME = "TUT/1";
     private static final String INVALID_GROUP_LOCATION = "E1/01/01";
 
+    private static final String INVALID_PERSON_INDEX = "e";
+
+    private static final String VALID_PERSON_INDEX_1 = "1";
+    private static final String VALID_PERSON_INDEX_2 = "2";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
@@ -217,15 +222,33 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parsePersonIndex_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parsePersonIndex(null);
+    }
+
+    @Test
     public void parseTag_invalidValue_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
         ParserUtil.parseTag(INVALID_TAG);
     }
 
     @Test
+    public void parsePersonIndex_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parsePersonIndex(INVALID_PERSON_INDEX);
+    }
+
+    @Test
     public void parseTag_validValueWithoutWhitespace_returnsTag() throws Exception {
         Tag expectedTag = new Tag(VALID_TAG_1);
         assertEquals(expectedTag, ParserUtil.parseTag(VALID_TAG_1));
+    }
+
+    @Test
+    public void parsePersonIndex_validValueWithoutWhitespace_returnsPersonIndex() throws Exception {
+        PersonIndex expectedPersonIndex = new PersonIndex(VALID_PERSON_INDEX_1);
+        assertEquals(expectedPersonIndex, ParserUtil.parsePersonIndex(VALID_PERSON_INDEX_1));
     }
 
     @Test
@@ -236,9 +259,22 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parsePersonIndex_validValueWithWhitespace_returnsTrimmedPersonIndex() throws Exception {
+        String personIndexWithWhitespace = WHITESPACE + VALID_PERSON_INDEX_1 + WHITESPACE;
+        PersonIndex expectedPersonIndex = new PersonIndex(VALID_PERSON_INDEX_1);
+        assertEquals(expectedPersonIndex, ParserUtil.parsePersonIndex(personIndexWithWhitespace));
+    }
+
+    @Test
     public void parseTags_null_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
         ParserUtil.parseTags(null);
+    }
+
+    @Test
+    public void parsePersonIndexs_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parsePersonIndexs(null);
     }
 
     @Test
@@ -248,8 +284,19 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parsePersonIndexs_collectionWithInvalidPersonIndexs_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parsePersonIndexs(Arrays.asList(VALID_PERSON_INDEX_1, INVALID_PERSON_INDEX));
+    }
+
+    @Test
     public void parseTags_emptyCollection_returnsEmptySet() throws Exception {
         assertTrue(ParserUtil.parseTags(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parsePersonIndexs_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parsePersonIndexs(Collections.emptyList()).isEmpty());
     }
 
     @Test
@@ -258,5 +305,13 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parsePersonIndexs_collectionWithValidPersonIndexs_returnsPersonIndexSet() throws Exception {
+        Set<PersonIndex> actualPersonIndexSet = ParserUtil.parsePersonIndexs(Arrays.asList(VALID_PERSON_INDEX_1, VALID_PERSON_INDEX_2));
+        Set<PersonIndex> expectedPersonIndexSet = new HashSet<PersonIndex>(Arrays.asList(new PersonIndex(VALID_PERSON_INDEX_1), new PersonIndex(VALID_PERSON_INDEX_2)));
+
+        assertEquals(expectedPersonIndexSet, actualPersonIndexSet);
     }
 }

@@ -2,9 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalGroups.CS1010;
-import static seedu.address.testutil.TypicalGroups.TUT_1;
-import static seedu.address.testutil.TypicalPersonIndexs.getTypicalPersonIndexs;
+import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_1;
+import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_2;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -21,18 +20,18 @@ public class AddGroupCommandTest {
     @Test
     public void constructor_nullParam_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddGroupCommand(null,null);
+        new AddGroupCommand(null);
     }
     @Test
     public void equals() {
-        AddGroupCommand addGroupCommand1 = new AddGroupCommand(TUT_1.getGroupName(),getTypicalPersonIndexs());
-        AddGroupCommand addGroupCommand2 = new AddGroupCommand(CS1010.getGroupName(), getTypicalPersonIndexs());
+        AddGroupCommand addGroupCommand1 = new AddGroupCommand(ADD_GROUP_1);
+        AddGroupCommand addGroupCommand2 = new AddGroupCommand(ADD_GROUP_2);
 
         // same object -> returns true
         assertTrue(addGroupCommand1.equals(addGroupCommand1));
 
         // same values -> returns true
-        AddGroupCommand addGroup1CommandCopy = new AddGroupCommand(TUT_1.getGroupName(),getTypicalPersonIndexs());
+        AddGroupCommand addGroup1CommandCopy = new AddGroupCommand(ADD_GROUP_1);
         assertTrue(addGroupCommand1.equals(addGroup1CommandCopy));
 
         // different types -> returns false

@@ -13,9 +13,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_TUT_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_INDEX_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalGroups.TUT_1;
-import static seedu.address.testutil.TypicalPersonIndexs.getSingleTypicalPersonIndexs;
-import static seedu.address.testutil.TypicalPersonIndexs.getTypicalPersonIndexs;
+import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_1;
+import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_3;
 
 import org.junit.Test;
 
@@ -31,15 +30,15 @@ public class AddGroupCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUP_NAME_DESC_TUT_1 + PERSON_INDEX_DESC_1,
-                new AddGroupCommand(TUT_1.getGroupName(),getSingleTypicalPersonIndexs()));
+                new AddGroupCommand(ADD_GROUP_3));
 
         // multiple group names - last group name accepted
         assertParseSuccess(parser, GROUP_NAME_DESC_CS1010 + GROUP_NAME_DESC_TUT_1 + PERSON_INDEX_DESC_1,
-                new AddGroupCommand(TUT_1.getGroupName(),getSingleTypicalPersonIndexs()));
+                new AddGroupCommand(ADD_GROUP_3));
 
         // multiple indexs - all accepted
         assertParseSuccess(parser, GROUP_NAME_DESC_TUT_1 + PERSON_INDEX_DESC_1 + PERSON_INDEX_DESC_2,
-                new AddGroupCommand(TUT_1.getGroupName(),getTypicalPersonIndexs()));
+                new AddGroupCommand(ADD_GROUP_1));
     }
     @Test
     public void parse_compulsoryFieldMissing_failure() {
