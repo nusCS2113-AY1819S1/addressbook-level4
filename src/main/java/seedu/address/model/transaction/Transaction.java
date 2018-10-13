@@ -13,7 +13,6 @@ import seedu.address.model.transaction.exceptions.ClosedTransactionException;
  * A basic Transaction class, where the Product is taken to be a string. This will be updated with actual Product
  * objects in V1.2.
  */
-
 public class Transaction {
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
     private static LocalDateTime time;
@@ -36,6 +35,12 @@ public class Transaction {
         this.addProduct(itemName, 1);
     }
 
+    /**
+     * TODO
+     * @param itemName
+     * @param quantity
+     * @throws ClosedTransactionException
+     */
     public void addProduct(String itemName, int quantity) throws ClosedTransactionException {
         if (!isActiveTransaction) {
             throw new ClosedTransactionException();
