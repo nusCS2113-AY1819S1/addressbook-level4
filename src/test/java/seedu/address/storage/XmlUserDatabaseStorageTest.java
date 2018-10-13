@@ -2,9 +2,9 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalUsers.DEFAULT_USER;
 import static seedu.address.testutil.TypicalUsers.AMY;
 import static seedu.address.testutil.TypicalUsers.BOB;
+import static seedu.address.testutil.TypicalUsers.DEFAULT_USER;
 import static seedu.address.testutil.TypicalUsers.getTypicalUserDatabase;
 
 import java.io.IOException;
@@ -17,13 +17,13 @@ import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
-
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserDatabase;
 
 public class XmlUserDatabaseStorageTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlAddressBookStorageTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test",
+            "data", "XmlAddressBookStorageTest");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -112,7 +112,8 @@ public class XmlUserDatabaseStorageTest {
      */
     private void saveUserDatabase(ReadOnlyUserDatabase userDatabase, String filePath) {
         try {
-            new XmlUserDatabaseStorage(Paths.get(filePath)).saveUserDatabase(userDatabase, addToTestDataPathIfNotNull(filePath));
+            new XmlUserDatabaseStorage(Paths.get(filePath)).saveUserDatabase(userDatabase,
+                    addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

@@ -1,5 +1,19 @@
 package seedu.address.logic.commands;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_JOE;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_ROE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalDistributors.getTypicalAddressBook;
+
 import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -14,12 +28,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.testutil.EditDistributorDescriptorBuilder;
 import seedu.address.testutil.DistributorBuilder;
-
-import static org.junit.Assert.*;
-import static seedu.address.logic.commands.CommandTestUtil.*;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalDistributors.getTypicalAddressBook;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
@@ -86,8 +94,10 @@ public class EditDCommandTest {
     public void execute_filteredList_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
-        Distributor distributorInFilteredList = model.getFilteredDistributorList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Distributor editedDistributor = new DistributorBuilder(distributorInFilteredList).withName(VALID_NAME_BOB).build();
+        Distributor distributorInFilteredList = model.getFilteredDistributorList()
+                .get(INDEX_FIRST_PERSON.getZeroBased());
+        Distributor editedDistributor = new DistributorBuilder(distributorInFilteredList)
+                .withName(VALID_NAME_BOB).build();
         EditDCommand editDCommand = new EditDCommand(INDEX_FIRST_PERSON,
                 new EditDistributorDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
@@ -115,7 +125,8 @@ public class EditDCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit product in filtered list into a duplicate in address book
-        Distributor distributorInList = model.getDistributorInfoBook().getDistributorList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Distributor distributorInList = model.getDistributorInfoBook().getDistributorList()
+                .get(INDEX_SECOND_PERSON.getZeroBased());
         EditDCommand editDCommand = new EditDCommand(INDEX_FIRST_PERSON,
                 new EditDistributorDescriptorBuilder(distributorInList).build());
 
@@ -140,7 +151,8 @@ public class EditDCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getDistributorInfoBook().getDistributorList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getDistributorInfoBook()
+                .getDistributorList().size());
 
         EditDCommand editDCommand = new EditDCommand(outOfBoundIndex,
                 new EditDistributorDescriptorBuilder().withName(VALID_NAME_BOB).build());
