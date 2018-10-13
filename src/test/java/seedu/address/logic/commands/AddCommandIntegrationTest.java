@@ -10,6 +10,8 @@ import org.junit.Test;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TestStorage;
+import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Product;
 import seedu.address.testutil.PersonBuilder;
@@ -32,7 +34,7 @@ public class AddCommandIntegrationTest {
         Product validProduct = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.addPerson(validPerson);
+        expectedModel.addPerson(validProduct);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new AddCommand(validProduct), model, commandHistory,

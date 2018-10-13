@@ -33,7 +33,6 @@ public class SampleDataUtil {
     }
 
 
-
     public static Product[] getSamplePersons() {
         return new Product[] {
             new Product(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
@@ -65,9 +64,9 @@ public class SampleDataUtil {
             sampleAb.addDistributor(sampleDistributor);
         }
 
-        for (Product sampleProduct : getSamplePersons()) {
-            sampleAb.addPerson(sampleProduct);
-        }
+    //    for (Product sampleProduct : getSamplePersons()) {
+    //        sampleAb.addPerson(sampleProduct);
+    //    }
         return sampleAb;
     }
 

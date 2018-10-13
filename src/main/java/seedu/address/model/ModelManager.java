@@ -191,6 +191,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public ReadOnlyAddressBook getAddressBook() {
+        return null;
+    }
+
+    @Override
     public User getLoggedInUser() {
         return versionedUserDatabase.getLoggedInUser();
     }

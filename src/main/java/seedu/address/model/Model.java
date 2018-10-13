@@ -175,4 +175,7 @@ public interface Model {
     User getLoggedInUser();
 
     void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException;
+
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getAddressBook();
 }
