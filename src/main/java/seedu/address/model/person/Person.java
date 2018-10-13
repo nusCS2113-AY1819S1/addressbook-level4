@@ -4,9 +4,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 
+import seedu.address.model.enrolledClass.EnrolledClass;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,17 +26,24 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Map<String, EnrolledClass> enrolledClasses = new TreeMap<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, Map<String, EnrolledClass> enrolledClasses) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        EnrolledClass tempClass;
+        for(String tempClassName: enrolledClasses.keySet()){
+            tempClass = enrolledClasses.get(tempClassName);
+            this.enrolledClasses.put(tempClassName, tempClass);
+        }
     }
 
     public Name getName() {
@@ -58,6 +68,14 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable enrolled class map, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Map<String, EnrolledClass> getEnrolledClasses() {
+        return Collections.unmodifiableMap(enrolledClasses);
     }
 
     /**
@@ -92,13 +110,14 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getEnrolledClasses().equals(getEnrolledClasses());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, enrolledClasses);
     }
 
     @Override
@@ -113,6 +132,11 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+        builder.append(" Enrolled Classes: ");
+        for(String temp: getEnrolledClasses().keySet()){
+            temp = temp + " ";
+            builder.append(temp);
+        }
         return builder.toString();
     }
 

@@ -4,14 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MERGE;
 
-import java.util.List;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.enrolledClass.EnrolledClass;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -91,9 +90,10 @@ public class MergeCommand extends Command {
         Email email = new Email("notimportant@no");
         Address address = new Address("here");
         Set<Tag> mergedTags = mergeTimeSlots(person1.getTags(), person2.getTags());
+        Map<String, EnrolledClass> enrolledClassMap = new TreeMap<>();
 
 
-        return new Person(mergedName, phone, email, address, mergedTags);
+        return new Person(mergedName, phone, email, address, mergedTags, enrolledClassMap);
 
 
     }

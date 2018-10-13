@@ -2,13 +2,12 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.enrolledClass.EnrolledClass;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -121,4 +120,36 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String enrolledClass} into a {@code EnrolledClass}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code enrolledClass} is invalid.
+     */
+    public static EnrolledClass parseEnrolledClass(String enrolledClass) throws ParseException {
+        requireNonNull(enrolledClass);
+        String trimmedEnrolledClass = enrolledClass.trim();
+        if (!EnrolledClass.isValidEnRolledClassName(trimmedEnrolledClass)) {
+            throw new ParseException(EnrolledClass.MESSAGE_ENROLLED_CLASS_CONSTRAINTS);
+        }
+        return new EnrolledClass(trimmedEnrolledClass);
+    }
+
+    /**
+     * Parses {@code Collection<String> enrolledClasses} into a {@code Map<String, EnrolledClass>}.
+     */
+    public static Map<String, EnrolledClass> parseEnrolledClasses(Collection<String> enrolledClasses)
+            throws ParseException {
+
+        requireNonNull(enrolledClasses);
+        final Map<String, EnrolledClass> enrolledClassMap = new TreeMap<>();
+        EnrolledClass tempEnrolledClass;
+        for (String enrolledClassName : enrolledClasses) {
+            tempEnrolledClass= parseEnrolledClass(enrolledClassName);
+            enrolledClassMap.put(tempEnrolledClass.enrolledClassName, tempEnrolledClass);
+        }
+        return enrolledClassMap;
+    }
+
 }
