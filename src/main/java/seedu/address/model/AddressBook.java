@@ -64,7 +64,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// list overwrite operations
 
-    
+
     /**
      * Replaces the contents of the product list with {@code products}.
      * {@code products} must not contain duplicate products.
@@ -72,7 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setPersons(List<Product> products) {
         this.persons.setPersons(products);
     }
-    
+
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -95,7 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     //// product-level operations
 
-    
+
     /**
      * Returns true if a product with the same identity as {@code product} exists in the address book.
      */
@@ -103,7 +103,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(product);
         return persons.contains(product);
     }
-    
+
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -113,7 +113,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return distributors.contains(distributor);
     }
 
-    
+
     /**
      * Adds a product to the address book.
      * The product must not already exist in the address book.
@@ -121,7 +121,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Product p) {
         persons.add(p);
     }
-    
+
 
     /**
      * Adds a distributor to the address book.
@@ -132,7 +132,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
 
-    
+
     /**
      * Replaces the given product {@code target} in the list with {@code editedProduct}.
      * {@code target} must exist in the address book.
@@ -142,7 +142,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedProduct);
         persons.setPerson(target, editedProduct);
     }
-    
+
 
     /**
      * Replaces the given distrbutor {@code target} in the list with {@code editedDistributor}.
@@ -155,7 +155,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         distributors.setDistributor(target, editedDistributor);
     }
 
-    
+
     /**
      * Adds a transaction to the active shopday.
      */
@@ -191,7 +191,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Product key) {
         persons.remove(key);
     }
-    
+
 
     /**
      * Removes {@code key} from this {@code AddressBook}.

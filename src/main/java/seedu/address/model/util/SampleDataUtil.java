@@ -30,8 +30,8 @@ public class SampleDataUtil {
             new Distributor(new DistributorName("Roy Balakrishnan"), new DistributorPhone("92624417"))
         };
     }
-   
-            
+
+
 
     public static Product[] getSamplePersons() {
         return new Product[] {
@@ -70,7 +70,7 @@ public class SampleDataUtil {
         return sampleAb;
     }
 
-    
+
     /**
      * Returns a tag set containing the list of strings given.
     */

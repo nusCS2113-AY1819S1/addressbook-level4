@@ -318,7 +318,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredDistributors.equals(other.filteredDistributors)
                 && filteredProducts.equals(other.filteredProducts);
     }
-  
+
     @Override
     public String getActiveDayHistory() {
         return versionedAddressBook.getActiveDayHistory();

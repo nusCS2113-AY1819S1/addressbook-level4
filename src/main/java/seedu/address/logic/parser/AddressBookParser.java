@@ -70,13 +70,13 @@ public class AddressBookParser {
 
         case AddTransactionCommand.COMMAND_WORD:
             return new AddTransactionCommandParser().parse(arguments);
-            
+
         case ViewLastTransaction.COMMAND_WORD:
             return new ViewLastTransaction();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-            
+
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
 
@@ -91,7 +91,7 @@ public class AddressBookParser {
 
         case ChangeUserPasswordCommand.COMMAND_WORD:
             return new ChangeUserPasswordCommandParser().parse(arguments);
-            
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
