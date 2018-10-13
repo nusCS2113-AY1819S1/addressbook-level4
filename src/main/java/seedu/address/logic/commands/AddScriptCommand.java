@@ -40,7 +40,7 @@ public class AddScriptCommand extends Command {
 
     public AddScriptCommand(String fileName) {
         requireNonNull(fileName);
-        textFileName = fileName.replaceAll("^\\s+", "") + TEXT_EXTENSION ;
+        textFileName = fileName.replaceAll("^\\s+", "") + TEXT_EXTENSION;
         this.path = FileUtil.getPath(textFileName);
         this.addScriptParser = new AddScriptParser();
     }

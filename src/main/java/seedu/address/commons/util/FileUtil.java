@@ -101,6 +101,7 @@ public class FileUtil {
      * @see <a href="https://stackoverflow.com/questions/5868369/how-to-read-a-large-text-file-line-by-line-using-java">
      *     https://stackoverflow.com/questions/5868369/how-to-read-a-large-text-file-line-by-line-using-java</a>
      */
+    @SuppressWarnings("unchecked")
     public static List<String> readEachLineFromFile(Path file) throws IOException {
         List list = new ArrayList<>();
         try (Stream<String> stream = Files.lines(file, Charset.defaultCharset())) {
