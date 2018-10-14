@@ -1,10 +1,10 @@
 package seedu.address.model.group;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.person.Person;
@@ -15,6 +15,10 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Group {
+
+    private static final String AT_LOCATION = " at location ";
+    private static final String WITH_TAGS = " with tags: ";
+
     // Identity fields
     private final GroupName groupName;
     private final GroupLocation groupLocation;
@@ -31,18 +35,6 @@ public class Group {
         this.groupName = groupName;
         this.groupLocation = groupLocation;
         this.tags.addAll(tags);
-    }
-
-    public Set<Person> getPersons(){
-        return Collections.unmodifiableSet(persons);
-    }
-
-    public void addPersons(Person persons){
-        this.persons.add(persons);
-    }
-
-    public void addPersonSet(Set<Person> persons){
-        this.persons.addAll(persons);
     }
 
     public GroupName getGroupName() {
@@ -62,7 +54,25 @@ public class Group {
     }
 
     /**
-     * Returns true if both groups of the same name have at least one other identity field that is the same.
+     * Returns an immutable person set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Person> getPersons(){
+        return Collections.unmodifiableSet(persons);
+    }
+
+    public void addPersons(Person persons){
+        requireNonNull(persons);
+        this.persons.add(persons);
+    }
+
+    public void addPersons(Set<Person> persons){
+        requireNonNull(persons);
+        this.persons.addAll(persons);
+    }
+
+    /**
+     * Returns true if both groups of the same name, location and tags.
      * This defines a weaker notion of equality between two groups.
      */
     public boolean isSameGroup(Group otherGroup) {
@@ -71,15 +81,8 @@ public class Group {
         }
         return otherGroup != null
                 && otherGroup.getGroupName().equals(getGroupName())
-                && (otherGroup.getGroupLocation().equals(getGroupLocation()));
-    }
-
-    /**
-     * Returns true if both group and addGroup are of the same group name.
-     */
-    public boolean hasSameGroupName(AddGroup addGroup) {
-        return addGroup != null
-                && addGroup.getGroupName().equals(getGroupName());
+                && otherGroup.getGroupLocation().equals(getGroupLocation())
+                && otherGroup.getTags().equals(getTags());
     }
 
     /**
@@ -104,18 +107,12 @@ public class Group {
     }
 
     @Override
-    public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(groupName, groupLocation, tags);
-    }
-
-    @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getGroupName())
-                .append(" Group Location: ")
-                .append(getGroupLocation())
-                .append(" Tags: ");
+        builder.append(groupName)
+                .append(AT_LOCATION)
+                .append(groupLocation)
+                .append(WITH_TAGS);
         getTags().forEach(builder::append);
         return builder.toString();
     }

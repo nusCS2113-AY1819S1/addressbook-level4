@@ -11,6 +11,7 @@ import seedu.address.model.group.Group;
  * An UI component that displays information of a {@code Group}.
  */
 public class GroupCard extends UiPart<Region> {
+
     private static final String FXML = "GroupListCard.fxml";
     private static final String[] TAG_COLOR_STYLES =
             { "teal", "red", "yellow", "blue", "orange", "brown", "green", "pink", "black", "grey" };
@@ -41,7 +42,7 @@ public class GroupCard extends UiPart<Region> {
         this.group = group;
         id.setText(displayedIndex + ". ");
         groupName.setText(group.getGroupName().groupName);
-        groupLocation.setText(group.getGroupLocation().value);
+        groupLocation.setText(group.getGroupLocation().groupLocation);
         initTags(group);
     }
 

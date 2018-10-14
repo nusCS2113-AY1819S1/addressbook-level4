@@ -17,7 +17,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_GENDER = new Prefix("g/");
     public static final Prefix PREFIX_NATIONALITY = new Prefix("nat/");
     public static final Prefix PREFIX_GROUP_LOCATION = new Prefix("l/");
-    public static final Prefix PREFIX_PERSON_INDEX = new Prefix("i/");
+    public static final Prefix PREFIX_PERSON_INDEX = new Prefix("p/");
+    public static final Prefix PREFIX_GROUP_INDEX = new Prefix("g/");
     public static final Prefix PREFIX_MEAN = new Prefix("mean/");
     public static final Prefix PREFIX_HIGHEST = new Prefix("highest/");
     public static final Prefix PREFIX_TWENTY_FIVE = new Prefix("25/");

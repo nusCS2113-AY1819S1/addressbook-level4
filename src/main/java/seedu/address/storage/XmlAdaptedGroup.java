@@ -26,6 +26,7 @@ public class XmlAdaptedGroup {
 
     @XmlElement(required = true)
     private String groupName;
+
     @XmlElement(required = true)
     private String groupLocation;
 
@@ -33,7 +34,7 @@ public class XmlAdaptedGroup {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     @XmlElement
-    private List<XmlAdaptedPerson> person = new ArrayList<>();
+    private List<XmlAdaptedPerson> persons = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedGroup.
@@ -45,11 +46,14 @@ public class XmlAdaptedGroup {
     /**
      * Constructs an {@code XmlAdaptedGroup} with the given group details.
      */
-    public XmlAdaptedGroup(String groupName, String groupLocation, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedGroup(String groupName, String groupLocation, List<XmlAdaptedTag> tagged, List<XmlAdaptedPerson> persons) {
         this.groupName = groupName;
         this.groupLocation = groupLocation;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+        if (persons != null) {
+            this.persons = new ArrayList<>(persons);
         }
     }
 
@@ -60,11 +64,11 @@ public class XmlAdaptedGroup {
      */
     public XmlAdaptedGroup(Group source) {
         groupName = source.getGroupName().groupName;
-        groupLocation = source.getGroupLocation().value;
+        groupLocation = source.getGroupLocation().groupLocation;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        person = source.getPersons().stream()
+        persons = source.getPersons().stream()
                 .map(XmlAdaptedPerson::new)
                 .collect(Collectors.toList());
     }
@@ -81,7 +85,7 @@ public class XmlAdaptedGroup {
         }
 
         final List<Person> groupPersons = new ArrayList<>();
-        for (XmlAdaptedPerson person : person) {
+        for (XmlAdaptedPerson person : persons) {
             groupPersons.add(person.toModelType());
         }
 
@@ -107,7 +111,7 @@ public class XmlAdaptedGroup {
         final Set<Person> modelPersons = new HashSet<>(groupPersons);
 
         Group group = new Group(modelGroupName,modelGroupLocation,modelTags);
-        group.addPersonSet(modelPersons);
+        group.addPersons(modelPersons);
 
         return group;
     }
@@ -126,6 +130,7 @@ public class XmlAdaptedGroup {
         return Objects.equals(groupName, otherGroup.groupName)
                 && Objects.equals(groupLocation, otherGroup.groupLocation)
                 && tagged.equals(otherGroup.tagged)
-                && person.equals(otherGroup.person);
+                && persons.equals(otherGroup.persons);
     }
+
 }

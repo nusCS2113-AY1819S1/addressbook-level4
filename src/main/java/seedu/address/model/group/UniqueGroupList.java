@@ -17,7 +17,7 @@ import seedu.address.model.person.exceptions.DuplicatePersonException;
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
  * A group is considered unique by comparing using {@code Group#isSameGroup(Group)}. As such, adding and updating of
  * groups uses Group#isSameGroup(Group) for equality so as to ensure that the group being added or updated is
- * unique in terms of identity in the UniqueGroupList. However, the removal of a Group uses Group#equals(Object) so
+ * unique in terms of all fields except its persons in the UniqueGroupList. However, the removal of a Group uses Group#equals(Object) so
  * as to ensure that the group with exactly the same fields will be removed.
  *
  * Supports a minimal set of list operations.
@@ -29,7 +29,7 @@ public class UniqueGroupList implements Iterable<Group> {
     private final ObservableList<Group> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent group as the given argument.
+     * Returns true if the internal list contains an equivalent group as the given argument.
      */
     public boolean contains(Group toCheck) {
         requireNonNull(toCheck);
@@ -37,13 +37,13 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Returns true if a specific group in the list contains least one same person as the persons in the
+     * Returns true if a specific group in the internal list contains at least one same person as the persons in the
      * given argument.
      */
     public boolean contains(AddGroup toCheck) {
         requireNonNull(toCheck);
         for (Group g : internalList){
-            if (g.hasSameGroupName(toCheck)){
+            if (g.isSameGroup(toCheck.getGroup())){
                 return contains(g,toCheck);
             }
         }
@@ -51,10 +51,11 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Returns true if the Group contains an equivalent person in AddGroup.
+     * Returns true if the group in the given argument contains least one
+     * same person as the persons in the given argument.
      */
     public boolean contains(Group group, AddGroup toCheck) {
-        requireAllNonNull(group,toCheck);
+        requireAllNonNull(group, toCheck);
         for (Person p : group.getPersons()){
             for (Person p2 : toCheck.getPersonSet()){
                 if(p.equals(p2)){
@@ -63,21 +64,6 @@ public class UniqueGroupList implements Iterable<Group> {
             }
         }
         return false;
-    }
-
-    /**
-     * Adds persons from AddressBook specified in AddGroup to group in AddressBook
-     * specified in AddGroup
-     */
-    public void addPersons(AddGroup toAdd) {
-        requireNonNull(toAdd);
-        for (Group g : internalList){
-            if (g.hasSameGroupName(toAdd)){
-                for (Person p : toAdd.getPersonSet()){
-                    g.addPersons(p);
-                }
-            }
-        }
     }
 
     /**
@@ -93,7 +79,7 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
-     * Adds persons a group in the list.
+     * Adds persons to a group in the list.
      * The person must not already exist in the list.
      */
     public void addGroup(AddGroup toAdd) {
@@ -102,6 +88,20 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new DuplicatePersonException();
         }
         addPersons(toAdd);
+    }
+
+    /**
+     * Adds persons to group in list
+     */
+    public void addPersons(AddGroup toAdd) {
+        requireNonNull(toAdd);
+        for (Group g : internalList){
+            if (g.isSameGroup(toAdd.getGroup())){
+                for (Person p : toAdd.getPersonSet()){
+                    g.addPersons(p);
+                }
+            }
+        }
     }
 
     /**
@@ -169,12 +169,7 @@ public class UniqueGroupList implements Iterable<Group> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueGroupList // instanceof handles nulls
-                && internalList.equals(((UniqueGroupList) other).internalList));
-    }
-
-    @Override
-    public int hashCode() {
-        return internalList.hashCode();
+                && internalList.equals(((UniqueGroupList) other).internalList)); // state check
     }
 
     /**

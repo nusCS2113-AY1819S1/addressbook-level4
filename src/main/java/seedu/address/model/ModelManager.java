@@ -69,12 +69,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return versionedAddressBook.hasGroup(group);
-    }
-
-    @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
@@ -85,6 +79,20 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updatePerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        versionedAddressBook.updatePerson(target, editedPerson);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return versionedAddressBook.hasGroup(group);
     }
 
     @Override
@@ -105,14 +113,6 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean hasPersonInGroup(AddGroup addGroup) {
         requireNonNull(addGroup);
         return versionedAddressBook.hasPersonInGroup(addGroup);
-    }
-
-    @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================

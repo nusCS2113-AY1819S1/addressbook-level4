@@ -40,20 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public AddressBook(ReadOnlyAddressBook toBeCopied) {
         this();
         resetData(toBeCopied);
-
-        //SortGrade sortGrade = new SortGrade();
-        //sortGrade.sortingFromLowesttoHighest(persons);
-
-        //Calculator cal = new Calculator();
-        //cal.find25th(persons);
-
-        //cal.find75th(persons);
-        //cal.calculateMedian(persons);
-        //cal.calculateMedian(persons);
-
     }
-
-    //// list overwrite operations
 
     /**
      * Replaces the contents of the person list with {@code persons}.
@@ -100,38 +87,6 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a group with the same group as {@code group} exists in the address book.
-     */
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return groups.contains(group);
-    }
-
-    /**
-     * Creates a group in the address book.
-     * The group must not already exist in the address book.
-     */
-    public void createGroup(Group g) {
-        groups.createGroup(g);
-    }
-
-   /**
-     * Adds persons to a group in the address book.
-     * The group must already exist in the address book.
-     */
-    public void addGroup(AddGroup addGroup) {
-        groups.addGroup(addGroup);
-    }
-
-    /**
-     * Return true if there exist a person in addGroup which is already in the
-     * specified group(in addGroup) in the AddressBook.
-     */
-    public boolean hasPersonInGroup(AddGroup addGroup) {
-        return groups.contains(addGroup);
-    }
-
-    /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
      * {@code target} must exist in the address book.
      * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
@@ -150,11 +105,44 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Returns true if a group with the same fields except its persons
+     * as {@code group} exists in the address book.
+     */
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return groups.contains(group);
+    }
+
+    /**
+     * Creates a group in the address book.
+     * The group must not already exist in the address book.
+     */
+    public void createGroup(Group g) {
+        groups.createGroup(g);
+    }
+
+   /**
+     * Adds persons to a group in the address book.
+     * The persons must not already exist in the group.
+     */
+    public void addGroup(AddGroup aG) {
+        groups.addGroup(aG);
+    }
+
+    /**
+     * Return true if a person with the same identity is already in the
+     * specified group.
+     */
+    public boolean hasPersonInGroup(AddGroup addGroup) {
+        return groups.contains(addGroup);
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons"
+        return persons.asUnmodifiableObservableList().size() + " persons "
                 + groups.asUnmodifiableObservableList().size() + " groups";
     }
 

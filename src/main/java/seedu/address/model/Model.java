@@ -100,19 +100,18 @@ public interface Model {
     void createGroup(Group group);
 
     /**
-     * Adds persons to the given group.
-     * {@code group} must already exist in the system.
-     */
-    void addGroup(AddGroup addGroup);
-
-    /**
-     * Return true if there exist another group with the same name and location.
+     * Returns true if a group with the same identity fields and tag as {@code group} exists in the address book.
      */
     boolean hasGroup(Group group);
 
     /**
-     * Return true if there exist a person in addGroup which is already in the
-     * specified group(in addGroup) in the AddressBook.
+     * Adds persons to the given group.
+     * {@code addGroup} persons must not already exist in the group.
+     */
+    void addGroup(AddGroup addGroup);
+
+    /**
+     * Return true if a person  with the same identity fields exist in the group.
      */
     boolean hasPersonInGroup(AddGroup addGroup);
 
