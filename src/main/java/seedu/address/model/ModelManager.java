@@ -209,6 +209,11 @@ public class ModelManager extends ComponentManager implements Model {
         versionedEventList.sortByEndTime();
     }
 
+    @Override
+    public void sortByDate() {
+        versionedEventList.sortByDate();
+    }
+
 
     //=========== Undo/Redo =================================================================================
 

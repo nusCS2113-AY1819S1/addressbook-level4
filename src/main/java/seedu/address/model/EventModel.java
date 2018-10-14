@@ -86,4 +86,6 @@ public interface EventModel {
     void sortByStartTime();
 
     void sortByEndTime();
+
+    void sortByDate();
 }

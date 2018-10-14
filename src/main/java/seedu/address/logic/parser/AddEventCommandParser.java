@@ -13,9 +13,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
+import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
+import seedu.address.model.event.StartTime;
 
 /**
  * Parses input arguments and creates a new AddEventCommand object
@@ -42,10 +44,12 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
-        LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
-        LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
+        //TODO ADD DATE
+        LocalDate date = LocalDate.parse("2018-10-28");
+        StartTime startDate = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_DATE).get());
+        EndTime endDate = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_DATE).get());
 
-        Event event = new Event(name, description, startDate, endDate, location);
+        Event event = new Event(name, description, date, startDate, endDate, location);
 
         return new AddEventCommand(event);
     }

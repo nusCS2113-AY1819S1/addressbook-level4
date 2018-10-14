@@ -24,6 +24,7 @@ public class SortCommand extends Command {
     public static final String KEY_NAME = "name";
     public static final String KEY_STARTTIME = "starttime";
     public static final String KEY_ENDTIME = "endtime";
+    public static final String KEY_DATE = "date";
 
     private final String key;
 
@@ -50,6 +51,9 @@ public class SortCommand extends Command {
             break;
         case (KEY_ENDTIME):
             model.sortByEndTime();
+            break;
+        case (KEY_DATE):
+            model.sortByDate();
             break;
         default:
             break;

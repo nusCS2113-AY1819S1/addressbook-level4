@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -11,8 +10,10 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
+import seedu.address.model.event.EndTime;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
+import seedu.address.model.event.StartTime;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Department;
 import seedu.address.model.person.Email;
@@ -30,6 +31,7 @@ public class ParserUtil {
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.
+     *
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
@@ -193,14 +195,24 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static LocalDate parseDate(String date) throws ParseException {
-        requireNonNull(date);
-        String trimmedLocation = date.trim();
+    public static StartTime parseStartTime(String startTime) throws ParseException {
+        requireNonNull(startTime);
+        String trimmedLocation = startTime.trim();
         // TODO: WORK ON VALIDATING DATE
         //if (!Location.isValidLocation(trimmedLocation)) {
         //  throw new ParseException(Location.MESSAGE_LOCATION_CONSTRAINTS);
         //}
-        return LocalDate.parse(date);
+        return new StartTime(startTime);
+    }
+
+    public static EndTime parseEndTime(String endTime) throws ParseException {
+        requireNonNull(endTime);
+        String trimmedLocation = endTime.trim();
+        // TODO: WORK ON VALIDATING DATE
+        //if (!Location.isValidLocation(trimmedLocation)) {
+        //  throw new ParseException(Location.MESSAGE_LOCATION_CONSTRAINTS);
+        //}
+        return new EndTime(endTime);
     }
 
 
