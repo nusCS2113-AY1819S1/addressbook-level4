@@ -64,20 +64,6 @@ public class Task {
     }
 
     /**
-     * Returns true if both tasks have the same identity fields.
-     * This defines a weaker notion of equality between two tasks.
-     */
-    public boolean isSameTask(Task otherTask) {
-        if (otherTask == this) {
-            return true;
-        }
-
-        return otherTask != null
-                && otherTask.getName().equals(getName())
-                && otherTask.getModule().equals(getModule());
-    }
-
-    /**
      * Returns true if both tasks have the same identity and data fields.
      * This defines a stronger notion of equality between two tasks.
      */
