@@ -10,6 +10,7 @@ public class User {
     private final Username username;
     private final Password password;
     private boolean loginStatus;
+    private boolean adminStatus;
 
     public User(Username username, Password password) {
         requireAllNonNull(username, password);
@@ -25,11 +26,16 @@ public class User {
         return password;
     }
 
+    public boolean getAdminStatus() {
+        return adminStatus;
+    }
+
     public boolean getLoginStatus() {
         return loginStatus;
     }
 
-    public void setLoginStatus(boolean loginStatus) {
+    public void setLoginStatus(boolean loginStatus, boolean adminStatus) {
         this.loginStatus = loginStatus;
+        this.adminStatus = adminStatus;
     }
 }
