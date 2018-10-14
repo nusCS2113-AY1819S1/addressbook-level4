@@ -12,10 +12,11 @@ import seedu.address.model.user.Username;
  */
 public abstract class Command {
 
+    public static final String MESSAGE_LOGIN = "Please login first!";
+
     private final Username username = new Username(" ");
     private final Password password = new Password(" ");
     private User currentUser = new User(username, password);
-    public static final String MESSAGE_LOGIN = "Please login first!";
 
     /**
      * Executes the command and returns the result message.
