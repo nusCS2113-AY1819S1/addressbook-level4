@@ -4,13 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents an Drink's total stock.
+ * Represents an Drink's total stock (i.e. quantity) in terms of unit.
  * Guarantees: TODO
  */
 public class Stock {
     public static final String MESSAGE_QUANTITY_CONSTRAINTS =
-            "Quantity should only contain numbers";
-    public static final String QUANTITY_VALIDATION_REGEX = "\\d+";
+            "Stock should only contain numbers";
+    public static final String STOCK_VALIDATION_REGEX = "\\d+";
     public static final String UNIT = "carton";
 
     private int value;
@@ -18,19 +18,19 @@ public class Stock {
     /**
      * Constructs an {@code Stock}.
      *
-     * @param quantity A valid quantity value expressed as a string.
+     * @param quantity A valid stock value expressed as a string.
      */
     public Stock(String quantity) {
         requireNonNull(quantity);
-        checkArgument(isValidQuantity(quantity), MESSAGE_QUANTITY_CONSTRAINTS);
+        checkArgument(isValidStock(quantity), MESSAGE_QUANTITY_CONSTRAINTS);
         this.value = Integer.parseInt(quantity);
     }
 
     /**
      * Returns true if a given string is a valid quantity value.
      */
-    public static boolean isValidQuantity(String test) {
-        return test.matches(QUANTITY_VALIDATION_REGEX);
+    public static boolean isValidStock(String test) {
+        return test.matches(STOCK_VALIDATION_REGEX);
     }
 
     public int getValue() {
