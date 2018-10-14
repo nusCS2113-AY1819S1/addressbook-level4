@@ -10,24 +10,28 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TodoListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTodoList;
 import seedu.address.model.UserPrefs;
 
 /**
- * Manages storage of AddressBook data in local storage.
+ * Manages storage of AddressBook, TodoList data in local storage.
  */
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private TodoListStorage todoListStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, TodoListStorage todoListStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
+        this.todoListStorage = todoListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -79,12 +83,53 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
+    // ================ TodoList methods ==============================
+
+    @Override
+    public Path getTodoListFilePath() {
+        return todoListStorage.getTodoListFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyTodoList> readTodoList() throws DataConversionException, IOException {
+        return readTodoList(todoListStorage.getTodoListFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyTodoList> readTodoList(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return todoListStorage.readTodoList(filePath);
+    }
+
+    @Override
+    public void saveTodoList(ReadOnlyTodoList todoList) throws IOException {
+        saveTodoList(todoList, todoListStorage.getTodoListFilePath());
+    }
+
+    @Override
+    public void saveTodoList(ReadOnlyTodoList todoList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        todoListStorage.saveTodoList(todoList, filePath);
+    }
+
+
     @Override
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveAddressBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleTodoListChangedEvent(TodoListChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveTodoList(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
