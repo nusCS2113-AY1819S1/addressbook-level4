@@ -16,6 +16,7 @@ public class User {
         this.password = password;
     }
 
+<<<<<<< HEAD
     public Username getUsername() {
         return username;
     }
@@ -23,4 +24,9 @@ public class User {
     public Password getPassword() {
         return password;
     }
+=======
+    public Username getUsername() { return username; }
+
+    public Password getPassword() { return password; }
+>>>>>>> 38598fe88fbbfc7ca04425ebd7a1e8e61909d7ae
 }
