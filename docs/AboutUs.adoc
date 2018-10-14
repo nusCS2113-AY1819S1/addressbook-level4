@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Wang Shining
-image::SHININGGGG.jpg[width="150", align="left"]
+image::SHININGGGG.png[width="150", align="left"]
 {empty}[http://github.com/SHININGGGG[github]] [<<SHININGGGG#, portfolio>>]
 
 Role: Team Lead +
@@ -20,7 +20,7 @@ Responsibilities: Expenditure tracker & Calender coding, UGDG update
 '''
 
 === Tay Ran Tian
-image::arty9.jpg[width="150", align="left"]
+image::arty9.png[width="150", align="left"]
 {empty}[http://github.com/arty9[github]] [<<arty9#, portfolio>>]
 
 Role: Developer +
@@ -29,7 +29,7 @@ Responsibilities: Documentations
 '''
 
 === Xin Shenzi
-image::feijunzi.jpg[width="150", align="left"]
+image::feijunzi.png[width="150", align="left"]
 {empty}[http://github.com/feijunzi[github]] [<<feijunzi#, portfolio>>]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities:
 '''
 
 === Xiao Yunhan
-image::XiaoYunhan.jpg[width="150", align="left"]
+image::XiaoYunhan.png[width="150", align="left"]
 {empty}[http://github.com/XiaoYunhan[github]] [<<XiaoYunhan#, portfolio>>]
 
 Role: Developer +
