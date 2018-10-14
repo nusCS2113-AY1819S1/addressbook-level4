@@ -102,6 +102,11 @@ public class MainApp extends Application {
             if (!summaryMapOptional.isPresent()) {
                 logger.info("Summary data file not found. Will start based on the sample FinancialPlanner");
             }
+            //TODO: remove this once storage is combined
+            if (summaryMapOptional.isPresent()) {
+                initialData.setSummaryMap(summaryMapOptional.get());
+            }
+
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty FinancialPlanner");
             initialData = new FinancialPlanner();

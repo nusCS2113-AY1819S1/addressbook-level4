@@ -16,7 +16,7 @@ import seedu.planner.model.summary.SummaryMap;
 public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     private final UniqueRecordList records;
-    private SummaryMap summaryMap = new SummaryMap();
+    private SummaryMap summaryMap;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -56,6 +56,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         requireNonNull(newData);
 
         setRecords(newData.getRecordList());
+        setSummaryMap(newData.getSummaryMap());
     }
 
     //// record-level operations
@@ -117,6 +118,11 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void updateSummary(Record target, Record editedRecord) {
         summaryMap.update(target, editedRecord);
+    }
+
+    //TODO: Remove this once fixed bug in storage and combined all 3
+    public void setSummaryMap(SummaryMap summaryMap) {
+        this.summaryMap = summaryMap;
     }
 
     //// util methods

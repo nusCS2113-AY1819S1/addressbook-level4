@@ -17,4 +17,7 @@ public interface ReadOnlyFinancialPlanner {
 
     SummaryMap getSummaryMap();
 
+    //TODO: to be removed when storage is combined
+    void setSummaryMap(SummaryMap summaryMap);
+
 }

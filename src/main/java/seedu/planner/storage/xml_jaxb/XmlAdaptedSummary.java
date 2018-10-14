@@ -87,7 +87,7 @@ public class XmlAdaptedSummary {
         if (total == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TOTAL_SIMPLE_NAME));
         }
-        if (!MoneyFlow.isValidMoneyFlow(date)) {
+        if (!MoneyFlow.isValidMoneyFlow(total)) {
             throw new IllegalValueException(MoneyFlow.MESSAGE_MONEY_FLOW_CONSTRAINTS);
         }
         final MoneyFlow modelTotal = new MoneyFlow(total);
