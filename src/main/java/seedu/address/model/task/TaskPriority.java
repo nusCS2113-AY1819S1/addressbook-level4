@@ -10,8 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TaskPriority {
 
     public static final String MESSAGE_PRIORITY_CONSTRAINTS =
-            "Priority should only contain the number 1, 2 or 3";
-    public static final String PRIORITY_VALIDATION_REGEX = "\\d{3,}";
+            "Priority should only contain one number: 1, 2 or 3";
+    public static final String PRIORITY_VALIDATION_REGEX = "[123]";
+
     public final String value;
 
     /**
@@ -26,7 +27,7 @@ public class TaskPriority {
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid priority number.
      */
     public static boolean isValidPriority(String test) {
         return test.matches(PRIORITY_VALIDATION_REGEX);
