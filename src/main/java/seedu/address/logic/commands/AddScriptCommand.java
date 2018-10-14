@@ -38,10 +38,19 @@ public class AddScriptCommand extends Command {
     private Path path;
     private AddScriptParser addScriptParser;
 
+
     public AddScriptCommand(String fileName) {
         requireNonNull(fileName);
         textFileName = fileName.replaceAll("^\\s+", "") + TEXT_EXTENSION;
         this.path = FileUtil.getPath(textFileName);
+        this.addScriptParser = new AddScriptParser();
+    }
+
+    public AddScriptCommand(String folderName, String fileName) {
+        requireNonNull(fileName);
+        requireNonNull(folderName);
+        textFileName = fileName.replaceAll("^\\s+", "") + TEXT_EXTENSION;
+        this.path = FileUtil.getPath(folderName + textFileName);
         this.addScriptParser = new AddScriptParser();
     }
 
@@ -61,7 +70,7 @@ public class AddScriptCommand extends Command {
             return new CommandResult(String.format(MESSAGE_UNABLE_TO_READ_FILE, textFileName));
         }
 
-        if (multCommandError != null) {
+        if (!multCommandError.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_ADD_ERROR, multCommandError , textFileName));
         }
 
