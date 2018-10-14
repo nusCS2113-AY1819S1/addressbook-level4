@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Date {
 
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Dates should only contain alphanumeric characters and spaces, and it should not be blank";
-    public static final String DATE_VALIDATION_REGEX = "[\\d{Alnum}]";
+            "Dates should only be in the format of DD-MM-YYYY, and it should not be blank";
+    public static final String DATE_VALIDATION_REGEX = "[\\d]{2}" + "-" + "[\\d]{2}" + "-" + "[\\d]{4}";
 
     public final String addingDate;
 

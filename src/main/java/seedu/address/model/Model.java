@@ -20,6 +20,9 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns the ExpenditureTracker */
+    ReadOnlyExpenditureTracker getExpenditureTracker();
+
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
      */
@@ -38,8 +41,7 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given expenditure.
      */
     void addExpenditure(Expenditure expenditure);
 
