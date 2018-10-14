@@ -22,7 +22,7 @@ public class TypicalTimeSlots {
             LocalTime.parse("10:00"),
             LocalTime.parse("12:00"));
 
-    public static final TimeSlot TUES_10_TO_12 = new TimeSlot(DayOfWeek.TUESDAY,
+    public static final TimeSlot TUE_10_TO_12 = new TimeSlot(DayOfWeek.TUESDAY,
             LocalTime.parse("10:00"),
             LocalTime.parse("12:00"));
 
@@ -45,6 +45,6 @@ public class TypicalTimeSlots {
     }
 
     public static Collection<TimeSlot> getTypicalTimeSlots() {
-        return new ArrayList<>(Arrays.asList(MON_8_TO_10, MON_10_TO_12, TUES_10_TO_12));
+        return new ArrayList<>(Arrays.asList(MON_8_TO_10, MON_10_TO_12, TUE_10_TO_12));
     }
 }

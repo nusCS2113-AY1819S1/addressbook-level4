@@ -20,8 +20,10 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.TimeSlot;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
+import seedu.address.testutil.TypicalTimeSlots;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";
@@ -29,6 +31,9 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_TIMESLOT = "something";
+    private static final String INVALID_DAY = "someday";
+    private static final String INVALID_TIME = "24:00";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -36,8 +41,12 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_DAY = "monday";
+    private static final String VALID_TIME_0800HRS = "08:00";
+    private static final String VALID_TIME_1000HRS = "10:00";
 
     private static final String WHITESPACE = " \t\r\n";
+    private static final String DASH = "-";
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
@@ -204,5 +213,61 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTimeSlot_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseTimeSlot(null);
+    }
+
+    @Test
+    public void parseTimeSlot_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTimeSlot(INVALID_TIMESLOT);
+    }
+
+    @Test
+    public void parseTimeSlot_invalidDay_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTimeSlot(INVALID_DAY + WHITESPACE + VALID_TIME_0800HRS + DASH + VALID_TIME_1000HRS);
+    }
+
+    @Test
+    public void parseTimeSlot_invalidStartTime_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + INVALID_TIME + DASH + VALID_TIME_1000HRS);
+    }
+
+    @Test
+    public void parseTimeSlot_invalidEndTime_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + VALID_TIME_0800HRS + DASH + INVALID_TIME);
+    }
+
+    @Test
+    public void parseTimeSlot_invalidRange_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + VALID_TIME_1000HRS + DASH + VALID_TIME_0800HRS);
+    }
+
+    @Test
+    public void parseTimeSlot_invalidRangeSameTime_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + VALID_TIME_1000HRS + DASH + VALID_TIME_1000HRS);
+    }
+
+    @Test
+    public void parseTimeSlot_validValues_returnsTimeSlot() throws Exception {
+        TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
+        TimeSlot actual = ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + VALID_TIME_0800HRS + DASH + VALID_TIME_1000HRS);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseTimeSlot_validValuesWithWhitespace_returnsTimeSlot() throws Exception {
+        TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
+        TimeSlot actual = ParserUtil.parseTimeSlot(WHITESPACE + VALID_DAY + WHITESPACE + VALID_TIME_0800HRS + DASH + VALID_TIME_1000HRS + WHITESPACE);
+        assertEquals(expected, actual);
     }
 }

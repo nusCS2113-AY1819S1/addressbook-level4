@@ -68,7 +68,7 @@ public class TimeTableTest {
     public void removeTimeSlot_timeSlotInTimeTable_removesTimeSlot() {
         timeTableTypical.removeTimeSlot(TypicalTimeSlots.MON_8_TO_10);
         timeTableTypical.removeTimeSlot(TypicalTimeSlots.MON_10_TO_12);
-        timeTableTypical.removeTimeSlot(TypicalTimeSlots.TUES_10_TO_12);
+        timeTableTypical.removeTimeSlot(TypicalTimeSlots.TUE_10_TO_12);
 
         assertEquals(timeTableBlank.getTimeSlots(), Collections.EMPTY_LIST);
     }
