@@ -63,7 +63,8 @@ public class XmlAdaptedTask {
      */
     public Task toModelType() throws IllegalValueException {
         if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskName.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskName.class.getSimpleName()));
         }
         if (!TaskName.isValidName(name)) {
             throw new IllegalValueException(TaskName.MESSAGE_NAME_CONSTRAINTS);
@@ -71,7 +72,8 @@ public class XmlAdaptedTask {
         final TaskName modelName = new TaskName(name);
 
         if (module == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskModule.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskModule.class.getSimpleName()));
         }
         if (!TaskModule.isValidModule(module)) {
             throw new IllegalValueException(TaskModule.MESSAGE_MODULE_CONSTRAINTS);
@@ -79,7 +81,8 @@ public class XmlAdaptedTask {
         final TaskModule modelPhone = new TaskModule(module);
 
         if (date == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskDate.class.getSimpleName()));
         }
         if (!TaskDate.isValidDate(date)) {
             throw new IllegalValueException(TaskDate.MESSAGE_DATE_CONSTRAINTS);
@@ -87,7 +90,8 @@ public class XmlAdaptedTask {
         final TaskDate modelEmail = new TaskDate(date);
 
         if (priority == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskPriority.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, TaskPriority.class.getSimpleName()));
         }
         if (!TaskPriority.isValidPriority(priority)) {
             throw new IllegalValueException(TaskPriority.MESSAGE_PRIORITY_CONSTRAINTS);
