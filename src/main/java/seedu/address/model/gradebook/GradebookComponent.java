@@ -15,24 +15,28 @@ public class GradebookComponent {
 
     @XmlElement(name = "moduleCode", required = true, nillable = true)
     private String moduleCode;
-    @XmlElement(name = "gradeItemName", required = true, nillable = true)
-    private String gradeItemName;
+    @XmlElement(name = "gradeComponentName", required = true, nillable = true)
+    private String gradeComponentName;
+    @XmlElement(name = "gradeComponentMaxMarks", required = true, nillable = true)
+    private int gradeComponentMaxMarks;
+    @XmlElement(name = "gradeComponentWeightage", required = true, nillable = true)
+    private int gradeComponentWeightage;
 
     public GradebookComponent() {
 
     }
 
-    public GradebookComponent(String moduleCode, String gradeItemName) {
+    public GradebookComponent(String moduleCode, String gradeComponentName, int gradeComponentMaxMarks,
+                              int gradeComponentWeightage) {
         this.moduleCode = moduleCode;
-        this.gradeItemName = gradeItemName;
+        this.gradeComponentName = gradeComponentName;
+        this.gradeComponentMaxMarks = gradeComponentMaxMarks;
+        this.gradeComponentWeightage = gradeComponentWeightage;
     }
 
-    public String getGradeItemName() {
-        return gradeItemName;
-    }
-
-    public void setGradeItemName(String gradeItemName) {
-        this.gradeItemName = gradeItemName;
+    public GradebookComponent(String moduleCode, String gradeComponentName) {
+        this.moduleCode = moduleCode;
+        this.gradeComponentName = gradeComponentName;
     }
 
     public String getModuleCode() {
@@ -41,5 +45,29 @@ public class GradebookComponent {
 
     public void setModuleCode(String moduleCode) {
         this.moduleCode = moduleCode;
+    }
+
+    public String getGradeComponentName() {
+        return gradeComponentName;
+    }
+
+    public void setGradeComponentName(String gradeComponentName) {
+        this.gradeComponentName = gradeComponentName;
+    }
+
+    public int getGradeComponentMaxMarks() {
+        return gradeComponentMaxMarks;
+    }
+
+    public void setGradeComponentMaxMarks(int gradeComponentMaxMarks) {
+        this.gradeComponentMaxMarks = gradeComponentMaxMarks;
+    }
+
+    public int getGradeComponentWeightage() {
+        return gradeComponentWeightage;
+    }
+
+    public void setGradeComponentWeightage(int gradeComponentWeightage) {
+        this.gradeComponentWeightage = gradeComponentWeightage;
     }
 }

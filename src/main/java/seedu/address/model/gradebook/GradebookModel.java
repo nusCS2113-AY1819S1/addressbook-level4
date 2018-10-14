@@ -17,12 +17,13 @@ public class GradebookModel {
 
     private static final String ADD_MESSAGE_SUCCESS = "Successfully Added! \nModule Code: %1$s"
             + "\nGradebook Item Name: %2$s";
+    private static final String ADD_MESSAGE_FAIL = "Module code and gradebook component name cannot be empty";
     private static final String LIST_MESSAGE_SUCCESS = "Success! List of components in the module:";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
     private static final String FIND_MESSAGE_SUCCESS = "Successfully found!";
     private static final String FIND_MESSAGE_FAIL = "Unsuccessful find";
-
+    private static final String DUPLICATE_RESULT = "Gradebook component already exist in Trajectory";
 
     /**
      * This method retrieves all datasets saved locally.
@@ -75,11 +76,25 @@ public class GradebookModel {
     /**
      This method adds gradebook component to a module in Trajectory.
      */
-    public static CommandResult addGradebookComponent (String moduleCode, String gradebookComponentName) {
+    public static CommandResult addGradebookComponent (String moduleCode, String gradebookComponentName,
+                                                       int gradebookComponentMaxMarks,
+                                                       int gradebookComponentWeightage) {
+        String status;
         retrieveGradebookData();
-        getGradebookStorage().add(new GradebookComponent(moduleCode, gradebookComponentName));
-        storeGradebookData();
-        return new CommandResult(String.format(ADD_MESSAGE_SUCCESS, moduleCode, gradebookComponentName));
+
+        if (moduleCode.equals("") || gradebookComponentName.equals("")) {
+            status = ADD_MESSAGE_FAIL;
+        } else if (findGradebookComponent(moduleCode, gradebookComponentName).feedbackToUser
+                .contains(FIND_MESSAGE_SUCCESS)) {
+            status = DUPLICATE_RESULT;
+        } else {
+            getGradebookStorage().add(new GradebookComponent(moduleCode, gradebookComponentName,
+                    gradebookComponentMaxMarks,
+                    gradebookComponentWeightage));
+            storeGradebookData();
+            status = ADD_MESSAGE_SUCCESS;
+        }
+        return new CommandResult(String.format(status, moduleCode, gradebookComponentName));
     }
 
     /**
@@ -91,8 +106,8 @@ public class GradebookModel {
         for (GradebookComponent gc: getGradebookStorage()) {
             sb.append("Module Code: ");
             sb.append(gc.getModuleCode() + "\n");
-            sb.append("List of Grade Component: ");
-            sb.append(gc.getGradeItemName() + "\n");
+            sb.append("Grade Component Name: ");
+            sb.append(gc.getGradeComponentName() + "\n");
         }
         return new CommandResult("\n" + LIST_MESSAGE_SUCCESS + "\n" + sb.toString());
     }
@@ -103,7 +118,7 @@ public class GradebookModel {
     public static CommandResult deleteGradebookComponent (String moduleCode, String gradebookComponentName) {
         String status = DELETE_MESSAGE_FAIL;
         for (GradebookComponent gc : getGradebookStorage()) {
-            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeItemName().equals(gradebookComponentName)) {
+            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
                 getGradebookStorage().remove(gc);
                 storeGradebookData();
                 status = DELETE_MESSAGE_SUCCESS;
@@ -121,12 +136,12 @@ public class GradebookModel {
         retrieveGradebookData();
         StringBuilder sb = new StringBuilder();
         for (GradebookComponent gc: getGradebookStorage()) {
-            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeItemName().equals(gradebookComponentName)) {
+            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
                 status = FIND_MESSAGE_SUCCESS;
                 sb.append("Module Code: ");
                 sb.append(gc.getModuleCode() + "\n");
                 sb.append("Grade Component: ");
-                sb.append(gc.getGradeItemName() + "\n");
+                sb.append(gc.getGradeComponentName() + "\n");
             }
         }
         return new CommandResult("\n" + status + "\n" + sb.toString());
