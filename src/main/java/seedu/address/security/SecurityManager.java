@@ -12,6 +12,7 @@ public class SecurityManager extends ComponentManager implements Security {
     private boolean isAuthenticated;
     private String username;
     private String password;
+    //User user that includes a person
     //Person userPerson;
 
 

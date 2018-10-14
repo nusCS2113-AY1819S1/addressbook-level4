@@ -92,21 +92,16 @@ public class LoginWindow extends UiPart<Stage> {
      * Runs whenever the login button is clicked
      */
     public void handleLoginClick() {
-        //TODO: find a way to link up to Security Module
-        System.out.println("Login Button Click Example");
-        System.out.println(usernameTextField.getText());
-        System.out.println(passwordTextField.getText());
         user.login(usernameTextField.getText(), passwordTextField.getText());
     }
 
-    //TODO: Find a proper handler, method to handle this event
     @Subscribe
-    public void handleSuccessfulLoginEvent(SuccessfulLoginEvent abce) {
+    public void handleSuccessfulLoginEvent(SuccessfulLoginEvent loginSuccess) {
         getRoot().hide();
     }
 
     @Subscribe
-    public void handleUnsuccessfulLoginEvent(UnsuccessfulLoginEvent abce) {
+    public void handleUnsuccessfulLoginEvent(UnsuccessfulLoginEvent loginFailure) {
         label.setText("Incorrect Username/Password");
     }
 
