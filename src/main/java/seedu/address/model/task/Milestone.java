@@ -8,12 +8,12 @@ import java.util.Objects;
 public class Milestone extends Task {
     private final String title;
     private final String milestone_description;
-    private final Integer order;
+    private final Integer rank;
 
-    public Milestone(String title, String milestone_description, Integer order) {
+    public Milestone(String title, String milestone_description, Integer rank) {
         this.title = title;
         this.milestone_description = milestone_description;
-        this.order = order;
+        this.rank = rank;
     }
 
     public String getTitle() {
@@ -24,8 +24,8 @@ public class Milestone extends Task {
         return milestone_description;
     }
 
-    public Integer getOrder() {
-        return order;
+    public Integer getRank() {
+        return rank;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class Milestone extends Task {
                     .append(" : ")
                     .append(getMileStoneDescription())
                     .append(" | ")
-                    .append(getOrder());
+                    .append(getRank());
             return builder.toString();
     }
 
