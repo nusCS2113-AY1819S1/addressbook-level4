@@ -63,7 +63,7 @@ Creates account for Gerald Chua
 * `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
 Creates account for James Yaputra
 
-=== Signing up for an account : `login`
+=== Logging into an account : `login`
 
 User: Logs in to account +
 Format: `login u/USERNAME p/PASSWORD` +
@@ -73,6 +73,28 @@ Examples:
 Logs in Gerald Chua +
 * `login u/James Yaputra p/drowssap12345` +
 Logs in James Yaputra
+
+=== Logging out of an account : `logout`
+
+User: Logs out of an account +
+Format: `logout` +
+Examples:
+
+* `login n/Gerald Chua p/password12345` +
+Logs in Gerald Chua +
+* `logout` +
+Logs out from Gerald Chua
+
+=== Signing up for an account : `signup`
+
+User: Creates a new account +
+Format: `signup u/USERNAME p/PASSWORD` +
+Examples:
+
+* `signup n/Gerald Chua p/password12345` +
+Creates Gerald Chua +
+* `signup u/James Yaputra p/drowssap12345` +
+Creates James Yaputra
 
 === Viewing help : `help`
 
