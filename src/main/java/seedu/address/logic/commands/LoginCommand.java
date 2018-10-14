@@ -37,7 +37,6 @@ public class LoginCommand extends Command {
     //TODO LINK TO MODEL AND STORAGE
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-<<<<<<< HEAD
         String username = toLogin.getUsername().toString();
         String password = toLogin.getPassword().toString();
 
@@ -45,8 +44,5 @@ public class LoginCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin));
-=======
-        return new CommandResult("boo");
->>>>>>> 38598fe88fbbfc7ca04425ebd7a1e8e61909d7ae
     }
 }

@@ -71,7 +71,7 @@ public class EditCommand extends Command {
         }
 
         Event eventToEdit = lastShownList.get(index.getZeroBased());
-        Event editedEvent = createEditedPerson(eventToEdit, editEventDescriptor);
+        Event editedEvent = createEditedEvent(eventToEdit, editEventDescriptor);
 
         if (!eventToEdit.isSameEvent(editedEvent) && model.hasEvent(editedEvent)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
@@ -85,22 +85,19 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Event} with the details of {@code eventToEdit}
-     * edited with {@code editPersonDescriptor}.
+     * edited with {@code editEventDescriptor}.
      */
-<<<<<<< HEAD
-    public static Event createEditedPerson(Event eventToEdit, EditPersonDescriptor editPersonDescriptor) {
-=======
-    private static Event createEditedPerson(Event eventToEdit, EditEventDescriptor editPersonDescriptor) {
->>>>>>> 38598fe88fbbfc7ca04425ebd7a1e8e61909d7ae
+
+    public static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor) {
         assert eventToEdit != null;
 
-        Name updatedName = editPersonDescriptor.getName().orElse(eventToEdit.getName());
-        Phone updatedPhone = editPersonDescriptor.getPhone().orElse(eventToEdit.getPhone());
-        Email updatedEmail = editPersonDescriptor.getEmail().orElse(eventToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(eventToEdit.getAddress());
-        Attendance updatedAttendance = editPersonDescriptor.getAttendance().orElse(eventToEdit.getAttendance());
-        DateTime updateDateTime = editPersonDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
-        Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(eventToEdit.getTags());
+        Name updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
+        Phone updatedPhone = editEventDescriptor.getPhone().orElse(eventToEdit.getPhone());
+        Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
+        Address updatedAddress = editEventDescriptor.getAddress().orElse(eventToEdit.getAddress());
+        Attendance updatedAttendance = editEventDescriptor.getAttendance().orElse(eventToEdit.getAttendance());
+        DateTime updateDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
+        Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
 
         return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress,
                             updatedAttendance, updateDateTime, updatedTags);
