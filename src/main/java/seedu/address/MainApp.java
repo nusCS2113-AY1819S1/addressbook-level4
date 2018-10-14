@@ -21,9 +21,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
+import seedu.address.model.ExpenditureTracker;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyExpenditureTracker;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -83,7 +85,9 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
+        //Optional<ReadOnlyExpenditureTracker> expenditureTrackerOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyExpenditureTracker initialExpenditureTracker = new ExpenditureTracker();
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -98,7 +102,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, initialExpenditureTracker, userPrefs);
     }
 
     private void initLogging(Config config) {
