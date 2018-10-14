@@ -43,6 +43,8 @@ public class LoginCommand extends Command {
         if (!(username.equals("admin") && password.equals("root"))) {
             throw new CommandException(MESSAGE_FAILURE);
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin));
+
+        setCurrentUser(toLogin);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, username));
     }
 }
