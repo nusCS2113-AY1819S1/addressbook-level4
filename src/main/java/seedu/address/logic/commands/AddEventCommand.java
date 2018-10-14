@@ -31,8 +31,8 @@ public class AddEventCommand extends Command {
             + PREFIX_NAME + "CS2113 Project Meeting "
             + PREFIX_DESCRIPTION + "Weekly Meetup "
             + PREFIX_LOCATION + "LT15 "
-            + PREFIX_START_DATE + "2018-10-28 "
-            + PREFIX_END_DATE + "2018-10-29 ";
+            + PREFIX_START_DATE + "12:00 "
+            + PREFIX_END_DATE + "23:59 ";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event list";

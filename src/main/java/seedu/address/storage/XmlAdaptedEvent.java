@@ -49,7 +49,8 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedEvent(String eventName, String description, String date, String startTime, String endTime, String location) {
+    public XmlAdaptedEvent(String eventName, String description, String date,
+                           String startTime, String endTime, String location) {
         this.eventName = eventName;
         this.description = description;
         this.date = date;
@@ -123,7 +124,7 @@ public class XmlAdaptedEvent {
         if (endTime == null) {
             throw new IllegalValueException("Invalid time format");
         }
-        final EndTime modelEndTime = new EndTime(EndTime.MESSAGE_TIME_CONSTRAINTS);
+        final EndTime modelEndTime = new EndTime(endTime);
 
 
         if (location == null) {
