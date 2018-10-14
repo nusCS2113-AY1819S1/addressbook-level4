@@ -20,6 +20,9 @@ public class GradebookModel {
     private static final String LIST_MESSAGE_SUCCESS = "Success! List of components in the module:";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
+    private static final String FIND_MESSAGE_SUCCESS = "Successfully found!";
+    private static final String FIND_MESSAGE_FAIL = "Unsuccessful find";
+
 
     /**
      * This method retrieves all datasets saved locally.
@@ -108,5 +111,24 @@ public class GradebookModel {
             }
         }
         return new CommandResult("\n" + status);
+    }
+
+    /**
+     This method finds gradebook component to a module in Trajectory.
+     */
+    public static CommandResult findGradebookComponent (String moduleCode, String gradebookComponentName) {
+        String status = FIND_MESSAGE_FAIL;
+        retrieveGradebookData();
+        StringBuilder sb = new StringBuilder();
+        for (GradebookComponent gc: getGradebookStorage()) {
+            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeItemName().equals(gradebookComponentName)) {
+                status = FIND_MESSAGE_SUCCESS;
+                sb.append("Module Code: ");
+                sb.append(gc.getModuleCode() + "\n");
+                sb.append("Grade Component: ");
+                sb.append(gc.getGradeItemName() + "\n");
+            }
+        }
+        return new CommandResult("\n" + status + "\n" + sb.toString());
     }
 }
