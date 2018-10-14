@@ -190,6 +190,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEvents.setPredicate(predicate);
     }
 
+
     //=========== Undo/Redo =================================================================================
 
     @Override
