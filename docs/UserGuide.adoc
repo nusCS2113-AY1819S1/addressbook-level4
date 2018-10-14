@@ -211,7 +211,8 @@ The timetable content is 'locked', and you will be prompted with this login pop 
 image::Security.png[width="790"]
 
 You will have to enter your credentials to log in. Only then would you be able to edit and view your own timetable,
-and your friends'. You will be ale to see the list of other people that are not your friends to add them as friends.
+and  view your friends' timetable. The timetable that belongs to people that are not your friends will not be available to you, till you
+add them as friends.
 
 
 
