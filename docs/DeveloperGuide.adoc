@@ -251,6 +251,8 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
+* can save the `TimeTable` Objects in ics format and read it back.
+* can read `TimeTable` data from a user-specified file in ics format.
 
 [[Design-Commons]]
 === Common classes
@@ -663,6 +665,38 @@ Extensions: (Only an option if one-time 'events' has been implemented) +
 2. System adds an 'event' at that <<timeslot,timeslots>>.
 Use case ends.
 
+[discrete]
+== Use case: Import TimeTable (for a person)
+
+MSS: +
+1. Student logs into their <<account, account>>. +
+2. System shows the possible commands. +
+3. User selects 'Import <<Timetable,Timetable>>'. +
+4. System asks for the location of the file to import the <<Timetable,Timetable>> from. +
+5. Student inputs the file location. +
+6. System acknowledges the command, and displays the timetable that was imported. +
+Use case ends.
+
+Extensions: (user provided invalid file location) +
+5a. Student inputs invalid file location. +
+5b. System informs user about the invalid file location. +
+Use case ends.
+
+[discrete]
+== Use case: Export TimeTable (for a person)
+
+MSS: +
+1. Student logs into their <<account, account>>. +
+2. System shows the possible commands. +
+3. User selects 'Export <<Timetable,Timetable>>'. +
+4. System asks for the location of the file to export the <<Timetable,Timetable>>. +
+5. Student inputs the file location. +
+6. System indicates successful export. +
+Use case ends.
+
+Extensions: (export fails for any reason) +
+6a. System indicates failed export. +
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
