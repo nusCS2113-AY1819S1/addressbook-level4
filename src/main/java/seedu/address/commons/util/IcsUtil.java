@@ -44,7 +44,7 @@ public class IcsUtil {
 
         TimeTable newTimeTable = new TimeTable();
 
-        String[] splitByNewLine = string.split("\\r\\n|[\\n\\x0B\\x0C\\r\\u0085\\u2028\\u2029]"); //REGEX
+        String[] lineArray = string.split("\\r\\n|[\\n\\x0B\\x0C\\r\\u0085\\u2028\\u2029]"); //REGEX
 
         String startdate = "";
         String starttime = "";
@@ -53,41 +53,37 @@ public class IcsUtil {
         String name = "";
 
         // this chunky thing goes through the strings from start to end, adding timeslots that it detects.
-        for (String line : splitByNewLine) { //must be in sequence, or else will bug
+        for (String line : lineArray) { //must be in sequence, or else will bug
             //TODO: make robust. current implementation can fail explosively.
 
-            String[] splitLines = line.split(":");
+            String[] splitLine = line.split(":");
 
-            if (splitLines[0].equals("DTSTART")) {
+            if (splitLine[0].equals("DTSTART")) {
                 //start time!
                 try {
-                    startdate = splitLines[1].substring(0, 8);
-                    starttime = splitLines[1].substring(9, 15);
+                    startdate = splitLine[1].substring(0, 8);
+                    starttime = splitLine[1].substring(9, 15);
                 } catch (IndexOutOfBoundsException e) {
                     throw new CommandException(MESSAGE_IO_ERROR);
                 }
             }
 
-            if (splitLines[0].equals("DTEND")) {
+            else if (splitLine[0].equals("DTEND")) {
                 //end time!
                 try {
-                    enddate = splitLines[1].substring(0, 8);
-                    endtime = splitLines[1].substring(9, 15);
+                    enddate = splitLine[1].substring(0, 8);
+                    endtime = splitLine[1].substring(9, 15);
                 } catch (IndexOutOfBoundsException e) {
                     throw new CommandException(MESSAGE_IO_ERROR);
                 }
             }
 
-            if (splitLines[0].equals("SUMMARY")) {
+            else if (splitLine[0].equals("SUMMARY")) {
                 //mod name
-                try {
-                    name = splitLines[1];
-                } catch (IndexOutOfBoundsException e) {
-                    throw new CommandException(MESSAGE_IO_ERROR);
-                }
+                name = splitLine[1];
             }
 
-            if (splitLines[0].equals("END:VEVENT")) {
+            else if ((splitLine[0].equals("END")) && (splitLine[1].equals("VEVENT"))) {
                 //single event reading over
                 int icsStartTime = 0;
                 try {
