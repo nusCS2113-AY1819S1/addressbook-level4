@@ -13,7 +13,8 @@ public class PersonIndex {
     public static final String PERSON_INDEX_VALIDATION_REGEX = "\\p{Digit}+";
 
 
-    public final String personIndex;
+    private final String personIndex;
+    private final Integer personIndexInt;
 
     /**
      * Constructs a {@code PersonIndex}.
@@ -24,6 +25,15 @@ public class PersonIndex {
         requireNonNull(personIndex);
         checkArgument(isValidPersonIndex(personIndex), MESSAGE_PERSON_INDEX_CONSTRAINTS);
         this.personIndex = personIndex;
+        this.personIndexInt = Integer.parseInt(this.personIndex);
+    }
+
+    public String getPersonIndex(){
+        return personIndex;
+    }
+
+    public Integer getPersonIndexInt(){
+        return personIndexInt;
     }
 
     /**
@@ -37,7 +47,8 @@ public class PersonIndex {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof PersonIndex // instanceof handles nulls
-                && personIndex.equals(((PersonIndex) other).personIndex)); // state check
+                && personIndex.equals(((PersonIndex) other).personIndex)
+                && personIndexInt.equals(((PersonIndex) other).personIndexInt)); // state check
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
@@ -99,9 +100,21 @@ public interface Model {
     void createGroup(Group group);
 
     /**
-     * return true if there exist another group with the same name.
+     * Adds persons to the given group.
+     * {@code group} must already exist in the system.
+     */
+    void addGroup(AddGroup addGroup);
+
+    /**
+     * Return true if there exist another group with the same name and location.
      */
     boolean hasGroup(Group group);
+
+    /**
+     * Return true if there exist a person in addGroup which is already in the
+     * specified group(in addGroup) in the AddressBook.
+     */
+    boolean hasPersonInGroup(AddGroup addGroup);
 
     /**
      * Returns an unmodifiable view of the filtered group list

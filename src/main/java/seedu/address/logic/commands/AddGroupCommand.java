@@ -15,6 +15,10 @@ import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
+/**
+ * Add a persons identified using it's displayed index from the address book to
+ * a group identified.
+ */
 public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "addgroup";
     public static final String COMMAND_WORD_2 = "addgrp";
@@ -27,8 +31,9 @@ public class AddGroupCommand extends Command {
             + PREFIX_NAME + "CS1231 "
             + PREFIX_PERSON_INDEX + "1 2 3";
     public static final String MESSAGE_SUCCESS = "Index(s) added to group %1$s";
+    public static final String MESSAGE_DUPLICATE_PERSONS = "Person(s) already exist in group";
 
-    public final AddGroup addGroup;
+    private final AddGroup addGroup;
 
     public AddGroupCommand(AddGroup addGroup){
         requireAllNonNull(addGroup);
@@ -42,13 +47,21 @@ public class AddGroupCommand extends Command {
         List<Person> lastShownPersonList = model.getFilteredPersonList();
         List<Group> lastShownGroupList = model.getFilteredGroupList();
 
-        if (addGroup.validGroupName(lastShownGroupList) == false) {
+        if (!addGroup.validGroupName(lastShownGroupList)) {
             throw new CommandException(Messages.MESSAGE_INVALID_GROUP_DISPLAYED_NAME);
-        }else if (addGroup.validPersonIndexsSet(lastShownPersonList.size()) == false) {
+        }else if (!addGroup.validPersonIndexsSet(lastShownPersonList.size())) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        throw new CommandException(String.format(MESSAGE_SUCCESS,addGroup.toString()));
+        addGroup.setPersonSet(lastShownPersonList);
+        if (model.hasPersonInGroup(addGroup)){
+            throw new CommandException(MESSAGE_DUPLICATE_PERSONS);
+        }
+
+        model.addGroup(addGroup);
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, addGroup));
+
     }
 
     @Override

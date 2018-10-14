@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonIndex;
 
 /**
@@ -12,11 +13,16 @@ import seedu.address.model.person.PersonIndex;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class AddGroup {
+
+    private static final Integer OFFSET = 1;
+    private static final Integer ZERO_BASED = 0;
+    private static final String COLON_SEPARATOR = " : ";
+
     // Identity fields
     private final GroupName groupName;
-
     //Data Fields
     private final Set<PersonIndex> personIndexs = new HashSet<>();
+    private final Set<Person> personSet = new HashSet<>();
 
     /**
      * Every field must be present and not null.
@@ -24,6 +30,16 @@ public class AddGroup {
     public AddGroup(GroupName groupName, Set<PersonIndex>personIndexs){
         this.groupName = groupName;
         this.personIndexs.addAll(personIndexs);
+    }
+
+    public Set<Person> getPersonSet(){
+        return personSet;
+    }
+
+    public void setPersonSet(List<Person> lastShownPersonList){
+        for (PersonIndex i : personIndexs){
+            personSet.add(lastShownPersonList.get(i.getPersonIndexInt() - OFFSET));
+        }
     }
 
     public GroupName getGroupName() {
@@ -34,19 +50,15 @@ public class AddGroup {
         return Collections.unmodifiableSet(personIndexs);
     }
 
-    // TODO
-    // test
     public boolean validPersonIndexsSet(int size) {
         for (PersonIndex i : personIndexs){
-            if(Integer.parseInt(i.personIndex) > size || Integer.parseInt(i.personIndex) <= 0){
+            if(Integer.parseInt(i.getPersonIndex()) > size || Integer.parseInt(i.getPersonIndex()) <= ZERO_BASED){
                 return false;
             }
         }
         return true;
     }
 
-    // TODO
-    // test
     public boolean validGroupName(List<Group> lastShownGroupList) {
         for (Group i : lastShownGroupList){
             if(groupName.equals(i.getGroupName())){
@@ -68,7 +80,7 @@ public class AddGroup {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(groupName)
-                .append(" : ");
+                .append(COLON_SEPARATOR);
         personIndexs.forEach(builder::append);
         return builder.toString();
     }

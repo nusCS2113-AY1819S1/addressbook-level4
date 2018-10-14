@@ -10,6 +10,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
@@ -35,6 +37,50 @@ public class UniqueGroupList implements Iterable<Group> {
     }
 
     /**
+     * Returns true if a specific group in the list contains least one same person as the persons in the
+     * given argument.
+     */
+    public boolean contains(AddGroup toCheck) {
+        requireNonNull(toCheck);
+        for (Group g : internalList){
+            if (g.hasSameGroupName(toCheck)){
+                return contains(g,toCheck);
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Returns true if the Group contains an equivalent person in AddGroup.
+     */
+    public boolean contains(Group group, AddGroup toCheck) {
+        requireAllNonNull(group,toCheck);
+        for (Person p : group.getPersons()){
+            for (Person p2 : toCheck.getPersonSet()){
+                if(p.equals(p2)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Adds persons from AddressBook specified in AddGroup to group in AddressBook
+     * specified in AddGroup
+     */
+    public void addPersons(AddGroup toAdd) {
+        requireNonNull(toAdd);
+        for (Group g : internalList){
+            if (g.hasSameGroupName(toAdd)){
+                for (Person p : toAdd.getPersonSet()){
+                    g.addPersons(p);
+                }
+            }
+        }
+    }
+
+    /**
      * Creates a group in the list.
      * The group must not already exist in the list.
      */
@@ -44,6 +90,18 @@ public class UniqueGroupList implements Iterable<Group> {
             throw new DuplicateGroupException();
         }
         internalList.add(toCreate);
+    }
+
+    /**
+     * Adds persons a group in the list.
+     * The person must not already exist in the list.
+     */
+    public void addGroup(AddGroup toAdd) {
+        requireNonNull(toAdd);
+        if (contains(toAdd)) {
+            throw new DuplicatePersonException();
+        }
+        addPersons(toAdd);
     }
 
     /**

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.UniqueGroupList;
 import seedu.address.model.person.Person;
@@ -112,6 +113,22 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void createGroup(Group g) {
         groups.createGroup(g);
+    }
+
+   /**
+     * Adds persons to a group in the address book.
+     * The group must already exist in the address book.
+     */
+    public void addGroup(AddGroup addGroup) {
+        groups.addGroup(addGroup);
+    }
+
+    /**
+     * Return true if there exist a person in addGroup which is already in the
+     * specified group(in addGroup) in the AddressBook.
+     */
+    public boolean hasPersonInGroup(AddGroup addGroup) {
+        return groups.contains(addGroup);
     }
 
     /**

@@ -37,7 +37,11 @@ public class Group {
         return Collections.unmodifiableSet(persons);
     }
 
-    public void setPersons(Set<Person> persons){
+    public void addPersons(Person persons){
+        this.persons.add(persons);
+    }
+
+    public void addPersonSet(Set<Person> persons){
         this.persons.addAll(persons);
     }
 
@@ -71,6 +75,14 @@ public class Group {
     }
 
     /**
+     * Returns true if both group and addGroup are of the same group name.
+     */
+    public boolean hasSameGroupName(AddGroup addGroup) {
+        return addGroup != null
+                && addGroup.getGroupName().equals(getGroupName());
+    }
+
+    /**
      * Returns true if both groups have the same identity and data fields.
      * This defines a stronger notion of equality between two persons.
      */
@@ -87,7 +99,8 @@ public class Group {
         Group otherGroup = (Group) other;
         return otherGroup.getGroupName().equals(getGroupName())
                 && otherGroup.getGroupLocation().equals(getGroupLocation())
-                && otherGroup.getTags().equals(getTags());
+                && otherGroup.getTags().equals(getTags())
+                && otherGroup.getPersons().equals(getPersons());
     }
 
     @Override

@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 
@@ -30,6 +31,9 @@ public class XmlAdaptedGroup {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    @XmlElement
+    private List<XmlAdaptedPerson> person = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedGroup.
@@ -60,6 +64,9 @@ public class XmlAdaptedGroup {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        person = source.getPersons().stream()
+                .map(XmlAdaptedPerson::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -71,6 +78,11 @@ public class XmlAdaptedGroup {
         final List<Tag> groupTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             groupTags.add(tag.toModelType());
+        }
+
+        final List<Person> groupPersons = new ArrayList<>();
+        for (XmlAdaptedPerson person : person) {
+            groupPersons.add(person.toModelType());
         }
 
         if (groupName == null) {
@@ -92,7 +104,12 @@ public class XmlAdaptedGroup {
         final GroupLocation modelGroupLocation = new GroupLocation(groupLocation);
 
         final Set<Tag> modelTags = new HashSet<>(groupTags);
-        return new Group(modelGroupName, modelGroupLocation, modelTags);
+        final Set<Person> modelPersons = new HashSet<>(groupPersons);
+
+        Group group = new Group(modelGroupName,modelGroupLocation,modelTags);
+        group.addPersonSet(modelPersons);
+
+        return group;
     }
 
     @Override
@@ -108,6 +125,7 @@ public class XmlAdaptedGroup {
         XmlAdaptedGroup otherGroup = (XmlAdaptedGroup) other;
         return Objects.equals(groupName, otherGroup.groupName)
                 && Objects.equals(groupLocation, otherGroup.groupLocation)
-                && tagged.equals(otherGroup.tagged);
+                && tagged.equals(otherGroup.tagged)
+                && person.equals(otherGroup.person);
     }
 }

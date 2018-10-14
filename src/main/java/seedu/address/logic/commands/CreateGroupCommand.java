@@ -29,7 +29,7 @@ public class CreateGroupCommand extends Command {
             + PREFIX_TAG + "SmartGroup";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exist in the Student Management System.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the student management system.";
 
     private final Group toCreate;
 
