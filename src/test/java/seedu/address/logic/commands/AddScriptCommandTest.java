@@ -34,16 +34,16 @@ public class AddScriptCommandTest {
             .withGrade("99").withPhone("66666666").withTags("owesMoney").build();
 
     private final String testFilesLocation = "/src/test/data/AddScriptCommandTest/";
-    private final String ValidTextFile = "ValidAddScriptCommand";
-    private final String MissingTextFile = "MissingTextFile";
-    private final String InvalidTextFile = "InvalidAddCommand";
+    private final String validTextFile = "ValidAddScriptCommand";
+    private final String missingTextFile = "MissingTextFile";
+    private final String invalidTextFile = "InvalidAddCommand";
 
     private final String invalidLinesNumbers = "2";
 
     private String defaultProjectLocation;
 
     @Before
-    public void setup() {
+    public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Path projectPath = Paths.get("");
         defaultProjectLocation = projectPath.toAbsolutePath().toString();
@@ -51,9 +51,9 @@ public class AddScriptCommandTest {
 
     @Test
     public void execute_addScriptCommand_successful() {
-        String validFileName = ValidTextFile;
+        String validFileName = validTextFile;
         String expectedMessage = String.format(AddScriptCommand.MESSAGE_SUCCESS,
-                ValidTextFile + AddScriptCommand.TEXT_EXTENSION);
+                validTextFile + AddScriptCommand.TEXT_EXTENSION);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.addPerson(novin);
@@ -67,10 +67,10 @@ public class AddScriptCommandTest {
     }
 
     @Test
-    public void execute_fileMissing_throwsIOException() {
+    public void execute_fileMissing_throwsIoException() {
         String expectedMessage = String.format(AddScriptCommand.MESSAGE_FILE_MISSING,
-                MissingTextFile + AddScriptCommand.TEXT_EXTENSION);
-        AddScriptCommand addScriptCommand = new AddScriptCommand(MissingTextFile);
+                missingTextFile + AddScriptCommand.TEXT_EXTENSION);
+        AddScriptCommand addScriptCommand = new AddScriptCommand(missingTextFile);
         CommandResult commandResult = addScriptCommand.execute(model, commandHistory);
         assertEquals(commandResult.feedbackToUser, expectedMessage);
     }
@@ -78,10 +78,10 @@ public class AddScriptCommandTest {
     @Test
     public void execute_wrongCommand_throwsParseException() {
         String expectedMessage = String.format(AddScriptCommand.MESSAGE_ADD_ERROR,
-                invalidLinesNumbers, InvalidTextFile + AddScriptCommand.TEXT_EXTENSION);
+                invalidLinesNumbers, invalidTextFile + AddScriptCommand.TEXT_EXTENSION);
 
         AddScriptCommand addScriptCommand = new AddScriptCommand (
-                defaultProjectLocation + testFilesLocation, InvalidTextFile);
+                defaultProjectLocation + testFilesLocation, invalidTextFile);
 
         CommandResult commandResult = addScriptCommand.execute(model, commandHistory);
         assertEquals(commandResult.feedbackToUser, expectedMessage);
