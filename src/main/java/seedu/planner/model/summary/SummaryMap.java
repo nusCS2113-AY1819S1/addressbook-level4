@@ -3,7 +3,9 @@ package seedu.planner.model.summary;
 import static java.util.Objects.requireNonNull;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
@@ -63,6 +65,17 @@ public class SummaryMap {
         add(target);
     }
 
+    /**
+     * Displays the lists of summary objects in a specific time period in the format of a string
+     */
+    //TODO: change this when changing to UI
+    public List<Summary> getSummaryList(Date startDate, Date endDate) {
+        return summaryMap.keySet().stream()
+                .filter(s -> isDateWithinInterval(s, startDate, endDate))
+                .map(s -> summaryMap.get(s))
+                .collect(Collectors.toList());
+    }
+
     public int size() {
         return summaryMap.size();
     }
@@ -73,6 +86,12 @@ public class SummaryMap {
 
     private boolean isDatePresentInMap(Date date) {
         return summaryMap.containsKey(date);
+    }
+
+    // TODO: Refactor this into the date util
+    private boolean isDateWithinInterval(Date toCheck, Date startDate, Date endDate) {
+        return toCheck.equals(startDate) || toCheck.equals(endDate)
+                || (toCheck.isLaterThan(startDate) && toCheck.isEarlierThan(endDate));
     }
 
     @Override

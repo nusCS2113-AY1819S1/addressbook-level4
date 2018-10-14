@@ -5,8 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.summary.Summary;
 import seedu.planner.model.summary.SummaryMap;
 
 /**
@@ -97,7 +99,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         records.remove(key);
     }
 
-    //// summary update operations
+    //// summary related operations
 
     /**
      * Add the record in the summary map
@@ -123,6 +125,10 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     //TODO: Remove this once fixed bug in storage and combined all 3
     public void setSummaryMap(SummaryMap summaryMap) {
         this.summaryMap = summaryMap;
+    }
+
+    public List<Summary> getSummaryList(Date startDate, Date endDate) {
+        return summaryMap.getSummaryList(startDate, endDate);
     }
 
     //// util methods

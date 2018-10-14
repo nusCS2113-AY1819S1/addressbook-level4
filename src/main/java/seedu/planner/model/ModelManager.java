@@ -3,6 +3,7 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -13,7 +14,9 @@ import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.Summary;
 
 /**
  * Represents the in-memory model of the financial planner data.
@@ -64,7 +67,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new SummaryMapChangedEvent(versionedFinancialPlanner.getSummaryMap()));
     }
 
-    //=========== Financial planner standard operations =============================================================
+    //=========== Financial planner standard operations ============================================
 
     @Override
     public boolean hasRecord(Record record) {
@@ -101,7 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateSummaryMapChanged();
     }
 
-    //=========== Filtered Record List Accessors =============================================================
+    //=========== Filtered Record List Accessors =====================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Record} backed by the internal list of
@@ -145,6 +148,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitFinancialPlanner() {
         versionedFinancialPlanner.commit();
+    }
+
+    //=========== Summary Display =================================================================================
+
+    public List<Summary> getSummaryList(Date startDate, Date endDate) {
+        return versionedFinancialPlanner.getSummaryList(startDate, endDate);
     }
 
     @Override

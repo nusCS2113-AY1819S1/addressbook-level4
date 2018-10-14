@@ -56,7 +56,7 @@ public class Summary {
     public void add(Record record) {
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
-            double newMoneyAmount = totalExpense.toDouble() + money.toDouble() ;
+            double newMoneyAmount = totalExpense.toDouble() + money.toDouble();
             String newMoneyString = String.format("%.2f", newMoneyAmount);
             totalExpense = new MoneyFlow(newMoneyString);
         } else {
@@ -87,7 +87,7 @@ public class Summary {
             String newMoneyString = String.format("%.2f", newMoneyAmount);
             totalExpense = new MoneyFlow(newMoneyString);
         } else {
-            double newMoneyAmount = totalIncome.toDouble() - money.toDouble() ;
+            double newMoneyAmount = totalIncome.toDouble() - money.toDouble();
             assert(newMoneyAmount >= 0);
             String newMoneyString = String.format("+%.2f", newMoneyAmount);
             totalIncome = new MoneyFlow(newMoneyString);
@@ -114,5 +114,13 @@ public class Summary {
                     && totalExpense.equals(((Summary) other).totalExpense)
                     && totalIncome.equals(((Summary) other).totalIncome)
                     && total.equals(((Summary) other).total));
+    }
+
+    @Override
+    public String toString() {
+        return "Date: " + date + "\n"
+                + "Total Expense: " + totalExpense + "\n"
+                + "Total Income: " + totalIncome + "\n"
+                + "Total: " + total;
     }
 }

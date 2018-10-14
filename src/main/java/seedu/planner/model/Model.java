@@ -1,9 +1,12 @@
 package seedu.planner.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.Summary;
 
 /**
  * The API of the Model component.
@@ -77,4 +80,6 @@ public interface Model {
      * Saves the current financial planner state for undo/redo.
      */
     void commitFinancialPlanner();
+
+    List<Summary> getSummaryList(Date startDate, Date endDate);
 }
