@@ -4,20 +4,18 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILELOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.FileUtil;
+import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FileLocation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -45,19 +43,19 @@ public class ImportCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Imported timetable for %1$s.";
     public static final String MESSAGE_IO_ERROR =
-            "IO error: Ensure your path is correct, and that your .ics file has not been corrupted.";
+            "IO error: your .ics file is corrupted/ not compatible.";
 
     private final Index index;
-    private final FileLocation fileLocation;
+    private final Path filePath;
 
     /**
      * Creates an ImportCommand to import the .ics data, parse it, and add a {@code Person} with this timetable
      */
-    public ImportCommand(Index index, FileLocation fileLocation) {
+    public ImportCommand(Index index, Path filePath) {
         //requireNonNull(timeTable);
 
         this.index = index;
-        this.fileLocation = fileLocation;
+        this.filePath = filePath;
     }
 
     @Override
@@ -70,9 +68,12 @@ public class ImportCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        //imports from file data, into a TimeTable object
-        TimeTable importedTimeTable = icsToTimeTable(fileLocation);
+        TimeTable importedTimeTable = new TimeTable();
+        try {
+            importedTimeTable = IcsUtil.getTimeTableFromFile(filePath);
+        } catch (CommandException e) {
 
+        }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person modifiedPerson = createModifiedPerson(personToEdit, importedTimeTable);
@@ -81,34 +82,6 @@ public class ImportCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, modifiedPerson));
-    }
-
-    /**
-     * Attempts to read the file at the path specified. Parses the file to return a timetable object.
-     */
-
-    private TimeTable icsToTimeTable(FileLocation fileLocation) throws CommandException{
-        if ( !fileLocation.isValidFileLocation()){
-            throw new CommandException(MESSAGE_IO_ERROR);
-        }
-
-        Path path = fileLocation.toPath();
-        String importstring = "";
-        try {
-            importstring = FileUtil.readFromFile(path);
-        }
-        catch (IOException e){
-            System.out.println ("error reading from file");
-        }
-
-        stringToTimeTable(importstring);
-
-        return new TimeTable();
-    }
-
-    private TimeTable stringToTimeTable(String string) {
-        System.out.println(string);
-        return new TimeTable();
     }
 
     /**

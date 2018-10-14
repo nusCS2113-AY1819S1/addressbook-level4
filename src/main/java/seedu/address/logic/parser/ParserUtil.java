@@ -153,17 +153,26 @@ public class ParserUtil {
      * Parses a {@code String fileLocation} into a {@code fileLocation}
      *
      */
-    public static FileLocation parseFileLocation (String fileLocation) throws ParseException {
+    public static Path parseFileLocation (String fileLocation) throws ParseException {
         requireNonNull(fileLocation);
         String trimmedFileLocation = fileLocation.trim();
 
-        FileLocation newFileLocation = new FileLocation(fileLocation);
+        //FileLocation newFileLocation = new FileLocation(fileLocation);
         Path newFilePath = Paths.get(trimmedFileLocation);
 
-        if (!FileUtil.isFileExists(newFilePath)){ //possible bug? seems to work.
+        //check file exists in the disk //does not check the validity of file!
+        if (!FileUtil.isFileExists(newFilePath)) {
             throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
         }
 
-        return newFileLocation;
+        //check file ends in .ics //does not check the validity of file!
+        /*
+        String pattern = "^.*\\.(ics|ICS)$";
+        if (Pattern.matches(pattern, fileLocation)) {
+            throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
+        }
+        */
+
+        return newFilePath;
     }
 }
