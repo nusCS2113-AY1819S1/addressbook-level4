@@ -25,7 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final VersionedExpenditureTracker versionedExpenditureTracker;
     private final FilteredList<Person> filteredPersons;
-
+    private final FilteredList<Expenditure> filteredExpenditures;
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -39,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         versionedExpenditureTracker = new VersionedExpenditureTracker(expenditureTracker);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredExpenditures = new FilteredList<>(versionedExpenditureTracker.getExpenditureList());
     }
 
     public ModelManager() {
@@ -72,6 +73,12 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.hasPerson(person);
     }
 
+   /** @Override
+    public boolean hasExpenditure(Expenditure expenditure) {
+        requireNonNull(expenditure);
+        return versionedExpenditureTracker.hasExpenditure(expenditure);
+    }
+    */
     @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
