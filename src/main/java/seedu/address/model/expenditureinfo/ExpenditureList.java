@@ -8,6 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.expenditureinfo.exceptions.DuplicateExpenditureException;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of expenditures.
