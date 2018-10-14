@@ -50,8 +50,8 @@ public class AddCommandIntegrationTest {
         expectedModel.addEvent(validEvent);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(new CreateCommand(validEvent), model, commandHistory,
-                String.format(CreateCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
+        assertCommandSuccess(new AddEventCommand(validEvent), model, commandHistory,
+                String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
     }
 
 

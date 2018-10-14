@@ -21,7 +21,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EventBuilder;
 
 
-public class CreateCommandTest {
+public class AddEventCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -37,36 +37,36 @@ public class CreateCommandTest {
     @Test
     public void execute_duplicateEvent_throwsCommandException() throws Exception {
         Event validEvent = new EventBuilder().build();
-        CreateCommand createCommand = new CreateCommand(validEvent);
+        AddEventCommand addEventCommand = new AddEventCommand(validEvent);
         ModelStub modelStub = new ModelStubWithEvent(validEvent);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(CreateCommand.MESSAGE_DUPLICATE_EVENT);
-        createCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(AddEventCommand.MESSAGE_DUPLICATE_EVENT);
+        addEventCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
         Event alice = new EventBuilder().withEventName("Lecture").build();
         Event bob = new EventBuilder().withEventName("Tutorial").build();
-        CreateCommand addAliceCommand = new CreateCommand(alice);
-        CreateCommand addBobCommand = new CreateCommand(bob);
+        AddEventCommand addLectureCommand = new AddEventCommand(alice);
+        AddEventCommand addTutorialCommand = new AddEventCommand(bob);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addLectureCommand.equals(addLectureCommand));
 
         // same values -> returns true
-        CreateCommand addAliceCommandCopy = new CreateCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddEventCommand addLectureCommandCopy = new AddEventCommand(alice);
+        assertTrue(addLectureCommand.equals(addLectureCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addLectureCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addLectureCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addLectureCommand.equals(addTutorialCommand));
     }
 
     /**
@@ -172,6 +172,31 @@ public class CreateCommandTest {
 
         @Override
         public void updateFilteredEventList(Predicate<Event> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoEventList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitEventList() {
             throw new AssertionError("This method should not be called.");
         }
     }
