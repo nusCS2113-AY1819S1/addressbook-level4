@@ -16,7 +16,7 @@ public class GradebookModel {
     private static final String STORAGE_GRADEBOOK = "gradebook.xml";
 
     private static final String ADD_MESSAGE_SUCCESS = "Successfully Added! \nModule Code: %1$s"
-            + "\nGradebook Item Name: %2$s";
+            + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
     private static final String ADD_MESSAGE_FAIL = "Module code and gradebook component name cannot be empty";
     private static final String LIST_MESSAGE_SUCCESS = "Success! List of components in the module:";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
@@ -80,21 +80,21 @@ public class GradebookModel {
                                                        int gradebookComponentMaxMarks,
                                                        int gradebookComponentWeightage) {
         String status;
-        retrieveGradebookData();
 
+        retrieveGradebookData();
         if (moduleCode.equals("") || gradebookComponentName.equals("")) {
             status = ADD_MESSAGE_FAIL;
         } else if (findGradebookComponent(moduleCode, gradebookComponentName).feedbackToUser
                 .contains(FIND_MESSAGE_SUCCESS)) {
             status = DUPLICATE_RESULT;
         } else {
-            getGradebookStorage().add(new GradebookComponent(moduleCode, gradebookComponentName,
-                    gradebookComponentMaxMarks,
-                    gradebookComponentWeightage));
-            storeGradebookData();
             status = ADD_MESSAGE_SUCCESS;
+            getGradebookStorage().add(new GradebookComponent(moduleCode, gradebookComponentName,
+                    gradebookComponentMaxMarks, gradebookComponentWeightage));
+            storeGradebookData();
         }
-        return new CommandResult(String.format(status, moduleCode, gradebookComponentName));
+        return new CommandResult(String.format(status, moduleCode, gradebookComponentName,
+                gradebookComponentMaxMarks, gradebookComponentWeightage));
     }
 
     /**
