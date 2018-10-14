@@ -149,8 +149,8 @@ public class ParserUtil {
         }
 
         String timeRangeString = trimmedTimeSlot.split("\\s+", 2)[1];
-        String startString = timeRangeString.split("-", 2)[0];
-        String endString = timeRangeString.split("-", 2)[1];
+        String startString = timeRangeString.split("-", 2)[0].trim();
+        String endString = timeRangeString.split("-", 2)[1].trim();
 
         LocalTime startTime;
         LocalTime endTime;

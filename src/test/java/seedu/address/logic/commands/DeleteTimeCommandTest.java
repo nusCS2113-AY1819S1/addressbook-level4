@@ -29,15 +29,19 @@ public class DeleteTimeCommandTest {
 
     @Test
     public void equals() {
-        DeleteTimeCommand deleteMon8To10ToFirstCommand = new DeleteTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
-        DeleteTimeCommand deleteTue8To10ToFirstCommand = new DeleteTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.TUE_10_TO_12);
-        DeleteTimeCommand deleteTue8To10ToSecondCommand = new DeleteTimeCommand(TypicalIndexes.INDEX_SECOND_PERSON, TypicalTimeSlots.TUE_10_TO_12);
+        DeleteTimeCommand deleteMon8To10ToFirstCommand =
+                new DeleteTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
+        DeleteTimeCommand deleteTue8To10ToFirstCommand =
+                new DeleteTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.TUE_10_TO_12);
+        DeleteTimeCommand deleteTue8To10ToSecondCommand =
+                new DeleteTimeCommand(TypicalIndexes.INDEX_SECOND_PERSON, TypicalTimeSlots.TUE_10_TO_12);
 
         // same object -> returns true
         assertTrue(deleteMon8To10ToFirstCommand.equals(deleteMon8To10ToFirstCommand));
 
         // same values -> returns true
-        DeleteTimeCommand deleteMon8To10CommandCopy = new DeleteTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
+        DeleteTimeCommand deleteMon8To10CommandCopy =
+                new DeleteTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
         assertTrue(deleteMon8To10ToFirstCommand.equals(deleteMon8To10CommandCopy));
 
         // different types -> returns false

@@ -13,7 +13,7 @@ import java.time.LocalTime;
 public class TimeSlot {
     // TODO: Make constraint message more descriptive
     public static final String MESSAGE_GENERAL_CONSTRAINTS = "Does not fit constraints!";
-    public static final String MESSAGE_NOT_ENOUGH_ARGUMENTS = "Accepted argument example: Monday 8-10";
+    public static final String MESSAGE_NOT_ENOUGH_ARGUMENTS = "Accepted argument example: Monday 08:00-10:00";
     public static final String MESSAGE_CANNOT_PARSE_DAY = "Accepted day format: MONDAY";
     public static final String MESSAGE_CANNOT_PARSE_TIME = "Accepted time format: 8-10";
     public static final String MESSAGE_INVALID_TIME_SLOT = "Invalid TimeSlot";
@@ -21,7 +21,7 @@ public class TimeSlot {
     // TODO: Change to accept times with non 0 minutes
     // TODO: Allow whitespaces before and after dash
     public static final String VALIDATION_REGEX =
-            "\\w+(\\s*)([0-1][0-9]|[2][0-3])[:][0][0][-]([0-1][0-9]|[2][0-3])[:][0][0]";
+            "\\w+(\\s*)([0-1][0-9]|[2][0-3])[:][0][0](\\s*)[-](\\s*)([0-1][0-9]|[2][0-3])[:][0][0]";
 
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;

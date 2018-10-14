@@ -29,15 +29,19 @@ public class AddTimeCommandTest {
 
     @Test
     public void equals() {
-        AddTimeCommand addMon8To10ToFirstCommand = new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
-        AddTimeCommand addTue8To10ToFirstCommand = new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.TUE_10_TO_12);
-        AddTimeCommand addTue8To10ToSecondCommand = new AddTimeCommand(TypicalIndexes.INDEX_SECOND_PERSON, TypicalTimeSlots.TUE_10_TO_12);
+        AddTimeCommand addMon8To10ToFirstCommand =
+                new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
+        AddTimeCommand addTue8To10ToFirstCommand =
+                new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.TUE_10_TO_12);
+        AddTimeCommand addTue8To10ToSecondCommand =
+                new AddTimeCommand(TypicalIndexes.INDEX_SECOND_PERSON, TypicalTimeSlots.TUE_10_TO_12);
 
         // same object -> returns true
         assertTrue(addMon8To10ToFirstCommand.equals(addMon8To10ToFirstCommand));
 
         // same values -> returns true
-        AddTimeCommand addMon8To10CommandCopy = new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
+        AddTimeCommand addMon8To10CommandCopy =
+                new AddTimeCommand(TypicalIndexes.INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10);
         assertTrue(addMon8To10ToFirstCommand.equals(addMon8To10CommandCopy));
 
         // different types -> returns false

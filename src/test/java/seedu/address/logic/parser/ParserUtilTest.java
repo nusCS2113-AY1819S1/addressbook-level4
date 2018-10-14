@@ -260,14 +260,16 @@ public class ParserUtilTest {
     @Test
     public void parseTimeSlot_validValues_returnsTimeSlot() throws Exception {
         TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
-        TimeSlot actual = ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + VALID_TIME_0800HRS + DASH + VALID_TIME_1000HRS);
+        TimeSlot actual = ParserUtil.parseTimeSlot(VALID_DAY
+                + WHITESPACE + VALID_TIME_0800HRS + DASH + VALID_TIME_1000HRS);
         assertEquals(expected, actual);
     }
 
     @Test
     public void parseTimeSlot_validValuesWithWhitespace_returnsTimeSlot() throws Exception {
         TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
-        TimeSlot actual = ParserUtil.parseTimeSlot(WHITESPACE + VALID_DAY + WHITESPACE + VALID_TIME_0800HRS + DASH + VALID_TIME_1000HRS + WHITESPACE);
+        TimeSlot actual = ParserUtil.parseTimeSlot(WHITESPACE + VALID_DAY
+                + WHITESPACE + VALID_TIME_0800HRS + WHITESPACE + DASH + WHITESPACE + VALID_TIME_1000HRS + WHITESPACE);
         assertEquals(expected, actual);
     }
 }
