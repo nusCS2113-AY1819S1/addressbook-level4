@@ -21,7 +21,7 @@ public class StartTime {
     public final String startTime;
 
     /**
-     * Constructs a {@code Name}.
+     * Constructs a {@code StartTime}.
      *
      * @param time A valid time.
      */
