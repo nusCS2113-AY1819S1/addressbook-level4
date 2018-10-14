@@ -14,8 +14,8 @@ public abstract class Command {
 
     public static final String MESSAGE_LOGIN = "Please login first!";
 
-    private final Username username = new Username(" ");
-    private final Password password = new Password(" ");
+    private final Username username = new Username("stub");
+    private final Password password = new Password("stub");
     private User currentUser = new User(username, password);
 
     /**
