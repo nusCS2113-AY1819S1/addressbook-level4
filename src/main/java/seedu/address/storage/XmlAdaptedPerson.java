@@ -42,7 +42,8 @@ public class XmlAdaptedPerson {
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedPerson() {
+    }
 
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
@@ -120,7 +121,7 @@ public class XmlAdaptedPerson {
 
         if (department == null) {
             throw new IllegalValueException(
-                String.format(MISSING_FIELD_MESSAGE_FORMAT, Department.class.getSimpleName()));
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, Department.class.getSimpleName()));
         }
         if (!Department.isValidDepartment(department)) {
             throw new IllegalValueException(Department.MESSAGE_DEPARTMENT_CONSTRAINTS);
