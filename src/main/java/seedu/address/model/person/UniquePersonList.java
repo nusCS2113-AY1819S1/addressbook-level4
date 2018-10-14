@@ -5,12 +5,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.TreeMap;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * A list of persons that enforces uniqueness between its elements and does not allow nulls.
@@ -27,22 +25,13 @@ public class UniquePersonList implements Iterable<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
 
-    /**
-     * A supporting data structure (Treemap) that helps keep the contacts in the contact list sorted, increasing
-     * usability.
-     * The names are sorted in an alphabetical order, with uppercase letters always being in front of lowercase letters.
-     * Therefore, a possible order of the list is "Alice, Bob, amy, andrew".
-     */
-
-    private TreeMap<String, Person> internalListHelper = new TreeMap<>();
-
+    private final UniquePersonListHelper uniquePersonListHelper = new UniquePersonListHelper();
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(Person toCheck) {
-        requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return uniquePersonListHelper.contains(toCheck);
     }
 
     /**
@@ -50,13 +39,7 @@ public class UniquePersonList implements Iterable<Person> {
      * The person must not already exist in the list.
      */
     public void add(Person toAdd) {
-        requireNonNull(toAdd);
-        String toAddName = nameFinder(toAdd);
-        if (contains(toAdd)) {
-            throw new DuplicatePersonException();
-        }
-
-        internalListHelper.put(toAddName,toAdd);
+        uniquePersonListHelper.add(toAdd);
         updateInternalList();
 
     }
@@ -67,20 +50,7 @@ public class UniquePersonList implements Iterable<Person> {
      * The person identity of {@code editedPerson} must not be the same as another existing person in the list.
      */
     public void setPerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-        String targetName = nameFinder(target);
-        String editedPersonName = nameFinder(editedPerson);
-        int index = internalList.indexOf(target);
-        if (index == -1) {
-            throw new PersonNotFoundException();
-        }
-
-        if (!target.isSamePerson(editedPerson) && contains(editedPerson)) {
-            throw new DuplicatePersonException();
-        }
-
-        internalListHelper.remove(targetName);
-        internalListHelper.put(editedPersonName, editedPerson);
+        uniquePersonListHelper.edit(target, editedPerson);
         updateInternalList();
     }
 
@@ -89,22 +59,16 @@ public class UniquePersonList implements Iterable<Person> {
      * The person must exist in the list.
      */
     public void remove(Person toRemove) {
-        requireNonNull(toRemove);
-        String toRemoveName = nameFinder(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new PersonNotFoundException();
-        }
-        internalListHelper.remove(toRemoveName);
+        uniquePersonListHelper.remove(toRemove);
         updateInternalList();
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
-        String tempName;
-        internalListHelper.clear();
-        for(Person temp: replacement){
-            tempName = nameFinder(temp);
-            internalListHelper.put(tempName, temp);
+
+        uniquePersonListHelper.removeAll();
+        for(Person tempPerson: replacement){
+            uniquePersonListHelper.add(tempPerson);
         }
         updateInternalList();
     }
@@ -115,14 +79,13 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void setPersons(List<Person> persons) {
         requireAllNonNull(persons);
-        String tempName;
+
         if (!personsAreUnique(persons)) {
             throw new DuplicatePersonException();
         }
-        internalListHelper.clear();
-        for(Person temp: persons){
-            tempName = nameFinder(temp);
-            internalListHelper.put(tempName, temp);
+        uniquePersonListHelper.removeAll();
+        for(Person tempPerson: persons){
+            uniquePersonListHelper.add(tempPerson);
         }
         updateInternalList();
     }
@@ -164,15 +127,13 @@ public class UniquePersonList implements Iterable<Person> {
         }
         return true;
     }
-
+    /**
+     * Updates the internal list, allowing it to have sorted contacts
+     */
     private void updateInternalList(){
         internalList.clear();
-        for(String key: internalListHelper.keySet()) {
-            internalList.add(internalListHelper.get(key));
+        for(String name: uniquePersonListHelper.acquireAllNames()) {
+            internalList.add(uniquePersonListHelper.get(name));
         }
-    }
-
-    private String nameFinder(Person person){
-        return person.getName().toString();
     }
 }

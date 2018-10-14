@@ -3,13 +3,16 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.enrolledClass.EnrolledClass;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -36,6 +39,9 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
+    @XmlElement
+    private List<XmlAdaptedEnrolledClass> enrolled = new ArrayList<>();
+
     /**
      * Constructs an XmlAdaptedPerson.
      * This is the no-arg constructor that is required by JAXB.
@@ -45,13 +51,18 @@ public class XmlAdaptedPerson {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String phone, String email, String address,
+                                List<XmlAdaptedTag> tagged, List<XmlAdaptedEnrolledClass> enrolled) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+
+        if (enrolled != null) {
+            this.enrolled = new ArrayList<>(enrolled);
         }
     }
 
@@ -68,6 +79,11 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        XmlAdaptedEnrolledClass tempXmlClass;
+        for(String nameTemp : source.getEnrolledClasses().keySet()){
+            tempXmlClass = new XmlAdaptedEnrolledClass(nameTemp);
+            enrolled.add(tempXmlClass);
+        }
     }
 
     /**
@@ -79,6 +95,11 @@ public class XmlAdaptedPerson {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
+        }
+
+        final List<EnrolledClass> personEnrolledClasses = new ArrayList<>();
+        for (XmlAdaptedEnrolledClass enrolledClass : enrolled) {
+            personEnrolledClasses.add(enrolledClass.toModelType());
         }
 
         if (name == null) {
@@ -114,7 +135,13 @@ public class XmlAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+
+        final Map<String, EnrolledClass> modelEnrolledClasses = new TreeMap<>();
+        for(EnrolledClass tempClass: personEnrolledClasses){
+            modelEnrolledClasses.put(tempClass.enrolledClassName, tempClass);
+        }
+
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, modelEnrolledClasses);
     }
 
     @Override
