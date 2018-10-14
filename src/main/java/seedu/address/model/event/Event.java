@@ -84,9 +84,9 @@ public class Event implements Comparable<Event> {
         return event != null
                 && event.getEventName().equals(getEventName())
                 && (event.getDescription().equals(getDescription())
-                || event.getLocation().equals(getLocation())
-                || event.getStartTime().equals(getStartTime())
-                || event.getEndTime().equals(getEndTime()));
+                && event.getLocation().equals(getLocation())
+                && event.getStartTime().equals(getStartTime())
+                && event.getEndTime().equals(getEndTime()));
     }
 
     /**
