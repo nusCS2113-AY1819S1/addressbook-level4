@@ -25,7 +25,6 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.tag.Tag;
 
@@ -136,7 +135,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
-        private TimeSlot timeSlot;
+        private TimeTable timeTable;
 
         public EditPersonDescriptor() {}
 
@@ -150,14 +149,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
-            setTimeSlot(toCopy.timeSlot);
+            setTimeTable(toCopy.timeTable);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, timeSlot);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, tags, timeTable);
         }
 
         public void setName(Name name) {
@@ -209,16 +208,12 @@ public class EditCommand extends Command {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
         }
 
-        public Optional<TimeSlot> getTimeSlot() {
-            return Optional.ofNullable(timeSlot);
+        public Optional<TimeTable> getTimeTable() {
+            return Optional.ofNullable(timeTable);
         }
 
-        public TimeSlot getTimeSlotObject() {
-            return this.timeSlot;
-        }
-
-        public void setTimeSlot(TimeSlot timeSlot) {
-            this.timeSlot = timeSlot;
+        public void setTimeTable(TimeTable timeSlot) {
+            this.timeTable = timeTable;
         }
 
         @Override
@@ -240,7 +235,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getTimeTable().equals(e.getTimeTable());
         }
     }
 }

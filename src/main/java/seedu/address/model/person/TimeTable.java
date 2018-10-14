@@ -34,7 +34,7 @@ public class TimeTable {
      * @throws TimeSlotOverlapException if toAdd overlaps with an existing TimeSlot in the TimeTable
      */
     public void addTimeSlot(TimeSlot toAdd) throws TimeSlotOverlapException {
-        if (!findOverlapTimeSlot(toAdd).isEmpty()) {
+        if (!findOverlapTimeSlots(toAdd).isEmpty()) {
             throw new TimeSlotOverlapException();
         } else {
             timeSlots.add(toAdd);
@@ -59,7 +59,7 @@ public class TimeTable {
      * @param toCheck the TimeSlot to be checked against
      * @return Optional containing overlapping TimeSlot
      */
-    private Collection <TimeSlot> findOverlapTimeSlot(TimeSlot toCheck) {
+    public Collection <TimeSlot> findOverlapTimeSlots(TimeSlot toCheck) {
         Collection <TimeSlot> toReturn = new ArrayList<>();
 
         for (TimeSlot timeSlot : timeSlots) {
