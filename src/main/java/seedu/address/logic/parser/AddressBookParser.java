@@ -40,20 +40,22 @@ public class AddressBookParser {
             return new TDLAddCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
+        case AddCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
 
         case TDLEditCommand.COMMAND_WORD:
             return new TDLEditCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
+        case EditCommand.COMMAND_ALIAS:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
-            case SelectCommand.COMMAND_ALIAS:
+        case SelectCommand.COMMAND_ALIAS:
             return new SelectCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            case DeleteCommand.COMMAND_ALIAS:
+        case DeleteCommand.COMMAND_ALIAS:
             return new DeleteCommandParser().parse(arguments);
 
         case TDLDeleteCommand.COMMAND_WORD:
@@ -61,24 +63,23 @@ public class AddressBookParser {
 
 
         case ClearCommand.COMMAND_WORD:
-            case ClearCommand.COMMAND_ALIAS:
-            case ClearCommand.COMMAND_INITIAL:
-
+        case ClearCommand.COMMAND_ALIAS:
+        case ClearCommand.COMMAND_INITIAL:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            case FindCommand.COMMAND_ALIAS:
+        case FindCommand.COMMAND_ALIAS:
             return new FindCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
-            case ListCommand.COMMAND_ALIAS:
+        case ListCommand.COMMAND_ALIAS:
             return new ListCommand();
 
         case TDLViewCommand.COMMAND_WORD:
             return new TDLViewCommand();
 
         case HistoryCommand.COMMAND_WORD:
-            case HistoryCommand.COMMAND_ALIAS:
+        case HistoryCommand.COMMAND_ALIAS:
             return new HistoryCommand();
 
         case ExitCommand.COMMAND_WORD:
@@ -93,8 +94,7 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-
-            default:
+        default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

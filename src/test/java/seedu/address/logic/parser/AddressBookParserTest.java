@@ -69,8 +69,8 @@ public class AddressBookParserTest {
     }
 
     @Test
-   public void parseCommand_clearInitial() throws Exception{
-    assertTrue(parser.parseCommand(ClearCommand.COMMAND_INITIAL) instanceof ClearCommand);
+    public void parseCommand_clearInitial() throws Exception {
+        assertTrue(parser.parseCommand(ClearCommand.COMMAND_INITIAL) instanceof ClearCommand);
         assertTrue(parser.parseCommand(ClearCommand.COMMAND_INITIAL + " 3") instanceof ClearCommand);
     }
 

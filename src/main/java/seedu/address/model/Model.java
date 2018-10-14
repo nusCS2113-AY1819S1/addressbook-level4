@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.task.Task;
@@ -20,6 +21,9 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the ExpenditureTracker */
+    ReadOnlyExpenditureTracker getExpenditureTracker();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -43,6 +47,11 @@ public interface Model {
     void addTask(Task task);
 
     void addPerson(Person person);
+
+    /**
+     * Adds the given expenditure.
+     */
+    void addExpenditure(Expenditure expenditure);
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

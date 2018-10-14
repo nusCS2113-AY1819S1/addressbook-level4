@@ -126,6 +126,9 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.remove(key);
     }
 
+    /**
+     * Removes {@code tag} from this {@code Person}
+     */
     private void removeTagFromPerson(Tag tag, Person person) {
         Set<Tag> newTags = new HashSet<>(person.getTags());
         if (!newTags.remove(tag)) {
