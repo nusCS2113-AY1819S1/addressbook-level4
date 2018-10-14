@@ -29,7 +29,7 @@ public class Event implements Comparable<Event> {
     private final LocalDate endTime; // date format: "2007-12-03"
     private final Location location;
 
-    // TODO: WILL BE IMPLEMENT IN THE NEXT VERSION FOR ADDING OF EMPOLYEES
+    // TODO: WILL BE IMPLEMENT IN THE NEXT VERSION FOR ADDING OF EMPLOYEES
     private final Set<Person> attendees = new HashSet<>();
 
     /**
@@ -89,6 +89,28 @@ public class Event implements Comparable<Event> {
                 || event.getEndTime().equals(getEndTime()));
     }
 
+    /**
+     * Returns true if both events have the same identity and data fields.
+     * This defines a stronger notion of equality between two events.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Event)) {
+            return false;
+        }
+
+        Event otherEvent = (Event) other;
+        return otherEvent.getEventName().equals(getEventName())
+                && otherEvent.getDescription().equals(getDescription())
+                && otherEvent.getLocation().equals(getLocation())
+                && otherEvent.getStartTime().equals(getStartTime())
+                && otherEvent.getEndTime().equals(getEndTime());
+    }
+
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
@@ -114,6 +136,18 @@ public class Event implements Comparable<Event> {
     public int compareTo(Event other) {
         return this.getEventName().fullName.compareTo(other.getEventName().fullName);
     }
+
+
+    /**
+     * Returns true if events attendees contain person.
+     */
+    public boolean containPerson(Person person) {
+        if (attendees.isEmpty()) {
+            return false;
+        }
+        return (attendees.contains(person));
+    }
+
 
 
     public int compareStartTimeTo(Event other) {

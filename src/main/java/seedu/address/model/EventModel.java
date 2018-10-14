@@ -48,4 +48,29 @@ public interface EventModel {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
+
+    /**
+     * Returns true if the model has previous event list states to restore.
+     */
+    boolean canUndoEventList();
+
+    /**
+     * Returns true if the model has undone event list states to restore.
+     */
+    boolean canRedoEventList();
+
+    /**
+     * Restores the model's event list to its previous state.
+     */
+    void undoEventList();
+
+    /**
+     * Restores the model's event list to its previously undone state.
+     */
+    void redoEventList();
+
+    /**
+     * Saves the current event list state for undo/redo.
+     */
+    void commitEventList();
 }

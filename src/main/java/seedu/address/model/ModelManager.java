@@ -190,6 +190,35 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEvents.setPredicate(predicate);
     }
 
+    //=========== Undo/Redo =================================================================================
+
+    @Override
+    public boolean canUndoEventList() {
+        return versionedEventList.canUndo();
+    }
+
+    @Override
+    public boolean canRedoEventList() {
+        return versionedEventList.canRedo();
+    }
+
+    @Override
+    public void undoEventList() {
+        versionedEventList.undo();
+        indicateEventListChanged();
+    }
+
+    @Override
+    public void redoEventList() {
+        versionedEventList.redo();
+        indicateEventListChanged();
+    }
+
+    @Override
+    public void commitEventList() {
+        versionedEventList.commit();
+    }
+
     //=========== Object Methods =============================================================================
 
     @Override

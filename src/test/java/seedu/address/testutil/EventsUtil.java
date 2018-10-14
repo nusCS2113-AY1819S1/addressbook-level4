@@ -13,7 +13,7 @@ import guitests.GuiRobot;
 import javafx.application.Platform;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.logic.commands.CreateCommand;
+import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.model.event.Event;
 
 /**
@@ -38,8 +38,8 @@ public class EventsUtil {
     /**
      * Returns an add command string for adding the {@code person}.
      */
-    public static String getCreateCommand(Event event) {
-        return CreateCommand.COMMAND_WORD + " " + getEventDetails(event);
+    public static String getAddEventCommand(Event event) {
+        return AddEventCommand.COMMAND_WORD + " " + getEventDetails(event);
     }
 
     /**

@@ -12,7 +12,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.event.Event;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 /**
@@ -41,10 +43,30 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
+    public void execute_newEvent_success() {
+        Event validEvent = new EventBuilder().build();
+
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getEventList(), new UserPrefs());
+        expectedModel.addEvent(validEvent);
+        expectedModel.commitAddressBook();
+
+        assertCommandSuccess(new AddEventCommand(validEvent), model, commandHistory,
+                String.format(AddEventCommand.MESSAGE_SUCCESS, validEvent), expectedModel);
+    }
+
+
+    @Test
     public void execute_duplicatePerson_throwsCommandException() {
         Person personInList = model.getAddressBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(personInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_PERSON);
+    }
+
+    @Test
+    public void execute_duplicateEvent_throwsCommandException() {
+        Event eventInList = model.getEventList().getEventList().get(0);
+        assertCommandFailure(new CreateCommand(eventInList), model, commandHistory,
+                CreateCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
 }
