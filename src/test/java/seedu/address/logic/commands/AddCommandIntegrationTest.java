@@ -65,8 +65,8 @@ public class AddCommandIntegrationTest {
     @Test
     public void execute_duplicateEvent_throwsCommandException() {
         Event eventInList = model.getEventList().getEventList().get(0);
-        assertCommandFailure(new CreateCommand(eventInList), model, commandHistory,
-                CreateCommand.MESSAGE_DUPLICATE_EVENT);
+        assertCommandFailure(new AddEventCommand(eventInList), model, commandHistory,
+                AddEventCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
 }
