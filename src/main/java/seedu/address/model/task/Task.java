@@ -5,16 +5,19 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Objects;
 
 /**
- * Represents a Person in the address book.
+ * Represents a Task in the to-do list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
 
-    // Data fields
+    // Identity fields
     private final TaskName name;
     private final TaskModule module;
+
+    // Data fields
     private final TaskDate date;
     private final TaskPriority priority;
+    private boolean completeness;
 
     /**
      * Every field must be present and not null.
@@ -25,6 +28,7 @@ public class Task {
         this.module = module;
         this.date = date;
         this.priority = priority;
+        completeness = false;
     }
 
     public TaskName getName() {
@@ -43,9 +47,25 @@ public class Task {
         return priority;
     }
 
+    public boolean getCompleteness() {return completeness;}
+
+    public void setAsCompleted() {completeness = true;}
+
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both tasks are totally the same.
+     * This defines a weaker notion of equality between two tasks.
+     */
+    public boolean isSameTask(Task otherTask) {
+        if (otherTask == this) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Returns true if both tasks have the same identity and data fields.
+     * This defines a stronger notion of equality between two tasks.
      */
     @Override
     public boolean equals(Object other) {
@@ -57,11 +77,11 @@ public class Task {
             return false;
         }
 
-        Task otherPerson = (Task) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getModule().equals(getModule())
-                && otherPerson.getDate().equals(getDate())
-                && otherPerson.getPriority().equals(getPriority());
+        Task otherTask = (Task) other;
+        return otherTask.getName().equals(getName())
+                && otherTask.getModule().equals(getModule())
+                && otherTask.getDate().equals(getDate())
+                && otherTask.getPriority().equals(getPriority());
     }
 
     @Override
