@@ -26,7 +26,7 @@ public class DeleteTimeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a timeslot to your timetable.";
 
     // TODO: Make success message more descriptive
-    public static final String MESSAGE_SUCCESS = "New timeslot added";
+    public static final String MESSAGE_SUCCESS = "Timeslot removed";
 
     private final TimeSlot toDelete;
     private final Index index;
@@ -64,7 +64,7 @@ public class DeleteTimeCommand extends Command {
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, editedPerson));
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     /**

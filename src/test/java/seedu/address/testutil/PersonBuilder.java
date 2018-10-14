@@ -27,7 +27,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
-    private TimeTable weekly;
+    private TimeTable timeTable;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -35,7 +35,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
-        weekly = new TimeTable();
+        timeTable = new TimeTable();
     }
 
     /**
@@ -47,7 +47,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
-        weekly = personToCopy.getTimeTable();
+        timeTable = personToCopy.getTimeTable();
     }
 
     /**
@@ -90,8 +90,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code TimeTable} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withTimeTable(TimeTable timeTable) {
+        this.timeTable = timeTable;
+        return this;
+    }
+
     public Person build() {
-        return new Person(name, phone, email, address, tags, weekly);
+        return new Person(name, phone, email, address, tags, timeTable);
     }
 
 }

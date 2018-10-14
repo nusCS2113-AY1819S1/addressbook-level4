@@ -212,7 +212,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(timeTable);
         }
 
-        public void setTimeTable(TimeTable timeSlot) {
+        public void setTimeTable(TimeTable timeTable) {
             this.timeTable = timeTable;
         }
 
