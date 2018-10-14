@@ -15,8 +15,7 @@ public abstract class Command {
     private final Username username = new Username(" ");
     private final Password password = new Password(" ");
     private User currentUser = new User(username, password);
-
-    private static final String MESSAGE_LOGIN = "Please login first!";
+    public static final String MESSAGE_LOGIN = "Please login first!";
 
     /**
      * Executes the command and returns the result message.
@@ -28,15 +27,26 @@ public abstract class Command {
      */
     public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
 
+    /**
+     * Sets current logged in user.
+     * @param user
+     */
     public void setCurrentUser(User user) {
         currentUser = user;
         currentUser.setLoginStatus(true);
     }
 
+    /**
+     * Clears current logged in user.
+     */
     public void clearCurrentUser() {
         currentUser.setLoginStatus(false);
     }
 
+    /**
+     * Checks whether or not a user is logged in.
+     * @throws CommandException
+     */
     public void authenticate() throws CommandException {
         if (!currentUser.getLoginStatus()) {
             throw new CommandException(MESSAGE_LOGIN);
