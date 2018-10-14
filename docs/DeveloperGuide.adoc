@@ -334,6 +334,7 @@ To allow sorting of these parameters, there are three types of comparators.
 
 image::SortNewCommand1StateListDiagram.png[width="650"]
 
+image::SortSequenceDiagram.png[width="650"]
 
 
 
