@@ -126,14 +126,15 @@ The `.pptx` files used to create diagrams in this document can be found in the l
 * `EventsCenter` : This class (written using https://github.com/google/guava/wiki/EventBusExplained[Google's Event Bus library]) is used by components to communicate with other components using events (i.e. a form of _Event Driven_ design)
 * `LogsCenter` : Used by many classes to write log messages to the App's log file.
 
-The rest of the App consists of four components.
+The rest of the App consists of five components.
 
 * <<Design-Ui,*`UI`*>>: The UI of the App.
 * <<Design-Logic,*`Logic`*>>: The command executor.
 * <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
 * <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
+* <<Design-Security,*`Security`*>>: Enforces Authentication
 
-Each of the four components
+Each of the five components
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
@@ -221,6 +222,22 @@ The `Model`,
 As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
+
+[[Design-Security]]
+=== Security component
+
+.Structure of the Model Component
+image::SecurityClassDiagram.png[width="800"]
+
+*API* : link:{repoURL}/src/main/java/seedu/address/security/Security.java[`Security.java`]
+
+The `Security` component is an authentication module that ensures the users that are using the application are
+recognized, and an instance of a authenticated user will be created every time a user is logged in so as to allow
+the application to do user-specific tasks.
+
+The Sequence Diagram when a user logs in is given below
+
+image::SecurityLoginSequenceDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
