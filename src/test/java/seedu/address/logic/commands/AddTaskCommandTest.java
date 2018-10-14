@@ -20,7 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.task.Task;
-import seedu.address.testutil.TaskBuilder;
+import UnRefactored.testutil.TaskBuilder;
 
 public class AddTaskCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
@@ -109,6 +109,11 @@ public class AddTaskCommandTest {
 
         @Override
         public void deleteTask(Task target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void completeTask(Task target) {
             throw new AssertionError("This method should not be called.");
         }
 

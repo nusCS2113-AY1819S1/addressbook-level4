@@ -22,21 +22,29 @@ public class CommandTestUtil {
 
     public static final String VALID_DEADLINE_1ST_JAN = "1/1";
     public static final String VALID_DEADLINE_31ST_MARCH = "31/3";
+    public static final String VALID_DEADLINE_12TH_MAY = "12/5";
     public static final String VALID_TITLE_1 = "Complete CS2113 Homework";
     public static final String VALID_TITLE_2 = "Start coding test units";
+    public static final String VALID_TITLE_3 = "Prepare OP2";
     public static final String VALID_DESCRIPTION_1 = "Refer to notes";
     public static final String VALID_DESCRIPTION_2 = "Do this before integration tests";
+    public static final String VALID_DESCRIPTION_3 = "OP2 has high weightage";
     public static final String VALID_PRIORITY_LEVEL_LOW = "low";
     public static final String VALID_PRIORITY_LEVEL_HIGH = "high";
+    public static final String VALID_PRIORITY_LEVEL_MEDIUM = "medium";
 
     public static final String DEADLINE_DESC_1ST_JAN = " " + PREFIX_DEADLINE + VALID_DEADLINE_1ST_JAN;
     public static final String DEADLINE_DESC_31ST_MARCH = " " + PREFIX_DEADLINE + VALID_DEADLINE_31ST_MARCH;
+    public static final String DEADLINE_DESC_12TH_MAY = " " + PREFIX_DEADLINE + VALID_DEADLINE_12TH_MAY;
     public static final String TITLE_DESC_1 = " " + PREFIX_TITLE + VALID_TITLE_1;
     public static final String TITLE_DESC_2 = " " + PREFIX_TITLE + VALID_TITLE_2;
+    public static final String TITLE_DESC_3 = " " + PREFIX_TITLE + VALID_TITLE_3;
     public static final String DESCRIPTION_DESC_1 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_1;
     public static final String DESCRIPTION_DESC_2 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_2;
+    public static final String DESCRIPTION_DESC_3 = " " + PREFIX_DESCRIPTION + VALID_DESCRIPTION_3;
     public static final String PRIORITY_LEVEL_DESC_LOW = " " + PREFIX_PRIORITY + VALID_PRIORITY_LEVEL_LOW;
     public static final String PRIORITY_LEVEL_DESC_HIGH = " " + PREFIX_PRIORITY + VALID_PRIORITY_LEVEL_HIGH;
+    public static final String PRIORITY_LEVEL_DESC_MEDIUM = " " + PREFIX_PRIORITY + VALID_PRIORITY_LEVEL_MEDIUM;
 
     public static final String INVALID_DEADLINE_DESC = " " + PREFIX_DEADLINE + "31/2"; // No 31st February in calendar
     public static final String INVALID_PRIORITY_LEVEL_DESC = " " + PREFIX_PRIORITY + "mid"; // not a priority level
@@ -111,20 +119,18 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredTaskList().size());
 
         Task task = model.getFilteredTaskList().get(targetIndex.getZeroBased());
-        final String[] splitName = task.getName().fullName.split("\\s+");
+        final String[] splitName = task.getTitle().split("\\s+");
         model.updateFilteredTaskList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredTaskList().size());
     }
 
-
+    */
     //Deletes the first task in {@code model}'s filtered list from {@code model}'s address book.
 
-    public static void deleteFirstPerson(Model model) {
+    public static void deleteFirstTask(Model model) {
         Task firstTask = model.getFilteredTaskList().get(0);
         model.deleteTask(firstTask);
         model.commitTaskBook();
     }
-    */
-
 }
