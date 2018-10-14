@@ -89,6 +89,7 @@ public class EditCommand extends Command {
      */
 
     public static Event createEditedEvent(Event eventToEdit, EditEventDescriptor editEventDescriptor) {
+
         assert eventToEdit != null;
 
         Name updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
