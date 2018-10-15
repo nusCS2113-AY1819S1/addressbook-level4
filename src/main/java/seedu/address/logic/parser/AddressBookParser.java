@@ -10,7 +10,6 @@ import javax.swing.JOptionPane;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.ClearSearchHistoryCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -107,9 +106,6 @@ public class AddressBookParser {
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-
-        case ClearSearchHistoryCommand.COMMAND_WORD:
-            return new ClearSearchHistoryCommand();
 
         case UndoSearchCommand.COMMAND_WORD:
             return new UndoSearchCommand();
