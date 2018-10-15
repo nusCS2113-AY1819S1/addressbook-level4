@@ -364,23 +364,18 @@ The `replyComment` and `deleteComment` command does similar methods and need not
 [NOTE]
 If the user uses the `find` command, the following functions will follow the indexing of the `find` command.
 
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::UndoRedoActivityDiagram.png[width="650"]
-
 ==== Design Considerations
 
-===== Aspect: How undo & redo executes
+===== Aspect: How comment functions executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the event being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 1 (current choice):** Comment section stored in eventmanager.xml.
+** Pros: Easy to parse because one field is used for comment section.
+** Cons: If a developer wants to manipulate specific comments through eventmanager.xml file there is no functions created for it.
+* **Alternative 2:** Store each comment as a seperate field and extract each comment individually.
+** Pros: No html tags will be stored in the field
+** Cons: New methods will need to be implemented to make many fields for comments.
 
-===== Aspect: Data structure to support the undo/redo commands
+===== Aspect: Data structure to support the comment function commands
 
 * **Alternative 1 (current choice):** Use a list to store the history of address book states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
