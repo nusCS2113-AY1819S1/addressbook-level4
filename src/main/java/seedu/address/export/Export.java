@@ -1,4 +1,4 @@
 package seedu.address.export;
 
-public class Export {
+public interface Export {
 }
