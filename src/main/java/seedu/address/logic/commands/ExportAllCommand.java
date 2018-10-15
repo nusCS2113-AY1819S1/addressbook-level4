@@ -1,9 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
-import java.io.IOException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
@@ -45,14 +42,10 @@ public class ExportAllCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         ObservableList<Person> personList = model.getFilteredPersonList();
-        try {
-            model.exportToCsv();
-        } catch (IOException e) {
-            throw new CommandException(MESSAGE_FAILURE);
-        }
-        //        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.exportAddressBook();
+        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
-//        throw new CommandException(String.format(MESSAGE_ARGUMENTS, filetype));
+        // throw new CommandException(String.format(MESSAGE_ARGUMENTS, filetype));
     }
 
     @Override

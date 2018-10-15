@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.io.IOException;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -85,7 +84,7 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Exports the current address book state to CSV file.
+     * Exports the current address book state to a .csv file.
      */
-    void exportToCsv() throws IOException;
+    void exportAddressBook();
 }
