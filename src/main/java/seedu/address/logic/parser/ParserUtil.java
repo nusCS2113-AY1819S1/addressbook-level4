@@ -190,29 +190,35 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String startDate} into a {@code LocalDate}.
+     * Parses a {@code String startTime} into a {@code StartTime}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
     public static StartTime parseStartTime(String startTime) throws ParseException {
         requireNonNull(startTime);
-        String trimmedLocation = startTime.trim();
+        String trimmedStartTime = startTime.trim();
         // TODO: WORK ON VALIDATING DATE
         //if (!Location.isValidLocation(trimmedLocation)) {
         //  throw new ParseException(Location.MESSAGE_LOCATION_CONSTRAINTS);
         //}
-        return new StartTime(startTime);
+        return new StartTime(trimmedStartTime);
     }
 
+    /**
+     * Parses a {@code String endTime} into a {@code EndTime}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
     public static EndTime parseEndTime(String endTime) throws ParseException {
         requireNonNull(endTime);
-        String trimmedLocation = endTime.trim();
+        String trimmedEndTime = endTime.trim();
         // TODO: WORK ON VALIDATING DATE
         //if (!Location.isValidLocation(trimmedLocation)) {
         //  throw new ParseException(Location.MESSAGE_LOCATION_CONSTRAINTS);
         //}
-        return new EndTime(endTime);
+        return new EndTime(trimmedEndTime);
     }
 
 
