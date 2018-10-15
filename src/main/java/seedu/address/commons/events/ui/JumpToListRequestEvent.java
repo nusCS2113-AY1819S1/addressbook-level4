@@ -17,7 +17,7 @@ public class JumpToListRequestEvent extends BaseEvent {
     }
 
     public JumpToListRequestEvent(ArrayList<Index> targetIndex) {
-        this.targetIndex = new ArrayList<>();
+        this.targetIndex = new ArrayList<>(extractIndexAsIntegers(targetIndex));
     }
 
     @Override
@@ -25,11 +25,11 @@ public class JumpToListRequestEvent extends BaseEvent {
         return getClass().getSimpleName();
     }
 
-    private ArrayList<Integer> extractIndexAsIntergers(ArrayList<Index> indexArrayList) {
-
+    private ArrayList<Integer> extractIndexAsIntegers(ArrayList<Index> indexArrayList) {
+        ArrayList<Integer> output = new ArrayList<>();
         for (Index index : indexArrayList) {
-
+            output.add(index.getZeroBased());
         }
-        return new ArrayList<>();
+        return output;
     }
 }

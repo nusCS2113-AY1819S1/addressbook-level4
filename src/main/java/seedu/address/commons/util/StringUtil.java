@@ -5,7 +5,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.StringTokenizer;
+
+import seedu.address.commons.core.index.Index;
 
 /**
  * Helper functions for handling strings.
@@ -64,5 +68,28 @@ public class StringUtil {
         } catch (NumberFormatException nfe) {
             return false;
         }
+    }
+
+    //@@author lekoook
+    public static ArrayList<Index> tokenizeIndexWithSpace(String input) {
+        ArrayList<Index> output = new ArrayList<>();
+        StringTokenizer tokenizer = new StringTokenizer(input);
+        while (tokenizer.hasMoreTokens()) {
+            Index zeroBasedIndex = Index.fromOneBased(Integer.valueOf(tokenizer.nextToken()));
+            output.add(zeroBasedIndex);
+        }
+        return output;
+    }
+
+    public static boolean areNonZeroUnsignedInteger(String input) {
+        requireNonNull(input);
+
+        StringTokenizer tokenizer = new StringTokenizer(input);
+        while (tokenizer.hasMoreTokens()) {
+            if (Integer.valueOf(tokenizer.nextToken()) - 1 < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

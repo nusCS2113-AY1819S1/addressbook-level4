@@ -189,17 +189,17 @@ public class ParserUtil {
 
     //@@author lekoook
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} list and returns it. Leading and trailing whitespaces will be
-     * trimmed.
+     * Parses one or more {@code oneBasedIndex} into an {@code Index} list and returns it. 
+     * Leading and trailing whitespaces will be trimmed.
      * @param oneBasedIndex the user input index.
      * @return the list of {@code Index} to return.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static ArrayList<Index> parseMultipleIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        if (!StringUtil.areNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return new ArrayList<>();
+        return StringUtil.tokenizeIndexWithSpace(oneBasedIndex);
     }
 }
