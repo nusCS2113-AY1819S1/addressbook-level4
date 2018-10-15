@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_RANGE;
 
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
