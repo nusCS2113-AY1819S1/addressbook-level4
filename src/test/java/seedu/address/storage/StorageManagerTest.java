@@ -80,7 +80,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
+    public void handleAddressBookChangedEventExceptionThrownEventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlTodoListStorageExceptionThrowingStub(Paths.get("dummy")),
@@ -108,7 +108,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void handleTodoListChangedEvent_exceptionThrown_eventRaised() {
+    public void handleTodoListChangedEventExceptionThrownEventRaised() {
         // Create a StorageManager while injecting a stub that throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlAddressBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new XmlTodoListStorageExceptionThrowingStub(Paths.get("dummy")),
