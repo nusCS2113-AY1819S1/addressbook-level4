@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static UnRefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
@@ -29,7 +29,7 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
         String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
         String description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        PriorityLevel priority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
+        PriorityLevel priority = ParserUtil.parsePriorityLevel(argMultimap.getValue(PREFIX_PRIORITY).get());
 
         Task task = new Task(title, description, priority);
 

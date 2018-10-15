@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static UnRefactored.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.commons.core.ComponentManager;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.TaskBookChangedEvent;
+import UnRefactored.commons.core.ComponentManager;
+import UnRefactored.commons.core.LogsCenter;
+import UnRefactored.commons.events.model.TaskBookChangedEvent;
 import seedu.address.model.task.Task;
 
 /**
@@ -70,8 +70,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addTask(Task person) {
-        versionedTaskBook.addTask(person);
+    public void completeTask(Task target) {
+        versionedTaskBook.completeTask(target);
+        indicateTaskBookChanged();
+    }
+
+    @Override
+    public void addTask(Task task) {
+        versionedTaskBook.addTask(task);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateTaskBookChanged();
     }
