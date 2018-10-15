@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Friend;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -28,6 +29,7 @@ public class PersonBuilder {
     private Address address;
     private Set<Tag> tags;
     private TimeTable weekly;
+    private Set<Friend> friendList;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -36,6 +38,7 @@ public class PersonBuilder {
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
         weekly = new TimeTable();
+        friendList = new HashSet<>();
     }
 
     /**
@@ -48,6 +51,7 @@ public class PersonBuilder {
         address = personToCopy.getAddress();
         tags = new HashSet<>(personToCopy.getTags());
         weekly = personToCopy.getTimeTable();
+        friendList = new HashSet<>(personToCopy.getFriends());
     }
 
     /**
@@ -91,7 +95,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, address, tags, weekly);
+        return new Person(name, phone, email, address, tags, weekly, friendList);
     }
 
 }

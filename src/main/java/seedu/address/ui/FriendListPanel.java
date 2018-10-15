@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,8 +16,9 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 
-import java.util.logging.Logger;
-
+/**
+ * Displays the friends in the first panel of the app
+ */
 public class FriendListPanel extends UiPart<Region> {
 
     private static final String FXML = "friendListPanel.fxml";

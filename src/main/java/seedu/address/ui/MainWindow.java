@@ -23,7 +23,6 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Friend;
 import seedu.address.model.person.Person;
 import seedu.address.security.Security;
 import seedu.address.security.UserStub;

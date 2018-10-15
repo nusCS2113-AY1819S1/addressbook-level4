@@ -129,6 +129,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Person> getFriendList(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }

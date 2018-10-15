@@ -12,7 +12,6 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Friend;
 import seedu.address.model.person.FriendListPredicate;
 import seedu.address.model.person.Person;
 
@@ -107,7 +106,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Person> getFriendList(Person person) {
         requireNonNull(person);
-        friendList.setPredicate(PredicateFromPerson(person));
+        friendList.setPredicate(predicateFromPerson(person));
         return FXCollections.unmodifiableObservableList(friendList);
     }
 
@@ -158,7 +157,7 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
-    public FriendListPredicate PredicateFromPerson(Person person) {
+    public FriendListPredicate predicateFromPerson(Person person) {
         return new FriendListPredicate(person.getFriends());
     }
 
