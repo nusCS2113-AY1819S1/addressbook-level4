@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
@@ -40,6 +41,7 @@ import seedu.recruit.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    // Candidates
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_GENDER_AMY = "F";
@@ -93,6 +95,26 @@ public class CommandTestUtil {
 
     public static final EditCandidateCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCandidateCommand.EditPersonDescriptor DESC_BOB;
+
+    // Company
+    public static final String VALID_NAME_ALFA = "Alfa Romeo Automobiles";
+    public static final String VALID_NAME_BMW = "BMW AG";
+    public static final String VALID_PHONE_ALFA = "33333333";
+    public static final String VALID_PHONE_BMW = "44444444";
+    public static final String VALID_EMAIL_ALFA = "alfa@example.com";
+    public static final String VALID_EMAIL_BMW = "bmw@example.com";
+    public static final String VALID_ADDRESS_ALFA = "Block 312, Alfa Romeo Street 1";
+    public static final String VALID_ADDRESS_BMW = "Block 123, Bmw Street 3";
+
+    public static final String NAME_DESC_ALFA = " " + PREFIX_COMPANY_NAME + VALID_NAME_ALFA;
+    public static final String NAME_DESC_BMW = " " + PREFIX_COMPANY_NAME + VALID_NAME_BMW;
+    public static final String PHONE_DESC_ALFA = " " + PREFIX_PHONE + VALID_PHONE_ALFA;
+    public static final String PHONE_DESC_BMW = " " + PREFIX_PHONE + VALID_PHONE_BMW;
+    public static final String EMAIL_DESC_ALFA = " " + PREFIX_EMAIL + VALID_EMAIL_ALFA;
+    public static final String EMAIL_DESC_BMW = " " + PREFIX_EMAIL + VALID_EMAIL_BMW;
+    public static final String ADDRESS_DESC_ALFA = " " + PREFIX_ADDRESS + VALID_ADDRESS_ALFA;
+    public static final String ADDRESS_DESC_BMW = " " + PREFIX_ADDRESS + VALID_ADDRESS_BMW;
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

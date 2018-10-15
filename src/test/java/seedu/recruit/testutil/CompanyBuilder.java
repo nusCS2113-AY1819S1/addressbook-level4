@@ -53,6 +53,42 @@ public class CompanyBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Phone} of the {@code Company} that we are building.
+     */
+
+    public CompanyBuilder withPhone(String phone) {
+        this.phone = new Phone(phone);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Email} of the {@code Company} that we are building.
+     */
+
+    public CompanyBuilder withEmail(String email) {
+        this.email = new Email(email);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Address} of the {@code Company} that we are building.
+     */
+
+    public CompanyBuilder withAddress(String address) {
+        this.address = new Address(address);
+        return this;
+    }
+
+    /**
+     * Sets the {@code jobList} of the {@code Company} that we are building.
+     */
+
+    public CompanyBuilder withJobList(UniqueJobList jobList) {
+        this.jobList = jobList;
+        return this;
+    }
+
     public Company build() {
         return new Company(companyName, address, email, phone, jobList);
     }
