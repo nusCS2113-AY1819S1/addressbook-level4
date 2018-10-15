@@ -2,6 +2,7 @@ package seedu.address.model.task;
 
 import java.util.Objects;
 
+//@@author JeremyInElysium
 /**
  * Represents a Milestone for any Task in the TaskBook
  */
