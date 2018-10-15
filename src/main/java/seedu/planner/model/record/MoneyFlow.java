@@ -30,15 +30,12 @@ public class MoneyFlow {
     private static final String MONEYFLOW_WHOLE_NUMBER_NONZERO_REGEX = "[1-9]{1}\\d*";
     private static final String MONEYFLOW_DECIMAL_PART_REGEX = ".\\d+";
     private static final String MONEYFLOW_SIGN_PART_REGEX = "[\\+-]";
-
     /**
      * This only represents the numerical part of the string pattern.
      */
-
     // UNSIGNED_MONEYFLOW_VALIDATION_REGEX = "(0|[1-9]{1}\d*)($|.\d+)"
     private static final String UNSIGNED_MONEYFLOW_VALIDATION_REGEX = "(" + MONEYFLOW_WHOLE_NUMBER_ZERO_REGEX + "|"
             + MONEYFLOW_WHOLE_NUMBER_NONZERO_REGEX + ")" + "(" + "$" + "|" + MONEYFLOW_DECIMAL_PART_REGEX + ")";
-
     /**
      * This represents the whole pattern.
      */
