@@ -1,8 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_SIMILARITY_FOUND;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -38,6 +41,8 @@ public class BookInventoryParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
 
+    private static ArrayList<String> commandList;
+    private static DiceCoefficient diceCoefficient;
     @FXML
     private StackPane personListPanelPlaceholder;
 
@@ -59,6 +64,23 @@ public class BookInventoryParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        diceCoefficient = new DiceCoefficient();
+        commandList = new ArrayList<>();
+        commandList.add(AddCommand.COMMAND_WORD);
+        commandList.add(EditCommand.COMMAND_WORD);
+        commandList.add(SellCommand.COMMAND_WORD);
+        commandList.add(SelectCommand.COMMAND_WORD);
+        commandList.add(DeleteCommand.COMMAND_WORD);
+        commandList.add(StockCommand.COMMAND_WORD);
+        commandList.add(ClearCommand.COMMAND_WORD);
+        commandList.add(FindCommand.COMMAND_WORD);
+        commandList.add(HistoryCommand.COMMAND_WORD);
+        commandList.add(ExitCommand.COMMAND_WORD);
+        commandList.add(HelpCommand.COMMAND_WORD);
+        commandList.add(UndoCommand.COMMAND_WORD);
+        commandList.add(RedoCommand.COMMAND_WORD);
+
 
         switch (commandWord) {
 
@@ -107,8 +129,16 @@ public class BookInventoryParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
+
         default:
+        {
+            for (String command : commandList) {
+                if (diceCoefficient(commandWord, command) > 0.5) {
+                    throw new ParseException(MESSAGE_SIMILARITY_FOUND + command + "?");
+                }
+            }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
         }
     }
 }
