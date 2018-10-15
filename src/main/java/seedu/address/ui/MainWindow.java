@@ -199,9 +199,9 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-//    public PersonListPanel getPersonListPanel() {
-//        return personListPanel;
-//    }
+    public PersonListPanel getPersonListPanel() {
+        return personListPanel;
+    }
 
     void releaseResources() {
         browserPanel.freeResources();

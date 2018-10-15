@@ -28,7 +28,7 @@ public class NoteListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Note> dataList) {
         notesListView.setItems(dataList);
-        notesListView.setCellFactory(listView -> new notesListViewCell());
+        notesListView.setCellFactory(listView -> new NotesListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -43,25 +43,9 @@ public class NoteListPanel extends UiPart<Region> {
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
-     */
-//    private void scrollTo(int index) {
-//        Platform.runLater(() -> {
-//            personListView.scrollTo(index);
-//            personListView.getSelectionModel().clearAndSelect(index);
-//        });
-//    }
-
-//    @Subscribe
-//    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-//        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-//        scrollTo(event.targetIndex);
-//    }
-
-    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
-    class notesListViewCell extends ListCell<Note> {
+    class NotesListViewCell extends ListCell<Note> {
         @Override
         protected void updateItem(Note note, boolean empty) {
             super.updateItem(note, empty);
