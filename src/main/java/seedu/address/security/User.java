@@ -1,16 +1,19 @@
 package seedu.address.security;
 
+import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /***
  * Represents the authenticated User
  */
 public class User {
+    private Model model;
     private String username;
     private Person person;
 
-    public User(String username) {
+    public User(String username, Model model) {
         this.username = username;
+        this.model = model;
         //this.person = matchPerson(username);
     }
 
