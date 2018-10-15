@@ -37,12 +37,15 @@ public class CsvWriter {
     public CsvWriter(ObservableList<Person> persons) {
         requireAllNonNull(persons);
 
-        // TODO: lift this up to a exportFileWriter interface
+        // TODO: Refactor this to a exportFileWriter interface
         logger.fine("Initializing with output file: " + outputFilepath.toString());
 
         this.persons = persons;
     }
 
+    /**
+     * Writes to the .csv file as defined in {@code outputFilepath}.
+     */
     public void writeToCsv() {
         try {
 
@@ -54,8 +57,8 @@ public class CsvWriter {
 
             List<String[]> data = new ArrayList<>();
             persons.forEach(person -> {
-                String[] details = convertToStringArray(person);
-                data.add(details);
+                String[] personDetails = convertToStringArray(person);
+                data.add(personDetails);
             });
 
             writer.writeAll(data);
@@ -66,12 +69,20 @@ public class CsvWriter {
         }
     }
 
+    // TODO: Implement a writeToCsv() with a specific filepath.
+
+    /**
+     *
+     * @param person {@code Person} A single person from the addressbook.
+     * @return A string array containing the name, phone, address, and email of
+     *          the {@code person}.
+     */
     private String[] convertToStringArray(Person person) {
-        String[] details = new String[header.length];
-        details[INDEX_PERSON_NAME] = person.getName().toString();
-        details[INDEX_PERSON_PHONE] = person.getPhone().toString();
-        details[INDEX_PERSON_ADDRESS] = person.getAddress().toString();
-        details[INDEX_PERSON_EMAIL] = person.getEmail().toString();
-        return details;
+        String[] personDetails = new String[header.length];
+        personDetails[INDEX_PERSON_NAME] = person.getName().toString();
+        personDetails[INDEX_PERSON_PHONE] = person.getPhone().toString();
+        personDetails[INDEX_PERSON_ADDRESS] = person.getAddress().toString();
+        personDetails[INDEX_PERSON_EMAIL] = person.getEmail().toString();
+        return personDetails;
     }
 }
