@@ -26,9 +26,9 @@ public class CsvWriter {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private static final int INDEX_PERSON_NAME = 0;
-    private static final int INDEX_PERSON_PHONE = 2;
-    private static final int INDEX_PERSON_ADDRESS = 3;
-    private static final int INDEX_PERSON_EMAIL = 4;
+    private static final int INDEX_PERSON_PHONE = 1;
+    private static final int INDEX_PERSON_ADDRESS = 2;
+    private static final int INDEX_PERSON_EMAIL = 3;
 
     private final String[] header = { "Name", "Phone", "Address", "Email" };
     private final ObservableList<Person> persons;
