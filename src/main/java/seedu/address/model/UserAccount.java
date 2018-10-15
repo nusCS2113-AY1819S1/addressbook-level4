@@ -6,9 +6,13 @@ import java.nio.file.Paths;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
+
 import seedu.address.model.user.User;
 import seedu.address.storage.JsonUserStorage;
 
+/**
+ * Represents user account authentication
+ */
 public class UserAccount {
 
     private JsonUserStorage userStorage;
@@ -24,6 +28,9 @@ public class UserAccount {
         }
     }
 
+    /**
+     * Returns true if user exists in the JSON file.
+     */
     public boolean userExists(User user) {
         String loggedUsername = user.getUsername().toString();
         String loggedPassword = user.getPassword().toString();
@@ -31,8 +38,10 @@ public class UserAccount {
 
         try {
             JSONObject userAccounts = userStorage.getUserAccounts();
-            String password = (String) userAccounts.get(loggedUsername);
-            isPresent = password.equals(loggedPassword);
+            if (userAccounts.containsKey(loggedUsername)) {
+                String password = (String) userAccounts.get(loggedUsername);
+                isPresent = password.equals(loggedPassword);
+            }
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         }
