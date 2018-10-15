@@ -207,8 +207,8 @@ asciidoctor {
         idprefix: '',  // for compatibility with GitHub preview
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-        'site-name': 'AddressBook-Level4',
-        'site-githuburl': 'https://github.com/se-edu/addressbook-level4',
+        'site-name': 'Drink-IO',
+        'site-githuburl': 'https://cs2113-ay1819s1-w12-4.github.io/main/',
         'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
     ]
 
