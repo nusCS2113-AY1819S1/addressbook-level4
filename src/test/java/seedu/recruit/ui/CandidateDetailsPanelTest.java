@@ -119,6 +119,6 @@ public class CandidateDetailsPanelTest extends GuiUnitTest {
         uiPartRule.setUiPart(CandidateDetailsPanel);
 
         candidateDetailsPanelHandle = new CandidateDetailsPanelHandle(getChildNode(CandidateDetailsPanel.getRoot(),
-                CandidateDetailsPanelHandle.PERSON_LIST_VIEW_ID));
+                CandidateDetailsPanelHandle.CANDIDATE_DETAILS_VIEW_ID));
     }
 }

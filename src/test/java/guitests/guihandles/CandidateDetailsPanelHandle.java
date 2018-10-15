@@ -9,10 +9,10 @@ import javafx.scene.control.ListView;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * Provides a handle for {@code PersonListPanel} containing the list of {@code CandidateCard}.
+ * Provides a handle for {@code CandidateDetailsPanel} containing the list of {@code CandidateCard}.
  */
 public class CandidateDetailsPanelHandle extends NodeHandle<ListView<Candidate>> {
-    public static final String PERSON_LIST_VIEW_ID = "#candidateDetailsView";
+    public static final String CANDIDATE_DETAILS_VIEW_ID = "#candidateDetailsView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 

@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
@@ -25,6 +26,8 @@ public class CandidateDetailsPanel extends UiPart<Region> {
 
     @FXML
     private ListView<Candidate> candidateDetailsView;
+    @FXML
+    private VBox cardPane;
     @FXML
     private Label name;
     @FXML
