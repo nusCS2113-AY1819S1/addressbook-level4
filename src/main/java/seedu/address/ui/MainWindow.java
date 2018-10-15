@@ -23,7 +23,9 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.security.Security;
+import seedu.address.security.UserStub;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -152,7 +154,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        friendListPanel = new FriendListPanel(logic.getFilteredPersonList());
+        friendListPanel = new FriendListPanel(logic.getFriendList(UserStub.getUser()));
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
