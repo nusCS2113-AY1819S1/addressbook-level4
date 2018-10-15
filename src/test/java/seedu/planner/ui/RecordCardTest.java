@@ -16,7 +16,7 @@ public class RecordCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
-        Record recordWithNoTags = new RecordBuilder().withTags(new String[0]).build();
+        Record recordWithNoTags = new RecordBuilder().withTags().build();
         RecordCard recordCard = new RecordCard(recordWithNoTags, 1);
         uiPartRule.setUiPart(recordCard);
         assertCardDisplay(recordCard, recordWithNoTags, 1);

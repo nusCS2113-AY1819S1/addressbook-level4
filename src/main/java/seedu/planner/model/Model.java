@@ -1,5 +1,6 @@
 package seedu.planner.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import seedu.planner.model.record.Record;
 /**
  * The API of the Model component.
  */
+
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Record> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
@@ -30,6 +32,8 @@ public interface Model {
      * The record must exist in the financial planner.
      */
     void deleteRecord(Record target);
+
+    void deleteListRecord(List<Record> targetList);
 
     /**
      * Adds the given record.

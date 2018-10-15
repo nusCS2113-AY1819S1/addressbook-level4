@@ -61,8 +61,8 @@ public class ListCommandTest {
     @Test
     public void execute_listIsFilteredWithDateIntervals_showsCorrectList() {
         showRecordAtIndex(model, INDEX_FIRST_RECORD);
-        Model expectedModelAfterFilter = filterListWithSpecificDateInterval(expectedModel, TYPICAL_START_DATE,
-                TYPICAL_END_DATE);
+        Model expectedModelAfterFilter = filterListWithSpecificDateInterval(
+                expectedModel, TYPICAL_START_DATE, TYPICAL_END_DATE);
         assertCommandSuccess(new ListCommand(TYPICAL_START_DATE, TYPICAL_END_DATE), model, commandHistory,
                 ListCommand.MESSAGE_SUCCESS, expectedModelAfterFilter);
     }
