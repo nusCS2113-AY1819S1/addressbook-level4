@@ -340,7 +340,7 @@ Step 1. The user launches the application, click on an event or types `select IN
 
 image::ShowCommentSection.png[width=""]
 
-Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. The addComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `addComment("May I ask, what is the attire for the event?")`. The new comment is added to the end of the comment section for event 1 and is stored into `eventmanager.xml`. 
+Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. The addComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `addComment("May I ask, what is the attire for the event?")`. The new comment is added to the end of the comment section for event 1 and is stored into `eventmanager.xml`.
 
 image::AddComment.png[width="800"]
 
