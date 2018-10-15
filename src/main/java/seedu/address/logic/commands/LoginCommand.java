@@ -34,17 +34,13 @@ public class LoginCommand extends Command {
         toLogin = user;
     }
 
-    //TODO LINK TO MODEL AND STORAGE
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        String username = toLogin.getUsername().toString();
-        String password = toLogin.getPassword().toString();
-
-        if (!(username.equals("admin") && password.equals("root"))) {
+        if (!model.userExists(toLogin)) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
         setCurrentUser(toLogin);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, username));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin.getUsername().toString()));
     }
 }

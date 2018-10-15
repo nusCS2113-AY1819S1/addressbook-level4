@@ -1,39 +1,54 @@
 package seedu.address.storage;
 
-import java.nio.file.Path;
-import java.util.Optional;
-
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.JsonUtil;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import seedu.address.model.user.User;
 
-/**
- * A class to access Users stored in the hard disk as a JSON file.
- */
-public class JsonUserStorage implements UserStorage {
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
+public class JsonUserStorage {
 
     private Path filePath;
 
-    public JsonUserStorage(Path filePath) {
+    public JsonUserStorage(Path filePath) throws IOException {
         this.filePath = filePath;
+        createUserFile();
     }
 
-    @Override
-    public Path getUserFilePath() {
-        return filePath;
+    public boolean userExists(User user) {
+        String loggedUsername = user.getUsername().toString();
+        String loggedPassword = user.getPassword().toString();
+        JSONParser parser = new JSONParser();
+        boolean isPresent = false;
+
+        try {
+            Object object = parser.parse(new FileReader("./" + filePath.toString()));
+
+            JSONObject jsonObject = (JSONObject) object;
+            String password = (String) jsonObject.get(loggedUsername);
+            isPresent = password.equals(loggedPassword);
+        } catch (ParseException | IOException e) {
+            e.printStackTrace();
+        }
+
+        return isPresent;
     }
 
-    @Override
-    public Optional<User> readUser() throws DataConversionException {
-        return readUser(filePath);
-    }
+    private void createUserFile() throws IOException {
+        if (!Files.exists(filePath)) {
+            Files.createFile(filePath);
+        }
 
-    /**
-     * Similar to {@link #readUser()}
-     * @param userFilePath location of the data. Cannot be null.
-     * @throws DataConversionException if the file format is not as expected.
-     */
-    private Optional<User> readUser(Path userFilePath) throws  DataConversionException {
-        return JsonUtil.readJsonFile(userFilePath, User.class);
+        JSONObject object = new JSONObject();
+        object.put("admin", "root");
+
+        FileWriter file = new FileWriter("./" + filePath.toString());
+        file.write(object.toJSONString());
+        file.flush();
     }
 }

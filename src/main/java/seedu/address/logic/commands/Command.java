@@ -12,9 +12,6 @@ import seedu.address.model.user.Username;
  */
 public abstract class Command {
 
-    private static final String MESSAGE_LOGIN = "Please login first!";
-    private static final String MESSAGE_ADMIN = "No admin access rights!";
-
     private final Username username = new Username("stub");
     private final Password password = new Password("stub");
     private User currentUser = new User(username, password);
@@ -40,29 +37,16 @@ public abstract class Command {
     }
 
     /**
+     * Returns currently logged in user.
+     */
+    User getCurrentUser() {
+        return currentUser;
+    }
+
+    /**
      * Clears current logged in user.
      */
     void clearCurrentUser() {
         currentUser.setLoginStatus(false, false);
-    }
-
-    /**
-     * Checks whether a user is logged in.
-     * @throws CommandException
-     */
-    public void authenticate() throws CommandException {
-        if (!currentUser.getLoginStatus()) {
-            throw new CommandException(MESSAGE_LOGIN);
-        }
-    }
-
-    /**
-     * Checks whether a user has admin rights.
-     * @throws CommandException
-     */
-    public void adminCheck() throws CommandException {
-        if (!currentUser.getAdminStatus()) {
-            throw new CommandException(MESSAGE_ADMIN);
-        }
     }
 }
