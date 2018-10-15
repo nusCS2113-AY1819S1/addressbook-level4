@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
@@ -130,7 +131,7 @@ public class MainWindow extends UiPart<Stage> {
              * when user switches from Company Book to Candidate Book
              */
             @Override
-            public void handleBookChange(ActionEvent event) {
+            public void handle(ActionEvent event) {
                 if (!panelViewPlaceHolder.getChildren().isEmpty()) {
                     panelViewPlaceHolder.getChildren().remove(0);
                     panelViewPlaceHolder.getChildren().add(candidateDetailsPanel.getRoot());
@@ -147,7 +148,7 @@ public class MainWindow extends UiPart<Stage> {
              * when user switches from Candidate Book to Company Book
              */
             @Override
-            public void handleBookChange(ActionEvent event) {
+            public void handle(ActionEvent event) {
                 if (!panelViewPlaceHolder.getChildren().isEmpty()) {
                     panelViewPlaceHolder.getChildren().remove(0);
                     panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
