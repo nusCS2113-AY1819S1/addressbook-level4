@@ -49,16 +49,16 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Unique
      * {@code XmlAdaptedRecord}.
      */
     public UniqueRecordList toModelType() throws IllegalValueException {
-        UniqueRecordList uniqueRecordList = new UniqueRecordList();
+        UniqueRecordList recordList = new UniqueRecordList();
         for (XmlAdaptedRecord p : records) {
             Record record = p.toModelType();
             try {
-                uniqueRecordList.add(record);
+                recordList.add(record);
             } catch (DuplicateRecordException e) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
             }
         }
-        return uniqueRecordList;
+        return recordList;
     }
     // TODO: change this to follow the others
     @Override
