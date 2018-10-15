@@ -22,14 +22,14 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlFinancialPlannerStorage.class);
 
-    private Path recordfilePath;
+    private Path filePath;
 
     public XmlFinancialPlannerStorage(Path filePath) {
-        this.recordfilePath = filePath;
+        this.filePath = filePath;
     }
 
     public Path getFinancialPlannerFilePath() {
-        return recordfilePath;
+        return filePath;
     }
 
     @Override
@@ -70,12 +70,12 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
      * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
         requireNonNull(financialPlanner);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableRecordList(financialPlanner));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableFinancialPlanner(financialPlanner));
     }
 
     /**
@@ -89,6 +89,6 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableRecordList(financialPlanner));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableFinancialPlanner(financialPlanner));
     }
 }

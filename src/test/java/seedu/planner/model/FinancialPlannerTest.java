@@ -19,6 +19,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
 import seedu.planner.testutil.RecordBuilder;
@@ -96,7 +97,7 @@ public class FinancialPlannerTest {
      */
     private static class FinancialPlannerStub implements ReadOnlyFinancialPlanner {
         private final ObservableList<Record> records = FXCollections.observableArrayList();
-
+        private final ObservableList<Limit> limits = FXCollections.observableArrayList();
         FinancialPlannerStub(Collection<Record> records) {
             this.records.setAll(records);
         }
@@ -105,6 +106,12 @@ public class FinancialPlannerTest {
         public ObservableList<Record> getRecordList() {
             return records;
         }
+
+        @Override
+        public ObservableList<Limit> getLimitList() {
+            return limits;
+        }
+
     }
 
 }

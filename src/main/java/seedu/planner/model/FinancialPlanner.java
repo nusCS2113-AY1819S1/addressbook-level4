@@ -6,10 +6,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 
-import seedu.planner.model.record.DateBasedLimitList;
-import seedu.planner.model.record.Limit;
-import seedu.planner.model.record.Record;
-import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.record.*;
 
 /**
  * Wraps all data at the planner-book level
@@ -96,6 +93,23 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void addLimit(Limit l) { limits.add(l);}
 
     /**
+     * check whether the records' money has already exceeded the limit.
+     * return true if limit exceeded.
+     * @param limit
+     * @return
+     */
+    public boolean isExceededLimit (Limit limit) {
+        Double recordsMoney = 0.0;
+
+        for (Record i: records){
+            if (limit.isInsideDatePeriod(i)){
+                recordsMoney += i.getMoneyFlow().toDouble();
+            }
+        }
+
+        return (limit.isExceeded(recordsMoney));
+    }
+    /**
      * Replaces the given record {@code target} in the list with {@code editedRecord}.
      * {@code target} must exist in the financial planner.
      * The record identity of {@code editedRecord} must not be the same as another existing record
@@ -125,7 +139,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     @Override
     public String toString() {
         return records.asUnmodifiableObservableList().size() + " records";
-        // TODO: refine later
+
     }
 
     @Override

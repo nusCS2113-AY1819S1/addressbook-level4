@@ -64,6 +64,13 @@ public interface Model {
     ObservableList<Record> getFilteredRecordList();
 
     /**
+     * This function will check whether the limit have been exceeded.
+     * @param limitIn
+     * @return
+     */
+    boolean isExceededLimit (Limit limitIn);
+
+    /**
      * Updates the filter of the filtered record list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */

@@ -19,6 +19,7 @@ import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.testutil.RecordBuilder;
 
@@ -104,12 +105,31 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addLimit(Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLimit(Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public boolean hasRecord(Record record) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public boolean hasSameDateLimit(Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deleteRecord(Record target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isExceededLimit (Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
 

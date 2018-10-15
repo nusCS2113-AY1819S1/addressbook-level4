@@ -105,6 +105,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateFinancialPlannerChanged();
     }
 
+    @Override
+    public boolean isExceededLimit (Limit limitIn) {
+        requireNonNull(limitIn);
+        return (versionedFinancialPlanner.isExceededLimit(limitIn));
+    }
+
     //=========== Filtered Record List Accessors =============================================================
 
     /**

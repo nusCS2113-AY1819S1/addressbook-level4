@@ -43,4 +43,27 @@ public class Limit {
     public MoneyFlow getLimitMoneyFlow() {
         return limitMoneyFlow;
     }
+
+    /**
+     * To test whether the given record is inside the limit date period.
+     * return true if it is.
+     * @param record
+     * @return
+     */
+    public boolean isInsideDatePeriod (Record record) {
+        Date recordDate;
+        recordDate = record.getDate();
+        return ((dateStart.isEarlierThan(recordDate) && dateEnd.isLaterThan(recordDate))
+            || dateEnd == recordDate || dateStart == recordDate);
+    }
+
+    /**
+     * To test whether the money amount has already exceeded the limit.
+     * return true if it exceeds.
+     * @param money
+     * @return
+     */
+    public boolean isExceeded (Double money) {
+        return (limitMoneyFlow.toDouble() < money);
+    }
 }

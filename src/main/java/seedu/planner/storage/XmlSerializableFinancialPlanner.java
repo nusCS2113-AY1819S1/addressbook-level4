@@ -16,7 +16,7 @@ import seedu.planner.model.record.Record;
  * An Immutable FinancialPlanner that is serializable to XML format
  */
 @XmlRootElement(name = "financialplanner")
-public class XmlSerializableRecordList extends XmlSerializableClass<FinancialPlanner> {
+public class XmlSerializableFinancialPlanner extends XmlSerializableClass<FinancialPlanner> {
 
     public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
 
@@ -27,7 +27,7 @@ public class XmlSerializableRecordList extends XmlSerializableClass<FinancialPla
      * Creates an empty XmlSerializableFinancialPlanner.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableRecordList() {
+    public XmlSerializableFinancialPlanner() {
 
         records = new ArrayList<>();
     }
@@ -35,7 +35,7 @@ public class XmlSerializableRecordList extends XmlSerializableClass<FinancialPla
     /**
      * Conversion
      */
-    public XmlSerializableRecordList(ReadOnlyFinancialPlanner src) {
+    public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
         this();
         records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
 
@@ -66,9 +66,9 @@ public class XmlSerializableRecordList extends XmlSerializableClass<FinancialPla
             return true;
         }
 
-        if (!(other instanceof XmlSerializableRecordList)) {
+        if (!(other instanceof XmlSerializableFinancialPlanner)) {
             return false;
         }
-        return records.equals(((XmlSerializableRecordList) other).records);
+        return records.equals(((XmlSerializableFinancialPlanner) other).records);
     }
 }
