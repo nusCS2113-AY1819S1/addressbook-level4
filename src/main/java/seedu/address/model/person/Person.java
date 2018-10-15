@@ -29,7 +29,7 @@ public class Person {
     private TimeTable weekly;
 
     // Friend list of the person
-    private final Set<Friend> friendList = new HashSet<>();
+    private Set<Friend> friendList;
 
     /**
      * Every field must be present and not null.
@@ -42,6 +42,7 @@ public class Person {
         this.address = address;
         this.tags.addAll(tags);
         this.weekly = timeTable;
+        this.friendList = friendList;
     }
 
     public Name getName() {

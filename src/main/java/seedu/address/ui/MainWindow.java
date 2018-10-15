@@ -23,6 +23,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Friend;
 import seedu.address.model.person.Person;
 import seedu.address.security.Security;
 import seedu.address.security.UserStub;
@@ -49,6 +50,7 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private LoginWindow loginWindow;
     private RegistrationWindow registrationWindow;
+    private Person person = UserStub.getUser();
 
     @FXML
     private Text friendText;
@@ -154,7 +156,7 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        friendListPanel = new FriendListPanel(logic.getFriendList(UserStub.getUser()));
+        friendListPanel = new FriendListPanel(logic.getFriendList(person));
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();

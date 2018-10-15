@@ -19,8 +19,12 @@ public class Friend {
         return friendName;
     }
 
-    private Boolean isValidFriendName(String friendName) {
+    @Override
+    public String toString() {
+        return friendName.toString();
+    }
 
+    private Boolean isValidFriendName(String friendName) {
         return true;
     }
 }

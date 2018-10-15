@@ -1,6 +1,5 @@
 package seedu.address.model.person;
 
-import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
 
@@ -15,8 +14,8 @@ public class FriendListPredicate implements Predicate<Person> {
     @Override
     public boolean test(Person person) {
         for (Friend friend : friendList) {
-            if (friend.getFriendName().equals(person.getName())) return true;
+            if (person.getName().equals(friend.getFriendName())) return true;
         }
-       return false;
+        return false;
     }
 }

@@ -104,6 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    @Override
     public ObservableList<Person> getFriendList(Person person) {
         requireNonNull(person);
         friendList.setPredicate(PredicateFromPerson(person));
