@@ -39,13 +39,23 @@ public class Attendees {
         return builder.toString();
     }
 
+    /**
+     * Add names to attendees list
+     * @param name The new name to be added.
+     * @return A new copy of updated Attendees.
+     */
+    public Attendees addName(String name) {
+        Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
+        updatedAttendees.add(name);
+        return new Attendees(updatedAttendees);
+    }
+
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Attendees// instanceof handles nulls
                 && attendeesSet.equals(((Attendees) other).attendeesSet)); // state check
     }
-
 
     @Override
     public int hashCode() {

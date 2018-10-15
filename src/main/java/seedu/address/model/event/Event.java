@@ -14,6 +14,7 @@ public class Event implements Comparable<Event> {
 
     public static final String MESSAGE_DESCRIPTION = " Description: ";
     public static final String MESSAGE_LOCATION = " Location: ";
+    public static final String MESSAGE_DATE = " Date: ";
     public static final String MESSAGE_START_TIME = " Start time: ";
     public static final String MESSAGE_END_TIME = " End time: ";
 
@@ -26,7 +27,6 @@ public class Event implements Comparable<Event> {
     private final StartTime startTime;
     private final EndTime endTime;
     private final Location location;
-
     private final Attendees attendees;
 
     /**
@@ -44,6 +44,24 @@ public class Event implements Comparable<Event> {
         this.endTime = endTime;
         this.location = location;
         attendees = new Attendees();
+
+    }
+
+    /**
+     * Overloaded constructor to construct event with existing attendees list
+     */
+
+    public Event(EventName eventName, Description description,
+                 LocalDate date, StartTime startTime, EndTime endTime, Location location, Attendees attendees) {
+        requireAllNonNull(eventName, description, startTime, endTime, location);
+
+        this.eventName = eventName;
+        this.description = description;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
+        this.attendees = attendees;
 
     }
 
