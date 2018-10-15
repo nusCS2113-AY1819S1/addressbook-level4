@@ -32,7 +32,7 @@ import com.google.api.services.gmail.model.Message;
 import javafx.collections.ObservableList;
 
 /**
- * Contains variables and emails pertaining to the Email Command
+ * Contains variables and functions pertaining to the Email Command
  */
 public class EmailUtil {
     /**
@@ -137,8 +137,7 @@ public class EmailUtil {
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }
-
-
+    
     /**
      * Create a MimeMessage using the parameters provided.
      *

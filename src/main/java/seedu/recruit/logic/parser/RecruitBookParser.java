@@ -47,6 +47,8 @@ public class RecruitBookParser {
      * Parses user input into command for execution.
      *
      * @param userInput full user input string
+     * @param state current Logic State, used for multi step commands
+     * @param emailUtil emailUtil variable passed from model manager to access boolean value isAreRecipientsCandidates
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
