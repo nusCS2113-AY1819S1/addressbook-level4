@@ -16,7 +16,9 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ExitRegisterEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.security.Security;
@@ -42,6 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private LoginWindow loginWindow;
+    private RegistrationWindow registrationWindow;
 
     @FXML
     private StackPane timetablePlaceholder;
@@ -82,6 +85,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         loginWindow = new LoginWindow(security);
+        registrationWindow = new RegistrationWindow(security);
     }
 
     public Stage getPrimaryStage() {
@@ -197,6 +201,15 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the Registration Window.
+     */
+    @FXML
+    public void handleRegister() {
+        loginWindow.hide();
+        registrationWindow.show();
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -221,5 +234,17 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleShowRegisterEvent(ShowRegisterEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleRegister();
+    }
+
+    @Subscribe
+    private void handleExitRegisterEvent(ExitRegisterEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleLogin();
     }
 }

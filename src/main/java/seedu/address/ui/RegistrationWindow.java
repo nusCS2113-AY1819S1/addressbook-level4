@@ -8,44 +8,48 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
-import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.events.ui.ShowRegisterEvent;
+import seedu.address.commons.events.ui.ExitRegisterEvent;
 import seedu.address.security.Security;
 
 /***
  * Controller for the login
  */
-public class LoginWindow extends UiPart<Stage> {
+public class RegistrationWindow extends UiPart<Stage> {
 
-    private static final String FXML = "LoginWindow.fxml";
+    private static final String FXML = "RegistrationWindow.fxml";
     private Security user;
     @FXML
     private TextField usernameTextField;
     @FXML
     private TextField passwordTextField;
     @FXML
+    private TextField phoneTextField;
+    @FXML
+    private TextField emailTextField;
+    @FXML
+    private TextField addressTextField;
+    @FXML
     private Label label;
 
     /**
-     * Creates a new LoginWindow.
+     * Creates a new Registration Window.
      *
-     * @param root Stage to use as the root of the HelpWindow.
+     * @param root Stage to use as the root of the Registration Window.
      */
-    public LoginWindow(Stage root) {
+    public RegistrationWindow(Stage root) {
         super(FXML, root);
 
 
-        root.setTitle("Login");
+        root.setTitle("Register");
         root.initModality(Modality.APPLICATION_MODAL);
         root.setMinWidth(250);
 
     }
 
     /**
-     * Creates a new LoginWindow.
+     * Creates a new Registration Window.
      */
-    public LoginWindow(Security user) {
+    public RegistrationWindow(Security user) {
         this(new Stage());
         this.user = user;
         //Links with eventsCenter I believe
@@ -71,16 +75,7 @@ public class LoginWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        //logger.fine("Showing help page about the application.");
         getRoot().show();
-    }
-
-    /***
-     * Hides the Login Window
-     */
-    public void hide() {
-        //logger.fine("Showing help page about the application.");
-        getRoot().hide();
     }
 
     /**
@@ -98,36 +93,25 @@ public class LoginWindow extends UiPart<Stage> {
     }
 
     /***
-     * Runs whenever the login button is clicked
+     * Runs whenever the register button is clicked
      */
-    public void handleLoginClick() {
-        user.login(usernameTextField.getText(), passwordTextField.getText());
-    }
-
-
-    /***
-     * Runs whenever the login button is clicked
-     */
-    public void handleRegisterClick() {
-        //Raise Event to create new window
-        raise(new ShowRegisterEvent());
+    public void handleRegister() {
+        //TODO
+        //user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
+        //        phoneTextField.getText(), addressTextField.getText());
     }
 
     @Subscribe
-    public void handleSuccessfulLoginEvent(SuccessfulLoginEvent loginSuccess) {
+    public void handleSuccessfulRegisterEvent(SuccessfulLoginEvent loginSuccess) {
         getRoot().hide();
     }
 
-    @Subscribe
-    public void handleUnsuccessfulLoginEvent(UnsuccessfulLoginEvent loginFailure) {
-        label.setText("Incorrect Username/Password");
-    }
-
     /**
-     * Closes the application.
+     * Closes the register window and open the login window
      */
     @FXML
     private void handleExit() {
-        raise(new ExitAppRequestEvent());
+        raise(new ExitRegisterEvent());
     }
+
 }
