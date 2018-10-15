@@ -11,122 +11,120 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.EventManagerChangedEvent;
-import seedu.address.model.event.Event;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
- * Represents the in-memory model of the event manager data.
+ * Represents the in-memory model of the address book data.
+ * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedEventManager versionedEManager;
-    private final FilteredList<Event> filteredEvents;
+    private final VersionedAddressBook versionedAddressBook;
+    private final FilteredList<Person> filteredPersons;
 
     /**
-     * Initializes a ModelManager with the given eventManager and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyEventManager eventManager, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(eventManager, userPrefs);
+        requireAllNonNull(addressBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + eventManager + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        versionedEManager = new VersionedEventManager(eventManager);
-        filteredEvents = new FilteredList<>(versionedEManager.getEventList());
+        versionedAddressBook = new VersionedAddressBook(addressBook);
+        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
     public ModelManager() {
-        this(new EventManager(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyEventManager newData) {
-        versionedEManager.resetData(newData);
-        indicateEManagerChanged();
+    public void resetData(ReadOnlyAddressBook newData) {
+        versionedAddressBook.resetData(newData);
+        indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyEventManager getEventManager() {
-        return versionedEManager;
+    public ReadOnlyAddressBook getAddressBook() {
+        return versionedAddressBook;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateEManagerChanged() {
-        raise(new EventManagerChangedEvent(versionedEManager));
+    private void indicateAddressBookChanged() {
+        raise(new AddressBookChangedEvent(versionedAddressBook));
     }
 
     @Override
-    public boolean hasEvent(Event event) {
-        requireNonNull(event);
-        return versionedEManager.hasEvent(event);
+    public synchronized void deletePerson(Person target) throws PersonNotFoundException {
+        versionedAddressBook.removePerson(target);
+        indicateAddressBookChanged();
     }
 
     @Override
-    public void deleteEvent(Event target) {
-        versionedEManager.removeEvent(target);
-        indicateEManagerChanged();
+    public synchronized void addPerson(Person person) throws DuplicatePersonException {
+        versionedAddressBook.addPerson(person);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        indicateAddressBookChanged();
     }
 
     @Override
-    public void addEvent(Event event) {
-        versionedEManager.addEvent(event);
-        updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
-        indicateEManagerChanged();
+    public void updatePerson(Person target, Person editedPerson)
+            throws DuplicatePersonException, PersonNotFoundException {
+        requireAllNonNull(target, editedPerson);
+
+        versionedAddressBook.updatePerson(target, editedPerson);
+        indicateAddressBookChanged();
     }
 
-    @Override
-    public void updateEvent(Event target, Event editedEvent) {
-        requireAllNonNull(target, editedEvent);
-
-        versionedEManager.updateEvent(target, editedEvent);
-        indicateEManagerChanged();
-    }
-
-    //=========== Filtered Event List Accessors =============================================================
+    //=========== Filtered Person List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Event} backed by the internal list of
-     * {@code versionedEManager}
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Event> getFilteredEventList() {
-        return FXCollections.unmodifiableObservableList(filteredEvents);
+    public ObservableList<Person> getFilteredPersonList() {
+        return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
     @Override
-    public void updateFilteredEventList(Predicate<Event> predicate) {
+    public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
-        filteredEvents.setPredicate(predicate);
+        filteredPersons.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoEventManager() {
-        return versionedEManager.canUndo();
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
     }
 
     @Override
-    public boolean canRedoEventManager() {
-        return versionedEManager.canRedo();
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
     }
 
     @Override
-    public void undoEventManager() {
-        versionedEManager.undo();
-        indicateEManagerChanged();
+    public void undoAddressBook() {
+        versionedAddressBook.undo();
+        indicateAddressBookChanged();
     }
 
     @Override
-    public void redoEventManager() {
-        versionedEManager.redo();
-        indicateEManagerChanged();
+    public void redoAddressBook() {
+        versionedAddressBook.redo();
+        indicateAddressBookChanged();
     }
 
     @Override
-    public void commitEventManager() {
-        versionedEManager.commit();
+    public void commitAddressBook() {
+        versionedAddressBook.commit();
     }
 
     @Override
@@ -143,8 +141,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedEManager.equals(other.versionedEManager)
-                && filteredEvents.equals(other.filteredEvents);
+        return versionedAddressBook.equals(other.versionedAddressBook)
+                && filteredPersons.equals(other.filteredPersons);
     }
 
 }

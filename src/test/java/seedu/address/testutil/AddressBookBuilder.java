@@ -1,34 +1,39 @@
 package seedu.address.testutil;
 
-import seedu.address.model.EventManager;
-import seedu.address.model.event.Event;
+import seedu.address.model.AddressBook;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A utility class to help with building Addressbook objects.
  * Example usage: <br>
- *     {@code EventManager ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
+ *     {@code AddressBook ab = new AddressBookBuilder().withPerson("John", "Doe").build();}
  */
 public class AddressBookBuilder {
 
-    private EventManager eventManager;
+    private AddressBook addressBook;
 
     public AddressBookBuilder() {
-        eventManager = new EventManager();
+        addressBook = new AddressBook();
     }
 
-    public AddressBookBuilder(EventManager eventManager) {
-        this.eventManager = eventManager;
+    public AddressBookBuilder(AddressBook addressBook) {
+        this.addressBook = addressBook;
     }
 
     /**
-     * Adds a new {@code Event} to the {@code EventManager} that we are building.
+     * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
-    public AddressBookBuilder withPerson(Event event) {
-        eventManager.addEvent(event);
+    public AddressBookBuilder withPerson(Person person) {
+        try {
+            addressBook.addPerson(person);
+        } catch (DuplicatePersonException dpe) {
+            throw new IllegalArgumentException("person is expected to be unique.");
+        }
         return this;
     }
 
-    public EventManager build() {
-        return eventManager;
+    public AddressBook build() {
+        return addressBook;
     }
 }

@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -30,7 +31,7 @@ public class CommandParserTestUtil {
     public static void assertParseFailure(Parser parser, String userInput, String expectedMessage) {
         try {
             parser.parse(userInput);
-            throw new AssertionError("The expected ParseException was not thrown.");
+            fail("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
             assertEquals(expectedMessage, pe.getMessage());
         }

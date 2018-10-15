@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import junit.framework.AssertionFailedError;
+
 /**
  * A set of assertion methods useful for writing tests.
  */
@@ -35,10 +37,10 @@ public class Assert {
                 return;
             }
 
-            throw new AssertionError(errorMessage, actualException);
+            throw new AssertionFailedError(errorMessage);
         }
 
-        throw new AssertionError(String.format(
+        throw new AssertionFailedError(String.format(
                 "Expected %s to be thrown, but nothing was thrown.", expectedException.getName()));
     }
 

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
-import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
 
 /**
  * A utility class for test cases.
@@ -33,23 +33,23 @@ public class TestUtil {
     }
 
     /**
-     * Returns the middle index of the event in the {@code model}'s event list.
+     * Returns the middle index of the person in the {@code model}'s person list.
      */
     public static Index getMidIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredEventList().size() / 2);
+        return Index.fromOneBased(model.getAddressBook().getPersonList().size() / 2);
     }
 
     /**
-     * Returns the last index of the event in the {@code model}'s event list.
+     * Returns the last index of the person in the {@code model}'s person list.
      */
     public static Index getLastIndex(Model model) {
-        return Index.fromOneBased(model.getFilteredEventList().size());
+        return Index.fromOneBased(model.getAddressBook().getPersonList().size());
     }
 
     /**
-     * Returns the event in the {@code model}'s event list at {@code index}.
+     * Returns the person in the {@code model}'s person list at {@code index}.
      */
-    public static Event getPerson(Model model, Index index) {
-        return model.getFilteredEventList().get(index.getZeroBased());
+    public static Person getPerson(Model model, Index index) {
+        return model.getAddressBook().getPersonList().get(index.getZeroBased());
     }
 }

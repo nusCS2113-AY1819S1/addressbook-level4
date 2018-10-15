@@ -1,19 +1,19 @@
 package seedu.address.ui;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.EventSelectionChangedEvent;
-import seedu.address.model.event.Event;
+import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.model.person.Person;
 
 /**
  * The Browser Panel of the App.
@@ -21,12 +21,12 @@ import seedu.address.model.event.Event;
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
-    public static final String SEARCH_PAGE = "EventSearchPage.html";
-
+    public static final String SEARCH_PAGE_URL =
+            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     @FXML
     private WebView browser;
@@ -35,36 +35,14 @@ public class BrowserPanel extends UiPart<Region> {
         super(FXML);
 
         // To prevent triggering events for typing inside the loaded Web page.
-        getRoot().setOnKeyPressed(javafx.event.Event::consume);
+        getRoot().setOnKeyPressed(Event::consume);
 
         loadDefaultPage();
         registerAsAnEventHandler(this);
     }
 
-    /**
-     * Gets the URL without parameters
-     */
-    public static URL getSearchPageUrlWithoutName() {
-        return MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
-    }
-
-    /**
-     * Formats HTML file path into string
-     */
-    private String formatEventPageUrl(Event event) {
-        URL searchPage = MainApp.class.getResource(FXML_FILE_FOLDER + SEARCH_PAGE);
-        String searchPageString = searchPage.toString()
-                + "?name=" + event.getName();
-
-        return searchPageString;
-    }
-
-    /**
-     * Loads a HTML file with variables passed into it
-     */
-    private void loadEventPage(Event event) throws MalformedURLException {
-        URL searchPage = new URL(formatEventPageUrl(event));
-        loadPage(searchPage.toExternalForm());
+    private void loadPersonPage(Person person) {
+        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
     }
 
     public void loadPage(String url) {
@@ -87,8 +65,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleEventSelectionChangedEvent(EventSelectionChangedEvent event) throws MalformedURLException {
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadEventPage(event.getNewSelection());
+        loadPersonPage(event.getNewSelection());
     }
 }

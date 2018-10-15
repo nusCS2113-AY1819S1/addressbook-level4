@@ -1,11 +1,7 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
 import seedu.address.commons.core.Messages;
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.event.NameContainsKeywordsPredicate;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
@@ -27,17 +23,16 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        requireNonNull(model);
-        model.updateFilteredEventList(predicate);
+    public CommandResult execute() {
+        model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_EVENTS_LISTED_OVERVIEW, model.getFilteredEventList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FindCommand // instanceof handles nulls
-                && predicate.equals(((FindCommand) other).predicate)); // state check
+                && this.predicate.equals(((FindCommand) other).predicate)); // state check
     }
 }

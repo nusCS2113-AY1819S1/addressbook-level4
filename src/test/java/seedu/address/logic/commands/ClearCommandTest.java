@@ -6,32 +6,30 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
 
-    private CommandHistory commandHistory = new CommandHistory();
-
     @Test
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
-        Model expectedModel = new ModelManager();
-        expectedModel.commitEventManager();
-
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(prepareCommand(model), model, ClearCommand.MESSAGE_SUCCESS, model);
     }
 
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.resetData(new EventManager());
-        expectedModel.commitEventManager();
-
-        assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(prepareCommand(model), model, ClearCommand.MESSAGE_SUCCESS, model);
     }
 
+    /**
+     * Generates a new {@code ClearCommand} which upon execution, clears the contents in {@code model}.
+     */
+    private ClearCommand prepareCommand(Model model) {
+        ClearCommand command = new ClearCommand();
+        command.setData(model, new CommandHistory());
+        return command;
+    }
 }

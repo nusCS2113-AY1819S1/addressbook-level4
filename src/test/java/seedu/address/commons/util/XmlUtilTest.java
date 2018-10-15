@@ -15,13 +15,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.EventManager;
-import seedu.address.model.event.Attendance;
-import seedu.address.storage.XmlAdaptedEvent;
+import seedu.address.model.AddressBook;
+import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableEManager;
+import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.EventBuilder;
+import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -41,8 +40,6 @@ public class XmlUtilTest {
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
-    private static final Attendance VALID_ATTENDANCE = new Attendance(false);
-
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
     @Rule
@@ -51,7 +48,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.getDataFromFile(null, EventManager.class);
+        XmlUtil.getDataFromFile(null, AddressBook.class);
     }
 
     @Test
@@ -63,52 +60,52 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, EventManager.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, AddressBook.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_dataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, EventManager.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, AddressBook.class);
     }
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        EventManager dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableEManager.class).toModelType();
-        assertEquals(9, dataFromFile.getEventList().size());
+        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
+        assertEquals(9, dataFromFile.getPersonList().size());
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
-        XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
-        XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_TAGS);
+        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
+                MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
+        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
-        XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
-        XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_TAGS);
+        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
+                INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
+        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+                VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
-        XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedEventWithRootElement.class);
-        XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_TAGS);
+        XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
+                VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
+        XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.saveDataToFile(null, new EventManager());
+        XmlUtil.saveDataToFile(null, new AddressBook());
     }
 
     @Test
@@ -120,30 +117,30 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new EventManager());
+        XmlUtil.saveDataToFile(MISSING_FILE, new AddressBook());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
-        XmlSerializableEManager dataToWrite = new XmlSerializableEManager(new EventManager());
+        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableEManager dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableEManager.class);
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new EventManager());
-        dataToWrite = new XmlSerializableEManager(
-                builder.withPerson(new EventBuilder().build()).build());
+        AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
+        dataToWrite = new XmlSerializableAddressBook(
+                builder.withPerson(new PersonBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableEManager.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 
     /**
-     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedEvent}
+     * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
      * objects.
      */
-    @XmlRootElement(name = "event")
-    private static class XmlAdaptedEventWithRootElement extends XmlAdaptedEvent {}
+    @XmlRootElement(name = "person")
+    private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
 }

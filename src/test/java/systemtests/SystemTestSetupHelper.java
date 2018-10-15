@@ -9,7 +9,7 @@ import org.testfx.api.FxToolkit;
 import guitests.guihandles.MainWindowHandle;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.model.ReadOnlyEventManager;
+import seedu.address.model.ReadOnlyAddressBook;
 
 /**
  * Contains helper methods that system tests require.
@@ -21,12 +21,12 @@ public class SystemTestSetupHelper {
     /**
      * Sets up a new {@code TestApp} and returns it.
      */
-    public TestApp setupApplication(Supplier<ReadOnlyEventManager> addressBook, Path saveFileLocation) {
+    public TestApp setupApplication(Supplier<ReadOnlyAddressBook> addressBook, Path saveFileLocation) {
         try {
             FxToolkit.registerStage(Stage::new);
             FxToolkit.setupApplication(() -> testApp = new TestApp(addressBook, saveFileLocation));
         } catch (TimeoutException te) {
-            throw new AssertionError("Application takes too long to set up.", te);
+            throw new AssertionError("Application takes too long to set up.");
         }
 
         return testApp;
@@ -55,7 +55,7 @@ public class SystemTestSetupHelper {
             });
             FxToolkit.showStage();
         } catch (TimeoutException te) {
-            throw new AssertionError("Stage takes too long to set up.", te);
+            throw new AssertionError("Stage takes too long to set up.");
         }
 
         return mainWindowHandle;
@@ -68,7 +68,7 @@ public class SystemTestSetupHelper {
         try {
             FxToolkit.cleanupStages();
         } catch (TimeoutException te) {
-            throw new AssertionError("Stage takes too long to tear down.", te);
+            throw new AssertionError("Stage takes too long to tear down.");
         }
     }
 }

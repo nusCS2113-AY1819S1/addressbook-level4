@@ -28,14 +28,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
-    private final Logger logger = LogsCenter.getLogger(getClass());
+    private final Logger logger = LogsCenter.getLogger(this.getClass());
 
     private Stage primaryStage;
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private EventListPanel eventListPanel;
+    private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -122,13 +122,13 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        eventListPanel = new EventListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(eventListPanel.getRoot());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getEventManagerFilePath());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
@@ -187,8 +187,8 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public EventListPanel getEventListPanel() {
-        return eventListPanel;
+    public PersonListPanel getPersonListPanel() {
+        return this.personListPanel;
     }
 
     void releaseResources() {

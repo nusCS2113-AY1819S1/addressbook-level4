@@ -1,13 +1,9 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
-
-import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
- * Lists all persons in the event manager to the user.
+ * Lists all persons in the address book to the user.
  */
 public class ListCommand extends Command {
 
@@ -17,9 +13,8 @@ public class ListCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        requireNonNull(model);
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+    public CommandResult execute() {
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

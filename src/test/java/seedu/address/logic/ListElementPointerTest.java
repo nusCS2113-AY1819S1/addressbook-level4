@@ -3,6 +3,7 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -139,7 +140,7 @@ public class ListElementPointerTest {
         assertFalse(pointer.hasNext());
         try {
             pointer.next();
-            throw new AssertionError("The expected NoSuchElementException was not thrown.");
+            fail("The expected NoSuchElementException was not thrown");
         } catch (NoSuchElementException e) {
             // expected exception thrown
         }
@@ -153,7 +154,7 @@ public class ListElementPointerTest {
         assertFalse(pointer.hasPrevious());
         try {
             pointer.previous();
-            throw new AssertionError("The expected NoSuchElementException was not thrown.");
+            fail("The expected NoSuchElementException was not thrown");
         } catch (NoSuchElementException e) {
             // expected exception thrown
         }
@@ -167,7 +168,7 @@ public class ListElementPointerTest {
         assertFalse(pointer.hasCurrent());
         try {
             pointer.current();
-            throw new AssertionError("The expected NoSuchElementException was not thrown.");
+            fail("The expected NoSuchElementException was not thrown");
         } catch (NoSuchElementException e) {
             // expected exception thrown
         }

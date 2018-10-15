@@ -7,5 +7,6 @@
       "y" : 100
     }
   },
-  "eventManagerFilePath" : "eventmanager.xml"
+  "addressBookFilePath" : "addressbook.xml",
+  "addressBookName" : "TypicalAddressBookName"
 }

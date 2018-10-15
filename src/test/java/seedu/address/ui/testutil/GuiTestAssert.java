@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
-import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
 
 /**
  * A set of assertion methods useful for writing GUI tests.
@@ -27,34 +27,34 @@ public class GuiTestAssert {
     }
 
     /**
-     * Asserts that {@code actualCard} displays the details of {@code expectedEvent}.
+     * Asserts that {@code actualCard} displays the details of {@code expectedPerson}.
      */
-    public static void assertCardDisplaysPerson(Event expectedEvent, PersonCardHandle actualCard) {
-        assertEquals(expectedEvent.getName().fullName, actualCard.getName());
-        assertEquals(expectedEvent.getPhone().value, actualCard.getPhone());
-        assertEquals(expectedEvent.getEmail().value, actualCard.getEmail());
-        assertEquals(expectedEvent.getAddress().value, actualCard.getAddress());
-        assertEquals(expectedEvent.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+    public static void assertCardDisplaysPerson(Person expectedPerson, PersonCardHandle actualCard) {
+        assertEquals(expectedPerson.getName().fullName, actualCard.getName());
+        assertEquals(expectedPerson.getPhone().value, actualCard.getPhone());
+        assertEquals(expectedPerson.getEmail().value, actualCard.getEmail());
+        assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
+        assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code events} correctly and
+     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, Event... events) {
-        for (int i = 0; i < events.length; i++) {
+    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, Person... persons) {
+        for (int i = 0; i < persons.length; i++) {
             personListPanelHandle.navigateToCard(i);
-            assertCardDisplaysPerson(events[i], personListPanelHandle.getPersonCardHandle(i));
+            assertCardDisplaysPerson(persons[i], personListPanelHandle.getPersonCardHandle(i));
         }
     }
 
     /**
-     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code events} correctly and
+     * Asserts that the list in {@code personListPanelHandle} displays the details of {@code persons} correctly and
      * in the correct order.
      */
-    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Event> events) {
-        assertListMatching(personListPanelHandle, events.toArray(new Event[0]));
+    public static void assertListMatching(PersonListPanelHandle personListPanelHandle, List<Person> persons) {
+        assertListMatching(personListPanelHandle, persons.toArray(new Person[0]));
     }
 
     /**

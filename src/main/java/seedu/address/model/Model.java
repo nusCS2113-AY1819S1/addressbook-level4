@@ -3,76 +3,70 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.event.Event;
+import seedu.address.model.person.Person;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.person.exceptions.PersonNotFoundException;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyEventManager newData);
+    void resetData(ReadOnlyAddressBook newData);
 
-    /** Returns the EventManager */
-    ReadOnlyEventManager getEventManager();
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getAddressBook();
+
+    /** Deletes the given person. */
+    void deletePerson(Person target) throws PersonNotFoundException;
+
+    /** Adds the given person */
+    void addPerson(Person person) throws DuplicatePersonException;
 
     /**
-     * Returns true if a event with the same identity as {@code event} exists in the event manager.
+     * Replaces the given person {@code target} with {@code editedPerson}.
+     *
+     * @throws DuplicatePersonException if updating the person's details causes the person to be equivalent to
+     *      another existing person in the list.
+     * @throws PersonNotFoundException if {@code target} could not be found in the list.
      */
-    boolean hasEvent(Event event);
+    void updatePerson(Person target, Person editedPerson)
+            throws DuplicatePersonException, PersonNotFoundException;
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<Person> getFilteredPersonList();
 
     /**
-     * Deletes the given event.
-     * The event must exist in the event manager.
-     */
-    void deleteEvent(Event target);
-
-    /**
-     * Adds the given event.
-     * {@code event} must not already exist in the event manager.
-     */
-    void addEvent(Event event);
-
-    /**
-     * Replaces the given event {@code target} with {@code editedEvent}.
-     * {@code target} must exist in the event manager.
-     * The event identity of {@code editedEvent} must not be the same as another existing event in the event manager.
-     */
-    void updateEvent(Event target, Event editedEvent);
-
-    /** Returns an unmodifiable view of the filtered event list */
-    ObservableList<Event> getFilteredEventList();
-
-    /**
-     * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredEventList(Predicate<Event> predicate);
+    void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
-     * Returns true if the model has previous event manager states to restore.
+     * Returns true if the model has previous address book states to restore.
      */
-    boolean canUndoEventManager();
+    boolean canUndoAddressBook();
 
     /**
-     * Returns true if the model has undone event manager states to restore.
+     * Returns true if the model has undone address book states to restore.
      */
-    boolean canRedoEventManager();
+    boolean canRedoAddressBook();
 
     /**
-     * Restores the model's event manager to its previous state.
+     * Restores the model's address book to its previous state.
      */
-    void undoEventManager();
+    void undoAddressBook();
 
     /**
-     * Restores the model's event manager to its previously undone state.
+     * Restores the model's address book to its previously undone state.
      */
-    void redoEventManager();
+    void redoAddressBook();
 
     /**
-     * Saves the current event manager state for undo/redo.
+     * Saves the current address book state for undo/redo.
      */
-    void commitEventManager();
+    void commitAddressBook();
 }

@@ -14,7 +14,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.EventManagerChangedEvent;
+import seedu.address.commons.events.model.AddressBookChangedEvent;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -66,15 +66,15 @@ public class StatusBarFooter extends UiPart<Region> {
     }
 
     private void setSaveLocation(String location) {
-        Platform.runLater(() -> saveLocationStatus.setText(location));
+        Platform.runLater(() -> this.saveLocationStatus.setText(location));
     }
 
     private void setSyncStatus(String status) {
-        Platform.runLater(() -> syncStatus.setText(status));
+        Platform.runLater(() -> this.syncStatus.setText(status));
     }
 
     @Subscribe
-    public void handleAddressBookChangedEvent(EventManagerChangedEvent abce) {
+    public void handleAddressBookChangedEvent(AddressBookChangedEvent abce) {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));

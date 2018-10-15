@@ -1,14 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
 
 /**
- * Reverts the {@code model}'s event manager to its previous state.
+ * Reverts the {@code model}'s address book to its previous state.
  */
 public class UndoCommand extends Command {
 
@@ -17,15 +15,15 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_FAILURE = "No more commands to undo!";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+    public CommandResult execute() throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoEventManager()) {
+        if (!model.canUndoAddressBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoEventManager();
-        model.updateFilteredEventList(PREDICATE_SHOW_ALL_EVENTS);
+        model.undoAddressBook();
+        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
