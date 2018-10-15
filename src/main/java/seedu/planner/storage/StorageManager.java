@@ -10,10 +10,12 @@ import com.google.common.eventbus.Subscribe;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
+import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.storage.DataSavingExceptionEvent;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
+import seedu.planner.model.summary.SummaryMap;
 
 /**
  * Manages storage of FinancialPlanner data in local storage.
@@ -48,7 +50,6 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-
     // ================ FinancialPlanner methods ==============================
 
     @Override
@@ -81,7 +82,6 @@ public class StorageManager extends ComponentManager implements Storage {
         financialPlannerStorage.saveFinancialPlanner(financialPlanner, filePath);
     }
 
-
     @Override
     @Subscribe
     public void handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent event) {
@@ -104,4 +104,43 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    // ================ SummaryMap storage methods ==============================
+
+    @Override
+    public Path getSummaryMapFilePath() {
+        return financialPlannerStorage.getSummaryMapFilePath();
+    }
+
+    @Override
+    public Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException {
+        return readSummaryMap(financialPlannerStorage.getSummaryMapFilePath());
+    }
+
+    @Override
+    public Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return financialPlannerStorage.readSummaryMap(filePath);
+    }
+
+    @Override
+    public void saveSummaryMap(SummaryMap summaryMap) throws IOException {
+        saveSummaryMap(summaryMap, financialPlannerStorage.getSummaryMapFilePath());
+    }
+
+    @Override
+    public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        financialPlannerStorage.saveSummaryMap(summaryMap, filePath);
+    }
+
+    @Override
+    @Subscribe
+    public void handleSummaryMapChangedEvent(SummaryMapChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveSummaryMap(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
 }

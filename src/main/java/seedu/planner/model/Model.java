@@ -1,11 +1,14 @@
 package seedu.planner.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.Summary;
 
 /**
  * The API of the Model component.
@@ -37,14 +40,10 @@ public interface Model {
     void deleteRecord(Record target);
 
     /**
-     * To delete a existing limit.
-     * @param target
-     */
-    void deleteLimit(Limit target);
-    /**
      * Adds the given record.
      * {@code record} must not already exist in the financial planner.
      */
+
     void addRecord(Record record);
 
     /**
@@ -60,8 +59,11 @@ public interface Model {
      */
     void updateRecord(Record target, Record editedRecord);
 
-    /** Returns an unmodifiable view of the filtered record list */
-    ObservableList<Record> getFilteredRecordList();
+    /**
+     * To delete a existing limit.
+     * @param target
+     */
+    void deleteLimit(Limit target);
 
     /**
      * This function will check whether the limit have been exceeded.
@@ -69,6 +71,9 @@ public interface Model {
      * @return
      */
     boolean isExceededLimit (Limit limitIn);
+
+    /** Returns an unmodifiable view of the filtered record list */
+    ObservableList<Record> getFilteredRecordList();
 
     /**
      * Updates the filter of the filtered record list to filter by the given {@code predicate}.
@@ -100,4 +105,6 @@ public interface Model {
      * Saves the current financial planner state for undo/redo.
      */
     void commitFinancialPlanner();
+
+    List<Summary> getSummaryList(Date startDate, Date endDate);
 }

@@ -17,7 +17,7 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.storage.UserPrefsStorage;
-import seedu.planner.storage.XmlSerializableFinancialPlanner;
+import seedu.planner.storage.xml_jaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.testutil.TestUtil;
 import systemtests.ModelHelper;
 

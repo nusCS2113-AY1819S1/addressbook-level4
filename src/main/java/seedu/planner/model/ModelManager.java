@@ -3,6 +3,7 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.Observable;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -13,8 +14,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
+import seedu.planner.commons.events.model.SummaryMapChangedEvent;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.Summary;
 
 /**
  * Represents the in-memory model of the financial planner data.
@@ -54,10 +58,19 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedFinancialPlanner;
     }
 
+    //=========== Event management methods =========================================================
+
     /** Raises an event to indicate the model has changed */
     private void indicateFinancialPlannerChanged() {
         raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
     }
+
+    /** Raises an event to indicate the summary map has changed */
+    private void indicateSummaryMapChanged() {
+        raise(new SummaryMapChangedEvent(versionedFinancialPlanner.getSummaryMap()));
+    }
+
+    //=========== Financial planner standard operations ============================================
 
     @Override
     public boolean hasRecord(Record record) {
@@ -66,27 +79,43 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasSameDateLimit(Limit limitIn) {
-        requireNonNull(limitIn);
-        return versionedFinancialPlanner.hasSameDateLimit(limitIn);
-    }
-
-    @Override
     public void deleteRecord(Record target) {
+        requireNonNull(target);
         versionedFinancialPlanner.removeRecord(target);
+        versionedFinancialPlanner.removeRecordFromSummary(target);
         indicateFinancialPlannerChanged();
-    }
-
-    @Override
-    public void deleteLimit(Limit target) {
-        versionedFinancialPlanner.removeLimit(target);
-        indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
     }
 
     @Override
     public void addRecord(Record record) {
+        requireNonNull(record);
         versionedFinancialPlanner.addRecord(record);
+        versionedFinancialPlanner.addRecordToSummary(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+        indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
+    }
+
+    @Override
+    public void updateRecord(Record target, Record editedRecord) {
+        requireAllNonNull(target, editedRecord);
+
+        versionedFinancialPlanner.updateRecord(target, editedRecord);
+        versionedFinancialPlanner.updateSummary(target, editedRecord);
+        indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
+    }
+
+    //=========== Limit related methods =====================================================
+    @Override
+    public boolean hasSameDateLimit(Limit limitIn) {
+        requireNonNull(limitIn);
+        return versionedFinancialPlanner.hasSameDateLimit(limitIn);
+    }
+    @Override
+    public void deleteLimit(Limit target) {
+        versionedFinancialPlanner.removeLimit(target);
         indicateFinancialPlannerChanged();
     }
 
@@ -96,15 +125,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         indicateFinancialPlannerChanged();
     }
-
-    @Override
-    public void updateRecord(Record target, Record editedRecord) {
-        requireAllNonNull(target, editedRecord);
-
-        versionedFinancialPlanner.updateRecord(target, editedRecord);
-        indicateFinancialPlannerChanged();
-    }
-
     @Override
     public boolean isExceededLimit (Limit limitIn) {
         requireNonNull(limitIn);
@@ -155,6 +175,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void commitFinancialPlanner() {
         versionedFinancialPlanner.commit();
+    }
+
+    //=========== Summary Display =================================================================================
+
+    public List<Summary> getSummaryList(Date startDate, Date endDate) {
+        return versionedFinancialPlanner.getSummaryList(startDate, endDate);
     }
 
     @Override
