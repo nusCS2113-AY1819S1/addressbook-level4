@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
@@ -45,6 +47,8 @@ public class TimeTablePanel extends UiPart<Region> {
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
+    private TimeTable timeTableLastLoaded;
+
     // TODO: remove hardcoding here
     private int currStartHour = 10;
     private int currEndHour = 19;
@@ -73,7 +77,16 @@ public class TimeTablePanel extends UiPart<Region> {
         // To prevent triggering events for typing inside the loaded Web page.
         getRoot().setOnKeyPressed(Event::consume);
 
+        timeTableLastLoaded = new TimeTable();
         fillInnerParts();
+        updateDimensions();
+
+        timeTablePanelMainGrid.getRoot().widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                reloadTimeTable();
+            }
+        });
 
         registerAsAnEventHandler(this);
     }
@@ -97,12 +110,23 @@ public class TimeTablePanel extends UiPart<Region> {
         currColDimensions = timeTablePanelMainGrid.getRoot().getWidth() / currNumCol;
     }
 
+    private void reloadTimeTable() {
+        timeTablePanelMainGrid.clearGrid();
+        updateDimensions();
+
+        for (TimeSlot timeSlot : timeTableLastLoaded.getTimeSlots()) {
+            timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
+        }
+
+    }
+
     /**
      * Loads a TimeTable from the TimeTable object it is given.
      */
     private void loadTimeTable(TimeTable timeTable) {
-        updateDimensions();
+        timeTableLastLoaded = timeTable;
         timeTablePanelMainGrid.clearGrid();
+        updateDimensions();
 
         for (TimeSlot timeSlot : timeTable.getTimeSlots()) {
             timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
