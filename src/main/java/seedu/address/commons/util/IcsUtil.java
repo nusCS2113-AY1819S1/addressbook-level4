@@ -106,17 +106,15 @@ public class IcsUtil {
     }
 
     /**
-     * Converts the date in the ics file into day (0-6).
+     * Converts the date in the ics file into day (1-7).
      */
     private static int icsDateToDay(String dateString) throws CommandException {
-        //TODO make defensive; the substring method is quite exceptional (ahahahhahahahahahahhaha ok im sorry).
         Calendar cal = Calendar.getInstance();
         try {
             cal.set(parseInt(dateString.substring(0, 3)), //year
                     parseInt(dateString.substring(4, 5)), //month
                     parseInt(dateString.substring(6, 7))); //day
-        }
-        catch (IndexOutOfBoundsException | NumberFormatException e){
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
         int day = cal.get(Calendar.DAY_OF_MONTH);
