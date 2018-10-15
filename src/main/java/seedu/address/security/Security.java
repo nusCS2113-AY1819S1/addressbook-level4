@@ -13,6 +13,11 @@ public interface Security {
     void login(String username, String password);
 
     /***
+     * Logs out
+     */
+    void logout();
+
+    /***
      *
      * @return is authenticated for tests
      */

@@ -1,6 +1,7 @@
 package seedu.address.security;
 
 import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
 
@@ -41,5 +42,12 @@ public class SecurityManager extends ComponentManager implements Security {
             //System.out.println("Incorrect password");
             raise(new UnsuccessfulLoginEvent());
         }
+    }
+
+    @Override
+    public void logout() {
+        this.isAuthenticated = false;
+        //TODO Do I clear the User since its logged out? I can just leave it there to be overwritten
+        raise(new LogoutEvent());
     }
 }
