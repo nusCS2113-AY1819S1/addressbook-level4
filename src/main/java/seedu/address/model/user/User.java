@@ -16,6 +16,7 @@ public class User {
         requireAllNonNull(username, password);
         this.username = username;
         this.password = password;
+        loginStatus = false;
     }
 
     public Username getUsername() {

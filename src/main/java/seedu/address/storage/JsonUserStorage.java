@@ -10,6 +10,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class JsonUserStorage {
 
@@ -40,7 +41,9 @@ public class JsonUserStorage {
     }
 
     private void createUserFile() throws IOException {
+        Path folder = Paths.get("data");
         if (!Files.exists(filePath)) {
+            Files.createDirectory(folder);
             Files.createFile(filePath);
         }
 

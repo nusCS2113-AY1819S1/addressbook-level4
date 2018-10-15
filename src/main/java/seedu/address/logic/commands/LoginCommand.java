@@ -22,6 +22,7 @@ public class LoginCommand extends Command {
             + PREFIX_PASSWORD + "PASSWORD";
 
     public static final String MESSAGE_SUCCESS = "Logged in: %1$s";
+    public static final String MESSAGE_LOGGED = "Already logged in!";
     public static final String MESSAGE_FAILURE = "Incorrect account credentials!";
 
     private final User toLogin;
