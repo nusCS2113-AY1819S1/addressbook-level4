@@ -50,6 +50,10 @@ public class LogicManager extends ComponentManager implements Logic {
         return model.getFriendList(person);
     }
 
+    public ObservableList<Person> getOtherList(Person person) {
+        return model.getOtherList(person);
+    }
+
     @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());

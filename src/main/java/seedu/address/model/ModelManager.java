@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.FriendListPredicate;
+import seedu.address.model.person.OtherListPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -24,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Person> friendList;
+    private final FilteredList<Person> otherList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -37,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         friendList = new FilteredList<>(versionedAddressBook.getPersonList());
+        otherList = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -106,8 +109,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Person> getFriendList(Person person) {
         requireNonNull(person);
-        friendList.setPredicate(predicateFromPerson(person));
+        friendList.setPredicate(friendsPredicateFromPerson(person));
         return FXCollections.unmodifiableObservableList(friendList);
+    }
+
+    public ObservableList<Person> getOtherList(Person person) {
+        requireNonNull(person);
+        otherList.setPredicate(othersPredicateFromPerson(person));
+        return FXCollections.unmodifiableObservableList(otherList);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -157,8 +166,11 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
-    public FriendListPredicate predicateFromPerson(Person person) {
+    public FriendListPredicate friendsPredicateFromPerson(Person person) {
         return new FriendListPredicate(person.getFriends());
     }
 
+    public OtherListPredicate othersPredicateFromPerson(Person person) {
+        return new OtherListPredicate(person.getFriends());
+    }
 }

@@ -152,7 +152,7 @@ public class MainWindow extends UiPart<Stage> {
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanel = new PersonListPanel(logic.getOtherList(person));
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         friendListPanel = new FriendListPanel(logic.getFriendList(person));
