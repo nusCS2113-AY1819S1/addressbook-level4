@@ -17,7 +17,7 @@ public class Quantity {
      */
     public static final String QUANTITY_VALIDATION_REGEX = "\\d{1,3}";
 
-    private static String value;
+    private String value;
     /**
      * Constructs an {@code Quantity}.
      *
