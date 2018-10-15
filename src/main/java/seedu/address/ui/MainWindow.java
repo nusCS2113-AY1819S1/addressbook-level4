@@ -194,6 +194,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Opens the Registration Window.
      */
@@ -203,16 +207,20 @@ public class MainWindow extends UiPart<Stage> {
         registrationWindow.show();
     }
 
-    void show() {
-        primaryStage.show();
-    }
-
     /**
      * Closes the application.
      */
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
+    }
+
+    /***
+     * Logs out of the application
+     */
+    @FXML
+    public void handleLogout() {
+        loginWindow.show();
     }
 
     public PersonListPanel getPersonListPanel() {
