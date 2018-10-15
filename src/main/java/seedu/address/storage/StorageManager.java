@@ -68,7 +68,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read AB data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
     }
 
@@ -79,7 +79,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write to AB data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
@@ -98,7 +98,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public Optional<ReadOnlyTodoList> readTodoList(Path filePath) throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
+        logger.fine("Attempting to read TDL data from file: " + filePath);
         return todoListStorage.readTodoList(filePath);
     }
 
@@ -109,7 +109,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public void saveTodoList(ReadOnlyTodoList todoList, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
+        logger.fine("Attempting to write to TDL data file: " + filePath);
         todoListStorage.saveTodoList(todoList, filePath);
     }
 
@@ -117,7 +117,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to AB file"));
         try {
             saveAddressBook(event.data);
         } catch (IOException e) {
@@ -128,7 +128,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     @Subscribe
     public void handleTodoListChangedEvent(TodoListChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to TDL file"));
         try {
             saveTodoList(event.data);
         } catch (IOException e) {

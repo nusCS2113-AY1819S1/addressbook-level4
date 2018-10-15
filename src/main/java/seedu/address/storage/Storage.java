@@ -53,5 +53,5 @@ public interface Storage extends AddressBookStorage, TodoListStorage, UserPrefsS
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleTodoListChangedEvent(TodoListChangedEvent abce);
+    void handleTodoListChangedEvent(TodoListChangedEvent tdce);
 }

@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.XmlUtil;
 
 /**
- * Stores addressbook data in an XML file
+ * Stores addressbook and todolist data in an XML file
  */
 public class XmlFileStorage {
     /**
