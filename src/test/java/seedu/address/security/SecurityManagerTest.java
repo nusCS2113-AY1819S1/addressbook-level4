@@ -10,11 +10,12 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
+import seedu.address.model.ModelManager;
 
 
 public class SecurityManagerTest {
 
-    private SecurityManager securityManager = new SecurityManager(false);
+    private SecurityManager securityManager = new SecurityManager(false, new ModelManager());
     private boolean succcessfulLoginEventCalled = false;
     private boolean unsuccessfulLoginEventCalled = false;
 

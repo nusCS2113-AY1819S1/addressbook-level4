@@ -34,7 +34,7 @@ public class MainWindowCloseTest extends GuiUnitTest {
         FxToolkit.setupStage(stage -> {
             this.stage = stage;
             mainWindow = new MainWindow(stage, new Config(), new UserPrefs(), new LogicManager(new ModelManager()),
-                    new SecurityManager(true));
+                    new SecurityManager(true, new ModelManager()));
             mainWindowHandle = new EmptyMainWindowHandle(stage);
 
             stage.setScene(mainWindow.getRoot().getScene());
