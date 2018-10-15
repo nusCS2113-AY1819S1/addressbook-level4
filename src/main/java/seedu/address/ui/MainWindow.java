@@ -35,6 +35,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Security security;
 
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
@@ -69,6 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.security = security;
         this.config = config;
         this.prefs = prefs;
 
@@ -220,7 +222,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleLogout() {
-        loginWindow.show();
+        security.logout();
     }
 
     public PersonListPanel getPersonListPanel() {

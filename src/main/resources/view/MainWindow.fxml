@@ -31,9 +31,9 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
-          <Menu mnemonicParsing="false" onAction="#handleLogout" text="Logout">
+          <Menu mnemonicParsing="false" text="Logout">
             <items>
-              <MenuItem mnemonicParsing="false" text="Action 1" />
+              <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
             </items>
           </Menu>
         </MenuBar>
