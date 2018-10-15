@@ -41,9 +41,6 @@ public class XmlAdaptedEvent {
     @XmlElement
     private List<String> attendees = new ArrayList<>();
 
-    //TODO: IMPLEMENT LIST OF ATTENDEES
-    //TODO: CREATE XMLATTENDEES
-
     /* @XmlElement
       private List<XmlAttendees> attendees = new ArrayList<>();*/
 
@@ -68,6 +65,7 @@ public class XmlAdaptedEvent {
         this.attendees = new ArrayList<>();
     }
 
+    //TODO: Test for this
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details with attendees.
      */
