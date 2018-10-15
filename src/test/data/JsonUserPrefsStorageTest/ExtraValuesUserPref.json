@@ -9,6 +9,5 @@
       "z" : 99
     }
   },
-  "addressBookFilePath" : "addressbook.xml",
-  "addressBookName" : "TypicalAddressBookName"
+  "eventManagerFilePath" : "eventmanager.xml"
 }

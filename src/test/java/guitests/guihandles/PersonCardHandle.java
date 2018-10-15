@@ -8,10 +8,10 @@ import com.google.common.collect.ImmutableMultiset;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
+import seedu.address.model.event.Event;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a event card in the event list panel.
  */
 public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
@@ -31,14 +31,14 @@ public class PersonCardHandle extends NodeHandle<Node> {
     public PersonCardHandle(Node cardNode) {
         super(cardNode);
 
-        this.idLabel = getChildNode(ID_FIELD_ID);
-        this.nameLabel = getChildNode(NAME_FIELD_ID);
-        this.addressLabel = getChildNode(ADDRESS_FIELD_ID);
-        this.phoneLabel = getChildNode(PHONE_FIELD_ID);
-        this.emailLabel = getChildNode(EMAIL_FIELD_ID);
+        idLabel = getChildNode(ID_FIELD_ID);
+        nameLabel = getChildNode(NAME_FIELD_ID);
+        addressLabel = getChildNode(ADDRESS_FIELD_ID);
+        phoneLabel = getChildNode(PHONE_FIELD_ID);
+        emailLabel = getChildNode(EMAIL_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
-        this.tagLabels = tagsContainer
+        tagLabels = tagsContainer
                 .getChildrenUnmodifiable()
                 .stream()
                 .map(Label.class::cast)
@@ -73,14 +73,14 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     /**
-     * Returns true if this handle contains {@code person}.
+     * Returns true if this handle contains {@code event}.
      */
-    public boolean equals(Person person) {
-        return getName().equals(person.getName().fullName)
-                && getAddress().equals(person.getAddress().value)
-                && getPhone().equals(person.getPhone().value)
-                && getEmail().equals(person.getEmail().value)
-                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(person.getTags().stream()
+    public boolean equals(Event event) {
+        return getName().equals(event.getName().fullName)
+                && getAddress().equals(event.getAddress().value)
+                && getPhone().equals(event.getPhone().value)
+                && getEmail().equals(event.getEmail().value)
+                && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(event.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
     }

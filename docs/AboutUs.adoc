@@ -4,53 +4,52 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-AddressBook - Level 4 was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
-_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
-{empty} +
-We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
+Event Manager is based on Address-Book Level 4, which was developed by the https://se-edu.github.io/docs/Team.html[se-edu] team. +
+We are a team of Y2 Computer Engineering undergraduate students based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
+=== Chia Xiang Rong
+image::xr_photo.jpg[width="150", align="left"]
+{empty}[http://github.com/chiaxr[github]] [<<johndoe#, portfolio>>]
 
-Role: Project Advisor
-
-'''
-
-=== John Roe
-image::lejolly.jpg[width="150", align="left"]
-{empty}[http://github.com/lejolly[github]] [<<johndoe#, portfolio>>]
-
-Role: Team Lead +
-Responsibilities: UI
+Role: Developer +
+Responsibilities: RSVP/Attendance
 
 '''
 
-=== Johnny Doe
+=== Gerald Chua Deng Xiang
+image::geraldcdx.png[width="250", align="left"]
+{empty}[https://www.comp.nus.edu.sg/~geraldc/website2-0/index.html[homepage]] [https://github.com/Geraldcdx[github]] [<<GCDX#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Comment Section Architect
+
+'''
+
+=== James Arista Yaputra
+image::jamesyaputra.png[width="150", align="left"]
+{empty}[http://github.com/jamesyaputra[github]] [<<jamesyaputra#, portfolio>>]
+
+Role: Developer +
+Responsibilities: User Authentication
+
+'''
+
+=== Chuang Qin Kai
+image::QK_photo.png[width="150", align="left"]
+{empty}[http://github.com/cqinkai[github]] [<<johndoe#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Event Reminders
+
+'''
+
+=== Ho Phi Long
 image::yijinl.jpg[width="150", align="left"]
 {empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
 Responsibilities: Data
-
-'''
-
-=== Johnny Roe
-image::m133225.jpg[width="150", align="left"]
-{empty}[http://github.com/m133225[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: Dev Ops + Threading
-
-'''
-
-=== Benson Meier
-image::yl_coder.jpg[width="150", align="left"]
-{empty}[http://github.com/yl-coder[github]] [<<johndoe#, portfolio>>]
-
-Role: Developer +
-Responsibilities: UI
 
 '''

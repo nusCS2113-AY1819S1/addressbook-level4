@@ -12,11 +12,10 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
-    private String addressBookName = "MyAddressBook";
+    private Path eventManagerFilePath = Paths.get("data" , "eventmanager.xml");
 
     public UserPrefs() {
-        this.setGuiSettings(500, 500, 0, 0);
+        setGuiSettings(500, 500, 0, 0);
     }
 
     public GuiSettings getGuiSettings() {
@@ -31,20 +30,12 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
-    public Path getAddressBookFilePath() {
-        return addressBookFilePath;
+    public Path getEventManagerFilePath() {
+        return eventManagerFilePath;
     }
 
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        this.addressBookFilePath = addressBookFilePath;
-    }
-
-    public String getAddressBookName() {
-        return addressBookName;
-    }
-
-    public void setAddressBookName(String addressBookName) {
-        this.addressBookName = addressBookName;
+    public void setEventManagerFilePath(Path eventManagerFilePath) {
+        this.eventManagerFilePath = eventManagerFilePath;
     }
 
     @Override
@@ -59,21 +50,19 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
-                && Objects.equals(addressBookName, o.addressBookName);
+                && Objects.equals(eventManagerFilePath, o.eventManagerFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath, addressBookName);
+        return Objects.hash(guiSettings, eventManagerFilePath);
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
-        sb.append("\nLocal data file location : " + addressBookFilePath);
-        sb.append("\nAddressBook name : " + addressBookName);
+        sb.append("\nLocal data file location : " + eventManagerFilePath);
         return sb.toString();
     }
 
