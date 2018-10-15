@@ -2,7 +2,11 @@ package seedu.address.commons.core.index;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Test;
 
@@ -67,6 +71,40 @@ public class IndexTest {
         } catch (IndexOutOfBoundsException ie) {
             // expected behaviour
         }
+    }
+
+    @Test
+    public void toStringTest(){
+        final String expected = Index.fromOneBased(5).toString();
+        final String actual = "[5]";
+        final String actual2 = "[6]";
+
+        // same string (=)
+        assertEquals(expected, actual);
+
+        // different string (!=)
+        assertNotEquals(expected, actual2);
+    }
+
+    @Test
+    public void hashCodeTest(){
+        final Index fifthPersonIndex = Index.fromOneBased(5);
+        final Index sixthPersonIndex = Index.fromOneBased(6);
+
+        Set<Index> expected = new HashSet<>();
+        Set<Index> actual = new HashSet<>();
+        Set<Index> actual2 = new HashSet<>();
+
+        expected.add(fifthPersonIndex);
+        expected.add(sixthPersonIndex);
+        actual.add(fifthPersonIndex);
+        actual.add(sixthPersonIndex);
+
+        // same set
+        assertEquals(expected, actual);
+
+        // different set
+        assertNotEquals(expected, actual2);
     }
 
     @Test
