@@ -11,12 +11,14 @@ import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.record.exceptions.DuplicateRecordException;
 
 /**
  * An Immutable FinancialPlanner that is serializable to XML format
  */
 @XmlRootElement(name = "financialplanner")
-public class XmlSerializableFinancialPlanner extends XmlSerializableClass<FinancialPlanner> {
+public class XmlSerializableFinancialPlanner extends XmlSerializableClass<UniqueRecordList> {
 
     public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
 
@@ -38,26 +40,25 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Financ
     public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
         this();
         records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
-
-
     }
 
     /**
-     * Converts this financialplanner into the model's {@code FinancialPlanner} object.
+     * Converts this RecordList into the model's {@code RecordList} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedRecord}.
      */
-    public FinancialPlanner toModelType() throws IllegalValueException {
-        FinancialPlanner financialPlanner = new FinancialPlanner();
+    public UniqueRecordList toModelType() throws IllegalValueException {
+        UniqueRecordList uniqueRecordList = new UniqueRecordList();
         for (XmlAdaptedRecord p : records) {
             Record record = p.toModelType();
-            if (financialPlanner.hasRecord(record)) {
+            try {
+                uniqueRecordList.add(record);
+            } catch (DuplicateRecordException e) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
             }
-            financialPlanner.addRecord(record);
         }
-        return financialPlanner;
+        return uniqueRecordList;
     }
     // TODO: change this to follow the others
     @Override
