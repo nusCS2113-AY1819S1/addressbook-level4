@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Quantity {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Quantity can take any values, and it should not be blank";
+            "Quantity can only take positive values, and it should not be blank";
 
     /*
      * Quantity only accepts from 0 to 999
@@ -34,6 +34,18 @@ public class Quantity {
 
     public void increase(int amount) {
         this.value = Integer.toString(Integer.parseInt(value) + amount);
+    }
+
+    /**
+     * Stores remaining number of book left and ensures remaining books is not negative
+     *
+     * @param amount number of books sold
+     */
+    public void decrease(int amount) {
+        Integer after = Integer.parseInt(value) - amount;
+        if (after > 0) {
+            this.value = Integer.toString(after);
+        }
     }
 
     public int toInteger() {

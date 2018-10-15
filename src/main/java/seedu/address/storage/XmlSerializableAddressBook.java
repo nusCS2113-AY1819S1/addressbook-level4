@@ -15,7 +15,7 @@ import seedu.address.model.book.Book;
 /**
  * An Immutable BookInventory that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "bookinventory")
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Book Inventory list contains duplicate book(s).";
