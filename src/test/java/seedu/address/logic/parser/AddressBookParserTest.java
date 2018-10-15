@@ -10,11 +10,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.VALID_GROUP_INDEX
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_2;
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_3;
-import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_1;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroup1;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
 
 import java.util.Arrays;
 import java.util.List;
@@ -77,7 +74,7 @@ public class AddressBookParserTest {
                 + " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_1
                 + " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_2
                 + " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_3);
-        assertEquals(new AddGroupCommand(ADD_GROUP_1), command);
+        assertEquals(new AddGroupCommand(getAddGroup1()), command);
     }
 
     @Test

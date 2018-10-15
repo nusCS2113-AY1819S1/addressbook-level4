@@ -63,7 +63,7 @@ public class GroupBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Group} that we are building.
+     * Parses the {@code persons} into a {@code Set<Person>} and set it to the {@code Group} that we are building.
      */
     public GroupBuilder withPersons(Person ... persons) {
         this.persons = SampleDataUtil.getPersonSet(persons);

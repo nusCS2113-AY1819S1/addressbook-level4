@@ -1,20 +1,20 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
+        import static java.util.Objects.requireNonNull;
+        import static seedu.address.commons.core.Messages.MESSAGE_INVALID_GROUP_DISPLAYED_INDEX;
+        import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+        import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_INDEX;
+        import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
 
-import java.util.List;
+        import java.util.List;
 
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.group.AddGroup;
-import seedu.address.model.group.Group;
-import seedu.address.model.person.Person;
+        import seedu.address.logic.CommandHistory;
+        import seedu.address.logic.commands.exceptions.CommandException;
+        import seedu.address.model.Model;
+        import seedu.address.model.group.AddGroup;
+        import seedu.address.model.group.Group;
+        import seedu.address.model.person.Person;
 
 /**
  * Add persons to a group via their respective indices

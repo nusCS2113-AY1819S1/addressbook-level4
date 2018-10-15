@@ -34,15 +34,10 @@ public class TypicalGroups {
             .withGroupName(VALID_GROUP_NAME_TUT_1)
             .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
             .withTags(VALID_GROUP_TAG_TUT_1).build();
-    public static final Group TUT_1_WITH_PERSONS = new GroupBuilder()
-            .withGroupName(VALID_GROUP_NAME_TUT_1)
-            .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
-            .withTags(VALID_GROUP_TAG_TUT_1).withPersons(ALICE).build();
     public static final Group CS1010 = new GroupBuilder()
             .withGroupName(VALID_GROUP_NAME_CS1010)
             .withGroupLocation(VALID_GROUP_LOCATION_CS1010)
             .withTags(VALID_GROUP_TAG_CS1010).build();
-
     public static final String KEYWORD_MATCHING_CS1010 = "Cs1010"; // A keyword that matches CS1010
 
     private TypicalGroups() {} // prevents instantiation
@@ -60,6 +55,12 @@ public class TypicalGroups {
 
     public static List<Group> getTypicalGroups() {
         return new ArrayList<>(Arrays.asList(TUT_1, CS1010, TUT_2, TUT_3, TUT_4));
+    }
+
+    public static final Group getTypicalGroupsWithPersons(){
+        Group group = new GroupBuilder(TUT_1).build();
+        group.addPersons(ALICE);
+        return group;
     }
 
 }

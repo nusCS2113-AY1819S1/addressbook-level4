@@ -100,15 +100,6 @@ public class XmlUtilTest {
     }
 
     @Test
-    public void xmlAdaptedGroupFromFile_fileWithMissingGroupField_validResult() throws Exception {
-        XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
-                MISSING_GROUP_FIELD_FILE, XmlAdaptedGroupWithRootElement.class);
-        XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
-                null, VALID_GROUP_LOCATION, VALID_GROUP_TAGS, VALID_PERSONS);
-        assertEquals(expectedGroup, actualGroup);
-    }
-
-    @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
@@ -119,15 +110,6 @@ public class XmlUtilTest {
     }
 
     @Test
-    public void xmlAdaptedGroupFromFile_fileWithInvalidGroupField_validResult() throws Exception {
-        XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
-                INVALID_GROUP_FIELD_FILE, XmlAdaptedGroupWithRootElement.class);
-        XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
-                VALID_GROUP_NAME, INVALID_GROUP_LOCATION, VALID_GROUP_TAGS, VALID_PERSONS);
-        assertEquals(expectedGroup, actualGroup);
-    }
-
-    @Test
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
         XmlAdaptedPerson actualPerson = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
@@ -135,6 +117,24 @@ public class XmlUtilTest {
                 VALID_NAME, VALID_GENDER, VALID_NATIONALITY, VALID_PHONE,
                 VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
+    }
+
+    @Test
+    public void xmlAdaptedGroupFromFile_fileWithMissingGroupField_validResult() throws Exception {
+        XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
+                MISSING_GROUP_FIELD_FILE, XmlAdaptedGroupWithRootElement.class);
+        XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
+                null, VALID_GROUP_LOCATION, VALID_GROUP_TAGS, VALID_PERSONS);
+        assertEquals(expectedGroup, actualGroup);
+    }
+
+    @Test
+    public void xmlAdaptedGroupFromFile_fileWithInvalidGroupField_validResult() throws Exception {
+        XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
+                INVALID_GROUP_FIELD_FILE, XmlAdaptedGroupWithRootElement.class);
+        XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
+                VALID_GROUP_NAME, INVALID_GROUP_LOCATION, VALID_GROUP_TAGS, VALID_PERSONS);
+        assertEquals(expectedGroup, actualGroup);
     }
 
     @Test

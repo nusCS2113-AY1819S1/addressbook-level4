@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -100,11 +101,14 @@ public class SampleDataUtil {
     }
 
     /**
-     * Returns a person set containing the list of strings given.
+     * Returns a person set containing the list of person given.
      */
     public static Set<Person> getPersonSet(Person... persons) {
-        return Arrays.stream(persons)
-                .collect(Collectors.toSet());
+        Set<Person> personSet = new HashSet<>();
+        for (Person p : persons){
+            personSet.add(p);
+        }
+        return personSet;
     }
 
 }

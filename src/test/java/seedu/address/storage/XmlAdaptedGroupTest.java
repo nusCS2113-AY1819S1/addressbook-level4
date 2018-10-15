@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedGroup.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
-import static seedu.address.testutil.TypicalGroups.TUT_1_WITH_PERSONS;
+import static seedu.address.testutil.TypicalGroups.getTypicalGroupsWithPersons;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
 import seedu.address.testutil.Assert;
-import seedu.address.testutil.TypicalGroups;
 
 public class XmlAdaptedGroupTest {
     private static final String INVALID_GROUP_NAME = "M@ths";
@@ -28,7 +27,7 @@ public class XmlAdaptedGroupTest {
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
-    private static final List<XmlAdaptedPerson> VALID_GROUP_PERSONS = TUT_1_WITH_PERSONS.getPersons().stream()
+    private static final List<XmlAdaptedPerson> VALID_GROUP_PERSONS = getTypicalGroupsWithPersons().getPersons().stream()
             .map(XmlAdaptedPerson::new)
             .collect(Collectors.toList());
 

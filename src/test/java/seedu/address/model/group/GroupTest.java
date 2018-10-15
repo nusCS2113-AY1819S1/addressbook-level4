@@ -8,8 +8,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS101
 import static seedu.address.testutil.TypicalGroups.CS1010;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.testutil.GroupBuilder;

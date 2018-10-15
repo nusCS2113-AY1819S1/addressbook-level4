@@ -15,8 +15,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PERSON_INDEX_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_1;
-import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_3;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroup1;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroup3;
 
 import org.junit.Test;
 
@@ -31,17 +31,17 @@ public class AddGroupCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + GROUP_INDEX_DESC_1 + PERSON_INDEX_DESC_1,
-                new AddGroupCommand(ADD_GROUP_3));
+                new AddGroupCommand(getAddGroup3()));
 
         // multiple group indices - last group name accepted
         assertParseSuccess(parser, GROUP_INDEX_DESC_2 + GROUP_INDEX_DESC_1 + PERSON_INDEX_DESC_1,
-                new AddGroupCommand(ADD_GROUP_3));
+                new AddGroupCommand(getAddGroup3()));
 
         // multiple person indices - all accepted
         assertParseSuccess(parser, GROUP_INDEX_DESC_1 + PERSON_INDEX_DESC_1
                         + PERSON_INDEX_DESC_2
                         + PERSON_INDEX_DESC_3,
-                new AddGroupCommand(ADD_GROUP_1));
+                new AddGroupCommand(getAddGroup1()));
     }
 
     @Test

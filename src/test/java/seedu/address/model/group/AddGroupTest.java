@@ -2,9 +2,9 @@ package seedu.address.model.group;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_1;
-import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_2;
-import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_3;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroup1;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroup2;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroup3;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
 import static seedu.address.testutil.TypicalIndexes.getSingleTypicalPersonIndicesSet;
 import static seedu.address.testutil.TypicalIndexes.getTypicalPersonIndicesSet;
@@ -42,26 +42,28 @@ public class AddGroupTest {
     @Test
     public void equals() {
         // same values -> returns true
-        AddGroup addGroup1Copy = new AddGroup(INDEX_FIRST_GROUP,getTypicalPersonIndicesSet());
-        assertTrue(ADD_GROUP_1.equals(addGroup1Copy));
+        AddGroup addGroup = getAddGroup1();
+        AddGroup addGroupCopy = new AddGroup(INDEX_FIRST_GROUP,getTypicalPersonIndicesSet());
+
+        assertTrue(addGroup.equals(addGroupCopy));
 
         // same object -> returns true
-        assertTrue(ADD_GROUP_1.equals(ADD_GROUP_1));
+        assertTrue(addGroup.equals(addGroup));
 
         // null -> returns false
-        assertFalse(ADD_GROUP_1.equals(null));
+        assertFalse(addGroup.equals(null));
 
         // different type -> returns false
-        assertFalse(ADD_GROUP_1.equals(5));
+        assertFalse(addGroup.equals(5));
 
         // different addGroup -> returns false
-        assertFalse(ADD_GROUP_1.equals(ADD_GROUP_3));
+        assertFalse(addGroup.equals(getAddGroup3()));
 
         // different group index -> returns false
-        assertFalse(ADD_GROUP_1.equals(ADD_GROUP_2));
+        assertFalse(addGroup.equals(getAddGroup2()));
 
         // different person indices -> returns false
-        assertFalse(ADD_GROUP_1.equals(ADD_GROUP_3));
+        assertFalse(addGroup.equals(getAddGroup3()));
     }
 
 

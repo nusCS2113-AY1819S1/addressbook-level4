@@ -5,8 +5,12 @@ import static org.junit.Assert.assertEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -29,21 +33,21 @@ public class XmlSerializableAddressBookTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
-                XmlSerializableAddressBook.class);
-        AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
-        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
-    }
-
-    @Test
     public void toModelType_typicalGroupsFile_success() throws Exception {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_GROUPS_FILE,
                 XmlSerializableAddressBook.class);
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalGroupsAddressBook = TypicalGroups.getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalGroupsAddressBook);
+    }
+
+    @Test
+    public void toModelType_typicalPersonsFile_success() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
+                XmlSerializableAddressBook.class);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalPersonsAddressBook = TypicalPersons.getTypicalAddressBook();
+        assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
     @Test
