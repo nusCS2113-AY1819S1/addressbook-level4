@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 
 /**
@@ -148,4 +149,12 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredTasks.equals(other.filteredTasks);
     }
 
+    /*
+    //=========== Deadline Accessors =============================================================
+    @Override
+    public void selectDeadline(Deadline deadline);
+
+    @Override
+    public boolean invalidDeadline(Deadline deadline);
+    */
 }

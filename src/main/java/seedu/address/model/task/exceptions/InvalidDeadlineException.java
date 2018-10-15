@@ -1,4 +1,4 @@
-package seedu.address.model.deadline.exceptions;
+package seedu.address.model.task.exceptions;
 
 /**
  * Signals that an invalid deadline is being entered.

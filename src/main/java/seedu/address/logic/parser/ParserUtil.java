@@ -76,4 +76,33 @@ public class ParserUtil {
         String trimmedDescription = description.trim();
         return trimmedDescription;
     }
+
+    //@@author emobeany
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String day}
+     */
+    public static String parseDay(String day) throws ParseException {
+        requireNonNull(day);
+        String trimmedDay = day.trim();
+        return trimmedDay;
+    }
+
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String month}
+     */
+    public static String parseMonth(String month) throws ParseException {
+        requireNonNull(month);
+        String trimmedMonth = month.trim();
+        return trimmedMonth;
+    }
+
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String year}
+     */
+    public static String parseYear(String year) throws ParseException {
+        requireNonNull(year);
+        String trimmedYear = year.trim();
+        return trimmedYear;
+    }
+
 }

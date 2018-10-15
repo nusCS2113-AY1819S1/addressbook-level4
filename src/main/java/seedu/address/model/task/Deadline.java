@@ -1,4 +1,6 @@
-package seedu.address.model.deadline;
+//@@author emobeany
+
+package seedu.address.model.task;
 
 import java.util.Objects;
 
@@ -8,25 +10,32 @@ import java.util.Objects;
  */
 
 public class Deadline {
-    private final Integer day;
-    private final Integer month;
-    private final Integer year;
+    private final String day;
+    private final String month;
+    private final String year;
 
-    public Deadline(Integer day, Integer month, Integer year) {
+    public Deadline(String day, String month, String year) {
         this.day = day;
         this.month = month;
         this.year = year;
     }
 
-    public Integer getDay() {
+    /*
+    public Deadline(String day, String month) {
+        this.day = day;
+        this.month = month;
+    }
+    */
+
+    public String getDay() {
         return day;
     }
 
-    public Integer getMonth() {
+    public String getMonth() {
         return month;
     }
 
-    public Integer getYear() {
+    public String getYear() {
         return year;
     }
 
@@ -34,12 +43,12 @@ public class Deadline {
      * Returns false if any fields are not within the limits (not a valid date).
      */
 
-    public boolean isValid(Deadline deadline) {
-        if (deadline.day < 0 || deadline.day > 31) {
+    public boolean isValidDeadline(Deadline deadline) {
+        if (Integer.parseInt(deadline.day) < 0 || Integer.parseInt(deadline.day) > 31) {
             return false;
-        } else if (deadline.month < 0 || deadline.month > 12) {
+        } else if (Integer.parseInt(deadline.month) < 0 || Integer.parseInt(deadline.month) > 12) {
             return false;
-        } else if (deadline.year < 1000 || deadline.year > 10000) {
+        } else if (Integer.parseInt(deadline.year) < 1000 || Integer.parseInt(deadline.year) > 10000) {
             return false;
         }
         return true;
@@ -61,7 +70,4 @@ public class Deadline {
                 .append(getYear());
         return builder.toString();
     }
-
-
-
 }
