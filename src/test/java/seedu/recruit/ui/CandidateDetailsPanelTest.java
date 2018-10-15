@@ -20,10 +20,9 @@ import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.commons.util.FileUtil;
 import seedu.recruit.commons.util.XmlUtil;
 import seedu.recruit.model.candidate.Candidate;
-import seedu.recruit.storage.XmlSerializableCandidateBook;
-
 import guitests.guihandles.CandidateCardHandle;
 import guitests.guihandles.CandidateDetailsPanelHandle;
+import seedu.recruit.storage.XmlSerializableCandidateBook;
 
 public class CandidateDetailsPanelTest extends GuiUnitTest {
     private static final ObservableList<Candidate> TYPICAL_CANDIDATES =
@@ -57,8 +56,8 @@ public class CandidateDetailsPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        CandidateCardHandle expectedPerson = candidateDetailsPanelHandle.
-                getCandidateCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        CandidateCardHandle expectedPerson = candidateDetailsPanelHandle
+                .getCandidateCardHandle(INDEX_SECOND_PERSON.getZeroBased());
         CandidateCardHandle selectedPerson = candidateDetailsPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
