@@ -28,45 +28,39 @@ public class LimitCommand extends Command {
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 "
             + PREFIX_MONEYFLOW + "100 ";
 
-    public static final String MESSAGE_BSSIC = "The limit you have set: %.2f \n"
-            + "The total money you have spent: %.2f\n";
+    public static final String MESSAGE_BASIC = "Date Period: %s -- %s.\n The limit you have set: %.2f \n";
 
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! "; //%l$s";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^";
-    private Limit limit;
-    private Record recordNow;
-    private int countRecord = 0;
-    private double sumOfSpend = 0;
+    public static final String MESSAGE_LIMITS_SAMEDATE ="There are already limits for that period of date";
 
-    public LimitCommand (Limit limitin) {
-        requireNonNull(limitin);
-        limit = limitin;
+    private Limit limit;
+    private boolean isExceeded;
+    private String output;
+    public LimitCommand (Limit limitIn) {
+        requireNonNull(limitIn);
+        limit = limitIn;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        while (countRecord < model.getFinancialPlanner().getRecordList().size()) {
-            recordNow = model.getFinancialPlanner().getRecordList().get(countRecord++);
-
-            if ((recordNow.getDate().isEarlierThan(limit.getDateEnd())
-                   && recordNow.getDate().isLaterThan(limit.getDateStart())
-                    || recordNow.getDate().equals(limit.getDateStart())
-                        || recordNow.getDate().equals(limit.getDateEnd()))) {
-                sumOfSpend += recordNow.getMoneyFlow().toDouble();
-            }
+        if (model.hasSameDateLimit(limit)) {
+            throw new CommandException(MESSAGE_LIMITS_SAMEDATE);
         }
 
-        if (limit.getLimitMoneyFlow().isNotLarger(sumOfSpend)) {
-            return new CommandResult(
-                    String.format(MESSAGE_BSSIC, -1 * limit.getLimitMoneyFlow().toDouble(), (-1 * sumOfSpend))
-                            + MESSAGE_NOT_EXCEED);
+        model.addLimit(limit);
+
+        if (model.isExceededLimit(limit)) {
+            output = String.format(MESSAGE_BASIC, limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())+
+                    MESSAGE_EXCEED;
         } else {
-            return new CommandResult(
-                    String.format(MESSAGE_BSSIC, -1 * limit.getLimitMoneyFlow().toDouble(), (-1 * sumOfSpend))
-                            + MESSAGE_EXCEED);
-
+            output = String.format(MESSAGE_BASIC, limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())+
+                    MESSAGE_NOT_EXCEED;
         }
+
+        return new CommandResult(output);
+        
     }
     @Override
     public boolean equals (Object other) {

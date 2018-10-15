@@ -1,6 +1,8 @@
 package seedu.planner.model;
 
 import javafx.collections.ObservableList;
+
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryMap;
 
@@ -20,4 +22,5 @@ public interface ReadOnlyFinancialPlanner {
     //TODO: to be removed when storage is combined
     void setSummaryMap(SummaryMap summaryMap);
 
+    ObservableList<Limit> getLimitList();
 }

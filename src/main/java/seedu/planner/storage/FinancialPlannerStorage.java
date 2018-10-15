@@ -19,6 +19,8 @@ public interface FinancialPlannerStorage {
      */
     Path getFinancialPlannerFilePath();
 
+
+
     /**
      * Returns the file path of the data file for SummaryMap storage
      */
@@ -42,10 +44,10 @@ public interface FinancialPlannerStorage {
      * @param financialPlanner cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
 
     /**
-     * @see #saveFinancialPlanner(ReadOnlyFinancialPlanner)
+     * @see #saveRecordList(ReadOnlyFinancialPlanner)
      */
     void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
 

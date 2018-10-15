@@ -64,7 +64,7 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link XmlFinancialPlannerStorageTest} class.
          */
         FinancialPlanner original = getTypicalFinancialPlanner();
-        storageManager.saveFinancialPlanner(original);
+        storageManager.saveRecordList(original);
         ReadOnlyFinancialPlanner retrieved = storageManager.readFinancialPlanner().get();
         assertEquals(original, new FinancialPlanner(retrieved));
     }

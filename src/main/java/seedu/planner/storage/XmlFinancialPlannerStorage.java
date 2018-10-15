@@ -76,7 +76,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     /**
-     * Similar to {@link #saveFinancialPlanner(ReadOnlyFinancialPlanner)}
+     * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
      * @param filePath location of the data. Cannot be null
      */
     public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
@@ -134,5 +134,21 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
         FileUtil.createIfMissing(filePath);
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableSummaryMap(summaryMap));
+    }
+
+    // ======================================= Limit Storage methods ==============================
+
+    /**
+     * save the updated limit list into the special xml file
+     * @param financialPlanner
+     * @param filePath
+     * @throws IOException
+     */
+    public void saveLimitList (ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+        requireNonNull(financialPlanner);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableFinancialPlanner(financialPlanner));
     }
 }

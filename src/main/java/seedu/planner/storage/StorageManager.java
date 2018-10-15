@@ -70,9 +70,11 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
         saveFinancialPlanner(financialPlanner, financialPlannerStorage.getFinancialPlannerFilePath());
     }
+
+    //public void
 
     @Override
     public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
@@ -85,7 +87,18 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveFinancialPlanner(event.data);
+            saveRecordList(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    //@Override
+   // @Subscribe
+    public void handleLimitListChangedEvent (FinancialPlannerChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveRecordList(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

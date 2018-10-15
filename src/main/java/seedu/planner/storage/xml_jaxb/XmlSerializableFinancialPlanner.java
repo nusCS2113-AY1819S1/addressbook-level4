@@ -28,6 +28,7 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Financ
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableFinancialPlanner() {
+
         records = new ArrayList<>();
     }
 
@@ -37,6 +38,8 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Financ
     public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
         this();
         records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
+
+
     }
 
     /**

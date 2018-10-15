@@ -15,6 +15,7 @@ public class UserPrefs {
 
     private Path financialPlannerFilePath = Paths.get("data" , "financialplanner.xml");
     private Path summaryMapFilePath = Paths.get("data", "summarymap.xml");
+    private Path financialPlannerLimitFilePath = Paths.get("data", "LimitList.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -35,6 +36,8 @@ public class UserPrefs {
     public Path getFinancialPlannerFilePath() {
         return financialPlannerFilePath;
     }
+
+    public Path getFinancialPlannerLimitFilePath() { return financialPlannerLimitFilePath; }
 
     public void setFinancialPlannerFilePath(Path financialPlannerFilePath) {
         this.financialPlannerFilePath = financialPlannerFilePath;

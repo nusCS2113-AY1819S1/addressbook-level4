@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
+import java.util.Observable;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,6 +16,7 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.Summary;
 
@@ -26,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
-
+    private final FilteredList<Limit> limits;
     /**
      * Initializes a ModelManager with the given financialPlanner and userPrefs.
      */
@@ -38,6 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
+        limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
     }
 
     public ModelManager() {
@@ -104,7 +107,31 @@ public class ModelManager extends ComponentManager implements Model {
         indicateSummaryMapChanged();
     }
 
-    //=========== Filtered Record List Accessors =====================================================
+    //=========== Limit related methods =====================================================
+    @Override
+    public boolean hasSameDateLimit(Limit limitIn) {
+        requireNonNull(limitIn);
+        return versionedFinancialPlanner.hasSameDateLimit(limitIn);
+    }
+    @Override
+    public void deleteLimit(Limit target) {
+        versionedFinancialPlanner.removeLimit(target);
+        indicateFinancialPlannerChanged();
+    }
+
+    @Override
+    public void addLimit(Limit limitIn) {
+        versionedFinancialPlanner.addLimit(limitIn);
+
+        indicateFinancialPlannerChanged();
+    }
+    @Override
+    public boolean isExceededLimit (Limit limitIn) {
+        requireNonNull(limitIn);
+        return (versionedFinancialPlanner.isExceededLimit(limitIn));
+    }
+
+    //=========== Filtered Record List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Record} backed by the internal list of
