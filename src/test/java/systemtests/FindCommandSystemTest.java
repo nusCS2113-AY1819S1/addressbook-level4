@@ -30,7 +30,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, BENSON_NOTT, DANIEL_NOTT); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredList(expectedModel, BENSON_NOTT, DANIEL_NOTT); // Benson&Daniel's first names are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
