@@ -11,6 +11,8 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
@@ -45,6 +47,12 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private LoginWindow loginWindow;
     private RegistrationWindow registrationWindow;
+
+    @FXML
+    private Text friendText;
+
+    @FXML
+    private Text personText;
 
     @FXML
     private StackPane timetablePlaceholder;
@@ -130,6 +138,14 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+
+        friendText.setText("Friends");
+        friendText.setFill(Color.LIGHTGOLDENRODYELLOW);
+        friendText.setStyle("-fx-font-size: 20px;");
+        personText.setText("Others");
+        personText.setFill(Color.LIGHTGOLDENRODYELLOW);
+        personText.setStyle("-fx-font-size: 20px;");
+
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
