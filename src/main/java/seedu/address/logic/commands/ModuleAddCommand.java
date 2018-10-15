@@ -7,7 +7,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.Module;
-import seedu.address.model.StorageController;
+import seedu.address.model.ModuleManager;
 
 /**
  * Adds a module to Trajectory
@@ -35,9 +35,10 @@ public class ModuleAddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        StorageController.retrieveData();
-        StorageController.getModuleStorage().add(new Module(moduleToAdd.getModuleName(), moduleToAdd.getModuleCode()));
-        StorageController.storeData();
+        ModuleManager moduleManager = new ModuleManager();
+        moduleManager.addModule(moduleToAdd);
+        moduleManager.saveModuleList();
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, moduleToAdd.getModuleCode(),
                 moduleToAdd.getModuleName()));
     }
