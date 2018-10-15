@@ -1,10 +1,15 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.io.IOException;
+
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.Person;
 
 //@@author jitwei98
 /**
@@ -21,6 +26,8 @@ public class ExportAllCommand extends Command {
     // public static final String MESSAGE_NOT_IMPLEMENTED_YET = "exportall command not implemented yet.";
 
     public static final String MESSAGE_ARGUMENTS = "Filetype: %1$s";
+    public static final String MESSAGE_SUCCESS = "Exported all contacts.";
+    private static final String MESSAGE_FAILURE = "Export failed!";
 
     // TODO: use enum or other better ways to store
     private String filetype;
@@ -36,7 +43,16 @@ public class ExportAllCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, filetype));
+        requireNonNull(model);
+        ObservableList<Person> personList = model.getFilteredPersonList();
+        try {
+            model.exportToCsv();
+        } catch (IOException e) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
+        //        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        return new CommandResult(MESSAGE_SUCCESS);
+//        throw new CommandException(String.format(MESSAGE_ARGUMENTS, filetype));
     }
 
     @Override

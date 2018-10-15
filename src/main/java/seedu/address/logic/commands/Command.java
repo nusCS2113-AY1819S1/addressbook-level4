@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import java.io.IOException;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -17,6 +19,6 @@ public abstract class Command {
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
      */
-    public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;
+    public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException, IOException;
 
 }
