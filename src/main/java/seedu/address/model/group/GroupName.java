@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class GroupName {
     public static final String MESSAGE_GROUP_NAME_CONSTRAINTS =
-            "Group names should only contain alphanumeric characters, '[' and ']', "
+            "Group names should only contain alphanumeric characters, '-', '[' and ']', "
                     + "and it should not be blank";
 
     /**
