@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.note.Note;
 import seedu.address.storage.StorageHandler;
 
@@ -14,8 +16,10 @@ import seedu.address.storage.StorageHandler;
 @XmlRootElement(name = "notes")
 public class NoteManager {
 
-    @XmlElement(name = "note")
     private static ArrayList<Note> notes = new ArrayList<Note>();
+
+    @XmlElement(name = "note")
+    private static ObservableList<Note> observableNotesList = FXCollections.observableArrayList();
 
     private static StorageHandler storage = new StorageHandler();
 
@@ -23,8 +27,14 @@ public class NoteManager {
 
     }
 
+    /**
+     * Adds the new note data to the ArrayList and ObservableList.
+     *
+     * @param note
+     */
     public void addNote(Note note) {
         notes.add(note);
+        observableNotesList.add(note);
     }
 
     public ArrayList<Note> getNotes() {
@@ -33,6 +43,10 @@ public class NoteManager {
 
     public void setNotesList(ArrayList<Note> notes) {
         this.notes = notes;
+    }
+
+    public ObservableList<Note> getObservableNotesList() {
+        return observableNotesList;
     }
 
     /**
