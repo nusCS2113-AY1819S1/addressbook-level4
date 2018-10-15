@@ -158,8 +158,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Import/ Export ==============================================================================
     @Override
-    public void exportToCsv() throws IOException {
-        // TODO: finish this
+    public void exportToCsv() {
         CsvWriter csvWriter = new CsvWriter(getFilteredPersonList());
         csvWriter.writeToCsv();
     }
