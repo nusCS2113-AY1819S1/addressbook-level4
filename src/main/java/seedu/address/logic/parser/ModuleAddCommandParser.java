@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ModuleAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Module;
+import seedu.address.model.module.Module;
 
 /**
  * Parses input arguments and creates a new ModuleAddCommand object.
