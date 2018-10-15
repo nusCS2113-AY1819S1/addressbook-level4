@@ -1,4 +1,4 @@
-package seedu.address.logic.comments;
+package seedu.address.logic;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -16,7 +16,7 @@ import java.util.Vector;
 /**
  * Adds comments section.
  */
-public abstract class Comments {
+public class Comments {
 
     public static Vector v;
     public static String input;
@@ -29,6 +29,37 @@ public abstract class Comments {
         v = this.parseCommentSection(input);
     }
 
+    /**
+     *  Appends comment to the end of the current Comment Section of index
+     */
+    public String addComment(String comment) {
+        v.add(comment);
+        return rewrite(v,input);
+    }
+
+    /**
+     *  Replies with the comment to event Comment section of index and line
+     */
+    public String replyComment(String comment, int line) {
+        try {
+            v.add(line, "REPLY--->" + comment);
+        } catch (Exception e) {
+            System.out.println("Line error");
+        }
+        return rewrite(v,input);
+    }
+
+    /**
+     *  Admin only: Can delete comment given event Comment Section indexx and Line
+     */
+    public String deleteComment(int line) {
+        try {
+            v.remove(line);
+        } catch(Exception e) {
+            System.out.println("Line error");
+        }
+        return rewrite(v,input);
+    }
 
     /**
      *  Runs a pre-processing to ensure that strings can be stored as a vector
@@ -99,9 +130,7 @@ public abstract class Comments {
      * Test code.
      */
     public static void main(String[] args) {
-        AddComment a = new AddComment();
-        DeleteComment b = new DeleteComment();
-        ReplyComment c = new ReplyComment();
+        Comments comment = new Comments();
         String str;
         while(true){
             System.out.println("What Comment do you want to add?");
@@ -110,13 +139,14 @@ public abstract class Comments {
 
             try {
                 Integer.parseInt(username);
-                str = b.deleteComment(Integer.parseInt(username));
+                str = comment.deleteComment(Integer.parseInt(username)-1);
                 System.out.println("Comment at " + username + "deleted");
-                //System.out.println(str);
+                System.out.println(str);
             } catch(NumberFormatException e) {
-                str = c.replyComment(username, 1);
+                //comment.addComment(username);
+                str = comment.replyComment(username, 1);
                 System.out.println("Comment added!!");
-                //System.out.println(str);
+                System.out.println(str);
             }
         }
 
