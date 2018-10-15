@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -93,7 +94,17 @@ public class AddressBook implements ReadOnlyTaskBook {
         tasks.remove(key);
     }
 
-    //// util methods
+    //@@author JeremyInElysium
+    /**
+     * Adds a milestone to a selected task in the Task Book.
+     * The task must already exist in the Task Book.
+     */
+    public void addMilestone(Milestone milestone) {
+        requireNonNull(milestone);
+        tasks.add(milestone);
+    }
+
+    // util methods
 
     @Override
     public String toString() {

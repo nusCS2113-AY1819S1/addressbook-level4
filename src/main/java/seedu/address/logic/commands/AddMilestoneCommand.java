@@ -27,15 +27,6 @@ public class AddMilestoneCommand extends Command {
             + PREFIX_MILESTONE + "Complete Sections 8.1 to 8.5 "
             + PREFIX_RANK + "1";
 
-    //print observable list v1.3
-
-    //prompt user to select task v1.3
-
-    //create Task object and assign user's choice to it v1.3
-    //Task selectedTask = ;
-
-    //assign milestone to user's choice v1.3
-
     private final Milestone toAdd;
 
     /**
@@ -46,18 +37,15 @@ public class AddMilestoneCommand extends Command {
         toAdd = milestone;
     }
 
-    public static final String MESSAGE_SUCCESS = "New milestone added";
+    public static final String MESSAGE_SUCCESS = "New milestone added: %1$s";
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task book";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandExceptionException {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        //update Model & ModelManager once interaction between Task & Milestone confirmed
-
-        }
-
-
+        model.addMilestone(toAdd);
+        model.commitTaskBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
-
 }
