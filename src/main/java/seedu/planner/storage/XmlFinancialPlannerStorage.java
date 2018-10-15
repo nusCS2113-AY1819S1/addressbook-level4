@@ -14,9 +14,11 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.commons.util.FileUtil;
+import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.summary.Summary;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xml_jaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.storage.xml_jaxb.XmlSerializableSummaryMap;
@@ -53,7 +55,16 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
             throws DataConversionException, IOException {
         requireNonNull(recordListFilePath);
         requireNonNull(summaryMapFilePath);
-        return null;
+
+        Optional<ReadOnlyFinancialPlanner> financialPlannerOptional = Optional.empty();
+        Optional<UniqueRecordList> recordListOptional = readRecordList(recordListFilePath);
+        Optional<SummaryMap> summaryMapOptional = readSummaryMap(summaryMapFilePath);
+        if (recordListOptional.isPresent() && summaryMapOptional.isPresent()) {
+            FinancialPlanner financialPlanner = new FinancialPlanner();
+            financialPlanner.resetData(recordListOptional.get(), summaryMapOptional.get());
+            financialPlannerOptional = Optional.of(financialPlanner);
+        }
+        return financialPlannerOptional;
     }
 
     @Override
