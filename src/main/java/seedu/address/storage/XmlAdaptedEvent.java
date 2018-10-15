@@ -116,7 +116,8 @@ public class XmlAdaptedEvent {
 
 
         if (startTime == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StartTime.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StartTime.class.getSimpleName()));
         }
         if (!StartTime.isValidTime(startTime)) {
             throw new IllegalValueException(StartTime.MESSAGE_TIME_CONSTRAINTS);
