@@ -484,12 +484,12 @@ We have two types of tests:
 
 .  *GUI Tests* - These are tests involving the GUI. They include,
 .. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
-.. _Unit tests_ that test the individual components. These are in `seedu.address.ui` package.
+.. _Unit tests_ that test the individual components. These are in `UnRefactored.ui` package.
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
-e.g. `seedu.address.commons.StringUtilTest`
+e.g. `UnRefactored.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `seedu.address.storage.StorageManagerTest`
+e.g. `UnRefactored.storage.StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
 e.g. `seedu.address.logic.LogicManagerTest`
 
@@ -868,14 +868,14 @@ Use case ends.
 
 *Extensions*
 
-* 2a. Student enters an invalid command format
-** 2a1. TB requests for a valid command
-** 2a2. Student enters a new add command
+* 1a. Student enters an invalid command format
+** 1a1. TB requests for a valid command
+** 1a2. Student enters a new add command
 +
-Use case ends.
+Use case resumes at step 2.
 
-* 2b. Student enters a duplicated task
-** 2b1. TB outputs an error message
+* 1b. Student enters a duplicated task
+** 1b1. TB outputs an error message
 +
 Use case ends.
 
@@ -920,23 +920,24 @@ Use case ends.
 *MSS*
 
 1.  Student requests to sort his or her tasks for the day
-2.  Student returns the method to sort the tasks
-3.  TB checks for its validity and display the sorted task list
+2.  TB asks for the criteria to sort the tasks.
+3.  Student returns the method to sort tasks
+4.  TB checks for its validity and display the sorted task list
 +
 Use case ends.
 
 *Extensions*
 
-* 2a. Student provided an invalid command format
-** 2a1. TB requests for a valid command
-** 2a2. Student enters a new Sort command
+* 1b. Student requested to sort an empty taskbook
+** 1b1. TB outputs an error message
 +
 Use case ends.
 
-* 2b. Student requested to sort an empty taskbook
-** 2b1. TB outputs an error message
+* 3a. Student provided an invalid sorting criteria
+** 3a1. TB requests for a valid sorting criteria
+** 3a2. Student enters a new criteria
 +
-Use case ends.
+Use case resumes at step 4.
 
 [discrete]
 
@@ -971,7 +972,7 @@ Use case ends.
 3. Student requests to defer deadline for a task
 4. TB asks for the number of weeks to defer
 5. Student provides the number of weeks for deferment
-6. TB defers deadline
+6. TB defers deadline for task
 +
 Use case ends.
 
@@ -983,6 +984,7 @@ Use case ends.
 Use case ends.
 
 [discrete]
+
 === Use case: Remove deadline
 
 *MSS*
@@ -1002,16 +1004,18 @@ Use case ends.
 ** 1a1. TB outputs an error message
 
 [discrete]
+
 === Use case: View date
 
 *MSS*
 
-1. Student enters the view command
+1. Student requests to view date
 2. TB returns the date in d/DAY w/WEEK m/MONTH format
 +
 Use case ends.
 
 [discrete]
+
 === Use case: Select a date
 
 *MSS*
@@ -1023,10 +1027,10 @@ Use case ends.
 
 *Extensions*
 
-* 2a. Date entered by the student is not valid e.g. d/Tues w/5 m/9
-** 2a1. TB prompts student to enter a correct date
+* 1a. Date entered by the student is not valid e.g. d/Tues w/5 m/9
+** 1a1. TB prompts student to enter a correct date
 +
-Use case ends.
+Use case resumes at step 2.
 
 [appendix]
 == Non Functional Requirements

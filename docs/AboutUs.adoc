@@ -23,7 +23,7 @@ Responsibilities: Deadline & Task features
 image::jeremyaw.png[width="150", align="left"]
 {empty}[http://github.com/jeremyinelysium[github]] [<<johndoe#, portfolio>>]
 
-Role: Team Lead +
+Role: Developer +
 Responsibilities: Deadline features
 
 '''
