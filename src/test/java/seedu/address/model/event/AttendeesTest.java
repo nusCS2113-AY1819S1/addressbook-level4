@@ -53,6 +53,7 @@ public class AttendeesTest {
 
         // Attendees not equal to one with different content
         assertFalse(listOne.equals(listTwo));
+        assertFalse(listOne.equals(listThree));
         assertFalse(listTwo.equals(listThree));
     }
 
