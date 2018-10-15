@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_TUT_1;
 import static seedu.address.testutil.TypicalGroups.CS1010;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalGroups.TUT_2;
@@ -31,7 +32,7 @@ public class UniqueGroupListTest {
     @Test
     public void contains_nullGroup_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueGroupList.contains(null);
+        uniqueGroupList.contains((Group) null);
     }
 
     @Test
@@ -50,7 +51,7 @@ public class UniqueGroupListTest {
         uniqueGroupList.createGroup(TUT_1);
         Group editedTut1 = new GroupBuilder(TUT_1)
                 .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
-                .withTags(VALID_GROUP_TAG_CS1010)
+                .withTags(VALID_GROUP_TAG_TUT_1)
                 .build();
         assertTrue(uniqueGroupList.contains(editedTut1));
     }
@@ -66,98 +67,6 @@ public class UniqueGroupListTest {
         uniqueGroupList.createGroup(TUT_1);
         thrown.expect(DuplicateGroupException.class);
         uniqueGroupList.createGroup(TUT_1);
-    }
-
-    @Test
-    public void setGroup_nullTargetGroup_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        uniqueGroupList.setGroup(null, TUT_1);
-    }
-
-    @Test
-    public void setGroup_nullEditedGroup_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        uniqueGroupList.setGroup(TUT_1, null);
-    }
-
-    @Test
-    public void setGroup_targetGroupNotInList_throwsGroupNotFoundException() {
-        thrown.expect(GroupNotFoundException.class);
-        uniqueGroupList.setGroup(TUT_1, TUT_1);
-    }
-
-    @Test
-    public void setGroup_editedGroupIsSameGroup_success() {
-        uniqueGroupList.createGroup(TUT_1);
-        uniqueGroupList.setGroup(TUT_1, TUT_1);
-        UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.createGroup(TUT_1);
-        assertEquals(expectedUniqueGroupList, uniqueGroupList);
-    }
-
-    @Test
-    public void setGroup_editedGroupHasSameIdentity_success() {
-        uniqueGroupList.createGroup(TUT_1);
-        Group editedTut1 = new GroupBuilder(TUT_1)
-                .withGroupLocation(VALID_GROUP_LOCATION_CS1010)
-                .withTags(VALID_GROUP_TAG_CS1010)
-                .build();
-        uniqueGroupList.setGroup(TUT_1, editedTut1);
-        UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.createGroup(editedTut1);
-        assertEquals(expectedUniqueGroupList, uniqueGroupList);
-    }
-
-    @Test
-    public void setGroup_editedGroupHasDifferentIdentity_success() {
-        uniqueGroupList.createGroup(TUT_1);
-        uniqueGroupList.setGroup(TUT_1, CS1010);
-        UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.createGroup(CS1010);
-        assertEquals(expectedUniqueGroupList, uniqueGroupList);
-    }
-
-    @Test
-    public void setGroup_editedGroupHasNonUniqueIdentity_throwsDuplicateGroupException() {
-        uniqueGroupList.createGroup(TUT_1);
-        uniqueGroupList.createGroup(CS1010);
-        thrown.expect(DuplicateGroupException.class);
-        uniqueGroupList.setGroup(TUT_1, CS1010);
-    }
-
-    @Test
-    public void remove_nullGroup_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        uniqueGroupList.remove(null);
-    }
-
-    @Test
-    public void remove_groupDoesNotExist_throwsGroupNotFoundException() {
-        thrown.expect(GroupNotFoundException.class);
-        uniqueGroupList.remove(TUT_2);
-    }
-
-    @Test
-    public void remove_existingGroup_removesGroup() {
-        uniqueGroupList.createGroup(TUT_1);
-        uniqueGroupList.remove(TUT_1);
-        UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        assertEquals(expectedUniqueGroupList, uniqueGroupList);
-    }
-
-    @Test
-    public void setGroups_nullUniqueGroupList_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        uniqueGroupList.setGroups((UniqueGroupList) null);
-    }
-
-    @Test
-    public void setGroups_uniqueGroupList_replacesOwnListWithProvidedUniqueGroupList() {
-        uniqueGroupList.createGroup(TUT_1);
-        UniqueGroupList expectedUniqueGroupList = new UniqueGroupList();
-        expectedUniqueGroupList.createGroup(CS1010);
-        uniqueGroupList.setGroups(expectedUniqueGroupList);
-        assertEquals(expectedUniqueGroupList, uniqueGroupList);
     }
 
     @Test

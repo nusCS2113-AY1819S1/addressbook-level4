@@ -2,20 +2,14 @@ package seedu.address.model.group;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_TUT_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_TUT_1;
 import static seedu.address.testutil.TypicalGroups.CS1010;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
-import static seedu.address.testutil.TypicalPersonIndexs.PERSON_INDEX_1;
-import static seedu.address.testutil.TypicalPersonIndexs.PERSON_INDEX_2;
 
 import org.junit.Test;
 
 import seedu.address.model.person.Name;
-import seedu.address.model.person.PersonIndex;
 import seedu.address.testutil.Assert;
-import seedu.address.testutil.GroupBuilder;
 
 public class GroupNameTest {
     @Test

@@ -41,9 +41,9 @@ public class GroupTest {
         editedTut1 = new GroupBuilder(TUT_1).withGroupName(VALID_GROUP_NAME_CS1010).build();
         assertFalse(TUT_1.isSameGroup(editedTut1));
 
-        // same group name, same location, different attributes -> returns true
+        // same group name, same location, different tags -> returns false
         editedTut1 = new GroupBuilder(TUT_1).withTags(VALID_GROUP_TAG_CS1010).build();
-        assertTrue(TUT_1.isSameGroup(editedTut1));
+        assertFalse(TUT_1.isSameGroup(editedTut1));
     }
 
     @Test

@@ -2,23 +2,19 @@ package seedu.address.model.group;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_CS1010;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS1010;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
 import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_1;
 import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_2;
 import static seedu.address.testutil.TypicalAddGroups.ADD_GROUP_3;
-import static seedu.address.testutil.TypicalGroups.CS1010;
-import static seedu.address.testutil.TypicalGroups.TUT_1;
-import static seedu.address.testutil.TypicalPersonIndexs.getSingleTypicalPersonIndexs;
-import static seedu.address.testutil.TypicalPersonIndexs.getTypicalPersonIndexs;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
+import static seedu.address.testutil.TypicalIndexes.getSingleTypicalPersonIndicesSet;
+import static seedu.address.testutil.TypicalIndexes.getTypicalPersonIndicesSet;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.testutil.Assert;
-import seedu.address.testutil.GroupBuilder;
 
 public class AddGroupTest {
     @Rule
@@ -30,23 +26,23 @@ public class AddGroupTest {
     }
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        AddGroup addGroup = ADD_GROUP_1;
-        thrown.expect(UnsupportedOperationException.class);
-        addGroup.getPersonIndexes().remove(0);
+    public void constructor_invalidIndex_throwsIndexOutOfBoundsException() {
+        String invalidGroupIndex = "0";
+        Assert.assertThrows(IndexOutOfBoundsException.class, () -> new AddGroup(Index.fromOneBased(Integer.parseInt(invalidGroupIndex)),
+                getSingleTypicalPersonIndicesSet()));
     }
 
     @Test
-    public void constructor_invalidGroupName_throwsIllegalArgumentException() {
-        String invalidGroupName = "";
-        Assert.assertThrows(IllegalArgumentException.class, () -> new AddGroup(new GroupName(invalidGroupName),
-                getSingleTypicalPersonIndexs()));
+    public void constructor_invalidIndex_throwsNumberFormatException() {
+        String invalidGroupIndex = "e";
+        Assert.assertThrows(NumberFormatException.class, () -> new AddGroup(Index.fromOneBased(Integer.parseInt(invalidGroupIndex)),
+                getSingleTypicalPersonIndicesSet()));
     }
 
     @Test
     public void equals() {
         // same values -> returns true
-        AddGroup addGroup1Copy = new AddGroup(TUT_1.getGroupName(),getTypicalPersonIndexs());
+        AddGroup addGroup1Copy = new AddGroup(INDEX_FIRST_GROUP,getTypicalPersonIndicesSet());
         assertTrue(ADD_GROUP_1.equals(addGroup1Copy));
 
         // same object -> returns true
@@ -61,11 +57,11 @@ public class AddGroupTest {
         // different addGroup -> returns false
         assertFalse(ADD_GROUP_1.equals(ADD_GROUP_3));
 
-        // different group name -> returns false
+        // different group index -> returns false
         assertFalse(ADD_GROUP_1.equals(ADD_GROUP_2));
 
-        // different person indexs -> returns false
-        assertFalse(ADD_GROUP_1.equals(ADD_GROUP_2));
+        // different person indices -> returns false
+        assertFalse(ADD_GROUP_1.equals(ADD_GROUP_3));
     }
 
 

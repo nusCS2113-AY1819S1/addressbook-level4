@@ -1,6 +1,7 @@
 package seedu.address.commons.util;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
@@ -52,6 +53,7 @@ public class XmlUtilTest {
     private static final String VALID_GROUP_LOCATION = "E1-01-01";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedTag> VALID_GROUP_TAGS = Collections.singletonList(new XmlAdaptedTag("maths"));
+    private static final List<XmlAdaptedPerson> VALID_PERSONS = Collections.singletonList(new XmlAdaptedPerson(ALICE));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -102,7 +104,7 @@ public class XmlUtilTest {
         XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
                 MISSING_GROUP_FIELD_FILE, XmlAdaptedGroupWithRootElement.class);
         XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
-                null, VALID_GROUP_LOCATION, VALID_GROUP_TAGS);
+                null, VALID_GROUP_LOCATION, VALID_GROUP_TAGS, VALID_PERSONS);
         assertEquals(expectedGroup, actualGroup);
     }
 
@@ -121,7 +123,7 @@ public class XmlUtilTest {
         XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
                 INVALID_GROUP_FIELD_FILE, XmlAdaptedGroupWithRootElement.class);
         XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
-                VALID_GROUP_NAME, INVALID_GROUP_LOCATION, VALID_GROUP_TAGS);
+                VALID_GROUP_NAME, INVALID_GROUP_LOCATION, VALID_GROUP_TAGS, VALID_PERSONS);
         assertEquals(expectedGroup, actualGroup);
     }
 
@@ -140,7 +142,7 @@ public class XmlUtilTest {
         XmlAdaptedGroup actualGroup = XmlUtil.getDataFromFile(
                 VALID_GROUP_FILE, XmlAdaptedGroupWithRootElement.class);
         XmlAdaptedGroup expectedGroup = new XmlAdaptedGroup(
-                VALID_GROUP_NAME, VALID_GROUP_LOCATION, VALID_GROUP_TAGS);
+                VALID_GROUP_NAME, VALID_GROUP_LOCATION, VALID_GROUP_TAGS, VALID_PERSONS);
         assertEquals(expectedGroup, actualGroup);
     }
 

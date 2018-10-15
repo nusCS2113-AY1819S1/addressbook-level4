@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -72,7 +73,7 @@ public class AddressBookTest {
     public void resetData_withDuplicateGroups_throwsDuplicateGroupException() {
         // Two groups with the same identity fields
         Group editedTut1 = new GroupBuilder(TUT_1).withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
-                .withTags(VALID_GROUP_TAG_CS1010)
+                .withTags(VALID_GROUP_TAG_TUT_1)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE);
         List<Group> newGroups = Arrays.asList(TUT_1, editedTut1);
@@ -125,11 +126,11 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasGroup_groupWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasGroup_groupWithSameIdentityAndTagFieldsInAddressBook_returnsTrue() {
         addressBook.createGroup(TUT_1);
         Group editedTut1 = new GroupBuilder(TUT_1)
                 .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
-                .withTags(VALID_GROUP_TAG_CS1010)
+                .withTags(VALID_GROUP_TAG_TUT_1)
                 .build();
         assertTrue(addressBook.hasGroup(editedTut1));
     }

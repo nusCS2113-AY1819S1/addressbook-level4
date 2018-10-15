@@ -24,7 +24,7 @@ public class GroupUtil {
     public static String getGroupDetails(Group group) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + group.getGroupName().groupName + " ");
-        sb.append(PREFIX_GROUP_LOCATION + group.getGroupLocation().value + " ");
+        sb.append(PREFIX_GROUP_LOCATION + group.getGroupLocation().groupLocation + " ");
         group.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );

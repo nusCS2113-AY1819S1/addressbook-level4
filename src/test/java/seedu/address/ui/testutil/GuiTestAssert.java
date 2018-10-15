@@ -121,7 +121,7 @@ public class GuiTestAssert {
      */
     public static void assertCardDisplaysGroup(Group expectedGroup, GroupCardHandle actualCard) {
         assertEquals(expectedGroup.getGroupName().groupName, actualCard.getGroupName());
-        assertEquals(expectedGroup.getGroupLocation().value, actualCard.getGroupLocation());
+        assertEquals(expectedGroup.getGroupLocation().groupLocation, actualCard.getGroupLocation());
         assertGroupTagsEqual(expectedGroup, actualCard);
     }
 

@@ -6,6 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_CS10
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_TUT_1;
+import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +34,10 @@ public class TypicalGroups {
             .withGroupName(VALID_GROUP_NAME_TUT_1)
             .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
             .withTags(VALID_GROUP_TAG_TUT_1).build();
+    public static final Group TUT_1_WITH_PERSONS = new GroupBuilder()
+            .withGroupName(VALID_GROUP_NAME_TUT_1)
+            .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
+            .withTags(VALID_GROUP_TAG_TUT_1).withPersons(ALICE).build();
     public static final Group CS1010 = new GroupBuilder()
             .withGroupName(VALID_GROUP_NAME_CS1010)
             .withGroupLocation(VALID_GROUP_LOCATION_CS1010)

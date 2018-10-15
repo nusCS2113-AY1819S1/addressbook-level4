@@ -99,4 +99,12 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    /**
+     * Returns a person set containing the list of strings given.
+     */
+    public static Set<Person> getPersonSet(Person... persons) {
+        return Arrays.stream(persons)
+                .collect(Collectors.toSet());
+    }
+
 }

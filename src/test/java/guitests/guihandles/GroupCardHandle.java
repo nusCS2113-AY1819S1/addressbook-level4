@@ -72,7 +72,7 @@ public class GroupCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(Group group) {
         return getGroupName().equals(group.getGroupName().groupName)
-                && getGroupLocation().equals(group.getGroupLocation().value)
+                && getGroupLocation().equals(group.getGroupLocation().groupLocation)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(group.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));
