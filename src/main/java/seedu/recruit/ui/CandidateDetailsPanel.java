@@ -42,7 +42,7 @@ public class CandidateDetailsPanel extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label desired_job;
+    private Label job;
     @FXML
     private Label education;
     @FXML
@@ -82,7 +82,7 @@ public class CandidateDetailsPanel extends UiPart<Region> {
         phone.setText(selectedCandidate.getPhone().value);
         email.setText(selectedCandidate.getEmail().value);
         address.setText(selectedCandidate.getAddress().value);
-        desired_job.setText(selectedCandidate.getJob().value);
+        job.setText(selectedCandidate.getJob().value);
         education.setText(selectedCandidate.getEducation().value);
         salary.setText(selectedCandidate.getSalary().value);
     }

@@ -123,6 +123,10 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    /**
+     * Handles the menu Switch Book from Candidate Book
+     * to Company Book event, {@code event}.
+     */
     @FXML
     public void handleChangeToCandidateDetailsPanel() {
         candidateBook.setOnAction(new EventHandler<ActionEvent>() {
@@ -140,6 +144,10 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
+    /**
+     * Handles the menu Switch Book from Company Book
+     * to Candidate Book event, {@code event}.
+     */
     @FXML
     public void handleChangeToCompanyJobDetailsPanel() {
         companyBook.setOnAction(new EventHandler<ActionEvent>() {
