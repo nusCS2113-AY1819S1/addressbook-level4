@@ -35,6 +35,7 @@ public class LoginCommand extends Command {
         toLogin = user;
     }
 
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         if (!model.userExists(toLogin)) {
@@ -43,5 +44,6 @@ public class LoginCommand extends Command {
 
         setCurrentUser(toLogin);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin.getUsername().toString()));
+
     }
 }

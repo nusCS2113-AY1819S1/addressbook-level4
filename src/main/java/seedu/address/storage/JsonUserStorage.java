@@ -52,5 +52,6 @@ public class JsonUserStorage {
         FileWriter file = new FileWriter(folderPathString);
         file.write(object.toJSONString());
         file.flush();
+
     }
 }
