@@ -28,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<LoginDetails> filteredLoginDetails;
+    private final FilteredList<ClubBudgetElements> filteredClubs;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +42,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedLoginBook = new VersionedLoginBook(loginBook);
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredClubs = new FilteredList<>(versionedAddressBook.getClubsList());
         filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
     }
 
@@ -156,6 +158,17 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    //=========== Filtered Clubs List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code ClubBudgetElements} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<ClubBudgetElements> getFilteredClubsList() {
+        return FXCollections.unmodifiableObservableList(filteredClubs);
     }
 
     //=========== Undo/Redo =================================================================================

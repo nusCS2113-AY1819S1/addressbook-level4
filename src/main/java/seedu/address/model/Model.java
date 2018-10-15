@@ -15,6 +15,8 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     Predicate<LoginDetails> PREDICATE_SHOW_ALL_ACCOUNTS = unused -> true;
+
+    Predicate<ClubBudgetElements> PREDICATE_SHOW_ALL_CLUBS = unused -> true;
     /**
      * Creates an account for address book.
      * The account must not already exist in the address book.
@@ -76,6 +78,10 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
+
+    /**
+     * Returns an unmodifiable view of the filtered clubs list */
+    ObservableList<ClubBudgetElements> getFilteredClubsList();
 
     /**
      * Updates the filter of the filtered login details list to filter by the given {@code predicate}.

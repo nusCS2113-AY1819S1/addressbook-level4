@@ -34,7 +34,7 @@ public class BudgetCommand extends Command {
     private final ClubBudgetElements toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates a BudgetCommand to add the specified {@code ClubBudgetElements}
      */
     public BudgetCommand(ClubBudgetElements club) {
         requireNonNull(club);
