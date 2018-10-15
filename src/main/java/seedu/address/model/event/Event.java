@@ -30,7 +30,7 @@ public class Event implements Comparable<Event> {
     private final Location location;
 
     // TODO: WILL BE IMPLEMENT IN THE NEXT VERSION FOR ADDING OF EMPLOYEES
-    private final Set<Person> attendees = new HashSet<>();
+    private Attendees attendees;
 
     /**
      * Every field must be present not null
@@ -68,7 +68,7 @@ public class Event implements Comparable<Event> {
         return location;
     }
 
-    public Set<Person> getAttendees() {
+    public Attendees getAttendees() {
         return attendees;
     }
 
@@ -136,19 +136,6 @@ public class Event implements Comparable<Event> {
     public int compareTo(Event other) {
         return this.getEventName().fullName.compareTo(other.getEventName().fullName);
     }
-
-
-    /**
-     * Returns true if events attendees contain person.
-     */
-    public boolean containPerson(Person person) {
-        if (attendees.isEmpty()) {
-            return false;
-        }
-        return (attendees.contains(person));
-    }
-
-
 
     public int compareStartTimeTo(Event other) {
         return this.getStartTime().compareTo(other.getStartTime());

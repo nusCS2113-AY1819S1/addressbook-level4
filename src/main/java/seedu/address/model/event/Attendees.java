@@ -1,27 +1,39 @@
 package seedu.address.model.event;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-import seedu.address.model.person.Person;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Represents a the attendees in a event.
  */
 public class Attendees {
-    private ArrayList<Person> attendeesList;
+    private Set<String> attendeesSet;
 
-    public Attendees(Person... persons) {
-        this.attendeesList = new ArrayList<Person>(Arrays.asList(persons));
+    public Attendees() {
+        this.attendeesSet = new HashSet<>();
+    }
+
+    public Attendees(Set<String> attendeesSet) {
+        Objects.requireNonNull(attendeesSet);
+        this.attendeesSet = attendeesSet;
+    }
+
+    public Attendees(Set<String>... attendeesSet) {
+        this();
+        for (Set<String> names: attendeesSet) {
+            Objects.requireNonNull(names);
+            this.attendeesSet.addAll(names);
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         int i = 1;
-        for (Person person : attendeesList) {
+        for (String name : attendeesSet) {
             builder.append(String.format("%i: ", i++));
-            builder.append(person.getName());
+            builder.append(name);
             builder.append("\n");
         }
         return builder.toString();
@@ -31,15 +43,12 @@ public class Attendees {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Attendees// instanceof handles nulls
-                && attendeesList.equals(((Attendees) other).attendeesList)); // state check
+                && attendeesSet.equals(((Attendees) other).attendeesSet)); // state check
     }
 
-    public ArrayList<Person> getAttendeesList() {
-        return attendeesList;
-    }
 
     @Override
     public int hashCode() {
-        return attendeesList.hashCode();
+        return attendeesSet.hashCode();
     }
 }
