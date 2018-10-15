@@ -39,7 +39,8 @@ public class InviteCommandParser implements Parser<InviteCommand> {
             try {
                 indexEvent = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_TO).get());
             } catch (ParseException pe) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InviteCommand.MESSAGE_USAGE), pe);
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                        InviteCommand.MESSAGE_USAGE), pe);
             }
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, InviteCommand.MESSAGE_USAGE));
