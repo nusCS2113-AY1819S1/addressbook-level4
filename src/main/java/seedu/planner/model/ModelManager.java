@@ -66,7 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the summary map has changed */
     private void indicateSummaryMapChanged() {
-        raise(new SummaryMapChangedEvent(versionedFinancialPlanner.getSummaryMap()));
+        raise(new SummaryMapChangedEvent(versionedFinancialPlanner));
     }
 
     //=========== Financial planner standard operations ============================================

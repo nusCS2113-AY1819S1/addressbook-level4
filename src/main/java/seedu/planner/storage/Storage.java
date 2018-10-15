@@ -50,7 +50,7 @@ public interface Storage extends FinancialPlannerStorage, UserPrefsStorage {
     Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException;
 
     @Override
-    void saveSummaryMap(SummaryMap summaryMap) throws IOException;
+    void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
 
     /**
      * Saves the summary map in the current version of Financial Planner to the had disk.

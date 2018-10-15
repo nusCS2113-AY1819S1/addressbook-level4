@@ -147,20 +147,20 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     @Override
-    public void saveSummaryMap(SummaryMap summaryMap) throws IOException {
-        saveSummaryMap(summaryMap, summaryMapFilePath);
+    public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+        saveSummaryMap(financialPlanner, summaryMapFilePath);
     }
 
     /**
-     * Similar to {@link #saveSummaryMap(SummaryMap)}}
+     * Similar to {@link #saveSummaryMap(ReadOnlyFinancialPlanner)}}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {
-        requireNonNull(summaryMap);
+    public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+        requireNonNull(financialPlanner);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableSummaryMap(summaryMap));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableSummaryMap(financialPlanner));
     }
 
     // ======================================= Limit Storage methods ==============================

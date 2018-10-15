@@ -98,16 +98,16 @@ public interface FinancialPlannerStorage {
     Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link SummaryMap} to the storage.
-     * @param summaryMap cannot be null
+     * Saves the given SummaryMap of {@link ReadOnlyFinancialPlanner} to the storage.
+     * @param financialPlanner cannot be null
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveSummaryMap(SummaryMap summaryMap) throws IOException;
+    void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
 
     /**
-     * @see #saveSummaryMap(SummaryMap)
+     * @see #saveSummaryMap(ReadOnlyFinancialPlanner)
      */
-    void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException;
+    void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
 
     // ================ Limit List storage methods ===========================
     //TODO: @Oscar put your limit functions here

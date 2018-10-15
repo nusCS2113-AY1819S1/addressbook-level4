@@ -138,14 +138,14 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveSummaryMap(SummaryMap summaryMap) throws IOException {
-        saveSummaryMap(summaryMap, financialPlannerStorage.getSummaryMapFilePath());
+    public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+        saveSummaryMap(financialPlanner, financialPlannerStorage.getSummaryMapFilePath());
     }
 
     @Override
-    public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {
+    public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        financialPlannerStorage.saveSummaryMap(summaryMap, filePath);
+        financialPlannerStorage.saveSummaryMap(financialPlanner, filePath);
     }
 
     // ================================== Event management methods ================================
