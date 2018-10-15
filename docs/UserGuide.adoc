@@ -71,17 +71,47 @@ Examples:
 
 * `add Vanilla Icecream`
 * `add Vanilla Icecream q/2, Chocolate Icecream q/5`
-
+//tianhang 10/09/18
 === Adding a food item: `additem`
 
-Adds a food item to the food item manager +
-Format: `additem n/FOOD_ITEM_NAME r/RECIPE_NAME p/PRICE`
+Adds a food item to the drink item manager +
+Format: `additem n/DRINK_ITEM p/DEFAULT_SELLING_PRICE`
 
 Examples:
 
-* `additem n/Vanilla Icecream r/Vanilla Recipe p/2.50`
-* `additem p/3.00 n/Hot Fudge Sundae r/Hot Fudge Sundae Recipe`
+* `additem n/coca cola p/2.50`
+* `additem n/sprite p/34`
+#UserCommand
 
+=== Change password: `changePassword`
+It enable user to change current account password
+Format: `changePassword o/OLDPASSWORD n/NEWPASSWORD`
+
+Examples:
+
+* `changePassword o/123 n/zzmsqsm`
+##MANAGER
+
+=== Change password: `createAccount`
+It enable manager to change additional user account
+Format: `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+
+
+Examples:
+
+* `createAccount u/stockTaker1 p/123 a/STOCK_TAKER`
+
+##STOCK TAKER
+
+=== Sell of item: `sell`
+It enable stock taker to record the sell of item
+Format: `sell n/NAME d/DATE q/QUANTITY p/TOTAL_REVENUE`
+
+
+Examples:
+
+* `sell n/coca cola d/10/09/18 q/34 p/345.60`
+//tianhang 10/09/18
 === Listing all food items : `viewall`
 
 Shows a list of all food items in the food item manager. +
