@@ -19,8 +19,8 @@ public class AddTimeCommandParser implements Parser<AddTimeCommand> {
      */
     public AddTimeCommand parse (String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args.split("\\s", 2)[0]);
-            TimeSlot timeSlot = ParserUtil.parseTimeSlot(args.split("\\s", 2)[1]);
+            Index index = ParserUtil.parseIndex(args.trim().split("\\s", 2)[0]);
+            TimeSlot timeSlot = ParserUtil.parseTimeSlot(args.trim().split("\\s", 2)[1]);
             return new AddTimeCommand(index, timeSlot);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTimeCommand.MESSAGE_USAGE));

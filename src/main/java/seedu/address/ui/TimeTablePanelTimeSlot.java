@@ -1,43 +1,23 @@
 package seedu.address.ui;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
+import javafx.scene.shape.Rectangle;
 import seedu.address.model.person.TimeSlot;
 
-/** TODO ALEXIS: currently unused, untested.
+
+/**
  * An UI component that displays information of a {@code TimeSlot}.
  * Lives in the TimeTablePanelMainGrid.
  *
  * Will be used to implement normal TimeSlots, and free-TimeSlots.
  */
-public class TimeTablePanelTimeSlot extends UiPart<Region> {
-
-    private static final String FXML = "TimeTablePanelTimeSlot.fxml";
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
-
+public class TimeTablePanelTimeSlot {
     public final TimeSlot timeSlot;
+    private Rectangle box;
 
-    @FXML
-    private HBox cardPane;
-    @FXML
-    private Label name; //name of timeSlot
-    @FXML
-    private Label id; //index of timeSlot in current TimeTableGrid
-
-    public TimeTablePanelTimeSlot(TimeSlot timeSlot, int displayedIndex) {
-        super(FXML);
+    public TimeTablePanelTimeSlot(TimeSlot timeSlot, double currRowDimensions, double currColDimensions) {
         this.timeSlot = timeSlot;
-        id.setText(displayedIndex + ". ");
-        name.setText(timeSlot.getLabel());
+
+        box = new Rectangle(currColDimensions * timeSlot.getDuration().toHours(), currRowDimensions);
     }
 
     @Override
@@ -53,9 +33,12 @@ public class TimeTablePanelTimeSlot extends UiPart<Region> {
         }
 
         // state check
-        // TODO ALEXIS: pls verify this whole function makes sense.
         TimeTablePanelTimeSlot card = (TimeTablePanelTimeSlot) other;
-        return id.getText().equals(card.id.getText())
-                && timeSlot.equals(card.timeSlot);
+
+        return timeSlot.equals(card.timeSlot);
+    }
+
+    public Rectangle getBox() {
+        return box;
     }
 }

@@ -26,19 +26,19 @@ public class Person {
     private final Set<Tag> tags = new HashSet<>();
 
     //Timetable field (Currently only one)
-    private TimeTable weekly;
+    private TimeTable timeTable;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, TimeTable timeTable) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, tags, timeTable);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.weekly = timeTable;
+        this.timeTable = timeTable;
     }
 
     public Name getName() {
@@ -58,7 +58,7 @@ public class Person {
     }
 
     public TimeTable getTimeTable() {
-        return weekly;
+        return timeTable;
     }
 
     /**
@@ -102,7 +102,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getTimeTable().equals(getTimeTable());
     }
 
     @Override

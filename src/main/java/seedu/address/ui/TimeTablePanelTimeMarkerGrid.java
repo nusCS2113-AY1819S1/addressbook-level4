@@ -24,8 +24,6 @@ import seedu.address.commons.core.LogsCenter;
 
 public class TimeTablePanelTimeMarkerGrid extends UiPart<Region> {
     private static final String FXML = "TimeTablePanelTimeMarkerGrid.fxml";
-    private static final int DEFAULT_START_HOUR = 10;
-    private static final int DEFAULT_END_HOUR = 19;
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -44,7 +42,7 @@ public class TimeTablePanelTimeMarkerGrid extends UiPart<Region> {
     }
 
     public TimeTablePanelTimeMarkerGrid() {
-        this(DEFAULT_START_HOUR, DEFAULT_END_HOUR);
+        this(TimeTablePanel.DEFAULT_START_HOUR, TimeTablePanel.DEFAULT_END_HOUR);
     }
 
     /**

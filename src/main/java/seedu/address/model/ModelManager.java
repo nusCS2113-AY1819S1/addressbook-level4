@@ -101,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateTimeTable(TimeTable timeTable) {
         requireNonNull(timeTable);
 
-        timeTable.updateTimeTable(timeTable);
+        this.timeTable.updateTimeTable(timeTable);
         indicateTimeTableChanged();
     }
 

@@ -12,6 +12,10 @@ public class TimeTableChangedEvent extends BaseEvent {
         this.data = data;
     }
 
+    public TimeTable getNewTimeTable() {
+        return data;
+    }
+
     @Override
     public String toString() {
         return "TimeTable";

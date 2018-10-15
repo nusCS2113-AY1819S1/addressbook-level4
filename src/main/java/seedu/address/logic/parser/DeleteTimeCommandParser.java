@@ -19,8 +19,8 @@ public class DeleteTimeCommandParser implements Parser<DeleteTimeCommand> {
      */
     public DeleteTimeCommand parse (String args) throws ParseException {
         try {
-            Index index = ParserUtil.parseIndex(args.split("\\s", 2)[0]);
-            TimeSlot timeSlot = ParserUtil.parseTimeSlot(args.split("\\s", 2)[1]);
+            Index index = ParserUtil.parseIndex(args.trim().split("\\s", 2)[0]);
+            TimeSlot timeSlot = ParserUtil.parseTimeSlot(args.trim().split("\\s", 2)[1]);
             return new DeleteTimeCommand(index, timeSlot);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteTimeCommand.MESSAGE_USAGE));

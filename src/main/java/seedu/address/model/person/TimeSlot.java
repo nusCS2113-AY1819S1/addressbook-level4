@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.DayOfWeek;
+import java.time.Duration;
 import java.time.LocalTime;
 
 /**
@@ -19,7 +20,6 @@ public class TimeSlot {
     public static final String MESSAGE_INVALID_TIME_SLOT = "Invalid TimeSlot";
 
     // TODO: Change to accept times with non 0 minutes
-    // TODO: Allow whitespaces before and after dash
     public static final String VALIDATION_REGEX =
             "\\w+(\\s*)([0-1][0-9]|[2][0-3])[:][0][0](\\s*)[-](\\s*)([0-1][0-9]|[2][0-3])[:][0][0]";
 
@@ -50,6 +50,10 @@ public class TimeSlot {
 
     public DayOfWeek getDayOfWeek() {
         return dayOfWeek;
+    }
+
+    public Duration getDuration() {
+        return Duration.between(startTime, endTime);
     }
 
     public String getLabel() {

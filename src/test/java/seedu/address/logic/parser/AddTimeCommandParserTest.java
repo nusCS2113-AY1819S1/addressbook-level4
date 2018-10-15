@@ -15,8 +15,8 @@ public class AddTimeCommandParserTest {
     private AddTimeCommandParser parser = new AddTimeCommandParser();
 
     @Test
-    public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1 monday 08:00-10:00",
+    public void parse_validArgs_returnsAddTimeCommand() {
+        assertParseSuccess(parser, " 1 monday 08:00-10:00 ",
                 new AddTimeCommand(INDEX_FIRST_PERSON, TypicalTimeSlots.MON_8_TO_10));
     }
 

@@ -9,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.TimeTableChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 
 /**
@@ -36,9 +38,21 @@ import seedu.address.model.person.TimeTable;
  */
 
 public class TimeTablePanel extends UiPart<Region> {
+    public static final int DEFAULT_START_HOUR = 10;
+    public static final int DEFAULT_END_HOUR = 19;
+
     private static final String FXML = "TimeTablePanel.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
+
+    // TODO: remove hardcoding here
+    private int currStartHour = 10;
+    private int currEndHour = 19;
+    private int currNumRow = 5;
+    private int currNumCol = 9;
+
+    private double currRowDimensions;
+    private double currColDimensions;
 
     private TimeTablePanelTimeMarkerGrid timeTablePanelTimeMarkerGrid;
     private TimeTablePanelDayMarkerGrid timeTablePanelDayMarkerGrid;
@@ -67,7 +81,7 @@ public class TimeTablePanel extends UiPart<Region> {
     /**
      * Fills up all the placeholders of this TimeTablePanel.
      */
-    void fillInnerParts() {
+    private void fillInnerParts() {
         timeTablePanelTimeMarkerGrid = new TimeTablePanelTimeMarkerGrid();
         timeTablePanelTimeMarkerGridPlaceholder.getChildren().add(timeTablePanelTimeMarkerGrid.getRoot());
 
@@ -78,23 +92,35 @@ public class TimeTablePanel extends UiPart<Region> {
         timeTablePanelMainGridPlaceholder.getChildren().add(timeTablePanelMainGrid.getRoot());
     }
 
-    /** TODO ALEXIS:
-     * Loads a TimeTable from the TimeTable object it is given.
-     */
-    private void loadTimeTable(TimeTable timeTable) {
-
+    private void updateDimensions() {
+        currRowDimensions = timeTablePanelMainGrid.getRoot().getHeight() / currNumRow;
+        currColDimensions = timeTablePanelMainGrid.getRoot().getWidth() / currNumCol;
     }
 
     /**
-     * Loads empty TimeTable.
+     * Loads a TimeTable from the TimeTable object it is given.
      */
-    private void loadTimeTable() {
+    private void loadTimeTable(TimeTable timeTable) {
+        updateDimensions();
+        timeTablePanelMainGrid.clearGrid();
 
+        for (TimeSlot timeSlot : timeTable.getTimeSlots()) {
+            timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
+        }
     }
 
+    public double getCurrRowDimensions() {
+        return currRowDimensions;
+    }
+
+    public double getCurrColDimensions() {
+        return currColDimensions;
+    }
+
+
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handleTimeTableChangedEvent(TimeTableChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadTimeTable(event.getNewSelection().getTimeTable());
+        loadTimeTable(event.getNewTimeTable());
     }
 }

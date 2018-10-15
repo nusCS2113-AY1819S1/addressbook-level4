@@ -74,7 +74,7 @@ public class AddTimeCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, TimeSlot toAdd) throws TimeSlotOverlapException {
         assert personToEdit != null;
 
-        TimeTable timeTable = personToEdit.getTimeTable();
+        TimeTable timeTable = new TimeTable (personToEdit.getTimeTable().getTimeSlots());
 
         try {
             timeTable.addTimeSlot(toAdd);
