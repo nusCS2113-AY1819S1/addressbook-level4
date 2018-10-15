@@ -114,12 +114,12 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveRecordList(ObservableList<Record> financialPlanner) throws IOException {
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
         saveRecordList(financialPlanner, financialPlannerStorage.getRecordListFilePath());
     }
 
     @Override
-    public void saveRecordList(ObservableList<Record> financialPlanner, Path filePath) throws IOException {
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         financialPlannerStorage.saveRecordList(financialPlanner, filePath);
     }

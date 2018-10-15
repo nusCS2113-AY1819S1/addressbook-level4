@@ -38,9 +38,9 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Unique
     /**
      * Conversion
      */
-    public XmlSerializableFinancialPlanner(ObservableList<Record> src) {
+    public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
         this();
-        records.addAll(src.stream()
+        records.addAll(src.getRecordList().stream()
                 .map(XmlAdaptedRecord::new).collect(Collectors.toList()));
     }
 

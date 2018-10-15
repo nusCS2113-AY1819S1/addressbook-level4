@@ -71,16 +71,16 @@ public interface FinancialPlannerStorage {
     Optional<UniqueRecordList> readRecordList(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ObservableList<Record>} to the storage.
-     * @param recordList cannot be null.
+     * Saves the RecordList of the given {@link ReadOnlyFinancialPlanner} to the storage.
+     * @param financialPlanner cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveRecordList(ObservableList<Record> recordList) throws IOException;
+    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
 
     /**
-     * @see #saveRecordList(ObservableList<Record>)
+     * @see #saveRecordList(ReadOnlyFinancialPlanner)
      */
-    void saveRecordList(ObservableList<Record> recordList, Path filePath) throws IOException;
+    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
 
     // ================ Summary Map storage methods ===========================
 

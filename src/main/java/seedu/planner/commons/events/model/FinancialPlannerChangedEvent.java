@@ -9,12 +9,12 @@ import seedu.planner.model.record.UniqueRecordList;
 /** Indicates the FinancialPlanner in the model has changed*/
 public class FinancialPlannerChangedEvent extends BaseEvent {
 
-    public final ObservableList<Record> data;
+    public final ReadOnlyFinancialPlanner data;
 
-    public FinancialPlannerChangedEvent(ObservableList<Record> data) {
+    public FinancialPlannerChangedEvent(ReadOnlyFinancialPlanner data) {
         this.data = data;
     }
 
     @Override
-    public String toString() { return "number of records " + data.size(); }
+    public String toString() { return "number of records " + data.getRecordList().size(); }
 }

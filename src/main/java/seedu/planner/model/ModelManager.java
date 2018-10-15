@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
-import java.util.Observable;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -62,7 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateFinancialPlannerChanged() {
-        raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner.getRecordList()));
+        raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
     }
 
     /** Raises an event to indicate the summary map has changed */

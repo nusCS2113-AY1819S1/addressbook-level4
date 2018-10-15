@@ -98,20 +98,20 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     @Override
-    public void saveRecordList(ObservableList<Record> recordList) throws IOException {
-        saveRecordList(recordList, recordListFilePath);
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+        saveRecordList(financialPlanner, recordListFilePath);
     }
 
     /**
-     * Similar to {@link FinancialPlannerStorage#saveRecordList(ObservableList<Record>)}
+     * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveRecordList(ObservableList<Record> recordList, Path filePath) throws IOException {
-        requireNonNull(recordList);
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+        requireNonNull(financialPlanner);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableFinancialPlanner(recordList));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableFinancialPlanner(financialPlanner));
     }
 
     // ===================== Summary Map Storage methods ======================================
