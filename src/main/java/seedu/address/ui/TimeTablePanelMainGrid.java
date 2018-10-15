@@ -36,14 +36,25 @@ public class TimeTablePanelMainGrid extends UiPart<Region> {
         mainGrid.getChildren().retainAll(mainGrid.getChildren().get(0));
     }
 
-    public void addTimeSlot(TimeSlot timeSlot, double currRowDimensions, double currColDimensions, int currStartHour, int currEndHour) {
+    /**
+     * Adds a timetable to the current timetable displayed
+     * @param timeSlot TimeSlot to add
+     * @param currRowDimensions Dimensions of the rows in the current grid
+     * @param currColDimensions Dimensions of the columns in the current grid
+     * @param currStartHour Start hour in the grid
+     * @param currEndHour End hour in the grid
+     */
+    public void addTimeSlot(
+            TimeSlot timeSlot, double currRowDimensions, double currColDimensions, int currStartHour, int currEndHour) {
+
         if (timeSlot.getStartTime().getHour() < currStartHour
                 || timeSlot.getEndTime().getHour() > currEndHour
                 || timeSlot.getDayOfWeek().getValue() > 5) {
             return;
         }
 
-        TimeTablePanelTimeSlot panelTimeSlot = new TimeTablePanelTimeSlot(timeSlot, currRowDimensions, currColDimensions);
+        TimeTablePanelTimeSlot panelTimeSlot = new TimeTablePanelTimeSlot(
+                timeSlot, currRowDimensions, currColDimensions);
         mainGrid.add(panelTimeSlot.getBox(), getColIndex(timeSlot, currStartHour), getRowIndex(timeSlot));
     }
 

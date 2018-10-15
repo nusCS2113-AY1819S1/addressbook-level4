@@ -12,7 +12,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TimeTableChangedEvent;
-import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
 
@@ -110,12 +109,16 @@ public class TimeTablePanel extends UiPart<Region> {
         currColDimensions = timeTablePanelMainGrid.getRoot().getWidth() / currNumCol;
     }
 
+    /**
+     * Reloads the last loaded timetable. Used for when the window is resized
+     */
     private void reloadTimeTable() {
         timeTablePanelMainGrid.clearGrid();
         updateDimensions();
 
         for (TimeSlot timeSlot : timeTableLastLoaded.getTimeSlots()) {
-            timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
+            timeTablePanelMainGrid.addTimeSlot(
+                    timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
         }
 
     }
@@ -129,7 +132,8 @@ public class TimeTablePanel extends UiPart<Region> {
         updateDimensions();
 
         for (TimeSlot timeSlot : timeTable.getTimeSlots()) {
-            timeTablePanelMainGrid.addTimeSlot(timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
+            timeTablePanelMainGrid.addTimeSlot(
+                    timeSlot, currRowDimensions, currColDimensions, currStartHour, currEndHour);
         }
     }
 
