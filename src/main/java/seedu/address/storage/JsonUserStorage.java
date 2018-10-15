@@ -38,6 +38,9 @@ public class JsonUserStorage {
         return (JSONObject) object;
     }
 
+    /**
+     * Creates a user account JSON file.
+     */
     @SuppressWarnings("unchecked")
     private void createUserFile() throws IOException {
         Files.createDirectory(folderPath);
