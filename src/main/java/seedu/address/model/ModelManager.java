@@ -62,7 +62,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
-    /** Raises an event to indicate the addressbook model has changed */
+    /**
+     * Raises an event to indicate the addressbook model has changed
+     */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
@@ -147,7 +149,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedEventList;
     }
 
-    /** Raises an event to indicate the eventlist model has changed */
+    /**
+     * Raises an event to indicate the eventlist model has changed
+     */
     private void indicateEventListChanged() {
         raise(new EventListChangedEvent(versionedEventList));
     }
@@ -189,6 +193,27 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredEvents.setPredicate(predicate);
     }
+
+    @Override
+    public void sortByName() {
+        versionedEventList.sortByName();
+    }
+
+    @Override
+    public void sortByStartTime() {
+        versionedEventList.sortByStartTime();
+    }
+
+    @Override
+    public void sortByEndTime() {
+        versionedEventList.sortByEndTime();
+    }
+
+    @Override
+    public void sortByDate() {
+        versionedEventList.sortByDate();
+    }
+
 
     //=========== Undo/Redo =================================================================================
 

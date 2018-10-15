@@ -126,6 +126,11 @@ public class EventList implements ReadOnlyEventList {
     public void sortByEndTime() {
         events.sortByEndTime();
     }
+
+    @Override
+    public void sortByDate() {
+        events.sortByDate();
+    }
 }
 
 

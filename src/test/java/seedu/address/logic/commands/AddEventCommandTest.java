@@ -199,6 +199,26 @@ public class AddEventCommandTest {
         public void commitEventList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void sortByName() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByStartTime() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByEndTime() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortByDate() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
 

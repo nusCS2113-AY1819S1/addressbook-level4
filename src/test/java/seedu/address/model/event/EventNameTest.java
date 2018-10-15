@@ -20,6 +20,7 @@ public class EventNameTest {
         Assert.assertThrows(IllegalArgumentException.class, () -> new EventName(invalidName));
     }
 
+
     @Test
     public void isValidName() {
         // null name
