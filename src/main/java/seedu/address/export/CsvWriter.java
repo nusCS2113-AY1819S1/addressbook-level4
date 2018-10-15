@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import com.opencsv.CSVWriter;
 
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ModelManager;
 import seedu.address.model.person.Person;
