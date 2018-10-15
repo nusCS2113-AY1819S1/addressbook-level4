@@ -3,47 +3,33 @@ package seedu.address.storage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import seedu.address.model.user.User;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class JsonUserStorage {
 
+    private Path folderPath;
     private Path filePath;
 
-    public JsonUserStorage(Path filePath) throws IOException {
+    public JsonUserStorage(Path folderPath, Path filePath) throws IOException {
+        this.folderPath = folderPath;
         this.filePath = filePath;
         createUserFile();
     }
 
-    public boolean userExists(User user) {
-        String loggedUsername = user.getUsername().toString();
-        String loggedPassword = user.getPassword().toString();
+    public JSONObject getUserAccounts() throws IOException, ParseException {
         JSONParser parser = new JSONParser();
-        boolean isPresent = false;
-
-        try {
-            Object object = parser.parse(new FileReader("./" + filePath.toString()));
-
-            JSONObject jsonObject = (JSONObject) object;
-            String password = (String) jsonObject.get(loggedUsername);
-            isPresent = password.equals(loggedPassword);
-        } catch (ParseException | IOException e) {
-            e.printStackTrace();
-        }
-
-        return isPresent;
+        Object object = parser.parse(new FileReader(("./" + filePath.toString())));
+        return (JSONObject) object;
     }
 
     private void createUserFile() throws IOException {
-        Path folder = Paths.get("data");
         if (!Files.exists(filePath)) {
-            Files.createDirectory(folder);
+            Files.createDirectory(folderPath);
             Files.createFile(filePath);
         }
 
