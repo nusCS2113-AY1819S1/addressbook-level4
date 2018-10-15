@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a5d7db49-1373-44d8-8b40-712b6f3e898a" name="Default Changelist" comment="">
+    <list default="true" id="52df7df2-b698-4b15-825e-06e7fb61b684" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8.1/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/seedu/address/logic/commands/CommandTestUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/seedu/address/logic/commands/CommandTestUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/seedu/address/testutil/EditPersonDescriptorBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/seedu/address/testutil/EditPersonDescriptorBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/model/DateTimeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/model/DateTimeManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/model/event/DateTime.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/model/event/DateTime.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/model/util/SampleDataUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/model/util/SampleDataUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/ui/EventCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/ui/EventCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/ui/EventPageFormatter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/ui/EventPageFormatter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/EventListCard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/EventListCard.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/view/EventListPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/view/EventListPanel.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -21,129 +28,156 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/New_folder$Main.ic" NAME="Main Coverage Results" MODIFIED="1539527434521" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-  </component>
-  <component name="CoverageViewManager">
-    <option name="myElementSize" value="193" />
-  </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ProjectResetup" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FUSProjectUsageTrigger">
-    <session id="1651145245">
+    <session id="-475023078">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
-          <entry key="project.open.time.1" value="1" />
-          <entry key="project.open.time.17" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.25" value="1" />
-          <entry key="project.open.time.31" value="1" />
-          <entry key="project.open.time.35" value="1" />
-          <entry key="project.open.time.46" value="1" />
-          <entry key="project.open.time.7" value="1" />
-          <entry key="project.opened" value="8" />
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="class" value="1" />
-          <entry key="fxml" value="6" />
+          <entry key="css" value="1" />
+          <entry key="fxml" value="4" />
           <entry key="html" value="1" />
-          <entry key="java" value="83" />
-          <entry key="png" value="4" />
+          <entry key="java" value="34" />
           <entry key="properties" value="1" />
           <entry key="txt" value="1" />
-          <entry key="xml" value="3" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CLASS" value="1" />
+          <entry key="CSS" value="1" />
           <entry key="HTML" value="1" />
-          <entry key="Image" value="4" />
-          <entry key="JAVA" value="83" />
+          <entry key="JAVA" value="34" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Properties" value="1" />
-          <entry key="XML" value="9" />
+          <entry key="XML" value="4" />
         </counts>
       </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
+      <usages-collector id="statistics.spring.boot.run.usages" />
+      <usages-collector id="statistics.spring.boot.mvc.usages" />
+      <usages-collector id="statistics.js.language.service.starts" />
+      <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="JAVA" value="174" />
+          <entry key="dummy" value="5" />
+          <entry key="fxml" value="9" />
+          <entry key="java" value="710" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
-      <usages-collector id="statistics.js.language.service.starts" />
-      <usages-collector id="statistics.spring.boot.run.usages" />
-      <usages-collector id="statistics.file.extensions.edit">
+      <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="java" value="174" />
+          <entry key="JAVA" value="710" />
+          <entry key="PLAIN_TEXT" value="5" />
+          <entry key="XML" value="9" />
         </counts>
       </usages-collector>
-      <usages-collector id="statistics.spring.boot.mvc.usages" />
     </session>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
-          <provider selected="true" editor-type-id="text-editor" />
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Event.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="118" column="16" selection-start-line="118" selection-start-column="16" selection-end-line="126" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/DateTime.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="21" column="70" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="70" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/util/SampleDataUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="30" column="127" lean-forward="true" selection-start-line="30" selection-start-column="127" selection-end-line="30" selection-end-column="127" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventPageFormatter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="282">
+              <caret line="58" column="76" selection-start-line="58" selection-start-column="76" selection-end-line="58" selection-end-column="76" />
+            </state>
+          </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/UiManager.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/EditCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="65">
-              <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2686#2687#0" expanded="true" />
-                <element signature="e#2764#2765#0" expanded="true" />
-              </folding>
+            <state>
+              <caret line="35" column="48" lean-forward="true" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/UiPart.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/AddCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1360">
-              <caret line="102" selection-start-line="102" selection-end-line="102" />
-              <folding>
-                <element signature="e#1067#1068#0" expanded="true" />
-                <element signature="e#1117#1118#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="68">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/images/address_book_32.png">
-          <provider selected="true" editor-type-id="images" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.graphics/javafx/stage/Stage.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/DeleteCommand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10506">
-              <caret line="710" column="42" selection-start-line="710" selection-start-column="42" selection-end-line="710" selection-end-column="42" />
-              <folding>
-                <element signature="e#25468#25469#0" expanded="true" />
-                <element signature="e#25496#25497#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="136">
+              <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/MainApp.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/parser/CliSyntax.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2482">
-              <caret line="183" selection-start-line="183" selection-end-line="183" />
+            <state relative-caret-position="221">
+              <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventCard.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="612">
+              <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -169,14 +203,14 @@
         <entry>
           <key>
             <ExternalProjectPojo>
-              <option name="name" value="New folder" />
+              <option name="name" value="ProjectResetup" />
               <option name="path" value="$PROJECT_DIR$" />
             </ExternalProjectPojo>
           </key>
           <value>
             <list>
               <ExternalProjectPojo>
-                <option name="name" value="New folder" />
+                <option name="name" value="ProjectResetup" />
                 <option name="path" value="$PROJECT_DIR$" />
               </ExternalProjectPojo>
             </list>
@@ -190,7 +224,7 @@
           <value>
             <list>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the sub-projects of root project 'New folder'." />
+                <option name="description" value="Displays the sub-projects of root project 'ProjectResetup'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="projects" />
               </ExternalTaskPojo>
@@ -233,7 +267,7 @@
                 <option name="name" value="jar" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the configuration model of root project 'New folder'. [incubating]" />
+                <option name="description" value="Displays the configuration model of root project 'ProjectResetup'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="model" />
               </ExternalTaskPojo>
@@ -243,7 +277,7 @@
                 <option name="name" value="processResources" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the tasks runnable from root project 'New folder'." />
+                <option name="description" value="Displays the tasks runnable from root project 'ProjectResetup'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="tasks" />
               </ExternalTaskPojo>
@@ -277,7 +311,7 @@
                 <option name="name" value="coveralls" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all dependencies declared in root project 'New folder'." />
+                <option name="description" value="Displays all dependencies declared in root project 'ProjectResetup'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencies" />
               </ExternalTaskPojo>
@@ -320,7 +354,7 @@
                 <option name="name" value="nonGuiTests" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the components produced by root project 'New folder'. [incubating]" />
+                <option name="description" value="Displays the components produced by root project 'ProjectResetup'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="components" />
               </ExternalTaskPojo>
@@ -335,12 +369,12 @@
                 <option name="name" value="classes" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the dependent components of components in root project 'New folder'. [incubating]" />
+                <option name="description" value="Displays the dependent components of components in root project 'ProjectResetup'. [incubating]" />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependentComponents" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays all buildscript dependencies declared in root project 'New folder'." />
+                <option name="description" value="Displays all buildscript dependencies declared in root project 'ProjectResetup'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="buildEnvironment" />
               </ExternalTaskPojo>
@@ -407,7 +441,7 @@
                 <option name="name" value="guiTests" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the insight into a specific dependency in root project 'New folder'." />
+                <option name="description" value="Displays the insight into a specific dependency in root project 'ProjectResetup'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="dependencyInsight" />
               </ExternalTaskPojo>
@@ -450,7 +484,7 @@
                 <option name="name" value="deployOfflineDocs" />
               </ExternalTaskPojo>
               <ExternalTaskPojo>
-                <option name="description" value="Displays the properties of root project 'New folder'." />
+                <option name="description" value="Displays the properties of root project 'ProjectResetup'." />
                 <option name="linkedExternalProjectPath" value="$PROJECT_DIR$" />
                 <option name="name" value="properties" />
               </ExternalTaskPojo>
@@ -545,7 +579,7 @@
                   </entry>
                 </map>
               </option>
-              <option name="name" value="New folder" />
+              <option name="name" value="ProjectResetup" />
               <option name="projectBuildClasspath">
                 <list>
                   <option value="$USER_HOME$/.gradle/wrapper/dists/gradle-4.8.1-bin/e8p42vx1m7a3mz9ydmjagn6wn/gradle-4.8.1/lib/ant-1.9.11.jar" />
@@ -636,26 +670,25 @@
       <map>
         <entry key="$USER_HOME$/OneDrive/Documents/addressbook-level2" value="PREVIEW" />
         <entry key="$PROJECT_DIR$/../AddressBook2" value="PREVIEW" />
-        <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
+        <entry key="$PROJECT_DIR$/../New folder" value="PREVIEW" />
         <entry key="$PROJECT_DIR$/../Project" value="PREVIEW" />
-        <entry key="$PROJECT_DIR$/../ProjectResetup" value="PREVIEW" />
+        <entry key="$PROJECT_DIR$" value="IMPORT" />
+        <entry key="$PROJECT_DIR$/../TestUi" value="PREVIEW" />
       </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/user/User.java" />
-        <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/LoginCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/EditCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ReplyCommentCommand.java" />
+        <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/DateTimeManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/ui/EventListPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/ModelManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/VersionedEventManager.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/EventListPanel.fxml" />
+        <option value="$PROJECT_DIR$/src/main/resources/view/EventListCard.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/seedu/address/ui/EventCard.java" />
+        <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/util/SampleDataUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/event/Event.java" />
-        <option value="$PROJECT_DIR$/src/test/java/seedu/address/logic/commands/CommandTestUtil.java" />
-        <option value="$PROJECT_DIR$/src/test/java/seedu/address/testutil/EditPersonDescriptorBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/seedu/address/ui/UiManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/event/DateTime.java" />
+        <option value="$PROJECT_DIR$/src/main/java/seedu/address/ui/EventPageFormatter.java" />
       </list>
     </option>
   </component>
@@ -665,16 +698,20 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="65" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
     <option name="height" value="1025" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
-      <autoscrollFromSource ProjectPane="true" />
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -685,63 +722,280 @@
         <subPane>
           <expand>
             <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name=".idea" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="address" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="commons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="commons" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="parser" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="parser" type="462c0819:PsiDirectoryNode" />
+              <item name="CliSyntax" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+              <item name="DateTime" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+              <item name="EventContainsKeywordsPredicate" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+              <item name="Name" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="SampleDataUtil" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="DateTimeManager" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="address" type="462c0819:PsiDirectoryNode" />
               <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="EventCard" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="EventListPanel" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
+              <item name="UiManager" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="New folder" type="b2602c69:ProjectViewProjectNode" />
-              <item name="New folder" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
+              <item name="view" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 9 &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 9 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="java.base" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 9 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="java.base" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 9 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="java.base" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="lang" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 9 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="java.base" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="lang" type="462c0819:PsiDirectoryNode" />
+              <item name="String" type="1a9f42e2:ClassTreeNode" />
             </path>
           </expand>
           <select />
@@ -752,14 +1006,14 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539539733539" />
-    <property name="last_opened_file_path" value="C:/Program Files/Java/jdk-9.0.4" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539599221699" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ical4j-3.0.0" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.deploy.options" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -776,7 +1030,7 @@
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="seedu.address.MainApp" />
-      <module name="New_folder_main" />
+      <module name="ProjectResetup_main" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -787,69 +1041,51 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a5d7db49-1373-44d8-8b40-712b6f3e898a" name="Default Changelist" comment="" />
-      <created>1539433323222</created>
+      <changelist id="52df7df2-b698-4b15-825e-06e7fb61b684" name="Default Changelist" comment="" />
+      <created>1539583835438</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1539433323222</updated>
-      <workItem from="1539433328180" duration="196000" />
-      <workItem from="1539506388801" duration="490000" />
-      <workItem from="1539509409772" duration="104000" />
-      <workItem from="1539522738731" duration="6548000" />
-      <workItem from="1539532008954" duration="1345000" />
-      <workItem from="1539533434505" duration="328000" />
-      <workItem from="1539538084086" duration="1157000" />
-      <workItem from="1539539395176" duration="309000" />
+      <updated>1539583835438</updated>
+      <workItem from="1539583839857" duration="12880000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10477000" />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="12880000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24832214" />
+      <window_info id="Designer" />
+      <window_info id="Image Layers" />
+      <window_info id="UI Designer" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info id="Capture Tool" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24966443" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="Capture Tool" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Build" weight="0.32885906" />
+      <window_info anchor="bottom" id="Terminal" weight="0.32885906" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Messages" weight="0.32885906" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32885906" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.36778525" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32885906" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32885906" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49932885" weight="0.32885906" />
-      <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49932885" weight="0.32885906" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.4986577" weight="0.32885906" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5013423" side_tool="true" weight="0.32885906" />
-      <window_info anchor="bottom" id="Build" order="11" weight="0.32896653" />
-      <window_info anchor="bottom" id="Messages" order="12" sideWeight="0.4986577" weight="0.32885906" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Capture Analysis" order="4" />
-      <window_info anchor="right" id="Gradle" order="5" />
-      <window_info anchor="right" id="Theme Preview" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Database" order="8" />
-      <window_info anchor="right" id="Maven Projects" order="9" />
-      <window_info anchor="right" id="Coverage" order="10" side_tool="true" weight="0.32985073" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Database" order="2" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.3295302" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Maven Projects" order="7" weight="0.3295302" />
+      <window_info anchor="right" id="Ant Build" order="8" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="9" weight="0.25" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -861,377 +1097,168 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/seedu/address/ui/MainWindow.java</url>
-          <line>124</line>
-          <properties />
-          <option name="timeStamp" value="14" />
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventListPanel.java</url>
+          <line>25</line>
+          <properties field="eventListView" class="seedu.address.ui.EventListPanel" />
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventListPanel.java</url>
           <line>34</line>
           <properties />
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventListPanel.java</url>
+          <line>28</line>
+          <properties />
+          <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventListPanel.java</url>
           <line>35</line>
           <properties />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/seedu/address/ui/UiManager.java</url>
-          <line>51</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-field">
-          <url>file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventListPanel.java</url>
-          <line>25</line>
-          <properties field="eventListView" class="seedu.address.ui.EventListPanel" />
-          <option name="timeStamp" value="13" />
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/view/StatusBarFooter.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
+    <entry file="file://$PROJECT_DIR$/copyright.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="10" selection-start-line="8" selection-start-column="10" selection-end-line="8" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/Comments.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/HelpWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-289">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        <state relative-caret-position="85">
+          <caret line="5" column="11" selection-start-line="5" selection-start-column="11" selection-end-line="5" selection-end-column="11" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/EventManagerStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/JsonUserPrefsStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/JsonUserStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/Storage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-97">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/StorageManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/Ui.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/UserPrefsStorage.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/UiPart.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        <state relative-caret-position="136">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/UserStorage.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/UiManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        <state relative-caret-position="133">
+          <caret line="57" selection-start-line="57" selection-end-line="57" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/XmlAdaptedEvent.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/XmlAdaptedTag.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/XmlEManagerStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/storage/XmlSerializableEManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/util/SampleDataUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
+        <state relative-caret-position="150">
+          <caret line="124" selection-start-line="124" selection-end-line="124" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Address.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/ResultDisplay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/EventListPanel.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/DarkTheme.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/CommandBox.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/EventListCard.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="57" lean-forward="true" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/default.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/view/BrowserPanel.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/EventContainsKeywordsPredicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/String.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="2135" column="18" selection-start-line="2135" selection-start-column="18" selection-end-line="2135" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/StatusBarFooter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Name.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Attendance.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/java.base/java/lang/Thread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="843" selection-start-line="843" selection-end-line="843" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.graphics/com/sun/glass/ui/win/WinApplication.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="174" selection-start-line="174" selection-end-line="174" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.graphics/com/sun/glass/ui/InvokeLaterDispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="95" selection-start-line="95" selection-end-line="95" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.graphics/com/sun/javafx/application/PlatformImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="416" selection-start-line="416" selection-end-line="416" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/StatusBarFooter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/AppParameters.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-221">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/BrowserPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-85">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.graphics/com/sun/javafx/application/LauncherImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="918" selection-start-line="918" selection-end-line="918" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/ReadOnlyEventManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/VersionedEventManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="28" lean-forward="true" selection-start-column="28" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/Logic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="22" column="26" selection-start-line="22" selection-start-column="26" selection-end-line="22" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="45" column="26" selection-start-line="45" selection-start-column="26" selection-end-line="45" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/collections/FXCollections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="402" selection-start-line="402" selection-end-line="402" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/ModelManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="121">
-          <caret line="103" selection-start-line="103" selection-end-line="103" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.base/javafx/collections/ObservableListBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="129">
-          <caret line="90" selection-start-line="90" selection-end-line="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/LogicManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="161">
-          <caret line="44" selection-start-line="44" selection-end-line="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.controls/javafx/scene/control/ListView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="586" column="22" selection-start-line="586" selection-start-column="22" selection-end-line="586" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/EventManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="16" column="30" selection-start-line="16" selection-start-column="30" selection-end-line="16" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/UniqueEventList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="46" column="17" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-714" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1734">
-          <caret line="124" selection-start-line="124" selection-end-line="124" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventListPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        <state relative-caret-position="-646">
+          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/seedu/address/logic/commands/EditEventDescriptorTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/DateTimeManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-92">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/seedu/address/testutil/EditPersonDescriptorBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="22" column="42" lean-forward="true" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="42" />
+        <state relative-caret-position="476">
+          <caret line="55" selection-start-line="55" selection-end-line="55" />
           <folding>
-            <element signature="e#697#698#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/seedu/address/logic/commands/CommandTestUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="63" column="39" lean-forward="true" selection-start-line="63" selection-start-column="39" selection-end-line="63" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/classes/seedu/address/MainApp.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="42" column="67" selection-start-line="42" selection-start-column="67" selection-end-line="42" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/UiPart.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="102" selection-start-line="102" selection-end-line="102" />
-          <folding>
-            <element signature="e#1067#1068#0" expanded="true" />
-            <element signature="e#1117#1118#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/images/address_book_32.png">
-      <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk-9.0.4/lib/src.zip!/javafx.graphics/javafx/stage/Stage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10506">
-          <caret line="710" column="42" selection-start-line="710" selection-start-column="42" selection-end-line="710" selection-end-column="42" />
-          <folding>
-            <element signature="e#25468#25469#0" expanded="true" />
-            <element signature="e#25496#25497#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/MainApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2482">
-          <caret line="183" selection-start-line="183" selection-end-line="183" />
         </state>
       </provider>
     </entry>
@@ -1242,18 +1269,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/UiManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventCard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2686#2687#0" expanded="true" />
-            <element signature="e#2764#2765#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="612">
+          <caret line="56" column="41" selection-start-line="56" selection-start-column="41" selection-end-line="56" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Event.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="118" column="16" selection-start-line="118" selection-start-column="16" selection-end-line="126" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/util/SampleDataUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="30" column="127" lean-forward="true" selection-start-line="30" selection-start-column="127" selection-end-line="30" selection-end-column="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/ui/EventPageFormatter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="58" column="76" selection-start-line="58" selection-start-column="76" selection-end-line="58" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/parser/CliSyntax.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/DateTime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="70" selection-start-line="21" selection-start-column="49" selection-end-line="21" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/AddCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/DeleteCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/EditCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="35" column="48" lean-forward="true" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
         </state>
       </provider>
     </entry>
@@ -1297,7 +1372,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>9</last-edited>
+          <last-edited>1.8</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1309,7 +1384,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>New_folder</last-edited>
+          <last-edited>ProjectResetup</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -1333,7 +1408,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>Gradle: com.fasterxml.jackson.core:jackson-annotations:2.7.0</last-edited>
+          <last-edited>ical4j-3.0</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

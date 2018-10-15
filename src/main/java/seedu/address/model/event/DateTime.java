@@ -12,14 +12,14 @@ public class DateTime {
 
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date should have all value and should be in the format\n" +
-                    "dd/MM/yyyy/hh/mm with each is a number within\n" +
+                    "dd/MM/yyyy HH:mm with each is a number within\n" +
                     "Year: 0 - 3000\n" +
                     "Month: 1 - 12\n" +
                     "Date: 1 - 31\n" +
                     "Hour: 0-23\n" +
                     "Minute: 0-59\n";
     public final Date dateTime;
-    private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy/hh/mm");
+    private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 
     //Create DateTime from the input
     public DateTime(String dateTimeAsString) {

@@ -7,8 +7,10 @@ import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
 
-import java.util.*;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import net.fortuna.ical4j.model.*;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
