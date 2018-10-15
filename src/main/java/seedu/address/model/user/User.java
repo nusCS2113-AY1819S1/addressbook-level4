@@ -12,13 +12,11 @@ public class User {
     private boolean loginStatus;
     private boolean adminStatus;
 
-
     public User(Username username, Password password) {
         requireAllNonNull(username, password);
         this.username = username;
         this.password = password;
         loginStatus = false;
-
     }
 
     public Username getUsername() {
