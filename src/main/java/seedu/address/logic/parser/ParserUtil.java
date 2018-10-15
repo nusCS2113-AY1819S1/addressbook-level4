@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -188,6 +189,23 @@ public class ParserUtil {
         }
         return new Location(trimmedLocation);
     }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static LocalDate parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedStartTime = date.trim();
+        // TODO: WORK ON VALIDATING DATE
+        //if (!Location.isValidLocation(trimmedLocation)) {
+        //  throw new ParseException(Location.MESSAGE_LOCATION_CONSTRAINTS);
+        //}
+        return LocalDate.parse(date);
+    }
+
 
     /**
      * Parses a {@code String startTime} into a {@code StartTime}.

@@ -116,13 +116,19 @@ public class XmlAdaptedEvent {
 
 
         if (startTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, StartTime.class.getSimpleName()));
+        }
+        if (!StartTime.isValidTime(startTime)) {
             throw new IllegalValueException(StartTime.MESSAGE_TIME_CONSTRAINTS);
         }
         final StartTime modelStartTime = new StartTime(startTime);
 
 
         if (endTime == null) {
-            throw new IllegalValueException("Invalid time format");
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndTime.class.getSimpleName()));
+        }
+        if (!EndTime.isValidTime(endTime)) {
+            throw new IllegalValueException(EndTime.MESSAGE_TIME_CONSTRAINTS);
         }
         final EndTime modelEndTime = new EndTime(endTime);
 
