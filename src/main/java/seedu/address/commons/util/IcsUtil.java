@@ -14,6 +14,8 @@ import seedu.address.model.person.TimeTable;
 /**
  * Helps with reading from and writing to ICS files.
  * Only support ICS to-and-from TimeTable Objects.
+ * TODO: create a 'serialisable' class to serialise(?) the timetable objects to ics file formats,
+ * just like in the jsonUtil class
  */
 public class IcsUtil {
     /**
@@ -99,7 +101,7 @@ public class IcsUtil {
 
             //newTimeTable.fillTimeSlot(icsDay-1,icsStartTime);
         };
-
+        //TODO: output an actual timetable.
         return new TimeTable();
     }
 
@@ -127,7 +129,6 @@ public class IcsUtil {
      */
     private static int icsTimeToHour(int icsTime) throws CommandException {
         int hour = icsTime / 10000 + 8;
-        System.out.println(hour);
         if ((hour > 24) || (hour < 0)) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
