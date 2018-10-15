@@ -38,12 +38,13 @@
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </GridPane.margin>
                     </TextField>
-                    <TextField id="password" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="passwordTextField" >
+                    <TextField id="password" promptText="Password" GridPane.columnIndex="1" GridPane.rowIndex="1" fx:id="passwordTextField" onAction="#handleLoginClick" >
                         <padding>
                             <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
                         </padding>
                     </TextField>
                     <Label text="Username:" />
+                    <Button mnemonicParsing="false" text="Register" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2" onAction="#handleRegisterClick" />
                     <Button mnemonicParsing="false" text="Log In" GridPane.columnIndex="1" GridPane.rowIndex="2" onAction="#handleLoginClick" />
                     <Label fx:id="label" textFill="RED" text="" GridPane.rowIndex="2" />
                 </children>
