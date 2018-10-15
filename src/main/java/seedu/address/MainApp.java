@@ -78,19 +78,19 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s event manager and {@code userPrefs}. <br>
-     * The data from the sample event manager will be used instead if {@code storage}'s event manager is not found,
-     * or an empty event manager will be used instead if errors occur when reading {@code storage}'s event manager.
+     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
+     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyEventManager> eventManagerOptional;
+        Optional<ReadOnlyEventManager> addressBookOptional;
         ReadOnlyEventManager initialData;
         try {
-            eventManagerOptional = storage.readEventManager();
-            if (!eventManagerOptional.isPresent()) {
+            addressBookOptional = storage.readEventManager();
+            if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample EventManager");
             }
-            initialData = eventManagerOptional.orElseGet(SampleDataUtil::getSampleEventManager);
+            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleEventManager);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty EventManager");
             initialData = new EventManager();

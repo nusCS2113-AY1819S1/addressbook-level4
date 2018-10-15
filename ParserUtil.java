@@ -10,6 +10,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Address;
+import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
@@ -36,19 +37,6 @@ public class ParserUtil {
     }
 
     /**
-     * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-    public static int parseLine(String line) throws ParseException {
-        String trimmedLine = line.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedLine)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Integer.parseInt(trimmedLine);
-    }
-
-    /**
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -61,6 +49,21 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String contact} into a {@code Contact}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code contact} is invalid.
+     */
+    public static Contact parseContact(String contact) throws ParseException {
+        requireNonNull(contact);
+        String trimmedContact = contact.trim();
+        if (!Contact.isValidContact(trimmedContact)) {
+            throw new ParseException(Contact.MESSAGE_CONTACT_CONSTRAINTS);
+        }
+        return new Contact(trimmedContact);
     }
 
     /**
@@ -107,19 +110,6 @@ public class ParserUtil {
         }
         return new Email(trimmedEmail);
     }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code email} is invalid.
-     */
-    public static String parseComment(String comment) throws ParseException {
-        requireNonNull(comment);
-        String trimmedComment = comment.trim();
-        return trimmedComment;
-    }
-
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
