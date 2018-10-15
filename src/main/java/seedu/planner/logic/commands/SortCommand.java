@@ -9,6 +9,10 @@ import java.util.Set;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 
+/**
+ * Sorts all records in the current displayed list by a specified category and/or order.
+ * Keyword matching is case insensitive and regardless of order of entry.
+ */
 public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
@@ -30,8 +34,8 @@ public class SortCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all records in the currently displayed list "
             + "by the specified category and order.\n"
-            + "Parameters: [KEYWORD] [ORDER]\n"
-            + "Example: " + COMMAND_WORD +  " " + CATEGORY_NAME + " " + ORDER_DESCENDING;
+            + "Parameters: [CATEGORY] [ORDER]\n"
+            + "Example: " + COMMAND_WORD +  " " + CATEGORY_NAME + " " + DESCENDING_CONDITION;
 
     private final String category;
     private final Boolean ascending;
