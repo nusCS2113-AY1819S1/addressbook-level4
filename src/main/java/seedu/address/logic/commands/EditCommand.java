@@ -20,13 +20,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.TimeSlot;
-import seedu.address.model.person.TimeTable;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,6 +98,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         TimeTable timeTable = personToEdit.getTimeTable();
+        Set<Friend> friendList = personToEdit.getFriends();
 
         //Edits the copy of the timetable, currently only allow one timeSlot edit per command
         if (editPersonDescriptor.getTimeSlot().isPresent()) {
@@ -111,7 +106,7 @@ public class EditCommand extends Command {
                     editPersonDescriptor.getTimeSlotObject().getHour());
         }
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable, friendList);
     }
 
     @Override

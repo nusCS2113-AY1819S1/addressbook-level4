@@ -12,6 +12,8 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.person.Friend;
+import seedu.address.model.person.FriendListPredicate;
 import seedu.address.model.person.Person;
 
 /**
@@ -22,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> friendList;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        friendList = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
     public ModelManager() {
@@ -100,6 +104,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    public ObservableList<Person> getFriendList(Person person) {
+        requireNonNull(person);
+        friendList.setPredicate(PredicateFromPerson(person));
+        return FXCollections.unmodifiableObservableList(friendList);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -145,6 +155,10 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    public FriendListPredicate PredicateFromPerson(Person person) {
+        return new FriendListPredicate(person.getFriends());
     }
 
 }

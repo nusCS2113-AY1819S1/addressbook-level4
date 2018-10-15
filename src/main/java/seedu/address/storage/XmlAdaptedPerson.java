@@ -10,12 +10,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.TimeTable;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -116,8 +111,10 @@ public class XmlAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        final Set<Friend> friendList = new HashSet<Friend>();
+
         TimeTable timeTable = new TimeTable();
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, timeTable);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelTags, timeTable, friendList);
     }
 
     @Override

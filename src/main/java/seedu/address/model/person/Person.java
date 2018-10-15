@@ -28,10 +28,13 @@ public class Person {
     //Timetable field (Currently only one)
     private TimeTable weekly;
 
+    // Friend list of the person
+    private final Set<Friend> friendList = new HashSet<>();
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, TimeTable timeTable) {
+    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, TimeTable timeTable, Set<Friend> friendList) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -59,6 +62,14 @@ public class Person {
 
     public TimeTable getTimeTable() {
         return weekly;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Friend> getFriends() {
+        return Collections.unmodifiableSet(friendList);
     }
 
     /**
