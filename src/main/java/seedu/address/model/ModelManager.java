@@ -12,7 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TimeTableChangedEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TimeTable;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,9 +24,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final TimeTable timeTable;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs, timeTable.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
@@ -32,8 +35,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        this.versionedAddressBook = new VersionedAddressBook(addressBook);
+        this.filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        this.timeTable = new TimeTable();
     }
 
     public ModelManager() {
@@ -51,9 +55,19 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
+    @Override
+    public TimeTable getTimeTable() {
+        return timeTable;
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
+    }
+
+    /** Raises an event to indicate the timetable has changed */
+    private void indicateTimeTableChanged() {
+        raise(new TimeTableChangedEvent(timeTable));
     }
 
     @Override
@@ -81,6 +95,14 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook.updatePerson(target, editedPerson);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateTimeTable(TimeTable timeTable) {
+        requireNonNull(timeTable);
+
+        timeTable.updateTimeTable(timeTable);
+        indicateTimeTableChanged();
     }
 
     //=========== Filtered Person List Accessors =============================================================

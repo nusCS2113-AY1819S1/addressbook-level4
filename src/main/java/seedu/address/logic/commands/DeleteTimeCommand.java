@@ -64,6 +64,7 @@ public class DeleteTimeCommand extends Command {
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
+        model.updateTimeTable(editedPerson.getTimeTable());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

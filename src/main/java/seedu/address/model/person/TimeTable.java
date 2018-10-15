@@ -69,4 +69,8 @@ public class TimeTable {
         }
         return toReturn;
     }
+
+    public void updateTimeTable(TimeTable toReplace) {
+        this.timeSlots = toReplace.getTimeSlots();
+    }
 }

@@ -45,6 +45,7 @@ public class SelectCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+        model.updateTimeTable(filteredPersonList.get(targetIndex.getZeroBased()).getTimeTable());
         return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
 
     }
