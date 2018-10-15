@@ -75,6 +75,8 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     @Override
     public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
                                      Path summaryMapFilePath) throws IOException {
+        saveRecordList(financialPlanner, recordListFilePath);
+        saveSummaryMap(financialPlanner, summaryMapFilePath);
     }
 
     // ===================== Record List Storage methods ======================================
