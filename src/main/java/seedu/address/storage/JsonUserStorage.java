@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class JsonUserStorage {
 
@@ -27,6 +27,7 @@ public class JsonUserStorage {
         return (JSONObject) object;
     }
 
+    @SuppressWarnings("unchecked")
     private void createUserFile() throws IOException {
         if (!Files.exists(filePath)) {
             Files.createDirectory(folderPath);

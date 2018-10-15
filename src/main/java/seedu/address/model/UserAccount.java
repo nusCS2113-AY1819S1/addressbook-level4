@@ -1,13 +1,13 @@
 package seedu.address.model;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 import seedu.address.model.user.User;
 import seedu.address.storage.JsonUserStorage;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class UserAccount {
 
