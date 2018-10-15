@@ -1,5 +1,6 @@
 package seedu.address.security;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -8,33 +9,45 @@ import seedu.address.model.person.Person;
  */
 public class User {
     private Model model;
+    private ObservableList<Person> list;
     private String username;
     private Person person;
 
     public User(String username, Model model) {
         this.username = username;
         this.model = model;
-        //this.person = matchPerson(username);
+        matchPerson(username);
     }
 
-//    private Person matchPerson(String name){
-//        //TODO Loop through personlist to get PersonClass
-//    }
+    /***
+     *
+     * Finds @param name inside database to match it to the current user
+     *
+     */
+    private void matchPerson(String name) {
+        list = model.getAddressBook().getPersonList();
+        //Loops through personlist to get matched name Person Class
+        list.forEach((Person) -> {
+            if (name.equals(Person.getName().toString())) {
+                this.person = Person;
+            }
+        });
+    }
 
     /***
      *
      * @param name of the person that you are trying to find as a friend
      * @return boolean whether name is found as a friend
      */
-//    public boolean isFriend(String name){
-//
-//    }
-//
-//    public void addFriend(String name){
-//
-//    }
-//
-//    public void removeFriend(String name){
-//
-//    }
+    //public boolean isFriend(String name){
+    //
+    //}
+    //
+    //public void addFriend(String name){
+    //
+    //}
+    //
+    //public void removeFriend(String name){
+    //
+    //}
 }

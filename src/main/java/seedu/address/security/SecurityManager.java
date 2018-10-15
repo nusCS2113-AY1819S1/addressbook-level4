@@ -15,9 +15,7 @@ public class SecurityManager extends ComponentManager implements Security {
     private Model model;
     private String username;
     private String password;
-    //User user that includes a person
-    //Person userPerson;
-
+    private User user;
 
     public SecurityManager(boolean isTest, Model model) {
         this.isAuthenticated = isTest; //Test for now
@@ -34,8 +32,8 @@ public class SecurityManager extends ComponentManager implements Security {
     public void login(String username, String password) {
         if (username.equals(this.username) && password.equals(this.password)) {
             this.isAuthenticated = true;
-            //TODO Implement Person class that this is linked to:
-            //userPerson = user1;
+            //Links User to Security Manager
+            this.user = new User(username, model);
             //TODO Implement logger
             //System.out.println("Correct Password");
             raise(new SuccessfulLoginEvent());
