@@ -15,8 +15,8 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import oldCode.Model;
+import oldCode.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 

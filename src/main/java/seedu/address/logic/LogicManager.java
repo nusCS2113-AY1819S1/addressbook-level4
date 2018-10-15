@@ -14,7 +14,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.IngredientManager;
 import seedu.address.model.IngredientModel;
-import seedu.address.model.Model;
+import oldCode.Model;
 import seedu.address.model.person.Person;
 
 /**

@@ -12,8 +12,8 @@ import javafx.scene.input.KeyCode;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import oldCode.Model;
+import oldCode.ModelManager;
 
 public class CommandBoxTest extends GuiUnitTest {
 

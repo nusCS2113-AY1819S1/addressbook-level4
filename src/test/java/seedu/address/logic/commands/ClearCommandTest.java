@@ -7,8 +7,8 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
+import oldCode.Model;
+import oldCode.ModelManager;
 import seedu.address.model.UserPrefs;
 
 public class ClearCommandTest {
