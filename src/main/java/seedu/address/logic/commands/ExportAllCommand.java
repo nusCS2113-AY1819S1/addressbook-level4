@@ -2,11 +2,9 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
 
 //@@author jitwei98
 /**
@@ -41,11 +39,8 @@ public class ExportAllCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        ObservableList<Person> personList = model.getFilteredPersonList();
         model.exportAddressBook();
-        // model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         return new CommandResult(MESSAGE_SUCCESS);
-        // throw new CommandException(String.format(MESSAGE_ARGUMENTS, filetype));
     }
 
     @Override
