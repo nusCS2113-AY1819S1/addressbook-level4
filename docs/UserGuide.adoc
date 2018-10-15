@@ -196,12 +196,25 @@ Format: `import INDEX file/FILE_LOCATION`
 
 Examples:
 
-* `import 1 file/C:\Users\happycat96\Downloads\nusmods_calendar.ics` +
+* To import the timetable `nusmods_calendar.ics` for the person at index `1`: +
+`import 1 file/C:\Users\happycat96\Downloads\nusmods_calendar.ics` +
 
 [TIP]
-You can import your NUSMODS timetable as a .ics file.
+You can import your NUSMODS timetable as a .ics file, as shown in the picture below.
 
 image::importics.png[]
+
+=== Export Timetable to a file : `export` (`e`)
+
+Imports a timetable to .ics file. +
+
+Format: `export INDEX file/FILE_LOCATION`
+
+Examples:
+
+* To export the timetable for the person at index `1` to the file `export.ics`: +
+ `export 1 file/C:\Users\happycat96\Downloads\export.ics` +
+
 
 === Exiting the program : `exit` (`x`)
 
