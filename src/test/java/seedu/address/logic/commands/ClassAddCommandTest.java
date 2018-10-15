@@ -2,9 +2,8 @@ package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.ClassCreateCommand.MESSAGE_ARGUMENTS;
 
-import static seedu.address.logic.commands.ClassCreateCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.ClassAddCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -21,7 +20,7 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
 
 
-public class ClassCreateCommandTest {
+public class ClassAddCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
@@ -30,7 +29,7 @@ public class ClassCreateCommandTest {
         final String moduleCode = "CG1111";
         final String maxEnrollment = "20";
 
-        assertCommandSuccess(new ClassCreateCommand(new Classroom(new ClassName(className),
+        assertCommandSuccess(new ClassAddCommand(new Classroom(new ClassName(className),
                         new ClassModule(moduleCode), new Enrollment(maxEnrollment))), model, new CommandHistory(),
                 String.format(MESSAGE_SUCCESS, className),
                 model);
@@ -38,12 +37,12 @@ public class ClassCreateCommandTest {
 
     @Test
     public void equals() {
-        final ClassCreateCommand standardCommand = new ClassCreateCommand
+        final ClassAddCommand standardCommand = new ClassAddCommand
                 (new Classroom(new ClassName(VALID_CLASS_T16),
                         new ClassModule(VALID_MODULE_CODE),
                         new Enrollment(VALID_MAX_ENROLLMENT)));
         // same values -> returns true
-        ClassCreateCommand commandWithSameValues = new ClassCreateCommand(
+        ClassAddCommand commandWithSameValues = new ClassAddCommand(
                 new Classroom(new ClassName(VALID_CLASS_T16),
                         new ClassModule(VALID_MODULE_CODE),
                         new Enrollment(VALID_MAX_ENROLLMENT)));

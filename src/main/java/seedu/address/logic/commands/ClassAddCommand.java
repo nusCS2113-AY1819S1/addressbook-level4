@@ -14,8 +14,8 @@ import seedu.address.model.classroom.Classroom;
 /**
  * Creates a class for a module.
  */
-public class ClassCreateCommand extends Command {
-    public static final String COMMAND_WORD = "classcreate";
+public class ClassAddCommand extends Command {
+    public static final String COMMAND_WORD = "class add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a class and assigns it to a module"
             + " for the system. "
@@ -38,7 +38,7 @@ public class ClassCreateCommand extends Command {
     /**
      * Command creates a classroom to be added.
      */
-    public ClassCreateCommand(Classroom classRoom) {
+    public ClassAddCommand(Classroom classRoom) {
         requireAllNonNull(classRoom);
         this.classToCreate = classRoom;
     }
@@ -63,8 +63,8 @@ public class ClassCreateCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ClassCreateCommand // instanceof handles nulls
-                && classToCreate.equals(((ClassCreateCommand) other).classToCreate));
+                || (other instanceof ClassAddCommand // instanceof handles nulls
+                && classToCreate.equals(((ClassAddCommand) other).classToCreate));
 
     }
 }
