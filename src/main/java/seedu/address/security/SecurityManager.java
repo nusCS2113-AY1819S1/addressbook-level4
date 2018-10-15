@@ -4,6 +4,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
+import seedu.address.model.Model;
 
 /***
  *  Implements a Security authentication that identifies user
@@ -11,16 +12,18 @@ import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
 
 public class SecurityManager extends ComponentManager implements Security {
     private boolean isAuthenticated;
+    private Model model;
     private String username;
     private String password;
     //User user that includes a person
     //Person userPerson;
 
 
-    public SecurityManager(boolean isTest) {
+    public SecurityManager(boolean isTest, Model model) {
         this.isAuthenticated = isTest; //Test for now
         this.username = "test";
         this.password = "test";
+        this.model = model;
     }
 
     public boolean getAuthentication() {
