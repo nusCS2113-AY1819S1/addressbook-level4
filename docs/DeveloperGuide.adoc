@@ -336,28 +336,21 @@ The Comments feature is facilitated by `Comments` class in the Logic/Comments fo
 
 Given below is an example usage scenario and how the Comments mechanism behaves at each step.
 
-Step 1. The user launches the application, click on an event or types `select INDEX` into the CLI. The comment section will be shown as such.
-
-image::ShowCommentSection.png[width=""]
+Step 1. The user launches the application, click on an event or types `select INDEX` into the CLI. The comment section will be seen.
 
 Step 2. The user/admin executes `addComment 1 C/May I ask, what is the attire for the event?` to add a comment to the first event in the Event Manager. The addComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `addComment("May I ask, what is the attire for the event?")`. The new comment is added to the end of the comment section for event 1 and is stored into `eventmanager.xml`.
 
-image::AddComment.png[width="800"]
-
 Step 3. The user/admin executes `replyComment 1 L/1 C/Athletic attire` to reply the comment in step 2. The replyComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `replyComment("Athletic attire", 1)`. The comment will be added to event 1 at line 1 of the comments section and is stored into `eventmanager.xml`.
-
-image::ReplyComment.png[width="800"]
 
 Step 4. The admin executes `deleteComment 1 L/1` to reply the comment in step 2. The deleteComment command calls `Comments` to parse the comments section from `eventmanager.xml` and runs `deleteComment(1)`. The comment at event 1 line 1 will be removed and the comments section is stored in the `eventmanager.xml`.
 
-image::DeleteComment.png[width="800"]
 
 [NOTE]
 If a command's syntax is wrong, it will prompt the user to try again and suggest a relevant format to abide to. In the case a false indexed event is not present, the functions will return an invalid index message.
 
 The following sequence diagram shows how the addComment operation works:
 
-image::addCommentSequenceDiagram.png[width="800"]
+image::addCommentSequenceDiagram.png[width="650"]
 
 The `replyComment` and `deleteComment` command does similar methods and need not be elaborated.
 
