@@ -29,7 +29,7 @@ public class AddCandidateCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newCandidate_success() {
         Candidate validCandidate = new PersonBuilder().build();
 
         Model expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
@@ -41,7 +41,7 @@ public class AddCandidateCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateCandidate_throwsCommandException() {
         Candidate candidateInList = model.getCandidateBook().getCandidatelist().get(0);
         assertCommandFailure(new AddCandidateCommand(candidateInList), model, commandHistory,
                 AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
