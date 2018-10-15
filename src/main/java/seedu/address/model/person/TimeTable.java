@@ -73,4 +73,12 @@ public class TimeTable {
     public void updateTimeTable(TimeTable toReplace) {
         this.timeSlots = toReplace.getTimeSlots();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TimeTable // instanceof handles nulls
+                && timeSlots.equals(((TimeTable) other).getTimeSlots())); // state check
+    }
+
 }

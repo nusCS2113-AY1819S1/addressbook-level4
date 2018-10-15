@@ -75,7 +75,7 @@ public class DeleteTimeCommand extends Command {
     private static Person createEditedPerson(Person personToEdit, TimeSlot toRemove) throws TimeSlotOverlapException {
         assert personToEdit != null;
 
-        TimeTable timeTable = personToEdit.getTimeTable();
+        TimeTable timeTable = new TimeTable (personToEdit.getTimeTable().getTimeSlots());
 
         try {
             timeTable.removeTimeSlot(toRemove);

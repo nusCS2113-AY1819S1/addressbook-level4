@@ -20,6 +20,7 @@ public class TimeTablePanelTimeSlot {
         box = new Rectangle(currColDimensions * timeSlot.getDuration().toHours(), currRowDimensions);
     }
 
+    
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
