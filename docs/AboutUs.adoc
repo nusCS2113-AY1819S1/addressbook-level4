@@ -4,22 +4,14 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-FrozenBook was developed by Team CS2113-AY1819S1-W12-4. +
+DrinkIO was developed by Team CS2113-AY1819S1-W12-4. +
 {empty} +
 We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
 
 == Project Team
 
-=== John Doe
-image::damithc.jpg[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~damithch[homepage]] [https://github.com/damithc[github]] [<<johndoe#, portfolio>>]
-
-Role: Project Advisor
-
-'''
-
 === Jin Minjia
-image::bluein-green.jpg[width="150", align="left"]
+image::bluein-green.png[width="150", align="left"]
 {empty}[http://github.com/bluein-green[github]] [<<johndoe#, portfolio>>]
 
 Role: <tbc> +
@@ -28,7 +20,7 @@ Responsibilities: <tbc>
 '''
 
 === Li Jiawei
-image::scottljw.jpg[width="150", align="left"]
+image::scottljw.png[width="150", align="left"]
 {empty}[http://github.com/scottljw[github]] [<<johndoe#, portfolio>>]
 
 Role: <tbc> +
@@ -37,7 +29,7 @@ Responsibilities: <tbc>
 '''
 
 === Lim Xuan Hao
-image::Lunastryke.jpg[width="150", align="left"]
+image::Lunastryke.png[width="150", align="left"]
 {empty}[http://github.com/Lunastryke[github]] [<<johndoe#, portfolio>>]
 
 Role: Documentation +
@@ -46,7 +38,7 @@ Responsibilities: Git Expert
 '''
 
 === Liu Tianhang
-image::LIU-TIANHANG.jpg[width="150", align="left"]
+image::LIU-TIANHANG.png[width="150", align="left"]
 {empty}[http://github.com/LIU-TIANHANG[github]] [<<johndoe#, portfolio>>]
 
 Role: <tbc> +
