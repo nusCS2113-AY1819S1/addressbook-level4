@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Event's end time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
-public class EndTime {
+public class EndTime implements Comparable<EndTime> {
 
     public static final String MESSAGE_TIME_CONSTRAINTS =
             "End time should only be given in HH:MM in 24 hour format";
@@ -54,6 +54,11 @@ public class EndTime {
     @Override
     public int hashCode() {
         return endTime.hashCode();
+    }
+
+    @Override
+    public int compareTo(EndTime other) {
+        return this.endTime.compareTo(other.endTime);
     }
 
 }

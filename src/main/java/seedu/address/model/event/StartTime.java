@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Event's start time in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidTime(String)}
  */
-public class StartTime {
+public class StartTime implements Comparable<StartTime> {
 
     public static final String MESSAGE_TIME_CONSTRAINTS =
             "Start time should only be given in HH:MM in 24 hour format";
@@ -56,4 +56,8 @@ public class StartTime {
         return startTime.hashCode();
     }
 
+    @Override
+    public int compareTo(StartTime other) {
+        return this.startTime.compareTo(other.startTime);
+    }
 }

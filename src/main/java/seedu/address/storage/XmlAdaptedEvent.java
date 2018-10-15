@@ -7,9 +7,11 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Description;
+import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
+import seedu.address.model.event.StartTime;
 
 
 /**
@@ -22,6 +24,8 @@ public class XmlAdaptedEvent {
     private String eventName;
     @XmlElement(required = true)
     private String description;
+    @XmlElement(required = true)
+    private String date;
     @XmlElement(required = true)
     private String startTime;
     @XmlElement(required = true)
@@ -45,9 +49,11 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedEvent(String eventName, String description, String startTime, String endTime, String location) {
+    public XmlAdaptedEvent(String eventName, String description, String date,
+                           String startTime, String endTime, String location) {
         this.eventName = eventName;
         this.description = description;
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
@@ -64,8 +70,9 @@ public class XmlAdaptedEvent {
     public XmlAdaptedEvent(Event source) {
         eventName = source.getEventName().fullName;
         description = source.getDescription().value;
-        startTime = source.getStartTime().toString();
-        endTime = source.getEndTime().toString();
+        date = source.getDate().toString();
+        startTime = source.getStartTime().startTime;
+        endTime = source.getEndTime().endTime;
         location = source.getLocation().value;
         /* attendees = source.getAttendees().stream()
                 .map(XmlAttendees::new)
@@ -101,16 +108,30 @@ public class XmlAdaptedEvent {
         }
         final Description modelDescription = new Description(description);
 
-        if (startTime == null) {
-            throw new IllegalValueException("Invalid time format");
+        if (date == null) {
+            throw new IllegalValueException("Wrong date format");
         }
-        final LocalDate modelStartTime = LocalDate.parse(startTime);
+
+        final LocalDate modelDate = LocalDate.parse(date);
+
+
+        if (startTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StartTime.class.getSimpleName()));
+        }
+        if (!StartTime.isValidTime(startTime)) {
+            throw new IllegalValueException(StartTime.MESSAGE_TIME_CONSTRAINTS);
+        }
+        final StartTime modelStartTime = new StartTime(startTime);
 
 
         if (endTime == null) {
-            throw new IllegalValueException("Invalid time format");
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndTime.class.getSimpleName()));
         }
-        final LocalDate modelEndTime = LocalDate.parse(endTime);
+        if (!EndTime.isValidTime(endTime)) {
+            throw new IllegalValueException(EndTime.MESSAGE_TIME_CONSTRAINTS);
+        }
+        final EndTime modelEndTime = new EndTime(endTime);
 
 
         if (location == null) {
@@ -123,7 +144,7 @@ public class XmlAdaptedEvent {
         final Location modelLocation = new Location(location);
 
         //final Set<Person> modelAttendees = new HashSet<>(eventAttendees);
-        return new Event(modelEventName, modelDescription, modelStartTime, modelEndTime, modelLocation);
+        return new Event(modelEventName, modelDescription, modelDate, modelStartTime, modelEndTime, modelLocation);
     }
 
     @Override

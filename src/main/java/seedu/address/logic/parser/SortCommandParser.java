@@ -33,6 +33,9 @@ public class SortCommandParser implements Parser<SortCommand> {
         case (SortCommand.KEY_ENDTIME):
             key = SortCommand.KEY_ENDTIME;
             break;
+        case (SortCommand.KEY_DATE):
+            key = SortCommand.KEY_DATE;
+            break;
         default:
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE));
         }

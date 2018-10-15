@@ -22,8 +22,9 @@ public class Event implements Comparable<Event> {
 
     // Data fields
     private final Description description;
-    private final LocalDate startTime; // date format: "2007-12-03"
-    private final LocalDate endTime; // date format: "2007-12-03"
+    private final LocalDate date;
+    private final StartTime startTime;
+    private final EndTime endTime;
     private final Location location;
 
     private final Attendees attendees;
@@ -33,11 +34,12 @@ public class Event implements Comparable<Event> {
      */
 
     public Event(EventName eventName, Description description,
-                 LocalDate startTime, LocalDate endTime, Location location) {
+                 LocalDate date, StartTime startTime, EndTime endTime, Location location) {
         requireAllNonNull(eventName, description, startTime, endTime, location);
 
         this.eventName = eventName;
         this.description = description;
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
@@ -54,11 +56,15 @@ public class Event implements Comparable<Event> {
         return description;
     }
 
-    public LocalDate getStartTime() {
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public StartTime getStartTime() {
         return startTime;
     }
 
-    public LocalDate getEndTime() {
+    public EndTime getEndTime() {
         return endTime;
     }
 
@@ -133,6 +139,11 @@ public class Event implements Comparable<Event> {
     @Override
     public int compareTo(Event other) {
         return this.getEventName().fullName.compareTo(other.getEventName().fullName);
+    }
+
+
+    public int compareDateTo(Event other) {
+        return this.getDate().compareTo(other.getDate());
     }
 
     public int compareStartTimeTo(Event other) {

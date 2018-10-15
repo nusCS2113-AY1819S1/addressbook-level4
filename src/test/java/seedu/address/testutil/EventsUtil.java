@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -45,14 +46,17 @@ public class EventsUtil {
     /**
      * Returns the part of command string for the given {@code person}'s details.
      */
-    public static String getEventDetails(Event event) {
+
+    public static String getEventDetails(Event event)
+    {
 
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + event.getEventName().fullName + " ");
         sb.append(PREFIX_DESCRIPTION + event.getDescription().value + " ");
         sb.append(PREFIX_LOCATION + event.getLocation().value + " ");
-        sb.append(PREFIX_START_DATE + formatDate(event.getStartTime()) + " ");
-        sb.append(PREFIX_END_DATE + formatDate(event.getEndTime()));
+        sb.append(PREFIX_DATE + event.getDate().toString() + " ");
+        sb.append(PREFIX_START_DATE + event.getStartTime().startTime + " ");
+        sb.append(PREFIX_END_DATE + event.getEndTime().endTime);
         return sb.toString();
     }
 

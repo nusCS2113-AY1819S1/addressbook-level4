@@ -318,6 +318,29 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+
+// tag:: Sorting[]
+
+=== Event Sorting
+
+==== Current Implementation
+
+The sort mechanism is facilitated by Comparator<Event>.
+When the sort method for FXObservableList is called, it will take a Comparator object to be use for sorting the list.
+The comparator is able to take in two Event class objects and compare the relative parameter values.
+The parameter can be `EventName`, `Date` & `StartTime`.
+To allow sorting of these parameters, there are three types of comparators.
+
+
+image::SortNewCommand1StateListDiagram.png[width="650"]
+
+image::SortSequenceDiagram.png[width="650"]
+
+
+
+// end::Sorting[]
+
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 

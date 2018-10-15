@@ -10,10 +10,14 @@ import seedu.address.model.event.Event;
  * The API of the Model component.
  */
 public interface EventModel {
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Event> PREDICATE_SHOW_ALL_EVENTS = unused -> true;
 
-    /** Returns the EventList */
+    /**
+     * Returns the EventList
+     */
     ReadOnlyEventList getEventList();
 
     /**
@@ -40,11 +44,14 @@ public interface EventModel {
      */
     void updateEvent(Event target, Event editedEvent);
 
-    /** Returns an unmodifiable view of the filtered event list */
+    /**
+     * Returns an unmodifiable view of the filtered event list
+     */
     ObservableList<Event> getFilteredEventList();
 
     /**
      * Updates the filter of the filtered event list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEventList(Predicate<Event> predicate);
@@ -73,4 +80,12 @@ public interface EventModel {
      * Saves the current event list state for undo/redo.
      */
     void commitEventList();
+
+    void sortByName();
+
+    void sortByStartTime();
+
+    void sortByEndTime();
+
+    void sortByDate();
 }
