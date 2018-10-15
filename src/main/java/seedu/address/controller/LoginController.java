@@ -1,8 +1,5 @@
 package seedu.address.controller;
 
-//@@author tianhang
-import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -11,10 +8,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import seedu.address.authentication.PasswordUtils;
-import seedu.address.commons.core.CurrentUser;
-import seedu.address.commons.core.LoginInfo;
-import seedu.address.commons.core.LogsCenter;
+import seedu.address.authentication.LoginUtils;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.ui.Ui;
 
@@ -27,7 +21,6 @@ public class LoginController {
 
     protected static Ui ui;
     protected static LoginInfoManager loginInfoManager;
-    private final Logger logger = LogsCenter.getLogger(LoginController.class);
     private String username;
     private String password;
     @FXML
@@ -65,10 +58,20 @@ public class LoginController {
     public void verifyLoginInfo () {
         getUsername();
         getPassword ();
-        if (!isUsernameValid () || !isPasswordValid ()) {
+        LoginUtils loginUtils = new LoginUtils (username, password, loginInfoManager);
+        if (!loginUtils.isUsernameValid ()) {
+            loginError.setText("Please enter username");
             return;
         }
-        passwordAndUserNameCheck();
+        if (!loginUtils.isPasswordValid ()) {
+            loginError.setText("Please enter password");
+            return;
+        }
+        if (loginUtils.passwordAndUserNameCheck()) {
+            changeStageToMainUi();
+        } else {
+            loginError.setText("wrong username or password");
+        }
     }
 
     /**
@@ -99,57 +102,9 @@ public class LoginController {
     }
 
     /**
-     * Returns validity of username
-     * If usernameField is empty, return false else return true
-     *
-     * @return boolean value
+     *change the stage to main UI
      */
-    private boolean isUsernameValid() {
-        if (username.equals ("")) {
-            loginError.setText("Please enter username");
-            System.out.println("Please enter username");
-            return false;
-        }
-        return true;
-    }
-    /**
-     * Returns validity of password.
-     * If passwordField is empty, return false else return true.
-     *
-     * @return boolean value
-     */
-    private boolean isPasswordValid() {
-        if (password.equals ("")) {
-            loginError.setText("Please enter password");
-            System.out.println("Please enter password");
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * check the password and username with logininfo list
-     */
-    private void passwordAndUserNameCheck() {
-        LoginInfo userInfoInStorage = loginInfoManager.getLoginInfo (username);
-        boolean usernameMatch = username.matches (userInfoInStorage.getUserName ());
-
-        String securePassword = userInfoInStorage.getPassword ();
-        boolean passwordMatch = PasswordUtils.verifyUserPassword(password, securePassword);
-
-        if (passwordMatch && usernameMatch) {
-            CurrentUser.setLoginInfo (username, userInfoInStorage.getAuthenticationLevel ());
-            logger.info (String.format ("User has login with user name : " + CurrentUser.getUserName ()));
-            changeStageToMainUi(userInfoInStorage);
-        } else {
-            loginError.setText("wrong password");
-        }
-    }
-
-    /**
-     *
-     */
-    private void changeStageToMainUi(LoginInfo userInfoInStorage) {
+    private void changeStageToMainUi() {
         Stage primaryStage = (Stage) passwordField.getScene().getWindow();
         primaryStage.close();
         ui.start(primaryStage);
@@ -164,7 +119,7 @@ public class LoginController {
     }
 
     /**
-     * set ui as mainWindow ui of address book
+     * pass in the main ui
      * @param ui
      */
     public void mainWindowInterface (Ui ui) {
@@ -173,6 +128,5 @@ public class LoginController {
         }
         this.ui = ui;
     }
-
 
 }
