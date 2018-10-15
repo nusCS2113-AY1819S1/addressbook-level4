@@ -10,7 +10,6 @@ import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 
 import seedu.planner.model.record.Limit;
-import seedu.planner.model.record.Record;
 
 /**
 * This Command is used as a limit function, Currently the user can input two Dates and one MoneyFlow,
@@ -60,7 +59,7 @@ public class LimitCommand extends Command {
         }
 
         return new CommandResult(output);
-        
+
     }
     @Override
     public boolean equals (Object other) {
