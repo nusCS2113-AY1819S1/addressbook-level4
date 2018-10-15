@@ -198,9 +198,9 @@ public class ParserUtil {
      */
     public static ArrayList<Index> parseMultipleIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+        if (!StringUtil.areNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return new ArrayList<>();
+        return StringUtil.tokenizeIndexWithSpace(oneBasedIndex);
     }
 }
