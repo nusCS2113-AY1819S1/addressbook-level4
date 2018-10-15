@@ -46,10 +46,10 @@ Responsibilities: Event Reminders
 '''
 
 === Ho Phi Long
-image::yijinl.jpg[width="150", align="left"]
+image::P_Long.jpg[width="150", align="left"]
 {empty}[http://github.com/yijinl[github]] [<<johndoe#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Data
+Responsibilities: Sort, Filter and Calendar export
 
 '''
