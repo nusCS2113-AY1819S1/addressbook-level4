@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.commons.core.EventsCenter;
@@ -30,10 +31,10 @@ public class SelectCommand extends Command {
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 
-    private final Index targetIndex;
+    private final ArrayList<Index> targetIndex;
 
-    public SelectCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public SelectCommand(ArrayList<Index> targetIndex) {
+        this.targetIndex = new ArrayList<>(targetIndex);
     }
 
     @Override
@@ -49,12 +50,14 @@ public class SelectCommand extends Command {
 
         List<Person> filteredPersonList = model.getFilteredPersonList();
 
-        if (targetIndex.getZeroBased() >= filteredPersonList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        for (Index index : targetIndex) {
+            if (index.getZeroBased() >= filteredPersonList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            }
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.toString()));
 
     }
 

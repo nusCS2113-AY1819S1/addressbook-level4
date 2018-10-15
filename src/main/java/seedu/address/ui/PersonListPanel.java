@@ -62,7 +62,7 @@ public class PersonListPanel extends UiPart<Region> {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
+        scrollTo(event.targetIndex.get(0));
     }
 
     /**

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -184,5 +185,21 @@ public class ParserUtil {
             throw new ParseException(Kpi.MESSAGE_KPI_CONSTRAINTS);
         }
         return new Kpi(trimmedScore);
+    }
+
+    //@@author lekoook
+    /**
+     * Parses {@code oneBasedIndex} into an {@code Index} list and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @param oneBasedIndex the user input index.
+     * @return the list of {@code Index} to return.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static ArrayList<Index> parseMultipleIndex(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return new ArrayList<>();
     }
 }
