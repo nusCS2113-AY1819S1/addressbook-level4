@@ -31,6 +31,12 @@ public interface Model {
     void deleteTask(Task target);
 
     /**
+     * Completes the given task.
+     * The task must exist in the task book.
+     */
+    void completeTask(Task target);
+
+    /**
      * Adds the given task.
      * {@code task} must not already exist in the task book.
      */

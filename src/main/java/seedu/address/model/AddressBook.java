@@ -90,6 +90,14 @@ public class AddressBook implements ReadOnlyTaskBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
+    public void completeTask(Task key) {
+        tasks.complete(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
     public void removeTask(Task key) {
         tasks.remove(key);
     }

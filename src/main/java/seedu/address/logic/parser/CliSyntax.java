@@ -15,6 +15,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TITLE = new Prefix("t/");
     public static final Prefix PREFIX_DESCRIPTION = new Prefix("d/");
     public static final Prefix PREFIX_PRIORITY = new Prefix("p/");
+    public static final Prefix PREFIX_DEADLINE = new Prefix("de/");
 
     public static final Prefix PREFIX_DAY = new Prefix ("dd/");
     public static final Prefix PREFIX_MONTH = new Prefix ("mm/");
