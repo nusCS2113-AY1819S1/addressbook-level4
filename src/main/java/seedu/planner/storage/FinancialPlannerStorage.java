@@ -17,15 +17,14 @@ public interface FinancialPlannerStorage {
     /**
      * Returns the file path of the data file of the record list storage.
      */
-    Path getFinancialPlannerFilePath();
-
-
+    Path getRecordListFilePath();
 
     /**
      * Returns the file path of the data file for SummaryMap storage
      */
     Path getSummaryMapFilePath();
 
+    // ================ Financial Planner storage methods ===========================
     /**
      * Returns FinancialPlanner data as a {@link ReadOnlyFinancialPlanner}.
      *   Returns {@code Optional.empty()} if storage file is not found.
@@ -35,9 +34,38 @@ public interface FinancialPlannerStorage {
     Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException;
 
     /**
-     * @see #getFinancialPlannerFilePath()
+     * @see #getRecordListFilePath() and #getSummaryMapFilePath
      */
-    Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
+                                                            Path summaryListFilePath)
+            throws DataConversionException, IOException;
+
+    /**
+     * Saves the given {@link ReadOnlyFinancialPlanner} to the storage.
+     * @param financialPlanner cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+
+    /**
+     * @see #saveFinancialPlanner(ReadOnlyFinancialPlanner)
+     */
+    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
+                              Path summaryMapFilePath) throws IOException;
+
+    // ================ Record List storage methods ===========================
+    /**
+     * Returns FinancialPlanner data as a {@link ReadOnlyFinancialPlanner}.
+     *   Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem when reading from the storage.
+     */
+    Optional<ReadOnlyFinancialPlanner> readRecordList() throws DataConversionException, IOException;
+
+    /**
+     * @see #getRecordListFilePath()
+     */
+    Optional<ReadOnlyFinancialPlanner> readRecordList(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyFinancialPlanner} to the storage.
@@ -49,7 +77,9 @@ public interface FinancialPlannerStorage {
     /**
      * @see #saveRecordList(ReadOnlyFinancialPlanner)
      */
-    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
+    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
+
+    // ================ Summary Map storage methods ===========================
 
     /**
      * Returns SummaryMap data as a {@link SummaryMap}.
@@ -75,5 +105,8 @@ public interface FinancialPlannerStorage {
      * @see #saveSummaryMap(SummaryMap)
      */
     void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException;
+
+    // ================ Limit List storage methods ===========================
+    //TODO: @Oscar put your limit functions here
 
 }

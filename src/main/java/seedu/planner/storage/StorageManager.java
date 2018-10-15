@@ -50,66 +50,78 @@ public class StorageManager extends ComponentManager implements Storage {
         userPrefsStorage.saveUserPrefs(userPrefs);
     }
 
-    // ================ FinancialPlanner methods ==============================
+
+    // =============== Methods to get file paths ==============================
 
     @Override
-    public Path getFinancialPlannerFilePath() {
-        return financialPlannerStorage.getFinancialPlannerFilePath();
+    public Path getRecordListFilePath() {
+        return financialPlannerStorage.getRecordListFilePath();
     }
-
-    @Override
-    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
-        return readFinancialPlanner(financialPlannerStorage.getFinancialPlannerFilePath());
-    }
-
-    @Override
-    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path filePath)
-            throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + filePath);
-        return financialPlannerStorage.readFinancialPlanner(filePath);
-    }
-
-    @Override
-    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
-        saveFinancialPlanner(financialPlanner, financialPlannerStorage.getFinancialPlannerFilePath());
-    }
-
-    //public void
-
-    @Override
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
-        logger.fine("Attempting to write to data file: " + filePath);
-        financialPlannerStorage.saveFinancialPlanner(financialPlanner, filePath);
-    }
-
-    @Override
-    @Subscribe
-    public void handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
-        try {
-            saveRecordList(event.data);
-        } catch (IOException e) {
-            raise(new DataSavingExceptionEvent(e));
-        }
-    }
-
-    //@Override
-   // @Subscribe
-    public void handleLimitListChangedEvent (FinancialPlannerChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
-        try {
-            saveRecordList(event.data);
-        } catch (IOException e) {
-            raise(new DataSavingExceptionEvent(e));
-        }
-    }
-
-    // ================ SummaryMap storage methods ==============================
 
     @Override
     public Path getSummaryMapFilePath() {
         return financialPlannerStorage.getSummaryMapFilePath();
     }
+
+    //TODO: @ Oscar add your get filepath function here
+
+    // ================ Financial Planner methods ===========================
+
+    @Override
+    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
+        return readFinancialPlanner(financialPlannerStorage.getRecordListFilePath(),
+                financialPlannerStorage.getSummaryMapFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
+                                                                   Path summaryMapFilePath)
+            throws DataConversionException, IOException{
+        logger.fine("Attempting to read data from file: " + recordListFilePath + " and "
+                 + summaryMapFilePath);
+        return financialPlannerStorage.readFinancialPlanner(recordListFilePath, summaryMapFilePath);
+    }
+
+    @Override
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException{
+        saveFinancialPlanner(financialPlanner, financialPlannerStorage.getRecordListFilePath(),
+                financialPlannerStorage.getSummaryMapFilePath());
+    }
+
+    @Override
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
+                                     Path summaryMapFilePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + recordListFilePath + " and "
+                + summaryMapFilePath);
+        financialPlannerStorage.saveFinancialPlanner(financialPlanner, recordListFilePath, summaryMapFilePath);
+    }
+
+    // ================ Record List methods ==============================
+
+    @Override
+    public Optional<ReadOnlyFinancialPlanner> readRecordList() throws DataConversionException, IOException {
+        return readRecordList(financialPlannerStorage.getRecordListFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyFinancialPlanner> readRecordList(Path filePath)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return financialPlannerStorage.readRecordList(filePath);
+    }
+
+    @Override
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+        saveRecordList(financialPlanner, financialPlannerStorage.getRecordListFilePath());
+    }
+
+    @Override
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        financialPlannerStorage.saveRecordList(financialPlanner, filePath);
+    }
+
+    // ================ SummaryMap storage methods ==============================
 
     @Override
     public Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException {
@@ -133,12 +145,35 @@ public class StorageManager extends ComponentManager implements Storage {
         financialPlannerStorage.saveSummaryMap(summaryMap, filePath);
     }
 
+    // ================================== Event management methods ================================
+
+    @Override
+    @Subscribe
+    public void handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveRecordList(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
     @Override
     @Subscribe
     public void handleSummaryMapChangedEvent(SummaryMapChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveSummaryMap(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    @Subscribe
+    public void handleLimitListChangedEvent (FinancialPlannerChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveRecordList(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

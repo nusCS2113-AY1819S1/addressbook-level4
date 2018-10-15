@@ -23,13 +23,13 @@ public interface Storage extends FinancialPlannerStorage, UserPrefsStorage {
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
-    // =================================== Financial Planner methods =========================================
+    // =================================== Record List methods =========================================
 
     @Override
-    Path getFinancialPlannerFilePath();
+    Path getRecordListFilePath();
 
     @Override
-    Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException;
+    Optional<ReadOnlyFinancialPlanner> readRecordList() throws DataConversionException, IOException;
 
     @Override
     void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;

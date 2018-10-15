@@ -33,25 +33,49 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
         this.summaryMapFilePath = summaryMapFilePath;
     }
 
-    public Path getFinancialPlannerFilePath() {
-        return financialPlannerFilePath;
-    }
+    public Path getRecordListFilePath() { return financialPlannerFilePath; }
 
     public Path getSummaryMapFilePath() { return summaryMapFilePath; }
+
+    // ===================== Financial Planner Storage methods ================================
+
+    @Override
+    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
+        return readFinancialPlanner(financialPlannerFilePath, summaryMapFilePath);
+    }
+
+    @Override
+    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
+                                                                   Path summaryMapFilePath)
+            throws DataConversionException, IOException {
+        requireNonNull(recordListFilePath);
+        requireNonNull(summaryMapFilePath);
+        return null;
+    }
+
+    @Override
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException{
+        saveFinancialPlanner(financialPlanner, financialPlannerFilePath, summaryMapFilePath);
+    }
+
+    @Override
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
+                                     Path summaryMapFilePath) throws IOException {
+    }
 
     // ===================== Record List Storage methods ======================================
 
     @Override
-    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
-        return readFinancialPlanner(financialPlannerFilePath);
+    public Optional<ReadOnlyFinancialPlanner> readRecordList() throws DataConversionException, IOException {
+        return readRecordList(financialPlannerFilePath);
     }
 
     /**
-     * Similar to {@link #readFinancialPlanner()}
+     * Similar to {@link #readRecordList()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyFinancialPlanner> readRecordList(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
@@ -71,15 +95,15 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     @Override
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
-        saveFinancialPlanner(financialPlanner, financialPlannerFilePath);
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+        saveRecordList(financialPlanner, financialPlannerFilePath);
     }
 
     /**
      * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
         requireNonNull(financialPlanner);
         requireNonNull(filePath);
 
