@@ -1,4 +1,4 @@
-package seedu.recruit.logic.commands.EmailCommand;
+package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,7 +7,6 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
-import seedu.recruit.logic.parser.RecruitBookParser;
 import seedu.recruit.model.Model;
 
 
@@ -25,7 +24,7 @@ public class EmailSelectRecipientsCommand extends Command {
         String lastCommandUsed = history.getLast();
         EmailUtil emailUtil = model.getEmailUtil();
 
-        if(lastCommandUsed.toUpperCase().contains("LISTC")) {
+        if (lastCommandUsed.toUpperCase().contains("LISTC")) {
             emailUtil.setRecipients(model.getFilteredCandidateList());
             emailUtil.setAreRecipientsCandidates(true);
         } else {

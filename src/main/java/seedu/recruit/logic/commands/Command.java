@@ -7,8 +7,6 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 
-import javax.mail.MessagingException;
-
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */

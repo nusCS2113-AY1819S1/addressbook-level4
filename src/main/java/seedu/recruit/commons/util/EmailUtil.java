@@ -1,5 +1,19 @@
 package seedu.recruit.commons.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Properties;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
@@ -14,29 +28,18 @@ import com.google.api.client.util.store.FileDataStoreFactory;
 import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
+
 import javafx.collections.ObservableList;
 
-import javax.mail.Address;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
-
+/**
+ * Contains variables and emails pertaining to the Email Command
+ */
 public class EmailUtil {
     /**
      * Global instance of the scopes required by this quickstart.
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
+    public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
     private static final String APPLICATION_NAME = "CS2113 F09 T04";
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -52,7 +55,6 @@ public class EmailUtil {
     private String to;
     private String subject;
     private String bodyText;
-    public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
 
     /**
      * Getters and Setters
@@ -188,7 +190,7 @@ public class EmailUtil {
 
         email.setFrom(new InternetAddress(from));
 
-        for(String recipient : to) {
+        for (String recipient : to) {
             email.addRecipient(javax.mail.Message.RecipientType.BCC, new InternetAddress(recipient));
         }
         email.setSubject(subject);

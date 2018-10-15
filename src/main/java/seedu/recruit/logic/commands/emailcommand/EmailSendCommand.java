@@ -1,6 +1,13 @@
-package seedu.recruit.logic.commands.EmailCommand;
+package seedu.recruit.logic.commands.emailcommand;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import javafx.collections.ObservableList;
+
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
@@ -8,12 +15,6 @@ import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 
 /**
  * Finally, send the email.
@@ -32,21 +33,21 @@ public class EmailSendCommand extends Command {
         ObservableList<?> recipients = emailUtil.getRecipients();
         ObservableList<?> contents = emailUtil.getContents();
 
-        for(Object content : contents) {
+        for (Object content : contents) {
             System.out.println(content.toString());
         }
 
         ArrayList<String> recipientEmails = new ArrayList<>();
-        if(emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.isAreRecipientsCandidates()) {
             for (Object recipient : recipients) {
-                Candidate candidate = (Candidate)recipient;
+                Candidate candidate = (Candidate) recipient;
                 recipientEmails.add(candidate.getEmail().toString());
             }
         } else {
             //next time
         }
 
-        for(String recipientEmail:recipientEmails) {
+        for (String recipientEmail:recipientEmails) {
             System.out.println(recipientEmail);
         }
 

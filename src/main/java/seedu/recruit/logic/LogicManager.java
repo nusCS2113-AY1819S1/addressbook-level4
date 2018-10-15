@@ -5,6 +5,7 @@ import java.security.GeneralSecurityException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+
 import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.util.EmailUtil;
@@ -17,8 +18,6 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
-
-import javax.mail.MessagingException;
 
 /**
  * The main LogicManager of the app.

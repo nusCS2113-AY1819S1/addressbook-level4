@@ -19,10 +19,6 @@ import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.DeleteCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
-import seedu.recruit.logic.commands.EmailCommand.EmailInitialiseCommand;
-import seedu.recruit.logic.commands.EmailCommand.EmailSelectContentsCommand;
-import seedu.recruit.logic.commands.EmailCommand.EmailSelectRecipientsCommand;
-import seedu.recruit.logic.commands.EmailCommand.EmailSendCommand;
 import seedu.recruit.logic.commands.ExitCommand;
 import seedu.recruit.logic.commands.FindCommand;
 import seedu.recruit.logic.commands.HelpCommand;
@@ -31,6 +27,10 @@ import seedu.recruit.logic.commands.ListCommand;
 import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailSelectContentsCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailSelectRecipientsCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
 
 import seedu.recruit.logic.parser.exceptions.ParseException;
 
@@ -54,7 +54,7 @@ public class RecruitBookParser {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
-            if(!state.nextCommand.equals("primary")) {
+            if (!state.nextCommand.equals("primary")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
             } else {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);

@@ -1,4 +1,4 @@
-package seedu.recruit.logic.commands.EmailCommand;
+package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
 

@@ -17,7 +17,6 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
-import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
@@ -31,7 +30,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
     private final FilteredList<JobOffer> filteredJobs;
-    public EmailUtil emailUtil;
+    private EmailUtil emailUtil;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.

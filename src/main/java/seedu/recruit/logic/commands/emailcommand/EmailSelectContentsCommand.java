@@ -1,14 +1,13 @@
-package seedu.recruit.logic.commands.EmailCommand;
+package seedu.recruit.logic.commands.emailcommand;
+
+import static java.util.Objects.requireNonNull;
 
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
-import seedu.recruit.logic.parser.RecruitBookParser;
 import seedu.recruit.model.Model;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * 3rd step of the Email command
@@ -23,7 +22,7 @@ public class EmailSelectContentsCommand extends Command {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 
-        if(emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.isAreRecipientsCandidates()) {
             emailUtil.setContents(model.getFilteredCompanyJobList());
         } else {
             emailUtil.setContents(model.getFilteredCandidateList());
