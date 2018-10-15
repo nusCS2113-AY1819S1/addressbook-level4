@@ -1,8 +1,9 @@
-package seedu.address.model;
+package seedu.address.model.module;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
+import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 
 /**

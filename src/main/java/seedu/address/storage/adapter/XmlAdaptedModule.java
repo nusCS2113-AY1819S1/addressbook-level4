@@ -3,7 +3,7 @@ package seedu.address.storage.adapter;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import seedu.address.model.Module;
+import seedu.address.model.module.Module;
 
 /**
  * JAXB-friendly adapted version of the Module.
