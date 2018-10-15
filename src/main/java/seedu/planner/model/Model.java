@@ -13,6 +13,7 @@ import seedu.planner.model.summary.Summary;
 /**
  * The API of the Model component.
  */
+
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Record> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
@@ -38,6 +39,8 @@ public interface Model {
      * The record must exist in the financial planner.
      */
     void deleteRecord(Record target);
+
+    void deleteListRecord(List<Record> targetList);
 
     /**
      * Adds the given record.

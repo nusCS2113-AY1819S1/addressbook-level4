@@ -46,7 +46,7 @@ public class HelpWindowTest extends GuiUnitTest {
     }
 
     @Test
-    public void focus_helpWindowNotFocused_focused() throws Exception {
+    public void focus_helpWindowNotFocused_focused() {
         // TODO: This test skip can be removed once this bug is fixed:
         // https://github.com/javafxports/openjdk-jfx/issues/50
         //

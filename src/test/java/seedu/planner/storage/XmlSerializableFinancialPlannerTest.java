@@ -28,8 +28,8 @@ public class XmlSerializableFinancialPlannerTest {
 
     @Test
     public void toModelType_typicalRecordsFile_success() throws Exception {
-        XmlSerializableFinancialPlanner dataFromFile = XmlUtil.getDataFromFile(TYPICAL_RECORDS_FILE,
-                XmlSerializableFinancialPlanner.class);
+        XmlSerializableFinancialPlanner dataFromFile = XmlUtil.getDataFromFile(
+                TYPICAL_RECORDS_FILE, XmlSerializableFinancialPlanner.class);
         FinancialPlanner financialPlannerFromFile = dataFromFile.toModelType();
         FinancialPlanner typicalRecordsFinancialPlanner = TypicalRecords.getTypicalFinancialPlanner();
         assertEquals(financialPlannerFromFile, typicalRecordsFinancialPlanner);

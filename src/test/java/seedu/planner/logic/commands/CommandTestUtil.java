@@ -131,6 +131,22 @@ public class CommandTestUtil {
     }
 
     /**
+     * Updates {@code model}'s filtered list to show only the record
+     * at the given {@code targetIndexInt} in the {@code model}'s planner book.
+     * @param model
+     * @param targetIndexInt
+     */
+    public static void showRecordAtIndex(Model model, int targetIndexInt) {
+        assertTrue((targetIndexInt < model.getFilteredRecordList().size()));
+
+        Record record = model.getFilteredRecordList().get(targetIndexInt);
+        final String[] splitName = record.getName().fullName.split("\\s+");
+        model.updateFilteredRecordList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+
+        assertEquals(1, model.getFilteredRecordList().size());
+    }
+
+    /**
      * Deletes the first record in {@code model}'s filtered list from {@code model}'s planner book.
      */
     public static void deleteFirstRecord(Model model) {

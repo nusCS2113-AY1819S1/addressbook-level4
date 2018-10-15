@@ -69,6 +69,15 @@ public class Record {
     }
 
     /**
+     * Return whether the record has the same date requried.
+     */
+    public boolean isSameDateRecord (Date date) {
+        return date.getDay() == this.date.getDay()
+                && date.getMonth() == this.date.getMonth()
+                && date.getYear() == this.date.getYear();
+    }
+
+    /**
      * Returns true if both records have the same identity and data fields.
      * This defines a stronger notion of equality between two records.
      */

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -130,6 +131,10 @@ public class AddCommandTest {
 
         @Override
         public boolean isExceededLimit (Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public void deleteListRecord(List<Record> targetList) {
             throw new AssertionError("This method should not be called.");
         }
 

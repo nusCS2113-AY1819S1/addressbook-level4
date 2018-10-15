@@ -3,7 +3,7 @@
 <financialplanner>
     <records>
         <name>Indo</name>
-        <date>25-9-2018</date>
+        <date>28-2-2018</date>
         <moneyFlow>-5.6</moneyFlow>
         <tagged>friends</tagged>
     </records>
@@ -16,7 +16,7 @@
     </records>
     <records>
         <name>Income from work</name>
-        <date>27-9-2018</date>
+        <date>26-9-2018</date>
         <moneyFlow>+60.0</moneyFlow>
     </records>
     <records>
@@ -37,7 +37,7 @@
     </records>
     <records>
         <name>Random income</name>
-        <date>25-9-2018</date>
+        <date>31-03-2018</date>
         <moneyFlow>+14.50</moneyFlow>
     </records>
 </financialplanner>
