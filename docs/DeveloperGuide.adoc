@@ -320,7 +320,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag::comments[]
-=== Comments feature
+=== Comments
 ==== Current Implementation
 `
 The Comments feature is facilitated by `Comments` class in the Logic/Comments folder. `AddComment`, `DeleteComment` and `ReplyComment` classes extend the `Comments` class. The features of the following classes are as such:
