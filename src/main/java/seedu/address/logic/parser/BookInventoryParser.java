@@ -43,6 +43,8 @@ public class BookInventoryParser {
 
     private static ArrayList<String> commandList;
     private static DiceCoefficient diceCoefficient;
+    private final double DICE_COEFFICIENT_THRESHOLD = 0.75;
+
     @FXML
     private StackPane personListPanelPlaceholder;
 
@@ -75,6 +77,7 @@ public class BookInventoryParser {
         commandList.add(StockCommand.COMMAND_WORD);
         commandList.add(ClearCommand.COMMAND_WORD);
         commandList.add(FindCommand.COMMAND_WORD);
+        commandList.add(ListCommand.COMMAND_WORD);
         commandList.add(HistoryCommand.COMMAND_WORD);
         commandList.add(ExitCommand.COMMAND_WORD);
         commandList.add(HelpCommand.COMMAND_WORD);
@@ -133,7 +136,7 @@ public class BookInventoryParser {
         default:
         {
             for (String command : commandList) {
-                if (diceCoefficient(commandWord, command) > 0.5) {
+                if (diceCoefficient(commandWord, command) > DICE_COEFFICIENT_THRESHOLD) {
                     throw new ParseException(MESSAGE_SIMILARITY_FOUND + command + "?");
                 }
             }

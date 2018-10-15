@@ -7,6 +7,9 @@ import java.util.Set;
 
 public class DiceCoefficient {
 
+    /**
+     * Adapted from https://en.wikibooks.org/wiki/Algorithm_Implementation/Strings/Dice%27s_coefficient
+     */
     //Note that this implementation is case-sensitive!
     public static double diceCoefficient(String s1, String s2)
     {
