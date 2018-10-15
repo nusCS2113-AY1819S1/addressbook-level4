@@ -14,20 +14,20 @@ import seedu.address.model.request.RequestList;
 /**
  * An Immutable RequestList that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "requestlist")
 public class XmlSerializableRequestList {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate request(s).";
 
     @XmlElement
-    private List<XmlAdaptedRequest> persons;
+    private List<XmlAdaptedRequest> requests;
 
     /**
      * Creates an empty XmlSerializableRequestList.
      * This empty constructor is required for marshalling.
      */
     public XmlSerializableRequestList() {
-        persons = new ArrayList<>();
+        requests = new ArrayList<>();
     }
 
     /**
@@ -35,7 +35,7 @@ public class XmlSerializableRequestList {
      */
     public XmlSerializableRequestList(ReadOnlyRequests src) {
         this();
-        persons.addAll(src.getRequestList().stream().map(XmlAdaptedRequest::new).collect(Collectors.toList()));
+        requests.addAll(src.getRequestList().stream().map(XmlAdaptedRequest::new).collect(Collectors.toList()));
     }
 
     /**
@@ -46,7 +46,7 @@ public class XmlSerializableRequestList {
      */
     public RequestList toModelType() throws IllegalValueException {
         RequestList requestList = new RequestList();
-        for (XmlAdaptedRequest p : persons) {
+        for (XmlAdaptedRequest p : requests) {
             Request request = p.toModelType();
             if (requestList.hasRequest(request)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
@@ -65,6 +65,6 @@ public class XmlSerializableRequestList {
         if (!(other instanceof XmlSerializableRequestList)) {
             return false;
         }
-        return persons.equals(((XmlSerializableRequestList) other).persons);
+        return requests.equals(((XmlSerializableRequestList) other).requests);
     }
 }

@@ -12,7 +12,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path bookInventoryFilePath = Paths.get("data" , "addressbook.xml");
+    private Path bookInventoryFilePath = Paths.get("data" , "bookinventory.xml");
+    private Path requestListFilePath = Paths.get("data" , "requestlist.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -32,6 +33,10 @@ public class UserPrefs {
 
     public Path getBookInventoryFilePath() {
         return bookInventoryFilePath;
+    }
+
+    public Path getRequestListFilePath() {
+        return requestListFilePath;
     }
 
     public void setBookInventoryFilePath(Path addressBookFilePath) {

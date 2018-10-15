@@ -15,28 +15,28 @@ import seedu.address.model.book.Book;
 /**
  * An Immutable BookInventory that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook {
+@XmlRootElement(name = "bookinventory")
+public class XmlSerializableBookInventory {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Book Inventory list contains duplicate book(s).";
 
     @XmlElement
-    private List<XmlAdaptedBook> persons;
+    private List<XmlAdaptedBook> books;
 
     /**
-     * Creates an empty XmlSerializableAddressBook.
+     * Creates an empty XmlSerializableBookInventory.
      * This empty constructor is required for marshalling.
      */
-    public XmlSerializableAddressBook() {
-        persons = new ArrayList<>();
+    public XmlSerializableBookInventory() {
+        books = new ArrayList<>();
     }
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyBookInventory src) {
+    public XmlSerializableBookInventory(ReadOnlyBookInventory src) {
         this();
-        persons.addAll(src.getBookList().stream().map(XmlAdaptedBook::new).collect(Collectors.toList()));
+        books.addAll(src.getBookList().stream().map(XmlAdaptedBook::new).collect(Collectors.toList()));
     }
 
     /**
@@ -47,7 +47,7 @@ public class XmlSerializableAddressBook {
      */
     public BookInventory toModelType() throws IllegalValueException {
         BookInventory bookInventory = new BookInventory();
-        for (XmlAdaptedBook p : persons) {
+        for (XmlAdaptedBook p : books) {
             Book book = p.toModelType();
             if (bookInventory.hasPerson(book)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
@@ -63,9 +63,9 @@ public class XmlSerializableAddressBook {
             return true;
         }
 
-        if (!(other instanceof XmlSerializableAddressBook)) {
+        if (!(other instanceof XmlSerializableBookInventory)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return books.equals(((XmlSerializableBookInventory) other).books);
     }
 }
