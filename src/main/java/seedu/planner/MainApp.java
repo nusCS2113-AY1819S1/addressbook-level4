@@ -92,7 +92,7 @@ public class MainApp extends Application {
         Optional<SummaryMap> summaryMapOptional;
         ReadOnlyFinancialPlanner initialData;
         try {
-            financialPlannerOptional = storage.readRecordList();
+            financialPlannerOptional = storage.readFinancialPlanner();
             if (!financialPlannerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample FinancialPlanner");
             }

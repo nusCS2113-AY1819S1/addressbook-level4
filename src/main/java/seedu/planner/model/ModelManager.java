@@ -62,7 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateFinancialPlannerChanged() {
-        raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
+        raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner.getRecordList()));
     }
 
     /** Raises an event to indicate the summary map has changed */

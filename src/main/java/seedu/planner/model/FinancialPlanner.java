@@ -172,6 +172,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
         return (limit.isExceeded(recordsMoney));
     }
+
     /**
      * Removes a limit from the list,
      * @param limitin must already existed.
@@ -183,7 +184,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     @Override
     public String toString() {
         return records.asUnmodifiableObservableList().size() + " records";
-
     }
 
     @Override

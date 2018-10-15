@@ -4,9 +4,12 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.record.Record;
+import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
 /**
@@ -55,29 +58,29 @@ public interface FinancialPlannerStorage {
 
     // ================ Record List storage methods ===========================
     /**
-     * Returns FinancialPlanner data as a {@link ReadOnlyFinancialPlanner}.
+     * Returns UniqueRecordList data as a {@link UniqueRecordList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyFinancialPlanner> readRecordList() throws DataConversionException, IOException;
+    Optional<UniqueRecordList> readRecordList() throws DataConversionException, IOException;
 
     /**
      * @see #getRecordListFilePath()
      */
-    Optional<ReadOnlyFinancialPlanner> readRecordList(Path filePath) throws DataConversionException, IOException;
+    Optional<UniqueRecordList> readRecordList(Path filePath) throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link ReadOnlyFinancialPlanner} to the storage.
-     * @param financialPlanner cannot be null.
+     * Saves the given {@link ObservableList<Record>} to the storage.
+     * @param recordList cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+    void saveRecordList(ObservableList<Record> recordList) throws IOException;
 
     /**
-     * @see #saveRecordList(ReadOnlyFinancialPlanner)
+     * @see #saveRecordList(ObservableList<Record>)
      */
-    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
+    void saveRecordList(ObservableList<Record> recordList, Path filePath) throws IOException;
 
     // ================ Summary Map storage methods ===========================
 

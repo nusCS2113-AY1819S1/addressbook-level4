@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.ObservableList;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
@@ -15,6 +16,8 @@ import seedu.planner.commons.events.storage.DataSavingExceptionEvent;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
+import seedu.planner.model.record.Record;
+import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
 /**
@@ -99,24 +102,24 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ Record List methods ==============================
 
     @Override
-    public Optional<ReadOnlyFinancialPlanner> readRecordList() throws DataConversionException, IOException {
+    public Optional<UniqueRecordList> readRecordList() throws DataConversionException, IOException {
         return readRecordList(financialPlannerStorage.getRecordListFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyFinancialPlanner> readRecordList(Path filePath)
+    public Optional<UniqueRecordList> readRecordList(Path filePath)
             throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
         return financialPlannerStorage.readRecordList(filePath);
     }
 
     @Override
-    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+    public void saveRecordList(ObservableList<Record> financialPlanner) throws IOException {
         saveRecordList(financialPlanner, financialPlannerStorage.getRecordListFilePath());
     }
 
     @Override
-    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+    public void saveRecordList(ObservableList<Record> financialPlanner, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         financialPlannerStorage.saveRecordList(financialPlanner, filePath);
     }

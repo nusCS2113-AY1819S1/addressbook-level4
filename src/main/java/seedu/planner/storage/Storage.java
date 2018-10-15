@@ -4,12 +4,15 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import javafx.collections.ObservableList;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.storage.DataSavingExceptionEvent;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
+import seedu.planner.model.record.Record;
+import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
 /**
@@ -29,10 +32,10 @@ public interface Storage extends FinancialPlannerStorage, UserPrefsStorage {
     Path getRecordListFilePath();
 
     @Override
-    Optional<ReadOnlyFinancialPlanner> readRecordList() throws DataConversionException, IOException;
+    Optional<UniqueRecordList> readRecordList() throws DataConversionException, IOException;
 
     @Override
-    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+    void saveRecordList(ObservableList<Record> recordList) throws IOException;
 
     /**
      * Saves the current version of the Financial Planner to the hard disk.

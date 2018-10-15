@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import javafx.collections.ObservableList;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
@@ -37,9 +38,10 @@ public class XmlSerializableFinancialPlanner extends XmlSerializableClass<Unique
     /**
      * Conversion
      */
-    public XmlSerializableFinancialPlanner(ReadOnlyFinancialPlanner src) {
+    public XmlSerializableFinancialPlanner(ObservableList<Record> src) {
         this();
-        records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
+        records.addAll(src.stream()
+                .map(XmlAdaptedRecord::new).collect(Collectors.toList()));
     }
 
     /**
