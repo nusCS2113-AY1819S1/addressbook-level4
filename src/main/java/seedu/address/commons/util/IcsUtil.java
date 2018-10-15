@@ -29,7 +29,7 @@ public class IcsUtil {
         try {
             importstring = FileUtil.readFromFile(file);
         } catch (IOException e) {
-            System.out.println ("error reading from file");
+            throw new CommandException(MESSAGE_IO_ERROR);
         }
 
         stringToTimeTableParser(importstring);
@@ -38,7 +38,7 @@ public class IcsUtil {
     }
 
     /**
-     * Parses raw string data from ics file into a timetable object
+     * Parses raw string (from ics file) into a timetable object
      */
     private static TimeTable stringToTimeTableParser(String string) throws CommandException {
 
@@ -66,9 +66,7 @@ public class IcsUtil {
                 } catch (IndexOutOfBoundsException e) {
                     throw new CommandException(MESSAGE_IO_ERROR);
                 }
-            }
-
-            else if (splitLine[0].equals("DTEND")) {
+            } else if (splitLine[0].equals("DTEND")) {
                 //end time!
                 try {
                     enddate = splitLine[1].substring(0, 8);
@@ -76,14 +74,10 @@ public class IcsUtil {
                 } catch (IndexOutOfBoundsException e) {
                     throw new CommandException(MESSAGE_IO_ERROR);
                 }
-            }
-
-            else if (splitLine[0].equals("SUMMARY")) {
+            } else if (splitLine[0].equals("SUMMARY")) {
                 //mod name
                 name = splitLine[1];
-            }
-
-            else if ((splitLine[0].equals("END")) && (splitLine[1].equals("VEVENT"))) {
+            } else if ((splitLine[0].equals("END")) && (splitLine[1].equals("VEVENT"))) {
                 //single event reading over
                 int icsStartTime = 0;
                 try {

@@ -68,11 +68,11 @@ public class ImportCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        TimeTable importedTimeTable = new TimeTable();
+        TimeTable importedTimeTable;
         try {
             importedTimeTable = IcsUtil.getTimeTableFromFile(filePath);
         } catch (CommandException e) {
-
+            throw new CommandException(MESSAGE_IO_ERROR);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
