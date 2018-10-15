@@ -4,11 +4,8 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import com.sun.xml.bind.XmlAccessorFactory;
-import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -21,9 +18,8 @@ import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
-import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
-import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.logic.Logic;
 import seedu.recruit.model.UserPrefs;
 
@@ -129,8 +125,12 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleChangeToCandidateDetailsPanel() {
         candidateBook.setOnAction(new EventHandler<ActionEvent>() {
+            /**
+             * Handles switch in panel view in RecruitBook main window
+             * when user switches from Company Book to Candidate Book
+             */
             @Override
-            public void handle(ActionEvent event) {
+            public void handleBookChange(ActionEvent event) {
                 if (!panelViewPlaceHolder.getChildren().isEmpty()) {
                     panelViewPlaceHolder.getChildren().remove(0);
                     panelViewPlaceHolder.getChildren().add(candidateDetailsPanel.getRoot());
@@ -142,8 +142,12 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleChangeToCompanyJobDetailsPanel() {
         companyBook.setOnAction(new EventHandler<ActionEvent>() {
+            /**
+             * Handles switch in panel view in RecruitBook main window
+             * when user switches from Candidate Book to Company Book
+             */
             @Override
-            public void handle(ActionEvent event) {
+            public void handleBookChange(ActionEvent event) {
                 if (!panelViewPlaceHolder.getChildren().isEmpty()) {
                     panelViewPlaceHolder.getChildren().remove(0);
                     panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
@@ -153,13 +157,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * RecruitBook's panelViewPlaceHolder shows the list of companies and
-     * their list of jobs.
-     * Fills up all the placeholders of this window.
+     * RecruitBook's default panelViewPlaceHolder shows the list of
+     * companies and their list of jobs, and at the same time
+     * fills up all the other placeholders of this window.
      */
     void fillInnerParts() {
         candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
-        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(), logic.getFilteredCompanyJobList());
+        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
+                                        logic.getFilteredCompanyJobList());
         panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
@@ -225,9 +230,13 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public CandidateDetailsPanel getCandidateDetailsPanel() {return candidateDetailsPanel;}
+    public CandidateDetailsPanel getCandidateDetailsPanel() {
+        return candidateDetailsPanel;
+    }
 
-    public CompanyJobDetailsPanel getCompanyJobDetailsPanel() {return companyJobDetailsPanel;}
+    public CompanyJobDetailsPanel getCompanyJobDetailsPanel() {
+        return companyJobDetailsPanel;
+    }
 
     void releaseResources() {
         browserPanel.freeResources();

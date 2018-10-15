@@ -10,8 +10,6 @@ import com.google.common.eventbus.Subscribe;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import seedu.recruit.commons.core.Config;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.LogsCenter;

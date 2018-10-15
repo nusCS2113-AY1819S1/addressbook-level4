@@ -1,7 +1,6 @@
 package seedu.recruit.commons.events.ui;
 
 import seedu.recruit.commons.events.BaseEvent;
-import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.ui.CandidateDetailsPanel;
 
 /**
