@@ -17,7 +17,8 @@ public class MainWindowHandle extends StageHandle {
     public MainWindowHandle(Stage stage) {
         super(stage);
 
-        candidateDetailsPanel = new CandidateDetailsPanelHandle(getChildNode(CandidateDetailsPanelHandle.CANDIDATE_DETAILS_VIEW_ID));
+        candidateDetailsPanel = new CandidateDetailsPanelHandle
+                (getChildNode(CandidateDetailsPanelHandle.CANDIDATE_DETAILS_VIEW_ID));
         resultDisplay = new ResultDisplayHandle(getChildNode(ResultDisplayHandle.RESULT_DISPLAY_ID));
         commandBox = new CommandBoxHandle(getChildNode(CommandBoxHandle.COMMAND_INPUT_FIELD_ID));
         statusBarFooter = new StatusBarFooterHandle(getChildNode(StatusBarFooterHandle.STATUS_BAR_PLACEHOLDER));
