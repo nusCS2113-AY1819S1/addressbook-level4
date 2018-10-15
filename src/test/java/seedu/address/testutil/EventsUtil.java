@@ -47,8 +47,7 @@ public class EventsUtil {
      * Returns the part of command string for the given {@code person}'s details.
      */
 
-    public static String getEventDetails(Event event)
-    {
+    public static String getEventDetails(Event event) {
 
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + event.getEventName().fullName + " ");

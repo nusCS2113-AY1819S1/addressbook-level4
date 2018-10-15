@@ -8,7 +8,7 @@ import java.util.Set;
  * Represents a the attendees in a event.
  */
 public class Attendees {
-    private Set<String> attendeesSet;
+    public final Set<String> attendeesSet;
 
     public Attendees() {
         this.attendeesSet = new HashSet<>();
@@ -48,6 +48,21 @@ public class Attendees {
         Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
         updatedAttendees.add(name);
         return new Attendees(updatedAttendees);
+    }
+
+    /**
+     * Returns whether set contains name.
+     * @param name The name to be checked.
+     */
+    public boolean hasName(String name) {
+        return attendeesSet.contains(name);
+    }
+
+    /**
+     * Returns whether set is empty.
+     */
+    public boolean isSetEmpty() {
+        return attendeesSet.isEmpty();
     }
 
     @Override

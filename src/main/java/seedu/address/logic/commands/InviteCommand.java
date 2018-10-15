@@ -20,6 +20,7 @@ import seedu.address.model.event.Location;
 import seedu.address.model.event.StartTime;
 import seedu.address.model.person.Person;
 
+//@@author jieliangang
 /**
  * Invites an existing person to an existing event.
  */
@@ -44,7 +45,6 @@ public class InviteCommand extends Command {
         this.indexEvent = indexEvent;
     }
 
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -64,13 +64,14 @@ public class InviteCommand extends Command {
         String personName = person.getName().toString();
         Attendees attendeesList = event.getAttendees();
 
-        if (!attendeesList.isSetEmpty() && attendeesList.hasName(personName)){
+        if (!attendeesList.isSetEmpty() && attendeesList.hasName(personName)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
-        Event updatedEvent = updateName(event, personName);
+        Event updatedEvent = updateList(event, personName);
 
         model.updateEvent(event, updatedEvent);
+        model.commitAddressBook();
 
         return new CommandResult(String.format(MESSAGE_INVITE_PERSON_SUCCESS, personName, event.getEventName()));
     }
@@ -82,7 +83,7 @@ public class InviteCommand extends Command {
      * @param personName The person's name to be added to the attendees list.
      * @return An updated event with the person's name in the attendees list.
      */
-    private static Event updateName(Event event, String personName) {
+    private static Event updateList(Event event, String personName) {
         assert event != null;
         Attendees updatedAttendee = event.getAttendees().addName(personName);
         EventName eventName = event.getEventName();
@@ -93,6 +94,14 @@ public class InviteCommand extends Command {
         LocalDate date = event.getDate();
 
         return new Event(eventName, description, date, startTime, endTime, location, updatedAttendee);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof InviteCommand // instanceof handles nulls
+                && indexEvent.equals(((InviteCommand) other).indexEvent))
+                && indexPerson.equals(((InviteCommand) other).indexPerson); // state check
     }
 
 }
