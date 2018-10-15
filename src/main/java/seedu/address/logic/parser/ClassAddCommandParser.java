@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.ClassCreateCommand;
+import seedu.address.logic.commands.ClassAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.classroom.ClassModule;
 import seedu.address.model.classroom.ClassName;
@@ -16,9 +16,9 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
 
 /**
- * Parses input arguments and creates a new ClassCreateCommand object
+ * Parses input arguments and creates a new ClassAddCommand object
  */
-public class ClassCreateCommandParser implements Parser<ClassCreateCommand> {
+public class ClassAddCommandParser implements Parser<ClassAddCommand> {
     /**
      * Parses {@code userInput} into a command and returns it.
      *
@@ -26,14 +26,14 @@ public class ClassCreateCommandParser implements Parser<ClassCreateCommand> {
      * @throws ParseException if {@code userInput} does not conform the expected format
      */
     @Override
-    public ClassCreateCommand parse(String args) throws ParseException {
+    public ClassAddCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_CLASSNAME, PREFIX_MODULECODE, PREFIX_MAXENROLLMENT);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CLASSNAME, PREFIX_MODULECODE, PREFIX_MAXENROLLMENT)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClassCreateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClassAddCommand.MESSAGE_USAGE));
         }
 
         String className = argMultimap.getValue(PREFIX_CLASSNAME).get();
@@ -44,7 +44,7 @@ public class ClassCreateCommandParser implements Parser<ClassCreateCommand> {
                 new ClassName(className),
                 new ClassModule(moduleCode),
                 new Enrollment(maxEnrollment));
-        return new ClassCreateCommand(classRoom);
+        return new ClassAddCommand(classRoom);
     }
 
     /**

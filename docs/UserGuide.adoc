@@ -318,9 +318,9 @@ Assigns the student with matric no. `A0171234B` as a TA.
 Assigns the student with email `e0191234@u.nus.edu` as a TA.
 
 === Class Management
-==== Add Class : `class create`
+==== Add Class : `class add`
 Creates a class and assigns it to a module for the system. +
-Format: `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT`
+Format: `class add c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT`
 
 ****
 * Module code must exist before creating a class for the module.
@@ -328,7 +328,7 @@ Format: `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT`
 
 Examples:
 
-* `class create c/T16 m/CG1111 e/20` +
+* `class add c/T16 m/CG1111 e/20` +
 Creates a class T16, assigns it to the module CG1111 with the max enrollment size of 20
 
 ==== Update Class Enrollment Limits : `class maxenroll`
@@ -777,8 +777,8 @@ e.g. `gradebook list c/CS2040C`
 e.g. `gradebook list grades c/CS2040C`
 * *Assign Grades* : `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS` +
 e.g. `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10`
-* *Creating a class* `class create c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT` +
-e.g. `class create c/T16 m/CG1111 e/20`
+* *Creating a class* `class add c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT` +
+e.g. `class add c/T16 m/CG1111 e/20`
 * *List class* `class list` +
 e.g. `class list`
 * *Deleting a class* `class delete c/CLASS_NAME m/MODULE_CODE` +
