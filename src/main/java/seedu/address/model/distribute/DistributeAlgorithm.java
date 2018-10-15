@@ -13,8 +13,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.Group;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 
@@ -29,10 +31,12 @@ import seedu.address.model.person.Person;
 public class DistributeAlgorithm {
 
     private static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
+    private static final String DUPLICATED_GROUP_FOUND = "There exist another group with the same name.";
+    private Model model;
 
     public DistributeAlgorithm(Model model, Distribute dist) throws CommandException {
         requireNonNull(dist);
-
+        this.model = model;
         int index = dist.getIndex();
         String groupName = dist.getGroupName().toString();
         boolean genderFlag = dist.getGender();
@@ -46,10 +50,12 @@ public class DistributeAlgorithm {
         if (allPerson.size() < index) {
             throw new CommandException(MESSAGE_INVALID_SIZE);
         }
+        doesGroupNameExist(index, groupName);
+
 
         //Converts into ArrayList to use Randomizer via Collections
         LinkedList<Person> allPersonArrayList = new LinkedList<>(allPerson);
-        allPersonArrayList = randomizer(allPersonArrayList);
+        allPersonArrayList = shuffle(allPersonArrayList);
 
         if (!genderFlag && !nationalityFlag) {
             normalDistribution(index, groupArrayList, allPersonArrayList, groupName);
@@ -63,9 +69,11 @@ public class DistributeAlgorithm {
     }
 
     /**
+     * This Method distribute all students into n number of groups
+     * Distribution is random.
      */
     private void normalDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
-                                    LinkedList<Person> allPersonArrayList, String groupName) {
+                                    LinkedList<Person> allPersonArrayList, String groupName) throws CommandException {
         for (int i = index; i > 0; i--) { //number of groups to add into the groupArrayList
             ArrayList<Person> addPerson = new ArrayList<>();
             int paxInAGroup = allPersonArrayList.size() / i;
@@ -89,6 +97,8 @@ public class DistributeAlgorithm {
     }
 
     /**
+     * This Method distribute all students into n number of groups.
+     * Distribution will try to achieve multi-national students in a group.
      */
     private void nationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                          LinkedList<Person> allPerson, String groupName) {
@@ -98,9 +108,11 @@ public class DistributeAlgorithm {
     }
 
     /**
+     * This Method distribute all students into n number of groups.
+     * Distribution will try to achieve an balance number of gender in a group.
      */
     private void genderDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
-                                    LinkedList<Person> allPerson, String groupName) {
+                                    LinkedList<Person> allPerson, String groupName) throws CommandException {
         LinkedList<Person> maleLinkList = new LinkedList<>();
         LinkedList<Person> femaleLinkList = new LinkedList<>();
         int loopCounter = 0;
@@ -142,9 +154,11 @@ public class DistributeAlgorithm {
     }
 
     /**
+     * This Method distribute all students into n number of groups
+     * Distribution will try to include balanced gender and include multi-national students.
      */
     private void strictDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
-                                    LinkedList<Person> allPersons, String groupName) {
+                                    LinkedList<Person> allPersons, String groupName) throws CommandException {
         System.out.println("Gender & Nationality Distribution");
     }
 
@@ -173,7 +187,7 @@ public class DistributeAlgorithm {
      * @param person
      * @return
      */
-    private LinkedList<Person> randomizer(LinkedList<Person> person) {
+    private LinkedList<Person> shuffle(LinkedList<Person> person) {
         requireNonNull(person);
         Collections.shuffle(person);
         return person;
@@ -236,9 +250,41 @@ public class DistributeAlgorithm {
      * This function concatenates the group index count behind the given group name.
      * Index shown to user will start from 1.
      */
-    private String groupNameConcatenation (int index, String groupName) {
+    private String groupNameConcatenation (int index, String groupName) throws CommandException {
         int newIndex = index + 1;
-        return groupName + String.valueOf(newIndex);
+        groupName = groupName + String.valueOf(newIndex);
+        if (existDuplicateGroup(groupName)) {
+            throw new CommandException(DUPLICATED_GROUP_FOUND);
+        }
+        return groupName;
+    }
+
+    /**
+     * This function checks if there is any other groups that have the same name.
+     * @param groupName check if groupName exist
+     * @return false if there is no existing group.
+     */
+    private boolean existDuplicateGroup (String groupName) {
+        ObservableList<Group> allGroups = model.getFilteredGroupList();
+        requireNonNull(allGroups);
+        for (Group gN : allGroups) {
+            if (gN.getGroupName().toString().equals(groupName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * This function will check all n number of groupName with the existing addressbook for exisiting groups.
+     * @param index : number of groups the user desire.
+     * @param groupName : the name of the group the user desire
+     * @throws CommandException
+     */
+    private void doesGroupNameExist(int index, String groupName) throws CommandException {
+        for (int i = index; i > 0; i--) {
+            groupNameConcatenation(i, groupName);
+        }
     }
 
 }
