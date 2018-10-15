@@ -13,7 +13,7 @@ import java.time.format.ResolverStyle;
  */
 public class BatchDate {
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Date should be in this format DD/MM/YYYY";
+            "Date should be in this format DD/MM/YYYY or D/MM/YYYY or DD/M/YYYY";
     public static final String DATE_VALIDATION_REGEX = "^(3[01]|[12][0-9]|0[1-9])/(1[0-2]|0[1-9])/[0-9]{4}$";
     public static final String DATE_FORMAT = "d/MM/uuuu";
     private static final DateTimeFormatter FORMAT =

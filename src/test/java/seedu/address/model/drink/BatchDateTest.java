@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.Assert;
 
+import java.time.DateTimeException;
+import java.time.format.DateTimeParseException;
+
 class BatchDateTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -15,9 +18,15 @@ class BatchDateTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
+    public void constructor_invalidDate_throwsIllegalArgumentException() {
         String invalidDate = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new BatchDate(invalidDate));
+    }
+
+    @Test
+    public void constructor_nonExistingDate_DateTimeParseException() {
+        String invalidDate = "30/2/2018";
+        Assert.assertThrows(DateTimeParseException.class, () -> new BatchDate(invalidDate));
     }
 
     @Test
