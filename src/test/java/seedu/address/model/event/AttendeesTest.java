@@ -1,5 +1,6 @@
 package seedu.address.model.event;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
@@ -57,6 +58,37 @@ public class AttendeesTest {
         assertFalse(listTwo.equals(listThree));
     }
 
+    @Test
+    public void hasName() {
+        Attendees attendees = new Attendees(attendeesSetOne);
+
+        // Attendees has names it contain
+        assertTrue(attendees.hasName(VALID_NAME_AMY));
+
+        // Attendees does not have names absent in list
+        assertFalse(attendees.hasName(VALID_NAME_BOB));
+    }
+
+    @Test
+    public void addName() {
+        Attendees attendees1 = new Attendees(attendeesSetTwo);
+        Attendees attendees2 = new Attendees(attendeesSetTwo);
+
+        attendees1.addName(VALID_NAME_CALVIN);
+        attendees2.attendeesSet.add(VALID_NAME_CALVIN);
+
+        assertEquals(attendees1, attendees2);
+    }
+
+    @Test
+    public void isSetEmpty() {
+        Attendees attendeesFilled = new Attendees(attendeesSetOne);
+        Attendees attendeesEmpty = new Attendees();
+
+        assertTrue(attendeesEmpty.isSetEmpty());
+
+        assertFalse(attendeesFilled.isSetEmpty());
+    }
 
 
 }
