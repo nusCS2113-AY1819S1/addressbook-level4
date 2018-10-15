@@ -21,7 +21,11 @@
     <list default="true" id="fa15998a-9e1b-4609-810a-3248cf9166c5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/logic/Comments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/logic/Comments.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ListCommand.java" afterDir="false" />
+>>>>>>> parent of e0ba280e... fixed untracked files
 =======
       <change beforePath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ListCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ListCommand.java" afterDir="false" />
 >>>>>>> parent of e0ba280e... fixed untracked files
@@ -90,6 +94,7 @@
       <usages-collector id="statistics.vcs.git.usages" />
     </session>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <session id="1388815692">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
@@ -136,6 +141,10 @@
 =======
   </component>
   <component name="FileEditorManager">
+=======
+  </component>
+  <component name="FileEditorManager">
+>>>>>>> parent of e0ba280e... fixed untracked files
     <leaf>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ListCommand.java">
@@ -151,12 +160,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="68">
               <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+<<<<<<< HEAD
+>>>>>>> parent of e0ba280e... fixed untracked files
+=======
 >>>>>>> parent of e0ba280e... fixed untracked files
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/MainApp.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -170,6 +183,10 @@
 =======
         <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Email.java">
           <provider selected="true" editor-type-id="text-editor">
+=======
+        <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Email.java">
+          <provider selected="true" editor-type-id="text-editor">
+>>>>>>> parent of e0ba280e... fixed untracked files
             <state relative-caret-position="578">
               <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
             </state>
@@ -181,6 +198,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
               <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+<<<<<<< HEAD
+>>>>>>> parent of e0ba280e... fixed untracked files
+=======
 >>>>>>> parent of e0ba280e... fixed untracked files
             </state>
           </provider>
@@ -188,12 +208,15 @@
       </file>
       <file pinned="false" current-in-tab="false">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/MainApp.java">
           <provider selected="true" editor-type-id="text-editor">
 >>>>>>> parent of 7f6be3ac... Changing workspace file
             <state relative-caret-position="306">
               <caret line="99" column="9" lean-forward="true" selection-start-line="99" selection-start-column="9" selection-end-line="99" selection-end-column="9" />
 =======
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
         <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/DateTime.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1224">
@@ -201,6 +224,9 @@
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+<<<<<<< HEAD
+>>>>>>> parent of e0ba280e... fixed untracked files
+=======
 >>>>>>> parent of e0ba280e... fixed untracked files
             </state>
           </provider>
@@ -719,6 +745,7 @@
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/event/DateTime.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/model/event/Event.java" />
 <<<<<<< HEAD
+<<<<<<< HEAD
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/AddCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/DeleteCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/parser/ParserUtil.java" />
@@ -726,6 +753,8 @@
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/EditCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ReplyCommentCommand.java" />
         <option value="$PROJECT_DIR$/src/main/java/seedu/address/logic/Comments.java" />
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
 =======
 >>>>>>> parent of e0ba280e... fixed untracked files
       </list>
@@ -745,10 +774,13 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="x" value="-15" />
     <option name="width" value="1950" />
     <option name="height" value="2085" />
 =======
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
@@ -770,6 +802,9 @@
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
       <pane id="Scope" />
+<<<<<<< HEAD
+>>>>>>> parent of e0ba280e... fixed untracked files
+=======
 >>>>>>> parent of e0ba280e... fixed untracked files
       <pane id="ProjectPane">
         <subPane>
@@ -777,6 +812,8 @@
             <path>
               <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+<<<<<<< HEAD
+=======
             </path>
             <path>
               <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
@@ -795,14 +832,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="address" type="462c0819:PsiDirectoryNode" />
+>>>>>>> parent of e0ba280e... fixed untracked files
             </path>
             <path>
               <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
@@ -811,7 +841,6 @@
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="address" type="462c0819:PsiDirectoryNode" />
-              <item name="commons" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
@@ -821,7 +850,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="address" type="462c0819:PsiDirectoryNode" />
               <item name="commons" type="462c0819:PsiDirectoryNode" />
-              <item name="Comparators" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
@@ -832,6 +860,51 @@
               <item name="address" type="462c0819:PsiDirectoryNode" />
               <item name="commons" type="462c0819:PsiDirectoryNode" />
               <item name="Comparators" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+<<<<<<< HEAD
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="commons" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="commons" type="462c0819:PsiDirectoryNode" />
+              <item name="Comparators" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+=======
+              <item name="DateComparator" type="1a9f42e2:ClassTreeNode" />
+>>>>>>> parent of e0ba280e... fixed untracked files
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="commons" type="462c0819:PsiDirectoryNode" />
+              <item name="Comparators" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="DateComparator" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
@@ -843,11 +916,14 @@
               <item name="address" type="462c0819:PsiDirectoryNode" />
               <item name="commons" type="462c0819:PsiDirectoryNode" />
               <item name="Comparators" type="462c0819:PsiDirectoryNode" />
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
               <item name="TimeComparator" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
               <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+<<<<<<< HEAD
               <item name="src" type="462c0819:PsiDirectoryNode" />
 <<<<<<< HEAD
               <item name="test" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
@@ -860,6 +936,8 @@
             <path>
               <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
               <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -887,6 +965,20 @@
               <item name="address" type="462c0819:PsiDirectoryNode" />
               <item name="logic" type="462c0819:PsiDirectoryNode" />
               <item name="commands" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
+              <item name="ExitCommand" type="1a9f42e2:ClassTreeNode" />
+=======
+              <item name="CommandResult" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
               <item name="ExitCommand" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
@@ -898,6 +990,30 @@
               <item name="address" type="462c0819:PsiDirectoryNode" />
               <item name="logic" type="462c0819:PsiDirectoryNode" />
               <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="FindCommand" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="HistoryCommand" type="1a9f42e2:ClassTreeNode" />
+>>>>>>> parent of e0ba280e... fixed untracked files
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+<<<<<<< HEAD
               <item name="FindCommand" type="1a9f42e2:ClassTreeNode" />
             </path>
             <path>
@@ -1076,6 +1192,164 @@
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
               <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
               <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+=======
+              <item name="ListCommand" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="logic" type="462c0819:PsiDirectoryNode" />
+              <item name="commands" type="462c0819:PsiDirectoryNode" />
+              <item name="RedoCommand" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+              <item name="Attendance" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+              <item name="Email" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+              <item name="Event" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="event" type="462c0819:PsiDirectoryNode" />
+              <item name="Name" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="EventManager" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="Model" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ProjectResetup" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="address" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="ReadOnlyEventManager" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="jfxrt.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="jfxrt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="javafx" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="jfxrt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="javafx" type="462c0819:PsiDirectoryNode" />
+              <item name="collections" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="jfxrt.jar" type="462c0819:PsiDirectoryNode" />
+              <item name="javafx" type="462c0819:PsiDirectoryNode" />
+              <item name="collections" type="462c0819:PsiDirectoryNode" />
+              <item name="FXCollections" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ProjectResetup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; 1.8 &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="rt.jar" type="462c0819:PsiDirectoryNode" />
+>>>>>>> parent of e0ba280e... fixed untracked files
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -1120,6 +1394,9 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="util" type="462c0819:PsiDirectoryNode" />
               <item name="Objects" type="1a9f42e2:ClassTreeNode" />
+<<<<<<< HEAD
+>>>>>>> parent of e0ba280e... fixed untracked files
+=======
 >>>>>>> parent of e0ba280e... fixed untracked files
             </path>
           </expand>
@@ -1134,11 +1411,17 @@
   </component>
   <component name="PropertiesComponent">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <property name="SearchEverywhereHistoryKey" value="replyco&#9;PSI&#9;JAVA://seedu.address.logic.parser.ReplyCommentCommandParser&#10;parserutil&#9;PSI&#9;JAVA://seedu.address.logic.parser.ParserUtil" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538588679940" />
+>>>>>>> parent of e0ba280e... fixed untracked files
 =======
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
@@ -1184,6 +1467,7 @@
     </option>
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="RunManager" selected="Application.Comments">
     <configuration name="Comments" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="seedu.address.logic.Comments" />
@@ -1224,6 +1508,8 @@
   </component>
 =======
 >>>>>>> parent of e0ba280e... fixed untracked files
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -1236,10 +1522,13 @@
       <updated>1538580329410</updated>
       <workItem from="1538580333104" duration="8077000" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <workItem from="1538904205749" duration="1269000" />
       <workItem from="1538979011382" duration="2310000" />
       <workItem from="1539071042466" duration="1595000" />
       <workItem from="1539073790138" duration="8399000" />
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
 =======
 >>>>>>> parent of e0ba280e... fixed untracked files
     </task>
@@ -1247,7 +1536,11 @@
   </component>
   <component name="TimeTrackingManager">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="21830000" />
+=======
+    <option name="totallyTimeSpent" value="8077000" />
+>>>>>>> parent of e0ba280e... fixed untracked files
 =======
     <option name="totallyTimeSpent" value="8077000" />
 >>>>>>> parent of e0ba280e... fixed untracked files
@@ -1262,7 +1555,11 @@
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Image Layers" order="4" />
 <<<<<<< HEAD
+<<<<<<< HEAD
       <window_info content_ui="combo" id="Project" order="5" visible="true" weight="0.24676375" />
+=======
+      <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.24966443" />
+>>>>>>> parent of e0ba280e... fixed untracked files
 =======
       <window_info active="true" content_ui="combo" id="Project" order="5" visible="true" weight="0.24966443" />
 >>>>>>> parent of e0ba280e... fixed untracked files
@@ -1278,6 +1575,9 @@
 =======
       <window_info anchor="bottom" id="Find" order="5" />
       <window_info anchor="bottom" id="Run" order="6" />
+<<<<<<< HEAD
+>>>>>>> parent of e0ba280e... fixed untracked files
+=======
 >>>>>>> parent of e0ba280e... fixed untracked files
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Debug" order="8" weight="0.4" />
@@ -1295,6 +1595,7 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="9" weight="0.24966443" />
     </layout>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <layout-to-restore>
       <window_info id="Designer" order="0" />
@@ -1328,6 +1629,8 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="9" weight="0.24966443" />
     </layout-to-restore>
+=======
+>>>>>>> parent of e0ba280e... fixed untracked files
 =======
 >>>>>>> parent of e0ba280e... fixed untracked files
   </component>
@@ -1479,6 +1782,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/HistoryCommand.java">
+<<<<<<< HEAD
 <<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1664,18 +1968,109 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="78" column="8" lean-forward="true" selection-start-line="78" selection-start-column="8" selection-end-line="79" selection-end-column="82" />
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ReplyCommentCommand.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/ETime.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_172/src.zip!/java/sql/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3009">
+          <caret line="57" column="11" selection-start-line="57" selection-start-column="11" selection-end-line="57" selection-end-column="11" />
+          <folding>
+            <element signature="e#1396#1397#0" expanded="true" />
+            <element signature="e#1435#1436#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Attendance.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="28" column="18" selection-start-line="28" selection-start-column="18" selection-end-line="28" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_172/src.zip!/java/util/Objects.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="158">
+          <caret line="200" column="24" selection-start-line="200" selection-start-column="24" selection-end-line="200" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_172/src.zip!/java/util/Date.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="242" column="11" selection-start-line="242" selection-start-column="11" selection-end-line="242" selection-end-column="11" />
+          <folding>
+            <element signature="e#6390#6391#0" expanded="true" />
+            <element signature="e#6438#6439#0" expanded="true" />
+            <element signature="e#6844#6845#0" expanded="true" />
+            <element signature="e#6875#6876#0" expanded="true" />
+            <element signature="e#7577#7578#0" expanded="true" />
+            <element signature="e#7625#7626#0" expanded="true" />
+            <element signature="e#8526#8527#0" expanded="true" />
+            <element signature="e#8578#8579#0" expanded="true" />
+            <element signature="e#38710#38711#0" expanded="true" />
+            <element signature="e#38770#38771#0" expanded="true" />
+            <element signature="e#39232#39233#0" expanded="true" />
+            <element signature="e#39292#39293#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Name.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-272">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/commands/ListCommand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="26" column="63" selection-start-line="26" selection-start-column="63" selection-end-line="26" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Email.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+>>>>>>> parent of e0ba280e... fixed untracked files
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/DateTime.java">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="17">
           <caret line="6" selection-start-line="6" selection-end-line="6" />
+=======
+        <state relative-caret-position="1224">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+>>>>>>> parent of e0ba280e... fixed untracked files
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/logic/parser/ReplyCommentCommandParser.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Event.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="489">
           <caret line="37" column="110" selection-start-line="37" selection-start-column="110" selection-end-line="37" selection-end-column="110" />
           <folding>
@@ -1735,6 +2130,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/seedu/address/model/event/Event.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+>>>>>>> parent of e0ba280e... fixed untracked files
+=======
         <state relative-caret-position="68">
           <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
 >>>>>>> parent of e0ba280e... fixed untracked files
