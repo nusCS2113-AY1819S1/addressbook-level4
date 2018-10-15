@@ -16,6 +16,9 @@ import seedu.address.model.person.TimeTable;
  * Only support ICS to-and-from TimeTable Objects.
  */
 public class IcsUtil {
+    /**
+     * Returns the data in the ICS file as a TimeTableObject
+     */
     public static TimeTable getTimeTableFromFile(Path file)
             throws CommandException {
 
@@ -85,8 +88,13 @@ public class IcsUtil {
                 } catch (NumberFormatException e) {
                     throw new CommandException(MESSAGE_IO_ERROR);
                 }
+                int icsDay = 0;
 
-                int icsDay = icsDateToDay(startdate);
+                try {
+                    icsDay = icsDateToDay(startdate);
+                } catch (CommandException e) {
+                    throw new CommandException(MESSAGE_IO_ERROR);
+                }
             }
 
             //newTimeTable.fillTimeSlot(icsDay-1,icsStartTime);
@@ -98,12 +106,17 @@ public class IcsUtil {
     /**
      * Converts the date in the ics file into day (0-6).
      */
-    private static int icsDateToDay(String dateString) {
+    private static int icsDateToDay(String dateString) throws CommandException {
         //TODO make defensive; the substring method is quite exceptional (ahahahhahahahahahahhaha ok im sorry).
         Calendar cal = Calendar.getInstance();
-        cal.set(parseInt(dateString.substring(0, 3)), //year
-                parseInt(dateString.substring(4, 5)), //month
-                parseInt(dateString.substring(6, 7))); //day
+        try {
+            cal.set(parseInt(dateString.substring(0, 3)), //year
+                    parseInt(dateString.substring(4, 5)), //month
+                    parseInt(dateString.substring(6, 7))); //day
+        }
+        catch (IndexOutOfBoundsException | NumberFormatException e){
+            throw new CommandException(MESSAGE_IO_ERROR);
+        }
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
         return day;
@@ -112,7 +125,12 @@ public class IcsUtil {
     /**
      * Converts the weird time in the ics file into human hours (0-23).
      */
-    private static int icsTimeToHour(int icsTime) {
-        return icsTime / 100000 + 8;
+    private static int icsTimeToHour(int icsTime) throws CommandException {
+        int hour = icsTime / 10000 + 8;
+        System.out.println(hour);
+        if ((hour > 24) || (hour < 0)) {
+            throw new CommandException(MESSAGE_IO_ERROR);
+        }
+        return hour;
     }
 }
