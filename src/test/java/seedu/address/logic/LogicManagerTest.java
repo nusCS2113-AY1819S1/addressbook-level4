@@ -28,7 +28,8 @@ public class LogicManagerTest {
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
-        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND);
+        assertParseException(invalidCommand, MESSAGE_UNKNOWN_COMMAND +
+                System.lineSeparator() + CommandSuggestion.SUGGESTION_NOT_IMPLEMENTED);
         assertHistoryCorrect(invalidCommand);
     }
 
