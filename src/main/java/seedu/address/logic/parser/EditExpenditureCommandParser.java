@@ -2,10 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
-
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditExpenditureCommand;
@@ -15,8 +14,14 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new EditExpenditureCommand object
  */
-public class EditExpenditureCommandParser implements  Parser<EditExpenditureCommand> {
+public class EditExpenditureCommandParser implements Parser<EditExpenditureCommand> {
 
+
+    /**
+     * Parses the given {@code String} of arguments in the context of the EditExpenditureCommand
+     * and returns an EditExpenditureCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     public EditExpenditureCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
@@ -39,7 +44,8 @@ public class EditExpenditureCommandParser implements  Parser<EditExpenditureComm
             editExpenditureDescriptor.setMoney(ParserUtil.parseMoney(argMultimap.getValue(PREFIX_MONEY).get()));
         }
         if (argMultimap.getValue(PREFIX_CATEGORY).isPresent()) {
-            editExpenditureDescriptor.setCategory(ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
+            editExpenditureDescriptor.setCategory(
+                    ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get()));
         }
 
         if (!editExpenditureDescriptor.isAnyFieldEdited()) {

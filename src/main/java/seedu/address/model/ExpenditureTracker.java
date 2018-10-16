@@ -82,6 +82,12 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
     }
 
     //// util methods
+    /**
+     * Replaces the given expenditure {@code target} in the list with {@code editedExpenditure}.
+     * {@code target} must exist in the expenditure tracker.
+     * The expenditure identity of {@code editedExpenditure}
+     * must not be the same as another existing expenditure in the expenditure tracker.
+     */
     public void updateExpenditure(Expenditure target, Expenditure editedExpenditure) {
         requireNonNull(editedExpenditure);
         expenditures.setExpenditures(target, editedExpenditure);

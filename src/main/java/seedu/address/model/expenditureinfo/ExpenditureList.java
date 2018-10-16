@@ -43,16 +43,6 @@ public class ExpenditureList implements Iterable<Expenditure> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
-     */
-
-    public void setExpenditures(ExpenditureList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
-    /**
      * Removes the equivalent expenditure from the list.
      * The expenditure must exist in the list.
      */
@@ -64,8 +54,15 @@ public class ExpenditureList implements Iterable<Expenditure> {
     }
 
     /**
-     * Replaces the contents of this list with {@code expenditures}.
+     * Replaces the contents of this list with {@code persons}.
+     * {@code persons} must not contain duplicate persons.
      */
+
+    public void setExpenditures(ExpenditureList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
 
     public void setExpenditures(List<Expenditure> expenditures) {
         requireAllNonNull(expenditures);
