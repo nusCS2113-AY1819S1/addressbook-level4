@@ -42,7 +42,9 @@ public class BrowserPanelTest extends GuiUnitTest {
         postNow(selectionChangedEventStub);
         URL expectedPersonUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
                 + "?name="
-                + ALICE.getName().fullName.replaceAll(" ", "%20"));
+                + ALICE.getName().fullName.replaceAll(" ", "%20")
+                + "&address="
+                + ALICE.getAddress().value.replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

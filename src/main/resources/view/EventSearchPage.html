@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html>
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
-  <title>Event Search Page</title>
+  <title>Dummy Search Page</title>
+  <script type="text/javascript">
+      function getJsonFromUrl() {
+          var query = location.search.substr(1);
+          var result = {};
+          query.split("&").forEach(function(part) {
+              var item = part.split("=");
+              result[item[0]] = decodeURIComponent(item[1]);
+          });
+          return result;
+      }
+      document.addEventListener("DOMContentLoaded", function(event) {
+          document.getElementById("name").innerHTML=getJsonFromUrl().name;
+          document.getElementById("address").innerHTML=getJsonFromUrl().address;
+      });
+  </script>
 </head>
 <body>
-  Event Name: <!-- Name --><!-- /Name --><br>
-  Event Address: <!-- Address --><!-- /Address --><br>
+  Event Name: <span id="name"></span><br>
+  Event Address: <span id="address"></span><br>
   <br>
   Event Attendance:<br>
   <!-- Attendance -->
