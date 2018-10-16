@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_31ST_MARCH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_1;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_2;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_1;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_2;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +21,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.exceptions.DuplicateTaskException;
 import seedu.address.model.task.exceptions.TaskNotFoundException;
-import UnRefactored.testutil.TaskBuilder;
+import unrefactored.testutil.TaskBuilder;
 
 public class UniqueTaskListTest {
     @Rule

@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 //import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-//import static UnRefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static UnRefactored.testutil.TypicalTasks.getTypicalTaskBook;
+//import static unrefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static unrefactored.testutil.TypicalTasks.getTypicalTaskBook;
 
 import org.junit.Before;
 import org.junit.Test;

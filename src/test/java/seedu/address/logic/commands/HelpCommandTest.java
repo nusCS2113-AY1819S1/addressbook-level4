@@ -7,11 +7,11 @@ import static seedu.address.logic.commands.HelpCommand.SHOWING_HELP_MESSAGE;
 import org.junit.Rule;
 import org.junit.Test;
 
-import UnRefactored.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import UnRefactored.ui.testutil.EventsCollectorRule;
+import unrefactored.commons.events.ui.ShowHelpRequestEvent;
+import unrefactored.ui.testutil.EventsCollectorRule;
 
 public class HelpCommandTest {
     @Rule

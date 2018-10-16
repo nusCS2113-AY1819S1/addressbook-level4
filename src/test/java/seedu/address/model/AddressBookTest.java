@@ -2,10 +2,9 @@ package seedu.address.model;
 
 //import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
-import static UnRefactored.testutil.TypicalTasks.getTypicalTaskBook;
+import static unrefactored.testutil.TypicalTasks.getTypicalTaskBook;
 //import static org.junit.Assert.assertTrue;
 
-//import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 //import java.util.List;
@@ -18,7 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.task.Task;
 //import seedu.address.model.task.exceptions.DuplicateTaskException;
-//import UnRefactored.testutil.TaskBuilder;
+//import unrefactored.testutil.TaskBuilder;
 
 public class AddressBookTest {
 

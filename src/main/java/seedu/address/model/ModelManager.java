@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static UnRefactored.commons.util.CollectionUtil.requireAllNonNull;
+import static unrefactored.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -9,9 +9,9 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import UnRefactored.commons.core.ComponentManager;
-import UnRefactored.commons.core.LogsCenter;
-import UnRefactored.commons.events.model.TaskBookChangedEvent;
+import unrefactored.commons.core.ComponentManager;
+import unrefactored.commons.core.LogsCenter;
+import unrefactored.commons.events.model.TaskBookChangedEvent;
 import seedu.address.model.task.Task;
 
 /**

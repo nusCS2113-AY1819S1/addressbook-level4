@@ -2,9 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static UnRefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static UnRefactored.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static UnRefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static unrefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static unrefactored.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static unrefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,8 +22,8 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 //import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.task.Task;
-import UnRefactored.testutil.TaskBuilder;
-import UnRefactored.testutil.TaskUtil;
+import unrefactored.testutil.TaskBuilder;
+import unrefactored.testutil.TaskUtil;
 
 public class TaskBookParserTest {
     @Rule

@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_1;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_2;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_3;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_1;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_2;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_3;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,7 +14,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import UnRefactored.testutil.AddressBookBuilder;
+import unrefactored.testutil.AddressBookBuilder;
 
 public class VersionedTaskBookTest {
 

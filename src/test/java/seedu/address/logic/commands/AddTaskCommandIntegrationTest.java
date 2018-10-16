@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static UnRefactored.testutil.TypicalTasks.getTypicalTaskBook;
+import static unrefactored.testutil.TypicalTasks.getTypicalTaskBook;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
-import UnRefactored.testutil.TaskBuilder;
+import unrefactored.testutil.TaskBuilder;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code AddTaskCommand}.
