@@ -1,49 +1,46 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEADLINE;
 
-import seedu.address.commons.core.Messages;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.DeferDeadlineCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
-
-import java.util.List;
 
 //@@ChanChunCheong
 /**
  * Defer deadline of a specific task in the taskbook.
  */
 
-public class DeferDeadlineCommand extends Command implements CommandParser{
+public class DeferDeadlineCommand extends Command implements CommandParser {
 
     public static final String COMMAND_WORD = "defer";
-    public static final String MESSAGE_USAGE = COMMAND_WORD +
-            ": Defers the deadline of the selected task in the taskbook. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Defers the deadline of the selected task in the taskbook. "
             + "Existing deadline will be overwritten by the input. "
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_DEADLINE + "deadline \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DEADLINE + "04011996";
-            /*
-            + PREFIX_DAY + "DAY"
-            + PREFIX_MONTH + "MONTH"
-            + PREFIX_YEAR +  "YEAR \n"
-            + "Example: " + COMMAND_WORD + "1"
-            + PREFIX_DAY + "01"
-            + PREFIX_MONTH + "01"
-            + PREFIX_YEAR + "2018";
-            */
+    /*
+    + PREFIX_DAY + "DAY"
+    + PREFIX_MONTH + "MONTH"
+    + PREFIX_YEAR +  "YEAR \n"
+    + "Example: " + COMMAND_WORD + "1"
+    + PREFIX_DAY + "01"
+    + PREFIX_MONTH + "01"
+    + PREFIX_YEAR + "2018";
+    */
 
     public static final String MESSAGE_INVALID_DEADLINE = "The date selected does not exist";
     public static final String MESSAGE_NONEXISTENT_TASK = "This task does not exist in the task book";
-    public static final String MESSAGE_SUCCESS =  "Date deferred for task: %1$s";
+    public static final String MESSAGE_SUCCESS = "Date deferred for task: %1$s";
     //public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Defer deadline command not implemented yet";
 
     private final Index taskIndex;
@@ -88,12 +85,12 @@ public class DeferDeadlineCommand extends Command implements CommandParser{
     }
 
     @Override
-    public Command parse(String arguments) throws ParseException{
+    public Command parse(String arguments) throws ParseException {
         return new DeferDeadlineCommandParser().parse(arguments);
     }
 
     @Override
-    public String getCommandWord(){
+    public String getCommandWord() {
         return COMMAND_WORD;
     }
 }

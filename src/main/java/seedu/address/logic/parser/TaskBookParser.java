@@ -57,11 +57,11 @@ public class TaskBookParser {
         Command commandToReturn = null;
         for (CommandParser command : commands) {
             if (command.getCommandWord().equals(commandWord)) {
-                 //For e.g AddTaskCommand.parse returns AddTaskCommandParser.parse(argument)
-                 // AddTaskCommandParser.parse(argument) returns AddTaskCommand(task) which will be returned to
-                 // Logic Manager CommandResult execute to call AddTaskCommand.execute
-                 commandToReturn = command.parse(arguments);
-                 break;
+                //For e.g AddTaskCommand.parse returns AddTaskCommandParser.parse(argument)
+                // AddTaskCommandParser.parse(argument) returns AddTaskCommand(task) which will be returned to
+                // Logic Manager CommandResult execute to call AddTaskCommand.execute
+                commandToReturn = command.parse(arguments);
+                break;
             }
         }
         // JUNIT: test commandToReturn != null

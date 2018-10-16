@@ -3,7 +3,6 @@ package seedu.address.model.task;
 import java.util.Objects;
 
 import seedu.address.model.task.exceptions.TaskCompletedException;
-import seedu.address.model.deadline.Deadline;
 
 /**
  * Represents a Task in the address book.
@@ -79,6 +78,11 @@ public class Task {
                 && otherTask.getTitle().equals(getTitle());
     }
 
+    /**
+     * Defers the task to a later
+     * @param deadline
+     * @return the new Task
+     */
     public Task deferred(String deadline) {
         this.deadline = deadline;
         return this;
