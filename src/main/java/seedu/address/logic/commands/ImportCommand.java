@@ -33,7 +33,6 @@ public class ImportCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Imports and overwrites timetable for the person identified by the "
             + " number used in the displayed person list. "
-            + "Compatible with .ICS file exported from NUSMODS. "
             + "Parameters: "
             + "INDEX (must be a positive integer) "
             + PREFIX_FILELOCATION + "FILE_LOCATION \n"

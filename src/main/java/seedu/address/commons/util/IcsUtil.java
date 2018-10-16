@@ -117,7 +117,7 @@ public class IcsUtil {
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
-        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int day = cal.get(Calendar.DAY_OF_WEEK);
 
         return day;
     }
