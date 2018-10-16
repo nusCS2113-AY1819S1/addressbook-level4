@@ -9,6 +9,9 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.expenditureinfo.Category;
+import seedu.address.model.expenditureinfo.Date;
+import seedu.address.model.expenditureinfo.Money;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -108,6 +111,51 @@ public class ParserUtil {
             throw new ParseException(Tag.MESSAGE_TAG_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Category parseCategory(String category) throws ParseException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        if (!Category.isValidCategory(trimmedCategory)) {
+            throw new ParseException(Category.MESSAGE_CATEGORY_CONSTRAINTS);
+        }
+        return new Category(trimmedCategory);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static Money parseMoney(String money) throws ParseException {
+        requireNonNull(money);
+        String trimmedMoney = money.trim();
+        if (!Money.isValidMoney(trimmedMoney)) {
+            throw new ParseException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        }
+        return new Money(trimmedMoney);
     }
 
     /**

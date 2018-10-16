@@ -24,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final VersionedExpenditureTracker versionedExpenditureTracker;
+    private final FilteredList<Expenditure> filteredExpenditures;
     private final FilteredList<Person> filteredPersons;
 
     /**
@@ -38,6 +39,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         versionedExpenditureTracker = new VersionedExpenditureTracker(expenditureTracker);
+        filteredExpenditures = new FilteredList<>(versionedExpenditureTracker.getExpenditureList());
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
     }
 
@@ -111,6 +113,15 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
+    }
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Expenditure} backed by the internal list of
+     * {@code versionedExpenditureTracker}
+     */
+    @Override
+    public ObservableList<Expenditure> getFilteredExpenditureList() {
+        return FXCollections.unmodifiableObservableList(filteredExpenditures);
     }
 
     @Override
