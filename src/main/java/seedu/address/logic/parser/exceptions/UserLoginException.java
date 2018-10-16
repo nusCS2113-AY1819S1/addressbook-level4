@@ -1,6 +1,6 @@
 package seedu.address.logic.parser.exceptions;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 /**
  * Represents a login error encountered when the user enter incorrect login credentials.

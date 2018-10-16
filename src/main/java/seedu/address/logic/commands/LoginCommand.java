@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.SearchHistoryManager;
+import seedu.address.model.searchhistory.SearchHistoryManager;
 
 
 /**
@@ -19,15 +19,14 @@ public abstract class LoginCommand extends Command {
             + "Parameters: USERID PASSWORD\n"
             + "Example: " + COMMAND_WORD + " A3583758X passphrase";
 
-    private SearchHistoryManager searchHistoryManager = SearchHistoryManager.getInstance();
+    private SearchHistoryManager searchHistoryManager = new SearchHistoryManager();
 
     protected Predicate getMostUpdatedIdPredicate(Predicate predicate) {
         searchHistoryManager.clearSearchHistory();
-        return SearchHistoryManager.getInstance().updateNewSearch(predicate);
+        return searchHistoryManager.executeNewSearch(predicate);
     }
 
     protected Predicate getMostUpdatedPasswordPredicate(Predicate predicate) {
-
-        return SearchHistoryManager.getInstance().updateNewSearch(predicate);
+        return searchHistoryManager.executeNewSearch(predicate);
     }
 }

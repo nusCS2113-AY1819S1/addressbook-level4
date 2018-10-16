@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
  * The API of the Model component.
@@ -100,4 +101,9 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Returns the model's SearchHistoryManager
+     */
+    SearchHistoryManager getSearchHistoryManager();
 }
