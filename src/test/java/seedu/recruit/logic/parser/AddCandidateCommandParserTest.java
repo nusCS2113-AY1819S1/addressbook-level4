@@ -77,7 +77,7 @@ public class AddCandidateCommandParserTest {
                 + EMAIL_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + JOB_DESC_BOB + EDUCATION_DESC_BOB
                 + SALARY_DESC_BOB + TAG_DESC_FRIEND, new AddCandidateCommand(expectedCandidate));
 
-        // multiple addresses - last recruit accepted
+        // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB + JOB_DESC_BOB + EDUCATION_DESC_BOB
                 + SALARY_DESC_BOB + TAG_DESC_FRIEND, new AddCandidateCommand(expectedCandidate));
@@ -119,7 +119,7 @@ public class AddCandidateCommandParserTest {
                 + VALID_EMAIL_BOB + ADDRESS_DESC_BOB + JOB_DESC_BOB + EDUCATION_DESC_BOB + SALARY_DESC_BOB,
                 expectedMessage);
 
-        // missing recruit prefix
+        // missing address prefix
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + AGE_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + VALID_ADDRESS_BOB + JOB_DESC_BOB + EDUCATION_DESC_BOB + SALARY_DESC_BOB,
                 expectedMessage);

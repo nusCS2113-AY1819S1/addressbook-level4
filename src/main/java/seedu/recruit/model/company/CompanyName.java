@@ -9,10 +9,10 @@ import static seedu.recruit.commons.util.AppUtil.checkArgument;
  */
 
 public class CompanyName {
-    public static final String COMPANY_VALIDATION_REGEX = "[\\p{Alpha}]+";
+    public static final String COMPANY_VALIDATION_REGEX = ".+";
 
     public static final String MESSAGE_COMPANY_CONSTRAINTS =
-            "Company name should only contain alphabetical characters and should not be blank ";
+            "Company name should not be blank";
 
     public final String value;
 
