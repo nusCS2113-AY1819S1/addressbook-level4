@@ -39,6 +39,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private SummaryDisplay summaryDisplay;
 
     @FXML
     private StackPane detailedRecordCardPlaceholder;
@@ -121,6 +122,9 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         detailedRecordCard = new DetailedRecordCard();
         detailedRecordCardPlaceholder.getChildren().add(detailedRecordCard.getRoot());
+
+        summaryDisplay = new SummaryDisplay();
+        detailedRecordCardPlaceholder.getChildren().add(summaryDisplay.getRoot());
 
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         recordListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
