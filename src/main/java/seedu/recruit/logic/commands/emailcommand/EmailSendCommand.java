@@ -27,8 +27,8 @@ public class EmailSendCommand extends Command {
     public static final String COMMAND_WORD = "send";
     public static final String MESSAGE_USAGE = "Type \"send\" to send the message!";
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
-    public static final String EMAIL_SUCCESS = "Successfully sent the email!";
-    public static final String EMAIL_FAILURE = "Failed to send the email!";
+    private static final String EMAIL_SUCCESS = "Successfully sent the email!";
+    private static final String EMAIL_FAILURE = "Failed to send the email!";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws IOException, GeneralSecurityException {
@@ -37,6 +37,7 @@ public class EmailSendCommand extends Command {
         ObservableList<?> recipients = emailUtil.getRecipients();
         ObservableList<?> contents = emailUtil.getContents();
 
+        // for testing purposes
         for (Object content : contents) {
             System.out.println(content.toString());
         }
@@ -47,32 +48,16 @@ public class EmailSendCommand extends Command {
             System.out.println(recipient.toString());
         }
 
+        //Generating recipients
         Set<String> recipientEmails = new HashSet<>();
-        if (emailUtil.isAreRecipientsCandidates()) {
-            for (Object recipient : recipients) {
-                Candidate candidate = (Candidate) recipient;
-                recipientEmails.add(candidate.getEmail().toString());
-            }
-        } else {
-            for (Object recipient : recipients) {
-                JobOffer jobOffer = (JobOffer) recipient;
+        generateRecipients(recipientEmails, model, emailUtil, recipients, contents);
 
-                int index = model.getCompanyIndexFromName(jobOffer.getCompanyName());
-                //Company not found in CompanyBook
-                if(index == -1) {
-                    continue;
-                }
-                
-                Company company = model.getCompanyFromIndex(index);
-                recipientEmails.add(company.getEmail().toString());
-            }
-        }
-
-        System.out.println(recipientEmails.toString());
+        //Generate content (bodyText)
+        String bodyText = generateContent(model, emailUtil, recipients, contents);
 
         //Sending the email
         try {
-            MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, "hello", "testing");
+            MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, "hello", bodyText);
             EmailUtil.sendMessage(EmailUtil.serviceInit(), EmailUtil.DEFAULT_FROM, mimeMessage);
             result = EMAIL_SUCCESS;
         } catch (MessagingException | GeneralSecurityException e) {
@@ -81,5 +66,82 @@ public class EmailSendCommand extends Command {
         }
         LogicManager.setLogicState("primary");
         return new CommandResult(result);
+    }
+
+    /**
+     * Generates a hashset of emails
+     * @param recipientEmails hashset of emails
+     * @param model
+     * @param emailUtil
+     * @param recipients
+     * @param contents
+     */
+    private void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil,
+                                    ObservableList<?> recipients, ObservableList<?> contents) {
+        if (emailUtil.isAreRecipientsCandidates()) {
+            //recipients are candidates
+            for (Object recipient : recipients) {
+                Candidate candidate = (Candidate) recipient;
+                recipientEmails.add(candidate.getEmail().toString());
+            }
+        } else {
+            //recipients are companies
+            for (Object recipient : recipients) {
+                JobOffer jobOffer = (JobOffer) recipient;
+
+                int index = model.getCompanyIndexFromName(jobOffer.getCompanyName());
+                //Company not found in CompanyBook
+                if(index == -1) {
+                    continue;
+                }
+
+                Company company = model.getCompanyFromIndex(index);
+                recipientEmails.add(company.getEmail().toString());
+            }
+        }
+    }
+
+    /**
+     * Generates bodytext of the email.
+     * @param bodyText String bodytext that will be sent
+     * @param model
+     * @param emailUtil
+     * @param recipients
+     * @param contents
+     */
+    private String generateContent(Model model, EmailUtil emailUtil,
+                                 ObservableList<?> recipients, ObservableList<?> contents) {
+        String bodyText;
+        if (emailUtil.isAreRecipientsCandidates()) {
+            bodyText = "Hello candidates! I think you will be interested in these job offer(s)\n";
+            //contents are companies
+            for(Object content : contents) {
+                JobOffer jobOffer = (JobOffer) content;
+                bodyText = bodyText + '\n' + "Company: " + jobOffer.getCompanyName().toString();
+                bodyText = bodyText + '\n' + "Job: " + jobOffer.getJob().toString();
+                bodyText = bodyText + '\n' + "Salary offered: " + jobOffer.getSalary().toString();
+                bodyText += '\n';
+            }
+        } else {
+            ArrayList<String> jobNames = new ArrayList<>();
+            for (Object recipient : recipients) {
+                JobOffer jobOffer = (JobOffer) recipient;
+                jobNames.add(jobOffer.getJob().toString()) ;
+            }
+
+            bodyText = "Hello Sirs/Madams,\nI think you will be interested in these candidates for your job offer: " +
+                    jobNames.toString() + '\n';
+            //contents are candidates
+            for (Object content : contents) {
+                Candidate candidate = (Candidate) content;
+                bodyText = bodyText + '\n' + "Name: " + candidate.getName().toString();
+                bodyText = bodyText + '\n' + "Age: " + candidate.getAge().toString();
+                bodyText = bodyText + '\n' + "Education: " + candidate.getEducation().toString();
+                bodyText = bodyText + '\n' + "Email: " + candidate.getEmail().toString();
+                bodyText = bodyText + '\n' + "Phone Number: " + candidate.getPhone().toString();
+                bodyText += '\n';
+            }
+        }
+        return bodyText;
     }
 }
