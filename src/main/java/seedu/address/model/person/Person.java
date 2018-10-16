@@ -2,15 +2,11 @@ package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 
 import seedu.address.model.enrolledClass.EnrolledClass;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TimeSlots;
 
 /**
  * Represents a Person in the address book.
@@ -27,12 +23,13 @@ public class Person {
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Map<String, EnrolledClass> enrolledClasses = new TreeMap<>();
+    private final Map<String, List<TimeSlots>> timeslots;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Map<String, EnrolledClass> enrolledClasses) {
+                  Set<Tag> tags, Map<String, EnrolledClass> enrolledClasses,Map<String ,List<TimeSlots> > timeslots) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
@@ -44,6 +41,7 @@ public class Person {
             tempClass = enrolledClasses.get(tempClassName);
             this.enrolledClasses.put(tempClassName, tempClass);
         }
+        this.timeslots = new HashMap<>(timeslots);
     }
 
     public Name getName() {
@@ -74,8 +72,10 @@ public class Person {
      * Returns an immutable enrolled class map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Map<String, EnrolledClass> getEnrolledClasses() {
-        return Collections.unmodifiableMap(enrolledClasses);
+    public Map<String, EnrolledClass> getEnrolledClasses() { return Collections.unmodifiableMap(enrolledClasses); }
+
+    public Map<String, List<TimeSlots>> getTimeSlots() {
+        return timeslots;
     }
 
     /**
@@ -117,7 +117,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, enrolledClasses);
+        return Objects.hash(name, phone, email, address, tags, enrolledClasses, timeslots);
     }
 
     @Override
