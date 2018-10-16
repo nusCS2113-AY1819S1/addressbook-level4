@@ -850,8 +850,7 @@ Additional user stories:
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |===========================================================================================================================================
 |Priority |As a/an ... |I want to ... |So that I can...
-|`* * *` |user who is always on the go |import/export my contacts to my smartphone |access them when I do not have my
- computer with me
+|`* * *` |student who interacts with a lot of people |export my contacts |share/print them
 
 |`* * *` |student with different group projects |group my contacts into different categories |I can send out messages to different project groups
 
