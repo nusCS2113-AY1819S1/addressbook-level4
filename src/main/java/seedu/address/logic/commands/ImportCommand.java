@@ -18,6 +18,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Friend;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
@@ -105,10 +106,13 @@ public class ImportCommand extends Command {
         Email updatedEmail = personToEdit.getEmail();
         Address updatedAddress = personToEdit.getAddress();
         Set<Tag> updatedTags = personToEdit.getTags();
+        Set<Friend> updatedFriends = personToEdit.getFriends();
 
         TimeTable timeTable = importedTimeTable;
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable);
+        return new Person(
+                updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable, updatedFriends);
+
     }
 
     @Override
