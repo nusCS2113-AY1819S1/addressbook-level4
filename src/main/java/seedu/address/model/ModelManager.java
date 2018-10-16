@@ -87,7 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(expenditure);
         return versionedExpenditureTracker.hasExpenditure(expenditure);
     }
-    
+
     @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
@@ -104,7 +104,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void deleteExpenditure(Expenditure target) {
         versionedExpenditureTracker.removeExpenditure(target);
     }
-    
+
     @Override
     public void deleteTask(Task target) {
         versionedAddressBook.removeTask(target);
@@ -147,7 +147,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedExpenditureTracker.updateExpenditure(target, editedExpenditure);
         indicateAddressBookChanged();
     }
-  
+
     @Override
     public void updateTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -176,7 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Expenditure> getFilteredExpenditureList() {
         return FXCollections.unmodifiableObservableList(filteredExpenditures);
     }
-  
+
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return FXCollections.unmodifiableObservableList(filteredTasks);
@@ -187,7 +187,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
-  
+
     @Override
     public void updateFilteredExpenditureList(Predicate<Expenditure> predicate) {
         requireNonNull(predicate);
