@@ -1,7 +1,7 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
+import static unrefactored.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Task's PriorityLevel in the address book.
@@ -29,14 +29,13 @@ public class PriorityLevel {
      */
     public static boolean isValidPriorityLevel(String test) {
         String testInLowerCase = test.toLowerCase();
-        if (testInLowerCase == "low" || testInLowerCase == "medium"
-                || testInLowerCase == "high") {
+        if (testInLowerCase.equals("low") || testInLowerCase.equals("medium")
+                || testInLowerCase.equals("high")) {
             return true;
         } else {
             return false;
         }
     }
-
 
     @Override
     public String toString() {

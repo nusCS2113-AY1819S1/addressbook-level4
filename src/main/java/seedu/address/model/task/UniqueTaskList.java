@@ -1,7 +1,7 @@
 package seedu.address.model.task;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static unrefactored.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
@@ -74,6 +74,20 @@ public class UniqueTaskList implements Iterable<Task> {
         if (!internalList.remove(toRemove)) {
             throw new TaskNotFoundException();
         }
+    }
+
+    /**
+     * Complete a task in the list.
+     * The task must exist in the list.
+     */
+    public void complete(Task toComplete) {
+        requireNonNull(toComplete);
+        int index = internalList.indexOf(toComplete);
+        if (index == -1) {
+            throw new TaskNotFoundException();
+        }
+        Task completedTask = toComplete.completed();
+        internalList.set(index, completedTask);
     }
 
     public void setTasks(UniqueTaskList replacement) {

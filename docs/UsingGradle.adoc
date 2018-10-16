@@ -83,7 +83,7 @@ The set of code style rules implemented can be found in `config/checkstyle/check
 * **`allTests`** +
 Runs all tests.
 * **`guiTests`** +
-Runs all tests in the `seedu.address.ui` and `systemtests` package
+Runs all tests in the `unrefactored.ui` and `systemtests` package
 * **`nonGuiTests`** +
 Runs all non-GUI tests in the `seedu.address`
 package

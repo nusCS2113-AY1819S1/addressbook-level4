@@ -5,19 +5,17 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.core.Version;
-//import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.ConfigUtil;
-import seedu.address.commons.util.StringUtil;
+import unrefactored.commons.core.Config;
+import unrefactored.commons.core.EventsCenter;
+import unrefactored.commons.core.LogsCenter;
+import unrefactored.commons.core.Version;
+//import unrefactored.commons.events.ui.ExitAppRequestEvent;
+import unrefactored.commons.exceptions.DataConversionException;
+import unrefactored.commons.util.ConfigUtil;
+import unrefactored.commons.util.StringUtil;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.model.AddressBook;
@@ -26,14 +24,14 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.JsonUserPrefsStorage;
-import seedu.address.storage.Storage;
-import seedu.address.storage.StorageManager;
-import seedu.address.storage.TaskBookStorage;
-import seedu.address.storage.UserPrefsStorage;
-import seedu.address.storage.XmlTaskBookStorage;
-//import seedu.address.ui.Ui;
-//import seedu.address.ui.UiManager;
+import unrefactored.storage.JsonUserPrefsStorage;
+import unrefactored.storage.Storage;
+import unrefactored.storage.StorageManager;
+import unrefactored.storage.TaskBookStorage;
+import unrefactored.storage.UserPrefsStorage;
+import unrefactored.storage.XmlTaskBookStorage;
+import unrefactored.ui.Ui;
+import unrefactored.ui.UiManager;
 
 /**
  * The main entry point to the application.
@@ -44,7 +42,7 @@ public class MainApp extends Application {
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
-    //    protected Ui ui;
+    protected Ui ui;
     protected Logic logic;
     protected Storage storage;
     protected Model model;
@@ -71,7 +69,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        //        ui = new UiManager(logic, config, userPrefs);
+        ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
     }
@@ -180,13 +178,13 @@ public class MainApp extends Application {
     @Override
     public void start(Stage primaryStage) {
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        //        ui.start(primaryStage);
+        ui.start(primaryStage);
     }
 
     @Override
     public void stop() {
         logger.info("============================ [ Stopping Address Book ] =============================");
-        //        ui.stop();
+        ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {

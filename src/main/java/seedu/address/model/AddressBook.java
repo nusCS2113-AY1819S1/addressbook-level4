@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
@@ -84,6 +85,14 @@ public class AddressBook implements ReadOnlyTaskBook {
         requireNonNull(editedPerson);
 
         tasks.setTask(target, editedPerson);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void completeTask(Task key) {
+        tasks.complete(key);
     }
 
     /**

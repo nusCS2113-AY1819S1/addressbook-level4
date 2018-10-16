@@ -116,17 +116,17 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-task(guiTests)
+//task(guiTests)
 task(nonGuiTests)
 
 // Run `test` task if `guiTests` or `nonGuiTests` is specified
-guiTests.dependsOn test
+//guiTests.dependsOn test
 nonGuiTests.dependsOn test
 
 task(allTests)
 
 // `allTests` implies both `guiTests` and `nonGuiTests`
-allTests.dependsOn guiTests
+//allTests.dependsOn guiTests
 allTests.dependsOn nonGuiTests
 
 test {
@@ -148,11 +148,12 @@ test {
     }
 
     doFirst {
-        boolean runGuiTests = gradle.taskGraph.hasTask(guiTests)
+//        boolean runGuiTests = gradle.taskGraph.hasTask(guiTests)
         boolean runNonGuiTests = gradle.taskGraph.hasTask(nonGuiTests)
 
-        if (!runGuiTests && !runNonGuiTests) {
-            runGuiTests = true
+        if (!runNonGuiTests) {
+            //!runGuiTests &&
+//            runGuiTests = true
             runNonGuiTests = true
         }
 
@@ -160,14 +161,14 @@ test {
             test.include 'seedu/address/**'
         }
 
-        if (runGuiTests) {
+        /*if (runGuiTests) {
             test.include 'systemtests/**'
             test.include 'seedu/address/ui/**'
         }
 
         if (!runGuiTests) {
             test.exclude 'seedu/address/ui/**'
-        }
+        }*/
     }
 }
 
@@ -236,10 +237,6 @@ task deployOfflineDocs(type: Copy) {
     }
 }
 
-task copyDummySearchPage(type: Copy) {
-    from 'docs/DummySearchPage.html'
-    into "${buildDir}/docs/html5"
-}
 
 deployOfflineDocs.dependsOn asciidoctor
 processResources.dependsOn deployOfflineDocs
