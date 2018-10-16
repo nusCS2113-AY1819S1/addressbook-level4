@@ -19,7 +19,7 @@ public class SaveCommand extends Command {
             + "Parameters: FILENAME \n"
             + "Example: " + COMMAND_WORD + " backup";
 
-    public static String fileName;
+    private static String fileName;
 
     public SaveCommand(String fileName) {
         this.fileName = fileName;
