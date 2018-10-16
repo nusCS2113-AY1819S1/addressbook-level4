@@ -6,6 +6,8 @@ import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import seedu.planner.commons.core.EventsCenter;
+import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
@@ -36,6 +38,7 @@ public class SummaryCommand extends Command{
         requireNonNull(model);
         List<Summary> summaryList = model.getSummaryList(startDate, endDate);
         String summaryString = summaryList.stream().map(s -> s.toString()).collect(Collectors.joining("\n\n"));
+        EventsCenter.getInstance().post(new ShowSummaryTableEvent());
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size(), summaryString));
     }
 

@@ -120,11 +120,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        detailedRecordCard = new DetailedRecordCard();
-        detailedRecordCardPlaceholder.getChildren().add(detailedRecordCard.getRoot());
-
         summaryDisplay = new SummaryDisplay();
         detailedRecordCardPlaceholder.getChildren().add(summaryDisplay.getRoot());
+
+        detailedRecordCard = new DetailedRecordCard();
+        detailedRecordCardPlaceholder.getChildren().add(detailedRecordCard.getRoot());
 
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         recordListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
