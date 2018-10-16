@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 //@@author jitwei98
@@ -21,6 +20,8 @@ public class ExportAllCommand extends Command {
     // public static final String MESSAGE_NOT_IMPLEMENTED_YET = "exportall command not implemented yet.";
 
     public static final String MESSAGE_ARGUMENTS = "Filetype: %1$s";
+    public static final String MESSAGE_SUCCESS = "Exported all contacts.";
+    private static final String MESSAGE_FAILURE = "Export failed!";
 
     // TODO: use enum or other better ways to store
     private String filetype;
@@ -35,8 +36,10 @@ public class ExportAllCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(String.format(MESSAGE_ARGUMENTS, filetype));
+    public CommandResult execute(Model model, CommandHistory history) {
+        requireNonNull(model);
+        model.exportAddressBook();
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 
     @Override

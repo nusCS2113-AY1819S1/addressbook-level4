@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.export.CsvWriter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -152,5 +153,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteTag(Tag tag) {
         versionedAddressBook.removeTag(tag);
+    }
+
+    //=========== Import/ Export ==============================================================================
+    @Override
+    public void exportAddressBook() {
+        CsvWriter csvWriter = new CsvWriter(getFilteredPersonList());
+        csvWriter.write();
     }
 }
