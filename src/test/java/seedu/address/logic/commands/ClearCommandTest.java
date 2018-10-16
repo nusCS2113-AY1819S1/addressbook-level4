@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static UnRefactored.testutil.TypicalTasks.getTypicalTaskBook;
+import static unrefactored.testutil.TypicalTasks.getTypicalTaskBook;
 
 import org.junit.Test;
 

@@ -126,8 +126,9 @@ public class CommandTestUtil {
     }
 
     */
-    //Deletes the first task in {@code model}'s filtered list from {@code model}'s address book.
-
+    /**
+     * Deletes the first task in {@code model}'s filtered list from {@code model}'s address book.
+     */
     public static void deleteFirstTask(Model model) {
         Task firstTask = model.getFilteredTaskList().get(0);
         model.deleteTask(firstTask);

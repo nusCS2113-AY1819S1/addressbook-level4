@@ -6,19 +6,19 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 //import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static UnRefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static UnRefactored.testutil.TypicalIndexes.INDEX_SECOND_TASK;
-import static UnRefactored.testutil.TypicalTasks.getTypicalTaskBook;
+import static unrefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static unrefactored.testutil.TypicalIndexes.INDEX_SECOND_TASK;
+import static unrefactored.testutil.TypicalTasks.getTypicalTaskBook;
 
 import org.junit.Test;
 
-import UnRefactored.commons.core.Messages;
-import UnRefactored.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.Task;
+import unrefactored.commons.core.Messages;
+import unrefactored.commons.core.index.Index;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for

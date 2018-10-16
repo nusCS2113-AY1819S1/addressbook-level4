@@ -9,15 +9,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_31ST_M
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DESCRIPTION_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_HIGH;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_2;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_1;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_2;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_1;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_2;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.task.Task;
-import UnRefactored.testutil.TaskBuilder;
+import unrefactored.testutil.TaskBuilder;
 
 public class TaskTest {
     @Rule

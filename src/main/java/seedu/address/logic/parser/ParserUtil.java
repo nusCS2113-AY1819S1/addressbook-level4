@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import UnRefactored.commons.core.index.Index;
-import UnRefactored.commons.util.StringUtil;
+import unrefactored.commons.core.index.Index;
+import unrefactored.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.PriorityLevel;
 

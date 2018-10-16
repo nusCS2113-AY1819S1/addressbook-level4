@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
-import static UnRefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static UnRefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static unrefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static unrefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 
 import org.junit.Test;
 

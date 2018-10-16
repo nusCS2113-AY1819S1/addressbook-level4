@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static UnRefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_1ST_JAN;
 import static seedu.address.logic.commands.CommandTestUtil.DEADLINE_DESC_31ST_MARCH;
 import static seedu.address.logic.commands.CommandTestUtil.DESCRIPTION_DESC_1;
@@ -18,15 +17,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-//import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_1;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_2;
+import static unrefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+//import static unrefactored.testutil.TypicalTasks.CS2113_TASK_1;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_2;
 
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
-import UnRefactored.testutil.TaskBuilder;
+import unrefactored.testutil.TaskBuilder;
+
 
 public class AddCommandParserTest {
     private AddTaskCommandParser parser = new AddTaskCommandParser();

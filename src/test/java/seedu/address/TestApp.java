@@ -6,20 +6,20 @@ import java.util.function.Supplier;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import UnRefactored.commons.core.Config;
-import UnRefactored.commons.core.GuiSettings;
-import UnRefactored.commons.exceptions.DataConversionException;
-import UnRefactored.commons.util.FileUtil;
-import UnRefactored.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
-import UnRefactored.storage.UserPrefsStorage;
-import UnRefactored.storage.XmlSerializableTaskBook;
-import UnRefactored.testutil.TestUtil;
-import UnRefactored.systemtests.ModelHelper;
+import unrefactored.commons.core.Config;
+import unrefactored.commons.core.GuiSettings;
+import unrefactored.commons.exceptions.DataConversionException;
+import unrefactored.commons.util.FileUtil;
+import unrefactored.commons.util.XmlUtil;
+import unrefactored.storage.UserPrefsStorage;
+import unrefactored.storage.XmlSerializableTaskBook;
+import unrefactored.systemtests.ModelHelper;
+import unrefactored.testutil.TestUtil;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for
