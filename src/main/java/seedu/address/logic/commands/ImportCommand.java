@@ -89,6 +89,7 @@ public class ImportCommand extends Command {
         model.updatePerson(personToEdit, modifiedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
+        model.updateTimeTable(modifiedPerson.getTimeTable());
         return new CommandResult(String.format(MESSAGE_SUCCESS, modifiedPerson));
     }
 
@@ -118,7 +119,7 @@ public class ImportCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
+        if (!(other instanceof ImportCommand)) {
             return false;
         }
 

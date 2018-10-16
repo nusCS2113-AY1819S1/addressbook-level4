@@ -9,7 +9,6 @@ import java.util.NoSuchElementException;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-//import seedu.address.model.person.TimeTable;
 
 /**
  * Parses input arguments and creates a new ImportCommand object

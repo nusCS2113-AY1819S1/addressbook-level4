@@ -35,11 +35,14 @@ public class IcsUtil {
 
         requireNonNull(file);
 
-        if (!Files.exists(file)) {
-            logger.info("Ics file " + file + " not found");
-            return Optional.empty();
+        try {
+            if (!Files.exists(file)) {
+                logger.info("Ics file " + file + " not found");
+                return Optional.empty();
+            }
+        } catch (SecurityException e){
+            logger.warning("Read rights not available when trying to access ICS file " + file + ": " + e);
         }
-
         String importstring = "";
         try {
             importstring = FileUtil.readFromFile(file);
