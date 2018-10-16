@@ -2,17 +2,11 @@ package seedu.address.model.classroom;
 
 import static java.util.Objects.requireNonNull;
 
-import javax.xml.bind.annotation.XmlElement;
-
 /**
  * Represents a module code in the app.
  */
 public class ClassModule {
-    @XmlElement
     private String value;
-
-    public ClassModule() {
-    }
 
     public ClassModule(String moduleCode) {
         requireNonNull(moduleCode);
