@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.List;
-import java.util.Observable;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
