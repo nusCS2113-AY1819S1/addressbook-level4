@@ -42,7 +42,5 @@ public class DeleteExpenditureCommand extends Command {
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, expenditureToDelete));
     }
-
-
 }
 
