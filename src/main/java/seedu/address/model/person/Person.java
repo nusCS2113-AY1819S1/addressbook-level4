@@ -189,4 +189,16 @@ public class Person {
         return true;
     }
 
+    public String getStringTags() {
+        //TODO throw an exception instead
+        if (tags.isEmpty()) {
+            return "";
+        }
+        String getTags = new String();
+        for (Tag tag : tags) {
+            getTags += tag.tagName + " ";
+        }
+        getTags = getTags.trim();
+        return getTags;
+    }
 }
