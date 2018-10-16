@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
@@ -10,10 +12,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.FileLocation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeSlot;
@@ -173,5 +177,33 @@ public class ParserUtil {
     // TODO: Make this accept non-full day name strings too (e.g. MON, Tue)
     public static DayOfWeek parseDay(String dayString) throws IllegalArgumentException {
         return DayOfWeek.valueOf(dayString.toUpperCase());
+    }
+
+    /**
+     *
+     * Parses a {@code String fileLocation} into a {@code fileLocation}
+     *
+     */
+    public static Path parseFileLocation (String fileLocation) throws ParseException {
+        requireNonNull(fileLocation);
+        String trimmedFileLocation = fileLocation.trim();
+
+        //FileLocation newFileLocation = new FileLocation(fileLocation);
+        Path newFilePath = Paths.get(trimmedFileLocation);
+
+        //check file exists in the disk //does not check the validity of file!
+        if (!FileUtil.isFileExists(newFilePath)) {
+            throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
+        }
+
+        //check file ends in .ics //does not check the validity of file!
+        /*
+        String pattern = "^.*\\.(ics|ICS)$";
+        if (Pattern.matches(pattern, fileLocation)) {
+            throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
+        }
+        */
+
+        return newFilePath;
     }
 }
