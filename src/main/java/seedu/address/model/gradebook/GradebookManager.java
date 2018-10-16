@@ -2,21 +2,17 @@ package seedu.address.model.gradebook;
 
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.StorageController;
+import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
  * The API of the GradebookManager component.
  */
 public class GradebookManager {
-    private static final String ADD_MESSAGE_SUCCESS = "Successfully Added! \nModule Code: %1$s"
-            + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
-    private static final String EMPTY_RESULT = "Module code and gradebook component name cannot be empty";
-    private static final String EXTRA_SPACE = "Extra spacings detected between %1$s";
     private static final String LIST_MESSAGE_SUCCESS = "Success! List of components in the module:";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
     private static final String FIND_MESSAGE_SUCCESS = "Successfully found!";
     private static final String FIND_MESSAGE_FAIL = "Unsuccessful find";
-    private static final String DUPLICATE_RESULT = "Gradebook component already exist in Trajectory";
 
     /**
      This method adds gradebook component to a module in Trajectory.
@@ -25,35 +21,9 @@ public class GradebookManager {
                                                 String gradebookComponentName,
                                                 int gradebookComponentMaxMarks,
                                                 int gradebookComponentWeightage) {
-        String status = ADD_MESSAGE_SUCCESS;
-        StorageController.retrieveData();
-
-        boolean empty = Gradebook.emptyParams(moduleCode, gradebookComponentName);
-        if (empty) {
-            status = EMPTY_RESULT;
-        }
-
-        boolean duplicate = Gradebook.duplicateComponent(moduleCode, gradebookComponentName);
-        if (duplicate) {
-            status = DUPLICATE_RESULT;
-        }
-
-        boolean extraSpace = Gradebook.extraSpace(gradebookComponentName);
-        if (extraSpace) {
-            status = EXTRA_SPACE;
-        }
-
-        if (!empty && !duplicate && !extraSpace) {
-            StorageController.getGradebookStorage().add(new XmlAdaptedGradebook(moduleCode, gradebookComponentName,
-                    gradebookComponentMaxMarks, gradebookComponentWeightage));
-            StorageController.storeData();
-        }
-
-        return String.format(status,
-                moduleCode,
-                gradebookComponentName,
-                gradebookComponentMaxMarks,
+        String result = Gradebook.checkValidation(moduleCode, gradebookComponentName, gradebookComponentMaxMarks,
                 gradebookComponentWeightage);
+        return result;
     }
 
     /**

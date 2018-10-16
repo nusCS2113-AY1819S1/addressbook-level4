@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
-import seedu.address.model.gradebook.XmlAdaptedGradebook;
-import seedu.address.model.gradebook.XmlSerializableGradebookList;
 import seedu.address.model.note.Note;
+import seedu.address.storage.adapter.XmlAdaptedGradebook;
 import seedu.address.storage.adapter.XmlAdaptedModule;
+import seedu.address.storage.serializable.XmlSerializableGradebookList;
 import seedu.address.storage.serializable.XmlSerializableModuleList;
 
 /**

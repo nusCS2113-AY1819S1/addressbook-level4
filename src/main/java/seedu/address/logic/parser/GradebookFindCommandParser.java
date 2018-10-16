@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GradebookFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.gradebook.XmlAdaptedGradebook;
+import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
  * Parses input arguments and creates a new GradebookFindCommand object

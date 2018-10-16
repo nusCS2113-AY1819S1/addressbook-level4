@@ -1,15 +1,16 @@
-package seedu.address.model.gradebook;
+package seedu.address.storage.serializable;
 
 import java.util.ArrayList;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import seedu.address.storage.adapter.XmlAdaptedGradebook;
+
 /**
- This gradebook manager stores gradebook information for Trajectory.
+ * Represents a list of gradebook components that is serializable to XML format
  */
 @XmlRootElement(namespace = "seedu.address.model")
 @XmlAccessorType(XmlAccessType.FIELD)

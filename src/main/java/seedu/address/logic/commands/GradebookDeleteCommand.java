@@ -8,7 +8,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.gradebook.GradebookManager;
-import seedu.address.model.gradebook.XmlAdaptedGradebook;
+import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
  * Deletes gradebook component for module in Trajectory to the user.

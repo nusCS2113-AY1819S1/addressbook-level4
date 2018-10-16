@@ -1,13 +1,14 @@
-package seedu.address.model.gradebook;
+package seedu.address.storage.adapter;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import seedu.address.model.gradebook.Gradebook;
+
 /**
- * Represents a component in the address book.
- * Guarantees: details are present and not null, field values are validated, immutable.
+ * JAXB-friendly adapted version of the Gradebook.
  */
 @XmlRootElement(name = "gradeComponent")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -21,10 +22,17 @@ public class XmlAdaptedGradebook {
     @XmlElement(name = "gradeComponentWeightage", required = true, nillable = true)
     private int gradeComponentWeightage;
 
+    /**
+     * Constructs an XmlAdaptedModule.
+     * This is the no-arg constructor that is required by JAXB.
+     */
     public XmlAdaptedGradebook() {
 
     }
 
+    /**
+     * Constructs an {@code XmlAdaptedGradebook} with the given gradebook component details
+     */
     public XmlAdaptedGradebook(String moduleCode, String gradeComponentName, int gradeComponentMaxMarks,
                                int gradeComponentWeightage) {
         this.moduleCode = moduleCode;
@@ -33,6 +41,19 @@ public class XmlAdaptedGradebook {
         this.gradeComponentWeightage = gradeComponentWeightage;
     }
 
+    /**
+     * Constructs an {@code XmlAdaptedGradebook} with the given gradebook component details
+     */
+    public XmlAdaptedGradebook(Gradebook gradebook) {
+        this.moduleCode = gradebook.getModuleCode();
+        this.gradeComponentName = gradebook.getGradeComponentName();
+        this.gradeComponentMaxMarks = gradebook.getGradeComponentMaxMarks();
+        this.gradeComponentWeightage = gradebook.getGradeComponentWeightage();
+    }
+
+    /**
+     * Constructs an {@code XmlAdaptedGradebook} with the given gradebook componenet details
+     */
     public XmlAdaptedGradebook(String moduleCode, String gradeComponentName) {
         this.moduleCode = moduleCode;
         this.gradeComponentName = gradeComponentName;
@@ -42,31 +63,15 @@ public class XmlAdaptedGradebook {
         return moduleCode;
     }
 
-    public void setModuleCode(String moduleCode) {
-        this.moduleCode = moduleCode;
-    }
-
     public String getGradeComponentName() {
         return gradeComponentName;
-    }
-
-    public void setGradeComponentName(String gradeComponentName) {
-        this.gradeComponentName = gradeComponentName;
     }
 
     public int getGradeComponentMaxMarks() {
         return gradeComponentMaxMarks;
     }
 
-    public void setGradeComponentMaxMarks(int gradeComponentMaxMarks) {
-        this.gradeComponentMaxMarks = gradeComponentMaxMarks;
-    }
-
     public int getGradeComponentWeightage() {
         return gradeComponentWeightage;
-    }
-
-    public void setGradeComponentWeightage(int gradeComponentWeightage) {
-        this.gradeComponentWeightage = gradeComponentWeightage;
     }
 }

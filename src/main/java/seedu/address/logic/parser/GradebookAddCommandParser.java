@@ -10,12 +10,16 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.gradebook.XmlAdaptedGradebook;
+import seedu.address.model.gradebook.Gradebook;
 
 /**
  * Parses input arguments and creates a new GradebookAddCommand object
  */
 public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
+    private static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
+    private static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
+
+
     /**
      * Parses the given {@code String} of arguments in the context of the GradebookAddCommand
      * and returns a GradebookAddCommand object for execution.
@@ -36,21 +40,22 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
             try {
                 gradeComponentMaxMarksArg = Integer.parseInt(argMultimap.getValue(PREFIX_GRADEBOOK_MAXMARKS).get());
             } catch (NumberFormatException nme) {
-                gradeComponentMaxMarksArg = 0;
+                throw new ParseException(MESSAGE_MAX_MARKS_ERROR);
             }
         }
         if (arePrefixesPresent(argMultimap, PREFIX_GRADEBOOK_WEIGHTAGE) || !argMultimap.getPreamble().isEmpty()) {
             try {
                 gradeComponentWeightageArg = Integer.parseInt(argMultimap.getValue(PREFIX_GRADEBOOK_WEIGHTAGE).get());
             } catch (NumberFormatException nme) {
-                gradeComponentWeightageArg = 0;
+                throw new ParseException(MESSAGE_WEIGHTAGE_ERROR);
             }
         }
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULECODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        XmlAdaptedGradebook gradebookComponent = new XmlAdaptedGradebook(moduleCodeArg, gradeComponentNameArg,
-                gradeComponentMaxMarksArg, gradeComponentWeightageArg);
-        return new GradebookAddCommand(gradebookComponent);
+
+        Gradebook gradebook = new Gradebook(moduleCodeArg, gradeComponentNameArg, gradeComponentMaxMarksArg,
+                gradeComponentWeightageArg);
+        return new GradebookAddCommand(gradebook);
     }
 
     /**
