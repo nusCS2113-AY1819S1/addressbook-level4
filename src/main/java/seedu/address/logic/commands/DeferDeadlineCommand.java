@@ -16,7 +16,7 @@ import seedu.address.model.task.Task;
 
 import java.util.List;
 
-
+//@@ChanChunCheong
 /**
  * Defer deadline of a specific task in the taskbook.
  */
@@ -43,7 +43,7 @@ public class DeferDeadlineCommand extends Command implements CommandParser{
 
     public static final String MESSAGE_INVALID_DEADLINE = "The date selected does not exist";
     public static final String MESSAGE_NONEXISTENT_TASK = "This task does not exist in the task book";
-    public static final String MESSAGE_SUCCESS = "Task completed: %1$s" + "date deferred to: %1$s";
+    public static final String MESSAGE_SUCCESS =  "Date deferred for task: %1$s";
     //public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Defer deadline command not implemented yet";
 
     private final Index taskIndex;
@@ -79,7 +79,7 @@ public class DeferDeadlineCommand extends Command implements CommandParser{
         Task taskToDefer = lastShownList.get(taskIndex.getZeroBased()); // get the task from the filteredtasklist;
         model.deferTaskDeadline(taskToDefer, deadline);
         model.commitTaskBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToDefer, deadline));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, taskToDefer));
 
         /*
         requireNonNull(model);

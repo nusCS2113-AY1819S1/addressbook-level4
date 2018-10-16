@@ -45,6 +45,11 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.add(toAdd);
     }
 
+    //@@ChanChunCheong
+    /**
+     * Defer the deadline of the task (@code target) in the list with (@code deadline).
+     * (@code target) must exist in the list.
+     */
     public void defer(Task target, String deadline){
         requireNonNull(target);
         requireNonNull(deadline);
