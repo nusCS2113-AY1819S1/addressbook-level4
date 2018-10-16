@@ -7,7 +7,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.Random;
 
-import org.junit.jupiter.api.Test;
+
+import org.junit.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.Model;
