@@ -221,8 +221,14 @@ public abstract class EventManagerSystemTest {
             expectedUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
                     + "?name="
                     + selectedCardHandle.getName().replaceAll(" ", "%20")
+                    + "&phone="
+                    + selectedCardHandle.getPhone()
+                    + "&email="
+                    + selectedCardHandle.getEmail()
                     + "&address="
-                    + selectedCardHandle.getAddress().replaceAll(" ", "%20"));
+                    + selectedCardHandle.getAddress().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + "&tags="
+                    + selectedCardHandle.getTagsString().replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }

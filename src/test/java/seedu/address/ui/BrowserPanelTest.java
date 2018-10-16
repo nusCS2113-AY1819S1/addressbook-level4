@@ -43,8 +43,14 @@ public class BrowserPanelTest extends GuiUnitTest {
         URL expectedPersonUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
                 + "?name="
                 + ALICE.getName().fullName.replaceAll(" ", "%20")
+                + "&phone="
+                + ALICE.getPhone()
+                + "&email="
+                + ALICE.getEmail()
                 + "&address="
-                + ALICE.getAddress().value.replaceAll(" ", "%20"));
+                + ALICE.getAddress().value.replaceAll(" ", "%20").replaceAll("#", "%23")
+                + "&tags="
+                + ALICE.getTagsString());
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

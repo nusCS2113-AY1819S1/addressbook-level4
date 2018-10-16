@@ -72,6 +72,12 @@ public class PersonCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
+    public String getTagsString() {
+        List<String> tagsList = getTags();
+        String tagsString = String.join(" ", tagsList);
+        return tagsString;
+    }
+
     /**
      * Returns true if this handle contains {@code event}.
      */
