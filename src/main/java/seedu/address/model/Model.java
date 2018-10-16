@@ -12,6 +12,9 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Product;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
@@ -127,7 +130,8 @@ public interface Model {
     /**
      * Adds a transaction to the sales history
      */
-    void addTransaction(Transaction transaction);
+    void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
+            DuplicateTransactionException, ClosedShopDayException;
 
     /**
      * Returns a given day's transaction history

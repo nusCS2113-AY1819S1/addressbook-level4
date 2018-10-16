@@ -12,7 +12,11 @@ import seedu.address.model.distributor.UniqueDistributorList;
 import seedu.address.model.person.Product;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.saleshistory.SalesHistory;
+import seedu.address.model.saleshistory.exceptions.DuplicateDayException;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 
@@ -159,10 +163,23 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a transaction to the active shopday.
+     * @param transaction
+     * @throws InvalidTimeFormatException
+     * @throws ClosedShopDayException
+     * @throws DuplicateTransactionException
      */
 
-    public void addTransaction(Transaction transaction) {
-        salesHistory.addTransaction(transaction);
+    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
+            ClosedShopDayException, DuplicateTransactionException{
+        try {
+            salesHistory.addTransaction(transaction);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        } catch (ClosedShopDayException e) {
+            throw e;
+        } catch (DuplicateTransactionException e) {
+            throw e;
+        }
         lastTransaction = transaction;
     }
 

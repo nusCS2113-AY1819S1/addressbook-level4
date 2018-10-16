@@ -26,6 +26,9 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Product;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.Storage;
@@ -336,8 +339,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addTransaction(Transaction transaction) {
-        versionedAddressBook.addTransaction(transaction);
+    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
+            ClosedShopDayException, DuplicateTransactionException {
+        try {
+            versionedAddressBook.addTransaction(transaction);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        } catch (ClosedShopDayException e) {
+            throw e;
+        } catch (DuplicateTransactionException e) {
+            throw e;
+        }
     }
 
     @Override
