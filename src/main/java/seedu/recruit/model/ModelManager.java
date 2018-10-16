@@ -28,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedCompanyBook versionedCompanyBook;
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
+    private final FilteredList<JobOffer> filteredJobs;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.
@@ -40,8 +41,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
         versionedCompanyBook = new VersionedCompanyBook(companyBook);
-        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
+        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
+        filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
     }
 
     public ModelManager() {
@@ -268,6 +270,15 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(companyName, jobOffer);
         versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
         indicateCompanyBookChanged();
+    }
+
+    /**
+     * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
+     * {@code versionedCompanyBook}
+     */
+    @Override
+    public ObservableList<JobOffer> getFilteredCompanyJobList() {
+        return FXCollections.unmodifiableObservableList(filteredJobs);
     }
 
     @Override
