@@ -15,7 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.ClassCreateCommand;
+import seedu.address.logic.commands.ClassAddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -134,15 +134,15 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_classCreate() throws Exception {
+    public void parseCommand_classAdd() throws Exception {
         final String className = "T16";
         final String moduleCode = "CG1111";
         final String maxEnrollment = "20";
-        ClassCreateCommand command = (ClassCreateCommand) parser.parseCommand(ClassCreateCommand.COMMAND_WORD
+        ClassAddCommand command = (ClassAddCommand) parser.parseCommand(ClassAddCommand.COMMAND_WORD
                 + " " + PREFIX_CLASSNAME + className
                 + " " + PREFIX_MODULECODE + moduleCode
                 + " " + PREFIX_MAXENROLLMENT + maxEnrollment);
-        assertEquals(new ClassCreateCommand(new Classroom(new ClassName(className),
+        assertEquals(new ClassAddCommand(new Classroom(new ClassName(className),
                 new ClassModule(moduleCode),
                 new Enrollment(maxEnrollment))), command);
     }
