@@ -372,11 +372,12 @@ Likewise, this implementation is similar to 2.5. Storage component.
 image::HighLevelRequestSequenceDiagram.png[width="800"]
 
 * **Similar to Add Command**
-** After request command is called, it
-** Cons: Adds more code to Quantity Class
-* **Alternative 2:** Decreases quantity in the Book Class.
-** Pros: Does not need to edit Quantity Class.
-** Cons: Code becomes less cohesive.
+** After request command is called by the user, it gets parsed through a RequestListParser.
+** The UI also prompts to EventCenter and logs out that the Request List has changed.
+** Request object is created and added to the model.
+** The storage then receives the request and returns message to model, which is then transferred to the UI.
+** This notifies the user that the request is successfully submitted.
+
 // end::Request[]
 
 // tag::dataencryption[]
