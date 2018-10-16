@@ -12,8 +12,8 @@ public class DistributorPhone {
 
 
     public static final String MESSAGE_PHONE_CONSTRAINTS =
-            "Distributor phone numbers should only contain numbers, and it should be at least 3 digits long";
-    public static final String PHONE_VALIDATION_REGEX = "\\d{3,}";
+            "Distributor phone numbers should only contain numbers, and it should be at least 8 digits long";
+    public static final String PHONE_VALIDATION_REGEX = "\\d{8,}";
     public final String value;
 
     /**
