@@ -47,7 +47,7 @@ public class ReplyCommentCommand extends Command {
      * @param index of the event in the filtered event list to edit
      * @param editPersonDescriptor details to edit the event with
      */
-    public ReplyCommentCommand(Index index, int line, String comment, Name name) {
+    public ReplyCommentCommand(Index index, int line, String comment, Name name ){
         requireNonNull(index);
         requireNonNull(line);
         requireNonNull(comment);

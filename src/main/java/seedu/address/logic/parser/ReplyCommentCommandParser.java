@@ -49,7 +49,7 @@ public class ReplyCommentCommandParser implements Parser<ReplyCommentCommand> {
         comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get());
 
 
-        if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
+        if ( !argMultimap.getValue(PREFIX_NAME).isPresent()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE));
         }
         //editCommentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
