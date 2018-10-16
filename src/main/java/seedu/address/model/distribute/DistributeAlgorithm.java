@@ -5,11 +5,13 @@ import static java.util.stream.Collectors.toMap;
 import static seedu.address.model.person.Gender.VALID_GENDER_FEMALE;
 import static seedu.address.model.person.Gender.VALID_GENDER_MALE;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
@@ -31,13 +33,18 @@ import seedu.address.model.person.Person;
 public class DistributeAlgorithm {
 
     private static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
-    private static final String DUPLICATED_GROUP_FOUND = "There exist another group with the same name.";
+    private static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
+    private static final String MESSAGE_SHUFFLE_ERROR = "There is a problem shuffling the people in the address book.";
+    private static final String GROUP_LOCATION = "[UNKNOWN]";
     private Model model;
+
+    public DistributeAlgorithm(){
+    }
 
     public DistributeAlgorithm(Model model, Distribute dist) throws CommandException {
         requireNonNull(dist);
         this.model = model;
-        int index = dist.getIndex();
+        int numOfGroups = dist.getIndex();
         String groupName = dist.getGroupName().toString();
         boolean genderFlag = dist.getGender();
         boolean nationalityFlag = dist.getNationality();
@@ -47,24 +54,25 @@ public class DistributeAlgorithm {
         // Get all person data via ObservableList
         ObservableList<Person> allPerson = model.getFilteredPersonList();
         requireNonNull(allPerson);
-        if (allPerson.size() < index) {
+        if (allPerson.size() < numOfGroups) {
             throw new CommandException(MESSAGE_INVALID_SIZE);
         }
-        doesGroupNameExist(index, groupName);
+        doesGroupNameExist(numOfGroups, groupName);
 
 
         //Converts into ArrayList to use Randomizer via Collections
         LinkedList<Person> allPersonArrayList = new LinkedList<>(allPerson);
-        allPersonArrayList = shuffle(allPersonArrayList);
+        Instant instant = Instant.now();
+        allPersonArrayList = shuffle(allPersonArrayList, new Random(instant.getEpochSecond()));
 
         if (!genderFlag && !nationalityFlag) {
-            normalDistribution(index, groupArrayList, allPersonArrayList, groupName);
+            normalDistribution(numOfGroups, groupArrayList, allPersonArrayList, groupName);
         } else if (!genderFlag && nationalityFlag) {
-            nationalityDistribution(index, groupArrayList, allPersonArrayList, groupName);
+            nationalityDistribution(numOfGroups, groupArrayList, allPersonArrayList, groupName);
         } else if (genderFlag && !nationalityFlag) {
-            genderDistribution(index, groupArrayList, allPersonArrayList, groupName);
+            genderDistribution(numOfGroups, groupArrayList, allPersonArrayList, groupName);
         } else {
-            strictDistribution(index, groupArrayList, allPersonArrayList, groupName);
+            strictDistribution(numOfGroups, groupArrayList, allPersonArrayList, groupName);
         }
     }
 
@@ -183,13 +191,18 @@ public class DistributeAlgorithm {
     //    }
 
     /**
-     * This function shuffles all the person inside the LinkedList.
+     * This function shuffles all the person inside the LinkedList, with a specific seed.
      * @param person
+     * @param seed
      * @return
      */
-    private LinkedList<Person> shuffle(LinkedList<Person> person) {
+    public LinkedList<Person> shuffle(LinkedList<Person> person, Random seed) {
         requireNonNull(person);
-        Collections.shuffle(person);
+        try {
+            Collections.shuffle(person, seed);
+        } catch (UnsupportedOperationException e) {
+            throw new UnsupportedOperationException(MESSAGE_SHUFFLE_ERROR);
+        }
         return person;
     }
 
@@ -236,7 +249,7 @@ public class DistributeAlgorithm {
      * This function runs through the allPerson list and add the specific gender required into an LinkedList
      * @param allPerson the list of allPerson in the addressbook
      */
-    private LinkedList<Person> filterGender(LinkedList<Person> allPerson,
+    public LinkedList<Person> filterGender(LinkedList<Person> allPerson,
                                             LinkedList<Person> filteredGender, String gender) {
         for (Person p : allPerson) {
             if (p.getGender().toString().equals(gender)) {
@@ -254,7 +267,7 @@ public class DistributeAlgorithm {
         int newIndex = index + 1;
         groupName = groupName + String.valueOf(newIndex);
         if (existDuplicateGroup(groupName)) {
-            throw new CommandException(DUPLICATED_GROUP_FOUND);
+            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
         return groupName;
     }
@@ -276,7 +289,7 @@ public class DistributeAlgorithm {
     }
 
     /**
-     * This function will check all n number of groupName with the existing addressbook for exisiting groups.
+     * This function will check all n number of groupName with the existing address book for existing groups.
      * @param index : number of groups the user desire.
      * @param groupName : the name of the group the user desire
      * @throws CommandException
