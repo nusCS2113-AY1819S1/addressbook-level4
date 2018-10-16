@@ -54,13 +54,15 @@ public class EventPageFormatter {
     public static void formatEvent(Event event) throws IOException, URISyntaxException {
         SEARCH_PAGE_PATH = BrowserPanel.getSearchPageUrlWithoutName().toURI();
         SEARCH_PAGE_STRING = readFile(SEARCH_PAGE_PATH);
-        //formatName(event.getName());
+
+        formatName(event.getName());
+
         writeFile(SEARCH_PAGE_PATH);
     }
 
     private static void formatName(Name name) {
         SEARCH_PAGE_STRING =
-                SEARCH_PAGE_STRING.replaceAll("(<!-- Name -->)[^]*(<!-- /Name -->)", name.toString());
+                SEARCH_PAGE_STRING.replaceAll("(<!-- Name -->).*?(<!-- /Name -->)", name.toString());
     }
 
     private static void formatPhone(Phone phone) {

@@ -56,7 +56,8 @@ public class BrowserPanel extends UiPart<Region> {
     private String formatEventPageUrl(Event event) {
         URL searchPage = getSearchPageUrlWithoutName();
         String searchPageString = searchPage.toString()
-                + "?name=" + event.getName();
+                + "?name=" + event.getName()
+                + "&address=" + event.getAddress();
 
         return searchPageString;
     }
@@ -65,15 +66,8 @@ public class BrowserPanel extends UiPart<Region> {
      * Loads a HTML file with variables passed into it
      */
     private void loadEventPage(Event event) throws MalformedURLException {
-        try {
-            EventPageFormatter.formatEvent(event);
-            URL searchPage = new URL(formatEventPageUrl(event));
-            loadPage(searchPage.toExternalForm());
-        } catch (IOException e) {
-            //TODO
-        } catch (URISyntaxException e) {
-            //TODO
-        }
+        URL searchPage = new URL(formatEventPageUrl(event));
+        loadPage(searchPage.toExternalForm());
     }
 
     public void loadPage(String url) {
