@@ -22,9 +22,9 @@ public class Group {
     // Identity fields
     private final GroupName groupName;
     private final GroupLocation groupLocation;
+    private final Set<Tag> tags = new HashSet<>();
 
     //Data Fields
-    private final Set<Tag> tags = new HashSet<>();
     private final Set<Person> persons = new HashSet<>();
 
     /**
