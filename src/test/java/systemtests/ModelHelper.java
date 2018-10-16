@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import seedu.address.model.Model;
-import seedu.address.model.candidate.Candidate;
+import seedu.recruit.model.Model;
+import seedu.recruit.model.candidate.Candidate;
 
 /**
  * Contains helper methods to set up {@code Model} for testing.
@@ -20,7 +20,7 @@ public class ModelHelper {
     public static void setFilteredList(Model model, List<Candidate> toDisplay) {
         Optional<Predicate<Candidate>> predicate =
                 toDisplay.stream().map(ModelHelper::getPredicateMatching).reduce(Predicate::or);
-        model.updateFilteredPersonList(predicate.orElse(PREDICATE_MATCHING_NO_PERSONS));
+        model.updateFilteredCandidateList(predicate.orElse(PREDICATE_MATCHING_NO_PERSONS));
     }
 
     /**

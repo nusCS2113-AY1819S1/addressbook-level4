@@ -4,12 +4,12 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.address.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
-import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.recruit.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL;
+import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_UPDATED;
+import static seedu.recruit.ui.StatusBarFooter.TOTAL_CANDIDATES_STATUS;
+import static seedu.recruit.ui.UiPart.FXML_FILE_FOLDER;
+import static seedu.recruit.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,25 +25,25 @@ import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.CandidateDetailsPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.MainApp;
-import seedu.address.TestApp;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
-import seedu.address.model.CandidateBook;
-import seedu.address.model.Model;
-import seedu.address.testutil.TypicalPersons;
-import seedu.address.ui.BrowserPanel;
-import seedu.address.ui.CommandBox;
+import seedu.recruit.MainApp;
+import seedu.recruit.TestApp;
+import seedu.recruit.commons.core.EventsCenter;
+import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.logic.commands.ClearCandidateBookCommand;
+import seedu.recruit.logic.commands.FindCommand;
+import seedu.recruit.logic.commands.ListCommand;
+import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.model.CandidateBook;
+import seedu.recruit.model.Model;
+import seedu.recruit.testutil.TypicalPersons;
+import seedu.recruit.ui.BrowserPanel;
+import seedu.recruit.ui.CommandBox;
 
 /**
  * A system test class for CandidateBook, which provides access to handles of GUI components and helper methods
@@ -104,7 +104,7 @@ public abstract class CandidateBookSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
+    public CandidateDetailsPanelHandle getPersonListPanel() {
         return mainWindowHandle.getPersonListPanel();
     }
 
@@ -140,11 +140,12 @@ public abstract class CandidateBookSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all persons in the recruit book.
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getAddressBook().getCandidatelist().size(), getModel().getFilteredPersonList().size());
+        assertEquals(getModel().getCandidateBook().getCandidateList().size(),
+                getModel().getFilteredCandidateList().size());
     }
 
     /**
@@ -152,7 +153,8 @@ public abstract class CandidateBookSystemTest {
      */
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
-        assertTrue(getModel().getFilteredPersonList().size() < getModel().getAddressBook().getCandidatelist().size());
+        assertTrue(getModel().getFilteredCandidateList().size()
+                < getModel().getCandidateBook().getCandidateList().size());
     }
 
     /**
@@ -164,11 +166,11 @@ public abstract class CandidateBookSystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all persons in the recruit book.
      */
     protected void deleteAllPersons() {
-        executeCommand(ClearCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getAddressBook().getCandidatelist().size());
+        executeCommand(ClearCandidateBookCommand.COMMAND_WORD);
+        assertEquals(0, getModel().getCandidateBook().getCandidateList().size());
     }
 
     /**
@@ -180,13 +182,13 @@ public abstract class CandidateBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new CandidateBook(expectedModel.getAddressBook()), testApp.readStorageAddressBook());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+        assertEquals(new CandidateBook(expectedModel.getCandidateBook()), testApp.readStorageAddressBook());
+        assertListMatching(getPersonListPanel(), expectedModel.getFilteredCandidateList());
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
-     * their current state.
+     * Calls {@code BrowserPanelHandle}, {@code CandidateDetailsPanelHandle}
+     * and {@code StatusBarFooterHandle} to remember their current state.
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();
@@ -211,7 +213,7 @@ public abstract class CandidateBookSystemTest {
      * Asserts that the browser's url is changed to display the details of the candidate in the candidate list panel at
      * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+     * @see CandidateDetailsPanelHandle#isSelectedPersonCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
@@ -230,7 +232,7 @@ public abstract class CandidateBookSystemTest {
     /**
      * Asserts that the browser's url and the selected card in the candidate list panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+     * @see CandidateDetailsPanelHandle#isSelectedPersonCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
@@ -269,7 +271,7 @@ public abstract class CandidateBookSystemTest {
     protected void assertStatusBarUnchangedExceptSyncStatus() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
-        String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
+        String expectedSyncStatus = String.format(SYNC_CANDIDATE_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
         assertFalse(handle.isSaveLocationChanged());
         assertFalse(handle.isTotalPersonsStatusChanged());
@@ -278,15 +280,15 @@ public abstract class CandidateBookSystemTest {
     /**
      * Asserts that the sync status in the status bar was changed to the timing of
      * {@code ClockRule#getInjectedClock()}, and total persons was changed to match the total
-     * number of persons in the address book, while the save location remains the same.
+     * number of persons in the recruit book, while the save location remains the same.
      */
     protected void assertStatusBarChangedExceptSaveLocation() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
-        String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
+        String expectedSyncStatus = String.format(SYNC_CANDIDATE_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
-        final int totalPersons = testApp.getModel().getAddressBook().getCandidatelist().size();
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, totalPersons), handle.getTotalPersonsStatus());
+        final int totalPersons = testApp.getModel().getCandidateBook().getCandidateList().size();
+        assertEquals(String.format(TOTAL_CANDIDATES_STATUS, totalPersons), handle.getTotalPersonsStatus());
         assertFalse(handle.isSaveLocationChanged());
     }
 
@@ -296,12 +298,12 @@ public abstract class CandidateBookSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
+        assertListMatching(getPersonListPanel(), getModel().getFilteredCandidateList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
-        assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getAddressBook().getCandidatelist().size()),
+        assertEquals(SYNC_CANDIDATE_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
+        assertEquals(String.format(TOTAL_CANDIDATES_STATUS, getModel().getCandidateBook().getCandidateList().size()),
                 getStatusBarFooter().getTotalPersonsStatus());
     }
 

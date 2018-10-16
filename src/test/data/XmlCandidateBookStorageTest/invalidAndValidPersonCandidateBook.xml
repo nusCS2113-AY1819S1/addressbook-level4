@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addressbook>
+<candidatebook>
     <!-- Valid Candidate -->
     <candidates>
         <name>Hans Muster</name>
@@ -20,4 +20,4 @@
         <education>O level</education>
         <salary>1000</salary>
     </candidates>
-</addressbook>
+</candidatebook>

@@ -28,7 +28,7 @@ if (JavaVersion.current() == JavaVersion.VERSION_1_10
 }
 
 // Specifies the entry point of the application
-mainClassName = 'seedu.address.MainApp'
+mainClassName = 'seedu.recruit.MainApp'
 
 sourceCompatibility = JavaVersion.VERSION_1_9
 targetCompatibility = JavaVersion.VERSION_1_9
@@ -79,6 +79,11 @@ dependencies {
     testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-9+181'
     testRuntimeOnly group:'org.junit.vintage', name:'junit-vintage-engine', version: jUnitVersion
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+
+    compile 'com.google.api-client:google-api-client:1.23.0'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.23.0'
+    compile 'com.google.apis:google-api-services-gmail:v1-rev83-1.23.0'
+    compile 'javax.mail:mail:1.4.7'
 }
 
 shadowJar {
@@ -157,16 +162,16 @@ test {
         }
 
         if (runNonGuiTests) {
-            test.include 'seedu/address/**'
+            test.include 'seedu/recruit/**'
         }
 
         if (runGuiTests) {
             test.include 'systemtests/**'
-            test.include 'seedu/address/ui/**'
+            test.include 'seedu/recruit/ui/**'
         }
 
         if (!runGuiTests) {
-            test.exclude 'seedu/address/ui/**'
+            test.exclude 'seedu/recruit/ui/**'
         }
     }
 }
