@@ -21,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TimeSlots;
 
 /**
  * Parses input arguments and creates a new AddCommand object
@@ -50,7 +51,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Map<String, EnrolledClass> enrolledClassList = ParserUtil.parseEnrolledClasses(
                                                         argMultimap.getAllValues(PREFIX_ENROLLED_CLASS));
 
-        Person person = new Person(name, phone, email, address, tagList, enrolledClassList);
+        Person person = new Person(name, phone, email, address, tagList, enrolledClassList, TimeSlots.sampleTimeSlots());
 
         return new AddCommand(person);
     }
