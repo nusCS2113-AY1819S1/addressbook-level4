@@ -28,7 +28,7 @@ public class Item {
     private final Quantity minQuantity;
 
     // Data fields
-    private final List<Integer> status = new ArrayList<>();
+    private final ArrayList<Integer> status = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -50,9 +50,9 @@ public class Item {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status.add(quantity.toInteger());
-        this.status.add(0);
-        this.status.add(0);
+        this.status.add(status.get(0));
+        this.status.add(status.get(1));
+        this.status.add(status.get(2));
         this.tags.addAll(tags);
     }
 

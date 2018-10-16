@@ -82,7 +82,11 @@ public class ParserUtil {
         }
         return new Quantity(trimmedMinQuantity);
     }
-
+    public static String parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        return trimmedStatus;
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
