@@ -20,6 +20,6 @@ public class ViewLastTransaction extends Command {
         if (latestTransaction == null) {
             return new CommandResult(NO_LATEST_TRANSACTION);
         }
-        return new CommandResult(latestTransaction.getTransactionRecord());
+        return new CommandResult(latestTransaction.getTransactionRecordAsString());
     }
 }

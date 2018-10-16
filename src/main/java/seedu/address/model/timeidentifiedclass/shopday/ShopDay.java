@@ -94,7 +94,7 @@ public class ShopDay extends TimeIdentifiedClass {
      */
     public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
             ClosedShopDayException, DuplicateTransactionException {
-        String transactionTime = transaction.getTime();
+        String transactionTime = transaction.getTransactionTime();
         if (!this.isActiveDay) {
             throw new ClosedShopDayException();
         } else if (shopDayRecord.containsKey(transactionTime)) {

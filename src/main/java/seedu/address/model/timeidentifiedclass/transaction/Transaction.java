@@ -8,6 +8,7 @@ import java.util.Set;
 import java.util.TreeMap;
 
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.transaction.exceptions.ClosedTransactionException;
 
 /**
@@ -28,7 +29,22 @@ public class Transaction extends TimeIdentifiedClass {
         this.openTransaction();
     }
 
-    public String getTime() {
+    /**
+     * Constructor to create transaction with given parameters. Used for reading from file.
+     * @param transactionTime
+     * @param transactionRecord
+     * @throws InvalidTimeFormatException
+     */
+    public Transaction(String transactionTime, TreeMap<String,Integer> transactionRecord)
+            throws InvalidTimeFormatException {
+        if (!isValidTransactionTime(transactionTime)) {
+            throw new InvalidTimeFormatException();
+        }
+        this.transactionTime = transactionTime;
+        this.transactionRecord = transactionRecord;
+    }
+
+    public String getTransactionTime() {
         return transactionTime;
     }
 
@@ -60,12 +76,16 @@ public class Transaction extends TimeIdentifiedClass {
         this.isActiveTransaction = true;
     }
 
-    public String getTransactionRecord() {
+    public TreeMap<String, Integer> getTransactionRecord() {
+        return transactionRecord;
+    }
+
+    public String getTransactionRecordAsString() {
         StringBuilder ret = new StringBuilder();
         Set set = transactionRecord.entrySet();
         Iterator it = set.iterator();
 
-        ret.append("================== Transaction Record " + this.getTime() + "==================\n");
+        ret.append("================== Transaction Record " + this.getTransactionTime() + "==================\n");
         ret.append("ITEM\tQTY\n");
         while (it.hasNext()) {
             Map.Entry entry = (Map.Entry) it.next();
@@ -73,5 +93,29 @@ public class Transaction extends TimeIdentifiedClass {
         }
         ret.trimToSize();
         return ret.toString();
+    }
+
+    /**
+     * The following checks if a given string represents a valid transaction time.
+     * @param transactionTime
+     * @return true only if valid.
+     */
+
+    public static boolean isValidTransactionTime(String transactionTime) {
+        String[] times = transactionTime.split("[/ :]");
+
+        // checks on the different components of the transaction time.
+
+        if (!isValidYear(times[0])
+                || !isValidMonth(times[1])
+                || !isValidDay(times[2])
+                || !isValidHour(times[3])
+                || !isValidMinute(times[4])
+                || !isValidSecond(times[5]))
+        {
+            return false;
+        }
+
+        return true;
     }
 }

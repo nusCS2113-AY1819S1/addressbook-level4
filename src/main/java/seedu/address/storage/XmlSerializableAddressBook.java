@@ -25,7 +25,7 @@ public class XmlSerializableAddressBook {
     private List<XmlAdaptedDistributor> distributors;
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedProduct> persons;
 
     /**
      * Creates an empty XmlSerializableAddressBook.
@@ -43,14 +43,14 @@ public class XmlSerializableAddressBook {
         this();
         distributors
                 .addAll(src.getDistributorList().stream().map(XmlAdaptedDistributor::new).collect(Collectors.toList()));
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        persons.addAll(src.getPersonList().stream().map(XmlAdaptedProduct::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this addressbook into the model's {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * {@code XmlAdaptedProduct}.
      */
     public AddressBook toModelType() throws IllegalValueException {
         AddressBook addressBook = new AddressBook();
@@ -63,7 +63,7 @@ public class XmlSerializableAddressBook {
             addressBook.addDistributor(distributor);
         }
 
-        for (XmlAdaptedPerson p : persons) {
+        for (XmlAdaptedProduct p : persons) {
             Product product = p.toModelType();
             if (addressBook.hasPerson(product)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);

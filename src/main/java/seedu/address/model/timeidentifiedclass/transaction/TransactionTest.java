@@ -12,7 +12,7 @@ public class TransactionTest {
      */
     public static void main(String[] args) {
         Transaction transaction = new Transaction();
-        System.out.println(transaction.getTime());
+        System.out.println(transaction.getTransactionTime());
         try {
             for (char i = 'a'; i < 'a' + 5; i++) {
                 transaction.addProduct("" + i);
@@ -23,7 +23,7 @@ public class TransactionTest {
         } catch (ClosedTransactionException c) {
             System.out.println("Successfully caught ClosedTransactionException");
         }
-        System.out.println(transaction.getTransactionRecord());
+        System.out.println(transaction.getTransactionRecordAsString());
         System.out.println("Expected output consists of a,b,c,d,e, all of quantity 2.");
     }
 }

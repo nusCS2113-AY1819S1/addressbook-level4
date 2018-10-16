@@ -1,26 +1,18 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
-import javax.xml.bind.annotation.XmlElement;
-
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Product;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
 
-/**
- * JAXB-friendly version of the Product.
- */
-public class XmlAdaptedPerson {
+import javax.xml.bind.annotation.XmlElement;
+import java.util.*;
+import java.util.stream.Collectors;
 
+/**
+ * JAXB friendly version of SalesHistory.
+ */
+
+public class XmlAdaptedSalesHistory {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Product's %s field is missing!";
 
     @XmlElement(required = true)
@@ -36,15 +28,15 @@ public class XmlAdaptedPerson {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedProduct.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedSalesHistory() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given product details.
+     * Constructs an {@code XmlAdaptedProduct} with the given product details.
      */
-    public XmlAdaptedPerson(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedSalesHistory(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -57,9 +49,9 @@ public class XmlAdaptedPerson {
     /**
      * Converts a given Product into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedProduct
      */
-    public XmlAdaptedPerson(Product source) {
+    public XmlAdaptedSalesHistory(Product source) {
         name = source.getName().fullName;
         phone = source.getSerialNumber().value;
         email = source.getDistributor().value;
@@ -122,11 +114,11 @@ public class XmlAdaptedPerson {
             return true;
         }
 
-        if (!(other instanceof XmlAdaptedPerson)) {
+        if (!(other instanceof XmlAdaptedProduct)) {
             return false;
         }
 
-        XmlAdaptedPerson otherPerson = (XmlAdaptedPerson) other;
+        XmlAdaptedSalesHistory otherPerson = (XmlAdaptedSalesHistory) other;
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
                 && Objects.equals(email, otherPerson.email)

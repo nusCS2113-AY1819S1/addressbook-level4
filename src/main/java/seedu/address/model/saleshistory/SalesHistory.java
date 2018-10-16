@@ -9,7 +9,6 @@ import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-import seedu.address.model.transaction.exceptions.ClosedTransactionException;
 
 /**
  * This class stores all the shopDay objects, with their contained transactions. Each day must have a unique date.

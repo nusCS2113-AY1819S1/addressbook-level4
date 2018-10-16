@@ -49,6 +49,6 @@ public class AddTransactionCommand extends Command {
             return new CommandResult(e.getLocalizedMessage() + ". Upon adding this transaction");
         }
         model.commitAddressBook();
-        return new CommandResult(MESSAGE_SUCCESS + toAdd.getTime());
+        return new CommandResult(MESSAGE_SUCCESS + toAdd.getTransactionTime());
     }
 }

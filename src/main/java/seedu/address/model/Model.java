@@ -128,7 +128,11 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Adds a transaction to the sales history
+     * Adds a transaction to the active shop day.
+     * @param transaction
+     * @throws InvalidTimeFormatException
+     * @throws DuplicateTransactionException
+     * @throws ClosedShopDayException
      */
     void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
             DuplicateTransactionException, ClosedShopDayException;
