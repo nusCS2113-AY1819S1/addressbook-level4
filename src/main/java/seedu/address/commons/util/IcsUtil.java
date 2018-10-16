@@ -1,15 +1,20 @@
 package seedu.address.commons.util;
 
-import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.ImportCommand.MESSAGE_IO_ERROR;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Calendar;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
+import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
  * Helps with reading from and writing to ICS files.
@@ -26,10 +31,6 @@ public class IcsUtil {
 
         requireNonNull(file);
 
-        if (!FileUtil.isFileExists(file)) {
-            throw new CommandException(MESSAGE_IO_ERROR);
-        }
-
         String importstring = "";
         try {
             importstring = FileUtil.readFromFile(file);
@@ -37,99 +38,127 @@ public class IcsUtil {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
 
-        stringToTimeTableParser(importstring);
+        //parse the string into timetable object
+        TimeTable newTimeTable = stringToTimeTableParser(importstring);
 
-        return new TimeTable();
+        return newTimeTable;
     }
 
     /**
-     * Parses raw string (from ics file) into a timetable object
+     * Parses the string from an ics file into a timetable object
      */
     private static TimeTable stringToTimeTableParser(String string) throws CommandException {
 
-        TimeTable newTimeTable = new TimeTable();
+        TimeTable timeTable = new TimeTable();
 
-        String[] lineArray = string.split("\\r\\n|[\\n\\x0B\\x0C\\r\\u0085\\u2028\\u2029]"); //REGEX
+        String[] Chunk = string.split("BEGIN:VEVENT");
+
+
+        for (String chunk : Chunk) { //each chunk contains the data of 1 timeslot
+            Optional<TimeSlot> OptionalTimeSlot = convertChunkToTimeSlot(timeTable, chunk);
+            if (OptionalTimeSlot.isPresent()) {
+                try {
+                    timeTable.addTimeSlot(OptionalTimeSlot.get());
+                } catch (TimeSlotOverlapException e) {
+
+                }
+            }
+        };
+        return timeTable;
+    }
+
+    /**
+     * Parses the chunk (a string) into the equivalent TimeSlot object
+     */
+    private static Optional<TimeSlot> convertChunkToTimeSlot(TimeTable newTimeTable, String chunk) throws CommandException {
+        String[] linesInChunk = chunk.split("\\r\\n|[\\n\\x0B\\x0C\\r\\u0085\\u2028\\u2029]");
 
         String startdate = "";
         String starttime = "";
         String enddate = "";
         String endtime = "";
         String name = "";
+        boolean isTimeSlot = false;
 
-        // this chunky thing goes through the strings from start to end, adding timeslots that it detects.
-        for (String line : lineArray) { //must be in sequence, or else will bug
-            //TODO: make robust. current implementation can fail explosively.
-
+        for (String line : linesInChunk) {
             String[] splitLine = line.split(":");
-
-            if (splitLine[0].equals("DTSTART")) {
-                //start time!
-                try {
-                    startdate = splitLine[1].substring(0, 8);
-                    starttime = splitLine[1].substring(9, 15);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new CommandException(MESSAGE_IO_ERROR);
-                }
-            } else if (splitLine[0].equals("DTEND")) {
-                //end time!
-                try {
-                    enddate = splitLine[1].substring(0, 8);
-                    endtime = splitLine[1].substring(9, 15);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new CommandException(MESSAGE_IO_ERROR);
-                }
-            } else if (splitLine[0].equals("SUMMARY")) {
-                //mod name
-                name = splitLine[1];
-            } else if ((splitLine[0].equals("END")) && (splitLine[1].equals("VEVENT"))) {
-                //single event reading over
-                int icsStartTime = 0;
-                try {
-                    icsStartTime = icsTimeToHour(parseInt(starttime));
-                } catch (NumberFormatException e) {
-                    throw new CommandException(MESSAGE_IO_ERROR);
-                }
-                int icsDay = 0;
-
-                try {
-                    icsDay = icsDateToDay(startdate);
-                } catch (CommandException e) {
-                    throw new CommandException(MESSAGE_IO_ERROR);
-                }
+            if (splitLine.length != 2) {
+                throw new CommandException(MESSAGE_IO_ERROR); //file format is wrong.
             }
 
-            //newTimeTable.fillTimeSlot(icsDay-1,icsStartTime);
-        };
-        //TODO: output an actual timetable.
-        return new TimeTable();
+            String dataName = splitLine[0];
+            String dataString = splitLine[1];
+
+            if (dataName.equals("DTSTART")) {
+                //get start
+                try {
+                    startdate = dataString.substring(0, 8);
+                    starttime = dataString.substring(9, 15);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new CommandException(MESSAGE_IO_ERROR);
+                }
+            } else if (dataName.equals("DTEND")) {
+                //get end
+                try {
+                    enddate = dataString.substring(0, 8);
+                    endtime = dataString.substring(9, 15);
+                } catch (IndexOutOfBoundsException e) {
+                    throw new CommandException(MESSAGE_IO_ERROR);
+                }
+            } else if (dataName.equals("SUMMARY")) {
+                //get mod name
+                name = dataString;
+            } else if (dataName.equals("RRULE")){
+                //is it a weekly time slot?
+                isTimeSlot = dataString.contains("WEEKLY");
+            }
+        }
+
+        //check data is all present
+        if ((startdate.isEmpty()) || (enddate.isEmpty()) || (starttime.isEmpty()) || (endtime.isEmpty()) || (name.isEmpty()) || (!isTimeSlot))
+        {
+            return Optional.empty();
+        }
+
+        //process the data we got from the chunk
+        LocalTime timeSlotStartTime;
+        LocalTime timeSlotEndTime;
+        DayOfWeek timeSlotDay;
+
+        try {
+            timeSlotStartTime = icsStringToTime(starttime);
+            timeSlotEndTime = icsStringToTime(endtime);
+            timeSlotDay = icsStringToDay(startdate);
+        } catch (NumberFormatException e) {
+            throw new CommandException(MESSAGE_IO_ERROR);
+        }
+
+        TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
+        return Optional.of(timeSlot);
     }
 
     /**
      * Converts the date in the ics file into day (1-7).
      */
-    private static int icsDateToDay(String dateString) throws CommandException {
-        Calendar cal = Calendar.getInstance();
-        try {
-            cal.set(parseInt(dateString.substring(0, 3)), //year
-                    parseInt(dateString.substring(4, 5)), //month
-                    parseInt(dateString.substring(6, 7))); //day
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new CommandException(MESSAGE_IO_ERROR);
-        }
-        int day = cal.get(Calendar.DAY_OF_WEEK);
+    private static DayOfWeek icsStringToDay(String dateString) throws CommandException {
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate date = LocalDate.parse(dateString, fmt);
+        DayOfWeek day = date.getDayOfWeek();
 
         return day;
     }
 
     /**
-     * Converts the weird time in the ics file into human hours (0-23).
+     * Converts the ics-formatted string into a LocalTime object.
      */
-    private static int icsTimeToHour(int icsTime) throws CommandException {
-        int hour = icsTime / 10000 + 8;
-        if ((hour > 24) || (hour < 0)) {
-            throw new CommandException(MESSAGE_IO_ERROR);
-        }
-        return hour;
+    private static LocalTime icsStringToTime(String icsTime) throws CommandException {
+        int timeInt = Integer.parseInt(icsTime);
+        timeInt += 80000; //need to add 8 hours to the ics-formatted version.
+        String formattedTime = String.format("%06d", timeInt);
+
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HHmmss");
+        LocalTime time = LocalTime.parse(formattedTime, fmt);
+
+        return time;
     }
 }
