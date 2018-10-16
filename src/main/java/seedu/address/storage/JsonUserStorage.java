@@ -17,13 +17,11 @@ import com.google.gson.JsonParser;
 public class JsonUserStorage {
 
     private Path folderPath;
-    private Path filePath;
-    private String folderPathString;
+    private String filePathString;
 
     public JsonUserStorage(Path folderPath, Path filePath) throws IOException {
-        this.filePath = filePath;
         this.folderPath = folderPath;
-        folderPathString = "./" + folderPath.toString();
+        filePathString = "./" + filePath.toString();
 
         if (Files.notExists(filePath)) {
             createUserFile();
@@ -35,7 +33,7 @@ public class JsonUserStorage {
      */
     public JsonObject getUserAccounts() throws IOException {
         JsonParser parser = new JsonParser();
-        JsonElement jsonElement = parser.parse(new FileReader(folderPathString));
+        JsonElement jsonElement = parser.parse(new FileReader(filePathString));
 
         return jsonElement.getAsJsonObject();
     }
@@ -45,14 +43,13 @@ public class JsonUserStorage {
      */
     private void createUserFile() throws IOException {
         Files.createDirectory(folderPath);
-        Files.createFile(filePath);
 
         Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("admin", "root");
 
         String json = gson.toJson(jsonObject);
-        FileWriter file = new FileWriter(folderPathString);
+        FileWriter file = new FileWriter(filePathString);
         file.write(json);
         file.flush();
     }
