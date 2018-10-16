@@ -3,12 +3,12 @@
   <component name="CheckStyle-IDEA">
     <option name="configuration">
       <map>
-        <entry key="active-configuration" value="LOCAL_FILE:$PROJECT_DIR$/config/checkstyle/checkstyle.xml:bookinventory" />
+        <entry key="active-configuration" value="LOCAL_FILE:C:/Users/Kenneth/Desktop/CS2113T/main/config/checkstyle/checkstyle.xml:bookinventory" />
         <entry key="checkstyle-version" value="8.1" />
         <entry key="copy-libs" value="true" />
         <entry key="location-0" value="BUNDLED:(bundled):Sun Checks" />
         <entry key="location-1" value="BUNDLED:(bundled):Google Checks" />
-        <entry key="location-2" value="LOCAL_FILE:$PROJECT_DIR$/config/checkstyle/checkstyle.xml:bookinventory" />
+        <entry key="location-2" value="LOCAL_FILE:C:/Users/Kenneth/Desktop/CS2113T/main/config/checkstyle/checkstyle.xml:bookinventory" />
         <entry key="scan-before-checkin" value="false" />
         <entry key="scanscope" value="JavaOnlyWithTests" />
         <entry key="suppress-errors" value="false" />
@@ -44,6 +44,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="main_main" options="--add-modules=javafx.graphics,javafx.base,javafx.fxml,javafx.controls" />
+      <module name="main_test" options="--add-modules=javafx.graphics" />
     </option>
   </component>
   <component name="ProjectModuleManager">
