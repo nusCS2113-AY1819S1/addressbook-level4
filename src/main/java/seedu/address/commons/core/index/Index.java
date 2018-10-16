@@ -31,6 +31,10 @@ public class Index {
         return zeroBasedIndex + 1;
     }
 
+    public int getTwoBased() {
+        return zeroBasedIndex + 2;
+    }
+
     /**
      * Creates a new {@code Index} using a zero-based index.
      */

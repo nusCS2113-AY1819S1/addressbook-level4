@@ -328,7 +328,7 @@ _{explain how the user can enable/disable data encryption}_
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
-* *Consultation manager* : `conslt`
+
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
@@ -339,9 +339,8 @@ e.g. `find James Jake`
 * *History* : `history`
 * *List* : `list`
 * *Notes manager* : `notes`
-* *Password manager* : `pVault`
+
 * *Redo* : `redo`
 * *Select* : `select INDEX` +
 e.g.`select 2`
-* *Timeslot manager* : `tSlot`
 * *Undo* : `undo`
