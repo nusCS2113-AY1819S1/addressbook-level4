@@ -64,6 +64,11 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
+    public Path getDistributorInfoFilePath() {
+        return addressBookStorage.getDistributorInfoFilePath();
+    }
+
+    @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(addressBookStorage.getProductInfoBookFilePath());
     }
