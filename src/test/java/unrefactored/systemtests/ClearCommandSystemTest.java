@@ -1,6 +1,6 @@
 package unrefactored.systemtests;
 
-import static unrefactored.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 //import static unrefactored.testutil.TypicalTasks.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
@@ -10,7 +10,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import unrefactored.commons.core.index.Index;
+import seedu.address.commons.core.index.Index;
 
 public class ClearCommandSystemTest extends AddressBookSystemTest {
 

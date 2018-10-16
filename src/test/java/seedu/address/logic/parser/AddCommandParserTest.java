@@ -17,7 +17,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PRIORITY_LEVEL_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static unrefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 //import static unrefactored.testutil.TypicalTasks.CS2113_TASK_1;
 import static unrefactored.testutil.TypicalTasks.CS2113_TASK_2;
 

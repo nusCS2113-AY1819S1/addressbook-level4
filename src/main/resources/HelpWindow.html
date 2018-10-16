@@ -1,0 +1,442 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]--><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="Asciidoctor 1.5.6.1"><title>AddressBook Level 4 - User Guide</title><link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css"></head><body class="article"><div id="header"><h1>AddressBook Level 4 - User Guide</h1></div><div id="content"><div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+    <p>By: <code>Team SE-EDU</code>      Since: <code>Jun 2016</code>      Licence: <code>MIT</code></p>
+</div>
+</div>
+    <div id="toc" class="toc">
+        <div id="toctitle"></div>
+        <ul class="sectlevel1">
+            <li><a href="#introduction">1. Introduction</a></li>
+            <li><a href="#quick-start">2. Quick Start</a></li>
+            <li><a href="#Features">3. Features</a>
+                <ul class="sectlevel2">
+                    <li><a href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></li>
+                    <li><a href="#adding-a-task-code-add-code">3.2. Adding a task: <code>add</code></a></li>
+                    <li><a href="#complete-a-task-code-complete-code">3.3. Complete a task: <code>complete</code></a></li>
+                    <li><a href="#sort-the-taskbook-code-sort-code">3.4. Sort the taskbook: <code>sort</code></a></li>
+                    <li><a href="#adding-a-deadline-code-deadline-code">3.5. Adding a deadline: <code>deadline</code></a></li>
+                    <li><a href="#deferring-a-deadline-code-deadline-code">3.6. Deferring a deadline: <code>deadline</code></a></li>
+                    <li><a href="#removing-a-deadline-code-remove_deadline-code">3.7. Removing a deadline : <code>remove_deadline</code></a></li>
+                    <li><a href="#viewing-today-s-date-code-view-code">3.8. Viewing today&#8217;s date : <code>view</code></a></li>
+                    <li><a href="#selecting-a-date-code-select-code">3.9. Selecting a date: <code>select</code></a></li>
+                    <li><a href="#listing-entered-commands-code-history-code">3.10. Listing entered commands : <code>history</code></a></li>
+                    <li><a href="#undoing-previous-command-code-undo-code">3.11. Undoing previous command : <code>undo</code></a></li>
+                    <li><a href="#redoing-the-previously-undone-command-code-redo-code">3.12. Redoing the previously undone command : <code>redo</code></a></li>
+                    <li><a href="#clearing-all-entries-code-clear-code">3.13. Clearing all entries : <code>clear</code></a></li>
+                    <li><a href="#exiting-the-program-code-exit-code">3.14. Exiting the program : <code>exit</code></a></li>
+                    <li><a href="#saving-the-data">3.15. Saving the data</a></li>
+                    <li><a href="#encrypting-data-files-code-coming-in-v2-0-code">3.16. Encrypting data files <code>[coming in v2.0]</code></a></li>
+                </ul>
+            </li>
+            <li><a href="#faq">4. FAQ</a></li>
+            <li><a href="#command-summary">5. Command Summary</a></li>
+        </ul>
+    </div>
+</div>
+    <div class="sect1">
+        <h2 id="introduction"><a class="link" href="#introduction">1. Introduction</a></h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p>Task Book is for students who prefer to use a desktop app for managing their daily tasks and ultimately, lead a more productive life. More importantly, AB is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <a href="#quick-start">Section 2, &#8220;Quick Start&#8221;</a> to get started. Enjoy!</p>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="quick-start"><a class="link" href="#quick-start">2. Quick Start</a></h2>
+        <div class="sectionbody">
+            <div class="olist arabic">
+                <ol class="arabic">
+                    <li>
+                        <p>Ensure you have Java version <code>9</code> or later installed in your Computer.</p>
+                    </li>
+                    <li>
+                        <p>Download the latest <code>addressbook.jar</code> <a href="https://github.com/se-edu/addressbook-level4/releases">here</a>.</p>
+                    </li>
+                    <li>
+                        <p>Copy the file to the folder you want to use as the home folder for your Address Book.</p>
+                    </li>
+                    <li>
+                        <p>Double-click the file to start the app. The GUI should appear in a few seconds.</p>
+                        <div class="imageblock">
+                            <div class="content">
+                                <img src="images/Ui.png" alt="Ui" width="790">
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Type the command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+                            e.g. typing <strong><code>help</code></strong> and pressing <kbd>Enter</kbd> will open the help window.</p>
+                    </li>
+                    <li>
+                        <p>Some example commands you can try:</p>
+                        <div class="ulist">
+                            <ul>
+                                <li>
+                                    <p><strong><code>list</code></strong> : lists all tasks for that day</p>
+                                </li>
+                                <li>
+                                    <p><strong><code>add</code></strong><code>t/Complete 2113 Tutorial d/Wed</code> : adds a new task to the Task Book.</p>
+                                </li>
+                                <li>
+                                    <p><strong><code>exit</code></strong> : exits the app</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <p>Refer to <a href="#Features">Section 3, &#8220;Features&#8221;</a> for details of each command.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="Features"><a class="link" href="#Features">3. Features</a></h2>
+        <div class="sectionbody">
+            <div class="exampleblock">
+                <div class="content">
+                    <div class="paragraph">
+                        <p><strong>Command Format</strong></p>
+                    </div>
+                    <div class="ulist">
+                        <ul>
+                            <li>
+                                <p>Words in <code>UPPER_CASE</code> are the parameters to be supplied by the user e.g. in <code>add n/NAME</code>, <code>NAME</code> is a parameter which can be used as <code>add n/John Doe</code>.</p>
+                            </li>
+                            <li>
+                                <p>Items in square brackets are optional e.g <code>n/NAME [t/TAG]</code> can be used as <code>n/John Doe t/friend</code> or as <code>n/John Doe</code>.</p>
+                            </li>
+                            <li>
+                                <p>Items with <code>…</code>​ after them can be used multiple times including zero times e.g. <code>[t/TAG]&#8230;&#8203;</code> can be used as <code>&#160;</code> (i.e. 0 times), <code>t/friend</code>, <code>t/friend t/family</code> etc.</p>
+                            </li>
+                            <li>
+                                <p>Parameters can be in any order e.g. if the command specifies <code>n/NAME p/PHONE_NUMBER</code>, <code>p/PHONE_NUMBER n/NAME</code> is also acceptable.</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="viewing-help-code-help-code"><a class="link" href="#viewing-help-code-help-code">3.1. Viewing help : <code>help</code></a></h3>
+                <div class="paragraph">
+                    <p>Format: <code>help</code></p>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="adding-a-task-code-add-code"><a class="link" href="#adding-a-task-code-add-code">3.2. Adding a task: <code>add</code></a></h3>
+                <div class="paragraph">
+                    <p>Adds a task to the task book<br>
+                        Format: <code>add t/ACTION d/DAY [w/WEEK] [m/MONTH]&#8230;&#8203;</code></p>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>add t/Complete 2113 Tutorial d/Wed w/2</code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="complete-a-task-code-complete-code"><a class="link" href="#complete-a-task-code-complete-code">3.3. Complete a task: <code>complete</code></a></h3>
+                <div class="paragraph">
+                    <p>Complete a task in the task book<br>
+                        Format: <code>complete t/ACTION d/DAY [w/WEEK] [m/MONTH]&#8230;&#8203;</code></p>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>complete t/Complete 2113 Tutorial d/Wed w/2</code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="sort-the-taskbook-code-sort-code"><a class="link" href="#sort-the-taskbook-code-sort-code">3.4. Sort the taskbook: <code>sort</code></a></h3>
+                <div class="paragraph">
+                    <p>Sort the tasks in the task book<br>
+                        Format: <code>sort t/ACTION d/DAY [w/WEEK] [m/MONTH]&#8230;&#8203;</code></p>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>sort t/Complete 2113 Tutorial d/Wed w/2</code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="adding-a-deadline-code-deadline-code"><a class="link" href="#adding-a-deadline-code-deadline-code">3.5. Adding a deadline: <code>deadline</code></a></h3>
+                <div class="paragraph">
+                    <p>Adds an important task with deadline to the task book<br>
+                        Format: <code>deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]</code></p>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>deadline t/Complete 2113 Milestone w/1 m/8</code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="deferring-a-deadline-code-deadline-code"><a class="link" href="#deferring-a-deadline-code-deadline-code">3.6. Deferring a deadline: <code>deadline</code></a></h3>
+                <div class="paragraph">
+                    <p>Defers a deadline for a task<br>
+                        Format: <code>defer_deadline t/ACTION w/WEEKS_OF_DEFERMENT</code></p>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>defer_deadline t/Complete 2113 Milestone w/1</code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="removing-a-deadline-code-remove_deadline-code"><a class="link" href="#removing-a-deadline-code-remove_deadline-code">3.7. Removing a deadline : <code>remove_deadline</code></a></h3>
+                <div class="paragraph">
+                    <p>Removes a deadline from an existing task
+                        Format: <code>remove_deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]</code></p>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>remove_deadline t/Complete 2113 Milestone w/1 m/8</code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="viewing-today-s-date-code-view-code"><a class="link" href="#viewing-today-s-date-code-view-code">3.8. Viewing today&#8217;s date : <code>view</code></a></h3>
+                <div class="paragraph">
+                    <p>Shows the date today.<br>
+                        Format: <code>view</code></p>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="selecting-a-date-code-select-code"><a class="link" href="#selecting-a-date-code-select-code">3.9. Selecting a date: <code>select</code></a></h3>
+                <div class="paragraph">
+                    <p>Chooses a particular date.<br>
+                        Format: <code>select d/DAY [w/WEEK] [m/MONTH]</code></p>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>select d/Mon</code></p>
+                        </li>
+                        <li>
+                            <p><code>select d/Mon w/2 m/1</code></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="listing-entered-commands-code-history-code"><a class="link" href="#listing-entered-commands-code-history-code">3.10. Listing entered commands : <code>history</code></a></h3>
+                <div class="paragraph">
+                    <p>Lists all the commands that you have entered in reverse chronological order.<br>
+                        Format: <code>history</code></p>
+                </div>
+                <div class="admonitionblock note">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-note" title="Note"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p>Pressing the <kbd>&uarr;</kbd> and <kbd>&darr;</kbd> arrows will display the previous and next input respectively in the command box.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="undoing-previous-command-code-undo-code"><a class="link" href="#undoing-previous-command-code-undo-code">3.11. Undoing previous command : <code>undo</code></a></h3>
+                <div class="paragraph">
+                    <p>Restores the address book to the state before the previous <em>undoable</em> command was executed.<br>
+                        Format: <code>undo</code></p>
+                </div>
+                <div class="admonitionblock note">
+                    <table>
+                        <tr>
+                            <td class="icon">
+                                <i class="fa icon-note" title="Note"></i>
+                            </td>
+                            <td class="content">
+                                <div class="paragraph">
+                                    <p>Undoable commands: those commands that modify the address book&#8217;s content (<code>add</code>, <code>delete</code>, <code>edit</code> and <code>clear</code>).</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>delete 1</code><br>
+                                <code>list</code><br>
+                                <code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+                        </li>
+                        <li>
+                            <p><code>select 1</code><br>
+                                <code>list</code><br>
+                                <code>undo</code><br>
+                                The <code>undo</code> command fails as there are no undoable commands executed previously.</p>
+                        </li>
+                        <li>
+                            <p><code>delete 1</code><br>
+                                <code>clear</code><br>
+                                <code>undo</code> (reverses the <code>clear</code> command)<br>
+                                <code>undo</code> (reverses the <code>delete 1</code> command)<br></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="redoing-the-previously-undone-command-code-redo-code"><a class="link" href="#redoing-the-previously-undone-command-code-redo-code">3.12. Redoing the previously undone command : <code>redo</code></a></h3>
+                <div class="paragraph">
+                    <p>Reverses the most recent <code>undo</code> command.<br>
+                        Format: <code>redo</code></p>
+                </div>
+                <div class="paragraph">
+                    <p>Examples:</p>
+                </div>
+                <div class="ulist">
+                    <ul>
+                        <li>
+                            <p><code>delete 1</code><br>
+                                <code>undo</code> (reverses the <code>delete 1</code> command)<br>
+                                <code>redo</code> (reapplies the <code>delete 1</code> command)<br></p>
+                        </li>
+                        <li>
+                            <p><code>delete 1</code><br>
+                                <code>redo</code><br>
+                                The <code>redo</code> command fails as there are no <code>undo</code> commands executed previously.</p>
+                        </li>
+                        <li>
+                            <p><code>delete 1</code><br>
+                                <code>clear</code><br>
+                                <code>undo</code> (reverses the <code>clear</code> command)<br>
+                                <code>undo</code> (reverses the <code>delete 1</code> command)<br>
+                                <code>redo</code> (reapplies the <code>delete 1</code> command)<br>
+                                <code>redo</code> (reapplies the <code>clear</code> command)<br></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="clearing-all-entries-code-clear-code"><a class="link" href="#clearing-all-entries-code-clear-code">3.13. Clearing all entries : <code>clear</code></a></h3>
+                <div class="paragraph">
+                    <p>Clears all entries from the address book.<br>
+                        Format: <code>clear</code></p>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="exiting-the-program-code-exit-code"><a class="link" href="#exiting-the-program-code-exit-code">3.14. Exiting the program : <code>exit</code></a></h3>
+                <div class="paragraph">
+                    <p>Exits the program.<br>
+                        Format: <code>exit</code></p>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="saving-the-data"><a class="link" href="#saving-the-data">3.15. Saving the data</a></h3>
+                <div class="paragraph">
+                    <p>Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+                        There is no need to save manually.</p>
+                </div>
+            </div>
+            <div class="sect2">
+                <h3 id="encrypting-data-files-code-coming-in-v2-0-code"><a class="link" href="#encrypting-data-files-code-coming-in-v2-0-code">3.16. Encrypting data files <code>[coming in v2.0]</code></a></h3>
+                <div class="paragraph">
+                    <p><em>{explain how the user can enable/disable data encryption}</em></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="faq"><a class="link" href="#faq">4. FAQ</a></h2>
+        <div class="sectionbody">
+            <div class="paragraph">
+                <p><strong>Q</strong>: How do I transfer my data to another Computer?<br>
+                    <strong>A</strong>: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.</p>
+            </div>
+        </div>
+    </div>
+    <div class="sect1">
+        <h2 id="command-summary"><a class="link" href="#command-summary">5. Command Summary</a></h2>
+        <div class="sectionbody">
+            <div class="ulist">
+                <ul>
+                    <li>
+                        <p><strong>Add</strong> : <code>add t/ACTION d/DAY [w/WEEK] [m/MONTH]&#8230;&#8203;</code><br>
+                            e.g. <code>add t/Complete 2113 Tutorial d/Wed w/2</code></p>
+                    </li>
+                    <li>
+                        <p><strong>Clear</strong> : <code>clear</code></p>
+                    </li>
+                    <li>
+                        <p><strong>Deadline</strong> : <code>deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]&#8230;&#8203;</code><br>
+                            e.g. <code>deadline t/Complete 2113 Tutorial d/Wed w/2</code></p>
+                    </li>
+                    <li>
+                        <p><strong>Defer deadline</strong> : <code>deadline t/ACTION w/WEEKS_OF_DEFERMENT</code><br>
+                            e.g. <code>defer_deadline t/Complete 2113 Tutorial w/1</code></p>
+                    </li>
+                    <li>
+                        <p><strong>List</strong> : <code>list</code></p>
+                    </li>
+                    <li>
+                        <p><strong>Help</strong> : <code>help</code></p>
+                    </li>
+                    <li>
+                        <p><strong>History</strong> : <code>history</code></p>
+                    </li>
+                    <li>
+                        <p><strong>Select</strong> : <code>select d/DAY [w/WEEK] [m/MONTH]</code><br>
+                            e.g. <code>select d/Mon w/2 m/1</code></p>
+                    </li>
+                    <li>
+                        <p><strong>Undo</strong> : <code>undo</code></p>
+                    </li>
+                    <li>
+                        <p><strong>Redo</strong> : <code>redo</code></p>
+                    </li>
+                    <li>
+                        <p><strong>Remove Deadline</strong> : <code>remove_deadline t\ACTION d\DAY [w\WEEK] [m\MONTH]&#8230;&#8203;</code><br>
+                            e.g. <code>remove_deadline t\Complete 2113 Tutorial d\Wed w\2</code></p>
+                    </li>
+                    <li>
+                        <p><strong>View</strong> : <code>view</code></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-10-10 14:29:57 UTC</div></div></div></body></html>

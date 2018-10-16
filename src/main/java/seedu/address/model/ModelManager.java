@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static unrefactored.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -12,9 +12,9 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
-import unrefactored.commons.core.ComponentManager;
-import unrefactored.commons.core.LogsCenter;
-import unrefactored.commons.events.model.TaskBookChangedEvent;
+import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
 
 /**
  * Represents the in-memory model of the task book data.
@@ -85,6 +85,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void selectDeadline(Deadline deadline) {
+        versionedTaskBook.selectDeadline(deadline);
+        //updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        //indicateTaskBookChanged();
+    }
+
+    @Override
     public void updateTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
@@ -94,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author JeremyInElysium
     @Override
-    public void addMilestone(Milestone milestone){
+    public void addMilestone(Milestone milestone) {
         versionedTaskBook.addMilestone(milestone);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateTaskBookChanged();

@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
-import unrefactored.commons.core.index.Index;
+import seedu.address.commons.core.index.Index;
 
 /**
  * A utility class for test cases.

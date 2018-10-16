@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
-import unrefactored.commons.core.GuiSettings;
+import seedu.address.commons.core.GuiSettings;
 
 /**
  * Represents User's preferences.

@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
-import unrefactored.commons.core.EventsCenter;
-import unrefactored.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;

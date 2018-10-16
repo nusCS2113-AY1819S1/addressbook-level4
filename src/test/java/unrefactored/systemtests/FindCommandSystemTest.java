@@ -1,8 +1,8 @@
 package unrefactored.systemtests;
 
 import static org.junit.Assert.assertFalse;
-import static unrefactored.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
-import static unrefactored.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_TASKS_LISTED_OVERVIEW;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static unrefactored.testutil.TypicalTasks.BENSON;
 import static unrefactored.testutil.TypicalTasks.CARL;
 import static unrefactored.testutil.TypicalTasks.DANIEL;
@@ -17,7 +17,7 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import unrefactored.commons.core.index.Index;
+import seedu.address.commons.core.index.Index;
 import unrefactored.tag.Tag;
 
 public class FindCommandSystemTest extends AddressBookSystemTest {

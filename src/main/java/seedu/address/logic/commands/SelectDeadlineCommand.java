@@ -43,11 +43,6 @@ public class SelectDeadlineCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if (model.invalidDeadline(toSelect)) {
-            throw new CommandException(MESSAGE_INVALID_DEADLINE);
-        }
-
         model.selectDeadline(toSelect);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSelect));
