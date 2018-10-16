@@ -17,15 +17,21 @@
       }
       document.addEventListener("DOMContentLoaded", function(event) {
           document.getElementById("name").innerHTML=getJsonFromUrl().name;
+          document.getElementById("phone").innerHTML=getJsonFromUrl().phone;
+          document.getElementById("email").innerHTML=getJsonFromUrl().email;
           document.getElementById("address").innerHTML=getJsonFromUrl().address;
+          document.getElementById("tags").innerHTML=getJsonFromUrl().tags;
       });
   </script>
 </head>
 <body>
-  Event Name: <span id="name"></span><br>
+  <h2>Event Name: <span id="name"></span><br></h2>
+  Event IC: <span></span><br>
+  IC Contact: <span id="phone"></span><br>
+  IC Email: <span id="email"></span><br>
   Event Address: <span id="address"></span><br>
   <br>
-  Event Attendance:<br>
+  Event Tags: <span id="tags"></span><br>
   <!-- Attendance -->
   <!-- /Attendance -->
 

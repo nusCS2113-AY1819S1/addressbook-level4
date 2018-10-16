@@ -66,6 +66,14 @@ public class Event {
         return Collections.unmodifiableSet(tags);
     }
 
+    public String getTagsString() {
+        String tagsString = "";
+        for (Tag tag : tags) {
+            tagsString = tagsString + tag.tagName + ' ';
+        }
+        return tagsString;
+    }
+
     /**
      * Returns true if both events of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two events.

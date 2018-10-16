@@ -57,7 +57,10 @@ public class BrowserPanel extends UiPart<Region> {
         URL searchPage = getSearchPageUrlWithoutName();
         String searchPageString = searchPage.toString()
                 + "?name=" + event.getName()
-                + "&address=" + event.getAddress();
+                + "&phone=" + event.getPhone()
+                + "&email=" + event.getEmail()
+                + "&address=" + event.getAddress().value.replaceAll("#", "%23")
+                + "&tags=" + event.getTagsString();
 
         return searchPageString;
     }
