@@ -52,7 +52,7 @@ public class AddTaskCommand extends Command {
         }
 
         model.addTask(toAdd);
-        model.commitAddressBook();
+        model.commitTodoList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

@@ -90,6 +90,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         //Optional<ReadOnlyExpenditureTracker> expenditureTrackerOptional;
         ReadOnlyAddressBook initialData;
+        ReadOnlyTodoList initialTodoList = new TodoList();
         ReadOnlyExpenditureTracker initialExpenditureTracker = new ExpenditureTracker();
         try {
             addressBookOptional = storage.readAddressBook();
@@ -105,7 +106,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, initialExpenditureTracker, userPrefs);
+        return new ModelManager(initialData, initialTodoList, initialExpenditureTracker, userPrefs);
     }
 
     private void initLogging(Config config) {
