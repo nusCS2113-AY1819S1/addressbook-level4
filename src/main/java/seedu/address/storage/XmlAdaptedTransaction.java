@@ -5,14 +5,19 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 import javax.xml.bind.annotation.XmlElement;
+import java.util.Objects;
 import java.util.TreeMap;
+
+/**
+ * This class adapts Transaction for JAXB.
+ */
 
 public class XmlAdaptedTransaction {
 
     @XmlElement(required = true)
     private String transactionTime;
     @XmlElement(required = true)
-    private TreeMap<String,Integer> transactionRecord;
+    private TreeMap<String, Integer> transactionRecord;
 
 
     private static final String INCORRECT_TRANSACTION_TIME_MESSAGE_FORMAT = "Incorrect transaction time of %s found!";
@@ -22,15 +27,17 @@ public class XmlAdaptedTransaction {
      * Constructs an XmlAdaptedTransaction.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedTransaction() {}
+    public XmlAdaptedTransaction() {
+    }
 
     /**
      * Constructs an {@code XmlAdaptedTransaction} with the required transaction details.
+     *
      * @param transactionTime
      * @param transactionRecord
      */
 
-    public XmlAdaptedTransaction(String transactionTime, TreeMap<String,Integer> transactionRecord) {
+    public XmlAdaptedTransaction(String transactionTime, TreeMap<String, Integer> transactionRecord) {
         this.transactionTime = transactionTime;
         this.transactionRecord = transactionRecord;
 
@@ -38,6 +45,7 @@ public class XmlAdaptedTransaction {
 
     /**
      * Converts a given transaction into this class for JAXB use.
+     *
      * @param transaction
      */
 
@@ -49,7 +57,7 @@ public class XmlAdaptedTransaction {
     public Transaction toModelType() throws IllegalValueException {
 
         if (transactionRecord == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,"transaction records"));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "transaction records"));
         }
 
         Transaction transaction;
@@ -57,9 +65,25 @@ public class XmlAdaptedTransaction {
         try {
             transaction = new Transaction(transactionTime, transactionRecord);
         } catch (InvalidTimeFormatException e) {
-            throw new IllegalValueException(String.format(INCORRECT_TRANSACTION_TIME_MESSAGE_FORMAT,"transaction time"));
+            throw new IllegalValueException(String.format(INCORRECT_TRANSACTION_TIME_MESSAGE_FORMAT, "transaction time"));
         }
         return transaction;
+    }
+
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof XmlAdaptedTransaction)) {
+            return false;
+        }
+
+        XmlAdaptedTransaction otherTransaction = (XmlAdaptedTransaction) other;
+        return Objects.equals(transactionRecord, otherTransaction.transactionRecord)
+                && Objects.equals(transactionTime, otherTransaction.transactionTime);
     }
 
 }

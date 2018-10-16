@@ -20,7 +20,7 @@ public class SalesHistory {
     public SalesHistory() {
         this.salesHistory = new TreeMap<>();
         activeDay = new ShopDay();
-        salesHistory.put(activeDay.getDay(),activeDay);
+        salesHistory.put(activeDay.getDay(), activeDay);
     }
 
     /**
@@ -32,7 +32,7 @@ public class SalesHistory {
         this.salesHistory = salesHistory;
         ShopDay today = new ShopDay();
         if (!salesHistory.containsKey(today.getDay())) {
-            salesHistory.put(today.getDay(),today);
+            salesHistory.put(today.getDay(), today);
         }
     }
 
@@ -75,7 +75,6 @@ public class SalesHistory {
     }
 
     public ShopDay getActiveDay() throws NoSuchElementException {
-        // TODO: Finish this exception handling.
         try {
             return getDaysHistory(activeDay.getDay());
         } catch (NoSuchElementException e) {
@@ -84,13 +83,12 @@ public class SalesHistory {
     }
 
     public void setActiveDay(ShopDay day) {
-            try {
-                addDay(day);
-                activeDay = salesHistory.get(day.getDay());
-
-            } catch (DuplicateDayException e) {
-                activeDay = salesHistory.get(day.getDay());
-            }
+        try {
+            addDay(day);
+            activeDay = salesHistory.get(day.getDay());
+        } catch (DuplicateDayException e) {
+            activeDay = salesHistory.get(day.getDay());
+        }
     }
 
 
