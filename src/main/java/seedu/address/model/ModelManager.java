@@ -9,12 +9,12 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Milestone;
-import seedu.address.model.task.Task;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Milestone;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the task book data.

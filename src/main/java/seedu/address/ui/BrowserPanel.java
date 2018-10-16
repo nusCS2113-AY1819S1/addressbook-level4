@@ -44,16 +44,21 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * To load
+     * @param task
+     * page in the UI
+     */
     private void loadPersonPage(Task task) {
         try {
-            URIBuilder uribuilder = new URIBuilder();
+            UriBuilder uribuilder = new UriBuilder();
             URL path = MainApp.class.getResource(FXML_FILE_FOLDER + "DummySearchPage.html");
             uribuilder.addPath(path);
             uribuilder.addQuery("title", task.getTitle());
             uribuilder.addQuery("description", task.getDescription());
             uribuilder.addQuery("priorityLevel", task.getPriorityLevel().toString());
-            logger.info(uribuilder.getURL());
-            loadPage(uribuilder.getURL());
+            logger.info(uribuilder.getUrl());
+            loadPage(uribuilder.getUrl());
         } catch (MalformedURLException | UnsupportedEncodingException | URISyntaxException e) {
             logger.warning(e.getMessage());
         }

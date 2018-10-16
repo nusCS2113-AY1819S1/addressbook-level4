@@ -17,6 +17,14 @@ import seedu.address.model.task.Task;
  */
 public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
+     * {@code ArgumentMultimap}.
+     */
+    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
+    }
+
     @Override
     public AddTaskCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap =
@@ -34,13 +42,5 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
         Task task = new Task(title, description, priority);
 
         return new AddTaskCommand(task);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
