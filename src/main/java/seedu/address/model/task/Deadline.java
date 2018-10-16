@@ -1,8 +1,7 @@
-//@@author emobeany
-
 package seedu.address.model.task;
 
 import java.util.Objects;
+//@@author emobeany
 
 /**
  * Represents a deadline in the task book.
@@ -12,6 +11,7 @@ import java.util.Objects;
 public class Deadline {
     public static final String MESSAGE_DEADLINE_CONSTRAINTS =
         "Deadline can only have dd/mm/yyyy format";
+
     private final String day;
     private final String month;
     private final String year;

@@ -180,7 +180,6 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Deadline Accessors =============================================================
     @Override
     public void selectDeadline(Deadline deadline);
-
     @Override
     public boolean invalidDeadline(Deadline deadline);
     */

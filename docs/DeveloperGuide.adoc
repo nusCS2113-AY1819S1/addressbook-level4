@@ -929,21 +929,21 @@ Use case resumes at step 6.
 
 *MSS*
 
-1.  Student requests to complete a new task
-2.  TB checks for its validity, change the status of the task to completed
+1.  Student requests to complete a new task by providing its index
+2.  TB checks for validity of the index and changes the status of the task to completed
 +
 Use case ends.
 
 *Extensions*
 
-* 1a. Student provided an invalid command
-** 1a1. TB requests for a valid command
+* 1a. Student provided an invalid index
+** 1a1. TB requests for a valid index
 ** 1a2. Student returns a new Complete command
 +
 Use case resumes at step 2.
 
-* 1b. Student requests to complete a non-existent task
-** 1b1. TB outputs an error message
+* 1a. Task is already completed
+** 1a1. TB returns an info message for user.
 +
 Use case ends.
 
@@ -975,28 +975,6 @@ Use case resumes at step 4.
 
 [discrete]
 
-=== Use case: Add important deadline
-
-*MSS*
-
-1. Student selects the date of deadline
-2. TB sets the date correspondingly
-3. Student requests to add new task with deadline included
-4. TB asks for the number of weeks before to remind about deadline e.g. 1 week earlier
-5. Student provides the number of weeks for reminder(s).
-6. TB adds the task and its reminder(s) to the list
-+
-Use case ends.
-
-*Extensions*
-
-* 3b. Student wants to add a deadline for an existing task i.e. duplicated task
-** 3b1. TB outputs an error message
-+
-Use case ends.
-
-[discrete]
-
 === Use case: Defer deadlines
 
 *MSS*
@@ -1019,22 +997,18 @@ Use case ends.
 
 [discrete]
 
-=== Use case: Remove deadline
+=== Use case: Delete task
 
 *MSS*
 
-1. Student selects the task
-2. TB displays the deadline for the task
-3. Student requests to delete deadline for the task
-4. TB asks for confirmation
-5. Student provides confirmation
-6. TB removes deadline from the task
+1. Student requests to delete a task by providing its index
+2. TB removes deadline from the task
 +
 Use case ends.
 
 *Extensions*
 
-* 1a. Student selects a task with no existing deadline
+* 1a. Student provides an invalid index of the task
 ** 1a1. TB outputs an error message
 
 [discrete]
