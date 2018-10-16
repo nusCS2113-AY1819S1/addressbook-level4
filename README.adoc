@@ -15,11 +15,16 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop Address Book + something else application. Most of the user interactions happen using a CLI (Command Line Interface) but we have included a GUI to make the application aesthetically appealing.
-* It is a Java application intended for computing personnels to make their lives simpler by typing on their comman line instead of using a cursor.
+* JitHub is an application that saves your contacts and helps you schedule meetings through cross-checking the
+timetable of your group mates.
+* JitHub is a CLI (Command Line Interface) application with GUI output so that you can have best of the both worlds.
+* JitHub is a Java application that you can run on any machine with Java Runtime Environment installed.
 * The original addressbook application provides a *reasonably well-written* code example. We hope we don't screw it up.
 * What's different from the original https://github.com/se-edu/addressbook-level4[Addressbook]:
-** Humors are added currently.
+** Meeting scheduling [coming in v1.4]
+** Natural language processing
+** Auto complete for commands
+** Export contacts
 
 == Site Map
 
