@@ -4,14 +4,13 @@ import seedu.recruit.commons.events.BaseEvent;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * Represents a selection change in the Candidate List Panel
+ * Represents a selection change in the Candidate Details Panel
  */
-public class PersonPanelSelectionChangedEvent extends BaseEvent {
-
+public class CandidateDetailsPanelSelectionChangedEvent extends BaseEvent {
 
     private final Candidate newSelection;
 
-    public PersonPanelSelectionChangedEvent(Candidate newSelection) {
+    public CandidateDetailsPanelSelectionChangedEvent(Candidate newSelection) {
         this.newSelection = newSelection;
     }
 
