@@ -1,7 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+
 
 import java.util.stream.Stream;
 
@@ -29,9 +33,9 @@ public class TDLAddCommandParser implements Parser<TDLAddCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TDLAddCommand.MESSAGE_USAGE));
         }
 
-        TaskName taskName= ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
+        TaskName taskName = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
         TaskModule taskModule = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
-        TaskDate taskDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        TaskDate taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DATE).get());
         TaskPriority taskPriority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
 
         Task task = new Task(taskName, taskModule, taskDate, taskPriority);

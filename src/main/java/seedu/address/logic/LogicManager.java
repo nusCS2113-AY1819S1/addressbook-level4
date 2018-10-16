@@ -51,6 +51,7 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public ListElementPointer getHistorySnapshot() {
-        return new ListElementPointer(history.getHistory());
+        return new ListElementPointer(history.getHistory()) ;
     }
+
 }

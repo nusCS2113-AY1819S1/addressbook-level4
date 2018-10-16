@@ -47,9 +47,9 @@ public class Task {
         return priority;
     }
 
-    public boolean getCompleteness() {return completeness;}
+    public boolean getCompleteness() { return completeness; }
 
-    public void setAsCompleted() {completeness = true;}
+    public void setAsCompleted() { completeness = true; }
 
     /**
      * Returns true if both tasks are totally the same.
