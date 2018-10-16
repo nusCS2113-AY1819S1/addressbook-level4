@@ -1,7 +1,8 @@
 package seedu.address.ui;
 
-import com.google.common.eventbus.Subscribe;
 import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
