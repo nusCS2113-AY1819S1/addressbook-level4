@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Task with missing name field -->
-<task>
-    <phone>9482424</phone>
-    <email>hans@example</email>
-    <address>4th street</address>
-    <tagged>friends</tagged>
-</task>
