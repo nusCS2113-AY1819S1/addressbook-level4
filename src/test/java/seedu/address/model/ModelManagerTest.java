@@ -4,8 +4,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroupWithGroupAndPerson;
 import static seedu.address.testutil.TypicalGroups.CS1010;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
+import static seedu.address.testutil.TypicalGroups.getTut1;
+import static seedu.address.testutil.TypicalGroups.getTypicalGroupsWithPersons;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
@@ -18,6 +21,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
@@ -33,19 +37,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasGroup_nullGroup_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        modelManager.hasGroup(null);
-    }
-
-    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
-    }
-
-    @Test
-    public void hasGroup_groupNotInAddressBook_returnsFalse() {
-        assertFalse(modelManager.hasGroup(TUT_1));
     }
 
     @Test
@@ -55,15 +48,57 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasGroup_groupInAddressBook_returnsTrue() {
-        modelManager.createGroup(TUT_1);
-        assertTrue(modelManager.hasGroup(TUT_1));
-    }
-
-    @Test
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void hasGroup_nullGroup_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasGroup(null);
+    }
+
+    @Test
+    public void hasGroup_groupNotInAddressBook_returnsFalse() {
+        assertFalse(modelManager.hasGroup(getTut1()));
+    }
+
+    @Test
+    public void hasGroup_groupInAddressBook_returnsTrue() {
+        modelManager.createGroup(getTut1());
+        assertTrue(modelManager.hasGroup(getTut1()));
+    }
+
+    @Test
+    public void hasPersonInGroup_null_throwsNullPointerException(){
+        thrown.expect(NullPointerException.class);
+        modelManager.hasPersonInGroup(null);
+    }
+
+    @Test
+    public void hasPersonInGroup_personIsAlreadyInGroup_returnTrue(){
+        modelManager.createGroup(getTypicalGroupsWithPersons());
+        assertTrue(modelManager.hasPersonInGroup(getAddGroupWithGroupAndPerson()));
+    }
+
+    @Test
+    public void hasPersonInGroup_personIsNotAlreadyInGroup_returnFalse(){
+        modelManager.createGroup(getTut1());
+        assertFalse(modelManager.hasPersonInGroup(getAddGroupWithGroupAndPerson()));
+    }
+
+    @Test
+    public void addGroup_personAlreadyInGroup_throwsDuplicatePersonsException(){
+        modelManager.createGroup(getTypicalGroupsWithPersons());
+        thrown.expect(DuplicatePersonException.class);
+        modelManager.addGroup(getAddGroupWithGroupAndPerson());
+    }
+
+    @Test
+    public void addGroup_personNotInGroup_addPersonToGroup(){
+        modelManager.createGroup(getTut1());
+        modelManager.addGroup(getAddGroupWithGroupAndPerson());
     }
 
     @Test
@@ -75,7 +110,7 @@ public class ModelManagerTest {
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE)
-                .withPerson(BENSON).withGroup(TUT_1)
+                .withPerson(BENSON).withGroup(getTut1())
                 .withGroup(CS1010).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();

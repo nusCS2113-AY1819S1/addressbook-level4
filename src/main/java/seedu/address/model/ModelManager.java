@@ -97,6 +97,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void createGroup(Group group) {
+        requireNonNull(group);
         versionedAddressBook.createGroup(group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         indicateAddressBookChanged();
@@ -104,6 +105,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addGroup(AddGroup addGroup) {
+        requireNonNull(addGroup);
         versionedAddressBook.addGroup(addGroup);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         indicateAddressBookChanged();
