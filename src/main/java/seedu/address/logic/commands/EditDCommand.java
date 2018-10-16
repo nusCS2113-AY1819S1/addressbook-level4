@@ -37,10 +37,8 @@ public class EditDCommand extends Command {
     public static final String MESSAGE_EDIT_DISTRIBUTOR_SUCCESS = "Edited Distributor: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This distributor already exists in the address book.";
-
     private final Index index;
     private final EditDistributorDescriptor editDistributorDescriptor;
-
     /**
      * @param index of the person in the filtered distributor list to edit
      * @param editDistributorDescriptor details to edit the distributor with
