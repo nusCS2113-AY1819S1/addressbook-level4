@@ -12,7 +12,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.recruit.MainApp;
 import seedu.recruit.commons.core.LogsCenter;
-import seedu.recruit.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.CandidateDetailsPanelSelectionChangedEvent;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
@@ -65,7 +65,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
+    private void handlePersonPanelSelectionChangedEvent(CandidateDetailsPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection());
     }

@@ -14,17 +14,17 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.commons.util.FileUtil;
 import seedu.recruit.commons.util.XmlUtil;
 import seedu.recruit.model.candidate.Candidate;
+import guitests.guihandles.CandidateCardHandle;
+import guitests.guihandles.CandidateDetailsPanelHandle;
 import seedu.recruit.storage.XmlSerializableCandidateBook;
 
-public class CandidateListPanelTest extends GuiUnitTest {
+public class CandidateDetailsPanelTest extends GuiUnitTest {
     private static final ObservableList<Candidate> TYPICAL_CANDIDATES =
             FXCollections.observableList(getTypicalPersons());
 
@@ -34,16 +34,16 @@ public class CandidateListPanelTest extends GuiUnitTest {
 
     private static final long CARD_CREATION_AND_DELETION_TIMEOUT = 2500;
 
-    private PersonListPanelHandle personListPanelHandle;
+    private CandidateDetailsPanelHandle candidateDetailsPanelHandle;
 
     @Test
     public void display() {
         initUi(TYPICAL_CANDIDATES);
 
         for (int i = 0; i < TYPICAL_CANDIDATES.size(); i++) {
-            personListPanelHandle.navigateToCard(TYPICAL_CANDIDATES.get(i));
+            candidateDetailsPanelHandle.navigateToCard(TYPICAL_CANDIDATES.get(i));
             Candidate expectedCandidate = TYPICAL_CANDIDATES.get(i);
-            PersonCardHandle actualCard = personListPanelHandle.getPersonCardHandle(i);
+            CandidateCardHandle actualCard = candidateDetailsPanelHandle.getCandidateCardHandle(i);
 
             assertCardDisplaysPerson(expectedCandidate, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
@@ -56,8 +56,9 @@ public class CandidateListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(INDEX_SECOND_PERSON.getZeroBased());
-        PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
+        CandidateCardHandle expectedPerson = candidateDetailsPanelHandle
+                .getCandidateCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        CandidateCardHandle selectedPerson = candidateDetailsPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
 
@@ -83,7 +84,7 @@ public class CandidateListPanelTest extends GuiUnitTest {
         Path xmlFile = createXmlFileWithPersons(personCount);
         XmlSerializableCandidateBook xmlAddressBook =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableCandidateBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getCandidatelist());
+        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getCandidateList());
     }
 
     /**
@@ -111,14 +112,15 @@ public class CandidateListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}.
-     * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
+     * Initializes {@code CandidateDetailsPanelHandle} with a
+     * {@code CandidateDetailsPanel} backed by {@code backingList}.
+     * Also shows the {@code Stage} that displays only {@code CandidateDetailsPanel}.
      */
     private void initUi(ObservableList<Candidate> backingList) {
-        PersonListPanel personListPanel = new PersonListPanel(backingList);
-        uiPartRule.setUiPart(personListPanel);
+        CandidateDetailsPanel CandidateDetailsPanel = new CandidateDetailsPanel(backingList);
+        uiPartRule.setUiPart(CandidateDetailsPanel);
 
-        personListPanelHandle = new PersonListPanelHandle(getChildNode(personListPanel.getRoot(),
-                PersonListPanelHandle.PERSON_LIST_VIEW_ID));
+        candidateDetailsPanelHandle = new CandidateDetailsPanelHandle(getChildNode(CandidateDetailsPanel.getRoot(),
+                CandidateDetailsPanelHandle.CANDIDATE_DETAILS_VIEW_ID));
     }
 }

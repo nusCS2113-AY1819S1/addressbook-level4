@@ -3,6 +3,7 @@ package seedu.recruit.ui;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,21 +11,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.events.ui.CandidateDetailsPanelSelectionChangedEvent;
 import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
-import seedu.recruit.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * Panel containing the list of persons,
+ * Panel containing the list of candidates,
  * and their details upon selection
  */
-public class PersonDetailsPanel extends UiPart<Region> {
-    private static final String FXML = "PersonDetailsPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonDetailsPanel.class);
+public class CandidateDetailsPanel extends UiPart<Region> {
+    private static final String FXML = "CandidateDetailsPanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(CandidateDetailsPanel.class);
 
     @FXML
-    private ListView<Candidate> personDetailsView;
+    private ListView<Candidate> candidateDetailsView;
+    @FXML
+    private VBox cardPane;
     @FXML
     private Label name;
     @FXML
@@ -38,58 +42,58 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label desired_job;
+    private Label job;
     @FXML
     private Label education;
     @FXML
     private Label salary;
 
-    public PersonDetailsPanel(ObservableList<Candidate> candidateList) {
+    public CandidateDetailsPanel(ObservableList<Candidate> candidateList) {
         super(FXML);
         setConnections(candidateList);
         registerAsAnEventHandler(this);
     }
 
     private void setConnections(ObservableList<Candidate> candidateList) {
-        personDetailsView.setItems(candidateList);
-        personDetailsView.setCellFactory(listView -> new PersonDetailsViewCell());
+        candidateDetailsView.setItems(candidateList);
+        candidateDetailsView.setCellFactory(listView -> new CandidateDetailsViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personDetailsView.getSelectionModel().selectedItemProperty()
+        candidateDetailsView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in candidate details panel changed to : '" + newValue + "'");
-                        raise(new PersonPanelSelectionChangedEvent(newValue));
+                        raise(new CandidateDetailsPanelSelectionChangedEvent(newValue));
                         showDetailsOfSelectedCandidate();
                     }
                 });
     }
 
     /**
-     * Expands {@code PersonCard} by listing all the details of the selected Candidate
+     * Expands {@code CandidateCard} by listing all the details of the selected Candidate
      */
     private void showDetailsOfSelectedCandidate() {
-        Candidate selectedPerson = personDetailsView.getSelectionModel().getSelectedItem();
-        name.setText(selectedPerson.getName().fullName);
-        gender.setText(selectedPerson.getGender().value);
-        age.setText(selectedPerson.getAge().value);
-        phone.setText(selectedPerson.getPhone().value);
-        email.setText(selectedPerson.getEmail().value);
-        address.setText(selectedPerson.getAddress().value);
-        desired_job.setText(selectedPerson.getJob().value);
-        education.setText(selectedPerson.getEducation().value);
-        salary.setText(selectedPerson.getSalary().value);
+        Candidate selectedCandidate = candidateDetailsView.getSelectionModel().getSelectedItem();
+        name.setText(selectedCandidate.getName().fullName);
+        gender.setText(selectedCandidate.getGender().value);
+        age.setText(selectedCandidate.getAge().value);
+        phone.setText(selectedCandidate.getPhone().value);
+        email.setText(selectedCandidate.getEmail().value);
+        address.setText(selectedCandidate.getAddress().value);
+        job.setText(selectedCandidate.getJob().value);
+        education.setText(selectedCandidate.getEducation().value);
+        salary.setText(selectedCandidate.getSalary().value);
     }
 
-        /**
-         * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
-         */
+    /**
+     * Scrolls to the {@code CandidateCard} at the {@code index} and selects it.
+     */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personDetailsView.scrollTo(index);
-            personDetailsView.getSelectionModel().clearAndSelect(index);
+            candidateDetailsView.scrollTo(index);
+            candidateDetailsView.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -100,9 +104,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Candidate} using a {@code CandidateCard}.
      */
-    class PersonDetailsViewCell extends ListCell<Candidate> {
+    class CandidateDetailsViewCell extends ListCell<Candidate> {
         @Override
         protected void updateItem(Candidate candidate, boolean empty) {
             super.updateItem(candidate, empty);
@@ -111,7 +115,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(candidate, getIndex() + 1).getRoot());
+                setGraphic(new CandidateCard(candidate, getIndex() + 1).getRoot());
             }
         }
     }

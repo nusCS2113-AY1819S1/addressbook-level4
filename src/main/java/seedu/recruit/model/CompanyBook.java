@@ -8,8 +8,8 @@ import javafx.collections.ObservableList;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.company.UniqueCompanyList;
-import seedu.recruit.model.joboffer.UniqueJobList;
 import seedu.recruit.model.joboffer.JobOffer;
+import seedu.recruit.model.joboffer.UniqueJobList;
 
 
 /**
@@ -115,6 +115,9 @@ public class CompanyBook implements ReadOnlyCompanyBook {
 
     // job offer level operations
 
+    /**
+     * Adds a job offer to an existing company in the CompanyBook to the recruit book.
+     */
     public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
         companyList.addJobOfferToCompany(companyName, jobOffer);
         companyJobList.add(jobOffer);

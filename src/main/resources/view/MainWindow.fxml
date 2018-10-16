@@ -34,8 +34,8 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
           <Menu mnemonicParsing="false" text="Switch Book">
-            <MenuItem fx:id="CompanyBook" mnemonicParsing="false" onAction="#handleChangeView" text="Company Book" />
-              <MenuItem fx:id="CandidateBook" mnemonicParsing="false" onAction="#handleChangeView" text="Candidate Book" />
+            <MenuItem fx:id="companyBook" mnemonicParsing="false" onAction="#handleChangeToCompanyJobDetailsPanel" text="Company Book" />
+              <MenuItem fx:id="candidateBook" mnemonicParsing="false" onAction="#handleChangeToCandidateDetailsPanel" text="Candidate Book" />
           </Menu>
         </MenuBar>
 
@@ -52,15 +52,8 @@
           </padding>
         </StackPane>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-          <VBox fx:id="candidateList" minWidth="100" prefWidth="100" SplitPane.resizableWithParent="false">
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-            <BorderPane fx:id="switchPanelPlaceholder" VBox.vgrow="ALWAYS"/>
-          </VBox>
-
-          <StackPane fx:id="panelView" prefWidth="340" >
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.8" VBox.vgrow="ALWAYS">
+          <StackPane fx:id="panelViewPlaceHolder" prefWidth="340" >
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>

@@ -4,20 +4,24 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import seedu.recruit.commons.core.Config;
 import seedu.recruit.commons.core.GuiSettings;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.ui.ExitAppRequestEvent;
+import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
+import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.logic.Logic;
 import seedu.recruit.model.UserPrefs;
@@ -30,6 +34,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
+    private volatile String currentBook = "companyBook";
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -37,16 +43,11 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private PersonDetailsPanel personDetailsPanel;
-    private SwitchPanel switchPanel;
+    private CandidateDetailsPanel candidateDetailsPanel;
     private CompanyJobDetailsPanel companyJobDetailsPanel;
-
-    @FXML
-    private StackPane browserPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -55,31 +56,19 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private MenuItem CompanyBook;
+    private MenuItem companyBook;
 
     @FXML
-    private MenuItem CandidateBook;
+    private MenuItem candidateBook;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    @FXML
-    private BorderPane switchPanelPlaceholder;
-
-    @FXML
-    private StackPane personDetailsPanelPlaceholder;
-
-    @FXML
-    private StackPane companyJobDetailsPanelPlaceholder;
+    private StackPane panelViewPlaceHolder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
-
-    @FXML
-    private StackPane panelView;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -138,62 +127,60 @@ public class MainWindow extends UiPart<Stage> {
         });
     }
 
-    @FXML
-    private void handleChangeView(ActionEvent event) {
-        String menuItemID = ((MenuItem) event.getSource()).getId();
-        if (menuItemID.contentEquals("CandidateBook")) {
-            panelView.getChildren().add(personDetailsPanel.getRoot());
-            panelView = personDetailsPanelPlaceholder;
-            System.out.println("PersonDetails in handle");
-        }
-        else if (menuItemID.contentEquals("CompanyBook")) {
-            panelView.getChildren().add(companyJobDetailsPanel.getRoot());
-            panelView = companyJobDetailsPanelPlaceholder;
-            System.out.println("Company in handle");
-        }
-    }
     /**
+     * Handles the menu Switch Book from Candidate Book
+     * to Company Book event, {@code event}.
+     */
     @FXML
-    public void handleChangeToCandidatePanelView(ActionEvent event) {
-        registerAsAnEventHandler(this);
-        //personDetailsPanel = new PersonDetailsPanel(logic.getFilteredPersonList());
-        panelView.getChildren().add(personDetailsPanel.getRoot());
-        panelView = personDetailsPanelPlaceholder;
+    public void handleChangeToCandidateDetailsPanel() {
+        candidateBook.setOnAction(new EventHandler<ActionEvent>() {
+            /**
+             * Handles switch in panel view in RecruitBook main window
+             * when user switches from Company Book to Candidate Book
+             */
+            @Override
+            public void handle(ActionEvent event) {
+                if (!panelViewPlaceHolder.getChildren().isEmpty()) {
+                    panelViewPlaceHolder.getChildren().remove(0);
+                    panelViewPlaceHolder.getChildren().add(candidateDetailsPanel.getRoot());
+                    currentBook = "candidateBook";
+                }
+            }
+        });
     }
 
+    /**
+     * Handles the menu Switch Book from Company Book
+     * to Candidate Book event, {@code event}.
+     */
     @FXML
-    public void handleChangeToCompanyPanelView(ActionEvent event) {
-        String menuItemID = ((MenuItem) event.getSource()).getId();
-        System.out.println(menuItemID);
-        if (menuItemID.contentEquals("CompanyJobDetailsPanel")) {
-            registerAsAnEventHandler(this);
-            //companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(), logic.getFilteredCompanyJobList());
-            panelView.getChildren().add(companyJobDetailsPanel.getRoot());
-            panelView = companyJobDetailsPanelPlaceholder;
-        }
-    }*/
+    public void handleChangeToCompanyJobDetailsPanel() {
+        companyBook.setOnAction(new EventHandler<ActionEvent>() {
+            /**
+             * Handles switch in panel view in RecruitBook main window
+             * when user switches from Candidate Book to Company Book
+             */
+            @Override
+            public void handle(ActionEvent event) {
+                if (!panelViewPlaceHolder.getChildren().isEmpty()) {
+                    panelViewPlaceHolder.getChildren().remove(0);
+                    panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
+                    currentBook = "companyBook";
+                }
+            }
+        });
+    }
 
     /**
-     * Fills up all the placeholders of this window.
+     * RecruitBook's default panelViewPlaceHolder shows the list of
+     * companies and their list of jobs, and at the same time
+     * fills up all the other placeholders of this window.
      */
     void fillInnerParts() {
-        //browserPanel = new BrowserPanel();
-        //browserPlaceholder.getChildren().add(browserPanel.getRoot());
-
-        personDetailsPanel = new PersonDetailsPanel(logic.getFilteredPersonList());
-        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(), logic.getFilteredCompanyJobList());
-
-        switchPanel = new SwitchPanel();
-        switchPanelPlaceholder.getChildren().add(switchPanel.getRoot());
-
-        if (panelView == personDetailsPanelPlaceholder) {
-            panelView.getChildren().add(personDetailsPanel.getRoot());
-            System.out.println("PersonDetails in fillInner");
-        }
-        else if (panelView == companyJobDetailsPanelPlaceholder) {
-            panelView.getChildren().add(companyJobDetailsPanel.getRoot());
-            System.out.println("CompnayDetails in fillInner");
-        }
+        candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
+        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
+                                        logic.getFilteredCompanyJobList());
+        panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -258,13 +245,23 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    //public PersonListPanel getPersonListPanel() {
-        //return personListPanel;
-    //}
+    public CandidateDetailsPanel getCandidateDetailsPanel() {
+        return candidateDetailsPanel;
+    }
 
-    //public PersonDetailsPanel getPersonDetailsPanel() {return personDetailsPanel;}
+    public CompanyJobDetailsPanel getCompanyJobDetailsPanel() {
+        return companyJobDetailsPanel;
+    }
 
-    public CompanyJobDetailsPanel getCompanyJobDetailsPanel() {return companyJobDetailsPanel;}
+    public String getDisplayedBook() {
+        if (currentBook.contentEquals("companyBook")) {
+            return "companyBook";
+        }
+        else if (currentBook.contentEquals("candidateBook")) {
+            return "candidateBook";
+        }
+        else return "Error in Switching Book";
+    }
 
     void releaseResources() {
         browserPanel.freeResources();
@@ -274,5 +271,17 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleShowCandidateBookEvent(ShowCandidateBookRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleChangeToCandidateDetailsPanel();
+    }
+
+    @Subscribe
+    private void handleShowCompanyBookEvent(ShowCompanyBookRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleChangeToCompanyJobDetailsPanel();
     }
 }
