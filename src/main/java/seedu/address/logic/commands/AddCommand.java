@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import oldCode.Model;
+import oldcode.Model;
 import seedu.address.model.person.Person;
 
 /**

@@ -1,4 +1,4 @@
-package oldCode;
+package oldcode;
 
 import java.util.function.Predicate;
 

@@ -13,8 +13,8 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import oldCode.Model;
-import oldCode.ModelManager;
+import oldcode.Model;
+import oldcode.ModelManager;
 import seedu.address.model.UserPrefs;
 
 

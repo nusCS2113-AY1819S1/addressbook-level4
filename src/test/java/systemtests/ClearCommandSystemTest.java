@@ -9,8 +9,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
-import oldCode.Model;
-import oldCode.ModelManager;
+import oldcode.Model;
+import oldcode.ModelManager;
 
 public class ClearCommandSystemTest extends AddressBookSystemTest {
 

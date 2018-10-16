@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
-import oldCode.Model;
+import oldcode.Model;
 
 /**
  * Lists all the commands entered by user from the start of app launch.

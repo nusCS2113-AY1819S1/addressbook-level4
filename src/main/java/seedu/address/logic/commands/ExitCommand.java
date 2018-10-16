@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.CommandHistory;
-import oldCode.Model;
+import oldcode.Model;
 
 /**
  * Terminates the program.
