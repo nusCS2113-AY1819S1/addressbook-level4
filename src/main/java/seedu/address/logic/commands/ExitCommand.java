@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
+import oldcode.Model;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.CommandHistory;
-import oldcode.Model;
+
 
 /**
  * Terminates the program.

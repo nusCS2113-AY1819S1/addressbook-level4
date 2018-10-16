@@ -3,8 +3,9 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static oldcode.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import seedu.address.logic.CommandHistory;
 import oldcode.Model;
+import seedu.address.logic.CommandHistory;
+
 
 /**
  * Lists all persons in the address book to the user.

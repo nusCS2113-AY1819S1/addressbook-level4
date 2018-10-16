@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import oldcode.Model;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 //import seedu.address.logic.commands.AddCommand;
@@ -14,7 +15,6 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.IngredientManager;
 import seedu.address.model.IngredientModel;
-import oldcode.Model;
 import seedu.address.model.person.Person;
 
 /**
