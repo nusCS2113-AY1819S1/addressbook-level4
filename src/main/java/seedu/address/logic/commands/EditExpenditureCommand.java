@@ -13,11 +13,12 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
 import seedu.address.model.expenditureinfo.Category;
 import seedu.address.model.expenditureinfo.Date;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.Money;
-import seedu.address.model.Model;
+
 
 /**
  * Edits the details of an existing expenditure in the expenditure tracker.
@@ -80,8 +81,8 @@ public class EditExpenditureCommand extends Command {
      * Creates and returns a {@code Expenditure} with the details of {@code ExpenditureToEdit}
      * edited with {@code editExpenditureDescriptor}.
      */
-    private static Expenditure createEditedExpenditure
-    (Expenditure expenditureToEdit, EditExpenditureDescriptor editExpenditureDescriptor) {
+    private static Expenditure createEditedExpenditure(Expenditure expenditureToEdit, EditExpenditureDescriptor
+            editExpenditureDescriptor) {
         assert expenditureToEdit != null;
 
         Date updatedDate = editExpenditureDescriptor.getDate().orElse(expenditureToEdit.getDate());

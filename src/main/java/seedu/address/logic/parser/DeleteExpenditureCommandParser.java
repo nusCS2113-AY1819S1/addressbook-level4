@@ -18,7 +18,8 @@ public class DeleteExpenditureCommandParser implements Parser<DeleteExpenditureC
     public DeleteExpenditureCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new DeleteExpenditureCommand(index); }
+            return new DeleteExpenditureCommand(index);
+        }
         catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteExpenditureCommand.MESSAGE_USAGE), pe);
