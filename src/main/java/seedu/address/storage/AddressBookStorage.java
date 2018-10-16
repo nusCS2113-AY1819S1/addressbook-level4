@@ -18,6 +18,10 @@ public interface AddressBookStorage {
      */
     Path getProductInfoBookFilePath();
 
+    /**
+     * Returns the file path of the data file.
+     */
+
     Path getDistributorInfoFilePath();
 
     /**
