@@ -1,0 +1,11 @@
+{
+  "guiSettings" : {
+    "windowWidth" : 1292.0,
+    "windowHeight" : 702.0,
+    "windowCoordinates" : {
+      "x" : -6,
+      "y" : -6
+    }
+  },
+  "eventManagerFilePath" : "data\\eventmanager.xml"
+}

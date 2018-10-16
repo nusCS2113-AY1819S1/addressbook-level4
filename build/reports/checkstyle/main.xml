@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.1">
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\AppParameters.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\MainApp.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\core\ComponentManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\core\Config.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\core\EventsCenter.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\core\GuiSettings.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\core\LogsCenter.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\core\Messages.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\core\Version.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\core\index\Index.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\BaseEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\model\AddressBookChangedEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\model\EventManagerChangedEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\storage\DataSavingExceptionEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\ui\EventSelectionChangedEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\ui\ExitAppRequestEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\ui\JumpToListRequestEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\ui\NewResultAvailableEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\ui\PersonPanelSelectionChangedEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\events\ui\ShowHelpRequestEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\exceptions\DataConversionException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\exceptions\DuplicateDataException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\exceptions\IllegalValueException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\util\AppUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\util\CollectionUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\util\ConfigUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\util\FileUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\util\JsonUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\util\StringUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\commons\util\XmlUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\CommandHistory.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\ListElementPointer.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\Logic.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\LogicManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\AddCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\ClearCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\Command.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\CommandResult.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\DeleteCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\EditCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\ExitCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\FindCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\HelpCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\HistoryCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\ListCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\LoginCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\LogoutCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\RedoCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\RegisterCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\ReplyCommentCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\SelectCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\UndoCommand.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\commands\exceptions\CommandException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\comments\AddComment.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\comments\Comments.java">
+<error line="117" column="21" severity="warning" message="Name &apos;Scan&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.LocalVariableNameCheck"/>
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\comments\DeleteComment.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\comments\ReplyComment.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\AddCommandParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\AddressBookParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\ArgumentMultimap.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\ArgumentTokenizer.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\CliSyntax.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\DeleteCommandParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\EditCommandParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\EventManagerParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\FindCommandParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\LoginCommandParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\Parser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\ParserUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\Prefix.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\RegisterCommandParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\ReplyCommentCommandParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\SelectCommandParser.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\logic\parser\exceptions\ParseException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\AddressBook.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\EventManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\Model.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\ModelManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\ReadOnlyAddressBook.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\ReadOnlyEventManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\UserAccount.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\UserPrefs.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\VersionedAddressBook.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\VersionedEventManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\Address.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\Attendance.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\Contact.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\Email.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\Event.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\Name.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\NameContainsKeywordsPredicate.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\Phone.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\UniqueEventList.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\exceptions\DuplicatePersonException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\event\exceptions\PersonNotFoundException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\Address.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\Email.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\Name.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\NameContainsKeywordsPredicate.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\Person.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\Phone.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\UniquePersonList.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\exceptions\DuplicatePersonException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\person\exceptions\PersonNotFoundException.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\tag\Tag.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\user\Password.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\user\User.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\user\Username.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\model\util\SampleDataUtil.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\AddressBookStorage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\Comments.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\EventManagerStorage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\JsonUserPrefsStorage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\JsonUserStorage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\Storage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\StorageManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\UserPrefsStorage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\UserStorage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\XmlAdaptedEvent.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\XmlAdaptedPerson.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\XmlAdaptedTag.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\XmlEManagerStorage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\XmlFileStorage.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\storage\XmlSerializableEManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\BrowserPanel.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\CommandBox.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\EventCard.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\EventListPanel.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\EventPageFormatter.java">
+<error line="26" column="24" severity="warning" message="Name &apos;SEARCH_PAGE_PATH&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*_?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.StaticVariableNameCheck"/>
+<error line="27" column="27" severity="warning" message="Name &apos;SEARCH_PAGE_STRING&apos; must match pattern &apos;^[a-z][a-zA-Z0-9]*_?$&apos;." source="com.puppycrawl.tools.checkstyle.checks.naming.StaticVariableNameCheck"/>
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\HelpWindow.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\MainWindow.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\PersonCard.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\PersonListPanel.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\ResultDisplay.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\StatusBarFooter.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\Ui.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\UiManager.java">
+</file>
+<file name="C:\Users\Gerald\Desktop\Github\addressbook-level4\src\main\java\seedu\address\ui\UiPart.java">
+</file>
+</checkstyle>
