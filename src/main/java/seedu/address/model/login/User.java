@@ -14,7 +14,7 @@ public class User {
 
     public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
 
-    private static final String AB_FILEPATH_FOLDER = "data/";
+    private static final String AB_FILEPATH_FOLDER = "data";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
 
