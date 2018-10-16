@@ -14,7 +14,11 @@ import seedu.address.model.task.Task;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    Predicate<Expenditure> PREDICATE_SHOW_ALL_EXPENDITURES = unused -> true;
+
     Predicate<Task> PREDICATE_SHOW_ALL_TASKS = unused -> true;
+
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -32,6 +36,7 @@ public interface Model {
 
     boolean hasPerson(Person person);
 
+    boolean hasExpenditure(Expenditure expenditure);
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -44,7 +49,11 @@ public interface Model {
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
+
+    void deleteExpenditure(Expenditure target);
+
     void addTask(Task task);
+
 
     void addPerson(Person person);
 
@@ -60,21 +69,33 @@ public interface Model {
      */
     void updatePerson(Person target, Person editedPerson);
 
+
+    void updateExpenditure(Expenditure target, Expenditure editedExpenditure);
+
     void updateTask(Task target, Task editedTask);
+
 
     void deleteTag(Tag tag);
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    ObservableList<Expenditure> getFilteredExpenditureList();
+
+
     ObservableList<Task> getFilteredTaskList();
+
 
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    void updateFilteredExpenditureList(Predicate<Expenditure> predicate);
+
     void updateFilteredTaskList(Predicate<Task> predicate);
+
 
     /**
      * Returns true if the model has previous address book states to restore.

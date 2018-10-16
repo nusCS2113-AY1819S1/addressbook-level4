@@ -122,12 +122,26 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasExpenditure(Expenditure expenditure) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void deletePerson(Person target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void deleteExpenditure(Expenditure target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updatePerson(Person target, Person editedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void updateExpenditure(Expenditure target, Expenditure editedExpenditure) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -137,10 +151,18 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<Expenditure> getFilteredExpenditureList() {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void updateFilteredExpenditureList(Predicate<Expenditure> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public boolean canUndoAddressBook() {
             throw new AssertionError("This method should not be called.");

@@ -26,7 +26,11 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final VersionedExpenditureTracker versionedExpenditureTracker;
     private final FilteredList<Person> filteredPersons;
+
+    private final FilteredList<Expenditure> filteredExpenditures;
+
     private final FilteredList<Task> filteredTasks;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -41,6 +45,9 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         versionedExpenditureTracker = new VersionedExpenditureTracker(expenditureTracker);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+
+        filteredExpenditures = new FilteredList<>(versionedExpenditureTracker.getExpenditureList());
+
         filteredTasks = new FilteredList<>(versionedAddressBook.getTaskList());
     }
 
@@ -76,6 +83,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasExpenditure(Expenditure expenditure) {
+        requireNonNull(expenditure);
+        return versionedExpenditureTracker.hasExpenditure(expenditure);
+    }
+    
+    @Override
     public boolean hasTask(Task task) {
         requireNonNull(task);
         return versionedAddressBook.hasTask(task);
@@ -87,6 +100,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void deleteExpenditure(Expenditure target) {
+        versionedExpenditureTracker.removeExpenditure(target);
+    }
+    
     @Override
     public void deleteTask(Task target) {
         versionedAddressBook.removeTask(target);
@@ -108,9 +126,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addExpenditure(Expenditure expenditure){
-
+    public void addExpenditure(Expenditure expenditure) {
+        versionedExpenditureTracker.addExpenditure(expenditure);
+        updateFilteredExpenditureList(PREDICATE_SHOW_ALL_EXPENDITURES);
+        indicateAddressBookChanged();
     }
+
     @Override
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
@@ -119,6 +140,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void updateExpenditure(Expenditure target, Expenditure editedExpenditure) {
+        requireAllNonNull(target, editedExpenditure);
+
+        versionedExpenditureTracker.updateExpenditure(target, editedExpenditure);
+        indicateAddressBookChanged();
+    }
+  
     @Override
     public void updateTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
@@ -144,6 +173,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public ObservableList<Expenditure> getFilteredExpenditureList() {
+        return FXCollections.unmodifiableObservableList(filteredExpenditures);
+    }
+  
+    @Override
     public ObservableList<Task> getFilteredTaskList() {
         return FXCollections.unmodifiableObservableList(filteredTasks);
     }
@@ -152,6 +186,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+  
+    @Override
+    public void updateFilteredExpenditureList(Predicate<Expenditure> predicate) {
+        requireNonNull(predicate);
+        filteredExpenditures.setPredicate(predicate);
     }
 
     @Override
