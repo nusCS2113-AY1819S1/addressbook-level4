@@ -1,5 +1,11 @@
 package seedu.address.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.logging.Logger;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.login.Password;
@@ -10,14 +16,10 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.Objects;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
-
+/**
+ * Wraps all data at the user database level
+ * Duplicates are not allowed (by .hasUser comparison)
+ */
 public class UserDatabase implements ReadOnlyUserDatabase {
 
     private static final Logger logger = LogsCenter.getLogger(UserDatabase.class);
@@ -55,6 +57,9 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         hasLoggedIn = loggedin;
     }
 
+    /**
+     * Returns true if a user with the same identity as {@code user} exists in the user database.
+     */
     public boolean hasUser(User user) {
         requireNonNull(user);
         return users.contains(user);
@@ -99,7 +104,8 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @throws AuthenticatedException is the user is already logged in.
      */
     public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
-        User toCheck = new User(username, password, Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+        User toCheck = new User(username, password, Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX
+                + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for login");
 
         if (hasLoggedIn) {
@@ -117,7 +123,6 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     /**
      * Checks whether input credentials matches a valid user.
-     *
      * @param username
      * @param password
      * @return
@@ -125,7 +130,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      */
     public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
-                Paths.get(AB_FILEPATH_FOLDER,AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
+                Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for permissions.");
         if (!hasLoggedIn) {
             return users.contains(toCheck);
@@ -134,14 +139,17 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         }
     }
 
-    public void setUsers(List<User> users) throws DuplicateUserException { this.users.setUsers(users); }
+    public void setUsers(List<User> users) throws DuplicateUserException {
+        this.users.setUsers(users);
+    }
 
     /**
      * Adds a user to the User Database.
-     *
      * @throws DuplicateUserException if an equivalent user already exists.
      */
-    public void addUser(User user) throws DuplicateUserException { users.add(user); }
+    public void addUser(User user) throws DuplicateUserException {
+        users.add(user);
+    }
 
     /**
      * Replaces the given user {@code target} in the list with {@code editedUser}.
@@ -156,22 +164,25 @@ public class UserDatabase implements ReadOnlyUserDatabase {
         users.setUser(target, userWithNewPassword);
     }
 
-
     /**
      * Removes {@code key} from this {@code UserDatabase}.
      */
-    public void removeUser(User key) { users.remove(key); }
+    public void removeUser(User key) {
+        users.remove(key);
+    }
 
     /**
      * Resets the existing user list of this {@code UserDatabase} with {@code newData}.
      */
     private void resetData(ReadOnlyUserDatabase newData) {
         requireNonNull(newData);
-            setUsers(newData.getUsersList());
+        setUsers(newData.getUsersList());
     }
 
     @Override
-    public ObservableList<User> getUsersList() { return users.asObservableList(); }
+    public ObservableList<User> getUsersList() {
+        return users.asObservableList();
+    }
 
     @Override
     public boolean equals(Object other) {

@@ -5,11 +5,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.login.User;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 
+/**
+ * Adds a user to the user database.
+ */
 public class CreateUserCommand extends Command {
 
     public static final String COMMAND_WORD = "create";

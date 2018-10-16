@@ -37,6 +37,10 @@ public class TestStorage extends ComponentManager implements Storage {
     }
 
     @Override
+    public Path getProductInfoBookFilePath() {
+        return null;
+    }
+
     public Path getAddressBookFilePath() {
         return null;
     }

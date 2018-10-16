@@ -6,12 +6,13 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorName;
+import seedu.address.model.distributor.DistributorPhone;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.distributor.Distributor;
-import seedu.address.model.distributor.DistributorPhone;
-import seedu.address.model.person.*;
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Phone;
 import seedu.address.model.person.Product;
 import seedu.address.model.tag.Tag;
 
@@ -30,8 +31,7 @@ public class SampleDataUtil {
             new Distributor(new DistributorName("Roy Balakrishnan"), new DistributorPhone("92624417"))
         };
     }
-   
-            
+
 
     public static Product[] getSamplePersons() {
         return new Product[] {
@@ -63,14 +63,12 @@ public class SampleDataUtil {
         for (Distributor sampleDistributor : getSampleDistributors()) {
             sampleAb.addDistributor(sampleDistributor);
         }
-
-        for (Product sampleProduct : getSamplePersons()) {
-            sampleAb.addPerson(sampleProduct);
-        }
+        //    for (Product sampleProduct : getSamplePersons()) {
+        //        sampleAb.addPerson(sampleProduct);
+        //    }
         return sampleAb;
     }
 
-    
     /**
      * Returns a tag set containing the list of strings given.
     */

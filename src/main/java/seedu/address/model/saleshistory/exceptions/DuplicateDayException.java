@@ -1,9 +1,10 @@
 package seedu.address.model.saleshistory.exceptions;
 
-import java.lang.Exception;
-
+/**
+ * TODO
+ */
 public class DuplicateDayException extends Exception {
-    private static String EXCEPTION_MESSAGE = "The given day is already present in history.";
+    private static final String EXCEPTION_MESSAGE = "The given day is already present in history.";
 
     public DuplicateDayException() {}
 

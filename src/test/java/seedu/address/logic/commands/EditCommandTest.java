@@ -24,6 +24,8 @@ import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.TestStorage;
+import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Product;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -34,7 +36,8 @@ import seedu.address.testutil.PersonBuilder;
  */
 public class EditCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserDatabase(), new TestStorage());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+            new UserDatabase(), new TestStorage());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -44,8 +47,9 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new UserDatabase(), new TestStorage());
+        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedProduct);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -66,8 +70,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.updatePerson(lastPerson, editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new UserDatabase(), new TestStorage());
+        expectedModel.updatePerson(lastProduct, editedProduct);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -80,7 +85,8 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UserDatabase(), new TestStorage());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new UserDatabase(), new TestStorage());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -97,8 +103,9 @@ public class EditCommandTest {
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedProduct);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                new UserPrefs(), new UserDatabase(), new TestStorage());
+        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedProduct);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -157,8 +164,9 @@ public class EditCommandTest {
         Product productToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedProduct).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UserDatabase(), new TestStorage());
-        expectedModel.updatePerson(personToEdit, editedPerson);
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new UserDatabase(), new TestStorage());
+        expectedModel.updatePerson(productToEdit, editedProduct);
         expectedModel.commitAddressBook();
 
         // edit -> first product edited
@@ -199,7 +207,8 @@ public class EditCommandTest {
         Product editedProduct = new PersonBuilder().build();
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedProduct).build();
         EditCommand editCommand = new EditCommand(INDEX_FIRST_PERSON, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(), new UserDatabase(), new TestStorage());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs(),
+                new UserDatabase(), new TestStorage());
 
         showPersonAtIndex(model, INDEX_SECOND_PERSON);
         Product productToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());

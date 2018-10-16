@@ -11,6 +11,9 @@ import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserDatabase;
 import seedu.address.model.login.User;
 
+/**
+ * An Immutable User Database that is serializable to XML format
+ */
 @XmlRootElement(name = "users")
 public class XmlSerializableUserDatabase {
 

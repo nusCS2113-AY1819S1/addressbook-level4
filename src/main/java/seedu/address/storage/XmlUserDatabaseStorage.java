@@ -2,9 +2,9 @@ package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
 
-import java.nio.file.Files;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -47,7 +47,7 @@ public class XmlUserDatabaseStorage implements UserDatabaseStorage {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
-            logger.info("Users file "  + filePath + " not found");
+            logger.info("Users file " + filePath + " not found");
             return Optional.empty();
         }
 

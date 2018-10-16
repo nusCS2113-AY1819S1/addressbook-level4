@@ -3,6 +3,7 @@ package seedu.address.commons.events.model;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyUserDatabase;
 
+/** Indicates the User Database in the model has changed*/
 public class UserDatabaseChangedEvent extends BaseEvent {
 
     public final ReadOnlyUserDatabase data;

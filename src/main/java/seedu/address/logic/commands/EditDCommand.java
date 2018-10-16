@@ -5,11 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DISTRIBUTORS;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -82,11 +79,13 @@ public class EditDCommand extends Command {
      * Creates and returns a {@code Distributor} with the details of {@code distributorToEdit}
      * edited with {@code editDistributorDescriptor}.
      */
-    private static Distributor createEditedDistributor(Distributor distributorToEdit, EditDistributorDescriptor editDistributorDescriptor) {
+    private static Distributor createEditedDistributor(Distributor distributorToEdit,
+                                                       EditDistributorDescriptor editDistributorDescriptor) {
         assert distributorToEdit != null;
 
         DistributorName updatedName = editDistributorDescriptor.getDistName().orElse(distributorToEdit.getDistName());
-        DistributorPhone updatedPhone = editDistributorDescriptor.getDistPhone().orElse(distributorToEdit.getDistPhone());
+        DistributorPhone updatedPhone =
+                editDistributorDescriptor.getDistPhone().orElse(distributorToEdit.getDistPhone());
 
         return new Distributor(updatedName, updatedPhone);
     }

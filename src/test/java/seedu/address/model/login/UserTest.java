@@ -1,11 +1,11 @@
 package seedu.address.model.login;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Test;
 
 import seedu.address.testutil.Assert;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class UserTest {
 
@@ -32,7 +32,8 @@ public class UserTest {
         Assert.assertThrows(NullPointerException.class, () -> new User(VALID_USERNAME, null, VALID_FILE_PATH));
 
         // null address book file path
-        Assert.assertThrows(NullPointerException.class, () -> new User(VALID_USERNAME, VALID_PASSWORD, null));
+        Assert.assertThrows(NullPointerException.class, () -> new User(VALID_USERNAME, VALID_PASSWORD,
+                null));
 
     }
 }

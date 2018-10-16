@@ -1,12 +1,10 @@
 package seedu.address.model.login;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
-
-import static java.nio.file.Paths.get;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents a User in the user database.
@@ -14,10 +12,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
  */
 public class User {
 
+    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
+
     private static final String AB_FILEPATH_FOLDER = "data/";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
-    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
 
     private Username username;
     private Password password;
@@ -26,7 +25,7 @@ public class User {
     public User() {
         this.username = new Username("default");
         this.password = new Password("password");
-        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER,"addressbook-default.xml");
+        this.addressBookFilePath = Paths.get(AB_FILEPATH_FOLDER, "addressbook-default.xml");
     }
 
     /**
@@ -46,8 +45,12 @@ public class User {
         this.addressBookFilePath = addressBookFilePath;
     }
 
+    /**
+     * Returns true if user of the same name has the correct address book extension field.
+     */
     public static boolean isValidAddressBookFilePath(Path test, String username) {
-        return test.equals(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX) && !test.equals("");
+        return test.equals(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX)
+                && !test.equals("");
     }
 
     public Username getUsername() {
@@ -64,7 +67,6 @@ public class User {
 
     /**
      * Returns true if both user of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
      */
     public boolean isSameUser(User otherUser) {
         if (otherUser == this) {

@@ -1,9 +1,10 @@
 package seedu.address.model.timeidentifiedclass.shopday.exceptions;
 
-import java.lang.Exception;
-
+/**
+ * todo
+ */
 public class ClosedShopDayException extends Exception {
-    private static String EXCEPTION_MESSAGE = "Unable to alter a day that is in the past!";
+    private static final String EXCEPTION_MESSAGE = "Unable to alter a day that is in the past!";
 
     public ClosedShopDayException() {}
 

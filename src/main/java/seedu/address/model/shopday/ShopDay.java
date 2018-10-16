@@ -1,29 +1,27 @@
 package seedu.address.model.shopday;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
 import seedu.address.model.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.transaction.Transaction;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.Set;
-import java.util.Iterator;
 
+/**
+ * TODO
+ */
 public class ShopDay {
     private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
     private static LocalDateTime time;
 
-    private TreeMap<String,Transaction> shopDayRecord;
-    private TreeMap<String,Reminder> reminderRecord;
+    private TreeMap<String, Transaction> shopDayRecord;
+    private TreeMap<String, Reminder> reminderRecord;
     private String date;
     private boolean isActiveDay;
-
-    private void initialise() {
-        this.shopDayRecord = new TreeMap<>();
-        this.reminderRecord = new TreeMap<>();
-        this.openDay();
-    }
 
     public ShopDay() {
         this.date = dayFormat.format(time.now());
@@ -39,12 +37,20 @@ public class ShopDay {
         return this.date;
     }
 
-    public void addTransaction(Transaction transaction) throws ClosedShopDayException,DuplicateTransactionException {
+    /**
+     * todo
+     * @param transaction
+     * @throws ClosedShopDayException
+     * @throws DuplicateTransactionException
+     */
+    public void addTransaction(Transaction transaction) throws ClosedShopDayException, DuplicateTransactionException {
         String transactionTime = transaction.getTime();
-        if (!this.isActiveDay) throw new ClosedShopDayException();
-        else if (shopDayRecord.containsKey(transactionTime)) throw new DuplicateTransactionException();
-        else {
-            shopDayRecord.put(transactionTime,transaction);
+        if (!this.isActiveDay) {
+            throw new ClosedShopDayException();
+        } else if (shopDayRecord.containsKey(transactionTime)) {
+            throw new DuplicateTransactionException();
+        } else {
+            shopDayRecord.put(transactionTime, transaction);
         }
     }
 
@@ -72,7 +78,13 @@ public class ShopDay {
         this.isActiveDay = true;
     }
 
-    public void closeDay(){
+    public void closeDay() {
         this.isActiveDay = false;
+    }
+
+    private void initialise() {
+        this.shopDayRecord = new TreeMap<>();
+        this.reminderRecord = new TreeMap<>();
+        this.openDay();
     }
 }

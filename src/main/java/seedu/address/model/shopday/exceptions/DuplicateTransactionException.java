@@ -1,9 +1,11 @@
 package seedu.address.model.shopday.exceptions;
 
-import java.lang.Exception;
-
+/**
+ * todo
+ */
 public class DuplicateTransactionException extends Exception {
-    private static String EXCEPTION_MESSAGE = "This day has already recorded another transaction at the given time.";
+    private static final String EXCEPTION_MESSAGE = "This day has already recorded another "
+            + "transaction at the given time.";
 
     public DuplicateTransactionException() {}
 

@@ -82,6 +82,10 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(addressBook));
     }
 
+    /**
+     * Similar to {@link #deleteAddressBook(User)}
+     * @param user location of the data. Cannot be null
+     */
     public void deleteAddressBook(User user) throws IOException {
         requireNonNull(filePath);
         Files.delete(filePath);

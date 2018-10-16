@@ -3,9 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-//import seedu.address.model.person.Person;
-import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-//import seedu.address.model.person.Product;
+import seedu.address.model.distributor.Distributor;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
@@ -14,7 +12,7 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Product;
-import seedu.address.model.distributor.Distributor;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * The API of the Model component.
@@ -74,13 +72,15 @@ public interface Model {
     /**
      * Replaces the given distributor {@code target} with {@code editedDistributor}.
      * {@code target} must exist in the address book.
-     * The distributor identity of {@code editedDistributor} must not be the same as another existing distributor in the Inventarie.
+     * The distributor identity of {@code editedDistributor} must not be the same as another existing distributor
+     * in the Inventarie.
      */
     void updateDistributor(Distributor target, Distributor editedDistributor);
 
-    
+
     /** Returns an unmodifiable view of the filtered person list
-     * The product identity of {@code editedProduct} must not be the same as another existing product in the address book.
+     * The product identity of {@code editedProduct} must not be the same as another existing
+     * product in the address book.
      */
     void updatePerson(Product target, Product editedProduct);
 
@@ -143,7 +143,7 @@ public interface Model {
      * Returns the latest transaction.
      */
     Transaction getLastTransaction();
-    
+
     /**
     * Sets the user list
     */
@@ -175,4 +175,7 @@ public interface Model {
     User getLoggedInUser();
 
     void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException;
+
+    /** Returns the AddressBook */
+    ReadOnlyAddressBook getAddressBook();
 }

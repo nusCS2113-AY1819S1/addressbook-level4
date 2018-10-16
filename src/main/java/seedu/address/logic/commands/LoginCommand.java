@@ -9,6 +9,9 @@ import seedu.address.model.login.Password;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 
+/**
+ *  Authenticates user login's credentials
+ */
 public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";

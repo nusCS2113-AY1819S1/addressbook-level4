@@ -1,16 +1,27 @@
 package seedu.address.model.login;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Iterator;
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
-import java.util.Iterator;
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
+/**
+ * A list of users that enforces uniqueness between its elements and does not allow nulls.
+ * A user is considered unique by comparing using {@code User#isSameUser(User)}. As such, adding and updating of
+ * users uses User#isSameUser(User) for equality so as to ensure that the user being added or updated is
+ * unique in terms of identity in the UniqueUsersList. However, the removal of a user uses User#equals(Object) so
+ * as to ensure that the user with exactly the same fields will be removed.
+ *
+ * Supports a minimal set of list operations.
+ *
+ * @see User#isSameUser(User)
+ */
 public class UniqueUsersList implements Iterable<User> {
 
     private final ObservableList<User> internalList = FXCollections.observableArrayList();
@@ -111,6 +122,9 @@ public class UniqueUsersList implements Iterable<User> {
                 && this.internalList.equals(((UniqueUsersList) other).internalList));
     }
 
+    /**
+     * Returns true if {@code persons} contains only unique users.
+     */
     private boolean usersAreUnique(List<User> persons) {
         for (int i = 0; i < persons.size() - 1; i++) {
             for (int j = i + 1; j < persons.size(); j++) {

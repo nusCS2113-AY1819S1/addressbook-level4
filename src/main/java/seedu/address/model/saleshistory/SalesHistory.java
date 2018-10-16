@@ -1,16 +1,20 @@
 package seedu.address.model.saleshistory;
 
+import java.util.NoSuchElementException;
+import java.util.TreeMap;
+
 import seedu.address.model.saleshistory.exceptions.DuplicateDayException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-import java.util.NoSuchElementException;
-import java.util.TreeMap;
 
+/**
+ * TODO
+ */
 public class SalesHistory {
-    private TreeMap<String,ShopDay> salesHistory;
+    private TreeMap<String, ShopDay> salesHistory;
     private ShopDay activeDay;
 
     public SalesHistory() {
@@ -25,13 +29,28 @@ public class SalesHistory {
         }
     }
 
+    /**
+     *
+     * @param day
+     * @throws DuplicateDayException
+     */
     public void addDay(ShopDay day) throws DuplicateDayException {
-        if(salesHistory.containsKey(day.getDay())) throw new DuplicateDayException();
-        salesHistory.put(day.getDay(),day);
+        if (salesHistory.containsKey(day.getDay())) {
+            throw new DuplicateDayException();
+        }
+        salesHistory.put(day.getDay(), day);
     }
 
+    /**
+     *
+     * @param day
+     * @throws DuplicateDayException
+     * @throws InvalidTimeFormatException
+     */
     public void addDay(String day) throws DuplicateDayException, InvalidTimeFormatException {
-        if (salesHistory.containsKey(day)) throw new DuplicateDayException();
+        if (salesHistory.containsKey(day)) {
+            throw new DuplicateDayException();
+        }
         ShopDay toBeAdded = null;
         try {
             toBeAdded = new ShopDay(day);
@@ -69,17 +88,22 @@ public class SalesHistory {
         this.activeDay = salesHistory.get(day.getDay());
     }
 
+    /**
+     * TODO
+     * @param transaction
+     */
     public void addTransaction(Transaction transaction) {
         // TODO: Update the exception handling here.
 
         try {
             activeDay.addTransaction(transaction);
         } catch (InvalidTimeFormatException e) {
+            // TODO
 
         } catch (ClosedShopDayException e) {
-
+            //TODO
         } catch (DuplicateTransactionException e) {
-
+            //TODO
         }
 
     }

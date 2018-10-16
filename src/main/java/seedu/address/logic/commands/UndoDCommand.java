@@ -10,22 +10,23 @@ import seedu.address.model.Model;
 /**
  * Reverts the {@code model}'s address book to its previous state.
 */
- public class UndoDCommand extends Command {
+public class UndoDCommand extends Command {
 
  public static final String COMMAND_WORD = "undoD";
  public static final String MESSAGE_SUCCESS = "Undo success!";
  public static final String MESSAGE_FAILURE = "No more commands to undo!";
 
- @Override
- public CommandResult execute(Model model, CommandHistory history) throws CommandException {
- requireNonNull(model);
 
- if (!model.canUndoAddressBook()) {
- throw new CommandException(MESSAGE_FAILURE);
- }
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
 
- model.undoAddressBook();
- model.updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
- return new CommandResult(MESSAGE_SUCCESS);
- }
- }
+        if (!model.canUndoAddressBook()) {
+            throw new CommandException(MESSAGE_FAILURE);
+        }
+
+        model.undoAddressBook();
+        model.updateFilteredDistributorList(PREDICATE_SHOW_ALL_DISTRIBUTORS);
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+}
