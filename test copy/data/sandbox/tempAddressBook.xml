@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <persons>
+        <name>Apple</name>
+        <phone>85355255</phone>
+        <email>Ah Huat</email>
+        <address>fruit</address>
+    </persons>
+</addressbook>

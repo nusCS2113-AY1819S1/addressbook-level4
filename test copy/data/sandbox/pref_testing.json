@@ -1,0 +1,12 @@
+{
+  "guiSettings" : {
+    "windowWidth" : 600.0,
+    "windowHeight" : 600.0,
+    "windowCoordinates" : {
+      "x" : 0,
+      "y" : 23
+    }
+  },
+  "addressBookFilePath" : "src/test/data/sandbox/sampleData.xml",
+  "usersFilePath" : "data/users.xml"
+}
