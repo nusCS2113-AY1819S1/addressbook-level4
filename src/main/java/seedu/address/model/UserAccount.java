@@ -4,9 +4,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
-
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import seedu.address.model.user.User;
 import seedu.address.storage.JsonUserStorage;
 
@@ -37,12 +36,13 @@ public class UserAccount {
         boolean isPresent = false;
 
         try {
-            JSONObject userAccounts = userStorage.getUserAccounts();
-            if (userAccounts.containsKey(loggedUsername)) {
-                String password = (String) userAccounts.get(loggedUsername);
-                isPresent = password.equals(loggedPassword);
+            JsonObject userAccounts = userStorage.getUserAccounts();
+
+            if (userAccounts.has(loggedUsername)) {
+                JsonElement password = userAccounts.get(loggedUsername);
+                isPresent = loggedPassword.equals(password.getAsString());
             }
-        } catch (ParseException | IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 

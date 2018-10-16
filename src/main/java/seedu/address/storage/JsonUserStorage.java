@@ -1,14 +1,16 @@
 package seedu.address.storage;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * A class to access UserAccount stored in the hard disk as a JSON file
@@ -32,25 +34,27 @@ public class JsonUserStorage {
     /**
      * Returns the user account JSON as a hash map JSON object.
      */
-    public JSONObject getUserAccounts() throws IOException, ParseException {
-        JSONParser parser = new JSONParser();
-        Object object = parser.parse(new FileReader(folderPathString));
-        return (JSONObject) object;
+    public JsonObject getUserAccounts() throws IOException {
+        JsonParser parser = new JsonParser();
+        JsonElement jsonElement = parser.parse(new FileReader(folderPathString));
+
+        return jsonElement.getAsJsonObject();
     }
 
     /**
      * Creates a user account JSON file.
      */
-    @SuppressWarnings("unchecked")
     private void createUserFile() throws IOException {
         Files.createDirectory(folderPath);
         Files.createFile(filePath);
 
-        JSONObject object = new JSONObject();
-        object.put("admin", "root");
+        Gson gson = new Gson();
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("admin", "root");
 
+        String json = gson.toJson(jsonObject);
         FileWriter file = new FileWriter(folderPathString);
-        file.write(object.toJSONString());
+        file.write(json);
         file.flush();
     }
 }
