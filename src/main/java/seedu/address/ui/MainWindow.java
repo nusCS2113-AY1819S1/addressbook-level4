@@ -133,7 +133,7 @@ public class MainWindow extends UiPart<Stage> {
 
         noteManager = new NoteManager();
         noteManager.getDataFromFile();
-        noteListPanel = new NoteListPanel(noteManager.getObservableNotesList());
+        noteListPanel = new NoteListPanel(noteManager.getFilteredNotesList());
         notesListPanelPlaceholder.getChildren().add(noteListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
