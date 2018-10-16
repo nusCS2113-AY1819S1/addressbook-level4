@@ -108,19 +108,4 @@ public class ExpenditureList implements Iterable<Expenditure> {
     public int hashCode() {
         return internalList.hashCode();
     }
-
-    /**
-     * Returns true if {@code expenditures} contains only unique expenditures.
-     */
-    private boolean expendituresAreUnique(List<Expenditure> expenditures) {
-        for (int i = 0; i < expenditures.size() - 1; i++) {
-            for (int j = i + 1; j < expenditures.size(); j++) {
-                if (expenditures.get(i).isSameExpenditure(expenditures.get(j))) {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
 }
