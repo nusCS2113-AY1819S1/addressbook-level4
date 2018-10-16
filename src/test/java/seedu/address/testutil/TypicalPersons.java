@@ -40,7 +40,8 @@ public class TypicalPersons {
     public static final Event CARL = new PersonBuilder().withName("Frisbee Competition").withContact("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Event DANIEL = new PersonBuilder().withName("Art and Crafts").withContact("Daniel Meier")
-            .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street").withTags("friends").build();
+            .withPhone("87652533").withEmail("cornelia@example.com").withAddress("10th street").withTags("friends")
+            .build();
     public static final Event ELLE = new PersonBuilder().withName("Music Tryouts").withContact("Elle Meyer")
             .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Event FIONA = new PersonBuilder().withName("Dining In The Dark").withContact("Fiona Kunz")

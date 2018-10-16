@@ -13,7 +13,7 @@ import org.junit.Test;
 import org.testfx.api.FxToolkit;
 
 import guitests.guihandles.HelpWindowHandle;
-import javafx.stage.Stage;
+//import javafx.stage.Stage; unused import because of commented out isFocused test
 
 public class HelpWindowTest extends GuiUnitTest {
 
