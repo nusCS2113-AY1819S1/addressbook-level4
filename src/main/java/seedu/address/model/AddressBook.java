@@ -134,8 +134,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Return true if a person with the same identity is already in the
      * specified group.
      */
-    public boolean hasPersonInGroup(AddGroup addGroup) {
-        return groups.contains(addGroup);
+    public boolean hasPersonInGroup(AddGroup aG) {
+        return groups.contains(aG);
     }
 
     //// util methods

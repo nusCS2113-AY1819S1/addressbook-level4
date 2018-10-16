@@ -8,7 +8,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroupWithGroupAndPerson;
 import static seedu.address.testutil.TypicalGroups.TUT_1;
+import static seedu.address.testutil.TypicalGroups.getTut1;
+import static seedu.address.testutil.TypicalGroups.getTypicalGroupsWithPersons;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -70,6 +73,37 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasPerson_nullPerson_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.hasPerson(null);
+    }
+
+    @Test
+    public void hasPerson_personNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasPerson_personInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        assertTrue(addressBook.hasPerson(ALICE));
+    }
+
+    @Test
+    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addPerson(ALICE);
+        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
+        assertTrue(addressBook.hasPerson(editedAlice));
+    }
+
+    @Test
+    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getPersonList().remove(0);
+    }
+
+    @Test
     public void resetData_withDuplicateGroups_throwsDuplicateGroupException() {
         // Two groups with the same identity fields
         Group editedTut1 = new GroupBuilder(TUT_1).withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
@@ -84,31 +118,14 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        addressBook.hasPerson(null);
-    }
-
-    @Test
     public void hasGroup_nullGroup_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         addressBook.hasGroup(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
-    }
-
-    @Test
     public void hasGroup_groupNotInAddressBook_returnsFalse() {
         assertFalse(addressBook.hasGroup(TUT_1));
-    }
-
-    @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
     }
 
     @Test
@@ -118,15 +135,7 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
-                .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
-    }
-
-    @Test
-    public void hasGroup_groupWithSameIdentityAndTagFieldsInAddressBook_returnsTrue() {
+    public void hasGroup_groupWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.createGroup(TUT_1);
         Group editedTut1 = new GroupBuilder(TUT_1)
                 .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
@@ -136,9 +145,42 @@ public class AddressBookTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        thrown.expect(UnsupportedOperationException.class);
-        addressBook.getPersonList().remove(0);
+    public void hasPersonInGroup_null_throwsNullPointerException(){
+        addressBook.createGroup(getTypicalGroupsWithPersons());
+        thrown.expect(NullPointerException.class);
+        assertTrue(addressBook.hasPersonInGroup(null));
+    }
+
+    @Test
+    public void hasPersonInGroup_groupAlreadyHasPerson_returnsTrue(){
+        addressBook.createGroup(getTypicalGroupsWithPersons());
+        assertTrue(addressBook.hasPersonInGroup(getAddGroupWithGroupAndPerson()));
+    }
+
+    @Test
+    public void hasPersonInGroup_groupDoesNotHavePerson_returnsFalse(){
+        addressBook.createGroup(getTut1());
+        assertFalse(addressBook.hasPersonInGroup(getAddGroupWithGroupAndPerson()));
+    }
+
+    @Test
+    public void addGroup_null_throwsNullPointerException(){
+        addressBook.createGroup(getTypicalGroupsWithPersons());
+        thrown.expect(NullPointerException.class);
+        addressBook.addGroup(null);
+    }
+
+    @Test
+    public void addGroup_personAlreadyInGroup_throwsDuplicatePersonException(){
+        addressBook.createGroup(getTypicalGroupsWithPersons());
+        thrown.expect(DuplicatePersonException.class);
+        addressBook.addGroup(getAddGroupWithGroupAndPerson());
+    }
+
+    @Test
+    public void addGroup_personNotAlreadyInGroup_addsPersonToGroup(){
+        addressBook.createGroup(getTut1());
+        addressBook.addGroup(getAddGroupWithGroupAndPerson());
     }
 
     @Test
