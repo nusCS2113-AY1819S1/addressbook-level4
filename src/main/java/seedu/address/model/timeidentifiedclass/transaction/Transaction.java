@@ -35,7 +35,7 @@ public class Transaction extends TimeIdentifiedClass {
      * @param transactionRecord
      * @throws InvalidTimeFormatException
      */
-    public Transaction(String transactionTime, TreeMap<String,Integer> transactionRecord)
+    public Transaction(String transactionTime, TreeMap<String, Integer> transactionRecord)
             throws InvalidTimeFormatException {
         if (!isValidTransactionTime(transactionTime)) {
             throw new InvalidTimeFormatException();
@@ -111,8 +111,7 @@ public class Transaction extends TimeIdentifiedClass {
                 || !isValidDay(times[2])
                 || !isValidHour(times[3])
                 || !isValidMinute(times[4])
-                || !isValidSecond(times[5]))
-        {
+                || !isValidSecond(times[5])) {
             return false;
         }
 

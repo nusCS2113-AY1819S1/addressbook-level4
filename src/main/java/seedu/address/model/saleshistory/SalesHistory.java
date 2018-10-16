@@ -104,8 +104,7 @@ public class SalesHistory {
     public void addTransaction(Transaction transaction) throws
             InvalidTimeFormatException,
             ClosedShopDayException,
-            DuplicateTransactionException
-    {
+            DuplicateTransactionException {
         try {
             activeDay.addTransaction(transaction);
         } catch (InvalidTimeFormatException e) {

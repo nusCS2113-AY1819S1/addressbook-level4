@@ -1,12 +1,12 @@
 package seedu.address.storage;
 
+import java.util.Objects;
+import java.util.TreeMap;
+import javax.xml.bind.annotation.XmlElement;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
-
-import javax.xml.bind.annotation.XmlElement;
-import java.util.Objects;
-import java.util.TreeMap;
 
 /**
  * This class adapts Transaction for JAXB.
@@ -14,14 +14,13 @@ import java.util.TreeMap;
 
 public class XmlAdaptedTransaction {
 
+    private static final String INCORRECT_TRANSACTION_TIME_MESSAGE_FORMAT = "Incorrect transaction time of %s found!";
+    private static final String MISSING_FIELD_MESSAGE_FORMAT = "Transaction's %s field is missing!";
+
     @XmlElement(required = true)
     private String transactionTime;
     @XmlElement(required = true)
     private TreeMap<String, Integer> transactionRecord;
-
-
-    private static final String INCORRECT_TRANSACTION_TIME_MESSAGE_FORMAT = "Incorrect transaction time of %s found!";
-    private static final String MISSING_FIELD_MESSAGE_FORMAT = "Transaction's %s field is missing!";
 
     /**
      * Constructs an XmlAdaptedTransaction.
@@ -54,6 +53,12 @@ public class XmlAdaptedTransaction {
         transactionRecord = transaction.getTransactionRecord();
     }
 
+    /**
+     * This method converts the XmlAdaptedTransaction into a Transacation object, and returns it.
+     * @return transaction
+     * @throws IllegalValueException
+     */
+
     public Transaction toModelType() throws IllegalValueException {
 
         if (transactionRecord == null) {
@@ -65,11 +70,11 @@ public class XmlAdaptedTransaction {
         try {
             transaction = new Transaction(transactionTime, transactionRecord);
         } catch (InvalidTimeFormatException e) {
-            throw new IllegalValueException(String.format(INCORRECT_TRANSACTION_TIME_MESSAGE_FORMAT, "transaction time"));
+            throw new IllegalValueException(String.format(INCORRECT_TRANSACTION_TIME_MESSAGE_FORMAT,
+                    "transaction time"));
         }
         return transaction;
     }
-
 
     @Override
     public boolean equals(Object other) {

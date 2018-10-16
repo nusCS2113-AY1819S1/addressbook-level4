@@ -37,7 +37,8 @@ public class ShopDay extends TimeIdentifiedClass {
     }
 
     /**
-     * This constructor allows us to create a new ShopDay object using a date. It is to facilitate creation of reminders.
+     * This constructor allows us to create a new ShopDay object using a date. It is to facilitate
+     * creation of reminders.
      * @param date
      * @throws InvalidTimeFormatException
      */
@@ -65,8 +66,7 @@ public class ShopDay extends TimeIdentifiedClass {
             this.date = date;
             this.shopDayRecord = shopDayRecord;
             this.reminderRecord = reminderRecord;
-        }
-        else {
+        } else {
             throw new InvalidTimeFormatException();
         }
     }
@@ -150,7 +150,9 @@ public class ShopDay extends TimeIdentifiedClass {
         this.isActiveDay = false;
     }
 
-    public boolean isOpenDay() { return isActiveDay; }
+    public boolean isOpenDay() {
+        return isActiveDay;
+    }
 
     /**
      *
