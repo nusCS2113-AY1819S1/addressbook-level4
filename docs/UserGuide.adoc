@@ -223,15 +223,15 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
-=== Exporting all contacts : `exportall` [coming in v1.4]
+=== Exporting all contacts : `exportall`
 
-Export all persons in the address book to mobile phone. +
+Export all name, phone, address and email of all persons in the address book. +
 Format: `exportall FILETYPE`
 
 Examples:
 
 * `exportall csv`
-* `exportall vcf`
+* `exportall vcf` [coming in v1.4]
 
 === Exporting contacts : `export` [coming in v1.4]
 
@@ -337,7 +337,7 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *ExportAll* : `exportall FILETYPE` (to be added)
+* *ExportAll* : `exportall FILETYPE`
 * *Mail* : `mail [i/INDEX]` (to be added)
 * *List Schedule* : `commonschedule p/PERSON…[PERSON] sd/START-DATE-DDMMYYYY` * *Mail* : `mail [i/INDEX]` +
 (to be added)
