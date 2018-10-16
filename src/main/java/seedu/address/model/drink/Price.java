@@ -12,7 +12,7 @@ public class Price {
             "Price should contain only numbers and at most 1 decimal point. "
                     + "It must be least 1 digit long with a maximum of 2 digits after the decimal point";
     public static final String PRICE_VALIDATION_REGEX = "[0-9]+([.][0-9]{1,2})?";
-    private float price;
+    private float value;
 
     /**
      * Constructs a {@code Price}.
@@ -22,17 +22,17 @@ public class Price {
     public Price(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
-        this.price = Float.parseFloat(price);
+        value = Float.parseFloat(price);
     }
 
-    public float getPrice() {
-        return price;
+    public float getValue() {
+        return value;
     }
 
-    public void setPrice(String price) {
+    public void setValue(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
-        this.price = Float.parseFloat(price);
+        value = Float.parseFloat(price);
     }
 
     /**
@@ -44,19 +44,19 @@ public class Price {
 
     @Override
     public String toString() {
-        return (Float.toString(price));
+        return (Float.toString(value));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Price // instanceof handles nulls
-                && (price == (((Price) other).price))); // state check
+                && (value == (((Price) other).value))); // state check
     }
 
     @Override
     public int hashCode() {
-        return Float.hashCode(price);
+        return Float.hashCode(value);
     }
 
 }
