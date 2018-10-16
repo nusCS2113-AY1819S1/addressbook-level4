@@ -62,6 +62,15 @@ Examples:
 
 * `add t/Complete 2113 Tutorial d/Wed w/2`
 
+=== Adding a milestone: `add_milestone`
+
+Adds a milestone to selected task from the task book +
+Format: `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...`
+
+Examples:
+
+* `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
+
 === Complete a task: `complete`
 
 Complete a task in the task book +
@@ -212,6 +221,8 @@ _{explain how the user can enable/disable data encryption}_
 
 * *Add* : `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
+* *Add Milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
+e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 * *Clear* : `clear`
 * *Deadline* : `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`

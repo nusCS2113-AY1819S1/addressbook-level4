@@ -9,8 +9,8 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-
 import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 import unrefactored.commons.core.ComponentManager;
 import unrefactored.commons.core.LogsCenter;
@@ -92,6 +92,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskBookChanged();
     }
 
+    //@@author JeremyInElysium
+    @Override
+    public void addMilestone(Milestone milestone){
+        versionedTaskBook.addMilestone(milestone);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        indicateTaskBookChanged();
+    }
     //=========== Filtered Task List Accessors =============================================================
 
     /**
