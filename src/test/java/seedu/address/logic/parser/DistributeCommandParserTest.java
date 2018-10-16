@@ -31,7 +31,7 @@ import seedu.address.model.distribute.DistributeAlgorithm;
 import seedu.address.model.group.GroupName;
 
 public class DistributeCommandParserTest {
-    DistributeCommandParser parser = new DistributeCommandParser();
+    private DistributeCommandParser parser = new DistributeCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
