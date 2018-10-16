@@ -43,9 +43,11 @@ public class GradebookManager {
             status = EXTRA_SPACE;
         }
 
-        StorageController.getGradebookStorage().add(new XmlAdaptedGradebook(moduleCode, gradebookComponentName,
-                gradebookComponentMaxMarks, gradebookComponentWeightage));
-        StorageController.storeData();
+        if (!empty && !duplicate && !extraSpace) {
+            StorageController.getGradebookStorage().add(new XmlAdaptedGradebook(moduleCode, gradebookComponentName,
+                    gradebookComponentMaxMarks, gradebookComponentWeightage));
+            StorageController.storeData();
+        }
 
         return String.format(status,
                 moduleCode,
