@@ -343,6 +343,10 @@ public class CommandTestUtil {
         public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
             throw new AssertionError("This method should not be called.");
         }
-    }
 
+        @Override
+        public void updateFilteredCompanyJobList(Predicate<JobOffer> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+    }
 }
