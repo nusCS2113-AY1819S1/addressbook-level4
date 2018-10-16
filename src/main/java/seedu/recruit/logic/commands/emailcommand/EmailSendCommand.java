@@ -55,9 +55,12 @@ public class EmailSendCommand extends Command {
         //Generate content (bodyText)
         String bodyText = generateContent(model, emailUtil, recipients, contents);
 
+        //Generate subject
+        String subject = generateSubject(emailUtil);
+        
         //Sending the email
         try {
-            MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, "hello", bodyText);
+            MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, subject, bodyText);
             EmailUtil.sendMessage(EmailUtil.serviceInit(), EmailUtil.DEFAULT_FROM, mimeMessage);
             result = EMAIL_SUCCESS;
         } catch (MessagingException | GeneralSecurityException e) {
@@ -143,5 +146,15 @@ public class EmailSendCommand extends Command {
             }
         }
         return bodyText;
+    }
+
+    private String generateSubject(EmailUtil emailUtil) {
+        String subject;
+        if(emailUtil.isAreRecipientsCandidates()) {
+            subject = "Hot new job offers that you will love!";
+        } else {
+            subject = "New candidates found for your company!";
+        }
+        return subject;
     }
 }
