@@ -53,6 +53,13 @@ public class TypicalGroups {
         return ab;
     }
 
+    public static Group getTut1(){
+        return new GroupBuilder()
+                .withGroupName(VALID_GROUP_NAME_TUT_1)
+                .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
+                .withTags(VALID_GROUP_TAG_TUT_1).build();
+    }
+
     public static List<Group> getTypicalGroups() {
         return new ArrayList<>(Arrays.asList(TUT_1, CS1010, TUT_2, TUT_3, TUT_4));
     }
