@@ -189,6 +189,9 @@ public class Person {
         return true;
     }
 
+    /**
+     * Returns the tags of the person as an entire String
+     */
     public String getStringTags() {
         //TODO throw an exception instead
         if (tags.isEmpty()) {
