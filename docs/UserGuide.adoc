@@ -167,6 +167,23 @@ Deletes the 2nd record in the expense book.
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
+=== Delete records in same date.
+
+Deletes the records whose date is required from the expense book. +
+Format: `delete_date dd-mm-yyyy`
+
+****
+* Deletes the record at the specified `DATE`.
+* The DATE refers to the Date the user keyed in, which is shown in the displayed list.
+* The Date must follow the format: dd-mm-yyyy or dd-m-yyyy, and should be valid.
+****
+
+Examples:
+* `delete 31-03-1999` +
+Deletes the records whose date is 31-03-1999.
+* `delete 30-4-1999` +
+Deletes the records whose date is 31-04-1999.
+
 === Selecting a record : `select`
 
 Selects the record identified by the index number used in the displayed record list. +
