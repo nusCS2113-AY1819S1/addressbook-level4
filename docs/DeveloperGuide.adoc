@@ -319,6 +319,62 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::mergetimetable[]
+=== Merge Timetable
+==== Current Implementation
+The merge feature allows for users to select multiple contacts and outputs a merged timetable with all
+their common free slots. When the user inputs the indexes of the contacts he wants to merge, the `Persons` are stored
+in an array , `personsToMerge`. The array is then iterated through, merging the all objects inside and
+outputting a final `Person` to be added to the address book.
+
+Given below is an example usage scenario and how the merge mechanism behaves at each step.
+
+Step 1. The user selects the indexes of the contacts he wants to merge. `MergeCommandParser` takes the input and puts
+it in a list, it then calls MergeCommand with the list as an argument.
+
+image::MergeCommand1.png[width="800"]
+
+Step 2. The Merge Command uses the list of indexes and the `filteredPersonsList` to create and fill the array
+`personsToMerge`.
+
+image::MergeCommand2.png[width="800"]
+
+Step 3. The `mergeTimetable` function is called on each element in `personsToMerge` and the element after it. The merge
+Timetable function iterates through all the time slots in both timetables and compares them.
+
+image::MergeCommand3.png[width="800"]
+
+Step 4. Based on whether both original time slots were free or busy, it outputs a merged free or busy time slot and
+adds it to the merged timetable
+
+image::MergeCommand4.png[width="800"]
+
+Step 5. The last element in the `personsToMerge` array is returned after all the iterations. This new person is added
+to the address book.
+
+image::MergeCommand5.PNG[width="800"]
+
+The following sequence diagram shows how the `merge` function works.
+
+
+==== Design Considerations
+
+===== Aspect: How merge executes
+* **Alternative 1 (current choice):** Create a new person with the merged timetable to add to the address book.
+** Pros: Easier to implement for testing the logic of the merge command.
+** Cons: Very clunky UI wise to have to find the added person.
+Have to manually delete the person after every merge to
+to prevent having many merged people in the contacts list.
+* **Alternative 2 (To be implemented):** Have a specific Class that has timetable and name that is updated with the
+merged timetable and names of people being merged whenever merge command is called and have a specific part of the UI
+ for displaying this Class.
+** Pros: Better user experience by letting user easily see the merged timetable. Does not need manual deletion of
+contacts. Better follows Separation of Concerns Principle.
+** Cons: Requires more time to implement.
+
+
+// end::mergetimetable[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
