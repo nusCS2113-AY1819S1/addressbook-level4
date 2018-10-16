@@ -5,9 +5,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.ui.BrowserPanel.DEFAULT_PAGE;
-import static seedu.recruit.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static seedu.recruit.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static seedu.recruit.ui.StatusBarFooter.TOTAL_PERSONS_STATUS;
+import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL;
+import static seedu.recruit.ui.StatusBarFooter.SYNC_CANDIDATE_STATUS_UPDATED;
+import static seedu.recruit.ui.StatusBarFooter.TOTAL_CANDIDATES_STATUS;
 import static seedu.recruit.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.recruit.ui.testutil.GuiTestAssert.assertListMatching;
 
@@ -271,7 +271,7 @@ public abstract class CandidateBookSystemTest {
     protected void assertStatusBarUnchangedExceptSyncStatus() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
-        String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
+        String expectedSyncStatus = String.format(SYNC_CANDIDATE_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
         assertFalse(handle.isSaveLocationChanged());
         assertFalse(handle.isTotalPersonsStatusChanged());
@@ -285,10 +285,10 @@ public abstract class CandidateBookSystemTest {
     protected void assertStatusBarChangedExceptSaveLocation() {
         StatusBarFooterHandle handle = getStatusBarFooter();
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
-        String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
+        String expectedSyncStatus = String.format(SYNC_CANDIDATE_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
         final int totalPersons = testApp.getModel().getCandidateBook().getCandidateList().size();
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, totalPersons), handle.getTotalPersonsStatus());
+        assertEquals(String.format(TOTAL_CANDIDATES_STATUS, totalPersons), handle.getTotalPersonsStatus());
         assertFalse(handle.isSaveLocationChanged());
     }
 
@@ -302,8 +302,8 @@ public abstract class CandidateBookSystemTest {
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
-        assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getCandidateBook().getCandidateList().size()),
+        assertEquals(SYNC_CANDIDATE_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
+        assertEquals(String.format(TOTAL_CANDIDATES_STATUS, getModel().getCandidateBook().getCandidateList().size()),
                 getStatusBarFooter().getTotalPersonsStatus());
     }
 
