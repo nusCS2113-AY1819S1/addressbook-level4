@@ -15,6 +15,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,7 +26,12 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final VersionedExpenditureTracker versionedExpenditureTracker;
     private final FilteredList<Person> filteredPersons;
+
     private final FilteredList<Expenditure> filteredExpenditures;
+
+    private final FilteredList<Task> filteredTasks;
+
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -39,7 +45,10 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         versionedExpenditureTracker = new VersionedExpenditureTracker(expenditureTracker);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+
         filteredExpenditures = new FilteredList<>(versionedExpenditureTracker.getExpenditureList());
+
+        filteredTasks = new FilteredList<>(versionedAddressBook.getTaskList());
     }
 
     public ModelManager() {
@@ -78,6 +87,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(expenditure);
         return versionedExpenditureTracker.hasExpenditure(expenditure);
     }
+    
+    @Override
+    public boolean hasTask(Task task) {
+        requireNonNull(task);
+        return versionedAddressBook.hasTask(task);
+    }
 
     @Override
     public void deletePerson(Person target) {
@@ -88,6 +103,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteExpenditure(Expenditure target) {
         versionedExpenditureTracker.removeExpenditure(target);
+    }
+    
+    @Override
+    public void deleteTask(Task target) {
+        versionedAddressBook.removeTask(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addTask(Task task) {
+        versionedAddressBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateAddressBookChanged();
     }
 
@@ -120,6 +147,15 @@ public class ModelManager extends ComponentManager implements Model {
         versionedExpenditureTracker.updateExpenditure(target, editedExpenditure);
         indicateAddressBookChanged();
     }
+  
+    @Override
+    public void updateTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        versionedAddressBook.updateTask(target, editedTask);
+        indicateAddressBookChanged();
+    }
+
     @Override
     public void deleteTag(Tag tag) {
         versionedAddressBook.removeTag(tag);
@@ -140,15 +176,28 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Expenditure> getFilteredExpenditureList() {
         return FXCollections.unmodifiableObservableList(filteredExpenditures);
     }
+  
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return FXCollections.unmodifiableObservableList(filteredTasks);
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+  
     @Override
     public void updateFilteredExpenditureList(Predicate<Expenditure> predicate) {
         requireNonNull(predicate);
         filteredExpenditures.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+        requireNonNull(predicate);
+        filteredTasks.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
