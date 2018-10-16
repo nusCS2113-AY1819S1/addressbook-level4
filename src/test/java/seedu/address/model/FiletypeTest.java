@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.Assert;
 
-class FiletypeTest {
+//@@author jitwei98
+public class FiletypeTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
