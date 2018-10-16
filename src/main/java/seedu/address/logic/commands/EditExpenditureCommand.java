@@ -63,9 +63,9 @@ public class EditExpenditureCommand extends Command{
         }
 
         model.updateExpenditure(expenditureToEdit, editedexpenditure);
-        model.updateFilteredExpenditureList(PREDICATE_SHOW_ALL_Expenditures);
+        model.updateFilteredExpenditureList(Model.PREDICATE_SHOW_ALL_EXPENDITURES);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_Expenditure_SUCCESS, editedexpenditure));
+        return new CommandResult(String.format(MESSAGE_EDIT_EXPENDITURE_SUCCESS, editedexpenditure));
     }
 
     /**

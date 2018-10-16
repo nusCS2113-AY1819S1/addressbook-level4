@@ -36,12 +36,12 @@ public class DeleteExpenditureCommand extends Command{
         List<Expenditure> lastShownList = model.getFilteredExpenditureList();
 
 
-        Expenditure.expenditureToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(expenditureToDelete);
+        Expenditure expenditureToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteExpenditure(expenditureToDelete);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, expenditureToDelete));
     }
 
 
 }
-}
+
