@@ -239,6 +239,16 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Authentication
+==== Current Implementation
+
+The authentication mechanism is facilitated by the Command class and the UserAccount class.
+It stores the user information, which includes username and password, using a JSON file.
+Additionally, authentication and admin status checks can be done using static methods in the Command class:
+
+* `authenticate` -- Checks if a user is logged in.
+* ``
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
