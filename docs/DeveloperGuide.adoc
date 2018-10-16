@@ -926,7 +926,7 @@ Use case ends.
 
 [discrete]
 
-=== 2.  Use case: Delete expense entry whose date isi required. [Linh Chi]
+=== 2.  Use case: Delete expense entry whose date is required. [Linh Chi]
 
 *MSS*
 
@@ -953,7 +953,7 @@ Use case ends.
 * 4a. User’s input is not a valid entry.
 ** FinancialPlanner throws invalid data error and resumes at step 4.
 * 5a. User declines the confirmation.
-** Use case resumes at step 4.
+** Use case resumes at step 3.
 
 [discrete]
 === 3.  Use case: See history of expenses for a certain period [Vincent]
