@@ -376,14 +376,13 @@ Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Sinc
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 // up until here
 
-The following sequence diagram shows how the undo operation works:
-// TODO: modify this with a new sequence diagram
-image::UndoRedoSequenceDiagram.png[width="800"]
+The following sequence diagram shows how the ExportAll operation works:
+
+image::ExportAllSequenceDiagram.png[width="800"]
 
 The following activity diagram summarizes what happens when `CsvWriter#write()` is called:
-// TODO: show the if condition ?
-
-image::UndoRedoActivityDiagram.png[width="650"]
+// TODO: show the if condition for file exists and not exists
+//image::UndoRedoActivityDiagram.png[width="650"]
 
 // tag::exportall[]
 
