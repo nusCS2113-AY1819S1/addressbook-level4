@@ -40,7 +40,7 @@ public interface Model {
      * {@code target} must exist in the inventory list.
      * The drink identity of {@code editedDrink} must not be the same as another existing drink in the inventory list.
      */
-    void updateDrink(Drink target, Drink editedDrink);
+    // void updateDrink(Drink target, Drink editedDrink);
 
     /** Returns an unmodifiable view of the filtered inventory list */
     ObservableList<Drink> getFilteredDrinkList();

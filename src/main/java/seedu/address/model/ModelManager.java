@@ -76,6 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateInventoryListChanged();
     }
 
+    /*
     @Override
     public void updateDrink(Drink target, Drink editedDrink) {
         requireAllNonNull(target, editedDrink);
@@ -83,6 +84,7 @@ public class ModelManager extends ComponentManager implements Model {
         inventoryList.updateDrink(target, editedDrink);
         indicateInventoryListChanged();
     }
+    */
 
     //=========== Filtered Drink List Accessors =============================================================
 

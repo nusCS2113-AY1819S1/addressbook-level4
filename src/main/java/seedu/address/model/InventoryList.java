@@ -73,16 +73,19 @@ public class InventoryList implements ReadOnlyInventoryList {
         drinks.add(d);
     }
 
+
     /**
      * Replaces the given drink {@code target} in the list with {@code editedDrink}.
      * {@code target} must exist in the inventory list.
      * The drink identity of {@code editedDrink} must not be the same as another existing drink in the address book.
      */
+    /*
     public void updateDrink(Drink target, Drink editedDrink) {
         requireNonNull(editedDrink);
 
         drinks.setDrink(target, editedDrink);
     }
+    */
 
     /**
      * Removes {@code key} from this {@code InventoryList}.
