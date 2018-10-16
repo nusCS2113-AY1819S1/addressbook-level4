@@ -1,4 +1,4 @@
-= Book Inventory - Developer Guide
+= AddressBook Level 4 - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,11 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
-
-== Introduction
-
-BookInventory is catered solely for students and other managerial roles such as store managers and accountant. BookInventory allows store managers to increase/decrease stocks for each book. Accountants will be able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, BookInventory is optimized for those who prefer to work with Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
+By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Setting up
 
@@ -306,7 +302,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire inventory book.
+* **Alternative 1 (current choice):** Saves the entire quantity book.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.

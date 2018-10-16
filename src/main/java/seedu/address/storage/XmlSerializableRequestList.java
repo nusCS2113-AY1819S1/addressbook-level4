@@ -14,7 +14,7 @@ import seedu.address.model.request.RequestList;
 /**
  * An Immutable RequestList that is serializable to XML format
  */
-@XmlRootElement(name = "requestlist")
+@XmlRootElement(name = "addressbook")
 public class XmlSerializableRequestList {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate request(s).";
