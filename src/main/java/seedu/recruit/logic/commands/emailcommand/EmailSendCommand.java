@@ -103,11 +103,11 @@ public class EmailSendCommand extends Command {
 
     /**
      * Generates bodytext of the email.
-     * @param bodyText String bodytext that will be sent
      * @param model
      * @param emailUtil
      * @param recipients
      * @param contents
+     * @return bodytext String
      */
     private String generateContent(Model model, EmailUtil emailUtil,
                                  ObservableList<?> recipients, ObservableList<?> contents) {
