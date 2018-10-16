@@ -341,6 +341,68 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+{nbsp}
+
+// tag::timetable[]
+=== Timetable feature
+==== Current implementation
+
+The timetable feature allows users to store and view their own timetables. Additionally, it allows users to view a deconflicted timetable, a timetable which highlights mutual free timeslots among all selected users.
+
+The timetable feature can be broadly split into two parts: +
+1. The backend, which handles the storage and logic of `TimeTable` objects; +
+2. The frontend, which handles the display of `TimeTable` objects.
+
+
+===== Backend implementation
+
+The `TimeTable` object is composed under the `Person` class in `Model`. Each `TimeTable` in turn is composed of any number of `TimeSlot` objects. Each `TimeSlot` consists of: +
+1. A `dayofWeek` variable, denoting the day of week of the `TimeSlot`; +
+2. A `startTime` variable, denoting the start time of the `TimeSlot`; and +
+3. An `endTime` variable, denoting the end time of the `TimeSlot`.
+
+The following class diagram summarises the relationship between the components of the TimeTable class:
+
+image:TimeTableClassDiagram.png[width="400"]
+
+{nbsp}
+
+The `TimeTable` class implements three key methods: +
+1. `TimeTable#addTimeSlot()` - to add a new `TimeSlot` to the `TimeTable` +
+2. `TimeTable#deleteTimeSlot()` - to remove an existing `TimeSlot` from the `TimeTable` +
+3. `TimeTable#deconflict()` - to create a deconflicted timetable from two or more `TimeTable` objects +
+
+===== Frontend implementation
+
+`TimeTablePanel` extends the abstract class `UIPart` and is implemented using a `BorderPane`. It is composed of the following classes: +
+1. `TimeTableDayMarkerGrid` - a `GridPane` on the left of the `TimeTablePanel` to display the days of the week; +
+2. `TimeTableTimeMarkerGrid` - a `GridPane` on the top of the `TimeTablePanel` to display the time markers +
+3. `TimeTableMainGrid` - a `GridPane` in the center of the `TimeTablePanel`. Composed of any number of `TimeTablePanelTimeSlot` objects. +
+
+The following screenshot shows the relative position of all the components in `TimeTablePanel`:
+
+image:TimeTableScreenshotLabelled.png[width="800"]
+
+{nbsp}
+
+===== Interaction between backend and frontend
+
+The following sequence diagrams show the sequence of significant method calls for the execution of the `TimeTable#addTimeSlot()` method. The execution of the `TimeTable#removeTimeSlot()` method is implemented in a similar manner.
+
+image:TimeTableSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+===== Aspect: How the frontend updates the `TimeTable` to be displayed
+* **Alternative 1 (current choice):** Clears the entire `TimeTableMainGrid` before loading the new `TimeTable`
+** Pros: Easy to implement, only one method (`loadTimeTable`) required
+** Cons: May suffer from performance degradation, especially when the `TimeTable` to be loaded contains many `TimeSlot` objects
+* **Alternative 2:** Detects the difference between the currently displayed `TimeTable` and adds or deletes `TimeTablePanelTimeSlot` objects accordingly.
+** Pros: Will reduce execution time of methods which update the displayed `TimeTable`
+** Cons: A method to detect the difference between `TimeTable` objects must be implemented. May not result in significant performance improvements when switching between `TimeTable` objects with few or no `TimeSlot` objects in common.
+// end::timetable[]
+
+{nbsp}
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
