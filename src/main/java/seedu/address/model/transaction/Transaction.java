@@ -7,11 +7,13 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import seedu.address.model.person.Name;
+import seedu.address.model.person.Product;
 import seedu.address.model.transaction.exceptions.ClosedTransactionException;
 
 /**
- * A basic Transaction class, where the Product is taken to be a string. This will be updated with actual Product
- * objects in V1.2.
+ * The transaction class, which records the time, product names, and number of products sold during a given transaction.
+ * Each object of this class is to be identified by the transactionTime.
  */
 public class Transaction {
     private static DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
@@ -36,7 +38,7 @@ public class Transaction {
     }
 
     /**
-     * TODO
+     * The following method takes the product's name as a string and adds it to the transaction record.
      * @param itemName
      * @param quantity
      * @throws ClosedTransactionException
@@ -48,6 +50,36 @@ public class Transaction {
             transactionRecord.replace(itemName, transactionRecord.get(itemName) + quantity);
         } else {
             transactionRecord.put(itemName, quantity);
+        }
+    }
+
+    /**
+     * The following method takes the product's name and adds it to the transaction record.
+     * @param itemName
+     * @param quantity
+     * @throws ClosedTransactionException
+     */
+
+    public void addProduct(Name itemName, int quantity) throws ClosedTransactionException {
+        try {
+            addProduct(itemName.toString(),quantity);
+        } catch (ClosedTransactionException e) {
+            throw e;
+        }
+    }
+
+    /**
+     * The following method takes the product and adds it to the transaction record.
+     * @param item
+     * @param quantity
+     * @throws ClosedTransactionException
+     */
+
+    public void addProduct(Product item, int quantity) throws ClosedTransactionException {
+        try {
+            addProduct(item.getName().toString(),quantity);
+        } catch (ClosedTransactionException e) {
+            throw e;
         }
     }
 
