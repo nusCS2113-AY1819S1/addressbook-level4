@@ -8,6 +8,7 @@ import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.ui.MainWindow;
 
 
 /**
@@ -15,19 +16,21 @@ import seedu.recruit.model.Model;
  */
 public class EmailSelectRecipientsCommand extends Command {
     public static final String COMMAND_WORD = "next";
-    public static final String MESSAGE_USAGE = "Find/Filter the recipients that you are going to email";
+    public static final String MESSAGE_USAGE = "Find the recipients that you are going to email\n " +
+            "Type \"next\" when you have done so to move on to the next step.";
     public static final String COMMAND_LOGIC_STATE = "EmailSelectRecipients";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        String lastCommandUsed = history.getLast();
         EmailUtil emailUtil = model.getEmailUtil();
 
-        if (lastCommandUsed.toUpperCase().contains("LISTC")) {
+        if (MainWindow.getDisplayedBook().equals("candidateBook")) {
+            System.out.println("Candidate Book!");
             emailUtil.setRecipients(model.getFilteredCandidateList());
             emailUtil.setAreRecipientsCandidates(true);
         } else {
+            System.out.println("Company Book!");
             emailUtil.setRecipients(model.getFilteredCompanyJobList());
             emailUtil.setAreRecipientsCandidates(false);
         }

@@ -34,7 +34,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
-    private volatile String currentBook = "companyBook";
+    private static volatile String currentBook = "companyBook";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -253,7 +253,7 @@ public class MainWindow extends UiPart<Stage> {
         return companyJobDetailsPanel;
     }
 
-    public String getDisplayedBook() {
+    public static String getDisplayedBook() {
         if (currentBook.contentEquals("companyBook")) {
             return "companyBook";
         }

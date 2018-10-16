@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -177,7 +174,7 @@ public class EmailUtil {
      * @throws MessagingException
      */
     public static MimeMessage createEmail(String from,
-                                          ArrayList<String> to,
+                                          Set<String> to,
                                           String subject,
                                           String bodyText)
             throws MessagingException {

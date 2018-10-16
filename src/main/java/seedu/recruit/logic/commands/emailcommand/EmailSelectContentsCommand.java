@@ -14,7 +14,8 @@ import seedu.recruit.model.Model;
  */
 public class EmailSelectContentsCommand extends Command {
     public static final String COMMAND_WORD = "next";
-    public static final String MESSAGE_USAGE = "Find/Filter the content that you are going to send";
+    public static final String MESSAGE_USAGE = "Find the content that you are going to email\n" +
+            "Type \"next\" when you have done so to move on to the next step.";
     public static final String COMMAND_LOGIC_STATE = "EmailSelectContents";
 
     @Override
