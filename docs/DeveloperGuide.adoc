@@ -358,12 +358,12 @@ The timetable feature can be broadly split into two parts: +
 
 The `TimeTable` object is composed under the `Person` class in `Model`. Each `TimeTable` in turn is composed of any number of `TimeSlot` objects. Each `TimeSlot` consists of: +
 1. A `dayofWeek` variable, denoting the day of week of the `TimeSlot`; +
-2. A 'startTime` variable, denoting the start time of the 'TimeSlot'; and +
-3. An 'endTime' variable, denoting the end time of the 'TimeSlot'.
+2. A `startTime` variable, denoting the start time of the `TimeSlot`; and +
+3. An `endTime` variable, denoting the end time of the `TimeSlot`.
 
 The following class diagram summarises the relationship between the components of the TimeTable class:
 
-image:TimeTableClassDiagram.png[width="800"]
+image:TimeTableClassDiagram.png[width="400"]
 
 {nbsp}
 
