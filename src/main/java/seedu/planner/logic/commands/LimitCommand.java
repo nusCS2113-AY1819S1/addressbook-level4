@@ -34,7 +34,6 @@ public class LimitCommand extends Command {
     public static final String MESSAGE_LIMITS_SAMEDATE ="There are already limits for that period of date";
 
     private Limit limit;
-    private boolean isExceeded;
     private String output;
     public LimitCommand (Limit limitIn) {
         requireNonNull(limitIn);

@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -19,8 +20,10 @@ import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.Summary;
 import seedu.planner.testutil.RecordBuilder;
 
 public class AddCommandTest {
@@ -96,6 +99,11 @@ public class AddCommandTest {
 
         @Override
         public void resetData(ReadOnlyFinancialPlanner newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public List<Summary> getSummaryList(Date date1, Date date2) {
             throw new AssertionError("This method should not be called.");
         }
 

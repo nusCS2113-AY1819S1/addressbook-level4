@@ -32,7 +32,7 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlFinancialPlannerStorage financialPlannerStorage = new XmlFinancialPlannerStorage(getTempFilePath("ab"));
+        XmlFinancialPlannerStorage financialPlannerStorage = new XmlFinancialPlannerStorage(getTempFilePath("ab"),);
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(financialPlannerStorage, userPrefsStorage);
     }

@@ -25,6 +25,7 @@ import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
+import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.model.util.SampleDataUtil;
 import seedu.planner.storage.FinancialPlannerStorage;
@@ -65,7 +66,7 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         FinancialPlannerStorage financialPlannerStorage =
                 new XmlFinancialPlannerStorage(userPrefs.getFinancialPlannerFilePath(),
-                        userPrefs.getSummaryMapFilePath());
+                        userPrefs.getSummaryMapFilePath(), userPrefs.getFinancialPlannerLimitFilePath());
         storage = new StorageManager(financialPlannerStorage, userPrefsStorage);
 
         initLogging(config);
@@ -90,9 +91,12 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyFinancialPlanner> financialPlannerOptional;
         Optional<SummaryMap> summaryMapOptional;
+        Optional<DateBasedLimitList> limitListOptional;
+
         ReadOnlyFinancialPlanner initialData;
         try {
             financialPlannerOptional = storage.readFinancialPlanner();
+
             if (!financialPlannerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample FinancialPlanner");
             }
@@ -102,6 +106,8 @@ public class MainApp extends Application {
             if (!summaryMapOptional.isPresent()) {
                 logger.info("Summary data file not found. Will start based on the sample FinancialPlanner");
             }
+           limitListOptional = storage.readLimitList();
+            initialData.setLimitList(limitListOptional.get());
             //TODO: remove this once storage is combined
             if (summaryMapOptional.isPresent()) {
                 initialData.setSummaryMap(summaryMapOptional.get());

@@ -2,8 +2,10 @@ package seedu.planner.storage;
 
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.model.FinancialPlanner;
-import seedu.planner.model.ReadOnlyLimitList;
+import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
+import seedu.planner.storage.xml_jaxb.XmlSerializableClass;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,7 +17,7 @@ import java.util.stream.Collectors;
  * The limit list that is serializable to XML format
  */
 @XmlRootElement(name = "LimitList")
-public class XmlSerializableLimitList {
+public class XmlSerializableLimitList extends XmlSerializableClass<DateBasedLimitList> {
     public static final String MESSAGE_DUPLICATE_LIMIT = "There are redundant limits for the same period of time";
 
     @XmlElement
@@ -25,7 +27,7 @@ public class XmlSerializableLimitList {
         limits = new ArrayList<>();
     }
 
-    public XmlSerializableLimitList(ReadOnlyLimitList src) {
+    public XmlSerializableLimitList(ReadOnlyFinancialPlanner src) {
         this();
         limits.addAll(src.getLimitList().stream().map(XmlAdaptedLimit::new).collect(Collectors.toList()));
     }
@@ -35,17 +37,17 @@ public class XmlSerializableLimitList {
      * @return
      * @throws IllegalValueException
      */
-    public FinancialPlanner toModelType() throws IllegalValueException {
-        FinancialPlanner financialPlanner = new FinancialPlanner();
+    public DateBasedLimitList toModelType() throws IllegalValueException {
+        DateBasedLimitList dateBasedLimitList = new DateBasedLimitList();
 
         for (XmlAdaptedLimit l : limits) {
             Limit limit = l.toModelType();
-            if (financialPlanner.hasSameDateLimit(limit)){
+            if (dateBasedLimitList.hasSameDatesLimit(limit)){
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LIMIT);
             }
-            financialPlanner.addLimit(limit);
+            dateBasedLimitList.add(limit);
         }
-        return financialPlanner;
+        return dateBasedLimitList;
     }
 
     @Override

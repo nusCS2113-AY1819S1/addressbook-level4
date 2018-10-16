@@ -5,7 +5,10 @@ import javafx.collections.ObservableList;
 import seedu.planner.model.record.exceptions.LimitNotFoundException;
 import seedu.planner.model.record.exceptions.RedundantLimitDatesException;
 
+import java.util.List;
+
 import static java.util.Objects.requireNonNull;
+import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * The DateBasedLimitList is mainly used for store and manage all the limit of the program.
@@ -51,6 +54,20 @@ public class DateBasedLimitList { //implements Iterable<Limit> {
         }
     }
 
+    public void setLimits(DateBasedLimitList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
+    }
+
+    public void setLimits(List<Limit> limits) {
+        requireAllNonNull(limits);
+        if (!limitsAreUnique(limits)) {
+            throw new RedundantLimitDatesException();
+        }
+
+        internalList.setAll(limits);
+    }
+
     /**
      * returns the newly updated limit list
      * @return
@@ -58,4 +75,16 @@ public class DateBasedLimitList { //implements Iterable<Limit> {
     public ObservableList<Limit> asUnmodifiableObservableList() {
         return FXCollections.unmodifiableObservableList(internalList);
     }
+
+    private boolean limitsAreUnique(List<Limit> limits) {
+        for (int i = 0; i < limits.size() - 1; i++) {
+            for (int j = i + 1; j < limits.size(); j++) {
+                if (limits.get(i).isSameLimitDates(limits.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
+

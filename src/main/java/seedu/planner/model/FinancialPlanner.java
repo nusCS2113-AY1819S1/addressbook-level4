@@ -22,7 +22,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     private final UniqueRecordList records;
     private SummaryMap summaryMap;
-    private final DateBasedLimitList limits;
+    private DateBasedLimitList limits;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -57,6 +57,10 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         this.records.setRecords(records);
     }
 
+    public void setLimits(List<Limit> limits) {
+        this.limits.setLimits(limits);
+    }
+
     /**
      * Resets the existing data of this {@code FinancialPlanner} with {@code newData}.
      */
@@ -65,6 +69,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
         setRecords(newData.getRecordList());
         setSummaryMap(newData.getSummaryMap());
+        setLimits(newData.getLimitList());
     }
 
     //// record-level operations
@@ -146,7 +151,10 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         return summaryMap.getSummaryList(startDate, endDate);
     }
 
-    //// Limit related operations
+    public void setLimitList(DateBasedLimitList limitList) {
+        this.limits = limitList;
+    }
+
 
     /**
      * Add a limit to the financial planner.
@@ -178,7 +186,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void removeLimit(Limit limitin) { limits.remove(limitin);}
 
-    //// util methods
+
 
     @Override
     public String toString() {

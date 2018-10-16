@@ -14,6 +14,7 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.commons.util.FileUtil;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xml_jaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.storage.xml_jaxb.XmlSerializableSummaryMap;
@@ -27,10 +28,12 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     private Path financialPlannerFilePath;
     private Path summaryMapFilePath;
+    private Path limitListFilePath;
 
-    public XmlFinancialPlannerStorage(Path financialPlannerFilePath, Path summaryMapFilePath) {
+    public XmlFinancialPlannerStorage(Path financialPlannerFilePath, Path summaryMapFilePath, Path limitListFilePath) {
         this.financialPlannerFilePath = financialPlannerFilePath;
         this.summaryMapFilePath = summaryMapFilePath;
+        this.limitListFilePath = limitListFilePath;
     }
 
     public Path getFinancialPlannerFilePath() {
@@ -39,6 +42,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     public Path getSummaryMapFilePath() { return summaryMapFilePath; }
 
+    public Path getLimitListFilePath() { return limitListFilePath; }
     // ===================== Record List Storage methods ======================================
 
     @Override
@@ -71,7 +75,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     @Override
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
         saveFinancialPlanner(financialPlanner, financialPlannerFilePath);
     }
 
@@ -138,17 +142,49 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     // ======================================= Limit Storage methods ==============================
 
+    @Override
+    public Optional<DateBasedLimitList> readLimitList() throws DataConversionException, IOException {
+        return readLimitList(limitListFilePath);
+    }
+
     /**
-     * save the updated limit list into the special xml file
-     * @param financialPlanner
-     * @param filePath
-     * @throws IOException
+     * Similar to {@link #readLimitList()}
+     * @param filePath location of the data. Cannot be null
+     * @throws DataConversionException if the file is not in the correct format.
      */
-    public void saveLimitList (ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
-        requireNonNull(financialPlanner);
+    public Optional<DateBasedLimitList> readLimitList(Path filePath) throws DataConversionException,
+            FileNotFoundException {
+        requireNonNull(filePath);
+
+        if (!Files.exists(filePath)) {
+            logger.info("The LimitList file " + filePath + " not found");
+            return Optional.empty();
+        }
+
+        XmlSerializableLimitList xmlLimitList = XmlFileStorage.loadDataFromSaveFile(filePath,
+                XmlSerializableLimitList.class);
+        try {
+            return Optional.of(xmlLimitList.toModelType());
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            throw new DataConversionException(ive);
+        }
+    }
+
+    @Override
+    public void saveLimitList(ReadOnlyFinancialPlanner limitList) throws IOException {
+        saveLimitList(limitList, limitListFilePath);
+    }
+
+    /**
+     * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
+     * @param filePath location of the data. Cannot be null
+     */
+    public void saveLimitList(ReadOnlyFinancialPlanner limitList, Path filePath) throws IOException {
+        requireNonNull(limitList);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableFinancialPlanner(financialPlanner));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableLimitList(limitList));
     }
 }

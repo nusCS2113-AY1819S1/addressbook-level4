@@ -7,6 +7,7 @@ import java.util.Optional;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.summary.SummaryMap;
 
 /**
@@ -19,7 +20,10 @@ public interface FinancialPlannerStorage {
      */
     Path getFinancialPlannerFilePath();
 
-
+    /**
+     * Returns the file path for the data file of the limit list storage.
+     */
+    Path getLimitListFilePath();
 
     /**
      * Returns the file path of the data file for SummaryMap storage
@@ -38,6 +42,32 @@ public interface FinancialPlannerStorage {
      * @see #getFinancialPlannerFilePath()
      */
     Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path filePath) throws DataConversionException, IOException;
+
+    /**
+     * Returns limitlist data as a limitlist.
+     * @return
+     * @throws DataConversionException
+     * @throws IOException
+     */
+    Optional<DateBasedLimitList> readLimitList() throws DataConversionException, IOException;
+
+    /**
+     * see previous one
+     */
+    Optional<DateBasedLimitList> readLimitList(Path filePath) throws DataConversionException, IOException;
+
+    /**
+     * save the given limitlist to the storage.
+     * @param limitList
+     * @throws IOException
+     */
+    void saveLimitList(ReadOnlyFinancialPlanner limitList) throws IOException;
+
+    /**
+     * @see #saveLimitList(ReadOnlyFinancialPlanner, Path)
+     */
+    void saveLimitList(ReadOnlyFinancialPlanner limitList, Path filePath) throws IOException;
+
 
     /**
      * Saves the given {@link ReadOnlyFinancialPlanner} to the storage.
