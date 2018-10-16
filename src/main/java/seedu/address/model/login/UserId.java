@@ -9,18 +9,23 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class UserId {
 
-    public static final String MESSAGE_USERID_CONSTRAINTS =
-            "There must be a user/ prefix before the user ID. User ID should only contain 9 alphanumeric characters, "
-                    + "and it should not be blank and not have any spaces";
+    public static final String MESSAGE_USERID_CONSTRAINTS = "User ID should only contain 9 alphanumeric characters, "
+                    + " with the first and last character, upper-case only alphabets, "
+            + "7 characters in between, all integers, and it should not be blank and not have any spaces";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String USERID_VALIDATION_REGEX = "[\\w]{9}";
+    public static final String USERID_VALIDATION_REGEX = "[A-Z][0-9]{7}[A-Z]";
 
     public final String fullUserId;
 
+    /**
+     * Constructs a {@code UserId}.
+     *
+     * @param id A valid userid.
+     */
     public UserId(String id) {
         requireNonNull(id);
         checkArgument(isValidUserId(id), MESSAGE_USERID_CONSTRAINTS);

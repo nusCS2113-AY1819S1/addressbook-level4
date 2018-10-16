@@ -74,6 +74,11 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void getLoginBookFilePath() {
+        assertNotNull(storageManager.getLoginBookFilePath());
+    }
+
+    @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
     }
@@ -88,7 +93,6 @@ public class StorageManagerTest {
         storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
-
 
     /**
      * A Stub class to throw an exception when the save method is called

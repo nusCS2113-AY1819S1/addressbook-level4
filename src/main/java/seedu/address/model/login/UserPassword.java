@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidUserPassword(String)}
  */
 public class UserPassword {
-    public static final String MESSAGE_USERPASSWORD_CONSTRAINTS = "There must be a pa/ prefix before the password. "
-            + "User password is case-sensitive, and it should not be blank and not have any spaces";
+    public static final String MESSAGE_USERPASSWORD_CONSTRAINTS = "User password is case-sensitive, and it "
+            + "should not be blank and not have any spaces";
 
     /*
      * The first character of the address must not be a whitespace,
@@ -19,6 +19,11 @@ public class UserPassword {
 
     public final String fullUserPassword;
 
+    /**
+     * Constructs a {@code UserPassword}.
+     *
+     * @param pass A valid userpassword.
+     */
     public UserPassword(String pass) {
         requireNonNull(pass);
         checkArgument(isValidUserPassword(pass), MESSAGE_USERPASSWORD_CONSTRAINTS);
@@ -26,7 +31,7 @@ public class UserPassword {
     }
 
     /**
-     * Returns true if a given string is a valid user ID.
+     * Returns true if a given string is a valid user password.
      */
     public static boolean isValidUserPassword(String test) {
         return test.matches(USERPASSWORD_VALIDATION_REGEX);

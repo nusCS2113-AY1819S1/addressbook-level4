@@ -14,7 +14,7 @@ import seedu.address.model.login.UserPassword;
  */
 public class XmlAccount {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "LoginDetail's %s field is missing!";
+    public static final String MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT = "LoginDetail's %s field is missing!";
 
     @XmlElement(required = true)
     private String userId;
@@ -46,13 +46,14 @@ public class XmlAccount {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly account object into the model's LoginDetails object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the account
      */
     public LoginDetails toModelType() throws IllegalValueException {
         if (userId == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, UserId.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
+                    UserId.class.getSimpleName()));
         }
         if (!UserId.isValidUserId(userId)) {
             throw new IllegalValueException(UserId.MESSAGE_USERID_CONSTRAINTS);
@@ -60,7 +61,7 @@ public class XmlAccount {
         final UserId modelUserId = new UserId(userId);
 
         if (userPassword == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MISSING_ACCOUNT_FIELD_MESSAGE_FORMAT,
                                                           UserPassword.class.getSimpleName()));
         }
         if (!UserPassword.isValidUserPassword(userPassword)) {
