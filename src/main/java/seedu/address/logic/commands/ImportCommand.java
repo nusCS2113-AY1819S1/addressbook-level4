@@ -6,10 +6,12 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -41,8 +43,10 @@ public class ImportCommand extends Command {
             + PREFIX_FILELOCATION + "C:\\Users\\happycat96\\Downloads\\nusmods_calendar.ics";
 
     public static final String MESSAGE_SUCCESS = "Imported timetable for %1$s.";
+    public static final String MESSAGE_EMPTY = "Timetable file empty.";
     public static final String MESSAGE_IO_ERROR =
             "IO error: your .ics file is corrupted/ not compatible.";
+
 
     private final Index index;
     private final Path filePath;
@@ -67,15 +71,20 @@ public class ImportCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
-        TimeTable importedTimeTable;
+        Optional<TimeTable> optionalTimeTable;
+        TimeTable timeTable;
+
         try {
-            importedTimeTable = IcsUtil.getTimeTableFromFile(filePath);
-        } catch (CommandException e) {
+            optionalTimeTable = IcsUtil.getTimeTableFromFile(filePath);
+        } catch (DataConversionException e) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
-
+        if (!optionalTimeTable.isPresent()) {
+            return new CommandResult(String.format(MESSAGE_EMPTY));
+        }
+        timeTable = optionalTimeTable.get();
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person modifiedPerson = createModifiedPerson(personToEdit, importedTimeTable);
+        Person modifiedPerson = createModifiedPerson(personToEdit, timeTable);
 
         model.updatePerson(personToEdit, modifiedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
