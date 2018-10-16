@@ -26,6 +26,6 @@ public class DistributeUtilTest {
         Random testValue = new Random(96259561);
         LinkedList<Person> allPersonList = new LinkedList<>(allPersons);
         Collections.shuffle(allPersonList, testValue);
-        assertTrue(testPerson.shuffle(allPersonList,testValue).equals(allPersonList));
+        assertTrue(testPerson.shuffle(allPersonList, testValue).equals(allPersonList));
     }
 }
