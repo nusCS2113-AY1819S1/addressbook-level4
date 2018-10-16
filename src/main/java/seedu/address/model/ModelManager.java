@@ -159,6 +159,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void exportAddressBook() {
         CsvWriter csvWriter = new CsvWriter(getFilteredPersonList());
-        csvWriter.writeToCsv();
+        csvWriter.write();
     }
 }

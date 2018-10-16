@@ -46,7 +46,7 @@ public class CsvWriter {
     /**
      * Writes to the .csv file as defined in {@code outputFilepath}.
      */
-    public void writeToCsv() {
+    public void write() {
         try {
 
             File file = new File(String.valueOf(outputFilepath));
