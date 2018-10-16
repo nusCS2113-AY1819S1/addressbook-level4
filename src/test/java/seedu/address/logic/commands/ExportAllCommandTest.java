@@ -3,9 +3,12 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.ExportAllCommand.MESSAGE_ARGUMENTS;
+import static seedu.address.logic.commands.ExportAllCommand.MESSAGE_SUCCESS;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
@@ -22,12 +25,19 @@ public class ExportAllCommandTest {
     private static final String FILETYPE_CSV = "csv";
     private static final String FILETYPE_VCF = "vcf";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model;
+    private Model expectedModel;
+
+    @Before
+    public void setUp() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void execute() {
-        assertCommandFailure(new ExportAllCommand(FILETYPE_CSV), model, new CommandHistory(),
-                String.format(MESSAGE_ARGUMENTS, FILETYPE_CSV));
+        assertCommandSuccess(new ExportAllCommand(FILETYPE_CSV), model, new CommandHistory(),
+                ExportAllCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
