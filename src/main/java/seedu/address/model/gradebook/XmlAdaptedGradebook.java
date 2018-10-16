@@ -9,10 +9,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Represents a component in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-@XmlRootElement(name = "gradebook")
+@XmlRootElement(name = "gradeComponent")
 @XmlAccessorType(XmlAccessType.FIELD)
-public class GradebookComponent {
-
+public class XmlAdaptedGradebook {
     @XmlElement(name = "moduleCode", required = true, nillable = true)
     private String moduleCode;
     @XmlElement(name = "gradeComponentName", required = true, nillable = true)
@@ -22,19 +21,19 @@ public class GradebookComponent {
     @XmlElement(name = "gradeComponentWeightage", required = true, nillable = true)
     private int gradeComponentWeightage;
 
-    public GradebookComponent() {
+    public XmlAdaptedGradebook() {
 
     }
 
-    public GradebookComponent(String moduleCode, String gradeComponentName, int gradeComponentMaxMarks,
-                              int gradeComponentWeightage) {
+    public XmlAdaptedGradebook(String moduleCode, String gradeComponentName, int gradeComponentMaxMarks,
+                               int gradeComponentWeightage) {
         this.moduleCode = moduleCode;
         this.gradeComponentName = gradeComponentName;
         this.gradeComponentMaxMarks = gradeComponentMaxMarks;
         this.gradeComponentWeightage = gradeComponentWeightage;
     }
 
-    public GradebookComponent(String moduleCode, String gradeComponentName) {
+    public XmlAdaptedGradebook(String moduleCode, String gradeComponentName) {
         this.moduleCode = moduleCode;
         this.gradeComponentName = gradeComponentName;
     }

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.gradebook.GradebookComponent;
+import seedu.address.model.gradebook.XmlAdaptedGradebook;
 
 /**
  * Parses input arguments and creates a new GradebookAddCommand object
@@ -23,7 +23,7 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
      */
     public GradebookAddCommand parse(String args) throws ParseException {
         int gradeComponentMaxMarksArg = 0;
-        int gradeComponenWeightageArg = 0;
+        int gradeComponentWeightageArg = 0;
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULECODE, PREFIX_GRADEBOOK_ITEM,
                 PREFIX_GRADEBOOK_MAXMARKS, PREFIX_GRADEBOOK_WEIGHTAGE);
@@ -32,17 +32,24 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradebookAddCommand.MESSAGE_USAGE));
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_GRADEBOOK_MAXMARKS) && !argMultimap.getPreamble().isEmpty()) {
-            gradeComponentMaxMarksArg = Integer.parseInt(argMultimap.getValue(PREFIX_GRADEBOOK_MAXMARKS).get());
+        if (arePrefixesPresent(argMultimap, PREFIX_GRADEBOOK_MAXMARKS) || !argMultimap.getPreamble().isEmpty()) {
+            try {
+                gradeComponentMaxMarksArg = Integer.parseInt(argMultimap.getValue(PREFIX_GRADEBOOK_MAXMARKS).get());
+            } catch (NumberFormatException nme) {
+                gradeComponentMaxMarksArg = 0;
+            }
         }
-        if (arePrefixesPresent(argMultimap, PREFIX_GRADEBOOK_WEIGHTAGE) && !argMultimap.getPreamble().isEmpty()) {
-            gradeComponenWeightageArg = Integer.parseInt(argMultimap.getValue(PREFIX_GRADEBOOK_WEIGHTAGE).get());
+        if (arePrefixesPresent(argMultimap, PREFIX_GRADEBOOK_WEIGHTAGE) || !argMultimap.getPreamble().isEmpty()) {
+            try {
+                gradeComponentWeightageArg = Integer.parseInt(argMultimap.getValue(PREFIX_GRADEBOOK_WEIGHTAGE).get());
+            } catch (NumberFormatException nme) {
+                gradeComponentWeightageArg = 0;
+            }
         }
-
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULECODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        GradebookComponent gradebookComponent = new GradebookComponent(moduleCodeArg, gradeComponentNameArg,
-                gradeComponentMaxMarksArg, gradeComponenWeightageArg);
+        XmlAdaptedGradebook gradebookComponent = new XmlAdaptedGradebook(moduleCodeArg, gradeComponentNameArg,
+                gradeComponentMaxMarksArg, gradeComponentWeightageArg);
         return new GradebookAddCommand(gradebookComponent);
     }
 

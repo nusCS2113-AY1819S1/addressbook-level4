@@ -6,8 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.gradebook.GradebookComponent;
-import seedu.address.model.gradebook.GradebookModel;
+import seedu.address.model.gradebook.GradebookManager;
+import seedu.address.model.gradebook.XmlAdaptedGradebook;
 
 /**
  * Finds gradebook component for module in Trajectory to the user.
@@ -22,9 +22,9 @@ public class GradebookFindCommand extends Command {
             + PREFIX_MODULECODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
 
-    private final GradebookComponent toFindGradebookComponent;
+    private final XmlAdaptedGradebook toFindGradebookComponent;
 
-    public GradebookFindCommand(GradebookComponent gradebookComponent) {
+    public GradebookFindCommand(XmlAdaptedGradebook gradebookComponent) {
         toFindGradebookComponent = gradebookComponent;
     }
 
@@ -32,7 +32,7 @@ public class GradebookFindCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        CommandResult result = GradebookModel.findGradebookComponent(toFindGradebookComponent.getModuleCode(),
+        CommandResult result = GradebookManager.findGradebookComponent(toFindGradebookComponent.getModuleCode(),
                 toFindGradebookComponent.getGradeComponentName());
         return result;
     }

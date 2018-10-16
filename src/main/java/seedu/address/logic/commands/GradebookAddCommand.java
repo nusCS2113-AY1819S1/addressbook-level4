@@ -10,8 +10,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.gradebook.GradebookComponent;
-import seedu.address.model.gradebook.GradebookModel;
+import seedu.address.model.gradebook.GradebookManager;
+import seedu.address.model.gradebook.XmlAdaptedGradebook;
 
 /**
  * Adds a gradebook component to the address book.
@@ -32,19 +32,21 @@ public class GradebookAddCommand extends Command {
             + PREFIX_GRADEBOOK_MAXMARKS + "60 "
             + PREFIX_GRADEBOOK_WEIGHTAGE + "50";
 
-    private final GradebookComponent toAddGradebookItem;
+    private final XmlAdaptedGradebook toAddGradebookItem;
 
-    public GradebookAddCommand (GradebookComponent gradebookComponent) {
+    public GradebookAddCommand (XmlAdaptedGradebook gradebookComponent) {
         toAddGradebookItem = gradebookComponent;
     }
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        CommandResult result = GradebookModel.addGradebookComponent(toAddGradebookItem.getModuleCode(),
-                toAddGradebookItem.getGradeComponentName(), toAddGradebookItem.getGradeComponentMaxMarks(),
+        String result = GradebookManager.addGradebookComponent(
+                toAddGradebookItem.getModuleCode(),
+                toAddGradebookItem.getGradeComponentName(),
+                toAddGradebookItem.getGradeComponentMaxMarks(),
                 toAddGradebookItem.getGradeComponentWeightage());
-        return result;
+        return new CommandResult(result);
     }
 
     @Override

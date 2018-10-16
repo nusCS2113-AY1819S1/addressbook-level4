@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GradebookFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.gradebook.GradebookComponent;
+import seedu.address.model.gradebook.XmlAdaptedGradebook;
 
 /**
  * Parses input arguments and creates a new GradebookFindCommand object
@@ -30,7 +30,7 @@ public class GradebookFindCommandParser {
 
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULECODE).get();
         String gradeItemNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        GradebookComponent gradebookComponent = new GradebookComponent(moduleCodeArg, gradeItemNameArg);
+        XmlAdaptedGradebook gradebookComponent = new XmlAdaptedGradebook(moduleCodeArg, gradeItemNameArg);
         return new GradebookFindCommand(gradebookComponent);
     }
 
