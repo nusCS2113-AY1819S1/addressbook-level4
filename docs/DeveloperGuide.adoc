@@ -390,7 +390,16 @@ Step 6. Close the OpenCSV writer.
 
 ==== Design Considerations
 
-===== Aspect: How undo & redo executes
+===== Aspect: How data in the AddressBook is passed into the CsvWriter object
+
+* **Alternative 1 (current choice):** `ObservableList<Person>`
+** Pros: Easy to implement since `getFilteredPersonList()` is already implemented.
+** Cons: We must ensure that the implementation of each individual command are correct.
+* **Alternative 2:** `versionedAddressBook`
+** Pros: Looks more direct since the whole AddressBook is passed into the `CsvWriter`.
+** Cons: Hard to write tests and requires more methods to process the data.
+
+* **Solution**: The data is passed into the `CsvWriter` object through its constructor as an `ObservableList<Person>`.
 
 // tag::exportall[]
 
