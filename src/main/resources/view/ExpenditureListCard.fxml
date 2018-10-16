@@ -25,7 +25,6 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="name" text="\$first" styleClass="cell_big_label" />
             </HBox>
             <Label fx:id="category" styleClass="cell_small_label" text="\$category" />
             <Label fx:id="money" styleClass="cell_small_label" text="\$money" />
