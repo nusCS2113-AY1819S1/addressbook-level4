@@ -95,7 +95,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [r/POSITION] [k/KPI
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Use "all/" instead of INDEX to edit all persons listed in a single command.
+* Use `all/` instead of `INDEX` to edit all persons listed in a single command.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
 * You can remove all the person's tags by typing `t/` without specifying any tags after it.
 * You can remove the person's position or KPI by typing `r/` or `k/` respectively without specifying any position or KPI.
@@ -243,11 +243,11 @@ Format: `restore INDEX`
 
 === Exports the address book to a directory : `export`
 Export the data to a designated directory with choice of filters. +
-Format: `export [d/ OUTPUT_PATH] [f/ FILTER_FIELD]`
+Format: `export [d/ OUTPUT_PATH] [f/ NAME_OF_FILE] [t/ FILTER_FIELD]`
 
 === Imports the address book from a directory : `import`
 Import the data from a designated directory with choice of filters. +
-Format: `import [d/ TARGET_PATH] [f/ FILTER_FIELD]`
+Format: `import [d/ TARGET_PATH] [t/ FILTER_FIELD]`
 
 === Clearing all entries : `clear`
 

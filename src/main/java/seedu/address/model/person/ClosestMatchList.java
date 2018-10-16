@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -107,6 +108,8 @@ public class ClosestMatchList {
             compareString = person.getPosition().value;
         } else if (myPrefix == PREFIX_NOTE) {
             compareString = person.getNote().value;
+        } else if (myPrefix == PREFIX_TAG) {
+            compareString = person.getStringTags();
         }
 
         generateNameMap(searchKey, compareString);
