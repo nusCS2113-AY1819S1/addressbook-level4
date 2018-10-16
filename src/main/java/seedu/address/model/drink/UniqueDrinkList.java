@@ -51,6 +51,8 @@ public class UniqueDrinkList implements Iterable<Drink> {
      * {@code target} must exist in the list.
      * The drink identity of {@code editedDrink} must not be the same as another existing drink in the list.
      */
+
+    // TODO: edit rather than delete and re-insert
     public void setDrink(Drink target, Drink editedDrink) {
         requireAllNonNull(target, editedDrink);
 
