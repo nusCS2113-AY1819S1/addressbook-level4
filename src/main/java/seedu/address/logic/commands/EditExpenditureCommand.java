@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+
 
 import java.util.List;
 import java.util.Optional;
@@ -12,10 +15,17 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.expenditureinfo.*;
+import seedu.address.model.expenditureinfo.Expenditure;
+import seedu.address.model.expenditureinfo.Date;
+import seedu.address.model.expenditureinfo.Money;
+import seedu.address.model.expenditureinfo.Category;
 
 
-public class EditExpenditureCommand extends Command{
+/**
+ * Edits the details of an existing expenditure in the expenditure tracker.
+ */
+
+public class EditExpenditureCommand extends Command {
 
     public static final String COMMAND_WORD = "ET_edit";
     public static final String COMMAND_ALIAS = "e";
@@ -28,7 +38,7 @@ public class EditExpenditureCommand extends Command{
             + "[" + PREFIX_MONEY + "MONEY] "
             + "[" + PREFIX_CATEGORY + "CATEGORY]\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_DATE+ "25/12/2017 "
+            + PREFIX_DATE + "25/12/2017 "
             + PREFIX_MONEY + "500";
 
     public static final String MESSAGE_EDIT_EXPENDITURE_SUCCESS = "Edited Expenditure: %1$s";
@@ -72,7 +82,8 @@ public class EditExpenditureCommand extends Command{
      * Creates and returns a {@code Expenditure} with the details of {@code ExpenditureToEdit}
      * edited with {@code editExpenditureDescriptor}.
      */
-    private static Expenditure createEditedExpenditure(Expenditure expenditureToEdit, EditExpenditureDescriptor editExpenditureDescriptor) {
+    private static Expenditure createEditedExpenditure
+    (Expenditure expenditureToEdit, EditExpenditureDescriptor editExpenditureDescriptor) {
         assert expenditureToEdit != null;
 
         Date updatedDate = editExpenditureDescriptor.getDate().orElse(expenditureToEdit.getDate());

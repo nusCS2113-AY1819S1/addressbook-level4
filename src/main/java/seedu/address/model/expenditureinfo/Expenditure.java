@@ -39,6 +39,10 @@ public class Expenditure {
     }
 
 
+    /**
+     * Returns true if both tasks have the same identity fields.
+     * This defines a weaker notion of equality between two expenditures.
+     */
     public boolean isSameExpenditure(Expenditure otherExpenditure) {
         if (otherExpenditure == this) {
             return true;

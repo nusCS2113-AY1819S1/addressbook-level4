@@ -54,7 +54,11 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
         setExpenditures(newData.getExpenditureList());
     }
 
-    public boolean hasExpenditure(Expenditure expenditure){
+    /**
+     * Returns true if an expenditure with the same identity as
+     * {@code expenditure} exists in the expenditure tracker.
+     */
+    public boolean hasExpenditure(Expenditure expenditure) {
         requireNonNull(expenditure);
         return expenditures.contains(expenditure);
     }
@@ -70,12 +74,15 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
         expenditures.add(e);
     }
 
+    /**
+     * Removes a person to the address book.
+     */
     public void removeExpenditure(Expenditure key) {
         expenditures.remove(key);
     }
 
     //// util methods
-    public  void updateExpenditure(Expenditure target, Expenditure editedExpenditure){
+    public void updateExpenditure(Expenditure target, Expenditure editedExpenditure) {
         requireNonNull(editedExpenditure);
         expenditures.setExpenditures(target, editedExpenditure);
     }

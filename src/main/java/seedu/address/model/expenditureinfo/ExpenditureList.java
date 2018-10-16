@@ -24,6 +24,9 @@ public class ExpenditureList implements Iterable<Expenditure> {
 
     private final ObservableList<Expenditure> internalList = FXCollections.observableArrayList();
 
+    /**
+     * Returns true if the list contains an equivalent task as the given argument.
+     */
     public boolean contains(Expenditure toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameExpenditure);
@@ -49,6 +52,10 @@ public class ExpenditureList implements Iterable<Expenditure> {
         internalList.setAll(replacement.internalList);
     }
 
+    /**
+     * Removes the equivalent expenditure from the list.
+     * The expenditure must exist in the list.
+     */
     public void remove(Expenditure toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
@@ -105,6 +112,9 @@ public class ExpenditureList implements Iterable<Expenditure> {
         return internalList.hashCode();
     }
 
+    /**
+     * Returns true if {@code expenditures} contains only unique expenditures.
+     */
     private boolean expendituresAreUnique(List<Expenditure> expenditures) {
         for (int i = 0; i < expenditures.size() - 1; i++) {
             for (int j = i + 1; j < expenditures.size(); j++) {
