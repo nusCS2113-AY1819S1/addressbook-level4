@@ -1,8 +1,8 @@
 package unrefactored.testutil;
 
 import javafx.application.Platform;
-import unrefactored.commons.core.EventsCenter;
-import unrefactored.commons.events.BaseEvent;
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.BaseEvent;
 import unrefactored.guitests.GuiRobot;
 
 /**

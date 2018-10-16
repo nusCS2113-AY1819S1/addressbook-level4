@@ -10,7 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PRIORITY_LEVEL_DESC_L
 import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_1;
 import static seedu.address.logic.commands.CommandTestUtil.TITLE_DESC_2;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_1ST_JAN;
-import static unrefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static unrefactored.testutil.TypicalTasks.CS2113_TASK_1;
 
 import org.junit.Test;
@@ -21,7 +21,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
-import unrefactored.commons.core.Messages;
+import seedu.address.commons.core.Messages;
 import unrefactored.testutil.TaskBuilder;
 import unrefactored.testutil.TaskUtil;
 

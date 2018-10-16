@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import unrefactored.commons.core.LogsCenter;
+import seedu.address.commons.core.LogsCenter;
 import unrefactored.guitests.GuiRobot;
 import unrefactored.guitests.guihandles.exceptions.NodeNotFoundException;
 

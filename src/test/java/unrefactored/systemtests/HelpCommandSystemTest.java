@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static unrefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
-import static unrefactored.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import org.junit.Test;
 
@@ -13,8 +13,8 @@ import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import unrefactored.guitests.GuiRobot;
 import unrefactored.guitests.guihandles.HelpWindowHandle;
-import unrefactored.ui.BrowserPanel;
-import unrefactored.ui.StatusBarFooter;
+import seedu.address.ui.BrowserPanel;
+import seedu.address.ui.StatusBarFooter;
 
 /**
  * A system test class for the help window, which contains interaction with other UI components.

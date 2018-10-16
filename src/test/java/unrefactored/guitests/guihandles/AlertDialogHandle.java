@@ -2,7 +2,7 @@ package unrefactored.guitests.guihandles;
 
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
-import unrefactored.ui.UiManager;
+import seedu.address.ui.UiManager;
 
 /**
  * A handle for the {@code AlertDialog} of the UI.

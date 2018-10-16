@@ -10,8 +10,8 @@ import org.junit.Test;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import unrefactored.commons.events.ui.ShowHelpRequestEvent;
-import unrefactored.ui.testutil.EventsCollectorRule;
+import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class HelpCommandTest {
     @Rule
