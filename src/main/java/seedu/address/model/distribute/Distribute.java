@@ -45,8 +45,22 @@ public class Distribute {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Distribute that = (Distribute) o;
+        return index == that.index
+                && Objects.equals(groupName, that.groupName)
+                && Objects.equals(gender, that.gender)
+                && Objects.equals(nationality, that.nationality);
+    }
+
+    @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(index, groupName, gender, nationality);
     }
 

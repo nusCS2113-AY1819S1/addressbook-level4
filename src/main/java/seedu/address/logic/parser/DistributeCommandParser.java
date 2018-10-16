@@ -5,6 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
+import static seedu.address.model.distribute.DistributeAlgorithm.MESSAGE_INVALID_SIZE;
 
 import java.util.stream.Stream;
 
@@ -29,6 +30,8 @@ public class DistributeCommandParser implements Parser<DistributeCommand> {
 
         try {
             index = ParserUtil.parseInteger(argMultimap.getPreamble());
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException(MESSAGE_INVALID_SIZE);
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DistributeCommand.MESSAGE_USAGE), pe);

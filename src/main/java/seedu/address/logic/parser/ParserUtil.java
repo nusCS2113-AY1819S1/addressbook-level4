@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.distribute.DistributeAlgorithm;
 import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
 import seedu.address.model.group.GroupLocation;
@@ -274,7 +275,7 @@ public class ParserUtil {
             trimmedFlaggedValue = "true";
             break;
         default:
-            throw new ParseException(GroupName.MESSAGE_GROUP_NAME_CONSTRAINTS);
+            throw new ParseException(DistributeAlgorithm.MESSAGE_FLAG_ERROR);
         }
         Boolean flag = Boolean.valueOf(trimmedFlaggedValue);
         if (flag) {

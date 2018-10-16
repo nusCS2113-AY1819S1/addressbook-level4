@@ -32,10 +32,12 @@ import seedu.address.model.person.Person;
  */
 public class DistributeAlgorithm {
 
-    private static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
-    private static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
-    private static final String MESSAGE_SHUFFLE_ERROR = "There is a problem shuffling the people in the address book.";
-    private static final String GROUP_LOCATION = "[UNKNOWN]";
+    public static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
+    public static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
+    public static final String MESSAGE_SHUFFLE_ERROR = "There is a problem shuffling the people in the address book.";
+    public static final String MESSAGE_FLAG_ERROR = "Gender and Nationality flags only accept "
+            + "'1' or '0' or \"true\" or \"false\"";
+    public static final String GROUP_LOCATION = "[UNKNOWN]";
     private Model model;
 
     public DistributeAlgorithm(){
@@ -58,7 +60,6 @@ public class DistributeAlgorithm {
             throw new CommandException(MESSAGE_INVALID_SIZE);
         }
         doesGroupNameExist(numOfGroups, groupName);
-
 
         //Converts into ArrayList to use Randomizer via Collections
         LinkedList<Person> allPersonArrayList = new LinkedList<>(allPerson);
@@ -277,7 +278,7 @@ public class DistributeAlgorithm {
      * @param groupName check if groupName exist
      * @return false if there is no existing group.
      */
-    private boolean existDuplicateGroup (String groupName) {
+    public boolean existDuplicateGroup (String groupName) {
         ObservableList<Group> allGroups = model.getFilteredGroupList();
         requireNonNull(allGroups);
         for (Group gN : allGroups) {
