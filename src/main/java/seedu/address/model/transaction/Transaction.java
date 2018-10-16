@@ -54,10 +54,15 @@ public class Transaction {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Transaction that = (Transaction) o;
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (other == null || getClass() != other.getClass()) {
+            return false;
+        }
+
+        Transaction that = (Transaction) other;
         return getTransactionType() == that.getTransactionType()
                 && getDrinkTransacted().isSameDrink(that.getDrinkTransacted())
                 && getAmountMoney().equals(that.getAmountMoney());
