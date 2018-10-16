@@ -3,76 +3,52 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
+import seedu.address.model.drink.Drink;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Drink> PREDICATE_SHOW_ALL_DRINKS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyInventoryList newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the InventoryList */
+    ReadOnlyInventoryList getInventoryList();
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a drink with the same identity as {@code drink} exists in the address book.
      */
-    boolean hasPerson(Person person);
+    boolean hasDrink(Drink drink);
 
     /**
-     * Deletes the given person.
-     * The person must exist in the address book.
+     * Deletes the given drink.
+     * The drink must exist in the inventory list.
      */
-    void deletePerson(Person target);
+    void deleteDrink(Drink target);
 
     /**
-     * Adds the given person.
-     * {@code person} must not already exist in the address book.
+     * Adds the given drink.
+     * {@code drink} must not already exist in the address book.
      */
-    void addPerson(Person person);
+    void addDrink(Drink drink);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}.
-     * {@code target} must exist in the address book.
-     * The person identity of {@code editedPerson} must not be the same as another existing person in the address book.
+     * Replaces the given drink {@code target} with {@code editedDrink}.
+     * {@code target} must exist in the inventory list.
+     * The drink identity of {@code editedDrink} must not be the same as another existing drink in the inventory list.
      */
-    void updatePerson(Person target, Person editedPerson);
+    // void updateDrink(Drink target, Drink editedDrink);
 
-    /** Returns an unmodifiable view of the filtered person list */
-    ObservableList<Person> getFilteredPersonList();
+    /** Returns an unmodifiable view of the filtered inventory list */
+    ObservableList<Drink> getFilteredDrinkList();
 
     /**
-     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * Updates the filter of the filtered drink list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Person> predicate);
+    void updateFilteredDrinkList(Predicate<Drink> predicate);
 
-    /**
-     * Returns true if the model has previous address book states to restore.
-     */
-    boolean canUndoAddressBook();
-
-    /**
-     * Returns true if the model has undone address book states to restore.
-     */
-    boolean canRedoAddressBook();
-
-    /**
-     * Restores the model's address book to its previous state.
-     */
-    void undoAddressBook();
-
-    /**
-     * Restores the model's address book to its previously undone state.
-     */
-    void redoAddressBook();
-
-    /**
-     * Saves the current address book state for undo/redo.
-     */
-    void commitAddressBook();
 }
