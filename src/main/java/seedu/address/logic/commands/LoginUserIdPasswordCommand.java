@@ -5,8 +5,11 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 
 import java.util.function.Predicate;
 
+import javax.security.auth.login.LoginException;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.exceptions.UserLoginException;
 import seedu.address.model.Model;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
@@ -43,6 +46,8 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
             MainWindow.setIsLoginSuccessful(true);
         } else {
             MainWindow.setIsLoginSuccessful(false);
+            UserLoginException userLoginException = new UserLoginException();
+            userLoginException.showLoginError();
         }
         return new CommandResult(
                 String.format(Messages.MESSAGE_LOGIN_LISTED_OVERVIEW, model.getFilteredLoginDetailsList().size()));

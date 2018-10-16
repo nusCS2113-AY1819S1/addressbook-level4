@@ -80,10 +80,9 @@ Password is case-sensitive!
 === Creating a new user account: `createaccount`
 
 Creates a new user account in the address book. +
-Format: `createaccount user/USERID pass/PASSWORD`
+Format: `createaccount USERID PASSWORD`
 
 ****
-* user/ and pass/ are required prefixes before USERID and PASSWORD
 * USERID refers to student matriculation number
 * PASSWORD refers to any desired passphrases the new user wishes to have
 * The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabet, and there must be exactly 7 digits between the two `X`
@@ -92,7 +91,7 @@ Format: `createaccount user/USERID pass/PASSWORD`
 
 Examples:
 
-* `createaccount user/X1234567X pass/zaq1xsw2cde3` +
+* `createaccount X1234567X aq1xsw2cde3` +
 Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
 === Viewing help : `help`
@@ -361,11 +360,7 @@ _{explain how the user can enable/disable data encryption}_
 * *Login* : `login USERID PASSWORD`
 e.g. `login A1234567M zaq1xsw2cde3`
 * *Create Account* : `createaccount USERID PASSWORD` +
-e.g. `createaccount user/A1234567M pass/zaq1xsw2cde3`
-* *Delete Account* : `deleteaccount USERID PASSWORD` +
-e.g. `deleteaccount A01234567M zaq1xsw2cde3`
-* *Change Password* : `changepassword USERID CURRENTPASSWORD NEWPASSWORD` +
-e.g. `changepassword A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
+e.g. `createaccount A1234567M zaq1xsw2cde3`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 * *Clear* : `clear`
 * *Delete* : `delete [-a all][INDEX]` +

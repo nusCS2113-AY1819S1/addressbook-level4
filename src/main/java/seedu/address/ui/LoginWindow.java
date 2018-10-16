@@ -18,6 +18,9 @@ class LoginWindow {
      */
     void initializeLogin(Logic logic) {
         String loginInput = JOptionPane.showInputDialog("Please login first by entering login credentials:");
+        if (loginInput == null) {
+            System.exit(0);
+        }
         try {
             logic.execute(loginInput);
         } catch (CommandException | ParseException e) {
