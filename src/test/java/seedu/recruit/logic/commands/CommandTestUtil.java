@@ -345,7 +345,7 @@ public class CommandTestUtil {
         }
 
         @Override
-        public ObservableList<Company> getFilteredCompanyJobList() {
+        public ObservableList<JobOffer> getFilteredCompanyJobList() {
             throw new AssertionError("This method should not be called.");
         }
 
