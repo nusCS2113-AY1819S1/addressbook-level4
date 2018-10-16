@@ -45,10 +45,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add t/TASK`, `TASK` is a parameter which can be used as `add t/Do homework`.
+//* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -63,6 +61,15 @@ Format: `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
 Examples:
 
 * `add t/Complete 2113 Tutorial d/Wed w/2`
+
+=== Adding a milestone: `add_milestone`
+
+Adds a milestone to selected task from the task book +
+Format: `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...`
+
+Examples:
+
+* `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 
 === Complete a task: `complete`
 
@@ -214,6 +221,8 @@ _{explain how the user can enable/disable data encryption}_
 
 * *Add* : `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
+* *Add Milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
+e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 * *Clear* : `clear`
 * *Deadline* : `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
 e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`

@@ -1,7 +1,7 @@
 package seedu.address.ui;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.EventsUtil.postNow;
+import static unrefactored.testutil.EventsUtil.postNow;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 
@@ -17,9 +17,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import guitests.guihandles.StatusBarFooterHandle;
-import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.model.AddressBook;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
+import unrefactored.guitests.guihandles.StatusBarFooterHandle;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 

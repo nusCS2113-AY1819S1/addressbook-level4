@@ -848,6 +848,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |messy student |view today's date |schedule tasks in an organised manner based on day, week, month
 
 |`* * *` |unorganised student |select a date |add/delete/complete tasks for that particular day
+
+|`* * *` |objective student |break up my task into smaller tasks |manage them more effectively
+
 |=======================================================================
 
 
@@ -880,6 +883,36 @@ Use case resumes at step 2.
 Use case ends.
 
 [discrete]
+
+[discrete]
+=== Use case: Add milestone
+
+*MSS*
+
+1. Student requests to add a new milestone
+2. TB returns a list of tasks entered previously
+3. Student selects the task to add the milestone to
+4. TB asks for the milestone description and rank
+5. Student provides the milestone description and rank
+6. TB adds the milestone to the selected task
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Task Book is currently empty as no tasks has been added yet.
+** 2a1. TB outputs error message
++
+Use case ends.
+
+* 5a. Student enters an milestone description and rank with invalid format
+** 5a1. TB requests for milestone description and rank with valid format
+** 5a2. Student enters milestone description and rank with valid format
++
+Use case resumes at step 6.
+
+[discrete]
+
 === Use case: Add important deadline
 
 *MSS*
@@ -891,6 +924,7 @@ Use case ends.
 5. Student provides the number of weeks for reminder(s).
 6. TB adds the task and its reminder(s) to the list
 
+[discrete]
 === Use case: Complete task
 
 *MSS*

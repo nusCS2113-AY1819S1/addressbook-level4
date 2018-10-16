@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -15,6 +17,7 @@ import seedu.address.model.task.UniqueTaskList;
 public class AddressBook implements ReadOnlyTaskBook {
 
     private final UniqueTaskList tasks;
+    private Deadline currentDate;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -89,11 +92,38 @@ public class AddressBook implements ReadOnlyTaskBook {
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
      */
+    public void completeTask(Task key) {
+        tasks.complete(key);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
     public void removeTask(Task key) {
         tasks.remove(key);
     }
 
-    //// util methods
+    //@@author JeremyInElysium
+    /**
+     * Adds a milestone to a selected task in the Task Book.
+     * The task must already exist in the Task Book.
+     */
+    public void addMilestone(Milestone milestone) {
+        requireNonNull(milestone);
+        tasks.add(milestone);
+    }
+
+    /**
+     * Selects the date for Task Book.
+     * Update the list.
+     */
+    public void selectDeadline(Deadline deadline) {
+        //TODO: @emobeany handle cases where year or month is not specified
+        currentDate = deadline;
+    }
+
+    // util methods
 
     @Override
     public String toString() {

@@ -1,17 +1,13 @@
 package seedu.address.model;
 
+//import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static unrefactored.testutil.TypicalTasks.getTypicalTaskBook;
+//import static org.junit.Assert.assertTrue;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
+//import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -19,9 +15,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.person.Task;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.task.Task;
+//import seedu.address.model.task.exceptions.DuplicateTaskException;
+//import unrefactored.testutil.TaskBuilder;
 
 public class AddressBookTest {
 
@@ -43,20 +39,20 @@ public class AddressBookTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
+        AddressBook newData = getTypicalTaskBook();
         addressBook.resetData(newData);
         assertEquals(newData, addressBook);
     }
 
-    @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    /*@Test
+    public void resetData_withDuplicatePersons_throwsDuplicateTaskException() {
         // Two tasks with the same identity fields
-        Task editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Task editedAlice = new TaskBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Task> newTasks = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newTasks);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateTaskException.class);
         addressBook.resetData(newData);
     }
 
@@ -89,7 +85,7 @@ public class AddressBookTest {
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getTaskList().remove(0);
-    }
+    }*/
 
     /**
      * A stub ReadOnlyTaskBook whose tasks list can violate interface constraints.
