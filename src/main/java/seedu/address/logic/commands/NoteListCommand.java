@@ -7,8 +7,8 @@ import java.util.function.Predicate;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.NoteManager;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteManager;
 
 /**
  * Lists notes based on given predicate.

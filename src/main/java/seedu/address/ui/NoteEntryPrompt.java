@@ -60,7 +60,7 @@ public class NoteEntryPrompt {
             String tempNote = noteContent.getText();
 
             if (tempNote.trim().length() > 0) {
-                note.setNote(tempNote);
+                note.setNoteText(tempNote);
                 dialogStage.close();
             }
         }

@@ -18,8 +18,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
-import seedu.address.model.NoteManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.note.NoteManager;
+
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -132,7 +133,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         noteManager = new NoteManager();
-        noteManager.getDataFromFile();
         noteListPanel = new NoteListPanel(noteManager.getFilteredNotesList());
         notesListPanelPlaceholder.getChildren().add(noteListPanel.getRoot());
 

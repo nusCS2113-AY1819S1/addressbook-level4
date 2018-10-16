@@ -1,25 +1,12 @@
 package seedu.address.model.note;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-
 /**
- * Represents a note data in Trajectory.
+ * Represents a note in Trajectory.
  */
-@XmlRootElement(name = "note")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Note {
 
-    @XmlElement(name = "moduleCode")
     private String moduleCode;
-
-    @XmlElement(name = "date")
     private String date;
-
-    @XmlElement(name = "text")
     private String noteText;
 
     public Note() {
@@ -27,9 +14,15 @@ public class Note {
     }
 
     public Note(String moduleCode, String date) {
-        this.noteText = "";
         this.moduleCode = moduleCode;
         this.date = date;
+        this.noteText = "";
+    }
+
+    public Note(String moduleCode, String date, String text) {
+        this.moduleCode = moduleCode;
+        this.date = date;
+        this.noteText = text;
     }
 
     public String getModuleCode() {
@@ -52,7 +45,7 @@ public class Note {
         return this.noteText;
     }
 
-    public void setNote(String noteText) {
+    public void setNoteText(String noteText) {
         this.noteText = noteText;
     }
 }

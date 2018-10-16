@@ -10,6 +10,10 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 import seedu.address.model.gradebook.GradebookComponent;
 import seedu.address.model.gradebook.GradebookManager;
+import seedu.address.storage.adapter.XmlAdaptedModule;
+import seedu.address.storage.adapter.XmlAdaptedNote;
+import seedu.address.storage.serializable.XmlSerializableModuleList;
+import seedu.address.storage.serializable.XmlSerializableNoteList;
 
 /**
  * This class is a storage controller for the other datasets that work alongside the main student list.
@@ -21,11 +25,13 @@ public class StorageController {
     private static final String STORAGE_MODULES = BASE_DIRECTORY + "modules.xml";
     private static final String STORAGE_CLASSES = BASE_DIRECTORY + "classes.xml";
     private static final String STORAGE_GRADEBOOK = BASE_DIRECTORY + "gradebook.xml";
+    private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
 
     private static ArrayList<Course> courseStorage = new ArrayList<Course>();
-    private static ArrayList<Module> moduleStorage = new ArrayList<Module>();
+    private static ArrayList<XmlAdaptedModule> moduleStorage = new ArrayList<>();
     private static ArrayList<Classroom> classesStorage = new ArrayList<Classroom>();
     private static ArrayList<GradebookComponent> gradebookStorage = new ArrayList<GradebookComponent>();
+    private static ArrayList<XmlAdaptedNote> noteStorage = new ArrayList<>();
 
     /**
      * This method retrieves all datasets saved locally.
@@ -37,12 +43,17 @@ public class StorageController {
             CourseManager cm = XmlUtil.getDataFromFile(Paths.get(STORAGE_COURSES), CourseManager.class);
             courseStorage = cm.getList();
 
-            ModuleManager moduleManager = XmlUtil.getDataFromFile(Paths.get(STORAGE_MODULES), ModuleManager.class);
-            moduleStorage = moduleManager.getModules();
+            XmlSerializableModuleList moduleList =
+                    XmlUtil.getDataFromFile(Paths.get(STORAGE_MODULES), XmlSerializableModuleList.class);
+            moduleStorage = moduleList.getModules();
 
             ClassroomManager crm = (ClassroomManager) XmlUtil.getDataFromFile(
                     Paths.get(STORAGE_CLASSES), ClassroomManager.class);
             classesStorage = crm.getList();
+
+            XmlSerializableNoteList noteList =
+                    XmlUtil.getDataFromFile(Paths.get(STORAGE_NOTES), XmlSerializableNoteList.class);
+            noteStorage = noteList.getNotes();
 
             GradebookManager gradeManager = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADEBOOK),
                     GradebookManager.class);
@@ -53,19 +64,20 @@ public class StorageController {
     }
 
     /**
-     * This method creates files for all datasets if they do not exist on the local filesystem.
+     This method creates files for all datasets if they do not exist on the local filesystem.
      */
     private static void createFiles() {
         File gradebook = new File(STORAGE_GRADEBOOK);
         File classes = new File(STORAGE_CLASSES);
         File courses = new File(STORAGE_COURSES);
         File modules = new File(STORAGE_MODULES);
-
+        File notes = new File(STORAGE_NOTES);
         try {
             gradebook.createNewFile();
             classes.createNewFile();
             courses.createNewFile();
             modules.createNewFile();
+            notes.createNewFile();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,7 +85,7 @@ public class StorageController {
     }
 
     /**
-     * This method stores all data within the arraylists above to local storage.
+     This method stores all data within the arraylists above to local storage.
      */
     public static void storeData() {
         try {
@@ -81,13 +93,17 @@ public class StorageController {
             cm.setCourseList(courseStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_COURSES), cm);
 
-            ModuleManager moduleManager = new ModuleManager();
-            moduleManager.setModules(moduleStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_MODULES), moduleManager);
+            XmlSerializableModuleList moduleList = new XmlSerializableModuleList();
+            moduleList.setModules(moduleStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_MODULES), moduleList);
 
             ClassroomManager crm = new ClassroomManager();
             crm.setClassroomList(classesStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_CLASSES), crm);
+
+            XmlSerializableNoteList noteList = new XmlSerializableNoteList();
+            noteList.setNotes(noteStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_NOTES), noteList);
 
             GradebookManager gm = new GradebookManager();
             gm.setGradebookComponentList(gradebookStorage);
@@ -105,12 +121,12 @@ public class StorageController {
         StorageController.courseStorage = courseStorage;
     }
 
-    public static ArrayList<Module> getModuleStorage() {
+    public static ArrayList<XmlAdaptedModule> getModuleStorage() {
         return moduleStorage;
     }
 
-    public static void setModuleStorage(ArrayList<Module> moduleStorage) {
-        StorageController.moduleStorage = moduleStorage;
+    public static void setModuleStorage(ArrayList<XmlAdaptedModule> moduleList) {
+        moduleStorage = moduleList;
     }
 
     public static ArrayList<Classroom> getClassesStorage() {
@@ -127,5 +143,13 @@ public class StorageController {
 
     public static void setGradebookStorage(ArrayList<GradebookComponent> gradebookStorage) {
         StorageController.gradebookStorage = gradebookStorage;
+    }
+
+    public static ArrayList<XmlAdaptedNote> getNoteStorage() {
+        return noteStorage;
+    }
+
+    public static void setNoteStorage(ArrayList<XmlAdaptedNote> noteList) {
+        noteStorage = noteList;
     }
 }

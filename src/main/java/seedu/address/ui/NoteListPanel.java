@@ -29,21 +29,10 @@ public class NoteListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<Note> dataList) {
         notesListView.setItems(dataList);
         notesListView.setCellFactory(listView -> new NotesListViewCell());
-        setEventHandlerForSelectionChangeEvent();
-    }
-
-    private void setEventHandlerForSelectionChangeEvent() {
-        notesListView.getSelectionModel().selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> {
-                    if (newValue != null) {
-                        logger.fine("Selection in list panel changed to : '" + newValue + "'");
-                        //raise(new PersonPanelSelectionChangedEvent(newValue));
-                    }
-                });
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
+     * Custom {@code ListCell} that displays the graphics of a {@code Note} using a {@code NoteCard}.
      */
     class NotesListViewCell extends ListCell<Note> {
         @Override
@@ -58,5 +47,4 @@ public class NoteListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

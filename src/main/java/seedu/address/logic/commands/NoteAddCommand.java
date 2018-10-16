@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.NoteManager;
 import seedu.address.model.note.Note;
+import seedu.address.model.note.NoteManager;
 import seedu.address.ui.NoteEntryPrompt;
 
 /**
@@ -51,9 +51,8 @@ public class NoteAddCommand extends Command {
         boolean isCancelled = showTextPrompt();
 
         if (!isCancelled) {
-            noteManager.getDataFromFile();
             noteManager.addNote(noteToAdd);
-            noteManager.saveDataToFile();
+            noteManager.saveNoteList();
 
             return new CommandResult(String.format(MESSAGE_SUCCESS, noteToAdd.getModuleCode()));
         } else {
