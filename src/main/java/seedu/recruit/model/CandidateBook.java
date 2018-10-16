@@ -53,7 +53,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     public void resetData(ReadOnlyCandidateBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getCandidateList());
+        setPersons(newData.getCandidatelist());
     }
 
     //// candidate-level operations
@@ -103,7 +103,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     }
 
     @Override
-    public ObservableList<Candidate> getCandidateList() {
+    public ObservableList<Candidate> getCandidatelist() {
         return persons.asUnmodifiableObservableList();
     }
 

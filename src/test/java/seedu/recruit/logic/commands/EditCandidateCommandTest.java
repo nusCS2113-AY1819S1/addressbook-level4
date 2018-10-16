@@ -129,7 +129,7 @@ public class EditCandidateCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
 
         // edit candidate in filtered list into a duplicate in recruit book
-        Candidate candidateInList = model.getCandidateBook().getCandidateList().get(INDEX_SECOND_PERSON.getZeroBased());
+        Candidate candidateInList = model.getCandidateBook().getCandidatelist().get(INDEX_SECOND_PERSON.getZeroBased());
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(INDEX_FIRST_PERSON,
                 new EditPersonDescriptorBuilder(candidateInList).build());
 
@@ -156,7 +156,7 @@ public class EditCandidateCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of recruit book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getCandidateBook().getCandidateList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getCandidateBook().getCandidatelist().size());
 
         EditCandidateCommand EditCandidateCommand = new EditCandidateCommand(outOfBoundIndex,
                 new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());

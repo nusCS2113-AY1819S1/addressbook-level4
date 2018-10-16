@@ -15,20 +15,15 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
-import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
  */
 public class StatusBarFooter extends UiPart<Region> {
 
-    public static final String SYNC_CANDIDATE_STATUS_INITIAL = "Candidate Book - not updated yet in this session";
-    public static final String SYNC_CANDIDATE_STATUS_UPDATED = "Candidate Book - Last Updated: %s";
-    public static final String SYNC_COMPANY_STATUS_INITIAL = "Company Book - Not updated yet in this session";
-    public static final String SYNC_COMPANY_STATUS_UPDATED = "Company Book - Last Updated: %s";
-    public static final String TOTAL_CANDIDATES_STATUS = "%d candidate(s) total";
-    public static final String TOTAL_COMPANIES_STATUS = "%d company(s) total";
-
+    public static final String SYNC_STATUS_INITIAL = "Not updated yet in this session";
+    public static final String SYNC_STATUS_UPDATED = "Last Updated: %s";
+    public static final String TOTAL_PERSONS_STATUS = "%d person(s) total";
     /**
      * Used to generate time stamps.
      *
@@ -44,28 +39,17 @@ public class StatusBarFooter extends UiPart<Region> {
     private static final String FXML = "StatusBarFooter.fxml";
 
     @FXML
-    private StatusBar syncCandidatesStatus;
+    private StatusBar syncStatus;
     @FXML
-    private StatusBar saveCandidateBookLocationStatus;
+    private StatusBar saveLocationStatus;
     @FXML
-    private StatusBar totalCandidatesStatus;
-    @FXML
-    private StatusBar syncCompaniesStatus;
-    @FXML
-    private StatusBar totalCompaniesStatus;
-    @FXML
-    private StatusBar saveCompanyBookLocationStatus;
+    private StatusBar totalPersonsStatus;
 
-
-    public StatusBarFooter(Path saveCandidateBookLocation, Path saveCompanyBookLocation,
-                           int totalCandidates, int totalCompanies) {
+    public StatusBarFooter(Path saveLocation, int totalPersons) {
         super(FXML);
-        setCandidateSyncStatus(SYNC_CANDIDATE_STATUS_INITIAL);
-        setCompanySyncStatus(SYNC_COMPANY_STATUS_INITIAL);
-        setSaveCandidateBookLocation(Paths.get(".").resolve(saveCandidateBookLocation).toString());
-        setSaveCompanyBookLocation(Paths.get(".").resolve(saveCompanyBookLocation).toString());
-        setTotalCandidates(totalCandidates);
-        setTotalCompanies(totalCompanies);
+        setSyncStatus(SYNC_STATUS_INITIAL);
+        setSaveLocation(Paths.get(".").resolve(saveLocation).toString());
+        setTotalPersons(totalPersons);
         registerAsAnEventHandler(this);
     }
 
@@ -83,47 +67,24 @@ public class StatusBarFooter extends UiPart<Region> {
         return clock;
     }
 
-    private void setSaveCandidateBookLocation(String location) {
-        Platform.runLater(() -> saveCandidateBookLocationStatus.setText(location));
+    private void setSaveLocation(String location) {
+        Platform.runLater(() -> saveLocationStatus.setText(location));
     }
 
-    private void setSaveCompanyBookLocation(String location) {
-        Platform.runLater(() -> saveCompanyBookLocationStatus.setText(location));
+    private void setSyncStatus(String status) {
+        Platform.runLater(() -> syncStatus.setText(status));
     }
 
-    private void setCandidateSyncStatus(String status) {
-        Platform.runLater(() -> syncCandidatesStatus.setText(status));
-    }
-
-    private void setCompanySyncStatus(String status) {
-        Platform.runLater(() -> syncCompaniesStatus.setText(status));
-    }
-
-    private void setTotalCandidates(int totalCandidates) {
-        Platform.runLater(() -> totalCandidatesStatus.setText(String.format(TOTAL_CANDIDATES_STATUS, totalCandidates)));
-    }
-
-    private void setTotalCompanies(int totalCompanies) {
-        Platform.runLater(() -> totalCompaniesStatus.setText(String.format(TOTAL_COMPANIES_STATUS, totalCompanies)));
+    private void setTotalPersons(int totalPersons) {
+        Platform.runLater(() -> totalPersonsStatus.setText(String.format(TOTAL_PERSONS_STATUS, totalPersons)));
     }
 
     @Subscribe
-    public void handleCandidateBookChangedEvent(CandidateBookChangedEvent abce) {
+    public void handleAddressBookChangedEvent(CandidateBookChangedEvent abce) {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
-        logger.info(LogsCenter.getEventHandlingLogMessage(abce,
-                "Candidate Book - Setting last updated status to " + lastUpdated));
-        setCandidateSyncStatus(String.format(SYNC_CANDIDATE_STATUS_UPDATED, lastUpdated));
-        setTotalCandidates(abce.data.getCandidateList().size());
-    }
-
-    @Subscribe
-    public void handleCompanyBookChangedEvent(CompanyBookChangedEvent abce) {
-        long now = clock.millis();
-        String lastUpdated = new Date(now).toString();
-        logger.info(LogsCenter.getEventHandlingLogMessage(abce,
-                "Company Book - Setting last updated status to " + lastUpdated));
-        setCompanySyncStatus(String.format(SYNC_COMPANY_STATUS_UPDATED, lastUpdated));
-        setTotalCompanies(abce.data.getCompanyList().size());
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+        setTotalPersons(abce.data.getCandidatelist().size());
     }
 }

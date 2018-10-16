@@ -66,7 +66,7 @@ public class SelectCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of recruit book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getCandidateBook().getCandidateList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getCandidateBook().getCandidatelist().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }

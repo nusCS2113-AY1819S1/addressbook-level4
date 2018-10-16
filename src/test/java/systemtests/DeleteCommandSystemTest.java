@@ -10,7 +10,6 @@ import static seedu.recruit.testutil.TestUtil.getPerson;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.Messages;
@@ -21,7 +20,6 @@ import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 
-@Ignore("not updated with new UI changes")
 public class DeleteCommandSystemTest extends CandidateBookSystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
@@ -70,7 +68,7 @@ public class DeleteCommandSystemTest extends CandidateBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getCandidateBook().getCandidateList().size();
+        int invalidIndex = getModel().getCandidateBook().getCandidatelist().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -101,7 +99,7 @@ public class DeleteCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: invalid index (size + 1) -> rejected */
         Index outOfBoundsIndex = Index.fromOneBased(
-                getModel().getCandidateBook().getCandidateList().size() + 1);
+                getModel().getCandidateBook().getCandidatelist().size() + 1);
         command = DeleteCommand.COMMAND_WORD + " " + outOfBoundsIndex.getOneBased();
         assertCommandFailure(command, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 

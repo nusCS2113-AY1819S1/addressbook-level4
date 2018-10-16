@@ -86,7 +86,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a candidate with new values same as another candidate's values but with different name -> edited*/
-        assertTrue(getModel().getCandidateBook().getCandidateList().contains(BOB));
+        assertTrue(getModel().getCandidateBook().getCandidatelist().contains(BOB));
         index = INDEX_SECOND_PERSON;
         assertNotEquals(getModel().getFilteredCandidateList().get(index.getZeroBased()), BOB);
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB
@@ -125,7 +125,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getCandidateBook().getCandidateList().size();
+        int invalidIndex = getModel().getCandidateBook().getCandidatelist().size();
         assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
@@ -188,7 +188,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: edit a candidate with new values same as another candidate's values -> rejected */
         executeCommand(PersonUtil.getAddCandidateCommand(BOB));
-        assertTrue(getModel().getCandidateBook().getCandidateList().contains(BOB));
+        assertTrue(getModel().getCandidateBook().getCandidatelist().contains(BOB));
         index = INDEX_FIRST_PERSON;
         assertFalse(getModel().getFilteredCandidateList().get(index.getZeroBased()).equals(BOB));
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB

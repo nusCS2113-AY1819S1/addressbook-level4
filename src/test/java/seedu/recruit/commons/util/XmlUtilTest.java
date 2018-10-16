@@ -81,7 +81,7 @@ public class XmlUtilTest {
     public void getDataFromFile_validFile_validResult() throws Exception {
         CandidateBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableCandidateBook.class)
                 .toModelType();
-        assertEquals(9, dataFromFile.getCandidateList().size());
+        assertEquals(9, dataFromFile.getCandidatelist().size());
     }
 
     @Test

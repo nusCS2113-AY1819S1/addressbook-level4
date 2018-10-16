@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.model.CandidateBook;
@@ -14,7 +13,6 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.util.SampleDataUtil;
 import seedu.recruit.testutil.TestUtil;
 
-@Ignore("not updated with new UI changes")
 public class SampleDataTest extends CandidateBookSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.

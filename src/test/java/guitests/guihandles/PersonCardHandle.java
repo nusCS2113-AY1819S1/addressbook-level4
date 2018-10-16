@@ -13,29 +13,29 @@ import seedu.recruit.model.candidate.Candidate;
 /**
  * Provides a handle to a candidate card in the candidate list panel.
  */
-public class CandidateCardHandle extends NodeHandle<Node> {
+public class PersonCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
-    private static final String EDUCATION_FIELD_ID = "#education";
-    private static final String SALARY_FIELD_ID = "#salary";
-    private static final String JOB_FIELD_ID = "#desired_job";
+    private static final String ADDRESS_FIELD_ID = "#address";
+    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
     private final Label nameLabel;
-    private final Label educationLabel;
-    private final Label salaryLabel;
-    private final Label jobLabel;
+    private final Label addressLabel;
+    private final Label phoneLabel;
+    private final Label emailLabel;
     private final List<Label> tagLabels;
 
-    public CandidateCardHandle(Node cardNode) {
+    public PersonCardHandle(Node cardNode) {
         super(cardNode);
 
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
-        educationLabel = getChildNode(EDUCATION_FIELD_ID);
-        salaryLabel = getChildNode(SALARY_FIELD_ID);
-        jobLabel = getChildNode(JOB_FIELD_ID);
+        addressLabel = getChildNode(ADDRESS_FIELD_ID);
+        phoneLabel = getChildNode(PHONE_FIELD_ID);
+        emailLabel = getChildNode(EMAIL_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -53,16 +53,16 @@ public class CandidateCardHandle extends NodeHandle<Node> {
         return nameLabel.getText();
     }
 
-    public String getEducation() {
-        return educationLabel.getText();
+    public String getAddress() {
+        return addressLabel.getText();
     }
 
-    public String getSalary() {
-        return salaryLabel.getText();
+    public String getPhone() {
+        return phoneLabel.getText();
     }
 
-    public String getJob() {
-        return jobLabel.getText();
+    public String getEmail() {
+        return emailLabel.getText();
     }
 
     public List<String> getTags() {
@@ -77,9 +77,9 @@ public class CandidateCardHandle extends NodeHandle<Node> {
      */
     public boolean equals(Candidate candidate) {
         return getName().equals(candidate.getName().fullName)
-                && getEducation().equals(candidate.getEducation().value)
-                && getSalary().equals(candidate.getSalary().value)
-                && getJob().equals(candidate.getJob().value)
+                && getAddress().equals(candidate.getAddress().value)
+                && getPhone().equals(candidate.getPhone().value)
+                && getEmail().equals(candidate.getEmail().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(candidate.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));

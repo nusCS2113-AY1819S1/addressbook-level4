@@ -208,16 +208,6 @@ public class AddCandidateCommandTest {
         }
 
         @Override
-        public ObservableList<JobOffer> getFilteredCompanyJobList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredCompanyJobList(Predicate<JobOffer> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean canUndoCompanyBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -294,6 +284,5 @@ public class AddCandidateCommandTest {
             return new CandidateBook();
         }
     }
-
 
 }
