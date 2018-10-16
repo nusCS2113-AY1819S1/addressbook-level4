@@ -96,6 +96,16 @@ public class AddressBook implements ReadOnlyTaskBook {
         tasks.complete(key);
     }
 
+    //@@author ChanChunCheong
+    /**
+     * Defer {@code key} previous deadline with (@code deadline) from this {@code AddressBook}.
+     * {@code key} must exist in the address book.
+     */
+    public void  deferDeadline(Task key, String deadline) {
+        requireNonNull(deadline);
+        tasks.defer(key, deadline);
+    }
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.

@@ -3,6 +3,7 @@ package seedu.address.model.task;
 import java.util.Objects;
 
 import seedu.address.model.task.exceptions.TaskCompletedException;
+import seedu.address.model.deadline.Deadline;
 
 /**
  * Represents a Task in the address book.
@@ -10,7 +11,7 @@ import seedu.address.model.task.exceptions.TaskCompletedException;
  */
 public class Task {
     private static final String PLACEHOLDER_DEADLINE = "1/1";
-    private final String deadline;
+    private String deadline;
     private final String title;
     private final String description;
     private final PriorityLevel priorityLevel;
@@ -78,6 +79,10 @@ public class Task {
                 && otherTask.getTitle().equals(getTitle());
     }
 
+    public Task deferred(String deadline) {
+        this.deadline = deadline;
+        return this;
+    }
     /**
      * Returns true if both tasks have the same data fields.
      * This defines a stronger notion of equality between two tasks.
