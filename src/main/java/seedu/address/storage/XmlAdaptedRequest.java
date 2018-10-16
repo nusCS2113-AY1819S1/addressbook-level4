@@ -1,7 +1,5 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -10,8 +8,8 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
 import seedu.address.model.request.Email;
-import seedu.address.model.request.Request;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.request
+        .Request;
 
 /**
  * JAXB-friendly version of the Request.
