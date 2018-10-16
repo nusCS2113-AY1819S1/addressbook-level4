@@ -346,12 +346,8 @@ image::SellSequenceDiagram.png[width="800"]
 The Request command utilises both the `RequestModel` and `Logic` component to fulfil its function.
 This is accessible for all users.
 
-The following sequence diagram shows how the Request operation is implemented:
-
-image::RequestCommandDiagram.png[width="800"]
-
 ==== Design Considerations
-===== Aspect 1: Request command is implemented in a different category
+===== Aspect: Request command is implemented in a different category
 As mentioned above, Request is called in RequestModel and RequestStorage.
 A request object consists of three objects, Isbn, Email, and Quantity.
 
@@ -363,17 +359,20 @@ image::RequestModelClassDiagram.jpg[width="800"]
 The implementation is similar to 2.4. Model component.
 Note that XmlAdaptedTag class is removed as request has no tags.
 
-===== Storage component
+===== RequestStorage component
 
 .Structure of the RequestStorage Component
 image::RequestStorageClassDiagram.jpg[width="800"]
 
 Likewise, this implementation is similar to 2.5. Storage component.
 
-===== Aspect 2: How Request command is implemented
+===== Aspect: How Request command is implemented
 
-* **Alternative 1 (current choice):** Decreases quantity in the Quantity Class.
-** Pros: Code is more cohesive.
+.Structure of Request (High Level Sequence Diagram)
+image::HighLevelRequestSequenceDiagram.png[width="800"]
+
+* **Similar to Add Command**
+** After request command is called, it
 ** Cons: Adds more code to Quantity Class
 * **Alternative 2:** Decreases quantity in the Book Class.
 ** Pros: Does not need to edit Quantity Class.
