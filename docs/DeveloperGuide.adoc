@@ -255,9 +255,9 @@ The methods that enable the analyses of quantities sold are:
 
 Internally, `Analysis#analyseProfit()` calls `Analysis#analyseCost()` and `Analysis#analyseRevenue()` to calculate the profit, using the formula “profit = revenue - cost”.
 
-`Analysis#analyseRevenue()` iterates through the `TransactionList` and checks the `Transaction`’s `TransactionType`. If the `TransactionType` is `SALE`, the `Price` at which the drink is sold is obtained and added to a sum of revenues. On the other hand, if the `TransactionType` is `IMPORT`, the `Transaction` will be ignored.
+`Analysis#analyseRevenue()` iterates through the `TransactionList` and checks the `Transaction`’s `TransactionType`. If the `TransactionType` is `SALE`, the `Price` at which the drink is sold is obtained and added to a sum of revenues. On the other hand, if the `TransactionType` is `IMPORT`, the `Transaction` will be ignored. The sum of revenues will be wrapped in a `Price` object and returned to the calling function.
 
-The opposite applies for `Analysis#analyseCost()`. It iterates through `TransactionList`, similar to `Analysis#analyseRevenue()`. Now, if the `TransactionType` is `IMPORT`, the `Price` at which the drink is bought for is obtained and added to a sum of costs.
+The opposite applies for `Analysis#analyseCost()`. It iterates through `TransactionList`, similar to `Analysis#analyseRevenue()`. Now, if the `TransactionType` is `IMPORT`, the `Price` at which the drink is bought for is obtained and added to a sum of costs. The sum of costs will be wrapped in `Price` and returned to the calling function.
 
 ==== Design Considerations
 * *Current implementation:* Currently, the entire `TransactionList` since the beginning of using the application is used for the analyses. This presents the overview of the company’s profit margin since it started using the application, and is useful for tracking long term growth.
