@@ -15,10 +15,12 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
+import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.security.Security;
@@ -197,10 +199,17 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Opens the Registration Window.
      */
-    @FXML
     public void handleRegister() {
         loginWindow.hide();
         registrationWindow.show();
+    }
+
+    /***
+     * Handles successful registration
+     */
+    public void handleSuccessRegister() {
+        registrationWindow.hide();
+        raise(new SuccessfulLoginEvent()); //Calls method fill in data
     }
 
     void show() {
@@ -239,5 +248,11 @@ public class MainWindow extends UiPart<Stage> {
     private void handleExitRegisterEvent(ExitRegisterEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleLogin();
+    }
+
+    @Subscribe
+    private void handleSuccessfulRegisterEvent(SuccessfulRegisterEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSuccessRegister();
     }
 }

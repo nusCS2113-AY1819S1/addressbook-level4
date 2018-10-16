@@ -4,6 +4,9 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.security.UnsuccessfulLoginEvent;
+import seedu.address.logic.Logic;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /***
@@ -16,12 +19,14 @@ public class SecurityManager extends ComponentManager implements Security {
     private String username;
     private String password;
     private User user;
+    private Logic logic;
 
-    public SecurityManager(boolean isTest, Model model) {
+    public SecurityManager(boolean isTest, Model model, Logic logic) {
         this.isAuthenticated = isTest; //Test for now
         this.username = "test";
         this.password = "test";
         this.model = model;
+        this.logic = logic;
     }
 
     public boolean getAuthentication() {
@@ -50,5 +55,18 @@ public class SecurityManager extends ComponentManager implements Security {
         this.isAuthenticated = false;
         //TODO Do I clear the User since its logged out? I can just leave it there to be overwritten
         raise(new LogoutEvent());
+    }
+
+    @Override
+    public int register(String username, String password, String email, String phone, String address) {
+        try {
+            logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
+            return 1;
+        } catch (CommandException e) {
+            return 2;
+        } catch (ParseException e) {
+            return 3;
+        }
+        //TODO Use password to create a database tgt with username
     }
 }
