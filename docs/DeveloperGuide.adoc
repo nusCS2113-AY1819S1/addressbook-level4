@@ -319,6 +319,22 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::exportall[]
+=== ExportAll Feature
+==== Current Implementation
+
+The exportall mechanism is facilitated by `CsvWriter`. Internally, a CSVWriter object from the http://opencsv.sourceforge.net/[OpenCSV]
+library is instantiated to write all persons to the default file path `/data/pineapple.csv`. Currently, it implements
+ the following operation(s):
+* `CsvWriter#write()` -- Saves the current address book state in its history.
+
+
+`VersionedAddressBook`.
+It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+Additionally, it implements the following operations:
+
+// tag::exportall[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
