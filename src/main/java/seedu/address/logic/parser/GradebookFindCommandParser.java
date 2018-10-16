@@ -6,32 +6,32 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.GradebookDeleteCommand;
+import seedu.address.logic.commands.GradebookFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gradebook.XmlAdaptedGradebook;
 
 /**
- * Parses input arguments and creates a new GradebookDeleteCommand object
+ * Parses input arguments and creates a new GradebookFindCommand object
  */
-public class GradebookDeleteCommandParser {
+public class GradebookFindCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the GradebookDeleteCommand
-     * and returns a GradebookDeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the GradebookFindCommand
+     * and returns a GradebookFindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public GradebookDeleteCommand parse(String args) throws ParseException {
+    public GradebookFindCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULECODE, PREFIX_GRADEBOOK_ITEM);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULECODE, PREFIX_GRADEBOOK_ITEM)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    GradebookDeleteCommand.MESSAGE_USAGE));
+                    GradebookFindCommand.MESSAGE_USAGE));
         }
 
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULECODE).get();
         String gradeItemNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
         XmlAdaptedGradebook gradebookComponent = new XmlAdaptedGradebook(moduleCodeArg, gradeItemNameArg);
-        return new GradebookDeleteCommand(gradebookComponent);
+        return new GradebookFindCommand(gradebookComponent);
     }
 
     /**
