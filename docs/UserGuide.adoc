@@ -18,7 +18,7 @@ By: `Team F09-4`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-RecruitBook is a tool to help manage job candidates and available job offers for job agents and HR(Human Resources) department. RecruitBook is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). RecruitBook can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+RecruitBook is a tool to help manage job candidates and available job offers for job agents and HR (Human Resources) department. RecruitBook is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). RecruitBook can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -136,10 +136,10 @@ The index must be an index number shown in the displayed candidates list.
 
 Example:
 
-*	`editc 1 n/John Doe p/91234567 e/johndoe@example.com` +
+* `editc 1 n/John Doe p/91234567 e/johndoe@example.com` +
 (Edits the name, phone number and email address of the candidate with index 1 to be John Doe, 91234567 and johndoe@example.com respectively)
 
-*	`editc 3 t/` +
+* `editc 3 t/` +
 (Edits and clears all existing tags belonging to the candidate at index 3)
 
 ==== Edits details of a job offer
@@ -150,8 +150,13 @@ This index must be an index number shown in the displayed job list.
 
 Examples:
 
+<<<<<<< HEAD
 *	`editj 1 x/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
+=======
+* `editj 1 x/20-30`
+(Edits the MIN_AGE-MAX_AGE attribute to be from 20 to 30 years of age for the 1st job offer)
+>>>>>>> 6ea65f13afc5a018bc00b2cb6c12bf58adb7a6bc
 
 === Locating candidates by search parameter : `find`
 
@@ -188,16 +193,16 @@ Searched field *must be of the full length* that is recorded in the RecruitBook
 
 Examples:
 
-*	`filter h/O LEVEL` +
+* `filter h/O LEVEL` +
 (Returns any candidate with `O LEVEL` as the highest education level)
 
-*	`filter j/Librarian` +
+* `filter j/Librarian` +
 (Returns any candidate searching for the job `Librarian`)
 
-*	`filter s/$4000` +
+* `filter s/$4000` +
 (Returns any candidate that expects a salary of $4000)
 
-*	`filter x/18` +
+* `filter x/18` +
 (Returns any candidate that is aged 18)
 
 ==== Exits from the filter interface and system proceeds to ask for next command
@@ -208,13 +213,19 @@ Format: `cancel`
 ==== Deleting a specific candidate
 Format: `deletec <INDEX>`
 
+<<<<<<< HEAD
 *	Deletes the candidate with the specified `INDEX`
 *	This index must be an index number shown in the displayed candidate list.
 *	The full name can be found using the find function when a partial keyword is entered
+=======
+* Deletes the candidate with the specified `INDEX`
+* The index must be an index number shown in the displayed candidate list.
+* The full name can be found using the find function when a partial keyword is entered
+>>>>>>> 6ea65f13afc5a018bc00b2cb6c12bf58adb7a6bc
 
 Example to delete a candidate:
 
-Step 1.	`find Betsy` +
+Step 1. `find Betsy` +
 (Shows all saved candidates named Betsy)
 
 Step 2. `deletec 1` +
@@ -223,12 +234,12 @@ Step 2. `deletec 1` +
 ==== Deleting a specific job offer
 Format: `deletej <INDEX>`
 
-*	Deletes the job with the specified `INDEX`
-*	The index must be an index number shown in the displayed job list.
+* Deletes the job with the specified `INDEX`
+* The index must be an index number shown in the displayed job list.
 
 Example to delete a job:
 
-Step 1.	`list jobs` +
+Step 1. `list jobs` +
 (Shows all available jobs)
 
 Step 2. `deletej 5` +
