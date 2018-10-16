@@ -13,7 +13,7 @@ import seedu.address.model.tag.Tag;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
-
+    Predicate<Expenditure> PREDICATE_SHOW_ALL_EXPENDITURES = unused -> true;
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
@@ -28,6 +28,7 @@ public interface Model {
      */
     boolean hasPerson(Person person);
 
+    boolean hasExpenditure(Expenditure expenditure);
     /**
      * Deletes the given person.
      * The person must exist in the address book.
@@ -38,6 +39,8 @@ public interface Model {
      * Adds the given person.
      * {@code person} must not already exist in the address book.
      */
+    void deleteExpenditure(Expenditure target);
+
     void addPerson(Person person);
 
     /**
@@ -52,6 +55,8 @@ public interface Model {
      */
     void updatePerson(Person target, Person editedPerson);
 
+    void updateExpenditure(Expenditure target, Expenditure editedExpenditure);
+
     void deleteTag(Tag tag);
 
     /** Returns an unmodifiable view of the filtered person list */
@@ -65,7 +70,7 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
+    void updateFilteredExpenditureList(Predicate<Expenditure> predicate);
     /**
      * Returns true if the model has previous address book states to restore.
      */

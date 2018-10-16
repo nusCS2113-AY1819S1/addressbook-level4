@@ -816,13 +816,14 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 *Target user profile*:
 
 * NUS SoC students
+* Is busy and has a need to better manage his/her student life
 * Has a need to manage a significant number of academic tasks
 * Has a need to keep track on expenditures
 * Prefer desktop applications over mobile platforms
 * Prefers typing over mouse input
 * Is reasonably comfortable using CLI applications
 
-*Value proposition*: To assist students in managing all of their academic work and spendings
+*Value proposition*: To assist students in managing all of their academic work and spendings which will improve their student life
 
 [appendix]
 == User Stories
@@ -832,7 +833,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the application
 
 |`* * *` |student |add a new task to the to-do list |
 
@@ -840,43 +841,35 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |student |delete a task on the to-do list |remove any entries that I no longer need
 
-|`* *` |student |archive completed tasks |have a history of all tasks completed earlier throughout the school semester
+|`* * *` |student |archive completed tasks |have a history of all tasks completed earlier throughout the school semester
 
-|`*` |student with multiple modules |tag each task with a module code |identify all tasks specific to a particular module
+|`* * *` |student with multiple modules |tag each task with a module code |identify all tasks specific to a particular module
 
-|`*` |student with multiple tasks |classify tasks and search tasks by their class names |
+|`* * *` |student with multiple tasks |tag each task with a deadline |identify all tasks that are time sensitive
 
-|`*` |student with multiple tasks |tag each task with a deadline |identify all tasks that are time sensitive
+|`* * *` |student with multiple tasks |tag each task with different levels of importance/priority |identify all tasks that requires more attention
 
-|`*` |student with multiple tasks |tag each task with different levels of importance/priority |identify all tasks that requires more attention
+|`* * *` |student with multiple tasks |sort the todo list by deadline |view which task is due the earliest
 
-|`*` |student with multiple tasks |sort the todo list by deadline |view which task is due the earliest
+|`* * *` |student with multiple tasks |sort the todo list by importance/priority |view which tasks are more important than the other
 
-|`*` |student with tasks may last for a long time |easily record and view my progress with progress bar |
+|`* * *` |student who is not capable of managing expenditure |see and check where did I spend my money and how much did I spend for each expenditure with the corresponding date |better understand my spending habits
 
-|`*` |student with multiple tasks |sort the todo list by importance/priority |view which tasks are more important than the other
+|`* * *` |student who wants to know how much money did I spend and how much income did I get for a certain period |see the amount of spendings and income respectively by keying in the starting date and end date of a particular period |
 
-|`*` |student |delete all archived completed tasks after the semester is done | get ready for the next semester
+|`* *` |student with tasks that may last for a long time |easily record and view my progress with progress bar |
+
+|`* *` |student |delete all archived completed tasks after the semester is done | get ready for the next semester
+
+|`* *` |student with difficulty in remembering all deadlines |get notified at a certain time before deadline based on my choice |submit my work on time
+
+|`* *` |student who wants to know how to save my money |obtain advices from the Expenditure Tracker by checking the categories which I mainly spent my money on |control my spendings in a particular category
 
 |`*` |student with multiple projects |have a separate project window |view all tasks specific only to projects
 
-|`*` |student with difficulty in remembering all deadlines |get notified at a certain time before deadline based on my choice |submit my work on time
-
-|`*` |student with multiple tasks to complete in one day |let the system automatically generate the to-do list |start working on the tasks
-
-|`*` |student who is not capable of managing expenditure |see and check where did I spend my money and how much did I spend for each expenditure with the corresponding date |
-
-|`*` |student who wants to know how to save my money |obtain advices from the Expenditure Tracker by checking the categories which I mainly spent my money on |
+|`*` |student with multiple tasks to complete in a day |let the system automatically generate the order of tasks based on priority |start working on the tasks
 
 |`*` |student who does not record their money spending regularly |notified by the Expenditure Tracker to note down the amount of money spent on food, snacks or other categories respectively everyday |
-
-|`*` |student who wants to know how much money did I spend and how much income did I get for a certain period |see the amount of spendings and income respectively by keying in the starting date and end date of a particular period |
-
-|`*` |student who likes to tag events information for everyday to remind myself |choose the corresponding date directly on the Calendar and key in the events that are going to happen on that day |
-
-|`*` |student with a desire to have a scheduled semester |mark every significant day such as the midterm / final exam date, recess week, reading week or even statutory holidays |
-
-|`*` |student who wants to arrange studying time properly |tag every study plan for every single day on Calendar in more details |
 |=======================================================================
 
 

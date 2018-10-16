@@ -39,6 +39,20 @@ public class Expenditure {
     }
 
 
+    /**
+     * Returns true if both tasks have the same identity fields.
+     * This defines a weaker notion of equality between two expenditures.
+     */
+    public boolean isSameExpenditure(Expenditure otherExpenditure) {
+        if (otherExpenditure == this) {
+            return true;
+        }
+
+        return otherExpenditure != null
+                && otherExpenditure.getDate().equals(getDate())
+                && otherExpenditure.getMoney().equals(getMoney())
+                && otherExpenditure.getCategory().equals(getCategory());
+    }
 
     @Override
     public int hashCode() {
