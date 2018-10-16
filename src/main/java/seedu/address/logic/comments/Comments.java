@@ -1,11 +1,5 @@
 package seedu.address.logic.comments;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.parser.Tag;
-import org.jsoup.select.Elements;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -13,34 +7,49 @@ import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.parser.Tag;
+import org.jsoup.select.Elements;
+
+
+
 /**
  * Adds comments section.
  */
 public abstract class Comments {
 
-    public static Vector v;
-    public static String input;
+    private static String input;
+    private static Vector comments;
 
     /**
      *  Constructor to make sure that used Vector and path is initialised
      */
     public Comments () {
         input = "C:/Users/Gerald/Desktop/test/1.html";
-        v = this.parseCommentSection(input);
+        comments = this.parseCommentSection(input);
     }
 
+    public Vector getComments() {
+        return comments;
+    }
+
+    public String getInput() {
+        return input;
+    }
 
     /**
      *  Runs a pre-processing to ensure that strings can be stored as a vector
      */
     public Vector parseCommentSection(String in) {
         String input = in;
-        Vector v= new Vector();
-        Document htmlfile=null;
+        Vector v = new Vector();
+        Document htmlfile = null;
         try {
-            htmlfile = Jsoup.parse(new File(input),null);
+            htmlfile = Jsoup.parse(new File(input), null);
         } catch (IOException e) {
-            e.printStackTrace();// This should return an error message in case it doesn't work
+            e.printStackTrace(); // This should return an error message in case it doesn't work
         }
         Element element = htmlfile.select("ol").first();
         Elements divChildren = element.children();
@@ -61,11 +70,11 @@ public abstract class Comments {
      *  Rewrites String to after a change has happened
      */
     public static String rewrite(Vector v, String input) {
-        String commentSection="<span>Comment Section</span>\n<ol>";
-        for(int i=0;i<v.size();i++) {
-            commentSection+= "\n" + "<li>" + v.get(i)+"</li>";
+        String commentSection = "<span>Comment Section</span>\n<ol>";
+        for (int i = 0; i < v.size(); i++) {
+            commentSection += "\n" + "<li>" + v.get(i) + "</li>";
         }
-        commentSection+="\n</ol>";
+        commentSection += "\n</ol>";
         File savingFile = new File(input);
         FileOutputStream fop = null;
         try {
@@ -103,17 +112,17 @@ public abstract class Comments {
         DeleteComment b = new DeleteComment();
         ReplyComment c = new ReplyComment();
         String str;
-        while(true){
+        while (true) {
             System.out.println("What Comment do you want to add?");
-            Scanner SCANNER = new Scanner(System.in);
-            String username = SCANNER.nextLine();
+            Scanner scan = new Scanner(System.in);
+            String username = scan.nextLine();
 
             try {
                 Integer.parseInt(username);
                 str = b.deleteComment(Integer.parseInt(username));
                 System.out.println("Comment at " + username + "deleted");
                 //System.out.println(str);
-            } catch(NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 str = c.replyComment(username, 1);
                 System.out.println("Comment added!!");
                 //System.out.println(str);

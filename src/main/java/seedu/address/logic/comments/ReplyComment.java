@@ -1,5 +1,7 @@
 package seedu.address.logic.comments;
 
+import java.util.Vector;
+
 /**
  *  Replies to a comment on a given line with a comment
  */
@@ -9,12 +11,14 @@ public class ReplyComment extends Comments {
      *  Replies with the comment to event Comment section of index and line
      */
     public String replyComment(String comment, int line) {
+        Vector comments = new Vector();
         try {
-            v.add(line, "REPLY--->" + comment);
+            comments = getComments();
+            comments.add(line, "REPLY--->" + comment);
         } catch (Exception e) {
             System.out.println("Line error");
         }
-        return rewrite(v,input);
+        return rewrite(comments, getInput());
     }
 
 }
