@@ -31,7 +31,7 @@ public class ItemBuilder {
         name = new Name(DEFAULT_NAME);
         quantity = new Quantity(DEFAULT_QUANTITY);
         minQuantity = new Quantity(DEFAULT_MIN_QUANTITY);
-        status = new ArrayList<>(Arrays.asList(20, 0, 0));
+        status = new ArrayList<>(Arrays.asList(Integer.parseInt(DEFAULT_QUANTITY), 0, 0));
         tags = new HashSet<>();
     }
 
@@ -67,6 +67,7 @@ public class ItemBuilder {
      */
     public ItemBuilder withQuantity(String quantity) {
         this.quantity = new Quantity(quantity);
+        this.status = new ArrayList<>(Arrays.asList(Integer.parseInt(quantity), 0, 0));
         return this;
     }
 

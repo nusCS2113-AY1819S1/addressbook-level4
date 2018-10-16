@@ -51,9 +51,15 @@ public class Item {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status.add(status.get(0));
-        this.status.add(status.get(1));
-        this.status.add(status.get(2));
+        if (status.isEmpty()) {
+            this.status.add(quantity.toInteger());
+            this.status.add(0);
+            this.status.add(0);
+        } else {
+            this.status.add(status.get(0));
+            this.status.add(status.get(1));
+            this.status.add(status.get(2));
+        }
         this.tags.addAll(tags);
     }
 
