@@ -14,11 +14,21 @@ public class SaveCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Saved Stock List";
 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves current version of stock list "
+            + "as an xml file with the specified file name.\n"
+            + "Parameters: FILENAME \n"
+            + "Example: " + COMMAND_WORD + " backup";
+
+    public static String fileName;
+
+    public SaveCommand(String fileName) {
+        this.fileName = fileName;
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.saveStockList();
+        model.saveStockList(fileName);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
