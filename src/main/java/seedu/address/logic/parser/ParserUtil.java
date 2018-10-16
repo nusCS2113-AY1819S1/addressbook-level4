@@ -82,7 +82,17 @@ public class ParserUtil {
         }
         return new Quantity(trimmedMinQuantity);
     }
-
+    /**
+     * Parses a {@code String Status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Status} is invalid.
+     */
+    public static String parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        return trimmedStatus;
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

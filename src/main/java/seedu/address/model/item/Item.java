@@ -22,7 +22,8 @@ public class Item {
     public static final int STATUS_ONLOAN = 1;
     public static final int STATUS_FAULTY = 2;
 
-    // Identity fields
+    // Identity
+    // fields
     private final Name name;
     private final Quantity quantity;
     private final Quantity minQuantity;
@@ -50,9 +51,15 @@ public class Item {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status.add(quantity.toInteger());
-        this.status.add(0);
-        this.status.add(0);
+        if (status.isEmpty()) {
+            this.status.add(quantity.toInteger());
+            this.status.add(0);
+            this.status.add(0);
+        } else {
+            this.status.add(status.get(0));
+            this.status.add(status.get(1));
+            this.status.add(status.get(2));
+        }
         this.tags.addAll(tags);
     }
 
