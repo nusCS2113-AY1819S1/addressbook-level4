@@ -13,6 +13,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.EventPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.model.event.Event;
 
 
@@ -45,6 +46,7 @@ public class EventListPanel extends UiPart<Region> {
                     if (newValue != null) {
                         logger.fine("Selection in event list panel changed to : '" + newValue + "'");
                         raise(new EventPanelSelectionChangedEvent(newValue));
+                        raise(new NewResultAvailableEvent(newValue.toString()));
                     }
                 });
     }
