@@ -50,7 +50,7 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Contact} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withContact(String contact) {
         descriptor.setContact(new Contact(contact));

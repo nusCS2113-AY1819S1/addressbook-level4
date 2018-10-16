@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Address;
+import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
@@ -60,7 +61,7 @@ public class XmlAdaptedEventTest {
     public void toModelType_invalidContact_throwsIllegalValueException() {
         XmlAdaptedEvent person =
                 new XmlAdaptedEvent(VALID_NAME, INVALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = Phone.MESSAGE_PHONE_CONSTRAINTS;
+        String expectedMessage = Contact.MESSAGE_CONTACT_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 
@@ -68,7 +69,7 @@ public class XmlAdaptedEventTest {
     public void toModelType_nullContact_throwsIllegalValueException() {
         XmlAdaptedEvent person = new XmlAdaptedEvent(VALID_NAME, null, VALID_PHONE, VALID_EMAIL,
                 VALID_ADDRESS, VALID_TAGS);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Contact.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
     }
 

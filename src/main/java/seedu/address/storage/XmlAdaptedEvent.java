@@ -96,7 +96,10 @@ public class XmlAdaptedEvent {
         final Name modelName = new Name(name);
 
         if (contact == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Contact.class.getSimpleName()));
+        }
+        if (!Contact.isValidContact(contact)) {
+            throw new IllegalValueException(Contact.MESSAGE_CONTACT_CONSTRAINTS);
         }
         final Contact modelContact = new Contact(contact);
 

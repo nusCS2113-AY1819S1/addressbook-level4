@@ -121,7 +121,7 @@ public class Event {
         return Objects.hash(name, contact, phone, email, address, tags);
     }
 
-    @Override //TODO CHECK FOR CONTACT
+    @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())

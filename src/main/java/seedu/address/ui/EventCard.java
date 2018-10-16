@@ -44,7 +44,7 @@ public class EventCard extends UiPart<Region> {
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
-        id.setText(displayedIndex + " ");
+        id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
         contact.setText(event.getContact().fullContactName);
         phone.setText(event.getPhone().value);
