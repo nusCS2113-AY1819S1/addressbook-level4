@@ -57,7 +57,7 @@ public class EmailSendCommand extends Command {
 
         //Generate subject
         String subject = generateSubject(emailUtil);
-        
+
         //Sending the email
         try {
             MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, subject, bodyText);
@@ -94,7 +94,7 @@ public class EmailSendCommand extends Command {
 
                 int index = model.getCompanyIndexFromName(jobOffer.getCompanyName());
                 //Company not found in CompanyBook
-                if(index == -1) {
+                if (index == -1) {
                     continue;
                 }
 
@@ -118,7 +118,7 @@ public class EmailSendCommand extends Command {
         if (emailUtil.isAreRecipientsCandidates()) {
             bodyText = "Hello candidates! I think you will be interested in these job offer(s)\n";
             //contents are companies
-            for(Object content : contents) {
+            for (Object content : contents) {
                 JobOffer jobOffer = (JobOffer) content;
                 bodyText = bodyText + '\n' + "Company: " + jobOffer.getCompanyName().toString();
                 bodyText = bodyText + '\n' + "Job: " + jobOffer.getJob().toString();
@@ -129,11 +129,11 @@ public class EmailSendCommand extends Command {
             ArrayList<String> jobNames = new ArrayList<>();
             for (Object recipient : recipients) {
                 JobOffer jobOffer = (JobOffer) recipient;
-                jobNames.add(jobOffer.getJob().toString()) ;
+                jobNames.add(jobOffer.getJob().toString());
             }
 
-            bodyText = "Hello Sirs/Madams,\nI think you will be interested in these candidates for your job offer: " +
-                    jobNames.toString() + '\n';
+            bodyText = "Hello Sirs/Madams,\nI think you will be interested in these candidates for your job offer: "
+                    + jobNames.toString() + '\n';
             //contents are candidates
             for (Object content : contents) {
                 Candidate candidate = (Candidate) content;
@@ -148,9 +148,14 @@ public class EmailSendCommand extends Command {
         return bodyText;
     }
 
+    /**
+     * Function to generate a subject for email
+     * @param emailUtil
+     * @return String subject
+     */
     private String generateSubject(EmailUtil emailUtil) {
         String subject;
-        if(emailUtil.isAreRecipientsCandidates()) {
+        if (emailUtil.isAreRecipientsCandidates()) {
             subject = "Hot new job offers that you will love!";
         } else {
             subject = "New candidates found for your company!";

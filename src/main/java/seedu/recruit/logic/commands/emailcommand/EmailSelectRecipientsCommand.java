@@ -16,8 +16,8 @@ import seedu.recruit.ui.MainWindow;
  */
 public class EmailSelectRecipientsCommand extends Command {
     public static final String COMMAND_WORD = "next";
-    public static final String MESSAGE_USAGE = "Find the recipients that you are going to email\n " +
-            "Type \"next\" when you have done so to move on to the next step.";
+    public static final String MESSAGE_USAGE = "Find the recipients that you are going to email\n "
+            + "Type \"next\" when you have done so to move on to the next step.";
     public static final String COMMAND_LOGIC_STATE = "EmailSelectRecipients";
 
     @Override
