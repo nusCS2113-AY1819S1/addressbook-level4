@@ -1,45 +1,80 @@
 package seedu.address.model.event;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
-import seedu.address.model.person.Person;
-
+//@@author: jieliangang
 /**
  * Represents a the attendees in a event.
  */
 public class Attendees {
-    private ArrayList<Person> attendeesList;
+    public final Set<String> attendeesSet;
 
-    public Attendees(Person... persons) {
-        this.attendeesList = new ArrayList<Person>(Arrays.asList(persons));
+    public Attendees() {
+        this.attendeesSet = new HashSet<>();
+    }
+
+    public Attendees(Set<String> attendeesSet) {
+        Objects.requireNonNull(attendeesSet);
+        this.attendeesSet = attendeesSet;
+    }
+
+    public Attendees(Set<String>... attendeesSet) {
+        this();
+        for (Set<String> names: attendeesSet) {
+            Objects.requireNonNull(names);
+            this.attendeesSet.addAll(names);
+        }
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         int i = 1;
-        for (Person person : attendeesList) {
+        for (String name : attendeesSet) {
             builder.append(String.format("%i: ", i++));
-            builder.append(person.getName());
+            builder.append(name);
             builder.append("\n");
         }
         return builder.toString();
+    }
+
+    /**
+     * Add names to attendees list
+     * @param name The new name to be added.
+     * @return A new copy of updated Attendees.
+     */
+    public Attendees addName(String name) {
+        Set<String> updatedAttendees = new HashSet<>(this.attendeesSet);
+        updatedAttendees.add(name);
+        return new Attendees(updatedAttendees);
+    }
+
+    /**
+     * Returns whether set contains name.
+     * @param name The name to be checked.
+     */
+    public boolean hasName(String name) {
+        return attendeesSet.contains(name);
+    }
+
+    /**
+     * Returns whether set is empty.
+     */
+    public boolean isSetEmpty() {
+        return attendeesSet.isEmpty();
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Attendees// instanceof handles nulls
-                && attendeesList.equals(((Attendees) other).attendeesList)); // state check
-    }
-
-    public ArrayList<Person> getAttendeesList() {
-        return attendeesList;
+                && attendeesSet.equals(((Attendees) other).attendeesSet)); // state check
     }
 
     @Override
     public int hashCode() {
-        return attendeesList.hashCode();
+        return attendeesSet.hashCode();
     }
 }

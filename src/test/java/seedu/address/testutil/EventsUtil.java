@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_START_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TO;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -13,6 +14,7 @@ import java.time.format.DateTimeFormatter;
 import guitests.GuiRobot;
 import javafx.application.Platform;
 import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.model.event.Event;
@@ -47,8 +49,7 @@ public class EventsUtil {
      * Returns the part of command string for the given {@code person}'s details.
      */
 
-    public static String getEventDetails(Event event)
-    {
+    public static String getEventDetails(Event event) {
 
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + event.getEventName().fullName + " ");
@@ -58,6 +59,13 @@ public class EventsUtil {
         sb.append(PREFIX_START_DATE + event.getStartTime().startTime + " ");
         sb.append(PREFIX_END_DATE + event.getEndTime().endTime);
         return sb.toString();
+    }
+
+    /**
+     * Returns the part of command string for the given {@code event}'s index.
+     */
+    public static String getEventIndex(Index index) {
+        return PREFIX_TO + String.valueOf(index.getOneBased());
     }
 
     /**

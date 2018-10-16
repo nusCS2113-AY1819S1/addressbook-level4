@@ -13,7 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
-
+//@@author: jieliangang
 /**
  * Creates an event in event list.
  */

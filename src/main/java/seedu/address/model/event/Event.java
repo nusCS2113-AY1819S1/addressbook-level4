@@ -3,11 +3,8 @@ package seedu.address.model.event;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
-import seedu.address.model.person.Person;
 
 /**
  * Represents a Event in the event list.
@@ -17,6 +14,7 @@ public class Event implements Comparable<Event> {
 
     public static final String MESSAGE_DESCRIPTION = " Description: ";
     public static final String MESSAGE_LOCATION = " Location: ";
+    public static final String MESSAGE_DATE = " Date: ";
     public static final String MESSAGE_START_TIME = " Start time: ";
     public static final String MESSAGE_END_TIME = " End time: ";
 
@@ -29,9 +27,7 @@ public class Event implements Comparable<Event> {
     private final StartTime startTime;
     private final EndTime endTime;
     private final Location location;
-
-    // TODO: WILL BE IMPLEMENT IN THE NEXT VERSION FOR ADDING OF EMPLOYEES
-    private final Set<Person> attendees = new HashSet<>();
+    private final Attendees attendees;
 
     /**
      * Every field must be present not null
@@ -47,6 +43,26 @@ public class Event implements Comparable<Event> {
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
+        attendees = new Attendees();
+
+    }
+
+    /**
+     * Overloaded constructor to construct event with existing attendees list
+     */
+
+    public Event(EventName eventName, Description description,
+                 LocalDate date, StartTime startTime, EndTime endTime, Location location, Attendees attendees) {
+        requireAllNonNull(eventName, description, startTime, endTime, location);
+
+        this.eventName = eventName;
+        this.description = description;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
+        this.attendees = attendees;
+
     }
 
 
@@ -74,7 +90,7 @@ public class Event implements Comparable<Event> {
         return location;
     }
 
-    public Set<Person> getAttendees() {
+    public Attendees getAttendees() {
         return attendees;
     }
 
@@ -143,16 +159,6 @@ public class Event implements Comparable<Event> {
         return this.getEventName().fullName.compareTo(other.getEventName().fullName);
     }
 
-
-    /**
-     * Returns true if events attendees contain person.
-     */
-    public boolean containPerson(Person person) {
-        if (attendees.isEmpty()) {
-            return false;
-        }
-        return (attendees.contains(person));
-    }
 
     public int compareDateTo(Event other) {
         return this.getDate().compareTo(other.getDate());
