@@ -60,6 +60,10 @@ public class AddressBookParserTest {
         assertEquals(new AddCommand(person), command);
     }
 
+    /**
+     * Command to create a group
+     * @throws Exception
+     */
     @Test
     public void parseCommand_group() throws Exception {
         Group group = new GroupBuilder().build();
@@ -67,6 +71,10 @@ public class AddressBookParserTest {
         assertEquals(new CreateGroupCommand(group), command);
     }
 
+    /**
+     * Command to add persons to a group
+     * @throws Exception
+     */
     @Test
     public void parseCommand_addGroup() throws Exception {
         AddGroupCommand command = (AddGroupCommand) parser.parseCommand(AddGroupCommand.COMMAND_WORD + " "

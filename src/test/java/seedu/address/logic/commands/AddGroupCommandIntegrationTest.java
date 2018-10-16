@@ -2,19 +2,14 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddGroups.getAddGroup3;
-import static seedu.address.testutil.TypicalGroups.CS1010;
-import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalGroups.getTut1;
 import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
 
 import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
