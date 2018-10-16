@@ -16,6 +16,7 @@ import seedu.address.commons.events.model.LoginBookChangedEvent;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UniqueAccountList;
 import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -26,6 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedLoginBook versionedLoginBook;
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final SearchHistoryManager searchHistoryManager;
     private final FilteredList<LoginDetails> filteredLoginDetails;
 
     /**
@@ -41,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
+        searchHistoryManager = new SearchHistoryManager();
     }
 
     public ModelManager() {
@@ -49,6 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
+        searchHistoryManager.clearSearchHistory();
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
@@ -173,6 +177,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public SearchHistoryManager getSearchHistoryManager() {
+        return searchHistoryManager;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -187,6 +196,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && searchHistoryManager.equals(other.searchHistoryManager);
     }
 }
