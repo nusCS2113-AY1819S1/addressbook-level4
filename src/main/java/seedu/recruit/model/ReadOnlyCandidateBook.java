@@ -12,6 +12,6 @@ public interface ReadOnlyCandidateBook {
      * Returns an unmodifiable view of the candidate list.
      * This list will not contain any duplicate candidates.
      */
-    ObservableList<Candidate> getCandidateList();
+    ObservableList<Candidate> getCandidatelist();
 
 }

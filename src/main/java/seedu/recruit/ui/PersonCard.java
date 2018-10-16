@@ -8,13 +8,11 @@ import javafx.scene.layout.Region;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * An UI component that displays the name and the
- * level of education, desired job and desired salary
- * of a {@code Candidate}.
+ * An UI component that displays information of a {@code Candidate}.
  */
-public class CandidateCard extends UiPart<Region> {
+public class PersonCard extends UiPart<Region> {
 
-    private static final String FXML = "CandidateCard.fxml";
+    private static final String FXML = "PersonListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -43,7 +41,7 @@ public class CandidateCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label job;
+    private Label desired_job;
     @FXML
     private Label education;
     @FXML
@@ -51,12 +49,17 @@ public class CandidateCard extends UiPart<Region> {
     @FXML
     private FlowPane tags;
 
-    public CandidateCard(Candidate candidate, int displayedIndex) {
+    public PersonCard(Candidate candidate, int displayedIndex) {
         super(FXML);
         this.candidate = candidate;
         id.setText(displayedIndex + ". ");
         name.setText(candidate.getName().fullName);
-        job.setText(candidate.getJob().value);
+        gender.setText(candidate.getGender().value);
+        age.setText(candidate.getAge().value);
+        phone.setText(candidate.getPhone().value);
+        email.setText(candidate.getEmail().value);
+        address.setText(candidate.getAddress().value);
+        desired_job.setText(candidate.getJob().value);
         education.setText(candidate.getEducation().value);
         salary.setText(candidate.getSalary().value);
         candidate.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
@@ -70,12 +73,12 @@ public class CandidateCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CandidateCard)) {
+        if (!(other instanceof PersonCard)) {
             return false;
         }
 
         // state check
-        CandidateCard card = (CandidateCard) other;
+        PersonCard card = (PersonCard) other;
         return id.getText().equals(card.id.getText())
                 && candidate.equals(card.candidate);
     }

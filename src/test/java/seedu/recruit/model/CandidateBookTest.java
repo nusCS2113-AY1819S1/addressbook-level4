@@ -32,7 +32,7 @@ public class CandidateBookTest {
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), candidateBook.getCandidateList());
+        assertEquals(Collections.emptyList(), candidateBook.getCandidatelist());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class CandidateBookTest {
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        candidateBook.getCandidateList().remove(0);
+        candidateBook.getCandidatelist().remove(0);
     }
 
     /**
@@ -102,7 +102,7 @@ public class CandidateBookTest {
         }
 
         @Override
-        public ObservableList<Candidate> getCandidateList() {
+        public ObservableList<Candidate> getCandidatelist() {
             return candidates;
         }
     }

@@ -14,17 +14,17 @@ import org.junit.Test;
 
 import guitests.guihandles.BrowserPanelHandle;
 import seedu.recruit.MainApp;
-import seedu.recruit.commons.events.ui.CandidateDetailsPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.PersonPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
-    private CandidateDetailsPanelSelectionChangedEvent selectionChangedEventStub;
+    private PersonPanelSelectionChangedEvent selectionChangedEventStub;
 
     private BrowserPanel browserPanel;
     private BrowserPanelHandle browserPanelHandle;
 
     @Before
     public void setUp() {
-        selectionChangedEventStub = new CandidateDetailsPanelSelectionChangedEvent(ALICE);
+        selectionChangedEventStub = new PersonPanelSelectionChangedEvent(ALICE);
 
         guiRobot.interact(() -> browserPanel = new BrowserPanel());
         uiPartRule.setUiPart(browserPanel);

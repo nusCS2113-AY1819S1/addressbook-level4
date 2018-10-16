@@ -39,7 +39,6 @@ import static seedu.recruit.testutil.TypicalPersons.HOON;
 import static seedu.recruit.testutil.TypicalPersons.IDA;
 import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.Messages;
@@ -57,7 +56,6 @@ import seedu.recruit.model.tag.Tag;
 import seedu.recruit.testutil.PersonBuilder;
 import seedu.recruit.testutil.PersonUtil;
 
-@Ignore("not updated with new UI changes")
 public class AddCandidateCommandSystemTest extends CandidateBookSystemTest {
 
     @Test
