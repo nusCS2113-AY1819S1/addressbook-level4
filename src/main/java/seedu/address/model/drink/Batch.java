@@ -49,6 +49,10 @@ public class Batch {
                 && otherBatch.getBatchId().equals(getBatchId());
     }
 
+    public void setBatchQuantity(int value) {
+        batchQuantity.setValue(value);
+    }
+
     /**
      * Returns true if both batches have the same identity and data fields.
      * This defines a stronger notion of equality between two batches.
