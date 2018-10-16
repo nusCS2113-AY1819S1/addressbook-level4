@@ -27,17 +27,6 @@ public class ShopDay extends TimeIdentifiedClass {
     private final String date;
     private boolean isActiveDay;
 
-
-    /**
-     * The following method is the all-purpose initializer for a new shopDay.
-     */
-
-    private void initialise() {
-        this.shopDayRecord = new TreeMap<>();
-        this.reminderRecord = new TreeMap<>();
-        this.openDay();
-    }
-
     /**
      * The following are the class constructors.
      */
@@ -70,7 +59,8 @@ public class ShopDay extends TimeIdentifiedClass {
      * @throws InvalidTimeFormatException
      */
 
-    public ShopDay(String date, TreeMap<String, Transaction> shopDayRecord, TreeMap<String,Reminder> reminderRecord) throws InvalidTimeFormatException{
+    public ShopDay(String date, TreeMap<String, Transaction> shopDayRecord, TreeMap<String, Reminder> reminderRecord)
+            throws InvalidTimeFormatException {
         if (isValidDateFormat(date)) {
             this.date = date;
             this.shopDayRecord = shopDayRecord;
@@ -80,6 +70,17 @@ public class ShopDay extends TimeIdentifiedClass {
             throw new InvalidTimeFormatException();
         }
     }
+
+    /**
+     * The following method is the all-purpose initializer for a new shopDay.
+     */
+
+    private void initialise() {
+        this.shopDayRecord = new TreeMap<>();
+        this.reminderRecord = new TreeMap<>();
+        this.openDay();
+    }
+
 
     public String getDay() {
         return this.date;
@@ -95,6 +96,9 @@ public class ShopDay extends TimeIdentifiedClass {
     public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
             ClosedShopDayException, DuplicateTransactionException {
         String transactionTime = transaction.getTransactionTime();
+        if (!Transaction.isValidTransactionTime(transactionTime)) {
+            throw new InvalidTimeFormatException();
+        }
         if (!this.isActiveDay) {
             throw new ClosedShopDayException();
         } else if (shopDayRecord.containsKey(transactionTime)) {
@@ -109,7 +113,7 @@ public class ShopDay extends TimeIdentifiedClass {
      * @param reminder
      */
     public void addReminder(Reminder reminder) {
-        reminderRecord.put(reminder.getTime(),reminder);
+        reminderRecord.put(reminder.getTime(), reminder);
     }
 
     /**

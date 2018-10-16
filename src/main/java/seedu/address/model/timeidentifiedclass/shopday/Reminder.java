@@ -36,6 +36,12 @@ public class Reminder extends TimeIdentifiedClass {
         return time;
     }
 
+    /**
+     * The following method allows us to change the time for a reminder.
+     * @param time
+     * @throws InvalidTimeFormatException
+     */
+
     public void changeTime(String time) throws InvalidTimeFormatException {
         if (!Transaction.isValidTransactionTime(time)) {
             throw new InvalidTimeFormatException();

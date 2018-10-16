@@ -17,6 +17,10 @@ public class SalesHistory {
     private TreeMap<String, ShopDay> salesHistory;
     private ShopDay activeDay;
 
+    /**
+     * The following constructor creates a blank sales history, with today automatically inserted.
+     */
+
     public SalesHistory() {
         this.salesHistory = new TreeMap<>();
         activeDay = new ShopDay();
@@ -54,7 +58,8 @@ public class SalesHistory {
      * @throws DuplicateDayException
      * @throws InvalidTimeFormatException
      */
-    public void addDay(String day) throws DuplicateDayException, InvalidTimeFormatException {
+    public void addDay(String day) throws DuplicateDayException,
+            InvalidTimeFormatException {
         if (salesHistory.containsKey(day)) {
             throw new DuplicateDayException();
         }
@@ -96,13 +101,15 @@ public class SalesHistory {
      * The following method adds a transaction to the active day.
      * @param transaction
      */
-    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
-            ClosedShopDayException, DuplicateTransactionException {
+    public void addTransaction(Transaction transaction) throws
+            InvalidTimeFormatException,
+            ClosedShopDayException,
+            DuplicateTransactionException
+    {
         try {
             activeDay.addTransaction(transaction);
         } catch (InvalidTimeFormatException e) {
             throw e;
-
         } catch (ClosedShopDayException e) {
             throw e;
         } catch (DuplicateTransactionException e) {
