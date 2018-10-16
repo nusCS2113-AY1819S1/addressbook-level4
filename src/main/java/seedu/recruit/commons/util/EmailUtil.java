@@ -5,10 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.internet.InternetAddress;
@@ -30,6 +27,8 @@ import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
 
 import javafx.collections.ObservableList;
+import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.joboffer.JobOffer;
 
 /**
  * Contains variables and functions pertaining to the Email Command
@@ -49,30 +48,38 @@ public class EmailUtil {
     /**
      * Variables for Email Command
      */
-    private ObservableList<?> recipients;
-    private ObservableList<?> contents;
+    private ArrayList<Candidate> candidates;
+    private ArrayList<JobOffer> jobOffers;
     private boolean areRecipientsCandidates;
     private String to;
     private String subject;
     private String bodyText;
 
     /**
+     * Constructor
+     */
+    public EmailUtil() {
+        this.candidates = new ArrayList<>();
+        this.jobOffers = new ArrayList<>();
+    }
+
+    /**
      * Getters and Setters
      */
-    public ObservableList<?> getRecipients() {
-        return recipients;
+    public ArrayList<Candidate> getCandidates() {
+        return candidates;
     }
 
-    public void setRecipients(ObservableList<?> recipients) {
-        this.recipients = recipients;
+    public void setCandidates(ArrayList<Candidate> candidates) {
+        this.candidates = candidates;
     }
 
-    public ObservableList<?> getContents() {
-        return contents;
+    public ArrayList<JobOffer> getJobOffers() {
+        return jobOffers;
     }
 
-    public void setContents(ObservableList<?> contents) {
-        this.contents = contents;
+    public void setJobOffers(ArrayList<JobOffer> jobOffers) {
+        this.jobOffers = jobOffers;
     }
 
     public boolean isAreRecipientsCandidates() {
@@ -107,6 +114,21 @@ public class EmailUtil {
         this.bodyText = bodyText;
     }
 
+    /**
+     * Adds candidate to candidates ArrayList
+     * @param candidate
+     */
+    public void addCandidate(Candidate candidate) {
+        this.candidates.add(candidate);
+    }
+
+    /**
+     * Adds jobOffer to jobOffers ArrayList
+     * @param jobOffer
+     */
+    public void addJobOffer(JobOffer jobOffer) {
+        this.jobOffers.add(jobOffer);
+    }
     /**
      * Creates an authorized Credential object.
      * @param httpTransport The network HTTP Transport.

@@ -8,8 +8,6 @@ import java.util.Set;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import javafx.collections.ObservableList;
-
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
@@ -34,8 +32,17 @@ public class EmailSendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws IOException, GeneralSecurityException {
         EmailUtil emailUtil = model.getEmailUtil();
         String result;
-        ObservableList<?> recipients = emailUtil.getRecipients();
-        ObservableList<?> contents = emailUtil.getContents();
+        ArrayList<?> recipients;
+        ArrayList<?> contents;
+
+        //Setting recipients and contents based on AreRecipientsCandidates boolean
+        if(emailUtil.isAreRecipientsCandidates()) {
+            recipients = emailUtil.getCandidates();
+            contents = emailUtil.getJobOffers();
+        } else {
+            recipients = emailUtil.getJobOffers();
+            contents = emailUtil.getCandidates();
+        }
 
         // for testing purposes
         for (Object content : contents) {
@@ -80,7 +87,7 @@ public class EmailSendCommand extends Command {
      * @param contents
      */
     private void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil,
-                                    ObservableList<?> recipients, ObservableList<?> contents) {
+                                    ArrayList<?> recipients, ArrayList<?> contents) {
         if (emailUtil.isAreRecipientsCandidates()) {
             //recipients are candidates
             for (Object recipient : recipients) {
@@ -113,7 +120,7 @@ public class EmailSendCommand extends Command {
      * @return bodytext String
      */
     private String generateContent(Model model, EmailUtil emailUtil,
-                                 ObservableList<?> recipients, ObservableList<?> contents) {
+                                   ArrayList<?> recipients, ArrayList<?> contents) {
         String bodyText;
         if (emailUtil.isAreRecipientsCandidates()) {
             bodyText = "Hello candidates! I think you will be interested in these job offer(s)\n";

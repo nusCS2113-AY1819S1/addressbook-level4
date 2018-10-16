@@ -2,13 +2,18 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.ui.MainWindow;
+
+import java.util.ArrayList;
 
 
 /**
@@ -26,16 +31,19 @@ public class EmailSelectRecipientsCommand extends Command {
         EmailUtil emailUtil = model.getEmailUtil();
 
         if (MainWindow.getDisplayedBook().equals("candidateBook")) {
-            System.out.println("Candidate Book!");
-            emailUtil.setRecipients(model.getFilteredCandidateList());
+            ObservableList<Candidate> recipients = model.getFilteredCandidateList();
+            for (Candidate recipient : recipients) {
+                emailUtil.addCandidate(recipient);
+            }
             emailUtil.setAreRecipientsCandidates(true);
         } else {
-            System.out.println("Company Book!");
-            emailUtil.setRecipients(model.getFilteredCompanyJobList());
+            ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
+            for(JobOffer recipient : recipients) {
+                emailUtil.addJobOffer(recipient);
+            }
             emailUtil.setAreRecipientsCandidates(false);
         }
 
-        model.setEmailUtil(emailUtil);
         LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
     }
