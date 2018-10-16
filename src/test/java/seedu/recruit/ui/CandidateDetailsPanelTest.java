@@ -84,7 +84,7 @@ public class CandidateDetailsPanelTest extends GuiUnitTest {
         Path xmlFile = createXmlFileWithPersons(personCount);
         XmlSerializableCandidateBook xmlAddressBook =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableCandidateBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getCandidatelist());
+        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getCandidateList());
     }
 
     /**

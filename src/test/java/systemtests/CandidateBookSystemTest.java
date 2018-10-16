@@ -144,7 +144,7 @@ public abstract class CandidateBookSystemTest {
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
-        assertEquals(getModel().getCandidateBook().getCandidatelist().size(),
+        assertEquals(getModel().getCandidateBook().getCandidateList().size(),
                 getModel().getFilteredCandidateList().size());
     }
 
@@ -154,7 +154,7 @@ public abstract class CandidateBookSystemTest {
     protected void showPersonsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredCandidateList().size()
-                < getModel().getCandidateBook().getCandidatelist().size());
+                < getModel().getCandidateBook().getCandidateList().size());
     }
 
     /**
@@ -170,7 +170,7 @@ public abstract class CandidateBookSystemTest {
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCandidateBookCommand.COMMAND_WORD);
-        assertEquals(0, getModel().getCandidateBook().getCandidatelist().size());
+        assertEquals(0, getModel().getCandidateBook().getCandidateList().size());
     }
 
     /**
@@ -287,7 +287,7 @@ public abstract class CandidateBookSystemTest {
         String timestamp = new Date(clockRule.getInjectedClock().millis()).toString();
         String expectedSyncStatus = String.format(SYNC_STATUS_UPDATED, timestamp);
         assertEquals(expectedSyncStatus, handle.getSyncStatus());
-        final int totalPersons = testApp.getModel().getCandidateBook().getCandidatelist().size();
+        final int totalPersons = testApp.getModel().getCandidateBook().getCandidateList().size();
         assertEquals(String.format(TOTAL_PERSONS_STATUS, totalPersons), handle.getTotalPersonsStatus());
         assertFalse(handle.isSaveLocationChanged());
     }
@@ -303,7 +303,7 @@ public abstract class CandidateBookSystemTest {
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
-        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getCandidateBook().getCandidatelist().size()),
+        assertEquals(String.format(TOTAL_PERSONS_STATUS, getModel().getCandidateBook().getCandidateList().size()),
                 getStatusBarFooter().getTotalPersonsStatus());
     }
 

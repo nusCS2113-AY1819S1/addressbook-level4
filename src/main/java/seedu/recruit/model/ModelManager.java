@@ -41,7 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
         versionedCompanyBook = new VersionedCompanyBook(companyBook);
-        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
+        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
     }

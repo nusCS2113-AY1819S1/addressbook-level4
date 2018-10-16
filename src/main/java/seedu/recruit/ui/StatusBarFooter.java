@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
+import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
@@ -49,7 +50,7 @@ public class StatusBarFooter extends UiPart<Region> {
         super(FXML);
         setSyncStatus(SYNC_STATUS_INITIAL);
         setSaveLocation(Paths.get(".").resolve(saveLocation).toString());
-        setTotalPersons(totalPersons);
+        setTotalCandidates(totalPersons);
         registerAsAnEventHandler(this);
     }
 
@@ -75,16 +76,25 @@ public class StatusBarFooter extends UiPart<Region> {
         Platform.runLater(() -> syncStatus.setText(status));
     }
 
-    private void setTotalPersons(int totalPersons) {
+    private void setTotalCandidates(int totalPersons) {
         Platform.runLater(() -> totalPersonsStatus.setText(String.format(TOTAL_PERSONS_STATUS, totalPersons)));
     }
 
     @Subscribe
-    public void handleAddressBookChangedEvent(CandidateBookChangedEvent abce) {
+    public void handleCandidateBookChangedEvent(CandidateBookChangedEvent abce) {
         long now = clock.millis();
         String lastUpdated = new Date(now).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
-        setTotalPersons(abce.data.getCandidatelist().size());
+        setTotalCandidates(abce.data.getCandidateList().size());
+    }
+
+    @Subscribe
+    public void handleCompanyBookChangedEvent(CompanyBookChangedEvent abce) {
+        long now = clock.millis();
+        String lastUpdated = new Date(now).toString();
+        logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
+        setSyncStatus(String.format(SYNC_STATUS_UPDATED, lastUpdated));
+        setTotalCandidates(abce.data.getCompanyList().size());
     }
 }
