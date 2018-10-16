@@ -145,6 +145,8 @@ For example, the `Logic` component (see the class diagram given below) defines i
 image::LogicClassDiagram.png[width="800"]
 
 [discrete]
+
+[[Events-Driven-Nature]]
 ==== Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
@@ -404,6 +406,47 @@ image:TimeTableSequenceDiagram.png[width="800"]
 // end::timetable[]
 
 {nbsp}
+
+// tag::import[]
+=== import timetable feature
+==== Current implementation
+
+The import timetable feature allows users to import their timetables from NUSMODS, as an .ics file.
+
+The timetable feature consists of two parts: +
+1. The backend, which handles the reading of the .ics file and the creation of the timetable object. +
+2. The frontend, which parses user input, and informs the user of success or failure.
+
+
+===== Backend implementation
+
+The file is read and parsed into a TimeTable by IcsUtil class.
+
+The following sequence diagram shows how the TimeTable is imported: +
+
+image:ImportSequenceDiagram.png[width="800"] +
+
+{nbsp}
+
+The `IcsUtil` class implements three key utility methods for handling .ics files: +
+1. `IcsUtil#getTimeTableFromFile()` - to obtain a `TimeTable`; accepts the `filePath` of the .ics file as parameter +
+
+
+===== Frontend implementation
+Same as the other commands, see <<Events-Driven-Nature,*`Events-Driven nature of the design`*>>.
+
+==== Design Considerations
+===== Aspect: Which Classes (and which system(s)) should parse the ics file format?
+* **Alternative 1 (current choice):** All code related to parsing .ice timetable files are inside 'IcsUtil' class.
+** Pros: All functions that have to do with .ics parsing is in 1 class.
+** Cons: Single responsibility principle is broken;
+* **Alternative 2:** Follow the existing implementation of 'Storage'; create an IcsTimeTableStorage class to access the ics file in hard disk, just like what is being done with 'preferences.json' and 'AddressBook.xml' files.
+** Pros: Better follows Single Responsibility Principle: classes that concerns storage are in the storage subsystem;
+** Cons: Current implementation favors 'permanent' files on the hard disk: Compared to the 'preferences.json' and 'AddressBook.xml' files, the .ics timetable file is single-use, and can have varying filePaths specified by user.
+// end::timetable[]
+
+{nbsp}
+
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

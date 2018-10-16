@@ -40,7 +40,7 @@ public class IcsUtil {
                 logger.info("Ics file " + file + " not found");
                 return Optional.empty();
             }
-        } catch (SecurityException e){
+        } catch (SecurityException e) {
             logger.warning("Read rights not available when trying to access ICS file " + file + ": " + e);
         }
         String importstring = "";
