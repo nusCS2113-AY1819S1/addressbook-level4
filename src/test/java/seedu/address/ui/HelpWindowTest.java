@@ -12,8 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.HelpWindowHandle;
 import javafx.stage.Stage;
+import unrefactored.guitests.guihandles.HelpWindowHandle;
 
 public class HelpWindowTest extends GuiUnitTest {
 

@@ -16,12 +16,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.AddressBook;
-import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
-import seedu.address.storage.XmlSerializableAddressBook;
-import seedu.address.testutil.AddressBookBuilder;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.TestUtil;
+import seedu.address.storage.XmlSerializableTaskBook;
+import unrefactored.testutil.AddressBookBuilder;
+import unrefactored.testutil.PersonBuilder;
+import unrefactored.testutil.TestUtil;
 
 public class XmlUtilTest {
 
@@ -71,8 +70,8 @@ public class XmlUtilTest {
 
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
-        assertEquals(9, dataFromFile.getPersonList().size());
+        AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableTaskBook.class).toModelType();
+        assertEquals(9, dataFromFile.getTaskList().size());
     }
 
     @Test
@@ -123,17 +122,17 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
-        XmlSerializableAddressBook dataToWrite = new XmlSerializableAddressBook(new AddressBook());
+        XmlSerializableTaskBook dataToWrite = new XmlSerializableTaskBook(new AddressBook());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        XmlSerializableTaskBook dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
         AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
-        dataToWrite = new XmlSerializableAddressBook(
+        dataToWrite = new XmlSerializableTaskBook(
                 builder.withPerson(new PersonBuilder().build()).build());
 
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
-        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
+        dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableTaskBook.class);
         assertEquals(dataToWrite, dataFromFile);
     }
 
@@ -141,6 +140,6 @@ public class XmlUtilTest {
      * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
      * objects.
      */
-    @XmlRootElement(name = "person")
+    @XmlRootElement(name = "task")
     private static class XmlAdaptedPersonWithRootElement extends XmlAdaptedPerson {}
 }

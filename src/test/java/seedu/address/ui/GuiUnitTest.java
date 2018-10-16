@@ -5,10 +5,10 @@ import java.util.Optional;
 import org.junit.After;
 import org.junit.Rule;
 
-import guitests.GuiRobot;
-import guitests.guihandles.exceptions.NodeNotFoundException;
 import javafx.scene.Node;
 import seedu.address.commons.core.EventsCenter;
+import unrefactored.guitests.GuiRobot;
+import unrefactored.guitests.guihandles.exceptions.NodeNotFoundException;
 import seedu.address.ui.testutil.UiPartRule;
 
 /**
@@ -29,7 +29,7 @@ public abstract class GuiUnitTest {
      * Retrieves the {@code query} node owned by the {@code rootNode}.
      *
      * @param query name of the CSS selector of the node to retrieve.
-     * @throws NodeNotFoundException if no such node exists.
+     * throws NodeNotFoundException if no such node exists.
      */
     protected <T extends Node> T getChildNode(Node rootNode, String query) {
         Optional<T> node = guiRobot.from(rootNode).lookup(query).tryQuery();
