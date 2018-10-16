@@ -352,7 +352,7 @@ The low level implementation of text prediction is done in `Trie`. The internal 
 
 A node has a `endNode` flag that determines if that node represents the last character of the predicted string value. If such a node is reached, the entire string value is appended to the prediction list.
 
-An example of such structure can be visualised in the diagram below:
+The data structure can be visualised in the diagram below:
 
 image::text_prediction_general.png[width="800"]
 
