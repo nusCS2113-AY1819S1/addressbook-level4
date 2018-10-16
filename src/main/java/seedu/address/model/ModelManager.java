@@ -11,122 +11,151 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Milestone;
+import seedu.address.model.task.Task;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task book data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
-    private final FilteredList<Person> filteredPersons;
+    private final VersionedTaskBook versionedTaskBook;
+    private final FilteredList<Task> filteredTasks;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given taskBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyTaskBook taskBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(taskBook, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task book: " + taskBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        versionedTaskBook = new VersionedTaskBook(taskBook);
+        filteredTasks = new FilteredList<>(versionedTaskBook.getTaskList());
     }
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
     }
+    //initialise the a new task book with new user prefs
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyTaskBook newData) {
+        versionedTaskBook.resetData(newData);
+        indicateTaskBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyTaskBook getAddressBook() {
+        return versionedTaskBook;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateTaskBookChanged() {
+        raise(new TaskBookChangedEvent(versionedTaskBook));
     }
 
     @Override
-    public boolean hasPerson(Person person) {
+    public boolean hasTask(Task person) {
         requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+        return versionedTaskBook.hasTask(person);
+    }
+
+    //@@ChanChunCheong
+    @Override
+    public void deferTaskDeadline(Task target, String deadline) {
+        versionedTaskBook.deferDeadline(target, deadline);
+        indicateTaskBookChanged();
+    }
+    @Override
+    public void deleteTask(Task target) {
+        versionedTaskBook.removeTask(target);
+        indicateTaskBookChanged();
     }
 
     @Override
-    public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+    public void completeTask(Task target) {
+        versionedTaskBook.completeTask(target);
+        indicateTaskBookChanged();
     }
 
     @Override
-    public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+    public void addTask(Task task) {
+        versionedTaskBook.addTask(task);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        indicateTaskBookChanged();
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
+    public void selectDeadline(Deadline deadline) {
+        versionedTaskBook.selectDeadline(deadline);
+        //updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        //indicateTaskBookChanged();
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    @Override
+    public void updateTask(Task target, Task editedTask) {
+        requireAllNonNull(target, editedTask);
+
+        versionedTaskBook.updateTask(target, editedTask);
+        indicateTaskBookChanged();
+    }
+
+    //@@author JeremyInElysium
+    @Override
+    public void addMilestone(Milestone milestone) {
+        versionedTaskBook.addMilestone(milestone);
+        updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        indicateTaskBookChanged();
+    }
+    //=========== Filtered Task List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
+     * {@code versionedTaskBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
-        return FXCollections.unmodifiableObservableList(filteredPersons);
+    public ObservableList<Task> getFilteredTaskList() {
+        return FXCollections.unmodifiableObservableList(filteredTasks);
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Person> predicate) {
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
         requireNonNull(predicate);
-        filteredPersons.setPredicate(predicate);
+        filteredTasks.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoTaskBook() {
+        return versionedTaskBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoTaskBook() {
+        return versionedTaskBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoTaskBook() {
+        versionedTaskBook.undo();
+        indicateTaskBookChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoTaskBook() {
+        versionedTaskBook.redo();
+        indicateTaskBookChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitTaskBook() {
+        versionedTaskBook.commit();
     }
 
     @Override
@@ -143,8 +172,15 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+        return versionedTaskBook.equals(other.versionedTaskBook)
+                && filteredTasks.equals(other.filteredTasks);
     }
 
+    /*
+    //=========== Deadline Accessors =============================================================
+    @Override
+    public void selectDeadline(Deadline deadline);
+    @Override
+    public boolean invalidDeadline(Deadline deadline);
+    */
 }

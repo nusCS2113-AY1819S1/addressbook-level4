@@ -6,12 +6,13 @@ import java.util.Collections;
 import java.util.List;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 
 /**
  * Lists all the commands entered by user from the start of app launch.
  */
-public class HistoryCommand extends Command {
+public class HistoryCommand extends Command implements CommandParser {
 
     public static final String COMMAND_WORD = "history";
     public static final String MESSAGE_SUCCESS = "Entered commands (from most recent to earliest):\n%1$s";
@@ -30,4 +31,13 @@ public class HistoryCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, String.join("\n", previousCommands)));
     }
 
+    @Override
+    public Command parse(String arguments) throws ParseException {
+        return new HistoryCommand();
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
+    }
 }

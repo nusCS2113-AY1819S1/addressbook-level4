@@ -18,7 +18,7 @@ By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Task Book is for students who prefer to use a desktop app for managing their daily tasks and ultimately, lead a more productive life. More importantly, AB is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB can get your management of tasks done faster than traditional paper notebooks or a mobile application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -27,15 +27,14 @@ AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for mana
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[width="790"]
+image::Ui.JPG[width="790"]
 +
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all tasks for that day
+* **`add`**`t/Complete 2113 Tutorial d/Wed` : adds a new task to the Task Book.
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,113 +45,91 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add t/TASK`, `TASK` is a parameter which can be used as `add t/Do homework`.
+//* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a task: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-[TIP]
-A person can have any number of tags (including 0)
+Adds a task to the task book +
+Format: `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add t/Complete 2113 Tutorial d/Wed w/2`
 
-=== Listing all persons : `list`
+=== Adding a milestone: `add_milestone`
 
-Shows a list of all persons in the address book. +
-Format: `list`
-
-=== Editing a person : `edit`
-
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
+Adds a milestone to selected task from the task book +
+Format: `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 
-=== Locating persons by name: `find`
+=== Complete a task: `complete`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
+Complete a task in the task book +
+Format: `complete t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `complete t/Complete 2113 Tutorial d/Wed w/2`
 
-=== Deleting a person : `delete`
+=== Sort the taskbook: `sort`
 
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
+Sort the tasks in the task book +
+Format: `sort t/ACTION d/DAY [w/WEEK] [m/MONTH]...`
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+* `sort t/Complete 2113 Tutorial d/Wed w/2`
 
-=== Selecting a person : `select`
+=== Adding a deadline: `deadline`
 
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
+Adds an important task with deadline to the task book +
+Format: `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+* `deadline t/Complete 2113 Milestone w/1 m/8`
+
+=== Deferring a deadline: `deadline`
+
+Defers a deadline for a task +
+Format: `defer [INDEX] de/deadline`
+
+Examples:
+
+* `defer 1 de/04012018`
+
+=== Removing a deadline : `remove_deadline`
+
+Removes a deadline from an existing task
+Format: `remove_deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
+
+Examples:
+
+* `remove_deadline t/Complete 2113 Milestone w/1 m/8`
+
+=== Viewing today's date : `view`
+
+Shows the date today. +
+Format: `view`
+
+=== Selecting a date: `select`
+
+Chooses a particular date. +
+Format: `select d/DAY [w/WEEK] [m/MONTH]`
+
+Examples:
+
+* `select d/Mon`
+* `select d/Mon w/2 m/1`
 
 === Listing entered commands : `history`
 
@@ -242,19 +219,22 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* : `add t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
+e.g. `add t/Complete 2113 Tutorial d/Wed w/2`
+* *Add Milestone* : `add_milestone t/TASK_TITLE m/MILESTONE r/RANK...` +
+e.g. `add_milestone t/Complete CS2113 W8 LO m/Complete Sections 8.1 to 8.5 r/1`
 * *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Deadline* : `deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]...` +
+e.g. `deadline t/Complete 2113 Tutorial d/Wed w/2`
+* *Defer deadline* : `deadline t/ACTION w/WEEKS_OF_DEFERMENT` +
+e.g. `defer_deadline t/Complete 2113 Tutorial w/1`
 * *List* : `list`
 * *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
 * *History* : `history`
+* *Select* : `select d/DAY [w/WEEK] [m/MONTH]` +
+e.g. `select d/Mon w/2 m/1`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Remove Deadline* : `remove_deadline t\ACTION d\DAY [w\WEEK] [m\MONTH]...` +
+e.g. `remove_deadline t\Complete 2113 Tutorial d\Wed w\2`
+* *View* : `view`
