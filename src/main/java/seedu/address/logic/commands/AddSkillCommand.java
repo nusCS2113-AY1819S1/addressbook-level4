@@ -30,7 +30,7 @@ public class AddSkillCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing skill will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_SKILL + "[REMARK]\n"
+            + PREFIX_SKILL + "[SKILL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SKILL + "Can swim.";
 
