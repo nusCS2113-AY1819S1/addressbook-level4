@@ -22,13 +22,14 @@ public class Item {
     public static final int STATUS_ONLOAN = 1;
     public static final int STATUS_FAULTY = 2;
 
-    // Identity fields
+    // Identity
+    // fields
     private final Name name;
     private final Quantity quantity;
     private final Quantity minQuantity;
 
     // Data fields
-    private final ArrayList<Integer> status = new ArrayList<>();
+    private final List<Integer> status = new ArrayList<>();
     private final Set<Tag> tags = new HashSet<>();
 
     /**

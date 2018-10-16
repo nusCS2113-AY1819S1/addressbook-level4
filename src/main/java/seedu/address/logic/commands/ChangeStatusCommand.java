@@ -1,12 +1,12 @@
 package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_STATUS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ORIGINAL_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -14,12 +14,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.item.Item;
-import seedu.address.model.item.Name;
-import seedu.address.model.item.Quantity;
-import seedu.address.model.tag.Tag;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ORIGINAL_STATUS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_STATUS;
+
+/**
+ * Updates the status of an existing item in the stock list.
+ */
 
 public class ChangeStatusCommand extends Command {
     public static final String COMMAND_WORD = "changeStatus";
@@ -35,7 +34,7 @@ public class ChangeStatusCommand extends Command {
             + PREFIX_NEW_STATUS + "Faulty";
     public static final String MESSAGE_CHANG_STATUS_SUCCESS = "Changed Status: %1$s";
     public static final String MESSAGE_INVALID_STATUS_QUANTITY = "The change status quantity input is invalid";
-    public static final String MESSAGE_INVALID_STATUS_Field = "The status description is invalid";
+    public static final String MESSAGE_INVALID_STATUS_FIELD = "The status description is invalid";
 
 
     private final Index index;
@@ -70,8 +69,12 @@ public class ChangeStatusCommand extends Command {
 
 
     }
-
-    private static Item createUpdatedItem(Item itemToUpdate, ChangeStatusDescriptor changeStatusDescriptor) throws CommandException{
+    /**
+     * Creates and returns a {@code Item} with the details of {@code itemToUpdate}
+     * edited with {@code changeStatusDescriptor}.
+     */
+    private static Item createUpdatedItem(Item itemToUpdate,
+                                          ChangeStatusDescriptor changeStatusDescriptor) throws CommandException {
         assert itemToUpdate != null;
         List<Integer> currentStatus = itemToUpdate.getStatus();
         List<Integer> updatedStatus = new ArrayList<>();
@@ -81,31 +84,31 @@ public class ChangeStatusCommand extends Command {
 
         Integer changeStatusValue = changeStatusDescriptor.getQuantity();
         switch (changeStatusDescriptor.getInitialStatus()) {
-            case "Ready":
-                updatedReady-=changeStatusValue;
-                break;
-            case "On_Loan":
-                updatedOnLoan-=changeStatusValue;
-                break;
-            case "Faulty":
-                updatedFaulty-=changeStatusValue;
-                break;
-            default:
-                throw new CommandException(MESSAGE_INVALID_STATUS_Field);
+        case "Ready":
+            updatedReady -= changeStatusValue;
+            break;
+        case "On_Loan":
+            updatedOnLoan -= changeStatusValue;
+            break;
+        case "Faulty":
+            updatedFaulty -= changeStatusValue;
+            break;
+        default:
+            throw new CommandException(MESSAGE_INVALID_STATUS_FIELD);
         }
 
         switch (changeStatusDescriptor.getUpdatedStatus()) {
-            case "Ready":
-                updatedReady+=changeStatusValue;
-                break;
-            case "On_Loan":
-                updatedOnLoan+=changeStatusValue;
-                break;
-            case "Faulty":
-                updatedFaulty+=changeStatusValue;
-                break;
-            default:
-                throw new CommandException(MESSAGE_INVALID_STATUS_Field);
+        case "Ready":
+            updatedReady += changeStatusValue;
+            break;
+        case "On_Loan":
+            updatedOnLoan += changeStatusValue;
+            break;
+        case "Faulty":
+            updatedFaulty += changeStatusValue;
+            break;
+        default:
+            throw new CommandException(MESSAGE_INVALID_STATUS_FIELD);
         }
         updatedStatus.add(updatedReady);
         updatedStatus.add(updatedOnLoan);
@@ -114,14 +117,19 @@ public class ChangeStatusCommand extends Command {
         return new Item(itemToUpdate.getName(), itemToUpdate.getQuantity(), itemToUpdate.getMinQuantity(),
                 updatedStatus, itemToUpdate.getTags());
     }
-
+    /**
+     * Stores the details to update the item with.
+     */
     public static class ChangeStatusDescriptor {
         private Integer changeStatusQuantity;
         private String initialStatus;
         private String updatedStatus;
 
         public ChangeStatusDescriptor() {}
-
+        /**
+         * Copy constructor.
+         * A defensive copy of {@code tags} is used internally.
+         */
         public ChangeStatusDescriptor (ChangeStatusDescriptor toCopy) {
             setQuantity(toCopy.changeStatusQuantity);
             setInitialStatus(toCopy.initialStatus);
@@ -134,11 +142,19 @@ public class ChangeStatusCommand extends Command {
         public Integer getQuantity() {
             return changeStatusQuantity;
         }
-        public void setInitialStatus(String initialStatus) {this.initialStatus = initialStatus;}
-        public String getInitialStatus() {return initialStatus;}
+        public void setInitialStatus(String initialStatus) {
+            this.initialStatus = initialStatus;
+        }
+        public String getInitialStatus() {
+            return initialStatus;
+        }
 
-        public void setUpdatedStatus(String updatedStatus) {this.updatedStatus = updatedStatus;}
-        public String getUpdatedStatus() {return updatedStatus;}
+        public void setUpdatedStatus(String updatedStatus) {
+            this.updatedStatus = updatedStatus;
+        }
+        public String getUpdatedStatus() {
+            return updatedStatus;
+        }
 
     }
 }
