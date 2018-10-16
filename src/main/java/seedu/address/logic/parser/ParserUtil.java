@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -131,16 +134,44 @@ public class ParserUtil {
     public static TimeSlot parseTimeSlot (String timeslot) throws ParseException {
         requireNonNull(timeslot);
         String trimmedTimeSlot = timeslot.trim();
+
         if (!TimeSlot.isValidTimeSlot(trimmedTimeSlot)) {
-            throw new ParseException(TimeSlot.MESSAGE_TIMESLOT_CONSTRAINTS);
+            throw new ParseException(TimeSlot.MESSAGE_GENERAL_CONSTRAINTS);
         }
 
+        String dayString = trimmedTimeSlot.split("\\s+", 2)[0];
+        DayOfWeek day;
 
-        int hour = Integer.parseInt(trimmedTimeSlot.substring(2, 4));
-        int day = Character.getNumericValue(trimmedTimeSlot.charAt(0));
+        try {
+            day = parseDay(dayString);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException((TimeSlot.MESSAGE_CANNOT_PARSE_DAY));
+        }
 
-        TimeSlot timeslotObject = new TimeSlot (hour, day);
-        timeslotObject.setIsFilled();
-        return timeslotObject;
+        String timeRangeString = trimmedTimeSlot.split("\\s+", 2)[1];
+        String startString = timeRangeString.split("-", 2)[0].trim();
+        String endString = timeRangeString.split("-", 2)[1].trim();
+
+        LocalTime startTime;
+        LocalTime endTime;
+
+        try {
+            startTime = LocalTime.parse(startString);
+            endTime = LocalTime.parse(endString);
+        } catch (DateTimeParseException e) {
+            throw new ParseException((TimeSlot.MESSAGE_CANNOT_PARSE_TIME));
+        }
+
+        try {
+            TimeSlot toReturn = new TimeSlot(day, startTime, endTime);
+            return toReturn;
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(TimeSlot.MESSAGE_INVALID_TIME_SLOT);
+        }
+    }
+
+    // TODO: Make this accept non-full day name strings too (e.g. MON, Tue)
+    public static DayOfWeek parseDay(String dayString) throws IllegalArgumentException {
+        return DayOfWeek.valueOf(dayString.toUpperCase());
     }
 }

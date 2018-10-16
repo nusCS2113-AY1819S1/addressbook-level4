@@ -23,6 +23,7 @@ import seedu.address.model.tag.Tag;
  */
 public class XmlAdaptedPerson {
 
+    // TODO: Add TimeTable to Storage
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
     @XmlElement(required = true)

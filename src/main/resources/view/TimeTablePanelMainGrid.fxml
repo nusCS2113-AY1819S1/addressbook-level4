@@ -1,31 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
-<?import javafx.geometry.Insets?>
 
-<GridPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" gridLinesVisible="true"
-          fx:id="mainGrid">
-  <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-  </columnConstraints>
-  <padding>
-    <Insets left="5.0" right="5.0" />
-  </padding>
-  <rowConstraints>
-    <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
-  </rowConstraints>
-</GridPane>
+  <GridPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:id="mainGrid" alignment="BASELINE_LEFT" gridLinesVisible="true">
+    <columnConstraints>
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+      <ColumnConstraints hgrow="ALWAYS" minWidth="5.0" prefWidth="1000" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+  </GridPane>
