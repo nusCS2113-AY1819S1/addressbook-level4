@@ -60,7 +60,7 @@ public class SelectCommandSystemTest extends CandidateBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getCandidateBook().getCandidatelist().size();
+        int invalidIndex = getModel().getCandidateBook().getCandidateList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered candidate list, select index within bounds of recruit book and candidate list -> selected */

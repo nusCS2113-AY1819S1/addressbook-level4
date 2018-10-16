@@ -85,7 +85,7 @@ public class FindCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: find same persons in recruit book after deleting 1 of them -> 1 candidate found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getCandidateBook().getCandidatelist().contains(BENSON));
+        assertFalse(getModel().getCandidateBook().getCandidateList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
         ModelHelper.setFilteredList(expectedModel, DANIEL);
