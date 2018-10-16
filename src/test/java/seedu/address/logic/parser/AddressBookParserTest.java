@@ -14,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -125,7 +126,7 @@ public class AddressBookParserTest {
             parser.parseCommand("histories");
             throw new AssertionError("The expected ParseException was not thrown.");
         } catch (ParseException pe) {
-            assertEquals(MESSAGE_UNKNOWN_COMMAND, pe.getMessage());
+            assertEquals(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator() + CommandSuggestion.SUGGESTION_NOT_IMPLEMENTED, pe.getMessage());
         }
     }
 
@@ -179,7 +180,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unknownCommand_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
+        thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND + System.lineSeparator() + CommandSuggestion.SUGGESTION_NOT_IMPLEMENTED);
         parser.parseCommand("unknownCommand");
     }
 }
