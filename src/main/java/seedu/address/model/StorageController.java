@@ -120,17 +120,6 @@ public class StorageController {
         StorageController.classesStorage = classesStorage;
     }
 
-<<<<<<< HEAD
-=======
-    public static ArrayList<GradebookComponent> getGradebookStorage() {
-        return gradebookStorage;
-    }
-
-    public static void setGradebookStorage(ArrayList<GradebookComponent> gradebookStorage) {
-        StorageController.gradebookStorage = gradebookStorage;
-    }
-
->>>>>>> upstream/master
     public static ArrayList<Note> getNoteStorage() {
         return noteStorage;
     }
