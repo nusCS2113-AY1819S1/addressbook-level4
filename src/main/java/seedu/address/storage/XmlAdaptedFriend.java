@@ -6,6 +6,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Friend;
 import seedu.address.model.person.Name;
 
+/**
+ * Allows friends to be added to the person
+ */
 public class XmlAdaptedFriend {
     @XmlValue
     private String friendName;
@@ -29,7 +32,7 @@ public class XmlAdaptedFriend {
      * @param source future changes to this will not affect the created
      */
     public XmlAdaptedFriend(Friend source) {
-        friendName= source.friendName.toString();
+        friendName = source.friendName.toString();
     }
 
     /**
