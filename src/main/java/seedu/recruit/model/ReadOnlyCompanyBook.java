@@ -14,5 +14,4 @@ public interface ReadOnlyCompanyBook {
      * This list will not contain any duplicate companies.
      */
     ObservableList<Company> getCompanyList();
-
 }
