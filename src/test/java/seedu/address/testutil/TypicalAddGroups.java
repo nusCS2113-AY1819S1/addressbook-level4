@@ -8,6 +8,7 @@ import static seedu.address.testutil.TypicalIndexes.getTypicalPersonIndicesSet;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.group.AddGroup;
@@ -31,10 +32,8 @@ public class TypicalAddGroups {
     public static AddGroup getAddGroupWithGroupAndPerson(){
         AddGroup addGroup = new AddGroup(INDEX_FIRST_GROUP, getSingleTypicalPersonIndicesSet());
 
-        List<Person> personList = new ArrayList<>();
-        personList.add(ALICE);
-        List<Group> groupList = new ArrayList<>();
-        groupList.add(getTut1());
+        List<Person> personList = new ArrayList<>(Arrays.asList(ALICE));
+        List<Group> groupList = new ArrayList<>(Arrays.asList(getTut1()));
 
         addGroup.setPersonSet(personList);
         addGroup.setGroupSet(groupList);

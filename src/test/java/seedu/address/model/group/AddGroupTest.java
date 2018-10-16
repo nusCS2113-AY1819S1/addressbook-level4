@@ -1,19 +1,28 @@
 package seedu.address.model.group;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalAddGroups.getAddGroup1;
 import static seedu.address.testutil.TypicalAddGroups.getAddGroup2;
 import static seedu.address.testutil.TypicalAddGroups.getAddGroup3;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroupWithGroupAndPerson;
+import static seedu.address.testutil.TypicalGroups.getTut1;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
 import static seedu.address.testutil.TypicalIndexes.getSingleTypicalPersonIndicesSet;
 import static seedu.address.testutil.TypicalIndexes.getTypicalPersonIndicesSet;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.Assert;
 
 public class AddGroupTest {
@@ -37,6 +46,42 @@ public class AddGroupTest {
         String invalidGroupIndex = "e";
         Assert.assertThrows(NumberFormatException.class, () -> new AddGroup(Index.fromOneBased(Integer.parseInt(invalidGroupIndex)),
                 getSingleTypicalPersonIndicesSet()));
+    }
+
+    @Test
+    public void test_personSetIsSet_isSet(){
+        AddGroup actual = getAddGroup3();
+        List<Person> personList = new ArrayList<>(Arrays.asList(ALICE));
+        actual.setPersonSet(personList);
+        assertEquals(getAddGroupWithGroupAndPerson().getPersonSet(),actual.getPersonSet());
+    }
+
+    @Test
+    public void test_groupSetIsSet_isSet(){
+        AddGroup actual = getAddGroup3();
+        List<Group> groupList = new ArrayList<>(Arrays.asList(getTut1()));
+        actual.setGroupSet(groupList);
+        assertEquals(getAddGroupWithGroupAndPerson().getGroup(),actual.getGroup());
+    }
+
+    @Test
+    public void test_validPersonIndexSet_returnsTrue(){
+        assertTrue(getAddGroup3().validPersonIndexSet(1));
+    }
+
+    @Test
+    public void test_invalidPersonIndexSet_returnsFalse(){
+        assertFalse(getAddGroup3().validPersonIndexSet(0));
+    }
+
+    @Test
+    public void test_validGroupIndex_returnsTrue(){
+        assertTrue(getAddGroup3().validGroupIndex(1));
+    }
+
+    @Test
+    public void test_invalidGroupIndex_returnsFalse(){
+        assertFalse(getAddGroup3().validGroupIndex(0));
     }
 
     @Test
@@ -66,5 +111,17 @@ public class AddGroupTest {
         assertFalse(addGroup.equals(getAddGroup3()));
     }
 
+    @Test
+    public void toStringTest(){
+        final StringBuilder builder = new StringBuilder();
+        builder.append(INDEX_FIRST_GROUP.toString())
+                .append(" : ")
+                .append(INDEX_FIRST_GROUP.toString());
+
+        String expected = builder.toString();
+        String actual = getAddGroup3().toString();
+
+        assertEquals(expected, actual);
+    }
 
 }
