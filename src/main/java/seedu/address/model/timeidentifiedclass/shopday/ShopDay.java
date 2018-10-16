@@ -104,8 +104,21 @@ public class ShopDay extends TimeIdentifiedClass {
         }
     }
 
-    // TODO: To be implemented.
-    public void addReminder() {
+    /**
+     * The following method adds a reminder to the reminder record.
+     * @param reminder
+     */
+    public void addReminder(Reminder reminder) {
+        reminderRecord.put(reminder.getTime(),reminder);
+    }
+
+    /**
+     * The following method removes a reminder from the reminder record.
+     * @param reminder
+     */
+
+    public void removeReminder(Reminder reminder) {
+        reminderRecord.remove(reminder.getTime());
     }
 
     public String getDaysTransactions() {
