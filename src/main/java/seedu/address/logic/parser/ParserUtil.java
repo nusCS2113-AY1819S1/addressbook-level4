@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Filetype.isValidFiletype;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Filetype;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -120,5 +122,21 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String filetype} into a {@code Filetype}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code String filetype} is invalid.
+     */
+    public static String parseFiletype(String filetype) throws ParseException {
+        requireNonNull(filetype);
+
+        String trimmedFiletype = filetype.trim();
+        if (!isValidFiletype(trimmedFiletype)) {
+            throw new ParseException(Filetype.MESSAGE_FILETYPE_CONSTRAINTS);
+        }
+        return trimmedFiletype;
     }
 }
