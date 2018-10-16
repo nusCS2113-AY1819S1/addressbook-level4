@@ -49,6 +49,11 @@ public class TaskBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
+        //@@author emobeany
+        /*case SelectDeadlineCommand.COMMAND_WORD:
+            return new SelectDeadlineCommandParser().parse(arguments);
+         */
         Command commandToReturn = null;
         for (CommandParser command : commands) {
             if (command.getCommandWord().equals(commandWord)) {

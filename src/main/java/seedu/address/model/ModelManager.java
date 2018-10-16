@@ -9,10 +9,12 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+
+import seedu.address.model.task.Deadline;
+import seedu.address.model.task.Task;
 import unrefactored.commons.core.ComponentManager;
 import unrefactored.commons.core.LogsCenter;
 import unrefactored.commons.events.model.TaskBookChangedEvent;
-import seedu.address.model.task.Task;
 
 /**
  * Represents the in-memory model of the task book data.
@@ -154,4 +156,12 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredTasks.equals(other.filteredTasks);
     }
 
+    /*
+    //=========== Deadline Accessors =============================================================
+    @Override
+    public void selectDeadline(Deadline deadline);
+
+    @Override
+    public boolean invalidDeadline(Deadline deadline);
+    */
 }

@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Task;
 
 /**
@@ -40,6 +41,17 @@ public interface Model {
      * {@code task} must not already exist in the task book.
      */
     void addTask(Task task);
+
+    //@@author emobeany
+    /**
+     * Selects the input date as deadline.
+     */
+    void selectDeadline(Deadline deadline);
+
+    /**
+     * Returns true if deadline does not exist.
+     */
+    boolean invalidDeadline(Deadline deadline);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.

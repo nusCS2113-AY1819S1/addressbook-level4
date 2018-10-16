@@ -891,6 +891,7 @@ Use case ends.
 5. Student provides the number of weeks for reminder(s).
 6. TB adds the task and its reminder(s) to the list
 
+[discrete]
 === Use case: Complete task
 
 *MSS*
