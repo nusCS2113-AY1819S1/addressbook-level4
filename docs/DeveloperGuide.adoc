@@ -239,6 +239,48 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::analyses[]
+=== Analyses of profits and quantities sold in the company
+==== Implementation
+To facilitate the analyses of total profit, revenue and costs of the company, as well as the quantities of drinks sold, transactions (sales and imports) are logged using `Transaction`. They will be logged when the drink stock increases due to import (`TransactionType` is `IMPORT`), or when they decrease due to a sale (`TransactionType` is `SALE`). These transactions are stored into a list of transactions, in `TransactionList`.
+
+Analyses are conducted in `Analysis`. The following operations are implemented for the analyses of profit, revenue and costs:
+* `Analysis#analyseProfit()`
+* `Analysis#analyseCost()`
+* `Analysis#analyseRevenue()`
+
+The methods that enable the analyses of quantities sold are:
+* `Analysis#analyseQuantitiesSold(Drink drink)`
+* <to be added>
+
+Internally, `Analysis#analyseProfit()` calls `Analysis#analyseCost()` and `Analysis#analyseRevenue()` to calculate the profit, using the formula “profit = revenue - cost”.
+
+`Analysis#analyseRevenue()` iterates through the `TransactionList` and checks the `Transaction`’s `TransactionType`. If the `TransactionType` is `SALE`, the `Price` at which the drink is sold is obtained and added to a sum of revenues. On the other hand, if the `TransactionType` is `IMPORT`, the `Transaction` will be ignored.
+
+The opposite applies for `Analysis#analyseCost()`. It iterates through `TransactionList`, similar to `Analysis#analyseRevenue()`. Now, if the `TransactionType` is `IMPORT`, the `Price` at which the drink is bought for is obtained and added to a sum of costs.
+
+==== Design Considerations
+* *Current implementation:* Currently, the entire `TransactionList` since the beginning of using the application is used for the analyses. This presents the overview of the company’s profit margin since it started using the application, and is useful for tracking long term growth.
+** Pros: Easy to implement
+** Cons: Inefficient in terms of time complexity.
+
+* *Alternative:* Record the increases in revenue and cost when every transaction is logged.
+** Pros: More time efficient.
+** Cons: We must ensure that the additions are correct. Difficult to extend this to allow for the analyses over different time periods.
+
+==== Future Plans
+In the future, there will be a `TransactionList` for each calendar month, to allow for the analyses of desired attributes in time periods of: 1 day, 7 days and 1 month.
+
+For the analyses over 1 month, the same approach as mentioned above will be implemented.
+
+For the analyses over 1 day, the `Date` of the `Transaction` will be checked before adding the respective `Price` into either the sum of revenues or costs. If the `Date` is the same as that of the current day’s date, then the `Price` will be added.
+
+For the analyses over 7 days, a similar concept as that for analyses over 1 day will be used. Special care will have to be taken to account for changes in month over the span of 7 days, and possibly changes in the year.
+
+
+// end::analyses[]
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
