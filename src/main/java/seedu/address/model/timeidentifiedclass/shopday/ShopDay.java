@@ -16,7 +16,8 @@ import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTrans
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
- * This class stores all
+ * This class represents one day of operation in the store, and contains the transactions
+ * and reminders of that day.
  */
 public class ShopDay extends TimeIdentifiedClass {
     private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -93,6 +94,7 @@ public class ShopDay extends TimeIdentifiedClass {
      * @throws ClosedShopDayException
      * @throws DuplicateTransactionException
      */
+
     public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
             ClosedShopDayException, DuplicateTransactionException {
         String transactionTime = transaction.getTransactionTime();
@@ -155,10 +157,11 @@ public class ShopDay extends TimeIdentifiedClass {
     }
 
     /**
-     *
+     * The following method checks whether a string is in the required date format.
      * @param date
-     * @return
+     * @return true if valid format, false otherwise.
      */
+
     public static boolean isValidDateFormat(String date) {
         String[] splitDate = date.split("/");
         if (isValidYear(splitDate[0]) && isValidMonth(splitDate[1]) && isValidDay(splitDate[2])) {
@@ -166,5 +169,4 @@ public class ShopDay extends TimeIdentifiedClass {
         }
         return false;
     }
-
 }
