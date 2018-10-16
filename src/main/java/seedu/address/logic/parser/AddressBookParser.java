@@ -15,6 +15,7 @@ import seedu.address.logic.commands.DeleteTimeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FriendCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ImportCommand;
@@ -23,6 +24,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnfriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -102,6 +104,12 @@ public class AddressBookParser {
         case TagCommand.COMMAND_WORD:
         case TagCommand.COMMAND_WORD_ALIAS:
             return new TagCommandParser().parse(arguments);
+
+        case FriendCommand.COMMAND_WORD:
+            return new FriendCommandParser().parse(arguments);
+
+        case UnfriendCommand.COMMAND_WORD:
+            return new UnfriendCommandParser().parse(arguments);
 
         case ImportCommand.COMMAND_WORD:
         case ImportCommand.COMMAND_WORD_ALIAS:

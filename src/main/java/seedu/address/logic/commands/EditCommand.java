@@ -22,11 +22,13 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Friend;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeTable;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Edits the details of an existing person in the address book.
@@ -103,8 +105,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         TimeTable timeTable = personToEdit.getTimeTable();
+        Set<Friend> friendList = personToEdit.getFriends();
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, timeTable, friendList);
     }
 
     @Override
@@ -135,6 +138,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Set<Tag> tags;
+        private Set<Friend> friendList;
 
         public EditPersonDescriptor() {}
 
@@ -148,6 +152,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setTags(toCopy.tags);
+            setFriends(toCopy.friendList);
         }
 
         /**
@@ -195,6 +200,14 @@ public class EditCommand extends Command {
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Sets {@code friendList} to this object's {@code friendList}.
+         * A defensive copy of {@code friendList} is used internally.
+         */
+        public void setFriends(Set<Friend> friendList) {
+            this.friendList = (friendList != null) ? new HashSet<>(friendList) : null;
         }
 
         /**

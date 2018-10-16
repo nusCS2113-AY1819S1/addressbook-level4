@@ -62,6 +62,18 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Return the friends list of the current user
+     * @param person
+     */
+    ObservableList<Person> getFriendList(Person person);
+
+    /**
+     * Return the non-friends list of the current user
+     * @param person
+     */
+    ObservableList<Person> getOtherList(Person person);
+
+    /**
      * Returns true if the model has previous address book states to restore.
      */
     boolean canUndoAddressBook();

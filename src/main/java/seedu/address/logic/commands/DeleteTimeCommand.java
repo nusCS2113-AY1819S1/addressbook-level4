@@ -84,7 +84,7 @@ public class DeleteTimeCommand extends Command {
         }
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getTags(), timeTable);
+                personToEdit.getAddress(), personToEdit.getTags(), timeTable, personToEdit.getFriends());
     }
 
     @Override

@@ -13,6 +13,8 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.model.person.FriendListPredicate;
+import seedu.address.model.person.OtherListPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeTable;
 
@@ -24,6 +26,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> friendList;
+    private final FilteredList<Person> otherList;
     private final TimeTable timeTable;
 
     /**
@@ -35,7 +39,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
-        this.versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedAddressBook = new VersionedAddressBook(addressBook);
+        friendList = new FilteredList<>(versionedAddressBook.getPersonList());
+        otherList = new FilteredList<>(versionedAddressBook.getPersonList());
         this.filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         this.timeTable = new TimeTable();
     }
@@ -122,6 +128,19 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    @Override
+    public ObservableList<Person> getFriendList(Person person) {
+        requireNonNull(person);
+        friendList.setPredicate(friendsPredicateFromPerson(person));
+        return FXCollections.unmodifiableObservableList(friendList);
+    }
+
+    public ObservableList<Person> getOtherList(Person person) {
+        requireNonNull(person);
+        otherList.setPredicate(othersPredicateFromPerson(person));
+        return FXCollections.unmodifiableObservableList(otherList);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -170,4 +189,11 @@ public class ModelManager extends ComponentManager implements Model {
                 && timeTable.equals(other.timeTable);
     }
 
+    public FriendListPredicate friendsPredicateFromPerson(Person person) {
+        return new FriendListPredicate(person.getFriends());
+    }
+
+    public OtherListPredicate othersPredicateFromPerson(Person person) {
+        return new OtherListPredicate(person.getFriends());
+    }
 }

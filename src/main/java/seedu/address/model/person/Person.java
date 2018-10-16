@@ -27,16 +27,21 @@ public class Person {
     //Timetable field (Currently only one)
     private TimeTable timeTable;
 
+    // Friend list of the person
+    private Set<Friend> friendList;
+
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags, TimeTable timeTable) {
-        requireAllNonNull(name, phone, email, address, tags, timeTable);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, TimeTable timeTable, Set<Friend> friendList) {
+        requireAllNonNull(name, phone, email, address, tags, timeTable, friendList);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
+        this.friendList = friendList;
         this.timeTable = timeTable;
     }
 
@@ -58,6 +63,14 @@ public class Person {
 
     public TimeTable getTimeTable() {
         return timeTable;
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Friend> getFriends() {
+        return friendList;
     }
 
     /**

@@ -32,7 +32,7 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE = "Could not save data to file";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/address_book_32.png";
+    private static final String ICON_APPLICATION = "/images/FreeTime_32.png";
 
     private Logic logic;
     private Config config;
@@ -59,7 +59,7 @@ public class UiManager extends ComponentManager implements Ui {
             mainWindow = new MainWindow(primaryStage, config, prefs, logic, security);
             mainWindow.show(); //This should be called before creating other UI parts
             //Gets rid of the login window when testing
-            if (security.getAuthentication()) {
+            if (true) { // TODO : security.getAuthentication()
                 mainWindow.fillInnerParts();
             } else {
                 mainWindow.handleLogin();
