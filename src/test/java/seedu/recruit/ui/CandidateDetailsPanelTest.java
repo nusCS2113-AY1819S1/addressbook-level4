@@ -12,16 +12,16 @@ import static seedu.recruit.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import guitests.guihandles.CandidateDetailsPanelHandle;
 import org.junit.Test;
 
-import guitests.guihandles.CandidateCardHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.commons.util.FileUtil;
 import seedu.recruit.commons.util.XmlUtil;
 import seedu.recruit.model.candidate.Candidate;
+import guitests.guihandles.CandidateCardHandle;
+import guitests.guihandles.CandidateDetailsPanelHandle;
 import seedu.recruit.storage.XmlSerializableCandidateBook;
 
 public class CandidateDetailsPanelTest extends GuiUnitTest {
@@ -56,7 +56,8 @@ public class CandidateDetailsPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        CandidateCardHandle expectedPerson = candidateDetailsPanelHandle.getCandidateCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        CandidateCardHandle expectedPerson = candidateDetailsPanelHandle
+                .getCandidateCardHandle(INDEX_SECOND_PERSON.getZeroBased());
         CandidateCardHandle selectedPerson = candidateDetailsPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
@@ -111,7 +112,8 @@ public class CandidateDetailsPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code CandidateDetailsPanelHandle} with a {@code CandidateDetailsPanel} backed by {@code backingList}.
+     * Initializes {@code CandidateDetailsPanelHandle} with a
+     * {@code CandidateDetailsPanel} backed by {@code backingList}.
      * Also shows the {@code Stage} that displays only {@code CandidateDetailsPanel}.
      */
     private void initUi(ObservableList<Candidate> backingList) {
@@ -119,6 +121,6 @@ public class CandidateDetailsPanelTest extends GuiUnitTest {
         uiPartRule.setUiPart(CandidateDetailsPanel);
 
         candidateDetailsPanelHandle = new CandidateDetailsPanelHandle(getChildNode(CandidateDetailsPanel.getRoot(),
-                CandidateDetailsPanelHandle.PERSON_LIST_VIEW_ID));
+                CandidateDetailsPanelHandle.CANDIDATE_DETAILS_VIEW_ID));
     }
 }

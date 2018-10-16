@@ -19,13 +19,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import guitests.guihandles.CandidateDetailsPanelHandle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.CandidateDetailsPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
@@ -187,8 +187,8 @@ public abstract class CandidateBookSystemTest {
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code CandidateDetailsPanelHandle} and {@code StatusBarFooterHandle} to remember
-     * their current state.
+     * Calls {@code BrowserPanelHandle}, {@code CandidateDetailsPanelHandle}
+     * and {@code StatusBarFooterHandle} to remember their current state.
      */
     private void rememberStates() {
         StatusBarFooterHandle statusBarFooterHandle = getStatusBarFooter();

@@ -3,6 +3,7 @@ package seedu.recruit.ui;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,9 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import seedu.recruit.commons.core.LogsCenter;
-import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.commons.events.ui.CandidateDetailsPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
@@ -26,6 +28,8 @@ public class CandidateDetailsPanel extends UiPart<Region> {
     @FXML
     private ListView<Candidate> candidateDetailsView;
     @FXML
+    private VBox cardPane;
+    @FXML
     private Label name;
     @FXML
     private Label gender;
@@ -38,7 +42,7 @@ public class CandidateDetailsPanel extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label desired_job;
+    private Label job;
     @FXML
     private Label education;
     @FXML
@@ -78,14 +82,14 @@ public class CandidateDetailsPanel extends UiPart<Region> {
         phone.setText(selectedCandidate.getPhone().value);
         email.setText(selectedCandidate.getEmail().value);
         address.setText(selectedCandidate.getAddress().value);
-        desired_job.setText(selectedCandidate.getJob().value);
+        job.setText(selectedCandidate.getJob().value);
         education.setText(selectedCandidate.getEducation().value);
         salary.setText(selectedCandidate.getSalary().value);
     }
 
-        /**
-         * Scrolls to the {@code CandidateCard} at the {@code index} and selects it.
-         */
+    /**
+     * Scrolls to the {@code CandidateCard} at the {@code index} and selects it.
+     */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
             candidateDetailsView.scrollTo(index);
