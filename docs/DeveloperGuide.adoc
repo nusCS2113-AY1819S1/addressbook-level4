@@ -355,8 +355,6 @@ The file path is defined in `outputFilepath`, and is hardcoded as `/data/pineapp
 [NOTE]
 Any existing file named as `pineapple.csv` at the defined path will be overwritten.
 
-// TODO: implementation details of write()
-
 The following sequence diagram shows how the ExportAll operation works:
 
 image::ExportAllSequenceDiagram.png[width="800"]
@@ -364,6 +362,35 @@ image::ExportAllSequenceDiagram.png[width="800"]
 // The following activity diagram summarizes what happens when `CsvWriter#write()` is called:
 // TODO: show the if condition for file exists and not exists
 // image::UndoRedoActivityDiagram.png[width="650"]
+
+// TODO: implementation details of write()
+==== write()
+Given below is the algorithm behind the write() method used in the `ExportAll` Command:
+
+Step 1. Instantiate an OpenCSV writer.
+
+Step 2. Write the header to the csv file.
+
+Step 3. Declare a `List<String[]> data`.
+
+Step 4. Loop through an
+https://docs.oracle.com/javase/8/javafx/api/javafx/collections/ObservableList.html[`ObservableList<Person>`]
+containing all persons in the AddressBook and push `String[] personDetails` to `data`.
+
+    // Generates a string array for each person and stores the details
+    String[] personDetails = new String[header.length];
+    personDetails[INDEX_PERSON_NAME] = person.getName().toString();
+    personDetails[INDEX_PERSON_PHONE] = person.getPhone().toString();
+    personDetails[INDEX_PERSON_ADDRESS] = person.getAddress().toString();
+    personDetails[INDEX_PERSON_EMAIL] = person.getEmail().toString();
+
+Step 5. Write `data` to the csv file.
+
+Step 6. Close the OpenCSV writer.
+
+==== Design Considerations
+
+===== Aspect: How undo & redo executes
 
 // tag::exportall[]
 
