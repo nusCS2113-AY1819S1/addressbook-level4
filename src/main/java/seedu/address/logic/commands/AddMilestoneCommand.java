@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Milestone;
 
@@ -14,9 +15,10 @@ import seedu.address.model.task.Milestone;
 /**
  * Adds a milestone to a task in the taskbook
  */
-public class AddMilestoneCommand extends Command {
+public class AddMilestoneCommand extends Command implements CommandParser {
     public static final String COMMAND_WORD = "add_milestone";
-
+    public static final String MESSAGE_SUCCESS = "New milestone added: %1$s";
+    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task book";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds milestone(s) to selected task. "
             + "Parameters: "
             + PREFIX_TITLE + "TITLE "
@@ -37,9 +39,6 @@ public class AddMilestoneCommand extends Command {
         toAdd = milestone;
     }
 
-    public static final String MESSAGE_SUCCESS = "New milestone added: %1$s";
-    public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task book";
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
@@ -47,5 +46,15 @@ public class AddMilestoneCommand extends Command {
         model.addMilestone(toAdd);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+    }
+
+    @Override
+    public Command parse(String arguments) throws ParseException {
+        return null;
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }

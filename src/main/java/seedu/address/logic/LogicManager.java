@@ -3,6 +3,7 @@ package seedu.address.logic;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.SelectDeadlineCommand;
 import unrefactored.commons.core.ComponentManager;
 import unrefactored.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddTaskCommand;
@@ -41,6 +42,7 @@ public class LogicManager extends ComponentManager implements Logic {
                 new CompleteTaskCommand(),
                 new DeleteCommand(),
                 new ListCommand(),
+                new SelectDeadlineCommand(),
                 new HelpCommand(),
                 new ExitCommand(),
                 new HistoryCommand(),
