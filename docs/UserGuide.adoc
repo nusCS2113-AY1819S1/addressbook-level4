@@ -1,0 +1,429 @@
+= Event Manager - User Guide
+:site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
+:imagesDir: images
+:stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
+ifdef::env-github[]
+:tip-caption: :bulb:
+:note-caption: :information_source:
+endif::[]
+:repoURL: https://github.com/se-edu/addressbook-level4
+
+By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+
+== Introduction
+
+Event Manager is made for the residents of the Residential Colleges (RC) in the National University of Singapore (NUS). This application is build for those who prefer to use a desktop application for managing events and attendees. Moreover, the Event Manager offers a faster workflow *for those who prefer working with a Command Line Interface* while still retaining the benefits of having a Graphical User Interface. If you can type fast, you can work even faster with Event Manager to manage the various events in your RC! All you need is a laptop/computer to run this application. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+
+== Quick Start
+
+.  Ensure you have Java version `9` or later installed in your Computer.
+.  Download the latest `EventManager.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your EventManager.
+.  Double-click the file to start the app. The GUI should appear in a few seconds.
++
+image::Ui.png[width="790"]
++
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Some example commands you can try:
+
+* *`list`* : lists all events
+* **`add`**`n/Computer Science Workshop c/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `Computer Science` to the Event Manager.
+* **`delete`**`3` : deletes the 3rd event shown in the current list
+* *`exit`* : exits the app
+
+.  Refer to <<Features>> for details of each command.
+
+[[Features]]
+== Features
+
+====
+*Command Format*
+
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/EVENT`, `EVENT` is a parameter which can be used as `add n/Computer Science Workshop`.
+* Items in square brackets are optional e.g `n/Comp Sci Workshop [t/TAG]` can be used as `n/Comp Sci Workshop t/sport` or as `n/Comp Sci Workshop`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
+====
+
+=== Signing up for an account : `signup`
+
+User: Creates a *user* account +
+Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD` +
+Examples:
+
+* `signup u/Gerald Chua p/password12345 c/password12345` +
+Creates account for Gerald Chua
+* `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
+Creates account for James Yaputra
+
+=== Logging into an account : `login`
+
+User: Logs in to account +
+Format: `login u/USERNAME p/PASSWORD` +
+Examples:
+
+* `login n/Gerald Chua p/password12345` +
+Logs in Gerald Chua +
+* `login u/James Yaputra p/drowssap12345` +
+Logs in James Yaputra
+
+=== Logging out of an account : `logout`
+
+User: Logs out of an account +
+Format: `logout` +
+Examples:
+
+* `login n/Gerald Chua p/password12345` +
+Logs in Gerald Chua +
+* `logout` +
+Logs out from Gerald Chua
+
+=== Signing up for an account : `signup`
+
+User: Creates a new account +
+Format: `signup u/USERNAME p/PASSWORD` +
+Examples:
+
+* `signup n/Gerald Chua p/password12345` +
+Creates Gerald Chua +
+* `signup u/James Yaputra p/drowssap12345` +
+Creates James Yaputra
+
+=== Viewing help : `help`
+
+Admin: Shows Admin commands +
+User: Shows User commands
+
+Format: `help`
+
+=== Adding a event: `add`
+
+Admin: Adds an event to tthe Event Manager +
+Adds a event to the Event Manager +
+Format: `add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+
+[TIP]
+An event can have any number of tags (including 0)
+
+Examples:
+
+* `add n/Com Sci Workshop c/John Doe cp/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Sports Day c/Betsy Crow t/Sports e/betsycrowe@example.com a/COM2 #02-01 p/1234567 t/leisure`
+
+=== Listing all events : `list`
+
+User/Admin: Shows a list of all events in the Event Manager. +
+Format: `list`
+
+=== Editing a event : `edit`
+
+Admin: Edits an existing event in the Event Manager. +
+Format: `edit INDEX [n/EVENT] [c/CONTACT NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
+****
+* Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the event will be removed i.e adding of tags is not cumulative.
+* You can remove all the event's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 p/91234567 e/johndoe@example.com` +
+Edits the phone number and email address of the 1st event to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Sports Day t/` +
+Edits the name of the 2nd event to be `Sports Day` and clears all existing tags.
+
+=== Locating events by name: `find`
+
+Admin/User: Finds events whose names contain any of the given keywords. +
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `sports` will match `Sports`
+* The order of the keywords does not matter. e.g. `Sports Day` will match `Day Sports`
+* Only the event name is searched.
+* Only full words will be matched e.g. `Sport` will not match `Sports`
+* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Sports Day` will return `Sports games`, `Good Day`
+****
+
+Examples:
+
+* `find Day` +
+Returns `Sports Day` and `Any day`
+* `find Sports Sci Day` +
+Returns any event having names `Sports Day`, `Comp Sci Workshop`, or `Good Day`
+
+=== Deleting a event : `delete`
+
+Admin: Deletes the specified event from the Event Manager. +
+Format: `delete INDEX`
+
+****
+* Deletes the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd event in the Event Manager.
+* `find Sports` +
+`delete 1` +
+Deletes the 1st event in the results of the `find` command.
+
+=== Selecting a event : `select`
+
+Admin/User: Selects the event identified by the index number used in the displayed event list. +
+Format: `select INDEX`
+
+****
+* Selects the event and loads the Google search page the event at the specified `INDEX`.
+* The index refers to the index number shown in the displayed event list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`select 2` +
+Selects the 2nd event in the Event Manager.
+* `find Sports` +
+`select 1` +
+Selects the 1st event in the results of the `find` command.
+
+=== Listing entered commands : `history`
+
+Admin/User: Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
+
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+// tag::undoredo[]
+=== Undoing previous command : `undo`
+
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+====
+
+Examples:
+
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
+
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+
+=== Redoing the previously undone command : `redo`
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+
+* `delete 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+`redo` (reapplies the `clear` command) +
+// end::undoredo[]
+
+=== Clearing all entries : `clear`
+
+Admin: Clears all entries from the Event Manager. +
+Format: `clear`
+
+=== Register for event : `register`
+
+User: RSVPs for an event. +
+Format: `register INDEX`
+
+Examples:
+
+* `register 1` +
+Registers User to event 1
+* `register 5` +
+Registers User to event 5
+
+=== Remove registration from event : `unregister`
+
+User: Removes RSVPs for an event. +
+Format: `unregister INDEX`
+
+Examples:
+
+* `unregister 1` +
+Unregisters User from event 1
+* `unregister 5` +
+Unregisters User from event 5
+
+=== View participant list : `viewParticipants`
+
+Admin/User: View names and total number of event attendees  +
+Format: `viewParticipants INDEX`
+
+Examples:
+
+* `viewParticipants 1` +
+Shows total and names of all participants going to event 1
+* `viewParticipants 5` +
+Shows total and names of all participants going to event 5
+
+=== Set reminders : `setReminder`
+
+Admin/User: Sets a reminder for the event identified by the index number used in the displayed event list. Reminder will alert the user 1 hour before the commencement time of the event. +
+Format: `setReminder INDEX`
+
+Examples:
+
+* `setReminder 1` +
+Sets a reminder for user for event 1
+* `setReminder 5` +
+Sets a reminder for user for event 5
+
+=== Clear reminders : `removeReminder`
+
+Admin/User: Removes the reminder for the event identified by the index number used in the displayed event list. +
+Format: `removeReminder INDEX`
+
+Examples:
+
+* `removeReminder 1` +
+Removes a reminder for user for event 1
+* `removeReminder 5` +
+Removes a reminder for user for event 5
+
+=== show reminders : `showReminders`
+
+Admin/User: Show all events with reminders set +
+Format: `showReminders`
+
+=== Adds Comment : `addComment`
+
+Admin/User: Add comment into event comment section +
+Format: `addComment INDEX C/STRING`
+
+Examples:
+
+* `addComment 1 C/What is the attire to wear for the event?` +
+Adds "What is the attire to wear for the event?" into event 1 comment section
+* `addComment 5 C/What is the attire to wear for this event?` +
+Adds "What is the attire to wear for this event?" into event 5 comment section
+
+=== Reply Comment : `replyComment`
+
+Admin/User: Replies a comment +
+Format: `replyComment INDEX LINE STRING`
+
+Examples:
+
+* `replyComment 1 L/5 C/What is the attire to wear for the event?` +
+Adds the comment "What is the attire to wear for the event?" into event 1 comment section at line 5
+* `replyComment 2 L/2 C/What is the attire to wear for the event?` +
+Adds the comment "What is the attire to wear for the event?" into event 2 comment section at line 2
+
+=== Delete Comment : `deleteComment`
+
+Admin: Deletes a comment +
+Format: `deleteComment INDEX LINE`
+
+Examples:
+
+* `deleteComment 1 L/5` +
+Deletes comment of event 1 at line 5
+* `deleteComment 2 L/2` +
+Deletes comment of event 2 at line 2
+
+=== Exiting the program : `exit`
+
+Admin/User: Exits the program. +
+Format: `exit`
+
+=== Saving the data
+
+Event Manager data are saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
+
+// tag::dataencryption[]
+=== Encrypting data files `[coming in v2.0]`
+
+_{explain how the user can enable/disable data encryption}_
+// end::dataencryption[]
+
+== FAQ
+
+*Q*: How do I transfer my data to another Computer? +
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Event Manager folder.
+
+== Command Summary
+
+* *Sign up* : `signup n/USERNAME p/PASSWORD c/CONFIRM_PASSWORD` +
+e.g. `signup n/Gerald Chua p/password12345 c/password12345`
+* *Login* : `login n/USERNAME p/PASSWORD` +
+e.g. `login n/Gerald Chua p/password12345`
+* *Add* `add n/EVENT_NAME c/CONTACT_NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+e.g. `add n/Sports Day c/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Clear* : `clear`
+* *Delete* : `delete INDEX` +
+e.g. `delete 3`
+* *Edit* : `edit INDEX [n/EVENT] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
+e.g. `edit 2 n/Good Day e/jameslee@example.com`
+* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
+e.g. `find Comp Sci Workshop`
+* *List* : `list`
+* *Help* : `help`
+* *Select* : `select INDEX` +
+e.g.`select 2`
+* *History* : `history`
+* *Undo* : `undo`
+* *Redo* : `redo`
+* *Register* : `register INDEX` +
+e.g. `register 1`
+* *Unregister* : `unregister INDEX` +
+e.g. `unregister 1`
+* *Set reminders* : `setReminder INDEX` +
+e.g. `setReminder 1`
+* *View Reminders* : `reminders` +
+e.g. `reminder`
+* *showComments* : `showComments INDEX` +
+e.g. `showComments 1`
+* *addComment* : `addCeomment INDEX STRING` +
+e.g. `add Comments 1 "HELLO"`
+* *replyComment* : `replyComment EVENTINDEX LINEINDEX STRING` +
+e.g. `replyComments 1 2 "Hello"`
+* *deleteComment* : `deleteComment EVENT INDEX LINEINDEX STRING` +
+e.g. `deleteComment 1 2`
