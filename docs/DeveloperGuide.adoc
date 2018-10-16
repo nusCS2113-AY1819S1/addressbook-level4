@@ -321,6 +321,39 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::savecommand[]
+=== SaveCommand feature
+==== Current Implementation
+
+The saveStockListVersion mechanism is facilitated by `SaveCommand`. It extends `Command` and implements the following operation:
+
+* `Command#SaveCommand()` -- Saves the current version of the stock list as an XML file in a /versions/ folder.
+
+The operation is exposed in the `Model` interface as `Model#saveStockList()`.
+
+Given below is an example usage scenario and how the saveCommand mechanism behaves at each step.
+
+Step 1. The user executes `save lab1` command to save the current version of the stock list as an xml file named `lab1.xml`.
+
+Step 2. The `save` command calls `Model#saveStockList()`, which initiates a `saveStockListVersionEvent`. The `fileName` and `ReadOnlyStockList` are saved as public final variables in the event.
+
+Step 3. The `handleSaveStockListVersionEvent` handler calls the `saveStockListVersion()` method from the `StorageManager` class.
+
+Step 4. The `ReadOnlyStockList` is saved as an xml file.
+
+==== Design Considerations
+
+===== Aspect: How SaveCommand executes
+
+* **Alternative 1 (current choice) Save the entire stock list.
+** Pros: Able to reload the particular version on the application.
+** Cons: May have performance issues in terms of usage.
+
+* **Alternative 2 Save as .csv file.
+** Pros: Less memory usage
+** Cons: Unable to edit fields using the application upon creation of the .csv file.
+// end::savecommand[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
