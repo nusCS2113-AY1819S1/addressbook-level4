@@ -135,7 +135,7 @@ public class XmlAdaptedEvent {
         }
         final DateTime modelDateTime = new DateTime(dateTime);
         if (attendance == null) {
-            throw new IllegalValueException(String.format(MESSAGE_DATETIME_CONSTRAINTS));
+            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Event(modelName, modelPhone, modelEmail, modelAddress, modelAttendance, modelDateTime, modelTags);
