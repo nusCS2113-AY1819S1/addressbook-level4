@@ -166,8 +166,11 @@ public interface Model {
      * @code companyName has to exist in the CompanyBook
      * @code jobOffer must not already exist inside the job list of companyName
      */
-
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
-
+    /**
+     * Updates the filter of the filtered company job list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
 }

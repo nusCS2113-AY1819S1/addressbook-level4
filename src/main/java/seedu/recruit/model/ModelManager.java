@@ -270,4 +270,9 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    @Override
+    public void updateFilteredCompanyJobList(Predicate<JobOffer> predicate) {
+        requireNonNull(predicate);
+        filteredJobs.setPredicate(predicate);
+    }
 }
