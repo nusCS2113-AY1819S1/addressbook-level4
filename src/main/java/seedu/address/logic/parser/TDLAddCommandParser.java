@@ -31,7 +31,7 @@ public class TDLAddCommandParser implements Parser<TDLAddCommand> {
 
         TaskName taskName= ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
         TaskModule taskModule = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
-        TaskDate taskDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        TaskDate taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DATE).get());
         TaskPriority taskPriority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
 
         Task task = new Task(taskName, taskModule, taskDate, taskPriority);

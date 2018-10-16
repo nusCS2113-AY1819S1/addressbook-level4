@@ -42,7 +42,7 @@ public class TDLEditCommandParser implements Parser<TDLEditCommand> {
             editTaskDescriptor.setModule(ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get()));
         }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editTaskDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editTaskDescriptor.setDate(ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_PRIORITY).isPresent()) {
             editTaskDescriptor.setPriority(ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get()));
