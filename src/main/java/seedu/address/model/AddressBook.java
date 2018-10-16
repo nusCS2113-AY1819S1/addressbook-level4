@@ -17,6 +17,7 @@ import seedu.address.model.task.UniqueTaskList;
 public class AddressBook implements ReadOnlyTaskBook {
 
     private final UniqueTaskList tasks;
+    private Deadline currentDate;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -111,6 +112,15 @@ public class AddressBook implements ReadOnlyTaskBook {
     public void addMilestone(Milestone milestone) {
         requireNonNull(milestone);
         tasks.add(milestone);
+    }
+
+    /**
+     * Selects the date for Task Book.
+     * Update the list.
+     */
+    public void selectDeadline(Deadline deadline) {
+        //TODO: @emobeany handle cases where year or month is not specified
+        currentDate = deadline;
     }
 
     // util methods

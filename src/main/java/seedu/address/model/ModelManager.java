@@ -85,6 +85,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void selectDeadline(Deadline deadline) {
+        versionedTaskBook.selectDeadline(deadline);
+        //updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        //indicateTaskBookChanged();
+    }
+
+    @Override
     public void updateTask(Task target, Task editedTask) {
         requireAllNonNull(target, editedTask);
 
@@ -94,7 +101,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author JeremyInElysium
     @Override
-    public void addMilestone(Milestone milestone){
+    public void addMilestone(Milestone milestone) {
         versionedTaskBook.addMilestone(milestone);
         updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
         indicateTaskBookChanged();
@@ -167,7 +174,6 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Deadline Accessors =============================================================
     @Override
     public void selectDeadline(Deadline deadline);
-
     @Override
     public boolean invalidDeadline(Deadline deadline);
     */
