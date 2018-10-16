@@ -18,6 +18,7 @@ import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -87,6 +88,10 @@ public class StockListParser {
 
         case ChangeStatusCommand.COMMAND_WORD:
             return new ChangeStatusCommandParser().parse(arguments);
+            
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommand();
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
