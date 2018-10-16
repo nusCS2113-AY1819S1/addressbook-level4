@@ -92,7 +92,7 @@ public class FindCommandTest {
 
 
     @Test
-    public void closest_match_list_test () {
+    public void closestMatchListTest () {
         String[] names = {"Kurz"};
         ClosestMatchList closestMatch = new ClosestMatchList(model, PREFIX_NAME, names);
         assertEquals(closestMatch.getApprovedList().length, 2);
