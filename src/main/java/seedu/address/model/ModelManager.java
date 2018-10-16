@@ -1,7 +1,7 @@
 package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
-import static unrefactored.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -9,12 +9,12 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import seedu.address.commons.core.ComponentManager;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.model.task.Deadline;
 import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
-import unrefactored.commons.core.ComponentManager;
-import unrefactored.commons.core.LogsCenter;
-import unrefactored.commons.events.model.TaskBookChangedEvent;
 
 /**
  * Represents the in-memory model of the task book data.

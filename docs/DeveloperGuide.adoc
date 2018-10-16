@@ -484,12 +484,12 @@ We have two types of tests:
 
 .  *GUI Tests* - These are tests involving the GUI. They include,
 .. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
-.. _Unit tests_ that test the individual components. These are in `unrefactored.ui` package.
+.. _Unit tests_ that test the individual components. These are in `seedu.address.ui` package.
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
-e.g. `unrefactored.commons.StringUtilTest`
+e.g. `seedu.address.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `unrefactored.storage.StorageManagerTest`
+e.g. `seedu.address.storage.StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
 e.g. `seedu.address.logic.LogicManagerTest`
 

@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 //import static org.junit.Assert.assertTrue;
 import static unrefactored.guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
-import static unrefactored.ui.BrowserPanel.DEFAULT_PAGE;
-import static unrefactored.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
-import static unrefactored.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
-import static unrefactored.ui.UiPart.FXML_FILE_FOLDER;
-//import static unrefactored.ui.testutil.GuiTestAssert.assertListMatching;
+import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
+import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
+import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
+import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
+//import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -29,8 +29,8 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import unrefactored.commons.core.EventsCenter;
-import unrefactored.commons.core.index.Index;
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.index.Index;
 import unrefactored.guitests.guihandles.BrowserPanelHandle;
 import unrefactored.guitests.guihandles.CommandBoxHandle;
 import unrefactored.guitests.guihandles.MainMenuHandle;
@@ -39,8 +39,8 @@ import unrefactored.guitests.guihandles.PersonListPanelHandle;
 import unrefactored.guitests.guihandles.ResultDisplayHandle;
 import unrefactored.guitests.guihandles.StatusBarFooterHandle;
 import unrefactored.testutil.TypicalTasks;
-import unrefactored.ui.BrowserPanel;
-import unrefactored.ui.CommandBox;
+import seedu.address.ui.BrowserPanel;
+import seedu.address.ui.CommandBox;
 
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods

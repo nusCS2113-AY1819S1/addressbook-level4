@@ -2,8 +2,8 @@ package unrefactored.systemtests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
-import static unrefactored.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static unrefactored.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static unrefactored.testutil.TestUtil.getLastIndex;
 import static unrefactored.testutil.TestUtil.getMidIndex;
 import static unrefactored.testutil.TestUtil.getTask;
@@ -16,8 +16,8 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
-import unrefactored.commons.core.Messages;
-import unrefactored.commons.core.index.Index;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.index.Index;
 
 public class DeleteCommandSystemTest extends AddressBookSystemTest {
 

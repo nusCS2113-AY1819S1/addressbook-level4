@@ -2,9 +2,9 @@ package unrefactored.systemtests;
 
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
-import static unrefactored.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static unrefactored.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static unrefactored.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static unrefactored.testutil.TestUtil.getLastIndex;
 import static unrefactored.testutil.TestUtil.getMidIndex;
 import static unrefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
@@ -15,7 +15,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import unrefactored.commons.core.index.Index;
+import seedu.address.commons.core.index.Index;
 
 public class SelectCommandSystemTest extends AddressBookSystemTest {
     @Test

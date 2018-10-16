@@ -2,14 +2,11 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.task.Deadline;
-//import seedu.address.commons.core.index.Index;
-//import seedu.address.commons.util.StringUtil;
-import seedu.address.model.task.Deadline;
+import seedu.address.commons.core.index.Index;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.PriorityLevel;
-import unrefactored.commons.core.index.Index;
-import unrefactored.commons.util.StringUtil;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
