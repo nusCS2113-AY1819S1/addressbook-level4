@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -92,7 +93,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public void handleSaveStockListVersionEvent(SaveStockListVersionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving current version to file"));
         try {
-            saveStockListVersion(event.data, Paths.get("versions", "backup.xml"));
+            saveStockListVersion(event.data, Paths.get("versions", LocalDate.now().toString()));
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
