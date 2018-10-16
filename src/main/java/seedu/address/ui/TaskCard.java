@@ -2,8 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.task.Task;
 
@@ -24,8 +22,8 @@ public class TaskCard extends UiPart<Region> {
 
     public final Task task;
 
-    @FXML
-    private HBox cardPane;
+    //@FXML
+    //private HBox cardPane;
     @FXML
     private Label id;
     @FXML
@@ -34,8 +32,8 @@ public class TaskCard extends UiPart<Region> {
     private Label taskmodule;
     @FXML
     private Label taskdate;
-    @FXML
-    private Label taskpriority;
+    //@FXML
+    //private Label taskpriority;
 
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
