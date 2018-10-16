@@ -34,7 +34,8 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
             Command command = taskBookParser.parseCommand(commandText); // Command command = AddCommand(task)
-            //AddCommand.execute(model, history) which will return CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            //AddCommand.execute(model, history) accessing the model component to model.addTask() & commitTaskBook();
+            // which will return CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
             return command.execute(model, history);
         } finally {
             history.add(commandText);

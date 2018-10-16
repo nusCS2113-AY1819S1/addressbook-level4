@@ -41,7 +41,7 @@ public class TaskBookParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case DeferDeadlineCommand.COMMAND_WORD;
+        case DeferDeadlineCommand.COMMAND_WORD:
             return new DeferDeadlineCommand();
 
         case ClearCommand.COMMAND_WORD:

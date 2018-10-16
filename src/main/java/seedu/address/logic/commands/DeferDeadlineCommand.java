@@ -12,7 +12,8 @@ import seedu.address.model.Model;
 public class DeferDeadlineCommand extends Command{
 
     public static final String COMMAND_WORD = "defer";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Defers the selected task in the taskbook"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Defers the deadline of the " +
+            " selected task in the taskbook"
             + "by the index number used in the last person listing. "
             + "Existing deadline will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
