@@ -7,10 +7,10 @@ import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEM
 import org.junit.Rule;
 import org.junit.Test;
 
-import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.logic.CommandHistory;
 import oldcode.Model;
 import oldcode.ModelManager;
+import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.logic.CommandHistory;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 public class ExitCommandTest {

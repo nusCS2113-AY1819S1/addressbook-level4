@@ -1,8 +1,8 @@
 package seedu.address.model;
 
+import static oldcode.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static oldcode.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 

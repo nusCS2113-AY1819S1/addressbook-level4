@@ -8,9 +8,9 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.logic.CommandHistory;
 import oldcode.Model;
 import oldcode.ModelManager;
+import seedu.address.logic.CommandHistory;
 import seedu.address.model.UserPrefs;
 
 public class UndoCommandTest {
