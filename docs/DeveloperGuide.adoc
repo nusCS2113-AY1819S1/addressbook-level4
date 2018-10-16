@@ -332,6 +332,8 @@ The following sequence diagram shows how the sell operation is implemented:
 
 image::SellSequenceDiagram.png[width="800"]
 
+After SoldBook is created, the inventory book will be updated through `Model#updateBook()`, `Model#updateFilteredBookList()` and `Model#commitBookInventory()` to store the latest quantity of books left.
+
 ==== Design Considerations
 
 ===== Aspect: How sell command is implemented
