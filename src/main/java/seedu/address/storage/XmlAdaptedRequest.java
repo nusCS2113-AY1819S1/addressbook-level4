@@ -27,9 +27,6 @@ public class XmlAdaptedRequest {
     @XmlElement(required = true)
     private String email;
 
-    @XmlElement
-    private List<XmlAdaptedTag> tagged = new ArrayList<>();
-
     /**
      * Constructs an XmlAdaptedRequest.
      * This is the no-arg constructor that is required by JAXB.
@@ -62,11 +59,6 @@ public class XmlAdaptedRequest {
      * @throws IllegalValueException if there were any data constraints violated in the adapted request
      */
     public Request toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
-        for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
-        }
-
         if (isbn == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Isbn.class.getSimpleName()));
         }
@@ -107,7 +99,7 @@ public class XmlAdaptedRequest {
 
         XmlAdaptedRequest otherPerson = (XmlAdaptedRequest) other;
         return Objects.equals(isbn, otherPerson.isbn)
-                && Objects.equals(email, otherPerson.email)
-                && tagged.equals(otherPerson.tagged);
+                && Objects.equals(quantity, otherPerson.quantity)
+                && Objects.equals(email, otherPerson.email);
     }
 }

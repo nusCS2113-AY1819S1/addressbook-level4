@@ -23,8 +23,8 @@ public class XmlSerializableBookInventoryTest {
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableBookInventory dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE,
+                XmlSerializableBookInventory.class);
         BookInventory bookInventoryFromFile = dataFromFile.toModelType();
         BookInventory typicalPersonsBookInventory = TypicalBooks.getTypicalBookInventory();
         // assertEquals(bookInventoryFromFile, typicalPersonsBookInventory);
@@ -32,18 +32,18 @@ public class XmlSerializableBookInventoryTest {
     /*
     @Test
     public void toModelType_invalidPersonFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableBookInventory dataFromFile = XmlUtil.getDataFromFile(INVALID_PERSON_FILE,
+                XmlSerializableBookInventory.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }
 
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
-                XmlSerializableAddressBook.class);
+        XmlSerializableBookInventory dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_PERSON_FILE,
+                XmlSerializableBookInventory.class);
         thrown.expect(IllegalValueException.class);
-        thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_PERSON);
+        thrown.expectMessage(XmlSerializableBookInventory.MESSAGE_DUPLICATE_PERSON);
         dataFromFile.toModelType();
     }
     */

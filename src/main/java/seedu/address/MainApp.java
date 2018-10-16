@@ -73,7 +73,7 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         BookInventoryStorage bookInventoryStorage = new XmlBookInventoryStorage(userPrefs.getBookInventoryFilePath());
         storage = new InventoryStorageManager(bookInventoryStorage, userPrefsStorage);
-        RequestListStorage requestListStorage = new XmlRequestListStorage(userPrefs.getBookInventoryFilePath());
+        RequestListStorage requestListStorage = new XmlRequestListStorage(userPrefs.getRequestListFilePath());
         requestStorage = new RequestListStorageManager(requestListStorage, userPrefsStorage);
         initLogging(config);
 

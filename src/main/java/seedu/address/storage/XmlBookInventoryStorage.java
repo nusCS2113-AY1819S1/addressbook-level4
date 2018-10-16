@@ -54,7 +54,7 @@ public class XmlBookInventoryStorage implements BookInventoryStorage {
             return Optional.empty();
         }
 
-        XmlSerializableAddressBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableBookInventory xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
         try {
             return Optional.of(xmlAddressBook.toModelType());
         } catch (IllegalValueException ive) {
@@ -77,7 +77,7 @@ public class XmlBookInventoryStorage implements BookInventoryStorage {
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(addressBook));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableBookInventory(addressBook));
     }
 
     public void backupInventoryBook(ReadOnlyBookInventory addressBook) throws IOException {
