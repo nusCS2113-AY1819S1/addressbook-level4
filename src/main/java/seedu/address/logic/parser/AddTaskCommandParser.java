@@ -3,13 +3,12 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
-
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.TDLAddCommand;
+import seedu.address.logic.commands.AddTaskCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 import seedu.address.model.task.*;
@@ -17,20 +16,20 @@ import seedu.address.model.task.*;
 /**
  * Parses input arguments and creates a new AddCommand object
  */
-public class TDLAddCommandParser implements Parser<TDLAddCommand> {
+public class AddTaskCommandParser implements Parser<AddTaskCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public TDLAddCommand parse(String args) throws ParseException {
+    public AddTaskCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TASK, PREFIX_MODULE, PREFIX_DATE, PREFIX_PRIORITY);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_TASK, PREFIX_MODULE, PREFIX_DATE, PREFIX_PRIORITY)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TDLAddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
 
         TaskName taskName = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
@@ -40,7 +39,7 @@ public class TDLAddCommandParser implements Parser<TDLAddCommand> {
 
         Task task = new Task(taskName, taskModule, taskDate, taskPriority);
 
-        return new TDLAddCommand(task);
+        return new AddTaskCommand(task);
     }
 
     /**
