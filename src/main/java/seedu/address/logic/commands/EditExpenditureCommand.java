@@ -49,7 +49,7 @@ public class EditExpenditureCommand extends Command{
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Expenditure> lastShownList = model.getFilteredExpenditrueList();
+        List<Expenditure> lastShownList = model.getFilteredExpenditureList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EXPENDITURE_DISPLAYED_INDEX);

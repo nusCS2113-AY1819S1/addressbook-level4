@@ -73,12 +73,10 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
     //// util methods
     public  void updateExpenditure(Expenditure target, Expenditure editedExpenditure){
         requireNonNull(editedExpenditure);
-        expenditures.setExpenditures(target, editedExpenditrue);
+        expenditures.setExpenditures(target, editedExpenditure);
     }
 
-    public void removeExpenditure(Expenditure key){
-        expenditures.remove(key);
-    }
+
     @Override
     public String toString() {
         return expenditures.asUnmodifiableObservableList().size() + " expenditures";
