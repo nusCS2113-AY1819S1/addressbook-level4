@@ -85,4 +85,8 @@ public class CsvWriter {
         personDetails[INDEX_PERSON_EMAIL] = person.getEmail().toString();
         return personDetails;
     }
+
+    public Path getOutputFilepath() {
+        return outputFilepath;
+    }
 }
