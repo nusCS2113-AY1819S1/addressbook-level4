@@ -32,7 +32,8 @@ public class EditDistributorsCommandParser implements Parser<EditDistributorsCom
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDistributorsCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    EditDistributorsCommand.MESSAGE_USAGE), pe);
         }
 
         EditDistributorDescriptor editDistributorDescriptor = new EditDistributorDescriptor();

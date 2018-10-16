@@ -28,7 +28,8 @@ public class AddDistributorsCommandParser implements Parser<AddDistributorsComma
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DIST_NAME, PREFIX_DIST_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDistributorsCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddDistributorsCommand.MESSAGE_USAGE));
         }
 
         DistributorName name = ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DIST_NAME).get());
