@@ -26,10 +26,10 @@ public class UserStub {
         Friend friend3 = new Friend(new Name("Julian Lim"));
         friendSetStub.addAll(Arrays.asList(friend1, friend2, friend3));
 
-        Person personStub = new Person(new Name("Charlotte Oliveiro"),
-                new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                getTagSet("neighbours"), new TimeTable(), friendSetStub);
+        Person personStub = new Person(new Name("Chun Lin"),
+                new Phone("98765432"), new Email("johnd@example.com"),
+                new Address("311, Clementi Ave 2, #02-25"),
+                new HashSet<Tag>(), new TimeTable(), friendSetStub);
         return personStub;
     }
 

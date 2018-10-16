@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -14,21 +15,21 @@ import seedu.address.model.person.Person;
 import seedu.address.security.UserStub;
 
 /**
- * Allows user to befriend a user from the others list, add a user to their friend list
+ * Adds a user from the frined list to the others list
  */
-public class FriendCommand extends Command {
-    public static final String COMMAND_WORD = "friend";
+public class UnfriendCommand extends Command {
+    public static final String COMMAND_WORD = "unfriend";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds the person selected with the index to the friends list.\n"
+            + ": Removes the person with the index to from the friends list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_ADD_FRIEND_SUCCESS = "Person added to the friend list!";
+    public static final String MESSAGE_REMOVE_FRIEND_SUCCESS = "Person removed from the friend list!";
 
     private final Index targetIndex;
 
-    public FriendCommand(Index targetIndex) {
+    public UnfriendCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -44,12 +45,12 @@ public class FriendCommand extends Command {
         Person personToEdit = otherList.get(targetIndex.getZeroBased());
         Person editedPerson = personToEdit;
         Person editedUser = UserStub.getUser();
-        editedPerson.getFriends().add(new Friend(UserStub.getUser().getName()));
-        editedUser.getFriends().add(new Friend(personToEdit.getName()));
+        editedPerson.getFriends().remove(new Friend(UserStub.getUser().getName()));
+        editedUser.getFriends().remove(new Friend(personToEdit.getName()));
 
         model.updatePerson(personToEdit, editedPerson);
         model.updatePerson(UserStub.getUser(), editedUser);
         model.commitAddressBook();
-        return new CommandResult(MESSAGE_ADD_FRIEND_SUCCESS);
+        return new CommandResult(MESSAGE_REMOVE_FRIEND_SUCCESS);
     }
 }

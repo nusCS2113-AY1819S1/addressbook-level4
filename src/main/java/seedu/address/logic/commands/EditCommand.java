@@ -146,6 +146,7 @@ public class EditCommand extends Command {
         private Address address;
         private Set<Tag> tags;
         private TimeSlot timeSlot;
+        private Set<Friend> friendList;
 
         public EditPersonDescriptor() {}
 
@@ -160,6 +161,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setTags(toCopy.tags);
             setTimeSlot(toCopy.timeSlot);
+            setFriends(toCopy.friendList);
         }
 
         /**
@@ -207,6 +209,14 @@ public class EditCommand extends Command {
          */
         public void setTags(Set<Tag> tags) {
             this.tags = (tags != null) ? new HashSet<>(tags) : null;
+        }
+
+        /**
+         * Sets {@code friendList} to this object's {@code friendList}.
+         * A defensive copy of {@code friendList} is used internally.
+         */
+        public void setFriends(Set<Friend> friendList) {
+            this.friendList = (friendList != null) ? new HashSet<>(friendList) : null;
         }
 
         /**

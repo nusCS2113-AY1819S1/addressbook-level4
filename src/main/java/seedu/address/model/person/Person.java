@@ -71,7 +71,7 @@ public class Person {
      * if modification is attempted.
      */
     public Set<Friend> getFriends() {
-        return Collections.unmodifiableSet(friendList);
+        return friendList;
     }
 
     /**

@@ -22,6 +22,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SetTimeTable;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UnfriendCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -108,6 +109,9 @@ public class AddressBookParser {
 
         case FriendCommand.COMMAND_WORD:
             return new FriendCommandParser().parse(arguments);
+
+        case UnfriendCommand.COMMAND_WORD:
+            return new UnfriendCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
