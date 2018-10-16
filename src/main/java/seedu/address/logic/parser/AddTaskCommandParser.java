@@ -35,10 +35,10 @@ public class AddTaskCommandParser implements Parser<AddTaskCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddTaskCommand.MESSAGE_USAGE));
         }
 
-        TaskName taskName = ParserUtil.parseTask(argMultimap.getValue(PREFIX_TASK).get());
-        TaskModule taskModule = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE).get());
+        TaskName taskName = ParserUtil.parseTaskName(argMultimap.getValue(PREFIX_TASK).get());
+        TaskModule taskModule = ParserUtil.parseTaskModule(argMultimap.getValue(PREFIX_MODULE).get());
         TaskDate taskDate = ParserUtil.parseTaskDate(argMultimap.getValue(PREFIX_DATE).get());
-        TaskPriority taskPriority = ParserUtil.parsePriority(argMultimap.getValue(PREFIX_PRIORITY).get());
+        TaskPriority taskPriority = ParserUtil.parseTaskPriority(argMultimap.getValue(PREFIX_PRIORITY).get());
 
         Task task = new Task(taskName, taskModule, taskDate, taskPriority);
 
