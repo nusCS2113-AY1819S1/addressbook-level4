@@ -54,6 +54,9 @@ public interface Model {
     /**
      * Returns true if the model has previous stock list states to restore.
      */
+
+    void updateFilteredItemListByTag(Predicate<Item> predicate);
+
     boolean canUndoStockList();
 
     /**
