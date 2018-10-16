@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import seedu.address.commons.events.model.SaveStockListVersionEvent;
 import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -37,4 +38,6 @@ public interface Storage extends StockListStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleStockListChangedEvent(StockListChangedEvent stockList);
+
+    void handleSaveStockListVersionEvent(SaveStockListVersionEvent stockList);
 }

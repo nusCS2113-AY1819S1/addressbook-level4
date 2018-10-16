@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -9,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.SaveStockListVersionEvent;
 import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -78,11 +80,24 @@ public class StorageManager extends ComponentManager implements Storage {
         stockListStorage.saveStockList(stockList, filePath);
     }
 
+    //@@author kelvintankaiboon
     @Override
-    public void backupStockList(ReadOnlyStockList stockList) throws IOException {
-        stockListStorage.backupStockList(stockList);
+    public void saveStockListVersion(ReadOnlyStockList stockList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        stockListStorage.saveStockListVersion(stockList, filePath);
     }
 
+    @Override
+    @Subscribe
+    public void handleSaveStockListVersionEvent(SaveStockListVersionEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Saving current version to file"));
+        try {
+            saveStockListVersion(event.data, Paths.get("versions", "backup.xml"));
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+    //@@author
 
     @Override
     @Subscribe
