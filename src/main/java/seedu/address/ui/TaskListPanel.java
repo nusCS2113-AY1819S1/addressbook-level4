@@ -56,13 +56,14 @@ public class TaskListPanel extends UiPart<Region> {
             taskListView.getSelectionModel().clearAndSelect(index);
         });
     }
-
+//uncomment after finishing the test part for TDL
+    /*
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         scrollTo(event.targetIndex);
     }
-
+*/
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Task} using a {@code TaskCard}.
      */

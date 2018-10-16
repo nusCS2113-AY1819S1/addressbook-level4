@@ -56,11 +56,7 @@ public class Task {
      * This defines a weaker notion of equality between two tasks.
      */
     public boolean isSameTask(Task otherTask) {
-        if (otherTask == this) {
-            return true;
-        }
-
-        return false;
+        return otherTask == this;
     }
 
     /**
