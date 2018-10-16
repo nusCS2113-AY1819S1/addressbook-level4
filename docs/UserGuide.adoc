@@ -240,34 +240,26 @@ Deletes all passwords from the password vault. The user will be prompted to re-e
 Changes the password used. User would have to re-enter the pVault password before the command is executed
 ****
 
-=== Accessing the timeslot manager: `tSlot`
+=== Accessing the timetable merger: `merge`
 
-Enters the timeslot manager program. This program stores users' timeslots (which are uploaded), and other parties' timeslots (e.g. friends, tutors, etc), which facilitates the scheduling stage for meet-ups. +
-Format: `tSlot`
+Merges the timetable of multiple contacts and displays their collated free time slots.
 
-Sub-Functions in `tSlot`: +
-<time is expressed in 24 hours> +
-<* indicates optional input>
-
+Format: `merge m/INDEX m/INDEX...`
 ****
-* `tSlot busyAdd <day 1-7> <timeStart> <timeEnd> <name>` +
-Adds a busy time slot for that day, for a friend. Enter "me" under name, if you are adding
-things under your own timeslot.
-* `tSlot list` +
-Lists out all the busy time slots. and unique index (id) would be displayed at the side for easier deletion
-* `tSlot delete <name/id>` +
-Deletes the specified busy timeslot +
-* `tSlot edit <name/id> <newDay> <timeStart> <timeEnd>` +
-Edits a current busy time slot +
-* `tSlot findTime <*day 1-7> <*timeStart> <*timeEnd> <duration>` +
-Finds the next available time slot. +
-If no fields entered for day→ Assumed to be today +
-If no fields entered for timeStart→ time starts at 0000 +
-If no fields entered for timeEnd→ time ends at 2359 +
-* `tSlot clear` +
-Clears all busy timeslots for all users. +
-This prompts user to enter 'Y' or 'N'. The command will be executed if 'Y' is entered
+* Merges the people at selected INDEXes.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* More than 2 people can be merged at once
 ****
+* `list` +
+`merge m/1 m/2` +
+Merges the timetables of the 1st and 2nd people in the address book.
+
+image::MergeCommandUser1.png[width="800"]
+
+merges into
+
+image::MergeCommanduser2.png[width="800"]
 
 === Accessing the consultation manager: `conslt`
 
