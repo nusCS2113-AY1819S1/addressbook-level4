@@ -238,22 +238,22 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
-// tag::analyses[]
-=== Analyses of profits and quantities sold in the company.
 
+// tag::analyses[]
+=== Analyses of profits and quantities sold in the company
 ==== Implementation
 To facilitate the analyses of total profit, revenue and costs of the company, as well as the quantities of drinks sold, transactions (sales and imports) are logged using `Transaction`. They will be logged when the drink stock increases due to import (`TransactionType` is `IMPORT`), or when they decrease due to a sale (`TransactionType` is `SALE`). These transactions are stored into a list of transactions, in `TransactionList`.
 
 Analyses are conducted in `Analysis`. The following operations are implemented for the analyses of profit, revenue and costs:
-    • `Analysis#analyseProfit()`
-    • `Analysis#analyseCost()`
-    • `Analysis#analyseRevenue()`
+* `Analysis#analyseProfit()`
+* `Analysis#analyseCost()`
+* `Analysis#analyseRevenue()`
 
 The methods that enable the analyses of quantities sold are:
-    • `Analysis#analyseQuantitiesSold(Drink drink)`
-    • <to be added>
+* `Analysis#analyseQuantitiesSold(Drink drink)`
+* <to be added>
 
-Internally, `Analysis#analyseProfit()` calls `Analysis#analyseCost()` and `Analysis#analyseRevenue()` to calculate the profit, using the formula “`profit = revenue – cost `”.
+Internally, `Analysis#analyseProfit()` calls `Analysis#analyseCost()` and `Analysis#analyseRevenue()` to calculate the profit, using the formula “profit = revenue - cost”.
 
 `Analysis#analyseRevenue()` iterates through the `TransactionList` and checks the `Transaction`’s `TransactionType`. If the `TransactionType` is `SALE`, the `Price` at which the drink is sold is obtained and added to a sum of revenues. On the other hand, if the `TransactionType` is `IMPORT`, the `Transaction` will be ignored.
 
