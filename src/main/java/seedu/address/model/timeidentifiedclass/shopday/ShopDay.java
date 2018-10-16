@@ -16,7 +16,7 @@ import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTrans
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
- *
+ * This class stores all
  */
 public class ShopDay extends TimeIdentifiedClass {
     private static DateTimeFormatter dayFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -27,11 +27,31 @@ public class ShopDay extends TimeIdentifiedClass {
     private final String date;
     private boolean isActiveDay;
 
+
+    /**
+     * The following method is the all-purpose initializer for a new shopDay.
+     */
+
+    private void initialise() {
+        this.shopDayRecord = new TreeMap<>();
+        this.reminderRecord = new TreeMap<>();
+        this.openDay();
+    }
+
+    /**
+     * The following are the class constructors.
+     */
+
     public ShopDay() {
         this.date = dayFormat.format(time.now());
         this.initialise();
     }
 
+    /**
+     * This constructor allows us to create a new ShopDay object using a date. It is to facilitate creation of reminders.
+     * @param date
+     * @throws InvalidTimeFormatException
+     */
     public ShopDay(String date) throws InvalidTimeFormatException {
         requireNonNull(date);
         if (isValidDateFormat(date)) {
@@ -42,12 +62,31 @@ public class ShopDay extends TimeIdentifiedClass {
         }
     }
 
+    /**
+     * The following constructor is to be used to facilitate reading from files.
+     * @param date
+     * @param shopDayRecord
+     * @param reminderRecord
+     * @throws InvalidTimeFormatException
+     */
+
+    public ShopDay(String date, TreeMap<String, Transaction> shopDayRecord, TreeMap<String,Reminder> reminderRecord) throws InvalidTimeFormatException{
+        if (isValidDateFormat(date)) {
+            this.date = date;
+            this.shopDayRecord = shopDayRecord;
+            this.reminderRecord = reminderRecord;
+        }
+        else {
+            throw new InvalidTimeFormatException();
+        }
+    }
+
     public String getDay() {
         return this.date;
     }
 
     /**
-     * todo
+     * The following method adds a transaction to the given shopDay object.
      * @param transaction
      * @throws InvalidTimeFormatException
      * @throws ClosedShopDayException
@@ -94,6 +133,8 @@ public class ShopDay extends TimeIdentifiedClass {
         this.isActiveDay = false;
     }
 
+    public boolean isOpenDay() { return isActiveDay; }
+
     /**
      *
      * @param date
@@ -107,9 +148,4 @@ public class ShopDay extends TimeIdentifiedClass {
         return false;
     }
 
-    private void initialise() {
-        this.shopDayRecord = new TreeMap<>();
-        this.reminderRecord = new TreeMap<>();
-        this.openDay();
-    }
 }
