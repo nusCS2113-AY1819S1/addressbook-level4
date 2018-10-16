@@ -215,7 +215,11 @@ The `Model`,
 [NOTE]
 As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
-image:ModelClassBetterOopDiagram.png[width="800"]
+image:ModelClassBetterOopDiagram.png[width="800"] +
+ +
+Similarly, we can store a `EnrolledClass` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `EnrolledClass` object per unique `EnrolledClass`, instead of each `Person` needing their own `EnrolledClass` object. An example of how such a model may look like is given below. +
+ +
+image:ModelClassEvenBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -319,12 +323,178 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
+// tag::sortingofpersons[]
+=== Sorting of contacts in addressbook feature
+==== Current Implementation
 
-_{Explain here how the data encryption feature will be implemented}_
+The sorting mechanism is implemented with `UniquePersonListHelper`, which is facilitated by `UniquePersonList`, which keeps a list of unique persons in `AddressBook`.
+`UniquePersonListHelper` sorts the contacts in `UniquePersonList` in an alphabetical order, according to the person's name.
+It implements the following operations:
 
-// end::dataencryption[]
+* `UniquePersonList#add()` -- Adds a new person to `UniquePersonList`, and hence the contact list
+* `UniquePersonList#remove()` -- Removes a new person to `UniquePersonList`, and hence the contact list
+* `UniquePersonList#setPerson()` -- Sets a new person, in place of an existing person, to `UniquePersonList`, and hence the contact list
+* `UniquePersonList#setPersons()` -- Sets a list of persons, in place of the current list of persons, to `UniquePersonList`, and hence the contact list
+* `UniquePersonList#contains()` -- Checks if a person is already a part of `UniquePersonList`, and hence the contact list
+
+These operations are exposed in the `Model` interface, through `ModelManager`, then through `AddressBook`.
+In `Model`, they are exposed as `Model#addPerson()`, `Model#deletePerson()`, `Model#updatePerson()`,
+`Model#resetData()`, and `Model#hasPerson()` respectively.
+
+Within `ModelManager`, the above listed operations are directly exposed as
+`ModelManager#addPerson()`, `ModelManager#deletePerson()`, `ModelManager#updatePerson()`,
+`ModelManager#resetData()`, and `ModelManager#hasPerson()` respectively.
+
+Within `AddressBook`, the above listed operations are directly exposed as
+`AddressBook#addPerson()`, `AddressBook#removePerson()`, `AddressBook#updatePerson()`,
+`AddressBook#setPersons()`, and `AddressBook#hasPerson()` respectively.
+
+Given below is an example usage scenario and how the sorting mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `UniquePersonListHelper` will be initialized with the saved
+persons of the application. For this example, let us assume that the `UniquePersonList` is empty, and hence, there are
+no saved persons.
+
+`UniquePersonList` will also be initialized, and will read inputs from `UniquePersonListHelper`.  Since
+`UniquePersonListHelper` is empty, `UniquePersonList` will also be empty.
+
+image::SortedListStartingStateListAndTreeDiagram.png[width="800"]
+
+Step 2. The user executes `add n/David ...` command, which calls `Model#addPerson()`, to add a new person.
+The new person will be added to `UniquePersonListHelper`, and `UniquePersonList` will take reference from `UniquePersonListHelper`.
+
+image::SortedListCommand1TreeStateDiagram.png[width="800"]
+
+`UniquePersonListHelper` will always have the correctly sorted persons.  Therefore, it is possible to iterate through
+`UniquePersonListHelper` in order to get the sorted order of persons.  This sorted order will be copied into `UniquePersonList`.
+
+image::SortedListCommand1ListStateDiagram.png[width="800"]
+
+Step 3. The user executes `add n/Aaron ...`, , which also calls `Model#addPerson()`, to add a new person. Like step 2, the new person will be added to
+`UniquePersonListHelper`, and `UniquePersonList` will take reference from `UniquePersonListHelper`.
+
+Because `UniquePersonListHelper` stores persons in a treemap, with person name as the key, and person as the value in
+ the key-value pair of the treemap, it is able to automatically sort persons according to their names.
+
+image::SortedListCommand2TreeStateDiagram.png[width="800"]
+
+When `UniquePersonListHelper` is being iterated through, it will be done so in an in-order depth-first-search, allowing
+the output to be the sorted order of persons.  This allows `UniquePersonList` to copy over the sorted order of persons,
+from `UniquePersonListHelper`.
+
+image::SortedListCommand2ListStateDiagram.png[width="800"]
+
+Step 4. The user executes `add n/Esther ...`, which also calls `Model#addPerson()`, to add a new person. Like step 3, the new person will be added to
+`UniquePersonListHelper`, and `UniquePersonList` will take reference from `UniquePersonListHelper`.
+
+Because `UniquePersonListHelper` stores persons in a treemap, Esther will be put behind both Aaron and David.
+
+image::SortedListCommand3TreeStateDiagram.png[width="800"]
+
+Like step 3, when `UniquePersonListHelper` is being iterated through, it will be done so in an in-order depth-first-
+search, allowing the output to be the sorted order of persons.  This allows `UniquePersonList` to copy over the sorted
+order of persons, from `UniquePersonListHelper`.
+
+image::SortedListCommand3ListStateDiagram.png[width="800"]
+
+Step 5. The user now decides that adding the person was a mistake.  The user wishes to change Esther's name to Bella.
+The user decides to edit the person Esther, by executing the `edit 3 n/Bella...` command.  This calls `Model#updatePerson()` The `edit 3 n/Bella...`
+command will check if Esther is a valid person, and will replace the name Esther, with the name Bella.  All other
+properties of that person instance will remain the same.
+
+Because alphabetically, B comes before D, person Bella, which was previously Esther, will now come before David.  The
+red-black tree underlying data structure of treemap, is able to handle this.
+
+image::SortedListCommand4TreeStateDiagram.png[width="800"]
+
+Like step 4, when `UniquePersonListHelper` is being iterated through, it will be done so in an in-order depth-first-
+search, allowing the output to be the sorted order of persons.  This allows `UniquePersonList` to copy over the sorted
+order of persons, from `UniquePersonListHelper`.
+
+image::SortedListCommand4ListStateDiagram.png[width="800"]
+
+Step 6. The user now decides that the person, Bella was a mistake.  Person Bella should not be in the `AddressBook`.
+The user wishes to delete the person Bella, by executing the `delete 2` command.  This calls `Model#deletePerson()`.
+  The `delete 2` command will check if
+Bella is a valid person, and if so, will delete the person Bella.
+
+The red-black tree which is the underlying data structure of treemap, is able to handle this operation.  It simply
+replaces the node it is about to delete, with the in-order successor.  More operations will be done to ensure a balanced
+tree, within the underlying red-black tree.
+
+image::SortedListCommand5TreeStateDiagram.png[width="800"]
+
+Like step 5, when `UniquePersonListHelper` is being iterated through, it will be done so in an in-order depth-first-
+search, allowing the output to be the sorted order of persons.  This allows `UniquePersonList` to copy over the sorted
+order of persons, from `UniquePersonListHelper`.
+
+image::SortedListCommand5ListStateDiagram.png[width="800"]
+
+[NOTE]
+If the Bella does not exist in `UniquePersonListHelper`,`UniquePersonListHelper` will return an error, and the
+ `delete` command will not be executed.
+
+The following sequence diagram shows how the `UniquePersonList` stays sorted when an `add` command is executed:
+
+image::SortedListSequenceDiagramCommandAdd.png[width="800"]
+
+The following sequence diagram shows how the `UniquePersonList` stays sorted when an `delete` command is executed:
+It is very similar to that of the `add` command.
+
+image::SortedListSequenceDiagramCommandDelete.png[width="800"]
+
+Step 7. The user then decides to execute the command `list`. Commands that do not modify the address book, such as
+`list`, will usually not call `Model#addPerson()`, `Model#deletePerson()`, `Model#updatePerson()`, `Model#resetData()`,
+or `Model#hasPerson()`.  Thus the state of `UniquePersonListHelper` will remain unchanged.
+
+image::SortedListCommand6TreeStateDiagram.png[width="800"]
+
+Therefore, `UniquePersonList` will also remain unchanged.
+
+image::SortedListCommand6ListStateDiagram.png[width="800"]
+
+Step 8. The user executes `clear`, which calls `Model#resetData()`.  This replaces all data in the address book with an
+empty address book.  Hence, `UniquePersonListHelper` will be cleared of all persons.
+
+image::SortedListCommand7TreeStateDiagram.png[width="800"]
+
+Therefore, `UniquePersonList` will also be cleared of all persons.
+
+image::SortedListCommand7ListStateDiagram.png[width="800"]
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+image::SortedListActivityDiagram.png[width="650"]
+
+==== Design Considerations
+
+===== Aspect: How the list is sorted
+
+* **Alternative 1 (current choice):** Implement a helper class, UniquePersonListHelper, which uses a treemap to sort the names.
+Clears the UniquePersonList every time a change is made, and iterates through the UniquePersonListHelper, to build a new
+ UniquePersonList.
+** Pros: Easy to implement.  Allows for minimal and compartmentalised changes throughout the code base.  Fast overall
+time complexity of O(N).
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** implement a comparator in the current UniquePersonList.
+** Pros: Will use less memory, because there is no need for a helping class or data structure.
+** Cons: It has a time complexity of O(N log N), which is slower than our chosen implementation.
+
+===== Aspect: Defensive programming practices for helper class
+
+* **Alternative 1 (current choice):** Implement all checks for errors in the helper class, `UniquePersonListHelper` and none in
+`UniquePersonList`.  This is because the helper class is in charge of the actual execution of the program.  If the checks for
+errors are implemented in `UniquePersonList` only, it is possible for a new developer to accidentally bypass the checks.
+** Pros: Prevents unnecessary checks and hence, potentially confusing code.
+** Cons: If any changes are made to the helper class in the future, e.g. removing the helper class, the developer has
+to remember to implement his/her own checks.
+* **Alternative 2:** Implement all checks for errors in both `UniquePersonList` and `UniquePersonListHelper`.
+** Pros: This would add an additional layer of defence to possible careless mistakes by developers in the future.  E.g.
+If they were to make their own version of the helper class but forget to implement their own checks for errors, `UniquePersonList`
+would still have backup checks.
+** Cons: This makes code harder to understand, by introducing redundant checks, which would be misleading.  Redundant checks
+might also encourage careless programing habits, which is wrong.
+// end::sortingofpersons[]
 
 === Logging
 
