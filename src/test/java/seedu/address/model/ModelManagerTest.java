@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_1;
-import static UnRefactored.testutil.TypicalTasks.CS2113_TASK_2;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_1;
+import static unrefactored.testutil.TypicalTasks.CS2113_TASK_2;
 
 import java.nio.file.Paths;
 
@@ -12,7 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import UnRefactored.testutil.AddressBookBuilder;
+import unrefactored.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
     @Rule

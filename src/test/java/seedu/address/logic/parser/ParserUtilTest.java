@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 //import static org.junit.Assert.assertTrue;
 
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static UnRefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
+import static unrefactored.testutil.TypicalIndexes.INDEX_FIRST_TASK;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.PriorityLevel;
-import UnRefactored.testutil.Assert;
+import unrefactored.testutil.Assert;
 
 public class ParserUtilTest {
     private static final String INVALID_DEADLINE_1 = "31/2";

@@ -20,7 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.task.Task;
-import UnRefactored.testutil.TaskBuilder;
+import unrefactored.testutil.TaskBuilder;
 
 public class AddTaskCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();

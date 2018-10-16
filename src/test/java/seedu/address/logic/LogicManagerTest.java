@@ -1,8 +1,8 @@
 package seedu.address.logic;
 
 import static org.junit.Assert.assertEquals;
-import static UnRefactored.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
-import static UnRefactored.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static unrefactored.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
+import static unrefactored.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import org.junit.Rule;
 import org.junit.Test;
