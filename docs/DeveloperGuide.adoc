@@ -1001,19 +1001,15 @@ Use case ends.
 
 *MSS*
 
-1. Student selects the date of deadline
-2. TB sets the date
-3. Student requests to defer deadline for a task
-4. TB asks for the number of weeks to defer
-5. Student provides the number of weeks for deferment
-6. TB defers deadline for task
+1. Student requests to defer deadline for an existing task to a requested date
+2. TB sets the new deadline for the existing task
 +
 Use case ends.
 
 *Extensions*
 
-* 3b. Student wants to defer a deadline for a task without deadline
-** 3b1. TB outputs an error message
+* 1b. Student wants to defer a deadline for a task without deadline
+** 1b1. TB outputs an error message
 +
 Use case ends.
 
