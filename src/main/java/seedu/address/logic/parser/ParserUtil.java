@@ -75,7 +75,7 @@ public class ParserUtil {
         return new TaskModule(trimmedModule);
     }
 
-    public static TaskDate parseDate(String date) throws ParseException {
+    public static TaskDate parseTaskDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!TaskDate.isValidDate(trimmedDate)) {
@@ -99,6 +99,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code date} is invalid.
      */
+
     public static Date parseDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
@@ -107,6 +108,7 @@ public class ParserUtil {
         }
         return new Date(trimmedDate);
     }
+
 
     /**
      * Parses a {@code String money} into a {@code Money}.
