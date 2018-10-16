@@ -61,6 +61,8 @@ public class SecurityManager extends ComponentManager implements Security {
     public int register(String username, String password, String email, String phone, String address) {
         try {
             logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
+            this.isAuthenticated = true;
+            this.user = new User(username, model);
             return 1;
         } catch (CommandException e) {
             return 2;
