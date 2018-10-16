@@ -35,7 +35,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_ATTENDANCE + "ATTENDANCE]\n"
-            + "[" + PREFIX_DATETIME + "dd/MM/yyyy/hh/mm\n"
+            + "[" + PREFIX_DATETIME + "dd/MM/yyyy hh:mm\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
@@ -182,9 +182,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
-        }
+        public void setAddress(Address address) { this.address = address; }
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
@@ -198,9 +196,7 @@ public class EditCommand extends Command {
             return Optional.ofNullable(attendance);
         }
 
-        public void setDate(DateTime dateTime) {
-            this.dateTime = dateTime;
-        }
+        public void setDate(DateTime dateTime) { this.dateTime = dateTime; }
 
         public Optional<DateTime> getDateTime() {
             return Optional.ofNullable(dateTime);
