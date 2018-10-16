@@ -150,13 +150,8 @@ This index must be an index number shown in the displayed job list.
 
 Examples:
 
-<<<<<<< HEAD
 *	`editj 1 x/20-30` +
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
-=======
-* `editj 1 x/20-30`
-(Edits the MIN_AGE-MAX_AGE attribute to be from 20 to 30 years of age for the 1st job offer)
->>>>>>> 6ea65f13afc5a018bc00b2cb6c12bf58adb7a6bc
 
 === Locating candidates by search parameter : `find`
 
@@ -213,15 +208,9 @@ Format: `cancel`
 ==== Deleting a specific candidate
 Format: `deletec <INDEX>`
 
-<<<<<<< HEAD
 *	Deletes the candidate with the specified `INDEX`
 *	This index must be an index number shown in the displayed candidate list.
 *	The full name can be found using the find function when a partial keyword is entered
-=======
-* Deletes the candidate with the specified `INDEX`
-* The index must be an index number shown in the displayed candidate list.
-* The full name can be found using the find function when a partial keyword is entered
->>>>>>> 6ea65f13afc5a018bc00b2cb6c12bf58adb7a6bc
 
 Example to delete a candidate:
 
