@@ -103,8 +103,9 @@ public class CommandTestUtil {
 
     public static final String GENDER_FLAG_INVALID_NUMBER = " " + PREFIX_GENDER + INVALID_GENDER_FLAG_NUMBER;
     public static final String GENDER_FLAG_INVALID_WORD = " " + PREFIX_GENDER + INVALID_GENDER_FLAG_WORD;
-    public static final String NATIONALITY_FLAG_INVALID_NUMBER = " " + PREFIX_NATIONALITY + INVALID_NATIONALITY_FLAG_NUMBER;
-    public static final String NATIONALITY_FLAG_INVALID_WORD= " " + PREFIX_NATIONALITY + INVALID_NATIONALITY_FLAG_WORD;
+    public static final String NATIONALITY_FLAG_INVALID_NUMBER = " " + PREFIX_NATIONALITY
+            + INVALID_NATIONALITY_FLAG_NUMBER;
+    public static final String NATIONALITY_FLAG_INVALID_WORD = " " + PREFIX_NATIONALITY + INVALID_NATIONALITY_FLAG_WORD;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Male1"; // '1' not allowed in Gender
