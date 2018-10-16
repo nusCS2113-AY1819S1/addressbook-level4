@@ -32,7 +32,7 @@ public interface Model {
     /**
      * Returns true if a limit with the same dates exists.
      */
-    boolean hasSameDateLimit(Limit limitin);
+    boolean hasSameDateLimit(Limit limitIn);
     /**
      * Deletes the given record.
      * The record must exist in the financial planner.
