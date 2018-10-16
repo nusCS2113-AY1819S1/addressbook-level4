@@ -6,6 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
 
 /**
@@ -31,7 +32,12 @@ public class BatchDate {
     public BatchDate(String date) {
         requireNonNull(date);
         checkArgument(isValidDate(date), MESSAGE_DATE_CONSTRAINTS);
-        this.batchDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(DATE_FORMAT));
+        try {
+            this.batchDate = LocalDate.parse(date, FORMAT);
+        }
+        catch (DateTimeParseException e) {
+            throw new RuntimeException();
+        }
     }
 
     public LocalDate getBatchDate() {
