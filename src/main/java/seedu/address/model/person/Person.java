@@ -20,13 +20,12 @@ public class Person {
     private final Phone phone;
     private final Email email;
 
-
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     //Timetable field (Currently only one)
-    private TimeTable weekly;
+    private TimeTable timeTable;
 
     // Friend list of the person
     private Set<Friend> friendList;
@@ -34,16 +33,16 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Set<Tag> tags,
-                  TimeTable timeTable, Set<Friend> friendList) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  Set<Tag> tags, TimeTable timeTable, Set<Friend> friendList) {
+        requireAllNonNull(name, phone, email, address, tags, timeTable, friendList);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        this.weekly = timeTable;
         this.friendList = friendList;
+        this.timeTable = timeTable;
     }
 
     public Name getName() {
@@ -63,7 +62,7 @@ public class Person {
     }
 
     public TimeTable getTimeTable() {
-        return weekly;
+        return timeTable;
     }
 
     /**
@@ -115,7 +114,8 @@ public class Person {
                 && otherPerson.getPhone().equals(getPhone())
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getTimeTable().equals(getTimeTable());
     }
 
     @Override

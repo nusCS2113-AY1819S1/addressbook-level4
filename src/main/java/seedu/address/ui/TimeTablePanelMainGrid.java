@@ -4,23 +4,20 @@ import java.util.logging.Logger;
 
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.person.TimeSlot;
 
 /**
- * TODO ALEXIS: working on this
  *
  * This is a visible grid for the timetable.
- * It will contain children: TimeTablePanelTimeSlot(s) and TimeTablePanelDaySlot(s)
+ * It will contain children: TimeTablePanelTimeSlot(s)
  *
  * Refer to TimeTablePanel class to better understand the relationships
  */
 
 public class TimeTablePanelMainGrid extends UiPart<Region> {
-
-    // TODO ALEXIS: fxml file: need to tweak!
     private static final String FXML = "TimeTablePanelMainGrid.fxml";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
@@ -28,26 +25,44 @@ public class TimeTablePanelMainGrid extends UiPart<Region> {
     @FXML
     private GridPane mainGrid;
 
-
     public TimeTablePanelMainGrid() {
         super(FXML);
 
         // To prevent triggering events for typing inside the timeTablePanelMainGrid
         getRoot().setOnKeyPressed(Event::consume);
+    }
 
-        populateDays();
-
-        //registerAsAnEventHandler(this);
+    public void clearGrid() {
+        mainGrid.getChildren().retainAll(mainGrid.getChildren().get(0));
     }
 
     /**
-     * Populates the days from monday to friday on the left-most column.
+     * Adds a timetable to the current timetable displayed
+     * @param timeSlot TimeSlot to add
+     * @param currRowDimensions Dimensions of the rows in the current grid
+     * @param currColDimensions Dimensions of the columns in the current grid
+     * @param currStartHour Start hour in the grid
+     * @param currEndHour End hour in the grid
      */
-    private void populateDays() {
-        mainGrid.add(new Label("Monday"), 0, 0);
-        mainGrid.add(new Label("Tuesday"), 0, 1);
-        mainGrid.add(new Label("Wednesday"), 0, 2);
-        mainGrid.add(new Label("Thursday"), 0, 3);
-        mainGrid.add(new Label("Friday"), 0, 4);
+    public void addTimeSlot(
+            TimeSlot timeSlot, double currRowDimensions, double currColDimensions, int currStartHour, int currEndHour) {
+
+        if (timeSlot.getStartTime().getHour() < currStartHour
+                || timeSlot.getEndTime().getHour() > currEndHour
+                || timeSlot.getDayOfWeek().getValue() > 5) {
+            return;
+        }
+
+        TimeTablePanelTimeSlot panelTimeSlot = new TimeTablePanelTimeSlot(
+                timeSlot, currRowDimensions, currColDimensions);
+        mainGrid.add(panelTimeSlot.getBox(), getColIndex(timeSlot, currStartHour), getRowIndex(timeSlot));
+    }
+
+    private int getColIndex(TimeSlot timeSlot, int currStartHour) {
+        return timeSlot.getStartTime().getHour() - currStartHour;
+    }
+
+    private int getRowIndex(TimeSlot timeSlot) {
+        return timeSlot.getDayOfWeek().getValue() - 1;
     }
 }
