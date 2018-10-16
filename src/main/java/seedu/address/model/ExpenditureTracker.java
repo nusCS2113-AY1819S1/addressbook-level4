@@ -70,6 +70,10 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
         expenditures.add(e);
     }
 
+    public void removeExpenditure(Expenditure key) {
+        expenditures.remove(key);
+    }
+
     //// util methods
     public  void updateExpenditure(Expenditure target, Expenditure editedExpenditure){
         requireNonNull(editedExpenditure);

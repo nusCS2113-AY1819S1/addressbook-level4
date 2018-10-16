@@ -49,6 +49,13 @@ public class ExpenditureList implements Iterable<Expenditure> {
         internalList.setAll(replacement.internalList);
     }
 
+    public void remove(Expenditure toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new ExpenditureNotFoundException();
+        }
+    }
+
     /**
      * Replaces the contents of this list with {@code expenditures}.
      */
