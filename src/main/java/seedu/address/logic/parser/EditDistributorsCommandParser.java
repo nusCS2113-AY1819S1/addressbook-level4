@@ -6,14 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.EditDCommand;
-import seedu.address.logic.commands.EditDCommand.EditDistributorDescriptor;
+import seedu.address.logic.commands.EditDistributorsCommand;
+import seedu.address.logic.commands.EditDistributorsCommand.EditDistributorDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
-public class EditDCommandParser implements Parser<EditDCommand> {
+public class EditDistributorsCommandParser implements Parser<EditDistributorsCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -21,7 +21,7 @@ public class EditDCommandParser implements Parser<EditDCommand> {
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public EditDCommand parse(String args) throws ParseException {
+    public EditDistributorsCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DIST_NAME, PREFIX_DIST_PHONE);
@@ -32,7 +32,7 @@ public class EditDCommandParser implements Parser<EditDCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDistributorsCommand.MESSAGE_USAGE), pe);
         }
 
         EditDistributorDescriptor editDistributorDescriptor = new EditDistributorDescriptor();
@@ -45,7 +45,7 @@ public class EditDCommandParser implements Parser<EditDCommand> {
                     .get()));
         }
 
-        return new EditDCommand(index, editDistributorDescriptor);
+        return new EditDistributorsCommand(index, editDistributorDescriptor);
     }
 }
 

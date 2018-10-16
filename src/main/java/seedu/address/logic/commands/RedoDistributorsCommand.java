@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 /**
  * Reverts the {@code model}'s address book to its previously undone state.
  */
-public class RedoDCommand extends Command {
+public class RedoDistributorsCommand extends Command {
 
     public static final String COMMAND_WORD = "redoD";
     public static final String MESSAGE_SUCCESS = "Redo success!";

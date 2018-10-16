@@ -24,7 +24,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     private static final Logger logger = LogsCenter.getLogger(UserDatabase.class);
 
-    private static final String AB_FILEPATH_FOLDER = "data/";
+    private static final String AB_FILEPATH_FOLDER = "data";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
     private UniqueUsersList users;
