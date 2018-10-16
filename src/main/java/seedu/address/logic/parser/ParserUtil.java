@@ -119,4 +119,19 @@ public class ParserUtil {
         }
         return tagSet;
     }
+
+    //@@author kelvintankaiboon
+    /**
+     *
+     * Parses a {@code String fileName}.
+     * @throws ParseException if the given string is invalid.
+     */
+    public static String parseFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedName = fileName.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return trimmedName;
+    }
 }

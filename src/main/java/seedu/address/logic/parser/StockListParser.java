@@ -90,7 +90,7 @@ public class StockListParser {
             return new ChangeStatusCommandParser().parse(arguments);
 
         case SaveCommand.COMMAND_WORD:
-            return new SaveCommand();
+            return new SaveCommandParser().parse(arguments);
 
 
         default:

@@ -106,7 +106,7 @@ public class AddCommandTest {
 
         //@@author kelvintankaiboon
         @Override
-        public void saveStockList() {
+        public void saveStockList(String fileName) {
             throw new AssertionError("This method should not be called.");
         }
         //@@author

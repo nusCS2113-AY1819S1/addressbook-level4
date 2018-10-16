@@ -59,13 +59,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     //@@author kelvintankaiboon
     /** Raises an event to indicate that saveCommand has been called */
-    private void indicateSaveStockListVersion() {
-        raise(new SaveStockListVersionEvent(versionedStockList));
+    private void indicateSaveStockListVersion(String fileName) {
+        raise(new SaveStockListVersionEvent(versionedStockList, fileName));
     }
 
     @Override
-    public void saveStockList() {
-        indicateSaveStockListVersion();
+    public void saveStockList(String fileName) {
+        indicateSaveStockListVersion(fileName);
     }
 
     @Override

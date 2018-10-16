@@ -7,9 +7,11 @@ import seedu.address.model.ReadOnlyStockList;
 public class SaveStockListVersionEvent extends BaseEvent {
 
     public final ReadOnlyStockList data;
+    public final String fileName;
 
-    public SaveStockListVersionEvent(ReadOnlyStockList data) {
+    public SaveStockListVersionEvent(ReadOnlyStockList data, String fileName) {
         this.data = data;
+        this.fileName = fileName;
     }
 
     @Override
