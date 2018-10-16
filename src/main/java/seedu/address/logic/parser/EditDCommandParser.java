@@ -2,8 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditDCommand;
@@ -24,7 +24,7 @@ public class EditDCommandParser implements Parser<EditDCommand> {
     public EditDCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
+                ArgumentTokenizer.tokenize(args, PREFIX_DIST_NAME, PREFIX_DIST_PHONE);
 
 
         Index index;
@@ -36,11 +36,11 @@ public class EditDCommandParser implements Parser<EditDCommand> {
         }
 
         EditDistributorDescriptor editDistributorDescriptor = new EditDistributorDescriptor();
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editDistributorDescriptor.setDistName(ParserUtil.parseDistName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (argMultimap.getValue(PREFIX_DIST_NAME).isPresent()) {
+            editDistributorDescriptor.setDistName(ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DIST_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editDistributorDescriptor.setDistPhone(ParserUtil.parseDistPhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        if (argMultimap.getValue(PREFIX_DIST_PHONE).isPresent()) {
+            editDistributorDescriptor.setDistPhone(ParserUtil.parseDistPhone(argMultimap.getValue(PREFIX_DIST_PHONE).get()));
         }
 
         return new EditDCommand(index, editDistributorDescriptor);
