@@ -15,7 +15,7 @@ import seedu.address.model.tag.Tag;
  */
 public class Drink {
     // Identity fields
-    private final Name name;
+    private Name name;
 
     // Data fields
     private Price costPrice;
@@ -34,6 +34,10 @@ public class Drink {
 
     public Name getName() {
         return name;
+    }
+
+    public void setName(Name name) {
+        this.name = name;
     }
 
     public Price getCostPrice() {

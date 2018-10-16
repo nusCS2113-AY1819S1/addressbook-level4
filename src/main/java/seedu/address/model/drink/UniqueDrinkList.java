@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.drink.exceptions.DrinkNotFoundException;
 import seedu.address.model.drink.exceptions.DuplicateDrinkException;
+import seedu.address.model.drink.exceptions.DuplicateNameException;
 
 /**
  * A list of drinks that enforces uniqueness between its elements and does not allow nulls.
@@ -46,26 +47,38 @@ public class UniqueDrinkList implements Iterable<Drink> {
         internalList.add(toAdd);
     }
 
-    /**
-     * Replaces the drink {@code target} in the list with {@code editedDrink}.
-     * {@code target} must exist in the list.
-     * The drink identity of {@code editedDrink} must not be the same as another existing drink in the list.
-     */
 
-    // TODO: edit rather than delete and re-insert
-    public void setDrink(Drink target, Drink editedDrink) {
-        requireAllNonNull(target, editedDrink);
+    /**
+     * Edits the {@code target} drink's name attribute.
+     * {@code target} must exist in the list.
+     * The new name {@code editedName} must not be the same as another existing drink in the list.
+     */
+    public void editDrinkName(Drink target, Name editedName) {
+        requireAllNonNull(target, editedName);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
             throw new DrinkNotFoundException();
         }
 
-        if (!target.isSameDrink(editedDrink) && contains(editedDrink)) {
-            throw new DuplicateDrinkException();
+        if (!drinkNameIsUnique(editedName)) {
+            throw new DuplicateNameException();
         }
 
-        internalList.set(index, editedDrink);
+        internalList.get(index).setName(editedName);
+    }
+
+    /**
+     * Returns true if (@code editedName} is a unique name.
+     */
+    private boolean drinkNameIsUnique(Name editedName) {
+        for (int i = 0; i < internalList.size(); i++) {
+            if (internalList.get(i).getName().equals(editedName)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     /**
