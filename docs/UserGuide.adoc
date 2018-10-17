@@ -281,7 +281,7 @@ Examples:
 * `class add c/T16 m/CG1111 e/20` +
 Creates a class T16, assigns it to the module CG1111 with the max enrollment size of 20
 
-==== Update Class Enrollment Limits : `class maxenroll`
+==== Update Class Enrollment Limits : `class maxenroll [coming in v1.3]`
 Modifies the max enrollment size for a class for the system. +
 Format: `class maxenroll  c/CLASS_NAME e/NEW_MAX_ENROLLMENT_SIZE`
 
@@ -294,7 +294,7 @@ Examples:
 * `class maxenroll c/T16 e/20` +
 Modifies the new max class enrollment size for the class T16 to be 20
 
-==== Update Class Attendance List : `class modattend`
+==== Update Class Attendance List : `class modattend [coming in v1.3]`
 Modifies the class attendance list for the system. +
 Format: `class modattend c/CLASS_NAME i/ADMISSION_NO`
 
@@ -335,7 +335,7 @@ Examples:
 * `class delete c/T16 m/CG1111` +
 Deletes the class T16 from the module CG1111
 
-==== Assign Student To Class : `class addstudent`
+==== Assign Student To Class : `class addstudent [coming in v1.3]`
 Assigns a student to a class for the system. +
 Format: `class addstudent c/CLASS_NAME m/MODULE_CODE`
 
@@ -348,7 +348,7 @@ Examples:
 * `class addstudent c/T16 i/A6942069M` +
 Adds a student of the admission number A6942069M to the class T16
 
-==== Unassigning Student From Class : `class delstudent`
+==== Unassigning Student From Class : `class delstudent [coming in v1.3]`
 Unassigns a student from the class for the system. +
 Format: `class delstudent c/CLASS_NAME i/ADMISSION_NO`
 
@@ -362,7 +362,7 @@ Examples:
 * `class delstudent c/T16 i/A6942069M` +
 Removes a student of the admission number A6942069M from the class T16
 
-==== Modifying class enrollment limits : `class maxenroll [coming in v1.2]`
+==== Modifying class enrollment limits : `class maxenroll [coming in v1.3]`
 Modifies the max enrollment size for a class for the system. +
 Format: `class maxenroll  c/CLASS_NAME e/NEW_MAX_ENROLLMENT_SIZE`
 
