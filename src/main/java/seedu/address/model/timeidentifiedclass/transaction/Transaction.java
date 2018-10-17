@@ -102,7 +102,11 @@ public class Transaction extends TimeIdentifiedClass {
      */
 
     public static boolean isValidTransactionTime(String transactionTime) {
-        String[] times = transactionTime.split("[/ :]");
+        String[] times = transactionTime.split("[/ \\s+ :]");
+
+        for (int i=0; i<6; i++) {
+            times[i].trim();
+        }
 
         // checks on the different components of the transaction time.
 

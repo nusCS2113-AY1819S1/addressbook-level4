@@ -76,9 +76,9 @@ Format: `latest`
 
 Displays the details of the latest transaction.
 
-=== Set a reminder: `setreminder`
+=== Add a reminder: `setreminder`
 
-Format: `setreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
+Format: `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
 
 Sets and stores a reminder. In v1.2, this is only allowed for the current day.
 In future releases, reminders will be set in the current and future days.
@@ -192,8 +192,8 @@ e.g. `addD dn/Ah Huat Distributors dp/61234567`
 * *Add a Transaction* : `Transaction pr/<product name> pr/<product name> ... pr/<product name` +
 e.g. `transaction pr/Apple pr/Banana pr/Cherry pr/Banana`
 * *View the latest transaction: `latest`
-* *Set a Reminder* : `setreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>` +
-e.g `setreminder time/2018/08/16 08:30:00 message/Remove expired milk from aisle 6.`
+* *Set a Reminder* : `addreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>` +
+e.g `addreminder time/2018/08/16 08:30:00 message/Remove expired milk from aisle 6.`
 * *View due Reminders* : `duereminders`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
