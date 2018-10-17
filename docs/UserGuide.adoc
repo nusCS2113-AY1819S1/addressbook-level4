@@ -29,6 +29,10 @@ JalilEnterprises is for those who *prefer to use a desktop app for stock taking*
 +
 image::Ui.png[width="790"]
 +
+.  You should log into this app via the *`login`* command before you start to use it. +
+Example of how to log in:
+* **`login`**`u/jalil p/dontworrybrother`
+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
@@ -55,6 +59,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Viewing help : `help`
 
 Format: `help`
+
+=== Logging in: `login`
+
+Log into Stock List. +
+Format: `login u/USERNAME p/PASSWORD`
+
+
+Examples:
+
+* `login u/jalil p/dontworrybrother`
+* `login u/kinwhye p/cap1`
 
 === Adding an item: `add`
 
@@ -254,6 +269,8 @@ e.g. `list t/Lab5`
 * *List item status* : `status`
 * *Loan list* : `loanList n/NAME q/QUANTITY l/LOANER` +
 e.g. `loanList n/Arduino q/20 l/KinWhye`
+* *Login* : `login u/USERNAME p/PASSWORD` +
+e.g. `login u/jalil p/dontworrybrother`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
