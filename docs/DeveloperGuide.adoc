@@ -370,6 +370,23 @@ _{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
 
+=== Lost and Found feature
+==== Current Implementation
+
+==== Design Considerations
+
+===== Aspect: How Lost and Found executes
+
+* **Alternative 1** (current choice) Create a lost&found list to record the lost&found history.
+** Pros: Able to list all the lost&found records and history.
+** Cons: May have performance issues in terms of usage.
+
+* **Alternative 2** Just do the same way as Change Status to change the quantity of the item in the StockList.
+** Pros: Easy to handle while only increasing and decreasing the quantity will be used and no need to record all the lost history.
+** Cons: Unable to list all the lost and found history.
+// end::lostcommand[],foundcommand[],lost&foundcommand[]
+
+
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
