@@ -9,9 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.course.Course;
 import seedu.address.model.course.CourseManager;
 
-
-
-
 /**
  * Deletes a course via a provided course code
  */
@@ -22,6 +19,7 @@ public class CourseDeleteCommand extends Command {
             + ": Deletes the course based on the course code that was provided.\n"
             + "Parameters: " + PREFIX_COURSE_CODE + "COURSE_CODE\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_COURSE_CODE + "CS1";
+
 
     public static final String MESSAGE_DELETE_COURSE_SUCCESS = "Deleted course: %1$s";
 

@@ -78,6 +78,5 @@ public class BrowserPanel extends UiPart<Region> {
         browser.getEngine().loadContent(event.message);
         browser.getEngine().setUserStyleSheetLocation(getClass()
             .getResource("/rendering/bootstrap.min.css").toString());
-
     }
 }
