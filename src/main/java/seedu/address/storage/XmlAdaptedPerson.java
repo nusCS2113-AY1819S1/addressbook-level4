@@ -46,9 +46,9 @@ public class XmlAdaptedPerson {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
-    @XmlElementWrapper(name="scoreList")
-    @XmlElement(name="test")
-    private List<XmlAdaptedTest> tests =  new ArrayList<>();
+    @XmlElementWrapper(name = "scoreList")
+    @XmlElement(name = "test")
+    private List<XmlAdaptedTest> tests = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -61,8 +61,8 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
 
-    public XmlAdaptedPerson(String name, String gender, String nationality, String phone,
-                            String email, String address, String grade, List<XmlAdaptedTag> tagged, List<XmlAdaptedTest> tests) {
+    public XmlAdaptedPerson(String name, String gender, String nationality, String phone, String email, String address,
+                            String grade, List<XmlAdaptedTag> tagged, List<XmlAdaptedTest> tests) {
 
         this.name = name;
         this.gender = gender;

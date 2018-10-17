@@ -2,8 +2,10 @@ package seedu.address.model.grade;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
-import seedu.address.model.person.Phone;
+/**
+ * Represents a Marks in the address book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidMarks(String)}
+ */
 
 public class Marks {
 

@@ -1,24 +1,16 @@
 package seedu.address.model.grade;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+
 import java.util.Objects;
 import java.util.Set;
-
-import javax.print.attribute.standard.MediaSize;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.UniquePersonList;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
-import seedu.address.model.person.exceptions.PersonNotFoundException;
-
+/**
+ * Represents a scoreList in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class ScoreList {
 
     private final Set<Test> scoreList = new HashSet<>();

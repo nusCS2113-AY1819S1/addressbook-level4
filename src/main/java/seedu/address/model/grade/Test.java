@@ -3,14 +3,17 @@ package seedu.address.model.grade;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
-
+/**
+ * Represents a Test in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 
 public class Test {
     private final TestName testName;
     private final Marks marks;
 
-    public Test(TestName testName, Marks marks){
-        requireAllNonNull(testName,marks);
+    public Test(TestName testName, Marks marks) {
+        requireAllNonNull(testName, marks);
         this.testName = testName;
         this.marks = marks;
     }

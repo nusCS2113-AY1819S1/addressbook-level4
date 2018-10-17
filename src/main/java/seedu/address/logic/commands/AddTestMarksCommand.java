@@ -13,7 +13,7 @@ import seedu.address.commons.core.Messages;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
+
 import seedu.address.model.Model;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
@@ -21,7 +21,9 @@ import seedu.address.model.grade.TestName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
-
+/**
+ * A command to add person test name and marks
+ */
 public class AddTestMarksCommand extends Command {
     /**
      * A command to add person test name and marks
@@ -32,7 +34,7 @@ public class AddTestMarksCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add test and marks to persons whose names"
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice cs2113quiz1 67";
+            + "Example: "  +  COMMAND_WORD  +  " alice cs2113quiz1 67";
 
 
     public static final String MESSAGE_DUPLICATE_TEST = "This test already exists in the system";

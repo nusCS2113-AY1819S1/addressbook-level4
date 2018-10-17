@@ -26,7 +26,9 @@ import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-
+/**
+ * A command to edit person test marks
+ */
 public class EditTestMarksCommand extends Command {
     /**
      * A command to edit person test marks
@@ -58,9 +60,9 @@ public class EditTestMarksCommand extends Command {
         model.updateFilteredPersonList(predicate);
 
 
-        List<Person> PersonListName = model.getFilteredPersonList();
+        List<Person> personListName = model.getFilteredPersonList();
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
-        Person personToEdit = PersonListName.get(0);
+        Person personToEdit = personListName.get(0);
 
         Test test = new Test(new TestName(testName), new Marks(testMarks));
 
@@ -92,7 +94,9 @@ public class EditTestMarksCommand extends Command {
         return new CommandResult(
                 String.format(Messages.MESSAGE_UPDATED_TEST_LIST, model.getFilteredPersonList().size()));
     }
-
+    /**
+     * createEditedPerson
+     */
     public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
@@ -117,7 +121,10 @@ public class EditTestMarksCommand extends Command {
                 && predicate.equals(((EditTestMarksCommand) other).predicate)); // state check
     }
 
-
+    /**
+     * Stores the details to edit the person with. Each non-empty field value will replace the
+     * corresponding field value of the person.
+     */
     public static class EditPersonDescriptor {
         private Name name;
         private Gender gender;

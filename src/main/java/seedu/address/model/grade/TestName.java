@@ -2,7 +2,10 @@ package seedu.address.model.grade;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
+/**
+ * Represents a TestName in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class TestName {
     public static final String MESSAGE_TEST_NAME_CONSTRAINTS =
             " Test names should only contain alphanumeric characters and "
