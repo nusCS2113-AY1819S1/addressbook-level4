@@ -17,7 +17,8 @@ import seedu.address.model.note.Note;
 public class NoteAddCommandParser implements Parser<NoteAddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the NoteAddCommand
-     * and returns an NoteAddCommand object for execution.
+     * and returns a NoteAddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public NoteAddCommand parse(String args) throws ParseException {

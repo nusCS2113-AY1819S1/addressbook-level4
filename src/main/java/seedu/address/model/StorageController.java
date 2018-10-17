@@ -64,7 +64,7 @@ public class StorageController {
     }
 
     /**
-     This method creates files for all datasets if they do not exist on the local filesystem.
+     * This method creates files for all datasets if they do not exist on the local filesystem.
      */
     private static void createFiles() {
         File gradebook = new File(STORAGE_GRADEBOOK);
