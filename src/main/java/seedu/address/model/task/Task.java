@@ -17,7 +17,7 @@ public class Task {
     // Data fields
     private final TaskDate date;
     private final TaskPriority priority;
-    private boolean completeness;
+    private boolean isComplete;
 
     /**
      * Every field must be present and not null.
@@ -28,7 +28,7 @@ public class Task {
         this.module = module;
         this.date = date;
         this.priority = priority;
-        completeness = false;
+        this.isComplete = false;
     }
 
     public TaskName getName() {
@@ -47,12 +47,16 @@ public class Task {
         return priority;
     }
 
-    public boolean getCompleteness() {
-        return completeness;
+    public boolean getComplete() {
+        return isComplete;
     }
 
     public void setAsCompleted() {
-        completeness = true;
+        isComplete = true;
+    }
+
+    public void setAsUncompleted() {
+        isComplete = false;
     }
 
     /**

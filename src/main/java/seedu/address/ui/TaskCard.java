@@ -32,8 +32,10 @@ public class TaskCard extends UiPart<Region> {
     private Label taskmodule;
     @FXML
     private Label taskdate;
-    //@FXML
-    //private Label taskpriority;
+    @FXML
+    private Label taskpriority;
+    @FXML
+    private Label taskstate;
 
     public TaskCard(Task task, int displayedIndex) {
         super(FXML);
@@ -42,7 +44,20 @@ public class TaskCard extends UiPart<Region> {
         taskname.setText(task.getName().fullName);
         taskmodule.setText(task.getModule().value);
         taskdate.setText(task.getDate().value);
-        taskdate.setText(task.getPriority().value);
+
+        if (task.getPriority().value.equals("1")) {
+            taskpriority.setText("High priority (1)");
+        } else if (task.getPriority().value.equals("2")) {
+            taskpriority.setText("Medium priority (2)");
+        } else {
+            taskpriority.setText("Low priority (3)");
+        }
+
+        if (task.getComplete()) {
+            taskstate.setText("Status: Completed");
+        } else {
+            taskstate.setText("Status: Uncompleted");
+        }
     }
 
     @Override
