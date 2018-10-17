@@ -935,9 +935,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |member of NUSSU |find out how to contact another member within NUSSU |work more efficiently with them
 
-|`* * *` |someone that takes charge of sponsors for events hosted by NUSSU |filter my search such that I would be only looking at the list of sponsors |not need to look through the whole list of addressbook
+|`* * *` |someone that takes charge of sponsors for events hosted by NUSSU |filter my search such that I would be only looking at the list of sponsors |not need to look through the whole list of contact details
 
 |`* * *` |event organizer that is trying to find the contact details of some very specific group of people |have a search and filter function that is flexible enough |find all the search requirements can be done on the application without needing me to look through the whole list
+
+|`* * *` |any user trying to filter the list of contact details|have an intuitive way to filter a large list of people|so that I can get the information that I want easily and quickly
+
+|`* * *` |forgetful user utilizing the newly implemented search pruning feature|keep track of my past search commands|so that I would not need to commit what I typed to memory
 
 |`* * *` |member of the NUSSU treasury |have a budgeting function |fairly allocate budgets to the different clubs/projects
 
@@ -1018,7 +1022,6 @@ As someone that keeps track of the finances for hosting events, I would like an 
 As someone that records what was discussed in a meeting, I would like to be able to keep a record of what everyone said, so that we can use it as a future reference for further discussion.
 
 As someone that constantly sends email to other members of NUSSU/ Sponsors/ Public, I would like to have an access to multiple different templates of emails so that I can focus more on writing the content of the email instead of spending too much time on crafting the overall structure.
-
 
 _{More to be added}_
 
