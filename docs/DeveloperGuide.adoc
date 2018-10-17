@@ -348,13 +348,15 @@ Certain properties of the application can be controlled (e.g App name, logging l
 
 === Storing Transactions Feature
 ==== Current Implementation
-The storage of transactions is facilitated by the `SalesHistory`, `ShopDay` and `Transactions` classes. +
-When `AddressBook` is loaded, it creates an object of the `SalesHistory` class using the `SalesHistory` default
-constructor. The SalesHistory default constructor initialises its `ActiveDay` as the current day. +
-Now, when the user inputs `transaction pr/<product name> pr/<product name> ... pr/product name>` into the CLI, the
-`AddressBookParser` processes this command and creates an object of type `AddTransactionCommand`. +
-`LogicManager` receives this command object and executes it. In its execution, the transaction is added to the current +
-day, that is, the active `ShopDay` in the `SalesHistory` of `AddressBook`. +
+* The storage of transactions is facilitated by the `SalesHistory`, `ShopDay` and `Transactions` classes.
+* When `AddressBook` is loaded, it creates an object of the `SalesHistory` class using the `SalesHistory` default
+constructor. The SalesHistory default constructor initialises its `ActiveDay` as the current day.
+* Now, when the user inputs `transaction pr/<product name> pr/<product name> ... pr/product name>` into the CLI, the
+`AddressBookParser` processes this command and creates an object of type `AddTransactionCommand`.
+* `LogicManager` receives this command object and executes it. In its execution, the transaction is added to the current
+day, that is, the active `ShopDay` in the `SalesHistory` of `AddressBook`.
+
+[NOTE]
 It is important to note that the `ShopDay` class stores each `Transaction` on a `TreeMap`, where each `Transaction` has
 its `transactionTime` as its key. This is to facilitate quick access to any transaction on a given day, and to maintain
 the `Transaction` objects in order of their creation times within memory.
