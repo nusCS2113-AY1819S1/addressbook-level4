@@ -6,6 +6,7 @@ import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 * Limit used to offer a function as a reminder to user about their money usage.
 * */
 public class Limit {
+
     private Date dateStart;
     private Date dateEnd;
     private MoneyFlow limitMoneyFlow;
@@ -20,6 +21,7 @@ public class Limit {
     public String toString () {
         return String.format("LIMIT_FORMAT", dateStart, dateEnd, limitMoneyFlow);
     }
+
 
     /**
      * This function is used to check whether
