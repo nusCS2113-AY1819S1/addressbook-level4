@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.EnumSet;
 
+//@@author jitwei98
 /**
  * Represents filetype available for import/export.
  * Guarantees: immutable; is valid as declared in {@link #isValidFiletype(String)}

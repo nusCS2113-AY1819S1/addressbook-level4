@@ -44,7 +44,7 @@ public interface Model {
     void updatePerson(Person target, Person editedPerson);
 
     /**
-     * Deltes the given tag {@code tag} from all persons {@code person}.
+     * Deletes the given tag {@code tag} from all persons {@code person}.
      * {@code tag} may or may not exist in the address book.
      */
     void deleteTag(Tag tag);
@@ -82,4 +82,9 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Exports the current address book state to a .csv file.
+     */
+    void exportAddressBook();
 }
