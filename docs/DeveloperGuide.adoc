@@ -266,12 +266,12 @@ image::LoginSequenceDiagram.png[width="800"]
 Step 1. The user launches the application for the first time. The `filteredLoginDetails` object will be initialized with
 a list of all the accounts in `LoginBook`.
 
-image::InitialLoginBookList.PNG[width="800"]
+image::InitialLoginBookList.PNG[width="200"]
 
 Step 2. The user executes `login A1234567M zaq1xsw2cde3` command in the input box that matches an account in
 `LoginBook`. `LogicManager` then calls `ParseCommand(login A1234567M zaq1xsw2cde3)` in `AddressBookParser`.
 
-image::CorrectIdPassword.PNG[width="800"]
+image::CorrectIdPassword.PNG[width="200"]
 
 Step 3. `AddressBookParser` instantiates the `LoginUserIdPasswordCommandParser` object and simultaneously calls the `parse(args)` method, returning
 an `LoginUserIdPasswordCommand` object with the user input, parsed, to `AddressBookParser` and `LogicManager`.
