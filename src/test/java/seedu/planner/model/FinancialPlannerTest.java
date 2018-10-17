@@ -22,7 +22,6 @@ import javafx.collections.ObservableList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
-import seedu.planner.model.summary.Summary;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.testutil.RecordBuilder;
 
@@ -100,7 +99,7 @@ public class FinancialPlannerTest {
     private static class FinancialPlannerStub implements ReadOnlyFinancialPlanner {
         private final ObservableList<Record> records = FXCollections.observableArrayList();
         private final ObservableList<Limit> limits = FXCollections.observableArrayList();
-
+        private final SummaryMap summaryMap = new SummaryMap();
         FinancialPlannerStub(Collection<Record> records) {
             this.records.setAll(records);
         }
@@ -117,11 +116,11 @@ public class FinancialPlannerTest {
 
         @Override
         public SummaryMap getSummaryMap() {
-            return new SummaryMap();
-        }
+            return summaryMap;
+        } //Dummy test to pass the check.
 
         @Override
-        public
+        public void setSummaryMap(SummaryMap summaryMap) {} //see as above
 
     }
 

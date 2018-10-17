@@ -1,14 +1,15 @@
 package seedu.planner.model.record;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.List;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.planner.model.record.exceptions.LimitNotFoundException;
 import seedu.planner.model.record.exceptions.RedundantLimitDatesException;
 
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * The DateBasedLimitList is mainly used for store and manage all the limit of the program.
@@ -76,6 +77,11 @@ public class DateBasedLimitList { //implements Iterable<Limit> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    /**
+     * To check whether the limits inside limitList are unique
+     * @param limits
+     * @return
+     */
     private boolean limitsAreUnique(List<Limit> limits) {
         for (int i = 0; i < limits.size() - 1; i++) {
             for (int j = i + 1; j < limits.size(); j++) {

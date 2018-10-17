@@ -1,17 +1,19 @@
 package seedu.planner.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import seedu.planner.commons.exceptions.IllegalValueException;
-import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.storage.xml_jaxb.XmlSerializableClass;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+
+
 
 /**
  * The limit list that is serializable to XML format
@@ -42,7 +44,7 @@ public class XmlSerializableLimitList extends XmlSerializableClass<DateBasedLimi
 
         for (XmlAdaptedLimit l : limits) {
             Limit limit = l.toModelType();
-            if (dateBasedLimitList.hasSameDatesLimit(limit)){
+            if (dateBasedLimitList.hasSameDatesLimit(limit)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_LIMIT);
             }
             dateBasedLimitList.add(limit);

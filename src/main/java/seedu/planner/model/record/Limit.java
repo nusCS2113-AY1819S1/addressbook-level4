@@ -28,7 +28,6 @@ public class Limit {
      */
     public boolean isSameLimitDates (Limit limitIn) {
         return ((dateEnd.equals(limitIn.getDateEnd())) && (dateStart.equals(limitIn.getDateStart())));
-            //TODO: to figure out why its not working.
     }
     public Date getDateStart() {
         return dateStart;

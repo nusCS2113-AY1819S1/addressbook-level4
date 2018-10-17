@@ -106,7 +106,7 @@ public class MainApp extends Application {
             if (!summaryMapOptional.isPresent()) {
                 logger.info("Summary data file not found. Will start based on the sample FinancialPlanner");
             }
-           limitListOptional = storage.readLimitList();
+            limitListOptional = storage.readLimitList();
             initialData.setLimitList(limitListOptional.get());
             //TODO: remove this once storage is combined
             if (summaryMapOptional.isPresent()) {

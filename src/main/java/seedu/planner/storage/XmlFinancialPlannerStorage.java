@@ -40,9 +40,11 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
         return financialPlannerFilePath;
     }
 
-    public Path getSummaryMapFilePath() { return summaryMapFilePath; }
+    public Path getSummaryMapFilePath() {
+        return summaryMapFilePath; }
 
-    public Path getLimitListFilePath() { return limitListFilePath; }
+    public Path getLimitListFilePath() {
+        return limitListFilePath; }
     // ===================== Record List Storage methods ======================================
 
     @Override
