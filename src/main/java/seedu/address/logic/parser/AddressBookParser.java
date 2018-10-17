@@ -117,6 +117,9 @@ public class AddressBookParser {
         case AddReminderCommand.COMMAND_WORD:
             return new AddReminderCommandParser().parse(arguments);
 
+         case ViewDueRemindersCommand.COMMAND_WORD:
+             return new ViewDueRemindersCommand();
+             
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
