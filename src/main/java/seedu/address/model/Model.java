@@ -19,26 +19,26 @@ public interface Model {
     ReadOnlyBookInventory getBookInventory();
 
     /**
-     * Returns true if a book with the same identity as {@code book} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in the BookInventory.
      */
     boolean hasBook(Book book);
 
     /**
      * Deletes the given book.
-     * The book must exist in the address book.
+     * The book must exist in the BookInventory.
      */
     void deleteBook(Book target);
 
     /**
      * Adds the given book.
-     * {@code book} must not already exist in the address book.
+     * {@code book} must not already exist in the BookInventory.
      */
     void addBook(Book book);
 
     /**
      * Replaces the given book {@code target} with {@code editedBook}.
-     * {@code target} must exist in the address book.
-     * The book identity of {@code editedBook} must not be the same as another existing book in the address book.
+     * {@code target} must exist in the BookInventory.
+     * The book identity of {@code editedBook} must not be the same as another existing book in the BookInventory.
      */
     void updateBook(Book target, Book editedBook);
 
@@ -52,27 +52,27 @@ public interface Model {
     void updateFilteredBookList(Predicate<Book> predicate);
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Returns true if the model has previous BookInventory states to restore.
      */
     boolean canUndoAddressBook();
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if the model has undone BookInventory states to restore.
      */
     boolean canRedoAddressBook();
 
     /**
-     * Restores the model's address book to its previous state.
+     * Restores the model's BookInventory to its previous state.
      */
     void undoAddressBook();
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Restores the model's BookInventory to its previously undone state.
      */
     void redoAddressBook();
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Saves the current BookInventory state for undo/redo.
      */
     void commitBookInventory();
 }

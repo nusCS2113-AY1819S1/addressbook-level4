@@ -114,7 +114,7 @@
 //        /* ------------------ Performing edit operation while a filtered list is being shown
 // ------------------------ */
 //
-//        /* Case: filtered book list, edit index within bounds of address book and book list -> edited */
+//        /* Case: filtered book list, edit index within bounds of BookInventory and book list -> edited */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
 //        index = INDEX_FIRST_PERSON;
 //        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
@@ -123,7 +123,7 @@
 //        editedBook = new BookBuilder(bookToEdit).withName(VALID_NAME_BOB).build();
 //        assertCommandSuccess(command, index, editedBook);
 //
-//        /* Case: filtered book list, edit index within bounds of address book but out of bounds of book list
+//        /* Case: filtered book list, edit index within bounds of BookInventory but out of bounds of book list
 //         * -> rejected
 //         */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);

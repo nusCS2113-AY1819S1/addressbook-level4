@@ -25,7 +25,7 @@
 //
 //    @Test
 //    public void find() {
-//        /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
+//        /* Case: find multiple persons in BookInventory, command with leading spaces and trailing spaces
 //         * -> 2 persons found
 //         */
 //        String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
@@ -47,23 +47,23 @@
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find multiple persons in address book, 2 keywords -> 2 persons found */
+//        /* Case: find multiple persons in BookInventory, 2 keywords -> 2 persons found */
 //        command = FindCommand.COMMAND_WORD + " Benson Daniel";
 //        ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL);
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find multiple persons in address book, 2 keywords in reversed order -> 2 persons found */
+//        /* Case: find multiple persons in BookInventory, 2 keywords in reversed order -> 2 persons found */
 //        command = FindCommand.COMMAND_WORD + " Daniel Benson";
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find multiple persons in address book, 2 keywords with 1 repeat -> 2 persons found */
+//        /* Case: find multiple persons in BookInventory, 2 keywords with 1 repeat -> 2 persons found */
 //        command = FindCommand.COMMAND_WORD + " Daniel Benson Daniel";
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find multiple persons in address book, 2 matching keywords and 1 non-matching keyword
+//        /* Case: find multiple persons in BookInventory, 2 matching keywords and 1 non-matching keyword
 //         * -> 2 persons found
 //         */
 //        command = FindCommand.COMMAND_WORD + " Daniel Benson NonMatchingKeyWord";
@@ -80,7 +80,7 @@
 //        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
 //        assertCommandFailure(command, expectedResultMessage);
 //
-//        /* Case: find same persons in address book after deleting 1 of them -> 1 book found */
+//        /* Case: find same persons in BookInventory after deleting 1 of them -> 1 book found */
 //        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
 //        assertFalse(getModel().getBookInventory().getBookList().contains(BENSON));
 //        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
@@ -89,44 +89,44 @@
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find book in address book, keyword is same as name but of different case -> 1 book found */
+//        /* Case: find book in BookInventory, keyword is same as name but of different case -> 1 book found */
 //        command = FindCommand.COMMAND_WORD + " MeIeR";
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find book in address book, keyword is substring of name -> 0 persons found */
+//        /* Case: find book in BookInventory, keyword is substring of name -> 0 persons found */
 //        command = FindCommand.COMMAND_WORD + " Mei";
 //        ModelHelper.setFilteredList(expectedModel);
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find book in address book, name is substring of keyword -> 0 persons found */
+//        /* Case: find book in BookInventory, name is substring of keyword -> 0 persons found */
 //        command = FindCommand.COMMAND_WORD + " Meiers";
 //        ModelHelper.setFilteredList(expectedModel);
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find book not in address book -> 0 persons found */
+//        /* Case: find book not in BookInventory -> 0 persons found */
 //        command = FindCommand.COMMAND_WORD + " Mark";
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find phone number of book in address book -> 0 persons found */
+//        /* Case: find phone number of book in BookInventory -> 0 persons found */
 //        command = FindCommand.COMMAND_WORD + " " + DANIEL.getIsbn().value;
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find address of book in address book -> 0 persons found */
+//        /* Case: find address of book in BookInventory -> 0 persons found */
 //        command = FindCommand.COMMAND_WORD + " " + DANIEL.getQuantity().getValue();
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find email of book in address book -> 0 persons found */
+//        /* Case: find email of book in BookInventory -> 0 persons found */
 //        command = FindCommand.COMMAND_WORD + " " + DANIEL.getPrice().value;
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardUnchanged();
 //
-//        /* Case: find tags of book in address book -> 0 persons found */
+//        /* Case: find tags of book in BookInventory -> 0 persons found */
 //        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
 //        command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
 //        assertCommandSuccess(command, expectedModel);
@@ -141,7 +141,7 @@
 //        assertCommandSuccess(command, expectedModel);
 //        assertSelectedCardDeselected();
 //
-//        /* Case: find book in empty address book -> 0 persons found */
+//        /* Case: find book in empty BookInventory -> 0 persons found */
 //        deleteAllPersons();
 //        command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
 //        expectedModel = getModel();

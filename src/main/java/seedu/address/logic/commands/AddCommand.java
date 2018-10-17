@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.book.Book;
 
 /**
- * Adds a book to the address book.
+ * Adds a book to the BookInventory.
  */
 public class AddCommand extends Command {
 

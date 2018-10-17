@@ -90,7 +90,7 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+     * Returns a {@code ModelManager} with the data from {@code storage}'s BookInventory and {@code userPrefs}. <br>
      * The data from the sample inventory book will be used instead if {@code storage}'s inventory book is not found,
      * or an empty inventory book will be used instead if errors occur when reading {@code storage}'s inventory book.
      */

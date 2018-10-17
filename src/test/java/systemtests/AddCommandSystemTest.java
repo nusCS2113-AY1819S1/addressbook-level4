@@ -55,7 +55,7 @@
 //        /* ------------------------ Perform add operations on the shown unfiltered list
 // ----------------------------- */
 //
-//        /* Case: add a book without tags to a non-empty address book, command with leading spaces and trailing spaces
+//        /* Case: add a book without tags to a non-empty BookInventory, command with leading spaces and trailing spaces
 //         * -> added
 //         */
 //        Book toAdd = AMY;
@@ -73,21 +73,21 @@
 //        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
 //        assertCommandSuccess(command, model, expectedResultMessage);
 //
-//        /* Case: add a book with all fields same as another book in the address book except name -> added */
+//        /* Case: add a book with all fields same as another book in the BookInventory except name -> added */
 //        toAdd = new BookBuilder(AMY).withName(VALID_NAME_BOB).build();
 //        command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + ISBN_DESC_AMY
 //                + PRICE_DESC_AMY + COST_DESC_AMY + QUANTITY_DESC_AMY
 //                + TAG_DESC_FRIEND;
 //        assertCommandSuccess(command, toAdd);
 //
-//        /* Case: add a book with all fields same as another book in the address book except phone and email
+//        /* Case: add a book with all fields same as another book in the BookInventory except phone and email
 //         * -> added
 //         */
 //        toAdd = new BookBuilder(AMY).withIsbn(VALID_ISBN_BOB).withPrice(VALID_PRICE_BOB).build();
 //        command = BookUtil.getAddCommand(toAdd);
 //        assertCommandSuccess(command, toAdd);
 //
-//        /* Case: add to empty address book -> added */
+//        /* Case: add to empty BookInventory -> added */
 //        deleteAllPersons();
 //        assertCommandSuccess(ALICE);
 //

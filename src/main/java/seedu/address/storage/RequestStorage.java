@@ -31,7 +31,7 @@ public interface RequestStorage extends RequestListStorage, UserPrefsStorage {
     void saveRequestList(ReadOnlyRequests requestList) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk.
+     * Saves the current version of the BookInventory to the hard disk.
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */

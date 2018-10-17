@@ -39,7 +39,7 @@ public class XmlFileStorage {
         }
     }
     /**
-     * Returns address book in the file or an empty address book
+     * Returns BookInventory in the file or an empty BookInventory
      */
     public static XmlSerializableBookInventory loadDataFromSaveFile(Path file) throws DataConversionException,
                                                                             FileNotFoundException {
@@ -51,7 +51,7 @@ public class XmlFileStorage {
     }
 
     /**
-     * Returns address book in the file or an empty address book
+     * Returns BookInventory in the file or an empty BookInventory
      */
     public static XmlSerializableRequestList loadRequestsFromSaveFile(Path file) throws DataConversionException,
             FileNotFoundException {

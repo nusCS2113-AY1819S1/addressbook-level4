@@ -54,14 +54,14 @@
 //
         /* ------------------------ Perform select operations on the shown filtered list ---------------------------- */
 //
-//        /* Case: filtered book list, select index within bounds of address book but out of bounds of book list
+//        /* Case: filtered book list, select index within bounds of BookInventory but out of bounds of book list
 //         * -> rejected
 //         */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
 //        int invalidIndex = getModel().getBookInventory().getBookList().size();
 //        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
 //
-//        /* Case: filtered book list, select index within bounds of address book and book list -> selected */
+//        /* Case: filtered book list, select index within bounds of BookInventory and book list -> selected */
 //        Index validIndex = Index.fromOneBased(1);
 //        assertTrue(validIndex.getZeroBased() < getModel().getFilteredBookList().size());
 //        command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
@@ -92,7 +92,7 @@
 //        /* Case: mixed case command word -> rejected */
 //        assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 //
-//        /* Case: select from empty address book -> rejected */
+//        /* Case: select from empty BookInventory -> rejected */
 //        deleteAllPersons();
 //        assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
 //                MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);

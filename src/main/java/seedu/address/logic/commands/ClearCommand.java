@@ -7,7 +7,7 @@ import seedu.address.model.BookInventory;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the BookInventory.
  */
 public class ClearCommand extends Command {
 
