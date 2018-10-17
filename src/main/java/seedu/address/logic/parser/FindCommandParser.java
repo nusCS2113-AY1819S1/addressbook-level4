@@ -19,6 +19,8 @@ import seedu.address.model.person.TagContainsKeywordsPredicate;
 public class FindCommandParser implements Parser<FindCommand> {
 
     public static final String TAG_OPTION_STRING = "\\tag";
+    public static final String EXCLUDE_OPTION_STRING = "\\exclude";
+
     /**
      * Parses the given {@code String} of arguments in the context of the FindCommand
      * and returns an FindCommand object for execution.
@@ -26,6 +28,7 @@ public class FindCommandParser implements Parser<FindCommand> {
      */
     public FindCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
@@ -33,12 +36,58 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         String[] keywords = trimmedArgs.split("\\s+");
         List<String> keywordsList = new ArrayList<String>(Arrays.asList(keywords));
-        if (keywords[0].equals(TAG_OPTION_STRING)) {
+
+        if (!hasValidInputFormat(keywordsList)) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+
+        if (isExcludeTagSearch(keywordsList)) {
+            removesFirstTwoItemsFromKeywordsList(keywordsList);
+            return new FindTagSubCommand(new TagContainsKeywordsPredicate(keywordsList), true);
+        } else if (isIncludeTagSearch(keywordsList)) {
             keywordsList.remove(0);
             return new FindTagSubCommand(new TagContainsKeywordsPredicate(keywordsList));
+        } else if (isExcludePersonSearch(keywordsList)) {
+            keywordsList.remove(0);
+            return new FindPersonSubCommand(new NameContainsKeywordsPredicate(keywordsList), true);
         } else {
             return new FindPersonSubCommand(new NameContainsKeywordsPredicate(keywordsList));
         }
     }
 
+    private boolean isExcludePersonSearch(List<String> keywordsList) {
+        return keywordsList.get(0).equals(EXCLUDE_OPTION_STRING);
+    }
+
+    private boolean isIncludeTagSearch(List<String> keywordsList) {
+        return keywordsList.size() >= 2 && keywordsList.get(0).equals(TAG_OPTION_STRING)
+                && !keywordsList.get(1).equals(EXCLUDE_OPTION_STRING);
+    }
+
+    private boolean isExcludeTagSearch(List<String> keywordsList) {
+        return keywordsList.size() >= 2 && keywordsList.get(0).equals(TAG_OPTION_STRING)
+                && keywordsList.get(1).equals(EXCLUDE_OPTION_STRING);
+    }
+
+    /**
+     * Returns false if the user's input is in the incorrect format
+     */
+    private boolean hasValidInputFormat(List<String> keywordsList) {
+        if (keywordsList.get(0).equals(TAG_OPTION_STRING) && keywordsList.size() == 1) {
+            return false;
+        } else if (keywordsList.get(0).equals(TAG_OPTION_STRING)
+                && keywordsList.get(0).equals(EXCLUDE_OPTION_STRING) && keywordsList.size() == 2) {
+            return false;
+        } else if (keywordsList.get(0).equals(EXCLUDE_OPTION_STRING) && keywordsList.size() == 1) {
+            return false;
+        }
+        return true;
+    }
+
+    private void removesFirstTwoItemsFromKeywordsList(List<String> keywordsList) {
+        assert keywordsList.size() >= 2;
+        keywordsList.remove(1);
+        keywordsList.remove(0);
+    }
 }
