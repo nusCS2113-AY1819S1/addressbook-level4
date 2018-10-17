@@ -25,7 +25,7 @@ public class SaveCommand extends Command {
         this.fileName = fileName;
     }
 
-   @Override
+    @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.saveStockList(fileName);

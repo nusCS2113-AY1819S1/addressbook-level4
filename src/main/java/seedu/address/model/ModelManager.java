@@ -112,7 +112,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredItems.setPredicate(predicate);
     }
     @Override
-    public void updateFilteredItemListByTag(Predicate<Item> predicate){
+    public void updateFilteredItemListByTag(Predicate<Item> predicate) {
         requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
 
