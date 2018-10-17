@@ -8,6 +8,9 @@ import seedu.address.model.timeidentifiedclass.transaction.Transaction;
  * This represents a reminder that is set for a given day and time.
  */
 public class Reminder extends TimeIdentifiedClass {
+
+    public static final String REMINDER_TIME_CONSTRAINTS = "Reminder times must be in yyyy/MM/dd HH:mm:ss format.";
+
     private String time;
     private String reminderMessage;
 

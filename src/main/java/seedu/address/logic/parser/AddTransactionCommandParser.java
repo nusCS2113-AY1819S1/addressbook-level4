@@ -22,7 +22,7 @@ public class AddTransactionCommandParser implements Parser<AddTransactionCommand
         Transaction transaction = new Transaction();
         for (int i = 0; i < productList.length; i++) {
             try {
-                transaction.addProduct(productList[i]);
+                transaction.addProduct(productList[i].trim());
             } catch (ClosedTransactionException e) {
                 // TODO: Exception handling in AddTransaction command parse. Closed transaction not possible as of yet.
             }

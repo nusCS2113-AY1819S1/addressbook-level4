@@ -18,6 +18,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.timeidentifiedclass.shopday.Reminder;
+import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
@@ -52,6 +54,15 @@ public class ParserUtil {
             throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
         return new Name(trimmedName);
+    }
+
+    public static String parseReminderTime(String reminderTime) throws ParseException {
+        requireNonNull(reminderTime);
+        String trimmedTime = reminderTime.trim();
+        if (!Transaction.isValidTransactionTime(reminderTime)) {
+            throw new ParseException(Reminder.REMINDER_TIME_CONSTRAINTS);
+        }
+        return trimmedTime;
     }
 
     /**
