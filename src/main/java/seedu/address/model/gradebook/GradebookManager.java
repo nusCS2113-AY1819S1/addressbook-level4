@@ -17,7 +17,8 @@ public class GradebookManager {
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
     private static final String MESSAGE_LIST_SUCCESS = "\nNumber of Grade Components Listed: %1$s \n%2$s";
-    private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
+    private static final String DELETE_MESSAGE_SUCCESS = "\nModule Code: %1$s \nGradebook Component: %2$s \n"
+            + "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
 
     private ArrayList<Gradebook> gradebooks = new ArrayList<>();
@@ -76,7 +77,7 @@ public class GradebookManager {
     /**
     This method deletes gradebook component to a module in Trajectory.
     */
-    public static CommandResult deleteGradebookComponent (String moduleCode, String gradebookComponentName) {
+    public static String deleteGradebookComponent (String moduleCode, String gradebookComponentName) {
         String status = DELETE_MESSAGE_FAIL;
         for (XmlAdaptedGradebook gc : StorageController.getGradebookStorage()) {
             if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
@@ -86,7 +87,9 @@ public class GradebookManager {
                 break;
             }
         }
-        return new CommandResult("\n" + status);
+        return String.format(status,
+                moduleCode,
+                gradebookComponentName);
     }
 
     /**
