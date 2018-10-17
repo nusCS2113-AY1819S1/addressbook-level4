@@ -67,7 +67,7 @@ public class GroupNameTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         String expected = VALID_GROUP_NAME_TUT_1;
 
         Group group = getTut1();

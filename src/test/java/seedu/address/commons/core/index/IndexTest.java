@@ -74,7 +74,7 @@ public class IndexTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         final String expected = Index.fromOneBased(5).toString();
         final String actual = "[5]";
         final String actual2 = "[6]";
@@ -87,7 +87,7 @@ public class IndexTest {
     }
 
     @Test
-    public void hashCodeTest(){
+    public void hashCodeTest() {
         final Index fifthPersonIndex = Index.fromOneBased(5);
         final Index sixthPersonIndex = Index.fromOneBased(6);
 

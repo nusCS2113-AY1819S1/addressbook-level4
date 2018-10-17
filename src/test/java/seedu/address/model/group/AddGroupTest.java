@@ -31,56 +31,62 @@ public class AddGroupTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new AddGroup(null,null));
+        Assert.assertThrows(NullPointerException.class, () -> new AddGroup(null, null));
     }
 
     @Test
     public void constructor_invalidIndex_throwsIndexOutOfBoundsException() {
         String invalidGroupIndex = "0";
-        Assert.assertThrows(IndexOutOfBoundsException.class, () -> new AddGroup(Index.fromOneBased(Integer.parseInt(invalidGroupIndex)),
+        Assert.assertThrows(IndexOutOfBoundsException.class, () ->
+                new AddGroup(Index.fromOneBased(Integer.parseInt(invalidGroupIndex)),
                 getSingleTypicalPersonIndicesSet()));
     }
 
     @Test
     public void constructor_invalidIndex_throwsNumberFormatException() {
         String invalidGroupIndex = "e";
-        Assert.assertThrows(NumberFormatException.class, () -> new AddGroup(Index.fromOneBased(Integer.parseInt(invalidGroupIndex)),
+        Assert.assertThrows(NumberFormatException.class, () ->
+                new AddGroup(Index.fromOneBased(Integer.parseInt(invalidGroupIndex)),
                 getSingleTypicalPersonIndicesSet()));
     }
 
     @Test
-    public void test_personSetIsSet_isSet(){
+    public void test_personSetIsSet_isSet() {
         AddGroup actual = getAddGroup3();
         List<Person> personList = new ArrayList<>(Arrays.asList(ALICE));
         actual.setPersonSet(personList);
-        assertEquals(getAddGroupWithGroupAndPerson().getPersonSet(),actual.getPersonSet());
+        assertEquals(getAddGroupWithGroupAndPerson().getPersonSet(), actual.getPersonSet());
     }
 
     @Test
-    public void test_groupSetIsSet_isSet(){
+    public void test_groupSetIsSet_isSet() {
         AddGroup actual = getAddGroup3();
         List<Group> groupList = new ArrayList<>(Arrays.asList(getTut1()));
         actual.setGroupSet(groupList);
-        assertEquals(getAddGroupWithGroupAndPerson().getGroup(),actual.getGroup());
+        assertEquals(getAddGroupWithGroupAndPerson().getGroup(), actual.getGroup());
     }
 
     @Test
     public void test_validPersonIndexSet_returnsTrue(){
+
         assertTrue(getAddGroup3().validPersonIndexSet(1));
     }
 
     @Test
     public void test_invalidPersonIndexSet_returnsFalse(){
+
         assertFalse(getAddGroup3().validPersonIndexSet(0));
     }
 
     @Test
     public void test_validGroupIndex_returnsTrue(){
+
         assertTrue(getAddGroup3().validGroupIndex(1));
     }
 
     @Test
     public void test_invalidGroupIndex_returnsFalse(){
+
         assertFalse(getAddGroup3().validGroupIndex(0));
     }
 

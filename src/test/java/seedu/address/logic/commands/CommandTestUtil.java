@@ -127,8 +127,10 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
     public static final String INVALID_GRADE_DESC = " " + PREFIX_GRADE + "10*"; // '*' not allowed in tags
-    public static final String INVALID_PERSON_INDEX_DESC = " " + PREFIX_PERSON_INDEX + "10*"; // '*' not allowed in person index
-    public static final String INVALID_GROUP_INDEX_DESC = " " + PREFIX_GROUP_INDEX + "10*"; // '*' not allowed in group index
+    public static final String INVALID_PERSON_INDEX_DESC = " "
+            + PREFIX_PERSON_INDEX + "10*"; // '*' not allowed in person index
+    public static final String INVALID_GROUP_INDEX_DESC = " "
+            + PREFIX_GROUP_INDEX + "10*"; // '*' not allowed in group index
 
     public static final String INVALID_GROUP_NAME_DESC = " " + PREFIX_NAME + "TUT1*"; // '*' not allowed in group names
     public static final String INVALID_GROUP_LOCATION_DESC = " "

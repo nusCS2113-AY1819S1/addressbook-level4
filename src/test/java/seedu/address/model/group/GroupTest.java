@@ -41,7 +41,7 @@ public class GroupTest {
     }
 
     @Test
-    public void constructor_nullParameters_throwsNullPointerException(){
+    public void constructor_nullParameters_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         Group group = new Group(null, null, null);
     }
@@ -57,7 +57,7 @@ public class GroupTest {
     }
 
     @Test
-    public void addPersons_addPersonSetWithPersonSet_personSetModified(){
+    public void addPersons_addPersonSetWithPersonSet_personSetModified() {
         Group expected = getTypicalGroupsWithPersons();
         expected.addPersons(AMY);
 
@@ -127,7 +127,7 @@ public class GroupTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
 
         Group group = getTut1();
 

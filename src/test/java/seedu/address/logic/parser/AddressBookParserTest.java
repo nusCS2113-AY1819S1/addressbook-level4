@@ -10,11 +10,11 @@ import static seedu.address.logic.parser.CommandParserTestUtil.VALID_GROUP_INDEX
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_1;
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_2;
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_3;
-import static seedu.address.testutil.TypicalAddGroups.getAddGroup1;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_FALSE;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_FALSE;
 import static seedu.address.logic.commands.CommandTestUtil.NUMBER_OF_GROUPS;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroup1;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;

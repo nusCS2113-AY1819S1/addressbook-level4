@@ -144,40 +144,40 @@ public class AddressBookTest {
     }
 
     @Test
-    public void hasPersonInGroup_null_throwsNullPointerException(){
+    public void hasPersonInGroup_null_throwsNullPointerException() {
         addressBook.createGroup(getTypicalGroupsWithPersons());
         thrown.expect(NullPointerException.class);
         assertTrue(addressBook.hasPersonInGroup(null));
     }
 
     @Test
-    public void hasPersonInGroup_groupAlreadyHasPerson_returnsTrue(){
+    public void hasPersonInGroup_groupAlreadyHasPerson_returnsTrue() {
         addressBook.createGroup(getTypicalGroupsWithPersons());
         assertTrue(addressBook.hasPersonInGroup(getAddGroupWithGroupAndPerson()));
     }
 
     @Test
-    public void hasPersonInGroup_groupDoesNotHavePerson_returnsFalse(){
+    public void hasPersonInGroup_groupDoesNotHavePerson_returnsFalse() {
         addressBook.createGroup(getTut1());
         assertFalse(addressBook.hasPersonInGroup(getAddGroupWithGroupAndPerson()));
     }
 
     @Test
-    public void addGroup_null_throwsNullPointerException(){
+    public void addGroup_null_throwsNullPointerException() {
         addressBook.createGroup(getTypicalGroupsWithPersons());
         thrown.expect(NullPointerException.class);
         addressBook.addGroup(null);
     }
 
     @Test
-    public void addGroup_personAlreadyInGroup_throwsDuplicatePersonException(){
+    public void addGroup_personAlreadyInGroup_throwsDuplicatePersonException() {
         addressBook.createGroup(getTypicalGroupsWithPersons());
         thrown.expect(DuplicatePersonException.class);
         addressBook.addGroup(getAddGroupWithGroupAndPerson());
     }
 
     @Test
-    public void addGroup_personNotAlreadyInGroup_addsPersonToGroup(){
+    public void addGroup_personNotAlreadyInGroup_addsPersonToGroup() {
         addressBook.createGroup(getTut1());
         addressBook.addGroup(getAddGroupWithGroupAndPerson());
     }

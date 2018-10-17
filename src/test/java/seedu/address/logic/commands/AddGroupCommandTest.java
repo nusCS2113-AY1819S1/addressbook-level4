@@ -44,7 +44,7 @@ public class AddGroupCommandTest {
     }
 
     @Test
-        public void execute_nullModel_throwsException() throws Exception{
+        public void execute_nullModel_throwsException() throws Exception {
         AddGroupCommand addGroupCommand = new AddGroupCommand(getAddGroup1());
         thrown.expect(NullPointerException.class);
         addGroupCommand.execute(null, commandHistory);
@@ -233,8 +233,8 @@ public class AddGroupCommandTest {
         @Override
         public boolean hasPersonInGroup(AddGroup toAdd) {
             requireNonNull(toAdd);
-            for (Person p : group.getPersons()){
-                for (Person p2 : toAdd.getPersonSet()){
+            for (Person p : group.getPersons()) {
+                for (Person p2 : toAdd.getPersonSet()) {
                     if (p.equals(p2)) {
                         return true;
                     }

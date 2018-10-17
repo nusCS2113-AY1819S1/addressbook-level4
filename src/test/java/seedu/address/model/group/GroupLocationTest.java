@@ -62,7 +62,7 @@ public class GroupLocationTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         String expected = VALID_GROUP_LOCATION_TUT_1;
 
         Group group = getTut1();

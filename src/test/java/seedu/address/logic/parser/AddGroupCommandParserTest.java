@@ -66,7 +66,7 @@ public class AddGroupCommandParserTest {
     public void parse_invalidValue_failure() {
 
         // invalid group index
-        assertParseFailure(parser, INVALID_GROUP_INDEX_DESC  + PERSON_INDEX_DESC_1,
+        assertParseFailure(parser, INVALID_GROUP_INDEX_DESC + PERSON_INDEX_DESC_1,
                 MESSAGE_INVALID_INDEX);
 
         // invalid person index

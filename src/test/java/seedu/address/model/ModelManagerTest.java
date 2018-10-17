@@ -71,32 +71,32 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPersonInGroup_null_throwsNullPointerException(){
+    public void hasPersonInGroup_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         modelManager.hasPersonInGroup(null);
     }
 
     @Test
-    public void hasPersonInGroup_personIsAlreadyInGroup_returnTrue(){
+    public void hasPersonInGroup_personIsAlreadyInGroup_returnTrue() {
         modelManager.createGroup(getTypicalGroupsWithPersons());
         assertTrue(modelManager.hasPersonInGroup(getAddGroupWithGroupAndPerson()));
     }
 
     @Test
-    public void hasPersonInGroup_personIsNotAlreadyInGroup_returnFalse(){
+    public void hasPersonInGroup_personIsNotAlreadyInGroup_returnFalse() {
         modelManager.createGroup(getTut1());
         assertFalse(modelManager.hasPersonInGroup(getAddGroupWithGroupAndPerson()));
     }
 
     @Test
-    public void addGroup_personAlreadyInGroup_throwsDuplicatePersonsException(){
+    public void addGroup_personAlreadyInGroup_throwsDuplicatePersonsException() {
         modelManager.createGroup(getTypicalGroupsWithPersons());
         thrown.expect(DuplicatePersonException.class);
         modelManager.addGroup(getAddGroupWithGroupAndPerson());
     }
 
     @Test
-    public void addGroup_personNotInGroup_addPersonToGroup(){
+    public void addGroup_personNotInGroup_addPersonToGroup() {
         modelManager.createGroup(getTut1());
         modelManager.addGroup(getAddGroupWithGroupAndPerson());
     }

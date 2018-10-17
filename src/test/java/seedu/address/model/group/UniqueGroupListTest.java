@@ -59,7 +59,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void contains_personInList_returnsTrue(){
+    public void contains_personInList_returnsTrue() {
         uniqueGroupList.createGroup(getTypicalGroupsWithPersons());
         assertTrue(uniqueGroupList.contains(getAddGroupWithGroupAndPerson()));
     }
@@ -88,7 +88,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void create_createGroup_addGroupToList(){
+    public void create_createGroup_addGroupToList() {
         uniqueGroupList.createGroup(getTut1());
         ObservableList<Group> expectedUniqueGroupList = FXCollections.observableArrayList();
         expectedUniqueGroupList.add(getTut1());
@@ -96,20 +96,20 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void addGroup_nullGroup_throwsNullPointerException(){
+    public void addGroup_nullGroup_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueGroupList.addGroup(null);
     }
 
     @Test
-    public void addGroup_duplicatePersons_throwsDuplicatePersonException(){
+    public void addGroup_duplicatePersons_throwsDuplicatePersonException() {
         thrown.expect(DuplicatePersonException.class);
         uniqueGroupList.createGroup(getTypicalGroupsWithPersons());
         uniqueGroupList.addGroup(getAddGroupWithGroupAndPerson());
     }
 
     @Test
-    public void addGroup_addPersonToGroup_addPersonToGroupInList(){
+    public void addGroup_addPersonToGroup_addPersonToGroupInList() {
         uniqueGroupList.createGroup(getTut1());
         uniqueGroupList.addGroup(getAddGroupWithGroupAndPerson());
         ObservableList<Group> expectedUniqueGroupList = FXCollections.observableArrayList();
@@ -118,7 +118,7 @@ public class UniqueGroupListTest {
     }
 
     @Test
-    public void addPersons_nullParameter_throwsNullPointerException(){
+    public void addPersons_nullParameter_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueGroupList.addPersons(null);
     }

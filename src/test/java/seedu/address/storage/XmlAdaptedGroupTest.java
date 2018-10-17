@@ -27,7 +27,8 @@ public class XmlAdaptedGroupTest {
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
-    private static final List<XmlAdaptedPerson> VALID_GROUP_PERSONS = getTypicalGroupsWithPersons().getPersons().stream()
+    private static final List<XmlAdaptedPerson> VALID_GROUP_PERSONS =
+            getTypicalGroupsWithPersons().getPersons().stream()
             .map(XmlAdaptedPerson::new)
             .collect(Collectors.toList());
 
