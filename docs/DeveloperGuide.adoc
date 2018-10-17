@@ -400,16 +400,32 @@ The stock operation is similar to the sell operation, refer to sell command for 
 
 * **Alternative 1 (current choice):** Increases quantity in the Quantity Class.
 ** Pros: Code is more cohesive.
-** Cons: Adds more code to Quantity Class
+** Cons: Adds more code to Quantity Class.
 * **Alternative 2:** Replace quantity in the Book Class.
 ** Pros: Does not need to edit Quantity Class.
 ** Cons: Code becomes less cohesive.
 // end::stockcommand[]
 
 // tag::dataencryption[]
-=== [Proposed] Data Encryption
+=== Password Protection
 
-_{Explain here how the data encryption feature will be implemented}_
+==== Current Implementation
+A password is required by the user for him/her to be able to use BookInventory.
+
+A password must be secured and kept using a hashing algorithm. In other words, the password must not be in plain text in the code.
+
+In order to prevent brute force, a user has up to 3 tries to key in the correct password. Failure to do so will end the application.
+
+==== Design Considerations
+
+=====Aspect: How hashing is done
+
+* **Alternative 1: Use existing hashing algorithms in java libraries such as `java.security.*`.
+** Pros: Easy and fast to implement.
+** Cons: If the algorithm in the source code is easily decryptable , can be easily bruteforced.
+* **Alternative 2: Implement own hashing algorithm
+** Pros: Encryption is foreign to interventions, harder to decrypt.
+** Cons: Can be tedious and time-consuming, might risk having similar keys.
 
 // end::dataencryption[]
 

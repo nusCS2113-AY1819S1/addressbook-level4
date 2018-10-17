@@ -31,6 +31,9 @@ image::download.png[width="450", align="left"]
 * If you are a github user, clone the repository.
 * However, it is encouraged that you "Download ZIP" in the drop-down menu.
 * Once it is downloaded, unzip the file.
+. Key-in password
+* A password will be required by the application to use it.
+* If you do not know the password, please contact us using github directly.
 . Input Commands
 * Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -43,6 +46,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ** *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
+
 
 [[Features]]
 == Features
