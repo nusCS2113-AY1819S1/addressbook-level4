@@ -132,7 +132,7 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append("Course Code: ").append(getCourseCode()).append("Matric No: ").append(getMatricNo());
+        builder.append("XmlAdaptedCourse Code: ").append(getCourseCode()).append("Matric No: ").append(getMatricNo());
         return builder.toString();
     }
 
