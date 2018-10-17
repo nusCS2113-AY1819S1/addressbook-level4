@@ -324,9 +324,11 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // tag::dataencryption[]
 === Change Status command
 For this command, 3 classes were created, changeStatusDescriptor, ChangeStatusCommandParser and ChangeStatusCommand.
+
 * The ChangeStatusDescriptor consists of the quantity, originalStatus, and updatedStatus.
 * The ChangeStatusCommandParser takes in the input string from the user and parses it into the index and the changeStatusDescriptor.
 * The ChangeStatusCommand has the execute method. Using the index, the item to update is obtained from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
+
 The updated item list and success message is shown to the user. Updates are committed to the storage.
 === [Proposed] Data Encryption
 
