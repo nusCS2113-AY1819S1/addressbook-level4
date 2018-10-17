@@ -24,7 +24,7 @@ Something Daily (SD) is for those who *prefer to use a desktop app to manage a s
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Copy the file to the folder you want to use as the home folder for your application.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -59,7 +59,7 @@ Format: `help`
 === Adding a task: `TDL_add`
 
 Adds a task to the to-do list +
-Format: `TDL_add t/TASK m/MODULE [d/DATE] [p/PRIORITY]`
+Format: `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 
 ****
 * The format for `m/MODULE` tag is controlled by the list of modules availble in the application. Hence, only valid NUS module codes are allowed.
@@ -229,7 +229,7 @@ There is no need to save manually.
 == Command Summary
 
 * *View* : `TDL_view PARAMETER`
-* *Add* `TDL_add t/TASK m/MODULE [d/DATE] [p/PRIORITY]`
+* *Add* `TDL_add t/TASK m/MODULE d/DATE p/PRIORITY`
 * *Edit* : `TDL_edit INDEX [t/TASK] [m/MODULE] [d/DATE] [p/PRIORITY]`
 * *Delete* : `TDL_delete INDEX`
 * *Complete* : `TDL_complete INDEX`
