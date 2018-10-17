@@ -22,18 +22,6 @@ public interface Model {
     void createAccount(LoginDetails loginDetails);
 
     /**
-     * Deletes an existing account in the address book.
-     * The account must exist in the address book.
-     */
-    //void deleteAccount(LoginDetails delete);
-
-    /**
-     * Changes the password of an existing account in the address book.
-     * The account must exist in the address book.
-     */
-    //void changePassword(LoginDetails change);
-
-    /**
      * Returns true if an account with the same user ID as {@code account} exists in the address book.
      */
     boolean hasAccount(LoginDetails credentials);

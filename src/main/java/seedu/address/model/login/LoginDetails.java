@@ -9,8 +9,8 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class LoginDetails {
-    private UserId userId;
-    private UserPassword userPassword;
+    private final UserId userId;
+    private final UserPassword userPassword;
 
     /**
      * Every field must be present and not null.
@@ -29,10 +29,6 @@ public class LoginDetails {
         return userPassword;
     }
 
-    public void setUserPassword(UserPassword password) {
-        this.userPassword = password;
-    }
-
     /**
      * Returns true if and only if both accounts are of the same user ID.
      */
@@ -45,8 +41,7 @@ public class LoginDetails {
     }
 
     /**
-     * Returns true if both accounts have the same user ID and passwords.
-     * This defines a stronger notion of equality between two accounts.
+     * Returns true if both accounts have the same user ID.
      */
     @Override
     public boolean equals(Object other) {
@@ -59,7 +54,7 @@ public class LoginDetails {
         }
 
         LoginDetails otherAccount = (LoginDetails) other;
-        return otherAccount.getUserId().equals(getUserId()) && otherAccount.getUserPassword().equals(getUserPassword());
+        return otherAccount.getUserId().equals(getUserId());
     }
 
 
@@ -73,7 +68,6 @@ public class LoginDetails {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getUserId())
-                .append(" User password: ")
                 .append(getUserPassword());
         return builder.toString();
     }

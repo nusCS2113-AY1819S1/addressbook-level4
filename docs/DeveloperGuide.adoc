@@ -239,6 +239,105 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::login[]
+=== Login system feature
+==== Current Implementation
+
+The login mechanism utilizes an existing Java library, `FilteredList`, in order to filter out the relevant
+account that is associated with an instance of a successful login. An object belonging to the `FilteredList` class, called
+`filteredLoginDetails`, is instantiated at the start of the application. The `filteredLoginDetails` object initially
+contains a complete list of all existing accounts stored in `LoginBook`. There is one crucial operation in `FilteredList`,
+which is often used:
+
+* `FilteredList#setPredicate(predicate)` -- Filters the list of accounts in `filteredLoginDetails` according to the
+predicate determined after the user inputs their login credentials.
+
+The operation above is called when the method, `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)`, is
+called in `ModelManager`. `ModelManager` implements `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)` and
+`getFilteredLoginDetailsList()` found in the `Model` interface. `getFilteredLoginDetailsList()` is called when the
+list of accounts in `LoginBook` is filtered to the extent where only one or no account remains in the list.
+
+Given below is an example usage scenario and how the login mechanism behaves at each step. The sequence diagram below
+demonstrates the flow of operation and interaction between the `Logic` and `Model` component in the login mechanism.
+Specifically, the diagram shows what happens when the user inputs the correct login credentials.
+
+image::LoginSequenceDiagram.png[width="800"]
+
+Step 1. The user launches the application for the first time. The `filteredLoginDetails` object will be initialized with
+a list of all the accounts in `LoginBook`.
+
+image::InitialLoginBookList.png[width="800"]
+
+Step 2. The user executes `login A1234567M zaq1xsw2cde3` command in the input box that matches an account in
+`LoginBook`. `LogicManager` then calls `ParseCommand(login A1234567M zaq1xsw2cde3)` in `AddressBookParser`.
+
+image::CorrectIdPassword.png[width="800"]
+
+Step 3. `AddressBookParser` instantiates the `LoginUserIdPasswordCommandParser` object and simultaneously calls the `parse(args)` method, returning
+an `LoginUserIdPasswordCommand` object with the user input, parsed, to `AddressBookParser` and `LogicManager`.
+
+Step 4. `LogicManager` calls the `execute()` method in `LoginUserIdPasswordCommand`. Next, `LoginUserIdPasswordCommand`
+calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the computed predicate from user ID field input.
+
+Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, which then filters out accounts whose user Id is a
+mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown below.
+
+image::ParseCorrectIdList.png[width="800"]
+
+Step 6. `LoginUserIdPasswordCommand` calls `updateFilteredLoginDetailsList(updatedPasswordPredicate)` in `Model` with the
+computed predicate from user password field input.
+
+Step 7. `Model` calls `setPredicate(updatedPasswordPredicate)` in `FilteredList`, which then further filters out accounts
+whose password is a mismatch with updatedPasswordPredicate. `filteredLoginDetails` is further updated as shown below.
+
+image::ParseCorrectIdList.png[width="800"]
+
+[NOTE]
+In step 2, if the user executes `login A1234561M zaq1xsw2cde3` command instead, the application will continue with steps
+2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
+list as shown in the image below.
+
+image::WrongIdCorrectPassword.png[width="800"]
+image::WrongIdOrPasswordList.png[width="800"]
+
+[NOTE]
+In step 2, if the user executes `login A1234567M zaq1xsw2cde4` command instead, the application will continue with steps
+2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
+list as shown in the image below.
+
+image::CorrectIdWrongPassword.png[width="800"]
+image::WrongIdOrPasswordList.png[width="800"]
+
+[NOTE]
+In step 2, if the user executes `login A1234561M zaq1xsw2cde4` command instead, the application will continue with steps
+2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
+list as shown in the image below.
+
+image::WrongIdPassword.png[width="800"]
+image::WrongIdOrPasswordList.png[width="800"]
+
+[NOTE]
+In all cases where the user inputs either the wrong ID or password or both, `showLoginError()` in `UserLoginException` will be
+called which brings up a warning dialog box that informs the user of wrong input credentials.
+
+image::LoginException.png[width="800"]
+
+The activity diagram below shows the overall picture of how the login mechanism works.
+
+image::LoginActivityDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How login data is stored
+
+* **Alternative 1 (current choice):** Saves login credentials in loginbook.xml in XML format.
+** Pros: Easier to read, and versioning is possible.
+** Cons: XML data file takes up more storage space.
+* **Alternative 2:** Saves login credentials using JSON.
+** Pros: Does not take up a lot of space.
+** Cons: Harder to read.
+// end::login[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -850,13 +949,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |member of the NUSSU treasury |view requests for grants from the clubs |allocate them the grant if the request is accepted by the NUSSU
 
-|`* * *` |executive member of NUSSU |log into the application with the relevant credentials |gain secure access to the application
+|`* * *` |executive member of NUSSU |log into the application |gain secure access to the application
 
-|`* * *` |executive member of NUSSU |create a new account for the application |gain access to certain features of the application relevant to my role when I log in
+|`* * *` |executive member of NUSSU |create a new account for the application with my relevant role |gain access to certain features of the application relevant to my role when I log in using the created account details
 
-|`* * *` |executive member of NUSSU |delete an existing account from the application |clear my login credentials from the application when I am not using it anymore
-
-|`* * *` |executive member of NUSSU |change the password of an existing account |feel more secure about my account login credentials
+|`* * *` |executive member of NUSSU |log into the application specific to my role |gain access to certain features of the application relevant to my role when I log in
 
 |`* *` |general secretary of NUSSU |have the option to backup all, or even specific segments of application data into a data file |recover the required segments of data when there is an accidental deletion of data
 
@@ -871,10 +968,6 @@ As an executive officer of NUSSU, I would like to view which other committees my
 As an executive officer of NUSSU, I can log into the app with the required credentials, so that I can access certain functionalities of the app exclusive to my credentials only.
 
 As an executive member of NUSSU, I can create a new account for myself to log into the app, so that I can access the functionalities of the app.
-
-As an executive member of NUSSU, I can delete an existing account, so that the account that is redundant will be removed from the database.
-
-As an executive member of NUSSU, I can change the password of an existing account, so that I can make my account more secure.
 
 As a member of NUSSU, I would like to find out how to contact another member within NUSSU so that I can work more efficiently with them.
 
@@ -1054,20 +1147,19 @@ Use case ends
 
 *MSS*
 
-1.  User types a command to access a certain functionality in NUSSU-Connect
-2.  NUSSU-Connect prompts user to login first by entering login credentials
-3.  User types in login credentials along with the login command
-4.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
+1.  NUSSU-Connect prompts user to login first by entering login credentials
+2.  User types in login credentials along with the login command
+3.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 3a. User types in wrong password or user ID
+* 2a. User types in wrong password or user ID
 +
 [none]
-** 3a1. NUSSU-Connect displays error message and continues to prompt user for login credentials before doing anything else
+** 2a1. NUSSU-Connect continues to prompt user for login credentials before giving access to user
 +
 Use case ends.
 
@@ -1097,63 +1189,6 @@ Use case ends.
 ** 3a1. NUSSU-Connect shows error message to user and and does not create a new account
 +
 Use case ends.
-
-=== Use case: Delete current user accounts
-
-*MSS*
-
-1.  User types command together with user ID and password to delete account associated with input user ID and password
-2.  NUSSU-Connect account associated with input user ID and respective password and shows successful execution message
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. User types in the wrong current password associated with the user ID
-+
-[none]
-** 1a1. NUSSU-Connect shows error message to user and cancels deletion of account
-+
-Use case ends.
-* 1b. User wants to delete a non-existent user account
-+
-[none]
-** 1b1. NUSSU-Connect shows error message to user and cancels deletion of account
-+
-Use case ends.
-
-=== Use case: Changing password of current user accounts
-
-*MSS*
-
-1.  User types command with the relevant credentials of an existing account to change that account's password
-2.  NUSSU-Connect changes password of account associated with input user ID and new password and shows successful execution message
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. User types in the wrong current password associated with the user ID
-+
-[none]
-** 1a1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-* 1b. User wants to change the password of a non-existent user account
-+
-[none]
-** 1b1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-* 1c. User types in new password that matches current old password
-+
-[none]
-** 1c1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-
 
 _{More to be added}_
 
