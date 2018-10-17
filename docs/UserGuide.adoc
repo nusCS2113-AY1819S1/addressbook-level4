@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/ChewKinWhye/main
 
-By: `Group T12-3`      Since: `Sep 2018`      Licence: `NUS`
+By: `Team T12-3`      Since: `Sep 2018`      Licence: `NUS`
 
 == Introduction
 
