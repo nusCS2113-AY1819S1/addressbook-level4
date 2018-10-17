@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.group.Group;
 
 /**
- * Creates a group in the addressbook
+ * Creates a group in the AddressBook
  */
 public class CreateGroupCommand extends Command {
 
@@ -23,13 +23,13 @@ public class CreateGroupCommand extends Command {
             + PREFIX_NAME + "GROUP_NAME "
             + PREFIX_GROUP_LOCATION + "GROUP_LOCATION "
             + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example:" + COMMAND_WORD + " "
-            + PREFIX_NAME + "TUT[E01] "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "TUT[01] "
             + PREFIX_GROUP_LOCATION + "E1-06-01 "
-            + PREFIX_TAG + "SmartGroup";
+            + PREFIX_TAG + "MA1501";
 
     public static final String MESSAGE_SUCCESS = "New group added: %1$s";
-    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exist in the Student Management System.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "This group already exists in the student management system";
 
     private final Group toCreate;
 

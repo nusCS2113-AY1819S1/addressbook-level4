@@ -37,6 +37,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private GroupListPanel groupListPanel;
+    private GroupPersonListPanel groupPersonListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -57,10 +58,14 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane groupListPanelPlaceholder;
 
     @FXML
+    private StackPane groupPersonListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -133,6 +138,9 @@ public class MainWindow extends UiPart<Stage> {
         groupListPanel = new GroupListPanel(logic.getFilteredGroupList());
         groupListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
 
+        groupPersonListPanel = new GroupPersonListPanel();
+        groupPersonListPanelPlaceholder.getChildren().add(groupPersonListPanel.getRoot());
+
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -202,6 +210,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public GroupListPanel getGroupListPanel() {
         return groupListPanel;
+    }
+
+    public GroupPersonListPanel getGroupPersonListPanel() {
+        return groupPersonListPanel;
     }
 
     void releaseResources() {

@@ -52,30 +52,31 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 
 === Creating a group: `group` `grp`
-Creates a group in the address book +
-Format: `group n/NAME l/LOCATION` +
-Shortcut Format: `grp n/NAME l/LOCATION` +
+Creates a group in the student management system +
+Format: `group n/NAME l/LOCATION [t/TAG] ...`  +
+Shortcut Format: `grp n/NAME l/LOCATION [t/TAG] ...` +
 ****
-* Creates a group with the specified NAME and LOCATION
-****
-
-Examples:
-
-* `group n/CS2113 l/LT15`
-* `grp n/CS2113 l/LT01`
-
-=== Populating a group: `pop`
-Adds person(s) to a group +
-Format: `pop n/NAME l/LOCATION i/INDEX [MORE_INDICES]` +
-****
-* Adds a person at specified INDEX(s) to group at specified NAME and LOCATION.
-* The index refers to the index number shown in the displayed person list.
-* The index must be a positive integer 1, 2, 3, …​
+* Creates a group with the specified NAME, LOCATION and TAG(s)
 ****
 
 Examples:
 
-* pop n/CS2113 l/LT15 i/2 3 4 5
+* `group n/CS2113 l/LT15 t/java`
+* `grp n/CS2113 l/LT01 t/c t/cpp`
+
+=== Add students a group: `addgroup` `addgrp`
+Adds student(s) to a group in the student management system +
+Format: `addgroup g/INDEX p/INDEX ...` +
+Shortcut Format: `addgrp g/INDEX p/INDEX ...` +
+****
+* Adds person(s) at specified INDEX(s) to group at specified at INDEX.
+* The index refers to the index number shown in the displayed group/person list.
+****
+
+Examples:
+
+* addgroup g/1 p/1
+* addgrp g/1 p/1 p/2
 
 === List a group of students: 'scorefilter a/56 or b/56'
 List out  students who score above/below certain grade.
@@ -365,6 +366,10 @@ e.g. `add n/James Ho g/M nat/CN p/22224444 e/jamesho@example.com a/123, Clementi
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
+* *Create Group* : `group n/NAME l/LOCATION [t/TAG] ...` +
+e.g. `group n/CS2040C l/LT15 t/cpp`
+* *Add to Group* : `addgroup g/INDEX p/INDEX ...` +
+e.g. `addgroup g/1 p/1 p/2`
 * *Edit* : `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +

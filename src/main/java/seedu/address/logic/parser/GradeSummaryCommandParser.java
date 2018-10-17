@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_SEVENTY_FIVE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TWENTY_FIVE;
 
 import seedu.address.logic.commands.GradeSummaryCommand;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

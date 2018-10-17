@@ -8,6 +8,13 @@ import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_FALSE;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_FALSE;
 import static seedu.address.logic.commands.CommandTestUtil.NUMBER_OF_GROUPS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP_INDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERSON_INDEX;
+import static seedu.address.logic.parser.CommandParserTestUtil.VALID_GROUP_INDEX_1;
+import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_1;
+import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_2;
+import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_3;
+import static seedu.address.testutil.TypicalAddGroups.getAddGroup1;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -19,6 +26,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -59,11 +67,29 @@ public class AddressBookParserTest {
         assertEquals(new AddCommand(person), command);
     }
 
+    /**
+     * Command to create a group
+     * @throws Exception
+     */
     @Test
     public void parseCommand_group() throws Exception {
         Group group = new GroupBuilder().build();
         CreateGroupCommand command = (CreateGroupCommand) parser.parseCommand(GroupUtil.getCreateGroupCommand(group));
         assertEquals(new CreateGroupCommand(group), command);
+    }
+
+    /**
+     * Command to add persons to a group
+     * @throws Exception
+     */
+    @Test
+    public void parseCommand_addGroup() throws Exception {
+        AddGroupCommand command = (AddGroupCommand) parser.parseCommand(AddGroupCommand.COMMAND_WORD + " "
+                + PREFIX_GROUP_INDEX + VALID_GROUP_INDEX_1
+                + " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_1
+                + " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_2
+                + " " + PREFIX_PERSON_INDEX + VALID_PERSON_INDEX_3);
+        assertEquals(new AddGroupCommand(getAddGroup1()), command);
     }
 
     @Test
