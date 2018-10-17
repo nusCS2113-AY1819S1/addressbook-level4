@@ -37,7 +37,7 @@ public class XmlFinancialPlannerStorageTest {
     }
 
     private java.util.Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(String filePath) throws Exception {
-        return new XmlFinancialPlannerStorage(Paths.get(filePath))
+        return new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
                 .readFinancialPlanner(addToTestDataPathIfNotNull(filePath));
     }
 
@@ -78,20 +78,22 @@ public class XmlFinancialPlannerStorageTest {
 
     @Test
     public void readAndSaveFinancialPlanner_allInOrder_success() throws Exception {
-        Path filePath = testFolder.getRoot().toPath().resolve("TempFinancialPlanner.xml");
+        Path filePathRecordList = testFolder.getRoot().toPath().resolve("TempFinancialPlanner.xml");
+        Path filePathSummaryMap = testFolder.getRoot().toPath().resolve("TempSummaryMap.xml");
+        Path filePathLimitList = testFolder.getRoot().toPath().resolve("TempLimitList.xml");
         FinancialPlanner original = getTypicalFinancialPlanner();
-        XmlFinancialPlannerStorage xmlFinancialPlannerStorage = new XmlFinancialPlannerStorage(filePath);
+        XmlFinancialPlannerStorage xmlFinancialPlannerStorage = new XmlFinancialPlannerStorage(filePathRecordList, filePathSummaryMap, filePathLimitList);
 
         //Save in new file and read back
-        xmlFinancialPlannerStorage.saveFinancialPlanner(original, filePath);
-        ReadOnlyFinancialPlanner readBack = xmlFinancialPlannerStorage.readFinancialPlanner(filePath).get();
+        xmlFinancialPlannerStorage.saveFinancialPlanner(original, filePathRecordList);
+        ReadOnlyFinancialPlanner readBack = xmlFinancialPlannerStorage.readFinancialPlanner(filePathRecordList).get();
         assertEquals(original, new FinancialPlanner(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addRecord(BURSARY);
         original.removeRecord(INDO);
-        xmlFinancialPlannerStorage.saveFinancialPlanner(original, filePath);
-        readBack = xmlFinancialPlannerStorage.readFinancialPlanner(filePath).get();
+        xmlFinancialPlannerStorage.saveFinancialPlanner(original, filePathRecordList);
+        readBack = xmlFinancialPlannerStorage.readFinancialPlanner(filePathRecordList).get();
         assertEquals(original, new FinancialPlanner(readBack));
 
         //Save and read without specifying file path
@@ -113,7 +115,7 @@ public class XmlFinancialPlannerStorageTest {
      */
     private void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, String filePath) {
         try {
-            new XmlFinancialPlannerStorage(Paths.get(filePath))
+            new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
                     .saveFinancialPlanner(financialPlanner, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);

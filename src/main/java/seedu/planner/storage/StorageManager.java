@@ -7,16 +7,16 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.collections.ObservableList;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
+import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.storage.DataSavingExceptionEvent;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
-import seedu.planner.model.record.Record;
+import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
@@ -172,11 +172,41 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    // ================ LimitList storage methods ==============================
+
+    @Override
+    public Path getLimitListFilePath() {
+        return financialPlannerStorage.getLimitListFilePath();
+    }
+
+    @Override
+    public Optional<DateBasedLimitList> readLimitList() throws DataConversionException, IOException {
+        return readLimitList(financialPlannerStorage.getLimitListFilePath());
+    }
+
+    @Override
+    public Optional<DateBasedLimitList> readLimitList(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return financialPlannerStorage.readLimitList(filePath);
+    }
+
+    @Override
+    public void saveLimitList(ReadOnlyFinancialPlanner limitList) throws IOException {
+        saveLimitList(limitList, financialPlannerStorage.getLimitListFilePath());
+    }
+
+    @Override
+    public void saveLimitList(ReadOnlyFinancialPlanner limitList, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        financialPlannerStorage.saveLimitList(limitList, filePath);
+    }
+
+    @Override
     @Subscribe
-    public void handleLimitListChangedEvent (FinancialPlannerChangedEvent event) {
+    public void handleLimitListChangedEvent(LimitListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveRecordList(event.data);
+            saveLimitList(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

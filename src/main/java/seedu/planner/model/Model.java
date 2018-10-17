@@ -33,7 +33,7 @@ public interface Model {
     /**
      * Returns true if a limit with the same dates exists.
      */
-    boolean hasSameDateLimit(Limit limitin);
+    boolean hasSameDateLimit(Limit limitIn);
     /**
      * Deletes the given record.
      * The record must exist in the financial planner.
@@ -77,6 +77,9 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered record list */
     ObservableList<Record> getFilteredRecordList();
+
+    /** Returns an unmodifiable view of the filtered limit list */
+    ObservableList<Limit> getLimitList();
 
     /**
      * Updates the filter of the filtered record list to filter by the given {@code predicate}.

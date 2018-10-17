@@ -34,11 +34,11 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
         } else {
             startDate = ParserUtil.parseDate(argList[0]);
             endDate = ParserUtil.parseDate(argList[1]);
-        if (!isDateOrderValid(startDate, endDate)) {
-            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE)));
+            if (!isDateOrderValid(startDate, endDate)) {
+                throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE)));
+            }
+            return new SummaryCommand(startDate, endDate);
         }
-        return new SummaryCommand(startDate, endDate);
-    }
     }
     /**
      * Returns true if none of the prefixes contains empty {@code Optional} values in the given

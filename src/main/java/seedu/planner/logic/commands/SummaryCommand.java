@@ -15,7 +15,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.summary.Summary;
 
 /** List all the summary of records within a period of time specified */
-public class SummaryCommand extends Command{
+public class SummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "summary";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the summary for each day for a period of time. "

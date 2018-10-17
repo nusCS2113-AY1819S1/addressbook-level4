@@ -2,7 +2,6 @@ package seedu.planner.commons.events.model;
 
 import seedu.planner.commons.events.BaseEvent;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
-import seedu.planner.model.summary.SummaryMap;
 
 /** Indicates that the summary map in the model has been changed*/
 public class SummaryMapChangedEvent extends BaseEvent {

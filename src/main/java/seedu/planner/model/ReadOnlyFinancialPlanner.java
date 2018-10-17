@@ -2,6 +2,7 @@ package seedu.planner.model;
 
 import javafx.collections.ObservableList;
 
+import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryMap;
@@ -23,4 +24,6 @@ public interface ReadOnlyFinancialPlanner {
     void setSummaryMap(SummaryMap summaryMap);
 
     ObservableList<Limit> getLimitList();
+
+    void setLimitList (DateBasedLimitList limitList);
 }

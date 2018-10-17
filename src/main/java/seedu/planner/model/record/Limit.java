@@ -1,5 +1,6 @@
 package seedu.planner.model.record;
 
+import static java.lang.Math.abs;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
@@ -23,14 +24,11 @@ public class Limit {
 
     /**
      * This function is used to check whether
-     * @param limitin
+     * @param limitIn
      * @return
      */
     public boolean isSameLimitDates (Limit limitIn) {
-        if (limitIn.dateEnd == dateEnd && limitIn.dateStart == dateStart) {
-            return true;
-        }
-        return false;
+        return ((dateEnd.equals(limitIn.getDateEnd())) && (dateStart.equals(limitIn.getDateStart())));
     }
     public Date getDateStart() {
         return dateStart;
@@ -54,7 +52,7 @@ public class Limit {
         Date recordDate;
         recordDate = record.getDate();
         return ((dateStart.isEarlierThan(recordDate) && dateEnd.isLaterThan(recordDate))
-            || dateEnd == recordDate || dateStart == recordDate);
+            || dateEnd.equals(recordDate) || dateStart.equals(recordDate));
     }
 
     /**
@@ -64,6 +62,6 @@ public class Limit {
      * @return
      */
     public boolean isExceeded (Double money) {
-        return (limitMoneyFlow.toDouble() < money);
+        return (abs(limitMoneyFlow.toDouble()) < abs(money));
     }
 }

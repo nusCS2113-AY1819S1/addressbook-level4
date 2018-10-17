@@ -13,6 +13,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
+import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
@@ -70,6 +71,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new SummaryMapChangedEvent(versionedFinancialPlanner));
     }
 
+    /** Raises an event to indicate the limit list has changed */
+    private void indicateLimitListChanged() {
+        raise(new LimitListChangedEvent(versionedFinancialPlanner));
+    }
+
     //=========== Financial planner standard operations ============================================
 
     @Override
@@ -124,14 +130,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteLimit(Limit target) {
         versionedFinancialPlanner.removeLimit(target);
-        indicateFinancialPlannerChanged();
+        indicateLimitListChanged();
     }
 
     @Override
     public void addLimit(Limit limitIn) {
         versionedFinancialPlanner.addLimit(limitIn);
 
-        indicateFinancialPlannerChanged();
+        indicateLimitListChanged();
     }
     @Override
     public boolean isExceededLimit (Limit limitIn) {
@@ -151,6 +157,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //show all the records
+    @Override
+    public ObservableList<Limit> getLimitList() {
+        return FXCollections.unmodifiableObservableList(limits);
+    }
+
     @Override
     public void updateFilteredRecordList(Predicate<Record> predicate) {
         requireNonNull(predicate);

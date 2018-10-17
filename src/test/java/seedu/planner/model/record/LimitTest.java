@@ -1,4 +1,5 @@
 package seedu.planner.model.record;
 
-public class LimitList {
+public class LimitTest {
+
 }

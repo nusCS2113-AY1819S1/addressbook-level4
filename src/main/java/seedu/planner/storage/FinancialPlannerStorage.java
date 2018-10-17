@@ -4,12 +4,11 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import javafx.collections.ObservableList;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
-import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.summary.SummaryMap;
 
 /**
@@ -21,6 +20,11 @@ public interface FinancialPlannerStorage {
      * Returns the file path of the data file of the record list storage.
      */
     Path getRecordListFilePath();
+
+    /**
+     * Returns the file path for the data file of the limit list storage.
+     */
+    Path getLimitListFilePath();
 
     /**
      * Returns the file path of the data file for SummaryMap storage
@@ -110,6 +114,28 @@ public interface FinancialPlannerStorage {
     void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
 
     // ================ Limit List storage methods ===========================
-    //TODO: @Oscar put your limit functions here
+    /**
+     * Returns limitlist data as a limitlist.
+     * @return
+     * @throws DataConversionException
+     * @throws IOException
+     */
+    Optional<DateBasedLimitList> readLimitList() throws DataConversionException, IOException;
 
+    /**
+     * see previous one
+     */
+    Optional<DateBasedLimitList> readLimitList(Path filePath) throws DataConversionException, IOException;
+
+    /**
+     * save the given limitlist to the storage.
+     * @param limitList
+     * @throws IOException
+     */
+    void saveLimitList(ReadOnlyFinancialPlanner limitList) throws IOException;
+
+    /**
+     * @see #saveLimitList(ReadOnlyFinancialPlanner, Path)
+     */
+    void saveLimitList(ReadOnlyFinancialPlanner limitList, Path filePath) throws IOException;
 }

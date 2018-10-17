@@ -228,7 +228,8 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the RecordList data in xml format and read it back.
+* can save the LimitList data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -880,6 +881,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |user |a secure place to store my expense records |keep my financial data safe
 
 |`*` |user |archive my old expenses history |look back at my expenses history whenever I need it
+|=======================================================================
 
 _{More to be added}_
 
@@ -924,18 +926,17 @@ Use case ends.
 ** Use case resumes at step 6.
 
 [discrete]
-=== 2.  Use case: Delete expense entry. [Linh Chi]
+
+=== 2.  Use case: Delete expense entry whose date is required. [Linh Chi]
 
 *MSS*
 
-1.  User requests to delete an entry
-2.  FinancialPlanner requests for date of entry to be deleted
-3.  User enters the date entry was added
-4.  FinancialPlanner shows list of entries and requests for entry to be deleted
-5.  User enters entry to be deleted
-6.  FinancialPlanner entry confirms entry to be deleted
-7.  User confirms the deletion
-8.  FinancialPlanner deletes the entry
+1.  User requests to delete records whose date is required.
+2.  FinancialPlanner requests for date of entry to be deleted.
+3.  User enters the date entry he/she wants to delete.
+4.  FinancialPlanner entry confirms date to be deleted.
+5.  User confirms the deletion
+6.  FinancialPlanner deletes the entry
 +
 Use case ends.
 
@@ -947,13 +948,13 @@ Use case ends.
 * 3a. User’s input is invalid.
 ** FinancialPlanner throws invalid format error and shows format needed.
 ** Use case resumes at step 2.
-* 3b User’s input date has no entries
+* 3b. User’s input date has no entries
 ** FinancialPlanner throws no entry error.
 ** Use case resumes at step 2.
-* 5a User’s input is not a valid entry.
+* 4a. User’s input is not a valid entry.
 ** FinancialPlanner throws invalid data error and resumes at step 4.
-* 7a User declines the confirmation.
-** Use case resumes at step 4.
+* 5a. User declines the confirmation.
+** Use case resumes at step 3.
 
 [discrete]
 === 3.  Use case: See history of expenses for a certain period [Vincent]

@@ -7,7 +7,7 @@ import javax.xml.bind.JAXBException;
 
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.commons.util.XmlUtil;
-import seedu.planner.storage.xml_jaxb.XmlSerializableClass;
+import seedu.planner.storage.xmljaxb.XmlSerializableClass;
 
 /**
  * Stores any {@code XmlSerializableClass} data in an XML file

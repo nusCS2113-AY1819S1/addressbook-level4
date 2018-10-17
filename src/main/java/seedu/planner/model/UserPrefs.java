@@ -37,7 +37,8 @@ public class UserPrefs {
         return financialPlannerFilePath;
     }
 
-    public Path getFinancialPlannerLimitFilePath() { return financialPlannerLimitFilePath; }
+    public Path getFinancialPlannerLimitFilePath() {
+        return financialPlannerLimitFilePath; }
 
     public void setFinancialPlannerFilePath(Path financialPlannerFilePath) {
         this.financialPlannerFilePath = financialPlannerFilePath;
