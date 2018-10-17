@@ -65,92 +65,92 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddDistributorsCommand.COMMAND_WORD:
-            return new AddDistributorsCommandParser().parse(arguments);
+            case AddDistributorsCommand.COMMAND_WORD:
+                return new AddDistributorsCommandParser().parse(arguments);
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
+            case AddCommand.COMMAND_WORD:
+                return new AddCommandParser().parse(arguments);
 
-        case EditDistributorsCommand.COMMAND_WORD:
-            return new EditDistributorsCommandParser().parse(arguments);
+            case EditDistributorsCommand.COMMAND_WORD:
+                return new EditDistributorsCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            case EditCommand.COMMAND_WORD:
+                return new EditCommandParser().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
 
-        case DeleteDistributorsCommand.COMMAND_WORD:
-            return new DeleteDistributorsCommandParser().parse(arguments);
+            case DeleteDistributorsCommand.COMMAND_WORD:
+                return new DeleteDistributorsCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-        case FindDistributorsCommand.COMMAND_WORD:
-            return new FindDistributorsCommandParser().parse(arguments);
+            case FindDistributorsCommand.COMMAND_WORD:
+                return new FindDistributorsCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            case FindCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
 
-        case ListDistributorsCommand.COMMAND_WORD:
-            return new ListDistributorsCommand();
+            case ListDistributorsCommand.COMMAND_WORD:
+                return new ListDistributorsCommand();
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
-        case UndoDistributorsCommand.COMMAND_WORD:
-            return new UndoDistributorsCommand();
+            case UndoDistributorsCommand.COMMAND_WORD:
+                return new UndoDistributorsCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
 
-        case AddTransactionCommand.COMMAND_WORD:
-            return new AddTransactionCommandParser().parse(arguments);
+            case AddTransactionCommand.COMMAND_WORD:
+                return new AddTransactionCommandParser().parse(arguments);
 
-        case ViewLastTransactionCommand.COMMAND_WORD:
-            return new ViewLastTransactionCommand();
+            case ViewLastTransactionCommand.COMMAND_WORD:
+                return new ViewLastTransactionCommand();
 
-        case RedoDistributorsCommand.COMMAND_WORD:
-            return new RedoDistributorsCommand();
+            case RedoDistributorsCommand.COMMAND_WORD:
+                return new RedoDistributorsCommand();
 
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
 
-        case LoginCommand.COMMAND_WORD:
-            return new LoginCommandParser().parse(arguments);
+            case LoginCommand.COMMAND_WORD:
+                return new LoginCommandParser().parse(arguments);
 
-        case LogoutCommand.COMMAND_WORD:
-            return new LogoutCommand();
+            case LogoutCommand.COMMAND_WORD:
+                return new LogoutCommand();
 
-        case CreateUserCommand.COMMAND_WORD:
-            return new CreateUserCommandParser().parse(arguments);
+            case CreateUserCommand.COMMAND_WORD:
+                return new CreateUserCommandParser().parse(arguments);
 
-        case DeleteUserCommand.COMMAND_WORD:
-            return new DeleteUserCommandParser().parse(arguments);
+            case DeleteUserCommand.COMMAND_WORD:
+                return new DeleteUserCommandParser().parse(arguments);
 
-        case ChangeUserPasswordCommand.COMMAND_WORD:
-            return new ChangeUserPasswordCommandParser().parse(arguments);
+            case ChangeUserPasswordCommand.COMMAND_WORD:
+                return new ChangeUserPasswordCommandParser().parse(arguments);
 
-        case AddReminderCommand.COMMAND_WORD:
-            return new AddReminderCommandParser().parse(arguments);
+            case AddReminderCommand.COMMAND_WORD:
+                return new AddReminderCommandParser().parse(arguments);
 
-         case ViewDueRemindersCommand.COMMAND_WORD:
-             return new ViewDueRemindersCommand();
-             
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            case ViewDueRemindersCommand.COMMAND_WORD:
+                return new ViewDueRemindersCommand();
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
