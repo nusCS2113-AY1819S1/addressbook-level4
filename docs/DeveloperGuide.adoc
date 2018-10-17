@@ -419,7 +419,7 @@ image::dataToGraphActivityDiagram.png[width="650"]
 // end::datatograph[]
 
 // tag::noteimportexport[]
-=== Notes data to/from Google Calendar
+=== Notes data to/from Google Calendar feature
 ==== Feature Description:
 *EXPORT :* +
 The user will be able to export notes from this application to a CSV file that follows the formatting required for importing calendar files to Google Calendar. The exporting process can be invoked by the user by entering the command below.
