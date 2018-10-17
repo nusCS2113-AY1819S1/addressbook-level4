@@ -87,11 +87,14 @@ public class SummaryDisplay extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         table.getItems().clear();
         data = FXCollections.observableList(event.data.stream().map(
-                s -> new SummaryEntry(s)).collect(Collectors.toList()));
+            s -> new SummaryEntry(s)).collect(Collectors.toList()));
         table.setItems(data);
         show();
     }
 
+    /**
+     * This represents an entry for the summary table
+     */
     public class SummaryEntry {
 
         private final SimpleStringProperty date;
