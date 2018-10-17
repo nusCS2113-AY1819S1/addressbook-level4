@@ -322,6 +322,10 @@ called which brings up a warning dialog box that informs the user of wrong input
 
 image::LoginException.png[width="800"]
 
+The activity diagram below shows the overall picture of how the login mechanism works.
+
+image::LoginActivityDiagram.png[width="800"]
+
 ==== Design Considerations
 
 ===== Aspect: How login data is stored
