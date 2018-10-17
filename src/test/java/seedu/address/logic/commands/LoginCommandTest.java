@@ -36,7 +36,7 @@ public class LoginCommandTest {
 
     @Test
     public void execute_loginAcceptedByModel_authenticationSuccess() throws Exception {
-        ModelStubAcceptingLogin modelStub = new ModelStubAcceptingLogin();
+        ModelStubAcceptLogin modelStub = new ModelStubAcceptLogin();
         LoginAttempt loginAttempt = new LoginAttempt("John", "pass");
 
         CommandResult commandResult = getLoginCommandForLoginAttempt(loginAttempt.getUsername(),
@@ -48,7 +48,7 @@ public class LoginCommandTest {
 
     @Test
     public void execute_loginAcceptedByModel_authenticationFail() throws Exception {
-        ModelStubAcceptingLogin modelStub = new ModelStubAcceptingLogin();
+        ModelStubAcceptLogin modelStub = new ModelStubAcceptLogin();
         LoginAttempt failedLoginAttempt = new LoginAttempt("John", "pass");
 
         CommandResult commandResult = getLoginCommandForLoginAttempt(failedLoginAttempt.getUsername(),
@@ -283,7 +283,7 @@ public class LoginCommandTest {
     /**
      * A Model stub that always accepts the login attempt.
      */
-    private class ModelStubAcceptingLogin extends ModelStub {
+    private class ModelStubAcceptLogin extends ModelStub {
 
         private boolean loginStatus = false;
 
@@ -295,7 +295,6 @@ public class LoginCommandTest {
             return true;
         }
 
-
         @Override
         public void setLoginStatus(boolean status) {
             this.loginStatus = true;
@@ -305,8 +304,6 @@ public class LoginCommandTest {
         public boolean hasLoggedIn() {
             return this.loginStatus;
         }
-
-
     }
 
     /**
