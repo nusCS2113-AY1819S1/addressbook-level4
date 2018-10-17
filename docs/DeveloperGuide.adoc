@@ -320,6 +320,25 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag:list[]
+=== Limit feature
+==== Current Implementation
+The limit command is based on the data type "Date", which includes two dates and moneyFlow.
+Once the user execute the limit command, the program will read all the records from the memory.
+
+The user need to input two dates, the first one is start date while the second one is end date.
+And the user also need to input the limit money they want to set. The user enter two dates after the
+one "d/" index followed by money with m/ index.
+
+The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/` is then passed into `LimitCommandParser#splitByWhitespace` for further processing and returns an array.
+This string will be split into two strings and each of them will be construct as a date type variable
+. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+
+The following sequence diagram shows how the limit operation works:
+
+image::LimitSequenceDiagram.png[width:800]
+
 === List history feature
 ==== Current Implementation
 The list mechanism is facilitated by `ModelManager`.
