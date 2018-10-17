@@ -319,6 +319,131 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::undoredo[]
+=== Group feature
+==== Current Implementation
+
+The `group` mechanism is facilitated by `AddressBook`.
+Additionally, it implements the following operations:
+
+* `AddressBook#createGroup()` -- Creates a group in the address book.
+* `AddressBook#hasGroup()` -- Checks to see if the address book has a particular group.
+* `AddressBook#hasPersonInGroup()` -- Checks to see if a particular person is in a group.
+* `AddressBook#addGroup()` -- Add's persons to a group.
+* `AddressBook#getGroupList()` -- Returns a list of groups in the address book.
+
+These operations are exposed in the `Model` interface as `Model#createGroup()`, `Model#hasGroup()`, `Model#hasPersonInGroup()`, `Model#addGroup()` and `Model#getFilteredGroupList()` respectively.
+
+Given below is an example usage scenario and how the `group` mechanism behaves at each step.
+
+Step 1. User executes `group n/CS2113 l/LT15` command to add a group to the address book. The address book detects `group` as a command word will use `CreateGroupCommandParser` to
+parse the input given. `CreateGroupCommandParser` will then create a `Group` object after parsing and pass it to `GroupCommand` which will then execute creating a group in the address book.
+  +
+[NOTE]
+If a duplicate groups are found in the address book during its execution, it will not create a group or override the existing group but throw a `CommandException : Duplicate Group` which will notify the user of the issue.
+
+Step 2. The user executes `addgroup g/1 p/1` command to add the first person in the address book to the first group in address book. The address book detects `addgroup` as a command word will use `AddGroupCommandParser` to
+parse the input given. `AddGroupCommandParser` will then create a `AddGroup` object after parsing and pass it to `AddGroupCommand` which will then execute adding persons to a group in the address book. +
+
+
+
+[NOTE]
+If a duplicate persons are found in the group of the address book during its execution, it will not create a group or override the existing group but throw a `CommandException : Duplicate Persons` which will notify the user of the issue.
+
+==== Design Considerations
+
+===== Aspect: Create groups
+
+* **Alternative 1 (current choice):** Creates a group and writes it to `addressbook.xml`.
+** Pros: Easy to implement.
+** Cons: Share same database as persons, not modular in terms of future expansions.
+* **Alternative 2:** Creates a group and writes it to a different file `addressbook2.xml`.
+** Pros: Modular as groups are stored in a different file, makes extraction of data easier.
+** Cons: Harder to implement.
+
+// end::undoredo[]
+
+// tag::AddScriptCommand[]
+=== AddScriptCommand Feature
+==== Current Implementation
+The AddScriptCommand Feature is executed by AddressBook when the user enter the specific command.
+
+Step 1: The User executes `AddScript StudentList`, the default constructor of the AddScriptCommand
+will be executed and a new `Path` will be generated based on the parameters of the command. The path will be assign
+with `StudentList.txt` for the above case.
+// end::AddScriptCommand[]
+
+// tag::distribute[]
+=== Distribute Students Equally feature
+==== Current Implementation
+The Distribute Students Equally feature holds 4 different algorithms.
+Each Algorithm serve different purposes.
+
+* Distribute Students Equally
+* Distribute Students Equally with Balanced Gender
+* Distribute Students Equally with Balanced Nationality
+* Distribute Students Equally with Balanced Gender & Nationality
+
+Every Algorithm will require inputs such as:
+****
+* Number of Groups to be created
+* 2D ArrayList of Person Type
+* LinkList containing all person data from the address book
+* Group Name in String Type
+****
+
+From these 4 inputs, each algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
+
+==== Sequence Diagrams
+
+==== Design Considerations
+
+===== Aspect: Distribute Students Equally Algorithm Explanation
+===== Aspect: Distribute Students Equally with Balanced Gender Explanation
+===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
+===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
+// end::distribute[]
+
+// tag::sendemail[]
+=== Send Email feature
+==== Current Implementation
+The send email feature is facilitated by `JavaMail` API. It provides a platform-independent and protocol-independent framework to build mail and messaging applications.
+
+In the current version, the following operations have been implemented:
+
+* `EmailCommand` -- The command to send an email to single or multiple indexes of persons.
+* `EmailUtil` -- The helper function that interacts with `JavaMail` for sending email.
+* `EmailLoginCommand` -- The command to enter credentials for the email account to be used for sending emails.
+
+The feature currently supports the following mail servers:
+
+1. `Google Mail` -- @gmail.com
+
+2. `Microsoft Outlook` -- @outlook.com
+
+3. `Hotmail` -- @hotmail.com
+
+4. `Live` -- @live.com
+
+5. `NUS Student` -- @u.nus.edu
+
+6. `NUS Staff` -- @nus.edu.sg
+
+==== Sequence Diagrams
+
+==== Design Considerations
+
+===== Aspect: How to send email to a single person
+
+===== Aspect: How to send email to multiple person
+
+===== Aspect: How to send email to a group of persons
+
+===== Aspect: How to allow sending through different mail servers
+
+===== Aspect: How to send email with attachments
+// end::sendmail[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
