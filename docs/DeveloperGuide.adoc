@@ -375,6 +375,11 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
 
+=== Expense feature
+==== Current Implementation
+
+
+
 == Documentation
 
 We use asciidoc for writing documentation.
@@ -1057,28 +1062,6 @@ Use case ends.
 Use case ends.
 
 [discrete]
-=== Use case: Local tasks backup (UC8)
-*Prerequisite*
-
-1. At least one tasks exists
-
-*MSS*
-
-1.  User requests to backup all data to another local folder
-2.  StudentPlanner backups current data to specified folder
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 2a. Folder provided cannot be written to
-[none]
-** 2a1. StudentPlanner informs user that folder cannot be used for backup
-+
-Use case ends.
-
-[discrete]
 === Use case: Online tasks backup (UC9)
 *Prerequisite*
 
@@ -1104,6 +1087,27 @@ Use case ends.
 ** 2b2. StudentPlanner shows help for online backup.
 +
 Use case ends.
+
+//@@ChenSongJian
+[discrete]
+=== Use case: Add Expense(UC11)
+
+*MSS*
+
+1.  User requests to add an new expense with details
+2.  StudentPlanner adds new expense with given details
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. Insufficient or Invalid details provided.
+[none]
+** 2a1. StudentPlanner informs user about unsuccessful adding of expense
++
+Use case ends.
+//@@
 
 [discrete]
 === Use case: Add Event (UC10)
