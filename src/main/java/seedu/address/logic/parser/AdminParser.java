@@ -6,7 +6,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddItemCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -20,20 +19,17 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellCommand;
-import seedu.address.logic.commands.UnAuthorisedCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateUserCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.ChangePasswordCommandParser;
 import seedu.address.logic.parser.user.CreateUserCommandParser;
-import seedu.address.logic.parser.validation.check.UserAuthenticationCheck;
-import seedu.address.logic.parser.validation.check.UserAuthenticationCheckUtils;
 
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class AdminParser {
 
     /**
      * Used for initial separation of command word and args.
@@ -54,61 +50,56 @@ public class AddressBookParser {
         }
 
         String commandWord = matcher.group("commandWord");
-        //checker for unauthorised command
-        UserAuthenticationCheck userAuthenticationCheck = new UserAuthenticationCheckUtils (commandWord);
-        commandWord = userAuthenticationCheck.checkAuthentication ();
-
         final String arguments = matcher.group("arguments");
 
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
-        case SellCommand.COMMAND_WORD:
-            return new SellCommandParser ().parse (arguments);
-
-        case ChangePasswordCommand.COMMAND_WORD:
-            return new ChangePasswordCommandParser ().parse(arguments);
+            case AddItemCommand.COMMAND_WORD:
+                return new AddItemCommandParser ().parse (arguments);
 
 
-        case EditCommand.COMMAND_WORD:
-            return new EditCommandParser().parse(arguments);
+            case ChangePasswordCommand.COMMAND_WORD:
+                return new ChangePasswordCommandParser ().parse(arguments);
 
-        case SelectCommand.COMMAND_WORD:
-            return new SelectCommandParser().parse(arguments);
+            case CreateUserCommand.COMMAND_WORD:
+                return new CreateUserCommandParser ().parse (arguments);
 
-        case DeleteCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            case EditCommand.COMMAND_WORD:
+                return new EditCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
+            case DeleteCommand.COMMAND_WORD:
+                return new DeleteCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            case ClearCommand.COMMAND_WORD:
+                return new ClearCommand();
 
-        case HistoryCommand.COMMAND_WORD:
-            return new HistoryCommand();
+            case FindCommand.COMMAND_WORD:
+                return new FindCommandParser().parse(arguments);
 
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            case ListCommand.COMMAND_WORD:
+                return new ListCommand();
 
-        case HelpCommand.COMMAND_WORD:
-            return new HelpCommand();
+            case HistoryCommand.COMMAND_WORD:
+                return new HistoryCommand();
 
-        case UndoCommand.COMMAND_WORD:
-            return new UndoCommand();
+            case ExitCommand.COMMAND_WORD:
+                return new ExitCommand();
 
-        case RedoCommand.COMMAND_WORD:
-            return new RedoCommand();
+            case HelpCommand.COMMAND_WORD:
+                return new HelpCommand();
 
-        case UnAuthorisedCommand.COMMAND_WORD:
-            return new UnAuthorisedCommand ();
-        default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            case UndoCommand.COMMAND_WORD:
+                return new UndoCommand();
+
+            case RedoCommand.COMMAND_WORD:
+                return new RedoCommand();
+
+
+            default:
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

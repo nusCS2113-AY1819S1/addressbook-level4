@@ -10,10 +10,14 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.user.UserCommand;
 import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.AdminParser;
+import seedu.address.logic.parser.StockTakerParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.user.admin.AdminModel;
+import seedu.address.model.user.stocktaker.StockTakerModel;
 
 /**
  * The main LogicManager of the app.
@@ -24,22 +28,32 @@ public class LogicManager extends ComponentManager implements Logic {
     private LoginInfoManager loginInfoManager;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
+    private final AdminParser adminParser;
+    private final StockTakerParser stockTakerParser;
     public LogicManager(Model model, LoginInfoManager loginInfoManager) {
         this.loginInfoManager = loginInfoManager;
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
+        adminParser = new AdminParser ();
+        stockTakerParser = new StockTakerParser ();
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = addressBookParser.parseCommand(commandText);
-
+            Command command;
+            if (model instanceof AdminModel){
+                 command = adminParser.parseCommand (commandText);
+            } else if (model instanceof StockTakerModel){
+                command = stockTakerParser.parseCommand (commandText);
+            } else {
+                 command = addressBookParser.parseCommand (commandText);
+            }
             if (command instanceof UserCommand) {
-                UserCommand command2 = (UserCommand) command;
-                return command2.execute (loginInfoManager, history);
+                UserCommand userCommand = (UserCommand) command;
+                return userCommand.execute (loginInfoManager, history);
             }
             return command.execute(model, history);
         } finally {

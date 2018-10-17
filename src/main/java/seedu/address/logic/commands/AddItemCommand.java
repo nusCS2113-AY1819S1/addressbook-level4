@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DRINK_ITEM;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.user.admin.AdminModel;
+import seedu.address.model.user.admin.AdminModelManager;
 
 /**
  * Adds a person to the address book.
@@ -48,6 +50,11 @@ public class AddItemCommand extends Command {
         //
         //        model.addPerson(toAdd);
         //        model.commitAddressBook();
+        if (model instanceof AdminModel){
+            System.out.println (( (AdminModelManager) model).isValid ());
+        }else{
+            System.out.println ("not rights");
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS, drinkName, defaultSellingPrice));
     }
 

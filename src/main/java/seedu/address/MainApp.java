@@ -26,15 +26,11 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.controller.LoginController;
+import seedu.address.init.InitAddressBook;
 import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
@@ -44,7 +40,6 @@ import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.storage.logininfo.JsonLoginInfoStorage;
 import seedu.address.storage.logininfo.LoginInfoStorage;
 import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
 import seedu.address.ui.UiPart;
 
 
@@ -70,6 +65,7 @@ public class MainApp extends Application {
     private FXMLLoader fxmlLoader;
     private LoginInfoManager loginInfoList;
     private LoginController loginController;
+    private InitAddressBook initAddressBook;
     //author @tianhang
 
     @Override
@@ -86,42 +82,43 @@ public class MainApp extends Application {
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
 
+        initAddressBook = new InitAddressBook (config, storage, userPrefs, loginInfoList);
         initLogging(config);
-
-        model = initModelManager(storage, userPrefs);
-        logic = new LogicManager(model, loginInfoList);
-
-        ui = new UiManager(logic, config, userPrefs);
-
         fxmlLoader = new FXMLLoader();
+//        model = initModelManager(storage, userPrefs);
+//        logic = new LogicManager(model, loginInfoList);
+//
+//        ui = new UiManager(logic, config, userPrefs);
+//
+
         initEventsCenter();
 
     }
 
-    /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
-     */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook ();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        }
-
-        return new ModelManager (initialData, userPrefs);
-    }
+//    /**
+//     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
+//     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
+//     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
+//     */
+//    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+//        Optional<ReadOnlyAddressBook> addressBookOptional;
+//        ReadOnlyAddressBook initialData;
+//        try {
+//            addressBookOptional = storage.readAddressBook();
+//            if (!addressBookOptional.isPresent()) {
+//                logger.info("Data file not found. Will be starting with a sample AddressBook");
+//            }
+//            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+//        } catch (DataConversionException e) {
+//            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
+//            initialData = new AddressBook ();
+//        } catch (IOException e) {
+//            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
+//            initialData = new AddressBook();
+//        }
+//
+//        return new ModelManager (initialData, userPrefs);
+//    }
 
     private void initLogging(Config config) {
         LogsCenter.init(config);
@@ -234,10 +231,8 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         window = primaryStage;
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        //@@author tianhang
         showLoginPage();
     }
-    //@@author tianhang
 
     /**
      * Start Login scene
@@ -249,21 +244,21 @@ public class MainApp extends Application {
     private void settingUpLoginWindow() {
         URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
         Parent root = loadFxmlFile(fxmlLoginFileUrl, window);
-        window.initStyle(StageStyle.UNDECORATED);
+        //window.initStyle(StageStyle.UNDECORATED);
         window.setTitle("Login Page");
         window.setScene(new Scene(root));
         window.show();
     }
     private void settingUpLoginController() {
         loginController = new LoginController ();
-        passInMainInterface();
+        passInInitAddressBook ();
         passInLoginList();
     }
     /**
-     * Pass {@code ui} to login page
+     * Pass {@code initAddressBook} to login page
      */
-    private void passInMainInterface() {
-        loginController.mainWindowInterface (ui);
+    private void passInInitAddressBook () {
+        loginController.passInInitAddressBook (initAddressBook);
     }
 
     /**

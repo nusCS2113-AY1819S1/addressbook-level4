@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import seedu.address.authentication.LoginUtils;
+import seedu.address.init.InitAddressBook;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.ui.Ui;
 
@@ -21,6 +22,7 @@ public class LoginController {
 
     protected static Ui ui;
     protected static LoginInfoManager loginInfoManager;
+    protected static InitAddressBook initAddressBook;
     private String username;
     private String password;
     @FXML
@@ -107,6 +109,8 @@ public class LoginController {
     private void changeStageToMainUi() {
         Stage primaryStage = (Stage) passwordField.getScene().getWindow();
         primaryStage.close();
+        initAddressBook.initAfterLogin ();
+        this.ui = initAddressBook.getUi ();
         ui.start(primaryStage);
     }
 
@@ -120,13 +124,13 @@ public class LoginController {
 
     /**
      * pass in the main ui
-     * @param ui
+     * @param initAddressBook
      */
-    public void mainWindowInterface (Ui ui) {
-        if (ui == null) {
-            System.out.println ("ui is null");
+    public void passInInitAddressBook (InitAddressBook initAddressBook) {
+        if (initAddressBook == null) {
+            System.out.println ("initAddressBook is null");
         }
-        this.ui = ui;
+        this.initAddressBook = initAddressBook;
     }
 
 }
