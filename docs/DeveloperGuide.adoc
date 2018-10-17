@@ -450,6 +450,67 @@ image::dataToGraphActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that needs to interact with storage controller or xml adapters directly but command should not have direct interaction from StorageController.
 // end::datatograph[]
 
+// tag::modulebidding[]
+=== [Proposed] Module bidding feature
+
+==== Proposed Implementation
+
+The module bidding feature is an enhancement that will make it easier to assign students to modules in `Trajectory`.
+It is designed with the module enrolment limits in mind, and the aim to give students a certain degree of flexibility
+in choosing the modules they want. At the moment, it is planned to store the feature in ModuleManager, but it may be
+abstracted into its own class if it proves to be necessary.
+
+The module bidding feature will implement the following features:
+
+* `ModuleManager#startBiddingRound()` -- Starts a bidding round for a module.
+* `ModuleManager#closeBiddingRound()` -- Closes the bidding round for a module.
+* `ModuleManager#placeBid()` -- Places a student's bid on the module they desire.
+* `ModuleManager#retractBid()` -- Retracts a student's bid from a module for which they previously bid.
+* `ModuleManager#assignSuccessfulStudents() -- Assigns the students with successful bids to the module.
+
+These operations will be exposed in the `ModuleManager` class until there is a need for abstraction.
+
+Given below is an example usage scenario and how the module bidding mechanism will behave at each step.
+
+Step 1. The teacher can start a bidding round for one of his/her modules using the CLI. The command will be routed to
+`ModuleManager#startBiddingRound()` with the module code to indicate that bidding has opened for that module. This will
+also update the status of the module to inform students that they may now start placing bids.
+
+Step 2. A student can place his/her bid for a module with an active bidding round. He/she will need to enter the number
+of points they wish to use in their bid. The input will be parsed to `ModuleManager#placeBid()` with the module code and
+the student's ID.
+
+Step 3. Should the student decide that he/she is no longer interested in the module, he/she may retract his/her bid by
+using the CLI and entering the module's code. This will invoke `ModuleManager#retractBid()` and the bid will be retracted.
+
+Step 4. When the time is past the intended duration of the bidding round, the bidding round can be closed automatically
+via a call to `ModuleManager#closeBiddingRound()`. When the bidding round has closed, the status will be updated to
+reflect it, and students will no longer be able to place bids for the module.
+
+[NOTE]
+The teacher may close the bidding round earlier by entering the command in the CLI.
+
+Step 5. After the bidding round has closed, Trajectory will decide which students are successful in their bid by invoking
+`ModuleManager#assignSuccessfulStudents()`. This will also assign the successful students to the module and deduct their
+bid points. The students who were unsuccessful in their bid will have their bid points refunded to their account.
+
+The following activity diagram summarizes the whole module bidding process:
+
+image::moduleBiddingActivityDiagram.png[width="650"]
+
+==== Design Considerations
+===== Aspect: How the module bidding will work
+
+* Alternative 1 (current choice): Teacher has to manually open a bidding round.
+** Pros: Easy to implement
+** Cons: May result in inconsistencies between the planned start time and the actual start time, thus causing frustration
+to the students.
+
+* Alternative 2: Teacher can input the start time for a module's bidding round
+** Pros: The actual start time will be consistent and reliable, leading to user (student) satisfaction.
+** Cons: More difficult to implement; Handling date objects is tricky because there are many popular date formats.
+// end::modulebidding[]
+
 // tag::noteimportexport[]
 === Notes data to/from Google Calendar feature
 ==== Feature Description:
