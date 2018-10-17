@@ -87,8 +87,6 @@ public class StockListParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
-            case SaveCommand.COMMAND_WORD:
-                return new SaveCommand();
         case ChangeStatusCommand.COMMAND_WORD:
             return new ChangeStatusCommandParser().parse(arguments);
 
