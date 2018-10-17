@@ -5,15 +5,17 @@ import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
+import com.t13g2.forum.logic.commands.exceptions.DuplicateBlockException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
-
+//@@xllx1
 /**
  * Allow admin to block user from posting a new thread.
  */
-public class BlockUserFromPostingCommand extends Command {
+public class BlockUserFromCreatingCommand extends Command {
 
     public static final String COMMAND_WORD = "block";
 
@@ -30,9 +32,9 @@ public class BlockUserFromPostingCommand extends Command {
     private final String userNameToBlock;
 
     /**
-     * Creates an BlockUserFromPostingCommand to block the specified {@code User}
+     * Creates an BlockUserFromCreatingCommand to block the specified {@code User}
      */
-    public BlockUserFromPostingCommand(String userName) {
+    public BlockUserFromCreatingCommand(String userName) {
         requireNonNull(userName);
         userNameToBlock = userName;
     }
@@ -42,18 +44,17 @@ public class BlockUserFromPostingCommand extends Command {
         requireNonNull(model);
         User user = new User();
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            try {
-                user = unitOfWork.getUserRepository().getUserByUsername(userNameToBlock);
-                if (user.getIsBlock()) {
-                    throw new CommandException(MESSAGE_DUPLICATE_BLOCK);
-                } else {
-                    user.setIsBlock(true);
-                    unitOfWork.commit();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new CommandException(MESSAGE_INVALID_USER);
+            user = unitOfWork.getUserRepository().getUserByUsername(userNameToBlock);
+            if (user.getIsBlock()) {
+                throw new DuplicateBlockException(MESSAGE_DUPLICATE_BLOCK);
+            } else {
+                user.setIsBlock(true);
+                unitOfWork.commit();
             }
+        } catch (EntityDoesNotExistException e) {
+            throw new CommandException(MESSAGE_INVALID_USER);
+        } catch (DuplicateBlockException e) {
+            throw new CommandException(MESSAGE_DUPLICATE_BLOCK);
         } catch (Exception e) {
             e.printStackTrace();
         }

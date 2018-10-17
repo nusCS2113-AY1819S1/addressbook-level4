@@ -8,10 +8,12 @@ import java.awt.EventQueue;
 import javax.swing.JOptionPane;
 
 import com.t13g2.forum.logic.CommandHistory;
+import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
+//@@xllx1
 /**
  * Announce new announcement.
  */
@@ -40,7 +42,7 @@ public class AnnounceCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
@@ -54,6 +56,7 @@ public class AnnounceCommand extends Command {
             });
         } catch (Exception e) {
             e.printStackTrace();
+
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAnnounce));
     }

@@ -33,5 +33,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("mCode/");
     /* Prefix for Comment */
     public static final Prefix PREFIX_COMMENT_CONTENT = new Prefix("cContent/");
+    /* Prefix for Comment */
+    public static final Prefix PREFIX_ADMIN_SET = new Prefix("set/");
 
 }
