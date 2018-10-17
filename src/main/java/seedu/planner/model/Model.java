@@ -109,5 +109,5 @@ public interface Model {
      */
     void commitFinancialPlanner();
 
-    List<Summary> getSummaryList(Date startDate, Date endDate);
+    ObservableList<Summary> getSummaryList(Date startDate, Date endDate);
 }

@@ -155,7 +155,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void setSummaryMap(SummaryMap summaryMap) {
         this.summaryMap = summaryMap;
     }
-    public List<Summary> getSummaryList(Date startDate, Date endDate) {
+
+    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
         return summaryMap.getSummaryList(startDate, endDate);
     }
 

@@ -188,7 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Summary Display =================================================================================
 
-    public List<Summary> getSummaryList(Date startDate, Date endDate) {
+    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
         return versionedFinancialPlanner.getSummaryList(startDate, endDate);
     }
 

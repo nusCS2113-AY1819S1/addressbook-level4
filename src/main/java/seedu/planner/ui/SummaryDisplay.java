@@ -1,11 +1,15 @@
 package seedu.planner.ui;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
-import com.fasterxml.jackson.databind.deser.impl.PropertyValue;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -27,7 +31,10 @@ public class SummaryDisplay extends UiPart<Region> {
 
     private static final String FXML = "SummaryDisplay.fxml";
 
-    private static final TableView<SummaryDisplayEntry> table = new TableView();
+    private ObservableList<SummaryDisplayEntry> data = FXCollections.emptyObservableList();
+
+    @FXML
+    private TableView<SummaryDisplayEntry> table;
 
     @FXML
     private AnchorPane summaryDisplay;
@@ -39,7 +46,7 @@ public class SummaryDisplay extends UiPart<Region> {
     private TableColumn totalIncomeColumn;
 
     @FXML
-    private TableColumn totalExpensesColumn;
+    private TableColumn totalExpenseColumn;
 
     @FXML
     private TableColumn totalColumn;
@@ -55,10 +62,14 @@ public class SummaryDisplay extends UiPart<Region> {
      * This function links up all the columns of {@code TableView} with the parameters of {@code SummaryDisplayEntry}
      */
     private void init() {
-        dateColumn.setCellFactory(new PropertyValueFactory<>("date"));
-        totalIncomeColumn.setCellFactory(new PropertyValueFactory<>("totalIncome"));
-        totalExpensesColumn.setCellFactory(new PropertyValueFactory<>("totalExpenses"));
-        totalColumn.setCellFactory(new PropertyValueFactory<>("total"));
+        dateColumn.setCellValueFactory(
+                new PropertyValueFactory<SummaryDisplayEntry, String>("date"));
+        totalIncomeColumn.setCellValueFactory(
+                new PropertyValueFactory<SummaryDisplayEntry, String>("totalIncome"));
+        totalExpenseColumn.setCellValueFactory(
+                new PropertyValueFactory<SummaryDisplayEntry, String>("totalExpense"));
+        totalColumn.setCellValueFactory(
+                new PropertyValueFactory<SummaryDisplayEntry, String>("total"));
     }
 
     private void show() {
@@ -71,23 +82,29 @@ public class SummaryDisplay extends UiPart<Region> {
         summaryDisplay.setVisible(false);
     }
 
+
+
     @Subscribe
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        table.getItems().clear();
+        data = FXCollections.observableList(event.data.stream().map(
+                s -> new SummaryDisplayEntry(s)).collect(Collectors.toList()));
+        table.setItems(data);
         show();
     }
 
-    private class SummaryDisplayEntry {
+    public class SummaryDisplayEntry {
 
         private final SimpleStringProperty date;
         private final SimpleStringProperty totalIncome;
         private final SimpleStringProperty totalExpense;
         private final SimpleStringProperty total;
 
-        public SummaryDisplayEntry(Date date, MoneyFlow totalIncome, MoneyFlow totalExpenses, MoneyFlow total) {
+        public SummaryDisplayEntry(Date date, MoneyFlow totalIncome, MoneyFlow totalExpense, MoneyFlow total) {
             this.date = new SimpleStringProperty(date.toString());
             this.totalIncome = new SimpleStringProperty((totalIncome.toString()));
-            this.totalExpense = new SimpleStringProperty((totalExpenses.toString()));
+            this.totalExpense = new SimpleStringProperty((totalExpense.toString()));
             this.total = new SimpleStringProperty((total.toString()));
         }
 
@@ -114,12 +131,12 @@ public class SummaryDisplay extends UiPart<Region> {
             this.totalIncome.set(totalIncome);
         }
 
-        public String getTotalExpenses() {
+        public String getTotalExpense() {
             return totalExpense.get();
         }
 
-        public void setTotalExpenses(String totalExpenses) {
-            this.totalExpense.set(totalExpenses);
+        public void setTotalExpense(String totalExpense) {
+            this.totalExpense.set(totalExpense);
         }
 
         public String getTotal() {

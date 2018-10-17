@@ -6,6 +6,7 @@ import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.collections.ObservableList;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.logic.CommandHistory;
@@ -23,7 +24,7 @@ public class SummaryCommand extends Command{
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed summary for %d days:\n%s";
+    public static final String MESSAGE_SUCCESS = "Listed summary for %d days:\n";
 
     private final Date startDate;
     private final Date endDate;
@@ -36,10 +37,9 @@ public class SummaryCommand extends Command{
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        List<Summary> summaryList = model.getSummaryList(startDate, endDate);
-        String summaryString = summaryList.stream().map(s -> s.toString()).collect(Collectors.joining("\n\n"));
-        EventsCenter.getInstance().post(new ShowSummaryTableEvent());
-        return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size(), summaryString));
+        ObservableList<Summary> summaryList = model.getSummaryList(startDate, endDate);
+        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }
 
     @Override
