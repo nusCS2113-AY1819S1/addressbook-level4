@@ -89,23 +89,35 @@ Format: `duereminders`
 
 Shows all reminders that are still due in the current day.
 
-=== Add a product: `add product name`
+=== Add a product: `add`
 
-Format: `add product name <product name>`
+Format: `add n/<product name> s/<serial no.> d/<distributor> i/<info.> t/<tags>`
 
 Adds a product to the list of products offered by the store
 
-=== Add a distributor: `addD name`
+=== Add a distributor: `addDistributor`
 
-Format: `addD dn/<distributor name> dp/<distributor phone>`
+Format: `addDistributor dn/<distributor name> dp/<distributor phone>`
 
 Adds a distributor to the list of distributors engaged with the store.
 
-=== Edit a distributor: `editD index`
+=== Edit a distributor: `editDistributor index`
 
-Format: `addD index dn/<distributor name> dp/<distributor phone>`
+Format: `editDistributor index dn/<distributor name> dp/<distributor phone>`
 
-Edits details of a distributor from the list of distributors engaged with the store.
+Edits details of the indexed distributor from the list of distributors engaged with the store.
+
+=== Find a distributor: `findDistributor`
+
+Format: `findDistributor <some relevant field>`
+
+Finds distributors that are related to the <some relevant field> entered.
+
+=== Delete a distributor: `deleteDistributor`
+
+Format: `deleteDistributor index`
+
+Deletes the indexed distributor from the list of distributors engaged with the store.
 
 === Find all stored contact information (distributors and customers): `contacts`
 
