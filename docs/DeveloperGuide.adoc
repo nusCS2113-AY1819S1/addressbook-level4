@@ -254,7 +254,15 @@ image::SortNewCommand1StateListDiagram.png[width="650"]
 
 image::SortSequenceDiagram.png[width="650"]
 
+==== Design Considerations
 
+===== Committing Event List after sorting
+ * **Alternative 1 (current choice):** Commits and saves the entire event list.
+** Pros: Easy to implement and able to use undo to the previous state.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Does not commit the event list.
+** Pros: Will use less memory.
+** Cons: Unable to use undo function to revert back to the previous view.
 
 // end::Sorting[]
 
@@ -285,7 +293,7 @@ We can also have a summarized content of persons (their names) involved in an ev
 
 Given below is an example usage scenario and how the invite mechanism works.
 
-Step 1. The user executes `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list. The command text is passed to an instance of the `LogicManager` class.
+Step 1. The user inputs `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list. The command text is passed to an instance of the `LogicManager` class.
 
 Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `invite` command phrase.
 
