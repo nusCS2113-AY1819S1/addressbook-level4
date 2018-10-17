@@ -20,7 +20,6 @@ public class UserAccount {
     private JsonUserStorage userStorage;
     private User user;
     private boolean loginStatus;
-    private boolean adminStatus;
 
     public UserAccount() {
         final Path userFolderPath = Paths.get("data");
@@ -29,7 +28,6 @@ public class UserAccount {
         final Password password = new Password("stub");
         user = new User(username, password);
         loginStatus = false;
-        adminStatus = false;
 
         try {
             userStorage = new JsonUserStorage(userFolderPath, userFilePath);
