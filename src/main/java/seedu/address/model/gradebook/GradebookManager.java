@@ -13,7 +13,7 @@ public class GradebookManager {
             + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
     private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
     private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
-    private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
+    private static final String MESSAGE_FIND_SUCCESS = "Successfully found! \n%1$s";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
@@ -78,9 +78,26 @@ public class GradebookManager {
     /**
      This method finds gradebook component to a module in Trajectory.
      */
-    public static CommandResult findGradebookComponent (String moduleCode, String gradebookComponentName) {
-        StorageController.retrieveData();
-        CommandResult result = Gradebook.findGradebookComponent(moduleCode, gradebookComponentName);
-        return result;
+    public static String findGradebookComponent (String moduleCode, String gradebookComponentName) {
+        String status = MESSAGE_FIND_FAIL;
+        boolean isEmpty = Gradebook.hasEmptyParams(moduleCode, gradebookComponentName);
+        if (isEmpty) {
+            status = MESSAGE_ERROR_EMPTY;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (XmlAdaptedGradebook gc: StorageController.getGradebookStorage()) {
+            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
+                status = MESSAGE_FIND_SUCCESS;
+                sb.append("Module Code: ");
+                sb.append(gc.getModuleCode() + "\n");
+                sb.append("Grade Component: ");
+                sb.append(gc.getGradeComponentName() + "\n");
+                sb.append("Maximum Marks: ");
+                sb.append(gc.getGradeComponentMaxMarks() + "\n");
+                sb.append("Weightage: ");
+                sb.append(gc.getGradeComponentWeightage() + "\n");
+            }
+        }
+        return String.format(status, sb.toString());
     }
 }
