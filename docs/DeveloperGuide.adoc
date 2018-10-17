@@ -1705,29 +1705,17 @@ Use case ends.
 *MSS* :
 
 1. Teacher removes grade component.
-2. System requests for confirmation by displaying input.
-3. Teacher confirms request.
-4. System indicates success message.
+2. System indicates success message.
 +
 Use case ends.
 
 *Extensions* :
 
-* 1a. System detects an error in the entered data.
+* 2a. Teacher enters an invalid command.
 +
-** 1a1. System displays message and format corresponding to error.
-** 1a2. Teacher enters new data.
+** 2a1. System displays the list of valid commands.
 +
-Steps 1a1-1a2 are repeated until the data entered is correct.
-+
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel removing a grade component.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
-+
-Use case ends.
+Use case resumes at step 1.
 
 
 [discrete]
