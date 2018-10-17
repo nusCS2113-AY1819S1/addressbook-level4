@@ -52,7 +52,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 
 === Creating a group: `group` `grp`
-Creates a group in the address book +
+Creates a group in the student management system +
 Format: `group n/NAME l/LOCATION` +
 Shortcut Format: `grp n/NAME l/LOCATION` +
 ****
@@ -64,18 +64,19 @@ Examples:
 * `group n/CS2113 l/LT15`
 * `grp n/CS2113 l/LT01`
 
-=== Populating a group: `pop`
-Adds person(s) to a group +
-Format: `pop n/NAME l/LOCATION i/INDEX [MORE_INDICES]` +
+=== Add students a group: `addgroup` `addgrp`
+Adds student(s) to a group in the student management system +
+Format: `addgroup g/INDEX p/INDEX ...` +
+Shortcut Format: `addgrp g/INDEX p/INDEX ...` +
 ****
-* Adds a person at specified INDEX(s) to group at specified NAME and LOCATION.
-* The index refers to the index number shown in the displayed person list.
-* The index must be a positive integer 1, 2, 3, …​
+* Adds person(s) at specified INDEX(s) to group at specified at INDEX.
+* The index refers to the index number shown in the displayed group/person list.
 ****
 
 Examples:
 
-* pop n/CS2113 l/LT15 i/2 3 4 5
+* addgroup g/1 p/1
+* addgrp g/1 p/1 p/2
 
 === List a group of students: 'scorefilter a/56 or b/56'
 List out  students who score above/below certain grade.
