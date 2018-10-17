@@ -336,5 +336,4 @@ public class LoginCommandTest {
             return username;
         }
     }
-
 }
