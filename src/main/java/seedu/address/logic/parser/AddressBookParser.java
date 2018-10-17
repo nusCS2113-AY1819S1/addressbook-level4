@@ -85,7 +85,7 @@ public class AddressBookParser {
 
         case CompleteTaskCommand.COMMAND_WORD:
             return new CompleteTaskCommandParser().parse(arguments);
-        
+
         case UncompleteTaskCommand.COMMAND_WORD:
             return new UncompleteTaskCommandParser().parse(arguments);
 
