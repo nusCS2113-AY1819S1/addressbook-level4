@@ -14,7 +14,6 @@ public class GradebookManager {
     private static final String MESSAGE_ADD_SUCCESS = "\nSuccessfully Added! \nModule Code: %1$s"
             + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
     private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
-    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found! \n%1$s";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
     private static final String MESSAGE_LIST_SUCCESS = "\nNumber of Grade Components Listed: %1$s \n%2$s";
