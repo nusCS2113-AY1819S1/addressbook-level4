@@ -158,15 +158,38 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookBackupRequest(backupPath);
     }
     //@@author
+
+    //@@author luhan02
     @Override
     public boolean hasTask(Task task) {
         return false;
     }
 
     @Override
+    public void deleteTask(Task target) {
+
+    }
+
+    @Override
     public void addTask(Task person) {
 
     }
+
+    @Override
+    public void updateTask(Task target, Task editedPerson) {
+
+    }
+
+    @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return null;
+    }
+
+    @Override
+    public void updateFilteredTaskList(Predicate<Task> predicate) {
+
+    }
+    //@@author
 
     @Override
     public boolean hasEvent(Event event) {

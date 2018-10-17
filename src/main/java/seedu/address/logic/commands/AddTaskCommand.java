@@ -13,8 +13,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
+//@@author luhan02
 /**
- * Adds a task to the task list.
+ * Adds a task to the student planner.
  */
 public class AddTaskCommand extends Command {
     public static final String COMMAND_WORD = "task";

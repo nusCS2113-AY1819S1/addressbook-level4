@@ -319,6 +319,35 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+//@@author luhan02
+//tag::tasks[]
+=== Tasks (CRUD) feature
+==== Current Implementation
+The tasks' CRUD mechanism is facilitated by `AddTaskCommand`,`listTaskCommand`,`findTaskCommand`,`UpdateTaskCommand`,`DeleteTaskCommand`. It extends `Command` and implement the following operation:
+
+* `Command#AddTaskCommand()` -- Create a new task to Student Planner
+* `Command#ListTaskCommand()`,`Command#FindTaskCommand()` -- View/ search existing tasks
+* `Command#UpdateTaskCommand()` -- Update existing tasks from history
+* `Command#DeleteTaskCommand()` -- Remove existing tasks from history
+
+These operations are exposed in the `Model` interface as `Model#hasTask()`,`Model#addTask()`,`Model#listTask()`,`Model#updateTask()` and `Model#deleteTask()` respectively.
+
+Given below is an example usage scenario and how the CRUD mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The Student Planner will be initialized with the initial task planner state.
+
+Step 2. The user executes `add t/submission ...` command to add a new submission task to the student planner. The `add` command calls `Model#addTask()` which returns a task to be shown in the task list.
+
+Step 3. The user executes  `find ...` command to search any existing task. The `find` command calls `Model#findTask()` and it does not modify the student planner, the studentPlannerStateList remains unchanged.
+
+Step 4. The user then decides to executes `update ...` command to update an existing task. The `update` command calls `Model#updateTask()`, causing a modified task to be saved.
+
+Step 5. The user executes `list` command to view the existing task list, which calls `Model#listTask()`. The `list` command does not modify the student planner, the studentPlannerStateList remains unchanged.
+
+Step 6. The user now decides that the task added was a mistake, and decides to remove that task by executing the `delete 6` command to delete the 6th task in the task list of the student planner. The `delete` command will call `Model#deleteTask()`, causing the modified state of the student planner after the `delete 5` command executes to be saved in the studentPlannerStateList.
+// end::tasks[]
+//@@author
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -837,15 +866,19 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |add a new task | track the tasks
 
+|`* * *` |user |list the tasks | view all the tasks avaiable
+
+|`* * *` |user |update the task | change the task information where necessary
+
 |`* * *` |user |delete a task |remove entries that I no longer need
 
 |`* * *` |user |find a task by name |locate task/s without having to go through the entire list
 
-|`* * *` |user |find a task by details |locate task/s without having to go through the details of the entire list of tasks
+|`* *` |user |find a task by details |locate task/s without having to go through the details of the entire list of tasks
 
 |`* * *` |user with many tasks in the address book |sort tasks by deadline |locate upcoming due tasks easily
 
-|`* * *` |user with many tasks in the address book |sort tasks by priority |locate important tasks easily
+|`* *` |user with many tasks in the address book |sort tasks by priority |locate important tasks easily
 
 |`* *` |paranoid user|backup tasks locally |I have a backup in case I accidentally delete my tasks file
 
