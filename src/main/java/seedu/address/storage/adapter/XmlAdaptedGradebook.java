@@ -59,6 +59,13 @@ public class XmlAdaptedGradebook {
         this.gradeComponentName = gradeComponentName;
     }
 
+    /**
+     * Converts this XmlAdaptedGradebook into the model's Gradebook object
+     */
+    public Gradebook toGradebookType() {
+        return new Gradebook(moduleCode, gradeComponentName, gradeComponentMaxMarks, gradeComponentWeightage);
+    }
+
     public String getModuleCode() {
         return moduleCode;
     }
