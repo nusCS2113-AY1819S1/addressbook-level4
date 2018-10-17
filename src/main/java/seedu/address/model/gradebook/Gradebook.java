@@ -8,10 +8,6 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  This class includes all necessary validation for gradebook objects.
  */
 public class Gradebook {
-    private static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
-    private static final String MESSAGE_ADD_SUCCESS = "Successfully Added! \nModule Code: %1$s"
-            + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
-    private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
     private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
@@ -37,7 +33,7 @@ public class Gradebook {
     /**
      This method checks if user inputs empty values for module code or gradebook component name.
      */
-    public static boolean isEmptyParams (String moduleCode, String gradebookComponentName) {
+    public static boolean hasEmptyParams(String moduleCode, String gradebookComponentName) {
         boolean empty = false;
         if (moduleCode.equals("") || gradebookComponentName.equals("")) {
             empty = true;
@@ -56,31 +52,6 @@ public class Gradebook {
             duplicate = true;
         }
         return duplicate;
-    }
-
-    /**
-     This method checks all validations before adding to Trajectory.
-     */
-    public static String checkValidation (String moduleCode, String gradebookComponentName,
-                                          int gradebookMaxMarks, int gradebookWeightage) {
-        boolean empty = isEmptyParams(moduleCode, gradebookComponentName);
-        boolean duplicate = isDuplicateComponent(moduleCode, gradebookComponentName);
-
-        String status = MESSAGE_ADD_SUCCESS;
-
-        if (empty) {
-            status = MESSAGE_ERROR_EMPTY;
-        }
-
-        if (duplicate) {
-            status = MESSAGE_ERROR_DUPLICATE;
-        }
-
-        return String.format(status,
-                moduleCode,
-                gradebookComponentName,
-                gradebookMaxMarks,
-                gradebookWeightage);
     }
 
     /**

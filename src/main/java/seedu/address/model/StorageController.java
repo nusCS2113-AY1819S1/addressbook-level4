@@ -51,9 +51,9 @@ public class StorageController {
             NotesManager nm = (NotesManager) XmlUtil.getDataFromFile(Paths.get(STORAGE_NOTES), NotesManager.class);
             noteStorage = nm.getList();
 
-            XmlSerializableGradebookList gradebookManager = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADEBOOK),
+            XmlSerializableGradebookList gradebookSerializable = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADEBOOK),
                     XmlSerializableGradebookList.class);
-            gradebookStorage = gradebookManager.getGradebookList();
+            gradebookStorage = gradebookSerializable.getGradebookList();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,9 +100,9 @@ public class StorageController {
             nm.setNotesList(noteStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_NOTES), nm);
 
-            XmlSerializableGradebookList gm = new XmlSerializableGradebookList();
-            gm.setGradebookList(gradebookStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_GRADEBOOK), gm);
+            XmlSerializableGradebookList gradebookList = new XmlSerializableGradebookList();
+            gradebookList.setGradebookList(gradebookStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_GRADEBOOK), gradebookList);
         } catch (Exception e) {
             e.printStackTrace();
         }
