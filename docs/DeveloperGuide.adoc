@@ -266,12 +266,12 @@ image::LoginSequenceDiagram.png[width="800"]
 Step 1. The user launches the application for the first time. The `filteredLoginDetails` object will be initialized with
 a list of all the accounts in `LoginBook`.
 
-image::InitialLoginBookList.png[width="800"]
+image::InitialLoginBookList.PNG[width="800"]
 
 Step 2. The user executes `login A1234567M zaq1xsw2cde3` command in the input box that matches an account in
 `LoginBook`. `LogicManager` then calls `ParseCommand(login A1234567M zaq1xsw2cde3)` in `AddressBookParser`.
 
-image::CorrectIdPassword.png[width="800"]
+image::CorrectIdPassword.PNG[width="800"]
 
 Step 3. `AddressBookParser` instantiates the `LoginUserIdPasswordCommandParser` object and simultaneously calls the `parse(args)` method, returning
 an `LoginUserIdPasswordCommand` object with the user input, parsed, to `AddressBookParser` and `LogicManager`.
@@ -282,7 +282,7 @@ calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the c
 Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, which then filters out accounts whose user Id is a
 mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown below.
 
-image::ParseCorrectIdList.png[width="800"]
+image::ParseCorrectIdList.PNG[width="800"]
 
 Step 6. `LoginUserIdPasswordCommand` calls `updateFilteredLoginDetailsList(updatedPasswordPredicate)` in `Model` with the
 computed predicate from user password field input.
@@ -290,37 +290,37 @@ computed predicate from user password field input.
 Step 7. `Model` calls `setPredicate(updatedPasswordPredicate)` in `FilteredList`, which then further filters out accounts
 whose password is a mismatch with updatedPasswordPredicate. `filteredLoginDetails` is further updated as shown below.
 
-image::ParseCorrectIdList.png[width="800"]
+image::ParseCorrectIdList.PNG[width="800"]
 
 [NOTE]
 In step 2, if the user executes `login A1234561M zaq1xsw2cde3` command instead, the application will continue with steps
 2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
 list as shown in the image below.
 
-image::WrongIdCorrectPassword.png[width="800"]
-image::WrongIdOrPasswordList.png[width="800"]
+image::WrongIdCorrectPassword.PNG[width="800"]
+image::WrongIdOrPasswordList.PNG[width="800"]
 
 [NOTE]
 In step 2, if the user executes `login A1234567M zaq1xsw2cde4` command instead, the application will continue with steps
 2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
 list as shown in the image below.
 
-image::CorrectIdWrongPassword.png[width="800"]
-image::WrongIdOrPasswordList.png[width="800"]
+image::CorrectIdWrongPassword.PNG[width="800"]
+image::WrongIdOrPasswordList.PNG[width="800"]
 
 [NOTE]
 In step 2, if the user executes `login A1234561M zaq1xsw2cde4` command instead, the application will continue with steps
 2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
 list as shown in the image below.
 
-image::WrongIdPassword.png[width="800"]
-image::WrongIdOrPasswordList.png[width="800"]
+image::WrongIdPassword.PNG[width="800"]
+image::WrongIdOrPasswordList.PNG[width="800"]
 
 [NOTE]
 In all cases where the user inputs either the wrong ID or password or both, `showLoginError()` in `UserLoginException` will be
 called which brings up a warning dialog box that informs the user of wrong input credentials.
 
-image::LoginException.png[width="800"]
+image::LoginException.PNG[width="800"]
 
 The activity diagram below shows the overall picture of how the login mechanism works.
 
