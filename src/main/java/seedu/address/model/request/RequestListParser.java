@@ -23,7 +23,7 @@ public class RequestListParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static ArrayList<String> commandList;
     private static DiceCoefficient diceCoefficient;
-    private final double DICE_COEFFICIENT_THRESHOLD = 0.5;
+    private static final double DICE_COEFFICIENT_THRESHOLD = 0.5;
 
     /**
      * Parses user input into command for execution.
@@ -44,21 +44,22 @@ public class RequestListParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
-            case RequestCommand.COMMAND_WORD:
-                return new RequestCommandParser().parse(arguments);
+        case RequestCommand.COMMAND_WORD:
+            return new RequestCommandParser().parse(arguments);
 
-            case ViewRequestCommand.COMMAND_WORD:
-                return new ViewRequestCommand();
+        case ViewRequestCommand.COMMAND_WORD:
+            return new ViewRequestCommand();
 
-            default: {
-                for (String command : commandList) {
-                    if (diceCoefficient(commandWord, command) > DICE_COEFFICIENT_THRESHOLD) {
-                        throw new ParseException(MESSAGE_SIMILARITY_FOUND + command + "?");
-                    }
+        default: {
+            for (String command : commandList) {
+                if (diceCoefficient(commandWord, command) > DICE_COEFFICIENT_THRESHOLD) {
+                    throw new ParseException(MESSAGE_SIMILARITY_FOUND + command + "?");
                 }
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        }
         }
     }
 }
