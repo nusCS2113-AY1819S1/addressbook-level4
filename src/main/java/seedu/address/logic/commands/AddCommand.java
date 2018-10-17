@@ -9,8 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.distributor.Distributor;
 import seedu.address.model.Model;
+import seedu.address.model.distributor.Distributor;
 import seedu.address.model.person.Product;
 
 /**
@@ -49,8 +49,7 @@ public class AddCommand extends Command {
         requireNonNull(product);
         toAdd = product;
         requireNonNull(distributor);
-        distToAdd= distributor;
-
+        distToAdd = distributor;
     }
 
     @Override

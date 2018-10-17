@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.tag.Tag;
 import seedu.address.model.distributor.DistributorName;
+import seedu.address.model.tag.Tag;
 
 /**
  * Represents a Product in the address book.

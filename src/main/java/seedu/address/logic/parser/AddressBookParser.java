@@ -6,8 +6,35 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDistributorCommand;
+import seedu.address.logic.commands.AddReminderCommand;
+import seedu.address.logic.commands.AddTransactionCommand;
+import seedu.address.logic.commands.ChangeUserPasswordCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteDistributorCommand;
+import seedu.address.logic.commands.DeleteUserCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditDistributorCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindDistributorCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListDistributorCommand;
+import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LogoutCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RedoDistributorCommand;
+import seedu.address.logic.commands.RegisterUserCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UndoDistributorCommand;
+import seedu.address.logic.commands.ViewDueRemindersCommand;
+import seedu.address.logic.commands.ViewLastTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
