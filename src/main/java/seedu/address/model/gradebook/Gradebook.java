@@ -9,6 +9,7 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  */
 public class Gradebook {
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
+    private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
 
     private String moduleCode;
     private String gradebookComponentName;
