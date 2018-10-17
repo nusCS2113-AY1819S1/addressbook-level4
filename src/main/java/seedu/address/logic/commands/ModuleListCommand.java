@@ -31,6 +31,6 @@ public class ModuleListCommand extends Command {
 
         return new CommandResult(
                 String.format(MESSAGE_SUCCESS, StorageController.getModuleStorage().size(), "s")
-                        + "\n" + sb.toString());
+                + "\n" + sb.toString());
     }
 }
