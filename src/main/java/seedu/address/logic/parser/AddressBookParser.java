@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDistributorsCommand;
+import seedu.address.logic.commands.AddReminderCommand;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.ChangeUserPasswordCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -33,7 +34,8 @@ import seedu.address.logic.commands.RedoDistributorsCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoDistributorsCommand;
-import seedu.address.logic.commands.ViewLastTransaction;
+import seedu.address.logic.commands.ViewDueRemindersCommand;
+import seedu.address.logic.commands.ViewLastTransactionCommand;
 
 
 /**
