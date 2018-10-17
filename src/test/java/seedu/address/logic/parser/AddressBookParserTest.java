@@ -5,10 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_FALSE;
-import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_FALSE;
-import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_TRUE;
 import static seedu.address.logic.commands.CommandTestUtil.NUMBER_OF_GROUPS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
