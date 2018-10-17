@@ -90,8 +90,8 @@ public class AddressBookParser {
         case AddTransactionCommand.COMMAND_WORD:
             return new AddTransactionCommandParser().parse(arguments);
 
-        case ViewLastTransaction.COMMAND_WORD:
-            return new ViewLastTransaction();
+        case ViewLastTransactionCommand.COMMAND_WORD:
+            return new ViewLastTransactionCommand();
 
         case RedoDCommand.COMMAND_WORD:
             return new RedoDCommand();
