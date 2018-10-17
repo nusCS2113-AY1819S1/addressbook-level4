@@ -417,6 +417,44 @@ image::dataToGraphActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that needs to interact with storage controller or xml adapters directly but command should not have direct interaction from StorageController.
 // end::datatograph[]
 
+// tag::noteimportexport[]
+=== Notes data to/from Google Calendar
+==== Feature Description:
+*EXPORT :* +
+The user will be able to export notes from this application to a CSV file that follows the formatting required for importing calendar files to Google Calendar. The exporting process can be invoked by the user by entering the command below.
+
+*Command: `note export`*
+
+* The command `note export` will create a file with a .csv extension on the local storage.
+* Invoking the command above by itself will convert all notes data saved in the application to CSV format.
+* It can be extended to perform more specific instructions. The following arguments may be used:
+** `note export [m/MODULE_CODE] [m/MODULE_CODE]...`
+*** Specifying the MODULE_CODE argument allows the user to export notes from one or more selected modules only.
+
+A possible implementation of exporting to CSV is provided below. +
+1. Assuming that notes data are currently present in Trajectory, the user can invoke the `note export` command to begin exporting. +
+2. A parser class will be used to generate the correct formatting for the Google Calendar. +
+3. A CSV API will then be used to handle the writing to CSV. The file will be saved to a default directory in the user's local storage. +
+
+*IMPORT :* +
+The user will be able to import the data from a CSV file to generate a proper representation of the Note model. The importing process can be invoked by the user by entering the command below.
+
+*Command: `note import`*
+
+* The command will populate the notes data in the application from an existing CSV file.
+* It requires that the user specify the directory of the file.
+** Example: `note import C:\MyData\notes.csv`
+* However, importing from an external source will overwrite existing notes data in Trajectory.
+
+A possible implementation of importing from CSV is provided below. +
+1. The user calls the import command to get data from a CSV file. +
+2. A CSV utility class will be used to fetch the file. +
+3. It will then be passed to a parser class that will handle the conversion to the Note model. +
+4. The converted model will be copied to the Note Model list. +
+
+`Due to the nature of Google Calendar's data fields, the Note Management feature needs to be enhanced to have mandatory input fields that satisfies the minimum requirements for Google Calendar imports.`
+// end::noteimportexport[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -443,45 +481,6 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
-
-// tag::note[]
-=== Notes data to/from Google Calendar
-==== Feature Description:
-*EXPORT :* +
-The user will be able to export notes from this application to a CSV file that follows the formatting required for importing calendar files to Google Calendar. The exporting process can be invoked by the user by entering the command below.
-
-*Command: `note export`*
-
-* The command `note export` will create a file with a .csv extension on the local storage.
-* Invoking the command above by itself will convert all notes data saved in the application to CSV format.
-* It can be extended to perform more specific instructions. The following arguments may be used:
-** `note export [m/MODULE_CODE] [m/MODULE_CODE]...`
-*** Specifying the MODULE_CODE argument allows the user to export notes from one or more selected modules only.
-
-
-
-A possible implementation of exporting to CSV is provided below. +
-1. Assuming that notes data are currently present in Trajectory, the user can invoke the `note export` command to begin exporting. +
-2. A parser class will be used to generate the correct formatting for the Google Calendar. +
-3. A CSV API will then be used to handle the writing to CSV. The file will be saved to a default directory in the user's local storage. +
-
-*IMPORT :* +
-The user will be able to import the data from a CSV file to generate a proper representation of the Note model. The importing process can be invoked by the user by entering the command below.
-
-*Command: `note import`*
-
-* The command will populate the notes data in the application from an existing CSV file.
-* It requires that the user specify the directory of the file.
-** Example: `note import C:\MyData\notes.csv`
-* However, importing from an external source will overwrite existing notes data in Trajectory.
-
-A possible implementation of importing from CSV is provided below. +
-1. The user calls the import command to get data from a CSV file. +
-2. A CSV utility class will be used to fetch the file.
-3. It will then be passed to a parser class that will handle the conversion to the Note model.
-4. The converted model will be copied to the Note Model list.
-
-`Due to the nature of Google Calendar's data fields, the Note Management feature can be enhanced to have mandatory input fields that satisfies the requirements for Google Calendar imports.`
 
 == Documentation
 
