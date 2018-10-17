@@ -758,7 +758,7 @@ e.g. `note add m/CS2040C`
 e.g. `note list m/CS2040C`
 * *Delete a note* `note delete INDEX` +
 e.g. `note delete 8`
-* *Edit a note* `note edit INDEX [m/MODULE_CODE] [d/DATE]` `[Coming in v1.3] +
+* *Edit a note* `note edit INDEX [m/MODULE_CODE] [d/DATE]` `[Coming in v1.3]` +
 e.g. `note edit m/CS2040C 5 p/3`
 * *Find a note* `note find k/KEYWORD [k/KEYWORD]..` `[Coming in v1.3]` +
 e.g. `note find k/bubble k/queue`
