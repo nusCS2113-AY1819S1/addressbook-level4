@@ -11,6 +11,7 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
 //@@xllx1
@@ -44,7 +45,10 @@ public class AnnounceCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
+        //check if user is not admin, throw exception
+        if (!Context.getInstance().getCurrentUser().isAdmin()) {
+            throw new CommandException();
+        }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             unitOfWork.getAnnouncementRepository().addAnnouncement(toAnnounce);
             unitOfWork.commit();
