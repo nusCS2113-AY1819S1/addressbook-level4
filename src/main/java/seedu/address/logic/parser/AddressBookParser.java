@@ -13,7 +13,6 @@ import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.ChangeUserPasswordCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CreateUserCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDistributorsCommand;
 import seedu.address.logic.commands.DeleteUserCommand;
@@ -30,14 +29,13 @@ import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RedoDistributorsCommand;
+import seedu.address.logic.commands.RegisterUserCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoDistributorsCommand;
 import seedu.address.logic.commands.ViewDueRemindersCommand;
 import seedu.address.logic.commands.ViewLastTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-
-
 
 /**
  * Parses user input.
@@ -135,8 +133,8 @@ public class AddressBookParser {
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
 
-        case CreateUserCommand.COMMAND_WORD:
-            return new CreateUserCommandParser().parse(arguments);
+        case RegisterUserCommand.COMMAND_WORD:
+            return new RegisterUserCommandParser().parse(arguments);
 
         case DeleteUserCommand.COMMAND_WORD:
             return new DeleteUserCommandParser().parse(arguments);

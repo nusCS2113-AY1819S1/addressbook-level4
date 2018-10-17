@@ -13,13 +13,13 @@ import seedu.address.model.login.Username;
  */
 public class SampleUsersUtil {
 
-    public static final String ALEXABPATH = "data/addressbook-alex.xml";
-    public static final String BERNICEABPATH = "data/addressbook-bernice.xml";
+    public static final String ALEX_AB_PATH = "data/addressbook-alex.xml";
+    public static final String BERNICE_AB_PATH = "data/addressbook-bernice.xml";
 
     public static User[] getSampleUsers() {
         return new User[] {
-            new User(new Username("alex"), new Password("87438807"), Paths.get(ALEXABPATH)),
-            new User(new Username("bernice"), new Password("99272758"), Paths.get(BERNICEABPATH))
+            new User(new Username("alex"), new Password("87438807"), Paths.get(ALEX_AB_PATH)),
+            new User(new Username("bernice"), new Password("99272758"), Paths.get(BERNICE_AB_PATH))
         };
     }
 

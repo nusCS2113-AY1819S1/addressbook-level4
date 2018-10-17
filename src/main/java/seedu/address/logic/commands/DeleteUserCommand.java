@@ -16,10 +16,10 @@ import seedu.address.model.login.exceptions.UserNotFoundException;
  */
 public class DeleteUserCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete-user";
+    public static final String COMMAND_WORD = "deregister";
 
-    public static final String MESSAGE_USAGE = "Delete the user with the parameters: u/USERNAME p/PASSWORD"
-            + "\nEXAMPLE: delete-user u/user p/123456"
+    public static final String MESSAGE_USAGE = "Deregister the user with the parameters: u/USERNAME p/PASSWORD"
+            + "\nEXAMPLE: deregister u/user p/123456"
             + "\nNote: You must be logged out before executing this command and username and password must be valid";
 
     public static final String MESSAGE_SUCCESS = "User successfully deleted: %1$s";

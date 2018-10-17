@@ -13,11 +13,11 @@ import seedu.address.model.login.exceptions.DuplicateUserException;
 /**
  * Adds a user to the user database.
  */
-public class CreateUserCommand extends Command {
+public class RegisterUserCommand extends Command {
 
-    public static final String COMMAND_WORD = "create";
+    public static final String COMMAND_WORD = "register";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new user and adds to the user database. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Registers a new user and adds to the user database. "
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD ";
@@ -29,9 +29,9 @@ public class CreateUserCommand extends Command {
     private final User toCreate;
 
     /**
-     * Creates a CreateUserCommand to add the specified {@code User}
+     * Creates a RegisterUserCommand to add the specified {@code User}
      */
-    public CreateUserCommand(User user) {
+    public RegisterUserCommand(User user) {
         requireNonNull(user);
         toCreate = user;
     }
@@ -51,7 +51,7 @@ public class CreateUserCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof CreateUserCommand // instanceof handles nulls
-                && toCreate.equals(((CreateUserCommand) other).toCreate));
+                || (other instanceof RegisterUserCommand // instanceof handles nulls
+                && toCreate.equals(((RegisterUserCommand) other).toCreate));
     }
 }
