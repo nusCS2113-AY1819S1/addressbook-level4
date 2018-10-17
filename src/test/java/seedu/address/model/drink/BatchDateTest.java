@@ -4,12 +4,11 @@ package seedu.address.model.drink;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.time.format.DateTimeParseException;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.testutil.Assert;
-
-import java.time.DateTimeException;
-import java.time.format.DateTimeParseException;
 
 class BatchDateTest {
     @Test
@@ -24,7 +23,7 @@ class BatchDateTest {
     }
 
     @Test
-    public void constructor_nonExistingDate_DateTimeParseException() {
+    public void constructor_nonExistingDate_throwsDateTimeParseException() {
         String invalidDate = "30/2/2018";
         Assert.assertThrows(DateTimeParseException.class, () -> new BatchDate(invalidDate));
     }
