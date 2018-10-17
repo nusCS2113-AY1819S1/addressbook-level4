@@ -10,12 +10,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Set;
 
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -71,11 +70,7 @@ public class EventPageFormatter {
 
     }
 
-    private static void formatAddress(Address address) {
-
-    }
-
-    private static void formatAttendance(Attendance attendance) {
+    private static void formatVenue(Venue Venue) {
 
     }
 
