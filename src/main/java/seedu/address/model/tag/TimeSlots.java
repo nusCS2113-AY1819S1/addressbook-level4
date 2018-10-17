@@ -1,5 +1,10 @@
 package seedu.address.model.tag;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -7,7 +12,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Tag in the address book.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
-public class Tag {
+public class TimeSlots {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
@@ -35,7 +40,7 @@ public class Tag {
             "Fri1pm", "CS2101", "Fri3pm", "Fri4pm", "Fri5pm", "Fri6pm", "Fri7pm"};
 
 
-    private String tagName;
+    public String timeslot;
 
 
     /**
@@ -43,54 +48,78 @@ public class Tag {
      *
      * @param tagName A valid tag name.
      */
-    public Tag(String tagName) {
-        requireNonNull(tagName);
-        checkArgument(isValidTagName(tagName), MESSAGE_TAG_CONSTRAINTS);
-        this.tagName = tagName;
+    public TimeSlots(String timeslot) {
+        requireNonNull(timeslot);
+        this.timeslot = timeslot;
+    }
+    public static Map<String, List<TimeSlots>> sampleTimeSlots() {
+        Map<String, List<TimeSlots>> sampletimeslot= new HashMap<>();
+        sampletimeslot.put("mon", getMon());
+        sampletimeslot.put("tue", getTue());
+        sampletimeslot.put("wed", getWed());
+        sampletimeslot.put("thu", getThu());
+        sampletimeslot.put("fri", getMon());
+
+        return sampletimeslot;
     }
 
     public static String[] getHeader() {
         return SET_VALUES;
     }
 
-    public static String[] getMon() {
-        return mon;
+    public static List<TimeSlots> getMon() {
+        List<TimeSlots> monTimeSlots = new ArrayList<>();
+        for(String it: mon ){
+            monTimeSlots.add(new TimeSlots(it));
+        }
+        return monTimeSlots;
+    }
+    public static List<TimeSlots> getTue() {
+        List<TimeSlots> tueTimeSlots = new ArrayList<>();
+        for(String it: tue ){
+            tueTimeSlots.add(new TimeSlots(it));
+        }
+        return tueTimeSlots;
     }
 
-    public static String[] getTue() {
-        return tue;
+    public static List<TimeSlots> getWed() {
+        List<TimeSlots> wedTimeSlots = new ArrayList<>();
+        for(String it: wed ){
+            wedTimeSlots.add(new TimeSlots(it));
+        }
+        return wedTimeSlots;
     }
 
-    public static String[] getWed() {
-        return wed;
+    public static List<TimeSlots> getThu() {
+        List<TimeSlots> thuTimeSlots = new ArrayList<>();
+        for(String it: thu ){
+            thuTimeSlots.add(new TimeSlots(it));
+        }
+        return thuTimeSlots;
     }
 
-    public static String[] getThu() {
-        return thu;
+    public static List<TimeSlots> getFri() {
+        List<TimeSlots> friTimeSlots = new ArrayList<>();
+        for(String it: fri ){
+            friTimeSlots.add(new TimeSlots(it));
+        }
+        return friTimeSlots;
     }
-
-    public static String[] getFri() {
-        return fri;
-    }
-
 
     /**
      * Returns true if a given string is a valid tag name.
      */
-    public static boolean isValidTagName(String test) {
-        return test.matches(TAG_VALIDATION_REGEX);
-    }
 
     @Override
     public int hashCode() {
-        return tagName.hashCode();
+        return timeslot.hashCode();
     }
 
     /**
      * Format state as text for viewing.
      */
     public String toString() {
-        return '[' + tagName + ']';
+        return timeslot;
     }
 
 }
