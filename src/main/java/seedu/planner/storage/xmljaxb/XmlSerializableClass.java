@@ -1,4 +1,4 @@
-package seedu.planner.storage.xml_jaxb;
+package seedu.planner.storage.xmljaxb;
 
 import seedu.planner.commons.exceptions.IllegalValueException;
 

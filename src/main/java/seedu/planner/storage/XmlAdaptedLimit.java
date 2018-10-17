@@ -1,5 +1,5 @@
 package seedu.planner.storage;
-
+import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.planner.commons.exceptions.IllegalValueException;
@@ -7,7 +7,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.MoneyFlow;
 
-import java.util.Objects;
+
 
 
 /**
@@ -30,7 +30,7 @@ public class XmlAdaptedLimit {
     /**
      * Detailed input strings constructor.
      */
-    public XmlAdaptedLimit (String dateStart, String dateEnd, String moneyFlow ){
+    public XmlAdaptedLimit (String dateStart, String dateEnd, String moneyFlow) {
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
         this.moneyFlow = moneyFlow;
@@ -40,12 +40,17 @@ public class XmlAdaptedLimit {
      * Given Limit type constructor.
      * @param limit
      */
-    public XmlAdaptedLimit(Limit limit){
+    public XmlAdaptedLimit(Limit limit) {
         this.dateStart = limit.getDateStart().value;
         this.dateEnd = limit.getDateEnd().value;
         this.moneyFlow = limit.getLimitMoneyFlow().value;
     }
 
+    /**
+     * Change the xml file storage into the actual limit module.
+     * @return
+     * @throws IllegalValueException
+     */
     public Limit toModelType() throws IllegalValueException {
         if (dateStart == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));

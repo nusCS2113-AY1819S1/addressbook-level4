@@ -31,7 +31,7 @@ public class LimitCommand extends Command {
 
     public static final String MESSAGE_EXCEED = "Your spend exceeded the limit !!! "; //%l$s";
     public static final String MESSAGE_NOT_EXCEED = "Your spend did not exceed the limit ^o^";
-    public static final String MESSAGE_LIMITS_SAMEDATE ="There are already limits for that period of date";
+    public static final String MESSAGE_LIMITS_SAME_DATE = "There are already limits for that period of date";
 
     private Limit limit;
     private String output;
@@ -44,17 +44,19 @@ public class LimitCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (model.hasSameDateLimit(limit)) {
-            throw new CommandException(MESSAGE_LIMITS_SAMEDATE);
+            throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
         }
 
         model.addLimit(limit);
 
         if (model.isExceededLimit(limit)) {
-            output = String.format(MESSAGE_BASIC, limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())+
-                    MESSAGE_EXCEED;
+            output = String.format(MESSAGE_BASIC,
+                    limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
+                    + MESSAGE_EXCEED;
         } else {
-            output = String.format(MESSAGE_BASIC, limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())+
-                    MESSAGE_NOT_EXCEED;
+            output = String.format(MESSAGE_BASIC,
+                    limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
+                    + MESSAGE_NOT_EXCEED;
         }
 
         return new CommandResult(output);

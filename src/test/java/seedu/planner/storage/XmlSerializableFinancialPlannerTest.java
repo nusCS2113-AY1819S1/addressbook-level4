@@ -12,7 +12,7 @@ import org.junit.rules.ExpectedException;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.commons.util.XmlUtil;
 import seedu.planner.model.FinancialPlanner;
-import seedu.planner.storage.xml_jaxb.XmlSerializableFinancialPlanner;
+import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.testutil.TypicalRecords;
 
 public class XmlSerializableFinancialPlannerTest {

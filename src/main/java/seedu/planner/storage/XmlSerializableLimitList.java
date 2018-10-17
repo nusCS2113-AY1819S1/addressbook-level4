@@ -10,7 +10,7 @@ import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
-import seedu.planner.storage.xml_jaxb.XmlSerializableClass;
+import seedu.planner.storage.xmljaxb.XmlSerializableClass;
 
 
 

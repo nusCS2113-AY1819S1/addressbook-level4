@@ -1,4 +1,4 @@
-package seedu.planner.storage.xml_jaxb;
+package seedu.planner.storage.xmljaxb;
 
 import static java.util.Objects.requireNonNull;
 

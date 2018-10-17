@@ -161,7 +161,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      * The newly added limit can not share same dates with the rest.
      * @param limit
      */
-    public void addLimit(Limit limit) { limits.add(limit);}
+    public void addLimit(Limit limit) {
+        limits.add(limit); }
 
     /**
      * check whether the records' money has already exceeded the limit.
@@ -172,8 +173,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public boolean isExceededLimit (Limit limit) {
         Double recordsMoney = 0.0;
 
-        for (Record i: records){
-            if (limit.isInsideDatePeriod(i)){
+        for (Record i: records) {
+            if (limit.isInsideDatePeriod(i)) {
                 recordsMoney += i.getMoneyFlow().toDouble();
             }
         }
@@ -184,7 +185,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      * Removes a limit from the list,
      * @param limitin must already existed.
      */
-    public void removeLimit(Limit limitin) { limits.remove(limitin);}
+    public void removeLimit(Limit limitin) {
+        limits.remove(limitin); }
 
 
 
@@ -201,10 +203,12 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
     // TODO make it return a read only map
     @Override
-    public SummaryMap getSummaryMap() { return summaryMap; }
+    public SummaryMap getSummaryMap() {
+        return summaryMap; }
 
     @Override
-    public ObservableList<Limit> getLimitList () { return limits.asUnmodifiableObservableList();}
+    public ObservableList<Limit> getLimitList () {
+        return limits.asUnmodifiableObservableList(); }
 
     @Override
     public boolean equals(Object other) {
