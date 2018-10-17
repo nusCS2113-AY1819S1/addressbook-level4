@@ -67,25 +67,25 @@ public class AddGroupTest {
     }
 
     @Test
-    public void test_validPersonIndexSet_returnsTrue(){
+    public void test_validPersonIndexSet_returnsTrue() {
 
         assertTrue(getAddGroup3().validPersonIndexSet(1));
     }
 
     @Test
-    public void test_invalidPersonIndexSet_returnsFalse(){
+    public void test_invalidPersonIndexSet_returnsFalse() {
 
         assertFalse(getAddGroup3().validPersonIndexSet(0));
     }
 
     @Test
-    public void test_validGroupIndex_returnsTrue(){
+    public void test_validGroupIndex_returnsTrue() {
 
         assertTrue(getAddGroup3().validGroupIndex(1));
     }
 
     @Test
-    public void test_invalidGroupIndex_returnsFalse(){
+    public void test_invalidGroupIndex_returnsFalse() {
 
         assertFalse(getAddGroup3().validGroupIndex(0));
     }
@@ -94,7 +94,7 @@ public class AddGroupTest {
     public void equals() {
         // same values -> returns true
         AddGroup addGroup = getAddGroup1();
-        AddGroup addGroupCopy = new AddGroup(INDEX_FIRST_GROUP,getTypicalPersonIndicesSet());
+        AddGroup addGroupCopy = new AddGroup(INDEX_FIRST_GROUP, getTypicalPersonIndicesSet());
 
         assertTrue(addGroup.equals(addGroupCopy));
 

@@ -53,7 +53,7 @@ public class TypicalGroups {
         return ab;
     }
 
-    public static Group getTut1(){
+    public static Group getTut1() {
         return new GroupBuilder()
                 .withGroupName(VALID_GROUP_NAME_TUT_1)
                 .withGroupLocation(VALID_GROUP_LOCATION_TUT_1)
@@ -64,7 +64,7 @@ public class TypicalGroups {
         return new ArrayList<>(Arrays.asList(TUT_1, CS1010, TUT_2, TUT_3, TUT_4));
     }
 
-    public static final Group getTypicalGroupsWithPersons(){
+    public static final Group getTypicalGroupsWithPersons() {
         Group group = new GroupBuilder(TUT_1).build();
         group.addPersons(ALICE);
         return group;

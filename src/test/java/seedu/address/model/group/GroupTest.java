@@ -47,7 +47,7 @@ public class GroupTest {
     }
 
     @Test
-    public void addPersons_addPersonSetWithPerson_personSetModified(){
+    public void addPersons_addPersonSetWithPerson_personSetModified() {
         Group expected = getTypicalGroupsWithPersons();
 
         Group actual = getTut1();
