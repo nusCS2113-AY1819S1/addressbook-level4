@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
+import seedu.address.model.login.UserRole;
 
 /**
  * A utility class to help with building LoginDetails objects.
@@ -14,6 +15,7 @@ public class AccountBuilder {
 
     private UserId userId;
     private UserPassword userPassword;
+    private UserRole userRole;
 
     public AccountBuilder() {
         userId = new UserId(DEFAULT_USERID);
@@ -44,8 +46,16 @@ public class AccountBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code UserPassword} of the {@code LoginDetails} that we are building.
+     */
+    public AccountBuilder withUserRole(String userrole) {
+        this.userRole = new UserRole(userrole);
+        return this;
+    }
+
     public LoginDetails build() {
-        return new LoginDetails(userId, userPassword);
+        return new LoginDetails(userId, userPassword, userRole);
     }
 
 }

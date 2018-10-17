@@ -34,6 +34,8 @@ public class CommandTestUtil {
     public static final String VALID_ID_ACCOUNT2 = "A1234568M";
     public static final String VALID_PASSWORD_ACCOUNT1 = "zaq1xsw2cde3";
     public static final String VALID_PASSWORD_ACCOUNT2 = "1qaz2wsx3edc";
+    public static final String VALID_ROLE_ACCOUNT1 = "member";
+    public static final String VALID_ROLE_ACCOUNT2 = "treasurer";
 
     public static final String USERID_DESC_ACCOUNT1 = " " + PREFIX_USERID + VALID_ID_ACCOUNT1;
     public static final String USERID_DESC_ACCOUNT2 = " " + PREFIX_USERID + VALID_ID_ACCOUNT2;
