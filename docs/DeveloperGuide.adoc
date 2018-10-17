@@ -298,6 +298,52 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::UndoRedoActivityDiagram.png[width="650"]
 
+//zcstart
+=== Class Add feature
+==== Current Implementation
+
+The add mechanism is facilitated by `ClassroomManager` supported by `StorageController`.
+It makes use of the following operations:
+
+* `ClassroomManager#addClassroom()` -- Adds a new classroomList to the in-memory array list.
+* `ClassroomManager#readClassroomList()` -- Gets the classroom list from storage and converts it to a Classroom array list.
+* `ClassroomManager#saveClassroomList()` -- Converts the classroom array list and invokes the StorageController to save the current classroom list to file.
+
+These operations are used in the `ClassAddCommand` class under `ClassAddCommand#execute()`.
+
+Given below is an example usage scenario and how the add/list mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `StorageController#retrieveData()` will retrieve all datasets saved locally.
+
+Step 2. The user executes `class add c/16...` command to add a new classroom to Trajectory. The `class add` command calls the `ClassAddCommand#execute()`. The `ClassroomManager` will be instantiated and read the classroom list from the storage and converts the data from XmlAdaptedClassroom to the Classroom data type.
+
+Step 3. The `classroomManager#saveClassroomList()` will be called to converts the classroom array list and invokes the StorageController to save the current classroom list to file. This is done by first converting our `Classroom` object into `XmlAdaptedClassroom` objects and saving it.
+
+=== Class List feature
+==== Current Implementation
+
+The list mechanism is facilitated by `ClassroomManager` supported by `StorageController`.
+It makes use the following operations:
+
+* `ClassroomManager#readClassroomList()` -- Gets the classroom list from storage and converts it to a Classroom array list.
+* `ClassroomManager#saveClassroomList()` -- Converts the classroom array list and invokes the StorageController to save the current classroom list to file.
+* `ClassroomManager#getClassroomList()` -- Gets the classroom list from the in-memory array list.
+
+These operations are used in the `ClassListCommand` class under `ClassListCommand#execute()`..
+
+Given below is an example usage scenario and how the add/list mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `StorageController#retrieveData()` will retrieve all datasets saved locally.
+
+Step 2. The user executes `class list` command to list all classrooms to Trajectory. The `class list` command calls the `ClassListCommand#execute()`. The `ClassroomManager` will be instantiated and read the classroom list from the storage and converts the data from XmlAdaptedClassroom to the Classroom data type.
+
+Step 3. The classroom list with the corresponding classroom information will be appended to the with the support of the `StringBuilder` and displayed as a message successfully.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+image::classaddlist.PNG[width="800"]
+
+//zcend
 ==== Design Considerations
 
 ===== Aspect: How undo & redo executes
