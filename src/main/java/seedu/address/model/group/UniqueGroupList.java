@@ -44,7 +44,7 @@ public class UniqueGroupList implements Iterable<Group> {
         requireNonNull(toCheck);
         for (Group g : internalList) {
             if (g.isSameGroup(toCheck.getGroup())) {
-                return contains(g,toCheck);
+                return contains(g, toCheck);
             }
         }
         return false;

@@ -61,11 +61,19 @@ public class Group {
         return Collections.unmodifiableSet(persons);
     }
 
+    /**
+     * Adds a single person
+     * @param persons
+     */
     public void addPersons(Person persons) {
         requireNonNull(persons);
         this.persons.add(persons);
     }
 
+    /**
+     * Adds multiple persons
+     * @param persons
+     */
     public void addPersons(Set<Person> persons) {
         requireNonNull(persons);
         this.persons.addAll(persons);

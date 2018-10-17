@@ -31,6 +31,10 @@ public class GroupPersonListPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Displays list of person(s) in group selected
+     * @param group
+     */
     private void loadGroupPersons(Group group) {
         ObservableList<Person> personObservableList = FXCollections.observableArrayList();
         for (Person p: group.getPersons()) {

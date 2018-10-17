@@ -65,7 +65,7 @@ public class SampleDataUtil {
             new Group(new GroupName("CS2040C"), new GroupLocation("LT15"), getTagSet("cpp", "tuesday", "5pm")),
 
             new Group(new GroupName("MA1508"), new GroupLocation("E1-01-01"),
-                    getTagSet("maths","linear", "wednesday", "2pm")),
+                    getTagSet("maths", "linear", "wednesday", "2pm")),
 
             new Group(new GroupName("CG2027"), new GroupLocation("E2-02-02"),
                     getTagSet("circuits", "monday", "12pm")),

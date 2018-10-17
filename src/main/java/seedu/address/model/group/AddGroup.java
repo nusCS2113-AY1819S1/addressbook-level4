@@ -55,6 +55,12 @@ public class AddGroup {
         }
     }
 
+    /**
+     * Check if person index input by user is in range of what
+     * is displayed on the person list panel.
+     * @param size
+     * @return
+     */
     public boolean validPersonIndexSet(int size) {
         for (Index i : personIndices) {
             if (i.getZeroBased() >= size) {
@@ -64,6 +70,12 @@ public class AddGroup {
         return true;
     }
 
+    /**
+     * Check if group index input by user is in range of what
+     * is displayed on the group list panel.
+     * @param size
+     * @return
+     */
     public boolean validGroupIndex(int size) {
         if (groupIndex.getZeroBased() >= size) {
             return false;
