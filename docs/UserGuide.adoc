@@ -204,7 +204,7 @@ Example:
 * `module delete c/CS2113` +
 Deletes the module with module code `CS2113`
 
-==== Find module : `module find`
+==== Find module : `module find [coming in v1.3]`
 Finds modules whose module codes contain any of the given keywords. This is useful for checking if certain module exists in the system. +
 Format: `module find KEYWORD [MORE_KEYWORDS]`
 
