@@ -6,8 +6,35 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddDistributorsCommand;
+import seedu.address.logic.commands.AddTransactionCommand;
+import seedu.address.logic.commands.ChangeUserPasswordCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CreateUserCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteDistributorsCommand;
+import seedu.address.logic.commands.DeleteUserCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditDistributorsCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindDistributorsCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListDistributorsCommand;
+import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RedoDistributorsCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UndoDistributorsCommand;
+import seedu.address.logic.commands.ViewLastTransaction;
+
 
 /**
  * Parses user input.
@@ -36,14 +63,14 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddDCommand.COMMAND_WORD:
-            return new AddDCommandParser().parse(arguments);
+        case AddDistributorsCommand.COMMAND_WORD:
+            return new AddDistributorsCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditDCommand.COMMAND_WORD:
-            return new EditDCommandParser().parse(arguments);
+        case EditDistributorsCommand.COMMAND_WORD:
+            return new EditDistributorsCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -51,8 +78,8 @@ public class AddressBookParser {
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
-        case DeleteDCommand.COMMAND_WORD:
-            return new DeleteDCommandParser().parse(arguments);
+        case DeleteDistributorsCommand.COMMAND_WORD:
+            return new DeleteDistributorsCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
@@ -60,14 +87,14 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
-        case FindDCommand.COMMAND_WORD:
-            return new FindDCommandParser().parse(arguments);
+        case FindDistributorsCommand.COMMAND_WORD:
+            return new FindDistributorsCommandParser().parse(arguments);
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListDCommand.COMMAND_WORD:
-            return new ListDCommand();
+        case ListDistributorsCommand.COMMAND_WORD:
+            return new ListDistributorsCommand();
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -81,8 +108,8 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case UndoDCommand.COMMAND_WORD:
-            return new UndoDCommand();
+        case UndoDistributorsCommand.COMMAND_WORD:
+            return new UndoDistributorsCommand();
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
@@ -93,8 +120,8 @@ public class AddressBookParser {
         case ViewLastTransactionCommand.COMMAND_WORD:
             return new ViewLastTransactionCommand();
 
-        case RedoDCommand.COMMAND_WORD:
-            return new RedoDCommand();
+        case RedoDistributorsCommand.COMMAND_WORD:
+            return new RedoDistributorsCommand();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();

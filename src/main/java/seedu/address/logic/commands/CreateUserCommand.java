@@ -17,7 +17,7 @@ public class CreateUserCommand extends Command {
 
     public static final String COMMAND_WORD = "create";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": creates a new user and adds to the user database. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new user and adds to the user database. "
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD ";

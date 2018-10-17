@@ -14,7 +14,7 @@ import seedu.address.model.distributor.Distributor;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteDCommand extends Command {
+public class DeleteDistributorsCommand extends Command {
 
     public static final String COMMAND_WORD = "deleteD";
 
@@ -27,7 +27,7 @@ public class DeleteDCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteDCommand(Index targetIndex) {
+    public DeleteDistributorsCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -49,7 +49,7 @@ public class DeleteDCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteDCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteDCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteDistributorsCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteDistributorsCommand) other).targetIndex)); // state check
     }
 }
