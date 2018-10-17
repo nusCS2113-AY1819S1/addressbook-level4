@@ -21,6 +21,7 @@ import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -50,6 +51,7 @@ public class StockListParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
         case EditCommand.COMMAND_WORD:
@@ -80,6 +82,8 @@ public class StockListParser {
             return new ChangeStatusCommandParser().parse(arguments);
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
