@@ -221,6 +221,8 @@ public abstract class EventManagerSystemTest {
             expectedUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
                     + "?name="
                     + selectedCardHandle.getName().replaceAll(" ", "%20")
+                    + "&contact="
+                    + selectedCardHandle.getContact().replaceAll(" ", "%20")
                     + "&phone="
                     + selectedCardHandle.getPhone()
                     + "&email="

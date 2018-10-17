@@ -43,6 +43,8 @@ public class BrowserPanelTest extends GuiUnitTest {
         URL expectedPersonUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
                 + "?name="
                 + ALICE.getName().fullName.replaceAll(" ", "%20")
+                + "?contact="
+                + ALICE.getContact().fullContactName.replaceAll(" ", "%20")
                 + "&phone="
                 + ALICE.getPhone()
                 + "&email="
