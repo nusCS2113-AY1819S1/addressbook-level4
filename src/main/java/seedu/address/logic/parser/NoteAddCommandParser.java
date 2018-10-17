@@ -32,6 +32,10 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
         String noteDate = (argMultimap.getValue(PREFIX_NOTE_DATE).isPresent())
                 ? argMultimap.getValue(PREFIX_NOTE_DATE).get() : "No Date";
 
+        if (noteDate.trim().length() == 0) {
+            noteDate = "No Date";
+        }
+
         Note note = new Note(moduleCode, noteDate);
         return new NoteAddCommand(note);
     }

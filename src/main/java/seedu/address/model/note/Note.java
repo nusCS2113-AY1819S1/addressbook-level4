@@ -9,10 +9,6 @@ public class Note {
     private String date;
     private String noteText;
 
-    public Note() {
-
-    }
-
     public Note(String moduleCode, String date) {
         this.moduleCode = moduleCode;
         this.date = date;

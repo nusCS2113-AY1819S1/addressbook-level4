@@ -27,6 +27,8 @@ public class NoteListCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NOTE_MODULE_CODE + "CS2040C";
 
+    private NoteManager noteManager = new NoteManager();
+
     private final Predicate<Note> predicate;
 
     public NoteListCommand(Predicate<Note> predicate) {
@@ -35,8 +37,6 @@ public class NoteListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        NoteManager noteManager = new NoteManager();
-
         noteManager.updateFilteredNotesList(predicate);
 
         if (noteManager.getFilteredNotesListSize() > 0) {
