@@ -10,7 +10,7 @@ import seedu.address.model.classroom.ClassroomManager;
 import seedu.address.ui.HtmlTableProcessor;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all all the class from the classlist.
  */
 public class ClassListCommand extends Command {
 

@@ -10,7 +10,7 @@ import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
 
 /**
- * Creates a class for a module.
+ * Deletes a class from the classroom list.
  */
 public class ClassDeleteCommand extends Command {
     public static final String COMMAND_WORD = "class delete";
@@ -33,7 +33,7 @@ public class ClassDeleteCommand extends Command {
     private final ClassroomManager classroomManager;
 
     /**
-     * Command creates a classroom to be added.
+     * Command deletes a classroom.
      */
     public ClassDeleteCommand(String className, String moduleCode) {
         classroomManager = new ClassroomManager();
