@@ -341,6 +341,78 @@ image::SortSequenceDiagram.png[width="650"]
 // end::Sorting[]
 
 
+// tag:: Invite[]
+=== Invite feature
+
+==== Current Implementation
+
+The `invite` command allows users to add attendees to an existing event, represented by a `Event` object.
+The command currently only allows users to add a single person to an event, based on the indices on the UI.
+This command adds the invited `Person` 's name, which is unique, to a chosen `Event`, so that the attendees of a particular event is recorded.
+
+The adding of attendees is facilitated by the class: `Attendees`, a list of names of type String.
+
+The following is a more detailed description of the class:
+
+*  `Attendees`
+** Each `Event` object has a `Attendees`, which is a list of the names of the `Person` attending the event.
+** This class is a wrapper class around the internal representation of a list of attendees that exposes only a few functions of a `Set` of `String`.
+** Only the names of the `Person` is recorded in an `Event`, as the name should be unique and uneditable.
+
+==== Execution of Command
+
+Given below is an example usage scenario and how the invite mechanism works.
+
+Step 1. The user executes `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list. The command text is passed to an instance of the `LogicManager` class.
+
+Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `invite` command phrase.
+
+Step 3. `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned.
+
+Step 4. `Logic Manager` then executes this `InviteCommand` by calling `InviteCommand#execute`.
+
+Step 5. The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected.
+
+Step 6. Next, the `Person` object's name is obtained and added to the `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
+
+Step 7. The new `Event` object is updated to the model by calling `Model#updateEvent`.
+
+Step 8. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
+
+The sequence diagram below illustrates the execution of the `invite` command.
+
+image::InviteSequenceDiagram.png[width="800"]
+
+==== Design Consideration
+
+===== Aspect: How to link Person and Object
+
+* **Alternative 1 (current choice):** Saves only the names of the Persons in the Attendees of Events.
+** Pros: Saves space. Able to filter EventList easily.
+** Cons: Requires going through the entire list of AddressBook to obtain details of persons attending the particular event.
+
+* **Alternative 2:** Saves the entire information of Events for each Persons.
+** Pros: Fast access to information of Events attended by any Persons.
+** Cons: Takes up a lot of storage space and memory. Many repeated items within the storage files.
+
+* **Alternative 3:** Assign an ID to each Persons and store in Attendees of Events.
+** Pros: Able to edit names in a straightforward coding manner.
+** Cons: We must add or assign an ID to each Persons. Unnecessary if name is unique and uneditable.
+
+===== Aspect: Data structure to support invite command
+
+* **Alternative 1 (current choice):** Use `HashSet` to store persons names.
+** Pros: Easier and faster to retrieve or validate names stored. Able to handle duplicates easily.
+** Cons: Sequence of persons added is lost. Currently, this feature is not important for the project.
+
+* **Alternative 2:** Use `ArrayList` to store persons names.
+** Pros: Names are stored in order of addition.
+** Cons: Inefficient when handling data.
+
+// end::Invite[]
+
+
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
