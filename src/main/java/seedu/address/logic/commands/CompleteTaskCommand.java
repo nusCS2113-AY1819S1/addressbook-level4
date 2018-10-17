@@ -1,17 +1,17 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
+import static seedu.address.storage.XmlSerializableTodoList.MESSAGE_DUPLICATE_TASK;
+
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
-
-import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
-import static seedu.address.storage.XmlSerializableTodoList.MESSAGE_DUPLICATE_TASK;
 
 /**
  * Edits the {@code isComplete} field of an existing task in the to-do list.
