@@ -86,7 +86,8 @@ public class XmlFinancialPlannerStorageTest {
         Path filePathSummaryMap = testFolder.getRoot().toPath().resolve("TempSummaryMap.xml");
         Path filePathLimitList = testFolder.getRoot().toPath().resolve("TempLimitList.xml");
         FinancialPlanner original = getTypicalFinancialPlanner();
-        XmlFinancialPlannerStorage xmlFinancialPlannerStorage = new XmlFinancialPlannerStorage(recordListFilePath, filePathSummaryMap, filePathLimitList);
+        XmlFinancialPlannerStorage xmlFinancialPlannerStorage = new XmlFinancialPlannerStorage(recordListFilePath,
+                filePathSummaryMap, filePathLimitList);
 
         //Save in new file and read back
         xmlFinancialPlannerStorage.saveRecordList(original, recordListFilePath);
