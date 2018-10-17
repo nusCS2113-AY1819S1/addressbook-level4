@@ -31,7 +31,7 @@ import seedu.recruit.model.UserPrefs;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-    
+
     private static String currentBook = "companyBook";
 
     private final Logger logger = LogsCenter.getLogger(getClass());

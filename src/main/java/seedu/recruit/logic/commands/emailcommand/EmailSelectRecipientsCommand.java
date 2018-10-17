@@ -13,9 +13,6 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.ui.MainWindow;
 
-import java.util.ArrayList;
-
-
 /**
  * 2nd step of the Email command
  */
@@ -38,7 +35,7 @@ public class EmailSelectRecipientsCommand extends Command {
             emailUtil.setAreRecipientsCandidates(true);
         } else {
             ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
-            for(JobOffer recipient : recipients) {
+            for (JobOffer recipient : recipients) {
                 emailUtil.addJobOffer(recipient);
             }
             emailUtil.setAreRecipientsCandidates(false);

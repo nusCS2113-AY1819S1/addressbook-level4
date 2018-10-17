@@ -28,12 +28,12 @@ public class EmailSelectContentsCommand extends Command {
 
         if (emailUtil.isAreRecipientsCandidates()) {
             ObservableList<JobOffer> contents = model.getFilteredCompanyJobList();
-            for(JobOffer content : contents) {
+            for (JobOffer content : contents) {
                 emailUtil.addJobOffer(content);
             }
         } else {
             ObservableList<Candidate> contents = model.getFilteredCandidateList();
-            for(Candidate content : contents) {
+            for (Candidate content : contents) {
                 emailUtil.addCandidate(content);
             }
         }
