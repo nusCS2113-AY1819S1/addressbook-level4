@@ -142,15 +142,6 @@ Examples:
 * `loanList n/Arduino q/20 l/KinWhye` +
 This would update the status of the 20 arduinos to loan
 
-=== Creating an archive of quantities for all items: `archive` +
-An archive will be created and named.
-Format: `archive n/NAME`
-
-Examples:
-
-* `archive n/ForAugust` +
-This would archive all the quantities of all items at the time when the command is inputed, and the name for this archive is `ForAugust`.
-
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -211,6 +202,17 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+// tag::savecommand[]
+=== Save current version of stock list : `save`
+An xml file recording current stocks will be created and named. +
+Format: `save NAME`
+
+Examples:
+
+* `save ForAugust` +
+This would save the stock list at the time when the command is inputted, and the name for this xml file is
+`ForAugust.xml`, under a /versions/ folder in main.
+// end::savecommand[]
 
 === Exiting the program : `exit`
 
@@ -237,8 +239,8 @@ _{explain how the user can enable/disable data encryption}_
 
 * *Add* `add n/NAME q/QUANTITY m/MINIMUM_QUANTITY [t/TAG]...` +
 e.g. `add n/Arduino q/20 m/5 t/Lab1 t/Lab2`
-* *Archive* `archive n/NAME` +
-e.g. archive n/ForAugust
+* *Save* `save NAME` +
+e.g. save ForAugust
 * *Check* `check`
 * *Changing status* `changeStatus n/NAME q/QUANTITY s/status` +
 e.g. `changeStatus n/Arduino q/20 s/faulty`

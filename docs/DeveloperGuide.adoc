@@ -345,11 +345,11 @@ Step 4. The `ReadOnlyStockList` is saved as an xml file.
 
 ===== Aspect: How SaveCommand executes
 
-* **Alternative 1 (current choice) Save the entire stock list.
+* **Alternative 1** (current choice) Save the entire stock list.
 ** Pros: Able to reload the particular version on the application.
 ** Cons: May have performance issues in terms of usage.
 
-* **Alternative 2 Save as .csv file.
+* **Alternative 2** Save as .csv file.
 ** Pros: Less memory usage
 ** Cons: Unable to edit fields using the application upon creation of the .csv file.
 // end::savecommand[]
