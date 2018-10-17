@@ -337,22 +337,22 @@ Given below is an example usage scenario and how the merge mechanism behaves at 
 Step 1. The user selects the indexes of the contacts he wants to merge. `MergeCommandParser` takes the input and puts
 it in a list, it then calls MergeCommand with the list as an argument.
 
-image::MergeCommand1.png[width="800"]
+image::MergeCommand1.PNG[width="800"]
 
 Step 2. The Merge Command uses the list of indexes and the `filteredPersonsList` to create and fill the array
 `personsToMerge`.
 
-image::MergeCommand2.png[width="800"]
+image::MergeCommand2.PNG[width="800"]
 
 Step 3. The `mergeTimetable` function is called on each element in `personsToMerge` and the element after it. The merge
 Timetable function iterates through all the time slots in both timetables and compares them.
 
-image::MergeCommand3.png[width="800"]
+image::MergeCommand3.PNG[width="800"]
 
 Step 4. Based on whether both original time slots were free or busy, it outputs a merged free or busy time slot and
 adds it to the merged timetable
 
-image::MergeCommand4.png[width="800"]
+image::MergeCommand4.PNG[width="800"]
 
 Step 5. The last element in the `personsToMerge` array is returned after all the iterations. This new person is added
 to the address book.
