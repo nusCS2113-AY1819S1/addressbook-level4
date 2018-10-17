@@ -40,6 +40,7 @@ import seedu.address.storage.RequestStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlBookInventoryStorage;
 import seedu.address.storage.XmlRequestListStorage;
+import seedu.address.ui.SubmitBox;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -60,6 +61,7 @@ public class MainApp extends Application {
     protected RequestModel requestModel;
     protected Config config;
     protected UserPrefs userPrefs;
+    protected SubmitBox submitBox;
 
     @Override
     public void init() throws Exception {
@@ -220,6 +222,12 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         logger.info("Starting BookInventory " + MainApp.VERSION);
         ui.start(primaryStage);
+        primaryStage.setOnCloseRequest(e -> {
+            final boolean exited = SubmitBox.display("Exit BookInventory", "Are you sure you want to exit BookInventory?");
+            if(!exited) {
+                e.consume();
+            } else stop();
+        });
     }
 
     @Override

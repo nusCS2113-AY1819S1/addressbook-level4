@@ -69,6 +69,10 @@ public class CheckPassword {
 
         Label label = new Label("Password");
         final PasswordField pb = new PasswordField();
+        // to be omitted @@author iashcole
+        // ~start~
+        pb.setText("owner");
+        // ~end~
 
         pb.setOnAction(new EventHandler<ActionEvent>() {
             @Override
