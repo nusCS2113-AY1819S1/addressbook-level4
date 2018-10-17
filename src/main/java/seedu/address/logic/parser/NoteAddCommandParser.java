@@ -11,12 +11,12 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.note.Note;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new NoteAddCommand object
  */
 public class NoteAddCommandParser implements Parser<NoteAddCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the NoteAddCommand
+     * and returns an NoteAddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public NoteAddCommand parse(String args) throws ParseException {
