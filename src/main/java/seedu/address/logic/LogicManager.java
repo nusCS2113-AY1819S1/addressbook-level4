@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -20,24 +22,21 @@ import seedu.address.model.request.RequestListParser;
 import seedu.address.model.request.RequestModel;
 import seedu.address.model.request.ViewRequestCommand;
 
-import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
-
 /**
  * The main LogicManager of the app.
  */
 public class LogicManager extends ComponentManager implements Logic {
-    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
+    private static DiceCoefficient diceCoefficient;
+    private static final double DICE_COEFFICIENT_THRESHOLD = 0.5;
 
+    private final Logger logger = LogsCenter.getLogger(LogicManager.class);
     private final Model model;
     private final RequestModel requestModel;
     private final CommandHistory history;
     private final BookInventoryParser bookInventoryParser;
     private final RequestListParser requestListParser;
 
-    private static DiceCoefficient diceCoefficient;
-    private final double DICE_COEFFICIENT_THRESHOLD = 0.5;
-
-    public LogicManager(Model model, RequestModel requestModel){
+    public LogicManager(Model model, RequestModel requestModel) {
         this.model = model;
         this.requestModel = requestModel;
         history = new CommandHistory();
@@ -51,7 +50,7 @@ public class LogicManager extends ComponentManager implements Logic {
         diceCoefficient = new DiceCoefficient();
         String[] string = commandText.trim().split("\\s+", 8);
         if (diceCoefficient(string[0], RequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD
-    || diceCoefficient(string[0], ViewRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD) {
+            || diceCoefficient(string[0], ViewRequestCommand.COMMAND_WORD) > DICE_COEFFICIENT_THRESHOLD) {
             CommandSecondary command = requestListParser.parseCommandRequest(commandText);
             history.add(commandText);
             return command.execute(requestModel, history);
