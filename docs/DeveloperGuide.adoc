@@ -145,6 +145,8 @@ For example, the `Logic` component (see the class diagram given below) defines i
 image::LogicClassDiagram.png[width="800"]
 
 [discrete]
+
+[[Events-Driven-Nature]]
 ==== Events-Driven nature of the design
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the command `delete 1`.
@@ -251,6 +253,8 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
+* can save the `TimeTable` Objects in ics format and read it back.
+* can read `TimeTable` data from a user-specified file in ics format.
 
 [[Design-Commons]]
 === Common classes
@@ -340,6 +344,109 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
+{nbsp}
+
+// tag::timetable[]
+=== Timetable feature
+==== Current implementation
+
+The timetable feature allows users to store and view their own timetables. Additionally, it allows users to view a deconflicted timetable, a timetable which highlights mutual free timeslots among all selected users.
+
+The timetable feature can be broadly split into two parts: +
+1. The backend, which handles the storage and logic of `TimeTable` objects; +
+2. The frontend, which handles the display of `TimeTable` objects.
+
+
+===== Backend implementation
+
+The `TimeTable` object is composed under the `Person` class in `Model`. Each `TimeTable` in turn is composed of any number of `TimeSlot` objects. Each `TimeSlot` consists of: +
+1. A `dayofWeek` variable, denoting the day of week of the `TimeSlot`; +
+2. A `startTime` variable, denoting the start time of the `TimeSlot`; and +
+3. An `endTime` variable, denoting the end time of the `TimeSlot`.
+
+The following class diagram summarises the relationship between the components of the TimeTable class:
+
+image:TimeTableClassDiagram.png[width="400"]
+
+{nbsp}
+
+The `TimeTable` class implements three key methods: +
+1. `TimeTable#addTimeSlot()` - to add a new `TimeSlot` to the `TimeTable` +
+2. `TimeTable#deleteTimeSlot()` - to remove an existing `TimeSlot` from the `TimeTable` +
+3. `TimeTable#deconflict()` - to create a deconflicted timetable from two or more `TimeTable` objects +
+
+===== Frontend implementation
+
+`TimeTablePanel` extends the abstract class `UIPart` and is implemented using a `BorderPane`. It is composed of the following classes: +
+1. `TimeTableDayMarkerGrid` - a `GridPane` on the left of the `TimeTablePanel` to display the days of the week; +
+2. `TimeTableTimeMarkerGrid` - a `GridPane` on the top of the `TimeTablePanel` to display the time markers +
+3. `TimeTableMainGrid` - a `GridPane` in the center of the `TimeTablePanel`. Composed of any number of `TimeTablePanelTimeSlot` objects. +
+
+The following screenshot shows the relative position of all the components in `TimeTablePanel`:
+
+image:TimeTableScreenshotLabelled.png[width="800"]
+
+{nbsp}
+
+===== Interaction between backend and frontend
+
+The following sequence diagrams show the sequence of significant method calls for the execution of the `TimeTable#addTimeSlot()` method. The execution of the `TimeTable#removeTimeSlot()` method is implemented in a similar manner.
+
+image:TimeTableSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+===== Aspect: How the frontend updates the `TimeTable` to be displayed
+* **Alternative 1 (current choice):** Clears the entire `TimeTableMainGrid` before loading the new `TimeTable`
+** Pros: Easy to implement, only one method (`loadTimeTable`) required
+** Cons: May suffer from performance degradation, especially when the `TimeTable` to be loaded contains many `TimeSlot` objects
+* **Alternative 2:** Detects the difference between the currently displayed `TimeTable` and adds or deletes `TimeTablePanelTimeSlot` objects accordingly.
+** Pros: Will reduce execution time of methods which update the displayed `TimeTable`
+** Cons: A method to detect the difference between `TimeTable` objects must be implemented. May not result in significant performance improvements when switching between `TimeTable` objects with few or no `TimeSlot` objects in common.
+// end::timetable[]
+
+{nbsp}
+
+// tag::import[]
+=== import timetable feature
+==== Current implementation
+
+The import timetable feature allows users to import their timetables from NUSMODS, as an .ics file.
+
+The timetable feature consists of two parts: +
+1. The backend, which handles the reading of the .ics file and the creation of the timetable object. +
+2. The frontend, which parses user input, and informs the user of success or failure.
+
+
+===== Backend implementation
+
+The file is read and parsed into a TimeTable by IcsUtil class.
+
+The following sequence diagram shows how the TimeTable is imported: +
+
+image:ImportSequenceDiagram.png[width="800"] +
+
+{nbsp}
+
+The `IcsUtil` class implements three key utility methods for handling .ics files: +
+1. `IcsUtil#getTimeTableFromFile()` - to obtain a `TimeTable`; accepts the `filePath` of the .ics file as parameter +
+
+
+===== Frontend implementation
+Same as the other commands, see <<Events-Driven-Nature,*`Events-Driven nature of the design`*>>.
+
+==== Design Considerations
+===== Aspect: Which Classes (and which system(s)) should parse the ics file format?
+* **Alternative 1 (current choice):** All code related to parsing .ice timetable files are inside 'IcsUtil' class.
+** Pros: All functions that have to do with .ics parsing is in 1 class.
+** Cons: Single responsibility principle is broken;
+* **Alternative 2:** Follow the existing implementation of 'Storage'; create an IcsTimeTableStorage class to access the ics file in hard disk, just like what is being done with 'preferences.json' and 'AddressBook.xml' files.
+** Pros: Better follows Single Responsibility Principle: classes that concerns storage are in the storage subsystem;
+** Cons: Current implementation favors 'permanent' files on the hard disk: Compared to the 'preferences.json' and 'AddressBook.xml' files, the .ics timetable file is single-use, and can have varying filePaths specified by user.
+// end::timetable[]
+
+{nbsp}
+
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -663,6 +770,38 @@ Extensions: (Only an option if one-time 'events' has been implemented) +
 2. System adds an 'event' at that <<timeslot,timeslots>>.
 Use case ends.
 
+[discrete]
+== Use case: Import TimeTable (for a person)
+
+MSS: +
+1. Student logs into their <<account, account>>. +
+2. System shows the possible commands. +
+3. User selects 'Import <<Timetable,Timetable>>'. +
+4. System asks for the location of the file to import the <<Timetable,Timetable>> from. +
+5. Student inputs the file location. +
+6. System acknowledges the command, and displays the timetable that was imported. +
+Use case ends.
+
+Extensions: (user provided invalid file location) +
+5a. Student inputs invalid file location. +
+5b. System informs user about the invalid file location. +
+Use case ends.
+
+[discrete]
+== Use case: Export TimeTable (for a person)
+
+MSS: +
+1. Student logs into their <<account, account>>. +
+2. System shows the possible commands. +
+3. User selects 'Export <<Timetable,Timetable>>'. +
+4. System asks for the location of the file to export the <<Timetable,Timetable>>. +
+5. Student inputs the file location. +
+6. System indicates successful export. +
+Use case ends.
+
+Extensions: (export fails for any reason) +
+6a. System indicates failed export. +
+Use case ends.
 
 [appendix]
 == Non Functional Requirements

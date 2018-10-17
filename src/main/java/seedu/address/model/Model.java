@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TimeTable;
 
 /**
  * The API of the Model component.
@@ -17,6 +18,9 @@ public interface Model {
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /** Returns the TimeTable */
+    TimeTable getTimeTable();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -42,6 +46,12 @@ public interface Model {
      */
     void updatePerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the timetable shown with a new timetable
+     * @param timeTable Timetable to replace
+     */
+    void updateTimeTable(TimeTable timeTable);
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -50,6 +60,18 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Return the friends list of the current user
+     * @param person
+     */
+    ObservableList<Person> getFriendList(Person person);
+
+    /**
+     * Return the non-friends list of the current user
+     * @param person
+     */
+    ObservableList<Person> getOtherList(Person person);
 
     /**
      * Returns true if the model has previous address book states to restore.

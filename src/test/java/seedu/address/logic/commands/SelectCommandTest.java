@@ -21,6 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.TypicalTimeSlots;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
@@ -37,6 +38,7 @@ public class SelectCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Index lastPersonIndex = Index.fromOneBased(model.getFilteredPersonList().size());
+        expectedModel.updateTimeTable(TypicalTimeSlots.getTypicalTimeTable());
 
         assertExecutionSuccess(INDEX_FIRST_PERSON);
         assertExecutionSuccess(INDEX_THIRD_PERSON);
@@ -55,6 +57,7 @@ public class SelectCommandTest {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         showPersonAtIndex(expectedModel, INDEX_FIRST_PERSON);
 
+        expectedModel.updateTimeTable(TypicalTimeSlots.getTypicalTimeTable());
         assertExecutionSuccess(INDEX_FIRST_PERSON);
     }
 

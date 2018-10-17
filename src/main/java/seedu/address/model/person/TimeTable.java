@@ -1,33 +1,84 @@
 package seedu.address.model.person;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
+import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
+import seedu.address.model.person.exceptions.TimeSlotOverlapException;
+
 /**
  * Represents a timetable that is associated with a person
  *
  */
 public class TimeTable {
-
-
-    private TimeSlot[][] weeklyslots;
+    private Collection <TimeSlot> timeSlots;
 
     public TimeTable() {
-        this.weeklyslots = new TimeSlot[7][24];
+        timeSlots = new ArrayList<>();
+    }
+
+    public TimeTable(Collection <TimeSlot> input) {
+        timeSlots = input;
+    }
+
+    public Collection <TimeSlot> getTimeSlots() {
+        Collection <TimeSlot> toReturn = new ArrayList<>();
+        toReturn.addAll(timeSlots);
+        return toReturn;
     }
 
     /**
-     *  Sets the timeslot as filled
-     * @param day
-     * @param hour
+     * Adds a TimeSlot to the TimeTable
+     *
+     * @param toAdd TimeSlot to be added
+     * @throws TimeSlotOverlapException if toAdd overlaps with an existing TimeSlot in the TimeTable
      */
-    public void fillTimeSlot(int day, int hour) {
-        weeklyslots[day][hour] = new TimeSlot(day, hour);
-        weeklyslots[day][hour].setIsFilled();
+    public void addTimeSlot(TimeSlot toAdd) throws TimeSlotOverlapException {
+        if (!findOverlapTimeSlots(toAdd).isEmpty()) {
+            throw new TimeSlotOverlapException();
+        } else {
+            timeSlots.add(toAdd);
+        }
     }
 
-    public void removeTimeSlot(int day, int hour) {
-        weeklyslots[day][hour].removeIsFilled();
+    /**
+     * Removes a TimeSlot from the TimeTable
+     *
+     * @param toRemove TimeSlot to be removed
+     * @throws TimeSlotDoesNotExistException if toRemove does not exist in the TimeTable
+     */
+    public void removeTimeSlot (TimeSlot toRemove) throws TimeSlotDoesNotExistException {
+        if (!timeSlots.remove(toRemove)) {
+            throw new TimeSlotDoesNotExistException();
+        }
     }
 
-    public boolean checkTimeSlot(int day, int hour) {
-        return false;
+    /**
+     * Checks whether toCheck overlaps with any TimeSlot in the existing timetable
+     *
+     * @param toCheck the TimeSlot to be checked against
+     * @return Optional containing overlapping TimeSlot
+     */
+    public Collection <TimeSlot> findOverlapTimeSlots(TimeSlot toCheck) {
+        Collection <TimeSlot> toReturn = new ArrayList<>();
+
+        for (TimeSlot timeSlot : timeSlots) {
+            if (timeSlot.isOverlap(toCheck)) {
+                toReturn.add(timeSlot);
+            }
+        }
+        return toReturn;
     }
+
+    public void updateTimeTable(TimeTable toReplace) {
+        this.timeSlots = toReplace.getTimeSlots();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TimeTable // instanceof handles nulls
+                && timeSlots.equals(((TimeTable) other).getTimeSlots())); // state check
+    }
+
 }

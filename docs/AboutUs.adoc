@@ -43,7 +43,7 @@ Responsibilities: Managing Users
 image::alexiscatnip.png[width="150", align="left"]
 {empty}[http://github.com/alexiscatnip[github]]
 
-Role: +
+Role: [small white]#Sleeping and typing bad code# +
 Responsibilities: Managing UI
 
 '''

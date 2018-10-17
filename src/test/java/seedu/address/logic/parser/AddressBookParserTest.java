@@ -26,7 +26,6 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.SetTimeTable;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -88,11 +87,6 @@ public class AddressBookParserTest {
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PersonUtil.getEditPersonDescriptorDetails(descriptor));
         assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
-    }
-
-    @Test
-    public void parseCommand_remark() throws Exception {
-        assertTrue(parser.parseCommand(SetTimeTable.COMMAND_WORD) instanceof SetTimeTable);
     }
 
     @Test

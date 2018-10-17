@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.121">
+  <GridPane fx:id="timingGrid" alignment="BOTTOM_LEFT" gridLinesVisible="false" minHeight="50.0">
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="60.0" minWidth="60.0" prefWidth="60.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="5.0" prefWidth="500" />
+    </columnConstraints>
+    <rowConstraints>
+      <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+  </GridPane>
+</StackPane>

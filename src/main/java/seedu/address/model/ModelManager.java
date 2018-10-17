@@ -12,7 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.model.person.FriendListPredicate;
+import seedu.address.model.person.OtherListPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.TimeTable;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -22,9 +26,12 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> friendList;
+    private final FilteredList<Person> otherList;
+    private final TimeTable timeTable;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook, userPrefs, timeTable.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
@@ -33,7 +40,10 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        friendList = new FilteredList<>(versionedAddressBook.getPersonList());
+        otherList = new FilteredList<>(versionedAddressBook.getPersonList());
+        this.filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        this.timeTable = new TimeTable();
     }
 
     public ModelManager() {
@@ -51,9 +61,19 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
+    @Override
+    public TimeTable getTimeTable() {
+        return timeTable;
+    }
+
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
+    }
+
+    /** Raises an event to indicate the timetable has changed */
+    private void indicateTimeTableChanged() {
+        raise(new TimeTableChangedEvent(timeTable));
     }
 
     @Override
@@ -83,6 +103,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void updateTimeTable(TimeTable timeTable) {
+        requireNonNull(timeTable);
+
+        this.timeTable.updateTimeTable(timeTable);
+        indicateTimeTableChanged();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -98,6 +126,19 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public ObservableList<Person> getFriendList(Person person) {
+        requireNonNull(person);
+        friendList.setPredicate(friendsPredicateFromPerson(person));
+        return FXCollections.unmodifiableObservableList(friendList);
+    }
+
+    public ObservableList<Person> getOtherList(Person person) {
+        requireNonNull(person);
+        otherList.setPredicate(othersPredicateFromPerson(person));
+        return FXCollections.unmodifiableObservableList(otherList);
     }
 
     //=========== Undo/Redo =================================================================================
@@ -144,7 +185,15 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && timeTable.equals(other.timeTable);
     }
 
+    public FriendListPredicate friendsPredicateFromPerson(Person person) {
+        return new FriendListPredicate(person.getFriends());
+    }
+
+    public OtherListPredicate othersPredicateFromPerson(Person person) {
+        return new OtherListPredicate(person.getFriends());
+    }
 }

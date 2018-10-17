@@ -11,6 +11,8 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
@@ -23,7 +25,9 @@ import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.Person;
 import seedu.address.security.Security;
+import seedu.address.security.UserStub;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -41,11 +45,19 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
     private PersonListPanel personListPanel;
+    private FriendListPanel friendListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private LoginWindow loginWindow;
     private RegistrationWindow registrationWindow;
+    private Person person = UserStub.getUser();
+
+    @FXML
+    private Text friendText;
+
+    @FXML
+    private Text personText;
 
     @FXML
     private StackPane timetablePlaceholder;
@@ -55,6 +67,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane friendListPanelPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -128,11 +143,26 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
+
+        friendText.setText("Friends");
+        friendText.setFill(Color.LIGHTGOLDENRODYELLOW);
+        friendText.setStyle("-fx-font-size: 20px;");
+        personText.setText("Others");
+        personText.setFill(Color.LIGHTGOLDENRODYELLOW);
+        personText.setStyle("-fx-font-size: 20px;");
+
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
+        // Implemented with UserStub, commented out to preserve tests
+        // personListPanel = new PersonListPanel(logic.getOtherList(person));
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
+        // Implemented with UserStub, commented out to preserve tests
+        // friendListPanel = new FriendListPanel(logic.getFriendList(person));
+        friendListPanel = new FriendListPanel(logic.getFilteredPersonList());
+        friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());

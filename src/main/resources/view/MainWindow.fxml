@@ -11,10 +11,11 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.text.Text?>
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="800" minHeight="600" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/FreeTime_32.png" />
   </icons>
   <scene>
     <Scene>
@@ -48,10 +49,21 @@
 
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
           <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+            <Text id="friendText" fx:id="friendText"/>
             <padding>
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
-            <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+            <StackPane fx:id="friendListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+
+            <SplitPane id="splitterPane" fx:id="splitterPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+              <VBox fx:id="nonFriendsList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+                <Text id="personText" fx:id="personText"/>
+                <padding>
+                  <Insets top="10" right="20" bottom="10" />
+                </padding>
+                <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+              </VBox>
+            </SplitPane>
           </VBox>
 
           <StackPane fx:id="timetablePlaceholder" prefWidth="340" >
@@ -59,7 +71,9 @@
               <Insets top="10" right="10" bottom="10" left="10" />
             </padding>
           </StackPane>
+
         </SplitPane>
+
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
