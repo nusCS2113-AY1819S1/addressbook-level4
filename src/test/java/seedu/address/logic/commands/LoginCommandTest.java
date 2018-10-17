@@ -57,7 +57,7 @@ public class LoginCommandTest {
 
     @Test
     public void execute_authenticated_throwsCommandException() throws Exception {
-        ModelStubThrowingAlreadyLoggedInException modelStub = new ModelStubThrowingAlreadyLoggedInException();
+        ModelStubThrowingAuthenticatedException modelStub = new ModelStubThrowingAuthenticatedException();
         LoginAttempt passLoginAttempt = new LoginAttempt("John", "pass");
 
         thrown.expect(CommandException.class);
@@ -105,7 +105,7 @@ public class LoginCommandTest {
         public User getLoggedInUser() {
             fail("This method should not be called.");
             return null;
-        };
+        }
 
         @Override
         public void setLoginStatus(boolean status) {
@@ -119,31 +119,31 @@ public class LoginCommandTest {
         }
 
         @Override
-        public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
+        public boolean checkCredentials(Username username, Password password) {
             fail("This method should not be called.");
             return false;
-        };
+        }
 
         @Override
         public void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException {
             fail("This method should not be called.");
-        };
+        }
 
         @Override
         public void addUser(User person) throws DuplicateUserException {
             fail("This method should not be called.");
-        };
+        }
 
         @Override
         public void deleteUser(User target) throws UserNotFoundException {
             fail("This method should not be called.");
-        };
+        }
 
         @Override
         public ReadOnlyAddressBook getUserDatabase() {
             fail("This method should not be called.");
             return null;
-        };
+        }
 
         @Override
         public void setUsersList(UniqueUsersList uniqueUsersList) {
@@ -286,7 +286,7 @@ public class LoginCommandTest {
         private boolean loginStatus = false;
 
         @Override
-        public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
+        public boolean checkLoginCredentials(Username username, Password password) {
             requireNonNull(username);
             requireNonNull(password);
             setLoginStatus(true);
@@ -310,7 +310,7 @@ public class LoginCommandTest {
     /**
      * A Model stub that always throw a AuthenticationException when trying to login.
      */
-    private class ModelStubThrowingAlreadyLoggedInException extends ModelStub {
+    private class ModelStubThrowingAuthenticatedException extends ModelStub {
         @Override
         public boolean checkLoginCredentials(Username username, Password password)
                 throws AuthenticatedException {
@@ -323,16 +323,16 @@ public class LoginCommandTest {
         private Username username;
         private Password password;
 
-        public LoginAttempt(String username, String password) {
+        private LoginAttempt(String username, String password) {
             this.username = new Username(username);
             this.password = new Password(password);
         }
 
-        public Password getPassword() {
+        private Password getPassword() {
             return password;
         }
 
-        public Username getUsername() {
+        private Username getUsername() {
             return username;
         }
     }
