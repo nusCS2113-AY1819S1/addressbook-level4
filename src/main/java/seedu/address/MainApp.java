@@ -102,7 +102,8 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            initialExpenditureTracker = expenditureTrackerOptional.orElseGet(SampleDataUtil::getSampleExpenditureTracker);
+            initialExpenditureTracker = expenditureTrackerOptional
+                    .orElseGet(SampleDataUtil::getSampleExpenditureTracker);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();

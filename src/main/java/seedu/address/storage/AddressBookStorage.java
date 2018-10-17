@@ -28,6 +28,11 @@ public interface AddressBookStorage {
     Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException;
 
     /**
+     * @see #getAddressBookFilePath()
+     */
+    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+
+    /**
      * Returns Expenditure data as a {@link ReadOnlyExpenditureTracker}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
@@ -36,14 +41,10 @@ public interface AddressBookStorage {
     Optional<ReadOnlyExpenditureTracker> readExpenditureTracker() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
-     */
-    Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
-
-    /**
      * @see #getExpenditureTrackerFilePath()
      */
-    Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path filePath)
+            throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.

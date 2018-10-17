@@ -75,7 +75,8 @@ public class XmlAdaptedExpenditure {
         final Money modelMoney = new Money(money);
 
         if (category == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Category.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Category.class.getSimpleName()));
         }
         if (!Category.isValidCategory(category)) {
             throw new IllegalValueException(Category.MESSAGE_CATEGORY_CONSTRAINTS);

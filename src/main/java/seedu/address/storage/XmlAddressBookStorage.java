@@ -43,18 +43,13 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         return readAddressBook(filePath);
     }
 
-    @Override
-    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker() throws DataConversionException, IOException {
-        return readExpenditureTracker(filePath);
-    }
-
     /**
      * Similar to {@link #readAddressBook()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
+            FileNotFoundException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -71,12 +66,18 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         }
     }
 
+    @Override
+    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker() throws DataConversionException, IOException {
+        return readExpenditureTracker(filePath);
+    }
+
     /**
      * Similar to {@link #readExpenditureTracker()}
      * @param expenditureFilePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path expenditureFilePath) throws DataConversionException,
+    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path expenditureFilePath)
+            throws DataConversionException,
             FileNotFoundException {
         requireNonNull(expenditureFilePath);
 
@@ -85,7 +86,8 @@ public class XmlAddressBookStorage implements AddressBookStorage {
             return Optional.empty();
         }
 
-        XmlSerializableExpenditureTracker xmlExpenditureTracker = XmlExpenditureFileStorage.loadDataFromSaveFile(expenditureFilePath);
+        XmlSerializableExpenditureTracker xmlExpenditureTracker =
+                XmlExpenditureFileStorage.loadDataFromSaveFile(expenditureFilePath);
         try {
             return Optional.of(xmlExpenditureTracker.toModelType());
         } catch (IllegalValueException ive) {
