@@ -1,29 +1,64 @@
 package seedu.address.model.gradebook;
 
-import java.util.ArrayList;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+import seedu.address.logic.commands.CommandResult;
+import seedu.address.model.StorageController;
+import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
- This gradebook manager stores gradebook information for Trajectory.
+ * The API of the GradebookManager component.
  */
-@XmlRootElement(namespace = "seedu.address.model")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class GradebookManager {
-    @XmlElementWrapper(name = "gradebook")
-    @XmlElement(name = "gradeItem")
-    private ArrayList<GradebookComponent> gradebookComponentsList = new ArrayList<GradebookComponent>();
+    private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
+    private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
 
-    public ArrayList<GradebookComponent> getList() {
-        return gradebookComponentsList;
+    /**
+     This method adds gradebook component to a module in Trajectory.
+     */
+    public static String addGradebookComponent (String moduleCode,
+                                                String gradebookComponentName,
+                                                int gradebookMaxMarks,
+                                                int gradebookWeightage) {
+        String result = Gradebook.checkValidation(moduleCode, gradebookComponentName, gradebookMaxMarks,
+                gradebookWeightage);
+        if (result.contains("Successfully")) {
+            StorageController.getGradebookStorage().add(new XmlAdaptedGradebook(moduleCode, gradebookComponentName,
+                    gradebookMaxMarks, gradebookWeightage));
+            StorageController.storeData();
+        }
+        return result;
     }
-    public void setGradebookComponentList(ArrayList<GradebookComponent> gradebookComponentsList) {
-        this.gradebookComponentsList = gradebookComponentsList;
+
+    /**
+     This method lists gradebook component to a module in Trajectory.
+     */
+    public static CommandResult listGradebookComponent () {
+        StorageController.retrieveData();
+        CommandResult result = Gradebook.listGradebookComponent();
+        return result;
+    }
+
+    /**
+    This method deletes gradebook component to a module in Trajectory.
+    */
+    public static CommandResult deleteGradebookComponent (String moduleCode, String gradebookComponentName) {
+        String status = DELETE_MESSAGE_FAIL;
+        for (XmlAdaptedGradebook gc : StorageController.getGradebookStorage()) {
+            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
+                StorageController.getGradebookStorage().remove(gc);
+                StorageController.storeData();
+                status = DELETE_MESSAGE_SUCCESS;
+                break;
+            }
+        }
+        return new CommandResult("\n" + status);
+    }
+
+    /**
+     This method finds gradebook component to a module in Trajectory.
+     */
+    public static CommandResult findGradebookComponent (String moduleCode, String gradebookComponentName) {
+        StorageController.retrieveData();
+        CommandResult result = Gradebook.findGradebookComponent(moduleCode, gradebookComponentName);
+        return result;
     }
 }
-
-
