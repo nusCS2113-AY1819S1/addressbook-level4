@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class ForumThread extends BaseModel {
     public static final String MESSAGE_THREAD_CONSTRAINTS =
-            "Thread should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Thread title should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String THREAD_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public static final String MESSAGE_THREAD_ID_CONSTRAINTS =

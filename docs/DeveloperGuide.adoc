@@ -239,6 +239,15 @@ Classes used by multiple components are in the `t13g2.forum.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::CURD feature
+=== CURD feature
+==== Current Implementation
+CURD feature is the basic commands to implement the Forum Book. It refers to create thread, update thread, read module, read thread, read comment and delete thread.
+
+===== Create Thread
+
+==== Design Considerations
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation

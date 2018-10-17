@@ -49,7 +49,8 @@ public class DeleteThreadCommand extends Command {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             //delete the thread according to the threadId from the memory repository
             unitOfWork.getForumThreadRepository().deleteThread(threadId);
-            unitOfWork.commit(); //update to local database
+            //update to local database
+            unitOfWork.commit();
         } catch (Exception e) {
             e.printStackTrace();
             throw new CommandException(MESSAGE_INVALID_THREAD_ID);
