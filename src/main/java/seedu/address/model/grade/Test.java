@@ -18,12 +18,12 @@ public class Test {
         this.marks = marks;
     }
 
- public TestName getTestName() {
-  return testName;
- }
- public Marks getMarks() {
-  return marks;
- }
+    public TestName getTestName() {
+        return testName;
+    }
+    public Marks getMarks() {
+        return marks;
+    }
     /**
      * Every field must be present and not null.
      */
