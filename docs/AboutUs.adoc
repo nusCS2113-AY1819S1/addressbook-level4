@@ -15,7 +15,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::dyeosy98.png[width="150", align="left"]
 {empty}[https://github.com/dyeosy98[github]]
 
-Role: Project Advisor
+Role: Project Advisor 
 
 '''
 
