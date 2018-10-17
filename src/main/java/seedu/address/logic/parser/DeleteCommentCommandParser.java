@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommentCommand;
-import seedu.address.logic.commands.ReplyCommentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

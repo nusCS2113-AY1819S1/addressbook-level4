@@ -1,12 +1,12 @@
 package seedu.address.logic.comments;
 
-import seedu.address.logic.commands.DeleteCommentCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 import java.util.Vector;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.address.logic.commands.DeleteCommentCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+
+
+
 
 /**
  *  Deletes a comment given the line of it
