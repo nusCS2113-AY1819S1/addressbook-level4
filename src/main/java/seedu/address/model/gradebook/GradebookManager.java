@@ -19,10 +19,15 @@ public class GradebookManager {
      */
     public static String addGradebookComponent (String moduleCode,
                                                 String gradebookComponentName,
-                                                int gradebookComponentMaxMarks,
-                                                int gradebookComponentWeightage) {
-        String result = Gradebook.checkValidation(moduleCode, gradebookComponentName, gradebookComponentMaxMarks,
-                gradebookComponentWeightage);
+                                                int gradebookMaxMarks,
+                                                int gradebookWeightage) {
+        String result = Gradebook.checkValidation(moduleCode, gradebookComponentName, gradebookMaxMarks,
+                gradebookWeightage);
+        if (result.contains("Successfully")) {
+            StorageController.getGradebookStorage().add(new XmlAdaptedGradebook(moduleCode, gradebookComponentName,
+                    gradebookMaxMarks, gradebookWeightage));
+            StorageController.storeData();
+        }
         return result;
     }
 

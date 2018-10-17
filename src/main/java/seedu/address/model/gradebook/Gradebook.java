@@ -1,7 +1,6 @@
 package seedu.address.model.gradebook;
 
 import seedu.address.model.StorageController;
-import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
  This class includes all necessary validation for gradebook objects.
@@ -12,7 +11,6 @@ public class Gradebook {
     private static final String MESSAGE_ADD_SUCCESS = "Successfully Added! \nModule Code: %1$s"
             + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
     private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
-    private static String status = "";
     private String moduleCode;
     private String gradebookComponentName;
     private int gradebookMaxMarks;
@@ -58,7 +56,7 @@ public class Gradebook {
         boolean empty = isEmptyParams(moduleCode, gradebookComponentName);
         boolean duplicate = isDuplicateComponent(moduleCode, gradebookComponentName);
 
-        status = MESSAGE_ADD_SUCCESS;
+        String status = MESSAGE_ADD_SUCCESS;
 
         if (empty) {
             status = MESSAGE_ERROR_EMPTY;
@@ -66,13 +64,6 @@ public class Gradebook {
 
         if (duplicate) {
             status = MESSAGE_ERROR_DUPLICATE;
-        }
-
-        if (!empty && !duplicate) {
-            gradebookComponentName = gradebookComponentName.replaceAll("\\s+", " ");
-            StorageController.getGradebookStorage().add(new XmlAdaptedGradebook(moduleCode, gradebookComponentName,
-                    gradebookMaxMarks, gradebookWeightage));
-            StorageController.storeData();
         }
 
         return String.format(status,
