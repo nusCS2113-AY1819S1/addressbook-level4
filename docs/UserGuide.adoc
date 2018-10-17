@@ -722,16 +722,16 @@ e.g. `module enrol i/A0167263X i/A0179821B`
 * *Assign TA* : `module assign [i/MATRIC_NUMBER] [e/EMAIL]` +
 e.g. `module assign i/A0171234B`
 
-* *Add Grade Component* : `gradebook add c/MODULE_CODE i/GRADE_ITEM` +
-e.g. `gradebook add c/CS2040C i/Assignment 1`
+* *Add Grade Component* : `gradebook add m/MODULE_CODE i/ITEM mm/[MAX MARKS] w/[WEIGHTAGE]` +
+e.g. `gradebook add m/CS2040C i/Assignment 1 mm/20 w/10`
 * *Edit Grade Item* : `gradebook edit c/MODULE_CODE i/GRADE_ITEM  m/ MAX_MARKS p/PERCENTAGE OF GRADE` +
 e.g. `gradebook edit c/CS2040C i/Assignment 1 m/20 p/10`
-* *Delete Grade Component* : `gradebook remove c/MODULE_CODE i/GRADE_ITEM` +
-e.g. `gradebook remove m/CS2040C i/Assignment 1`
-* *List Grade Components* : `gradebook list c/MODULE_CODE` +
-e.g. `gradebook list c/CS2040C`
-* *List Grade Components* : `gradebook list grades c/MODULE_CODE` +
-e.g. `gradebook list grades c/CS2040C`
+* *Delete Grade Component* : `gradebook delete m/MODULE_CODE i/GRADE_ITEM` +
+e.g. `gradebook delete m/CS2040C i/Assignment 1`
+* *List Grade Components* : `gradebook list` +
+e.g. `gradebook list`
+* *Find Grade Components* : `gradebook find m/MODULE_CODE i/ITEM` +
+e.g. `gradebook find m/CS2040C i/finals`
 * *Assign Grades* : `gradebook assign c/MODULE_CODE i/MATRIC_NUMBER g/GRADE_ITEM_NAME m/MARKS` +
 e.g. `gradebook assign c/CS2040C i/A0168111 g/Assignment 1 m/10`
 * *Creating a class* `class add c/CLASS_NAME m/MODULE_CODE e/MAX_ENROLLMENT` +
