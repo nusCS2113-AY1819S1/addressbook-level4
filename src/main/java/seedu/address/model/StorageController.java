@@ -11,7 +11,9 @@ import seedu.address.model.classroom.ClassroomManager;
 import seedu.address.model.gradebook.GradebookComponent;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.model.note.Note;
+import seedu.address.storage.adapter.XmlAdaptedCourse;
 import seedu.address.storage.adapter.XmlAdaptedModule;
+import seedu.address.storage.serializable.XmlSerializableCourseList;
 import seedu.address.storage.serializable.XmlSerializableModuleList;
 
 /**
@@ -26,7 +28,7 @@ public class StorageController {
     private static final String STORAGE_GRADEBOOK = BASE_DIRECTORY + "gradebook.xml";
     private static final String STORAGE_NOTES = BASE_DIRECTORY + "notes.xml";
 
-    private static ArrayList<Course> courseStorage = new ArrayList<Course>();
+    private static ArrayList<XmlAdaptedCourse> courseStorage = new ArrayList<XmlAdaptedCourse>();
     private static ArrayList<XmlAdaptedModule> moduleStorage = new ArrayList<>();
     private static ArrayList<Classroom> classesStorage = new ArrayList<Classroom>();
     private static ArrayList<GradebookComponent> gradebookStorage = new ArrayList<GradebookComponent>();
@@ -39,8 +41,9 @@ public class StorageController {
         createFiles();
 
         try {
-            CourseManager cm = XmlUtil.getDataFromFile(Paths.get(STORAGE_COURSES), CourseManager.class);
-            courseStorage = cm.getList();
+            XmlSerializableCourseList cl = XmlUtil
+                    .getDataFromFile(Paths.get(STORAGE_COURSES), XmlSerializableCourseList.class);
+            courseStorage = cl.getList();
 
             XmlSerializableModuleList moduleList =
                     XmlUtil.getDataFromFile(Paths.get(STORAGE_MODULES), XmlSerializableModuleList.class);
@@ -87,9 +90,9 @@ public class StorageController {
    */
     public static void storeData() {
         try {
-            CourseManager cm = new CourseManager();
-            cm.setCourseList(courseStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_COURSES), cm);
+            XmlSerializableCourseList cl = new XmlSerializableCourseList();
+            cl.setCourseList(courseStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_COURSES), cl);
 
             XmlSerializableModuleList moduleList = new XmlSerializableModuleList();
             moduleList.setModules(moduleStorage);
@@ -111,11 +114,11 @@ public class StorageController {
         }
     }
 
-    public static ArrayList<Course> getCourseStorage() {
+    public static ArrayList<XmlAdaptedCourse> getCourseStorage() {
         return courseStorage;
     }
 
-    public static void setCourseStorage(ArrayList<Course> courseStorage) {
+    public static void setCourseStorage(ArrayList<XmlAdaptedCourse> courseStorage) {
         StorageController.courseStorage = courseStorage;
     }
 
