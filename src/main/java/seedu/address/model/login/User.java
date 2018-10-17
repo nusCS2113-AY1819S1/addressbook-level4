@@ -14,7 +14,7 @@ public class User {
 
     public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
 
-    private static final String AB_FILEPATH_FOLDER = "data";
+    private static final String AB_FILEPATH_FOLDER = "data/";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";
     private static final String AB_FILEPATH_POSTFIX = ".xml";
 
@@ -49,7 +49,7 @@ public class User {
      * Returns true if user of the same name has the correct address book extension field.
      */
     public static boolean isValidAddressBookFilePath(Path test, String username) {
-        return test.equals(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX)
+        return test.equals(Paths.get(AB_FILEPATH_FOLDER + AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX))
                 && !test.equals("");
     }
 
