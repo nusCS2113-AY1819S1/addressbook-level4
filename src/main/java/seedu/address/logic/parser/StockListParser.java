@@ -84,9 +84,8 @@ public class StockListParser {
             return new SaveCommandParser().parse(arguments);
         case TagCommand.COMMAND_WORD:
             return new TagCommandParser().parse(arguments);
-
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
