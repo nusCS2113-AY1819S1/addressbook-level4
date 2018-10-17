@@ -13,16 +13,6 @@ public class UserRepository extends BaseRepository implements IUserRepository {
     }
 
     @Override
-    public void commit() {
-
-    }
-
-    @Override
-    public void rollback() {
-
-    }
-
-    @Override
     public int addUser(User user) {
         forumBookStorage.getUsers().getList().add(user);
         return 0;

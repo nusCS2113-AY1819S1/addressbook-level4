@@ -13,16 +13,6 @@ public class AnnouncementRepository extends BaseRepository implements IAnnouncem
     }
 
     @Override
-    public void commit() {
-
-    }
-
-    @Override
-    public void rollback() {
-
-    }
-
-    @Override
     public int addAnnouncement(Announcement announcement) {
         forumBookStorage.getAnnouncements().getList().add(announcement);
         return announcement.getId();

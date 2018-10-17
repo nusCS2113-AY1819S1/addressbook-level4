@@ -12,15 +12,6 @@ public class ModuleRepository extends BaseRepository implements IModuleRepositor
         super(forumBookStorage);
     }
 
-    @Override
-    public void commit() {
-
-    }
-
-    @Override
-    public void rollback() {
-
-    }
 
     @Override
     public int addModule(Module module) {

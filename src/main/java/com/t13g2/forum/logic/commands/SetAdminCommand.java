@@ -12,6 +12,7 @@ import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
 //@@xllx1
+
 /**
  * Set a certain user as admin or set the admin as user
  */

@@ -319,6 +319,54 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+=== Storage
+
+==== Design Consideration
+
+As the basis of the whole program, storage should be robust, efficient and stable at all the time.
+Data consistency and multi-thread access should be specially taken care of.
+
+==== Overview
+
+ForumBook's storage consists of six(6) parts.
+
+* User
+** Stores user information like username, password, email etc.
+* Announcement
+** Stores announcement set by admin, multiple announcements can be saved in the storage.
+* Module
+** Stores module information like module name, code etc.
+* ForumThread
+** Stores threads posted by users
+* Comment
+** Stores comments under threads
+* RunningId
+** Used for generating auto incremented ID, each the above entity has a unique ID
+
+These components are stored separately in six files for performance, see below for detailed process of loading and saving.
+
+==== Storage Structure
+
+To avoid unnecessary disk IO, each part of the storage is saved in a file located in `forumData` directory.
+All data manipulation must be done within an `IUnitOfWork` where developer has to commit if the data
+should be persistent on disk, and rollback if the exception is thrown somewhere during the transaction.
+
+`IStorage` defines interface to access file systems, this handles how our program actually get/read data.
+By default, we have `FileStorage` which stores and reads data from local hard disk. More storage options
+ can be achieved by implementing this interface. eg: `FtpStorage`
+
+`IForumBookStorage` defines interface to access data entities
+
+`I*Repository` defines interface to how we can manipulate different entities.
+Each entity is managed by a repository, eg: `IUserRepository`
+
+`*Storage` is a thin wrapper for the ease of serializing data into `ObjectStream`
+
+Data are saved in ObjectStream
+
+`RunningId` does not work as the other entities do, it has its own logic to make sure IDs are consistent among processes
+if the user runs more than one instance of the program.
+
 === Admin management
 
 ==== Current Implementation
@@ -346,9 +394,9 @@ Step 4. The admin executes `setAdmin uName/john set/true` to set a certain user 
 If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
 
 // tag::dataencryption[]
-=== [Proposed] Data Encryption
+==== Data Encryption
 
-_{Explain here how the data encryption feature will be implemented}_
+Data encryption is done in a transparent layer between `ForumBookStorage` and `FileStorage`.
 
 // end::dataencryption[]
 
