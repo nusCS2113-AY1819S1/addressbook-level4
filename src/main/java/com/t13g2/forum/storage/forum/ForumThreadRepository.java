@@ -14,15 +14,6 @@ public class ForumThreadRepository extends BaseRepository implements IForumThrea
         super(forumBookStorage);
     }
 
-    @Override
-    public void commit() {
-
-    }
-
-    @Override
-    public void rollback() {
-
-    }
 
     @Override
     public int addThread(ForumThread forumThread) {

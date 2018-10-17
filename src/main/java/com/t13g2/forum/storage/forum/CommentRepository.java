@@ -14,16 +14,6 @@ public class CommentRepository extends BaseRepository implements ICommentReposit
     }
 
     @Override
-    public void commit() {
-
-    }
-
-    @Override
-    public void rollback() {
-
-    }
-
-    @Override
     public int addComment(Comment comment) {
         return 0;
     }

@@ -9,10 +9,4 @@ public abstract class BaseRepository {
     public BaseRepository(IForumBookStorage forumBookStorage) {
         this.forumBookStorage = forumBookStorage;
     }
-
-    @Deprecated
-    public abstract void commit();
-
-    @Deprecated
-    public abstract void rollback();
 }
