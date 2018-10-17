@@ -1,5 +1,7 @@
 package seedu.address.model.gradebook;
 
+import java.util.ArrayList;
+
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
@@ -9,14 +11,35 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  */
 public class GradebookManager {
     private static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
-    private static final String MESSAGE_ADD_SUCCESS = "Successfully Added! \nModule Code: %1$s"
+    private static final String MESSAGE_ADD_SUCCESS = "\nSuccessfully Added! \nModule Code: %1$s"
             + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
     private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
-    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
+    private static final String MESSAGE_LIST_SUCCESS = "\nNumber of Grade Components Listed: %1$s \n%2$s";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
+
+    private ArrayList<Gradebook> gradebooks = new ArrayList<>();
+
+    public GradebookManager() {
+        readGradebookComponentsList();
+    }
+
+    public ArrayList<Gradebook> getGradebooks() {
+        return gradebooks;
+    }
+
+
+    /**
+     * Gets gradebook component list from storage and converts it to a Gradebook array list
+     */
+    private void readGradebookComponentsList() {
+        ArrayList<XmlAdaptedGradebook> xmlGradebookList = StorageController.getGradebookStorage();
+        for (XmlAdaptedGradebook xmlGradebook : xmlGradebookList) {
+            gradebooks.add(xmlGradebook.toGradebookType());
+        }
+    }
 
     /**
      This method adds gradebook component to a module in Trajectory.
@@ -51,15 +74,6 @@ public class GradebookManager {
     }
 
     /**
-     This method lists gradebook component to a module in Trajectory.
-     */
-    public static CommandResult listGradebookComponent () {
-        StorageController.retrieveData();
-        CommandResult result = Gradebook.listGradebookComponent();
-        return result;
-    }
-
-    /**
     This method deletes gradebook component to a module in Trajectory.
     */
     public static CommandResult deleteGradebookComponent (String moduleCode, String gradebookComponentName) {
@@ -84,3 +98,4 @@ public class GradebookManager {
         return result;
     }
 }
+

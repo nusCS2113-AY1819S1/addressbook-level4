@@ -8,7 +8,6 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  This class includes all necessary validation for gradebook objects.
  */
 public class Gradebook {
-    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
 
@@ -52,28 +51,6 @@ public class Gradebook {
             duplicate = true;
         }
         return duplicate;
-    }
-
-    /**
-     This method lists all gradebook components found in Trajectory.
-     */
-    public static CommandResult listGradebookComponent() {
-        int count = 0;
-        int index = 1;
-        StringBuilder sb = new StringBuilder();
-        for (XmlAdaptedGradebook gc: StorageController.getGradebookStorage()) {
-            sb.append(index++ + ") ");
-            sb.append("Module Code: ");
-            sb.append(gc.getModuleCode() + "\n");
-            sb.append("Grade Component Name: ");
-            sb.append(gc.getGradeComponentName() + "\n");
-            sb.append("Maximum Marks: ");
-            sb.append(gc.getGradeComponentMaxMarks() + "\n");
-            sb.append("Weightage: ");
-            sb.append(gc.getGradeComponentWeightage() + "\n");
-            count++;
-        }
-        return new CommandResult("\n" + MESSAGE_LIST_SUCCESS + count + "\n" + sb.toString());
     }
 
     /**
