@@ -8,7 +8,6 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  This class includes all necessary validation for gradebook objects.
  */
 public class Gradebook {
-    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
 
     private String moduleCode;
@@ -54,25 +53,26 @@ public class Gradebook {
     }
 
     /**
-     This method lists all gradebook components found in Trajectory.
+     This method finds gradebook component to a module in Trajectory.
      */
-    public static CommandResult listGradebookComponent() {
-        int count = 0;
-        int index = 1;
+    public static CommandResult findGradebookComponent (String moduleCode, String gradebookComponentName) {
+        String status = MESSAGE_FIND_FAIL;
+
         StringBuilder sb = new StringBuilder();
         for (XmlAdaptedGradebook gc: StorageController.getGradebookStorage()) {
-            sb.append(index++ + ") ");
-            sb.append("Module Code: ");
-            sb.append(gc.getModuleCode() + "\n");
-            sb.append("Grade Component Name: ");
-            sb.append(gc.getGradeComponentName() + "\n");
-            sb.append("Maximum Marks: ");
-            sb.append(gc.getGradeComponentMaxMarks() + "\n");
-            sb.append("Weightage: ");
-            sb.append(gc.getGradeComponentWeightage() + "\n");
-            count++;
+            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
+                status = MESSAGE_FIND_SUCCESS;
+                sb.append("Module Code: ");
+                sb.append(gc.getModuleCode() + "\n");
+                sb.append("Grade Component: ");
+                sb.append(gc.getGradeComponentName() + "\n");
+                sb.append("Maximum Marks: ");
+                sb.append(gc.getGradeComponentMaxMarks() + "\n");
+                sb.append("Weightage: ");
+                sb.append(gc.getGradeComponentWeightage() + "\n");
+            }
         }
-        return new CommandResult("\n" + MESSAGE_LIST_SUCCESS + count + "\n" + sb.toString());
+        return new CommandResult("\n" + status + "\n" + sb.toString());
     }
 
     public String getModuleCode() {
