@@ -64,10 +64,20 @@ public class DetailedRecordCard extends UiPart<Region> {
             moneyFlow.setText(record.getMoneyFlow().toString());
             biggerTags.getChildren().clear();
             record.getTags().forEach(tag -> biggerTags.getChildren().add(new Label(tag.tagName)));
-            detailedCard.setVisible(true);
+            show();
         } else {
-            detailedCard.setVisible(false);
+            hide();
         }
+    }
+
+    private void show() {
+        getRoot().toFront();
+        detailedCard.setVisible(true);
+    }
+
+    private void hide() {
+        getRoot().toBack();
+        detailedCard.setVisible(false);
     }
 
     @Subscribe

@@ -1,4 +1,4 @@
-package seedu.planner.storage;
+package seedu.planner.storage.xmljaxb;
 
 import javax.xml.bind.annotation.XmlValue;
 

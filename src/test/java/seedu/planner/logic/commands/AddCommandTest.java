@@ -20,7 +20,10 @@ import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
+import seedu.planner.model.record.Date;
+import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.Summary;
 import seedu.planner.testutil.RecordBuilder;
 
 public class AddCommandTest {
@@ -95,32 +98,60 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteRecord(Record target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateRecord(Record target, Record editedRecord) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void resetData(ReadOnlyFinancialPlanner newData) {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public ObservableList<Summary> getSummaryList(Date date1, Date date2) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Limit> getLimitList() {
+            throw new AssertionError("This method should not be called.");
+        }
         @Override
         public ReadOnlyFinancialPlanner getFinancialPlanner() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public void addLimit(Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteLimit(Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
         public boolean hasRecord(Record record) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteRecord(Record target) {
+        public boolean hasSameDateLimit(Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
 
+
         @Override
+        public boolean isExceededLimit (Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public void deleteListRecord(List<Record> targetList) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateRecord(Record target, Record editedRecord) {
             throw new AssertionError("This method should not be called.");
         }
 
