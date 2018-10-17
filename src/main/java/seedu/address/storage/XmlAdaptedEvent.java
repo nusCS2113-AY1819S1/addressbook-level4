@@ -16,6 +16,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.event.Venue;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -38,6 +39,8 @@ public class XmlAdaptedEvent {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElement
+    private List<XmlAdaptedAttendee> attending = new ArrayList<>(); //TODO
 
     /**
      * Constructs an XmlAdaptedEvent.
@@ -49,7 +52,7 @@ public class XmlAdaptedEvent {
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
     public XmlAdaptedEvent(String name, String contact, String phone, String email, String venue,
-                           List<XmlAdaptedTag> tagged) {
+                           List<XmlAdaptedTag> tagged, List<XmlAdaptedAttendee> attending) {
         this.name = name;
         this.contact = contact;
         this.phone = phone;
@@ -57,6 +60,9 @@ public class XmlAdaptedEvent {
         this.venue = venue;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+        if (attending != null) {
+            this.attending = new ArrayList<>(attending);
         }
     }
 
@@ -74,6 +80,9 @@ public class XmlAdaptedEvent {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        attending = source.getAttendees().stream()
+                .map(XmlAdaptedAttendee::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -82,9 +91,14 @@ public class XmlAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted event
      */
     public Event toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final List<Tag> eventTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            eventTags.add(tag.toModelType());
+        }
+
+        final List<Attendee> personAttendees = new ArrayList<>();
+        for (XmlAdaptedAttendee attendee : attending) {
+            personAttendees.add(attendee.toModelType());
         }
 
         if (name == null) {
@@ -127,8 +141,9 @@ public class XmlAdaptedEvent {
         }
         final Venue modelVenue = new Venue(venue);
 
-        final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Event(modelName, modelContact, modelPhone, modelEmail, modelVenue, modelTags);
+        final Set<Tag> modelTags = new HashSet<>(eventTags);
+        final Set<Attendee> modelAttendees = new HashSet<>(personAttendees);
+        return new Event(modelName, modelContact, modelPhone, modelEmail, modelVenue, modelTags, modelAttendees);
     }
 
     @Override
@@ -147,6 +162,7 @@ public class XmlAdaptedEvent {
                 && Objects.equals(phone, otherEvent.phone)
                 && Objects.equals(email, otherEvent.email)
                 && Objects.equals(venue, otherEvent.venue)
-                && tagged.equals(otherEvent.tagged);
+                && tagged.equals(otherEvent.tagged)
+                && attending.equals(otherEvent.attending);
     }
 }

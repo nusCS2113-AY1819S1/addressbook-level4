@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -27,6 +28,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.event.Venue;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -45,7 +47,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_VENUE + "VENUE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
+            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_ATTENDEE + "ATTENDEE]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -104,8 +107,10 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Venue updatedVenue = editPersonDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(eventToEdit.getTags());
+        Set<Attendee> updatedAttendees = editPersonDescriptor.getAttendees().orElse(eventToEdit.getAttendees());
 
-        return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedTags);
+        return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedVenue, updatedTags,
+                updatedAttendees);
     }
 
     @Override
@@ -137,6 +142,7 @@ public class EditCommand extends Command {
         private Email email;
         private Venue venue;
         private Set<Tag> tags;
+        private Set<Attendee> attendees;
 
         public EditPersonDescriptor() {}
 
@@ -151,13 +157,14 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setVenue(toCopy.venue);
             setTags(toCopy.tags);
+            setAttendees(toCopy.attendees);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, tags);
+            return CollectionUtil.isAnyNonNull(name, contact, phone, email, venue, tags, attendees);
         }
 
         public void setName(Name name) {
@@ -209,12 +216,29 @@ public class EditCommand extends Command {
         }
 
         /**
+         * Sets {@code attendees} to this object's {@code attendees}.
+         * A defensive copy of {@code attendees} is used internally.
+         */
+        public void setAttendees(Set<Attendee> attendees) {
+            this.attendees = (attendees != null) ? new HashSet<>(attendees) : null;
+        }
+
+        /**
          * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
          * if modification is attempted.
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Returns an unmodifiable attendee set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code attendees} is null.
+         */
+        public Optional<Set<Attendee>> getAttendees() {
+            return (attendees != null) ? Optional.of(Collections.unmodifiableSet(attendees)) : Optional.empty();
         }
 
         @Override
@@ -237,7 +261,8 @@ public class EditCommand extends Command {
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getVenue().equals(e.getVenue())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getAttendees().equals(e.getAttendees());
         }
     }
 }

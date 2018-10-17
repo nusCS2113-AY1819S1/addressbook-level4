@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_HAN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
@@ -30,18 +32,20 @@ public class TypicalPersons {
             .withVenue("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com")
             .withPhone("94351253")
-            .withTags("friends").build();
+            .withTags("friends")
+            .withAttendees("Peter Parker").build();
     public static final Event BENSON = new PersonBuilder().withName("Dancing Tryouts")
             .withContact("Benson Meier")
             .withVenue("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
+            .withTags("owesMoney", "friends")
+            .withAttendees("Mary Kate").build();
     public static final Event CARL = new PersonBuilder().withName("Frisbee Competition").withContact("Carl Kurz")
             .withPhone("95352563").withEmail("heinz@example.com").withVenue("wall street").build();
     public static final Event DANIEL = new PersonBuilder().withName("Art and Crafts").withContact("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com").withVenue("10th street").withTags("friends")
-            .build();
+            .withAttendees("Scarlet Witch").build();
     public static final Event ELLE = new PersonBuilder().withName("Music Tryouts").withContact("Elle Meyer")
             .withPhone("9482224").withEmail("werner@example.com").withVenue("michegan ave").build();
     public static final Event FIONA = new PersonBuilder().withName("Dining In The Dark").withContact("Fiona Kunz")
@@ -58,10 +62,11 @@ public class TypicalPersons {
     // Manually added - Event's details found in {@code CommandTestUtil}
     public static final Event AMY = new PersonBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY)
             .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withVenue(VALID_VENUE_AMY)
-            .withTags(VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_FRIEND).withAttendees(VALID_ATTENDEE_TED).build();
     public static final Event BOB = new PersonBuilder().withName(VALID_NAME_BOB).withContact(VALID_CONTACT_BOB)
             .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withVenue(VALID_VENUE_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAttendees(VALID_ATTENDEE_TED, VALID_ATTENDEE_HAN)
+            .build();
 
     public static final String KEYWORD_MATCHING_TRYOUTS = "Tryouts"; // A keyword that matches Tryouts
 

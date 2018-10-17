@@ -14,6 +14,7 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.event.Venue;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Username;
@@ -193,5 +194,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String attendee} into a {@code Attendee}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attendee} is invalid.
+     */
+    public static Attendee parseAttendee(String attendee) throws ParseException {
+        requireNonNull(attendee);
+        String trimmedAttendee = attendee.trim();
+        if (!Attendee.isValidAttendeeName(trimmedAttendee)) {
+            throw new ParseException(Attendee.MESSAGE_ATTENDEE_CONSTRAINTS);
+        }
+        return new Attendee(trimmedAttendee);
+    }
+
+    /**
+     * Parses {@code Collection<String> attendees} into a {@code Set<Attendee>}.
+     */
+    public static Set<Attendee> parseAttendees(Collection<String> attendees) throws ParseException {
+        requireNonNull(attendees);
+        final Set<Attendee> attendeeSet = new HashSet<>();
+        for (String attendeeName : attendees) {
+            attendeeSet.add(parseAttendee(attendeeName));
+        }
+        return attendeeSet;
     }
 }

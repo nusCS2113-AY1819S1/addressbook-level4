@@ -11,6 +11,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.event.Venue;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -39,6 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(event.getEmail());
         descriptor.setVenue(event.getVenue());
         descriptor.setTags(event.getTags());
+        descriptor.setAttendees(event.getAttendees());
     }
 
     /**
@@ -88,6 +90,16 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
         descriptor.setTags(tagSet);
+        return this;
+    }
+
+    /**
+     * Parses the {@code attendees} into a {@code Set<Attendee>} and set it to the {@code EditPersonDescriptor}
+     * that we are building.
+     */
+    public EditPersonDescriptorBuilder withAttendees(String... attendees) {
+        Set<Attendee> attendeeSet = Stream.of(attendees).map(Attendee::new).collect(Collectors.toSet());
+        descriptor.setAttendees(attendeeSet);
         return this;
     }
 

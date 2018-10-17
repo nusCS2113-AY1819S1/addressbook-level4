@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.EventManager;
+import seedu.address.storage.XmlAdaptedAttendee;
 import seedu.address.storage.XmlAdaptedEvent;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableEManager;
@@ -41,7 +42,10 @@ public class XmlUtilTest {
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_VENUE = "4th street";
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedTag> VALID_TAGS =
+            Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedAttendee> VALID_ATTENDEES =
+            Collections.singletonList(new XmlAdaptedAttendee("Alan Stewart"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -81,7 +85,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                null, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS);
+                null, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -90,7 +94,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                VALID_NAME, VALID_CONTACT, INVALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS);
+                VALID_NAME, VALID_CONTACT, INVALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -99,7 +103,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS);
+                VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedPerson, actualPerson);
     }
 

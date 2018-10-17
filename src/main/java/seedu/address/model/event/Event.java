@@ -7,7 +7,9 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
+
 
 /**
  * Represents an Event in the event manager.
@@ -24,12 +26,14 @@ public class Event {
     // Data fields
     private final Venue venue;
     private final Set<Tag> tags = new HashSet<>();
+    private final Set<Attendee> attendees = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, Set<Tag> tags) {
-        requireAllNonNull(name, contact, phone, email, venue, tags);
+    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, Set<Tag> tags,
+                 Set<Attendee> attendees) {
+        requireAllNonNull(name, contact, phone, email, venue, tags, attendees);
 
         this.name = name;
         this.contact = contact;
@@ -37,6 +41,7 @@ public class Event {
         this.email = email;
         this.venue = venue;
         this.tags.addAll(tags);
+        this.attendees.addAll(attendees);
     }
 
     public Name getName() {
@@ -75,6 +80,14 @@ public class Event {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable attendee set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Attendee> getAttendees() {
+        return Collections.unmodifiableSet(attendees);
     }
 
     /**

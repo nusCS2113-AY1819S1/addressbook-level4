@@ -9,6 +9,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.event.Venue;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -29,6 +30,7 @@ public class PersonBuilder {
     private Email email;
     private Venue venue;
     private Set<Tag> tags;
+    private Set<Attendee> attendees;
 
     public PersonBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -37,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         venue = new Venue(DEFAULT_VENUE);
         tags = new HashSet<>();
+        attendees = new HashSet<>();
     }
 
     /**
@@ -49,6 +52,7 @@ public class PersonBuilder {
         email = eventToCopy.getEmail();
         venue = eventToCopy.getVenue();
         tags = new HashSet<>(eventToCopy.getTags());
+        attendees = new HashSet<>(eventToCopy.getAttendees());
     }
 
     /**
@@ -99,8 +103,16 @@ public class PersonBuilder {
         return this;
     }
 
+    /**
+     * Parses the {@code attendees} into a {@code Set<attendee>} and set it to the {@code Event} that we are building.
+     */
+    public PersonBuilder withAttendees(String ... attendees) {
+        this.attendees = SampleDataUtil.getAttendeeSet(attendees);
+        return this;
+    }
+
     public Event build() {
-        return new Event(name, contact, phone, email, venue, tags);
+        return new Event(name, contact, phone, email, venue, tags, attendees);
     }
 
 }
