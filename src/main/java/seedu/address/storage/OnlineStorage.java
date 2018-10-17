@@ -33,6 +33,6 @@ public interface OnlineStorage {
      * @param description can be null.
      * @throws OnlineBackupFailureException if there was any problem saving to online storage.
      */
-    void saveContentToStorage(String content, String fileName, String description)
+    String saveContentToStorage(String content, String fileName, String description)
             throws IOException, OnlineBackupFailureException;
 }

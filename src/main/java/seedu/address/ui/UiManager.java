@@ -13,6 +13,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.storage.DataRestoreExceptionEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.Logic;
@@ -33,9 +34,9 @@ public class UiManager extends ComponentManager implements Ui {
     public static final String FILE_OPS_BACKUP_SUCCESS_DIALOG_HEADER_MESSAGE = "Backup operation success";
     public static final String FILE_OPS_BACKUP_SUCCESS_DIALOG_CONTENT_MESSAGE = "Data backup to %s";
 
-    public static final String FILE_OPS_BACKUP_ERROR_DIALOG_STAGE_TITLE = "Backup Status";
-    public static final String FILE_OPS_BACKUP_ERROR_DIALOG_HEADER_MESSAGE = "Backup operation failed";
-    public static final String FILE_OPS_BACKUP_ERROR_DIALOG_CONTENT_MESSAGE = "Could not backup data to %s";
+    public static final String FILE_OPS_RESTORE_ERROR_DIALOG_STAGE_TITLE = "Backup Restore Error";
+    public static final String FILE_OPS_RESTORE_ERROR_DIALOG_HEADER_MESSAGE = "Restore operation failed";
+    public static final String FILE_OPS_RESTORE_ERROR_DIALOG_CONTENT_MESSAGE = "Could not restore data";
 
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
     private static final String ICON_APPLICATION = "/images/address_book_32.png";
@@ -124,5 +125,13 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         showFileOperationAlertAndWait(FILE_OPS_ERROR_DIALOG_HEADER_MESSAGE, FILE_OPS_ERROR_DIALOG_CONTENT_MESSAGE,
                 event.exception);
+    }
+
+    //@@author QzSG
+    @Subscribe
+    private void handleDataRestoreExceptionEvent(DataRestoreExceptionEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        showFileOperationAlertAndWait(FILE_OPS_RESTORE_ERROR_DIALOG_HEADER_MESSAGE,
+                FILE_OPS_RESTORE_ERROR_DIALOG_CONTENT_MESSAGE, event.exception);
     }
 }

@@ -3,6 +3,7 @@ package seedu.address.commons.util;
 import static java.util.Objects.requireNonNull;
 
 import java.io.FileNotFoundException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -69,13 +70,14 @@ public class XmlUtil {
         m.marshal(data, file.toFile());
     }
 
+    //@@author QzSG
     /**
-     * Converts the data in the file to a sting.
+     * Converts the data in the file to a string.
      *
      * @throws JAXBException         Thrown if there is an error during converting the data
      *                               into xml and returning the string.
      */
-    public static <T> String convertContentToString(T data) throws JAXBException {
+    public static <T> String convertDataToString(T data) throws JAXBException {
         requireNonNull(data);
 
         StringWriter stringWriter = new StringWriter();
@@ -87,4 +89,27 @@ public class XmlUtil {
         return stringWriter.toString();
     }
 
+    /**
+     * Returns the xml data in the string as an object of the specified type.
+     *
+     * @param dataString     Points to a valid xml string containing data that match the {@code classToConvert}.
+     *                       Cannot be null.
+     * @param classToConvert The class corresponding to the xml data.
+     *                       Cannot be null.
+     * @throws JAXBException         Thrown if the data string is empty or does not have the correct format.
+     */
+    @SuppressWarnings("unchecked")
+    public static <T> T getDataFromString(String dataString, Class<T> classToConvert)
+            throws JAXBException {
+
+        requireNonNull(dataString);
+        requireNonNull(classToConvert);
+
+        JAXBContext context = JAXBContext.newInstance(classToConvert);
+        Unmarshaller um = context.createUnmarshaller();
+
+        StringReader stringReader = new StringReader(dataString);
+        return ((T) um.unmarshal(stringReader));
+    }
+    //@@author
 }

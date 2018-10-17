@@ -17,8 +17,8 @@ public class UserPrefs {
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
-        setAddressBookFilePath(Paths.get("data" , "addressbook.xml"));
-        setAddressBookBackupFilePath(Paths.get("data" , "addressbook.bak"));
+        setAddressBookFilePath(getAddressBookFilePath());
+        setAddressBookBackupFilePath(getAddressBookBackupFilePath());
     }
 
     public GuiSettings getGuiSettings() {

@@ -6,7 +6,7 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyAddressBook;
 
 //@@author QzSG
-/** Indicates the AddressBook in the model has changed*/
+/** Indicates a AddressBook backup request*/
 public class AddressBookLocalBackupEvent extends BaseEvent {
 
     public final ReadOnlyAddressBook data;

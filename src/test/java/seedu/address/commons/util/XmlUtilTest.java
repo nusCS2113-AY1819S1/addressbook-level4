@@ -33,7 +33,10 @@ public class XmlUtilTest {
     private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidPersonField.xml");
     private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
     private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
-
+    private static final String VALID_DATA_STRING = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>"
+            + "<addressbook><persons><name>Alice Pauline</name><phone>94351253</phone><email>alice@example.com</email>"
+            + "<address>123, Jurong West Ave 6, #08-111</address><tagged>friends</tagged></addressbook>";
+    private static final String EMPTY_DATA_STRING = "";
     private static final String INVALID_PHONE = "9482asf424";
 
     private static final String VALID_NAME = "Hans Muster";
@@ -136,6 +139,25 @@ public class XmlUtilTest {
         dataFromFile = XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableAddressBook.class);
         assertEquals(dataToWrite, dataFromFile);
     }
+    //@@author QzSG
+    @Test
+    public void getDataFromString_nullString_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        XmlUtil.getDataFromString(null, AddressBook.class);
+    }
+
+    @Test
+    public void getDataFromString_nullClass_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        XmlUtil.getDataFromString(VALID_DATA_STRING, null);
+    }
+
+    @Test
+    public void getDataFromString_emptyString_dataFormatMismatchException() throws Exception {
+        thrown.expect(JAXBException.class);
+        XmlUtil.getDataFromString(EMPTY_DATA_STRING, AddressBook.class);
+    }
+    //@@author
 
     /**
      * Test class annotated with {@code XmlRootElement} to allow unmarshalling of .xml data to {@code XmlAdaptedPerson}
