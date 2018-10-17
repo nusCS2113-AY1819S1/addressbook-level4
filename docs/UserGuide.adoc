@@ -112,20 +112,17 @@ Delete an employee from ProManage: +
 Format/Prompts: +
 Enter a command: `delete LIST_INDEX`
 
-==== Adding an event: `create`
+==== Adding an event: `addEvent`
 
 Adds an event to ProManage, via a series of prompts +
 Format/Prompts: +
-Enter a command: `create` +
-Enter event details: `n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION` +
-Enter departments to invite: `DEPARTMENT, [MORE DEPARTMENTS,]...` +
-Enter description or instructions: `INSTRUCTIONS`
+Enter a command: `addEvent` +
+Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
 
 Example: +
-`create` +
-`n/Budget Review d/120918 t/1600 l/Conference Room 1` +
-`Finance, Admin, Marketing` +
-Creates an event named Budget Review, inviting 3 departments to it.
+`addEvent` +
+`n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` +
+Creates an event named Board Meeting.
 
 ==== Listing all events: `schedule`
 
@@ -134,9 +131,10 @@ Format: `schedule`
 
 ==== Invite employees: `invite`
 
-Add employees to the project event. +
-Format: `invite SCHEDULE_INDEX  n/NAME`  +
-Example: invite 10 n/John Doe
+Add employees to the project event at the respective specified INDEX. The index refers to the index number shown in the
+displayed person and event list. The index must be a positive integer 1, 2, 3... +
+Format: `invite LIST_INDEX to/SCHEDULE_INDEX` +
+Example: invite 1 to/2
 
 ==== Remove employee: `remove`
 
@@ -145,15 +143,14 @@ Format/Prompts: `remove SCHEDULE_INDEX  n/NAME` +
 Example: remove 10 n/John Doe
 
 
-==== Modifying an event: `modify`
+==== Modifying an event: `editEvent`
 
 Modifying the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The
 index must be a positive integer 1, 2, 3... +
 Input nil if it is not the field to be changed. +
 Format/Prompts: +
-Enter a command: `modify SCHEDULE_INDEX` +
-Enter event details: `n/NAME d/DATE t/TIME l/LOCATION or nil` +
-Enter departments to invite: `DEPARTMENT [MORE DEPARTMENTS,]...or nil`
+Enter a command: `editEvent SCHEDULE_INDEX` +
+Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
@@ -163,9 +160,8 @@ index *must be a positive integer* 1, 2, 3, ... +
 ****
 
 Examples:
-* Enter a command: `modify 10`  +
-Enter event details: `n/Food Sampling d/120918  t/1600  l/Conference Room 1`
-Enter departments to invite: `Admin, Programmes`
+* Enter a command: `editEvent 10`  +
+Enter event details: n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
 
 ==== Locating events by name: `find`
 
@@ -187,11 +183,11 @@ Returns `Budget Review` and `Budget Press Release`
 * `find Budget Review` +
 Returns any event having names `Budget` or `Review`
 
-==== Deleting an event : `cancel`
+==== Deleting an event : `deleteEvent`
 
 Delete the event at the specified INDEX. +
 Format/Prompts: +
-Enter a command: `cancel SCHEDULE_INDEX`
+Enter a command: `deleteEvent SCHEDULE_INDEX`
 
 ****
 * Deletes the event at the specified `INDEX`.
@@ -202,11 +198,11 @@ Enter a command: `cancel SCHEDULE_INDEX`
 Examples:
 
 * `schedule` +
-`cancel 2` +
-Cancels the 2nd event in the address book.
+`deleteEvent 2` +
+Deletes the 2nd event in the address book.
 * `find Meeting` +
-`cancel 1` +
-Cancels the 1st event in the results of the `find` command.
+`deleteEvent 1` +
+Deletes the 1st event in the results of the `find` command.
 
 
 ==== Selecting an event: `select`
@@ -322,20 +318,17 @@ Department Heads can only access his/her own department’s events.
 
 Format: `help`
 
-==== Adding an event: `create`
+==== Adding an event: `addEvent`
 
 Adds an event to ProManage, via a series of prompts +
 Format/Prompts: +
-Enter a command: `create` +
-Enter event details: `n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION` +
-Enter departments to invite: `DEPARTMENT, [MORE DEPARTMENTS,]...` +
-Enter description or instructions: `INSTRUCTIONS`
+Enter a command: `addEvent` +
+Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
 
 Example: +
-`create` +
-`n/Budget Review d/120918 t/1600 l/Conference Room 1` +
-`Finance, Admin, Marketing` +
-Creates an event named Budget Review, inviting 3 departments to it.
+`addEvent` +
+`n/Board Meeting d/Weekly Meeting l/Conference Room 1 date/2018-09-28 s/12:00 e/23:59 ` +
+Creates an event named Board Meeting.
 
 ==== Listing all events: `schedule`
 
@@ -344,9 +337,10 @@ Format: `schedule`
 
 ==== Invite employees: `invite`
 
-Add employees to the project event. +
-Format: `invite SCHEDULE_INDEX  n/NAME`  +
-Example: invite 10 n/John Doe
+Add employees to the project event at the respective specified INDEX. The index refers to the index number shown in the
+displayed person and event list. The index must be a positive integer 1, 2, 3... +
+Format: `invite LIST_INDEX to/SCHEDULE_INDEX` +
+Example: invite 1 to/2
 
 ==== Remove employee: `remove`
 
@@ -355,15 +349,14 @@ Format/Prompts: `remove SCHEDULE_INDEX  n/NAME` +
 Example: remove 10 n/John Doe
 
 
-==== Modifying an event: `modify`
+==== Modifying an event: `editEvent`
 
 Modifying the event at the specified INDEX. The index refers to the index number shown in the displayed event list. The
 index must be a positive integer 1, 2, 3... +
 Input nil if it is not the field to be changed. +
 Format/Prompts: +
-Enter a command: `modify SCHEDULE_INDEX` +
-Enter event details: `n/NAME d/DATE t/TIME l/LOCATION or nil` +
-Enter departments to invite: `DEPARTMENT [MORE DEPARTMENTS,]...or nil`
+Enter a command: `editEvent SCHEDULE_INDEX` +
+Enter event details: `n/NAME d/DESCRIPTION l/LOCATION date/DATE(DDMMYY) s/START TIME e/END TIME`  +
 
 ****
 * Edits the event at the specified `INDEX`. The index refers to the index number shown in the displayed event list. The
@@ -373,9 +366,8 @@ index *must be a positive integer* 1, 2, 3, ... +
 ****
 
 Examples:
-* Enter a command: `modify 10`  +
-Enter event details: `n/Food Sampling d/120918  t/1600  l/Conference Room 1`
-Enter departments to invite: `Admin, Programmes`
+* Enter a command: `editEvent 10`  +
+Enter event details: n/Weekly Meeting d/Check on progress l/Conference Room 2 date/2018-09-10 s/12:00 e/14:00`
 
 ==== Locating events by name: `find`
 
@@ -397,11 +389,11 @@ Returns `Budget Review` and `Budget Press Release`
 * `find Budget Review` +
 Returns any event having names `Budget` or `Review`
 
-==== Deleting an event : `cancel`
+==== Deleting an event : `deleteEvent`
 
 Delete the event at the specified INDEX. +
 Format/Prompts: +
-Enter a command: `cancel SCHEDULE_INDEX`
+Enter a command: `deleteEvent SCHEDULE_INDEX`
 
 ****
 * Deletes the event at the specified `INDEX`.
@@ -412,11 +404,11 @@ Enter a command: `cancel SCHEDULE_INDEX`
 Examples:
 
 * `schedule` +
-`cancel 2` +
-Cancels the 2nd event in the address book.
+`deleteEvent 2` +
+Deletes the 2nd event in the address book.
 * `find Meeting` +
-`cancel 1` +
-Cancels the 1st event in the results of the `find` command.
+`deleteEvent 1` +
+Deletes the 1st event in the results of the `find` command.
 
 
 ==== Selecting an event: `select`
@@ -570,20 +562,20 @@ Task with id 1 is submitted as complete.
 
 * *Delete* : `delete LIST_INDEX`
 
-* *Create* : `create n/NAME d/DATE(DDMMYY) t/TIME l/LOCATION dep/DEPARTMENT, [MORE DEPARTMENTS,]...` +
+* *addEvent* : `addEvent n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START TIME e/END TIME ` +
 // TODO figure this out! Enter description or instructions: `INSTRUCTIONS`
 
 * *Schedule* : `schedule`
 
-* *Invite* : `invite SCHEDULE_INDEX  n/NAME`
+* *Invite* : `invite LIST_INDEX to/SCHEDULE_INDEX`
 
 * *Remove* : `remove SCHEDULE_INDEX  n/NAME`
 
-* *Modify* : `modify SCHEDULE_INDEX n/NAME d/DATE t/TIME l/LOCATION or nil`
+* *editEvent* : `n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START TIME e/END TIME `
 
 * *Find* : `find KEYWORD [MORE_KEYWORDS]`
 
-* *Cancel* : `cancel SCHEDULE_INDEX`
+* *deleteEvent* : `deleteEvent SCHEDULE_INDEX`
 
 * *Select* : `select SCHEDULE_INDEX`
 
