@@ -9,6 +9,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.AddSkillLevelCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Skill;
+import seedu.address.model.person.SkillLevel;
+
 /**
  * Parses input arguments and creates a new {@code AddSkillLevelCommand} object
  */
@@ -28,9 +31,9 @@ public class AddSkillLevelCommandParser implements Parser<AddSkillLevelCommand> 
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddSkillLevelCommand.MESSAGE_USAGE), ive);
         }
-        String remark = argMultimap.getValue(PREFIX_SKILL).orElse("");
-        int level = Integer.parseInt(argMultimap.getValue(PREFIX_SKILLLEVEL).orElse(""));
+        Skill skill = new Skill(argMultimap.getValue(PREFIX_SKILL).orElse(""));
+        SkillLevel level = new SkillLevel(Integer.parseInt(argMultimap.getValue(PREFIX_SKILLLEVEL).orElse("")));
 
-        return new AddSkillLevelCommand(index, remark, level);
+        return new AddSkillLevelCommand(index, skill, level);
     }
 }
