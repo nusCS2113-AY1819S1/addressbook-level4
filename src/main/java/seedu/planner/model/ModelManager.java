@@ -36,7 +36,8 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         requireAllNonNull(financialPlanner, userPrefs);
 
-        logger.fine("Initializing with financial planner: " + financialPlanner + " and user prefs " + userPrefs);
+        logger.fine("Initializing with financial planner: " + financialPlanner
+                + " and user prefs " + userPrefs);
 
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
@@ -90,6 +91,14 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.removeRecordFromSummary(target);
         indicateFinancialPlannerChanged();
         indicateSummaryMapChanged();
+    }
+
+    @Override
+    public void deleteListRecord(List<Record> targetList) {
+        for (Record target : targetList) {
+            versionedFinancialPlanner.removeRecord(target);
+        }
+        indicateFinancialPlannerChanged();
     }
 
     @Override
@@ -147,6 +156,7 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredRecords);
     }
 
+    //show all the records
     @Override
     public ObservableList<Limit> getLimitList() {
         return FXCollections.unmodifiableObservableList(limits);

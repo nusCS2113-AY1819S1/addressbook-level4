@@ -10,6 +10,7 @@ import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.Command;
 import seedu.planner.logic.commands.DeleteCommand;
+import seedu.planner.logic.commands.DeleteCommandByDateEntry;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.ExitCommand;
 import seedu.planner.logic.commands.FindCommand;
@@ -65,6 +66,9 @@ public class FinancialPlannerParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case DeleteCommandByDateEntry.COMMAND_WORD:
+            return new DeleteCommandByDateEntryParser().parse(arguments);
+
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -95,8 +99,10 @@ public class FinancialPlannerParser {
         case LimitCommand.COMMAND_WORD:
             return new LimitCommandParser().parse(arguments);
 
+
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommandParser().parse(arguments);
+
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
