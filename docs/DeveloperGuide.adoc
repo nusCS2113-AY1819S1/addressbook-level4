@@ -839,7 +839,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
-|`* * *` |university lecturer |create groups of students |have a list of all my students in a particular module/group
+|`* * *` |university lecturer |create groups |have a list of all my modules/tutorial classes
+
+|`* * *` |university lecturer |add students to groups |have a list of all my students in a particular module/group
 
 |`* * *` |university lecturer |send an email to all students in any group |make module specific announcements
 
@@ -863,7 +865,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Student management system` and the *Actor* is the `Lecturer`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete person
@@ -893,45 +895,59 @@ Use case resumes at step 2.
 
 [discrete]
 === Use case: Create Groups
-*Precondition*
 
-1.  Address Book is not empty
 
 *MSS*
 
-1.  User creates a group
-2.  AddressBook confirms that group is created
-3.  User adds students to group
-4.  AddressBook confirms that students were added
+1.  Lecturer creates a group
+2.  Student management system confirms that group is created
 +
 Use case ends
 
 *Extensions*
 
 [none]
-* 1a. AddressBook detects error in data entered.
+* 1a. Student management system detects incorrect format of data entered.
 +
 
 [none]
-** 1a1. AddressBook rejects command entered.
+** 1a1. Student management system rejects command entered with relevant error message.
 [none]
-* 1b. AddressBook detects duplicate group.
+* 1b. Student management system detects duplicate group.
 +
 
 [none]
-** 1b1. AddressBook rejects command entered.
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Add Students To Groups
+*Precondition*
+
+1.  Student management system has student(s)
+
+*MSS*
+
+1.  Lecturer adds student(s) to a group
+2.  AddressBook confirms student is added
++
+Use case ends
+
+*Extensions*
+
 [none]
-* 3a. AddressBook detects error in data entered.
+* 1a. Student management system detects incorrect format of in data entered.
 +
 
 [none]
-** 3a1. AddressBook rejects command entered.
+** 1a1. Student management system rejects command entered with relevant error message.
 [none]
-* 3b. AddressBook detects group is not created.
+* 1b. Student management system detects student(s) is already in the group.
 +
 
 [none]
-** 3b1. AddressBook rejects command entered.
+** 1b1. Student management system rejects command entered with relevant error message.
 +
 
 
