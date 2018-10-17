@@ -2,19 +2,11 @@ package seedu.address.model.classroom;
 
 import static java.util.Objects.requireNonNull;
 
-import javax.xml.bind.annotation.XmlElement;
-
-
-
 /**
  * Represents a classname.
  */
 public class ClassName {
-    @XmlElement
     private String value;
-
-    public ClassName() {
-    }
 
     public ClassName(String className) {
         requireNonNull(className);

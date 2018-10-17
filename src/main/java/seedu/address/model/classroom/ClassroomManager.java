@@ -1,23 +1,55 @@
 package seedu.address.model.classroom;
 
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlRootElement;
+import java.util.stream.Collectors;
+
+import seedu.address.model.StorageController;
+import seedu.address.storage.adapter.XmlAdaptedClassroom;
+
 /**
- This classroom manager stores classroom for Trajectory.
+ * This classroom manager stores classrooms for Trajectory.
  */
-@XmlRootElement(namespace = "seedu.address.model")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class ClassroomManager {
-    @XmlElementWrapper(name = "classrooms")
-    @XmlElement(name = "class")
-    private ArrayList<Classroom> classroomList = new ArrayList<Classroom>();
-    public ArrayList<Classroom> getList() {
-        return classroomList;
+    private ArrayList<Classroom> classroomList = new ArrayList<>();
+
+    public ClassroomManager() {
+        readClassroomList();
     }
+
+    /**
+     * Adds a new classroomList to the in-memory array list
+     */
+    public void addClassroom(Classroom classroom) {
+        classroomList.add(classroom);
+    }
+
+    /**
+     * Gets the module list from storage and converts it to a Module array list
+     */
+    private void readClassroomList() {
+        ArrayList<XmlAdaptedClassroom> xmlClassroomList = StorageController.getClassesStorage();
+        for (XmlAdaptedClassroom xmlClassroom : xmlClassroomList) {
+            classroomList.add(xmlClassroom.toModelType());
+        }
+    }
+
+    /**
+     * Converts the Classroom array list and invokes the StorageController to save the current classroom list to file
+     */
+    public void saveClassroomList() {
+        ArrayList<XmlAdaptedClassroom> xmlClassroomList =
+                classroomList
+                        .stream()
+                        .map(XmlAdaptedClassroom::new)
+                        .collect(Collectors.toCollection(ArrayList::new));
+        StorageController.setClassesStorage(xmlClassroomList);
+        StorageController.storeData();
+    }
+
+    public ArrayList<Classroom> getClassroomList() {
+        return this.classroomList;
+    }
+
     public void setClassroomList(ArrayList<Classroom> classroomList) {
         this.classroomList = classroomList;
     }
