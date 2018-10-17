@@ -33,7 +33,7 @@ public class ClassDeleteCommand extends Command {
     private final ClassroomManager classroomManager;
 
     /**
-     * Command creates a classroom to be added.
+     * Command deletes a classroom.
      */
     public ClassDeleteCommand(String className, String moduleCode) {
         classroomManager = new ClassroomManager();
