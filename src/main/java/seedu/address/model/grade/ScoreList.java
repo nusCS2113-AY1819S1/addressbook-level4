@@ -19,7 +19,9 @@ public class ScoreList {
         requireAllNonNull(scoreList);
         this.scoreList.addAll(scoreList);
     }
-
+    /**
+     * Every field must be present and not null.
+     */
     public Set<Test> getScoreList() {
         return Collections.unmodifiableSet(scoreList);
     }

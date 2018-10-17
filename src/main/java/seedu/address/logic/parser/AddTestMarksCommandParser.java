@@ -11,13 +11,13 @@ import java.util.List;
 import seedu.address.logic.commands.AddTestMarksCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
-
+/**
+ * Parses the given {@code String} of arguments in the context of the FindCommand
+ * and returns an FindCommand object for execution.
+ * @throws ParseException if the user input does not conform the expected format
+ */
 public class AddTestMarksCommandParser {
-    /**
-     * Parses the given {@code String} of arguments in the context of the FindCommand
-     * and returns an FindCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
-     */
+
     public AddTestMarksCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
