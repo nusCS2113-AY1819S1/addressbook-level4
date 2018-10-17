@@ -381,7 +381,7 @@ e.g. `createaccount A1234567M zaq1xsw2cde3`
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find [\tag tags] KEYWORD [MORE_KEYWORDS]` +
+* *Find* : `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake` +
 e.g `find \tag President`
 * *List* : `list`
