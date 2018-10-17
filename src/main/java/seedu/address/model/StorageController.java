@@ -30,7 +30,7 @@ public class StorageController {
 
     private static ArrayList<XmlAdaptedCourse> courseStorage = new ArrayList<XmlAdaptedCourse>();
     private static ArrayList<XmlAdaptedModule> moduleStorage = new ArrayList<>();
-    private static ArrayList<Classroom> classesStorage = new ArrayList<Classroom>();
+    private static ArrayList<XmlAdaptedClassroom> classesStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedGradebook> gradebookStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedNote> noteStorage = new ArrayList<>();
 
@@ -85,7 +85,7 @@ public class StorageController {
     }
 
     /**
-     This method stores all data within the arraylists above to local storage.
+     * This method stores all data within the arraylists above to local storage.
      */
     public static void storeData() {
         try {
@@ -137,11 +137,11 @@ public class StorageController {
         StorageController.classesStorage = classesStorage;
     }
 
-    public static ArrayList<GradebookComponent> getGradebookStorage() {
+    public static ArrayList<XmlAdaptedGradebook> getGradebookStorage() {
         return gradebookStorage;
     }
 
-    public static void setGradebookStorage(ArrayList<GradebookComponent> gradebookStorage) {
+    public static void setGradebookStorage(ArrayList<XmlAdaptedGradebook> gradebookStorage) {
         StorageController.gradebookStorage = gradebookStorage;
     }
 

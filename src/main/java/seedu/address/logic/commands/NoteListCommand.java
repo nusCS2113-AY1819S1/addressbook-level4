@@ -1,12 +1,9 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
-
-import java.util.function.Predicate;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.StorageController;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteManager;
 
@@ -17,33 +14,32 @@ public class NoteListCommand extends Command {
 
     public static final String COMMAND_WORD = "note list";
 
-    public static final String MESSAGE_SUCCESS = "Notes have been listed.";
+    public static final String MESSAGE_SUCCESS = "Listed %1$s note(s).";
 
-    public static final String MESSAGE_NOT_FOUND = "No notes were found. Displaying all notes.";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists notes. "
-            + "Parameters: ["
-            + PREFIX_MODULECODE + "MODULE CODE]\n"
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MODULECODE + "CS2040C";
+    public static final String MESSAGE_NOT_FOUND = "No notes were found.";
 
     private NoteManager noteManager = new NoteManager();
 
-    private final Predicate<Note> predicate;
-
-    public NoteListCommand(Predicate<Note> predicate) {
-        this.predicate = predicate;
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        noteManager.updateFilteredNotesList(predicate);
 
-        if (noteManager.getFilteredNotesListSize() > 0) {
-            return new CommandResult(MESSAGE_SUCCESS);
+        StringBuilder sb = new StringBuilder();
+
+        for (Note n: noteManager.getNotes()) {
+            sb.append("Module Code: ");
+            sb.append(n.getModuleCode() + "\n");
+            sb.append("Date: ");
+            sb.append(n.getDate() + "\n");
+            sb.append("Note:\n");
+            sb.append(n.getNoteText() + "\n");
+        }
+
+        if (sb.length() > 0) {
+            return new CommandResult(
+                    String.format(MESSAGE_SUCCESS, StorageController.getNoteStorage().size(), "s")
+                            + "\n" + sb.toString());
         } else {
-            noteManager.updateFilteredNotesList(null);
-            return new CommandResult(MESSAGE_NOT_FOUND);
+            return new CommandResult(String.format(MESSAGE_NOT_FOUND));
         }
     }
 }
