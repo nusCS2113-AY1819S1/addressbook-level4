@@ -75,8 +75,6 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handleNewInfo(NewInfoMessageEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        browser.getEngine().setUserStyleSheetLocation(getClass()
-                .getResource("/rendering/bootstrap.min.css").toString());
         browser.getEngine().loadContent(event.message);
 
     }
