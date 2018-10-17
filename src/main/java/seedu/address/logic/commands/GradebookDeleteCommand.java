@@ -7,8 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
-import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
  * Deletes gradebook component for module in Trajectory to the user.
@@ -23,17 +23,16 @@ public class GradebookDeleteCommand extends Command {
             + PREFIX_MODULECODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
 
-    private final XmlAdaptedGradebook toDeleteGradebookComponent;
-
-    public GradebookDeleteCommand(XmlAdaptedGradebook gradebookComponent) {
+    private final Gradebook toDeleteGradebookComponent;
+    public GradebookDeleteCommand (Gradebook gradebookComponent) {
         toDeleteGradebookComponent = gradebookComponent;
     }
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        CommandResult result = GradebookManager.deleteGradebookComponent(toDeleteGradebookComponent.getModuleCode(),
+        String result = GradebookManager.deleteGradebookComponent(toDeleteGradebookComponent.getModuleCode(),
                 toDeleteGradebookComponent.getGradeComponentName());
-        return result;
+        return new CommandResult(result);
     }
 }

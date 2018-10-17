@@ -38,6 +38,10 @@ public class ModuleManager {
         modules.set(targetIndex, editedModule);
     }
 
+    public void deleteModule(Module toDelete) {
+        modules.remove(toDelete);
+    }
+
     /**
      * Gets the module list from storage and converts it to a Module array list
      */
@@ -58,6 +62,11 @@ public class ModuleManager {
         StorageController.storeData();
     }
 
+    /**
+     * Searches the list of modules to find a module that matches the {@code moduleCode}
+     * @param moduleCode The target module's code to find
+     * @return The module object that matches the module code, or {@code null} if there isn't a matching module
+     */
     public Module getModuleByModuleCode(String moduleCode) {
         return this.modules.stream()
                 .filter(module -> module.getModuleCode().equals(moduleCode))

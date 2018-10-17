@@ -28,14 +28,12 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_MODULE_NAME);
 
-        String moduleCode;
-
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleEditCommand.MESSAGE_USAGE));
         }
 
-        moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
+        String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
 
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
         editModuleDescriptor.setModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
