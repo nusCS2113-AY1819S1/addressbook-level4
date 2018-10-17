@@ -19,7 +19,6 @@ import seedu.address.model.login.LoginDetails;
 public class XmlSerializableLoginBook {
 
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "LoginDetails list contains duplicate account(s).";
-
     @XmlElement
     private List<XmlAccount> accounts;
 

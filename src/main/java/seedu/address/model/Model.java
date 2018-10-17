@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
  * The API of the Model component.
@@ -19,18 +20,6 @@ public interface Model {
      * The account must not already exist in the address book.
      */
     void createAccount(LoginDetails loginDetails);
-
-    /**
-     * Deletes an existing account in the address book.
-     * The account must exist in the address book.
-     */
-    //void deleteAccount(LoginDetails delete);
-
-    /**
-     * Changes the password of an existing account in the address book.
-     * The account must exist in the address book.
-     */
-    //void changePassword(LoginDetails change);
 
     /**
      * Returns true if an account with the same user ID as {@code account} exists in the address book.
@@ -112,4 +101,9 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Returns the model's SearchHistoryManager
+     */
+    SearchHistoryManager getSearchHistoryManager();
 }
