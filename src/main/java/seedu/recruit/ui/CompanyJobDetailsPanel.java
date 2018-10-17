@@ -13,8 +13,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 
 import seedu.recruit.commons.core.LogsCenter;
-import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.commons.events.ui.CompanyDetailsPanelSelectionChangedEvent;
+import seedu.recruit.commons.events.ui.JumpToListRequestEvent;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
 

@@ -36,7 +36,7 @@ public class XmlSerializableCandidateBook {
      */
     public XmlSerializableCandidateBook(ReadOnlyCandidateBook src) {
         this();
-        candidates.addAll(src.getCandidatelist().stream().map(XmlAdaptedCandidate::new).collect(Collectors.toList()));
+        candidates.addAll(src.getCandidateList().stream().map(XmlAdaptedCandidate::new).collect(Collectors.toList()));
     }
 
     /**

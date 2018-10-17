@@ -49,6 +49,7 @@ public class AddJobDetailsCommand extends Command {
 
 
     public AddJobDetailsCommand(JobOffer jobOffer) {
+        requireNonNull(jobOffer);
         toAdd = jobOffer;
     };
 

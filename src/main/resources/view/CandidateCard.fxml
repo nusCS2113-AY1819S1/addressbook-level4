@@ -32,9 +32,9 @@
             <graphic>
                <Label fx:id="education1" styleClass="cell_small_label" text="Highest Education: " />
             </graphic></Label>
-        <Label fx:id="desired_job" styleClass="cell_small_label" text="\$desired_job">
+        <Label fx:id="job" styleClass="cell_small_label" text="\$desired_job">
             <graphic>
-               <Label fx:id="desired_job1" styleClass="cell_small_label" text="Desired Job: " />
+               <Label fx:id="job1" styleClass="cell_small_label" text="Desired Job: " />
             </graphic></Label>
         <Label fx:id="salary" styleClass="cell_small_label" text="\$salary">
             <graphic>

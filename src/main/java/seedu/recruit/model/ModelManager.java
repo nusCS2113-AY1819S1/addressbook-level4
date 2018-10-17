@@ -16,7 +16,6 @@ import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
-import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
@@ -42,7 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
         versionedCompanyBook = new VersionedCompanyBook(companyBook);
-        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
+        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
     }
@@ -287,5 +286,4 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
     }
-
 }

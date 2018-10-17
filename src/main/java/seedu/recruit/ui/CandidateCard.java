@@ -43,7 +43,7 @@ public class CandidateCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label desired_job;
+    private Label job;
     @FXML
     private Label education;
     @FXML
@@ -56,7 +56,7 @@ public class CandidateCard extends UiPart<Region> {
         this.candidate = candidate;
         id.setText(displayedIndex + ". ");
         name.setText(candidate.getName().fullName);
-        desired_job.setText(candidate.getJob().value);
+        job.setText(candidate.getJob().value);
         education.setText(candidate.getEducation().value);
         salary.setText(candidate.getSalary().value);
         candidate.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -34,8 +34,8 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
           <Menu mnemonicParsing="false" text="Switch Book">
-            <MenuItem fx:id="CompanyBook" mnemonicParsing="false" onAction="#handleChangeView" text="Company Book" />
-              <MenuItem fx:id="CandidateBook" mnemonicParsing="false" onAction="#handleChangeView" text="Candidate Book" />
+            <MenuItem fx:id="companyBook" mnemonicParsing="false" onAction="#handleChangeToCompanyJobDetailsPanel" text="Company Book" />
+              <MenuItem fx:id="candidateBook" mnemonicParsing="false" onAction="#handleChangeToCandidateDetailsPanel" text="Candidate Book" />
           </Menu>
         </MenuBar>
 

@@ -35,7 +35,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 * *`list candidates`* : lists the names of all the candidates available
 * *`addc`* : add a job candidate to RecruitBook
-* *`add job`* : adds an available job to RecruitBook
+* *`addj`* : adds an available job to RecruitBook
 * **`delete`**`3` : deletes the 3rd job shown in the current list
 * *`exit`* : exits the app
 
@@ -47,10 +47,9 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Details labelled with “if any” must be filled in at least with `NA` if user finds it not applicable.
+* Words in `UPPER_CASE` are the fields to be specified by you! e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Details labelled with “if any” must be filled in at least with `NA` if you find it not applicable.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
-* Gender can be specified by g/U (unrestricted), g/F (female) or g/M (male).
 ====
 
 === Viewing help : `help`
@@ -58,13 +57,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Views help information of the various commands in RecruitBook. +
 Format: `help`
 
-=== Adding a candidate / job : `add`
+=== Adding a candidate / company / job  : `add`
 
 ==== Adds a candidate to the RecruitBook
 Format: `addc` +
 Supported tags: `n/`, `p/`, `e/`, `a/`, `g/`, `x/`, `j/`, `h/`, `s/`, `y/`, `c/`
 
-Entering this command will prompt user the following: +
+Entering this command will prompt you the following: +
 *`Enter the following details of the candidate in the format:`* +
 `n/NAME g/GENDER x/AGE p/PHONE_NUMBER e/EMAIL a/ADDRESS j/SEEKING_JOB h/HIGHEST_EDUCATION s/EXPECTED_SALARY_PER_MONTH`
 
@@ -73,7 +72,7 @@ Examples:
 * `n/John Doe g/M x/18 p/91238123 e/johndoe@gmail.com a/123, Central Boulevard, #01-111, 600123 j/WAITER h/A LEVEL s/1200`
 * `n/Mary Loe g/M x/18 p/82238123 e/maryloe@gmail.com a/113, South Boulevard, #01-111, 600123 j/WAITER h/O LEVEL s/NA`
 
-After keying in the details, user will be further prompted for details of job experience: +
+After keying in the details, you will be further prompted for details of job experience: +
 *`Enter job experience (if any) of the candidate in the following format:`* +
 `j/JOB y/YEARS_OF_EXPERIENCE c/COMPANY`
 
@@ -82,28 +81,29 @@ Examples:
 * `j/Store Manager y/1 c/Mcdonalds`
 * `j/Cashier y/2 c/KFC`
 
+==== Adds a company to the RecruitBook
+Format: `addC c/UNIQUE_COMPANY_NAME a/ADDRESS e/EMAIL p/PHONE` +
+
+Examples:
+
+*	`addC c/KFC a/101, Clementi Ave 2, #01-01 e/kfc@gmail.com p/61231232`
+*	`addC c/McDonalds a/101, Bukit Merah Lane 2, #01-01 e/macs@gmail.com p/61117111`
+
 ==== Adds a job offer to the RecruitBook
 Format: `addj`
 
-Entering this command will prompt user the following: +
+Entering this command will prompt you the following: +
 *`Enter the following details of the job in the format:`* +
-`c/COMPANY j/JOB_TITLE`
+`c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY`
+
+NOTE: COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
-*	`c/Mcdonalds j/Store Manager`
-*	`c/KFC j/Cashier`
+*	`c/McDonalds j/Cashier g/M xr/20-30 h/O levels s/1200`
+*	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
 
-After keying in the details, user will be further prompted for details of job requirements: +
-*`Enter the job requirements in the format:`* +
-`x/MIN_AGE-MAX_AGE h/HIGHEST_EDUCATION s/MIN_SALARY-MAX_SALARY g/GENDER`
-
-Examples:
-
-* `x/18-60 h/PRIMARY s/1000-1200 g/U`
-*	`x/18-30 h/O LEVEL s/1500-2000 g/M`
-
-==== Exits from the add job and add candidate interface without adding to RecruitBook
+=== Exits from any intermediate command
 Format: `cancel`
 
 === Listing all : `list`

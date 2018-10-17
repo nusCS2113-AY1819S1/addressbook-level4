@@ -5,12 +5,14 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
-import guitests.guihandles.CandidateCardHandle;
+import org.junit.Ignore;
 import org.junit.Test;
 
+import guitests.guihandles.CandidateCardHandle;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.testutil.PersonBuilder;
 
+@Ignore
 public class CandidateCardTest extends GuiUnitTest {
 
     @Test

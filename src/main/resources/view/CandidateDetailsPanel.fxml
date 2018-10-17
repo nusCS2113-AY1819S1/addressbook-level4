@@ -55,7 +55,7 @@
                            <Label fx:id="email" layoutX="10.0" layoutY="12.0" text="\$email" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                            <Label fx:id="address" layoutX="10.0" layoutY="12.0" text="\$address" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                            <Label fx:id="education" layoutX="10.0" layoutY="12.0" text="\$education" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                           <Label fx:id="desired_job" layoutX="10.0" layoutY="12.0" text="\$desired_job" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                           <Label fx:id="job" layoutX="10.0" layoutY="12.0" text="\$job" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                            <Label fx:id="salary" layoutX="10.0" layoutY="12.0" text="\$salary" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         </children>
                      </GridPane>

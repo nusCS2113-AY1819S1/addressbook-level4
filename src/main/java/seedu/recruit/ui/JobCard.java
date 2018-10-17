@@ -4,9 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.recruit.model.joboffer.Job;
 import seedu.recruit.model.joboffer.JobOffer;
-import seedu.recruit.model.company.Company;
 
 /**
  * An UI component that displays the name of the job,
