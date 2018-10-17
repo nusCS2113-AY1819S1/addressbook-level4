@@ -72,13 +72,6 @@ public class StorageManager extends ComponentManager implements Storage {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
 
-
-    @Override
-    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker() throws DataConversionException, IOException {
-        return readExpenditureTracker(addressBookStorage.getExpenditureTrackerFilePath());
-    }
-
-
     @Override
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read AB data from file: " + filePath);
@@ -86,7 +79,13 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path expenditureFilePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker() throws DataConversionException, IOException {
+        return readExpenditureTracker(addressBookStorage.getExpenditureTrackerFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path expenditureFilePath)
+            throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + expenditureFilePath);
         return addressBookStorage.readExpenditureTracker(expenditureFilePath);
     }

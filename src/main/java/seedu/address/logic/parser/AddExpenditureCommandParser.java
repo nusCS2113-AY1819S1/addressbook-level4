@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
 
 import java.util.stream.Stream;
 
@@ -28,7 +30,8 @@ public class AddExpenditureCommandParser implements Parser<AddExpenditureCommand
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_MONEY, PREFIX_CATEGORY)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddExpenditureCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    AddExpenditureCommand.MESSAGE_USAGE));
         }
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());

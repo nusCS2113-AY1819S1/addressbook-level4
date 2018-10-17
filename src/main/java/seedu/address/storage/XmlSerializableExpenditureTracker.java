@@ -36,7 +36,8 @@ public class XmlSerializableExpenditureTracker {
      */
     public XmlSerializableExpenditureTracker(ReadOnlyExpenditureTracker src) {
         this();
-        expenditures.addAll(src.getExpenditureList().stream().map(XmlAdaptedExpenditure::new).collect(Collectors.toList()));
+        expenditures.addAll(src.getExpenditureList().stream().
+                map(XmlAdaptedExpenditure::new).collect(Collectors.toList()));
     }
 
     /**
