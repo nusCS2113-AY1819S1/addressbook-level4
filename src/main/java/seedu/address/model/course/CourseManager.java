@@ -26,8 +26,22 @@ public class CourseManager {
         }
     }
 
-    public void addModule(Course course) {
+    public void deleteCourse (Course course) {
+        courseList.remove(course);
+    }
+    public void addCourse(Course course) {
         courseList.add(course);
+    }
+
+    public Course getCourse(String courseCode) {
+        for (Course c: courseList) {
+            if (courseCode.equalsIgnoreCase(c.getCourseCode())) {
+                return c;
+            }
+        }
+
+        throw new NullPointerException();
+
     }
 
     /**
@@ -45,7 +59,7 @@ public class CourseManager {
         return courseList;
     }
 
-    public void setModules(ArrayList<Course> courses) {
+    public void setCourses(ArrayList<Course> courses) {
         this.courseList = courses;
     }
 }
