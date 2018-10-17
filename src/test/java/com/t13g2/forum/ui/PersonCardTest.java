@@ -9,6 +9,7 @@ import org.junit.Test;
 import com.t13g2.forum.model.person.Person;
 import com.t13g2.forum.testutil.PersonBuilder;
 import com.t13g2.forum.ui.testutil.GuiTestAssert;
+
 import guitests.guihandles.PersonCardHandle;
 
 public class PersonCardTest extends GuiUnitTest {

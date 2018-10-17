@@ -18,6 +18,7 @@ import com.t13g2.forum.testutil.EventsUtil;
 import com.t13g2.forum.testutil.TypicalIndexes;
 import com.t13g2.forum.testutil.TypicalPersons;
 import com.t13g2.forum.ui.testutil.GuiTestAssert;
+
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 
@@ -28,7 +29,8 @@ public class PersonListPanelTest extends GuiUnitTest {
     private static final ObservableList<Person> TYPICAL_PERSONS =
             FXCollections.observableList(TypicalPersons.getTypicalPersons());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(TypicalIndexes.INDEX_SECOND_PERSON);
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT =
+        new JumpToListRequestEvent(TypicalIndexes.INDEX_SECOND_PERSON);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
@@ -56,7 +58,8 @@ public class PersonListPanelTest extends GuiUnitTest {
         EventsUtil.postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        PersonCardHandle expectedPerson = personListPanelHandle.getPersonCardHandle(TypicalIndexes.INDEX_SECOND_PERSON.getZeroBased());
+        PersonCardHandle expectedPerson = personListPanelHandle
+            .getPersonCardHandle(TypicalIndexes.INDEX_SECOND_PERSON.getZeroBased());
         PersonCardHandle selectedPerson = personListPanelHandle.getHandleToSelectedCard();
         GuiTestAssert.assertCardEquals(expectedPerson, selectedPerson);
     }

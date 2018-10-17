@@ -12,6 +12,7 @@ import com.t13g2.forum.logic.LogicManager;
 import com.t13g2.forum.logic.commands.ListCommand;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.ModelManager;
+
 import guitests.guihandles.CommandBoxHandle;
 
 import javafx.scene.input.KeyCode;

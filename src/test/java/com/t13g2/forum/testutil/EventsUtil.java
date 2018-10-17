@@ -2,6 +2,7 @@ package com.t13g2.forum.testutil;
 
 import com.t13g2.forum.commons.core.EventsCenter;
 import com.t13g2.forum.commons.events.BaseEvent;
+
 import guitests.GuiRobot;
 
 import javafx.application.Platform;

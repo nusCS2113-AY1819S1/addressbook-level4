@@ -12,6 +12,7 @@ import com.t13g2.forum.MainApp;
 import com.t13g2.forum.commons.events.ui.PersonPanelSelectionChangedEvent;
 import com.t13g2.forum.testutil.EventsUtil;
 import com.t13g2.forum.testutil.TypicalPersons;
+
 import guitests.guihandles.BrowserPanelHandle;
 
 public class BrowserPanelTest extends GuiUnitTest {
@@ -38,8 +39,8 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a person
         EventsUtil.postNow(selectionChangedEventStub);
-        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL +
-            TypicalPersons.ALICE.getName().fullName.replaceAll(" ", "%20"));
+        URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
+            + TypicalPersons.ALICE.getName().fullName.replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

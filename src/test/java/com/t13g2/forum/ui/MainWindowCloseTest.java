@@ -13,6 +13,7 @@ import com.t13g2.forum.logic.LogicManager;
 import com.t13g2.forum.model.ModelManager;
 import com.t13g2.forum.model.UserPrefs;
 import com.t13g2.forum.ui.testutil.EventsCollectorRule;
+
 import guitests.guihandles.StageHandle;
 
 import javafx.stage.Stage;

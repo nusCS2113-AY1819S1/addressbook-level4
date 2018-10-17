@@ -8,6 +8,8 @@ public class User extends BaseModel {
         "User name can take any values, and it should not be blank";
     public static final String MESSAGE_USER_PASSWORD_CONSTRAINTS =
         "User name can take any values, and it should not be blank";
+    public static final String MESSAGE_NOT_ADMIN = "You are not an admin!";
+    public static final String MESSAGE_NOT_LOGIN = "Please login in order to proceed!";
     /**
      * The first character of the user name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.

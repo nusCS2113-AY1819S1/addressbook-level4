@@ -8,6 +8,7 @@ import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.logic.commands.exceptions.DuplicateBlockException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
@@ -42,7 +43,14 @@ public class BlockUserFromCreatingCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        User user = new User();
+        User user = null;
+        // if user has not login or is not admin, then throw exception
+        if (Context.getInstance().getCurrentUser() == null) {
+            throw new CommandException(User.MESSAGE_NOT_LOGIN);
+        }
+        if (!Context.getInstance().getCurrentUser().isAdmin()) {
+            throw new CommandException(User.MESSAGE_NOT_ADMIN);
+        }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             user = unitOfWork.getUserRepository().getUserByUsername(userNameToBlock);
             if (user.getIsBlock()) {

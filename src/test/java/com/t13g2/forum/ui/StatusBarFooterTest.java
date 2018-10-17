@@ -17,6 +17,7 @@ import org.junit.Test;
 import com.t13g2.forum.commons.events.model.AddressBookChangedEvent;
 import com.t13g2.forum.model.ForumBook;
 import com.t13g2.forum.testutil.EventsUtil;
+
 import guitests.guihandles.StatusBarFooterHandle;
 
 public class StatusBarFooterTest extends GuiUnitTest {
@@ -54,7 +55,8 @@ public class StatusBarFooterTest extends GuiUnitTest {
     @Test
     public void display() {
         // initial state
-        assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(), StatusBarFooter.SYNC_STATUS_INITIAL);
+        assertStatusBarContent(RELATIVE_PATH.resolve(STUB_SAVE_LOCATION).toString(),
+            StatusBarFooter.SYNC_STATUS_INITIAL);
 
         // after address book is updated
         EventsUtil.postNow(EVENT_STUB);

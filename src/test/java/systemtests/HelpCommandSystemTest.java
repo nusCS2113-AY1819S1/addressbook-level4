@@ -14,6 +14,7 @@ import com.t13g2.forum.logic.commands.HelpCommand;
 import com.t13g2.forum.logic.commands.SelectCommand;
 import com.t13g2.forum.ui.BrowserPanel;
 import com.t13g2.forum.ui.StatusBarFooter;
+
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 

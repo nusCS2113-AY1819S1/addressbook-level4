@@ -168,6 +168,20 @@ public class ParserUtil {
         return new Announcement(trimmedTitle, trimmedContent);
     }
 
+    /**
+     * Parse {@code }
+     */
+    public static Module parseModule(String moduleTitle, String moduleCode) throws ParseException {
+        requireNonNull(moduleTitle);
+        requireNonNull(moduleCode);
+        String trimmedModuleTitle = moduleTitle.trim();
+        String trimmedModuleCode = moduleCode.trim();
+        if (!isValidModule(trimmedModuleCode)) {
+            throw new ParseException(Module.MESSAGE_MODULE_CONSTRAINTS);
+        }
+        return new Module(trimmedModuleTitle, trimmedModuleCode);
+    }
+
     //@@author
     /**
      * moduleCode
@@ -223,9 +237,9 @@ public class ParserUtil {
     public static String parseComment(String comment) throws ParseException {
         requireNonNull(comment);
         String trimmedComment = comment.trim();
-//        if (!isValidComment(trimmedComment)) {
-//            throw new ParseException(Comment.MESSAGE_COMMENT_CONSTRAINTS);
-//        }
+        // if (!isValidComment(trimmedComment)) {
+        //    throw new ParseException(Comment.MESSAGE_COMMENT_CONSTRAINTS);
+        // }
         return trimmedComment;
     }
     //Returns true if a given string is a valid comment content.

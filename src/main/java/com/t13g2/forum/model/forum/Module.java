@@ -15,6 +15,11 @@ public class Module extends BaseModel {
 
     private List<ForumThread> forumThreads;
 
+    public Module(String title, String moduleCode) {
+        this.title = title;
+        this.moduleCode = moduleCode;
+    }
+
     public String getTitle() {
         return title;
     }

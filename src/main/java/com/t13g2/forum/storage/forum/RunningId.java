@@ -23,7 +23,8 @@ public class RunningId {
      */
     private void writeToFile(int currentId) {
         try {
-            Files.write(Paths.get(StorageMapping.getInstance().getFileName(RunningId.class)), String.valueOf(currentId + 1).getBytes());
+            Files.write(Paths.get(StorageMapping.getInstance().getFileName(RunningId.class)),
+                String.valueOf(currentId + 1).getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -34,7 +35,8 @@ public class RunningId {
      */
     private int readFromFile() {
         try {
-            String text = new String(Files.readAllBytes(Paths.get(StorageMapping.getInstance().getFileName(RunningId.class))));
+            String text = new String(Files.readAllBytes(Paths.get(StorageMapping.getInstance()
+                .getFileName(RunningId.class))));
             return Integer.valueOf(text);
         } catch (IOException e) {
             //TODO: handle error

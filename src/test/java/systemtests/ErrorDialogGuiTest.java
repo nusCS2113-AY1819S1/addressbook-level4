@@ -11,6 +11,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.t13g2.forum.commons.events.storage.DataSavingExceptionEvent;
+
 import guitests.GuiRobot;
 import guitests.guihandles.AlertDialogHandle;
 

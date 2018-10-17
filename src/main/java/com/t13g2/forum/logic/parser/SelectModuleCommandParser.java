@@ -1,10 +1,12 @@
 package com.t13g2.forum.logic.parser;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+
+import java.util.stream.Stream;
+
 import com.t13g2.forum.commons.core.Messages;
 import com.t13g2.forum.logic.commands.SelectModuleCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
-import java.util.stream.Stream;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 /**
  * Parses input arguments and creates a new SelectModuleCommand object
@@ -21,7 +23,8 @@ public class SelectModuleCommandParser implements Parser<SelectModuleCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, SelectModuleCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                SelectModuleCommand.MESSAGE_USAGE));
         }
         String moduleCode = ParserUtil.parseModule(argMultimap.getValue(PREFIX_MODULE_CODE).get());
         return new SelectModuleCommand(moduleCode);

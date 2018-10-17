@@ -35,22 +35,26 @@ public class EditPersonDescriptorTest {
 
         // different phone -> returns false
         editedAmy =
-            new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withPhone(CommandTestUtil.VALID_PHONE_BOB).build();
+            new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withPhone(CommandTestUtil.VALID_PHONE_BOB).build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different email -> returns false
         editedAmy =
-            new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
+            new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withEmail(CommandTestUtil.VALID_EMAIL_BOB).build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different address -> returns false
         editedAmy =
-            new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
+            new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withAddress(CommandTestUtil.VALID_ADDRESS_BOB).build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
         editedAmy =
-            new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY).withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
+            new EditPersonDescriptorBuilder(CommandTestUtil.DESC_AMY)
+                .withTags(CommandTestUtil.VALID_TAG_HUSBAND).build();
         assertFalse(CommandTestUtil.DESC_AMY.equals(editedAmy));
     }
 }
