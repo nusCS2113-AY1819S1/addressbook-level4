@@ -7,6 +7,8 @@ public class CliSyntax {
 
     /* Prefix definitions */
     public static final Prefix PREFIX_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_GENDER = new Prefix("g/");
+    public static final Prefix PREFIX_NATIONALITY = new Prefix("nat/");
     public static final Prefix PREFIX_PHONE = new Prefix("p/");
     public static final Prefix PREFIX_EMAIL = new Prefix("e/");
     public static final Prefix PREFIX_ADDRESS = new Prefix("a/");
@@ -14,8 +16,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_GRADE = new Prefix("d/");
     public static final Prefix PREFIX_SUBJECT = new Prefix("s/");
     public static final Prefix PREFIX_MESSAGE = new Prefix("m/");
-    public static final Prefix PREFIX_GENDER = new Prefix("g/");
-    public static final Prefix PREFIX_NATIONALITY = new Prefix("nat/");
     public static final Prefix PREFIX_GROUP_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_PERSON_INDEX = new Prefix("p/");
     public static final Prefix PREFIX_GROUP_INDEX = new Prefix("g/");

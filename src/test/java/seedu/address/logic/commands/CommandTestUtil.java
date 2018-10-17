@@ -65,6 +65,15 @@ public class CommandTestUtil {
     public static final String VALID_PERSON_INDEX_1 = "1";
     public static final String VALID_PERSON_INDEX_2 = "2";
     public static final String VALID_PERSON_INDEX_3 = "3";
+    public static final String VALID_NUMBER_OF_GROUPS = "5";
+    public static final String VALID_GENDER_FLAG_TRUE = "true";
+    public static final String VALID_GENDER_FLAG_FALSE = "false";
+    public static final String VALID_NATIONALITY_FLAG_TRUE = "true";
+    public static final String VALID_NATIONALITY_FLAG_FALSE = "false";
+    public static final String INVALID_GENDER_FLAG_NUMBER = "4";
+    public static final String INVALID_GENDER_FLAG_WORD = "alsfe";
+    public static final String INVALID_NATIONALITY_FLAG_NUMBER = "6";
+    public static final String INVALID_NATIONALITY_FLAG_WORD = "eurt";
 
     public static final String VALID_GROUP_INDEX_1 = "1";
     public static final String VALID_GROUP_INDEX_2 = "2";
@@ -98,6 +107,18 @@ public class CommandTestUtil {
     public static final String GROUP_TAG_DESC_TUT_1 = " " + PREFIX_TAG + VALID_GROUP_TAG_TUT_1;
     public static final String GROUP_TAG_DESC_CS1010 = " " + PREFIX_TAG + VALID_GROUP_TAG_CS1010;
 
+    public static final String NUMBER_OF_GROUPS = " " + VALID_NUMBER_OF_GROUPS;
+    public static final String GENDER_FLAG_FALSE = " " + PREFIX_GENDER + VALID_GENDER_FLAG_FALSE;
+    public static final String GENDER_FLAG_TRUE = " " + PREFIX_GENDER + VALID_GENDER_FLAG_TRUE;
+    public static final String NATIONALITY_FLAG_FALSE = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_FLAG_FALSE;
+    public static final String NATIONALITY_FLAG_TRUE = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_FLAG_TRUE;
+
+    public static final String GENDER_FLAG_INVALID_NUMBER = " " + PREFIX_GENDER + INVALID_GENDER_FLAG_NUMBER;
+    public static final String GENDER_FLAG_INVALID_WORD = " " + PREFIX_GENDER + INVALID_GENDER_FLAG_WORD;
+    public static final String NATIONALITY_FLAG_INVALID_NUMBER = " " + PREFIX_NATIONALITY
+            + INVALID_NATIONALITY_FLAG_NUMBER;
+    public static final String NATIONALITY_FLAG_INVALID_WORD = " " + PREFIX_NATIONALITY + INVALID_NATIONALITY_FLAG_WORD;
+
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Male1"; // '1' not allowed in Gender
     public static final String INVALID_NATIONALITY_DESC = " " + PREFIX_GENDER + "SG1"; // '1' not allowed in Nationality
@@ -113,6 +134,9 @@ public class CommandTestUtil {
     public static final String INVALID_GROUP_LOCATION_DESC = " "
             + PREFIX_GROUP_LOCATION + "E1/01/01"; // '/' not allowed in group names
     public static final String INVALID_GROUP_TAG_DESC = " " + PREFIX_TAG + "morning*"; // '*' not allowed in tags
+
+    public static final String INVALID_GROUP_NUMBER_DESC = " " + "0";
+    public static final String INVALID_MAX_GROUP_NUMBER_DESC = " " + "9223372036854775808";
 
     public static final String PREAMBLE_WHITESPACE = "\t \r \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";

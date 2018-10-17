@@ -10,6 +10,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.distribute.DistributeAlgorithm;
 import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
 import seedu.address.model.group.GroupLocation;
@@ -29,6 +30,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    private static String groupName;
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -250,4 +252,50 @@ public class ParserUtil {
         return new Message(trimmedMessage);
     }
 
+    /** Checks if input value by the user is not Null or not 0
+     * @param value
+     * @return
+     * @throws ParseException
+     */
+    public static int parseInteger(String value) throws ParseException {
+        String trimmedInt = value.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedInt)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Integer.parseInt(trimmedInt);
+    }
+
+
+    /**
+     * Conducts the check of flags during user command input
+     * Accepts "true" or '1' to assert true
+     * Accepts "false" or '0' to assert false
+     * @param isFlagged
+     * @return
+     * @throws ParseException
+     */
+    public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
+        requireNonNull(isFlagged);
+        String trimmedFlaggedValue = isFlagged.trim().toLowerCase();
+        switch(trimmedFlaggedValue) {
+        case "false":
+        case "0":
+            trimmedFlaggedValue = "false";
+            break;
+        case "true":
+        case "1":
+            trimmedFlaggedValue = "true";
+            break;
+        default:
+            throw new ParseException(DistributeAlgorithm.MESSAGE_FLAG_ERROR);
+        }
+        Boolean flag = Boolean.valueOf(trimmedFlaggedValue);
+        if (flag) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
+

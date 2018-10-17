@@ -25,6 +25,7 @@ endif::[]
 * Add/Delete Students
 * View Students Data
 * Add/Delete Tutorial Groups
+** Add/Delete Students into Tutorial Groups
 * View Students in Tutorial Groups
 * Create _n_ number of Evenly Distributed Groups
 ** Can be based on *Gender*

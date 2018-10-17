@@ -86,19 +86,25 @@ Example: scorefilter a/66
 This will list all the students who score above 56 in a new grade list
 
 
-=== Create N number of group, distributed equally based on nationality or gender or both: `makegroup`
-Make multiple groups of N determined by the user, with a group name which will enumerate from 1 and user is able to select the condition to distribute equally via Gender & Nationally +
-Format: `makegroup gn/GROUP_NAME n/NthGROUP g/GENDER l/LOCAL` +
+=== Create N number of group, distributed equally based on nationality or gender or both: `distinto`
+Creates _n_ number of groups determined by the user, with a group name and user is able to select the condition to distribute equally via Gender & Nationally +
+Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
 ****
-* Create N number of equally distributed groups based on gender & nationality.
-* GROUP_NAME is specified in String format, which a number will enumerate from 1 at the end of the string.
-* N must be a positive integer to tell the system the number of group to be created.
-* GENDER & LOCAL are boolean flags to enable the system to distribute equally based on.
+* NUM_OF_GROUPS is an positive integer value and must not be 0.
+* GROUP_NAME is specified in String format.
+* GROUP_NAME will include the NUM_OF_GROUP index where it will be concatenate behind the GROUP_NAME.
+* `g/` is the Gender Prefix which only takes in '1' or '0' or "true" or "false". It is a boolean type.
+** '1' or "true" will trigger the software to distribute into group with balanced genders
+** '0' or "false" will ignore gender field and distribute
+* `nat/` is the nationality Prefix which only takes in '1' or '0'. It is a boolean type.
+** '1' or "true" will trigger the software to distribute into group with balanced nationality.
+** '0' or "false" will ignore nationality field and distribute
 ****
 
 Examples:
 
-* makegroup gn/T13- n/5 g/true l/true
+* distinto 5 n/T13- g/true nat/true
+* di 3 n/T11- g/1 nat/1
 
 === Sending Email to Group of Persons: `sendmail`
 Sends an email to all persons belonging to a group +

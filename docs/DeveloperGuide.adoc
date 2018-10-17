@@ -1023,7 +1023,8 @@ Use case ends
 === Use case: Group Distribution
 *Precondition*
 
-1.  Group's exist in the AddressBook
+1.  Student must exist in the AddressBook
+2.  Number of groups must be less than number of Students
 
 *MSS*
 
@@ -1106,6 +1107,32 @@ Use case ends
 
 [none]
 ** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[discrete]
+=== Use case: Adding Multiple Students to Student Management System(SMS)
+*Precondition*
+
+1.  User has selected a group of students
+
+*MSS*
+
+1.  User requests SMS to use a specific text file to execute multiple add commands
+2.  SMS open the exact text file and execute all the commands that are in the following text file
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. SMS detects that no such text file is present in default directory and return a error message to the user.
++
+Use case ends
+
+[none]
+** 2a. SMS detects that that there are invalid commands contains in the text file and return the line numbers that the
+add command is not able to run.
 +
 Use case ends
 
