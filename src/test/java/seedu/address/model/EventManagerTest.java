@@ -20,7 +20,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.DuplicatePersonException;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.testutil.EventBuilder;
 
 public class EventManagerTest {
@@ -56,7 +56,7 @@ public class EventManagerTest {
         List<Event> newEvents = Arrays.asList(ALICE, editedAlice);
         EventManagerStub newData = new EventManagerStub(newEvents);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         eventManager.resetData(newData);
     }
 

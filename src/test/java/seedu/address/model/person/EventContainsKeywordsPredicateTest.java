@@ -12,7 +12,7 @@ import org.junit.Test;
 import seedu.address.model.event.EventContainsKeywordsPredicate;
 import seedu.address.testutil.EventBuilder;
 
-public class NameContainsKeywordsPredicateTest {
+public class EventContainsKeywordsPredicateTest {
 
     @Test
     public void equals() {
@@ -59,7 +59,7 @@ public class NameContainsKeywordsPredicateTest {
     }
 
     @Test
-    public void test_nameDoesNotContainKeywords_returnsFalse() {
+    public void test_eventDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
         EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Collections.emptyList());
         assertFalse(predicate.test(new EventBuilder().withName("Alice").build()));
@@ -68,9 +68,9 @@ public class NameContainsKeywordsPredicateTest {
         predicate = new EventContainsKeywordsPredicate(Arrays.asList("Carol"));
         assertFalse(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
-        // Keywords match phone, email and address, but does not match name
-        predicate = new EventContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com", "Main", "Street"));
+        // Keywords match phone and email , but does not match name, date time and tag
+        predicate = new EventContainsKeywordsPredicate(Arrays.asList("12345", "alice@email.com"));
         assertFalse(predicate.test(new EventBuilder().withName("Alice").withPhone("12345")
-                .withEmail("alice@email.com").withAddress("Main Street").build()));
+                .withEmail("alice@email.com").withAddress("Main Street").withDateTime("10/10/2010 10:10").build()));
     }
 }

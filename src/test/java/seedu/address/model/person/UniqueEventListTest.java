@@ -18,8 +18,8 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
-import seedu.address.model.event.exceptions.DuplicatePersonException;
-import seedu.address.model.event.exceptions.PersonNotFoundException;
+import seedu.address.model.event.exceptions.DuplicateEventException;
+import seedu.address.model.event.exceptions.EventNotFoundException;
 import seedu.address.testutil.EventBuilder;
 
 public class UniqueEventListTest {
@@ -62,7 +62,7 @@ public class UniqueEventListTest {
     @Test
     public void add_duplicatePerson_throwsDuplicatePersonException() {
         uniqueEventList.add(ALICE);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         uniqueEventList.add(ALICE);
     }
 
@@ -80,7 +80,7 @@ public class UniqueEventListTest {
 
     @Test
     public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+        thrown.expect(EventNotFoundException.class);
         uniqueEventList.setEvent(ALICE, ALICE);
     }
 
@@ -117,7 +117,7 @@ public class UniqueEventListTest {
     public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
         uniqueEventList.add(ALICE);
         uniqueEventList.add(BOB);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         uniqueEventList.setEvent(ALICE, BOB);
     }
 
@@ -129,7 +129,7 @@ public class UniqueEventListTest {
 
     @Test
     public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+        thrown.expect(EventNotFoundException.class);
         uniqueEventList.remove(ALICE);
     }
 
@@ -175,7 +175,7 @@ public class UniqueEventListTest {
     @Test
     public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
         List<Event> listWithDuplicateEvents = Arrays.asList(ALICE, ALICE);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         uniqueEventList.setEvents(listWithDuplicateEvents);
     }
 

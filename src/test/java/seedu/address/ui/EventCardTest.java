@@ -16,7 +16,7 @@ public class EventCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
-        Event eventWithNoTags = new EventBuilder().withTags(new String[0]).build();
+        Event eventWithNoTags = new EventBuilder().withTags().build();
         EventCard eventCard = new EventCard(eventWithNoTags, 1);
         uiPartRule.setUiPart(eventCard);
         assertCardDisplay(eventCard, eventWithNoTags, 1);

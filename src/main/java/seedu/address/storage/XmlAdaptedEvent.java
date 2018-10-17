@@ -47,14 +47,14 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
-    public XmlAdaptedEvent(String name, String phone, String email, String address, Attendance attendance, DateTime datetime,
+    public XmlAdaptedEvent(String name, String phone, String email, String address, Attendance attendance, String datetime,
                            List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.attendance = attendance.toString();
-        this.dateTime = datetime.toString();
+        this.dateTime = datetime;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -130,13 +130,17 @@ public class XmlAdaptedEvent {
 
         final Attendance modelAttendance = new Attendance(attendance);
 
+        if (dateTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateTime.class.getSimpleName()));
+        }
+
         if (!DateTime.isValidDateTime(dateTime)) {
-            throw new IllegalValueException(Attendance.MESSAGE_ATTENDANCE_CONSTRAINTS);
+                throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
+
         final DateTime modelDateTime = new DateTime(dateTime);
-        if (attendance == null) {
-            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
-        }
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Event(modelName, modelPhone, modelEmail, modelAddress, modelAttendance, modelDateTime, modelTags);
     }
@@ -156,6 +160,7 @@ public class XmlAdaptedEvent {
                 && Objects.equals(phone, otherEvent.phone)
                 && Objects.equals(email, otherEvent.email)
                 && Objects.equals(address, otherEvent.address)
+                && Objects.equals(dateTime, otherEvent.dateTime)
                 && tagged.equals(otherEvent.tagged);
     }
 }

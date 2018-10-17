@@ -8,6 +8,7 @@ import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Event}'s {@code any fields} matches any of the keywords given.
+ * field find by DateTime, Address, and Name
  */
 public class EventContainsKeywordsPredicate implements Predicate<Event> {
     private final List<String> keywords;

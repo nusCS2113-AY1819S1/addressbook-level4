@@ -18,7 +18,7 @@ public class EventCardHandle extends NodeHandle<Node> {
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
-    private static final String DATETIME_FIELD_ID = "#datetime";
+    private static final String DATETIME_FIELD_ID = "#dateTime";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
@@ -84,7 +84,7 @@ public class EventCardHandle extends NodeHandle<Node> {
                 && getAddress().equals(event.getAddress().value)
                 && getPhone().equals(event.getPhone().value)
                 && getEmail().equals(event.getEmail().value)
-                && getDatetime().equals(event.getDateTime())
+                && getDatetime().equals(event.getDateTime().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(event.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));

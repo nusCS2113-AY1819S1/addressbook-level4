@@ -7,6 +7,7 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <attendance>false</attendance>
+        <dateTime>22/10/2018 9:30</dateTime>
         <tagged>friends</tagged>
     </events>
     <events>
@@ -15,6 +16,7 @@
         <email>johnd@example.com</email>
         <address>311, Clementi Ave 2, #02-25</address>
         <attendance>true</attendance>
+        <dateTime >2/10/2018 19:30</dateTime>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </events>
@@ -24,6 +26,7 @@
         <email>heinz@example.com</email>
         <address>wall street</address>
         <attendance>false</attendance>
+        <dateTime>22/1/2018 9:30</dateTime>
     </events>
     <events>
         <name>Daniel Meier</name>
@@ -31,6 +34,7 @@
         <email>cornelia@example.com</email>
         <address>10th street</address>
         <attendance>false</attendance>
+        <dateTime>22/10/2017 9:30</dateTime>
         <tagged>friends</tagged>
     </events>
     <events>
@@ -39,6 +43,7 @@
         <email>werner@example.com</email>
         <address>michegan ave</address>
         <attendance>true</attendance>
+        <dateTime>12/8/2018 17:30</dateTime>
     </events>
     <events>
         <name>Fiona Kunz</name>
@@ -46,6 +51,7 @@
         <email>lydia@example.com</email>
         <address>little tokyo</address>
         <attendance>false</attendance>
+        <dateTime>22/10/2018 15:15</dateTime>
     </events>
     <events>
         <name>George Best</name>
@@ -53,5 +59,6 @@
         <email>anna@example.com</email>
         <address>4th street</address>
         <attendance>true</attendance>
+        <dateTime>30/10/2018 14:30</dateTime>
     </events>
 </eventmanager>

@@ -11,11 +11,7 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
-import seedu.address.model.event.Email;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
+import seedu.address.model.event.*;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedEventTest {
@@ -23,7 +19,8 @@ public class XmlAdaptedEventTest {
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
-    private static final String INVALID_ATTENDANCE = "no";
+    private static final String INVALID_ATTENDANCE = "false";
+    private static final String INVALID_DATETIME = "31-2-2018 10:10";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -31,96 +28,115 @@ public class XmlAdaptedEventTest {
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
     private static final Attendance VALID_ATTENDANCE = BENSON.getAttendance();
+    private static final String VALID_DATETIME = BENSON.getDateTime().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validPersonDetails_returnsPerson() throws Exception {
-        XmlAdaptedEvent person = new XmlAdaptedEvent(BENSON);
-        assertEquals(BENSON, person.toModelType());
+        XmlAdaptedEvent event = new XmlAdaptedEvent(BENSON);
+        assertEquals(BENSON, event.toModelType());
     }
 
     @Test
     public void toModelType_invalidName_throwsIllegalValueException() {
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(INVALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_ATTENDANCE, VALID_TAGS);
+                        VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = Name.MESSAGE_NAME_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
     @Test
     public void toModelType_nullName_throwsIllegalValueException() {
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_ATTENDANCE, VALID_TAGS);
+                        VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
     @Test
     public void toModelType_invalidPhone_throwsIllegalValueException() {
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_ATTENDANCE, VALID_TAGS);
+                        VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = Phone.MESSAGE_PHONE_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
     @Test
     public void toModelType_nullPhone_throwsIllegalValueException() {
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(VALID_NAME, null, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_ATTENDANCE, VALID_TAGS);
+                        VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
     @Test
     public void toModelType_invalidEmail_throwsIllegalValueException() {
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(VALID_NAME, VALID_PHONE, INVALID_EMAIL, VALID_ADDRESS,
-                        VALID_ATTENDANCE, VALID_TAGS);
+                        VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = Email.MESSAGE_EMAIL_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
     @Test
     public void toModelType_nullEmail_throwsIllegalValueException() {
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(VALID_NAME, VALID_PHONE, null, VALID_ADDRESS,
-                        VALID_ATTENDANCE, VALID_TAGS);
+                        VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(VALID_NAME, VALID_PHONE, VALID_EMAIL, INVALID_ADDRESS,
-                        VALID_ATTENDANCE, VALID_TAGS);
+                        VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(VALID_NAME, VALID_PHONE, VALID_EMAIL, null,
-                        VALID_ATTENDANCE, VALID_TAGS);
+                        VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
-        Assert.assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
+    }
+    //Date time cannot be test as normal illegal value exception since DateTime constructor will throw Parser Exception first
+    @Test
+    public void toModelType_invalidDateTime_throwIllegalValueException() {
+        XmlAdaptedEvent event =
+                new XmlAdaptedEvent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_ATTENDANCE, INVALID_DATETIME, VALID_TAGS);
+        String expectedMessage = DateTime.MESSAGE_DATETIME_CONSTRAINTS;
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
+    }
+
+    @Test
+    public void toModelType_nullDateTime_throwIllegalValueException() {
+        XmlAdaptedEvent event =
+                new XmlAdaptedEvent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
+                        VALID_ATTENDANCE, null, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
+        Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
 
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<XmlAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new XmlAdaptedTag(INVALID_TAG));
-        XmlAdaptedEvent person =
+        XmlAdaptedEvent event =
                 new XmlAdaptedEvent(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS,
-                        VALID_ATTENDANCE, invalidTags);
-        Assert.assertThrows(IllegalValueException.class, person::toModelType);
+                        VALID_ATTENDANCE, VALID_DATETIME, invalidTags);
+        Assert.assertThrows(IllegalValueException.class, event::toModelType);
     }
 
 }

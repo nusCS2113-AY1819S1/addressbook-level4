@@ -17,6 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.EventManager;
 import seedu.address.model.event.Attendance;
+import seedu.address.model.event.DateTime;
 import seedu.address.storage.XmlAdaptedEvent;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableEManager;
@@ -29,11 +30,11 @@ public class XmlUtilTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlUtilTest");
     private static final Path EMPTY_FILE = TEST_DATA_FOLDER.resolve("empty.xml");
     private static final Path MISSING_FILE = TEST_DATA_FOLDER.resolve("missing.xml");
-    private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validAddressBook.xml");
-    private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingPersonField.xml");
-    private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidPersonField.xml");
-    private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
-    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
+    private static final Path VALID_FILE = TEST_DATA_FOLDER.resolve("validEventManager.xml");
+    private static final Path MISSING_EVENT_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingEventField.xml");
+    private static final Path INVALID_EVENT_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidEventField.xml");
+    private static final Path VALID_EVENT_FILE = TEST_DATA_FOLDER.resolve("validEvent.xml");
+    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempEventManager.xml");
 
     private static final String INVALID_PHONE = "9482asf424";
 
@@ -42,6 +43,7 @@ public class XmlUtilTest {
     private static final String VALID_EMAIL = "hans@example";
     private static final String VALID_ADDRESS = "4th street";
     private static final Attendance VALID_ATTENDANCE = new Attendance(false);
+    private static final String VALID_DATETIME  = "10/10/2010 10:10";
 
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
@@ -81,27 +83,27 @@ public class XmlUtilTest {
     @Test
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
-                MISSING_PERSON_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
+                MISSING_EVENT_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_TAGS);
+                null, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
-                INVALID_PERSON_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
+                INVALID_EVENT_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_TAGS);
+                VALID_NAME, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
     @Test
     public void xmlAdaptedPersonFromFile_fileWithValidPerson_validResult() throws Exception {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
-                VALID_PERSON_FILE, XmlAdaptedEventWithRootElement.class);
+                VALID_EVENT_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_TAGS);
+                VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_ATTENDANCE, VALID_DATETIME, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 

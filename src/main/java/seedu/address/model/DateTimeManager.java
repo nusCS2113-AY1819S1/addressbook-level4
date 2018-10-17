@@ -10,8 +10,6 @@ import seedu.address.model.user.User;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import net.fortuna.ical4j.model.*;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class DateTimeManager {

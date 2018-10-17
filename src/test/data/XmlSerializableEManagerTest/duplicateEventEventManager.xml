@@ -7,6 +7,7 @@
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <attendance>false</attendance>
+        <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
         <tagged>friends</tagged>
     </events>
 
@@ -16,6 +17,7 @@
         <phone>94351253</phone>
         <email>pauline@example.com</email>
         <address>4th street</address>
+        <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
         <attendance>false</attendance>
     </events>
 

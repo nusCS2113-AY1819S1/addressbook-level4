@@ -119,6 +119,6 @@ public class EventListPanelTest extends GuiUnitTest {
         uiPartRule.setUiPart(eventListPanel);
 
         eventListPanelHandle = new EventListPanelHandle(getChildNode(eventListPanel.getRoot(),
-                EventListPanelHandle.PERSON_LIST_VIEW_ID));
+                EventListPanelHandle.EVENT_LIST_VIEW_ID));
     }
 }

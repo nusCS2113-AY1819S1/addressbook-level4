@@ -6,6 +6,8 @@
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
+        <attendence isPrivate="false">true</attendence>
+        <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
     </events>
     <!-- Event with invalid phone field -->
     <events>
@@ -13,5 +15,7 @@
         <phone isPrivate="false">948asdf2424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
+        <attendence isPrivate="false">true</attendence>
+        <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
     </events>
 </addressbook>
