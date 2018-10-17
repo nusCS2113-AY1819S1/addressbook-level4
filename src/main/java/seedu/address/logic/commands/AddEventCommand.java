@@ -30,9 +30,9 @@ public class AddEventCommand extends Command {
             + PREFIX_START_DATE + "START DATE "
             + PREFIX_END_DATE + "END DATE \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "CS2113 Project Meeting "
-            + PREFIX_DESCRIPTION + "Weekly Meetup "
-            + PREFIX_LOCATION + "LT15 "
+            + PREFIX_NAME + "Board Meeting "
+            + PREFIX_DESCRIPTION + "Weekly Meeting "
+            + PREFIX_LOCATION + "Conference Room 1 "
             + PREFIX_DATE + "2018-09-28 "
             + PREFIX_START_DATE + "12:00 "
             + PREFIX_END_DATE + "23:59 ";
