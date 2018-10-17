@@ -60,7 +60,6 @@ public class EditCommandTest {
         ItemBuilder itemInList = new ItemBuilder(lastItem);
         Item editedItem = itemInList.withName(VALID_NAME_RPLIDAR).withQuantity(VALID_QUANTITY_RPLIDAR)
                 .withTags(VALID_TAG_LAB1).build();
-
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_NAME_RPLIDAR)
                 .withQuantity(VALID_QUANTITY_RPLIDAR).withTags(VALID_TAG_LAB1).build();
         EditCommand editCommand = new EditCommand(indexLastItem, descriptor);

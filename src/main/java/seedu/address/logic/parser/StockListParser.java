@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.ChangeStatusCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -86,8 +87,13 @@ public class StockListParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
-            case SaveCommand.COMMAND_WORD:
-                return new SaveCommand();
+
+        case ChangeStatusCommand.COMMAND_WORD:
+            return new ChangeStatusCommandParser().parse(arguments);
+
+        case SaveCommand.COMMAND_WORD:
+            return new SaveCommandParser().parse(arguments);
+
 
             case TagCommand.COMMAND_WORD:
                 return new TagCommandParser().parse(arguments);

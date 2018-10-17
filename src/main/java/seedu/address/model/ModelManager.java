@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.SaveStockListVersionEvent;
 import seedu.address.commons.events.model.StockListChangedEvent;
 import seedu.address.model.item.Item;
 
@@ -54,6 +55,17 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateStockListChanged() {
         raise(new StockListChangedEvent(versionedStockList));
+    }
+
+    //@@author kelvintankaiboon
+    /** Raises an event to indicate that saveCommand has been called */
+    private void indicateSaveStockListVersion(String fileName) {
+        raise(new SaveStockListVersionEvent(versionedStockList, fileName));
+    }
+
+    @Override
+    public void saveStockList(String fileName) {
+        indicateSaveStockListVersion(fileName);
     }
 
     @Override
