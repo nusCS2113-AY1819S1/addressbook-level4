@@ -47,7 +47,7 @@ Creates the `addressbook.jar` file in the `build/jar` folder, _if the current fi
 e.g. `./gradlew shadowJar`
 
 ****
-To force Gradle to create the JAR file even if the current one is up-to-date, you can '`clean`' first. +
+To force Gradle to create the JAR file even if the current one is up-to-reportDate, you can '`clean`' first. +
 e.g. `./gradlew clean shadowJar`
 ****
 

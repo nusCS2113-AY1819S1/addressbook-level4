@@ -6,4 +6,21 @@
     <email>hans@example</email>
     <address>4th street</address>
     <tagged>friends</tagged>
+    <reports>
+        <title>Asthma</title>
+        <date>01/01/2018</date>
+        <information>Prescribed XXX medicine, next appointment on 02/02/2018.</information>
+    </reports>
+    <medHistories>
+        <medHistDate>10/10/2010</medHistDate>
+        <allergy>Pollen</allergy>
+        <prevCountry>USA</prevCountry>
+    </medHistories>
+    <appts>
+        <apptStart>01/01/2018 14:00</apptStart>
+        <apptEnd>01/01/2018 15:00</apptEnd>
+        <apptVenue>Consultation Room 1</apptVenue>
+        <apptInfo>Diabetes Checkup</apptInfo>
+        <apptDrName>Dr Tan</apptDrName>
+    </appts>
 </person>

@@ -29,7 +29,7 @@ public class XmlAdaptedTag {
     /**
      * Converts a given Tag into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created
+     * @param source future changes to this will not affect the created XmlAdaptedTag
      */
     public XmlAdaptedTag(Tag source) {
         tagName = source.tagName;

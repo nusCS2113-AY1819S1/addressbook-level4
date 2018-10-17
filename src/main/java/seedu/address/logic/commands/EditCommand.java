@@ -20,12 +20,17 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.medhistory.MedHistory;
+import seedu.address.model.medicalreport.MedicalReport;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.DateOfBirth;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Nric;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.timetable.Appt;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -99,9 +104,16 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+
+        Set<MedicalReport> updatedReports = personToEdit.getMedicalReports(); // edit command disallow editing reports
+        Set<MedHistory> updatedMedHistory = personToEdit.getMedHistory(); // edit command does not edit MedHistory now
+        Set<Appt> updatedAppts = personToEdit.getAppts(); // edit command does not allow editing appts
+        Nric updatedNric = personToEdit.getNric();
+        DateOfBirth updatedDateOfBirth = personToEdit.getDateOfBirth();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedReports,
+                          updatedMedHistory, updatedAppts, updatedNric, updatedDateOfBirth, updatedTags);
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -22,6 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Person> sortedPersons;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -34,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        sortedPersons = new FilteredList<>(sortedPersonList(versionedAddressBook.getPersonList()));
     }
 
     public ModelManager() {
@@ -61,7 +64,13 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(person);
         return versionedAddressBook.hasPerson(person);
     }
-
+    /**
+    @Override
+    public boolean hasReport(MedicalReport report) {
+        requireNonNull(report);
+        return versionedAddressBook.hasReport(report);
+    }
+    */
     @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
@@ -99,6 +108,34 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
+
+    //=========== Sorted Person List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Person> getSortedPersonList() {
+        return FXCollections.unmodifiableObservableList(sortedPersons);
+    }
+    /**
+     * Returns a sorted list
+     */
+
+    public ObservableList<Person> sortedPersonList(ObservableList<Person> personList) {
+        ObservableList<Person> sortedList = FXCollections.observableArrayList();
+        sortedList.addAll(personList);
+        sortedList.sort(Comparator.comparing(person -> person.getName().fullName));
+
+        return FXCollections.unmodifiableObservableList(sortedList);
+    }
+    @Override
+    public void updateSortedPersonList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        sortedPersons.setPredicate(predicate);
+    }
+
 
     //=========== Undo/Redo =================================================================================
 
