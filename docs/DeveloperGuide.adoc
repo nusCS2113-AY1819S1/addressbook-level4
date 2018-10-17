@@ -239,6 +239,46 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Authentication
+==== Current Implementation
+
+The authentication mechanism is facilitated by the `Command` class and the `UserAccount` class.
+It stores the user information, which includes username and password, using a JSON file.
+
+A new method is added in the `Model` interface to check whether a user account exists in the JSON file.
+
+Additionally, a `JsonUserStorage` class has been created to handle the reading, parsing and writing of the JSON file.
+
+Given below is an example usage scenario and how authentication behaves at each step.
+
+Step 1. The user launches the application for the first time. The `JsonUserStorage` class will create a default JSON file in `data/users.json` that stores the basic `admin` account information.
+
+Step 2. The user executes the command `login u/USERNAME p/PASSWORD`. This will trigger the method `userExists(user)` in the `ModelManager` class, which is linked to `UserAccount`.
+
+Step 3. `UserAccount` will prompt `JsonUserStorage` to read the JSON file and return to it the JSONObject parsed from the file.
+
+Step 4. `UserAccount` will then compare the logged username and password with the ones stored in the JSON file. If the comparisons return true, the `userExists` method will return true.
+
+Step 5. The `currentUser` in the `Command` class will then be set and the login flag will be set to true. If the user is an admin, the admin flag will be set to true as well.
+
+Step 6. After authentication, the user can now start using the application.
+
+Step 7. The user can choose to log out of the application as well with the `logout` command. This command sets the login flag to false and clears `currentUser`.
+
+[NOTE]
+If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the `login` command will throw a `CommandException`.
+
+==== Future Improvements
+===== Adding of the `signup u/USERNAME p/PASSWORD` command.
+* Will allow users to create new user accounts.
+
+===== Making `JsonUserStorage` more OCP-compliant
+* As of now, `JsonUserStorage` does not abide to the Open-Closed Principle.
+* In the future, `Storage` will implement `JsonUserStorage`.
+
+===== Password encryption
+* Stores encrypted password instead of plain text.
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -400,8 +440,8 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `WARNING` : Can continue, but with caution
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
-
 [[Implementation-Configuration]]
+
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
