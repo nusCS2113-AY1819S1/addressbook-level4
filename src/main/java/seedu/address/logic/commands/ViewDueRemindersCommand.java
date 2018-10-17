@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class ViewDueRemindersCommand extends Command {
 
     public static final String COMMAND_WORD = "duereminders";
-    public static final String MESSAGE_USAGE = ": Shows the remidners that are past their times.";
+    public static final String MESSAGE_USAGE = ": Shows the reminders that are past their times.";
     public static final String NO_REMINDERS_SET = "No reminders set today.";
 
     @Override
