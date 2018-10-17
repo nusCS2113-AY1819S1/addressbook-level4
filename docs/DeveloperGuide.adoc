@@ -848,6 +848,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |student with multiple tasks |sort the todo list by importance/priority |view which tasks are more important than the other
 
+|`* * *` |student |add a new expenditure to the expenditure tracker |
+
+|`* * *` |student |edit an expenditure in the expenditure tracker |keep my expenditures updated and correct
+
+|`* * *` |student |delete an expenditure in the expenditure tracker |remove any entries that I typed wrongly
+
 |`* * *` |student who is not capable of managing expenditure |see and check where did I spend my money and how much did I spend for each expenditure with the corresponding date |better understand my spending habits
 
 |`* * *` |student who wants to know how much money did I spend and how much income did I get for a certain period |see the amount of spendings and income respectively by keying in the starting date and end date of a particular period |
