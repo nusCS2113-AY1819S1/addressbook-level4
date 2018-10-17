@@ -918,15 +918,47 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |New user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new book |
+|`* * *` |Helpful user |add/remove books |Share my knowledge with others
 
-|`* * *` |user |delete a book |remove entries that I no longer need
+|`* * *` |Student |Find for books related to my module |Easily access the correct materials
 
-|`* * *` |user |find a book by name |locate details of books without having to go through the entire list
+|`* * *` |Overachiever |See peer reviews for books related to my module |Get access to helpful materials
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* *` |NSF |Find out what books are relevant to the modules I'm about to take in university |Read the books during my free time
+
+|`* *` |Professor |Add rating/review to books |Recommend this book to the rest                                      people
+
+|`* *` |NUS Staff |Use the program as and when |Easily sieve out the books that i want to read
+
+|`* *` |Non-Tech Savvy User|Have a straightforward easy-to-understand help page |Search on the books i would like to find with
+
+|`* *` |Careless user |Undo/Redo my command |Easily remove/get back to the current/next state
+
+|`* *` |User |Have an application with minimal downtime |Use the application at any point of time.
+
+|`*` |Unmotivated student |Have a colorful GUI |Have a better mood to study
+
+|`*` |New User |Have a user-friendly application |Use the catalogue easily
+
+|`*` |Exchange student |Use the program in my native language |Understand the program easily
+
+|`*` |Bookshop owner |Sell the books that people want |KNow which books are in demand
+
+|`*` |Underachiever |Have reviews for books which are easy to understand |Grasp on concepts quickly
+
+|`*` |Student nearing the exams |Have reviews for books which summarises the module |Recap on concepts quickly
+
+|`*` |Teaching assistant |Have a list of recommended books |Recommend my weaker students to read on those
+
+|`*` |Author |Have the books listed neatly and visibly under users' module selection |Help students in their studies and also help them gain an appreciation to the module/
+
+|`*` |Passionate student willing to help others |Have a moderately long word limit for the review |Share my personal experience with this book and how this book is recommended
+
+|`*` |Book enthusiast |Have a review for all the books I read |Allow people to acquire knowledge.
+
+|`*` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many books in the quantity book |sort books by name |locate a book easily
 |=======================================================================

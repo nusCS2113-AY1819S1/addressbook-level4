@@ -785,10 +785,10 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="951" />
-    <option name="width" value="978" />
-    <option name="height" value="1039" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="950" />
+    <option name="width" value="979" />
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -1010,7 +1010,7 @@
     <property name="SearchEverywhereHistoryKey" value="bookinventory&#9;FILE&#9;file://C:/Users/Kenneth/Desktop/CS2113T/main/data/bookinventory.xml&#10;logic&#9;FILE&#9;file://C:/Users/Kenneth/Desktop/CS2113T/main/src/main/java/seedu/address/logic/LogicManager.java&#10;reques&#9;FILE&#9;file://C:/Users/Kenneth/Desktop/CS2113T/main/src/main/java/seedu/address/model/request/RequestListParser.java" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539771203913" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1539772434794" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/config/checkstyle/checkstyle.xml" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
@@ -1034,7 +1034,20 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.All in main_test (2)">
+  <component name="RunManager" selected="Application.MainApp">
+    <configuration name="MainApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="seedu.address.MainApp" />
+      <module name="main_main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="seedu.address.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AddCommandIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="main_test" />
       <extension name="coverage">
@@ -1045,14 +1058,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="seedu.address.logic.commands" />
       <option name="MAIN_CLASS_NAME" value="seedu.address.logic.commands.AddCommandIntegrationTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="All in main_test (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="main_test" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -1090,17 +1095,17 @@
     <list>
       <item itemvalue="JUnit.All in main_test" />
       <item itemvalue="JUnit.BookTest" />
-      <item itemvalue="JUnit.All in main_test (1)" />
       <item itemvalue="JUnit.AddCommandIntegrationTest" />
       <item itemvalue="JUnit.All in main_test (2)" />
+      <item itemvalue="Application.MainApp" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.MainApp" />
         <item itemvalue="JUnit.All in main_test (2)" />
         <item itemvalue="JUnit.BookTest" />
         <item itemvalue="JUnit.All in main_test" />
         <item itemvalue="JUnit.AddCommandIntegrationTest" />
-        <item itemvalue="JUnit.All in main_test (1)" />
       </list>
     </recent_temporary>
   </component>
