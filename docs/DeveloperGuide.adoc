@@ -905,7 +905,7 @@ Use case ends.
 +
 [none]
 ** 2b1. StudentPlanner informs user about unsuccessful adding of task.
-** 2b1. StudentPlanner <<_use_case_app_usage_uc6,shows application usage (UC6)>>
+** 2b2. StudentPlanner <<_use_case_app_usage_uc6,shows application usage (UC6)>>
 +
 Use case ends.
 
@@ -1069,6 +1069,29 @@ Use case ends.
 [none]
 ** 2b1. StudentPlanner shows error.
 ** 2b2. StudentPlanner shows help for online backup.
++
+Use case ends.
+
+[discrete]
+=== Use case: Add Event (UC10)
+
+*MSS*
+
+1.  User requests to add an event
+2.  StudentPlanner adds new event with given details
++
+Use case ends.
+
+*Extensions*
+
+* 2a. A similar event exists
+[none]
+** 2a1. StudentPlanner prompts user that a similar event exists. Event is not added.
++
+Use case ends.
+* 2b. Insufficient or Invalid details provided.
+[none]
+** 2b1. StudentPlanner shows required command format to user. Event is not added.
 +
 Use case ends.
 
