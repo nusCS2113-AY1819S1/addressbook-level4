@@ -8,6 +8,7 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
@@ -40,7 +41,7 @@ public class LoginCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        User exist = new User();
+        User exist = null;
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             try {
                 exist = unitOfWork.getUserRepository().authenticate(userName, userPassword);
@@ -53,6 +54,7 @@ public class LoginCommand extends Command {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Context.getInstance().setCurrentUser(exist);
         return new CommandResult(String.format(MESSAGE_SUCCESS, exist.getUsername()));
     }
 }
