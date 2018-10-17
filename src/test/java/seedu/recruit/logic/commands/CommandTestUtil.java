@@ -23,6 +23,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.CandidateBook;
@@ -351,6 +352,16 @@ public class CommandTestUtil {
 
         @Override
         public void updateFilteredCompanyJobList(Predicate<JobOffer> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public EmailUtil getEmailUtil() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEmailUtil(EmailUtil emailUtil) {
             throw new AssertionError("This method should not be called.");
         }
     }

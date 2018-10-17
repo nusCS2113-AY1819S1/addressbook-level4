@@ -56,7 +56,7 @@ public class RecruitBookParser {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
 
         if (!matcher.matches()) {
-            if (!state.nextCommand.equals("primary")) {
+            if (state.nextCommand.equals("primary")) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
             } else {
                 throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
