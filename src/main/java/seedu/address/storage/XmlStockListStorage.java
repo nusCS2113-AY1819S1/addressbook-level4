@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -24,7 +23,6 @@ public class XmlStockListStorage implements StockListStorage {
     private static final Logger logger = LogsCenter.getLogger(XmlStockListStorage.class);
 
     private final Path filePath;
-    private final Path backupFilePath;
 
     /**
      * Reused from https://github.com/se-edu/addressbook-level4 solutions
@@ -32,7 +30,6 @@ public class XmlStockListStorage implements StockListStorage {
      */
     public XmlStockListStorage(Path filePath) {
         this.filePath = filePath;
-        this.backupFilePath = Paths.get(filePath.toString() + ".backup");
     }
 
     public Path getStockListFilePath() {
@@ -83,9 +80,13 @@ public class XmlStockListStorage implements StockListStorage {
         FileUtil.createIfMissing(filePath);
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableStockList(stockList));
     }
-
+    //@@author kelvintankaiboon
     @Override
-    public void backupStockList(ReadOnlyStockList stockList) throws IOException {
-        saveStockList(stockList, backupFilePath);
+    public void saveStockListVersion(ReadOnlyStockList stockList, Path filePath) throws IOException {
+        requireNonNull(stockList);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableStockList(stockList));
     }
 }

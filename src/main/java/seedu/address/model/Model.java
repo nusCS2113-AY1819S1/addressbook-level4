@@ -18,6 +18,11 @@ public interface Model {
     /** Returns the StockList */
     ReadOnlyStockList getStockList();
 
+    //@@author kelvintankaiboon
+    /** Saves the current version of the StockList */
+    void saveStockList(String fileName);
+    //@@author
+
     /**
      * Returns true if a item with the same identity as {@code item} exists in the stock list.
      */
