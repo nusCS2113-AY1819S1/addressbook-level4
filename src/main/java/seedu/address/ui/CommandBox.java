@@ -29,7 +29,7 @@ public class CommandBox extends UiPart<Region> {
     private final Logic logic;
     private ListElementPointer historySnapshot;
     private final CommandHistory commandHistory;
-    private List<String> Commands;
+    private List<String> commands;
     private int commandHistoryPointer;
     @FXML
     private TextField commandTextField;
@@ -41,10 +41,10 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
         commandHistory = new CommandHistory();
-        Commands = commandHistory.getHistory();
+        commands = commandHistory.getHistory();
         commandHistoryPointer = 0;
-        Commands.add("add n/Hello World i/9783161484100 p/19.99 c/15.00 q/50 t/cs2113t t/coding");
-        Commands.add("request i/9783161484100 q/42 e/johnd@example.com ");
+        commands.add("add n/Hello World i/9783161484100 p/19.99 c/15.00 q/50 t/cs2113t t/coding");
+        commands.add("request i/9783161484100 q/42 e/johnd@example.com ");
     }
 
     /**
@@ -65,13 +65,13 @@ public class CommandBox extends UiPart<Region> {
             break;
         case TAB:
             keyEvent.consume();
-            if (Commands.size() == 0) {
+            if (commands.size() == 0) {
                 break;
             }
-            if (Commands.size() == commandHistoryPointer) {
+            if (commands.size() == commandHistoryPointer) {
                 commandHistoryPointer = 0;
             }
-            commandTextField.setText(Commands.get(commandHistoryPointer));
+            commandTextField.setText(commands.get(commandHistoryPointer));
             commandHistoryPointer++;
             break;
         default:
