@@ -118,7 +118,7 @@ public class AddGroupTest {
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         final StringBuilder builder = new StringBuilder();
         builder.append(INDEX_FIRST_GROUP.toString())
                 .append(" : ")
