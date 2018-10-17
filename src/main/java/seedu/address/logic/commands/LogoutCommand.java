@@ -18,7 +18,7 @@ public class LogoutCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
 
-        clearCurrentUser();
+        model.clearUser();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
