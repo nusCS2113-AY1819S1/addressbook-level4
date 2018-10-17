@@ -320,18 +320,18 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag::datatograph[]
-=== Exporting Gradebook data-to-graph feature
+=== Gradebook Graph feature
 ==== Current Implementation
 
-The export-to-graph mechanism is an enhancement that will be released in the later versions, facilitated by 'Trajectory'.
+The gradebook graph mechanism is an enhancement that will be released in the later versions, facilitated by 'Trajectory'.
 It is stored internally in GradebookManager.
 
 Additionally, it implements the following operations:
 
-* `gradebookManager#exportStudentGrades()` -- Exports data of student grades from Array List to graph form
-* `gradebookManager#exportStudentProgress()` -- Exports student data to present progress on module.
+* `gradebookManager#graphModuleSummary()` -- Converts data of all student grades from Array List to graph form
+* `gradebookManager#graphStudentProgress()` -- Converts student data to present progress on module.
 
-These operations are exposed in the `GradebookManager` as `GradebookManager#exportStudentGrades()`, `GradebookManager#exportStudentProgress()` respectively.
+These operations are exposed in the `GradebookManager` as `GradebookManager#graphModuleSummary()`, `GradebookManager#graphStudentProgress()` respectively.
 
 Given below is an example usage scenario and how the gradebook data-to-graph mechanism behaves at each step.
 
@@ -339,12 +339,12 @@ Step 1. The user launches the application for the first time. The StorageControl
 
 Step 2. The user executes `gradebook find m/cs2113 i/Finals` command to find the relevant gradebook component. The `find` command calls `GradebookManager#findGradebookComponent()`, which finds and filters the Array List to the relevant search.
 
-Step 3. The user executes `gradebook export student grades`. GradebookManager#exportStudentGrades will convert the Array List to graph form and display to the user.
+Step 3. The user executes `gradebook graph student`. GradebookManager#graphStudentProgress will convert the Array List to graph form and display to the user.
 
 [NOTE]
 If a command fails its execution, it will not call `Gradebook#GradebookManager()`, so Trajectory state will not be saved into the `GradebookManager`.
 
-Step 4. The user now decides to export graph according to the progress of a student, and that action is done by executing the `gradebook export student grades` command. This command will call `GradebookManager#exportStudentGrades()`, which then displays the graph of the students progress.
+Step 4. The user now decides to export graph according to the progress of a student, and that action is done by executing the `gradebook graph student` command. This command will call `GradebookManager#graphStudentProgress()`, which then displays the graph of the students progress.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 

@@ -10,7 +10,7 @@ import seedu.address.model.gradebook.GradebookManager;
  */
 public class GradebookListCommand extends Command {
     public static final String COMMAND_WORD = "gradebook list";
-    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
+    public static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
