@@ -13,12 +13,13 @@ import seedu.address.logic.parser.DiceCoefficient;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.book.Book;
+import seedu.address.model.request.CommandSecondary;
+import seedu.address.model.request.Request;
+import seedu.address.model.request.RequestCommand;
 import seedu.address.model.request.RequestListParser;
 import seedu.address.model.request.RequestModel;
-import seedu.address.model.request.RequestCommand;
 import seedu.address.model.request.ViewRequestCommand;
-import seedu.address.model.request.Request;
-import seedu.address.model.request.CommandSecondary;
+
 import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
 
 /**
