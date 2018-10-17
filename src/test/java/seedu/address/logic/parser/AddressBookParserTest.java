@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_FLAG_FALSE;
+import static seedu.address.logic.commands.CommandTestUtil.GROUP_NAME_DESC_CS1010;
+import static seedu.address.logic.commands.CommandTestUtil.NATIONALITY_FLAG_FALSE;
+import static seedu.address.logic.commands.CommandTestUtil.NUMBER_OF_GROUPS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -18,6 +22,7 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DistributeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -30,7 +35,9 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.distribute.Distribute;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.GroupName;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -63,6 +70,15 @@ public class AddressBookParserTest {
     public void parseCommand_listGroup() throws Exception {
         assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD) instanceof ListGroupCommand);
         assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD + " 3") instanceof ListGroupCommand);
+    }
+
+    @Test
+    public void parseCommand_distribute() throws Exception {
+        Distribute descriptor = new Distribute(5, new GroupName("CS1010"), false, false);
+        DistributeCommand command = (DistributeCommand) parser.parseCommand(DistributeCommand.COMMAND_WORD
+               + NUMBER_OF_GROUPS + GROUP_NAME_DESC_CS1010 + GENDER_FLAG_FALSE + NATIONALITY_FLAG_FALSE);
+        System.out.println(command.toString());
+        assertEquals(new DistributeCommand(descriptor), command);
     }
 
     @Test
