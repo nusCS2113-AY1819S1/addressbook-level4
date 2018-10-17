@@ -15,7 +15,7 @@ public class ViewDueRemindersCommand extends Command {
 
     public static final String COMMAND_WORD = "duereminders";
     public static final String MESSAGE_USAGE = ": Shows the reminders that are past their times.";
-    public static final String NO_REMINDERS_SET = "No reminders set today.";
+    public static final String NO_REMINDERS_SET = "No reminders due yet.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -27,7 +27,7 @@ public class ViewDueRemindersCommand extends Command {
 
         StringBuilder allReminders = new StringBuilder();
 
-        allReminders.append("Reminders for today:\n");
+        allReminders.append("Reminders due as of now today:\n");
 
         for (Reminder reminder : reminders) {
             allReminders.append(reminder.getTime() + "\t\t" + reminder.getMessage() + "\n");
