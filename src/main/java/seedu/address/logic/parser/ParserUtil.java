@@ -151,6 +151,7 @@ public class ParserUtil {
             throw new ParseException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
         }
         return new Password(trimmedPassword);
+    }
 
     //@@author kelvintankaiboon
     /**
