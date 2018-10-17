@@ -2,8 +2,8 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
@@ -40,7 +40,7 @@ public class EditCompanyCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "Example: " + COMMAND_WORD + " 1 "
-            +PREFIX_COMPANY_NAME + "KFC "
+            + PREFIX_COMPANY_NAME + "KFC "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
