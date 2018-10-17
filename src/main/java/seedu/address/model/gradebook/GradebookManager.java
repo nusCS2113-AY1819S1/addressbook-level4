@@ -8,6 +8,13 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  * The API of the GradebookManager component.
  */
 public class GradebookManager {
+    private static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
+    private static final String MESSAGE_ADD_SUCCESS = "Successfully Added! \nModule Code: %1$s"
+            + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
+    private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
+    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
+    private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
+    private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
 
@@ -18,14 +25,29 @@ public class GradebookManager {
                                                 String gradebookComponentName,
                                                 int gradebookMaxMarks,
                                                 int gradebookWeightage) {
-        String result = Gradebook.checkValidation(moduleCode, gradebookComponentName, gradebookMaxMarks,
-                gradebookWeightage);
-        if (result.contains("Successfully")) {
+        String status = MESSAGE_ADD_SUCCESS;
+        boolean isEmpty = Gradebook.hasEmptyParams(moduleCode, gradebookComponentName);
+        boolean hasDuplicate = Gradebook.isDuplicateComponent(moduleCode, gradebookComponentName);
+
+        if (isEmpty) {
+            status = MESSAGE_ERROR_EMPTY;
+        }
+
+        if (hasDuplicate) {
+            status = MESSAGE_ERROR_DUPLICATE;
+        }
+
+        if (!isEmpty && !hasDuplicate) {
             StorageController.getGradebookStorage().add(new XmlAdaptedGradebook(moduleCode, gradebookComponentName,
                     gradebookMaxMarks, gradebookWeightage));
             StorageController.storeData();
         }
-        return result;
+
+        return String.format(status,
+                moduleCode,
+                gradebookComponentName,
+                gradebookMaxMarks,
+                gradebookWeightage);
     }
 
     /**
