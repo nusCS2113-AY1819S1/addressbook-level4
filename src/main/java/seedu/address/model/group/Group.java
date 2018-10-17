@@ -57,16 +57,16 @@ public class Group {
      * Returns an immutable person set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Set<Person> getPersons(){
+    public Set<Person> getPersons() {
         return Collections.unmodifiableSet(persons);
     }
 
-    public void addPersons(Person persons){
+    public void addPersons(Person persons) {
         requireNonNull(persons);
         this.persons.add(persons);
     }
 
-    public void addPersons(Set<Person> persons){
+    public void addPersons(Set<Person> persons) {
         requireNonNull(persons);
         this.persons.addAll(persons);
     }

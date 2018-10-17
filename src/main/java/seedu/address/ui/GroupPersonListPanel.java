@@ -31,7 +31,7 @@ public class GroupPersonListPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void loadGroupPersons(Group group){
+    private void loadGroupPersons(Group group) {
         ObservableList<Person> personObservableList = FXCollections.observableArrayList();
         for (Person p: group.getPersons()) {
             personObservableList.add(p);

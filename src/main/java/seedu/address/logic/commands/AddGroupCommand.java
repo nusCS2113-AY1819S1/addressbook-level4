@@ -40,7 +40,7 @@ public class AddGroupCommand extends Command {
      * Creates an AddGroupCommand to add persons to group
      * specified in {@code AddGroup}
      */
-    public AddGroupCommand(AddGroup toAdd){
+    public AddGroupCommand(AddGroup toAdd) {
         requireAllNonNull(toAdd);
         this.toAdd = toAdd;
     }
@@ -54,14 +54,14 @@ public class AddGroupCommand extends Command {
 
         if (!toAdd.validGroupIndex(lastShownGroupList.size())) {
             throw new CommandException(MESSAGE_INVALID_GROUP_DISPLAYED_INDEX);
-        }else if (!toAdd.validPersonIndexSet(lastShownPersonList.size())) {
+        } else if (!toAdd.validPersonIndexSet(lastShownPersonList.size())) {
             throw new CommandException(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
         toAdd.setPersonSet(lastShownPersonList);
         toAdd.setGroupSet(lastShownGroupList);
 
-        if (model.hasPersonInGroup(toAdd)){
+        if (model.hasPersonInGroup(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSONS);
         }
 

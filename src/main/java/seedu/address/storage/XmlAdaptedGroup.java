@@ -46,7 +46,8 @@ public class XmlAdaptedGroup {
     /**
      * Constructs an {@code XmlAdaptedGroup} with the given group details.
      */
-    public XmlAdaptedGroup(String groupName, String groupLocation, List<XmlAdaptedTag> tagged, List<XmlAdaptedPerson> persons) {
+    public XmlAdaptedGroup(String groupName, String groupLocation,
+                           List<XmlAdaptedTag> tagged, List<XmlAdaptedPerson> persons) {
         this.groupName = groupName;
         this.groupLocation = groupLocation;
         if (tagged != null) {
@@ -110,7 +111,7 @@ public class XmlAdaptedGroup {
         final Set<Tag> modelTags = new HashSet<>(groupTags);
         final Set<Person> modelPersons = new HashSet<>(groupPersons);
 
-        Group group = new Group(modelGroupName,modelGroupLocation,modelTags);
+        Group group = new Group(modelGroupName, modelGroupLocation, modelTags);
         group.addPersons(modelPersons);
 
         return group;

@@ -122,7 +122,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         groups.createGroup(g);
     }
 
-   /**
+    /**
      * Adds persons to a group in the address book.
      * The persons must not already exist in the group.
      */

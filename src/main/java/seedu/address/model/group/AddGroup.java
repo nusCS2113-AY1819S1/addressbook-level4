@@ -26,38 +26,38 @@ public class AddGroup {
     private final Set<Group> groupSet = new HashSet<>();
     private final Set<Person> personSet = new HashSet<>();
 
-     /**
+    /**
      * Every field must be present and not null.
      */
-    public AddGroup(Index groupIndex, Set<Index>personIndices){
+    public AddGroup(Index groupIndex, Set<Index>personIndices) {
         requireAllNonNull(groupIndex, personIndices);
         this.groupIndex = groupIndex;
         this.personIndices.addAll(personIndices);
     }
 
-    public Group getGroup(){
+    public Group getGroup() {
         return groupSet.iterator().next();
     }
 
-    public Set<Person> getPersonSet(){
+    public Set<Person> getPersonSet() {
         return personSet;
     }
 
-    public void setGroupSet(List<Group> group){
+    public void setGroupSet(List<Group> group) {
         requireNonNull(group);
         groupSet.add(group.get(groupIndex.getZeroBased()));
     }
 
-    public void setPersonSet(List<Person> person){
+    public void setPersonSet(List<Person> person) {
         requireNonNull(person);
-        for (Index i : personIndices){
+        for (Index i : personIndices) {
             personSet.add(person.get(i.getZeroBased()));
         }
     }
 
     public boolean validPersonIndexSet(int size) {
-        for (Index i : personIndices){
-            if(i.getZeroBased() >= size){
+        for (Index i : personIndices) {
+            if (i.getZeroBased() >= size) {
                 return false;
             }
         }
@@ -65,7 +65,7 @@ public class AddGroup {
     }
 
     public boolean validGroupIndex(int size) {
-        if(groupIndex.getZeroBased() >= size) {
+        if (groupIndex.getZeroBased() >= size) {
             return false;
         }
         return true;

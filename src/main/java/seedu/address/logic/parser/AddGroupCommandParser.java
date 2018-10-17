@@ -15,7 +15,7 @@ import seedu.address.model.group.AddGroup;
 /**
  * Parses input arguments and creates a new AddGroupCommand object
  */
-public class AddGroupCommandParser implements Parser<AddGroupCommand>{
+public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddGroupCommand
@@ -35,7 +35,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand>{
 
         Index groupIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_GROUP_INDEX).get());
         Set<Index> personIndexList = ParserUtil.parseIndices(argMultimap.getAllValues(PREFIX_PERSON_INDEX));
-        AddGroup addGroup = new AddGroup(groupIndex,personIndexList);
+        AddGroup addGroup = new AddGroup(groupIndex, personIndexList);
         return new AddGroupCommand(addGroup);
     }
     /**
