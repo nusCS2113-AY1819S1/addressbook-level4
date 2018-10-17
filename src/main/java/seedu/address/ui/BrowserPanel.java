@@ -1,5 +1,8 @@
 package seedu.address.ui;
 
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -13,7 +16,7 @@ import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The Browser Panel of the App.
@@ -22,7 +25,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
-            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+            "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?title=";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -41,8 +44,25 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
-    private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+    /**
+     * To load
+     * @param task
+     * page in the UI
+     */
+    private void loadPersonPage(Task task) {
+        try {
+            UriBuilder uribuilder = new UriBuilder();
+            URL path = MainApp.class.getResource(FXML_FILE_FOLDER + "DummySearchPage.html");
+            uribuilder.addPath(path);
+            uribuilder.addQuery("title", task.getTitle());
+            uribuilder.addQuery("description", task.getDescription());
+            uribuilder.addQuery("priorityLevel", task.getPriorityLevel().toString());
+            logger.info(uribuilder.getUrl());
+            loadPage(uribuilder.getUrl());
+        } catch (MalformedURLException | UnsupportedEncodingException | URISyntaxException e) {
+            logger.warning(e.getMessage());
+        }
+        //        URL url = MainApp.class.getResource(FXML_FILE_FOLDER + "DummySearchPage.html");
     }
 
     public void loadPage(String url) {

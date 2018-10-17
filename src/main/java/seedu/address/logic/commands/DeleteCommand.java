@@ -8,25 +8,32 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes a task identified using it's displayed index from the address book.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends Command implements CommandParser {
 
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the person identified by the index number used in the displayed person list.\n"
+            + ": Deletes the task identified by the index number used in the displayed task list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
     private final Index targetIndex;
 
+    public DeleteCommand() {
+        // Null so that it can be initialized in LogicManager
+        // Check in JUnit test
+        targetIndex = null;
+    }
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -34,16 +41,16 @@ public class DeleteCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        List<Task> lastShownList = model.getFilteredTaskList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deletePerson(personToDelete);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, personToDelete));
+        Task taskToDelete = lastShownList.get(targetIndex.getZeroBased());
+        model.deleteTask(taskToDelete);
+        model.commitTaskBook();
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }
 
     @Override
@@ -51,5 +58,15 @@ public class DeleteCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+    }
+
+    @Override
+    public Command parse(String arguments) throws ParseException {
+        return new DeleteCommandParser().parse(arguments);
+    }
+
+    @Override
+    public String getCommandWord() {
+        return COMMAND_WORD;
     }
 }
