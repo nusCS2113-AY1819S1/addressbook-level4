@@ -5,8 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_NAME_TUT_1;
-import static seedu.address.testutil.TypicalGroups.CS1010;
-import static seedu.address.testutil.TypicalGroups.TUT_1;
 import static seedu.address.testutil.TypicalGroups.getTut1;
 
 import org.junit.Test;

@@ -5,7 +5,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_LOCATION_TUT_1;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_CS1010;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_GROUP_TAG_TUT_1;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalAddGroups.getAddGroupWithGroupAndPerson;
