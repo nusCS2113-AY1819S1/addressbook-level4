@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/ChewKinWhye/main
 
-By: `T12-3`      Since: `Sep 2018`      Licence: `NUS`
+By: `Group T12-3`      Since: `Sep 2018`      Licence: `NUS`
 
 == Introduction
 
@@ -221,6 +221,16 @@ Examples:
 Shows the number of every item that has been lost +
 Format: `lost&found`
 
+=== Listing items under a specific tag: `tag`
+
+Finds and lists items whose tags contain any of the given keywords +
+Format: `tag KEYWORD [MORE_KEYWORDS]
+
+Examples:
+
+* `tag Lab1` +
+Returns the items with tag "Lab1"
+
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
@@ -263,7 +273,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+JalilEnterprises data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -308,6 +318,8 @@ e.g. `lost n/Arduino q/25`
 * *Found* : `found n/NAME [q/QUANTITY]` +
 e.g. `found n/Arduino q/25`
 * *Lost&Found List* : `lost&found`
+* *Tag* : `tag KEYWORD [MORE_KEYWORDS]` +
+e.g. `tag Lab1`
 * *Redo* : `redo`
 
 
