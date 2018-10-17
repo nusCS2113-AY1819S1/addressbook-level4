@@ -25,7 +25,9 @@ public class ScoreList {
     public Set<Test> getScoreList() {
         return Collections.unmodifiableSet(scoreList);
     }
-
+    /**
+     * Every field must be present and not null.
+     */
     public boolean isSameList(ScoreList otherList) {
         if (otherList == this) {
             return true;
