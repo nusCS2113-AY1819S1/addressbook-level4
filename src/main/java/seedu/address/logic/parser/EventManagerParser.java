@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddCommentCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -98,6 +99,9 @@ public class EventManagerParser {
 
         case RegisterCommand.COMMAND_WORD:
             return new RegisterCommandParser().parse(arguments);
+
+        case AddCommentCommand.COMMAND_WORD:
+            return new AddCommentCommandParser().parse(arguments);
 
         case ReplyCommentCommand.COMMAND_WORD:
             return new ReplyCommentCommandParser().parse(arguments);
