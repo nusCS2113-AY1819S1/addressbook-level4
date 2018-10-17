@@ -298,6 +298,52 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 image::UndoRedoActivityDiagram.png[width="650"]
 
+//zcstart
+=== Class Add feature
+==== Current Implementation
+
+The add mechanism is facilitated by `ClassroomManager` supported by `StorageController`.
+It makes use of the following operations:
+
+* `ClassroomManager#addClassroom()` -- Adds a new classroomList to the in-memory array list.
+* `ClassroomManager#readClassroomList()` -- Gets the classroom list from storage and converts it to a Classroom array list.
+* `ClassroomManager#saveClassroomList()` -- Converts the classroom array list and invokes the StorageController to save the current classroom list to file.
+
+These operations are used in the `ClassAddCommand` class under `ClassAddCommand#execute()`.
+
+Given below is an example usage scenario and how the add/list mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `StorageController#retrieveData()` will retrieve all datasets saved locally.
+
+Step 2. The user executes `class add c/16...` command to add a new classroom to Trajectory. The `class add` command calls the `ClassAddCommand#execute()`. The `ClassroomManager` will be instantiated and read the classroom list from the storage and converts the data from XmlAdaptedClassroom to the Classroom data type.
+
+Step 3. The `classroomManager#saveClassroomList()` will be called to converts the classroom array list and invokes the StorageController to save the current classroom list to file. This is done by first converting our `Classroom` object into `XmlAdaptedClassroom` objects and saving it.
+
+=== Class List feature
+==== Current Implementation
+
+The list mechanism is facilitated by `ClassroomManager` supported by `StorageController`.
+It makes use the following operations:
+
+* `ClassroomManager#readClassroomList()` -- Gets the classroom list from storage and converts it to a Classroom array list.
+* `ClassroomManager#saveClassroomList()` -- Converts the classroom array list and invokes the StorageController to save the current classroom list to file.
+* `ClassroomManager#getClassroomList()` -- Gets the classroom list from the in-memory array list.
+
+These operations are used in the `ClassListCommand` class under `ClassListCommand#execute()`..
+
+Given below is an example usage scenario and how the add/list mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `StorageController#retrieveData()` will retrieve all datasets saved locally.
+
+Step 2. The user executes `class list` command to list all classrooms to Trajectory. The `class list` command calls the `ClassListCommand#execute()`. The `ClassroomManager` will be instantiated and read the classroom list from the storage and converts the data from XmlAdaptedClassroom to the Classroom data type.
+
+Step 3. The classroom list with the corresponding classroom information will be appended to the with the support of the `StringBuilder` and displayed as a message successfully.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+image::classaddlist.PNG[width="800"]
+
+//zcend
 ==== Design Considerations
 
 ===== Aspect: How undo & redo executes
@@ -318,6 +364,58 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
+// tag::datatograph[]
+=== Exporting Gradebook data-to-graph feature
+==== Current Implementation
+
+The export-to-graph mechanism is an enhancement that will be released in the later versions, facilitated by 'Trajectory'.
+It is stored internally in GradebookManager.
+
+Additionally, it implements the following operations:
+
+* `gradebookManager#exportStudentGrades()` -- Exports data of student grades from Array List to graph form
+* `gradebookManager#exportStudentProgress()` -- Exports student data to present progress on module.
+
+These operations are exposed in the `GradebookManager` as `GradebookManager#exportStudentGrades()`, `GradebookManager#exportStudentProgress()` respectively.
+
+Given below is an example usage scenario and how the gradebook data-to-graph mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The StorageController which interacts with #xmlAdaptedGradebook to retrieve data from Array List using #retrieveData.
+
+Step 2. The user executes `gradebook find m/cs2113 i/Finals` command to find the relevant gradebook component. The `find` command calls `GradebookManager#findGradebookComponent()`, which finds and filters the Array List to the relevant search.
+
+Step 3. The user executes `gradebook export student grades`. GradebookManager#exportStudentGrades will convert the Array List to graph form and display to the user.
+
+[NOTE]
+If a command fails its execution, it will not call `Gradebook#GradebookManager()`, so Trajectory state will not be saved into the `GradebookManager`.
+
+Step 4. The user now decides to export graph according to the progress of a student, and that action is done by executing the `gradebook export student grades` command. This command will call `GradebookManager#exportStudentGrades()`, which then displays the graph of the students progress.
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+image::dataToGraphActivityDiagram.png[width="650"]
+
+==== Design Considerations
+
+===== Aspect: How graph-to-data executes
+
+* **Alternative 1 (current choice):** Individual command knows how to export accordingly.
+** Pros: Will use less memory (e.g. only execute command when needed)
+** Cons: Parameters and prefixes must be entered correctly before running command.
+* **Alternative 2:** Saves the entire Trajectory.
+** Pros: Easy to implement.
+** Cons: Might result in low performance due to high memory usage.
+
+===== Aspect: Data structure to support the data-to-graph commands
+
+* **Alternative 1 (current choice):** Use a list to store the data before exporting.
+** Pros: Easy data structure to use for any graph.
+** Cons: Large list of data might require significant memory.
+* **Alternative 2:** Use `GradebookManager' for data-to-graph export
+** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
+** Cons: Requires dealing with commands that needs to interact with storage controller or xml adapters directly but command should not have direct interaction from StorageController.
+// end::datatograph[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -1705,29 +1803,17 @@ Use case ends.
 *MSS* :
 
 1. Teacher removes grade component.
-2. System requests for confirmation by displaying input.
-3. Teacher confirms request.
-4. System indicates success message.
+2. System indicates success message.
 +
 Use case ends.
 
 *Extensions* :
 
-* 1a. System detects an error in the entered data.
+* 2a. Teacher enters an invalid command.
 +
-** 1a1. System displays message and format corresponding to error.
-** 1a2. Teacher enters new data.
+** 2a1. System displays the list of valid commands.
 +
-Steps 1a1-1a2 are repeated until the data entered is correct.
-+
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel removing a grade component.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
-+
-Use case ends.
+Use case resumes at step 1.
 
 
 [discrete]
