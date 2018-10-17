@@ -17,6 +17,7 @@ public class Task {
     // Data fields
     private final TaskDate date;
     private final TaskPriority priority;
+    private boolean completeness;
 
     /**
      * Every field must be present and not null.
@@ -27,6 +28,7 @@ public class Task {
         this.module = module;
         this.date = date;
         this.priority = priority;
+        completeness = false;
     }
 
     public TaskName getName() {
@@ -45,18 +47,20 @@ public class Task {
         return priority;
     }
 
+    public boolean getCompleteness() {
+        return completeness;
+    }
+
+    public void setAsCompleted() {
+        completeness = true;
+    }
+
     /**
-     * Returns true if both tasks have the same identity fields.
+     * Returns true if both tasks are totally the same.
      * This defines a weaker notion of equality between two tasks.
      */
     public boolean isSameTask(Task otherTask) {
-        if (otherTask == this) {
-            return true;
-        }
-
-        return otherTask != null
-                && otherTask.getName().equals(getName())
-                && otherTask.getModule().equals(getModule());
+        return otherTask == this;
     }
 
     /**

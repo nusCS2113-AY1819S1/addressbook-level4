@@ -50,6 +50,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         this.persons.setPersons(persons);
     }
 
+
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -69,6 +70,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.contains(person);
     }
 
+
     /**
      * Adds a person to the address book.
      * The person must not already exist in the address book.
@@ -76,6 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addPerson(Person p) {
         persons.add(p);
     }
+
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}.
@@ -88,6 +91,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.setPerson(target, editedPerson);
     }
 
+
     /**
      * Removes {@code key} from this {@code AddressBook}.
      * {@code key} must exist in the address book.
@@ -95,6 +99,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void removePerson(Person key) {
         persons.remove(key);
     }
+
 
     /**
      * Removes {@code tag} from this {@code Person}

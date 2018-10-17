@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
+import seedu.address.model.task.Task;
 
 /**
  * The main LogicManager of the app.
@@ -47,6 +48,10 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
+    public ObservableList<Task> getFilteredTaskList() {
+        return model.getFilteredTaskList();
+    
+    @Override
     public ObservableList<Expenditure> getFilteredExpenditureList() {
         return model.getFilteredExpenditureList();
     }
@@ -55,4 +60,5 @@ public class LogicManager extends ComponentManager implements Logic {
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
     }
+
 }

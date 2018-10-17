@@ -26,6 +26,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenditureTracker;
+import seedu.address.model.ReadOnlyTodoList;
+import seedu.address.model.TodoList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
@@ -90,7 +92,9 @@ public class MainApp extends Application {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         Optional<ReadOnlyExpenditureTracker> expenditureTrackerOptional;
         ReadOnlyAddressBook initialData;
-        ReadOnlyExpenditureTracker initialExpenditureData;
+        ReadOnlyTodoList initialTodoList = new TodoList();
+        ReadOnlyExpenditureTracker initialExpenditureTracker = new ExpenditureTracker();
+
         try {
             addressBookOptional = storage.readAddressBook();
             expenditureTrackerOptional = storage.readExpenditureTracker();
@@ -98,18 +102,19 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            initialExpenditureData = expenditureTrackerOptional.orElseGet(SampleDataUtil::getSampleExpenditureTracker);
+            initialExpenditureTracker = expenditureTrackerOptional.orElseGet(SampleDataUtil::getSampleExpenditureTracker);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
-            initialExpenditureData = new ExpenditureTracker();
+            initialExpenditureTracker = new ExpenditureTracker();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
-            initialExpenditureData = new ExpenditureTracker();
+            initialExpenditureTracker = new ExpenditureTracker();
         }
 
-        return new ModelManager(initialData, initialExpenditureData, userPrefs);
+        return new ModelManager(initialData, initialTodoList, initialExpenditureTracker, userPrefs);
+
     }
 
     private void initLogging(Config config) {
