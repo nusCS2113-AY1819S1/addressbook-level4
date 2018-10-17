@@ -239,6 +239,37 @@ Classes used by multiple components are in the `t13g2.forum.commons` package.
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::CURD feature
+=== CURD feature
+==== Current Implementation
+CURD is refers to `create`, `update`, `read` and `delete`. This feature is implemented to achieve basic functionalities of the Forum Book. It extends `ForumBook` with various commands and supports the following operations:
+
+* `createThread`: Create a new thread under a specific module with comment.
+* `updateThread`: Update a existing thread title created by its user.
+* `listModule`: List out all the modules in the Forum Book.
+* `selectModule`: Select a specific module and list out all the threads under the module.
+* `selectThread`: Select a specific thread and list out all the comments under the thread.
+* `deleteThread`: Delete a specific thread.
+
+Given below is an example usage scenario and how the CURD can be operated by user at each step.
+
+Step 1. The user launches the application, executes `createThread mCode/CS2113 tTitle/Exam Information cContent/What is the topic coverage for the final?` to create and add the thread into storage file. The createThread command calls `UnitOfWork.commit()`, saving the modified forum book state into ForumBookStorage.
+
+Step 2. The user executes `updateThread tId/123 tTitle/Mid-term Test` to update the specific thread's title from storage file. The updateThread command calls `UnitOfWork.getForumThreadRepository().getThread(threadId)`，`forumThread.setTitle()` and lastly `UnitOfWork.commit()`, saving the modified forum book state into ForumBookStorage.
+
+Step 3. The user executes `listModule` to retrieve all the existing modules from storage file. The `listModule` command calls `UnitOfWork.getModuleRepository().getAllModule()` which returns the module list to be shown in the panel.
+
+Step 4. The user executes `selectModule mCode/CS2113` to retrieve the module with module code CS2113 and its thread list from storage file. The `selectModule` command calls `UnitOfWork.getModuleRepository().getModuleByCode(moduleCode)` and `UnitOfWork.getForumThreadRepository().getThreadsByModule(module)` to return the module and thread list to be shown in the panel.
+
+Step 5. The user executes `selectThread tId/123` to retrieve the thread with ID 123 and its comments from storage file. The `selectModule` command calls `UnitOfWork.getForumThreadRepository().getThread(threadId)` and `UnitOfWork.getCommentRepository().getCommentsByThread(threadId)` to return the thread and comment list to be shown in the panel.
+
+Step 6. The user executes `deleteThread tId/123` to delete/remove the thread with ID 123 from storage file. The deleteThread command calls `UnitOfWork.getForumThreadRepository().deleteThread(threadId)` and `UnitOfWork.commit()` to save the modified forum book state.
+
+[NOTE]
+If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
+//end of CURD feature
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation

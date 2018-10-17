@@ -223,9 +223,9 @@ public class ParserUtil {
     public static String parseComment(String comment) throws ParseException {
         requireNonNull(comment);
         String trimmedComment = comment.trim();
-        if (!isValidComment(trimmedComment)) {
-            throw new ParseException(Comment.MESSAGE_COMMENT_CONSTRAINTS);
-        }
+//        if (!isValidComment(trimmedComment)) {
+//            throw new ParseException(Comment.MESSAGE_COMMENT_CONSTRAINTS);
+//        }
         return trimmedComment;
     }
     //Returns true if a given string is a valid comment content.
