@@ -66,8 +66,8 @@ All products containing the name searched for will appear.
 
 Format: `Transaction pr/<product name> pr/<product name> ... pr/<product name`
 
-Adds a transaction to the record for the given day. 
-The time of the transaction, names of the products, and  
+Adds a transaction to the record for the given day.
+The time of the transaction, names of the products, and
 individual product quantities will be stored.
 
 === View the latest transaction: `latest`
