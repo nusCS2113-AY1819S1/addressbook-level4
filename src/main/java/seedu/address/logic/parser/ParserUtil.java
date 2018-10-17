@@ -9,11 +9,11 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.Venue;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Username;
@@ -139,18 +139,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String location} into a {@code Venue}.
+     * Parses a {@code String venue} into a {@code Venue}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code location} is invalid.
+     * @throws ParseException if the given {@code venue} is invalid.
      */
-    public static Venue parseVenue(String location) throws ParseException {
-        requireNonNull(location);
-        String trimmedAddress = location.trim();
-        if (!Venue.isValidVenue(trimmedAddress)) {
+    public static Venue parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedVenue = venue.trim();
+        if (!Venue.isValidVenue(trimmedVenue)) {
             throw new ParseException(Venue.MESSAGE_VENUE_CONSTRAINTS);
         }
-        return new Venue(trimmedAddress);
+        return new Venue(trimmedVenue);
     }
 
     /**
