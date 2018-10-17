@@ -34,7 +34,7 @@ public class AddTestMarksCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add test and marks to persons whose names"
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: "  +  COMMAND_WORD  +  " alice cs2113quiz1 67";
+            + "Example: " + COMMAND_WORD + " alice cs2113quiz1 67";
 
 
     public static final String MESSAGE_DUPLICATE_TEST = "This test already exists in the system";

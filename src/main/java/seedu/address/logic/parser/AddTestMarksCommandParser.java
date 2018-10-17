@@ -32,8 +32,8 @@ public class AddTestMarksCommandParser {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_TEST_NAME, PREFIX_TEST_MARK);
 
-        nameKeywordsList.remove(PREFIX_TEST_NAME+argMultimap.getValue(PREFIX_TEST_NAME).get());
-        nameKeywordsList.remove(PREFIX_TEST_MARK+argMultimap.getValue(PREFIX_TEST_MARK).get());
+        nameKeywordsList.remove(PREFIX_TEST_NAME + argMultimap.getValue(PREFIX_TEST_NAME).get());
+        nameKeywordsList.remove(PREFIX_TEST_MARK + argMultimap.getValue(PREFIX_TEST_MARK).get());
 
         return new AddTestMarksCommand(new NameContainsKeywordsPredicate(nameKeywordsList),
                 argMultimap.getValue(PREFIX_TEST_NAME).get(), argMultimap.getValue(PREFIX_TEST_MARK).get());

@@ -24,7 +24,9 @@ public class Test {
     public Marks getMarks() {
         return marks;
     }
-
+    /**
+     * Every field must be present and not null.
+     */
     public boolean isSameTest(Test otherTest) {
         if (otherTest == this) {
             return true;

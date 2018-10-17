@@ -29,7 +29,7 @@ public class Person {
     private final Grade grade;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Map<String,String> scoresList = new HashMap<>();
+    private final Map<String, String> scoresList = new HashMap<>();
     private final Set<Test> testList = new HashSet<>();
     /**
      * Every field must be present and not null.
@@ -93,8 +93,8 @@ public class Person {
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-    public Set<Test> getTests()
-    { return Collections.unmodifiableSet(testList); }
+    public Set<Test> getTests() { return Collections.unmodifiableSet(testList); }
+
 
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
