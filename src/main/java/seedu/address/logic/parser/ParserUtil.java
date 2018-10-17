@@ -56,6 +56,13 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
+    /**
+     * Returns the time entered by the user for a given reminder.
+     * @param reminderTime
+     * @return trimmed reminder time (removing trailing whitespaces).
+     * @throws ParseException if {@code String}reminder time is in the wrong format.
+     */
+
     public static String parseReminderTime(String reminderTime) throws ParseException {
         requireNonNull(reminderTime);
         String trimmedTime = reminderTime.trim();

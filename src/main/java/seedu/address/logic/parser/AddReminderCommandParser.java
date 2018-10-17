@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_MESSAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import java.util.stream.Stream;
 
@@ -26,7 +26,7 @@ public class AddReminderCommandParser implements Parser<AddReminderCommand> {
 
     public AddReminderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TIME, PREFIX_REMINDER_MESSAGE);
-        if (!arePrefixesPresent(argMultimap, PREFIX_TIME,PREFIX_REMINDER_MESSAGE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_TIME, PREFIX_REMINDER_MESSAGE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddReminderCommand.MESSAGE_USAGE));
         }

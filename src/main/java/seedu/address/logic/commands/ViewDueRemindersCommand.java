@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 
-import java.util.ArrayList;
+/**
+ * This command allows us to view all reminders in the active shop day that are due.
+ */
 
 public class ViewDueRemindersCommand extends Command {
 

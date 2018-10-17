@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMINDER_MESSAGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -43,7 +43,7 @@ public class AddReminderCommand extends Command {
             return new CommandResult(e.getExceptionMessage());
         }
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS,toAdd.getMessage(),toAdd.getTime()));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getMessage(), toAdd.getTime()));
     }
 
     @Override

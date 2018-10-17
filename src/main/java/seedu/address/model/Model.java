@@ -15,7 +15,6 @@ import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Product;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
-import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
