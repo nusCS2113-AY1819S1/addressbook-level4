@@ -23,11 +23,12 @@ import com.t13g2.forum.logic.commands.HelpCommand;
 import com.t13g2.forum.logic.commands.HistoryCommand;
 import com.t13g2.forum.logic.commands.ListCommand;
 import com.t13g2.forum.logic.commands.ListModuleCommand;
-import com.t13g2.forum.logic.commands.SelectModuleCommand;
-import com.t13g2.forum.logic.commands.SelectThreadCommand;
 import com.t13g2.forum.logic.commands.LoginCommand;
 import com.t13g2.forum.logic.commands.RedoCommand;
 import com.t13g2.forum.logic.commands.SelectCommand;
+import com.t13g2.forum.logic.commands.SelectModuleCommand;
+import com.t13g2.forum.logic.commands.SelectThreadCommand;
+import com.t13g2.forum.logic.commands.SetAdminCommand;
 import com.t13g2.forum.logic.commands.UndoCommand;
 import com.t13g2.forum.logic.parser.exceptions.ParseException;
 
@@ -102,6 +103,9 @@ public class AddressBookParser {
 
         case BlockUserFromPostingCommand.COMMAND_WORD:
             return new BlockUserFromPostingCommandParser().parse(arguments);
+
+        case SetAdminCommand.COMMAND_WORD:
+            return new SetAdminCommandParser().parse(arguments);
 
         case CreateThreadCommand.COMMAND_WORD:
             return new CreateThreadCommandParser().parse(arguments);

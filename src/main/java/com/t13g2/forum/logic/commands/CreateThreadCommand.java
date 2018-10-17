@@ -1,17 +1,19 @@
 package com.t13g2.forum.logic.commands;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
+
+import static java.util.Objects.requireNonNull;
+
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
+import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
-import com.t13g2.forum.model.forum.Comment;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
-import static java.util.Objects.requireNonNull;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
 
 /**
  * Create a new thread to the forum book under certain module

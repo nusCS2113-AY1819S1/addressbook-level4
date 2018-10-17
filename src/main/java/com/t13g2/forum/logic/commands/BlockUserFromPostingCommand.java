@@ -9,7 +9,7 @@ import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
-
+//@@xllx1
 /**
  * Allow admin to block user from posting a new thread.
  */

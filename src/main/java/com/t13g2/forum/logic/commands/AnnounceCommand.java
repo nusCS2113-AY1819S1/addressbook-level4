@@ -12,6 +12,7 @@ import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
+//@@xllx1
 /**
  * Announce new announcement.
  */
