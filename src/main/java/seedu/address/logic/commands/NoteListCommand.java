@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_MODULE_CODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 import java.util.function.Predicate;
 
@@ -23,9 +23,9 @@ public class NoteListCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists notes. "
             + "Parameters: ["
-            + PREFIX_NOTE_MODULE_CODE + "MODULE CODE]\n"
+            + PREFIX_MODULECODE + "MODULE CODE]\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NOTE_MODULE_CODE + "CS2040C";
+            + PREFIX_MODULECODE + "CS2040C";
 
     private NoteManager noteManager = new NoteManager();
 

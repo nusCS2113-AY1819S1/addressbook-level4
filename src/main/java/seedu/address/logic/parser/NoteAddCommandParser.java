@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE_MODULE_CODE;
 
 import java.util.stream.Stream;
 
@@ -21,14 +21,14 @@ public class NoteAddCommandParser implements Parser<NoteAddCommand> {
      */
     public NoteAddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NOTE_MODULE_CODE, PREFIX_NOTE_DATE);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULECODE, PREFIX_NOTE_DATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NOTE_MODULE_CODE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULECODE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteAddCommand.MESSAGE_USAGE));
         }
 
-        String moduleCode = argMultimap.getValue(PREFIX_NOTE_MODULE_CODE).get();
+        String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
         String noteDate = (argMultimap.getValue(PREFIX_NOTE_DATE).isPresent())
                 ? argMultimap.getValue(PREFIX_NOTE_DATE).get() : "No Date";
 
