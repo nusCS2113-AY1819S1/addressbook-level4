@@ -205,15 +205,13 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-<<<<<<< HEAD
-=======
+
     //=========== Filtered Task List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Task} backed by the internal list of
      * {@code versionedTodoList}
      */
->>>>>>> b4febe5f65e6c58d7ca6c0009fb245fe49fb1851
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return FXCollections.unmodifiableObservableList(filteredTasks);
@@ -225,15 +223,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(predicate);
     }
 
-<<<<<<< HEAD
-=======
     //=========== Filtered Expenditure List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Expenditure} backed by the internal list of
      * {@code versionedExpenditureTracker}
      */
->>>>>>> b4febe5f65e6c58d7ca6c0009fb245fe49fb1851
     @Override
     public ObservableList<Expenditure> getFilteredExpenditureList() {
         return FXCollections.unmodifiableObservableList(filteredExpenditures);
