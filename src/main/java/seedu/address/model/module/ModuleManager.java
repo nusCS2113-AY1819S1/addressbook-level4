@@ -1,5 +1,7 @@
 package seedu.address.model.module;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -25,6 +27,18 @@ public class ModuleManager {
     }
 
     /**
+     * Replaces the given module {@code target} with {@code editedModule}
+     * {@code target} must already exist in Trajectory
+     */
+    public void updateModule(Module target, Module editedModule) {
+        requireAllNonNull(target, editedModule);
+
+        int targetIndex = modules.indexOf(target);
+
+        modules.set(targetIndex, editedModule);
+    }
+
+    /**
      * Gets the module list from storage and converts it to a Module array list
      */
     private void readModuleList() {
@@ -42,6 +56,13 @@ public class ModuleManager {
                 modules.stream().map(XmlAdaptedModule::new).collect(Collectors.toCollection(ArrayList::new));
         StorageController.setModuleStorage(xmlAdaptedModules);
         StorageController.storeData();
+    }
+
+    public Module getModuleByModuleCode(String moduleCode) {
+        return this.modules.stream()
+                .filter(module -> module.getModuleCode().equals(moduleCode))
+                .findAny()
+                .orElse(null);
     }
 
     public ArrayList<Module> getModules() {

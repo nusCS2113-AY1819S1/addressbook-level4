@@ -21,8 +21,7 @@ public class ModuleAddCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public ModuleAddCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_MODULE_CODE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_NAME, PREFIX_MODULE_CODE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_NAME, PREFIX_MODULE_CODE)
                 || !argMultimap.getPreamble().isEmpty()) {
