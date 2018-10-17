@@ -93,7 +93,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyExpenditureTracker> expenditureTrackerOptional;
         ReadOnlyAddressBook initialData;
         ReadOnlyTodoList initialTodoList = new TodoList();
-        ReadOnlyExpenditureTracker initialExpenditureTracker = new ExpenditureTracker();
+        ReadOnlyExpenditureTracker initialExpenditureTracker;
 
         try {
             addressBookOptional = storage.readAddressBook();
