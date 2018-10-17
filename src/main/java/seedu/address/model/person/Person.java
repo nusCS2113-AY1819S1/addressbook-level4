@@ -3,10 +3,13 @@ package seedu.address.model.person;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.grade.Test;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -26,15 +29,16 @@ public class Person {
     private final Grade grade;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-
+    private final Map<String,String> scoresList  = new HashMap<>();
+    private final Set<Test> testList = new HashSet<>();
     /**
      * Every field must be present and not null.
      */
 
     public Person(Name name, Gender gender, Nationality nationality, Phone phone,
-                  Email email, Address address, Grade grade, Set<Tag> tags) {
+                  Email email, Address address, Grade grade, Set<Tag> tags, Set<Test> testList) {
 
-        requireAllNonNull(name, gender, nationality, phone, email, address, grade, tags);
+        requireAllNonNull(name, gender, nationality, phone, email, address, grade, tags, testList);
 
         this.name = name;
         this.gender = gender;
@@ -44,6 +48,7 @@ public class Person {
         this.address = address;
         this.grade = grade;
         this.tags.addAll(tags);
+        this.testList.addAll(testList);
     }
 
     public Name getName() {
@@ -77,10 +82,18 @@ public class Person {
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
+    public Map<String,String> getScoresList() {
+        return Collections.unmodifiableMap(scoresList);
+    }
+
+    /**
+     * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
     }
-
+    public Set<Test> getTests() { return Collections.unmodifiableSet(testList); }
     /**
      * Returns true if both persons of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two persons.
@@ -117,7 +130,8 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getGrade().equals(getGrade())
-                && otherPerson.getTags().equals(getTags());
+                && otherPerson.getTags().equals(getTags())
+                && otherPerson.getTests().equals(getTests());
 
     }
 

@@ -1,16 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GENDER;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NATIONALITY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -18,91 +9,92 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+
+
+
 import seedu.address.model.Model;
+import seedu.address.model.grade.Marks;
+import seedu.address.model.grade.Test;
+import seedu.address.model.grade.TestName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
 import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
-/**
- * Edits the details of an existing person in the address book.
- */
-public class EditCommand extends Command {
+public class EditTestMarksCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
-    public static final String COMMAND_WORD_2 = "e";
+    public static final String COMMAND_WORD = "edit_test";
+    public static final String COMMAND_WORD_2 = "et";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the person identified "
-            + "by the index number used in the displayed person list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_GENDER + "GENDER] "
-            + "[" + PREFIX_NATIONALITY + "NATIONALITY] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_GRADE + "GRADE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Add test to persons whose names"
+            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+            + "Example: " + COMMAND_WORD + " alice cs2113quiz1 66";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
-    private final Index index;
-    private final EditPersonDescriptor editPersonDescriptor;
+    public static final String MESSAGE_NOT_FOUND_TEST = "Test Name is not Found please add first.";
+    private final NameContainsKeywordsPredicate predicate;
+    private final String testName;
+    private final String testMarks;
+    private final EditPersonDescriptor editPersonDescriptor = null;
 
-    /**
-     * @param index of the person in the filtered person list to edit
-     * @param editPersonDescriptor details to edit the person with
-     */
-    public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
-        requireNonNull(index);
-        requireNonNull(editPersonDescriptor);
-
-        this.index = index;
-        this.editPersonDescriptor = new EditPersonDescriptor(editPersonDescriptor);
+    public EditTestMarksCommand(NameContainsKeywordsPredicate predicate, String testName, String testMarks) {
+        this.predicate = predicate;
+        this.testName = testName;
+        this.testMarks = testMarks;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<Person> lastShownList = model.getFilteredPersonList();
+        model.updateFilteredPersonList(predicate);
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+
+        List<Person> PersonListName = model.getFilteredPersonList();
+        EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
+        Person personToEdit = PersonListName.get(0);
+
+        Test test = new Test(new TestName(testName), new Marks(testMarks));
+
+        Set<Test> testList = new HashSet<>();
+        testList.addAll(personToEdit.getTests());
+
+        boolean checkExists = false;
+        for (Test t : personToEdit.getTests()) {
+            if (t.getTestName().testName.equals(test.getTestName().testName)) {
+                checkExists = true;
+                testList.remove(t);
+                testList.add(test);
+            }
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        if (!checkExists) {
+            throw new CommandException(MESSAGE_NOT_FOUND_TEST);
+        }
+
+        editPersonDescriptor.setTests(testList);
         Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
 
-        if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
-        }
 
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson));
+
+
+        return new CommandResult(
+                String.format(Messages.MESSAGE_UPDATED_TEST_LIST, model.getFilteredPersonList().size()));
     }
 
-    /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * edited with {@code editPersonDescriptor}.
-     */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    public static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
@@ -113,32 +105,20 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Test> updatedTests = editPersonDescriptor.getTests().orElse(personToEdit.getTests());
         return new Person(updatedName, updateGender, updateNationality, updatedPhone,
-                updatedEmail, updatedAddress, updatedGrade, updatedTags,null);
+                updatedEmail, updatedAddress, updatedGrade, updatedTags, updatedTests);
     }
+
 
     @Override
     public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof EditCommand)) {
-            return false;
-        }
-
-        // state check
-        EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-                && editPersonDescriptor.equals(e.editPersonDescriptor);
+        return other == this // short circuit if same object
+                || (other instanceof EditTestMarksCommand // instanceof handles nulls
+                && predicate.equals(((EditTestMarksCommand) other).predicate)); // state check
     }
 
-    /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
-     */
+
     public static class EditPersonDescriptor {
         private Name name;
         private Gender gender;
@@ -148,8 +128,10 @@ public class EditCommand extends Command {
         private Address address;
         private Grade grade;
         private Set<Tag> tags;
+        private Set<Test> tests;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -164,6 +146,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setGrade(toCopy.grade);
             setTags(toCopy.tags);
+            setTests(toCopy.tests);
         }
 
         /**
@@ -172,7 +155,7 @@ public class EditCommand extends Command {
         public boolean isAnyFieldEdited() {
 
             return CollectionUtil.isAnyNonNull(name, phone, email,
-                    address, tags, grade);
+                    address, tags, grade, tests);
 
         }
 
@@ -233,7 +216,6 @@ public class EditCommand extends Command {
         }
 
 
-
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -249,6 +231,23 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTests(Set<Test> tests) {
+            this.tests = (tests != null) ? new HashSet<>(tests) : null;
+        }
+
+        /**
+         * Returns an unmodifiable Test set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Test>> getTests() {
+            return (tests != null) ? Optional.of(Collections.unmodifiableSet(tests)) : Optional.empty();
         }
 
         @Override
@@ -273,7 +272,9 @@ public class EditCommand extends Command {
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
                     && getGrade().equals(e.getGrade())
-                    && getTags().equals(e.getTags());
+                    && getTags().equals(e.getTags())
+                    && getTests().equals(e.getTests());
         }
     }
 }
+
