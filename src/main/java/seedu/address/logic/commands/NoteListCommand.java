@@ -1,15 +1,14 @@
 package seedu.address.logic.commands;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.StorageController;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteManager;
 
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Lists notes based on given predicate.
@@ -22,9 +21,6 @@ public class NoteListCommand extends Command {
 
     public static final String MESSAGE_NOT_FOUND = "No notes were found.";
 
-    private NoteManager noteManager = new NoteManager();
-
-    // private final Predicate<Note> predicate;
     private final String moduleCode;
 
     public NoteListCommand(String moduleCode) {
@@ -33,6 +29,8 @@ public class NoteListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+
+        NoteManager noteManager = new NoteManager();
         List<Note> filteredNotes;
 
         if (moduleCode.trim().length() > 0) {
@@ -44,7 +42,9 @@ public class NoteListCommand extends Command {
 
         StringBuilder sb = new StringBuilder();
 
+        int listId = 1;
         for (Note n: filteredNotes) {
+            sb.append(listId++ + ":\n");
             sb.append("Module Code: ");
             sb.append(n.getModuleCode() + "\n");
             sb.append("Date: ");

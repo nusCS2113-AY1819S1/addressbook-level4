@@ -36,8 +36,6 @@ public class NoteAddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Note has been added to %1$s.";
     public static final String MESSAGE_CANCEL = "Note creation has been cancelled.";
 
-    private static NoteManager noteManager = new NoteManager();
-
     private Note noteToAdd;
 
     public NoteAddCommand(Note note) {
@@ -47,6 +45,7 @@ public class NoteAddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        NoteManager noteManager = new NoteManager();
 
         boolean isCancelled = showTextPrompt();
 
