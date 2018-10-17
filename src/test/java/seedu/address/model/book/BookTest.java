@@ -42,7 +42,7 @@ public class BookTest {
 
         // different name -> returns false
         editedAlice = new BookBuilder(ALICE).withName(VALID_NAME_BOB).build();
-        assertFalse(ALICE.isSameBook(editedAlice));
+        assertTrue(ALICE.isSameBook(editedAlice));
 
         // same name, same phone, different attributes -> returns true
         editedAlice = new BookBuilder(ALICE).withPrice(VALID_PRICE_BOB).withQuantity(VALID_QUANTITY_BOB)
@@ -52,7 +52,7 @@ public class BookTest {
         // same name, same email, different attributes -> returns true
         editedAlice = new BookBuilder(ALICE).withIsbn(VALID_ISBN_BOB).withQuantity(VALID_QUANTITY_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameBook(editedAlice));
+        assertFalse(ALICE.isSameBook(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new BookBuilder(ALICE).withQuantity(VALID_QUANTITY_BOB).withTags(VALID_TAG_HUSBAND).build();
@@ -91,7 +91,7 @@ public class BookTest {
 
         // different address -> returns false
         editedAlice = new BookBuilder(ALICE).withQuantity(VALID_QUANTITY_BOB).build();
-        // assertFalse(ALICE.equals(editedAlice));
+        assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
         editedAlice = new BookBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
