@@ -1,12 +1,23 @@
 package seedu.address.ui;
-import javafx.stage.*;
-import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.geometry.*;
 
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+/**
+ * Alerts user
+ */
 public class AlertBox {
 
+    /**
+     * Displays Alert Box
+     * @param title Header for Alert Box
+     * @param message Message under header
+     */
     protected static void display(String title, String message) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);

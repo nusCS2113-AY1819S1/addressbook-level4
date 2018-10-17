@@ -1,14 +1,26 @@
 package seedu.address.ui;
-import javafx.stage.*;
-import javafx.scene.*;
-import javafx.scene.layout.*;
-import javafx.scene.control.*;
-import javafx.geometry.*;
 
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+/**
+ * Submits user data
+ */
 public class SubmitBox {
 
-    static boolean isYes;
+    private static boolean isYes;
 
+    /**
+     * displays submit box
+     * @param title submit box header
+     * @param message submit box message
+     * @return boolean isYes
+     */
     public static boolean display(String title, String message) {
 
         Stage window = new Stage();
