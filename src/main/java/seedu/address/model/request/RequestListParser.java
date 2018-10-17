@@ -23,7 +23,7 @@ public class RequestListParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static ArrayList<String> commandList;
     private static DiceCoefficient diceCoefficient;
-    private final double DICE_COEFFICIENT_THRESHOLD = 0.75;
+    private final double DICE_COEFFICIENT_THRESHOLD = 0.5;
 
     /**
      * Parses user input into command for execution.

@@ -43,8 +43,7 @@ public class BookInventoryParser {
 
     private static ArrayList<String> commandList;
     private static DiceCoefficient diceCoefficient;
-    private final double DICE_COEFFICIENT_THRESHOLD = 0.75;
-
+    private final double DICE_COEFFICIENT_THRESHOLD = 0.5;
     @FXML
     private StackPane personListPanelPlaceholder;
 

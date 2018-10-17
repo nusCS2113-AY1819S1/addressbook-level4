@@ -16,15 +16,15 @@ public class DiceCoefficient {
         Set<String> nx = new HashSet<String>();
         Set<String> ny = new HashSet<String>();
 
-        for (int i=0; i < s1.length()-1; i++) {
+        for (int i = 0; i < s1.length() - 1; i++) {
             char x1 = s1.charAt(i);
-            char x2 = s1.charAt(i+1);
+            char x2 = s1.charAt(i + 1);
             String tmp = "" + x1 + x2;
             nx.add(tmp);
         }
-        for (int j=0; j < s2.length()-1; j++) {
+        for (int j = 0; j < s2.length() - 1; j++) {
             char y1 = s2.charAt(j);
-            char y2 = s2.charAt(j+1);
+            char y2 = s2.charAt(j + 1);
             String tmp = "" + y1 + y2;
             ny.add(tmp);
         }
@@ -58,17 +58,20 @@ public class DiceCoefficient {
     public static double diceCoefficientOptimized(String s, String t)
     {
         // Verifying the input:
-        if (s == null || t == null)
+        if (s == null || t == null) {
             return 0;
+        }
         // Quick check to catch identical objects:
-        if (s == t)
+        if (s.equals(t)) {
             return 1;
+        }
         // avoid exception for single character searches
-        if (s.length() < 2 || t.length() < 2)
+        if (s.length() < 2 || t.length() < 2) {
             return 0;
+        }
 
         // Create the bigrams for string s:
-        final int n = s.length()-1;
+        final int n = s.length() - 1;
         final int[] sPairs = new int[n];
         for (int i = 0; i <= n; i++)
             if (i == 0)

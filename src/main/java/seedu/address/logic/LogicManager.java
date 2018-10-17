@@ -30,8 +30,9 @@ public class LogicManager extends ComponentManager implements Logic {
     private final RequestListParser requestListParser;
 
     private static DiceCoefficient diceCoefficient;
-    private final double DICE_COEFFICIENT_THRESHOLD = 0.75;
-    public LogicManager(Model model, RequestModel requestModel) {
+    private final double DICE_COEFFICIENT_THRESHOLD = 0.5;
+
+    public LogicManager(Model model, RequestModel requestModel){
         this.model = model;
         this.requestModel = requestModel;
         history = new CommandHistory();
