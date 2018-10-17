@@ -238,88 +238,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-// tag::undoredo[]
-=== Undo/Redo feature
-==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-image::UndoRedoStartingStateListDiagram.png[width="800"]
-
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
-
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
-
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-image::UndoRedoSequenceDiagram.png[width="800"]
-
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
-
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::UndoRedoActivityDiagram.png[width="650"]
-
-==== Design Considerations
-
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
-
-
-// tag:: Sorting[]
 
 === Event Sorting
 
@@ -339,6 +257,96 @@ image::SortSequenceDiagram.png[width="650"]
 
 
 // end::Sorting[]
+
+
+// tag:: Invite[]
+=== Invite feature
+
+==== Current Implementation
+
+The `invite` command allows users to add attendees to an existing event, which is represented by an `Event` object.
+The command currently only allows users to add a single person to an event, based on the indices on the UI.
+This command adds the invited `Person` 's name, which is unique, to a chosen `Event`, so that the attendees of a particular event is recorded.
+
+The adding of attendees is facilitated by the class: `Attendees`, a list of names of type `String`.
+
+The following is a more detailed description of the class:
+
+*  `Attendees`
+** Each `Event` object has an `Attendees`, which is a list of the names of the different `Person` attending the event.
+** This class is a wrapper class around the internal representation of a list of attendees that exposes only a few functions of a `Set` of `String`.
+** Only the names of the `Person` is recorded in an `Event`, as the name should be unique and uneditable.
+
+Storing only the *name* of `Person` in the `Attendees` object of `Event` saves memory storage and facilitates the `select` feature. As we select a person, we can simply iterate through the event list and check whether the person's name is in the attendees list.
+
+We can also have a summarized content of persons (their names) involved in an event. Obtaining the full information of the list of persons in a particular event is not required in the current version of project, but can still be implemented easily with the current `Attendee` structure. This can be done by filtering through the address book based on the person names present in `Attendees`. Thus, there is no need to store any event information in the `Person` object.
+
+==== Execution of Command
+
+Given below is an example usage scenario and how the invite mechanism works.
+
+Step 1. The user executes `invite 1 to/1` to invite the 1st person in the address book to the 1st event in the event list. The command text is passed to an instance of the `LogicManager` class.
+
+Step 2. The `LogicManager` instance calls `AddressBookParser#parsecommand`, which parses the `invite` command phrase.
+
+Step 3. `InviteCommandParser#parse` parses the person and event index. An instance of the `InviteCommand` encapsulating the two indices information is then returned.
+
+Step 4. `Logic Manager` then executes this `InviteCommand` by calling `InviteCommand#execute`.
+
+Step 5. The filtered person list and event list is first obtained by calling `PersonModel#getFilteredPersonList` and `EventModel#getFilteredEventList`. Based on the indices, the `Person` and `Event` is selected.
+
+Step 6. Next, the `Person` object's name is obtained and added to the obtained `Attendees` object. The new `Attendees` object is then added to a new copy of the `Event` object.
+
+Step 7. The new `Event` object is updated to the model by calling `Model#updateEvent`.
+
+Step 8. The `InviteCommand#execute` finally returns a `CommandResult` with a success message.
+
+The sequence diagram below illustrates the execution of the `invite` command.
+
+image::InviteSequenceDiagram.png[width="800"]
+
+==== Design Consideration
+
+===== Aspect: How to link `Person` and `Event`
+
+* **Alternative 1 (current choice):** Saves only the names of the Persons in the Attendees of Events.
+** Pros: Saves space. Able to filter EventList easily.
+** Cons: Requires going through the entire list of AddressBook to obtain details of persons attending the particular event.
+
+* **Alternative 2:** Saves the entire information of Events for each Persons.
+** Pros: Fast access to information of Events attended by any Persons.
+** Cons: Takes up a lot of storage space and memory. Many repeated items within the storage files.
+
+* **Alternative 3:** Assign an ID to each Persons and store in Attendees of Events.
+** Pros: Able to edit names in a straightforward coding manner.
+** Cons: We must add or assign an ID during creation of Person. This may require some refactoring of the current code base. Unnecessary if name is unique and uneditable.
+
+===== Aspect: Data structure to support `invite` command
+
+* **Alternative 1 (current choice):** Use `HashSet` to store persons names.
+** Pros: Easier and faster to retrieve or validate names stored. Able to handle duplicates easily.
+** Cons: Sequence of persons added is lost. Currently, this feature is not important for the project.
+
+* **Alternative 2:** Use `ArrayList` to store persons names.
+** Pros: Names are stored in order of addition.
+** Cons: Inefficient when handling data.
+
+==== Future Improvements
+
+===== Adding multiple persons to an event
+
+The current `invite` command only invites one person to a chosen event based on the index chosen. This feature can be further extended to enable inviting more than one person to an event.
+One possible way to to implement this is to have the user
+
+* input a certain range (2-5) or
+* multiple indices (1, 3, 6) or
+* a mixture of both (1-3, 4, 6-10)
+
+The same concept can also be applied to events, being able to invite one person to multiple events with one single command.
+
+Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`.
+// end::Invite[]
+
 
 
 // tag::dataencryption[]
