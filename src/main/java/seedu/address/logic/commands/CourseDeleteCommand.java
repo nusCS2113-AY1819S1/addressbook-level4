@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COURSE_CODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -20,7 +21,7 @@ public class CourseDeleteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the course based on the course code that was provided.\n"
             + "Parameters: COURSE_CODE\n"
-            + "Example: " + COMMAND_WORD + " CS1";
+            + "Example: " + COMMAND_WORD + PREFIX_COURSE_CODE + " CS1";
 
     public static final String MESSAGE_DELETE_COURSE_SUCCESS = "Deleted course: %1$s";
 

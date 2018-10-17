@@ -145,6 +145,16 @@ Examples:
 Shows a list of all courses in the system. +
 Format: course list
 
+==== Remove course : `course delete`
+Deletes the specified course from the system +
+Format: course delete c/COURSE_CODE
+
+Examples:
+
+* `course delete CEG1`
+Deletes CEG1 from the course directory, if it exists.
+
+
 === Module Management
 ==== Add Module : `module add`
 Adds a module to the system. +
