@@ -19,7 +19,7 @@ import seedu.address.model.person.Person;
  */
 public class AddCommand extends Command {
 
-    public static final String COMMAND_WORD = "student_add";
+    public static final String COMMAND_WORD = "student add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a student into Trajectory. "
             + "Parameters: "

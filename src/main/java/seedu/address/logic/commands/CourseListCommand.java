@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.Course;
 import seedu.address.model.Model;
-import seedu.address.model.StorageController;
+import seedu.address.model.course.Course;
+import seedu.address.model.course.CourseManager;
+
 
 /**
  * Lists all persons in the address book to the user.
@@ -17,11 +18,10 @@ public class CourseListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        StorageController.retrieveData();
-
+        CourseManager cm = new CourseManager();
         StringBuilder sb = new StringBuilder();
 
-        for (Course c: StorageController.getCourseStorage()) {
+        for (Course c: cm.getCourses()) {
             sb.append("Course Name:");
             sb.append(c.getCourseName() + "\n");
             sb.append("Course Code: ");

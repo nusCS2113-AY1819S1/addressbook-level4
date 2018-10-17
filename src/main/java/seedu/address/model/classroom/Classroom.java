@@ -4,28 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Objects;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
-
 /**
  * Represents a classroom in the app.
  */
-@XmlRootElement(name = "class")
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Classroom {
-    //class-specific fields
-    @XmlElement(name = "className")
     private ClassName className;
-    @XmlElement(name = "moduleCode")
     private ClassModule moduleCode;
-    @XmlElement(name = "maxEnrollment")
     private Enrollment maxEnrollment;
-
-    public Classroom() {
-    }
 
     public Classroom(ClassName className, ClassModule moduleCode, Enrollment maxEnrollment) {
         requireNonNull(className);

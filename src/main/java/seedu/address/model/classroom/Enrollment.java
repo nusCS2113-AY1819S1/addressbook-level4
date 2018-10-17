@@ -2,15 +2,10 @@ package seedu.address.model.classroom;
 
 import static java.util.Objects.requireNonNull;
 
-import javax.xml.bind.annotation.XmlElement;
-
-
-
 /**
  * Represents an enrollment size for the class in the app.
  */
 public class Enrollment {
-    @XmlElement
     private String value;
 
     public Enrollment() {

@@ -7,7 +7,9 @@ import static seedu.address.logic.commands.ClassAddCommand.MESSAGE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
 
@@ -31,8 +33,17 @@ public class ClassAddCommandTest {
 
         assertCommandSuccess(new ClassAddCommand(new Classroom(new ClassName(className),
                         new ClassModule(moduleCode), new Enrollment(maxEnrollment))), model, new CommandHistory(),
-                String.format(MESSAGE_SUCCESS, className),
+                String.format(MESSAGE_SUCCESS, className, moduleCode, maxEnrollment),
                 model);
+    }
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void constructor_nullPerson_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new ClassAddCommand(null);
     }
 
     @Test
