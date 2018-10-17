@@ -1,6 +1,8 @@
 package seedu.address.model.gradebook;
 
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.StorageController;
+import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
  This class includes all necessary validation for gradebook objects.
@@ -11,6 +13,8 @@ public class Gradebook {
     private static final String MESSAGE_ADD_SUCCESS = "Successfully Added! \nModule Code: %1$s"
             + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
     private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
+    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
+
     private String moduleCode;
     private String gradebookComponentName;
     private int gradebookMaxMarks;
@@ -73,6 +77,28 @@ public class Gradebook {
                 gradebookWeightage);
     }
 
+    /**
+     This method checks all validations before adding to Trajectory.
+     */
+    public static CommandResult listGradebookComponent() {
+        int count = 0;
+        int index = 1;
+        StringBuilder sb = new StringBuilder();
+        for (XmlAdaptedGradebook gc: StorageController.getGradebookStorage()) {
+            sb.append(index++ + ") ");
+            sb.append("Module Code: ");
+            sb.append(gc.getModuleCode() + "\n");
+            sb.append("Grade Component Name: ");
+            sb.append(gc.getGradeComponentName() + "\n");
+            sb.append("Maximum Marks: ");
+            sb.append(gc.getGradeComponentMaxMarks() + "\n");
+            sb.append("Weightage: ");
+            sb.append(gc.getGradeComponentWeightage() + "\n");
+            count++;
+        }
+        return new CommandResult("\n" + MESSAGE_LIST_SUCCESS + count + "\n" + sb.toString());
+    }
+
     public String getModuleCode() {
         return this.moduleCode;
     }
@@ -88,6 +114,4 @@ public class Gradebook {
     public int getGradeComponentWeightage() {
         return this.gradebookWeightage;
     }
-
-
 }

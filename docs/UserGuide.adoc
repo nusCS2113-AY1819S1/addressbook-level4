@@ -523,20 +523,16 @@ Examples:
 * `gradebook find c/CS2040C g/Assignment 1` +
 Finds Assignment 1 gradebook component in module CS2040C.
 
-==== List Grade Components : `gradebook list [coming in v1.2]`
+==== List Grade Components : `gradebook list`
 Lists all the grade items in a certain module. +
 Format: `gradebook list'
-
-****
-* Module code must exist.
-****
 
 Examples:
 
 * `gradebook list` +
-Lists all the grade items for the module with module code CS2040C.
+Lists all the grade items found in Trajectory.
 
-==== List Students Grades : `gradebook list students [coming in v1.2]`
+==== List Students Grades : `gradebook list students [coming in v1.3]`
 Lists grades of all students enrolled in the module. +
 Format: `gradebook list students c/MODULE_CODE'
 

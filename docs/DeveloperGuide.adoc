@@ -1774,7 +1774,7 @@ Use case ends.
 
 *Guarantees* :
 
-* TBC
+* NIL
 
 *MSS* :
 
@@ -1788,18 +1788,8 @@ Use case ends.
 * 1a. System detects an error in the entered data.
 +
 ** 1a1. System displays message and format corresponding to error.
-** 1a2. Teacher enters new data.
 +
-Steps 1a1-1a2 are repeated until the data entered is correct.
-+
-Use case resumes from step 2.
-
-* *a. At any time, teacher chooses to cancel listing a grade component.
-+
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
-+
-Use case ends.
+Use case resumes from step 1.
 
 
 [discrete]

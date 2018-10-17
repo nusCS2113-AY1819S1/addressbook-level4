@@ -8,7 +8,6 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  * The API of the GradebookManager component.
  */
 public class GradebookManager {
-    private static final String LIST_MESSAGE_SUCCESS = "Success! List of components in the module:";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
     private static final String FIND_MESSAGE_SUCCESS = "Successfully found!";
@@ -36,14 +35,8 @@ public class GradebookManager {
      */
     public static CommandResult listGradebookComponent () {
         StorageController.retrieveData();
-        StringBuilder sb = new StringBuilder();
-        for (XmlAdaptedGradebook gc: StorageController.getGradebookStorage()) {
-            sb.append("Module Code: ");
-            sb.append(gc.getModuleCode() + "\n");
-            sb.append("Grade Component Name: ");
-            sb.append(gc.getGradeComponentName() + "\n");
-        }
-        return new CommandResult("\n" + LIST_MESSAGE_SUCCESS + "\n" + sb.toString());
+        CommandResult result = Gradebook.listGradebookComponent();
+        return result;
     }
 
     /**
