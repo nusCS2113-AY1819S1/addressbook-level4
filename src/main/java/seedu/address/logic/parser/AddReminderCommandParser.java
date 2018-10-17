@@ -11,7 +11,18 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 
+
+/**
+ * Parses input arguments and creates new AddReminderCommand object.
+ */
+
 public class AddReminderCommandParser implements Parser<AddReminderCommand> {
+
+    /**
+     * Parses the given {@code String} of arguments in the context of AddReminderCommand
+     * and returns an AddReminderCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
 
     public AddReminderCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_TIME, PREFIX_REMINDER_MESSAGE);
