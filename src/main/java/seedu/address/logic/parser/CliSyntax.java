@@ -17,6 +17,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_USERNAME = new Prefix("u/");
     public static final Prefix PREFIX_PASSWORD = new Prefix("p/");
     public static final Prefix PREFIX_NEW_PASSWORD = new Prefix("newp/");
+    public static final Prefix PREFIX_TIME = new Prefix("time/");
+    public static final Prefix PREFIX_REMINDER_MESSAGE = new Prefix("message/");
     // TODO: To add transaction items with quantity
     // public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
 }

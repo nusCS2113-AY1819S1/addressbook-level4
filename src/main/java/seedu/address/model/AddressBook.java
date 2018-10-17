@@ -226,7 +226,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Returns the reminders which are due in the active day.
      * @return reminder list.
      */
-    public ArrayList<Reminder> getDueReminders() {
+    public ArrayList<Reminder> getDueRemindersInActiveDay() {
         final TreeMap<String, Reminder> reminderRecord = salesHistory.getActiveDay().getReminderRecord();
         ArrayList<Reminder> reminders = new ArrayList<>();
 

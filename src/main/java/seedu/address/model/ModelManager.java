@@ -348,11 +348,11 @@ public class ModelManager extends ComponentManager implements Model {
             ClosedShopDayException, DuplicateTransactionException {
         try {
             versionedAddressBook.addTransaction(transaction);
+        } catch (DuplicateTransactionException e) {
+            throw e;
         } catch (InvalidTimeFormatException e) {
             throw e;
         } catch (ClosedShopDayException e) {
-            throw e;
-        } catch (DuplicateTransactionException e) {
             throw e;
         }
     }
@@ -360,7 +360,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException {
         if (!Transaction.isValidTransactionTime(reminder.getTime())) {
-            throw new InvalidTimeFormatException();
+            throw new InvalidTimeFormatException ();
         }
         try {
             versionedAddressBook.addReminderToActiveShopDay(reminder);
@@ -372,8 +372,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ArrayList<Reminder> getDueReminders(ShopDay day) throws InvalidTimeFormatException {
-        return null;
+    public ArrayList<Reminder> getDueRemindersInActiveShopDay() {
+        return versionedAddressBook.getDueRemindersInActiveDay();
     }
 
     @Override
@@ -381,5 +381,3 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.getLastTransaction();
     }
 }
-
-

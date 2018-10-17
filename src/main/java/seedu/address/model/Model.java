@@ -150,7 +150,13 @@ public interface Model {
 
     void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException;
 
-    ArrayList<Reminder> getDueReminders(ShopDay day) throws InvalidTimeFormatException;
+    /**
+     * Returns the reminders due on the current active day.
+     * @return
+     */
+
+    ArrayList<Reminder> getDueRemindersInActiveShopDay();
+
     /**
      * Returns a given day's transaction history
      */
