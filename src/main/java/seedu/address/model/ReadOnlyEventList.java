@@ -19,4 +19,6 @@ public interface ReadOnlyEventList {
 
     void sortByEndTime();
 
+    void sortByDate();
+
 }

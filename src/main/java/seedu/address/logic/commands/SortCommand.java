@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyEventList;
 
 
 /**
@@ -25,6 +24,7 @@ public class SortCommand extends Command {
     public static final String KEY_NAME = "name";
     public static final String KEY_STARTTIME = "starttime";
     public static final String KEY_ENDTIME = "endtime";
+    public static final String KEY_DATE = "date";
 
     private final String key;
 
@@ -42,16 +42,18 @@ public class SortCommand extends Command {
      * @throws CommandException If an error occurs during command execution.
      */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        ReadOnlyEventList events = model.getEventList();
         switch (key) {
         case (KEY_NAME):
-            events.sortByName();
+            model.sortByName();
             break;
         case (KEY_STARTTIME):
-            events.sortByStartTime();
+            model.sortByStartTime();
             break;
         case (KEY_ENDTIME):
-            events.sortByEndTime();
+            model.sortByEndTime();
+            break;
+        case (KEY_DATE):
+            model.sortByDate();
             break;
         default:
             break;

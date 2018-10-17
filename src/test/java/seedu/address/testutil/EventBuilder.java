@@ -3,10 +3,11 @@ package seedu.address.testutil;
 import java.time.LocalDate;
 
 import seedu.address.model.event.Description;
+import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
-
+import seedu.address.model.event.StartTime;
 
 
 /**
@@ -16,21 +17,24 @@ public class EventBuilder {
 
     public static final String DEFAULT_NAME = "CS2113 Meeting";
     public static final String DEFAULT_DESCRIPTION = "Weekly Meetup";
-    public static final String DEFAULT_START_DATE = "2018-10-28";
-    public static final String DEFAULT_END_DATE = "2018-10-29";
+    public static final String DEFAULT_DATE = "2018-10-10";
+    public static final String DEFAULT_START_TIME = "12:00";
+    public static final String DEFAULT_END_TIME = "16:00";
     public static final String DEFAULT_LOCATION = "LT15";
 
     private EventName eventName;
     private Description description;
-    private LocalDate startTime; // date format: "2007-12-03"
-    private LocalDate endTime; // date format: "2007-12-03"
+    private LocalDate date;
+    private StartTime startTime;
+    private EndTime endTime;
     private Location location;
 
     public EventBuilder() {
         eventName = new EventName(DEFAULT_NAME);
         description = new Description(DEFAULT_DESCRIPTION);
-        startTime = LocalDate.parse(DEFAULT_START_DATE);
-        endTime = LocalDate.parse(DEFAULT_END_DATE);
+        date = LocalDate.parse(DEFAULT_DATE);
+        startTime = new StartTime(DEFAULT_START_TIME);
+        endTime = new EndTime(DEFAULT_END_TIME);
         location = new Location(DEFAULT_LOCATION);
     }
 
@@ -63,18 +67,26 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code LocalDate} of the {@code Event} that we are building.
+     * Sets the {@code Address} of the {@code Event} that we are building.
      */
-    public EventBuilder withStartTime(String date) {
-        this.startTime = LocalDate.parse(date);
+    public EventBuilder withDate(String date) {
+        this.date = LocalDate.parse(date);
         return this;
     }
 
     /**
      * Sets the {@code LocalDate} of the {@code Event} that we are building.
      */
-    public EventBuilder withEndTime(String date) {
-        this.endTime = LocalDate.parse(date);
+    public EventBuilder withStartTime(String startTime) {
+        this.startTime = new StartTime(startTime);
+        return this;
+    }
+
+    /**
+     * Sets the {@code LocalDate} of the {@code Event} that we are building.
+     */
+    public EventBuilder withEndTime(String endTime) {
+        this.endTime = new EndTime(endTime);
         return this;
     }
 
@@ -87,7 +99,7 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(eventName, description, startTime, endTime, location);
+        return new Event(eventName, description, date, startTime, endTime, location);
     }
 
 

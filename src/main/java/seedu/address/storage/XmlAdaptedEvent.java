@@ -1,15 +1,23 @@
 package seedu.address.storage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.event.Attendees;
 import seedu.address.model.event.Description;
+import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
+import seedu.address.model.event.StartTime;
 
 
 /**
@@ -23,14 +31,15 @@ public class XmlAdaptedEvent {
     @XmlElement(required = true)
     private String description;
     @XmlElement(required = true)
+    private String date;
+    @XmlElement(required = true)
     private String startTime;
     @XmlElement(required = true)
     private String endTime;
     @XmlElement(required = true)
     private String location;
-
-    //TODO: IMPLEMENT LIST OF ATTENDEES
-    //TODO: CREATE XMLATTENDEES
+    @XmlElement
+    private List<String> attendees = new ArrayList<>();
 
     /* @XmlElement
       private List<XmlAttendees> attendees = new ArrayList<>();*/
@@ -45,15 +54,32 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
-    public XmlAdaptedEvent(String eventName, String description, String startTime, String endTime, String location) {
+    public XmlAdaptedEvent(String eventName, String description, String date,
+                           String startTime, String endTime, String location) {
         this.eventName = eventName;
         this.description = description;
+        this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
-        /*if (attendees != null) {
+        this.attendees = new ArrayList<>();
+    }
+
+    //TODO: Test for this
+    /**
+     * Constructs an {@code XmlAdaptedPerson} with the given person details with attendees.
+     */
+    public XmlAdaptedEvent(String eventName, String description, String date,
+                           String startTime, String endTime, String location, List<String> attendees) {
+        this.eventName = eventName;
+        this.description = description;
+        this.date = date;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.location = location;
+        if (attendees != null) {
             this.attendees = new ArrayList<>(attendees);
-        }*/
+        }
     }
 
     /**
@@ -64,9 +90,13 @@ public class XmlAdaptedEvent {
     public XmlAdaptedEvent(Event source) {
         eventName = source.getEventName().fullName;
         description = source.getDescription().value;
-        startTime = source.getStartTime().toString();
-        endTime = source.getEndTime().toString();
+        date = source.getDate().toString();
+        startTime = source.getStartTime().startTime;
+        endTime = source.getEndTime().endTime;
         location = source.getLocation().value;
+        attendees = source.getAttendees().attendeesSet.stream()
+                .collect(Collectors.toList());
+
         /* attendees = source.getAttendees().stream()
                 .map(XmlAttendees::new)
                 .collect(Collectors.toList());*/
@@ -78,10 +108,10 @@ public class XmlAdaptedEvent {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Event toModelType() throws IllegalValueException {
-        /*final List<Person> eventAttendees = new ArrayList<>();
-        for (XmlAttendees attendee : attendees) {
-            eventAttendees.add(attendee.toModelType());
-        }*/
+        final List<String> eventAttendees = new ArrayList<>();
+        for (String name : attendees) {
+            eventAttendees.add(name);
+        }
 
         if (eventName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -101,16 +131,30 @@ public class XmlAdaptedEvent {
         }
         final Description modelDescription = new Description(description);
 
-        if (startTime == null) {
-            throw new IllegalValueException("Invalid time format");
+        if (date == null) {
+            throw new IllegalValueException("Wrong date format");
         }
-        final LocalDate modelStartTime = LocalDate.parse(startTime);
+
+        final LocalDate modelDate = LocalDate.parse(date);
+
+
+        if (startTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    StartTime.class.getSimpleName()));
+        }
+        if (!StartTime.isValidTime(startTime)) {
+            throw new IllegalValueException(StartTime.MESSAGE_TIME_CONSTRAINTS);
+        }
+        final StartTime modelStartTime = new StartTime(startTime);
 
 
         if (endTime == null) {
-            throw new IllegalValueException("Invalid time format");
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, EndTime.class.getSimpleName()));
         }
-        final LocalDate modelEndTime = LocalDate.parse(endTime);
+        if (!EndTime.isValidTime(endTime)) {
+            throw new IllegalValueException(EndTime.MESSAGE_TIME_CONSTRAINTS);
+        }
+        final EndTime modelEndTime = new EndTime(endTime);
 
 
         if (location == null) {
@@ -122,8 +166,10 @@ public class XmlAdaptedEvent {
         }
         final Location modelLocation = new Location(location);
 
-        //final Set<Person> modelAttendees = new HashSet<>(eventAttendees);
-        return new Event(modelEventName, modelDescription, modelStartTime, modelEndTime, modelLocation);
+        Set<String> attendees = new HashSet<>(eventAttendees);
+        final Attendees modelAttendees = new Attendees(attendees);
+        return new Event(modelEventName, modelDescription, modelDate, modelStartTime,
+                modelEndTime, modelLocation, modelAttendees);
     }
 
     @Override

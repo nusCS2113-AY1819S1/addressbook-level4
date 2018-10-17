@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -12,7 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
 
-
+//@@author: jieliangang
 /**
  * Creates an event in event list.
  */
@@ -25,14 +26,16 @@ public class AddEventCommand extends Command {
             + PREFIX_NAME + "NAME "
             + PREFIX_DESCRIPTION + "DESCRIPTION "
             + PREFIX_LOCATION + "LOCATION "
+            + PREFIX_DATE + "DATE "
             + PREFIX_START_DATE + "START DATE "
             + PREFIX_END_DATE + "END DATE \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "CS2113 Project Meeting "
             + PREFIX_DESCRIPTION + "Weekly Meetup "
             + PREFIX_LOCATION + "LT15 "
-            + PREFIX_START_DATE + "2018-10-28 "
-            + PREFIX_END_DATE + "2018-10-29 ";
+            + PREFIX_DATE + "2018-09-28 "
+            + PREFIX_START_DATE + "12:00 "
+            + PREFIX_END_DATE + "23:59 ";
 
     public static final String MESSAGE_SUCCESS = "New event added: %1$s";
     public static final String MESSAGE_DUPLICATE_EVENT = "This event already exists in the event list";

@@ -20,6 +20,7 @@ public class EventNameTest {
         Assert.assertThrows(IllegalArgumentException.class, () -> new EventName(invalidName));
     }
 
+
     @Test
     public void isValidName() {
         // null name
@@ -34,4 +35,5 @@ public class EventNameTest {
         assertTrue(EventName.isValidName("John's Birthday!!")); // with special characters
         assertTrue(EventName.isValidName("David Roger Jackson Ray Jr 2nd's Birthday")); // long names
     }
+
 }

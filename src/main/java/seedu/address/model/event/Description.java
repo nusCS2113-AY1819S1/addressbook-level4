@@ -7,6 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 /**
  * Represents an Event's description.
  * Guarantees: details are present and not null, field values are validated, immutable.
+ * Description can take any values.
  */
 public class Description {
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS =

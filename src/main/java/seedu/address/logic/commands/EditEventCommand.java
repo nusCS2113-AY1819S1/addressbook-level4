@@ -19,9 +19,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Description;
+import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
+import seedu.address.model.event.StartTime;
 
 /**
  * Edits the details of an existing event in the address book.
@@ -71,11 +73,13 @@ public class EditEventCommand extends Command {
 
         EventName updatedName = editEventDescriptor.getEventName().orElse(eventToEdit.getEventName());
         Description updatedDescription = editEventDescriptor.getDescription().orElse(eventToEdit.getDescription());
-        LocalDate updatedStartTime = editEventDescriptor.getStartTime().orElse(eventToEdit.getStartTime());
-        LocalDate updatedEndTime = editEventDescriptor.getEndTime().orElse(eventToEdit.getEndTime());
+        LocalDate updatedDate = editEventDescriptor.getDate().orElse(eventToEdit.getDate());
+        StartTime updatedStartTime = editEventDescriptor.getStartTime().orElse(eventToEdit.getStartTime());
+        EndTime updatedEndTime = editEventDescriptor.getEndTime().orElse(eventToEdit.getEndTime());
         Location updatedLocation = editEventDescriptor.getLocation().orElse(eventToEdit.getLocation());
 
-        return new Event(updatedName, updatedDescription, updatedStartTime, updatedEndTime, updatedLocation);
+        return new Event(updatedName, updatedDescription, updatedDate,
+                updatedStartTime, updatedEndTime, updatedLocation);
     }
 
     @Override
@@ -125,8 +129,9 @@ public class EditEventCommand extends Command {
     public static class EditEventDescriptor {
         private EventName eventName;
         private Description description;
-        private LocalDate startTime;
-        private LocalDate endTime;
+        private LocalDate date;
+        private StartTime startTime;
+        private EndTime endTime;
         private Location location;
 
         public EditEventDescriptor() {
@@ -167,19 +172,27 @@ public class EditEventCommand extends Command {
             this.description = description;
         }
 
-        public Optional<LocalDate> getStartTime() {
+        public Optional<LocalDate> getDate() {
+            return Optional.ofNullable(date);
+        }
+
+        public void setDate(LocalDate date) {
+            this.date = date;
+        }
+
+        public Optional<StartTime> getStartTime() {
             return Optional.ofNullable(startTime);
         }
 
-        public void setStartTime(LocalDate startTime) {
+        public void setStartTime(StartTime startTime) {
             this.startTime = startTime;
         }
 
-        public Optional<LocalDate> getEndTime() {
+        public Optional<EndTime> getEndTime() {
             return Optional.ofNullable(endTime);
         }
 
-        public void setEndTime(LocalDate endTime) {
+        public void setEndTime(EndTime endTime) {
             this.endTime = endTime;
         }
 

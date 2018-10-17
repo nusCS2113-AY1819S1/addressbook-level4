@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_END_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_LOCATION;
@@ -13,9 +14,11 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddEventCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Description;
+import seedu.address.model.event.EndTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.EventName;
 import seedu.address.model.event.Location;
+import seedu.address.model.event.StartTime;
 
 /**
  * Parses input arguments and creates a new AddEventCommand object
@@ -31,10 +34,10 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
     public AddEventCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_DESCRIPTION,
-                        PREFIX_LOCATION, PREFIX_START_DATE, PREFIX_END_DATE);
+                        PREFIX_DATE, PREFIX_LOCATION, PREFIX_START_DATE, PREFIX_END_DATE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_DESCRIPTION,
-                PREFIX_LOCATION, PREFIX_START_DATE, PREFIX_END_DATE)
+                PREFIX_DATE, PREFIX_LOCATION, PREFIX_START_DATE, PREFIX_END_DATE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddEventCommand.MESSAGE_USAGE));
         }
@@ -42,10 +45,11 @@ public class AddEventCommandParser implements Parser<AddEventCommand> {
         EventName name = ParserUtil.parseEventName(argMultimap.getValue(PREFIX_NAME).get());
         Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
         Location location = ParserUtil.parseLocation(argMultimap.getValue(PREFIX_LOCATION).get());
-        LocalDate startDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_START_DATE).get());
-        LocalDate endDate = ParserUtil.parseDate(argMultimap.getValue(PREFIX_END_DATE).get());
+        LocalDate date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        StartTime startDate = ParserUtil.parseStartTime(argMultimap.getValue(PREFIX_START_DATE).get());
+        EndTime endDate = ParserUtil.parseEndTime(argMultimap.getValue(PREFIX_END_DATE).get());
 
-        Event event = new Event(name, description, startDate, endDate, location);
+        Event event = new Event(name, description, date, startDate, endDate, location);
 
         return new AddEventCommand(event);
     }
