@@ -2,7 +2,6 @@ package seedu.address.model.gradebook;
 
 import java.util.ArrayList;
 
-import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
