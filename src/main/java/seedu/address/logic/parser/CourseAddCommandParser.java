@@ -9,10 +9,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.CourseAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Course;
-
-
-
+import seedu.address.model.course.Course;
 
 /**
  * Parses input arguments and creates a new AddCommand object
