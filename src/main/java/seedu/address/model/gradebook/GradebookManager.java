@@ -19,7 +19,7 @@ public class GradebookManager {
     private static final String MESSAGE_LIST_SUCCESS = "\nNumber of Grade Components Listed: %1$s \n%2$s";
     private static final String DELETE_MESSAGE_SUCCESS = "\nModule Code: %1$s \nGradebook Component: %2$s \n"
             + "Successfully deleted!";
-    private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
+    private static final String DELETE_MESSAGE_FAIL = "\nUnsuccessful Deletion";
 
     private ArrayList<Gradebook> gradebooks = new ArrayList<>();
 
