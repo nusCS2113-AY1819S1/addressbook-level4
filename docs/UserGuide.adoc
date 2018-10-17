@@ -1,3 +1,4 @@
+:product_name : DRINK I/O
 = AddressBook Level 4 - User Guide
 :site-section: UserGuide
 :toc:
@@ -14,11 +15,15 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-W12-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2113T-W12-4`      Since: `Jun 2016`      Licence: `MIT`
+
 
 == Introduction
 
-FrozenBook is for those who are running or are looking to run a small icecream shop business. It is a comprehensive integrated solution for small icecream shop businesses, merging cashier sales with inventory tracking while providing financial tools. It allows you to spend less time fiddling with different kinds of software and lets you focus on the important things - providing icecream to people. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+{product_name} is a desktop application that helps you to manage your drinks distribution company. You can use <product name> to keep track of your inventory, analyse your company’s sales performance and set reminders to help you import more goods should their stocks fall low. <product name> is optimised for Command Line Interface (CLI), allowing you to _____do your work____ faster than traditional Graphical User Interface (GUI) apps, while retaining the benefits of a GUI.
+
+This user guide provides comprehensive documentation on the {product_name} setup process, the commands you can use and ____. Choose a topic from the Table of Contents (link) to find answers, get instructions and learn to improve your workflow with {product_name}.
+
 
 == Quick Start
 
@@ -41,120 +46,208 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
+== Getting Started
+
+=== Logging in
+=== Logging out
+
+== Types of Users
+=== Stocktaker
+=== Accountant
+=== Administrator
+
+== Managing Your {product_name} Account
+
+=== Changing your password
+=== Create additional account
+
+== Managing Your Inventory
+
+=== Adding new items
+=== Searching for an item
+=== Viewing all items in inventory
+=== Viewing item details
+=== Updating item details
+==== Updating item name
+==== Updating cost price
+==== Updating sales price
+
+== Managing Transactions
+
+=== Creating an import transaction [batches]
+=== Creating a sales transaction
+
+== Analysing Sales Performance
+=== Viewing overall cost, revenue and profit
+=== Filtering popular items
+=== Viewing an item’s transactions
+=== Viewing an item’s cost, revenue and profit
+
+== Setting Reminders
+
 == Features
 
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PRICE`, `p/PRICE n/NAME` is also acceptable.
+* Words in UPPER_CASE are the parameters supplied by users
+* Use underscore for spaces
+* There is a default order for command parameters, but parameters can be supplied in any order if tags are specified (e.g. t/ for item, c/ for characteristic)
+* Parameters in square bracket are optional
 ====
+=== Global Command
+==== Login in Program:(more details about command box login will be release soon)
+. At the login page, enter user and password,
+. Clicked Login Button
 
-=== Viewing help : `help`
+==== Exiting Program: `logout`
+Return user to the login page.
+Format: `logout`
 
+==== Exiting Program: `exit`
+Exits program.
+Format: `exit`
+
+==== Viewing help : `help`
+View help for respective user
 Format: `help`
 
-=== Adding a transaction: 'add'
+==== Change password: `changePassword`
+Change password of the current account
+Format: `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
+[NOTE]
+====
+This enable user to change their password after manager create a default account.
+====
 
-Adds the transaction of a food item +
-Format: `add FOOD_ITEM_NAME [q/QUANTITY]`
+==== View stock numbers of an drink based on name: `view`
 
-****
-* Adds a transaction of the specified `FOOD_ITEM_NAME`
-* If quantity is not specified, it is default set to 1
-* Multiple items can be added in the same transaction by delimiting them with a comma
-****
+Format: `view [-d] [n/Drink_NAME] [-b]`
 
+[NOTE]
+====
+The default view is for a type of drink.
+The default order will be a alphabetical order.
+When command -d is added, the list will show an decreasing alphabetical order.
+When command -b is added, the list will show a list based on individually batch.
+====
+
+==== View stock numbers of an drink based on quantity: `quantity`
+Displays specifically the quantities left of the ingredient desired.
+	Format: `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
+[NOTE]
+====
+The default view is for a type of drink.
+The default order will be a increasing order whereby the least number of drink will be showed first
+When command -d is added, the list will show an decreasing order.
+When n/Drink Name is added, the list will only show the quantity related to the name.
+When command -b is added, the list will show a list based on individually batch.
+When t/tag is added, it will show a list that has all the drinks with that particular tag.
+====
+
+==== View expiry dates of batches of an ingredient: `importDate`
+Displays the import dates of batches of the ingredient desired.
+	Format: `importDate [-d] INGREDIENT_NAME`
+
+[NOTE]
+====
+The default order will be a increasing order whereby the earliest importing date will be showed first
+When command -d is added, the list will show an decreasing order
+====
+
+=== Manager
+
+==== Viewing Help: `help`
+Shows available commands with brief description of what can manager do.
+Format: `help`
+
+==== Add new drink items: `addItem`
+Add a new food item to the food item manager for sales.
+	Format: `addItem n/DrinkItem p/DEFAULT_SELLING_PRICE`
+[NOTE]
+====
+All the drink item added will be in a predefined list. As such, stock taker only able to add batches that is in this predefined list.
+====
+
+==== View history of actions: `history`
+Displays list of actions done by user over a specified time frame.
+	Format: `history START_DATE END_DATE`
+[NOTE]
+====
+Start date must be earlier than end date
+====
+
+==== Create account for other user : `createAccount`
+Create a account with different authentication right.
+Format:`createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+
+==== Delete account of other user : `deleteAccount`
+Delete a account.
+Format: `deleteAccount u/USER_NAME`
+
+=== Stock Taker
+
+==== Viewing Help: `help`
+Shows available commands with brief description of what can stock taker do.
+Format: `help`
+
+==== Import transaction of a drink item: `add`
+Records import of a drink item.
+	Format: `add n/DRINK_NAME  d/DATE_OF_IMPORT  q/QUANTITY_IMPORT p/TOTAL_IMPORT_PRICE`
 Examples:
 
-* `add Vanilla Icecream`
-* `add Vanilla Icecream q/2, Chocolate Icecream q/5`
-//tianhang 10/09/18
-=== Adding a food item: `additem`
+* `Add n/coca cola d/10/06/18 q/12 p/345.68`
 
-Adds a food item to the drink item manager +
-Format: `additem n/DRINK_ITEM p/DEFAULT_SELLING_PRICE`
+[NOTE]
+====
+DRINK NAME is predefined by manager, so alert message will appear if drink name are not in the predefined list. However, drink name will be case-insensitive.
+====
 
+==== Sale transaction of a drink item: `sell`
+Record sale of a drink item
+           Format: `sell n/DRINK_NAME  d/DATE_SOLD  q/QUANTITY_SOLD p/TOTAL_SELLING_PRICE`
 Examples:
 
-* `additem n/coca cola p/2.50`
-* `additem n/sprite p/34`
-#UserCommand
+* `Sell n/coca cola d/12/06/18 q/15 p/758`
 
-=== Change password: `changePassword`
-It enable user to change current account password
-Format: `changePassword o/OLDPASSWORD n/NEWPASSWORD`
+[NOTE]
+====
+* DRINK NAME is predefined by manager, so alert message will appear if drink name are not in the predefined list
+* Quantity sold cannot be more than stock. Or else a warning message will be shown.
+====
 
-Examples:
+=== Accountant
 
-* `changePassword o/123 n/zzmsqsm`
-##MANAGER
+==== Viewing Help: `help`
+Shows available commands with brief description of what can accountant do.
+Format: `help`
 
-=== Change password: `createAccount`
-It enable manager to change additional user account
-Format: `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+==== Get the total profit of the shop over specified periods: `profit`
+View the total profit earned in time periods of a day, 7 days and 30 days.
+	Format: `profit`
+[NOTE]
+====
+To view profit earned up to now in the current day, no parameters are used. i.e. just “profit”
+To view profit earned in last 7 days, append “-w”
+To view profit earned in last 30 days, append “-m”
+====
 
+==== Get the quantities of each drink item sold over specified periods: `sales`
+View the sales number of each drink item in a period specified by the starting date and ending date.
+	Format: `sales STARTING_DATE ENDING_DATE`
 
-Examples:
+==== Get the trend of cost of every ingredient over specified periods: `viewcost`
+View the variation tendency of the cost of every ingredient in a period specified by the starting date and ending date.
+	Format: `viewcost STARTING_DATE ENDING_DATE`
 
-* `createAccount u/stockTaker1 p/123 a/STOCK_TAKER`
+==== Update the current cost of certain ingredients: `editcost`
+Update the cost of ingredients every time they change to keep track.
+	Format: `editcost INGREDIENT_NAME UNIT_COST`
 
-##STOCK TAKER
+=== Original command
+Keep for reference of syntax
 
-=== Sell of item: `sell`
-It enable stock taker to record the sell of item
-Format: `sell n/NAME d/DATE q/QUANTITY p/TOTAL_REVENUE`
-
-
-Examples:
-
-* `sell n/coca cola d/10/09/18 q/34 p/345.60`
-//tianhang 10/09/18
-=== Listing all food items : `viewall`
-
-Shows a list of all food items in the food item manager. +
-Format: `viewall`
-
-=== Editing a food item's price : `editprice`
-
-Edits the price of a existing food item in the food item manager. +
-Format: `editprice n/FOOD_ITEM_NAME p/PRICE`
-
-Examples:
-
-* `editprice n/Vanilla Icecream p/3.00` +
-Edits the price of Vanilla Icecream to $3.00
-
-=== Viewing stock numbers of an ingredient : `view -q`
-
-Displays specifically the quantity left of the desired ingredient +
-Format: `view -q INGREDIENT_NAME`
-
-Examples:
-
-* `view -q Vanilla Extract`
-
-=== Viewing recipe of a food item : `view -r`
-
-Displays specifically the recipe of the desired food item +
-Format: `view -r FOOD_ITEM_NAME`
-
-Examples:
-
-* `view -q Vanilla Icecream`
-
-=== Deleting a ingredient : `delete`
-
-Deletes the specified ingredient from the address book. +
-Format: `delete INGREDIENT_NAME`
-
-Examples:
-
-* `delete Vanilla Extract`
-
-=== Listing entered commands : `history`
+==== Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
@@ -165,7 +258,7 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 ====
 
 // tag::undoredo[]
-=== Undoing previous command : `undo`
+==== Undoing previous command : `undo`
 
 <TO BE EDITED FURTHER> +
 Restores the FrozenBook to the state before the previous _undoable_ command was executed. +
@@ -192,7 +285,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo`
+==== Redoing the previously undone command : `redo`
 
 <TO BE EDITED FURTHER> +
 Reverses the most recent `undo` command. +
@@ -216,23 +309,23 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear`
+==== Clearing all entries : `clear`
 
 Clears all data from the FrozenBook. +
 Format: `clear`
 
-=== Exiting the program : `exit`
+==== Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
 
-=== Saving the data
+==== Saving the data
 
 FrozenBook data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+==== Encrypting data files `[coming in v2.0]`
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
@@ -243,14 +336,32 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
 
 == Command Summary
+=== Common Command
+* *logout* : `logout`
+* *exit* : `exit`
+* *help* : `help`
+* *change password* : `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
+* *view stock by Name* :` view [-d] [n/Drink_NAME] [-b]`
+* *view stock by quantity* : `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
+* *view stock by import date* : `importDate [-d] INGREDIENT_NAME`
 
-* *Add* : `add FOOD_ITEM_NAME [q/QUANTITY]`
-* *Add item* : `additem n/FOOD_ITEM_NAME r/RECIPE_NAME p/PRICE`
-* *View all* : `viewall`
-* *Edit price* : `editprice n/FOOD_ITEM_NAME p/PRICE`
-* *View stock quantity* : `view -q INGREDIENT_NAME`
-* *View recipe* : `view -r FOOD_ITEM_NAME`
-* *Delete ingredient* : `delete INGREDIENT_NAME`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+=== Manager
+
+* *add new item* : `addItem n/DrinkItem p/DEFAULT_SELLING_PRICE`
+* *view history* : `history START_DATE END_DATE`
+* *create account* : `createAccount u/USER_NAME p/PASSWORD a/AUTHENTICATION_LEVEL`
+* *delete account* : `deleteAccount u/USER_NAME`
+
+=== Stock Taker
+
+* *add new batch of good* : `add n/DRINK_NAME  d/DATE_OF_IMPORT  q/QUANTITY_IMPORT p/TOTAL_IMPORT_PRICE`
+* *record Sale transaction of a drink item* : `sell n/DRINK_NAME  d/DATE_SOLD  q/QUANTITY_SOLD p/TOTAL_SELLING_PRICE`
+
+=== Accountant
+
+* *total profit* : `profit`
+* *sale of item* : `sales`
+* *cost of item* : `costs`
+* *view cost trend* : `viewcost`
+* *edit current cost* : `editcost`
+
