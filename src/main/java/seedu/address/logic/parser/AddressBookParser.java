@@ -113,7 +113,7 @@ public class AddressBookParser {
             return new AddSkillCommandParser().parse(arguments);
 
         case AddSkillLevelCommand.COMMAND_WORD:
-            return new AddSkillLevelCommand();
+            return new AddSkillLevelCommandParser().parse(arguments);
 
         case ClearSearchHistoryCommand.COMMAND_WORD:
             return new ClearSearchHistoryCommand();
