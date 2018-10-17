@@ -8,6 +8,7 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
 //@@xllx1
@@ -23,7 +24,7 @@ public class SetAdminCommand extends Command {
         + PREFIX_ADMIN_SET + "SET/REVERT "
         + "Example: " + COMMAND_WORD + " "
         + PREFIX_USER_NAME + "john"
-        + PREFIX_ADMIN_SET + "0";
+        + PREFIX_ADMIN_SET + "true  ";
 
     public static final String MESSAGE_SUCCESS = "%1$s now is %s an admin";
     public static final String MESSAGE_INVALID_USER = "This user does not exist.";
@@ -48,22 +49,22 @@ public class SetAdminCommand extends Command {
         String isAdmin = "";
         User userToSet;
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            try {
-                userToSet = unitOfWork.getUserRepository().getUserByUsername(userNametoSetAdmin);
-                if (setAdmin && userToSet.isAdmin()) {
-                    throw new CommandException(MESSAGE_DUPLICATE_SET);
-                } else if (!setAdmin && !userToSet.isAdmin()) {
-                    throw new CommandException(MESSAGE_DUPLICATE_REVERT);
-                } else {
-                    userToSet.setAdmin(!userToSet.isAdmin());
-                }
-                if (!setAdmin) {
-                    isAdmin = "not";
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-                throw new CommandException(MESSAGE_INVALID_USER);
+            userToSet = unitOfWork.getUserRepository().getUserByUsername(userNametoSetAdmin);
+            if (setAdmin && userToSet.isAdmin()) {
+                throw new CommandException(MESSAGE_DUPLICATE_SET);
+            } else if (!setAdmin && !userToSet.isAdmin()) {
+                throw new CommandException(MESSAGE_DUPLICATE_REVERT);
+            } else {
+                userToSet.setAdmin(!userToSet.isAdmin());
+                unitOfWork.commit();
             }
+            if (!setAdmin) {
+                isAdmin = "not";
+            }
+        } catch (EntityDoesNotExistException e) {
+            throw new CommandException(MESSAGE_INVALID_USER);
+        } catch (CommandException e) {
+            throw e;
         } catch (Exception e) {
             e.printStackTrace();
         }
