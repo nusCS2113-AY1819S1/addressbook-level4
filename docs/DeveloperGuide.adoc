@@ -151,7 +151,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `BookInventoryChangedEvent` when the Book Inventory data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -191,7 +191,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/quantity/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `BookInventoryParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a book) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -212,12 +212,12 @@ image::ModelClassDiagram.png[width="800"]
 The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Book Inventory data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
+As a more OOP model, we can store a `Tag` list in `Book Inventory`, which `Person` can reference. This would allow `Book Inventory` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassBetterOopDiagram.png[width="800"]
 
@@ -232,12 +232,12 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Book Inventory data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.bookinventory.commons` package.
 
 == Implementation
 
@@ -247,54 +247,54 @@ This section describes some noteworthy details on how certain features are imple
 === Undo/Redo feature
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+The undo/redo mechanism is facilitated by `VersionedBookInventory`.
+It extends `BookInventory` with an undo/redo history, stored internally as an `bookInventoryStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` -- Saves the current quantity book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous quantity book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone quantity book state from its history.
+* `VersionedBookInventory#commit()` -- Saves the current quantity book state in its history.
+* `VersionedBookInventory#undo()` -- Restores the previous quantity book state from its history.
+* `VersionedBookInventory#redo()` -- Restores a previously undone quantity book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitBookInventory()`, `Model#undoBookInventory()` and `Model#redoBookInventory()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial quantity book state, and the `currentStatePointer` pointing to that single quantity book state.
+Step 1. The user launches the application for the first time. The `VersionedBookInventory` will be initialized with the initial quantity book state, and the `currentStatePointer` pointing to that single quantity book state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th book in the quantity book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the quantity book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted quantity book state.
+Step 2. The user executes `delete 5` command to delete the 5th book in the quantity book. The `delete` command calls `Model#commitBookInventory()`, causing the modified state of the quantity book after the `delete 5` command executes to be saved in the `bookInventoryStateList`, and the `currentStatePointer` is shifted to the newly inserted quantity book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new book. The `add` command also calls `Model#commitAddressBook()`, causing another modified quantity book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new book. The `add` command also calls `Model#commitBookInventory()`, causing another modified quantity book state to be saved into the `bookInventoryStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the quantity book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitBookInventory()`, so the quantity book state will not be saved into the `bookInventoryStateList`.
 
-Step 4. The user now decides that adding the book was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous quantity book state, and restores the quantity book to that state.
+Step 4. The user now decides that adding the book was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoBookInventory()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous quantity book state, and restores the quantity book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial quantity book state, then there are no previous quantity book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial quantity book state, then there are no previous quantity book states to restore. The `undo` command uses `Model#canUndoBookInventory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the quantity book to that state.
+The `redo` command does the opposite -- it calls `Model#redoBookInventory()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the quantity book to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest quantity book state, then there are no undone quantity book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `bookInventoryStateList.size() - 1`, pointing to the latest quantity book state, then there are no undone quantity book states to restore. The `redo` command uses `Model#canRedoBookInventory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the quantity book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the quantity book, such as `list`, will usually not call `Model#commitBookInventory()`, `Model#undoBookInventory()` or `Model#redoBookInventory()`. Thus, the `BookInventoryStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all quantity book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitBookInventory()`. Since the `currentStatePointer` is not pointing at the end of the `BookInventoryStateList`, all quantity book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -317,7 +317,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 * **Alternative 1 (current choice):** Use a list to store the history of quantity book states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedBookInventory`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
@@ -615,7 +615,7 @@ Here are the steps to create a new release.
 
 === Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
+A project often depends on third-party libraries. For example, Book Inventory depends on the http://wiki.fasterxml.com/JacksonHome[Jackson library] for XML parsing. Managing these _dependencies_ can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives. +
 a. Include those libraries in the repo (this bloats the repo size) +
 b. Require developers to download those libraries manually (this creates extra work for developers)
 
@@ -647,9 +647,9 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 ****
 * Hints
 ** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/quantity/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/quantity/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/quantity/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
+** link:{repoURL}/src/main/java/seedu/quantity/logic/parser/BookInventoryParser.java[`BookInventoryParser`] is responsible for analyzing command words.
 * Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/quantity/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}/src/main/java/seedu/quantity/logic/parser/BookInventoryParser.java[`BookInventoryParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
 ** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
@@ -667,12 +667,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/quantity/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/quantity/model/AddressBook.java[`AddressBook`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu/quantity/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/quantity/model/BookInventory.java[`BookInventory`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/quantity/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/quantity/model/book/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/quantity/model/AddressBook.java[`AddressBook`] allows you to update a book, and link:{repoURL}/src/main/java/seedu/quantity/model/book/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/quantity/model/BookInventory.java[`BookInventory`] and link:{repoURL}/src/main/java/seedu/quantity/model/book/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/quantity/model/BookInventory.java[`BookInventory`] allows you to update a book, and link:{repoURL}/src/main/java/seedu/quantity/model/book/Person.java[`Person`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/quantity/model/AddressBook.java[`AddressBook`]. Loop through each book, and remove the `tag` from each book.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/quantity/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/quantity/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/quantity/model/BookInventory.java[`BookInventory`]. Loop through each book, and remove the `tag` from each book.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/quantity/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/quantity/model/ModelManager.java[`ModelManager`] should call `BookInventory#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****
@@ -725,7 +725,7 @@ image::getting-started-ui-result-after.png[width="200"]
 ** Modify link:{repoURL}/src/main/java/seedu/quantity/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
+*** The system tests link:{repoURL}/src/test/java/systemtests/BookInventorySystemTest.java[`BookInventorySystemTest#assertCommandBoxShowsDefaultStyle() and BookInventorySystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
@@ -746,9 +746,9 @@ image::getting-started-ui-status-after.png[width="500"]
 ** link:{repoURL}/src/main/java/seedu/quantity/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the quantity book is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/quantity/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of books when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/quantity/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of books whenever there are new changes to the addressbook.
+** Use link:{repoURL}/src/main/java/seedu/quantity/ui/StatusBarFooter.java[`StatusBarFooter#handleBookInventoryChangedEvent(BookInventoryChangedEvent)`] to update the number of books whenever there are new changes to the BookInventory.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of books status bar.
+** For system tests, modify link:{repoURL}/src/test/java/systemtests/BookInventorySystemTest.java[`BookInventorySystemTest`] to also verify the new total number of books status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
 
@@ -760,12 +760,12 @@ image::getting-started-ui-status-after.png[width="500"]
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the quantity book can be saved in a fixed temporary location.
+. Add a new method `backupBookInventory(ReadOnlyBookInventory)`, so that the quantity book can be saved in a fixed temporary location.
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/quantity/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/quantity/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/quantity/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
+** Add the API method in link:{repoURL}/src/main/java/seedu/quantity/storage/BookInventoryStorage.java[`BookInventoryStorage`] interface.
+** Implement the logic in link:{repoURL}/src/main/java/seedu/quantity/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/quantity/storage/XmlBookInventoryStorage.java[`XmlBookInventoryStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -775,7 +775,7 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 
 By creating this command, you will get a chance to learn how to implement a feature end-to-end, touching all major components of the app.
 
-*Scenario:* You are a software maintainer for `addressbook`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
+*Scenario:* You are a software maintainer for `BookInventory`, as the former developer team has moved on to new projects. The current users of your application have a list of new feature requests that they hope the software will eventually have. The most popular request is to allow adding additional comments/notes about a particular contact, by providing a flexible `remark` field for each contact, rather than relying on tags alone. After designing the specification for the `remark` command, you are convinced that this feature is worth implementing. Your job is to implement the `remark` command.
 
 ==== Description
 Edits the remark for a book specified in the `INDEX`. +
@@ -796,12 +796,12 @@ Let's start by teaching the application how to parse a `remark` command. We will
 **Main:**
 
 . Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/quantity/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/quantity/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
+. Modify link:{repoURL}/src/main/java/seedu/quantity/logic/parser/BookInventoryParser.java[`BookInventoryParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/quantity/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}/src/test/java/seedu/quantity/logic/parser/BookInventoryParserTest.java[`BookInventoryParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -810,14 +810,14 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/quantity/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}/src/main/java/seedu/quantity/logic/parser/BookInventoryParser.java[`BookInventoryParser`] to use the newly implemented `RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/quantity/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}/src/test/java/seedu/quantity/logic/parser/BookInventoryParserTest.java[`BookInventoryParserTest`] to test that the correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
 Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/quantity/ui/PersonCard.java[`PersonCard`] s to display a remark for each book later.
@@ -861,7 +861,7 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 **Tests:**
 
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsBookInventory.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidPersonBookInventory.xml`, `typicalPersonsBookInventory.xml`, `validBookInventory.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
 ===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
 Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/quantity/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/quantity/model/book/Person.java[`Person`].
@@ -968,7 +968,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `BookInventory` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete book
@@ -976,9 +976,9 @@ _{More to be added}_
 *MSS*
 
 1.  User requests to list books
-2.  AddressBook shows a list of books
+2.  BookInventory shows a list of books
 3.  User requests to delete a specific book in the list
-4.  AddressBook deletes the book
+4.  BookInventory deletes the book
 +
 Use case ends.
 
@@ -992,7 +992,7 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. BookInventory shows an error message.
 +
 Use case resumes at step 2.
 
