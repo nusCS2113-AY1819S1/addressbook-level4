@@ -11,7 +11,7 @@ import seedu.address.model.Model;
  */
 public class ListDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "listDistributor";
+    public static final String COMMAND_WORD = "listDistributors";
 
     public static final String MESSAGE_SUCCESS = "Listed all distributors";
 

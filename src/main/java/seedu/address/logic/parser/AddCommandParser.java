@@ -12,6 +12,9 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.distributor.Distributor;
+import seedu.address.model.distributor.DistributorName;
+import seedu.address.model.distributor.DistributorPhone;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -41,13 +44,16 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_SERIAL_NR).get());
-        Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_DISTRIBUTOR).get());
+        DistributorName distname = ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DISTRIBUTOR).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_PRODUCT_INFO).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Product product = new Product(name, phone, email, address, tagList);
+        DistributorPhone distphone = new DistributorPhone("00000000");
 
-        return new AddCommand(product);
+        Product product = new Product(name, phone, distname, address, tagList);
+        Distributor distributor = new Distributor(distname, distphone);
+
+        return new AddCommand(product, distributor);
 
     }
 

@@ -22,7 +22,7 @@ public class DistributorPhone {
      * @param distphone A valid phone number.
      */
     public DistributorPhone(String distphone) {
-        requireNonNull(distphone);
+        //requireNonNull(distphone);
         checkArgument(isValidPhone(distphone), MESSAGE_PHONE_CONSTRAINTS);
         value = distphone;
     }

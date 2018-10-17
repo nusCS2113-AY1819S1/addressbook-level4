@@ -37,7 +37,7 @@ public class DeleteDistributorCommand extends Command {
         List<Distributor> lastShownList = model.getFilteredDistributorList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DIST_DISPLAYED_INDEX);
         }
 
         Distributor distributorToDelete = lastShownList.get(targetIndex.getZeroBased());

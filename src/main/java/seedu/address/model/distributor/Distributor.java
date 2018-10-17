@@ -15,10 +15,10 @@ public class Distributor {
     private final DistributorPhone distphone;
 
     /**
-     * Every field must be present and not null.
+     * Only name must be present and not null.
      */
     public Distributor(DistributorName distname, DistributorPhone distphone) {
-        requireAllNonNull(distname, distphone);
+        requireAllNonNull(distname);
         this.distname = distname;
         this.distphone = distphone;
     }

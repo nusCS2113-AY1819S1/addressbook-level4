@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -28,7 +29,7 @@ public class XmlAdaptedProduct {
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
-    private String email;
+    private String distname;
     @XmlElement(required = true)
     private String address;
 
@@ -44,10 +45,10 @@ public class XmlAdaptedProduct {
     /**
      * Constructs an {@code XmlAdaptedProduct} with the given product details.
      */
-    public XmlAdaptedProduct(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedProduct(String name, String phone, String distname, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
-        this.email = email;
+        this.distname = distname;
         this.address = address;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -62,7 +63,7 @@ public class XmlAdaptedProduct {
     public XmlAdaptedProduct(Product source) {
         name = source.getName().fullName;
         phone = source.getSerialNumber().value;
-        email = source.getDistributor().value;
+        distname = source.getDistributor().fullDistName;
         address = source.getProductInfo().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -96,13 +97,13 @@ public class XmlAdaptedProduct {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
+        if (distname == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
+        if (!DistributorName.isValidName(distname)) {
+            throw new IllegalValueException(DistributorName.MESSAGE_NAME_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final DistributorName modelDistName = new DistributorName(distname);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -113,7 +114,7 @@ public class XmlAdaptedProduct {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Product(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Product(modelName, modelPhone, modelDistName, modelAddress, modelTags);
     }
 
     @Override
@@ -129,7 +130,7 @@ public class XmlAdaptedProduct {
         XmlAdaptedProduct otherPerson = (XmlAdaptedProduct) other;
         return Objects.equals(name, otherPerson.name)
                 && Objects.equals(phone, otherPerson.phone)
-                && Objects.equals(email, otherPerson.email)
+                && Objects.equals(distname, otherPerson.distname)
                 && Objects.equals(address, otherPerson.address)
                 && tagged.equals(otherPerson.tagged);
     }

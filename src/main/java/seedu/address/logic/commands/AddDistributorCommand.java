@@ -29,7 +29,7 @@ public class AddDistributorCommand extends Command {
             + PREFIX_DIST_PHONE + "60123456 ";
 
     public static final String MESSAGE_SUCCESS = "New distributor added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This distributor already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR = "This distributor already exists in the address book";
 
     private final Distributor toAdd;
 
@@ -46,7 +46,7 @@ public class AddDistributorCommand extends Command {
         requireNonNull(model);
 
         if (model.hasDistributor(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_DISTRIBUTOR);
         }
 
         model.addDistributor(toAdd);

@@ -36,7 +36,7 @@ public class EditDistributorCommand extends Command {
 
     public static final String MESSAGE_EDIT_DISTRIBUTOR_SUCCESS = "Edited Distributor: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This distributor already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR = "This distributor already exists in the address book.";
     private final Index index;
     private final EditDistributorDescriptor editDistributorDescriptor;
     /**
@@ -57,14 +57,14 @@ public class EditDistributorCommand extends Command {
         List<Distributor> lastShownList = model.getFilteredDistributorList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DIST_DISPLAYED_INDEX);
         }
 
         Distributor distributorToEdit = lastShownList.get(index.getZeroBased());
         Distributor editedDistributor = createEditedDistributor(distributorToEdit, editDistributorDescriptor);
 
         if (!distributorToEdit.isSameDistributor(editedDistributor) && model.hasDistributor(editedDistributor)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_DISTRIBUTOR);
         }
 
         model.updateDistributor(distributorToEdit, editedDistributor);
