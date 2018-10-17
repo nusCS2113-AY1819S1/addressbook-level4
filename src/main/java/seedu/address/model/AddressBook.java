@@ -15,6 +15,7 @@ import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatExcep
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
@@ -201,6 +202,30 @@ public class AddressBook implements ReadOnlyAddressBook {
         return lastTransaction;
     }
 
+    /**
+     * This method adds a reminder to the active shop day.
+     * @param reminder
+     * @throws InvalidTimeFormatException
+     */
+    public void addReminderToActiveShopDay(Reminder reminder) throws InvalidTimeFormatException,
+            DuplicateReminderException {
+
+        if (!Transaction.isValidTransactionTime(reminder.getTime())) {
+            throw new InvalidTimeFormatException();
+        }
+
+        try {
+            salesHistory.getActiveDay().addReminder(reminder);
+        } catch (DuplicateReminderException e) {
+            throw e;
+        }
+
+    }
+
+    /**
+     * Returns the reminders which are due in the active day.
+     * @return reminder list.
+     */
     public ArrayList<Reminder> getDueReminders() {
         final TreeMap<String, Reminder> reminderRecord = salesHistory.getActiveDay().getReminderRecord();
         ArrayList<Reminder> reminders = new ArrayList<>();
