@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "The Five People You Meet In Heaven "
-            + PREFIX_ISBN + "978-0-7868-6871-1 "
+            + PREFIX_ISBN + "978-3-16-148410-0 "
             + PREFIX_PRICE + "19.99 "
             + PREFIX_COST + "15.00 "
             + PREFIX_QUANTITY + "50 "

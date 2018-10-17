@@ -22,7 +22,7 @@ public class RequestCommand extends CommandSecondary {
             + PREFIX_QUANTITY + "QUANTITY "
             + PREFIX_EMAIL + "EMAIL "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_ISBN + "97865432214 "
+            + PREFIX_ISBN + "9783161484100 "
             + PREFIX_QUANTITY + "42 "
             + PREFIX_EMAIL + "johnd@example.com ";
 
