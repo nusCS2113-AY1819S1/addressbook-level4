@@ -137,21 +137,28 @@ _{explain how the user can enable/disable data encryption}_
 // tag::authentication[]
 === User Authentication
 
-==== Create new user : `create`
+==== Register new user : `register`
 
 Creates a new user account in the application. +
-Format: `create u/USERNAME p/PASSWORD`
-e.g. `create u/John p/pass`
+Format: `register u/USERNAME p/PASSWORD` +
+e.g. `register u/John p/pass`
 
 ==== Login : `login`
 
 Logs the user into the application. +
-Format: `login u/USERNAME p/PASSWORD`
+Format: `login u/USERNAME p/PASSWORD` +
+e.g. `login u/John p/pass`
 
 ==== Logout: `logout`
 
 Logs the user out of the application. +
 Format: `logout`
+
+==== Deregister: `deregister`
+
+Deregister the user account in the application. +
+Format: `deregister u/USERNAME p/PASSWORD` +
+e.g. `deregister u/John p/pass`
 
 // end::authentication[]
 

@@ -13,7 +13,7 @@ import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.ChangeUserPasswordCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.CreateUserCommand;
+import seedu.address.logic.commands.RegisterUserCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.DeleteDistributorsCommand;
 import seedu.address.logic.commands.DeleteUserCommand;
@@ -135,8 +135,8 @@ public class AddressBookParser {
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
 
-        case CreateUserCommand.COMMAND_WORD:
-            return new CreateUserCommandParser().parse(arguments);
+        case RegisterUserCommand.COMMAND_WORD:
+            return new RegisterUserCommandParser().parse(arguments);
 
         case DeleteUserCommand.COMMAND_WORD:
             return new DeleteUserCommandParser().parse(arguments);

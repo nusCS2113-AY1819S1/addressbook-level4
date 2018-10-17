@@ -6,35 +6,35 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.CreateUserCommand;
+import seedu.address.logic.commands.RegisterUserCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 
 /**
- * Parses input arguments and creates a new CreateUserCommand object
+ * Parses input arguments and creates a new RegisterUserCommand object
  */
-public class CreateUserCommandParser implements Parser<CreateUserCommand> {
+public class RegisterUserCommandParser implements Parser<RegisterUserCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the CreateUserCommand
-     * and returns an CreateUserCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the RegisterUserCommand
+     * and returns an RegisterUserCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public CreateUserCommand parse(String args) throws ParseException {
+    public RegisterUserCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_PASSWORD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME, PREFIX_PASSWORD)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateUserCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterUserCommand.MESSAGE_USAGE));
         }
 
         Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
         Password password = ParserUtil.parsePassword(argMultimap.getValue(PREFIX_PASSWORD).get());
 
         User user = new User(username, password);
-        return new CreateUserCommand(user);
+        return new RegisterUserCommand(user);
     }
 
     /**
