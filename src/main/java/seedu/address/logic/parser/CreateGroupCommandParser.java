@@ -41,7 +41,6 @@ public class CreateGroupCommandParser implements Parser<CreateGroupCommand> {
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Group group = new Group(groupName, groupLocation, tagList);
-
         return new CreateGroupCommand(group);
     }
 

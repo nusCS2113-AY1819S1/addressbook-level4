@@ -7,12 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddScriptCommand;
 import seedu.address.logic.commands.AddTestMarksCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DistributeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditTestMarksCommand;
 import seedu.address.logic.commands.EmailCommand;
@@ -68,6 +70,10 @@ public class AddressBookParser {
         case CreateGroupCommand.COMMAND_WORD_2:
             return new CreateGroupCommandParser().parse(arguments);
 
+        case AddGroupCommand.COMMAND_WORD:
+        case AddGroupCommand.COMMAND_WORD_2:
+            return new AddGroupCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD_2:
             return new EditCommandParser().parse(arguments);
@@ -95,6 +101,10 @@ public class AddressBookParser {
         case EmailCommand.COMMAND_WORD:
         case EmailCommand.COMMAND_WORD_2:
             return new EmailCommandParser().parse(arguments);
+
+        case DistributeCommand.COMMAND_WORD:
+        case DistributeCommand.COMMAND_WORD_2:
+            return new DistributeCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
         case ListCommand.COMMAND_WORD_2:

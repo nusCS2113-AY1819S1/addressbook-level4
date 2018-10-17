@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 
@@ -68,12 +69,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        return versionedAddressBook.hasGroup(group);
-    }
-
-    @Override
     public void deletePerson(Person target) {
         versionedAddressBook.removePerson(target);
         indicateAddressBookChanged();
@@ -87,18 +82,39 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updatePerson(Person target, Person editedPerson) {
+        requireAllNonNull(target, editedPerson);
+
+        versionedAddressBook.updatePerson(target, editedPerson);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        return versionedAddressBook.hasGroup(group);
+    }
+
+    @Override
     public void createGroup(Group group) {
+        requireNonNull(group);
         versionedAddressBook.createGroup(group);
         updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updatePerson(Person target, Person editedPerson) {
-        requireAllNonNull(target, editedPerson);
-
-        versionedAddressBook.updatePerson(target, editedPerson);
+    public void addGroup(AddGroup addGroup) {
+        requireNonNull(addGroup);
+        versionedAddressBook.addGroup(addGroup);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public boolean hasPersonInGroup(AddGroup addGroup) {
+        requireNonNull(addGroup);
+        return versionedAddressBook.hasPersonInGroup(addGroup);
     }
 
     //=========== Filtered Person List Accessors =============================================================

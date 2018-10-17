@@ -3,4 +3,14 @@
 <groups>
     <groupLocation>E1-01-01</groupLocation>
     <tagged>maths</tagged>
+    <persons>
+        <name>Alice Pauline</name>
+        <gender>FEMALE</gender>
+        <nationality>SG</nationality>
+        <phone>94351253</phone>
+        <email>alice@example.com</email>
+        <address>123, Jurong West Ave 6, #08-111</address>
+        <tagged>friends</tagged>
+        <grade>100</grade>
+    </persons>
 </groups>

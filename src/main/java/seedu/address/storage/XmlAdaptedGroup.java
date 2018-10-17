@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
 
@@ -25,11 +26,15 @@ public class XmlAdaptedGroup {
 
     @XmlElement(required = true)
     private String groupName;
+
     @XmlElement(required = true)
     private String groupLocation;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+
+    @XmlElement
+    private List<XmlAdaptedPerson> persons = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedGroup.
@@ -41,11 +46,15 @@ public class XmlAdaptedGroup {
     /**
      * Constructs an {@code XmlAdaptedGroup} with the given group details.
      */
-    public XmlAdaptedGroup(String groupName, String groupLocation, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedGroup(String groupName, String groupLocation,
+                           List<XmlAdaptedTag> tagged, List<XmlAdaptedPerson> persons) {
         this.groupName = groupName;
         this.groupLocation = groupLocation;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+        if (persons != null) {
+            this.persons = new ArrayList<>(persons);
         }
     }
 
@@ -56,9 +65,12 @@ public class XmlAdaptedGroup {
      */
     public XmlAdaptedGroup(Group source) {
         groupName = source.getGroupName().groupName;
-        groupLocation = source.getGroupLocation().value;
+        groupLocation = source.getGroupLocation().groupLocation;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
+                .collect(Collectors.toList());
+        persons = source.getPersons().stream()
+                .map(XmlAdaptedPerson::new)
                 .collect(Collectors.toList());
     }
 
@@ -71,6 +83,11 @@ public class XmlAdaptedGroup {
         final List<Tag> groupTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             groupTags.add(tag.toModelType());
+        }
+
+        final List<Person> groupPersons = new ArrayList<>();
+        for (XmlAdaptedPerson person : persons) {
+            groupPersons.add(person.toModelType());
         }
 
         if (groupName == null) {
@@ -92,7 +109,12 @@ public class XmlAdaptedGroup {
         final GroupLocation modelGroupLocation = new GroupLocation(groupLocation);
 
         final Set<Tag> modelTags = new HashSet<>(groupTags);
-        return new Group(modelGroupName, modelGroupLocation, modelTags);
+        final Set<Person> modelPersons = new HashSet<>(groupPersons);
+
+        Group group = new Group(modelGroupName, modelGroupLocation, modelTags);
+        group.addPersons(modelPersons);
+
+        return group;
     }
 
     @Override
@@ -108,6 +130,8 @@ public class XmlAdaptedGroup {
         XmlAdaptedGroup otherGroup = (XmlAdaptedGroup) other;
         return Objects.equals(groupName, otherGroup.groupName)
                 && Objects.equals(groupLocation, otherGroup.groupLocation)
-                && tagged.equals(otherGroup.tagged);
+                && tagged.equals(otherGroup.tagged)
+                && persons.equals(otherGroup.persons);
     }
+
 }
