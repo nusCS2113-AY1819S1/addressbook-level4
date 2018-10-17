@@ -23,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.person.TimeSlots;
 
 /**
  * Edits the details of an existing person in the address book.
@@ -100,7 +101,8 @@ public class EditCommand extends Command {
         Map<String, EnrolledClass> updatedEnrolledClasses = editPersonDescriptor.getEnrolledClasses()
                                                             .orElse(personToEdit.getEnrolledClasses());
 
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags, updatedEnrolledClasses);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
+                updatedEnrolledClasses, TimeSlots.sampleTimeSlots());
     }
 
     @Override
@@ -196,7 +198,7 @@ public class EditCommand extends Command {
             if (tags != null){
                 this.tags = tags;
             } else {
-                this.tags = new HashSet<>(tags);
+                this.tags = new HashSet<>();
             }
         }
 
