@@ -10,6 +10,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.distributor.Distributor;
 import seedu.address.model.person.Product;
 
 /**
@@ -35,18 +36,20 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "fruit ";
 
     public static final String MESSAGE_SUCCESS = "New product added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This product already exists in the Product list";
+    public static final String MESSAGE_DUPLICATE_PRODUCT = "This product already exists in the Product list";
 
 
     private final Product toAdd;
+    private final Distributor distToAdd;
 
     /**
      * Creates an AddCommand to add the specified {@code Product}
      */
-    public AddCommand(Product product) {
+    public AddCommand(Product product, Distributor distributor) {
         requireNonNull(product);
         toAdd = product;
-
+        requireNonNull(distributor);
+        distToAdd = distributor;
     }
 
     @Override
@@ -54,10 +57,11 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PRODUCT);
         }
 
         model.addPerson(toAdd);
+        model.addDistributor(distToAdd);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

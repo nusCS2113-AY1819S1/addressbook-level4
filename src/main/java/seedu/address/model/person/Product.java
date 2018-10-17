@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -18,7 +19,7 @@ public class Product {
     // Identity fields
     private final Name name;
     private final Phone phone;
-    private final Email email;
+    private final DistributorName distname;
 
     // Data fields
     private final Address address;
@@ -27,11 +28,11 @@ public class Product {
     /**
      * Every field must be present and not null.
      */
-    public Product(Name name, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Product(Name name, Phone phone, DistributorName distname, Address address, Set<Tag> tags) {
+        requireAllNonNull(name, phone, distname, address, tags);
         this.name = name;
         this.phone = phone;
-        this.email = email;
+        this.distname = distname;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -44,8 +45,8 @@ public class Product {
         return phone;
     }
 
-    public Email getDistributor() {
-        return email;
+    public DistributorName getDistributor() {
+        return distname;
     }
 
     public Address getProductInfo() {
@@ -100,7 +101,7 @@ public class Product {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, distname, address, tags);
     }
 
     @Override

@@ -77,6 +77,7 @@ public class XmlUtilTest {
     }
      */
 
+    /*
     @Test
     public void xmlAdaptedPersonFromFile_fileWithMissingPersonField_validResult() throws Exception {
         XmlAdaptedProduct actualPerson = XmlUtil.getDataFromFile(
@@ -102,7 +103,7 @@ public class XmlUtilTest {
         XmlAdaptedProduct expectedPerson = new XmlAdaptedProduct(
                 VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
-    }
+    }*/
 
     @Test
     public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {

@@ -1,7 +1,5 @@
 package seedu.address.model.distributor;
-//package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -22,7 +20,7 @@ public class DistributorPhone {
      * @param distphone A valid phone number.
      */
     public DistributorPhone(String distphone) {
-        requireNonNull(distphone);
+        //requireNonNull(distphone);
         checkArgument(isValidPhone(distphone), MESSAGE_PHONE_CONSTRAINTS);
         value = distphone;
     }

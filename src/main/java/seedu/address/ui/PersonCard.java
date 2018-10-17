@@ -35,7 +35,7 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label email;
+    private Label distname;
     @FXML
     private FlowPane tags;
 
@@ -46,7 +46,7 @@ public class PersonCard extends UiPart<Region> {
         name.setText("Name: " + product.getName().fullName);
         phone.setText("Serial Number: " + product.getSerialNumber().value);
         address.setText("Product Info: " + product.getProductInfo().value);
-        email.setText("Distributor: " + product.getDistributor().value);
+        distname.setText("Distributor: " + product.getDistributor().fullDistName);
         product.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

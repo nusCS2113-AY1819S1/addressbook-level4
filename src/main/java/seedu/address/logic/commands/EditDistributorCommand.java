@@ -21,9 +21,9 @@ import seedu.address.model.distributor.DistributorPhone;
 /**
  * Edits the details of an existing distributor in the address book.
  */
-public class EditDistributorsCommand extends Command {
+public class EditDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "editD";
+    public static final String COMMAND_WORD = "editDistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the distributor identified "
             + "by the index number used in the displayed distributor list. "
@@ -36,14 +36,14 @@ public class EditDistributorsCommand extends Command {
 
     public static final String MESSAGE_EDIT_DISTRIBUTOR_SUCCESS = "Edited Distributor: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This distributor already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_DISTRIBUTOR = "This distributor already exists in the address book.";
     private final Index index;
     private final EditDistributorDescriptor editDistributorDescriptor;
     /**
      * @param index of the person in the filtered distributor list to edit
      * @param editDistributorDescriptor details to edit the distributor with
      */
-    public EditDistributorsCommand(Index index, EditDistributorDescriptor editDistributorDescriptor) {
+    public EditDistributorCommand(Index index, EditDistributorDescriptor editDistributorDescriptor) {
         requireNonNull(index);
         requireNonNull(editDistributorDescriptor);
 
@@ -57,14 +57,14 @@ public class EditDistributorsCommand extends Command {
         List<Distributor> lastShownList = model.getFilteredDistributorList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DIST_DISPLAYED_INDEX);
         }
 
         Distributor distributorToEdit = lastShownList.get(index.getZeroBased());
         Distributor editedDistributor = createEditedDistributor(distributorToEdit, editDistributorDescriptor);
 
         if (!distributorToEdit.isSameDistributor(editedDistributor) && model.hasDistributor(editedDistributor)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_DISTRIBUTOR);
         }
 
         model.updateDistributor(distributorToEdit, editedDistributor);
@@ -96,12 +96,12 @@ public class EditDistributorsCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditDistributorsCommand)) {
+        if (!(other instanceof EditDistributorCommand)) {
             return false;
         }
 
         // state check
-        EditDistributorsCommand e = (EditDistributorsCommand) other;
+        EditDistributorCommand e = (EditDistributorCommand) other;
         return index.equals(e.index)
                 && editDistributorDescriptor.equals(e.editDistributorDescriptor);
     }

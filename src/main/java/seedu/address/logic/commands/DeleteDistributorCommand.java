@@ -14,9 +14,9 @@ import seedu.address.model.distributor.Distributor;
 /**
  * Deletes a person identified using it's displayed index from the address book.
  */
-public class DeleteDistributorsCommand extends Command {
+public class DeleteDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "deleteD";
+    public static final String COMMAND_WORD = "deleteDistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the distributor identified by the index number used in the displayed distributor list.\n"
@@ -27,7 +27,7 @@ public class DeleteDistributorsCommand extends Command {
 
     private final Index targetIndex;
 
-    public DeleteDistributorsCommand(Index targetIndex) {
+    public DeleteDistributorCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -37,7 +37,7 @@ public class DeleteDistributorsCommand extends Command {
         List<Distributor> lastShownList = model.getFilteredDistributorList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_DIST_DISPLAYED_INDEX);
         }
 
         Distributor distributorToDelete = lastShownList.get(targetIndex.getZeroBased());
@@ -49,7 +49,7 @@ public class DeleteDistributorsCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof DeleteDistributorsCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteDistributorsCommand) other).targetIndex)); // state check
+                || (other instanceof DeleteDistributorCommand // instanceof handles nulls
+                && targetIndex.equals(((DeleteDistributorCommand) other).targetIndex)); // state check
     }
 }
