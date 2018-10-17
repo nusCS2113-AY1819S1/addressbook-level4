@@ -35,6 +35,6 @@ public class ClassListCommand extends Command {
         }
 
         builder.append(HtmlTableProcessor.getTableItemEnd());
-        return new CommandResult(MESSAGE_SUCCESS + "\n" + builder.toString());
+        return new CommandResult(MESSAGE_SUCCESS + "\n", builder.toString());
     }
 }
