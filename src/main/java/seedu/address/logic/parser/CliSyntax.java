@@ -11,5 +11,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_MIN_QUANTITY = new Prefix("m/");
     public static final Prefix PREFIX_STATUS = new Prefix("s/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
+    public static final Prefix PREFIX_PASSWORD = new Prefix("p/");
+    public static final Prefix PREFIX_USERNAME = new Prefix("u/");
 
 }
