@@ -6,30 +6,30 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DIST_PHONE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddDistributorsCommand;
+import seedu.address.logic.commands.AddDistributorCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.distributor.Distributor;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.distributor.DistributorPhone;
 
 /**
- * Parses input arguments and creates a new AddDistributorsCommand object
+ * Parses input arguments and creates a new AddDistributorCommand object
  */
-public class AddDistributorsCommandParser implements Parser<AddDistributorsCommand> {
+public class AddDistributorsCommandParser implements Parser<AddDistributorCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddDistributorsCommand parse(String args) throws ParseException {
+    public AddDistributorCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_DIST_NAME, PREFIX_DIST_PHONE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DIST_NAME, PREFIX_DIST_PHONE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddDistributorsCommand.MESSAGE_USAGE));
+                    AddDistributorCommand.MESSAGE_USAGE));
         }
 
         DistributorName name = ParserUtil.parseDistName(argMultimap.getValue(PREFIX_DIST_NAME).get());
@@ -37,7 +37,7 @@ public class AddDistributorsCommandParser implements Parser<AddDistributorsComma
 
         Distributor distributor = new Distributor(name, phone);
 
-        return new AddDistributorsCommand(distributor);
+        return new AddDistributorCommand(distributor);
 
     }
 

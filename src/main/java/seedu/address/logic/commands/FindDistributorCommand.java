@@ -11,9 +11,9 @@ import seedu.address.model.distributor.DNameContainsKeywordsPredicate;
  * Finds and lists all persons in address book whose name contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindDistributorsCommand extends Command {
+public class FindDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "findD";
+    public static final String COMMAND_WORD = "findDistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -22,7 +22,7 @@ public class FindDistributorsCommand extends Command {
 
     private final DNameContainsKeywordsPredicate predicate;
 
-    public FindDistributorsCommand(DNameContainsKeywordsPredicate predicate) {
+    public FindDistributorCommand(DNameContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -37,8 +37,8 @@ public class FindDistributorsCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindDistributorsCommand // instanceof handles nulls
-                && predicate.equals(((FindDistributorsCommand) other).predicate)); // state check
+                || (other instanceof FindDistributorCommand // instanceof handles nulls
+                && predicate.equals(((FindDistributorCommand) other).predicate)); // state check
     }
 }
 

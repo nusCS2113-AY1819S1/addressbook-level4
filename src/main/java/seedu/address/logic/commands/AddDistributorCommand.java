@@ -16,9 +16,9 @@ import seedu.address.model.distributor.Distributor;
 /**
  * Adds a person to the address book.
  */
-public class AddDistributorsCommand extends Command {
+public class AddDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "addD";
+    public static final String COMMAND_WORD = "addDistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a distributor to the inventarie. "
             + "Parameters: "
@@ -34,9 +34,9 @@ public class AddDistributorsCommand extends Command {
     private final Distributor toAdd;
 
     /**
-     * Creates an AddDistributorsCommand to add the specified {@code Distributor}
+     * Creates an AddDistributorCommand to add the specified {@code Distributor}
      */
-    public AddDistributorsCommand(Distributor distributor) {
+    public AddDistributorCommand(Distributor distributor) {
         requireNonNull(distributor);
         toAdd = distributor;
     }
@@ -57,7 +57,7 @@ public class AddDistributorsCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddDistributorsCommand // instanceof handles nulls
-                && toAdd.equals(((AddDistributorsCommand) other).toAdd));
+                || (other instanceof AddDistributorCommand // instanceof handles nulls
+                && toAdd.equals(((AddDistributorCommand) other).toAdd));
     }
 }

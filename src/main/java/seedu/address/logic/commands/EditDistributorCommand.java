@@ -21,9 +21,9 @@ import seedu.address.model.distributor.DistributorPhone;
 /**
  * Edits the details of an existing distributor in the address book.
  */
-public class EditDistributorsCommand extends Command {
+public class EditDistributorCommand extends Command {
 
-    public static final String COMMAND_WORD = "editD";
+    public static final String COMMAND_WORD = "editDistributor";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the distributor identified "
             + "by the index number used in the displayed distributor list. "
@@ -43,7 +43,7 @@ public class EditDistributorsCommand extends Command {
      * @param index of the person in the filtered distributor list to edit
      * @param editDistributorDescriptor details to edit the distributor with
      */
-    public EditDistributorsCommand(Index index, EditDistributorDescriptor editDistributorDescriptor) {
+    public EditDistributorCommand(Index index, EditDistributorDescriptor editDistributorDescriptor) {
         requireNonNull(index);
         requireNonNull(editDistributorDescriptor);
 
@@ -96,12 +96,12 @@ public class EditDistributorsCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof EditDistributorsCommand)) {
+        if (!(other instanceof EditDistributorCommand)) {
             return false;
         }
 
         // state check
-        EditDistributorsCommand e = (EditDistributorsCommand) other;
+        EditDistributorCommand e = (EditDistributorCommand) other;
         return index.equals(e.index)
                 && editDistributorDescriptor.equals(e.editDistributorDescriptor);
     }
