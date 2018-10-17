@@ -18,6 +18,13 @@ public class NoteManager {
     }
 
     /**
+     * Deletes the specified note from the in-memory ArrayList.
+     */
+    public void deleteNote(int index) {
+        notes.remove(index);
+    }
+
+    /**
      * Adds the new note to the in-memory ArrayList.
      */
     public void addNote(Note note) {

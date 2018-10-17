@@ -47,7 +47,7 @@ public class Gradebook {
         StorageController.retrieveData();
         boolean duplicate = false;
         if (GradebookManager.findGradebookComponent(moduleCode, gradebookComponentName)
-                .feedbackToUser.contains(MESSAGE_FIND_SUCCESS)) {
+                .contains(MESSAGE_FIND_SUCCESS)) {
             duplicate = true;
         }
         return duplicate;

@@ -31,8 +31,8 @@ public class GradebookFindCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        CommandResult result = GradebookManager.findGradebookComponent(toFindGradebookComponent.getModuleCode(),
+        String result = GradebookManager.findGradebookComponent(toFindGradebookComponent.getModuleCode(),
                 toFindGradebookComponent.getGradeComponentName());
-        return result;
+        return new CommandResult(result);
     }
 }
