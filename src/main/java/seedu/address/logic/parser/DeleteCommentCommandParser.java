@@ -26,17 +26,16 @@ public class DeleteCommentCommandParser implements Parser<DeleteCommentCommand> 
                 ArgumentTokenizer.tokenize(args, PREFIX_LINE);
 
         int line;
-        String comment;
         Index index;
 
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommentCommand.MESSAGE), pe);
         }
 
         if (!argMultimap.getValue(PREFIX_LINE).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommentCommand.MESSAGE));
         }
         line = ParserUtil.parseLine(argMultimap.getValue(PREFIX_LINE).get());
 
