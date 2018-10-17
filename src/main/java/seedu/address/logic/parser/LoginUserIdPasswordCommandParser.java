@@ -11,6 +11,7 @@ import seedu.address.logic.commands.LoginUserIdPasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
+import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new LoginUserIdCommand object
@@ -32,6 +33,7 @@ public class LoginUserIdPasswordCommandParser implements Parser<LoginCommand> {
         String[] keywords = trimmedArgs.split("\\s+");
         List<String> keywordsList = new ArrayList<String>(Arrays.asList(keywords));
         return new LoginUserIdPasswordCommand(new UserIdContainsKeywordsPredicate(keywordsList),
-                                              new UserPasswordContainsKeywordsPredicate(keywordsList));
+                                              new UserPasswordContainsKeywordsPredicate(keywordsList),
+                                              new UserRoleContainsKeywordsPredicate(keywordsList));
     }
 }

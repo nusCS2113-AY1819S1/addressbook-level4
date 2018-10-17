@@ -15,9 +15,9 @@ public abstract class LoginCommand extends Command {
     public static final String COMMAND_WORD = "login";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ":Login into NUSSU-Connect with input "
-            + "user ID and password."
-            + "Parameters: USERID PASSWORD\n"
-            + "Example: " + COMMAND_WORD + " A3583758X passphrase";
+            + "user ID, password and role."
+            + "Parameters: USERID PASSWORD ROLE\n"
+            + "Example: " + COMMAND_WORD + " A3583758X 1qaxcdwd2w member";
 
     private SearchHistoryManager searchHistoryManager = new SearchHistoryManager();
 
@@ -27,6 +27,10 @@ public abstract class LoginCommand extends Command {
     }
 
     protected Predicate getMostUpdatedPasswordPredicate(Predicate predicate) {
+        return searchHistoryManager.executeNewSearch(predicate);
+    }
+
+    protected Predicate getMostUpdatedRolePredicate(Predicate predicate) {
         return searchHistoryManager.executeNewSearch(predicate);
     }
 }

@@ -11,6 +11,7 @@ import seedu.address.logic.parser.exceptions.UserLoginException;
 import seedu.address.model.Model;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
+import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
 import seedu.address.ui.MainWindow;
 
 /**
@@ -22,12 +23,16 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
 
     private final UserIdContainsKeywordsPredicate idPredicate;
     private final UserPasswordContainsKeywordsPredicate passwordPredicate;
+    private final UserRoleContainsKeywordsPredicate rolePredicate;
 
     public LoginUserIdPasswordCommand(UserIdContainsKeywordsPredicate idPredicate,
-                                      UserPasswordContainsKeywordsPredicate passwordPredicate) {
+                                      UserPasswordContainsKeywordsPredicate passwordPredicate,
+                                      UserRoleContainsKeywordsPredicate rolePredicate) {
         super();
         this.idPredicate = idPredicate;
         this.passwordPredicate = passwordPredicate;
+        this.rolePredicate = rolePredicate;
+
     }
 
     @Override
@@ -40,6 +45,8 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
         model.updateFilteredLoginDetailsList(updatedIdPredicate);
         Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(passwordPredicate);
         model.updateFilteredLoginDetailsList(updatedPasswordPredicate);
+        Predicate updatedRolePredicate = getMostUpdatedRolePredicate(rolePredicate);
+        model.updateFilteredLoginDetailsList(updatedRolePredicate);
         if (model.getFilteredLoginDetailsList().size() != 0) {
             MainWindow.setIsLoginSuccessful(true);
         } else {

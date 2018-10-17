@@ -16,8 +16,9 @@ public class CreateAccountCommand extends Command {
     public static final String COMMAND_WORD = "createaccount";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account for the login book. "
-            + "Parameters: USERID PASSWORD\n"
-            + "Example: " + COMMAND_WORD + " A1234567M zaq1xsw2cde3";
+            + "Parameters: USERID PASSWORD ROLE\n"
+            + "Example: " + COMMAND_WORD + " A1234567M zaq1xsw2cde3 treasurer";
+
 
     public static final String MESSAGE_SUCCESS = "New account created: %1$s";
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the login book";

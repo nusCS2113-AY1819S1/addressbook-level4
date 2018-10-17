@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.model.login.UserId.MESSAGE_USERID_CONSTRAINTS;
 import static seedu.address.model.login.UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS;
+import static seedu.address.model.login.UserRole.MESSAGE_USERROLE_CONSTRAINTS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +17,8 @@ import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPassword;
+import seedu.address.model.login.UserRole;
+
 
 /**
  * Parses input arguments and creates a new CreateAccountCommand object
@@ -41,6 +44,7 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
 
         UserId userId = null;
         UserPassword userPassword = null;
+        UserRole userRole = null;
         for (int i = 1; st.hasMoreTokens(); i++) {
             if (i == 2) {
                 String tokenUserId = st.nextToken();
@@ -54,9 +58,15 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
                     throw new CommandException(MESSAGE_USERPASSWORD_CONSTRAINTS);
                 }
                 userPassword = new UserPassword(tokenUserPassword);
+            } else if (i == 4) {
+                String tokenUserRole = st.nextToken();
+                if (!UserRole.isValidUserRole(tokenUserRole)) {
+                    throw new CommandException(MESSAGE_USERROLE_CONSTRAINTS);
+                }
+                userRole = new UserRole(tokenUserRole);
             }
         }
-        LoginDetails details = new LoginDetails(userId, userPassword);
+        LoginDetails details = new LoginDetails(userId, userPassword, userRole);
 
         return new CreateAccountCommand(new UserIdContainsKeywordsPredicate(keywordsList), details);
     }
