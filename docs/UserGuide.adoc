@@ -83,6 +83,12 @@ Format: `setreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>`
 Sets and stores a reminder. In v1.2, this is only allowed for the current day.
 In future releases, reminders will be set in the current and future days.
 
+=== View due reminder notifcations: `duereminders`
+
+Format: `duereminders`
+
+Shows all reminders that are still due in the current day.
+
 === Add a product: `add product name`
 
 Format: `add product name <product name>`
@@ -172,15 +178,16 @@ A: There are numerous advantages to digitization of records. Do google ‘advant
 
 == Command Summary
 
-* *Add Product* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
+* *Add Product* : `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-*  *Add Distributor* `addD dn/DIST_NAME dp/DIST_PHONE` +
+*  *Add Distributor* : `addD dn/DIST_NAME dp/DIST_PHONE` +
 e.g. `addD dn/Ah Huat Distributors dp/61234567`
-* *Add a transaction* `Transaction pr/<product name> pr/<product name> ... pr/<product name` +
+* *Add a Transaction* : `Transaction pr/<product name> pr/<product name> ... pr/<product name` +
 e.g. `transaction pr/Apple pr/Banana pr/Cherry pr/Banana`
 * *View the latest transaction: `latest`
-* *Set a reminder: `setreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>` +
+* *Set a Reminder* : `setreminder time/yyyy/MM/dd HH:mm:ss message/<The reminder message>` +
 e.g `setreminder time/2018/08/16 08:30:00 message/Remove expired milk from aisle 6.`
+* *View due Reminders* : `duereminders`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
