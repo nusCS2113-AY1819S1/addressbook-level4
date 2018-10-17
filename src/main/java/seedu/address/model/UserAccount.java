@@ -60,11 +60,17 @@ public class UserAccount {
         return isPresent;
     }
 
+    /**
+     * Sets the current user.
+     */
     public void logUser(User user) {
         this.user = user;
         loginStatus = true;
     }
 
+    /**
+     * Clears the current user.
+     */
     public void clearUser() {
         loginStatus = false;
     }
