@@ -752,9 +752,9 @@ e.g. `class listattend c/T16`
 e.g. `class markattend c/T16 i/A6942069M`
 * *Modifying class attendance list* `class modattend c/CLASS_NAME i/ADMISSION_NO` +
 e.g. `class modattend c/T16 i/A6942069M`
-* *Add a note* `note add m/MODULE_CODE` +
+* *Add a note* `note add [m/MODULE_CODE] [d/DATE]` +
 e.g. `note add m/CS2040C`
-* *List notes* `note list m/MODULE_CODE` +
+* *List notes* `note list [m/MODULE_CODE]` +
 e.g. `note list m/CS2040C`
 * *Delete a note* `note delete INDEX` +
 e.g. `note delete 8`
