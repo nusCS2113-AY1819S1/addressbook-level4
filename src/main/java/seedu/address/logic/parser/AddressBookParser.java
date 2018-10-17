@@ -91,7 +91,7 @@ public class AddressBookParser {
             return new NoteAddCommandParser().parse(arguments);
 
         case NoteListCommand.COMMAND_WORD:
-            return new NoteListCommand();
+            return new NoteListCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
