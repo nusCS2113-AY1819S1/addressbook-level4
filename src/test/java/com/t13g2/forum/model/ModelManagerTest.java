@@ -46,7 +46,8 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        ForumBook addressBook = new AddressBookBuilder().withPerson(TypicalPersons.ALICE).withPerson(TypicalPersons.BENSON).build();
+        ForumBook addressBook = new AddressBookBuilder()
+            .withPerson(TypicalPersons.ALICE).withPerson(TypicalPersons.BENSON).build();
         ForumBook differentAddressBook = new ForumBook();
         UserPrefs userPrefs = new UserPrefs();
 

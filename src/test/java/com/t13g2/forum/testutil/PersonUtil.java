@@ -3,8 +3,8 @@ package com.t13g2.forum.testutil;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_INDEX;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE;
-import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_TAG;
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD;
 
 import java.util.Set;
 

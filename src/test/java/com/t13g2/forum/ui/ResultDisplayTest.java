@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import com.t13g2.forum.commons.events.ui.NewResultAvailableEvent;
 import com.t13g2.forum.testutil.EventsUtil;
+
 import guitests.guihandles.ResultDisplayHandle;
 
 public class ResultDisplayTest extends GuiUnitTest {

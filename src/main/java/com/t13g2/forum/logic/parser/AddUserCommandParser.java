@@ -32,7 +32,11 @@ public class AddUserCommandParser {
 
         String userName = ParserUtil.parseUserName(argMultimap.getValue(PREFIX_USER_NAME).get());
         String userPassword = ParserUtil.parseUserPassword(argMultimap.getValue(PREFIX_USER_PASSWORD).get());
-        User user = new User (userName, userPassword, false, false, " ", " ");
+        boolean admin = false;
+        if (userName.equals("admin")) {
+            admin = true;
+        }
+        User user = new User (userName, userPassword, admin, false, " ", " ");
         return new AddUserCommand(user);
     }
     private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {

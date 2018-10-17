@@ -49,7 +49,6 @@ public class CreateThreadCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             //get the respective module by moduleCode
             Module module = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);

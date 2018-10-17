@@ -8,18 +8,18 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
 //@@xllx1
-
 /**
  * Set a certain user as admin or set the admin as user
  */
 public class SetAdminCommand extends Command {
     public static final String COMMAND_WORD = "setAdmin";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set/Revert (1/0) a user as admin. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Set/Revert (true/false) a user as admin. "
         + "Parameters: "
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_ADMIN_SET + "SET/REVERT "
@@ -36,7 +36,7 @@ public class SetAdminCommand extends Command {
     private final boolean setAdmin;
 
     /**
-     * Creates an AnnounceCommand to announce the specified {@code toAnnounce}.
+     * Creates an SetAdminCommand to set the specified {@code userName}.
      */
     public SetAdminCommand(String userName, boolean set) {
         requireNonNull(userName);
@@ -48,7 +48,14 @@ public class SetAdminCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         String isAdmin = "";
-        User userToSet;
+        User userToSet = null;
+        // if user has not login or is not admin, then throw exception
+        if (Context.getInstance().getCurrentUser() == null) {
+            throw new CommandException(User.MESSAGE_NOT_LOGIN);
+        }
+        if (!Context.getInstance().getCurrentUser().isAdmin()) {
+            throw new CommandException(User.MESSAGE_NOT_ADMIN);
+        }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             userToSet = unitOfWork.getUserRepository().getUserByUsername(userNametoSetAdmin);
             if (setAdmin && userToSet.isAdmin()) {

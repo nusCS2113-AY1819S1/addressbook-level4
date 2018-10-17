@@ -35,6 +35,9 @@ public class StorageMapping {
         return classMapFileName.get(clazz);
     }
 
+    /**
+     *
+     */
     private void initDataFolder() {
         dataFolder = Paths.get(Paths.get("").toString(), "forumData").toString();
         if (!Files.exists(Paths.get(dataFolder))) {

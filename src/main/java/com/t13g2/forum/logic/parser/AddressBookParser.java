@@ -13,6 +13,7 @@ import com.t13g2.forum.logic.commands.BlockUserFromCreatingCommand;
 import com.t13g2.forum.logic.commands.CheckAnnouncmentCommand;
 import com.t13g2.forum.logic.commands.ClearCommand;
 import com.t13g2.forum.logic.commands.Command;
+import com.t13g2.forum.logic.commands.CreateModuleCommand;
 import com.t13g2.forum.logic.commands.CreateThreadCommand;
 import com.t13g2.forum.logic.commands.DeleteCommand;
 import com.t13g2.forum.logic.commands.DeleteThreadCommand;
@@ -106,6 +107,9 @@ public class AddressBookParser {
 
         case SetAdminCommand.COMMAND_WORD:
             return new SetAdminCommandParser().parse(arguments);
+
+        case CreateModuleCommand.COMMAND_WORD:
+            return new CreateModuleCommandParser().parse(arguments);
 
         case CreateThreadCommand.COMMAND_WORD:
             return new CreateThreadCommandParser().parse(arguments);

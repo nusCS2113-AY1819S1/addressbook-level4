@@ -36,6 +36,7 @@ import com.t13g2.forum.model.Model;
 import com.t13g2.forum.testutil.TypicalPersons;
 import com.t13g2.forum.ui.BrowserPanel;
 import com.t13g2.forum.ui.CommandBox;
+
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;

@@ -17,13 +17,11 @@ import com.t13g2.forum.model.UserPrefs;
 import com.t13g2.forum.storage.UserPrefsStorage;
 import com.t13g2.forum.storage.XmlSerializableAddressBook;
 import com.t13g2.forum.testutil.TestUtil;
-import systemtests.ModelHelper;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-
-
+import systemtests.ModelHelper;
 
 /**
  * This class is meant to override some properties of MainApp so that it will be suited for

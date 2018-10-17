@@ -19,7 +19,8 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager();
         expectedModel.commitForumBook();
 
-        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, commandHistory,
+            ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -29,7 +30,8 @@ public class ClearCommandTest {
         expectedModel.resetData(new ForumBook());
         expectedModel.commitForumBook();
 
-        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        CommandTestUtil.assertCommandSuccess(new ClearCommand(), model, commandHistory,
+            ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
 }

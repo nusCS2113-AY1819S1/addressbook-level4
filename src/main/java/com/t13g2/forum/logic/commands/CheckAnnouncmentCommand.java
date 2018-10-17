@@ -9,6 +9,8 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.User;
+import com.t13g2.forum.storage.forum.Context;
 import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
@@ -25,7 +27,11 @@ public class CheckAnnouncmentCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        Announcement announcement = new Announcement();
+        Announcement announcement = null;
+        // if user has not login, then throw exception
+        if (Context.getInstance().getCurrentUser() == null) {
+            throw new CommandException(User.MESSAGE_NOT_LOGIN);
+        }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             announcement = unitOfWork.getAnnouncementRepository().getLatestAnnouncement();
             final String title = announcement.getTitle();
