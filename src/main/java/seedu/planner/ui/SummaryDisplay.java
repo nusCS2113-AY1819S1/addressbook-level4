@@ -1,7 +1,5 @@
 package seedu.planner.ui;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -31,10 +29,10 @@ public class SummaryDisplay extends UiPart<Region> {
 
     private static final String FXML = "SummaryDisplay.fxml";
 
-    private ObservableList<SummaryDisplayEntry> data = FXCollections.emptyObservableList();
+    private ObservableList<SummaryEntry> data = FXCollections.emptyObservableList();
 
     @FXML
-    private TableView<SummaryDisplayEntry> table;
+    private TableView<SummaryEntry> table;
 
     @FXML
     private AnchorPane summaryDisplay;
@@ -59,17 +57,17 @@ public class SummaryDisplay extends UiPart<Region> {
     }
 
     /**
-     * This function links up all the columns of {@code TableView} with the parameters of {@code SummaryDisplayEntry}
+     * This function links up all the columns of {@code TableView} with the parameters of {@code SummaryEntry}
      */
     private void init() {
         dateColumn.setCellValueFactory(
-                new PropertyValueFactory<SummaryDisplayEntry, String>("date"));
+                new PropertyValueFactory<SummaryEntry, String>("date"));
         totalIncomeColumn.setCellValueFactory(
-                new PropertyValueFactory<SummaryDisplayEntry, String>("totalIncome"));
+                new PropertyValueFactory<SummaryEntry, String>("totalIncome"));
         totalExpenseColumn.setCellValueFactory(
-                new PropertyValueFactory<SummaryDisplayEntry, String>("totalExpense"));
+                new PropertyValueFactory<SummaryEntry, String>("totalExpense"));
         totalColumn.setCellValueFactory(
-                new PropertyValueFactory<SummaryDisplayEntry, String>("total"));
+                new PropertyValueFactory<SummaryEntry, String>("total"));
     }
 
     private void show() {
@@ -89,26 +87,26 @@ public class SummaryDisplay extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         table.getItems().clear();
         data = FXCollections.observableList(event.data.stream().map(
-                s -> new SummaryDisplayEntry(s)).collect(Collectors.toList()));
+                s -> new SummaryEntry(s)).collect(Collectors.toList()));
         table.setItems(data);
         show();
     }
 
-    public class SummaryDisplayEntry {
+    public class SummaryEntry {
 
         private final SimpleStringProperty date;
         private final SimpleStringProperty totalIncome;
         private final SimpleStringProperty totalExpense;
         private final SimpleStringProperty total;
 
-        public SummaryDisplayEntry(Date date, MoneyFlow totalIncome, MoneyFlow totalExpense, MoneyFlow total) {
+        public SummaryEntry(Date date, MoneyFlow totalIncome, MoneyFlow totalExpense, MoneyFlow total) {
             this.date = new SimpleStringProperty(date.toString());
             this.totalIncome = new SimpleStringProperty((totalIncome.toString()));
             this.totalExpense = new SimpleStringProperty((totalExpense.toString()));
             this.total = new SimpleStringProperty((total.toString()));
         }
 
-        public SummaryDisplayEntry(Summary summary) {
+        public SummaryEntry(Summary summary) {
             this.date = new SimpleStringProperty(summary.getDate().toString());
             this.totalIncome = new SimpleStringProperty((summary.getTotalIncome().toString()));
             this.totalExpense = new SimpleStringProperty((summary.getTotalExpense().toString()));

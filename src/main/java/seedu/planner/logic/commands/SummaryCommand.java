@@ -24,7 +24,7 @@ public class SummaryCommand extends Command{
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed summary for %d days:\n";
+    public static final String MESSAGE_SUCCESS = "Listed summary for %d days:";
 
     private final Date startDate;
     private final Date endDate;
