@@ -354,7 +354,7 @@ Step 4. The `ReadOnlyStockList` is saved as an xml file.
 ** Cons: Unable to edit fields using the application upon creation of the .csv file.
 // end::savecommand[]
 
-// tag::dataencryption[]
+// tag::changestatus[]
 === Change Status command
 For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCommandParser and ChangeStatusCommand.
 
@@ -363,7 +363,40 @@ For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCo
 * The ChangeStatusCommand has the execute method. Using the index, the item to update is obtained from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
 
 The updated item list and success message is shown to the user. Updates are committed to the storage.
+// end::changestatus[]
 
+// tag::login[]
+=== Login feature
+==== Current Implementation
+
+The login mechanism is facilitated by `LoginCommand`. It extends `Command` and implements the following operations:
+
+* `LoginCommand#execute()` -- checks if the username and password match the predefined account details. Displays a login success message if match and displays a failure message otherwise.
+
+Given below is an example usage scenario and how the LoginCommand mechanism behaves at each step.
+
+Step 1. The user executes `login u/admin p/password` command to log into StockList with 'admin' and 'password' being the username and password credentials respectively.
+
+Step 2. The `execute` command calls `Account#getUsername()` and `Account#getPassword()` methods, which parses the user input and stores the credentials as `username` and `password` variables.
+
+Step 3. The `execute` command then checks if the username and password strings match the predefined username and password strings.
+
+Step 4. If the username and password strings match, a success message is printed; otherwise a failure message is printed.
+
+==== Design Considerations
+
+===== Aspect: How 'execute' executes
+
+* **Alternative 1** (current choice) Check if the username and passwords match the predefined strings.
+** Pros: Very simple, minimal memory usage, allows for only one access account.
+** Cons: Does not allow access for multiple accounts.
+
+* **Alternative 2** Save multiple account credentials in a file, check against the file.
+** Pros: Allows for multiple accounts with different levels of access to StockList.
+** Cons: More memory usage
+// end::login[]
+
+// tag::dataencryption[]
 === [Proposed] Data Encryption
 
 _{Explain here how the data encryption feature will be implemented}_

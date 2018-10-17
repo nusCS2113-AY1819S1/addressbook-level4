@@ -17,6 +17,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SaveCommand;
 import seedu.address.logic.commands.SelectCommand;
@@ -50,6 +51,7 @@ public class StockListParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
+<<<<<<< HEAD
 
             case AddCommand.COMMAND_WORD:
                 return new AddCommandParser().parse(arguments);
@@ -87,11 +89,39 @@ public class StockListParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
+=======
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser().parse(arguments);
+        case SelectCommand.COMMAND_WORD:
+            return new SelectCommandParser().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser().parse(arguments);
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+>>>>>>> f27af9e9fe083c0969d9a1a280c4ce56994f6ce0
         case ChangeStatusCommand.COMMAND_WORD:
             return new ChangeStatusCommandParser().parse(arguments);
-
         case SaveCommand.COMMAND_WORD:
             return new SaveCommandParser().parse(arguments);
+<<<<<<< HEAD
 
 
             case TagCommand.COMMAND_WORD:
@@ -99,6 +129,10 @@ public class StockListParser {
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+=======
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+>>>>>>> f27af9e9fe083c0969d9a1a280c4ce56994f6ce0
         }
     }
 
