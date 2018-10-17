@@ -27,8 +27,8 @@ public class Reminder extends TimeIdentifiedClass {
         if (!Transaction.isValidTransactionTime(time)) {
             throw new InvalidTimeFormatException();
         }
-        this.time = time;
-        this.reminderMessage = reminderMessage;
+        this.time = time.trim();
+        this.reminderMessage = reminderMessage.trim();
     }
 
     public String getMessage() {
