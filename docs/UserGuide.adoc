@@ -375,7 +375,7 @@ Examples:
 * `class maxenroll c/T16 e/20` +
 Modifies the new max class enrollment size for the class T16 to be 20
 
-==== Accessing class attendance list : `class listattend [coming in v1.4]`
+==== Accessing class attendance list : `class listattend [coming in v1.3]`
 Access the class attendance list for the system. +
 Format: `class listattend c/CLASS_NAME`
 
@@ -388,7 +388,7 @@ Examples:
 * `class listattend c/T16` +
 Displays the class attendance list for the class T16
 
-==== Marking class attendance list : `class markattend [coming in v1.4]`
+==== Marking class attendance list : `class markattend [coming in v1.3]`
 Mark the class attendance list for a specified student for the system. +
 Format: `class markattend c/CLASS_NAME i/ADMISSION_NO`
 
@@ -402,7 +402,7 @@ Examples:
 * `class markattend c/T16 i/A6942069M` +
 Marks the attendance of the student of the admission number A6942069M for the class T16
 
-==== Modifying class attendance list : `class modattend [coming in v1.4]`
+==== Modifying class attendance list : `class modattend [coming in v1.3]`
 Modifies the class attendance list for the system. +
 Format: `class modattend c/CLASS_NAME i/ADMISSION_NO`
 
