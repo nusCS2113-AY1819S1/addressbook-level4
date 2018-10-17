@@ -223,10 +223,13 @@ public class MainApp extends Application {
         logger.info("Starting BookInventory " + MainApp.VERSION);
         ui.start(primaryStage);
         primaryStage.setOnCloseRequest(e -> {
-            final boolean exited = SubmitBox.display("Exit BookInventory", "Are you sure you want to exit BookInventory?");
-            if(!exited) {
+            final boolean exited = SubmitBox.display("Exit BookInventory",
+                    "Are you sure you want to exit BookInventory?");
+            if (!exited) {
                 e.consume();
-            } else stop();
+            } else {
+                stop();
+            }
         });
     }
 
