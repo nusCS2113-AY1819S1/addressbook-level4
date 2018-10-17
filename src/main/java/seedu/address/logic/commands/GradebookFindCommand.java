@@ -8,7 +8,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
-import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
  * Finds gradebook component for module in Trajectory to the user.
