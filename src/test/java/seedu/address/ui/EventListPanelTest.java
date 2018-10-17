@@ -99,7 +99,7 @@ public class EventListPanelTest extends GuiUnitTest {
             builder.append("<contact>BAA</contact>\n");
             builder.append("<phone>000</phone>\n");
             builder.append("<email>a@aa</email>\n");
-            builder.append("<address>a</address>\n");
+            builder.append("<venue>a</venue>\n");
             builder.append("</persons>\n");
         }
         builder.append("</eventmanager>\n");

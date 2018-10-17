@@ -40,7 +40,7 @@ public class XmlUtilTest {
     private static final String VALID_CONTACT = "Hans Muster";
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
-    private static final String VALID_ADDRESS = "4th street";
+    private static final String VALID_VENUE = "4th street";
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
 
     @Rule
@@ -81,7 +81,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                null, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                null, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -90,7 +90,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                VALID_NAME, VALID_CONTACT, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, VALID_CONTACT, INVALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -99,7 +99,7 @@ public class XmlUtilTest {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(
                 VALID_PERSON_FILE, XmlAdaptedEventWithRootElement.class);
         XmlAdaptedEvent expectedPerson = new XmlAdaptedEvent(
-                VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_VENUE, VALID_TAGS);
         assertEquals(expectedPerson, actualPerson);
     }
 
