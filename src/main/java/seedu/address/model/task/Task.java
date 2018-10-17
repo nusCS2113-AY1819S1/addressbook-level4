@@ -64,7 +64,13 @@ public class Task {
      * This defines a weaker notion of equality between two tasks.
      */
     public boolean isSameTask(Task otherTask) {
-        return otherTask == this;
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getName().equals(getName())
+                && otherTask.getModule().equals(getModule());
     }
 
     /**
