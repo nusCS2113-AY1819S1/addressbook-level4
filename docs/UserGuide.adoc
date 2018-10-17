@@ -127,12 +127,12 @@ Format: `status`
 === Changing status of item: `changeStatus`
 
 The status of the items can be changed +
-Format: `changeStatus n/NAME q/QUANTITY s/status`
+Format: `changeStatus INDEX q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS`
 
 Examples:
 
-* `changeStatus n/Arduino q/20 s/faulty` +
-The status of 20 arduinos would be changed to faulty
+* `changeStatus 1 q/20 os/Ready ns/Faulty` +
+The status of 20 arduinos would be changed from Ready to faulty
 
 === Creating a loan list: `loanList`
 A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
