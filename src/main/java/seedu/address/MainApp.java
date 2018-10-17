@@ -24,14 +24,19 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyUserDatabase;
+import seedu.address.model.UserDatabase;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
+import seedu.address.model.util.SampleUsersUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.UserDatabaseStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlUserDatabaseStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -62,8 +67,9 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
+        UserDatabaseStorage usersStorage = new XmlUserDatabaseStorage(userPrefs.getUsersFilePath());
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, usersStorage);
 
         initLogging(config);
 
@@ -84,6 +90,21 @@ public class MainApp extends Application {
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyUserDatabase> userDatabaseOptional;
+        ReadOnlyUserDatabase initialUsers;
+        try {
+            userDatabaseOptional = storage.readUserDatabase();
+            if (!userDatabaseOptional.isPresent()) {
+                logger.info("Users file not found. Will be starting with a empty UserDatabase");
+            }
+            initialUsers = userDatabaseOptional.orElseGet(SampleUsersUtil::getSampleUserDatabase);
+        } catch (DataConversionException e) {
+            logger.warning("Users file not in the correct format. Will be starting with an empty AddressBook");
+            initialUsers = new UserDatabase();
+        } catch (IOException e) {
+            logger.warning("Users while reading from the file. Will be starting with an empty AddressBook");
+            initialUsers = new UserDatabase();
+        }
         try {
             addressBookOptional = storage.readAddressBook();
             if (!addressBookOptional.isPresent()) {
@@ -98,7 +119,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, userPrefs);
+        return new ModelManager(initialData, userPrefs, initialUsers, this.storage);
     }
 
     private void initLogging(Config config) {

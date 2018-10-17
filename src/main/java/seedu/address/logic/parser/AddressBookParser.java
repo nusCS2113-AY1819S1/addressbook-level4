@@ -7,18 +7,34 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddDistributorsCommand;
+import seedu.address.logic.commands.AddReminderCommand;
+import seedu.address.logic.commands.AddTransactionCommand;
+import seedu.address.logic.commands.ChangeUserPasswordCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteDistributorsCommand;
+import seedu.address.logic.commands.DeleteUserCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditDistributorsCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindDistributorsCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ListDistributorsCommand;
+import seedu.address.logic.commands.LoginCommand;
+import seedu.address.logic.commands.LogoutCommand;
 import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.RedoDistributorsCommand;
+import seedu.address.logic.commands.RegisterUserCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.UndoDistributorsCommand;
+import seedu.address.logic.commands.ViewDueRemindersCommand;
+import seedu.address.logic.commands.ViewLastTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -46,10 +62,16 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
+        case AddDistributorsCommand.COMMAND_WORD:
+            return new AddDistributorsCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
+
+        case EditDistributorsCommand.COMMAND_WORD:
+            return new EditDistributorsCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
@@ -57,14 +79,23 @@ public class AddressBookParser {
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
+        case DeleteDistributorsCommand.COMMAND_WORD:
+            return new DeleteDistributorsCommandParser().parse(arguments);
+
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
+        case FindDistributorsCommand.COMMAND_WORD:
+            return new FindDistributorsCommandParser().parse(arguments);
+
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case ListDistributorsCommand.COMMAND_WORD:
+            return new ListDistributorsCommand();
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -78,15 +109,47 @@ public class AddressBookParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case UndoDistributorsCommand.COMMAND_WORD:
+            return new UndoDistributorsCommand();
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
+        case AddTransactionCommand.COMMAND_WORD:
+            return new AddTransactionCommandParser().parse(arguments);
+
+        case ViewLastTransactionCommand.COMMAND_WORD:
+            return new ViewLastTransactionCommand();
+
+        case RedoDistributorsCommand.COMMAND_WORD:
+            return new RedoDistributorsCommand();
+
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
+
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
+
+        case RegisterUserCommand.COMMAND_WORD:
+            return new RegisterUserCommandParser().parse(arguments);
+
+        case DeleteUserCommand.COMMAND_WORD:
+            return new DeleteUserCommandParser().parse(arguments);
+
+        case ChangeUserPasswordCommand.COMMAND_WORD:
+            return new ChangeUserPasswordCommandParser().parse(arguments);
+
+        case AddReminderCommand.COMMAND_WORD:
+            return new AddReminderCommandParser().parse(arguments);
+
+        case ViewDueRemindersCommand.COMMAND_WORD:
+            return new ViewDueRemindersCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }
