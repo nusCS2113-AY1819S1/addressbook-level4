@@ -1,9 +1,13 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.ClassroomManager;
+import seedu.address.ui.HtmlTableProcessor;
 
 /**
  * Lists all persons in the address book to the user.
@@ -20,10 +24,17 @@ public class ClassListCommand extends Command {
 
         final StringBuilder builder = new StringBuilder();
 
+        builder.append(HtmlTableProcessor.getH3Representation("Class List"));
+        builder.append(HtmlTableProcessor.renderTableStart(new ArrayList<String>(
+                Arrays.asList("Class Name", "Module Code", "Max Enrollment Size"))));
+
+        builder.append(HtmlTableProcessor.getTableItemStart());
+
         for (Classroom c : classroomManager.getClassroomList()) {
             builder.append(c.toString());
-            builder.append("\n");
         }
+
+        builder.append(HtmlTableProcessor.getTableItemEnd());
         return new CommandResult(MESSAGE_SUCCESS + "\n" + builder.toString());
     }
 }
