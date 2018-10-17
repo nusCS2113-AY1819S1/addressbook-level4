@@ -319,6 +319,36 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::distribute[]
+=== Distribute Students Equally feature
+==== Current Implementation
+The Distribute Students Equally feature holds 4 different algorithms.
+Each Algorithm serve different purposes.
+
+* Distribute Students Equally
+* Distribute Students Equally with Balanced Gender
+* Distribute Students Equally with Balanced Nationality
+* Distribute Students Equally with Balanced Gender & Nationality
+
+Every Algorithm will require inputs such as:
+****
+* Number of Groups to be created
+* 2D ArrayList of Person Type
+* LinkList containing all person data from the address book
+* Group Name in String Type
+****
+
+From these 4 inputs, each algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
+
+==== Sequence Diagrams
+
+==== Design Considerations
+
+===== Aspect: Distribute Students Equally Algorithm Explanation
+===== Aspect: Distribute Students Equally with Balanced Gender Explanation
+===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
+===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
