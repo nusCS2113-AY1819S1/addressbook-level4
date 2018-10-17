@@ -1,0 +1,5 @@
+{
+  "appTitle" : "FreeTime v1.2",
+  "logLevel" : "INFO",
+  "userPrefsFilePath" : "preferences.json"
+}
