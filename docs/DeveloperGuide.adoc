@@ -346,7 +346,28 @@ Step 5. The user executes `list` command to view the existing task list, which c
 
 Step 6. The user now decides that the task added was a mistake, and decides to remove that task by executing the `delete 6` command to delete the 6th task in the task list of the student planner. The `delete` command will call `Model#deleteTask()`, causing the modified state of the student planner after the `delete 5` command executes to be saved in the studentPlannerStateList.
 // end::tasks[]
-//@@author
+
+//@@author QzSG
+// tag::backuprestore[]
+=== Backup Feature
+==== Backups Types
+The application supports both local and online backups
+
+==== Backup Implementation
+A generic `OnlineStorage` interface must be implemented by all forms of Online backup services. This allows developers to easily add and extend the list of supported backup services by implementing a common set of methods.
+The current minimum set of methods that must be implemented is for backup, namely `OnlineStorage#saveContentToStorage`. Future iterations of code will enforce implementation of `OnlineStorage#loadContentFromStorage`.
+
+For local backups, the existing classes provided by `XmlAddressBookStorage` are reused
+
+==== Command Flow
+When a user enters a backup or restore command for local backups or restoration. `Model#backupAddressBookLocal` will be called which calls `indicateAddressBookBackupRequest` that raises a `Model#AddressBookLocalBackupEvent`.
+The `StorageManager` subscribes to the event and will perform the backup of the address book in the event handler. This allows us to seperate backup concerns from the Model as the model should not know how to perform backup,
+also in this manner, the storage manager will not need to know about the model to perform backup.
+
+For online backups, in this case the example of saving backup data to GitHub. After a correct backup command is entered by the user, an `OnlineBackupEvent` is immediately raised and handled by the `StorageManager`.
+To prevent the main JavaFX UI thread from freezing during the entire duration of the online backup. We utilize a worker thread that performs the online backup without blocking the main thread. We set up the Task handlers so that
+exceptions thrown in the worker thread can be captured and shown to the user in the form of a popup. This multi-threaded approach allows us to perform long running tasks on worker threads and at the same time allows us to perform
+and show feedback to the UI for the user as the Task event handlers are performed on the main JavaFX thread.
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

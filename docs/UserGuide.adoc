@@ -215,17 +215,49 @@ There is no need to save manually.
 Alert user when a deadline is due
 
 // tag::databackup[]
-=== Local backup `Coming in [v1.2]`
+=== Backup data :`backup`
 
-Allow user to backup data _locally_ by calling `backup local <path to backup too>` +
-Where the backup folder is a folder the user has write permissions to.
+Allow user to backup data _locally_ or to online services.
 
-=== Online backup `Coming in [v1.3]`
+Format: `backup [PATH] | [GITHUB ACCESS_TOKEN]`
 
-Allow user to backup data to online services like GitHub gists or Google Drive by calling `backup online <service>` +
-Where the service to backup data to has already been setup beforehand
+****
+* For GitHub online backup, a personal access token must be provided in `ACCESS_TOKEN`
+****
 
-=== Setup or restore backup data
+Examples:
+
+* `backup` +
+Creates a local backup to the default backup path in `preferences.json`.
+* `backup C:\backup\backup.bak` +
+Creates a local backup to the provided path `C:\backup\backup.bak`.
+* `backup github ACCESS_TOKEN_HERE` +
+Creates an online backup to GitHub Gists using the provided personal access token.
+// end::databackup[]
+
+// tag::datarestore[]
+=== Restore data :`restore`
+
+Allow user to restore data backups _locally_ or from online services.
+
+Format: `restore [PATH] | [GITHUB ACCESS_TOKEN]`
+
+****
+* For GitHub online restore, a personal access token must be provided in `ACCESS_TOKEN`
+****
+
+Examples:
+
+* `restore` +
+Restores Student Planner data using local backup in default backup path inside `preferences.json`.
+* `restore C:\backup\backup.bak` +
+Restores Student Planner data using the provided backup file path `C:\backup\backup.bak`.
+* `restore github ACCESS_TOKEN_HERE` +
+Restores Student Planner data on GitHub Gists using the provided personal access token.
+// end::databackup[]
+
+
+=== Setup or restore backup data `[coming in v1.3]`
 Allow user to setup backup settings (setup cloud services like GitHub gists or Google Drive, backup location) by calling `backup doctor`
 
 // end::databackup[]
