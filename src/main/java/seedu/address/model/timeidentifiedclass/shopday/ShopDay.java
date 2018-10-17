@@ -12,6 +12,7 @@ import java.util.TreeMap;
 import seedu.address.model.timeidentifiedclass.TimeIdentifiedClass;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
@@ -88,7 +89,7 @@ public class ShopDay extends TimeIdentifiedClass {
     }
 
     /**
-     * The following method adds a transaction to the given shopDay object.
+     * The following method adds a transaction to the given ShopDay object.
      * @param transaction
      * @throws InvalidTimeFormatException
      * @throws ClosedShopDayException
@@ -114,7 +115,11 @@ public class ShopDay extends TimeIdentifiedClass {
      * The following method adds a reminder to the reminder record.
      * @param reminder
      */
-    public void addReminder(Reminder reminder) {
+    public void addReminder(Reminder reminder) throws DuplicateReminderException {
+        if (reminderRecord.containsKey(reminder.getTime())
+                && reminderRecord.get(reminder.getTime()).getMessage().equalsIgnoreCase(reminder.getMessage())) {
+            throw new DuplicateReminderException();
+        }
         reminderRecord.put(reminder.getTime(), reminder);
     }
 
@@ -142,6 +147,15 @@ public class ShopDay extends TimeIdentifiedClass {
         }
         ret.trimToSize();
         return ret.toString();
+    }
+
+    /**
+     * Obtain the reminder record.
+     * @return reminderRecord
+     */
+
+    public TreeMap<String, Reminder> getReminderRecord() {
+        return reminderRecord;
     }
 
     public void openDay() {

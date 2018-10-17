@@ -53,7 +53,7 @@ public class Transaction extends TimeIdentifiedClass {
     }
 
     /**
-     * todo
+     * Adds a product to the transaction record.
      * @param itemName
      * @param quantity
      * @throws ClosedTransactionException

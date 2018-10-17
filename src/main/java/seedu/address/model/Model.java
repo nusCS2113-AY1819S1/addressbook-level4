@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -13,7 +14,10 @@ import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Product;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
+import seedu.address.model.timeidentifiedclass.shopday.Reminder;
+import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
@@ -138,8 +142,19 @@ public interface Model {
             DuplicateTransactionException, ClosedShopDayException;
 
     /**
+     * Adds a reminder to the active shop day.
+     * @param reminder
+     * @throws InvalidTimeFormatException
+     * @throws DuplicateReminderException
+     */
+
+    void addReminder(Reminder reminder) throws InvalidTimeFormatException, DuplicateReminderException;
+
+    ArrayList<Reminder> getDueReminders(ShopDay day) throws InvalidTimeFormatException;
+    /**
      * Returns a given day's transaction history
      */
+
     String getDaysHistory(String day);
 
     /**
