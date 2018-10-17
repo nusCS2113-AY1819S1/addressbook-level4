@@ -26,6 +26,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_MODULECODE = new Prefix("m/");
     public static final Prefix PREFIX_MAXENROLLMENT = new Prefix("e/");
 
-    public static final Prefix PREFIX_NOTETEXT = new Prefix("t/");
+    public static final Prefix PREFIX_NOTE_DATE = new Prefix("d/");
 
 }

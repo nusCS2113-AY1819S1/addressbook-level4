@@ -6,15 +6,16 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.note.Note;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
 import seedu.address.storage.adapter.XmlAdaptedCourse;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
 import seedu.address.storage.adapter.XmlAdaptedModule;
+import seedu.address.storage.adapter.XmlAdaptedNote;
 import seedu.address.storage.serializable.XmlSerializableClassroomList;
 import seedu.address.storage.serializable.XmlSerializableCourseList;
 import seedu.address.storage.serializable.XmlSerializableGradebookList;
 import seedu.address.storage.serializable.XmlSerializableModuleList;
+import seedu.address.storage.serializable.XmlSerializableNoteList;
 
 /**
  * This class is a storage controller for the other datasets that work alongside the main student list.
@@ -29,9 +30,9 @@ public class StorageController {
 
     private static ArrayList<XmlAdaptedCourse> courseStorage = new ArrayList<XmlAdaptedCourse>();
     private static ArrayList<XmlAdaptedModule> moduleStorage = new ArrayList<>();
-    private static ArrayList<XmlAdaptedClassroom> classesStorage = new ArrayList<XmlAdaptedClassroom>();
-    private static ArrayList<Note> noteStorage = new ArrayList<Note>();
+    private static ArrayList<XmlAdaptedClassroom> classesStorage = new ArrayList<>();
     private static ArrayList<XmlAdaptedGradebook> gradebookStorage = new ArrayList<>();
+    private static ArrayList<XmlAdaptedNote> noteStorage = new ArrayList<>();
 
     /**
      * This method retrieves all datasets saved locally.
@@ -51,8 +52,9 @@ public class StorageController {
                     XmlUtil.getDataFromFile(Paths.get(STORAGE_CLASSES), XmlSerializableClassroomList.class);
             classesStorage = classroomList.getClassroomList();
 
-            NotesManager nm = (NotesManager) XmlUtil.getDataFromFile(Paths.get(STORAGE_NOTES), NotesManager.class);
-            noteStorage = nm.getList();
+            XmlSerializableNoteList noteList =
+                    XmlUtil.getDataFromFile(Paths.get(STORAGE_NOTES), XmlSerializableNoteList.class);
+            noteStorage = noteList.getNotes();
 
             XmlSerializableGradebookList gradebookSerializable = XmlUtil.getDataFromFile(Paths.get(STORAGE_GRADEBOOK),
                     XmlSerializableGradebookList.class);
@@ -63,7 +65,7 @@ public class StorageController {
     }
 
     /**
-     This method creates files for all datasets if they do not exist on the local filesystem.
+     * This method creates files for all datasets if they do not exist on the local filesystem.
      */
     private static void createFiles() {
         File classes = new File(STORAGE_CLASSES);
@@ -83,8 +85,8 @@ public class StorageController {
     }
 
     /**
-  This method stores all data within the arraylists above to local storage.
-   */
+     * This method stores all data within the arraylists above to local storage.
+     */
     public static void storeData() {
         try {
             XmlSerializableCourseList cl = new XmlSerializableCourseList();
@@ -99,9 +101,9 @@ public class StorageController {
             classroomList.setClassroomList(classesStorage);
             XmlUtil.saveDataToFile(Paths.get(STORAGE_CLASSES), classroomList);
 
-            NotesManager nm = new NotesManager();
-            nm.setNotesList(noteStorage);
-            XmlUtil.saveDataToFile(Paths.get(STORAGE_NOTES), nm);
+            XmlSerializableNoteList noteList = new XmlSerializableNoteList();
+            noteList.setNotes(noteStorage);
+            XmlUtil.saveDataToFile(Paths.get(STORAGE_NOTES), noteList);
 
             XmlSerializableGradebookList gradebookList = new XmlSerializableGradebookList();
             gradebookList.setGradebookList(gradebookStorage);
@@ -135,19 +137,19 @@ public class StorageController {
         StorageController.classesStorage = classesStorage;
     }
 
-    public static ArrayList<Note> getNoteStorage() {
-        return noteStorage;
-    }
-
-    public static void setNoteStorage(ArrayList<Note> noteStorage) {
-        StorageController.noteStorage = noteStorage;
-    }
-
     public static ArrayList<XmlAdaptedGradebook> getGradebookStorage() {
         return gradebookStorage;
     }
 
     public static void setGradebookStorage(ArrayList<XmlAdaptedGradebook> gradebookStorage) {
         StorageController.gradebookStorage = gradebookStorage;
+    }
+
+    public static ArrayList<XmlAdaptedNote> getNoteStorage() {
+        return noteStorage;
+    }
+
+    public static void setNoteStorage(ArrayList<XmlAdaptedNote> noteList) {
+        noteStorage = noteList;
     }
 }
