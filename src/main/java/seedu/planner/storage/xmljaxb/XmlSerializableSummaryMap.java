@@ -1,7 +1,5 @@
 package seedu.planner.storage.xmljaxb;
 
-import static java.util.Objects.requireNonNull;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,7 +24,8 @@ public class XmlSerializableSummaryMap extends XmlSerializableClass<SummaryMap> 
      * This creates an empty {@code XmlSerializableSummaryMap}
      * This empty constructor is needed for marshalling
      */
-    public XmlSerializableSummaryMap() { summaryMap = new HashMap(); }
+    public XmlSerializableSummaryMap() {
+        summaryMap = new HashMap(); }
 
     /**
      * Conversion
