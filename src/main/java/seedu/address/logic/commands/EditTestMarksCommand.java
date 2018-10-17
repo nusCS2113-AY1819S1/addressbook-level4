@@ -12,9 +12,6 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-
-
-
 import seedu.address.model.Model;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
@@ -31,7 +28,9 @@ import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
 public class EditTestMarksCommand extends Command {
-
+    /**
+     * A command to edit person test marks
+     */
     public static final String COMMAND_WORD = "edit_test";
     public static final String COMMAND_WORD_2 = "et";
 

@@ -13,6 +13,7 @@ import seedu.address.commons.core.Messages;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.grade.Marks;
 import seedu.address.model.grade.Test;
@@ -21,7 +22,10 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 
-public class AddTestMarksCommand extends Command{
+public class AddTestMarksCommand extends Command {
+    /**
+     * A command to add person test name and marks
+     */
     public static final String COMMAND_WORD = "add_testmarks";
     public static final String COMMAND_WORD_2 = "addt";
 
