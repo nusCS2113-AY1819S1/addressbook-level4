@@ -17,7 +17,7 @@ public class TagCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List all items whose tag matches "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD"
+            + "Parameters: KEYWORD [MORE_KEYWORDS]..."
             + " Example: " + COMMAND_WORD + " Lab1";
 
     private final NameContainsKeywordsPredicate predicate;
