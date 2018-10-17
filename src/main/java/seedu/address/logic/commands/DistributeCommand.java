@@ -49,6 +49,7 @@ public class DistributeCommand extends Command {
         requireNonNull(model);
         new DistributeAlgorithm(model, distribute);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.commitAddressBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
