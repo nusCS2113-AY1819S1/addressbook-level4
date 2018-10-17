@@ -6,7 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
-import javafx.collections.ObservableList;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -26,6 +26,8 @@ import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.person.Product;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
+
+import javafx.collections.ObservableList;
 
 public class LoginCommandTest {
 
