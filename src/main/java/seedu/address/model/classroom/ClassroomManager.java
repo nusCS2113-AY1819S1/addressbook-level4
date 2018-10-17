@@ -24,7 +24,7 @@ public class ClassroomManager {
     }
 
     /**
-     * Gets the module list from storage and converts it to a Module array list
+     * Gets the classroom list from storage and converts it to a Classroom array list
      */
     private void readClassroomList() {
         ArrayList<XmlAdaptedClassroom> xmlClassroomList = StorageController.getClassesStorage();
@@ -34,7 +34,7 @@ public class ClassroomManager {
     }
 
     /**
-     * Converts the Classroom array list and invokes the StorageController to save the current classroom list to file
+     * Converts the classroom array list and invokes the StorageController to save the current classroom list to file
      */
     public void saveClassroomList() {
         ArrayList<XmlAdaptedClassroom> xmlClassroomList =
