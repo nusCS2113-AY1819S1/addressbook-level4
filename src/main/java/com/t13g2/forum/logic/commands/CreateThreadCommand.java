@@ -3,7 +3,6 @@ package com.t13g2.forum.logic.commands;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_COMMENT_CONTENT;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_THREAD_TITLE;
-
 import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.logic.CommandHistory;
