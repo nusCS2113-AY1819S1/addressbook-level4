@@ -103,15 +103,6 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(expenditure);
         return versionedExpenditureTracker.hasExpenditure(expenditure);
     }
-<<<<<<< HEAD
-
-    @Override
-    public boolean hasTask(Task task) {
-        requireNonNull(task);
-        return versionedAddressBook.hasTask(task);
-    }
-=======
->>>>>>> b4febe5f65e6c58d7ca6c0009fb245fe49fb1851
 
     @Override
     public void deletePerson(Person target) {
@@ -120,14 +111,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-<<<<<<< HEAD
-    public void deleteExpenditure(Expenditure target) {
-        versionedExpenditureTracker.removeExpenditure(target);
-    }
-
-    @Override
-=======
->>>>>>> b4febe5f65e6c58d7ca6c0009fb245fe49fb1851
     public void deleteTask(Task target) {
         versionedTodoList.removeTask(target);
         indicateTodoListChanged();
@@ -204,7 +187,6 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
-
 
     //=========== Filtered Task List Accessors =============================================================
 
