@@ -66,6 +66,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void logUser(User user) {
+        requireNonNull(user);
+        userAccount.logUser(user);
+    }
+
+    @Override
+    public void clearUser() {
+        userAccount.clearUser();
+    }
+
+    @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);
         return versionedEManager.hasEvent(event);

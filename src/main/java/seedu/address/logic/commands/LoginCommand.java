@@ -41,7 +41,7 @@ public class LoginCommand extends Command {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        setCurrentUser(toLogin);
+        model.logUser(toLogin);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin.getUsername().toString()));
     }
 }
