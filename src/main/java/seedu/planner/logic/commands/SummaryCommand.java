@@ -3,9 +3,6 @@ package seedu.planner.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javafx.collections.ObservableList;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;

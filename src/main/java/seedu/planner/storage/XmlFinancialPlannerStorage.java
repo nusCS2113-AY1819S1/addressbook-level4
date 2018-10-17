@@ -38,11 +38,17 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
         this.limitListFilePath = limitListFilePath;
     }
 
-    public Path getRecordListFilePath() { return recordListFilePath; }
+    public Path getRecordListFilePath() {
+        return recordListFilePath;
+    }
 
-    public Path getSummaryMapFilePath() { return summaryMapFilePath; }
+    public Path getSummaryMapFilePath() {
+        return summaryMapFilePath;
+    }
 
-    public Path getLimitListFilePath() { return limitListFilePath; }
+    public Path getLimitListFilePath() {
+        return limitListFilePath;
+    }
 
     // ===================== Financial Planner Storage methods ================================
 
@@ -70,7 +76,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     @Override
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException{
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
         saveFinancialPlanner(financialPlanner, recordListFilePath, summaryMapFilePath);
     }
 
@@ -185,6 +191,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
         return readLimitList(limitListFilePath);
     }
 
+    @Override
     public Optional<DateBasedLimitList> readLimitList(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);

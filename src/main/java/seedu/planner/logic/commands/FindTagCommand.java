@@ -2,8 +2,6 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;

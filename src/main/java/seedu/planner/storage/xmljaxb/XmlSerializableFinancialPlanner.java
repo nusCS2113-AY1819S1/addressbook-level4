@@ -7,9 +7,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javafx.collections.ObservableList;
 import seedu.planner.commons.exceptions.IllegalValueException;
-import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;

@@ -79,14 +79,14 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
                                                                    Path summaryMapFilePath)
-            throws DataConversionException, IOException{
+            throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + recordListFilePath + " and "
                  + summaryMapFilePath);
         return financialPlannerStorage.readFinancialPlanner(recordListFilePath, summaryMapFilePath);
     }
 
     @Override
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException{
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
         saveFinancialPlanner(financialPlanner, financialPlannerStorage.getRecordListFilePath(),
                 financialPlannerStorage.getSummaryMapFilePath());
     }

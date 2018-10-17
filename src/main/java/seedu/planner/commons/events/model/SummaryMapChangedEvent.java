@@ -13,5 +13,7 @@ public class SummaryMapChangedEvent extends BaseEvent {
     }
 
     @Override
-    public String toString() { return "number of dates included in summary: " + data.getSummaryMap().size(); }
+    public String toString() {
+        return "number of dates included in summary: " + data.getSummaryMap().size();
+    }
 }

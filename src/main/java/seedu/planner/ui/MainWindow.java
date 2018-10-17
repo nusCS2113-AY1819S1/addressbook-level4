@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -20,7 +19,6 @@ import seedu.planner.commons.events.ui.ExitAppRequestEvent;
 import seedu.planner.commons.events.ui.ShowHelpRequestEvent;
 import seedu.planner.logic.Logic;
 import seedu.planner.model.UserPrefs;
-import seedu.planner.model.summary.Summary;
 
 /**
  * The Main Window. Provides the basic application layout containing
