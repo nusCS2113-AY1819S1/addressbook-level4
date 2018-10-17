@@ -53,16 +53,16 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 === Creating a group: `group` `grp`
 Creates a group in the student management system +
-Format: `group n/NAME l/LOCATION` +
-Shortcut Format: `grp n/NAME l/LOCATION` +
+Format: `group n/NAME l/LOCATION [t/TAG] ...`  +
+Shortcut Format: `grp n/NAME l/LOCATION [t/TAG] ...` +
 ****
-* Creates a group with the specified NAME and LOCATION
+* Creates a group with the specified NAME, LOCATION and TAG(s)
 ****
 
 Examples:
 
-* `group n/CS2113 l/LT15`
-* `grp n/CS2113 l/LT01`
+* `group n/CS2113 l/LT15 t/java`
+* `grp n/CS2113 l/LT01 t/c t/cpp`
 
 === Add students a group: `addgroup` `addgrp`
 Adds student(s) to a group in the student management system +
@@ -360,6 +360,10 @@ e.g. `add n/James Ho g/M nat/CN p/22224444 e/jamesho@example.com a/123, Clementi
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
+* *Create Group* : `group n/NAME l/LOCATION [t/TAG] ...` +
+e.g. `group n/CS2040C l/LT15 t/cpp`
+* *Add to Group* : `addgroup g/INDEX p/INDEX ...` +
+e.g. `addgroup g/1 p/1 p/2`
 * *Edit* : `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
