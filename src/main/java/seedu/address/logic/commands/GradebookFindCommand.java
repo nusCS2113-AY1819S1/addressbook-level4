@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
+import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
@@ -22,9 +23,8 @@ public class GradebookFindCommand extends Command {
             + PREFIX_MODULECODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
 
-    private final XmlAdaptedGradebook toFindGradebookComponent;
-
-    public GradebookFindCommand(XmlAdaptedGradebook gradebookComponent) {
+    private final Gradebook toFindGradebookComponent;
+    public GradebookFindCommand (Gradebook gradebookComponent) {
         toFindGradebookComponent = gradebookComponent;
     }
 

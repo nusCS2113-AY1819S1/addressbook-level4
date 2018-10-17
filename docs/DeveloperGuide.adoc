@@ -1749,21 +1749,17 @@ Use case ends.
 
 *Extensions* :
 
-* 1a. System detects an error in the entered data.
+* 1a. Teacher enters an invalid command.
 +
-** 1a1. System displays message and format corresponding to error.
-** 1a2. Teacher enters new data.
+** 1a1. System displays the list of valid commands.
 +
-Steps 1a1-1a2 are repeated until the data entered is correct.
-+
-Use case resumes from step 2.
+Use case resumes at step 1.
 
-* *a. At any time, teacher chooses to cancel finding grade component.
+* 1b. Teacher enters the wrong parameter prefix.
 +
-** *a1. System requests to confirm the cancellation.
-** *a2. Teacher confirms request.
+** 1b1. System displays the correct format for the command.
 +
-Use case ends.
+Use case resumes at step 1.
 
 
 [discrete]

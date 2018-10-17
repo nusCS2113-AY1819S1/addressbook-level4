@@ -10,8 +10,6 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
 public class GradebookManager {
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "Unsuccessful Deletion";
-    private static final String FIND_MESSAGE_SUCCESS = "Successfully found!";
-    private static final String FIND_MESSAGE_FAIL = "Unsuccessful find";
 
     /**
      This method adds gradebook component to a module in Trajectory.
@@ -59,18 +57,8 @@ public class GradebookManager {
      This method finds gradebook component to a module in Trajectory.
      */
     public static CommandResult findGradebookComponent (String moduleCode, String gradebookComponentName) {
-        String status = FIND_MESSAGE_FAIL;
         StorageController.retrieveData();
-        StringBuilder sb = new StringBuilder();
-        for (XmlAdaptedGradebook gc: StorageController.getGradebookStorage()) {
-            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
-                status = FIND_MESSAGE_SUCCESS;
-                sb.append("Module Code: ");
-                sb.append(gc.getModuleCode() + "\n");
-                sb.append("Grade Component: ");
-                sb.append(gc.getGradeComponentName() + "\n");
-            }
-        }
-        return new CommandResult("\n" + status + "\n" + sb.toString());
+        CommandResult result = Gradebook.findGradebookComponent(moduleCode, gradebookComponentName);
+        return result;
     }
 }
