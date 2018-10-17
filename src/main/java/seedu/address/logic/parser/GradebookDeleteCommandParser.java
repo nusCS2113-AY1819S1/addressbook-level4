@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.GradebookDeleteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.gradebook.Gradebook;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
 
 /**
@@ -30,8 +31,8 @@ public class GradebookDeleteCommandParser {
 
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULECODE).get();
         String gradeItemNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
-        XmlAdaptedGradebook gradebookComponent = new XmlAdaptedGradebook(moduleCodeArg, gradeItemNameArg);
-        return new GradebookDeleteCommand(gradebookComponent);
+        Gradebook gradebook = new Gradebook(moduleCodeArg, gradeItemNameArg);
+        return new GradebookDeleteCommand(gradebook);
     }
 
     /**
