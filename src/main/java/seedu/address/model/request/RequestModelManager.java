@@ -14,7 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.UserPrefs;
 
 /**
- * Represents the in-memory requestModel of the address book data.
+ * Represents the in-memory requestModel of the BookInventory data.
  */
 public class RequestModelManager extends ComponentManager implements RequestModel {
     private static final Logger logger = LogsCenter.getLogger(RequestModelManager.class);

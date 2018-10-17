@@ -10,7 +10,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
- * Adds a request to the address book.
+ * Adds a request to the BookInventory.
  */
 public class RequestCommand extends CommandSecondary {
 

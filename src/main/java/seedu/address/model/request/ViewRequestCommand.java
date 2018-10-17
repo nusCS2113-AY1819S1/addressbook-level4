@@ -7,7 +7,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 
 /**
- * Lists all persons in the address book to the user.
+ * Lists all persons in the BookInventory to the user.
  */
 public class ViewRequestCommand extends CommandSecondary {
 

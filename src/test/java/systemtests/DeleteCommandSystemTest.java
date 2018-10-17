@@ -61,13 +61,13 @@
 //        /* ------------------ Performing delete operation while a filtered list is being shown
 // ---------------------- */
 //
-//        /* Case: filtered book list, delete index within bounds of address book and book list -> deleted */
+//        /* Case: filtered book list, delete index within bounds of BookInventory and book list -> deleted */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
 //        Index index = INDEX_FIRST_PERSON;
 //        assertTrue(index.getZeroBased() < getModel().getFilteredBookList().size());
 //        assertCommandSuccess(index);
 //
-//        /* Case: filtered book list, delete index within bounds of address book but out of bounds of book list
+//        /* Case: filtered book list, delete index within bounds of BookInventory but out of bounds of book list
 //         * -> rejected
 //         */
 //        showPersonsWithName(KEYWORD_MATCHING_MEIER);
@@ -116,7 +116,7 @@
 //    }
 //
 //    /**
-//     * Removes the {@code Book} at the specified {@code index} in {@code model}'s address book.
+//     * Removes the {@code Book} at the specified {@code index} in {@code model}'s BookInventory.
 //     * @return the removed book
 //     */
 //    private Book removePerson(Model model, Index index) {

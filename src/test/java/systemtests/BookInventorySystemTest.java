@@ -139,7 +139,7 @@ public abstract class BookInventorySystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all persons in the BookInventory.
      */
     protected void showAllPersons() {
         executeCommand(ListCommand.COMMAND_WORD);
@@ -163,7 +163,7 @@ public abstract class BookInventorySystemTest {
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all persons in the BookInventory.
      */
     protected void deleteAllPersons() {
         executeCommand(ClearCommand.COMMAND_WORD);
