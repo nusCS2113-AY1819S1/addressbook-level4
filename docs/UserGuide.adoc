@@ -447,9 +447,9 @@ Updated overall marks of CS2040C Assignment 1 to 20 marks.
 * `gradebook add c/CS2040C g/Final Examinations p/50` +
 Updated Final Examinations grade percentage to 50%.
 
-==== Remove Grade Component : `gradebook remove` `[coming in v1.3]`
+==== Remove Grade Component : `gradebook delete`
 Removes a grade item to a module code. +
-Format: `gradebook remove c/MODULE_CODE g/GRADE_ITEM'
+Format: `gradebook remove c/MODULE_CODE m/GRADE_ITEM'
 
 ****
 * Module and grade item must exist.
@@ -457,7 +457,7 @@ Format: `gradebook remove c/MODULE_CODE g/GRADE_ITEM'
 
 Examples:
 
-* `gradebook remove m/CS2040C g/Assignment 1` +
+* `gradebook remove m/CS2040C i/Assignment 1` +
 Deletes Assignment 1 gradebook component from module CS2040C.
 
 ==== Find Grade Component : `gradebook find`
