@@ -8,7 +8,6 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  This class includes all necessary validation for gradebook objects.
  */
 public class Gradebook {
-    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
 

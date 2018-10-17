@@ -2,36 +2,37 @@ package seedu.address.logic.commands;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.StorageController;
-import seedu.address.storage.adapter.XmlAdaptedGradebook;
+import seedu.address.model.gradebook.Gradebook;
+import seedu.address.model.gradebook.GradebookManager;
 
 /**
  * Lists all gradebook components for module in Trajectory to the user.
  */
 public class GradebookListCommand extends Command {
-
     public static final String COMMAND_WORD = "gradebook list";
-    private static final String MESSAGE_LIST_SUCCESS = "\nNumber of Grade Components Listed: %1$s \n%2$s";
+    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
+        GradebookManager gradebookManager = new GradebookManager();
+        StringBuilder sb = new StringBuilder();
+
         int count = 0;
         int index = 1;
 
-        StringBuilder sb = new StringBuilder();
-
-        for (XmlAdaptedGradebook gradebookAdapted: StorageController.getGradebookStorage()) {
+        for (Gradebook g: gradebookManager.getGradebooks()) {
             sb.append(index++ + ") ");
             sb.append("Module Code: ");
-            sb.append(gradebookAdapted.getModuleCode() + "\n");
+            sb.append(g.getModuleCode() + "\n");
             sb.append("Grade Component Name: ");
-            sb.append(gradebookAdapted.getGradeComponentName() + "\n");
+            sb.append(g.getGradeComponentName() + "\n");
             sb.append("Maximum Marks: ");
-            sb.append(gradebookAdapted.getGradeComponentMaxMarks() + "\n");
+            sb.append(g.getGradeComponentMaxMarks() + "\n");
             sb.append("Weightage: ");
-            sb.append(gradebookAdapted.getGradeComponentWeightage() + "\n");
+            sb.append(g.getGradeComponentWeightage() + "\n");
             count++;
         }
-        return new CommandResult(String.format(MESSAGE_LIST_SUCCESS, count, sb.toString()));
+        return new CommandResult(
+                String.format(MESSAGE_LIST_SUCCESS) + count + "\n" + sb.toString());
     }
 }
