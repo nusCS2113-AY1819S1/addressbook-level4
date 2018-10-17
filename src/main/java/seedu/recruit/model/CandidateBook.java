@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.UniqueCandidateList;
 
@@ -84,6 +85,13 @@ public class CandidateBook implements ReadOnlyCandidateBook {
         requireNonNull(editedCandidate);
 
         persons.setPerson(target, editedCandidate);
+    }
+
+    /**
+     *  Sorts the candidate list
+     */
+    public void sortCandidateByName(Prefix prefix) {
+        persons.sortPersons(prefix);
     }
 
     /**

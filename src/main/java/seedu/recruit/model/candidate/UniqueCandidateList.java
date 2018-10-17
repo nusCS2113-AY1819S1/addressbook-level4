@@ -2,12 +2,16 @@ package seedu.recruit.model.candidate;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.candidate.exceptions.DuplicatePersonException;
 import seedu.recruit.model.candidate.exceptions.PersonNotFoundException;
 
@@ -75,6 +79,19 @@ public class UniqueCandidateList implements Iterable<Candidate> {
         if (!internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
+    }
+
+    /**
+     * Sorts candidates in CandidateBook by name
+     */
+    public void sortPersons(Prefix prefix) {
+
+        Collections.sort(internalList, new Comparator<Candidate>() {
+            @Override
+            public int compare(Candidate o1, Candidate o2) {
+                return (o1.getName().toString()).compareTo(o2.getName().toString());
+            }
+        });
     }
 
     public void setPersons(UniqueCandidateList replacement) {
