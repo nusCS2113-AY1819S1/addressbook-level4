@@ -43,7 +43,8 @@ public interface AddressBookStorage {
     /**
      * @see #getExpenditureTrackerFilePath()
      */
-    Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path filePath)
+            throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyAddressBook} to the storage.
