@@ -11,26 +11,37 @@ import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTrans
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 /**
- * TODO
+ * This class stores all the shopDay objects, with their contained transactions. Each day must have a unique date.
  */
 public class SalesHistory {
     private TreeMap<String, ShopDay> salesHistory;
     private ShopDay activeDay;
 
+    /**
+     * The following constructor creates a blank sales history, with today automatically inserted.
+     */
+
     public SalesHistory() {
         this.salesHistory = new TreeMap<>();
-
-        // TODO: This is a stub for v1.2 . To be eliminated later.
         activeDay = new ShopDay();
-        try {
-            addDay(activeDay);
-        } catch (DuplicateDayException e) {
-            // This will not happen as list is initially empty.
+        salesHistory.put(activeDay.getDay(), activeDay);
+    }
+
+    /**
+     * The following constructor is to facilitate reading sales history from files.
+     * @param salesHistory
+     */
+
+    public SalesHistory(TreeMap<String, ShopDay> salesHistory) {
+        this.salesHistory = salesHistory;
+        ShopDay today = new ShopDay();
+        if (!salesHistory.containsKey(today.getDay())) {
+            salesHistory.put(today.getDay(), today);
         }
     }
 
     /**
-     *
+     * This method adds a day to the sales history.
      * @param day
      * @throws DuplicateDayException
      */
@@ -42,12 +53,13 @@ public class SalesHistory {
     }
 
     /**
-     *
+     * The following method adds a day to the sales history.
      * @param day
      * @throws DuplicateDayException
      * @throws InvalidTimeFormatException
      */
-    public void addDay(String day) throws DuplicateDayException, InvalidTimeFormatException {
+    public void addDay(String day) throws DuplicateDayException,
+            InvalidTimeFormatException {
         if (salesHistory.containsKey(day)) {
             throw new DuplicateDayException();
         }
@@ -67,44 +79,40 @@ public class SalesHistory {
         }
     }
 
-    public ShopDay getActiveDay() {
-        // TODO: Finish this exception handling.
+    public ShopDay getActiveDay() throws NoSuchElementException {
         try {
-            return getDaysHistory(this.activeDay.getDay());
+            return getDaysHistory(activeDay.getDay());
         } catch (NoSuchElementException e) {
-            // just for stub: to be updated later.
-            return null;
+            throw e;
         }
     }
 
     public void setActiveDay(ShopDay day) {
-        if (!salesHistory.containsKey(day.getDay())) {
-            try {
-                this.addDay(day);
-            } catch (DuplicateDayException e) {
-                // not possible since salesHistory does not contain the key.
-            }
+        try {
+            addDay(day);
+            activeDay = salesHistory.get(day.getDay());
+        } catch (DuplicateDayException e) {
+            activeDay = salesHistory.get(day.getDay());
         }
-        this.activeDay = salesHistory.get(day.getDay());
     }
 
+
     /**
-     * TODO
+     * The following method adds a transaction to the active day.
      * @param transaction
      */
-    public void addTransaction(Transaction transaction) {
-        // TODO: Update the exception handling here.
-
+    public void addTransaction(Transaction transaction) throws
+            InvalidTimeFormatException,
+            ClosedShopDayException,
+            DuplicateTransactionException {
         try {
             activeDay.addTransaction(transaction);
         } catch (InvalidTimeFormatException e) {
-            // TODO
-
+            throw e;
         } catch (ClosedShopDayException e) {
-            //TODO
+            throw e;
         } catch (DuplicateTransactionException e) {
-            //TODO
+            throw e;
         }
-
     }
 }

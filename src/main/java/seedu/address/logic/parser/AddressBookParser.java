@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddDistributorsCommand;
+import seedu.address.logic.commands.AddReminderCommand;
 import seedu.address.logic.commands.AddTransactionCommand;
 import seedu.address.logic.commands.ChangeUserPasswordCommand;
 import seedu.address.logic.commands.ClearCommand;
@@ -32,8 +33,11 @@ import seedu.address.logic.commands.RedoDistributorsCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoDistributorsCommand;
-import seedu.address.logic.commands.ViewLastTransaction;
+import seedu.address.logic.commands.ViewDueRemindersCommand;
+import seedu.address.logic.commands.ViewLastTransactionCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+
+
 
 /**
  * Parses user input.
@@ -60,8 +64,8 @@ public class AddressBookParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        switch (commandWord) {
 
+        switch (commandWord) {
         case AddDistributorsCommand.COMMAND_WORD:
             return new AddDistributorsCommandParser().parse(arguments);
 
@@ -116,8 +120,8 @@ public class AddressBookParser {
         case AddTransactionCommand.COMMAND_WORD:
             return new AddTransactionCommandParser().parse(arguments);
 
-        case ViewLastTransaction.COMMAND_WORD:
-            return new ViewLastTransaction();
+        case ViewLastTransactionCommand.COMMAND_WORD:
+            return new ViewLastTransactionCommand();
 
         case RedoDistributorsCommand.COMMAND_WORD:
             return new RedoDistributorsCommand();
@@ -140,9 +144,14 @@ public class AddressBookParser {
         case ChangeUserPasswordCommand.COMMAND_WORD:
             return new ChangeUserPasswordCommandParser().parse(arguments);
 
+        case AddReminderCommand.COMMAND_WORD:
+            return new AddReminderCommandParser().parse(arguments);
+
+        case ViewDueRemindersCommand.COMMAND_WORD:
+            return new ViewDueRemindersCommand();
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

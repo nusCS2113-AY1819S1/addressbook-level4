@@ -58,7 +58,7 @@ public abstract class TimeIdentifiedClass {
      * @param hour
      * @return
      */
-    public boolean isValidHour(String hour) {
+    public static boolean isValidHour(String hour) {
         if (hour.matches("d{2}")) {
             int hourValue = Integer.parseInt(hour);
             if (hourValue < NUMBER_OF_HOURS_IN_DAY && hourValue > 0) {
@@ -73,7 +73,7 @@ public abstract class TimeIdentifiedClass {
      * @param minute
      * @return
      */
-    public boolean isValidMinute(String minute) {
+    public static boolean isValidMinute(String minute) {
         if (minute.matches("\\d{2}")) {
             int minuteValue = Integer.parseInt(minute);
             if (minuteValue < NUMBER_OF_MINUTES_IN_HOUR && minuteValue > 0) {
@@ -88,7 +88,7 @@ public abstract class TimeIdentifiedClass {
      * @param second
      * @return
      */
-    public boolean isValidSecond(String second) {
+    public static boolean isValidSecond(String second) {
         if (second.matches("\\d{2}")) {
             int secondValue = Integer.parseInt(second);
             if (secondValue < NUMBER_OF_SECONDS_IN_HOUR && secondValue > 0) {

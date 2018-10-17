@@ -8,7 +8,7 @@ import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 /**
  * Javadoc
  */
-public class ViewLastTransaction extends Command {
+public class ViewLastTransactionCommand extends Command {
 
     public static final String COMMAND_WORD = "latest";
     public static final String MESSAGE_USAGE = ": Shows the details of the latest transaction.";
@@ -20,6 +20,6 @@ public class ViewLastTransaction extends Command {
         if (latestTransaction == null) {
             return new CommandResult(NO_LATEST_TRANSACTION);
         }
-        return new CommandResult(latestTransaction.getTransactionRecord());
+        return new CommandResult(latestTransaction.getTransactionRecordAsString());
     }
 }

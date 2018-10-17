@@ -2,8 +2,13 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.distributor.Distributor;
@@ -12,7 +17,12 @@ import seedu.address.model.distributor.UniqueDistributorList;
 import seedu.address.model.person.Product;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.saleshistory.SalesHistory;
+import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
+import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.shopday.ShopDay;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateReminderException;
+import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
 
@@ -159,10 +169,23 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a transaction to the active shopday.
+     * @param transaction
+     * @throws InvalidTimeFormatException
+     * @throws ClosedShopDayException
+     * @throws DuplicateTransactionException
      */
 
-    public void addTransaction(Transaction transaction) {
-        salesHistory.addTransaction(transaction);
+    public void addTransaction(Transaction transaction) throws InvalidTimeFormatException,
+            ClosedShopDayException, DuplicateTransactionException {
+        try {
+            salesHistory.addTransaction(transaction);
+        } catch (InvalidTimeFormatException e) {
+            throw e;
+        } catch (ClosedShopDayException e) {
+            throw e;
+        } catch (DuplicateTransactionException e) {
+            throw e;
+        }
         lastTransaction = transaction;
     }
 
@@ -183,6 +206,55 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     public Transaction getLastTransaction() {
         return lastTransaction;
+    }
+
+    /**
+     * This method adds a reminder to the active shop day.
+     * @param reminder
+     * @throws InvalidTimeFormatException
+     */
+    public void addReminderToActiveShopDay(Reminder reminder) throws InvalidTimeFormatException,
+            DuplicateReminderException {
+
+        if (!Transaction.isValidTransactionTime(reminder.getTime())) {
+            throw new InvalidTimeFormatException();
+        }
+
+        try {
+            salesHistory.getActiveDay().addReminder(reminder);
+        } catch (DuplicateReminderException e) {
+            throw e;
+        }
+
+    }
+
+    /**
+     * Returns the reminders which are due in the active day.
+     * @return reminder list.
+     */
+    public ArrayList<Reminder> getDueRemindersInActiveDay() {
+        final TreeMap<String, Reminder> reminderRecord = salesHistory.getActiveDay().getReminderRecord();
+        ArrayList<Reminder> reminders = new ArrayList<>();
+
+        // To get time since transaction and reminder have the same time formats.
+        final String currentTime = (new Transaction()).getTransactionTime();
+
+        // To iterate through the TreeMap.
+        Set set = reminderRecord.entrySet();
+        Iterator it = set.iterator();
+
+        while (it.hasNext()) {
+            Map.Entry entry = (Map.Entry) it.next();
+            String reminderTime = (String) entry.getKey();
+
+            //checks if reminder time is lesser than or equal to the current time.
+            if (reminderTime.compareTo(currentTime) <= 0) {
+                reminders.add((Reminder) entry.getValue());
+            } else {
+                break;
+            }
+        }
+        return reminders;
     }
 
     /**
