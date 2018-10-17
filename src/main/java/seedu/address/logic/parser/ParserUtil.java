@@ -120,4 +120,23 @@ public class ParserUtil {
         return trimmedYear;
     }
 
+    //@@author JeremyInElysium
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String milestoneDescription}
+     */
+    public static String parseMilestoneDescription(String milestoneDescription) throws ParseException {
+        requireNonNull(milestoneDescription);
+        String trimmedMilestoneDescription = milestoneDescription.trim();
+        return trimmedMilestoneDescription;
+    }
+
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String rank}
+     */
+    public static String parseRank(String rank) throws ParseException {
+        requireNonNull(rank);
+        String trimmedRank = rank.trim();
+        return trimmedRank;
+    }
+
 }

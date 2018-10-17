@@ -7,16 +7,16 @@ package seedu.address.model.task;
 public class Milestone extends Task {
     //private final String title;
     //private final String milestone_description;
-    private final Integer rank;
+    private final String rank;
 
-    public Milestone(String title, String milestoneDescription, Integer rank) {
+    public Milestone(String title, String milestoneDescription, String rank) {
         super(title, milestoneDescription, new PriorityLevel("high"));
         //this.title = title;
         //this.milestoneDescription = milestoneDescription;
         this.rank = rank;
     }
 
-    public Integer getRank() {
+    public String getRank() {
         return rank;
     }
 

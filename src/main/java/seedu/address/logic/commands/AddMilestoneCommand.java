@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.AddMilestoneCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Milestone;
@@ -50,7 +51,7 @@ public class AddMilestoneCommand extends Command implements CommandParser {
 
     @Override
     public Command parse(String arguments) throws ParseException {
-        return null;
+        return new AddMilestoneCommandParser().parse(arguments);
     }
 
     @Override
