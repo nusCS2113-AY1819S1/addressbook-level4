@@ -55,6 +55,7 @@ public class ReplyCommentCommand extends Command {
 
         this.index = index;
         this.line = line;
+        this.comment = comment;
         this.editCommentDescriptor = new EditCommand.EditPersonDescriptor();
     }
 
