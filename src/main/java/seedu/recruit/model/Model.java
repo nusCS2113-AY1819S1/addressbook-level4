@@ -61,6 +61,7 @@ public interface Model {
     /**
      * Returns true if the model has previous CandidateBook states to restore.
      */
+
     boolean canUndoCandidateBook();
 
     /**
