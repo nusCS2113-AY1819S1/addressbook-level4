@@ -8,11 +8,10 @@ import java.nio.file.Paths;
  *
  */
 public class RunningId {
-    public static final String FILE_NAME = "i";
     private static RunningId ourInstance = new RunningId();
 
     private RunningId() {
-
+        init();
     }
 
     public static RunningId getInstance() {
@@ -24,7 +23,7 @@ public class RunningId {
      */
     private void writeToFile(int currentId) {
         try {
-            Files.write(Paths.get(FILE_NAME), String.valueOf(currentId + 1).getBytes());
+            Files.write(Paths.get(StorageMapping.getInstance().getFileName(RunningId.class)), String.valueOf(currentId + 1).getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,7 +34,7 @@ public class RunningId {
      */
     private int readFromFile() {
         try {
-            String text = new String(Files.readAllBytes(Paths.get(FILE_NAME)));
+            String text = new String(Files.readAllBytes(Paths.get(StorageMapping.getInstance().getFileName(RunningId.class))));
             return Integer.valueOf(text);
         } catch (IOException e) {
             //TODO: handle error
@@ -45,7 +44,7 @@ public class RunningId {
     }
 
     private void init() {
-        if (!Files.exists(Paths.get(FILE_NAME))) {
+        if (!Files.exists(Paths.get(StorageMapping.getInstance().getFileName(RunningId.class)))) {
             writeToFile(0);
         }
     }
