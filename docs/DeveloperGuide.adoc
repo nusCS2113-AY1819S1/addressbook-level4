@@ -363,6 +363,46 @@ If a duplicate persons are found in the group of the address book during its exe
 
 // end::undoredo[]
 
+// tag::AddScriptCommand[]
+=== AddScriptCommand Feature
+==== Current Implementation
+The AddScriptCommand Feature is executed by AddressBook when the user enter the specific command.
+
+Step 1: The User executes `AddScript StudentList`, the default constructor of the AddScriptCommand
+will be executed and a new `Path` will be generated based on the parameters of the command. The path will be assign
+with `StudentList.txt` for the above case.
+// end::AddScriptCommand[]
+
+// tag::distribute[]
+=== Distribute Students Equally feature
+==== Current Implementation
+The Distribute Students Equally feature holds 4 different algorithms.
+Each Algorithm serve different purposes.
+
+* Distribute Students Equally
+* Distribute Students Equally with Balanced Gender
+* Distribute Students Equally with Balanced Nationality
+* Distribute Students Equally with Balanced Gender & Nationality
+
+Every Algorithm will require inputs such as:
+****
+* Number of Groups to be created
+* 2D ArrayList of Person Type
+* LinkList containing all person data from the address book
+* Group Name in String Type
+****
+
+From these 4 inputs, each algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
+
+==== Sequence Diagrams
+
+==== Design Considerations
+
+===== Aspect: Distribute Students Equally Algorithm Explanation
+===== Aspect: Distribute Students Equally with Balanced Gender Explanation
+===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
+===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
