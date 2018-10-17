@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= HealthBook - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,15 +12,15 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T12-2
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T12-2`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+Health Book (or some other name that we will be deciding later) is an address book application that is *catered for healthcare professionals who seek to retrieve their patients’ personal information and health-related information* all in one place. *Command Line Interface is utilized mainly for the input*, while GUI is used mainly to display the output. By combining these 2 interfaces, Health Book aims to provide healthcare professionals with the speed and efficiency obtained from a CLI while retaining the systematic view of information through the GUI.
 
-== Quick Start
+== Quick Start (to be edited in the future)
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
@@ -50,16 +50,35 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+
+*Application Workflow*
+
+1. Healthcare professionals can create new patient entries with the following mandatory details (i.e. regarded as basic information):
+   a. Name
+   b. Phone Number
+   c. Email Address
+2. The following information are optional (i.e. regarded as additional information) and is not required for the creation of patient entries. In fact, these information can only be filled in after the patient entry has been created in step 1:
+   a. NRIC Number
+   b. Date of Birth
+   c. Height
+   d. Weight
+   e. Gender
+   f. Occupation.
+   g. Marital Status
+   h. Family Members
+3. Medical report/diagnosis can only be added or after patient entries have been created. Additional information need not be completed to attach medical report/diagnosis to a patient. All fields in medical report are mandatory and cannot be omitted during the creation process.
+
 ====
 
-=== Viewing help : `help`
+=== Viewing of available commands : `help`
 
+Displays the list of commands available. +
 Format: `help`
 
 === Adding a person: `add`
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Create a new patient entry into the health book +
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS`
 
 [TIP]
 A person can have any number of tags (including 0)
@@ -67,37 +86,37 @@ A person can have any number of tags (including 0)
 Examples:
 
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567`
 
-=== Listing all persons : `list`
+=== Listing all patients : `list`
 
-Shows a list of all persons in the address book. +
+Shows a list of all persons in the health book. +
 Format: `list`
 
-=== Editing a person : `edit`
+=== Editing basic information of patient person : `edit`
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Edits an existing patient in the health book. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]`
 
 ****
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* You can remove all the patient's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
 * `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
+Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 * `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Finding patients by categories: `find`
 
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Finds patients by categories such as their name, age and marital status. +
+Format: `find category/KEYWORD UNDER CATEGORY`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
@@ -109,14 +128,18 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 
-* `find John` +
+* `find n/John` +
 Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find n/Betsy Tim John` +
+Returns any patient having names `Betsy`, `Tim`, or `John`
+* `find ms/married`
+Returns any patient who is married.
+* `find age/18`
+Returns any patient who is 18 years old.
 
-=== Deleting a person : `delete`
+=== Deleting a patient : `delete`
 
-Deletes the specified person from the address book. +
+Deletes the specified patient from the health book. +
 Format: `delete INDEX`
 
 ****
@@ -130,131 +153,213 @@ Examples:
 * `list` +
 `delete 2` +
 Deletes the 2nd person in the address book.
-* `find Betsy` +
+* `find n/Betsy` +
 `delete 1` +
 Deletes the 1st person in the results of the `find` command.
 
-=== Selecting a person : `select`
+=== Adding an appointment into patient's timetable: `addappt`
 
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
+Adds an appointment into the specified patient's timetable. +
+Format: `addappt INDEX d/DATE s/START_TIME e/END_TIME v/VENUE i/APPOINTMENT_INFORMATION dn/DOCTOR_NAME`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* Adds an appointment for the patient at the specified INDEX.
 * The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
 Examples:
 
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
+* `addappt 2 d/12092018 s/1300 e/1400 v/Consultation Room 12 i/Diabetes Checkup dn/Dr Tan` +
+Adds an appointment for the 2nd person in the list on 12/09/2018 from 1300-1400 at Consultation Room 12 for a diabetes checkup by Dr Tan
 
-=== Listing entered commands : `history`
+=== Viewing a patient's appointments timetable: `viewappts`
 
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
+Shows a list of all appointments in the specified patient's timetable. +
+Format: `viewappts INDEX`
 
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
-
-// tag::undoredo[]
-=== Undoing previous command : `undo`
-
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
+****
+* Views all appointments of the patient at the specified index.
+* The index refers to the index number shown in the displayed person list.
+****
 
 Examples:
 
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
+* `viewappts 2` +
+Views all appointments of the 2nd person in the list.
 
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
+=== Editing an appointment in a patient's timetable: `editappt`
 
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+Edits a specified appointment in the patient's timetable. +
+Format: `editappt INDEX [d/DATE] [s/START_TIME] [e/END_TIME]
+[v/VENUE] [i/APPOINTMENT_INFORMATION] [dn/DOCTOR_NAME]`
 
-=== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format: `redo`
+****
+* Edits a patient’s appointment at the specified index.
+* The index refers to the index number shown in the displayed appointment list.
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
 
 Examples:
 
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
+* `editappt 2 s/1400 e/1500 v/Consultation Room 13` +
+Edits the 2nd appointment in the list to have start time of 1400, end time of 1500,
+and venue of Consultation Room 13.
 
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
+=== Deleting an appointment in a patient’s timetable: `deleteappt`
 
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
+Deletes a specified appointment in the patient’s timetable. +
+Format: `deleteappt INDEX`
 
-=== Clearing all entries : `clear`
+****
+* Deletes a patient’s appointment at the specified index.
+* The index refers to the index number shown in the displayed appointment list.
+****
 
-Clears all entries from the address book. +
-Format: `clear`
+Examples:
 
-=== Exiting the program : `exit`
+* `deleteappt 2` +
+Deletes the 2nd appointment in the displayed appointment list.
 
-Exits the program. +
-Format: `exit`
+=== Adding additional information of patient: `addinfo`
 
-=== Saving the data
+Add the following additional information: NRIC, DOB (in DDMMYYYY format), height (cm), weight (kg),
+gender, occupation, marital status, family member. +
+Note: age field will be auto-calculated once DOB is populated +
+Format: `addinfo INDEX [i/NRIC] [d/DOB]`
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
+.Constraints for `[i/NRIC]`:
+* Must start with 'S' or 'T' followed by 7 digits before ending with an alphabet
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+.Constraints for `[d/DOB]`:
+* Must be in the format `dd-MM-YYYY`
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Work In Progress: `[h/HEIGHT] [w/WEIGHT] [g/GENDER] [o/OCCUPATION] [m/MARITAL_STATUS] [f/FAMILY_MEMBER_INDEX]`
+
+Examples:
+
+* `addinfo 2 n/S9123456A d/01-01-1990` +
+For patient in index 2, populate NRIC field with S91234567A, date of birth field
+with 01-01-1990, height field with 154, gender field with Male and associate
+patient in index 3 as family member.
+
+=== Adding of Medical Report: `addreport`
+
+Add medical diagnosis/report to the patient. +
+Format: `addreport INDEX [t/TITLE] [d/DATE] [mr/MEDICAL_REPORT]`
+
+Examples:
+
+* `addreport 3 t/ASTHMA d/01012018 mr/Patient diagnosed with asthma and prescribed XXX medicine. Next appointment on 02-02-2018.` +
+Adds a new medical report for patient at index 3 titled ASTHMA, dated 01-01-2018 with the report stating that the patient has been diagnosed with asthma and is prescribed XXX medicine. Next appointment on 02-02-2018.
+
+=== Editing of Medical Report: `editreport`
+
+Edit existing medical diagnosis/report of the patient. +
+Format: `editreport INDEX_PATIENT INDEX_REPORT [t/TITLE] [d/DATE] [mr/MEDICAL_REPORT]`
+
+****
+* `INDEX_PATIENT` refers to the index shown in the displayed person list
+* `INDEX_REPORT` refers to the index shown in the displayed report list
+****
+
+Examples:
+
+* `editreport 3 1 t/DEPRESSION d/02012018 mr/Patient diagnosed with depression and prescribed XXX medicine. Next appointment is on 03-02-2018` +
+Edits title, date and information of existing medical report at index 1 for patient at index 3 titled DEPRESSION, dated 02-01-2018 with the report stating that the patient has been diagnosed with depression and is prescribed XXX medicine. Next appointment on 03-02-2018.
+
+=== List of Medical Report: `listreport`
+
+List all medical diagnosis/reports of a patient +
+Format: `listreport INDEX`
+
+Examples:
+
+* `listreport 1` +
+List all medical reports/diagnosis that are attached to patient at index 1.
+
+=== Sort patients list: `sortlist`
+
+Sort the list of patients according to a specific category. +
+Format: `sortlist CATEGORY ORDER_INDEX`
+
+`CATEGORY` refers to certain types of important patient information such as name, blood type,
+allergy etc. and each of these information will be defined by their first letter. (ie n for name)
+`ORDER_INDEX` can be 1 or 2 where 1 means in alphabetical and 2 means in reverse order.
+
+Example:
+
+* `sortlist n 2` +
+Sort the patient list by their names in reverse order (Z → A).
+
+=== View patient’s information: `view`
+
+View patient’s general and additional information. +
+Format: `view INDEX`
+
+Example:
+
+* `view 1` +
+Display information of patient at index 1
+
+=== Import files to other computers: `import`
+
+Import patient’s info as a txt file from a specified directory and file name. +
+Format: `import DIRECTORY_NAME/FILE_NAME`
+
+Example:
+
+* `import Desktop/patient1info.txt`
+
+=== Export files to other computers: `export`
+
+Export patient’s info as a txt file to a specified directory and file name. +
+Format: `export INDEX DIRECTORY_NAME/FILE_NAME`
+
+Example:
+
+* `export 1 Desktop/patient1info.txt`
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+Empty.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
+* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS` +
+e.g. `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
 * *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+* *Edit* : `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]` +
+e.g. `edit 1 p/91234567 e/johndoe@example.com`
+* *Find* : `find category/KEYWORD UNDER CATEGORY` +
+e.g. `find ms/married` +
+e.g. `find age/18` +
+e.g. `find n/Betsy Tim John`
+* *Delete* : `delete INDEX` +
+e.g. `delete 2`
+* *Add Timetable* : `add timetable INDEX d/DATE s/START_TIME e/END_TIME v/VENUE i/APPOINTMENT_INFORMATION dn/DOCTOR_NAME` +
+e.g. `add timetable 2 d/12092018 s/1300 e/1400 v/Consultation Room 12 i/Diabetes Checkup dn/Dr Tan`
+* *View Timetable* : `view timetable INDEX` +
+e.g. `view timetable 2`
+* *Edit Timetable* : `edit timetable INDEX [d/DATE] [s/START_TIME] [e/END_TIME] [v/VENUE] [i/APPOINTMENT_INFORMATION] [dn/DOCTOR_NAME]` +
+e.g.`edit timetable 2 s/1400 e/1500 v/Consultation Room 13`
+* *Delete Timetable* : `delete timetable INDEX` +
+e.g. `delete timetable 2`
+* *Add Information* : `addinfo INDEX [n/NRIC] [d/DOB] [h/HEIGHT] [w/WEIGHT] [g/GENDER] [o/OCCUPATION] [m/MARITAL_STATUS] [f/FAMILY_MEMBER_INDEX]` +
+e.g. `addinfo 2 n/S9123456A d/01011990 h/154 g/M f/3`
+* *Edit Information* : `editinfo INDEX [n/NRIC] [d/DOB] [h/HEIGHT] [w/WEIGHT] [g/GENDER] [o/OCCUPATION] [m/MARITAL_STATUS] [f/FAMILY_MEMBER_INDEX]` +
+e.g. `editinfo 2 n/S9123456A d/01011990 h/154 g/M f/3`
+* *Add Medical Report* : `addreport INDEX [t/TITLE] [d/DATE] [mr/MEDICAL_REPORT]` +
+e.g. `addreport 3 t/ASTHMA d/01012018 mr/Patient diagnosed with asthma and prescribed XXX medicine. Next appointment on 02-02-2018.`
+* *Edit Medical Report* : `editreport INDEX_PATIENT INDEX_REPORT [t/TITLE] [d/DATE] [mr/MEDICAL_REPORT]` +
+e.g. `editreport 3 1 t/DEPRESSION d/02012018 mr/Patient diagnosed with depression and prescribed XXX medicine. Next appointment is on 03-02-2018.`
+* *List Medical Report* : `listreport INDEX` +
+e.g. `listreport 1`
+* *Sort* : `sortlist CATEGORY ORDER_INDEX` +
+e.g. `sortlist n 2`
+* *View* : `view INDEX` +
+e.g. view 1
+* *Import Document* : `import DIRECTORY_NAME/FILE_NAME` +
+e.g. `import Desktop/patient1info.txt`
+* *Export Document* : `export INDEX DIRECTORY_NAME/FILE_NAME` +
+e.g. `export 1 Desktop/patient1info.txt`
