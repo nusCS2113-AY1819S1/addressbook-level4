@@ -756,12 +756,12 @@ e.g. `class modattend c/T16 i/A6942069M`
 e.g. `note add m/CS2040C`
 * *List notes* `note list m/MODULE_CODE` +
 e.g. `note list m/CS2040C`
-* *Delete a note* `note delete m/MODULE_CODE INDEX` `[Coming in v1.2]` +
-e.g. `note delete m/CS2040C 8`
-* *Edit a note* `note edit m/MODULE_CODE INDEX [p/PRIORITY_LEVEL] [d/DATE]` `[Coming in v1.3] +
+* *Delete a note* `note delete INDEX` +
+e.g. `note delete 8`
+* *Edit a note* `note edit INDEX [m/MODULE_CODE] [d/DATE]` `[Coming in v1.3] +
 e.g. `note edit m/CS2040C 5 p/3`
-* *Find a note* `note find m/MODULE_CODE k/KEYWORD [k/KEYWORD]..` `[Coming in v1.2]` +
-e.g. `note find m/CS2040C k/bubble`
+* *Find a note* `note find k/KEYWORD [k/KEYWORD]..` `[Coming in v1.3]` +
+e.g. `note find k/bubble k/queue`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
