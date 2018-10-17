@@ -9,10 +9,10 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  */
 public class GradebookManager {
     private static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
-    private static final String MESSAGE_ADD_SUCCESS = "Successfully Added! \nModule Code: %1$s"
+    private static final String MESSAGE_ADD_SUCCESS = "\nSuccessfully Added! \nModule Code: %1$s"
             + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
     private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
-    private static final String MESSAGE_LIST_SUCCESS = "Number of Grade Components Listed: ";
+    private static final String MESSAGE_LIST_SUCCESS = "\nNumber of Grade Components Listed: %1$s \n%2$s";
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
     private static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted!";
@@ -51,12 +51,27 @@ public class GradebookManager {
     }
 
     /**
-     This method lists gradebook component to a module in Trajectory.
+     This method lists all gradebook components found in Trajectory.
      */
-    public static CommandResult listGradebookComponent () {
-        StorageController.retrieveData();
-        CommandResult result = Gradebook.listGradebookComponent();
-        return result;
+    public static String listGradebookComponent() {
+        int count = 0;
+        int index = 1;
+        StringBuilder sb = new StringBuilder();
+        for (XmlAdaptedGradebook gradebookAdapted: StorageController.getGradebookStorage()) {
+            sb.append(index++ + ") ");
+            sb.append("Module Code: ");
+            sb.append(gradebookAdapted.getModuleCode() + "\n");
+            sb.append("Grade Component Name: ");
+            sb.append(gradebookAdapted.getGradeComponentName() + "\n");
+            sb.append("Maximum Marks: ");
+            sb.append(gradebookAdapted.getGradeComponentMaxMarks() + "\n");
+            sb.append("Weightage: ");
+            sb.append(gradebookAdapted.getGradeComponentWeightage() + "\n");
+            count++;
+        }
+        return String.format(MESSAGE_LIST_SUCCESS,
+                count,
+                sb.toString());
     }
 
     /**

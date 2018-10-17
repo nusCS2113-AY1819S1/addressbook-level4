@@ -13,8 +13,8 @@ public class GradebookListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        CommandResult result = GradebookManager.listGradebookComponent();
-        return result;
+        String result = GradebookManager.listGradebookComponent();
+        return new CommandResult(result);
     }
 }
 

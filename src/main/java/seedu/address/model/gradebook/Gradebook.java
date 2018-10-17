@@ -55,28 +55,6 @@ public class Gradebook {
     }
 
     /**
-     This method lists all gradebook components found in Trajectory.
-     */
-    public static CommandResult listGradebookComponent() {
-        int count = 0;
-        int index = 1;
-        StringBuilder sb = new StringBuilder();
-        for (XmlAdaptedGradebook gc: StorageController.getGradebookStorage()) {
-            sb.append(index++ + ") ");
-            sb.append("Module Code: ");
-            sb.append(gc.getModuleCode() + "\n");
-            sb.append("Grade Component Name: ");
-            sb.append(gc.getGradeComponentName() + "\n");
-            sb.append("Maximum Marks: ");
-            sb.append(gc.getGradeComponentMaxMarks() + "\n");
-            sb.append("Weightage: ");
-            sb.append(gc.getGradeComponentWeightage() + "\n");
-            count++;
-        }
-        return new CommandResult("\n" + MESSAGE_LIST_SUCCESS + count + "\n" + sb.toString());
-    }
-
-    /**
      This method finds gradebook component to a module in Trajectory.
      */
     public static CommandResult findGradebookComponent (String moduleCode, String gradebookComponentName) {
