@@ -82,7 +82,17 @@ public class ParserUtil {
         }
         return new Quantity(trimmedMinQuantity);
     }
-
+    /**
+     * Parses a {@code String Status} into a {@code Status}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code Status} is invalid.
+     */
+    public static String parseStatus(String status) throws ParseException {
+        requireNonNull(status);
+        String trimmedStatus = status.trim();
+        return trimmedStatus;
+    }
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
@@ -108,5 +118,20 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    //@@author kelvintankaiboon
+    /**
+     *
+     * Parses a {@code String fileName}.
+     * @throws ParseException if the given string is invalid.
+     */
+    public static String parseFileName(String fileName) throws ParseException {
+        requireNonNull(fileName);
+        String trimmedName = fileName.trim();
+        if (!Name.isValidName(trimmedName)) {
+            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return trimmedName;
     }
 }

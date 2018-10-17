@@ -9,7 +9,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_NAME = new Prefix("n/");
     public static final Prefix PREFIX_QUANTITY = new Prefix("q/");
     public static final Prefix PREFIX_MIN_QUANTITY = new Prefix("m/");
-    public static final Prefix PREFIX_STATUS = new Prefix("s/");
+    public static final Prefix PREFIX_ORIGINAL_STATUS = new Prefix("os/");
+    public static final Prefix PREFIX_NEW_STATUS = new Prefix("ns/");
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
 }
