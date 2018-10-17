@@ -957,14 +957,42 @@ details manually
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
+=== Use case: Add schedule
+
+*MSS*
+
+1.  User requests to add personal schedule.
+2.  User adds in non-available time slots with event tag.
+3.  Jithub shows user available time slots.
+4.  User selects a group of persons.
+5.  Jithub shows the common available time slots among all selected persons.
++
+Use Case ends.
+
+*Extensions*
+
+* 2a. User requests to delete added schedule.
++
+Use case resumes at step 3.
+
+* 2a. User does not add anything.
++
+Use case resumes at step 3.
+
+* 5a. No common time slots available.
++
+Use Case ends.
+
+
+[discrete]
 === Use case: Delete person
 
 *MSS*
 
 1.  User requests to list persons
-2.  AddressBook shows a list of persons
+2.  Jithub shows a list of persons
 3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+4.  Jithub deletes the person
 +
 Use case ends.
 
