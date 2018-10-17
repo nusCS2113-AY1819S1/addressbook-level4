@@ -58,6 +58,14 @@ public class AddCommentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+        List<Event> filteredEventList = model.getFilteredEventList();
+
+
+        if (index.getZeroBased() >= filteredEventList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
         String test =
                 "<span>Comment Section</span>\n"
                         + "<ol>\n"
@@ -82,14 +90,6 @@ public class AddCommentCommand extends Command {
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }
-
-        requireNonNull(model);
-        List<Event> filteredEventList = model.getFilteredEventList();
-
-
-        if (index.getZeroBased() >= filteredEventList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
