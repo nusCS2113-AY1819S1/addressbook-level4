@@ -347,7 +347,38 @@ The same concept can also be applied to events, being able to invite one person 
 Implementation of this additional feature would require changes to both `InviteCommandParser` and `InviteCommand#execute`.
 // end::Invite[]
 
+// tag:: Sorting[]
 
+=== Event Sorting
+
+==== Current Implementation
+
+The sort mechanism is facilitated by Comparator<Event>.
+When the sort method for FXObservableList is called, it will take a Comparator object to be used for sorting the list.
+The comparator is able to take in two Event class objects and compare the relative parameter values.
+The parameter can be `EventName`, `Date` & `StartTime`.
+To allow sorting of these parameters, there are three types of comparators.
+
+
+image::SortNewCommand1StateListDiagram.png[width="650"]
+
+The following sequence diagram shows how the sort operation works:
+
+image::SortSequenceDiagram.png[width="650"]
+
+
+==== Design Considerations
+
+===== Committing Event List after sorting
+
+* **Alternative 1 (current choice):** Commits and saves the entire event list.
+** Pros: Easy to implement and able to use undo to the previous state.
+** Cons: May have performance issues in terms of memory usage.
+* **Alternative 2:** Does not commit the event list.
+** Pros: Will use less memory.
+** Cons: Unable to use undo function to revert back to the previous view.
+
+// end::Sorting[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

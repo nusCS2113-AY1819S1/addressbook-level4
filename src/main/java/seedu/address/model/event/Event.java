@@ -143,14 +143,23 @@ public class Event implements Comparable<Event> {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getEventName())
+                .append("\n")
                 .append(MESSAGE_DESCRIPTION)
                 .append(getDescription())
+                .append("\n")
                 .append(MESSAGE_LOCATION)
                 .append(getLocation())
+                .append("\n")
+                .append(MESSAGE_DATE)
+                .append(getDate())
+                .append("\n")
                 .append(MESSAGE_START_TIME)
                 .append(getStartTime())
+                .append("\n")
                 .append(MESSAGE_END_TIME)
-                .append(getEndTime());
+                .append(getEndTime())
+                .append("\n")
+                .append(attendees.toString());
         return builder.toString();
     }
 
