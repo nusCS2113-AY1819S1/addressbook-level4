@@ -10,7 +10,8 @@
     <scene>
         <Scene>
             <AnchorPane id="AnchorPane" maxHeight="1000" maxWidth="1000" minHeight="200" minWidth="200"
-                        prefHeight="288.0" prefWidth="293.0" xmlns:fx="http://javafx.com/fxml">
+                        prefHeight="288.0" prefWidth="293.0" xmlns:fx="http:
+                        //javafx.com/fxml">
                 <children>
                     <TableView fx:id="personTable" layoutX="35.0" layoutY="28.0" prefHeight="200.0" prefWidth="227.0"
                                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">

@@ -9,13 +9,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class GroupName {
     public static final String MESSAGE_GROUP_NAME_CONSTRAINTS =
-            "Group names should only contain alphanumeric characters and "
-                    + "certain characters such as '[', ']' and '-' and should it not be blank";
+            "Group names should only contain alphanumeric characters, '-', '[' and ']', "
+                    + "and it should not be blank";
 
-    /*
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
-     * Allows user to input alphanumeric and '-', '[' and ']' characters
+     * Allows user to input alphanumeric, '-', '[' and ']' characters
      */
     public static final String GROUP_NAME_VALIDATION_REGEX = "[\\p{Alnum}\\-\\[\\]][\\p{Alnum}\\-\\[\\]]*";
 
@@ -51,8 +51,4 @@ public class GroupName {
                 && groupName.equals(((GroupName) other).groupName)); // state check
     }
 
-    @Override
-    public int hashCode() {
-        return groupName.hashCode();
-    }
 }

@@ -114,7 +114,7 @@ public class EditCommand extends Command {
         Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedName, updateGender, updateNationality, updatedPhone,
-                updatedEmail, updatedAddress, updatedGrade, updatedTags);
+                updatedEmail, updatedAddress, updatedGrade, updatedTags, null);
     }
 
     @Override
@@ -231,6 +231,7 @@ public class EditCommand extends Command {
         public Optional<Grade> getGrade() {
             return Optional.ofNullable(grade);
         }
+
 
 
         /**

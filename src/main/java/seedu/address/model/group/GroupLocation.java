@@ -8,27 +8,29 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidGroupLocation(String)}
  */
 public class GroupLocation {
-    public static final String MESSAGE_GROUP_LOCATION_CONSTRAINTS =
-            "GroupLocation can take '-' and alphanumeric characters, and should not be blank";
 
-    /*
+    public static final String MESSAGE_GROUP_LOCATION_CONSTRAINTS =
+            "Group locations should only contain alphanumeric characters and '-', "
+                    + "and it should not be blank";
+
+    /**
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      * Allow user to input '-' and alphanumeric characters
      */
     public static final String LOCATION_VALIDATION_REGEX = "[\\p{Alnum}\\-][\\p{Alnum}\\-]*";
 
-    public final String value;
+    public final String groupLocation;
 
     /**
      * Constructs a {@code GroupLocation}.
      *
-     * @param groupLocation A valid location.
+     * @param groupLocation A valid group location.
      */
     public GroupLocation(String groupLocation) {
         requireNonNull(groupLocation);
         checkArgument(isValidGroupLocation(groupLocation), MESSAGE_GROUP_LOCATION_CONSTRAINTS);
-        value = groupLocation;
+        this.groupLocation = groupLocation;
     }
 
     public static boolean isValidGroupLocation(String test) {
@@ -37,19 +39,14 @@ public class GroupLocation {
 
     @Override
     public String toString() {
-        return value;
+        return groupLocation;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof GroupLocation // instanceof handles nulls
-                && value.equals(((GroupLocation) other).value)); // state check
-    }
-
-    @Override
-    public int hashCode() {
-        return value.hashCode();
+                && groupLocation.equals(((GroupLocation) other).groupLocation)); // state check
     }
 
 }

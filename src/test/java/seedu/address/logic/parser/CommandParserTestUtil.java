@@ -10,6 +10,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class CommandParserTestUtil {
 
+    public static final String VALID_GROUP_INDEX_1 = "1";
+    public static final String VALID_PERSON_INDEX_1 = "1";
+    public static final String VALID_PERSON_INDEX_2 = "2";
+    public static final String VALID_PERSON_INDEX_3 = "3";
+
     /**
      * Asserts that the parsing of {@code userInput} by {@code parser} is successful and the command created
      * equals to {@code expectedCommand}.

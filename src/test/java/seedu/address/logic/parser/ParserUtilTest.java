@@ -2,7 +2,6 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
@@ -15,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
@@ -35,6 +35,10 @@ public class ParserUtilTest {
     private static final String INVALID_GROUP_NAME = "TUT/1";
     private static final String INVALID_GROUP_LOCATION = "E1/01/01";
 
+    private static final String INVALID_INDEX = "e";
+
+    private static final String VALID_INDEX_1 = "1";
+    private static final String VALID_INDEX_2 = "2";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
     private static final String VALID_ADDRESS = "123 Main Street #0505";
@@ -70,6 +74,34 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseIndices_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseIndices(null);
+    }
+
+    @Test
+    public void parseIndices_collectionWithInvalidIndices_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseIndices(Arrays.asList(VALID_INDEX_1, INVALID_INDEX));
+    }
+
+    @Test
+    public void parseIndices_emptyCollection_returnsEmptySet() throws Exception {
+        assertTrue(ParserUtil.parseIndices(Collections.emptyList()).isEmpty());
+    }
+
+    @Test
+    public void parseIndices_collectionWithValidIndices_returnsIndexSet() throws Exception {
+        Set<Index> actualIndexSet = ParserUtil.parseIndices(Arrays.asList(VALID_INDEX_1, VALID_INDEX_2));
+
+        Set<Index> expectedIndexSet = new HashSet<>();
+        expectedIndexSet.add(Index.fromOneBased(Integer.valueOf(VALID_INDEX_1)));
+        expectedIndexSet.add(Index.fromOneBased(Integer.valueOf(VALID_INDEX_2)));
+
+        assertEquals(expectedIndexSet, actualIndexSet);
     }
 
     @Test

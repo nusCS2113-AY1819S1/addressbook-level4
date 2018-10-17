@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.GroupBuilder;
@@ -171,6 +172,16 @@ public class CreateGroupCommandTest {
 
         @Override
         public boolean hasGroup(Group checkGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addGroup(AddGroup addGroup) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasPersonInGroup(AddGroup addGroup) {
             throw new AssertionError("This method should not be called.");
         }
     }
