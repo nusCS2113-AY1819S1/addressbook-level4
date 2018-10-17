@@ -1,15 +1,18 @@
 package seedu.planner.model.record;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import seedu.planner.testutil.LimitBuilder;
-
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_100;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_500;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_DATE_START_DIFF;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import seedu.planner.testutil.LimitBuilder;
+
+
 
 
 public class LimitTest {

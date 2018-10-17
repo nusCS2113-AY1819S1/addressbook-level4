@@ -60,7 +60,7 @@ public class LimitBuilder {
 
 
     public Limit build() {
-        return new Limit( dateStart, dateEnd, moneyFlow);
+        return new Limit(dateStart, dateEnd, moneyFlow);
     }
 
 }
