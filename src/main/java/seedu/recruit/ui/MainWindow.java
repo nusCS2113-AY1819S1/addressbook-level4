@@ -4,7 +4,6 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -12,7 +11,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.Node;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -33,8 +31,8 @@ import seedu.recruit.model.UserPrefs;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
-    private static volatile String currentBook = "companyBook";
+    
+    private static String currentBook = "companyBook";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -185,8 +183,9 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getCandidateBookFilePath(),
-                logic.getFilteredCompanyList().size());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(
+                prefs.getCandidateBookFilePath(), prefs.getCompanyBookFilePath(),
+                logic.getFilteredPersonList().size(), logic.getFilteredCompanyList().size());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
@@ -256,11 +255,11 @@ public class MainWindow extends UiPart<Stage> {
     public static String getDisplayedBook() {
         if (currentBook.contentEquals("companyBook")) {
             return "companyBook";
-        }
-        else if (currentBook.contentEquals("candidateBook")) {
+        } else if (currentBook.contentEquals("candidateBook")) {
             return "candidateBook";
+        } else {
+            return "Error in Switching Book";
         }
-        else return "Error in Switching Book";
     }
 
     void releaseResources() {

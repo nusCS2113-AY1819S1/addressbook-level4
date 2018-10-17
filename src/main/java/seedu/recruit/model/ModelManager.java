@@ -288,6 +288,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
     }
+
     public EmailUtil getEmailUtil() {
         return emailUtil;
     }
