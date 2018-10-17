@@ -21,7 +21,9 @@ import javafx.collections.ObservableList;
 import seedu.planner.commons.events.ui.JumpToListRequestEvent;
 import seedu.planner.commons.util.FileUtil;
 import seedu.planner.commons.util.XmlUtil;
+import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.record.Record;
+import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 
 public class RecordListPanelTest extends GuiUnitTest {
@@ -79,11 +81,14 @@ public class RecordListPanelTest extends GuiUnitTest {
      * Returns a list of records containing {@code recordCount} records that is used to populate the
      * {@code RecordListPanel}.
      */
+    //TODO: @test Rewrite this to not hardcode it. Originally supposed to get FP from reading directly
     private ObservableList<Record> createBackingList(int recordCount) throws Exception {
         Path xmlFile = createXmlFileWithRecords(recordCount);
         XmlSerializableFinancialPlanner xmlFinancialPlanner =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableFinancialPlanner.class);
-        return FXCollections.observableArrayList(xmlFinancialPlanner.toModelType().getRecordList());
+        FinancialPlanner financialPlanner = new FinancialPlanner();
+        financialPlanner.resetData(xmlFinancialPlanner.toModelType(), new SummaryMap());
+        return FXCollections.observableArrayList(financialPlanner.getRecordList());
     }
 
     /**
