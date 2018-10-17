@@ -13,9 +13,9 @@ public class ClassDeleteCommandTest {
         final String className = "T16";
         final String moduleCode = "CG1111";
         final ClassDeleteCommand standardCommand = new ClassDeleteCommand(className, moduleCode);
-//        // null -> returns false
+        // null -> returns false
         assertFalse(standardCommand.equals(null));
-//        // different types -> returns false
+        // different types -> returns false
         assertFalse(standardCommand.equals(new ClearCommand()));
     }
 }
