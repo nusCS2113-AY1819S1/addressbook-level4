@@ -139,7 +139,7 @@ public interface Model {
     /**
      * Sorts the candidates in CandidateBook
      */
-    void sortByName(Prefix prefix);
+    void sortCandidates(Prefix prefix);
 
     /**
      * Returns true if the model has previous CompanyBook states to restore.

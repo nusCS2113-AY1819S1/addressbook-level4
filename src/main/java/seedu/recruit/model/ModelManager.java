@@ -117,8 +117,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void sortByName(Prefix prefix) {
-        versionedCandidateBook.sortCandidateByName(prefix);
+    public void sortCandidates(Prefix prefix) {
+        versionedCandidateBook.sortCandidates(prefix);
         indicateCandidateBookChanged();
     }
 
