@@ -111,8 +111,6 @@ public class DistributeAlgorithm {
      */
     private void nationalityDistribution(int index, ArrayList<ArrayList<Person>> groupArrayList,
                                          LinkedList<Person> allPerson, String groupName) {
-    //   LinkedList<Person> nationalityLinkList = CreateNationalityList(allPerson);
-    //        int numOfDifferentNationality = numberOfDifferentNationality(allPerson);
 
     }
 
@@ -172,25 +170,6 @@ public class DistributeAlgorithm {
     }
 
     /* --- MODULAR METHODS --- **/
-
-    //    private LinkedList<Person> CreateNationalityList(LinkedList<Person> allPerson) {
-    //        //number of different nationality
-    //        Map<Nationality, Long> counts = numberOfDifferentNationality(allPerson);
-    //        Map<Nationality, Long> sortedCount = paxPerNationality(counts);
-    //        LinkedList<Person> NationalityLinkList = new LinkedList<>();
-    //
-    //        System.out.println(counts.size());
-    //        System.out.println(sortedCount);
-    //
-    //        for (int i = 0; i < counts.size(); i++) {
-    //            String[] parseValue = sortedCount.entrySet().toArray()[i].toString().split("=");
-    ////            int value = Integer.parseInt(parseValue[1]);
-    //            System.out.print(sortedCount.keySet().toArray()[i] + " ");
-    ////            System.out.println(value);
-    //        }
-    //        return NationalityLinkList;
-    //    }
-
     /**
      * This function shuffles all the person inside the LinkedList, with a specific seed.
      * @param person
