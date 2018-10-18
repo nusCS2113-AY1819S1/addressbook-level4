@@ -10,7 +10,7 @@ import seedu.address.model.classroom.ClassroomManager;
 import seedu.address.ui.HtmlTableProcessor;
 
 /**
- * Lists all all the class from the classlist.
+ * Lists all the class from the classroom list.
  */
 public class ClassListCommand extends Command {
 
