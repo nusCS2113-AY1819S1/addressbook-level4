@@ -228,7 +228,8 @@ image::StorageClassDiagram.png[width="800"]
 The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the RecordList data in xml format and read it back.
+* can save the LimitList data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -318,6 +319,69 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
+// tag:list[]
+=== Limit feature
+==== Current Implementation
+The limit command is based on the data type "Date", which includes two dates and moneyFlow.
+Once the user execute the limit command, the program will read all the records from the memory.
+
+The user need to input two dates, the first one is start date while the second one is end date.
+And the user also need to input the limit money they want to set. The user enter two dates after the
+one "d/" index followed by money with m/ index.
+
+The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/` is then passed into `LimitCommandParser#splitByWhitespace` for further processing and returns an array.
+This string will be split into two strings and each of them will be construct as a date type variable
+. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+
+The following sequence diagram shows how the limit operation works:
+
+image::LimitSequenceDiagram.png[width:800]
+
+=== List history feature
+==== Current Implementation
+The list mechanism is facilitated by `ModelManager`.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
+ListCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode.
+
+This feature has only one keyword `list` but implements 3 different argument modes to allow users to access multiple versions of the same command.
+The three argument modes are as listed below:
+
+* No Argument mode -- Requires no arguments and returns the entire list of records in the FinancialPlanner.
+* Single Argument mode -- Requires a single date and returns all records containing that date
+* Dual Argument mode -- Requires 2 dates, a `start date` and an `end date`. It returns all records containing dates within the time frame of start date and end date, inclusive of both start date and end date
+The mechanism that facilitates these modes can be found in the `ListCommandParser#parse`. Below is a overview of the mechanism:
+
+. The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/` is then passed into `ListCommandParser#splitByWhitespace` for further processing and returns an array.
+. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+
+The `ListCommand` has two constructors which makes use of overloading to reduce code complexity.
+
+* One constructor has no arguments and assigns default predicate for the `FilteredList` in `ModelManager`,
+`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list.
+* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval.
+
+The following sequence diagram shows how the list operation works:
+
+image::ListSequenceDiagram.png[width="800"]
+
+For simplicity, interactions with the UI is not shown in the diagram above. +
+The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This listener is present in `RecordListPanel` and will update the UI list automatically.
+
+=== Design Considerations
+==== Aspect: Data structure to support listing of records
+
+* **Alternative 1 (current choice):** Uses a FilteredList that is tracked by the UI. FilteredLIst is a wrapper around the ObservableList<Record> that is stored in UniquePersonList which allows for any changes in the observable list to be propagated to the filtered list automatically.
+** Pros: Easy to implement
+** Cons: May take a significantly longer time to list records if there are many records spanning across a large timeframe.
+
+* **Alternative 2:** Implement a HashMap with Date as the key and Record as the value.
+** Pros: Allows for constant time complexity to access any elements. Hence, listing records can potentially be faster.
+** Cons: Current UI implementation relies on `FilteredList`. In order for UI to be compatible with the new data structure, the UI may need to change its implementation to `ObservableMap` instead. Alternatively, one can utilise a `HashMap` to first generate the list and pass the list reference into `FilteredList`. However, there is a need to code a filter function.
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -880,6 +944,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |user |a secure place to store my expense records |keep my financial data safe
 
 |`*` |user |archive my old expenses history |look back at my expenses history whenever I need it
+|=======================================================================
 
 _{More to be added}_
 
@@ -924,18 +989,17 @@ Use case ends.
 ** Use case resumes at step 6.
 
 [discrete]
-=== 2.  Use case: Delete expense entry. [Linh Chi]
+
+=== 2.  Use case: Delete expense entry whose date is required. [Linh Chi]
 
 *MSS*
 
-1.  User requests to delete an entry
-2.  FinancialPlanner requests for date of entry to be deleted
-3.  User enters the date entry was added
-4.  FinancialPlanner shows list of entries and requests for entry to be deleted
-5.  User enters entry to be deleted
-6.  FinancialPlanner entry confirms entry to be deleted
-7.  User confirms the deletion
-8.  FinancialPlanner deletes the entry
+1.  User requests to delete records whose date is required.
+2.  FinancialPlanner requests for date of entry to be deleted.
+3.  User enters the date entry he/she wants to delete.
+4.  FinancialPlanner entry confirms date to be deleted.
+5.  User confirms the deletion
+6.  FinancialPlanner deletes the entry
 +
 Use case ends.
 
@@ -947,13 +1011,13 @@ Use case ends.
 * 3a. User’s input is invalid.
 ** FinancialPlanner throws invalid format error and shows format needed.
 ** Use case resumes at step 2.
-* 3b User’s input date has no entries
+* 3b. User’s input date has no entries
 ** FinancialPlanner throws no entry error.
 ** Use case resumes at step 2.
-* 5a User’s input is not a valid entry.
+* 4a. User’s input is not a valid entry.
 ** FinancialPlanner throws invalid data error and resumes at step 4.
-* 7a User declines the confirmation.
-** Use case resumes at step 4.
+* 5a. User declines the confirmation.
+** Use case resumes at step 3.
 
 [discrete]
 === 3.  Use case: See history of expenses for a certain period [Vincent]

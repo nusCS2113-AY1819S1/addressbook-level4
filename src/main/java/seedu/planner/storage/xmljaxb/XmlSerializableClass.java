@@ -1,9 +1,9 @@
-package seedu.planner.storage;
+package seedu.planner.storage.xmljaxb;
 
 import seedu.planner.commons.exceptions.IllegalValueException;
 
 /**
- * This represents a typical class which can be serialized into XML
+ * This represents a typical class which can be serialized into XML by JAXB
  */
 public abstract class XmlSerializableClass<T> {
 

@@ -1,7 +1,7 @@
 package seedu.planner.storage;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.planner.storage.XmlAdaptedRecord.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.planner.storage.xmljaxb.XmlAdaptedRecord.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.planner.testutil.TypicalRecords.CAIFAN;
 
 import java.util.ArrayList;
@@ -14,6 +14,8 @@ import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
+import seedu.planner.storage.xmljaxb.XmlAdaptedRecord;
+import seedu.planner.storage.xmljaxb.XmlAdaptedTag;
 import seedu.planner.testutil.Assert;
 
 public class XmlAdaptedRecordTest {

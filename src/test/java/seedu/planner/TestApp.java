@@ -17,7 +17,7 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.storage.UserPrefsStorage;
-import seedu.planner.storage.XmlSerializableFinancialPlanner;
+import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.testutil.TestUtil;
 import systemtests.ModelHelper;
 
@@ -84,8 +84,22 @@ public class TestApp extends MainApp {
     /**
      * Returns the file path of the storage file.
      */
-    public Path getStorageSaveLocation() {
-        return storage.getFinancialPlannerFilePath();
+    public Path getRecordStorageSaveLocation() {
+        return storage.getRecordListFilePath();
+    }
+
+    /**
+     * Returns the file path of the storage file.
+     */
+    public Path getSummaryStorageSaveLocation() {
+        return storage.getSummaryMapFilePath();
+    }
+
+    /**
+     * Returns the file path of the storage file.
+     */
+    public Path getLimitStorageSaveLocation() {
+        return storage.getLimitListFilePath();
     }
 
     /**

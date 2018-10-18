@@ -269,7 +269,7 @@ public abstract class FinancialPlannerSystemTest {
         assertEquals("", getResultDisplay().getText());
         assertListMatching(getRecordListPanel(), getModel().getFilteredRecordList());
         assertFalse(getDetailedRecordCardPanel().isVisible());
-        assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
+        assertEquals(Paths.get(".").resolve(testApp.getRecordStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());
         assertEquals(SYNC_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
