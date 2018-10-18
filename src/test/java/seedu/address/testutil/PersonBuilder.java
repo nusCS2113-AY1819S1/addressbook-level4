@@ -22,8 +22,8 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_SKILL = "";
-    public static final int DEFAULT_SKILLLEVEL = 0;
+    public static final String DEFAULT_SKILL = "Photography";
+    public static final int DEFAULT_SKILLLEVEL = 20;
 
     private Name name;
     private Phone phone;
@@ -93,6 +93,20 @@ public class PersonBuilder {
      */
     public PersonBuilder withEmail(String email) {
         this.email = new Email(email);
+        return this;
+    }
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSkill(String skill) {
+        this.skill = new Skill(skill);
+        return this;
+    }
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSkillLevel(int skillLevel) {
+        this.skillLevel = new SkillLevel(skillLevel);
         return this;
     }
 
