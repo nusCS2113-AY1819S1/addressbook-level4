@@ -875,15 +875,44 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |Manager |add a new drink item |keep list of offerings updated
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |Manager |delete a drink item |keep list of offerings updated
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |Manager |modify the price of a drink item |maintain a good profit margin
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |Manager |see drink batches that have been imported before a certain date|take action to clear old inventory stocks
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * ` |Manager |see which drinks are selling well and the converse |take action to manage stocks better
+
+|`* * ` |Manager |view actions done by employees |track work done and monitor for fraud
+
+|`* * *` |Stock Taker |add new batches of drinks |keep inventory updated
+
+|`* * *` |Stock Taker |update the stocks of drinks |keep inventory updated
+
+|`* * *` |Stock Taker |view the stock numbers of drinks |know when to restock them
+
+|`* * *` |Stock Taker |view import dates of drink batches |sell the batches that have been in the inventory for longer
+
+|`* * *` |Accountant |update the cost price of drinks |ensure that the total costs and profits of the company are updated
+
+|`* *` |Accountant |keep track of the quantities of drinks sold over a certain period |report on the trends on drink sales
+
+|`* *` |Accountant |keep track of total profit over a period of time |report on the status and progress of the company
+
+|`* * *` |user |type commands easily |perform actions easily
+
+|`* * *` |user |login security feature |secure important data
+
+|`* * *` |user |view list of available commands |know which actions i can take
+
+|`* *` |user |confirmation for actions |reduce mistakes due to carelessness
+
+|`* * ` |user |see the pictures of drinks |easily identify the drink that i am looking at
+
+|`*` |experienced user |have shortcuts for commands |perform actions efficiently
+
 |=======================================================================
 
 _{More to be added}_
@@ -891,7 +920,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `FrozenBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `DrinkIO` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case: Add Transaction

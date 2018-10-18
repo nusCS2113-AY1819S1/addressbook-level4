@@ -28,7 +28,7 @@ This user guide provides comprehensive documentation on the {product_name} setup
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `FrozenBook.jar` link:{repoURL}/releases[here].
+.  Download the latest `DrinkIO.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -38,9 +38,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`viewall`* : Shows a list of all the food items offered in the shop, together with their prices.
-* **`add` **`Vanilla Icecream, Chocolate Icecream [2]` : Adds a transaction of 1 Vanilla Icecream and 2 Chocolate Icecream.
-* **`stock` **`Vanilla Icecream 10` : Increases the stock quantity of Vanilla Icecream by 10 servings
+* *`viewall`* : Shows a list of all the drinks stocked in the inventory, together with their prices.
+* **`add` **`Coca Cola, Green Tea [2]` : Adds a transaction of 1 Coca Cola and 2 Green Tea.
+* **`stock` **`Coca Cola 10` : Increases the stock quantity Coca Cola by 10 cans
 * *`exit`* : Exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -145,8 +145,8 @@ When command -b is added, the list will show a list based on individually batch.
 When t/tag is added, it will show a list that has all the drinks with that particular tag.
 ====
 
-==== View expiry dates of batches of an ingredient: `importDate`
-Displays the import dates of batches of the ingredient desired.
+==== View import dates for a batch of drinks: `importDate`
+Displays the import dates of batches of the drink desired.
 	Format: `importDate [-d] INGREDIENT_NAME`
 
 [NOTE]
@@ -162,7 +162,7 @@ Shows available commands with brief description of what can manager do.
 Format: `help`
 
 ==== Add new drink items: `addItem`
-Add a new food item to the food item manager for sales.
+Add a new drink item to the drink item manager for sales.
 	Format: `addItem n/DrinkItem p/DEFAULT_SELLING_PRICE`
 [NOTE]
 ====
@@ -188,7 +188,7 @@ Format: `deleteAccount u/USER_NAME`
 === Stock Taker
 
 ==== Viewing Help: `help`
-Shows available commands with brief description of what can stock taker do.
+Shows available commands with brief description of what a stock taker can do.
 Format: `help`
 
 ==== Import transaction of a drink item: `add`
@@ -200,7 +200,7 @@ Examples:
 
 [NOTE]
 ====
-DRINK NAME is predefined by manager, so alert message will appear if drink name are not in the predefined list. However, drink name will be case-insensitive.
+DRINK NAME is predefined by manager, so alert message will appear if the drink name is not in the predefined list. In addition, drink name will be case-insensitive.
 ====
 
 ==== Sale transaction of a drink item: `sell`
@@ -212,7 +212,7 @@ Examples:
 
 [NOTE]
 ====
-* DRINK NAME is predefined by manager, so alert message will appear if drink name are not in the predefined list
+* DRINK NAME is predefined by manager, so alert message will appear if the drink name is not in the predefined list
 * Quantity sold cannot be more than stock. Or else a warning message will be shown.
 ====
 
@@ -321,7 +321,7 @@ Format: `exit`
 
 ==== Saving the data
 
-FrozenBook data are saved in the hard disk automatically after any command that changes the data. +
+DrinkIO data is saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -341,7 +341,7 @@ _{explain how the user can enable/disable data encryption}_
 * *exit* : `exit`
 * *help* : `help`
 * *change password* : `changePassword o/OLD_PASSWORD n/NEW_PASSWORD`
-* *view stock by Name* :` view [-d] [n/Drink_NAME] [-b]`
+* *view stock by Name* : `view [-d] [n/Drink_NAME] [-b]`
 * *view stock by quantity* : `quantity [-d] [n/Drink_NAME] [-b] [t/tag]`
 * *view stock by import date* : `importDate [-d] INGREDIENT_NAME`
 
@@ -364,4 +364,3 @@ _{explain how the user can enable/disable data encryption}_
 * *cost of item* : `costs`
 * *view cost trend* : `viewcost`
 * *edit current cost* : `editcost`
-
