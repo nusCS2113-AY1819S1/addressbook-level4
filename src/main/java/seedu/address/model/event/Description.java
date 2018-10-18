@@ -2,6 +2,9 @@ package seedu.address.model.event;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Event description
+ */
 public class Description {
     public final String description;
 

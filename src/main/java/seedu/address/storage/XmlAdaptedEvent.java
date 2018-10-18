@@ -53,8 +53,8 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
-    public XmlAdaptedEvent(String name, String phone, String email, String address, Attendance attendance, String datetime,
-                           List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedEvent(String name, String phone, String email, String address,
+                           Attendance attendance, String datetime, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
         this.email = email;

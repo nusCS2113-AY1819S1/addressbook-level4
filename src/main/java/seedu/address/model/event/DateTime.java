@@ -20,8 +20,9 @@ public class DateTime {
                     + "Date: 1 - 31\n"
                     + "Hour: 0-23\n"
                     + "Minute: 0-59\n";
-    public final Date dateTime;
     private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+    public final Date dateTime;
 
     //Create DateTime from the input
     public DateTime(String dateTimeAsString) {
@@ -32,13 +33,18 @@ public class DateTime {
         try {
             dateTime1 = dateFormat.parse(dateTimeAsString);
         } catch (ParseException e) {
-            checkArgument(false,MESSAGE_DATETIME_CONSTRAINTS);
+            checkArgument(false, MESSAGE_DATETIME_CONSTRAINTS);
         }
         dateTime = dateTime1;
     }
 
+    /**
+     * Check if string has correct datetime format
+     * @param dateTimeAsString
+     * @return boolean
+     */
     public static boolean isValidDateTime (String dateTimeAsString) {
-        try{
+        try {
             dateFormat.parse(dateTimeAsString);
             return true;
         } catch (Exception e) {
@@ -62,5 +68,4 @@ public class DateTime {
     public int hashCode() {
         return dateTime.hashCode();
     }
-
 }

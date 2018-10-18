@@ -7,11 +7,12 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
+/**
+ * Use to export list of current user
+ * registered events as a iCalendar file
+ */
 public class ExportCalendarCommand extends Command {
-    /**
-     * Use to export list of registered events
-     * as a iCalendar file
-     */
+
     public static final String COMMAND_WORD = "export";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD

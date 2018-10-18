@@ -11,11 +11,11 @@ import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
 
+/**
+ * This class is utility class for method related to @DateTime field
+ * and system clock
+ */
 public class DateTimeManager {
-    /**
-     * This class is utility class for method related to @DateTime field
-     * and system clock
-     */
     private static AttendanceContainsUserPredicate predicate;
 
     //Use to get computer current datetime,assuming computer date is set correctly
@@ -26,15 +26,15 @@ public class DateTimeManager {
     /**Compare to know how many TimeUnit until or past the date of comparision
      *TimeUnit: NANOSECONDS, MICROSECONDS, MILLISECONDS, SECONDS, MINUTES, HOURS, DAYS
      */
-    public static long daysDiff (DateTime eventDate, Date currentDate, TimeUnit timeUnit) {
-        requireAllNonNull(eventDate,currentDate, timeUnit);
+    public static long daysDiff(DateTime eventDate, Date currentDate, TimeUnit timeUnit) {
+        requireAllNonNull(eventDate, currentDate, timeUnit);
         return timeUnit.convert(
                 eventDate.dateTime.getTime() - currentDate.getTime(), timeUnit);
     }
 
     //Require the current model to get the list
     public static ObservableList<Event> getAttendingEventList(Model model, User currentUser) {
-        requireAllNonNull(model,currentUser);
+        requireAllNonNull(model, currentUser);
         currentUser.getUsername();
         model.updateFilteredEventList(predicate);
         return model.getFilteredEventList();

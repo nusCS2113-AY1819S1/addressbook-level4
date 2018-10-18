@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Event}'s {@code any fields} matches any of the keywords given.
+ * Tests that a {@code Event}'s {@code DateTime, Name or Tags} matches any of the keywords given.
  * field find by DateTime, Address, and Name
  */
 public class EventContainsKeywordsPredicate implements Predicate<Event> {
@@ -24,7 +24,8 @@ public class EventContainsKeywordsPredicate implements Predicate<Event> {
                         StringUtil.containsWordIgnoreCase(event.getName().fullName, keyword)
                         || StringUtil.containsWordIgnoreCase(event.getAddress().value, keyword)
                         || StringUtil.containsWordIgnoreCase(event.getDateTime().toString(), keyword)
-                        || event.getTags().stream().anyMatch(tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
+                        || event.getTags().stream().anyMatch(
+                                tag -> StringUtil.containsWordIgnoreCase(tag.tagName, keyword)));
     }
 
     @Override
