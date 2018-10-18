@@ -378,8 +378,8 @@ Step 7. Finally a success message is displayed with the details that have been e
 image::ExecuteBudgetCommand.png[width="800"]
 
 [NOTE]
-In Step 4, had the user entered a club name that already existed in the address book, then a duplicate message would be shown
-prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
+In Step 4, had the user entered a club name that already existed in the list of clubs in the address book, then a duplicate
+message would be shown, prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
 user entered a unique club name
 
 image::DuplicateBudget.png[width="800"]
