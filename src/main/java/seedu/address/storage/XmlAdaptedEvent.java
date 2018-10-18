@@ -2,13 +2,14 @@ package seedu.address.storage;
 
 import static seedu.address.model.event.DateTime.MESSAGE_DATETIME_CONSTRAINTS;
 
-import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Address;
@@ -141,7 +142,7 @@ public class XmlAdaptedEvent {
         }
 
         if (!DateTime.isValidDateTime(dateTime)) {
-                throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
         }
 
         final DateTime modelDateTime = new DateTime(dateTime);

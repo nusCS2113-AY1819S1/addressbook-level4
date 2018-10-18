@@ -50,11 +50,11 @@ public class EventPageFormatter {
         SEARCH_PAGE_PATH = BrowserPanel.getSearchPageUrlWithoutName().toURI();
         SEARCH_PAGE_STRING = readFile(SEARCH_PAGE_PATH);
         SEARCH_PAGE_STRING = SEARCH_PAGE_STRING.replace(SEARCH_PAGE_STRING,
-                        event.getName().toString() + "<br/>" +
-                        " Venue: " + event.getAddress().toString() + "<br/>" +
-                        " Time: " + pageDateFormat.format(event.getDateTime().dateTime) + "<br/>" +
-                        " Phone: " + event.getPhone().toString() +
-                        " Email: " + event.getEmail().toString() + "<br/>");
+                        event.getName().toString() + "<br/>"
+                                + " Venue: " + event.getAddress().toString() + "<br/>"
+                                + " Time: " + pageDateFormat.format(event.getDateTime().dateTime) + "<br/>"
+                                + " Phone: " + event.getPhone().toString()
+                                + " Email: " + event.getEmail().toString() + "<br/>");
         writeFile(SEARCH_PAGE_PATH);
     }
 }

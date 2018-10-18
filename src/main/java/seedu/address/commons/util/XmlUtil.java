@@ -2,13 +2,14 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.FileNotFoundException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import java.io.FileNotFoundException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * Helps with reading from and writing to XML files.
