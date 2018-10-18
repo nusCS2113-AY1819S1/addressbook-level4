@@ -7,6 +7,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERPASSWORD;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,7 +18,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
+import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
+import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -31,8 +35,13 @@ public class CommandTestUtil {
     public static final String VALID_PASSWORD_ACCOUNT1 = "zaq1xsw2cde3";
     public static final String VALID_PASSWORD_ACCOUNT2 = "1qaz2wsx3edc";
 
-    public static final String INVALID_ACCOUNT_ID_DESC = " " + "AA234567M"; // '&' not allowed in names
-    public static final String INVALID_ACCOUNT_PASS_DESC = " " + "James&"; // '&' not allowed in names
+    public static final String USERID_DESC_ACCOUNT1 = " " + PREFIX_USERID + VALID_ID_ACCOUNT1;
+    public static final String USERID_DESC_ACCOUNT2 = " " + PREFIX_USERID + VALID_ID_ACCOUNT2;
+    public static final String USERPASSWORD_DESC_ACCOUNT1 = " " + PREFIX_USERPASSWORD + VALID_PASSWORD_ACCOUNT1;
+    public static final String USERPASSWORD_DESC_ACCOUNT2 = " " + PREFIX_USERPASSWORD + VALID_PASSWORD_ACCOUNT2;
+
+    public static final String INVALID_ACCOUNT_ID_DESC = " " + "AA234567M"; // 'A' not allowed from the 2nd to 8th place
+    public static final String INVALID_ACCOUNT_PASS_DESC = " " + "zaq1 xsw2 cde3"; // ' ' not allowed in password
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
@@ -97,6 +106,33 @@ public class CommandTestUtil {
             assertEquals(expectedCommandHistory, actualCommandHistory);
         } catch (CommandException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
+    /**
+     * Executes the given {@code command}, confirms that <br>
+     * - a {@code CommandException} is thrown <br>
+     * - the CommandException message matches {@code expectedMessage} <br>
+     * - the login book and the filtered account list in the {@code actualModel} remain unchanged <br>
+     * - {@code actualCommandHistory} remains unchanged.
+     */
+    public static void assertLoginCommandFailure(Command command, Model actualModel,
+                                                 CommandHistory actualCommandHistory, String expectedMessage) {
+        // we are unable to defensively copy the model for comparison later, so we can
+        // only do so by copying its components.
+        LoginBook expectedLoginBook = new LoginBook(actualModel.getLoginBook());
+        List<LoginDetails> expectedFilteredList = new ArrayList<>(actualModel.getFilteredLoginDetailsList());
+
+        CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
+
+        try {
+            command.execute(actualModel, actualCommandHistory);
+            throw new AssertionError("The expected CommandException was not thrown.");
+        } catch (CommandException e) {
+            assertEquals(expectedMessage, e.getMessage());
+            assertEquals(expectedLoginBook, actualModel.getLoginBook());
+            assertEquals(expectedFilteredList, actualModel.getFilteredLoginDetailsList());
+            assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
 

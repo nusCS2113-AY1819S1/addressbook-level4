@@ -51,8 +51,11 @@ public class SampleDataUtil {
         };
     }
 
-    public static LoginDetails getSampleLoginDetail() {
-        return new LoginDetails(new UserId("X1234567X"), new UserPassword("123456789"));
+    public static LoginDetails[] getSampleLoginDetail() {
+        return new LoginDetails[] {
+            new LoginDetails(new UserId("A1234567M"), new UserPassword("zaq1xsw2cde3")),
+            new LoginDetails(new UserId("A1234568M"), new UserPassword("1qaz2wsx3edc"))
+        };
     }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
@@ -64,10 +67,11 @@ public class SampleDataUtil {
     }
 
     public static ReadOnlyLoginBook getSampleLoginBook() {
-        LoginBook samplelb = new LoginBook();
-        samplelb.createAccount(getSampleLoginDetail());
-
-        return samplelb;
+        LoginBook sampleLb = new LoginBook();
+        for (LoginDetails sampleAccount : getSampleLoginDetail()) {
+            sampleLb.createAccount(sampleAccount);
+        }
+        return sampleLb;
     }
 
     /**

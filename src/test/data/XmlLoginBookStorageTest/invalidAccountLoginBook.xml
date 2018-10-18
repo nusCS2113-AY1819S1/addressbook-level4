@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<loginbook>
+    <!-- account with invalid user ID field -->
+    <accounts>
+        <userId>AA234567M</userId>
+        <userPassword>zaq1xsw2cde3</userPassword>
+    </accounts>
+</loginbook>
