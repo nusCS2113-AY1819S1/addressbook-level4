@@ -18,8 +18,8 @@ import seedu.address.model.event.Event;
  */
 public class EventPageFormatter {
 
-    private static URI SearchPagePath;
-    private static String SearchPageString;
+    private static URI searchPagePath;
+    private static String searchPageString;
     private static final DateFormat pageDateFormat = new SimpleDateFormat("EEEEE dd-MMMMM-yyyy 'at' HH:mm a");
     public EventPageFormatter() {
 
@@ -37,9 +37,9 @@ public class EventPageFormatter {
      * Overwrites Event Search Page file
      */
     private static void writeFile(URI path) throws IOException {
-        File f = new File(SearchPagePath);
+        File f = new File(searchPagePath);
         FileWriter fWriter = new FileWriter(f, false);
-        fWriter.write(SearchPageString);
+        fWriter.write(searchPageString);
         fWriter.close();
     }
 
@@ -47,14 +47,14 @@ public class EventPageFormatter {
      * Formats Event Search Page with data from event
      */
     public static void formatEvent(Event event) throws IOException, URISyntaxException {
-        SearchPagePath = BrowserPanel.getSearchPageUrlWithoutName().toURI();
-        SearchPageString = readFile(SearchPagePath);
-        SearchPageString = SearchPageString.replace(SearchPageString,
+        searchPagePath = BrowserPanel.getSearchPageUrlWithoutName().toURI();
+        searchPageString = readFile(searchPagePath);
+        searchPageString = searchPageString.replace(searchPageString,
                         event.getName().toString() + "<br/>"
                                 + " Venue: " + event.getAddress().toString() + "<br/>"
                                 + " Time: " + pageDateFormat.format(event.getDateTime().dateTime) + "<br/>"
                                 + " Phone: " + event.getPhone().toString()
                                 + " Email: " + event.getEmail().toString() + "<br/>");
-        writeFile(SearchPagePath);
+        writeFile(searchPagePath);
     }
 }

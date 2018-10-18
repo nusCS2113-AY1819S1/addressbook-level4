@@ -42,6 +42,10 @@ public class ModelManager extends ComponentManager implements Model {
         filteredEvents = new FilteredList<>(sortEventList(versionedEManager.getEventList()));
     }
 
+    public ModelManager() {
+        this(new EventManager(), new UserPrefs());
+    }
+
     /**
      * Sort the events list by DateTime then by name
      * @param eventList
@@ -52,12 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
         ObservableList<Event> sortedList = FXCollections.observableArrayList();
         sortedList.addAll(eventList);
         sortedList.sort(new DateTimeComparator().thenComparing(new NameComparator()));
-        FXCollections.unmodifiableObservableList(sortedList);
-        return sortedList;
-    }
-
-    public ModelManager() {
-        this(new EventManager(), new UserPrefs());
+        return FXCollections.unmodifiableObservableList(sortedList);
     }
 
     @Override
