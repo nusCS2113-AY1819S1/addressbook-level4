@@ -194,7 +194,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) { this.address = address; }
+        public void setAddress(Address address) {
+            this.address = address;
+        }
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
@@ -208,7 +210,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(attendance);
         }
 
-        public void setDate(DateTime dateTime) { this.dateTime = dateTime; }
+        public void setDate(DateTime dateTime) {
+            this.dateTime = dateTime;
+        }
 
         public Optional<DateTime> getDateTime() {
             return Optional.ofNullable(dateTime);
