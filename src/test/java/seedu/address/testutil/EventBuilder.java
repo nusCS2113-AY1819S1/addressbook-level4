@@ -104,6 +104,9 @@ public class EventBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code DateTime} of the {@code Event} that we are building.
+     */
     public EventBuilder withDateTime(String datetimeAsString) {
         this.datetime = new DateTime(datetimeAsString);
         return this;
