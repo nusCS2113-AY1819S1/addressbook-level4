@@ -37,6 +37,10 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label skill;
+    @FXML
+    private Label skillLevel;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
@@ -47,6 +51,8 @@ public class PersonCard extends UiPart<Region> {
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
+        skill.setText(person.getSkill().value);
+        skillLevel.setText(Integer.toString(person.getSkillLevel().skillLevel)); // TODO: Is there a better way?
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
