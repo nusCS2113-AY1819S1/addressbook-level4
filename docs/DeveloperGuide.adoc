@@ -359,7 +359,7 @@ Step 2. The user (a club's treasurer) executes `budget c/Computing Club t/200 e/
 submit the data for the calculation of her club's budget. The 'LogicManager' then calls the 'parseCommand' in the
 'AddressBookParser'.
 
-image::EnterBudgetCommand.png[width="800"]
+image::BudgetCommand.png[width="800"]
 
 Step 3. The 'AddressBookParser' then returns a new 'BudgetCommandParser', which then parses the command to be executed and
 creates a 'ClubBudgetElements' object called 'club' with the club's name, the expected turnout and the number of events.
@@ -375,14 +375,14 @@ adding the required club's data to the address book.
 
 Step 7. Finally a success message is displayed with the details that have been entered by the user.
 
-image::ExecutedBudgetCommand.png[width="800"]
+image::ExecuteBudgetCommand.png[width="800"]
 
 [NOTE]
-In Step 4, had the user entered a club name that already existed in the address book, then a duplicate message would be shown
-prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
+In Step 4, had the user entered a club name that already existed in the list of clubs in the address book, then a duplicate
+message would be shown, prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
 user entered a unique club name
 
-image::DuplicateBudgetCommand.png[width="800"]
+image::DuplicateBudget.png[width="800"]
 
 The image below is the sequence diagram for the functioning of the `budget` command:
 
