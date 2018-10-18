@@ -18,6 +18,7 @@ import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.DeleteCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
+import seedu.recruit.logic.commands.EditCompanyCommand;
 import seedu.recruit.logic.commands.EmailCommand;
 import seedu.recruit.logic.commands.ExitCommand;
 import seedu.recruit.logic.commands.FindCommand;
@@ -26,7 +27,7 @@ import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCommand;
 import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCommand;
-import seedu.recruit.logic.commands.SortByNameCommand;
+import seedu.recruit.logic.commands.SortCommand;
 import seedu.recruit.logic.commands.UndoCommand;
 
 import seedu.recruit.logic.parser.exceptions.ParseException;
@@ -83,6 +84,9 @@ public class RecruitBookParser {
         case EditCandidateCommand.COMMAND_WORD:
             return new EditCandidateCommandParser().parse(arguments);
 
+        case EditCompanyCommand.COMMAND_WORD:
+            return new EditCompanyCommandParser().parse(arguments);
+
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
 
@@ -98,8 +102,8 @@ public class RecruitBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case SortByNameCommand.COMMAND_WORD:
-            return new SortByNameCommand();
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();

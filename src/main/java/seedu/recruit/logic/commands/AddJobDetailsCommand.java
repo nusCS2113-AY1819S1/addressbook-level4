@@ -1,6 +1,7 @@
 package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE_RANGE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
@@ -43,11 +44,12 @@ public class AddJobDetailsCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New added job offer: %1$s";
     public static final String MESSAGE_DUPLICATE_JOB_OFFER = "This job offer already exists in the Company";
     public static final String MESSAGE_COMPANY_NOT_FOUND = "Company not found in CompanyBook.\n"
-            + "Please add the company to CompanyBook first";
+                                                          + "Please add the company to CompanyBook first";
     private final JobOffer toAdd;
 
 
     public AddJobDetailsCommand(JobOffer jobOffer) {
+        requireNonNull(jobOffer);
         toAdd = jobOffer;
     };
 
@@ -73,4 +75,3 @@ public class AddJobDetailsCommand extends Command {
                 && toAdd.equals(((AddJobDetailsCommand) other).toAdd));
     }
 }
-

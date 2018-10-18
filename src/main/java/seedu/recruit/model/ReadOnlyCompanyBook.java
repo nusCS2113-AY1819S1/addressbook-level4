@@ -2,6 +2,7 @@ package seedu.recruit.model;
 
 import javafx.collections.ObservableList;
 import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.JobOffer;
 
 /**
  * CompanyBook
@@ -15,4 +16,5 @@ public interface ReadOnlyCompanyBook {
      */
     ObservableList<Company> getCompanyList();
 
+    ObservableList<JobOffer> getCompanyJobList();
 }

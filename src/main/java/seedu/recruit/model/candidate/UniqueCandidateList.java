@@ -82,11 +82,77 @@ public class UniqueCandidateList implements Iterable<Candidate> {
     /**
      * Sorts candidates in CandidateBook by name
      */
-    public void sortPersons() {
+    public void sortByName() {
+
         Collections.sort(internalList, new Comparator<Candidate>() {
             @Override
             public int compare(Candidate o1, Candidate o2) {
                 return (o1.getName().toString()).compareTo(o2.getName().toString());
+            }
+        });
+    }
+
+    /**
+     * Sorts candidates in CandidateBook by age
+     */
+    public void sortByAge() {
+
+        Collections.sort(internalList, new Comparator<Candidate>() {
+            @Override
+            public int compare(Candidate o1, Candidate o2) {
+                return (o1.getAge().toString()).compareTo(o2.getAge().toString());
+            }
+        });
+    }
+
+    /**
+     * Sorts candidates in CandidateBook by email
+     */
+    public void sortByEmail() {
+
+        Collections.sort(internalList, new Comparator<Candidate>() {
+            @Override
+            public int compare(Candidate o1, Candidate o2) {
+                return (o1.getEmail().toString()).compareTo(o2.getEmail().toString());
+            }
+        });
+    }
+
+    /**
+     * Sorts candidates in CandidateBook by job
+     */
+    public void sortByJob() {
+
+        Collections.sort(internalList, new Comparator<Candidate>() {
+            @Override
+            public int compare(Candidate o1, Candidate o2) {
+                return (o1.getJob().toString()).compareTo(o2.getJob().toString());
+            }
+        });
+    }
+
+    /**
+     * Sorts candidates in CandidateBook by education level
+     */
+    public void sortByEducation() {
+
+        Collections.sort(internalList, new Comparator<Candidate>() {
+            @Override
+            public int compare(Candidate o1, Candidate o2) {
+                return (o1.getEducation().toString()).compareTo(o2.getEducation().toString());
+            }
+        });
+    }
+
+    /**
+     * Sorts candidates in CandidateBook by salary
+     */
+    public void sortBySalary() {
+
+        Collections.sort(internalList, new Comparator<Candidate>() {
+            @Override
+            public int compare(Candidate o1, Candidate o2) {
+                return (o1.getSalary().toString()).compareTo(o2.getSalary().toString());
             }
         });
     }

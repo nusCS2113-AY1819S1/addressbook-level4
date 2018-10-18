@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.UniqueCandidateList;
 
@@ -53,7 +54,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     public void resetData(ReadOnlyCandidateBook newData) {
         requireNonNull(newData);
 
-        setPersons(newData.getCandidatelist());
+        setPersons(newData.getCandidateList());
     }
 
     //// candidate-level operations
@@ -87,10 +88,31 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     }
 
     /**
-     * Sorts the candidate list
+     *  Sorts the candidate list
      */
-    public void sortCandidateByName() {
-        persons.sortPersons();
+    public void sortCandidates(Prefix prefix) {
+        String prefixString = prefix.toString();
+        switch(prefixString) {
+        case "n/":
+            persons.sortByName();
+            break;
+        case "x/":
+            persons.sortByAge();
+            break;
+        case "e/":
+            persons.sortByEmail();
+            break;
+        case "j/":
+            persons.sortByJob();
+            break;
+        case "h/":
+            persons.sortByEducation();
+            break;
+        default:
+            persons.sortBySalary();
+
+        }
+
     }
 
     /**
@@ -110,7 +132,7 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     }
 
     @Override
-    public ObservableList<Candidate>    getCandidatelist() {
+    public ObservableList<Candidate> getCandidateList() {
         return persons.asUnmodifiableObservableList();
     }
 
