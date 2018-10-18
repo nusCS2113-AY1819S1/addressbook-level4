@@ -3,6 +3,7 @@ package seedu.recruit.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
@@ -15,6 +16,7 @@ public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Candidate> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Company> PREDICATE_SHOW_ALL_COMPANIES = unused -> true;
+    Predicate<JobOffer> PREDICATE_SHOW_ALL_JOBOFFERS = unused -> true;
 
     // ================================== CandidateBook functions ====================================== //
     /** Clears existing backing model and replaces with the provided new data. */
@@ -166,8 +168,18 @@ public interface Model {
      * @code companyName has to exist in the CompanyBook
      * @code jobOffer must not already exist inside the job list of companyName
      */
-
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
+    /** Returns an unmodifiable view of the filtered job lists of all companies */
+    ObservableList<JobOffer> getFilteredCompanyJobList();
 
+    /**
+     * Updates the filter of the filtered company job list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
+
+    EmailUtil getEmailUtil();
+
+    void setEmailUtil(EmailUtil emailUtil);
 }

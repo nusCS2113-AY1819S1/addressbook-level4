@@ -5,8 +5,10 @@ import java.security.GeneralSecurityException;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+
 import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.logic.commands.exceptions.CommandException;
@@ -14,6 +16,8 @@ import seedu.recruit.logic.parser.RecruitBookParser;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
+import seedu.recruit.model.company.Company;
+import seedu.recruit.model.joboffer.JobOffer;
 
 /**
  * The main LogicManager of the app.
@@ -27,11 +31,13 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final RecruitBookParser recruitBookParser;
+    private final EmailUtil emailUtil;
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         recruitBookParser = new RecruitBookParser();
+        emailUtil = model.getEmailUtil();
     }
 
     @Override
@@ -39,7 +45,7 @@ public class LogicManager extends ComponentManager implements Logic {
             throws CommandException, ParseException, IOException, GeneralSecurityException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         try {
-            Command command = recruitBookParser.parseCommand(commandText, state);
+            Command command = recruitBookParser.parseCommand(commandText, state, emailUtil);
             return command.execute(model, history);
         } finally {
             history.add(commandText);
@@ -49,6 +55,16 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Candidate> getFilteredPersonList() {
         return model.getFilteredCandidateList();
+    }
+
+    @Override
+    public ObservableList<Company> getFilteredCompanyList() {
+        return model.getFilteredCompanyList();
+    }
+
+    @Override
+    public ObservableList<JobOffer> getFilteredCompanyJobList() {
+        return model.getFilteredCompanyJobList();
     }
 
     @Override

@@ -14,6 +14,6 @@ public class CandidateBookChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons " + data.getCandidatelist().size();
+        return "number of candidates " + data.getCandidateList().size();
     }
 }

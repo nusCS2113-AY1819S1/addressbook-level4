@@ -13,6 +13,7 @@ import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
@@ -28,6 +29,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedCompanyBook versionedCompanyBook;
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
+    private final FilteredList<JobOffer> filteredJobs;
+    private EmailUtil emailUtil;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.
@@ -40,8 +43,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
         versionedCompanyBook = new VersionedCompanyBook(companyBook);
-        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidatelist());
+        filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
+        filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
+        emailUtil = new EmailUtil();
     }
 
     public ModelManager() {
@@ -269,5 +274,26 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
         indicateCompanyBookChanged();
     }
+    /**
+     * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
+     * {@code versionedCompanyBook}
+     */
+    @Override
+    public ObservableList<JobOffer> getFilteredCompanyJobList() {
+        return FXCollections.unmodifiableObservableList(filteredJobs);
+    }
 
+    @Override
+    public void updateFilteredCompanyJobList(Predicate<JobOffer> predicate) {
+        requireNonNull(predicate);
+        filteredJobs.setPredicate(predicate);
+    }
+
+    public EmailUtil getEmailUtil() {
+        return emailUtil;
+    }
+
+    public void setEmailUtil(EmailUtil emailUtil) {
+        this.emailUtil = emailUtil;
+    }
 }
