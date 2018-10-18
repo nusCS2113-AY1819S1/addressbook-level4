@@ -27,6 +27,7 @@ import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCommand;
 import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.logic.commands.SortCommand;
 import seedu.recruit.logic.commands.UndoCommand;
 
 import seedu.recruit.logic.parser.exceptions.ParseException;
@@ -100,6 +101,9 @@ public class RecruitBookParser {
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
