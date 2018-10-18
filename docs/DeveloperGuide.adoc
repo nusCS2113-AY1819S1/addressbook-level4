@@ -53,7 +53,7 @@ This will generate all resources required by the application and tests.
 
 === Verifying the setup
 
-. Run the `seedu.quantity.MainApp` and try a few commands
+. Run the `seedu.address.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
 
 === Configurations to do before writing code
@@ -115,7 +115,7 @@ The *_Architecture Diagram_* given above explains the high-level design of the A
 [TIP]
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
-`Main` has only one class called link:{repoURL}/src/main/java/seedu/quantity/MainApp.java[`MainApp`]. It is responsible for,
+`Main` has only one class called link:{repoURL}/src/main/java/seedu.address/MainApp.java[`MainApp`]. It is responsible for,
 
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup method where necessary.
@@ -169,11 +169,11 @@ The sections below give more details of each component.
 .Structure of the UI Component
 image::UiClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/quantity/ui/Ui.java[`Ui.java`]
+*API* : link:{repoURL}/src/main/java/seedu.address/ui/Ui.java[`Ui.java`]
 
 The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `BookListPanel`, `StatusBarFooter`, `BrowserPanel` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu/quantity/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the link:{repoURL}/src/main/java/seedu.address/ui/MainWindow.java[`MainWindow`] is specified in link:{repoURL}/src/main/resources/view/MainWindow.fxml[`MainWindow.fxml`]
 
 The `UI` component,
 
@@ -189,7 +189,7 @@ The `UI` component,
 image::LogicClassDiagram.png[width="800"]
 
 *API* :
-link:{repoURL}/src/main/java/seedu/quantity/logic/Logic.java[`Logic.java`]
+link:{repoURL}/src/main/java/seedu.address/logic/Logic.java[`Logic.java`]
 
 .  `Logic` uses the `BookInventoryParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
@@ -207,7 +207,7 @@ image::DeletePersonSdForLogic.png[width="800"]
 .Structure of the Model Component
 image::ModelClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/quantity/model/Model.java[`Model.java`]
+*API* : link:{repoURL}/src/main/java/seedu.address/model/Model.java[`Model.java`]
 
 The `Model`,
 
@@ -227,7 +227,7 @@ image:ModelClassBetterOopDiagram.png[width="800"]
 .Structure of the Storage Component
 image::StorageClassDiagram.png[width="800"]
 
-*API* : link:{repoURL}/src/main/java/seedu/quantity/storage/Storage.java[`Storage.java`]
+*API* : link:{repoURL}/src/main/java/seedu.address/storage/Storage.java[`Storage.java`]
 
 The `Storage` component,
 
@@ -418,12 +418,12 @@ In order to prevent brute force, a user has up to 3 tries to key in the correct 
 
 ==== Design Considerations
 
-=====Aspect: How hashing is done
+===== Aspect: How hashing is done
 
-* **Alternative 1: Use existing hashing algorithms in java libraries such as `java.security.*`.
+* **Alternative 1: Use existing hashing algorithms in java libraries such as `java.security'.**
 ** Pros: Easy and fast to implement.
-** Cons: If the algorithm in the source code is easily decryptable , can be easily bruteforced.
-* **Alternative 2: Implement own hashing algorithm
+** Cons: If the algorithm in the source code is easy to decrypt , can be easily brute-forced.
+* **Alternative 2: Implement own hashing algorithm.**
 ** Pros: Encryption is foreign to interventions, harder to decrypt.
 ** Cons: Can be tedious and time-consuming, might risk having similar keys.
 
@@ -587,14 +587,14 @@ We have two types of tests:
 
 .  *GUI Tests* - These are tests involving the GUI. They include,
 .. _System Tests_ that test the entire App by simulating user actions on the GUI. These are in the `systemtests` package.
-.. _Unit tests_ that test the individual components. These are in `seedu.quantity.ui` package.
+.. _Unit tests_ that test the individual components. These are in `seedu.address.ui` package.
 .  *Non-GUI Tests* - These are tests not involving the GUI. They include,
 ..  _Unit tests_ targeting the lowest level methods/classes. +
-e.g. `seedu.quantity.commons.StringUtilTest`
+e.g. `seedu.address.commons.StringUtilTest`
 ..  _Integration tests_ that are checking the integration of multiple code units (those code units are assumed to be working). +
-e.g. `seedu.quantity.storage.StorageManagerTest`
+e.g. `seedu.address.storage.StorageManagerTest`
 ..  Hybrids of unit and integration tests. These test are checking multiple code units as well as how the are connected together. +
-e.g. `seedu.quantity.logic.LogicManagerTest`
+e.g. `seedu.address.logic.LogicManagerTest`
 
 
 === Troubleshooting Testing
@@ -624,7 +624,7 @@ When a pull request has changes to asciidoc files, you can use https://www.netli
 
 Here are the steps to create a new release.
 
-.  Update the version number in link:{repoURL}/src/main/java/seedu/quantity/MainApp.java[`MainApp.java`].
+.  Update the version number in link:{repoURL}/src/main/java/seedu.address/MainApp.java[`MainApp.java`].
 .  Generate a JAR file <<UsingGradle#creating-the-jar-file, using Gradle>>.
 .  Tag the repo with the version number. e.g. `v0.1`
 .  https://help.github.com/articles/creating-releases/[Create a new release using GitHub] and upload the JAR file you created.
@@ -662,10 +662,10 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 +
 ****
 * Hints
-** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/quantity/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/quantity/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/quantity/logic/parser/BookInventoryParser.java[`BookInventoryParser`] is responsible for analyzing command words.
+** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu.address/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu.address/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
+** link:{repoURL}/src/main/java/seedu.address/logic/parser/BookInventoryParser.java[`BookInventoryParser`] is responsible for analyzing command words.
 * Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/quantity/logic/parser/BookInventoryParser.java[`BookInventoryParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}/src/main/java/seedu.address/logic/parser/BookInventoryParser.java[`BookInventoryParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
 ** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
@@ -683,12 +683,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/quantity/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/quantity/model/BookInventory.java[`BookInventory`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu.address/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu.address/model/BookInventory.java[`BookInventory`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/quantity/model/BookInventory.java[`BookInventory`] and link:{repoURL}/src/main/java/seedu/quantity/model/book/Book.java[`Book`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/quantity/model/BookInventory.java[`BookInventory`] allows you to update a book, and link:{repoURL}/src/main/java/seedu/quantity/model/book/Book.java[`Book`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu.address/model/BookInventory.java[`BookInventory`] and link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu.address/model/BookInventory.java[`BookInventory`] allows you to update a book, and link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/quantity/model/BookInventory.java[`BookInventory`]. Loop through each book, and remove the `tag` from each book.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/quantity/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/quantity/model/ModelManager.java[`ModelManager`] should call `BookInventory#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu.address/model/BookInventory.java[`BookInventory`]. Loop through each book, and remove the `tag` from each book.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu.address/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu.address/model/ModelManager.java[`ModelManager`] should call `BookInventory#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****
@@ -713,7 +713,7 @@ image::getting-started-ui-tag-after.png[width="300"]
 +
 ****
 * Hints
-** The tag labels are created inside link:{repoURL}/src/main/java/seedu/quantity/ui/BookCard.java[the `BookCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
+** The tag labels are created inside link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[the `BookCard` constructor] (`new Label(tag.tagName)`). https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Label.html[JavaFX's `Label` class] allows you to modify the style of each Label, such as changing its color.
 ** Use the .css attribute `-fx-background-color` to add a color.
 ** You may wish to modify link:{repoURL}/src/main/resources/view/DarkTheme.css[`DarkTheme.css`] to include some pre-defined colors using css, especially if you have experience with web-based css.
 * Solution
@@ -722,7 +722,7 @@ image::getting-started-ui-tag-after.png[width="300"]
 *** The PR uses the hash code of the tag names to generate a color. This is deliberately designed to ensure consistent colors each time the application runs. You may wish to expand on this design to include additional features, such as allowing users to set their own tag colors, and directly saving the colors to storage, so that tags retain their colors even if the hash code algorithm changes.
 ****
 
-. Modify link:{repoURL}/src/main/java/seedu/quantity/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu/quantity/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
+. Modify link:{repoURL}/src/main/java/seedu.address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] such that link:{repoURL}/src/main/java/seedu.address/ui/ResultDisplay.java[`ResultDisplay`] can show a different style on error (currently it shows the same regardless of errors).
 +
 **Before**
 +
@@ -734,11 +734,11 @@ image::getting-started-ui-result-after.png[width="200"]
 +
 ****
 * Hints
-** link:{repoURL}/src/main/java/seedu/quantity/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu/quantity/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu/quantity/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
-** Refer to link:{repoURL}/src/main/java/seedu/quantity/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
+** link:{repoURL}/src/main/java/seedu.address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] is raised by link:{repoURL}/src/main/java/seedu.address/ui/CommandBox.java[`CommandBox`] which also knows whether the result is a success or failure, and is caught by link:{repoURL}/src/main/java/seedu.address/ui/ResultDisplay.java[`ResultDisplay`] which is where we want to change the style to.
+** Refer to link:{repoURL}/src/main/java/seedu.address/ui/CommandBox.java[`CommandBox`] for an example on how to display an error.
 * Solution
-** Modify link:{repoURL}/src/main/java/seedu/quantity/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
-** Modify link:{repoURL}/src/main/java/seedu/quantity/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
+** Modify link:{repoURL}/src/main/java/seedu.address/commons/events/ui/NewResultAvailableEvent.java[`NewResultAvailableEvent`] 's constructor so that users of the event can indicate whether an error has occurred.
+** Modify link:{repoURL}/src/main/java/seedu.address/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
 *** The system tests link:{repoURL}/src/test/java/systemtests/BookInventorySystemTest.java[`BookInventorySystemTest#assertCommandBoxShowsDefaultStyle() and BookInventorySystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
@@ -746,7 +746,7 @@ image::getting-started-ui-result-after.png[width="200"]
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/quantity/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the quantity book.
+. Modify the link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the quantity book.
 +
 **Before**
 +
@@ -759,10 +759,10 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/quantity/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the quantity book is updated.
+** link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the quantity book is updated.
 * Solution
-** Modify the constructor of link:{repoURL}/src/main/java/seedu/quantity/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of books when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/quantity/ui/StatusBarFooter.java[`StatusBarFooter#handleBookInventoryChangedEvent(BookInventoryChangedEvent)`] to update the number of books whenever there are new changes to the BookInventory.
+** Modify the constructor of link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of books when the application just started.
+** Use link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter#handleBookInventoryChangedEvent(BookInventoryChangedEvent)`] to update the number of books whenever there are new changes to the BookInventory.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
 ** For system tests, modify link:{repoURL}/src/test/java/systemtests/BookInventorySystemTest.java[`BookInventorySystemTest`] to also verify the new total number of books status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
@@ -780,8 +780,8 @@ Do take a look at <<Design-Storage>> before attempting to modify the `Storage` c
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/quantity/storage/BookInventoryStorage.java[`BookInventoryStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/quantity/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/quantity/storage/XmlBookInventoryStorage.java[`XmlBookInventoryStorage`] class.
+** Add the API method in link:{repoURL}/src/main/java/seedu.address/storage/BookInventoryStorage.java[`BookInventoryStorage`] interface.
+** Implement the logic in link:{repoURL}/src/main/java/seedu.address/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu.address/storage/XmlBookInventoryStorage.java[`XmlBookInventoryStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -811,13 +811,13 @@ Let's start by teaching the application how to parse a `remark` command. We will
 
 **Main:**
 
-. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/quantity/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/quantity/logic/parser/BookInventoryParser.java[`BookInventoryParser`] to accept a `RemarkCommand`.
+. Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu.address/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
+. Modify link:{repoURL}/src/main/java/seedu.address/logic/parser/BookInventoryParser.java[`BookInventoryParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/quantity/logic/parser/BookInventoryParserTest.java[`BookInventoryParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}/src/test/java/seedu.address/logic/parser/BookInventoryParserTest.java[`BookInventoryParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -826,33 +826,33 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/quantity/logic/parser/BookInventoryParser.java[`BookInventoryParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}/src/main/java/seedu.address/logic/parser/BookInventoryParser.java[`BookInventoryParser`] to use the newly implemented `RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/quantity/logic/parser/BookInventoryParserTest.java[`BookInventoryParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}/src/test/java/seedu.address/logic/parser/BookInventoryParserTest.java[`BookInventoryParserTest`] to test that the correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `BookCard`
-Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/quantity/ui/BookCard.java[`BookCard`] s to display a remark for each book later.
+Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[`BookCard`] s to display a remark for each book later.
 
 **Main:**
 
 . Add a `Label` with any random text inside link:{repoURL}/src/main/resources/view/BookListCard.fxml[`BookListCard.fxml`].
-. Add FXML annotation in link:{repoURL}/src/main/java/seedu/quantity/ui/BookCard.java[`BookCard`] to tie the variable to the actual label.
+. Add FXML annotation in link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[`BookCard`] to tie the variable to the actual label.
 
 **Tests:**
 
 . Modify link:{repoURL}/src/test/java/guitests/guihandles/BookCardHandle.java[`BookCardHandle`] so that future tests can read the contents of the remark label.
 
 ===== [Step 4] Model: Add `Remark` class
-We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu/quantity/model/book/Book.java[`Book`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
+We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/seedu.address/model/book/Quantity.java[`Quantity`] class. Instead of just using a `String`, let's follow the conventional class structure that the codebase already uses by adding a `Remark` class.
 
 **Main:**
 
-. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu/quantity/model/book/Address.java[`Address`], remove the regex and change the names accordingly).
+. Add `Remark` to model component (you can copy from link:{repoURL}/src/main/java/seedu.address/model/book/Quantity.java[`Quantity`], remove the regex and change the names accordingly).
 . Modify `RemarkCommand` to now take in a `Remark` instead of a `String`.
 
 **Tests:**
@@ -860,16 +860,16 @@ We have to properly encapsulate the remark in our link:{repoURL}/src/main/java/s
 . Add test for `Remark`, to test the `Remark#equals()` method.
 
 ===== [Step 5] Model: Modify `Book` to support a `Remark` field
-Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu/quantity/model/book/Book.java[`Book`].
+Now we have the `Remark` class, we need to actually use it inside link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`].
 
 **Main:**
 
-. Add `getRemark()` in link:{repoURL}/src/main/java/seedu/quantity/model/book/Book.java[`Book`].
+. Add `getRemark()` in link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the book will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/quantity/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `bookInventory.xml` so that the application will load the sample data when you launch it.)
+. Modify link:{repoURL}/src/main/java/seedu.address/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `bookInventory.xml` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedBook` class
-We now have `Remark` s for `Book` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/quantity/storage/XmlAdaptedBook.java[`XmlAdaptedBook`] to include a `Remark` field so that it will be saved.
+We now have `Remark` s for `Book` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu.address/storage/XmlAdaptedBook.java[`XmlAdaptedBook`] to include a `Remark` field so that it will be saved.
 
 **Main:**
 
@@ -880,23 +880,23 @@ We now have `Remark` s for `Book` s, but they will be gone when we exit the appl
 . Fix `invalidAndValidBookBookInventory.xml`, `typicalBooksBookInventory.xml`, `validBookInventory.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
 ===== [Step 6b] Test: Add withRemark() for `BookBuilder`
-Since `Book` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/quantity/testutil/BookBuilder.java[`BookBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/quantity/model/book/Book.java[`Book`].
+Since `Book` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu.address/testutil/BookBuilder.java[`BookBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu.address/model/book/Book.java[`Book`].
 
 **Tests:**
 
-. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu/quantity/testutil/BookBuilder.java[`BookBuilder`]. This method will create a new `Remark` for the book that it is currently building.
-. Try and use the method on any sample `Book` in link:{repoURL}/src/test/java/seedu/quantity/testutil/TypicalBooks.java[`TypicalBooks`].
+. Add a new method `withRemark()` for link:{repoURL}/src/test/java/seedu.address/testutil/BookBuilder.java[`BookBuilder`]. This method will create a new `Remark` for the book that it is currently building.
+. Try and use the method on any sample `Book` in link:{repoURL}/src/test/java/seedu.address/testutil/TypicalBooks.java[`TypicalBooks`].
 
 ===== [Step 7] Ui: Connect `Remark` field to `BookCard`
-Our remark label in link:{repoURL}/src/main/java/seedu/quantity/ui/BookCard.java[`BookCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
+Our remark label in link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[`BookCard`] is still a placeholder. Let's bring it to life by binding it with the actual `remark` field.
 
 **Main:**
 
-. Modify link:{repoURL}/src/main/java/seedu/quantity/ui/BookCard.java[`BookCard`]'s constructor to bind the `Remark` field to the `Book` 's remark.
+. Modify link:{repoURL}/src/main/java/seedu.address/ui/BookCard.java[`BookCard`]'s constructor to bind the `Remark` field to the `Book` 's remark.
 
 **Tests:**
 
-. Modify link:{repoURL}/src/test/java/seedu/quantity/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysBook(...)`] so that it will compare the now-functioning remark label.
+. Modify link:{repoURL}/src/test/java/seedu.address/ui/testutil/GuiTestAssert.java[`GuiTestAssert#assertCardDisplaysBook(...)`] so that it will compare the now-functioning remark label.
 
 ===== [Step 8] Logic: Implement `RemarkCommand#execute()` logic
 We now have everything set up... but we still can't modify the remarks. Let's finish it up by adding in actual logic for our `remark` command.
