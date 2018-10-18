@@ -45,7 +45,7 @@ public class SampleDataUtil {
             new Person(new Name("Bernice Yu"), new Gender("Female"), new Nationality("SG"),
                     new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new Grade("100"), getTagSet("colleagues", "friends"),test),
+                    new Grade("100"), getTagSet("colleagues", "friends"), test),
 
             new Person(new Name("Charlotte Oliveiro"), new Gender("F"), new Nationality("AU"),
                     new Phone("93210283"), new Email("charlotte@example.com"),
@@ -54,11 +54,11 @@ public class SampleDataUtil {
 
             new Person(new Name("David Li"), new Gender("M"), new Nationality("CN"),
                     new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Seran" +
-                            "on Gardens Street 26, #16-43"),
+                    new Address("Blk 436 Seran"
+                            + "on Gardens Street 26, #16-43"),
                     new Grade("100"), getTagSet("family"), test),
-            new Person(new Name("Irfan Ibrahi" +
-                    "m"), new Gender("Male"), new Nationality("MY"),
+            new Person(new Name("Irfan Ibrahi"
+                    + "m"), new Gender("Male"), new Nationality("MY"),
                     new Phone("92492021"), new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"),
                     new Grade("100"), getTagSet("classmates"), test),
@@ -136,10 +136,10 @@ public class SampleDataUtil {
      * Returns a test set containing the list of test given.
      */
     public static Set<Test> getTestsSet(Test... tests) {
-        Set<Test> TestSet = new HashSet<>();
+        Set<Test> testSet = new HashSet<>();
         for (Test t : tests) {
-            TestSet.add(t);
+            testSet.add(t);
         }
-        return TestSet;
+        return testSet;
     }
 }
