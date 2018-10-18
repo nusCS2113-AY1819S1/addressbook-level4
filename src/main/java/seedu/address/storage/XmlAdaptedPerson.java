@@ -16,6 +16,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Skill;
+import seedu.address.model.person.SkillLevel;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,8 +36,8 @@ public class XmlAdaptedPerson {
     private String address;
     @XmlElement(required = true)
     private String skill;
-
-
+    @XmlElement(required = true)
+    private int skillLevel;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -71,6 +72,7 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         skill = source.getSkill().value;
+        skillLevel = source.getSkillLevel().level;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -124,10 +126,10 @@ public class XmlAdaptedPerson {
         }
 
         final Skill modelSkill = new Skill(skill);
+        final SkillLevel modelSkillLevel = new SkillLevel(skillLevel);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSkill, modelTags);
-
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSkill, modelSkillLevel, modelTags);
     }
 
     @Override
