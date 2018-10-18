@@ -420,10 +420,10 @@ In order to prevent brute force, a user has up to 3 tries to key in the correct 
 
 =====Aspect: How hashing is done
 
-* **Alternative 1: Use existing hashing algorithms in java libraries such as `java.security.*`.
+* **Alternative 1: Use existing hashing algorithms in java libraries such as `java.security'.**
 ** Pros: Easy and fast to implement.
 ** Cons: If the algorithm in the source code is easily decryptable , can be easily bruteforced.
-* **Alternative 2: Implement own hashing algorithm
+* **Alternative 2: Implement own hashing algorithm.**
 ** Pros: Encryption is foreign to interventions, harder to decrypt.
 ** Cons: Can be tedious and time-consuming, might risk having similar keys.
 
