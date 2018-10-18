@@ -175,7 +175,7 @@ Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 Examples:
 
 * `request i/978-2-12-345680-3 e/johnd@gmail.com q/5` +
-Requests for 5 same books with the corresponding iSBN13 with requester's price johnd@gmail.com
+Requests for 5 same books with the corresponding iSBN13 with requester's email johnd@gmail.com
 
 === Viewing of Requests : `viewrequests`
 
