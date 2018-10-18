@@ -14,7 +14,7 @@ public class StringSimilarityTest {
         assertEquals(stringsimilarity.editDistance("test", "test"), 0);
 
         // "" -> "test", has edit distance of 4
-        assertEquals(stringsimilarity.editDistance("", "test"),4);
+        assertEquals(stringsimilarity.editDistance("", "test"), 4);
 
         // "TEST" -> "test", has edit distance of 4
         assertEquals(stringsimilarity.editDistance("TEST", "test"), 4);
