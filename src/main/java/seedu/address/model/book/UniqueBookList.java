@@ -3,6 +3,8 @@ package seedu.address.model.book;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -12,7 +14,7 @@ import seedu.address.model.book.exceptions.BookNotFoundException;
 import seedu.address.model.book.exceptions.DuplicateBookException;
 
 /**
- * A list of persons that enforces uniqueness between its elements and does not allow nulls.
+ * A list of books that enforces uniqueness between its elements and does not allow nulls.
  * A book is considered unique by comparing using {@code Book#isSameBook(Book)}. As such, adding and updating of
  * persons uses Book#isSameBook(Book) for equality so as to ensure that the book being added or updated is
  * unique in terms of identity in the UniqueBookList. However, the removal of a book uses Book#equals(Object) so
@@ -51,7 +53,7 @@ public class UniqueBookList implements Iterable<Book> {
      * {@code target} must exist in the list.
      * The book identity of {@code editedBook} must not be the same as another existing book in the list.
      */
-    public void setPerson(Book target, Book editedBook) {
+    public void setBook(Book target, Book editedBook) {
         requireAllNonNull(target, editedBook);
 
         int index = internalList.indexOf(target);
@@ -77,7 +79,7 @@ public class UniqueBookList implements Iterable<Book> {
         }
     }
 
-    public void setPersons(UniqueBookList replacement) {
+    public void setBooks(UniqueBookList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
     }
@@ -86,15 +88,26 @@ public class UniqueBookList implements Iterable<Book> {
      * Replaces the contents of this list with {@code books}.
      * {@code books} must not contain duplicate books.
      */
-    public void setPersons(List<Book> books) {
+    public void setBooks(List<Book> books) {
         requireAllNonNull(books);
-        if (!personsAreUnique(books)) {
+        if (!booksAreUnique(books)) {
             throw new DuplicateBookException();
         }
 
         internalList.setAll(books);
     }
 
+    /**
+     * Sorts the contents of this list based on their quantities
+     */
+    public void sortBooks() {
+        Collections.sort(internalList, new Comparator<Book>() {
+            @Override
+            public int compare(Book b1, Book b2) {
+                return b1.getQuantity().getValue().compareTo(b2.getQuantity().getValue());
+            }
+        });
+    }
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
@@ -122,7 +135,7 @@ public class UniqueBookList implements Iterable<Book> {
     /**
      * Returns true if {@code books} contains only unique books.
      */
-    private boolean personsAreUnique(List<Book> books) {
+    private boolean booksAreUnique(List<Book> books) {
         for (int i = 0; i < books.size() - 1; i++) {
             for (int j = i + 1; j < books.size(); j++) {
                 if (books.get(i).isSameBook(books.get(j))) {

@@ -63,18 +63,18 @@ public class BookInventoryTest {
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        bookInventory.hasPerson(null);
+        bookInventory.hasBook(null);
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(bookInventory.hasPerson(ALICE));
+        assertFalse(bookInventory.hasBook(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
         bookInventory.addBook(ALICE);
-        assertTrue(bookInventory.hasPerson(ALICE));
+        assertTrue(bookInventory.hasBook(ALICE));
     }
 
     @Test
@@ -82,7 +82,7 @@ public class BookInventoryTest {
         bookInventory.addBook(ALICE);
         Book editedAlice = new BookBuilder(ALICE).withQuantity(VALID_QUANTITY_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        assertTrue(bookInventory.hasPerson(editedAlice));
+        assertTrue(bookInventory.hasBook(editedAlice));
     }
 
     @Test

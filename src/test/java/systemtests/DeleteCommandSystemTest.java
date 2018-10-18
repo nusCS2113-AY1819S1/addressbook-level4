@@ -34,7 +34,7 @@
 //        Model expectedModel = getModel();
 //        String command = "     " + DeleteCommand.COMMAND_WORD + "      " +
 // INDEX_FIRST_PERSON.getOneBased() + "       ";
-//        Book deletedBook = removePerson(expectedModel, INDEX_FIRST_PERSON);
+//        Book deletedBook = removeBook(expectedModel, INDEX_FIRST_PERSON);
 //        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedBook);
 //        // assertCommandSuccess(command, expectedModel, expectedResultMessage);
 //
@@ -50,7 +50,7 @@
 //
 //        /* Case: redo deleting the last book in the list -> last book deleted again */
 //        command = RedoCommand.COMMAND_WORD;
-//        removePerson(modelBeforeDeletingLast, lastPersonIndex);
+//        removeBook(modelBeforeDeletingLast, lastPersonIndex);
 //        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
 //        assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 //
@@ -84,7 +84,7 @@
 //        Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
 //        selectPerson(selectedIndex);
 //        command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-//        deletedBook = removePerson(expectedModel, selectedIndex);
+//        deletedBook = removeBook(expectedModel, selectedIndex);
 //        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedBook);
 //        assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 //
@@ -119,7 +119,7 @@
 //     * Removes the {@code Book} at the specified {@code index} in {@code model}'s BookInventory.
 //     * @return the removed book
 //     */
-//    private Book removePerson(Model model, Index index) {
+//    private Book removeBook(Model model, Index index) {
 //        Book targetBook = getPerson(model, index);
 //        model.deleteBook(targetBook);
 //        return targetBook;
@@ -132,7 +132,7 @@
 //     */
 //    private void assertCommandSuccess(Index toDelete) {
 //        Model expectedModel = getModel();
-//        Book deletedBook = removePerson(expectedModel, toDelete);
+//        Book deletedBook = removeBook(expectedModel, toDelete);
 //        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedBook);
 //
 //        assertCommandSuccess(

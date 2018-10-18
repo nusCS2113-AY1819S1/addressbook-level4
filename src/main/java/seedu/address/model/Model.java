@@ -52,6 +52,11 @@ public interface Model {
     void updateFilteredBookList(Predicate<Book> predicate);
 
     /**
+     * Sorts the books according the their quantity
+     */
+    void sortBooksUsingQuantity();
+
+    /**
      * Returns true if the model has previous BookInventory states to restore.
      */
     boolean canUndoAddressBook();
