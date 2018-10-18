@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.UniqueEventList;
@@ -104,6 +103,7 @@ public class EventManager implements ReadOnlyEventManager {
 
     @Override
     public ObservableList<Event> getEventList() {
+        //events.sortEventList();
         return events.asUnmodifiableObservableList();
     }
 

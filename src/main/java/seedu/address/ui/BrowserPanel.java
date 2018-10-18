@@ -22,7 +22,7 @@ import seedu.address.model.event.Event;
  */
 public class BrowserPanel extends UiPart<Region> {
 
-        public static final String DEFAULT_PAGE = "default.html";
+    public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE = "EventSearchPage.html";
 
 
