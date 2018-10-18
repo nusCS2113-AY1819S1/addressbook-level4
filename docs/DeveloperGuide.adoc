@@ -391,6 +391,102 @@ image::BudgetCommandSequenceDiagram.png[width="800"]
 //end::budget[]
 
 // tag::undoredo[]
+=== Search Pruning Feature
+
+The Search Pruning mechanism is facilitated by the `SearchHistoryManager`.
+Within `SearchHistoryManager` is `searchHistoryStack`, storing `Predicate` objects.
+The `Predicate` objects are used to filter `filteredListPerson` in ModelManager.
+
+A main `SearchHistoryManager` object named `searchHistoryManager` is stored within `ModelManager` and you could access `searchHistoryManager` by calling the
+getter method `getSearchHistoryManager()`.
+
+IMPORTANT: `searchHistoryManger` is only meant for the filtering of
+`Person` objects and Predicates irrelevant to the filtering of `Person` objects could not be stored in it.
+If you want to utilize `SearchHistoryManager` for your own use case, you can initialize a new SearchHistoryManager object
+by calling its default constructor.
+
+==== Current Implementation
+
+The main implementation behind SearchHistoryManager is a Stack Data Structure +
+and the following 3 methods of `SearchHistoryManager` are exposed for your usage +
+
+* `executeNewSearch(Predicate<T> predicate)` +
+updates system search logic to the next state and returns a `Predicate` object storing the system search logic after the update.
+* `revertLastSearch()` +
+reverts system search logic to the previous state and returns a `Predicate` object storing
+                       the system search logic after revert.
+* `clearSearchHistory()` +
+clears all system search logic from in-app memory. +
+
+Given below are illustrations to help you understand how each method works internally
+
+In the following diagrams, UP is the short-form for User Predicate which stores the logic specified by the user and SP is the short-form for System Predicate which stores the search logic for the system
+
+NOTE: User Predicate and System Predicate are not actual Classes, they are simply called that way to help in your understanding.
+'''
+`executeNewSearch(Predicate<T> predicate)` +
+
+Upon calling this method, there will be two different situations +
+
+* Situation 1: searchHistoryStack is empty +
+Upon receiving a new `Predicate` defined by the user, SearchHistoryManager will simply push the new `Predicate` into `searchHistoryStack`
+
+image::executeNewSearchEmptyStack.png[width="800"]
+
+* Situation 2: searchHistoryStack is not empty +
+Before pushing the new `Predicate` into the Stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the Stack.
+After retrieving it, it will call the `and()` method with the User Predicate, creating a new System Predicate which will then be pushed into the top
+of the Stack.
+
+image::executeNewSearchNonEmptyStack.png[width="800"]
+'''
+`revertLastSearch()` +
+
+This method will remove the System Predicate from the top of the Stack. +
+In the event that the Stack is already empty, `SearchHistoryManager` will throw `EmptyStackException`.
+
+image::undoSearchHistoryStack.png[width="800"]
+'''
+`clearSearchHistory()` +
+
+This method will simply empty the Stack.
+
+image::clearSearchHistoryStack.png[width="800"]
+
+'''
+The following sequence diagrams shows you how `find` and `undosearch` commands utilize `SearchHistoryManager` to perform Search Pruning.
+
+ - `find` +
+
+image::SearchPruningSequenceDiagram.png[width="800"]
+
+ - `undosearch` +
+
+image::undoSearchSequenceDiagram.png[width="800"]
+
+
+==== Design Considerations
+
+Aspect: What data is stored in search history stack +
+
+* **Alternative 1(current choice):**  Save a Stack of Predicates
+** Pros:
+    . Does not need to store the data in search history explicitly which saves memory +
+    . Any form of Search Pruning done with Predicates can reuse `SearchHistoryManager` class +
+
+** Cons:
+. Need to understand how `Predicate` works before utilizing this Class.
+. `Predicate` objects by itself does not perform the Search Pruning. In NUSSU Connect, we have to pass the `Predicate`
+   into a `FilteredList<T>` object to do the Search Pruning.
+
+* ** Alternative 2: ** Save a Stack of Lists containing Person objects in search history
+** Pros:
+    . It is easy to understand that we are filtering according to Person objects from `SearchHistoryManager` class
+
+** Cons:
+    . More memory is required as Person objects has to be duplicated multiple times into a new List.
+    . Class is inextensible to store other objects other than those from a Person classes.
+    
 === Undo/Redo feature
 ==== Current Implementation
 
