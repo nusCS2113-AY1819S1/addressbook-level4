@@ -53,7 +53,7 @@ public class Limit {
         Date recordDate;
         recordDate = record.getDate();
         return ((dateStart.isEarlierThan(recordDate) && dateEnd.isLaterThan(recordDate))
-            || dateEnd == recordDate || dateStart == recordDate);
+            || dateEnd.equals( recordDate) || dateStart.equals(recordDate));
     }
 
     /**
@@ -63,6 +63,6 @@ public class Limit {
      * @return
      */
     public boolean isExceeded (Double money) {
-        return (limitMoneyFlow.toDouble() < money);
+        return (limitMoneyFlow.toDouble() > money);
     }
 }
