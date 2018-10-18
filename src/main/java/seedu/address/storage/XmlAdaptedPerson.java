@@ -1,9 +1,11 @@
 package seedu.address.storage;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.enrolledClass.EnrolledClass;
@@ -13,7 +15,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TimeSlots;
+import seedu.address.model.person.TimeSlots;
 
 /**
  * JAXB-friendly version of the Person.
@@ -37,8 +39,9 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedEnrolledClass> enrolled = new ArrayList<>();
 
-    @XmlElement
-    private Map<String, List<XmlAdaptedTimeSlots>> timeslots = new HashMap<>();
+    @XmlElementWrapper
+    private Map<String, ListWrapper> timeslots = new HashMap<>();
+
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -50,7 +53,8 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
     public XmlAdaptedPerson(String name, String phone, String email, String address,
-                            List<XmlAdaptedTag> tagged, List<XmlAdaptedEnrolledClass> enrolled, Map<String, List<XmlAdaptedTimeSlots>> timeslots) {
+                            List<XmlAdaptedTag> tagged, List<XmlAdaptedEnrolledClass> enrolled, Map<String,
+            ListWrapper> timeslots) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -86,13 +90,17 @@ public class XmlAdaptedPerson {
         }
         timeslots = toXmlAdaptedTimeSlots(source.getTimeSlots());
     }
-    public static Map<String, List<XmlAdaptedTimeSlots>>toXmlAdaptedTimeSlots (Map<String, List<TimeSlots>> source) {
-        Map<String, List<XmlAdaptedTimeSlots>> timeslots = new HashMap<>();
+    public static Map<String, ListWrapper>toXmlAdaptedTimeSlots (Map<String, List<TimeSlots>> source) {
+        Map<String, ListWrapper> timeslots = new HashMap<>();
         String[] days ={"mon", "tue", "wed", "thu", "fri"};
         for(String day :days) {
+            ArrayList<XmlAdaptedTimeSlots> toAdd= new ArrayList<>();
+            ListWrapper wrapper = new ListWrapper();
+            wrapper.setList(toAdd);
             for (TimeSlots i : source.get(day)) {
-                timeslots.get(day).add(new XmlAdaptedTimeSlots(i));
+                toAdd.add(new XmlAdaptedTimeSlots(i));
             }
+            timeslots.put(day, wrapper);
         }
         return timeslots;
     }
@@ -116,9 +124,11 @@ public class XmlAdaptedPerson {
         final Map<String ,List<TimeSlots> >personTimeSlots = new HashMap<>();
         String[] days ={"mon", "tue", "wed", "thu", "fri"};
         for(String day: days){
-            for (XmlAdaptedTimeSlots i : timeslots.get(day)) {
-                personTimeSlots.get(day).add(i.toModelType());
+            List<TimeSlots> toAdd = new ArrayList<>();
+            for (XmlAdaptedTimeSlots i : timeslots.get(day).getList()) {
+                toAdd.add(i.toModelType());
             }
+            personTimeSlots.put(day, toAdd);
         }
 
         if (name == null) {

@@ -65,11 +65,11 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-        for(String tempEnrolledClassName : person.getEnrolledClasses().keySet()){
+       /* for(String tempEnrolledClassName : person.getEnrolledClasses().keySet()){
             Label enrolledClass = new Label(tempEnrolledClassName);
             enrolledClass.setPrefSize(61, 10);
             header.getChildren().add(enrolledClass);
-        }
+        }*/
 
         for (String it : Tag.getHeader()) {
             Label day = new Label(it);
@@ -77,11 +77,32 @@ public class PersonCard extends UiPart<Region> {
             header.getChildren().add(day);
 
         }
-        colourTag(person);
-        getMod(Tag.getTue(), tuesday);
-        getMod(Tag.getWed(), wednesday);
-        getMod(Tag.getThu(), thursday);
-        getMod(Tag.getFri(), friday);
+        String[] mon= new String[12];
+        String[] tue= new String[12];
+        String[] wed= new String[12];
+        String[] thu= new String[12];
+        String[] fri =new String[12];
+
+        for(int i=0; i<12; i++) {
+            mon[i]= person.getTimeSlots().get("mon").get(i).toString();
+        }
+        for(int i=0; i<12; i++) {
+            tue[i]= person.getTimeSlots().get("tue").get(i).toString();
+        }
+        for(int i=0; i<12; i++) {
+            wed[i]= person.getTimeSlots().get("wed").get(i).toString();
+        }
+        for(int i=0; i<12; i++) {
+            thu[i]= person.getTimeSlots().get("thu").get(i).toString();
+        }
+        for(int i=0; i<12; i++) {
+            fri[i]= person.getTimeSlots().get("fri").get(i).toString();
+        }
+        getMod(mon, monday);
+        getMod(tue, tuesday);
+        getMod(wed, wednesday);
+        getMod(thu, thursday);
+        getMod(fri, friday);
 
 
     }
@@ -91,7 +112,15 @@ public class PersonCard extends UiPart<Region> {
         for (String it : mods) {
             Label slot = new Label(it);
             slot.setPrefSize(53, 25);
-            if (it.charAt(5) == 'm' || it.charAt(5) == 'a') {
+            if(it.equalsIgnoreCase("busy")){
+                slot.getStyleClass().add("black");
+                slot.setText(" ");
+            }
+            else if(it.equalsIgnoreCase("free")){
+                slot.getStyleClass().add("white");
+                slot.setText(" ");
+            }
+            else if (it.charAt(5) == 'm' || it.charAt(5) == 'a') {
                 slot.getStyleClass().add("white");
                 slot.setText(" ");
 
