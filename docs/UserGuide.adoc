@@ -176,7 +176,7 @@ Examples:
 * `findc e/helloworld@example.com` +
 (Returns any candidates having email helloworld@example.com)
 
-====Finds names of companies from RecruitBook based on the searched name.
+==== Finds names of companies from RecruitBook based on the searched name.
 Format: `findC NAME` +
 
 ****
