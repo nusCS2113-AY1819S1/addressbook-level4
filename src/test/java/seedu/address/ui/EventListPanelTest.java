@@ -1,5 +1,16 @@
 package seedu.address.ui;
 
+import static java.time.Duration.ofMillis;
+import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
+import static seedu.address.testutil.EventsUtil.postNow;
+import static seedu.address.testutil.TypicalEvents.getTypicalEvents;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
+import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import guitests.guihandles.EventCardHandle;
 import guitests.guihandles.EventListPanelHandle;
 import javafx.collections.FXCollections;
@@ -10,17 +21,6 @@ import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.event.Event;
 import seedu.address.storage.XmlSerializableEManager;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static java.time.Duration.ofMillis;
-import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
-import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalEvents.getTypicalEvents;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
-import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
 public class EventListPanelTest extends GuiUnitTest {
     private static final ObservableList<Event> TYPICAL_EVENTS =

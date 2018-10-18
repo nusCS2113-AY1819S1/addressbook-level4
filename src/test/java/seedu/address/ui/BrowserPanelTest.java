@@ -1,18 +1,18 @@
 package seedu.address.ui;
 
-import guitests.guihandles.BrowserPanelHandle;
-import org.junit.Before;
-import org.junit.Test;
-import seedu.address.MainApp;
-import seedu.address.commons.events.ui.EventSelectionChangedEvent;
-
-import java.net.URL;
-
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
+
+import java.net.URL;
+
+import guitests.guihandles.BrowserPanelHandle;
+import org.junit.Before;
+import org.junit.Test;
+import seedu.address.MainApp;
+import seedu.address.commons.events.ui.EventSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private EventSelectionChangedEvent selectionChangedEventStub;

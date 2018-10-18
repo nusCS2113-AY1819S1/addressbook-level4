@@ -1,15 +1,15 @@
 package seedu.address.model;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 import javafx.collections.ObservableList;
 import seedu.address.model.event.AttendanceContainsUserPredicate;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
-
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class DateTimeManager {
     private static AttendanceContainsUserPredicate predicate;

@@ -1,9 +1,9 @@
 package seedu.address.model.event;
 
 
-import seedu.address.model.user.User;
-
 import java.util.function.Predicate;
+
+import seedu.address.model.user.User;
 
 public class AttendanceContainsUserPredicate implements Predicate<Event> {
     private final String username;

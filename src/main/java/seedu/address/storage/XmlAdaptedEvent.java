@@ -1,14 +1,6 @@
 package seedu.address.storage;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
-import seedu.address.model.event.DateTime;
-import seedu.address.model.event.Email;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.Name;
-import seedu.address.model.event.Phone;
-import seedu.address.model.tag.Tag;
+import static seedu.address.model.event.DateTime.MESSAGE_DATETIME_CONSTRAINTS;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.util.ArrayList;
@@ -18,7 +10,15 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static seedu.address.model.event.DateTime.MESSAGE_DATETIME_CONSTRAINTS;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.event.Address;
+import seedu.address.model.event.Attendance;
+import seedu.address.model.event.DateTime;
+import seedu.address.model.event.Email;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.Name;
+import seedu.address.model.event.Phone;
+import seedu.address.model.tag.Tag;
 
 /**
  * JAXB-friendly version of the Event.

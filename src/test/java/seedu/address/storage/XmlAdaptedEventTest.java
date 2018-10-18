@@ -1,5 +1,12 @@
 package seedu.address.storage;
 
+import static seedu.address.storage.XmlAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.TypicalEvents.BENSON;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Address;
@@ -9,13 +16,6 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.testutil.Assert;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static seedu.address.storage.XmlAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalEvents.BENSON;
 
 public class XmlAdaptedEventTest {
     private static final String INVALID_NAME = "R@chel";

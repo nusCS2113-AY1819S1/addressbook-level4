@@ -1,18 +1,5 @@
 package seedu.address.logic.commands;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.EventManager;
-import seedu.address.model.Model;
-import seedu.address.model.event.Event;
-import seedu.address.model.event.EventContainsKeywordsPredicate;
-import seedu.address.testutil.EditEventDescriptorBuilder;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -21,6 +8,19 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.EventManager;
+import seedu.address.model.Model;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.EventContainsKeywordsPredicate;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.

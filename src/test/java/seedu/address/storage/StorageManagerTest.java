@@ -1,5 +1,14 @@
 package seedu.address.storage;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -10,15 +19,6 @@ import seedu.address.model.EventManager;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
-
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 public class StorageManagerTest {
 

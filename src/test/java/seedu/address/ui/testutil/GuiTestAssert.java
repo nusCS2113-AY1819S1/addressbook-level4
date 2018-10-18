@@ -1,14 +1,14 @@
 package seedu.address.ui.testutil;
 
-import guitests.guihandles.EventCardHandle;
-import guitests.guihandles.EventListPanelHandle;
-import guitests.guihandles.ResultDisplayHandle;
-import seedu.address.model.event.Event;
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.EventListPanelHandle;
+import guitests.guihandles.ResultDisplayHandle;
+import seedu.address.model.event.Event;
 
 /**
  * A set of assertion methods useful for writing GUI tests.

@@ -1,11 +1,11 @@
 package seedu.address.ui;
 
+import static seedu.address.testutil.EventsUtil.postNow;
+
 import guitests.guihandles.ResultDisplayHandle;
 import org.junit.Before;
 import org.junit.Test;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
-
-import static seedu.address.testutil.EventsUtil.postNow;
 
 public class ResultDisplayTest extends GuiUnitTest {
 

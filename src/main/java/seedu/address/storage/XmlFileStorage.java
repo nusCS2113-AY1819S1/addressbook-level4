@@ -1,11 +1,11 @@
 package seedu.address.storage;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.util.XmlUtil;
-
 import javax.xml.bind.JAXBException;
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
+
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.util.XmlUtil;
 
 /**
  * Stores event manager data in an XML file
