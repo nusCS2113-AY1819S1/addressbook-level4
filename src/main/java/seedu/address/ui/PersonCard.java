@@ -39,6 +39,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label skill;
     @FXML
+    private Label skillLevel;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
