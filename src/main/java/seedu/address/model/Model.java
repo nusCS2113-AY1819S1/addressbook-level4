@@ -70,18 +70,6 @@ public interface Model {
     boolean canRedoStockList();
 
     /**
-     * Lost the given item.
-     * The item must exist in the stock list.
-     */
-    void lostItem(Item target);
-
-    /**
-     * Found the given item.
-     * The item must exist in the stock list.
-     */
-    void foundItem(Item target);
-
-    /**
      * Restores the model's stock list to its previous state.
      */
     void undoStockList();
