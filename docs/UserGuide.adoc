@@ -265,7 +265,7 @@ Format: `email`
 .   *Choose your contents.* Same as before, what is shown on the main window will be taken in as
     the contents. +
     Type `next` to move on to the next step.
-    
+
     WARNING: Recipients and contents must be contrasting - If recipients are candidates, then
     the content must be job offers and vice versa.
 
