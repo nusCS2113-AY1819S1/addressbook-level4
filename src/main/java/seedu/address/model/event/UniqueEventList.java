@@ -6,8 +6,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Iterator;
 import java.util.List;
 
+import javafx.beans.InvalidationListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.commons.comparators.DateTimeComparator;
+import seedu.address.commons.comparators.NameComparator;
 import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.model.event.exceptions.EventNotFoundException;
 
@@ -99,7 +102,17 @@ public class UniqueEventList implements Iterable<Event> {
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Event> asUnmodifiableObservableList() {
+        //sortEventList();
         return FXCollections.unmodifiableObservableList(internalList);
+    }
+
+    /**
+     * Sort the internal events list by DateTime then by Name
+     * implement here to keep the the binding list as internal list
+     */
+    //Todo: check if list is sorted by DateTime then Name by default
+    private void sortEventList() {
+        internalList.sort(new DateTimeComparator().thenComparing(new NameComparator()));
     }
 
     @Override
