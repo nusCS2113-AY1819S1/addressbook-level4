@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.StatisticCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
@@ -71,6 +72,8 @@ public class SellCommand extends Command {
         if (originalQuantity == sellBook.getQuantity().getValue()) {
             throw new CommandException(MESSAGE_INVALID_QUANTITY);
         }
+
+        StatisticCenter.getInstance().increaseRevenue(bookToSell.getPrice().toString());
 
         model.updateBook(bookToSell, sellBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
