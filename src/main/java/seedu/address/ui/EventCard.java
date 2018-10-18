@@ -29,13 +29,11 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label contact;
-    @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
-    private Label venue;
+    private Label address;
     @FXML
     private Label email;
     @FXML
@@ -46,9 +44,8 @@ public class EventCard extends UiPart<Region> {
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
-        contact.setText(event.getContact().fullContactName);
         phone.setText(event.getPhone().value);
-        venue.setText(event.getVenue().value);
+        address.setText(event.getAddress().value);
         email.setText(event.getEmail().value);
         event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }

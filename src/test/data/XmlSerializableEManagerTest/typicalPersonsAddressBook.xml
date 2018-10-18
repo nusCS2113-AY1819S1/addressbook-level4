@@ -2,56 +2,56 @@
 <!-- EventManager save file which contains the same Event values as in TypicalPersons#getTypicalAddressBook() -->
 <eventmanager>
     <events>
-        <name>Inter Neighbourhood Cooking Competition</name>
-        <contact>Alice Pauline</contact>
+        <name>Alice Pauline</name>
         <phone>94351253</phone>
         <email>alice@example.com</email>
-        <venue>123, Jurong West Ave 6, #08-111</venue>
+        <address>123, Jurong West Ave 6, #08-111</address>
+        <attendance>false</attendance>
         <tagged>friends</tagged>
     </events>
     <events>
-        <name>Dancing Tryouts</name>
-        <contact>Benson Meier</contact>
+        <name>Benson Meier</name>
         <phone>98765432</phone>
         <email>johnd@example.com</email>
-        <venue>311, Clementi Ave 2, #02-25</venue>
+        <address>311, Clementi Ave 2, #02-25</address>
+        <attendance>true</attendance>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
     </events>
     <events>
-        <name>Frisbee Competition</name>
-        <contact>Carl Kurz</contact>
+        <name>Carl Kurz</name>
         <phone>95352563</phone>
         <email>heinz@example.com</email>
-        <venue>wall street</venue>
+        <address>wall street</address>
+        <attendance>false</attendance>
     </events>
     <events>
-        <name>Art and Crafts</name>
-        <contact>Daniel Meier</contact>
+        <name>Daniel Meier</name>
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
-        <venue>10th street</venue>
+        <address>10th street</address>
+        <attendance>false</attendance>
         <tagged>friends</tagged>
     </events>
     <events>
-        <name>Music Tryouts</name>
-        <contact>Elle Meyer</contact>
+        <name>Elle Meyer</name>
         <phone>9482224</phone>
         <email>werner@example.com</email>
-        <venue>michegan ave</venue>
+        <address>michegan ave</address>
+        <attendance>true</attendance>
     </events>
     <events>
-        <name>Dining In The Dark</name>
-        <contact>Fiona Kunz</contact>
+        <name>Fiona Kunz</name>
         <phone>9482427</phone>
         <email>lydia@example.com</email>
-        <venue>little tokyo</venue>
+        <address>little tokyo</address>
+        <attendance>false</attendance>
     </events>
     <events>
-        <name>College Games</name>
-        <contact>George Best</contact>
+        <name>George Best</name>
         <phone>9482442</phone>
         <email>anna@example.com</email>
-        <venue>4th street</venue>
+        <address>4th street</address>
+        <attendance>true</attendance>
     </events>
 </eventmanager>

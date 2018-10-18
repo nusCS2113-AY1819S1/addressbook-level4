@@ -3,17 +3,15 @@
     <!-- Valid Event -->
     <events>
         <name>Hans Muster</name>
-        <contact isPrivate="false">Hans Muster</contact>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
-        <venue isPrivate="false">4th street</venue>
+        <address isPrivate="false">4th street</address>
     </events>
     <!-- Event with invalid phone field -->
     <events>
         <name>Hans Muster</name>
-        <contact isPrivate="false">Hans Muster</contact>
         <phone isPrivate="false">948asdf2424</phone>
         <email isPrivate="false">hans@example.com</email>
-        <venue isPrivate="false">4th street</venue>
+        <address isPrivate="false">4th street</address>
     </events>
 </addressbook>
