@@ -63,8 +63,6 @@ Format: `login USERID PASSWORD`
 * PASSWORD refers to the password associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
 * USERID must belong to an existing account
-* There must be at least 1 space between USERID and PASSWORD
-* There need not be any spaces between `login` and `USERID`
 ****
 
 Examples:
@@ -80,19 +78,55 @@ Password is case-sensitive!
 === Creating a new user account: `createaccount`
 
 Creates a new user account in the address book. +
-Format: `createaccount USERID PASSWORD`
+Format: `createaccount user/USERID pass/PASSWORD`
 
 ****
+* user/ and pass/ are required prefixes before USERID and PASSWORD
 * USERID refers to student matriculation number
 * PASSWORD refers to any desired passphrases the new user wishes to have
-* The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabet, and there must be exactly 7 digits between the two `X`
+* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
 * USERID must not belong to an existing account
 ****
 
 Examples:
 
-* `createaccount X1234567X aq1xsw2cde3` +
+* `createaccount user/X1234567X pass/zaq1xsw2cde3` +
 Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
+
+=== Deleting an existing user account: `deleteaccount`
+
+Deletes an existing account from the address book. +
+Format: `deleteaccount USERID PASSWORD`
+
+****
+* USERID refers to student matriculation number
+* PASSWORD refers to passphrase associated with USERID of the account
+* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
+* USERID must belong to an existing account
+****
+
+Examples:
+
+* `deleteaccount X1234567X zaq1xsw2cde3` +
+Deletes the current account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
+
+=== Changing the password of an existing user account: `changepassword`
+
+Changes the password of an existing account from the address book. +
+Format: `changepassword USERID CURRENTPASSWORD NEWPASSWORD`
+
+****
+* USERID refers to student matriculation number
+* CURRENTPASSWORD refers to current passphrase associated with USERID of the account
+* The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
+* USERID must belong to an existing account
+* NEWPASSWORD must be different from CURRENTPASSWORD
+****
+
+Examples:
+
+* `changepassword X1234567X zaq1xsw2cde3 1qaz2wsx3edc` +
+Changes the password of the current account with user ID as X1234567X, from "zaq1xsw2cde3" to "1qaz2wsx3edc" in the address book.
 
 === Viewing help : `help`
 
@@ -139,14 +173,13 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 === Locating persons: `find`
 
 Finds persons in the displayed list whose names/tags contain any of the given keywords. +
-Format: `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]`
+Format: `find [\tag tags]  KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * For back-to-back find commands, the most recent find command will search according to the previous find command
-* The `\exclude` option will exclude any names/tags with the specified keywords
 ****
 
 Examples:
@@ -156,48 +189,35 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
-* `find \exclude Tom` +
-Returns any person without the name `Tom`.
-
 * `find \tag President` +
 Returns any person with the tag `President`
 * `find \tag President Vice_President` +
 Returns any person with the tag `President` OR `Vice_President`.
-* `find \tag \exclude President` +
-Returns any person without the tag `President`.
-====
-**Search Pruning feature with find commands:**
-
-With the introduction of v1.1, NUSSU Connect now includes a Search Pruning feature that helps you
-trim the list of contacts with every successive find command. This lets you search through the list
-of contacts in a much more intuitive manner without the hassle of typing a long single line command that is
-usually error-prone.
-
-The concept of the Search Pruning feature will be further illustrated below.
 ****
-*Assume that the original list of contacts contains the following 3 persons.*
+**Executing back-to-back find commands:**
+
+Assume that the displayed list contains 3 person initially.
 
 image::InitialList.png[align="left"]
 
-*After executing the command `find \tag VIP`* +
-*the displayed list will now contain 2 persons, both with the tag 'VIP'*
+After executing the command "find \tag VIP" +
+the displayed list will contain 2 person, both with the tag 'VIP'
 
 image::SecondList.png[align="left"]
 
-*Executing another command `find \tag President`* +
-*will filter according to the previous displayed list instead of the original list* +
-*The displayed list now contains only 1 person with the tag 'President'* +
+After executing the command "find \tag President" +
+it will filter according to the previous displayed list +
+the displayed list will contain 1 person, with the tag 'President' +
 
 image::ThirdList.png[align="left"]
 ****
-====
 
-=== Undoing Search Commands: `undosearch`
+=== Resetting Search History: `clearsearch`
 
-Restores the displayed list to the state before you perform your most recent find command +
-Format: `undosearch`
+Resets search history back to the very initial stage before any find commands are executed +
+Format: `clearsearch`
 ****
-* To be used together with Search Pruning feature
+* To be used together with the find command
 ****
 
 === Deleting : `delete`
@@ -310,36 +330,29 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
-=== Submitting data for budget allocation: `budget`
-
+=== Submitting data for budget allocation: `data`
 Submits the data about number of events, expected turnout etc. +
-Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
-
+Format: `data e/NUMBER OF EVENTS t/TURNOUT`
 Example: +
-`budget c/Computing Club t/200 e/5`
+`data e/5 t/200` +
 
 === Viewing the allocated budget : `viewbudget`
-
 Shows the allocated budget to the user +
-Format: `viewbudget`
+Format: `viewbudget` +
 
 === Submitting grant request : `request`
-
 Submits data about amount of grant needed, the reason and tags the importance level
-Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL`
-
+Format: `request m/AMOUNT r/REASON t/IMPORTANCE LEVEL
 Example: +
 `request m/1000 r/for booking auditorium t/medium` +
 
 === Viewing grant request : `viewrequest`
 Shows a list of all the grant request sorted by order of importance, and if there is a tie, by descending order of amount requested. +
-Format: `viewrequest`
+Format: `viewrequest` +
 
 === Accepting grant request: `accept`
-
 Approves a specific grant request from the list of grants.
-Format: `accept [-a all] [INDEX]`
-
+Format: `accept [-a all] [INDEX] +
 ****
 * Approves the request at the specified `INDEX`.
 * The index refers to the index number shown in the displayed requests list.
@@ -381,14 +394,18 @@ _{explain how the user can enable/disable data encryption}_
 * *Login* : `login USERID PASSWORD`
 e.g. `login A1234567M zaq1xsw2cde3`
 * *Create Account* : `createaccount USERID PASSWORD` +
-e.g. `createaccount A1234567M zaq1xsw2cde3`
+e.g. `createaccount user/A1234567M pass/zaq1xsw2cde3`
+* *Delete Account* : `deleteaccount USERID PASSWORD` +
+e.g. `deleteaccount A01234567M zaq1xsw2cde3`
+* *Change Password* : `changepassword USERID CURRENTPASSWORD NEWPASSWORD` +
+e.g. `changepassword A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 * *Clear* : `clear`
 * *Delete* : `delete [-a all][INDEX]` +
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]` +
+* *Find* : `find [\tag tags] KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake` +
 e.g `find \tag President`
 * *List* : `list`
@@ -398,8 +415,8 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Submitting data for budget* : `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS` +
-e.g. `budget c/Computing Club t/200 e/5`
+* *Submitting data for budget* : `data e/NUMBER OF EVENTS t/TURNOUT` +
+e.g. `data e/5 t/200`
 * *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
 e.g. `request m/1000 r/for booking auditorium t/medium`
 * *Viewing grant request* : `viewrequest`

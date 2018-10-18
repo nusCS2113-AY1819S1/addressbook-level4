@@ -12,7 +12,7 @@ public class ExpectedTurnout {
 
     public static final String MESSAGE_EXPECTED_TURNOUT_CONSTRAINTS =
             "Expected turnout should only contain numbers, and it can be any number including zero";
-    public static final String EXPECTED_TURNOUT_VALIDATION_REGEX = "\\d";
+    public static final String EXPECTED_TURNOUT_VALIDATION_REGEX = "\\d{1,}";
     public final String value;
 
     /**

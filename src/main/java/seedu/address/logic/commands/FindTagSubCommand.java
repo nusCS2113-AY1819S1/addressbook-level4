@@ -18,9 +18,13 @@ public class FindTagSubCommand extends FindCommand {
     private final TagContainsKeywordsPredicate predicate;
 
     public FindTagSubCommand(TagContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
+        this(predicate, false);
     }
 
+    public FindTagSubCommand(TagContainsKeywordsPredicate predicate, boolean isExcludeMode) {
+        this.predicate = predicate;
+        this.isExcludeMode = isExcludeMode;
+    }
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
