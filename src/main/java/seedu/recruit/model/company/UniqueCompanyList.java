@@ -15,7 +15,7 @@ import seedu.recruit.model.joboffer.JobOffer;
 /**
  * A list of companies that enforces uniqueness between its elements and does not allow nulls.
  * A company is considered unique by comparing using {@code Company#isSameCompany(Company)}. As such, adding and
- * updating of companes uses Company#isSameCompany(Company) for equality so as to ensure that the company being
+ * updating of companies uses Company#isSameCompany(Company) for equality so as to ensure that the company being
  * added or updated is unique in terms of identity in the UniqueCompanyList. However, the removal of a company uses
  * Company#equals(Company) so as to ensure that the company with exactly the same fields will be removed.
  *

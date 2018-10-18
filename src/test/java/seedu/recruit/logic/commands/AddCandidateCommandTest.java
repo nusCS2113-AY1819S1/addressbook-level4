@@ -81,7 +81,6 @@ public class AddCandidateCommandTest {
         assertFalse(addAliceCommand.equals(addBobCommand));
     }
 
-
     /**
      * A Model stub that contains a single candidate.
      */
@@ -128,5 +127,4 @@ public class AddCandidateCommandTest {
             return new CandidateBook();
         }
     }
-
 }

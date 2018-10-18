@@ -41,10 +41,9 @@ public class AddCandidateCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicateCandidate_throwsCommandException() {
-        Candidate candidateInList = model.getCandidateBook().getCandidatelist().get(0);
+    public void execute_duplicatePerson_throwsCommandException() {
+        Candidate candidateInList = model.getCandidateBook().getCandidateList().get(0);
         assertCommandFailure(new AddCandidateCommand(candidateInList), model, commandHistory,
                 AddCandidateCommand.MESSAGE_DUPLICATE_PERSON);
     }
-
 }
