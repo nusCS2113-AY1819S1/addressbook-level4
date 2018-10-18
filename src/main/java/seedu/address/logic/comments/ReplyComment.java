@@ -1,5 +1,8 @@
 package seedu.address.logic.comments;
 
+import seedu.address.logic.commands.ReplyCommentCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
+
 import java.util.Vector;
 
 /**
@@ -19,13 +22,13 @@ public class ReplyComment extends Comments {
     /**
      *  Replies with the comment to event Comment section of index and line
      */
-    public String replyComment(String comment, int line) {
+    public String replyComment(String comment, int line) throws CommandException {
         Vector comments = new Vector();
         try {
             comments = getComments();
             comments.add(line, "REPLY--->" + comment);
         } catch (Exception e) {
-            System.out.println("Line error");
+            throw new CommandException(ReplyCommentCommand.MESSAGE_LINE_INVALID);
         }
         return rewrite(comments);
     }

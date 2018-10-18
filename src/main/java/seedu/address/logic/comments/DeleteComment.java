@@ -5,9 +5,6 @@ import java.util.Vector;
 import seedu.address.logic.commands.DeleteCommentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
-
-
-
 /**
  *  Deletes a comment given the line of it
  */

@@ -38,6 +38,7 @@ public class ReplyCommentCommand extends Command {
             + PREFIX_COMMENT + "johndoe@example.com is here";
 
     public static final String MESSAGE_REPLY_COMMENT = "Comment [%1$s] replied for Event %2$s at Line %3$s";
+    public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again";
 
     private final Index index;
     private final EditCommand.EditPersonDescriptor editCommentDescriptor;
