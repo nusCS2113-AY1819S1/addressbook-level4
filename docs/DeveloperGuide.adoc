@@ -281,6 +281,49 @@ For the analyses over 7 days, a similar concept as that for analyses over 1 day 
 // end::analyses[]
 
 
+//tag::login[]
+=== Login/logout feature
+
+==== Current Implementation
+
+The login feature is a standalone feature that enable security check on user. It has a fxml page that name `LoginPage.fxml` at `main\resources\view`
+The controller of the fxml page named `LoginController` at `seedu.address\controller`
+
+Given below is a class diagram for logout function
+
+image::LoginUMLDiagram/Login_Class_diagram.png[width="800"]
+
+
+Given below is an example usage scenario and how logout mechanism behave at each step.
+
+image::LoginUMLDiagram/Login_sequence_diagram.png[width="800"]
+The `LoginController` will check for username and password will the LoginUtils
+Once the username and password is correct, it will continue to `initAddressBook`.
+It will also start the ui.
+
+
+image::LoginUMLDiagram/LoginUtils_sequence_diagram.png[width="800"]
+
+==== Design Considerations
+===== Aspect: How to store the data
+* **Alternative 1 (current choice):** Saves the login detail in a json file called `loginInfoList.json`.
+** Pros: Have a systematic and elegant way to store data.
+** Cons: Hard to implement
+* **Alternative 2:** Store the data in enum.
+** Pros: Easy to implement
+** Cons: Fixed database. Cannot add /modify/delete accounts. (suitable for very small project)
+
+===== Aspect: Data format for store data
+
+* **Alternative 1 (current choice):** Store in Json file.
+** Pros: Json is popular and have have support online.
+** Pros :JSON is relatively easier to implement compared to XML
+** Cons: Have to write serialized method for JSON file.
+* **Alternative 2:** Store in XML file
+** Pros: Classic and matured product
+** Pros: Have serialized code in original ab4.
+** Cons: It has many rule to set before implementation.
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
