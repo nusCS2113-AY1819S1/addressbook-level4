@@ -1,10 +1,9 @@
 package seedu.address.model.event;
 
+import seedu.address.commons.util.StringUtil;
+
 import java.util.List;
 import java.util.function.Predicate;
-
-import com.sun.xml.bind.v2.TODO;
-import seedu.address.commons.util.StringUtil;
 
 /**
  * Tests that a {@code Event}'s {@code any fields} matches any of the keywords given.

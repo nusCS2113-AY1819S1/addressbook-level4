@@ -1,16 +1,15 @@
 package seedu.address.model.person;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+import seedu.address.model.event.EventContainsKeywordsPredicate;
+import seedu.address.testutil.EventBuilder;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.junit.Test;
-
-import seedu.address.model.event.EventContainsKeywordsPredicate;
-import seedu.address.testutil.EventBuilder;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class EventContainsKeywordsPredicateTest {
 

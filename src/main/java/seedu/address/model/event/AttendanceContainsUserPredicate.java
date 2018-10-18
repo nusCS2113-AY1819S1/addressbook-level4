@@ -2,6 +2,7 @@ package seedu.address.model.event;
 
 
 import seedu.address.model.user.User;
+
 import java.util.function.Predicate;
 
 public class AttendanceContainsUserPredicate implements Predicate<Event> {

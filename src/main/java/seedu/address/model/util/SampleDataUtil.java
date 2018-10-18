@@ -1,13 +1,13 @@
 package seedu.address.model.util;
 
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import seedu.address.model.EventManager;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.*;
 import seedu.address.model.tag.Tag;
+
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Contains utility methods for populating {@code EventManager} with sample data.

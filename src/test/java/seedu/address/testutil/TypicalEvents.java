@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import seedu.address.model.EventManager;
+import seedu.address.model.event.Event;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import seedu.address.model.EventManager;
-import seedu.address.model.event.Event;
 
 import static seedu.address.logic.commands.CommandTestUtil.*;
 

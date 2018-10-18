@@ -1,16 +1,15 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.EventManager;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * An Immutable EventManager that is serializable to XML format

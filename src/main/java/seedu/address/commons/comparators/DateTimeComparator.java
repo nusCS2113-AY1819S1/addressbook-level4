@@ -1,8 +1,8 @@
-package seedu.address.commons.Comparators;
-
-import java.util.Comparator;
+package seedu.address.commons.comparators;
 
 import seedu.address.model.event.Event;
+
+import java.util.Comparator;
 
 public class DateTimeComparator implements Comparator<Event> {
     @Override

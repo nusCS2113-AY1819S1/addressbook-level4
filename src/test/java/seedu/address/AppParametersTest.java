@@ -1,6 +1,7 @@
 package seedu.address;
 
-import static org.junit.Assert.assertEquals;
+import javafx.application.Application;
+import org.junit.Test;
 
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -8,9 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
-
-import javafx.application.Application;
+import static org.junit.Assert.assertEquals;
 
 public class AppParametersTest {
 

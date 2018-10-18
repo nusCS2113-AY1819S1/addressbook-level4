@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import seedu.address.model.event.Event;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,10 +12,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Set;
-
-import seedu.address.model.event.*;
-import seedu.address.model.tag.Tag;
 
 /**
  * Formatter for Event Page HTML file

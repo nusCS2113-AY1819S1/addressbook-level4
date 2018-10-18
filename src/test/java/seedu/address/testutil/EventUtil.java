@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
-import java.util.Set;
-
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
+
+import java.util.Set;
 
 import static seedu.address.logic.parser.CliSyntax.*;
 

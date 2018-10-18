@@ -1,24 +1,20 @@
 package seedu.address.storage;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalEvents.ALICE;
-import static seedu.address.testutil.TypicalEvents.HOON;
-import static seedu.address.testutil.TypicalEvents.IDA;
-import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import org.junit.rules.TemporaryFolder;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.EventManager;
+import seedu.address.model.ReadOnlyEventManager;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.rules.TemporaryFolder;
-
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.EventManager;
-import seedu.address.model.ReadOnlyEventManager;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static seedu.address.testutil.TypicalEvents.*;
 
 public class XmlEventManagerStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlEventManagerStorageTest");

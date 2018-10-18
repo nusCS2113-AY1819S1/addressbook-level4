@@ -1,6 +1,10 @@
 package seedu.address.storage;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.FileUtil;
+import seedu.address.model.ReadOnlyEventManager;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,11 +13,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.model.ReadOnlyEventManager;
+import static java.util.Objects.requireNonNull;
 
 /**
  * A class to access EventManager data stored as an xml file on the hard disk.

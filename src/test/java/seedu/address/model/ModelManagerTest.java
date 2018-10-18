@@ -1,20 +1,19 @@
 package seedu.address.model;
 
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+import seedu.address.model.event.EventContainsKeywordsPredicate;
+import seedu.address.testutil.AddressBookBuilder;
+
+import java.nio.file.Paths;
+import java.util.Arrays;
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.BENSON;
-
-import java.nio.file.Paths;
-import java.util.Arrays;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
-import seedu.address.model.event.EventContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
     @Rule

@@ -1,10 +1,10 @@
 package seedu.address.model;
 
-import java.util.function.Predicate;
-
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
+
+import java.util.function.Predicate;
 
 /**
  * The API of the Model component.

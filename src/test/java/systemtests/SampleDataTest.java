@@ -1,17 +1,16 @@
 package systemtests;
 
-import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
+import org.junit.Test;
+import seedu.address.model.EventManager;
+import seedu.address.model.event.Event;
+import seedu.address.model.util.SampleDataUtil;
+import seedu.address.testutil.TestUtil;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-import org.junit.Test;
-
-import seedu.address.model.EventManager;
-import seedu.address.model.event.Event;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 
 public class SampleDataTest extends EventManagerSystemTest {
     /**git ls-tree HEAD

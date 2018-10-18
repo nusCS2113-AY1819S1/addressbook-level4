@@ -1,14 +1,10 @@
 package seedu.address.commons.core;
 
+import seedu.address.commons.events.BaseEvent;
+
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
-
-import seedu.address.commons.events.BaseEvent;
+import java.util.logging.*;
 
 /**
  * Configures and manages loggers and handlers, including their logging level
