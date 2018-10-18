@@ -1,9 +1,10 @@
 package seedu.address.logic.comments;
 
+import java.util.Vector;
+
 import seedu.address.logic.commands.ReplyCommentCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 
-import java.util.Vector;
 
 /**
  *  Replies to a comment on a given line with a comment
