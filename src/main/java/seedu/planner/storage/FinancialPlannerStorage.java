@@ -8,6 +8,7 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
 /**
@@ -18,7 +19,8 @@ public interface FinancialPlannerStorage {
     /**
      * Returns the file path of the data file of the record list storage.
      */
-    Path getFinancialPlannerFilePath();
+
+    Path getRecordListFilePath();
 
     /**
      * Returns the file path for the data file of the limit list storage.
@@ -30,6 +32,7 @@ public interface FinancialPlannerStorage {
      */
     Path getSummaryMapFilePath();
 
+    // ================ Financial Planner storage methods ===========================
     /**
      * Returns FinancialPlanner data as a {@link ReadOnlyFinancialPlanner}.
      *   Returns {@code Optional.empty()} if storage file is not found.
@@ -39,10 +42,79 @@ public interface FinancialPlannerStorage {
     Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException;
 
     /**
-     * @see #getFinancialPlannerFilePath()
+     * @see #getRecordListFilePath() and #getSummaryMapFilePath
      */
-    Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
+                                                            Path summaryListFilePath)
+            throws DataConversionException, IOException;
 
+    /**
+     * Saves the given {@link ReadOnlyFinancialPlanner} to the storage.
+     * @param financialPlanner cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+
+    /**
+     * @see #saveFinancialPlanner(ReadOnlyFinancialPlanner)
+     */
+    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
+                              Path summaryMapFilePath) throws IOException;
+
+    // ================ Record List storage methods ===========================
+    /**
+     * Returns UniqueRecordList data as a {@link UniqueRecordList}.
+     *   Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem when reading from the storage.
+     */
+    Optional<UniqueRecordList> readRecordList() throws DataConversionException, IOException;
+
+    /**
+     * @see #getRecordListFilePath()
+     */
+    Optional<UniqueRecordList> readRecordList(Path filePath) throws DataConversionException, IOException;
+
+    /**
+     * Saves the RecordList of the given {@link ReadOnlyFinancialPlanner} to the storage.
+     * @param financialPlanner cannot be null.
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+
+    /**
+     * @see #saveRecordList(ReadOnlyFinancialPlanner)
+     */
+    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
+
+    // ================ Summary Map storage methods ===========================
+
+    /**
+     * Returns SummaryMap data as a {@link SummaryMap}.
+     *   Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem reading from the storage.
+     */
+    Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException;
+
+    /**
+     * @see #getSummaryMapFilePath()
+     */
+    Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException, IOException;
+
+    /**
+     * Saves the given SummaryMap of {@link ReadOnlyFinancialPlanner} to the storage.
+     * @param financialPlanner cannot be null
+     * @throws IOException if there was any problem writing to the file.
+     */
+    void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+
+    /**
+     * @see #saveSummaryMap(ReadOnlyFinancialPlanner)
+     */
+    void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
+
+    // ================ Limit List storage methods ===========================
     /**
      * Returns limitlist data as a limitlist.
      * @return
@@ -67,43 +139,4 @@ public interface FinancialPlannerStorage {
      * @see #saveLimitList(ReadOnlyFinancialPlanner, Path)
      */
     void saveLimitList(ReadOnlyFinancialPlanner limitList, Path filePath) throws IOException;
-
-
-    /**
-     * Saves the given {@link ReadOnlyFinancialPlanner} to the storage.
-     * @param financialPlanner cannot be null.
-     * @throws IOException if there was any problem writing to the file.
-     */
-    void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
-
-    /**
-     * @see #saveRecordList(ReadOnlyFinancialPlanner)
-     */
-    void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
-
-    /**
-     * Returns SummaryMap data as a {@link SummaryMap}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
-     * @throws DataConversionException if the data in storage is not in the expected format.
-     * @throws IOException if there was any problem reading from the storage.
-     */
-    Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException;
-
-    /**
-     * @see #getSummaryMapFilePath()
-     */
-    Optional<SummaryMap> readSummaryMap(Path filePath) throws DataConversionException, IOException;
-
-    /**
-     * Saves the given {@link SummaryMap} to the storage.
-     * @param summaryMap cannot be null
-     * @throws IOException if there was any problem writing to the file.
-     */
-    void saveSummaryMap(SummaryMap summaryMap) throws IOException;
-
-    /**
-     * @see #saveSummaryMap(SummaryMap)
-     */
-    void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException;
-
 }

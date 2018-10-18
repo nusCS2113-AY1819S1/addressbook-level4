@@ -12,6 +12,7 @@ import org.junit.rules.ExpectedException;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.commons.util.XmlUtil;
 import seedu.planner.model.FinancialPlanner;
+import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.testutil.TypicalRecords;
 
@@ -26,11 +27,13 @@ public class XmlSerializableFinancialPlannerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    //TODO: @test Rewrite this test to not be hardcoded
     @Test
     public void toModelType_typicalRecordsFile_success() throws Exception {
         XmlSerializableFinancialPlanner dataFromFile = XmlUtil.getDataFromFile(
                 TYPICAL_RECORDS_FILE, XmlSerializableFinancialPlanner.class);
-        FinancialPlanner financialPlannerFromFile = dataFromFile.toModelType();
+        FinancialPlanner financialPlannerFromFile = new FinancialPlanner();
+        financialPlannerFromFile.resetData(dataFromFile.toModelType(), new SummaryMap());
         FinancialPlanner typicalRecordsFinancialPlanner = TypicalRecords.getTypicalFinancialPlanner();
         assertEquals(financialPlannerFromFile, typicalRecordsFinancialPlanner);
     }

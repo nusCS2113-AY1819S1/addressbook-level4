@@ -12,6 +12,7 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
 /**
@@ -25,13 +26,13 @@ public interface Storage extends FinancialPlannerStorage, UserPrefsStorage {
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
-    // =================================== Financial Planner methods =========================================
+    // =================================== Record List methods =========================================
 
     @Override
-    Path getFinancialPlannerFilePath();
+    Path getRecordListFilePath();
 
     @Override
-    Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException;
+    Optional<UniqueRecordList> readRecordList() throws DataConversionException, IOException;
 
     @Override
     void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
@@ -49,7 +50,7 @@ public interface Storage extends FinancialPlannerStorage, UserPrefsStorage {
     Optional<SummaryMap> readSummaryMap() throws DataConversionException, IOException;
 
     @Override
-    void saveSummaryMap(SummaryMap summaryMap) throws IOException;
+    void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
 
     /**
      * Saves the LimitList in the current version of Financial Planner to the had disk.

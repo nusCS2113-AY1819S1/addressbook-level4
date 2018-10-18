@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.exceptions.RecordNotFoundException;
@@ -69,11 +71,12 @@ public class SummaryMap {
      * Displays the lists of summary objects in a specific time period in the format of a string
      */
     //TODO: change this when changing to UI
-    public List<Summary> getSummaryList(Date startDate, Date endDate) {
-        return summaryMap.keySet().stream()
+    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
+        List<Summary> summaryList = summaryMap.keySet().stream()
                 .filter(s -> isDateWithinInterval(s, startDate, endDate))
                 .map(s -> summaryMap.get(s))
                 .collect(Collectors.toList());
+        return FXCollections.unmodifiableObservableList(FXCollections.observableList(summaryList));
     }
 
     public int size() {

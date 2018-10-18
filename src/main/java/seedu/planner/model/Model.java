@@ -88,6 +88,12 @@ public interface Model {
     void updateFilteredRecordList(Predicate<Record> predicate);
 
     /**
+     * Updates the filtered record list to sort by the given {@code category}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void sortFilteredRecordList(String category, Boolean reversed);
+
+    /**
      * Returns true if the model has previous financial planner states to restore.
      */
     boolean canUndoFinancialPlanner();
@@ -112,5 +118,5 @@ public interface Model {
      */
     void commitFinancialPlanner();
 
-    List<Summary> getSummaryList(Date startDate, Date endDate);
+    ObservableList<Summary> getSummaryList(Date startDate, Date endDate);
 }

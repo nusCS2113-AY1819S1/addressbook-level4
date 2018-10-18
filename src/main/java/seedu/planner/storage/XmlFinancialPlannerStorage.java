@@ -13,8 +13,10 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.commons.exceptions.IllegalValueException;
 import seedu.planner.commons.util.FileUtil;
+import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.storage.xmljaxb.XmlSerializableSummaryMap;
@@ -26,38 +28,81 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlFinancialPlannerStorage.class);
 
-    private Path financialPlannerFilePath;
+    private Path recordListFilePath;
     private Path summaryMapFilePath;
     private Path limitListFilePath;
 
-    public XmlFinancialPlannerStorage(Path financialPlannerFilePath, Path summaryMapFilePath, Path limitListFilePath) {
-        this.financialPlannerFilePath = financialPlannerFilePath;
+
+    public XmlFinancialPlannerStorage(Path recordListFilePath, Path summaryMapFilePath, Path limitListFilePath) {
+        this.recordListFilePath = recordListFilePath;
         this.summaryMapFilePath = summaryMapFilePath;
         this.limitListFilePath = limitListFilePath;
     }
 
-    public Path getFinancialPlannerFilePath() {
-        return financialPlannerFilePath;
+    public Path getRecordListFilePath() {
+        return recordListFilePath;
     }
 
     public Path getSummaryMapFilePath() {
-        return summaryMapFilePath; }
+
+        return summaryMapFilePath;
+    }
 
     public Path getLimitListFilePath() {
-        return limitListFilePath; }
-    // ===================== Record List Storage methods ======================================
+        return limitListFilePath;
+    }
+
+    // ===================== Financial Planner Storage methods ================================
+
 
     @Override
     public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
-        return readFinancialPlanner(financialPlannerFilePath);
+        return readFinancialPlanner(recordListFilePath, summaryMapFilePath);
+    }
+
+    @Override
+    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
+                                                                   Path summaryMapFilePath)
+            throws DataConversionException, IOException {
+        requireNonNull(recordListFilePath);
+        requireNonNull(summaryMapFilePath);
+
+        Optional<ReadOnlyFinancialPlanner> financialPlannerOptional = Optional.empty();
+        Optional<UniqueRecordList> recordListOptional = readRecordList(recordListFilePath);
+        Optional<SummaryMap> summaryMapOptional = readSummaryMap(summaryMapFilePath);
+        if (recordListOptional.isPresent() && summaryMapOptional.isPresent()) {
+            FinancialPlanner financialPlanner = new FinancialPlanner();
+            financialPlanner.resetData(recordListOptional.get(), summaryMapOptional.get());
+            financialPlannerOptional = Optional.of(financialPlanner);
+        }
+        return financialPlannerOptional;
+    }
+
+    @Override
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+        saveFinancialPlanner(financialPlanner, recordListFilePath, summaryMapFilePath);
+    }
+
+    @Override
+    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
+                                     Path summaryMapFilePath) throws IOException {
+        saveRecordList(financialPlanner, recordListFilePath);
+        saveSummaryMap(financialPlanner, summaryMapFilePath);
+    }
+
+    // ===================== Record List Storage methods ======================================
+
+    @Override
+    public Optional<UniqueRecordList> readRecordList() throws DataConversionException, IOException {
+        return readRecordList(recordListFilePath);
     }
 
     /**
-     * Similar to {@link #readFinancialPlanner()}
+     * Similar to {@link #readRecordList()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path filePath) throws DataConversionException,
+    public Optional<UniqueRecordList> readRecordList(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
@@ -78,14 +123,16 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     @Override
     public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
-        saveFinancialPlanner(financialPlanner, financialPlannerFilePath);
+
+        saveRecordList(financialPlanner, recordListFilePath);
+
     }
 
     /**
      * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+    public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
         requireNonNull(financialPlanner);
         requireNonNull(filePath);
 
@@ -126,20 +173,20 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     }
 
     @Override
-    public void saveSummaryMap(SummaryMap summaryMap) throws IOException {
-        saveSummaryMap(summaryMap, summaryMapFilePath);
+    public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+        saveSummaryMap(financialPlanner, summaryMapFilePath);
     }
 
     /**
-     * Similar to {@link #saveSummaryMap(SummaryMap)}}
+     * Similar to {@link #saveSummaryMap(ReadOnlyFinancialPlanner)}}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveSummaryMap(SummaryMap summaryMap, Path filePath) throws IOException {
-        requireNonNull(summaryMap);
+    public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+        requireNonNull(financialPlanner);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableSummaryMap(summaryMap));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableSummaryMap(financialPlanner));
     }
 
     // ======================================= Limit Storage methods ==============================
@@ -149,11 +196,8 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
         return readLimitList(limitListFilePath);
     }
 
-    /**
-     * Similar to {@link #readLimitList()}
-     * @param filePath location of the data. Cannot be null
-     * @throws DataConversionException if the file is not in the correct format.
-     */
+
+    @Override
     public Optional<DateBasedLimitList> readLimitList(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
@@ -182,6 +226,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
      * Similar to {@link FinancialPlannerStorage#saveRecordList(ReadOnlyFinancialPlanner)}
      * @param filePath location of the data. Cannot be null
      */
+
     public void saveLimitList(ReadOnlyFinancialPlanner limitList, Path filePath) throws IOException {
         requireNonNull(limitList);
         requireNonNull(filePath);

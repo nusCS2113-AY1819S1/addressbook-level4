@@ -98,12 +98,23 @@ public class AddCommandTest {
         }
 
         @Override
+        public void deleteRecord(Record target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateRecord(Record target, Record editedRecord) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void resetData(ReadOnlyFinancialPlanner newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public List<Summary> getSummaryList(Date date1, Date date2) {
+
+        public ObservableList<Summary> getSummaryList(Date date1, Date date2) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -135,24 +146,17 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        @Override
-        public void deleteRecord(Record target) {
-            throw new AssertionError("This method should not be called.");
-        }
 
         @Override
-
         public boolean isExceededLimit (Limit limit) {
             throw new AssertionError("This method should not be called.");
         }
 
+
+
         public void deleteListRecord(List<Record> targetList) {
 
-            throw new AssertionError("This method should not be called.");
-        }
 
-        @Override
-        public void updateRecord(Record target, Record editedRecord) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -163,6 +167,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredRecordList(Predicate<Record> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortFilteredRecordList(String category, Boolean ascending) {
             throw new AssertionError("This method should not be called.");
         }
 

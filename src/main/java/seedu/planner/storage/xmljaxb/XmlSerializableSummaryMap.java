@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.planner.commons.exceptions.IllegalValueException;
+import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.summary.Summary;
 import seedu.planner.model.summary.SummaryMap;
@@ -30,9 +31,9 @@ public class XmlSerializableSummaryMap extends XmlSerializableClass<SummaryMap> 
     /**
      * Conversion
      */
-    public XmlSerializableSummaryMap(SummaryMap summaryMap) {
+    public XmlSerializableSummaryMap(ReadOnlyFinancialPlanner financialPlanner) {
         this.summaryMap = new HashMap();
-        Map<Date, Summary> map = summaryMap.getMap();
+        Map<Date, Summary> map = financialPlanner.getSummaryMap().getMap();
         for (Date key : map.keySet()) {
             Summary summary = map.get(key);
             this.summaryMap.put(key.toString(), new XmlAdaptedSummary(summary));

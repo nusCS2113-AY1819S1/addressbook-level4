@@ -70,6 +70,21 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         setRecords(newData.getRecordList());
         setSummaryMap(newData.getSummaryMap());
         setLimits(newData.getLimitList());
+
+    }
+
+    /**
+     * Resets the existing data of this {@code FinancialPlanner} with the given parameters
+     * @param recordList
+     * @param summaryMap
+     */
+    public void resetData(UniqueRecordList recordList, SummaryMap summaryMap) {
+        requireNonNull(recordList);
+        requireNonNull(summaryMap);
+
+        setRecords(recordList.asUnmodifiableObservableList());
+        setSummaryMap(summaryMap);
+
     }
 
     //// record-level operations
@@ -119,6 +134,12 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         records.remove(key);
     }
 
+    /**
+     * Sorts the records in this {@code FinancialPlanner}.
+     */
+    public void sortRecords(String category, Boolean ascending) {
+        records.sortRecords(category, ascending);
+    }
 
     //// summary related operations
     /**
@@ -147,7 +168,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void setSummaryMap(SummaryMap summaryMap) {
         this.summaryMap = summaryMap;
     }
-    public List<Summary> getSummaryList(Date startDate, Date endDate) {
+
+    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
         return summaryMap.getSummaryList(startDate, endDate);
     }
 
@@ -181,6 +203,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
         return (limit.isExceeded(recordsMoney));
     }
+
     /**
      * Removes a limit from the list,
      * @param limitin must already existed.
@@ -189,11 +212,9 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         limits.remove(limitin); }
 
 
-
     @Override
     public String toString() {
         return records.asUnmodifiableObservableList().size() + " records";
-
     }
 
     @Override

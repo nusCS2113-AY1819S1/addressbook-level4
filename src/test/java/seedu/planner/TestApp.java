@@ -84,8 +84,22 @@ public class TestApp extends MainApp {
     /**
      * Returns the file path of the storage file.
      */
-    public Path getStorageSaveLocation() {
-        return storage.getFinancialPlannerFilePath();
+    public Path getRecordStorageSaveLocation() {
+        return storage.getRecordListFilePath();
+    }
+
+    /**
+     * Returns the file path of the storage file.
+     */
+    public Path getSummaryStorageSaveLocation() {
+        return storage.getSummaryMapFilePath();
+    }
+
+    /**
+     * Returns the file path of the storage file.
+     */
+    public Path getLimitStorageSaveLocation() {
+        return storage.getLimitListFilePath();
     }
 
     /**

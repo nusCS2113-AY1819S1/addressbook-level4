@@ -68,8 +68,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the summary map has changed */
     private void indicateSummaryMapChanged() {
-        raise(new SummaryMapChangedEvent(versionedFinancialPlanner.getSummaryMap()));
+        raise(new SummaryMapChangedEvent(versionedFinancialPlanner));
     }
+
 
     /** Raises an event to indicate the limit list has changed */
     private void indicateLimitListChanged() {
@@ -168,6 +169,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRecords.setPredicate(predicate);
     }
 
+    //=========== Modifying Record List Accessors =============================================================
+
+    @Override
+    public void sortFilteredRecordList(String category, Boolean ascending) {
+        requireAllNonNull(category, ascending);
+        versionedFinancialPlanner.sortRecords(category, ascending);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -199,7 +208,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Summary Display =================================================================================
 
-    public List<Summary> getSummaryList(Date startDate, Date endDate) {
+    public ObservableList<Summary> getSummaryList(Date startDate, Date endDate) {
         return versionedFinancialPlanner.getSummaryList(startDate, endDate);
     }
 
