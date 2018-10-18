@@ -18,7 +18,7 @@ By: `Team F09-4`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-RecruitBook is a tool to help manage job candidates and available job offers for job agents and HR(Human Resources) department. RecruitBook is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). RecruitBook can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+RecruitBook is a tool to help manage job candidates and available job offers for job agents and HR (Human Resources) department. RecruitBook is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). RecruitBook can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -47,7 +47,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the fields to be specified by you! e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the fields to be specified by you! e.g. in `addc n/NAME`, `NAME` is a parameter which can be used as `addc n/John Doe`.
 * Details labelled with “if any” must be filled in at least with `NA` if you find it not applicable.
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
@@ -96,7 +96,7 @@ Entering this command will prompt you the following: +
 *`Enter the following details of the job in the format:`* +
 `c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY`
 
-NOTE: COMPANY specified has to be added to RecruitBook first!
+Note: COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
@@ -106,14 +106,14 @@ Examples:
 === Exits from any intermediate command
 Format: `cancel`
 
-=== Listing all : `list`
+=== Listing details of candidates / jobs : `list`
 
-==== Shows a list of all candidates interviewed by job agent +
+==== Shows a list of all candidates present in the RecruitBook +
 Format: `list candidates`
 
 Examples:
 
-* `John Doe p/91234567 e/johndoe@example.com a/72 Kent Ridge Rd j/Writer h/Business Degree s/$5000 j/Marketing assistant y/2 c/NUS`
+*   `John Doe p/91234567 e/johndoe@example.com a/72 Kent Ridge Rd j/Writer h/Business Degree s/$5000 j/Marketing assistant y/2 c/NUS`
 *	`Betsy Crower p/98765432 e/betsycrower@example.com ...`
 *	`Chris Lee p/91238765 e/chrislee@example.com ...`
 
@@ -136,10 +136,10 @@ The index must be an index number shown in the displayed candidates list.
 
 Example:
 
-*	`editc 1 n/John Doe p/91234567 e/johndoe@example.com` +
+* `editc 1 n/John Doe p/91234567 e/johndoe@example.com` +
 (Edits the name, phone number and email address of the candidate with index 1 to be John Doe, 91234567 and johndoe@example.com respectively)
 
-*	`editc 3 t/` +
+* `editc 3 t/` +
 (Edits and clears all existing tags belonging to the candidate at index 3)
 
 ==== Edits details of a company at the specified index `INDEX`
@@ -157,15 +157,15 @@ Example:
 Format: `editj <INDEX>`
 
 Edits the job with the specified `INDEX`.
-The index must be an index number shown in the displayed job list.
+This index must be an index number shown in the displayed job list.
 
 Examples:
 
-*	`editj 1 x/20-30`
-(Edits the MIN_AGE-MAX_AGE attribute to be from 20 to 30 years of age for the 1st job offer)
+*	`editj 1 x/20-30` +
+(Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
 === Locating candidates by search parameter : `find`
-==== Finds names of candidates from RecruitBook based on the search parameter. 
+==== Finds names of candidates from RecruitBook based on the search parameter.
 Format: `findc <tag>/KEYWORD` +
 Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 
@@ -191,7 +191,7 @@ Examples:
 Format: `findC NAME` +
 
 ****
-* The search is case insentitive. e.g. `kfc` will match `KFC` 
+* The search is case insensitive. e.g. `kfc` will match `KFC`
 * The order of the keywords does not matter. e.g. `Pte Ltd Hanbaobao` will match `Hanbaobao Pte Ltd`
 * Only full words will be matched e.g. `Mc` will not match `McDonalds`
 * Companies matching at least one keyword will be returned (i.e. `OR` search)
@@ -204,25 +204,25 @@ Examples:
 
 === Filtering by a specific tag : `filter`
 
-==== Filters and lists out the names of the people that falls within the category of the searched field
+==== Filters out the names of the people that falls under the searched category
 
 Format: `filter <tag>/KEYWORD` +
 Supported tags: `h/`, `j/`, `s/`, `x/`
 
-Searched field *must be of the full length* that is being recorded in the system
+Searched field *must be of the full length* that is recorded in the RecruitBook
 
 Examples:
 
-*	`filter h/O LEVEL` +
+* `filter h/O LEVEL` +
 (Returns any candidate with `O LEVEL` as the highest education level)
 
-*	`filter j/Librarian` +
+* `filter j/Librarian` +
 (Returns any candidate searching for the job `Librarian`)
 
-*	`filter s/$4000` +
+* `filter s/$4000` +
 (Returns any candidate that expects a salary of $4000)
 
-*	`filter x/18` +
+* `filter x/18` +
 (Returns any candidate that is aged 18)
 
 ==== Exits from the filter interface and system proceeds to ask for next command
@@ -250,26 +250,26 @@ Examples:
 Format: `deletec <INDEX>`
 
 *	Deletes the candidate with the specified `INDEX`
-*	The index must be an index number shown in the displayed candidate list.
+*	This index must be an index number shown in the displayed candidate list.
 *	The full name can be found using the find function when a partial keyword is entered
 
 Example to delete a candidate:
 
-Step 1.	`find Betsy` +
+Step 1. `find Betsy` +
 (Shows all saved candidates named Betsy)
 
 Step 2. `deletec 1` +
-(Deletes the candidate with index 1 from the RecruitBook(based on most recent list))
+(Deletes the 1st candidate on most recent list)
 
 ==== Deleting a specific job offer
 Format: `deletej <INDEX>`
 
-*	Deletes the job with the specified `INDEX`
-*	The index must be an index number shown in the displayed job list.
+* Deletes the job with the specified `INDEX`
+* The index must be an index number shown in the displayed job list.
 
 Example to delete a job:
 
-Step 1.	`list jobs` +
+Step 1. `list jobs` +
 (Shows all available jobs)
 
 Step 2. `deletej 5` +
@@ -284,6 +284,50 @@ Format: `clear`
 
 Exits the program. +
 Format: `exit`
+
+=== Sending emails : `email`
+
+Sends an email to specified candidates about specified job offers OR
+to specified companies about specified candidates that are suitable for specified job offers. +
+
+NOTE: Only Gmail is supported at this point in time.
+
+NOTE: If it is your first time running RecruitBook, a Gmail log in page will open on your browser.
+The gmail account that you log in with will be the email account used to send emails.
+
+Format: `email`
+
+._Email command is a 4-step command_
+.   *Initialisation.* Type `email` to initialise the email command.
+.   *Choose your recipients.* On the RecruitBook application, what's shown on the main window
+    will be taken in as the recipients. You can use commands such as `list`, `filter`, `find`
+    to change the candidate/job offer shown. +
+    Type `next` to move on to the next step.
+.   *Choose your contents.* Same as before, what is shown on the main window will be taken in as
+    the contents. +
+    Type `next` to move on to the next step.
+
+    WARNING: Recipients and contents must be contrasting - If recipients are candidates, then
+    the content must be job offers and vice versa.
+
+.   *Sending your email.* Once both recipients and contents have been picked, type `send` to send your email. +
+    This step is a confirmation step before you actually send the email.
+
+Examples:
+
+._You wish to send an email to candidates whose asking salary is $1,000 about being a cashier_
+.   `email` +
+    (Initialise email command)
+.   `filter /s$1000` +
+    (On CandidateBook)
+.   `next` +
+    (To select recipients)
+.   `find /jCashier` +
+    (On CompanyBook)
+.   `next` +
+    (To select contents)
+.   `send` +
+    (To send email)
 
 === Saving the data
 
@@ -307,9 +351,15 @@ _{explain how the user can enable/disable data encryption}_
 *	*Add* : `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …` +
             e.g. `addc n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
 *	*List* : `list [jobs /candidates]`
+<<<<<<< HEAD
 *	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
             e.g. `editc 2 e/jameslee@example.com`, `editC 5`
 *	*Find* : `find <tag>/KEYWORD [MORE_KEYWORDS]` +
+=======
+*	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `edit <INDEX>` +
+            e.g. `editc 2 e/jameslee@example.com`, `editj 5`
+*	*Find* : `find <tag>/KEYWORD` +
+>>>>>>> 0501a5066406d24aa24af3ff64c6011bf4ad554b
             e.g. `find n/James n/Jake`
 *	*Filter* : `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
             e.g. `filter h/O LEVEL`
@@ -317,3 +367,4 @@ _{explain how the user can enable/disable data encryption}_
             e.g. `deletec 1 `, `deletej 5`
 *	*Clear* : `clear`
 *	*Exit* : `exit`
+*           *Email* : `email`

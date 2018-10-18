@@ -27,7 +27,6 @@ public class Company {
     private final Email email;
     private final Phone phone;
 
-
     // List of unique job offers
     private UniqueJobList jobOffers;
 
