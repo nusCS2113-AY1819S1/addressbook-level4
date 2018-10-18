@@ -31,7 +31,6 @@
  */
 
 package seedu.address.ui;
-import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -46,10 +45,16 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Checks if password is correct
+ */
 public class CheckPassword {
     private static int count = 0;
     private static Label message = new Label("");
 
+    /**
+     * displays enter password box
+     */
     public static void display() {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
@@ -80,7 +85,8 @@ public class CheckPassword {
                 if (pb.getText().equals("password")) {
                     message.setText("Your password has been confirmed");
                     message.setTextFill(Color.web("black"));
-                    AlertBox.display("Welcome", "Welcome, student! If you encounter any problems using the app, press F1 for help!");
+                    AlertBox.display("Welcome", "Welcome, student!"
+                            + " If you encounter any problems using the app, press F1 for help!");
                     window.close();
 
                 } else if (pb.getText().equals("owner")) {
