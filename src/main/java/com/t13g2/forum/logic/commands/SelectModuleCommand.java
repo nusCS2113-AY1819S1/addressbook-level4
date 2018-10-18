@@ -19,10 +19,12 @@ public class SelectModuleCommand extends Command {
     public static final String COMMAND_WORD = "selectModule";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-        + ": List all the threads under certain module in the forum book.\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_MODULE_CODE + "CS2113";
+            + ": List all the threads under certain module in the forum book.\n"
+            + "Example: "
+            + COMMAND_WORD + " "
+            + PREFIX_MODULE_CODE + "CS2113";
 
-    private static String MESSAGE;
+    private static String message;
     private static String moduleCode;
 
     public SelectModuleCommand(String moduleCode) {
@@ -32,16 +34,16 @@ public class SelectModuleCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String message_success = "Listed all threads under module " + moduleCode + ":\n %1$s";
+        String messageSuccess = "Listed all threads under module " + moduleCode + ":\n %1$s";
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             Module module = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
             List<ForumThread> threadList = unitOfWork.getForumThreadRepository().getThreadsByModule(module);
             for (ForumThread thread : threadList) {
-                MESSAGE = thread.getId() + ": " + thread.getTitle() + "\n";
+                message = thread.getId() + ": " + thread.getTitle() + "\n";
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new CommandResult(String.format(message_success, MESSAGE));
+        return new CommandResult(String.format(messageSuccess, message));
     }
 }
