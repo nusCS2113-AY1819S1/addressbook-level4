@@ -52,6 +52,7 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         skill.setText(person.getSkill().value);
+        skillLevel.setText(Integer.toString(person.getSkillLevel().skillLevel)); // TODO: Is there a better way?
         person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 
