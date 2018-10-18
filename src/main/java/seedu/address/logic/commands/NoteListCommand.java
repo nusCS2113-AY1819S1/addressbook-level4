@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteManager;
 
-
 /**
  * Lists notes based on given predicate.
  */
