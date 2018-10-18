@@ -339,6 +339,36 @@ image::LoginActivityDiagram.png[width="800"]
 // end::login[]
 
 // tag::undoredo[]
+
+=== Add Skill Level Command
+
+==== Current Implementation
+
+The add skill mechanism builds on the addressBookParser. This ensures that the correct number of arguments
+is given to the item.
+
+==== Alternate implementations
+
+We considered two different ways to implement the Skill Class.
+
+* **Alternative 1**: Combining both Skill and SkillLevel properties together into a single class.
+
+** Pros: Resembles the real world, as there is a one-to-one mapping of Skill to SkillLevel.
+** Cons: Harder to test, and violates Single Responsiblity Principle.
+
+* **Alternative 2 (Current Choice)**: Separating the Skill and SkillLevel classes into different classes.
+
+** Pros: Easier to test.
+** Cons: Adds to the number of classes unnecessarily.
+
+==== Possible extensions
+
+* One possiblilty is to enhance the add command such that skills can be added together with the rest of the
+information during addition of personal information.
+* Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
+* Another is to enhance the storage such that multiple skills can be added per person.
+
+
 === Undo/Redo feature
 ==== Current Implementation
 
@@ -417,13 +447,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 === Logging
 
