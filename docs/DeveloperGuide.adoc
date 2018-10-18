@@ -239,6 +239,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::authentication[]
 === Authentication
 ==== Current Implementation
 
@@ -278,6 +279,7 @@ If an authentication fails, i.e. credentials are wrong or do not exist in the JS
 
 ===== Password encryption
 * Stores encrypted password instead of plain text.
+// end::authentication[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -451,14 +453,12 @@ Step 4: The event page is reloaded to display the new event attendance.
 ** Pros: Can easily check which events a user has registered for.
 ** Cons: Inefficient to check which users are attending an event.
 
-
 ==== Future Improvements
 ===== Adding `unregister` command.
 * Allows users to unregister for events.
 
 ===== Adding `listAttending` command.
 * Allows users to view events they have registered for.
-
 // end::rsvp[]
 
 // tag::dataencryption[]
@@ -482,8 +482,8 @@ We are using `java.util.logging` package for logging. The `LogsCenter` class is 
 * `WARNING` : Can continue, but with caution
 * `INFO` : Information showing the noteworthy actions by the App
 * `FINE` : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size
-
 [[Implementation-Configuration]]
+
 === Configuration
 
 Certain properties of the application can be controlled (e.g App name, logging level) through the configuration file (default: `config.json`).
