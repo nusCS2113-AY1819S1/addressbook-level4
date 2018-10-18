@@ -83,11 +83,18 @@ public class StringUtil {
 
     public static ArrayList<Index> tokenizeIndexWithRange(String input) {
         ArrayList<Index> output = new ArrayList<>();
-        StringTokenizer tokenizer = new StringTokenizer(input, "-");
-        while (tokenizer.hasMoreTokens()) {
-            int start = Integer.valueOf(tokenizer.nextToken());
-            int end = Integer.valueOf(tokenizer.nextToken());
+        StringTokenizer tokenizer = new StringTokenizer(input, "- \t\n\r\f");
+
+        // Do a token count check here
+
+        int start = Integer.valueOf(tokenizer.nextToken());
+        int end = Integer.valueOf(tokenizer.nextToken());
+
+        for (int i = start; i <= end; i++) {
+            output.add(Index.fromOneBased(i));
         }
+
+        return output;
     }
 
     public static boolean areNonZeroUnsignedInteger(String input) {

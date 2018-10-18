@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -189,7 +190,7 @@ public class ParserUtil {
 
     //@@author lekoook
     /**
-     * Parses one or more {@code oneBasedIndex} into an {@code Index} list and returns it. 
+     * Parses one or more {@code Index} into an {@code Index} list and returns it.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @param oneBasedIndex the user input index.
@@ -204,25 +205,44 @@ public class ParserUtil {
         return StringUtil.tokenizeIndexWithSpace(oneBasedIndex);
     }
 
-    private static ArrayList<Index> parseMultipleRangeIndex(String oneBasedIndex) throws ParseException {
-
-    }
-
-    private static ArrayList<Index> parseRangeIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
+    /**
+     * Parses a range or multiple ranges of {@code Index} into an {@code Index} list and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @param oneBasedIndex the user input index.
+     * @return the list of {@code Index} to return.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    private static ArrayList<Index> parseMultipleRangeIndex(String oneBasedIndex) {
         ArrayList<Index> output = new ArrayList<>();
-
-        StringUtil.tokenizeIndexWithRange(oneBasedIndex);
-
-        return  output;
+        StringTokenizer tokenizer = new StringTokenizer(oneBasedIndex, ",");
+        while (tokenizer.hasMoreTokens()) {
+            ArrayList<Index> indices = StringUtil.tokenizeIndexWithRange(tokenizer.nextToken());
+            output.addAll(indices);
+        }
+        return output;
     }
 
+    /**
+     * Parses a single, multiple, or range(s) of {@code Index} into an {@code Index} list and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * A range is defined by using a '-' between two indices, inclusive. Multiple ranges are separated with
+     * a comma.
+     * Whitespaces are ignored.
+     *
+     * For example, a valid input specifying ranges could be "1 - 3, 5-7".
+     *
+     * @param oneBasedIndex the user input index.
+     * @return the list of {@code Index} to return.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
     public static ArrayList<Index> parseSelectIndex(String oneBasedIndex) throws ParseException {
 
         // Perform a syntax check here
-
+        
         if (!oneBasedIndex.contains("-")) {
-            return  parseMultipleIndex(oneBasedIndex)
+            return  parseMultipleIndex(oneBasedIndex);
         } else {
             return parseMultipleRangeIndex(oneBasedIndex);
         }
