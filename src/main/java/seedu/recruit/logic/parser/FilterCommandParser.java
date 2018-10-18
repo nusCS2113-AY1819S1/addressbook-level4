@@ -8,6 +8,10 @@ import seedu.recruit.logic.commands.FilterCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
 
+/**
+ * Parses input arguments and creates a new FilterCommand object
+ */
+
 public class FilterCommandParser implements Parser<FilterCommand> {
 
     /**
@@ -23,8 +27,8 @@ public class FilterCommandParser implements Parser<FilterCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
 
-            String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] nameKeywords = trimmedArgs.split("\\s+");
 
-            return new FilterCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
-        }
+        return new FilterCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+    }
 }

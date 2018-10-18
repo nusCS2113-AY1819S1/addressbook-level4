@@ -1,21 +1,27 @@
 package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE;
 
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
 
+/**
+ * Filters and lists all persons in recruit book whose tags falls under the searched category.
+ * Keyword matching is case insensitive.
+ */
+
 public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons who falls under the searched category "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Filters all persons who "
+            + "falls under the searched category "
             + "and displays them as a list with index numbers.\n"
             + "Parameters: "
             + PREFIX_EDUCATION + "HIGHEST_EDUCATION_LEVEL "

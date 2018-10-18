@@ -24,8 +24,10 @@ public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.recruit.model.company.CompanyNameContainsKeywordsPredicate // instanceof handles nulls
-                && keywords.equals(((seedu.recruit.model.company.CompanyNameContainsKeywordsPredicate) other).keywords)); // state check
+                || (other instanceof seedu.recruit.model.company.CompanyNameContainsKeywordsPredicate
+                // instanceof handles nulls
+                && keywords.equals(((seedu.recruit.model.company.CompanyNameContainsKeywordsPredicate)
+                other).keywords)); // state check
     }
 
 }
