@@ -19,6 +19,8 @@ public abstract class Command {
      * @param history {@code CommandHistory} which the command should operate on.
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.
+     * @throws IOException Something to do with the email command
+     * @throws GeneralSecurityException Something to do with email command
      */
     public abstract CommandResult execute(Model model, CommandHistory history)
             throws CommandException, IOException, GeneralSecurityException;
