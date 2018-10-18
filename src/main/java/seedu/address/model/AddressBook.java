@@ -7,6 +7,8 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.budgetelements.UniqueClubsList;
+import seedu.address.model.clubbudget.FinalClubBudget;
+import seedu.address.model.clubbudget.UniqueClubBudgetList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -32,6 +34,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     private final UniqueClubsList clubs;
     {
         clubs = new UniqueClubsList();
+    }
+
+    private final UniqueClubBudgetList clubBudgets;
+    {
+        clubBudgets = new UniqueClubBudgetList();
     }
 
     public AddressBook() {}
@@ -110,10 +117,26 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Adds a club to the address book.
-     * The person must not already exist in the address book.
+     * The club must not already exist in the address book.
      */
     public void addClub(ClubBudgetElements c) {
         clubs.add(c);
+    }
+
+    /**
+     * Returns true if a club budget with the same identity as {@code clubBudget} exists in the address book.
+     */
+    public boolean hasClubBudget(FinalClubBudget clubBudget) {
+        requireNonNull(clubBudget);
+        return clubBudgets.contains(clubBudget);
+    }
+
+    /**
+     * Adds a club budget to the address book.
+     * The club budget must not already exist in the address book.
+     */
+    public void addClubBudget(FinalClubBudget c) {
+        clubBudgets.add(c);
     }
 
 
@@ -131,7 +154,12 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<ClubBudgetElements> getClubsList() { return clubs.asUnmodifiableObservableList(); }
+    public ObservableList<ClubBudgetElements> getClubsList() {
+        return clubs.asUnmodifiableObservableList(); }
+
+    @Override
+    public ObservableList<FinalClubBudget> getClubBudgetsList() {
+        return clubBudgets.asUnmodifiableObservableList(); }
 
     @Override
     public boolean equals(Object other) {

@@ -23,6 +23,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 
 import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 
 import seedu.address.model.person.Person;
@@ -161,12 +162,22 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<FinalClubBudget> getFilteredClubBudgetsList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredClubBudgetsList(Predicate<FinalClubBudget> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -200,6 +211,15 @@ public class AddCommandTest {
         }
         @Override
         public void addClub(ClubBudgetElements club) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasClubBudget(FinalClubBudget clubBudget) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addClubBudget(FinalClubBudget clubBudget) {
             throw new AssertionError("This method should not be called.");
         }
     }

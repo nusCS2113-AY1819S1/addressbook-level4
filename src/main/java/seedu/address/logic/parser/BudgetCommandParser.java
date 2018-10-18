@@ -16,7 +16,7 @@ import seedu.address.model.budgetelements.ExpectedTurnout;
 import seedu.address.model.budgetelements.NumberOfEvents;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new BudgetCommand object
  */
 public class BudgetCommandParser implements Parser<BudgetCommand> {
 
@@ -31,7 +31,7 @@ public class BudgetCommandParser implements Parser<BudgetCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CLUB_NAME, PREFIX_EXPECTED_TURNOUT, PREFIX_NUMBER_OF_EVENTS)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BudgetCommand.MESSAGE_USAGE));
         }
 
         ClubName clubname = ParserUtil.parseClubName(argMultimap.getValue(PREFIX_CLUB_NAME).get());

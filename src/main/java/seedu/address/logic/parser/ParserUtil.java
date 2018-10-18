@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.budgetelements.ClubName;
 import seedu.address.model.budgetelements.ExpectedTurnout;
 import seedu.address.model.budgetelements.NumberOfEvents;
+import seedu.address.model.clubbudget.TotalBudget;
 import seedu.address.model.login.UserId;
 import seedu.address.model.login.UserPassword;
 import seedu.address.model.person.Address;
@@ -201,5 +202,20 @@ public class ParserUtil {
             throw new ParseException(NumberOfEvents.MESSAGE_NUMBER_OF_EVENTS_CONSTRAINTS);
         }
         return new NumberOfEvents(trimmedNumberOfEvents);
+    }
+
+    /**
+     * Parses a {@code int totalBudget} into a {@code int}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code totalBudget} is invalid.
+     */
+    public static TotalBudget parseTotalBudget(String totalBudget) throws ParseException {
+        requireNonNull(totalBudget);
+        String trimmedTotalBudget = totalBudget.trim();
+        if (!TotalBudget.isValidTotalBudget(trimmedTotalBudget)) {
+            throw new ParseException(TotalBudget.MESSAGE_TOTAL_BUDGET_CONSTRAINTS);
+        }
+        return new TotalBudget(trimmedTotalBudget);
     }
 }

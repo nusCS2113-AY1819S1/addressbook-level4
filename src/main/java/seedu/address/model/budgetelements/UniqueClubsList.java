@@ -12,7 +12,7 @@ import seedu.address.model.budgetelements.exceptions.DuplicateClubException;
 /**
  * A list of clubs that enforces uniqueness between its elements and does not allow nulls.
  * A club is considered unique by comparing using {@code ClubBudgetElements#isSameClub(ClubBudgetElements)}. As such
- * adding of clubs uses CLubBudgetElements#isSameClub(ClubBudgetElements) for equality so as to ensure that the club
+ * adding of clubs uses ClubBudgetElements#isSameClub(ClubBudgetElements) for equality so as to ensure that the club
  * being added is unique in terms of identity in the UniqueClubsList.
  *
  * Supports a minimal set of list operations.

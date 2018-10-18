@@ -14,6 +14,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.LoginBookChangedEvent;
 import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
 
@@ -28,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<LoginDetails> filteredLoginDetails;
     private final FilteredList<ClubBudgetElements> filteredClubs;
+    private final FilteredList<FinalClubBudget> filteredClubBudgets;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -43,6 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredClubs = new FilteredList<>(versionedAddressBook.getClubsList());
         filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
+        filteredClubBudgets = new FilteredList<>(versionedAddressBook.getClubBudgetsList());
     }
 
     public ModelManager() {
@@ -141,6 +144,20 @@ public class ModelManager extends ComponentManager implements Model {
         filteredLoginDetails.setPredicate(predicate);
     }
 
+    //=========== Getting Final Budget =====================================================================
+
+    @Override
+    public boolean hasClubBudget(FinalClubBudget clubBudget) {
+        requireNonNull(clubBudget);
+        return versionedAddressBook.hasClubBudget(clubBudget);
+    }
+
+    @Override
+    public void addClubBudget(FinalClubBudget clubBudget) {
+        versionedAddressBook.addClubBudget(clubBudget);
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -167,6 +184,23 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public ObservableList<ClubBudgetElements> getFilteredClubsList() {
         return FXCollections.unmodifiableObservableList(filteredClubs);
+    }
+
+    //=========== Filtered Club Budgets List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code FinalClubBudget} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<FinalClubBudget> getFilteredClubBudgetsList() {
+        return FXCollections.unmodifiableObservableList(filteredClubBudgets);
+    }
+
+    @Override
+    public void updateFilteredClubBudgetsList(Predicate<FinalClubBudget> predicate) {
+        requireNonNull(predicate);
+        filteredClubBudgets.setPredicate(predicate);
     }
 
     //=========== Undo/Redo =================================================================================

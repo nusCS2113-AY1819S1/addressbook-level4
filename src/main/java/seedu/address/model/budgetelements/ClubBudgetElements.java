@@ -42,7 +42,7 @@ public class ClubBudgetElements {
 
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
+     * Returns true if both clubs have the same name
      * This defines a weaker notion of equality between two persons.
      */
 
