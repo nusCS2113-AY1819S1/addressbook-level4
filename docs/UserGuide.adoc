@@ -154,7 +154,7 @@ Examples:
 (Edits the `MIN_AGE-MAX_AGE` attribute of the 1st job offer to be of 20 to 30 years of age)
 
 === Locating candidates by search parameter : `find`
-==== Finds names of candidates from RecruitBook based on the search parameter. 
+==== Finds names of candidates from RecruitBook based on the search parameter.
 Format: `findc <tag>/KEYWORD` +
 Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 
@@ -180,7 +180,7 @@ Examples:
 Format: `findC NAME` +
 
 ****
-* The search is case insentitive. e.g. `kfc` will match `KFC` 
+* The search is case insentitive. e.g. `kfc` will match `KFC`
 * The order of the keywords does not matter. e.g. `Pte Ltd Hanbaobao` will match `Hanbaobao Pte Ltd`
 * Only full words will be matched e.g. `Mc` will not match `McDonalds`
 * Companies matching at least one keyword will be returned (i.e. `OR` search)
