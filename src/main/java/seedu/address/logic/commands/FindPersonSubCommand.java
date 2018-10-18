@@ -18,7 +18,12 @@ public class FindPersonSubCommand extends FindCommand {
     private final NameContainsKeywordsPredicate predicate;
 
     public FindPersonSubCommand(NameContainsKeywordsPredicate predicate) {
+        this(predicate, false);
+    }
+
+    public FindPersonSubCommand(NameContainsKeywordsPredicate predicate, boolean isExcludeMode) {
         this.predicate = predicate;
+        this.isExcludeMode = isExcludeMode;
     }
 
     @Override

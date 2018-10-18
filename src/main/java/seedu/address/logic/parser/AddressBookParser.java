@@ -8,6 +8,9 @@ import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillCommand;
+import seedu.address.logic.commands.AddSkillLevelCommand;
+import seedu.address.logic.commands.BudgetCalculationCommand;
+import seedu.address.logic.commands.BudgetCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateAccountCommand;
@@ -23,6 +26,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoSearchCommand;
+import seedu.address.logic.commands.ViewClubBudgetsCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -79,6 +83,9 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ViewClubBudgetsCommand.COMMAND_WORD:
+            return new ViewClubBudgetsCommand();
+
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
 
@@ -97,10 +104,18 @@ public class AddressBookParser {
         case AddSkillCommand.COMMAND_WORD:
             return new AddSkillCommandParser().parse(arguments);
 
+
+        case AddSkillLevelCommand.COMMAND_WORD:
+            return new AddSkillLevelCommandParser().parse(arguments);
+
         case UndoSearchCommand.COMMAND_WORD:
             return new UndoSearchCommand();
 
+        case BudgetCommand.COMMAND_WORD:
+            return new BudgetCommandParser().parse(arguments);
 
+        case BudgetCalculationCommand.COMMAND_WORD:
+            return new BudgetCalculationCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

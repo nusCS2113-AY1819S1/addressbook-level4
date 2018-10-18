@@ -20,8 +20,12 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+
 import seedu.address.model.ReadOnlyLoginBook;
+import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
+
 import seedu.address.model.person.Person;
 
 import seedu.address.model.searchhistory.SearchHistoryManager;
@@ -155,12 +159,27 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<ClubBudgetElements> getFilteredClubsList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<FinalClubBudget> getFilteredClubBudgetsList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredClubBudgetsList(Predicate<FinalClubBudget> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -186,6 +205,24 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasClub(ClubBudgetElements club) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addClub(ClubBudgetElements club) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasClubBudget(FinalClubBudget clubBudget) {
+            throw new AssertionError("This method should not be called.");
+        }
+        @Override
+        public void addClubBudget(FinalClubBudget clubBudget) {
             throw new AssertionError("This method should not be called.");
         }
 
