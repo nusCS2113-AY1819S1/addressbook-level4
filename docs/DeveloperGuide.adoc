@@ -314,6 +314,30 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::completeuncomplete[]
+=== Completing/Uncompleting a Task feature
+==== Current Implementation
+
+Marking of a task as `completed` or `uncompleted` uses both `Logic` and `Model` components.
+Both commands are similiar in most areas, the key differences are in the respective `Command` classes.
+This feature reuses the methods in the `Model` component used by the edit task command.
+
+The following sequence diagram shows how the `TDL_complete` operation works:
+
+image::CompleteUncompleteTaskSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: Methods to support the completed/uncompleted commands
+
+* **Alternative 1 (current choice):** Reuses the same methods available in `Model`
+** Pros: Easy to implement with no modification to `Model` component.
+** Cons: May have performance issues in terms of memory usage due to an additional `Task` object.
+* **Alternative 2:** Create additional methods in `Model`
+** Pros: Should use less memory.
+** Cons: We must ensure that the implementation of each individual methods are correct.
+// end::completeuncomplete[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -847,6 +871,12 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |student with multiple tasks |sort the todo list by deadline |view which task is due the earliest
 
 |`* * *` |student with multiple tasks |sort the todo list by importance/priority |view which tasks are more important than the other
+
+|`* * *` |student |add a new expenditure to the expenditure tracker |
+
+|`* * *` |student |edit an expenditure in the expenditure tracker |keep my expenditures updated and correct
+
+|`* * *` |student |delete an expenditure in the expenditure tracker |remove any entries that I typed wrongly
 
 |`* * *` |student who is not capable of managing expenditure |see and check where did I spend my money and how much did I spend for each expenditure with the corresponding date |better understand my spending habits
 

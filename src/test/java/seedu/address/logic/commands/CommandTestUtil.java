@@ -3,10 +3,14 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +41,14 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
     public static final String VALID_TAG_UNUSED = "unused";
+    public static final String VALID_TASK_NAME_ASSIGNMENT = "Assignment 3";
+    public static final String VALID_TASK_NAME_TUTORIAL = "Tutorial 5";
+    public static final String VALID_TASK_MODULE_ASSIGNMENT = "CS2102";
+    public static final String VALID_TASK_MODULE_TUTORIAL = "CG2028";
+    public static final String VALID_TASK_DATE_ASSIGNMENT = "19-10";
+    public static final String VALID_TASK_DATE_TUTORIAL = "04-08";
+    public static final String VALID_TASK_PRIORITY_ASSIGNMENT = "1";
+    public static final String VALID_TASK_PRIORITY_TUTORIAL = "2";
 
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
@@ -48,12 +60,24 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String TASK_NAME_DESC_ASSIGNMENT = " " + PREFIX_TASK + VALID_TASK_NAME_ASSIGNMENT;
+    public static final String TASK_NAME_DESC_TUTORIAL = " " + PREFIX_TASK + VALID_TASK_NAME_TUTORIAL;
+    public static final String TASK_MODULE_DESC_ASSIGNMENT = " " + PREFIX_MODULE + VALID_TASK_MODULE_ASSIGNMENT;
+    public static final String TASK_MODULE_DESC_TUTORIAL = " " + PREFIX_MODULE + VALID_TASK_MODULE_TUTORIAL;
+    public static final String TASK_DATE_DESC_ASSIGNMENT = " " + PREFIX_DATE + VALID_TASK_DATE_ASSIGNMENT;
+    public static final String TASK_DATE_DESC_TUTORIAL = " " + PREFIX_DATE + VALID_TASK_DATE_TUTORIAL;
+    public static final String TASK_PRIORITY_DESC_ASSIGNMENT = " " + PREFIX_PRIORITY + VALID_TASK_PRIORITY_ASSIGNMENT;
+    public static final String TASK_PRIORITY_DESC_TUTORIAL = " " + PREFIX_PRIORITY + VALID_TASK_PRIORITY_TUTORIAL;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_TASK_NAME_DESC = " " + PREFIX_TASK + "Essay*"; // '*' not allowed in names
+    public static final String INVALID_TASK_MODULE_DESC = " " + PREFIX_MODULE + "CS23345"; // invalid module code
+    public static final String INVALID_TASK_DATE_DESC = " " + PREFIX_DATE + "0912"; // missing '-' symbol
+    public static final String INVALID_TASK_PRIORITY_DESC = " " + PREFIX_TASK + "4"; // only 1, 2, or 3 allowed
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
