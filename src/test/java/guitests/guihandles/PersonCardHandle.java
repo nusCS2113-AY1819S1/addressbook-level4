@@ -72,10 +72,10 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     public String getSkill() {
-        return skillLabel.getText();
-    }
+        return skillLabel.getText(); }
 
-    public String getSkillLevel() { return skillLevelLabel.getText(); }
+    public String getSkillLevel() {
+        return skillLevelLabel.getText(); }
 
     public List<String> getTags() {
         return tagLabels
