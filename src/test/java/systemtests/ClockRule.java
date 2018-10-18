@@ -4,11 +4,10 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneId;
 
-import seedu.address.ui.StatusBarFooter;
-
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
+import seedu.address.ui.StatusBarFooter;
 
 /**
  * This rule makes the time stamp in the status bar predictable during a test.

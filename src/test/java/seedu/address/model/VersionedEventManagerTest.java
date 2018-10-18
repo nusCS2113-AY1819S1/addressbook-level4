@@ -12,9 +12,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import seedu.address.testutil.AddressBookBuilder;
-
 import org.junit.Test;
+import seedu.address.testutil.AddressBookBuilder;
 
 public class VersionedEventManagerTest {
 

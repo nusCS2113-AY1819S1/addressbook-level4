@@ -8,13 +8,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.UserPrefs;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.UserPrefs;
 
 public class JsonUserPrefsStorageTest {
 

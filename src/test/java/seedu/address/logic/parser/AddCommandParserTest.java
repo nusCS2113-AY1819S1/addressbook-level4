@@ -33,6 +33,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalEvents.AMY;
 import static seedu.address.testutil.TypicalEvents.BOB;
 
+import org.junit.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.event.Address;
 import seedu.address.model.event.DateTime;
@@ -42,8 +43,6 @@ import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EventBuilder;
-
-import org.junit.Test;
 
 public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();

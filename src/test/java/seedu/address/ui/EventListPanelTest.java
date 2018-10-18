@@ -11,18 +11,16 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.EventListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+import org.junit.Test;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.event.Event;
 import seedu.address.storage.XmlSerializableEManager;
-
-import guitests.guihandles.EventCardHandle;
-import guitests.guihandles.EventListPanelHandle;
-import org.junit.Test;
 
 public class EventListPanelTest extends GuiUnitTest {
     private static final ObservableList<Event> TYPICAL_EVENTS =

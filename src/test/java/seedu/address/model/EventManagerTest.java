@@ -15,14 +15,12 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.DuplicateEventException;
-import seedu.address.testutil.EventBuilder;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.exceptions.DuplicateEventException;
+import seedu.address.testutil.EventBuilder;
 
 public class EventManagerTest {
 

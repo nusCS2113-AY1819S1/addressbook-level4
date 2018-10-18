@@ -5,9 +5,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
-import seedu.address.logic.commands.SelectCommand;
-
 import org.junit.Test;
+import seedu.address.logic.commands.SelectCommand;
 
 /**
  * Test scope: similar to {@code DeleteCommandParserTest}.

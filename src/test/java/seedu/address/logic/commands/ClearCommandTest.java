@@ -3,13 +3,12 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
+import org.junit.Test;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-
-import org.junit.Test;
 
 public class ClearCommandTest {
 

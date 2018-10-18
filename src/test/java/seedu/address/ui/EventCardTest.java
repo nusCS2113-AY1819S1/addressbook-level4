@@ -4,11 +4,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
-import seedu.address.model.event.Event;
-import seedu.address.testutil.EventBuilder;
-
 import guitests.guihandles.EventCardHandle;
 import org.junit.Test;
+import seedu.address.model.event.Event;
+import seedu.address.testutil.EventBuilder;
 
 public class EventCardTest extends GuiUnitTest {
 

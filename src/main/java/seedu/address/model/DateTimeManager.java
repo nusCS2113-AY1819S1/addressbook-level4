@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import javafx.collections.ObservableList;
-
 import seedu.address.model.event.AttendanceContainsUserPredicate;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Event;

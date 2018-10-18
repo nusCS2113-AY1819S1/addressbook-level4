@@ -2,17 +2,15 @@ package seedu.address.ui;
 
 import java.util.ArrayList;
 
+import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
-
+import org.junit.Before;
+import org.junit.Test;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-
-import guitests.guihandles.CommandBoxHandle;
-import org.junit.Before;
-import org.junit.Test;
 
 public class CommandBoxTest extends GuiUnitTest {
 

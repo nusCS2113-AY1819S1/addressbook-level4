@@ -10,7 +10,9 @@ import java.util.Arrays;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.EventManager;
@@ -19,10 +21,6 @@ import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
 import seedu.address.testutil.EventBuilder;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class AddCommandTest {
 

@@ -11,6 +11,9 @@ import java.util.List;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import seedu.address.model.EventManager;
 import seedu.address.model.event.Attendance;
 import seedu.address.storage.XmlAdaptedEvent;
@@ -19,10 +22,6 @@ import seedu.address.storage.XmlSerializableEManager;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.TestUtil;
-
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 public class XmlUtilTest {
 

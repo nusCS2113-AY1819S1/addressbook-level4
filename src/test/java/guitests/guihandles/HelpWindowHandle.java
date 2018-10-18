@@ -2,9 +2,8 @@ package guitests.guihandles;
 
 import java.net.URL;
 
-import javafx.stage.Stage;
-
 import guitests.GuiRobot;
+import javafx.stage.Stage;
 
 /**
  * A handle to the {@code HelpWindow} of the application.

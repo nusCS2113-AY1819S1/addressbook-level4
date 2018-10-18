@@ -32,6 +32,7 @@ import static seedu.address.testutil.TypicalEvents.HOON;
 import static seedu.address.testutil.TypicalEvents.IDA;
 import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_MEIER;
 
+import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
@@ -46,8 +47,6 @@ import seedu.address.model.event.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.EventUtil;
-
-import org.junit.Test;
 
 public class AddCommandSystemTest extends EventManagerSystemTest {
 

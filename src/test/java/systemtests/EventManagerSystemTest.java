@@ -18,6 +18,14 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.EventListPanelHandle;
+import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.ResultDisplayHandle;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
@@ -31,15 +39,6 @@ import seedu.address.model.Model;
 import seedu.address.testutil.TypicalEvents;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
-
-import guitests.guihandles.CommandBoxHandle;
-import guitests.guihandles.EventListPanelHandle;
-import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.ResultDisplayHandle;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
 
 /**
  * A system test class for EventManager, which provides access to handles of GUI components and helper methods

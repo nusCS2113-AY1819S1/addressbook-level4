@@ -7,10 +7,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.Test;
 import seedu.address.model.event.EventContainsKeywordsPredicate;
 import seedu.address.testutil.EventBuilder;
-
-import org.junit.Test;
 
 public class EventContainsKeywordsPredicateTest {
 

@@ -11,14 +11,13 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.EventManager;
-import seedu.address.model.ReadOnlyEventManager;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.EventManager;
+import seedu.address.model.ReadOnlyEventManager;
 
 public class XmlEventManagerStorageTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlEventManagerStorageTest");

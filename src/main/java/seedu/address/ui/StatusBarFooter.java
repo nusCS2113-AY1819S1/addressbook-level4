@@ -9,12 +9,11 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Region;
-
+import org.controlsfx.control.StatusBar;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.EventManagerChangedEvent;
 
 import com.google.common.eventbus.Subscribe;
-import org.controlsfx.control.StatusBar;
 
 /**
  * A ui for the status bar that is displayed at the footer of the application.
