@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.planner.commons.util.SortUtil;
 import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
 import seedu.planner.model.record.exceptions.RecordNotFoundException;
@@ -106,26 +107,26 @@ public class UniqueRecordList implements Iterable<Record> {
 
             case SortCommand.CATEGORY_NAME:
                 if (!ascending) {
-                    internalList.sort(RecordComparator.compareNameAttribute().reversed());
+                    internalList.sort(SortUtil.compareNameAttribute().reversed());
                 } else {
-                    internalList.sort(RecordComparator.compareNameAttribute());
+                    internalList.sort(SortUtil.compareNameAttribute());
                 }
                 break;
 
             case SortCommand.CATEGORY_DATE:
                 if (!ascending) {
-                    internalList.sort(RecordComparator.compareDateAttribute().reversed());
+                    internalList.sort(SortUtil.compareDateAttribute().reversed());
                 } else {
-                    internalList.sort(RecordComparator.compareDateAttribute());
+                    internalList.sort(SortUtil.compareDateAttribute());
                 }
                 break;
 
             case SortCommand.CATEGORY_MONEYFLOW:
             case SortCommand.CATEGORY_MONEY:
                 if (!ascending) {
-                    internalList.sort(RecordComparator.compareMoneyflowAttribute().reversed());
+                    internalList.sort(SortUtil.compareMoneyflowAttribute().reversed());
                 } else {
-                    internalList.sort(RecordComparator.compareMoneyflowAttribute());
+                    internalList.sort(SortUtil.compareMoneyflowAttribute());
                 }
                 break;
         }

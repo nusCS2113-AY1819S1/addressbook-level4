@@ -1,11 +1,13 @@
-package seedu.planner.model.record;
+package seedu.planner.commons.util;
 
 import java.util.Comparator;
+
+import seedu.planner.model.record.Record;
 
 /**
  * Comparator to sort {@code Record}s by name, date and moneyflow attributes.
  */
-public class RecordComparator {
+public class SortUtil {
 
     public static Comparator<Record> compareNameAttribute() {
         return Comparator.comparing(A -> A.getName().fullName.toLowerCase());
