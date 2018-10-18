@@ -2,7 +2,12 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
-import seedu.address.model.event.*;
+import seedu.address.model.event.Address;
+import seedu.address.model.event.DateTime;
+import seedu.address.model.event.Email;
+import seedu.address.model.event.Event;
+import seedu.address.model.event.Name;
+import seedu.address.model.event.Phone;
 import seedu.address.model.tag.Tag;
 
 import java.util.Set;

@@ -1,7 +1,9 @@
 package systemtests;
 
-import guitests.guihandles.*;
+import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.EventListPanelHandle;
+import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.ResultDisplayHandle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -29,7 +31,9 @@ import java.util.Date;
 import java.util.List;
 
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;

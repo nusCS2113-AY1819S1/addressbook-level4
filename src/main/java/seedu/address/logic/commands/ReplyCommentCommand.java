@@ -14,7 +14,9 @@ import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMMENT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_LINE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
  * Replies a comment in the comment section of the event

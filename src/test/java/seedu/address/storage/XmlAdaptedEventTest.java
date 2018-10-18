@@ -2,7 +2,12 @@ package seedu.address.storage;
 
 import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.*;
+import seedu.address.model.event.Address;
+import seedu.address.model.event.Attendance;
+import seedu.address.model.event.DateTime;
+import seedu.address.model.event.Email;
+import seedu.address.model.event.Name;
+import seedu.address.model.event.Phone;
 import seedu.address.testutil.Assert;
 
 import java.util.ArrayList;
