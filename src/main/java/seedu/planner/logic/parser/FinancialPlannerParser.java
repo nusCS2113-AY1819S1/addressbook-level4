@@ -22,6 +22,8 @@ import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.logic.commands.ListCommand;
 import seedu.planner.logic.commands.RedoCommand;
 import seedu.planner.logic.commands.SelectCommand;
+import seedu.planner.logic.commands.SortCommand;
+import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
 
 import seedu.planner.logic.parser.exceptions.ParseException;
@@ -81,6 +83,9 @@ public class FinancialPlannerParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommandParser().parse(arguments);
+
+        case SortCommand.COMMAND_WORD:
+            return new SortCommandParser().parse(arguments);
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
