@@ -23,7 +23,7 @@ public class ExportCalendarCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         User currentUser = new User(new Username("John"), new Password("12345678"));
-        DateTimeManager.ExportICalenderFile(model,currentUser);
+        DateTimeManager.exportICalenderFile(model,currentUser);
         return new CommandResult(MESSAGE_EXPORT_SUCCESS);
     }
 }

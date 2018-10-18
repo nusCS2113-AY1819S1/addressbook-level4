@@ -21,6 +21,9 @@ import seedu.address.model.user.User;
  * Represents the in-memory model of the event manager data.
  */
 public class ModelManager extends ComponentManager implements Model {
+    /**
+     * Implement model interface
+     */
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedEventManager versionedEManager;
