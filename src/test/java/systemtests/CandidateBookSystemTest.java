@@ -36,7 +36,7 @@ import seedu.recruit.TestApp;
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
-import seedu.recruit.logic.commands.FindCommand;
+import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.ListCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.model.CandidateBook;
@@ -152,7 +152,7 @@ public abstract class CandidateBookSystemTest {
      * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
      */
     protected void showPersonsWithName(String keyword) {
-        executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
+        executeCommand(FindCandidateCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredCandidateList().size()
                 < getModel().getCandidateBook().getCandidateList().size());
     }
