@@ -41,10 +41,13 @@ public class StorageManagerTest {
     @Before
     public void setUp() {
         XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
-        XmlExpenditureTrackerStorage expenditureTrackerStorage = new XmlExpenditureTrackerStorage(getTempFilePath("et"));
+        XmlExpenditureTrackerStorage expenditureTrackerStorage =
+                new XmlExpenditureTrackerStorage(getTempFilePath("et"));
         XmlTodoListStorage todoListStorage = new XmlTodoListStorage(getTempFilePath("td"));
-        JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, expenditureTrackerStorage, todoListStorage, userPrefsStorage);
+        JsonUserPrefsStorage userPrefsStorage =
+                new JsonUserPrefsStorage(getTempFilePath("prefs"));
+        storageManager = new StorageManager(addressBookStorage, expenditureTrackerStorage,
+                todoListStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -179,7 +182,8 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveExpenditureTracker(ReadOnlyExpenditureTracker expenditureTracker, Path filePath) throws IOException {
+        public void saveExpenditureTracker(ReadOnlyExpenditureTracker expenditureTracker,
+                                           Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }
