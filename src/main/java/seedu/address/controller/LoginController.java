@@ -1,5 +1,6 @@
 package seedu.address.controller;
 
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -9,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import seedu.address.authentication.LoginUtils;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.init.InitAddressBook;
 import seedu.address.model.LoginInfoManager;
 import seedu.address.ui.Ui;
@@ -23,6 +25,7 @@ public class LoginController {
     protected static Ui ui;
     protected static LoginInfoManager loginInfoManager;
     protected static InitAddressBook initAddressBook;
+    protected static Stage mainWindow;
     private String username;
     private String password;
     @FXML
@@ -31,7 +34,7 @@ public class LoginController {
     private PasswordField passwordField;
     @FXML
     private javafx.scene.control.Label loginError;
-
+    private final Logger logger = LogsCenter.getLogger(LoginController.class);
 
     /**
      * handle when user press enter on login textfield or passwordField
@@ -61,15 +64,15 @@ public class LoginController {
         getUsername();
         getPassword ();
         LoginUtils loginUtils = new LoginUtils (username, password, loginInfoManager);
-        if (!loginUtils.isUsernameValid ()) {
+        if (!loginUtils.isUsernameEmpty ()) {
             loginError.setText("Please enter username");
             return;
         }
-        if (!loginUtils.isPasswordValid ()) {
+        if (!loginUtils.isPasswordEmpty ()) {
             loginError.setText("Please enter password");
             return;
         }
-        if (loginUtils.passwordAndUserNameCheck()) {
+        if (loginUtils.isPasswordAndUserNameValid ()) {
             changeStageToMainUi();
         } else {
             loginError.setText("wrong username or password");
@@ -77,7 +80,7 @@ public class LoginController {
     }
 
     /**
-     * Close window
+     * Close loginWindow
      *
      * @param e
      */
@@ -108,12 +111,15 @@ public class LoginController {
      */
     private void changeStageToMainUi() {
         Stage primaryStage = (Stage) passwordField.getScene().getWindow();
-        primaryStage.close();
+        primaryStage.hide();
+        Stage stage = new Stage ();
         initAddressBook.initAfterLogin ();
         this.ui = initAddressBook.getUi ();
-        ui.start(primaryStage);
+        ui.start(stage);
     }
-
+    public static Ui getUi(){
+        return ui;
+    }
     /**
      * pass in LoginInfo list
      * @param loginInfoManager
@@ -123,7 +129,7 @@ public class LoginController {
     }
 
     /**
-     * pass in the main ui
+     * pass in the main Book
      * @param initAddressBook
      */
     public void passInInitAddressBook (InitAddressBook initAddressBook) {
@@ -132,5 +138,6 @@ public class LoginController {
         }
         this.initAddressBook = initAddressBook;
     }
+
 
 }

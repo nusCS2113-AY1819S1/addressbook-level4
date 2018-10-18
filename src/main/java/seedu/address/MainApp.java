@@ -5,23 +5,24 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -61,11 +62,12 @@ public class MainApp extends Application {
     protected Config config;
     protected UserPrefs userPrefs;
     //author @tianhang
-    protected Stage window;
+    protected Stage loginWindow;
     private FXMLLoader fxmlLoader;
     private LoginInfoManager loginInfoList;
     private LoginController loginController;
     private InitAddressBook initAddressBook;
+    private Stage mainWindow;
     //author @tianhang
 
     @Override
@@ -229,7 +231,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        window = primaryStage;
+        loginWindow = primaryStage;
         logger.info("Starting AddressBook " + MainApp.VERSION);
         showLoginPage();
     }
@@ -243,11 +245,11 @@ public class MainApp extends Application {
     }
     private void settingUpLoginWindow() {
         URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
-        Parent root = loadFxmlFile(fxmlLoginFileUrl, window);
-        //window.initStyle(StageStyle.UNDECORATED);
-        window.setTitle("Login Page");
-        window.setScene(new Scene(root));
-        window.show();
+        Parent root = loadFxmlFile(fxmlLoginFileUrl, loginWindow);
+        //loginWindow.initStyle(StageStyle.UNDECORATED);
+        loginWindow.setTitle("Login Page");
+        loginWindow.setScene(new Scene(root));
+        loginWindow.show();
     }
     private void settingUpLoginController() {
         loginController = new LoginController ();
@@ -273,39 +275,54 @@ public class MainApp extends Application {
      * @param root
      * @return root of primary stage
      */
-    private Parent loadFxmlFile(URL location, Stage root) {
+    private Parent loadFxmlFile(URL location, Stage stage) {
         System.out.println(location);
         requireNonNull(location);
         fxmlLoader.setLocation(location);
-        Parent rooting = null;
+        Parent root = null;
         try {
-            rooting = fxmlLoader.load();
+                root = fxmlLoader.load ();
 
         } catch (IOException e) {
             //System.out.println("the exception is " + e);
             throw new AssertionError(e);
         }
-        return rooting;
+        return root;
     }
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        closeUiWindow();
+        //Platform.exit();
+        System.exit(0);
+    }
+    private void closeUiWindow(){
+        logger.info("============================ [ Stopping DRINK I/O ] =============================");
+        ui = LoginController.getUi ();
+        if (ui != null){
+            ui.stop ();
+        }
         try {
             storage.saveLoginInfo (loginInfoList);
             storage.saveUserPrefs(userPrefs);
         } catch (IOException e) {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
-        window.close ();
-        Platform.exit();
-        System.exit(0);
+        loginWindow.close ();
+        //Platform.exit();
     }
-
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         stop();
     }
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        Window currentStage = Stage.getWindows().filtered(window -> window.isShowing()).get (0);
+        currentStage.hide ();
+        loginWindow.show ();
+    }
+
 
     public static void main(String[] args) {
         launch(args);

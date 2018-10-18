@@ -22,6 +22,7 @@ import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
 import seedu.address.logic.commands.user.CreateUserCommand;
+import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.user.ChangePasswordCommandParser;
 import seedu.address.logic.parser.user.CreateUserCommandParser;
@@ -97,6 +98,8 @@ public class AdminParser {
             case RedoCommand.COMMAND_WORD:
                 return new RedoCommand();
 
+            case LogoutCommand.COMMAND_WORD:
+                return new LogoutCommand ();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

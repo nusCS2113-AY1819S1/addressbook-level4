@@ -30,7 +30,7 @@ public class LoginUtils {
      *
      * @return boolean value
      */
-    public boolean isUsernameValid() {
+    public boolean isUsernameEmpty () {
         if (username.equals ("")) {
             return false;
         }
@@ -42,7 +42,7 @@ public class LoginUtils {
      *
      * @return boolean value
      */
-    public boolean isPasswordValid() {
+    public boolean isPasswordEmpty () {
         if (password.equals ("")) {
             return false;
         }
@@ -52,17 +52,17 @@ public class LoginUtils {
     /**
      * check the password and username with logininfo list
      */
-    public boolean passwordAndUserNameCheck() {
+    public boolean isPasswordAndUserNameValid () {
         LoginInfo userInfoInStorage = loginInfoManager.getLoginInfo (username.toString ());
         boolean usernameMatch = username.toString ().matches (userInfoInStorage.getUserName ());
 
         String securePassword = userInfoInStorage.getPassword ();
         boolean passwordMatch = PasswordUtils.verifyUserPassword(password.toString (), securePassword);
 
-        if (passwordMatch && usernameMatch) {
-            CurrentUser.setLoginInfo (username.toString (), userInfoInStorage.getAuthenticationLevel ());
-            logger.info (String.format ("User has login with user name : " + CurrentUser.getUserName ()));
-            return true;
+            if (passwordMatch && usernameMatch) {
+                CurrentUser.setLoginInfo (username.toString (), userInfoInStorage.getAuthenticationLevel ());
+                logger.info (String.format ("User has login with user name : " + CurrentUser.getUserName ()));
+                return true;
         }
         return false;
     }

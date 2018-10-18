@@ -69,7 +69,6 @@ public class InitAddressBook {
         ui = new UiManager (logic, config, userPrefs);
 
         fxmlLoader = new FXMLLoader();
-        initEventsCenter();
 
     }
 
@@ -108,9 +107,4 @@ public class InitAddressBook {
     }
 
 
-
-
-    private void initEventsCenter() {
-        EventsCenter.getInstance().registerHandler(this);
-    }
 }
