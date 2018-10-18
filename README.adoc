@@ -31,7 +31,7 @@ endif::[]
 
 == Acknowledgements
 
-* Original source code adapted from SE-EDU at http://github.com/se-edu/
+* Original source code adapted from SE-EDU at https://github.com/se-edu/addressbook-level4
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
