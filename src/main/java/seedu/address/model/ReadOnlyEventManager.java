@@ -1,8 +1,8 @@
 package seedu.address.model;
 
-import javafx.collections.ObservableList;
-
 import seedu.address.model.event.Event;
+
+import javafx.collections.ObservableList;
 
 /**
  * Unmodifiable view of an event manager

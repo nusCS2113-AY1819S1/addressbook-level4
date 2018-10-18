@@ -2,9 +2,6 @@ package seedu.address.ui;
 
 import static org.junit.Assert.assertTrue;
 
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
 import guitests.guihandles.StageHandle;
 import org.junit.Before;
 import org.junit.Rule;
@@ -17,6 +14,9 @@ import seedu.address.logic.LogicManager;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
+
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Contains tests for closing of the {@code MainWindow}.

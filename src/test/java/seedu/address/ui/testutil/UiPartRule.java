@@ -2,12 +2,12 @@ package seedu.address.ui.testutil;
 
 import java.util.concurrent.TimeoutException;
 
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-
 import org.testfx.api.FxToolkit;
 
 import seedu.address.ui.UiPart;
+
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 /**
  * Provides an isolated stage to test an individual {@code UiPart}.
