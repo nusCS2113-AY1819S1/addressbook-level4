@@ -368,7 +368,7 @@ Finally the 'BudgetCommand' is called with 'club' as the parameter.
 Step 4. The 'BudgetCommand' checks whether the 'club' is a duplicate and it is not, the 'BudgetCommand' calls the 'addClub'
 command in 'Model' with 'club' as the parameter.
 
-Step 5. 'Model' calls 'addClubBudget' in 'ReadOnlyAddressBook' and indicates that the address book's status has changed.
+Step 5. 'Model' calls 'addClub' in 'ReadOnlyAddressBook' and indicates that the address book's status has changed.
 
 Step 6. 'ReadOnlyAddressBook' calls the 'addClubBudget' command on an object 'clubs' of the 'UniqueClubsList' class, thus
 adding the required club's data to the address book.
@@ -384,14 +384,9 @@ user entered a unique club name
 
 image::DuplicateBudgetCommand.png[width="800"]
 
+This is the sequence diagram for the full functioning of the `budget` command:
 
-
-
-
-
-
-
-
+image::BudgetCommandSequenceDiagram.png[width="800"]
 
 //end::budget[]
 
