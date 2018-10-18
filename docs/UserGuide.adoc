@@ -251,13 +251,13 @@ to specified companies about specified candidates that are suitable for specifie
 
 NOTE: Only Gmail is supported at this point in time.
 
-NOTE: If it is your first time running RecruitBook, a Gmail log in page will open on your browser. 
+NOTE: If it is your first time running RecruitBook, a Gmail log in page will open on your browser.
 The gmail account that you log in with will be the email account used to send emails.
 
 Format: `email`
 
 ._Email command is a 4-step command_
-.   *Initialisation.* Type `email` to initialise the email command. 
+.   *Initialisation.* Type `email` to initialise the email command.
 .   *Choose your recipients.* On the RecruitBook application, what's shown on the main window
     will be taken in as the recipients. You can use commands such as `list`, `filter`, `find`
     to change the candidate/job offer shown. +
@@ -266,11 +266,11 @@ Format: `email`
     the contents. +
     Type `next` to move on to the next step.
     
-    WARNING: Recipients and contents must be contrasting - If recipients are candidates, then 
+    WARNING: Recipients and contents must be contrasting - If recipients are candidates, then
     the content must be job offers and vice versa.
-            
+
 .   *Sending your email.* Once both recipients and contents have been picked, type `send` to send your email. +
-    This step is a confirmation step before you actually send the email. 
+    This step is a confirmation step before you actually send the email.
 
 Examples:
 
