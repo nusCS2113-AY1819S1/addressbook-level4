@@ -193,7 +193,7 @@ public class ParserUtil {
      * Parses one or more {@code Index} into an {@code Index} list and returns it.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param oneBasedIndex the user input index.
+     * @param oneBasedIndex the user input string.
      * @return the list of {@code Index} to return.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
@@ -209,7 +209,7 @@ public class ParserUtil {
      * Parses a range or multiple ranges of {@code Index} into an {@code Index} list and returns it.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param oneBasedIndex the user input index.
+     * @param oneBasedIndex the user input string.
      * @return the list of {@code Index} to return.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
@@ -233,18 +233,28 @@ public class ParserUtil {
      *
      * For example, a valid input specifying ranges could be "1 - 3, 5-7".
      *
-     * @param oneBasedIndex the user input index.
+     * @param oneBasedIndex the user input string.
      * @return the list of {@code Index} to return.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static ArrayList<Index> parseSelectIndex(String oneBasedIndex) throws ParseException {
 
         // Perform a syntax check here
-        
-        if (!oneBasedIndex.contains("-")) {
-            return  parseMultipleIndex(oneBasedIndex);
-        } else {
+
+        if (isRangeIndexFormat(oneBasedIndex)) {
             return parseMultipleRangeIndex(oneBasedIndex);
+        } else {
+            return  parseMultipleIndex(oneBasedIndex);
         }
+    }
+
+    /**
+     * Determines if a user input conforms to the range selection format with the help of regex.
+     *
+     * @param input the user input string.
+     * @return true if conforms, false otherwise.
+     */
+    private static boolean isRangeIndexFormat(String input) {
+        return input.trim().matches("(?s)(\\d*\\s*-\\s*\\d*\\s*\\s*,?)?(\\s*,\\s*\\d*\\s*-\\s*\\d*\\s*\\s*,?)*");
     }
 }
