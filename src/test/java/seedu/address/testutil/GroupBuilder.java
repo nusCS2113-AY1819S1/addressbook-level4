@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
+import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -19,11 +20,13 @@ public class GroupBuilder {
     private GroupName groupName;
     private GroupLocation groupLocation;
     private Set<Tag> tags;
+    private Set<Person> persons;
 
     public GroupBuilder() {
         groupName = new GroupName(DEFAULT_GROUP_NAME);
         groupLocation = new GroupLocation(DEFAULT_GROUP_LOCATION);
         tags = new HashSet<>();
+        persons = new HashSet<>();
     }
 
     /**
@@ -44,6 +47,14 @@ public class GroupBuilder {
     }
 
     /**
+     * Sets the {@code GroupLocation} of the {@code Group} that we are building.
+     */
+    public GroupBuilder withGroupLocation(String groupLocation) {
+        this.groupLocation = new GroupLocation(groupLocation);
+        return this;
+    }
+
+    /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Group} that we are building.
      */
     public GroupBuilder withTags(String ... tags) {
@@ -52,10 +63,10 @@ public class GroupBuilder {
     }
 
     /**
-     * Sets the {@code GroupLocation} of the {@code Group} that we are building.
+     * Parses the {@code persons} into a {@code Set<Person>} and set it to the {@code Group} that we are building.
      */
-    public GroupBuilder withGroupLocation(String groupLocation) {
-        this.groupLocation = new GroupLocation(groupLocation);
+    public GroupBuilder withPersons(Person ... persons) {
+        this.persons = SampleDataUtil.getPersonSet(persons);
         return this;
     }
 

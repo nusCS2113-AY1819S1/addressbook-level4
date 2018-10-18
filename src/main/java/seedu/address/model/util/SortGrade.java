@@ -3,11 +3,13 @@ package seedu.address.model.util;
 
 
 //import java.lang.reflect.Array;
+
 import java.util.ArrayList;
-//import java.util.Comparator;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+
+//import java.util.Comparator;
 //import seedu.address.model.person.UniquePersonList;
 /**
  * sort student in ascending order by scores.

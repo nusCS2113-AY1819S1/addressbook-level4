@@ -109,6 +109,10 @@ image::Architecture.png[width="600"]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
+
+
+
+
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
@@ -319,7 +323,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::undoredo[]
+// tag::group[]
 === Group feature
 ==== Current Implementation
 
@@ -361,7 +365,7 @@ If a duplicate persons are found in the group of the address book during its exe
 ** Pros: Modular as groups are stored in a different file, makes extraction of data easier.
 ** Cons: Harder to implement.
 
-// end::undoredo[]
+// end::group[]
 
 // tag::AddScriptCommand[]
 === AddScriptCommand Feature
@@ -964,7 +968,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
 
-|`* * *` |university lecturer |create groups of students |have a list of all my students in a particular module/group
+|`* * *` |university lecturer |create groups |have a list of all my modules/tutorial classes
+
+|`* * *` |university lecturer |add students to groups |have a list of all my students in a particular module/group
 
 |`* * *` |university lecturer |add groups to a calender |have a list of all my modules with their respective dates
 
@@ -990,7 +996,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Student management system` and the *Actor* is the `Lecturer`, unless specified otherwise)
 
 [discrete]
 === Use case: Delete person
@@ -1020,45 +1026,59 @@ Use case resumes at step 2.
 
 [discrete]
 === Use case: Create Groups
-*Precondition*
 
-1.  Address Book is not empty
 
 *MSS*
 
-1.  User creates a group
-2.  AddressBook confirms that group is created
-3.  User adds students to group
-4.  AddressBook confirms that students were added
+1.  Lecturer creates a group
+2.  Student management system confirms that group is created
 +
 Use case ends
 
 *Extensions*
 
 [none]
-* 1a. AddressBook detects error in data entered.
+* 1a. Student management system detects incorrect format of data entered.
 +
 
 [none]
-** 1a1. AddressBook rejects command entered.
+** 1a1. Student management system rejects command entered with relevant error message.
 [none]
-* 1b. AddressBook detects duplicate group.
+* 1b. Student management system detects duplicate group.
 +
 
 [none]
-** 1b1. AddressBook rejects command entered.
+** 1b1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Add Students To Groups
+*Precondition*
+
+1.  Student management system has student(s)
+
+*MSS*
+
+1.  Lecturer adds student(s) to a group
+2.  AddressBook confirms student is added
++
+Use case ends
+
+*Extensions*
+
 [none]
-* 3a. AddressBook detects error in data entered.
+* 1a. Student management system detects incorrect format of in data entered.
 +
 
 [none]
-** 3a1. AddressBook rejects command entered.
+** 1a1. Student management system rejects command entered with relevant error message.
 [none]
-* 3b. AddressBook detects group is not created.
+* 1b. Student management system detects student(s) is already in the group.
 +
 
 [none]
-** 3b1. AddressBook rejects command entered.
+** 1b1. Student management system rejects command entered with relevant error message.
 +
 
 
@@ -1143,7 +1163,8 @@ Use case ends
 === Use case: Group Distribution
 *Precondition*
 
-1.  Group's exist in the AddressBook
+1.  Student must exist in the AddressBook
+2.  Number of groups must be less than number of Students
 
 *MSS*
 
@@ -1226,6 +1247,32 @@ Use case ends
 
 [none]
 ** 1a1. AddressBook rejects command.
++
+Use case ends
+
+[discrete]
+=== Use case: Adding Multiple Students to Student Management System(SMS)
+*Precondition*
+
+1.  User has selected a group of students
+
+*MSS*
+
+1.  User requests SMS to use a specific text file to execute multiple add commands
+2.  SMS open the exact text file and execute all the commands that are in the following text file
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. SMS detects that no such text file is present in default directory and return a error message to the user.
++
+Use case ends
+
+[none]
+** 2a. SMS detects that that there are invalid commands contains in the text file and return the line numbers that the
+add command is not able to run.
 +
 Use case ends
 

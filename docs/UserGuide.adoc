@@ -52,30 +52,31 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 
 === Creating a group: `group` `grp`
-Creates a group in the address book +
-Format: `group n/NAME l/LOCATION` +
-Shortcut Format: `grp n/NAME l/LOCATION` +
+Creates a group in the student management system +
+Format: `group n/NAME l/LOCATION [t/TAG] ...`  +
+Shortcut Format: `grp n/NAME l/LOCATION [t/TAG] ...` +
 ****
-* Creates a group with the specified NAME and LOCATION
-****
-
-Examples:
-
-* `group n/CS2113 l/LT15`
-* `grp n/CS2113 l/LT01`
-
-=== Populating a group: `pop`
-Adds person(s) to a group +
-Format: `pop n/NAME l/LOCATION i/INDEX [MORE_INDICES]` +
-****
-* Adds a person at specified INDEX(s) to group at specified NAME and LOCATION.
-* The index refers to the index number shown in the displayed person list.
-* The index must be a positive integer 1, 2, 3, …​
+* Creates a group with the specified NAME, LOCATION and TAG(s)
 ****
 
 Examples:
 
-* pop n/CS2113 l/LT15 i/2 3 4 5
+* `group n/CS2113 l/LT15 t/java`
+* `grp n/CS2113 l/LT01 t/c t/cpp`
+
+=== Add students a group: `addgroup` `addgrp`
+Adds student(s) to a group in the student management system +
+Format: `addgroup g/INDEX p/INDEX ...` +
+Shortcut Format: `addgrp g/INDEX p/INDEX ...` +
+****
+* Adds person(s) at specified INDEX(s) to group at specified at INDEX.
+* The index refers to the index number shown in the displayed group/person list.
+****
+
+Examples:
+
+* addgroup g/1 p/1
+* addgrp g/1 p/1 p/2
 
 === List a group of students: 'scorefilter a/56 or b/56'
 List out  students who score above/below certain grade.
@@ -85,19 +86,25 @@ Example: scorefilter a/66
 This will list all the students who score above 56 in a new grade list
 
 
-=== Create N number of group, distributed equally based on nationality or gender or both: `makegroup`
-Make multiple groups of N determined by the user, with a group name which will enumerate from 1 and user is able to select the condition to distribute equally via Gender & Nationally +
-Format: `makegroup gn/GROUP_NAME n/NthGROUP g/GENDER l/LOCAL` +
+=== Create N number of group, distributed equally based on nationality or gender or both: `distinto`
+Creates _n_ number of groups determined by the user, with a group name and user is able to select the condition to distribute equally via Gender & Nationally +
+Format: `distinto NUM_OF_GROUPS n/GROUP_NAME g/true nat/true` +
 ****
-* Create N number of equally distributed groups based on gender & nationality.
-* GROUP_NAME is specified in String format, which a number will enumerate from 1 at the end of the string.
-* N must be a positive integer to tell the system the number of group to be created.
-* GENDER & LOCAL are boolean flags to enable the system to distribute equally based on.
+* NUM_OF_GROUPS is an positive integer value and must not be 0.
+* GROUP_NAME is specified in String format.
+* GROUP_NAME will include the NUM_OF_GROUP index where it will be concatenate behind the GROUP_NAME.
+* `g/` is the Gender Prefix which only takes in '1' or '0' or "true" or "false". It is a boolean type.
+** '1' or "true" will trigger the software to distribute into group with balanced genders
+** '0' or "false" will ignore gender field and distribute
+* `nat/` is the nationality Prefix which only takes in '1' or '0'. It is a boolean type.
+** '1' or "true" will trigger the software to distribute into group with balanced nationality.
+** '0' or "false" will ignore nationality field and distribute
 ****
 
 Examples:
 
-* makegroup gn/T13- n/5 g/true l/true
+* distinto 5 n/T13- g/true nat/true
+* di 3 n/T11- g/1 nat/1
 
 === Sending Email to Group of Persons: `sendmail`
 Sends an email to all persons belonging to a group +
@@ -359,6 +366,10 @@ e.g. `add n/James Ho g/M nat/CN p/22224444 e/jamesho@example.com a/123, Clementi
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
+* *Create Group* : `group n/NAME l/LOCATION [t/TAG] ...` +
+e.g. `group n/CS2040C l/LT15 t/cpp`
+* *Add to Group* : `addgroup g/INDEX p/INDEX ...` +
+e.g. `addgroup g/1 p/1 p/2`
 * *Edit* : `edit INDEX [n/NAME] [g/GENDER] [nat/NATIONALITY] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +

@@ -58,15 +58,23 @@ public class GroupCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
+    public List<String> getTagStyleClasses(String tag) {
+        return tagLabels
+                .stream()
+                .filter(label -> label.getText().equals(tag))
+                .map(Label::getStyleClass)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No such tag."));
+    }
+
     /**
      * Returns true if this handle contains {@code group}.
      */
     public boolean equals(Group group) {
         return getGroupName().equals(group.getGroupName().groupName)
-                && getGroupLocation().equals(group.getGroupLocation().value)
+                && getGroupLocation().equals(group.getGroupLocation().groupLocation)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(group.getTags().stream()
                 .map(tag -> tag.tagName)
                 .collect(Collectors.toList())));
     }
-
 }

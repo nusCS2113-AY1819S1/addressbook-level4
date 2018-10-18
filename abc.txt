@@ -1,2 +1,3 @@
-add n/novin tong p/90930155 e/cocolupiayi@gmail.com a/Pasir ris d/99
-add n/daven tong p/12344506 e/daven@gmail.com a/dsada d/89
+add n/Novin Tong Yong Kang g/M nat/SG p/99999999 e/novin@example.com a/Pasir Ris street 99,#02-25 d/69 t/friends
+delete n/Tsu Wei Quan g/F nat/SG p/66666666 e/TsuTheBoss@gmail.com a/Tampines street 82,#02-33 d/99 t/owesMoney
+add n/abc p/99999999 e/novin@example.com a/Pasir Ris street 99,#02-25 d/69 t/friends
