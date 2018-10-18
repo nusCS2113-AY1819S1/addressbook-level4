@@ -33,6 +33,13 @@ public class AddMilestoneCommand extends Command implements CommandParser {
     private final Milestone toAdd;
 
     /**
+     * Creates a AddMilestoneCommand to serve the purpose of the LogicManager
+     */
+    public AddMilestoneCommand() {
+        toAdd = null;
+    }
+
+    /**
      * Creates a AddMilestoneCommand to add the specified {@code Milestone}
      */
     public AddMilestoneCommand(Milestone milestone) {
