@@ -81,7 +81,7 @@ public class XmlBookInventoryRequestStorageTest {
 
         //Modify data, overwrite exiting file, and read back
         original.addBook(HOON);
-        original.removePerson(ALICE);
+        original.removeBook(ALICE);
         xmlAddressBookStorage.saveAddressBook(original, filePath);
         readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new BookInventory(readBack));

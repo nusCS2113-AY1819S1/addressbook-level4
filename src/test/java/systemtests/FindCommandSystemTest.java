@@ -1,7 +1,7 @@
 //package systemtests;
 //
 //import static org.junit.Assert.assertFalse;
-//import static seedu.address.commons.core.Messages.MESSAGE_PERSONS_LISTED_OVERVIEW;
+//import static seedu.address.commons.core.Messages.MESSAGE_BOOKS_LISTED_OVERVIEW;
 //import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 //import static seedu.address.testutil.TypicalBooks.BENSON;
 //import static seedu.address.testutil.TypicalBooks.CARL;
@@ -156,7 +156,7 @@
 //
 //    /**
 //     * Executes {@code command} and verifies that the command box displays an empty string, the result display
-//     * box displays {@code Messages#MESSAGE_PERSONS_LISTED_OVERVIEW} with the number of people in the filtered list,
+//     * box displays {@code Messages#MESSAGE_BOOKS_LISTED_OVERVIEW} with the number of people in the filtered list,
 //     * and the model related components equal to {@code expectedModel}.
 //     * These verifications are done by
 //     * {@code BookInventorySystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
@@ -166,7 +166,7 @@
 //     */
 //    private void assertCommandSuccess(String command, Model expectedModel) {
 //        String expectedResultMessage = String.format(
-//                MESSAGE_PERSONS_LISTED_OVERVIEW, expectedModel.getFilteredBookList().size());
+//                MESSAGE_BOOKS_LISTED_OVERVIEW, expectedModel.getFilteredBookList().size());
 //
 //        executeCommand(command);
 //        assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
