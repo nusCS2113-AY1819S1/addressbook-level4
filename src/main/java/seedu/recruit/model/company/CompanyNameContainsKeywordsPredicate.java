@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 import seedu.recruit.commons.util.StringUtil;
 
 /**
- * Tests that a {@code Candidate}'s {@code Name} matches any of the keywords given.
+ * Tests that a {@code Company}'s {@code Name} matches any of the keywords given.
  */
 public class CompanyNameContainsKeywordsPredicate implements Predicate<Company> {
     private final List<String> keywords;

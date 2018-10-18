@@ -19,7 +19,7 @@ public class FindCompanyCommand extends Command {
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "NAME \n"
-            + "Example: " + COMMAND_WORD + " KFC";
+            + "Example: " + COMMAND_WORD + " Hanbaobao Pte Ltd";
 
     private final CompanyNameContainsKeywordsPredicate predicate;
 

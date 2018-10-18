@@ -16,8 +16,8 @@ import seedu.recruit.model.company.CompanyNameContainsKeywordsPredicate;
 public class FindCompanyCommandParser implements Parser<FindCompanyCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FindCandidateCommand
-     * and returns an FindCandidateCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the FindCompanyCommand
+     * and returns an FindCompanyCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public FindCompanyCommand parse(String args) throws ParseException {
