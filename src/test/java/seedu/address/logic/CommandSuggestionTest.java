@@ -5,21 +5,29 @@ import static org.junit.Assert.assertSame;
 
 import org.junit.Test;
 
+import seedu.address.logic.commands.ExportAllCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.ScheduleCommand;
+
 public class CommandSuggestionTest {
     private CommandSuggestion commandSuggestion = new CommandSuggestion();
 
     @Test
     public void getSuggestion() {
-        // "abcDEF" command is not similar to "test" command
+        // "abcDEF" input is not similar to any command
         assertSame(commandSuggestion.getSuggestion("abcDEF"), CommandSuggestion.NO_SUGGESTION);
 
-        // "test" command is similar to "test" command, returns edit distance 0
-        assertEquals(commandSuggestion.getSuggestion("test"),
-                String.format(CommandSuggestion.SUGGESTION_HEADER, 0));
+        // "hist" input is similar to "list" command
+        assertEquals(commandSuggestion.getSuggestion("hist"),
+            String.format(CommandSuggestion.SUGGESTION_HEADER, ListCommand.COMMAND_WORD));
 
-        // "tes" command is similar to "test" command, returns edit distance 1
-        assertEquals(commandSuggestion.getSuggestion("tes"),
-                String.format(CommandSuggestion.SUGGESTION_HEADER, 1));
+        // "shedule" input is similar to "schedule" command
+        assertEquals(commandSuggestion.getSuggestion("shedule"),
+            String.format(CommandSuggestion.SUGGESTION_HEADER, ScheduleCommand.COMMAND_WORD));
+
+        // "exportalll" input is similar to "exportall" command
+        assertEquals(commandSuggestion.getSuggestion("exportalll"),
+            String.format(CommandSuggestion.SUGGESTION_HEADER, ExportAllCommand.COMMAND_WORD));
     }
 
 }

@@ -22,8 +22,7 @@ import seedu.address.logic.commands.UndoCommand;
 public class CommandSuggestion {
     public static final String SUGGESTION_HEADER = "Did you mean: %1$s?";
     public static final String NO_SUGGESTION = "No suggestions available.";
-    public static final String TEMPORARY_COMPARISON_COMMAND = "test";
-    public static final int WORD_DISTANCE_LIMIT = 3;
+    private static final int WORD_DISTANCE_LIMIT = 2;
 
     private static final String[] CommandList;
 
@@ -63,11 +62,15 @@ public class CommandSuggestion {
     }
 
     private String getNearestCommand(String userCommand) {
-        int distance = new StringSimilarity().editDistance(userCommand, TEMPORARY_COMPARISON_COMMAND);
-        if (distance <= WORD_DISTANCE_LIMIT) {
-            return Integer.toString(distance);
-        } else {
-            return "";
+        int shortestEditDistance = WORD_DISTANCE_LIMIT;
+        String shortestEditCommand = "";
+        for (int i = 0; i < CommandList.length; i++) {
+            int distance = new StringSimilarity().editDistance(userCommand, CommandList[i]);
+            if (distance <= shortestEditDistance) {
+                shortestEditDistance = distance;
+                shortestEditCommand = CommandList[i];
+            }
         }
+        return shortestEditCommand;
     }
 }

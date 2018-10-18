@@ -10,19 +10,19 @@ public class StringSimilarityTest {
     @Test
     public void editDistance() {
 
-        // "test" -> "test", has edit distance of 0
-        assertEquals(stringsimilarity.editDistance("test", "test"), 0);
+        // "add" -> "add", has edit distance of 0
+        assertEquals(stringsimilarity.editDistance("add", "add"), 0);
 
-        // "" -> "test", has edit distance of 4
-        assertEquals(stringsimilarity.editDistance("", "test"), 4);
+        // "" -> "add", has edit distance of 3
+        assertEquals(stringsimilarity.editDistance("", "add"), 3);
 
-        // "TEST" -> "test", has edit distance of 4
-        assertEquals(stringsimilarity.editDistance("TEST", "test"), 4);
+        // "ADD" -> "add", has edit distance of 3
+        assertEquals(stringsimilarity.editDistance("ADD", "add"), 3);
 
-        // "tes" -> "test", has edit distance of 1
-        assertEquals(stringsimilarity.editDistance("tes", "test"), 1);
+        // "sched" -> "schedule", has edit distance of 3
+        assertEquals(stringsimilarity.editDistance("sched", "schedule"), 3);
 
-        // "abcdef" -> "test", has edit distance of 6
-        assertEquals(stringsimilarity.editDistance("abcdef", "test"), 6);
+        // "lister" -> "list", has edit distance of 2
+        assertEquals(stringsimilarity.editDistance("lister", "list"), 2);
     }
 }
