@@ -48,10 +48,6 @@ public class PasswordCommand extends Command {
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
 
-        UserPrefs userPref = new UserPrefs();
-        Path path = Paths.get(userPref.getAddressBookFilePath().toString());
-        XmlAddressBookStorage storage = new XmlAddressBookStorage(path);
-
         if (!fe.isAlphanumeric(this.password)) {
             throw new CommandException(FileEncryptor.MESSAGE_PASSWORD_ALNUM);
         }
@@ -59,17 +55,7 @@ public class PasswordCommand extends Command {
         fe.process(this.password);
         String message = fe.getMessage();
 
-
-        ReadOnlyAddressBook initialData;
-        try {
-            initialData = storage.readAddressBook().orElseGet(SampleDataUtil::getSampleAddressBook);
-            model.resetData(initialData);
-        } catch (IOException ioe) {
-            logger.warning(ioe.getMessage());
-        } catch (DataConversionException dataE) {
-            logger.warning(dataE.getMessage());
-        }
-
+        model.reinitAddressbook();
         model.getTextPrediction().reinitialise();
 
         return new CommandResult(message);
