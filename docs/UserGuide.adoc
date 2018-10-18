@@ -318,9 +318,17 @@ Format: `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS`
 Example: +
 `budget c/Computing Club t/200 e/5`
 
+=== Calculating the budgets : `calculatebudget`
+
+Calculates the budgets for all the clubs in the address book using the total available budget
+Format: `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD`
+
+Example: +
+`calculatebudget b/50000`
+
 === Viewing the allocated budget : `viewbudget`
 
-Shows the allocated budget to the user +
+Shows all the allocated budgets to the user +
 Format: `viewbudget`
 
 === Submitting grant request : `request`
@@ -400,6 +408,9 @@ e.g.`select 2`
 * *Redo* : `redo`
 * *Submitting data for budget* : `budget c/CLUB NAME t/TURNOUT e/NUMBER OF EVENTS` +
 e.g. `budget c/Computing Club t/200 e/5`
+* *Calculating budgets* : `calculatebudget b/TOTAL AVAILABLE BUDGET IN SGD` +
+e.g. `calculatebudget b/50000`
+* *Viewing all the budgets* : `viewbudget`
 * *Submitting grant request* : request m/AMOUNT r/REASON t/IMPORTANCE LEVEL` +
 e.g. `request m/1000 r/for booking auditorium t/medium`
 * *Viewing grant request* : `viewrequest`

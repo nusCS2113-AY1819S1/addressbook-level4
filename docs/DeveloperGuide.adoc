@@ -338,6 +338,58 @@ image::LoginActivityDiagram.png[width="800"]
 ** Cons: Harder to read.
 // end::login[]
 
+//tag::budget[]
+=== Budgeting Feature
+==== Current Implementation
+
+This feature has been implemented through 3 separate commands, each dealing with a separate stage in the calculation and
+subsequent allocation of budgets by the NUSSU Executive Committee to all the clubs that submit the data required to
+calculate the budget. The three commands are: `budget` - which handles the submission of data by the club treasurer required to calculate the
+calculate the budget for that club, `calculatebudget` - which is to be used only by the NUSSU Executive Committee members
+in order to calculate the budgets for each club and `viewbudget` - which lists the final budgets of all the clubs.
+
+==== Submission of Data
+
+Given below is an example usage scenario and the behaviour at each step of the `budget` command.
+
+Step 1. The user launches the application for the first time. 'filteredClubBudgets' will be initialised with an empty list
+of all the club budgets in the address book.
+
+Step 2. The user (a club's treasurer) executes `budget c/Computing Club t/200 e/5` command in order to
+submit the data for the calculation of her club's budget. The 'LogicManager' then calls the 'parseCommand' in the
+'AddressBookParser'.
+
+image::EnterBudgetCommand.png[width="800"]
+
+Step 3. The 'AddressBookParser' then returns a new 'BudgetCommandParser', which then parses the command to be executed and
+creates a 'ClubBudgetElements' object called 'club' with the club's name, the expected turnout and the number of events.
+Finally the 'BudgetCommand' is called with 'club' as the parameter.
+
+Step 4. The 'BudgetCommand' checks whether the 'club' is a duplicate and it is not, the 'BudgetCommand' calls the 'addClub'
+command in 'Model' with 'club' as the parameter.
+
+Step 5. 'Model' calls 'addClub' in 'ReadOnlyAddressBook' and indicates that the address book's status has changed.
+
+Step 6. 'ReadOnlyAddressBook' calls the 'addClubBudget' command on an object 'clubs' of the 'UniqueClubsList' class, thus
+adding the required club's data to the address book.
+
+Step 7. Finally a success message is displayed with the details that have been entered by the user.
+
+image::ExecutedBudgetCommand.png[width="800"]
+
+[NOTE]
+In Step 4, had the user entered a club name that already existed in the address book, then a duplicate message would be shown
+prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
+user entered a unique club name
+
+image::DuplicateBudgetCommand.png[width="800"]
+
+This is the sequence diagram for the full functioning of the `budget` command:
+
+image::BudgetCommandSequenceDiagram.png[width="800"]
+
+//end::budget[]
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
