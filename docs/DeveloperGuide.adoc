@@ -384,7 +384,7 @@ user entered a unique club name
 
 image::DuplicateBudgetCommand.png[width="800"]
 
-This is the sequence diagram for the full functioning of the `budget` command:
+The image below is the sequence diagram for the functioning of the `budget` command:
 
 image::BudgetCommandSequenceDiagram.png[width="800"]
 
