@@ -1,22 +1,14 @@
 //@@author lws803
 package seedu.address.logic.commands;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.XmlAddressBookStorage;
-
 
 /**
  * Encrypts the XML data using a password and returns a message
@@ -48,10 +40,6 @@ public class PasswordCommand extends Command {
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
 
-        UserPrefs userPref = new UserPrefs();
-        Path path = Paths.get(userPref.getAddressBookFilePath().toString());
-        XmlAddressBookStorage storage = new XmlAddressBookStorage(path);
-
         if (!fe.isAlphanumeric(this.password)) {
             throw new CommandException(FileEncryptor.MESSAGE_PASSWORD_ALNUM);
         }
@@ -59,17 +47,7 @@ public class PasswordCommand extends Command {
         fe.process(this.password);
         String message = fe.getMessage();
 
-
-        ReadOnlyAddressBook initialData;
-        try {
-            initialData = storage.readAddressBook().orElseGet(SampleDataUtil::getSampleAddressBook);
-            model.resetData(initialData);
-        } catch (IOException ioe) {
-            logger.warning(ioe.getMessage());
-        } catch (DataConversionException dataE) {
-            logger.warning(dataE.getMessage());
-        }
-
+        model.reinitAddressbook();
         model.getTextPrediction().reinitialise();
 
         return new CommandResult(message);
