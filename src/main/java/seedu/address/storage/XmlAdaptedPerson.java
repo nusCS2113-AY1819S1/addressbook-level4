@@ -95,7 +95,6 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        grade = source.getGrade().value;
         tests = source.getTests().stream()
                 .map(XmlAdaptedTest::new)
                 .collect(Collectors.toList());
@@ -170,11 +169,14 @@ public class XmlAdaptedPerson {
         final Grade modelGrade = new Grade(grade);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
         final List<Test> personTests = new ArrayList<>();
+
         for (XmlAdaptedTest test : tests) {
             personTests.add(test.toModelType());
         }
         final Set<Test> modelTests = new HashSet<>(personTests);
+
         return new Person(modelName, modelGender, modelNationality, modelPhone,
                 modelEmail, modelAddress, modelGrade, modelTags, modelTests);
 
