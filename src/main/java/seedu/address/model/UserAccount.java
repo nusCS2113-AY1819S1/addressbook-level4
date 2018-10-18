@@ -58,6 +58,21 @@ public class UserAccount {
         return isPresent;
     }
 
+
+    /**
+     * Returns true if user is logged in.
+     */
+    public boolean authenticate() {
+        return loginStatus;
+    }
+
+    /**
+     * Returns logged in user.
+     */
+    public User getUser(User user) {
+        return user;
+    }
+
     /**
      * Sets the current user.
      */
