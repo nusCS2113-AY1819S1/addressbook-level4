@@ -30,20 +30,20 @@ public class CommandSuggestion {
     // Initialising the CommandList Array
     static {
         CommandList = new String[] {
-                AddCommand.COMMAND_WORD,
-                ClearCommand.COMMAND_WORD,
-                DeleteCommand.COMMAND_WORD,
-                EditCommand.COMMAND_WORD,
-                ExitCommand.COMMAND_WORD,
-                ExportAllCommand.COMMAND_WORD,
-                FindCommand.COMMAND_WORD,
-                HelpCommand.COMMAND_WORD,
-                HistoryCommand.COMMAND_WORD,
-                ListCommand.COMMAND_WORD,
-                RedoCommand.COMMAND_WORD,
-                ScheduleCommand.COMMAND_WORD,
-                SelectCommand.COMMAND_WORD,
-                UndoCommand.COMMAND_WORD
+            AddCommand.COMMAND_WORD,
+            ClearCommand.COMMAND_WORD,
+            DeleteCommand.COMMAND_WORD,
+            EditCommand.COMMAND_WORD,
+            ExitCommand.COMMAND_WORD,
+            ExportAllCommand.COMMAND_WORD,
+            FindCommand.COMMAND_WORD,
+            HelpCommand.COMMAND_WORD,
+            HistoryCommand.COMMAND_WORD,
+            ListCommand.COMMAND_WORD,
+            RedoCommand.COMMAND_WORD,
+            ScheduleCommand.COMMAND_WORD,
+            SelectCommand.COMMAND_WORD,
+            UndoCommand.COMMAND_WORD
         };
     }
 
@@ -55,7 +55,7 @@ public class CommandSuggestion {
      */
     public String getSuggestion(String userCommand) {
         String suggestedCommand = getNearestCommand(userCommand);
-        if(suggestedCommand.isEmpty()) {
+        if (suggestedCommand.isEmpty()) {
             return NO_SUGGESTION;
         } else {
             return String.format(SUGGESTION_HEADER, suggestedCommand);

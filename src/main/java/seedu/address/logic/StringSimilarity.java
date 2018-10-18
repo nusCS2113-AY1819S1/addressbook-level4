@@ -19,17 +19,17 @@ public class StringSimilarity {
     public int editDistance(String userCommand, String commandToCheck) {
         int[][] distanceArray = new int[userCommand.length() + ARRAY_PADDING][commandToCheck.length() + ARRAY_PADDING];
 
-        for(int i = 0; i < userCommand.length() + ARRAY_PADDING; i++) {
+        for (int i = 0; i < userCommand.length() + ARRAY_PADDING; i++) {
             distanceArray[i][0] = i;
         }
 
-        for(int j = 0; j < commandToCheck.length() + ARRAY_PADDING; j++) {
+        for (int j = 0; j < commandToCheck.length() + ARRAY_PADDING; j++) {
             distanceArray[0][j] = j;
         }
 
-        for(int i = 0; i < userCommand.length(); i++) {
-            for(int j = 0; j < commandToCheck.length(); j++) {
-                if(userCommand.charAt(i) == commandToCheck.charAt(j)) {
+        for (int i = 0; i < userCommand.length(); i++) {
+            for (int j = 0; j < commandToCheck.length(); j++) {
+                if (userCommand.charAt(i) == commandToCheck.charAt(j)) {
                     distanceArray[i + ARRAY_PADDING][j + ARRAY_PADDING] = distanceArray[i][j];
                 } else {
                     distanceArray[i + ARRAY_PADDING][j + ARRAY_PADDING] = minimum(
