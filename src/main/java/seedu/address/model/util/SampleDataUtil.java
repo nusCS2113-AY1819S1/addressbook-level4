@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.EventManager;
 import seedu.address.model.ReadOnlyEventManager;
+import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;

@@ -2,8 +2,10 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -24,7 +26,7 @@ public class Event {
     private final Email email;
 
     // Data fields
-    private final Venue venue;
+    private final Address address;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Attendee> attendees = new HashSet<>();
 
@@ -39,7 +41,7 @@ public class Event {
         this.contact = contact;
         this.phone = phone;
         this.email = email;
-        this.venue = venue;
+        this.address = address;
         this.tags.addAll(tags);
         this.attendees.addAll(attendees);
     }
@@ -68,9 +70,9 @@ public class Event {
 
     }
 
-    public Venue getVenue() {
+    public Address getAddress() {
 
-        return venue;
+        return address;
 
     }
 
@@ -80,6 +82,15 @@ public class Event {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getTagsString() {
+        List<String> tagsList = new ArrayList<>();
+        for (Tag t: tags) {
+            tagsList.add(t.tagName);
+        }
+        String tagsString = String.join(" ", tagsList);
+        return tagsString;
     }
 
     /**
@@ -124,14 +135,14 @@ public class Event {
                 && otherEvent.getContact().equals(getContact())
                 && otherEvent.getPhone().equals(getPhone())
                 && otherEvent.getEmail().equals(getEmail())
-                && otherEvent.getVenue().equals(getVenue())
+                && otherEvent.getAddress().equals(getAddress())
                 && otherEvent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, contact, phone, email, venue, tags);
+        return Objects.hash(name, contact, phone, email, address, tags);
     }
 
     @Override
@@ -144,8 +155,8 @@ public class Event {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Venue: ")
-                .append(getVenue())
+                .append(" Address: ")
+                .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
