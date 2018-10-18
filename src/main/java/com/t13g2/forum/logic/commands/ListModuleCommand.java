@@ -20,7 +20,7 @@ public class ListModuleCommand extends Command {
             + "Example: " + COMMAND_WORD + " ";
 
     public static final String MESSAGE_SUCCESS = "Listed all modules";
-    private static String MESSAGE;
+    private static String message;
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -29,13 +29,13 @@ public class ListModuleCommand extends Command {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             List<Module> moduleList = unitOfWork.getModuleRepository().getAllModule();
             for (Module module : moduleList) {
-                MESSAGE = module.getModuleCode() + ": " + module.getTitle() + "\n";
+                message = module.getModuleCode() + ": " + module.getTitle() + "\n";
             }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, message));
     }
 
 }
