@@ -71,12 +71,14 @@ public class XmlExpenditureTrackerStorage implements ExpenditureTrackerStorage {
      * Similar to {@link #saveExpenditureTracker(ReadOnlyExpenditureTracker)}
      * @param filePath location of the data. Cannot be null
      */
-    public void saveExpenditureTracker(ReadOnlyExpenditureTracker expenditureTracker, Path filePath) throws IOException {
+    public void saveExpenditureTracker(ReadOnlyExpenditureTracker expenditureTracker,
+                                       Path filePath) throws IOException {
         requireNonNull(expenditureTracker);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveExpenditureTrackerDataToFile(filePath, new XmlSerializableExpenditureTracker(expenditureTracker));
+        XmlFileStorage.saveExpenditureTrackerDataToFile(filePath,
+                new XmlSerializableExpenditureTracker(expenditureTracker));
     }
 
 }

@@ -114,7 +114,8 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public void saveExpenditureTracker(ReadOnlyExpenditureTracker expenditureTracker, Path filePath) throws IOException {
+    public void saveExpenditureTracker(ReadOnlyExpenditureTracker expenditureTracker,
+                                       Path filePath) throws IOException {
         logger.fine("Attempting to write to ET data file: " + filePath);
         expenditureTrackerStorage.saveExpenditureTracker(expenditureTracker, filePath);
     }

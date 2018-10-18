@@ -35,7 +35,9 @@ public class UserPrefs {
         return addressBookFilePath;
     }
 
-    public Path getExpenditureTrackerFilePath() { return expenditureTrackerFilePath; }
+    public Path getExpenditureTrackerFilePath() {
+        return expenditureTrackerFilePath;
+    }
 
     public void setAddressBookFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;

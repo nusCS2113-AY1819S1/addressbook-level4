@@ -51,7 +51,8 @@ public class XmlFileStorage {
     /**
      * Returns expenditure tracker in the file or an empty expenditure tracker
      */
-    public static XmlSerializableExpenditureTracker loadExpenditureTrackerDataFromSaveFile(Path file) throws DataConversionException,
+    public static XmlSerializableExpenditureTracker loadExpenditureTrackerDataFromSaveFile(Path file)
+            throws DataConversionException,
             FileNotFoundException {
         try {
             return XmlUtil.getDataFromFile(file, XmlSerializableExpenditureTracker.class);

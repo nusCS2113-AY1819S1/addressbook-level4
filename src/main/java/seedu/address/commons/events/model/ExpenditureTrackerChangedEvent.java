@@ -3,8 +3,9 @@ package seedu.address.commons.events.model;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyExpenditureTracker;
 
-/* indicates that the Expenditure Tracker has been changed */
+/** Indicates that the Expenditure Tracker has been changed*/
 public class ExpenditureTrackerChangedEvent extends BaseEvent {
+
     public final ReadOnlyExpenditureTracker data;
 
     public ExpenditureTrackerChangedEvent(ReadOnlyExpenditureTracker data) {
