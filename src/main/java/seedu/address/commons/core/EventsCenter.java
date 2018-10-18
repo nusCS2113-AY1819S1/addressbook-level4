@@ -2,9 +2,9 @@ package seedu.address.commons.core;
 
 import java.util.logging.Logger;
 
-import seedu.address.commons.events.BaseEvent;
-
 import com.google.common.eventbus.EventBus;
+
+import seedu.address.commons.events.BaseEvent;
 
 /**
  * Manages the event dispatching of the app.

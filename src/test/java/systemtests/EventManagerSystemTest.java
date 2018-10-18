@@ -18,14 +18,15 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import guitests.guihandles.CommandBoxHandle;
-import guitests.guihandles.EventListPanelHandle;
-import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.ResultDisplayHandle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+
+import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.EventListPanelHandle;
+import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.ResultDisplayHandle;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;

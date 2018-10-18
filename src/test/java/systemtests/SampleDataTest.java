@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import org.junit.Test;
+
 import seedu.address.model.EventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.util.SampleDataUtil;
