@@ -139,13 +139,14 @@ Edits the name of the 2nd person to be `Betsy Crower` and clears all existing ta
 === Locating persons: `find`
 
 Finds persons in the displayed list whose names/tags contain any of the given keywords. +
-Format: `find [\tag tags]  KEYWORD [MORE_KEYWORDS]`
+Format: `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]`
 
 ****
 * The search is case insensitive. e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * For back-to-back find commands, the most recent find command will search according to the previous find command
+* The `\exclude` option will exclude any names/tags with the specified keywords
 ****
 
 Examples:
@@ -155,10 +156,15 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
+* `find \exclude Tom` +
+Returns any person without the name `Tom`.
+
 * `find \tag President` +
 Returns any person with the tag `President`
 * `find \tag President Vice_President` +
 Returns any person with the tag `President` OR `Vice_President`.
+* `find \tag \exclude President` +
+Returns any person without the tag `President`.
 ====
 **Search Pruning feature with find commands:**
 
@@ -382,7 +388,7 @@ e.g. `createaccount A1234567M zaq1xsw2cde3`
 e.g. `delete 3`
 * *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find [\tag tags] KEYWORD [MORE_KEYWORDS]` +
+* *Find* : `find [\tag] [\exclude] KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake` +
 e.g `find \tag President`
 * *List* : `list`
