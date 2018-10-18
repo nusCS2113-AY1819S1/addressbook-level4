@@ -196,11 +196,35 @@ public class ParserUtil {
      * @return the list of {@code Index} to return.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    public static ArrayList<Index> parseMultipleIndex(String oneBasedIndex) throws ParseException {
+    private static ArrayList<Index> parseMultipleIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
         if (!StringUtil.areNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return StringUtil.tokenizeIndexWithSpace(oneBasedIndex);
+    }
+
+    private static ArrayList<Index> parseMultipleRangeIndex(String oneBasedIndex) throws ParseException {
+
+    }
+
+    private static ArrayList<Index> parseRangeIndex(String oneBasedIndex) throws ParseException {
+        String trimmedIndex = oneBasedIndex.trim();
+        ArrayList<Index> output = new ArrayList<>();
+
+        StringUtil.tokenizeIndexWithRange(oneBasedIndex);
+
+        return  output;
+    }
+
+    public static ArrayList<Index> parseSelectIndex(String oneBasedIndex) throws ParseException {
+
+        // Perform a syntax check here
+
+        if (!oneBasedIndex.contains("-")) {
+            return  parseMultipleIndex(oneBasedIndex)
+        } else {
+            return parseMultipleRangeIndex(oneBasedIndex);
+        }
     }
 }

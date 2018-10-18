@@ -81,6 +81,15 @@ public class StringUtil {
         return output;
     }
 
+    public static ArrayList<Index> tokenizeIndexWithRange(String input) {
+        ArrayList<Index> output = new ArrayList<>();
+        StringTokenizer tokenizer = new StringTokenizer(input, "-");
+        while (tokenizer.hasMoreTokens()) {
+            int start = Integer.valueOf(tokenizer.nextToken());
+            int end = Integer.valueOf(tokenizer.nextToken());
+        }
+    }
+
     public static boolean areNonZeroUnsignedInteger(String input) {
         requireNonNull(input);
 
