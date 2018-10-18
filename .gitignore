@@ -5,6 +5,7 @@ build/
 .idea/
 lib/*
 *.iml
+*.xlsx
 *.log
 *.log.*
 *.csv
