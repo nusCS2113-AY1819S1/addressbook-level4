@@ -17,16 +17,13 @@ import seedu.address.logic.commands.UndoCommand;
 
 /**
  * Suggests a command with the closest match to the inputted string.
+ * @author elstonayx
  */
 public class CommandSuggestion {
     public static final String SUGGESTION_HEADER = "Did you mean: %1$s?";
-    public static final String TEMPORARY_SUGGESTION = "Suggestion not implemented";
-    public static final String NO_SUGGESTION = "No suggestion";
+    public static final String NO_SUGGESTION = "No suggestions available.";
     public static final String TEMPORARY_COMPARISON_COMMAND = "test";
-    public static final int ARRAY_PADDING = 1;
-    public static final int DELETION_COST = 1;
-    public static final int ADDITION_COST = 1;
-    public static final int SUBSTITUTION_COST = 1;
+    public static final int WORD_DISTANCE_LIMIT = 3;
 
     private static final String[] CommandList;
 
@@ -53,54 +50,24 @@ public class CommandSuggestion {
     /**
      * Parses the command input and passes it to the getNearestCommand for comparison of commands.
      * Returns formatted string of the suggestion header and closest matched command, else returns nothing.
-     * @param userCommand A {@code String}
+     * @param userCommand A {@code String} object of the user's command input
      * @return A {@code String} object containing the suggestion header and suggested similar command.
      */
     public String getSuggestion(String userCommand) {
-        return String.format(SUGGESTION_HEADER, getNearestCommand(userCommand));
+        String suggestedCommand = getNearestCommand(userCommand);
+        if(suggestedCommand.isEmpty()) {
+            return NO_SUGGESTION;
+        } else {
+            return String.format(SUGGESTION_HEADER, suggestedCommand);
+        }
     }
 
     private String getNearestCommand(String userCommand) {
-        return Integer.toString(editDistance(userCommand, TEMPORARY_COMPARISON_COMMAND));
-        /*
-        if(editDistance(userCommand, TEMPORARY_COMPARISON_COMMAND) == 1) {
-            return TEMPORARY_SUGGESTION;
+        int distance = new StringSimilarity().editDistance(userCommand, TEMPORARY_COMPARISON_COMMAND);
+        if (distance <= WORD_DISTANCE_LIMIT) {
+            return Integer.toString(distance);
         } else {
-            return NO_SUGGESTION;
+            return "";
         }
-        */
     }
-
-    private int editDistance(String userCommand, String commandToCheck) {
-        int[][] distanceArray = new int[userCommand.length() + ARRAY_PADDING][commandToCheck.length() + ARRAY_PADDING];
-
-        for(int i = 0; i < userCommand.length() + ARRAY_PADDING; i++) {
-            distanceArray[i][0] = i;
-        }
-
-        for(int j = 0; j < commandToCheck.length() + ARRAY_PADDING; j++) {
-            distanceArray[0][j] = j;
-        }
-
-        for(int i = 0; i < userCommand.length(); i++) {
-            for(int j = 0; j < commandToCheck.length(); j++) {
-                if(userCommand.charAt(i) == commandToCheck.charAt(j)) {
-                    distanceArray[i + ARRAY_PADDING][j + ARRAY_PADDING] = distanceArray[i][j];
-                } else {
-                    distanceArray[i + ARRAY_PADDING][j + ARRAY_PADDING] = minimum(
-                            distanceArray[i + ARRAY_PADDING][j] + DELETION_COST,
-                            distanceArray[i][j + ARRAY_PADDING] + ADDITION_COST,
-                            distanceArray[i][j] + SUBSTITUTION_COST
-                    );
-                }
-            }
-        }
-
-        return distanceArray[userCommand.length()][commandToCheck.length()];
-    }
-
-    private int minimum(int a, int b, int c) {
-        return Math.min(Math.min(a, b), c);
-    }
-
 }
