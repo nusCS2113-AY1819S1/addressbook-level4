@@ -10,6 +10,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ExpenditureTrackerChangedEvent;
 import seedu.address.commons.events.model.TodoListChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
@@ -25,14 +26,17 @@ public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private ExpenditureTrackerStorage expenditureTrackerStorage;
     private TodoListStorage todoListStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, TodoListStorage todoListStorage,
+    public StorageManager(AddressBookStorage addressBookStorage, ExpenditureTrackerStorage expenditureTrackerStorage,
+                          TodoListStorage todoListStorage,
                           UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
+        this.expenditureTrackerStorage = expenditureTrackerStorage;
         this.todoListStorage = todoListStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
@@ -63,11 +67,6 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Path getExpenditureTrackerFilePath() {
-        return addressBookStorage.getExpenditureTrackerFilePath();
-    }
-
-    @Override
     public Optional<ReadOnlyAddressBook> readAddressBook() throws DataConversionException, IOException {
         return readAddressBook(addressBookStorage.getAddressBookFilePath());
     }
@@ -76,18 +75,6 @@ public class StorageManager extends ComponentManager implements Storage {
     public Optional<ReadOnlyAddressBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read AB data from file: " + filePath);
         return addressBookStorage.readAddressBook(filePath);
-    }
-
-    @Override
-    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker() throws DataConversionException, IOException {
-        return readExpenditureTracker(addressBookStorage.getExpenditureTrackerFilePath());
-    }
-
-    @Override
-    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path expenditureFilePath)
-            throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + expenditureFilePath);
-        return addressBookStorage.readExpenditureTracker(expenditureFilePath);
     }
 
     @Override
@@ -101,6 +88,36 @@ public class StorageManager extends ComponentManager implements Storage {
         addressBookStorage.saveAddressBook(addressBook, filePath);
     }
 
+
+    // ================ ExpenditureTracker methods ==============================
+
+    @Override
+    public Path getExpenditureTrackerFilePath() {
+        return expenditureTrackerStorage.getExpenditureTrackerFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker() throws DataConversionException, IOException {
+        return readExpenditureTracker(expenditureTrackerStorage.getExpenditureTrackerFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path expenditureFilePath)
+            throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + expenditureFilePath);
+        return expenditureTrackerStorage.readExpenditureTracker(expenditureFilePath);
+    }
+
+    @Override
+    public void saveExpenditureTracker(ReadOnlyExpenditureTracker expenditureTracker) throws IOException {
+        saveExpenditureTracker(expenditureTracker, expenditureTrackerStorage.getExpenditureTrackerFilePath());
+    }
+
+    @Override
+    public void saveExpenditureTracker(ReadOnlyExpenditureTracker expenditureTracker, Path filePath) throws IOException {
+        logger.fine("Attempting to write to ET data file: " + filePath);
+        expenditureTrackerStorage.saveExpenditureTracker(expenditureTracker, filePath);
+    }
 
     // ================ TodoList methods ==============================
 
@@ -138,6 +155,17 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to AB file"));
         try {
             saveAddressBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleExpenditureTrackerChangedEvent(ExpenditureTrackerChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to ET file"));
+        try {
+            saveExpenditureTracker(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

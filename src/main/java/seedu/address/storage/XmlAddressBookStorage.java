@@ -24,17 +24,12 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
 
     private Path filePath;
-    //private Path expenditureFilePath;
 
     public XmlAddressBookStorage(Path filePath) {
         this.filePath = filePath;
     }
 
     public Path getAddressBookFilePath() {
-        return filePath;
-    }
-
-    public Path getExpenditureTrackerFilePath() {
         return filePath;
     }
 
@@ -62,36 +57,6 @@ public class XmlAddressBookStorage implements AddressBookStorage {
             return Optional.of(xmlAddressBook.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
-            throw new DataConversionException(ive);
-        }
-    }
-
-    @Override
-    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker() throws DataConversionException, IOException {
-        return readExpenditureTracker(filePath);
-    }
-
-    /**
-     * Similar to {@link #readExpenditureTracker()}
-     * @param expenditureFilePath location of the data. Cannot be null
-     * @throws DataConversionException if the file is not in the correct format.
-     */
-    public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path expenditureFilePath)
-            throws DataConversionException,
-            FileNotFoundException {
-        requireNonNull(expenditureFilePath);
-
-        if (!Files.exists(filePath)) {
-            logger.info("AddressBook file " + expenditureFilePath + " not found");
-            return Optional.empty();
-        }
-
-        XmlSerializableExpenditureTracker xmlExpenditureTracker =
-                XmlExpenditureFileStorage.loadDataFromSaveFile(expenditureFilePath);
-        try {
-            return Optional.of(xmlExpenditureTracker.toModelType());
-        } catch (IllegalValueException ive) {
-            logger.info("Illegal values found in " + expenditureFilePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
         }
     }

@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ExpenditureTrackerChangedEvent;
 import seedu.address.commons.events.model.TodoListChangedEvent;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.person.Person;
@@ -82,6 +83,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** Raises an event to indicate the model has changed */
+    private void indicateExpenditureTrackerChanged() {
+        raise(new ExpenditureTrackerChangedEvent(versionedExpenditureTracker));
+    }
+
+    /** Raises an event to indicate the model has changed */
     private void indicateTodoListChanged() {
         raise(new TodoListChangedEvent(versionedTodoList));
     }
@@ -119,6 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteExpenditure(Expenditure target) {
         versionedExpenditureTracker.removeExpenditure(target);
+        indicateExpenditureTrackerChanged();
     }
 
     @Override
@@ -139,7 +146,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void addExpenditure(Expenditure expenditure) {
         versionedExpenditureTracker.addExpenditure(expenditure);
         updateFilteredExpenditureList(PREDICATE_SHOW_ALL_EXPENDITURES);
-        indicateAddressBookChanged();
+        indicateExpenditureTrackerChanged();
     }
 
     @Override
@@ -163,7 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedExpenditure);
 
         versionedExpenditureTracker.updateExpenditure(target, editedExpenditure);
-        indicateAddressBookChanged();
+        indicateExpenditureTrackerChanged();
     }
 
     @Override

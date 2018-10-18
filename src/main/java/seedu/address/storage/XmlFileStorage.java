@@ -37,6 +37,30 @@ public class XmlFileStorage {
     }
 
     /**
+     * Saves the given expendituretracker data to the specified file.
+     */
+    public static void saveExpenditureTrackerDataToFile(Path file, XmlSerializableExpenditureTracker expenditureTracker)
+            throws FileNotFoundException {
+        try {
+            XmlUtil.saveDataToFile(file, expenditureTracker);
+        } catch (JAXBException e) {
+            throw new AssertionError("Unexpected exception " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * Returns expenditure tracker in the file or an empty expenditure tracker
+     */
+    public static XmlSerializableExpenditureTracker loadExpenditureTrackerDataFromSaveFile(Path file) throws DataConversionException,
+            FileNotFoundException {
+        try {
+            return XmlUtil.getDataFromFile(file, XmlSerializableExpenditureTracker.class);
+        } catch (JAXBException e) {
+            throw new DataConversionException(e);
+        }
+    }
+
+    /**
      * Saves the given todolist data to the specified file.
      */
     public static void saveTodoListDataToFile(Path file, XmlSerializableTodoList todoList)
