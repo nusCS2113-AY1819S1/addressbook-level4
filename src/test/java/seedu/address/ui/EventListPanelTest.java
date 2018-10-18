@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import static java.time.Duration.ofMillis;
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalEvents.getTypicalEvents;

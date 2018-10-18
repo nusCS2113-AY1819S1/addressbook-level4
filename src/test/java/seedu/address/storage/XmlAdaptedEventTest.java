@@ -1,5 +1,6 @@
 package seedu.address.storage;
 
+import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedEvent.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.TypicalEvents.BENSON;
 
