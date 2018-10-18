@@ -391,6 +391,108 @@ image::BudgetCommandSequenceDiagram.png[width="800"]
 //end::budget[]
 
 // tag::undoredo[]
+=== Search Pruning Feature
+
+The Search Pruning mechanism is facilitated by the `SearchHistoryManager`.
+Within `SearchHistoryManager` is `searchHistoryStack`, storing `Predicate` objects.
+The `Predicate` objects are used to filter `filteredListPerson` in ModelManager.
+
+A main `SearchHistoryManager` object named `searchHistoryManager` is stored within `ModelManager` and you could access `searchHistoryManager` by calling the
+getter method `getSearchHistoryManager()`.
+
+IMPORTANT: `searchHistoryManger` is only meant for the filtering of
+`Person` objects and Predicates irrelevant to the filtering of `Person` objects could not be stored in it.
+If you want to utilize `SearchHistoryManager` for your own use case, you can initialize a new SearchHistoryManager object
+by calling its default constructor.
+
+==== Current Implementation
+
+The main implementation behind SearchHistoryManager is a Stack Data Structure and the following 3 methods of `SearchHistoryManager` are exposed for your usage +
+
+* `executeNewSearch(Predicate<T> predicate)` +
+updates system search logic to the next state and returns a `Predicate` object storing the system search logic after the update.
+* `revertLastSearch()` +
+reverts system search logic to the previous state and returns a `Predicate` object storing
+                       the system search logic after revert.
+* `clearSearchHistory()` +
+clears all system search logic from in-app memory. +
+
+Given below are illustrations to help you understand how each method works internally
+
+ In the diagrams, UP is the short-form for User Predicate and SP is the short-form for System Predicate.
+ . User Predicate stores the logic specified by the user. This will not be used directly to filter the
+   list.
+ . System Predicate stores the search logic for the system which will be used to filter the list.
+
+NOTE: User Predicate and System Predicate are not actual Classes, they are simply there to help simplify the explanation.
+In the actual implementation, there is no way to differentiate one Predicate from the other
+
+'''
+
+`executeNewSearch(Predicate<T> predicate)` +
+
+Upon calling this method, there will be two different situations +
+
+* Situation 1: `searchHistoryStack` is empty +
+Upon receiving a new User Predicate, SearchHistoryManager will simply push the new Predicate into `searchHistoryStack`
+as a System Predicate which will be used to filter the list.
+
+image::executeNewSearchEmptyStack.png[width="800"]
+
+* Situation 2: `searchHistoryStack` is not empty +
+Before pushing the new `Predicate` into the stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the stack.
+After retrieving it, it will call the `and()` method with the User Predicate, creating a new System Predicate which will then be pushed into the top
+of the stack.
+
+image::executeNewSearchNonEmptyStack.png[width="800"]
+'''
+`revertLastSearch()` +
+
+This method will pop the System Predicate at the top of the stack. +
+In the event that the stack is already empty, this method will throw `EmptyStackException`.
+
+image::undoSearchHistoryStack.png[width="800"]
+'''
+`clearSearchHistory()` +
+
+This method will simply empty the stack.
+
+image::clearSearchHistoryStack.png[width="800"]
+
+'''
+The following sequence diagrams shows you how `find` and `undosearch` commands utilize `SearchHistoryManager` to perform Search Pruning.
+
+ - `find` command +
+
+image::SearchPruningSequenceDiagram.png[width="800"]
+
+ - `undosearch` command +
+
+image::undoSearchSequenceDiagram.png[width="800"]
+
+
+==== Design Considerations
+
+Aspect: What data is stored in search history stack +
+
+* **Alternative 1(current choice):**  Save a Stack of Predicates
+** Pros:
+    . Does not need to store the data in search history explicitly which saves memory +
+    . Any form of Search Pruning done with Predicates can reuse `SearchHistoryManager` class +
+
+** Cons:
+. Need to understand how `Predicate` works before utilizing this Class.
+. `Predicate` objects by itself does not perform the Search Pruning. In NUSSU Connect, we have to pass the `Predicate`
+   into a `FilteredList<T>` object to do the Search Pruning.
+
+* ** Alternative 2: ** Save a Stack of Lists containing Person objects in search history
+** Pros:
+    . It is easy to understand that we are filtering according to Person objects from `SearchHistoryManager` class
+
+** Cons:
+    . More memory is required as Person objects has to be duplicated multiple times into a new List.
+    . Class is inextensible to store other objects other than those from a Person classes.
+
 
 === Add Skill Level Command
 
@@ -442,7 +544,6 @@ We considered two different ways to implement the Skill Class.
 information during addition of personal information.
 * Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
 * Another is to enhance the storage such that multiple skills can be added per person.
-
 
 === Undo/Redo feature
 ==== Current Implementation
