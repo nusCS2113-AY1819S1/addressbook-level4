@@ -41,8 +41,8 @@ public class EditCompanyCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_COMPANY_NAME + "KFC "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "johndoe@example.com";
+            + PREFIX_PHONE + "6222 6111 "
+            + PREFIX_EMAIL + "kfc.ops.feedback@kfc.com.sg";
 
     public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited Company: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
