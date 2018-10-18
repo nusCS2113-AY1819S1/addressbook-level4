@@ -438,9 +438,9 @@ Upon receiving a new `Predicate` defined by the user, SearchHistoryManager will 
 image::executeNewSearchEmptyStack.png[width="800"]
 
 * Situation 2: `searchHistoryStack` is not empty +
-Before pushing the new `Predicate` into the stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the Stack.
+Before pushing the new `Predicate` into the stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the stack.
 After retrieving it, it will call the `and()` method with the User Predicate, creating a new System Predicate which will then be pushed into the top
-of the Stack.
+of the stack.
 
 image::executeNewSearchNonEmptyStack.png[width="800"]
 '''
