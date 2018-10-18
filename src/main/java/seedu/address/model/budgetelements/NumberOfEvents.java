@@ -12,7 +12,7 @@ public class NumberOfEvents {
 
     public static final String MESSAGE_NUMBER_OF_EVENTS_CONSTRAINTS =
             "Number of events should only contain numbers, and it can be any number including zero";
-    public static final String NUMBER_OF_EVENTS_VALIDATION_REGEX = "\\d";
+    public static final String NUMBER_OF_EVENTS_VALIDATION_REGEX = "\\d{1,}";
     public final String value;
 
     /**

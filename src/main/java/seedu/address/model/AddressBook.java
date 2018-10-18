@@ -5,6 +5,10 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.budgetelements.UniqueClubsList;
+import seedu.address.model.clubbudget.FinalClubBudget;
+import seedu.address.model.clubbudget.UniqueClubBudgetList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 
@@ -25,6 +29,16 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+    }
+
+    private final UniqueClubsList clubs;
+    {
+        clubs = new UniqueClubsList();
+    }
+
+    private final UniqueClubBudgetList clubBudgets;
+    {
+        clubBudgets = new UniqueClubBudgetList();
     }
 
     public AddressBook() {}
@@ -93,6 +107,39 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.remove(key);
     }
 
+    /**
+     * Returns true if a club with the same identity as {@code club} exists in the address book.
+     */
+    public boolean hasClub(ClubBudgetElements club) {
+        requireNonNull(club);
+        return clubs.contains(club);
+    }
+
+    /**
+     * Adds a club to the address book.
+     * The club must not already exist in the address book.
+     */
+    public void addClub(ClubBudgetElements c) {
+        clubs.add(c);
+    }
+
+    /**
+     * Returns true if a club budget with the same identity as {@code clubBudget} exists in the address book.
+     */
+    public boolean hasClubBudget(FinalClubBudget clubBudget) {
+        requireNonNull(clubBudget);
+        return clubBudgets.contains(clubBudget);
+    }
+
+    /**
+     * Adds a club budget to the address book.
+     * The club budget must not already exist in the address book.
+     */
+    public void addClubBudget(FinalClubBudget c) {
+        clubBudgets.add(c);
+    }
+
+
     //// util methods
 
     @Override
@@ -105,6 +152,14 @@ public class AddressBook implements ReadOnlyAddressBook {
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
+
+    @Override
+    public ObservableList<ClubBudgetElements> getClubsList() {
+        return clubs.asUnmodifiableObservableList(); }
+
+    @Override
+    public ObservableList<FinalClubBudget> getClubBudgetsList() {
+        return clubBudgets.asUnmodifiableObservableList(); }
 
     @Override
     public boolean equals(Object other) {

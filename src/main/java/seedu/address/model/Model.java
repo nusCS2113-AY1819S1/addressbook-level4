@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.budgetelements.ClubBudgetElements;
+import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
 import seedu.address.model.searchhistory.SearchHistoryManager;
@@ -15,6 +17,10 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     Predicate<LoginDetails> PREDICATE_SHOW_ALL_ACCOUNTS = unused -> true;
+
+    Predicate<ClubBudgetElements> PREDICATE_SHOW_ALL_CLUBS = unused -> true;
+
+    Predicate<FinalClubBudget> PREDICATE_SHOW_ALL_CLUB_BUDGETS = unused -> true;
     /**
      * Creates an account for address book.
      * The account must not already exist in the address book.
@@ -66,6 +72,14 @@ public interface Model {
     ObservableList<Person> getFilteredPersonList();
 
     /**
+     * Returns an unmodifiable view of the filtered clubs list */
+    ObservableList<ClubBudgetElements> getFilteredClubsList();
+
+    /**
+     * Returns an unmodifiable view of the filtered club budgets list */
+    ObservableList<FinalClubBudget> getFilteredClubBudgetsList();
+
+    /**
      * Updates the filter of the filtered login details list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
@@ -76,6 +90,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates the filter of the filtered club budgets list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredClubBudgetsList(Predicate<FinalClubBudget> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -103,7 +123,29 @@ public interface Model {
     void commitAddressBook();
 
     /**
-     * Returns the model's SearchHistoryManager
+     * Returns true if a club with the same identity as {@code club} exists in the address book.
+     */
+    boolean hasClub(ClubBudgetElements club);
+
+    /**
+     * Adds the given club.
+     * @code club} must not already exist in the address book.
+     */
+    void addClub(ClubBudgetElements club);
+
+    /**
+     * Returns true if a club budget with the same identity as {@code clubBudget} exists in the address book.
+     */
+    boolean hasClubBudget(FinalClubBudget clubBudget);
+
+    /**
+     * Adds the given club budget.
+     * @code clubBudget} must not already exist in the address book.
+     */
+    void addClubBudget(FinalClubBudget clubBudget);
+
+    /** Returns the model's SearchHistoryManager
      */
     SearchHistoryManager getSearchHistoryManager();
+
 }

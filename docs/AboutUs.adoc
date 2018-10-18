@@ -4,7 +4,7 @@
 :imagesDir: images
 :stylesDir: stylesheets
 
-image::NUSSU-Connect-Banner.jpg[width="680", align=center"]
+image::NUSSU-ConnectPNGBanner.png[width="680", align=center"]
 NUSSU-Connect is an application developed to help NUSSU manage people and
 related functions relating to HR and Finance needs. It is currently a work in progress.
 https://se-edu.github.io/docs/Team.html[F09-1] team. +
