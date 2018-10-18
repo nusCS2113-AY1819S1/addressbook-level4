@@ -414,6 +414,14 @@ Step 4. After parsing, the command is sent to the `Model` which alters the `Pers
 
 Step 5. The result is encapsulated as a `CommandResult` object which is passed back to the `UI`.
 
+
+Before executing the command:
+
+image::aslbefore.png[width="800"]
+After executing the command:
+
+image::aslafter.png[width="800"]
+
 ==== Alternate implementations
 
 We considered two different ways to implement the Skill Class.
