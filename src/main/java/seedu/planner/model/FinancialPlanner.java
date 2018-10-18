@@ -132,6 +132,12 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         records.remove(key);
     }
 
+    /**
+     * Sorts the records in this {@code FinancialPlanner}.
+     */
+    public void sortRecords(String category, Boolean ascending) {
+        records.sortRecords(category, ascending);
+    }
 
     //// summary related operations
     /**
@@ -203,7 +209,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void removeLimit(Limit limitin) {
         limits.remove(limitin); }
 
-
+    //// util methods
 
     @Override
     public String toString() {
