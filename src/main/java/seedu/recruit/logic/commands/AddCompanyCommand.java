@@ -16,7 +16,7 @@ import seedu.recruit.model.company.Company;
  * Adds a company to the CompanyBook.
  */
 
-public class AddCompanyCommand  extends Command {
+public class AddCompanyCommand extends Command {
 
     public static final String COMMAND_WORD = "addC";
 
