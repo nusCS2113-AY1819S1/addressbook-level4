@@ -197,24 +197,26 @@ The `undo` command fails as there are no undoable commands executed previously.
 === Lost an item: `lost`
 
 Lost an item From the stock list +
-Format: `lost n/NAME [q/QUANTITY]`
+Format: `lost INDEX [q/QUANTITY]`
 
 
 
 Examples:
 
-* `lost n/Arduino q/25`
+* `lost 1 q/25`+
+this would result in 25 Arduinos to be lost
 
 === Found an item: `found`
 
 Found an item From the Lost&Found List +
-Format: `found n/NAME [q/QUANTITY]`
+Format: `found INDEX [q/QUANTITY]`
 
 
 
 Examples:
 
-* `found n/Arduino q/25`
+* `found 1 q/25`+
+this would result in 25 Arduinos to be found
 
 === Listing Lost&Found List: `lost&found`
 
