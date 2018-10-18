@@ -108,6 +108,12 @@ public class RecruitBookParser {
 
             case ClearCompanyBookCommand.COMMAND_WORD:
                 return new ClearCompanyBookCommand();
+                
+            case EditCompanyCommand.COMMAND_WORD:
+                return new EditCompanyCommandParser().parse(arguments);
+
+            case SelectCommand.COMMAND_WORD:
+                return new SelectCommandParser().parse(arguments);
 
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
