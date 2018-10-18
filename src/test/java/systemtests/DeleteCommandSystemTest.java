@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.CommandSuggestion;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
@@ -108,7 +109,8 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(DeleteCommand.COMMAND_WORD + " 1 abc", MESSAGE_INVALID_DELETE_COMMAND_FORMAT);
 
         /* Case: mixed case command word -> rejected */
-        assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND);
+        assertCommandFailure("DelETE 1", MESSAGE_UNKNOWN_COMMAND
+                + System.lineSeparator() + CommandSuggestion.SUGGESTION_NOT_IMPLEMENTED);
     }
 
     /**
