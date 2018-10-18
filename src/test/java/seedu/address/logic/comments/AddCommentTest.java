@@ -1,5 +1,6 @@
 package seedu.address.logic.comments;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -34,8 +35,19 @@ class AddCommentTest {
                      + "<li>hi</li>\n"
                      + "</ol>";
     @Test
-    void addComment() throws Exception {
+    void addComment_correctInput_success() {
         AddComment test = new AddComment(comments);
         assertEquals(testcase, test.addComment("hi"));
+    }
+    @Test
+    void addComment_incorrectInput_failure() {
+        AddComment test = new AddComment(comments);
+        assertNotEquals(testcase, test.addComment("i"));
+    }
+
+    @Test
+    void getInput_correctInput_success() {
+        AddComment test = new AddComment(comments);
+        assertEquals(comments, test.getInput());
     }
 }
