@@ -31,7 +31,7 @@ public class LoginUserIdPasswordCommandParser implements Parser<LoginCommand> {
         }
 
         String[] keywords = trimmedArgs.split("\\s+");
-        List<String> keywordsList = new ArrayList<String>(Arrays.asList(keywords));
+        List<String> keywordsList = new ArrayList<>(Arrays.asList(keywords));
         return new LoginUserIdPasswordCommand(new UserIdContainsKeywordsPredicate(keywordsList),
                                               new UserPasswordContainsKeywordsPredicate(keywordsList),
                                               new UserRoleContainsKeywordsPredicate(keywordsList));

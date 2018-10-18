@@ -21,16 +21,16 @@ public abstract class LoginCommand extends Command {
 
     private SearchHistoryManager searchHistoryManager = new SearchHistoryManager();
 
-    protected Predicate getMostUpdatedIdPredicate(Predicate predicate) {
+    Predicate getMostUpdatedIdPredicate(Predicate predicate) {
         searchHistoryManager.clearSearchHistory();
         return searchHistoryManager.executeNewSearch(predicate);
     }
 
-    protected Predicate getMostUpdatedPasswordPredicate(Predicate predicate) {
+    Predicate getMostUpdatedPasswordPredicate(Predicate predicate) {
         return searchHistoryManager.executeNewSearch(predicate);
     }
 
-    protected Predicate getMostUpdatedRolePredicate(Predicate predicate) {
+    Predicate getMostUpdatedRolePredicate(Predicate predicate) {
         return searchHistoryManager.executeNewSearch(predicate);
     }
 }

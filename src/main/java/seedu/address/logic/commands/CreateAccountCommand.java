@@ -21,7 +21,7 @@ public class CreateAccountCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "New account created: %1$s";
-    public static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the login book";
+    private static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the login book";
 
     private final LoginDetails toAdd;
     private final UserIdContainsKeywordsPredicate idPredicate;

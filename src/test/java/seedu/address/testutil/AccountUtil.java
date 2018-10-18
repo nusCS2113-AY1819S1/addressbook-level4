@@ -1,8 +1,5 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERPASSWORD;
-
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.model.login.LoginDetails;
 
@@ -23,8 +20,8 @@ public class AccountUtil {
      */
     public static String getAccountDetails(LoginDetails loginDetails) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_USERID + loginDetails.getUserId().fullUserId + " ");
-        sb.append(PREFIX_USERPASSWORD + loginDetails.getUserPassword().fullUserPassword + " ");
+        sb.append(loginDetails.getUserId().fullUserId + " ");
+        sb.append(loginDetails.getUserPassword().fullUserPassword + " ");
         return sb.toString();
     }
 

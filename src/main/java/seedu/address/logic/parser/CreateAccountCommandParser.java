@@ -1,9 +1,9 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.model.login.UserId.MESSAGE_USERID_CONSTRAINTS;
-import static seedu.address.model.login.UserPassword.MESSAGE_USERPASSWORD_CONSTRAINTS;
-import static seedu.address.model.login.UserRole.MESSAGE_USERROLE_CONSTRAINTS;
+import static seedu.address.logic.parser.ParserUtil.parseUserId;
+import static seedu.address.logic.parser.ParserUtil.parseUserPassword;
+import static seedu.address.logic.parser.ParserUtil.parseUserRole;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.StringTokenizer;
 
 import seedu.address.logic.commands.CreateAccountCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
@@ -28,9 +27,9 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
     /**
      * Parses the given {@code String} of arguments in the context of the CreateAccountCommand
      * and returns an CreateAccountCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     * @throws ParseException if the user input does not conform to the expected format
      */
-    public CreateAccountCommand parse(String args) throws ParseException, CommandException {
+    public CreateAccountCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
@@ -38,36 +37,31 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
         }
 
         String[] keywords = trimmedArgs.split("\\s+");
-        List<String> keywordsList = new ArrayList<String>(Arrays.asList(keywords));
+        List<String> keywordsList = new ArrayList<>(Arrays.asList(keywords));
+        LoginDetails details = extractLoginDetailsFromInput(args);
+        return new CreateAccountCommand(new UserIdContainsKeywordsPredicate(keywordsList), details);
+    }
 
+    /**
+     * Constructs and returns a LoginDetails object from the input of user account credentials
+     * @param args from input of user account credentials
+     * @return LoginDetails object constructed from parsed user input consisting of userId, userPassword and userRole
+     * @throws ParseException if the user input does not conform to the expected format
+     */
+    public LoginDetails extractLoginDetailsFromInput(String args) throws ParseException {
         StringTokenizer st = new StringTokenizer(args);
-
         UserId userId = null;
         UserPassword userPassword = null;
         UserRole userRole = null;
         for (int i = 1; st.hasMoreTokens(); i++) {
             if (i == 2) {
-                String tokenUserId = st.nextToken();
-                if (!UserId.isValidUserId(tokenUserId)) {
-                    throw new CommandException(MESSAGE_USERID_CONSTRAINTS);
-                }
-                userId = new UserId(tokenUserId);
+                userId = parseUserId(st.nextToken());
             } else if (i == 3) {
-                String tokenUserPassword = st.nextToken();
-                if (!UserPassword.isValidUserPassword(tokenUserPassword)) {
-                    throw new CommandException(MESSAGE_USERPASSWORD_CONSTRAINTS);
-                }
-                userPassword = new UserPassword(tokenUserPassword);
+                userPassword = parseUserPassword(st.nextToken());
             } else if (i == 4) {
-                String tokenUserRole = st.nextToken();
-                if (!UserRole.isValidUserRole(tokenUserRole)) {
-                    throw new CommandException(MESSAGE_USERROLE_CONSTRAINTS);
-                }
-                userRole = new UserRole(tokenUserRole);
+                userRole = parseUserRole(st.nextToken());
             }
         }
-        LoginDetails details = new LoginDetails(userId, userPassword, userRole);
-
-        return new CreateAccountCommand(new UserIdContainsKeywordsPredicate(keywordsList), details);
+        return new LoginDetails(userId, userPassword, userRole);
     }
 }
