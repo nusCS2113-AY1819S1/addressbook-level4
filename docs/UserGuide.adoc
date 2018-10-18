@@ -18,7 +18,13 @@ By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-BookInventory is catered for a variety of users, ranging from inventory keeper, accountant to students. Inventory Keeper is able to increase/decrease stocks for each book. The accountant is able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, BookInventory is optimized for those who prefer to work with Command Line Interface (CLI) while stil having the benefits of a GraphicalUser Interface (GUI). Enjoy!
+BookInventory is catered for a variety of users, ranging from inventory keeper,
+accountant to students. Inventory Keeper is able to increase/decrease stocks for each book.
+The accountant is able to check the total revenue and profits for individual books to make
+better decisions to improve the sales. Students will have access in checking the availability
+of materials related to their modules. Most importantly, BookInventory is optimized for those
+who prefer to work with Command Line Interface (CLI) while still having the benefits of a
+GraphicalUser Interface (GUI). Enjoy!
 
 == Getting Started
 
