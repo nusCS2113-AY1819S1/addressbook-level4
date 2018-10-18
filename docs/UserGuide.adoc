@@ -154,28 +154,42 @@ Examples:
 (Edits the MIN_AGE-MAX_AGE attribute to be from 20 to 30 years of age for the 1st job offer)
 
 === Locating candidates by search parameter : `find`
-
-Finds names of candidates from RecruitBook with a given search parameter. +
-Format: `find <tag>/KEYWORD` +
+==== Finds names of candidates from RecruitBook based on the search parameter.
+Format: `findc <tag>/KEYWORD` +
 Supported tags: `n/NAME`, `p/PHONE`, `e/EMAIL`, `a/ADDRESS`
 
 ****
-* The search is case insensitive. e.g `hans` will match `Hans`
+* The search is case insensitive e.g `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Candidates matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find n/john` +
+* `findc n/john` +
 (Returns any candidate having the name John)
 
-* `find p/98` +
+* `findc p/98` +
 (Returns any candidate having phone number with 98 inside)
 
-* `find e/helloworld@example.com` +
+* `findc e/helloworld@example.com` +
 (Returns any candidates having email helloworld@example.com)
+
+==== Finds names of companies from RecruitBook based on the searched name.
+Format: `findC NAME` +
+
+****
+* The search is case insentitive. e.g. `kfc` will match `KFC`
+* The order of the keywords does not matter. e.g. `Pte Ltd Hanbaobao` will match `Hanbaobao Pte Ltd`
+* Only full words will be matched e.g. `Mc` will not match `McDonalds`
+* Companies matching at least one keyword will be returned (i.e. `OR` search)
+****
+
+Examples:
+
+* `findC McDonalds` +
+(Returns any company having the name McDonalds)
 
 === Filtering by a specific tag : `filter`
 

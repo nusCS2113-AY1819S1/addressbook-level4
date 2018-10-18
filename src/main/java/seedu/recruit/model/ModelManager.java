@@ -14,6 +14,7 @@ import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
 import seedu.recruit.commons.util.EmailUtil;
+import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
@@ -115,6 +116,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedCandidate);
 
         versionedCandidateBook.updatePerson(target, editedCandidate);
+        indicateCandidateBookChanged();
+    }
+
+    @Override
+    public void sortCandidates(Prefix prefix) {
+        versionedCandidateBook.sortCandidates(prefix);
         indicateCandidateBookChanged();
     }
 
