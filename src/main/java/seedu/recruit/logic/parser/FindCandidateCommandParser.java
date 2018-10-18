@@ -2,8 +2,8 @@ package seedu.recruit.logic.parser;
 
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import seedu.recruit.logic.commands.FindCandidateCommand;
