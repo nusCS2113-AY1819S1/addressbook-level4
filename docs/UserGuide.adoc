@@ -80,10 +80,9 @@ Password is case-sensitive!
 === Creating a new user account: `createaccount`
 
 Creates a new user account in the address book. +
-Format: `createaccount user/USERID pass/PASSWORD`
+Format: `createaccount USERID PASSWORD`
 
 ****
-* user/ and pass/ are required prefixes before USERID and PASSWORD
 * USERID refers to student matriculation number
 * PASSWORD refers to any desired passphrases the new user wishes to have
 * The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabet, and there must be exactly 7 digits between the two `X`
@@ -92,7 +91,7 @@ Format: `createaccount user/USERID pass/PASSWORD`
 
 Examples:
 
-* `createaccount user/X1234567X pass/zaq1xsw2cde3` +
+* `createaccount X1234567X aq1xsw2cde3` +
 Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
 
 === Viewing help : `help`
@@ -160,31 +159,39 @@ Returns any person having names `Betsy`, `Tim`, or `John`
 Returns any person with the tag `President`
 * `find \tag President Vice_President` +
 Returns any person with the tag `President` OR `Vice_President`.
-****
-**Executing back-to-back find commands:**
+====
+**Search Pruning feature with find commands:**
 
-Assume that the displayed list contains 3 person initially.
+With the introduction of v1.1, NUSSU Connect now includes a Search Pruning feature that helps you
+trim the list of contacts with every successive find command. This lets you search through the list
+of contacts in a much more intuitive manner without the hassle of typing a long single line command that is
+usually error-prone.
+
+The concept of the Search Pruning feature will be further illustrated below.
+****
+*Assume that the original list of contacts contains the following 3 persons.*
 
 image::InitialList.png[align="left"]
 
-After executing the command "find \tag VIP" +
-the displayed list will contain 2 person, both with the tag 'VIP'
+*After executing the command `find \tag VIP`* +
+*the displayed list will now contain 2 persons, both with the tag 'VIP'*
 
 image::SecondList.png[align="left"]
 
-After executing the command "find \tag President" +
-it will filter according to the previous displayed list +
-the displayed list will contain 1 person, with the tag 'President' +
+*Executing another command `find \tag President`* +
+*will filter according to the previous displayed list instead of the original list* +
+*The displayed list now contains only 1 person with the tag 'President'* +
 
 image::ThirdList.png[align="left"]
 ****
+====
 
-=== Resetting Search History: `clearsearch`
+=== Undoing Search Commands: `undosearch`
 
-Resets search history back to the very initial stage before any find commands are executed
-Format: `clearsearch`
+Restores the displayed list to the state before you perform your most recent find command +
+Format: `undosearch`
 ****
-* To be used together with the find command
+* To be used together with Search Pruning feature
 ****
 
 === Deleting : `delete`
@@ -368,11 +375,7 @@ _{explain how the user can enable/disable data encryption}_
 * *Login* : `login USERID PASSWORD`
 e.g. `login A1234567M zaq1xsw2cde3`
 * *Create Account* : `createaccount USERID PASSWORD` +
-e.g. `createaccount user/A1234567M pass/zaq1xsw2cde3`
-* *Delete Account* : `deleteaccount USERID PASSWORD` +
-e.g. `deleteaccount A01234567M zaq1xsw2cde3`
-* *Change Password* : `changepassword USERID CURRENTPASSWORD NEWPASSWORD` +
-e.g. `changepassword A01234567M zaq1xsw2cde3 1qaz2wsx3edc`
+e.g. `createaccount A1234567M zaq1xsw2cde3`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 * *Clear* : `clear`
 * *Delete* : `delete [-a all][INDEX]` +

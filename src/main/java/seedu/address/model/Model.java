@@ -7,6 +7,7 @@ import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
  * The API of the Model component.
@@ -142,4 +143,9 @@ public interface Model {
      * @code clubBudget} must not already exist in the address book.
      */
     void addClubBudget(FinalClubBudget clubBudget);
+
+    /** Returns the model's SearchHistoryManager
+     */
+    SearchHistoryManager getSearchHistoryManager();
+
 }

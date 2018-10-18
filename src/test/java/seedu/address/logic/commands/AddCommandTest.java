@@ -27,6 +27,8 @@ import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 
 import seedu.address.model.person.Person;
+
+import seedu.address.model.searchhistory.SearchHistoryManager;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -205,6 +207,7 @@ public class AddCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
         @Override
         public boolean hasClub(ClubBudgetElements club) {
             throw new AssertionError("This method should not be called.");
@@ -220,6 +223,11 @@ public class AddCommandTest {
         }
         @Override
         public void addClubBudget(FinalClubBudget clubBudget) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public SearchHistoryManager getSearchHistoryManager() {
             throw new AssertionError("This method should not be called.");
         }
     }

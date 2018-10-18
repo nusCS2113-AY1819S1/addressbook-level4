@@ -17,6 +17,7 @@ import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
+import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -27,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedLoginBook versionedLoginBook;
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final SearchHistoryManager searchHistoryManager;
     private final FilteredList<LoginDetails> filteredLoginDetails;
     private final FilteredList<ClubBudgetElements> filteredClubs;
     private final FilteredList<FinalClubBudget> filteredClubBudgets;
@@ -46,6 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredClubs = new FilteredList<>(versionedAddressBook.getClubsList());
         filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
         filteredClubBudgets = new FilteredList<>(versionedAddressBook.getClubBudgetsList());
+        searchHistoryManager = new SearchHistoryManager();
     }
 
     public ModelManager() {
@@ -54,6 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
+        searchHistoryManager.clearSearchHistory();
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
@@ -233,6 +237,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public SearchHistoryManager getSearchHistoryManager() {
+        return searchHistoryManager;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {
@@ -247,6 +256,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && searchHistoryManager.equals(other.searchHistoryManager);
     }
 }
