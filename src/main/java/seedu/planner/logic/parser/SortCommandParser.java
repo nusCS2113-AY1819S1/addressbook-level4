@@ -34,7 +34,7 @@ public class SortCommandParser implements Parser<SortCommand> {
         String[] argList = trimmedArgs.split("\\s+");
 
         if ((argList.length) == ONLY_CATEGORY_OR_ORDER_SPECIFIED) {
-            if (!CATEGORY_SET.contains(argList[0].toLowerCase()) && !ORDER_SET.contains(argList[0].toLowerCase())){
+            if (!CATEGORY_SET.contains(argList[0].toLowerCase()) && !ORDER_SET.contains(argList[0].toLowerCase())) {
                 throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE)));
             }
             category = argList[0].toLowerCase();
