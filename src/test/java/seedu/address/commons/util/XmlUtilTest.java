@@ -55,7 +55,8 @@ public class XmlUtilTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedTag> VALID_GROUP_TAGS = Collections.singletonList(new XmlAdaptedTag("maths"));
     private static final List<XmlAdaptedPerson> VALID_PERSONS = Collections.singletonList(new XmlAdaptedPerson(ALICE));
-    private static final List<XmlAdaptedTest> VALID_TEST = Collections.singletonList(new XmlAdaptedTest("CS2113quiz","77"));
+    private static final List<XmlAdaptedTest> VALID_TEST =
+            Collections.singletonList(new XmlAdaptedTest("CS2113quiz", "77"));
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
