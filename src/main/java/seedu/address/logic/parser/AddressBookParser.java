@@ -81,6 +81,8 @@ public class AddressBookParser {
             case ChangeTimeSlotCommand.COMMAND_WORD:
                 return new ChangeTimeSlotCommandParser().parse(arguments);
 
+            case LoginIvleCommand.COMMAND_WORD:
+                return new LoginIvleCommandParser().parse(arguments);
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
