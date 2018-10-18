@@ -50,7 +50,7 @@ class DeleteCommentTest {
     void deleteComment_lineNotPresent_exceptionThrown() throws Exception {
         DeleteComment test = new DeleteComment(comments);
         try {
-            assertNotEquals(testcase, test.deleteComment( 15));
+            assertNotEquals(testcase, test.deleteComment(15));
         } catch (Exception e) {
             assertEquals("Line is invalid, try again", DeleteCommentCommand.MESSAGE_LINE_INVALID);
         }
