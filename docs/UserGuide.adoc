@@ -103,13 +103,69 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any person having names `Betsy`, `Tim`, or `John`
 
+=== Add a timeslot to your timetable: `addtime` (`at`)
+
+Adds a filled timeslot to your timetable.
+
+Format: `addtime Monday 10:00-12:00`
+
+****
+* Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of Monday.
+* If you type `10` for either the start or end time, FreeTime will assume that you mean `10:00`
+* You cannot add a timeslot that clashes with your timetable.
+****
+
+Examples:
+
+
+* `addtime Monday 10:00-12:00` +
+Adds the timeslot from 10:00 to 12:00 on Monday to your timetable.
+
+* `addtime Fri 13:00-14:00` +
+Adds the timeslot from 13:00 to 14:00 on Friday to your timetable.
+
+* `addtime Wed 17-18` +
+Adds the timeslot from 17:00 to 18:00 on Wednesday to your timetable.
+
+After adding a timeslot, you should see the following:
+
+image:AddTimeSuccess.png[width="600"]
+
+=== Delete a timeslot from your timetable: `deletetime` (`dt`)
+
+Delete a timeslot from your timetable.
+
+Format: `deletetime Monday 10:00-12:00`
+
+****
+* Shortforms for the day of the week are fine too. e.g. You can type `Mon` instead of Monday.
+* If you type `10` for either the start or end time, FreeTime will assume that you mean `10:00`
+* You cannot add a timeslot that is not filled in your timetable.
+****
+
+Examples:
+
+* `deletetime Monday 10:00-12:00` +
+Deletes the timeslot from 10:00 to 12:00 on Monday from your timetable.
+
+* `addtime Fri 13:00-14:00` +
+Deletes the timeslot from 13:00 to 14:00 on Friday from your timetable.
+
+* `addtime Wed 17-18` +
+Deletes the timeslot from 17:00 to 18:00 on Wednesday from your timetable.
+
+=== Show free slots among selected people `free` (`f`) (coming to you in v1.3!)
+
+{nbsp}
+
+
 === Selecting a person : `select` (`s`)
 
 Selects the person identified by the index number used in the displayed person list. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
+* Selects the person and displays the person's timetable at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
@@ -272,4 +328,8 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Add timeslot* : `addtime` +
+e.g. `addtime mon 10-12`
+* *Delete timeslot* : `deletetime` +
+e.g. `deletetime tue 12-14`
 * *Import Timetable from a file* : `import INDEX file/FILE_LOCATION`
