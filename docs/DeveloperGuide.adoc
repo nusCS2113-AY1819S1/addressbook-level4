@@ -239,6 +239,12 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+=== Find feature
+
+The `find` command is used to find candidates or companies stored in the address book through either the `findc` (find Candidate) or `findC` (find company).
+It extends `Command` and overrides two of its methods namely `CommandResult` and `equals`.
+
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation

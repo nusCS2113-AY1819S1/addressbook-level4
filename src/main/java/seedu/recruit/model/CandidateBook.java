@@ -10,7 +10,7 @@ import seedu.recruit.model.candidate.UniqueCandidateList;
 
 /**
  * Wraps all data at the CandidateBook level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Duplicates are not allowed (by .isSameCandidate comparison)
  */
 public class CandidateBook implements ReadOnlyCandidateBook {
 
