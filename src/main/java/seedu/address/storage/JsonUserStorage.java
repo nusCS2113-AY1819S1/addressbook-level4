@@ -42,7 +42,9 @@ public class JsonUserStorage {
      * Creates a user account JSON file.
      */
     private void createUserFile() throws IOException {
-        Files.createDirectory(folderPath);
+        if (Files.notExists(folderPath)) {
+            Files.createDirectory(folderPath);
+        }
 
         Gson gson = new Gson();
         JsonObject jsonObject = new JsonObject();
