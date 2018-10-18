@@ -407,8 +407,7 @@ by calling its default constructor.
 
 ==== Current Implementation
 
-The main implementation behind SearchHistoryManager is a Stack Data Structure +
-and the following 3 methods of `SearchHistoryManager` are exposed for your usage +
+The main implementation behind SearchHistoryManager is a Stack Data Structure and the following 3 methods of `SearchHistoryManager` are exposed for your usage +
 
 * `executeNewSearch(Predicate<T> predicate)` +
 updates system search logic to the next state and returns a `Predicate` object storing the system search logic after the update.
@@ -420,7 +419,9 @@ clears all system search logic from in-app memory. +
 
 Given below are illustrations to help you understand how each method works internally
 
-In the following diagrams, UP is the short-form for User Predicate which stores the logic specified by the user and SP is the short-form for System Predicate which stores the search logic for the system
+ In the diagrams, UP is the short-form for User Predicate and SP is the short-form for System Predicate.
+ . User Predicate stores the logic specified by the user
+ . System Predicate stores the search logic for the system
 
 NOTE: User Predicate and System Predicate are not actual Classes, they are simply there to help simplify the explanation.
 In the actual implementation, there is no way to differentiate one Predicate from the other
@@ -431,13 +432,13 @@ In the actual implementation, there is no way to differentiate one Predicate fro
 
 Upon calling this method, there will be two different situations +
 
-* Situation 1: searchHistoryStack is empty +
+* Situation 1: `searchHistoryStack` is empty +
 Upon receiving a new `Predicate` defined by the user, SearchHistoryManager will simply push the new `Predicate` into `searchHistoryStack`
 
 image::executeNewSearchEmptyStack.png[width="800"]
 
-* Situation 2: searchHistoryStack is not empty +
-Before pushing the new `Predicate` into the Stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the Stack.
+* Situation 2: `searchHistoryStack` is not empty +
+Before pushing the new `Predicate` into the stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the Stack.
 After retrieving it, it will call the `and()` method with the User Predicate, creating a new System Predicate which will then be pushed into the top
 of the Stack.
 
@@ -445,25 +446,25 @@ image::executeNewSearchNonEmptyStack.png[width="800"]
 '''
 `revertLastSearch()` +
 
-This method will remove the System Predicate from the top of the Stack. +
-In the event that the Stack is already empty, `SearchHistoryManager` will throw `EmptyStackException`.
+This method will remove the System Predicate from the top of the stack. +
+In the event that the stack is already empty, `SearchHistoryManager` will throw `EmptyStackException`.
 
 image::undoSearchHistoryStack.png[width="800"]
 '''
 `clearSearchHistory()` +
 
-This method will simply empty the Stack.
+This method will simply empty the stack.
 
 image::clearSearchHistoryStack.png[width="800"]
 
 '''
 The following sequence diagrams shows you how `find` and `undosearch` commands utilize `SearchHistoryManager` to perform Search Pruning.
 
- - `find` +
+ - `find` command +
 
 image::SearchPruningSequenceDiagram.png[width="800"]
 
- - `undosearch` +
+ - `undosearch` command +
 
 image::undoSearchSequenceDiagram.png[width="800"]
 
