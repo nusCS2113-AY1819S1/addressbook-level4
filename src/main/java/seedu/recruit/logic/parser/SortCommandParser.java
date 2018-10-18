@@ -25,20 +25,20 @@ public class SortCommandParser implements Parser<SortCommand> {
         requireNonNull(arg);
 
         switch(arg) {
-            case " n/":
-                return new SortCommand(PREFIX_NAME);
-            case " x/":
-                return new SortCommand(PREFIX_AGE);
-            case " e/":
-                return new SortCommand(PREFIX_EMAIL);
-            case " j/":
-                return new SortCommand(PREFIX_JOB);
-            case " h/":
-                return new SortCommand(PREFIX_EDUCATION);
-            case " s/":
-                return new SortCommand(PREFIX_SALARY);
-            default:
-                throw new ParseException(SortCommand.MESSAGE_TAG_USAGE);
+        case " n/":
+            return new SortCommand(PREFIX_NAME);
+        case " x/":
+            return new SortCommand(PREFIX_AGE);
+        case " e/":
+            return new SortCommand(PREFIX_EMAIL);
+        case " j/":
+            return new SortCommand(PREFIX_JOB);
+        case " h/":
+            return new SortCommand(PREFIX_EDUCATION);
+        case " s/":
+            return new SortCommand(PREFIX_SALARY);
+        default:
+            throw new ParseException(SortCommand.MESSAGE_TAG_USAGE);
         }
     }
 }

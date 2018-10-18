@@ -30,16 +30,16 @@ public class SortCommand extends Command {
             + ", Salary " + PREFIX_SALARY + "\n"
             + "Example: " + COMMAND_WORD + " " + PREFIX_NAME;
 
-    private static Prefix PREFIX_TO_SORT;
+    private static Prefix prefixToSort;
 
     public SortCommand(Prefix prefix) {
-        PREFIX_TO_SORT = prefix;
+        this.prefixToSort = prefix;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.sortCandidates(PREFIX_TO_SORT);
+        model.sortCandidates(prefixToSort);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

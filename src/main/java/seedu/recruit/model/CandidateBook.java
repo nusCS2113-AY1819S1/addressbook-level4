@@ -1,12 +1,6 @@
 package seedu.recruit.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import java.util.List;
 
@@ -99,23 +93,23 @@ public class CandidateBook implements ReadOnlyCandidateBook {
     public void sortCandidates(Prefix prefix) {
         String prefixString = prefix.toString();
         switch(prefixString) {
-            case "n/":
-                persons.sortByName();
-                break;
-            case "x/":
-                persons.sortByAge();
-                break;
-            case "e/":
-                persons.sortByEmail();
-                break;
-            case "j/":
-                persons.sortByJob();
-                break;
-            case "h/":
-                persons.sortByEducation();
-                break;
-            case "s/":
-                persons.sortBySalary();
+        case "n/":
+            persons.sortByName();
+            break;
+        case "x/":
+            persons.sortByAge();
+            break;
+        case "e/":
+            persons.sortByEmail();
+            break;
+        case "j/":
+            persons.sortByJob();
+            break;
+        case "h/":
+            persons.sortByEducation();
+            break;
+        default:
+            persons.sortBySalary();
 
         }
 

@@ -1,14 +1,11 @@
 package seedu.recruit.testutil;
 
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import seedu.recruit.logic.commands.EditCompanyCommand.EditCompanyDescriptor;
-import seedu.recruit.model.company.Company;
-import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.commons.Address;
 import seedu.recruit.model.commons.Email;
 import seedu.recruit.model.commons.Phone;
+import seedu.recruit.model.company.Company;
+import seedu.recruit.model.company.CompanyName;
 
 /**
  * A utility class to help with building EditCompanyDescriptor objects.
