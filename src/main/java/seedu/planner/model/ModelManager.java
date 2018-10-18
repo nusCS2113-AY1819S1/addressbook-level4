@@ -168,6 +168,14 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRecords.setPredicate(predicate);
     }
 
+    //=========== Modifying Record List Accessors =============================================================
+
+    @Override
+    public void sortFilteredRecordList(String category, Boolean ascending) {
+        requireAllNonNull(category, ascending);
+        versionedFinancialPlanner.sortRecords(category, ascending);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override

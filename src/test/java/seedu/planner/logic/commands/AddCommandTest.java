@@ -166,6 +166,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void sortFilteredRecordList(String category, Boolean ascending) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoFinancialPlanner() {
             throw new AssertionError("This method should not be called.");
         }

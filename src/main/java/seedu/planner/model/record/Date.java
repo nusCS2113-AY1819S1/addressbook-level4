@@ -170,6 +170,32 @@ public class Date {
         }
         return false;
     }
+    /**
+     * Compares whether the current object {@code Date} is earlier or later than the given {@code Date}
+     * @param other
+     * @return a positive value if date is later and negative value if date is earlier and zero if dates are the same
+     */
+    public int dateComparator(Date other) {
+        if (this.year < other.getYear()) {
+            return -1;
+        } else if (this.year == other.getYear()) {
+            if (this.month < other.getMonth()) {
+                return -1;
+            } else if (this.month == other.getMonth()) {
+                if (this.day < other.getDay()) {
+                    return -1;
+                } else if (this.day == other.getDay()) {
+                    return 0;
+                } else {
+                    return 1;
+                }
+            } else {
+                return 1;
+            }
+        } else {
+            return 1;
+        }
+    }
 
     @Override
     public int hashCode() {
