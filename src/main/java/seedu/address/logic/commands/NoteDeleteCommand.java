@@ -32,8 +32,6 @@ public class NoteDeleteCommand extends Command {
 
         NoteManager noteManager = new NoteManager();
 
-        System.out.println("ArrayList size: " + noteManager.getNotes().size());
-
         if (index > noteManager.getNotes().size() || index < 1) {
             return new CommandResult(MESSAGE_INVALID_INDEX);
         } else {
