@@ -41,7 +41,7 @@ public class EditCompanyCommand extends Command {
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_COMPANY_NAME + "KFC "
-            + PREFIX_PHONE + "6222 6111 "
+            + PREFIX_PHONE + "62226111 "
             + PREFIX_EMAIL + "kfc.ops.feedback@kfc.com.sg";
 
     public static final String MESSAGE_EDIT_COMPANY_SUCCESS = "Edited Company: %1$s";

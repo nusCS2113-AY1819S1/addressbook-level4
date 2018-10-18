@@ -139,9 +139,9 @@ image::companyPanel1.png[width="790", align="left"]
 image::companyPanel2.png[width="790", align="left"]
 image::companyPanel3.png[width="790", align="left"]
 
-=== Editing a candidate / job : `editc`
+=== Editing a candidate / company / job : `edit`
 
-==== Edits attributes of the candidate at the specified index `<INDEX>`
+==== Edits attributes of the candidate at the specified index `INDEX`
 Format: `editc <INDEX>`
 
 Edits the candidate with the specified `INDEX`.
@@ -154,6 +154,17 @@ Example:
 
 * `editc 3 t/` +
 (Edits and clears all existing tags belonging to the candidate at index 3)
+
+==== Edits details of a company at the specified index `INDEX`
+Format: `editC <INDEX>`
+
+Edits the company with the specified `INDEX`.
+The index must be an index number shown in the displayed company list.
+
+Example:
+
+*   `editC 1 n/KFC p/62226111` +
+(Edits the name and phone number of the company with index 1 to be KFC and 62226111
 
 ==== Edits details of a job offer
 Format: `editj <INDEX>`
@@ -193,7 +204,7 @@ Examples:
 Format: `findC NAME` +
 
 ****
-* The search is case insentitive. e.g. `kfc` will match `KFC`
+* The search is case insensitive. e.g. `kfc` will match `KFC`
 * The order of the keywords does not matter. e.g. `Pte Ltd Hanbaobao` will match `Hanbaobao Pte Ltd`
 * Only full words will be matched e.g. `Mc` will not match `McDonalds`
 * Companies matching at least one keyword will be returned (i.e. `OR` search)
@@ -229,6 +240,22 @@ Examples:
 
 ==== Exits from the filter interface and system proceeds to ask for next command
 Format: `cancel`
+
+=== Sorting candidates / company / job : `sort`
+
+==== Sorting candidates based on different fields
+Format: `sortc <tag>` +
+Supported tags: `n/`, `x/`, `e/`, `j/`, `h/`, `s/`
+
+*   Only one tag/field is included when using the sort command
+*   There must be one tag/field included
+
+Examples:
+
+*   `sortc n/` +
+(Sorts all candidates lexicographically by their name)
+*   `sortc s/` +
+(Sorts all candidates by their salary)
 
 === Deleting a candidate / job : `delete`
 
@@ -340,9 +367,15 @@ _{explain how the user can enable/disable data encryption}_
 *	*Add* : `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …` +
             e.g. `addc n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
 *	*List* : `list [jobs /candidates]`
+<<<<<<< HEAD
+*	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
+            e.g. `editc 2 e/jameslee@example.com`, `editC 5`
+*	*Find* : `find <tag>/KEYWORD [MORE_KEYWORDS]` +
+=======
 *	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `edit <INDEX>` +
             e.g. `editc 2 e/jameslee@example.com`, `editj 5`
 *	*Find* : `find <tag>/KEYWORD` +
+>>>>>>> 0501a5066406d24aa24af3ff64c6011bf4ad554b
             e.g. `find n/James n/Jake`
 *	*Filter* : `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
             e.g. `filter h/O LEVEL`
