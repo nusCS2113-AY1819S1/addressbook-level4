@@ -73,7 +73,7 @@ public class EditCompanyCommand extends Command {
         }
 
         Company companyToEdit = lastShownList.get(index.getZeroBased());
-        Company editedCompany = createEditedPerson(companyToEdit, editCompanyDescriptor);
+        Company editedCompany = createEditedCompany(companyToEdit, editCompanyDescriptor);
 
         if (!companyToEdit.isSameCompany(editedCompany) && model.hasCompany(editedCompany)) {
             throw new CommandException(MESSAGE_DUPLICATE_COMPANY);
@@ -89,7 +89,7 @@ public class EditCompanyCommand extends Command {
      * Creates and returns a {@code company} with the details of {@code companyToEdit}
      * edited with {@code EditCompanyDescriptor}.
      */
-    private static Company createEditedPerson(Company companyToEdit, EditCompanyDescriptor editCompanyDescriptor) {
+    private static Company createEditedCompany(Company companyToEdit, EditCompanyDescriptor editCompanyDescriptor) {
         assert companyToEdit != null;
 
         CompanyName updatedName = editCompanyDescriptor.getName().orElse(companyToEdit.getCompanyName());
