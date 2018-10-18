@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="summaryDisplay" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+            AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0"
+               AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <tabs>
+          <Tab text="Summary">
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="171.2" prefWidth="200.0"
+                                    AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView prefHeight="200.0" prefWidth="200.0" editable="false" fx:id="table">
+                                <columns>
+                                   <TableColumn fx:id="dateColumn" prefWidth="75.0" text="DATE" />
+                                   <TableColumn fx:id="totalIncomeColumn" prefWidth="75.0" text="TOTAL INCOME" />
+                                   <TableColumn fx:id="totalExpenseColumn" prefWidth="75.0" text="TOTAL EXPENSE" />
+                                   <TableColumn fx:id="totalColumn" prefWidth="75.0" text="NET MONEYFLOW" />
+                                </columns>
+                              <columnResizePolicy>
+                                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                              </columnResizePolicy>
+                              </TableView>
+                        </ScrollPane>
+               </AnchorPane>
+          </Tab>
+        </tabs>
+      </TabPane>
+</AnchorPane>

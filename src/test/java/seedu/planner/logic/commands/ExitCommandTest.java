@@ -24,9 +24,11 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
-import seedu.planner.storage.XmlAdaptedRecord;
-import seedu.planner.storage.XmlAdaptedTag;
-import seedu.planner.storage.XmlSerializableFinancialPlanner;
+import seedu.planner.model.record.UniqueRecordList;
+import seedu.planner.model.summary.SummaryMap;
+import seedu.planner.storage.xmljaxb.XmlAdaptedRecord;
+import seedu.planner.storage.xmljaxb.XmlAdaptedTag;
+import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.testutil.FinancialPlannerBuilder;
 import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.testutil.TestUtil;
@@ -92,11 +94,14 @@ public class ExitCommandTest {
             XmlUtil.getDataFromFile(EMPTY_FILE, FinancialPlanner.class);
         }
 
+        //TODO: @test change this to non hardcoded
         @Test
         public void getDataFromFile_validFile_validResult() throws Exception {
-            FinancialPlanner dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableFinancialPlanner.class)
+            UniqueRecordList dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableFinancialPlanner.class)
                     .toModelType();
-            assertEquals(9, dataFromFile.getRecordList().size());
+            FinancialPlanner data = new FinancialPlanner();
+            data.resetData(dataFromFile, new SummaryMap());
+            assertEquals(9, data.getRecordList().size());
         }
 
         @Test
