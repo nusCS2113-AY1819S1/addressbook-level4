@@ -422,8 +422,11 @@ Given below are illustrations to help you understand how each method works inter
 
 In the following diagrams, UP is the short-form for User Predicate which stores the logic specified by the user and SP is the short-form for System Predicate which stores the search logic for the system
 
-NOTE: User Predicate and System Predicate are not actual Classes, they are simply called that way to help in your understanding.
+NOTE: User Predicate and System Predicate are not actual Classes, they are simply there to help simplify the explanation.
+In the actual implementation, there is no way to differentiate one Predicate from the other
+
 '''
+
 `executeNewSearch(Predicate<T> predicate)` +
 
 Upon calling this method, there will be two different situations +
