@@ -37,7 +37,7 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String skill;
     @XmlElement(required = true)
-    private int skillLevel;
+    private String skillLevel; // TODO: Determine if this needs to be a string.
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -72,7 +72,7 @@ public class XmlAdaptedPerson {
         email = source.getEmail().value;
         address = source.getAddress().value;
         skill = source.getSkill().value;
-        skillLevel = source.getSkillLevel().level;
+        skillLevel = Integer.toString(source.getSkillLevel().skillLevel);
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -125,8 +125,13 @@ public class XmlAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Skill.class.getSimpleName()));
         }
 
+        if (skillLevel == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    SkillLevel.class.getSimpleName()));
+        }
+
         final Skill modelSkill = new Skill(skill);
-        final SkillLevel modelSkillLevel = new SkillLevel(skillLevel);
+        final SkillLevel modelSkillLevel = new SkillLevel(5); // TODO: Change this to a real value.
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelSkill, modelSkillLevel, modelTags);
