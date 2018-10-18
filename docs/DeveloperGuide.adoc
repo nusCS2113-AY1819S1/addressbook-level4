@@ -418,7 +418,7 @@ In order to prevent brute force, a user has up to 3 tries to key in the correct 
 
 ==== Design Considerations
 
-=====Aspect: How hashing is done
+===== Aspect: How hashing is done
 
 * **Alternative 1: Use existing hashing algorithms in java libraries such as `java.security'.**
 ** Pros: Easy and fast to implement.
