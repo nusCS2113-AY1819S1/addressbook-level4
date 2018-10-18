@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.storage.XmlAdaptedGroup;
 import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
+import seedu.address.storage.XmlAdaptedTest;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -54,7 +55,8 @@ public class XmlUtilTest {
     private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
     private static final List<XmlAdaptedTag> VALID_GROUP_TAGS = Collections.singletonList(new XmlAdaptedTag("maths"));
     private static final List<XmlAdaptedPerson> VALID_PERSONS = Collections.singletonList(new XmlAdaptedPerson(ALICE));
-
+    private static final List<XmlAdaptedTest> VALID_TEST =
+            Collections.singletonList(new XmlAdaptedTest("CS2113quiz", "77"));
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -95,7 +97,7 @@ public class XmlUtilTest {
                 MISSING_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
                 null, VALID_GENDER, VALID_NATIONALITY, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TEST);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -105,7 +107,7 @@ public class XmlUtilTest {
                 INVALID_PERSON_FIELD_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
                 VALID_NAME, VALID_GENDER, VALID_NATIONALITY, INVALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TEST);
         assertEquals(expectedPerson, actualPerson);
     }
 
@@ -115,7 +117,7 @@ public class XmlUtilTest {
                 VALID_PERSON_FILE, XmlAdaptedPersonWithRootElement.class);
         XmlAdaptedPerson expectedPerson = new XmlAdaptedPerson(
                 VALID_NAME, VALID_GENDER, VALID_NATIONALITY, VALID_PHONE,
-                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS);
+                VALID_EMAIL, VALID_ADDRESS, VALID_GRADE, VALID_TAGS, VALID_TEST);
         assertEquals(expectedPerson, actualPerson);
     }
 
