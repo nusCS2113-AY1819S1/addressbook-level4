@@ -5,7 +5,9 @@ import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import com.google.common.eventbus.Subscribe;
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
@@ -32,9 +34,7 @@ import seedu.address.storage.XmlEManagerStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.stage.Stage;
+import com.google.common.eventbus.Subscribe;
 
 /**
  * The main entry point to the application.

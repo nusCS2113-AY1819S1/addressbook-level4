@@ -4,10 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Optional;
 
+import javafx.scene.Node;
+
 import guitests.GuiRobot;
 import guitests.guihandles.exceptions.NodeNotFoundException;
-
-import javafx.scene.Node;
 
 /**
  * Provides access to a node in a JavaFx application for GUI testing purposes.

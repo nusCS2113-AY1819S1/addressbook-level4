@@ -10,10 +10,6 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Address;
 import seedu.address.model.event.Email;
@@ -21,6 +17,10 @@ import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
+
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "R@chel";

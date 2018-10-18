@@ -4,14 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
 
-import org.junit.Rule;
-import org.junit.Test;
-
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.ui.testutil.EventsCollectorRule;
+
+import org.junit.Rule;
+import org.junit.Test;
 
 public class ExitCommandTest {
     @Rule

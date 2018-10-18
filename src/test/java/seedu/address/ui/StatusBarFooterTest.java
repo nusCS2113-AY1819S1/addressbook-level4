@@ -11,14 +11,14 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.util.Date;
 
+import seedu.address.commons.events.model.EventManagerChangedEvent;
+import seedu.address.model.EventManager;
+
 import guitests.guihandles.StatusBarFooterHandle;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import seedu.address.commons.events.model.EventManagerChangedEvent;
-import seedu.address.model.EventManager;
 
 public class StatusBarFooterTest extends GuiUnitTest {
 

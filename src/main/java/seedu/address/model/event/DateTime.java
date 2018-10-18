@@ -9,7 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateTime {
-
+    /**
+     * DateTime field for event
+     */
     public static final String MESSAGE_DATETIME_CONSTRAINTS =
             "Date should have all value and should be in the format\n"
                     + "dd/MM/yyyy HH:mm with each is a number within\n"

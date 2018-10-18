@@ -2,15 +2,15 @@ package seedu.address.ui;
 
 import java.util.Optional;
 
-import guitests.GuiRobot;
-import guitests.guihandles.exceptions.NodeNotFoundException;
-import org.junit.After;
-import org.junit.Rule;
+import javafx.scene.Node;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.ui.testutil.UiPartRule;
 
-import javafx.scene.Node;
+import guitests.GuiRobot;
+import guitests.guihandles.exceptions.NodeNotFoundException;
+import org.junit.After;
+import org.junit.Rule;
 
 /**
  * A GUI unit test class for EventManager.

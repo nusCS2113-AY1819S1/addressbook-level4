@@ -2,11 +2,11 @@ package seedu.address.ui;
 
 import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
-
 import javafx.fxml.FXML;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+
+import seedu.address.commons.core.LogsCenter;
 
 /**
  * Controller for a help page

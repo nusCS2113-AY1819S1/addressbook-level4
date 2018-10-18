@@ -4,13 +4,13 @@ import java.nio.file.Path;
 import java.util.concurrent.TimeoutException;
 import java.util.function.Supplier;
 
-import guitests.guihandles.MainWindowHandle;
-import org.testfx.api.FxToolkit;
+import javafx.stage.Stage;
 
 import seedu.address.TestApp;
 import seedu.address.model.ReadOnlyEventManager;
 
-import javafx.stage.Stage;
+import guitests.guihandles.MainWindowHandle;
+import org.testfx.api.FxToolkit;
 
 /**
  * Contains helper methods that system tests require.

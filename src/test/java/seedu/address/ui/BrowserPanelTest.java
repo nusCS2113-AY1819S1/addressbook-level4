@@ -8,12 +8,12 @@ import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 
 import java.net.URL;
 
+import seedu.address.MainApp;
+import seedu.address.commons.events.ui.EventSelectionChangedEvent;
+
 import guitests.guihandles.BrowserPanelHandle;
 import org.junit.Before;
 import org.junit.Test;
-
-import seedu.address.MainApp;
-import seedu.address.commons.events.ui.EventSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private EventSelectionChangedEvent selectionChangedEventStub;

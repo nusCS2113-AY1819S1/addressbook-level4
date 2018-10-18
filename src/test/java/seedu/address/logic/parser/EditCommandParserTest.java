@@ -31,8 +31,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
 
-import org.junit.Test;
-
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
@@ -42,6 +40,8 @@ import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditEventDescriptorBuilder;
+
+import org.junit.Test;
 
 public class EditCommandParserTest {
 

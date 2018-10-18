@@ -1,9 +1,9 @@
 package guitests.guihandles;
 
-import seedu.address.ui.UiManager;
-
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
+
+import seedu.address.ui.UiManager;
 
 /**
  * A handle for the {@code AlertDialog} of the UI.

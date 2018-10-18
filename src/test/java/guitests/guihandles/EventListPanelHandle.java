@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.model.event.Event;
-
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
+
+import seedu.address.model.event.Event;
 
 /**
  * Provides a handle for {@code EventListPanel} containing the list of {@code EventCard}.

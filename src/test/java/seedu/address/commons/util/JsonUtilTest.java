@@ -3,10 +3,10 @@ package seedu.address.commons.util;
 import java.io.IOException;
 import java.nio.file.Path;
 
-import org.junit.Test;
-
 import seedu.address.testutil.SerializableTestClass;
 import seedu.address.testutil.TestUtil;
+
+import org.junit.Test;
 
 /**
  * Tests JSON Read and Write

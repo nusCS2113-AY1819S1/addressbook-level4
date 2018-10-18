@@ -10,12 +10,12 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.BOB;
 
+import seedu.address.model.event.Event;
+import seedu.address.testutil.EventBuilder;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import seedu.address.model.event.Event;
-import seedu.address.testutil.EventBuilder;
 
 public class EventTest {
     @Rule

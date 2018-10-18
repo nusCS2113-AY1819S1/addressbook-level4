@@ -13,13 +13,13 @@ import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.Test;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.event.EventContainsKeywordsPredicate;
+
+import org.junit.Test;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.

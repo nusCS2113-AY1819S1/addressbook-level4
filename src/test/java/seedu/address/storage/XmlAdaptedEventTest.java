@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.junit.Test;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Address;
 import seedu.address.model.event.Attendance;
@@ -17,6 +15,8 @@ import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.testutil.Assert;
+
+import org.junit.Test;
 
 public class XmlAdaptedEventTest {
     private static final String INVALID_NAME = "R@chel";

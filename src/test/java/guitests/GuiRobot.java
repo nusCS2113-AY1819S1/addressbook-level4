@@ -3,10 +3,10 @@ package guitests;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
+import javafx.stage.Stage;
+
 import guitests.guihandles.exceptions.StageNotFoundException;
 import org.testfx.api.FxRobot;
-
-import javafx.stage.Stage;
 
 /**
  * Robot used to simulate user actions on the GUI.
