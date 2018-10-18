@@ -396,8 +396,23 @@ image::BudgetCommandSequenceDiagram.png[width="800"]
 
 ==== Current Implementation
 
-The add skill mechanism builds on the addressBookParser. This ensures that the correct number of arguments
-is given to the item.
+The add skill mechanism builds on the `addressBookParser`. This as well
+as it's subclass `addSkillCommandParser` ensures that the correct number of arguments
+is given to the command.
+
+The following shows how the application handles the request to change a skill in one particular scenario.
+
+Step 1. The user launches the application. The application boots up and lists all members.
+
+Step 2. The user locates the person he wants to add on at Index 4. They execute the `asl 4 s/Photography l/60` command.
+
+Step 3.'LogicManager' calls the 'parseCommand' in the 'AddressBookParser', which calls `AddSkillCommandParser` to
+parse it.
+
+Step 4. After parsing, the command is sent to the `Model` which alters the `Person` object by modifying their
+`Skill` and `SkillLevel` properties.
+
+Step 5. The result is encapsulated as a `CommandResult` object which is passed back to the `UI`.
 
 ==== Alternate implementations
 
