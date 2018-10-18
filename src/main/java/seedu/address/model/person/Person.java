@@ -78,7 +78,7 @@ public class Person {
      */
     public boolean isSamePerson(Person otherPerson) {
         if (otherPerson == this) {
-            return true;
+            return true; //memory when you compare between 2 objects
         }
 
         return otherPerson != null
