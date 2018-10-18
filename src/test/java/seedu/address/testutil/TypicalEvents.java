@@ -40,7 +40,8 @@ public class TypicalEvents {
     public static final Event CARL = new EventBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").withDateTime("22/1/2018 9:30").build();
     public static final Event DANIEL = new EventBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withEmail("cornelia@example.com").withAddress("10th street").withDateTime("22/10/2017 9:30").withTags("friends").build();
+            .withEmail("cornelia@example.com").withAddress("10th street").withDateTime("22/10/2017 9:30")
+            .withTags("friends").build();
     public static final Event ELLE = new EventBuilder().withName("Elle Meyer").withPhone("9482224")
             .withEmail("werner@example.com").withAddress("michegan ave").withDateTime("12/8/2018 17:30").build();
     public static final Event FIONA = new EventBuilder().withName("Fiona Kunz").withPhone("9482427")
@@ -56,10 +57,11 @@ public class TypicalEvents {
 
     // Manually added - Event's details found in {@code CommandTestUtil}
     public static final Event AMY = new EventBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_FRIEND).build();
+            .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
+            .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_FRIEND).build();
     public static final Event BOB = new EventBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB).withDateTime(VALID_DATETIME_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
-            .build();
+            .withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+            .withDateTime(VALID_DATETIME_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

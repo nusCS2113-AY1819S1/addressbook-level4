@@ -74,6 +74,9 @@ public class EditEventDescriptorBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code DateTime} of the {@code EditEventDescriptor} that we are building.
+     */
     public EditEventDescriptorBuilder withDateTime(String datetimeAsString) {
         descriptor.setDate(new DateTime(datetimeAsString));
         return this;

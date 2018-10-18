@@ -11,7 +11,7 @@ import javafx.scene.layout.Region;
 import seedu.address.model.event.Event;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a event card in the event list panel.
  */
 public class EventCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
@@ -68,7 +68,9 @@ public class EventCardHandle extends NodeHandle<Node> {
         return emailLabel.getText();
     }
 
-    public String getDatetime() { return datetimeLabel.getText(); }
+    public String getDatetime() {
+        return datetimeLabel.getText();
+    }
 
     public List<String> getTags() {
         return tagLabels

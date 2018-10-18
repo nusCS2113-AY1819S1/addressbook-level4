@@ -115,7 +115,7 @@ public class XmlAdaptedEventTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }
-    //Date time cannot be test as normal illegal value exception since DateTime constructor will throw Parser Exception first
+
     @Test
     public void toModelType_invalidDateTime_throwIllegalValueException() {
         XmlAdaptedEvent event =

@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.event;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.model.event.EventContainsKeywordsPredicate;
 import seedu.address.testutil.EventBuilder;
 
 public class EventContainsKeywordsPredicateTest {
@@ -19,14 +18,17 @@ public class EventContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("first");
         List<String> secondPredicateKeywordList = Arrays.asList("first", "second");
 
-        EventContainsKeywordsPredicate firstPredicate = new EventContainsKeywordsPredicate(firstPredicateKeywordList);
-        EventContainsKeywordsPredicate secondPredicate = new EventContainsKeywordsPredicate(secondPredicateKeywordList);
+        EventContainsKeywordsPredicate firstPredicate =
+                new EventContainsKeywordsPredicate(firstPredicateKeywordList);
+        EventContainsKeywordsPredicate secondPredicate =
+                new EventContainsKeywordsPredicate(secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        EventContainsKeywordsPredicate firstPredicateCopy = new EventContainsKeywordsPredicate(firstPredicateKeywordList);
+        EventContainsKeywordsPredicate firstPredicateCopy =
+                new EventContainsKeywordsPredicate(firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -42,7 +44,8 @@ public class EventContainsKeywordsPredicateTest {
     @Test
     public void test_nameContainsKeywords_returnsTrue() {
         // One keyword
-        EventContainsKeywordsPredicate predicate = new EventContainsKeywordsPredicate(Collections.singletonList("Alice"));
+        EventContainsKeywordsPredicate predicate =
+                new EventContainsKeywordsPredicate(Collections.singletonList("Alice"));
         assertTrue(predicate.test(new EventBuilder().withName("Alice Bob").build()));
 
         // Multiple keywords
