@@ -137,6 +137,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredItemListByTag(Predicate<Item> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean canUndoStockList() {
             throw new AssertionError("This method should not be called.");
         }
