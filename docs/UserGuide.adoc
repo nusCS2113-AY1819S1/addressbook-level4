@@ -244,7 +244,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Display account data : `showdata`
 
-Displays accounting data
+Displays accounting data. +
 Format: `showdata`
 
 === Next Page : `next`
