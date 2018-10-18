@@ -47,7 +47,13 @@ public class TypicalPersons {
             .withEmail("stefan@example.com").withAddress("little india").build();
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
             .withEmail("hans@example.com").withAddress("chicago ave").build();
-
+    public static final Person JOHN = new PersonBuilder().withName("John Choo").withPhone("84823231")
+            .withEmail("hong@example.com").withAddress("china town").build();
+    public static final Person KHOR = new PersonBuilder().withName("Khor Amy").withPhone("81234567")
+            .withEmail("ren@example.com").withAddress("kampong glam").withTags(VALID_TAG_FRIEND).build();
+    public static final Person SEGWIT = new PersonBuilder().withName("Segwit Choo").withPhone("99939995")
+            .withEmail("geegee@example.com").withAddress("homeless").withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
+            .build();
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY).withTags(VALID_TAG_FRIEND).build();
@@ -61,6 +67,7 @@ public class TypicalPersons {
 
     /**
      * Returns an {@code AddressBook} with all the typical persons.
+     * All typical persons are not Tagged
      */
     public static AddressBook getTypicalAddressBook() {
         AddressBook ab = new AddressBook();
@@ -70,7 +77,30 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Returns an {@code AddressBook} with all the typical persons
+     * including those that are tagged.
+     */
+    public static AddressBook getTypicalTaggedAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getTypicalPersonsWithTags()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns a list of all typical persons that are not tagged,
+     */
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+
+    /**
+     * Returns a list of all typical persons that could be tagged,
+     */
+    public static List<Person> getTypicalPersonsWithTags() {
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN, SEGWIT, KHOR));
+    }
+
 }

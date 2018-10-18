@@ -1,13 +1,12 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERPASSWORD;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.login.LoginDetails;
+import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 
 /**
  * Adds an account to the login book
@@ -16,32 +15,32 @@ public class CreateAccountCommand extends Command {
 
     public static final String COMMAND_WORD = "createaccount";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account for the address book. "
-            + "Parameters: "
-            + PREFIX_USERID + "USERID "
-            + PREFIX_USERPASSWORD + "PASSWORD "
-            + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USERID + "A1234567M "
-            + PREFIX_USERPASSWORD + "zaq1xsw2cde3";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates an account for the login book. "
+            + "Parameters: USERID PASSWORD\n"
+            + "Example: " + COMMAND_WORD + " A1234567M zaq1xsw2cde3";
 
     public static final String MESSAGE_SUCCESS = "New account created: %1$s";
-    private static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the login book";
 
     private final LoginDetails toAdd;
+    private final UserIdContainsKeywordsPredicate idPredicate;
 
     /**
      * Creates a CreateAccountCommand to add the specified {@code LoginDetails}
      */
-    public CreateAccountCommand(LoginDetails details) {
-        requireNonNull(details);
-        toAdd = details;
+    public CreateAccountCommand(UserIdContainsKeywordsPredicate idPredicate, LoginDetails loginDetails) {
+        requireNonNull(loginDetails);
+        this.idPredicate = idPredicate;
+        this.toAdd = loginDetails;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasAccount(toAdd)) {
+        model.updateFilteredLoginDetailsList(idPredicate);
+
+        if (model.getFilteredLoginDetailsList().size() != 0) {
             throw new CommandException(MESSAGE_DUPLICATE_ACCOUNT);
         }
 

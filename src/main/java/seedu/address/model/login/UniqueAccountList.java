@@ -47,8 +47,8 @@ public class UniqueAccountList implements Iterable<LoginDetails> {
     }
 
     /**
-     * Replaces the contents of this list with {@code persons}.
-     * {@code persons} must not contain duplicate persons.
+     * Replaces the contents of this list with {@code loginDetails}.
+     * {@code loginDetails} must not contain duplicate accounts.
      */
     public void setLoginDetails(List<LoginDetails> loginDetails) {
         requireAllNonNull(loginDetails);
@@ -81,7 +81,7 @@ public class UniqueAccountList implements Iterable<LoginDetails> {
     }
 
     /**
-     * Returns true if {@code persons} contains only unique persons.
+     * Returns true if {@code loginDetails} contains only unique accounts.
      */
     private boolean loginDetailsAreUnique(List<LoginDetails> loginDetails) {
         for (int i = 0; i < loginDetails.size() - 1; i++) {
