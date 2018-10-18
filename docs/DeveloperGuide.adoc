@@ -486,7 +486,7 @@ Aspect: What data is stored in search history stack +
 ** Cons:
     . More memory is required as Person objects has to be duplicated multiple times into a new List.
     . Class is inextensible to store other objects other than those from a Person classes.
-    
+
 === Undo/Redo feature
 ==== Current Implementation
 
