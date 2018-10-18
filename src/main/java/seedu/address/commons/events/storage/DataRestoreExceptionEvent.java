@@ -2,7 +2,7 @@ package seedu.address.commons.events.storage;
 
 import seedu.address.commons.events.BaseEvent;
 
-//@@author QzsG
+//@@author QzSG
 /**
  * Indicates an exception during a file restore
  */
