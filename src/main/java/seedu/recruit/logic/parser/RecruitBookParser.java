@@ -19,6 +19,7 @@ import seedu.recruit.logic.commands.ClearCompanyBookCommand;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.DeleteCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
+import seedu.recruit.logic.commands.EditCompanyCommand;
 import seedu.recruit.logic.commands.ExitCommand;
 import seedu.recruit.logic.commands.FindCommand;
 import seedu.recruit.logic.commands.HelpCommand;
@@ -87,15 +88,20 @@ public class RecruitBookParser {
             }
         } else {
             switch (commandWord) {
-
             case AddCandidateCommand.COMMAND_WORD:
                 return new AddCandidateCommandParser().parse(arguments);
 
             case AddJobCommand.COMMAND_WORD:
                 return new AddJobCommand();
 
+            case AddCompanyCommand.COMMAND_WORD:
+                return new AddCompanyCommandParser().parse(arguments);
+
             case EditCandidateCommand.COMMAND_WORD:
                 return new EditCandidateCommandParser().parse(arguments);
+
+            case EditCompanyCommand.COMMAND_WORD:
+                return new EditCompanyCommandParser().parse(arguments);
 
             case SelectCommand.COMMAND_WORD:
                 return new SelectCommandParser().parse(arguments);
@@ -108,12 +114,6 @@ public class RecruitBookParser {
 
             case ClearCompanyBookCommand.COMMAND_WORD:
                 return new ClearCompanyBookCommand();
-                
-            case EditCompanyCommand.COMMAND_WORD:
-                return new EditCompanyCommandParser().parse(arguments);
-
-            case SelectCommand.COMMAND_WORD:
-                return new SelectCommandParser().parse(arguments);
 
             case FindCommand.COMMAND_WORD:
                 return new FindCommandParser().parse(arguments);
@@ -138,9 +138,6 @@ public class RecruitBookParser {
 
             case EmailInitialiseCommand.COMMAND_WORD:
                 return new EmailInitialiseCommand();
-
-            case AddCompanyCommand.COMMAND_WORD:
-                return new AddCompanyCommandParser().parse(arguments);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
