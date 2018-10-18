@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NUMBER_OF_EVENTS;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.BudgetCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.budgetelements.ClubBudgetElements;
