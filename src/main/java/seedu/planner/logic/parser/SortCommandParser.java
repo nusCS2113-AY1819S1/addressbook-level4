@@ -33,31 +33,30 @@ public class SortCommandParser implements Parser<SortCommand> {
         Boolean ascending;
         String[] argList = trimmedArgs.split("\\s+");
 
-        if ((argList.length) == ONLY_CATEGORY_OR_ORDER_SPECIFIED){
+        if ((argList.length) == ONLY_CATEGORY_OR_ORDER_SPECIFIED) {
             if (!CATEGORY_SET.contains(argList[0].toLowerCase()) && !ORDER_SET.contains(argList[0].toLowerCase())){
                 throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE)));
             }
             category = argList[0].toLowerCase();
             ascending = true;
-            if (category.equals(DESCENDING_CONDITION)){
+            if (category.equals(DESCENDING_CONDITION)) {
                 category = CATEGORY_NAME;
                 ascending = false;
-            } else if (category.equals(ASCENDING_CONDITION)){
+            } else if (category.equals(ASCENDING_CONDITION)) {
                 category = CATEGORY_NAME;
             }
-        } else if (argList.length == CATEGORY_AND_ORDER_SPECIFIED){
+        } else if (argList.length == CATEGORY_AND_ORDER_SPECIFIED) {
             if ((ORDER_SET.contains(argList[0].toLowerCase()) || ORDER_SET.contains(argList[1].toLowerCase()))
-                    && (CATEGORY_SET.contains(argList[0].toLowerCase()) || CATEGORY_SET.contains(argList[1].toLowerCase()))){
-                if (ORDER_SET.contains(argList[0].toLowerCase())){
+                    && (CATEGORY_SET.contains(argList[0].toLowerCase())
+                    || CATEGORY_SET.contains(argList[1].toLowerCase()))) {
+                if (ORDER_SET.contains(argList[0].toLowerCase())) {
                     ascending = !(argList[0].toLowerCase().equals(DESCENDING_CONDITION));
                     category = argList[1].toLowerCase();
-                }
-                else {
+                } else {
                     ascending = (argList[1].toLowerCase().equals(ASCENDING_CONDITION));
                     category = argList[0].toLowerCase();
                 }
-            }
-            else {
+            } else {
                 throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE)));
             }
         } else {

@@ -105,30 +105,32 @@ public class UniqueRecordList implements Iterable<Record> {
 
         switch (category) {
 
-            case SortCommand.CATEGORY_NAME:
-                if (!ascending) {
-                    internalList.sort(SortUtil.compareNameAttribute().reversed());
-                } else {
-                    internalList.sort(SortUtil.compareNameAttribute());
-                }
-                break;
+        case SortCommand.CATEGORY_NAME:
+            if (!ascending) {
+                internalList.sort(SortUtil.compareNameAttribute().reversed());
+            } else {
+                internalList.sort(SortUtil.compareNameAttribute());
+            }
+            break;
 
-            case SortCommand.CATEGORY_DATE:
-                if (!ascending) {
-                    internalList.sort(SortUtil.compareDateAttribute().reversed());
-                } else {
-                    internalList.sort(SortUtil.compareDateAttribute());
-                }
-                break;
+        case SortCommand.CATEGORY_DATE:
+            if (!ascending) {
+                internalList.sort(SortUtil.compareDateAttribute().reversed());
+            } else {
+                internalList.sort(SortUtil.compareDateAttribute());
+            }
+            break;
 
-            case SortCommand.CATEGORY_MONEYFLOW:
-            case SortCommand.CATEGORY_MONEY:
-                if (!ascending) {
-                    internalList.sort(SortUtil.compareMoneyflowAttribute().reversed());
-                } else {
-                    internalList.sort(SortUtil.compareMoneyflowAttribute());
-                }
-                break;
+        case SortCommand.CATEGORY_MONEYFLOW:
+        case SortCommand.CATEGORY_MONEY:
+            if (!ascending) {
+                internalList.sort(SortUtil.compareMoneyflowAttribute().reversed());
+            } else {
+                internalList.sort(SortUtil.compareMoneyflowAttribute());
+            }
+            break;
+
+        default: break;
         }
 
     }

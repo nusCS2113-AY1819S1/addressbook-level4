@@ -35,18 +35,18 @@ public class SortCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all records in the currently displayed list "
             + "by the specified category and order.\n"
             + "Parameters: [CATEGORY] [ORDER]\n"
-            + "Example: " + COMMAND_WORD +  " " + CATEGORY_NAME + " " + DESCENDING_CONDITION;
-
-    private final String category;
-    private final Boolean ascending;
+            + "Example: " + COMMAND_WORD + " " + CATEGORY_NAME + " " + DESCENDING_CONDITION;
 
     public static final Set<String> CATEGORY_SET = new HashSet<>(Arrays.asList(CATEGORY_NAME, CATEGORY_MONEYFLOW,
             CATEGORY_MONEY, CATEGORY_DATE));
     public static final Set<String> ORDER_SET = new HashSet<>(Arrays.asList(DESCENDING_CONDITION, ASCENDING_CONDITION));
 
+    private final String category;
+    private final Boolean ascending;
+
     public SortCommand(String category, Boolean ascending) {
-            this.category = category;
-            this.ascending = ascending;
+        this.category = category;
+        this.ascending = ascending;
     }
 
     @Override
@@ -55,15 +55,15 @@ public class SortCommand extends Command {
         model.sortFilteredRecordList(category, ascending);
         String returnMessageCategory = category;
         String returnMessageOrder = ascending ? ORDER_ASCENDING : ORDER_DESCENDING;
-        return new CommandResult(MESSAGE_SUCCESS + returnMessageCategory + " " +
-                returnMessageOrder + ".\n");
+        return new CommandResult(MESSAGE_SUCCESS + returnMessageCategory + " "
+            + returnMessageOrder + ".\n");
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SortCommand // instanceof handles nulls
-                && category.equals(((SortCommand) other).category)
-                    && ascending.equals(((SortCommand) other).ascending)); // state check
+            || (other instanceof SortCommand // instanceof handles nulls
+            && category.equals(((SortCommand) other).category)
+            && ascending.equals(((SortCommand) other).ascending)); // state check
     }
 }

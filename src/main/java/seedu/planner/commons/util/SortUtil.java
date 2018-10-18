@@ -10,15 +10,15 @@ import seedu.planner.model.record.Record;
 public class SortUtil {
 
     public static Comparator<Record> compareNameAttribute() {
-        return Comparator.comparing(A -> A.getName().fullName.toLowerCase());
+        return Comparator.comparing(a -> a.getName().fullName.toLowerCase());
     }
 
     public static Comparator<Record> compareDateAttribute() {
-        return (A, B) -> A.getDate().dateComparator(B.getDate());
+        return (a, b) -> a.getDate().dateComparator(b.getDate());
     }
 
     public static Comparator<Record> compareMoneyflowAttribute() {
-        return Comparator.comparing(A -> A.getMoneyFlow().valueDouble);
+        return Comparator.comparing(a -> a.getMoneyFlow().valueDouble);
     }
 
 }
