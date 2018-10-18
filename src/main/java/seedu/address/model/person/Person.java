@@ -6,7 +6,6 @@ import java.util.*;
 
 import seedu.address.model.enrolledClass.EnrolledClass;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TimeSlots;
 
 /**
  * Represents a Person in the address book.
@@ -41,7 +40,14 @@ public class Person {
             tempClass = enrolledClasses.get(tempClassName);
             this.enrolledClasses.put(tempClassName, tempClass);
         }
-        this.timeslots = new HashMap<>(timeslots);
+
+        if (timeslots!=null) {
+            this.timeslots = new HashMap<>(timeslots);
+        }
+        else{
+            this.timeslots = TimeSlots.sampleTimeSlots();
+        }
+
     }
 
     public Name getName() {

@@ -255,11 +255,11 @@ Format: `merge m/INDEX m/INDEX...`
 `merge m/1 m/2` +
 Merges the timetables of the 1st and 2nd people in the address book.
 
-image::MergeCommandUser1.png[width="800"]
+image::MergeCommandUser1.PNG[width="800"]
 
 merges into
 
-image::MergeCommanduser2.png[width="800"]
+image::MergeCommanduser2.PNG[width="800"]
 
 === Accessing the consultation manager: `conslt`
 
