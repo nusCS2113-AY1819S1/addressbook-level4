@@ -1,5 +1,8 @@
 package seedu.planner.model.summary;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+
 import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
@@ -15,6 +18,7 @@ public class Summary {
     private MoneyFlow total;
 
     public Summary(Record record) {
+        requireNonNull(record);
         date = record.getDate();
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
@@ -28,6 +32,7 @@ public class Summary {
     }
 
     public Summary(Date date, MoneyFlow totalExpense, MoneyFlow totalIncome, MoneyFlow total) {
+        requireAllNonNull(date, totalExpense, totalIncome, total);
         this.date = date;
         this.totalExpense = totalExpense;
         this.totalIncome = totalIncome;
@@ -54,6 +59,7 @@ public class Summary {
      * Adds the record's moneyflow to totalExpense, totalIncome or total
      */
     public void add(Record record) {
+        requireNonNull(record);
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
             totalExpense = MoneyUtil.add(totalExpense, money);
@@ -68,6 +74,7 @@ public class Summary {
      * and total
      */
     public void remove(Record record) {
+        requireNonNull(record);
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
             totalExpense = MoneyUtil.subtract(totalExpense, money);
