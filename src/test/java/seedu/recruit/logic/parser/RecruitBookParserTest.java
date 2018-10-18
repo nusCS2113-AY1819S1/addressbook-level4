@@ -22,7 +22,7 @@ import seedu.recruit.logic.commands.DeleteCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
 import seedu.recruit.logic.commands.ExitCommand;
-import seedu.recruit.logic.commands.FindCommand;
+import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCommand;
@@ -91,10 +91,11 @@ public class RecruitBookParserTest {
     @Test
     public void parseCommand_find() throws Exception {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
-        FindCommand command = (FindCommand) parser.parseCommand(
-                FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")),
+
+        FindCandidateCommand command = (FindCandidateCommand) parser.parseCommand(
+                FindCandidateCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")),
                 state, emailUtil);
-        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCandidateCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
