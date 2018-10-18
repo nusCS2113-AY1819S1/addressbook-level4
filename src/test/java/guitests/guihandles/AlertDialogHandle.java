@@ -2,6 +2,7 @@ package guitests.guihandles;
 
 import javafx.scene.control.DialogPane;
 import javafx.stage.Stage;
+
 import seedu.address.ui.UiManager;
 
 /**

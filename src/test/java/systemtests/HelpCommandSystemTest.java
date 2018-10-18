@@ -8,6 +8,7 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import org.junit.Test;
+
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.SelectCommand;

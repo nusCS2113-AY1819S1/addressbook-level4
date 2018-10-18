@@ -2,11 +2,13 @@ package seedu.address.ui;
 
 import java.util.Optional;
 
+import javafx.scene.Node;
+
 import guitests.GuiRobot;
 import guitests.guihandles.exceptions.NodeNotFoundException;
-import javafx.scene.Node;
 import org.junit.After;
 import org.junit.Rule;
+
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.ui.testutil.UiPartRule;
 

@@ -34,6 +34,7 @@ import static seedu.address.testutil.TypicalEvents.AMY;
 import static seedu.address.testutil.TypicalEvents.BOB;
 
 import org.junit.Test;
+
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.event.Address;
 import seedu.address.model.event.DateTime;

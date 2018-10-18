@@ -6,10 +6,12 @@ import static org.junit.Assert.assertFalse;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-import guitests.GuiRobot;
-import guitests.guihandles.exceptions.NodeNotFoundException;
 import javafx.scene.Node;
 import javafx.stage.Stage;
+
+import guitests.GuiRobot;
+import guitests.guihandles.exceptions.NodeNotFoundException;
+
 import seedu.address.commons.core.LogsCenter;
 
 /**

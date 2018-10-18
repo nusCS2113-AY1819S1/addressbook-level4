@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+
 import seedu.address.model.user.User;
 import seedu.address.storage.JsonUserStorage;
 

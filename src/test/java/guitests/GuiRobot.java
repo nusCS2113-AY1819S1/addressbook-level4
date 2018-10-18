@@ -3,8 +3,9 @@ package guitests;
 import java.util.Optional;
 import java.util.function.BooleanSupplier;
 
-import guitests.guihandles.exceptions.StageNotFoundException;
 import javafx.stage.Stage;
+
+import guitests.guihandles.exceptions.StageNotFoundException;
 import org.testfx.api.FxRobot;
 
 /**

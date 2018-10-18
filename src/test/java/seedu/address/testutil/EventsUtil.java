@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
-import guitests.GuiRobot;
 import javafx.application.Platform;
+
+import guitests.GuiRobot;
+
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.BaseEvent;
 

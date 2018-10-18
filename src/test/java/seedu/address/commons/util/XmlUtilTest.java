@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.model.EventManager;
 import seedu.address.model.event.Attendance;
 import seedu.address.storage.XmlAdaptedEvent;

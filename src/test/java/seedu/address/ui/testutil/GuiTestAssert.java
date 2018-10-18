@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import guitests.guihandles.EventCardHandle;
 import guitests.guihandles.EventListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+
 import seedu.address.model.event.Event;
 
 /**
