@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.grade.Marks;
+import seedu.address.model.grade.Test;
+import seedu.address.model.grade.TestName;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
@@ -24,41 +27,49 @@ import seedu.address.model.tag.Tag;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleDataUtil {
+
+
+
     public static Person[] getSamplePersons() {
+        Set<Test> test = new HashSet<>();
+        test.add(new Test(new TestName("a"), new Marks("1")));
+
         return new Person[] {
+
 
             new Person(new Name("Alex Yeoh"), new Gender("Male"), new Nationality("SG"),
                     new Phone("87438807"), new Email("alexyeoh@example.com"),
                     new Address("Blk 30 Geylang Street 29, #06-40"),
-                    new Grade("100"), getTagSet("friends"), null),
+                    new Grade("100"), getTagSet("friends"), test),
 
             new Person(new Name("Bernice Yu"), new Gender("Female"), new Nationality("SG"),
                     new Phone("99272758"), new Email("berniceyu@example.com"),
                     new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new Grade("100"), getTagSet("colleagues", "friends"), null),
+                    new Grade("100"), getTagSet("colleagues", "friends"), test),
 
             new Person(new Name("Charlotte Oliveiro"), new Gender("F"), new Nationality("AU"),
                     new Phone("93210283"), new Email("charlotte@example.com"),
                     new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new Grade("100"), getTagSet("neighbours"), null),
+                    new Grade("100"), getTagSet("neighbours"), test),
 
             new Person(new Name("David Li"), new Gender("M"), new Nationality("CN"),
                     new Phone("91031282"), new Email("lidavid@example.com"),
-                    new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new Grade("100"), getTagSet("family"), null),
-            new Person(new Name("Irfan Ibrahim"), new Gender("Male"), new Nationality("MY"),
+                    new Address("Blk 436 Seran"
+                            + "on Gardens Street 26, #16-43"),
+                    new Grade("100"), getTagSet("family"), test),
+            new Person(new Name("Irfan Ibrahi"
+                    + "m"), new Gender("Male"), new Nationality("MY"),
                     new Phone("92492021"), new Email("irfan@example.com"),
                     new Address("Blk 47 Tampines Street 20, #17-35"),
-                    new Grade("100"), getTagSet("classmates"), null),
+                    new Grade("100"), getTagSet("classmates"), test),
             new Person(new Name("Roy Balakrishnan"), new Gender("M"), new Nationality("IN"),
                     new Phone("92624417"), new Email("royb@example.com"),
                     new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    new Grade("100"), getTagSet("colleagues"), null)
-
-
-
+                    new Grade("100"), getTagSet("colleagues"), test)
         };
     }
+
+
 
     public static Group[] getSampleGroups() {
         return new Group[] {
@@ -121,5 +132,14 @@ public class SampleDataUtil {
         }
         return personSet;
     }
-
+    /**
+     * Returns a test set containing the list of test given.
+     */
+    public static Set<Test> getTestsSet(Test... tests) {
+        Set<Test> testSet = new HashSet<>();
+        for (Test t : tests) {
+            testSet.add(t);
+        }
+        return testSet;
+    }
 }
