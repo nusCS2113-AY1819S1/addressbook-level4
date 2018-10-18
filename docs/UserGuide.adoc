@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= Financial Planner - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,19 +12,22 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2113-AY1819S1-T09-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `T09-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+FinancialPlanner (FP) is for those who *prefer to use a desktop app for managing their finances*. More
+importantly, FP is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still
+having the benefits of a Graphical User Interface (GUI). If you can type fast, FP can get your finance management
+tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Copy the file to the folder you want to use as the home folder for your Financial Planner.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -33,9 +36,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`list`* : lists all records
+* **`add`**`n/Grocery shoppings m/-70 d/20-9-2018 t/Shopping` : adds a contact named `Grocery shopping` to the Financial Planner.
+* **`delete`**`3` : deletes the 3rd record shown in the current list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,57 +49,87 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter
+which can be used as `add n/Grocery shopping`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/Grocery shopping t/friend` or as
+`n/Grocery shopping`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}`
+(i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME m/MONEYFLOW`, `m/MONEYFLOW n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding a record: `add` [Vincent]
 
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Adds a record to the FinanceBook +
+Format: `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
+
+MONEYFLOW denotes the money parameter of the financial activity. It can be either a debit(expense) or a credit(income).
+To distinguish between an expense and an income, the user will need to enter a plus "+" or minus "-" sign before the
+money amount. +
+
+****
+* Typical format for a MONEYFLOW parameter :
+** Typical example of *expense*: add n/PhoneBill d/24-9-2018 m/*-4.50*
+** Typical example of *income*: add n/Allowance d/24-9-2018 m/*+50.00*
+****
 
 [TIP]
-A person can have any number of tags (including 0)
+A record can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/PaymentToJohn d/20-8-2018 m/-10`
+* `add n/PaymentFromBetty t/friend m/+10 d/10-11-2018 t/classmate`
 
-=== Listing all persons : `list`
+=== Listing all records satisfying some criteria : list [Vincent]
 
-Shows a list of all persons in the address book. +
-Format: `list`
-
-=== Editing a person : `edit`
-
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Shows a list of all records in the record book which fulfills a certain criteria. +
+There are 3 modes, default mode, single argument mode and dual argument mode. +
+Format: +
+Default mode: `list` +
+Single argument mode: `list d/DATE` +
+Dual argument mode: `list d/START_DATE END_DATE`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* The default mode will list down all records in the Financial Planner. +
+* The single argument mode will list down all records with the date equal to DATE specified in the format. +
+* The dual argument mode will list down all records with date equal to or later than START_DATE
+and earlier than or equal to END_DATE +
+****
+
+Examples:
+
+* `list`
+* `list d/10-11-2018`
+* `list d/10-11-2018 11-11-2018`
+
+=== Editing a record : `edit`
+
+Edits an existing record in the expense book. +
+Format: `edit INDEX [n/NAME] [m/MONEYFLOW] [d/DATE] [t/TAG]...`
+
+****
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the displayed record list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the record will be removed i.e adding of tags is not cumulative.
+* You can remove all the record's tags by typing `t/` without specifying any tags after it.
 ****
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `edit 1 m/+33 d/28-2-2018` +
+Edits the money flow and date of the 1st record to be `+33` and `28-2-2018` respectively.
+* `edit 2 n/Shopping for clothes t/` +
+Edits the name of the 2nd record to be `Shopping for clothes` and clears all existing tags.
 
-=== Locating persons by name: `find`
+=== Locating records by name: `find`
 
-Finds persons whose names contain any of the given keywords. +
+Finds records whose names contain any of the given keywords. +
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
 ****
@@ -104,24 +137,24 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
 * Only the name is searched.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Records matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 ****
 
 Examples:
 
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
+* `find Family` +
+Returns `dinner with family` and `family party`
+* `find family food shopping` +
+Returns all records having `family`, `food`, or `shopping` in their name
 
-=== Deleting a person : `delete`
+=== Deleting a record : `delete`
 
-Deletes the specified person from the address book. +
+Deletes the specified record from the expense book. +
 Format: `delete INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Deletes the record at the specified `INDEX`.
+* The index refers to the index number shown in the displayed record list.
 * The index *must be a positive integer* 1, 2, 3, ...
 ****
 
@@ -129,19 +162,36 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
+Deletes the 2nd record in the expense book.
+* `find Dinner` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st record in the results of the `find` command.
 
-=== Selecting a person : `select`
+=== Delete records in same date.
 
-Selects the person identified by the index number used in the displayed person list. +
+Deletes the records whose date is required from the expense book. +
+Format: `delete_date dd-mm-yyyy`
+
+****
+* Deletes the record at the specified `DATE`.
+* The DATE refers to the Date the user keyed in, which is shown in the displayed list.
+* The Date must follow the format: dd-mm-yyyy or dd-m-yyyy, and should be valid.
+****
+
+Examples:
+* `delete 31-03-1999` +
+Deletes the records whose date is 31-03-1999.
+* `delete 30-4-1999` +
+Deletes the records whose date is 31-04-1999.
+
+=== Selecting a record : `select`
+
+Selects the record identified by the index number used in the displayed record list. +
 Format: `select INDEX`
 
 ****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+* Selects the record and loads the Google search page the record at the specified `INDEX`.
+* The index refers to the index number shown in the displayed record list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 ****
 
@@ -149,10 +199,30 @@ Examples:
 
 * `list` +
 `select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
+Selects the 2nd record in the expense book.
+* `find Dinner` +
 `select 1` +
-Selects the 1st person in the results of the `find` command.
+Selects the 1st record in the results of the `find` command.
+
+=== Locating records by tag: `findtag`
+
+Finds records with tags that match any of the given keywords. +
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the tags are searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Records with tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `findtag friend` +
+Returns any record with `\*friend*`
+* `findtag friend food shopping` +
+Returns all records having tags `\*friend*`, `\*food*`, or `\*shopping*`
 
 === Listing entered commands : `history`
 
@@ -167,12 +237,12 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 // tag::undoredo[]
 === Undoing previous command : `undo`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the expense book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the expense book's content (`add`, `delete`, `edit` and `clear`).
 ====
 
 Examples:
@@ -216,7 +286,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the expense book. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -226,7 +296,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Financial Planner data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -238,12 +308,12 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Financial Planner folder.
 
 == Command Summary
 
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+* *Add* `add n/NAME d/DATE m/MONEYFLOW [t/TAG]...` +
+e.g. `add n/Dinner with family d/20-12-2017 m/-10 t/food t/family`
 * *Clear* : `clear`
 * *Delete* : `delete INDEX` +
 e.g. `delete 3`
@@ -251,10 +321,16 @@ e.g. `delete 3`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
-* *List* : `list`
+* *List* : `list [d/DATE] [DATE]` +
+e.g. +
+.  `list`
+. `list d/20-12-2017`
+. `list d/20-12-2017 31-09-2018`
 * *Help* : `help`
 * *Select* : `select INDEX` +
-e.g.`select 2`
+e.g. `select 2`
+* *Find Tag* : `findtag KEYWORD [MORE_KEYWORDS]` +
+e.g. `findtag friend`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
