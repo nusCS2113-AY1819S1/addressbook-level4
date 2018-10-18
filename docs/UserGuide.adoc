@@ -57,6 +57,18 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 Views help information of the various commands in RecruitBook. +
 Format: `help`
 
+=== Switching Books : `switch`
+
+Toggles between Candidate Book and Company Book according to your viewing needs.
+
+==== Switching to Candidate Book +
+Format: `switchc`
+
+==== Switching to Company Book +
+Format: `switchC`
+
+image::switchBook.png[width="790"]
+
 === Adding a candidate / company / job  : `add`
 
 ==== Adds a candidate to the RecruitBook
@@ -109,22 +121,23 @@ Format: `cancel`
 === Listing details of candidates / jobs : `list`
 
 ==== Shows a list of all candidates present in the RecruitBook +
-Format: `list candidates`
+Format: `listc`
 
 Examples:
 
-*   `John Doe p/91234567 e/johndoe@example.com a/72 Kent Ridge Rd j/Writer h/Business Degree s/$5000 j/Marketing assistant y/2 c/NUS`
-*	`Betsy Crower p/98765432 e/betsycrower@example.com ...`
-*	`Chris Lee p/91238765 e/chrislee@example.com ...`
+image::candidatePanel.png[width="790", align="left"]
 
-==== Shows a list of all job offers available at the moment +
-Format: `list jobs`
+==== Shows a list of all job offers of a selected company available at the moment +
+Format: `listC<INDEX>`
+
+Shows the list of job offers of the company with the specified `INDEX`.
+The index must be an index number shown in the displayed company list.
 
 Examples:
 
-*	`j/Software Engineer c/NUS ar/25-40 h/Computing Degree s/$6000-$8000 g/U`
-*	`j/Writer c/Singapore Press Holdings ar/25-30 h/A levels s/$5000-$6000 g/F`
-*	`j/Research Assistant c/A*STAR ar/25-50 h/Computing Degree s/$4000-$6000 g/M`
+image::companyPanel1.png[width="790", align="left"]
+image::companyPanel2.png[width="790", align="left"]
+image::companyPanel3.png[width="790", align="left"]
 
 === Editing a candidate / job : `editc`
 
@@ -250,8 +263,11 @@ Step 2. `deletej 5` +
 
 === Clearing all entries : `clear`
 
-Clears all entries from the RecruitBook. +
-Format: `clear`
+Clears all entries from the Candidate Book. +
+Format: `clearc`
+
+Clears all entries from the Company Book. +
+Format: `clearC`
 
 === Exiting the program : `exit`
 
