@@ -24,13 +24,13 @@ public class SetAdminCommand extends Command {
         + PREFIX_USER_NAME + "USER NAME "
         + PREFIX_ADMIN_SET + "SET/REVERT "
         + "Example: " + COMMAND_WORD + " "
-        + PREFIX_USER_NAME + "john"
+        + PREFIX_USER_NAME + "john "
         + PREFIX_ADMIN_SET + "true  ";
 
-    public static final String MESSAGE_SUCCESS = "%1$s now is %s an admin";
+    public static final String MESSAGE_SUCCESS = "%1$s now is %2$s an admin";
     public static final String MESSAGE_INVALID_USER = "This user does not exist.";
     public static final String MESSAGE_DUPLICATE_SET = "This user has already been an admin.";
-    public static final String MESSAGE_DUPLICATE_REVERT = "This user is not an admin.";
+    public static final String MESSAGE_DUPLICATE_REVERT = "%1$s is not an admin, unable to revert.";
 
     private final String userNametoSetAdmin;
     private final boolean setAdmin;
@@ -61,7 +61,7 @@ public class SetAdminCommand extends Command {
             if (setAdmin && userToSet.isAdmin()) {
                 throw new CommandException(MESSAGE_DUPLICATE_SET);
             } else if (!setAdmin && !userToSet.isAdmin()) {
-                throw new CommandException(MESSAGE_DUPLICATE_REVERT);
+                throw new CommandException(String.format(MESSAGE_DUPLICATE_REVERT, userToSet.getUsername()));
             } else {
                 userToSet.setAdmin(!userToSet.isAdmin());
                 unitOfWork.commit();
