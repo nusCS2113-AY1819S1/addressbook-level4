@@ -120,6 +120,17 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Returns the sorted list as an unmodifiable {@code ObservableList}.
+     */
+
+    /*public ObservableList<Person> sortedPersonList() {
+        ObservableList<Person> sortedInternalList = internalList;
+        sortedInternalList.sort(Comparator.comparing(person -> person.getName().fullName));
+
+        return FXCollections.unmodifiableObservableList(sortedInternalList);
+    }
+*/
+    /**
      * Returns true if {@code persons} contains only unique persons.
      */
     private boolean personsAreUnique(List<Person> persons) {
