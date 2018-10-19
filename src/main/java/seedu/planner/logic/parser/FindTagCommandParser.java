@@ -25,9 +25,9 @@ public class FindTagCommandParser implements Parser<FindTagCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
 
-        String[] nameKeywords = trimmedArgs.split("\\s+");
+        String[] tagKeywords = trimmedArgs.split("\\s+");
 
-        return new FindTagCommand(new TagsContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new FindTagCommand(new TagsContainsKeywordsPredicate(Arrays.asList(tagKeywords)));
     }
 
 }

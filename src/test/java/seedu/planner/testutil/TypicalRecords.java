@@ -59,6 +59,7 @@ public class TypicalRecords {
 
     private TypicalRecords() {} // prevents instantiation
 
+
     /**
      * Returns an {@code FinancialPlanner} with all the typical records.
      */
@@ -66,6 +67,7 @@ public class TypicalRecords {
         FinancialPlanner ab = new FinancialPlanner();
         for (Record record : getTypicalRecords()) {
             ab.addRecord(record);
+            ab.addRecordToSummary(record);
         }
         return ab;
     }

@@ -28,9 +28,6 @@ import static seedu.planner.testutil.TypicalRecords.AMY;
 import static seedu.planner.testutil.TypicalRecords.BOB;
 import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
-//import org.junit.Ignore;
-
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.Messages;
@@ -47,7 +44,6 @@ import seedu.planner.model.tag.Tag;
 import seedu.planner.testutil.RecordBuilder;
 import seedu.planner.testutil.RecordUtil;
 
-@Ignore
 public class EditCommandSystemTest extends FinancialPlannerSystemTest {
 
     @Test

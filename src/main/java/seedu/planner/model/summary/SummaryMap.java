@@ -64,7 +64,7 @@ public class SummaryMap {
      */
     public void update(Record target, Record editedRecord) {
         remove(target);
-        add(target);
+        add(editedRecord);
     }
 
     /**
