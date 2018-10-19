@@ -14,11 +14,8 @@ public class ViewStatisticCommand extends Command {
 
     public static final String COMMAND_WORD = "viewstatistic";
 
-    public static final String MESSAGE_SUCCESS = StatisticCenter.getInstance().getStatistic().toString();
-
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(StatisticCenter.getInstance().getStatistic().toString());
     }
 }

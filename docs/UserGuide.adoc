@@ -18,7 +18,13 @@ By: `Team SE-EDU, W13-4`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-BookInventory is catered for a variety of users, ranging from inventory keeper, accountant to students. Inventory Keeper is able to increase/decrease stocks for each book. The accountant is able to check the total revenue and profits for individual books to make better decisions to improve the sales. Students will have access in checking the availability of materials related to their modules. Most importantly, BookInventory is optimized for those who prefer to work with Command Line Interface (CLI) while stil having the benefits of a GraphicalUser Interface (GUI). Enjoy!
+BookInventory is catered for a variety of users, ranging from inventory keeper,
+accountant to students. Inventory Keeper is able to increase/decrease stocks for each book.
+The accountant is able to check the total revenue and profits for individual books to make
+better decisions to improve the sales. Students will have access in checking the availability
+of materials related to their modules. Most importantly, BookInventory is optimized for those
+who prefer to work with Command Line Interface (CLI) while still having the benefits of a
+GraphicalUser Interface (GUI). Enjoy!
 
 == Getting Started
 
@@ -31,6 +37,9 @@ image::download.png[width="450", align="left"]
 * If you are a github user, clone the repository.
 * However, it is encouraged that you "Download ZIP" in the drop-down menu.
 * Once it is downloaded, unzip the file.
+. Key-in password
+* A password will be required by the application to use it.
+* If you do not know the password, please contact us using github directly.
 . Input Commands
 * Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
@@ -43,6 +52,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ** *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
+
 
 [[Features]]
 == Features
@@ -171,7 +181,7 @@ Format: `request i/ISBN13 e/EMAIL q/QUANTITY`
 Examples:
 
 * `request i/978-2-12-345680-3 e/johnd@gmail.com q/5` +
-Requests for 5 same books with the corresponding iSBN13 with requester's price johnd@gmail.com
+Requests for 5 same books with the corresponding iSBN13 with requester's email johnd@gmail.com
 
 === Viewing of Requests : `viewrequests`
 
@@ -240,7 +250,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Display account data : `showdata`
 
-Displays accounting data
+Displays accounting data. +
 Format: `showdata`
 
 === Next Page : `next`

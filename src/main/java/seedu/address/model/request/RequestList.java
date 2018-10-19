@@ -57,7 +57,7 @@ public class RequestList implements ReadOnlyRequests {
     //// request-level operations
 
     /**
-     * Returns true if a request with the same identity as {@code request} exists in the address book.
+     * Returns true if a request with the same identity as {@code request} exists in the BookInventory.
      */
     public boolean hasRequest(Request request) {
         requireNonNull(request);
@@ -65,8 +65,8 @@ public class RequestList implements ReadOnlyRequests {
     }
 
     /**
-     * Adds a request to the address book.
-     * The request must not already exist in the address book.
+     * Adds a request to the BookInventory.
+     * The request must not already exist in the BookInventory.
      */
     public void addRequest(Request p) {
         requestList.add(p);
@@ -74,9 +74,9 @@ public class RequestList implements ReadOnlyRequests {
 
     /**
      * Replaces the given request {@code target} in the list with {@code editedRequest}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the BookInventory.
      * The request identity of {@code editedRequest} must not be the same as
-     * another existing request in the address book.
+     * another existing request in the BookInventory.
      */
     public void updateRequest(Request target, Request editedRequest) {
         requireNonNull(editedRequest);
@@ -86,7 +86,7 @@ public class RequestList implements ReadOnlyRequests {
 
     /**
      * Removes {@code key} from this {@code RequestList}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the BookInventory.
      */
     public void removeRequest(Request key) {
         requestList.remove(key);

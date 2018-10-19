@@ -15,7 +15,7 @@ import seedu.address.commons.events.model.BookInventoryChangedEvent;
 import seedu.address.model.book.Book;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the BookInventory data.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);

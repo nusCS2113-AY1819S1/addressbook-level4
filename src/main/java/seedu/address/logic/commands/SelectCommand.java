@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.book.Book;
 
 /**
- * Selects a book identified using it's displayed index from the address book.
+ * Selects a book identified using it's displayed index from the BookInventory.
  */
 public class SelectCommand extends Command {
 

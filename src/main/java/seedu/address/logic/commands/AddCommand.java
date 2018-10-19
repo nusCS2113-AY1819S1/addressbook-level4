@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.book.Book;
 
 /**
- * Adds a book to the address book.
+ * Adds a book to the BookInventory.
  */
 public class AddCommand extends Command {
 
@@ -31,13 +31,13 @@ public class AddCommand extends Command {
             + PREFIX_QUANTITY + "QUANTITY "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_NAME + "Hello World "
-            + PREFIX_ISBN + "943-13-41893-31-1 "
+            + PREFIX_NAME + "The Five People You Meet In Heaven "
+            + PREFIX_ISBN + "978-3-16-148410-0 "
             + PREFIX_PRICE + "19.99 "
             + PREFIX_COST + "15.00 "
             + PREFIX_QUANTITY + "50 "
-            + PREFIX_TAG + "cs2113t "
-            + PREFIX_TAG + "coding";
+            + PREFIX_TAG + "Mitch "
+            + PREFIX_TAG + "Albom";
 
     public static final String MESSAGE_SUCCESS = "New book added: %1$s";
     public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the inventory list";

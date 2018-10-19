@@ -7,12 +7,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Book's quantity in the inventory book.
  * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
  */
-public class Quantity {
+public class
+
+Quantity {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
-            "Quantity can take any values, and it should not be blank";
+            "Quantity can only take positive values, and it should not be blank";
 
-    /*
+    /**
      * Quantity only accepts from 0 to 999
      */
     public static final String QUANTITY_VALIDATION_REGEX = "\\d{1,3}";
@@ -34,6 +36,18 @@ public class Quantity {
 
     public void increase(int amount) {
         this.value = Integer.toString(Integer.parseInt(value) + amount);
+    }
+
+    /**
+     * Ensures quantity remains above 0 and stores the remaining quantity of books
+     *
+     * @param selling quantity of books sold
+     */
+    public void decrease(int selling) {
+        Integer after = Integer.parseInt(value) - selling;
+        if (after >= 0) {
+            this.value = Integer.toString(Integer.parseInt(value) - selling);
+        }
     }
 
     public int toInteger() {

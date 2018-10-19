@@ -6,7 +6,7 @@ import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
 
 /**
- * Represents a Request in the address book.
+ * Represents a Request in the BookInventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Request {

@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.logic.CommandHistory;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
@@ -26,7 +28,9 @@ public class CommandBox extends UiPart<Region> {
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
-
+    private final CommandHistory commandHistory;
+    private List<String> commands;
+    private int commandHistoryPointer;
     @FXML
     private TextField commandTextField;
 
@@ -36,6 +40,11 @@ public class CommandBox extends UiPart<Region> {
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
+        commandHistory = new CommandHistory();
+        commands = commandHistory.getHistory();
+        commandHistoryPointer = 0;
+        commands.add("add n/Hello World i/9783161484100 p/19.99 c/15.00 q/50 t/cs2113t t/coding");
+        commands.add("request i/9783161484100 q/42 e/johnd@example.com ");
     }
 
     /**
@@ -48,12 +57,22 @@ public class CommandBox extends UiPart<Region> {
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
             keyEvent.consume();
             navigateToNextInput();
+            break;
+        case TAB:
+            keyEvent.consume();
+            if (commands.size() == 0) {
+                break;
+            }
+            if (commands.size() == commandHistoryPointer) {
+                commandHistoryPointer = 0;
+            }
+            commandTextField.setText(commands.get(commandHistoryPointer));
+            commandHistoryPointer++;
             break;
         default:
             // let JavaFx handle the keypress

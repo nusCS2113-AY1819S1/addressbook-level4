@@ -10,12 +10,9 @@ import java.util.TimeZone;
  */
 public class Statistic {
     private static final String STARTING_FIGURE = "0";
-    // Identity field
-    private static volatile Statistic singleton = null;
-
     // Data fields
     private static Calendar localCalendar = Calendar.getInstance(TimeZone.getDefault());
-    private static Revenue revenue = new Revenue(null);
+    private volatile Revenue revenue;
     private final int month;
     private final int year;
 
@@ -24,6 +21,7 @@ public class Statistic {
      * Every field must be present and not null.
      */
     public Statistic(int month, int year) {
+        this.revenue = new Revenue(STARTING_FIGURE);
         this.month = month;
         this.year = year;
     }
@@ -40,8 +38,9 @@ public class Statistic {
         return revenue;
     }
 
-    public void increaseRevenue(String amount) {
-        revenue.increase(Float.parseFloat(amount));
+    public void increaseRevenue(String price, String amount) {
+        Float earnedRevenue = Float.parseFloat(price) * Integer.parseInt(amount);
+        revenue.increase(earnedRevenue);
     }
 
 
@@ -95,7 +94,7 @@ public class Statistic {
                 .append(" Year: ")
                 .append(getYear())
                 .append(" Revenue: ")
-                .append(getRevenue());
+                .append(getRevenue().toString());
         return builder.toString();
     }
 

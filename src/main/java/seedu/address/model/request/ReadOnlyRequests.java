@@ -3,7 +3,7 @@ package seedu.address.model.request;
 import javafx.collections.ObservableList;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an BookInventory
  */
 public interface ReadOnlyRequests {
 

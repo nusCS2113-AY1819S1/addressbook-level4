@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Book's phone number in the address book.
+ * Represents a Book's phone number in the BookInventory.
  * Guarantees: immutable; is valid as declared in {@link #isValidIsbn(String)}
  */
 public class Isbn {

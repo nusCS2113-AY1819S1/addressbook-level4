@@ -59,7 +59,7 @@ public class BookInventory implements ReadOnlyBookInventory {
     //// book-level operations
 
     /**
-     * Returns true if a book with the same identity as {@code book} exists in the address book.
+     * Returns true if a book with the same identity as {@code book} exists in the BookInventory.
      */
     public boolean hasPerson(Book book) {
         requireNonNull(book);
@@ -67,8 +67,8 @@ public class BookInventory implements ReadOnlyBookInventory {
     }
 
     /**
-     * Adds a book to the address book.
-     * The book must not already exist in the address book.
+     * Adds a book to the BookInventory.
+     * The book must not already exist in the BookInventory.
      */
     public void addBook(Book p) {
         persons.add(p);
@@ -76,8 +76,8 @@ public class BookInventory implements ReadOnlyBookInventory {
 
     /**
      * Replaces the given book {@code target} in the list with {@code editedBook}.
-     * {@code target} must exist in the address book.
-     * The book identity of {@code editedBook} must not be the same as another existing book in the address book.
+     * {@code target} must exist in the BookInventory.
+     * The book identity of {@code editedBook} must not be the same as another existing book in the BookInventory.
      */
     public void updatePerson(Book target, Book editedBook) {
         requireNonNull(editedBook);
@@ -87,7 +87,7 @@ public class BookInventory implements ReadOnlyBookInventory {
 
     /**
      * Removes {@code key} from this {@code BookInventory}.
-     * {@code key} must exist in the address book.
+     * {@code key} must exist in the BookInventory.
      */
     public void removePerson(Book key) {
         persons.remove(key);
