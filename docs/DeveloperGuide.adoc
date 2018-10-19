@@ -1109,7 +1109,7 @@ Use case ends.
 +
 Use case ends.
 
-//@@ChenSongJian
+//@@author ChenSongJian
 [discrete]
 === Use case: Add Expense(UC11)
 
