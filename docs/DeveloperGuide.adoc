@@ -455,6 +455,45 @@ Same as the other commands, see <<Events-Driven-Nature,*`Events-Driven nature of
 
 {nbsp}
 
+// tag::friend[]
+=== Friend feature
+==== Feature Description
+The friend feature allows users to befriend and add other users to their friend list. Timetables are only viewable for users in your friend list and timetables can only be deconflicted within your friends.
+
+==== Current implementation
+
+This feature is implemented with two main parts. The front end and the backend implementation, which will be explained below.
+
+
+===== Backend implementation
+
+The `User` is associated with a specific `Person`. Each person can have any number of `Friend` objects. Every friend will have a `Name` object that corresponds to the specific `Person` object in the list.
+
+.Class Diagram of the Friend class
+image::FriendClassDiagram.png[width="200"]
+
+{nbsp}
+
+
+===== Frontend implementation
+On the left side users will now see two panes, one above for friends and one below for the rest of the users not inside the friend list.
+PersonListPanel is adapted to now have two `Stackpane` instead of one and is nested inside a `Splitpane` in the `VBox`.
+
+.Frontend implementation of Friend feature
+image::FriendFeatureFrontEndDiagram.png[width="300"]
+
+===== Design Considerations
+===== How to store the Friends that a user has.
+* **Alternative 1 (current choice):** `Person` to compose `Friend` to compose `Name`
+** Pros:
+** Cons:
+* Alternative 2: Allowing every `Friend` object compose a `Person` instead of a `Name`
+** Pros:
+** Cons:
+// end::friend[]
+
+{nbsp}
+
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
