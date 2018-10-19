@@ -239,7 +239,312 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::login[]
+=== Login system feature
+==== Current Implementation
+
+The login mechanism utilizes an existing Java library, `FilteredList`, in order to filter out the relevant
+account that is associated with an instance of a successful login. An object belonging to the `FilteredList` class, called
+`filteredLoginDetails`, is instantiated at the start of the application. The `filteredLoginDetails` object initially
+contains a complete list of all existing accounts stored in `LoginBook`. There is one crucial operation in `FilteredList`,
+which is often used:
+
+* `FilteredList#setPredicate(predicate)` -- Filters the list of accounts in `filteredLoginDetails` according to the
+predicate determined after the user inputs their login credentials.
+
+The operation above is called when the method, `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)`, is
+called in `ModelManager`. `ModelManager` implements `updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate)` and
+`getFilteredLoginDetailsList()` found in the `Model` interface. `getFilteredLoginDetailsList()` is called when the
+list of accounts in `LoginBook` is filtered to the extent where only one or no account remains in the list.
+
+Given below is an example usage scenario and how the login mechanism behaves at each step. The sequence diagram below
+demonstrates the flow of operation and interaction between the `Logic` and `Model` component in the login mechanism.
+Specifically, the diagram shows what happens when the user inputs the correct login credentials.
+
+image::LoginSequenceDiagram.png[width="800"]
+
+Step 1. The user launches the application for the first time. The `filteredLoginDetails` object will be initialized with
+a list of all the accounts in `LoginBook`.
+
+image::InitialLoginBookList.PNG[width="300"]
+
+Step 2. The user executes `login A1234567M zaq1xsw2cde3` command in the input box that matches an account in
+`LoginBook`. `LogicManager` then calls `ParseCommand(login A1234567M zaq1xsw2cde3)` in `AddressBookParser`.
+
+image::CorrectIdPassword.PNG[width="300"]
+
+Step 3. `AddressBookParser` instantiates the `LoginUserIdPasswordCommandParser` object and simultaneously calls the `parse(args)` method, returning
+an `LoginUserIdPasswordCommand` object with the user input, parsed, to `AddressBookParser` and `LogicManager`.
+
+Step 4. `LogicManager` calls the `execute()` method in `LoginUserIdPasswordCommand`. Next, `LoginUserIdPasswordCommand`
+calls `updateFilteredLoginDetailsList(updatedIdPredicate)` in `Model` with the computed predicate from user ID field input.
+
+Step 5. `Model` calls `setPredicate(updatedIdPredicate)` in `FilteredList`, which then filters out accounts whose user Id is a
+mismatch with updatedIdPredicate. `filteredLoginDetails` is updated as shown below.
+
+image::ParseCorrectIdList.PNG[width="300"]
+
+Step 6. `LoginUserIdPasswordCommand` calls `updateFilteredLoginDetailsList(updatedPasswordPredicate)` in `Model` with the
+computed predicate from user password field input.
+
+Step 7. `Model` calls `setPredicate(updatedPasswordPredicate)` in `FilteredList`, which then further filters out accounts
+whose password is a mismatch with updatedPasswordPredicate. `filteredLoginDetails` is further updated as shown below.
+
+image::ParseCorrectIdList.PNG[width="300"]
+
+[NOTE]
+In step 2, if the user executes `login A1234561M zaq1xsw2cde3` command instead, the application will continue with steps
+2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
+list as shown in the image below.
+
+image::WrongIdCorrectPassword.PNG[width="300"]
+image::WrongIdOrPasswordList.PNG[width="300"]
+
+[NOTE]
+In step 2, if the user executes `login A1234567M zaq1xsw2cde4` command instead, the application will continue with steps
+2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
+list as shown in the image below.
+
+image::CorrectIdWrongPassword.PNG[width="300"]
+image::WrongIdOrPasswordList.PNG[width="300"]
+
+[NOTE]
+In step 2, if the user executes `login A1234561M zaq1xsw2cde4` command instead, the application will continue with steps
+2 to 7, but instead of one account remaining at the end of the filtering process, there will be no account in the updated
+list as shown in the image below.
+
+image::WrongIdPassword.PNG[width="300"]
+image::WrongIdOrPasswordList.PNG[width="300"]
+
+[NOTE]
+In all cases where the user inputs either the wrong ID or password or both, `showLoginError()` in `UserLoginException` will be
+called which brings up a warning dialog box that informs the user of wrong input credentials.
+
+image::LoginException.PNG[width="300"]
+
+The activity diagram below shows the overall picture of how the login mechanism works.
+
+image::LoginActivityDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: How login data is stored
+
+* **Alternative 1 (current choice):** Saves login credentials in loginbook.xml in XML format.
+** Pros: Easier to read, and versioning is possible.
+** Cons: XML data file takes up more storage space.
+* **Alternative 2:** Saves login credentials using JSON.
+** Pros: Does not take up a lot of space.
+** Cons: Harder to read.
+// end::login[]
+
+//tag::budget[]
+=== Budgeting Feature
+==== Current Implementation
+
+This feature has been implemented through 3 separate commands, each dealing with a separate stage in the calculation and
+subsequent allocation of budgets by the NUSSU Executive Committee to all the clubs that submit the data required to
+calculate the budget. The three commands are: `budget` - which handles the submission of data by the club treasurer required to calculate the
+calculate the budget for that club, `calculatebudget` - which is to be used only by the NUSSU Executive Committee members
+in order to calculate the budgets for each club and `viewbudget` - which lists the final budgets of all the clubs.
+
+==== Submission of Data
+
+Given below is an example usage scenario and the behaviour at each step of the `budget` command.
+
+Step 1. The user launches the application for the first time. 'filteredClubBudgets' will be initialised with an empty list
+of all the club budgets in the address book.
+
+Step 2. The user (a club's treasurer) executes `budget c/Computing Club t/200 e/5` command in order to
+submit the data for the calculation of her club's budget. The 'LogicManager' then calls the 'parseCommand' in the
+'AddressBookParser'.
+
+image::BudgetCommand.png[width="800"]
+
+Step 3. The 'AddressBookParser' then returns a new 'BudgetCommandParser', which then parses the command to be executed and
+creates a 'ClubBudgetElements' object called 'club' with the club's name, the expected turnout and the number of events.
+Finally the 'BudgetCommand' is called with 'club' as the parameter.
+
+Step 4. The 'BudgetCommand' checks whether the 'club' is a duplicate and it is not, the 'BudgetCommand' calls the 'addClub'
+command in 'Model' with 'club' as the parameter.
+
+Step 5. 'Model' calls 'addClub' in 'ReadOnlyAddressBook' and indicates that the address book's status has changed.
+
+Step 6. 'ReadOnlyAddressBook' calls the 'addClubBudget' command on an object 'clubs' of the 'UniqueClubsList' class, thus
+adding the required club's data to the address book.
+
+Step 7. Finally a success message is displayed with the details that have been entered by the user.
+
+image::ExecuteBudgetCommand.png[width="800"]
+
+[NOTE]
+In Step 4, had the user entered a club name that already existed in the list of clubs in the address book, then a duplicate
+message would be shown, prompting the user to edit their entered command and try again. Execution of subsequent steps would be stopped until the
+user entered a unique club name
+
+image::DuplicateBudget.png[width="800"]
+
+The image below is the sequence diagram for the functioning of the `budget` command:
+
+image::BudgetCommandSequenceDiagram.png[width="800"]
+
+//end::budget[]
+
 // tag::undoredo[]
+=== Search Pruning Feature
+
+The Search Pruning mechanism is facilitated by the `SearchHistoryManager`.
+Within `SearchHistoryManager` is `searchHistoryStack`, storing `Predicate` objects.
+The `Predicate` objects are used to filter `filteredListPerson` in ModelManager.
+
+A main `SearchHistoryManager` object named `searchHistoryManager` is stored within `ModelManager` and you could access `searchHistoryManager` by calling the
+getter method `getSearchHistoryManager()`.
+
+IMPORTANT: `searchHistoryManger` is only meant for the filtering of
+`Person` objects and Predicates irrelevant to the filtering of `Person` objects could not be stored in it.
+If you want to utilize `SearchHistoryManager` for your own use case, you can initialize a new SearchHistoryManager object
+by calling its default constructor.
+
+==== Current Implementation
+
+The main implementation behind SearchHistoryManager is a Stack Data Structure and the following 3 methods of `SearchHistoryManager` are exposed for your usage +
+
+* `executeNewSearch(Predicate<T> predicate)` +
+updates system search logic to the next state and returns a `Predicate` object storing the system search logic after the update.
+* `revertLastSearch()` +
+reverts system search logic to the previous state and returns a `Predicate` object storing
+                       the system search logic after revert.
+* `clearSearchHistory()` +
+clears all system search logic from in-app memory. +
+
+Given below are illustrations to help you understand how each method works internally
+
+ In the diagrams, UP is the short-form for User Predicate and SP is the short-form for System Predicate.
+ . User Predicate stores the logic specified by the user. This will not be used directly to filter the
+   list.
+ . System Predicate stores the search logic for the system which will be used to filter the list.
+
+NOTE: User Predicate and System Predicate are not actual Classes, they are simply there to help simplify the explanation.
+In the actual implementation, there is no way to differentiate one Predicate from the other
+
+'''
+
+`executeNewSearch(Predicate<T> predicate)` +
+
+Upon calling this method, there will be two different situations +
+
+* Situation 1: `searchHistoryStack` is empty +
+Upon receiving a new User Predicate, SearchHistoryManager will simply push the new Predicate into `searchHistoryStack`
+as a System Predicate which will be used to filter the list.
+
+image::executeNewSearchEmptyStack.png[width="800"]
+
+* Situation 2: `searchHistoryStack` is not empty +
+Before pushing the new `Predicate` into the stack, `SearchHistoryManager` will first retrieve the System Predicate object at the top of the stack.
+After retrieving it, it will call the `and()` method with the User Predicate, creating a new System Predicate which will then be pushed into the top
+of the stack.
+
+image::executeNewSearchNonEmptyStack.png[width="800"]
+'''
+`revertLastSearch()` +
+
+This method will pop the System Predicate at the top of the stack. +
+In the event that the stack is already empty, this method will throw `EmptyStackException`.
+
+image::undoSearchHistoryStack.png[width="800"]
+'''
+`clearSearchHistory()` +
+
+This method will simply empty the stack.
+
+image::clearSearchHistoryStack.png[width="800"]
+
+'''
+The following sequence diagrams shows you how `find` and `undosearch` commands utilize `SearchHistoryManager` to perform Search Pruning.
+
+ - `find` command +
+
+image::SearchPruningSequenceDiagram.png[width="800"]
+
+ - `undosearch` command +
+
+image::undoSearchSequenceDiagram.png[width="800"]
+
+
+==== Design Considerations
+
+Aspect: What data is stored in search history stack +
+
+* **Alternative 1(current choice):**  Save a Stack of Predicates
+** Pros:
+    . Does not need to store the data in search history explicitly which saves memory +
+    . Any form of Search Pruning done with Predicates can reuse `SearchHistoryManager` class +
+
+** Cons:
+. Need to understand how `Predicate` works before utilizing this Class.
+. `Predicate` objects by itself does not perform the Search Pruning. In NUSSU Connect, we have to pass the `Predicate`
+   into a `FilteredList<T>` object to do the Search Pruning.
+
+* ** Alternative 2: ** Save a Stack of Lists containing Person objects in search history
+** Pros:
+    . It is easy to understand that we are filtering according to Person objects from `SearchHistoryManager` class
+
+** Cons:
+    . More memory is required as Person objects has to be duplicated multiple times into a new List.
+    . Class is inextensible to store other objects other than those from a Person classes.
+
+
+=== Add Skill Level Command
+
+==== Current Implementation
+
+The add skill mechanism builds on the `addressBookParser`. This as well
+as it's subclass `addSkillCommandParser` ensures that the correct number of arguments
+is given to the command.
+
+The following shows how the application handles the request to change a skill in one particular scenario.
+
+Step 1. The user launches the application. The application boots up and lists all members.
+
+Step 2. The user locates the person he wants to add on at Index 4. They execute the `asl 4 s/Photography l/60` command.
+
+Step 3.'LogicManager' calls the 'parseCommand' in the 'AddressBookParser', which calls `AddSkillCommandParser` to
+parse it.
+
+Step 4. After parsing, the command is sent to the `Model` which alters the `Person` object by modifying their
+`Skill` and `SkillLevel` properties.
+
+Step 5. The result is encapsulated as a `CommandResult` object which is passed back to the `UI`.
+
+
+Before executing the command:
+
+image::aslbefore.png[width="800"]
+After executing the command:
+
+image::aslafter.png[width="800"]
+
+==== Alternate implementations
+
+We considered two different ways to implement the Skill Class.
+
+* **Alternative 1**: Combining both Skill and SkillLevel properties together into a single class.
+
+** Pros: Resembles the real world, as there is a one-to-one mapping of Skill to SkillLevel.
+** Cons: Harder to test, and violates Single Responsiblity Principle.
+
+* **Alternative 2 (Current Choice)**: Separating the Skill and SkillLevel classes into different classes.
+
+** Pros: Easier to test.
+** Cons: Adds to the number of classes unnecessarily.
+
+==== Possible extensions
+
+* One possiblilty is to enhance the add command such that skills can be added together with the rest of the
+information during addition of personal information.
+* Another is to enhance the edit command, possibly depreciating the use of the add skill level command.
+* Another is to enhance the storage such that multiple skills can be added per person.
+
 === Undo/Redo feature
 ==== Current Implementation
 
@@ -318,13 +623,6 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 === Logging
 
@@ -836,9 +1134,13 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |member of NUSSU |find out how to contact another member within NUSSU |work more efficiently with them
 
-|`* * *` |someone that takes charge of sponsors for events hosted by NUSSU |filter my search such that I would be only looking at the list of sponsors |not need to look through the whole list of addressbook
+|`* * *` |someone that takes charge of sponsors for events hosted by NUSSU |filter my search such that I would be only looking at the list of sponsors |not need to look through the whole list of contact details
 
 |`* * *` |event organizer that is trying to find the contact details of some very specific group of people |have a search and filter function that is flexible enough |find all the search requirements can be done on the application without needing me to look through the whole list
+
+|`* * *` |any user trying to filter the list of contact details|have an intuitive way to filter a large list of people|so that I can get the information that I want easily and quickly
+
+|`* * *` |forgetful user utilizing the newly implemented search pruning feature|keep track of my past search commands|so that I would not need to commit what I typed to memory
 
 |`* * *` |member of the NUSSU treasury |have a budgeting function |fairly allocate budgets to the different clubs/projects
 
@@ -850,13 +1152,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |member of the NUSSU treasury |view requests for grants from the clubs |allocate them the grant if the request is accepted by the NUSSU
 
-|`* * *` |executive member of NUSSU |log into the application with the relevant credentials |gain secure access to the application
+|`* * *` |executive member of NUSSU |log into the application |gain secure access to the application
 
-|`* * *` |executive member of NUSSU |create a new account for the application |gain access to certain features of the application relevant to my role when I log in
+|`* * *` |executive member of NUSSU |create a new account for the application with my relevant role |gain access to certain features of the application relevant to my role when I log in using the created account details
 
-|`* * *` |executive member of NUSSU |delete an existing account from the application |clear my login credentials from the application when I am not using it anymore
-
-|`* * *` |executive member of NUSSU |change the password of an existing account |feel more secure about my account login credentials
+|`* * *` |executive member of NUSSU |log into the application specific to my role |gain access to certain features of the application relevant to my role when I log in
 
 |`* *` |general secretary of NUSSU |have the option to backup all, or even specific segments of application data into a data file |recover the required segments of data when there is an accidental deletion of data
 
@@ -871,10 +1171,6 @@ As an executive officer of NUSSU, I would like to view which other committees my
 As an executive officer of NUSSU, I can log into the app with the required credentials, so that I can access certain functionalities of the app exclusive to my credentials only.
 
 As an executive member of NUSSU, I can create a new account for myself to log into the app, so that I can access the functionalities of the app.
-
-As an executive member of NUSSU, I can delete an existing account, so that the account that is redundant will be removed from the database.
-
-As an executive member of NUSSU, I can change the password of an existing account, so that I can make my account more secure.
 
 As a member of NUSSU, I would like to find out how to contact another member within NUSSU so that I can work more efficiently with them.
 
@@ -925,7 +1221,6 @@ As someone that keeps track of the finances for hosting events, I would like an 
 As someone that records what was discussed in a meeting, I would like to be able to keep a record of what everyone said, so that we can use it as a future reference for further discussion.
 
 As someone that constantly sends email to other members of NUSSU/ Sponsors/ Public, I would like to have an access to multiple different templates of emails so that I can focus more on writing the content of the email instead of spending too much time on crafting the overall structure.
-
 
 _{More to be added}_
 
@@ -1054,20 +1349,19 @@ Use case ends
 
 *MSS*
 
-1.  User types a command to access a certain functionality in NUSSU-Connect
-2.  NUSSU-Connect prompts user to login first by entering login credentials
-3.  User types in login credentials along with the login command
-4.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
+1.  NUSSU-Connect prompts user to login first by entering login credentials
+2.  User types in login credentials along with the login command
+3.  NUSSU-Connect queries against login book and authorizes the user full access to NUSSU-Connect
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 3a. User types in wrong password or user ID
+* 2a. User types in wrong password or user ID
 +
 [none]
-** 3a1. NUSSU-Connect displays error message and continues to prompt user for login credentials before doing anything else
+** 2a1. NUSSU-Connect continues to prompt user for login credentials before giving access to user
 +
 Use case ends.
 
@@ -1097,63 +1391,6 @@ Use case ends.
 ** 3a1. NUSSU-Connect shows error message to user and and does not create a new account
 +
 Use case ends.
-
-=== Use case: Delete current user accounts
-
-*MSS*
-
-1.  User types command together with user ID and password to delete account associated with input user ID and password
-2.  NUSSU-Connect account associated with input user ID and respective password and shows successful execution message
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. User types in the wrong current password associated with the user ID
-+
-[none]
-** 1a1. NUSSU-Connect shows error message to user and cancels deletion of account
-+
-Use case ends.
-* 1b. User wants to delete a non-existent user account
-+
-[none]
-** 1b1. NUSSU-Connect shows error message to user and cancels deletion of account
-+
-Use case ends.
-
-=== Use case: Changing password of current user accounts
-
-*MSS*
-
-1.  User types command with the relevant credentials of an existing account to change that account's password
-2.  NUSSU-Connect changes password of account associated with input user ID and new password and shows successful execution message
-+
-Use case ends.
-
-*Extensions*
-
-[none]
-* 1a. User types in the wrong current password associated with the user ID
-+
-[none]
-** 1a1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-* 1b. User wants to change the password of a non-existent user account
-+
-[none]
-** 1b1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-* 1c. User types in new password that matches current old password
-+
-[none]
-** 1c1. NUSSU-Connect shows error message to user and cancels changing of password of account
-+
-Use case ends.
-
 
 _{More to be added}_
 

@@ -20,6 +20,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
     private static final String SKILL_FIELD_ID = "#skill";
+    private static final String SKILLLEVEL_FIELD_ID = "#skillLevel";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
@@ -28,6 +29,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label phoneLabel;
     private final Label emailLabel;
     private final Label skillLabel;
+    private final Label skillLevelLabel;
     private final List<Label> tagLabels;
 
     public PersonCardHandle(Node cardNode) {
@@ -39,6 +41,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
         skillLabel = getChildNode(SKILL_FIELD_ID);
+        skillLevelLabel = getChildNode(SKILLLEVEL_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -69,8 +72,10 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     public String getSkill() {
-        return skillLabel.getText();
-    }
+        return skillLabel.getText(); }
+
+    public String getSkillLevel() {
+        return skillLevelLabel.getText(); }
 
     public List<String> getTags() {
         return tagLabels

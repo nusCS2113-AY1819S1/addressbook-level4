@@ -7,6 +7,7 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <skill isPrivate="false">Skillsets</skill>
+        <skillLevel isPrivate="false">5</skillLevel>
     </persons>
     <!-- Person with invalid phone field -->
     <persons>
@@ -15,5 +16,6 @@
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
         <skill isPrivate="false">Skillsets</skill>
+        <skillLevel isPrivate="false">5</skillLevel>
     </persons>
 </addressbook>

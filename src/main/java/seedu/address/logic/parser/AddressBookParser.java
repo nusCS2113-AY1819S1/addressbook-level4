@@ -6,9 +6,11 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.JOptionPane;
-
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddSkillCommand;
+import seedu.address.logic.commands.AddSkillLevelCommand;
+import seedu.address.logic.commands.BudgetCalculationCommand;
+import seedu.address.logic.commands.BudgetCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateAccountCommand;
@@ -24,8 +26,9 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoSearchCommand;
+import seedu.address.logic.commands.ViewClubBudgetsCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.ui.LoginDialogBox;
 
 /**
  * Parses user input.
@@ -44,7 +47,7 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException {
+    public Command parseCommand(String userInput) throws ParseException, CommandException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -57,19 +60,7 @@ public class AddressBookParser {
             return new LoginUserIdPasswordCommandParser().parse(arguments);
 
         case CreateAccountCommand.COMMAND_WORD:
-            //@@author Chocological-reused
-            //Reused from https://stackoverflow.com/posts/6555051/revisions with minor modifications
-            LoginDialogBox.setLoginDialogBox();
-
-            String loginSelection = JOptionPane.showInputDialog(LoginDialogBox.getLoginFrame(),
-                    "Please type in master password", null);
-            //@@author
-            switch (loginSelection) {
-            case "123456789":
-                return new CreateAccountCommandParser().parse(arguments);
-            default:
-                throw new IllegalArgumentException("Wrong master password!");
-            }
+            return new CreateAccountCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
@@ -92,6 +83,9 @@ public class AddressBookParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ViewClubBudgetsCommand.COMMAND_WORD:
+            return new ViewClubBudgetsCommand();
+
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
 
@@ -107,8 +101,26 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
+<<<<<<< HEAD
         case UndoSearchCommand.COMMAND_WORD:
             return new UndoSearchCommand();
+=======
+        case AddSkillCommand.COMMAND_WORD:
+            return new AddSkillCommandParser().parse(arguments);
+
+
+        case AddSkillLevelCommand.COMMAND_WORD:
+            return new AddSkillLevelCommandParser().parse(arguments);
+
+        case UndoSearchCommand.COMMAND_WORD:
+            return new UndoSearchCommand();
+
+        case BudgetCommand.COMMAND_WORD:
+            return new BudgetCommandParser().parse(arguments);
+
+        case BudgetCalculationCommand.COMMAND_WORD:
+            return new BudgetCalculationCommandParser().parse(arguments);
+>>>>>>> f9374283a72493067a0bda36ce277c57c3445d3c
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

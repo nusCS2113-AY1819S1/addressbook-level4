@@ -18,8 +18,8 @@ import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
 public class LoginUserIdPasswordCommandParser implements Parser<LoginCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the CreateAccountCommand
-     * and returns an CreateAccountCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the LoginUserIdPasswordCommand
+     * and returns an LoginUserIdPasswordCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public LoginCommand parse(String args) throws ParseException {

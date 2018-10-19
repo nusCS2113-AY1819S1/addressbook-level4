@@ -9,6 +9,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Skill;
+import seedu.address.model.person.SkillLevel;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -21,13 +22,15 @@ public class PersonBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final String DEFAULT_SKILL = "";
+    public static final String DEFAULT_SKILL = "Photography";
+    public static final int DEFAULT_SKILLLEVEL = 20;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
     private Skill skill;
+    private SkillLevel skillLevel;
     private Set<Tag> tags;
 
     public PersonBuilder() {
@@ -36,6 +39,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         skill = new Skill(DEFAULT_SKILL);
+        skillLevel = new SkillLevel(DEFAULT_SKILLLEVEL);
         tags = new HashSet<>();
     }
 
@@ -48,6 +52,7 @@ public class PersonBuilder {
         email = personToCopy.getEmail();
         address = personToCopy.getAddress();
         skill = personToCopy.getSkill();
+        skillLevel = personToCopy.getSkillLevel();
         tags = new HashSet<>(personToCopy.getTags());
     }
 
@@ -90,9 +95,23 @@ public class PersonBuilder {
         this.email = new Email(email);
         return this;
     }
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSkill(String skill) {
+        this.skill = new Skill(skill);
+        return this;
+    }
+    /**
+     * Sets the {@code Email} of the {@code Person} that we are building.
+     */
+    public PersonBuilder withSkillLevel(int skillLevel) {
+        this.skillLevel = new SkillLevel(skillLevel);
+        return this;
+    }
 
     public Person build() {
-        return new Person(name, phone, email, address, skill, tags);
+        return new Person(name, phone, email, address, skill, skillLevel, tags);
     }
 
 }

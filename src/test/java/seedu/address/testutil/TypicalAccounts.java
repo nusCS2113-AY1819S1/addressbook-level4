@@ -24,6 +24,8 @@ public class TypicalAccounts {
             .withUserPassword("1qaz2wsx3edc").build();
     public static final LoginDetails LOGINDETAIL4 = new AccountBuilder().withUserId("A1234566M")
             .withUserPassword("zaq1xsw2cde3").build();
+    public static final LoginDetails LOGINDETAIL5 = new AccountBuilder().withUserId("A1234567M")
+            .withUserPassword("zaq1xsw2cde3").build();
 
     public static final LoginDetails ACCOUNT1 = new AccountBuilder().withUserId(VALID_ID_ACCOUNT1)
             .withUserPassword(VALID_PASSWORD_ACCOUNT1).build();

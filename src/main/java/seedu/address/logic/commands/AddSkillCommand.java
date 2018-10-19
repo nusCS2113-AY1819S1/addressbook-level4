@@ -13,6 +13,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Skill;
+import seedu.address.model.person.SkillLevel;
 
 //@@author derpyplops-reused
 //{The implementation is a simple renaming of the "remark" example in the Dev Guide.
@@ -30,7 +31,7 @@ public class AddSkillCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing skill will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_SKILL + "[REMARK]\n"
+            + PREFIX_SKILL + "[SKILL]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_SKILL + "Can swim.";
 
@@ -38,6 +39,7 @@ public class AddSkillCommand extends Command {
 
     public static final String MESSAGE_ADD_SKILL_SUCCESS = "Added skill to person: %1$s";
     public static final String MESSAGE_DELETE_SKILL_SUCCESS = "Remove skill to person: %1$s";
+    public final SkillLevel dummySkillLevel = new SkillLevel(0);
     private final Index index;
     private final Skill skill;
     /**
@@ -62,7 +64,7 @@ public class AddSkillCommand extends Command {
         }
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), skill, personToEdit.getTags());
+                personToEdit.getAddress(), skill, dummySkillLevel, personToEdit.getTags());
         model.updatePerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();

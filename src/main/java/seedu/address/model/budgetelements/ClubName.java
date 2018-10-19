@@ -18,7 +18,7 @@ public class ClubName {
      * otherwise " " (a blank string) becomes a valid input.
      */
 
-    public static final String CLUB_NAME_VALIDATION_REGEX = "[\\p{Alnum}]*";
+    public static final String CLUB_NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
     public final String clubName;
 
