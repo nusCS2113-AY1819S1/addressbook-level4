@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<financialplanner>
+    <!-- Record with invalid name field -->
+    <records>
+        <name>Payment for HM!!</name>
+        <date isPrivate="false">10-12-1994</date>
+        <moneyFlow isPrivate="false">-11.99</moneyFlow>
+    </records>
+</financialplanner>
