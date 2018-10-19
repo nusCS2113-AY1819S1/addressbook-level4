@@ -323,11 +323,11 @@ Format: `email`
     the contents. +
     Type `next` to move on to the next step.
 
-    WARNING: Recipients and contents must be contrasting - If recipients are candidates, then
-    the content must be job offers and vice versa.
-
 .   *Sending your email.* Once both recipients and contents have been picked, type `send` to send your email. +
     This step is a confirmation step before you actually send the email.
+
+WARNING: Recipients and contents must be contrasting - If recipients are candidates, then the
+content must be job offers and vice versa.
 
 Examples:
 
