@@ -45,7 +45,7 @@
 //
 //    @Test
 //    public void addressBook_dataFileDoesNotExist_loadSampleData() {
-//        Book[] expectedList = SampleDataUtil.getSamplePersons();
+//        Book[] expectedList = SampleDataUtil.getSampleBooks();
 //        assertListMatching(getPersonListPanel(), expectedList);
 //    }
 //}

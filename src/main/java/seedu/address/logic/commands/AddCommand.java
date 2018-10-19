@@ -60,6 +60,7 @@ public class AddCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_BOOK);
         }
 
+
         model.addBook(toAdd);
         model.commitBookInventory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
