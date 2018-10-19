@@ -84,7 +84,7 @@ public class DeleteCommandByDateEntryTest {
         //delete the Records have required date
         deleteCommandByDateEntry.execute(model, commandHistory);
 
-        //undo -> reverts addressBook back to the prebious state and filtered record list to show all records
+        //undo -> reverts financialPlanner back to the prebious state and filtered record list to show all records
         expectedModel.undoFinancialPlanner();
         CommandTestUtil.assertCommandSuccess(
                 new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
