@@ -32,11 +32,10 @@ public class EmailSelectRecipientsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        EmailUtil emailUtil = model.getEmailUtil();
 
         //Add recipients only if commandWord is add.
         if(commandWord.equals("add")) {
-            EmailUtil emailUtil = model.getEmailUtil();
-
             if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                 ObservableList<Candidate> recipients = model.getFilteredCandidateList();
                 for (Candidate recipient : recipients) {
@@ -52,8 +51,25 @@ public class EmailSelectRecipientsCommand extends Command {
             }
             return new CommandResult("Recipients added!\n" + EmailSelectRecipientsCommand.MESSAGE_USAGE);
         } else {
-            LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
-            return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
+            //Check if content array is empty, if it is, do not allow to move on to next stage
+            boolean isEmpty = false;
+
+            //if recipient are candidates and candidate arraylist is empty
+            if (emailUtil.isAreRecipientsCandidates() && emailUtil.getCandidates().size() == 0) {
+                isEmpty = true;
+            }
+            //if companies are candidates and job offers arraylist is empty
+            if (!emailUtil.isAreRecipientsCandidates() && emailUtil.getJobOffers().size() == 0) {
+                isEmpty = true;
+            }
+
+            if(isEmpty) {
+                return new CommandResult("There are no recipients selected!\n"
+                        + EmailSelectRecipientsCommand.MESSAGE_USAGE);
+            } else {
+                LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
+                return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
+            }
         }
     }
 }
