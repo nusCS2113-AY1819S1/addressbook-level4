@@ -3,7 +3,6 @@ package systemtests;
 import static seedu.planner.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.index.Index;
@@ -13,7 +12,6 @@ import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
 
-@Ignore
 public class ClearCommandSystemTest extends FinancialPlannerSystemTest {
 
     @Test
@@ -76,6 +74,7 @@ public class ClearCommandSystemTest extends FinancialPlannerSystemTest {
      * @see ClearCommandSystemTest#assertCommandSuccess(String)
      */
     private void assertCommandSuccess(String command, String expectedResultMessage, Model expectedModel) {
+
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();

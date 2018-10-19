@@ -52,6 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void resetData(ReadOnlyFinancialPlanner newData) {
         versionedFinancialPlanner.resetData(newData);
         indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
     }
 
     @Override
@@ -192,12 +193,16 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoFinancialPlanner() {
         versionedFinancialPlanner.undo();
         indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
+        indicateLimitListChanged();
     }
 
     @Override
     public void redoFinancialPlanner() {
         versionedFinancialPlanner.redo();
         indicateFinancialPlannerChanged();
+        indicateSummaryMapChanged();
+        indicateLimitListChanged();
     }
 
     @Override
