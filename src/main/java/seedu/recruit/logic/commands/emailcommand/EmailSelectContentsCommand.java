@@ -50,7 +50,7 @@ public class EmailSelectContentsCommand extends Command {
             }
 
             String output = "Content added:\n";
-            if(emailUtil.isAreRecipientsCandidates()) {
+            if (emailUtil.isAreRecipientsCandidates()) {
                 output += model.getFilteredContentJobOfferNames();
             } else {
                 output += model.getFilteredCandidateNames();
@@ -58,7 +58,7 @@ public class EmailSelectContentsCommand extends Command {
             output += EmailSelectRecipientsCommand.MESSAGE_USAGE;
             return new CommandResult(output);
 
-        } else if(commandWord.equals("next")) {
+        } else if (commandWord.equals("next")) {
             //Check if content array is empty, if it is, do not allow to move on to next stage
             boolean isEmpty = false;
 
@@ -71,7 +71,7 @@ public class EmailSelectContentsCommand extends Command {
                 isEmpty = true;
             }
 
-            if(isEmpty) {
+            if (isEmpty) {
                 return new CommandResult("ERROR: There are no contents selected!\n"
                         + EmailSelectContentsCommand.MESSAGE_USAGE);
             } else {

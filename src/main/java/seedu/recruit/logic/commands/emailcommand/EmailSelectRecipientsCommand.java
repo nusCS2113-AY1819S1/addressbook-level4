@@ -36,7 +36,7 @@ public class EmailSelectRecipientsCommand extends Command {
         EmailUtil emailUtil = model.getEmailUtil();
 
         //Add recipients only if commandWord is add.
-        if(commandWord.equals("add")) {
+        if (commandWord.equals("add")) {
             if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                 ObservableList<Candidate> recipients = model.getFilteredCandidateList();
                 for (Candidate recipient : recipients) {
@@ -52,7 +52,7 @@ public class EmailSelectRecipientsCommand extends Command {
             }
 
             String output = "Recipients added:\n";
-            if(emailUtil.isAreRecipientsCandidates()) {
+            if (emailUtil.isAreRecipientsCandidates()) {
                 output += model.getFilteredCandidateNames();
             } else {
                 output += model.getFilteredRecipientJobOfferNames();
@@ -73,7 +73,7 @@ public class EmailSelectRecipientsCommand extends Command {
                 isEmpty = true;
             }
 
-            if(isEmpty) {
+            if (isEmpty) {
                 return new CommandResult("ERROR: There are no recipients selected!\n"
                         + EmailSelectRecipientsCommand.MESSAGE_USAGE);
             } else {

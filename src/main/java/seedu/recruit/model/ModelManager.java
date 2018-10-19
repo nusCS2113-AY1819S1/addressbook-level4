@@ -312,7 +312,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String getFilteredRecipientJobOfferNames() {
         StringBuilder output = new StringBuilder();
-        for(JobOffer jobOffer : filteredJobs) {
+        for (JobOffer jobOffer : filteredJobs) {
             output.append(jobOffer.getCompanyName().toString());
             output.append(" regarding job offer: ");
             output.append(jobOffer.getJob().toString());
@@ -327,7 +327,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String getFilteredContentJobOfferNames() {
         StringBuilder output = new StringBuilder();
-        for(JobOffer jobOffer : filteredJobs) {
+        for (JobOffer jobOffer : filteredJobs) {
             output.append(jobOffer.getJob().toString());
             output.append(" at ");
             output.append(jobOffer.getCompanyName().toString());
@@ -342,7 +342,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String getFilteredCandidateNames() {
         StringBuilder output = new StringBuilder();
-        for(Candidate candidate : filteredCandidates) {
+        for (Candidate candidate : filteredCandidates) {
             output.append(candidate.getName().toString());
             output.append("\n");
         }

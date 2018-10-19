@@ -50,9 +50,7 @@ public class EmailSendCommand extends Command {
         for (Object content : contents) {
             System.out.println(content.toString());
         }
-
         System.out.println("-----------------------------");
-
         for (Object recipient : recipients) {
             System.out.println(recipient.toString());
         }

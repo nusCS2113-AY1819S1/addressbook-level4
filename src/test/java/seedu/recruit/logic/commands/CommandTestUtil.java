@@ -378,5 +378,20 @@ public class CommandTestUtil {
         public void setEmailUtil(EmailUtil emailUtil) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getFilteredRecipientJobOfferNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredContentJobOfferNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredCandidateNames() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 }
