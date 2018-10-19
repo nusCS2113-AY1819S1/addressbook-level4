@@ -6,7 +6,6 @@ import static seedu.planner.logic.commands.CommandTestUtil.deleteFirstRecord;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.logic.CommandHistory;
@@ -14,7 +13,6 @@ import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
 import seedu.planner.model.UserPrefs;
 
-@Ignore
 public class UndoCommandTest {
 
     private final Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());

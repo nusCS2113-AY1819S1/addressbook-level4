@@ -10,7 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
@@ -24,7 +23,6 @@ import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.ui.testutil.EventsCollectorRule;
 
-@Ignore
 public class StorageManagerTest {
 
     @Rule

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -16,6 +17,7 @@ import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.testutil.TypicalRecords;
 
+@Ignore
 public class XmlSerializableFinancialPlannerTest {
 
     private static final Path TEST_DATA_FOLDER =
