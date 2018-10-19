@@ -46,6 +46,7 @@ public class UniqueEventList implements Iterable<Event> {
             throw new DuplicateEventException();
         }
         internalList.add(toAdd);
+        sortEventList();
     }
 
     /**
@@ -66,6 +67,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.set(index, editedEvent);
+        sortEventList();
     }
 
     /**
@@ -77,11 +79,13 @@ public class UniqueEventList implements Iterable<Event> {
         if (!internalList.remove(toRemove)) {
             throw new EventNotFoundException();
         }
+        sortEventList();
     }
 
     public void setEvents(UniqueEventList replacement) {
         requireNonNull(replacement);
         internalList.setAll(replacement.internalList);
+        sortEventList();
     }
 
     /**
@@ -95,6 +99,7 @@ public class UniqueEventList implements Iterable<Event> {
         }
 
         internalList.setAll(events);
+        sortEventList();
     }
 
     /**

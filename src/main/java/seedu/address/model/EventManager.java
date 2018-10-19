@@ -103,7 +103,6 @@ public class EventManager implements ReadOnlyEventManager {
 
     @Override
     public ObservableList<Event> getEventList() {
-        //events.sortEventList();
         return events.asUnmodifiableObservableList();
     }
 

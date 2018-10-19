@@ -25,6 +25,7 @@ import seedu.address.model.event.Event;
  */
 public class TypicalEvents {
 
+    //Sort list in order should be: CARL, ELLE, ALICE, DANIEL, FIONA, BENSON, GEORGE,
     public static final Event ALICE = new EventBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
             .withPhone("94351253")
@@ -56,6 +57,7 @@ public class TypicalEvents {
             .withEmail("hans@example.com").withAddress("chicago ave").withDateTime("18/17/2018 10:45").build();
 
     // Manually added - Event's details found in {@code CommandTestUtil}
+    //Order in the list BOB, AMY
     public static final Event AMY = new EventBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
             .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_FRIEND).build();
