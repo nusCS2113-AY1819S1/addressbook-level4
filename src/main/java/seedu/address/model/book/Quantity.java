@@ -7,7 +7,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents a Book's quantity in the inventory book.
  * Guarantees: immutable; is valid as declared in {@link #isValidQuantity(String)}
  */
-public class Quantity {
+public class
+
+Quantity {
 
     public static final String MESSAGE_ADDRESS_CONSTRAINTS =
             "Quantity can only take positive values, and it should not be blank";
