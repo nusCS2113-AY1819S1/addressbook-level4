@@ -35,7 +35,10 @@ public class EmailParser {
                 return new ListCommand();
 
             case "next":
-                return new EmailSelectRecipientsCommand();
+                return new EmailSelectRecipientsCommand(commandWord);
+
+            case "add":
+                return new EmailSelectRecipientsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -47,11 +50,11 @@ public class EmailParser {
                 && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
-
             case "next":
-                return new EmailSelectContentsCommand();
+                return new EmailSelectContentsCommand(commandWord);
+
+            case "add":
+                return new EmailSelectContentsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -64,7 +67,10 @@ public class EmailParser {
                 return new ListCommand();
 
             case "next":
-                return new EmailSelectContentsCommand();
+                return new EmailSelectContentsCommand(commandWord);
+
+            case "add":
+                return new EmailSelectContentsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

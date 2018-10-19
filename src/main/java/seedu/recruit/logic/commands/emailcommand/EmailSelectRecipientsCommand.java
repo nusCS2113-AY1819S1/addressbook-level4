@@ -18,30 +18,42 @@ import seedu.recruit.ui.MainWindow;
  */
 public class EmailSelectRecipientsCommand extends Command {
     public static final String COMMAND_WORD = "next";
-    public static final String MESSAGE_USAGE = "Find the recipients that you are going to email\n "
-            + "Type \"next\" when you have done so to move on to the next step.";
+    public static final String MESSAGE_USAGE = "Find the recipients that you are going to email\n"
+            + "All items listed below will be added into the recipients field.\n"
+            + "Find/Filter the recipients you intend to email, then type \"add\" to add recipients to the field.\n"
+            + "Type \"next\" when you have finished adding recipients to move on to the next step.\n";
     public static final String COMMAND_LOGIC_STATE = "EmailSelectRecipients";
+    private final String commandWord;
+
+    public EmailSelectRecipientsCommand(String commandWord) {
+        this.commandWord = commandWord;
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        EmailUtil emailUtil = model.getEmailUtil();
 
-        if (MainWindow.getDisplayedBook().equals("candidateBook")) {
-            ObservableList<Candidate> recipients = model.getFilteredCandidateList();
-            for (Candidate recipient : recipients) {
-                emailUtil.addCandidate(recipient);
+        //Add recipients only if commandWord is add.
+        if(commandWord.equals("add")) {
+            EmailUtil emailUtil = model.getEmailUtil();
+
+            if (MainWindow.getDisplayedBook().equals("candidateBook")) {
+                ObservableList<Candidate> recipients = model.getFilteredCandidateList();
+                for (Candidate recipient : recipients) {
+                    emailUtil.addCandidate(recipient);
+                }
+                emailUtil.setAreRecipientsCandidates(true);
+            } else {
+                ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
+                for (JobOffer recipient : recipients) {
+                    emailUtil.addJobOffer(recipient);
+                }
+                emailUtil.setAreRecipientsCandidates(false);
             }
-            emailUtil.setAreRecipientsCandidates(true);
+            return new CommandResult("Recipients added!\n" + EmailSelectRecipientsCommand.MESSAGE_USAGE);
         } else {
-            ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
-            for (JobOffer recipient : recipients) {
-                emailUtil.addJobOffer(recipient);
-            }
-            emailUtil.setAreRecipientsCandidates(false);
+            LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
+            return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
         }
-
-        LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
-        return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
     }
 }
