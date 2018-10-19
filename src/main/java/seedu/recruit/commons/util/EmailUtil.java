@@ -132,6 +132,7 @@ public class EmailUtil {
     public void addJobOffer(JobOffer jobOffer) {
         this.jobOffers.add(jobOffer);
     }
+
     /**
      * Creates an authorized Credential object.
      * @param httpTransport The network HTTP Transport.

@@ -46,7 +46,15 @@ public class EmailSelectContentsCommand extends Command {
                     emailUtil.addCandidate(content);
                 }
             }
-            return new CommandResult("Contents added!\n" + EmailSelectContentsCommand.MESSAGE_USAGE);
+            if(emailUtil.isAreRecipientsCandidates()) {
+                return new CommandResult("Content added:\n"
+                        + model.getFilteredContentJobOfferNames()
+                        + EmailSelectRecipientsCommand.MESSAGE_USAGE);
+            } else {
+                return new CommandResult("Content added:\n"
+                        + model.getFilteredCandidateNames()
+                        + EmailSelectRecipientsCommand.MESSAGE_USAGE);
+            }
         } else {
             //Check if content array is empty, if it is, do not allow to move on to next stage
             boolean isEmpty = false;

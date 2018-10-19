@@ -186,7 +186,30 @@ public interface Model {
      */
     void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
 
+    // ================================== Email Command functions ===================================== //
+
+    /**
+     * Returns emailUtil in model
+     */
     EmailUtil getEmailUtil();
 
+    /**
+     * Setter for emailUtil in model
+     */
     void setEmailUtil(EmailUtil emailUtil);
+
+    /**
+     * Returns a concatenated string of names of job offers for email select recipients command
+     */
+    String getFilteredRecipientJobOfferNames();
+
+    /**
+     * Returns a concatendated string of names of job offers for email select contents command
+     */
+    String getFilteredContentJobOfferNames();
+
+    /**
+     * Returns a concatenated string of names of candidates for email command
+     */
+    String getFilteredCandidateNames();
 }

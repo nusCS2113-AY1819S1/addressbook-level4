@@ -49,7 +49,16 @@ public class EmailSelectRecipientsCommand extends Command {
                 }
                 emailUtil.setAreRecipientsCandidates(false);
             }
-            return new CommandResult("Recipients added!\n" + EmailSelectRecipientsCommand.MESSAGE_USAGE);
+
+            if(emailUtil.isAreRecipientsCandidates()) {
+                return new CommandResult("Recipients added:\n"
+                        + model.getFilteredCandidateNames()
+                        + EmailSelectRecipientsCommand.MESSAGE_USAGE);
+            } else {
+                return new CommandResult("Recipients added:\n"
+                        + model.getFilteredRecipientJobOfferNames()
+                        + EmailSelectRecipientsCommand.MESSAGE_USAGE);
+            }
         } else {
             //Check if content array is empty, if it is, do not allow to move on to next stage
             boolean isEmpty = false;
