@@ -53,6 +53,7 @@ public class CreateModuleCommand extends Command {
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             if (unitOfWork.getModuleRepository().getModuleByCode(moduleToAdd.getModuleCode()) == null) {
+                moduleToAdd.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
                 unitOfWork.getModuleRepository().addModule(moduleToAdd);
                 unitOfWork.commit();
             } else {

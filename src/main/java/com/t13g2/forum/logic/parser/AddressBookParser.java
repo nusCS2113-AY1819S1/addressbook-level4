@@ -8,6 +8,7 @@ import java.util.regex.Pattern;
 
 import com.t13g2.forum.logic.commands.AddCommand;
 import com.t13g2.forum.logic.commands.AddUserCommand;
+import com.t13g2.forum.logic.commands.AdminUpdatePasswordCommand;
 import com.t13g2.forum.logic.commands.AnnounceCommand;
 import com.t13g2.forum.logic.commands.BlockUserFromCreatingCommand;
 import com.t13g2.forum.logic.commands.CheckAnnouncmentCommand;
@@ -108,6 +109,9 @@ public class AddressBookParser {
 
         case SetAdminCommand.COMMAND_WORD:
             return new SetAdminCommandParser().parse(arguments);
+
+        case AdminUpdatePasswordCommand.COMMAND_WORD:
+            return new AdminUpdatePasswordCommandParser().parse(arguments);
 
         case CreateModuleCommand.COMMAND_WORD:
             return new CreateModuleCommandParser().parse(arguments);

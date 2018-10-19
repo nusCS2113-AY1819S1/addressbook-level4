@@ -54,6 +54,7 @@ public class AnnounceCommand extends Command {
             throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            toAnnounce.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
             unitOfWork.getAnnouncementRepository().addAnnouncement(toAnnounce);
             unitOfWork.commit();
             EventQueue.invokeLater(new Runnable() {
