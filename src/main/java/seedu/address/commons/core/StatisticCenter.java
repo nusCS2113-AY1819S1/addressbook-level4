@@ -29,7 +29,9 @@ public class StatisticCenter implements Serializable {
     public static StatisticCenter getInstance() {
         if (instance == null) { //if there is no instance available... create new one
             synchronized (StatisticCenter.class) {
-                if (instance == null) instance = new StatisticCenter();
+                if (instance == null) {
+                    instance = new StatisticCenter();
+                }
             }
         }
         return instance;

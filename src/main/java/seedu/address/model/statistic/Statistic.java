@@ -38,6 +38,11 @@ public class Statistic {
         return revenue;
     }
 
+    /**
+     * Records revenue from book sold
+     * @param price of the book
+     * @param amount sold
+     */
     public void increaseRevenue(String price, String amount) {
         Float earnedRevenue = Float.parseFloat(price) * Integer.parseInt(amount);
         revenue.increase(earnedRevenue);
