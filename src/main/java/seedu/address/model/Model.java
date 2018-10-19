@@ -25,6 +25,16 @@ public interface Model {
     boolean userExists(User user);
 
     /**
+     * Returns true if a user is logged in.
+     */
+    boolean authenticate();
+
+    /**
+     * Returns true if an admin is logged in.
+     */
+    boolean getAdminStatus();
+
+    /**
      * Logs user into Event Manager.
      */
     void logUser(User user);

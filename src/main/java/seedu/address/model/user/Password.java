@@ -12,7 +12,7 @@ public class Password {
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
             "Passwords can take any values, and it should not be blank";
 
-    /**
+    /*
      * The first character of the username must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
