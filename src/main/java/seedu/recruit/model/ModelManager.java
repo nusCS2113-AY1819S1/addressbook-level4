@@ -335,7 +335,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return output.toString();
     }
-    
+
     /**
      * Returns a concatenated string of names of candidates for email command
      */

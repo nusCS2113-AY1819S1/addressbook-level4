@@ -59,7 +59,7 @@ public class EmailSelectRecipientsCommand extends Command {
                         + model.getFilteredRecipientJobOfferNames()
                         + EmailSelectRecipientsCommand.MESSAGE_USAGE);
             }
-        } else {
+        } else if (commandWord.equals("next")) {
             //Check if content array is empty, if it is, do not allow to move on to next stage
             boolean isEmpty = false;
 
@@ -79,6 +79,10 @@ public class EmailSelectRecipientsCommand extends Command {
                 LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
                 return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
             }
+        //back command
+        } else {
+            LogicManager.setLogicState(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE);
+            return new CommandResult(EmailSelectRecipientsCommand.MESSAGE_USAGE);
         }
     }
 }

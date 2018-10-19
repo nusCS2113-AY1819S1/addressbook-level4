@@ -56,6 +56,9 @@ public class EmailParser {
             case "add":
                 return new EmailSelectContentsCommand(commandWord);
 
+            case "back":
+                return new EmailSelectRecipientsCommand(commandWord);
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
@@ -72,6 +75,9 @@ public class EmailParser {
             case "add":
                 return new EmailSelectContentsCommand(commandWord);
 
+            case "back":
+                return new EmailSelectRecipientsCommand(commandWord);
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
@@ -82,6 +88,9 @@ public class EmailParser {
 
             case "send":
                 return new EmailSendCommand();
+
+            case "back":
+                return new EmailSelectContentsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

@@ -34,7 +34,7 @@ public class EmailSelectContentsCommand extends Command {
         EmailUtil emailUtil = model.getEmailUtil();
 
         //Add contents only if commandWord equals add
-        if(commandWord.equals("add")) {
+        if (commandWord.equals("add")) {
             if (emailUtil.isAreRecipientsCandidates()) {
                 ObservableList<JobOffer> contents = model.getFilteredCompanyJobList();
                 for (JobOffer content : contents) {
@@ -55,7 +55,7 @@ public class EmailSelectContentsCommand extends Command {
                         + model.getFilteredCandidateNames()
                         + EmailSelectRecipientsCommand.MESSAGE_USAGE);
             }
-        } else {
+        } else if(commandWord.equals("next")) {
             //Check if content array is empty, if it is, do not allow to move on to next stage
             boolean isEmpty = false;
 
@@ -75,6 +75,10 @@ public class EmailSelectContentsCommand extends Command {
                 LogicManager.setLogicState(EmailSendCommand.COMMAND_LOGIC_STATE);
                 return new CommandResult(EmailSendCommand.MESSAGE_USAGE);
             }
+        //back command
+        } else {
+            LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
+            return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
         }
     }
 }

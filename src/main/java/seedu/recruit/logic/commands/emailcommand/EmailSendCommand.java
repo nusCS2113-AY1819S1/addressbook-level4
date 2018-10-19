@@ -23,7 +23,7 @@ import seedu.recruit.model.joboffer.JobOffer;
  */
 public class EmailSendCommand extends Command {
     public static final String COMMAND_WORD = "send";
-    public static final String MESSAGE_USAGE = "Type \"send\" to send the message!";
+    public static final String MESSAGE_USAGE = "Type \"send\" to send the message\n";
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
     private static final String EMAIL_SUCCESS = "Successfully sent the email!";
     private static final String EMAIL_FAILURE = "Failed to send the email!";
