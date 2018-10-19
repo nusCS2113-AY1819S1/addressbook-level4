@@ -16,4 +16,18 @@ public class UserLoginException {
         JOptionPane.showMessageDialog(null, "Incorrect user Id/Password/Role. "
                 + "Please try again.");
     }
+
+    /**
+     * Shows an error message to the user in the event that the user inputs invalid login parameters.
+     */
+    public void showInvalidLoginError() {
+        JOptionPane.showMessageDialog(null, "Invalid login parameters!");
+    }
+
+    /**
+     * Shows an error message to the user in the event that the user presses enter key without any input.
+     */
+    public void showBlankLoginError() {
+        JOptionPane.showMessageDialog(null, "Please type in your login credentials!");
+    }
 }

@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.LoginUserIdPasswordCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.UserLoginException;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
 import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
@@ -26,12 +28,27 @@ public class LoginUserIdPasswordCommandParser implements Parser<LoginCommand> {
     public LoginCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
+            UserLoginException userLoginException = new UserLoginException();
+            userLoginException.showInvalidLoginError();
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, LoginCommand.MESSAGE_USAGE));
         }
 
         String[] keywords = trimmedArgs.split("\\s+");
         List<String> keywordsList = new ArrayList<>(Arrays.asList(keywords));
+        switch(keywords[2]) {
+        case "member":
+            LoginManager.setIsMember(true);
+            break;
+        case "president":
+            LoginManager.setIsPresident(true);
+            break;
+        case "treasurer":
+            LoginManager.setIsTreasurer(true);
+            break;
+        default:
+            break;
+        }
         return new LoginUserIdPasswordCommand(new UserIdContainsKeywordsPredicate(keywordsList),
                                               new UserPasswordContainsKeywordsPredicate(keywordsList),
                                               new UserRoleContainsKeywordsPredicate(keywordsList));

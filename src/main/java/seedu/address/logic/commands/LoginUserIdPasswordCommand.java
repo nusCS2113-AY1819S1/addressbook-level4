@@ -6,13 +6,15 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 
 import java.util.function.Predicate;
 
+import javax.swing.JOptionPane;
+
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.parser.exceptions.UserLoginException;
 import seedu.address.model.Model;
 import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPasswordContainsKeywordsPredicate;
 import seedu.address.model.login.UserRoleContainsKeywordsPredicate;
-import seedu.address.ui.MainWindow;
 
 /**
  * Queries the login book to see if there is a user ID and password that matches input user ID and password.
@@ -59,6 +61,7 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
      * @param model the current model being used to filter the accounts list
      */
     private void updateFilteredAccountList(Model model) {
+        LoginManager.setIsSensitiveInformation(true);
         Predicate updatedIdPredicate = getMostUpdatedIdPredicate(getIdPredicate());
         model.updateFilteredLoginDetailsList(updatedIdPredicate);
         Predicate updatedPasswordPredicate = getMostUpdatedPasswordPredicate(getPasswordPredicate());
@@ -67,16 +70,18 @@ public class LoginUserIdPasswordCommand extends LoginCommand {
         model.updateFilteredLoginDetailsList(updatedRolePredicate);
     }
 
-
     /**
      * Checks if there is an existing account in the account list in the model that matches input of user login
-     * credentials, and sets the login condition as successful or unsuccessful accordingly.
+     * credentials, and sets the login condition as successful only if the input user credentials is correct.
      * @param model the current model being used to filter the accounts list
      */
     private void checkUpdatedAccountListSetLoginCondition(Model model) {
         if (model.getFilteredLoginDetailsList().size() != 0) {
-            MainWindow.setIsLoginSuccessful(true);
+            JOptionPane.showMessageDialog(null, "Login successful!");
+            LoginManager.setIsLoginSuccessful(true);
         } else {
+            LoginManager.setAllRolesFalse();
+            LoginManager.setIsLoginSuccessful(false);
             UserLoginException userLoginException = new UserLoginException();
             userLoginException.showLoginError();
         }

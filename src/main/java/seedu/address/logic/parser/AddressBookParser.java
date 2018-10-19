@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.address.logic.LoginManager;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillCommand;
 import seedu.address.logic.commands.AddSkillLevelCommand;
@@ -27,8 +28,8 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UndoSearchCommand;
 import seedu.address.logic.commands.ViewClubBudgetsCommand;
-import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.exceptions.UserLoginException;
 
 /**
  * Parses user input.
@@ -47,9 +48,13 @@ public class AddressBookParser {
      * @return the command based on the user input
      * @throws ParseException if the user input does not conform the expected format
      */
-    public Command parseCommand(String userInput) throws ParseException, CommandException {
+    public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
+            if (!LoginManager.getIsLoginSuccessful()) {
+                UserLoginException userLoginException = new UserLoginException();
+                userLoginException.showBlankLoginError();
+            }
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
 
@@ -118,6 +123,10 @@ public class AddressBookParser {
             return new BudgetCalculationCommandParser().parse(arguments);
 
         default:
+            if (!LoginManager.getIsLoginSuccessful()) {
+                UserLoginException userLoginException = new UserLoginException();
+                userLoginException.showInvalidLoginError();
+            }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

@@ -9,14 +9,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class UserRole {
 
-    public static final String MESSAGE_USERROLE_CONSTRAINTS = "User role must not contain any digits or special"
-            + " characters, and it should not be blank and not have any spaces.";
+    public static final String MESSAGE_USERROLE_CONSTRAINTS = "User role must be either member, president "
+            + "or treasurer.";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String USERROLE_VALIDATION_REGEX = "[a-zA-Z]+";
+    public static final String USERROLE_VALIDATION_REGEX = "\\b(member|president|treasurer)\\b";
 
     public final String fullUserRole;
 
