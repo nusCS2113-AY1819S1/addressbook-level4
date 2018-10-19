@@ -62,7 +62,8 @@ public abstract class FinancialPlannerSystemTest {
     @Before
     public void setUp() {
         setupHelper = new SystemTestSetupHelper();
-        testApp = setupHelper.setupApplication(this::getInitialData, getDataFileLocation());
+        testApp = setupHelper.setupApplication(this::getInitialData, getRecordListDataFileLocation(),
+                getLimitListDataFileLocation(), getSummaryMapDataFileLocation());
         mainWindowHandle = setupHelper.setupMainWindowHandle();
 
         assertApplicationStartingStateIsCorrect();
@@ -75,17 +76,28 @@ public abstract class FinancialPlannerSystemTest {
     }
 
     /**
-     * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
+     * Returns the data to be loaded into the file in
+     * {@link #getRecordListDataFileLocation()},
+     * {@link #getLimitListDataFileLocation()},
+     * {@link #getSummaryMapDataFileLocation()},
      */
     protected FinancialPlanner getInitialData() {
         return TypicalRecords.getTypicalFinancialPlanner();
     }
 
     /**
-     * Returns the directory of the data file.
+     * Returns the directory of the record list data file.
      */
-    protected Path getDataFileLocation() {
-        return TestApp.SAVE_LOCATION_FOR_TESTING;
+    protected Path getRecordListDataFileLocation() {
+        return TestApp.RECORD_LIST_LOCATION_FOR_TESTING;
+    }
+
+    protected Path getSummaryMapDataFileLocation() {
+        return TestApp.SUMMARY_MAP_LOCATION_FOR_TESTING;
+    }
+
+    protected Path getLimitListDataFileLocation() {
+        return TestApp.LIMIT_LIST_LOCATION_FOR_TESTING;
     }
 
     public MainWindowHandle getMainWindowHandle() {

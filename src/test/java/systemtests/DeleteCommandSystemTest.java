@@ -21,7 +21,6 @@ import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Record;
 
-@Ignore
 public class DeleteCommandSystemTest extends FinancialPlannerSystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
