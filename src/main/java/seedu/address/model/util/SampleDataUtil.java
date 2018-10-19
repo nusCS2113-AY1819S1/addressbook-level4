@@ -23,7 +23,7 @@ import seedu.address.model.tag.Tag;
  * Sample data taken from https://www.abebooks.com/books/Textbooks/index.shtml
  */
 public class SampleDataUtil {
-    public static Book[] getSamplePersons() {
+    public static Book[] getSampleBooks() {
         return new Book[] {
             new Book(new Name("Biology: A Global Approach"), new Isbn("9780321775658"), new Price("73.76"),
                     new Cost("19.99"), new Quantity("4"),
@@ -52,18 +52,18 @@ public class SampleDataUtil {
     }
     public static ReadOnlyBookInventory getSampleAddressBook() {
         BookInventory sampleAb = new BookInventory();
-        for (Book sampleBook : getSamplePersons()) {
+        for (Book sampleBook : getSampleBooks()) {
             sampleAb.addBook(sampleBook);
         }
         return sampleAb;
     }
 
     public static ReadOnlyRequests getSampleRequestList() {
-        RequestList requestAb = new RequestList();
+        RequestList requestBi = new RequestList();
         for (Request sampleRequest : getSampleRequests()) {
-            requestAb.addRequest(sampleRequest);
+            requestBi.addRequest(sampleRequest);
         }
-        return requestAb;
+        return requestBi;
     }
 
     /**

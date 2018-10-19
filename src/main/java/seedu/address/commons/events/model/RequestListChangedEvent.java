@@ -14,6 +14,6 @@ public class RequestListChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of persons ";
+        return "number of persons " + dataRequest.getRequestList().size();
     }
 }

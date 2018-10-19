@@ -128,14 +128,14 @@ public class MainApp extends Application {
         try {
             requestListOptional = requestStorage.readRequestList();
             if (!requestListOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample BookInventory");
+                logger.info("Data file not found. Will be starting with a sample RequestList");
             }
             initialData = requestListOptional.orElseGet(SampleDataUtil::getSampleRequestList);
         } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty BookInventory");
+            logger.warning("Data file not in the correct format. Will be starting with an empty RequestList");
             initialData = new RequestList();
         } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty BookInventory");
+            logger.warning("Problem while reading from the file. Will be starting with an empty RequestList");
             initialData = new RequestList();
         }
 
