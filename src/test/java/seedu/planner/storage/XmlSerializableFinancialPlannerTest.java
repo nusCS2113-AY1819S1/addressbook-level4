@@ -26,7 +26,6 @@ public class XmlSerializableFinancialPlannerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
-    //TODO: @test Rewrite this test to not be hardcoded
     @Test
     public void toModelType_typicalRecordsFile_success() throws Exception {
         XmlSerializableFinancialPlanner dataFromFile = XmlUtil.getDataFromFile(
