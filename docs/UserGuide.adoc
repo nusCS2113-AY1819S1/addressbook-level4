@@ -167,7 +167,7 @@ Deletes the 2nd record in the expense book.
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
-=== Delete records in same date.
+=== Delete records in same date. `delete_date`
 
 Deletes the records whose date is required from the expense book. +
 Format: `delete_date dd-mm-yyyy`
