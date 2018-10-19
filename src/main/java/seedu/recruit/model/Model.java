@@ -177,6 +177,19 @@ public interface Model {
      */
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
+    /**
+     * Returns true if a company has a job offer with the same identity as {@code jobOffer} exists in the CompanyBook.
+     */
+    boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer);
+
+    /**
+     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
+     * {@code target} must exist in the company book{@code companyName}.
+     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
+     * same company{@code companyName}.
+     */
+    void updateJobOffer(CompanyName companyName, JobOffer target, JobOffer editedJobOffer);
+
     /** Returns an unmodifiable view of the filtered job lists of all companies */
     ObservableList<JobOffer> getFilteredCompanyJobList();
 

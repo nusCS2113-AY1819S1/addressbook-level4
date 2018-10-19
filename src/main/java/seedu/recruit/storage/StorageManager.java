@@ -130,7 +130,7 @@ public class StorageManager extends ComponentManager implements Storage {
 
     /**
      * Saves the current version of the Company Book to the hard disk.
-     *   Creates the data file if it is missing.
+     * Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
 

@@ -96,9 +96,9 @@ public class EditCompanyCommand extends Command {
         Phone updatedPhone = editCompanyDescriptor.getPhone().orElse(companyToEdit.getPhone());
         Email updatedEmail = editCompanyDescriptor.getEmail().orElse(companyToEdit.getEmail());
         Address updatedAddress = editCompanyDescriptor.getAddress().orElse(companyToEdit.getAddress());
-        UniqueJobList updatedJobList = new UniqueJobList();
+        UniqueJobList sameJobList = companyToEdit.getUniqueJobList();
 
-        return new Company(updatedName, updatedAddress, updatedEmail, updatedPhone, updatedJobList);
+        return new Company(updatedName, updatedAddress, updatedEmail, updatedPhone, sameJobList);
     }
 
     @Override

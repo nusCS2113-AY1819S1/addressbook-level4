@@ -281,6 +281,20 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
         indicateCompanyBookChanged();
     }
+
+    @Override
+    public boolean hasJobOffer(CompanyName companyName, JobOffer jobOffer) {
+        requireAllNonNull(companyName, jobOffer);
+        return versionedCompanyBook.hasJobOffer(companyName, jobOffer);
+    }
+
+    @Override
+    public void updateJobOffer(CompanyName companyName, JobOffer target, JobOffer editedJobOffer) {
+        requireAllNonNull(companyName, target, editedJobOffer);
+        versionedCompanyBook.updateJobOffer(companyName, target, editedJobOffer);
+        indicateCompanyBookChanged();
+    }
+
     /**
      * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
      * {@code versionedCompanyBook}
