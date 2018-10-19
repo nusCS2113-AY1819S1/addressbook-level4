@@ -8,16 +8,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Password {
 
-    // TODO: SET PROPER PASSWORD CONSTRAINTS
+    private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-@";
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
-            "Passwords can take any values, and it should not be blank";
-
-    /**
-     * The first character of the username must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String PASSWORD_VALIDATION_REGEX = "[^\\s].*";
-
+            "Passwords should only contain alphanumeric characters and these special characters, excluding "
+            + "the parentheses, (" + SPECIAL_CHARACTERS + ") .\n";
+    private static final String PASSWORD_VALIDATION_REGEX = "^[\\w" + SPECIAL_CHARACTERS + "]+";
     public final String value;
 
     /**
