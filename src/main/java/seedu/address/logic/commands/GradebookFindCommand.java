@@ -24,8 +24,8 @@ public class GradebookFindCommand extends Command {
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!"
             + "\nModule Code: %1$s"
             + "\nComponent Name: %2$s"
-            + "\nMaximum Marks: %3$s"
-            + "\nWeightage: %4$s";
+            + "\nMaximum Marks: %3$d"
+            + "\nWeightage: %4$d";
 
 
     private final Gradebook toFindGradebookComponent;
@@ -45,9 +45,9 @@ public class GradebookFindCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_FIND_SUCCESS,
-                toFindGradebookComponent.getModuleCode(),
-                toFindGradebookComponent.getGradeComponentName(),
-                toFindGradebookComponent.getGradeComponentMaxMarks(),
-                toFindGradebookComponent.getGradeComponentWeightage()));
+                gradebook.getModuleCode(),
+                gradebook.getGradeComponentName(),
+                gradebook.getGradeComponentMaxMarks(),
+                gradebook.getGradeComponentWeightage()));
     }
 }
