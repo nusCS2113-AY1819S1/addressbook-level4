@@ -60,7 +60,6 @@ public class UserAccount {
 
         return isPresent;
     }
-    
     /**
      * Returns true if user is logged in.
      */
