@@ -28,9 +28,10 @@ public class CheckCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        model.sortBooksUsingQuantity();
         model.updateFilteredBookList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredBookList().size()));
+                String.format(Messages.MESSAGE_BOOKS_LISTED_OVERVIEW, model.getFilteredBookList().size()));
     }
 
     @Override
