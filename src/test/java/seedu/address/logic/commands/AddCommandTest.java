@@ -21,7 +21,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.user.User;
-import seedu.address.testutil.Assert;
 import seedu.address.testutil.EventBuilder;
 
 public class AddCommandTest {
