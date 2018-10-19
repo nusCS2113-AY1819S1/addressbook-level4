@@ -104,7 +104,7 @@ public class UniqueBookList implements Iterable<Book> {
         Collections.sort(internalList, new Comparator<Book>() {
             @Override
             public int compare(Book b1, Book b2) {
-                return b1.getQuantity().getValue().compareTo(b2.getQuantity().getValue());
+                return Integer.parseInt(b1.getQuantity().getValue()) - Integer.parseInt(b2.getQuantity().getValue());
             }
         });
     }

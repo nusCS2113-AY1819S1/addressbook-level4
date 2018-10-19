@@ -22,8 +22,6 @@ import seedu.address.model.book.Price;
 import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
-import javax.swing.text.View;
-
 /**
  * Decrease the quantity of an existing book in the inventory book.
  */
@@ -75,7 +73,8 @@ public class SellCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_QUANTITY);
         }
 
-        StatisticCenter.getInstance().getStatistic().increaseRevenue(bookToSell.getPrice().toString(), decreaseQuantity.getQuantity().getValue());
+        StatisticCenter.getInstance().getStatistic().increaseRevenue(
+                bookToSell.getPrice().toString(), decreaseQuantity.getQuantity().getValue());
 
         model.updateBook(bookToSell, sellBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
