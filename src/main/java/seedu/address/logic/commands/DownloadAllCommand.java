@@ -4,7 +4,7 @@ import seedu.address.logic.*;
 import seedu.address.logic.commands.exceptions.*;
 import seedu.address.model.*;
 
-public class LoginIvleCommand extends Command {
+public class DownloadAllCommand extends Command {
 
     public static final String COMMAND_WORD="download";
     public static final String MESSAGE_USAGE="download pass/(password) user/(username) mod/(moduleCode)";
@@ -14,7 +14,7 @@ public class LoginIvleCommand extends Command {
     private String moduleCode;
 
 
-    public LoginIvleCommand (String username,String password,String moduleCode){
+    public DownloadAllCommand(String username, String password, String moduleCode){
         this.password=password;
         this.username=username;
         this.moduleCode=moduleCode;
