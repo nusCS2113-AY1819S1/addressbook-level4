@@ -35,8 +35,8 @@ public class XmlAdaptedTest {
      * Constructs an {@code XmlAdaptedGroup} with the given group details.
      */
     public XmlAdaptedTest(String testname, String scores) {
-        this.testName = testName;
-        this.marks = marks;
+        this.testName = testname;
+        this.marks = scores;
 
     }
 
@@ -64,7 +64,7 @@ public class XmlAdaptedTest {
         if (!TestName.isValidTestName(testName)) {
             throw new IllegalValueException(TestName.MESSAGE_TEST_NAME_CONSTRAINTS);
         }
-        final TestName modelTestName = new TestName(testName);
+        TestName modelTestName = new TestName(testName);
 
         if (marks == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -73,7 +73,7 @@ public class XmlAdaptedTest {
         if (!Marks.isValidMarks(marks)) {
             throw new IllegalValueException(Marks.MESSAGE_MARKS_CONSTRAINTS);
         }
-        final Marks modelMarks = new Marks(marks);
+        Marks modelMarks = new Marks(marks);
 
         return new Test(modelTestName, modelMarks);
     }

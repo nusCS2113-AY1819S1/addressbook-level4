@@ -68,8 +68,8 @@ public class ParserUtil {
         }
         return indexList;
     }
-  
-    /*
+    
+    /**
      * Parses {@code Collection<String> indices} into a {@code Set<Index>}.
      */
     public static Set<Index> parseIndices(Collection<String> indices) throws ParseException {

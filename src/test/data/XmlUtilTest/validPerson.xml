@@ -8,4 +8,10 @@
     <address>4th street</address>
     <tagged>friends</tagged>
     <grade>100</grade>
+    <scoreList>
+        <test>
+            <testName>CS2113quiz</testName>
+            <marks>77</marks>
+        </test>
+    </scoreList>
 </person>
