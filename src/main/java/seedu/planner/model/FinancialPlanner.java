@@ -133,6 +133,22 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     }
 
     /**
+     * Removes {@code records} from this {@code Financial Planner}
+     * {@code records} must exist in the Financial Planner.
+     * That means that all the Records in the list must exist in the Finacial Planner.
+     */
+    public int removeRecordsSameDate(List<Record> records, Date targetDate) {
+        int count = 0;
+        for (Record record : records) {
+            if (record.getDate().equals(targetDate)) {
+                removeRecord(record);
+                count++;
+            }
+        }
+        return count;
+    }
+
+    /**
      * Sorts the records in this {@code FinancialPlanner}.
      */
     public void sortRecords(String category, Boolean ascending) {
@@ -152,6 +168,17 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void removeRecordFromSummary(Record key) {
         summaryMap.remove(key);
+    }
+
+    /**
+     * Remove the record from the summary map
+     */
+    public void removeRecordsFromSummarySameDate(List<Record> key, Date targetDate) {
+        for (Record record : key) {
+            if (record.getDate().equals(targetDate)) {
+                removeRecordFromSummary(record);
+            }
+        }
     }
 
     /**

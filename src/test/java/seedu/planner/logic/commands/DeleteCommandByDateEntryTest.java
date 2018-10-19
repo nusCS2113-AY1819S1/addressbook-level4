@@ -31,7 +31,8 @@ public class DeleteCommandByDateEntryTest {
 
     @Test
     public void execute_validDateUnfilteredList_success() {
-        List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
+        Date date = TypicalDates.DATE_FIRST_INDEX_DATE;
+        List<Record> records = filteredRecordList(model);
 
         DeleteCommandByDateEntry deleteCommandByDateEntry =
                 new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
@@ -40,7 +41,7 @@ public class DeleteCommandByDateEntryTest {
                 DeleteCommandByDateEntry.MESSAGE_DELETE_RECORD_SUCCESS, TypicalDates.DATE_FIRST_INDEX_DATE);
 
         ModelManager expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
-        expectedModel.deleteListRecord(recordsToDelete);
+        int size = expectedModel.deleteListRecordSameDate(records, date);
         expectedModel.commitFinancialPlanner();
 
         CommandTestUtil.assertCommandSuccess(
@@ -73,12 +74,13 @@ public class DeleteCommandByDateEntryTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
+        Date date = TypicalDates.DATE_FIRST_INDEX_DATE;
+        List<Record> records = filteredRecordList(model);
 
         DeleteCommandByDateEntry deleteCommandByDateEntry =
                 new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
-        expectedModel.deleteListRecord(recordsToDelete);
+        int size = expectedModel.deleteListRecordSameDate(records, date);
         expectedModel.commitFinancialPlanner();
 
         //delete the Records have required date
@@ -118,13 +120,17 @@ public class DeleteCommandByDateEntryTest {
      */
 
     @Test
-    public void executeUndoRedo_exsistentDateFilteredList_sameRecordDeleted()
-            throws Exception {
+    public void executeUndoRedo_exsistentDateFilteredList_sameRecordDeleted() throws Exception {
         DeleteCommandByDateEntry deleteCommandByDateEntry =
                 new DeleteCommandByDateEntry(TypicalDates.DATE_FIRST_INDEX_DATE);
         Model expectedModel = new ModelManager(model.getFinancialPlanner(), new UserPrefs());
-        List<Record> recordsToDelete = listAllRecordToDelete(model, TypicalDates.DATE_FIRST_INDEX_DATE);
-        expectedModel.deleteListRecord(recordsToDelete);
+
+        Date date = TypicalDates.DATE_FIRST_INDEX_DATE;
+
+        List<Record> records = filteredRecordList(model);
+        List<Record> recordsToDelete = listAllRecordToDelete(model, date);
+
+        int size = expectedModel.deleteListRecordSameDate(records, date);
         expectedModel.commitFinancialPlanner();
 
         // delete -> deletes second record in unfiltered record list / first record in filtered record list

@@ -52,9 +52,7 @@ public class FileUtil {
         if (Files.exists(file)) {
             return;
         }
-
         createParentDirsOfFile(file);
-
         Files.createFile(file);
     }
 
@@ -63,7 +61,6 @@ public class FileUtil {
      */
     public static void createParentDirsOfFile(Path file) throws IOException {
         Path parentDir = file.getParent();
-
         if (parentDir != null) {
             Files.createDirectories(parentDir);
         }
@@ -89,14 +86,22 @@ public class FileUtil {
      * @param fileName name of the file
      * @param workbook the Excel Workbook we want to produce.
      */
-    public static void writeWorkBookInFileSystem (String fileName, XSSFWorkbook workbook) {
+    public static void writeWorkBookInFileSystem (String fileName, XSSFWorkbook workbook, String path) {
         try {
-            FileOutputStream fileOut = new FileOutputStream(new File(fileName));
+            FileOutputStream fileOut = new FileOutputStream(new File(path));
             workbook.write(fileOut);
             fileOut.close();
-            System.out.println(String.format("%1$s is written successfully.\n", fileName));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Check whether the given directory is realistic or not.
+     * @return boolean variable to indicate whether the directory exists.
+     */
+    public static Boolean isValidDirectory (String dirPath) {
+        return new File(dirPath).isDirectory();
+    }
+
 }

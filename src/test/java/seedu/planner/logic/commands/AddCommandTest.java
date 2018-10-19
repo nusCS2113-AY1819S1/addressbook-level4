@@ -151,7 +151,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        public void deleteListRecord(List<Record> targetList) {
+        public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
             throw new AssertionError("This method should not be called.");
         }
 

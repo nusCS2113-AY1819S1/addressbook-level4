@@ -39,19 +39,10 @@ public class DeleteCommandByDateEntry extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Record> lastShownList = model.getFilteredRecordList();
-        Boolean targetRecordExist = Boolean.FALSE;
-        for (Record targetRecord : lastShownList) {
-            logger.info(String.format(
-                    "The date required is: %1$s, the date shown is %2$s\n",
-                    targetDate.getValue(), targetRecord.getDate().getValue()));
-            if (targetRecord.isSameDateRecord(targetDate)) {
-                model.deleteRecord(targetRecord);
-                model.commitFinancialPlanner();
-                targetRecordExist = Boolean.TRUE;
-            }
-        }
-        if (!targetRecordExist) {
-            logger.info("The record does not exist.\n");
+        int size = model.deleteListRecordSameDate(lastShownList, targetDate);
+        model.commitFinancialPlanner();
+        if (size == 0) {
+            logger.info("The record whose date is required, does not exist.\n");
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
         } else {
             return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, targetDate.value));

@@ -41,16 +41,33 @@ public class ExportExcelCommand extends Command {
     public CommandResult execute(Model model, CommandHistory commandHistory) throws CommandException {
         requireNonNull(this);
         model.updateFilteredRecordList(predicate);
+
         List<Record> recordList = model.getFilteredRecordList();
+
         String nameFile = String.format("Financial_Planner_%1$s_%2$s.xlsx",
                 predicate.getStartDate().getValue(), predicate.getEndDate().getValue());
+
         logger.info(nameFile);
+
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet(nameFile);
+
         Map<String, Object[]> mapData = ExcelUtil.exportData(recordList);
+
         ExcelUtil.writeDataIntoExcelSheet(mapData, sheet);
-        FileUtil.writeWorkBookInFileSystem(nameFile, workbook);
-        return new CommandResult(String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile));
+
+        String str = "^(([a-zA-Z]:)|((\\\\|/){2,4}\\w+)\\$?)((\\\\|/)(\\w[\\w ]*.*))+\\.([a-zA-Z0-9]+)$";
+        String path = "D:\\Important things\\NUS\\MODULES\\CS2113T"
+                + System.getProperty("file.separator")
+                + String.format(nameFile);
+        logger.info((path.matches(str)) ? "command1: match" : "command1: unmatch");
+
+        path.replace("\\", System.getProperty("file.separator"));
+
+        logger.info((path.matches(str)) ? "command2: match" : "command2: unmatch");
+
+        FileUtil.writeWorkBookInFileSystem(nameFile, workbook, path);
+        return new CommandResult(String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile, path));
     }
 
     @Override

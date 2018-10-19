@@ -28,6 +28,8 @@ import static seedu.planner.testutil.TypicalRecords.AMY;
 import static seedu.planner.testutil.TypicalRecords.BOB;
 import static seedu.planner.testutil.TypicalRecords.KEYWORD_MATCHING_BURSARY;
 
+//import org.junit.Ignore;
+
 import org.junit.Ignore;
 import org.junit.Test;
 

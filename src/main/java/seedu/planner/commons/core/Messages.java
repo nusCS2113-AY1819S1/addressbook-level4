@@ -21,5 +21,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_STARTDATE_ENDDATE =
             "Please enter the Start_Date smaller than or equal to the End_Date.\n";
     public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY =
-            "The Excel file named %1$s has been written successfully.\n";
+            "The Excel file named %1$s has been written successfully in path: %2$s.\n";
+    public static final String MESSAGE_UNREALISTIC_DIRECTORY =
+            "Please choose existing directory.\n";
 }

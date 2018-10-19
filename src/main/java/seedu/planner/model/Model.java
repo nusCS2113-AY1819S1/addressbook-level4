@@ -40,7 +40,7 @@ public interface Model {
      */
     void deleteRecord(Record target);
 
-    void deleteListRecord(List<Record> targetList);
+    int deleteListRecordSameDate(List<Record> targetList, Date targetDate);
 
     /**
      * Adds the given record.

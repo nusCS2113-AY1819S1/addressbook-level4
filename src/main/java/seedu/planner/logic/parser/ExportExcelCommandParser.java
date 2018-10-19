@@ -1,5 +1,6 @@
 package seedu.planner.logic.parser;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -24,6 +25,8 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
      */
     public ExportExcelCommand parse(String args) throws ParseException {
         String trimmedArgs = args.trim();
+        logger.info(trimmedArgs);
+
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ExportExcelCommand.MESSAGE_USAGE));
