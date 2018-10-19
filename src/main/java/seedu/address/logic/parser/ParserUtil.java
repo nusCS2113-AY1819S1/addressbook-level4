@@ -68,7 +68,7 @@ public class ParserUtil {
         }
         return indexList;
     }
-    
+
     /**
      * Parses {@code Collection<String> indices} into a {@code Set<Index>}.
      */
@@ -176,7 +176,6 @@ public class ParserUtil {
     /**
      * Parses a {@code String password}
      * Leading and trailing whitespaces will be trimmed.
-     *
      */
     public static String parsePassword(String password) {
         requireNonNull(password);
@@ -285,7 +284,9 @@ public class ParserUtil {
         return new Message(trimmedMessage);
     }
 
-    /** Checks if input value by the user is not Null or not 0
+    /**
+     * Checks if input value by the user is not Null or not 0
+     *
      * @param value
      * @return
      * @throws ParseException
@@ -303,6 +304,7 @@ public class ParserUtil {
      * Conducts the check of flags during user command input
      * Accepts "true" or '1' to assert true
      * Accepts "false" or '0' to assert false
+     *
      * @param isFlagged
      * @return
      * @throws ParseException
@@ -310,7 +312,7 @@ public class ParserUtil {
     public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
         requireNonNull(isFlagged);
         String trimmedFlaggedValue = isFlagged.trim().toLowerCase();
-        switch(trimmedFlaggedValue) {
+        switch (trimmedFlaggedValue) {
         case "false":
         case "0":
             trimmedFlaggedValue = "false";
