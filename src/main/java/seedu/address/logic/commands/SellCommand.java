@@ -80,7 +80,7 @@ public class SellCommand extends Command {
         model.updateBook(bookToSell, sellBook);
         model.updateFilteredBookList(PREDICATE_SHOW_ALL_BOOKS);
         model.commitBookInventory();
-        return new CommandResult(String.format(MESSAGE_SELL_BOOK_SUCCESS + StatisticCenter.getInstance().getStatistic().toString(), sellBook));
+        return new CommandResult(String.format(MESSAGE_SELL_BOOK_SUCCESS, sellBook));
 
 
     }
