@@ -1,10 +1,14 @@
 package seedu.planner.commons.util;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  * Writes and reads files
@@ -80,4 +84,19 @@ public class FileUtil {
         Files.write(file, content.getBytes(CHARSET));
     }
 
+    /**
+     * Write the Excel workbook in the file system, or you can customise the location of the Excel workbook.
+     * @param fileName name of the file
+     * @param workbook the Excel Workbook we want to produce.
+     */
+    public static void writeWorkBookInFileSystem (String fileName, XSSFWorkbook workbook) {
+        try {
+            FileOutputStream fileOut = new FileOutputStream(new File(fileName));
+            workbook.write(fileOut);
+            fileOut.close();
+            System.out.println(String.format("%1$s is written successfully.\n", fileName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

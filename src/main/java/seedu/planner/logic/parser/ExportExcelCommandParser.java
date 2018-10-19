@@ -28,7 +28,7 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ExportExcelCommand.MESSAGE_USAGE));
         }
-        String[] dates = trimmedArgs.split(" ");
+        String[] dates = splitByWhitespace(trimmedArgs);
         if (Arrays.asList(dates).size() != 2) {
             throw new ParseException(
                     String.format(
@@ -41,13 +41,29 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
         Date startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
         Date endDate = ParserUtil.parseDate(Arrays.asList(dates).get(1));
 
-        if (startDate.isEarlierThan(endDate) || startDate.equals(endDate)) {
+        if (isDateOrderValid(startDate, endDate)) {
             DateIsWithinIntervalPredicate predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
             return new ExportExcelCommand(predicate);
         } else {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE));
         }
+    }
+    /**
+     * Splits a string using whitespace as delimiters
+     * @param args String arguments that have 2 dates.
+     * @return array of split strings
+     */
+    private static String[] splitByWhitespace(String args) {
+        if (args.isEmpty()) {
+            return null;
+        }
+        String[] argList = args.split("\\s+");
+        return argList;
+    }
+
+    private static boolean isDateOrderValid(Date startDate, Date endDate) {
+        return startDate.isEarlierThan(endDate) || startDate.equals(endDate);
     }
 
 }
