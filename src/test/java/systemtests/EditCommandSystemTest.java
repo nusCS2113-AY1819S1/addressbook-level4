@@ -223,7 +223,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
 //        /* Case: edit a event with new values same as another event's values but with different email -> rejected */
 //        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
 //                + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-//        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
+        //assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
     }
 
     /**
