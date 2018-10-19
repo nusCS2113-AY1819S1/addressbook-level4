@@ -20,7 +20,7 @@ public class XmlSerializableFinancialPlannerTest {
     private static final Path TEST_DATA_FOLDER =
             Paths.get("src", "test", "data", "XmlSerializableFinancialPlannerTest");
     private static final Path TYPICAL_RECORDS_FILE = TEST_DATA_FOLDER.resolve("typicalRecordsFinancialPlanner.xml");
-    private static final Path INVALID_RECORD_FILE = TEST_DATA_FOLDER.resolve("invalidRecord_RecordList.xml");
+    private static final Path INVALID_RECORD_FILE = TEST_DATA_FOLDER.resolve("invalidRecordFinancialPlanner.xml");
     private static final Path DUPLICATE_RECORD_FILE = TEST_DATA_FOLDER.resolve("duplicateRecordFinancialPlanner.xml");
 
     @Rule
