@@ -10,19 +10,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
+import seedu.planner.commons.events.model.LimitListChangedEvent;
+import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.commons.events.storage.DataSavingExceptionEvent;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.ui.testutil.EventsCollectorRule;
 
-@Ignore
 public class StorageManagerTest {
 
     @Rule
@@ -68,7 +68,7 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link XmlFinancialPlannerStorageTest} class.
          */
         FinancialPlanner original = getTypicalFinancialPlanner();
-        storageManager.saveRecordList(original);
+        storageManager.saveFinancialPlanner(original);
         ReadOnlyFinancialPlanner retrieved = storageManager.readFinancialPlanner().get();
         assertEquals(original, new FinancialPlanner(retrieved));
     }
@@ -98,22 +98,57 @@ public class StorageManagerTest {
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
+    @Test
+    public void handleSummaryMapChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
+                Paths.get("dummy"), Paths.get("dummy"), Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
+        storage.handleSummaryMapChangedEvent(new SummaryMapChangedEvent(new FinancialPlanner()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
+
+    @Test
+    public void handleLimitListChangedEvent_exceptionThrown_eventRaised() {
+        // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
+        Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
+                Paths.get("dummy"), Paths.get("dummy"), Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
+        storage.handleLimitListChangedEvent(new LimitListChangedEvent(new FinancialPlanner()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
 
     /**
      * A Stub class to throw an exception when the save method is called
      */
     class XmlFinancialPlannerStorageExceptionThrowingStub extends XmlFinancialPlannerStorage {
 
-        public XmlFinancialPlannerStorageExceptionThrowingStub(Path filePathRecordList, Path filePathLimitList,
-                                                               Path filePathSummaryMap) {
-            super(filePathRecordList, filePathSummaryMap, filePathLimitList);
+        public XmlFinancialPlannerStorageExceptionThrowingStub(Path recordListFilePath, Path limitListFilePath,
+                                                               Path summaryMapFilePath) {
+            super(recordListFilePath, summaryMapFilePath, limitListFilePath);
         }
 
         @Override
         public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
             throw new IOException("dummy exception");
         }
+
+        @Override
+        public void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath)
+                throws IOException {
+            throw new IOException("dummy exception");
+        }
+
+        @Override
+        public void saveLimitList(ReadOnlyFinancialPlanner financialPlanner, Path limitListFilePath)
+                throws IOException {
+            throw new IOException("dummy exception");
+        }
+
+        @Override
+        public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path summaryMapFilePath)
+                throws IOException {
+            throw new IOException("dummy exception");
+        }
     }
-
-
 }

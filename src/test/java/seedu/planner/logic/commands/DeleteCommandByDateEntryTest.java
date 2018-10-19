@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.Messages;
@@ -24,7 +23,6 @@ import seedu.planner.testutil.TypicalDates;
 import seedu.planner.testutil.TypicalIndexes;
 import seedu.planner.testutil.TypicalRecords;
 
-@Ignore
 public class DeleteCommandByDateEntryTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
