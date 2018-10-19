@@ -49,6 +49,10 @@ public class CompanyBook implements ReadOnlyCompanyBook {
         this.companyList.setCompanyList(companyList);
     }
 
+    public void setCompanyList(UniqueCompanyList companyList) {
+        this.companyList.setCompanyList(companyList);
+    }
+
     /**
      * Resets the existing data of this {@code CompanyBook} with {@code newData}.
      */
@@ -152,6 +156,5 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public int hashCode() {
         return companyList.hashCode();
     }
-
 
 }

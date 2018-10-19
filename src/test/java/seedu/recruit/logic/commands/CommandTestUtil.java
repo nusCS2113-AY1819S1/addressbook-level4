@@ -23,8 +23,10 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.recruit.commons.core.index.Index;
+import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
+import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ReadOnlyCandidateBook;
@@ -34,6 +36,7 @@ import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.JobOffer;
+import seedu.recruit.testutil.EditCompanyDescriptorBuilder;
 import seedu.recruit.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -115,6 +118,9 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_ALFA = " " + PREFIX_ADDRESS + VALID_ADDRESS_ALFA;
     public static final String ADDRESS_DESC_BMW = " " + PREFIX_ADDRESS + VALID_ADDRESS_BMW;
 
+    public static final EditCompanyCommand.EditCompanyDescriptor DESC_ALFA;
+    public static final EditCompanyCommand.EditCompanyDescriptor DESC_BMW;
+
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
@@ -123,6 +129,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        DESC_ALFA = new EditCompanyDescriptorBuilder().withCompanyName(VALID_NAME_ALFA).withPhone(VALID_PHONE_ALFA)
+                .withEmail(VALID_EMAIL_ALFA).withAddress(VALID_ADDRESS_ALFA).build();
+        DESC_BMW = new EditCompanyDescriptorBuilder().withCompanyName(VALID_NAME_BMW).withPhone(VALID_PHONE_BMW)
+                .withEmail(VALID_EMAIL_BMW).withAddress(VALID_ADDRESS_BMW).build();
     }
 
     /**
@@ -226,6 +236,11 @@ public class CommandTestUtil {
 
         @Override
         public void updateCandidate(Candidate target, Candidate editedCandidate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortCandidates(Prefix prefix) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -351,6 +366,16 @@ public class CommandTestUtil {
 
         @Override
         public void updateFilteredCompanyJobList(Predicate<JobOffer> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public EmailUtil getEmailUtil() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setEmailUtil(EmailUtil emailUtil) {
             throw new AssertionError("This method should not be called.");
         }
     }
