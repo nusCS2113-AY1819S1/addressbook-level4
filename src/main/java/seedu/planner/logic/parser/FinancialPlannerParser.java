@@ -55,7 +55,7 @@ public class FinancialPlannerParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        switch (commandWord.toLowerCase()) {
+        switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
