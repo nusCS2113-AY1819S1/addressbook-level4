@@ -13,14 +13,16 @@ import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
- * 3rd step of the Email command
+ * 3rd step of the Email command: selecting contents
  */
 public class EmailSelectContentsCommand extends Command {
     public static final String COMMAND_WORD = "next";
-    public static final String MESSAGE_USAGE = "Find the contents that you are going to email recipients about.\n"
+    public static final String MESSAGE_USAGE = "Find/Filter the contents you intend to email. "
             + "All items listed below will be added into the contents field.\n"
-            + "Find/Filter the contents you intend to email, then type \"add\" to add contents to the field.\n"
-            + "Type \"next\" when you have finished adding contents to move on to the next step.";
+            + "Type \"add\" to add contents to the field.\n"
+            + "Type \"next\" when you have finished adding contents to move on to the next step.\n"
+            + "Type \"back\" to return to select recipients command.\n"
+            + "Type \"cancel\" to cancel the email command.";
     public static final String COMMAND_LOGIC_STATE = "EmailSelectContents";
     private final String commandWord;
 
@@ -46,15 +48,16 @@ public class EmailSelectContentsCommand extends Command {
                     emailUtil.addCandidate(content);
                 }
             }
+
+            String output = "Content added:\n";
             if(emailUtil.isAreRecipientsCandidates()) {
-                return new CommandResult("Content added:\n"
-                        + model.getFilteredContentJobOfferNames()
-                        + EmailSelectRecipientsCommand.MESSAGE_USAGE);
+                output += model.getFilteredContentJobOfferNames();
             } else {
-                return new CommandResult("Content added:\n"
-                        + model.getFilteredCandidateNames()
-                        + EmailSelectRecipientsCommand.MESSAGE_USAGE);
+                output += model.getFilteredCandidateNames();
             }
+            output += EmailSelectRecipientsCommand.MESSAGE_USAGE;
+            return new CommandResult(output);
+
         } else if(commandWord.equals("next")) {
             //Check if content array is empty, if it is, do not allow to move on to next stage
             boolean isEmpty = false;
@@ -69,7 +72,7 @@ public class EmailSelectContentsCommand extends Command {
             }
 
             if(isEmpty) {
-                return new CommandResult("There are no contents selected!\n"
+                return new CommandResult("ERROR: There are no contents selected!\n"
                         + EmailSelectContentsCommand.MESSAGE_USAGE);
             } else {
                 LogicManager.setLogicState(EmailSendCommand.COMMAND_LOGIC_STATE);

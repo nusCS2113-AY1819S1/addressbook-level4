@@ -19,11 +19,13 @@ import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
- * Finally, send the email.
+ * 4th step of the email command: send the email.
  */
 public class EmailSendCommand extends Command {
     public static final String COMMAND_WORD = "send";
-    public static final String MESSAGE_USAGE = "Type \"send\" to send the message\n";
+    public static final String MESSAGE_USAGE = "Type \"send\" to send the message\n"
+            + "Type \"back\" to go back to select contents command.\n"
+            + "Type \"cancel\" to cancel the email command.";
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
     private static final String EMAIL_SUCCESS = "Successfully sent the email!";
     private static final String EMAIL_FAILURE = "Failed to send the email!";
