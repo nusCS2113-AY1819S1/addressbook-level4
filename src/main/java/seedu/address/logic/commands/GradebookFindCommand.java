@@ -1,6 +1,5 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
@@ -21,6 +20,13 @@ public class GradebookFindCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULECODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
+    private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
+    private static final String MESSAGE_FIND_SUCCESS = "Successfully found!"
+            + "\nModule Code: %1$s"
+            + "\nComponent Name: %2$s"
+            + "\nMaximum Marks: %3$s"
+            + "\nWeightage: %4$s";
+
 
     private final Gradebook toFindGradebookComponent;
     public GradebookFindCommand (Gradebook gradebookComponent) {
@@ -30,9 +36,18 @@ public class GradebookFindCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        requireNonNull(model);
-        String result = GradebookManager.findGradebookComponent(toFindGradebookComponent.getModuleCode(),
+        GradebookManager gradebookManager = new GradebookManager();
+        Gradebook gradebook = gradebookManager.findGradebookComponent(
+                toFindGradebookComponent.getModuleCode(),
                 toFindGradebookComponent.getGradeComponentName());
-        return new CommandResult(result);
+        if (gradebook == null) {
+            return new CommandResult(MESSAGE_FIND_FAIL);
+        }
+
+        return new CommandResult(String.format(MESSAGE_FIND_SUCCESS,
+                toFindGradebookComponent.getModuleCode(),
+                toFindGradebookComponent.getGradeComponentName(),
+                toFindGradebookComponent.getGradeComponentMaxMarks(),
+                toFindGradebookComponent.getGradeComponentWeightage()));
     }
 }

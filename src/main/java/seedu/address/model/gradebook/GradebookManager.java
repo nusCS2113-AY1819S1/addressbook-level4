@@ -13,9 +13,6 @@ public class GradebookManager {
     private static final String MESSAGE_ADD_SUCCESS = "\nSuccessfully Added! \nModule Code: %1$s"
             + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
     private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
-    private static final String MESSAGE_FIND_SUCCESS = "Successfully found! \n%1$s";
-    private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
-    private static final String MESSAGE_LIST_SUCCESS = "\nNumber of Grade Components Listed: %1$s \n%2$s";
     private static final String DELETE_MESSAGE_SUCCESS = "\nModule Code: %1$s \nGradebook Component: %2$s \n"
             + "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "\nUnsuccessful Deletion";
@@ -30,7 +27,6 @@ public class GradebookManager {
         return gradebooks;
     }
 
-
     /**
      * Gets gradebook component list from storage and converts it to a Gradebook array list
      */
@@ -44,13 +40,13 @@ public class GradebookManager {
     /**
      This method adds gradebook component to a module in Trajectory.
      */
-    public static String addGradebookComponent (String moduleCode,
+    public String addGradebookComponent (String moduleCode,
                                                 String gradebookComponentName,
                                                 int gradebookMaxMarks,
                                                 int gradebookWeightage) {
         String status = MESSAGE_ADD_SUCCESS;
         boolean isEmpty = Gradebook.hasEmptyParams(moduleCode, gradebookComponentName);
-        boolean hasDuplicate = Gradebook.isDuplicateComponent(moduleCode, gradebookComponentName);
+        boolean hasDuplicate = isDuplicateComponent(moduleCode, gradebookComponentName);
 
         if (isEmpty) {
             status = MESSAGE_ERROR_EMPTY;
@@ -94,27 +90,29 @@ public class GradebookManager {
     /**
      This method finds gradebook component to a module in Trajectory.
      */
-    public static String findGradebookComponent (String moduleCode, String gradebookComponentName) {
-        String status = MESSAGE_FIND_FAIL;
-        boolean isEmpty = Gradebook.hasEmptyParams(moduleCode, gradebookComponentName);
-        if (isEmpty) {
-            status = MESSAGE_ERROR_EMPTY;
-        }
-        StringBuilder sb = new StringBuilder();
-        for (XmlAdaptedGradebook gc: StorageController.getGradebookStorage()) {
-            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
-                status = MESSAGE_FIND_SUCCESS;
-                sb.append("Module Code: ");
-                sb.append(gc.getModuleCode() + "\n");
-                sb.append("Grade Component: ");
-                sb.append(gc.getGradeComponentName() + "\n");
-                sb.append("Maximum Marks: ");
-                sb.append(gc.getGradeComponentMaxMarks() + "\n");
-                sb.append("Weightage: ");
-                sb.append(gc.getGradeComponentWeightage() + "\n");
+    public Gradebook findGradebookComponent (String moduleCode, String gradebookComponentName) {
+        for (Gradebook gradebook : gradebooks) {
+            if (gradebook.getModuleCode().equals(moduleCode)
+                    && gradebook.getGradeComponentName().equals(gradebookComponentName)) {
+                return gradebook;
             }
         }
-        return String.format(status, sb.toString());
+        return null;
+    }
+
+    /**
+     This method checks if component already exists in Trajectory.
+     */
+    public boolean isDuplicateComponent (String moduleCode, String gradebookComponentName) {
+        StorageController.retrieveData();
+        boolean duplicate = false;
+
+        Gradebook gradebook = findGradebookComponent(moduleCode, gradebookComponentName);
+        if (gradebook != null) {
+            duplicate = true;
+        }
+
+        return duplicate;
     }
 }
 
