@@ -16,8 +16,8 @@ public class Username {
     private static final String FIRST_CHARACTER_REGEX = "[^\\W_]";  // alphanumeric except underscores
     private static final String MIDDLE_REGEX = "[a-zA-Z0-9.-_-]*";   // alphanumeric, period, hyphen, underscore
     private static final String LAST_CHARACTER_REGEX = "[^\\W_]";
-    public static final String USERNAME_VALIDATION_REGEX = FIRST_CHARACTER_REGEX +
-            MIDDLE_REGEX + LAST_CHARACTER_REGEX;
+    public static final String USERNAME_VALIDATION_REGEX = FIRST_CHARACTER_REGEX
+            + MIDDLE_REGEX + LAST_CHARACTER_REGEX;
 
     public final String value;
 
