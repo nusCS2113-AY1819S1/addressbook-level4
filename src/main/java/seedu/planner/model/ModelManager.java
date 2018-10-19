@@ -228,5 +228,4 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedFinancialPlanner.equals(other.versionedFinancialPlanner)
                 && filteredRecords.equals(other.filteredRecords);
     }
-
 }

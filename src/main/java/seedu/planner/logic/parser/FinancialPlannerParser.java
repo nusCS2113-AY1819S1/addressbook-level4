@@ -13,6 +13,7 @@ import seedu.planner.logic.commands.DeleteCommand;
 import seedu.planner.logic.commands.DeleteCommandByDateEntry;
 import seedu.planner.logic.commands.EditCommand;
 import seedu.planner.logic.commands.ExitCommand;
+import seedu.planner.logic.commands.ExportExcelCommand;
 import seedu.planner.logic.commands.FindCommand;
 import seedu.planner.logic.commands.FindTagCommand;
 import seedu.planner.logic.commands.HelpCommand;
@@ -53,6 +54,7 @@ public class FinancialPlannerParser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -106,9 +108,11 @@ public class FinancialPlannerParser {
         case SummaryCommand.COMMAND_WORD:
             return new SummaryCommandParser().parse(arguments);
 
+        case ExportExcelCommand.COMMAND_WORD:
+            return new ExportExcelCommandParser().parse(arguments);
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
-
 }

@@ -39,7 +39,7 @@ public class DeleteCommandByDateEntry extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Record> lastShownList = model.getFilteredRecordList();
-        boolean targetRecordExist = false;
+        Boolean targetRecordExist = Boolean.FALSE;
         for (Record targetRecord : lastShownList) {
             logger.info(String.format(
                     "The date required is: %1$s, the date shown is %2$s\n",
@@ -47,7 +47,7 @@ public class DeleteCommandByDateEntry extends Command {
             if (targetRecord.isSameDateRecord(targetDate)) {
                 model.deleteRecord(targetRecord);
                 model.commitFinancialPlanner();
-                targetRecordExist = true;
+                targetRecordExist = Boolean.TRUE;
             }
         }
         if (!targetRecordExist) {
