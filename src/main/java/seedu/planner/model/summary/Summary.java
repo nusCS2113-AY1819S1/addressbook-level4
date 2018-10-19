@@ -1,5 +1,6 @@
 package seedu.planner.model.summary;
 
+import seedu.planner.commons.util.MoneyUtil;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
@@ -50,56 +51,30 @@ public class Summary {
     }
 
     /**
-     * Adds the record's moneyflow to totalExpense, totalIncome or total\
+     * Adds the record's moneyflow to totalExpense, totalIncome or total
      */
-    // TODO: Please refactor this and bring into Moneyflow class
     public void add(Record record) {
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
-            double newMoneyAmount = totalExpense.toDouble() + money.toDouble();
-            String newMoneyString = String.format("%.2f", newMoneyAmount);
-            totalExpense = new MoneyFlow(newMoneyString);
+            totalExpense = MoneyUtil.add(totalExpense, money);
         } else {
-            double newMoneyAmount = totalIncome.toDouble() + money.toDouble();
-            String newMoneyString = String.format("+%.2f", newMoneyAmount);
-            totalIncome = new MoneyFlow(newMoneyString);
+            totalIncome = MoneyUtil.add(totalIncome, money);
         }
-        double newTotalAmount = total.toDouble() + money.toDouble();
-        String newTotalString;
-        if (newTotalAmount > 0) {
-            newTotalString = String.format("+%.2f", newTotalAmount);
-        } else {
-            newTotalString = String.format("%.2f", newTotalAmount);
-        }
-        total = new MoneyFlow(newTotalString);
+        total = MoneyUtil.add(total, money);
     }
 
     /**
      * Subtracts the record's moneyflow from totalExpense or totalIncome depending on the type of moneyflow
      * and total
      */
-    // TODO: Please refactor this and bring into Moneyflow class
     public void remove(Record record) {
         MoneyFlow money = record.getMoneyFlow();
         if (isExpense(money)) {
-            double newMoneyAmount = totalExpense.toDouble() - money.toDouble();
-            assert(newMoneyAmount <= 0);
-            String newMoneyString = String.format("%.2f", newMoneyAmount);
-            totalExpense = new MoneyFlow(newMoneyString);
+            totalExpense = MoneyUtil.subtract(totalExpense, money);
         } else {
-            double newMoneyAmount = totalIncome.toDouble() - money.toDouble();
-            assert(newMoneyAmount >= 0);
-            String newMoneyString = String.format("+%.2f", newMoneyAmount);
-            totalIncome = new MoneyFlow(newMoneyString);
+            totalIncome = MoneyUtil.subtract(totalIncome, money);
         }
-        double newTotalAmount = total.toDouble() - money.toDouble();
-        String newTotalString;
-        if (newTotalAmount > 0) {
-            newTotalString = String.format("+%.2f", newTotalAmount);
-        } else {
-            newTotalString = String.format("%.2f", newTotalAmount);
-        }
-        total = new MoneyFlow(newTotalString);
+        total = MoneyUtil.subtract(total, money);
     }
 
     private boolean isExpense(MoneyFlow money) {

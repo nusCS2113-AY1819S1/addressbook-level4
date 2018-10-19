@@ -321,6 +321,49 @@ image::UndoRedoActivityDiagram.png[width="650"]
 // end::undoredo[]
 
 // tag:list[]
+
+=== Sort records feature
+==== Current Implementation
+The sort function is facilitated by `ModelManager`.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between
+the commands and the `VersionedFinancialPlanner`.
+SortCommand calls `ModelManager#sortFilteredRecordList` and passes in the category to be sorted by and whether the sort
+order is to be in reversed.
+
+This feature has one keyword `sort` and takes in arguments of either category or order of sort. Keywords are not
+case sensitive.
+
+Category can be either of the following keywords:
+
+* `name` - To sort in lexicographical order by the name attribute of the record
+* `date` - To sort by the date attribute of the record
+* `money`/`moneyflow` - To sort by the expenditure or income of the record
+
+Order can be either of the following keywords:
+
+* `desc` - To sort in descending order
+* `asc` - To sort in ascending order
+
+This feature has 2 different kind of modes as follows:
+
+. Single Argument Mode - Input argument can be either the category or the order of sort
+* If category specified, records are sorted in ascending order of that category
+* If order specified, records will be sorted by name in the specified order
+
+. Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order
+
+The input given by the user is passed to `SortCommandParser` to split the input separated by whitespaces to ensure
+there is either only one or two arguments input by the user. These arguments are then stored in an array of strings and
+the size of the array determines the mode of the command.
+The strings are compared to two sets of strings containing the supported categories and orders of the function.
+The string of the category and a boolean representing whether the records are to be reversed will then be passed to
+`ModelManager` to sort the records.
+
+
+The following sequence diagram shows how the sort operation works:
+
+image::SortSequenceDiagram.png[width:800]
+
 === Limit feature
 ==== Current Implementation
 The limit command is based on the data type "Date", which includes two dates and moneyFlow.
