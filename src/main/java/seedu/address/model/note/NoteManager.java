@@ -18,6 +18,13 @@ public class NoteManager {
     }
 
     /**
+     * Adds the new note to the in-memory ArrayList.
+     */
+    public void addNote(Note note) {
+        notes.add(note);
+    }
+
+    /**
      * Deletes the specified note from the in-memory ArrayList.
      */
     public void deleteNote(int index) {
@@ -25,10 +32,24 @@ public class NoteManager {
     }
 
     /**
-     * Adds the new note to the in-memory ArrayList.
+     * Replaces the note at the specified {@code index} with
+     * the {@code newNote}.
+     *
+     * @param index
+     * @param newNote
      */
-    public void addNote(Note note) {
-        notes.add(note);
+    public void editNote(int index, Note newNote) {
+        notes.set(index, newNote);
+    }
+
+    /**
+     * Retrieves the Note object at the specified {@code index}.
+     *
+     * @param index
+     * @return Note object.
+     */
+    public Note getNoteAt(int index) {
+        return notes.get(index);
     }
 
 
