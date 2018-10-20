@@ -66,12 +66,7 @@ public class SellCommand extends Command {
         }
 
         Book bookToSell = lastShownList.get(index.getZeroBased());
-        String originalQuantity = bookToSell.getQuantity().getValue();
         Book sellBook = createSoldBook(bookToSell, decreaseQuantity);
-
-        if (originalQuantity == sellBook.getQuantity().getValue()) {
-            throw new CommandException(MESSAGE_INVALID_QUANTITY);
-        }
 
         StatisticCenter.getInstance().getStatistic().increaseRevenue(
                 bookToSell.getPrice().toString(), decreaseQuantity.getQuantity().getValue());
@@ -88,7 +83,7 @@ public class SellCommand extends Command {
      * Creates and returns a {@code Book} with the details of {@code bookToSell}
      * edited with {@code decreaseQuantity}
      */
-    private static Book createSoldBook(Book bookToSell, DecreaseQuantity decreaseQuantity) {
+    private static Book createSoldBook(Book bookToSell, DecreaseQuantity decreaseQuantity) throws CommandException {
         assert bookToSell != null;
 
         Name name = bookToSell.getName();

@@ -2,6 +2,9 @@ package seedu.address.model.book;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.commands.SellCommand.MESSAGE_INVALID_QUANTITY;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a Book's quantity in the inventory book.
@@ -41,10 +44,12 @@ public class Quantity {
      *
      * @param selling quantity of books sold
      */
-    public void decrease(int selling) {
+    public void decrease(int selling) throws CommandException {
         Integer after = Integer.parseInt(value) - selling;
         if (after >= 0) {
-            this.value = Integer.toString(Integer.parseInt(value) - selling);
+            this.value = Integer.toString(after);
+        } else {
+            throw new CommandException(MESSAGE_INVALID_QUANTITY);
         }
     }
 
