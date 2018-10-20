@@ -368,7 +368,7 @@ If a duplicate persons are found in the group of the address book during its exe
 // end::group[]
 
 // tag::AddScriptCommand[]
-=== AddScriptCommand Feature
+=== AddScriptCommand feature
 ==== Current Implementation
 The AddScriptCommand Feature is executed by AddressBook when the user enter the specific command.
 
@@ -432,6 +432,44 @@ The feature currently supports the following mail servers:
 5. `NUS Student` -- @u.nus.edu
 
 6. `NUS Staff` -- @nus.edu.sg
+
+Given below is an example usage scenario and how the EmailCommand behaves at each step.
+
+Step 1. The user types in the command to send email.
+
+* Single Person Index
+
+image::EmailCommandSingleIndexDiagram.png[width="500"]
+
+* Single Person Index w/ Command Alias
+
+image::AliasEmailCommandSingleIndexDiagram.png[width="500"]
+
+* Multiple Persons Index
+
+image::EmailCommandMultipleIndexDiagram.png[width="500"]
+
+* Multiple Persons Index w/ Command Alias
+
+image::AliasEmailCommandMultipleIndexDiagram.png[width="500"]
+
+
+[NOTE]
+If a login credential is not found in the system, the following message will be shown.
+
+image::EmailCommandNoLoginFound.png[width="500"]
+
+In order for an email to be sent, there must be a sender account.
+
+[NOTE]
+If subject title exceeds 78 characters, the following message will be shown.
+
+image::EmailCommandExceedSubjectLength.png[width="700"]
+
+Although it is possible for subject field to contain more than 78 characters, the system
+sets a limit to prevent subject title folding.
+
+
 
 ==== Sequence Diagrams
 
