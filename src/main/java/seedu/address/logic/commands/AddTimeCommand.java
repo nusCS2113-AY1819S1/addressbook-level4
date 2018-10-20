@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -16,26 +17,26 @@ import seedu.address.model.person.TimeTable;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
- * Adds a timeslot to the timetable of person at Index index
+ * Adds a {@code TimeSlot} to the {@code TimeTable} of person at {@code Index index}
  */
 public class AddTimeCommand extends Command {
     public static final String COMMAND_WORD = "addtime";
 
-    // TODO: Make usage message more descriptive
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a timeslot to your timetable.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Adds a timeslot to your timetable.\n"
+            + "Parameters: DAYOFWEEK STAET - END\n"
+            + "Example: " + COMMAND_WORD + " Monday 8-10";
 
-    // TODO: Make success message more descriptive
-    public static final String MESSAGE_SUCCESS = "New timeslot added";
+    public static final String MESSAGE_ADD_TIMESLOT_SUCCESS = "Added timeslot: %1$s";
 
     private final TimeSlot toAdd;
     private final Index index;
 
     /**
-     * Creates an AddTimeCommand to add the specified timeSlot
+     * Creates an {@code AddTimeCommand} to add the specified {@code TimeSlot}
      */
     public AddTimeCommand(Index index, TimeSlot timeSlot) {
-        requireNonNull(index);
-        requireNonNull(timeSlot);
+        requireAllNonNull(index, timeSlot);
 
         this.index = index;
         this.toAdd = timeSlot;
@@ -64,17 +65,17 @@ public class AddTimeCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.commitAddressBook();
         model.updateTimeTable(editedPerson.getTimeTable());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(String.format(MESSAGE_ADD_TIMESLOT_SUCCESS, toAdd));
     }
 
     /**
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * and the timeslot (@code toAdd) added.
+     * and the {@code TimeSlot toAdd} added.
      */
     private static Person createEditedPerson(Person personToEdit, TimeSlot toAdd) throws TimeSlotOverlapException {
-        assert personToEdit != null;
+        requireAllNonNull(personToEdit, toAdd);
 
-        TimeTable timeTable = new TimeTable (personToEdit.getTimeTable().getTimeSlots());
+        TimeTable timeTable = new TimeTable(personToEdit.getTimeTable());
 
         try {
             timeTable.addTimeSlot(toAdd);
@@ -83,7 +84,7 @@ public class AddTimeCommand extends Command {
         }
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                          personToEdit.getAddress(), personToEdit.getTags(), timeTable, personToEdit.getFriends());
+                personToEdit.getAddress(), personToEdit.getTags(), timeTable, personToEdit.getFriends());
     }
 
     @Override
