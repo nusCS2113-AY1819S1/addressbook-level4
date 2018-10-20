@@ -34,7 +34,7 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final TaskBookParser taskBookParser;
-
+    //@@author chelseyong
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
