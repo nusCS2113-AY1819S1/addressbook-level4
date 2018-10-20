@@ -9,7 +9,7 @@ import seedu.recruit.logic.parser.exceptions.ParseException;
 /**
  * Parses input arguments and creates a new DeleteCandidateCommand object
  */
-public class DeleteCommandParser implements Parser<DeleteCandidateCommand> {
+public class DeleteCandidateCommandParser implements Parser<DeleteCandidateCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCandidateCommand

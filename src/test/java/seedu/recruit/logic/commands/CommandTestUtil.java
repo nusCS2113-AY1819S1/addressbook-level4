@@ -360,6 +360,11 @@ public class CommandTestUtil {
         }
 
         @Override
+        public void deleteJobOffer(JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<JobOffer> getFilteredCompanyJobList() {
             throw new AssertionError("This method should not be called.");
         }

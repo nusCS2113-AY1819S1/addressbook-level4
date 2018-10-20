@@ -18,7 +18,7 @@ import seedu.recruit.logic.commands.DeleteCandidateCommand;
  */
 public class DeleteCandidateCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private DeleteCandidateCommandParser parser = new DeleteCandidateCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {

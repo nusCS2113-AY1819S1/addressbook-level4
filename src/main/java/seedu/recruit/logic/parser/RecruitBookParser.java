@@ -110,7 +110,7 @@ public class RecruitBookParser {
                 return new SelectCommandParser().parse(arguments);
 
             case DeleteCandidateCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(arguments);
+                return new DeleteCandidateCommandParser().parse(arguments);
 
             case ClearCandidateBookCommand.COMMAND_WORD:
                 return new ClearCandidateBookCommand();
