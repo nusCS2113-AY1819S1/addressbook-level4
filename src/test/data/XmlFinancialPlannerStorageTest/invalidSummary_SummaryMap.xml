@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<summarymap>
+    <summaryMap>
+        <entry>
+            <key>30-9-2018</key>
+            <!-- Summary with invalid totalExpense field -->
+            <value>
+                <date>30-9-2018</date>
+                <totalExpense>-7..58</totalExpense>
+                <totalIncome>+0</totalIncome>
+                <total>-7.58</total>
+            </value>
+        </entry>
+    </summaryMap>
+</summarymap>

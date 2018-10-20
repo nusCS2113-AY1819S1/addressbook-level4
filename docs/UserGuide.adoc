@@ -85,7 +85,7 @@ Examples:
 * `add n/PaymentToJohn d/20-8-2018 m/-10`
 * `add n/PaymentFromBetty t/friend m/+10 d/10-11-2018 t/classmate`
 
-=== Listing all records satisfying some criteria : list [Vincent]
+=== Listing all records satisfying some criteria : `list` [Vincent]
 
 Shows a list of all records in the record book which fulfills a certain criteria. +
 There are 3 modes, default mode, single argument mode and dual argument mode. +
@@ -106,6 +106,37 @@ Examples:
 * `list`
 * `list d/10-11-2018`
 * `list d/10-11-2018 11-11-2018`
+
+=== Sorting displayed records : `sort`
+
+Sorts the list of records in the record book by a category.
+There are 3 categories to sort by `name`, `date`, `moneyflow`/`money` either in ascending order `asc` or
+descending order `desc`. +
+Format: `sort [CATEGORY] [ORDER]`
+
+****
+* Only the abovementioned keywords for category and order are supported.
+* Keyword matching is case insensitive, e.g `sort Name Desc` will work the same as `sort name desc`.
+* Sorts the list of records and updates the displayed list of records.
+* At least one of the optional fields must be provided.
+* At most one of each optional field is to be provided.
+* If only a category is specified, the records are sorted in ascending order of that category.
+* If only a sort order is specified, the records are sorted by name in that order.
+****
+
+Examples:
+
+* `sort date` +
+Sorts the list of records by date in ascending order.
+
+* `sort desc` +
+Sorts the list of records by name in descending order.
+
+* `sort name asc` +
+Sorts the list of records by name in ascending order.
+
+* `sort moneyflow desc` +
+Sorts the list of records by moneyflow in descending order.
 
 === Editing a record : `edit`
 
@@ -147,6 +178,26 @@ Returns `dinner with family` and `family party`
 * `find family food shopping` +
 Returns all records having `family`, `food`, or `shopping` in their name
 
+=== Locating records by tag: `findtag`
+
+Finds records with tags that match any of the given keywords. +
+Format: `findtag KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `hans` will match `Hans`
+* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+* Only the tags are searched.
+* Only full words will be matched e.g. `Han` will not match `Hans`
+* Records with tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `findtag friend` +
+Returns any record tagged with `friend`
+* `findtag friend food shopping` +
+Returns all records having any of the tags `friend`, `food`, or `shopping`
+
 === Deleting a record : `delete`
 
 Deletes the specified record from the expense book. +
@@ -167,7 +218,7 @@ Deletes the 2nd record in the expense book.
 `delete 1` +
 Deletes the 1st record in the results of the `find` command.
 
-=== Delete records in same date.
+=== Delete records in same date. `delete_date`
 
 Deletes the records whose date is required from the expense book. +
 Format: `delete_date dd-mm-yyyy`
@@ -203,26 +254,6 @@ Selects the 2nd record in the expense book.
 * `find Dinner` +
 `select 1` +
 Selects the 1st record in the results of the `find` command.
-
-=== Locating records by tag: `findtag`
-
-Finds records with tags that match any of the given keywords. +
-Format: `findtag KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the tags are searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Records with tags matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `findtag friend` +
-Returns any record with `\*friend*`
-* `findtag friend food shopping` +
-Returns all records having tags `\*friend*`, `\*food*`, or `\*shopping*`
 
 === Listing entered commands : `history`
 

@@ -147,7 +147,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` simply raises a `FinancialPlannerChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
@@ -187,7 +187,7 @@ image::LogicClassDiagram.png[width="800"]
 *API* :
 link:{repoURL}/src/main/java/seedu/expense/logic/Logic.java[`Logic.java`]
 
-.  `Logic` uses the `AddressBookParser` class to parse the user command.
+.  `Logic` uses the `FinancialPlannerParser` class to parse the user command.
 .  This results in a `Command` object which is executed by the `LogicManager`.
 .  The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
 .  The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
@@ -244,54 +244,71 @@ This section describes some noteworthy details on how certain features are imple
 === Undo/Redo feature
 ==== Current Implementation
 
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
+The undo/redo mechanism is facilitated by `VersionedFinancialPlanner`.
+It extends `FinancialPlanner` with an undo/redo history, stored internally as an `financialPlannerStateList` and
+`currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` -- Saves the current expense book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous expense book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone expense book state from its history.
+* `VersionedFinancialPlanner#commit()` -- Saves the current expense book state in its history.
+* `VersionedFinancialPlanner#undo()` -- Restores the previous expense book state from its history.
+* `VersionedFinancialPlanner#redo()` -- Restores a previously undone expense book state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitFinancialPlanner()`,
+`Model#undoFinancialPlanner()` and `Model#redoFinancialPlanner()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial expense book state, and the `currentStatePointer` pointing to that single expense book state.
+Step 1. The user launches the application for the first time. The `VersionedFinancialPlanner` will be initialized with
+the initial expense book state, and the `currentStatePointer` pointing to that single expense planner state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the expense book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the expense book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted expense book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the expense book. The `delete` command calls
+`Model#commitFinancialPlanner()`, causing the modified state of the expense book after the `delete 5` command executes
+to be saved in the `financialPlannerStateList`, and the `currentStatePointer` is shifted to the newly inserted expense book state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified expense book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David ...` to add a new person. The `add` command also calls
+`Model#commitFinancialPlanner()`, causing another modified expense book state to be saved into the
+`financialPlannerStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the expense book state will not be saved into the `addressBookStateList`.
+If a command fails its execution, it will not call `Model#commitFinancialPlanner()`, so the expense book state will
+not be saved into the `financialPlannerStateList`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous expense book state, and restores the expense book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the
+`undo` command. The `undo` command will call `Model#undoFinancialPlanner()`, which will shift the `currentStatePointer`
+once to the left, pointing it to the previous expense book state, and restores the expense book to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial expense book state, then there are no previous expense book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial expense book state, then there are no previous
+expense book states to restore. The `undo` command uses `Model#canUndoFinancialPlanner()` to check if this is the case.
+If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the expense book to that state.
+The `redo` command does the opposite -- it calls `Model#redoFinancialPlanner()`, which shifts the `currentStatePointer`
+once to the right, pointing to the previously undone state, and restores the expense book to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest expense book state, then there are no undone expense book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `financialPlannerStateList.size() - 1`, pointing to the latest expense book
+state, then there are no undone expense book states to restore. The `redo` command uses `Model#canRedoFinancialPlanner()`
+to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the expense book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the expense book, such as
+`list`, will usually not call `Model#commitFinancialPlanner()`, `Model#undoFinancialPlanner()` or
+`Model#redoFinancialPlanner()`. Thus, the `financialPlannerStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all expense book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitFinancialPlanner()`. Since the `currentStatePointer` is not pointing at the end of the `financialPlannerStateList`, all expense book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -314,31 +331,57 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 * **Alternative 1 (current choice):** Use a list to store the history of expense book states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
+** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedFinancialPlanner`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
 // tag:list[]
-=== Limit feature
+
+=== Sort records feature
 ==== Current Implementation
-The limit command is based on the data type "Date", which includes two dates and moneyFlow.
-Once the user execute the limit command, the program will read all the records from the memory.
+The sort mechanism is facilitated by `ModelManager`. It extends `FinancialPlanner` with a component that sorts the
+internal list of records. SortCommand calls `ModelManager#sortFilteredRecordList` and passes in the category to be
+sorted by and the sort order.
 
-The user need to input two dates, the first one is start date while the second one is end date.
-And the user also need to input the limit money they want to set. The user enter two dates after the
-one "d/" index followed by money with m/ index.
+This feature has one keyword `sort` and takes in arguments of either category or order of sort. Keywords are not
+case sensitive.
 
-The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
-. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
-. The string associated with `d/` is then passed into `LimitCommandParser#splitByWhitespace` for further processing and returns an array.
-This string will be split into two strings and each of them will be construct as a date type variable
-. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+Category can be either of the following keywords:
 
-The following sequence diagram shows how the limit operation works:
+* `name` - To sort in lexicographical order by the name attribute of the record
+* `date` - To sort by the date attribute of the record
+* `money`/`moneyflow` - To sort by the expenditure or income of the record
 
-image::LimitSequenceDiagram.png[width:800]
+Order can be either of the following keywords:
+
+* `desc` - To sort in descending order
+* `asc` - To sort in ascending order
+
+This feature has 2 different kind of modes as follows:
+
+. Single Argument Mode - Input argument can be either the category or the order of sort
+* If category specified, records are sorted in ascending order of that category
+* If order specified, records will be sorted by name in the specified order
+
+. Duo Argument Mode - Input arguments must contain only 1 category and only 1 order, and can be input in no particular order
+
+The input given by the user is passed to `SortCommandParser` to split the input separated by whitespaces to ensure
+there is either only one or two arguments input by the user. These arguments are stored in an array of strings and
+the size of the array determines the mode of the command.
+
+The strings are compared to two sets of strings containing the supported categories and orders of the function.
+The string of the category and a boolean representing whether the records are to be reversed will then be passed to
+`ModelManager` to sort the records.
+
+Since the displayed list in the UI is a `FilteredList` which is a wrapper for the underlying list `UniqueRecordList` structure,
+sorting the internal list of records in `versionedFinancialPlanner` will post an event that notifies the UI to update
+the displayed list.
+
+The following sequence diagram shows how the sort operation works:
+
+image::SortSequenceDiagram.png[width:800]
 
 === List history feature
 ==== Current Implementation
@@ -370,7 +413,50 @@ The following sequence diagram shows how the list operation works:
 image::ListSequenceDiagram.png[width="800"]
 
 For simplicity, interactions with the UI is not shown in the diagram above. +
-The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This listener is present in `RecordListPanel` and will update the UI list automatically.
+The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
+implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
+listener is present in `RecordListPanel` and will update the UI list automatically.
+
+=== Find records by tag feature
+==== Current Implementation
+The findtag mechanism is also facilitated by `ModelManager`. FindTagCommand calls `ModelManager#updateFilteredRecords`
+and passes in different predicates depending on the input by the user.
+
+This feature has only one keyword `findtag` and a single working mode which takes in any number of input arguments. The
+input given by the user is passed to `FindTagCommandParser#parse` to split the desired tags the user wants to search by
+into an array of strings. The array of strings is passed into `TagsContainsKeywordsPredicate` to create the predicate
+for `updateFilteredRecordList` required in `ModelManager`.
+
+In `TagsContainsKeywordsPredicate`, to compare for a match, every keyword in the array is compared
+against the set of tags of each record and as long as any tag matches any of the keywords,
+the predicate will evaluate to true and allows the `FilteredList` to filter out the records that do not fulfil the
+predicate.
+
+`FindTagCommandParser` returns a `FindTagCommand` object which calls `updateFilteredRecordList` to set the new predicate
+and obtain a new `filteredRecords` based on the predicate, which will also trigger an event for the UI to read in and display the new records.
+
+The following sequence diagram shows how the limit operation works:
+
+image::FindTagSequenceDiagram.png[width:800]
+
+=== Limit feature
+==== Current Implementation
+The limit command is based on the data type "Date", which includes two dates and moneyFlow.
+Once the user execute the limit command, the program will read all the records from the memory.
+
+The user need to input two dates, the first one is start date while the second one is end date.
+And the user also need to input the limit money they want to set. The user enter two dates after the
+one "d/" index followed by money with m/ index.
+
+The input given by the user is passed to `ArgumentTokeniser#tokenise` to split the input separated by prefixes.
+. This returns a `ArgumentMultiMap` which contains a map with prefixes as keys and their associated input arguments as the value.
+. The string associated with `d/` is then passed into `LimitCommandParser#splitByWhitespace` for further processing and returns an array.
+This string will be split into two strings and each of them will be construct as a date type variable
+. The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ListCommand` object.
+
+The following sequence diagram shows how the limit operation works:
+
+image::LimitSequenceDiagram.png[width:800]
 
 === Design Considerations
 ==== Aspect: Data structure to support listing of records
@@ -624,9 +710,9 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 ****
 * Hints
 ** Just like we store each individual command word constant `COMMAND_WORD` inside `*Command.java` (e.g.  link:{repoURL}/src/main/java/seedu/expense/logic/commands/FindCommand.java[`FindCommand#COMMAND_WORD`], link:{repoURL}/src/main/java/seedu/expense/logic/commands/DeleteCommand.java[`DeleteCommand#COMMAND_WORD`]), you need a new constant for aliases as well (e.g. `FindCommand#COMMAND_ALIAS`).
-** link:{repoURL}/src/main/java/seedu/expense/logic/parser/AddressBookParser.java[`AddressBookParser`] is responsible for analyzing command words.
+** link:{repoURL}/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] is responsible for analyzing command words.
 * Solution
-** Modify the switch statement in link:{repoURL}/src/main/java/seedu/expense/logic/parser/AddressBookParser.java[`AddressBookParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
+** Modify the switch statement in link:{repoURL}/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser#parseCommand(String)`] such that both the proper command word and alias can be used to execute the same intended command.
 ** Add new tests for each of the aliases that you have added.
 ** Update the user guide to document the new aliases.
 ** See this https://github.com/se-edu/addressbook-level4/pull/785[PR] for the full solution.
@@ -644,12 +730,12 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 +
 ****
 * Hints
-** The link:{repoURL}/src/main/java/seedu/expense/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/expense/model/AddressBook.java[`AddressBook`] API need to be updated.
+** The link:{repoURL}/src/main/java/seedu/expense/model/Model.java[`Model`] and the link:{repoURL}/src/main/java/seedu/expense/model/FinancialPlanner.java[`FinancialPlanner`] API need to be updated.
 ** Think about how you can use SLAP to design the method. Where should we place the main logic of deleting tags?
-**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/expense/model/AddressBook.java[`AddressBook`] and link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/expense/model/AddressBook.java[`AddressBook`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`] allows you to update the tags.
+**  Find out which of the existing API methods in  link:{repoURL}/src/main/java/seedu/expense/model/FinancialPlanner.java[`FinancialPlanner`] and link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`] classes can be used to implement the tag removal logic. link:{repoURL}/src/main/java/seedu/expense/model/FinancialPlanner.java[`FinancialPlanner`] allows you to update a person, and link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`] allows you to update the tags.
 * Solution
-** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/expense/model/AddressBook.java[`AddressBook`]. Loop through each person, and remove the `tag` from each person.
-** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/expense/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/expense/model/ModelManager.java[`ModelManager`] should call `AddressBook#removeTag(Tag)`.
+** Implement a `removeTag(Tag)` method in link:{repoURL}/src/main/java/seedu/expense/model/FinancialPlanner.java[`FinancialPlanner`]. Loop through each person, and remove the `tag` from each person.
+** Add a new API method `deleteTag(Tag)` in link:{repoURL}/src/main/java/seedu/expense/model/ModelManager.java[`ModelManager`]. Your link:{repoURL}/src/main/java/seedu/expense/model/ModelManager.java[`ModelManager`] should call `FinancialPlanner#removeTag(Tag)`.
 ** Add new tests for each of the new public methods that you have added.
 ** See this https://github.com/se-edu/addressbook-level4/pull/790[PR] for the full solution.
 ****
@@ -702,7 +788,7 @@ image::getting-started-ui-result-after.png[width="200"]
 ** Modify link:{repoURL}/src/main/java/seedu/expense/ui/ResultDisplay.java[`ResultDisplay#handleNewResultAvailableEvent(NewResultAvailableEvent)`] to react to this event appropriately.
 ** You can write two different kinds of tests to ensure that the functionality works:
 *** The unit tests for `ResultDisplay` can be modified to include verification of the color.
-*** The system tests link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest#assertCommandBoxShowsDefaultStyle() and AddressBookSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
+*** The system tests link:{repoURL}/src/test/java/systemtests/FinancialPlannerSystemTest.java[`FinancialPlannerSystemTest#assertCommandBoxShowsDefaultStyle() and FinancialPlannerSystemTest#assertCommandBoxShowsErrorStyle()`] to include verification for `ResultDisplay` as well.
 ** See this https://github.com/se-edu/addressbook-level4/pull/799[PR] for the full solution.
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
@@ -723,9 +809,9 @@ image::getting-started-ui-status-after.png[width="500"]
 ** link:{repoURL}/src/main/java/seedu/expense/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the expense book is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/expense/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of persons when the application just started.
-** Use link:{repoURL}/src/main/java/seedu/expense/ui/StatusBarFooter.java[`StatusBarFooter#handleAddressBookChangedEvent(AddressBookChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
+** Use link:{repoURL}/src/main/java/seedu/expense/ui/StatusBarFooter.java[`StatusBarFooter#handleFinancialPlannerChangedEvent(FinancialPlannerChangedEvent)`] to update the number of persons whenever there are new changes to the addressbook.
 ** For tests, modify link:{repoURL}/src/test/java/guitests/guihandles/StatusBarFooterHandle.java[`StatusBarFooterHandle`] by adding a state-saving functionality for the total number of people status, just like what we did for save location and sync status.
-** For system tests, modify link:{repoURL}/src/test/java/systemtests/AddressBookSystemTest.java[`AddressBookSystemTest`] to also verify the new total number of persons status bar.
+** For system tests, modify link:{repoURL}/src/test/java/systemtests/FinancialPlannerSystemTest.java[`FinancialPlannerSystemTest`] to also verify the new total number of persons status bar.
 ** See this https://github.com/se-edu/addressbook-level4/pull/803[PR] for the full solution.
 ****
 
@@ -737,12 +823,12 @@ image::getting-started-ui-status-after.png[width="500"]
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupAddressBook(ReadOnlyAddressBook)`, so that the expense book can be saved in a fixed temporary location.
+. Add a new method `backupFinancialPlanner(ReadOnlyFinancialPlanner)`, so that the expense book can be saved in a fixed temporary location.
 +
 ****
 * Hint
-** Add the API method in link:{repoURL}/src/main/java/seedu/expense/storage/AddressBookStorage.java[`AddressBookStorage`] interface.
-** Implement the logic in link:{repoURL}/src/main/java/seedu/expense/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/expense/storage/XmlAddressBookStorage.java[`XmlAddressBookStorage`] class.
+** Add the API method in link:{repoURL}/src/main/java/seedu/expense/storage/FinancialPlannerStorage.java[`FinancialPlannerStorage`] interface.
+** Implement the logic in link:{repoURL}/src/main/java/seedu/expense/storage/StorageManager.java[`StorageManager`] and link:{repoURL}/src/main/java/seedu/expense/storage/XmlFinancialPlannerStorage.java[`XmlFinancialPlannerStorage`] class.
 * Solution
 ** See this https://github.com/se-edu/addressbook-level4/pull/594[PR] for the full solution.
 ****
@@ -773,12 +859,12 @@ Let's start by teaching the application how to parse a `remark` command. We will
 **Main:**
 
 . Add a `RemarkCommand` that extends link:{repoURL}/src/main/java/seedu/expense/logic/commands/Command.java[`Command`]. Upon execution, it should just throw an `Exception`.
-. Modify link:{repoURL}/src/main/java/seedu/expense/logic/parser/AddressBookParser.java[`AddressBookParser`] to accept a `RemarkCommand`.
+. Modify link:{repoURL}/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] to accept a `RemarkCommand`.
 
 **Tests:**
 
 . Add `RemarkCommandTest` that tests that `execute()` throws an Exception.
-. Add new test method to link:{repoURL}/src/test/java/seedu/expense/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
+. Add new test method to link:{repoURL}/src/test/java/seedu/expense/logic/parser/FinancialPlannerParserTest.java[`FinancialPlannerParserTest`], which tests that typing "remark" returns an instance of `RemarkCommand`.
 
 ===== [Step 2] Logic: Teach the app to accept 'remark' arguments
 Let's teach the application to parse arguments that our `remark` command will accept. E.g. `1 r/Likes to drink coffee.`
@@ -787,14 +873,14 @@ Let's teach the application to parse arguments that our `remark` command will ac
 
 . Modify `RemarkCommand` to take in an `Index` and `String` and print those two parameters as the error message.
 . Add `RemarkCommandParser` that knows how to parse two arguments, one index and one with prefix 'r/'.
-. Modify link:{repoURL}/src/main/java/seedu/expense/logic/parser/AddressBookParser.java[`AddressBookParser`] to use the newly implemented `RemarkCommandParser`.
+. Modify link:{repoURL}/src/main/java/seedu/expense/logic/parser/FinancialPlannerParser.java[`FinancialPlannerParser`] to use the newly implemented `RemarkCommandParser`.
 
 **Tests:**
 
 . Modify `RemarkCommandTest` to test the `RemarkCommand#equals()` method.
 . Add `RemarkCommandParserTest` that tests different boundary values
 for `RemarkCommandParser`.
-. Modify link:{repoURL}/src/test/java/seedu/expense/logic/parser/AddressBookParserTest.java[`AddressBookParserTest`] to test that the correct command is generated according to the user input.
+. Modify link:{repoURL}/src/test/java/seedu/expense/logic/parser/FinancialPlannerParserTest.java[`FinancialPlannerParserTest`] to test that the correct command is generated according to the user input.
 
 ===== [Step 3] Ui: Add a placeholder for remark in `PersonCard`
 Let's add a placeholder on all our link:{repoURL}/src/main/java/seedu/expense/ui/PersonCard.java[`PersonCard`] s to display a remark for each person later.
@@ -827,7 +913,7 @@ Now we have the `Remark` class, we need to actually use it inside link:{repoURL}
 
 . Add `getRemark()` in link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`].
 . You may assume that the user will not be able to use the `add` and `edit` commands to modify the remarks field (i.e. the person will be created without a remark).
-. Modify link:{repoURL}/src/main/java/seedu/expense/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `addressBook.xml` so that the application will load the sample data when you launch it.)
+. Modify link:{repoURL}/src/main/java/seedu/expense/model/util/SampleDataUtil.java/[`SampleDataUtil`] to add remarks for the sample data (delete your `financialPlanner.xml` so that the application will load the sample data when you launch it.)
 
 ===== [Step 6] Storage: Add `Remark` field to `XmlAdaptedPerson` class
 We now have `Remark` s for `Person` s, but they will be gone when we exit the application. Let's modify link:{repoURL}/src/main/java/seedu/expense/storage/XmlAdaptedPerson.java[`XmlAdaptedPerson`] to include a `Remark` field so that it will be saved.
@@ -838,7 +924,7 @@ We now have `Remark` s for `Person` s, but they will be gone when we exit the ap
 
 **Tests:**
 
-. Fix `invalidAndValidPersonAddressBook.xml`, `typicalPersonsAddressBook.xml`, `validAddressBook.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
+. Fix `invalidAndValidPersonFinancialPlanner.xml`, `typicalPersonsFinancialPlanner.xml`, `validFinancialPlanner.xml` etc., such that the XML tests will not fail due to a missing `<remark>` element.
 
 ===== [Step 6b] Test: Add withRemark() for `PersonBuilder`
 Since `Person` can now have a `Remark`, we should add a helper method to link:{repoURL}/src/test/java/seedu/expense/testutil/PersonBuilder.java[`PersonBuilder`], so that users are able to create remarks when building a link:{repoURL}/src/main/java/seedu/expense/model/person/Person.java[`Person`].
@@ -951,7 +1037,7 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `FinancialPlanner` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === 1.  Use case: Input expense for a certain activity. [Vincent]

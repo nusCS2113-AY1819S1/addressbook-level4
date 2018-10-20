@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.commons.core.Messages;
@@ -24,7 +23,6 @@ import seedu.planner.testutil.TypicalDates;
 import seedu.planner.testutil.TypicalIndexes;
 import seedu.planner.testutil.TypicalRecords;
 
-@Ignore
 public class DeleteCommandByDateEntryTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -84,7 +82,7 @@ public class DeleteCommandByDateEntryTest {
         //delete the Records have required date
         deleteCommandByDateEntry.execute(model, commandHistory);
 
-        //undo -> reverts addressBook back to the prebious state and filtered record list to show all records
+        //undo -> reverts financialPlanner back to the prebious state and filtered record list to show all records
         expectedModel.undoFinancialPlanner();
         CommandTestUtil.assertCommandSuccess(
                 new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);

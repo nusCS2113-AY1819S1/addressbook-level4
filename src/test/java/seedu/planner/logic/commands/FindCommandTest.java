@@ -13,7 +13,6 @@ import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 import java.util.Arrays;
 import java.util.Collections;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.planner.logic.CommandHistory;
@@ -25,7 +24,7 @@ import seedu.planner.model.record.NameContainsKeywordsPredicate;
 /**
  * Contains integration tests (interaction with the Model) for {@code FindCommand}.
  */
-@Ignore
+
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalFinancialPlanner(), new UserPrefs());

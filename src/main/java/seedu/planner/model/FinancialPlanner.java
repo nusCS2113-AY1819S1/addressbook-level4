@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import javafx.collections.ObservableList;
-
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
@@ -70,7 +69,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         setRecords(newData.getRecordList());
         setSummaryMap(newData.getSummaryMap());
         setLimits(newData.getLimitList());
-
     }
 
     /**
@@ -235,7 +233,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof FinancialPlanner // instanceof handles nulls
-                && records.equals(((FinancialPlanner) other).records));
+                && records.equals(((FinancialPlanner) other).records))
+                && summaryMap.equals(((FinancialPlanner) other).summaryMap);
     }
 
     @Override
