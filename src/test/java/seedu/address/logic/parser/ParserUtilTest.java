@@ -41,7 +41,8 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_DAY = "monday";
+    private static final String VALID_DAY_FULL = "monday";
+    private static final String VALID_DAY_SHORT = "mon";
     private static final String VALID_TIME_0800HRS = "08:00";
     private static final String VALID_TIME_1000HRS = "10:00";
 
@@ -236,31 +237,39 @@ public class ParserUtilTest {
     @Test
     public void parseTimeSlot_invalidStartTime_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + INVALID_TIME + DASH + VALID_TIME_1000HRS);
+        ParserUtil.parseTimeSlot(VALID_DAY_FULL + WHITESPACE + INVALID_TIME + DASH + VALID_TIME_1000HRS);
     }
 
     @Test
     public void parseTimeSlot_invalidEndTime_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + VALID_TIME_0800HRS + DASH + INVALID_TIME);
+        ParserUtil.parseTimeSlot(VALID_DAY_FULL + WHITESPACE + VALID_TIME_0800HRS + DASH + INVALID_TIME);
     }
 
     @Test
     public void parseTimeSlot_invalidRange_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + VALID_TIME_1000HRS + DASH + VALID_TIME_0800HRS);
+        ParserUtil.parseTimeSlot(VALID_DAY_FULL + WHITESPACE + VALID_TIME_1000HRS + DASH + VALID_TIME_0800HRS);
     }
 
     @Test
     public void parseTimeSlot_invalidRangeSameTime_throwsParseException() throws Exception {
         thrown.expect(ParseException.class);
-        ParserUtil.parseTimeSlot(VALID_DAY + WHITESPACE + VALID_TIME_1000HRS + DASH + VALID_TIME_1000HRS);
+        ParserUtil.parseTimeSlot(VALID_DAY_FULL + WHITESPACE + VALID_TIME_1000HRS + DASH + VALID_TIME_1000HRS);
     }
 
     @Test
     public void parseTimeSlot_validValues_returnsTimeSlot() throws Exception {
         TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
-        TimeSlot actual = ParserUtil.parseTimeSlot(VALID_DAY
+        TimeSlot actual = ParserUtil.parseTimeSlot(VALID_DAY_FULL
+                + WHITESPACE + VALID_TIME_0800HRS + DASH + VALID_TIME_1000HRS);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void parseTimeSlot_validValuesShortDay_returnsTimeSlot() throws Exception {
+        TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
+        TimeSlot actual = ParserUtil.parseTimeSlot(VALID_DAY_SHORT
                 + WHITESPACE + VALID_TIME_0800HRS + DASH + VALID_TIME_1000HRS);
         assertEquals(expected, actual);
     }
@@ -268,7 +277,7 @@ public class ParserUtilTest {
     @Test
     public void parseTimeSlot_validValuesWithWhitespace_returnsTimeSlot() throws Exception {
         TimeSlot expected = TypicalTimeSlots.MON_8_TO_10;
-        TimeSlot actual = ParserUtil.parseTimeSlot(WHITESPACE + VALID_DAY
+        TimeSlot actual = ParserUtil.parseTimeSlot(WHITESPACE + VALID_DAY_FULL
                 + WHITESPACE + VALID_TIME_0800HRS + WHITESPACE + DASH + WHITESPACE + VALID_TIME_1000HRS + WHITESPACE);
         assertEquals(expected, actual);
     }
