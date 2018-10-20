@@ -12,7 +12,7 @@ import org.junit.Test;
 
 import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
-import seedu.recruit.logic.commands.DeleteCommand;
+import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.ui.BrowserPanel;
@@ -71,7 +71,7 @@ public class HelpCommandSystemTest extends CandidateBookSystemTest {
 
         // assert that the status bar too is updated correctly while the help window is open
         // note: the select command tested above does not update the status bar
-        executeCommand(DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        executeCommand(DeleteCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
         assertNotEquals(StatusBarFooter.SYNC_CANDIDATE_STATUS_INITIAL, getStatusBarFooter().getSyncStatus());
     }
 

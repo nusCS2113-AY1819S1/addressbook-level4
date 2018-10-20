@@ -3,26 +3,26 @@ package seedu.recruit.logic.parser;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import seedu.recruit.commons.core.index.Index;
-import seedu.recruit.logic.commands.DeleteCommand;
+import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new DeleteCommand object
+ * Parses input arguments and creates a new DeleteCandidateCommand object
  */
-public class DeleteCommandParser implements Parser<DeleteCommand> {
+public class DeleteCommandParser implements Parser<DeleteCandidateCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteCommand
-     * and returns an DeleteCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteCandidateCommand
+     * and returns an DeleteCandidateCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteCommand parse(String args) throws ParseException {
+    public DeleteCandidateCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
-            return new DeleteCommand(index);
+            return new DeleteCandidateCommand(index);
         } catch (ParseException pe) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCandidateCommand.MESSAGE_USAGE), pe);
         }
     }
 
