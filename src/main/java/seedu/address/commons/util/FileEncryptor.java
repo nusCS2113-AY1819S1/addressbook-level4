@@ -79,7 +79,7 @@ public class FileEncryptor {
             throw new FileEncryptorException("Password mismatch!");
         }
 
-        return "decrypted";
+        return "";
     }
 
     /**
