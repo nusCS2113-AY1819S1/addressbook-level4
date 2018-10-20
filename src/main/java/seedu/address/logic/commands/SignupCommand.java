@@ -37,6 +37,7 @@ public class SignupCommand extends Command {
             throw new CommandException(MESSAGE_EXISTS);
         }
 
+        model.createUser(toSignup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSignup.getUsername().toString()));
     }
 }
