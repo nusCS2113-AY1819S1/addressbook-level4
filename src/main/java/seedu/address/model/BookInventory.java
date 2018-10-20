@@ -74,6 +74,16 @@ public class BookInventory implements ReadOnlyBookInventory {
     }
 
     /**
+     * Finds book in the list with the isbn provided
+     * @param isbn the 10/13 digits assigned to books
+     * @return the book with the corresponding {@param isbn}
+     */
+    public Book getBook(String isbn) {
+        requireNonNull(isbn);
+        return books.getBook(isbn);
+    }
+
+    /**
      * Adds a book to the BookInventory.
      * The book must not already exist in the BookInventory.
      */

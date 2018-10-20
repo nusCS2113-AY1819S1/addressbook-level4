@@ -24,6 +24,11 @@ public interface Model {
     boolean hasBook(Book book);
 
     /**
+     * Returns book if a book has the correspondind isbn
+     */
+    Book getBook(String isbn);
+
+    /**
      * Deletes the given book.
      * The book must exist in the BookInventory.
      */

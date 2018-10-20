@@ -2,6 +2,9 @@ package seedu.address.model.book;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.commands.SellCommand.MESSAGE_INVALID_QUANTITY;
+
+import seedu.address.logic.commands.exceptions.CommandException;
 
 /**
  * Represents a Book's quantity in the inventory book.
@@ -9,7 +12,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Quantity {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
+    public static final String MESSAGE_QUANTITY_CONSTRAINTS =
             "Quantity can only take positive values, and it should not be blank";
 
     /**
@@ -25,9 +28,10 @@ public class Quantity {
      */
     public Quantity(String quantity) {
         requireNonNull(quantity);
-        checkArgument(isValidQuantity(quantity), MESSAGE_ADDRESS_CONSTRAINTS);
+        checkArgument(isValidQuantity(quantity), MESSAGE_QUANTITY_CONSTRAINTS);
         value = quantity;
     }
+
     public String getValue() {
         return value;
     }
@@ -41,10 +45,12 @@ public class Quantity {
      *
      * @param selling quantity of books sold
      */
-    public void decrease(int selling) {
+    public void decrease(int selling) throws CommandException {
         Integer after = Integer.parseInt(value) - selling;
         if (after >= 0) {
-            this.value = Integer.toString(Integer.parseInt(value) - selling);
+            this.value = Integer.toString(after);
+        } else {
+            throw new CommandException(MESSAGE_INVALID_QUANTITY);
         }
     }
 

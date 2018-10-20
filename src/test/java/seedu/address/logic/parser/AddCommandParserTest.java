@@ -118,7 +118,7 @@ public class AddCommandParserTest {
         // invalid quantity
         assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB
                 + PRICE_DESC_BOB + COST_DESC_BOB + INVALID_QUANTITY_DESC
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND, Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, NAME_DESC_BOB + ISBN_DESC_BOB

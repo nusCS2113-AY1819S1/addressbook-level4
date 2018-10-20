@@ -55,37 +55,37 @@ public class ParserUtil {
      * Parses a {@code String phone} into a {@code Isbn}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code isbn} is invalid.
      */
-    public static Isbn parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
-        if (!Isbn.isValidIsbn(trimmedPhone)) {
+    public static Isbn parseIsbn(String isbn) throws ParseException {
+        requireNonNull(isbn);
+        String trimmedIsbn = isbn.trim();
+        if (!Isbn.isValidIsbn(trimmedIsbn)) {
             throw new ParseException(Isbn.MESSAGE_ISBN_CONSTRAINTS);
         }
-        return new Isbn(trimmedPhone);
+        return new Isbn(trimmedIsbn);
     }
 
     /**
-     * Parses a {@code String address} into an {@code Quantity}.
+     * Parses a {@code String quantity} into an {@code Quantity}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code quantity} is invalid.
      */
-    public static Quantity parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Quantity.isValidQuantity(trimmedAddress)) {
-            throw new ParseException(Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
+    public static Quantity parseQuantity(String quantity) throws ParseException {
+        requireNonNull(quantity);
+        String trimmedQuantity = quantity.trim();
+        if (!Quantity.isValidQuantity(trimmedQuantity)) {
+            throw new ParseException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
         }
-        return new Quantity(trimmedAddress);
+        return new Quantity(trimmedQuantity);
     }
 
     /**
-     * Parses a {@code String email} into an {@code Price}.
+     * Parses a {@code String price} into an {@code Price}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @throws ParseException if the given {@code price} is invalid.
      */
     public static Price parsePrice(String price) throws ParseException {
         requireNonNull(price);
@@ -106,7 +106,7 @@ public class ParserUtil {
         requireNonNull(cost);
         String trimmedCost = cost.trim();
         if (!Cost.isValidCost(trimmedCost)) {
-            throw new ParseException(Price.MESSAGE_PRICE_CONSTRAINTS);
+            throw new ParseException(Cost.MESSAGE_COST_CONSTRAINTS);
         }
         return new Cost(trimmedCost);
     }

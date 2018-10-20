@@ -43,10 +43,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Isbn isbn = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ISBN).get());
+        Isbn isbn = ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get());
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         Cost cost = ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get());
-        Quantity quantity = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_QUANTITY).get());
+        Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Book book = new Book(name, isbn, price, cost, quantity, tagList);

@@ -9,7 +9,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.StatisticCenter;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -38,21 +37,20 @@ public class SellCommand extends Command {
             + PREFIX_QUANTITY + "5";
 
     public static final String MESSAGE_SELL_BOOK_SUCCESS = "Sold Book: %1$s";
-    public static final String MESSAGE_NOT_SOLD = "Quantity sold must be specified.";
+    public static final String MESSAGE_NOT_SOLD = "Decrease to stock quantity must be provided.";
     public static final String MESSAGE_INVALID_QUANTITY = "Quantity of books left cannot be less than 0.";
-    public static final String MESSAGE_NEGATIVE_SOLD_VALUE = "Quantity sold must be positive";
-    private final Index index;
+    private final String findBookBy;
     private final DecreaseQuantity decreaseQuantity;
 
     /**
-     * @param index of the book int he filtered book list to edit
-     * @param decreaseQuantity details to sell the book with
+     * @param findBookBy the index or isbn in the filtered book list to edit
+     * @param decreaseQuantity number to sell the book with
      */
-    public SellCommand(Index index, DecreaseQuantity decreaseQuantity) {
-        requireNonNull(index);
+    public SellCommand(String findBookBy, DecreaseQuantity decreaseQuantity) {
+        requireNonNull(findBookBy);
         requireNonNull(decreaseQuantity);
 
-        this.index = index;
+        this.findBookBy = findBookBy;
         this.decreaseQuantity = new DecreaseQuantity(decreaseQuantity);
     }
 
@@ -60,18 +58,17 @@ public class SellCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Book> lastShownList = model.getFilteredBookList();
+        Book bookToSell;
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (findBookBy.length() == 1 && Integer.parseInt(findBookBy) >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_BOOK_DISPLAYED_INDEX);
+        } else if (findBookBy.length() == 1) {
+            bookToSell = lastShownList.get(Integer.parseInt(findBookBy));
+        } else {
+            bookToSell = model.getBook(findBookBy);
         }
 
-        Book bookToSell = lastShownList.get(index.getZeroBased());
-        String originalQuantity = bookToSell.getQuantity().getValue();
         Book sellBook = createSoldBook(bookToSell, decreaseQuantity);
-
-        if (originalQuantity == sellBook.getQuantity().getValue()) {
-            throw new CommandException(MESSAGE_INVALID_QUANTITY);
-        }
 
         StatisticCenter.getInstance().getStatistic().increaseRevenue(
                 bookToSell.getPrice().toString(), decreaseQuantity.getQuantity().getValue());
@@ -88,7 +85,7 @@ public class SellCommand extends Command {
      * Creates and returns a {@code Book} with the details of {@code bookToSell}
      * edited with {@code decreaseQuantity}
      */
-    private static Book createSoldBook(Book bookToSell, DecreaseQuantity decreaseQuantity) {
+    private static Book createSoldBook(Book bookToSell, DecreaseQuantity decreaseQuantity) throws CommandException {
         assert bookToSell != null;
 
         Name name = bookToSell.getName();
@@ -110,7 +107,7 @@ public class SellCommand extends Command {
 
         // state check
         SellCommand s = (SellCommand) other;
-        return index.equals(s.index)
+        return findBookBy.equals(s.findBookBy)
                 && decreaseQuantity.equals(s.decreaseQuantity);
     }
 
