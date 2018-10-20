@@ -10,10 +10,18 @@ import seedu.address.storage.adapter.XmlAdaptedClassroom;
  * This classroom manager stores classrooms for Trajectory.
  */
 public class ClassroomManager {
+    private static ClassroomManager classroomManager = null;
     private ArrayList<Classroom> classroomList = new ArrayList<>();
 
     public ClassroomManager() {
         readClassroomList();
+    }
+
+    public static ClassroomManager getInstance() {
+        if (classroomManager == null) {
+            classroomManager = new ClassroomManager();
+        }
+        return classroomManager;
     }
 
     /**

@@ -55,7 +55,7 @@ public class ClassAddCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        ClassroomManager classroomManager = new ClassroomManager();
+        ClassroomManager classroomManager = ClassroomManager.getInstance();
         classroomManager.addClassroom(classToCreate);
         classroomManager.saveClassroomList();
 
