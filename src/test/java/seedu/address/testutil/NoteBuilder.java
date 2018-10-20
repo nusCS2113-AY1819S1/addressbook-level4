@@ -4,9 +4,8 @@ import seedu.address.model.note.Note;
 
 public class NoteBuilder {
     public static final String DEFAULT_MODULE_CODE = "CS2113";
-    public static final String DEFAULT_DATE = "18/10/2018";
+    public static final String DEFAULT_DATE = "21/12/2113";
     public static final String DEFAULT_TEXT = "CS2113 Rocks!";
-    public static final String EMPTY_DATE = "";
 
     private String moduleCode;
     private String date;

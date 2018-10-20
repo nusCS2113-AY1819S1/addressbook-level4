@@ -19,7 +19,7 @@ public class NoteDeleteCommand extends Command {
             + "2";
 
     public static final String MESSAGE_SUCCESS = "Note has been deleted.";
-    public static final String MESSAGE_INVALID_INDEX = "The index provided is out of bounds.";
+    public static final String MESSAGE_INVALID_INDEX = "Invalid input!\nINDEX %1$s is out of bounds.";
 
     private final int index;
 
@@ -33,7 +33,7 @@ public class NoteDeleteCommand extends Command {
         NoteManager noteManager = new NoteManager();
 
         if (index > noteManager.getNotes().size() || index < 1) {
-            return new CommandResult(MESSAGE_INVALID_INDEX);
+            throw new CommandException(String.format(MESSAGE_INVALID_INDEX, index));
         } else {
             noteManager.deleteNote(index - 1);
             noteManager.saveNoteList();

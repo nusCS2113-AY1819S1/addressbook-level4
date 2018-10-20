@@ -20,7 +20,7 @@ public class NoteAddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a note. "
             + "Parameters: "
-            + PREFIX_MODULECODE + "MODULE CODE "
+            + PREFIX_MODULECODE + "MODULE_CODE "
             + "[" + PREFIX_NOTE_DATE + "DATE]\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULECODE + "CS2113";

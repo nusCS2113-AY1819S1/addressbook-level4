@@ -17,13 +17,8 @@ public class NoteTextEditWindow {
 
     private static final String PATH = "/view/NoteEntryPromptWindow.fxml";
 
-    private BorderPane layout;
-    private FXMLLoader loader;
-    private Scene scene;
     private Stage notePromptStage;
-
     private NoteEntryPrompt controller;
-
     private Note note;
 
     public NoteTextEditWindow(Note note) {
@@ -39,11 +34,11 @@ public class NoteTextEditWindow {
         try {
             controller = new NoteEntryPrompt();
 
-            loader = new FXMLLoader(getClass().getResource(PATH));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(PATH));
             loader.setController(controller);
-            layout = loader.load();
+            BorderPane layout = loader.load();
 
-            scene = new Scene(layout);
+            Scene scene = new Scene(layout);
 
             notePromptStage = new Stage();
             notePromptStage.setMinHeight(380);
