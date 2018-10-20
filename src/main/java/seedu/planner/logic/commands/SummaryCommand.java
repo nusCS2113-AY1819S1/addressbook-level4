@@ -7,8 +7,10 @@ import java.util.function.Predicate;
 
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
+import seedu.planner.commons.util.DateUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
+import seedu.planner.model.Month;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
@@ -34,6 +36,12 @@ public class SummaryCommand extends Command {
     public SummaryCommand(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
+        predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
+    }
+
+    public SummaryCommand(Month startMonth, Month endMonth) {
+        startDate = DateUtil.generateFirstOfMonth(startMonth);
+        endDate = DateUtil.generateLastOfMonth(endMonth);
         predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 

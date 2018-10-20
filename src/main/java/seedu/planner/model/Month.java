@@ -58,6 +58,14 @@ public class Month {
         value = String.format("%s-%d", standardMonths.get(month - 1), year);
     }
 
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
     /**
      * Returns if a given string is a valid Month.
      * @param test given string
