@@ -10,7 +10,7 @@ import java.util.Set;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Book in the quantity book.
+ * Represents a Book in the BookInventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Book {

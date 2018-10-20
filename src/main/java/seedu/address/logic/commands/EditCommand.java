@@ -52,7 +52,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_BOOK_SUCCESS = "Edited Book: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the quantity book.";
+    public static final String MESSAGE_DUPLICATE_BOOK = "This book already exists in the BookInventory.";
 
     private final Index index;
     private final EditBookDescriptor editBookDescriptor;

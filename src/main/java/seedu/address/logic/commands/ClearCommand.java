@@ -14,7 +14,7 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String COMMAND_ALIAS = "c";
 
-    public static final String MESSAGE_SUCCESS = "Quantity book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "BookInventory has been cleared!";
 
 
     @Override
