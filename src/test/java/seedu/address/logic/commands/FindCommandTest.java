@@ -90,11 +90,12 @@ public class FindCommandTest {
         return new NameContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 
-
+    //@@author lws803
     @Test
     public void closestMatchListTest () {
         String[] names = {"Kurz"};
         ClosestMatchList closestMatch = new ClosestMatchList(model, PREFIX_NAME, names);
         assertEquals(closestMatch.getApprovedList().length, 2);
     }
+    //@@author
 }
