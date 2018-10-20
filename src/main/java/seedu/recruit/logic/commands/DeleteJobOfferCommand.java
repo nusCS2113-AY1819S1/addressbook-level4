@@ -38,7 +38,7 @@ public class DeleteJobOfferCommand extends Command {
         List<JobOffer> lastShownList = model.getFilteredCompanyJobList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);
         }
 
         JobOffer jobOfferToDelete = lastShownList.get(targetIndex.getZeroBased());
