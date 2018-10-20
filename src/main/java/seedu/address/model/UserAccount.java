@@ -59,6 +59,20 @@ public class UserAccount {
     }
 
     /**
+     * Creates a new user profile in the JSON file.
+     */
+    public void createUser(User user) {
+        String loggedUsername = user.getUsername().toString();
+        String loggedPassword = user.getPassword().toString();
+
+        try {
+            userStorage.createUser(loggedUsername, loggedPassword);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Sets the current user.
      */
     public void logUser(User user) {

@@ -25,6 +25,11 @@ public interface Model {
     boolean userExists(User user);
 
     /**
+     * Creates a new user profile in the Event Manager.
+     */
+    void createUser(User user);
+
+    /**
      * Logs user into Event Manager.
      */
     void logUser(User user);

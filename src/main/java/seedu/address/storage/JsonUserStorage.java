@@ -29,6 +29,17 @@ public class JsonUserStorage {
     }
 
     /**
+     * Adds a new property in the JSON file.
+     */
+    public void createUser(String username, String password) throws IOException {
+        Gson gson = new Gson();
+        JsonObject jsonObject = getUserAccounts();
+        jsonObject.addProperty(username, password);
+
+        writeJson(gson, jsonObject);
+    }
+
+    /**
      * Returns the user account JSON as a hash map JSON object.
      */
     public JsonObject getUserAccounts() throws IOException {
@@ -50,6 +61,13 @@ public class JsonUserStorage {
         JsonObject jsonObject = new JsonObject();
         jsonObject.addProperty("admin", "root");
 
+        writeJson(gson, jsonObject);
+    }
+
+    /**
+     * Writes to the User JSON.
+     */
+    private void writeJson(Gson gson, JsonObject jsonObject) throws IOException {
         String json = gson.toJson(jsonObject);
         FileWriter file = new FileWriter(filePathString);
         file.write(json);
