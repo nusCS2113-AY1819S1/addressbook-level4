@@ -7,20 +7,20 @@ import java.util.stream.Collectors;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.planner.model.record.Date;
+import seedu.planner.model.Month;
 import seedu.planner.model.record.Record;
 import seedu.planner.ui.SummaryEntry;
 
 /**
- * This class represents a list containing all DaySummary objects computed from a given list of records
+ * This class represents a list containing all MonthSummary objects computed from a given list of records
  * and a predicate criteria. The internal implementation is a HashMap but it returns a list
- * and implements only list functions
+ * and implements only list functions.
  */
-public class SummaryByDateList {
+public class SummaryByMonthList {
 
-    private HashMap<Date, DaySummary> summaryMap = new HashMap<>();
+    private HashMap<Month, MonthSummary> summaryMap = new HashMap<>();
 
-    public SummaryByDateList(List<Record> recordList , Predicate<Record> predicate) {
+    public SummaryByMonthList(List<Record> recordList , Predicate<Record> predicate) {
         for (Record r : recordList) {
             if (predicate.test(r)) {
                 addRecordToMap(r);
@@ -34,8 +34,8 @@ public class SummaryByDateList {
         return FXCollections.observableList(list);
     }
 
-    private SummaryEntry convertToUiFriendly(DaySummary summary) {
-        return new SummaryEntry(summary.getDate().toString(), summary.getTotalIncome().toString(),
+    private SummaryEntry convertToUiFriendly(MonthSummary summary) {
+        return new SummaryEntry(summary.getMonth().toString(), summary.getTotalIncome().toString(),
                 summary.getTotalExpense().toString(), summary.getTotal().toString());
     }
 
@@ -46,11 +46,11 @@ public class SummaryByDateList {
      * @see Summary#add(Record)
      */
     private void addRecordToMap(Record record) {
-        Date date = record.getDate();
-        if (summaryMap.containsKey(date)) {
-            summaryMap.get(date).add(record);
+        Month month = new Month(record.getDate().getMonth(), record.getDate().getYear());
+        if (summaryMap.containsKey(month)) {
+            summaryMap.get(month).add(record);
         } else {
-            summaryMap.put(date, new DaySummary(record));
+            summaryMap.put(month, new MonthSummary(record));
         }
     }
 
@@ -61,7 +61,7 @@ public class SummaryByDateList {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SummaryByDateList // instanceof handles nulls
-                && summaryMap.equals(((SummaryByDateList) other).summaryMap));
+                || (other instanceof SummaryByMonthList // instanceof handles nulls
+                && summaryMap.equals(((SummaryByMonthList) other).summaryMap));
     }
 }

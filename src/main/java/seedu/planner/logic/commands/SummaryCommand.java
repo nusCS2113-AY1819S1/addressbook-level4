@@ -16,6 +16,7 @@ import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByDateList;
+import seedu.planner.model.summary.SummaryByMonthList;
 
 /** List all the summary of records within a period of time specified */
 public class SummaryCommand extends Command {
@@ -27,32 +28,42 @@ public class SummaryCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
 
-    public static final String MESSAGE_SUCCESS = "Listed summary for %d days:";
+    public static final String MESSAGE_SUCCESS = "Listed summary for %d days/months:";
 
     private final Date startDate;
     private final Date endDate;
     private final Predicate<Record> predicate;
+    private final boolean byDate;
 
     public SummaryCommand(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
         predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
+        byDate = true;
     }
 
     public SummaryCommand(Month startMonth, Month endMonth) {
         startDate = DateUtil.generateFirstOfMonth(startMonth);
         endDate = DateUtil.generateLastOfMonth(endMonth);
         predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
+        byDate = false;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
-        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(),
-                predicate);
-        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList()));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
+        if (byDate) {
+            SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(),
+                    predicate);
+            EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList()));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
+        } else {
+            SummaryByMonthList summaryList = new SummaryByMonthList(financialPlanner.getRecordList(),
+                    predicate);
+            EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList()));
+            return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
+        }
     }
 
     @Override
