@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
+import seedu.planner.ui.SummaryEntry;
 
 /**
  * This class represents a list containing all summary objects computed from a given list of records
@@ -17,7 +18,7 @@ import seedu.planner.model.record.Record;
  */
 public class SummaryByDateList {
 
-    private HashMap<Date, Summary> summaryMap = new HashMap<>();
+    private HashMap<Date, DaySummary> summaryMap = new HashMap<>();
 
     public SummaryByDateList(List<Record> recordList , Predicate<Record> predicate) {
         for (Record r : recordList) {
@@ -27,9 +28,15 @@ public class SummaryByDateList {
         }
     }
 
-    public ObservableList<Summary> getSummaryList() {
-        List<Summary> list = summaryMap.keySet().stream().map(k -> summaryMap.get(k)).collect(Collectors.toList());
+    public ObservableList<SummaryEntry> getSummaryList() {
+        List<SummaryEntry> list = summaryMap.keySet().stream().map(k -> convertToUiFriendly(summaryMap.get(k)))
+                .collect(Collectors.toList());
         return FXCollections.observableList(list);
+    }
+
+    private SummaryEntry convertToUiFriendly(DaySummary summary) {
+        return new SummaryEntry(summary.getDate().toString(), summary.getTotalIncome().toString(),
+                summary.getTotalExpense().toString(), summary.getTotal().toString());
     }
 
     /** Adds a record to the {@code summaryMap} while following some rules.
@@ -43,7 +50,7 @@ public class SummaryByDateList {
         if (summaryMap.containsKey(date)) {
             summaryMap.get(date).add(record);
         } else {
-            summaryMap.put(date, new Summary(record));
+            summaryMap.put(date, new DaySummary(record));
         }
     }
 
