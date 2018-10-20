@@ -31,6 +31,7 @@ public class Quantity {
         checkArgument(isValidQuantity(quantity), MESSAGE_ADDRESS_CONSTRAINTS);
         value = quantity;
     }
+
     public String getValue() {
         return value;
     }

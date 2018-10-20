@@ -37,6 +37,16 @@ public class UniqueBookList implements Iterable<Book> {
     }
 
     /**
+     * Finds book with {@param isbn}
+     * @param isbn the field used to find book
+     * @return Book with {@param isbn}
+     */
+    public Book getBook(String isbn) {
+        requireNonNull(isbn);
+        return internalList.stream().filter(b -> b.getIsbn().value.equals(isbn)).findAny().orElse(null);
+    }
+
+    /**
      * Adds a book to the list.
      * The book must not already exist in the list.
      */

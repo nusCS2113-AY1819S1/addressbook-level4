@@ -63,6 +63,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public Book getBook(String isbn) {
+        requireNonNull(isbn);
+        return versionedAddressBook.getBook(isbn);
+    }
+
+    @Override
     public void deleteBook(Book target) {
         versionedAddressBook.removeBook(target);
         indicateAddressBookChanged();
