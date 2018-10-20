@@ -9,6 +9,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.user.User;
 
+/**
+ * Creates a user in the Event Manager.
+ */
 public class SignupCommand extends Command {
 
     public static final String COMMAND_WORD = "signup";
