@@ -1,11 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_MAXMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_WEIGHTAGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -22,12 +21,12 @@ public class GradebookAddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a gradebook component to Trajectory. "
             + "\nParameters: "
-            + PREFIX_MODULECODE + "MODULE_CODE  "
+            + PREFIX_MODULE_CODE + "MODULE CODE  "
             + PREFIX_GRADEBOOK_ITEM + "ITEM "
             + PREFIX_GRADEBOOK_MAXMARKS + "[MAX MARKS] "
             + PREFIX_GRADEBOOK_WEIGHTAGE + "[WEIGHTAGE] "
             + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_MODULECODE + "CS2113 "
+            + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1 "
             + PREFIX_GRADEBOOK_MAXMARKS + "60 "
             + PREFIX_GRADEBOOK_WEIGHTAGE + "50";

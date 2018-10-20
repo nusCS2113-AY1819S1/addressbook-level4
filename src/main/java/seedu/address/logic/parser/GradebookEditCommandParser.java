@@ -1,39 +1,41 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM_EDIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_MAXMARKS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_WEIGHTAGE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.GradebookAddCommand;
+import seedu.address.logic.commands.GradebookEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gradebook.Gradebook;
 
 /**
- * Parses input arguments and creates a new GradebookAddCommand object
+ * Parses input arguments and creates a new GradebookEditCommand object
  */
-public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
+public class GradebookEditCommandParser {
     private static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
     private static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the GradebookAddCommand
-     * and returns a GradebookAddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the GradebookFindCommand
+     * and returns a GradebookFindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public GradebookAddCommand parse(String args) throws ParseException {
+    public GradebookEditCommand parse(String args) throws ParseException {
         int gradeComponentMaxMarksArg = 0;
         int gradeComponentWeightageArg = 0;
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM,
+                PREFIX_GRADEBOOK_ITEM_EDIT, PREFIX_GRADEBOOK_MAXMARKS, PREFIX_GRADEBOOK_WEIGHTAGE);
 
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULECODE, PREFIX_GRADEBOOK_ITEM,
-                PREFIX_GRADEBOOK_MAXMARKS, PREFIX_GRADEBOOK_WEIGHTAGE);
-
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULECODE, PREFIX_GRADEBOOK_ITEM)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, GradebookAddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    GradebookEditCommand.MESSAGE_USAGE));
         }
         if (arePrefixesPresent(argMultimap, PREFIX_GRADEBOOK_MAXMARKS) || !argMultimap.getPreamble().isEmpty()) {
             try {
@@ -49,12 +51,18 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
                 throw new ParseException(MESSAGE_WEIGHTAGE_ERROR);
             }
         }
-        String moduleCodeArg = argMultimap.getValue(PREFIX_MODULECODE).get();
+
+        String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
+        String newModuleCodeArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM_EDIT).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
 
-        Gradebook gradebook = new Gradebook(moduleCodeArg, gradeComponentNameArg, gradeComponentMaxMarksArg,
+        Gradebook gradebook = new Gradebook(
+                moduleCodeArg,
+                gradeComponentNameArg,
+                newModuleCodeArg,
+                gradeComponentMaxMarksArg,
                 gradeComponentWeightageArg);
-        return new GradebookAddCommand(gradebook);
+        return new GradebookEditCommand(gradebook);
     }
 
     /**

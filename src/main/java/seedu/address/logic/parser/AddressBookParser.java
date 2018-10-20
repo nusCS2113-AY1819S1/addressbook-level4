@@ -83,6 +83,9 @@ public class AddressBookParser {
         case GradebookFindCommand.COMMAND_WORD:
             return new GradebookFindCommandParser().parse(arguments);
 
+        case GradebookEditCommand.COMMAND_WORD:
+            return new GradebookFindCommandParser().parse(arguments);
+
         case CourseAddCommand.COMMAND_WORD:
             return new CourseAddCommandParser().parse(arguments);
 
