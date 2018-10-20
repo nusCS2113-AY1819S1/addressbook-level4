@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -61,7 +62,10 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void setTags(ObservableMap<Tag, UniquePersonList> tagListMap) {
         this.tags.setTags(tagListMap);
     }
-
+    //TODO add description
+    public void setSchedule(List<Activity> activities) {
+        this.schedule.setSchedule(activities);
+    }
     /**
      * Resets the existing data of this {@code AddressBook} with {@code newData}.
      */
@@ -70,6 +74,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         setPersons(newData.getPersonList());
         setTags(newData.getTagList());
+        setSchedule(newData.getActivityList());
     }
 
     //// person-level operations

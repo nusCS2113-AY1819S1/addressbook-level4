@@ -46,7 +46,6 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         textPrediction = new CommandCompleter(this);
-        //TODO read data of schedule
     }
 
     public ModelManager() {

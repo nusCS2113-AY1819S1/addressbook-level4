@@ -33,13 +33,6 @@ public class ScheduleCommand extends Command {
         toAdd = activity;
     }
 
-    /**
-     * Peeks at the person to add {@code Person}
-     */
-    public String peekPerson() {
-        return toAdd.toString();
-    }
-
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);

@@ -11,11 +11,21 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import seedu.address.model.person.Person;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 public class Schedule {
     private final Map<Date, ArrayList<Activity>> schedule = new HashMap<>();
 
 
     public Schedule () {
+    }
+
+    public void setSchedule(List<Activity> activities) {
+        requireAllNonNull(activities);
+        schedule.clear();
+        for(Activity activity : activities){
+            add(activity);
+        }
     }
 
     public ArrayList<Activity> getActivities() {
