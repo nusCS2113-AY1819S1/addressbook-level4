@@ -101,6 +101,30 @@ public class GradebookManager {
     }
 
     /**
+     * Replaces the given gradebook component {@code target} with {@code editedComponentName, editedMaxMarks,
+     * editedWeightage}
+     * {@code moduleCode, gradebookComponentName} must already exist in Trajectory
+     */
+    public void editGradebookComponent (Gradebook gradebook, Gradebook toEditGradebookComponents) {
+
+
+        gradebooks.set(targetIndex, editedModule);
+    }
+
+//    /**
+//     This method finds gradebook component to a module in Trajectory.
+//     */
+//    public Gradebook editGradebookComponent (String moduleCode, String gradebookComponentName) {
+//        for (Gradebook gradebook : gradebooks) {
+//            if (gradebook.getModuleCode().equals(moduleCode)
+//                    && gradebook.getGradeComponentName().equals(gradebookComponentName)) {
+//                return gradebook;
+//            }
+//        }
+//        return null;
+//    }
+
+    /**
      This method checks if component already exists in Trajectory.
      */
     public boolean isDuplicateComponent (String moduleCode, String gradebookComponentName) {

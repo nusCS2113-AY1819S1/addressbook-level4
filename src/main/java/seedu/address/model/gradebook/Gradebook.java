@@ -6,13 +6,30 @@ package seedu.address.model.gradebook;
 public class Gradebook {
     private String moduleCode;
     private String gradebookComponentName;
+    private String editedGradebookComponentName;
     private int gradebookMaxMarks;
     private int gradebookWeightage;
 
-    public Gradebook(String moduleCode, String gradebookComponentName,
-                     int gradebookMaxMarks, int gradebookWeightage) {
+    public Gradebook(
+            String moduleCode,
+            String gradebookComponentName,
+            int gradebookMaxMarks,
+            int gradebookWeightage) {
         this.moduleCode = moduleCode;
         this.gradebookComponentName = gradebookComponentName;
+        this.gradebookMaxMarks = gradebookMaxMarks;
+        this.gradebookWeightage = gradebookWeightage;
+    }
+
+    public Gradebook(
+            String moduleCode,
+            String gradebookComponentName,
+            String editedGradebookComponentName,
+                     int gradebookMaxMarks,
+            int gradebookWeightage) {
+        this.moduleCode = moduleCode;
+        this.gradebookComponentName = gradebookComponentName;
+        this.editedGradebookComponentName = editedGradebookComponentName;
         this.gradebookMaxMarks = gradebookMaxMarks;
         this.gradebookWeightage = gradebookWeightage;
     }
@@ -39,6 +56,10 @@ public class Gradebook {
 
     public String getGradeComponentName() {
         return this.gradebookComponentName;
+    }
+
+    public String getEditedGradeComponentName() {
+        return this.editedGradebookComponentName;
     }
 
     public int getGradeComponentMaxMarks() {
