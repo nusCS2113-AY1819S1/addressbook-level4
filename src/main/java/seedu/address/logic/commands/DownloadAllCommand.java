@@ -12,8 +12,8 @@ public class DownloadAllCommand extends Command {
 
     public static final String COMMAND_WORD = "downloadAll";
     public static final String MESSAGE_USAGE = "downloadAll pass/(password) user/(username) mod/(moduleCode)";
-    public static final String CHROMEDRIVER_PATH = "\\chromedriver.exe";
-    public static final String DOWNLOAD_RELATIVE_PATH = "\\notesDownload";
+    public static final String CHROMEDRIVER_PATH = "/chromedriver.exe";
+    public static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
     public static final String IVLE_TITLE = "IVLE";
     public static final String IVLE_ADDRESS = "https://ivle.nus.edu.sg";
     public static final String IVLE_USERNAME_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_userid";
