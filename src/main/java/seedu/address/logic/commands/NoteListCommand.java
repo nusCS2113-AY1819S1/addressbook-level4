@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -8,8 +10,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteManager;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 /**
  * Lists notes based on given predicate.

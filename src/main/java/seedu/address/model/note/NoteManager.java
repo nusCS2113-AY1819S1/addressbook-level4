@@ -1,14 +1,12 @@
 package seedu.address.model.note;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedNote;
-import seedu.address.ui.NoteTextEditWindow;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the in-memory model of the Note data.
