@@ -45,7 +45,7 @@ public class ModuleCodeTest {
     }
 
     @Test
-    public void toString_outputsModuleCodeInString() {
+    public void toString_outputsModuleCodeAsString() {
         final String validModuleCode = "CS2113";
         final ModuleCode validModuleCodeObj = new ModuleCode(validModuleCode);
 
