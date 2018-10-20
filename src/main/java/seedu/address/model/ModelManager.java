@@ -20,7 +20,7 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.autocomplete.CommandCompleter;
 import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
-import seedu.address.model.schedule.Schedule;
+import seedu.address.model.schedule.Activity;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.XmlAddressBookStorage;
 
@@ -33,7 +33,6 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private List<Person> selectedPersons;
-    private final Schedule schedule;
     private TextPrediction textPrediction;
 
     /**
@@ -48,7 +47,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         textPrediction = new CommandCompleter(this);
         //TODO read data of schedule
-        schedule = new Schedule();
     }
 
     public ModelManager() {
@@ -214,4 +212,14 @@ public class ModelManager extends ComponentManager implements Model {
             logger.warning(dataE.getMessage());
         }
     }
+
+    //@@author LowGinWee
+    /**
+     * Reinitialises the address book
+     */
+    @Override
+    public void addSchedule(Activity activity) {
+        versionedAddressBook.addActivity(activity);
+    }
+
 }

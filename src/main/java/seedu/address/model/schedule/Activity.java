@@ -14,4 +14,8 @@ public class Activity {
     public Date getDate() {
         return date;
     }
+
+    public String getActivity() {
+        return activity;
+    }
 }

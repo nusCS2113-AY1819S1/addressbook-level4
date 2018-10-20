@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Activity;
 
 /**
  * The API of the Model component.
@@ -102,4 +103,6 @@ public interface Model {
      * Reinitialises the address book
      */
     void reinitAddressbook ();
+
+    void addSchedule(Activity activity);
 }

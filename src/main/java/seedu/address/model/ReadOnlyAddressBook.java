@@ -4,7 +4,10 @@ import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.schedule.Activity;
 import seedu.address.model.tag.Tag;
+
+import java.util.ArrayList;
 
 
 /**
@@ -18,5 +21,6 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
     ObservableMap<Tag, UniquePersonList> getTagList();
+    ArrayList<Activity> getActivityList();
 
 }
