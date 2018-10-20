@@ -36,8 +36,6 @@ public class NoteAddCommandParserTest {
 
     @Test
     public void parse_validArgs_success() throws ParseException {
-        String expectedMessage = NoteAddCommand.MESSAGE_SUCCESS;
-
         // valid arguments with optional arguments
         String args = " m/CS2113 d/1/2/2020";
         NoteAddCommand noteAddCommand = parser.parse(args);
