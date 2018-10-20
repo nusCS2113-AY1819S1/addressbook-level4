@@ -9,6 +9,7 @@ import java.util.Set;
 import seedu.planner.commons.core.index.Index;
 import seedu.planner.commons.util.StringUtil;
 import seedu.planner.logic.parser.exceptions.ParseException;
+import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
@@ -63,6 +64,21 @@ public class ParserUtil {
             throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String month} into a {@code Month}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code month} is invalid.
+     */
+    public static Month parseMonth(String month) throws ParseException {
+        requireNonNull(month);
+        String trimmedMonth = month.trim();
+        if (!Month.isValidMonth(trimmedMonth)) {
+            throw new ParseException(Month.MESSAGE_MONTH_CONSTRAINTS);
+        }
+        return new Month(trimmedMonth);
     }
 
     /**

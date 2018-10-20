@@ -58,6 +58,12 @@ public class Month {
         value = String.format("%s-%d", standardMonths.get(month - 1), year);
     }
 
+    public Month(int month, int year) {
+        this.month = month;
+        this.year = year;
+        value = String.format("%s-%d", standardMonths.get(month - 1), year);
+    }
+
     public int getYear() {
         return year;
     }
