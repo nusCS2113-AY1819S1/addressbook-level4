@@ -11,7 +11,7 @@ public class Message {
 
     public static final String MESSAGE_MESSAGE_CONSTRAINTS =
             "Message can only be 25MB in size (Gmail).";
-    public static final String MESSAGE_VALIDATION_REGEX = "^.{0,255}$";
+    public static final String MESSAGE_VALIDATION_REGEX = "^.{0,25000000}$";
     public final String value;
 
     /**
