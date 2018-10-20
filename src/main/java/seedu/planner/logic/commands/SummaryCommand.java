@@ -2,7 +2,8 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
+
+import java.util.function.Predicate;
 
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
@@ -10,6 +11,8 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DateIsWithinIntervalPredicate;
+import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryByDateList;
 
 /** List all the summary of records within a period of time specified */
@@ -26,10 +29,12 @@ public class SummaryCommand extends Command {
 
     private final Date startDate;
     private final Date endDate;
+    private final Predicate<Record> predicate;
 
     public SummaryCommand(Date startDate, Date endDate) {
         this.startDate = startDate;
         this.endDate = endDate;
+        predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
     @Override
@@ -37,7 +42,7 @@ public class SummaryCommand extends Command {
         requireNonNull(model);
         ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
         SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(),
-                PREDICATE_SHOW_ALL_RECORDS);
+                predicate);
         EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }
