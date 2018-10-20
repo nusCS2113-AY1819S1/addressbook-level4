@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -172,8 +173,8 @@ public class ParserUtil {
         LocalTime endTime;
 
         try {
-            startTime = LocalTime.parse(startString);
-            endTime = LocalTime.parse(endString);
+            startTime = parseTime(startString);
+            endTime = parseTime(endString);
         } catch (DateTimeParseException e) {
             throw new ParseException((TimeSlot.MESSAGE_CANNOT_PARSE_TIME));
         }
@@ -201,6 +202,34 @@ public class ParserUtil {
             } catch (IllegalArgumentException e) {
                 throw e;
             }
+        }
+    }
+
+    /**
+     * Parses {@code timeString} according to various defined formats into a {@code LocalTime} object
+     * @param timeString {@code String} to be parsed
+     * @return {@code LocalTime} object representing {@code timeString}
+     * @throws DateTimeParseException if {@code timeString} cannot be parsed
+     */
+    public static LocalTime parseTime(String timeString) throws DateTimeParseException {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm");
+
+        if (timeString.contains(":") && timeString.length() == 4) {
+            format = DateTimeFormatter.ofPattern("H:mm");
+        } else if (timeString.length() == 4) {
+            format = DateTimeFormatter.ofPattern("HHmm");
+        } else if (timeString.length() == 3) {
+            format = DateTimeFormatter.ofPattern("Hmm");
+        } else if (timeString.length() == 2) {
+            format = DateTimeFormatter.ofPattern("HH");
+        } else if (timeString.length() == 1) {
+            format = DateTimeFormatter.ofPattern("H");
+        }
+
+        try {
+            return LocalTime.parse(timeString, format);
+        } catch (DateTimeParseException e) {
+            throw e;
         }
     }
 

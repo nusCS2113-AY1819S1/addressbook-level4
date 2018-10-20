@@ -21,7 +21,7 @@ public class TimeSlot {
 
     // TODO: Change to accept times with non 0 minutes
     public static final String VALIDATION_REGEX =
-            "\\w+(\\s*)([0-1][0-9]|[2][0-3])[:][0][0](\\s*)[-](\\s*)([0-1][0-9]|[2][0-3])[:][0][0]";
+            "\\w+(\\s*)([0-9]|[0-1][0-9]|[2][0-3])[:]?[0]?[0]?(\\s*)[-](\\s*)([0-9]|[0-1][0-9]|[2][0-3])[:]?[0]?[0]?";
 
     private DayOfWeek dayOfWeek;
     private LocalTime startTime;
