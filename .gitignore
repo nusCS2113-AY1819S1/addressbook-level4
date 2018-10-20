@@ -18,3 +18,15 @@ classes/
 /bin/
 src/main/resources/docs/
 out/
+reposense-report/summary.json
+reposense-report/static/js/v_summary.js
+reposense-report/static/js/v_authorship.js
+reposense-report/static/js/main.js
+reposense-report/static/js/api.js
+reposense-report/static/css/style.css
+reposense-report/static/css/_colors.css
+reposense-report/index.html
+reposense-report/archive.zip
+reposense-report/CS2113-AY1819S1-T13-4_main_master/commits.json
+reposense-report/CS2113-AY1819S1-T13-4_main_master/authorship.json
+RepoSense.jar

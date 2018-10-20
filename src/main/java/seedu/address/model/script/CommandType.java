@@ -3,6 +3,10 @@ package seedu.address.model.script;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents a CommandType.
+ * Guarantees: immutable; is valid as declared in {@link #isValidCommand(String)}
+ */
 public class CommandType {
     public static final String MESSAGE_MESSAGE_CONSTRAINTS =
             "Command string is not valid";

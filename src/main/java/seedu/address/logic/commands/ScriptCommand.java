@@ -67,7 +67,6 @@ public class ScriptCommand extends Command {
         try {
             List<String> commandArguments = FileUtil.readEachLineFromFile(path);
             commandArguments.replaceAll(s -> commandType + SPACE + s);
-            System.out.println(commandArguments.get(0));
             multCommandError = executeMultipleCommand(scriptParser, commandArguments, model, history);
         } catch (IOException ioe) {
             return new CommandResult(String.format(MESSAGE_UNABLE_TO_READ_FILE, textFileName));
@@ -83,12 +82,12 @@ public class ScriptCommand extends Command {
     /**
      * This method will execute multiple commands.
      */
-    public String executeMultipleCommand(AddressBookParser ScriptParser, List<String> commandArguments,
+    public String executeMultipleCommand(AddressBookParser scriptParser, List<String> commandArguments,
                                          Model model, CommandHistory history) {
         String lineNumbers = new String();
         for (String fullCommands : commandArguments) {
             try {
-                Command command = ScriptParser.parseCommand(fullCommands);
+                Command command = scriptParser.parseCommand(fullCommands);
                 command.execute(model, history);
             } catch (ParseException | CommandException pe) {
                 lineNumbers = lineNumbers + (commandArguments.indexOf(fullCommands) + 1) + COMMA;
