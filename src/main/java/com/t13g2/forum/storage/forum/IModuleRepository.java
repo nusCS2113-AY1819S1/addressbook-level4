@@ -14,9 +14,9 @@ public interface IModuleRepository {
 
     void removeModule(int moduleId);
 
-    Module getModule(int moduleId);
+    Module getModule(int moduleId) throws EntityDoesNotExistException;
 
-    Module getModuleByCode(String moduleCode);
+    Module getModuleByCode(String moduleCode) throws EntityDoesNotExistException;
 
     List<Module> getAllModule();
 }

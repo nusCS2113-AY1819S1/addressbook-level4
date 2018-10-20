@@ -33,5 +33,11 @@ public interface IForumBookStorage {
 
     UserStorage getUsers();
 
+    ModuleStorage getModules();
+
+    CommentStorage getComments();
+
+
+
 
 }

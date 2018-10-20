@@ -15,17 +15,19 @@ public class AnnouncementRepository extends BaseRepository implements IAnnouncem
     @Override
     public int addAnnouncement(Announcement announcement) {
         forumBookStorage.getAnnouncements().getList().add(announcement);
+        forumBookStorage.getAnnouncements().setDirty();
         return announcement.getId();
     }
 
     @Override
     public void deleteAnnouncement(Announcement announcement) {
-
+        this.deleteAnnouncement(announcement.getId());
     }
 
     @Override
     public void deleteAnnouncement(int announcementId) {
-
+        forumBookStorage.getAnnouncements().getList().removeIf(announcement -> announcement.getId() == announcementId);
+        forumBookStorage.getAnnouncements().setDirty();
     }
 
     @Override
