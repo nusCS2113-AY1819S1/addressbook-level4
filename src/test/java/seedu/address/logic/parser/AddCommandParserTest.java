@@ -64,23 +64,28 @@ public class AddCommandParserTest {
 
         // multiple names - last name accepted
         assertParseSuccess(parser, NAME_DESC_AMY + NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB  + TAG_DESC_FRIEND, new AddCommand(expectedEvent));
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB  + TAG_DESC_FRIEND,
+                new AddCommand(expectedEvent));
 
         // multiple contacts - last contact accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_AMY + CONTACT_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedEvent));
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedEvent));
 
         // multiple phones - last phone accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_AMY + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedEvent));
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedEvent));
 
         // multiple emails - last email accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedEvent));
+                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedEvent));
 
         // multiple addresses - last address accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND, new AddCommand(expectedEvent));
+                + ADDRESS_DESC_AMY + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND,
+                new AddCommand(expectedEvent));
 
         // multiple datetime- last datetime accepted
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB

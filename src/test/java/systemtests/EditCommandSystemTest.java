@@ -101,7 +101,8 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         index = INDEX_SECOND_EVENT;
         assertNotEquals(getModel().getFilteredEventList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + CONTACT_DESC_BOB
-                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
         editedEvent = new EventBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedEvent);
 
