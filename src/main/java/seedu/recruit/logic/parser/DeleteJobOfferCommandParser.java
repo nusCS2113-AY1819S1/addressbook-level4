@@ -10,7 +10,7 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
  * Parses input arguments and creates a new DeleteJobOfferCommand object
  */
 
-public class DeleteJobOfferCommandParser {
+public class DeleteJobOfferCommandParser implements Parser<DeleteJobOfferCommand> {
     public DeleteJobOfferCommand parse(String args) throws ParseException {
         try {
             Index index = ParserUtil.parseIndex(args);
