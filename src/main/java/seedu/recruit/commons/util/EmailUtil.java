@@ -30,6 +30,7 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
 
+import seedu.recruit.commons.core.EmailSettings;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 
@@ -54,16 +55,15 @@ public class EmailUtil {
     private ArrayList<Candidate> candidates;
     private ArrayList<JobOffer> jobOffers;
     private boolean areRecipientsCandidates;
-    private String to;
-    private String subject;
-    private String bodyText;
+    private final EmailSettings emailSettings;
 
     /**
      * Constructor
      */
-    public EmailUtil() {
+    public EmailUtil(EmailSettings emailSettings) {
         this.candidates = new ArrayList<>();
         this.jobOffers = new ArrayList<>();
+        this.emailSettings = emailSettings;
     }
 
     /**
@@ -93,28 +93,8 @@ public class EmailUtil {
         this.areRecipientsCandidates = areRecipientsCandidates;
     }
 
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBodyText() {
-        return bodyText;
-    }
-
-    public void setBodyText(String bodyText) {
-        this.bodyText = bodyText;
+    public EmailSettings getEmailSettings() {
+        return emailSettings;
     }
 
     /**

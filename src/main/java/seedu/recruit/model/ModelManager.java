@@ -10,6 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.recruit.commons.core.ComponentManager;
+import seedu.recruit.commons.core.EmailSettings;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
@@ -47,7 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
-        emailUtil = new EmailUtil();
+        emailUtil = new EmailUtil(userPrefs.getEmailSettings());
     }
 
     public ModelManager() {

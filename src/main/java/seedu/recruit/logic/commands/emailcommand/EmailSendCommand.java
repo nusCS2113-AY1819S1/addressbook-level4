@@ -123,7 +123,7 @@ public class EmailSendCommand extends Command {
                                    ArrayList<?> recipients, ArrayList<?> contents) {
         String bodyText;
         if (emailUtil.isAreRecipientsCandidates()) {
-            bodyText = "Hello candidates! I think you will be interested in these job offer(s)\n";
+            bodyText = emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient();
             //contents are companies
             for (Object content : contents) {
                 JobOffer jobOffer = (JobOffer) content;
@@ -139,7 +139,7 @@ public class EmailSendCommand extends Command {
                 jobNames.add(jobOffer.getJob().toString());
             }
 
-            bodyText = "Hello Sirs/Madams,\nI think you will be interested in these candidates for your job offer: "
+            bodyText = emailUtil.getEmailSettings().getBodyTextCompanyAsRecipient()
                     + jobNames.toString() + '\n';
             //contents are candidates
             for (Object content : contents) {
@@ -163,9 +163,9 @@ public class EmailSendCommand extends Command {
     private String generateSubject(EmailUtil emailUtil) {
         String subject;
         if (emailUtil.isAreRecipientsCandidates()) {
-            subject = "Hot new job offers that you will love!";
+            subject = emailUtil.getEmailSettings().getSubjectCandidateAsRecipient();
         } else {
-            subject = "New candidates found for your company!";
+            subject = emailUtil.getEmailSettings().getSubjectCompanyAsRecipient();
         }
         return subject;
     }
