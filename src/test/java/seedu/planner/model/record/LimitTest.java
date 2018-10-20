@@ -10,6 +10,7 @@ import static seedu.planner.testutil.TypicalLimits.LIMIT_DATE_END_DIFF;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_DATE_START_DIFF;
 import static seedu.planner.testutil.TypicalLimits.LIMIT_WEEKS_RANGE;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_END_DATE;
+import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_EXCEEDED;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_MONEY_100;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_MONEY_101;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_MONEY_EARMED;
