@@ -12,7 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
  */
 public class Quantity {
 
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS =
+    public static final String MESSAGE_QUANTITY_CONSTRAINTS =
             "Quantity can only take positive values, and it should not be blank";
 
     /**
@@ -28,7 +28,7 @@ public class Quantity {
      */
     public Quantity(String quantity) {
         requireNonNull(quantity);
-        checkArgument(isValidQuantity(quantity), MESSAGE_ADDRESS_CONSTRAINTS);
+        checkArgument(isValidQuantity(quantity), MESSAGE_QUANTITY_CONSTRAINTS);
         value = quantity;
     }
 

@@ -173,7 +173,7 @@
 //
 //        /* Case: invalid address -> rejected */
 //        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + ISBN_DESC_AMY + PRICE_DESC_AMY + INVALID_QUANTITY_DESC;
-//        assertCommandFailure(command, Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
+//        assertCommandFailure(command, Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
 //
 //        /* Case: invalid tag -> rejected */
 //        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + ISBN_DESC_AMY + PRICE_DESC_AMY + QUANTITY_DESC_AMY

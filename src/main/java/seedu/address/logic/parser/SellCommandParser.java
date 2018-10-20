@@ -41,7 +41,7 @@ public class SellCommandParser implements Parser<SellCommand> {
             findBookBy = Integer.toString(index.getZeroBased());
         } else {
             try {
-                isbn = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ISBN).get());
+                isbn = ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get());
             } catch (ParseException pe) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE), pe);
             }
@@ -50,7 +50,7 @@ public class SellCommandParser implements Parser<SellCommand> {
 
         DecreaseQuantity decreaseQuantity = new DecreaseQuantity();
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
-            Quantity quantity = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_QUANTITY).get());
+            Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
             decreaseQuantity.setQuantity(quantity);
         }
 

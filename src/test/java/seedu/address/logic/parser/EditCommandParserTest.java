@@ -84,7 +84,7 @@ public class EditCommandParserTest {
                 "1" + INVALID_ISBN_DESC, Isbn.MESSAGE_ISBN_CONSTRAINTS); // invalid phone
         assertParseFailure(parser, "1" + INVALID_PRICE_DESC, Price.MESSAGE_PRICE_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_QUANTITY_DESC,
-                Quantity.MESSAGE_ADDRESS_CONSTRAINTS); // invalid address
+                Quantity.MESSAGE_QUANTITY_CONSTRAINTS); // invalid address
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
