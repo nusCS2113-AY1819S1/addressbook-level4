@@ -76,6 +76,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void createUser(User user) {
+        requireNonNull(user);
+        userAccount.createUser(user);
+    }
+
+    @Override
     public void logUser(User user) {
         requireNonNull(user);
         userAccount.logUser(user);
