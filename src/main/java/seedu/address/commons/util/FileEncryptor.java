@@ -1,19 +1,20 @@
 //@@author lws803
 package seedu.address.commons.util;
 
-import seedu.address.commons.exceptions.FileEncryptorException;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Arrays;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
+
+import seedu.address.commons.exceptions.FileEncryptorException;
 
 // TODO: Parse username as salt and pad it to make it 8bytes long at least
 
