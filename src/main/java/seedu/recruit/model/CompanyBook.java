@@ -60,6 +60,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
         requireNonNull(newData);
 
         setCompanyList(newData.getCompanyList());
+        companyJobList.setJobOffers(newData.getCompanyJobList());
     }
 
     //// company -level operations
@@ -134,6 +135,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
 
     public void deleteJobOffer(JobOffer jobOffer) {
         companyList.deleteJobOffer(jobOffer);
+        companyJobList.remove(jobOffer);
     }
 
     //// util methods
