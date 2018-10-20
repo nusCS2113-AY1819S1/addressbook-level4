@@ -334,7 +334,7 @@ Given below is an example usage scenario and how the password mechanism behaves 
 Step 1. The user enters the password command with a password.
 
 [NOTE]
-If the user enters a password which is non alpha-numeric, an error will be thrown at the CommandResult box. Only
+If the user enters a password which is non alpha-numeric, an error will be thrown at the CommandResult box. Only alpha-numeric passwords are supported by `FileEncryptor`
 
 Step 2. The user closes the addressbook.
 
