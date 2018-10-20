@@ -29,7 +29,7 @@ public interface Model {
      */
     boolean userExists(User user);
 
-   /**
+    /**
      * Returns true if a user is logged in.
      */
     boolean authenticate();
