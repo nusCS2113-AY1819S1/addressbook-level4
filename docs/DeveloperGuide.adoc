@@ -411,21 +411,31 @@ The admin management is facilitated by various commands. It extends `ForumBook` 
 
 * `SetAdminCommand`: Sets a user as admin or reverts an admin to user.
 
+
 Given below is an example usage scenario and how the admin management behaves at each step.
 
-Step 1. The admin launches the application, executes `announce aTitle/Urgent! aContent/System maintenance from 3PM to 6PM.` to add the announcement to storage file. The `announce` command calls `UnitOfWork.commit()`, causing a modified forum book state to be saved into `ForumBookStorage`
+
+Step 1. The admin launches the application, executes `announce aTitle/Urgent! aContent/System maintenance from 3PM to 6PM.` to add the announcement to storage file. The `announce` command calls `UnitOfWork.getAnnouncementRepository.addAnnouncement(announcement)` and then `UnitOfWork.commit()`, causing a modified forum book state to be saved into `ForumBookStorage`
+
+image::SDAnnounce.png[width="800"]
 
 Step 2. The admin/user executes `checkAnnounce` to check for the latest announcement in storage file. The `checkAnnounce` calls the `UnitOfWork.getAnnouncementRepository().getLatestAnnouncement()` which returns an announcement to be shown in the message dialog.
 
-Step 3. The admin executes `block uName/john` to block john from creating new threads or comments. The `block` calls the `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
+image::SDCheckAnnounce.png[width="800"]
 
-Step 4. The admin executes `setAdmin uName/john set/true` to set a certain user as admin or to revert an admin to user. The `setAdmin` also calls the `UnitOfWord.commit()`, cuasing another modified forum book state to be saved into `ForumBookStorage`.
+Step 3. The admin executes `block uName/john` to block john from creating new threads or comments. The `block` calls `User.setIsBlock(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
+
+image::SDBlockUserFromCreating.png[width="800"]
+
+Step 4. The admin executes `setAdmin uName/john set/true` to set a certain user as admin or to revert an admin to user. The `setAdmin` calls the `User.setAdmin(true)` and then `UnitOfWork.commit()`, cuasing another modified forum book state to be saved into `ForumBookStorage`.
+
+image::SDSetAdmin.png[width="800"]
 
 [NOTE]
 If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
 
 // tag::dataencryption[]
-==== Data Encryption
+=== Data Encryption
 
 Data encryption is done in a transparent layer between `ForumBookStorage` and `FileStorage`.
 
