@@ -84,7 +84,7 @@ public class DateBasedLimitListTest {
         dateBasedLimitList.add(LIMIT_100);
         dateBasedLimitList.setLimit(LIMIT_100, LIMIT_100);
         DateBasedLimitList expectedDateBasedLimitList = new DateBasedLimitList();
-        expectedDateBasedLimitList.add();
+        expectedDateBasedLimitList.add(LIMIT_100);
         assertEquals(expectedDateBasedLimitList, dateBasedLimitList);
     }
 
