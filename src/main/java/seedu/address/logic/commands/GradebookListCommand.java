@@ -17,20 +17,19 @@ public class GradebookListCommand extends Command {
         GradebookManager gradebookManager = new GradebookManager();
         StringBuilder sb = new StringBuilder();
 
-        int count = 0;
+        int count = gradebookManager.getGradebooks().size();
         int index = 1;
 
-        for (Gradebook g: gradebookManager.getGradebooks()) {
+        for (Gradebook gradebook: gradebookManager.getGradebooks()) {
             sb.append(index++ + ") ");
             sb.append("Module Code: ");
-            sb.append(g.getModuleCode() + "\n");
+            sb.append(gradebook.getModuleCode() + "\n");
             sb.append("Grade Component Name: ");
-            sb.append(g.getGradeComponentName() + "\n");
+            sb.append(gradebook.getGradeComponentName() + "\n");
             sb.append("Maximum Marks: ");
-            sb.append(g.getGradeComponentMaxMarks() + "\n");
+            sb.append(gradebook.getGradeComponentMaxMarks() + "\n");
             sb.append("Weightage: ");
-            sb.append(g.getGradeComponentWeightage() + "\n");
-            count++;
+            sb.append(gradebook.getGradeComponentWeightage() + "\n");
         }
         return new CommandResult(
                 String.format(MESSAGE_LIST_SUCCESS) + count + "\n" + sb.toString());

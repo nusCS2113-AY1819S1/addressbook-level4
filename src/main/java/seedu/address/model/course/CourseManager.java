@@ -11,9 +11,10 @@ import seedu.address.storage.adapter.XmlAdaptedCourse;
  */
 public class CourseManager {
 
+    private static CourseManager initCM = new CourseManager();
     private ArrayList<Course> courseList = new ArrayList<Course>();
 
-    public CourseManager() {
+    private CourseManager() {
         loadCourses();
     }
 
@@ -33,6 +34,12 @@ public class CourseManager {
         courseList.add(course);
     }
 
+    public static CourseManager getInstance() {
+        if (initCM == null) {
+            initCM = new CourseManager();
+        }
+        return initCM;
+    }
     public Course getCourse(String courseCode) {
         for (Course c: courseList) {
             if (courseCode.equalsIgnoreCase(c.getCourseCode())) {

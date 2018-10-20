@@ -4,6 +4,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * Contains tests for NoteAddCommand.
+ */
 public class NoteAddCommandTest {
 
     @Rule
