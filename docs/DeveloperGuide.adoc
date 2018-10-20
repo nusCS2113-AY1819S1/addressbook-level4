@@ -447,6 +447,24 @@ Same as the other commands, see <<Events-Driven-Nature,*`Events-Driven nature of
 
 {nbsp}
 
+=== Security Implementation
+To begin this section, we would need to introduce the idea of a Authenticated User instance.
+
+==== Current Implementation
+This section will be broken down into +
+1. Front-End +
+2. Back-End +
+
+===== Front-End Implementation
+1. CLI +
+2. UI Prompt +
+Inside the UI package, there are two new windows created, LoginWindow and RegistrationWindow. Whenever login or register
+process is successful, it raises their respective SuccessEvent to the event bus. The preexisting UIManager is subscribed
+to this events, and will display the content of the UI and closing the respective boxes.
+
+===== Back-End Implmentation
+
+==== Design Considerations
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
