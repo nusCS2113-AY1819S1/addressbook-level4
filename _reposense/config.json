@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "QzSG",
+      "displayName": "ADR...HUA",
+      "authorNames": ["QzSG","Adrian"]
+    },
+    {
+      "githubId": "ChenSongJian",
+      "displayName": "CHE...IAN",
+      "authorNames": ["ChenSongJian"]
+    },
+    {
+      "githubId": "T0roloco",
+      "displayName": "GON...AVO",
+      "authorNames": ["T0roloco"]
+    },
+    {
+      "githubId": "ian-tjahjono",
+      "displayName": "IAN...ONO",
+      "authorNames": ["ian-tjahjono"]
+    },
+    {
+      "githubId": "luhan02",
+      "displayName": "LU ...HAN",
+      "authorNames": ["luhan02"]
+    }
+  ]
+}
