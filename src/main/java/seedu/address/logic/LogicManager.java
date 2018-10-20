@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -11,7 +10,6 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.BookInventoryParser;
 import seedu.address.logic.parser.DiceCoefficient;
@@ -82,5 +80,7 @@ public class LogicManager extends ComponentManager implements Logic {
         return new ListElementPointer(history.getHistory());
     }
 
-    public List<String> getHistoryList () { return history.getHistory(); }
+    public List<String> getHistoryList () {
+        return history.getHistory();
+    }
 }
