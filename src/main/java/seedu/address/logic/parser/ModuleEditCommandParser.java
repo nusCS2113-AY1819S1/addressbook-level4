@@ -36,9 +36,10 @@ public class ModuleEditCommandParser implements Parser<ModuleEditCommand> {
         String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
 
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
-        editModuleDescriptor.setModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+        editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get()));
         if (argMultimap.getValue(PREFIX_MODULE_NAME).isPresent()) {
-            editModuleDescriptor.setModuleName(argMultimap.getValue(PREFIX_MODULE_NAME).get());
+            editModuleDescriptor.setModuleName(
+                    ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MODULE_NAME).get()));
         }
 
         if (!editModuleDescriptor.isAnyFieldEdited()) {

@@ -4,30 +4,20 @@ package seedu.address.model.module;
  * Represents a module in Trajectory
  */
 public class Module {
-    private String name;
-    private String code;
-
     private ModuleCode moduleCode;
+    private ModuleName moduleName;
 
-    public Module(String name, String code) {
-        this.name = name;
-        this.code = code;
+    public Module(ModuleCode moduleCode, ModuleName moduleName) {
+        this.moduleCode = moduleCode;
+        this.moduleName = moduleName;
     }
 
-    public Module(ModuleCode code) {
-        this.moduleCode = code;
-    }
-
-    public String getModuleName() {
-        return this.name;
-    }
-
-    public String getModuleCode() {
-        return this.code;
-    }
-
-    public ModuleCode getCode() {
+    public ModuleCode getModuleCode() {
         return this.moduleCode;
+    }
+
+    public ModuleName getModuleName() {
+        return this.moduleName;
     }
 
     /**

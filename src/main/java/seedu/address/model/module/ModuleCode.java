@@ -8,6 +8,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
 public class ModuleCode {
+
+    public static final String MESSAGE_MODULE_CODE_CONSTRAINT =
+            "Module code should begin with 2 or 3 uppercase letters, followed by a 4-digit number and an optional"
+            + " uppercase letter at the end.";
+
     /*
      * The first 2 or 3 (optional) characters must be uppercase letters.
      * The following 1 character must be an integer from 1-9 (0 is not valid!).
@@ -16,10 +21,6 @@ public class ModuleCode {
      * This final character must be an uppercase letter.
      */
     private static final String MODULE_CODE_VALIDATION_REGEX = "^[A-Z]{2,3}[1-9][0-9]{3}[A-Z]?$";
-
-    private static final String MESSAGE_MODULE_CODE_CONSTRAINT =
-            "Module code should begin with 2 uppercase letters, followed by a 4-digit number and an optional"
-            + " uppercase letter at the end.";
 
     public final String moduleCode;
 

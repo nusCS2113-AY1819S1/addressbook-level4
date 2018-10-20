@@ -9,6 +9,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ModuleName {
 
+    public static final String MESSAGE_MODULE_NAME_CONSTRAINTS =
+            "Module name should only contain alphanumeric characters, spaces, hyphens (-), and ampersands (&),"
+            + " and it should not be blank.";
+
     /*
      * The first character of the module name must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
@@ -17,10 +21,6 @@ public class ModuleName {
      * The 2 accepted symbols are not allowed as the first character of the module name.
      */
     private static final String MODULE_NAME_VALIDATION_REGEX = "^[a-zA-z0-9][a-zA-z0-9-& ]+$";
-
-    private static final String MESSAGE_MODULE_NAME_CONSTRAINTS =
-            "Module names should only contain alphanumeric characters, spaces, hyphens (-), and ampersands (&),"
-            + " and it should not be blank";
 
     public final String moduleName;
 

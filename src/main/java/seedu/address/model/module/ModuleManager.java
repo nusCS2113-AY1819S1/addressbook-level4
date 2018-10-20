@@ -3,8 +3,11 @@ package seedu.address.model.module;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 
@@ -12,6 +15,8 @@ import seedu.address.storage.adapter.XmlAdaptedModule;
  * This module manager stores modules for Trajectory.
  */
 public class ModuleManager {
+
+    private static final Logger logger = LogsCenter.getLogger(ModuleManager.class);
 
     private ArrayList<Module> modules = new ArrayList<>();
 
@@ -47,8 +52,12 @@ public class ModuleManager {
      */
     private void readModuleList() {
         ArrayList<XmlAdaptedModule> xmlModuleList = StorageController.getModuleStorage();
-        for (XmlAdaptedModule xmlModule : xmlModuleList) {
-            modules.add(xmlModule.toModelType());
+        try {
+            for (XmlAdaptedModule xmlModule : xmlModuleList) {
+                modules.add(xmlModule.toModelType());
+            }
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found when reading module list: " + ive.getMessage());
         }
     }
 
@@ -69,7 +78,7 @@ public class ModuleManager {
      */
     public Module getModuleByModuleCode(String moduleCode) {
         return this.modules.stream()
-                .filter(module -> module.getModuleCode().equals(moduleCode))
+                .filter(module -> module.getModuleCode().moduleCode.equals(moduleCode))
                 .findAny()
                 .orElse(null);
     }
