@@ -26,13 +26,13 @@ public class Month {
             "Month should follow the modern calendar. "
                     + "month parameter must use the 3-letter representation and is non case-sensitive"
                     + ", for eg. feb or FeB or FEB are both accepted\n";
-    public static final String MONTH_VALIDATION_REGEX = "(?<month><[a-zA-Z]{3})-(?<year>\\d{4})";
-    public static final Pattern MONTH_VALIDATION_PATTERN = Pattern.compile(MONTH_VALIDATION_REGEX);
+    public static final String MONTH_VALIDATION_REGEX = "[a-zA-Z]{3}-\\d{4}";
+    public static final Pattern MONTH_VALIDATION_PATTERN = Pattern.compile("(?<month>[a-zA-Z]{3})-(?<year>\\d{4})");
 
     private static final List<String> standardMonths = Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
             "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
 
-    public final String value = null;
+    public final String value;
 
     private Logger logger = LogsCenter.getLogger(Month.class);
     private Matcher matcher;
@@ -45,7 +45,9 @@ public class Month {
      *
      * @param input A valid string.
      */
+    //TODO: refactor this
     public Month(String input) throws ParseException {
+        input = input.toUpperCase();
         checkArgument(isValidMonth(input), MESSAGE_MONTH_CONSTRAINTS);
         matcher = MONTH_VALIDATION_PATTERN.matcher(input);
         if (!matcher.matches()) {
@@ -53,6 +55,7 @@ public class Month {
         }
         checkArgument(isLogicalMonth(matcher.group("month")), MESSAGE_MONTH_LOGICAL_CONSTRAINTS);
         initMonth(matcher.group("month"), matcher.group("year"));
+        value = String.format("%s-%d", standardMonths.get(month - 1), year);
     }
 
     /**
@@ -69,7 +72,6 @@ public class Month {
      */
     public static boolean isLogicalMonth(String test) {
         requireNonNull(test);
-        test = test.toUpperCase();
         return standardMonths.contains(test);
     }
 
@@ -77,5 +79,18 @@ public class Month {
         requireAllNonNull(month, year);
         this.year = Integer.parseInt(year);
         this.month = standardMonths.indexOf(month) + 1;
+    }
+
+    @Override
+    public String toString() {
+        return value;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof Month // instanceof handles nulls
+                && month == ((Month) other).month
+                && year == ((Month) other).year);
     }
 }
