@@ -23,11 +23,11 @@ import seedu.address.commons.util.FileEncryptor;
  */
 public class PasswordCommandTest {
 
-    private final static Logger LOGGER = Logger.getLogger(PasswordCommandTest.class.getName());
-
     private String password = "test1234";
     private String tempFileName = "test.tmp";
     private String toWrite = "Hello";
+
+    private final static Logger LOGGER = Logger.getLogger(PasswordCommandTest.class.getName());
 
     /**
      * Sets up the temporary file
@@ -76,5 +76,4 @@ public class PasswordCommandTest {
         File tmpFile = new File(tempFileName);
         tmpFile.delete();
     }
-    
 }
