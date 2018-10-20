@@ -22,7 +22,7 @@ public class CourseListCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        CourseManager cm = new CourseManager();
+        CourseManager cm = CourseManager.getInstance();
         StringBuilder sb = new StringBuilder();
 
         sb.append(HtmlTableProcessor.getH3Representation("Course List"));
