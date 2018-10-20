@@ -142,6 +142,14 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Enables Security CLI
+     */
+    void fillSecurityCommandBox() {
+        SecurityBox commandBox = new SecurityBox(logic);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
