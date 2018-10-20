@@ -34,7 +34,6 @@ public class DownloadAllCommand extends Command {
     private String moduleCode;
     private String downloadFilePath;
 
-
     public DownloadAllCommand(String username, String password, String moduleCode){
         this.password=password;
         this.username=username;
