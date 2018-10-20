@@ -21,6 +21,15 @@ public class TimeTable {
         timeSlots = input;
     }
 
+    /**
+     * Copy constructor for {@code TimeTable}
+     * @param input {@code TimeTable} to be copied
+     */
+    public TimeTable(TimeTable input) {
+        this(input.getTimeSlots());
+    }
+
+
     public Collection <TimeSlot> getTimeSlots() {
         Collection <TimeSlot> toReturn = new ArrayList<>();
         toReturn.addAll(timeSlots);

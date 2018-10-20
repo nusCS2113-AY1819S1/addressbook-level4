@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * Represents a single TimeSlot in TimeTable Class
@@ -83,6 +85,18 @@ public class TimeSlot {
 
         return isSameDay && !isNotOverlapTime;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH))
+                .append(" ")
+                .append(getStartTime())
+                .append(" - ")
+                .append(getEndTime());
+        return builder.toString();
+    }
+
 
     @Override
     public boolean equals(Object other) {
