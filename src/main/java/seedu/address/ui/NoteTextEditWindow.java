@@ -16,7 +16,7 @@ import seedu.address.model.note.Note;
 public class NoteTextEditWindow {
 
     private static final String PATH = "/view/NoteEntryPromptWindow.fxml";
-    
+
     private Stage notePromptStage;
     private NoteEntryPrompt controller;
     private Note note;
