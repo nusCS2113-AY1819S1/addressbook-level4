@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.time.DayOfWeek;
 import java.time.Duration;
@@ -16,7 +16,6 @@ import java.util.Locale;
 public class TimeSlot {
     // TODO: Make constraint message more descriptive
     public static final String MESSAGE_GENERAL_CONSTRAINTS = "Does not fit constraints!";
-    public static final String MESSAGE_NOT_ENOUGH_ARGUMENTS = "Accepted argument example: Monday 08:00-10:00";
     public static final String MESSAGE_CANNOT_PARSE_DAY = "Accepted day format: MONDAY";
     public static final String MESSAGE_CANNOT_PARSE_TIME = "Accepted time format: 8-10";
     public static final String MESSAGE_INVALID_TIME_SLOT = "Invalid TimeSlot";
@@ -31,9 +30,7 @@ public class TimeSlot {
     private String label;
 
     public TimeSlot(DayOfWeek day, LocalTime start, LocalTime end) {
-        requireNonNull(day);
-        requireNonNull(start);
-        requireNonNull(end);
+        requireAllNonNull(day, start, end);
 
         checkArgument(isValidTimeSlot(start, end), MESSAGE_INVALID_TIME_SLOT);
 
@@ -79,9 +76,9 @@ public class TimeSlot {
     public boolean isOverlap(TimeSlot toCompare) {
         boolean isSameDay = this.getDayOfWeek() == toCompare.getDayOfWeek();
         boolean isNotOverlapTime = (this.getEndTime().isBefore(toCompare.getStartTime())
-                                    || this.getEndTime().equals(toCompare.getStartTime())
-                                    || toCompare.getEndTime().isBefore(this.getStartTime())
-                                    || toCompare.getEndTime().equals(this.getStartTime()));
+                || this.getEndTime().equals(toCompare.getStartTime())
+                || toCompare.getEndTime().isBefore(this.getStartTime())
+                || toCompare.getEndTime().equals(this.getStartTime()));
 
         return isSameDay && !isNotOverlapTime;
     }
@@ -115,4 +112,3 @@ public class TimeSlot {
                 && otherTimeSlot.getEndTime().equals(getEndTime());
     }
 }
-
