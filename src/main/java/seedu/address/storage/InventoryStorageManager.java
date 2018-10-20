@@ -86,7 +86,7 @@ public class InventoryStorageManager extends ComponentManager implements Invento
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(BookInventoryChangedEvent event) {
+    public void handleBookInventoryChangedEvent(BookInventoryChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveAddressBook(event.data);

@@ -35,5 +35,5 @@ public interface InventoryStorage extends BookInventoryStorage, UserPrefsStorage
      *   Creates the data file if it is missing.
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(BookInventoryChangedEvent bice);
+    void handleBookInventoryChangedEvent(BookInventoryChangedEvent bice);
 }

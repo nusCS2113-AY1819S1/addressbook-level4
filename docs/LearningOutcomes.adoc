@@ -163,7 +163,7 @@ class gives some examples of how to use _Equivalence Partitions_, _Boundary Valu
 Consider the link:{repoURL}/src/test/java/seedu/quantity/storage/StorageManagerTest.java[`StorageManagerTest.java`] class.
 
 * Test methods `prefsReadSave()` and `addressBookReadSave()` are integration tests. Note how they simply test if The `StorageManager` class is correctly wired to its dependencies.
-* Test method `handleAddressBookChangedEvent_exceptionThrown_eventRaised()` is a unit test because it uses _dependency injection_ to isolate the SUT `StorageManager#handleAddressBookChangedEvent(...)` from its dependencies.
+* Test method `handleBookInventoryChangedEvent_exceptionThrown_eventRaised()` is a unit test because it uses _dependency injection_ to isolate the SUT `StorageManager#handleBookInventoryChangedEvent(...)` from its dependencies.
 
 Compare the above with link:{repoURL}/src/test/java/seedu/quantity/logic/LogicManagerTest.java[`LogicManagerTest`]. Some of the tests in that class (e.g. `execute_*` methods) are neither integration nor unit tests. They are _integration + unit_ tests because they not only check if the LogicManager is correctly wired to its dependencies, but also checks the working of its dependencies. For example, the following two lines test the `LogicManager` but also the `Parser`.
 
