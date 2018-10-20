@@ -13,9 +13,11 @@ public class AttendanceContainsUserPredicate implements Predicate<Event> {
     public AttendanceContainsUserPredicate(User name) {
         this.username = name.getUsername().value;
     }
-    //To be reimplement later when user is modified
+    //Todo: to reimplement later
+
+    //Todo: To reimplement later when Attendance field is add
     @Override
     public boolean test (Event event) {
-        return username.equalsIgnoreCase(event.getAttendance().toString());
+        return true;//username.equalsIgnoreCase(event.getAttendance().toString());
     }
 }

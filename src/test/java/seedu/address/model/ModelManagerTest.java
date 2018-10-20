@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.event.EventContainsKeywordsPredicate;
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EventManagerBuilder;
 
 public class ModelManagerTest {
     @Rule
@@ -47,7 +47,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        EventManager eventManager = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        EventManager eventManager = new EventManagerBuilder().withEvent(ALICE).withEvent(BENSON).build();
         EventManager differentEventManager = new EventManager();
         UserPrefs userPrefs = new UserPrefs();
 

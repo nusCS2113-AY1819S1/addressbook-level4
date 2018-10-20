@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
+import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
@@ -18,28 +18,29 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class EventBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
+    public static final String DEFAULT_NAME = "Halloween Party";
+    public static final String DEFAULT_CONTACT = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
-    public static final Boolean DEFAULT_ATTENDANCE = false;
     public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
 
     private Name name;
+    private Contact contact;
     private Phone phone;
     private Email email;
     private Address address;
-    private Attendance attendance;
     private Set<Tag> tags;
     private DateTime datetime;
 
     public EventBuilder() {
         name = new Name(DEFAULT_NAME);
+        contact = new Contact(DEFAULT_CONTACT);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
-        attendance = new Attendance(DEFAULT_ATTENDANCE);
         datetime = new DateTime(DEFAULT_DATETIME);
+
         tags = new HashSet<>();
     }
 
@@ -48,11 +49,12 @@ public class EventBuilder {
      */
     public EventBuilder(Event eventToCopy) {
         name = eventToCopy.getName();
+        contact = eventToCopy.getContact();
         phone = eventToCopy.getPhone();
         email = eventToCopy.getEmail();
         address = eventToCopy.getAddress();
-        attendance = eventToCopy.getAttendance();
         datetime = eventToCopy.getDateTime();
+
         tags = new HashSet<>(eventToCopy.getTags());
     }
 
@@ -97,10 +99,10 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code Attendance} of the {@code Event} that we are building.
+     * Sets the {@code Contact} of the {@code Event} that we are building.
      */
-    public EventBuilder withAttendance(Boolean attendance) {
-        this.attendance = new Attendance(attendance);
+    public EventBuilder withContact(String contact) {
+        this.contact = new Contact(contact);
         return this;
     }
 
@@ -113,7 +115,6 @@ public class EventBuilder {
     }
 
     public Event build() {
-        return new Event(name, phone, email, address, attendance, datetime, tags);
+        return new Event(name, contact, phone, email, address, datetime, tags);
     }
-
 }

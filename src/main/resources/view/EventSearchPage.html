@@ -1,14 +1,40 @@
 <!DOCTYPE html>
 <html>
+<!DOCTYPE html>
+<html>
 <head>
   <meta charset="utf-8">
-  <title>Event Search Page</title>
+  <title>Dummy Search Page</title>
+  <script type="text/javascript">
+      function getJsonFromUrl() {
+          var query = location.search.substr(1);
+          var result = {};
+          query.split("&").forEach(function(part) {
+              var item = part.split("=");
+              result[item[0]] = decodeURIComponent(item[1]);
+          });
+          return result;
+      }
+      document.addEventListener("DOMContentLoaded", function(event) {
+          document.getElementById("name").innerHTML=getJsonFromUrl().name;
+          document.getElementById("contact").innerHTML=getJsonFromUrl().contact;
+          document.getElementById("phone").innerHTML=getJsonFromUrl().phone;
+          document.getElementById("email").innerHTML=getJsonFromUrl().email;
+          document.getElementById("address").innerHTML=getJsonFromUrl().address;
+          document.getElementById("dateTime").innerHTML=getJsonFromUrl().dateTime;
+          document.getElementById("tags").innerHTML=getJsonFromUrl().tags;
+      });
+  </script>
 </head>
 <body>
-  Event Name: <!-- Name --><!-- /Name --><br>
-  Event Address: <!-- Address --><!-- /Address --><br>
+  <h2>Event Name: <span id="name"></span><br></h2>
+  Event IC: <span id="contact"></span><br>
+  IC Contact: <span id="phone"></span><br>
+  IC Email: <span id="email"></span><br>
+  Event Venue: <span id="address"></span><br>
+  Time: <span id="dateTime"></span><br>
   <br>
-  Event Attendance:<br>
+  Event Tags: <span id="tags"></span><br>
   <!-- Attendance -->
   <!-- /Attendance -->
 

@@ -5,11 +5,14 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATETIME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTACT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_DATETIME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -21,6 +24,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATETIME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -30,7 +35,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 import static seedu.address.testutil.TypicalEvents.AMY;
 import static seedu.address.testutil.TypicalEvents.BOB;
-import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_TRYOUTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_EVENT;
@@ -44,6 +49,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.event.Address;
+import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
@@ -66,8 +72,9 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
          */
         Index index = INDEX_FIRST_EVENT;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
-                + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " "
+                + CONTACT_DESC_BOB + " " + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " "
                 + DATETIME_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
+
         Event editedEvent = new EventBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
         assertCommandSuccess(command, index, editedEvent);
 
@@ -84,26 +91,29 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a event with new values same as existing values -> edited */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + "  " + NAME_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
         assertCommandSuccess(command, index, BOB);
 
         /* Case: edit a event with new values same as another event's values but with different name -> edited */
         assertTrue(getModel().getEventManager().getEventList().contains(BOB));
         index = INDEX_SECOND_EVENT;
         assertNotEquals(getModel().getFilteredEventList().get(index.getZeroBased()), BOB);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + CONTACT_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedEvent = new EventBuilder(BOB).withName(VALID_NAME_AMY).build();
         assertCommandSuccess(command, index, editedEvent);
 
-        /* Case: edit a event with new values same as another event's values but with different phone and email
-         * -> edited
+        /* Case: edit a event with new values same as another event's values but with different contact, phone, email
+         * and datetime -> edited
          */
         index = INDEX_SECOND_EVENT;
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        editedEvent = new EventBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + DATETIME_DESC_AMY + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
+        editedEvent = new EventBuilder(BOB).withContact(VALID_CONTACT_AMY).withPhone(VALID_PHONE_AMY)
+                .withEmail(VALID_EMAIL_AMY).withDateTime(VALID_DATETIME_AMY).build();
         assertCommandSuccess(command, index, editedEvent);
 
         /* Case: clear tags -> cleared */
@@ -116,7 +126,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
         /* Case: filtered event list, edit index within bounds of address book and event list -> edited */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showEventsWithName(KEYWORD_MATCHING_TRYOUTS);
         index = INDEX_FIRST_EVENT;
         assertTrue(index.getZeroBased() < getModel().getFilteredEventList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
@@ -127,7 +137,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         /* Case: filtered event list, edit index within bounds of address book but out of bounds of event list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showEventsWithName(KEYWORD_MATCHING_TRYOUTS);
         int invalidIndex = getModel().getEventManager().getEventList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
                 Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
@@ -137,11 +147,11 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         /* Case: selects first card in the event list, edit a event -> edited, card selection remains unchanged but
          * browser url changes
          */
-        showAllPersons();
+        showAllEvents();
         index = INDEX_FIRST_EVENT;
-        selectPerson(index);
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY
-                + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DATETIME_DESC_AMY + TAG_DESC_FRIEND;
+        selectEvent(index);
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + CONTACT_DESC_AMY
+                + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + DATETIME_DESC_AMY + TAG_DESC_FRIEND;
         // this can be misleading: card selection actually remains unchanged but the
         // browser's url is updated to reflect the new data
         //Use AMY datetime will move amy to the 3 place in the based one list
@@ -172,19 +182,23 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: invalid name -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased()
-                        + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
+                + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
+
+        /* Case: invalid contact -> rejected */
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased()
+                + INVALID_CONTACT_DESC, Contact.MESSAGE_CONTACT_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased()
-                        + INVALID_PHONE_DESC, Phone.MESSAGE_PHONE_CONSTRAINTS);
+                + INVALID_PHONE_DESC, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased()
-                        + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS);
+                + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased()
-                        + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
+                + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid datetime -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased()
@@ -192,25 +206,52 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: invalid tag -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased()
-                        + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
+                + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
-        /* Case: edit a event with new values same as another event's values -> rejected */
         executeCommand(EventUtil.getAddCommand(BOB));
         assertTrue(getModel().getEventManager().getEventList().contains(BOB));
-        index = INDEX_FIRST_EVENT;
+        index = INDEX_SECOND_EVENT;
         assertFalse(getModel().getFilteredEventList().get(index.getZeroBased()).equals(BOB));
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+
+        /* Case: edit a event with new values same as another event's values -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
 
         /* Case: edit a event with new values same as another event's values but with different tags -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
 
         /* Case: edit a event with new values same as another event's values but with different address -> rejected */
-        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
-                + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_AMY + DATETIME_DESC_BOB + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
+
+        /* Case: edit a event with new values same as another event's values but with different contact -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_AMY
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
+
+        /* Case: edit a event with new values same as another event's values but with different phone -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_BOB
+                + PHONE_DESC_AMY + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
+
+        /* Case: edit a event with new values same as another event's values but with different email -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + DATETIME_DESC_BOB + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
+
+        /* Case: edit a event with new values same as another event's values but with different datetime -> rejected */
+        command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_BOB
+                + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATETIME_DESC_AMY + TAG_DESC_FRIEND
+                + TAG_DESC_HUSBAND;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_EVENT);
     }
 

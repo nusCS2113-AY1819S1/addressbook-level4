@@ -7,7 +7,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_EVENT_SUCCESS;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_TRYOUTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 import org.junit.Test;
@@ -30,9 +30,9 @@ public class SelectCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, INDEX_FIRST_EVENT);
 
         /* Case: select the last card in the event list -> selected */
-        Index personCount = getLastIndex(getModel());
-        command = SelectCommand.COMMAND_WORD + " " + personCount.getOneBased();
-        assertCommandSuccess(command, personCount);
+        Index eventCount = getLastIndex(getModel());
+        command = SelectCommand.COMMAND_WORD + " " + eventCount.getOneBased();
+        assertCommandSuccess(command, eventCount);
 
         /* Case: undo previous selection -> rejected */
         command = UndoCommand.COMMAND_WORD;
@@ -57,7 +57,7 @@ public class SelectCommandSystemTest extends EventManagerSystemTest {
         /* Case: filtered event list, select index within bounds of address book but out of bounds of event list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showEventsWithName(KEYWORD_MATCHING_TRYOUTS);
         int invalidIndex = getModel().getEventManager().getEventList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
 
@@ -94,7 +94,7 @@ public class SelectCommandSystemTest extends EventManagerSystemTest {
         assertCommandFailure("SeLeCt 1", MESSAGE_UNKNOWN_COMMAND);
 
         /* Case: select from empty address book -> rejected */
-        deleteAllPersons();
+        deleteAllEvents();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST_EVENT.getOneBased(),
                 MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
     }
@@ -117,7 +117,7 @@ public class SelectCommandSystemTest extends EventManagerSystemTest {
         Model expectedModel = getModel();
         String expectedResultMessage = String.format(
                 MESSAGE_SELECT_EVENT_SUCCESS, expectedSelectedCardIndex.getOneBased());
-        int preExecutionSelectedCardIndex = getPersonListPanel().getSelectedCardIndex();
+        int preExecutionSelectedCardIndex = getEventListPanel().getSelectedCardIndex();
 
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);

@@ -3,10 +3,10 @@
     <!-- Event with invalid name field -->
     <events>
         <name>Ha!ns Mu@ster</name>
+        <contact isPrivate="false">Some C0NT@CT</contact>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
-        <attendence isPrivate="false">true</attendence>
         <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
     </events>
 </addressbook>

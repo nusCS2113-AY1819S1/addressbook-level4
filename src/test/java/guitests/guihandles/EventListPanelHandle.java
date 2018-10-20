@@ -16,7 +16,7 @@ public class EventListPanelHandle extends NodeHandle<ListView<Event>> {
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Event> lastRememberedSelectedPersonCard;
+    private Optional<Event> lastRememberedSelectedEventCard;
 
     public EventListPanelHandle(ListView<Event> personListPanelNode) {
         super(personListPanelNode);
@@ -101,15 +101,15 @@ public class EventListPanelHandle extends NodeHandle<ListView<Event>> {
      * Returns the event card handle of a event associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public EventCardHandle getPersonCardHandle(int index) {
+    public EventCardHandle getEventCardHandle(int index) {
         return getAllCardNodes().stream()
                 .map(EventCardHandle::new)
-                .filter(handle -> handle.equals(getPerson(index)))
+                .filter(handle -> handle.equals(getEvent(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Event getPerson(int index) {
+    private Event getEvent(int index) {
         return getRootNode().getItems().get(index);
     }
 
@@ -125,28 +125,28 @@ public class EventListPanelHandle extends NodeHandle<ListView<Event>> {
     /**
      * Remembers the selected {@code EventCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
+    public void rememberSelectedEventCard() {
         List<Event> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedEventCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedEventCard = Optional.of(selectedItems.get(0));
         }
     }
 
     /**
      * Returns true if the selected {@code EventCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * {@code rememberSelectedEventCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
+    public boolean isSelectedEventCardChanged() {
         List<Event> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedEventCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedEventCard.isPresent()
+                    || !lastRememberedSelectedEventCard.get().equals(selectedItems.get(0));
         }
     }
 

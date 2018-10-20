@@ -4,10 +4,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_EVENT_SUCCESS;
+import static seedu.address.testutil.TestUtil.getEvent;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
-import static seedu.address.testutil.TestUtil.getPerson;
-import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalEvents.KEYWORD_MATCHING_TRYOUTS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 
 import org.junit.Test;
@@ -32,14 +32,14 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
         /* Case: delete the first event in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST_EVENT.getOneBased() + "       ";
-        Event deletedEvent = removePerson(expectedModel, INDEX_FIRST_EVENT);
+        Event deletedEvent = removeEvent(expectedModel, INDEX_FIRST_EVENT);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last event in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
-        Index lastPersonIndex = getLastIndex(modelBeforeDeletingLast);
-        assertCommandSuccess(lastPersonIndex);
+        Index lastEventIndex = getLastIndex(modelBeforeDeletingLast);
+        assertCommandSuccess(lastEventIndex);
 
         /* Case: undo deleting the last event in the list -> last event restored */
         command = UndoCommand.COMMAND_WORD;
@@ -48,18 +48,18 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: redo deleting the last event in the list -> last event deleted again */
         command = RedoCommand.COMMAND_WORD;
-        removePerson(modelBeforeDeletingLast, lastPersonIndex);
+        removeEvent(modelBeforeDeletingLast, lastEventIndex);
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, modelBeforeDeletingLast, expectedResultMessage);
 
         /* Case: delete the middle event in the list -> deleted */
-        Index middlePersonIndex = getMidIndex(getModel());
-        assertCommandSuccess(middlePersonIndex);
+        Index middleEventIndex = getMidIndex(getModel());
+        assertCommandSuccess(middleEventIndex);
 
         /* ------------------ Performing delete operation while a filtered list is being shown ---------------------- */
 
         /* Case: filtered event list, delete index within bounds of address book and event list -> deleted */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showEventsWithName(KEYWORD_MATCHING_TRYOUTS);
         Index index = INDEX_FIRST_EVENT;
         assertTrue(index.getZeroBased() < getModel().getFilteredEventList().size());
         assertCommandSuccess(index);
@@ -67,7 +67,7 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
         /* Case: filtered event list, delete index within bounds of address book but out of bounds of event list
          * -> rejected
          */
-        showPersonsWithName(KEYWORD_MATCHING_MEIER);
+        showEventsWithName(KEYWORD_MATCHING_TRYOUTS);
         int invalidIndex = getModel().getEventManager().getEventList().size();
         command = DeleteCommand.COMMAND_WORD + " " + invalidIndex;
         assertCommandFailure(command, MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
@@ -75,13 +75,13 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
         /* --------------------- Performing delete operation while a event card is selected ------------------------ */
 
         /* Case: delete the selected event -> event list panel selects the event before the deleted event */
-        showAllPersons();
+        showAllEvents();
         expectedModel = getModel();
         Index selectedIndex = getLastIndex(expectedModel);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
-        selectPerson(selectedIndex);
+        selectEvent(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        deletedEvent = removePerson(expectedModel, selectedIndex);
+        deletedEvent = removeEvent(expectedModel, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvent);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
@@ -115,8 +115,8 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
      * Removes the {@code Event} at the specified {@code index} in {@code model}'s address book.
      * @return the removed event
      */
-    private Event removePerson(Model model, Index index) {
-        Event targetEvent = getPerson(model, index);
+    private Event removeEvent(Model model, Index index) {
+        Event targetEvent = getEvent(model, index);
         model.deleteEvent(targetEvent);
         return targetEvent;
     }
@@ -128,7 +128,7 @@ public class DeleteCommandSystemTest extends EventManagerSystemTest {
      */
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
-        Event deletedEvent = removePerson(expectedModel, toDelete);
+        Event deletedEvent = removeEvent(expectedModel, toDelete);
         String expectedResultMessage = String.format(MESSAGE_DELETE_EVENT_SUCCESS, deletedEvent);
 
         assertCommandSuccess(

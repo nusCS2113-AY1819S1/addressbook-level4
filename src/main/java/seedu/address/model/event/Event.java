@@ -2,21 +2,24 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Event in the event manager.
+ * Represents an Event in the event manager.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
     //Todo: add contact field
     // Identity fields
     private final Name name;
+    private final Contact contact;
     private final Phone phone;
     private final Email email;
 
@@ -24,25 +27,30 @@ public class Event {
     private final DateTime dateTime;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Attendance attendance;
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Phone phone, Email email, Address address,
-                 Attendance attendance, DateTime datetime, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, datetime, tags);
+
+    public Event(Name name, Contact contact, Phone phone, Email email, Address address,
+                DateTime datetime, Set<Tag> tags) {
+        requireAllNonNull(name, contact, phone, email, address, datetime);
+
         this.name = name;
+        this.contact = contact;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.attendance = attendance;
-        this.tags.addAll(tags);
         this.dateTime = datetime;
+        this.tags.addAll(tags);
     }
 
     public Name getName() {
         return name;
+    }
+
+    public Contact getContact() {
+        return contact;
     }
 
     public Phone getPhone() {
@@ -57,10 +65,6 @@ public class Event {
         return address;
     }
 
-    public Attendance getAttendance() {
-        return attendance;
-    }
-
     public DateTime getDateTime () {
         return dateTime;
     }
@@ -71,6 +75,15 @@ public class Event {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getTagsString() {
+        List<String> tagsList = new ArrayList<>();
+        for (Tag t: tags) {
+            tagsList.add(t.tagName);
+        }
+        String tagsString = String.join(" ", tagsList);
+        return tagsString;
     }
 
     /**
@@ -84,7 +97,8 @@ public class Event {
 
         return otherEvent != null
                 && otherEvent.getName().equals(getName())
-                && (otherEvent.getPhone().equals(getPhone()) || otherEvent.getEmail().equals(getEmail()));
+                && (otherEvent.getPhone().equals(getPhone()) || otherEvent.getEmail().equals(getEmail())
+                    || otherEvent.getContact().equals(getContact()));
     }
 
     /**
@@ -103,6 +117,7 @@ public class Event {
 
         Event otherEvent = (Event) other;
         return otherEvent.getName().equals(getName())
+                && otherEvent.getContact().equals(getContact())
                 && otherEvent.getPhone().equals(getPhone())
                 && otherEvent.getEmail().equals(getEmail())
                 && otherEvent.getAddress().equals(getAddress())
@@ -113,13 +128,16 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, dateTime, tags);
+        return Objects.hash(name, contact, phone, email, address, dateTime, tags);
+
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Contact: ")
+                .append(getContact())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")

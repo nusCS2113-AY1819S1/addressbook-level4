@@ -2,6 +2,8 @@ package seedu.address.model;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -16,6 +18,8 @@ import seedu.address.model.user.User;
  * and system clock
  */
 public class DateTimeManager {
+    public static final DateFormat PAGE_DATE_FORMAT = new SimpleDateFormat("EEEEE dd-MMMMM-yyyy 'at' HH:mm a");
+
     private static AttendanceContainsUserPredicate predicate;
 
     //Use to get computer current datetime,assuming computer date is set correctly

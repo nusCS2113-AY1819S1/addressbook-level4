@@ -14,14 +14,14 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.EventManagerBuilder;
 
 public class VersionedEventManagerTest {
 
-    private final ReadOnlyEventManager addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyEventManager addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyEventManager addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyEventManager emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyEventManager addressBookWithAmy = new EventManagerBuilder().withEvent(AMY).build();
+    private final ReadOnlyEventManager addressBookWithBob = new EventManagerBuilder().withEvent(BOB).build();
+    private final ReadOnlyEventManager addressBookWithCarl = new EventManagerBuilder().withEvent(CARL).build();
+    private final ReadOnlyEventManager emptyAddressBook = new EventManagerBuilder().build();
 
     @Test
     public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {

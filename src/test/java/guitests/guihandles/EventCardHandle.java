@@ -16,6 +16,7 @@ import seedu.address.model.event.Event;
 public class EventCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
+    private static final String CONTACT_FIELD_ID = "#contact";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
     private static final String EMAIL_FIELD_ID = "#email";
@@ -24,6 +25,7 @@ public class EventCardHandle extends NodeHandle<Node> {
 
     private final Label idLabel;
     private final Label nameLabel;
+    private final Label contactLabel;
     private final Label addressLabel;
     private final Label phoneLabel;
     private final Label emailLabel;
@@ -35,6 +37,7 @@ public class EventCardHandle extends NodeHandle<Node> {
 
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
+        contactLabel = getChildNode(CONTACT_FIELD_ID);
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
         emailLabel = getChildNode(EMAIL_FIELD_ID);
@@ -54,6 +57,10 @@ public class EventCardHandle extends NodeHandle<Node> {
 
     public String getName() {
         return nameLabel.getText();
+    }
+
+    public String getContact() {
+        return contactLabel.getText();
     }
 
     public String getAddress() {
@@ -79,11 +86,18 @@ public class EventCardHandle extends NodeHandle<Node> {
                 .collect(Collectors.toList());
     }
 
+    public String getTagsString() {
+        List<String> tagsList = getTags();
+        String tagsString = String.join(" ", tagsList);
+        return tagsString;
+    }
+
     /**
      * Returns true if this handle contains {@code event}.
      */
     public boolean equals(Event event) {
         return getName().equals(event.getName().fullName)
+                && getContact().equals(event.getContact().fullContactName)
                 && getAddress().equals(event.getAddress().value)
                 && getPhone().equals(event.getPhone().value)
                 && getEmail().equals(event.getEmail().value)

@@ -61,9 +61,36 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean authenticate() {
+        return userAccount.authenticate();
+    }
+
+    @Override
+    public boolean getAdminStatus() {
+        return userAccount.getAdminStatus();
+    }
+
+    @Override
     public boolean userExists(User user) {
         requireNonNull(user);
         return userAccount.userExists(user);
+    }
+
+    @Override
+    public void createUser(User user) {
+        requireNonNull(user);
+        userAccount.createUser(user);
+    }
+
+    @Override
+    public void logUser(User user) {
+        requireNonNull(user);
+        userAccount.logUser(user);
+    }
+
+    @Override
+    public void clearUser() {
+        userAccount.clearUser();
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDANCE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -23,7 +24,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.event.Address;
-import seedu.address.model.event.Attendance;
+import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
@@ -43,6 +44,7 @@ public class EditCommand extends Command {
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_NAME + "NAME] "
+            + "[" + PREFIX_CONTACT + "CONTACT] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
@@ -105,15 +107,16 @@ public class EditCommand extends Command {
         assert eventToEdit != null;
 
         Name updatedName = editEventDescriptor.getName().orElse(eventToEdit.getName());
+        Contact updatedContact = editEventDescriptor.getContact().orElse(eventToEdit.getContact());
         Phone updatedPhone = editEventDescriptor.getPhone().orElse(eventToEdit.getPhone());
         Email updatedEmail = editEventDescriptor.getEmail().orElse(eventToEdit.getEmail());
         Address updatedAddress = editEventDescriptor.getAddress().orElse(eventToEdit.getAddress());
-        Attendance updatedAttendance = editEventDescriptor.getAttendance().orElse(eventToEdit.getAttendance());
         DateTime updateDateTime = editEventDescriptor.getDateTime().orElse(eventToEdit.getDateTime());
         Set<Tag> updatedTags = editEventDescriptor.getTags().orElse(eventToEdit.getTags());
 
-        return new Event(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                            updatedAttendance, updateDateTime, updatedTags);
+        return new Event(updatedName, updatedContact, updatedPhone, updatedEmail, updatedAddress,
+                            updateDateTime, updatedTags);
+
     }
 
     @Override
@@ -140,11 +143,12 @@ public class EditCommand extends Command {
      */
     public static class EditEventDescriptor {
         private Name name;
+        private Contact contact;
         private Phone phone;
         private Email email;
         private Address address;
-        private Attendance attendance;
         private DateTime dateTime;
+
         private Set<Tag> tags;
 
         public EditEventDescriptor() {}
@@ -155,10 +159,10 @@ public class EditCommand extends Command {
          */
         public EditEventDescriptor(EditEventDescriptor toCopy) {
             setName(toCopy.name);
+            setContact(toCopy.contact);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
-            setAttendance(toCopy.attendance);
             setTags(toCopy.tags);
             setDate(toCopy.dateTime);
         }
@@ -167,7 +171,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, attendance, dateTime, tags);
+            return CollectionUtil.isAnyNonNull(name, contact, phone, email, address, dateTime, tags);
         }
 
         public void setName(Name name) {
@@ -176,6 +180,14 @@ public class EditCommand extends Command {
 
         public Optional<Name> getName() {
             return Optional.ofNullable(name);
+        }
+
+        public void setContact(Contact contact) {
+            this.contact = contact;
+        }
+
+        public Optional<Contact> getContact() {
+            return Optional.ofNullable(contact);
         }
 
         public void setPhone(Phone phone) {
@@ -200,14 +212,6 @@ public class EditCommand extends Command {
 
         public Optional<Address> getAddress() {
             return Optional.ofNullable(address);
-        }
-
-        public void setAttendance(Attendance attendance) {
-            this.attendance = attendance;
-        }
-
-        public Optional<Attendance> getAttendance() {
-            return Optional.ofNullable(attendance);
         }
 
         public void setDate(DateTime dateTime) {
@@ -251,10 +255,10 @@ public class EditCommand extends Command {
             EditEventDescriptor e = (EditEventDescriptor) other;
 
             return getName().equals(e.getName())
+                    && getContact().equals(e.getContact())
                     && getPhone().equals(e.getPhone())
                     && getEmail().equals(e.getEmail())
                     && getAddress().equals(e.getAddress())
-                    && getAttendance().equals(e.getAttendance())
                     && getDateTime().equals(e.getDateTime())
                     && getTags().equals(e.getTags());
         }

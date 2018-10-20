@@ -43,7 +43,7 @@ public class EventListPanelTest extends GuiUnitTest {
         for (int i = 0; i < TYPICAL_EVENTS.size(); i++) {
             eventListPanelHandle.navigateToCard(TYPICAL_EVENTS.get(i));
             Event expectedEvent = TYPICAL_EVENTS.get(i);
-            EventCardHandle actualCard = eventListPanelHandle.getPersonCardHandle(i);
+            EventCardHandle actualCard = eventListPanelHandle.getEventCardHandle(i);
 
             assertCardDisplaysPerson(expectedEvent, actualCard);
             assertEquals(Integer.toString(i + 1) + ". ", actualCard.getId());
@@ -56,7 +56,7 @@ public class EventListPanelTest extends GuiUnitTest {
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        EventCardHandle expectedPerson = eventListPanelHandle.getPersonCardHandle(INDEX_SECOND_EVENT.getZeroBased());
+        EventCardHandle expectedPerson = eventListPanelHandle.getEventCardHandle(INDEX_SECOND_EVENT.getZeroBased());
         EventCardHandle selectedPerson = eventListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }
@@ -96,6 +96,7 @@ public class EventListPanelTest extends GuiUnitTest {
         for (int i = 0; i < personCount; i++) {
             builder.append("<persons>\n");
             builder.append("<name>").append(i).append("a</name>\n");
+            builder.append("<contact>BAA</contact>\n");
             builder.append("<phone>000</phone>\n");
             builder.append("<email>a@aa</email>\n");
             builder.append("<address>a</address>\n");
