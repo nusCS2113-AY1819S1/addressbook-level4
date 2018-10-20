@@ -26,11 +26,23 @@ import seedu.address.model.person.exceptions.TimeSlotOverlapException;
  */
 public class IcsUtil {
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
+    private static IcsUtil instance;
+
+    private IcsUtil(){
+
+    }
+
+    public static IcsUtil getInstance(){
+        if (instance == null) {
+            instance = new IcsUtil();
+        }
+        return instance;
+    }
 
     /**
      * Returns the data in the ICS file as a TimeTableObject
      */
-    public static Optional<TimeTable> getTimeTableFromFile(Path file)
+    public Optional<TimeTable> getTimeTableFromFile(Path file)
             throws DataConversionException {
 
         requireNonNull(file);
@@ -60,7 +72,7 @@ public class IcsUtil {
     /**
      * Parses the string from an ics file into a timetable object
      */
-    private static Optional<TimeTable> stringToTimeTableParser(String string) throws DataConversionException {
+    private Optional<TimeTable> stringToTimeTableParser(String string) throws DataConversionException {
 
         TimeTable timeTable = new TimeTable();
 
@@ -83,7 +95,7 @@ public class IcsUtil {
     /**
      * Parses the chunk (a string) into the equivalent TimeSlot object
      */
-    private static Optional<TimeSlot> convertChunkToTimeSlot(TimeTable newTimeTable, String chunk)
+    private Optional<TimeSlot> convertChunkToTimeSlot(TimeTable newTimeTable, String chunk)
             throws DataConversionException {
         String[] linesInChunk = chunk.split("\\r\\n|[\\n\\x0B\\x0C\\r\\u0085\\u2028\\u2029]");
 
@@ -154,7 +166,7 @@ public class IcsUtil {
     /**
      * Converts the date in the ics file into day (1-7).
      */
-    private static DayOfWeek icsStringToDay(String dateString) {
+    private DayOfWeek icsStringToDay(String dateString) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate date = LocalDate.parse(dateString, fmt);
         DayOfWeek day = date.getDayOfWeek();
@@ -165,7 +177,7 @@ public class IcsUtil {
     /**
      * Converts the ics-formatted string into a LocalTime object.
      */
-    private static LocalTime icsStringToTime(String icsTime) {
+    private LocalTime icsStringToTime(String icsTime) {
         int timeInt = Integer.parseInt(icsTime);
         timeInt += 80000; //need to add 8 hours to the ics-formatted version.
         String formattedTime = String.format("%06d", timeInt);

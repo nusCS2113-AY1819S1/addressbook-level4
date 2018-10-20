@@ -75,7 +75,7 @@ public class ImportCommand extends Command {
         TimeTable timeTable;
 
         try {
-            optionalTimeTable = IcsUtil.getTimeTableFromFile(filePath);
+            optionalTimeTable = IcsUtil.getInstance().getTimeTableFromFile(filePath);
         } catch (DataConversionException e) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
