@@ -15,17 +15,20 @@ public class CommentRepository extends BaseRepository implements ICommentReposit
 
     @Override
     public int addComment(Comment comment) {
-        return 0;
+        forumBookStorage.getComments().getList().add(comment);
+        forumBookStorage.getComments().setDirty();
+        return comment.getId();
     }
 
     @Override
     public void deleteComment(Comment comment) {
-
+        this.deleteComment(comment.getId());
     }
 
     @Override
     public void deleteComment(int commentId) {
-
+        forumBookStorage.getComments().getList().removeIf(comment -> comment.getId() == commentId);
+        forumBookStorage.getComments().setDirty();
     }
 
     @Override

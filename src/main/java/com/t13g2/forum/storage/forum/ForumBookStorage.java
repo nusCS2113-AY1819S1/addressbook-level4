@@ -141,5 +141,15 @@ public class ForumBookStorage implements IForumBookStorage {
         return users;
     }
 
+    @Override
+    public ModuleStorage getModules() {
+        return modules;
+    }
+
+    @Override
+    public CommentStorage getComments() {
+        return comments;
+    }
+
 
 }
