@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <MenuBar id="menuBar" VBox.vgrow="NEVER">
+    <Menu mnemonicParsing="false" text="File">
+      <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+    </Menu>
+    <Menu mnemonicParsing="false" text="Help">
+         <items>
+         <MenuItem id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help">
+               <graphic>
+                  <MenuButton mnemonicParsing="false" text="MenuButton">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="Action 1" />
+                      <MenuItem mnemonicParsing="false" text="Action 2" />
+                    </items>
+                  </MenuButton>
+               </graphic>
+            </MenuItem>
+         </items>
+    </Menu>
+      <Menu mnemonicParsing="false" onAction="#handleLogout" text="Logout">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+        </items>
+      </Menu>
+  </MenuBar>
+
+  <StackPane id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+    <padding>
+      <Insets bottom="5" left="10" right="10" top="5" />
+    </padding>
+  </StackPane>
+
+  <StackPane id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="pane-with-border" VBox.vgrow="NEVER">
+    <padding>
+      <Insets bottom="5" left="10" right="10" top="5" />
+    </padding>
+  </StackPane>
+
+  <SplitPane id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+    <VBox id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+      <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+      </padding>
+      <StackPane id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+    </VBox>
+
+    <StackPane id="timetablePlaceholder" prefWidth="340">
+      <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+      </padding>
+    </StackPane>
+  </SplitPane>
+
+  <StackPane id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+</VBox>

@@ -41,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Security security;
 
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
@@ -86,6 +87,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.security = security;
         this.config = config;
         this.prefs = prefs;
 
@@ -226,6 +228,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Opens the Registration Window.
      */
@@ -242,16 +248,20 @@ public class MainWindow extends UiPart<Stage> {
         raise(new SuccessfulLoginEvent()); //Calls method fill in data
     }
 
-    void show() {
-        primaryStage.show();
-    }
-
     /**
      * Closes the application.
      */
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
+    }
+
+    /***
+     * Logs out of the application
+     */
+    @FXML
+    public void handleLogout() {
+        security.logout();
     }
 
     public PersonListPanel getPersonListPanel() {
