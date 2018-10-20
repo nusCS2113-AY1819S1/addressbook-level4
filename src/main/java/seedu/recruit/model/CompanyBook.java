@@ -120,11 +120,20 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     // job offer level operations
 
     /**
-     * Adds a job offer to an existing company in the CompanyBook to the recruit book.
+     * Adds a job offer to an existing company in the CompanyBook
      */
     public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
         companyList.addJobOfferToCompany(companyName, jobOffer);
         companyJobList.add(jobOffer);
+    }
+
+    /**
+     * Deletes a job offer from an existing company in the CompanyBook.
+     * @param jobOffer must exist inside the CompanyBook
+     */
+
+    public void deleteJobOffer(JobOffer jobOffer) {
+        companyList.deleteJobOffer(jobOffer);
     }
 
     //// util methods

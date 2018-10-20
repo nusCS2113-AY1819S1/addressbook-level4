@@ -60,6 +60,17 @@ public class UniqueJobList implements Iterable<JobOffer> {
         internalList.add(toAdd);
     }
 
+    /**
+     * Removes the equivalent job offer from the list.
+     * The job offer must exist in the list.
+     */
+    public void remove(JobOffer toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new JobNotFoundException();
+        }
+    }
+
 
     /**
      * Replaces the job offer {@code target} in the list with {@code editedJobOffer}.
@@ -79,17 +90,6 @@ public class UniqueJobList implements Iterable<JobOffer> {
         }
 
         internalList.set(index, editedJobOffer);
-    }
-
-    /**
-     * Removes the equivalent job offer from the list.
-     * The job offer must exist in the list.
-     */
-    public void remove(JobOffer toRemove) {
-        requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
-            throw new JobNotFoundException();
-        }
     }
 
     public void setJobOffers (UniqueJobList replacement) {

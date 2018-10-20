@@ -18,7 +18,7 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
 import seedu.recruit.logic.commands.ClearCandidateBookCommand;
-import seedu.recruit.logic.commands.DeleteCommand;
+import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand;
 import seedu.recruit.logic.commands.EditCandidateCommand.EditPersonDescriptor;
 import seedu.recruit.logic.commands.ExitCommand;
@@ -66,9 +66,9 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_delete() throws Exception {
-        DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(), state, emailUtil);
-        assertEquals(new DeleteCommand(INDEX_FIRST_PERSON), command);
+        DeleteCandidateCommand command = (DeleteCandidateCommand) parser.parseCommand(
+                DeleteCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(), state, emailUtil);
+        assertEquals(new DeleteCandidateCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test

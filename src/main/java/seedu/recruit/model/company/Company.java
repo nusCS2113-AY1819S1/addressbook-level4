@@ -71,6 +71,10 @@ public class Company {
         jobOffers.add(jobOffer);
     }
 
+    public void removeJobOffer(JobOffer jobOffer) {
+        jobOffers.remove(jobOffer);
+    }
+
     /**
      * Returns true if both companies is of the same name
      * This defines a weaker notion of equality between two companies.
