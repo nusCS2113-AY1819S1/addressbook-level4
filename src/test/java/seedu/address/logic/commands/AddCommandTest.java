@@ -90,6 +90,11 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void createUser(User user) {
+            throw new AssertionError("This method should not be called!");
+        }
+
+        @Override
         public boolean userExists(User user) {
             throw new AssertionError("This method should not be called");
         }
