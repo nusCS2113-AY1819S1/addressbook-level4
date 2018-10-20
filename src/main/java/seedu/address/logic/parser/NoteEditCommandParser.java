@@ -36,13 +36,13 @@ public class NoteEditCommandParser implements Parser<NoteEditCommand> {
         final String index = matcher.group("index");
         final String optionalParams = matcher.group("optionalParams");
 
-        if (!index.matches("\\d+")) {
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(optionalParams, PREFIX_MODULECODE, PREFIX_NOTE_DATE);
+
+        if (!index.matches("\\d+") || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     NoteEditCommand.MESSAGE_USAGE));
         }
-
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(optionalParams, PREFIX_MODULECODE, PREFIX_NOTE_DATE);
 
         String moduleCode = "";
         String date = "";

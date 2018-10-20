@@ -21,9 +21,9 @@ public class NoteEditCommand extends Command {
             + "Parameters: "
             + "INDEX "
             + "[" + PREFIX_MODULECODE
-            + "MODULE_CODE] "
+            + "NEW_MODULE_CODE] "
             + "[" + PREFIX_NOTE_DATE
-            + "DATE]\n"
+            + "NEW_DATE]\n"
             + "Example: " + COMMAND_WORD + " "
             + "4";
 

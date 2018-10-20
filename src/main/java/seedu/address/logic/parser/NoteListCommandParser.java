@@ -4,6 +4,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.NoteListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -23,8 +24,11 @@ public class NoteListCommandParser implements Parser<NoteListCommand> {
         if (arePrefixesPresent(argMultimap, PREFIX_MODULECODE)) {
             String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
             return new NoteListCommand(moduleCode);
-        } else {
+        } else if (args.trim().isEmpty()) {
             return new NoteListCommand("");
+        } else {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                    NoteListCommand.MESSAGE_USAGE));
         }
     }
 

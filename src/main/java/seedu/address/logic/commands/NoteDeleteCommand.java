@@ -33,7 +33,7 @@ public class NoteDeleteCommand extends Command {
         NoteManager noteManager = new NoteManager();
 
         if (index > noteManager.getNotes().size() || index < 1) {
-            return new CommandResult(String.format(MESSAGE_INVALID_INDEX, index));
+            throw new CommandException(String.format(MESSAGE_INVALID_INDEX, index));
         } else {
             noteManager.deleteNote(index - 1);
             noteManager.saveNoteList();

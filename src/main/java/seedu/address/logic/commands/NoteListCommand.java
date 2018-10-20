@@ -9,12 +9,20 @@ import seedu.address.model.Model;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteManager;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+
 /**
  * Lists notes based on given predicate.
  */
 public class NoteListCommand extends Command {
 
     public static final String COMMAND_WORD = "note list";
+
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists notes. "
+            + "Parameters: "
+            + "[" + PREFIX_MODULECODE + "MODULE_CODE]\n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_MODULECODE + "CS2113";
 
     public static final String MESSAGE_SUCCESS = "Listed %1$s note(s).";
 

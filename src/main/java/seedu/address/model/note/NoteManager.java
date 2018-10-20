@@ -5,6 +5,10 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedNote;
+import seedu.address.ui.NoteTextEditWindow;
+
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Represents the in-memory model of the Note data.
@@ -28,7 +32,9 @@ public class NoteManager {
      * Deletes the specified note from the in-memory ArrayList.
      */
     public void deleteNote(int index) {
-        notes.remove(index);
+        if (index < notes.size()) {
+            notes.remove(index);
+        }
     }
 
     /**
@@ -39,19 +45,27 @@ public class NoteManager {
      * @param newNote
      */
     public void editNote(int index, Note newNote) {
+        requireAllNonNull(index, newNote);
         notes.set(index, newNote);
     }
 
     /**
      * Retrieves the Note object at the specified {@code index}.
      *
-     * @param index
-     * @return Note object.
+     * @param index index of the element to retrieve
+     * @return Note object at the specified index, or null if index is out of bounds.
      */
     public Note getNoteAt(int index) {
-        return notes.get(index);
-    }
+        Note noteToGet;
 
+        try {
+            noteToGet = notes.get(index);
+            return noteToGet;
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     /**
      * Gets the note list from storage and converts it to a Notes array list.
