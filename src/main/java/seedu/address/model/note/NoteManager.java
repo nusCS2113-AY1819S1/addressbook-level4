@@ -92,4 +92,8 @@ public class NoteManager {
     public void setModules(ArrayList<Note> notes) {
         this.notes = notes;
     }
+
+    public void clearNotes() {
+        notes.clear();
+    }
 }

@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -34,13 +36,19 @@ public class NoteAddCommandParserTest {
 
     @Test
     public void parse_validArgs_success() throws ParseException {
+        String expectedMessage = NoteAddCommand.MESSAGE_SUCCESS;
+
         // valid arguments with optional arguments
         String args = " m/CS2113 d/1/2/2020";
-        parser.parse(args);
+        NoteAddCommand noteAddCommand = parser.parse(args);
+
+        assertNotNull(noteAddCommand);
 
         // valid arguments
         args = " m/CS2040C";
-        parser.parse(args);
+        noteAddCommand = parser.parse(args);
+
+        assertNotNull(noteAddCommand);
     }
 
     @Test
@@ -56,6 +64,4 @@ public class NoteAddCommandParserTest {
 
         parser.parse(args);
     }
-
-
 }
