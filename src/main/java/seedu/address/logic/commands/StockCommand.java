@@ -25,7 +25,7 @@ import seedu.address.model.book.Quantity;
 import seedu.address.model.tag.Tag;
 
 /**
- * Stocks the details of an existing book in the quantity book.
+ * Stocks the details of an existing book in the BookInventory.
  */
 public class StockCommand extends Command {
 

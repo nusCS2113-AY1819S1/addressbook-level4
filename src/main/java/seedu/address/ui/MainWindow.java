@@ -52,7 +52,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane bookListPanelPlaceholder;
 
     @FXML
     private StackPane requestListPanelPlaceholder;
@@ -129,7 +129,7 @@ public class MainWindow extends UiPart<Stage> {
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         bookListPanel = new BookListPanel(logic.getFilteredBookList());
-        personListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
+        bookListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
 
         requestListPanel = new RequestListPanel(logic.getFilteredRequestList());
         requestListPanelPlaceholder.getChildren().addAll(requestListPanel.getRoot());
@@ -140,13 +140,11 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getBookInventoryFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        StatusBarFooter requestStatusBarFooter = new StatusBarFooter(prefs.getRequestListFilePath());
+        statusbarPlaceholder.getChildren().add(requestStatusBarFooter.getRoot());
+
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
-    }
-
-    void showBookList () {
-        bookListPanel = new BookListPanel(logic.getFilteredBookList());
-        personListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
     }
 
     void hide() {

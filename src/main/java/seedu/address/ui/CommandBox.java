@@ -41,10 +41,7 @@ public class CommandBox extends UiPart<Region> {
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
         commandHistory = new CommandHistory();
-        commands = commandHistory.getHistory();
         commandHistoryPointer = 0;
-        commands.add("add n/Hello World i/9783161484100 p/19.99 c/15.00 q/50 t/cs2113t t/coding");
-        commands.add("request i/9783161484100 q/42 e/johnd@example.com ");
     }
 
     /**
@@ -63,8 +60,9 @@ public class CommandBox extends UiPart<Region> {
             keyEvent.consume();
             navigateToNextInput();
             break;
-        case TAB:
+        case SHIFT:
             keyEvent.consume();
+            commands = logic.getHistoryList();
             if (commands.size() == 0) {
                 break;
             }
