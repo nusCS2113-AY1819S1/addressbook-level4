@@ -1,9 +1,7 @@
 //@@author lws803
 package seedu.address.logic.commands;
 
-import java.util.logging.Logger;
-
-import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.FileEncryptorException;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,9 +19,9 @@ public class PasswordCommand extends Command {
             + "Parameters: KEYWORD PASSWORD...\\n"
             + "Example: " + COMMAND_WORD + " myPassword";
 
-    // public static final String MESSAGE_SUCCESS = "Command executed";
+    public static final String MESSAGE_ENCRYPT_SUCCESS = "File encrypted!";
+    public static final String MESSAGE_DECRYPT_SUCCESS = "File decrypted!";
 
-    private static final Logger logger = LogsCenter.getLogger(PasswordCommand.class);
     private String password;
     private FileEncryptor fe;
 
@@ -40,17 +38,21 @@ public class PasswordCommand extends Command {
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
 
-        if (!fe.isAlphanumeric(this.password)) {
-            throw new CommandException(FileEncryptor.MESSAGE_PASSWORD_ALNUM);
+        String message;
+        try {
+            message = fe.process(this.password);
+        } catch (FileEncryptorException fex) {
+            return new CommandResult(fex.getLocalizedMessage());
         }
-        // TODO: Let FE throw the error instead of getting the message from it.
-        fe.process(this.password);
-        String message = fe.getMessage();
 
         model.reinitAddressbook();
         model.getTextPrediction().reinitialise();
 
-        return new CommandResult(message);
+        if (message == FileEncryptor.MESSAGE_DECRYPTED) {
+            return new CommandResult(MESSAGE_DECRYPT_SUCCESS);
+        } else {
+            return new CommandResult(MESSAGE_ENCRYPT_SUCCESS);
+        }
     }
 
 }
