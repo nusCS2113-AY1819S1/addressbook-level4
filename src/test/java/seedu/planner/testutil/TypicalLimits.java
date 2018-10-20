@@ -39,10 +39,9 @@ public class TypicalLimits {
 
     public static final MoneyFlow TYPICAL_LIMIT_MONEY_101 = new MoneyFlow("-101");
     public static final MoneyFlow TYPICAL_LIMIT_MONEY_100 = new MoneyFlow("-100");
-    public static final MoneyFlow TYPICAL_LIMIT_MONEY_501 = new MoneyFlow("-501");
     public static final MoneyFlow TYPICAL_LIMIT_EXCEEDED = new MoneyFlow("-999999");
     public static final MoneyFlow TYPICAL_LIMIT_NOT_EXCEEDED = new MoneyFlow("-1");
-    public static final MoneyFlow TYPICAL_LIMIT_MONEY_EARMED = new MoneyFlow("+100");
+    public static final MoneyFlow TYPICAL_LIMIT_MONEY_EARNED = new MoneyFlow("+100");
     public static final Date TYPICAL_START_DATE = new Date("01-02-2018");
     public static final Date TYPICAL_WITHIN_DATE = new Date("03-02-2018");
     public static final Date TYPICAL_END_DATE = new Date("05-02-2018");

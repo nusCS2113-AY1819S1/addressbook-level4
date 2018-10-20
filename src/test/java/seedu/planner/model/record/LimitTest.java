@@ -13,7 +13,7 @@ import static seedu.planner.testutil.TypicalLimits.TYPICAL_END_DATE;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_EXCEEDED;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_MONEY_100;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_MONEY_101;
-import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_MONEY_EARMED;
+import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_MONEY_EARNED;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_LIMIT_NOT_EXCEEDED;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_NOT_INSIDE_DATE;
 import static seedu.planner.testutil.TypicalLimits.TYPICAL_START_DATE;
@@ -75,7 +75,7 @@ public class LimitTest {
         assertFalse(LIMIT_100.isExceeded(TYPICAL_LIMIT_MONEY_100.toDouble()));
 
         //user have earned money -> returns false
-        assertFalse(LIMIT_100.isExceeded(TYPICAL_LIMIT_MONEY_EARMED.toDouble()));
+        assertFalse(LIMIT_100.isExceeded(TYPICAL_LIMIT_MONEY_EARNED.toDouble()));
 
     }
 
