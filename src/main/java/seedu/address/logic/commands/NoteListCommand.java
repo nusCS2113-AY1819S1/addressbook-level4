@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.note.Note;
 import seedu.address.model.note.NoteManager;
 
-
 /**
  * Lists notes based on given predicate.
  */
@@ -17,7 +16,7 @@ public class NoteListCommand extends Command {
 
     public static final String COMMAND_WORD = "note list";
 
-    public static final String MESSAGE_SUCCESS = "Listed %1$s note(s).\n";
+    public static final String MESSAGE_SUCCESS = "Listed %1$s note(s).";
 
     public static final String MESSAGE_NOT_FOUND = "No notes were found.";
 
@@ -43,20 +42,23 @@ public class NoteListCommand extends Command {
         StringBuilder sb = new StringBuilder();
 
         int listId = 1;
+        int size = filteredNotes.size();
+
         for (Note n: filteredNotes) {
-            sb.append(listId++ + ":\n");
+            sb.append(listId + ":\n");
             sb.append("Module Code: ");
             sb.append(n.getModuleCode() + "\n");
             sb.append("Date: ");
             sb.append(n.getDate() + "\n");
             sb.append("Note:\n");
-            sb.append(n.getNoteText() + "\n\n");
+            sb.append(n.getNoteText() + ((listId < size) ? "\n\n" : "\n"));
+            listId++;
         }
 
         if (sb.length() > 0) {
             return new CommandResult(
-                    String.format(MESSAGE_SUCCESS, filteredNotes.size(), "s")
-                            + "\n" + sb.toString());
+                    String.format(MESSAGE_SUCCESS, filteredNotes.size())
+                            + "\n\n" + sb.toString());
         } else {
             return new CommandResult(String.format(MESSAGE_NOT_FOUND));
         }
