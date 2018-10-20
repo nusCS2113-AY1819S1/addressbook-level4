@@ -2,6 +2,7 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,6 +18,11 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.FileEncryptorException;
 import seedu.address.commons.util.FileEncryptor;
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
 
 /**
  * Testing for password encrypytion and decryption
@@ -28,6 +34,9 @@ public class PasswordCommandTest {
     private String password = "test1234";
     private String tempFileName = "test.tmp";
     private String toWrite = "Hello";
+    private Model model;
+    private CommandHistory commandHistory = new CommandHistory();
+    private File tmpFile;
 
     /**
      * Sets up the temporary file
@@ -35,19 +44,20 @@ public class PasswordCommandTest {
      */
     @Before
     public void setup () throws IOException {
-        File tmpFile = new File(tempFileName);
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        tmpFile = new File(tempFileName);
         FileWriter writer = new FileWriter(tmpFile);
         writer.write(toWrite);
         writer.close();
     }
 
     /**
-     * Encryption and decryption test command
+     * FileEncrypter Encryption and decryption test command
      */
     @Test
     public void encryptDecryptTest () throws IOException {
 
-        FileEncryptor feEncrypt = new FileEncryptor(tempFileName);
+        FileEncryptor feEncrypt = new FileEncryptor(tmpFile.getPath());
 
         try {
             String message = feEncrypt.process(password);
@@ -69,6 +79,26 @@ public class PasswordCommandTest {
     }
 
     /**
+     * PasswordCommand unit test
+     */
+    @Test
+    public void passwordTest () {
+        assertPasswordCommandSuccess(
+                new PasswordCommand(password, tmpFile.getPath()),
+                model,
+                commandHistory,
+                PasswordCommand.MESSAGE_ENCRYPT_SUCCESS
+        );
+
+        assertPasswordCommandSuccess(
+                new PasswordCommand(password, tmpFile.getPath()),
+                model,
+                commandHistory,
+                PasswordCommand.MESSAGE_DECRYPT_SUCCESS
+        );
+    }
+
+    /**
      * Cleans up the temp file
      */
     @After
@@ -76,4 +106,24 @@ public class PasswordCommandTest {
         File tmpFile = new File(tempFileName);
         tmpFile.delete();
     }
+
+
+    /**
+     * AssertCommand method specifically to test password command success
+     * @param command
+     * @param actualModel
+     * @param actualCommandHistory
+     * @param expectedMessage
+     */
+    public static void assertPasswordCommandSuccess(Command command, Model actualModel,
+                                                    CommandHistory actualCommandHistory,
+                                                    String expectedMessage) {
+        try {
+            CommandResult result = command.execute(actualModel, actualCommandHistory);
+            assertEquals(expectedMessage, result.feedbackToUser);
+        } catch (CommandException ce) {
+            throw new AssertionError("Execution of command should not fail.", ce);
+        }
+    }
+
 }

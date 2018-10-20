@@ -6,7 +6,6 @@ import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.UserPrefs;
 
 /**
  * Encrypts the XML data using a password and returns a message
@@ -29,10 +28,9 @@ public class PasswordCommand extends Command {
      * Executes the FileEncryptor and obtains a message
      * @param credentials will be obtained from parser
      */
-    public PasswordCommand (String[] credentials) {
-        UserPrefs userPref = new UserPrefs();
-        fe = new FileEncryptor(userPref.getAddressBookFilePath().toString());
-        this.password = credentials[0];
+    public PasswordCommand (String credentials, String path) {
+        fe = new FileEncryptor(path);
+        this.password = credentials;
     }
 
     @Override
@@ -42,7 +40,7 @@ public class PasswordCommand extends Command {
         try {
             message = fe.process(this.password);
         } catch (FileEncryptorException fex) {
-            return new CommandResult(fex.getLocalizedMessage());
+            throw new CommandException(fex.getLocalizedMessage());
         }
 
         model.reinitAddressbook();
