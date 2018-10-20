@@ -60,6 +60,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean authenticate() {
+        return userAccount.authenticate();
+    }
+
+    @Override
+    public boolean getAdminStatus() {
+        return userAccount.getAdminStatus();
+    }
+
+    @Override
     public boolean userExists(User user) {
         requireNonNull(user);
         return userAccount.userExists(user);
