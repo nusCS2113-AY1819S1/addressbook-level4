@@ -2,14 +2,15 @@ package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 
-import javafx.collections.ObservableList;
 import seedu.planner.commons.core.EventsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.Model;
+import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
-import seedu.planner.model.summary.Summary;
+import seedu.planner.model.summary.SummaryByDateList;
 
 /** List all the summary of records within a period of time specified */
 public class SummaryCommand extends Command {
@@ -34,8 +35,10 @@ public class SummaryCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        ObservableList<Summary> summaryList = model.getSummaryList(startDate, endDate);
-        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList));
+        ReadOnlyFinancialPlanner financialPlanner = model.getFinancialPlanner();
+        SummaryByDateList summaryList = new SummaryByDateList(financialPlanner.getRecordList(),
+                PREDICATE_SHOW_ALL_RECORDS);
+        EventsCenter.getInstance().post(new ShowSummaryTableEvent(summaryList.getSummaryList()));
         return new CommandResult(String.format(MESSAGE_SUCCESS, summaryList.size()));
     }
 
