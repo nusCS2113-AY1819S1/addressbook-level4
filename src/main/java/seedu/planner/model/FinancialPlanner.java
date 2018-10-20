@@ -184,6 +184,11 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void addLimit(Limit limit) {
         limits.add(limit); }
 
+    public void updateLimit(Limit target, Limit editedLimit) {
+        requireNonNull(editedLimit);
+
+        limits.setLimit(target, editedLimit);
+    }
     /**
      * check whether the records' money has already exceeded the limit.
      * return true if limit exceeded.

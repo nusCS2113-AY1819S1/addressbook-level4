@@ -63,6 +63,13 @@ public interface Model {
     void updateRecord(Record target, Record editedRecord);
 
     /**
+     * Replace the limit inside the limit list according to the given limit dates
+     * @param target
+     * @param editedLimit
+     */
+    void updateLimit(Limit target, Limit editedLimit);
+
+    /**
      * To delete a existing limit.
      * @param target
      */

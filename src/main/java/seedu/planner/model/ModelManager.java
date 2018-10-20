@@ -146,6 +146,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(limitIn);
         return (versionedFinancialPlanner.isExceededLimit(limitIn));
     }
+    @Override
+    public void updateLimit(Limit target, Limit editedLimit) {
+        requireAllNonNull(target, editedLimit);
+        versionedFinancialPlanner.updateLimit(target, editedLimit);
+        indicateLimitListChanged();
+    }
 
     //=========== Filtered Record List Accessors =============================================================
 
