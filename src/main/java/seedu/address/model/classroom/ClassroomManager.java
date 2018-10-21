@@ -1,8 +1,13 @@
 package seedu.address.model.classroom;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedClassroom;
 
@@ -10,10 +15,12 @@ import seedu.address.storage.adapter.XmlAdaptedClassroom;
  * This classroom manager stores classrooms for Trajectory.
  */
 public class ClassroomManager {
+    private static final Logger logger = LogsCenter.getLogger(ClassroomManager.class);
+
     private static ClassroomManager classroomManager = null;
     private ArrayList<Classroom> classroomList = new ArrayList<>();
 
-    public ClassroomManager() {
+    private ClassroomManager() {
         readClassroomList();
     }
 
@@ -57,7 +64,11 @@ public class ClassroomManager {
     private void readClassroomList() {
         ArrayList<XmlAdaptedClassroom> xmlClassroomList = StorageController.getClassesStorage();
         for (XmlAdaptedClassroom xmlClassroom : xmlClassroomList) {
-            classroomList.add(xmlClassroom.toModelType());
+            try {
+                classroomList.add(xmlClassroom.toModelType());
+            } catch (IllegalValueException e) {
+                logger.info("Illegal values found when reading classroom list: " + e.getMessage());
+            }
         }
     }
 
@@ -80,5 +91,14 @@ public class ClassroomManager {
 
     public void setClassroomList(ArrayList<Classroom> classroomList) {
         this.classroomList = classroomList;
+    }
+
+    /**
+     * Returns true if a classroom with the same identity as {@code classToCreate} exists in the classroom list.
+     */
+    public boolean hasClassroom(Classroom classToCreate) {
+        requireNonNull(classToCreate);
+        return (findClassroom(classToCreate.getClassName().getValue(),
+                classToCreate.getModuleCode().getValue())) != null;
     }
 }

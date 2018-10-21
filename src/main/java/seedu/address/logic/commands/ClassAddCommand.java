@@ -28,12 +28,11 @@ public class ClassAddCommand extends Command {
             + PREFIX_MODULECODE + "CG1111 "
             + PREFIX_MAXENROLLMENT + "20";
 
-    public static final String MESSAGE_NOT_IMPLEMENTED_YET = "Class create command not implemented yet.";
     public static final String MESSAGE_SUCCESS = "New class added: %1$s,"
             + " ClassModule code: %2$s,"
             + " Enrollment size: %3$s";
 
-    public static final String MESSAGE_ARGUMENTS = "Class name: %1$s, ClassModule code: %2$s, Enrollment size: %3$s";
+    public static final String MESSAGE_DUPLICATE_CLASSROOM = "This classroom already exists in Trajectory";
 
     private final Classroom classToCreate;
 
@@ -56,6 +55,11 @@ public class ClassAddCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         ClassroomManager classroomManager = ClassroomManager.getInstance();
+
+        if (classroomManager.hasClassroom(classToCreate)) {
+            throw new CommandException(MESSAGE_DUPLICATE_CLASSROOM);
+        }
+
         classroomManager.addClassroom(classToCreate);
         classroomManager.saveClassroomList();
 
