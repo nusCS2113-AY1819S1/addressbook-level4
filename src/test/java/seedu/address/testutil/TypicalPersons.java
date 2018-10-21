@@ -90,6 +90,9 @@ public class TypicalPersons {
     public static final Person JOELTAN = new PersonBuilder().withName("Joel Tan").withGender("MALE")
             .withNationality("SG").withPhone("98989898").withEmail("joel.twh@u.nus.edu")
             .withAddress("West Side").build();
+    public static final Person TSURAJOVIN = new PersonBuilder().withName("Tsuraj Jovin").withGender("FEMALE")
+            .withNationality("SG").withPhone("98765432").withEmail("tsurajovin@gmail.com")
+            .withAddress("PSC Building").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder()
@@ -125,6 +128,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getMultipleValidTypicalPerson() {
-        return new ArrayList<>(Arrays.asList(JOEL, WEIQUAN, NOVIN, JOELTAN));
+        return new ArrayList<>(Arrays.asList(JOEL, WEIQUAN, NOVIN, JOELTAN, TSURAJOVIN));
     }
 }

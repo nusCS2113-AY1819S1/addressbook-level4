@@ -20,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.email.Domain;
 import seedu.address.model.email.Message;
 import seedu.address.model.email.Subject;
 
@@ -56,7 +57,7 @@ public class EmailCommandTest {
     public void execute_sendEmailToMultiplePersonSuccessful() throws Exception {
         setValidLogin();
         try {
-            indexList = ParserUtil.parseMultipleIndex("1,2,3,4");
+            indexList = ParserUtil.parseMultipleIndex("1,2,3,4,5");
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
         }
@@ -84,7 +85,7 @@ public class EmailCommandTest {
     public void execute_sendEmailToMultiplePersonUnsuccessfulDueToInvalidLogin() throws Exception {
         setInvalidLogin();
         try {
-            indexList = ParserUtil.parseMultipleIndex("1,2,3,4");
+            indexList = ParserUtil.parseMultipleIndex("1,2,3,4,5");
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
         }
@@ -99,8 +100,8 @@ public class EmailCommandTest {
      * Method to set valid email account for sending emails.
      */
     public void setValidLogin() {
-        EmailUtil.setUserEmailAddress("Tsurajovin@gmail.com");
-        EmailUtil.setUserEmailPassword("Tsurajovin!123");
+        EmailUtil.setUserEmailAddress(Domain.SEND_GRID_USERNAME);
+        EmailUtil.setUserEmailPassword(Domain.SEND_GRID_PASSWORD);
     }
 
     public void setInvalidLogin() {
