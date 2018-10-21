@@ -23,6 +23,7 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.grade.Test;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -113,8 +114,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Grade updatedGrade = editPersonDescriptor.getGrade().orElse(personToEdit.getGrade());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+        Set<Test> updatedTest = editPersonDescriptor.getTests().orElse(personToEdit.getTests());
         return new Person(updatedName, updateGender, updateNationality, updatedPhone,
-                updatedEmail, updatedAddress, updatedGrade, updatedTags);
+                updatedEmail, updatedAddress, updatedGrade, updatedTags, updatedTest);
     }
 
     @Override
@@ -148,6 +150,7 @@ public class EditCommand extends Command {
         private Address address;
         private Grade grade;
         private Set<Tag> tags;
+        private Set<Test> test;
 
         public EditPersonDescriptor() {}
 
@@ -164,6 +167,7 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setGrade(toCopy.grade);
             setTags(toCopy.tags);
+            setTests(toCopy.test);
         }
 
         /**
@@ -233,6 +237,7 @@ public class EditCommand extends Command {
         }
 
 
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -248,6 +253,23 @@ public class EditCommand extends Command {
          */
         public Optional<Set<Tag>> getTags() {
             return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+        }
+
+        /**
+         * Sets {@code tags} to this object's {@code tags}.
+         * A defensive copy of {@code tags} is used internally.
+         */
+        public void setTests(Set<Test> test) {
+            this.test = (test != null) ? new HashSet<>(test) : null;
+        }
+
+        /**
+         * Returns an unmodifiable tag set, which throws {@code UnsupportedOperationException}
+         * if modification is attempted.
+         * Returns {@code Optional#empty()} if {@code tags} is null.
+         */
+        public Optional<Set<Test>> getTests() {
+            return (test != null) ? Optional.of(Collections.unmodifiableSet(test)) : Optional.empty();
         }
 
         @Override

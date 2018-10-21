@@ -17,11 +17,6 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
-     * {@code Predicate} that always evaluate to true
-     */
-    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
-
-    /**
      * Clears existing backing model and replaces with the provided new data.
      */
     void resetData(ReadOnlyAddressBook newData);
@@ -93,6 +88,13 @@ public interface Model {
      */
     void commitAddressBook();
 
+    //@@author rajdeepsh
+
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
     /**
      * Creates the given group.
      * {@code group} must not already exist in the system.
@@ -114,6 +116,12 @@ public interface Model {
      * Return true if a person  with the same identity fields exist in the group.
      */
     boolean hasPersonInGroup(AddGroup addGroup);
+
+    /**
+     * Deletes the given group.
+     * The group must exist in the address book.
+     */
+    void deleteGroup(Group target);
 
     /**
      * Returns an unmodifiable view of the filtered group list

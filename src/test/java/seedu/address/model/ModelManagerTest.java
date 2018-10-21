@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_GROUPS;
@@ -20,6 +21,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.group.GroupNameContainsKeywordsPredicate;
+import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.testutil.AddressBookBuilder;
@@ -68,6 +70,20 @@ public class ModelManagerTest {
     public void hasGroup_groupInAddressBook_returnsTrue() {
         modelManager.createGroup(getTut1());
         assertTrue(modelManager.hasGroup(getTut1()));
+    }
+
+    @Test
+    public void deleteGroup_groupInAddressBook_deletesGroup() {
+        ModelManager expected = new ModelManager();
+        modelManager.createGroup(getTut1());
+        modelManager.deleteGroup(getTut1());
+        assertEquals(expected, modelManager);
+    }
+
+    @Test
+    public void deleteGroup_groupNotInAddressBook_throwsGroupNotFoundException() {
+        thrown.expect(GroupNotFoundException.class);
+        modelManager.deleteGroup(getTut1());
     }
 
     @Test

@@ -3,8 +3,11 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.person.Gender.inputTransform;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -44,6 +47,26 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses multiple {@code oneBasedIndex} into a list of {@code Index} and returns it. Leading and trailing white
+     * spaces will be trimmed.
+     *
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    public static List<Index> parseMultipleIndex(String oneBasedIndex) throws ParseException {
+        List<Index> indexList = new ArrayList<>();
+        String trimmedIndex = oneBasedIndex.trim();
+        List<String> items = Arrays.asList(trimmedIndex.split(","));
+        for (String string : items) {
+            if (!StringUtil.isNonZeroUnsignedInteger(string)) {
+                throw new ParseException(MESSAGE_INVALID_INDEX);
+            } else {
+                indexList.add(Index.fromOneBased(Integer.parseInt(string)));
+            }
+        }
+        return indexList;
     }
 
     /**
@@ -151,6 +174,15 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String password}
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static String parsePassword(String password) {
+        requireNonNull(password);
+        return password.trim();
+    }
+
+    /**
      * Parses a {@code String groupName} into a {@code GroupName}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -252,7 +284,9 @@ public class ParserUtil {
         return new Message(trimmedMessage);
     }
 
-    /** Checks if input value by the user is not Null or not 0
+    /**
+     * Checks if input value by the user is not Null or not 0
+     *
      * @param value
      * @return
      * @throws ParseException
@@ -270,6 +304,7 @@ public class ParserUtil {
      * Conducts the check of flags during user command input
      * Accepts "true" or '1' to assert true
      * Accepts "false" or '0' to assert false
+     *
      * @param isFlagged
      * @return
      * @throws ParseException
@@ -277,7 +312,7 @@ public class ParserUtil {
     public static Boolean parseIsFlagged(String isFlagged) throws ParseException {
         requireNonNull(isFlagged);
         String trimmedFlaggedValue = isFlagged.trim().toLowerCase();
-        switch(trimmedFlaggedValue) {
+        switch (trimmedFlaggedValue) {
         case "false":
         case "0":
             trimmedFlaggedValue = "false";

@@ -8,8 +8,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.grade.Test;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Gender;
@@ -44,6 +46,9 @@ public class XmlAdaptedPerson {
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
+    @XmlElementWrapper(name = "scoreList")
+    @XmlElement(name = "test")
+    private List<XmlAdaptedTest> tests = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedPerson.
@@ -56,8 +61,8 @@ public class XmlAdaptedPerson {
      * Constructs an {@code XmlAdaptedPerson} with the given person details.
      */
 
-    public XmlAdaptedPerson(String name, String gender, String nationality, String phone,
-                            String email, String address, String grade, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedPerson(String name, String gender, String nationality, String phone, String email, String address,
+                            String grade, List<XmlAdaptedTag> tagged, List<XmlAdaptedTest> tests) {
 
         this.name = name;
         this.gender = gender;
@@ -68,6 +73,9 @@ public class XmlAdaptedPerson {
         this.grade = grade;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+        if (tests != null) {
+            this.tests = new ArrayList<>(tests);
         }
     }
 
@@ -87,7 +95,9 @@ public class XmlAdaptedPerson {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
-        grade = source.getGrade().value;
+        tests = source.getTests().stream()
+                .map(XmlAdaptedTest::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -160,8 +170,15 @@ public class XmlAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
+        final List<Test> personTests = new ArrayList<>();
+
+        for (XmlAdaptedTest test : tests) {
+            personTests.add(test.toModelType());
+        }
+        final Set<Test> modelTests = new HashSet<>(personTests);
+
         return new Person(modelName, modelGender, modelNationality, modelPhone,
-                modelEmail, modelAddress, modelGrade, modelTags);
+                modelEmail, modelAddress, modelGrade, modelTags, modelTests);
 
     }
 
@@ -183,6 +200,7 @@ public class XmlAdaptedPerson {
                 && Objects.equals(email, otherPerson.email)
                 && Objects.equals(address, otherPerson.address)
                 && Objects.equals(grade, otherPerson.grade)
-                && tagged.equals(otherPerson.tagged);
+                && tagged.equals(otherPerson.tagged)
+                && tests.equals(otherPerson.tests);
     }
 }

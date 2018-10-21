@@ -9,13 +9,17 @@ import java.util.regex.Pattern;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.AddScriptCommand;
+import seedu.address.logic.commands.AddTestMarksCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DistributeCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditTestMarksCommand;
 import seedu.address.logic.commands.EmailCommand;
+import seedu.address.logic.commands.EmailLoginCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GenListCommand;
@@ -64,6 +68,8 @@ public class AddressBookParser {
         case AddScriptCommand.COMMAND_WORD_2:
             return new AddScriptCommand(arguments);
 
+        //@@author rajdeepsh
+
         case CreateGroupCommand.COMMAND_WORD:
         case CreateGroupCommand.COMMAND_WORD_2:
             return new CreateGroupCommandParser().parse(arguments);
@@ -71,6 +77,12 @@ public class AddressBookParser {
         case AddGroupCommand.COMMAND_WORD:
         case AddGroupCommand.COMMAND_WORD_2:
             return new AddGroupCommandParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD:
+        case DeleteGroupCommand.COMMAND_WORD_2:
+            return new DeleteGroupCommandParser().parse(arguments);
+
+        //@@author
 
         case EditCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD_2:
@@ -99,6 +111,10 @@ public class AddressBookParser {
         case EmailCommand.COMMAND_WORD:
         case EmailCommand.COMMAND_WORD_2:
             return new EmailCommandParser().parse(arguments);
+
+        case EmailLoginCommand.COMMAND_WORD:
+        case EmailLoginCommand.COMMAND_WORD_2:
+            return new EmailLoginCommandParser().parse(arguments);
 
         case DistributeCommand.COMMAND_WORD:
         case DistributeCommand.COMMAND_WORD_2:
@@ -135,6 +151,14 @@ public class AddressBookParser {
         case GradeSummaryCommand.COMMAND_WORD:
         case GradeSummaryCommand.COMMAND_WORD_2:
             return new GradeSummaryCommandParser().parse(arguments);
+
+        case AddTestMarksCommand.COMMAND_WORD:
+        case AddTestMarksCommand.COMMAND_WORD_2:
+            return new AddTestMarksCommandParser().parse(arguments);
+
+        case EditTestMarksCommand.COMMAND_WORD:
+        case EditTestMarksCommand.COMMAND_WORD_2:
+            return new EditTestMarksCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

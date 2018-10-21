@@ -109,6 +109,10 @@ image::Architecture.png[width="600"]
 The *_Architecture Diagram_* given above explains the high-level design of the App. Given below is a quick overview of each component.
 
 [TIP]
+
+
+
+
 The `.pptx` files used to create diagrams in this document can be found in the link:{repoURL}/docs/diagrams/[diagrams] folder. To update a diagram, modify the diagram in the pptx file, select the objects of the diagram, and choose `Save as picture`.
 
 `Main` has only one class called link:{repoURL}/src/main/java/seedu/address/MainApp.java[`MainApp`]. It is responsible for,
@@ -319,7 +323,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::undoredo[]
+// tag::group[]
 === Group feature
 ==== Current Implementation
 
@@ -361,7 +365,7 @@ If a duplicate persons are found in the group of the address book during its exe
 ** Pros: Modular as groups are stored in a different file, makes extraction of data easier.
 ** Cons: Harder to implement.
 
-// end::undoredo[]
+// end::group[]
 
 // tag::AddScriptCommand[]
 === AddScriptCommand Feature
@@ -402,6 +406,47 @@ From these 4 inputs, each algorithm will run necessary checks, create the requir
 ===== Aspect: Distribute Students Equally with Balanced Gender Explanation
 ===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
 ===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
+// end::distribute[]
+
+// tag::sendemail[]
+=== Send Email feature
+==== Current Implementation
+The send email feature is facilitated by `JavaMail` API. It provides a platform-independent and protocol-independent framework to build mail and messaging applications.
+
+In the current version, the following operations have been implemented:
+
+* `EmailCommand` -- The command to send an email to single or multiple indexes of persons.
+* `EmailUtil` -- The helper function that interacts with `JavaMail` for sending email.
+* `EmailLoginCommand` -- The command to enter credentials for the email account to be used for sending emails.
+
+The feature currently supports the following mail servers:
+
+1. `Google Mail` -- @gmail.com
+
+2. `Microsoft Outlook` -- @outlook.com
+
+3. `Hotmail` -- @hotmail.com
+
+4. `Live` -- @live.com
+
+5. `NUS Student` -- @u.nus.edu
+
+6. `NUS Staff` -- @nus.edu.sg
+
+==== Sequence Diagrams
+
+==== Design Considerations
+
+===== Aspect: How to send email to a single person
+
+===== Aspect: How to send email to multiple person
+
+===== Aspect: How to send email to a group of persons
+
+===== Aspect: How to allow sending through different mail servers
+
+===== Aspect: How to send email with attachments
+// end::sendmail[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -927,7 +972,9 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |add students to groups |have a list of all my students in a particular module/group
 
-|`* * *` |university lecturer |send an email to all students in any group |make module specific announcements
+|`* * *` |university lecturer |add groups to a calender |have a list of all my modules with their respective dates
+
+|`* * *` |university lecturer |send an email to a student, a group of students or students belonging to a group |make module specific announcements
 
 |`* * *` |university lecturer |print an attendance sheet of all persons in a specific group |
 
@@ -1074,32 +1121,41 @@ Use case ends
 === Use case: Mass Email Communication
 *Precondition*
 
-1.  Group's exist in the AddressBook
+1.  Student(s) or group's exist in the AddressBook
 
 *MSS*
 
-1.  User requests to send email with specified content to a group
-2.  AddressBook confirms with user that email was sent
+1.  User requests to send email with specified content to student(s) or group.
+2.  AddressBook sends email with specified content student(s) or group.
 +
 Use case ends
 
 *Extensions*
 
 [none]
-* 1a. AddressBook detects error in data entered.
+* 1a. AddressBook detects subject exceeds imposed word limit.
 +
 
 [none]
-** 1a1. AddressBook rejects command.
+** 1a1. AddressBook rejects command and displays error message.
 +
 Use case ends
 
 [none]
-* 1b. AddressBook detects email content exceeds word limit.
+* 1b. AddressBook detects email content exceeds size limit of 25mb.
 +
 
 [none]
 ** 1b1. AddressBook rejects command and displays error message.
++
+Use case ends
+
+[none]
+* 1c. AddressBook detects no login credential found in system.
++
+
+[none]
+** 1c1. AddressBook rejects command and displays error message.
 +
 Use case ends
 
