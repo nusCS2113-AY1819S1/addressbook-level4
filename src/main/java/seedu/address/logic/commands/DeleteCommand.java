@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
+//@@author chelseyong
 /**
  * Deletes a task identified using it's displayed index from the address book.
  */

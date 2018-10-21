@@ -12,7 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.task.Task;
 
-// @@author Chelsey
+// @@author chelseyong
 /**
  * Adds a task to the task book
  */
