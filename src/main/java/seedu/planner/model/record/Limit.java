@@ -30,7 +30,7 @@ public class Limit {
      * @return
      */
     public boolean isSameLimitDates (Limit limitIn) {
-        return ((dateEnd.equals(limitIn.getDateEnd())) && (dateStart.equals(limitIn.getDateStart())));
+        return (limitIn != null) && ((dateEnd.equals(limitIn.getDateEnd())) && (dateStart.equals(limitIn.getDateStart())));
     }
     public Date getDateStart() {
         return dateStart;
@@ -65,7 +65,7 @@ public class Limit {
      */
     public boolean isExceeded (Double money) {
 
-        return (abs(limitMoneyFlow.toDouble()) < abs(money));
+        return (money!= null)&&(abs(limitMoneyFlow.toDouble()) <= abs(money));
 
     }
 }

@@ -33,12 +33,6 @@ public class LimitTest {
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void asObservableList_modifyList_throwsUnsupportedOperationException() {
-        Limit limit = new LimitBuilder().build();
-        thrown.expect(UnsupportedOperationException.class);
-    }
-
-    @Test
     public void isSameLimit() {
         // same object -> returns true
         assertTrue(LIMIT_100.isSameLimitDates(LIMIT_100));
@@ -101,8 +95,8 @@ public class LimitTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Limit aliceCopy = new LimitBuilder(LIMIT_100).build();
-        assertTrue(LIMIT_100.equals(aliceCopy));
+        Limit limitCopy = new LimitBuilder(LIMIT_100).build();
+        assertTrue(LIMIT_100.equals(limitCopy));
 
         // same object -> returns true
         assertTrue(LIMIT_100.equals(LIMIT_100));
