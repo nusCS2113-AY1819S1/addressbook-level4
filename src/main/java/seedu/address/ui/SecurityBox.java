@@ -7,12 +7,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
-import seedu.address.logic.ListElementPointer;
-import seedu.address.logic.Logic;
-import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.commons.events.ui.ShowLoginEvent;
+import seedu.address.security.Security;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -23,18 +19,14 @@ public class SecurityBox extends UiPart<Region> {
     private static final String FXML = "SecurityBox.fxml";
 
     private final Logger logger = LogsCenter.getLogger(SecurityBox.class);
-    private final Logic logic;
-    private ListElementPointer historySnapshot;
+    private final Security security;
 
     @FXML
     private TextField commandTextField;
 
-    public SecurityBox(Logic logic) {
+    public SecurityBox(Security security) {
         super(FXML);
-        this.logic = logic;
-        // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
-        historySnapshot = logic.getHistorySnapshot();
+        this.security = security;
     }
 
     /**
@@ -42,19 +34,11 @@ public class SecurityBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        try {
-            CommandResult commandResult = logic.execute(commandTextField.getText());
-            historySnapshot.next();
-            // process result of the command
-            commandTextField.setText("");
-            logger.info("Result: " + commandResult.feedbackToUser);
-            raise(new NewResultAvailableEvent(commandResult.feedbackToUser));
-
-        } catch (CommandException | ParseException e) {
-            // handle command failure
-            setStyleToIndicateCommandFailure();
-            logger.info("Invalid command: " + commandTextField.getText());
-            raise(new NewResultAvailableEvent(e.getMessage()));
+        String[] command = commandTextField.getText().trim().split("\\s+");
+        if (command[0].equals("login") && command.length > 2) {
+            security.login(command[1], command[2]);
+        } else if (command[0].equals("ui")) {
+            raise(new ShowLoginEvent());
         }
     }
 

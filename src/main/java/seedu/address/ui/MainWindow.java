@@ -21,6 +21,7 @@ import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowLoginEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
 import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
@@ -145,7 +146,7 @@ public class MainWindow extends UiPart<Stage> {
      * Enables Security CLI
      */
     void fillSecurityCommandBox() {
-        SecurityBox commandBox = new SecurityBox(logic);
+        SecurityBox commandBox = new SecurityBox(security);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -294,6 +295,12 @@ public class MainWindow extends UiPart<Stage> {
 
     @Subscribe
     private void handleExitRegisterEvent(ExitRegisterEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleLogin();
+    }
+
+    @Subscribe
+    private void handleShowLoginEvent(ShowLoginEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleLogin();
     }
