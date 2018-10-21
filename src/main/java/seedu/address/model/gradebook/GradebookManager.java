@@ -1,6 +1,7 @@
 package seedu.address.model.gradebook;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import seedu.address.model.StorageController;
 import seedu.address.storage.adapter.XmlAdaptedGradebook;
@@ -35,6 +36,16 @@ public class GradebookManager {
         for (XmlAdaptedGradebook xmlGradebook : xmlGradebookList) {
             gradebooks.add(xmlGradebook.toGradebookType());
         }
+    }
+
+    /**
+     * Converts the Note array list and invokes the StorageController to save the current note list to file.
+     */
+    public void saveGradebookList() {
+        ArrayList<XmlAdaptedGradebook> xmlAdaptedGradebooks =
+                gradebooks.stream().map(XmlAdaptedGradebook::new).collect(Collectors.toCollection(ArrayList::new));
+        StorageController.setGradebookStorage(xmlAdaptedGradebooks);
+        StorageController.storeData();
     }
 
     /**
@@ -99,30 +110,6 @@ public class GradebookManager {
         }
         return null;
     }
-
-    /**
-     * Replaces the given gradebook component {@code target} with {@code editedComponentName, editedMaxMarks,
-     * editedWeightage}
-     * {@code moduleCode, gradebookComponentName} must already exist in Trajectory
-     */
-    public void editGradebookComponent (Gradebook gradebook, Gradebook toEditGradebookComponents) {
-
-
-        gradebooks.set(targetIndex, editedModule);
-    }
-
-//    /**
-//     This method finds gradebook component to a module in Trajectory.
-//     */
-//    public Gradebook editGradebookComponent (String moduleCode, String gradebookComponentName) {
-//        for (Gradebook gradebook : gradebooks) {
-//            if (gradebook.getModuleCode().equals(moduleCode)
-//                    && gradebook.getGradeComponentName().equals(gradebookComponentName)) {
-//                return gradebook;
-//            }
-//        }
-//        return null;
-//    }
 
     /**
      This method checks if component already exists in Trajectory.

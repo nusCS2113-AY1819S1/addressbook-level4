@@ -13,8 +13,13 @@ import seedu.address.model.Model;
 import seedu.address.model.gradebook.Gradebook;
 import seedu.address.model.gradebook.GradebookManager;
 
+/**
+ * Edits a gradebook component for module in Trajectory to the user.
+ */
 public class GradebookEditCommand extends Command {
     public static final String COMMAND_WORD = "gradebook edit";
+    private static final String MESSAGE_EDIT_GRADEBOOK_SUCCESS = "Successfully edited!";
+    private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a gradebook component to Trajectory. "
             + "\nParameters: "
@@ -30,10 +35,6 @@ public class GradebookEditCommand extends Command {
             + PREFIX_GRADEBOOK_MAXMARKS + "60 "
             + PREFIX_GRADEBOOK_WEIGHTAGE + "50";
 
-    public static final String MESSAGE_EDIT_GRADEBOOK_SUCCESS = "Edited Gradebook Component Name: %1$s,"
-            + "Maximum Marks: %2$s, Weightage: %3$s";
-    private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
-
     private final Gradebook toEditGradebookItem;
     public GradebookEditCommand (Gradebook gradebookComponent) {
         toEditGradebookItem = gradebookComponent;
@@ -42,6 +43,8 @@ public class GradebookEditCommand extends Command {
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        String status = MESSAGE_EDIT_GRADEBOOK_SUCCESS;
+
         GradebookManager gradebookManager = new GradebookManager();
         Gradebook gradebook = gradebookManager.findGradebookComponent(
                 toEditGradebookItem.getModuleCode(),
@@ -50,25 +53,17 @@ public class GradebookEditCommand extends Command {
             return new CommandResult(MESSAGE_FIND_FAIL);
         }
 
-        gradebookManager.editGradebookComponent(gradebook, );
+        if (!toEditGradebookItem.getgradebookNewComponentName().equals("")) {
+            gradebook.setGradeComponentName(toEditGradebookItem.getgradebookNewComponentName());
+        }
+        if (toEditGradebookItem.getGradeComponentMaxMarks() != 0) {
+            gradebook.setgradebookMaxMarks(toEditGradebookItem.getGradeComponentMaxMarks());
+        }
+        if (toEditGradebookItem.getGradeComponentWeightage() != 0) {
+            gradebook.setgradebookWeightage(toEditGradebookItem.getGradeComponentWeightage());
+        }
+        gradebookManager.saveGradebookList();
 
-
-
-
-
-
-
-
-        return new CommandResult(result);
-    }
-
-    public void setGradebookComponentName(String gradebookComponentName) {
-        this.gradebookComponentName = gradebookComponentName;
-    }
-    public void setGradebookMaxMarks(String gradebookMaxMarks) {
-        this.gradebookMaxMarks = gradebookMaxMarks;
-    }
-    public void setGradebookWeightage(String gradebookWeightage) {
-        this.gradebookWeightage = gradebookWeightage;
+        return new CommandResult(status);
     }
 }

@@ -20,6 +20,7 @@ import seedu.address.model.gradebook.Gradebook;
 public class GradebookEditCommandParser {
     private static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
     private static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
+    private static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
 
     /**
      * Parses the given {@code String} of arguments in the context of the GradebookFindCommand
@@ -29,6 +30,8 @@ public class GradebookEditCommandParser {
     public GradebookEditCommand parse(String args) throws ParseException {
         int gradeComponentMaxMarksArg = 0;
         int gradeComponentWeightageArg = 0;
+        String newGradeComponentNameArg = "";
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM,
                 PREFIX_GRADEBOOK_ITEM_EDIT, PREFIX_GRADEBOOK_MAXMARKS, PREFIX_GRADEBOOK_WEIGHTAGE);
 
@@ -51,15 +54,21 @@ public class GradebookEditCommandParser {
                 throw new ParseException(MESSAGE_WEIGHTAGE_ERROR);
             }
         }
+        if (arePrefixesPresent(argMultimap, PREFIX_GRADEBOOK_ITEM_EDIT) || !argMultimap.getPreamble().isEmpty()) {
+            newGradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM_EDIT).get();
+        }
 
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
-        String newModuleCodeArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM_EDIT).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
+        boolean isEmpty = Gradebook.hasEmptyParams(moduleCodeArg, gradeComponentNameArg);
+        if (isEmpty) {
+            throw new ParseException(MESSAGE_ERROR_EMPTY);
+        }
 
         Gradebook gradebook = new Gradebook(
                 moduleCodeArg,
                 gradeComponentNameArg,
-                newModuleCodeArg,
+                newGradeComponentNameArg,
                 gradeComponentMaxMarksArg,
                 gradeComponentWeightageArg);
         return new GradebookEditCommand(gradebook);

@@ -52,7 +52,10 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULECODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
 
-        Gradebook gradebook = new Gradebook(moduleCodeArg, gradeComponentNameArg, gradeComponentMaxMarksArg,
+        Gradebook gradebook = new Gradebook(
+                moduleCodeArg,
+                gradeComponentNameArg,
+                gradeComponentMaxMarksArg,
                 gradeComponentWeightageArg);
         return new GradebookAddCommand(gradebook);
     }

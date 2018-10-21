@@ -6,7 +6,7 @@ package seedu.address.model.gradebook;
 public class Gradebook {
     private String moduleCode;
     private String gradebookComponentName;
-    private String editedGradebookComponentName;
+    private String gradebookNewComponentName;
     private int gradebookMaxMarks;
     private int gradebookWeightage;
 
@@ -24,12 +24,12 @@ public class Gradebook {
     public Gradebook(
             String moduleCode,
             String gradebookComponentName,
-            String editedGradebookComponentName,
-                     int gradebookMaxMarks,
+            String gradebookNewComponentName,
+            int gradebookMaxMarks,
             int gradebookWeightage) {
         this.moduleCode = moduleCode;
         this.gradebookComponentName = gradebookComponentName;
-        this.editedGradebookComponentName = editedGradebookComponentName;
+        this.gradebookNewComponentName = gradebookNewComponentName;
         this.gradebookMaxMarks = gradebookMaxMarks;
         this.gradebookWeightage = gradebookWeightage;
     }
@@ -54,19 +54,35 @@ public class Gradebook {
         return this.moduleCode;
     }
 
+    public void setModuleCode(String moduleCode) {
+        this.moduleCode = moduleCode;
+    }
+
+    public String getgradebookNewComponentName() {
+        return this.gradebookNewComponentName;
+    }
+
     public String getGradeComponentName() {
         return this.gradebookComponentName;
     }
 
-    public String getEditedGradeComponentName() {
-        return this.editedGradebookComponentName;
+    public void setGradeComponentName (String gradebookComponentName) {
+        this.gradebookComponentName = gradebookComponentName;
     }
 
     public int getGradeComponentMaxMarks() {
         return this.gradebookMaxMarks;
     }
 
+    public void setgradebookMaxMarks (int gradebookMaxMarks) {
+        this.gradebookMaxMarks = gradebookMaxMarks;
+    }
+
     public int getGradeComponentWeightage() {
         return this.gradebookWeightage;
+    }
+
+    public void setgradebookWeightage (int gradebookWeightage) {
+        this.gradebookWeightage = gradebookWeightage;
     }
 }
