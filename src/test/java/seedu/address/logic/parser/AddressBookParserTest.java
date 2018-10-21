@@ -30,6 +30,7 @@ import seedu.address.logic.commands.AddGroupCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteGroupCommand;
 import seedu.address.logic.commands.DistributeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -92,6 +93,19 @@ public class AddressBookParserTest {
         assertEquals(new AddGroupCommand(getAddGroup1()), command);
     }
 
+    /**
+     * Command to delete a group
+     * @throws Exception
+     */
+    @Test
+    public void parseCommand_deleteGroup() throws Exception {
+        assertTrue(parser.parseCommand(DeleteGroupCommand.COMMAND_WORD) instanceof DeleteGroupCommand);
+    }
+
+    /**
+     * Command to list all groups
+     * @throws Exception
+     */
     @Test
     public void parseCommand_listGroup() throws Exception {
         assertTrue(parser.parseCommand(ListGroupCommand.COMMAND_WORD) instanceof ListGroupCommand);
