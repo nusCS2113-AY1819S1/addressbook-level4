@@ -5,31 +5,31 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.UserPrefs;
+import seedu.address.model.person.TimeTable;
 
 /**
- * Represents a storage for {@link seedu.address.model.UserPrefs}.
+ * Represents a storage for a single {@link seedu.address.model.person.TimeTable} object.
  */
-public interface UserPrefsStorage {
+public interface TimeTableStorage {
 
     /**
-     * Returns the file path of the UserPrefs data file.
+     * Returns the file path of the TimeTable data file.
      */
-    Path getUserPrefsFilePath();
+    Path getTimeTableFilePath();
 
     /**
-     * Returns UserPrefs data from storage.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns TimeTable data from storage.
+     *   Returns {@code Optional.empty()} if storage (.ics) file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
+    Optional<TimeTable> readTimeTable() throws DataConversionException, IOException;
 
     /**
-     * Saves the given {@link seedu.address.model.UserPrefs} to the storage.
-     * @param userPrefs cannot be null.
+     * Saves the given {@link TimeTable} to the storage.
+     * @param timeTable cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveUserPrefs(UserPrefs userPrefs) throws IOException;
+    void saveTimeTable(TimeTable timeTable) throws IOException;
 
 }

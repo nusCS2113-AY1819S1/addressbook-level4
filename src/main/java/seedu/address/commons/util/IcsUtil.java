@@ -2,6 +2,7 @@ package seedu.address.commons.util;
 
 import static java.util.Objects.requireNonNull;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -19,20 +20,25 @@ import seedu.address.model.person.TimeTable;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
- * Helps with reading from and writing to ICS files.
- * Only support ICS to-and-from TimeTable Objects.
- * TODO: create a 'serialisable' class to serialise(?) the timetable objects to ics file formats,
- * just like in the jsonUtil class
+ * Converts a TimeTable object instance to .ics and vice versa.
+ *
+ * Usage:
+ * 1) Mainly used to read and write the TimeTable(s) of FreeTime into the disk for permanent storage.
+ * 2) Also used during import and export commands (ie, read and write)
+ *
+ * NOTE: Only support ICS to-and-from TimeTable Objects(!!).
+ * TODO: allow conversion to objects other than timetable
+ * TODO: create a 'serialisable' class to serialise(?) the timetable objects to ics file formats
  */
 public class IcsUtil {
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
     private static IcsUtil instance;
 
     private IcsUtil(){
-
+        //any things to initialise?
     }
 
-    public static IcsUtil getInstance(){
+    public static IcsUtil getInstance() {
         if (instance == null) {
             instance = new IcsUtil();
         }
@@ -40,44 +46,64 @@ public class IcsUtil {
     }
 
     /**
-     * Returns the data in the ICS file as a TimeTableObject
+     * Returns the TimeTable object from the .ics file.
+     * Returns {@code Optional.empty()} object if the file is not found.
+     * Missing or corrupted or incompatible entries in the .ics file will silently fail, for now.
+     * @param filePath cannot be null.
+     * @throws DataConversionException if the file format is not as expected.
      */
-    public Optional<TimeTable> getTimeTableFromFile(Path file)
+    public Optional<TimeTable> readIcsFile(Path filePath)
             throws DataConversionException {
 
-        requireNonNull(file);
+        requireNonNull(filePath);
 
         try {
-            if (!Files.exists(file)) {
-                logger.info("Ics file " + file + " not found");
+            if (!Files.exists(filePath)) {
+                logger.info("Ics file " + filePath + " not found");
                 return Optional.empty();
             }
         } catch (SecurityException e) {
-            logger.warning("Read rights not available when trying to access ICS file " + file + ": " + e);
-        }
-        String importstring = "";
-        try {
-            importstring = FileUtil.readFromFile(file);
-        } catch (IOException e) {
-            logger.warning("Error reading from ICS file " + file + ": " + e);
-            throw new DataConversionException(e);
+            logger.warning("Read rights not available when trying to access ICS file " + filePath + ": " + e);
         }
 
-        //parse the string into timetable object
-        Optional<TimeTable> optionalTimeTable = stringToTimeTableParser(importstring);
+        Optional<TimeTable> optionalTimeTable;
+        try {
+            optionalTimeTable = parseTimeTableFromString(FileUtil.readFromFile(filePath));
+        } catch (IOException e) {
+            logger.warning("Error reading from ICS file " + filePath + ": " + e);
+            throw new DataConversionException(e);
+        }
 
         return optionalTimeTable;
     }
 
     /**
-     * Parses the string from an ics file into a timetable object
+     * Saves TimeTable object data to the .ics file specified
+     *
+     * @param filePath Points to a .ics file containing data {@code TimeTable}.
+     *             Cannot be null.
+     * @throws FileNotFoundException    Thrown if the file is missing.
+     * @throws DataConversionException  Thrown if there is an error during converting the data
+     *                                  into .ics and writing to the file.
      */
-    private Optional<TimeTable> stringToTimeTableParser(String string) throws DataConversionException {
+
+    public void saveIcsFile(TimeTable timeTable, Path filePath)
+            throws DataConversionException, FileNotFoundException {
+        requireNonNull(filePath);
+        //TODO
+    }
+
+
+    /**
+     * Parses the string (that was read from an .ics file) into a timetable object
+     * @throws DataConversionException if the string contents are not expected.
+     * TODO: how to parse string in a OOP-way?
+     */
+    private Optional<TimeTable> parseTimeTableFromString(String string) throws DataConversionException {
 
         TimeTable timeTable = new TimeTable();
 
         String[] chunks = string.split("BEGIN:VEVENT");
-
 
         for (String chunk : chunks) { //each chunk contains the data of 1 timeslot
             Optional<TimeSlot> optionalTimeSlot = convertChunkToTimeSlot(timeTable, chunk);
