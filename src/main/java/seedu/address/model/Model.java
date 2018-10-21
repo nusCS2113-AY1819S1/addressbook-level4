@@ -116,6 +116,12 @@ public interface Model {
     boolean hasPersonInGroup(AddGroup addGroup);
 
     /**
+     * Deletes the given group.
+     * The group must exist in the address book.
+     */
+    void deleteGroup(Group target);
+
+    /**
      * Returns an unmodifiable view of the filtered group list
      */
     ObservableList<Group> getFilteredGroupList();
