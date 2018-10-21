@@ -30,9 +30,11 @@ import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCommand;
 import seedu.recruit.logic.commands.RedoCandidateBookCommand;
+import seedu.recruit.logic.commands.RedoCompanyBookCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.logic.commands.SortCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
+import seedu.recruit.logic.commands.UndoCompanyBookCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectContentsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectRecipientsCommand;
@@ -155,6 +157,12 @@ public class RecruitBookParser {
 
             case RedoCandidateBookCommand.COMMAND_WORD:
                 return new RedoCandidateBookCommand();
+
+            case UndoCompanyBookCommand.COMMAND_WORD:
+                return new UndoCompanyBookCommand();
+
+            case RedoCompanyBookCommand.COMMAND_WORD:
+                return new RedoCompanyBookCommand();
 
             case EmailInitialiseCommand.COMMAND_WORD:
                 return new EmailInitialiseCommand();
