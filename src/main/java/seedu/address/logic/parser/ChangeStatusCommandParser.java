@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORIGINAL_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
@@ -24,17 +25,11 @@ public class ChangeStatusCommandParser implements Parser<ChangeStatusCommand> {
     public ChangeStatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_QUANTITY, PREFIX_ORIGINAL_STATUS, PREFIX_NEW_STATUS);
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ChangeStatusCommand.MESSAGE_USAGE), pe);
-        }
-
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_ORIGINAL_STATUS, PREFIX_NEW_STATUS);
 
         ChangeStatusDescriptor changeStatusDescriptor = new ChangeStatusDescriptor();
+        changeStatusDescriptor.setName(ParserUtil
+                .parseName(argMultimap.getValue(PREFIX_NAME).get()));
         changeStatusDescriptor.setQuantity(ParserUtil
                 .parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()).toInteger());
         changeStatusDescriptor.setInitialStatus(ParserUtil
@@ -42,7 +37,7 @@ public class ChangeStatusCommandParser implements Parser<ChangeStatusCommand> {
         changeStatusDescriptor.setUpdatedStatus(ParserUtil
                 .parseStatus(argMultimap.getValue(PREFIX_NEW_STATUS).get()));
 
-        return new ChangeStatusCommand(index, changeStatusDescriptor);
+        return new ChangeStatusCommand(changeStatusDescriptor);
 
     }
 }
