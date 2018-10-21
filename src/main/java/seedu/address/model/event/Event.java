@@ -2,8 +2,10 @@ package seedu.address.model.event;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -80,6 +82,15 @@ public class Event {
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    public String getTagsString() {
+        List<String> tagsList = new ArrayList<>();
+        for (Tag t: tags) {
+            tagsList.add(t.tagName);
+        }
+        String tagsString = String.join(" ", tagsList);
+        return tagsString;
     }
 
     /**

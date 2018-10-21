@@ -27,6 +27,7 @@ import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
@@ -213,13 +214,23 @@ public abstract class EventManagerSystemTest {
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
         getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-        String selectedCardName = getPersonListPanel().getHandleToSelectedCard().getName();
+        PersonCardHandle selectedCardHandle = getPersonListPanel().getHandleToSelectedCard();
         URL expectedUrl;
         try {
 
             expectedUrl = new URL(BrowserPanel.getSearchPageUrlWithoutName().toString()
                     + "?name="
-                    + selectedCardName.replaceAll(" ", "%20"));
+                    + selectedCardHandle.getName().replaceAll(" ", "%20")
+                    + "&contact="
+                    + selectedCardHandle.getContact().replaceAll(" ", "%20")
+                    + "&phone="
+                    + selectedCardHandle.getPhone()
+                    + "&email="
+                    + selectedCardHandle.getEmail()
+                    + "&address="
+                    + selectedCardHandle.getAddress().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + "&tags="
+                    + selectedCardHandle.getTagsString().replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
             throw new AssertionError("URL expected to be valid.", mue);
         }

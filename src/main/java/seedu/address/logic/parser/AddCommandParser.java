@@ -7,13 +7,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.Set;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
@@ -38,7 +38,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL,
                         PREFIX_VENUE, PREFIX_TAG, PREFIX_ATTENDEE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CONTACT, PREFIX_VENUE, PREFIX_PHONE, PREFIX_EMAIL)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_CONTACT, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
@@ -47,7 +47,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Contact contact = ParserUtil.parseContact(argMultimap.getValue(PREFIX_CONTACT).get());
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
-        Venue venue = ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get());
+        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Set<Attendee> attendeeList = ParserUtil.parseAttendees(argMultimap.getAllValues(PREFIX_ATTENDEE));
 

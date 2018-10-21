@@ -12,8 +12,6 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,35 +27,35 @@ public class TypicalPersons {
 
     public static final Event ALICE = new PersonBuilder().withName("Inter Neighbourhood Cooking Competition")
             .withContact("Alice Pauline")
-            .withVenue("123, Jurong West Ave 6, #08-111")
+            .withAddress("123, Jurong West Ave 6, #08-111")
             .withEmail("alice@example.com")
             .withPhone("94351253")
             .withTags("friends")
             .withAttendees("Peter Parker").build();
     public static final Event BENSON = new PersonBuilder().withName("Dancing Tryouts")
             .withContact("Benson Meier")
-            .withVenue("311, Clementi Ave 2, #02-25")
+            .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com")
             .withPhone("98765432")
             .withTags("owesMoney", "friends")
             .withAttendees("Mary Kate").build();
     public static final Event CARL = new PersonBuilder().withName("Frisbee Competition").withContact("Carl Kurz")
-            .withPhone("95352563").withEmail("heinz@example.com").withVenue("wall street").build();
+            .withPhone("95352563").withEmail("heinz@example.com").withAddress("wall street").build();
     public static final Event DANIEL = new PersonBuilder().withName("Art and Crafts").withContact("Daniel Meier")
             .withPhone("87652533").withEmail("cornelia@example.com").withVenue("10th street").withTags("friends")
             .withAttendees("Scarlet Witch").build();
     public static final Event ELLE = new PersonBuilder().withName("Music Tryouts").withContact("Elle Meyer")
-            .withPhone("9482224").withEmail("werner@example.com").withVenue("michegan ave").build();
+            .withPhone("9482224").withEmail("werner@example.com").withAddress("michegan ave").build();
     public static final Event FIONA = new PersonBuilder().withName("Dining In The Dark").withContact("Fiona Kunz")
-            .withPhone("9482427").withEmail("lydia@example.com").withVenue("little tokyo").build();
+            .withPhone("9482427").withEmail("lydia@example.com").withAddress("little tokyo").build();
     public static final Event GEORGE = new PersonBuilder().withName("College Games").withContact("George Best")
-            .withPhone("9482442").withEmail("anna@example.com").withVenue("4th street").build();
+            .withPhone("9482442").withEmail("anna@example.com").withAddress("4th street").build();
 
     // Manually added
     public static final Event HOON = new PersonBuilder().withName("Eating Competition").withContact("Hoon Meier")
-            .withPhone("8482424").withEmail("stefan@example.com").withVenue("little india").build();
+            .withPhone("8482424").withEmail("stefan@example.com").withAddress("little india").build();
     public static final Event IDA = new PersonBuilder().withName("Yoga Session").withContact("Ida Mueller")
-            .withPhone("8482131").withEmail("hans@example.com").withVenue("chicago ave").build();
+            .withPhone("8482131").withEmail("hans@example.com").withAddress("chicago ave").build();
 
     // Manually added - Event's details found in {@code CommandTestUtil}
     public static final Event AMY = new PersonBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY)

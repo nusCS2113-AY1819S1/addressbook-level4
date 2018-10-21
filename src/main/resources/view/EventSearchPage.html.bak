@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Event Search Page</title>
+</head>
+<body>
+  Event Name: <!-- Name --><!-- /Name --><br>
+  Event Address: <!-- Address --><!-- /Address --><br>
+  <br>
+  Event Attendance:<br>
+  <!-- Attendance -->
+  <!-- /Attendance -->
+
+</body>
+</html>

@@ -239,6 +239,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::authentication[]
 === Authentication
 ==== Current Implementation
 
@@ -278,6 +279,7 @@ If an authentication fails, i.e. credentials are wrong or do not exist in the JS
 
 ===== Password encryption
 * Stores encrypted password instead of plain text.
+// end::authentication[]
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -418,6 +420,46 @@ If the user uses the `find` command, the following functions will follow the ind
 ** Pros: Library functions can help parse the comment section into the arrayList.
 ** Cons: More code is neede to simple insert or delete elements inside the data structure.
 // end::comments[]
+
+// tag::rsvp[]
+=== RSVP
+==== Current Implementation
+The RSVP feature consists the `register` command. Attendees of an event are stored in the `eventmanager.xml` file, in a similar fashion to the storage of tags.
+
+Below is an example usage scenario and how the RSVP mechanism behaves:
+
+Step 1: The user launches the application, clicks on an event or types `select 2` into the CLI. Details of the 2nd event including event attendance are displayed.
+
+Step 2: The user executes `register 2` to register for the 2nd event. The `register` command gets the username of the current user, and adds it into the event data.
+
+Step 3: An `EventManagerChangedEvent` event is raised by `Model`. `EventCenter` handles the event, calling for `Storage` to update `eventmanager.xml`.
+
+Step 4: The event page is reloaded to display the new event attendance.
+
+==== Design Considerations
+===== Aspect: How to display attendance
+* **Alternative 1 (current choice):** Display event attendance list
+** Pros: Can see which other users are attending the event
+** Cons: More complex to implement
+* **Alternative 2:** Display whether current user is registered for an event
+** Pros: Easier to implement, user can easily see whether they are registered
+** Cons: New methods will need to be implemented to make many fields for comments.
+
+===== Aspect: How to store attendance
+* **Alternative 1 (current choice):** Attendance stored in `eventmanager.xml` in similar fashion to tags.
+** Pros: Methods for parsing tags can be applied to parse attendance
+** Cons: Inefficient to retrieve list of events which a user has registered for
+* **Alternative 2:** Store with user details
+** Pros: Can easily check which events a user has registered for.
+** Cons: Inefficient to check which users are attending an event.
+
+==== Future Improvements
+===== Adding `unregister` command.
+* Allows users to unregister for events.
+
+===== Adding `listAttending` command.
+* Allows users to view events they have registered for.
+// end::rsvp[]
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

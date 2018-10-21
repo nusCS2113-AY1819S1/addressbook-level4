@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.event.Address;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
@@ -28,18 +29,18 @@ public class ParserUtilTest {
     private static final String INVALID_ATTENDEE = "M@ry";
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
+    private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
-    private static final String INVALID_VENUE = " ";
 
     private static final String VALID_ATTENDEE_1 = "Mary Kate";
     private static final String VALID_ATTENDEE_2 = "Peter Parker";
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
+    private static final String VALID_ADDRESS = "123 Main Street #0505";
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-    private static final String VALID_VENUE = "123 Main Street #0505";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -115,26 +116,26 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseVenue_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseVenue((String) null));
+    public void parseAddress_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
     }
 
     @Test
-    public void parseVenue_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseVenue(INVALID_VENUE));
+    public void parseAddress_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_ADDRESS));
     }
 
     @Test
-    public void parseVenue_validValueWithoutWhitespace_returnsVenue() throws Exception {
-        Venue expectedVenue = new Venue(VALID_VENUE);
-        assertEquals(expectedVenue, ParserUtil.parseVenue(VALID_VENUE));
+    public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
+        Address expectedAddress = new Address(VALID_ADDRESS);
+        assertEquals(expectedAddress, ParserUtil.parseAddress(VALID_ADDRESS));
     }
 
     @Test
-    public void parseVenue_validValueWithWhitespace_returnsTrimmedVenue() throws Exception {
-        String venueWithWhitespace = WHITESPACE + VALID_VENUE + WHITESPACE;
-        Venue expectedVenue = new Venue(VALID_VENUE);
-        assertEquals(expectedVenue, ParserUtil.parseVenue(venueWithWhitespace));
+    public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
+        String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
+        Address expectedAddress = new Address(VALID_ADDRESS);
+        assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
     }
 
     @Test

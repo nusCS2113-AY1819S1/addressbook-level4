@@ -3,9 +3,10 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
-//import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN; TODO
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -16,7 +17,6 @@ import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_VENUE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
@@ -49,6 +49,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
@@ -133,7 +134,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
 
         /* ------------------ Performing edit operation while a filtered list is being shown ------------------------ */
 
-        /* Case: filtered event list, edit index within bounds of event manager and event list -> edited */
+        /* Case: filtered event list, edit index within bounds of address book and event list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_TRYOUTS);
         index = INDEX_FIRST_PERSON;
         assertTrue(index.getZeroBased() < getModel().getFilteredEventList().size());
@@ -142,7 +143,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         editedEvent = new EventBuilder(eventToEdit).withName(VALID_NAME_BOB).build();
         assertCommandSuccess(command, index, editedEvent);
 
-        /* Case: filtered event list, edit index within bounds of event manager but out of bounds of event list
+        /* Case: filtered event list, edit index within bounds of address book but out of bounds of event list
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_TRYOUTS);
@@ -203,9 +204,9 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
                 + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        /* Case: invalid venue -> rejected */
+        /* Case: invalid address -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
-                + INVALID_VENUE_DESC, Venue.MESSAGE_VENUE_CONSTRAINTS);
+                + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
@@ -237,7 +238,7 @@ public class EditCommandSystemTest extends EventManagerSystemTest {
                 + ATTENDEE_DESC_HAN;
         assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
 
-        /* Case: edit a event with new values same as another event's values but with different venue -> rejected */
+        /* Case: edit a event with new values same as another event's values but with different address -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + CONTACT_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + VENUE_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND
                 + ATTENDEE_DESC_TED + ATTENDEE_DESC_HAN;
