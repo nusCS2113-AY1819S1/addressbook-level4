@@ -14,6 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.recruit.commons.core.EmailSettings;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.AddCandidateCommand;
@@ -43,7 +44,9 @@ public class RecruitBookParserTest {
 
     // dummy LogicState stub
     private LogicState state = new LogicState("primary");
-    private EmailUtil emailUtil = new EmailUtil();
+    // dummy emailsettings stub
+    private EmailSettings emailSettings = new EmailSettings();
+    private EmailUtil emailUtil = new EmailUtil(emailSettings);
 
     private final RecruitBookParser parser = new RecruitBookParser();
 

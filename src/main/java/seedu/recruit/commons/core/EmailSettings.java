@@ -2,6 +2,9 @@ package seedu.recruit.commons.core;
 
 import java.io.Serializable;
 
+/**
+ * Stores settings for email command. Can be changed in preferences.json
+ */
 public class EmailSettings implements Serializable {
 
     private static final String DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT = "New job offers that I have found for you!";
@@ -16,12 +19,21 @@ public class EmailSettings implements Serializable {
     private final String bodyTextCandidateAsRecipient;
     private final String bodyTextCompanyAsRecipient;
 
-
     public EmailSettings() {
         subjectCandidateAsRecipient = DEFAULT_SUBJECT_CANDIDATE_AS_RECIPIENT;
         subjectCompanyAsRecipient = DEFAULT_SUBJECT_COMPANY_AS_RECIPEINT;
         bodyTextCandidateAsRecipient = DEFAULT_BODYTEXT_CANDIDATE_AS_RECIPIENT;
         bodyTextCompanyAsRecipient = DEFAULT_BODYTEXT_COMPANY_AS_RECIPIENT;
+    }
+
+    public EmailSettings(String subjectCandidateAsRecipient,
+                         String subjectCompanyAsRecipient,
+                         String bodyTextCandidateAsRecipient,
+                         String bodyTextCompanyAsRecipient) {
+        this.subjectCandidateAsRecipient = subjectCandidateAsRecipient;
+        this.subjectCompanyAsRecipient  = subjectCompanyAsRecipient;
+        this.bodyTextCandidateAsRecipient = bodyTextCandidateAsRecipient;
+        this.bodyTextCompanyAsRecipient = bodyTextCompanyAsRecipient;
     }
 
     public String getSubjectCandidateAsRecipient() {
