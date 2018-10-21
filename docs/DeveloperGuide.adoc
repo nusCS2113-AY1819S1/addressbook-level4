@@ -852,6 +852,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |User |Find relevant details to a specific job candidate |Assign the most suitable job to him/her
 
+|`* *` |User |Undo/Redo changes to CompanyBook and CandidateBook |Revert unwanted changes job candidates and offers
+
 |`* *` |User |Hide <<private-contact-detail,private contact details>> by default |Minimize chance of someone else seeing them by accident
 
 |`* *` |User |Add relevant job experience/history of candidate |Useful when recommending candidates for jobs requiring relevant experience

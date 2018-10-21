@@ -34,7 +34,7 @@ public class AddCompanyCommandIntegrationTest {
     public void execute_newCompany_success() {
         Company validCompany = new CompanyBuilder().build();
 
-        Model expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
         expectedModel.addCompany(validCompany);
         expectedModel.commitCompanyBook();
 
