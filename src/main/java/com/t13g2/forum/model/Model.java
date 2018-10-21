@@ -3,6 +3,7 @@ package com.t13g2.forum.model;
 import java.util.function.Predicate;
 
 import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 
@@ -119,4 +120,19 @@ public interface Model {
      * set or revert the user as admin.
      */
     void setAdmin(User user);
+
+    /**
+     * create module by admin.
+     */
+    boolean createModule(Module module);
+
+    /**
+     * admin updates password.
+     */
+    void adminUpdatePassword(User userToUpdate);
+
+    /**
+     * deletes a certain user.
+     */
+    void deleteUser(User userToDelete);
 }

@@ -12,6 +12,7 @@ import com.t13g2.forum.commons.events.model.ShowAnnouncementEvent;
 import com.t13g2.forum.commons.events.model.UserLoginEvent;
 import com.t13g2.forum.commons.util.CollectionUtil;
 import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 import com.t13g2.forum.storage.forum.Context;
@@ -191,6 +192,24 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void setAdmin(User user) {
         versionedAddressBook.setAdmin(user);
+    }
+
+    @Override
+    public boolean createModule(Module module) {
+        if (versionedAddressBook.createModule(module)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void adminUpdatePassword(User userToUpdate) {
+        versionedAddressBook.adminUpdatePassword(userToUpdate);
+    }
+
+    @Override
+    public void deleteUser(User userToDelete) {
+        versionedAddressBook.deleteUser(userToDelete);
     }
 
     //@@author

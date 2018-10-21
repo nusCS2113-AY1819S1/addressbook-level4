@@ -6,12 +6,9 @@ import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
-import com.t13g2.forum.logic.commands.exceptions.DuplicateModuleException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
-import com.t13g2.forum.storage.forum.Context;
-import com.t13g2.forum.storage.forum.UnitOfWork;
 
 //@@xllx1
 /**
@@ -51,20 +48,11 @@ public class CreateModuleCommand extends Command {
         if (!model.checkIsAdmin()) {
             throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            if (unitOfWork.getModuleRepository().getModuleByCode(moduleToAdd.getModuleCode()) == null) {
-                moduleToAdd.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
-                unitOfWork.getModuleRepository().addModule(moduleToAdd);
-                unitOfWork.commit();
-            } else {
-                throw new DuplicateModuleException("");
-            }
-        } catch (DuplicateModuleException e) {
+        if (model.createModule(moduleToAdd)) {
+            return new CommandResult(String.format(MESSAGE_SUCCESS, moduleToAdd.getModuleCode()));
+        } else {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE,
                 moduleToAdd.getModuleCode()));
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, moduleToAdd.getModuleCode()));
     }
 }
