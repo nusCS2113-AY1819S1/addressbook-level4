@@ -11,7 +11,7 @@ import seedu.planner.model.record.Record;
 /**
  * This class represents the summary of all financial activity within a day.
  */
-public class DaySummary {
+public class DaySummary extends SummaryAbs {
     private Date date;
     private MoneyFlow totalExpense;
     private MoneyFlow totalIncome;
@@ -55,9 +55,7 @@ public class DaySummary {
         return total;
     }
 
-    /**
-     * Adds the record's moneyflow to totalExpense, totalIncome or total
-     */
+    @Override
     public void add(Record record) {
         requireNonNull(record);
         MoneyFlow money = record.getMoneyFlow();
@@ -67,21 +65,6 @@ public class DaySummary {
             totalIncome = MoneyUtil.add(totalIncome, money);
         }
         total = MoneyUtil.add(total, money);
-    }
-
-    /**
-     * Subtracts the record's moneyflow from totalExpense or totalIncome depending on the type of moneyflow
-     * and total
-     */
-    public void remove(Record record) {
-        requireNonNull(record);
-        MoneyFlow money = record.getMoneyFlow();
-        if (isExpense(money)) {
-            totalExpense = MoneyUtil.subtract(totalExpense, money);
-        } else {
-            totalIncome = MoneyUtil.subtract(totalIncome, money);
-        }
-        total = MoneyUtil.subtract(total, money);
     }
 
     private boolean isExpense(MoneyFlow money) {
