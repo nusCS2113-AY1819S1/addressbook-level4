@@ -42,11 +42,11 @@ import seedu.address.model.tag.Tag;
 public class DistributeAlgorithm {
 
     public static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
-    public static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
-    public static final String MESSAGE_MISSING_GROUP = "Group is not found.";
-    public static final String MESSAGE_SHUFFLE_ERROR = "There is a problem shuffling the people in the address book.";
     public static final String MESSAGE_FLAG_ERROR = "Gender and Nationality flags only accept "
             + "'1' or '0' or \"true\" or \"false\"";
+    private static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
+    private static final String MESSAGE_MISSING_GROUP = "Group is not found.";
+    private static final String MESSAGE_SHUFFLE_ERROR = "There is a problem shuffling the people in the address book.";
     private static final String GROUP_LOCATION = "UNKNOWN";
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
@@ -59,7 +59,7 @@ public class DistributeAlgorithm {
         boolean genderFlag = dist.getGender();
         boolean nationalityFlag = dist.getNationality();
 
-        ArrayList<ArrayList<Person>> groupArrayList = new ArrayList<ArrayList<Person>>();
+        ArrayList<ArrayList<Person>> groupArrayList = new ArrayList<>();
 
         // Get all person data via ObservableList
         ObservableList<Person> allPerson = model.getFilteredPersonList();
@@ -72,7 +72,7 @@ public class DistributeAlgorithm {
         //Converts into ArrayList to use Randomizer via Collections
         LinkedList<Person> randomAllPersonArrayList = new LinkedList<>(allPerson);
         Instant instant = Instant.now();
-        randomAllPersonArrayList = shuffle(randomAllPersonArrayList, new Random(instant.getEpochSecond()));
+        shuffle(randomAllPersonArrayList, new Random(instant.getEpochSecond()));
 
         if (!genderFlag && !nationalityFlag) {
             normalDistribution(numOfGroups, groupArrayList, randomAllPersonArrayList, groupName);
@@ -131,8 +131,8 @@ public class DistributeAlgorithm {
         int loopCounter = 0;
         int num = 0;
 
-        maleLinkList = filterGender(randomAllPersonArrayList, maleLinkList, VALID_GENDER_MALE);
-        femaleLinkList = filterGender(randomAllPersonArrayList, femaleLinkList, VALID_GENDER_FEMALE);
+        filterGender(randomAllPersonArrayList, maleLinkList, VALID_GENDER_MALE);
+        filterGender(randomAllPersonArrayList, femaleLinkList, VALID_GENDER_FEMALE);
 
         while (maleLinkList.size() != 0 || femaleLinkList.size() != 0) {
             if (loopCounter % index == 0) {
@@ -195,7 +195,7 @@ public class DistributeAlgorithm {
      * @param seed
      * @return
      */
-    public LinkedList<Person> shuffle(LinkedList<Person> person, Random seed) {
+    private LinkedList<Person> shuffle(LinkedList<Person> person, Random seed) {
         requireNonNull(person);
         try {
             Collections.shuffle(person, seed);
@@ -211,20 +211,16 @@ public class DistributeAlgorithm {
      * Returns a integer value which represent the number of different nationalities
      */
     private Map<Nationality, Long> numberOfDifferentNationality(LinkedList<Person> allPerson) {
-        Map<Nationality, Long> numberOfNationality =
-                allPerson.stream().collect(Collectors.groupingBy(e -> e.getNationality(), Collectors.counting()));
-        return numberOfNationality;
+        return allPerson.stream().collect(Collectors.groupingBy(e -> e.getNationality(), Collectors.counting()));
     }
 
     /**
      * This function will sort the map that holds the number of people with different nationalities.
      */
     private Map<Nationality, Long> paxPerNationality(Map<Nationality, Long> numberOfNationality) {
-        Map<Nationality, Long> sortedNumOfNationality =
-                numberOfNationality.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
-                        .collect(toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
-                                LinkedHashMap::new));
-        return sortedNumOfNationality;
+        return numberOfNationality.entrySet().stream().sorted(Collections.reverseOrder(Map.Entry.comparingByValue()))
+                .collect(toMap(e -> e.getKey(), e -> e.getValue(), (e1, e2) -> e2,
+                        LinkedHashMap::new));
     }
 
     /**
@@ -248,7 +244,7 @@ public class DistributeAlgorithm {
      * This function runs through the allPerson list and add the specific gender required into an LinkedList
      * @param allPerson the list of allPerson in the addressbook
      */
-    public LinkedList<Person> filterGender(LinkedList<Person> allPerson,
+    private LinkedList<Person> filterGender(LinkedList<Person> allPerson,
                                            LinkedList<Person> filteredGender, String gender) {
         for (Person p : allPerson) {
             if (p.getGender().toString().equals(gender)) {
@@ -276,7 +272,7 @@ public class DistributeAlgorithm {
      * @param groupName check if groupName exist
      * @return false if there is no existing group.
      */
-    public boolean existDuplicateGroup (String groupName) {
+    private boolean existDuplicateGroup (String groupName) {
         ObservableList<Group> allGroups = model.getFilteredGroupList();
         requireNonNull(allGroups);
         for (Group gN : allGroups) {
@@ -291,7 +287,7 @@ public class DistributeAlgorithm {
      * This function will check all n number of groupName with the existing address book for existing groups.
      * @param index : number of groups the user desire.
      * @param groupName : the name of the group the user desire
-     * @throws CommandException
+     * @throws CommandException if there exist a duplicate groupName
      */
     private void doesGroupNameExist(int index, String groupName) throws CommandException {
         for (int i = index; i > 0; i--) {
@@ -302,14 +298,13 @@ public class DistributeAlgorithm {
     /**
      * This method will creates a new group with a given groupname.
      * @param toCreateGroupName the groupName that has been concatenated with index
-     * @throws CommandException
+     * @return returns the group object that has been created.
      */
     private Group groupBuilder(String toCreateGroupName) {
         GroupName parseGroupName = new GroupName(toCreateGroupName);
         GroupLocation parseGroupLocation = new GroupLocation(GROUP_LOCATION);
         Set<Tag> tags = new HashSet<>();
-        Group group = new Group(parseGroupName, parseGroupLocation, tags);
-        return group;
+        return new Group(parseGroupName, parseGroupLocation, tags);
     }
 
     private void createGroup(Group group) throws CommandException {
@@ -321,8 +316,9 @@ public class DistributeAlgorithm {
     }
 
     /**
-     * @param group
-     * @return
+     * This method returns the index of the particular group in the address book.
+     * @param group The group to search for.
+     * @return Return the Index value of the group.
      */
     private Index returnGroupIndex(Group group) {
         ObservableList<Group> allGroups = model.getFilteredGroupList();
