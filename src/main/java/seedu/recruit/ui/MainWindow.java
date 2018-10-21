@@ -32,7 +32,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
 
-    private static String currentBook = "companyBook";
+    public volatile static String currentBook = "companyBook";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -44,8 +44,8 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private CandidateDetailsPanel candidateDetailsPanel;
-    private CompanyJobDetailsPanel companyJobDetailsPanel;
+    private static CandidateDetailsPanel candidateDetailsPanel;
+    private static CompanyJobDetailsPanel companyJobDetailsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -60,7 +60,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem candidateBook;
 
     @FXML
-    private StackPane panelViewPlaceHolder;
+    private static StackPane panelViewPlaceHolder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -85,6 +85,9 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
+        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
+                logic.getFilteredCompanyJobList());
     }
 
     public Stage getPrimaryStage() {
@@ -138,11 +141,7 @@ public class MainWindow extends UiPart<Stage> {
              */
             @Override
             public void handle(ActionEvent event) {
-                if (!panelViewPlaceHolder.getChildren().isEmpty()) {
-                    panelViewPlaceHolder.getChildren().remove(0);
-                    panelViewPlaceHolder.getChildren().add(candidateDetailsPanel.getRoot());
-                    currentBook = "candidateBook";
-                }
+                switchToCandidateBook();
             }
         });
     }
@@ -160,11 +159,7 @@ public class MainWindow extends UiPart<Stage> {
              */
             @Override
             public void handle(ActionEvent event) {
-                if (!panelViewPlaceHolder.getChildren().isEmpty()) {
-                    panelViewPlaceHolder.getChildren().remove(0);
-                    panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
-                    currentBook = "companyBook";
-                }
+                switchToCompanyBook();
             }
         });
     }
@@ -175,10 +170,10 @@ public class MainWindow extends UiPart<Stage> {
      * fills up all the other placeholders of this window.
      */
     void fillInnerParts() {
-        candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
-        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
-                                        logic.getFilteredCompanyJobList());
-        panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
+        //candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
+        //companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
+                                        //logic.getFilteredCompanyJobList());
+        //panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -244,11 +239,11 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public CandidateDetailsPanel getCandidateDetailsPanel() {
+    public static CandidateDetailsPanel getCandidateDetailsPanel() {
         return candidateDetailsPanel;
     }
 
-    public CompanyJobDetailsPanel getCompanyJobDetailsPanel() {
+    public static CompanyJobDetailsPanel getCompanyJobDetailsPanel() {
         return companyJobDetailsPanel;
     }
 
@@ -259,6 +254,22 @@ public class MainWindow extends UiPart<Stage> {
             return "candidateBook";
         } else {
             return "Error in Switching Book";
+        }
+    }
+
+    public static void switchToCandidateBook() {
+        if (!panelViewPlaceHolder.getChildren().isEmpty()) {
+            panelViewPlaceHolder.getChildren().remove(0);
+            panelViewPlaceHolder.getChildren().add(candidateDetailsPanel.getRoot());
+            currentBook = "candidateBook";
+        }
+    }
+
+    public static void switchToCompanyBook() {
+        if (!panelViewPlaceHolder.getChildren().isEmpty()) {
+            panelViewPlaceHolder.getChildren().remove(0);
+            panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
+            currentBook = "companyBook";
         }
     }
 
