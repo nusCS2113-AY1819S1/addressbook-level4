@@ -20,8 +20,7 @@ import seedu.address.model.person.Person;
  * Displays the friends in the first panel of the app
  */
 public class FriendListPanel extends UiPart<Region> {
-
-    private static final String FXML = "friendListPanel.fxml";
+    private static final String FXML = "FriendListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
 
     @FXML

@@ -7,19 +7,21 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddTimeCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteTimeCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FriendCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ImportCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.SetTimeTable;
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.UnfriendCommand;
@@ -29,7 +31,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class AddressBookParser {
-
     /**
      * Used for initial separation of command word and args.
      */
@@ -100,9 +101,6 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD_ALIAS:
             return new RedoCommand();
 
-        case SetTimeTable.COMMAND_WORD:
-            return new SetTimeTable();
-
         case TagCommand.COMMAND_WORD:
         case TagCommand.COMMAND_WORD_ALIAS:
             return new TagCommandParser().parse(arguments);
@@ -112,6 +110,17 @@ public class AddressBookParser {
 
         case UnfriendCommand.COMMAND_WORD:
             return new UnfriendCommandParser().parse(arguments);
+
+        case ImportCommand.COMMAND_WORD:
+        case ImportCommand.COMMAND_WORD_ALIAS:
+            return new ImportCommandParser().parse(arguments);
+
+        // TODO: Implement aliases
+        case AddTimeCommand.COMMAND_WORD:
+            return new AddTimeCommandParser().parse(arguments);
+
+        case DeleteTimeCommand.COMMAND_WORD:
+            return new DeleteTimeCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

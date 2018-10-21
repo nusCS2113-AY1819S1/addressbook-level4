@@ -7,27 +7,27 @@ import seedu.address.model.person.Friend;
 import seedu.address.model.person.Name;
 
 /**
- * Allows friends to be added to the person
+ * Constructs a friend
  */
 public class XmlAdaptedFriend {
     @XmlValue
     private String friendName;
 
     /**
-     * Constructs an XmlAdaptedTag.
+     * Constructs an XmlAdaptedFriend.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedFriend() {}
 
     /**
-     * Constructs a {@code XmlAdaptedTag} with the given {@code tagName}.
+     * Constructs a {@code XmlAdaptedFriend} with the given {@code friendName}.
      */
     public XmlAdaptedFriend(String friendName) {
         this.friendName = friendName;
     }
 
     /**
-     * Converts a given Tag into this class for JAXB use.
+     * Converts a given Friend into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created
      */
@@ -36,7 +36,7 @@ public class XmlAdaptedFriend {
     }
 
     /**
-     * Converts this jaxb-friendly adapted tag object into the model's Tag object.
+     * Converts this jaxb-friendly adapted friend object into the model's Friend object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
