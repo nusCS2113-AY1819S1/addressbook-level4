@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
@@ -32,8 +32,8 @@ public class DeleteCandidateCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST_PERSON);
+        Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS, candidateToDelete);
 
@@ -55,10 +55,10 @@ public class DeleteCandidateCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST_PERSON);
+        Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS, candidateToDelete);
 
@@ -72,9 +72,9 @@ public class DeleteCandidateCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of recruit book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getCandidateBook().getCandidateList().size());
 
@@ -86,8 +86,8 @@ public class DeleteCandidateCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST_PERSON);
+        Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
         expectedModel.commitCandidateBook();
@@ -127,11 +127,11 @@ public class DeleteCandidateCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST_PERSON);
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND_PERSON);
-        Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showPersonAtIndex(model, INDEX_SECOND);
+        Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteCandidate(candidateToDelete);
         expectedModel.commitCandidateBook();
 
@@ -142,7 +142,7 @@ public class DeleteCandidateCommandTest {
         expectedModel.undoCandidateBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(candidateToDelete, model.getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        assertNotEquals(candidateToDelete, model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second candidate in unfiltered candidate list
         expectedModel.redoCandidateBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -150,14 +150,14 @@ public class DeleteCandidateCommandTest {
 
     @Test
     public void equals() {
-        DeleteCandidateCommand deleteFirstCommand = new DeleteCandidateCommand(INDEX_FIRST_PERSON);
-        DeleteCandidateCommand deleteSecondCommand = new DeleteCandidateCommand(INDEX_SECOND_PERSON);
+        DeleteCandidateCommand deleteFirstCommand = new DeleteCandidateCommand(INDEX_FIRST);
+        DeleteCandidateCommand deleteSecondCommand = new DeleteCandidateCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCandidateCommand deleteFirstCommandCopy = new DeleteCandidateCommand(INDEX_FIRST_PERSON);
+        DeleteCandidateCommand deleteFirstCommandCopy = new DeleteCandidateCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false
