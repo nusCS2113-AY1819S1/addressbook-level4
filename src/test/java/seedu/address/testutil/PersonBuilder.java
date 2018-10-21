@@ -3,7 +3,6 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
@@ -23,13 +22,13 @@ public class PersonBuilder {
     public static final String DEFAULT_CONTACT = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_VENUE = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Contact contact;
     private Phone phone;
     private Email email;
-    private Address address;
+    private Venue venue;
     private Set<Tag> tags;
     private Set<Attendee> attendees;
 
@@ -38,7 +37,7 @@ public class PersonBuilder {
         contact = new Contact(DEFAULT_CONTACT);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        venue = new Venue(DEFAULT_VENUE);
         tags = new HashSet<>();
         attendees = new HashSet<>();
     }
@@ -51,7 +50,7 @@ public class PersonBuilder {
         contact = eventToCopy.getContact();
         phone = eventToCopy.getPhone();
         email = eventToCopy.getEmail();
-        address = eventToCopy.getAddress();
+        venue = eventToCopy.getVenue();
         tags = new HashSet<>(eventToCopy.getTags());
         attendees = new HashSet<>(eventToCopy.getAttendees());
     }
@@ -73,10 +72,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Event} that we are building.
+     * Sets the {@code Venue} of the {@code Event} that we are building.
      */
-    public PersonBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public PersonBuilder withVenue(String venue) {
+        this.venue = new Venue(venue);
         return this;
     }
 

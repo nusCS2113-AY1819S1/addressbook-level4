@@ -1,9 +1,9 @@
-package seedu.address.model.person;
+package seedu.address.model.event;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -16,8 +16,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.event.Event;
-import seedu.address.model.event.UniqueEventList;
 import seedu.address.model.event.exceptions.DuplicatePersonException;
 import seedu.address.model.event.exceptions.PersonNotFoundException;
 import seedu.address.testutil.EventBuilder;
@@ -48,7 +46,7 @@ public class UniqueEventListTest {
     @Test
     public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(ALICE);
-        Event editedAlice = new EventBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueEventList.contains(editedAlice));
     }
@@ -96,7 +94,7 @@ public class UniqueEventListTest {
     @Test
     public void setPerson_editedPersonHasSameIdentity_success() {
         uniqueEventList.add(ALICE);
-        Event editedAlice = new EventBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueEventList.setEvent(ALICE, editedAlice);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();

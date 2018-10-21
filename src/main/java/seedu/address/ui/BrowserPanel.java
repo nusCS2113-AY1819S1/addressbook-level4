@@ -58,7 +58,7 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&contact=" + event.getContact()
                 + "&phone=" + event.getPhone()
                 + "&email=" + event.getEmail()
-                + "&venue=" + event.getVenue().value.replaceAll("#", "%23")
+                + "&address=" + event.getVenue().value.replaceAll("#", "%23")
                 + "&tags=" + event.getTagsString();
 
         return searchPageString;

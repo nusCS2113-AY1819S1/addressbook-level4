@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EVENTS;
 
 import java.util.Collections;
@@ -21,7 +22,6 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
@@ -32,7 +32,7 @@ import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing event in the address book.
+ * Edits the details of an existing event in the event manager.
  */
 public class EditCommand extends Command {
 
@@ -55,7 +55,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Event: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This event already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_PERSON = "This event already exists in the event manager.";
 
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
@@ -105,7 +105,7 @@ public class EditCommand extends Command {
         Contact updatedContact = editPersonDescriptor.getContact().orElse(eventToEdit.getContact());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(eventToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(eventToEdit.getEmail());
-        Address updatedAddress = editPersonDescriptor.getAddress().orElse(eventToEdit.getAddress());
+        Venue updatedVenue = editPersonDescriptor.getVenue().orElse(eventToEdit.getVenue());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(eventToEdit.getTags());
         Set<Attendee> updatedAttendees = editPersonDescriptor.getAttendees().orElse(eventToEdit.getAttendees());
 
@@ -140,7 +140,7 @@ public class EditCommand extends Command {
         private Contact contact;
         private Phone phone;
         private Email email;
-        private Address address;
+        private Venue venue;
         private Set<Tag> tags;
         private Set<Attendee> attendees;
 
@@ -155,7 +155,7 @@ public class EditCommand extends Command {
             setContact(toCopy.contact);
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
-            setAddress(toCopy.address);
+            setVenue(toCopy.venue);
             setTags(toCopy.tags);
             setAttendees(toCopy.attendees);
         }
@@ -199,12 +199,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(email);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setVenue(Venue venue) {
+            this.venue = venue;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Venue> getVenue() {
+            return Optional.ofNullable(venue);
         }
 
         /**

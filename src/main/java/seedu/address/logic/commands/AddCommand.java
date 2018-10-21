@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -36,7 +37,7 @@ public class AddCommand extends Command {
             + PREFIX_CONTACT + "Amy Tan "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_VENUE + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney "
             + PREFIX_ATTENDEE + "Jason Derulo";
@@ -46,7 +47,7 @@ public class AddCommand extends Command {
 
     private final Event toAdd;
 
-    private Comments comments = new Comments();
+    //private Comments comments = new Comments();
 
     /**
      * Creates an AddCommand to add the specified {@code Event}
@@ -63,7 +64,7 @@ public class AddCommand extends Command {
         if (model.hasEvent(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_EVENT);
         }
-        comments.createHtml(comments.getFilePath(), comments.getFileName());
+        //comments.createHtml(comments.getFilePath(), comments.getFileName());
         model.addEvent(toAdd);
         model.commitEventManager();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

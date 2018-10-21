@@ -1,11 +1,10 @@
-package seedu.address.model.person;
+package seedu.address.model.event;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.model.event.Venue;
 import seedu.address.testutil.Assert;
 
 public class VenueTest {

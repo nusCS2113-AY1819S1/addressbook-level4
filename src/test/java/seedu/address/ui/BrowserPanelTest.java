@@ -49,7 +49,7 @@ public class BrowserPanelTest extends GuiUnitTest {
                 + ALICE.getPhone()
                 + "&email="
                 + ALICE.getEmail()
-                + "&venue="
+                + "&address="
                 + ALICE.getVenue().value.replaceAll(" ", "%20").replaceAll("#", "%23")
                 + "&tags="
                 + ALICE.getTagsString());

@@ -89,6 +89,7 @@ public class XmlUtilTest {
         assertEquals(expectedPerson, actualPerson);
     }
 
+
     @Test
     public void xmlAdaptedPersonFromFile_fileWithInvalidPersonField_validResult() throws Exception {
         XmlAdaptedEvent actualPerson = XmlUtil.getDataFromFile(

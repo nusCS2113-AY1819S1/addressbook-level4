@@ -11,11 +11,11 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Venue;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedEventTest {
@@ -23,7 +23,7 @@ public class XmlAdaptedEventTest {
     private static final String INVALID_NAME = "D@NC^N& ^N TH3 D@RK";
     private static final String INVALID_CONTACT = "R@chel";
     private static final String INVALID_PHONE = "+651234";
-    private static final String INVALID_ADDRESS = " ";
+    private static final String INVALID_VENUE = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
 
@@ -31,7 +31,7 @@ public class XmlAdaptedEventTest {
     private static final String VALID_CONTACT = BENSON.getContact().toString();
     private static final String VALID_PHONE = BENSON.getPhone().toString();
     private static final String VALID_EMAIL = BENSON.getEmail().toString();
-    private static final String VALID_ADDRESS = BENSON.getAddress().toString();
+    private static final String VALID_VENUE = BENSON.getVenue().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
@@ -118,7 +118,7 @@ public class XmlAdaptedEventTest {
     }
 
     @Test
-    public void toModelType_nullAddress_throwsIllegalValueException() {
+    public void toModelType_nullVenue_throwsIllegalValueException() {
         XmlAdaptedEvent person = new XmlAdaptedEvent(VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL,
                 null, VALID_TAGS, VALID_ATTENDEES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Venue.class.getSimpleName());

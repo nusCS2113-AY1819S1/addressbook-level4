@@ -1,38 +1,32 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
-=======
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
->>>>>>> 9470c38c62904923c790831a4c15b2cc592386a8
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-<<<<<<< HEAD
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDEE_DESC;
-=======
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
->>>>>>> 9470c38c62904923c790831a4c15b2cc592386a8
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTACT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_VENUE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
@@ -50,17 +44,13 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
-import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
-<<<<<<< HEAD
 import seedu.address.model.event.Venue;
 import seedu.address.model.attendee.Attendee;
-=======
->>>>>>> 9470c38c62904923c790831a4c15b2cc592386a8
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -73,7 +63,7 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
 
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add an event without tags to a non-empty address book, command with leading spaces and trailing spaces
+        /* Case: add an event without tags to a non-empty event manager, command with leading spaces and trailing spaces
          * -> added
          */
         Event toAdd = AMY;
@@ -93,13 +83,13 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add an event with all fields same as another event in the address book except name -> added */
+        /* Case: add an event with all fields same as another event in the event manager except name -> added */
         toAdd = new EventBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + VENUE_DESC_AMY + TAG_DESC_FRIEND + ATTENDEE_DESC_TED;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add an event with all fields same as another event in the address book except contact, phone and email
+        /* Case: add an event with all fields same as another event in the event manager except contact, phone and email
          * -> added
          */
         toAdd = new EventBuilder(AMY).withContact(VALID_CONTACT_BOB).withPhone(VALID_PHONE_BOB)
@@ -107,7 +97,7 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add to empty address book -> added */
+        /* Case: add to empty event manager -> added */
         deleteAllPersons();
         assertCommandSuccess(ALICE);
 
@@ -153,8 +143,8 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_EVENT);
 
-        /* Case: add a duplicate event except with different address -> rejected */
-        toAdd = new EventBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
+        /* Case: add a duplicate event except with different venue -> rejected */
+        toAdd = new EventBuilder(HOON).withVenue(VALID_VENUE_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_EVENT);
 
@@ -163,22 +153,22 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_EVENT);
 
         /* Case: missing name -> rejected */
-        command = AddCommand.COMMAND_WORD + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + VENUE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing contact -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + VENUE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing phone -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + EMAIL_DESC_AMY + VENUE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
         /* Case: missing email -> rejected */
-        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + PHONE_DESC_AMY + ADDRESS_DESC_AMY;
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + PHONE_DESC_AMY + VENUE_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
-        /* Case: missing address -> rejected */
+        /* Case: missing venue -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY;
         assertCommandFailure(command, String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
 
@@ -188,32 +178,32 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: invalid name -> rejected */
         command = AddCommand.COMMAND_WORD + INVALID_NAME_DESC + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+                + VENUE_DESC_AMY;
         assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid contact -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + INVALID_CONTACT_DESC + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+                + VENUE_DESC_AMY;
         assertCommandFailure(command, Contact.MESSAGE_CONTACT_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + INVALID_PHONE_DESC + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY;
+                + VENUE_DESC_AMY;
         assertCommandFailure(command, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + PHONE_DESC_AMY + INVALID_EMAIL_DESC
-                + ADDRESS_DESC_AMY;
+                + VENUE_DESC_AMY;
         assertCommandFailure(command, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
-        /* Case: invalid address -> rejected */
+        /* Case: invalid venue -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + INVALID_ADDRESS_DESC;
-        assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
+                + INVALID_VENUE_DESC;
+        assertCommandFailure(command, Venue.MESSAGE_VENUE_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + ADDRESS_DESC_AMY + INVALID_TAG_DESC;
+                + VENUE_DESC_AMY + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: invalid attendee -> rejected */

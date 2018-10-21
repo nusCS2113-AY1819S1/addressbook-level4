@@ -228,7 +228,7 @@ public abstract class EventManagerSystemTest {
                     + "&email="
                     + selectedCardHandle.getEmail()
                     + "&address="
-                    + selectedCardHandle.getAddress().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
                     + "&tags="
                     + selectedCardHandle.getTagsString().replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {

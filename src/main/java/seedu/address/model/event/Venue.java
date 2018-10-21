@@ -32,7 +32,7 @@ public class Venue {
     }
 
     /**
-     * Returns true if a given string is a valid location.
+     * Returns true if a given string is a valid venue.
      */
     public static boolean isValidVenue(String test) {
         return test.matches(VENUE_VALIDATION_REGEX);

@@ -26,7 +26,7 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
 
     @Test
     public void find() {
-        /* Case: find multiple persons in address book, command with leading spaces and trailing spaces
+        /* Case: find multiple persons in event manager, command with leading spaces and trailing spaces
          * -> 2 persons found
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TRYOUTS + "   ";
@@ -48,23 +48,23 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords -> 2 persons found */
+        /* Case: find multiple persons in event manager, 2 keywords -> 2 persons found */
         command = FindCommand.COMMAND_WORD + " Dancing Music";
         ModelHelper.setFilteredList(expectedModel, BENSON, ELLE);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords in reversed order -> 2 persons found */
+        /* Case: find multiple persons in event manager, 2 keywords in reversed order -> 2 persons found */
         command = FindCommand.COMMAND_WORD + " Music Dancing";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 keywords with 1 repeat -> 2 persons found */
+        /* Case: find multiple persons in event manager, 2 keywords with 1 repeat -> 2 persons found */
         command = FindCommand.COMMAND_WORD + " Music Dancing Music";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find multiple persons in address book, 2 matching keywords and 1 non-matching keyword
+        /* Case: find multiple persons in event manager, 2 matching keywords and 1 non-matching keyword
          * -> 2 persons found
          */
         command = FindCommand.COMMAND_WORD + " Music Dancing NonMatchingKeyWord";
@@ -81,7 +81,7 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
-        /* Case: find same persons in address book after deleting 1 of them -> 1 event found */
+        /* Case: find same persons in event manager after deleting 1 of them -> 1 event found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getEventManager().getEventList().contains(BENSON));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TRYOUTS;
@@ -90,44 +90,44 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find event in address book, keyword is same as name but of different case -> 1 event found */
+        /* Case: find event in event manager, keyword is same as name but of different case -> 1 event found */
         command = FindCommand.COMMAND_WORD + " TrYouts";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find event in address book, keyword is substring of name -> 0 persons found */
+        /* Case: find event in event manager, keyword is substring of name -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Try";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find event in address book, name is substring of keyword -> 0 persons found */
+        /* Case: find event in event manager, name is substring of keyword -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Tryoutser";
         ModelHelper.setFilteredList(expectedModel);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find event not in address book -> 0 persons found */
+        /* Case: find event not in event manager -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " Mark";
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find phone number of event in address book -> 0 persons found */
+        /* Case: find phone number of event in event manager -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " " + DANIEL.getPhone().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find address of event in address book -> 0 persons found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getAddress().value;
+        /* Case: find venue of event in event manager -> 0 persons found */
+        command = FindCommand.COMMAND_WORD + " " + DANIEL.getVenue().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find email of event in address book -> 0 persons found */
+        /* Case: find email of event in event manager -> 0 persons found */
         command = FindCommand.COMMAND_WORD + " " + DANIEL.getEmail().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
-        /* Case: find tags of event in address book -> 0 persons found */
+        /* Case: find tags of event in event manager -> 0 persons found */
         List<Tag> tags = new ArrayList<>(DANIEL.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
@@ -142,7 +142,7 @@ public class FindCommandSystemTest extends EventManagerSystemTest {
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
-        /* Case: find event in empty address book -> 0 persons found */
+        /* Case: find event in empty event manager -> 0 persons found */
         deleteAllPersons();
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_TRYOUTS;
         expectedModel = getModel();
