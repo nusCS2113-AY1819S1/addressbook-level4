@@ -12,7 +12,7 @@ public class Subject {
     public static final String MESSAGE_SUBJECT_CONSTRAINTS =
             "Email subject has no character limit (RFC 2822), "
                     + "however to prevent folding of subject, 78 characters is enforced.";
-    public static final String SUBJECT_VALIDATION_REGEX = "^.{0,255}$";
+    public static final String SUBJECT_VALIDATION_REGEX = "^.{0,78}$";
     public final String value;
 
     /**
