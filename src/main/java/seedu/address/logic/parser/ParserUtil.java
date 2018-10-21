@@ -123,7 +123,7 @@ public class ParserUtil {
         requireNonNull(countryCode);
         String trimmedCountryCode = countryCode.trim();
         if (!Nationality.isValidCountryCode(trimmedCountryCode)) {
-            throw new ParseException(Nationality.MESSAGE_NAME_CONSTRAINTS);
+            throw new ParseException(Nationality.MESSAGE_NATIONALITY_CONSTRAINT);
         }
         return new Nationality(trimmedCountryCode);
     }

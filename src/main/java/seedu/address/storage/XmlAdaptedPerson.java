@@ -132,7 +132,7 @@ public class XmlAdaptedPerson {
                     Nationality.class.getSimpleName()));
         }
         if (!Nationality.isValidCountryCode(nationality)) {
-            throw new IllegalValueException(Nationality.MESSAGE_NAME_CONSTRAINTS);
+            throw new IllegalValueException(Nationality.MESSAGE_NATIONALITY_CONSTRAINT);
         }
         final Nationality modelNationality = new Nationality(nationality);
 

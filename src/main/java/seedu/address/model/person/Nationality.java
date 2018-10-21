@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Nationality {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
+    public static final String MESSAGE_NATIONALITY_CONSTRAINT =
             "Country Code should only contain 2 UPPERCASE characters and valid. It should not be blank";
 
     /**
@@ -40,7 +40,7 @@ public class Nationality {
      */
     public Nationality(String nationality) {
         requireNonNull(nationality);
-        checkArgument(isValidCountryCode(nationality), MESSAGE_NAME_CONSTRAINTS);
+        checkArgument(isValidCountryCode(nationality), MESSAGE_NATIONALITY_CONSTRAINT);
         this.nationality = nationality;
     }
 

@@ -82,6 +82,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_FEMALE;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_MALE;
+    public static final String GENDER_ABBREVATION_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_ABBREVATION_FEMALE;
+    public static final String GENDER_ABBREVATION_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_ABBREVATION_MALE;
     public static final String NATIONALITY_DESC_AMY = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_SG;
     public static final String NATIONALITY_DESC_BOB = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_CN;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
@@ -121,7 +123,8 @@ public class CommandTestUtil {
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Male1"; // '1' not allowed in Gender
-    public static final String INVALID_NATIONALITY_DESC = " " + PREFIX_GENDER + "SG1"; // '1' not allowed in Nationality
+    public static final String INVALID_GENDER_ABBREVIATED_DESC = " " + PREFIX_GENDER + "A"; // '1' not allowed in Gender
+    public static final String INVALID_NATIONALITY_DESC = " " + PREFIX_NATIONALITY + "SG1"; // '1' not allowed in Nationality
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
