@@ -25,19 +25,22 @@ public class SummaryByMonthCommandParser implements Parser<SummaryCommand> {
     public SummaryCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_DATE);
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByMonthCommand.MESSAGE_USAGE));
         }
         String monthIntervalString = argMultimap.getValue(PREFIX_DATE).get();
         String[] argList = splitByWhitespace(monthIntervalString);
         Month startMonth;
         Month endMonth;
-        if (argList.length != 2) {
-            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE)));
+        if (argList == null || argList.length != 2) {
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByMonthCommand.MESSAGE_USAGE)));
         }
         startMonth = ParserUtil.parseMonth(argList[0]);
         endMonth = ParserUtil.parseMonth(argList[1]);
         if (DateUtil.compareMonth(startMonth, endMonth) > 0) {
-            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryCommand.MESSAGE_USAGE)));
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByMonthCommand.MESSAGE_USAGE)));
         }
         return new SummaryByMonthCommand(startMonth, endMonth);
     }

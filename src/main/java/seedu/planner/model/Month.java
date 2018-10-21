@@ -46,12 +46,12 @@ public class Month {
      * @param input A valid string.
      */
     //TODO: refactor this
-    public Month(String input) throws ParseException {
+    public Month(String input) {
         input = input.toUpperCase();
         checkArgument(isValidMonth(input), MESSAGE_MONTH_CONSTRAINTS);
         matcher = MONTH_VALIDATION_PATTERN.matcher(input);
         if (!matcher.matches()) {
-            throw new ParseException(MESSAGE_MONTH_CONSTRAINTS);
+            checkArgument(false, MESSAGE_MONTH_CONSTRAINTS);
         }
         checkArgument(isLogicalMonth(matcher.group("month")), MESSAGE_MONTH_LOGICAL_CONSTRAINTS);
         initMonth(matcher.group("month"), matcher.group("year"));

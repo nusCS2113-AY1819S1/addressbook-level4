@@ -18,11 +18,11 @@ import seedu.planner.model.summary.SummaryByDateList;
 /** List all the summary of records within a period of time specified */
 public class SummaryByDateCommand extends SummaryCommand {
 
-    public static final String COMMAND_WORD = "summary date";
+    public static final String COMMAND_MODE = "date";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the summary for each day for a period of time. "
             + "Parameters: "
             + PREFIX_DATE + "DATE_START " + "DATE_END "
-            + "Example: " + COMMAND_WORD + " "
+            + "Example: " + COMMAND_WORD + " " + COMMAND_MODE + " "
             + PREFIX_DATE + "18-9-2018 " + "20-9-2018 ";
 
     public static final String MESSAGE_SUCCESS = "Listed summary for %d days/months:";
