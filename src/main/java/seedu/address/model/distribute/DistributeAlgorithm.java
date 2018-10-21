@@ -103,35 +103,7 @@ public class DistributeAlgorithm {
 
             groupArrayList.add(addPerson);
         }
-
-        // TODO: Add function that iterate groupArrayList and addMemebrs into the group
-        ObservableList<Person> allPerson = model.getFilteredPersonList();
-
-        for (int i = 0; i < groupArrayList.size(); i++) {
-            //Create a group here
-            //Get the group Index
-            String toCreateGroupName = groupNameConcatenation(i, groupName);
-            Group newGroup = groupBuilder(toCreateGroupName);
-            createGroup(newGroup);
-            Index groupIndex = returnGroupIndex(newGroup);
-            if (groupIndex.getOneBased() == 0) {
-                throw new CommandException(MESSAGE_MISSING_GROUP);
-            }
-            System.out.println(groupIndex.getOneBased());
-            System.out.println(toCreateGroupName);
-            for (int j = 0; j < groupArrayList.get(i).size(); j++) {
-                System.out.println(groupArrayList.get(i).get(j));
-                for (int k = 0; k < allPerson.size(); k++) {
-                    //System.out.println (groupArrayList.get(i).get(j));
-                    if (allPerson.get(k).equals(groupArrayList.get(i).get(j))) {
-                        Set<Index> personIndices = new HashSet<>();
-                        personIndices.add(Index.fromZeroBased(k));
-                        AddGroup addSinglePersonIntoGroup = new AddGroup(groupIndex, personIndices);
-                        addPersonIntoGroup(addSinglePersonIntoGroup);
-                    }
-                }
-            }
-        }
+        distributeProcess(groupArrayList, groupName);
         groupArrayList.clear();
     }
 
@@ -369,4 +341,38 @@ public class DistributeAlgorithm {
         return Index.fromZeroBased(0);
     }
 
+
+    /**
+     * This Method Create the require group by the user and add the specific person into the group.
+     * Works for multiple groups.
+     * @param groupArrayList Total number of groups
+     * @param groupName Groupname set by the User
+     * @throws CommandException if Index of a group was return as 0.
+     */
+    private void distributeProcess(ArrayList<ArrayList<Person>> groupArrayList,
+                                   String groupName) throws CommandException {
+        ObservableList<Person> allPerson = model.getFilteredPersonList();
+        for (int i = 0; i < groupArrayList.size(); i++) {
+            String toCreateGroupName = groupNameConcatenation(i, groupName);
+            Group newGroup = groupBuilder(toCreateGroupName);
+            createGroup(newGroup);
+            Index groupIndex = returnGroupIndex(newGroup);
+            if (groupIndex.getOneBased() == 0) {
+                throw new CommandException(MESSAGE_MISSING_GROUP);
+            }
+            System.out.println(groupIndex.getOneBased());
+            System.out.println(toCreateGroupName);
+            for (int j = 0; j < groupArrayList.get(i).size(); j++) {
+                System.out.println(groupArrayList.get(i).get(j));
+                for (int k = 0; k < allPerson.size(); k++) {
+                    if (allPerson.get(k).equals(groupArrayList.get(i).get(j))) {
+                        Set<Index> personIndices = new HashSet<>();
+                        personIndices.add(Index.fromZeroBased(k));
+                        AddGroup addSinglePersonIntoGroup = new AddGroup(groupIndex, personIndices);
+                        addPersonIntoGroup(addSinglePersonIntoGroup);
+                    }
+                }
+            }
+        }
+    }
 }
