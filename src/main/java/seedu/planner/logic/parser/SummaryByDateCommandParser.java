@@ -29,13 +29,15 @@ public class SummaryByDateCommandParser implements Parser<SummaryCommand> {
         String[] argList = splitByWhitespace(dateIntervalString);
         Date startDate;
         Date endDate;
-        if (argList.length != 2) {
-            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByDateCommand.MESSAGE_USAGE)));
+        if (argList == null || argList.length != 2) {
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByDateCommand.MESSAGE_USAGE)));
         }
         startDate = ParserUtil.parseDate(argList[0]);
         endDate = ParserUtil.parseDate(argList[1]);
         if (!isDateOrderValid(startDate, endDate)) {
-            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT, SummaryByDateCommand.MESSAGE_USAGE)));
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryByDateCommand.MESSAGE_USAGE)));
         }
         return new SummaryByDateCommand(startDate, endDate);
     }

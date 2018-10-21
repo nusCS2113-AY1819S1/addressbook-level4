@@ -63,7 +63,13 @@ public class ParserUtil {
         if (!Date.isValidDateFormat(trimmedDate)) {
             throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
-        return new Date(trimmedDate);
+        Date result;
+        try {
+            result = new Date(trimmedDate);
+        } catch (IllegalArgumentException e) {
+            throw new ParseException(e.getMessage());
+        }
+        return result;
     }
 
     /**

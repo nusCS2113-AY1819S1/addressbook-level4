@@ -1,7 +1,6 @@
 package seedu.planner.model.record;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.planner.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.planner.commons.util.AppUtil.checkArgument;
 
 import java.util.logging.Logger;
@@ -41,12 +40,10 @@ public class Date {
      */
     public Date(String date) {
         requireNonNull(date);
-        checkArgument(isValidDateFormat(date), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_DATE_CONSTRAINTS));
+        checkArgument(isValidDateFormat(date), MESSAGE_DATE_CONSTRAINTS);
         value = date;
         splitDate(date);
-        checkArgument(DateUtil.isValidDate(day, month), String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                MESSAGE_DATE_LOGICAL_CONSTRAINTS));
+        checkArgument(DateUtil.isValidDate(day, month), MESSAGE_DATE_LOGICAL_CONSTRAINTS);
     }
 
     /**
