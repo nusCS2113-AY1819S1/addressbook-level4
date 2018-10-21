@@ -155,14 +155,7 @@ public class DistributeAlgorithm {
                 loopCounter++;
             }
         }
-
-        // TODO: Add function that iterate groupArrayList and addMemebrs into the group
-        for (int i = 0; i < groupArrayList.size(); i++) {
-            System.out.println(groupNameConcatenation(i, groupName));
-            for (int j = 0; j < groupArrayList.get(i).size(); j++) {
-                System.out.println (groupArrayList.get(i).get(j));
-            }
-        }
+        distributeProcess(groupArrayList, groupName);
         groupArrayList.clear();
     }
 
