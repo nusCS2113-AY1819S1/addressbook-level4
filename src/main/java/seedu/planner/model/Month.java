@@ -46,6 +46,7 @@ public class Month {
      */
     //TODO: refactor this
     public Month(String input) {
+        requireNonNull(input);
         input = input.toUpperCase();
         checkArgument(isValidMonth(input), MESSAGE_MONTH_CONSTRAINTS);
         matcher = MONTH_VALIDATION_PATTERN.matcher(input);
