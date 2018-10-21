@@ -32,7 +32,7 @@ public class TypicalExpenditures {
     private TypicalExpenditures() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code ExpenditureTracker} with all the typical expenditures.
      */
     public static ExpenditureTracker getTypicalExpenditureTracker() {
         ExpenditureTracker et = new ExpenditureTracker();
