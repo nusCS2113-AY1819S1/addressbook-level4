@@ -1,7 +1,9 @@
 package seedu.planner.model.summary;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.planner.model.Month.STANDARD_MONTHS;
 
 import org.junit.Test;
 
@@ -19,6 +21,27 @@ public class MonthTest {
     public void constructor_invalidMonth_throwsIllegalArgumentException() {
         String invalidMonth = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Month(invalidMonth));
+    }
+
+    @Test
+    public void constructor_diffRepresentations_sameMonth() {
+        assertEquals(new Month("fEb-2018"), new Month("FEB-2018"));
+        assertEquals(new Month("feb-2018"), new Month("FEB-2018"));
+    }
+
+    /**
+     * Checks the mapping between standard representation and the month number
+     */
+    @Test
+    public void constructor_valid_success() {
+        String yearString = "2018";
+        int monthNum = 1;
+        for (String m : STANDARD_MONTHS) {
+            String testInput = m + "-" + yearString;
+            int year = Integer.parseInt(yearString);
+            assertEquals(new Month(testInput), new Month(monthNum, year));
+            monthNum++;
+        }
     }
 
     @Test
@@ -45,7 +68,7 @@ public class MonthTest {
     }
 
     /**
-     * Test whether a given month and year is logical
+     * Test whether a given month is logical
      */
     @Test
     public void isValidMonth() {
@@ -55,6 +78,5 @@ public class MonthTest {
         // valid dates
         assertTrue(Month.isLogicalMonth("apr")); // APR exists
         assertTrue(Month.isLogicalMonth("Apr")); // argument is non case-sensitive
-
     }
 }

@@ -28,7 +28,7 @@ public class Month {
     public static final String MONTH_VALIDATION_REGEX = "[a-zA-Z]{3}-\\d{4}";
     public static final Pattern MONTH_VALIDATION_PATTERN = Pattern.compile("(?<month>[a-zA-Z]{3})-(?<year>\\d{4})");
 
-    private static final List<String> standardMonths = Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+    public static final List<String> STANDARD_MONTHS = Arrays.asList("JAN", "FEB", "MAR", "APR", "MAY", "JUN",
             "JUL", "AUG", "SEP", "OCT", "NOV", "DEC");
 
     public final String value;
@@ -54,13 +54,13 @@ public class Month {
         }
         checkArgument(isLogicalMonth(matcher.group("month")), MESSAGE_MONTH_LOGICAL_CONSTRAINTS);
         initMonth(matcher.group("month"), matcher.group("year"));
-        value = String.format("%s-%d", standardMonths.get(month - 1), year);
+        value = String.format("%s-%d", STANDARD_MONTHS.get(month - 1), year);
     }
 
     public Month(int month, int year) {
         this.month = month;
         this.year = year;
-        value = String.format("%s-%d", standardMonths.get(month - 1), year);
+        value = String.format("%s-%d", STANDARD_MONTHS.get(month - 1), year);
     }
 
     public int getYear() {
@@ -85,13 +85,13 @@ public class Month {
      */
     public static boolean isLogicalMonth(String test) {
         requireNonNull(test);
-        return standardMonths.contains(test);
+        return STANDARD_MONTHS.contains(test);
     }
 
     private void initMonth(String month, String year) {
         requireAllNonNull(month, year);
         this.year = Integer.parseInt(year);
-        this.month = standardMonths.indexOf(month) + 1;
+        this.month = STANDARD_MONTHS.indexOf(month) + 1;
     }
 
     @Override
