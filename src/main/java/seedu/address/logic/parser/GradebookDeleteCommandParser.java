@@ -2,7 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
@@ -20,15 +20,15 @@ public class GradebookDeleteCommandParser {
      * @throws ParseException if the user input does not conform the expected format
      */
     public GradebookDeleteCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULECODE, PREFIX_GRADEBOOK_ITEM);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_MODULECODE, PREFIX_GRADEBOOK_ITEM)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     GradebookDeleteCommand.MESSAGE_USAGE));
         }
 
-        String moduleCodeArg = argMultimap.getValue(PREFIX_MODULECODE).get();
+        String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         String gradeItemNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
         Gradebook gradebook = new Gradebook(moduleCodeArg, gradeItemNameArg);
         return new GradebookDeleteCommand(gradebook);

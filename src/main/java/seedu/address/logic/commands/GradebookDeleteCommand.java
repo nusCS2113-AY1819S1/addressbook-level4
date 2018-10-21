@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -17,10 +17,10 @@ public class GradebookDeleteCommand extends Command {
     public static final String COMMAND_WORD = "gradebook delete";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a gradebook component to Trajectory. "
             + "Parameters: "
-            + PREFIX_MODULECODE + "MODULE_CODE  "
+            + PREFIX_MODULE_CODE + "MODULE_CODE  "
             + PREFIX_GRADEBOOK_ITEM + "ITEM "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MODULECODE + "CS2113 "
+            + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
 
     private final Gradebook toDeleteGradebookComponent;
