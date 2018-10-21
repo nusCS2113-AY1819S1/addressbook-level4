@@ -15,6 +15,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDE
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_2;
 import static seedu.address.logic.parser.CommandParserTestUtil.VALID_PERSON_INDEX_3;
 import static seedu.address.testutil.TypicalAddGroups.getAddGroup1;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_GROUP;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.Arrays;
@@ -99,7 +100,9 @@ public class AddressBookParserTest {
      */
     @Test
     public void parseCommand_deleteGroup() throws Exception {
-        assertTrue(parser.parseCommand(DeleteGroupCommand.COMMAND_WORD) instanceof DeleteGroupCommand);
+        DeleteGroupCommand command = (DeleteGroupCommand) parser.parseCommand(
+                DeleteGroupCommand.COMMAND_WORD + " " + INDEX_FIRST_GROUP.getOneBased());
+        assertEquals(new DeleteGroupCommand(INDEX_FIRST_GROUP), command);
     }
 
     /**

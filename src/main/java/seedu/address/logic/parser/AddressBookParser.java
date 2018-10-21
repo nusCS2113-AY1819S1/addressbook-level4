@@ -77,7 +77,7 @@ public class AddressBookParser {
 
         case DeleteGroupCommand.COMMAND_WORD:
         case DeleteGroupCommand.COMMAND_WORD_2:
-            return new DeleteGroupCommand();
+            return new DeleteGroupCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
         case EditCommand.COMMAND_WORD_2:
