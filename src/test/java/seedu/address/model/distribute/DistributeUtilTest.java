@@ -10,6 +10,7 @@ import java.util.Random;
 import org.junit.Test;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.util.DistributeUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -22,7 +23,7 @@ public class DistributeUtilTest {
 
     @Test
     public void shuffleTest() {
-        DistributeAlgorithm testPerson = new DistributeAlgorithm();
+        DistributeUtil testPerson = new DistributeUtil();
         Random testValue = new Random(96259561);
         LinkedList<Person> allPersonList = new LinkedList<>(allPersons);
         Collections.shuffle(allPersonList, testValue);
