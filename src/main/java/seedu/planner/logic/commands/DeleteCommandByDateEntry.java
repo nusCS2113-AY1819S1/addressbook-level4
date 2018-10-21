@@ -54,7 +54,7 @@ public class DeleteCommandByDateEntry extends Command {
             logger.info("The record does not exist.\n");
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
         } else {
-            return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, targetDate.value));
+            return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, targetDate.value) + model.autoLimitCheck());
         }
     }
 

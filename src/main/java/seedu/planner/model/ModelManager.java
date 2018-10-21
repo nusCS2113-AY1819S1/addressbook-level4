@@ -158,6 +158,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.updateLimit(target, editedLimit);
         indicateLimitListChanged();
     }
+
     @Override
     public String autoLimitCheck () {
        String output = "\n";
@@ -169,6 +170,12 @@ public class ModelManager extends ComponentManager implements Model {
         return output;
     }
 
+    /**
+     * This function is to do the auto check whenever the record changed.
+     * @param isExceeded
+     * @param limit
+     * @return
+     */
     public String generateLimitOutput (boolean isExceeded, Limit limit) {
         String output;
         if (isExceeded) {

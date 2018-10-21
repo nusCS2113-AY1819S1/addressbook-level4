@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
         Record recordToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteRecord(recordToDelete);
         model.commitFinancialPlanner();
-        return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, recordToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, recordToDelete) + model.autoLimitCheck());
     }
 
     @Override
