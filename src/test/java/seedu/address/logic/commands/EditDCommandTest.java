@@ -118,7 +118,7 @@ public class EditDCommandTest {
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder(firstDistributor).build();
         EditDistributorCommand editDCommand = new EditDistributorCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editDCommand, model, commandHistory, EditDistributorCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editDCommand, model, commandHistory, EditDistributorCommand.MESSAGE_DUPLICATE_DISTRIBUTOR);
     }
 
     @Test
@@ -131,7 +131,7 @@ public class EditDCommandTest {
         EditDistributorCommand editDCommand = new EditDistributorCommand(INDEX_FIRST_PERSON,
                 new EditDistributorDescriptorBuilder(distributorInList).build());
 
-        assertCommandFailure(editDCommand, model, commandHistory, EditDistributorCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editDCommand, model, commandHistory, EditDistributorCommand.MESSAGE_DUPLICATE_DISTRIBUTOR);
     }
 
     @Test

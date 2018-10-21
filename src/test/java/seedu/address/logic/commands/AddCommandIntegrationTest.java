@@ -46,7 +46,7 @@ public class AddCommandIntegrationTest {
     public void execute_duplicatePerson_throwsCommandException() {
         Product productInList = model.getProductInfoBook().getPersonList().get(0);
         assertCommandFailure(new AddCommand(productInList), model, commandHistory,
-                AddCommand.MESSAGE_DUPLICATE_PERSON);
+                AddCommand.MESSAGE_DUPLICATE_PRODUCT);
     }
 
 }
