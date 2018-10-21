@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.item.Item;
 
+
 /**
  * An UI component that displays information of a {@code Item}.
  */
@@ -65,9 +66,9 @@ public class ItemCard extends UiPart<Region> {
         name.setText(item.getName().fullName);
         quantity.setText(item.getQuantity().toString());
         minQuantity.setText(item.getMinQuantity().toString());
-        statusReady.setText(item.getStatus().get(0).toString());
-        statusOnLoan.setText(item.getStatus().get(1).toString());
-        statusFaulty.setText(item.getStatus().get(2).toString());
+        statusReady.setText(item.getStatus().getStatusReady().toString());
+        statusOnLoan.setText(item.getStatus().getStatusOnLoan().toString());
+        statusFaulty.setText(item.getStatus().getStatusFaulty().toString());
         item.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
         quantityText.setText(QUANTITY_TEXT);
         minQuantityText.setText(MIN_QUANTITY_TEXT);
