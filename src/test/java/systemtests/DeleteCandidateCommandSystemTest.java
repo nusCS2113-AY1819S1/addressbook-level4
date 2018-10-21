@@ -7,7 +7,7 @@ import static seedu.recruit.logic.commands.DeleteCandidateCommand.MESSAGE_DELETE
 import static seedu.recruit.testutil.TestUtil.getLastIndex;
 import static seedu.recruit.testutil.TestUtil.getMidIndex;
 import static seedu.recruit.testutil.TestUtil.getPerson;
-import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Ignore;
@@ -33,9 +33,9 @@ public class DeleteCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: delete the first candidate in the list, command with leading spaces and trailing spaces -> deleted */
         Model expectedModel = getModel();
-        String command = "     " + DeleteCandidateCommand.COMMAND_WORD + "      " + INDEX_FIRST_PERSON.getOneBased()
+        String command = "     " + DeleteCandidateCommand.COMMAND_WORD + "      " + INDEX_FIRST.getOneBased()
                 + "       ";
-        Candidate deletedCandidate = removePerson(expectedModel, INDEX_FIRST_PERSON);
+        Candidate deletedCandidate = removePerson(expectedModel, INDEX_FIRST);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedCandidate);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
@@ -63,7 +63,7 @@ public class DeleteCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: filtered candidate list, delete index within bounds of recruit book and candidate list -> deleted */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST;
         assertTrue(index.getZeroBased() < getModel().getFilteredCandidateList().size());
         assertCommandSuccess(index);
 

@@ -5,7 +5,7 @@ import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
 
 import org.junit.Before;
-import org.junit.Test;
+import org.junit.Test;git
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.CandidateBook;
@@ -67,5 +67,4 @@ public class AddJobDetailsCommandIntegrationTest {
         assertCommandFailure(new AddJobDetailsCommand(jobOffer), model, commandHistory,
                 AddJobDetailsCommand.MESSAGE_COMPANY_NOT_FOUND);
     }
-
 }
