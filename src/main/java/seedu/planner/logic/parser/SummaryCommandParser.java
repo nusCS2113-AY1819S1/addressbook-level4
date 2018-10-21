@@ -28,15 +28,21 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
     }
 
     /**
-     * Splits a string using whitespace as delimiters
-     * @param args
-     * @return array of split strings
+     * Retrieves all arguments from a string
+     * @param args given string
+     * @return array of strings
+     * @throws ParseException if args cannot be processed
      */
-    private static String[] splitByWhitespace(String args) {
+    private static String[] getArguments(String args) throws ParseException {
         if (args.isEmpty()) {
-            return null;
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryCommand.MESSAGE_USAGE)));
         }
         String[] argList = args.split("\\s+");
+        if (argList.length != 2) {
+            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    SummaryCommand.MESSAGE_USAGE)));
+        }
         return argList;
     }
 
@@ -56,22 +62,29 @@ public class SummaryCommandParser implements Parser<SummaryCommand> {
         }
         String mode = argMultimap.getPreamble().trim();
         String intervalString = argMultimap.getValue(PREFIX_DATE).get();
-        String[] argList = splitByWhitespace(intervalString);
-        if (argList == null || argList.length != 2) {
-            throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SummaryCommand.MESSAGE_USAGE)));
-        }
+        String[] argList = getArguments(intervalString);
+        return createSummaryCommand(mode, argList[0], argList[1]);
+    }
+
+    /**
+     * Creates a SummaryCommand object from 2 strings arg1 and arg2.
+     * @param mode - determines which SummaryCommand is created
+     * @param arg1 - 1st argument
+     * @param arg2 - 2nd argument
+     * @throws ParseException if no SummaryCommand object can be created due to invalid arguments
+     */
+    private SummaryCommand createSummaryCommand(String mode, String arg1, String arg2) throws ParseException {
         if (mode.equals("date")) {
-            Date startDate = ParserUtil.parseDate(argList[0]);
-            Date endDate = ParserUtil.parseDate(argList[1]);
+            Date startDate = ParserUtil.parseDate(arg1);
+            Date endDate = ParserUtil.parseDate(arg2);
             if (!isDateOrderValid(startDate, endDate)) {
                 throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         SummaryByDateCommand.MESSAGE_USAGE)));
             }
             return new SummaryByDateCommand(startDate, endDate);
         } else if (mode.equals("month")) {
-            Month startMonth = ParserUtil.parseMonth(argList[0]);
-            Month endMonth = ParserUtil.parseMonth(argList[1]);
+            Month startMonth = ParserUtil.parseMonth(arg1);
+            Month endMonth = ParserUtil.parseMonth(arg2);
             if (DateUtil.compareMonth(startMonth, endMonth) > 0) {
                 throw new ParseException((String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         SummaryByMonthCommand.MESSAGE_USAGE)));
