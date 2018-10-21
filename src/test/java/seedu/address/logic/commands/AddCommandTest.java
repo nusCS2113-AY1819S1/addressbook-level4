@@ -26,9 +26,11 @@ import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 
+import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 
 import seedu.address.model.searchhistory.SearchHistoryManager;
+import seedu.address.testutil.AccountBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -81,22 +83,33 @@ public class AddCommandTest {
         Person bob = new PersonBuilder().withName("Bob").build();
         AddCommand addAliceCommand = new AddCommand(alice);
         AddCommand addBobCommand = new AddCommand(bob);
+        LoginDetails loginDetailOne = new AccountBuilder().withUserId("A1234567M").build();
+        LoginDetails loginDetailTwo = new AccountBuilder().withUserId("A1234568M").build();
+        UserIdContainsKeywordsPredicate idPredicate = new AccountBuilder().buildUserIdPredicate();
+        CreateAccountCommand createAccountOneCommand = new CreateAccountCommand(idPredicate, loginDetailOne);
+        CreateAccountCommand createAccountTwoCommand = new CreateAccountCommand(idPredicate, loginDetailTwo);
 
         // same object -> returns true
         assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(createAccountOneCommand.equals(createAccountOneCommand));
 
         // same values -> returns true
         AddCommand addAliceCommandCopy = new AddCommand(alice);
         assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        CreateAccountCommand createAccountOneCommandCopy = new CreateAccountCommand(idPredicate, loginDetailOne);
+        assertTrue(createAccountOneCommand.equals(createAccountOneCommandCopy));
 
         // different types -> returns false
         assertFalse(addAliceCommand.equals(1));
+        assertFalse(createAccountOneCommand.equals(1));
 
         // null -> returns false
         assertFalse(addAliceCommand.equals(null));
+        assertFalse(createAccountOneCommand.equals(null));
 
         // different person -> returns false
         assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(createAccountOneCommand.equals(createAccountTwoCommand));
     }
 
     /**

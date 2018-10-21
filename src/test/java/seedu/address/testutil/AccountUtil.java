@@ -22,6 +22,7 @@ public class AccountUtil {
         StringBuilder sb = new StringBuilder();
         sb.append(loginDetails.getUserId().fullUserId + " ");
         sb.append(loginDetails.getUserPassword().fullUserPassword + " ");
+        sb.append(loginDetails.getUserRole().fullUserRole + " ");
         return sb.toString();
     }
 

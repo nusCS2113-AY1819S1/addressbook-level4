@@ -21,7 +21,7 @@ public class CreateAccountCommand extends Command {
 
 
     public static final String MESSAGE_SUCCESS = "New account created: %1$s";
-    private static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the login book";
+    public static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the login book";
 
     private final LoginDetails toAdd;
     private final UserIdContainsKeywordsPredicate idPredicate;
@@ -41,7 +41,7 @@ public class CreateAccountCommand extends Command {
 
         model.updateFilteredLoginDetailsList(idPredicate);
 
-        if (model.getFilteredLoginDetailsList().size() != 0) {
+        if (model.hasAccount(toAdd) || model.getFilteredLoginDetailsList().size() != 0) {
             throw new CommandException(MESSAGE_DUPLICATE_ACCOUNT);
         }
 
