@@ -8,9 +8,6 @@ import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
-import com.t13g2.forum.storage.forum.Context;
-import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
-import com.t13g2.forum.storage.forum.UnitOfWork;
 
 //@@xllx1
 /**
@@ -49,23 +46,19 @@ public class AdminUpdatePasswordCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // if user has not login or is not admin, then throw exception
-        if (Context.getInstance().getCurrentUser() == null) {
+        if (!model.checkIsLogin()) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
-        if (!Context.getInstance().getCurrentUser().isAdmin()) {
+        if (!model.checkIsAdmin()) {
             throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            User user = unitOfWork.getUserRepository().getUserByUsername(userNameToUpdate);
-            user.setPassword(userPassToUpdate);
-            unitOfWork.getUserRepository().updateUser(user);
-            unitOfWork.commit();
-        } catch (EntityDoesNotExistException e) {
-            throw new CommandException(MESSAGE_INVALID_USER);
-        } catch (Exception e) {
-            e.printStackTrace();
-
+        User userToUpdate = model.doesUserExist(userNameToUpdate);
+        if (userToUpdate == null) {
+            throw new CommandException(String.format(MESSAGE_INVALID_USER, userNameToUpdate));
         }
+        userToUpdate.setPassword(userPassToUpdate);
+
+        model.adminUpdatePassword(userToUpdate);
         return new CommandResult(String.format(MESSAGE_SUCCESS, userNameToUpdate, userPassToUpdate));
     }
 }

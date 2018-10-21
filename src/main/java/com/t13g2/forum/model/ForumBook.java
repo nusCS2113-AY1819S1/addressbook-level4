@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import com.t13g2.forum.logic.commands.exceptions.DuplicateModuleException;
 import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 import com.t13g2.forum.model.person.UniquePersonList;
@@ -215,6 +217,50 @@ public class ForumBook implements ReadOnlyForumBook {
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
             user.setAdmin(!user.isAdmin());
             unitOfWork.getUserRepository().updateUser(user);
+            unitOfWork.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * creates a module.
+     */
+    public boolean createModule(Module module) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            if (unitOfWork.getModuleRepository().getModuleByCode(module.getModuleCode()) == null) {
+                module.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
+                unitOfWork.getModuleRepository().addModule(module);
+                unitOfWork.commit();
+            } else {
+                throw new DuplicateModuleException("");
+            }
+        } catch (DuplicateModuleException e) {
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    /**
+     * admin updates a user's password.
+     */
+    public void adminUpdatePassword(User userToUpdate) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            unitOfWork.getUserRepository().updateUser(userToUpdate);
+            unitOfWork.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * admin deletes a certain user.
+     */
+    public void deleteUser(User userToDelete) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            unitOfWork.getUserRepository().deleteUser(userToDelete);
             unitOfWork.commit();
         } catch (Exception e) {
             e.printStackTrace();

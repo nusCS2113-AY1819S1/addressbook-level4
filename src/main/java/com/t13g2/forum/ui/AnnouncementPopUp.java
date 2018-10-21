@@ -4,10 +4,8 @@ import java.util.logging.Logger;
 
 import com.t13g2.forum.commons.core.LogsCenter;
 
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
