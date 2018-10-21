@@ -5,6 +5,10 @@ import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.testutil.TestUtil.getIndexSet;
 import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_THIRD;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +48,33 @@ public class DeleteCompanyCommandTest {
 
         ModelManager expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCompany(companyToDelete);
+        expectedModel.commitCompanyBook();
+
+        assertCommandSuccess(deleteCompanyCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validMultipleIndexesUnfilteredList_success() {
+        //Set up deleted companies
+        ArrayList<Company> companiesToDelete = new ArrayList<Company>();
+        companiesToDelete.add(model.getFilteredCompanyList().get(INDEX_FIRST.getZeroBased()));
+        companiesToDelete.add(model.getFilteredCompanyList().get(INDEX_SECOND.getZeroBased()));
+        companiesToDelete.add(model.getFilteredCompanyList().get(INDEX_THIRD.getZeroBased()));
+
+        DeleteCompanyCommand deleteCompanyCommand = new DeleteCompanyCommand(getIndexSet(INDEX_FIRST, INDEX_SECOND,
+                                                        INDEX_THIRD));
+
+        String expectedMessage = String.format(DeleteCompanyCommand.MESSAGE_DELETE_COMPANY_SUCCESS,
+                companiesToDelete.get(2) + "\n"
+                + companiesToDelete.get(1) + "\n"
+                + companiesToDelete.get(0) + "\n");
+
+        ModelManager expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(), new UserPrefs());
+
+        for (Company company : companiesToDelete) {
+            expectedModel.deleteCompany(company);
+        }
+
         expectedModel.commitCompanyBook();
 
         assertCommandSuccess(deleteCompanyCommand, model, commandHistory, expectedMessage, expectedModel);

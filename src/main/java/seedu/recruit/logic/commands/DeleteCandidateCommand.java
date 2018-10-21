@@ -24,7 +24,7 @@ public class DeleteCandidateCommand extends Command {
             + "Parameters: INDEX,INDEX ... (INDEX must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1,2";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Candidate(s):\n%1$s";
+    public static final String MESSAGE_DELETE_CANDIDATE_SUCCESS = "Deleted Candidate(s):\n%1$s";
 
     private final Set<Index> targetIndexes;
 
@@ -52,7 +52,7 @@ public class DeleteCandidateCommand extends Command {
 
 
         model.commitCandidateBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedCandidates));
+        return new CommandResult(String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS, deletedCandidates));
     }
 
     @Override

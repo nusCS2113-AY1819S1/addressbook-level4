@@ -9,7 +9,10 @@ import static seedu.recruit.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.recruit.testutil.TestUtil.getIndexSet;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_THIRD;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 
@@ -36,11 +39,39 @@ public class DeleteCandidateCommandTest {
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
         DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
 
-        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_CANDIDATE_SUCCESS,
                 candidateToDelete + "\n");
 
         ModelManager expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
+        expectedModel.commitCandidateBook();
+
+        assertCommandSuccess(deleteCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validMultipleIndexesUnfilteredList_success() {
+        //Set up deleted companies
+        ArrayList<Candidate> candidatesToDelete = new ArrayList<Candidate>();
+        candidatesToDelete.add(model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()));
+        candidatesToDelete.add(model.getFilteredCandidateList().get(INDEX_SECOND.getZeroBased()));
+        candidatesToDelete.add(model.getFilteredCandidateList().get(INDEX_THIRD.getZeroBased()));
+
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST,
+                INDEX_SECOND, INDEX_THIRD));
+
+        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_CANDIDATE_SUCCESS,
+                candidatesToDelete.get(2) + "\n"
+                        + candidatesToDelete.get(1) + "\n"
+                        + candidatesToDelete.get(0) + "\n");
+
+        ModelManager expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(),
+                new UserPrefs());
+
+        for (Candidate candidate : candidatesToDelete) {
+            expectedModel.deleteCandidate(candidate);
+        }
+
         expectedModel.commitCandidateBook();
 
         assertCommandSuccess(deleteCandidateCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -62,7 +93,7 @@ public class DeleteCandidateCommandTest {
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
         DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
 
-        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_CANDIDATE_SUCCESS,
                 candidateToDelete + "\n");
 
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
