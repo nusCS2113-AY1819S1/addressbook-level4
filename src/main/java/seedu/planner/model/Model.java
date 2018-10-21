@@ -81,7 +81,21 @@ public interface Model {
      * @return
      */
     boolean isExceededLimit (Limit limitIn);
-
+    /**
+     *This function will execute all the limits stored inside
+     * storage right now. The final output will be in one string
+     * and it will return this string to limit command and display.
+     * @return
+     */
+    String autoLimitCheck ();
+    /**
+     * This will generate the output string according to the
+     * exceeding condition and limit information.
+     * @param isExceeded
+     * @param limit
+     * @return
+     */
+    String generateLimitOutput (boolean isExceeded, Limit limit);
     /** Returns an unmodifiable view of the filtered record list */
     ObservableList<Record> getFilteredRecordList();
 

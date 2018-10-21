@@ -2,6 +2,9 @@ package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -15,6 +18,8 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
+import seedu.planner.logic.CommandHistory;
+import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
@@ -65,6 +70,7 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateFinancialPlannerChanged() {
         raise(new FinancialPlannerChangedEvent(versionedFinancialPlanner));
+        autoLimitCheck();
     }
 
     /** Raises an event to indicate the summary map has changed */
@@ -152,6 +158,31 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.updateLimit(target, editedLimit);
         indicateLimitListChanged();
     }
+    @Override
+    public String autoLimitCheck () {
+       String output = "\n";
+        int count = 1;
+        for (Limit i: limits) {
+            output += String.format("%d.",count++) + generateLimitOutput(isExceededLimit(i),i) + "\n";
+        }
+       // new LimitCommand(output).execute( null , new CommandHistory()) ;
+        return output;
+    }
+
+    public String generateLimitOutput (boolean isExceeded, Limit limit) {
+        String output;
+        if (isExceeded) {
+            output = String.format(MESSAGE_BASIC,
+                    limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
+                    + MESSAGE_EXCEED;
+        } else {
+            output = String.format(MESSAGE_BASIC,
+                    limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
+                    + MESSAGE_NOT_EXCEED;
+        }
+        return output;
+    }
+
 
     //=========== Filtered Record List Accessors =============================================================
 

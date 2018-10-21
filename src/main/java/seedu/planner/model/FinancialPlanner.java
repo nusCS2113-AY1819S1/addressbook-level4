@@ -1,10 +1,14 @@
 package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
+import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
+import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;
@@ -197,15 +201,15 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public boolean isExceededLimit (Limit limit) {
         Double recordsMoney = 0.0;
-
         for (Record i: records) {
             if (limit.isInsideDatePeriod(i)) {
                 recordsMoney += i.getMoneyFlow().toDouble();
             }
         }
-
         return (limit.isExceeded(recordsMoney));
     }
+
+
 
     /**
      * Removes a limit from the list,

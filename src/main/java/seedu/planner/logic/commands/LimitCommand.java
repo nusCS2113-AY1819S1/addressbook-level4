@@ -35,21 +35,31 @@ public class LimitCommand extends Command {
 
     private Limit limit;
     private String output;
+    private boolean isAutoCheck;
     public LimitCommand (Limit limitIn) {
         requireNonNull(limitIn);
         limit = limitIn;
+        isAutoCheck = false;
+    }
+
+    public LimitCommand (String output) {
+        requireNonNull(output);
+        this.output = output;
+        isAutoCheck =true;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
+
         if (model.hasSameDateLimit(limit)) {
             throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
         }
 
+        if (!isAutoCheck){
         model.addLimit(limit);
-
-        if (model.isExceededLimit(limit)) {
+        output = model.generateLimitOutput(model.isExceededLimit(limit), limit);
+        }
+      /*  if (model.isExceededLimit(limit)) {
             output = String.format(MESSAGE_BASIC,
                     limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
                     + MESSAGE_EXCEED;
@@ -57,7 +67,7 @@ public class LimitCommand extends Command {
             output = String.format(MESSAGE_BASIC,
                     limit.getDateStart(), limit.getDateEnd(), limit.getLimitMoneyFlow().toDouble())
                     + MESSAGE_NOT_EXCEED;
-        }
+        }*/
 
         return new CommandResult(output);
 

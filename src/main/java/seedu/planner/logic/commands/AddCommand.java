@@ -54,7 +54,7 @@ public class AddCommand extends Command {
 
         model.addRecord(toAdd);
         model.commitFinancialPlanner();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd)+ model.autoLimitCheck());
     }
 
     @Override
