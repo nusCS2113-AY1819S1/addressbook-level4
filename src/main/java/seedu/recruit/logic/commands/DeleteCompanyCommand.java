@@ -3,6 +3,7 @@ package seedu.recruit.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
@@ -20,38 +21,46 @@ public class DeleteCompanyCommand extends Command {
     public static final String COMMAND_WORD = "deleteC";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the company identified by the index number used in the displayed company list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the company(s) identified by the index number(s) used in the displayed company list.\n"
+            + "Parameters: INDEX,INDEX,INDEX ... (INDEX must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1,2";
 
-    public static final String MESSAGE_DELETE_COMPANY_SUCCESS = "Deleted Company: %1$s";
+    public static final String MESSAGE_DELETE_COMPANY_SUCCESS = "Deleted Company(s):\n%1$s";
 
-    private final Index targetIndex;
+    private final Set<Index> targetIndexes;
 
-    public DeleteCompanyCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCompanyCommand(Set<Index> targetIndexes) {
+        this.targetIndexes = targetIndexes;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Company> lastShownList = model.getFilteredCompanyList();
+        StringBuilder deletedCompanies = new StringBuilder();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+        //Check if any of the specified indexes are invalid
+        for (Index index: targetIndexes) {
+            if (index.getZeroBased() >= lastShownList.size()) {
+                throw new CommandException(Messages.MESSAGE_INVALID_COMPANY_DISPLAYED_INDEX);
+            }
         }
 
-        Company companyToDelete = lastShownList.get(targetIndex.getZeroBased());
-        model.deleteCompany(companyToDelete);
+        for (Index index: targetIndexes) {
+            Company companyToDelete = lastShownList.get(index.getZeroBased());
+            model.deleteCompany(companyToDelete);
+            deletedCompanies.append(companyToDelete + "\n");
+        }
+
         model.commitCompanyBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_COMPANY_SUCCESS, companyToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_COMPANY_SUCCESS, deletedCompanies));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCompanyCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCompanyCommand) other).targetIndex)); // state check
+                && targetIndexes.equals(((DeleteCompanyCommand) other).targetIndexes)); // state check
     }
 
 

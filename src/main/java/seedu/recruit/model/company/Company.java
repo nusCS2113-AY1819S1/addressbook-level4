@@ -120,7 +120,8 @@ public class Company {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getCompanyName())
+        builder.append("Company Name:")
+                .append(getCompanyName())
                 .append(" Address: ")
                 .append(getAddress())
                 .append(" Email: ")
