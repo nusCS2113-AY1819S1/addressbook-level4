@@ -115,7 +115,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
+        public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
             fail("This method should not be called.");
             return false;
         }
@@ -288,7 +288,7 @@ public class LoginCommandTest {
         private boolean loginStatus = false;
 
         @Override
-        public boolean checkLoginCredentials(Username username, Password password) {
+        public boolean checkAuthentication(Username username, Password password) {
             requireNonNull(username);
             requireNonNull(password);
             setLoginStatus(true);
@@ -311,7 +311,7 @@ public class LoginCommandTest {
      */
     private class ModelStubThrowingAuthenticatedException extends ModelStub {
         @Override
-        public boolean checkLoginCredentials(Username username, Password password)
+        public boolean checkAuthentication(Username username, Password password)
                 throws AuthenticatedException {
             throw new AuthenticatedException();
         }
