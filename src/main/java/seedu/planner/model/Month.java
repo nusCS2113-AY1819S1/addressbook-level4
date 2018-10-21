@@ -11,7 +11,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.planner.commons.core.LogsCenter;
-import seedu.planner.logic.parser.exceptions.ParseException;
 
 /**
  * Represents a month of {@code MonthSummary} in the financial planner.
@@ -93,6 +92,11 @@ public class Month {
         requireAllNonNull(month, year);
         this.year = Integer.parseInt(year);
         this.month = standardMonths.indexOf(month) + 1;
+    }
+
+    @Override
+    public int hashCode() {
+        return value.hashCode();
     }
 
     @Override
