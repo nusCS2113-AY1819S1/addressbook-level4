@@ -58,6 +58,8 @@ dependencies {
     String testFxVersion = '4.0.12-alpha'
     String jUnitVersion = '5.1.0'
 
+    compile 'net.sf.biweekly:biweekly:0.6.2'
+
     implementation group: 'net.sf.biweekly', name: 'biweekly', version: '0.6.2'
     implementation group: 'org.controlsfx', name: 'controlsfx', version: '8.40.11'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
