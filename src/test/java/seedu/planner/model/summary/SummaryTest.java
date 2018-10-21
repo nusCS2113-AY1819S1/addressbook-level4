@@ -1,7 +1,6 @@
 package seedu.planner.model.summary;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.planner.testutil.SummaryBuilder.DEFAULT_COUNT;
 import static seedu.planner.testutil.SummaryBuilder.DEFAULT_TOTAL;
 import static seedu.planner.testutil.SummaryBuilder.DEFAULT_TOTAL_EXPENSE;
 import static seedu.planner.testutil.SummaryBuilder.DEFAULT_TOTAL_INCOME;
@@ -62,7 +61,6 @@ public class SummaryTest {
         SummaryBuilder toCompareBuilder = new SummaryBuilder();
         MoneyFlow targetTotalExpense = MoneyUtil.add(new MoneyFlow(DEFAULT_TOTAL_EXPENSE), toAdd.getMoneyFlow());
         MoneyFlow targetTotal = MoneyUtil.add(new MoneyFlow(DEFAULT_TOTAL), toAdd.getMoneyFlow());
-        int targetCount = Integer.parseInt(DEFAULT_COUNT) + 1;
 
         assertEquals(summary, toCompareBuilder.withTotalExpense(targetTotalExpense.value)
                 .withTotal(targetTotal.value).build());
@@ -78,45 +76,6 @@ public class SummaryTest {
         SummaryBuilder toCompareBuilder = new SummaryBuilder();
         MoneyFlow targetTotalIncome = MoneyUtil.add(new MoneyFlow(DEFAULT_TOTAL_INCOME), toAdd.getMoneyFlow());
         MoneyFlow targetTotal = MoneyUtil.add(new MoneyFlow(DEFAULT_TOTAL), toAdd.getMoneyFlow());
-        int targetCount = Integer.parseInt(DEFAULT_COUNT) + 1;
-
-        assertEquals(summary, toCompareBuilder.withTotalIncome(targetTotalIncome.value)
-                .withTotal(targetTotal.value).build());
-    }
-
-    @Test
-    public void remove_nullRecord_throwsNullPointerException() {
-        Summary summary = summaryBuilder.build();
-        Assert.assertThrows(NullPointerException.class, () -> summary.remove(null));
-    }
-
-    @Test
-    public void remove_recordWithExpenseMoneyFlow_success() {
-        Summary summary = summaryBuilder.build();
-        RecordBuilder recordBuilder = new RecordBuilder();
-        Record toRemove = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_EXPENSE).build();
-        summary.remove(toRemove);
-
-        SummaryBuilder toCompareBuilder = new SummaryBuilder();
-        MoneyFlow targetTotalExpense = MoneyUtil.subtract(
-                new MoneyFlow(DEFAULT_TOTAL_EXPENSE), toRemove.getMoneyFlow());
-        MoneyFlow targetTotal = MoneyUtil.subtract(new MoneyFlow(DEFAULT_TOTAL), toRemove.getMoneyFlow());
-        int targetCount = Integer.parseInt(DEFAULT_COUNT) - 1;
-        assertEquals(summary, toCompareBuilder.withTotalExpense(targetTotalExpense.value)
-                .withTotal(targetTotal.value).build());
-    }
-
-    @Test
-    public void remove_recordWithIncomeMoneyFlow_success() {
-        Summary summary = summaryBuilder.build();
-        RecordBuilder recordBuilder = new RecordBuilder();
-        Record toRemove = recordBuilder.withDate(DEFAULT_DATE).withMoneyFlow(DEFAULT_MONEYFLOW_INCOME).build();
-        summary.remove(toRemove);
-
-        SummaryBuilder toCompareBuilder = new SummaryBuilder();
-        MoneyFlow targetTotalIncome = MoneyUtil.subtract(new MoneyFlow(DEFAULT_TOTAL_INCOME), toRemove.getMoneyFlow());
-        MoneyFlow targetTotal = MoneyUtil.subtract(new MoneyFlow(DEFAULT_TOTAL), toRemove.getMoneyFlow());
-        int targetCount = Integer.parseInt(DEFAULT_COUNT) - 1;
 
         assertEquals(summary, toCompareBuilder.withTotalIncome(targetTotalIncome.value)
                 .withTotal(targetTotal.value).build());
