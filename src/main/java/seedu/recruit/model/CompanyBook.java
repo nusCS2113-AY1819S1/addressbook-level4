@@ -77,6 +77,9 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      */
     public void addCompany(Company p) {
         companyList.add(p);
+        for (JobOffer jobOffer : p.getUniqueJobList()) {
+            companyJobList.add(jobOffer);
+        }
     }
 
     /**

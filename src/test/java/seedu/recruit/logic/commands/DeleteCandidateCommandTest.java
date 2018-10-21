@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.recruit.testutil.TestUtil.getIndexSet;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalAddressBook;
@@ -33,9 +34,10 @@ public class DeleteCandidateCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST);
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
 
-        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS, candidateToDelete);
+        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                candidateToDelete + "\n");
 
         ModelManager expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
@@ -47,7 +49,7 @@ public class DeleteCandidateCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCandidateList().size() + 1);
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(outOfBoundIndex);
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(outOfBoundIndex));
 
         assertCommandFailure(deleteCandidateCommand, model, commandHistory,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -58,9 +60,10 @@ public class DeleteCandidateCommandTest {
         showPersonAtIndex(model, INDEX_FIRST);
 
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST);
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
 
-        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS, candidateToDelete);
+        String expectedMessage = String.format(DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS,
+                candidateToDelete + "\n");
 
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
@@ -78,7 +81,7 @@ public class DeleteCandidateCommandTest {
         // ensures that outOfBoundIndex is still in bounds of recruit book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getCandidateBook().getCandidateList().size());
 
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(outOfBoundIndex);
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(outOfBoundIndex));
 
         assertCommandFailure(deleteCandidateCommand, model, commandHistory,
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -87,7 +90,7 @@ public class DeleteCandidateCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Candidate candidateToDelete = model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased());
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST);
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
         Model expectedModel = new ModelManager(model.getCandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCandidate(candidateToDelete);
         expectedModel.commitCandidateBook();
@@ -107,7 +110,7 @@ public class DeleteCandidateCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredCandidateList().size() + 1);
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(outOfBoundIndex);
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(outOfBoundIndex));
 
         // execution failed -> recruit book state not added into model
         assertCommandFailure(deleteCandidateCommand, model, commandHistory,
@@ -127,7 +130,7 @@ public class DeleteCandidateCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(INDEX_FIRST);
+        DeleteCandidateCommand deleteCandidateCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
         Model expectedModel = new ModelManager(model.getCandidateBook(), new CompanyBook(), new UserPrefs());
 
         showPersonAtIndex(model, INDEX_SECOND);
@@ -150,14 +153,14 @@ public class DeleteCandidateCommandTest {
 
     @Test
     public void equals() {
-        DeleteCandidateCommand deleteFirstCommand = new DeleteCandidateCommand(INDEX_FIRST);
-        DeleteCandidateCommand deleteSecondCommand = new DeleteCandidateCommand(INDEX_SECOND);
+        DeleteCandidateCommand deleteFirstCommand = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
+        DeleteCandidateCommand deleteSecondCommand = new DeleteCandidateCommand(getIndexSet(INDEX_SECOND));
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCandidateCommand deleteFirstCommandCopy = new DeleteCandidateCommand(INDEX_FIRST);
+        DeleteCandidateCommand deleteFirstCommandCopy = new DeleteCandidateCommand(getIndexSet(INDEX_FIRST));
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

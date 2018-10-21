@@ -1,5 +1,7 @@
 package seedu.recruit.commons.core.index;
 
+import java.util.Objects;
+
 /**
  * Represents a zero-based or one-based index.
  *
@@ -48,7 +50,13 @@ public class Index {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Index // instanceof handles nulls
-                && zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
+                || (other instanceof Index) // instanceof handles nulls
+                && (zeroBasedIndex == ((Index) other).zeroBasedIndex); // state check
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(zeroBasedIndex);
     }
 }
