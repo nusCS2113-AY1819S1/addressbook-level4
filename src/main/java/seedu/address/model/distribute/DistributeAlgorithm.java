@@ -17,10 +17,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CreateGroupCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.group.AddGroup;
 import seedu.address.model.group.Group;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
@@ -40,15 +42,13 @@ public class DistributeAlgorithm {
 
     public static final String MESSAGE_INVALID_SIZE = "Number of Groups should not be more than Number of Persons";
     public static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
+    public static final String MESSAGE_MISSING_GROUP = "Group is not found.";
     public static final String MESSAGE_SHUFFLE_ERROR = "There is a problem shuffling the people in the address book.";
     public static final String MESSAGE_FLAG_ERROR = "Gender and Nationality flags only accept "
             + "'1' or '0' or \"true\" or \"false\"";
     public static final String GROUP_LOCATION = "UNKNOWN";
     private Model model;
     private CommandHistory commandHistory = new CommandHistory();
-
-    public DistributeAlgorithm(){
-    }
 
     public DistributeAlgorithm(Model model, Distribute dist) throws CommandException {
         requireNonNull(dist);
@@ -106,16 +106,20 @@ public class DistributeAlgorithm {
         // TODO: Add function that iterate groupArrayList and addMemebrs into the group
         ObservableList<Person> allPerson = model.getFilteredPersonList();
 
-        for (int i = 0; i < groupArrayList.size(); i++) {
+        for (int i = 1; i <= groupArrayList.size(); i++) {
             //Create a group here
             //Get the group Index
             String toCreateGroupName = groupNameConcatenation(i, groupName);
-            createNewGroup(toCreateGroupName);
-            for (int j = 0; j < groupArrayList.get(i).size(); j++) {
+            Group newGroup = createNewGroup(toCreateGroupName);
+            Index groupIndex = returnGroupIndex(newGroup);
+            System.out.println(groupIndex.getOneBased());
+            for (int j = 1; j <= groupArrayList.get(i).size(); j++) {
                 System.out.println(groupArrayList.get(i).get(j));
-                for (int k = 0; k < allPerson.size(); k++) {
+                for (int k = 1; k <= allPerson.size(); k++) {
                     if (allPerson.get(k).equals(groupArrayList.get(i).get(j))) {
-
+                        Set<Index> personIndices = new HashSet<>();
+                        personIndices.add(Index.fromZeroBased(k));
+                        AddGroup addPersonIntoGroup = new AddGroup(groupIndex, personIndices);
                         break;
                     }
                 }
@@ -287,8 +291,7 @@ public class DistributeAlgorithm {
      * Index shown to user will start from 1.
      */
     private String groupNameConcatenation (int index, String groupName) throws CommandException {
-        int newIndex = index + 1;
-        groupName = groupName + String.valueOf(newIndex);
+        groupName = groupName + String.valueOf(index);
         if (existDuplicateGroup(groupName)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
@@ -328,12 +331,27 @@ public class DistributeAlgorithm {
      * @param toCreateGroupName the groupName that has been concatenated with index
      * @throws CommandException
      */
-    private void createNewGroup(String toCreateGroupName) throws CommandException {
+    private Group createNewGroup(String toCreateGroupName) throws CommandException {
         GroupName parseGroupName = new GroupName(toCreateGroupName);
         GroupLocation parseGroupLocation = new GroupLocation(GROUP_LOCATION);
         Set<Tag> tags = new HashSet<>();
         Group group = new Group(parseGroupName, parseGroupLocation, tags);
         new CreateGroupCommand(group).execute(model, commandHistory);
+        return group;
+    }
+
+    /**
+     * @param group
+     * @return
+     */
+    private Index returnGroupIndex(Group group) {
+        ObservableList<Group> allGroups = model.getFilteredGroupList();
+        for (int i = 0; i < allGroups.size(); i++) {
+            if (group.isSameGroup(allGroups.get(i))) {
+                return Index.fromZeroBased(i);
+            }
+        }
+        return Index.fromZeroBased(0);
     }
 
 }
