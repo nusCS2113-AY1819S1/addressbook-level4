@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEvents.ALICE;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,7 +20,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.DuplicatePersonException;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.testutil.EventBuilder;
 
 public class EventManagerTest {
@@ -43,7 +43,7 @@ public class EventManagerTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        EventManager newData = getTypicalAddressBook();
+        EventManager newData = getTypicalEventManager();
         eventManager.resetData(newData);
         assertEquals(newData, eventManager);
     }
@@ -56,7 +56,7 @@ public class EventManagerTest {
         List<Event> newEvents = Arrays.asList(ALICE, editedAlice);
         EventManagerStub newData = new EventManagerStub(newEvents);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         eventManager.resetData(newData);
     }
 

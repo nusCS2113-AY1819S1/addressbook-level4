@@ -7,7 +7,7 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.EventCardHandle;
 import seedu.address.model.event.Event;
 import seedu.address.testutil.EventBuilder;
 
@@ -16,7 +16,7 @@ public class EventCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
-        Event eventWithNoTags = new EventBuilder().withTags(new String[0]).build();
+        Event eventWithNoTags = new EventBuilder().withTags().build();
         EventCard eventCard = new EventCard(eventWithNoTags, 1);
         uiPartRule.setUiPart(eventCard);
         assertCardDisplay(eventCard, eventWithNoTags, 1);
@@ -61,12 +61,12 @@ public class EventCardTest extends GuiUnitTest {
     private void assertCardDisplay(EventCard eventCard, Event expectedEvent, int expectedId) {
         guiRobot.pauseForHuman();
 
-        PersonCardHandle personCardHandle = new PersonCardHandle(eventCard.getRoot());
+        EventCardHandle eventCardHandle = new EventCardHandle(eventCard.getRoot());
 
         // verify id is displayed correctly
-        assertEquals(Integer.toString(expectedId) + ". ", personCardHandle.getId());
+        assertEquals(Integer.toString(expectedId) + ". ", eventCardHandle.getId());
 
         // verify event details are displayed correctly
-        assertCardDisplaysPerson(expectedEvent, personCardHandle);
+        assertCardDisplaysPerson(expectedEvent, eventCardHandle);
     }
 }

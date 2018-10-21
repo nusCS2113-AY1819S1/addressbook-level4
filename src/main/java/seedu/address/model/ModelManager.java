@@ -27,6 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given eventManager and userPrefs.
+     * FilteredEvents will be default to be automatically sorted by DateTime
      */
     public ModelManager(ReadOnlyEventManager eventManager, UserPrefs userPrefs) {
         super();

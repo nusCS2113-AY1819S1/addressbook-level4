@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.model.event.DateTime.MESSAGE_DATETIME_CONSTRAINTS;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +14,7 @@ import javax.xml.bind.annotation.XmlElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
+import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
@@ -35,6 +38,8 @@ public class XmlAdaptedEvent {
     private String email;
     @XmlElement(required = true)
     private String address;
+    @XmlElement(required = true)
+    private String dateTime;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -48,13 +53,16 @@ public class XmlAdaptedEvent {
     /**
      * Constructs an {@code XmlAdaptedEvent} with the given event details.
      */
+
     public XmlAdaptedEvent(String name, String contact, String phone, String email, String address,
-                           List<XmlAdaptedTag> tagged) {
+                           String datetime, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.contact = contact;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.dateTime = datetime;
+
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -71,6 +79,8 @@ public class XmlAdaptedEvent {
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
+        dateTime = source.getDateTime().toString();
+
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -127,8 +137,19 @@ public class XmlAdaptedEvent {
         }
         final Address modelAddress = new Address(address);
 
+        if (dateTime == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    DateTime.class.getSimpleName()));
+        }
+
+        if (!DateTime.isValidDateTime(dateTime)) {
+            throw new IllegalValueException(MESSAGE_DATETIME_CONSTRAINTS);
+        }
+
+        final DateTime modelDateTime = new DateTime(dateTime);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Event(modelName, modelContact, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Event(modelName, modelContact, modelPhone, modelEmail, modelAddress, modelDateTime, modelTags);
     }
 
     @Override
@@ -147,6 +168,7 @@ public class XmlAdaptedEvent {
                 && Objects.equals(phone, otherEvent.phone)
                 && Objects.equals(email, otherEvent.email)
                 && Objects.equals(address, otherEvent.address)
+                && Objects.equals(dateTime, otherEvent.dateTime)
                 && tagged.equals(otherEvent.tagged);
     }
 }

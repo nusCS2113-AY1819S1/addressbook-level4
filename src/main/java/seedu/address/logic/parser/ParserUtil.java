@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
+import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
@@ -87,7 +88,7 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code comment} is invalid.
      */
-    public static String parseComment(String comment) throws ParseException {
+    public static String parseComment(String comment) {
         requireNonNull(comment);
         String trimmedComment = comment.trim();
         return trimmedComment;
@@ -166,6 +167,21 @@ public class ParserUtil {
             throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parse a{@code String datetimeAsString into an {@code DateTime}}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code datetimeAsString} is invalid.
+     */
+    public static DateTime parseDateTime(String datetimeAsString) throws ParseException {
+        requireNonNull(datetimeAsString);
+        String trimmedDateTime = datetimeAsString.trim();
+        if (!DateTime.isValidDateTime(datetimeAsString)) {
+            throw new ParseException(DateTime.MESSAGE_DATETIME_CONSTRAINTS);
+        }
+        return new DateTime(trimmedDateTime);
     }
 
     /**

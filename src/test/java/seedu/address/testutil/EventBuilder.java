@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.event.Address;
 import seedu.address.model.event.Contact;
+import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
@@ -22,6 +23,7 @@ public class EventBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
 
     private Name name;
     private Contact contact;
@@ -29,6 +31,7 @@ public class EventBuilder {
     private Email email;
     private Address address;
     private Set<Tag> tags;
+    private DateTime datetime;
 
     public EventBuilder() {
         name = new Name(DEFAULT_NAME);
@@ -36,6 +39,8 @@ public class EventBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
+        datetime = new DateTime(DEFAULT_DATETIME);
+
         tags = new HashSet<>();
     }
 
@@ -48,6 +53,8 @@ public class EventBuilder {
         phone = eventToCopy.getPhone();
         email = eventToCopy.getEmail();
         address = eventToCopy.getAddress();
+        datetime = eventToCopy.getDateTime();
+
         tags = new HashSet<>(eventToCopy.getTags());
     }
 
@@ -99,8 +106,15 @@ public class EventBuilder {
         return this;
     }
 
-    public Event build() {
-        return new Event(name, contact, phone, email, address, tags);
+    /**
+     * Sets the {@code DateTime} of the {@code Event} that we are building.
+     */
+    public EventBuilder withDateTime(String datetimeAsString) {
+        this.datetime = new DateTime(datetimeAsString);
+        return this;
     }
 
+    public Event build() {
+        return new Event(name, contact, phone, email, address, datetime, tags);
+    }
 }

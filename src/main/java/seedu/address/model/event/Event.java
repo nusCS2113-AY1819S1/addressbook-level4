@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
-
+    //Todo: add contact field
     // Identity fields
     private final Name name;
     private final Contact contact;
@@ -24,51 +24,49 @@ public class Event {
     private final Email email;
 
     // Data fields
+    private final DateTime dateTime;
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Contact contact, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, contact, phone, email, address, tags);
+
+    public Event(Name name, Contact contact, Phone phone, Email email, Address address,
+                DateTime datetime, Set<Tag> tags) {
+        requireAllNonNull(name, contact, phone, email, address, datetime);
 
         this.name = name;
         this.contact = contact;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.dateTime = datetime;
         this.tags.addAll(tags);
     }
 
     public Name getName() {
-
         return name;
-
     }
 
     public Contact getContact() {
-
         return contact;
-
     }
 
     public Phone getPhone() {
-
         return phone;
-
     }
 
     public Email getEmail() {
-
         return email;
-
     }
 
     public Address getAddress() {
-
         return address;
+    }
 
+    public DateTime getDateTime () {
+        return dateTime;
     }
 
     /**
@@ -123,13 +121,15 @@ public class Event {
                 && otherEvent.getPhone().equals(getPhone())
                 && otherEvent.getEmail().equals(getEmail())
                 && otherEvent.getAddress().equals(getAddress())
+                && otherEvent.getDateTime().equals(getDateTime())
                 && otherEvent.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, contact, phone, email, address, tags);
+        return Objects.hash(name, contact, phone, email, address, dateTime, tags);
+
     }
 
     @Override
@@ -144,6 +144,8 @@ public class Event {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress())
+                .append(" Time: ")
+                .append(getDateTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
