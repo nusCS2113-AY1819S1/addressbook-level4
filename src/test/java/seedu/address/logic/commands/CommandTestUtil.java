@@ -124,7 +124,8 @@ public class CommandTestUtil {
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_GENDER_DESC = " " + PREFIX_GENDER + "Male1"; // '1' not allowed in Gender
     public static final String INVALID_GENDER_ABBREVIATED_DESC = " " + PREFIX_GENDER + "A"; // '1' not allowed in Gender
-    public static final String INVALID_NATIONALITY_DESC = " " + PREFIX_NATIONALITY + "SG1"; // '1' not allowed in Nationality
+    public static final String INVALID_NATIONALITY_DESC = " "
+            + PREFIX_NATIONALITY + "SG1"; // '1' not allowed in Nationality
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
