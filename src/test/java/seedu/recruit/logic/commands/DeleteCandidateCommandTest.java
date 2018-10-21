@@ -22,8 +22,8 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.candidate.Candidate;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteCandidateCommand}.
+ * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
+ * and unit tests for {@code DeleteCandidateCommand}.
  */
 public class DeleteCandidateCommandTest {
 
@@ -97,11 +97,13 @@ public class DeleteCandidateCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first candidate deleted again
         expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
@@ -114,8 +116,10 @@ public class DeleteCandidateCommandTest {
                 Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single recruit book state in model -> undoCommand and redoCommand fail
-        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
-        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_FAILURE);
     }
 
     /**
@@ -123,7 +127,8 @@ public class DeleteCandidateCommandTest {
      * 2. Undo the deletion.
      * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted candidate in the
      * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the candidate object regardless of indexing.
+     * 4. Redo the deletion. This ensures {@code RedoCandidateBookCommand} deletes the candidate object regardless of
+     * indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
@@ -140,12 +145,14 @@ public class DeleteCandidateCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered candidate list to show all persons
         expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(candidateToDelete, model.getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second candidate in unfiltered candidate list
         expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test

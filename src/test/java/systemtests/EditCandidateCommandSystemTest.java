@@ -37,8 +37,8 @@ import org.junit.Test;
 import seedu.recruit.commons.core.Messages;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.EditCandidateCommand;
-import seedu.recruit.logic.commands.RedoCommand;
-import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.RedoCandidateBookCommand;
+import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.Name;
@@ -69,13 +69,13 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandSuccess(command, index, editedCandidate);
 
         /* Case: undo editing the last candidate in the list -> last candidate restored */
-        command = UndoCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
+        command = UndoCandidateBookCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCandidateBookCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: redo editing the last candidate in the list -> last candidate edited again */
-        command = RedoCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
+        command = RedoCandidateBookCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCandidateBookCommand.MESSAGE_SUCCESS;
         model.updateCandidate(
                 getModel().getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()), editedCandidate);
         assertCommandSuccess(command, model, expectedResultMessage);

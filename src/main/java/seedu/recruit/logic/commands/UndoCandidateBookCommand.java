@@ -8,13 +8,13 @@ import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 
 /**
- * Reverts the {@code model}'s recruit book to its previous state.
+ * Reverts the {@code model}'s CandidateBook to its previous state.
  */
-public class UndoCommand extends Command {
+public class UndoCandidateBookCommand extends Command {
 
-    public static final String COMMAND_WORD = "undo";
+    public static final String COMMAND_WORD = "undoc";
     public static final String MESSAGE_SUCCESS = "Undo success!";
-    public static final String MESSAGE_FAILURE = "No more commands to undo!";
+    public static final String MESSAGE_FAILURE = "No more CandidateBook commands to undo!";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {

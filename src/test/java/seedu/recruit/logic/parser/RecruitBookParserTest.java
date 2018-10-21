@@ -26,9 +26,9 @@ import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCommand;
-import seedu.recruit.logic.commands.RedoCommand;
+import seedu.recruit.logic.commands.RedoCandidateBookCommand;
 import seedu.recruit.logic.commands.SelectCommand;
-import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.candidate.NameContainsKeywordsPredicate;
@@ -85,7 +85,8 @@ public class RecruitBookParserTest {
     @Test
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD, state, emailUtil) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", state, emailUtil) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3", state, emailUtil)
+                instanceof ExitCommand);
     }
 
     @Test
@@ -93,7 +94,8 @@ public class RecruitBookParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
 
         FindCandidateCommand command = (FindCandidateCommand) parser.parseCommand(
-                FindCandidateCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")),
+                FindCandidateCommand.COMMAND_WORD + " " + keywords.stream()
+                        .collect(Collectors.joining(" ")),
                 state, emailUtil);
         assertEquals(new FindCandidateCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
@@ -101,13 +103,15 @@ public class RecruitBookParserTest {
     @Test
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD, state, emailUtil) instanceof HelpCommand);
-        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", state, emailUtil) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3", state, emailUtil)
+                instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_history() throws Exception {
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD, state, emailUtil) instanceof HistoryCommand);
-        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3", state, emailUtil) instanceof HistoryCommand);
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3", state, emailUtil)
+                instanceof HistoryCommand);
 
         try {
             parser.parseCommand("histories", state, emailUtil);
@@ -120,7 +124,8 @@ public class RecruitBookParserTest {
     @Test
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD, state, emailUtil) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3", state, emailUtil) instanceof ListCommand);
+        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3", state, emailUtil)
+                instanceof ListCommand);
     }
 
     @Test
@@ -132,14 +137,18 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_redoCommandWord_returnsRedoCommand() throws Exception {
-        assertTrue(parser.parseCommand(RedoCommand.COMMAND_WORD, state, emailUtil) instanceof RedoCommand);
-        assertTrue(parser.parseCommand("redo 1", state, emailUtil) instanceof RedoCommand);
+        assertTrue(parser.parseCommand(RedoCandidateBookCommand.COMMAND_WORD, state, emailUtil)
+                instanceof RedoCandidateBookCommand);
+        assertTrue(parser.parseCommand("redoc 1", state, emailUtil)
+                instanceof RedoCandidateBookCommand);
     }
 
     @Test
     public void parseCommand_undoCommandWord_returnsUndoCommand() throws Exception {
-        assertTrue(parser.parseCommand(UndoCommand.COMMAND_WORD, state, emailUtil) instanceof UndoCommand);
-        assertTrue(parser.parseCommand("undo 3", state, emailUtil) instanceof UndoCommand);
+        assertTrue(parser.parseCommand(UndoCandidateBookCommand.COMMAND_WORD, state, emailUtil)
+                instanceof UndoCandidateBookCommand);
+        assertTrue(parser.parseCommand("undoc 3", state, emailUtil)
+                instanceof UndoCandidateBookCommand);
     }
 
     @Test
