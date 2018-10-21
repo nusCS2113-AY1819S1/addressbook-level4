@@ -1,5 +1,7 @@
 package com.t13g2.forum.logic.parser;
 
+import static com.t13g2.forum.logic.parser.CliSyntax.PREFIX_USER_NAME;
+
 import java.util.stream.Stream;
 
 import com.t13g2.forum.commons.core.Messages;
@@ -18,13 +20,16 @@ public class BlockUserFromPostingCommandParser implements Parser<BlockUserFromCr
      * @throws ParseException if the user input does not conform the expected format
      */
     public BlockUserFromCreatingCommand parse(String args) throws ParseException {
-        try {
-            String userName = ParserUtil.parseUserName(args);
-            return new BlockUserFromCreatingCommand(userName);
-        } catch (ParseException pe) {
-            throw new ParseException(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, BlockUserFromCreatingCommand.MESSAGE_USAGE), pe);
+        ArgumentMultimap argMultimap =
+            ArgumentTokenizer.tokenize(args, PREFIX_USER_NAME);
+        if (!arePrefixesPresent(argMultimap, PREFIX_USER_NAME)
+            || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
+                BlockUserFromCreatingCommand.MESSAGE_USAGE));
         }
+        String userName = ParserUtil.parseUserName(argMultimap.getValue(PREFIX_USER_NAME).get());
+
+        return new BlockUserFromCreatingCommand(userName);
     }
 
     /**

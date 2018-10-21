@@ -8,8 +8,13 @@ import java.util.logging.Logger;
 import com.t13g2.forum.commons.core.ComponentManager;
 import com.t13g2.forum.commons.core.LogsCenter;
 import com.t13g2.forum.commons.events.model.AddressBookChangedEvent;
+import com.t13g2.forum.commons.events.model.ShowAnnouncementEvent;
+import com.t13g2.forum.commons.events.model.UserLoginEvent;
 import com.t13g2.forum.commons.util.CollectionUtil;
+import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
+import com.t13g2.forum.storage.forum.Context;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -131,6 +136,64 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
+    //@@xllx1
+    @Override
+    public boolean userLogin(String userName, String userPassword) {
+        User user = versionedAddressBook.userLogin(userName, userPassword);
+        if (user != null) {
+            raise(new UserLoginEvent(userName, user.isAdmin()));
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkIsLogin() {
+        if (Context.getInstance().getCurrentUser() == null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean checkIsAdmin() {
+        if (!Context.getInstance().getCurrentUser().isAdmin()) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public void addAnnouncement(Announcement toAnnounce) {
+        versionedAddressBook.addAnnouncement(toAnnounce);
+        raise(new ShowAnnouncementEvent(toAnnounce.getTitle(), toAnnounce.getContent()));
+    }
+
+    @Override
+    public Announcement showLatestAnnouncement() {
+        Announcement latestAnnouncement = versionedAddressBook.checkAnnounce();
+        if (latestAnnouncement != null) {
+            raise(new ShowAnnouncementEvent(latestAnnouncement.getTitle(), latestAnnouncement.getContent()));
+        }
+        return latestAnnouncement;
+    }
+
+    @Override
+    public User doesUserExist(String userName) {
+        return versionedAddressBook.doesUserExist(userName);
+    }
+
+    @Override
+    public boolean blockUser(User user) {
+        return versionedAddressBook.blockUser(user);
+    }
+
+    @Override
+    public void setAdmin(User user) {
+        versionedAddressBook.setAdmin(user);
+    }
+
+    //@@author
     @Override
     public boolean equals(Object obj) {
         // short circuit if same object
