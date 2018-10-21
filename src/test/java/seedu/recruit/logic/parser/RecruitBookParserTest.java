@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.recruit.testutil.TestUtil.getIndexSet;
 import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
@@ -68,7 +69,7 @@ public class RecruitBookParserTest {
     public void parseCommand_delete() throws Exception {
         DeleteCandidateCommand command = (DeleteCandidateCommand) parser.parseCommand(
                 DeleteCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil);
-        assertEquals(new DeleteCandidateCommand(INDEX_FIRST), command);
+        assertEquals(new DeleteCandidateCommand(getIndexSet(INDEX_FIRST)), command);
     }
 
     @Test

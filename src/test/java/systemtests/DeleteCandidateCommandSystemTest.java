@@ -3,7 +3,7 @@ package systemtests;
 import static org.junit.Assert.assertTrue;
 import static seedu.recruit.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.recruit.logic.commands.DeleteCandidateCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.recruit.logic.commands.DeleteCandidateCommand.MESSAGE_DELETE_CANDIDATE_SUCCESS;
 import static seedu.recruit.testutil.TestUtil.getLastIndex;
 import static seedu.recruit.testutil.TestUtil.getMidIndex;
 import static seedu.recruit.testutil.TestUtil.getPerson;
@@ -36,7 +36,7 @@ public class DeleteCandidateCommandSystemTest extends CandidateBookSystemTest {
         String command = "     " + DeleteCandidateCommand.COMMAND_WORD + "      " + INDEX_FIRST.getOneBased()
                 + "       ";
         Candidate deletedCandidate = removePerson(expectedModel, INDEX_FIRST);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedCandidate);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS, deletedCandidate);
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
 
         /* Case: delete the last candidate in the list -> deleted */
@@ -87,7 +87,7 @@ public class DeleteCandidateCommandSystemTest extends CandidateBookSystemTest {
         selectPerson(selectedIndex);
         command = DeleteCandidateCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
         deletedCandidate = removePerson(expectedModel, selectedIndex);
-        expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedCandidate);
+        expectedResultMessage = String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS, deletedCandidate);
         assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
@@ -134,7 +134,7 @@ public class DeleteCandidateCommandSystemTest extends CandidateBookSystemTest {
     private void assertCommandSuccess(Index toDelete) {
         Model expectedModel = getModel();
         Candidate deletedCandidate = removePerson(expectedModel, toDelete);
-        String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedCandidate);
+        String expectedResultMessage = String.format(MESSAGE_DELETE_CANDIDATE_SUCCESS, deletedCandidate);
 
         assertCommandSuccess(
                 DeleteCandidateCommand.COMMAND_WORD + " " + toDelete.getOneBased(), expectedModel,
