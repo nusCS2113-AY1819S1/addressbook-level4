@@ -42,7 +42,7 @@ public class ClassroomParserUtil {
 
     /**
      *
-     * Parses a {@code String moduleCode} into a {@code ClassModule}.
+     * Parses a {@code String maxEnrollment} into a {@code parseEnrollment}.
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the given {@code className} is invalid.
      */
