@@ -30,8 +30,8 @@ public class FindCommandParserTest {
         prefixKeywordsMap.put(PREFIX_NAME, names);
         Set<Prefix> keys = prefixKeywordsMap.keySet();
 
-//        FindCommand expectedFindCommand =
-//                new FindCommand(, names, keys.toArray(new Prefix[0]));
+        // FindCommand expectedFindCommand =
+        //        new FindCommand(, names, keys.toArray(new Prefix[0]));
         // assertParseSuccess(parser,  "Alice Bob", expectedFindCommand);
 
         // multiple whitespaces between keywords
