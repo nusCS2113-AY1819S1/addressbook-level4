@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -10,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_POSITION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -74,19 +74,33 @@ public class FindCommand extends Command {
             String[] approvedList = closestMatch.getApprovedList();
 
             if (type == PREFIX_PHONE) {
-                combinedPredicate = combinedPredicate.and(new PhoneContainsKeywordPredicate(Arrays.asList(approvedList)));
+                combinedPredicate = combinedPredicate.and(
+                        new PhoneContainsKeywordPredicate(Arrays.asList(approvedList))
+                );
             } else if (type == PREFIX_NAME) {
-                combinedPredicate = combinedPredicate.and(new NameContainsKeywordsPredicate(Arrays.asList(approvedList)));
+                combinedPredicate = combinedPredicate.and(
+                        new NameContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
             } else if (type == PREFIX_ADDRESS) {
-                combinedPredicate = combinedPredicate.and(new AddressContainsKeywordsPredicate(Arrays.asList(approvedList)));
+                combinedPredicate = combinedPredicate.and(
+                        new AddressContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
             } else if (type == PREFIX_EMAIL) {
-                combinedPredicate = combinedPredicate.and(new EmailContainsKeywordsPredicate(Arrays.asList(approvedList)));
+                combinedPredicate = combinedPredicate.and(
+                        new EmailContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
             } else if (type == PREFIX_NOTE) {
-                combinedPredicate = combinedPredicate.and(new NoteContainsKeywordsPredicate(Arrays.asList(approvedList)));
+                combinedPredicate = combinedPredicate.and(
+                        new NoteContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
             } else if (type == PREFIX_POSITION) {
-                combinedPredicate = combinedPredicate.and(new PositionContainsKeywordsPredicate(Arrays.asList(approvedList)));
+                combinedPredicate = combinedPredicate.and(
+                        new PositionContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
             } else if (type == PREFIX_TAG) {
-                combinedPredicate = combinedPredicate.and(new TagContainsKeywordsPredicate(Arrays.asList(approvedList)));
+                combinedPredicate = combinedPredicate.and(
+                        new TagContainsKeywordsPredicate(Arrays.asList(approvedList))
+                );
             }
         }
 
