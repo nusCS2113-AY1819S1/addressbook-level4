@@ -71,6 +71,13 @@ public class UniqueJobList implements Iterable<JobOffer> {
         }
     }
 
+    /**
+     * Removes all job offers from the list.
+     */
+    public void clear() {
+        internalList.clear();
+    }
+
 
     /**
      * Replaces the job offer {@code target} in the list with {@code editedJobOffer}.

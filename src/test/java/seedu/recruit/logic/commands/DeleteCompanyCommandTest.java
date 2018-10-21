@@ -40,7 +40,7 @@ public class DeleteCompanyCommandTest {
 
         String expectedMessage = String.format(DeleteCompanyCommand.MESSAGE_DELETE_COMPANY_SUCCESS, companyToDelete);
 
-        ModelManager expectedModel = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(new CandidateBook(), model.getCompanyBook(), new UserPrefs());
         expectedModel.deleteCompany(companyToDelete);
         expectedModel.commitCompanyBook();
 

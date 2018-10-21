@@ -3,7 +3,9 @@ package seedu.recruit.logic.commands;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
+import static seedu.recruit.testutil.TypicalCompanies.resetTypicalCompaniesJobList;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,6 +32,11 @@ public class AddJobDetailsCommandIntegrationTest {
     @Before
     public void setUp() {
         model = new ModelManager(new CandidateBook(), getTypicalCompanyBook(), new UserPrefs());
+    }
+
+    @After
+    public void cleanUp() {
+        resetTypicalCompaniesJobList();
     }
 
     @Test
