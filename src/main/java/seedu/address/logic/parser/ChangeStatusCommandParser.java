@@ -1,18 +1,16 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ORIGINAL_STATUS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ChangeStatusCommand;
 import seedu.address.logic.commands.ChangeStatusCommand.ChangeStatusDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-
+//@@author ChewKinWhye
 /**
  * Parses input arguments and creates a new ChangeStatusCommand object
  */
@@ -25,7 +23,8 @@ public class ChangeStatusCommandParser implements Parser<ChangeStatusCommand> {
     public ChangeStatusCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_QUANTITY, PREFIX_ORIGINAL_STATUS, PREFIX_NEW_STATUS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME,
+                        PREFIX_QUANTITY, PREFIX_ORIGINAL_STATUS, PREFIX_NEW_STATUS);
 
         ChangeStatusDescriptor changeStatusDescriptor = new ChangeStatusDescriptor();
         changeStatusDescriptor.setName(ParserUtil

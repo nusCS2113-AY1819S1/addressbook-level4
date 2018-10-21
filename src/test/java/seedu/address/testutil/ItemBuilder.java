@@ -1,14 +1,12 @@
 package seedu.address.testutil;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
+import seedu.address.model.item.Status;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -24,14 +22,14 @@ public class ItemBuilder {
     private Name name;
     private Quantity quantity;
     private Quantity minQuantity;
-    private List<Integer> status;
+    private Status status;
     private Set<Tag> tags;
 
     public ItemBuilder() {
         name = new Name(DEFAULT_NAME);
         quantity = new Quantity(DEFAULT_QUANTITY);
         minQuantity = new Quantity(DEFAULT_MIN_QUANTITY);
-        status = new ArrayList<>(Arrays.asList(Integer.parseInt(DEFAULT_QUANTITY), 0, 0));
+        status = new Status(Integer.parseInt(DEFAULT_QUANTITY), 0, 0);
         tags = new HashSet<>();
     }
 
@@ -67,7 +65,7 @@ public class ItemBuilder {
      */
     public ItemBuilder withQuantity(String quantity) {
         this.quantity = new Quantity(quantity);
-        this.status = new ArrayList<>(Arrays.asList(Integer.parseInt(quantity), 0, 0));
+        this.status = new Status(Integer.parseInt(quantity), 0, 0);
         return this;
     }
 
@@ -82,7 +80,7 @@ public class ItemBuilder {
     /**
      * Sets the {@code Email} of the {@code Item} that we are building.
      */
-    public ItemBuilder withStatus(List<Integer> status) {
+    public ItemBuilder withStatus(Status status) {
         this.status = status;
         return this;
     }
