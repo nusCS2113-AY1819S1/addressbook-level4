@@ -2,10 +2,14 @@ package com.t13g2.forum.ui;
 
 import java.util.logging.Logger;
 
+import org.controlsfx.control.StatusBar;
+
 import com.google.common.eventbus.Subscribe;
 import com.t13g2.forum.commons.core.Config;
 import com.t13g2.forum.commons.core.GuiSettings;
 import com.t13g2.forum.commons.core.LogsCenter;
+import com.t13g2.forum.commons.events.model.ShowAnnouncementEvent;
+import com.t13g2.forum.commons.events.model.UserLoginEvent;
 import com.t13g2.forum.commons.events.ui.ExitAppRequestEvent;
 import com.t13g2.forum.commons.events.ui.ShowHelpRequestEvent;
 import com.t13g2.forum.logic.Logic;
@@ -39,6 +43,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private AnnouncementPopUp announcementPopUp;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -58,6 +63,9 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane statusbarPlaceholder;
 
+    @FXML
+    private StatusBar statusBarUserName;
+
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
 
@@ -75,6 +83,7 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        announcementPopUp = new AnnouncementPopUp();
     }
 
     public Stage getPrimaryStage() {
@@ -87,6 +96,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -160,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     GuiSettings getCurrentGuiSetting() {
         return new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+            (int) primaryStage.getX(), (int) primaryStage.getY());
     }
 
     /**
@@ -175,6 +185,31 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    //@@xllx1
+    /**
+     * show user name and user type in the label
+     */
+    @FXML
+    public void handleUserLogin(String userName, boolean isAdmin) {
+        String userType = "(" + (isAdmin ? "Admin" : "User") + ")";
+        statusBarUserName.setText("");
+        statusBarUserName.setText(userName + userType);
+    }
+
+    /**
+     * shows announcement in a pop up window.
+     */
+    @FXML
+    public void handleShowAnnouncement(String announcementTitle, String announcementContent) {
+        announcementPopUp = new AnnouncementPopUp();
+        if (!announcementPopUp.isShowing()) {
+            announcementPopUp.show(announcementTitle, announcementContent);
+        } else {
+            announcementPopUp.focus();
+        }
+    }
+
+    //@@author
     void show() {
         primaryStage.show();
     }
@@ -199,5 +234,18 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    //@@xllx1
+    @Subscribe
+    private void handleUserLoginEvent(UserLoginEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleUserLogin(event.userName, event.userType);
+    }
+
+    @Subscribe
+    private void handleShowAnnouncementEvent(ShowAnnouncementEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleShowAnnouncement(event.announcementTitle, event.announcementContent);
     }
 }

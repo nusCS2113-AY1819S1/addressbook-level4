@@ -4,8 +4,13 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import com.t13g2.forum.model.forum.Announcement;
+import com.t13g2.forum.model.forum.User;
 import com.t13g2.forum.model.person.Person;
 import com.t13g2.forum.model.person.UniquePersonList;
+import com.t13g2.forum.storage.forum.Context;
+import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
+import com.t13g2.forum.storage.forum.UnitOfWork;
 
 import javafx.collections.ObservableList;
 
@@ -117,5 +122,102 @@ public class ForumBook implements ReadOnlyForumBook {
     @Override
     public int hashCode() {
         return persons.hashCode();
+    }
+
+    //@@xllx1
+    /**
+     * User login to forum book.
+     * The user must exist in the forum book.
+     */
+    public User userLogin(String userName, String userPassword) {
+        User exist = null;
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            try {
+                exist = unitOfWork.getUserRepository().authenticate(userName, userPassword);
+                if (exist == null) {
+                    return null;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Context.getInstance().setCurrentUser(exist);
+        return exist;
+    }
+
+    /**
+     * adds new announcement to storage by admin.
+     * @param toAnnounce
+     */
+    public void addAnnouncement(Announcement toAnnounce) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            toAnnounce.setCreatedByUserId(Context.getInstance().getCurrentUser().getId());
+            unitOfWork.getAnnouncementRepository().addAnnouncement(toAnnounce);
+            unitOfWork.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * returns latest announcement.
+     */
+    public Announcement checkAnnounce() {
+        Announcement announcement = null;
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            announcement = unitOfWork.getAnnouncementRepository().getLatestAnnouncement();
+        } catch (EntityDoesNotExistException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return announcement;
+    }
+
+    /**
+     * checks if user exists.
+     */
+    public User doesUserExist(String userName) {
+        User user = null;
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            user = unitOfWork.getUserRepository().getUserByUsername(userName);
+        } catch (EntityDoesNotExistException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return user;
+    }
+
+    /**
+     * blocks the specific user.
+     */
+    public boolean blockUser(User user) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            if (user.getIsBlock()) {
+                return false;
+            } else {
+                user.setIsBlock(true);
+                unitOfWork.commit();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    /**
+     * set or revert the user as admin.
+     */
+    public void setAdmin(User user) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            user.setAdmin(!user.isAdmin());
+            unitOfWork.getUserRepository().updateUser(user);
+            unitOfWork.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

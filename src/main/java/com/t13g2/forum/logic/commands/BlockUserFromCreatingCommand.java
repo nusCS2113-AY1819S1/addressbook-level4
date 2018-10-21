@@ -5,12 +5,8 @@ import static java.util.Objects.requireNonNull;
 
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
-import com.t13g2.forum.logic.commands.exceptions.DuplicateBlockException;
 import com.t13g2.forum.model.Model;
 import com.t13g2.forum.model.forum.User;
-import com.t13g2.forum.storage.forum.Context;
-import com.t13g2.forum.storage.forum.EntityDoesNotExistException;
-import com.t13g2.forum.storage.forum.UnitOfWork;
 
 //@@xllx1
 /**
@@ -45,26 +41,18 @@ public class BlockUserFromCreatingCommand extends Command {
         requireNonNull(model);
         User user = null;
         // if user has not login or is not admin, then throw exception
-        if (Context.getInstance().getCurrentUser() == null) {
+        if (!model.checkIsLogin()) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
-        if (!Context.getInstance().getCurrentUser().isAdmin()) {
+        if (!model.checkIsAdmin()) {
             throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
-        try (UnitOfWork unitOfWork = new UnitOfWork()) {
-            user = unitOfWork.getUserRepository().getUserByUsername(userNameToBlock);
-            if (user.getIsBlock()) {
-                throw new DuplicateBlockException(MESSAGE_DUPLICATE_BLOCK);
-            } else {
-                user.setIsBlock(true);
-                unitOfWork.commit();
-            }
-        } catch (EntityDoesNotExistException e) {
+        user = model.doesUserExist(userNameToBlock);
+        if (user == null) {
             throw new CommandException(MESSAGE_INVALID_USER);
-        } catch (DuplicateBlockException e) {
+        }
+        if (!model.blockUser(user)) {
             throw new CommandException(MESSAGE_DUPLICATE_BLOCK);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, user));
     }

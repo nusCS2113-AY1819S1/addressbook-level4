@@ -45,10 +45,10 @@ public class CreateModuleCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         // if user has not login or is not admin, then throw exception
-        if (Context.getInstance().getCurrentUser() == null) {
+        if (!model.checkIsLogin()) {
             throw new CommandException(User.MESSAGE_NOT_LOGIN);
         }
-        if (!Context.getInstance().getCurrentUser().isAdmin()) {
+        if (!model.checkIsAdmin()) {
             throw new CommandException(User.MESSAGE_NOT_ADMIN);
         }
         try (UnitOfWork unitOfWork = new UnitOfWork()) {
