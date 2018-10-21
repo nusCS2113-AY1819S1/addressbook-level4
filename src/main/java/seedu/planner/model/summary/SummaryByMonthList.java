@@ -34,7 +34,10 @@ public class SummaryByMonthList {
         return FXCollections.observableList(list);
     }
 
-    private SummaryEntry convertToUiFriendly(MonthSummary summary) {
+    /**
+     * Converts each {@code MonthSummary} to a UI friendly counterpart for display
+     */
+    public SummaryEntry convertToUiFriendly(MonthSummary summary) {
         return new SummaryEntry(summary.getMonth().toString(), summary.getTotalIncome().toString(),
                 summary.getTotalExpense().toString(), summary.getTotal().toString());
     }

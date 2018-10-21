@@ -1,11 +1,14 @@
 package seedu.planner.testutil;
 
+import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
-import seedu.planner.model.summary.Summary;
+import seedu.planner.model.summary.DaySummary;
+import seedu.planner.model.summary.MonthSummary;
+import seedu.planner.model.summary.SummaryAbs;
 
 /**
- * A utility class to help build Summay objects for testing
+ * A utility class to help buildDaySummary Summary objects for testing
  */
 public class SummaryBuilder {
 
@@ -13,20 +16,20 @@ public class SummaryBuilder {
     public static final String DEFAULT_TOTAL_EXPENSE = "-10";
     public static final String DEFAULT_TOTAL_INCOME = "+300";
     public static final String DEFAULT_TOTAL = "+290";
-    public static final String DEFAULT_COUNT = "10";
+    public static final String DEFAULT_MONTH = "feb-2018";
 
     private Date date;
+    private Month month;
     private MoneyFlow totalExpense;
     private MoneyFlow totalIncome;
     private MoneyFlow total;
-    private Integer trackedRecordsCount;
 
     public SummaryBuilder() {
         date = new Date(DEFAULT_DATE);
+        month = new Month(DEFAULT_MONTH);
         totalExpense = new MoneyFlow(DEFAULT_TOTAL_EXPENSE);
         totalIncome = new MoneyFlow(DEFAULT_TOTAL_INCOME);
         total = new MoneyFlow(DEFAULT_TOTAL);
-        trackedRecordsCount = Integer.parseInt(DEFAULT_COUNT);
     }
 
     /**
@@ -34,6 +37,14 @@ public class SummaryBuilder {
      */
     public SummaryBuilder withDate(String date) {
         this.date = new Date(date);
+        return this;
+    }
+
+    /**
+     * Sets the {@code month} of the {@code Summary} that we are building.
+     */
+    public SummaryBuilder withMonth(String month) {
+        this.month = new Month(month);
         return this;
     }
 
@@ -61,8 +72,12 @@ public class SummaryBuilder {
         return this;
     }
 
-    public Summary build() {
-        return new Summary(date, totalExpense, totalIncome, total);
+    public SummaryAbs buildDaySummary() {
+        return new DaySummary(date, totalExpense, totalIncome, total);
+    }
+
+    public SummaryAbs buildMonthSummary() {
+        return new MonthSummary(month, totalExpense, totalIncome, total);
     }
 
 }

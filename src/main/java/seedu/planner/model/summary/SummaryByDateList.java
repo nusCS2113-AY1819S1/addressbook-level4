@@ -34,7 +34,10 @@ public class SummaryByDateList {
         return FXCollections.observableList(list);
     }
 
-    private SummaryEntry convertToUiFriendly(DaySummary summary) {
+    /**
+     * Converts each {@code DaySummary} to a UI friendly counterpart for display
+     */
+    public SummaryEntry convertToUiFriendly(DaySummary summary) {
         return new SummaryEntry(summary.getDate().toString(), summary.getTotalIncome().toString(),
                 summary.getTotalExpense().toString(), summary.getTotal().toString());
     }

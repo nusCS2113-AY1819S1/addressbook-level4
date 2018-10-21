@@ -10,7 +10,7 @@ import seedu.planner.model.Model;
  * Represents a basic summary command with hidden internal logic and the ability to be executed.
  * This command should not be executed
  */
-public abstract class SummaryCommand extends Command{
+public abstract class SummaryCommand extends Command {
 
     public static final String COMMAND_WORD = "summary";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Lists the summary for each day/month "

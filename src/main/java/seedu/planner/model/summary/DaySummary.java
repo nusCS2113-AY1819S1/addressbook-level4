@@ -74,7 +74,7 @@ public class DaySummary extends SummaryAbs {
     @Override
     public boolean equals(Object other) {
         return this == other // short circuit if same object
-                || (other instanceof Summary // instanceof handles nulls
+                || (other instanceof DaySummary // instanceof handles nulls
                 && date.equals(((DaySummary) other).date)
                 && totalExpense.equals(((DaySummary) other).totalExpense)
                 && totalIncome.equals(((DaySummary) other).totalIncome)
