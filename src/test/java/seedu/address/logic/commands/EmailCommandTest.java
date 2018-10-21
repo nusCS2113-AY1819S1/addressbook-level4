@@ -10,6 +10,7 @@ import java.util.List;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.EmailUtil;
 import seedu.address.logic.CommandHistory;
@@ -24,6 +25,9 @@ import seedu.address.model.email.Subject;
 
 public class EmailCommandTest {
 
+    private static final Subject VALID_SUBJECT = new Subject("This is a valid subject");
+    private static final Message VALID_MESSAGE = new Message("This is a valid message");
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -31,8 +35,6 @@ public class EmailCommandTest {
 
     private Model modelSingle = new ModelManager(getSingleTypicalAddressBook(), new UserPrefs());
     private Model modelMultiple = new ModelManager(getMultipleTypicalAddressBook(), new UserPrefs());
-    public static final Subject validSubject = new Subject("This is a valid subject");
-    public static final Message validMessage = new Message("This is a valid message");
 
     private Index index;
     private List<Index> indexList;
@@ -45,7 +47,8 @@ public class EmailCommandTest {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
         }
-        CommandResult commandResult = new EmailCommand(index, validSubject, validMessage).execute(modelSingle, commandHistory);
+        CommandResult commandResult = new EmailCommand(index, VALID_SUBJECT, VALID_MESSAGE)
+                .execute(modelSingle, commandHistory);
         assertEquals(String.format(EmailCommand.MESSAGE_SUCCESS), commandResult.feedbackToUser);
     }
 
@@ -57,7 +60,8 @@ public class EmailCommandTest {
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EmailCommand.MESSAGE_USAGE), pe);
         }
-        CommandResult commandResult = new EmailCommand(indexList, validSubject, validMessage).execute(modelMultiple, commandHistory);
+        CommandResult commandResult = new EmailCommand(indexList, VALID_SUBJECT, VALID_MESSAGE)
+                .execute(modelMultiple, commandHistory);
         assertEquals(String.format(EmailCommand.MESSAGE_SUCCESS), commandResult.feedbackToUser);
     }
 
@@ -71,7 +75,8 @@ public class EmailCommandTest {
         }
         thrown.expect(CommandException.class);
         thrown.expectMessage(EmailCommand.MESSAGE_AUTHENTICATION_FAIL);
-        CommandResult commandResult = new EmailCommand(index, validSubject, validMessage).execute(modelSingle, commandHistory);
+        CommandResult commandResult = new EmailCommand(index, VALID_SUBJECT, VALID_MESSAGE)
+                .execute(modelSingle, commandHistory);
         assertEquals(String.format(EmailCommand.MESSAGE_AUTHENTICATION_FAIL), commandResult.feedbackToUser);
     }
 
@@ -85,7 +90,8 @@ public class EmailCommandTest {
         }
         thrown.expect(CommandException.class);
         thrown.expectMessage(EmailCommand.MESSAGE_AUTHENTICATION_FAIL);
-        CommandResult commandResult = new EmailCommand(indexList, validSubject, validMessage).execute(modelMultiple, commandHistory);
+        CommandResult commandResult = new EmailCommand(indexList, VALID_SUBJECT, VALID_MESSAGE)
+                .execute(modelMultiple, commandHistory);
         assertEquals(String.format(EmailCommand.MESSAGE_AUTHENTICATION_FAIL), commandResult.feedbackToUser);
     }
 
