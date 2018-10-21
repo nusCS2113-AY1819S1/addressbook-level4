@@ -25,8 +25,8 @@ public class DeleteCompanyCommandParser implements Parser<DeleteCompanyCommand> 
     public DeleteCompanyCommand parse(String args) throws ParseException {
         String[] indexes = args.split(PREFIX_INDEX.toString());
         try {
-            Set<Index> indexSetList = parseIndexSet(indexes);
-            return new DeleteCompanyCommand(indexSetList);
+            Set<Index> indexSet = parseIndexSet(indexes);
+            return new DeleteCompanyCommand(indexSet);
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCompanyCommand.MESSAGE_USAGE), pe);
