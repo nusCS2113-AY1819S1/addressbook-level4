@@ -54,10 +54,9 @@ public class ProductCardTest extends GuiUnitTest {
         assertFalse(personCard.equals(new PersonCard(product, 1)));
     }
 
-    /**
-     * Asserts that {@code personCard} displays the details of {@code expectedProduct} correctly and matches
+    /* Asserts that {@code personCard} displays the details of {@code expectedProduct} correctly and matches
      * {@code expectedId}.
-     * /
+     */
 
     private void assertCardDisplay(PersonCard personCard, Product expectedProduct, int expectedId) {
         guiRobot.pauseForHuman();

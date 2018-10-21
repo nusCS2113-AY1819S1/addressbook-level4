@@ -19,7 +19,7 @@ import org.junit.Test;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.EditDCommand.EditDistributorDescriptor;
+import seedu.address.logic.commands.EditDistributorCommand.EditDistributorDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -43,7 +43,7 @@ public class EditDCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Distributor editedDistributor = new DistributorBuilder().build();
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder(editedDistributor).build();
-        EditDCommand editCommand = new EditDCommand(INDEX_FIRST_PERSON, descriptor);
+        EditDistributorCommand editCommand = new EditDistributorCommand(INDEX_FIRST_PERSON, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedDistributor);
 
@@ -65,7 +65,7 @@ public class EditDCommandTest {
 
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).build();
-        EditDCommand editDCommand = new EditDCommand(indexLastDistributor, descriptor);
+        EditDistributorCommand editDCommand = new EditDistributorCommand(indexLastDistributor, descriptor);
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedDistributor);
 
@@ -79,7 +79,7 @@ public class EditDCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditDCommand editDCommand = new EditDCommand(INDEX_FIRST_PERSON, new EditDistributorDescriptor());
+        EditDistributorCommand editDCommand = new EditDistributorCommand(INDEX_FIRST_PERSON, new EditDistributorDescriptor());
         Distributor editedDistributor = model.getFilteredDistributorList().get(INDEX_FIRST_PERSON.getZeroBased());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedDistributor);
@@ -99,7 +99,7 @@ public class EditDCommandTest {
                 .get(INDEX_FIRST_PERSON.getZeroBased());
         Distributor editedDistributor = new DistributorBuilder(distributorInFilteredList)
                 .withName(VALID_NAME_BOB).build();
-        EditDCommand editDCommand = new EditDCommand(INDEX_FIRST_PERSON,
+        EditDistributorCommand editDCommand = new EditDistributorCommand(INDEX_FIRST_PERSON,
                 new EditDistributorDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedDistributor);
@@ -116,9 +116,9 @@ public class EditDCommandTest {
     public void execute_duplicatePersonUnfilteredList_failure() {
         Distributor firstDistributor = model.getFilteredDistributorList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder(firstDistributor).build();
-        EditDCommand editDCommand = new EditDCommand(INDEX_SECOND_PERSON, descriptor);
+        EditDistributorCommand editDCommand = new EditDistributorCommand(INDEX_SECOND_PERSON, descriptor);
 
-        assertCommandFailure(editDCommand, model, commandHistory, EditDCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editDCommand, model, commandHistory, EditDistributorCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
@@ -128,17 +128,17 @@ public class EditDCommandTest {
         // edit product in filtered list into a duplicate in address book
         Distributor distributorInList = model.getDistributorInfoBook().getDistributorList()
                 .get(INDEX_SECOND_PERSON.getZeroBased());
-        EditDCommand editDCommand = new EditDCommand(INDEX_FIRST_PERSON,
+        EditDistributorCommand editDCommand = new EditDistributorCommand(INDEX_FIRST_PERSON,
                 new EditDistributorDescriptorBuilder(distributorInList).build());
 
-        assertCommandFailure(editDCommand, model, commandHistory, EditDCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editDCommand, model, commandHistory, EditDistributorCommand.MESSAGE_DUPLICATE_PERSON);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDistributorList().size() + 1);
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        EditDCommand editDCommand = new EditDCommand(outOfBoundIndex, descriptor);
+        EditDistributorCommand editDCommand = new EditDistributorCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editDCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
@@ -155,7 +155,7 @@ public class EditDCommandTest {
         assertTrue(outOfBoundIndex.getZeroBased() < model.getDistributorInfoBook()
                 .getDistributorList().size());
 
-        EditDCommand editDCommand = new EditDCommand(outOfBoundIndex,
+        EditDistributorCommand editDCommand = new EditDistributorCommand(outOfBoundIndex,
                 new EditDistributorDescriptorBuilder().withName(VALID_NAME_BOB).build());
 
         assertCommandFailure(editDCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -166,7 +166,7 @@ public class EditDCommandTest {
         Distributor editedDistributor = new DistributorBuilder().build();
         Distributor distributorToEdit = model.getFilteredDistributorList().get(INDEX_FIRST_PERSON.getZeroBased());
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder(editedDistributor).build();
-        EditDCommand editDCommand = new EditDCommand(INDEX_FIRST_PERSON, descriptor);
+        EditDistributorCommand editDCommand = new EditDistributorCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getProductInfoBook()), new UserPrefs(),
                 new UserDatabase(), new TestStorage());
         expectedModel.updateDistributor(distributorToEdit, editedDistributor);
@@ -177,25 +177,25 @@ public class EditDCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered product list to show all persons
         expectedModel.undoAddressBook();
-        assertCommandSuccess(new UndoDCommand(), model, commandHistory, UndoDCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoDistributorCommand(), model, commandHistory, UndoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first product edited again
         expectedModel.redoAddressBook();
-        assertCommandSuccess(new RedoDCommand(), model, commandHistory, RedoDCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoDistributorCommand(), model, commandHistory, RedoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredDistributorList().size() + 1);
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        EditDCommand editDCommand = new EditDCommand(outOfBoundIndex, descriptor);
+        EditDistributorCommand editDCommand = new EditDistributorCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
         assertCommandFailure(editDCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
-        assertCommandFailure(new UndoDCommand(), model, commandHistory, UndoDCommand.MESSAGE_FAILURE);
-        assertCommandFailure(new RedoDCommand(), model, commandHistory, RedoDCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoDistributorCommand(), model, commandHistory, UndoDistributorCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoDistributorCommand(), model, commandHistory, RedoDistributorCommand.MESSAGE_FAILURE);
     }
 
     /**
@@ -209,7 +209,7 @@ public class EditDCommandTest {
     public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
         Distributor editedDistributor = new DistributorBuilder().build();
         EditDistributorDescriptor descriptor = new EditDistributorDescriptorBuilder(editedDistributor).build();
-        EditDCommand editDCommand = new EditDCommand(INDEX_FIRST_PERSON, descriptor);
+        EditDistributorCommand editDCommand = new EditDistributorCommand(INDEX_FIRST_PERSON, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getProductInfoBook()), new UserPrefs(),
                 new UserDatabase(), new TestStorage());
 
@@ -223,21 +223,21 @@ public class EditDCommandTest {
 
         // undo -> reverts addressbook back to previous state and filtered product list to show all persons
         expectedModel.undoAddressBook();
-        assertCommandSuccess(new UndoDCommand(), model, commandHistory, UndoDCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoDistributorCommand(), model, commandHistory, UndoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredDistributorList().get(INDEX_FIRST_PERSON.getZeroBased()), distributorToEdit);
         // redo -> edits same second product in unfiltered product list
         expectedModel.redoAddressBook();
-        assertCommandSuccess(new RedoDCommand(), model, commandHistory, RedoDCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoDistributorCommand(), model, commandHistory, RedoDistributorCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void equals() {
-        final EditDCommand standardCommand = new EditDCommand(INDEX_FIRST_PERSON, DESC_JOE);
+        final EditDistributorCommand standardCommand = new EditDistributorCommand(INDEX_FIRST_PERSON, DESC_JOE);
 
         // same values -> returns true
         EditDistributorDescriptor copyDescriptor = new EditDistributorDescriptor(DESC_JOE);
-        EditDCommand commandWithSameValues = new EditDCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditDistributorCommand commandWithSameValues = new EditDistributorCommand(INDEX_FIRST_PERSON, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -250,10 +250,10 @@ public class EditDCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditDCommand(INDEX_SECOND_PERSON, DESC_JOE)));
+        assertFalse(standardCommand.equals(new EditDistributorCommand(INDEX_SECOND_PERSON, DESC_JOE)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditDCommand(INDEX_FIRST_PERSON, DESC_ROE)));
+        assertFalse(standardCommand.equals(new EditDistributorCommand(INDEX_FIRST_PERSON, DESC_ROE)));
     }
 
 }

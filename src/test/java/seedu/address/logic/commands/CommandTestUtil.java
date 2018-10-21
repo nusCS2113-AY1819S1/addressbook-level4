@@ -74,8 +74,8 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
-    public static final EditDCommand.EditDistributorDescriptor DESC_JOE;
-    public static final EditDCommand.EditDistributorDescriptor DESC_ROE;
+    public static final EditDistributorCommand.EditDistributorDescriptor DESC_JOE;
+    public static final EditDistributorCommand.EditDistributorDescriptor DESC_ROE;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
