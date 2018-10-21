@@ -41,7 +41,6 @@ public class AddGroupCommandIntegrationTest {
         expectedModel = new ModelManager(abCopy, new UserPrefs());
     }
 
-    // TODO assertCommandSuccessTest
     @Test
     public void execute_addGroup_success() {
 
