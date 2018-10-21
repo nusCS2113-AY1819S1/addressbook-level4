@@ -105,7 +105,7 @@ public class FinancialPlannerParser {
             return new LimitCommandParser().parse(arguments);
 
         case SummaryCommand.COMMAND_WORD:
-            return new SummaryMainCommandParser().parse(arguments);
+            return new SummaryCommandParser().parse(arguments);
 
         case ExportExcelCommand.COMMAND_WORD:
             return new ExportExcelCommandParser().parse(arguments);
