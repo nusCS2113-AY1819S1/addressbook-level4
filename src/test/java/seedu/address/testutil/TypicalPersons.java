@@ -78,6 +78,18 @@ public class TypicalPersons {
     public static final Person IDA = new PersonBuilder().withName("Ida Mueller").withGender("MALE")
             .withNationality("US").withPhone("8482131").withEmail("hans@example.com")
             .withAddress("chicago ave").build();
+    public static final Person JOEL = new PersonBuilder().withName("Tan Wei Hao Joel").withGender("MALE")
+            .withNationality("SG").withPhone("81385542").withEmail("joeltan98@hotmail.com")
+            .withAddress("Lakeside").build();
+    public static final Person WEIQUAN = new PersonBuilder().withName("Tsu Wei Quan").withGender("FEMALE")
+            .withNationality("SG").withPhone("96259561").withEmail("tsuweiquan@gmail.com")
+            .withAddress("Pasiris").build();
+    public static final Person NOVIN = new PersonBuilder().withName("Novin Tong").withGender("MALE")
+            .withNationality("SG").withPhone("88888888").withEmail("E0176909@u.nus.edu")
+            .withAddress("East Side").build();
+    public static final Person JOELTAN = new PersonBuilder().withName("Joel Tan").withGender("MALE")
+            .withNationality("SG").withPhone("98989898").withEmail("joel.twh@u.nus.edu")
+            .withAddress("West Side").build();
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder()
@@ -106,5 +118,13 @@ public class TypicalPersons {
 
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+    }
+
+    public static List<Person> getSingleValidTypicalPerson() {
+        return new ArrayList<>(Arrays.asList(JOEL));
+    }
+
+    public static List<Person> getMultipleValidTypicalPerson() {
+        return new ArrayList<>(Arrays.asList(JOEL, WEIQUAN, NOVIN, JOELTAN));
     }
 }
