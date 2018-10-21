@@ -1,3 +1,5 @@
+//@@author rajdeepsh
+
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;
@@ -12,6 +14,7 @@ import seedu.address.model.group.exceptions.DuplicateGroupException;
 import seedu.address.model.group.exceptions.GroupNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+
 
 /**
  * A list of groups that enforces uniqueness between its elements and does not allow nulls.
