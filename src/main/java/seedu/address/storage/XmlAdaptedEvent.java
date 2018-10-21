@@ -96,9 +96,9 @@ public class XmlAdaptedEvent {
             eventTags.add(tag.toModelType());
         }
 
-        final List<Attendee> personAttendees = new ArrayList<>();
+        final List<Attendee> eventAttendees = new ArrayList<>();
         for (XmlAdaptedAttendee attendee : attending) {
-            personAttendees.add(attendee.toModelType());
+            eventAttendees.add(attendee.toModelType());
         }
 
         if (name == null) {
@@ -142,7 +142,7 @@ public class XmlAdaptedEvent {
         final Venue modelVenue = new Venue(venue);
 
         final Set<Tag> modelTags = new HashSet<>(eventTags);
-        final Set<Attendee> modelAttendees = new HashSet<>(personAttendees);
+        final Set<Attendee> modelAttendees = new HashSet<>(eventAttendees);
         return new Event(modelName, modelContact, modelPhone, modelEmail, modelVenue, modelTags, modelAttendees);
     }
 

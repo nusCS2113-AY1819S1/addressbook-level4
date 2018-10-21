@@ -29,7 +29,7 @@ public class AddCommand extends Command {
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + PREFIX_VENUE + "VENUE "
-            + "[" + PREFIX_TAG + "TAG] "
+            + "[" + PREFIX_TAG + "TAG]... "
             + "[" + PREFIX_ATTENDEE + "ATTENDEE]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "New Year's Party "

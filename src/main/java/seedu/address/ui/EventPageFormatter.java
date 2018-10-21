@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Set;
 
+import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
@@ -60,6 +61,10 @@ public class EventPageFormatter {
     private static void formatName(Name name) {
         SEARCH_PAGE_STRING =
                 SEARCH_PAGE_STRING.replaceAll("(<!-- Name -->)[^]*(<!-- /Name -->)", name.toString());
+    }
+
+    private static void formatContact(Contact contact) {
+
     }
 
     private static void formatPhone(Phone phone) {

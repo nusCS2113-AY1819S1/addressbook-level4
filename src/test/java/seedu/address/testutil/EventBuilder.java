@@ -72,6 +72,14 @@ public class EventBuilder {
     }
 
     /**
+     * Parses the {@code attendees} into a {@code Set<attendee>} and set it to the {@code Event} that we are building.
+     */
+    public EventBuilder withAttendees(String ... attendees) {
+        this.attendees = SampleDataUtil.getAttendeeSet(attendees);
+        return this;
+    }
+
+    /**
      * Sets the {@code Venue} of the {@code Event} that we are building.
      */
     public EventBuilder withVenue(String venue) {
@@ -100,14 +108,6 @@ public class EventBuilder {
      */
     public EventBuilder withContact(String contact) {
         this.contact = new Contact(contact);
-        return this;
-    }
-
-    /**
-     * Parses the {@code attendees} into a {@code Set<attendee>} and set it to the {@code Event} that we are building.
-     */
-    public EventBuilder withAttendees(String ... attendees) {
-        this.attendees = SampleDataUtil.getAttendeeSet(attendees);
         return this;
     }
 

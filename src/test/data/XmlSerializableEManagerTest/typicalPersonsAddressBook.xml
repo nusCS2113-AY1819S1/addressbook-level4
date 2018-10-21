@@ -8,6 +8,7 @@
         <email>alice@example.com</email>
         <venue>123, Jurong West Ave 6, #08-111</venue>
         <tagged>friends</tagged>
+        <attending>Peter Parker</attending>
     </events>
     <events>
         <name>Dancing Tryouts</name>
@@ -17,6 +18,7 @@
         <venue>311, Clementi Ave 2, #02-25</venue>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
+        <attending>Mary Kate</attending>
     </events>
     <events>
         <name>Frisbee Competition</name>
@@ -32,6 +34,7 @@
         <email>cornelia@example.com</email>
         <venue>10th street</venue>
         <tagged>friends</tagged>
+        <attending>Scarlet Witch</attending>
     </events>
     <events>
         <name>Music Tryouts</name>

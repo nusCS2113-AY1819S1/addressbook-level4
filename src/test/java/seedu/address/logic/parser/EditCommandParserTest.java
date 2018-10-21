@@ -54,7 +54,7 @@ public class EditCommandParserTest {
 
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
-    private static final String ATTENDEE_EMPTY = " " + PREFIX_ATTENDEE; //TODO UNUSED
+    private static final String ATTENDEE_EMPTY = " " + PREFIX_ATTENDEE; //TODO
 
     private static final String MESSAGE_INVALID_FORMAT =
             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
@@ -118,8 +118,8 @@ public class EditCommandParserTest {
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND
-                + EMAIL_DESC_AMY + VENUE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + ATTENDEE_DESC_TED;
+        String userInput = targetIndex.getOneBased() + PHONE_DESC_BOB + TAG_DESC_HUSBAND + ATTENDEE_DESC_TED
+                + EMAIL_DESC_AMY + VENUE_DESC_AMY + NAME_DESC_AMY + TAG_DESC_FRIEND + ATTENDEE_DESC_HAN;
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_AMY).withVenue(VALID_VENUE_AMY)
@@ -188,7 +188,7 @@ public class EditCommandParserTest {
 
         EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withPhone(VALID_PHONE_BOB)
                 .withEmail(VALID_EMAIL_BOB).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .withAttendees(ATTENDEE_DESC_TED, ATTENDEE_DESC_HAN).build();
+                .withAttendees(VALID_ATTENDEE_TED, VALID_ATTENDEE_HAN).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);

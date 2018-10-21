@@ -1,10 +1,13 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_ATTENDEE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CONTACT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
@@ -47,6 +50,7 @@ import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.event.Venue;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -64,7 +68,8 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
          */
         Event toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + CONTACT_DESC_AMY + " "
-                + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + "   " + VENUE_DESC_AMY + "   " + TAG_DESC_FRIEND + " ";
+                + PHONE_DESC_AMY + " " + EMAIL_DESC_AMY + "   " + VENUE_DESC_AMY + "   " + TAG_DESC_FRIEND + " "
+                + ATTENDEE_DESC_TED + " ";
         assertCommandSuccess(command, toAdd);
 
         /* Case: undo adding Amy to the list -> Amy deleted */
@@ -81,7 +86,7 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         /* Case: add an event with all fields same as another event in the event manager except name -> added */
         toAdd = new EventBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
-                + VENUE_DESC_AMY + TAG_DESC_FRIEND;
+                + VENUE_DESC_AMY + TAG_DESC_FRIEND + ATTENDEE_DESC_TED;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an event with all fields same as another event in the event manager except contact, phone and email
@@ -98,8 +103,8 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: add an event with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + PHONE_DESC_BOB + VENUE_DESC_BOB + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + CONTACT_DESC_BOB;
+        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + ATTENDEE_DESC_TED + PHONE_DESC_BOB + VENUE_DESC_BOB + NAME_DESC_BOB
+                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + ATTENDEE_DESC_HAN + CONTACT_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an event, missing tags -> added */
@@ -200,6 +205,11 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
         command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + VENUE_DESC_AMY + INVALID_TAG_DESC;
         assertCommandFailure(command, Tag.MESSAGE_TAG_CONSTRAINTS);
+
+        /* Case: invalid attendee -> rejected */
+        command = AddCommand.COMMAND_WORD + NAME_DESC_AMY + CONTACT_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
+                + VENUE_DESC_AMY + INVALID_ATTENDEE_DESC;
+        assertCommandFailure(command, Attendee.MESSAGE_ATTENDEE_CONSTRAINTS);
     }
 
     /**

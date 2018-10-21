@@ -125,13 +125,14 @@ public class Event {
                 && otherEvent.getPhone().equals(getPhone())
                 && otherEvent.getEmail().equals(getEmail())
                 && otherEvent.getVenue().equals(getVenue())
-                && otherEvent.getTags().equals(getTags());
+                && otherEvent.getTags().equals(getTags())
+                && otherEvent.getAttendees().equals(getAttendees());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, contact, phone, email, venue, tags);
+        return Objects.hash(name, contact, phone, email, venue, tags, attendees);
     }
 
     @Override
@@ -148,6 +149,9 @@ public class Event {
                 .append(getVenue())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
+
+        builder.append(" Attendees: ");
+        getAttendees().forEach(builder::append);
         return builder.toString();
     }
 

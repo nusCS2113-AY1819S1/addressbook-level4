@@ -8,6 +8,7 @@
         <email>alice@example.com</email>
         <venue>123, Jurong West Ave 6, #08-111</venue>
         <tagged>friends</tagged>
+        <attending>Peter Parker</attending>
     </events>
 
     <!-- Event with same identity as Alice Pauline -->

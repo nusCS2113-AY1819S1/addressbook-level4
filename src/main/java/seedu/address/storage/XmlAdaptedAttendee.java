@@ -19,7 +19,7 @@ public class XmlAdaptedAttendee {
     /**
      * Constructs a {@code XmlAdaptedAttendee} with the given {@code attendeeName}.
      */
-    public XmlAdaptedAttendee(String tagName) {
+    public XmlAdaptedAttendee(String attendeeName) {
         this.attendeeName = attendeeName;
     }
 
@@ -33,7 +33,7 @@ public class XmlAdaptedAttendee {
     }
 
     /**
-     * Converts this jaxb-friendly adapted tag object into the model's Attendee object.
+     * Converts this jaxb-friendly adapted attendee object into the model's Attendee object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted event
      */

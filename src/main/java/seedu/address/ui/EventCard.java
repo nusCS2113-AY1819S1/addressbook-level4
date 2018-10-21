@@ -40,6 +40,8 @@ public class EventCard extends UiPart<Region> {
     private Label email;
     @FXML
     private FlowPane tags;
+    //@FXML
+    //private FlowPane attendees;
 
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
@@ -51,6 +53,7 @@ public class EventCard extends UiPart<Region> {
         venue.setText(event.getVenue().value);
         email.setText(event.getEmail().value);
         event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        //event.getAttendees().forEach(attendee -> attendees.getChildren().add(new Label(attendee.attendeeName)));
     }
 
     @Override
