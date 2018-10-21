@@ -38,30 +38,36 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
 
         String[] keywords = trimmedArgs.split("\\s+");
         List<String> keywordsList = new ArrayList<>(Arrays.asList(keywords));
-        LoginDetails details = extractLoginDetailsFromInput(args);
+        LoginDetails details = extractLoginDetailsFromInput(keywords, args);
         return new CreateAccountCommand(new UserIdContainsKeywordsPredicate(keywordsList), details);
     }
 
     /**
      * Constructs and returns a LoginDetails object from the input of user account credentials
+     * @param keywords string array representation of login user input
      * @param args from input of user account credentials
      * @return LoginDetails object constructed from parsed user input consisting of userId, userPassword and userRole
      * @throws ParseException if the user input does not conform to the expected format
      */
-    public LoginDetails extractLoginDetailsFromInput(String args) throws ParseException {
-        StringTokenizer st = new StringTokenizer(args);
-        UserId userId = null;
-        UserPassword userPassword = null;
-        UserRole userRole = null;
-        for (int i = 1; st.hasMoreTokens(); i++) {
-            if (i == 2) {
-                userId = parseUserId(st.nextToken());
-            } else if (i == 3) {
-                userPassword = parseUserPassword(st.nextToken());
-            } else if (i == 4) {
-                userRole = parseUserRole(st.nextToken());
+    public LoginDetails extractLoginDetailsFromInput(String[] keywords, String args) throws ParseException {
+        if (keywords.length != 3) {
+            throw new ParseException(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateAccountCommand.MESSAGE_USAGE));
+        } else {
+            StringTokenizer st = new StringTokenizer(args);
+            UserId userId = null;
+            UserPassword userPassword = null;
+            UserRole userRole = null;
+            for (int i = 1; st.hasMoreTokens(); i++) {
+                if (i == 2) {
+                    userId = parseUserId(st.nextToken());
+                } else if (i == 3) {
+                    userPassword = parseUserPassword(st.nextToken());
+                } else if (i == 4) {
+                    userRole = parseUserRole(st.nextToken());
+                }
             }
+            return new LoginDetails(userId, userPassword, userRole);
         }
-        return new LoginDetails(userId, userPassword, userRole);
     }
 }

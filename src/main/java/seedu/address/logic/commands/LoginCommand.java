@@ -21,16 +21,35 @@ public abstract class LoginCommand extends Command {
 
     private SearchHistoryManager searchHistoryManager = new SearchHistoryManager();
 
-    Predicate getMostUpdatedIdPredicate(Predicate predicate) {
+    /**
+     * Clears the current searchHistoryManager object of previous login input details in preparation for another
+     * login attempt so that the filtered login details list becomes unfiltered again. Returns a new predicate generated
+     * from user input login id to be used in the filtering of the login details list.
+     * @param idPredicate the predicate generated from user input login id
+     * @return a new predicate generated from user input login id
+     */
+    Predicate getMostUpdatedIdPredicate(Predicate idPredicate) {
         searchHistoryManager.clearSearchHistory();
-        return searchHistoryManager.executeNewSearch(predicate);
+        return searchHistoryManager.executeNewSearch(idPredicate);
     }
 
-    Predicate getMostUpdatedPasswordPredicate(Predicate predicate) {
-        return searchHistoryManager.executeNewSearch(predicate);
+    /**
+     * Returns a new predicate generated from user input login password to be used in the filtering of the
+     * login details list.
+     * @param passwordPredicate the predicate generated from user input login password
+     * @return a new predicate generated from user input login password
+     */
+    Predicate getMostUpdatedPasswordPredicate(Predicate passwordPredicate) {
+        return searchHistoryManager.executeNewSearch(passwordPredicate);
     }
 
-    Predicate getMostUpdatedRolePredicate(Predicate predicate) {
-        return searchHistoryManager.executeNewSearch(predicate);
+    /**
+     * Returns a new predicate generated from user input login role to be used in the filtering of the
+     * login details list.
+     * @param rolePredicate the predicate generated from user input login role
+     * @return a new predicate generated from user input login role
+     */
+    Predicate getMostUpdatedRolePredicate(Predicate rolePredicate) {
+        return searchHistoryManager.executeNewSearch(rolePredicate);
     }
 }

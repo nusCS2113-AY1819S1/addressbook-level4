@@ -126,6 +126,7 @@ public class AddressBookParser {
             if (!LoginManager.getIsLoginSuccessful()) {
                 UserLoginException userLoginException = new UserLoginException();
                 userLoginException.showInvalidLoginError();
+                userLoginException.showLoginUsage();
             }
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
