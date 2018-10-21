@@ -5,6 +5,9 @@ import javax.xml.bind.annotation.XmlValue;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.attendee.Attendee;
 
+/**
+ * JAXB-friendly adapted version of the Attendee.
+ */
 public class XmlAdaptedAttendee {
 
     @XmlValue
