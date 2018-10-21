@@ -5,7 +5,7 @@ import static seedu.recruit.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.recruit.testutil.TypicalCompanies.getTypicalCompanyBook;
 
 import org.junit.Before;
-import org.junit.Test;git
+import org.junit.Test;
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.model.CandidateBook;
