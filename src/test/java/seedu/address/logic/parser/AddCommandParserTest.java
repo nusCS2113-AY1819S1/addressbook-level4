@@ -5,8 +5,8 @@ import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.GENDER_ABBREVATION_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.GENDER_ABBREVATION_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_ABBREVIATION_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.GENDER_ABBREVIATION_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.GENDER_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.GRADE_DESC_AMY;
@@ -80,7 +80,7 @@ public class AddCommandParserTest {
                 new AddCommand(expectedPerson));
 
         //One gender - gender input string is abbreviated
-        assertParseSuccess(parser, NAME_DESC_BOB + GENDER_ABBREVATION_DESC_BOB + NATIONALITY_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + GENDER_ABBREVIATION_DESC_BOB + NATIONALITY_DESC_BOB
                         + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + GRADE_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
@@ -90,19 +90,19 @@ public class AddCommandParserTest {
                 new AddCommand(expectedPerson));
 
         //multiple gender - last gender accepted (both are abbreviation)
-        assertParseSuccess(parser, NAME_DESC_BOB + GENDER_ABBREVATION_DESC_AMY + GENDER_ABBREVATION_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + GENDER_ABBREVIATION_DESC_AMY + GENDER_ABBREVIATION_DESC_BOB
                         + NATIONALITY_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + GRADE_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         //multiple gender - last gender accepted (first is non abbreviated, seconds is abbreviated)
-        assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_AMY + GENDER_ABBREVATION_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + GENDER_DESC_AMY + GENDER_ABBREVIATION_DESC_BOB
                         + NATIONALITY_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + GRADE_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
 
         //multiple gender - last gender accepted (first is abbreviated, seconds is non abbreviated)
-        assertParseSuccess(parser, NAME_DESC_BOB + GENDER_ABBREVATION_DESC_AMY + GENDER_DESC_BOB
+        assertParseSuccess(parser, NAME_DESC_BOB + GENDER_ABBREVIATION_DESC_AMY + GENDER_DESC_BOB
                         + NATIONALITY_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
                         + GRADE_DESC_BOB + TAG_DESC_FRIEND,
                 new AddCommand(expectedPerson));
@@ -199,12 +199,12 @@ public class AddCommandParserTest {
         //invalid gender non abbreviated "Male1"
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_GENDER_DESC + NATIONALITY_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + GRADE_DESC_BOB, Gender.MESSAGE_NAME_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + GRADE_DESC_BOB, Gender.MESSAGE_GENDER_CONSTRAINTS);
 
         //invalid gender abbreviated "A"
         assertParseFailure(parser, NAME_DESC_BOB + INVALID_GENDER_ABBREVIATED_DESC + NATIONALITY_DESC_BOB
                 + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB
-                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + GRADE_DESC_BOB, Gender.MESSAGE_NAME_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + GRADE_DESC_BOB, Gender.MESSAGE_GENDER_CONSTRAINTS);
 
         //invalid nationality "SG1"
         assertParseFailure(parser, NAME_DESC_BOB + GENDER_DESC_BOB + INVALID_NATIONALITY_DESC

@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Gender {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS =
+    public static final String MESSAGE_GENDER_CONSTRAINTS =
             "Gender can input as 'M' or \"Male\" for Male and 'F' or \"Female\" for Female.\n"
                     + "It is not case sensitive but it should not be blank";
 
@@ -28,7 +28,7 @@ public class Gender {
      */
     public Gender(String gender) {
         requireNonNull(gender);
-        checkArgument(isInputAccepted(gender), MESSAGE_NAME_CONSTRAINTS);
+        checkArgument(isInputAccepted(gender), MESSAGE_GENDER_CONSTRAINTS);
         gender = inputTransform(gender);
         requireNonNull(gender);
         this.gender = gender;

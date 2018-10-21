@@ -106,7 +106,7 @@ public class ParserUtil {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
         if (!Gender.isInputAccepted(trimmedGender)) {
-            throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
+            throw new ParseException(Gender.MESSAGE_GENDER_CONSTRAINTS);
         }
         trimmedGender = inputTransform(trimmedGender);
         requireNonNull(trimmedGender);

@@ -56,8 +56,8 @@ public class CommandTestUtil {
 
     public static final String VALID_GENDER_MALE = "MALE";
     public static final String VALID_GENDER_FEMALE = "FEMALE";
-    public static final String VALID_GENDER_ABBREVATION_MALE = "M";
-    public static final String VALID_GENDER_ABBREVATION_FEMALE = "F";
+    public static final String VALID_GENDER_ABBREVIATION_MALE = "M";
+    public static final String VALID_GENDER_ABBREVIATION_FEMALE = "F";
 
     public static final String VALID_NATIONALITY_SG = "SG";
     public static final String VALID_NATIONALITY_CN = "CN";
@@ -82,8 +82,8 @@ public class CommandTestUtil {
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String GENDER_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_FEMALE;
     public static final String GENDER_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_MALE;
-    public static final String GENDER_ABBREVATION_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_ABBREVATION_FEMALE;
-    public static final String GENDER_ABBREVATION_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_ABBREVATION_MALE;
+    public static final String GENDER_ABBREVIATION_DESC_AMY = " " + PREFIX_GENDER + VALID_GENDER_ABBREVIATION_FEMALE;
+    public static final String GENDER_ABBREVIATION_DESC_BOB = " " + PREFIX_GENDER + VALID_GENDER_ABBREVIATION_MALE;
     public static final String NATIONALITY_DESC_AMY = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_SG;
     public static final String NATIONALITY_DESC_BOB = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_CN;
     public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
