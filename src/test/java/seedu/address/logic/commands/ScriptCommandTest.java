@@ -67,7 +67,7 @@ public class ScriptCommandTest {
     public void execute_fileMissing_throwsIoException() {
         String expectedMessage = String.format(ScriptCommand.MESSAGE_FILE_MISSING,
                 missingTextFile + ScriptCommand.TEXT_EXTENSION);
-        ScriptCommand scriptCommand = new ScriptCommand(new TextFile(missingTextFile), new CommandType(addCommand) );
+        ScriptCommand scriptCommand = new ScriptCommand(new TextFile(missingTextFile), new CommandType(addCommand));
         CommandResult commandResult = scriptCommand.execute(model, commandHistory);
         assertEquals(commandResult.feedbackToUser, expectedMessage);
     }
