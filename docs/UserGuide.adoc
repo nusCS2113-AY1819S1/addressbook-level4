@@ -107,14 +107,14 @@ Examples:
 
 * `defer 1 de/04012018`
 
-=== Removing a deadline : `remove_deadline`
+=== Delete a task : `delete`
 
-Removes a deadline from an existing task
-Format: `remove_deadline t/ACTION d/DAY [w/WEEK] [m/MONTH]`
+Removes a task from the task book
+Format: `delete [INDEX]`
 
 Examples:
 
-* `remove_deadline t/Complete 2113 Milestone w/1 m/8`
+* `delete 1`
 
 === Viewing today's date : `view`
 

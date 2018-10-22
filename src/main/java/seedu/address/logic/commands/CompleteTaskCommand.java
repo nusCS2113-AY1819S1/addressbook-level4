@@ -51,6 +51,9 @@ public class CompleteTaskCommand extends Command implements CommandParser {
         }
 
         Task taskToComplete = lastShownList.get(targetIndex.getZeroBased());
+        if (taskToComplete.isCompleted()) {
+            throw new CommandException(Messages.MESSAGE_COMPLETED_TASK);
+        }
         model.completeTask(taskToComplete);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToComplete));

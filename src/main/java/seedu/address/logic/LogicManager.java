@@ -63,7 +63,7 @@ public class LogicManager extends ComponentManager implements Logic {
             history.add(commandText);
         }
     }
-
+    //@@author
     @Override
     public ObservableList<Task> getFilteredTaskList() {
         return model.getFilteredTaskList();

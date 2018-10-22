@@ -2,8 +2,6 @@ package seedu.address.model.task;
 
 import java.util.Objects;
 
-import seedu.address.model.task.exceptions.TaskCompletedException;
-
 /**
  * Represents a Task in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -22,6 +20,14 @@ public class Task {
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.isCompleted = false;
+    }
+
+    public Task(String deadline, String title, String description, PriorityLevel priorityLevel, boolean isCompleted) {
+        this.deadline = deadline;
+        this.title = title;
+        this.description = description;
+        this.priorityLevel = priorityLevel;
+        this.isCompleted = isCompleted;
     }
 
     public Task(String title, String description, PriorityLevel priorityLevel) {
@@ -54,12 +60,8 @@ public class Task {
     /**
      * Marks the task as completed by
      * setting @code {isCompleted} to true
-     * If task is already completed, {@throws TaskCompletedException}
      */
     public Task completed() {
-        if (isCompleted) {
-            throw new TaskCompletedException();
-        }
         this.isCompleted = true;
         return this;
     }
@@ -125,11 +127,11 @@ public class Task {
                 .append(getDescription())
                 .append(" Priority: ")
                 .append(getPriorityLevel());
-        if (isCompleted) {
+        /*if (isCompleted) {
             builder.append(" => Completed!");
         } else {
             builder.append(" => Not completed!");
-        }
+        }*/
         return builder.toString();
     }
 }
