@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import java.util.function.Predicate;
 
 import seedu.address.logic.parser.FindCommandParser;
+import seedu.address.model.person.Person;
 import seedu.address.model.searchhistory.SearchHistoryManager;
 
 /**
@@ -21,7 +22,8 @@ public abstract class FindCommand extends Command {
             + "Example3: " + COMMAND_WORD + " " + FindCommandParser.TAG_OPTION_STRING + " President";
 
     protected boolean isExcludeMode = false;
-    protected Predicate getMostUpdatedPredicate(SearchHistoryManager manager, Predicate predicate) {
+    protected Predicate getMostUpdatedPredicate(SearchHistoryManager<Person> manager,
+                                                Predicate<Person> predicate) {
         if (isExcludeMode) {
             predicate = predicate.negate();
         }

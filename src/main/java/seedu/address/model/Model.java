@@ -146,6 +146,5 @@ public interface Model {
 
     /** Returns the model's SearchHistoryManager
      */
-    SearchHistoryManager getSearchHistoryManager();
-
+    SearchHistoryManager<Person> getSearchHistoryManager();
 }
