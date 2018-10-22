@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- EventList save file which contains the same Event values as in TypicalEvents#getTypicalEventList() -->
+<eventlist>
+
+    <events>
+        <eventName>Test Event 1</eventName>
+        <description>Test Description 1</description>
+        <date>2018-09-18</date>
+        <startTime>12:00</startTime>
+        <endTime>16:00</endTime>
+        <location>Test Location 1</location>
+    </events>
+    <events>
+        <eventName>Test Event 2</eventName>
+        <description>Test Description 2</description>
+        <date>2018-09-18</date>
+        <startTime>12:00</startTime>
+        <endTime>21:00</endTime>
+        <location>Test Location 2</location>
+    </events>
+    <events>
+        <eventName>Test Event 3</eventName>
+        <description>Test Description 3</description>
+        <date>2018-09-18</date>
+        <startTime>09:00</startTime>
+        <endTime>21:00</endTime>
+        <location>Test Location 3</location>
+        <attendees>Alice Pauline</attendees>
+    </events>
+
+</eventlist>

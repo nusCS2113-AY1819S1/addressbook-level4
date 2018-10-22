@@ -1,0 +1,30 @@
+{
+  "authors":
+  [
+    {
+      "githubId": "jieliangang",
+      "displayName": "ANG...ANG",
+      "authorNames": ["jieliangang", "jlang"]
+    },
+    {
+      "githubId": "fr3ddy4",
+      "displayName": "FAR...LAN",
+      "authorNames": ["fr3ddy4"]
+    },
+    {
+      "githubId": "Jeevz10",
+      "displayName": "JEE...HAR",
+      "authorNames": ["Jeevz10"]
+    },
+    {
+      "githubId": "IcedCoffeeBoy",
+      "displayName": "LEE...ANG",
+      "authorNames": ["IcedCoffeeBoy","DESKTOP-T5GT484\\user", "Ming Liang", "Lee Ming Liang"]
+    },
+    {
+      "githubId": "perrythewang",
+      "displayName": "PER...ING",
+      "authorNames": ["perrythewang", "Perry Wang"]
+    }
+  ]
+}
