@@ -1,6 +1,8 @@
 package seedu.address.model.task;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import seedu.address.model.task.exceptions.TaskCompletedException;
 
@@ -15,6 +17,7 @@ public class Task {
     private final String description;
     private final PriorityLevel priorityLevel;
     private boolean isCompleted;
+    private final Set<Milestone> milestoneSet;
 
     public Task(String deadline, String title, String description, PriorityLevel priorityLevel) {
         this.deadline = deadline;
@@ -22,6 +25,7 @@ public class Task {
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.isCompleted = false;
+        milestoneSet = new HashSet<>();
     }
 
     public Task(String title, String description, PriorityLevel priorityLevel) {
@@ -30,6 +34,7 @@ public class Task {
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.isCompleted = false;
+        milestoneSet = new HashSet<>();
     }
 
     public String getDeadline() {
@@ -87,6 +92,15 @@ public class Task {
         this.deadline = deadline;
         return this;
     }
+
+    //@@JeremyInElysium
+    /**
+     * Add a milestone to the task.
+     */
+    public void addMilestone(Milestone milestone) {
+        milestoneSet.add(milestone);
+    }
+
     /**
      * Returns true if both tasks have the same data fields.
      * This defines a stronger notion of equality between two tasks.
