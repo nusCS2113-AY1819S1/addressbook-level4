@@ -95,6 +95,64 @@ Edits the body of the 1st task to be `Need two pens`.
 * `edit 2 t/` +
 Edits the 2nd task by clearing all existing tags.
 
+=== Locating contacts by address: `findaddress`
+
+Finds contacts whose address or body contain any of the given keywords. +
+Format: `findaddress KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `college` will match `College`
+* The order of the keywords does not matter. e.g. `Ave College` will match `College Ave`
+* Only the address and body is searched.
+* Only full words will be matched e.g. `Colle` will not match `College`
+* Contacts matching at least one keyword will be returned (i.e. `OR` search). e.g. `College Tampines` will return all contacts with address containing any of the keywords college or tampines
+****
+
+Examples:
+
+* `findaddress College` +
+Returns `college` and `College ave e`
+* `findaddress college lorong tampines` +
+Returns any contacts having an address or body that contains `college`, `lorong`, or `tampines`
+
+=== Locating contacts by name: `findname`
+
+Finds contacts whose name or body contain any of the given keywords. +
+Format: `findname KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `mario` will match `Mario`
+* The order of the keywords does not matter. e.g. `Gonzalez Mario` will match `Mario Gonzalez`
+* Only the name and body is searched.
+* Only full words will be matched e.g. `Gonza` will not match `Gonzalez`
+* Contacts matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+****
+
+Examples:
+
+* `findaddress Mario` +
+Returns `mario` and `Mario Gonzalez`
+* `findaddress mario alex david` +
+Returns any contacts having names or body that contains `mario`, `alex`, or `david`
+
+=== Locating contacts by phone: `findphone`
+
+Finds contacts whose phone number or body contain any of the given keywords. +
+Format: `findname KEYWORD [MORE_KEYWORDS]`
+
+****
+* Only the phone number and body is searched.
+* Only full phone numbers will be matched e.g. `98835` will not match `98835761`
+* Contacts matching at least one keyword will be returned (i.e. `OR` search). e.g. `98835761 87438807 ` will return the contacts with phone number 98835761 or 87438807.
+****
+
+Examples:
+
+* `findaddress 98835761` +
+Returns `98835761` and the contact with that phone number
+* `findaddress 98835761 87438807` +
+Returns any contacts having phone number or body that contains `98835761`, or `87438807`
+
 === Locating tasks by name: `find`
 
 Finds tasks whose names or body contain any of the given keywords. +

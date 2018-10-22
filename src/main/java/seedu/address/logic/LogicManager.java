@@ -21,7 +21,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindAddressCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.FindNameCommand;
+import seedu.address.logic.commands.FindPhoneCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -105,8 +108,11 @@ public class LogicManager extends ComponentManager implements Logic {
                 + PREFIX_ADDRESS + " "
                 + PREFIX_TAG);
         commandList.add(ExitCommand.COMMAND_WORD);
+        commandList.add(FindAddressCommand.COMMAND_WORD);
         commandList.add(FindCommand.COMMAND_WORD);
         commandList.add(FindCommand.COMMAND_WORD + " KEYWORD");
+        commandList.add(FindNameCommand.COMMAND_WORD);
+        commandList.add(FindPhoneCommand.COMMAND_WORD);
         commandList.add(HelpCommand.COMMAND_WORD);
         commandList.add(HistoryCommand.COMMAND_WORD);
         commandList.add(ListCommand.COMMAND_WORD);
