@@ -13,13 +13,13 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 
 == Summary of contributions
 
-* *Major enhancement*: To be decided.
-** What it does: To be decided.
-** Justification: ide a convenient way to rectify them.
+* *Major enhancement*: Schedule synchronizer.
+** What it does: It allows for users to create a merged timetable that displays all common free time slots with a contact/multiple contacts in the address book.
+** Justification: This will allow users to easily find a time slot to arrange for meet ups for social or work related reasons because finding a common time slot can be an annoying experience when it involves too many people.
 ** Highlights: To be decided.
 ** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
 
-* *Minor enhancement*: To be decided.
+* *Minor enhancement*: Contacts can be filtered based on their free time slots or modules taken.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -45,9 +45,9 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=merge]
 
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=merge]
 
 == Contributions to the Developer Guide
 
