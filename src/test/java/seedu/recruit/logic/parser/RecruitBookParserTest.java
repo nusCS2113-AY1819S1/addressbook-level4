@@ -107,7 +107,8 @@ public class RecruitBookParserTest {
     @Test
     public void parseCommand_history() throws Exception {
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD, state, emailUtil) instanceof HistoryCommand);
-        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3", state, emailUtil) instanceof HistoryCommand);
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3", state, emailUtil)
+                instanceof HistoryCommand);
 
         try {
             parser.parseCommand("histories", state, emailUtil);
@@ -119,8 +120,10 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCandidateCommand.COMMAND_WORD, state, emailUtil) instanceof ListCandidateCommand);
-        assertTrue(parser.parseCommand(ListCandidateCommand.COMMAND_WORD + " 3", state, emailUtil) instanceof ListCandidateCommand);
+        assertTrue(parser.parseCommand(ListCandidateCommand.COMMAND_WORD, state, emailUtil)
+                instanceof ListCandidateCommand);
+        assertTrue(parser.parseCommand(ListCandidateCommand.COMMAND_WORD + " 3", state, emailUtil)
+                instanceof ListCandidateCommand);
     }
 
     @Test

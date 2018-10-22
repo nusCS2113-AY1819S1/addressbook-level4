@@ -40,10 +40,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private static StackPane staticPanelViewPlaceholder;
 
+    private static Logic logic;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private static Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
