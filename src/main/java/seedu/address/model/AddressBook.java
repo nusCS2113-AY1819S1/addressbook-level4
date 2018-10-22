@@ -119,10 +119,12 @@ public class AddressBook implements ReadOnlyTaskBook {
      * Adds a milestone to a selected task in the Task Book.
      * The task must already exist in the Task Book.
      */
+    /*
     public void addMilestone(Milestone milestone) {
         requireNonNull(milestone);
         tasks.add(milestone);
     }
+    */
     //@@author
     /**
      * Selects the date for Task Book.

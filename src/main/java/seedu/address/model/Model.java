@@ -61,7 +61,9 @@ public interface Model {
     /**
      * Adds the given milestone.
      */
+    /*
     void addMilestone(Milestone milestone);
+    */
     //@@author
     /** Returns an unmodifiable view of the filtered task list */
     ObservableList<Task> getFilteredTaskList();
