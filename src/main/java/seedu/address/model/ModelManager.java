@@ -13,7 +13,6 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.model.task.Deadline;
-import seedu.address.model.task.Milestone;
 import seedu.address.model.task.Task;
 
 /**
