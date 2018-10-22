@@ -1,5 +1,7 @@
 package seedu.planner.model.summary;
 
+import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.function.Predicate;
@@ -17,10 +19,10 @@ import seedu.planner.ui.SummaryEntry;
  * and implements only list functions
  */
 public class SummaryByDateList {
-
     private HashMap<Date, DaySummary> summaryMap = new HashMap<>();
 
     public SummaryByDateList(List<Record> recordList , Predicate<Record> predicate) {
+        requireAllNonNull(recordList, predicate);
         for (Record r : recordList) {
             if (predicate.test(r)) {
                 addRecordToMap(r);
@@ -33,6 +35,11 @@ public class SummaryByDateList {
                 .collect(Collectors.toList());
         return FXCollections.observableList(list);
     }
+
+    public HashMap<Date, DaySummary> getSummaryMap() {
+        return summaryMap;
+    }
+
 
     /**
      * Converts each {@code DaySummary} to a UI friendly counterpart for display

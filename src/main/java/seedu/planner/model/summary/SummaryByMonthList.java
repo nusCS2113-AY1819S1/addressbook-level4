@@ -18,7 +18,7 @@ import seedu.planner.ui.SummaryEntry;
  */
 public class SummaryByMonthList {
 
-    private HashMap<Month, MonthSummary> summaryMap = new HashMap<>();
+    protected HashMap<Month, MonthSummary> summaryMap = new HashMap<>();
 
     public SummaryByMonthList(List<Record> recordList , Predicate<Record> predicate) {
         for (Record r : recordList) {
@@ -32,6 +32,10 @@ public class SummaryByMonthList {
         List<SummaryEntry> list = summaryMap.keySet().stream().map(k -> convertToUiFriendly(summaryMap.get(k)))
                 .collect(Collectors.toList());
         return FXCollections.observableList(list);
+    }
+
+    public HashMap<Month, MonthSummary> getSummaryMap() {
+        return summaryMap;
     }
 
     /**
@@ -48,7 +52,7 @@ public class SummaryByMonthList {
      * @param record given record
      * @see Summary#add(Record)
      */
-    private void addRecordToMap(Record record) {
+    protected void addRecordToMap(Record record) {
         Month month = new Month(record.getDate().getMonth(), record.getDate().getYear());
         if (summaryMap.containsKey(month)) {
             summaryMap.get(month).add(record);

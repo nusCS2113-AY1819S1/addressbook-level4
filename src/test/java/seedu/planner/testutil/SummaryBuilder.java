@@ -32,6 +32,20 @@ public class SummaryBuilder {
         total = new MoneyFlow(DEFAULT_TOTAL);
     }
 
+    public SummaryBuilder(DaySummary summaryToCopy) {
+        date = summaryToCopy.getDate();
+        totalExpense = summaryToCopy.getTotalExpense();
+        totalIncome = summaryToCopy.getTotalIncome();
+        total = summaryToCopy.getTotal();
+    }
+
+    public SummaryBuilder(MonthSummary summaryToCopy) {
+        month = summaryToCopy.getMonth();
+        totalExpense = summaryToCopy.getTotalExpense();
+        totalIncome = summaryToCopy.getTotalIncome();
+        total = summaryToCopy.getTotal();
+    }
+
     /**
      * Sets the {@code date} of the {@code Summary} that we are building.
      */
