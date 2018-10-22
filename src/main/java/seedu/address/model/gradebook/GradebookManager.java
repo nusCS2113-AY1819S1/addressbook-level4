@@ -10,9 +10,6 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  * The API of the GradebookManager component.
  */
 public class GradebookManager {
-    private static final String DELETE_MESSAGE_SUCCESS = "\nModule Code: %1$s \nGradebook Component: %2$s \n"
-            + "Successfully deleted!";
-    private static final String DELETE_MESSAGE_FAIL = "\nUnsuccessful Deletion";
     private ArrayList<Gradebook> gradebooks = new ArrayList<>();
 
     public GradebookManager() {
@@ -50,21 +47,10 @@ public class GradebookManager {
     }
 
     /**
-    This method deletes gradebook component to a module in Trajectory.
-    */
-    public static String deleteGradebookComponent (String moduleCode, String gradebookComponentName) {
-        String status = DELETE_MESSAGE_FAIL;
-        for (XmlAdaptedGradebook gc : StorageController.getGradebookStorage()) {
-            if (gc.getModuleCode().equals(moduleCode) && gc.getGradeComponentName().equals(gradebookComponentName)) {
-                StorageController.getGradebookStorage().remove(gc);
-                StorageController.storeData();
-                status = DELETE_MESSAGE_SUCCESS;
-                break;
-            }
-        }
-        return String.format(status,
-                moduleCode,
-                gradebookComponentName);
+     This method deletes gradebook component to a module in Trajectory.
+     */
+    public void deleteGradebookComponent (Gradebook gradebook) {
+        gradebooks.remove(gradebook);
     }
 
     /**
