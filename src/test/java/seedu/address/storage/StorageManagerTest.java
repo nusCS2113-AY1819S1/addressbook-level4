@@ -115,5 +115,4 @@ public class StorageManagerTest {
             throw new IOException("dummy exception");
         }
     }
-    
 }
