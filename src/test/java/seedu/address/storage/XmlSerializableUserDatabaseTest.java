@@ -29,8 +29,8 @@ public class XmlSerializableUserDatabaseTest {
         XmlSerializableUserDatabase dataFromFile = XmlUtil.getDataFromFile(TYPICAL_USERS_FILE,
                 XmlSerializableUserDatabase.class);
         UserDatabase userDatabaseFromFile = dataFromFile.toModelType();
-        UserDatabase typicalUsersAddressBook = TypicalUsers.getTypicalUserDatabase();
-        assertEquals(userDatabaseFromFile, typicalUsersAddressBook);
+        UserDatabase typicalUsersUserDatabase = TypicalUsers.getTypicalUserDatabase();
+        assertEquals(userDatabaseFromFile, typicalUsersUserDatabase);
     }
 
     @Test

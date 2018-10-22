@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <userdatabase>
     <users>
-        <username>username</username>
+        <username>user</username>
         <password>pass</password>
-        <addressbookfilepath>data/addressbook-username.xml</addressbookfilepath>
+        <addressbookfilepath>data/addressbook-user.xml</addressbookfilepath>
     </users>
     <users>
         <username>amy</username>
