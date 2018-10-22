@@ -2,7 +2,9 @@ package seedu.recruit.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
@@ -31,8 +33,7 @@ import seedu.recruit.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_INVALID_INDEX_ARGS = "Index arguments are not valid.\n"
-                                                            + "Only INDEX or INDEX-INDEX is accepted";
+    public static final String MESSAGE_INVALID_INDEX_ARGS = "Index arguments are not valid.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -41,6 +42,44 @@ public class ParserUtil {
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         return Index.fromOneBased(parseIndexStringToInteger(oneBasedIndex));
+    }
+
+    /**
+     * Parses an Array {@code indexArgs} into an {@code Set<Index>} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+
+    public static Set<Index> parseIndexSet(String[] indexArgs) throws ParseException {
+        Set<Index> orderedIndexSet = new TreeSet<Index> (new LargestToSmallestIndexComparator());
+        for (String index : indexArgs) {
+            String[] indexRange = index.split("-");
+            orderedIndexSet.addAll(parseIndexRange(indexRange));
+        }
+        return orderedIndexSet;
+    }
+
+    /**
+     * Parses {@code indexRange} into a  {@code indexSet} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     *         or if user enters an invalid format of arguments.
+     */
+    private static Set<Index> parseIndexRange (String ...indexRange) throws ParseException {
+        ArrayList<Integer> integerList = new ArrayList<>();
+        Set<Index> indexSet = new HashSet<>();
+
+        for (int i = 0; i < indexRange.length; i++) {
+            if (i == 2) {
+                throw new ParseException(MESSAGE_INVALID_INDEX_ARGS);
+            }
+            integerList.add(parseIndexStringToInteger(indexRange[i]));
+        }
+
+        for (int index = Collections.min(integerList); index <= Collections.max(integerList); index++) {
+            indexSet.add(Index.fromOneBased(index));
+        }
+        return indexSet;
     }
 
     /**
@@ -53,46 +92,6 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Integer.parseInt(trimmedIndex);
-    }
-
-    /**
-     * Parses an Array {@code indexArgs} into an {@code Set<Index>} and returns it.
-     * Leading and trailing whitespaces will be trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
-     */
-
-    public static Set<Index> parseIndexSet(String[] indexArgs) throws ParseException {
-        Set<Index> indexSet = new TreeSet<Index> (new LargestToSmallestIndexComparator());
-        for (String index : indexArgs) {
-            String[] indexRange = index.split("-");
-            if (indexRange.length == 1) {
-                indexSet.add(parseIndex(index));
-            } else if (indexRange.length == 2) {
-                indexSet.addAll(parseIndexRange(indexRange[0], indexRange[1]));
-            } else {
-                throw new ParseException(MESSAGE_INVALID_INDEX_ARGS);
-            }
-        }
-        return indexSet;
-    }
-
-    private static Set<Index> parseIndexRange (String firstArg, String secondArg) throws ParseException {
-        int fromIndex, toIndex;
-        Set<Index> indexSet = new HashSet<>();
-
-        if (parseIndexStringToInteger(firstArg) < parseIndexStringToInteger(secondArg)) {
-            fromIndex = parseIndexStringToInteger(firstArg);
-            toIndex = parseIndexStringToInteger(secondArg);
-        } else {
-            fromIndex = parseIndexStringToInteger(secondArg);
-            toIndex = parseIndexStringToInteger(firstArg);
-        }
-
-        for (int index = fromIndex; index <= toIndex; index++) {
-            indexSet.add(Index.fromOneBased(index));
-        }
-
-        return indexSet;
     }
 
 
