@@ -21,7 +21,8 @@ public class LoginCommandTestParser {
         Password password = new Password(VALID_PASSWORD);
         User expectedUser = new User(username, password);
 
-        assertParseSuccess(parser, "u/bob p/pass", new LoginCommand(expectedUser));
+        // valid username and password
+        assertParseSuccess(parser, USERNAME_DESC + PASSWORD_DESC, new LoginCommand(expectedUser));
     }
 
     @Test
