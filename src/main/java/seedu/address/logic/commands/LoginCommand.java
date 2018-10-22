@@ -48,4 +48,11 @@ public class LoginCommand extends Command {
         model.logUser(toLogin);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin.getUsername().toString()));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof LoginCommand // instanceof handles nulls
+                && toLogin.equals(((LoginCommand) other).toLogin));
+    }
 }

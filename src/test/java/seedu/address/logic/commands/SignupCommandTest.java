@@ -1,11 +1,18 @@
 package seedu.address.logic.commands;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import javafx.collections.ObservableList;
+import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
+
+import java.util.function.Predicate;
+
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -15,11 +22,6 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.storage.UserStorage;
-
-import java.util.function.Predicate;
-
-import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.assertEquals;
 
 public class SignupCommandTest {
 
