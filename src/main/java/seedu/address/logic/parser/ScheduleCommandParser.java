@@ -73,13 +73,13 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 						" " + args,
 						PREFIX_ACTIVITY);
 		if (!arePrefixesPresent(argMultimap, PREFIX_ACTIVITY)
-				|| !argMultimap.getPreamble().isEmpty()) {
+				|| argMultimap.getPreamble().isEmpty()) {
 			throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
 		}
 
 		Index index;
 		try {
-			index = Index.fromOneBased(Integer.parseInt(argMultimap.getPreamble()));
+			index = Index.fromOneBased(Integer.parseInt(argMultimap.getPreamble().trim()));
 		} catch (NumberFormatException e){
 			throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
 		}
