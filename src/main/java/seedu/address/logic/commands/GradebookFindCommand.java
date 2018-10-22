@@ -20,8 +20,8 @@ public class GradebookFindCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
-    private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
-    private static final String MESSAGE_FIND_SUCCESS = "Successfully found!"
+    private static final String MESSAGE_FIND_FAIL = "\nUnsuccessful find";
+    private static final String MESSAGE_FIND_SUCCESS = "\nSuccessfully found!"
             + "\nModule Code: %1$s"
             + "\nComponent Name: %2$s"
             + "\nMaximum Marks: %3$d"

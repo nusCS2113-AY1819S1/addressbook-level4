@@ -18,8 +18,8 @@ import seedu.address.model.gradebook.GradebookManager;
  */
 public class GradebookEditCommand extends Command {
     public static final String COMMAND_WORD = "gradebook edit";
-    private static final String MESSAGE_EDIT_GRADEBOOK_SUCCESS = "Successfully edited!";
-    private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
+    private static final String MESSAGE_EDIT_GRADEBOOK_SUCCESS = "\nSuccessfully edited!";
+    private static final String MESSAGE_FIND_FAIL = "\nUnsuccessful find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a gradebook component to Trajectory. "
             + "\nParameters: "
