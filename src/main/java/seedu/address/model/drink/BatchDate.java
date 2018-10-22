@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
@@ -49,6 +50,22 @@ public class BatchDate {
      */
     public static boolean isValidDate(String test) {
         return test.matches(DATE_VALIDATION_REGEX);
+    }
+
+    /**
+     * @param other a valid BatchDate object
+     * @return Returns true if other holds a date after that of the current object
+     */
+    public boolean isAfter(BatchDate other) {
+        return this.batchDate.isAfter(other.batchDate);
+    }
+
+    /**
+     * @param other a valid BatchDate object
+     * @return Returns true if other holds a date before that of the current object
+     */
+    public boolean isBefore(BatchDate other) {
+        return this.batchDate.isBefore(other.batchDate);
     }
 
     @Override

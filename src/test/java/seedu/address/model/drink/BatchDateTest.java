@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.testutil.Assert;
 
 class BatchDateTest {
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new BatchDate(null));
@@ -49,5 +50,36 @@ class BatchDateTest {
         assertTrue(BatchDate.isValidDate("15/1/2018")); // date format DD/M/YYYY
         assertTrue(BatchDate.isValidDate("1/10/2018")); // date format D/MM/YYYY
         assertTrue(BatchDate.isValidDate("1/1/2018")); // date format D/M/YYYY
+    }
+
+    @Test
+    void isBefore() {
+        String validDate = "22/10/2018";
+        BatchDate batchDate = new BatchDate(validDate);
+        BatchDate batchDateBefore = new BatchDate("21/10/2018");
+        BatchDate batchDateAfter = new BatchDate("23/10/2018");
+        BatchDate batchDateEquals = new BatchDate(validDate);
+        // not before
+        assertFalse(batchDate.isBefore(batchDateBefore));
+        assertFalse(batchDate.isBefore(batchDateEquals));
+
+        // is before
+        assertTrue(batchDate.isBefore(batchDateAfter));
+    }
+
+    @Test
+    void isAfter() {
+        String validDate = "22/10/2018";
+        BatchDate batchDate = new BatchDate(validDate);
+        BatchDate batchDateBefore = new BatchDate("21/10/2018");
+        BatchDate batchDateAfter = new BatchDate("23/10/2018");
+        BatchDate batchDateEquals = new BatchDate(validDate);
+
+        // not after
+        assertFalse(batchDate.isAfter(batchDateAfter));
+        assertFalse(batchDate.isAfter(batchDateEquals));
+
+        // is after
+        assertTrue(batchDate.isAfter(batchDateBefore));
     }
 }

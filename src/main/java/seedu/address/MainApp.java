@@ -209,7 +209,7 @@ public class MainApp extends Application {
     private void showLoginPage() {
         URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
         Parent root = loadFxmlFile(fxmlLoginFileUrl, window);
-        window.initStyle(StageStyle.UNDECORATED);
+        //window.initStyle(StageStyle.UNDECORATED);
         window.setTitle("Login Page");
         window.setScene(new Scene(root));
         window.show();
