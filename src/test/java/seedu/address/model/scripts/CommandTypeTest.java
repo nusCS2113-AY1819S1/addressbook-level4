@@ -1,12 +1,7 @@
 package seedu.address.model.scripts;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.junit.Test;
 
@@ -89,9 +84,8 @@ public class CommandTypeTest {
 
     @Test
     public void test_hashcode() {
-        Set<String> s1 = new HashSet<>(Arrays.asList("Hello", "World"));
-        Set<String> s2 = new HashSet<>(Arrays.asList("World", "Hello"));
-        assertEquals(s1, s2);
-        assertTrue(s1.hashCode() == s2.hashCode());
+        CommandType commandType1 = new CommandType("add");
+        CommandType commandType2 = new CommandType("undo");
+        assertFalse(commandType1.hashCode() == commandType2.hashCode());
     }
 }

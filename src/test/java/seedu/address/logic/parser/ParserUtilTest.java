@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
@@ -22,6 +23,8 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.script.CommandType;
+import seedu.address.model.script.TextFile;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
@@ -48,6 +51,12 @@ public class ParserUtilTest {
 
     private static final String VALID_GROUP_NAME = "TUT[1]";
     private static final String VALID_GROUP_LOCATION = "E1-01-01";
+
+    private static final String VALID_TEXT_FILE = "StudentList";
+    private static final String INVALID_TEXT_FILE = "\\StudentList";
+
+    private static final String VALID_COMMAND_TYPE = "add";
+    private static final String INVALID_COMMAND_TYPE = "abc";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -291,4 +300,53 @@ public class ParserUtilTest {
 
         assertEquals(expectedTagSet, actualTagSet);
     }
+
+    @Test
+    public void parseTextFile_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseTextFile((String) null));
+    }
+
+    @Test
+    public void parseTextFile_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseTextFile(INVALID_TEXT_FILE);
+    }
+
+    @Test
+    public void parseTextFile_validValue_returnTextFile() throws Exception {
+        TextFile expectedTextFile = new TextFile(VALID_TEXT_FILE);
+        assertEquals(expectedTextFile, ParserUtil.parseTextFile(VALID_TEXT_FILE));
+    }
+
+    @Test
+    public void parseTextFile_validValueWithWhiteSpace_returnTextFile() throws Exception {
+        String textFileWithSpace = WHITESPACE + VALID_TEXT_FILE + WHITESPACE;
+        TextFile expectedTextFile = new TextFile(VALID_TEXT_FILE);
+        assertEquals(expectedTextFile, ParserUtil.parseTextFile(textFileWithSpace));
+    }
+
+    @Test
+    public void parseCommandType_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseCommandType((String) null));
+    }
+
+    @Test
+    public void parseCommandType_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseCommandType(INVALID_COMMAND_TYPE);
+    }
+
+    @Test
+    public void parseCommandType_validValue_returnCommandType() throws Exception {
+        CommandType expectedCommandType = new CommandType(VALID_COMMAND_TYPE);
+        assertEquals(expectedCommandType, ParserUtil.parseCommandType(VALID_COMMAND_TYPE));
+    }
+
+    @Test
+    public void parseCommandType_validValueWithWhiteSpace_returnCommandType() throws Exception {
+        String commandTypeWithSpace = WHITESPACE + VALID_COMMAND_TYPE + WHITESPACE;
+        CommandType expectedTextFile = new CommandType(VALID_COMMAND_TYPE);
+        assertEquals(expectedTextFile, ParserUtil.parseCommandType(commandTypeWithSpace));
+    }
+
 }

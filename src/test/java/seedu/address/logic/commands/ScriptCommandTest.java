@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -83,6 +85,23 @@ public class ScriptCommandTest {
         assertEquals(commandResult.feedbackToUser, expectedMessage);
     }
 
+    @Test
+    public void equals() {
+        ScriptCommand validScriptCommand = new ScriptCommand(
+                new TextFile(validAddTextFile), new CommandType(addCommand));
+        ScriptCommand invalidScriptCommmamd = new ScriptCommand(
+                new TextFile(validAddTextFile), new CommandType(deleteCommand));
 
+        // same object -> returns true
+        assertTrue(validScriptCommand.equals(validScriptCommand));
 
+        // different types -> returns false
+        assertFalse(validAddTextFile.equals(1));
+
+        // null -> returns false
+        assertFalse(validAddTextFile.equals(null));
+
+        // different person -> returns false
+        assertFalse(validAddTextFile.equals(invalidScriptCommmamd));
+    }
 }
