@@ -64,10 +64,10 @@ public class SampleDataUtil {
 
     private static UniqueJobList getSampleJobList() {
         UniqueJobList jobList = new UniqueJobList();
-        jobList.add(new JobOffer(new CompanyName("Mcdonalds"), new Job("Cashier"), new Gender("M"),
+        jobList.add(new JobOffer(new CompanyName("McDonalds"), new Job("Cashier"), new Gender("M"),
                 new AgeRange("20-30"), new Education("O levels"),
                 new Salary("1000")));
-        jobList.add(new JobOffer(new CompanyName("KFC"), new Job("Cook"), new Gender("F"),
+        jobList.add(new JobOffer(new CompanyName("McDonalds"), new Job("Cook"), new Gender("F"),
                 new AgeRange("20-30"), new Education("O levels"),
                 new Salary("1000")));
         return jobList;
@@ -75,7 +75,7 @@ public class SampleDataUtil {
 
     public static Company[] getSampleCompanies() {
         return new Company[]{
-            new Company(new CompanyName("Mcdonalds"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+            new Company(new CompanyName("McDonalds"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
             new Email("mcdonalds@gmail.com"), new Phone("61116222"), getSampleJobList())
         };
     }

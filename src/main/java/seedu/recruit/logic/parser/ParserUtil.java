@@ -3,8 +3,10 @@ package seedu.recruit.logic.parser;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.commons.util.StringUtil;
@@ -41,6 +43,31 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses an Array {@code oneBasedIndexes} into an {@code Set<Index>} and returns it.
+     * Leading and trailing whitespaces will be trimmed.
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+
+    public static Set<Index> parseIndexSet(String[] oneBasedIndexes) throws ParseException {
+        Set<Index> indexSet = new TreeSet<Index> (new LargestToSmallestIndexComparator());
+        for (int i = 0; i < oneBasedIndexes.length; i++) {
+            indexSet.add(parseIndex(oneBasedIndexes[i]));
+        }
+        return indexSet;
+    }
+
+    /**
+     * Comparator for returning Index Sets
+     */
+
+    private static class LargestToSmallestIndexComparator implements Comparator<Index> {
+        @Override
+        public int compare(Index a, Index b) {
+            return a.getZeroBased() < b.getZeroBased() ? 1 : a.getZeroBased() == b.getZeroBased() ? 0 : -1;
+        }
     }
 
     /**

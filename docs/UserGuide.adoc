@@ -36,7 +36,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`list candidates`* : lists the names of all the candidates available
 * *`addc`* : add a job candidate to RecruitBook
 * *`addj`* : adds an available job to RecruitBook
-* **`delete`**`3` : deletes the 3rd job shown in the current list
+* **`deleteC`**`3` : deletes the 3rd company shown in the list of companies
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -106,13 +106,15 @@ Format: `addj`
 
 Entering this command will prompt you the following: +
 *`Enter the following details of the job in the format:`* +
-`c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY`
+`c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY` +
+`(Enter 'cancel' to stop adding jobs)` +
+`Example: c/McDonalds j/cashier g/M xr/20-30 h/O levels s/1200`
 
 Note: COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
-*	`c/McDonalds j/Cashier g/M xr/20-30 h/O levels s/1200`
+*	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
 *	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
 
 === Exits from any intermediate command
@@ -257,16 +259,17 @@ Examples:
 *   `sortc s/` +
 (Sorts all candidates by their salary)
 
-=== Deleting a candidate / job : `delete`
+=== Deleting candidates / companies / job offers : `delete`
 
-==== Deleting a specific candidate
-Format: `deletec <INDEX>`
+==== Deleting candidate(s)
+Format: `deletec <INDEX>,<INDEX> ...`
 
-*	Deletes the candidate with the specified `INDEX`
+*	Deletes the candidate(s) with the specified `INDEX`(s)
 *	This index must be an index number shown in the displayed candidate list.
 *	The full name can be found using the find function when a partial keyword is entered
 
-Example to delete a candidate:
+
+Example to delete candidate(s):
 
 Step 1. `find Betsy` +
 (Shows all saved candidates named Betsy)
@@ -274,19 +277,34 @@ Step 1. `find Betsy` +
 Step 2. `deletec 1` +
 (Deletes the 1st candidate on most recent list)
 
-==== Deleting a specific job offer
-Format: `deletej <INDEX>`
+==== Deleting company(s)
+Format: `deleteC <INDEX>,<INDEX> ...`
 
-* Deletes the job with the specified `INDEX`
+* Deletes the company(s) with the specified `INDEX`(s)
+* The index must be an index number shown in the displayed company list.
+
+Example to delete company(s):
+
+Step 1. `listC` +
+(Shows all available companies)
+
+Step 2. `deleteC 1,6,2` +
+(Deletes the 1st, 2nd and 6th job in the job list)
+
+
+==== Deleting job offer(s)
+Format: `deletej <INDEX>,<INDEX> ...`
+
+* Deletes the job(s) with the specified `INDEX`(s)
 * The index must be an index number shown in the displayed job list.
 
-Example to delete a job:
+Example to delete job(s):
 
-Step 1. `list jobs` +
+Step 1. `listj` +
 (Shows all available jobs)
 
-Step 2. `deletej 5` +
-(Deletes the 5th job in the job list)
+Step 2. `deletej 5,4` +
+(Deletes the 4th and 5th job in the job list)
 
 === Clearing all entries : `clear`
 

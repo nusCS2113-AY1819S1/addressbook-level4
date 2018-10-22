@@ -4,7 +4,7 @@ import static java.time.Duration.ofMillis;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTimeoutPreemptively;
 import static seedu.recruit.testutil.EventsUtil.postNow;
-import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.recruit.ui.testutil.GuiTestAssert.assertCardDisplaysPerson;
 import static seedu.recruit.ui.testutil.GuiTestAssert.assertCardEquals;
@@ -30,7 +30,7 @@ public class CandidateDetailsPanelTest extends GuiUnitTest {
     private static final ObservableList<Candidate> TYPICAL_CANDIDATES =
             FXCollections.observableList(getTypicalPersons());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
@@ -59,7 +59,7 @@ public class CandidateDetailsPanelTest extends GuiUnitTest {
         guiRobot.pauseForHuman();
 
         CandidateCardHandle expectedPerson = candidateDetailsPanelHandle
-                .getCandidateCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+                .getCandidateCardHandle(INDEX_SECOND.getZeroBased());
         CandidateCardHandle selectedPerson = candidateDetailsPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedPerson, selectedPerson);
     }

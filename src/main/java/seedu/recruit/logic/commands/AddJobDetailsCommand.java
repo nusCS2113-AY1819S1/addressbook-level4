@@ -10,7 +10,6 @@ import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_SALARY;
 
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -24,13 +23,14 @@ public class AddJobDetailsCommand extends Command {
 
     public static final String COMMAND_WORD = "AddJobDetails";
 
-    public static final String MESSAGE_USAGE = "Enter the following details of the job in the format:\n"
+    public static final String MESSAGE_USAGE = "Enter the following details of the job in the format:\nq"
             + PREFIX_COMPANY_NAME + "COMPANY "
             + PREFIX_JOB + "JOB_TITLE "
             + PREFIX_GENDER + "GENDER "
             + PREFIX_AGE_RANGE + "AGE_RANGE "
             + PREFIX_EDUCATION + "EDUCATION "
             + PREFIX_SALARY + "SALARY\n"
+            + "(Enter 'cancel' to stop adding jobs)\n"
             + "Example: "
             + PREFIX_COMPANY_NAME + "McDonalds "
             + PREFIX_JOB + "cashier "
@@ -65,7 +65,6 @@ public class AddJobDetailsCommand extends Command {
         }
         model.addJobOffer(toAdd.getCompanyName(), toAdd);
         model.commitCompanyBook();
-        LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     };
     @Override
