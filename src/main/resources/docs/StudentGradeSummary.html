@@ -1,0 +1,47 @@
+<!DOCTYPE html> //@@author clara1234566
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript">
+        function getJsonFromUrl() {
+            var query = location.search.substr(1);
+            var result = {};
+            query.split("&").forEach(function(part) {
+                var item = part.split("=");
+                result[item[0]] = decodeURIComponent(item[1]);
+            });
+            return result;
+        }
+        document.addEventListener("DOMContentLoaded", function(event) {
+
+            var jsonData = JSON.parse(getJsonFromUrl().data);
+            var table = document.getElementById("gradeTable");
+
+            for (var i = 0, len = jsonData.length; i < len; ++i) {
+                var row = table.insertRow();
+                var nameCol = row.insertCell();
+                var marksCol = row.insertCell();
+                var gradeCol = row.insertCell();
+                nameCol.innerHTML = jsonData[i].name;
+                marksCol.innerHTML = jsonData[i].marks;
+                gradeCol.innerHTML = jsonData[i].grade;
+            }
+        });
+    </script>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<table id="gradeTable" style="width:100%">
+    <tr>
+        <th>Test Name</th>
+        <th>Marks</th>
+        <th>Grade</th>
+    </tr>
+</table>
+</body>
+</html>
