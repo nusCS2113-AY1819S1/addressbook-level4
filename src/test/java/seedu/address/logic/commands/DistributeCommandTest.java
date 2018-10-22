@@ -2,13 +2,17 @@ package seedu.address.logic.commands;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
-import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -16,14 +20,30 @@ import seedu.address.model.distribute.Distribute;
 import seedu.address.testutil.DistributeBuilder;
 
 public class DistributeCommandTest {
-    private Model model;
-    private Model expectedModel;
+
+    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     private CommandHistory commandHistory = new CommandHistory();
 
-    @Before
-    public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+    @Test
+    public void constructor_nullDistribute_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new DistributeCommand(null);
+    }
+
+    @Test
+    public void execute_distributeAcceptedByModel_distributeSuccessful() throws ParseException, CommandException {
+        AddressBook stubAddressBook = getTypicalAddressBook();
+        UserPrefs stubUserPrefs = new UserPrefs();
+        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
+        Distribute validDistributeCommand = new DistributeBuilder().build();
+        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
+        assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
+                commandResult.feedbackToUser);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
@@ -70,5 +90,4 @@ public class DistributeCommandTest {
         // different person -> returns false
         assertFalse(distributeFirstCommand.equals(allDifferentCommand));
     }
-
 }
