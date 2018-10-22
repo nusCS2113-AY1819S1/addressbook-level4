@@ -9,6 +9,7 @@ import java.util.Map;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
@@ -45,14 +46,15 @@ public class Schedule {
     }
 
     //TODO convert index to 1
-    public void delete(Date date, int index) {
+    public void delete(Date date, Index index) {
         if (!contains(date)) {
             //TODO add throw
         }
-        if (schedule.get(date).size() < index) {
+
+        if (schedule.get(date).size() <= index.getZeroBased()) {
             //TODO add throw
         }
-        schedule.get(date).remove(index);
+        schedule.get(date).remove(index.getZeroBased());
         if (schedule.get(date).isEmpty()){
             schedule.remove(date);
         }

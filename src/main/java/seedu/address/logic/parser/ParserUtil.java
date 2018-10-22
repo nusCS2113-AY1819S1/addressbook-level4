@@ -205,13 +205,13 @@ public class ParserUtil {
 //        }
         StringTokenizer tokens = new StringTokenizer(trimmedDate, "/");
         int day = Integer.parseInt(tokens.nextToken()) ;
-        //TODO change this to index 0
-        int month = Integer.parseInt(tokens.nextToken());
+        int month = Integer.parseInt(tokens.nextToken()) - 1;
         int year = Integer.parseInt(tokens.nextToken());
-
         Date date = Activity.toDate(day, month, year);
         return date;
     }
+
+
 
 
 }

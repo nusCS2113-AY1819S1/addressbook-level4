@@ -13,9 +13,13 @@ import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Activity;
 import seedu.address.model.schedule.Schedule;
 
-public class ScheduleCommand extends Command {
+public abstract class ScheduleCommand extends Command {
 
     public static final String COMMAND_WORD = CliSyntax.COMMAND_SCHEDULE;
+    public static final String COMMAND_WORD_ADD = "add";
+    public static final String COMMAND_WORD_DELETE = "delete";
+    public static final String COMMAND_WORD_EDIT = "edit";
+
 
     //TODO update this message
     public static final String MESSAGE_USAGE = COMMAND_WORD + "Updates your schedule";
@@ -23,15 +27,7 @@ public class ScheduleCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK= "This task already exists in the schedule";
 
-    private final Activity toAdd;
-
-    /**
-     * Creates an AddCommand to add the specified {@code Person}
-     */
-    public ScheduleCommand(Activity activity) {
-        requireNonNull(activity);
-        toAdd = activity;
-    }
+    public abstract CommandResult updateSchedule(Model model);
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
@@ -42,15 +38,9 @@ public class ScheduleCommand extends Command {
         if (fe.isLocked()) {
             throw new CommandException(FileEncryptor.MESSAGE_ADDRESS_BOOK_LOCKED);
         }
-        model.addSchedule(toAdd);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-    }
 
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof ScheduleCommand // instanceof handles nulls
-                && toAdd.equals(((ScheduleCommand) other).toAdd));
+        CommandResult result = updateSchedule(model);
+        model.commitAddressBook();
+        return result;
     }
 }

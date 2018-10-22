@@ -1,9 +1,11 @@
 package seedu.address.model;
 
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Activity;
@@ -104,5 +106,8 @@ public interface Model {
      */
     void reinitAddressbook ();
 
-    void addSchedule(Activity activity);
+    //@@author LowGinWee
+    void addActivity(Activity activity);
+
+    void deleteActivity(Date date, Index index);
 }

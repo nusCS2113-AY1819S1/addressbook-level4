@@ -8,6 +8,7 @@ import java.util.List;
 
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.schedule.Activity;
@@ -121,7 +122,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         schedule.add(activity);
     }
 
-    public void deleteActivity(Date date, int index) {
+    public void deleteActivity(Date date, Index index) {
         schedule.delete(date, index);
     }
 

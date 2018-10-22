@@ -108,6 +108,7 @@ public class AddressBookParser {
 
         case MailCommand.COMMAND_WORD:
             return new MailCommandParser().parse(arguments);
+
         case ScheduleCommand.COMMAND_WORD:
             return new ScheduleCommandParser().parse(arguments);
 

@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Date;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -15,6 +16,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.autocomplete.CommandCompleter;
@@ -213,12 +215,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //@@author LowGinWee
+    //TODO change this
     /**
      * Reinitialises the address book
      */
     @Override
-    public void addSchedule(Activity activity) {
+    public void addActivity(Activity activity) {
         versionedAddressBook.addActivity(activity);
+        indicateAddressBookChanged();
+    }
+    /**
+     * Reinitialises the address book
+     */
+    @Override
+    public void deleteActivity(Date date, Index index) {
+        versionedAddressBook.deleteActivity(date, index);
         indicateAddressBookChanged();
     }
 
