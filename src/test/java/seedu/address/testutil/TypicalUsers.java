@@ -8,7 +8,6 @@ import seedu.address.model.UserDatabase;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
-import seedu.address.model.login.exceptions.DuplicateUserException;
 
 /**
  * A utility class containing a list of {@code User} objects to be used in tests.
