@@ -48,6 +48,7 @@ public class CompanyJobDetailsPanel extends UiPart<Region> {
         companyView.setCellFactory(listView -> new CompanyViewCell());
         companyJobDetailsView.setItems(companyJobList);
         companyJobDetailsView.setCellFactory(listView -> new CompanyJobDetailsViewCell());
+        numberOfJobOffers.setText(String.valueOf(companyJobList.size()));
         setEventHandlerForSelectionChangeEvent();
     }
 
