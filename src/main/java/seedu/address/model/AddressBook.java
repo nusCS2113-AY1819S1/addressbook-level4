@@ -139,8 +139,21 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof AddressBook // instanceof handles nulls
+                && persons.equals(((AddressBook) other).persons));
+    }
+
+    @Override
+    public int hashCode() {
+        return persons.hashCode();
+    }
+
     //=========== Todo tasks =============================================================
 
+    //@@author linnnruoo
     /**
      * Replaces the contents of the todo tasks list with {@code todos}.
      * {@code todos} must not contain duplicate todos.
@@ -168,14 +181,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
-    }
-
-    @Override
-    public int hashCode() {
-        return persons.hashCode();
+    public ObservableList<Todo> getTodoList() {
+        return todos.asUnmodifiableObservableList();
     }
 }

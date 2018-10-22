@@ -13,6 +13,7 @@ import seedu.address.model.todo.Todo;
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Todo> PREDICATE_SHOW_ALL_TODOS = unused -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
@@ -53,20 +54,11 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
-    /** Returns an unmodifiable view of the filtered todo task list */
-    ObservableList<Todo> getFilteredTodoList();
-
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
-
-    /**
-     * Updates the filter of the filtered todo task list to filter by the given {@code predicate}.
-     * @throws NullPointerException if {@code predicate} is null.
-     */
-    void updateFilteredTodoList(Predicate<Todo> predicate);
 
     /**
      * Returns true if the model has previous address book states to restore.
@@ -98,6 +90,9 @@ public interface Model {
      */
     void exportAddressBook();
 
+    /** Returns an unmodifiable view of the filtered todo task list */
+    ObservableList<Todo> getFilteredTodoList();
+
     /**
      * Returns true if a todo task with the same fields as {@code todo} exists in the address book.
      */
@@ -108,4 +103,10 @@ public interface Model {
      * {@code todo} must not already exist in the address book.
      */
     void addTodo(Todo todo);
+
+    /**
+     * Updates the filter of the filtered todo task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTodoList(Predicate<Todo> predicate);
 }

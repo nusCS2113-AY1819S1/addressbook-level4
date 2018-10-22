@@ -9,6 +9,7 @@ import seedu.address.model.todo.Content;
 import seedu.address.model.todo.Title;
 import seedu.address.model.todo.Todo;
 
+//@@author: linnnruoo
 /**
  * JAXB-friendly version of the Todo.
  */
