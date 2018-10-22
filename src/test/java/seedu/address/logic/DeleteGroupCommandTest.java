@@ -36,11 +36,11 @@ import seedu.address.model.person.Person;
  */
 public class DeleteGroupCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private CommandHistory commandHistory = new CommandHistory();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void constructor_nullDeleteGroup_throwsNullPointerException() {
