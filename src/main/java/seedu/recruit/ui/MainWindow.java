@@ -22,7 +22,6 @@ import seedu.recruit.commons.events.ui.ShowCandidateBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowCompanyBookRequestEvent;
 import seedu.recruit.commons.events.ui.ShowHelpRequestEvent;
 import seedu.recruit.logic.Logic;
-import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.UserPrefs;
 
 /**
@@ -35,6 +34,12 @@ public class MainWindow extends UiPart<Stage> {
 
     private static String currentBook = "companyBook";
 
+    private static CandidateDetailsPanel candidateDetailsPanel;
+
+    private static CompanyJobDetailsPanel companyJobDetailsPanel;
+
+    private static StackPane staticPanelViewPlaceholder;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -45,8 +50,6 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private static CandidateDetailsPanel candidateDetailsPanel;
-    private static CompanyJobDetailsPanel companyJobDetailsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -62,9 +65,6 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane panelViewPlaceholder;
-
-    @FXML
-    private static StackPane staticPanelViewPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -255,6 +255,10 @@ public class MainWindow extends UiPart<Stage> {
         return staticPanelViewPlaceholder;
     }
 
+    /**
+     * Switches the view on panelViewPlaceholder
+     * from Company Book to Candidate Book.
+     */
     public static void switchToCandidateBook() {
         if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
             getStaticPanelViewPlaceholder().getChildren().remove(0);
@@ -263,6 +267,10 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Switches the view on panelViewPlaceholder
+     * from Candidate Book to Company Book.
+     */
     public static void switchToCompanyBook() {
         if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
             getStaticPanelViewPlaceholder().getChildren().remove(0);
