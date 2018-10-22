@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.commons.util.DistributeUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -17,7 +18,9 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.distribute.Distribute;
+import seedu.address.model.group.Group;
 import seedu.address.testutil.DistributeBuilder;
+import seedu.address.testutil.GroupBuilder;
 
 public class DistributeCommandTest {
 
@@ -44,6 +47,19 @@ public class DistributeCommandTest {
         assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
                 commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_duplicateGroupFound_throwsCommandException() throws CommandException, ParseException {
+        AddressBook stubAddressBook = getTypicalAddressBook();
+        Group stubGroup = new GroupBuilder().withGroupName("CS2113-T13-1").build();
+        stubAddressBook.createGroup(stubGroup);
+        UserPrefs stubUserPrefs = new UserPrefs();
+        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
+        Distribute validDistributeCommand = new DistributeBuilder().build();
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(DistributeUtil.MESSAGE_DUPLICATE_GROUP);
+        new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
     }
 
     @Test
@@ -90,4 +106,6 @@ public class DistributeCommandTest {
         // different person -> returns false
         assertFalse(distributeFirstCommand.equals(allDifferentCommand));
     }
+
+
 }

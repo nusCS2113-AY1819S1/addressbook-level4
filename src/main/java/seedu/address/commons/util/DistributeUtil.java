@@ -33,7 +33,7 @@ import seedu.address.model.tag.Tag;
  */
 public class DistributeUtil {
 
-    private static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
+    public static final String MESSAGE_DUPLICATE_GROUP = "There exist another group with the same name.";
     private static final String MESSAGE_MISSING_GROUP = "Group is not found.";
     private static final String MESSAGE_SHUFFLE_ERROR = "There is a problem shuffling the people in the address book.";
     private static final String GROUP_LOCATION = "UNKNOWN";
