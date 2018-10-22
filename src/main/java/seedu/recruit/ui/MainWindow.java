@@ -40,10 +40,11 @@ public class MainWindow extends UiPart<Stage> {
 
     private static StackPane staticPanelViewPlaceholder;
 
+    private static Logic logic;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
-    private Logic logic;
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
@@ -136,10 +137,7 @@ public class MainWindow extends UiPart<Stage> {
      * fills up all the other placeholders of this window.
      */
     void fillInnerParts() {
-        candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
-        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
-                logic.getFilteredCompanyJobList());
-        panelViewPlaceholder.getChildren().add(companyJobDetailsPanel.getRoot());
+        panelViewPlaceholder.getChildren().add(getCompanyJobDetailsPanel().getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -234,10 +232,13 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public static CandidateDetailsPanel getCandidateDetailsPanel() {
+        candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
         return candidateDetailsPanel;
     }
 
     public static CompanyJobDetailsPanel getCompanyJobDetailsPanel() {
+        companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
+                logic.getFilteredCompanyJobList());
         return companyJobDetailsPanel;
     }
 
