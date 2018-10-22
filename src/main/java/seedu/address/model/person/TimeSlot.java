@@ -8,6 +8,9 @@ import java.time.Duration;
 import java.time.LocalTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
+import java.util.Objects;
+
+import seedu.address.model.person.exceptions.TimeSlotNotOverlapException;
 
 /**
  * Represents a single TimeSlot in TimeTable Class
@@ -39,6 +42,12 @@ public class TimeSlot {
         endTime = end;
     }
 
+    public TimeSlot(TimeSlot input) {
+        dayOfWeek = input.dayOfWeek;
+        startTime = input.startTime;
+        endTime = input.endTime;
+    }
+
     public LocalTime getStartTime() {
         return startTime;
     }
@@ -68,19 +77,73 @@ public class TimeSlot {
     }
 
     /**
-     * Checks whether this TimeSlot overlaps with toCompare
+     * Checks whether this {@code TimeSlot} overlaps with {@code toCompare}
      *
-     * @param toCompare TimeSlot to compare against
-     * @return Whether this TimeSlot overlaps with toCompare
+     * @param toCompare {@code TimeSlot} to compare against
+     * @return Whether this {@code TimeSlot} overlaps with {@code toCompare}
      */
     public boolean isOverlap(TimeSlot toCompare) {
-        boolean isSameDay = this.getDayOfWeek() == toCompare.getDayOfWeek();
-        boolean isNotOverlapTime = (this.getEndTime().isBefore(toCompare.getStartTime())
-                || this.getEndTime().equals(toCompare.getStartTime())
-                || toCompare.getEndTime().isBefore(this.getStartTime())
-                || toCompare.getEndTime().equals(this.getStartTime()));
+        boolean isNotOverlapTime = (this.endTime.isBefore(toCompare.startTime)
+                || toCompare.endTime.isBefore(this.startTime)
+                || isAdjacent(toCompare));
 
-        return isSameDay && !isNotOverlapTime;
+        return isSameDay(toCompare) && !isNotOverlapTime;
+    }
+
+    /**
+     * Checks whether this {@code TimeSlot} is adjacent to {@code toCompare}
+     *
+     * @param toCompare {@code TimeSlot} to compare against
+     * @return Whether this {@code TimeSlot} is adjacent to {@code toCompare}
+     */
+    public boolean isAdjacent(TimeSlot toCompare) {
+        return isSameDay(toCompare)
+                && (this.endTime.equals(toCompare.startTime) || this.startTime.equals(toCompare.endTime));
+    }
+
+    public boolean isSameDay(TimeSlot toCompare) {
+        return this.dayOfWeek == toCompare.dayOfWeek;
+    }
+
+    /**
+     * Merges {@code toMerge} into this {@code TimeSlot}
+     * This {@code TimeSlot} must overlap or be adjacent with {@code toMerge}
+     *
+     * @param toMerge {@code TimeSlot} to be merged
+     * @throws TimeSlotNotOverlapException if {@code toMerge} does not overlap with this {@code TimeSlot}
+     */
+    public void mergeInto(TimeSlot toMerge) throws TimeSlotNotOverlapException {
+        TimeSlot merged;
+
+        try {
+            merged = merge(toMerge);
+        } catch (TimeSlotNotOverlapException e) {
+            throw e;
+        }
+
+        this.startTime = merged.startTime;
+        this.endTime = merged.endTime;
+        this.dayOfWeek = merged.dayOfWeek;
+    }
+
+    /**
+     * Returns a {@code TimeSlot} with {@code toMerge} merged with this {@code TimeSlot}
+     * This {@code TimeSlot} must overlap or be adjacent with {@code toMerge}
+     *
+     * @param toMerge {@code TimeSlot} to be merged
+     * @return Merged {@code TimeSlot}
+     * @throws TimeSlotNotOverlapException if {@code toMerge} does not overlap with this {@code TimeSlot}
+     */
+    public TimeSlot merge(TimeSlot toMerge) throws TimeSlotNotOverlapException {
+        if (!isOverlap(toMerge) && !isAdjacent(toMerge)) {
+            throw new TimeSlotNotOverlapException();
+        }
+
+        LocalTime toReturnStart = this.startTime.isBefore(toMerge.startTime) ? this.startTime : toMerge.startTime;
+        LocalTime toReturnEnd = this.endTime.isAfter(toMerge.endTime) ? this.endTime : toMerge.endTime;
+        DayOfWeek toReturnDay = this.dayOfWeek;
+
+        return new TimeSlot(toReturnDay, toReturnStart, toReturnEnd);
     }
 
     @Override
@@ -88,12 +151,11 @@ public class TimeSlot {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH))
                 .append(" ")
-                .append(getStartTime())
+                .append(startTime)
                 .append(" - ")
-                .append(getEndTime());
+                .append(endTime);
         return builder.toString();
     }
-
 
     @Override
     public boolean equals(Object other) {
@@ -108,7 +170,13 @@ public class TimeSlot {
         TimeSlot otherTimeSlot = (TimeSlot) other;
 
         return otherTimeSlot.getDayOfWeek().equals(getDayOfWeek())
-                && otherTimeSlot.getStartTime().equals(getStartTime())
-                && otherTimeSlot.getEndTime().equals(getEndTime());
+                && otherTimeSlot.startTime.equals(startTime)
+                && otherTimeSlot.endTime.equals(endTime);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dayOfWeek, startTime, endTime);
+    }
+
 }

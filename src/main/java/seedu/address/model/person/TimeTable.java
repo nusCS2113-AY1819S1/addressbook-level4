@@ -1,7 +1,7 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
@@ -13,7 +13,7 @@ public class TimeTable {
     protected Collection <TimeSlot> timeSlots;
 
     public TimeTable() {
-        timeSlots = new ArrayList<>();
+        timeSlots = new HashSet<>();
     }
 
     public TimeTable(Collection <TimeSlot> input) {
@@ -26,7 +26,7 @@ public class TimeTable {
     }
 
     public Collection <TimeSlot> getTimeSlots() {
-        Collection <TimeSlot> toReturn = new ArrayList<>();
+        Collection <TimeSlot> toReturn = new HashSet<>();
         toReturn.addAll(timeSlots);
         return toReturn;
     }
@@ -82,9 +82,16 @@ public class TimeTable {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TimeTable // instanceof handles nulls
-                && timeSlots.equals(((TimeTable) other).getTimeSlots())); // state check
-    }
+        if (other == this) {
+            return true;
+        }
 
+        if (!(other instanceof TimeTable)) {
+            return false;
+        }
+
+        TimeTable otherTimeTable = (TimeTable) other;
+
+        return otherTimeTable.getTimeSlots().equals(this.getTimeSlots());
+    }
 }
