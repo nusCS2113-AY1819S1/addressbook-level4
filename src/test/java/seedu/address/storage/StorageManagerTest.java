@@ -110,8 +110,7 @@ public class StorageManagerTest {
         ReadOnlyExpenditureTracker retrieved = storageManager.readExpenditureTracker().get();
         assertEquals(original, new ExpenditureTracker(retrieved));
     }
-
-
+    
     @Test
     public void getExpenditureTrackerFilePath() {
         assertNotNull(storageManager.getExpenditureTrackerFilePath());
