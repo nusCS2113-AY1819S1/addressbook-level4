@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.GradebookAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.gradebook.Gradebook;
+import seedu.address.model.gradebook.GradebookManager;
 
 /**
  * Parses input arguments and creates a new GradebookAddCommand object
@@ -18,6 +19,11 @@ import seedu.address.model.gradebook.Gradebook;
 public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     private static final String MESSAGE_MAX_MARKS_ERROR = "Invalid input. \nMaximum marks should only be an integer";
     private static final String MESSAGE_WEIGHTAGE_ERROR = "Invalid input. \nWeightage should only be an integer";
+    private static final String MESSAGE_EMPTY_INPUTS = "Module code and gradebook component name cannot be empty";
+    private static final String MESSAGE_DUPLICATE = "Gradebook component already exist in Trajectory";
+    private static final String MESSAGE_MAX_MARKS_INVALID = "Max marks should be within 0-100 range";
+    private static final String MESSAGE_WEIGHTAGE_INVALID = "Weightage should be within 0-100 range";
+    private static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the GradebookAddCommand
@@ -27,6 +33,7 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     public GradebookAddCommand parse(String args) throws ParseException {
         int gradeComponentMaxMarksArg = 0;
         int gradeComponentWeightageArg = 0;
+        GradebookManager gradebookManager = new GradebookManager();
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE, PREFIX_GRADEBOOK_ITEM,
                 PREFIX_GRADEBOOK_MAXMARKS, PREFIX_GRADEBOOK_WEIGHTAGE);
@@ -51,6 +58,26 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
         }
         String moduleCodeArg = argMultimap.getValue(PREFIX_MODULE_CODE).get();
         String gradeComponentNameArg = argMultimap.getValue(PREFIX_GRADEBOOK_ITEM).get();
+        boolean isEmpty = gradebookManager.isEmpty(moduleCodeArg, gradeComponentNameArg);
+        if (isEmpty) {
+            throw new ParseException(MESSAGE_EMPTY_INPUTS);
+        }
+        boolean isDuplicate = gradebookManager.isDuplicate(moduleCodeArg, gradeComponentNameArg);
+        if (isDuplicate) {
+            throw new ParseException(MESSAGE_DUPLICATE);
+        }
+        boolean isMaxMarksValid = gradebookManager.isMaxMarksValid(gradeComponentMaxMarksArg);
+        if (!isMaxMarksValid) {
+            throw new ParseException(MESSAGE_MAX_MARKS_INVALID);
+        }
+        boolean isWeightageValid = gradebookManager.isWeightageValid(gradeComponentWeightageArg);
+        if (!isWeightageValid) {
+            throw new ParseException(MESSAGE_WEIGHTAGE_INVALID);
+        }
+        boolean hasWeightageExceed = gradebookManager.hasWeightageExceed(moduleCodeArg, gradeComponentWeightageArg);
+        if (hasWeightageExceed) {
+            throw new ParseException(MESSAGE_WEIGHTAGE_EXCEED);
+        }
 
         Gradebook gradebook = new Gradebook(
                 moduleCodeArg,

@@ -10,20 +10,14 @@ import seedu.address.storage.adapter.XmlAdaptedGradebook;
  * The API of the GradebookManager component.
  */
 public class GradebookManager {
-    private static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
-    private static final String MESSAGE_ADD_SUCCESS = "\nSuccessfully Added! \nModule Code: %1$s"
-            + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
-    private static final String MESSAGE_ERROR_DUPLICATE = "Gradebook component already exist in Trajectory";
     private static final String DELETE_MESSAGE_SUCCESS = "\nModule Code: %1$s \nGradebook Component: %2$s \n"
             + "Successfully deleted!";
     private static final String DELETE_MESSAGE_FAIL = "\nUnsuccessful Deletion";
-
     private ArrayList<Gradebook> gradebooks = new ArrayList<>();
 
     public GradebookManager() {
         readGradebookComponentsList();
     }
-
     public ArrayList<Gradebook> getGradebooks() {
         return gradebooks;
     }
@@ -51,33 +45,8 @@ public class GradebookManager {
     /**
      This method adds gradebook component to a module in Trajectory.
      */
-    public String addGradebookComponent (String moduleCode,
-                                                String gradebookComponentName,
-                                                int gradebookMaxMarks,
-                                                int gradebookWeightage) {
-        String status = MESSAGE_ADD_SUCCESS;
-        boolean isEmpty = Gradebook.hasEmptyParams(moduleCode, gradebookComponentName);
-        boolean hasDuplicate = isDuplicateComponent(moduleCode, gradebookComponentName);
-
-        if (isEmpty) {
-            status = MESSAGE_ERROR_EMPTY;
-        }
-
-        if (hasDuplicate) {
-            status = MESSAGE_ERROR_DUPLICATE;
-        }
-
-        if (!isEmpty && !hasDuplicate) {
-            StorageController.getGradebookStorage().add(new XmlAdaptedGradebook(moduleCode, gradebookComponentName,
-                    gradebookMaxMarks, gradebookWeightage));
-            StorageController.storeData();
-        }
-
-        return String.format(status,
-                moduleCode,
-                gradebookComponentName,
-                gradebookMaxMarks,
-                gradebookWeightage);
+    public void addGradebookComponent (Gradebook gradebook) {
+        gradebooks.add(gradebook);
     }
 
     /**
@@ -112,18 +81,64 @@ public class GradebookManager {
     }
 
     /**
-     This method checks if component already exists in Trajectory.
+     This method checks if module code and component name have empty inputs.
      */
-    public boolean isDuplicateComponent (String moduleCode, String gradebookComponentName) {
-        StorageController.retrieveData();
-        boolean duplicate = false;
+    public boolean isEmpty (String moduleCode, String gradebookComponentName) {
+        boolean isEmpty = false;
+        if (moduleCode.equals("") || gradebookComponentName.equals("")) {
+            isEmpty = true;
+        }
+        return isEmpty;
+    }
 
+    /**
+     This method checks if module code and component name already exist.
+     */
+    public boolean isDuplicate (String moduleCode, String gradebookComponentName) {
+        boolean isDuplicate = false;
         Gradebook gradebook = findGradebookComponent(moduleCode, gradebookComponentName);
         if (gradebook != null) {
-            duplicate = true;
+            isDuplicate = true;
         }
+        return isDuplicate;
+    }
 
-        return duplicate;
+    /**
+     This method checks if maximum marks are within acceptable range.
+     */
+    public boolean isMaxMarksValid (int gradebookMaxMarks) {
+        boolean isMaxMarksValid = false;
+        if (gradebookMaxMarks >= 0 && gradebookMaxMarks <= 100) {
+            isMaxMarksValid = true;
+        }
+        return isMaxMarksValid;
+    }
+
+    /**
+     This method checks if maximum marks are within acceptable range.
+     */
+    public boolean isWeightageValid (int gradebookWeightage) {
+        boolean isWeightageValid = false;
+        if (gradebookWeightage >= 0 && gradebookWeightage <= 100) {
+            isWeightageValid = true;
+        }
+        return isWeightageValid;
+    }
+    /**
+     This method checks if weightage adds up to a maximum of 100.
+     */
+    public boolean hasWeightageExceed (String moduleCode, int gradebookWeightage) {
+        boolean hasWeightageExceed = false;
+        int totalWeightage = 0;
+        for (Gradebook gradebook : gradebooks) {
+            if (gradebook.getModuleCode().equals(moduleCode)) {
+                totalWeightage += gradebook.getGradeComponentWeightage();
+            }
+        }
+        if (totalWeightage + gradebookWeightage > 101) {
+            hasWeightageExceed = true;
+        }
+        return hasWeightageExceed;
     }
 }
 

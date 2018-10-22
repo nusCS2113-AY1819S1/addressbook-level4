@@ -18,6 +18,8 @@ import seedu.address.model.gradebook.GradebookManager;
 public class GradebookAddCommand extends Command {
 
     public static final String COMMAND_WORD = "gradebook add";
+    private static final String MESSAGE_ADD_SUCCESS = "\nSuccessfully Added! \nModule Code: %1$s"
+            + "\nGradebook Component Name: %2$s" + "\nMaximum Marks: %3$s" + "\nWeightage: %4$s";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a gradebook component to Trajectory. "
             + "\nParameters: "
@@ -32,22 +34,24 @@ public class GradebookAddCommand extends Command {
             + PREFIX_GRADEBOOK_WEIGHTAGE + "50";
 
     private final Gradebook toAddGradebookItem;
+
     public GradebookAddCommand (Gradebook gradebookComponent) {
-        toAddGradebookItem = gradebookComponent;
+        this.toAddGradebookItem = gradebookComponent;
     }
 
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         GradebookManager gradebookManager = new GradebookManager();
+        gradebookManager.addGradebookComponent(toAddGradebookItem);
+        gradebookManager.saveGradebookList();
 
-        String result = gradebookManager.addGradebookComponent(
+        return new CommandResult(String.format(
+                MESSAGE_ADD_SUCCESS,
                 toAddGradebookItem.getModuleCode(),
                 toAddGradebookItem.getGradeComponentName(),
                 toAddGradebookItem.getGradeComponentMaxMarks(),
-                toAddGradebookItem.getGradeComponentWeightage());
-
-        return new CommandResult(result);
+                toAddGradebookItem.getGradeComponentWeightage()));
     }
 
     @Override
