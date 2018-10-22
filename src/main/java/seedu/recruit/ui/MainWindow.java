@@ -34,6 +34,12 @@ public class MainWindow extends UiPart<Stage> {
 
     private static String currentBook = "companyBook";
 
+    private static CandidateDetailsPanel candidateDetailsPanel;
+
+    private static CompanyJobDetailsPanel companyJobDetailsPanel;
+
+    private static StackPane staticPanelViewPlaceholder;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     private Stage primaryStage;
@@ -44,8 +50,6 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private CandidateDetailsPanel candidateDetailsPanel;
-    private CompanyJobDetailsPanel companyJobDetailsPanel;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -60,7 +64,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem candidateBook;
 
     @FXML
-    private StackPane panelViewPlaceHolder;
+    private StackPane panelViewPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -85,6 +89,7 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        staticPanelViewPlaceholder = panelViewPlaceholder;
     }
 
     public Stage getPrimaryStage() {
@@ -126,50 +131,6 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Handles the menu Switch Book from Candidate Book
-     * to Company Book event, {@code event}.
-     */
-    @FXML
-    public void handleChangeToCandidateDetailsPanel() {
-        candidateBook.setOnAction(new EventHandler<ActionEvent>() {
-            /**
-             * Handles switch in panel view in RecruitBook main window
-             * when user switches from Company Book to Candidate Book
-             */
-            @Override
-            public void handle(ActionEvent event) {
-                if (!panelViewPlaceHolder.getChildren().isEmpty()) {
-                    panelViewPlaceHolder.getChildren().remove(0);
-                    panelViewPlaceHolder.getChildren().add(candidateDetailsPanel.getRoot());
-                    currentBook = "candidateBook";
-                }
-            }
-        });
-    }
-
-    /**
-     * Handles the menu Switch Book from Company Book
-     * to Candidate Book event, {@code event}.
-     */
-    @FXML
-    public void handleChangeToCompanyJobDetailsPanel() {
-        companyBook.setOnAction(new EventHandler<ActionEvent>() {
-            /**
-             * Handles switch in panel view in RecruitBook main window
-             * when user switches from Candidate Book to Company Book
-             */
-            @Override
-            public void handle(ActionEvent event) {
-                if (!panelViewPlaceHolder.getChildren().isEmpty()) {
-                    panelViewPlaceHolder.getChildren().remove(0);
-                    panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
-                    currentBook = "companyBook";
-                }
-            }
-        });
-    }
-
-    /**
      * RecruitBook's default panelViewPlaceHolder shows the list of
      * companies and their list of jobs, and at the same time
      * fills up all the other placeholders of this window.
@@ -177,8 +138,8 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());
         companyJobDetailsPanel = new CompanyJobDetailsPanel(logic.getFilteredCompanyList(),
-                                        logic.getFilteredCompanyJobList());
-        panelViewPlaceHolder.getChildren().add(companyJobDetailsPanel.getRoot());
+                logic.getFilteredCompanyJobList());
+        panelViewPlaceholder.getChildren().add(companyJobDetailsPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -221,6 +182,34 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Handles the menu Switch Book from Company Book
+     * to Candidate Book event, {@code event}.
+     */
+    @FXML
+    public void handleChangeToCandidateDetailsPanel() {
+        candidateBook.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                switchToCandidateBook();
+            }
+        });
+    }
+
+    /**
+     * Handles the menu Switch Book from Candidate Book
+     * to Company Book event, {@code event}.
+     */
+    @FXML
+    public void handleChangeToCompanyJobDetailsPanel() {
+        companyBook.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                switchToCompanyBook();
+            }
+        });
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
@@ -244,11 +233,11 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public CandidateDetailsPanel getCandidateDetailsPanel() {
+    public static CandidateDetailsPanel getCandidateDetailsPanel() {
         return candidateDetailsPanel;
     }
 
-    public CompanyJobDetailsPanel getCompanyJobDetailsPanel() {
+    public static CompanyJobDetailsPanel getCompanyJobDetailsPanel() {
         return companyJobDetailsPanel;
     }
 
@@ -259,6 +248,34 @@ public class MainWindow extends UiPart<Stage> {
             return "candidateBook";
         } else {
             return "Error in Switching Book";
+        }
+    }
+
+    public static StackPane getStaticPanelViewPlaceholder() {
+        return staticPanelViewPlaceholder;
+    }
+
+    /**
+     * Switches the view on panelViewPlaceholder
+     * from Company Book to Candidate Book.
+     */
+    public static void switchToCandidateBook() {
+        if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
+            getStaticPanelViewPlaceholder().getChildren().remove(0);
+            getStaticPanelViewPlaceholder().getChildren().add(getCandidateDetailsPanel().getRoot());
+            currentBook = "candidateBook";
+        }
+    }
+
+    /**
+     * Switches the view on panelViewPlaceholder
+     * from Candidate Book to Company Book.
+     */
+    public static void switchToCompanyBook() {
+        if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
+            getStaticPanelViewPlaceholder().getChildren().remove(0);
+            getStaticPanelViewPlaceholder().getChildren().add(getCompanyJobDetailsPanel().getRoot());
+            currentBook = "companyBook";
         }
     }
 

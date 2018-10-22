@@ -14,7 +14,6 @@ public class CancelCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Cancelled command: %1$s";
 
-
     private final String cancelledCommand;
 
     public CancelCommand(String cancelledCommand) {
@@ -25,5 +24,4 @@ public class CancelCommand extends Command {
         LogicManager.setLogicState("primary");
         return new CommandResult(String.format(MESSAGE_SUCCESS, cancelledCommand));
     }
-
 }
