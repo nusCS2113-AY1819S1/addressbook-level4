@@ -3,23 +3,27 @@
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: NUSync
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+NUSync is an utility application that consists of a timetable manager, as well as an all in one IVLE notes downloader.
 
 == Summary of contributions
 
-* *Major enhancement*: To be decided.
-** What it does: To be decided.
-** Justification: ide a convenient way to rectify them.
-** Highlights: To be decided.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: IVLE Notes downloader
+** What it does: Allows the user to select and download all/selected notes
 
-* *Minor enhancement*: To be decided.
+
+** Justification: Allows the user to download his or her notes with a single line of command. Additionally, allow the users to download a single file with at most 2 lines of command. This method significantly triumphs the existing method; which involves manually transversing the IVLE web page, in terms of efficiency. 
+
+
+** Highlights: This is a completely new feature that has been added into the existing AddressBook level 4 code base. It does not improve on any existing feature at the moment. 
+** Credits: Selenium Web driver. 
+
+* *Minor enhancement*: Allow the user to select a few files instead of all the files to download. 
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -58,12 +62,5 @@ include::../UserGuide.adoc[tag=dataencryption]
 include::../DeveloperGuide.adoc[tag=undoredo]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
 
 
