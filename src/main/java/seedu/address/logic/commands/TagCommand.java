@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.item.NameContainsKeywordsPredicate;
+import seedu.address.model.item.TagContainsKeywordsPredicate;
 
 /**
  * Find and show items under a specific tag
@@ -20,9 +20,9 @@ public class TagCommand extends Command {
             + "Parameters: KEYWORD [MORE_KEYWORDS]..."
             + " Example: " + COMMAND_WORD + " Lab1";
 
-    private final NameContainsKeywordsPredicate predicate;
+    private final TagContainsKeywordsPredicate predicate;
 
-    public TagCommand(NameContainsKeywordsPredicate predicate) {
+    public TagCommand(TagContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -30,7 +30,7 @@ public class TagCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.updateFilteredItemListByTag(predicate);
+        model.updateFilteredItemList(predicate);
         return new CommandResult(
              String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredItemList().size()));
     }
