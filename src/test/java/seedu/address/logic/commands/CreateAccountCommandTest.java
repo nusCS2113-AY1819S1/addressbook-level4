@@ -16,21 +16,18 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.LoginBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
-
 import seedu.address.model.ReadOnlyLoginBook;
 import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
-
 import seedu.address.model.person.Person;
-
 import seedu.address.model.searchhistory.SearchHistoryManager;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.AccountBuilder;
 
-public class AddCommandTest {
+public class CreateAccountCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -40,56 +37,58 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullAccount_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new CreateAccountCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_accountAcceptedByModel_addSuccessful() throws Exception {
+        CreateAccountCommandTest.ModelStubAcceptingAccountAdded modelStub = new CreateAccountCommandTest
+                                                                            .ModelStubAcceptingAccountAdded();
+        LoginDetails validAccount = new AccountBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new CreateAccountCommand(validAccount)
+                                                               .execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(CreateAccountCommand.MESSAGE_SUCCESS, validAccount), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validAccount), modelStub.accountsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateAccount_throwsCommandException() throws Exception {
+        LoginDetails validAccount = new AccountBuilder().build();
+        CreateAccountCommand createAccountCommand = new CreateAccountCommand(validAccount);
+        ModelStub modelStub = new ModelStubWithAccount(validAccount);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(CreateAccountCommand.MESSAGE_DUPLICATE_ACCOUNT);
+        createAccountCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        LoginDetails loginDetailOne = new AccountBuilder().withUserId("A1234567M").build();
+        LoginDetails loginDetailTwo = new AccountBuilder().withUserId("A1234568M").build();
+        CreateAccountCommand createAccountOneCommand = new CreateAccountCommand(loginDetailOne);
+        CreateAccountCommand createAccountTwoCommand = new CreateAccountCommand(loginDetailTwo);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(createAccountOneCommand.equals(createAccountOneCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        CreateAccountCommand createAccountOneCommandCopy = new CreateAccountCommand(loginDetailOne);
+        assertTrue(createAccountOneCommand.equals(createAccountOneCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(createAccountOneCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(createAccountOneCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(createAccountOneCommand.equals(createAccountTwoCommand));
     }
 
     /**
@@ -163,7 +162,7 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredLoginDetailsList(Predicate<LoginDetails> predicate) {
-            throw new AssertionError("This method should not be called.");
+
         }
 
         @Override
@@ -226,50 +225,44 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single account.
      */
-    private class ModelStubWithPerson extends ModelStub {
-        private final Person person;
+    private class ModelStubWithAccount extends CreateAccountCommandTest.ModelStub {
+        private final LoginDetails loginDetails;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithAccount(LoginDetails loginDetails) {
+            requireNonNull(loginDetails);
+            this.loginDetails = loginDetails;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasAccount(LoginDetails loginDetails) {
+            requireNonNull(loginDetails);
+            return this.loginDetails.isSameAccount(loginDetails);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the account being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingAccountAdded extends CreateAccountCommandTest.ModelStub {
+        final ArrayList<LoginDetails> accountsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasAccount(LoginDetails loginDetails) {
+            requireNonNull(loginDetails);
+            return accountsAdded.stream().anyMatch(loginDetails::isSameAccount);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void createAccount(LoginDetails loginDetails) {
+            requireNonNull(loginDetails);
+            accountsAdded.add(loginDetails);
         }
 
         @Override
-        public void commitAddressBook() {
-            // called by {@code AddCommand#execute()}
-        }
-
-        @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyLoginBook getLoginBook() {
+            return new LoginBook();
         }
     }
-
 }

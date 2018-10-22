@@ -19,6 +19,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.AddSkillLevelCommand;
 import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
@@ -33,11 +34,14 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Skill;
 import seedu.address.model.person.SkillLevel;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
+import seedu.address.testutil.AccountBuilder;
+import seedu.address.testutil.AccountUtil;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -53,6 +57,14 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
+    }
+
+    @Test
+    public void parseCommand_createaccount() throws Exception {
+        LoginDetails loginDetails = new AccountBuilder().build();
+        CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
+                                                                        .getCreateAccountCommand(loginDetails));
+        assertEquals(new CreateAccountCommand(loginDetails), command);
     }
 
     @Test

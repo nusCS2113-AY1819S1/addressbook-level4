@@ -18,15 +18,15 @@ import seedu.address.model.login.LoginDetails;
  * A utility class containing a list of {@code LoginDetails} objects to be used in tests.
  */
 public class TypicalAccounts {
-    public static final LoginDetails LOGINDETAIL1 = new AccountBuilder().withUserId("A1234565M")
+    public static final LoginDetails LOGINDETAIL1 = new AccountBuilder().withUserId("A1234561M")
             .withUserPassword("zaq1xsw2cde3").withUserRole("member").build();
-    public static final LoginDetails LOGINDETAIL2 = new AccountBuilder().withUserId("A1234566M")
+    public static final LoginDetails LOGINDETAIL2 = new AccountBuilder().withUserId("A1234562M")
             .withUserPassword("1qaz2wsx3edc").withUserRole("member").build();
-    public static final LoginDetails LOGINDETAIL3 = new AccountBuilder().withUserId("A1234565M")
+    public static final LoginDetails LOGINDETAIL3 = new AccountBuilder().withUserId("A1234563M")
             .withUserPassword("1qaz2wsx3edc").withUserRole("member").build();
-    public static final LoginDetails LOGINDETAIL4 = new AccountBuilder().withUserId("A1234566M")
+    public static final LoginDetails LOGINDETAIL4 = new AccountBuilder().withUserId("A1234564M")
             .withUserPassword("zaq1xsw2cde3").withUserRole("member").build();
-    public static final LoginDetails LOGINDETAIL5 = new AccountBuilder().withUserId("A1234567M")
+    public static final LoginDetails LOGINDETAIL5 = new AccountBuilder().withUserId("A1234565M")
             .withUserPassword("zaq1xsw2cde3").withUserRole("member").build();
 
     public static final LoginDetails ACCOUNT1 = new AccountBuilder().withUserId(VALID_ID_ACCOUNT1)

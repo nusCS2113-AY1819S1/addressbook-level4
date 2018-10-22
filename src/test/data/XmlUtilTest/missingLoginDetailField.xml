@@ -2,4 +2,5 @@
 <!-- Login detail with missing user ID field -->
 <logindetail>
     <userPassword>zaq1xsw2cde3</userPassword>
+    <userRole>member</userRole>
 </logindetail>

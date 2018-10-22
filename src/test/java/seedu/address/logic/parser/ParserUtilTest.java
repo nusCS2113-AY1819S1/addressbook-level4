@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.login.UserId;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -24,6 +25,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
+    private static final String INVALID_USERID = "AA123456M";
+    private static final String VALID_USERID = "A1234567M";
+
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -62,6 +66,29 @@ public class ParserUtilTest {
 
         // Leading and trailing whitespaces
         assertEquals(INDEX_FIRST_PERSON, ParserUtil.parseIndex("  1  "));
+    }
+
+    @Test
+    public void parseUserId_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseUserId((String) null));
+    }
+
+    @Test
+    public void parseUserId_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseUserId(INVALID_USERID));
+    }
+
+    @Test
+    public void parseUserId_validValueWithoutWhitespace_returnsName() throws Exception {
+        UserId expectedUserId = new UserId(VALID_USERID);
+        assertEquals(expectedUserId, ParserUtil.parseUserId(VALID_USERID));
+    }
+
+    @Test
+    public void parseUserId_validValueWithWhitespace_returnsTrimmedName() throws Exception {
+        String userIdWithWhitespace = WHITESPACE + VALID_USERID + WHITESPACE;
+        UserId expectedUserId = new UserId(VALID_USERID);
+        assertEquals(expectedUserId, ParserUtil.parseUserId(userIdWithWhitespace));
     }
 
     @Test

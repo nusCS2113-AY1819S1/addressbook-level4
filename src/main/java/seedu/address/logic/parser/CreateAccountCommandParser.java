@@ -5,16 +5,12 @@ import static seedu.address.logic.parser.ParserUtil.parseUserId;
 import static seedu.address.logic.parser.ParserUtil.parseUserPassword;
 import static seedu.address.logic.parser.ParserUtil.parseUserRole;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.StringTokenizer;
 
 import seedu.address.logic.commands.CreateAccountCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.login.UserId;
-import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 import seedu.address.model.login.UserPassword;
 import seedu.address.model.login.UserRole;
 
@@ -37,9 +33,8 @@ public class CreateAccountCommandParser implements Parser<CreateAccountCommand> 
         }
 
         String[] keywords = trimmedArgs.split("\\s+");
-        List<String> keywordsList = new ArrayList<>(Arrays.asList(keywords));
         LoginDetails details = extractLoginDetailsFromInput(keywords, args);
-        return new CreateAccountCommand(new UserIdContainsKeywordsPredicate(keywordsList), details);
+        return new CreateAccountCommand(details);
     }
 
     /**

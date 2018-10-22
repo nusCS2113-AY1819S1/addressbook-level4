@@ -6,7 +6,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.login.LoginDetails;
-import seedu.address.model.login.UserIdContainsKeywordsPredicate;
 
 /**
  * Adds an account to the login book
@@ -24,14 +23,12 @@ public class CreateAccountCommand extends Command {
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the login book";
 
     private final LoginDetails toAdd;
-    private final UserIdContainsKeywordsPredicate idPredicate;
 
     /**
      * Creates a CreateAccountCommand to add the specified {@code LoginDetails}
      */
-    public CreateAccountCommand(UserIdContainsKeywordsPredicate idPredicate, LoginDetails loginDetails) {
+    public CreateAccountCommand(LoginDetails loginDetails) {
         requireNonNull(loginDetails);
-        this.idPredicate = idPredicate;
         this.toAdd = loginDetails;
     }
 
@@ -39,9 +36,7 @@ public class CreateAccountCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        model.updateFilteredLoginDetailsList(idPredicate);
-
-        if (model.hasAccount(toAdd) || model.getFilteredLoginDetailsList().size() != 0) {
+        if (model.hasAccount(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_ACCOUNT);
         }
 

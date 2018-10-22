@@ -56,11 +56,12 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Logging into system: `login`
 
 Logs into application using relevant credentials. +
-Format: `login USERID PASSWORD`
+Format: `login USERID PASSWORD ROLE`
 
 ****
 * USERID refers to student matriculation number
 * PASSWORD refers to the password associated with the existing account
+* ROLE refers to the role in NUSSU associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
 * USERID must belong to an existing account
 * There must be at least 1 space between USERID and PASSWORD
@@ -69,8 +70,8 @@ Format: `login USERID PASSWORD`
 
 Examples:
 
-* `login X1234567X zaq1xsw2cde3` +
-Logs into Address book with user ID as X1234567X and password as zaq1xsw2cde3.
+* `login X1234567X zaq1xsw2cde3 member` +
+Logs into Address book with user ID as X1234567X, password as zaq1xsw2cde3 and role as member.
 
 [NOTE]
 ====

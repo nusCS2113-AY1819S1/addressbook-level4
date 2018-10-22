@@ -40,6 +40,13 @@ public class UserId {
     }
 
     @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof UserId // instanceof handles nulls
+                && fullUserId.equals(((UserId) other).fullUserId)); // state check
+    }
+
+    @Override
     public int hashCode() {
         return fullUserId.hashCode();
     }
