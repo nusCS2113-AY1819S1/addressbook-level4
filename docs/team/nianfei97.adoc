@@ -1,0 +1,29 @@
+= Teh Nian Fei - Project Portfolio
+:site-section: AboutUs
+:imagesDir: ../images
+:stylesDir: ../stylesheets
+
+== PROJECT: FreeTime
+
+---
+
+== Overview
+
+FreeTime is a desktop application that helps users coordinate their schedules with their friends or groupmates. It displays timeslots where everyone the user wants to meet is free. It receives input through a command line interface while displaying output through a graphical user interface.
+
+FreeTime was developed in a team of four throughout the course of a semester as part of the module requirements for the following modules offered by the School of Computing, National University of Singapore: +
+
+* CS2113 - Software Engineering & Object-Oriented Programming +
+* CS2101 - Effective Communication for Computing Professionals +
+
+
+
+== Summary of contributions
+
+== Contributions to the User Guide
+
+The following section details my contributions to FreeTime's User Guide.
+
+== Contributions to the Developer Guide
+
+The following section details my contributions to FreeTime's Developer Guide.

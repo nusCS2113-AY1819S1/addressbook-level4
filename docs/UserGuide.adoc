@@ -1,4 +1,4 @@
-= Timetable Deconflicter (TBC) - User Guide
+= FreeTime - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -18,7 +18,7 @@ By: `W13-1`      Since: `Sept 2018`      Licence: `MIT`
 
 == Introduction
 
-Timetable Deconflicter (TBC) is a desktop app that allows you to *find free timeslots to meet team members for projects*. More specifically, it helps you identify the times during which everyone you want to meet is free. Timetable Deconflicter is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+FreeTime is a desktop app that allows you to *find free timeslots to meet team members for projects*. More specifically, it helps you identify the times during which everyone you want to meet is free. Timetable Deconflicter is optimized for those who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI). Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
