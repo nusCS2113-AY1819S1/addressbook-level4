@@ -17,13 +17,13 @@ public class TodoCommand extends Command {
     public static final String COMMAND_WORD = "todo";
     public static final String COMMAND_ALIAs = "td";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a todo task for JitHub users."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a todo task for JitHub users. "
             + "Parameters: "
-            + PREFIX_TITLE + "TITLE"
-            + PREFIX_CONTENT + "CONTENT"
+            + PREFIX_TITLE + "TITLE" + " "
+            + PREFIX_CONTENT + "CONTENT" + " "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TITLE + "Do Unit Tests" + " "
-            + PREFIX_CONTENT + "Do Junit tests to test these codes";
+            + PREFIX_CONTENT + "write tests to test these shitty codes";
 
     public static final String MESSAGE_SUCCESS = "New todo task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TODO = "This task has already been created in your JitHub";
