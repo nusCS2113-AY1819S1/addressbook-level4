@@ -64,14 +64,20 @@ Format: `login USERID PASSWORD ROLE`
 * ROLE refers to the role in NUSSU associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can be any lower or upper case letter alphabet, and there must be exactly 7 digits between the two `X`
 * USERID must belong to an existing account
-* There must be at least 1 space between USERID and PASSWORD
-* There need not be any spaces between `login` and `USERID`
+* There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
+* There must be at least 1 space between `login` keyword and USERID
+* The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the login process
+* There must not be any additional unnecessary parameters in user input during the login process
+* There must not be any spaces in USERID, PASSWORD and ROLE
 ****
 
 Examples:
 
 * `login X1234567X zaq1xsw2cde3 member` +
 Logs into Address book with user ID as X1234567X, password as zaq1xsw2cde3 and role as member.
+
+image::CorrectIdPasswordRole.PNG[width="300"]
+image::LoginSuccessMessage.PNG[width="300"]
 
 [NOTE]
 ====
@@ -81,19 +87,28 @@ Password is case-sensitive!
 === Creating a new user account: `createaccount`
 
 Creates a new user account in the address book. +
-Format: `createaccount USERID PASSWORD`
+Format: `createaccount USERID PASSWORD ROLE`
 
 ****
 * USERID refers to student matriculation number
 * PASSWORD refers to any desired passphrases the new user wishes to have
+* ROLE refers to the role in NUSSU associated with the existing account
 * The USERID must be in the `X1234567X` format, where X can only be upper-case letter alphabet, and there must be exactly 7 digits between the two `X`
 * USERID must not belong to an existing account
+* ROLE can only contain lower-case letter alphabets, and be only either `member`, `president` or `treasurer`
+* There must be at least 1 space between USERID and PASSWORD, and between PASSWORD and ROLE
+* There must be at least 1 space between `login` keyword and USERID
+* The 3 parameters, USERID, PASSWORD and ROLE must be present in user input during the account creation process
+* There must not be any additional unnecessary parameters in user input during the account creation process
+* There must not be any spaces in USERID, PASSWORD and ROLE
 ****
 
 Examples:
 
-* `createaccount X1234567X aq1xsw2cde3` +
-Creates a new account with user ID as X1234567X and password as zaq1xsw2cde3 in the address book.
+* `createaccount X1234567X aq1xsw2cde3 member` +
+Creates a new account with user ID as X1234567X, password as zaq1xsw2cde3 and role as member in the address book.
+
+image::CreateAccountSuccess.PNG[width="300"]
 
 === Viewing help : `help`
 
@@ -399,10 +414,10 @@ _{explain how the user can enable/disable data encryption}_
 
 == Command Summary
 
-* *Login* : `login USERID PASSWORD`
-e.g. `login A1234567M zaq1xsw2cde3`
-* *Create Account* : `createaccount USERID PASSWORD` +
-e.g. `createaccount A1234567M zaq1xsw2cde3`
+* *Login* : `login USERID PASSWORD ROLE`
+e.g. `login A1234567M zaq1xsw2cde3 member`
+* *Create Account* : `createaccount USERID PASSWORD ROLE` +
+e.g. `createaccount A1234567M zaq1xsw2cde3 member`
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 * *Clear* : `clear`
 * *Delete* : `delete [-a all][INDEX]` +
