@@ -31,6 +31,8 @@ import seedu.recruit.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final String MESSAGE_INVALID_INDEX_ARGS = "Index arguments are not valid.\n"
+                                                            + "Only INDEX or INDEX-INDEX is accepted";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -38,26 +40,61 @@ public class ParserUtil {
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
-        String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(parseIndexStringToInteger(oneBasedIndex));
     }
 
     /**
-     * Parses an Array {@code oneBasedIndexes} into an {@code Set<Index>} and returns it.
+     * Parses String @param index to an integer and returns it
+     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     */
+    private static Integer parseIndexStringToInteger(String index) throws ParseException {
+        String trimmedIndex = index.trim();
+        if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_INDEX);
+        }
+        return Integer.parseInt(trimmedIndex);
+    }
+
+    /**
+     * Parses an Array {@code indexArgs} into an {@code Set<Index>} and returns it.
      * Leading and trailing whitespaces will be trimmed.
      * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
 
-    public static Set<Index> parseIndexSet(String[] oneBasedIndexes) throws ParseException {
+    public static Set<Index> parseIndexSet(String[] indexArgs) throws ParseException {
         Set<Index> indexSet = new TreeSet<Index> (new LargestToSmallestIndexComparator());
-        for (int i = 0; i < oneBasedIndexes.length; i++) {
-            indexSet.add(parseIndex(oneBasedIndexes[i]));
+        for (String index : indexArgs) {
+            String[] indexRange = index.split("-");
+            if (indexRange.length == 1) {
+                indexSet.add(parseIndex(index));
+            } else if (indexRange.length == 2) {
+                indexSet.addAll(parseIndexRange(indexRange[0], indexRange[1]));
+            } else {
+                throw new ParseException(MESSAGE_INVALID_INDEX_ARGS);
+            }
         }
         return indexSet;
     }
+
+    private static Set<Index> parseIndexRange (String firstArg, String secondArg) throws ParseException {
+        int fromIndex, toIndex;
+        Set<Index> indexSet = new HashSet<>();
+
+        if (parseIndexStringToInteger(firstArg) < parseIndexStringToInteger(secondArg)) {
+            fromIndex = parseIndexStringToInteger(firstArg);
+            toIndex = parseIndexStringToInteger(secondArg);
+        } else {
+            fromIndex = parseIndexStringToInteger(secondArg);
+            toIndex = parseIndexStringToInteger(firstArg);
+        }
+
+        for (int index = fromIndex; index <= toIndex; index++) {
+            indexSet.add(Index.fromOneBased(index));
+        }
+
+        return indexSet;
+    }
+
 
     /**
      * Comparator for returning Index Sets
