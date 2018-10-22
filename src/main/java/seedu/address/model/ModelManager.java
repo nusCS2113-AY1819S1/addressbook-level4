@@ -6,8 +6,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -228,9 +230,18 @@ public class ModelManager extends ComponentManager implements Model {
      * Reinitialises the address book
      */
     @Override
-    public void deleteActivity(Date date, Index index) {
-        versionedAddressBook.deleteActivity(date, index);
+    public void deleteActivity(Activity activity) {
+        versionedAddressBook.deleteActivity(activity);
         indicateAddressBookChanged();
     }
 
+    @Override
+    public ObservableList<Activity> getActivityList(){
+        return versionedAddressBook.getActivityList();
+    }
+
+    @Override
+    public TreeMap<Date, ArrayList<Activity>> getSchedule(){
+        return versionedAddressBook.getSchedule();
+    }
 }

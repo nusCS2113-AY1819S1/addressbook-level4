@@ -5,18 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableMap;
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.person.Person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 public class Schedule {
-    private final Map<Date, ArrayList<Activity>> schedule = new HashMap<>();
-
+    private final TreeMap<Date, ArrayList<Activity>> schedule = new TreeMap<>();
 
     public Schedule () {
     }
@@ -29,14 +30,17 @@ public class Schedule {
         }
     }
 
-    public ArrayList<Activity> getActivities() {
-        ArrayList<Activity> activities = new ArrayList<>();
+    public ObservableList<Activity> getActivities() {
+        ObservableList<Activity> activities = FXCollections.observableArrayList();
         for (Date date : schedule.keySet()){
             activities.addAll(schedule.get(date));
         }
-        return new ArrayList<>(activities);
+        return FXCollections.unmodifiableObservableList(activities);
     }
 
+    public TreeMap<Date, ArrayList<Activity>> getSchedule() {
+        return schedule;
+    }
     public void add(Activity activity) {
         Date date = activity.getDate();
         if (!contains(date)) {
@@ -46,17 +50,10 @@ public class Schedule {
     }
 
     //TODO convert index to 1
-    public void delete(Date date, Index index) {
-        if (!contains(date)) {
-            //TODO add throw
-        }
-
-        if (schedule.get(date).size() <= index.getZeroBased()) {
-            //TODO add throw
-        }
-        schedule.get(date).remove(index.getZeroBased());
-        if (schedule.get(date).isEmpty()){
-            schedule.remove(date);
+    public void delete(Activity activity){
+        schedule.get(activity.getDate()).remove(activity);
+        if (schedule.get(activity.getDate()).isEmpty()){
+            schedule.remove(activity.getDate());
         }
     }
 

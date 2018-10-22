@@ -1,14 +1,17 @@
 //@@author LowGinWee
 package seedu.address.model.schedule;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Activity {
     private final Date date;
     private final String activity;
-    public static final String DATE_VALIDATION_REGEX = "";
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Date should be in \"DD/MM/YYYY\".";
+    public static final String DATE_VALIDATION_REGEX = "\\d{2}/\\d{2}/\\d{4}";
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Date should be in \"DD/MM/YYYY\" and must be a valid date.";
 
     public Activity(Date date, String activity){
             this.date = date;
@@ -36,6 +39,14 @@ public class Activity {
     }
 
     public static boolean isValidDate(String test){
+
+        DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        format.setLenient(false);
+        try {
+            format.parse(test);
+        } catch (ParseException e) {
+            return false;
+        }
         return test.matches(DATE_VALIDATION_REGEX);
     }
 }

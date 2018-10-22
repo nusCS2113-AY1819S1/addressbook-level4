@@ -57,62 +57,35 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 	}
 
 	private ScheduleCommand parseDelete(String args) throws ParseException{
-		ArgumentMultimap argMultimap =
-				ArgumentTokenizer.tokenize(
-						" " + args,
-						PREFIX_DATE);
-		if (!arePrefixesPresent(argMultimap,PREFIX_DATE)) {
-			throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
-		}
-
-		String[] input = argMultimap.getValue(PREFIX_DATE).get().split(" ", 2);
-		Date date = ParserUtil.parseDate(input[1]);
 
 		Index index;
 		try {
-			index = Index.fromOneBased(Integer.parseInt(input[1]));
+			index = Index.fromOneBased(Integer.parseInt(args));
 		} catch (NumberFormatException e){
 			throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
 		}
-		return new ScheduleDeleteCommand(date, index);
+		return new ScheduleDeleteCommand(index);
 	}
 
 	private ScheduleCommand parseEdit(String args) throws ParseException{
 		ArgumentMultimap argMultimap =
 				ArgumentTokenizer.tokenize(
 						" " + args,
-						PREFIX_DATE,
 						PREFIX_ACTIVITY);
-		if (!arePrefixesPresent(argMultimap,PREFIX_DATE, PREFIX_ACTIVITY)) {
+		if (!arePrefixesPresent(argMultimap, PREFIX_ACTIVITY)
+				|| !argMultimap.getPreamble().isEmpty()) {
 			throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
 		}
 
-		String[] input = argMultimap.getValue(PREFIX_DATE).get().split(" ", 2);
-		Date date = ParserUtil.parseDate(input[1]);
-
 		Index index;
 		try {
-			index = Index.fromOneBased(Integer.parseInt(input[1]));
+			index = Index.fromOneBased(Integer.parseInt(argMultimap.getPreamble()));
 		} catch (NumberFormatException e){
 			throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_USAGE));
 		}
 		String task = argMultimap.getValue(PREFIX_ACTIVITY).get();
-		Activity activity = new Activity(date, task);
-		return new ScheduleEditCommand(date, index, activity);
+		return new ScheduleEditCommand(index, task);
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	/**
 	 * Returns true if none of the prefixes contains empty {@code Optional} values in the given

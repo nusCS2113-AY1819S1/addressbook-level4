@@ -1,42 +1,46 @@
 package seedu.address.logic.commands;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.schedule.Activity;
 
+import java.rmi.activation.ActivationID;
 import java.util.Date;
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 
 public class ScheduleEditCommand extends ScheduleCommand{
 
-	private final Activity toAdd;
-	private final Date date;
+	private final String task;
 	private final Index index;
+	private final String MESSEGE_SUCCESS = "Task is edited";
 
 	/**
 	 * Creates an AddCommand to add the specified {@code Person}
 	 */
-	public ScheduleEditCommand(Date date, Index index, Activity activity) {
-		requireNonNull(activity);
-		toAdd = activity;
-		this.date = date;
+	public ScheduleEditCommand(Index index, String task) {
+		requireNonNull(task);
+		requireNonNull(index);
+		this.task = task;
 		this.index = index;
 	}
 
 	@Override
-	public CommandResult updateSchedule(Model model) {
-		model.deleteActivity(date, index);
+	public CommandResult updateSchedule(Model model) throws CommandException{
+		Activity toDelete = getActivityFromIndex(model, index);
+		Activity toAdd = new Activity(toDelete.getDate(), task);
+		model.deleteActivity(toDelete);
 		model.addActivity(toAdd);
-		return new CommandResult("success in adding scheudle");
+		return new CommandResult(MESSEGE_SUCCESS);
 	}
 
 	@Override
 	public boolean equals(Object other) {
 		return other == this // short circuit if same object
 				|| (other instanceof ScheduleEditCommand// instanceof handles nulls
-				&& toAdd.equals(((ScheduleEditCommand) other).toAdd)
-				&& date.equals(((ScheduleEditCommand) other).date)
+				&& task.equals(((ScheduleEditCommand) other).task)
 				&& index.equals(((ScheduleEditCommand) other).index));
 	}
 }

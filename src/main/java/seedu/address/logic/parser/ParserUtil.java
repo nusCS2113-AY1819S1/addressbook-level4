@@ -200,12 +200,12 @@ public class ParserUtil {
      */
     public static Date parseDate(String dateString) throws ParseException {
         String trimmedDate = dateString.trim();
-//        if (!Activity.isValidDate(trimmedDate)) {
-//            throw new ParseException(Activity.MESSAGE_DATE_CONSTRAINTS);
-//        }
+        if (!Activity.isValidDate(trimmedDate)) {
+            throw new ParseException(Activity.MESSAGE_DATE_CONSTRAINTS);
+        }
         StringTokenizer tokens = new StringTokenizer(trimmedDate, "/");
         int day = Integer.parseInt(tokens.nextToken()) ;
-        int month = Integer.parseInt(tokens.nextToken()) - 1;
+        int month = Integer.parseInt(tokens.nextToken());
         int year = Integer.parseInt(tokens.nextToken());
         Date date = Activity.toDate(day, month, year);
         return date;
