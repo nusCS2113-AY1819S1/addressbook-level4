@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/ChewKinWhye/main
 
-By: `Team T12-3`      Since: `Sep 2018`      Licence: `NUS`
+By: `Team T12-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 
@@ -149,6 +149,16 @@ Examples:
 * `changeStatus 1 q/20 os/Ready ns/Faulty` +
 The status of 20 arduinos would be changed from Ready to faulty
 
+=== Listing items under a specific tag: `tag`
+
+Finds and lists items whose tags contain any of the given keywords. This command is case insensitive +
+Format: `tag KEYWORD [MORE_KEYWORDS]
+
+Examples:
+
+* `tag Lab1` +
+Returns the items whose tags includes "Lab1"
+
 === Creating a loan list: `loanList`
 A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
 Format: `loanList n/NAME q/QUANTITY l/LOANER`
@@ -221,15 +231,7 @@ Examples:
 Shows the number of every item that has been lost +
 Format: `lost&found`
 
-=== Listing items under a specific tag: `tag`
 
-Finds and lists items whose tags contain any of the given keywords +
-Format: `tag KEYWORD [MORE_KEYWORDS]
-
-Examples:
-
-* `tag Lab1` +
-Returns the items with tag "Lab1"
 
 === Redoing the previously undone command : `redo`
 
