@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Todo;
 
 /**
  * The API of the Model component.
@@ -52,6 +53,9 @@ public interface Model {
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
+    /** Returns an unmodifiable view of the filtered todo task list */
+    ObservableList<Todo> getFilteredTodoList();
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
@@ -87,4 +91,15 @@ public interface Model {
      * Exports the current address book state to a .csv file.
      */
     void exportAddressBook();
+
+    /**
+     * Returns true if a todo task with the same fields as {@code todo} exists in the address book.
+     */
+    boolean hasTodo(Todo todo);
+
+    /**
+     * Adds the given todo task.
+     * {@code todo} must not already exist in the address book.
+     */
+    void addTodo(Todo todo);
 }

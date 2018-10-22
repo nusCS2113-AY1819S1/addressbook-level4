@@ -49,12 +49,12 @@ public class TodoCommand extends Command {
         model.addTodo(todo);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, todo));
+    }
 
-        @Override
-        public boolean equals(Object other) {
-            return other == this // short circuit if same object
-                    || (other instanceof TodoCommand // instanceof handles nulls
-                    && todo.equals(((TodoCommand) other).todo));
-        }
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof TodoCommand // instanceof handles nulls
+                && todo.equals(((TodoCommand) other).todo));
     }
 }
