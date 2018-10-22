@@ -99,8 +99,7 @@ public class EmailParser {
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
-        }
-        else {
+        } else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

@@ -56,10 +56,10 @@ public class EmailUtil {
     /**
      * Variables for Email Command
      */
+    private static EmailSettings emailSettings;
     private ArrayList<Candidate> candidates;
     private ArrayList<JobOffer> jobOffers;
     private boolean areRecipientsCandidates;
-    private static EmailSettings emailSettings;
 
     /**
      * Constructor

@@ -27,6 +27,7 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.logic.parser.Prefix;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.CandidateBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ReadOnlyCandidateBook;
@@ -149,7 +150,7 @@ public class CommandTestUtil {
             assertEquals(expectedMessage, result.feedbackToUser);
             assertEquals(expectedModel, actualModel);
             assertEquals(expectedCommandHistory, actualCommandHistory);
-        } catch (IOException | GeneralSecurityException | CommandException ce) {
+        } catch (IOException | GeneralSecurityException | CommandException | ParseException ce) {
             throw new AssertionError("Execution of command should not fail.", ce);
         }
     }
@@ -173,7 +174,7 @@ public class CommandTestUtil {
         try {
             command.execute(actualModel, actualCommandHistory);
             throw new AssertionError("The expected CommandException was not thrown.");
-        } catch (IOException | GeneralSecurityException | CommandException e) {
+        } catch (IOException | GeneralSecurityException | CommandException | ParseException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedCandidateBook, actualModel.getCandidateBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredCandidateList());

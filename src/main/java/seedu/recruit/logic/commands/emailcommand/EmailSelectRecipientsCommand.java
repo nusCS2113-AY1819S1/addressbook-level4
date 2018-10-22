@@ -4,12 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import javafx.collections.ObservableList;
-import org.apache.http.ParseException;
+
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
