@@ -147,7 +147,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillSecurityCommandBox() {
         SecurityBox commandBox = new SecurityBox(security);
+        commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        SecurityResultDisplay securityResultDisplay = new SecurityResultDisplay();
+        resultDisplayPlaceholder.getChildren().clear();
+        resultDisplayPlaceholder.getChildren().add(securityResultDisplay.getRoot());
     }
 
     /**
@@ -176,12 +181,14 @@ public class MainWindow extends UiPart<Stage> {
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().clear();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
