@@ -70,6 +70,8 @@ public class CommandTestUtil {
     public static final String VALID_GENDER_FLAG_FALSE = "false";
     public static final String VALID_NATIONALITY_FLAG_TRUE = "true";
     public static final String VALID_NATIONALITY_FLAG_FALSE = "false";
+    public static final String VALID_FLAG_0 = "0";
+    public static final String VALID_FLAG_1 = "1";
     public static final String INVALID_GENDER_FLAG_NUMBER = "4";
     public static final String INVALID_GENDER_FLAG_WORD = "alsfe";
     public static final String INVALID_NATIONALITY_FLAG_NUMBER = "6";
@@ -114,6 +116,10 @@ public class CommandTestUtil {
     public static final String GENDER_FLAG_TRUE = " " + PREFIX_GENDER + VALID_GENDER_FLAG_TRUE;
     public static final String NATIONALITY_FLAG_FALSE = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_FLAG_FALSE;
     public static final String NATIONALITY_FLAG_TRUE = " " + PREFIX_NATIONALITY + VALID_NATIONALITY_FLAG_TRUE;
+    public static final String GENDER_FLAG_BOOLEAN_FALSE = " " + PREFIX_GENDER + VALID_FLAG_0;
+    public static final String GENDER_FLAG_BOOLEAN_TRUE = " " + PREFIX_GENDER + VALID_FLAG_1;
+    public static final String NATIONALITY_FLAG_BOOLEAN_FALSE = " " + PREFIX_NATIONALITY + VALID_FLAG_0;
+    public static final String NATIONALITY_FLAG_BOOLEAN_TRUE = " " + PREFIX_NATIONALITY + VALID_FLAG_1;
 
     public static final String GENDER_FLAG_INVALID_NUMBER = " " + PREFIX_GENDER + INVALID_GENDER_FLAG_NUMBER;
     public static final String GENDER_FLAG_INVALID_WORD = " " + PREFIX_GENDER + INVALID_GENDER_FLAG_WORD;
