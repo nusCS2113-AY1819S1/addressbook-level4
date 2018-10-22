@@ -41,6 +41,7 @@ public class ListCandidateCommandTest {
     @Ignore
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST);
-        assertCommandSuccess(new ListCandidateCommand(), model, commandHistory, ListCandidateCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ListCandidateCommand(), model, commandHistory,
+                ListCandidateCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
