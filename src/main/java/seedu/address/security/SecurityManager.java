@@ -18,7 +18,6 @@ public class SecurityManager extends ComponentManager implements Security {
     private Model model;
     private String username;
     private String password;
-    private User user;
     private Logic logic;
 
     public SecurityManager(boolean isTest, Model model, Logic logic) {
@@ -37,8 +36,8 @@ public class SecurityManager extends ComponentManager implements Security {
     public void login(String username, String password) {
         if (username.equals(this.username) && password.equals(this.password)) {
             this.isAuthenticated = true;
-            //Links User to Security Manager
-            this.user = new User(username, model);
+            //Instantiates User in Model manager
+            model.matchUserToPerson(username);
             //TODO Implement logger
             //System.out.println("Correct Password");
             raise(new SuccessfulLoginEvent());
@@ -62,7 +61,7 @@ public class SecurityManager extends ComponentManager implements Security {
         try {
             logic.execute("add n/" + username + " e/" + email + " p/" + phone + " a/" + address);
             this.isAuthenticated = true;
-            this.user = new User(username, model);
+            model.matchUserToPerson(username);
             return 1;
         } catch (CommandException e) {
             return 2;
