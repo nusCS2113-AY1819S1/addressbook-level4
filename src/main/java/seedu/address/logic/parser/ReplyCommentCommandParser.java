@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ReplyCommentCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.Name;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -29,7 +28,6 @@ public class ReplyCommentCommandParser implements Parser<ReplyCommentCommand> {
 
         int line;
         String comment;
-        Name name;
         Index index;
 
         try {
@@ -48,12 +46,6 @@ public class ReplyCommentCommandParser implements Parser<ReplyCommentCommand> {
         }
         comment = ParserUtil.parseComment(argMultimap.getValue(PREFIX_COMMENT).get());
 
-
-        if (!argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ReplyCommentCommand.MESSAGE));
-        }
-        //editCommentDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        return new ReplyCommentCommand(index , line , comment, name);
+        return new ReplyCommentCommand(index , line , comment);
     }
 }

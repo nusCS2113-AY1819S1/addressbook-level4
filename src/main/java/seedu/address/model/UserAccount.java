@@ -20,6 +20,7 @@ public class UserAccount {
     private JsonUserStorage userStorage;
     private User user;
     private boolean loginStatus;
+    private boolean adminStatus;
 
     public UserAccount() {
         final Path userFolderPath = Paths.get("data");
@@ -28,6 +29,7 @@ public class UserAccount {
         final Password password = new Password("stub");
         user = new User(username, password);
         loginStatus = false;
+        adminStatus = false;
 
         try {
             userStorage = new JsonUserStorage(userFolderPath, userFilePath);
@@ -50,12 +52,47 @@ public class UserAccount {
             if (userAccounts.has(loggedUsername)) {
                 JsonElement password = userAccounts.get(loggedUsername);
                 isPresent = loggedPassword.equals(password.getAsString());
+                adminStatus = loggedUsername.equals("admin");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         return isPresent;
+    }
+    /**
+     * Returns true if user is logged in.
+     */
+    public boolean authenticate() {
+        return loginStatus;
+    }
+
+    /**
+     * Returns true if admin is logged in.
+     */
+    public boolean getAdminStatus() {
+        return adminStatus;
+    }
+
+    /**
+     * Returns logged in user.
+     */
+    public User getUser(User user) {
+        return user;
+    }
+
+    /**
+     * Creates a new user profile in the JSON file.
+     */
+    public void createUser(User user) {
+        String loggedUsername = user.getUsername().toString();
+        String loggedPassword = user.getPassword().toString();
+
+        try {
+            userStorage.createUser(loggedUsername, loggedPassword);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

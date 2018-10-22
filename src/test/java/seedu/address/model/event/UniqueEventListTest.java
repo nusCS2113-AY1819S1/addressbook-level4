@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalEvents.ALICE;
+import static seedu.address.testutil.TypicalEvents.BOB;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,8 +16,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.event.exceptions.DuplicatePersonException;
-import seedu.address.model.event.exceptions.PersonNotFoundException;
+import seedu.address.model.event.exceptions.DuplicateEventException;
+import seedu.address.model.event.exceptions.EventNotFoundException;
+
 import seedu.address.testutil.EventBuilder;
 
 public class UniqueEventListTest {
@@ -27,24 +28,24 @@ public class UniqueEventListTest {
     private final UniqueEventList uniqueEventList = new UniqueEventList();
 
     @Test
-    public void contains_nullPerson_throwsNullPointerException() {
+    public void contains_nullEvent_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueEventList.contains(null);
     }
 
     @Test
-    public void contains_personNotInList_returnsFalse() {
+    public void contains_EventNotInList_returnsFalse() {
         assertFalse(uniqueEventList.contains(ALICE));
     }
 
     @Test
-    public void contains_personInList_returnsTrue() {
+    public void contains_EventInList_returnsTrue() {
         uniqueEventList.add(ALICE);
         assertTrue(uniqueEventList.contains(ALICE));
     }
 
     @Test
-    public void contains_personWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_EventWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(ALICE);
         Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -52,38 +53,38 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void add_nullPerson_throwsNullPointerException() {
+    public void add_nullEvent_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueEventList.add(null);
     }
 
     @Test
-    public void add_duplicatePerson_throwsDuplicatePersonException() {
+    public void add_duplicateEvent_throwsDuplicateEventException() {
         uniqueEventList.add(ALICE);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         uniqueEventList.add(ALICE);
     }
 
     @Test
-    public void setPerson_nullTargetPerson_throwsNullPointerException() {
+    public void setEvent_nullTargetEvent_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueEventList.setEvent(null, ALICE);
     }
 
     @Test
-    public void setPerson_nullEditedPerson_throwsNullPointerException() {
+    public void setEvent_nullEditedEvent_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueEventList.setEvent(ALICE, null);
     }
 
     @Test
-    public void setPerson_targetPersonNotInList_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+    public void setEvent_targetEventNotInList_throwsEventNotFoundException() {
+        thrown.expect(EventNotFoundException.class);
         uniqueEventList.setEvent(ALICE, ALICE);
     }
 
     @Test
-    public void setPerson_editedPersonIsSamePerson_success() {
+    public void setEvent_editedEventIsSameEvent_success() {
         uniqueEventList.add(ALICE);
         uniqueEventList.setEvent(ALICE, ALICE);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
@@ -92,7 +93,7 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasSameIdentity_success() {
+    public void setEvent_editedEventHasSameIdentity_success() {
         uniqueEventList.add(ALICE);
         Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -103,7 +104,7 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasDifferentIdentity_success() {
+    public void setEvent_editedEventHasDifferentIdentity_success() {
         uniqueEventList.add(ALICE);
         uniqueEventList.setEvent(ALICE, BOB);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
@@ -112,27 +113,27 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void setPerson_editedPersonHasNonUniqueIdentity_throwsDuplicatePersonException() {
+    public void setEvent_editedEventHasNonUniqueIdentity_throwsDuplicateEventException() {
         uniqueEventList.add(ALICE);
         uniqueEventList.add(BOB);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         uniqueEventList.setEvent(ALICE, BOB);
     }
 
     @Test
-    public void remove_nullPerson_throwsNullPointerException() {
+    public void remove_nullEvent_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueEventList.remove(null);
     }
 
     @Test
-    public void remove_personDoesNotExist_throwsPersonNotFoundException() {
-        thrown.expect(PersonNotFoundException.class);
+    public void remove_EventDoesNotExist_throwsEventNotFoundException() {
+        thrown.expect(EventNotFoundException.class);
         uniqueEventList.remove(ALICE);
     }
 
     @Test
-    public void remove_existingPerson_removesPerson() {
+    public void remove_existingEvent_removesEvent() {
         uniqueEventList.add(ALICE);
         uniqueEventList.remove(ALICE);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
@@ -140,13 +141,13 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void setPersons_nullUniquePersonList_throwsNullPointerException() {
+    public void setEvents_nullUniqueEventList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueEventList.setEvents((UniqueEventList) null);
     }
 
     @Test
-    public void setPersons_uniquePersonList_replacesOwnListWithProvidedUniquePersonList() {
+    public void setEvents_uniqueEventList_replacesOwnListWithProvidedUniqueEventList() {
         uniqueEventList.add(ALICE);
         UniqueEventList expectedUniqueEventList = new UniqueEventList();
         expectedUniqueEventList.add(BOB);
@@ -155,13 +156,13 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void setPersons_nullList_throwsNullPointerException() {
+    public void setEvents_nullList_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueEventList.setEvents((List<Event>) null);
     }
 
     @Test
-    public void setPersons_list_replacesOwnListWithProvidedList() {
+    public void setEvents_list_replacesOwnListWithProvidedList() {
         uniqueEventList.add(ALICE);
         List<Event> eventList = Collections.singletonList(BOB);
         uniqueEventList.setEvents(eventList);
@@ -171,9 +172,9 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void setPersons_listWithDuplicatePersons_throwsDuplicatePersonException() {
+    public void setEvents_listWithDuplicateEvents_throwsDuplicateEventException() {
         List<Event> listWithDuplicateEvents = Arrays.asList(ALICE, ALICE);
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         uniqueEventList.setEvents(listWithDuplicateEvents);
     }
 

@@ -2,8 +2,9 @@ package seedu.address.ui;
 
 import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
+import static seedu.address.model.DateTimeManager.PAGE_DATE_FORMAT;
 import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 
@@ -51,6 +52,8 @@ public class BrowserPanelTest extends GuiUnitTest {
                 + ALICE.getEmail()
                 + "&address="
                 + ALICE.getVenue().value.replaceAll(" ", "%20").replaceAll("#", "%23")
+                + "&dateTime="
+                + PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime).replaceAll(" ", "%20")
                 + "&tags="
                 + ALICE.getTagsString());
 

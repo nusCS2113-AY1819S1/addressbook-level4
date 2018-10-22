@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -20,8 +21,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.NameContainsKeywordsPredicate;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.model.event.EventContainsKeywordsPredicate;
+import seedu.address.testutil.EditEventDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -40,6 +41,8 @@ public class CommandTestUtil {
     public static final String VALID_EMAIL_BOB = "bob@example.com";
     public static final String VALID_VENUE_AMY = "Block 312, Amy Street 1";
     public static final String VALID_VENUE_BOB = "Block 123, Bobby Street 3";
+    public static final String VALID_DATETIME_AMY = "17/8/2018 21:15";
+    public static final String VALID_DATETIME_BOB = "7/7/2017 7:07";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -55,6 +58,8 @@ public class CommandTestUtil {
     public static final String EMAIL_DESC_BOB = " " + PREFIX_EMAIL + VALID_EMAIL_BOB;
     public static final String VENUE_DESC_AMY = " " + PREFIX_VENUE + VALID_VENUE_AMY;
     public static final String VENUE_DESC_BOB = " " + PREFIX_VENUE + VALID_VENUE_BOB;
+    public static final String DATETIME_DESC_AMY = " " + PREFIX_DATETIME + VALID_DATETIME_AMY;
+    public static final String DATETIME_DESC_BOB = " " + PREFIX_DATETIME + VALID_DATETIME_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
@@ -65,20 +70,22 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_VENUE_DESC = " " + PREFIX_VENUE; // empty string not allowed for venues
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_DATETIME_DESC = " " + PREFIX_DATETIME + "31-12-2018 4.30"; //Incorrect format
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
-    public static final EditCommand.EditPersonDescriptor DESC_AMY;
-    public static final EditCommand.EditPersonDescriptor DESC_BOB;
+    public static final EditCommand.EditEventDescriptor DESC_AMY;
+    public static final EditCommand.EditEventDescriptor DESC_BOB;
 
     static {
-        DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY)
+        DESC_AMY = new EditEventDescriptorBuilder().withName(VALID_NAME_AMY).withContact(VALID_CONTACT_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withVenue(VALID_VENUE_AMY)
-                .withTags(VALID_TAG_FRIEND).withAttendees(VALID_ATTENDEE_HAN).build();
-        DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).withContact(VALID_CONTACT_BOB)
+                .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_FRIEND)
+                .withAttendees(VALID_ATTENDEE_HAN).build();
+        DESC_BOB = new EditEventDescriptorBuilder().withName(VALID_NAME_BOB).withContact(VALID_CONTACT_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withVenue(VALID_VENUE_BOB)
-                .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+                .withDateTime(VALID_DATETIME_AMY).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
 
     /**
@@ -88,7 +95,7 @@ public class CommandTestUtil {
      * - the {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandSuccess(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            String expectedMessage, Model expectedModel) {
+                                            String expectedMessage, Model expectedModel) {
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
         try {
             CommandResult result = command.execute(actualModel, actualCommandHistory);
@@ -108,7 +115,7 @@ public class CommandTestUtil {
      * - {@code actualCommandHistory} remains unchanged.
      */
     public static void assertCommandFailure(Command command, Model actualModel, CommandHistory actualCommandHistory,
-            String expectedMessage) {
+                                            String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         EventManager expectedEventManager = new EventManager(actualModel.getEventManager());
@@ -129,22 +136,22 @@ public class CommandTestUtil {
 
     /**
      * Updates {@code model}'s filtered list to show only the event at the given {@code targetIndex} in the
-     * {@code model}'s address book.
+     * {@code model}'s event manager.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showEventAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredEventList().size());
 
         Event event = model.getFilteredEventList().get(targetIndex.getZeroBased());
         final String[] splitName = event.getName().fullName.split("\\s+");
-        model.updateFilteredEventList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredEventList(new EventContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredEventList().size());
     }
 
     /**
-     * Deletes the first event in {@code model}'s filtered list from {@code model}'s address book.
+     * Deletes the first event in {@code model}'s filtered list from {@code model}'s event manager.
      */
-    public static void deleteFirstPerson(Model model) {
+    public static void deleteFirstEvent(Model model) {
         Event firstEvent = model.getFilteredEventList().get(0);
         model.deleteEvent(firstEvent);
         model.commitEventManager();

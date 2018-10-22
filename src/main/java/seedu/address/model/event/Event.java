@@ -4,6 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +19,6 @@ import seedu.address.model.tag.Tag;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Event {
-
     // Identity fields
     private final Name name;
     private final Contact contact;
@@ -27,53 +27,49 @@ public class Event {
 
     // Data fields
     private final Venue venue;
+    private final DateTime dateTime;
     private final Set<Tag> tags = new HashSet<>();
     private final Set<Attendee> attendees = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, Set<Tag> tags,
+    public Event(Name name, Contact contact, Phone phone, Email email, Venue venue, DateTime datetime, Set<Tag> tags,
                  Set<Attendee> attendees) {
-        requireAllNonNull(name, contact, phone, email, venue, tags, attendees);
+        requireAllNonNull(name, contact, phone, email, venue, datetime);
 
         this.name = name;
         this.contact = contact;
         this.phone = phone;
         this.email = email;
         this.venue = venue;
+        this.dateTime = datetime;
         this.tags.addAll(tags);
         this.attendees.addAll(attendees);
     }
 
     public Name getName() {
-
         return name;
-
     }
 
     public Contact getContact() {
-
         return contact;
-
     }
 
     public Phone getPhone() {
-
         return phone;
-
     }
 
     public Email getEmail() {
-
         return email;
-
     }
 
     public Venue getVenue() {
-
         return venue;
+    }
 
+    public DateTime getDateTime () {
+        return dateTime;
     }
 
     /**
@@ -136,6 +132,7 @@ public class Event {
                 && otherEvent.getPhone().equals(getPhone())
                 && otherEvent.getEmail().equals(getEmail())
                 && otherEvent.getVenue().equals(getVenue())
+                && otherEvent.getDateTime().equals(getDateTime())
                 && otherEvent.getTags().equals(getTags())
                 && otherEvent.getAttendees().equals(getAttendees());
     }
@@ -143,7 +140,7 @@ public class Event {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, contact, phone, email, venue, tags, attendees);
+        return Objects.hash(name, contact, phone, email, venue, dateTime, tags, attendees);
     }
 
     @Override
@@ -158,6 +155,8 @@ public class Event {
                 .append(getEmail())
                 .append(" Venue: ")
                 .append(getVenue())
+                .append(" Time: ")
+                .append(getDateTime())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
 

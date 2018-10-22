@@ -7,17 +7,19 @@
         <phone>94351253</phone>
         <email>alice@example.com</email>
         <venue>123, Jurong West Ave 6, #08-111</venue>
+        <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
         <tagged>friends</tagged>
         <attending>Peter Parker</attending>
     </events>
 
-    <!-- Event with same identity as Alice Pauline -->
+    <!-- Event with same identity as Inter Neighbourhood Cooking Competition -->
     <events>
         <name>Inter Neighbourhood Cooking Competition</name>
         <contact>Alice Pauline</contact>
         <phone>94351253</phone>
         <email>pauline@example.com</email>
         <venue>4th street</venue>
+        <dateTime isPrivate="false">10/10/2010 10:10</dateTime>
     </events>
 
 </eventmanager>

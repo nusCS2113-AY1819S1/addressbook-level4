@@ -5,6 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Contact;
+import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
@@ -23,12 +24,14 @@ public class EventBuilder {
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_VENUE = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
 
     private Name name;
     private Contact contact;
     private Phone phone;
     private Email email;
     private Venue venue;
+    private DateTime datetime;
     private Set<Tag> tags;
     private Set<Attendee> attendees;
 
@@ -38,6 +41,8 @@ public class EventBuilder {
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
         venue = new Venue(DEFAULT_VENUE);
+        datetime = new DateTime(DEFAULT_DATETIME);
+
         tags = new HashSet<>();
         attendees = new HashSet<>();
     }
@@ -51,6 +56,8 @@ public class EventBuilder {
         phone = eventToCopy.getPhone();
         email = eventToCopy.getEmail();
         venue = eventToCopy.getVenue();
+        datetime = eventToCopy.getDateTime();
+
         tags = new HashSet<>(eventToCopy.getTags());
         attendees = new HashSet<>(eventToCopy.getAttendees());
     }
@@ -111,8 +118,15 @@ public class EventBuilder {
         return this;
     }
 
-    public Event build() {
-        return new Event(name, contact, phone, email, venue, tags, attendees);
+    /**
+     * Sets the {@code DateTime} of the {@code Event} that we are building.
+     */
+    public EventBuilder withDateTime(String datetime) {
+        this.datetime = new DateTime(datetime);
+        return this;
     }
 
+    public Event build() {
+        return new Event(name, contact, phone, email, venue, datetime, tags, attendees);
+    }
 }

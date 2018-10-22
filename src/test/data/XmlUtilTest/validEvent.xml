@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!-- Event with an invalid phone field -->
 <event>
     <name>Night Cycling</name>
     <contact>Hans Muster</contact>
-    <phone>9482asf424</phone>
+    <phone>9482424</phone>
     <email>hans@example</email>
     <venue>4th street</venue>
     <tagged>friends</tagged>
     <attending>Mary Kate</attending>
+    <dateTime>10/10/2010 10:10</dateTime>
 </event>

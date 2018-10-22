@@ -5,8 +5,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEvents.ALICE;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,7 +20,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.event.Event;
-import seedu.address.model.event.exceptions.DuplicatePersonException;
+import seedu.address.model.event.exceptions.DuplicateEventException;
 import seedu.address.testutil.EventBuilder;
 
 public class EventManagerTest {
@@ -43,42 +43,42 @@ public class EventManagerTest {
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        EventManager newData = getTypicalAddressBook();
+        EventManager newData = getTypicalEventManager();
         eventManager.resetData(newData);
         assertEquals(newData, eventManager);
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicateEvents_throwsDuplicateEventException() {
         // Two events with the same identity fields
         Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Event> newEvents = Arrays.asList(ALICE, editedAlice);
         EventManagerStub newData = new EventManagerStub(newEvents);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateEventException.class);
         eventManager.resetData(newData);
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasEvent_nullEvent_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         eventManager.hasEvent(null);
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasEvent_eventNotInAddressBook_returnsFalse() {
         assertFalse(eventManager.hasEvent(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasEvent_eventInAddressBook_returnsTrue() {
         eventManager.addEvent(ALICE);
         assertTrue(eventManager.hasEvent(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
         eventManager.addEvent(ALICE);
         Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
@@ -86,7 +86,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getEventList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         eventManager.getEventList().remove(0);
     }

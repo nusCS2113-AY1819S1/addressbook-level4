@@ -27,6 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Initializes a ModelManager with the given eventManager and userPrefs.
+     * FilteredEvents will be default to be automatically sorted by DateTime
      */
     public ModelManager(ReadOnlyEventManager eventManager, UserPrefs userPrefs) {
         super();
@@ -60,9 +61,25 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean authenticate() {
+        return userAccount.authenticate();
+    }
+
+    @Override
+    public boolean getAdminStatus() {
+        return userAccount.getAdminStatus();
+    }
+
+    @Override
     public boolean userExists(User user) {
         requireNonNull(user);
         return userAccount.userExists(user);
+    }
+
+    @Override
+    public void createUser(User user) {
+        requireNonNull(user);
+        userAccount.createUser(user);
     }
 
     @Override

@@ -4,6 +4,7 @@ import static guitests.guihandles.WebViewUtil.waitUntilBrowserLoaded;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.model.DateTimeManager.PAGE_DATE_FORMAT;
 import static seedu.address.ui.BrowserPanel.DEFAULT_PAGE;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
@@ -25,10 +26,10 @@ import org.junit.ClassRule;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.EventCardHandle;
+import guitests.guihandles.EventListPanelHandle;
 import guitests.guihandles.MainMenuHandle;
 import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.PersonCardHandle;
-import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
 import seedu.address.MainApp;
@@ -41,7 +42,8 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.model.EventManager;
 import seedu.address.model.Model;
-import seedu.address.testutil.TypicalPersons;
+import seedu.address.model.event.DateTime;
+import seedu.address.testutil.TypicalEvents;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
 
@@ -86,7 +88,7 @@ public abstract class EventManagerSystemTest {
      * Returns the data to be loaded into the file in {@link #getDataFileLocation()}.
      */
     protected EventManager getInitialData() {
-        return TypicalPersons.getTypicalAddressBook();
+        return TypicalEvents.getTypicalEventManager();
     }
 
     /**
@@ -104,8 +106,8 @@ public abstract class EventManagerSystemTest {
         return mainWindowHandle.getCommandBox();
     }
 
-    public PersonListPanelHandle getPersonListPanel() {
-        return mainWindowHandle.getPersonListPanel();
+    public EventListPanelHandle getEventListPanel() {
+        return mainWindowHandle.getEventListPanel();
     }
 
     public MainMenuHandle getMainMenu() {
@@ -140,17 +142,18 @@ public abstract class EventManagerSystemTest {
     }
 
     /**
-     * Displays all persons in the address book.
+     * Displays all Events in the event manager
+     * .
      */
-    protected void showAllPersons() {
+    protected void showAllEvents() {
         executeCommand(ListCommand.COMMAND_WORD);
         assertEquals(getModel().getEventManager().getEventList().size(), getModel().getFilteredEventList().size());
     }
 
     /**
-     * Displays all persons with any parts of their names matching {@code keyword} (case-insensitive).
+     * Displays all Events with any parts of their names matching {@code keyword} (case-insensitive).
      */
-    protected void showPersonsWithName(String keyword) {
+    protected void showEventsWithName(String keyword) {
         executeCommand(FindCommand.COMMAND_WORD + " " + keyword);
         assertTrue(getModel().getFilteredEventList().size() < getModel().getEventManager().getEventList().size());
     }
@@ -158,15 +161,16 @@ public abstract class EventManagerSystemTest {
     /**
      * Selects the event at {@code index} of the displayed list.
      */
-    protected void selectPerson(Index index) {
+    protected void selectEvent(Index index) {
         executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
-        assertEquals(index.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(index.getZeroBased(), getEventListPanel().getSelectedCardIndex());
     }
 
     /**
-     * Deletes all persons in the address book.
+     * Deletes all Events in the event manager
+     * .
      */
-    protected void deleteAllPersons() {
+    protected void deleteAllEvents() {
         executeCommand(ClearCommand.COMMAND_WORD);
         assertEquals(0, getModel().getEventManager().getEventList().size());
     }
@@ -174,18 +178,18 @@ public abstract class EventManagerSystemTest {
     /**
      * Asserts that the {@code CommandBox} displays {@code expectedCommandInput}, the {@code ResultDisplay} displays
      * {@code expectedResultMessage}, the storage contains the same event objects as {@code expectedModel}
-     * and the event list panel displays the persons in the model correctly.
+     * and the event list panel displays the Events in the model correctly.
      */
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new EventManager(expectedModel.getEventManager()), testApp.readStorageAddressBook());
-        assertListMatching(getPersonListPanel(), expectedModel.getFilteredEventList());
+        assertListMatching(getEventListPanel(), expectedModel.getFilteredEventList());
     }
 
     /**
-     * Calls {@code BrowserPanelHandle}, {@code PersonListPanelHandle} and {@code StatusBarFooterHandle} to remember
+     * Calls {@code BrowserPanelHandle}, {@code EventListPanelHandle} and {@code StatusBarFooterHandle} to remember
      * their current state.
      */
     private void rememberStates() {
@@ -193,7 +197,7 @@ public abstract class EventManagerSystemTest {
         getBrowserPanel().rememberUrl();
         statusBarFooterHandle.rememberSaveLocation();
         statusBarFooterHandle.rememberSyncStatus();
-        getPersonListPanel().rememberSelectedPersonCard();
+        getEventListPanel().rememberSelectedEventCard();
     }
 
     /**
@@ -203,18 +207,19 @@ public abstract class EventManagerSystemTest {
      */
     protected void assertSelectedCardDeselected() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isAnyCardSelected());
+        assertFalse(getEventListPanel().isAnyCardSelected());
     }
 
     /**
      * Asserts that the browser's url is changed to display the details of the event in the event list panel at
      * {@code expectedSelectedCardIndex}, and only the card at {@code expectedSelectedCardIndex} is selected.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+     * @see EventListPanelHandle#isSelectedEventCardChanged()
      */
     protected void assertSelectedCardChanged(Index expectedSelectedCardIndex) {
-        getPersonListPanel().navigateToCard(getPersonListPanel().getSelectedCardIndex());
-        PersonCardHandle selectedCardHandle = getPersonListPanel().getHandleToSelectedCard();
+        getEventListPanel().navigateToCard(getEventListPanel().getSelectedCardIndex());
+        EventCardHandle selectedCardHandle = getEventListPanel().getHandleToSelectedCard();
+        DateTime selectedCardHandleDateTime = new DateTime(selectedCardHandle.getDatetime());
         URL expectedUrl;
         try {
 
@@ -229,6 +234,8 @@ public abstract class EventManagerSystemTest {
                     + selectedCardHandle.getEmail()
                     + "&address="
                     + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + "&dateTime="
+                    + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime).replaceAll(" ", "%20")
                     + "&tags="
                     + selectedCardHandle.getTagsString().replaceAll(" ", "%20"));
         } catch (MalformedURLException mue) {
@@ -236,17 +243,17 @@ public abstract class EventManagerSystemTest {
         }
         assertEquals(expectedUrl, getBrowserPanel().getLoadedUrl());
 
-        assertEquals(expectedSelectedCardIndex.getZeroBased(), getPersonListPanel().getSelectedCardIndex());
+        assertEquals(expectedSelectedCardIndex.getZeroBased(), getEventListPanel().getSelectedCardIndex());
     }
 
     /**
      * Asserts that the browser's url and the selected card in the event list panel remain unchanged.
      * @see BrowserPanelHandle#isUrlChanged()
-     * @see PersonListPanelHandle#isSelectedPersonCardChanged()
+     * @see EventListPanelHandle#isSelectedEventCardChanged()
      */
     protected void assertSelectedCardUnchanged() {
         assertFalse(getBrowserPanel().isUrlChanged());
-        assertFalse(getPersonListPanel().isSelectedPersonCardChanged());
+        assertFalse(getEventListPanel().isSelectedEventCardChanged());
     }
 
     /**
@@ -290,7 +297,7 @@ public abstract class EventManagerSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
-        assertListMatching(getPersonListPanel(), getModel().getFilteredEventList());
+        assertListMatching(getEventListPanel(), getModel().getFilteredEventList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),
                 getStatusBarFooter().getSaveLocation());

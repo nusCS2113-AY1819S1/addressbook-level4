@@ -33,15 +33,15 @@ public class AddCommentCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_COMMENT + "johndoe@example.com is here";
 
-    public static final String MESSAGE_REPLY_COMMENT = "Comment [%1$s] replied for Event %2$s";
+    public static final String MESSAGE_ADD_COMMENT = "Comment [%1$s] replied for Event %2$s";
 
     private final Index index;
-    private final EditCommand.EditPersonDescriptor editCommentDescriptor;
+    private final EditCommand.EditEventDescriptor editCommentDescriptor;
     private String comment = null;
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editPersonDescriptor details to edit the event with
+     * @param editEventDescriptor details to edit the event with
      */
     public AddCommentCommand(Index index, String comment) {
         requireNonNull(index);
@@ -49,7 +49,7 @@ public class AddCommentCommand extends Command {
 
         this.index = index;
         this.comment = comment;
-        this.editCommentDescriptor = new EditCommand.EditPersonDescriptor();
+        this.editCommentDescriptor = new EditCommand.EditEventDescriptor();
     }
 
     public String getComment() {
@@ -58,6 +58,14 @@ public class AddCommentCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
+        List<Event> filteredEventList = model.getFilteredEventList();
+
+
+        if (index.getZeroBased() >= filteredEventList.size()) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
+
         String test =
                 "<span>Comment Section</span>\n"
                         + "<ol>\n"
@@ -84,23 +92,15 @@ public class AddCommentCommand extends Command {
             e.printStackTrace();
         }
 
-        requireNonNull(model);
-        List<Event> filteredEventList = model.getFilteredEventList();
-
-
-        if (index.getZeroBased() >= filteredEventList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
-        }
-
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        Event editedEvent = EditCommand.createEditedPerson(eventToEdit, editCommentDescriptor);
+        Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
 
-        return new CommandResult(String.format(MESSAGE_REPLY_COMMENT, getComment(), index.getOneBased()));
+        return new CommandResult(String.format(MESSAGE_ADD_COMMENT, getComment(), index.getOneBased()));
     }
 
 }

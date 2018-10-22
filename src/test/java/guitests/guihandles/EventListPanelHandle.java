@@ -11,24 +11,24 @@ import seedu.address.model.event.Event;
 /**
  * Provides a handle for {@code EventListPanel} containing the list of {@code EventCard}.
  */
-public class PersonListPanelHandle extends NodeHandle<ListView<Event>> {
-    public static final String PERSON_LIST_VIEW_ID = "#personListView";
+public class EventListPanelHandle extends NodeHandle<ListView<Event>> {
+    public static final String EVENT_LIST_VIEW_ID = "#eventListView";
 
     private static final String CARD_PANE_ID = "#cardPane";
 
-    private Optional<Event> lastRememberedSelectedPersonCard;
+    private Optional<Event> lastRememberedSelectedEventCard;
 
-    public PersonListPanelHandle(ListView<Event> personListPanelNode) {
+    public EventListPanelHandle(ListView<Event> personListPanelNode) {
         super(personListPanelNode);
     }
 
     /**
-     * Returns a handle to the selected {@code PersonCardHandle}.
+     * Returns a handle to the selected {@code EventCardHandle}.
      * A maximum of 1 item can be selected at any time.
      * @throws AssertionError if no card is selected, or more than 1 card is selected.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getHandleToSelectedCard() {
+    public EventCardHandle getHandleToSelectedCard() {
         List<Event> selectedEventList = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedEventList.size() != 1) {
@@ -36,7 +36,7 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Event>> {
         }
 
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
+                .map(EventCardHandle::new)
                 .filter(handle -> handle.equals(selectedEventList.get(0)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
@@ -101,15 +101,15 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Event>> {
      * Returns the event card handle of a event associated with the {@code index} in the list.
      * @throws IllegalStateException if the selected card is currently not in the scene graph.
      */
-    public PersonCardHandle getPersonCardHandle(int index) {
+    public EventCardHandle getEventCardHandle(int index) {
         return getAllCardNodes().stream()
-                .map(PersonCardHandle::new)
-                .filter(handle -> handle.equals(getPerson(index)))
+                .map(EventCardHandle::new)
+                .filter(handle -> handle.equals(getEvent(index)))
                 .findFirst()
                 .orElseThrow(IllegalStateException::new);
     }
 
-    private Event getPerson(int index) {
+    private Event getEvent(int index) {
         return getRootNode().getItems().get(index);
     }
 
@@ -125,28 +125,28 @@ public class PersonListPanelHandle extends NodeHandle<ListView<Event>> {
     /**
      * Remembers the selected {@code EventCard} in the list.
      */
-    public void rememberSelectedPersonCard() {
+    public void rememberSelectedEventCard() {
         List<Event> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            lastRememberedSelectedPersonCard = Optional.empty();
+            lastRememberedSelectedEventCard = Optional.empty();
         } else {
-            lastRememberedSelectedPersonCard = Optional.of(selectedItems.get(0));
+            lastRememberedSelectedEventCard = Optional.of(selectedItems.get(0));
         }
     }
 
     /**
      * Returns true if the selected {@code EventCard} is different from the value remembered by the most recent
-     * {@code rememberSelectedPersonCard()} call.
+     * {@code rememberSelectedEventCard()} call.
      */
-    public boolean isSelectedPersonCardChanged() {
+    public boolean isSelectedEventCardChanged() {
         List<Event> selectedItems = getRootNode().getSelectionModel().getSelectedItems();
 
         if (selectedItems.size() == 0) {
-            return lastRememberedSelectedPersonCard.isPresent();
+            return lastRememberedSelectedEventCard.isPresent();
         } else {
-            return !lastRememberedSelectedPersonCard.isPresent()
-                    || !lastRememberedSelectedPersonCard.get().equals(selectedItems.get(0));
+            return !lastRememberedSelectedEventCard.isPresent()
+                    || !lastRememberedSelectedEventCard.get().equals(selectedItems.get(0));
         }
     }
 
