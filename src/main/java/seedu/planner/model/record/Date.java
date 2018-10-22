@@ -161,5 +161,4 @@ public class Date {
                 && month == ((Date) other).getMonth()
                 && year == ((Date) other).getYear()); // state check
     }
-
 }

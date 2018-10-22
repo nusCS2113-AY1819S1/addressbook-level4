@@ -1,9 +1,11 @@
 package seedu.planner.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -16,6 +18,7 @@ import seedu.planner.commons.util.FileUtil;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 import seedu.planner.model.record.Record;
 
@@ -25,16 +28,28 @@ import seedu.planner.model.record.Record;
 public class ExportExcelCommand extends Command {
     public static final String COMMAND_WORD = "export_excel";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Export the records data into Excel file within specific period.\n"
+            + ": Exports the records within specific period or all records in the Financial Planner into Excel file .\n"
             + "The file will be named in format: Financial_Planner_STARTDATE_ENDDATE.\n"
             + "Parameters: START_DATE END_DATE, START_DATE should be equal to or smaller than END_DATE.\n"
-            + "Example: " + COMMAND_WORD + " 31-03-1999 31-3-2018\n";
+            + "Example 1: " + COMMAND_WORD + " 31-03-1999 31-3-2019\n"
+            + "Example 2: " + COMMAND_WORD;
 
-    private final DateIsWithinIntervalPredicate predicate;
+    private final Date startDate;
+    private final Date endDate;
+
+    private final Predicate<Record> predicate;
     private Logger logger = LogsCenter.getLogger(ExportExcelCommand.class);
 
-    public ExportExcelCommand(DateIsWithinIntervalPredicate predicate) {
-        this.predicate = predicate;
+    public ExportExcelCommand() {
+        startDate = null;
+        endDate = null;
+        predicate = PREDICATE_SHOW_ALL_RECORDS;
+    }
+
+    public ExportExcelCommand(Date startDate, Date endDate) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
     }
 
     @Override
@@ -43,29 +58,18 @@ public class ExportExcelCommand extends Command {
         model.updateFilteredRecordList(predicate);
 
         List<Record> recordList = model.getFilteredRecordList();
-
-        String nameFile = String.format("Financial_Planner_%1$s_%2$s.xlsx",
-                predicate.getStartDate().getValue(), predicate.getEndDate().getValue());
-
+        String nameFile = ExcelUtil.setNameExcelFile(startDate, endDate);
         logger.info(nameFile);
 
         XSSFWorkbook workbook = new XSSFWorkbook();
         XSSFSheet sheet = workbook.createSheet(nameFile);
 
-        Map<String, Object[]> mapData = ExcelUtil.exportData(recordList);
+        ExcelUtil.writeDataIntoExcelSheet(ExcelUtil.exportData(recordList), sheet);
 
-        ExcelUtil.writeDataIntoExcelSheet(mapData, sheet);
-
-        String str = "^(([a-zA-Z]:)|((\\\\|/){2,4}\\w+)\\$?)((\\\\|/)(\\w[\\w ]*.*))+\\.([a-zA-Z0-9]+)$";
         String path = "D:\\Important things\\NUS\\MODULES\\CS2113T"
                 + System.getProperty("file.separator")
                 + String.format(nameFile);
-        logger.info((path.matches(str)) ? "command1: match" : "command1: unmatch");
-
         path.replace("\\", System.getProperty("file.separator"));
-
-        logger.info((path.matches(str)) ? "command2: match" : "command2: unmatch");
-
         FileUtil.writeWorkBookInFileSystem(nameFile, workbook, path);
         return new CommandResult(String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile, path));
     }

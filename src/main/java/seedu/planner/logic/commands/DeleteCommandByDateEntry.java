@@ -19,13 +19,13 @@ import seedu.planner.model.record.Record;
 public class DeleteCommandByDateEntry extends Command {
     public static final String COMMAND_WORD = "delete_date";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Delete the all records identified by the date number used in the displayed record list.\n"
+            + ": Deletes the all records identified by the date number used in the displayed record list.\n"
             + "PARAMERERS: DATE (Must follow the format dd-mm-yyyy).\n"
             + "Example: "
             + COMMAND_WORD
-            + "31-03-1999";
+            + " 31-03-1999";
 
-    public static final String MESSAGE_DELETE_RECORD_SUCCESS = "Deleted all records whose date is %1$s";
+    public static final String MESSAGE_DELETE_RECORDS_SUCCESS = "Deleted all records whose date is %1$s";
 
     private static final Logger logger = LogsCenter.getLogger(DeleteCommandByDateEntry.class);
 
@@ -38,14 +38,25 @@ public class DeleteCommandByDateEntry extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        Boolean targetRecordExist = Boolean.FALSE;
+        requireNonNull(model);
         List<Record> lastShownList = model.getFilteredRecordList();
-        int size = model.deleteListRecordSameDate(lastShownList, targetDate);
-        model.commitFinancialPlanner();
-        if (size == 0) {
-            logger.info("The record whose date is required, does not exist.\n");
+        for (int i = lastShownList.size() - 1; i >= 0; i--) {
+            Record targetRecord = lastShownList.get(i);
+            logger.info(String.format(
+                    "---------------------------------------------The date required is: %1$s, the date shown is %2$s\n",
+                    targetDate.getValue(), targetRecord.getDate().getValue()));
+            if (targetRecord.isSameDateRecord(targetDate)) {
+                model.deleteRecord(targetRecord);
+                targetRecordExist = Boolean.TRUE;
+            }
+        }
+        if (!targetRecordExist) {
+            logger.info("The record does not exist.\n");
             throw new CommandException(Messages.MESSAGE_NONEXISTENT_RECORD_DISPLAYED_DATE);
         } else {
-            return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, targetDate.value));
+            model.commitFinancialPlanner();
+            return new CommandResult(String.format(MESSAGE_DELETE_RECORDS_SUCCESS, targetDate.value));
         }
     }
 

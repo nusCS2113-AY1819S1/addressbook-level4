@@ -230,10 +230,33 @@ Format: `delete_date dd-mm-yyyy`
 ****
 
 Examples:
-* `delete 31-03-1999` +
+
+* `delete_date 31-03-1999` +
 Deletes the records whose date is 31-03-1999.
-* `delete 30-4-1999` +
-Deletes the records whose date is 31-04-1999.
+
+=== Export the records into the Excel file. `export_excel`
+
+Exports the records into the Excel file. +
+
+There are 3 modes, default mode, single argument mode and dual argument mode. +
+Format: +
+
+* Default mode: `export_excel` +
+* Single argument mode: `export_excel DATE` +
+* Dual argument mode: `export_excel d/START_DATE END_DATE`
+
+****
+* The default mode will list down all records in the Financial Planner and exports all the records in the Excel file. +
+* The single argument mode will list down all records with the date equal to DATE specified in the format and exports all shown records in the Excel file. +
+* The dual argument mode will list down all records with date equal to or later than START_DATE
+and earlier than or equal to END_DATE and exports all shown records in the Excel file. +
+****
+
+Examples:
+
+* `export_excel`
+* `export_excel 31-3-1999`
+* `export_excel 31-3-1999 31-03-2019`
 
 === Selecting a record : `select`
 

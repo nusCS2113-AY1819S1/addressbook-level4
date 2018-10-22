@@ -1,6 +1,5 @@
 package seedu.planner.logic.parser;
 
-import java.io.File;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
@@ -9,7 +8,6 @@ import seedu.planner.commons.core.Messages;
 import seedu.planner.logic.commands.ExportExcelCommand;
 import seedu.planner.logic.parser.exceptions.ParseException;
 import seedu.planner.model.record.Date;
-import seedu.planner.model.record.DateIsWithinIntervalPredicate;
 
 /**
  * Parses input arguments and create ExportExcelCommand object.
@@ -24,32 +22,35 @@ public class ExportExcelCommandParser implements Parser<ExportExcelCommand> {
      * @throws ParseException if the user input does not conform the expected format.
      */
     public ExportExcelCommand parse(String args) throws ParseException {
+        Date startDate;
+        Date endDate;
         String trimmedArgs = args.trim();
         logger.info(trimmedArgs);
 
         if (trimmedArgs.isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, ExportExcelCommand.MESSAGE_USAGE));
-        }
-        String[] dates = splitByWhitespace(trimmedArgs);
-        if (Arrays.asList(dates).size() != 2) {
-            throw new ParseException(
-                    String.format(
-                            Messages.MESSAGE_INVALID_COMMAND_FORMAT
-                                    + Messages.MESSAGE_INVALID_DATE_REQUIRED, ExportExcelCommand.MESSAGE_USAGE));
-        }
-        logger.info(String.format("The Start Date: %1$s, the End Date: %2$s\n",
-                Arrays.asList(dates).get(0), Arrays.asList(dates).get(1)));
-
-        Date startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
-        Date endDate = ParserUtil.parseDate(Arrays.asList(dates).get(1));
-
-        if (isDateOrderValid(startDate, endDate)) {
-            DateIsWithinIntervalPredicate predicate = new DateIsWithinIntervalPredicate(startDate, endDate);
-            return new ExportExcelCommand(predicate);
+            return new ExportExcelCommand();
         } else {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE));
+            String[] dates = splitByWhitespace(trimmedArgs);
+            int dateNum = Arrays.asList(dates).size();
+            if (dateNum > 2) {
+                throw new ParseException(
+                        String.format(
+                                Messages.MESSAGE_INVALID_COMMAND_FORMAT
+                                        + Messages.MESSAGE_INVALID_DATE_REQUIRED, ExportExcelCommand.MESSAGE_USAGE));
+            } else if (dateNum == 1) {
+                startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
+                endDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
+            } else {
+                startDate = ParserUtil.parseDate(Arrays.asList(dates).get(0));
+                endDate = ParserUtil.parseDate(Arrays.asList(dates).get(1));
+            }
+            logger.info(String.format("The Start Date: %1$s, the End Date: %2$s\n",
+                    startDate.getValue(), endDate.getValue()));
+        }
+        if (isDateOrderValid(startDate, endDate)) {
+            return new ExportExcelCommand(startDate, endDate);
+        } else {
+            throw new ParseException(String.format(Messages.MESSAGE_INVALID_STARTDATE_ENDDATE));
         }
     }
     /**

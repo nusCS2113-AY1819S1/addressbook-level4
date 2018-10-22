@@ -53,7 +53,6 @@ public class ListCommandTest {
         assertCommandSuccess(new ListCommand(), model, commandHistory, ListCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
-    // TODO: Should I hardcode this?
     /**
      * Tests that the list shown after filtering according to date interval given is equal to the expected model
      * after the same filter

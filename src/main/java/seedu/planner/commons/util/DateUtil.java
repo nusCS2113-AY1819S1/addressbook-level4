@@ -29,6 +29,7 @@ public class DateUtil {
      * This function checks whether the given day and month falls within the constraints of modern calendars
      * @param day
      * @param month
+     * @param year
      * @return true if valid and false if otherwise
      */
     public static boolean isValidDate(int day, int month, int year) {
@@ -44,7 +45,7 @@ public class DateUtil {
             isValid = day <= THIRTYONEDAYS;
             break;
         case FEB:
-            isValid = day <= (isLeapYear(year)? TWENTYNINEDAYS : TWENTYEIGHTDAYS);
+            isValid = day <= (isLeapYear(year) ? TWENTYNINEDAYS : TWENTYEIGHTDAYS);
             break;
         case APR:
         case JUN:

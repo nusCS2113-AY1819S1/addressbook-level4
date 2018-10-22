@@ -458,6 +458,58 @@ The following sequence diagram shows how the limit operation works:
 
 image::LimitSequenceDiagram.png[width:800]
 
+=== Delete By Date Entry
+==== Current implementation
+The delete by date entry mechanism is facilitated by `ModelManager`.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
+DeleteByDateEntryCommand calls `ModelManager#getFilteredRecordList`.
+
+This feature has only one keyword `delete_date` and implements only 1 argument mode.
+The three argument modes are as listed below:
+
+* Single Argument mode -- Requires only one date. It exports all records whose date is required and shows all records exported in the Financial Planner.
+
+The mechanism that facilitates these modes can be found in the `DeleteByDateEntryCommandParser#parse`. Below is a overview of the mechanism:
+
+* The argument mode is determined and is further processed into `Date` objects, before creating and returning a `DeleteByDateEntryCommand` object.
+
+The following sequence diagram shows how the list operation works:
+
+image::DeleteByDateEntrySequenceDiagram.png[width:800]
+
+=== Export into Excel file
+==== Current implementation
+The export into excel file mechanism is facilitated by `ModelManager`.
+It represents an in-memory model of the FinancialPlanner and is the component which manages the interactions between the commands and the `VersionedFinancialPlanner`.
+ExportExcelCommand calls `ModelManager#updateFilteredRecords` and passes in different predicates depending on the argument mode.
+
+This feature has only one keyword `export_excel` but implements 3 different argument modes to allow users to access multiple versions of the same command.
+The three argument modes are as listed below:
+
+* No Argument mode -- It requires no arguments and exports the entire list of records in the FinancialPlanner and shows all the records in the Financial Planner.
+* Single Argument mode -- Requires only one date. It exports all records whose date is required and shows all records exported in the Financial Planner.
+* Dual Argument mode -- Requires 2 dates, a `start date` and an `end date`. It exports all records containing dates within the time frame of start date and end date, inclusive of both start date and end date and shows all records exported in the Financial Planner.
+
+The mechanism that facilitates these modes can be found in the `ExportExcelCommandParser#parse`. Below is a overview of the mechanism:
+
+* The string associated is passed into `ExportExcelCommandParser#splitByWhitespace` for further processing and returns an array.
+* The argument mode is determined by the size of this array and the elements are further processed into `Date` objects, before creating and returning a `ExportExcelCommand` object.
+
+The `ExportExcelCommand` has two constructors which makes use of overloading to reduce code complexity.
+
+* One constructor has no arguments and assigns default predicate for the `FilteredList` in `ModelManager`,
+`PREDICATE_SHOW_ALL_RECORDS` which will show all items in the list.
+* The second constructor takes in 2 `Date` arguments and assigns the predicate `DateIsWithinDateIntervalPredicate` which will only show items within the date interval.
+
+The following sequence diagram shows how the list operation works:
+
+image::ExportExcelSequenceDiagram.png[width="800"]
+
+For simplicity, interactions with the UI is not shown in the diagram above. +
+The update of the UI `RecordListPanel` is done through the event system. `FilteredList` is a type of ObservableList
+implemented by the Java 8 API and it will propagate any changes to the list to any listeners listening to it. This
+listener is present in `RecordListPanel` and will update the UI list automatically.
+
 === Design Considerations
 ==== Aspect: Data structure to support listing of records
 
