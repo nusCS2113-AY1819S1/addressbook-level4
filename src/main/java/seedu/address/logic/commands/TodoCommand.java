@@ -22,7 +22,7 @@ public class TodoCommand extends Command {
             + PREFIX_TITLE + "TITLE"
             + PREFIX_CONTENT + "CONTENT"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TITLE + "Do Unit Tests"
+            + PREFIX_TITLE + "Do Unit Tests" + " "
             + PREFIX_CONTENT + "Do Junit tests to test these codes";
 
     public static final String MESSAGE_SUCCESS = "New todo task added: %1$s";
