@@ -34,10 +34,8 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     public CompanyBook(ReadOnlyCompanyBook toBeCopied) {
         this();
         resetData(toBeCopied);
-        for (Company company:companyList) {
-            companyJobList.getInternalList().addAll(company.getJobOffers());
-        }
     }
+
 
     //// list overwrite operations
 
@@ -60,6 +58,7 @@ public class CompanyBook implements ReadOnlyCompanyBook {
         requireNonNull(newData);
 
         setCompanyList(newData.getCompanyList());
+        companyJobList.setJobOffers(newData.getCompanyJobList());
     }
 
     //// company -level operations
@@ -78,6 +77,9 @@ public class CompanyBook implements ReadOnlyCompanyBook {
      */
     public void addCompany(Company p) {
         companyList.add(p);
+        for (JobOffer jobOffer : p.getUniqueJobList()) {
+            companyJobList.add(jobOffer);
+        }
     }
 
     /**
@@ -120,11 +122,21 @@ public class CompanyBook implements ReadOnlyCompanyBook {
     // job offer level operations
 
     /**
-     * Adds a job offer to an existing company in the CompanyBook to the recruit book.
+     * Adds a job offer to an existing company in the CompanyBook
      */
     public void addJobOfferToCompany(CompanyName companyName, JobOffer jobOffer) {
         companyList.addJobOfferToCompany(companyName, jobOffer);
         companyJobList.add(jobOffer);
+    }
+
+    /**
+     * Deletes a job offer from an existing company in the CompanyBook.
+     * @param jobOffer must exist inside the CompanyBook
+     */
+
+    public void deleteJobOffer(JobOffer jobOffer) {
+        companyList.deleteJobOffer(jobOffer);
+        companyJobList.remove(jobOffer);
     }
 
     //// util methods

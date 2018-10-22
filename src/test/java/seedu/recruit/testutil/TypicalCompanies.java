@@ -54,6 +54,16 @@ public class TypicalCompanies {
         }
         return cb;
     }
+
+    /**
+     * Reset typical companies job list
+     */
+    public static void resetTypicalCompaniesJobList() {
+        for (Company company : getTypicalCompanies()) {
+            company.getUniqueJobList().clear();
+        }
+    }
+
     public static List<Company> getTypicalCompanies() {
         return new ArrayList<>(Arrays.asList(AUDI, BENTLEY, CHEVROLET, DODGE));
     }

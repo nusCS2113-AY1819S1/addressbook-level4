@@ -28,6 +28,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.CandidateBook;
+import seedu.recruit.model.CompanyBook;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.ReadOnlyCandidateBook;
 import seedu.recruit.model.ReadOnlyCompanyBook;
@@ -166,7 +167,9 @@ public class CommandTestUtil {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
         CandidateBook expectedCandidateBook = new CandidateBook(actualModel.getCandidateBook());
-        List<Candidate> expectedFilteredList = new ArrayList<>(actualModel.getFilteredCandidateList());
+        List<Candidate> expectedFilteredCandidateList = new ArrayList<>(actualModel.getFilteredCandidateList());
+        CompanyBook expectedCompanyBook = new CompanyBook(actualModel.getCompanyBook());
+        List<Company> expectedFilteredCompanyList = new ArrayList<>(actualModel.getFilteredCompanyList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
 
@@ -176,7 +179,9 @@ public class CommandTestUtil {
         } catch (IOException | GeneralSecurityException | CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
             assertEquals(expectedCandidateBook, actualModel.getCandidateBook());
-            assertEquals(expectedFilteredList, actualModel.getFilteredCandidateList());
+            assertEquals(expectedFilteredCandidateList, actualModel.getFilteredCandidateList());
+            assertEquals(expectedCompanyBook, actualModel.getCompanyBook());
+            assertEquals(expectedFilteredCompanyList, actualModel.getFilteredCompanyList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }
     }
@@ -194,6 +199,7 @@ public class CommandTestUtil {
 
         assertEquals(1, model.getFilteredCandidateList().size());
     }
+
 
     /**
      * Deletes the first candidate in {@code model}'s filtered list from {@code model}'s recruit book.
@@ -356,6 +362,11 @@ public class CommandTestUtil {
 
         @Override
         public void addJobOffer(CompanyName companyName, JobOffer jobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteJobOffer(JobOffer jobOffer) {
             throw new AssertionError("This method should not be called.");
         }
 

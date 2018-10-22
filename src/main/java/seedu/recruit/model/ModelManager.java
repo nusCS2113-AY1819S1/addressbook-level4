@@ -281,6 +281,13 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.addJobOfferToCompany(companyName, jobOffer);
         indicateCompanyBookChanged();
     }
+
+    @Override
+    public void deleteJobOffer(JobOffer jobOffer) {
+        requireNonNull(jobOffer);
+        versionedCompanyBook.deleteJobOffer(jobOffer);
+        indicateCompanyBookChanged();
+    }
     /**
      * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
      * {@code versionedCompanyBook}
