@@ -30,6 +30,7 @@ import seedu.recruit.logic.commands.ListCommand;
 import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.logic.commands.SortCommand;
+import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectContentsCommand;
@@ -135,6 +136,9 @@ public class RecruitBookParser {
 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
+
+            case SwitchBookCommand.COMMAND_WORD:
+                return new SwitchBookCommand();
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
