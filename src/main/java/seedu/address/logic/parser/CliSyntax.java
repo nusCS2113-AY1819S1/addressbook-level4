@@ -18,7 +18,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_COMMAND = new Prefix("command/");
     public static final Prefix PREFIX_INVALID = new Prefix("invalid/");
     public static final Prefix PREFIX_DIRECTORY = new Prefix("d/");
-    public static final Prefix PREFIX_FILENAME = new Prefix("f");
+    public static final Prefix PREFIX_DATE = new Prefix("d/");
+    public static final Prefix PREFIX_ACTIVITY = new Prefix("a/");
+    public static final Prefix PREFIX_FILENAME = new Prefix("f/");
+
 
     /* Command keywords */
     public static final String COMMAND_ADD = "add";
@@ -40,4 +43,5 @@ public class CliSyntax {
     public static final String COMMAND_EXPORT = "export";
     public static final String COMMAND_MAIL = "mail";
     public static final String COMMAND_SNAPSHOTS = "snapshots";
+    public static final String COMMAND_SCHEDULE = "schedule";
 }

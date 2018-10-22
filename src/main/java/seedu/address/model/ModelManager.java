@@ -6,7 +6,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -15,11 +18,13 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.autocomplete.CommandCompleter;
 import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Activity;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.XmlAddressBookStorage;
 
@@ -209,5 +214,34 @@ public class ModelManager extends ComponentManager implements Model {
         } catch (DataConversionException dataE) {
             logger.warning(dataE.getMessage());
         }
+    }
+
+    //@@author LowGinWee
+    //TODO change this
+    /**
+     * Reinitialises the address book
+     */
+    @Override
+    public void addActivity(Activity activity) {
+        versionedAddressBook.addActivity(activity);
+        indicateAddressBookChanged();
+    }
+    /**
+     * Reinitialises the address book
+     */
+    @Override
+    public void deleteActivity(Activity activity) {
+        versionedAddressBook.deleteActivity(activity);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public ObservableList<Activity> getActivityList(){
+        return versionedAddressBook.getActivityList();
+    }
+
+    @Override
+    public TreeMap<Date, ArrayList<Activity>> getSchedule(){
+        return versionedAddressBook.getSchedule();
     }
 }

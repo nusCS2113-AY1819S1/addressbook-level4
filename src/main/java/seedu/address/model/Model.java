@@ -1,11 +1,17 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.function.Predicate;
 
+import javafx.beans.Observable;
 import javafx.collections.ObservableList;
+import seedu.address.commons.core.index.Index;
 import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
+import seedu.address.model.schedule.Activity;
 
 /**
  * The API of the Model component.
@@ -102,4 +108,14 @@ public interface Model {
      * Reinitialises the address book
      */
     void reinitAddressbook ();
+
+    //@@author LowGinWee
+    void addActivity(Activity activity);
+
+    void deleteActivity(Activity activity);
+
+    ObservableList<Activity> getActivityList();
+
+    TreeMap<Date, ArrayList<Activity>> getSchedule();
+
 }

@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.StringTokenizer;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -20,6 +23,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Position;
+import seedu.address.model.schedule.Activity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -102,19 +106,6 @@ public class ParserUtil {
         return new Email(trimmedEmail);
     }
 
-    /**
-     * Parses a {@code String note} into an {@code Note}.
-     * Leading and trailing whitespaces will be trimmed.
-     *
-     * @throws ParseException if the given {@code note} is invalid.
-     */
-    public static Note parseNote(String note) throws ParseException {
-        String trimmedNote = note.trim();
-        if (!Note.isValidNote(trimmedNote)) {
-            throw new ParseException(Note.MESSAGE_NOTE_CONSTRAINTS);
-        }
-        return new Note(trimmedNote);
-    }
 
     /**
      * Parses a {@code String tag} into a {@code Tag}.
@@ -157,7 +148,7 @@ public class ParserUtil {
         return new BackupList(backupDir);
     }
 
-    //@@author
+    //@@author LowGinWee
     /**
      * Parses a {@code String position} into an {@code Position}.
      * Leading and trailing whitespaces will be trimmed.
@@ -170,6 +161,21 @@ public class ParserUtil {
             throw new ParseException(Position.MESSAGE_POSITION_CONSTRAINTS);
         }
         return new Position(trimmedPosition);
+    }
+
+
+    /**
+     * Parses a {@code String note} into an {@code Note}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code note} is invalid.
+     */
+    public static Note parseNote(String note) throws ParseException {
+        String trimmedNote = note.trim();
+        if (!Note.isValidNote(trimmedNote)) {
+            throw new ParseException(Note.MESSAGE_NOTE_CONSTRAINTS);
+        }
+        return new Note(trimmedNote);
     }
 
     /**
@@ -185,4 +191,27 @@ public class ParserUtil {
         }
         return new Kpi(trimmedScore);
     }
+
+    /**
+     * Parses a {@code String position} into an {@code Position}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code position} is invalid.
+     */
+    public static Date parseDate(String dateString) throws ParseException {
+        String trimmedDate = dateString.trim();
+        if (!Activity.isValidDate(trimmedDate)) {
+            throw new ParseException(Activity.MESSAGE_DATE_CONSTRAINTS);
+        }
+        StringTokenizer tokens = new StringTokenizer(trimmedDate, "/");
+        int day = Integer.parseInt(tokens.nextToken()) ;
+        int month = Integer.parseInt(tokens.nextToken());
+        int year = Integer.parseInt(tokens.nextToken());
+        Date date = Activity.toDate(day, month, year);
+        return date;
+    }
+
+
+
+
 }
