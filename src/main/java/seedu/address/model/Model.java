@@ -57,10 +57,14 @@ public interface Model {
     void updateFilteredItemList(Predicate<Item> predicate);
 
     /**
+     * Updates the filter of the filtered item list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredItemListByTag(Predicate<Item> predicate);
+
+    /**
      * Returns true if the model has previous stock list states to restore.
      */
-
-    void updateFilteredItemListByTag(Predicate<Item> predicate);
 
     boolean canUndoStockList();
 
