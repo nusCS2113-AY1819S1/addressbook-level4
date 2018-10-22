@@ -1,5 +1,5 @@
 
-Lim Jit Wei - Project Portfolio
+= Lim Jit Wei - Project Portfolio
 
 :site-section: AboutUs
 :imagesDir: ../images/jitwei98.png
@@ -7,7 +7,7 @@ Lim Jit Wei - Project Portfolio
 
 // image::../jitwei98.png[width="150", align="left"]
 
-== PROJECT: JitHub
+== PROJECT: https://github.com/CS2113-AY1819S1-W12-1/main[JitHub]
 
 // include UI screenshot here
 
@@ -15,7 +15,9 @@ Lim Jit Wei - Project Portfolio
 
 == Overview
 
-```ruby JitHub``` is a CLI (Command Line Interface) application written in Java that saves your contacts and helps you
+https://github.com/CS2113-AY1819S1-W12-1/main[JitHub] is a CLI (Command Line Interface) application written in Java that saves your contacts
+and helps
+ you
 schedule
 meetings
 through cross-checking the
@@ -61,25 +63,32 @@ _{you can add/remove categories in the list above}_
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|Given below are sections I contributed to the User Guide.
+
+ _They showcase my ability to **write documentation targeting end-users.**_
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+//include::../UserGuide.adoc[tag=undoredo]
+//
+//include::../UserGuide.adoc[tag=dataencryption]
 
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|Given below are sections I contributed to the Developer Guide.
+
+_They showcase my ability to **write technical documentation and the technical depth of my contributions to the
+project.**_
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+//include::../DeveloperGuide.adoc[tag=undoredo]
+//
+//include::../DeveloperGuide.adoc[tag=dataencryption]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
 
-
-== PROJECT: PowerPointLabs
+// TODO: include links
+== PROJECT: AnimatedEpp
+// TODO: include descriptions here
 
 ---
 
