@@ -18,10 +18,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyEventManager;
 import seedu.address.model.event.Event;
-import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
-import seedu.address.model.user.Username;
 import seedu.address.storage.UserStorage;
+import seedu.address.testutil.UserBuilder;
 
 public class LoginCommandTest {
 
@@ -40,27 +39,23 @@ public class LoginCommandTest {
 
     @Test
     public void execute_successfulLogin() throws Exception {
-        Username username = new Username("admin");
-        Password password = new Password("root");
-        User user = new User(username, password);
+        User user = new UserBuilder().build();
 
         JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
         ModelStubAcceptUser modelStubAcceptUser;
 
-        jsonUserStorageStub.createUser(username.toString(), password.toString());
+        jsonUserStorageStub.createUser(user.getUsername().toString(), user.getPassword().toString());
         modelStubAcceptUser = new ModelStubAcceptUser(user, jsonUserStorageStub);
 
         CommandResult commandResult = new LoginCommand(user).execute(modelStubAcceptUser, commandHistory);
 
-        assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, username.toString()), commandResult.feedbackToUser);
+        assertEquals(String.format(LoginCommand.MESSAGE_SUCCESS, user.getUsername().toString()), commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
     public void execute_failedLogin_noUser() throws Exception {
-        Username username = new Username("admin");
-        Password password = new Password("root");
-        User user = new User(username, password);
+        User user = new UserBuilder().build();
 
         JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
         ModelStubAcceptUser modelStubAcceptUser;
@@ -76,14 +71,12 @@ public class LoginCommandTest {
 
     @Test
     public void execute_failedLogin_alreadyLogged() throws Exception {
-        Username username = new Username("admin");
-        Password password = new Password("root");
-        User user = new User(username, password);
+        User user = new UserBuilder().build();
 
         JsonUserStorageStub jsonUserStorageStub = new JsonUserStorageStub();
         ModelStubWithUser modelStubWithUser;
 
-        jsonUserStorageStub.createUser(username.toString(), password.toString());
+        jsonUserStorageStub.createUser(user.getUsername().toString(), user.getPassword().toString());
         modelStubWithUser = new ModelStubWithUser();
         LoginCommand loginCommand = new LoginCommand(user);
 
