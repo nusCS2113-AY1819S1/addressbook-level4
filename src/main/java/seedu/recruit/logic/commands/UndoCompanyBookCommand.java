@@ -17,17 +17,17 @@ public class UndoCompanyBookCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Undo success!";
     public static final String MESSAGE_FAILURE = "No more CompanyBook commands to undo!";
 
-        @Override
-        public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-            requireNonNull(model);
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
+        requireNonNull(model);
 
-            if (!model.canUndoCompanyBook()) {
-                throw new CommandException(MESSAGE_FAILURE);
-            }
-
-            model.undoCompanyBook();
-            model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
-            return new CommandResult(MESSAGE_SUCCESS);
+        if (!model.canUndoCompanyBook()) {
+            throw new CommandException(MESSAGE_FAILURE);
         }
+
+        model.undoCompanyBook();
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
 
 }
