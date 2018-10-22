@@ -371,6 +371,12 @@ to parse the input given. `DeleteGroupCommandParser` will then create an `Index`
 which will then execute deleting the specified group from the student management system.
  +
 
+The following sequence diagram shows how the delete group operation works within both `Model` and `Logic` components:
+
+.Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command
+image::DeleteGroupSequenceDiagram.png[width="800"]
+
+
 ==== Design Considerations
 
 ===== Aspect: Storage
