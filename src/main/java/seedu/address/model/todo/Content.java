@@ -33,7 +33,7 @@ public class Content {
     }
 
     /**
-     * Returns true if a given string is a valid email.
+     * Returns true if a given string is a valid content.
      */
     public static boolean isValidContent(String test) {
         return test.matches(CONTENT_VALIDATION_REGEX);
