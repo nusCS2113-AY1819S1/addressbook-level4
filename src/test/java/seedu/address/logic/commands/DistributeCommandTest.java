@@ -8,11 +8,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.distribute.Distribute;
-import seedu.address.model.group.GroupName;
+import seedu.address.testutil.DistributeBuilder;
 
 public class DistributeCommandTest {
     private Model model;
@@ -26,32 +27,29 @@ public class DistributeCommandTest {
     }
 
     @Test
-    public void equals() {
-        //TODO create a builder for this.
-        Distribute first = new Distribute(3, new GroupName("First-Group"), true, false);
-        Distribute second = new Distribute(3, new GroupName("First-Group"), true, false);
-        Distribute differentIndex = new Distribute(4, new GroupName("First-Group"), true, false);
-        Distribute differentGroupName = new Distribute(4, new GroupName("Different-Group"), true, false);
-        Distribute differentGenderFlag = new Distribute(4, new GroupName("First-Group"), false, false);
-        Distribute differentNationalityFlag = new Distribute(4, new GroupName("First-Group"), true, true);
-        Distribute allDifferent = new Distribute(2, new GroupName("CS2113-T13-"), false, true);
+    public void equals() throws ParseException {
+        Distribute distributeIntoThree = new DistributeBuilder().build();
+        Distribute differentIndexDistribution = new DistributeBuilder().setIndex("4").build();
+        Distribute differentGroupNameDistribution = new DistributeBuilder().setGroupName("Different-Group").build();
+        Distribute differentGenderFlagDistribution = new DistributeBuilder().setGenderFlag("true").build();
+        Distribute differentNationalityFlagDistribution = new DistributeBuilder().setNationalityFlag("true").build();
+        Distribute allDifferent = new DistributeBuilder().setIndex("6").setGroupName("New-Group")
+                .setGenderFlag("true").setNationalityFlag("true").build();
 
-        DistributeCommand distributeFirstCommand = new DistributeCommand(first);
-        DistributeCommand distributeSecondCommand = new DistributeCommand(second);
-        DistributeCommand differentIndexCommand = new DistributeCommand(differentIndex);
-        DistributeCommand differentGroupNameCommand = new DistributeCommand(differentGroupName);
-        DistributeCommand differentGenderFlagCommand = new DistributeCommand(differentGenderFlag);
-        DistributeCommand differentNationalityFlagCommand = new DistributeCommand(differentNationalityFlag);
+        DistributeCommand distributeFirstCommand = new DistributeCommand(distributeIntoThree);
+        DistributeCommand differentIndexCommand = new DistributeCommand(differentIndexDistribution);
+        DistributeCommand differentGroupNameCommand = new DistributeCommand(differentGroupNameDistribution);
+        DistributeCommand differentGenderFlagCommand = new DistributeCommand(differentGenderFlagDistribution);
+        DistributeCommand differentNationalityFlagCommand = new DistributeCommand(differentNationalityFlagDistribution);
         DistributeCommand allDifferentCommand = new DistributeCommand(allDifferent);
 
 
         // same object -> returns true
-        assertTrue(distributeFirstCommand.equals(distributeSecondCommand));
+        assertTrue(distributeFirstCommand.equals(distributeFirstCommand));
 
         // same values -> returns true
-        DistributeCommand forthCommand = new DistributeCommand(new Distribute(3,
-                new GroupName("First-Group"), true, false));
-        assertTrue(forthCommand.equals(distributeFirstCommand));
+        DistributeCommand differentIndexCommandCopy = new DistributeCommand(differentIndexDistribution);
+        assertTrue(differentIndexCommandCopy.equals(differentIndexCommand));
 
 
         // different Index
