@@ -18,6 +18,7 @@ import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
 import seedu.address.model.searchhistory.SearchHistoryManager;
+import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,10 +26,10 @@ import seedu.address.model.searchhistory.SearchHistoryManager;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
+    private final SearchHistoryManager<Person> searchHistoryManager = new SearchHistoryManager<>();
     private final VersionedLoginBook versionedLoginBook;
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-    private final SearchHistoryManager<Person> searchHistoryManager;
     private final FilteredList<LoginDetails> filteredLoginDetails;
     private final FilteredList<ClubBudgetElements> filteredClubs;
     private final FilteredList<FinalClubBudget> filteredClubBudgets;
@@ -48,7 +49,6 @@ public class ModelManager extends ComponentManager implements Model {
         filteredClubs = new FilteredList<>(versionedAddressBook.getClubsList());
         filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
         filteredClubBudgets = new FilteredList<>(versionedAddressBook.getClubBudgetsList());
-        searchHistoryManager = new SearchHistoryManager<>();
     }
 
     public ModelManager() {
@@ -236,9 +236,28 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
+    //=========== Persons Search Pruning ====================================================
     @Override
-    public SearchHistoryManager<Person> getSearchHistoryManager() {
-        return searchHistoryManager;
+    public void revertLastSearch() throws EmptyHistoryException {
+        Predicate<Person> predicate = searchHistoryManager.revertLastSearch();
+        if (predicate != null) {
+            filteredPersons.setPredicate(predicate);
+        } else {
+            filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
+        }
+    }
+
+    @Override
+    public void executeSearch(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        Predicate<Person> updatedPredicate = searchHistoryManager.executeNewSearch(predicate);
+        filteredPersons.setPredicate(updatedPredicate);
+    }
+
+    @Override
+    public void resetSearchHistoryToInitialState() {
+        searchHistoryManager.clearSearchHistory();
+        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
