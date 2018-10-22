@@ -74,7 +74,7 @@ public class MainApp extends Application {
 
         logic = new LogicManager(model);
 
-        security = new SecurityManager(false);
+        security = new SecurityManager(true);
 
         ui = new UiManager(logic, config, userPrefs, security);
 
