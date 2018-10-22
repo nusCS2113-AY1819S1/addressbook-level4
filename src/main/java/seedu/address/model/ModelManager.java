@@ -28,7 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedLoginBook versionedLoginBook;
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-    private final SearchHistoryManager searchHistoryManager;
+    private final SearchHistoryManager<Person> searchHistoryManager;
     private final FilteredList<LoginDetails> filteredLoginDetails;
     private final FilteredList<ClubBudgetElements> filteredClubs;
     private final FilteredList<FinalClubBudget> filteredClubBudgets;
@@ -48,7 +48,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredClubs = new FilteredList<>(versionedAddressBook.getClubsList());
         filteredLoginDetails = new FilteredList<>(versionedLoginBook.getLoginDetailsList());
         filteredClubBudgets = new FilteredList<>(versionedAddressBook.getClubBudgetsList());
-        searchHistoryManager = new SearchHistoryManager();
+        searchHistoryManager = new SearchHistoryManager<>();
     }
 
     public ModelManager() {
@@ -237,7 +237,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public SearchHistoryManager getSearchHistoryManager() {
+    public SearchHistoryManager<Person> getSearchHistoryManager() {
         return searchHistoryManager;
     }
 
