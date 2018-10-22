@@ -95,13 +95,4 @@ public class FileUtil {
             e.printStackTrace();
         }
     }
-
-    /**
-     * Check whether the given directory is realistic or not.
-     * @return boolean variable to indicate whether the directory exists.
-     */
-    public static Boolean isValidDirectory (String dirPath) {
-        return new File(dirPath).isDirectory();
-    }
-
 }
