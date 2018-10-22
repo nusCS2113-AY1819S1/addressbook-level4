@@ -6,18 +6,27 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+import biweekly.ICalendar;
+import biweekly.component.VEvent;
+import biweekly.io.text.ICalReader;
+import biweekly.property.DateEnd;
+import biweekly.property.DateStart;
+import biweekly.property.RecurrenceRule;
+import biweekly.property.Summary;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.person.TimeSlot;
 import seedu.address.model.person.TimeTable;
-import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
  * Converts a TimeTable object instance to .ics and vice versa.
@@ -90,6 +99,7 @@ public class IcsUtil {
     public void saveIcsFile(TimeTable timeTable, Path filePath)
             throws DataConversionException, FileNotFoundException {
         requireNonNull(filePath);
+
         //TODO
     }
 
@@ -97,102 +107,108 @@ public class IcsUtil {
     /**
      * Parses the string (that was read from an .ics file) into a timetable object
      * @throws DataConversionException if the string contents are not expected.
-     * TODO: how to parse string in a OOP-way?
      */
     private Optional<TimeTable> parseTimeTableFromString(String string) throws DataConversionException {
 
-        TimeTable timeTable = new TimeTable();
+        ArrayList<ICalendar> iCalendarList = stringToICalendarList(string);
+        ArrayList<VEvent> vEventList = iCalendarListToVEventList(iCalendarList);
+        TimeTable timeTable = vEventListToTimeTable(vEventList);
 
-        String[] chunks = string.split("BEGIN:VEVENT");
-
-        for (String chunk : chunks) { //each chunk contains the data of 1 timeslot
-            Optional<TimeSlot> optionalTimeSlot = convertChunkToTimeSlot(timeTable, chunk);
-            if (optionalTimeSlot.isPresent()) {
-                try {
-                    timeTable.addTimeSlot(optionalTimeSlot.get());
-                } catch (TimeSlotOverlapException e) {
-                    throw new DataConversionException(e);
-                }
-            }
-        };
+        //finished using ICalReader
         return Optional.of(timeTable);
     }
-
     /**
-     * Parses the chunk (a string) into the equivalent TimeSlot object
+     * Parses the list of VEvents into a single timetable object
      */
-    private Optional<TimeSlot> convertChunkToTimeSlot(TimeTable newTimeTable, String chunk)
-            throws DataConversionException {
-        String[] linesInChunk = chunk.split("\\r\\n|[\\n\\x0B\\x0C\\r\\u0085\\u2028\\u2029]");
+    private TimeTable vEventListToTimeTable(ArrayList<VEvent> vEventList) throws DataConversionException {
+        TimeTable timeTable = new TimeTable();
+        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        DateFormat timeFormat = new SimpleDateFormat("HHmmss");
 
-        String startdate = "";
-        String starttime = "";
-        String enddate = "";
-        String endtime = "";
-        String name = "";
-        boolean isTimeSlot = false;
+        //this for-loop iterates through the list of events.
+        for (VEvent event : vEventList) {
+            DateStart dateStart = event.getDateStart();
 
-        for (String line : linesInChunk) {
-            String[] splitLine = line.split(":");
-            if (splitLine.length != 2) {
-                continue; //file format is wrong, just ignore the line
+            String dateStartStr = (dateStart == null) ? null : dateFormat.format(dateStart.getValue());
+            String timeStartStr = (dateStart == null) ? null : timeFormat.format(dateStart.getValue());
+
+            DateEnd dateEnd = event.getDateEnd();
+            //assume event ends on same day.
+            String timeEndStr = (dateEnd == null) ? null : timeFormat.format(dateEnd.getValue());
+
+            Summary summary = event.getSummary();
+            String summaryStr = (summary == null) ? null : summary.getValue();
+            //TODO: add this parameter to timetable object.
+
+            RecurrenceRule recurrenceRule = event.getRecurrenceRule();
+            String recurrenceRuleStr = (recurrenceRule == null) ? null : "hasrecurrance";
+            if (recurrenceRule == null) {
+                continue; //TODO: this is currently hacky. pls make proper.
             }
 
-            String dataName = splitLine[0];
-            String dataString = splitLine[1];
+            //process the data we got from the chunk
+            LocalTime timeSlotStartTime = timeStringToLocalTime(timeStartStr);
+            LocalTime timeSlotEndTime = timeStringToLocalTime(timeEndStr);
+            DayOfWeek timeSlotDay = dateStringToDayOfWeek(dateStartStr);
 
-            if (dataName.equals("DTSTART")) {
-                //get start
-                try {
-                    startdate = dataString.substring(0, 8);
-                    starttime = dataString.substring(9, 15);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DataConversionException(e);
-                }
-            } else if (dataName.equals("DTEND")) {
-                //get end
-                try {
-                    enddate = dataString.substring(0, 8);
-                    endtime = dataString.substring(9, 15);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new DataConversionException(e);
-                }
-            } else if (dataName.equals("SUMMARY")) {
-                //get mod name
-                name = dataString;
-            } else if (dataName.equals("RRULE")) {
-                //is it a weekly time slot?
-                isTimeSlot = dataString.contains("WEEKLY");
-            }
+            System.out.println(timeSlotStartTime + " to " + timeSlotEndTime + " on " + timeSlotDay + ": " + summaryStr);
+
+            //after getting all the data of this event, we add it to timetable.
+            TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
+            timeTable.addTimeSlot(timeSlot);
         }
-
-        //check data is all present
-        if ((startdate.isEmpty()) || (enddate.isEmpty()) || (starttime.isEmpty())
-                || (endtime.isEmpty()) || (name.isEmpty()) || (!isTimeSlot)) {
-            return Optional.empty();
-        }
-
-        //process the data we got from the chunk
-        LocalTime timeSlotStartTime;
-        LocalTime timeSlotEndTime;
-        DayOfWeek timeSlotDay;
-
-        try {
-            timeSlotStartTime = icsStringToTime(starttime);
-            timeSlotEndTime = icsStringToTime(endtime);
-            timeSlotDay = icsStringToDay(startdate);
-        } catch (NumberFormatException e) {
-            throw new DataConversionException(e);
-        }
-
-        TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
-        return Optional.of(timeSlot);
+        return timeTable;
     }
 
     /**
-     * Converts the date in the ics file into day (1-7).
+     * Parses a list of iCalendarList objects into a list of vevent objects
      */
-    private DayOfWeek icsStringToDay(String dateString) {
+    private ArrayList<VEvent> iCalendarListToVEventList(ArrayList<ICalendar> iCalendarList) {
+        ArrayList < VEvent> vEventList = new ArrayList< VEvent>();
+        for (ICalendar iCalendar : iCalendarList) {
+            for (VEvent event : iCalendar.getEvents()) {
+                vEventList.add(event);
+            }
+        }
+        return vEventList;
+    }
+
+    /**
+     * Parses the iCal string into a list of ICalendar Objects
+     * @throws DataConversionException if the string contents are not expected.
+     *
+     */
+    private ArrayList<ICalendar> stringToICalendarList (String string) throws DataConversionException {
+        ArrayList<ICalendar> iCalendarList = new ArrayList<ICalendar>();
+        ICalReader reader = null;
+        try {
+            reader = new ICalReader(string);
+            ICalendar ical;
+            while ((ical = reader.readNext()) != null) {
+                //for each ICalendar found, add it to the list of ICalendars
+                iCalendarList.add(ical);
+            }
+        } catch (IOException e) {
+            throw new DataConversionException(e);
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                // so many catches... :c
+                throw new DataConversionException(e);
+            }
+        }
+        return iCalendarList;
+    }
+
+
+    /**
+     * Converts the ics-format dateString into DayOfWeek object.
+     * @param dateString    is in format yyyyMMdd
+     */
+    private DayOfWeek dateStringToDayOfWeek(String dateString) {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate date = LocalDate.parse(dateString, fmt);
         DayOfWeek day = date.getDayOfWeek();
@@ -201,11 +217,12 @@ public class IcsUtil {
     }
 
     /**
-     * Converts the ics-formatted string into a LocalTime object.
+     * Converts the ics-formatted timeString into a LocalTime object.
+     * @param timeString    is in format HHmmss
      */
-    private LocalTime icsStringToTime(String icsTime) {
-        int timeInt = Integer.parseInt(icsTime);
-        timeInt += 80000; //need to add 8 hours to the ics-formatted version.
+    private LocalTime timeStringToLocalTime(String timeString) {
+        int timeInt = Integer.parseInt(timeString);
+        //timeInt += 80000; //need to add 8 hours to the ics-formatted version.
         String formattedTime = String.format("%06d", timeInt);
 
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HHmmss");
