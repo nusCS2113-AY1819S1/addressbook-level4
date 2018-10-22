@@ -1,16 +1,23 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_PASSWORD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_USERNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PASSWORD_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.USERNAME_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+
 import org.junit.Test;
+
 import seedu.address.logic.commands.LoginCommand;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
-
-import static seedu.address.logic.commands.CommandTestUtil.*;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
 public class LoginCommandParserTest {
     private LoginCommandParser parser = new LoginCommandParser();
