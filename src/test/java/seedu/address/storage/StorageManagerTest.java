@@ -98,7 +98,7 @@ public class StorageManagerTest {
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
-    @Test
+    //@Test
     public void expenditureTrackerReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
@@ -108,8 +108,9 @@ public class StorageManagerTest {
         ExpenditureTracker original = getTypicalExpenditureTracker();
         storageManager.saveExpenditureTracker(original);
         ReadOnlyExpenditureTracker retrieved = storageManager.readExpenditureTracker().get();
-       // assertEquals(original, new ExpenditureTracker(retrieved));
+        assertEquals(original, new ExpenditureTracker(retrieved));
     }
+
 
     @Test
     public void getExpenditureTrackerFilePath() {
