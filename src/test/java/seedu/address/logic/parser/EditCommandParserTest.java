@@ -95,8 +95,8 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS); // invalid email
         assertParseFailure(parser, "1" + INVALID_VENUE_DESC, Venue.MESSAGE_VENUE_CONSTRAINTS); // invalid venue
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS); // invalid tag
-        assertParseFailure(parser, "1" + INVALID_ATTENDEE_DESC, Attendee.MESSAGE_ATTENDEE_CONSTRAINTS);
-            // invalid attendee
+        assertParseFailure(parser, "1" + INVALID_ATTENDEE_DESC, Attendee.MESSAGE_ATTENDEE_CONSTRAINTS); //
+        // invalid attendee
 
         // invalid phone followed by valid email
         assertParseFailure(parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_PHONE_CONSTRAINTS);
