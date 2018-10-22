@@ -9,14 +9,14 @@ import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 /**
  * Represents in-memory model for Predicates containing system search logic.
  */
-public class SearchHistoryManager {
+public class SearchHistoryManager<T> {
 
-    private Stack<Predicate> searchHistoryStack = new Stack<>();
-    /** Returns predicate at top of search history stack if stack is non-empty.
+    private Stack<Predicate<T>> searchHistoryStack = new Stack<>();
+    /** Returns Predicate at top of search history stack if stack is non-empty.
      * If search history stack is empty, null is returned.
      * @return a Predicate containing the system search logic.
      */
-    private Predicate retrievePredicateAtTopOfStack() {
+    private Predicate<T> retrievePredicateAtTopOfStack() {
         if (!searchHistoryStack.empty()) {
             return searchHistoryStack.peek();
         } else {
@@ -24,12 +24,12 @@ public class SearchHistoryManager {
         }
     }
 
-    /** Returns system search logic after reverting to its previous state.
+    /** Returns a Predicate containing system search logic after reverting to its previous state.
      * If search history is empty after revert, null is returned.
      * @return a Predicate containing the system search logic after reverting.
      * @throws EmptyStackException If search history is empty after revert.
      */
-    public Predicate revertLastSearch() throws EmptyStackException {
+    public Predicate<T> revertLastSearch() throws EmptyStackException {
         try {
             removeLastPredicateFromStack();
         } catch (EmptyStackException e) {
@@ -37,26 +37,27 @@ public class SearchHistoryManager {
         }
         return retrievePredicateAtTopOfStack();
     }
-    /** Returns system search logic given a user-defined search logic.
+
+    /** Returns a Predicate containing system search logic given a user-defined search logic.
      * @param predicate a Predicate containing the user-defined search logic.
      * @return a Predicate containing the system search logic.
      **/
-    public Predicate executeNewSearch(Predicate predicate) {
+    public Predicate<T> executeNewSearch(Predicate<T> predicate) {
         addNewPredicateToStack(predicate);
         assert !searchHistoryStack.empty();
         return retrievePredicateAtTopOfStack();
     }
 
-    /** Updates system search logic to its next state given a user-defined search logic
-     * @param newPredicate a Predicate containing the user-defined search logic
+    /** Updates system search logic to its next state given a Predicate containing user-defined search logic
+     * @param newPredicate a Predicate containing user-defined search logic
      **/
-    private void addNewPredicateToStack(Predicate newPredicate) {
-        Predicate predicate = retrievePredicateAtTopOfStack();
+    private void addNewPredicateToStack(Predicate<T> newPredicate) {
+        Predicate<T> predicate = retrievePredicateAtTopOfStack();
         if (predicate == null) {
             searchHistoryStack.push(newPredicate);
         } else {
             assert !searchHistoryStack.empty();
-            Predicate updatedPredicate = predicate.and(newPredicate);
+            Predicate<T> updatedPredicate = predicate.and(newPredicate);
             searchHistoryStack.push(updatedPredicate);
         }
     }

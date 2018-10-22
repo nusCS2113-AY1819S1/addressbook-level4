@@ -26,6 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.model.person.TagContainsKeywordsPredicate;
 import seedu.address.model.searchhistory.SearchHistoryManager;
 
@@ -88,8 +89,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
         NameContainsKeywordsPredicate firstPredicate = prepareNameContainsKeywordsPredicate(" ");
         FindCommand command = new FindPersonSubCommand(firstPredicate, false);
-        SearchHistoryManager manager = expectedModel.getSearchHistoryManager();
-        Predicate secondPredicate = manager.executeNewSearch(firstPredicate);
+        SearchHistoryManager<Person> manager = expectedModel.getSearchHistoryManager();
+        Predicate<Person> secondPredicate = manager.executeNewSearch(firstPredicate);
         expectedModel.updateFilteredPersonList(secondPredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
@@ -100,8 +101,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
         NameContainsKeywordsPredicate firstPredicate = prepareNameContainsKeywordsPredicate("Kurz Elle Kunz");
         FindCommand command = new FindPersonSubCommand(firstPredicate, false);
-        SearchHistoryManager manager = expectedModel.getSearchHistoryManager();
-        Predicate secondPredicate = manager.executeNewSearch(firstPredicate);
+        SearchHistoryManager<Person> manager = expectedModel.getSearchHistoryManager();
+        Predicate<Person> secondPredicate = manager.executeNewSearch(firstPredicate);
         expectedModel.updateFilteredPersonList(secondPredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPersonList());
@@ -112,8 +113,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         TagContainsKeywordsPredicate firstPredicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
         FindCommand command = new FindTagSubCommand(firstPredicate);
-        SearchHistoryManager manager = expectedModel.getSearchHistoryManager();
-        Predicate secondPredicate = manager.executeNewSearch(firstPredicate);
+        SearchHistoryManager<Person> manager = expectedModel.getSearchHistoryManager();
+        Predicate<Person> secondPredicate = manager.executeNewSearch(firstPredicate);
         expectedModel.updateFilteredPersonList(secondPredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT, KHOR), model.getFilteredPersonList());
@@ -124,8 +125,8 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         TagContainsKeywordsPredicate firstPredicate = prepareTagContainsKeywordsPredicate(VALID_TAG_HUSBAND);
         FindCommand command = new FindTagSubCommand(firstPredicate);
-        SearchHistoryManager manager = expectedModel.getSearchHistoryManager();
-        Predicate secondPredicate = manager.executeNewSearch(firstPredicate);
+        SearchHistoryManager<Person> manager = expectedModel.getSearchHistoryManager();
+        Predicate<Person> secondPredicate = manager.executeNewSearch(firstPredicate);
         expectedModel.updateFilteredPersonList(secondPredicate);
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT), model.getFilteredPersonList());
@@ -133,12 +134,11 @@ public class FindCommandTest {
 
     @Test
     public void execute_twoBackToBackFindCommand_onePersonFound() {
-        SearchHistoryManager manager = expectedModel.getSearchHistoryManager();
-
+        SearchHistoryManager<Person> manager = expectedModel.getSearchHistoryManager();
         String firstExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 2);
         TagContainsKeywordsPredicate firstPredicate = prepareTagContainsKeywordsPredicate(VALID_TAG_FRIEND);
         FindCommand firstCommand = new FindTagSubCommand(firstPredicate);
-        Predicate secondPredicate = manager.executeNewSearch(firstPredicate);
+        Predicate<Person> secondPredicate = manager.executeNewSearch(firstPredicate);
         expectedModel.updateFilteredPersonList(secondPredicate);
         assertCommandSuccess(firstCommand, model, commandHistory, firstExpectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT, KHOR), model.getFilteredPersonList());
@@ -146,7 +146,7 @@ public class FindCommandTest {
         String secondExpectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 1);
         NameContainsKeywordsPredicate thirdPredicate = prepareNameContainsKeywordsPredicate("Choo");
         FindCommand secondCommand = new FindPersonSubCommand(thirdPredicate, false);
-        Predicate fourthPredicate = manager.executeNewSearch(thirdPredicate);
+        Predicate<Person> fourthPredicate = manager.executeNewSearch(thirdPredicate);
         expectedModel.updateFilteredPersonList(fourthPredicate);
         assertCommandSuccess(secondCommand, model, commandHistory, secondExpectedMessage, expectedModel);
         assertEquals(Arrays.asList(SEGWIT), model.getFilteredPersonList());
