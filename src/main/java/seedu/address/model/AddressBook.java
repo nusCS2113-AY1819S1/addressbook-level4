@@ -154,7 +154,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     /**
      * Returns true if a todo with the same identity as {@code todo} exists in the address book.
      */
-    public boolean hasPerson(Todo todo) {
+    public boolean hasTodo(Todo todo) {
         requireNonNull(todo);
         return todos.contains(todo);
     }

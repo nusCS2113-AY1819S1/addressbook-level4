@@ -63,6 +63,12 @@ public interface Model {
     void updateFilteredPersonList(Predicate<Person> predicate);
 
     /**
+     * Updates the filter of the filtered todo task list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredTodoList(Predicate<Todo> predicate);
+
+    /**
      * Returns true if the model has previous address book states to restore.
      */
     boolean canUndoAddressBook();
