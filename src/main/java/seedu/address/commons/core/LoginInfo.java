@@ -1,31 +1,33 @@
 package seedu.address.commons.core;
-//@@author tianhang
+
 import java.util.Objects;
+
+import seedu.address.model.user.AuthenticationLevel;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.UserName;
 
 /**
  * This contains the login information of user
  */
 public class LoginInfo {
 
-    protected String userName;
-    protected String password;
-    protected String authenticationLevel;
+    protected UserName userName;
+    protected Password password;
+    protected AuthenticationLevel authenticationLevel;
 
-    public LoginInfo(){
-
-    }
+    public LoginInfo(){ }
     public LoginInfo (String userName, String authenticationLevel) {
-        this.userName = userName;
-        this.authenticationLevel = authenticationLevel;
+        this.userName = new UserName (userName);
+        this.authenticationLevel = new AuthenticationLevel (authenticationLevel);
     }
     public LoginInfo (String userName, String password, String authenticationLevel) {
-        this.userName = userName;
-        this.password = password;
-        this.authenticationLevel = authenticationLevel;
+        this.userName = new UserName (userName);
+        this.password = new Password (password);
+        this.authenticationLevel = new AuthenticationLevel (authenticationLevel);
     }
 
     public void setPassword (String password) {
-        this.password = password;
+        this.password = new Password (password);
     }
 
 
@@ -37,22 +39,22 @@ public class LoginInfo {
     @Override
     public String toString () {
         StringBuilder sb = new StringBuilder();
-        sb.append("userName : " + userName);
-        sb.append ("\npassword : " + password);
-        sb.append ("\nauthenticationLevel : " + authenticationLevel);
+        sb.append("userName : " + userName.toString ());
+        sb.append ("\npassword : " + password.toString ());
+        sb.append ("\nauthenticationLevel : " + authenticationLevel.toString ());
         return sb.toString();
     }
 
     public String getUserName () {
-        return userName;
+        return userName.toString ();
     }
 
     public String getPassword () {
-        return password;
+        return password.toString ();
     }
 
     public String getAuthenticationLevel () {
-        return authenticationLevel;
+        return authenticationLevel.toString ();
     }
 
 }

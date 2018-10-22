@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.user;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -18,14 +18,16 @@ import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
-import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
-import seedu.address.logic.commands.user.CreateUserCommand;
+import seedu.address.logic.commands.user.CreateAccountCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
+import seedu.address.logic.parser.AddItemCommandParser;
+import seedu.address.logic.parser.DeleteCommandParser;
+import seedu.address.logic.parser.EditCommandParser;
+import seedu.address.logic.parser.FindCommandParser;
+import seedu.address.logic.parser.SelectCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.user.ChangePasswordCommandParser;
-import seedu.address.logic.parser.user.CreateUserCommandParser;
 
 /**
  * Parses user input.
@@ -62,23 +64,23 @@ public class AdminParser {
             case ChangePasswordCommand.COMMAND_WORD:
                 return new ChangePasswordCommandParser ().parse(arguments);
 
-            case CreateUserCommand.COMMAND_WORD:
-                return new CreateUserCommandParser ().parse (arguments);
+            case CreateAccountCommand.COMMAND_WORD:
+                return new CreateAccountCommandParser ().parse (arguments);
 
             case EditCommand.COMMAND_WORD:
-                return new EditCommandParser().parse(arguments);
+                return new EditCommandParser ().parse(arguments);
 
             case SelectCommand.COMMAND_WORD:
-                return new SelectCommandParser().parse(arguments);
+                return new SelectCommandParser ().parse(arguments);
 
             case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser().parse(arguments);
+                return new DeleteCommandParser ().parse(arguments);
 
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
 
             case FindCommand.COMMAND_WORD:
-                return new FindCommandParser().parse(arguments);
+                return new FindCommandParser ().parse(arguments);
 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();

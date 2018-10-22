@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 /**
  * Adds a person to the address book.
  */
-public class CreateUserCommand extends UserCommand {
+public class CreateAccountCommand extends UserCommand {
 
     public static final String COMMAND_WORD = "createAccount";
 
@@ -38,7 +38,7 @@ public class CreateUserCommand extends UserCommand {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public CreateUserCommand(String userName, String password, String authenticationLevel) {
+    public CreateAccountCommand (String userName, String password, String authenticationLevel) {
         requireNonNull(userName);
         requireNonNull (password);
         requireNonNull (authenticationLevel);

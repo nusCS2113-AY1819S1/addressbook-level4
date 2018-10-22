@@ -24,7 +24,7 @@
                 <Font name="Lucida Console" size="20.0" />
             </font>
         </Label>
-        <Label layoutX="347.0" layoutY="114.0" text="FROZEN BOOK" textFill="#3b33e2">
+        <Label layoutX="388.0" layoutY="114.0" text="Drink I/O" textFill="#3b33e2">
             <font>
                 <Font name="Marlett" size="33.0" />
             </font>
@@ -53,10 +53,11 @@
         </ImageView>
         <Label fx:id="loginError" layoutX="460.0" layoutY="234.0" textFill="#fa0c0c" />
         <PasswordField fx:id="passwordField" layoutX="381.0" layoutY="263.0" onKeyPressed="#handleEnterPressed" />
-        <Label layoutX="584.0" layoutY="1.0" onMouseClicked="#handleClose" prefHeight="18.0" prefWidth="19.0" text="x" textFill="#e20505">
+        <Label layoutX="576.0" layoutY="28.0" onMouseClicked="#handleClose" prefHeight="18.0" prefWidth="19.0" text="x" textFill="#e20505">
             <font>
                 <Font size="17.0" />
             </font>
         </Label>
+      <TextField fx:id="commandBox" layoutY="2.0" onKeyReleased="#handleInputFromCommandBox" prefHeight="26.0" prefWidth="600.0" />
     </children>
 </AnchorPane>

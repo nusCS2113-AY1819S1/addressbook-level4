@@ -15,13 +15,14 @@ public class LoginInfoManager {
     public LoginInfoManager () {
         loginInfoList = null;
     }
+
     public LoginInfo getLoginInfo(String userName) {
         for (LoginInfo loginInfo : loginInfoList) {
             if (loginInfo.getUserName ().equals (userName)) {
                 return loginInfo;
             }
         }
-        return new LoginInfo ();
+        return null;
     }
 
     /**
@@ -64,7 +65,7 @@ public class LoginInfoManager {
 
             sb.append("\nuserName : " + loginInfo.getUserName ());
             sb.append ("\npassword : " + loginInfo.getPassword ());
-            sb.append ("\nauthenticationLevel" + loginInfo.getAuthenticationLevel ());
+            sb.append ("\nauthenticationLevel : " + loginInfo.getAuthenticationLevel ());
         }
         return sb.toString();
     }

@@ -15,7 +15,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.user.ChangePasswordCommand;
-import seedu.address.logic.commands.user.CreateUserCommand;
+import seedu.address.logic.commands.user.CreateAccountCommand;
 
 /**
  * this stores the authentication level and command available for each level
@@ -26,9 +26,9 @@ public enum AuthenticationLevel {
                             EditCommand.COMMAND_WORD , ExitCommand.COMMAND_WORD , FindCommand.COMMAND_WORD ,
                             HelpCommand.COMMAND_WORD , HistoryCommand.COMMAND_WORD , ListCommand.COMMAND_WORD ,
                             RedoCommand.COMMAND_WORD , SelectCommand.COMMAND_WORD , UndoCommand.COMMAND_WORD ,
-                            ChangePasswordCommand.COMMAND_WORD , CreateUserCommand.COMMAND_WORD,
+                            ChangePasswordCommand.COMMAND_WORD , CreateAccountCommand.COMMAND_WORD,
                             AddItemCommand.COMMAND_WORD, SellCommand.COMMAND_WORD}),
-    MANAGER (new String[] {AddItemCommand.COMMAND_WORD, CreateUserCommand.COMMAND_WORD,
+    MANAGER (new String[] {AddItemCommand.COMMAND_WORD, CreateAccountCommand.COMMAND_WORD,
                            ChangePasswordCommand.COMMAND_WORD }),
     STOCK_TAKER (new String[] {SellCommand.COMMAND_WORD});
 

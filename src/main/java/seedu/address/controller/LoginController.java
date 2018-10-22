@@ -3,17 +3,20 @@ package seedu.address.controller;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import seedu.address.authentication.LoginUtils;
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.init.InitAddressBook;
+import seedu.address.commons.events.model.InitInventoryListEvent;
+import seedu.address.commons.events.ui.ChangeMainStageEvent;
 import seedu.address.model.LoginInfoManager;
-import seedu.address.ui.Ui;
 
 
 
@@ -22,20 +25,58 @@ import seedu.address.ui.Ui;
  */
 public class LoginController {
 
-    protected static Ui ui;
     protected static LoginInfoManager loginInfoManager;
-    protected static InitAddressBook initAddressBook;
-    protected static Stage mainWindow;
-    private String username;
-    private String password;
+    private String username = "";
+    private String password = "";
     @FXML
-    private javafx.scene.control.TextField usernameField;
+    private TextField usernameField;
     @FXML
     private PasswordField passwordField;
     @FXML
-    private javafx.scene.control.Label loginError;
+    private Label loginError;
+    @FXML
+    private TextField commandBox;
+    private String commandInput;
+    private boolean isPasswordGoingToEnter = false;
     private final Logger logger = LogsCenter.getLogger(LoginController.class);
 
+    @FXML
+    public void handleInputFromCommandBox(KeyEvent key){
+        //        commandInput = commandBox.getText ();
+        //        int caretPosition = commandBox.getCaretPosition();
+        //        setUserNameAndPassword();
+        //        //commandBox.setText (setPasswordToStar ());
+        //        commandBox.positionCaret (caretPosition);
+        if (key.getCode() == KeyCode.ENTER) {
+            commandInput = commandBox.getText ();
+            setUserNameAndPassword();
+            verifyLoginInfo ();
+        }
+    }
+    private void setUserNameAndPassword(){
+        String[] splited = commandInput.split("\\s");
+        int count = 0;
+        while( count < splited.length){
+            if (count ==0){
+                username = splited[count];
+            }else if(count ==1){
+                password = splited[count];
+            }else if(count >1){
+                loginError.setText ("Wrong format for username and password");
+            }
+            count++;
+        }
+    }
+    private String setPasswordToStar(){
+
+        String staredCommand = username + " ";
+        int passwordLength = password.length();
+        while (passwordLength > 0 ){
+            staredCommand += "*";
+            passwordLength--;
+        }
+        return staredCommand;
+    }
     /**
      * handle when user press enter on login textfield or passwordField
      * @param key the key enter by user
@@ -43,6 +84,8 @@ public class LoginController {
     @FXML
     public void handleEnterPressed(KeyEvent key) {
         if (key.getCode() == KeyCode.ENTER) {
+            getUsername();
+            getPassword ();
             verifyLoginInfo ();
         }
     }
@@ -52,33 +95,10 @@ public class LoginController {
      */
     @FXML
     public void handleLoginButtonClick(ActionEvent clicked) {
-        verifyLoginInfo ();
-    }
-
-    /**
-     * Check for Login information such as username and password.
-     *
-     * @throws Exception
-     */
-    public void verifyLoginInfo () {
         getUsername();
         getPassword ();
-        LoginUtils loginUtils = new LoginUtils (username, password, loginInfoManager);
-        if (!loginUtils.isUsernameEmpty ()) {
-            loginError.setText("Please enter username");
-            return;
-        }
-        if (!loginUtils.isPasswordEmpty ()) {
-            loginError.setText("Please enter password");
-            return;
-        }
-        if (loginUtils.isPasswordAndUserNameValid ()) {
-            changeStageToMainUi();
-        } else {
-            loginError.setText("wrong username or password");
-        }
+        verifyLoginInfo ();
     }
-
     /**
      * Close loginWindow
      *
@@ -90,6 +110,42 @@ public class LoginController {
         stageTheLabelBelongs.close();
     }
 
+
+    /**
+     * Check for Login information such as username and password.
+     *
+     * @throws Exception
+     */
+    public void verifyLoginInfo () {
+        LoginUtils loginUtils = new LoginUtils (username, password, loginInfoManager);
+        if (!loginUtils.isUsernameEmpty ()) {
+            loginError.setText("Please enter username");
+            return;
+        } else if (!loginUtils.isPasswordEmpty ()) {
+            loginError.setText("Please enter password");
+            return;
+        }
+        if (loginUtils.isPasswordAndUserNameValid ()) {
+            changeStageToMainUi();
+            clearLoginInput();
+        } else {
+            clearLoginInput();
+            loginError.setText("wrong username or password");
+        }
+    }
+
+    /**
+     * Set back the ui into clean state
+     */
+    private void clearLoginInput(){
+        usernameField.setText ("");
+        passwordField.setText ("");
+        commandBox.setText ("");
+        loginError.setText ("");
+        username = "";
+        password = "";
+
+    }
     /**
      * gets the user name from textfield.
      */
@@ -113,12 +169,8 @@ public class LoginController {
         Stage primaryStage = (Stage) passwordField.getScene().getWindow();
         primaryStage.hide();
         Stage stage = new Stage ();
-        initAddressBook.initAfterLogin ();
-        this.ui = initAddressBook.getUi ();
-        ui.start(stage);
-    }
-    public static Ui getUi(){
-        return ui;
+        EventsCenter.getInstance().post(new InitInventoryListEvent ());
+        EventsCenter.getInstance().post(new ChangeMainStageEvent (stage));
     }
     /**
      * pass in LoginInfo list
@@ -128,16 +180,6 @@ public class LoginController {
         this.loginInfoManager = loginInfoManager;
     }
 
-    /**
-     * pass in the main Book
-     * @param initAddressBook
-     */
-    public void passInInitAddressBook (InitAddressBook initAddressBook) {
-        if (initAddressBook == null) {
-            System.out.println ("initAddressBook is null");
-        }
-        this.initAddressBook = initAddressBook;
-    }
 
 
 }

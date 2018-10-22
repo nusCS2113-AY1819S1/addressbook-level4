@@ -15,6 +15,7 @@ public class Password {
 
     private String password;
 
+    public Password(){}
     public Password(String password) {
         requireNonNull(password);
         this.password = password;

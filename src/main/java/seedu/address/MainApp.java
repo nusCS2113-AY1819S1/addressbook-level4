@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -23,6 +24,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
+import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -87,40 +89,9 @@ public class MainApp extends Application {
         initAddressBook = new InitAddressBook (config, storage, userPrefs, loginInfoList);
         initLogging(config);
         fxmlLoader = new FXMLLoader();
-//        model = initModelManager(storage, userPrefs);
-//        logic = new LogicManager(model, loginInfoList);
-//
-//        ui = new UiManager(logic, config, userPrefs);
-//
-
         initEventsCenter();
 
     }
-
-//    /**
-//     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-//     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-//     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
-//     */
-//    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-//        Optional<ReadOnlyAddressBook> addressBookOptional;
-//        ReadOnlyAddressBook initialData;
-//        try {
-//            addressBookOptional = storage.readAddressBook();
-//            if (!addressBookOptional.isPresent()) {
-//                logger.info("Data file not found. Will be starting with a sample AddressBook");
-//            }
-//            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-//        } catch (DataConversionException e) {
-//            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-//            initialData = new AddressBook ();
-//        } catch (IOException e) {
-//            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-//            initialData = new AddressBook();
-//        }
-//
-//        return new ModelManager (initialData, userPrefs);
-//    }
 
     private void initLogging(Config config) {
         LogsCenter.init(config);
@@ -253,14 +224,7 @@ public class MainApp extends Application {
     }
     private void settingUpLoginController() {
         loginController = new LoginController ();
-        passInInitAddressBook ();
         passInLoginList();
-    }
-    /**
-     * Pass {@code initAddressBook} to login page
-     */
-    private void passInInitAddressBook () {
-        loginController.passInInitAddressBook (initAddressBook);
     }
 
     /**
@@ -270,7 +234,7 @@ public class MainApp extends Application {
         loginController.getLoginInfoList (loginInfoList);
     }
     /**
-     * load the file from {@code location} and set {@code root}
+     * loads the file from {@code location} and set {@code root}
      * @param location
      * @param root
      * @return root of primary stage
@@ -292,15 +256,12 @@ public class MainApp extends Application {
     @Override
     public void stop() {
         closeUiWindow();
-        //Platform.exit();
+        Platform.exit();
         System.exit(0);
     }
     private void closeUiWindow(){
         logger.info("============================ [ Stopping DRINK I/O ] =============================");
-        ui = LoginController.getUi ();
-        if (ui != null){
-            ui.stop ();
-        }
+        //EventsCenter.getInstance().post(new StopUiEvent ());
         try {
             storage.saveLoginInfo (loginInfoList);
             storage.saveUserPrefs(userPrefs);
@@ -308,7 +269,6 @@ public class MainApp extends Application {
             logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
         }
         loginWindow.close ();
-        //Platform.exit();
     }
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
