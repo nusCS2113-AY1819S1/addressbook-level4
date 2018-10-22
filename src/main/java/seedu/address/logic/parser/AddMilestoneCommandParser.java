@@ -1,12 +1,11 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MILESTONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.util.stream.Stream;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddMilestoneCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.task.Milestone;
@@ -28,20 +27,20 @@ public class AddMilestoneCommandParser implements Parser<AddMilestoneCommand> {
     @Override
     public AddMilestoneCommand parse(String userInput) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(userInput, PREFIX_TITLE, PREFIX_MILESTONE, PREFIX_RANK);
+                ArgumentTokenizer.tokenize(userInput, PREFIX_INDEX, PREFIX_MILESTONE, PREFIX_RANK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_TITLE, PREFIX_MILESTONE, PREFIX_RANK)
+        if (!arePrefixesPresent(argMultimap, PREFIX_INDEX, PREFIX_MILESTONE, PREFIX_RANK)
             || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddMilestoneCommand.MESSAGE_USAGE));
         }
 
-        String title = ParserUtil.parseTitle(argMultimap.getValue(PREFIX_TITLE).get());
+        Index index = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_INDEX).get());
         String milestoneDescription = ParserUtil.parseMilestoneDescription(
                 argMultimap.getValue(PREFIX_MILESTONE).get());
         String rank = ParserUtil.parseRank(argMultimap.getValue(PREFIX_RANK).get());
 
-        Milestone milestone = new Milestone(title, milestoneDescription, rank);
+        Milestone milestone = new Milestone(milestoneDescription, rank);
 
-        return new AddMilestoneCommand(milestone);
+        return new AddMilestoneCommand(index, milestone);
     }
 }
