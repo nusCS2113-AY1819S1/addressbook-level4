@@ -18,7 +18,7 @@ public class CancelCommand extends Command {
 
     public CancelCommand(String cancelledCommand) {
         this.cancelledCommand = cancelledCommand;
-    };
+    }
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         LogicManager.setLogicState("primary");

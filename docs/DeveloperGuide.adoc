@@ -826,7 +826,15 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |User |Add a new candidate |
 
+|`* * *` |User |Add a new company |
+
+|`* * *` |User |Add a new job offer to a company |
+
 |`* * *` |User |Delete a candidate |Remove entries that I no longer need
+
+|`* * *` |User |Delete a company |Remove entries that I no longer need
+
+|`* * *` |User |Delete a job offer |Remove entries that I no longer need
 
 |`* * *` |User |Find a candidate by name |Locate details of candidates without having to go through the entire list
 
@@ -844,7 +852,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |User |Find relevant details to a specific job candidate |Assign the most suitable job to him/her
 
+|`* *` |User |Undo/Redo changes to CompanyBook and CandidateBook |Revert unwanted changes job candidates and offers
+
 |`* *` |User |Hide <<private-contact-detail,private contact details>> by default |Minimize chance of someone else seeing them by accident
+
+|`* *` |User |Add relevant job experience/history of candidate |Useful when recommending candidates for jobs requiring relevant experience
 
 |`* *`|User|Shortlist the best candidates for a specific job offer|See the best available candidates
 
@@ -917,11 +929,10 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. User enters invalid details or used the wrong format.
+* 3a. User enters invalid details or used the wrong format.
 +
 [none]
-** 1a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
-** 1a2. Prompts user to re-enter fields in correct format or to exit add command
+** 3a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
 +
 Use case resumes at step 3.
 
@@ -930,11 +941,42 @@ Use case resumes at step 3.
 +
 [none]
 ** 3a1. RecruitBook informs user of existing entry
-** 3a2. Prompts user to enter a new entry or to exit add command
 +
 Use case resumes at step 3.
 
 [discrete]
+
+=== Use case: Add Company
+
+*MSS*
+
+1.  User requests to add a company
+2.  RecruitBook adds company to CompanyBook
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. User enters invalid details or used the wrong format.
++
+[none]
+** 1a1. RecruitBook informs user which fields they entered wrongly and show relevant examples
+** 1a2. Prompts user to re-enter fields in correct format or to exit add command
++
+Use case resumes at step 1.
+
+[none]
+* 1b. User enters a duplicate entry
++
+[none]
+** 1b1. RecruitBook informs user of existing entry
+** 1b2. Prompts user to enter a new entry or to exit add command
++
+Use case resumes at step 1.
+
+[discrete]
+
 === Use case: List candidate
 
 *MSS*

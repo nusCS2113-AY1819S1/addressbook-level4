@@ -25,8 +25,8 @@ import static seedu.recruit.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.recruit.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.recruit.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.recruit.testutil.TypicalPersons.AMY;
 import static seedu.recruit.testutil.TypicalPersons.BOB;
 import static seedu.recruit.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
@@ -61,7 +61,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST;
         String command = " " + EditCandidateCommand.COMMAND_WORD + "  " + index.getOneBased() + "  "
                 + NAME_DESC_BOB + "  " + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " "
                 + TAG_DESC_HUSBAND + " ";
@@ -77,7 +77,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updateCandidate(
-                getModel().getFilteredCandidateList().get(INDEX_FIRST_PERSON.getZeroBased()), editedCandidate);
+                getModel().getFilteredCandidateList().get(INDEX_FIRST.getZeroBased()), editedCandidate);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a candidate with new values same as existing values -> edited */
@@ -87,7 +87,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: edit a candidate with new values same as another candidate's values but with different name -> edited*/
         assertTrue(getModel().getCandidateBook().getCandidateList().contains(BOB));
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND;
         assertNotEquals(getModel().getFilteredCandidateList().get(index.getZeroBased()), BOB);
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
@@ -97,14 +97,14 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
         /* Case: edit a candidate with new values same as another candidate's values but with different phone and email
          * -> edited
          */
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND;
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedCandidate = new PersonBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedCandidate);
 
         /* Case: clear tags -> cleared */
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST;
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
         Candidate candidateToEdit = getModel().getFilteredCandidateList().get(index.getZeroBased());
         editedCandidate = new PersonBuilder(candidateToEdit).withTags().build();
@@ -114,7 +114,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
 
         /* Case: filtered candidate list, edit index within bounds of recruit book and candidate list -> edited */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST;
         assertTrue(index.getZeroBased() < getModel().getFilteredCandidateList().size());
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         candidateToEdit = getModel().getFilteredCandidateList().get(index.getZeroBased());
@@ -135,7 +135,7 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
          *  but browser url changes
          */
         showAllPersons();
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST;
         selectPerson(index);
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY
                 + EMAIL_DESC_AMY + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
@@ -163,33 +163,33 @@ public class EditCandidateCommandSystemTest extends CandidateBookSystemTest {
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCandidateCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
-        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(),
                 EditCandidateCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                         + INVALID_NAME_DESC, Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                         + INVALID_PHONE_DESC, Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                         + INVALID_EMAIL_DESC, Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid recruit -> rejected */
-        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                         + INVALID_ADDRESS_DESC, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased()
+        assertCommandFailure(EditCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                         + INVALID_TAG_DESC, Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a candidate with new values same as another candidate's values -> rejected */
         executeCommand(PersonUtil.getAddCandidateCommand(BOB));
         assertTrue(getModel().getCandidateBook().getCandidateList().contains(BOB));
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST;
         assertFalse(getModel().getFilteredCandidateList().get(index.getZeroBased()).equals(BOB));
         command = EditCandidateCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB
                 + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;

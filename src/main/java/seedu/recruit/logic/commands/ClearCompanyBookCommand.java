@@ -11,7 +11,7 @@ import seedu.recruit.model.Model;
  */
 
 public class ClearCompanyBookCommand extends Command {
-    public static final String COMMAND_WORD = "clearj";
+    public static final String COMMAND_WORD = "clearC";
     public static final String MESSAGE_SUCCESS = "CompanyBook has been cleared!";
 
 
