@@ -16,11 +16,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.event.Venue;
-import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 

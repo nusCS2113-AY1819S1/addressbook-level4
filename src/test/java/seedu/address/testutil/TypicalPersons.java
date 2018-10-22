@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_HAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;

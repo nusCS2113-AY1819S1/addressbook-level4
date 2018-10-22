@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
 import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_HAN;
+import static seedu.address.logic.commands.CommandTestUtil.ATTENDEE_DESC_TED;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.CONTACT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -21,8 +21,8 @@ import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_HAN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ATTENDEE_TED;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
@@ -54,7 +54,8 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Event expectedEvent = new EventBuilder(BOB).withTags(VALID_TAG_FRIEND).withAttendees(VALID_ATTENDEE_TED).build();
+        Event expectedEvent = new EventBuilder(BOB).withTags(VALID_TAG_FRIEND).withAttendees(VALID_ATTENDEE_TED)
+                .build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB
@@ -84,8 +85,8 @@ public class AddCommandParserTest {
         Event expectedEventMultipleTags = new EventBuilder(BOB).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
                 .build();
         assertParseSuccess(parser, NAME_DESC_BOB + CONTACT_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
-                + VENUE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDEE_DESC_TED + ATTENDEE_DESC_HAN
-                , new AddCommand(expectedEventMultipleTags));
+                + VENUE_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND + ATTENDEE_DESC_TED + ATTENDEE_DESC_HAN,
+                new AddCommand(expectedEventMultipleTags));
 
         // multiple attendees - all accepted
         Event expectedEventMultipleAttendees = new EventBuilder(BOB).withAttendees(VALID_ATTENDEE_TED,

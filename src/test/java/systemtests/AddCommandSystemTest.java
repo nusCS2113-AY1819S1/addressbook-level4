@@ -20,11 +20,11 @@ import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CONTACT_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VENUE_DESC_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -44,13 +44,13 @@ import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
 import seedu.address.model.event.Venue;
-import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EventBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -103,8 +103,8 @@ public class AddCommandSystemTest extends EventManagerSystemTest {
 
         /* Case: add an event with tags, command with parameters in random order -> added */
         toAdd = BOB;
-        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + ATTENDEE_DESC_TED + PHONE_DESC_BOB + VENUE_DESC_BOB + NAME_DESC_BOB
-                + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + ATTENDEE_DESC_HAN + CONTACT_DESC_BOB;
+        command = AddCommand.COMMAND_WORD + TAG_DESC_FRIEND + ATTENDEE_DESC_TED + PHONE_DESC_BOB + VENUE_DESC_BOB
+                + NAME_DESC_BOB + TAG_DESC_HUSBAND + EMAIL_DESC_BOB + ATTENDEE_DESC_HAN + CONTACT_DESC_BOB;
         assertCommandSuccess(command, toAdd);
 
         /* Case: add an event, missing tags -> added */

@@ -12,8 +12,8 @@ import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
-import seedu.address.model.event.Event;
 import seedu.address.model.attendee.Attendee;
+import seedu.address.model.event.Event;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,8 +42,9 @@ public class PersonUtil {
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
         event.getAttendees().stream().forEach(
-                s -> sb.append(PREFIX_ATTENDEE + s.attendeeName + " ")
+            s -> sb.append(PREFIX_ATTENDEE + s.attendeeName + " ")
         );
+
         return sb.toString();
     }
 
