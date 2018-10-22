@@ -342,7 +342,7 @@ These operations are exposed in the `Model` interface as `Model#createGroup()`, 
 
 Given below is an example usage scenario and how the group mechanism behaves at each step.
 
-Step 1. User inputs `creategroup n/CS2113 l/LT15` to create a group in the student management system.
+Step 1. User inputs `creategroup n/CS1231 l/LT15` to create a group in the student management system.
 The `AddressBookParser` detects `creategroup` as a command word to use `CreateGroupCommandParser` to parse the input given.
 `CreateGroupCommandParser` will then create a `Group` object after parsing and pass it to `GroupCommand` which will then
 execute adding the group created to the student management system.
@@ -352,8 +352,9 @@ If a duplicate groups are found in the student management system during its exec
 it will not create a group nor will it override the existing group but instead, it will throw a `DuplicateGroupException`
 which will then notify the user of the issue.
 
-The following sequence diagram shows how the create group operation works:
+The following sequence diagram shows how the create group operation works within both `Model` and `Logic` components:
 
+.Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command
 image::CreateGroupSequenceDiagram.png[width="800"]
 
 Step 2. The user inputs `addgroup g/1 p/1` to add the first person in the student management system to the first group
