@@ -1,6 +1,15 @@
 package seedu.planner.ui;
 
+import static seedu.planner.logic.commands.AddCommand.COMMAND_WORD;
+import static seedu.planner.logic.commands.ClearCommand.COMMAND_WORD;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
+
+import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +20,25 @@ import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.NewResultAvailableEvent;
 import seedu.planner.logic.ListElementPointer;
 import seedu.planner.logic.Logic;
+import seedu.planner.logic.commands.AddCommand;
+import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.CommandResult;
+import seedu.planner.logic.commands.DeleteCommand;
+import seedu.planner.logic.commands.DeleteCommandByDateEntry;
+import seedu.planner.logic.commands.EditCommand;
+import seedu.planner.logic.commands.ExitCommand;
+import seedu.planner.logic.commands.ExportExcelCommand;
+import seedu.planner.logic.commands.FindCommand;
+import seedu.planner.logic.commands.FindTagCommand;
+import seedu.planner.logic.commands.HelpCommand;
+import seedu.planner.logic.commands.HistoryCommand;
+import seedu.planner.logic.commands.LimitCommand;
+import seedu.planner.logic.commands.ListCommand;
+import seedu.planner.logic.commands.RedoCommand;
+import seedu.planner.logic.commands.SelectCommand;
+import seedu.planner.logic.commands.SortCommand;
+import seedu.planner.logic.commands.SummaryCommand;
+import seedu.planner.logic.commands.UndoCommand;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.logic.parser.exceptions.ParseException;
 
@@ -27,6 +54,8 @@ public class CommandBox extends UiPart<Region> {
     private final Logic logic;
     private ListElementPointer historySnapshot;
 
+    public static AutoCompleteBox autoCompleteBox;
+
     @FXML
     private TextField commandTextField;
 
@@ -34,6 +63,7 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.logic = logic;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
+        this.autoCompleteBox = new AutoCompleteBox(commandTextField);
         commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
         historySnapshot = logic.getHistorySnapshot();
     }
