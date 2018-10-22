@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
@@ -40,12 +41,12 @@ public class TimeTableTest {
         expected.add(TypicalTimeSlots.MON_8_TO_10);
         expected.add(TypicalTimeSlots.MON_10_TO_12);
 
-        assertEquals(timeTableTypical.findOverlapTimeSlots(TypicalTimeSlots.MON_9_TO_11), expected);
+        assertTrue(timeTableTypical.hasOverlap(TypicalTimeSlots.MON_9_TO_11));
     }
 
     @Test
     public void findOverlapTimeSlots_noOverlap_returnsEmpty() {
-        assertEquals(timeTableTypical.findOverlapTimeSlots(TypicalTimeSlots.WED_10_TO_12), Collections.emptyList());
+        assertTrue(timeTableTypical.hasOverlap(TypicalTimeSlots.MON_9_TO_11));
     }
 
     @Test

@@ -8,27 +8,22 @@ import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
  * Represents a timetable that is associated with a person
- *
  */
 public class TimeTable {
-    private Collection <TimeSlot> timeSlots;
+    protected Collection <TimeSlot> timeSlots;
 
     public TimeTable() {
         timeSlots = new ArrayList<>();
     }
 
     public TimeTable(Collection <TimeSlot> input) {
-        timeSlots = input;
+        this();
+        timeSlots.addAll(input);
     }
 
-    /**
-     * Copy constructor for {@code TimeTable}
-     * @param input {@code TimeTable} to be copied
-     */
     public TimeTable(TimeTable input) {
         this(input.getTimeSlots());
     }
-
 
     public Collection <TimeSlot> getTimeSlots() {
         Collection <TimeSlot> toReturn = new ArrayList<>();
@@ -37,13 +32,21 @@ public class TimeTable {
     }
 
     /**
-     * Adds a TimeSlot to the TimeTable
+     * Overwrites this {@code TimeTable} with {@code toReplace}
+     */
+    public void updateTimeTable(TimeTable toReplace) {
+        timeSlots.clear();
+        timeSlots.addAll(toReplace.getTimeSlots());
+    }
+
+    /**
+     * Adds a {@code TimeSlot} to the {@code TimeTable}
      *
-     * @param toAdd TimeSlot to be added
-     * @throws TimeSlotOverlapException if toAdd overlaps with an existing TimeSlot in the TimeTable
+     * @param toAdd {@code TimeSlot} to be added
+     * @throws TimeSlotOverlapException if {@code toAdd} overlaps with an existing {@code TimeSlot}
      */
     public void addTimeSlot(TimeSlot toAdd) throws TimeSlotOverlapException {
-        if (!findOverlapTimeSlots(toAdd).isEmpty()) {
+        if (hasOverlap(toAdd)) {
             throw new TimeSlotOverlapException();
         } else {
             timeSlots.add(toAdd);
@@ -51,10 +54,10 @@ public class TimeTable {
     }
 
     /**
-     * Removes a TimeSlot from the TimeTable
+     * Removes a {@code TimeSlot} from the {@code TimeTable}
      *
-     * @param toRemove TimeSlot to be removed
-     * @throws TimeSlotDoesNotExistException if toRemove does not exist in the TimeTable
+     * @param toRemove {@code TimeSlot} to be removed
+     * @throws TimeSlotDoesNotExistException if {@code toRemove} does not exist in the {@code TimeTable}
      */
     public void removeTimeSlot (TimeSlot toRemove) throws TimeSlotDoesNotExistException {
         if (!timeSlots.remove(toRemove)) {
@@ -63,24 +66,18 @@ public class TimeTable {
     }
 
     /**
-     * Checks whether toCheck overlaps with any TimeSlot in the existing timetable
-     *
-     * @param toCheck the TimeSlot to be checked against
-     * @return Optional containing overlapping TimeSlot
+     * Checks whether {@code toCheck} overlaps with any {@code TimeSlot}s in this {@code TimeTable}
+     * @param toCheck {@code TimeSlot} to be checked
+     * @return Whether an overlapping {@code TimeSlot} exists in this {@code TimeTable}
      */
-    public Collection <TimeSlot> findOverlapTimeSlots(TimeSlot toCheck) {
-        Collection <TimeSlot> toReturn = new ArrayList<>();
-
+    public boolean hasOverlap(TimeSlot toCheck) {
         for (TimeSlot timeSlot : timeSlots) {
             if (timeSlot.isOverlap(toCheck)) {
-                toReturn.add(timeSlot);
+                return true;
             }
         }
-        return toReturn;
-    }
 
-    public void updateTimeTable(TimeTable toReplace) {
-        this.timeSlots = toReplace.getTimeSlots();
+        return false;
     }
 
     @Override
