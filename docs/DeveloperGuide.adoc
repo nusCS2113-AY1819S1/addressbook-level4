@@ -335,16 +335,15 @@ Additionally, it implements the following operations:
 * `AddressBook#hasPersonInGroup()` -- Checks to see if a particular person is in a group.
 * `AddressBook#addGroup()` -- Add's persons to a group.
 * `AddressBook#removeGroup()` -- Removes a group form the student management system.
-* `AddressBook#getGroupList()` -- Returns a list of groups in the student management system.
 
 These operations are exposed in the `Model` interface as `Model#createGroup()`, `Model#hasGroup()`,
-`Model#hasPersonInGroup()`, `Model#addGroup()`, `Model#deleteGroup()` and `Model#getFilteredGroupList()` respectively.
+`Model#hasPersonInGroup()`, `Model#addGroup()` and `Model#deleteGroup()` respectively.
 
 Given below is an example usage scenario and how the group mechanism behaves at each step.
 
 Step 1. User inputs `creategroup n/CS1231 l/LT15` to create a group in the student management system.
 The `AddressBookParser` detects `creategroup` as a command word to use `CreateGroupCommandParser` to parse the input given.
-`CreateGroupCommandParser` will then create a `Group` object after parsing and pass it to `GroupCommand` which will then
+`CreateGroupCommandParser` will then create a `Group` object containing all of the group's given information after parsing and pass it to `GroupCommand` which will then
 execute adding the group created to the student management system.
   +
 [NOTE]
@@ -352,19 +351,24 @@ If a duplicate groups are found in the student management system during its exec
 it will not create a group nor will it override the existing group but instead, it will throw a `DuplicateGroupException`
 which will then notify the user of the issue.
 
-The following sequence diagram shows how the create group operation works within both `Model` and `Logic` components:
+The following sequence diagram shows how the create group operation works within both `Model` and `Logic` components where `g` is the `Group` object created:
 
 .Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command
 image::CreateGroupSequenceDiagram.png[width="800"]
 
 Step 2. The user inputs `addgroup g/1 p/1` to add the first person in the student management system to the first group
 in the student management system. The `AddressBookParser` detects `addgroup` as a command word will use `AddGroupCommandParser`
-to parse the input given. `AddGroupCommandParser` will then create an `AddGroup` object after parsing and pass it to `AddGroupCommand`
+to parse the input given. `AddGroupCommandParser` will then create an `AddGroup` object containing all relevant group and person indexes after parsing and pass it to `AddGroupCommand`
 which will then execute adding persons to the specified group in the student management system.
  +
 [NOTE]
 If a duplicate persons are found in the group of the student management system during its execution,
 it will not create a group nor will it override the existing group but instead, it will throw a `DuplicatePersonException` which will notify the user of the issue.
+
+The following sequence diagram shows how the add persons to group operation works within both `Model` and `Logic` components where `ag` is the `AddGroup` object created:
+
+.Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command
+image::AddGroupSequenceDiagram.png[width="800"]
 
 Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word will use `DeleteGroupCommandParser`
 to parse the input given. `DeleteGroupCommandParser` will then create an `Index` object after parsing and pass it to `DeleteGroupCommand`
