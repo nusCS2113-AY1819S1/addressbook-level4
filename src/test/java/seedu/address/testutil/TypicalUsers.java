@@ -15,9 +15,12 @@ import seedu.address.model.login.exceptions.DuplicateUserException;
  */
 public class TypicalUsers {
 
-    public static final User DEFAULT_USER = new User(new Username("username"), new Password("pass"));
+    public static final User DEFAULT_USER = new User(new Username("user"), new Password("pass"));
     public static final User AMY = new User(new Username("amy"), new Password("pass"));
     public static final User BOB = new User(new Username("bob"), new Password("pass"));
+
+    public static final User JOHN = new User(new Username("John"), new Password("pass"));
+    public static final User RICK = new User(new Username("Rick"), new Password("pass"));
 
 
     private TypicalUsers() {} // prevents instantiation
@@ -28,11 +31,7 @@ public class TypicalUsers {
     public static UserDatabase getTypicalUserDatabase() {
         UserDatabase ud = new UserDatabase();
         for (User user: getTypicalUsers()) {
-            try {
-                ud.addUser(user);
-            } catch (DuplicateUserException e) {
-                throw new AssertionError("not possible");
-            }
+            ud.addUser(user);
         }
         return ud;
     }
