@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
 import java.net.URL;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -14,15 +16,17 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.GroupPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.address.model.grade.Test;
 import seedu.address.model.group.Group;
 import seedu.address.model.person.Person;
-
+//@@author clara1234566
 /**
  * The Browser Panel of the App.
  */
 public class BrowserPanel extends UiPart<Region> {
 
     public static final String DEFAULT_PAGE = "default.html";
+    public static final String STUDENT_GRADE_PAGE_URL = "/docs/StudentGradeSummary.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
 
@@ -43,8 +47,25 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * The window to show student tests && grades.
+     */
     private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+        String urlToLoad = getClass().getResource(STUDENT_GRADE_PAGE_URL).toString();
+        int i = 0;
+        Set<Test> testList = new HashSet<>();
+        testList.addAll(person.getTests());
+        String json = "[";
+        for (Test test: testList) {
+            if (i++ == testList.size() - 1) {
+                json = json + "{\"name\":\"" + test.getTestName() + "\",\"marks\":\"" + test.getMarks() + "\"}]";
+            } else {
+                json = json + "{\"name\":\"" + test.getTestName() + "\",\"marks\":\"" + test.getMarks() + "\"},";
+            }
+        }
+
+        loadPage(urlToLoad + "?data=" + json);
+
     }
 
     private void loadGroupPage(Group group) {
