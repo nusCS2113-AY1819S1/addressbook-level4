@@ -36,12 +36,26 @@ public class Schedule {
         return new ArrayList<>(activities);
     }
 
-    public void add(Activity activity){
+    public void add(Activity activity) {
         Date date = activity.getDate();
         if (!contains(date)) {
             schedule.put(date, new ArrayList<>());
         }
         schedule.get(date).add(activity);
+    }
+
+    //TODO convert index to 1
+    public void delete(Date date, int index) {
+        if (!contains(date)) {
+            //TODO add throw
+        }
+        if (schedule.get(date).size() < index) {
+            //TODO add throw
+        }
+        schedule.get(date).remove(index);
+        if (schedule.get(date).isEmpty()){
+            schedule.remove(date);
+        }
     }
 
     private boolean contains(Date date) {

@@ -121,6 +121,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         schedule.add(activity);
     }
 
+    public void deleteActivity(Date date, int index) {
+        schedule.delete(date, index);
+    }
+
+    public void editActivity(){
+
+    }
     /**
      * @return the List of Unique Tags.
      */

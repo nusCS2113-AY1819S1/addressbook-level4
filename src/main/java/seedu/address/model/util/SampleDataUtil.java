@@ -1,6 +1,8 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -14,6 +16,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Position;
+import seedu.address.model.schedule.Activity;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,12 +45,21 @@ public class SampleDataUtil {
                 new Note("Roy is a friend"), getTagSet("colleagues"))
         };
     }
+    public static Activity[] getSampleSchedule() {
+        return new Activity[]{
+                new Activity(Activity.toDate(1, 12, 1990), "sample activity")
+        };
+    }
 
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+        for (Activity sampleActivity : getSampleSchedule()) {
+            sampleAb.addActivity(sampleActivity);
+        }
+
         return sampleAb;
     }
 

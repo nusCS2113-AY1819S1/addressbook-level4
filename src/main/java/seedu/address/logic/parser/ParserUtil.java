@@ -200,17 +200,16 @@ public class ParserUtil {
      */
     public static Date parseDate(String dateString) throws ParseException {
         String trimmedDate = dateString.trim();
-        if (!Activity.isValidDate(trimmedDate)) {
-            throw new ParseException(Activity.MESSAGE_DATE_CONSTRAINTS);
-        }
+//        if (!Activity.isValidDate(trimmedDate)) {
+//            throw new ParseException(Activity.MESSAGE_DATE_CONSTRAINTS);
+//        }
         StringTokenizer tokens = new StringTokenizer(trimmedDate, "/");
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(tokens.nextToken()));
-        cal.set(Calendar.MONTH,  Integer.parseInt(tokens.nextToken()));
-        cal.set(Calendar.YEAR,  Integer.parseInt(tokens.nextToken()));
+        int day = Integer.parseInt(tokens.nextToken()) ;
+        //TODO change this to index 0
+        int month = Integer.parseInt(tokens.nextToken());
+        int year = Integer.parseInt(tokens.nextToken());
 
-        Date date = cal.getTime();
-        
+        Date date = Activity.toDate(day, month, year);
         return date;
     }
 

@@ -219,6 +219,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addSchedule(Activity activity) {
         versionedAddressBook.addActivity(activity);
+        indicateAddressBookChanged();
     }
 
 }
