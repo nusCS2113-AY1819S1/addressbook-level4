@@ -1,8 +1,10 @@
 package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import javafx.collections.ObservableList;
+import org.apache.http.ParseException;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
@@ -31,12 +33,12 @@ public class EmailSelectRecipientsCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws ParseException {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 
         //Add recipients only if commandWord is add.
-        if (commandWord.equals("add")) {
+        if (commandWord.equals(EmailUtil.EMAIL_ADD_COMMAND)) {
             if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                 ObservableList<Candidate> recipients = model.getFilteredCandidateList();
                 for (Candidate recipient : recipients) {
@@ -60,7 +62,7 @@ public class EmailSelectRecipientsCommand extends Command {
             output += EmailSelectRecipientsCommand.MESSAGE_USAGE;
             return new CommandResult(output);
 
-        } else if (commandWord.equals("next")) {
+        } else if (commandWord.equals(EmailUtil.EMAIL_NEXT_COMMAND)) {
             //Check if content array is empty, if it is, do not allow to move on to next stage
             boolean isEmpty = false;
 
@@ -81,9 +83,11 @@ public class EmailSelectRecipientsCommand extends Command {
                 return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
             }
         //back command
-        } else {
+        } else if (commandWord.equals(EmailUtil.EMAIL_BACK_COMMAND)) {
             LogicManager.setLogicState(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(EmailSelectRecipientsCommand.MESSAGE_USAGE);
         }
+
+        throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 }

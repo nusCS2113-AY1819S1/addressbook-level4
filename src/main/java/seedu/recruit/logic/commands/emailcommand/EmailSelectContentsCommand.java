@@ -1,6 +1,7 @@
 package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import javafx.collections.ObservableList;
 import seedu.recruit.commons.util.EmailUtil;
@@ -8,6 +9,7 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
@@ -31,12 +33,12 @@ public class EmailSelectContentsCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws ParseException {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 
         //Add contents only if commandWord equals add
-        if (commandWord.equals("add")) {
+        if (commandWord.equals(EmailUtil.EMAIL_ADD_COMMAND)) {
             if (emailUtil.isAreRecipientsCandidates()) {
                 ObservableList<JobOffer> contents = model.getFilteredCompanyJobList();
                 for (JobOffer content : contents) {
@@ -58,7 +60,7 @@ public class EmailSelectContentsCommand extends Command {
             output += EmailSelectRecipientsCommand.MESSAGE_USAGE;
             return new CommandResult(output);
 
-        } else if (commandWord.equals("next")) {
+        } else if (commandWord.equals(EmailUtil.EMAIL_NEXT_COMMAND)) {
             //Check if content array is empty, if it is, do not allow to move on to next stage
             boolean isEmpty = false;
 
@@ -79,9 +81,11 @@ public class EmailSelectContentsCommand extends Command {
                 return new CommandResult(EmailSendCommand.MESSAGE_USAGE);
             }
         //back command
-        } else {
+        } else if (commandWord.equals(EmailUtil.EMAIL_BACK_COMMAND)) {
             LogicManager.setLogicState(EmailSelectContentsCommand.COMMAND_LOGIC_STATE);
             return new CommandResult(EmailSelectContentsCommand.MESSAGE_USAGE);
         }
+
+        throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 }

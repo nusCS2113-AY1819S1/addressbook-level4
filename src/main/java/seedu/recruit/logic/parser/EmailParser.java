@@ -1,6 +1,10 @@
 package seedu.recruit.logic.parser;
 
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_ADD_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_BACK_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_NEXT_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_SEND_COMMAND;
 
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
@@ -34,10 +38,10 @@ public class EmailParser {
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
 
-            case "next":
+            case EMAIL_NEXT_COMMAND:
                 return new EmailSelectRecipientsCommand(commandWord);
 
-            case "add":
+            case EMAIL_ADD_COMMAND:
                 return new EmailSelectRecipientsCommand(commandWord);
 
             default:
@@ -50,13 +54,13 @@ public class EmailParser {
                 && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
-            case "next":
+            case EMAIL_NEXT_COMMAND:
                 return new EmailSelectContentsCommand(commandWord);
 
-            case "add":
+            case EMAIL_ADD_COMMAND:
                 return new EmailSelectContentsCommand(commandWord);
 
-            case "back":
+            case EMAIL_BACK_COMMAND:
                 return new EmailSelectRecipientsCommand(commandWord);
 
             default:
@@ -69,13 +73,13 @@ public class EmailParser {
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
 
-            case "next":
+            case EMAIL_NEXT_COMMAND:
                 return new EmailSelectContentsCommand(commandWord);
 
-            case "add":
+            case EMAIL_ADD_COMMAND:
                 return new EmailSelectContentsCommand(commandWord);
 
-            case "back":
+            case EMAIL_BACK_COMMAND:
                 return new EmailSelectRecipientsCommand(commandWord);
 
             default:
@@ -86,16 +90,17 @@ public class EmailParser {
         } else if (state.nextCommand.equals(EmailSendCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
 
-            case "send":
+            case EMAIL_SEND_COMMAND:
                 return new EmailSendCommand();
 
-            case "back":
+            case EMAIL_BACK_COMMAND:
                 return new EmailSelectContentsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
-        } else {
+        }
+        else {
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

@@ -43,6 +43,10 @@ public class EmailUtil {
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
     public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
+    public static final String EMAIL_ADD_COMMAND = "add";
+    public static final String EMAIL_NEXT_COMMAND = "next";
+    public static final String EMAIL_BACK_COMMAND = "back";
+    public static final String EMAIL_SEND_COMMAND = "send";
     private static final String APPLICATION_NAME = "CS2113 F09 T04";
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
