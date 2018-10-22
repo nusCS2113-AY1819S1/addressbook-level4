@@ -22,7 +22,7 @@ public class EmailInitialiseCommand extends Command {
         requireNonNull(model);
 
         //Initiailising a fresh instance of EmailUtil
-        EmailUtil emailUtil = new EmailUtil(model.getEmailUtil().getEmailSettings());
+        EmailUtil emailUtil = new EmailUtil();
         model.setEmailUtil(emailUtil);
         LogicManager.setLogicState(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(EmailSelectRecipientsCommand.MESSAGE_USAGE);

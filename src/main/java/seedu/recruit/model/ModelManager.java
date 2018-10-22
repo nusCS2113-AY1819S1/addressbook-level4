@@ -42,12 +42,13 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with recruit book: " + candidateBook + " and user prefs " + userPrefs);
 
+        EmailUtil.setEmailSettings(userPrefs.getEmailSettings());
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
         versionedCompanyBook = new VersionedCompanyBook(companyBook);
         filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
-        emailUtil = new EmailUtil(userPrefs.getEmailSettings());
+        emailUtil = new EmailUtil();
     }
 
     public ModelManager() {

@@ -55,20 +55,23 @@ public class EmailUtil {
     private ArrayList<Candidate> candidates;
     private ArrayList<JobOffer> jobOffers;
     private boolean areRecipientsCandidates;
-    private final EmailSettings emailSettings;
+    private static EmailSettings emailSettings;
 
     /**
      * Constructor
      */
-    public EmailUtil(EmailSettings emailSettings) {
+    public EmailUtil() {
         this.candidates = new ArrayList<>();
         this.jobOffers = new ArrayList<>();
-        this.emailSettings = emailSettings;
     }
-
     /**
      * Getters and Setters
      */
+    public static void setEmailSettings(EmailSettings emailSettings) {
+        EmailUtil.emailSettings = emailSettings;
+    }
+
+
     public ArrayList<Candidate> getCandidates() {
         return candidates;
     }
