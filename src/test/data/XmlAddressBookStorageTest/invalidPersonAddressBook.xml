@@ -3,7 +3,7 @@
     <!-- Product with invalid name field -->
     <products>
         <name>Ha!ns Mu@ster</name>
-        <phone isPrivate="false">9482424</phone>
+        <serialNumber isPrivate="false">9482424</serialNumber>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
     </products>

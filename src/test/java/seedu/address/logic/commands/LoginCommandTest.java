@@ -25,7 +25,7 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
@@ -70,7 +70,7 @@ public class LoginCommandTest {
     }
 
     /**
-     * Generates a new AddCommand with the details of the given person.
+     * Generates a new AddCommand with the details of the given product.
      */
     private LoginCommand getLoginCommandForLoginAttempt(Username username, Password password, Model model)
             throws CommandException {

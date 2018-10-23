@@ -38,7 +38,7 @@ public class EditDistributorDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditDistributorDescriptor} that we are building.
+     * Sets the {@code SerialNumber} of the {@code EditDistributorDescriptor} that we are building.
      */
     public EditDistributorDescriptorBuilder withPhone(String phone) {
         descriptor.setDistPhone(new DistributorPhone(phone));
