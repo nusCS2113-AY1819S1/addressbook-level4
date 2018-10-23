@@ -51,7 +51,7 @@ public class Filetype {
     /**
      * Returns true if a given string matches any of the valid Extension.
      */
-    public static boolean isValidExtension(String extension) {
+    private static boolean isValidExtension(String extension) {
         return contains(Extension.class, extension);
     }
 

@@ -22,7 +22,7 @@ public class CsvWriterTest {
 
     private Path expectedPath = Paths.get("data" , "pineapple.csv");
     // AddressBookStub addressBookStub = new AddressBookStub();
-    //  CsvWriter csvWriter = new CsvWriter(new AddressBookStub.getPersonList());
+    // CsvWriter csvWriter = new CsvWriter(new AddressBookStub.getPersonList());
 
     @Test
     public void getOutputFilepathNotNull() {
@@ -36,7 +36,7 @@ public class CsvWriterTest {
 
     @Test
     public void testWriteToCsv() {
-        // TODO: Implement this!
+        // TODO: Implement this after being able to read from csv
     }
 
 }
