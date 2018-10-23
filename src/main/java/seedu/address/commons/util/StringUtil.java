@@ -17,6 +17,13 @@ import seedu.address.commons.core.index.Index;
 public class StringUtil {
 
     /**
+     * Regex strings for parsing.
+     */
+    private static final String REGEX_INTEGERS = "\\d+";
+    private static final String REGEX_INDEX_RANGE_FORMAT =
+            "(?s)(\\d*\\s*-\\s*\\d*\\s*\\s*,?)?(\\s*,\\s*\\d*\\s*-\\s*\\d*\\s*\\s*,?)*";
+
+    /**
      * Returns true if the {@code sentence} contains the {@code word}.
      *   Ignores case, but a full word match is required.
      *   <br>examples:<pre>
@@ -121,7 +128,7 @@ public class StringUtil {
 
         StringTokenizer tokenizer = new StringTokenizer(input);
         while (tokenizer.hasMoreTokens()) {
-            if (!tokenizer.nextToken().matches("\\d+")) {
+            if (!tokenizer.nextToken().matches(REGEX_INTEGERS)) {
                 return false;
             }
         }
@@ -135,7 +142,7 @@ public class StringUtil {
      * @return true if conforms, false otherwise.
      */
     public static boolean isRangeIndexFormat(String input) {
-        return input.trim().matches("(?s)(\\d*\\s*-\\s*\\d*\\s*\\s*,?)?(\\s*,\\s*\\d*\\s*-\\s*\\d*\\s*\\s*,?)*");
+        return input.trim().matches(REGEX_INDEX_RANGE_FORMAT);
     }
 
     /**
