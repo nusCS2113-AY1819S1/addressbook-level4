@@ -10,14 +10,14 @@ image::driedmelon.png[width="150", align="left"]
 
 ---
 
-= Roles: Team Lead
-= Responsibilities: Deliverables and deadlines
+=== Roles: Team Lead
+=== Responsibilities: Deliverables and deadlines
 
 ---
 
 == Overview
 
-`JitHub` is a desktop time scheduling application targeted at tertiary students. It enables you to view available meeting
+`JitHub` started off as a is a desktop time scheduling application targeted at tertiary students. It enables you to view available meeting
  time slots in project teams. This is done with a Command Line Interface(CLI), and it has a GUI created with JavaFX.
  `JitHub` is written in Java, and has about 10 kLoC.
 
