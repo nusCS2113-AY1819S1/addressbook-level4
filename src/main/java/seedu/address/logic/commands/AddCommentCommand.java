@@ -69,9 +69,6 @@ public class AddCommentCommand extends Command {
         String test =
                 "<span>Comment Section</span>\n"
                         + "<ol>\n"
-                        + "<li>hello</li>\n"
-                        + "<li>My name is Gerald</li>\n"
-                        + "<li>What is your name?</li>\n"
                         + "</ol>";
 
         AddComment comments = new AddComment(test);
