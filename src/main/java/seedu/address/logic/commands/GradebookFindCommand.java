@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GRADEBOOK_ITEM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
@@ -15,10 +15,10 @@ public class GradebookFindCommand extends Command {
     public static final String COMMAND_WORD = "gradebook find";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds a gradebook component to module in Trajectory. "
             + "Parameters: "
-            + PREFIX_MODULECODE + "MODULE_CODE  "
+            + PREFIX_MODULE_CODE + "MODULE_CODE  "
             + PREFIX_GRADEBOOK_ITEM + "ITEM "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_MODULECODE + "CS2113 "
+            + PREFIX_MODULE_CODE + "CS2113 "
             + PREFIX_GRADEBOOK_ITEM + "Assignment 1";
     private static final String MESSAGE_FIND_FAIL = "Unsuccessful find";
     private static final String MESSAGE_FIND_SUCCESS = "Successfully found!"
