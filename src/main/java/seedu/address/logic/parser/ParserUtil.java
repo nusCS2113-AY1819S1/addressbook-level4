@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expenditureinfo.Category;
 import seedu.address.model.expenditureinfo.Date;
+import seedu.address.model.expenditureinfo.Description;
 import seedu.address.model.expenditureinfo.Money;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -115,6 +116,22 @@ public class ParserUtil {
             throw new ParseException(TaskPriority.MESSAGE_PRIORITY_CONSTRAINTS);
         }
         return new TaskPriority(trimmedPriority);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
     }
 
     /**

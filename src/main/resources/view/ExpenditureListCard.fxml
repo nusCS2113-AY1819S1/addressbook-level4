@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<!-- @@author SHININGGGG -->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -25,6 +25,7 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
+                <Label fx:id="description" text="\$first" styleClass="cell_big_label" />
             </HBox>
             <Label fx:id="category" styleClass="cell_small_label" text="\$category" />
             <Label fx:id="money" styleClass="cell_small_label" text="\$money" />
