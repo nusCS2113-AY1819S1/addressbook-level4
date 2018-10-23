@@ -33,7 +33,7 @@ public interface Model {
 
     /**
      * Deletes the given candidate.
-     * The candidate must exist in the recruit book.
+     * The candidate must exist in the candidate book.
      */
     void deleteCandidate(Candidate target);
 
@@ -176,6 +176,12 @@ public interface Model {
      * @code jobOffer must not already exist inside the job list of companyName
      */
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
+
+    /**
+     * Deletes the given job offer.
+     * The job offer must exist in the CompanyBook.
+     */
+    void deleteJobOffer(JobOffer target);
 
     /** Returns an unmodifiable view of the filtered job lists of all companies */
     ObservableList<JobOffer> getFilteredCompanyJobList();

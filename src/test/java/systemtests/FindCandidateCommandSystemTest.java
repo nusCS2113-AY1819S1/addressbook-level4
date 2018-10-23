@@ -15,7 +15,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.recruit.commons.core.index.Index;
-import seedu.recruit.logic.commands.DeleteCommand;
+import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.RedoCommand;
 import seedu.recruit.logic.commands.UndoCommand;
@@ -84,7 +84,7 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: find same persons in recruit book after deleting 1 of them -> 1 candidate found */
-        executeCommand(DeleteCommand.COMMAND_WORD + " 1");
+        executeCommand(DeleteCandidateCommand.COMMAND_WORD + " 1");
         assertFalse(getModel().getCandidateBook().getCandidateList().contains(BENSON));
         command = FindCandidateCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
