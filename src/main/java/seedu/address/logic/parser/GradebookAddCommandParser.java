@@ -26,7 +26,7 @@ public class GradebookAddCommandParser implements Parser<GradebookAddCommand> {
     private static final String MESSAGE_WEIGHTAGE_EXCEED = "The accumulated weightage for module stated has exceeded!";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the GradebookAddCommand
+     * Parses the given {@code String args} of arguments in the context of the GradebookAddCommand
      * and returns a GradebookAddCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
