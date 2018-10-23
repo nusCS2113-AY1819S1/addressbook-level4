@@ -23,8 +23,8 @@ import seedu.recruit.model.UserPrefs;
 import seedu.recruit.model.company.Company;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteCompanyCommand}.
+ * Contains integration tests (interaction with the Model, UndoCandidateBookCommand and RedoCandidateBookCommand)
+ * and unit tests for {@code DeleteCompanyCommand}.
  */
 
 public class DeleteCompanyCommandTest {

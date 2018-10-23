@@ -17,8 +17,8 @@ import org.junit.Test;
 import seedu.recruit.commons.core.index.Index;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.FindCandidateCommand;
-import seedu.recruit.logic.commands.RedoCommand;
-import seedu.recruit.logic.commands.UndoCommand;
+import seedu.recruit.logic.commands.RedoCandidateBookCommand;
+import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.tag.Tag;
 
@@ -74,13 +74,13 @@ public class FindCandidateCommandSystemTest extends CandidateBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: undo previous find command -> rejected */
-        command = UndoCommand.COMMAND_WORD;
-        String expectedResultMessage = UndoCommand.MESSAGE_FAILURE;
+        command = UndoCandidateBookCommand.COMMAND_WORD;
+        String expectedResultMessage = UndoCandidateBookCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: redo previous find command -> rejected */
-        command = RedoCommand.COMMAND_WORD;
-        expectedResultMessage = RedoCommand.MESSAGE_FAILURE;
+        command = RedoCandidateBookCommand.COMMAND_WORD;
+        expectedResultMessage = RedoCandidateBookCommand.MESSAGE_FAILURE;
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: find same persons in recruit book after deleting 1 of them -> 1 candidate found */

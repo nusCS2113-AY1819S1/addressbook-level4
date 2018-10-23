@@ -1,31 +1,33 @@
 package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.recruit.model.Model.PREDICATE_SHOW_ALL_COMPANIES;
 
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 
 /**
- * Reverts the {@code model}'s recruit book to its previous state.
+ * Reverts the {@code model}'s CompanyBook to its previous state.
  */
-public class UndoCommand extends Command {
 
-    public static final String COMMAND_WORD = "undo";
+public class UndoCompanyBookCommand extends Command {
+
+    public static final String COMMAND_WORD = "undoC";
     public static final String MESSAGE_SUCCESS = "Undo success!";
-    public static final String MESSAGE_FAILURE = "No more commands to undo!";
+    public static final String MESSAGE_FAILURE = "No more CompanyBook commands to undo!";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoCandidateBook()) {
+        if (!model.canUndoCompanyBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoCandidateBook();
-        model.updateFilteredCandidateList(PREDICATE_SHOW_ALL_PERSONS);
+        model.undoCompanyBook();
+        model.updateFilteredCompanyList(PREDICATE_SHOW_ALL_COMPANIES);
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
 }
