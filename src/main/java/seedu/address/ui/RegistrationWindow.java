@@ -108,9 +108,9 @@ public class RegistrationWindow extends UiPart<Stage> {
         registerFlag = user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
              phoneTextField.getText(), addressTextField.getText());
         System.out.println(registerFlag);
-        if ( registerFlag == 1) {
+        if (registerFlag == 1) {
             raise(new SuccessfulRegisterEvent());
-        };
+        }
     }
 
 

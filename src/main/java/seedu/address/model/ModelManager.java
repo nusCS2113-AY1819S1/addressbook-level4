@@ -203,10 +203,10 @@ public class ModelManager extends ComponentManager implements Model {
     public void matchUserToPerson(String name) {
         list = getAddressBook().getPersonList();
         //Loops through personlist to get matched name Person Class
-        list.forEach((Person) -> {
-            if (name.equals(Person.getName().toString())) {
-                this.user = new User(Person.getData());
+        for (Person person : list) {
+            if (name.equals(person.getName().toString())) {
+                this.user = new User(person.getData());
             }
-        });
+        }
     }
 }

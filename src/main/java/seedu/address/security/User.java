@@ -27,11 +27,11 @@ public class User {
     private void matchPerson(String name) {
         list = model.getAddressBook().getPersonList();
         //Loops through personlist to get matched name Person Class
-        list.forEach((Person) -> {
-            if (name.equals(Person.getName().toString())) {
-                this.person = Person;
+        for (Person person : list) {
+            if (name.equals(person.getName().toString())) {
+                this.person = person;
             }
-        });
+        }
     }
 
     /***

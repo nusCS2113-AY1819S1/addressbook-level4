@@ -40,14 +40,15 @@ public class SecurityBox extends UiPart<Region> {
             security.login(command[1], command[2]);
         } else if (command[0].equals("register") && command.length == 6) {
             switch(security.register(command[1], command[2], command[3], command[4], command[5])) {
-                case 1:
-                    System.out.println("Success");
-                    raise(new SuccessfulRegisterEvent());
-                    break;
-                case 2:
-                    System.out.println("Failure: Username already used");
-                default:
-                    break;
+            case 1:
+                System.out.println("Success");
+                raise(new SuccessfulRegisterEvent());
+                break;
+            case 2:
+                System.out.println("Failure: Username already used");
+                break;
+            default:
+                break;
             }
         } else if (command[0].equals("ui")) {
             raise(new ShowLoginEvent());
