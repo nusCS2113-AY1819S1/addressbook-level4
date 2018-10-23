@@ -66,9 +66,9 @@ public class EmailUtil {
      * Constructor
      */
     public EmailUtil() {
-        this.candidates = new ArrayList<>();
-        this.jobOffers = new ArrayList<>();
-        this.hasRecipientsAdded = false;
+        candidates = new ArrayList<>();
+        jobOffers = new ArrayList<>();
+        hasRecipientsAdded = false;
     }
 
     /**
@@ -119,7 +119,7 @@ public class EmailUtil {
      * @param candidate
      */
     public void addCandidate(Candidate candidate) {
-        this.candidates.add(candidate);
+        candidates.add(candidate);
     }
 
     /**
@@ -127,7 +127,7 @@ public class EmailUtil {
      * @param jobOffer
      */
     public void addJobOffer(JobOffer jobOffer) {
-        this.jobOffers.add(jobOffer);
+        jobOffers.add(jobOffer);
     }
 
     /**
