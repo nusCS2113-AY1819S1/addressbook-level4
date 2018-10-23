@@ -30,7 +30,7 @@ import seedu.address.model.tag.Tag;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
-    public static final String COMMAND_WORD_ALIAS = "i";
+    public static final String COMMAND_WORD_ALIAS = "im";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Imports and overwrites timetable for the person identified by the "

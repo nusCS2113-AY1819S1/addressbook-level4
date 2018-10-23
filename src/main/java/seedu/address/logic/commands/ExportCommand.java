@@ -22,7 +22,7 @@ import seedu.address.model.person.TimeTable;
 public class ExportCommand extends Command {
 
     public static final String COMMAND_WORD = "export";
-    public static final String COMMAND_WORD_ALIAS = "exim";
+    public static final String COMMAND_WORD_ALIAS = "ex";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Exports timetable for the person identified by the "
