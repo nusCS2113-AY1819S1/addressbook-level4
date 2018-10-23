@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<HBox fx:id="placeHolder" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox>
+         <children>
+            <Label prefWidth="300.0" text="Security Commands" textFill="WHITE" />
+            <Label text="1. Login" textFill="WHITE" underline="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Command:&#10;  login &lt;Username&gt; &lt;Password&gt;">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Text>
+            <Label text="2. Register" textFill="WHITE" underline="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Command:&#10;  register &lt;Username&gt; &lt;Password&gt; &lt;Email&gt; &lt;HandPhone&gt; &lt;Address&gt; ">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Text>
+            <Label text="3. UI" textFill="WHITE" underline="true">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="10.0" />
+               </VBox.margin>
+            </Label>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="command:  &#10;  ui">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Text>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="*Note*&#10;The fields between &lt;&gt; are compulsory">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Text>
+         </children>
+      </VBox>
+      <TextArea fx:id="securityResultDisplay" opacity="0.0" styleClass="result-display">
+         <padding>
+            <Insets left="10.0" right="10.0" />
+         </padding>
+      </TextArea>
+   </children>
+</HBox>

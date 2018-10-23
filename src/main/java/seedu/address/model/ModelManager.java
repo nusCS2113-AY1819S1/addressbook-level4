@@ -29,6 +29,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> friendList;
     private final FilteredList<Person> otherList;
     private final TimeTable timeTable;
+    private ObservableList<Person> list;
+    private User user;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs, timeTable.
@@ -42,8 +44,8 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         friendList = new FilteredList<>(versionedAddressBook.getPersonList());
         otherList = new FilteredList<>(versionedAddressBook.getPersonList());
-        this.filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-        this.timeTable = new TimeTable();
+        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        timeTable = new TimeTable();
     }
 
     public ModelManager() {
@@ -157,12 +159,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoAddressBook() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
+
+        // TODO: Implement after user comes online
+        // indicateTimeTableChanged(user.getTimeTable());
     }
 
     @Override
     public void redoAddressBook() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
+
+        // TODO: Implement after user comes online
+        // indicateTimeTableChanged(user.getTimeTable());
     }
 
     @Override
@@ -195,5 +203,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     public OtherListPredicate othersPredicateFromPerson(Person person) {
         return new OtherListPredicate(person.getFriends());
+    }
+
+    @Override
+    public void matchUserToPerson(String name) {
+        list = getAddressBook().getPersonList();
+        //Loops through personlist to get matched name Person Class
+        for (Person person : list) {
+            if (name.equals(person.getName().toString())) {
+                this.user = new User(person.getData());
+            }
+        }
     }
 }

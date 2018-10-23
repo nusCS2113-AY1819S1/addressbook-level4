@@ -17,10 +17,13 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.ShowLoginEvent;
 import seedu.address.commons.events.ui.ShowRegisterEvent;
+import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
@@ -39,6 +42,7 @@ public class MainWindow extends UiPart<Stage> {
 
     private Stage primaryStage;
     private Logic logic;
+    private Security security;
 
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
@@ -84,6 +88,7 @@ public class MainWindow extends UiPart<Stage> {
         // Set dependencies
         this.primaryStage = primaryStage;
         this.logic = logic;
+        this.security = security;
         this.config = config;
         this.prefs = prefs;
 
@@ -138,6 +143,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Enables Security CLI
+     */
+    void fillSecurityCommandBox() {
+        SecurityBox commandBox = new SecurityBox(security);
+        commandBoxPlaceholder.getChildren().clear();
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        SecurityResultDisplay securityResultDisplay = new SecurityResultDisplay();
+        resultDisplayPlaceholder.getChildren().clear();
+        resultDisplayPlaceholder.getChildren().add(securityResultDisplay.getRoot());
+    }
+
+    /**
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
@@ -159,12 +177,14 @@ public class MainWindow extends UiPart<Stage> {
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().clear();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().clear();
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
@@ -220,17 +240,24 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    void show() {
+        primaryStage.show();
+    }
+
     /**
      * Opens the Registration Window.
      */
-    @FXML
     public void handleRegister() {
         loginWindow.hide();
         registrationWindow.show();
     }
 
-    void show() {
-        primaryStage.show();
+    /***
+     * Handles successful registration
+     */
+    public void handleSuccessRegister() {
+        registrationWindow.hide();
+        raise(new SuccessfulLoginEvent()); //Calls method fill in data
     }
 
     /**
@@ -239,6 +266,14 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
+    }
+
+    /***
+     * Logs out of the application
+     */
+    @FXML
+    public void handleLogout() {
+        security.logout();
     }
 
     public PersonListPanel getPersonListPanel() {
@@ -265,5 +300,17 @@ public class MainWindow extends UiPart<Stage> {
     private void handleExitRegisterEvent(ExitRegisterEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleLogin();
+    }
+
+    @Subscribe
+    private void handleShowLoginEvent(ShowLoginEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleLogin();
+    }
+
+    @Subscribe
+    private void handleSuccessfulRegisterEvent(SuccessfulRegisterEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSuccessRegister();
     }
 }

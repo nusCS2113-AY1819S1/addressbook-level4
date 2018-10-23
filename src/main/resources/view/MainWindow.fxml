@@ -32,6 +32,11 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Logout">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleLogout" text="Logout" />
+            </items>
+          </Menu>
         </MenuBar>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
@@ -40,8 +45,8 @@
           </padding>
         </StackPane>
 
-        <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
-                   minHeight="100" prefHeight="100" maxHeight="100">
+        <StackPane VBox.vgrow="ALWAYS" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
+                   minHeight="100" prefHeight="100">
           <padding>
             <Insets top="5" right="10" bottom="5" left="10" />
           </padding>

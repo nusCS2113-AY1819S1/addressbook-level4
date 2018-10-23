@@ -138,4 +138,9 @@ public class Person {
         getTags().forEach(builder::append);
         return builder.toString();
     }
+
+    public UserParameterHelper getData() {
+        return new UserParameterHelper(this.name, this.phone, this.email, this.address, this.tags,
+                this.timeTable, this.friendList);
+    }
 }

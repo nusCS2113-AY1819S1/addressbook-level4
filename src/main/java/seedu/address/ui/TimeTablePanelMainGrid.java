@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.DayOfWeek;
+import java.time.LocalTime;
 import java.util.logging.Logger;
 
 import javafx.event.Event;
@@ -38,28 +40,43 @@ public class TimeTablePanelMainGrid extends UiPart<Region> {
 
     /**
      * Adds a timetable to the current timetable displayed
-     * @param timeSlot TimeSlot to add
-     * @param currRowDimensions Dimensions of the rows in the current grid
-     * @param currColDimensions Dimensions of the columns in the current grid
-     * @param currStartHour Start hour in the grid
-     * @param currEndHour End hour in the grid
+     * @param input TimeSlot to add
+     * @param currRowDim Dimensions of the rows in the current grid
+     * @param currColDim Dimensions of the columns in the current grid
+     * @param currStart Start hour in the grid
+     * @param currEnd End hour in the grid
      */
     public void addTimeSlot(
-            TimeSlot timeSlot, double currRowDimensions, double currColDimensions, int currStartHour, int currEndHour) {
+            TimeSlot input, double currRowDim, double currColDim, LocalTime currStart, LocalTime currEnd) {
 
-        if (timeSlot.getStartTime().getHour() < currStartHour
-                || timeSlot.getEndTime().getHour() > currEndHour
-                || timeSlot.getDayOfWeek().getValue() > 5) {
+        assert(currStart.getMinute() == 0);
+        assert(currEnd.getMinute() == 0);
+
+        TimeSlot trimmedTimeSlot = input;
+
+        // Check for whether the timeslot can be displayed on the current timetable
+        if (input.getDayOfWeek() == DayOfWeek.SATURDAY
+                || input.getDayOfWeek() == DayOfWeek.SUNDAY
+                || input.getEndTime().isBefore(currStart) || input.getEndTime().equals(currStart)
+                || input.getStartTime().isAfter(currEnd) || input.getStartTime().equals(currEnd)) {
             return;
         }
 
+        if (input.getStartTime().isBefore(currStart)) {
+            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), currStart, input.getEndTime());
+        }
+
+        if (input.getEndTime().isAfter(currEnd)) {
+            trimmedTimeSlot = new TimeSlot(input.getDayOfWeek(), input.getStartTime(), currEnd);
+        }
+
         TimeTablePanelTimeSlot panelTimeSlot = new TimeTablePanelTimeSlot(
-                timeSlot, currRowDimensions, currColDimensions);
-        mainGrid.add(panelTimeSlot.getBox(), getColIndex(timeSlot, currStartHour), getRowIndex(timeSlot));
+                trimmedTimeSlot, currRowDim, currColDim);
+        mainGrid.add(panelTimeSlot.getBox(), getColIndex(trimmedTimeSlot, currStart), getRowIndex(trimmedTimeSlot));
     }
 
-    private int getColIndex(TimeSlot timeSlot, int currStartHour) {
-        return timeSlot.getStartTime().getHour() - currStartHour;
+    private int getColIndex(TimeSlot timeSlot, LocalTime currStartHour) {
+        return timeSlot.getStartTime().getHour() - currStartHour.getHour();
     }
 
     private int getRowIndex(TimeSlot timeSlot) {
