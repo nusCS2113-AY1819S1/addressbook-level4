@@ -46,7 +46,7 @@ public class SampleDataUtil {
                     getTagSet("colleagues"))
         };
     }
-
+    //@@author SHININGGGG
     public static Expenditure[] getSampleExpenditures() {
         return new Expenditure[] {
             new Expenditure(new Description("Mcdonalds McFlurry"), new Date("01-01-2018"),

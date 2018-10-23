@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.model.expenditureinfo;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
