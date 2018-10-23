@@ -1,9 +1,10 @@
 //author @tianhang
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.Ingredient;
 
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.IngredientModel;
 import seedu.address.model.ingredient.Topping;
@@ -11,7 +12,7 @@ import seedu.address.model.ingredient.Topping;
 /**
  * Adds a person to the address book.
  */
-public class BatchToppingCommand extends BatchCommand {
+public class AddToppingCommand extends IngredientCommand {
 
 
 
@@ -23,7 +24,7 @@ public class BatchToppingCommand extends BatchCommand {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public BatchToppingCommand (Topping topping) {
+    public AddToppingCommand (Topping topping) {
         requireNonNull (topping);
         toAdd = topping;
     }
@@ -45,8 +46,8 @@ public class BatchToppingCommand extends BatchCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BatchToppingCommand // instanceof handles nulls
-                && toAdd.equals(((BatchToppingCommand) other).toAdd));
+                || (other instanceof AddToppingCommand // instanceof handles nulls
+                && toAdd.equals((( AddToppingCommand ) other).toAdd));
     }
 
 

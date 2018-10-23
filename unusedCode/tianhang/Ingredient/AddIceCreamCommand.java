@@ -1,5 +1,5 @@
 //author @tianhang
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.Ingredient;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.IngredientModel;
 
@@ -18,7 +19,7 @@ import seedu.address.model.ingredient.IceCream;
 /**
  * Adds a person to the address book.
  */
-public class BatchIceCreamCommand extends BatchCommand {
+public class AddIceCreamCommand extends IngredientCommand {
 
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
@@ -43,7 +44,7 @@ public class BatchIceCreamCommand extends BatchCommand {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public BatchIceCreamCommand (IceCream iceCream) {
+    public AddIceCreamCommand (IceCream iceCream) {
         requireNonNull (iceCream);
         toAdd = iceCream;
     }
@@ -65,8 +66,8 @@ public class BatchIceCreamCommand extends BatchCommand {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof BatchIceCreamCommand // instanceof handles nulls
-                && toAdd.equals(((BatchIceCreamCommand) other).toAdd));
+                || (other instanceof AddIceCreamCommand // instanceof handles nulls
+                && toAdd.equals((( AddIceCreamCommand ) other).toAdd));
     }
 
 

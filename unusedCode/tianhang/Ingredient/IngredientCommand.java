@@ -1,11 +1,13 @@
 
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.Ingredient;
 //@@author tianhang
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_ICECREAM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_TOPPING;
 
 import seedu.address.Model;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.IngredientModel;
 
@@ -15,11 +17,11 @@ import seedu.address.model.IngredientModel;
 /**
  * Adds a person to the address book.
  */
-public class BatchCommand extends Command {
+public class IngredientCommand extends Command {
 
     public static final String COMMAND_WORD = "addIngredient";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE_ADD_INGREDIENT = COMMAND_WORD + ": Adds a person to the address book. "
             + "Parameters: "
             + PREFIX_INGREDIENT_ICECREAM + "ice cream name "
             + "or "
@@ -32,7 +34,7 @@ public class BatchCommand extends Command {
     /**
      * Creates an AddCommand to add the specified {@code Person}
      */
-    public BatchCommand () {
+    public IngredientCommand () {
 
     }
 
