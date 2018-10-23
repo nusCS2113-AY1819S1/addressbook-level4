@@ -3,7 +3,6 @@ package seedu.planner.ui;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.swing.plaf.synth.Region;
 
@@ -12,8 +11,6 @@ import org.controlsfx.control.textfield.TextFields;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import seedu.planner.commons.core.LogsCenter;
-import seedu.planner.logic.Logic;
 import seedu.planner.logic.commands.AddCommand;
 import seedu.planner.logic.commands.ClearCommand;
 import seedu.planner.logic.commands.DeleteCommand;
@@ -33,9 +30,9 @@ import seedu.planner.logic.commands.SortCommand;
 import seedu.planner.logic.commands.SummaryCommand;
 import seedu.planner.logic.commands.UndoCommand;
 
-public class AutoCompleteBox {
+public class AutoCompleteBox extends UiPart<Region> {
 
-   // private static final String FXML = "AutoCompleteBox.fxml";
+    private static final String FXML = "AutoCompleteBox.fxml";
 
     private static Set<String> commandWordSet =
             new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
@@ -49,7 +46,7 @@ public class AutoCompleteBox {
     private AutoCompletionBinding<String> autoCompletionBinding;
 
     public AutoCompleteBox(TextField commandTextField) {
-        //super(FXML);
+        super(FXML);
         autoCompletionBinding = TextFields.bindAutoCompletion(commandTextField, commandWordSet);
     }
 

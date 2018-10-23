@@ -54,7 +54,7 @@ public class CommandBox extends UiPart<Region> {
     private final Logic logic;
     private ListElementPointer historySnapshot;
 
-    public static AutoCompleteBox autoCompleteBox;
+    public AutoCompleteBox autoCompleteBox;
 
     @FXML
     private TextField commandTextField;
