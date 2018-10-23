@@ -78,33 +78,34 @@ _{Optionally, you may include other projects in your portfolio.}_
 
 [silver]#DRINK I/O#
 
-[Gray]#DRINK I/O#
+[gray]#DRINK I/O#
 
-[Black]#DRINK I/O#
+[black]#DRINK I/O#
 
-[Red]#DRINK I/O#
+[red]#DRINK I/O#
 
-[Maroon]#DRINK I/O#
+[maroon]#DRINK I/O#
 
-[Yellow]#DRINK I/O#
+[yellow]#DRINK I/O#
 
-[Olive]#DRINK I/O#
+[olive]#DRINK I/O#
 
-[Lime]#DRINK I/O#
+[lime]#DRINK I/O#
 
-[Green]#DRINK I/O#
+[green]#DRINK I/O#
 
-[Aqua]#DRINK I/O#
+[aqua]#DRINK I/O#
 
-[Teal]#DRINK I/O#
+[teal]#DRINK I/O#
 
 [blue]#DRINK I/O#
 
-[Navy]#DRINK I/O#
+[navy]#DRINK I/O#
 
-[Fuchsia]#DRINK I/O#
+[fuchsia]#DRINK I/O#
 
-[Purple]#DRINK I/O#
+[purple]#DRINK I/O#
+
 <<DRINK I/O>>
 
 Bold:
@@ -113,7 +114,7 @@ Bold:
 
 Even a mixture of bold italic colour
 
-[Blue]#DRINK [red]*I*/[yellow]*O*#
+[blue]#DRINK [red]*I*/[yellow]*O*#
 
 Chars: n__i__**b**++m++[red]##r##
 
