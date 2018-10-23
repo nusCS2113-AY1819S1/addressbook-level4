@@ -1,3 +1,5 @@
+//@@author rajdeepsh
+
 package seedu.address.model.group;
 
 import static java.util.Objects.requireNonNull;

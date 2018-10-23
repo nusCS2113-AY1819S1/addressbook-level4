@@ -93,6 +93,8 @@ public interface Model {
      */
     void commitAddressBook();
 
+    //@@author rajdeepsh
+
     /**
      * Creates the given group.
      * {@code group} must not already exist in the system.
@@ -114,6 +116,12 @@ public interface Model {
      * Return true if a person  with the same identity fields exist in the group.
      */
     boolean hasPersonInGroup(AddGroup addGroup);
+
+    /**
+     * Deletes the given group.
+     * The group must exist in the address book.
+     */
+    void deleteGroup(Group target);
 
     /**
      * Returns an unmodifiable view of the filtered group list
