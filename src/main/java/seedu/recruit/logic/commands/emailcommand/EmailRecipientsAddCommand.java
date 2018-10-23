@@ -21,7 +21,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
         EmailUtil emailUtil = model.getEmailUtil();
 
         //Check if there are already recipients added
-        if(!emailUtil.isHasRecipientsAdded()) {
+        if (!emailUtil.isHasRecipientsAdded()) {
             if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                 ObservableList<Candidate> recipients = model.getFilteredCandidateList();
                 for (Candidate recipient : recipients) {
@@ -40,7 +40,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
             //displayed book is candidates and recipients are candidates.
             //send error if displayedbook is company.
             if (emailUtil.isAreRecipientsCandidates()) {
-                if(MainWindow.getDisplayedBook().equals("candidateBook")) {
+                if (MainWindow.getDisplayedBook().equals("candidateBook")) {
                     ObservableList<Candidate> recipients = model.getFilteredCandidateList();
                     for (Candidate recipient : recipients) {
                         emailUtil.addCandidate(recipient);
@@ -49,7 +49,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                     return new CommandResult("ERROR: You can only add candidates!");
                 }
             } else {
-                if(MainWindow.getDisplayedBook().equals("companyBook")) {
+                if (MainWindow.getDisplayedBook().equals("companyBook")) {
                     ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
                     for (JobOffer recipient : recipients) {
                         emailUtil.addJobOffer(recipient);

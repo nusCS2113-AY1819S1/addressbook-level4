@@ -81,7 +81,7 @@ public class EmailUtil {
     public void setHasRecipientsAdded(boolean hasRecipientsAdded) {
         this.hasRecipientsAdded = hasRecipientsAdded;
     }
-    
+
     public static void setEmailSettings(EmailSettings emailSettings) {
         EmailUtil.emailSettings = emailSettings;
     }
