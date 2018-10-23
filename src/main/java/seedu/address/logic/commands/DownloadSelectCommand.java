@@ -8,10 +8,10 @@ import seedu.address.model.*;
 import java.io.*;
 import java.util.*;
 
-public class DownloadAllCommand extends Command {
+public class DownloadSelectCommand extends Command {
 
-    public static final String COMMAND_WORD = "downloadAll";
-    public static final String MESSAGE_USAGE = "downloadAll pass/(password) user/(username) mod/(moduleCode)";
+    public static final String COMMAND_WORD = "downloadSelect";
+    public static final String MESSAGE_USAGE = "downloadSelect pass/(password) user/(username) mod/(moduleCode) file/(0,1,2....n))";
     public static final String CHROMEDRIVER_PATH_WINDOWS = "/chromeDrivers/windows/chromedriver.exe";
     public static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver";
     public static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
@@ -26,36 +26,51 @@ public class DownloadAllCommand extends Command {
     public static final String IVLE_DOWNLOAD_PAGE_ADDRESS = "https://ivle.nus.edu.sg/v1/File/download_all.aspx";
     public static final String IVLE_MODULE_LIST_FIELD_ID = "ctl00_ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_ContentPlaceHolder1_ddlModule";
     public static final String MODULE_NOT_FOUND_MESSAGE = "MODULE CODE NOT FOUND";
-    public static final String CHECKBOX_XPATH_VALUE = "//input[@type='checkbox']";
-    public static final String IVLE_DOWNLOAD_PAGE_BUTTON_ID = "ctl00_ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_ContentPlaceHolder1_btnDownloadSel";
-
+    public static final String WORKBIN_CSS_SELECTOR_ID = "a[href^=\"/workbin\"]";
+    public static final String TREEVIEW_CLASS_ID = "TreeView";
+    public static final String FILE_DOWNLOAD_LINK_ATTRIBUTE_ID="href";
 
     private String username;
     private String password;
+    private ArrayList<Integer> fileSelect;
     private String moduleCode;
     private String downloadFilePath;
 
-    public DownloadAllCommand(String username, String password, String moduleCode){
+    public DownloadSelectCommand(String username, String password,String moduleCode,String fileSelectInput){
         this.password=password;
         this.username=username;
-        this.moduleCode=moduleCode.toLowerCase();
+        this.moduleCode=moduleCode;
+        fileSelect = new ArrayList<>();
+        for(String id: fileSelectInput.split(",")){
+            fileSelect.add(Integer.parseInt(id));
+        }
+
+    }
+    public DownloadSelectCommand(String username, String password,String moduleCode){
+        this.password=password;
+        this.username=username;
+        this.moduleCode=moduleCode;
     }
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
+        String returnMessage;
         WebDriver driver=initializeWebDriver();
         loginIvle(driver);
-        String returnMessage;
-        if(checkLoggedIn(driver)==false) {
+        if(checkLoggedIn(driver)==false){
             driver.close();
             returnMessage = WRONG_PASS_USER_MESSAGE;
         }
         else{
             if(checkModuleExists(driver)){
-                initializeDownloadFolder();
-                downloadFiles(driver);
-                dynamicWaiting();
-                driver.close();
-                returnMessage = moduleCode+" FILE DOWNLOADED AT :"+downloadFilePath;
+                if(fileSelect==null) {
+                    returnMessage=getFileNames(driver);
+                    driver.close();
+                }
+                else{
+                    downloadFiles(driver);
+                    driver.close();
+                    returnMessage = moduleCode+" FILES DOWNLOADED AT :"+downloadFilePath;
+                }
             }
             else{
                 driver.close();
@@ -63,6 +78,29 @@ public class DownloadAllCommand extends Command {
             }
         }
         return new CommandResult(returnMessage);
+    }
+
+    private String getFileNames(WebDriver driver){
+        WebElement treeview = driver.findElement(By.className(TREEVIEW_CLASS_ID));
+        List<WebElement> fileResult = treeview.findElements(By.cssSelector(WORKBIN_CSS_SELECTOR_ID));
+        String result= new String();
+        for (int i=0; i<fileResult.size(); i++) {
+            result+=(i+": "+fileResult.get(i).getText()+"\r\n");
+            //below statements are for debug. todo: remove when publishing
+            //System.out.println(fileResult.get(i).getText()); // filename
+            //System.out.println(fileResult.get(i).getAttribute("href")); // link
+        }
+        return result;
+    }
+    private void downloadFiles(WebDriver driver){
+        WebElement treeview = driver.findElement(By.className(TREEVIEW_CLASS_ID));
+        List<WebElement> fileResult = treeview.findElements(By.cssSelector(WORKBIN_CSS_SELECTOR_ID));
+        initializeDownloadFolder();
+        for(int fileID:fileSelect) {
+            driver.get(fileResult.get(fileID).getAttribute(FILE_DOWNLOAD_LINK_ATTRIBUTE_ID));
+            dynamicWaiting();
+        }
+
     }
 
     private WebDriver initializeWebDriver(){
@@ -74,7 +112,7 @@ public class DownloadAllCommand extends Command {
         else if(System.getProperty("os.name").contains(MAC_OS_NAME)) {
             System.setProperty("webdriver.chrome.driver",downloadFilePath+ CHROMEDRIVER_PATH_MAC);
         }
-        downloadFilePath += DOWNLOAD_RELATIVE_PATH;
+        downloadFilePath += DOWNLOAD_RELATIVE_PATH ;
 
         HashMap<String,Object> chromePrefs =  new HashMap<String,Object>();
         chromePrefs.put("profile.default_content_settings.popups",0);
@@ -131,15 +169,6 @@ public class DownloadAllCommand extends Command {
         return true;
     }
 
-    private void downloadFiles(WebDriver driver){
-        List<WebElement> checkBoxList=driver.findElements(By.xpath(CHECKBOX_XPATH_VALUE));
-        for(WebElement checkBox: checkBoxList) {
-            if(!checkBox.isSelected()) {
-                checkBox.click();
-            }
-        }
-        driver.findElement(By.id(IVLE_DOWNLOAD_PAGE_BUTTON_ID)).click();
-    }
     private void initializeDownloadFolder(){
         File folder = new File(downloadFilePath);
         File[] filesList = folder.listFiles();
