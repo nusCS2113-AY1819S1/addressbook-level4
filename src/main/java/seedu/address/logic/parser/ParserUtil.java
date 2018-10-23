@@ -240,6 +240,9 @@ public class ParserUtil {
     public static ArrayList<Index> parseSelectIndex(String oneBasedIndex) throws ParseException {
 
         // Perform a syntax check here
+        if (!isValidSelectSyntax(oneBasedIndex)) {
+            throw new ParseException("Select command format invalid!");
+        }
 
         if (isRangeIndexFormat(oneBasedIndex)) {
             return parseMultipleRangeIndex(oneBasedIndex);
@@ -256,5 +259,12 @@ public class ParserUtil {
      */
     private static boolean isRangeIndexFormat(String input) {
         return input.trim().matches("(?s)(\\d*\\s*-\\s*\\d*\\s*\\s*,?)?(\\s*,\\s*\\d*\\s*-\\s*\\d*\\s*\\s*,?)*");
+    }
+
+    private static boolean isValidSelectSyntax(String input) {
+        if (isRangeIndexFormat(input) || StringUtil.areNonZeroUnsignedInteger(input)) {
+            return true;
+        }
+        return false;
     }
 }

@@ -102,7 +102,7 @@ public class StringUtil {
 
         StringTokenizer tokenizer = new StringTokenizer(input);
         while (tokenizer.hasMoreTokens()) {
-            if (Integer.valueOf(tokenizer.nextToken()) - 1 < 0) {
+            if (!tokenizer.nextToken().matches("\\d+")) {
                 return false;
             }
         }
