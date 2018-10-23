@@ -46,6 +46,7 @@ public class ViewClubBudgetsCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_CLUB);
         }*/
 
+
         List<FinalClubBudget> listOfBudgets = model.getFilteredClubBudgetsList();
 
         int i;
@@ -58,6 +59,7 @@ public class ViewClubBudgetsCommand extends Command {
 
             if (currentBudget.getClubName().equals(toShow)) {
                 budgetToShow = Integer.toString(currentBudget.getAllocatedBudget());
+                System.out.println("the budget is " + budgetToShow);
                 return new CommandResult(String.format(MESSAGE_SUCCESS, budgetToShow));
             }
         }
