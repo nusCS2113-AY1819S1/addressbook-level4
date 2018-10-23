@@ -60,6 +60,14 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_login() throws Exception {
+        LoginDetails loginDetails = new AccountBuilder().build();
+        CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
+                .getCreateAccountCommand(loginDetails));
+        assertEquals(new CreateAccountCommand(loginDetails), command);
+    }
+
+    @Test
     public void parseCommand_createaccount() throws Exception {
         LoginDetails loginDetails = new AccountBuilder().build();
         CreateAccountCommand command = (CreateAccountCommand) parser.parseCommand(AccountUtil
