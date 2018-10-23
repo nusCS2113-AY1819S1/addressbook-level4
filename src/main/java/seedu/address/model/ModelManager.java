@@ -218,11 +218,13 @@ public class ModelManager extends ComponentManager implements Model {
      * @param friendListPredicate
      * @return
      */
-    public CombinedFriendPredicate combinedFriendPredicate(Predicate<Person> predicate, FriendListPredicate friendListPredicate) {
+    public CombinedFriendPredicate combinedFriendPredicate(Predicate<Person> predicate,
+                                                           FriendListPredicate friendListPredicate) {
         return new CombinedFriendPredicate(predicate, friendListPredicate);
     }
 
-    public CombinedOtherPredicate combinedOtherPredicate(Predicate<Person> predicate, OtherListPredicate otherListPredicate) {
+    public CombinedOtherPredicate combinedOtherPredicate(Predicate<Person> predicate,
+                                                         OtherListPredicate otherListPredicate) {
         return new CombinedOtherPredicate(predicate, otherListPredicate);
     }
 

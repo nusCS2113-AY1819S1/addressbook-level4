@@ -7,7 +7,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.tag.TagsContainsKeywords;
-import seedu.address.security.UserStub;
 
 /**
  * Find and display the persons with the same tag

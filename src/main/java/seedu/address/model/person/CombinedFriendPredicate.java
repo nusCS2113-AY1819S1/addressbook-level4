@@ -1,12 +1,14 @@
 package seedu.address.model.person;
 
-import java.util.Set;
 import java.util.function.Predicate;
 
+/**
+ * Combines the predicates to allow SetPredicate to be called
+ */
 public class CombinedFriendPredicate implements Predicate<Person> {
 
-    Predicate<Person> predicate1;
-    FriendListPredicate friendListPredicate;
+    private final Predicate<Person> predicate1;
+    private final FriendListPredicate friendListPredicate;
 
     public CombinedFriendPredicate(Predicate<Person> predicate, FriendListPredicate friendListPredicate) {
         this.predicate1 = predicate;

@@ -2,10 +2,13 @@ package seedu.address.model.person;
 
 import java.util.function.Predicate;
 
+/**
+ * Combines the predicates to allow SetPredicate to be called
+ */
 public class CombinedOtherPredicate implements Predicate<Person> {
 
-    Predicate<Person> predicate1;
-    OtherListPredicate otherListPredicate;
+    private final Predicate<Person> predicate1;
+    private final OtherListPredicate otherListPredicate;
 
     public CombinedOtherPredicate(Predicate<Person> predicate, OtherListPredicate otherListPredicate) {
         this.predicate1 = predicate;
