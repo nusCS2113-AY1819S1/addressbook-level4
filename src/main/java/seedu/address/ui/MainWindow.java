@@ -1,9 +1,14 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -42,6 +47,7 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private TimeTablePanel timetablePanel;
+    private MePanel mePanel;
     private PersonListPanel personListPanel;
     private FriendListPanel friendListPanel;
     private Config config;
@@ -49,7 +55,11 @@ public class MainWindow extends UiPart<Stage> {
     private HelpWindow helpWindow;
     private LoginWindow loginWindow;
     private RegistrationWindow registrationWindow;
-    private Person person = UserStub.getUser();
+    private Person currentUser = UserStub.getUser();
+    private ObservableList<Person> meList = FXCollections.observableArrayList(currentUser);
+
+    @FXML
+    private Text meText;
 
     @FXML
     private Text friendText;
@@ -65,6 +75,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private MenuItem helpMenuItem;
+
+    @FXML
+    private StackPane mePanelPlaceholder;
 
     @FXML
     private StackPane friendListPanelPlaceholder;
@@ -142,6 +155,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     void fillInnerParts() {
 
+        meText.setText("Me");
+        meText.setFill(Color.LIGHTGOLDENRODYELLOW);
+        meText.setStyle("-fx-font-size: 20px;");
         friendText.setText("Friends");
         friendText.setFill(Color.LIGHTGOLDENRODYELLOW);
         friendText.setStyle("-fx-font-size: 20px;");
@@ -152,10 +168,13 @@ public class MainWindow extends UiPart<Stage> {
         timetablePanel = new TimeTablePanel();
         timetablePlaceholder.getChildren().add(timetablePanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getOtherList(person));
+        mePanel = new MePanel(meList);
+        mePanelPlaceholder.getChildren().add(mePanel.getRoot());
+
+        personListPanel = new PersonListPanel(logic.getOtherList(currentUser));
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-        friendListPanel = new FriendListPanel(logic.getFriendList(person));
+        friendListPanel = new FriendListPanel(logic.getFriendList(currentUser));
         friendListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
