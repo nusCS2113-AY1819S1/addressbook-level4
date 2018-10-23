@@ -7,7 +7,7 @@ import seedu.address.model.budgetelements.ClubBudgetElements;
 import seedu.address.model.clubbudget.FinalClubBudget;
 import seedu.address.model.login.LoginDetails;
 import seedu.address.model.person.Person;
-import seedu.address.model.searchhistory.SearchHistoryManager;
+import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 
 /**
  * The API of the Model component.
@@ -144,7 +144,18 @@ public interface Model {
      */
     void addClubBudget(FinalClubBudget clubBudget);
 
-    /** Returns the model's SearchHistoryManager
+    /**
+     * Reverts model's filtered person list and search history to previous state.
      */
-    SearchHistoryManager<Person> getSearchHistoryManager();
+    void revertLastSearch() throws EmptyHistoryException;
+
+    /**
+     * Updates model's filtered person list and search history to the next state.
+     */
+    void executeSearch(Predicate<Person> predicate);
+
+    /**
+     * Resets all search history and returns filtered person list to initial state.
+     */
+    void resetSearchHistoryToInitialState();
 }
