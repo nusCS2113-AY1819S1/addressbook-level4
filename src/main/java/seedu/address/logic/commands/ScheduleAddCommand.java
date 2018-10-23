@@ -6,10 +6,10 @@ import seedu.address.model.Model;
 import seedu.address.model.schedule.Activity;
 
 public class ScheduleAddCommand extends ScheduleCommand {
-    private final String MESSAGE_SUCCESS = "Task \"%s\" on %s has been successfully added to your schedule.";
+    private static final String MESSAGE_SUCCESS = "Task \"%s\" on %s has been successfully added to your schedule.";
     private final Activity toAdd;
 
-	/**
+    /**
 	 * Creates an AddCommand to add the specified {@code Person}
 	 */
     public ScheduleAddCommand(Activity activity) {
@@ -23,12 +23,12 @@ public class ScheduleAddCommand extends ScheduleCommand {
         return new CommandResult(String.format(MESSAGE_SUCCESS,
 				toAdd.getActivity(),
 				Activity.getDateString(toAdd.getDate())));
-	}
+    }
 
-	@Override
+    @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof ScheduleAddCommand// instanceof handles nulls
                 && toAdd.equals(((ScheduleAddCommand) other).toAdd));
-	}
+    }
 }

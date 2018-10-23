@@ -7,11 +7,11 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.schedule.Activity;
 
-public class ScheduleEditCommand extends ScheduleCommand{
+public class ScheduleEditCommand extends ScheduleCommand {
 
     private final String task;
     private final Index index;
-    private final String MESSAGE_SUCCESS = "Task \"%s\" on %s has been edited to \"%s\".";
+    private static final String MESSAGE_SUCCESS = "Task \"%s\" on %s has been edited to \"%s\".";
 
     /**
      * Creates an AddCommand to add the specified {@code Person}
@@ -24,7 +24,7 @@ public class ScheduleEditCommand extends ScheduleCommand{
     }
 
     @Override
-    public CommandResult updateSchedule(Model model) throws CommandException{
+    public CommandResult updateSchedule(Model model) throws CommandException {
         Activity toDelete = getActivityFromIndex(model, index);
         Activity toAdd = new Activity(toDelete.getDate(), task);
         model.deleteActivity(toDelete);

@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -204,7 +203,7 @@ public class ParserUtil {
             throw new ParseException(Activity.MESSAGE_DATE_CONSTRAINTS);
         }
         StringTokenizer tokens = new StringTokenizer(trimmedDate, "/");
-        int day = Integer.parseInt(tokens.nextToken()) ;
+        int day = Integer.parseInt(tokens.nextToken());
         int month = Integer.parseInt(tokens.nextToken());
         int year = Integer.parseInt(tokens.nextToken());
         Date date = Activity.toDate(day, month, year);

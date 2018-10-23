@@ -1,22 +1,20 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.TreeMap;
+import java.util.logging.Logger;
+
 import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.schedule.Activity;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.TreeMap;
-import java.util.logging.Logger;
+
 
 /**
  * The Browser Panel of the App.

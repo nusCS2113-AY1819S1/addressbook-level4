@@ -6,9 +6,7 @@ import java.util.List;
 import java.util.TreeMap;
 import java.util.function.Predicate;
 
-import javafx.beans.Observable;
 import javafx.collections.ObservableList;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.autocomplete.TextPrediction;
 import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Activity;

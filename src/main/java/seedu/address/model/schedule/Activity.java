@@ -9,14 +9,15 @@ import java.util.Date;
 import java.util.Locale;
 
 public class Activity {
-    private final Date date;
-    private final String activity;
     public static final String DATE_VALIDATION_REGEX = "\\d{2}/\\d{2}/\\d{4}";
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date should be in \"DD/MM/YYYY\" and must be a valid date.";
 
-    public Activity(Date date, String activity){
-            this.date = date;
-            this.activity = activity;
+    private final Date date;
+    private final String activity;
+
+    public Activity(Date date, String activity) {
+        this.date = date;
+        this.activity = activity;
     }
 
     public Date getDate() {
@@ -39,7 +40,7 @@ public class Activity {
         return cal.getTime();
     }
 
-    public static  String getDateString (Date date) {
+    public static String getDateString (Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         String dayOfWeek = new SimpleDateFormat("EE", Locale.ENGLISH).format(date);
@@ -50,7 +51,8 @@ public class Activity {
         return new String(dayOfWeek + " " + cal.get(Calendar.DATE) + "/" + month
                 + "/" + cal.get(Calendar.YEAR));
     }
-    public static boolean isValidDate(String test){
+
+    public static boolean isValidDate(String test) {
 
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         format.setLenient(false);

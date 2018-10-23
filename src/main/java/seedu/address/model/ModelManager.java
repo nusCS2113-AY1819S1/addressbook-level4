@@ -236,12 +236,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ObservableList<Activity> getActivityList(){
+    public ObservableList<Activity> getActivityList() {
         return versionedAddressBook.getActivityList();
     }
 
     @Override
-    public TreeMap<Date, ArrayList<Activity>> getSchedule(){
+    public TreeMap<Date, ArrayList<Activity>> getSchedule() {
         return versionedAddressBook.getSchedule();
     }
 }

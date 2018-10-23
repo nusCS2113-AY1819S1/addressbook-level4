@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.COMMAND_SCHEDULE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTIVITY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
@@ -12,8 +14,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.schedule.Activity;
-
-import java.util.List;
 
 public abstract class ScheduleCommand extends Command {
 
@@ -36,13 +36,13 @@ public abstract class ScheduleCommand extends Command {
     public static final String MESSAGE_DELETE = COMMAND_WORD + " " + COMMAND_WORD_DELETE
             + ": Deletes task, by index, from schedule.\n"
             + "parameters: INDEX";
-    public static final String MESSAGE_EDIT = COMMAND_WORD + " " +  COMMAND_WORD_EDIT
+    public static final String MESSAGE_EDIT = COMMAND_WORD + " " + COMMAND_WORD_EDIT
             + ": Edit task, by index, from schedule.\n"
             + "parameters: INDEX " + PREFIX_ACTIVITY + "Task";
 
     public abstract CommandResult updateSchedule(Model model) throws CommandException;
 
-    public Activity getActivityFromIndex (Model model, Index index) throws CommandException{
+    public Activity getActivityFromIndex (Model model, Index index) throws CommandException {
         List<Activity> activities = model.getActivityList();
         if (index.getZeroBased() >= activities.size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX + " " + MESSAGE_USAGE);
