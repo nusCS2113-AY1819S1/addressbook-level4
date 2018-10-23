@@ -3,14 +3,10 @@ package seedu.address.logic.comments;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.parser.Tag;
 import org.jsoup.select.Elements;
-
-
-
 
 /**
  * Adds comments section.

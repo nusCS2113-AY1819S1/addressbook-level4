@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedEventManager extends EventManager {
 
-    private final List<ReadOnlyEventManager> addressBookStateList;
+    private final List<ReadOnlyEventManager> eventManagerStateList;
     private int currentStatePointer;
 
     public VersionedEventManager(ReadOnlyEventManager initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new EventManager(initialState));
+        eventManagerStateList = new ArrayList<>();
+        eventManagerStateList.add(new EventManager(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,48 +25,48 @@ public class VersionedEventManager extends EventManager {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new EventManager(this));
+        eventManagerStateList.add(new EventManager(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        eventManagerStateList.subList(currentStatePointer + 1, eventManagerStateList.size()).clear();
     }
 
     /**
-     * Restores the address book to its previous state.
+     * Restores the event manager to its previous state.
      */
     public void undo() {
         if (!canUndo()) {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(eventManagerStateList.get(currentStatePointer));
     }
 
     /**
-     * Restores the address book to its previously undone state.
+     * Restores the event manager to its previously undone state.
      */
     public void redo() {
         if (!canRedo()) {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(eventManagerStateList.get(currentStatePointer));
     }
 
     /**
-     * Returns true if {@code undo()} has address book states to undo.
+     * Returns true if {@code undo()} has event manager states to undo.
      */
     public boolean canUndo() {
         return currentStatePointer > 0;
     }
 
     /**
-     * Returns true if {@code redo()} has address book states to redo.
+     * Returns true if {@code redo()} has event manager states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < eventManagerStateList.size() - 1;
     }
 
     @Override
@@ -85,7 +85,7 @@ public class VersionedEventManager extends EventManager {
 
         // state check
         return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
+                && eventManagerStateList.equals(otherVersionedAddressBook.eventManagerStateList)
                 && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
     }
 
@@ -94,7 +94,7 @@ public class VersionedEventManager extends EventManager {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of addressBookState list, unable to undo.");
+            super("Current state pointer at start of eventManagerState list, unable to undo.");
         }
     }
 
@@ -103,7 +103,7 @@ public class VersionedEventManager extends EventManager {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of addressBookState list, unable to redo.");
+            super("Current state pointer at end of eventManagerState list, unable to redo.");
         }
     }
 }

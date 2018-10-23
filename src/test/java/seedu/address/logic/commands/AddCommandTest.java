@@ -90,7 +90,31 @@ public class AddCommandTest {
      */
     private class ModelStub implements Model {
         @Override
+        public void createUser(User user) {
+            throw new AssertionError("This method should not be called!");
+        }
+
+        public boolean authenticate() {
+            throw new AssertionError("This method should not be called!");
+        }
+
+        @Override
+        public boolean getAdminStatus() {
+            throw new AssertionError("This method should not be called!");
+        }
+
+        @Override
         public boolean userExists(User user) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void logUser(User user) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
+        public void clearUser() {
             throw new AssertionError("This method should not be called");
         }
 

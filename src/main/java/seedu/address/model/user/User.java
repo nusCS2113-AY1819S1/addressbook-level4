@@ -40,3 +40,4 @@ public class User {
         this.adminStatus = adminStatus;
     }
 }
+

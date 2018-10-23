@@ -29,25 +29,34 @@ public class EventCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
+    private Label contact;
+    @FXML
     private Label id;
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label venue;
     @FXML
     private Label email;
     @FXML
+    private Label dateTime;
+    @FXML
     private FlowPane tags;
+    //@FXML
+    //private FlowPane attendees;
 
     public EventCard(Event event, int displayedIndex) {
         super(FXML);
         this.event = event;
         id.setText(displayedIndex + ". ");
         name.setText(event.getName().fullName);
+        contact.setText(event.getContact().fullContactName);
         phone.setText(event.getPhone().value);
-        address.setText(event.getAddress().value);
+        venue.setText(event.getVenue().value);
         email.setText(event.getEmail().value);
+        dateTime.setText(event.getDateTime().toString());
         event.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        //event.getAttendees().forEach(attendee -> attendees.getChildren().add(new Label(attendee.attendeeName)));
     }
 
     @Override

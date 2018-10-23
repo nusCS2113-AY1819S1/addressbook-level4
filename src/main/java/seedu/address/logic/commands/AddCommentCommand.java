@@ -38,12 +38,12 @@ public class AddCommentCommand extends Command {
     public static final String MESSAGE_ADD_COMMENT = "Comment [%1$s] replied for Event %2$s";
 
     private final Index index;
-    private final EditCommand.EditPersonDescriptor editCommentDescriptor;
+    private final EditCommand.EditEventDescriptor editCommentDescriptor;
     private String comment = null;
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editPersonDescriptor details to edit the event with
+     * @param editEventDescriptor details to edit the event with
      */
     public AddCommentCommand(Index index, String comment) {
         requireNonNull(index);
@@ -51,7 +51,7 @@ public class AddCommentCommand extends Command {
 
         this.index = index;
         this.comment = comment;
-        this.editCommentDescriptor = new EditCommand.EditPersonDescriptor();
+        this.editCommentDescriptor = new EditCommand.EditEventDescriptor();
     }
 
     public String getComment() {
@@ -97,7 +97,7 @@ public class AddCommentCommand extends Command {
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        Event editedEvent = EditCommand.createEditedPerson(eventToEdit, editCommentDescriptor);
+        Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();

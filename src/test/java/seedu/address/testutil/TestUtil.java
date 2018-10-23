@@ -49,7 +49,7 @@ public class TestUtil {
     /**
      * Returns the event in the {@code model}'s event list at {@code index}.
      */
-    public static Event getPerson(Model model, Index index) {
+    public static Event getEvent(Model model, Index index) {
         return model.getFilteredEventList().get(index.getZeroBased());
     }
 }

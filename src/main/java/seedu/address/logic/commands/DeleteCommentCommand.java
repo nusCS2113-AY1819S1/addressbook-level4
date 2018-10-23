@@ -38,12 +38,12 @@ public class DeleteCommentCommand extends Command {
     public static final String MESSAGE_LINE_INVALID = "Line is invalid, try again";
 
     private final Index index;
-    private final EditCommand.EditPersonDescriptor editCommentDescriptor;
+    private final EditCommand.EditEventDescriptor editCommentDescriptor;
     private int line = 0;
 
     /**
      * @param index of the event in the filtered event list to edit
-     * @param editPersonDescriptor details to edit the event with
+     * @param editEventDescriptor details to edit the event with
      */
     public DeleteCommentCommand(Index index, int line) {
         requireNonNull(index);
@@ -51,7 +51,7 @@ public class DeleteCommentCommand extends Command {
 
         this.index = index;
         this.line = line;
-        this.editCommentDescriptor = new EditCommand.EditPersonDescriptor();
+        this.editCommentDescriptor = new EditCommand.EditEventDescriptor();
     }
 
     public int getLine() {
@@ -71,7 +71,7 @@ public class DeleteCommentCommand extends Command {
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
 
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
-        Event editedEvent = EditCommand.createEditedPerson(eventToEdit, editCommentDescriptor);
+        Event editedEvent = EditCommand.createEditedEvent(eventToEdit, editCommentDescriptor);
 
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();

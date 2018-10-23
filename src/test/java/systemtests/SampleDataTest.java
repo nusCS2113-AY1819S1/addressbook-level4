@@ -8,13 +8,17 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import seedu.address.commons.comparators.DateTimeComparator;
+import seedu.address.commons.comparators.NameComparator;
 import seedu.address.model.EventManager;
 import seedu.address.model.event.Event;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
 public class SampleDataTest extends EventManagerSystemTest {
-    /**
+    /**git ls-tree HEAD
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
@@ -46,6 +50,9 @@ public class SampleDataTest extends EventManagerSystemTest {
     @Test
     public void addressBook_dataFileDoesNotExist_loadSampleData() {
         Event[] expectedList = SampleDataUtil.getSampleEvents();
-        assertListMatching(getPersonListPanel(), expectedList);
+        ObservableList<Event> sortList = FXCollections.observableArrayList();
+        sortList.addAll(expectedList);
+        sortList.sort(new DateTimeComparator().thenComparing(new NameComparator()));
+        assertListMatching(getEventListPanel(), sortList);
     }
 }

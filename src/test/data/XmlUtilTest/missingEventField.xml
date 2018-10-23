@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Event with missing name field -->
+<event>
+    <contact>Hans Muster</contact>
+    <phone>9482424</phone>
+    <email>hans@example</email>
+    <venue>4th street</venue>
+    <dateTime>10/10/2010 10:10</dateTime>
+    <tagged>friends</tagged>
+    <attending>Mary Kate</attending>
+</event>
