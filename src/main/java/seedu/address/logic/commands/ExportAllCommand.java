@@ -22,7 +22,6 @@ public class ExportAllCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Exported all contacts.";
     private static final String MESSAGE_FAILURE = "Export failed!";
 
-    // TODO: use enum or other better ways to store
     private Filetype filetype;
 
     /**
