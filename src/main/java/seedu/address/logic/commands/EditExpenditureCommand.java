@@ -90,7 +90,8 @@ public class EditExpenditureCommand extends Command {
             editExpenditureDescriptor) {
         assert expenditureToEdit != null;
 
-        Description updatedDescription = editExpenditureDescriptor.getDescription().orElse(expenditureToEdit.getDescription());
+        Description updatedDescription = editExpenditureDescriptor.getDescription()
+                .orElse(expenditureToEdit.getDescription());
         Date updatedDate = editExpenditureDescriptor.getDate().orElse(expenditureToEdit.getDate());
         Money updatedMoney = editExpenditureDescriptor.getMoney().orElse(expenditureToEdit.getMoney());
         Category updatedCategory = editExpenditureDescriptor.getCategory().orElse(expenditureToEdit.getCategory());
@@ -201,7 +202,7 @@ public class EditExpenditureCommand extends Command {
             EditExpenditureDescriptor e = (EditExpenditureDescriptor) other;
 
             return getDescription().equals(e.getDescription())
-                    &&getDate().equals(e.getDate())
+                    && getDate().equals(e.getDate())
                     && getMoney().equals(e.getMoney())
                     && getCategory().equals(e.getCategory());
 

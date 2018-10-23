@@ -5,7 +5,11 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.expenditureinfo.*;
+import seedu.address.model.expenditureinfo.Category;
+import seedu.address.model.expenditureinfo.Date;
+import seedu.address.model.expenditureinfo.Description;
+import seedu.address.model.expenditureinfo.Expenditure;
+import seedu.address.model.expenditureinfo.Money;
 
 /**
  * JAXB-friendly version of the Expenditure.
@@ -60,7 +64,8 @@ public class XmlAdaptedExpenditure {
     public Expenditure toModelType() throws IllegalValueException {
 
         if (description == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Description.class.getSimpleName()));
         }
         if (!Description.isValidDescription(description)) {
             throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
@@ -107,7 +112,7 @@ public class XmlAdaptedExpenditure {
 
         XmlAdaptedExpenditure otherExpenditure = (XmlAdaptedExpenditure) other;
         return Objects.equals(description, otherExpenditure.description)
-                &&Objects.equals(date, otherExpenditure.date)
+                && Objects.equals(date, otherExpenditure.date)
                 && Objects.equals(money, otherExpenditure.money)
                 && Objects.equals(category, otherExpenditure.category);
     }
