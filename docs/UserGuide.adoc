@@ -12,7 +12,7 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/ChewKinWhye/main
+:repoURL: https://github.com/CS2113-AY1819S1-T12-3/main
 
 By: `Team T12-3`      Since: `Sep 2018`      Licence: `MIT`
 
@@ -23,7 +23,7 @@ JalilEnterprises is for those who *prefer to use a desktop app for stock taking*
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `JalilEnterprises.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Stock List.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -37,10 +37,10 @@ Example of how to log in:
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/Arduino q/20 m/5 t/Lab1 t/Lab2` : adds 20 `Arduino` item to the StockList, with tags `Lab1` and `Lab2`.
-* **`delete`**`n/Arduino q/20` : delete `20 Arduinos`.
-* *`status`* : Shows the number of every item in each status category (Free, loan, faulty)
+* *`list`* : lists all items
+* **`add`**`n/Arduino q/20 m/5 t/Lab1 t/Lab2` : adds 20 `Arduino` item to the StockList, with a minimum quantity of 5 and tags `Lab1` and `Lab2`.
+* **`delete`**`1 q/20` : decreases the quantity of the `1st item by 20`.
+* *`status`* : Shows the number of every item in each status category (Ready, On_Loan, Faulty)
 
 .  Refer to <<Features>> for details of each command.
 
@@ -50,10 +50,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in UPPER_CASE are the parameters to be supplied by the user e.g. in add n/NAME, NAME is a parameter which can be used as add n/Arduino.
-* Items in square brackets are optional e.g n/NAME [t/TAG] can be used as n/Arduino t/Lab1 or as n/Arduino.
-* Items with …​ after them can be used multiple times including zero times e.g. [t/TAG]…​ can be used as   (i.e. 0 times), t/Lab1, t/Lab2 t/Lab 5 etc.
-* Parameters can be in any order e.g. if the command specifies n/NAME q/QUANTITY, q/QUANTITY n/NAME is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Arduino`.
+* Items in square brackets are optional e.g `n/NAME [t/TAG]`` can be used as `n/Arduino t/Lab1` or as `n/Arduino`.
+* Items with `…​` after them can be used multiple times including zero times e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/Lab1`, `t/Lab2 t/Lab5` etc.
+* Parameters can be in any order e.g. if the command specifies `n/NAME q/QUANTITY`, `q/QUANTITY n/NAME` is also acceptable.
 ====
 
 === Viewing help : `help`
@@ -86,10 +86,10 @@ Examples:
 === Updating an item : `update`
 
 Updates an existing item in the stock list +
-Format: `update n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
+Format: `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
 
 ****
-* Updates the item with the specified name.
+* Edits the person at the specified INDEX. The index refers to the index number shown in the displayed person list. The index must be a positive integer 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the item will be removed i.e adding of tags is not cumulative.
@@ -97,17 +97,18 @@ Format: `update n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]`
 ****
 Examples:
 
-* `update n/Arduino q/25 t/Lab7 t/Lab8` +
-Edits the quantity and tags of the Arduino item to be `25` and `Lab7`, `Lab8` respectively.
+* `update 1 n/Arduino q/25 t/Lab7 t/Lab8` +
+Edits the name, quantity and tags of the 1st item to be `Arduino`, `25` and `Lab7`, `Lab8` respectively.
 
 === Deleting an item : `delete`
 
 Deletes an item from the stock list +
-Format: `delete n/NAME q/QUANTITY`
+Format: `delete INDEX q/QUANTITY`
+****
 Examples:
 
-* `delete n/Arduino q/20` +
-Deletes 20 Arduinos
+* `delete 1 q/20` +
+Decreases the quantity of the 1st item by 20
 
 === Listing all items : `all`
 Shows all items in the stock list +
@@ -136,7 +137,7 @@ Returns any items having names `Arduino` or `Pi`
 
 === Listing item status: `status`
 
-Shows the number of every item in each status category (Free, loan, faulty) +
+Shows the number of every item in each status category (Ready, On_Loan, Faulty) +
 Format: `status`
 
 === Changing status of item: `changeStatus`
@@ -147,7 +148,7 @@ Format: `changeStatus INDEX q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS`
 Examples:
 
 * `changeStatus 1 q/20 os/Ready ns/Faulty` +
-The status of 20 arduinos would be changed from Ready to faulty
+The status of 20 arduinos would be changed from Ready to Faulty
 
 === Listing items under a specific tag: `tag`
 
@@ -162,10 +163,11 @@ Returns the items whose tags includes "Lab1"
 === Creating a loan list: `loanList`
 A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
 Format: `loanList n/NAME q/QUANTITY l/LOANER`
+
 Examples:
 
 * `loanList n/Arduino q/20 l/KinWhye` +
-This would update the status of the 20 arduinos to loan
+This would update the status of the 20 arduinos to On_Loan
 
 === Listing entered commands : `history`
 
@@ -296,10 +298,10 @@ e.g. `add n/Arduino q/20 m/5 t/Lab1 t/Lab2`
 * *Save* `save NAME` +
 e.g. save ForAugust
 * *Check* `check`
-* *Changing status* `changeStatus n/NAME q/QUANTITY s/status` +
-e.g. `changeStatus n/Arduino q/20 s/faulty`
-* *Delete* : `delete n/NAME q/QUANTITY` +
-e.g. `delete n/Arduino q/20`
+* *Changing status* `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS` +
+e.g. `changeStatus n/Arduino q/20 os/Ready ns/Faulty`
+* *Delete* : `delete INDEX q/QUANTITY` +
+e.g. `delete 1 q/20`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find n/Arduino`
 * *List* : `all`
@@ -313,8 +315,8 @@ e.g. `login u/jalil p/dontworrybrother`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
-* *Update* : `update n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]` +
-e.g. `update n/Arduino q/25 t/Lab7 t/Lab8`
+* *Update* : `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]` +
+e.g. `update 1 n/Arduino q/25 t/Lab7 t/Lab8`
 * *Lost* : `lost n/NAME [q/QUANTITY]` +
 e.g. `lost n/Arduino q/25`
 * *Found* : `found n/NAME [q/QUANTITY]` +
