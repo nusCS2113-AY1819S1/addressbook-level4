@@ -20,7 +20,7 @@ class DeleteCommentTest {
                     + "<li>hello</li>\n"
                     + "<li>there</li>\n"
                     + "<li>hello</li>\n"
-                    + "</ol>";
+                    + "</ol>\n";
 
     private String testcase =
             "<span>Comment Section</span>\n"
@@ -33,7 +33,7 @@ class DeleteCommentTest {
                     + "<li>hello</li>\n"
                     + "<li>there</li>\n"
                     + "<li>hello</li>\n"
-                    + "</ol>";
+                    + "</ol>\n";
     @Test
     void deleteComment_correctInput_success() throws Exception {
         DeleteComment test = new DeleteComment(comments);
