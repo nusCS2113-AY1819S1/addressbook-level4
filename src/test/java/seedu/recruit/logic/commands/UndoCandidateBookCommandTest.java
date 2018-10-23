@@ -14,7 +14,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-public class UndoCommandTest {
+public class UndoCandidateBookCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
@@ -34,13 +34,16 @@ public class UndoCommandTest {
     public void execute() {
         // multiple undoable states in model
         expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single undoable state in model
         expectedModel.undoCandidateBook();
-        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no undoable states in model
-        assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new UndoCandidateBookCommand(), model, commandHistory,
+                UndoCandidateBookCommand.MESSAGE_FAILURE);
     }
 }

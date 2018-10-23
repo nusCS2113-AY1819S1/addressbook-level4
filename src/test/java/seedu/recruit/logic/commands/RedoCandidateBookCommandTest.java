@@ -14,7 +14,7 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.ModelManager;
 import seedu.recruit.model.UserPrefs;
 
-public class RedoCommandTest {
+public class RedoCandidateBookCommandTest {
 
     private final Model model = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
     private final Model expectedModel = new ModelManager(getTypicalAddressBook(), new CompanyBook(), new UserPrefs());
@@ -38,13 +38,16 @@ public class RedoCommandTest {
     public void execute() {
         // multiple redoable states in model
         expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         // single redoable state in model
         expectedModel.redoCandidateBook();
-        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_SUCCESS, expectedModel);
 
         // no redoable state in model
-        assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
+        assertCommandFailure(new RedoCandidateBookCommand(), model, commandHistory,
+                RedoCandidateBookCommand.MESSAGE_FAILURE);
     }
 }
