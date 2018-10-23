@@ -6,7 +6,7 @@
 </head>
 <body>
   Event Name: <!-- Name --><!-- /Name --><br>
-  Event Venue: <!-- Venue --><!-- /Venue --><br>
+  Event Address: <!-- Address --><!-- /Address --><br>
   <br>
   Event Attendance:<br>
   <!-- Attendance -->

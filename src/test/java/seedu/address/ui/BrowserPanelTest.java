@@ -51,7 +51,7 @@ public class BrowserPanelTest extends GuiUnitTest {
                 + "&email="
                 + ALICE.getEmail()
                 + "&address="
-                + ALICE.getVenue().value.replaceAll(" ", "%20").replaceAll("#", "%23")
+                + ALICE.getAddress().value.replaceAll(" ", "%20").replaceAll("#", "%23")
                 + "&dateTime="
                 + PAGE_DATE_FORMAT.format(ALICE.getDateTime().dateTime).replaceAll(" ", "%20")
                 + "&tags="

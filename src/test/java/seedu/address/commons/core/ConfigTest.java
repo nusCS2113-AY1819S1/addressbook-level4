@@ -14,9 +14,9 @@ public class ConfigTest {
 
     @Test
     public void toString_defaultObject_stringReturned() {
-        String defaultConfigAsString = "App title : Event Manager App\n"
+        String defaultConfigAsString = "App title : Event App\n"
                 + "Current log level : INFO\n"
-                + "Preference file location : preferences.json";
+                + "Preference file Location : preferences.json";
 
         assertEquals(defaultConfigAsString, new Config().toString());
     }

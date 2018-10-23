@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
@@ -53,7 +53,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showEventAtIndex(model, INDEX_FIRST_EVENT);
+        showPersonAtIndex(model, INDEX_FIRST_EVENT);
 
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
@@ -70,7 +70,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showEventAtIndex(model, INDEX_FIRST_EVENT);
+        showPersonAtIndex(model, INDEX_FIRST_EVENT);
 
         Index outOfBoundIndex = INDEX_SECOND_EVENT;
         // ensures that outOfBoundIndex is still in bounds of address book list
@@ -126,7 +126,7 @@ public class DeleteCommandTest {
         DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_EVENT);
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
 
-        showEventAtIndex(model, INDEX_SECOND_EVENT);
+        showPersonAtIndex(model, INDEX_SECOND_EVENT);
         Event eventToDelete = model.getFilteredEventList().get(INDEX_FIRST_EVENT.getZeroBased());
         expectedModel.deleteEvent(eventToDelete);
         expectedModel.commitEventManager();

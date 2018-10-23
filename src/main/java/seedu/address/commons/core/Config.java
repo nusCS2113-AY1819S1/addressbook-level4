@@ -13,7 +13,7 @@ public class Config {
     public static final Path DEFAULT_CONFIG_FILE = Paths.get("config.json");
 
     // Config values customizable through config file
-    private String appTitle = "Event Manager App";
+    private String appTitle = "Event App";
     private Level logLevel = Level.INFO;
     private Path userPrefsFilePath = Paths.get("preferences.json");
 
@@ -67,7 +67,7 @@ public class Config {
         StringBuilder sb = new StringBuilder();
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
-        sb.append("\nPreference file location : " + userPrefsFilePath);
+        sb.append("\nPreference file Location : " + userPrefsFilePath);
         return sb.toString();
     }
 

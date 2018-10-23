@@ -3,8 +3,8 @@ package seedu.address.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_VENUE_BOB;
 import static seedu.address.testutil.TypicalEvents.ALICE;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
@@ -49,9 +49,9 @@ public class EventManagerTest {
     }
 
     @Test
-    public void resetData_withDuplicateEvents_throwsDuplicateEventException() {
+    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
         // Two events with the same identity fields
-        Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
+        Event editedAlice = new EventBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Event> newEvents = Arrays.asList(ALICE, editedAlice);
         EventManagerStub newData = new EventManagerStub(newEvents);
@@ -61,32 +61,32 @@ public class EventManagerTest {
     }
 
     @Test
-    public void hasEvent_nullEvent_throwsNullPointerException() {
+    public void hasPerson_nullPerson_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         eventManager.hasEvent(null);
     }
 
     @Test
-    public void hasEvent_eventNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(eventManager.hasEvent(ALICE));
     }
 
     @Test
-    public void hasEvent_eventInAddressBook_returnsTrue() {
+    public void hasPerson_personInAddressBook_returnsTrue() {
         eventManager.addEvent(ALICE);
         assertTrue(eventManager.hasEvent(ALICE));
     }
 
     @Test
-    public void hasEvent_eventWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         eventManager.addEvent(ALICE);
-        Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
+        Event editedAlice = new EventBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(eventManager.hasEvent(editedAlice));
     }
 
     @Test
-    public void getEventList_modifyList_throwsUnsupportedOperationException() {
+    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         eventManager.getEventList().remove(0);
     }

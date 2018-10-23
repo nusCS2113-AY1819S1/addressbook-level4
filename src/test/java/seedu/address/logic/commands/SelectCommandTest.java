@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showEventAtIndex;
+import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_EVENT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_EVENT;
@@ -52,16 +52,16 @@ public class SelectCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showEventAtIndex(model, INDEX_FIRST_EVENT);
-        showEventAtIndex(expectedModel, INDEX_FIRST_EVENT);
+        showPersonAtIndex(model, INDEX_FIRST_EVENT);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_EVENT);
 
         assertExecutionSuccess(INDEX_FIRST_EVENT);
     }
 
     @Test
     public void execute_invalidIndexFilteredList_failure() {
-        showEventAtIndex(model, INDEX_FIRST_EVENT);
-        showEventAtIndex(expectedModel, INDEX_FIRST_EVENT);
+        showPersonAtIndex(model, INDEX_FIRST_EVENT);
+        showPersonAtIndex(expectedModel, INDEX_FIRST_EVENT);
 
         Index outOfBoundsIndex = INDEX_SECOND_EVENT;
         // ensures that outOfBoundIndex is still in bounds of address book list

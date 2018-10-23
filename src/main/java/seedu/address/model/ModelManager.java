@@ -33,7 +33,7 @@ public class ModelManager extends ComponentManager implements Model {
         super();
         requireAllNonNull(eventManager, userPrefs);
 
-        logger.fine("Initializing with event manager: " + eventManager + " and user prefs " + userPrefs);
+        logger.fine("Initializing with address book: " + eventManager + " and user prefs " + userPrefs);
 
         userAccount = new UserAccount();
         versionedEManager = new VersionedEventManager(eventManager);
