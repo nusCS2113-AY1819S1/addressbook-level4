@@ -10,7 +10,10 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.product.*;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Email;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.Address;
 import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
@@ -87,7 +90,8 @@ public class XmlAdaptedProduct {
         final Name modelName = new Name(name);
 
         if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, SerialNumber.class.getSimpleName()));
+            throw new IllegalValueException(
+                    String.format(MISSING_FIELD_MESSAGE_FORMAT, SerialNumber.class.getSimpleName()));
         }
         if (!SerialNumber.isValidPhone(phone)) {
             throw new IllegalValueException(SerialNumber.MESSAGE_PHONE_CONSTRAINTS);

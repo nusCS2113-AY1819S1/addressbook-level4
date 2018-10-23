@@ -23,8 +23,8 @@ import seedu.address.model.Model;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.product.Address;
 import seedu.address.model.product.Name;
-import seedu.address.model.product.SerialNumber;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -99,7 +99,8 @@ public class EditCommand extends Command {
 
 
         Name updatedName = editPersonDescriptor.getName().orElse(productToEdit.getName());
-        SerialNumber updatedSerialNumber = editPersonDescriptor.getSerialNumber().orElse(productToEdit.getSerialNumber());
+        SerialNumber updatedSerialNumber =
+                editPersonDescriptor.getSerialNumber().orElse(productToEdit.getSerialNumber());
         DistributorName updatedDistName = editPersonDescriptor.getDistributor().orElse(productToEdit.getDistributor());
         Address updatedAddress = editPersonDescriptor.getProductInfo().orElse(productToEdit.getProductInfo());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(productToEdit.getTags());
