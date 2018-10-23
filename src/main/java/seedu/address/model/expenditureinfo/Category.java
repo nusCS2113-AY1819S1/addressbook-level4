@@ -35,23 +35,23 @@ public class Category {
      * Returns true if a given string is a valid category.
      */
     public static boolean isValidCategory(String test) {
-        return test.equals("Food")
-                || test.equals("Drink")
-                || test.equals("Clothing")
-                || test.equals("Electronics")
-                || test.equals("DailyNecessities")
-                || test.equals("Sports")
-                || test.equals("Communications")
-                || test.equals("Travels")
-                || test.equals("Study")
-                || test.equals("Office")
-                || test.equals("Pets")
-                || test.equals("Gifts")
-                || test.equals("Entertainment")
-                || test.equals("Traffic")
-                || test.equals("Shopping")
-                || test.equals("Beauty")
-                || test.equals("Furniture");
+        return "Food".equals(test)
+                || "Drink".equals(test)
+                || "Clothing".equals(test)
+                || "Electronics".equals(test)
+                || "DailyNecessities".equals(test)
+                || "Sports".equals(test)
+                || "Communications".equals(test)
+                || "Travels".equals(test)
+                || "Study".equals(test)
+                || "Office".equals(test)
+                || "Pets".equals(test)
+                || "Gifts".equals(test)
+                || "Entertainment".equals(test)
+                || "Traffic".equals(test)
+                || "Shopping".equals(test)
+                || "Beauty".equals(test)
+                || "Furniture".equals(test);
     }
 
 
