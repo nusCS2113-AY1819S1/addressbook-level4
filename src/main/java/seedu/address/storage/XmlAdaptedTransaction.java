@@ -39,7 +39,6 @@ public class XmlAdaptedTransaction {
     public XmlAdaptedTransaction(String transactionTime, TreeMap<String, Integer> transactionRecord) {
         this.transactionTime = transactionTime;
         this.transactionRecord = transactionRecord;
-
     }
 
     /**
