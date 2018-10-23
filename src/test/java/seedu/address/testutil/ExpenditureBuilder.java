@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.expenditureinfo.Category;
 import seedu.address.model.expenditureinfo.Date;
+import seedu.address.model.expenditureinfo.Description;
 import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.Money;
 
@@ -10,15 +11,18 @@ import seedu.address.model.expenditureinfo.Money;
  */
 public class ExpenditureBuilder {
 
-    public static final String DEFAULT_CATEGORY = "Chicken rice";
+    public static final String DEFAULT_DESCRIPTION = "Chicken rice";
+    public static final String DEFAULT_CATEGORY = "Food";
     public static final String DEFAULT_DATE = "01-01-2018";
     public static final String DEFAULT_MONEY = "10";
 
+    private Description description;
     private Category category;
     private Date date;
     private Money money;
 
     public ExpenditureBuilder() {
+        description = new Description(DEFAULT_DESCRIPTION);
         category = new Category(DEFAULT_CATEGORY);
         date = new Date(DEFAULT_DATE);
         money = new Money(DEFAULT_MONEY);
@@ -28,9 +32,18 @@ public class ExpenditureBuilder {
      * Initializes the ExpenditureBuilder with the data of {@code expenditureToCopy}.
      */
     public ExpenditureBuilder(Expenditure expenditureToCopy) {
+        description = expenditureToCopy.getDescription();
         category = expenditureToCopy.getCategory();
         date = expenditureToCopy.getDate();
         money = expenditureToCopy.getMoney();
+    }
+
+    /**
+     * Sets the {@code Description} of the {@code Expenditure} that we are building.
+     */
+    public ExpenditureBuilder withDescription(String description) {
+        this.description = new Description(description);
+        return this;
     }
 
     /**
@@ -58,7 +71,7 @@ public class ExpenditureBuilder {
     }
 
     public Expenditure build() {
-        return new Expenditure(date, money, category);
+        return new Expenditure(description, date, money, category);
     }
 
 }

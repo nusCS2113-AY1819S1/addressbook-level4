@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
 
 import seedu.address.commons.core.index.Index;
@@ -25,7 +26,7 @@ public class EditExpenditureCommandParser implements Parser<EditExpenditureComma
     public EditExpenditureCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_MONEY, PREFIX_CATEGORY);
+                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_MONEY, PREFIX_CATEGORY);
 
         Index index;
 
@@ -37,6 +38,10 @@ public class EditExpenditureCommandParser implements Parser<EditExpenditureComma
         }
 
         EditExpenditureDescriptor editExpenditureDescriptor = new EditExpenditureDescriptor();
+        if (argMultimap.getValue(PREFIX_DESCRIPTION).isPresent()) {
+            editExpenditureDescriptor.setDescription(ParserUtil.parseDescription(argMultimap
+                    .getValue(PREFIX_DESCRIPTION).get()));
+        }
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
             editExpenditureDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
