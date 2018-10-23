@@ -97,7 +97,6 @@ public class StorageManagerTest {
         storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
-    
     //@Test
     public void expenditureTrackerReadSave() throws Exception {
         /*
