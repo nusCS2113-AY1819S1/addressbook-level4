@@ -40,7 +40,7 @@ public class XmlSerializableEManager {
     }
 
     /**
-     * Converts this addressbook into the model's {@code EventManager} object.
+     * Converts this event manager into the model's {@code EventManager} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedEvent}.

@@ -20,9 +20,34 @@ public interface Model {
     ReadOnlyEventManager getEventManager();
 
     /**
+     * Creates a new user profile in the Event Manager.
+     */
+    void createUser(User user);
+
+    /**
      * Returns true if a user account is registered in the Event Manager.
      */
     boolean userExists(User user);
+
+    /**
+     * Returns true if a user is logged in.
+     */
+    boolean authenticate();
+
+    /**
+     * Returns true if an admin is logged in.
+     */
+    boolean getAdminStatus();
+
+    /**
+     * Logs user into Event Manager.
+     */
+    void logUser(User user);
+
+    /**
+     * Logs user out of the Event Manager.
+     */
+    void clearUser();
 
     /**
      * Returns true if a event with the same identity as {@code event} exists in the event manager.

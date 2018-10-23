@@ -2,7 +2,7 @@ package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalEvents.getTypicalEventManager;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,11 +24,11 @@ public class AddCommandIntegrationTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        model = new ModelManager(getTypicalEventManager(), new UserPrefs());
     }
 
     @Test
-    public void execute_newPerson_success() {
+    public void execute_newEvent_success() {
         Event validEvent = new EventBuilder().build();
 
         Model expectedModel = new ModelManager(model.getEventManager(), new UserPrefs());
@@ -40,7 +40,7 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicateEvent_throwsCommandException() {
         Event eventInList = model.getEventManager().getEventList().get(0);
         assertCommandFailure(new AddCommand(eventInList), model, commandHistory,
                 AddCommand.MESSAGE_DUPLICATE_EVENT);
