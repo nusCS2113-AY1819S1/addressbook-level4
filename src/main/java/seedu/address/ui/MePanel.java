@@ -11,6 +11,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 
+/**
+ * Panel containing just the current User
+ */
 public class MePanel extends UiPart<Region> {
 
     private static final String FXML = "MePanel.fxml";
