@@ -15,7 +15,11 @@ public class CliSyntax {
 
     public static final Prefix PREFIX_NOTE_DATE = new Prefix("d/");
 
-    /* TODO: Reorder the prefixes above in alphabetical order using the following template */
+
+
+
+    /* TODO: Reorder the prefixes above in alphabetical order using the foll
+    owing template */
     /* Class prefixes */
     public static final Prefix PREFIX_CLASSNAME = new Prefix("c/");
     public static final Prefix PREFIX_MAXENROLLMENT = new Prefix("e/");
@@ -30,7 +34,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_GRADEBOOK_WEIGHTAGE = new Prefix("w/");
     public static final Prefix PREFIX_GRADEBOOK_ITEM_EDIT = new Prefix("ei/");
     /* Module prefixes */
-    public static final Prefix PREFIX_MODULE_CODE = new Prefix("c/");
-    public static final Prefix PREFIX_MODULE_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_MODULE_CODE = new Prefix("mc/");
+    public static final Prefix PREFIX_MODULE_NAME = new Prefix("mn/");
     /* Note prefixes */
 }
