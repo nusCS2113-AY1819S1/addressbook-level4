@@ -8,10 +8,10 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Password {
 
-    private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.-@";
+    private static final String SPECIAL_CHARACTERS = "!#$%&'*+/=?`{|}~^.@-";
     public static final String MESSAGE_PASSWORD_CONSTRAINTS =
             "Passwords should only contain alphanumeric characters and these special characters, excluding "
-            + "the parentheses, (" + SPECIAL_CHARACTERS + ") .\n";
+                    + "the parentheses, (" + SPECIAL_CHARACTERS + ") .\n";
     private static final String PASSWORD_VALIDATION_REGEX = "^[\\w" + SPECIAL_CHARACTERS + "]+";
     public final String value;
 
