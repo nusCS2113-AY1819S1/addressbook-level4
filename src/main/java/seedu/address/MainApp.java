@@ -16,7 +16,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
@@ -207,7 +206,6 @@ public class MainApp extends Application {
     private void showLoginPage() {
         URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
         Parent root = loadFxmlFile(fxmlLoginFileUrl, window);
-        //window.initStyle(StageStyle.UNDECORATED);
         window.setTitle("Login Page");
         window.setScene(new Scene(root));
         window.show();
