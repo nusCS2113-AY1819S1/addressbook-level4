@@ -127,7 +127,7 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void remove_EventDoesNotExist_throwsEventNotFoundException() {
+    public void remove_eventDoesNotExist_throwsEventNotFoundException() {
         thrown.expect(EventNotFoundException.class);
         uniqueEventList.remove(ALICE);
     }
