@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILELOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -75,8 +75,8 @@ public class ImportCommand extends Command {
         TimeTable timeTable;
 
         try {
-            optionalTimeTable = IcsUtil.getInstance().readIcsFile(filePath);
-        } catch (DataConversionException e) {
+            optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath);
+        } catch (IOException e) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
         if (!optionalTimeTable.isPresent()) {

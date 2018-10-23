@@ -28,6 +28,17 @@ public class TimeTable {
     }
 
     /**
+     * Returns if the TimeTable is empty.
+     */
+    public boolean isEmpty() {
+        if (timeSlots.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Adds a TimeSlot to the TimeTable
      *
      * @param toAdd TimeSlot to be added

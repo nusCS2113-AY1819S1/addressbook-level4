@@ -42,8 +42,8 @@ public class IcsTimeTableStorage implements TimeTableStorage {
         requireNonNull(timeTableFilePath);
 
         try {
-            return IcsUtil.getInstance().readIcsFile(timeTableFilePath);
-        } catch (DataConversionException e) {
+            return IcsUtil.getInstance().readTimeTableFromFile(timeTableFilePath);
+        } catch (IOException e) {
             throw new DataConversionException(e);
         }
     }
@@ -51,8 +51,8 @@ public class IcsTimeTableStorage implements TimeTableStorage {
     @Override
     public void saveTimeTable(TimeTable timeTable) throws IOException {
         try {
-            IcsUtil.getInstance().saveIcsFile(timeTable, filePath);
-        } catch (FileNotFoundException | DataConversionException e) {
+            IcsUtil.getInstance().saveTimeTableToFile(timeTable, filePath);
+        } catch (FileNotFoundException e) {
             throw new IOException();
         }
     }
