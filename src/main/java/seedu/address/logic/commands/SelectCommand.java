@@ -29,7 +29,8 @@ public class SelectCommand extends Command {
             + "Parameters: INDEX INDEX ... INDEX   or   START - END, ... , START - END\n"
             + "Example: " + COMMAND_WORD + " 1 2 4 5   or   1 - 3, 5 - 9";
 
-    public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
+    public static final String MESSAGE_SELECT_PERSON_SUCCESS_MULTIPLE = "Selected %1$s persons.";
+    public static final String MESSAGE_SELECT_PERSON_SUCCESS_SINGLE = "Selected %1$s person.";
 
     private final ArrayList<Index> targetIndex;
 
@@ -57,7 +58,11 @@ public class SelectCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
-        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS, targetIndex.toString()));
+        int selectedCount = targetIndex.size();
+        if (selectedCount <= 1) {
+            return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS_SINGLE, selectedCount));
+        }
+        return new CommandResult(String.format(MESSAGE_SELECT_PERSON_SUCCESS_MULTIPLE, selectedCount));
 
     }
 
