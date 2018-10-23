@@ -52,16 +52,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
+// tag::authentication[]
 === Signing up for an account : `signup`
 
 User: Creates a *user* account +
-Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD` +
+Format: `signup n/USERdetails p/PASSWORD +
 Examples:
 
-* `signup u/Gerald Chua p/password12345 c/password12345` +
-Creates account for Gerald Chua
-* `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
-Creates account for James Yaputra
+* `signup u/Gerald Chua p/password12345 +
+Creates account with the username Gerald Chua
+* `signup u/James Yaputra p/drowssap12345 +
+Creates account with the username James Yaputra
 
 === Logging into an account : `login`
 
@@ -84,17 +85,7 @@ Examples:
 Logs in Gerald Chua +
 * `logout` +
 Logs out from Gerald Chua
-
-=== Signing up for an account : `signup`
-
-User: Creates a new account +
-Format: `signup u/USERNAME p/PASSWORD` +
-Examples:
-
-* `signup n/Gerald Chua p/password12345` +
-Creates Gerald Chua +
-* `signup u/James Yaputra p/drowssap12345` +
-Creates James Yaputra
+// end::authentication[]
 
 === Viewing help : `help`
 
