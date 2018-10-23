@@ -25,6 +25,8 @@ import seedu.address.model.person.Grade;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Nationality;
 import seedu.address.model.person.Phone;
+import seedu.address.model.script.CommandType;
+import seedu.address.model.script.TextFile;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -282,6 +284,36 @@ public class ParserUtil {
             throw new ParseException(Message.MESSAGE_MESSAGE_CONSTRAINTS);
         }
         return new Message(trimmedMessage);
+    }
+
+    /**
+     * Parses {@code String textFile} into a {@code textFile}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code textFile} is invalid.
+     */
+    public static TextFile parseTextFile(String textFile) throws ParseException {
+        requireNonNull(textFile);
+        String trimmedMessage = textFile.trim();
+        if (!TextFile.isValidTextFile(trimmedMessage)) {
+            throw new ParseException(TextFile.MESSAGE_MESSAGE_CONSTRAINTS);
+        }
+        return new TextFile(trimmedMessage);
+    }
+
+    /**
+     * Parses {@code String commandType} into a {@code commandType}
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code commandType} is invalid.
+     */
+    public static CommandType parseCommandType(String commandType) throws ParseException {
+        requireNonNull(commandType);
+        String trimmedMessage = commandType.trim();
+        if (!CommandType.isValidCommand(trimmedMessage)) {
+            throw new ParseException(CommandType.MESSAGE_MESSAGE_CONSTRAINTS);
+        }
+        return new CommandType(trimmedMessage);
     }
 
     /**
