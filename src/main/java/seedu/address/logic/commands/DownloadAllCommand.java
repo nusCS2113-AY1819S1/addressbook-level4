@@ -12,9 +12,12 @@ public class DownloadAllCommand extends Command {
 
     public static final String COMMAND_WORD = "downloadAll";
     public static final String MESSAGE_USAGE = "downloadAll pass/(password) user/(username) mod/(moduleCode)";
-    public static final String CHROMEDRIVER_PATH = "/chromedriver";
+    public static final String CHROMEDRIVER_PATH_WINDOWS = "/chromeDrivers/windows/chromedriver.exe";
+    public static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver";
     public static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
     public static final String IVLE_TITLE = "IVLE";
+    public static final String WINDOWS_OS_NAME="Windows";
+    public static final String MAC_OS_NAME="Mac";
     public static final String IVLE_ADDRESS = "https://ivle.nus.edu.sg";
     public static final String IVLE_USERNAME_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_userid";
     public static final String IVLE_PASSWORD_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_password";
@@ -39,33 +42,37 @@ public class DownloadAllCommand extends Command {
     }
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        String returnMessage= new String();
-        returnMessage = bootWebDriver(returnMessage);
-
+        WebDriver driver=initializeWebDriver();
+        loginIvle(driver);
+        String returnMessage;
+        if(checkLoggedIn(driver)==false) {
+            driver.close();
+            returnMessage = WRONG_PASS_USER_MESSAGE;
+        }
+        else{
+            if(checkModuleExists(driver)){
+                initializeDownloadFolder();
+                downloadFiles(driver);
+                dynamicWaiting();
+                driver.close();
+                returnMessage = moduleCode+" FILE DOWNLOADED AT :"+downloadFilePath;
+            }
+            else{
+                driver.close();
+                returnMessage = MODULE_NOT_FOUND_MESSAGE;
+            }
+        }
         return new CommandResult(returnMessage);
     }
 
-    private String bootWebDriver(String returnMessage) {
-        WebDriver driver=initilizeWebDriver();
-        loginIvle(driver);
-
-        if(checkLoggedIn(driver)==false){
-            driver.close();
-            return WRONG_PASS_USER_MESSAGE;
-        }
-
-        if(checkModExists(driver)){
-           return moduleCode+" FILE DOWNLOADED AT :"+downloadFilePath;
-        }
-        else {
-            driver.close();
-            return MODULE_NOT_FOUND_MESSAGE;
-        }
-    }
-
-    private WebDriver initilizeWebDriver(){
+    private WebDriver initializeWebDriver(){
         downloadFilePath = new File("").getAbsolutePath();
-        System.setProperty("webdriver.chrome.driver",downloadFilePath+CHROMEDRIVER_PATH);
+        if(System.getProperty("os.name").contains(WINDOWS_OS_NAME)) {
+            System.setProperty("webdriver.chrome.driver",downloadFilePath+ CHROMEDRIVER_PATH_WINDOWS);
+        }
+        else if(System.getProperty("os.name").contains(MAC_OS_NAME)) {
+            System.setProperty("webdriver.chrome.driver",downloadFilePath+ CHROMEDRIVER_PATH_MAC);
+        }
         downloadFilePath += DOWNLOAD_RELATIVE_PATH;
 
         HashMap<String,Object> chromePrefs =  new HashMap<String,Object>();
@@ -76,6 +83,7 @@ public class DownloadAllCommand extends Command {
         ChromeOptions options=new ChromeOptions();
         options.setExperimentalOption("prefs",chromePrefs);
         WebDriver driver=new ChromeDriver(options);
+        driver.manage().window().setPosition(new Point(-2000,0));
         return driver;
     }
     private void loginIvle(WebDriver driver){
@@ -93,24 +101,24 @@ public class DownloadAllCommand extends Command {
         return true;
     }
 
-    private boolean checkModExists (WebDriver driver){
+    private boolean checkModuleExists(WebDriver driver){
         driver.get(IVLE_DOWNLOAD_PAGE_ADDRESS);
         Select dropDown= new Select(driver.findElement(By.id(IVLE_MODULE_LIST_FIELD_ID)));
         List<WebElement> itemsModules=dropDown.getOptions();
         int itemCount=itemsModules.size();
+        //i starts at 1 because 0 is reserved for "select module"
         for(int i=1;i<itemCount;i++) {
-            if(checkModMatches(itemsModules.get(i).getText().toLowerCase())) {
+            if(checkModuleMatches(itemsModules.get(i).getText().toLowerCase())) {
                 moduleCode=itemsModules.get(i).getText();
                 dropDown.selectByIndex(i);
-                downloadFiles(driver);
                 return true;
             }
         }
         return false;
     }
-    private boolean checkModMatches(String input){
+    private boolean checkModuleMatches(String input){
         try {
-            for(int i=0;i<6;i++){
+            for(int i=0;i<moduleCode.length();i++){
                 if(input.charAt(i)!=moduleCode.charAt(i)) {
                     return false;
                 }
@@ -124,17 +132,14 @@ public class DownloadAllCommand extends Command {
 
     private void downloadFiles(WebDriver driver){
         List<WebElement> checkBoxList=driver.findElements(By.xpath(CHECKBOX_XPATH_VALUE));
-        initilizeDownloadFolder();
         for(WebElement checkBox: checkBoxList) {
             if(!checkBox.isSelected()) {
                 checkBox.click();
             }
         }
         driver.findElement(By.id(IVLE_DOWNLOAD_PAGE_BUTTON_ID)).click();
-        dynamicWaiting(driver);
-
     }
-    private void initilizeDownloadFolder(){
+    private void initializeDownloadFolder(){
         File folder = new File(downloadFilePath);
         File[] filesList = folder.listFiles();
 
@@ -145,7 +150,7 @@ public class DownloadAllCommand extends Command {
             }
         }
     }
-    private void dynamicWaiting(WebDriver driver){
+    private void dynamicWaiting(){
         String[] keyExtentions={"crdownload"};
         try {
             do {
@@ -154,6 +159,5 @@ public class DownloadAllCommand extends Command {
         }
         catch(InterruptedException e){
         }
-            driver.close();
     }
 }
