@@ -106,13 +106,10 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @throws AuthenticatedException is the user is already logged in.
      */
     public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
-
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
                 Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
-        
         logger.fine("Attempting to check credentials for login");
-
         if (hasLoggedIn) {
             throw new AuthenticatedException();
         } else if (!users.contains(toCheck)) {
