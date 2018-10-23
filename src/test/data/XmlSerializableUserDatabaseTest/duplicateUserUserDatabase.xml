@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<userdatabase>
+    <users>
+        <username>username</username>
+        <password>pass</password>
+        <addressbookfilepath>data/addressbook-username.xml</addressbookfilepath>
+    </users>
+    <users>
+        <username>amy</username>
+        <password>pass</password>
+        <addressbookfilepath>data/addressbook-amy.xml</addressbookfilepath>
+    </users>
+    <users>
+        <username>amy</username>
+        <password>pass</password>
+        <addressbookfilepath>data/addressbook-amy.xml</addressbookfilepath>
+    </users>
+</userdatabase>
