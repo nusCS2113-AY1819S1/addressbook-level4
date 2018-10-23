@@ -108,7 +108,7 @@ public class ReplyCommentCommand extends Command {
         //use this to set the comments for it to save
         System.out.println(eventToEdit.getPhone());
         Phone phone = eventToEdit.getPhone();
-        String x= phone.toString();
+        String x = phone.toString();
         int y = Integer.parseInt(x);
         y++;
         Phone phone2 = new Phone(Integer.toString(y));

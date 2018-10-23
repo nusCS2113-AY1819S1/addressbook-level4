@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
+import org.jsoup.Jsoup;
+
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -66,15 +68,21 @@ public class AddCommentCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
-        String test =
-                "<span>Comment Section</span>\n"
-                        + "<ol>\n"
-                        + "</ol>";
+        String test;
+        String test2 = "C:/Users/Gerald/Desktop/Github/addressbook-level4/src/main/"
+                + "java/seedu/address/logic/comments/dummy.html";
+
+        try {
+            test = Jsoup.parse(new File(test2), null).toString();
+            System.out.println(test);
+        } catch (Exception e) {
+            throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
+        }
 
         AddComment comments = new AddComment(test);
         test = comments.addComment(getComment());
 
-        File savingFile = new File("C:/Users/Gerald/Desktop/test/1.html");
+        File savingFile = new File(test2);
         FileOutputStream fop = null;
         try {
             fop = new FileOutputStream(savingFile);

@@ -1,7 +1,5 @@
 package seedu.address.logic.comments;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Vector;
 
 import org.jsoup.Jsoup;
@@ -25,10 +23,8 @@ public abstract class Comments {
     /**
      *  Constructor to make sure that used Vector and path is initialised
      */
-    public Comments (String input) throws IOException {
-        //this.input = input;
-        File file = new File("seedu/address/logic/comments/dummy.html");
-        this.input = Jsoup.parse(file, null).toString();
+    public Comments (String input) {
+        this.input = input;
         this.comments = this.parseCommentSection(input);
     }
 
