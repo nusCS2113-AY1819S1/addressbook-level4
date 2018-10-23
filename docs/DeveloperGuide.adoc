@@ -390,19 +390,56 @@ Each Algorithm serve different purposes.
 
 Every Algorithm will require inputs such as:
 ****
-* Number of Groups to be created
+* Number of Groups to be created of Integer Data Type
 * 2D ArrayList of Person Type
-* LinkList containing all person data from the address book
+* LinkList containing all person data from the current address book
 * Group Name in String Type
 ****
 
 From these 4 inputs, each algorithm will run necessary checks, create the required number of groups with the `Group Name` parsed in and add the Students assigned to the group.
 
+[NOTE]
+Before any Algorithm execute, the system will check if there exist any duplicate group name.
+If such an event occur, the command will stop and throw a `CommandException : Duplicate Groups Found` which will notify the user of the issue.
+
 ==== Sequence Diagrams
 
 ==== Design Considerations
+Before any Algorithm is execute, there are some checks and functions to be performed.
+
+. Check if _n_ number of groups to be created must be less than number of persons in the address book.
+.. throw `Command Exception` if _n_ groups is more than > number of persons in address book.
+. Check if there exist a group with the same group name as the ones to be created.
+.. throw `Command Exception` if there exist another group with the intended name to be created.
+. Shuffle the Address Book with a time seed.
+.. A Better Distribution
+. Place All Persons ArrayList into an LinkList.
 
 ===== Aspect: Distribute Students Equally Algorithm Explanation
+
+*Allocation Process*
+
+Firstly, I have created a 2D ArrayList of Person Type to allocate person to groups.
+
+The 2D ArrayList act as a group which contains groups of selected persons.
+Next, I have created an for loop to iterate _n_ times, where _n_ is the number of required groups to be created.
+In the for loop, i have created an ArrayList of Person Type which stores all selected Persons.
+In each for loop, the system will calculate the required number of person to be in a group and add them into the ArrayList.
+
+Once the required number of person to be in a group is fulfilled, this ArrayList is stored into the 2D Array List.
+This process loops for _n_ times.
+
+The 2D Array List should now store _n_ Elements with (_a_) number of persons in each Element.
+
+*Distribution Process*
+
+Once the allocation process of person to groups. The `distributeProcess` method will access the 2D ArrayList.
+In each ArrayList of the 2D ArrayList, the distributeProcess Method will create a group and add all the person allocated
+to that ArrayList into the group.
+This process loops until the 2D ArrayList if fully accessed.
+
+*The process is now complete.*
+
 ===== Aspect: Distribute Students Equally with Balanced Gender Explanation
 ===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
 ===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
