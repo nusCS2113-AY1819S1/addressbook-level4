@@ -108,7 +108,7 @@ public class ParserUtil {
         requireNonNull(gender);
         String trimmedGender = gender.trim();
         if (!Gender.isInputAccepted(trimmedGender)) {
-            throw new ParseException(Gender.MESSAGE_NAME_CONSTRAINTS);
+            throw new ParseException(Gender.MESSAGE_GENDER_CONSTRAINTS);
         }
         trimmedGender = inputTransform(trimmedGender);
         requireNonNull(trimmedGender);
@@ -125,7 +125,7 @@ public class ParserUtil {
         requireNonNull(countryCode);
         String trimmedCountryCode = countryCode.trim();
         if (!Nationality.isValidCountryCode(trimmedCountryCode)) {
-            throw new ParseException(Nationality.MESSAGE_NAME_CONSTRAINTS);
+            throw new ParseException(Nationality.MESSAGE_NATIONALITY_CONSTRAINT);
         }
         return new Nationality(trimmedCountryCode);
     }

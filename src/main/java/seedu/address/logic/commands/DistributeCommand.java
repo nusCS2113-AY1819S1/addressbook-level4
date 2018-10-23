@@ -28,7 +28,7 @@ public class DistributeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Distribute students equally into N groups.\n"
             + "Parameters: NUMBER OF GROUPS "
             + PREFIX_NAME + "GROUP NAME "
-            + PREFIX_GENDER + "BALANCED GENDER?"
+            + PREFIX_GENDER + "BALANCED GENDER? "
             + PREFIX_NATIONALITY + "BALANCED NATIONALITY?\n"
             + "Example: " + COMMAND_WORD + " "
             + "5 "
@@ -69,7 +69,4 @@ public class DistributeCommand extends Command {
     public int hashCode() {
         return Objects.hash(distribute);
     }
-
-
-
 }
