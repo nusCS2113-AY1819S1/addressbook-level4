@@ -66,7 +66,7 @@ public abstract class Comments {
             comments += "\n" + "<li>" + commentsVector.get(i) + "</li>" + " <br>";
             System.out.println(comments);
         }
-        comments += "\n</ol>";
+        comments += "\n</ol>\n";
         return comments;
     }
 
