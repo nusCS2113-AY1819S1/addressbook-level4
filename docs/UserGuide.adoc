@@ -381,6 +381,12 @@ e.g. `addgroup g/1 p/1 p/2`
 e.g. `edit 2 n/James Lee e/jameslee@example.com`
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find James Jake`
+* *Send Email (Person)*: `sendmail [Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+e.g. `sendmail 1 s/Solution for Assignment m/Hi Bob, solution has been attached.`
+* *Send Email (Persons)*: `sendmail [Index],..,[Index] s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+e.g. `sendmail 1,4,6 s/Tutorial Cancelled m/Tutorial class for Friday has been cancelled.`
+* *Send Email (Group)*: `sendmail gn/GROUP_NAME s/EMAIL_SUBJECT m/EMAIL MESSAGE` +
+e.g. `sendmail gn/CS2113T s/Announcement m/Please bring your calculator tomorrow.`
 * *List* : `list`
 * *Help* : `help`
 * *Select* : `select INDEX` +
