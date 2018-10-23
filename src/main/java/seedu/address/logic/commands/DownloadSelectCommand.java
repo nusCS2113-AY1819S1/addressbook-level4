@@ -11,7 +11,7 @@ import java.util.*;
 public class DownloadSelectCommand extends Command {
 
     public static final String COMMAND_WORD = "downloadSelect";
-    public static final String MESSAGE_USAGE = "downloadSelect pass/(password) user/(username) mod/(moduleCode) selectFile/(0,1,2....n))";
+    public static final String MESSAGE_USAGE = "downloadSelect pass/(password) user/(username) mod/(moduleCode) file/(0,1,2....n))";
     public static final String CHROMEDRIVER_PATH_WINDOWS = "/chromeDrivers/windows/chromedriver.exe";
     public static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver";
     public static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
