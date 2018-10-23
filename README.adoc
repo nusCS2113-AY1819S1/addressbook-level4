@@ -1,11 +1,11 @@
-= FrozenBook
+= DrinkIO
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
-https://travis-ci.org/se-edu/addressbook-level4[image:https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master[Build Status]]
-https://ci.appveyor.com/project/damithc/addressbook-level4[image:https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true[Build status]]
-https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master[Coverage Status]]
-https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&utm_medium=referral&utm_content=se-edu/addressbook-level4&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a[Codacy Badge]]
-https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
+https://https://travis-ci.org/CS2113-AY1819S1-W12-4[image:https://travis-ci.org/CS2113-AY1819S1-W12-4/main.svg?branch=master[Build Status]]
+// https://ci.appveyor.com/project/damithc/addressbook-level4[image:https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true[Build status]]
+// https://coveralls.io/github/se-edu/addressbook-level4?branch=master[image:https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master[Coverage Status]]
+// https://www.codacy.com/app/damith/addressbook-level4?utm_source=github.com&utm_medium=referral&utm_content=se-edu/addressbook-level4&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/fc0b7775cf7f4fdeaf08776f3d8e364a[Codacy Badge]]
+// https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
 
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
@@ -16,8 +16,9 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 == About App
-FrozenBook is a comprehensive management solution targeted at small icecream shop businesses.
-It provides small businesses with a inventory management system along with a accounting system to make running an icecream shop a breeze.
+FrozenBook is a comprehensive inventory management system targeted at small-scale drink distribution companies that  typically use Microsoft Excel or paper to keep track of their stocks.
+Our system will enable employees and managers to keep track of the stocks of various drinks, as well as the profit / revenue earned over time periods.
+This will enable them to stock up on goods in a timely manner and make it easier for them to track their finances.
 
 == Site Map
 
