@@ -30,6 +30,7 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
 
+import seedu.recruit.commons.core.EmailSettings;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 
@@ -42,6 +43,10 @@ public class EmailUtil {
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
     public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
+    public static final String EMAIL_ADD_COMMAND = "add";
+    public static final String EMAIL_NEXT_COMMAND = "next";
+    public static final String EMAIL_BACK_COMMAND = "back";
+    public static final String EMAIL_SEND_COMMAND = "send";
     private static final String APPLICATION_NAME = "CS2113 F09 T04";
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -51,12 +56,10 @@ public class EmailUtil {
     /**
      * Variables for Email Command
      */
+    private static EmailSettings emailSettings;
     private ArrayList<Candidate> candidates;
     private ArrayList<JobOffer> jobOffers;
     private boolean areRecipientsCandidates;
-    private String to;
-    private String subject;
-    private String bodyText;
 
     /**
      * Constructor
@@ -65,10 +68,14 @@ public class EmailUtil {
         this.candidates = new ArrayList<>();
         this.jobOffers = new ArrayList<>();
     }
-
     /**
      * Getters and Setters
      */
+    public static void setEmailSettings(EmailSettings emailSettings) {
+        EmailUtil.emailSettings = emailSettings;
+    }
+
+
     public ArrayList<Candidate> getCandidates() {
         return candidates;
     }
@@ -93,28 +100,8 @@ public class EmailUtil {
         this.areRecipientsCandidates = areRecipientsCandidates;
     }
 
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBodyText() {
-        return bodyText;
-    }
-
-    public void setBodyText(String bodyText) {
-        this.bodyText = bodyText;
+    public EmailSettings getEmailSettings() {
+        return emailSettings;
     }
 
     /**
@@ -132,6 +119,7 @@ public class EmailUtil {
     public void addJobOffer(JobOffer jobOffer) {
         this.jobOffers.add(jobOffer);
     }
+
     /**
      * Creates an authorized Credential object.
      * @param httpTransport The network HTTP Transport.

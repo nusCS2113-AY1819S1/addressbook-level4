@@ -19,11 +19,13 @@ import seedu.recruit.model.company.Company;
 import seedu.recruit.model.joboffer.JobOffer;
 
 /**
- * Finally, send the email.
+ * 4th step of the email command: send the email.
  */
 public class EmailSendCommand extends Command {
     public static final String COMMAND_WORD = "send";
-    public static final String MESSAGE_USAGE = "Type \"send\" to send the message!";
+    public static final String MESSAGE_USAGE = "Type \"send\" to send the message\n"
+            + "Type \"back\" to go back to select contents command.\n"
+            + "Type \"cancel\" to cancel the email command.";
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
     private static final String EMAIL_SUCCESS = "Successfully sent the email!";
     private static final String EMAIL_FAILURE = "Failed to send the email!";
@@ -48,9 +50,7 @@ public class EmailSendCommand extends Command {
         for (Object content : contents) {
             System.out.println(content.toString());
         }
-
         System.out.println("-----------------------------");
-
         for (Object recipient : recipients) {
             System.out.println(recipient.toString());
         }
@@ -123,7 +123,7 @@ public class EmailSendCommand extends Command {
                                    ArrayList<?> recipients, ArrayList<?> contents) {
         String bodyText;
         if (emailUtil.isAreRecipientsCandidates()) {
-            bodyText = "Hello candidates! I think you will be interested in these job offer(s)\n";
+            bodyText = emailUtil.getEmailSettings().getBodyTextCandidateAsRecipient();
             //contents are companies
             for (Object content : contents) {
                 JobOffer jobOffer = (JobOffer) content;
@@ -139,7 +139,7 @@ public class EmailSendCommand extends Command {
                 jobNames.add(jobOffer.getJob().toString());
             }
 
-            bodyText = "Hello Sirs/Madams,\nI think you will be interested in these candidates for your job offer: "
+            bodyText = emailUtil.getEmailSettings().getBodyTextCompanyAsRecipient()
                     + jobNames.toString() + '\n';
             //contents are candidates
             for (Object content : contents) {
@@ -163,9 +163,9 @@ public class EmailSendCommand extends Command {
     private String generateSubject(EmailUtil emailUtil) {
         String subject;
         if (emailUtil.isAreRecipientsCandidates()) {
-            subject = "Hot new job offers that you will love!";
+            subject = emailUtil.getEmailSettings().getSubjectCandidateAsRecipient();
         } else {
-            subject = "New candidates found for your company!";
+            subject = emailUtil.getEmailSettings().getSubjectCompanyAsRecipient();
         }
         return subject;
     }

@@ -10,7 +10,7 @@ import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 
 /**
- * Starts the 3-step process of Email
+ * Starts the 4-step process of Email
  */
 public class EmailInitialiseCommand extends Command {
     public static final String COMMAND_WORD = "email";
