@@ -11,8 +11,11 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -45,6 +48,8 @@ import seedu.address.model.person.TimeTable;
  * TODO: create a 'serialisable' class to serialise(?) the timetable objects to ics file formats
  */
 public class IcsUtil {
+    public static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
+
     private static final Logger logger = LogsCenter.getLogger(IcsUtil.class);
     private static IcsUtil instance;
 
@@ -201,20 +206,53 @@ public class IcsUtil {
         VEvent vEvent = new VEvent();
 
         //set the recurrence rule
-
         Recurrence recurrence =
-                new Recurrence.Builder(Frequency.WEEKLY).count(14).byDay(1, valueOfAbbr(abbreviation)).build();
+                new Recurrence.Builder(Frequency.WEEKLY).count(14).byDay(valueOfAbbr(abbreviation)).build();
         RecurrenceRule recurrenceRule = new RecurrenceRule(recurrence);
         vEvent.setRecurrenceRule(recurrenceRule);
 
-        //set the start and endtimes and day of week
-        //vEvent.setDateStart((startTime));
+        //set the DateStart
+        vEvent.setDateStart(getPreviousDateOfDay(startTime, dayOfWeek));
 
+        //set the DateEnd
+        vEvent.setDateEnd(getPreviousDateOfDay(endTime, dayOfWeek));
+
+        //set summary (name of module)
         vEvent.setSummary(label);
 
         return vEvent;
     }
 
+    /**
+     * Get the Date of the previous dayOfWeek.
+     * ie; if dayOfWeek is monday, then the return last monday's Date.
+     */
+    private Date getPreviousDateOfDay(LocalTime startTime, DayOfWeek dayOfWeek) {
+        LocalDate previousDay =
+                LocalDate.now(ZoneId.of(DEFAULT_ZONE_ID))
+                        .with(TemporalAdjusters.previous(dayOfWeek));
+
+        LocalDateTime localDateTime = startTime.atDate(previousDay);
+        return localDateTimeToDate(localDateTime);
+    }
+
+    /**
+     * Utility function to convert {@code LocalDateTime} to {@code Date}
+     */
+    private Date localDateTimeToDate(LocalDateTime localDateTime) {
+        //Date in = new Date();
+        //LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
+        Date out = Date.from(localDateTime.atZone(ZoneId.of(DEFAULT_ZONE_ID)).toInstant());
+        return out;
+    }
+
+    /*
+     * Utility function to convert {@code Date} to {@code LocalDateTime}
+     */
+    private LocalDateTime dateToLocalDateTime(Date date) {
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+        return localDateTime;
+    }
 
     /**
      * Writes ICalendar object to file specified
