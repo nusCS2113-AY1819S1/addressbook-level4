@@ -44,8 +44,8 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         friendList = new FilteredList<>(versionedAddressBook.getPersonList());
         otherList = new FilteredList<>(versionedAddressBook.getPersonList());
-        this.filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-        this.timeTable = new TimeTable();
+        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        timeTable = new TimeTable();
     }
 
     public ModelManager() {
@@ -159,12 +159,18 @@ public class ModelManager extends ComponentManager implements Model {
     public void undoAddressBook() {
         versionedAddressBook.undo();
         indicateAddressBookChanged();
+
+        // TODO: Implement after user comes online
+        // indicateTimeTableChanged(user.getTimeTable());
     }
 
     @Override
     public void redoAddressBook() {
         versionedAddressBook.redo();
         indicateAddressBookChanged();
+
+        // TODO: Implement after user comes online
+        // indicateTimeTableChanged(user.getTimeTable());
     }
 
     @Override

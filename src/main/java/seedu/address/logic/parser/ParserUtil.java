@@ -6,8 +6,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +29,17 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
+    public static final HashMap<String, DayOfWeek> DAY_OF_WEEK_MAP = new HashMap<>();
+
+    static {
+        DAY_OF_WEEK_MAP.put("MON", DayOfWeek.MONDAY);
+        DAY_OF_WEEK_MAP.put("TUE", DayOfWeek.TUESDAY);
+        DAY_OF_WEEK_MAP.put("WED", DayOfWeek.WEDNESDAY);
+        DAY_OF_WEEK_MAP.put("THU", DayOfWeek.THURSDAY);
+        DAY_OF_WEEK_MAP.put("FRI", DayOfWeek.FRIDAY);
+        DAY_OF_WEEK_MAP.put("SAT", DayOfWeek.SATURDAY);
+        DAY_OF_WEEK_MAP.put("SUN", DayOfWeek.SUNDAY);
+    }
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -158,8 +171,8 @@ public class ParserUtil {
         LocalTime endTime;
 
         try {
-            startTime = LocalTime.parse(startString);
-            endTime = LocalTime.parse(endString);
+            startTime = parseTime(startString);
+            endTime = parseTime(endString);
         } catch (DateTimeParseException e) {
             throw new ParseException((TimeSlot.MESSAGE_CANNOT_PARSE_TIME));
         }
@@ -172,9 +185,50 @@ public class ParserUtil {
         }
     }
 
-    // TODO: Make this accept non-full day name strings too (e.g. MON, Tue)
+    /**
+     * Parses a string and returns a DayOfWeek
+     * @param dayString String to be parsed
+     * @return DayOfWeek of String
+     * @throws IllegalArgumentException if string cannot be parsed
+     */
     public static DayOfWeek parseDay(String dayString) throws IllegalArgumentException {
-        return DayOfWeek.valueOf(dayString.toUpperCase());
+        if (DAY_OF_WEEK_MAP.containsKey(dayString.toUpperCase())) {
+            return DAY_OF_WEEK_MAP.get(dayString.toUpperCase());
+        } else {
+            try {
+                return DayOfWeek.valueOf(dayString.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw e;
+            }
+        }
+    }
+
+    /**
+     * Parses {@code timeString} according to various defined formats into a {@code LocalTime} object
+     * @param timeString {@code String} to be parsed
+     * @return {@code LocalTime} object representing {@code timeString}
+     * @throws DateTimeParseException if {@code timeString} cannot be parsed
+     */
+    public static LocalTime parseTime(String timeString) throws DateTimeParseException {
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("HH:mm");
+
+        if (timeString.contains(":") && timeString.length() == 4) {
+            format = DateTimeFormatter.ofPattern("H:mm");
+        } else if (timeString.length() == 4) {
+            format = DateTimeFormatter.ofPattern("HHmm");
+        } else if (timeString.length() == 3) {
+            format = DateTimeFormatter.ofPattern("Hmm");
+        } else if (timeString.length() == 2) {
+            format = DateTimeFormatter.ofPattern("HH");
+        } else if (timeString.length() == 1) {
+            format = DateTimeFormatter.ofPattern("H");
+        }
+
+        try {
+            return LocalTime.parse(timeString, format);
+        } catch (DateTimeParseException e) {
+            throw e;
+        }
     }
 
     /**
