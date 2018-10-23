@@ -28,13 +28,15 @@ import seedu.recruit.logic.commands.FindCandidateCommand;
 import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
-import seedu.recruit.logic.commands.ListCommand;
+import seedu.recruit.logic.commands.ListCandidateCommand;
+import seedu.recruit.logic.commands.ListCompanyCommand;
 import seedu.recruit.logic.commands.RedoCandidateBookCommand;
 import seedu.recruit.logic.commands.RedoCompanyBookCommand;
 import seedu.recruit.logic.commands.SelectCommand;
 import seedu.recruit.logic.commands.SortCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.commands.UndoCompanyBookCommand;
+import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectContentsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectRecipientsCommand;
@@ -143,8 +145,14 @@ public class RecruitBookParser {
             case SortCommand.COMMAND_WORD:
                 return new SortCommandParser().parse(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case ListCandidateCommand.COMMAND_WORD:
+                return new ListCandidateCommand();
+
+            case ListCompanyCommand.COMMAND_WORD:
+                return new ListCompanyCommand();
+
+            case SwitchBookCommand.COMMAND_WORD:
+                return new SwitchBookCommand();
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();

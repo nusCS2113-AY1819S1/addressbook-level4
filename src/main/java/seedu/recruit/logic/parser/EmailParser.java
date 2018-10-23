@@ -5,7 +5,7 @@ import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.Command;
-import seedu.recruit.logic.commands.ListCommand;
+import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectContentsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectRecipientsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
@@ -31,8 +31,8 @@ public class EmailParser {
         if (state.nextCommand.equals(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case ListCandidateCommand.COMMAND_WORD:
+                return new ListCandidateCommand();
 
             case "next":
                 return new EmailSelectRecipientsCommand();
@@ -47,8 +47,8 @@ public class EmailParser {
                 && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case ListCandidateCommand.COMMAND_WORD:
+                return new ListCandidateCommand();
 
             case "next":
                 return new EmailSelectContentsCommand();
@@ -60,8 +60,8 @@ public class EmailParser {
                 && !emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case ListCandidateCommand.COMMAND_WORD:
+                return new ListCandidateCommand();
 
             case "next":
                 return new EmailSelectContentsCommand();
