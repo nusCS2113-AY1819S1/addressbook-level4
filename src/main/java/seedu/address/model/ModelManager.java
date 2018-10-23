@@ -176,7 +176,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
-        boolean result = versionedUserDatabase.checkLoginCredentials(username, password);
+        boolean result = versionedUserDatabase.checkAuthentication(username, password);
         if (hasLoggedIn() && result) {
             reloadAddressBook(username);
         }

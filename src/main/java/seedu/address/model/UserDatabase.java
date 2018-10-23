@@ -104,7 +104,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @param password
      * @throws AuthenticatedException is the user is already logged in.
      */
-    public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
+    public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX),
                 Paths.get(AB_FILEPATH_FOLDER, AB_SALESHISTORY_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
