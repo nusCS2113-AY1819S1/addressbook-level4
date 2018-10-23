@@ -138,8 +138,8 @@ public class XmlAdaptedEventTest {
 
     @Test
     public void toModelType_nullDateTime_throwIllegalValueException() {
-        XmlAdaptedEvent event = new XmlAdaptedEvent(VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_VENUE, null,
-                VALID_TAGS, VALID_ATTENDEES);
+        XmlAdaptedEvent event = new XmlAdaptedEvent(VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_VENUE,
+                null, VALID_TAGS, VALID_ATTENDEES);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, DateTime.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, event::toModelType);
     }

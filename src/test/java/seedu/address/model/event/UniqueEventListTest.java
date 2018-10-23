@@ -34,18 +34,18 @@ public class UniqueEventListTest {
     }
 
     @Test
-    public void contains_EventNotInList_returnsFalse() {
+    public void contains_eventNotInList_returnsFalse() {
         assertFalse(uniqueEventList.contains(ALICE));
     }
 
     @Test
-    public void contains_EventInList_returnsTrue() {
+    public void contains_eventInList_returnsTrue() {
         uniqueEventList.add(ALICE);
         assertTrue(uniqueEventList.contains(ALICE));
     }
 
     @Test
-    public void contains_EventWithSameIdentityFieldsInList_returnsTrue() {
+    public void contains_eventWithSameIdentityFieldsInList_returnsTrue() {
         uniqueEventList.add(ALICE);
         Event editedAlice = new EventBuilder(ALICE).withVenue(VALID_VENUE_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
