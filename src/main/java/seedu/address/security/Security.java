@@ -13,6 +13,17 @@ public interface Security {
     void login(String username, String password);
 
     /***
+     * Logs out
+     */
+    void logout();
+
+    /***
+     * Registers the user
+     * Returns 1 if successful, 2 if user exists, 3 if the fields are incomplete
+     */
+    int register(String username, String password, String email, String phone, String address);
+
+    /***
      *
      * @return is authenticated for tests
      */

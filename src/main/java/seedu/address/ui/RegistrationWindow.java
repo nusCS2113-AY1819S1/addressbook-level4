@@ -1,14 +1,12 @@
 package seedu.address.ui;
 
-import com.google.common.eventbus.Subscribe;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.ui.ExitRegisterEvent;
+import seedu.address.commons.events.ui.SuccessfulRegisterEvent;
 import seedu.address.security.Security;
 
 /***
@@ -30,6 +28,7 @@ public class RegistrationWindow extends UiPart<Stage> {
     private TextField addressTextField;
     @FXML
     private Label label;
+    private Integer registerFlag;
 
     /**
      * Creates a new Registration Window.
@@ -93,18 +92,28 @@ public class RegistrationWindow extends UiPart<Stage> {
     }
 
     /***
+     * Hides the Login Window
+     */
+    public void hide() {
+        //logger.fine("Showing help page about the application.");
+        getRoot().hide();
+    }
+
+
+    /***
      * Runs whenever the register button is clicked
      */
     public void handleRegister() {
         //TODO
-        //user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
-        //        phoneTextField.getText(), addressTextField.getText());
+        registerFlag = user.register(usernameTextField.getText(), passwordTextField.getText(), emailTextField.getText(),
+             phoneTextField.getText(), addressTextField.getText());
+        System.out.println(registerFlag);
+        if (registerFlag == 1) {
+            raise(new SuccessfulRegisterEvent());
+        }
     }
 
-    @Subscribe
-    public void handleSuccessfulRegisterEvent(SuccessfulLoginEvent loginSuccess) {
-        getRoot().hide();
-    }
+
 
     /**
      * Closes the register window and open the login window
