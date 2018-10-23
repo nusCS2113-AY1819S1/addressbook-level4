@@ -269,6 +269,8 @@ Step 7. After authentication, the user can now start using the application.
 
 Step 8. The user can choose to log out of the application as well with the `logout` command. This command sets the login flag to false and clears `currentUser`.
 
+image::AuthenticationDiagram.png[width="800"]
+
 [NOTE]
 If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the `login` command will throw a `CommandException`.
 
