@@ -24,7 +24,7 @@ public class AddTimeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a timeslot to your timetable.\n"
-            + "Parameters: DAYOFWEEK STAET - END\n"
+            + "Parameters: DAYOFWEEK START - END\n"
             + "Example: " + COMMAND_WORD + " Monday 8-10";
 
     public static final String MESSAGE_ADD_TIMESLOT_SUCCESS = "Added timeslot: %1$s";

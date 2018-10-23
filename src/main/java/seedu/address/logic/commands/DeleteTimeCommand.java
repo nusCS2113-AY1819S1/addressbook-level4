@@ -25,7 +25,7 @@ public class DeleteTimeCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes a timeslot from your timetable.\n"
-            + "Parameters: DAYOFWEEK STAET - END\n"
+            + "Parameters: DAYOFWEEK START - END\n"
             + "Example: " + COMMAND_WORD + " Monday 8-10";
 
     public static final String MESSAGE_DELETE_TIMESLOT_SUCCESS = "Deleted timeslot: %1$s";
