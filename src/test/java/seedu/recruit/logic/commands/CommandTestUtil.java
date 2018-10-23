@@ -397,12 +397,27 @@ public class CommandTestUtil {
         }
 
         @Override
+        public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public String getFilteredContentJobOfferNames() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
+        public String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffer) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public String getFilteredCandidateNames() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
             throw new AssertionError("This method should not be called.");
         }
     }

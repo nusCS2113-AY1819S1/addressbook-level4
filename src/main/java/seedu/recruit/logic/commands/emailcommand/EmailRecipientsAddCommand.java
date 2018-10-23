@@ -2,7 +2,10 @@ package seedu.recruit.logic.commands.emailcommand;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+
 import javafx.collections.ObservableList;
+
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.CommandResult;
@@ -10,8 +13,6 @@ import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 import seedu.recruit.ui.MainWindow;
-
-import java.util.ArrayList;
 
 /**
  * This class handles the add sub command for email recipients phase
@@ -62,7 +63,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
                     for (JobOffer recipient : recipients) {
                         //if added successfully into linkedhashset, means it was not there.
                         //if not added successfully then object already exists.
-                        if(!emailUtil.addJobOffer(recipient)) {
+                        if (!emailUtil.addJobOffer(recipient)) {
                             duplicateJobOffers.add(recipient);
                         }
                     }
@@ -77,12 +78,12 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
         String duplicates = "Unable to add the following because it already has been added before:\n";
         if (duplicateCandidates.size() != 0 || duplicateJobOffers.size() != 0) {
             if (emailUtil.isAreRecipientsCandidates()) {
-                for(Candidate duplicateCandidate : duplicateCandidates) {
+                for (Candidate duplicateCandidate : duplicateCandidates) {
                     duplicates += duplicateCandidate.getName().toString();
                     duplicates += "\n";
                 }
             } else {
-                for(JobOffer duplicateJobOffer : duplicateJobOffers) {
+                for (JobOffer duplicateJobOffer : duplicateJobOffers) {
                     duplicates += duplicateJobOffer.getJob().toString();
                     duplicates += "\n";
                 }
@@ -92,7 +93,7 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
 
         //Generate recipients string
         String recipients = "Recipients added:\n";
-        if(hasDuplicates) {
+        if (hasDuplicates) {
             if (emailUtil.isAreRecipientsCandidates()) {
                 recipients += model.getFilteredCandidateNames(duplicateCandidates);
             } else {
@@ -109,11 +110,11 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
         //Generate output string
         String output = "";
 
-        if(hasDuplicates) {
+        if (hasDuplicates) {
             output += duplicates;
         }
 
-        if(!recipients.equals("Recipients added:\n")) {
+        if (!recipients.equals("Recipients added:\n")) {
             output += recipients;
         }
 

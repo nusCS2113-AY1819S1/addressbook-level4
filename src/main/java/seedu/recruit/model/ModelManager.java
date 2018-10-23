@@ -89,7 +89,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedCandidateBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateCandidateBookChanged() {
         raise(new CandidateBookChangedEvent(versionedCandidateBook));
     }
@@ -187,7 +189,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedCompanyBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateCompanyBookChanged() {
         raise(new CompanyBookChangedEvent(versionedCompanyBook));
     }
@@ -290,6 +294,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.deleteJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
+
     /**
      * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
      * {@code versionedCompanyBook}
@@ -331,10 +336,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-     *
      * @param duplicateJobOffers arraylist of duplicate job offers
      * @return concatenated string of names of job offers for
-     *         email select recipients command minus specified job offers
+     * email select recipients command minus specified job offers
      */
     @Override
     public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
@@ -348,7 +352,7 @@ public class ModelManager extends ComponentManager implements Model {
                     break;
                 }
             }
-            if(!hasDuplicate) {
+            if (!hasDuplicate) {
                 output.append(jobOffer.getCompanyName().toString());
                 output.append(" regarding job offer: ");
                 output.append(jobOffer.getJob().toString());
@@ -376,7 +380,7 @@ public class ModelManager extends ComponentManager implements Model {
     /**
      * @param duplicateJobOffers arraylist of duplicate joboffers
      * @return a concatenated string of names of job offers
-     *         for email select contents command minus specified job offers
+     * for email select contents command minus specified job offers
      */
 
     @Override
@@ -385,13 +389,13 @@ public class ModelManager extends ComponentManager implements Model {
         StringBuilder output = new StringBuilder();
         for (JobOffer jobOffer : filteredJobs) {
             hasDuplicate = false;
-            for(JobOffer duplicateJobOffer : duplicateJobOffers) {
-                if(jobOffer.isSameJobOffer(duplicateJobOffer)) {
+            for (JobOffer duplicateJobOffer : duplicateJobOffers) {
+                if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
                     hasDuplicate = true;
                     break;
                 }
             }
-            if(!hasDuplicate) {
+            if (!hasDuplicate) {
                 output.append(jobOffer.getJob().toString());
                 output.append(" at ");
                 output.append(jobOffer.getCompanyName().toString());
@@ -424,13 +428,13 @@ public class ModelManager extends ComponentManager implements Model {
         StringBuilder output = new StringBuilder();
         for (Candidate candidate : filteredCandidates) {
             hasDuplicate = false;
-            for(Candidate duplicateCandidate : duplicateCandidates) {
+            for (Candidate duplicateCandidate : duplicateCandidates) {
                 if (candidate.isSamePerson(duplicateCandidate)) {
                     hasDuplicate = true;
                     break;
                 }
             }
-            if(!hasDuplicate) {
+            if (!hasDuplicate) {
                 output.append(candidate.getName().toString());
                 output.append("\n");
             }
