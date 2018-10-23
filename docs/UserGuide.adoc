@@ -89,7 +89,7 @@ Edits the name, quantity and tags of the 1st item to be `Arduino`, `25` and `Lab
 
 Deletes an item from the stock list +
 Format: `delete INDEX q/QUANTITY`
-****
+
 Examples:
 
 * `delete 1 q/20` +
