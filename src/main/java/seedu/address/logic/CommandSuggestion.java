@@ -13,6 +13,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.ScheduleCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.TodoCommand;
 import seedu.address.logic.commands.UndoCommand;
 
 /**
@@ -42,7 +43,8 @@ public class CommandSuggestion {
             RedoCommand.COMMAND_WORD,
             ScheduleCommand.COMMAND_WORD,
             SelectCommand.COMMAND_WORD,
-            UndoCommand.COMMAND_WORD
+            UndoCommand.COMMAND_WORD,
+            TodoCommand.COMMAND_WORD
         };
     }
 

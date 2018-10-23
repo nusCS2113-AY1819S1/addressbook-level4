@@ -15,6 +15,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.export.CsvWriter;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.todo.Todo;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -24,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Todo> filteredTodos;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredTodos = new FilteredList<>(versionedAddressBook.getTodoList());
     }
 
     public ModelManager() {
@@ -102,6 +105,23 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Filtered Todo tasks List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Todo} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Todo> getFilteredTodoList() {
+        return FXCollections.unmodifiableObservableList(filteredTodos);
+    }
+
+    @Override
+    public void updateFilteredTodoList(Predicate<Todo> predicate) {
+        requireNonNull(predicate);
+        filteredTodos.setPredicate(predicate);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -160,5 +180,19 @@ public class ModelManager extends ComponentManager implements Model {
     public void exportAddressBook() {
         CsvWriter csvWriter = new CsvWriter(getFilteredPersonList());
         csvWriter.write();
+    }
+
+    //=========== Todo ========================================================================================
+    @Override
+    public boolean hasTodo(Todo todo) {
+        requireNonNull(todo);
+        return versionedAddressBook.hasTodo(todo);
+    }
+
+    @Override
+    public void addTodo(Todo todo) {
+        versionedAddressBook.addTodo(todo);
+        updateFilteredTodoList(PREDICATE_SHOW_ALL_TODOS);
+        indicateAddressBookChanged();
     }
 }
