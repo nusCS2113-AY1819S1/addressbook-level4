@@ -104,6 +104,13 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        //@@author kelvintankaiboon
+        @Override
+        public void saveStockList(String fileName) {
+            throw new AssertionError("This method should not be called.");
+        }
+        //@@author
+
         @Override
         public boolean hasItem(Item item) {
             throw new AssertionError("This method should not be called.");
@@ -126,6 +133,11 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredItemList(Predicate<Item> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredItemListByTag(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

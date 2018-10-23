@@ -18,6 +18,11 @@ public interface Model {
     /** Returns the StockList */
     ReadOnlyStockList getStockList();
 
+    //@@author kelvintankaiboon
+    /** Saves the current version of the StockList */
+    void saveStockList(String fileName);
+    //@@author
+
     /**
      * Returns true if a item with the same identity as {@code item} exists in the stock list.
      */
@@ -52,8 +57,15 @@ public interface Model {
     void updateFilteredItemList(Predicate<Item> predicate);
 
     /**
+     * Updates the filter of the filtered item list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredItemListByTag(Predicate<Item> predicate);
+
+    /**
      * Returns true if the model has previous stock list states to restore.
      */
+
     boolean canUndoStockList();
 
     /**

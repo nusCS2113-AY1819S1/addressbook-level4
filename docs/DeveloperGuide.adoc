@@ -16,7 +16,7 @@ endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-T12-3/main/tree/master
 
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team T12-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -249,50 +249,50 @@ The undo/redo mechanism is facilitated by `VersionedStockList`.
 It extends `StockList` with an undo/redo history, stored internally as an `stockListStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedStockList#commit()` -- Saves the current address book state in its history.
-* `VersionedStockList#undo()` -- Restores the previous address book state from its history.
-* `VersionedStockList#redo()` -- Restores a previously undone address book state from its history.
+* `VersionedStockList#commit()` -- Saves the current stock list state in its history.
+* `VersionedStockList#undo()` -- Restores the previous stock list state from its history.
+* `VersionedStockList#redo()` -- Restores a previously undone stock list state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitStockList()`, `Model#undoStockList()` and `Model#redoStockList()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedStockList` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedStockList` will be initialized with the initial stock list state, and the `currentStatePointer` pointing to that single stock list state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th item in the address book. The `delete` command calls `Model#commitStockList()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `stockListStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th item in the stock list. The `delete` command calls `Model#commitStockList()`, causing the modified state of the stock list after the `delete 5` command executes to be saved in the `stockListStateList`, and the `currentStatePointer` is shifted to the newly inserted stock list state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new item. The `add` command also calls `Model#commitStockList()`, causing another modified address book state to be saved into the `stockListStateList`.
+Step 3. The user executes `add n/David ...` to add a new item. The `add` command also calls `Model#commitStockList()`, causing another modified stock list state to be saved into the `stockListStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitStockList()`, so the address book state will not be saved into the `stockListStateList`.
+If a command fails its execution, it will not call `Model#commitStockList()`, so the stock list state will not be saved into the `stockListStateList`.
 
-Step 4. The user now decides that adding the item was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoStockList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the item was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoStockList()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous stock list state, and restores the stock list to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoStockList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial stock list state, then there are no previous stock list states to restore. The `undo` command uses `Model#canUndoStockList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoStockList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite -- it calls `Model#redoStockList()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the stock list to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `stockListStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoStockList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `stockListStateList.size() - 1`, pointing to the latest stock list state, then there are no undone stock list states to restore. The `redo` command uses `Model#canRedoStockList()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitStockList()`, `Model#undoStockList()` or `Model#redoStockList()`. Thus, the `stockListStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the stock list, such as `list`, will usually not call `Model#commitStockList()`, `Model#undoStockList()` or `Model#redoStockList()`. Thus, the `stockListStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitStockList()`. Since the `currentStatePointer` is not pointing at the end of the `stockListStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitStockList()`. Since the `currentStatePointer` is not pointing at the end of the `stockListStateList`, all stock list states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -304,7 +304,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire stock list.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -313,7 +313,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
+* **Alternative 1 (current choice):** Use a list to store the history of stock list states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedStockList`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
@@ -321,7 +321,40 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
-// tag::dataencryption[]
+// tag::savecommand[]
+=== SaveCommand feature
+==== Current Implementation
+
+The saveStockListVersion mechanism is facilitated by `SaveCommand`. It extends `Command` and implements the following operation:
+
+* `Command#SaveCommand()` -- Saves the current version of the stock list as an XML file in a /versions/ folder.
+
+The operation is exposed in the `Model` interface as `Model#saveStockList()`.
+
+Given below is an example usage scenario and how the saveCommand mechanism behaves at each step.
+
+Step 1. The user executes `save lab1` command to save the current version of the stock list as an xml file named `lab1.xml`.
+
+Step 2. The `save` command calls `Model#saveStockList()`, which initiates a `saveStockListVersionEvent`. The `fileName` and `ReadOnlyStockList` are saved as public final variables in the event.
+
+Step 3. The `handleSaveStockListVersionEvent` handler calls the `saveStockListVersion()` method from the `StorageManager` class.
+
+Step 4. The `ReadOnlyStockList` is saved as an xml file.
+
+==== Design Considerations
+
+===== Aspect: How SaveCommand executes
+
+* **Alternative 1** (current choice) Save the entire stock list.
+** Pros: Able to reload the particular version on the application.
+** Cons: May have performance issues in terms of usage.
+
+* **Alternative 2** Save as .csv file.
+** Pros: Less memory usage
+** Cons: Unable to edit fields using the application upon creation of the .csv file.
+// end::savecommand[]
+
+// tag::changestatus[]
 === Change Status command
 For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCommandParser and ChangeStatusCommand.
 
@@ -330,12 +363,101 @@ For this command, 3 classes were created, ChangeStatusDescriptor, ChangeStatusCo
 * The ChangeStatusCommand has the execute method. Using the index, the item to update is obtained from the model class. A copy is created and changes are made to the copy. The copy then replaces the original item.
 
 The updated item list and success message is shown to the user. Updates are committed to the storage.
+// end::changestatus[]
 
+// tag::login[]
+=== Login feature
+==== Current Implementation
+
+The login mechanism is facilitated by `LoginCommand`. It extends `Command` and implements the following operations:
+
+* `LoginCommand#execute()` -- checks if the username and password match the predefined account details. Displays a login success message if match and displays a failure message otherwise.
+
+Given below is an example usage scenario and how the LoginCommand mechanism behaves at each step.
+
+Step 1. The user executes `login u/admin p/password` command to log into StockList with 'admin' and 'password' being the username and password credentials respectively.
+
+Step 2. The `execute` command calls `Account#getUsername()` and `Account#getPassword()` methods, which parses the user input and stores the credentials as `username` and `password` variables.
+
+Step 3. The `execute` command then checks if the username and password strings match the predefined username and password strings.
+
+Step 4. If the username and password strings match, a success message is printed; otherwise a failure message is printed.
+
+==== Design Considerations
+
+===== Aspect: How 'execute' executes
+
+* **Alternative 1** (current choice) Check if the username and passwords match the predefined strings.
+** Pros: Very simple, minimal memory usage, allows for only one access account.
+** Cons: Does not allow access for multiple accounts.
+
+* **Alternative 2** Save multiple account credentials in a file, check against the file.
+** Pros: Allows for multiple accounts with different levels of access to StockList.
+** Cons: More memory usage
+// end::login[]
+
+// tag::dataencryption[]
 === [Proposed] Data Encryption
 
 _{Explain here how the data encryption feature will be implemented}_
 
 // end::dataencryption[]
+
+// tag::tag[]
+=== Tag feature
+==== Current Implementation
+
+The Tag feature is facilitated by `TagCommand`.
+It extends `Command` and implements the following operations:
+
+* `TagCommand#tag()` -- Finds and shows all items under a specific tag.
+* `TagCommand#append()` --  Append a new tag to all the items in the Stock List.
+
+Given below is an example usage scenario and how the tag mechanism behaves at each step.
+
+Scenario 1.
+
+Step 1. The user executes `tag Lab1` command to list all items with the tag `Lab1`
+
+Step 2. The `tag` command calls `updateFilteredItemListByTag()`, which shows the search result to the user.
+
+Scenario 2.
+
+Step 1. The user executes `tag append Lab3` command to append a tag `Lab3` to all the items in the Stock List.
+
+Step 2. The 'tag append' command calls `EditCommand` to all the items in the stock list.
+
+
+==== Design Considerations
+
+===== Aspect: How tag append executes
+
+* **Alternative 1 (current choice):** Append tag to all items in the stock list.
+** Pros: Easy to implement.
+** Cons: May have performance issues in terms of memory usage and may not be useful in real-life usage.
+* **Alternative 2:** Append tag to some of the items, by index
+** Pros: Will use less memory and will be useful in real-life scenario
+** Cons: It is harder to implement and harder to use.
+
+
+// end::tag[]
+
+=== Lost and Found feature
+==== Current Implementation
+
+==== Design Considerations
+
+===== Aspect: How Lost and Found executes
+
+* **Alternative 1** (current choice) Create a lost&found list to record the lost&found history.
+** Pros: Able to list all the lost&found records and history.
+** Cons: May have performance issues in terms of usage.
+
+* **Alternative 2** Just do the same way as Change Status to change the quantity of the item in the StockList.
+** Pros: Easy to handle while only increasing and decreasing the quantity will be used and no need to record all the lost history.
+** Cons: Unable to list all the lost and found history.
+// end::lostcommand[],foundcommand[],lost&foundcommand[]
+
 
 === Logging
 
@@ -582,12 +704,12 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [discrete]
 ==== `Model` component
 
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the address book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
+*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the stock list, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the address book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the stock list.
 +
 ****
 * Hints
@@ -604,7 +726,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your address book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last item in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your stock list application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last item in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
@@ -654,7 +776,7 @@ image::getting-started-ui-result-after.png[width="200"]
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the address book.
+. Modify the link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the stock list.
 +
 **Before**
 +
@@ -667,7 +789,7 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the address book is updated.
+** link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the stock list is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of items when the application just started.
 ** Use link:{repoURL}/src/main/java/seedu/address/ui/StatusBarFooter.java[`StatusBarFooter#handleStockListChangedEvent(StockListChangedEvent)`] to update the number of items whenever there are new changes to the addressbook.
@@ -679,12 +801,12 @@ image::getting-started-ui-status-after.png[width="500"]
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the address book to the cloud. However, the current implementation of the application constantly saves the address book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the address book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the stock list to the cloud. However, the current implementation of the application constantly saves the stock list after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the stock list storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupStockList(ReadOnlyStockList)`, so that the address book can be saved in a fixed temporary location.
+. Add a new method `backupStockList(ReadOnlyStockList)`, so that the stock list can be saved in a fixed temporary location.
 +
 ****
 * Hint
@@ -870,7 +992,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 _{More to be added}_
 
 [appendix]
-== Use Cases
+== Use Cases:
 
 (For all use cases below, the *System* is `JalilEnterprises` and the *Actor* is the `user`, unless specified otherwise)
 
@@ -894,6 +1016,32 @@ Use case ends.
 Use case ends.
 
 * 3a. The given index is invalid.
++
+[none]
+** 3a1. StockList shows an error message.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Tag item
+
+*MSS*
+
+1.  User requests to list items
+2.  StockList shows a list of items
+3.  User requests to show items with a specific tag
+4.  StockList finds and shows the items
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given tag is invalid.
 +
 [none]
 ** 3a1. StockList shows an error message.
