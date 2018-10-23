@@ -103,12 +103,12 @@ public class StorageManagerTest {
      * {@link XmlExpenditureTrackerStorage} class.
      * More extensive testing of UserPref saving/reading is done in {@link XmlExpenditureTrackerStorageTest} class.
      */
-    public void expenditureTrackerReadSave() throws Exception {
-        ExpenditureTracker original = getTypicalExpenditureTracker();
-        storageManager.saveExpenditureTracker(original);
-        ReadOnlyExpenditureTracker retrieved = storageManager.readExpenditureTracker().get();
-        assertEquals(original, new ExpenditureTracker(retrieved));
-    }
+    //public void expenditureTrackerReadSave() throws Exception {
+    //    ExpenditureTracker original = getTypicalExpenditureTracker();
+    //    storageManager.saveExpenditureTracker(original);
+    //    ReadOnlyExpenditureTracker retrieved = storageManager.readExpenditureTracker().get();
+    //    assertEquals(original, new ExpenditureTracker(retrieved));
+    //}
     @Test
     public void getExpenditureTrackerFilePath() {
         assertNotNull(storageManager.getExpenditureTrackerFilePath());
