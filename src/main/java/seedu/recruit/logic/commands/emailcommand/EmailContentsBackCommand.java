@@ -5,25 +5,25 @@ import static java.util.Objects.requireNonNull;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.LogicManager;
-import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
+import seedu.recruit.ui.MainWindow;
 
 /**
- * Starts the 4-step process of Email
+ * This class handles the back sub command for email contents phase
  */
-public class EmailInitialiseCommand extends Command {
-    public static final String COMMAND_WORD = "email";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Emails specified candidates about specified job offers"
-            + "or specified companies about specified candidates.";
-
+public class EmailContentsBackCommand extends EmailContentsSelectCommand {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
+        EmailUtil emailUtil = model.getEmailUtil();
 
-        //Initiailising a fresh instance of EmailUtil
-        EmailUtil emailUtil = new EmailUtil();
-        model.setEmailUtil(emailUtil);
+        if (emailUtil.isAreRecipientsCandidates()) {
+            MainWindow.switchToCandidateBook();
+        } else {
+            MainWindow.switchToCompanyBook();
+        }
+
         LogicManager.setLogicState(EmailRecipientsSelectCommand.COMMAND_LOGIC_STATE);
         return new CommandResult(EmailRecipientsSelectCommand.MESSAGE_USAGE);
     }

@@ -1,18 +1,17 @@
 package seedu.recruit.logic.commands.emailcommand;
 
+import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
-import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.CommandHistory;
-import seedu.recruit.logic.LogicManager;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.CommandResult;
+import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
@@ -27,55 +26,13 @@ public class EmailSendCommand extends Command {
             + "Type \"back\" to go back to select contents command.\n"
             + "Type \"cancel\" to cancel the email command.";
     public static final String COMMAND_LOGIC_STATE = "EmailSend";
-    private static final String EMAIL_SUCCESS = "Successfully sent the email!";
-    private static final String EMAIL_FAILURE = "Failed to send the email!";
+    public static final String EMAIL_SUCCESS = "Successfully sent the email!";
+    public static final String EMAIL_FAILURE = "Failed to send the email!";
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) throws IOException, GeneralSecurityException {
-        EmailUtil emailUtil = model.getEmailUtil();
-        String result;
-        ArrayList<?> recipients;
-        ArrayList<?> contents;
-
-        //Setting recipients and contents based on AreRecipientsCandidates boolean
-        if (emailUtil.isAreRecipientsCandidates()) {
-            recipients = emailUtil.getCandidates();
-            contents = emailUtil.getJobOffers();
-        } else {
-            recipients = emailUtil.getJobOffers();
-            contents = emailUtil.getCandidates();
-        }
-
-        // for testing purposes
-        for (Object content : contents) {
-            System.out.println(content.toString());
-        }
-        System.out.println("-----------------------------");
-        for (Object recipient : recipients) {
-            System.out.println(recipient.toString());
-        }
-
-        //Generating recipients
-        Set<String> recipientEmails = new HashSet<>();
-        generateRecipients(recipientEmails, model, emailUtil, recipients, contents);
-
-        //Generate content (bodyText)
-        String bodyText = generateContent(model, emailUtil, recipients, contents);
-
-        //Generate subject
-        String subject = generateSubject(emailUtil);
-
-        //Sending the email
-        try {
-            MimeMessage mimeMessage = EmailUtil.createEmail(EmailUtil.DEFAULT_FROM, recipientEmails, subject, bodyText);
-            EmailUtil.sendMessage(EmailUtil.serviceInit(), EmailUtil.DEFAULT_FROM, mimeMessage);
-            result = EMAIL_SUCCESS;
-        } catch (MessagingException | GeneralSecurityException e) {
-            e.printStackTrace();
-            result = EMAIL_FAILURE;
-        }
-        LogicManager.setLogicState("primary");
-        return new CommandResult(result);
+    public CommandResult execute(Model model, CommandHistory history)
+            throws ParseException, IOException, GeneralSecurityException {
+        throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
     }
 
     /**
@@ -86,7 +43,7 @@ public class EmailSendCommand extends Command {
      * @param recipients
      * @param contents
      */
-    private void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil,
+    public void generateRecipients(Set<String> recipientEmails, Model model, EmailUtil emailUtil,
                                     ArrayList<?> recipients, ArrayList<?> contents) {
         if (emailUtil.isAreRecipientsCandidates()) {
             //recipients are candidates
@@ -119,7 +76,7 @@ public class EmailSendCommand extends Command {
      * @param contents
      * @return bodytext String
      */
-    private String generateContent(Model model, EmailUtil emailUtil,
+    public String generateContent(Model model, EmailUtil emailUtil,
                                    ArrayList<?> recipients, ArrayList<?> contents) {
         String bodyText;
         if (emailUtil.isAreRecipientsCandidates()) {
@@ -160,7 +117,7 @@ public class EmailSendCommand extends Command {
      * @param emailUtil
      * @return String subject
      */
-    private String generateSubject(EmailUtil emailUtil) {
+    public String generateSubject(EmailUtil emailUtil) {
         String subject;
         if (emailUtil.isAreRecipientsCandidates()) {
             subject = emailUtil.getEmailSettings().getSubjectCandidateAsRecipient();

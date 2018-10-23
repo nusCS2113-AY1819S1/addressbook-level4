@@ -10,9 +10,16 @@ import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.Command;
 import seedu.recruit.logic.commands.ListCandidateCommand;
-import seedu.recruit.logic.commands.emailcommand.EmailSelectContentsCommand;
-import seedu.recruit.logic.commands.emailcommand.EmailSelectRecipientsCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailContentsAddCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailContentsBackCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailContentsNextCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailContentsSelectCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailRecipientsAddCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailRecipientsNextCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailRecipientsSelectCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailSendBackCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
+import seedu.recruit.logic.commands.emailcommand.EmailSendSendCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 
 /**
@@ -32,17 +39,17 @@ public class EmailParser {
     public Command parseCommand(String commandWord, String arguments, LogicState state, EmailUtil emailUtil)
             throws ParseException {
         //Email command set recipients step
-        if (state.nextCommand.equals(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE)) {
+        if (state.nextCommand.equals(EmailRecipientsSelectCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
 
             case ListCandidateCommand.COMMAND_WORD:
                 return new ListCandidateCommand();
 
             case EMAIL_NEXT_COMMAND:
-                return new EmailSelectRecipientsCommand(commandWord);
+                return new EmailRecipientsNextCommand();
 
             case EMAIL_ADD_COMMAND:
-                return new EmailSelectRecipientsCommand(commandWord);
+                return new EmailRecipientsAddCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -50,23 +57,23 @@ public class EmailParser {
 
         //Email command set contents step. Allow certain commands depending whether
         //recipients are candidates or job offers.
-        } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
+        } else if (state.nextCommand.equals(EmailContentsSelectCommand.COMMAND_LOGIC_STATE)
                 && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
             case EMAIL_NEXT_COMMAND:
-                return new EmailSelectContentsCommand(commandWord);
+                return new EmailContentsNextCommand();
 
             case EMAIL_ADD_COMMAND:
-                return new EmailSelectContentsCommand(commandWord);
+                return new EmailContentsAddCommand();
 
             case EMAIL_BACK_COMMAND:
-                return new EmailSelectRecipientsCommand(commandWord);
+                return new EmailContentsBackCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
             }
-        } else if (state.nextCommand.equals(EmailSelectContentsCommand.COMMAND_LOGIC_STATE)
+        } else if (state.nextCommand.equals(EmailContentsSelectCommand.COMMAND_LOGIC_STATE)
                 && !emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
@@ -74,13 +81,13 @@ public class EmailParser {
                 return new ListCandidateCommand();
 
             case EMAIL_NEXT_COMMAND:
-                return new EmailSelectContentsCommand(commandWord);
+                return new EmailContentsNextCommand();
 
             case EMAIL_ADD_COMMAND:
-                return new EmailSelectContentsCommand(commandWord);
+                return new EmailContentsAddCommand();
 
             case EMAIL_BACK_COMMAND:
-                return new EmailSelectRecipientsCommand(commandWord);
+                return new EmailContentsBackCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -91,10 +98,10 @@ public class EmailParser {
             switch (commandWord) {
 
             case EMAIL_SEND_COMMAND:
-                return new EmailSendCommand();
+                return new EmailSendSendCommand();
 
             case EMAIL_BACK_COMMAND:
-                return new EmailSelectContentsCommand(commandWord);
+                return new EmailSendBackCommand();
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
