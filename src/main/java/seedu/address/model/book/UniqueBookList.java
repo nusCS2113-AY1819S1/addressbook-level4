@@ -6,7 +6,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +29,7 @@ import seedu.address.model.book.exceptions.DuplicateBookException;
 public class UniqueBookList implements Iterable<Book> {
 
     private final ObservableList<Book> internalList = FXCollections.observableArrayList();
+    private final Queue<String> isbnList = new LinkedList<>();
 
     /**
      * Returns true if the list contains an equivalent book as the given argument.
@@ -118,6 +121,17 @@ public class UniqueBookList implements Iterable<Book> {
             }
         });
     }
+
+    public Queue<String> getIsbnList(String isbnText) {
+        for (Book book : internalList) {
+            String isbn = book.getIsbn().value;
+            if (isbn.contains(isbnText)) {
+                isbnList.add(isbn);
+            }
+        }
+        return isbnList;
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

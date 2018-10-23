@@ -3,6 +3,7 @@ package seedu.address.logic;
 import static seedu.address.logic.parser.DiceCoefficient.diceCoefficient;
 
 import java.util.List;
+import java.util.Queue;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -63,6 +64,11 @@ public class LogicManager extends ComponentManager implements Logic {
                 history.add(commandText);
             }
         }
+    }
+
+    @Override
+    public Queue<String> getCompleteIsbn(String isbnText) {
+        return model.getCompleteIsbn(isbnText);
     }
 
     @Override

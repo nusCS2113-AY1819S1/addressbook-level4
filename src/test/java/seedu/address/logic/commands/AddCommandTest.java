@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Queue;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -125,6 +126,11 @@ public class AddCommandTest {
 
         @Override
         public void sortBooksUsingQuantity() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Queue<String> getCompleteIsbn(String isbnText) {
             throw new AssertionError("This method should not be called.");
         }
 

@@ -207,6 +207,7 @@ public class MainWindow extends UiPart<Stage> {
     public RequestListPanel getRequestListPanel() {
         return requestListPanel;
     }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
