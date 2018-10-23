@@ -3,9 +3,9 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.ExportAllCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Filetype;
 
 //@@author jitwei98
 /**
@@ -23,12 +23,12 @@ public class ExportAllCommandParser implements Parser<ExportAllCommand> {
         requireNonNull(userInput);
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(userInput);
 
-        String filetype;
+        Filetype filetype;
         try {
             filetype = ParserUtil.parseFiletype(argMultimap.getPreamble());
-        } catch (IllegalValueException ive) {
+        } catch (Exception pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ExportAllCommand.MESSAGE_USAGE), ive);
+                    ExportAllCommand.MESSAGE_USAGE), pe);
         }
 
         return new ExportAllCommand(filetype);
