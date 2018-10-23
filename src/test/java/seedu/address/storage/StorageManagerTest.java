@@ -98,12 +98,12 @@ public class StorageManagerTest {
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
     //@Test
+    /*
+     * Note: This is an integration test that verifies the StorageManager is properly wired to the
+     * {@link XmlExpenditureTrackerStorage} class.
+     * More extensive testing of UserPref saving/reading is done in {@link XmlExpenditureTrackerStorageTest} class.
+     */
     public void expenditureTrackerReadSave() throws Exception {
-        /*
-         * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link XmlExpenditureTrackerStorage} class.
-         * More extensive testing of UserPref saving/reading is done in {@link XmlExpenditureTrackerStorageTest} class.
-         */
         ExpenditureTracker original = getTypicalExpenditureTracker();
         storageManager.saveExpenditureTracker(original);
         ReadOnlyExpenditureTracker retrieved = storageManager.readExpenditureTracker().get();
