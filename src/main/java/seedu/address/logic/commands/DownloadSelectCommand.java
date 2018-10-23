@@ -67,7 +67,9 @@ public class DownloadSelectCommand extends Command {
                     driver.close();
                 }
                 else{
+                    initializeDownloadFolder();
                     downloadFiles(driver);
+                    dynamicWaiting();
                     driver.close();
                     returnMessage = moduleCode+" FILES DOWNLOADED AT :"+downloadFilePath;
                 }
@@ -95,12 +97,9 @@ public class DownloadSelectCommand extends Command {
     private void downloadFiles(WebDriver driver){
         WebElement treeview = driver.findElement(By.className(TREEVIEW_CLASS_ID));
         List<WebElement> fileResult = treeview.findElements(By.cssSelector(WORKBIN_CSS_SELECTOR_ID));
-        initializeDownloadFolder();
         for(int fileID:fileSelect) {
             driver.get(fileResult.get(fileID).getAttribute(FILE_DOWNLOAD_LINK_ATTRIBUTE_ID));
-            dynamicWaiting();
         }
-
     }
 
     private WebDriver initializeWebDriver(){
