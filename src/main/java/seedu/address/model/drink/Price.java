@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Price in DRINKio
+ * Represents a Price in DrinkIO
  * Guarantees: Is valid as declared in {@link #isValidPrice(String)}
  */
 public class Price {
@@ -59,5 +59,4 @@ public class Price {
     public int hashCode() {
         return Float.hashCode(price);
     }
-
 }

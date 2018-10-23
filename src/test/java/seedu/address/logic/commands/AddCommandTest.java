@@ -14,10 +14,10 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import seedu.address.Model;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
@@ -155,7 +155,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A DrinkModel stub that contains a single person.
      */
     private class ModelStubWithPerson extends ModelStub {
         private final Person person;
@@ -173,7 +173,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A DrinkModel stub that always accept the person being added.
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
