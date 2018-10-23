@@ -13,10 +13,13 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TimeTableChangedEvent;
+import seedu.address.model.person.CombinedFriendPredicate;
+import seedu.address.model.person.CombinedOtherPredicate;
 import seedu.address.model.person.FriendListPredicate;
 import seedu.address.model.person.OtherListPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeTable;
+import seedu.address.security.UserStub;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -129,6 +132,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFriendList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        friendList.setPredicate(combinedFriendPredicate(predicate, friendsPredicateFromPerson(UserStub.getUser())));
+    }
+
+    @Override
+    public void updateOtherList(Predicate<Person> predicate) {
+        requireNonNull(predicate);
+        otherList.setPredicate(combinedOtherPredicate(predicate, othersPredicateFromPerson(UserStub.getUser())));
+    }
+
+    @Override
     public ObservableList<Person> getFriendList(Person person) {
         requireNonNull(person);
         friendList.setPredicate(friendsPredicateFromPerson(person));
@@ -196,4 +211,19 @@ public class ModelManager extends ComponentManager implements Model {
     public OtherListPredicate othersPredicateFromPerson(Person person) {
         return new OtherListPredicate(person.getFriends());
     }
+
+    /**
+     * Combines the predicates to allow SetPredicate to be called
+     * @param predicate
+     * @param friendListPredicate
+     * @return
+     */
+    public CombinedFriendPredicate combinedFriendPredicate(Predicate<Person> predicate, FriendListPredicate friendListPredicate) {
+        return new CombinedFriendPredicate(predicate, friendListPredicate);
+    }
+
+    public CombinedOtherPredicate combinedOtherPredicate(Predicate<Person> predicate, OtherListPredicate otherListPredicate) {
+        return new CombinedOtherPredicate(predicate, otherListPredicate);
+    }
+
 }

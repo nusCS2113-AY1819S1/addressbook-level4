@@ -51,7 +51,7 @@
           <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
               <Text id="meText" fx:id="meText"/>
               <padding>
-                  <Insets top="10" right="10" bottom="10" />
+                  <Insets top="10" right="10" bottom="10" left="10"/>
               </padding>
               <StackPane fx:id="mePanelPlaceholder" VBox.vgrow="ALWAYS"/>
 
@@ -59,7 +59,7 @@
                   <VBox fx:id="FriendsList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
                     <Text id="friendText" fx:id="friendText"/>
                     <padding>
-                        <Insets top="10" right="10" bottom="10" left="10" />
+                        <Insets top="10" right="10" bottom="10" />
                     </padding>
             <StackPane fx:id="friendListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
                   </VBox>
