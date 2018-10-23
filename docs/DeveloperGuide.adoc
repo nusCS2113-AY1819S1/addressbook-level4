@@ -328,7 +328,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ==== Current implementation
 The sell command utilises both the `Model` and `Logic` component to fulfil its function.
 
-The following sequence diagram shows how the sell operation is implemented:
+The following sequence diagram shows how the sell operation is implemented
 
 image::SellSequenceDiagram.png[width="800"]
 
