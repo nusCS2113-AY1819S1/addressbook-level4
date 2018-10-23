@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.model.Filetype;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -19,8 +20,8 @@ import seedu.address.model.UserPrefs;
  */
 public class ExportAllCommandTest {
 
-    private static final String FILETYPE_CSV = "csv";
-    private static final String FILETYPE_VCF = "vcf";
+    private static final Filetype FILETYPE_CSV = new Filetype("csv");
+    private static final Filetype FILETYPE_VCF = new Filetype("vcf");
 
     private Model model;
     private Model expectedModel;

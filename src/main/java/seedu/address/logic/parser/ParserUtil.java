@@ -126,20 +126,21 @@ public class ParserUtil {
         return tagSet;
     }
 
+    //@@author jitwei98
     /**
      * Parses a {@code String filetype} into a {@code Filetype}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code String filetype} is invalid.
      */
-    public static String parseFiletype(String filetype) throws ParseException {
+    public static Filetype parseFiletype(String filetype) throws ParseException {
         requireNonNull(filetype);
 
         String trimmedFiletype = filetype.trim();
         if (!isValidFiletype(trimmedFiletype)) {
             throw new ParseException(Filetype.MESSAGE_FILETYPE_CONSTRAINTS);
         }
-        return trimmedFiletype;
+        return new Filetype(trimmedFiletype);
     }
 
     //@@author linnnruo
