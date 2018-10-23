@@ -29,6 +29,7 @@ public class DeleteTimeCommand extends Command {
             + "Example: " + COMMAND_WORD + " Monday 8-10";
 
     public static final String MESSAGE_DELETE_TIMESLOT_SUCCESS = "Deleted timeslot: %1$s";
+    public static final String MESSAGE_TIMESLOT_DOES_NOT_EXIST = "The timeslot to be deleted does not exist!";
 
     private final TimeSlot toDelete;
     private final Index index;
@@ -59,7 +60,7 @@ public class DeleteTimeCommand extends Command {
         try {
             editedPerson = createEditedPerson(personToEdit, toDelete);
         } catch (TimeSlotDoesNotExistException e) {
-            throw new CommandException(Messages.MESSAGE_TIMESLOT_DOES_NOT_EXIST);
+            throw new CommandException(DeleteTimeCommand.MESSAGE_TIMESLOT_DOES_NOT_EXIST);
         }
 
         model.updatePerson(personToEdit, editedPerson);

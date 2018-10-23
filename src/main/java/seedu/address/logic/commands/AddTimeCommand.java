@@ -28,6 +28,7 @@ public class AddTimeCommand extends Command {
             + "Example: " + COMMAND_WORD + " Monday 8-10";
 
     public static final String MESSAGE_ADD_TIMESLOT_SUCCESS = "Added timeslot: %1$s";
+    public static final String MESSAGE_OVERLAP_TIMESLOT = "The timeslot added overlaps with an existing timeslot!";
 
     private final TimeSlot toAdd;
     private final Index index;
@@ -58,7 +59,7 @@ public class AddTimeCommand extends Command {
         try {
             editedPerson = createEditedPerson(personToEdit, toAdd);
         } catch (TimeSlotOverlapException e) {
-            throw new CommandException(Messages.MESSAGE_OVERLAP_TIMESLOT);
+            throw new CommandException(AddTimeCommand.MESSAGE_OVERLAP_TIMESLOT);
         }
 
         model.updatePerson(personToEdit, editedPerson);
