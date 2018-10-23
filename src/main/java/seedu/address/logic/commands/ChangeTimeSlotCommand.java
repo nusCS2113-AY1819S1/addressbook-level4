@@ -5,11 +5,13 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.*;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.person.IsNotSelfOrMergedPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.TimeSlots;
 /**
@@ -49,6 +51,7 @@ public class ChangeTimeSlotCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        lastShownList = ((ObservableList<Person>) lastShownList).filtered(new IsNotSelfOrMergedPredicate());
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -71,8 +74,13 @@ public class ChangeTimeSlotCommand extends Command {
             }
             if(i%3==0){
                 activity =actions[i];
-                timeSlots.get(day).set(changeTimeToIndex(time), new TimeSlots(activity));
-
+                if(actions[i].equalsIgnoreCase("free")){
+                    timeSlots.get(day).set(changeTimeToIndex(time),
+                            new TimeSlots (day.toLowerCase()+time.toLowerCase()));
+                }
+                else {
+                    timeSlots.get(day).set(changeTimeToIndex(time), new TimeSlots(activity));
+                }
             }
         }
         Person newPerson= new Person(personToChange.getName(),personToChange.getPhone(),personToChange.getEmail(),

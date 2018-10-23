@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
+import seedu.address.model.person.IsNotSelfOrMergedPredicate;
 import seedu.address.model.person.TimetableContainsModulePredicate;
 
 /**
@@ -15,13 +16,14 @@ public class FilterCommand extends Command {
 
     public static final String COMMAND_WORD = "filter";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Filters the list to all the people who take the modules "
-            + "inputted." + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + "Filters the list to based on free time slots and " +
+            "modules taken "
+             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " CS2101 CS2113";
 
     private final TimetableContainsModulePredicate predicate;
 
-    public FilterCommand(TimetableContainsModulePredicate predicate) {
+    public FilterCommand( TimetableContainsModulePredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -30,7 +32,8 @@ public class FilterCommand extends Command {
         requireNonNull(model);
         model.updateFilteredPersonList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW,
+                        model.getFilteredPersonList().filtered(new IsNotSelfOrMergedPredicate()).size()));
     }
 
     @Override

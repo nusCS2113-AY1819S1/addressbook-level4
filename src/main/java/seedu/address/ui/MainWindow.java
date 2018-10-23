@@ -19,6 +19,8 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.person.IsMergedPredicate;
+import seedu.address.model.person.TimetableContainsModulePredicate;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -39,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private MergedTimetablePanel mergedTimetablePanel;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -57,6 +60,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane mergedTimetablePlaceholder;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -133,6 +139,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        mergedTimetablePanel = new MergedTimetablePanel(logic.getFilteredPersonList());
+        mergedTimetablePlaceholder.getChildren().add(mergedTimetablePanel.getRoot());
     }
 
     void hide() {
@@ -189,6 +198,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public MergedTimetablePanel getMergedTimetablePanel() {
+        return mergedTimetablePanel;
     }
 
     void releaseResources() {

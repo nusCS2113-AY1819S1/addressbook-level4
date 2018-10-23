@@ -4,6 +4,12 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.tag.Tag;
+
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 /**
  * Tests that a {@code Person}'s {@code Name} matches any of the keywords given.
@@ -17,6 +23,25 @@ public class NameContainsKeywordsPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        int isMerged=0;
+        if(keywords.get(0).equalsIgnoreCase("merged")){
+            for(Tag tag: person.getTags()){
+                if(tag.toString().equalsIgnoreCase("[merged]")){
+                    isMerged=1;
+                }
+            }
+            if(isMerged==0){
+                return true;
+            }
+        }
+        if(keywords.get(0).equalsIgnoreCase("main")) {
+            for (Tag tag : person.getTags()) {
+                if (tag.toString().equalsIgnoreCase("[merged]")) {
+                    return true;
+                }
+            }
+        }
+
         return keywords.stream()
                 .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getName().fullName, keyword));
     }

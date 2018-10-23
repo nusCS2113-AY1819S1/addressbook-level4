@@ -3,21 +3,18 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MERGE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.*;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.enrolledClass.EnrolledClass;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.*;
 import seedu.address.model.tag.Tag;
-import seedu.address.model.person.TimeSlots;
 
 
 /**
@@ -31,27 +28,29 @@ public class MergeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Merges the timetables of selected people"
             + "by the index number used in the last person listing.\n "
             + "Parameters: INDEX (must be positive integer )"
-            + PREFIX_MERGE + "[INDEX]"
+            + PREFIX_MERGE + "[INDEX] " + PREFIX_NAME +"[GROUP NAME]"
             + "for all timetables you want to merge.\n"
-            + "Example: " + "COMMAND_WORD" + "1" + "COMMAND_WORD" + "2";
+            + "Example: " + COMMAND_WORD + PREFIX_MERGE + "1 " + PREFIX_MERGE + "2 " + PREFIX_NAME + "GES PROJECT";
 
     public static final String MESSAGE_MERGE_TIMETABLE_SUCCESS = "Timetables Merged";
     public static final String MESSAGE_NOT_MERGED = "At least two people to merge must be provided";
 
     private final List<String> indices;
+    private final Name name;
 
-    public MergeCommand(List<String> indices) {
+    public MergeCommand(List<String> indices, String name) {
         requireNonNull(indices);
+        requireNonNull(name);
 
         this.indices = indices;
+        this.name = new Name(name);
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-
-
+        lastShownList = ((ObservableList<Person>) lastShownList).filtered(new IsNotSelfOrMergedPredicate());
         Person[] personsToMerge = new Person[lastShownList.size()];
 
 
@@ -74,7 +73,7 @@ public class MergeCommand extends Command {
             i++;
         }
         for (int j = 0; j < i - 1; j++) {
-            personsToMerge[j + 1] = mergeTimetables(personsToMerge[j], personsToMerge[j + 1]);
+            personsToMerge[j + 1] = mergeTimetables(personsToMerge[j], personsToMerge[j + 1], j);
         }
         model.addPerson(personsToMerge[i - 1]);
         model.commitAddressBook();
@@ -83,12 +82,19 @@ public class MergeCommand extends Command {
     }
 
 
-    private Person mergeTimetables(Person person1, Person person2) {
-        Name mergedName = new Name(person1.getName().toString() + " and " + person2.getName().toString());
-        Phone phone = new Phone("999");
+    private Person mergeTimetables(Person person1, Person person2, int index) {
+        Name mergedName = name;
+        Phone phone = new Phone("99999999");
         Email email = new Email("notimportant@no");
-        Address address = new Address("here");
+        Address address;
+        if(index==0) {
+            address = new Address(person1.getName().toString() + ", " + person2.getName().toString());
+        }
+        else{
+            address = new Address(person1.getAddress().toString() + ", " + person2.getName().toString());
+        }
         Set<Tag> mergedTags= new HashSet<>();
+        mergedTags.add(new Tag("merged"));
         Map<String, List<TimeSlots>> mergedSlots = mergeTimeSlots(person1.getTimeSlots(), person2.getTimeSlots());
         Map<String, EnrolledClass> enrolledClassMap = new TreeMap<>();
 

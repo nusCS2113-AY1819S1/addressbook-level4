@@ -64,6 +64,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseEnrolledClassesForEdit(argMultimap.getAllValues(PREFIX_ENROLLED_CLASS))
                                             .ifPresent(editPersonDescriptor::setEnrolledClasses);
 
+
         if (!editPersonDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }

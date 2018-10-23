@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import seedu.address.model.tag.Tag;
-import seedu.address.model.person.TimeSlots;
 
 /**
  * Tests that a {@code Person}'s {@code Tag} matches any of the keywords given.
@@ -18,6 +17,11 @@ public class TimetableContainsModulePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
+        for(Tag tags: person.getTags() ) {
+            if (tags.toString().equalsIgnoreCase("[merged]")) {
+                return true;
+            }
+        }
         String[] days = {"mon", "tue", "wed", "thu", "fri"};
         for (String day : days) {
             for (TimeSlots module : person.getTimeSlots().get(day)) {

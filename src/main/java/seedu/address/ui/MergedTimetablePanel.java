@@ -13,34 +13,34 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.model.person.IsNotSelfOrMergedPredicate;
+import seedu.address.model.person.IsMergedPredicate;
 import seedu.address.model.person.Person;
 
 /**
  * Panel containing the list of persons.
  */
-public class PersonListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+public class MergedTimetablePanel extends UiPart<Region> {
+    private static final String FXML = "MergedTimetablePanel.fxml";
+    private final Logger logger = LogsCenter.getLogger(MergedTimetablePanel.class);
 
     @FXML
-    private ListView<Person> personListView;
+    private ListView<Person> timetable;
 
-    public PersonListPanel(ObservableList<Person> personList) {
+    public MergedTimetablePanel(ObservableList<Person> timetableList) {
         super(FXML);
-        personList = personList.filtered(new IsNotSelfOrMergedPredicate());
-        setConnections(personList);
+        timetableList = timetableList.filtered(new IsMergedPredicate());
+        setConnections(timetableList);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Person> personList) {
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+    private void setConnections(ObservableList<Person> timetableList) {
+        timetable.setItems(timetableList);
+        timetable.setCellFactory(listView -> new PersonListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        personListView.getSelectionModel().selectedItemProperty()
+        timetable.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in person list panel changed to : '" + newValue + "'");
@@ -49,13 +49,15 @@ public class PersonListPanel extends UiPart<Region> {
                 });
     }
 
+
+
     /**
      * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            personListView.scrollTo(index);
-            personListView.getSelectionModel().clearAndSelect(index);
+            timetable.scrollTo(index);
+            timetable.getSelectionModel().clearAndSelect(index);
         });
     }
 
@@ -77,7 +79,7 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
+                setGraphic(new TimetableCard(person, getIndex() + 1).getRoot());
             }
         }
     }

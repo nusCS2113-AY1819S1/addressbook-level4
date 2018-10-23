@@ -53,14 +53,20 @@
             </padding>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
-
-          <StackPane fx:id="browserPlaceholder" prefWidth="340" >
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-          </StackPane>
+          <VBox fx:id="timetableList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+            <StackPane fx:id="browserPlaceholder" prefWidth="340" prefHeight="320">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+            </StackPane>
+            <SplitPane id="splitPane" fx:id="splitPane1" dividerPositions="0.5" VBox.vgrow="ALWAYS">
+              <padding>
+                <Insets top="10" right="10" bottom="10" left="10" />
+              </padding>
+              <StackPane fx:id="mergedTimetablePlaceholder" VBox.vgrow="ALWAYS"/>
+            </SplitPane>
+          </VBox>
         </SplitPane>
-
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>
     </Scene>

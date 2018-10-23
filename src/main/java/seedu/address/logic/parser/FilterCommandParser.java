@@ -24,9 +24,7 @@ public class FilterCommandParser implements Parser<FilterCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FilterCommand.MESSAGE_USAGE));
         }
-
         String[] moduleKeywords = trimmedArgs.split("\\s+");
-
 
         return new FilterCommand(new TimetableContainsModulePredicate(Arrays.asList(moduleKeywords)));
     }
