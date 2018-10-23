@@ -11,9 +11,7 @@ class UniqueBatchListTest {
     private final UniqueBatchList uniqueBatchList = new UniqueBatchList();
 
     @Test
-    public void contains_nullBatch_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        uniqueBatchList.contains(null);
+    void contains_nullBatch_throwsNullPointerException() {
     }
 
     @Test
