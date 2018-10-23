@@ -31,7 +31,7 @@ import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Test;
 
-import oldcode.Model;
+import seedu.address.Model;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.AddCommand;
@@ -189,7 +189,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, DrinkModel)}.<br>
      *
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
@@ -236,7 +236,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, DrinkModel)}.<br>
      *
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */

@@ -13,7 +13,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import oldcode.Model;
+import seedu.address.Model;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.FindCommand;
@@ -159,7 +159,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
      * box displays {@code Messages#MESSAGE_PERSONS_LISTED_OVERVIEW} with the number of people in the filtered list,
      * and the model related components equal to {@code expectedModel}.
      * These verifications are done by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, DrinkModel)}.<br>
      * Also verifies that the status bar remains unchanged, and the command box has the default style class, and the
      * selected card updated accordingly, depending on {@code cardStatus}.
      *
@@ -179,7 +179,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
      * Executes {@code command} and verifies that the command box displays {@code command}, the result display
      * box displays {@code expectedResultMessage} and the model related components equal to the current model.
      * These verifications are done by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, DrinkModel)}.<br>
      * Also verifies that the browser url, selected card and status bar remain unchanged, and the command box has the
      * error style.
      *

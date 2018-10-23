@@ -2,7 +2,6 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_DRINKS;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -17,17 +16,18 @@ import seedu.address.model.drink.Drink;
 
 /**
  * Represents the in-memory model of the inventory list data.
+ * TODO: include transactions
  */
-public class ModelManager extends ComponentManager implements Model {
-    private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
+public class DrinkModelManager extends ComponentManager implements DrinkModel {
+    private static final Logger logger = LogsCenter.getLogger(DrinkModelManager.class);
 
     private final FilteredList<Drink> filteredDrinks;
     private final InventoryList inventoryList;
 
     /**
-     * Initializes a ModelManager with the given inventoryList and userPrefs.
+     * Initializes a DrinkModelManager with the given inventoryList and userPrefs.
      */
-    public ModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs) {
+    public DrinkModelManager(ReadOnlyInventoryList inventoryList, UserPrefs userPrefs) {
         super();
         requireAllNonNull(inventoryList, userPrefs);
 
@@ -37,7 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredDrinks = new FilteredList<>(inventoryList.getDrinkList());
     }
 
-    public ModelManager() {
+    public DrinkModelManager() {
         this(new InventoryList(), new UserPrefs());
     }
 
@@ -111,12 +111,12 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         // instanceof handles nulls
-        if (!(obj instanceof ModelManager)) {
+        if (!(obj instanceof DrinkModelManager)) {
             return false;
         }
 
         // state check
-        ModelManager other = (ModelManager) obj;
+        DrinkModelManager other = (DrinkModelManager) obj;
         return inventoryList.equals(other.inventoryList)
                 && inventoryList.equals(other.filteredDrinks);
     }

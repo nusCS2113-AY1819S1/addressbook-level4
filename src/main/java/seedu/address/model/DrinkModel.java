@@ -6,9 +6,9 @@ import javafx.collections.ObservableList;
 import seedu.address.model.drink.Drink;
 
 /**
- * The API of the Model component.
+ * The API of the DrinkModel component.
  */
-public interface Model {
+public interface DrinkModel {
     /** {@code Predicate} that always evaluate to true */
     Predicate<Drink> PREDICATE_SHOW_ALL_DRINKS = unused -> true;
 

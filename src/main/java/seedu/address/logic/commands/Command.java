@@ -1,6 +1,6 @@
 package seedu.address.logic.commands;
 
-import oldcode.Model;
+import seedu.address.Model;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 
@@ -13,7 +13,7 @@ public abstract class Command {
     /**
      * Executes the command and returns the result message.
      *
-     * @param model {@code Model} which the command should operate on.
+     * @param model {@code DrinkModel} which the command should operate on.
      * @param history {@code CommandHistory} which the command should operate on.
      * @return feedback message of the operation result for display
      * @throws CommandException If an error occurs during command execution.

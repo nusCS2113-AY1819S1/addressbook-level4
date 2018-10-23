@@ -8,7 +8,7 @@ import seedu.address.model.ingredient.IngredientQuantity;
 
 // TODO: add more methods
 /**
- * The API of the Ingredient Model component.
+ * The API of the Ingredient DrinkModel component.
  */
 public interface IngredientModel {
 

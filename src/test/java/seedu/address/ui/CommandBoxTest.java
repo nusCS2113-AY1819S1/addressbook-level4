@@ -9,8 +9,8 @@ import org.junit.Test;
 
 import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
-import oldcode.Model;
-import oldcode.ModelManager;
+import seedu.address.Model;
+import seedu.address.ModelManager;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.ListCommand;
