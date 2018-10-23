@@ -2,13 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ATTENDEE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_VENUE;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -19,6 +20,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditEventDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +39,8 @@ public class EditCommandParser implements Parser
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_CONTACT, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_DATETIME, PREFIX_TAG);
+                        PREFIX_VENUE, PREFIX_DATETIME, PREFIX_TAG, PREFIX_ATTENDEE);
+
         Index index;
 
         try {
@@ -59,13 +62,14 @@ public class EditCommandParser implements Parser
         if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
             editEventDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editEventDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+        if (argMultimap.getValue(PREFIX_VENUE).isPresent()) {
+            editEventDescriptor.setVenue(ParserUtil.parseVenue(argMultimap.getValue(PREFIX_VENUE).get()));
         }
         if (argMultimap.getValue(PREFIX_DATETIME).isPresent()) {
             editEventDescriptor.setDate(ParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editEventDescriptor::setTags);
+        parseAttendeesForEdit(argMultimap.getAllValues(PREFIX_ATTENDEE)).ifPresent(editEventDescriptor::setAttendees);
 
         if (!editEventDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
@@ -86,6 +90,22 @@ public class EditCommandParser implements Parser
         }
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
+    }
+
+    /**
+     * Parses {@code Collection<String> attendees} into a {@code Set<Attendee>} if {@code attendees} is non-empty.
+     * If {@code attendees} contain only one element which is an empty string, it will be parsed into a
+     * {@code Set<Attendee>} containing zero attendees.
+     */
+    private Optional<Set<Attendee>> parseAttendeesForEdit(Collection<String> attendees) throws ParseException {
+        assert attendees != null;
+
+        if (attendees.isEmpty()) {
+            return Optional.empty();
+        }
+        Collection<String> attendeeSet = attendees.size() == 1 && attendees.contains("")
+                ? Collections.emptySet() : attendees;
+        return Optional.of(ParserUtil.parseAttendees(attendeeSet));
     }
 
 }

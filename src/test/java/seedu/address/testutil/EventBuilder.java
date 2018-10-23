@@ -3,13 +3,14 @@ package seedu.address.testutil;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.event.Address;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Event;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -22,26 +23,28 @@ public class EventBuilder {
     public static final String DEFAULT_CONTACT = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
     public static final String DEFAULT_EMAIL = "alice@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_VENUE = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATETIME = "31/12/2018 12:00";
 
     private Name name;
     private Contact contact;
     private Phone phone;
     private Email email;
-    private Address address;
-    private Set<Tag> tags;
+    private Venue venue;
     private DateTime datetime;
+    private Set<Tag> tags;
+    private Set<Attendee> attendees;
 
     public EventBuilder() {
         name = new Name(DEFAULT_NAME);
         contact = new Contact(DEFAULT_CONTACT);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        venue = new Venue(DEFAULT_VENUE);
         datetime = new DateTime(DEFAULT_DATETIME);
 
         tags = new HashSet<>();
+        attendees = new HashSet<>();
     }
 
     /**
@@ -52,10 +55,11 @@ public class EventBuilder {
         contact = eventToCopy.getContact();
         phone = eventToCopy.getPhone();
         email = eventToCopy.getEmail();
-        address = eventToCopy.getAddress();
+        venue = eventToCopy.getVenue();
         datetime = eventToCopy.getDateTime();
 
         tags = new HashSet<>(eventToCopy.getTags());
+        attendees = new HashSet<>(eventToCopy.getAttendees());
     }
 
     /**
@@ -75,10 +79,18 @@ public class EventBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Event} that we are building.
+     * Parses the {@code attendees} into a {@code Set<attendee>} and set it to the {@code Event} that we are building.
      */
-    public EventBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public EventBuilder withAttendees(String ... attendees) {
+        this.attendees = SampleDataUtil.getAttendeeSet(attendees);
+        return this;
+    }
+
+    /**
+     * Sets the {@code Venue} of the {@code Event} that we are building.
+     */
+    public EventBuilder withVenue(String venue) {
+        this.venue = new Venue(venue);
         return this;
     }
 
@@ -109,12 +121,12 @@ public class EventBuilder {
     /**
      * Sets the {@code DateTime} of the {@code Event} that we are building.
      */
-    public EventBuilder withDateTime(String datetimeAsString) {
-        this.datetime = new DateTime(datetimeAsString);
+    public EventBuilder withDateTime(String datetime) {
+        this.datetime = new DateTime(datetime);
         return this;
     }
 
     public Event build() {
-        return new Event(name, contact, phone, email, address, datetime, tags);
+        return new Event(name, contact, phone, email, venue, datetime, tags, attendees);
     }
 }

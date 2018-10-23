@@ -9,12 +9,13 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.event.Address;
+import seedu.address.model.attendee.Attendee;
 import seedu.address.model.event.Contact;
 import seedu.address.model.event.DateTime;
 import seedu.address.model.event.Email;
 import seedu.address.model.event.Name;
 import seedu.address.model.event.Phone;
+import seedu.address.model.event.Venue;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Username;
@@ -140,18 +141,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code String venue} into an {@code Venue}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @throws ParseException if the given {@code venue} is invalid.
      */
-    public static Address parseAddress(String address) throws ParseException {
-        requireNonNull(address);
-        String trimmedAddress = address.trim();
-        if (!Address.isValidAddress(trimmedAddress)) {
-            throw new ParseException(Address.MESSAGE_ADDRESS_CONSTRAINTS);
+    public static Venue parseVenue(String venue) throws ParseException {
+        requireNonNull(venue);
+        String trimmedVenue = venue.trim();
+        if (!Venue.isValidVenue(trimmedVenue)) {
+            throw new ParseException(Venue.MESSAGE_VENUE_CONSTRAINTS);
         }
-        return new Address(trimmedAddress);
+        return new Venue(trimmedVenue);
     }
 
     /**
@@ -209,5 +210,32 @@ public class ParserUtil {
             tagSet.add(parseTag(tagName));
         }
         return tagSet;
+    }
+
+    /**
+     * Parses a {@code String attendee} into a {@code Attendee}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code attendee} is invalid.
+     */
+    public static Attendee parseAttendee(String attendee) throws ParseException {
+        requireNonNull(attendee);
+        String trimmedAttendee = attendee.trim();
+        if (!Attendee.isValidAttendeeName(trimmedAttendee)) {
+            throw new ParseException(Attendee.MESSAGE_ATTENDEE_CONSTRAINTS);
+        }
+        return new Attendee(trimmedAttendee);
+    }
+
+    /**
+     * Parses {@code Collection<String> attendees} into a {@code Set<Attendee>}.
+     */
+    public static Set<Attendee> parseAttendees(Collection<String> attendees) throws ParseException {
+        requireNonNull(attendees);
+        final Set<Attendee> attendeeSet = new HashSet<>();
+        for (String attendeeName : attendees) {
+            attendeeSet.add(parseAttendee(attendeeName));
+        }
+        return attendeeSet;
     }
 }
