@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-T12-3/main
 
-By: `T12-3`      Since: `Sep 2018`      Licence: `NUS`
+By: `Team T12-3`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
 
@@ -29,6 +29,10 @@ JalilEnterprises is for those who *prefer to use a desktop app for stock taking*
 +
 image::Ui.png[width="790"]
 +
+.  You should log into this app via the *`login`* command before you start to use it. +
+Example of how to log in:
+* **`login`**`u/jalil p/dontworrybrother`
+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
@@ -55,6 +59,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Viewing help : `help`
 
 Format: `help`
+
+=== Logging in: `login`
+
+Log into Stock List. +
+Format: `login u/USERNAME p/PASSWORD`
+
+
+Examples:
+
+* `login u/jalil p/dontworrybrother`
+* `login u/kinwhye p/cap1`
 
 === Adding an item: `add`
 
@@ -135,6 +150,16 @@ Examples:
 * `changeStatus 1 q/20 os/Ready ns/Faulty` +
 The status of 20 arduinos would be changed from Ready to Faulty
 
+=== Listing items under a specific tag: `tag`
+
+Finds and lists items whose tags contain any of the given keywords. This command is case insensitive +
+Format: `tag KEYWORD [MORE_KEYWORDS]
+
+Examples:
+
+* `tag Lab1` +
+Returns the items whose tags includes "Lab1"
+
 === Creating a loan list: `loanList`
 A loan list can be created whenever a list of items loaned out needs to be kept tracked on +
 Format: `loanList n/NAME q/QUANTITY l/LOANER`
@@ -143,15 +168,6 @@ Examples:
 
 * `loanList n/Arduino q/20 l/KinWhye` +
 This would update the status of the 20 arduinos to On_Loan
-
-=== Creating an archive of quantities for all items: `archive` +
-An archive will be created and named.
-Format: `archive n/NAME`
-
-Examples:
-
-* `archive n/ForAugust` +
-This would archive all the quantities of all items at the time when the command is inputed, and the name for this archive is `ForAugust`.
 
 === Listing entered commands : `history`
 
@@ -190,6 +206,35 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
+=== Lost an item: `lost`
+
+Lost an item From the stock list +
+Format: `lost n/NAME [q/QUANTITY]`
+
+
+
+Examples:
+
+* `lost n/Arduino q/25`
+
+=== Found an item: `found`
+
+Found an item From the Lost&Found List +
+Format: `found n/NAME [q/QUANTITY]`
+
+
+
+Examples:
+
+* `found n/Arduino q/25`
+
+=== Listing Lost&Found List: `lost&found`
+
+Shows the number of every item that has been lost +
+Format: `lost&found`
+
+
+
 === Redoing the previously undone command : `redo`
 
 Reverses the most recent `undo` command. +
@@ -213,6 +258,17 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
+// tag::savecommand[]
+=== Save current version of stock list : `save`
+An xml file recording current stocks will be created and named. +
+Format: `save NAME`
+
+Examples:
+
+* `save ForAugust` +
+This would save the stock list at the time when the command is inputted, and the name for this xml file is
+`ForAugust.xml`, under a /versions/ folder in main.
+// end::savecommand[]
 
 === Exiting the program : `exit`
 
@@ -221,7 +277,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+JalilEnterprises data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -239,8 +295,8 @@ _{explain how the user can enable/disable data encryption}_
 
 * *Add* `add n/NAME q/QUANTITY m/MINIMUM_QUANTITY [t/TAG]...` +
 e.g. `add n/Arduino q/20 m/5 t/Lab1 t/Lab2`
-* *Archive* `archive n/NAME` +
-e.g. archive n/ForAugust
+* *Save* `save NAME` +
+e.g. save ForAugust
 * *Check* `check`
 * *Changing status* `changeStatus n/NAME q/QUANTITY os/ORIGINALSTATUS ns/NEWSTATUS` +
 e.g. `changeStatus n/Arduino q/20 os/Ready ns/Faulty`
@@ -254,9 +310,20 @@ e.g. `list t/Lab5`
 * *List item status* : `status`
 * *Loan list* : `loanList n/NAME q/QUANTITY l/LOANER` +
 e.g. `loanList n/Arduino q/20 l/KinWhye`
+* *Login* : `login u/USERNAME p/PASSWORD` +
+e.g. `login u/jalil p/dontworrybrother`
 * *Help* : `help`
 * *History* : `history`
 * *Undo* : `undo`
 * *Update* : `update INDEX n/NAME [q/QUANTITY] [m/MINIMUM_QUANTITY] [t/TAG]` +
 e.g. `update 1 n/Arduino q/25 t/Lab7 t/Lab8`
+* *Lost* : `lost n/NAME [q/QUANTITY]` +
+e.g. `lost n/Arduino q/25`
+* *Found* : `found n/NAME [q/QUANTITY]` +
+e.g. `found n/Arduino q/25`
+* *Lost&Found List* : `lost&found`
+* *Tag* : `tag KEYWORD [MORE_KEYWORDS]` +
+e.g. `tag Lab1`
 * *Redo* : `redo`
+
+

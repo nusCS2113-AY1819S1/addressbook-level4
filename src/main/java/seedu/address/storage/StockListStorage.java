@@ -42,6 +42,6 @@ public interface StockListStorage {
      */
     void saveStockList(ReadOnlyStockList stockList, Path filePath) throws IOException;
 
-    void backupStockList(ReadOnlyStockList stockList) throws IOException;
+    void saveStockListVersion(ReadOnlyStockList stockList, Path filePath) throws IOException;
 
 }
