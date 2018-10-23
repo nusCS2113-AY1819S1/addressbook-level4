@@ -5,8 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -30,6 +30,7 @@ import com.google.api.services.gmail.Gmail;
 import com.google.api.services.gmail.GmailScopes;
 import com.google.api.services.gmail.model.Message;
 
+import seedu.recruit.commons.core.EmailSettings;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.joboffer.JobOffer;
 
@@ -42,6 +43,10 @@ public class EmailUtil {
      * If modifying these scopes, delete your previously saved tokens/ folder.
      */
     public static final String DEFAULT_FROM = "cs2113.f09.4@gmail.com";
+    public static final String EMAIL_ADD_COMMAND = "add";
+    public static final String EMAIL_NEXT_COMMAND = "next";
+    public static final String EMAIL_BACK_COMMAND = "back";
+    public static final String EMAIL_SEND_COMMAND = "send";
     private static final String APPLICATION_NAME = "CS2113 F09 T04";
     private static final String TOKENS_DIRECTORY_PATH = "tokens";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
@@ -51,37 +56,49 @@ public class EmailUtil {
     /**
      * Variables for Email Command
      */
-    private ArrayList<Candidate> candidates;
-    private ArrayList<JobOffer> jobOffers;
+    private static EmailSettings emailSettings;
+    private LinkedHashSet<Candidate> candidates;
+    private LinkedHashSet<JobOffer> jobOffers;
+    private boolean hasRecipientsAdded;
     private boolean areRecipientsCandidates;
-    private String to;
-    private String subject;
-    private String bodyText;
 
     /**
      * Constructor
      */
     public EmailUtil() {
-        this.candidates = new ArrayList<>();
-        this.jobOffers = new ArrayList<>();
+        candidates = new LinkedHashSet<>();
+        jobOffers = new LinkedHashSet<>();
+        hasRecipientsAdded = false;
     }
 
     /**
      * Getters and Setters
      */
-    public ArrayList<Candidate> getCandidates() {
+    public boolean isHasRecipientsAdded() {
+        return hasRecipientsAdded;
+    }
+
+    public void setHasRecipientsAdded(boolean hasRecipientsAdded) {
+        this.hasRecipientsAdded = hasRecipientsAdded;
+    }
+
+    public static void setEmailSettings(EmailSettings emailSettings) {
+        EmailUtil.emailSettings = emailSettings;
+    }
+
+    public LinkedHashSet<Candidate> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(ArrayList<Candidate> candidates) {
+    public void setCandidates(LinkedHashSet<Candidate> candidates) {
         this.candidates = candidates;
     }
 
-    public ArrayList<JobOffer> getJobOffers() {
+    public LinkedHashSet<JobOffer> getJobOffers() {
         return jobOffers;
     }
 
-    public void setJobOffers(ArrayList<JobOffer> jobOffers) {
+    public void setJobOffers(LinkedHashSet<JobOffer> jobOffers) {
         this.jobOffers = jobOffers;
     }
 
@@ -93,45 +110,28 @@ public class EmailUtil {
         this.areRecipientsCandidates = areRecipientsCandidates;
     }
 
-    public String getTo() {
-        return to;
-    }
-
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
-    public String getBodyText() {
-        return bodyText;
-    }
-
-    public void setBodyText(String bodyText) {
-        this.bodyText = bodyText;
+    public EmailSettings getEmailSettings() {
+        return emailSettings;
     }
 
     /**
      * Adds candidate to candidates ArrayList
      * @param candidate
+     * @return boolean value whether value was added into linkedhashset
      */
-    public void addCandidate(Candidate candidate) {
-        this.candidates.add(candidate);
+    public boolean addCandidate(Candidate candidate) {
+        return candidates.add(candidate);
     }
 
     /**
      * Adds jobOffer to jobOffers ArrayList
      * @param jobOffer
+     * @return boolean value whether value was added into linkedhashset
      */
-    public void addJobOffer(JobOffer jobOffer) {
-        this.jobOffers.add(jobOffer);
+    public boolean addJobOffer(JobOffer jobOffer) {
+        return jobOffers.add(jobOffer);
     }
+
     /**
      * Creates an authorized Credential object.
      * @param httpTransport The network HTTP Transport.

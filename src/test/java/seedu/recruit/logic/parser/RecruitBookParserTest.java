@@ -45,7 +45,6 @@ public class RecruitBookParserTest {
     // dummy LogicState stub
     private LogicState state = new LogicState("primary");
     private EmailUtil emailUtil = new EmailUtil();
-
     private final RecruitBookParser parser = new RecruitBookParser();
 
     @Test

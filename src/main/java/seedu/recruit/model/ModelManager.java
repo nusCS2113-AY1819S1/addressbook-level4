@@ -3,6 +3,7 @@ package seedu.recruit.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -42,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with recruit book: " + candidateBook + " and user prefs " + userPrefs);
 
+        EmailUtil.setEmailSettings(userPrefs.getEmailSettings());
         versionedCandidateBook = new VersionedCandidateBook(candidateBook);
         versionedCompanyBook = new VersionedCompanyBook(companyBook);
         filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
@@ -87,7 +89,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedCandidateBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateCandidateBookChanged() {
         raise(new CandidateBookChangedEvent(versionedCandidateBook));
     }
@@ -185,7 +189,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedCompanyBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateCompanyBookChanged() {
         raise(new CompanyBookChangedEvent(versionedCompanyBook));
     }
@@ -288,6 +294,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedCompanyBook.deleteJobOffer(jobOffer);
         indicateCompanyBookChanged();
     }
+
     /**
      * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
      * {@code versionedCompanyBook}
@@ -303,11 +310,135 @@ public class ModelManager extends ComponentManager implements Model {
         filteredJobs.setPredicate(predicate);
     }
 
+    // ================================== Email Command functions ===================================== //
+
     public EmailUtil getEmailUtil() {
         return emailUtil;
     }
 
     public void setEmailUtil(EmailUtil emailUtil) {
         this.emailUtil = emailUtil;
+    }
+
+    /**
+     * Returns a concatenated string of names of job offers for email select recipients command
+     */
+    @Override
+    public String getFilteredRecipientJobOfferNames() {
+        StringBuilder output = new StringBuilder();
+        for (JobOffer jobOffer : filteredJobs) {
+            output.append(jobOffer.getCompanyName().toString());
+            output.append(" regarding job offer: ");
+            output.append(jobOffer.getJob().toString());
+            output.append("\n");
+        }
+        return output.toString();
+    }
+
+    /**
+     * @param duplicateJobOffers arraylist of duplicate job offers
+     * @return concatenated string of names of job offers for
+     * email select recipients command minus specified job offers
+     */
+    @Override
+    public String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
+        boolean hasDuplicate;
+        StringBuilder output = new StringBuilder();
+        for (JobOffer jobOffer : filteredJobs) {
+            hasDuplicate = false;
+            for (JobOffer duplicateJobOffer : duplicateJobOffers) {
+                if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
+                    hasDuplicate = true;
+                    break;
+                }
+            }
+            if (!hasDuplicate) {
+                output.append(jobOffer.getCompanyName().toString());
+                output.append(" regarding job offer: ");
+                output.append(jobOffer.getJob().toString());
+                output.append("\n");
+            }
+        }
+        return output.toString();
+    }
+
+    /**
+     * Returns a concatenated string of names of job offers for email select contents command
+     */
+    @Override
+    public String getFilteredContentJobOfferNames() {
+        StringBuilder output = new StringBuilder();
+        for (JobOffer jobOffer : filteredJobs) {
+            output.append(jobOffer.getJob().toString());
+            output.append(" at ");
+            output.append(jobOffer.getCompanyName().toString());
+            output.append("\n");
+        }
+        return output.toString();
+    }
+
+    /**
+     * @param duplicateJobOffers arraylist of duplicate joboffers
+     * @return a concatenated string of names of job offers
+     * for email select contents command minus specified job offers
+     */
+
+    @Override
+    public String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers) {
+        boolean hasDuplicate;
+        StringBuilder output = new StringBuilder();
+        for (JobOffer jobOffer : filteredJobs) {
+            hasDuplicate = false;
+            for (JobOffer duplicateJobOffer : duplicateJobOffers) {
+                if (jobOffer.isSameJobOffer(duplicateJobOffer)) {
+                    hasDuplicate = true;
+                    break;
+                }
+            }
+            if (!hasDuplicate) {
+                output.append(jobOffer.getJob().toString());
+                output.append(" at ");
+                output.append(jobOffer.getCompanyName().toString());
+                output.append("\n");
+            }
+        }
+        return output.toString();
+    }
+
+    /**
+     * Returns a concatenated string of names of candidates for email command
+     */
+    @Override
+    public String getFilteredCandidateNames() {
+        StringBuilder output = new StringBuilder();
+        for (Candidate candidate : filteredCandidates) {
+            output.append(candidate.getName().toString());
+            output.append("\n");
+        }
+        return output.toString();
+    }
+
+    /**
+     * @param duplicateCandidates Arraylist of duplicate candidates
+     * @return a concatenated string of names of candidates for email command minus duplicate candidates
+     */
+    @Override
+    public String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates) {
+        boolean hasDuplicate;
+        StringBuilder output = new StringBuilder();
+        for (Candidate candidate : filteredCandidates) {
+            hasDuplicate = false;
+            for (Candidate duplicateCandidate : duplicateCandidates) {
+                if (candidate.isSamePerson(duplicateCandidate)) {
+                    hasDuplicate = true;
+                    break;
+                }
+            }
+            if (!hasDuplicate) {
+                output.append(candidate.getName().toString());
+                output.append("\n");
+            }
+        }
+        return output.toString();
     }
 }
