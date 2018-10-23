@@ -6,6 +6,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  * Represents a single TimeSlot in TimeTable Class
@@ -99,6 +101,15 @@ public class TimeSlot {
         return otherTimeSlot.getDayOfWeek().equals(getDayOfWeek())
                 && otherTimeSlot.getStartTime().equals(getStartTime())
                 && otherTimeSlot.getEndTime().equals(getEndTime());
+    }
+    /**
+     * converts DayOfWeek object into the corresponding abbreviation.
+     * Possible outputs:
+     * MO, TU, WE, TH, FR, SA, SU
+     */
+    public String getAbbreviationFromDayOfWeek() {
+        String dayString = dayOfWeek.getDisplayName(TextStyle.FULL , Locale.ENGLISH);
+        return dayString.substring(0, 2);
     }
 }
 
