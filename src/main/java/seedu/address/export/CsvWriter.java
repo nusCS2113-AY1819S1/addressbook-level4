@@ -50,8 +50,8 @@ public class CsvWriter {
         try {
 
             File file = new File(String.valueOf(outputFilepath));
-            FileWriter outputfile = new FileWriter(file);
-            CSVWriter writer = new CSVWriter(outputfile);
+            FileWriter outputFile = new FileWriter(file);
+            CSVWriter writer = new CSVWriter(outputFile);
 
             writer.writeNext(header);
 
