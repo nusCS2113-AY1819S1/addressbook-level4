@@ -13,9 +13,11 @@ public class DownloadAllCommand extends Command {
     public static final String COMMAND_WORD = "downloadAll";
     public static final String MESSAGE_USAGE = "downloadAll pass/(password) user/(username) mod/(moduleCode)";
     public static final String CHROMEDRIVER_PATH_WINDOWS = "/chromeDrivers/windows/chromedriver.exe";
-    public static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver.exe";
+    public static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver";
     public static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
     public static final String IVLE_TITLE = "IVLE";
+    public static final String WINDOWS_OS_NAME="Windows";
+    public static final String MAC_OS_NAME="Mac";
     public static final String IVLE_ADDRESS = "https://ivle.nus.edu.sg";
     public static final String IVLE_USERNAME_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_userid";
     public static final String IVLE_PASSWORD_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_password";
@@ -42,7 +44,6 @@ public class DownloadAllCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         String returnMessage= new String();
         returnMessage = bootWebDriver(returnMessage);
-
         return new CommandResult(returnMessage);
     }
 
@@ -66,7 +67,13 @@ public class DownloadAllCommand extends Command {
 
     private WebDriver initilizeWebDriver(){
         downloadFilePath = new File("").getAbsolutePath();
-        System.setProperty("webdriver.chrome.driver",downloadFilePath+ CHROMEDRIVER_PATH_WINDOWS);
+
+        if(System.getProperty("os.name").contains(WINDOWS_OS_NAME)) {
+            System.setProperty("webdriver.chrome.driver",downloadFilePath+ CHROMEDRIVER_PATH_WINDOWS);
+        }
+        else if(System.getProperty("os.name").contains(MAC_OS_NAME)) {
+            System.setProperty("webdriver.chrome.driver",downloadFilePath+ CHROMEDRIVER_PATH_MAC);
+        }
         downloadFilePath += DOWNLOAD_RELATIVE_PATH;
 
         HashMap<String,Object> chromePrefs =  new HashMap<String,Object>();
