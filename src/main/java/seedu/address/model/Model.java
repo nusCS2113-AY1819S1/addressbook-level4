@@ -1,4 +1,4 @@
-package seedu.address;
+package seedu.address.model;
 
 import java.util.function.Predicate;
 

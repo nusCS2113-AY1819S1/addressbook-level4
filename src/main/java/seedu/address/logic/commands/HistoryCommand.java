@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collections;
 import java.util.List;
 
-import seedu.address.Model;
+import seedu.address.model.Model;
 import seedu.address.logic.CommandHistory;
 
 
