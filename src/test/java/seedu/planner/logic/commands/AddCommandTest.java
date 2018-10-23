@@ -21,6 +21,7 @@ import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.Summary;
@@ -192,6 +193,26 @@ public class AddCommandTest {
 
         @Override
         public void commitFinancialPlanner() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void setDirectoryPath(String path) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeDirectoryPath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public DirectoryPath getDirectoryPath() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isDirectorySet(DirectoryPath path) {
             throw new AssertionError("This method should not be called.");
         }
     }

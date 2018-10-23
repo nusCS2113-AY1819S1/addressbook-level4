@@ -6,7 +6,6 @@ import static seedu.planner.testutil.TypicalRecords.BURSARY;
 import static seedu.planner.testutil.TypicalRecords.IDA;
 import static seedu.planner.testutil.TypicalRecords.INDO;
 import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -20,6 +19,7 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
@@ -58,25 +58,41 @@ public class XmlFinancialPlannerStorageTest {
         readSummaryMap(null);
     }
 
+    @Test
+    public void getReadDirectoryPath_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        readDirectoryPath(null);
+    }
     //TODO: Test(read utility functions)
     private java.util.Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(String filePath) throws Exception {
-        return new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
-                .readFinancialPlanner(addToTestDataPathIfNotNull(filePath), addToTestDataPathIfNotNull(filePath));
+        return new XmlFinancialPlannerStorage(
+                Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+                .readFinancialPlanner(addToTestDataPathIfNotNull(
+                        filePath), addToTestDataPathIfNotNull(filePath), addToTestDataPathIfNotNull(filePath));
     }
 
     private java.util.Optional<UniqueRecordList> readRecordList(String filePath) throws Exception {
-        return new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+        return new XmlFinancialPlannerStorage(
+                Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
                 .readRecordList(addToTestDataPathIfNotNull(filePath));
     }
 
     private java.util.Optional<DateBasedLimitList> readLimitList(String filePath) throws Exception {
-        return new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+        return new XmlFinancialPlannerStorage(
+                Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
                 .readLimitList(addToTestDataPathIfNotNull(filePath));
     }
 
     private java.util.Optional<SummaryMap> readSummaryMap(String filePath) throws Exception {
-        return new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+        return new XmlFinancialPlannerStorage(
+                Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
                 .readSummaryMap(addToTestDataPathIfNotNull(filePath));
+    }
+
+    private java.util.Optional<DirectoryPath> readDirectoryPath(String filePath) throws Exception {
+        return new XmlFinancialPlannerStorage(
+                Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+                .readDirectoryPath(addToTestDataPathIfNotNull(filePath));
     }
 
     //TODO: Test(path generator)
@@ -93,12 +109,12 @@ public class XmlFinancialPlannerStorageTest {
         assertFalse(readRecordList("NonExistentFile.xml").isPresent());
         assertFalse(readLimitList("NonExistentFile.xml").isPresent());
         assertFalse(readSummaryMap("NonExistentFile.xml").isPresent());
+        assertFalse(readDirectoryPath("NonExistentFile.xml").isPresent());
     }
 
     //TODO: Test(not XML)
     @Test
     public void read_recordListNotXmlFormat_exceptionThrown() throws Exception {
-
         thrown.expect(DataConversionException.class);
         readRecordList("NotXmlFormatRecordList.xml");
 
@@ -120,6 +136,12 @@ public class XmlFinancialPlannerStorageTest {
         readLimitList("NotXmlFormatLimitList.xml");
     }
 
+    @Test
+    public void read_directoryPathNotXmlFormat_exceptionThrown() throws Exception {
+        thrown.expect(DataConversionException.class);
+        readDirectoryPath("NotXmlFormatDirectoryPath.xml");
+    }
+
     //TODO: Test(not correct format)
     @Test
     public void readRecordList_invalidRecordRecordList_throwDataConversionException() throws Exception {
@@ -137,6 +159,12 @@ public class XmlFinancialPlannerStorageTest {
     public void readSummaryMap_invalidSummarySummaryMap_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
         readSummaryMap("invalidSummary_SummaryMap.xml");
+    }
+
+    @Test
+    public void readDirectoryPath_invalidDirectoryDirectoryPath_throwDataConversionException() throws Exception {
+        thrown.expect(DataConversionException.class);
+        readDirectoryPath("invalidDirectory_DirectoryPath.xml");
     }
 
     //TODO: Test(incorrect then correct format)
@@ -161,16 +189,24 @@ public class XmlFinancialPlannerStorageTest {
         readFinancialPlanner("invalidAndValidSummarySummaryMap.xml");
     }
 
+    @Test
+    public void readDirectoryPath_invalidAndValidDirectoryDirectory_throwDataConversionException()
+            throws Exception {
+        thrown.expect(DataConversionException.class);
+        readDirectoryPath("invalidAndValidDirectoryDirectoryPath.xml");
+    }
+
     //TODO: Refactor the storage into 3 different storage
     @Test
     public void readAndSaveFinancialPlanner_allInOrder_success() throws Exception {
         Path recordListFilePath = testFolder.getRoot().toPath().resolve("TempFinancialPlanner.xml");
         Path summaryMapFilePath = testFolder.getRoot().toPath().resolve("TempSummaryMap.xml");
         Path limitListFilePath = testFolder.getRoot().toPath().resolve("TempLimitList.xml");
+        Path directoryPathFilePath = testFolder.getRoot().toPath().resolve("TempDirectoryPath.xml");
 
         FinancialPlanner original = getTypicalFinancialPlanner();
         XmlFinancialPlannerStorage xmlFinancialPlannerStorage = new XmlFinancialPlannerStorage(recordListFilePath,
-                summaryMapFilePath, limitListFilePath);
+                summaryMapFilePath, limitListFilePath, directoryPathFilePath);
 
         //Save in new file and read back, save each file separately
         xmlFinancialPlannerStorage.saveRecordList(original, recordListFilePath);
@@ -181,11 +217,13 @@ public class XmlFinancialPlannerStorageTest {
         UniqueRecordList recordList = xmlFinancialPlannerStorage.readRecordList(recordListFilePath).get();
         DateBasedLimitList limitList = xmlFinancialPlannerStorage.readLimitList(limitListFilePath).get();
         SummaryMap summaryMap = xmlFinancialPlannerStorage.readSummaryMap(summaryMapFilePath).get();
+        DirectoryPath directoryPath = xmlFinancialPlannerStorage.readDirectoryPath(directoryPathFilePath).get();
 
         //Recreate the readback financial planner
         FinancialPlanner readBack = new FinancialPlanner();
+
         //TODO: @Oscar add your limit in resetdata
-        readBack.resetData(recordList, summaryMap);
+        readBack.resetData(recordList, summaryMap, limitList, directoryPath);
         assertEquals(original, new FinancialPlanner(readBack));
 
         //Modify data, overwrite exiting file, and read back
@@ -193,14 +231,19 @@ public class XmlFinancialPlannerStorageTest {
         original.addRecordToSummary(BURSARY);
         original.removeRecord(INDO);
         original.removeRecordFromSummary(INDO);
+
         xmlFinancialPlannerStorage.saveRecordList(original, recordListFilePath);
         xmlFinancialPlannerStorage.saveSummaryMap(original, summaryMapFilePath);
         xmlFinancialPlannerStorage.saveLimitList(original, limitListFilePath);
+        xmlFinancialPlannerStorage.saveDirectoryPath(original, directoryPathFilePath);
+
         recordList = xmlFinancialPlannerStorage.readRecordList(recordListFilePath).get();
         limitList = xmlFinancialPlannerStorage.readLimitList(limitListFilePath).get();
         summaryMap = xmlFinancialPlannerStorage.readSummaryMap(summaryMapFilePath).get();
+        directoryPath = xmlFinancialPlannerStorage.readDirectoryPath(directoryPathFilePath).get();
+
         readBack = new FinancialPlanner();
-        readBack.resetData(recordList, summaryMap);
+        readBack.resetData(recordList, summaryMap, limitList, directoryPath);
         assertEquals(original, new FinancialPlanner(readBack));
 
         //Save and read without specifying file path
@@ -208,11 +251,15 @@ public class XmlFinancialPlannerStorageTest {
         xmlFinancialPlannerStorage.saveRecordList(original); //file path not specified
         xmlFinancialPlannerStorage.saveLimitList(original);
         xmlFinancialPlannerStorage.saveSummaryMap(original);
+        xmlFinancialPlannerStorage.saveDirectoryPath(original);
+
         recordList = xmlFinancialPlannerStorage.readRecordList(recordListFilePath).get();
         limitList = xmlFinancialPlannerStorage.readLimitList(limitListFilePath).get();
         summaryMap = xmlFinancialPlannerStorage.readSummaryMap(summaryMapFilePath).get();
+        directoryPath = xmlFinancialPlannerStorage.readDirectoryPath(directoryPathFilePath).get();
+
         readBack = new FinancialPlanner();
-        readBack.resetData(recordList, summaryMap);
+        readBack.resetData(recordList, summaryMap, limitList, directoryPath);
         assertEquals(original, new FinancialPlanner(readBack));
     }
 
@@ -235,13 +282,20 @@ public class XmlFinancialPlannerStorageTest {
         saveSummaryMap(null, "SomeFile.xml");
     }
 
+    @Test
+    public void saveDirectoryPath_nullDirectoryPath_throwsNullPointerExceptio() {
+        thrown.expect(NullPointerException.class);
+        saveDirectoryPath(null, "SomeFile.xml");
+    }
+
     //TODO:test(save everything) utility
     /**
      * Saves record list of {@code financialPlanner} at the specified {@code filePath}.
      */
     private void saveRecordList(ReadOnlyFinancialPlanner financialPlanner, String filePath) {
         try {
-            new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+            new XmlFinancialPlannerStorage(
+                    Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
                     .saveRecordList(financialPlanner, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
@@ -253,7 +307,8 @@ public class XmlFinancialPlannerStorageTest {
      */
     private void saveLimitList(ReadOnlyFinancialPlanner financialPlanner, String filePath) {
         try {
-            new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+            new XmlFinancialPlannerStorage(
+                    Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
                     .saveLimitList(financialPlanner, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
@@ -265,8 +320,22 @@ public class XmlFinancialPlannerStorageTest {
      */
     private void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, String filePath) {
         try {
-            new XmlFinancialPlannerStorage(Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+            new XmlFinancialPlannerStorage(
+                    Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
                     .saveSummaryMap(financialPlanner, addToTestDataPathIfNotNull(filePath));
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the file.", ioe);
+        }
+    }
+
+    /**
+     * Saves directory path of {@code financialPlanner} at the specified {@code filePath}.
+     */
+    private void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner, String filePath) {
+        try {
+            new XmlFinancialPlannerStorage(
+                    Paths.get(filePath), Paths.get(filePath), Paths.get(filePath), Paths.get(filePath))
+                    .saveDirectoryPath(financialPlanner, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -289,5 +358,11 @@ public class XmlFinancialPlannerStorageTest {
     public void saveSummaryMap_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         saveSummaryMap(new FinancialPlanner(), null);
+    }
+
+    @Test
+    public void saveDirectoryPath_nullFilePath_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        saveDirectoryPath(new FinancialPlanner(), null);
     }
 }

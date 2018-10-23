@@ -20,6 +20,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.exceptions.DuplicateRecordException;
@@ -101,6 +102,7 @@ public class FinancialPlannerTest {
         private final ObservableList<Record> records = FXCollections.observableArrayList();
         private final ObservableList<Limit> limits = FXCollections.observableArrayList();
         private final SummaryMap summaryMap = new SummaryMap();
+        private final DirectoryPath directoryPath = new DirectoryPath();
         FinancialPlannerStub(Collection<Record> records) {
             this.records.setAll(records);
         }
@@ -126,6 +128,10 @@ public class FinancialPlannerTest {
         @Override
         public void setLimitList(DateBasedLimitList limitList) {} //see as above
 
+        @Override
+        public DirectoryPath getDirectoryPath() {
+            return directoryPath.getDirectoryPath();
+        }
     }
 
 }

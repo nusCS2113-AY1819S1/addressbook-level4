@@ -119,7 +119,6 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the record at the given {@code targetIndex} in the
      * {@code model}'s planner book.
      */
-    // TODO: Look at this code again
     public static void showRecordAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredRecordList().size());
 

@@ -8,12 +8,15 @@ import static seedu.planner.testutil.TypicalRecords.getTypicalFinancialPlanner;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.logging.Logger;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.planner.commons.core.LogsCenter;
+import seedu.planner.commons.events.model.DirectoryPathChangedEvent;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
@@ -31,17 +34,19 @@ public class StorageManagerTest {
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
     private StorageManager storageManager;
+    private Logger logger = LogsCenter.getLogger(StorageManagerTest.class);
 
     @Before
     public void setUp() {
         XmlFinancialPlannerStorage financialPlannerStorage = new XmlFinancialPlannerStorage(
                 getTempFilePath("ab"), getTempFilePath("summaryMap"),
-                getTempFilePath("limitList"));
+                getTempFilePath("limitList"), getTempFilePath("directoryPath"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
         storageManager = new StorageManager(financialPlannerStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
+        logger.info("\n" + testFolder.getRoot().toPath().resolve(fileName).toString() + " Test folder getTempFilePath");
         return testFolder.getRoot().toPath().resolve(fileName);
     }
 
@@ -89,10 +94,18 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void getDirectoryFilePath() {
+        assertNotNull(storageManager.getDirectoryPathFilePath());
+    }
+
+    @Test
     public void handleFinancialPlannerChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
-                Paths.get("dummy"), Paths.get("dummy"), Paths.get("dummy")),
+                Paths.get("dummy"),
+                Paths.get("dummy"),
+                Paths.get("dummy"),
+                Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleFinancialPlannerChangedEvent(new FinancialPlannerChangedEvent(new FinancialPlanner()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
@@ -102,7 +115,10 @@ public class StorageManagerTest {
     public void handleSummaryMapChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
-                Paths.get("dummy"), Paths.get("dummy"), Paths.get("dummy")),
+                Paths.get("dummy"),
+                Paths.get("dummy"),
+                Paths.get("dummy"),
+                Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleSummaryMapChangedEvent(new SummaryMapChangedEvent(new FinancialPlanner()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
@@ -112,9 +128,24 @@ public class StorageManagerTest {
     public void handleLimitListChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that  throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
-                Paths.get("dummy"), Paths.get("dummy"), Paths.get("dummy")),
+                Paths.get("dummy"),
+                Paths.get("dummy"),
+                Paths.get("dummy"),
+                Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));
         storage.handleLimitListChangedEvent(new LimitListChangedEvent(new FinancialPlanner()));
+        assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
+    }
+
+    @Test
+    public void handleDirectoryPathChangedEvent_exceptionThrown_eventRaised() {
+        Storage storage = new StorageManager(new XmlFinancialPlannerStorageExceptionThrowingStub(
+                Paths.get("dummy"),
+                Paths.get("dummy"),
+                Paths.get("dummy"),
+                Paths.get("dummy")),
+                new JsonUserPrefsStorage(Paths.get("dummy")));
+        storage.handleDirectoryPathChangedEvent(new DirectoryPathChangedEvent(new FinancialPlanner()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -124,8 +155,8 @@ public class StorageManagerTest {
     class XmlFinancialPlannerStorageExceptionThrowingStub extends XmlFinancialPlannerStorage {
 
         public XmlFinancialPlannerStorageExceptionThrowingStub(Path recordListFilePath, Path limitListFilePath,
-                                                               Path summaryMapFilePath) {
-            super(recordListFilePath, summaryMapFilePath, limitListFilePath);
+                                                               Path summaryMapFilePath, Path diretoryPathFilePath) {
+            super(recordListFilePath, summaryMapFilePath, limitListFilePath, diretoryPathFilePath);
         }
 
         @Override
@@ -147,6 +178,12 @@ public class StorageManagerTest {
 
         @Override
         public void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path summaryMapFilePath)
+                throws IOException {
+            throw new IOException("dummy exception");
+        }
+
+        @Override
+        public void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner, Path directoryPathFilePath)
                 throws IOException {
             throw new IOException("dummy exception");
         }

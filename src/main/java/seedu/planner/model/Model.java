@@ -1,11 +1,11 @@
 package seedu.planner.model;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.Summary;
@@ -39,8 +39,6 @@ public interface Model {
      * The record must exist in the financial planner.
      */
     void deleteRecord(Record target);
-
-    int deleteListRecordSameDate(List<Record> targetList, Date targetDate);
 
     /**
      * Adds the given record.
@@ -119,4 +117,27 @@ public interface Model {
     void commitFinancialPlanner();
 
     ObservableList<Summary> getSummaryList(Date startDate, Date endDate);
+
+    /**
+     * Check whether the directory path is null or not.
+     * @param path the given path.
+     * @return
+     */
+    public boolean isDirectorySet(DirectoryPath path);
+
+    /**
+     * @return Return the directory of the model.
+     */
+    public DirectoryPath getDirectoryPath();
+
+    /**
+     * Remove the value of Directory path and sest back to the default user home directory.
+     */
+    public void removeDirectoryPath();
+
+    /**
+     * Set the new value of the directory path.
+     * @param path new value of the directory path.
+     */
+    public void setDirectoryPath(String path);
 }

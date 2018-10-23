@@ -16,6 +16,7 @@ public class UserPrefs {
     private Path financialPlannerFilePath = Paths.get("data" , "financialplanner.xml");
     private Path summaryMapFilePath = Paths.get("data", "summarymap.xml");
     private Path financialPlannerLimitFilePath = Paths.get("data", "LimitList.xml");
+    private Path directoryPathFilePath = Paths.get("data", "directorypath.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -37,9 +38,6 @@ public class UserPrefs {
         return financialPlannerFilePath;
     }
 
-    public Path getFinancialPlannerLimitFilePath() {
-        return financialPlannerLimitFilePath; }
-
     public void setFinancialPlannerFilePath(Path financialPlannerFilePath) {
         this.financialPlannerFilePath = financialPlannerFilePath;
     }
@@ -51,6 +49,17 @@ public class UserPrefs {
     public void setSummaryMapFilePath(Path summaryMapFilePath) {
         this.summaryMapFilePath = summaryMapFilePath;
     }
+
+    public Path getDirectoryPathFilePath() {
+        return directoryPathFilePath;
+    }
+
+    public void setDirectoryPathFilePath(Path directoryPathFilePath) {
+        this.directoryPathFilePath = directoryPathFilePath;
+    }
+
+    public Path getFinancialPlannerLimitFilePath() {
+        return financialPlannerLimitFilePath; }
 
     @Override
     public boolean equals(Object other) {

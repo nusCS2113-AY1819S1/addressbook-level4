@@ -3,20 +3,18 @@ package seedu.planner.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.planner.logic.commands.ExitCommand.MESSAGE_EXIT_ACKNOWLEDGEMENT;
-
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.annotation.XmlRootElement;
-
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.XmlRootElement;
 import seedu.planner.commons.events.ui.ExitAppRequestEvent;
 import seedu.planner.commons.util.FileUtil;
 import seedu.planner.commons.util.XmlUtil;
@@ -24,6 +22,8 @@ import seedu.planner.logic.CommandHistory;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.Model;
 import seedu.planner.model.ModelManager;
+import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xmljaxb.XmlAdaptedRecord;
@@ -100,7 +100,7 @@ public class ExitCommandTest {
             UniqueRecordList dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableFinancialPlanner.class)
                     .toModelType();
             FinancialPlanner data = new FinancialPlanner();
-            data.resetData(dataFromFile, new SummaryMap());
+            data.resetData(dataFromFile, new SummaryMap(), new DateBasedLimitList(), new DirectoryPath());
             assertEquals(9, data.getRecordList().size());
         }
 

@@ -1,5 +1,6 @@
 package seedu.planner.storage;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -8,6 +9,7 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
@@ -31,6 +33,8 @@ public interface FinancialPlannerStorage {
      */
     Path getSummaryMapFilePath();
 
+    Path getDirectoryPathFilePath();
+
     // ================ Financial Planner storage methods ===========================
     /**
      * Returns FinancialPlanner data as a {@link ReadOnlyFinancialPlanner}.
@@ -44,7 +48,8 @@ public interface FinancialPlannerStorage {
      * @see #getRecordListFilePath() and #getSummaryMapFilePath
      */
     Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
-                                                            Path summaryListFilePath)
+                                                            Path summaryListFilePath,
+                                                            Path directoryPath)
             throws DataConversionException, IOException;
 
     /**
@@ -58,9 +63,10 @@ public interface FinancialPlannerStorage {
      * @see #saveFinancialPlanner(ReadOnlyFinancialPlanner)
      */
     void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
-                              Path summaryMapFilePath) throws IOException;
+                              Path summaryMapFilePath, Path directoryPathFilePath) throws IOException;
 
     // ================ Record List storage methods ===========================
+
     /**
      * Returns UniqueRecordList data as a {@link UniqueRecordList}.
      *   Returns {@code Optional.empty()} if storage file is not found.
@@ -114,6 +120,7 @@ public interface FinancialPlannerStorage {
     void saveSummaryMap(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
 
     // ================ Limit List storage methods ===========================
+
     /**
      * Returns limitlist data as a limitlist.
      * @return
@@ -138,4 +145,31 @@ public interface FinancialPlannerStorage {
      * @see #saveLimitList(ReadOnlyFinancialPlanner, Path)
      */
     void saveLimitList(ReadOnlyFinancialPlanner limitList, Path filePath) throws IOException;
+
+    // ======================================= Directory Storage methods ==============================
+
+    /**
+     * Returns DirectoryPath data as a {@link DirectoryPath}.
+     *   Returns {@code Optional.empty()} if storage file is not found.
+     * @throws DataConversionException if the data in storage is not in the expected format.
+     * @throws IOException if there was any problem reading from the storage.
+     */
+    Optional<DirectoryPath> readDirectoryPath() throws DataConversionException, IOException;
+
+    /**
+     * @see #readDirectoryPath(Path)
+     */
+    Optional<DirectoryPath> readDirectoryPath(Path filePath) throws DataConversionException, IOException;
+
+    /**
+     * save the given financialPlanner to the storage.
+     * @param financialPlanner
+     * @throws IOException
+     */
+    public void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+
+    /**
+     * @see #saveDirectoryPath(ReadOnlyFinancialPlanner, Path)
+     */
+    public void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException;
 }

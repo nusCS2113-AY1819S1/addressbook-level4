@@ -3,7 +3,6 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -12,10 +11,12 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.planner.commons.core.ComponentManager;
 import seedu.planner.commons.core.LogsCenter;
+import seedu.planner.commons.events.model.DirectoryPathChangedEvent;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
 import seedu.planner.model.record.Date;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.Summary;
@@ -29,6 +30,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedFinancialPlanner versionedFinancialPlanner;
     private final FilteredList<Record> filteredRecords;
     private final FilteredList<Limit> limits;
+    private final DirectoryPath directoryPath;
+
     /**
      * Initializes a ModelManager with the given financialPlanner and userPrefs.
      */
@@ -41,7 +44,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedFinancialPlanner = new VersionedFinancialPlanner(financialPlanner);
         filteredRecords = new FilteredList<>(versionedFinancialPlanner.getRecordList());
-        limits = new FilteredList<Limit>(versionedFinancialPlanner.getLimitList());
+        limits = new FilteredList<>(versionedFinancialPlanner.getLimitList());
+        directoryPath = new DirectoryPath(versionedFinancialPlanner.getDirectoryPath());
     }
 
     public ModelManager() {
@@ -53,6 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.resetData(newData);
         indicateFinancialPlannerChanged();
         indicateSummaryMapChanged();
+        indicateDirectoryPathChanged();
     }
 
     @Override
@@ -77,6 +82,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new LimitListChangedEvent(versionedFinancialPlanner));
     }
 
+    /** Raises an event to indicate the directory path has changed */
+    private void indicateDirectoryPathChanged() {
+        raise(new DirectoryPathChangedEvent(versionedFinancialPlanner));
+    }
+
     //=========== Financial planner standard operations ============================================
 
     @Override
@@ -92,17 +102,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.removeRecordFromSummary(target);
         indicateFinancialPlannerChanged();
         indicateSummaryMapChanged();
-    }
-
-    @Override
-    public int deleteListRecordSameDate(List<Record> targetList, Date targetDate) {
-        int count = 0;
-        requireNonNull(targetList);
-        count = versionedFinancialPlanner.removeRecordsSameDate(targetList, targetDate);
-        versionedFinancialPlanner.removeRecordsFromSummarySameDate(targetList, targetDate);
-        indicateFinancialPlannerChanged();
-        indicateSummaryMapChanged();
-        return count;
+        indicateDirectoryPathChanged();
     }
 
     @Override
@@ -112,16 +112,17 @@ public class ModelManager extends ComponentManager implements Model {
         versionedFinancialPlanner.addRecordToSummary(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateFinancialPlannerChanged();
+        indicateDirectoryPathChanged();
         indicateSummaryMapChanged();
     }
 
     @Override
     public void updateRecord(Record target, Record editedRecord) {
         requireAllNonNull(target, editedRecord);
-
         versionedFinancialPlanner.updateRecord(target, editedRecord);
         versionedFinancialPlanner.updateSummary(target, editedRecord);
         indicateFinancialPlannerChanged();
+        indicateDirectoryPathChanged();
         indicateSummaryMapChanged();
     }
 
@@ -140,7 +141,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addLimit(Limit limitIn) {
         versionedFinancialPlanner.addLimit(limitIn);
-
         indicateLimitListChanged();
     }
     @Override
@@ -198,6 +198,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateFinancialPlannerChanged();
         indicateSummaryMapChanged();
         indicateLimitListChanged();
+        indicateDirectoryPathChanged();
     }
 
     @Override
@@ -206,11 +207,35 @@ public class ModelManager extends ComponentManager implements Model {
         indicateFinancialPlannerChanged();
         indicateSummaryMapChanged();
         indicateLimitListChanged();
+        indicateDirectoryPathChanged();
     }
 
     @Override
     public void commitFinancialPlanner() {
         versionedFinancialPlanner.commit();
+    }
+
+    //=========== Directory Path related methods ============================================
+    @Override
+    public boolean isDirectorySet(DirectoryPath path) {
+        return versionedFinancialPlanner.isDirectorySet();
+    }
+
+    @Override
+    public DirectoryPath getDirectoryPath() {
+        return versionedFinancialPlanner.getDirectoryPath();
+    }
+
+    @Override
+    public void removeDirectoryPath() {
+        versionedFinancialPlanner.removeDirectoryPath();
+        indicateDirectoryPathChanged();
+    }
+
+    @Override
+    public void setDirectoryPath(String path) {
+        versionedFinancialPlanner.setDirectoryPath(path);
+        indicateDirectoryPathChanged();
     }
 
     //=========== Summary Display =================================================================================
@@ -235,5 +260,6 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedFinancialPlanner.equals(other.versionedFinancialPlanner)
                 && filteredRecords.equals(other.filteredRecords);
+
     }
 }

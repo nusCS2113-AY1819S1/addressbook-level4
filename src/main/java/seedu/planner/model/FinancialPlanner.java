@@ -3,10 +3,13 @@ package seedu.planner.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
+import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.Limit;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.record.UniqueRecordList;
@@ -22,6 +25,8 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     private final UniqueRecordList records;
     private SummaryMap summaryMap;
     private DateBasedLimitList limits;
+    private DirectoryPath directoryPath;
+    private Logger logger = LogsCenter.getLogger(FinancialPlanner.class);
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -34,6 +39,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         records = new UniqueRecordList();
         summaryMap = new SummaryMap();
         limits = new DateBasedLimitList();
+        directoryPath = new DirectoryPath();
     }
 
     public FinancialPlanner() {}
@@ -46,7 +52,7 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         resetData(toBeCopied);
     }
 
-    //// list overwrite operations
+    //=======list overwrite operations==================================================================================
 
     /**
      * Replaces the contents of the record list with {@code records}.
@@ -68,23 +74,30 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
 
         setRecords(newData.getRecordList());
         setSummaryMap(newData.getSummaryMap());
-        //setLimits(newData.getLimitList());
+        setDirectoryPath(newData.getDirectoryPath().getDirectoryPathValue());
+        setLimits(newData.getLimitList());
     }
 
     /**
      * Resets the existing data of this {@code FinancialPlanner} with the given parameters
      * @param recordList
      * @param summaryMap
+     * @param directoryPath
      */
-    public void resetData(UniqueRecordList recordList, SummaryMap summaryMap) {
+    public void resetData(UniqueRecordList recordList, SummaryMap summaryMap,
+                          DateBasedLimitList limitList, DirectoryPath directoryPath) {
         requireNonNull(recordList);
         requireNonNull(summaryMap);
+        requireNonNull(directoryPath);
+        requireNonNull(limitList);
 
         setRecords(recordList.asUnmodifiableObservableList());
         setSummaryMap(summaryMap);
+        setDirectoryPath(directoryPath);
+        setLimitList(limitList);
     }
 
-    //// record-level operations
+    //======record-level operations=====================================================================================
 
     /**
      * Returns true if a record with the same identity as {@code record} exists in the financial planner.
@@ -120,7 +133,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
      */
     public void updateRecord(Record target, Record editedRecord) {
         requireNonNull(editedRecord);
-
         records.setRecord(target, editedRecord);
     }
     /**
@@ -132,29 +144,13 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     }
 
     /**
-     * Removes {@code records} from this {@code Financial Planner}
-     * {@code records} must exist in the Financial Planner.
-     * That means that all the Records in the list must exist in the Finacial Planner.
-     */
-    public int removeRecordsSameDate(List<Record> records, Date targetDate) {
-        int count = 0;
-        for (Record record : records) {
-            if (record.getDate().equals(targetDate)) {
-                removeRecord(record);
-                count++;
-            }
-        }
-        return count;
-    }
-
-    /**
      * Sorts the records in this {@code FinancialPlanner}.
      */
     public void sortRecords(String category, Boolean ascending) {
         records.sortRecords(category, ascending);
     }
 
-    //// summary related operations
+    //======summary related operations==================================================================================
     /**
      * Add the record in the summary map
      */
@@ -169,16 +165,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
         summaryMap.remove(key);
     }
 
-    /**
-     * Remove the record from the summary map
-     */
-    public void removeRecordsFromSummarySameDate(List<Record> key, Date targetDate) {
-        for (Record record : key) {
-            if (record.getDate().equals(targetDate)) {
-                removeRecordFromSummary(record);
-            }
-        }
-    }
 
     /**
      * Update summary map to reflect change in {@code records}
@@ -186,8 +172,6 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void updateSummary(Record target, Record editedRecord) {
         summaryMap.update(target, editedRecord);
     }
-
-    //TODO: Remove this once fixed bug in storage and combined all 3
 
     public void setSummaryMap(SummaryMap summaryMap) {
         this.summaryMap = summaryMap;
@@ -235,7 +219,40 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     public void removeLimit(Limit limitin) {
         limits.remove(limitin); }
 
-    //// util methods
+    //======Directory Path methods.=====================================================================================
+
+    /**
+     * Check if the directory == null or not.
+     * @return boolean value.
+     */
+    public boolean isDirectorySet() {
+        return directoryPath.isDirectorySet();
+    }
+
+    /**
+     * Set the Directory to the chosen Directory path.
+     * @param path the given Directory path.
+     */
+    public void setDirectoryPath(String path) {
+        directoryPath.updateDirectoryPath(path);
+    }
+
+    /**
+     * Set the Directory to the chosen Directory path.
+     * @param path the given Directory path.
+     */
+    public void setDirectoryPath(DirectoryPath path) {
+        directoryPath.updateDirectoryPath(path);
+    }
+
+    /**
+     * Remove the chosen Directory and set back to the User's home directory.
+     */
+    public void removeDirectoryPath() {
+        directoryPath.removeDirectoryPath();
+    }
+
+    //======util methods================================================================================================
 
     @Override
     public String toString() {
@@ -250,11 +267,18 @@ public class FinancialPlanner implements ReadOnlyFinancialPlanner {
     // TODO make it return a read only map
     @Override
     public SummaryMap getSummaryMap() {
-        return summaryMap; }
+        return summaryMap;
+    }
 
     @Override
     public ObservableList<Limit> getLimitList () {
-        return limits.asUnmodifiableObservableList(); }
+        return limits.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public DirectoryPath getDirectoryPath() {
+        return directoryPath.getDirectoryPath();
+    }
 
     @Override
     public boolean equals(Object other) {

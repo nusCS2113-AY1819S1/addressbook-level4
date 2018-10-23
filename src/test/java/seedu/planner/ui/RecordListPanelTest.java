@@ -22,6 +22,8 @@ import seedu.planner.commons.events.ui.JumpToListRequestEvent;
 import seedu.planner.commons.util.FileUtil;
 import seedu.planner.commons.util.XmlUtil;
 import seedu.planner.model.FinancialPlanner;
+import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.Record;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
@@ -87,7 +89,8 @@ public class RecordListPanelTest extends GuiUnitTest {
         XmlSerializableFinancialPlanner xmlFinancialPlanner =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableFinancialPlanner.class);
         FinancialPlanner financialPlanner = new FinancialPlanner();
-        financialPlanner.resetData(xmlFinancialPlanner.toModelType(), new SummaryMap());
+        financialPlanner.resetData(xmlFinancialPlanner.toModelType(), new SummaryMap(),
+                new DateBasedLimitList(), new DirectoryPath());
         return FXCollections.observableArrayList(financialPlanner.getRecordList());
     }
 

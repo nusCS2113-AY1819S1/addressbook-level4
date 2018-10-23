@@ -53,6 +53,16 @@ public class SampleDataTest extends FinancialPlannerSystemTest {
     }
 
     /**
+     * Returns a non-existent file location to force test app to load sample data.
+     */
+    @Override
+    protected Path getDirectoryPathDataFileLocation() {
+        Path filePath = TestUtil.getFilePathInSandboxFolder("SomeFileThatDoesNotExist1234567890.xml");
+        deleteFileIfExists(filePath);
+        return filePath;
+    }
+
+    /**
      * Deletes the file at {@code filePath} if it exists.
      */
     private void deleteFileIfExists(Path filePath) {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
+import seedu.planner.commons.events.model.DirectoryPathChangedEvent;
 import seedu.planner.commons.events.model.FinancialPlannerChangedEvent;
 import seedu.planner.commons.events.model.LimitListChangedEvent;
 import seedu.planner.commons.events.model.SummaryMapChangedEvent;
@@ -12,6 +13,7 @@ import seedu.planner.commons.exceptions.DataConversionException;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
 
@@ -73,4 +75,19 @@ public interface Storage extends FinancialPlannerStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleLimitListChangedEvent(LimitListChangedEvent event);
+
+    // ================ DirectoryPath storage methods ==============================
+
+    @Override
+    Optional<DirectoryPath> readDirectoryPath() throws DataConversionException, IOException;
+
+    @Override
+    void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner) throws IOException;
+
+    /**
+     * Saves the Directory Path in the current version of Financial Planner to the had disk.
+     *   Creates the date file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleDirectoryPathChangedEvent(DirectoryPathChangedEvent event);
 }

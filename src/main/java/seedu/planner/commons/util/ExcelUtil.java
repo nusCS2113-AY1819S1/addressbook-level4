@@ -9,6 +9,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 
+import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Record;
 
 /**
@@ -53,5 +54,13 @@ public class ExcelUtil {
                 }
             }
         }
+    }
+
+    public static final String setNameExcelFile (Date startDate, Date endDate) {
+        return (startDate == null && endDate == null)
+                ? "Financial_Planner_ALL.xlsx"
+                : ((startDate.equals(endDate))
+                    ? String.format("Financial_Planner_%1$s.xlsx", startDate.getValue())
+                    : String.format("Financial_Planner_%1$s_%2$s.xlsx", startDate.getValue(), endDate.getValue()));
     }
 }

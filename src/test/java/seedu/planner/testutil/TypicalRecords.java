@@ -58,6 +58,9 @@ public class TypicalRecords {
     public static final Date TYPICAL_START_DATE1 = new Date ("31-03-1999");
     public static final Date TYPICAL_END_DATE1 = new Date ("31-3-2019");
 
+    public static final Date TYPICAL_NONEXISTENT_STARTDATE = new Date("1-1-1999");
+    public static final Date TYPICAL_NONEXISTENT_ENDDATE = new Date("2-1-1999");
+
     public static final Date OUT_OF_BOUND_DATE = new Date ("30-03-2018");
 
     private TypicalRecords() {} // prevents instantiation

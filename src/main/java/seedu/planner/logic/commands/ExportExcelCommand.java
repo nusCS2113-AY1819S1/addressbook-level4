@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.planner.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -20,6 +19,7 @@ import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateIsWithinIntervalPredicate;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.Record;
 
 /**
@@ -70,8 +70,10 @@ public class ExportExcelCommand extends Command {
                 + System.getProperty("file.separator")
                 + String.format(nameFile);
         path.replace("\\", System.getProperty("file.separator"));
+        String path_ex = "D:uhjkmjh bhjnknjhbnjkm \\gvhbnjhvb    gvhbjnjhb";
+        logger.info("------------------------------------- MEOW: " + DirectoryPath.removeWhiteSpace(path_ex));
         FileUtil.writeWorkBookInFileSystem(nameFile, workbook, path);
-        return new CommandResult(String.format(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY, nameFile, path));
+        return new CommandResult(Messages.MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY);
     }
 
     @Override

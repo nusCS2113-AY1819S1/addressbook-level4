@@ -16,8 +16,10 @@ import seedu.planner.commons.util.FileUtil;
 import seedu.planner.model.FinancialPlanner;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.record.UniqueRecordList;
 import seedu.planner.model.summary.SummaryMap;
+import seedu.planner.storage.xmljaxb.XmlSerializableDirectoryPath;
 import seedu.planner.storage.xmljaxb.XmlSerializableFinancialPlanner;
 import seedu.planner.storage.xmljaxb.XmlSerializableSummaryMap;
 
@@ -31,11 +33,14 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
     private Path recordListFilePath;
     private Path summaryMapFilePath;
     private Path limitListFilePath;
+    private Path directoryPathFilePath;
 
-    public XmlFinancialPlannerStorage(Path recordListFilePath, Path summaryMapFilePath, Path limitListFilePath) {
+    public XmlFinancialPlannerStorage(Path recordListFilePath, Path summaryMapFilePath, Path limitListFilePath,
+                                      Path directoryPathFilePath) {
         this.recordListFilePath = recordListFilePath;
         this.summaryMapFilePath = summaryMapFilePath;
         this.limitListFilePath = limitListFilePath;
+        this.directoryPathFilePath = directoryPathFilePath;
     }
 
     public Path getRecordListFilePath() {
@@ -50,26 +55,38 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
         return limitListFilePath;
     }
 
-    // ===================== Financial Planner Storage methods ================================
+    public Path getDirectoryPathFilePath() {
+        return directoryPathFilePath;
+    }
 
+    // ===================== Financial Planner Storage methods ================================
     @Override
     public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner() throws DataConversionException, IOException {
-        return readFinancialPlanner(recordListFilePath, summaryMapFilePath);
+        return readFinancialPlanner(recordListFilePath, summaryMapFilePath, directoryPathFilePath);
     }
 
     @Override
     public Optional<ReadOnlyFinancialPlanner> readFinancialPlanner(Path recordListFilePath,
-                                                                   Path summaryMapFilePath)
+                                                                   Path summaryMapFilePath,
+                                                                   Path directoryPathFilePath)
             throws DataConversionException, IOException {
         requireNonNull(recordListFilePath);
         requireNonNull(summaryMapFilePath);
+        requireNonNull(directoryPathFilePath);
 
         Optional<ReadOnlyFinancialPlanner> financialPlannerOptional = Optional.empty();
         Optional<UniqueRecordList> recordListOptional = readRecordList(recordListFilePath);
         Optional<SummaryMap> summaryMapOptional = readSummaryMap(summaryMapFilePath);
-        if (recordListOptional.isPresent() && summaryMapOptional.isPresent()) {
+        Optional<DirectoryPath> directoryPathOptional = readDirectoryPath(directoryPathFilePath);
+        Optional<DateBasedLimitList> limitListOptional = readLimitList(limitListFilePath);
+
+        if (recordListOptional.isPresent()
+                && summaryMapOptional.isPresent()
+                && directoryPathOptional.isPresent()
+                && limitListOptional.isPresent()) {
             FinancialPlanner financialPlanner = new FinancialPlanner();
-            financialPlanner.resetData(recordListOptional.get(), summaryMapOptional.get());
+            financialPlanner.resetData(recordListOptional.get(), summaryMapOptional.get(),
+                    limitListOptional.get(), directoryPathOptional.get());
             financialPlannerOptional = Optional.of(financialPlanner);
         }
         return financialPlannerOptional;
@@ -77,14 +94,15 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
     @Override
     public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
-        saveFinancialPlanner(financialPlanner, recordListFilePath, summaryMapFilePath);
+        saveFinancialPlanner(financialPlanner, recordListFilePath, summaryMapFilePath, directoryPathFilePath);
     }
 
     @Override
     public void saveFinancialPlanner(ReadOnlyFinancialPlanner financialPlanner, Path recordListFilePath,
-                                     Path summaryMapFilePath) throws IOException {
+                                     Path summaryMapFilePath, Path directoryPathFilePath) throws IOException {
         saveRecordList(financialPlanner, recordListFilePath);
         saveSummaryMap(financialPlanner, summaryMapFilePath);
+        saveDirectoryPath(financialPlanner, directoryPathFilePath);
     }
 
     // ===================== Record List Storage methods ======================================
@@ -110,6 +128,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
         XmlSerializableFinancialPlanner xmlFinancialPlanner = XmlFileStorage.loadDataFromSaveFile(filePath,
                 XmlSerializableFinancialPlanner.class);
+        logger.info("The value of the file path is" + filePath);
         try {
             return Optional.of(xmlFinancialPlanner.toModelType());
         } catch (IllegalValueException ive) {
@@ -158,7 +177,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
         XmlSerializableSummaryMap xmlSummaryMap = XmlFileStorage.loadDataFromSaveFile(filePath,
                 XmlSerializableSummaryMap.class);
-
+        logger.info("The value of the file path is" + filePath);
         try {
             return Optional.of(xmlSummaryMap.toModelType());
         } catch (IllegalValueException ive) {
@@ -203,6 +222,7 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
         XmlSerializableLimitList xmlLimitList = XmlFileStorage.loadDataFromSaveFile(filePath,
                 XmlSerializableLimitList.class);
+        logger.info("The value of the file path is" + filePath);
         try {
             return Optional.of(xmlLimitList.toModelType());
         } catch (IllegalValueException ive) {
@@ -226,5 +246,54 @@ public class XmlFinancialPlannerStorage implements FinancialPlannerStorage {
 
         FileUtil.createIfMissing(filePath);
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableLimitList(limitList));
+    }
+
+    // ======================================= Directory Storage methods ==============================
+
+    @Override
+    public Optional<DirectoryPath> readDirectoryPath() throws DataConversionException, IOException {
+        return readDirectoryPath(directoryPathFilePath);
+    }
+
+    /**
+     * Similar to {@link #readDirectoryPath(Path)} ()} ()}
+     * @param filePath location of the data. Cannot be null
+     * @throws DataConversionException if the file is not in the correct format.
+     */
+    public Optional<DirectoryPath> readDirectoryPath(Path filePath) throws DataConversionException,
+            FileNotFoundException {
+        requireNonNull(filePath);
+
+        if (!Files.exists(filePath)) {
+            logger.info("Directory Path " + filePath + " not found");
+            return Optional.empty();
+        }
+        XmlSerializableDirectoryPath xmlSerializableDirectoryPath = XmlFileStorage.loadDataFromSaveFile(filePath,
+                XmlSerializableDirectoryPath.class);
+        try {
+            return Optional.of(xmlSerializableDirectoryPath.toModelType());
+        } catch (IllegalValueException ive) {
+            logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
+            throw new DataConversionException(ive);
+        }
+    }
+
+    @Override
+    public void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner) throws IOException {
+        saveDirectoryPath(financialPlanner, directoryPathFilePath);
+    }
+
+    /**
+     * Similar to {@link #saveDirectoryPath(ReadOnlyFinancialPlanner)}}
+     * @param financialPlanner the given financial planner.
+     * @param filePath the given location to save the file.
+     * @throws IOException
+     */
+    public void saveDirectoryPath(ReadOnlyFinancialPlanner financialPlanner, Path filePath) throws IOException {
+        requireNonNull(financialPlanner);
+        requireNonNull(filePath);
+
+        FileUtil.createIfMissing(filePath);
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableDirectoryPath(financialPlanner));
     }
 }

@@ -20,8 +20,12 @@ public class Messages {
             "Please enter exact TWO Dates, Start_Date and End_Date.\n";
     public static final String MESSAGE_INVALID_STARTDATE_ENDDATE =
             "Please enter the Start_Date smaller than or equal to the End_Date.\n";
-    public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY =
+    public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY_NAME_PATH =
             "The Excel file named %1$s has been written successfully in path: %2$s.\n";
+    public static final String MESSAGE_EXCEL_FILE_WRITTEN_SUCCESSFULLY =
+            "The Excel file has been written successfully.\n";
     public static final String MESSAGE_UNREALISTIC_DIRECTORY =
             "Please choose existing directory.\n";
+    public static final String MESSAGE_SET_DIRECTORY_SUCCESSFULLY =
+            "The Directory path has been set to %1$s\n";
 }

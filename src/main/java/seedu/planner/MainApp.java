@@ -26,6 +26,7 @@ import seedu.planner.model.ModelManager;
 import seedu.planner.model.ReadOnlyFinancialPlanner;
 import seedu.planner.model.UserPrefs;
 import seedu.planner.model.record.DateBasedLimitList;
+import seedu.planner.model.record.DirectoryPath;
 import seedu.planner.model.summary.SummaryMap;
 import seedu.planner.model.util.SampleDataUtil;
 import seedu.planner.storage.FinancialPlannerStorage;
@@ -60,13 +61,20 @@ public class MainApp extends Application {
         super.init();
 
         AppParameters appParameters = AppParameters.parse(getParameters());
+
         config = initConfig(appParameters.getConfigPath());
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
+
         userPrefs = initPrefs(userPrefsStorage);
+
         FinancialPlannerStorage financialPlannerStorage =
-                new XmlFinancialPlannerStorage(userPrefs.getFinancialPlannerFilePath(),
-                        userPrefs.getSummaryMapFilePath(), userPrefs.getFinancialPlannerLimitFilePath());
+                new XmlFinancialPlannerStorage(
+                        userPrefs.getFinancialPlannerFilePath(),
+                        userPrefs.getSummaryMapFilePath(),
+                        userPrefs.getFinancialPlannerLimitFilePath(),
+                        userPrefs.getDirectoryPathFilePath());
+
         storage = new StorageManager(financialPlannerStorage, userPrefsStorage);
 
         initLogging(config);
@@ -92,23 +100,35 @@ public class MainApp extends Application {
         Optional<ReadOnlyFinancialPlanner> financialPlannerOptional;
         Optional<SummaryMap> summaryMapOptional;
         Optional<DateBasedLimitList> limitListOptional;
+        Optional<DirectoryPath> directoryPathOptional;
 
         ReadOnlyFinancialPlanner initialData;
         try {
             financialPlannerOptional = storage.readFinancialPlanner();
-
             if (!financialPlannerOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample FinancialPlanner");
             }
+
             initialData = financialPlannerOptional.orElseGet(SampleDataUtil::getSampleFinancialPlanner);
 
             summaryMapOptional = storage.readSummaryMap();
             if (!summaryMapOptional.isPresent()) {
                 logger.info("Summary data file not found. Will start based on the sample FinancialPlanner");
             }
+
+            limitListOptional = storage.readLimitList();
+            if (!summaryMapOptional.isPresent()) {
+                logger.info("Limit data file not found. Will start based on the sample FinancialPlanner");
+            }
+            directoryPathOptional = storage.readDirectoryPath();
+            if (!directoryPathOptional.isPresent()) {
+                logger.info("DirectoryPath data file not found. Will start based on the sample FinancialPlanner");
+            }
+
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty FinancialPlanner");
             initialData = new FinancialPlanner();
+
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty FinancialPlanner");
             initialData = new FinancialPlanner();
