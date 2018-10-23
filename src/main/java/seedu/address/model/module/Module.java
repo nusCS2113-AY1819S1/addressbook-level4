@@ -4,25 +4,25 @@ package seedu.address.model.module;
  * Represents a module in Trajectory
  */
 public class Module {
-    private static final String MODULE_CODE_VALIDATION_REGEX = "^[A-Z]{2,3}[1-9]{1}[0-9]{3}[A-Z]{0,1}$";
-    private String name;
-    private String code;
+    private ModuleCode moduleCode;
+    private ModuleName moduleName;
 
-    public Module(String name, String code) {
-        this.name = name;
-        this.code = code;
+    public Module(ModuleCode moduleCode, ModuleName moduleName) {
+        this.moduleCode = moduleCode;
+        this.moduleName = moduleName;
     }
 
-    public String getModuleName() {
-        return this.name;
+    public ModuleCode getModuleCode() {
+        return this.moduleCode;
     }
 
-    public String getModuleCode() {
-        return this.code;
+    public ModuleName getModuleName() {
+        return this.moduleName;
     }
 
     /**
      * Returns true if both modules have the same module code and name.
+     * This defines a weaker notion of equality between two modules.
      */
     public boolean isSameModule(Module otherModule) {
         if (otherModule == this) {
@@ -42,5 +42,24 @@ public class Module {
                 .append(" Module Name: ")
                 .append(getModuleName());
         return builder.toString();
+    }
+
+    /**
+     * Returns true if both modules have the same module code and data fields.
+     * This defines a stronger notion of equality between two modules.
+     */
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Module)) {
+            return false;
+        }
+
+        Module otherModule = (Module) other;
+        return otherModule.getModuleCode().equals((getModuleCode()))
+                && otherModule.getModuleName().equals(getModuleName());
     }
 }

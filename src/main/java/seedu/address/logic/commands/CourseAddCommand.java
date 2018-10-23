@@ -46,7 +46,7 @@ public class CourseAddCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        CourseManager cm = new CourseManager();
+        CourseManager cm = CourseManager.getInstance();
         cm.addCourse(internalCourse);
         cm.saveCourseList();
         return new CommandResult(String.format(MESSAGE_SUCCESS,

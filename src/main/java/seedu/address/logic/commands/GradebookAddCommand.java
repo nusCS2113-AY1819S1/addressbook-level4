@@ -40,7 +40,9 @@ public class GradebookAddCommand extends Command {
     @Override
     public CommandResult execute (Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        String result = GradebookManager.addGradebookComponent(
+        GradebookManager gradebookManager = new GradebookManager();
+
+        String result = gradebookManager.addGradebookComponent(
                 toAddGradebookItem.getModuleCode(),
                 toAddGradebookItem.getGradeComponentName(),
                 toAddGradebookItem.getGradeComponentMaxMarks(),

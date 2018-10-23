@@ -34,7 +34,7 @@ public class CourseDeleteCommand extends Command {
      * Executes the deletion of a course.
      */
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        CourseManager cm = new CourseManager();
+        CourseManager cm = CourseManager.getInstance();
         Course foundCourse = cm.getCourse(courseCode);
         cm.deleteCourse(foundCourse);
         cm.saveCourseList();

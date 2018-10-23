@@ -9,6 +9,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.ModuleAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleName;
 
 /**
  * Parses input arguments and creates a new ModuleAddCommand object.
@@ -28,10 +30,10 @@ public class ModuleAddCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ModuleAddCommand.MESSAGE_USAGE));
         }
 
-        String moduleName = argMultimap.getValue(PREFIX_MODULE_NAME).get();
-        String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_MODULE_CODE).get());
+        ModuleName moduleName = ParserUtil.parseModuleName(argMultimap.getValue(PREFIX_MODULE_NAME).get());
 
-        Module module = new Module(moduleName, moduleCode);
+        Module module = new Module(moduleCode, moduleName);
         return new ModuleAddCommand(module);
     }
 

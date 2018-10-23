@@ -22,10 +22,10 @@ public class ModuleListCommand extends Command {
         StringBuilder sb = new StringBuilder();
 
         for (Module m: moduleManager.getModules()) {
-            sb.append("Module Name: ");
-            sb.append(m.getModuleName() + "\n");
             sb.append("Module Code: ");
             sb.append(m.getModuleCode() + "\n");
+            sb.append("Module Name: ");
+            sb.append(m.getModuleName() + "\n");
             sb.append("\n");
         }
 

@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 import seedu.address.model.note.Note;
 
 /**
- * The window to add/edit a note. It provides a Text Area
- * to allow the user to type notes in multiple line.
+ * This is the controller for the NoteEntryPromptWindow FXML.
+ * It consists of a TextArea for the user to enter input in multiple lines.
  */
 public class NoteEntryPrompt {
 
@@ -41,7 +41,8 @@ public class NoteEntryPrompt {
     }
 
     /**
-     * Populate the Text Area containing the editable note
+     * Populates the TextArea with the editable note.
+     *
      * @param note
      */
     public void setNote(Note note) {
@@ -57,23 +58,37 @@ public class NoteEntryPrompt {
     @FXML
     private void handleKeyPress(KeyEvent keyEvent) {
         if (keyCombinationSave.match(keyEvent)) {
-            String tempNote = noteContent.getText();
-
-            if (tempNote.trim().length() > 0) {
-                note.setNoteText(tempNote);
-                dialogStage.close();
-            }
+            saveAndCloseWindow();
         }
 
         if (keyCombinationCancel.match(keyEvent)) {
-            isCancelled = true;
+            closeWindow();
+        }
+    }
+
+    /**
+     * Saves the note and closes the window.
+     */
+    public void saveAndCloseWindow() {
+        String tempNote = noteContent.getText();
+
+        if (tempNote.trim().length() > 0) {
+            note.setNoteText(tempNote);
             dialogStage.close();
         }
     }
 
     /**
+     * Closes the window without saving the note data.
+     */
+    public void closeWindow() {
+        isCancelled = true;
+        dialogStage.close();
+    }
+
+    /**
      * Returns true if the user pressed the key combination to cancel.
-     * Otherwise, return false
+     * Otherwise, return false.
      *
      * @return value of isCancelled.
      */
