@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.model;
 
 import javafx.collections.ObservableList;
