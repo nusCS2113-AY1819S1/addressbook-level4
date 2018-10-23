@@ -52,16 +52,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * Parameters can be in any order e.g. if the command specifies `n/EVENT p/PHONE_NUMBER`, `p/PHONE_NUMBER n/EVENT` is also acceptable.
 ====
 
+// tag::authentication[]
 === Signing up for an account : `signup`
 
 User: Creates a *user* account +
 Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD` +
 Examples:
 
-* `signup u/Gerald Chua p/password12345 c/password12345` +
-Creates account for Gerald Chua
-* `signup u/James Yaputra p/drowssap12345 c/drowssap12345` +
-Creates account for James Yaputra
+* `signup u/gerald p/password12345 +
+Creates account with the username gerald
+* `signup u/james p/drowssap12345 +
+Creates account with the username james
 
 === Logging into an account : `login`
 
@@ -69,10 +70,10 @@ User: Logs in to account +
 Format: `login u/USERNAME p/PASSWORD` +
 Examples:
 
-* `login n/Gerald Chua p/password12345` +
-Logs in Gerald Chua +
-* `login u/James Yaputra p/drowssap12345` +
-Logs in James Yaputra
+* `login n/gerald p/password12345` +
+Logs in gerald +
+* `login u/james p/drowssap12345` +
+Logs in james
 
 === Logging out of an account : `logout`
 
@@ -80,21 +81,11 @@ User: Logs out of an account +
 Format: `logout` +
 Examples:
 
-* `login n/Gerald Chua p/password12345` +
-Logs in Gerald Chua +
+* `login n/gerald p/password12345` +
+Logs in gerald +
 * `logout` +
-Logs out from Gerald Chua
-
-=== Signing up for an account : `signup`
-
-User: Creates a new account +
-Format: `signup u/USERNAME p/PASSWORD` +
-Examples:
-
-* `signup n/Gerald Chua p/password12345` +
-Creates Gerald Chua +
-* `signup u/James Yaputra p/drowssap12345` +
-Creates James Yaputra
+Logs out from gerald
+// end::authentication[]
 
 === Viewing help : `help`
 
