@@ -107,7 +107,7 @@ public class AddressBookParser {
 
         case ExportAllCommand.COMMAND_WORD:
             return new ExportAllCommandParser().parse(arguments);
-        
+
         case TodoCommand.COMMAND_WORD:
             return new TodoCommandParser().parse(arguments);
 
