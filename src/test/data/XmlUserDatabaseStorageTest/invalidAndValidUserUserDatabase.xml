@@ -4,14 +4,14 @@
     <users>
         <username>amy</username>
         <password>pass</password>
-        <addressbookfilepath>data/addressbook-amy.xml</addressbookfilepath>
-        <saleshistoryfilepath>data/saleshistory-amy.xml</saleshistoryfilepath>
+        <addressBookFilePath>data/addressbook-amy.xml</addressBookFilePath>
+        <salesHistoryFilePath>data/saleshistory-amy.xml</salesHistoryFilePath>
     </users>
     <!-- Invalid User with invalid password field -->
     <users>
         <username>John</username>
         <password>p@ss</password>
-        <addressbookfilepath>data/addressbook-u.xml</addressbookfilepath>
-        <saleshistoryfilepath>data/saleshistory-John.xml</saleshistoryfilepath>
+        <addressBookFilePath>data/addressbook-u.xml</addressBookFilePath>
+        <salesHistoryFilePath>data/saleshistory-John.xml</salesHistoryFilePath>
     </users>
 </userdatabase>

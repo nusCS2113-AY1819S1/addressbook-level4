@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <userdatabase>
     <users>
-        <username>username</username>
+        <username>user</username>
         <password>pass</password>
-        <addressbookfilepath>data/addressbook-username.xml</addressbookfilepath>
-        <saleshistoryfilepath>data/saleshistory-username.xml</saleshistoryfilepath>
+        <addressBookFilePath>data/addressbook-user.xml</addressBookFilePath>
+        <salesHistoryFilePath>data/saleshistory-user.xml</salesHistoryFilePath>
     </users>
     <users>
         <username>amy</username>
         <password>pass</password>
-        <addressbookfilepath>data/addressbook-amy.xml</addressbookfilepath>
-        <saleshistoryfilepath>data/saleshistory-amy.xml</saleshistoryfilepath>
+        <addressBookFilePath>data/addressbook-amy.xml</addressBookFilePath>
+        <salesHistoryFilePath>data/saleshistory-amy.xml</salesHistoryFilePath>
     </users>
     <users>
         <username>bob</username>
         <password>pass</password>
-        <addressbookfilepath>data/addressbook-bob.xml</addressbookfilepath>
-        <saleshistoryfilepath>data/saleshistory-bob.xml</saleshistoryfilepath>
+        <addressBookFilePath>data/addressbook-bob.xml</addressBookFilePath>
+        <salesHistoryFilePath>data/saleshistory-bob.xml</salesHistoryFilePath>
     </users>
 </userdatabase>
