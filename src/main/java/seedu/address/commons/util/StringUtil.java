@@ -71,6 +71,13 @@ public class StringUtil {
     }
 
     //@@author lekoook
+
+    /**
+     * Tokenizes a string input with white spaces into a list of {@code Index}.
+     *
+     * @param input the user string input.
+     * @return the list of tokenized {@code Index}.
+     */
     public static ArrayList<Index> tokenizeIndexWithSpace(String input) {
         ArrayList<Index> output = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(input);
@@ -81,6 +88,12 @@ public class StringUtil {
         return output;
     }
 
+    /**
+     * Tokenizes a string input with the range delimiter into a list of {@code Index}.
+     *
+     * @param input the user string input.
+     * @return the list of tokenized {@code Index}.
+     */
     public static ArrayList<Index> tokenizeIndexWithRange(String input) {
         ArrayList<Index> output = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(input, "- \t\n\r\f");
@@ -97,6 +110,12 @@ public class StringUtil {
         return output;
     }
 
+    /**
+     * Determines if a string contains non zero unsigned {@code Index} only.
+     *
+     * @param input the user input string.
+     * @return true if contains, false otherwise.
+     */
     public static boolean areNonZeroUnsignedInteger(String input) {
         requireNonNull(input);
 
@@ -110,7 +129,7 @@ public class StringUtil {
     }
 
     /**
-     * Determines if a user input conforms to the range selection format with the help of regex.
+     * Determines if a user input conforms to the {@code Index} range selection format with the help of regex.
      *
      * @param input the user input string.
      * @return true if conforms, false otherwise.
@@ -119,6 +138,12 @@ public class StringUtil {
         return input.trim().matches("(?s)(\\d*\\s*-\\s*\\d*\\s*\\s*,?)?(\\s*,\\s*\\d*\\s*-\\s*\\d*\\s*\\s*,?)*");
     }
 
+    /**
+     * Determines if a user input has a valid select command format.
+     *
+     * @param input the user input string.
+     * @return true if confirms, false otherwise.
+     */
     public static boolean isValidSelectSyntax(String input) {
         if (isRangeIndexFormat(input) || StringUtil.areNonZeroUnsignedInteger(input)) {
             return true;
