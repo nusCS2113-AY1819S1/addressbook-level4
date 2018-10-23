@@ -59,6 +59,7 @@ public class EmailUtil {
     private static EmailSettings emailSettings;
     private ArrayList<Candidate> candidates;
     private ArrayList<JobOffer> jobOffers;
+    private boolean hasRecipientsAdded;
     private boolean areRecipientsCandidates;
 
     /**
@@ -67,14 +68,23 @@ public class EmailUtil {
     public EmailUtil() {
         this.candidates = new ArrayList<>();
         this.jobOffers = new ArrayList<>();
+        this.hasRecipientsAdded = false;
     }
+
     /**
      * Getters and Setters
      */
+    public boolean isHasRecipientsAdded() {
+        return hasRecipientsAdded;
+    }
+
+    public void setHasRecipientsAdded(boolean hasRecipientsAdded) {
+        this.hasRecipientsAdded = hasRecipientsAdded;
+    }
+    
     public static void setEmailSettings(EmailSettings emailSettings) {
         EmailUtil.emailSettings = emailSettings;
     }
-
 
     public ArrayList<Candidate> getCandidates() {
         return candidates;

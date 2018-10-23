@@ -9,7 +9,11 @@ import static seedu.recruit.commons.util.EmailUtil.EMAIL_SEND_COMMAND;
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.Command;
+import seedu.recruit.logic.commands.FindCandidateCommand;
+import seedu.recruit.logic.commands.FindCompanyCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
+import seedu.recruit.logic.commands.ListCompanyCommand;
+import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsAddCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsBackCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsNextCommand;
@@ -45,6 +49,18 @@ public class EmailParser {
             case ListCandidateCommand.COMMAND_WORD:
                 return new ListCandidateCommand();
 
+            case ListCompanyCommand.COMMAND_WORD:
+                return new ListCompanyCommand();
+
+            case FindCandidateCommand.COMMAND_WORD:
+                return new FindCandidateCommandParser().parse(arguments);
+
+            case FindCompanyCommand.COMMAND_WORD:
+                return new FindCompanyCommandParser().parse(arguments);
+
+            case SwitchBookCommand.COMMAND_WORD:
+                return new SwitchBookCommand();
+
             case EMAIL_NEXT_COMMAND:
                 return new EmailRecipientsNextCommand();
 
@@ -60,6 +76,12 @@ public class EmailParser {
         } else if (state.nextCommand.equals(EmailContentsSelectCommand.COMMAND_LOGIC_STATE)
                 && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
+
+            case ListCompanyCommand.COMMAND_WORD:
+                return new ListCompanyCommand();
+
+            case FindCompanyCommand.COMMAND_WORD:
+                return new FindCompanyCommandParser().parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();
@@ -79,6 +101,9 @@ public class EmailParser {
 
             case ListCandidateCommand.COMMAND_WORD:
                 return new ListCandidateCommand();
+
+            case FindCandidateCommand.COMMAND_WORD:
+                return new FindCandidateCommandParser().parse(arguments);
 
             case EMAIL_NEXT_COMMAND:
                 return new EmailContentsNextCommand();

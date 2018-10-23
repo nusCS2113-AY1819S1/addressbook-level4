@@ -20,19 +20,44 @@ public class EmailRecipientsAddCommand extends EmailRecipientsSelectCommand {
         requireNonNull(model);
         EmailUtil emailUtil = model.getEmailUtil();
 
-        //Add recipients only if commandWord is add.
-        if (MainWindow.getDisplayedBook().equals("candidateBook")) {
-            ObservableList<Candidate> recipients = model.getFilteredCandidateList();
-            for (Candidate recipient : recipients) {
-                emailUtil.addCandidate(recipient);
+        //Check if there are already recipients added
+        if(!emailUtil.isHasRecipientsAdded()) {
+            if (MainWindow.getDisplayedBook().equals("candidateBook")) {
+                ObservableList<Candidate> recipients = model.getFilteredCandidateList();
+                for (Candidate recipient : recipients) {
+                    emailUtil.addCandidate(recipient);
+                }
+                emailUtil.setAreRecipientsCandidates(true);
+            } else {
+                ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
+                for (JobOffer recipient : recipients) {
+                    emailUtil.addJobOffer(recipient);
+                }
+                emailUtil.setAreRecipientsCandidates(false);
             }
-            emailUtil.setAreRecipientsCandidates(true);
+            emailUtil.setHasRecipientsAdded(true);
         } else {
-            ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
-            for (JobOffer recipient : recipients) {
-                emailUtil.addJobOffer(recipient);
+            //displayed book is candidates and recipients are candidates.
+            //send error if displayedbook is company.
+            if (emailUtil.isAreRecipientsCandidates()) {
+                if(MainWindow.getDisplayedBook().equals("candidateBook")) {
+                    ObservableList<Candidate> recipients = model.getFilteredCandidateList();
+                    for (Candidate recipient : recipients) {
+                        emailUtil.addCandidate(recipient);
+                    }
+                } else {
+                    return new CommandResult("ERROR: You can only add candidates!");
+                }
+            } else {
+                if(MainWindow.getDisplayedBook().equals("companyBook")) {
+                    ObservableList<JobOffer> recipients = model.getFilteredCompanyJobList();
+                    for (JobOffer recipient : recipients) {
+                        emailUtil.addJobOffer(recipient);
+                    }
+                } else {
+                    return new CommandResult("ERROR: You can only add job offers!");
+                }
             }
-            emailUtil.setAreRecipientsCandidates(false);
         }
 
         String output = "Recipients added:\n";
