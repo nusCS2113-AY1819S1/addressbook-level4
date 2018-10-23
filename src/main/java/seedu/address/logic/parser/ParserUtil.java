@@ -180,9 +180,7 @@ public class ParserUtil {
     }
 
     /**
-     *
      * Parses a {@code String fileLocation} into a {@code fileLocation}
-     *
      */
     public static Path parseFileLocation (String fileLocation) throws ParseException {
         requireNonNull(fileLocation);
@@ -192,9 +190,10 @@ public class ParserUtil {
         Path newFilePath = Paths.get(trimmedFileLocation);
 
         //check file exists in the disk //does not check the validity of file!
+        /*
         if (!FileUtil.isFileExists(newFilePath)) {
             throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
-        }
+        }*/
 
         //check file ends in .ics //does not check the validity of file!
         /*

@@ -208,7 +208,7 @@ public class IcsUtil {
         vEvent.setRecurrenceRule(recurrenceRule);
 
         //set the start and endtimes and day of week
-        //vEvent.setDateStart(localTimeToBiweeklyDate(startTime));
+        //vEvent.setDateStart((startTime));
 
         vEvent.setSummary(label);
 
