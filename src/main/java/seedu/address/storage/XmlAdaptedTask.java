@@ -22,6 +22,8 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String priority;
+    @XmlElement(required = true)
+    private String expectedNumOfHours;
 
     /**
      * Constructs an XmlAdaptedTask.
@@ -32,11 +34,12 @@ public class XmlAdaptedTask {
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
-    public XmlAdaptedTask(String deadline, String title, String description, String priority) {
+    public XmlAdaptedTask(String deadline, String title, String description, String priority, String expectedNumOfHours) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priority = priority;
+        this.expectedNumOfHours = expectedNumOfHours;
     }
 
     /**
@@ -49,6 +52,7 @@ public class XmlAdaptedTask {
         title = source.getTitle();
         description = source.getDescription();
         priority = source.getPriorityLevel().toString();
+        expectedNumOfHours = Integer.toString(source.getExpectedNumOfHours());
     }
 
     /**
@@ -86,7 +90,13 @@ public class XmlAdaptedTask {
         }
         final PriorityLevel modelPriority = new PriorityLevel(priority);
 
-        return new Task(modelDeadline, modelTitle, modelDescription, modelPriority);
+        if (expectedNumOfHours == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    "Expected number of expectedNumOfHours"));
+        }
+        final int modelExpectedNumOfHours = Integer.parseInt(expectedNumOfHours);
+
+        return new Task(modelDeadline, modelTitle, modelDescription, modelPriority, modelExpectedNumOfHours);
     }
 
     @Override

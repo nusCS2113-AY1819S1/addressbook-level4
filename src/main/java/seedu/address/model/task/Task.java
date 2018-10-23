@@ -13,28 +13,34 @@ public class Task {
     private final String description;
     private final PriorityLevel priorityLevel;
     private boolean isCompleted;
+    private int expectedNumOfHours;
 
-    public Task(String deadline, String title, String description, PriorityLevel priorityLevel) {
+    public Task(String deadline, String title, String description, PriorityLevel priorityLevel,
+                int expectedNumOfHours) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.isCompleted = false;
+        this.expectedNumOfHours = expectedNumOfHours;
     }
 
-    public Task(String deadline, String title, String description, PriorityLevel priorityLevel, boolean isCompleted) {
+    public Task(String deadline, String title, String description, PriorityLevel priorityLevel,
+                int expectedNumOfHours, boolean isCompleted) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
+        this.expectedNumOfHours = expectedNumOfHours;
         this.isCompleted = isCompleted;
     }
 
-    public Task(String title, String description, PriorityLevel priorityLevel) {
+    public Task(String title, String description, PriorityLevel priorityLevel, int expectedNumOfHours) {
         this.deadline = PLACEHOLDER_DEADLINE;
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
+        this.expectedNumOfHours = expectedNumOfHours;
         this.isCompleted = false;
     }
 
@@ -52,6 +58,9 @@ public class Task {
 
     public PriorityLevel getPriorityLevel() {
         return priorityLevel;
+    }
+    public int getExpectedNumOfHours() {
+        return expectedNumOfHours;
     }
     public boolean isCompleted() {
         return isCompleted;
@@ -108,13 +117,14 @@ public class Task {
                 && otherTask.getDeadline().equals(getTitle())
                 && otherTask.getDescription().equals(getDescription())
                 && otherTask.getPriorityLevel().equals(getPriorityLevel())
-                && otherTask.isCompleted() == isCompleted();
+                && otherTask.isCompleted() == isCompleted()
+                && otherTask.expectedNumOfHours == expectedNumOfHours;
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(deadline, title, description, priorityLevel, isCompleted);
+        return Objects.hash(deadline, title, description, priorityLevel, expectedNumOfHours, isCompleted);
     }
 
     @Override
@@ -127,11 +137,6 @@ public class Task {
                 .append(getDescription())
                 .append(" Priority: ")
                 .append(getPriorityLevel());
-        /*if (isCompleted) {
-            builder.append(" => Completed!");
-        } else {
-            builder.append(" => Not completed!");
-        }*/
         return builder.toString();
     }
 }

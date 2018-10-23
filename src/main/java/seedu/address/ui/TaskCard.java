@@ -36,6 +36,8 @@ public class TaskCard extends UiPart<Region> {
     @FXML
     private Label priorityLevel;
     @FXML
+    private Label expectedNumOfHours;
+    @FXML
     private Label status;
     /*
     @FXML
@@ -52,12 +54,12 @@ public class TaskCard extends UiPart<Region> {
         deadline.setText(task.getDeadline());
         description.setText(task.getDescription());
         priorityLevel.setText(task.getPriorityLevel().priorityLevel);
+        expectedNumOfHours.setText(Integer.toString(task.getExpectedNumOfHours()) + " hours");
         if (task.isCompleted()) {
             status.setText("Completed!");
         } else {
             status.setText("Not completed :(");
         }
-        //email.setText(task.getEmail().value);
         //task.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

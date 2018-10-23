@@ -120,4 +120,12 @@ public class ParserUtil {
         return trimmedYear;
     }
 
+    /**
+     * Leading and trailing whitespaces will be trimmed from {@code String hours}
+     */
+    public static int parseHours(String hours) throws ParseException {
+        requireNonNull(hours);
+        String trimmedHours = hours.trim();
+        return Integer.parseInt(trimmedHours);
+    }
 }

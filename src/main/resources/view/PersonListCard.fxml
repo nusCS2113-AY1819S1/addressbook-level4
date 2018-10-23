@@ -33,6 +33,7 @@
       <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
       <Label fx:id="priorityLevel" styleClass="cell_small_label" text="\$priorityLevel" />
       <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
+      <Label fx:id="expectedNumOfHours" text="\$expectedNumOfHours" />
     </VBox>
       <rowConstraints>
          <RowConstraints />

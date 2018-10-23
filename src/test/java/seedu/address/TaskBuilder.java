@@ -13,12 +13,14 @@ public class TaskBuilder {
     public static final String DEFAULT_DESCRIPTION = "refer to notes";
     public static final String DEFAULT_PRIORITY = "high";
     public static final boolean DEFAULT_COMPLETE = false;
+    public static final String DEFAULT_EXPECTED_NUM_OF_HOURS = "1";
 
     private String deadline;
     private String title;
     private String description;
     private PriorityLevel priority;
     private boolean isCompleted;
+    private int expectedNumOfHours;
 
     public TaskBuilder() {
         this.deadline = DEFAULT_DEADLINE;
@@ -26,6 +28,7 @@ public class TaskBuilder {
         this.description = DEFAULT_DESCRIPTION;
         this.priority = new PriorityLevel(DEFAULT_PRIORITY);
         this.isCompleted = DEFAULT_COMPLETE;
+        this.expectedNumOfHours = Integer.parseInt(DEFAULT_EXPECTED_NUM_OF_HOURS);
     }
 
     /**
@@ -37,6 +40,7 @@ public class TaskBuilder {
         this.description = taskToCopy.getDescription();
         this.priority = taskToCopy.getPriorityLevel();
         this.isCompleted = taskToCopy.isCompleted();
+        this.expectedNumOfHours = taskToCopy.getExpectedNumOfHours();
     }
     /**
      * Sets the {@code Deadline} of the {@code Task} that we are building.
@@ -78,7 +82,15 @@ public class TaskBuilder {
         return this;
     }
 
+    /**
+     * Sets the expected number of hours of the {@code Task} that we are building.
+     */
+    public TaskBuilder withExpectedNumOfHours(int expectedNumOfHours) {
+        this.expectedNumOfHours = expectedNumOfHours;
+        return this;
+    }
+
     public Task build() {
-        return new Task(deadline, title, description, priority, isCompleted);
+        return new Task(deadline, title, description, priority, expectedNumOfHours, isCompleted);
     }
 }

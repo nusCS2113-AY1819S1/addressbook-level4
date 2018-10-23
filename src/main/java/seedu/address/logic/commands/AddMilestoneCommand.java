@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MILESTONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RANK;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTION;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -21,11 +21,11 @@ public class AddMilestoneCommand extends Command implements CommandParser {
     public static final String MESSAGE_TASK_NOT_FOUND = "This task does not exist in the task book";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds milestone(s) to selected task. "
             + "Parameters: "
-            + PREFIX_TITLE + "TITLE "
+            + PREFIX_ACTION + "TITLE "
             + PREFIX_MILESTONE + "MILESTONE "
             + PREFIX_RANK + "RANK \n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_TITLE + "Complete CS2113T Week 8 LO "
+            + PREFIX_ACTION + "Complete CS2113T Week 8 LO "
             + PREFIX_MILESTONE + "Complete Sections 8.1 to 8.5 "
             + PREFIX_RANK + "1";
 
