@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
@@ -57,8 +58,8 @@ public class EmailUtil {
      * Variables for Email Command
      */
     private static EmailSettings emailSettings;
-    private ArrayList<Candidate> candidates;
-    private ArrayList<JobOffer> jobOffers;
+    private LinkedHashSet<Candidate> candidates;
+    private LinkedHashSet<JobOffer> jobOffers;
     private boolean hasRecipientsAdded;
     private boolean areRecipientsCandidates;
 
@@ -66,8 +67,8 @@ public class EmailUtil {
      * Constructor
      */
     public EmailUtil() {
-        candidates = new ArrayList<>();
-        jobOffers = new ArrayList<>();
+        candidates = new LinkedHashSet<>();
+        jobOffers = new LinkedHashSet<>();
         hasRecipientsAdded = false;
     }
 
@@ -86,19 +87,19 @@ public class EmailUtil {
         EmailUtil.emailSettings = emailSettings;
     }
 
-    public ArrayList<Candidate> getCandidates() {
+    public LinkedHashSet<Candidate> getCandidates() {
         return candidates;
     }
 
-    public void setCandidates(ArrayList<Candidate> candidates) {
+    public void setCandidates(LinkedHashSet<Candidate> candidates) {
         this.candidates = candidates;
     }
 
-    public ArrayList<JobOffer> getJobOffers() {
+    public LinkedHashSet<JobOffer> getJobOffers() {
         return jobOffers;
     }
 
-    public void setJobOffers(ArrayList<JobOffer> jobOffers) {
+    public void setJobOffers(LinkedHashSet<JobOffer> jobOffers) {
         this.jobOffers = jobOffers;
     }
 
@@ -117,17 +118,19 @@ public class EmailUtil {
     /**
      * Adds candidate to candidates ArrayList
      * @param candidate
+     * @return boolean value whether value was added into linkedhashset
      */
-    public void addCandidate(Candidate candidate) {
-        candidates.add(candidate);
+    public boolean addCandidate(Candidate candidate) {
+        return candidates.add(candidate);
     }
 
     /**
      * Adds jobOffer to jobOffers ArrayList
      * @param jobOffer
+     * @return boolean value whether value was added into linkedhashset
      */
-    public void addJobOffer(JobOffer jobOffer) {
-        jobOffers.add(jobOffer);
+    public boolean addJobOffer(JobOffer jobOffer) {
+        return jobOffers.add(jobOffer);
     }
 
     /**

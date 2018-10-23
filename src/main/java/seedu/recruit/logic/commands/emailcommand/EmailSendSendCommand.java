@@ -27,11 +27,11 @@ public class EmailSendSendCommand extends EmailSendCommand {
 
         //Setting recipients and contents based on AreRecipientsCandidates boolean
         if (emailUtil.isAreRecipientsCandidates()) {
-            recipients = emailUtil.getCandidates();
-            contents = emailUtil.getJobOffers();
+            recipients = new ArrayList<>(emailUtil.getCandidates());
+            contents = new ArrayList<>(emailUtil.getJobOffers());
         } else {
-            recipients = emailUtil.getJobOffers();
-            contents = emailUtil.getCandidates();
+            recipients = new ArrayList<>(emailUtil.getJobOffers());
+            contents = new ArrayList<>(emailUtil.getCandidates());
         }
 
         // for testing purposes

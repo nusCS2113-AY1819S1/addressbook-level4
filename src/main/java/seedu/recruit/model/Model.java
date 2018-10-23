@@ -1,5 +1,6 @@
 package seedu.recruit.model;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -210,12 +211,31 @@ public interface Model {
     String getFilteredRecipientJobOfferNames();
 
     /**
+     * @param duplicateJobOffers arraylist of duplicate joboffers
+     * @return a concatenated string of names of job offers
+     *         for email select recipients command minus specified job offers
+     */
+    String getFilteredRecipientJobOfferNames(ArrayList<JobOffer> duplicateJobOffers);
+
+    /**
      * Returns a concatendated string of names of job offers for email select contents command
      */
     String getFilteredContentJobOfferNames();
 
     /**
+     * @param duplicateJobOffers arraylist of duplicate joboffers
+     * @return a concatenated string of names of job offers
+     *         for email select contents command minus specified job offers
+     */
+    String getFilteredContentJobOfferNames(ArrayList<JobOffer> duplicateJobOffers);
+
+    /**
      * Returns a concatenated string of names of candidates for email command
      */
     String getFilteredCandidateNames();
+
+    /**
+     * Returns a concatenated string of names of candidates for email command minus specified candidates
+     */
+    String getFilteredCandidateNames(ArrayList<Candidate> duplicateCandidates);
 }
