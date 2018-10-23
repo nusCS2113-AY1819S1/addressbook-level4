@@ -37,6 +37,7 @@ public class TextFileTest {
         assertFalse(TextFile.isValidTextFile("?123"));
         assertFalse(TextFile.isValidTextFile("<123"));
         assertFalse(TextFile.isValidTextFile(">123"));
+        assertFalse(TextFile.isValidTextFile("\"123"));
 
         // valid commands
         assertTrue(TextFile.isValidTextFile("studentlist"));

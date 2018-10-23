@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class TextFile {
 
     public static final String MESSAGE_MESSAGE_CONSTRAINTS = "Text file name contains invalid characters";
-    public static final String MESSAGE_VALIDATION_REGEX = "^[^<>?/:*\\s]+$";
+    public static final String MESSAGE_VALIDATION_REGEX = "^[^\"<>?/:*\\s]+$";
     public final String value;
 
     /**

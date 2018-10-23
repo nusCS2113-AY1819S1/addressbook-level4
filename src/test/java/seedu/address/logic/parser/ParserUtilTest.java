@@ -15,7 +15,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.group.GroupLocation;
 import seedu.address.model.group.GroupName;
@@ -53,7 +52,7 @@ public class ParserUtilTest {
     private static final String VALID_GROUP_LOCATION = "E1-01-01";
 
     private static final String VALID_TEXT_FILE = "StudentList";
-    private static final String INVALID_TEXT_FILE = "\\StudentList";
+    private static final String INVALID_TEXT_FILE = "\"StudentList";
 
     private static final String VALID_COMMAND_TYPE = "add";
     private static final String INVALID_COMMAND_TYPE = "abc";
