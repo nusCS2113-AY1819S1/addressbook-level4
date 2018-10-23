@@ -25,9 +25,9 @@ public class SelectCommand extends Command {
     public static final String COMMAND_WORD = CliSyntax.COMMAND_SELECT;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Selects the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Selects single or multiple persons identified by the index numbers used in the displayed person list.\n"
+            + "Parameters: INDEX INDEX ... INDEX   or   START - END, ... , START - END\n"
+            + "Example: " + COMMAND_WORD + " 1 2 4 5   or   1 - 3, 5 - 9";
 
     public static final String MESSAGE_SELECT_PERSON_SUCCESS = "Selected Person: %1$s";
 
