@@ -6,8 +6,8 @@ import java.util.Set;
 import seedu.address.model.distributor.DistributorName;
 import seedu.address.model.product.Address;
 import seedu.address.model.product.Name;
-import seedu.address.model.product.SerialNumber;
 import seedu.address.model.product.Product;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -73,8 +73,8 @@ public class ProductBuilder {
     /**
      * Sets the {@code SerialNumber} of the {@code Product} that we are building.
      */
-    public ProductBuilder withSerialNumber(String serial_number) {
-        this.serialNumber = new SerialNumber(serial_number);
+    public ProductBuilder withSerialNumber(String serialNumber) {
+        this.serialNumber = new SerialNumber(serialNumber);
         return this;
     }
 
