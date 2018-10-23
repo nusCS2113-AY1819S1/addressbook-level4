@@ -1,6 +1,5 @@
 package seedu.address.testutil;
 
-
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME;
 
