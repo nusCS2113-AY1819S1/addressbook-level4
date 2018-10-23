@@ -1,3 +1,4 @@
+//@@author Lunastryke
 package seedu.address.model.drink;
 
 import static java.util.Objects.requireNonNull;
