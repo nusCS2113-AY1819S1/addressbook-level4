@@ -2,11 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.function.Predicate;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
-import seedu.address.model.searchhistory.SearchHistoryManager;
 import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
 
 /**
@@ -20,14 +17,8 @@ public class UndoSearchCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        SearchHistoryManager manager = model.getSearchHistoryManager();
         try {
-            Predicate predicate = manager.revertLastSearch();
-            if (predicate == null) {
-                model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
-            } else {
-                model.updateFilteredPersonList(predicate);
-            }
+            model.revertLastSearch();
             return new CommandResult(MESSAGE_SUCCESS);
         } catch (EmptyHistoryException e) {
             model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);

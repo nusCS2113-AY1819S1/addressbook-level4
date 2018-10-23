@@ -11,21 +11,23 @@ import seedu.address.model.searchhistory.exceptions.EmptyHistoryException;
  */
 public class SearchHistoryManager<T> {
 
+    private final Predicate<T> emptyStackPredicate = predicate -> true;
     private Stack<Predicate<T>> searchHistoryStack = new Stack<>();
+
     /** Returns Predicate at top of search history stack if stack is non-empty.
-     * If search history stack is empty, null is returned.
+     * If search history stack is empty, a predicate that defaults to true is returned.
      * @return a Predicate containing the system search logic.
      */
     private Predicate<T> retrievePredicateAtTopOfStack() {
         if (!searchHistoryStack.empty()) {
             return searchHistoryStack.peek();
         } else {
-            return null;
+            return emptyStackPredicate;
         }
     }
 
     /** Returns a Predicate containing system search logic after reverting to its previous state.
-     * If search history is empty after revert, null is returned.
+     * If search history is empty after revert, a predicate that defaults to true is returned.
      * @return a Predicate containing the system search logic after reverting.
      * @throws EmptyStackException If search history is empty after revert.
      */
@@ -52,11 +54,10 @@ public class SearchHistoryManager<T> {
      * @param newPredicate a Predicate containing user-defined search logic
      **/
     private void addNewPredicateToStack(Predicate<T> newPredicate) {
-        Predicate<T> predicate = retrievePredicateAtTopOfStack();
-        if (predicate == null) {
+        if (searchHistoryStack.isEmpty()) {
             searchHistoryStack.push(newPredicate);
         } else {
-            assert !searchHistoryStack.empty();
+            Predicate<T> predicate = retrievePredicateAtTopOfStack();
             Predicate<T> updatedPredicate = predicate.and(newPredicate);
             searchHistoryStack.push(updatedPredicate);
         }
