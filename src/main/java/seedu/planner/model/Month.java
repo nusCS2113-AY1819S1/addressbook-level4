@@ -47,7 +47,6 @@ public class Month {
     //TODO: refactor this
     public Month(String input) {
         requireNonNull(input);
-        input = input.toUpperCase();
         checkArgument(isValidMonth(input), MESSAGE_MONTH_CONSTRAINTS);
         matcher = MONTH_VALIDATION_PATTERN.matcher(input);
         if (!matcher.matches()) {
@@ -61,6 +60,7 @@ public class Month {
     public Month(int month, int year) {
         this.month = month;
         this.year = year;
+        checkArgument(month <= STANDARD_MONTHS.size(), MESSAGE_MONTH_CONSTRAINTS);
         value = String.format("%s-%d", STANDARD_MONTHS.get(month - 1), year);
     }
 
@@ -86,13 +86,13 @@ public class Month {
      */
     public static boolean isLogicalMonth(String test) {
         requireNonNull(test);
-        return STANDARD_MONTHS.contains(test);
+        return STANDARD_MONTHS.contains(test.toUpperCase());
     }
 
     private void initMonth(String month, String year) {
         requireAllNonNull(month, year);
         this.year = Integer.parseInt(year);
-        this.month = STANDARD_MONTHS.indexOf(month) + 1;
+        this.month = STANDARD_MONTHS.indexOf(month.toUpperCase()) + 1;
     }
 
     @Override

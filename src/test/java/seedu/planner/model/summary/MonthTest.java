@@ -79,4 +79,13 @@ public class MonthTest {
         assertTrue(Month.isLogicalMonth("apr")); // APR exists
         assertTrue(Month.isLogicalMonth("Apr")); // argument is non case-sensitive
     }
+
+    /**
+     * Test whether 2 valid representations of the same Month object gives same object
+     */
+    @Test
+    public void constructor_differentValidRepresentations_sameObject() {
+        assertEquals(new Month("APR-2018"), new Month("apr-2018"));
+        assertEquals(new Month("aPr-2018"), new Month("apr-2018"));
+    }
 }

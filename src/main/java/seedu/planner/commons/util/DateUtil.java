@@ -18,6 +18,9 @@ public class DateUtil {
      * This function checks whether the given day and month falls within the constraints of modern calendars
      */
     public static boolean isValidDate(int day, int month) {
+        if (month >= maxDaysInEachMonth.size()) {
+            return false;
+        }
         return day <= maxDaysInEachMonth.get(month - 1);
     }
 
