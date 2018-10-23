@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -38,7 +39,8 @@ public class DistributeCommandTest {
     }
 
     @Test
-    public void execute_distributeAcceptedByModel_distributeSuccessful() throws ParseException, CommandException {
+    public void execute_distributeBalancedAcceptedByModel_distributeSuccessful()
+            throws ParseException, CommandException {
         AddressBook stubAddressBook = getTypicalAddressBook();
         UserPrefs stubUserPrefs = new UserPrefs();
         Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
@@ -48,6 +50,48 @@ public class DistributeCommandTest {
                 commandResult.feedbackToUser);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
+
+    @Test
+    public void execute_distributeByGenderAcceptedByModel_distributeSuccessful()
+            throws ParseException, CommandException {
+        AddressBook stubAddressBook = getTypicalAddressBook();
+        UserPrefs stubUserPrefs = new UserPrefs();
+        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
+        Distribute validDistributeCommand = new DistributeBuilder().setGenderFlag("true").build();
+        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
+        assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
+                commandResult.feedbackToUser);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_distributeByNationalityAcceptedByModel_distributeSuccessful()
+            throws ParseException, CommandException {
+        AddressBook stubAddressBook = getTypicalAddressBook();
+        UserPrefs stubUserPrefs = new UserPrefs();
+        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
+        Distribute validDistributeCommand = new DistributeBuilder().setNationalityFlag("true").build();
+        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
+        assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
+                commandResult.feedbackToUser);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_distributeByGenderAndNationalityAcceptedByModel_distributeSuccessful()
+            throws ParseException, CommandException {
+        AddressBook stubAddressBook = getTypicalAddressBook();
+        UserPrefs stubUserPrefs = new UserPrefs();
+        Model modelStub = new ModelManager(stubAddressBook, stubUserPrefs);
+        Distribute validDistributeCommand = new DistributeBuilder().setNationalityFlag("true").setGenderFlag("true")
+                .build();
+        CommandResult commandResult = new DistributeCommand(validDistributeCommand).execute(modelStub, commandHistory);
+        assertEquals(String.format(DistributeCommand.MESSAGE_SUCCESS, validDistributeCommand),
+                commandResult.feedbackToUser);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+
 
     @Test
     public void execute_duplicateGroupFound_throwsCommandException() throws CommandException, ParseException {
@@ -107,5 +151,14 @@ public class DistributeCommandTest {
         assertFalse(distributeFirstCommand.equals(allDifferentCommand));
     }
 
+    @Test
+    public void toStringTest() throws ParseException {
+        Distribute validDistributeCommand = new DistributeBuilder().build();
+        String expectedMessage = "3Group Name: CS2113-T13-Sort By Gender: falseSort By Nationality: false";
+        String unexpectedMessage = "8Group Name: CS2113-T13-Sort By Gender: falseSort By Nationality: false";
+
+        Assert.assertEquals(expectedMessage, validDistributeCommand.toString());
+        Assert.assertNotEquals(unexpectedMessage, validDistributeCommand.toString());
+    }
 
 }
