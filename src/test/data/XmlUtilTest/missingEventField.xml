@@ -4,8 +4,8 @@
     <contact>Hans Muster</contact>
     <phone>9482424</phone>
     <email>hans@example</email>
-    <address>4th street</address>
-    <attendance>false</attendance>
+    <venue>4th street</venue>
     <dateTime>10/10/2010 10:10</dateTime>
     <tagged>friends</tagged>
+    <attending>Mary Kate</attending>
 </event>

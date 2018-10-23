@@ -6,26 +6,28 @@
         <contact>Alice Pauline</contact>
         <phone>94351253</phone>
         <email>alice@example.com</email>
-        <address>123, Jurong West Ave 6, #08-111</address>
+        <venue>123, Jurong West Ave 6, #08-111</venue>
         <dateTime>22/10/2018 9:30</dateTime>
         <tagged>friends</tagged>
+        <attending>Peter Parker</attending>
     </events>
     <events>
         <name>Dancing Tryouts</name>
         <contact>Benson Meier</contact>
         <phone>98765432</phone>
         <email>johnd@example.com</email>
-        <address>311, Clementi Ave 2, #02-25</address>
+        <venue>311, Clementi Ave 2, #02-25</venue>
         <dateTime >2/10/2018 19:30</dateTime>
         <tagged>owesMoney</tagged>
         <tagged>friends</tagged>
+        <attending>Mary Kate</attending>
     </events>
     <events>
         <name>Frisbee Competition</name>
         <contact>Carl Kurz</contact>
         <phone>95352563</phone>
         <email>heinz@example.com</email>
-        <address>wall street</address>
+        <venue>wall street</venue>
         <dateTime>22/1/2018 9:30</dateTime>
     </events>
     <events>
@@ -33,16 +35,17 @@
         <contact>Daniel Meier</contact>
         <phone>87652533</phone>
         <email>cornelia@example.com</email>
-        <address>10th street</address>
+        <venue>10th street</venue>
         <dateTime>22/10/2017 9:30</dateTime>
         <tagged>friends</tagged>
+        <attending>Scarlet Witch</attending>
     </events>
     <events>
         <name>Music Tryouts</name>
         <contact>Elle Meyer</contact>
         <phone>9482224</phone>
         <email>werner@example.com</email>
-        <address>michegan ave</address>
+        <venue>michegan ave</venue>
         <dateTime>12/8/2018 17:30</dateTime>
     </events>
     <events>
@@ -50,7 +53,7 @@
         <contact>Fiona Kunz</contact>
         <phone>9482427</phone>
         <email>lydia@example.com</email>
-        <address>little tokyo</address>
+        <venue>little tokyo</venue>
         <dateTime>22/10/2018 15:15</dateTime>
     </events>
     <events>
@@ -58,7 +61,7 @@
         <contact>George Best</contact>
         <phone>9482442</phone>
         <email>anna@example.com</email>
-        <address>4th street</address>
+        <venue>4th street</venue>
         <dateTime>30/10/2018 14:30</dateTime>
     </events>
 </eventmanager>

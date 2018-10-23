@@ -5,7 +5,7 @@
         <contact isPrivate="false">Hans Muster</contact>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">4th street</address>
+        <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">22/10/2018 9:30</dateTime>
     </events>
     <events>
@@ -13,7 +13,7 @@
         <contact isPrivate="false">Ruth Mueller</contact>
         <phone isPrivate="false">87249245</phone>
         <email isPrivate="false">ruth@example.com</email>
-        <address isPrivate="false">81th street</address>
+        <venue isPrivate="false">81th street</venue>
         <dateTime isPrivate="false">2/10/2018 19:30</dateTime>
     </events>
     <events>
@@ -21,7 +21,7 @@
         <contact isPrivate="false">Heinz Kurz</contact>
         <phone isPrivate="false">95352563</phone>
         <email isPrivate="false">heinz@example.com</email>
-        <address isPrivate="false">wall street</address>
+        <venue isPrivate="false">wall street</venue>
         <dateTime isPrivate="false">22/1/2018 9:30</dateTime>
     </events>
     <events>
@@ -29,7 +29,7 @@
         <contact isPrivate="false">Cornelia Meier</contact>
         <phone isPrivate="false">87652533</phone>
         <email isPrivate="false">cornelia@example.com</email>
-        <address isPrivate="false">10th street</address>
+        <venue isPrivate="false">10th street</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
     </events>
     <events>
@@ -37,7 +37,7 @@
         <contact isPrivate="false">Werner Meyer</contact>
         <phone isPrivate="false">9482224</phone>
         <email isPrivate="false">werner@example.com</email>
-        <address isPrivate="false">michegan ave</address>
+        <venue isPrivate="false">michegan ave</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
     </events>
     <events>
@@ -45,7 +45,7 @@
         <contact isPrivate="false">Lydia Kunz</contact>
         <phone isPrivate="false">9482427</phone>
         <email isPrivate="false">lydia@example.com</email>
-        <address isPrivate="false">little tokyo</address>
+        <venue isPrivate="false">little tokyo</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
     </events>
     <events>
@@ -53,7 +53,7 @@
         <contact isPrivate="false">Anna Best</contact>
         <phone isPrivate="false">9482442</phone>
         <email isPrivate="false">anna@example.com</email>
-        <address isPrivate="false">4th street</address>
+        <venue isPrivate="false">4th street</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
     </events>
     <events>
@@ -61,15 +61,15 @@
         <contact isPrivate="false">Stefan Meier</contact>
         <phone isPrivate="false">8482424</phone>
         <email isPrivate="false">stefan@example.com</email>
-        <address isPrivate="false">little india</address>
-        <dateTime isPrivate="false">22/10/2017 9:30</dateTime>l
+        <venue isPrivate="false">little india</venue>
+        <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
     </events>
     <events>
         <name>Martin Mueller</name>
         <contact isPrivate="false">Martin Mueller</contact>
         <phone isPrivate="false">8482131</phone>
         <email isPrivate="false">hans@example.com</email>
-        <address isPrivate="false">chicago ave</address>
+        <venue isPrivate="false">chicago ave</venue>
         <dateTime isPrivate="false">22/10/2017 9:30</dateTime>
     </events>
 </eventmanager>
