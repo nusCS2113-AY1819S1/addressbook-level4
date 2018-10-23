@@ -2,41 +2,50 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.COMMAND_SCHEDULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ACTIVITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.FileEncryptor;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
 import seedu.address.model.schedule.Activity;
-import seedu.address.model.schedule.Schedule;
 
 import java.util.List;
 
 public abstract class ScheduleCommand extends Command {
 
-    public static final String COMMAND_WORD = CliSyntax.COMMAND_SCHEDULE;
+    public static final String COMMAND_WORD = COMMAND_SCHEDULE;
     public static final String COMMAND_WORD_ADD = "add";
     public static final String COMMAND_WORD_DELETE = "delete";
     public static final String COMMAND_WORD_EDIT = "edit";
 
-
-    //TODO update this message
-    public static final String MESSAGE_USAGE = COMMAND_WORD + "Updates your schedule";
-
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK= "This task already exists in the schedule";
-    private final String MESSEGE_INVALID_INDEX = "Index is not valid";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": updates contents in your schedule.\n"
+            + "parameters: \"add\", \"edit\" or \"delete\"";
+    //TODO to check for duplicates
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the schedule";
+    public static final String MESSAGE_INVALID_INDEX = "Index is not valid";
+    public static final String MESSAGE_ADD = COMMAND_WORD + " " + COMMAND_WORD_ADD
+            + ": Adds a new task to your schedule.\n"
+            + "parameters: "
+            + PREFIX_DATE + "DD/MM/YYYY "
+            + PREFIX_ACTIVITY + "task";
+    public static final String MESSAGE_DELETE = COMMAND_WORD + " " + COMMAND_WORD_DELETE
+            + ": Deletes task, by index, from schedule.\n"
+            + "parameters: INDEX";
+    public static final String MESSAGE_EDIT = COMMAND_WORD + " " +  COMMAND_WORD_EDIT
+            + ": Edit task, by index, from schedule.\n"
+            + "parameters: INDEX " + PREFIX_ACTIVITY + "Task";
 
     public abstract CommandResult updateSchedule(Model model) throws CommandException;
 
     public Activity getActivityFromIndex (Model model, Index index) throws CommandException{
         List<Activity> activities = model.getActivityList();
         if (index.getZeroBased() >= activities.size()) {
-            throw new CommandException(MESSEGE_INVALID_INDEX);
+            throw new CommandException(MESSAGE_INVALID_INDEX + " " + MESSAGE_USAGE);
         }
         return activities.get(index.getZeroBased());
     }

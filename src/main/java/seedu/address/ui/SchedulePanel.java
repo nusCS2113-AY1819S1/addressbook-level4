@@ -40,15 +40,7 @@ public class SchedulePanel extends UiPart<Region> {
         int count = 1;
         String scheduleText = new String();
         for (Date date : schedule.keySet()) {
-            Calendar cal = Calendar.getInstance();
-            cal.setTime(date);
-            String dayOfWeek = new SimpleDateFormat("EE", Locale.ENGLISH).format(date);
-            int month = cal.get(Calendar.MONTH);
-            if (month == 0){
-                month = 12;
-            }
-            scheduleText += dayOfWeek + " " +cal.get(Calendar.DATE) + "/" + month
-                    + "/" + cal.get(Calendar.YEAR) + ":\n";
+            scheduleText += Activity.getDateString(date)+ ":\n";
             for (Activity activity : schedule.get(date)) {
                 scheduleText += count + ". " + activity.getActivity() + "\n";
                 count++;

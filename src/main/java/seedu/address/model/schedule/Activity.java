@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 public class Activity {
     private final Date date;
@@ -38,6 +39,17 @@ public class Activity {
         return cal.getTime();
     }
 
+    public static  String getDateString (Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        String dayOfWeek = new SimpleDateFormat("EE", Locale.ENGLISH).format(date);
+        int month = cal.get(Calendar.MONTH);
+        if (month == 0){
+            month = 12;
+        }
+        return new String(dayOfWeek + " " + cal.get(Calendar.DATE) + "/" + month
+                + "/" + cal.get(Calendar.YEAR));
+    }
     public static boolean isValidDate(String test){
 
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
