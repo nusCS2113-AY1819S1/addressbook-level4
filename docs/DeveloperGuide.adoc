@@ -438,9 +438,19 @@ In each ArrayList of the 2D ArrayList, the distributeProcess Method will create 
 to that ArrayList into the group.
 This process loops until the 2D ArrayList if fully accessed.
 
-*The process is now complete.*
+*The process is now complete with all person distributed randomly into _n_ number of groups.*
 
 ===== Aspect: Distribute Students Equally with Balanced Gender Explanation
+
+The process is similar to the Algorithm used above. However, the key difference is that I had separate all female person into a list
+and all males into a list. After separation, I distribute 1 male person to each group and does this loop until there are no males left.
+
+This process repeats for the female students.
+
+Once the groupArrayList is allocated, we will run the same Distribution Process mentioned in the Algorithm above.
+
+*The process is now complete with all person distributed randomly with balanced genders into _n_ number of groups.*
+
 ===== Aspect: Distribute Students Equally with Balanced Nationality Explanation
 ===== Aspect: Distribute Students Equally with Balanced Gender & Nationality Explanation
 // end::distribute[]
