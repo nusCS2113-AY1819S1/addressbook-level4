@@ -22,7 +22,7 @@ public class TodoCard extends UiPart<Region> {
      * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
      */
 
-    public final Todo todo_task;
+    public final Todo todoTask;
 
     @FXML
     private HBox cardPane;
@@ -35,7 +35,7 @@ public class TodoCard extends UiPart<Region> {
 
     public TodoCard(Todo todo, int displayedIndex) {
         super(FXML);
-        this.todo_task = todo;
+        this.todoTask = todo;
         id.setText(displayedIndex + ". ");
         title.setText(todo.getTitle().value);
         content.setText(todo.getContent().value);
@@ -56,6 +56,6 @@ public class TodoCard extends UiPart<Region> {
         // state check
         TodoCard card = (TodoCard) other;
         return id.getText().equals(card.id.getText())
-                && todo_task.equals(card.todo_task);
+                && todoTask.equals(card.todoTask);
     }
 }

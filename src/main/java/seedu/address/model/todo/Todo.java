@@ -24,8 +24,13 @@ public class Todo {
         this.content = content;
     }
 
-    public Title getTitle() { return title; }
-    public Content getContent() { return content; }
+    public Title getTitle() {
+        return title;
+    }
+
+    public Content getContent() {
+        return content;
+    }
 
     /**
      * Returns true if both todo tasks of the same title have content field that is the same.

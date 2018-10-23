@@ -32,7 +32,7 @@ public class TodoListPanel extends UiPart<Region> {
 
     private void setConnections(ObservableList<Todo> todoList) {
         todoListView.setItems(todoList);
-        todoListView.setCellFactory(listView -> new todoListViewCell());
+        todoListView.setCellFactory(listView -> new TodoListViewCell());
     }
 
     /**
@@ -54,7 +54,7 @@ public class TodoListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Todo} using a {@code todoCard}.
      */
-    class todoListViewCell extends ListCell<Todo> {
+    class TodoListViewCell extends ListCell<Todo> {
         @Override
         protected void updateItem(Todo todo, boolean empty) {
             super.updateItem(todo, empty);
