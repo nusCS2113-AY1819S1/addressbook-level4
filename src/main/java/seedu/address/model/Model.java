@@ -10,6 +10,7 @@ import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
@@ -194,7 +195,7 @@ public interface Model {
 
     boolean checkAuthentication(Username username, Password password) throws AuthenticatedException;
 
-    boolean checkCredentials(Username username, Password password) throws AuthenticatedException;
+    boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException;
 
     boolean hasLoggedIn();
 

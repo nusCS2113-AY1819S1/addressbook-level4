@@ -24,6 +24,7 @@ import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 import seedu.address.model.product.Product;
@@ -184,7 +185,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
+    public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
         return versionedUserDatabase.checkCredentials(username, password);
     }
 
