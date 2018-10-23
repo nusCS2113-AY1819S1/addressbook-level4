@@ -2,6 +2,7 @@ package seedu.recruit.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_AGE_RANGE;
+import static seedu.recruit.logic.parser.CliSyntax.PREFIX_COMPANY_NAME;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_EDUCATION;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_GENDER;
 import static seedu.recruit.logic.parser.CliSyntax.PREFIX_JOB;
@@ -19,6 +20,7 @@ import seedu.recruit.logic.commands.exceptions.CommandException;
 import seedu.recruit.model.Model;
 import seedu.recruit.model.candidate.Education;
 import seedu.recruit.model.candidate.Gender;
+import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
 import seedu.recruit.model.joboffer.AgeRange;
 import seedu.recruit.model.joboffer.Job;
@@ -35,15 +37,15 @@ public class EditJobDetailsCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the job offer identified "
             + "by the company name and index number used in the displayed job offer list for that specific company. "
             + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: COMPANY NAME(must exist in the Company Book) "
-            + "INDEX (must be a positive integer) "
+            + "Parameters: INDEX (must be a positive integer)"
+            + "[" + PREFIX_COMPANY_NAME + "Company Name] "
             + "[" + PREFIX_JOB + "Job Title] "
             + "[" + PREFIX_GENDER + "GENDER] "
             + "[" + PREFIX_AGE_RANGE + "AGE RANGE] "
             + "[" + PREFIX_EDUCATION + "EDUCATION] "
             + "[" + PREFIX_SALARY + "SALARY] "
-            + "Example: " + COMMAND_WORD + " KFC" + " 1 "
-            + PREFIX_JOB + "KFC "
+            + "Example: " + COMMAND_WORD +  " 1 "
+            + PREFIX_COMPANY_NAME + "KFC "
             + PREFIX_GENDER + "M "
             + PREFIX_AGE_RANGE + "21-42"
             + PREFIX_EDUCATION + "A LEVELS";
@@ -74,20 +76,24 @@ public class EditJobDetailsCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        List<JobOffer> lastShownList = model.getFilteredCompanyJobList();
+        List<JobOffer> masterJobList = model.getFilteredCompanyJobList();
+        int CompanyIndex = model.getCompanyIndexFromName(this.companyName);
+        Company CompanyToEdit = model.getCompanyFromIndex(CompanyIndex);
+        List<JobOffer> companyJobList = CompanyToEdit.getUniqueJobList().getInternalList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (index.getZeroBased() >= masterJobList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_JOB_OFFER_DISPLAYED_INDEX);
         }
 
-        JobOffer jobOfferToEdit = lastShownList.get(index.getZeroBased());
+        JobOffer jobOfferToEdit = companyJobList.get(index.getZeroBased());
         JobOffer editedJobOffer = createEditedJobOffer(jobOfferToEdit, editJobOfferDescriptor);
 
         if (!jobOfferToEdit.isSameJobOffer(editedJobOffer) && model.hasJobOffer(companyName, editedJobOffer)) {
             throw new CommandException(MESSAGE_DUPLICATE_JOB_OFFER);
         }
 
-        model.updateJobOffer(companyName, jobOfferToEdit, editedJobOffer);
+        model.updateJobOffer(jobOfferToEdit, editedJobOffer);
+        model.updateJobOfferInCompany(companyName, jobOfferToEdit, editedJobOffer);
         model.updateFilteredCompanyJobList(PREDICATE_SHOW_ALL_JOBOFFERS);
         model.commitCompanyBook();
         return new CommandResult(String.format(MESSAGE_EDIT_JOB_OFFER_SUCCESS, editedJobOffer));

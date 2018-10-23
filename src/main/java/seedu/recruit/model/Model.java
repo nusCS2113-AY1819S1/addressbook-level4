@@ -184,11 +184,19 @@ public interface Model {
 
     /**
      * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
-     * {@code target} must exist in the company book{@code companyName}.
+     * {@code target} must exist in the company book.
+     * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
+     * company book.
+     */
+    void updateJobOffer(JobOffer target, JobOffer editedJobOffer);
+
+    /**
+     * Replaces the given job offer {@code target} in the list with {@code editedJobOffer}.
+     * {@code target} must exist in the company's job list {@code companyName}.
      * The job offer identity of {@code editedJobOffer} must not be the same as another existing job offer in the
      * same company{@code companyName}.
      */
-    void updateJobOffer(CompanyName companyName, JobOffer target, JobOffer editedJobOffer);
+    void updateJobOfferInCompany(CompanyName companyName, JobOffer target, JobOffer editedJobOffer);
 
     /** Returns an unmodifiable view of the filtered job lists of all companies */
     ObservableList<JobOffer> getFilteredCompanyJobList();
