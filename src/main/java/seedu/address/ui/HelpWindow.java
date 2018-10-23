@@ -40,7 +40,7 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Shows the help window.
+     * Shows the help loginWindow.
      * @throws IllegalStateException
      * <ul>
      *     <li>
@@ -63,14 +63,14 @@ public class HelpWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the help window is currently being shown.
+     * Returns true if the help loginWindow is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Focuses on the help window.
+     * Focuses on the help loginWindow.
      */
     public void focus() {
         getRoot().requestFocus();
