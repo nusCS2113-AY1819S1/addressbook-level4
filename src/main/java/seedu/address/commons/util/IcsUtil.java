@@ -16,7 +16,6 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Optional;
@@ -41,11 +40,7 @@ import seedu.address.model.person.TimeTable;
  *
  * Usage:
  * 1) Mainly used to read and write the TimeTable(s) of FreeTime into the disk for permanent storage.
- * 2) Also used during import and export commands (ie, read and write)
- *
- * NOTE: Only support ICS to-and-from TimeTable Objects(!!).
- * TODO: allow conversion to objects other than timetable
- * TODO: create a 'serialisable' class to serialise(?) the timetable objects to ics file formats
+ * 2) Also used during import and export commands.
  */
 public class IcsUtil {
     public static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
@@ -54,7 +49,7 @@ public class IcsUtil {
     private static IcsUtil instance;
 
     private IcsUtil(){
-        //any things to initialise?
+
     }
 
     public static IcsUtil getInstance() {
@@ -88,7 +83,7 @@ public class IcsUtil {
     }
 
     /**
-     * Converts icalendar to TimeTable
+     * Converts {@code ICalendar} to {@code TimeTable}
      * Returns {@code Optional.empty()} object if the file is not found.
      * Missing or corrupted or incompatible entries in the .ics file will silently fail, for now.
 
@@ -114,7 +109,7 @@ public class IcsUtil {
             String timeStartStr = (dateStart == null) ? null : timeFormat.format(dateStart.getValue());
 
             DateEnd dateEnd = event.getDateEnd();
-            //assume event ends on same day.
+            //we assume event ends on same day.
             String timeEndStr = (dateEnd == null) ? null : timeFormat.format(dateEnd.getValue());
 
             Summary summary = event.getSummary();
@@ -166,7 +161,6 @@ public class IcsUtil {
         } catch (IOException e) {
             throw new IOException (e);
         }
-        //TODO implement above functions.
     }
 
     /**
@@ -186,38 +180,33 @@ public class IcsUtil {
     }
 
     /**
-     * Converts TimeSlot to a VEvent that has a {@code Recurrence} of weekly.
-     * note that the exported data will only stretch this current week, for now.
-     *
-     * @throws FileNotFoundException    Thrown if the file is missing.
-     * @throws IOException  Thrown if there is an error during converting the data
-     *                                  into .ics and writing to the file.
+     * Converts {@code TimeSlot} to a {@code VEvent} that has a {@code Recurrence} of {@code Frequency.WEEKLY}.
+     * Note that the exported data will only stretch for 1 week, the current week. (as of now)
      */
     private VEvent toWeeklyVEvent(TimeSlot timeSlot, int count) {
-        Date date = new Date(); //date now
-        LocalTime localTime = LocalTime.now(); //localtime now
-
+        //extract data from {@code TimeSlot}
         LocalTime startTime = timeSlot.getStartTime();
         LocalTime endTime = timeSlot.getEndTime();
         DayOfWeek dayOfWeek = timeSlot.getDayOfWeek();
         String label = timeSlot.getLabel();
         String abbreviation = timeSlot.getAbbreviationFromDayOfWeek();
 
+        //write data to {@code VEvent}
         VEvent vEvent = new VEvent();
 
-        //set the recurrence rule
+        //write data to {@code VEvent}: set the recurrence rule
         Recurrence recurrence =
                 new Recurrence.Builder(Frequency.WEEKLY).count(14).byDay(valueOfAbbr(abbreviation)).build();
         RecurrenceRule recurrenceRule = new RecurrenceRule(recurrence);
         vEvent.setRecurrenceRule(recurrenceRule);
 
-        //set the DateStart
+        //write data to {@code VEvent}: set the DateStart
         vEvent.setDateStart(getPreviousDateOfDay(startTime, dayOfWeek));
 
-        //set the DateEnd
+        //write data to {@code VEvent}: set the DateEnd
         vEvent.setDateEnd(getPreviousDateOfDay(endTime, dayOfWeek));
 
-        //set summary (name of module)
+        //write data to {@code VEvent}: set summary (Module Name)
         vEvent.setSummary(label);
 
         return vEvent;
@@ -225,7 +214,7 @@ public class IcsUtil {
 
     /**
      * Get the Date of the previous dayOfWeek.
-     * ie; if dayOfWeek is monday, then the return last monday's Date.
+     * ie: if dayOfWeek is monday, then the return last monday's Date.
      */
     private Date getPreviousDateOfDay(LocalTime startTime, DayOfWeek dayOfWeek) {
         LocalDate previousDay =
@@ -240,8 +229,6 @@ public class IcsUtil {
      * Utility function to convert {@code LocalDateTime} to {@code Date}
      */
     private Date localDateTimeToDate(LocalDateTime localDateTime) {
-        //Date in = new Date();
-        //LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
         Date out = Date.from(localDateTime.atZone(ZoneId.of(DEFAULT_ZONE_ID)).toInstant());
         return out;
     }
@@ -257,7 +244,6 @@ public class IcsUtil {
     /**
      * Writes ICalendar object to file specified
      * @throws IOException if any error occurs during write.
-     *
      */
     private void writeICalendarToFile(ICalendar iCalendar, Path filePath) throws IOException {
         File file = filePath.toFile();
@@ -272,9 +258,9 @@ public class IcsUtil {
      * Reads {@code ICalendar} object from file specified
      * Will return an empty ICalendar if the .ics file is empty.
      *
-     * NOTE: this function will silently fail if there are more than 1 VCalendar's in a .ics file.
-     * other Vcalendar will not be read
-     * Thankfully, NUSMODS export only has 1 VCalendar in an .ics file.
+     * This function will silently fail if there are more than 1 {@code ICalendar} in a .ics file
+     * the other {@code ICalendar} are simply not read!
+     * Thankfully, NUSMODS export only has 1 VCalendar in an .ics file, so all is good.
      *
      * @throws IOException if any error occurs during read.
      */
@@ -288,71 +274,12 @@ public class IcsUtil {
         return iCalendar;
     }
 
-
     /**
-     * Attempts to read the specified file and return its contents as a simple String.
-     * @throws IOException if the file cannot be read for any reason.
-     */
-    private Optional<String> getStringFromPath(Path filePath) throws IOException {
-        String fileString = "";
-
-        try {
-            fileString = FileUtil.readFromFile(filePath);
-        } catch (IOException e) {
-            logger.warning("Error reading from ICS file " + filePath + ": " + e);
-            throw new IOException(e);
-        }
-        return Optional.of(fileString);
-    }
-
-    /**
-     * Parses the list of VEvents into a single timetable object
-     */
-    private TimeTable vEventListToTimeTable(ArrayList<VEvent> vEventList) throws IOException {
-        TimeTable timeTable = new TimeTable();
-        DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-        DateFormat timeFormat = new SimpleDateFormat("HHmmss");
-
-        //this for-loop iterates through the list of events.
-        for (VEvent event : vEventList) {
-            DateStart dateStart = event.getDateStart();
-
-            String dateStartStr = (dateStart == null) ? null : dateFormat.format(dateStart.getValue());
-            String timeStartStr = (dateStart == null) ? null : timeFormat.format(dateStart.getValue());
-
-            DateEnd dateEnd = event.getDateEnd();
-            //assume event ends on same day.
-            String timeEndStr = (dateEnd == null) ? null : timeFormat.format(dateEnd.getValue());
-
-            Summary summary = event.getSummary();
-            String summaryStr = (summary == null) ? null : summary.getValue();
-            //TODO: add this parameter to timetable object.
-
-            RecurrenceRule recurrenceRule = event.getRecurrenceRule();
-            String recurrenceRuleStr = (recurrenceRule == null) ? null : "hasrecurrance";
-            if (recurrenceRule == null) {
-                continue; //TODO: this is currently hacky. pls make proper.
-            }
-
-            //process the data we got from the chunk
-            LocalTime timeSlotStartTime = timeStringToLocalTime(timeStartStr);
-            LocalTime timeSlotEndTime = timeStringToLocalTime(timeEndStr);
-            DayOfWeek timeSlotDay = dateStringToDayOfWeek(dateStartStr);
-
-            System.out.println(timeSlotStartTime + " to " + timeSlotEndTime + " on " + timeSlotDay + ": " + summaryStr);
-
-            //after getting all the data of this event, we add it to timetable.
-            TimeSlot timeSlot = new TimeSlot(timeSlotDay, timeSlotStartTime, timeSlotEndTime);
-            timeTable.addTimeSlot(timeSlot);
-        }
-        return timeTable;
-    }
-
-    /**
-     * Converts the ics-format dateString into DayOfWeek object.
+     * Converts the ics-formatted dateString into DayOfWeek object.
      * @param dateString    is in format yyyyMMdd
      */
     private DayOfWeek dateStringToDayOfWeek(String dateString) {
+        //TODO: defensive coding
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate date = LocalDate.parse(dateString, fmt);
         DayOfWeek day = date.getDayOfWeek();
@@ -365,8 +292,8 @@ public class IcsUtil {
      * @param timeString    is in format HHmmss
      */
     private LocalTime timeStringToLocalTime(String timeString) {
+        //TODO: defensive coding
         int timeInt = Integer.parseInt(timeString);
-        //timeInt += 80000; //need to add 8 hours to the ics-formatted version.
         String formattedTime = String.format("%06d", timeInt);
 
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("HHmmss");
