@@ -59,17 +59,12 @@ public class ScriptCommand extends Command {
         requireNonNull(model);
         String multCommandError;
         AddressBookParser scriptParser = new AddressBookParser();
-
-        if (!FileUtil.isFileExists(path)) {
-            return new CommandResult(String.format(MESSAGE_FILE_MISSING, textFileName));
-        }
-
         try {
             List<String> commandArguments = FileUtil.readEachLineFromFile(path);
             commandArguments.replaceAll(s -> commandType + SPACE + s);
             multCommandError = executeMultipleCommand(scriptParser, commandArguments, model, history);
         } catch (IOException ioe) {
-            return new CommandResult(String.format(MESSAGE_UNABLE_TO_READ_FILE, textFileName));
+            return new CommandResult(String.format(MESSAGE_FILE_MISSING, textFileName));
         }
 
         if (!multCommandError.isEmpty()) {

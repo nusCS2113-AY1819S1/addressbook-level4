@@ -86,6 +86,17 @@ public class ScriptCommandTest {
     }
 
     @Test
+    public void execute_fileMissing_throwsParseException() {
+        String expectedMessage = String.format(ScriptCommand.MESSAGE_ADD_ERROR,
+                invalidLinesNumbers, validAddTextFile + ScriptCommand.TEXT_EXTENSION);
+
+        ScriptCommand scriptCommand = new ScriptCommand(new TextFile(validAddTextFile), new CommandType(deleteCommand));
+
+        CommandResult commandResult = scriptCommand.execute(model, commandHistory);
+        assertEquals(commandResult.feedbackToUser, expectedMessage);
+    }
+
+    @Test
     public void equals() {
         ScriptCommand validScriptCommand = new ScriptCommand(
                 new TextFile(validAddTextFile), new CommandType(addCommand));
