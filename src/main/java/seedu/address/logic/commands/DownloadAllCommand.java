@@ -12,7 +12,8 @@ public class DownloadAllCommand extends Command {
 
     public static final String COMMAND_WORD = "downloadAll";
     public static final String MESSAGE_USAGE = "downloadAll pass/(password) user/(username) mod/(moduleCode)";
-    public static final String CHROMEDRIVER_PATH = "/chromedriver.exe";
+    public static final String CHROMEDRIVER_PATH_WINDOWS = "/chromeDrivers/windows/chromedriver.exe";
+    public static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver.exe";
     public static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
     public static final String IVLE_TITLE = "IVLE";
     public static final String IVLE_ADDRESS = "https://ivle.nus.edu.sg";
@@ -25,7 +26,7 @@ public class DownloadAllCommand extends Command {
     public static final String MODULE_NOT_FOUND_MESSAGE = "MODULE CODE NOT FOUND";
     public static final String CHECKBOX_XPATH_VALUE = "//input[@type='checkbox']";
     public static final String IVLE_DOWNLOAD_PAGE_BUTTON_ID = "ctl00_ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_ContentPlaceHolder1_btnDownloadSel";
-
+    public static final int MODULE_CHAR_SIZE = 6;
 
     private String username;
     private String password;
@@ -54,7 +55,7 @@ public class DownloadAllCommand extends Command {
             return WRONG_PASS_USER_MESSAGE;
         }
 
-        if(checkModExists(driver)){
+        if(checkModuleExists(driver)){
            return moduleCode+" FILE DOWNLOADED AT :"+downloadFilePath;
         }
         else {
@@ -65,7 +66,7 @@ public class DownloadAllCommand extends Command {
 
     private WebDriver initilizeWebDriver(){
         downloadFilePath = new File("").getAbsolutePath();
-        System.setProperty("webdriver.chrome.driver",downloadFilePath+CHROMEDRIVER_PATH);
+        System.setProperty("webdriver.chrome.driver",downloadFilePath+ CHROMEDRIVER_PATH_WINDOWS);
         downloadFilePath += DOWNLOAD_RELATIVE_PATH;
 
         HashMap<String,Object> chromePrefs =  new HashMap<String,Object>();
@@ -93,7 +94,7 @@ public class DownloadAllCommand extends Command {
         return true;
     }
 
-    private boolean checkModExists (WebDriver driver){
+    private boolean checkModuleExists(WebDriver driver){
         driver.get(IVLE_DOWNLOAD_PAGE_ADDRESS);
         Select dropDown= new Select(driver.findElement(By.id(IVLE_MODULE_LIST_FIELD_ID)));
         List<WebElement> itemsModules=dropDown.getOptions();
@@ -110,7 +111,7 @@ public class DownloadAllCommand extends Command {
     }
     private boolean checkModMatches(String input){
         try {
-            for(int i=0;i<6;i++){
+            for(int i=0;i<MODULE_CHAR_SIZE;i++){
                 if(input.charAt(i)!=moduleCode.charAt(i)) {
                     return false;
                 }
