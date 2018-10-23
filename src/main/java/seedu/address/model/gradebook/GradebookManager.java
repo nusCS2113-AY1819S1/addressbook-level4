@@ -33,7 +33,7 @@ public class GradebookManager {
     }
 
     /**
-     * Converts the Note array list and invokes the StorageController to save the current note list to file.
+     * Converts the Gradebook array list and invokes the StorageController to save the current gradebook list to file.
      */
     public void saveGradebookList() {
         ArrayList<XmlAdaptedGradebook> xmlAdaptedGradebooks =
