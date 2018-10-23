@@ -4,7 +4,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.*;
 
-import seedu.address.model.enrolledClass.EnrolledClass;
+import seedu.address.model.enrolledModule.EnrolledModule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -21,24 +21,24 @@ public class Person {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
-    private final Map<String, EnrolledClass> enrolledClasses = new TreeMap<>();
+    private final Map<String, EnrolledModule> enrolledModules = new TreeMap<>();
     private final Map<String, List<TimeSlots>> timeslots;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address,
-                  Set<Tag> tags, Map<String, EnrolledClass> enrolledClasses,Map<String ,List<TimeSlots> > timeslots) {
+                  Set<Tag> tags, Map<String, EnrolledModule> enrolledModules, Map<String ,List<TimeSlots> > timeslots) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.tags.addAll(tags);
-        EnrolledClass tempClass;
-        for(String tempClassName: enrolledClasses.keySet()){
-            tempClass = enrolledClasses.get(tempClassName);
-            this.enrolledClasses.put(tempClassName, tempClass);
+        EnrolledModule tempModule;
+        for(String tempModuleName: enrolledModules.keySet()){
+            tempModule = enrolledModules.get(tempModuleName);
+            this.enrolledModules.put(tempModuleName, tempModule);
         }
 
         if (timeslots!=null) {
@@ -75,10 +75,10 @@ public class Person {
     }
 
     /**
-     * Returns an immutable enrolled class map, which throws {@code UnsupportedOperationException}
+     * Returns an immutable enrolled module map, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public Map<String, EnrolledClass> getEnrolledClasses() { return Collections.unmodifiableMap(enrolledClasses); }
+    public Map<String, EnrolledModule> getEnrolledModules() { return Collections.unmodifiableMap(enrolledModules); }
 
     public Map<String, List<TimeSlots>> getTimeSlots() {
         return timeslots;
@@ -117,13 +117,13 @@ public class Person {
                 && otherPerson.getEmail().equals(getEmail())
                 && otherPerson.getAddress().equals(getAddress())
                 && otherPerson.getTags().equals(getTags())
-                && otherPerson.getEnrolledClasses().equals(getEnrolledClasses());
+                && otherPerson.getEnrolledModules().equals(getEnrolledModules());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, enrolledClasses, timeslots);
+        return Objects.hash(name, phone, email, address, tags, enrolledModules, timeslots);
     }
 
     @Override
@@ -138,8 +138,8 @@ public class Person {
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
-        builder.append(" Enrolled Classes: ");
-        for(String temp: getEnrolledClasses().keySet()){
+        builder.append(" Enrolled Modules: ");
+        for(String temp: getEnrolledModules().keySet()){
             temp = temp + " ";
             builder.append(temp);
         }

@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.ChangeTimeSlotCommand.MESSAGE_USAGE;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ChangeTimeSlotCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.enrolledModule.EnrolledModule;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -70,9 +71,36 @@ public class ChangeTimeSlotCommandParser implements Parser<ChangeTimeSlotCommand
                 && !time.equalsIgnoreCase("6pm")
                 && !time.equalsIgnoreCase("7pm")) {
             return true;
+          }
+          else {
+            return false;
+          }
+      }
+
+    /**
+     * Parses {@code Collection<String> enrolledClasses} into a {@code Map<String, EnrolledModule>} if {@code tags}
+     * is non-empty.
+     * If {@code enrolledClasses} contain only one element which is an empty string, it will be parsed into a
+     * {@code Map<String, EnrolledModule>} containing zero enrolledClasses.
+     */
+    private Optional<Map<String, EnrolledModule>> parseEnrolledClassesForEdit(Collection<String> enrolledClasses)
+            throws ParseException {
+
+        assert enrolledClasses != null;
+
+        if (enrolledClasses.isEmpty()) {
+            return Optional.empty();
+        }
+
+        Collection<String> enrolledClassesMap;
+        if (enrolledClasses.size() == 1 && enrolledClasses.contains("")){
+            enrolledClassesMap = Collections.emptySet();
         } else {
             return false;
         }
+
+        return Optional.of(ParserUtil.parseEnrolledModules(enrolledClassesMap));
+
     }
 }
 

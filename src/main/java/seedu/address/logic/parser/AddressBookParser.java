@@ -81,6 +81,12 @@ public class AddressBookParser {
             case ChangeTimeSlotCommand.COMMAND_WORD:
                 return new ChangeTimeSlotCommandParser().parse(arguments);
 
+            case DownloadAllCommand.COMMAND_WORD:
+                return new DownloadAllCommandParser().parse(arguments);
+
+            case DownloadSelectCommand.COMMAND_WORD:
+                return new DownloadSelectCommandParser().parse(arguments);
+
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

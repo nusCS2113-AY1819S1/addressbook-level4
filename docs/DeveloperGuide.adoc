@@ -217,7 +217,7 @@ As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person`
  +
 image:ModelClassBetterOopDiagram.png[width="800"] +
  +
-Similarly, we can store a `EnrolledClass` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `EnrolledClass` object per unique `EnrolledClass`, instead of each `Person` needing their own `EnrolledClass` object. An example of how such a model may look like is given below. +
+Similarly, we can store a `EnrolledModules` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `EnrolledModules` object per unique `EnrolledModules`, instead of each `Person` needing their own `EnrolledModules` object. An example of how such a model may look like is given below. +
  +
 image:ModelClassEvenBetterOopDiagram.png[width="800"]
 
@@ -1082,7 +1082,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |user |delete all downloaded notes | free up some space on my local drive
 
-|`* * *` |user |view my enrolled classes | store my notes according to the classes I am enrolled in
+|`* * *` |user |view my enrolled modules | store my notes according to the modules I am enrolled in
 
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
@@ -1156,19 +1156,19 @@ A contact detail that is not meant to be shared with others
 [appendix]
 == Product Survey
 
-*Product Name*
+*Product Name*: NUSMods
 
-Author: ...
+Author: ?
 
 Pros:
 
-* ...
-* ...
+* Students are currently able to type in their module code, and the relevant timeslots pertaining to all the different types of lessons (e.g. lectures, tutorials, lab sessions, etc) will be displayed.
+* Students do not have to go to IVLE/CORS to retrieve the timing of the various classes for a module.
 
 Cons:
 
-* ...
-* ...
+* Students have to manually select their relevant lecture/tutorial/lab sessions by clicking via several steps.
+* Students' timetable on NUSMods is not as easily transferrable across different devices.
 
 [appendix]
 == Instructions for Manual Testing

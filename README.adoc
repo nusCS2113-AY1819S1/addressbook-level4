@@ -2,7 +2,6 @@
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2113-AY1819S1-W12-2/main[image:https://travis-ci.org/CS2113-AY1819S1-W12-2/main.svg?branch=master[Build Status]]
-https://ci.appveyor.com/project/damithc/addressbook-level4[image:https://ci.appveyor.com/api/projects/status/3boko2x2vr5cc3w2?svg=true[Build status]]
 https://coveralls.io/github/CS2113-AY1819S1-W12-2/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-W12-2/main/badge.svg?branch=master[Coverage Status]]
 
 ifdef::env-github[]
@@ -26,6 +25,7 @@ endif::[]
 
 == Acknowledgements
 
+* This application is built on the sample application https://github.com/nusCS2113-AY1819S1/addressbook-level4[Address Book (Level 4)]
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]

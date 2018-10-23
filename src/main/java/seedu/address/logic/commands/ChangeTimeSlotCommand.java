@@ -84,8 +84,9 @@ public class ChangeTimeSlotCommand extends Command {
                 }
             }
         }
-        Person newPerson = new Person(personToChange.getName(), personToChange.getPhone(), personToChange.getEmail(),
-                personToChange.getAddress(), personToChange.getTags(), personToChange.getEnrolledClasses(),
+
+        Person newPerson= new Person(personToChange.getName(),personToChange.getPhone(),personToChange.getEmail(),
+                personToChange.getAddress(),personToChange.getTags(),personToChange.getEnrolledModules(),
                 timeSlots);
 
         if (!personToChange.isSamePerson(newPerson) && model.hasPerson(newPerson)) {

@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -8,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.enrolledClass.EnrolledClass;
+import seedu.address.model.enrolledModule.EnrolledModule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -84,7 +83,7 @@ public class XmlAdaptedPerson {
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
         XmlAdaptedEnrolledClass tempXmlClass;
-        for(String nameTemp : source.getEnrolledClasses().keySet()){
+        for(String nameTemp : source.getEnrolledModules().keySet()){
             tempXmlClass = new XmlAdaptedEnrolledClass(nameTemp);
             enrolled.add(tempXmlClass);
         }
@@ -116,9 +115,9 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<EnrolledClass> personEnrolledClasses = new ArrayList<>();
+        final List<EnrolledModule> personEnrolledModules = new ArrayList<>();
         for (XmlAdaptedEnrolledClass enrolledClass : enrolled) {
-            personEnrolledClasses.add(enrolledClass.toModelType());
+            personEnrolledModules.add(enrolledClass.toModelType());
         }
 
         final Map<String ,List<TimeSlots> >personTimeSlots = new HashMap<>();
@@ -165,9 +164,9 @@ public class XmlAdaptedPerson {
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 
-        final Map<String, EnrolledClass> modelEnrolledClasses = new TreeMap<>();
-        for(EnrolledClass tempClass: personEnrolledClasses){
-            modelEnrolledClasses.put(tempClass.enrolledClassName, tempClass);
+        final Map<String, EnrolledModule> modelEnrolledClasses = new TreeMap<>();
+        for(EnrolledModule tempClass: personEnrolledModules){
+            modelEnrolledClasses.put(tempClass.enrolledModuleName, tempClass);
         }
         final Map<String ,List<TimeSlots> >modelTimeSlots = new  HashMap<>(personTimeSlots);
 
