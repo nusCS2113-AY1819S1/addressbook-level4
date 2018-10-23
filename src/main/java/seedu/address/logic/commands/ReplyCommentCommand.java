@@ -115,7 +115,6 @@ public class ReplyCommentCommand extends Command {
         editCommentDescriptor.setPhone(phone2);
         //ends here
         Event editedEvent = EditCommand.createEditedPerson(eventToEdit, editCommentDescriptor);
-
         model.updateEvent(eventToEdit, editedEvent);
         model.commitEventManager();
         System.out.println(eventToEdit.getPhone());

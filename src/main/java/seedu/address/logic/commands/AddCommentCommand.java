@@ -63,25 +63,23 @@ public class AddCommentCommand extends Command {
         requireNonNull(model);
         List<Event> filteredEventList = model.getFilteredEventList();
 
-
         if (index.getZeroBased() >= filteredEventList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         String test;
-        String test2 = "C:/Users/Gerald/Desktop/Github/addressbook-level4/src/main/"
-                + "java/seedu/address/logic/comments/dummy.html";
-
+        String test2 = "src/main/java/seedu/address/logic/comments/dummy.html";
+        File file = new File(test2);
+        test2 = file.getAbsolutePath();
+        test2 = test2.replace(File.separator, "/");
         try {
             test = Jsoup.parse(new File(test2), null).toString();
-            System.out.println(test);
         } catch (Exception e) {
             throw new CommandException(Messages.MESSAGE_INVALID_EVENT_DISPLAYED_INDEX);
         }
 
         AddComment comments = new AddComment(test);
         test = comments.addComment(getComment());
-
         File savingFile = new File(test2);
         FileOutputStream fop = null;
         try {
@@ -98,7 +96,6 @@ public class AddCommentCommand extends Command {
         }
 
         EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
-
         Event eventToEdit = filteredEventList.get(index.getZeroBased());
         Event editedEvent = EditCommand.createEditedPerson(eventToEdit, editCommentDescriptor);
 
