@@ -36,7 +36,7 @@ public class StorageManagerTest {
     private StorageManager storageManager;
 
     @Before
-    public void setUp() {
+    public void setup() {
         XmlAddressBookStorage addressBookStorage = new XmlAddressBookStorage(getTempFilePath("ab"));
         XmlEventStorage eventStorage = new XmlEventStorage(getTempFilePath("el"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
