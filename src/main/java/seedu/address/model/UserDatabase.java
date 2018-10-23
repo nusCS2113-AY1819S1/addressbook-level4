@@ -13,6 +13,7 @@ import seedu.address.model.login.UniqueUsersList;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
@@ -103,7 +104,7 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @param password
      * @throws AuthenticatedException is the user is already logged in.
      */
-    public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
+    public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
         User toCheck = new User(username, password, Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX
                 + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for login");
@@ -128,14 +129,14 @@ public class UserDatabase implements ReadOnlyUserDatabase {
      * @return
      * @throws AuthenticatedException
      */
-    public boolean checkCredentials(Username username, Password password) throws AuthenticatedException {
+    public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
         User toCheck = new User(username, password,
                 Paths.get(AB_FILEPATH_FOLDER, AB_FILEPATH_PREFIX + username + AB_FILEPATH_POSTFIX));
         logger.fine("Attempting to check credentials for permissions.");
         if (!hasLoggedIn) {
             return users.contains(toCheck);
         } else {
-            throw new AuthenticatedException();
+            throw new AuthenticationFailedException();
         }
     }
 
