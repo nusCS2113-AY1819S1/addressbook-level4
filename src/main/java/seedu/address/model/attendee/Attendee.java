@@ -3,15 +3,16 @@ package seedu.address.model.attendee;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.user.Username;
+
 /**
  * Represents an Attendee in the event manager.
  * Guarantees: immutable; attendee name is valid as declared in {@link #isValidAttendeeName(String)}
  */
 public class Attendee {
 
-    public static final String MESSAGE_ATTENDEE_CONSTRAINTS =
-            "Attendee names should only contain alphanumeric characters and spaces";
-    public static final String ATTENDEE_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String MESSAGE_ATTENDEE_CONSTRAINTS = Username.MESSAGE_USERNAME_CONSTRAINTS;
+    public static final String ATTENDEE_VALIDATION_REGEX = Username.USERNAME_VALIDATION_REGEX;
 
     public final String attendeeName;
 
