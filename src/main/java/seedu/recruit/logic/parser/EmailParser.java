@@ -1,11 +1,15 @@
 package seedu.recruit.logic.parser;
 
 import static seedu.recruit.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_ADD_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_BACK_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_NEXT_COMMAND;
+import static seedu.recruit.commons.util.EmailUtil.EMAIL_SEND_COMMAND;
 
 import seedu.recruit.commons.util.EmailUtil;
 import seedu.recruit.logic.LogicState;
 import seedu.recruit.logic.commands.Command;
-import seedu.recruit.logic.commands.ListCommand;
+import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectContentsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSelectRecipientsCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailSendCommand;
@@ -31,11 +35,14 @@ public class EmailParser {
         if (state.nextCommand.equals(EmailSelectRecipientsCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case ListCandidateCommand.COMMAND_WORD:
+                return new ListCandidateCommand();
 
-            case "next":
-                return new EmailSelectRecipientsCommand();
+            case EMAIL_NEXT_COMMAND:
+                return new EmailSelectRecipientsCommand(commandWord);
+
+            case EMAIL_ADD_COMMAND:
+                return new EmailSelectRecipientsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -47,11 +54,14 @@ public class EmailParser {
                 && emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case EMAIL_NEXT_COMMAND:
+                return new EmailSelectContentsCommand(commandWord);
 
-            case "next":
-                return new EmailSelectContentsCommand();
+            case EMAIL_ADD_COMMAND:
+                return new EmailSelectContentsCommand(commandWord);
+
+            case EMAIL_BACK_COMMAND:
+                return new EmailSelectRecipientsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -60,11 +70,17 @@ public class EmailParser {
                 && !emailUtil.isAreRecipientsCandidates()) {
             switch (commandWord) {
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+            case ListCandidateCommand.COMMAND_WORD:
+                return new ListCandidateCommand();
 
-            case "next":
-                return new EmailSelectContentsCommand();
+            case EMAIL_NEXT_COMMAND:
+                return new EmailSelectContentsCommand(commandWord);
+
+            case EMAIL_ADD_COMMAND:
+                return new EmailSelectContentsCommand(commandWord);
+
+            case EMAIL_BACK_COMMAND:
+                return new EmailSelectRecipientsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
@@ -74,8 +90,11 @@ public class EmailParser {
         } else if (state.nextCommand.equals(EmailSendCommand.COMMAND_LOGIC_STATE)) {
             switch (commandWord) {
 
-            case "send":
+            case EMAIL_SEND_COMMAND:
                 return new EmailSendCommand();
+
+            case EMAIL_BACK_COMMAND:
+                return new EmailSelectContentsCommand(commandWord);
 
             default:
                 throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
