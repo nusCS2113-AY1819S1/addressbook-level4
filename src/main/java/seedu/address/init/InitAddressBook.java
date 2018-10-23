@@ -1,10 +1,13 @@
 package seedu.address.init;
 
-import com.google.common.eventbus.Subscribe;
 import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Logger;
+
+import com.google.common.eventbus.Subscribe;
+
 import javafx.fxml.FXMLLoader;
+
 import seedu.address.MainApp;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.CurrentUser;
@@ -31,6 +34,9 @@ import seedu.address.storage.Storage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
+/**
+ * Contain item that has to be init after login
+ */
 public class InitAddressBook {
     public static final Version VERSION = new Version(0, 6, 0, true);
     public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
@@ -47,13 +53,17 @@ public class InitAddressBook {
     private LoginInfoManager loginInfoList;
 
 
-    public InitAddressBook(Config config, Storage storage, UserPrefs userPrefs, LoginInfoManager loginInfoList){
+    public InitAddressBook(Config config, Storage storage, UserPrefs userPrefs, LoginInfoManager loginInfoList) {
         this.storage = storage;
         this.userPrefs = userPrefs;
         this.loginInfoList = loginInfoList;
         this.config = config;
         EventsCenter.getInstance().registerHandler(this);
     }
+
+    /**
+     * init Drink I/O after login
+     */
     public void initAfterLogin() {
         model = initModelManager(storage, userPrefs);
         logic = new LogicManager (model, loginInfoList);
@@ -64,12 +74,12 @@ public class InitAddressBook {
     }
 
     @Subscribe
-    public void handleinitInventoryListEvent(InitInventoryListEvent event){
+    public void handleinitInventoryListEvent(InitInventoryListEvent event) {
         initAfterLogin ();
     }
 
     @Subscribe
-    public void handleChangeMainStageEvent(ChangeMainStageEvent event){
+    public void handleChangeMainStageEvent(ChangeMainStageEvent event) {
         ui.start(event.mainStage);
     }
 
@@ -94,17 +104,17 @@ public class InitAddressBook {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
-        if (CurrentUser.getAuthenticationLevel ().equals ("admin")){
+        if (CurrentUser.getAuthenticationLevel ().equals ("admin")) {
             return new AdminModelManager (initialData , userPrefs);
         }
-        if (CurrentUser.getAuthenticationLevel ().equals ("STOCK_TAKER")){
+        if (CurrentUser.getAuthenticationLevel ().equals ("STOCK_TAKER")) {
             return new StockTakerModelManager (initialData , userPrefs);
         }
 
-        if (CurrentUser.getAuthenticationLevel ().equals ("ACCOUNTANT")){
+        if (CurrentUser.getAuthenticationLevel ().equals ("ACCOUNTANT")) {
             return new AccountantModelManager (initialData, userPrefs);
         }
-        if (CurrentUser.getAuthenticationLevel ().equals ("MANAGER")){
+        if (CurrentUser.getAuthenticationLevel ().equals ("MANAGER")) {
             return new ManagerModelManager (initialData, userPrefs);
         }
         return new ModelManager (initialData, userPrefs);

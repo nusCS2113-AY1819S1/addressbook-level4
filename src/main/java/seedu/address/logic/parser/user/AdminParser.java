@@ -57,54 +57,54 @@ public class AdminParser {
 
         switch (commandWord) {
 
-            case AddItemCommand.COMMAND_WORD:
-                return new AddItemCommandParser ().parse (arguments);
+        case AddItemCommand.COMMAND_WORD:
+            return new AddItemCommandParser ().parse (arguments);
 
 
-            case ChangePasswordCommand.COMMAND_WORD:
-                return new ChangePasswordCommandParser ().parse(arguments);
+        case ChangePasswordCommand.COMMAND_WORD:
+            return new ChangePasswordCommandParser ().parse(arguments);
 
-            case CreateAccountCommand.COMMAND_WORD:
-                return new CreateAccountCommandParser ().parse (arguments);
+        case CreateAccountCommand.COMMAND_WORD:
+            return new CreateAccountCommandParser ().parse (arguments);
 
-            case EditCommand.COMMAND_WORD:
-                return new EditCommandParser ().parse(arguments);
+        case EditCommand.COMMAND_WORD:
+            return new EditCommandParser ().parse(arguments);
 
-            case SelectCommand.COMMAND_WORD:
-                return new SelectCommandParser ().parse(arguments);
+        case SelectCommand.COMMAND_WORD:
+            return new SelectCommandParser ().parse(arguments);
 
-            case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommandParser ().parse(arguments);
+        case DeleteCommand.COMMAND_WORD:
+            return new DeleteCommandParser ().parse(arguments);
 
-            case ClearCommand.COMMAND_WORD:
-                return new ClearCommand();
+        case ClearCommand.COMMAND_WORD:
+            return new ClearCommand();
 
-            case FindCommand.COMMAND_WORD:
-                return new FindCommandParser ().parse(arguments);
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser ().parse(arguments);
 
-            case ListCommand.COMMAND_WORD:
-                return new ListCommand();
+        case ListCommand.COMMAND_WORD:
+            return new ListCommand();
 
-            case HistoryCommand.COMMAND_WORD:
-                return new HistoryCommand();
+        case HistoryCommand.COMMAND_WORD:
+            return new HistoryCommand();
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            case UndoCommand.COMMAND_WORD:
-                return new UndoCommand();
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
 
-            case RedoCommand.COMMAND_WORD:
-                return new RedoCommand();
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
 
-            case LogoutCommand.COMMAND_WORD:
-                return new LogoutCommand ();
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand ();
 
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 

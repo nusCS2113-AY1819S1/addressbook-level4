@@ -1,6 +1,7 @@
 package seedu.address.controller;
 
 import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -40,8 +41,12 @@ public class LoginController {
     private boolean isPasswordGoingToEnter = false;
     private final Logger logger = LogsCenter.getLogger(LoginController.class);
 
+    /**
+     * Get the input from the login command box
+     * @param key key entered
+     */
     @FXML
-    public void handleInputFromCommandBox(KeyEvent key){
+    public void handleInputFromCommandBox(KeyEvent key) {
         //        commandInput = commandBox.getText ();
         //        int caretPosition = commandBox.getCaretPosition();
         //        setUserNameAndPassword();
@@ -53,25 +58,25 @@ public class LoginController {
             verifyLoginInfo ();
         }
     }
-    private void setUserNameAndPassword(){
+    private void setUserNameAndPassword() {
         String[] splited = commandInput.split("\\s");
         int count = 0;
-        while( count < splited.length){
-            if (count ==0){
+        while (count < splited.length) {
+            if (count == 0) {
                 username = splited[count];
-            }else if(count ==1){
+            } else if (count == 1) {
                 password = splited[count];
-            }else if(count >1){
+            } else if (count > 1) {
                 loginError.setText ("Wrong format for username and password");
             }
             count++;
         }
     }
-    private String setPasswordToStar(){
+    private String setPasswordToStar() {
 
         String staredCommand = username + " ";
         int passwordLength = password.length();
-        while (passwordLength > 0 ){
+        while (passwordLength > 0) {
             staredCommand += "*";
             passwordLength--;
         }
@@ -137,7 +142,7 @@ public class LoginController {
     /**
      * Set back the ui into clean state
      */
-    private void clearLoginInput(){
+    private void clearLoginInput() {
         usernameField.setText ("");
         passwordField.setText ("");
         commandBox.setText ("");

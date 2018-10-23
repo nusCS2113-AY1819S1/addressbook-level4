@@ -50,9 +50,9 @@ public class AddItemCommand extends Command {
         //
         //        model.addPerson(toAdd);
         //        model.commitAddressBook();
-        if (model instanceof AdminModel){
-            System.out.println (( (AdminModelManager) model).isValid ());
-        }else{
+        if (model instanceof AdminModel) {
+            System.out.println (((AdminModelManager) model).isValid ());
+        } else {
             System.out.println ("not rights");
         }
         return new CommandResult(String.format(MESSAGE_SUCCESS, drinkName, defaultSellingPrice));

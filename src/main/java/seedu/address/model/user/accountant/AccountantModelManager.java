@@ -4,7 +4,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 
-public class AccountantModelManager extends ModelManager implements AccountantModel{
+/**
+ * Represents the in-memory model of the accountant command
+ */
+public class AccountantModelManager extends ModelManager implements AccountantModel {
     public AccountantModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super(addressBook, userPrefs);
     }

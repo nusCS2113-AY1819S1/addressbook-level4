@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -24,7 +23,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
-import seedu.address.commons.events.ui.StopUiEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
@@ -259,7 +257,11 @@ public class MainApp extends Application {
         Platform.exit();
         System.exit(0);
     }
-    private void closeUiWindow(){
+
+    /**
+     * Close Ui window and load LoginInfo and UserPref into storage
+     */
+    private void closeUiWindow() {
         logger.info("============================ [ Stopping DRINK I/O ] =============================");
         //EventsCenter.getInstance().post(new StopUiEvent ());
         try {

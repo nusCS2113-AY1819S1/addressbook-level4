@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
-import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.ui.StopUiEvent;
@@ -121,7 +120,7 @@ public class UiManager extends ComponentManager implements Ui {
                 event.exception);
     }
     @Subscribe
-    private void handleStopUiEvent(StopUiEvent event){
+    private void handleStopUiEvent(StopUiEvent event) {
         System.out.println ("at handleStopUiEvent");
         stop ();
     }

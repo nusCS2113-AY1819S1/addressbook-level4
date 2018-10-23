@@ -4,7 +4,10 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 
-public class AdminModelManager extends ModelManager implements AdminModel{
+/**
+ * This is the API model for Admin command
+ */
+public class AdminModelManager extends ModelManager implements AdminModel {
     public AdminModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super(addressBook, userPrefs);
     }

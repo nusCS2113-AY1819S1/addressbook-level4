@@ -40,18 +40,17 @@ public class AccountantParser {
 
         switch (commandWord) {
 
-            case ChangePasswordCommand.COMMAND_WORD:
-                return new ChangePasswordCommandParser ().parse(arguments);
+        case ChangePasswordCommand.COMMAND_WORD:
+            return new ChangePasswordCommandParser ().parse(arguments);
 
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
 
-            case ExitCommand.COMMAND_WORD:
-                return new ExitCommand();
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
-            case HelpCommand.COMMAND_WORD:
-                return new HelpCommand();
-
-            default:
-                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+        default:
+            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
