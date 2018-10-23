@@ -3,14 +3,14 @@
     <!-- Valid Product -->
     <products>
         <name>Hans Muster</name>
-        <phone isPrivate="false">9482424</phone>
+        <serialNumber isPrivate="false">9482424</serialNumber>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
     </products>
-    <!-- Product with invalid phone field -->
+    <!-- Product with invalid serialNumber field -->
     <products>
         <name>Hans Muster</name>
-        <phone isPrivate="false">948asdf2424</phone>
+        <serialNumber isPrivate="false">948asdf2424</serialNumber>
         <email isPrivate="false">hans@example.com</email>
         <address isPrivate="false">4th street</address>
     </products>
