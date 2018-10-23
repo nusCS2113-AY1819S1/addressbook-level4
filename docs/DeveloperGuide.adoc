@@ -469,21 +469,63 @@ image::EmailCommandExceedSubjectLength.png[width="700"]
 Although it is possible for subject field to contain more than 78 characters, the system
 sets a limit to prevent subject title folding.
 
-
-
 ==== Sequence Diagrams
+
+image::EmailCommandSequenceDiagram.png[width="800"]
 
 ==== Design Considerations
 
 ===== Aspect: How to send email to a single person
+Initially, the idea was to identify the recipient by their full name, but after awhile, we found
+that using the pre-existing `Index` class to be a better way to select our recipient.
+
+To send an email to a single person, we simply identify the `Index` of the person we want to send
+to from any list (full listing or filtered list) and enter it into the sendmail command.
+
 
 ===== Aspect: How to send email to multiple person
+Since we are able to send email to a single person using their index, we can identify more recipients
+using their associated Index in the listing.
+
+To send an email to multiple persons, we simply identify all their `Index` and enter them into the
+sendmail command separated by a comma. We then add a parser to identify that this is an email command
+for multiple persons and add them all into the recipient list.
 
 ===== Aspect: How to send email to a group of persons
 
-===== Aspect: How to allow sending through different mail servers
+Similar idea for sending email to single or multiple person(s). Instead of identifying `Index` of persons,
+now we simply identify an entire list of person using their `Group` name, add a parser to identify that
+it is an email command for sending to a group and then add all of the persons into the recipient list.
+
+===== Aspect: How to allow email login from different mail servers
+
+To support more mail servers (initially only Google mail was supported through hardcoding), we maintain a list
+of mail servers under `Domain`. To add a new mail server support, we need primarily three information:
+
+* The SMTP Hostname
+
+image::EmailCommandDomainHost.png[width="400"]
+
+* The SMTP Port (465 or 587)
+
+image::EmailCommandDomainPort.png[width="300"]
+
+* Is it TLS or SSL (if SSL, we need to add trust into `Properties`)
+
+image::EmailCommandDomainTrust.png[width="450"]
+
+When the user enter their email credentials using `login` command, we will be able to identify which mail
+server their email uses by looking at the domain (@example.com). We then set `Properties` with the relevant
+domain information.
+
+
 
 ===== Aspect: How to send email with attachments
+
+To send emails with attachment, we consider allowing the user to specify a path to the attachment or we can
+ fix a specific folder where the attachments has to be in to be included in the email.
+
+We then make use of MimeMessage provided by `JavaMail` API and create a Multipart message.
 // end::sendmail[]
 
 // tag::dataencryption[]
