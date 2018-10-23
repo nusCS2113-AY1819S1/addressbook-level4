@@ -35,7 +35,7 @@ public class ExportCommand extends Command {
             + PREFIX_FILELOCATION + "C:\\export_folder\\nusmods_calendar.ics";
 
     public static final String MESSAGE_SUCCESS = "Exported timetable to %1$s.";
-    public static final String MESSAGE_EMPTY = "Timetable is empty. The exported file will be empty if I export it, so I just don't bother exporting it in the first place. :) I'm lazy.";
+    public static final String MESSAGE_EMPTY = "Timetable is empty. Why would you want to export an empty timetable?";
     public static final String MESSAGE_IO_ERROR =
             "Failed to write the timetable to the path specified.";
     private final Index index;
