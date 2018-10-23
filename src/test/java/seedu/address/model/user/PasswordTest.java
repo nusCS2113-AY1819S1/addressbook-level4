@@ -21,7 +21,7 @@ public class PasswordTest {
     }
 
     @Test
-    public void isValidUsername() {
+    public void isValidPassword() {
         // null password
         Assert.assertThrows(NullPointerException.class, () -> Password.isValidPassword(null));
 
