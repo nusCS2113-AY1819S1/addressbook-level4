@@ -11,7 +11,7 @@ import java.util.TreeMap;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.enrolledClass.EnrolledClass;
+import seedu.address.model.enrolledModule.EnrolledModule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -126,34 +126,34 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String enrolledClass} into a {@code EnrolledClass}.
+     * Parses a {@code String enrolledModule} into a {@code EnrolledModule}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code enrolledClass} is invalid.
+     * @throws ParseException if the given {@code enrolledModule} is invalid.
      */
-    public static EnrolledClass parseEnrolledClass(String enrolledClass) throws ParseException {
-        requireNonNull(enrolledClass);
-        String trimmedEnrolledClass = enrolledClass.trim();
-        if (!EnrolledClass.isValidEnRolledClassName(trimmedEnrolledClass)) {
-            throw new ParseException(EnrolledClass.MESSAGE_ENROLLED_CLASS_CONSTRAINTS);
+    public static EnrolledModule parseEnrolledModule(String enrolledModule) throws ParseException {
+        requireNonNull(enrolledModule);
+        String trimmedEnrolledModule = enrolledModule.trim();
+        if (!EnrolledModule.isValidEnRolledModuleName(trimmedEnrolledModule)) {
+            throw new ParseException(EnrolledModule.MESSAGE_ENROLLED_MODULE_CONSTRAINTS);
         }
-        return new EnrolledClass(trimmedEnrolledClass);
+        return new EnrolledModule(trimmedEnrolledModule);
     }
 
     /**
-     * Parses {@code Collection<String> enrolledClasses} into a {@code Map<String, EnrolledClass>}.
+     * Parses {@code Collection<String> enrolledModules} into a {@code Map<String, EnrolledModule>}.
      */
-    public static Map<String, EnrolledClass> parseEnrolledClasses(Collection<String> enrolledClasses)
+    public static Map<String, EnrolledModule> parseEnrolledModules(Collection<String> enrolledModules)
             throws ParseException {
 
-        requireNonNull(enrolledClasses);
-        final Map<String, EnrolledClass> enrolledClassMap = new TreeMap<>();
-        EnrolledClass tempEnrolledClass;
-        for (String enrolledClassName : enrolledClasses) {
-            tempEnrolledClass= parseEnrolledClass(enrolledClassName);
-            enrolledClassMap.put(tempEnrolledClass.enrolledClassName, tempEnrolledClass);
+        requireNonNull(enrolledModules);
+        final Map<String, EnrolledModule> enrolledModuleMap = new TreeMap<>();
+        EnrolledModule tempEnrolledModule;
+        for (String enrolledModuleName : enrolledModules) {
+            tempEnrolledModule = parseEnrolledModule(enrolledModuleName);
+            enrolledModuleMap.put(tempEnrolledModule.enrolledModuleName, tempEnrolledModule);
         }
-        return enrolledClassMap;
+        return enrolledModuleMap;
     }
 
 }

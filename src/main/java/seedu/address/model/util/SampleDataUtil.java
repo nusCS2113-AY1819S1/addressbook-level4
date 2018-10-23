@@ -1,12 +1,11 @@
 package seedu.address.model.util;
 
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.enrolledClass.EnrolledClass;
+import seedu.address.model.enrolledModule.EnrolledModule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -68,12 +67,12 @@ public class SampleDataUtil {
     /**
      * Returns a enrolled class map containing the list of strings given.
      */
-    public static Map<String, EnrolledClass> getEnrolledClassMap(String... strings) {
-        Map<String, EnrolledClass> enrolledClassMap = new TreeMap<>();
-        EnrolledClass tempEnrolledClass;
+    public static Map<String, EnrolledModule> getEnrolledClassMap(String... strings) {
+        Map<String, EnrolledModule> enrolledClassMap = new TreeMap<>();
+        EnrolledModule tempEnrolledModule;
         for(String enrolledClassName : strings){
-            tempEnrolledClass = new EnrolledClass(enrolledClassName);
-            enrolledClassMap.put(tempEnrolledClass.enrolledClassName, tempEnrolledClass);
+            tempEnrolledModule = new EnrolledModule(enrolledClassName);
+            enrolledClassMap.put(tempEnrolledModule.enrolledModuleName, tempEnrolledModule);
         }
         return enrolledClassMap;
     }

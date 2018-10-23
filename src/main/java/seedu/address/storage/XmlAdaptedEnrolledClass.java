@@ -3,11 +3,10 @@ package seedu.address.storage;
 import javax.xml.bind.annotation.XmlValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.enrolledClass.EnrolledClass;
-import seedu.address.model.tag.Tag;
+import seedu.address.model.enrolledModule.EnrolledModule;
 
 /**
- * JAXB-friendly adapted version of the EnrolledClass.
+ * JAXB-friendly adapted version of the EnrolledModule.
  */
 public class XmlAdaptedEnrolledClass {
 
@@ -21,31 +20,31 @@ public class XmlAdaptedEnrolledClass {
     public XmlAdaptedEnrolledClass() {}
 
     /**
-     * Constructs a {@code XmlAdaptedEnrolledClass} with the given {@code enrolledClassName}.
+     * Constructs a {@code XmlAdaptedEnrolledClass} with the given {@code enrolledModuleName}.
      */
     public XmlAdaptedEnrolledClass(String enrolledClassName) {
         this.enrolledClassName = enrolledClassName;
     }
 
     /**
-     * Converts a given EnrolledClass into this class for JAXB use.
+     * Converts a given EnrolledModule into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created
      */
-    public XmlAdaptedEnrolledClass(EnrolledClass source) {
-        enrolledClassName = source.enrolledClassName;
+    public XmlAdaptedEnrolledClass(EnrolledModule source) {
+        enrolledClassName = source.enrolledModuleName;
     }
 
     /**
-     * Converts this jaxb-friendly adapted EnrolledClass object into the model's EnrolledClass object.
+     * Converts this jaxb-friendly adapted EnrolledModule object into the model's EnrolledModule object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public EnrolledClass toModelType() throws IllegalValueException {
-        if (!EnrolledClass.isValidEnRolledClassName(enrolledClassName)) {
-            throw new IllegalValueException(EnrolledClass.MESSAGE_ENROLLED_CLASS_CONSTRAINTS);
+    public EnrolledModule toModelType() throws IllegalValueException {
+        if (!EnrolledModule.isValidEnRolledModuleName(enrolledClassName)) {
+            throw new IllegalValueException(EnrolledModule.MESSAGE_ENROLLED_MODULE_CONSTRAINTS);
         }
-        return new EnrolledClass(enrolledClassName);
+        return new EnrolledModule(enrolledClassName);
     }
 
     @Override
