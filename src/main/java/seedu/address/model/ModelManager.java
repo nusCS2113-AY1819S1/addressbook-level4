@@ -60,6 +60,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new EventManagerChangedEvent(versionedEManager));
     }
 
+    //=========== Authentication Accessors  =============================================================
     @Override
     public boolean authenticate() {
         return userAccount.authenticate();
@@ -93,6 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
         userAccount.clearUser();
     }
 
+    //=========== Event List Accessors and Modifiers =============================================================
     @Override
     public boolean hasEvent(Event event) {
         requireNonNull(event);

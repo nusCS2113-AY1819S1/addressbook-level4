@@ -1,6 +1,6 @@
 package seedu.address.ui;
 
-import static seedu.address.model.DateTimeManager.PAGE_DATE_FORMAT;
+import static seedu.address.model.DateTimeUtil.PAGE_DATE_FORMAT;
 
 import java.net.MalformedURLException;
 import java.net.URL;
