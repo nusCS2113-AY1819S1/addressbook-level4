@@ -5,18 +5,17 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.expenditureinfo.Category;
-import seedu.address.model.expenditureinfo.Date;
-import seedu.address.model.expenditureinfo.Expenditure;
-import seedu.address.model.expenditureinfo.Money;
+import seedu.address.model.expenditureinfo.*;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Expenditure.
  */
 public class XmlAdaptedExpenditure {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Expenditure's %s field is missing!";
 
+    @XmlElement(required = true)
+    private String description;
     @XmlElement(required = true)
     private String date;
     @XmlElement(required = true)
@@ -34,7 +33,8 @@ public class XmlAdaptedExpenditure {
     /**
      * Constructs an {@code XmlAdaptedExpenditure} with the given person details.
      */
-    public XmlAdaptedExpenditure(String date, String money, String category) {
+    public XmlAdaptedExpenditure(String description, String date, String money, String category) {
+        this.description = description;
         this.date = date;
         this.money = money;
         this.category = category;
@@ -46,6 +46,7 @@ public class XmlAdaptedExpenditure {
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
     public XmlAdaptedExpenditure(Expenditure source) {
+        description = source.getDescription().descriptionName;
         date = source.getDate().addingDate;
         money = source.getMoney().addingMoney;
         category = source.getCategory().categoryName;
@@ -57,6 +58,14 @@ public class XmlAdaptedExpenditure {
      * @throws IllegalValueException if there were any data constraints violated in the adapted expenditure
      */
     public Expenditure toModelType() throws IllegalValueException {
+
+        if (description == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Description.class.getSimpleName()));
+        }
+        if (!Description.isValidDescription(description)) {
+            throw new IllegalValueException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        }
+        final Description modelDescription = new Description(description);
 
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
@@ -83,7 +92,7 @@ public class XmlAdaptedExpenditure {
         }
         final Category modelCategory = new Category(category);
 
-        return new Expenditure(modelDate, modelMoney, modelCategory);
+        return new Expenditure(modelDescription, modelDate, modelMoney, modelCategory);
     }
 
     @Override
@@ -97,7 +106,8 @@ public class XmlAdaptedExpenditure {
         }
 
         XmlAdaptedExpenditure otherExpenditure = (XmlAdaptedExpenditure) other;
-        return Objects.equals(date, otherExpenditure.date)
+        return Objects.equals(description, otherExpenditure.description)
+                &&Objects.equals(date, otherExpenditure.date)
                 && Objects.equals(money, otherExpenditure.money)
                 && Objects.equals(category, otherExpenditure.category);
     }

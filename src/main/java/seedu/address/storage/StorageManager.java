@@ -104,7 +104,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Override
     public Optional<ReadOnlyExpenditureTracker> readExpenditureTracker(Path expenditureFilePath)
             throws DataConversionException, IOException {
-        logger.fine("Attempting to read data from file: " + expenditureFilePath);
+        logger.fine("Attempting to read ET data from file: " + expenditureFilePath);
         return expenditureTrackerStorage.readExpenditureTracker(expenditureFilePath);
     }
 

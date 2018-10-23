@@ -9,7 +9,7 @@ import seedu.address.model.expenditureinfo.Expenditure;
 public interface ReadOnlyExpenditureTracker {
 
     /**
-     * Returns an unmodifiable view of the persons list.
+     * Returns an unmodifiable view of the expenditures list.
      * This list will not contain any duplicate persons.
      */
     ObservableList<Expenditure> getExpenditureList();

@@ -17,6 +17,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
 
     /* Expenditure prefix definition */
+    public static final Prefix PREFIX_DESCRIPTION = new Prefix("e/");
     public static final Prefix PREFIX_MONEY = new Prefix("m/");
     public static final Prefix PREFIX_CATEGORY = new Prefix("c/");
 

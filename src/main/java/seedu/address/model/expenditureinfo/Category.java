@@ -10,13 +10,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Category {
 
     public static final String MESSAGE_CATEGORY_CONSTRAINTS =
-            "Category can take any values, and it should not be blank";
+            "Category can only take few values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String CATEGORY_VALIDATION_REGEX = "[^\\s].*";
+    //public static final String CATEGORY_VALIDATION_REGEX = "[^\\s].*";
 
     public final String categoryName;
 
@@ -35,7 +35,23 @@ public class Category {
      * Returns true if a given string is a valid category.
      */
     public static boolean isValidCategory(String test) {
-        return test.matches(CATEGORY_VALIDATION_REGEX);
+        return test.equals("Food")
+                || test.equals("Drink")
+                || test.equals("Clothing")
+                || test.equals("Electronics")
+                || test.equals("DailyNecessities")
+                || test.equals("Sports")
+                || test.equals("Communications")
+                || test.equals("Travels")
+                || test.equals("Study")
+                || test.equals("Office")
+                || test.equals("Pets")
+                || test.equals("Gifts")
+                || test.equals("Entertainment")
+                || test.equals("Traffic")
+                || test.equals("Shopping")
+                || test.equals("Beauty")
+                || test.equals("Furniture");
     }
 
 
