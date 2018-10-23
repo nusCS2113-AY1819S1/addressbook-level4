@@ -14,7 +14,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2113-AY1819S1-T12-1/main/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2113T-T12-1`      Since: `Aug 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -246,7 +246,8 @@ This section describes some noteworthy details on how certain features are imple
 The authentication mechanism is facilitated by the `Command` class and the `UserAccount` class.
 It stores the user information, which includes username and password, using a JSON file.
 
-A new method is added in the `Model` interface to check whether a user account exists in the JSON file.
+New methods are added in the `Model` interface to check whether a user account exists in the JSON file, and to create new user accounts in the JSON file.
+Additional methods are also added to check the login and admin status of the user.
 
 Additionally, a `JsonUserStorage` class has been created to handle the reading, parsing and writing of the JSON file.
 
@@ -254,25 +255,24 @@ Given below is an example usage scenario and how authentication behaves at each 
 
 Step 1. The user launches the application for the first time. The `JsonUserStorage` class will create a default JSON file in `data/users.json` that stores the basic `admin` account information.
 
-Step 2. The user executes the command `login u/USERNAME p/PASSWORD`. This will trigger the method `userExists(user)` in the `ModelManager` class, which is linked to `UserAccount`.
+Step 2. The user has the option to create a new account using the command `signup u/USERNAME p/PASSWORD`. This will trigger the method `createUser(user)` in the `Model Manager` class, which is linked to `UserAccount`.
 
-Step 3. `UserAccount` will prompt `JsonUserStorage` to read the JSON file and return to it the JSONObject parsed from the file.
+Step 3. The user executes the command `login u/USERNAME p/PASSWORD`. This will trigger the method `userExists(user)` in the `ModelManager` class.
 
-Step 4. `UserAccount` will then compare the logged username and password with the ones stored in the JSON file. If the comparisons return true, the `userExists` method will return true.
+Step 4. `UserAccount` will prompt `JsonUserStorage` to read the JSON file and return to it the JSONObject parsed from the file.
 
-Step 5. The `currentUser` in the `Command` class will then be set and the login flag will be set to true. If the user is an admin, the admin flag will be set to true as well.
+Step 5. `UserAccount` will then compare the logged username and password with the ones stored in the JSON file. If the comparisons return true, the `userExists` method will return true.
 
-Step 6. After authentication, the user can now start using the application.
+Step 6. The `currentUser` in the `Command` class will then be set and the login flag will be set to true. If the user is an admin, the admin flag will be set to true as well.
 
-Step 7. The user can choose to log out of the application as well with the `logout` command. This command sets the login flag to false and clears `currentUser`.
+Step 7. After authentication, the user can now start using the application.
+
+Step 8. The user can choose to log out of the application as well with the `logout` command. This command sets the login flag to false and clears `currentUser`.
 
 [NOTE]
 If an authentication fails, i.e. credentials are wrong or do not exist in the JSON file, the `login` command will throw a `CommandException`.
 
 ==== Future Improvements
-===== Adding of the `signup u/USERNAME p/PASSWORD` command.
-* Will allow users to create new user accounts.
-
 ===== Making `JsonUserStorage` more OCP-compliant
 * As of now, `JsonUserStorage` does not abide to the Open-Closed Principle.
 * In the future, `Storage` will implement `JsonUserStorage`.

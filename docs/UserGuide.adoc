@@ -56,13 +56,13 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Signing up for an account : `signup`
 
 User: Creates a *user* account +
-Format: `signup n/USERdetails p/PASSWORD c/CONFIRM-PASSWORD` +
+Format: `signup n/USERdetails p/PASSWORD +
 Examples:
 
-* `signup u/gerald p/password12345 +
-Creates account with the username gerald
-* `signup u/james p/drowssap12345 +
-Creates account with the username james
+* `signup u/Gerald Chua p/password12345 +
+Creates account with the username Gerald Chua
+* `signup u/James Yaputra p/drowssap12345 +
+Creates account with the username James Yaputra
 
 === Logging into an account : `login`
 
@@ -70,10 +70,10 @@ User: Logs in to account +
 Format: `login u/USERNAME p/PASSWORD` +
 Examples:
 
-* `login n/gerald p/password12345` +
-Logs in gerald +
-* `login u/james p/drowssap12345` +
-Logs in james
+* `login n/Gerald Chua p/password12345` +
+Logs in Gerald Chua +
+* `login u/James Yaputra p/drowssap12345` +
+Logs in James Yaputra
 
 === Logging out of an account : `logout`
 
@@ -81,10 +81,10 @@ User: Logs out of an account +
 Format: `logout` +
 Examples:
 
-* `login n/gerald p/password12345` +
-Logs in gerald +
+* `login n/Gerald Chua p/password12345` +
+Logs in Gerald Chua +
 * `logout` +
-Logs out from gerald
+Logs out from Gerald Chua
 // end::authentication[]
 
 === Viewing help : `help`
