@@ -26,7 +26,7 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.exceptions.InvalidTimeFormatException;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.ClosedShopDayException;
@@ -175,7 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
+    public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
         boolean result = versionedUserDatabase.checkLoginCredentials(username, password);
         if (hasLoggedIn() && result) {
             reloadAddressBook(username);

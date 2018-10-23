@@ -12,7 +12,7 @@ import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
 /**
- * Created by Amirul Maricar on 04/10/2018
+ *  Changes registered user password
  */
 public class ChangeUserPasswordCommand extends Command {
 
@@ -20,7 +20,7 @@ public class ChangeUserPasswordCommand extends Command {
 
     public static final String MESSAGE_USAGE = "Changes the user password."
             + "with the parameters: u/USERNAME p/PASSWORD newp/NEWPASSWORD"
-            + "\nEXAMPLE: change-pw u/inventarie p/123456 newp/543210";
+            + "\nEXAMPLE: change-pw u/inventarie p/123 newp/000";
 
     public static final String MESSAGE_SUCCESS = "Password updated for %1$s";
     public static final String MESSAGE_UPDATE_FAILURE = "Password update failed. Username or password is incorrect.";
@@ -57,7 +57,7 @@ public class ChangeUserPasswordCommand extends Command {
             }
         } catch (AuthenticatedException e) {
             throw new CommandException(MESSAGE_NOT_LOGGED_OUT);
-        } catch (UserNotFoundException pnfe) {
+        } catch (UserNotFoundException e) {
             throw new CommandException(MESSAGE_UPDATE_FAILURE);
         }
     }

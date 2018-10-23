@@ -148,9 +148,8 @@ public class UserDatabase implements ReadOnlyUserDatabase {
 
     /**
      * Adds a user to the User Database.
-     * @throws DuplicateUserException if an equivalent user already exists.
      */
-    public void addUser(User user) throws DuplicateUserException {
+    public void addUser(User user) {
         users.add(user);
     }
 

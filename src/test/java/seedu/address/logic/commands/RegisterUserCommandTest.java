@@ -14,6 +14,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.distributor.Distributor;
@@ -27,27 +28,51 @@ import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
-public class LogoutCommandTest {
+public class RegisterUserCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
     @Test
-    public void execute_loginAcceptedByModel_logoutSuccessful() {
-        LogoutCommandTest.ModelStubAcceptingLogout modelStub = new LogoutCommandTest.ModelStubAcceptingLogout();
-        CommandResult commandResult = getLogoutCommand(modelStub).execute(modelStub, new CommandHistory());
+    public void execute_createUserAcceptedByModel_createSuccessful() throws Exception {
+        RegisterUserCommandTest.ModelStubAcceptingRegisterUser modelStub =
+                new RegisterUserCommandTest.ModelStubAcceptingRegisterUser();
 
-        assertEquals(LogoutCommand.MESSAGE_LOGOUT_SUCCESS, commandResult.feedbackToUser);
+        User validUser = registerValidUser();
+
+        CommandResult commandResult =
+                getRegisterUserCommandForRegisterUserAttempt(validUser, modelStub)
+                        .execute(modelStub, new CommandHistory());
+
+        assertEquals(String.format(RegisterUserCommand.MESSAGE_SUCCESS, validUser.getUsername().toString()),
+                commandResult.feedbackToUser);
+    }
+
+
+    @Test
+    public void execute_duplicateUser_throwsCommandException() throws Exception {
+        RegisterUserCommandTest.ModelStubThrowingDuplicateUserException modelStub =
+                new RegisterUserCommandTest.ModelStubThrowingDuplicateUserException();
+
+        User validUser = registerValidUser();
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(RegisterUserCommand.MESSAGE_DUPLICATE_USER);
+
+        getRegisterUserCommandForRegisterUserAttempt(validUser, modelStub)
+                .execute(modelStub, new CommandHistory());
     }
 
     /**
-     * Generates a new AddCommand with the details of the given person.
+     * Generates a new CreateUserCommand with the details of the given person.
      */
-    private LogoutCommand getLogoutCommand(Model model) {
-        LogoutCommand command = new LogoutCommand();
+    private RegisterUserCommand getRegisterUserCommandForRegisterUserAttempt(User user, Model model) throws Exception {
+
+        RegisterUserCommand command = new RegisterUserCommand(user);
         command.execute(model, new CommandHistory());
         return command;
     }
+
 
     /**
      * A default model stub that have all of the methods failing.
@@ -250,28 +275,31 @@ public class LogoutCommandTest {
     }
 
     /**
-     * A Model stub that always accepts the login attempt.
+     * A Model stub that always accepts the registration attempt.
      */
-    private class ModelStubAcceptingLogout extends ModelStub {
-
-        private boolean loginStatus = false;
-
-        @Override
-        public boolean checkAuthentication(Username username, Password password) {
-            requireNonNull(username);
-            requireNonNull(password);
-            setLoginStatus(true);
-            return true;
-        }
+    private class ModelStubAcceptingRegisterUser extends RegisterUserCommandTest.ModelStub {
+        final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
-        public void setLoginStatus(boolean status) {
-            this.loginStatus = true;
+        public void addUser(User user) throws DuplicateUserException {
+            requireNonNull(user);
+            usersAdded.add(user);
         }
 
+    }
+
+    /**
+     * A Model stub that always throw a DuplicateUserException when trying to login.
+     */
+    private class ModelStubThrowingDuplicateUserException extends RegisterUserCommandTest.ModelStub {
         @Override
-        public boolean hasLoggedIn() {
-            return this.loginStatus;
+        public void addUser(User person) throws DuplicateUserException {
+            throw new DuplicateUserException();
         }
+
+    }
+
+    private User registerValidUser() {
+        return new User(new Username("John"), new Password("pass"));
     }
 }

@@ -3,7 +3,7 @@
 
     <products>
         <name>Alice Pauline</name>
-        <phone>94351253</phone>
+        <serialNumber>94351253</serialNumber>
         <email>alice@example.com</email>
         <address>123, Jurong West Ave 6, #08-111</address>
         <tagged>friends</tagged>
@@ -12,7 +12,7 @@
     <!-- Product with same identity as Alice Pauline -->
     <products>
         <name>Alice Pauline</name>
-        <phone>94351253</phone>
+        <serialNumber>94351253</serialNumber>
         <email>pauline@example.com</email>
         <address>4th street</address>
     </products>

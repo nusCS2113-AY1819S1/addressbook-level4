@@ -25,7 +25,7 @@ import seedu.address.model.login.Username;
 import seedu.address.model.login.exceptions.AuthenticatedException;
 import seedu.address.model.login.exceptions.DuplicateUserException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Product;
 import seedu.address.model.timeidentifiedclass.shopday.Reminder;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
@@ -36,7 +36,7 @@ public class LoginCommandTest {
 
     @Test
     public void execute_loginAcceptedByModel_authenticationSuccess() throws Exception {
-        ModelStubAcceptLogin modelStub = new ModelStubAcceptLogin();
+        ModelStubAcceptingLogin modelStub = new ModelStubAcceptingLogin();
         LoginAttempt loginAttempt = new LoginAttempt("John", "pass");
 
         CommandResult commandResult = getLoginCommandForLoginAttempt(loginAttempt.getUsername(),
@@ -48,7 +48,7 @@ public class LoginCommandTest {
 
     @Test
     public void execute_loginAcceptedByModel_authenticationFail() throws Exception {
-        ModelStubAcceptLogin modelStub = new ModelStubAcceptLogin();
+        ModelStubAcceptingLogin modelStub = new ModelStubAcceptingLogin();
         LoginAttempt failedLoginAttempt = new LoginAttempt("John", "pass");
 
         CommandResult commandResult = getLoginCommandForLoginAttempt(failedLoginAttempt.getUsername(),
@@ -70,7 +70,7 @@ public class LoginCommandTest {
     }
 
     /**
-     * Generates a new AddCommand with the details of the given person.
+     * Generates a new AddCommand with the details of the given product.
      */
     private LoginCommand getLoginCommandForLoginAttempt(Username username, Password password, Model model)
             throws CommandException {
@@ -115,7 +115,7 @@ public class LoginCommandTest {
         }
 
         @Override
-        public boolean checkLoginCredentials(Username username, Password password) throws AuthenticatedException {
+        public boolean checkAuthentication(Username username, Password password) throws AuthenticatedException {
             fail("This method should not be called.");
             return false;
         }
@@ -283,12 +283,12 @@ public class LoginCommandTest {
     /**
      * A Model stub that always accepts the login attempt.
      */
-    private class ModelStubAcceptLogin extends ModelStub {
+    private class ModelStubAcceptingLogin extends ModelStub {
 
         private boolean loginStatus = false;
 
         @Override
-        public boolean checkLoginCredentials(Username username, Password password) {
+        public boolean checkAuthentication(Username username, Password password) {
             requireNonNull(username);
             requireNonNull(password);
             setLoginStatus(true);
@@ -311,7 +311,7 @@ public class LoginCommandTest {
      */
     private class ModelStubThrowingAuthenticatedException extends ModelStub {
         @Override
-        public boolean checkLoginCredentials(Username username, Password password)
+        public boolean checkAuthentication(Username username, Password password)
                 throws AuthenticatedException {
             throw new AuthenticatedException();
         }

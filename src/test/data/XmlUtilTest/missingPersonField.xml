@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!-- Product with missing name field -->
 <product>
-    <phone>9482424</phone>
+    <serialNumber>9482424</serialNumber>
     <email>hans@example</email>
     <address>4th street</address>
     <tagged>friends</tagged>

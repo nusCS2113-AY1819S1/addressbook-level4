@@ -6,10 +6,10 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.distributor.DistributorName;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Product;
+import seedu.address.model.product.Address;
+import seedu.address.model.product.Name;
+import seedu.address.model.product.Product;
+import seedu.address.model.product.SerialNumber;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -33,7 +33,7 @@ public class EditPersonDescriptorBuilder {
     public EditPersonDescriptorBuilder(Product product) {
         descriptor = new EditPersonDescriptor();
         descriptor.setName(product.getName());
-        descriptor.setPhone(product.getSerialNumber());
+        descriptor.setSerialNumber(product.getSerialNumber());
         descriptor.setEmail(product.getDistributor());
         descriptor.setAddress(product.getProductInfo());
         descriptor.setTags(product.getTags());
@@ -48,10 +48,10 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code SerialNumber} of the {@code EditPersonDescriptor} that we are building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+        descriptor.setSerialNumber(new SerialNumber(phone));
         return this;
     }
 

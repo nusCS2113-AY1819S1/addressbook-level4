@@ -29,7 +29,7 @@ Inventarie Pro is for self employed business owners who *prefer to use a desktop
 .  Once prompted, enter your username and password. This will be your permanent username and password for subsequent uses.
 
 +
-image::UiNew.png[width="790"]
+image::Ui.png[width="790"]
 
 == Features
 
@@ -97,13 +97,13 @@ Adds a product to the list of products offered by the store
 
 === Add a distributor: `addDistributor`
 
-Format: `addDistributor dn/<distributor name> dp/<distributor phone>`
+Format: `addDistributor dn/<distributor name> dp/<distributor serialNumber>`
 
 Adds a distributor to the list of distributors engaged with the store.
 
 === Edit a distributor: `editDistributor index`
 
-Format: `editDistributor index dn/<distributor name> dp/<distributor phone>`
+Format: `editDistributor index dn/<distributor name> dp/<distributor serialNumber>`
 
 Edits details of the indexed distributor from the list of distributors engaged with the store.
 
