@@ -103,7 +103,7 @@ public class TimeSlot {
                 && otherTimeSlot.getEndTime().equals(getEndTime());
     }
     /**
-     * converts DayOfWeek object into <></>he corresponding abbreviation.
+     * converts DayOfWeek object into the corresponding abbreviation.
      * Possible outputs:
      * MO, TU, WE, TH, FR, SA, SU
      */
