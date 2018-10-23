@@ -1,9 +1,9 @@
 package seedu.address.testutil;
 
-import seedu.address.model.classroom.ClassModule;
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * A utility class to help with building Classroom objects.
@@ -11,16 +11,16 @@ import seedu.address.model.classroom.Enrollment;
 public class ClassroomBuilder {
 
     public static final String DEFAULT_CLASSNAME = "T16";
-    public static final String DEFAULT_CLASSMODULE = "CG1111";
+    public static final String DEFAULT_ModuleCode = "CG1111";
     public static final String DEFAULT_ENROLLMENT = "20";
 
     private ClassName className;
-    private ClassModule moduleCode;
+    private ModuleCode moduleCode;
     private Enrollment maxEnrollment;
 
     public ClassroomBuilder() {
         className = new ClassName(DEFAULT_CLASSNAME);
-        moduleCode = new ClassModule(DEFAULT_CLASSMODULE);
+        moduleCode = new ModuleCode(DEFAULT_ModuleCode);
         maxEnrollment = new Enrollment(DEFAULT_ENROLLMENT);
     }
 
@@ -42,10 +42,10 @@ public class ClassroomBuilder {
     }
 
     /**
-     * Sets the {@code ClassModule} of the {@code Classroom} that we are building.
+     * Sets the {@code ModuleCode} of the {@code Classroom} that we are building.
      */
-    public ClassroomBuilder withClassModule(String moduleCode) {
-        this.moduleCode = new ClassModule(moduleCode);
+    public ClassroomBuilder withModuleCode(String moduleCode) {
+        this.moduleCode = new ModuleCode(moduleCode);
         return this;
     }
 

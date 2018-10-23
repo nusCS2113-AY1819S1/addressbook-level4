@@ -16,10 +16,10 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.classroom.ClassModule;
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
+import seedu.address.model.module.ModuleCode;
 
 
 public class ClassAddCommandTest {
@@ -32,7 +32,7 @@ public class ClassAddCommandTest {
         final String maxEnrollment = "20";
 
         assertCommandSuccess(new ClassAddCommand(new Classroom(new ClassName(className),
-                        new ClassModule(moduleCode), new Enrollment(maxEnrollment))), model, new CommandHistory(),
+                        new ModuleCode(moduleCode), new Enrollment(maxEnrollment))), model, new CommandHistory(),
                 String.format(MESSAGE_SUCCESS, className, moduleCode, maxEnrollment),
                 model);
     }
@@ -50,12 +50,12 @@ public class ClassAddCommandTest {
     public void equals() {
         final ClassAddCommand standardCommand = new ClassAddCommand
                 (new Classroom(new ClassName(VALID_CLASS_T16),
-                        new ClassModule(VALID_MODULE_CODE),
+                        new ModuleCode(VALID_MODULE_CODE),
                         new Enrollment(VALID_MAX_ENROLLMENT)));
         // same values -> returns true
         ClassAddCommand commandWithSameValues = new ClassAddCommand(
                 new Classroom(new ClassName(VALID_CLASS_T16),
-                        new ClassModule(VALID_MODULE_CODE),
+                        new ModuleCode(VALID_MODULE_CODE),
                         new Enrollment(VALID_MAX_ENROLLMENT)));
         assertTrue(standardCommand.equals(commandWithSameValues));
         // same object -> returns true

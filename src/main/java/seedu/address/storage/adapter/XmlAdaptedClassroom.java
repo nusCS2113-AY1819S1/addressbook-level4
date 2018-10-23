@@ -6,10 +6,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.classroom.ClassModule;
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * JAXB-friendly adapted version of the Classroom.
@@ -48,7 +48,7 @@ public class XmlAdaptedClassroom {
      */
     public XmlAdaptedClassroom(Classroom classroom) {
         this.className = classroom.getClassName().getValue();
-        this.moduleCode = classroom.getModuleCode().getValue();
+        this.moduleCode = classroom.getModuleCode().moduleCode;
         this.maxEnrollment = classroom.getMaxEnrollment().getValue();
     }
 
@@ -67,12 +67,12 @@ public class XmlAdaptedClassroom {
 
         if (moduleCode == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
-                    ClassModule.class.getSimpleName()));
+                    ModuleCode.class.getSimpleName()));
         }
-        if (!ClassModule.isValidClassModule(moduleCode)) {
-            throw new IllegalValueException(ClassModule.MESSAGE_CLASSMODULE_CONSTRAINTS);
+        if (!ModuleCode.isValidModuleCode(moduleCode)) {
+            throw new IllegalValueException(ModuleCode.MESSAGE_MODULE_CODE_CONSTRAINT);
         }
-        final ClassModule modelClassModule = new ClassModule(moduleCode);
+        final ModuleCode modelModuleCode = new ModuleCode(moduleCode);
 
         if (maxEnrollment == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -83,7 +83,7 @@ public class XmlAdaptedClassroom {
         }
         final Enrollment modelEnrollment = new Enrollment(maxEnrollment);
 
-        return new Classroom(modelClassName, modelClassModule, modelEnrollment);
+        return new Classroom(modelClassName, modelModuleCode, modelEnrollment);
     }
 
     @Override

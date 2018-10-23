@@ -4,16 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MAXENROLLMENT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ClassAddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.classroom.ClassModule;
 import seedu.address.model.classroom.ClassName;
 import seedu.address.model.classroom.Classroom;
 import seedu.address.model.classroom.Enrollment;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new ClassAddCommand object
@@ -29,23 +29,23 @@ public class ClassAddCommandParser implements Parser<ClassAddCommand> {
     public ClassAddCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CLASSNAME, PREFIX_MODULECODE, PREFIX_MAXENROLLMENT);
+                ArgumentTokenizer.tokenize(args, PREFIX_CLASSNAME, PREFIX_MODULE_CODE, PREFIX_MAXENROLLMENT);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CLASSNAME, PREFIX_MODULECODE, PREFIX_MAXENROLLMENT)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CLASSNAME, PREFIX_MODULE_CODE, PREFIX_MAXENROLLMENT)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClassAddCommand.MESSAGE_USAGE));
         }
 
         String className = argMultimap.getValue(PREFIX_CLASSNAME).get().toUpperCase();
         ClassroomParserUtil.parseClassName(className);
-        String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get().toUpperCase();
-        ClassroomParserUtil.parseClassModule(moduleCode);
+        String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get().toUpperCase();
+        ParserUtil.parseModuleCode(moduleCode);
         String maxEnrollment = argMultimap.getValue(PREFIX_MAXENROLLMENT).get();
         ClassroomParserUtil.parseEnrollment(maxEnrollment);
 
         Classroom classRoom = new Classroom(
                 new ClassName(className),
-                new ClassModule(moduleCode),
+                new ModuleCode(moduleCode),
                 new Enrollment(maxEnrollment));
         return new ClassAddCommand(classRoom);
     }

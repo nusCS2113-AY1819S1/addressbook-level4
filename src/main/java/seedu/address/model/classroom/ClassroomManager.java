@@ -44,7 +44,7 @@ public class ClassroomManager {
     public Classroom findClassroom(String className, String moduleCode) {
         for (Classroom classroom : classroomList) {
             if (classroom.getClassName().getValue().equalsIgnoreCase(className)
-                    && classroom.getModuleCode().getValue().equalsIgnoreCase(moduleCode)) {
+                    && classroom.getModuleCode().moduleCode.equalsIgnoreCase(moduleCode)) {
                 return classroom;
             }
         }
@@ -99,6 +99,6 @@ public class ClassroomManager {
     public boolean hasClassroom(Classroom classToCreate) {
         requireNonNull(classToCreate);
         return (findClassroom(classToCreate.getClassName().getValue(),
-                classToCreate.getModuleCode().getValue())) != null;
+                classToCreate.getModuleCode().moduleCode)) != null;
     }
 }
