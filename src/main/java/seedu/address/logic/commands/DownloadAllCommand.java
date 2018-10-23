@@ -67,7 +67,6 @@ public class DownloadAllCommand extends Command {
 
     private WebDriver initializeWebDriver(){
         downloadFilePath = new File("").getAbsolutePath();
-
         if(System.getProperty("os.name").contains(WINDOWS_OS_NAME)) {
             System.setProperty("webdriver.chrome.driver",downloadFilePath+ CHROMEDRIVER_PATH_WINDOWS);
         }
