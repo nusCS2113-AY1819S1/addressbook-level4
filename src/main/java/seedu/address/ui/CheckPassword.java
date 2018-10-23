@@ -55,7 +55,7 @@ public class CheckPassword {
     /**
      * displays enter password box
      */
-    public static void display() {
+    public static void display(boolean []isAdmin) {
         Stage window = new Stage();
         window.initModality(Modality.APPLICATION_MODAL);
         Group root = new Group();
@@ -78,7 +78,6 @@ public class CheckPassword {
         // ~start~
         pb.setText("owner");
         // ~end~
-
         pb.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent e) {
@@ -87,14 +86,14 @@ public class CheckPassword {
                     message.setTextFill(Color.web("black"));
                     AlertBox.display("Welcome", "Welcome, student!"
                             + " If you encounter any problems using the app, press F1 for help!");
+                    isAdmin[0] = false;
                     window.close();
-
                 } else if (pb.getText().equals("owner")) {
                     message.setText("Your password has been confirmed");
                     message.setTextFill(Color.web("black"));
                     AlertBox.display("Welcome Owner", "Welcome back, you have administrative rights.");
+                    isAdmin[0] = true;
                     window.close();
-
                 } else {
                     message.setText("Your password is incorrect!");
                     message.setTextFill(Color.web("red"));
