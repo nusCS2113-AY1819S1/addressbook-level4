@@ -1,11 +1,9 @@
 package seedu.planner.ui;
 
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,9 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import seedu.planner.commons.core.LogsCenter;
 import seedu.planner.commons.events.ui.ShowSummaryTableEvent;
-import seedu.planner.model.record.Date;
-import seedu.planner.model.record.MoneyFlow;
-import seedu.planner.model.summary.Summary;
 
 /**
  * This UI component is responsible for displaying the summary requested by the user
@@ -61,13 +56,14 @@ public class SummaryDisplay extends UiPart<Region> {
      */
     private void init() {
         dateColumn.setCellValueFactory(
-                new PropertyValueFactory<SummaryEntry, String>("date"));
+                new PropertyValueFactory<SummaryEntry, String>("timeStamp"));
         totalIncomeColumn.setCellValueFactory(
                 new PropertyValueFactory<SummaryEntry, String>("totalIncome"));
         totalExpenseColumn.setCellValueFactory(
                 new PropertyValueFactory<SummaryEntry, String>("totalExpense"));
         totalColumn.setCellValueFactory(
                 new PropertyValueFactory<SummaryEntry, String>("total"));
+        table.setItems(data);
     }
 
     private void show() {
@@ -85,68 +81,7 @@ public class SummaryDisplay extends UiPart<Region> {
     @Subscribe
     public void handleShowSummaryTableEvent(ShowSummaryTableEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        table.getItems().clear();
-        data = FXCollections.observableList(event.data.stream().map(
-            s -> new SummaryEntry(s)).collect(Collectors.toList()));
-        table.setItems(data);
+        table.setItems(event.data);
         show();
-    }
-
-    /**
-     * This represents an entry for the summary table
-     */
-    public class SummaryEntry {
-
-        private final SimpleStringProperty date;
-        private final SimpleStringProperty totalIncome;
-        private final SimpleStringProperty totalExpense;
-        private final SimpleStringProperty total;
-
-        public SummaryEntry(Date date, MoneyFlow totalIncome, MoneyFlow totalExpense, MoneyFlow total) {
-            this.date = new SimpleStringProperty(date.toString());
-            this.totalIncome = new SimpleStringProperty((totalIncome.toString()));
-            this.totalExpense = new SimpleStringProperty((totalExpense.toString()));
-            this.total = new SimpleStringProperty((total.toString()));
-        }
-
-        public SummaryEntry(Summary summary) {
-            this.date = new SimpleStringProperty(summary.getDate().toString());
-            this.totalIncome = new SimpleStringProperty((summary.getTotalIncome().toString()));
-            this.totalExpense = new SimpleStringProperty((summary.getTotalExpense().toString()));
-            this.total = new SimpleStringProperty((summary.getTotal().toString()));
-        }
-
-        public String getDate() {
-            return date.get();
-        }
-
-        public void setDate(String date) {
-            this.date.set(date);
-        }
-
-        public String getTotalIncome() {
-            return totalIncome.get();
-        }
-
-        public void setTotalIncome(String totalIncome) {
-            this.totalIncome.set(totalIncome);
-        }
-
-        public String getTotalExpense() {
-            return totalExpense.get();
-        }
-
-        public void setTotalExpense(String totalExpense) {
-            this.totalExpense.set(totalExpense);
-        }
-
-        public String getTotal() {
-            return total.get();
-        }
-
-        public void setTotal(String total) {
-            this.total.set(total);
-        }
-
     }
 }

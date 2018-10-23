@@ -34,9 +34,16 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String VALID_DATE_START = "10-2-2018";
+    public static final String VALID_DATE_END = "12-10-2018";
+    public static final String VALID_MONTH_START = "jan-2018";
+    public static final String VALID_MONTH_END = "dec-2018";
 
     public static final String INVALID_NAME = "James&";
     public static final String INVALID_DATE = "911a";
+    public static final String ILLOGICAL_DATE = "30-2-2018";
+    public static final String INVALID_LOGICAL_MONTH = "mon-2018";
+    public static final String INVALID_FORMAT_MONTH = "month-2018";
     public static final String INVALID_MONEYFLOW = "11.";
     public static final String INVALID_TAG = "hubby*";
 

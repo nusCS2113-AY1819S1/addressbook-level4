@@ -9,15 +9,15 @@ import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Record;
 
 /**
- * This object represents the in memory model of a summary of all financial activity within a day.
+ * This class represents the summary of all financial activity within a day.
  */
-public class Summary {
+public class DaySummary extends SummaryAbs {
     private Date date;
     private MoneyFlow totalExpense;
     private MoneyFlow totalIncome;
     private MoneyFlow total;
 
-    public Summary(Record record) {
+    public DaySummary(Record record) {
         requireNonNull(record);
         date = record.getDate();
         MoneyFlow money = record.getMoneyFlow();
@@ -31,7 +31,7 @@ public class Summary {
         total = money;
     }
 
-    public Summary(Date date, MoneyFlow totalExpense, MoneyFlow totalIncome, MoneyFlow total) {
+    public DaySummary(Date date, MoneyFlow totalExpense, MoneyFlow totalIncome, MoneyFlow total) {
         requireAllNonNull(date, totalExpense, totalIncome, total);
         this.date = date;
         this.totalExpense = totalExpense;
@@ -55,9 +55,7 @@ public class Summary {
         return total;
     }
 
-    /**
-     * Adds the record's moneyflow to totalExpense, totalIncome or total
-     */
+    @Override
     public void add(Record record) {
         requireNonNull(record);
         MoneyFlow money = record.getMoneyFlow();
@@ -69,21 +67,6 @@ public class Summary {
         total = MoneyUtil.add(total, money);
     }
 
-    /**
-     * Subtracts the record's moneyflow from totalExpense or totalIncome depending on the type of moneyflow
-     * and total
-     */
-    public void remove(Record record) {
-        requireNonNull(record);
-        MoneyFlow money = record.getMoneyFlow();
-        if (isExpense(money)) {
-            totalExpense = MoneyUtil.subtract(totalExpense, money);
-        } else {
-            totalIncome = MoneyUtil.subtract(totalIncome, money);
-        }
-        total = MoneyUtil.subtract(total, money);
-    }
-
     private boolean isExpense(MoneyFlow money) {
         return money.toDouble() < 0;
     }
@@ -91,11 +74,11 @@ public class Summary {
     @Override
     public boolean equals(Object other) {
         return this == other // short circuit if same object
-                || (other instanceof Summary // instanceof handles nulls
-                    && date.equals(((Summary) other).date)
-                    && totalExpense.equals(((Summary) other).totalExpense)
-                    && totalIncome.equals(((Summary) other).totalIncome)
-                    && total.equals(((Summary) other).total));
+                || (other instanceof DaySummary // instanceof handles nulls
+                && date.equals(((DaySummary) other).date)
+                && totalExpense.equals(((DaySummary) other).totalExpense)
+                && totalIncome.equals(((DaySummary) other).totalIncome)
+                && total.equals(((DaySummary) other).total));
     }
 
     @Override

@@ -3,6 +3,7 @@ package seedu.planner.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.planner.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.planner.logic.parser.ParserUtil.parseMonth;
 import static seedu.planner.testutil.TypicalIndexes.INDEX_FIRST_RECORD;
 
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.planner.logic.parser.exceptions.ParseException;
+import seedu.planner.model.Month;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.MoneyFlow;
 import seedu.planner.model.record.Name;
@@ -23,13 +25,17 @@ import seedu.planner.testutil.Assert;
 
 public class ParserUtilTest {
     private static final String INVALID_NAME = "P@yment from R@chel";
-    private static final String INVALID_DATE = "+651234";
+    private static final String INVALID_FORMAT_DATE = "+651234";
+    private static final String INVALID_DATE = "32-10-2018";
+    private static final String INVALID_FORMAT_MONTH = "month-2018";
+    private static final String INVALID_MONTH = "mon-2018";
     private static final String INVALID_EXPENSE = " ";
     private static final String INVALID_INCOME = "example.com";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Payment from Rachel";
     private static final String VALID_DATE = "12-07-2007";
+    private static final String VALID_MONTH = "apr-2018";
     private static final String VALID_EXPENSE = "-15.70";
     private static final String VALID_INCOME = "+16.70";
     private static final String VALID_TAG_1 = "friend";
@@ -92,6 +98,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseDate_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_FORMAT_DATE));
         Assert.assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
     }
 
@@ -109,6 +116,29 @@ public class ParserUtilTest {
     }
 
     @Test
+    public void parseMonth_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> parseMonth(null));
+    }
+
+    @Test
+    public void parseMonth_invalidValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> parseMonth(INVALID_FORMAT_MONTH));
+        Assert.assertThrows(ParseException.class, () -> parseMonth(INVALID_MONTH));
+    }
+
+    @Test
+    public void parseMonth_validValueWithoutWhitespace_returnsMonth() throws Exception {
+        Month expectedMonth = new Month(VALID_MONTH);
+        assertEquals(expectedMonth, parseMonth(VALID_MONTH));
+    }
+
+    @Test
+    public void parseMonth_validValueWithWhitespace_returnMonth() throws Exception {
+        Month expectedMonth = new Month(VALID_MONTH);
+        assertEquals(expectedMonth, parseMonth(WHITESPACE + VALID_MONTH + WHITESPACE));
+    }
+
+    @Test
     public void parseMoneyFlow_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseMoneyFlow(null));
     }
@@ -121,13 +151,13 @@ public class ParserUtilTest {
     @Test
     public void parseMoneyFlow_validValueWithoutWhitespace_returnsMoneyFlow() throws Exception {
         MoneyFlow expectedExpense = new MoneyFlow(VALID_EXPENSE);
-        MoneyFlow expectedIncome = new MoneyFlow(VALID_INCOME);
         assertEquals(expectedExpense, ParserUtil.parseMoneyFlow(VALID_EXPENSE));
+        MoneyFlow expectedIncome = new MoneyFlow(VALID_INCOME);
         assertEquals(expectedIncome, ParserUtil.parseMoneyFlow(VALID_INCOME));
     }
 
     @Test
-    public void parseMoneyFlow_validValueWithWhitespace_returnsMoneyFlow() throws Exception {
+    public void parseMoneyFlow_validValueWithWhitespace_returnsTrimmedMoneyFlow() throws Exception {
         String expenseWithWhitespace = WHITESPACE + VALID_EXPENSE + WHITESPACE;
         String incomeWithWhitespace = WHITESPACE + VALID_INCOME + WHITESPACE;
         MoneyFlow expectedExpense = new MoneyFlow(VALID_EXPENSE);
