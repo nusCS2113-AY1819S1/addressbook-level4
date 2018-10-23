@@ -338,6 +338,8 @@ e.g. `find James Jake`
 * *Help* : `help`
 * *History* : `history`
 * *List* : `list`
+* *Merge Timetables* : `merge [index 1] [index 2] <add more indices if required>`
+e.g. `merge 1 2 5`
 * *Notes manager* : `notes`
 
 * *Redo* : `redo`

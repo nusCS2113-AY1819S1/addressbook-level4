@@ -1156,19 +1156,19 @@ A contact detail that is not meant to be shared with others
 [appendix]
 == Product Survey
 
-*Product Name*
+*Product Name*: NUSMods
 
-Author: ...
+Author: ?
 
 Pros:
 
-* ...
-* ...
+* Students are currently able to type in their module code, and the relevant timeslots pertaining to all the different types of lessons (e.g. lectures, tutorials, lab sessions, etc) will be displayed.
+* Students do not have to go to IVLE/CORS to retrieve the timing of the various classes for a module.
 
 Cons:
 
-* ...
-* ...
+* Students have to manually select their relevant lecture/tutorial/lab sessions by clicking via several steps.
+* Students' timetable on NUSMods is not as easily transferrable across different devices.
 
 [appendix]
 == Instructions for Manual Testing
