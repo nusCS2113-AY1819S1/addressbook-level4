@@ -203,6 +203,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean deleteModule(String moduleCode) {
+        if (versionedAddressBook.deleteModule(moduleCode)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public void adminUpdatePassword(User userToUpdate) {
         versionedAddressBook.adminUpdatePassword(userToUpdate);
     }

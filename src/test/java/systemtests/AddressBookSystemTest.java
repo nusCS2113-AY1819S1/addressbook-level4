@@ -179,9 +179,9 @@ public abstract class AddressBookSystemTest {
     protected void assertApplicationDisplaysExpected(String expectedCommandInput, String expectedResultMessage,
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
-        assertEquals(expectedResultMessage, getResultDisplay().getText());
         assertEquals(new ForumBook(expectedModel.getForumBook()), testApp.readStorageAddressBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
+        assertEquals(expectedResultMessage, getResultDisplay().getText());
     }
 
     /**

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.List;
 
 import com.t13g2.forum.logic.commands.exceptions.DuplicateModuleException;
+import com.t13g2.forum.logic.commands.exceptions.InvalidModuleException;
 import com.t13g2.forum.model.forum.Announcement;
 import com.t13g2.forum.model.forum.Module;
 import com.t13g2.forum.model.forum.User;
@@ -236,6 +237,26 @@ public class ForumBook implements ReadOnlyForumBook {
                 throw new DuplicateModuleException("");
             }
         } catch (DuplicateModuleException e) {
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    /**
+     * deletes a module.
+     */
+    public boolean deleteModule(String moduleCode) {
+        try (UnitOfWork unitOfWork = new UnitOfWork()) {
+            Module moduleToDelete = unitOfWork.getModuleRepository().getModuleByCode(moduleCode);
+            if (moduleToDelete != null) {
+                unitOfWork.getModuleRepository().removeModule(moduleToDelete);
+                unitOfWork.commit();
+            } else {
+                throw new InvalidModuleException("");
+            }
+        } catch (InvalidModuleException e) {
             return false;
         } catch (Exception e) {
             e.printStackTrace();
