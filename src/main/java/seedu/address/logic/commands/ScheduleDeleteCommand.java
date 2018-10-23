@@ -8,8 +8,8 @@ import seedu.address.model.Model;
 import seedu.address.model.schedule.Activity;
 
 public class ScheduleDeleteCommand extends ScheduleCommand {
-    private final Index index;
     private static final String MESSAGE_SUCCESS = "Task \"%s\" on %s has been deleted.";
+    private final Index index;
 
     /**
      * Creates an AddCommand to add the specified {@code Person}

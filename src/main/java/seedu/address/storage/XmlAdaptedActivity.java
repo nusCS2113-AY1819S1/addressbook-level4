@@ -16,8 +16,9 @@ public class XmlAdaptedActivity {
     private String activity;
 
     public XmlAdaptedActivity() {
-	}
-	public XmlAdaptedActivity(Date date, String activity) {
+    }
+
+    public XmlAdaptedActivity(Date date, String activity) {
         this.date = date;
         this.activity = activity;
     }

@@ -38,7 +38,7 @@ public class SchedulePanel extends UiPart<Region> {
         int count = 1;
         String scheduleText = new String();
         for (Date date : schedule.keySet()) {
-            scheduleText += Activity.getDateString(date)+ ":\n";
+            scheduleText += Activity.getDateString(date) + ":\n";
             for (Activity activity : schedule.get(date)) {
                 scheduleText += count + ". " + activity.getActivity() + "\n";
                 count++;

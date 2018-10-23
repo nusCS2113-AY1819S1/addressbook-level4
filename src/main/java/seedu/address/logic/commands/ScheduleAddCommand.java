@@ -10,8 +10,8 @@ public class ScheduleAddCommand extends ScheduleCommand {
     private final Activity toAdd;
 
     /**
-	 * Creates an AddCommand to add the specified {@code Person}
-	 */
+     * Creates an AddCommand to add the specified {@code Person}
+     */
     public ScheduleAddCommand(Activity activity) {
         requireNonNull(activity);
         toAdd = activity;

@@ -8,10 +8,9 @@ import seedu.address.model.Model;
 import seedu.address.model.schedule.Activity;
 
 public class ScheduleEditCommand extends ScheduleCommand {
-
+    private static final String MESSAGE_SUCCESS = "Task \"%s\" on %s has been edited to \"%s\".";
     private final String task;
     private final Index index;
-    private static final String MESSAGE_SUCCESS = "Task \"%s\" on %s has been edited to \"%s\".";
 
     /**
      * Creates an AddCommand to add the specified {@code Person}

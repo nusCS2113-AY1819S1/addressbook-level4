@@ -1,8 +1,6 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 

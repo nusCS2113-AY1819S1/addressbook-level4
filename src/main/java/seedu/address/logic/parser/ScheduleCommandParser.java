@@ -27,7 +27,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         args = args.trim();
         String[] input = args.split(" ", 2);
         try {
-        switch (input[0].trim()) {
+            switch (input[0].trim()) {
             case ScheduleCommand.COMMAND_WORD_ADD:
                 errorMessage = ScheduleCommand.MESSAGE_ADD;
                 return parseAdd(input[1]);
@@ -40,7 +40,7 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             default:
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         ScheduleCommand.MESSAGE_USAGE));
-        }
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, errorMessage));
         }

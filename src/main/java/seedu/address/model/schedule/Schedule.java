@@ -2,8 +2,8 @@ package seedu.address.model.schedule;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -19,7 +19,7 @@ public class Schedule {
     public void setSchedule(List<Activity> activities) {
         requireNonNull(activities);
         schedule.clear();
-        for(Activity activity : activities) {
+        for (Activity activity : activities) {
             add(activity);
         }
     }

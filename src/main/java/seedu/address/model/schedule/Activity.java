@@ -45,7 +45,7 @@ public class Activity {
         cal.setTime(date);
         String dayOfWeek = new SimpleDateFormat("EE", Locale.ENGLISH).format(date);
         int month = cal.get(Calendar.MONTH);
-        if (month == 0){
+        if (month == 0) {
             month = 12;
         }
         return new String(dayOfWeek + " " + cal.get(Calendar.DATE) + "/" + month
