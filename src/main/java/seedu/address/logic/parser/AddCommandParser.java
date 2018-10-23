@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLLED_CLASS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENROLLED_MODULE;
 
 import java.util.Map;
 import java.util.Set;
@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.enrolledClass.EnrolledClass;
+import seedu.address.model.enrolledModule.EnrolledModule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                                            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ENROLLED_CLASS);
+                                            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ENROLLED_MODULE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -48,10 +48,10 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
-        Map<String, EnrolledClass> enrolledClassList = ParserUtil.parseEnrolledClasses(
-                                                        argMultimap.getAllValues(PREFIX_ENROLLED_CLASS));
+        Map<String, EnrolledModule> enrolledModuleList = ParserUtil.parseEnrolledModules(
+                                                        argMultimap.getAllValues(PREFIX_ENROLLED_MODULE));
 
-        Person person = new Person(name, phone, email, address, tagList, enrolledClassList, TimeSlots.initTimeSlots());
+        Person person = new Person(name, phone, email, address, tagList, enrolledModuleList, TimeSlots.initTimeSlots());
 
         return new AddCommand(person);
     }

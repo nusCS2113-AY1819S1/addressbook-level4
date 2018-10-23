@@ -12,7 +12,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ChangeTimeSlotCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.enrolledClass.EnrolledClass;
+import seedu.address.model.enrolledModule.EnrolledModule;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -79,12 +79,12 @@ public class ChangeTimeSlotCommandParser implements Parser<ChangeTimeSlotCommand
     }
 
     /**
-     * Parses {@code Collection<String> enrolledClasses} into a {@code Map<String, EnrolledClass>} if {@code tags}
+     * Parses {@code Collection<String> enrolledClasses} into a {@code Map<String, EnrolledModule>} if {@code tags}
      * is non-empty.
      * If {@code enrolledClasses} contain only one element which is an empty string, it will be parsed into a
-     * {@code Map<String, EnrolledClass>} containing zero enrolledClasses.
+     * {@code Map<String, EnrolledModule>} containing zero enrolledClasses.
      */
-    private Optional<Map<String, EnrolledClass>> parseEnrolledClassesForEdit(Collection<String> enrolledClasses)
+    private Optional<Map<String, EnrolledModule>> parseEnrolledClassesForEdit(Collection<String> enrolledClasses)
             throws ParseException {
 
         assert enrolledClasses != null;
@@ -100,7 +100,7 @@ public class ChangeTimeSlotCommandParser implements Parser<ChangeTimeSlotCommand
             enrolledClassesMap = enrolledClasses;
         }
 
-        return Optional.of(ParserUtil.parseEnrolledClasses(enrolledClassesMap));
+        return Optional.of(ParserUtil.parseEnrolledModules(enrolledClassesMap));
     }
 
 }

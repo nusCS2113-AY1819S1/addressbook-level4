@@ -65,10 +65,10 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
 
-       /* for(String tempEnrolledClassName : person.getEnrolledClasses().keySet()){
-            Label enrolledClass = new Label(tempEnrolledClassName);
-            enrolledClass.setPrefSize(61, 10);
-            header.getChildren().add(enrolledClass);
+       /* for(String tempEnrolledClassName : person.getEnrolledModules().keySet()){
+            Label enrolledModule = new Label(tempEnrolledClassName);
+            enrolledModule.setPrefSize(61, 10);
+            header.getChildren().add(enrolledModule);
         }*/
 
         for (String it : Tag.getHeader()) {

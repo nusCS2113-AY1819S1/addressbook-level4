@@ -10,7 +10,7 @@ import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.enrolledClass.EnrolledClass;
+import seedu.address.model.enrolledModule.EnrolledModule;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -90,7 +90,7 @@ public class MergeCommand extends Command {
         Address address = new Address("here");
         Set<Tag> mergedTags= new HashSet<>();
         Map<String, List<TimeSlots>> mergedSlots = mergeTimeSlots(person1.getTimeSlots(), person2.getTimeSlots());
-        Map<String, EnrolledClass> enrolledClassMap = new TreeMap<>();
+        Map<String, EnrolledModule> enrolledClassMap = new TreeMap<>();
 
 
         return new Person(mergedName, phone, email, address, mergedTags, enrolledClassMap,
