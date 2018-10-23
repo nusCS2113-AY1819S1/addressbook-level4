@@ -7,7 +7,6 @@ import com.google.common.eventbus.Subscribe;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -91,10 +90,9 @@ public class SummaryDisplay extends UiPart<Region> {
     }
 
     @Subscribe
-    //TODO: Refactor this to not hardcode
+    //TODO: Refactor this to not hardcode, add exception throwing
     public void handleShowPieChartStatsEvent(ShowPieChartStatsEvent event) {
-        Tab tab = new Tab();
-        tab.setText("Category Breakdown for financial activity");
+        CustomTab tab = new CustomTab();
         if (!tabManager.getTabs().stream().anyMatch(t -> t.getText() == "Category Breakdown for financial activity")) {
             tabManager.getTabs().add(tab);
             tabManager.getSelectionModel().select(tab);
