@@ -8,6 +8,8 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ExpenditureTracker;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenditureTracker;
+import seedu.address.model.ReadOnlyTodoList;
+import seedu.address.model.TodoList;
 import seedu.address.model.expenditureinfo.Category;
 import seedu.address.model.expenditureinfo.Date;
 import seedu.address.model.expenditureinfo.Expenditure;
@@ -18,6 +20,11 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskModule;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskPriority;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -57,6 +64,17 @@ public class SampleDataUtil {
         };
     }
 
+    public static Task[] getSampleTasks() {
+        return new Task[] {
+            new Task(new TaskName("Milestone 3"), new TaskModule("CS2113"), new TaskDate("01-11"), new TaskPriority("1")),
+            new Task(new TaskName("Tutorial 7"), new TaskModule("CS2102"), new TaskDate("02-11"), new TaskPriority("3")),
+            new Task(new TaskName("Assignment 3"), new TaskModule("CG2027"), new TaskDate("23-10"), new TaskPriority("1")),
+            new Task(new TaskName("Essay"), new TaskModule("CG2028"), new TaskDate("10-11"), new TaskPriority("2")),
+            new Task(new TaskName("Forum Post"), new TaskModule("CS2101"), new TaskDate("20-11"), new TaskPriority("2")),
+            new Task(new TaskName("Webcast"), new TaskModule("CS1231"), new TaskDate("14-11"), new TaskPriority("3")),
+        };
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
@@ -71,6 +89,14 @@ public class SampleDataUtil {
             sampleEt.addExpenditure(sampleExpenditure);
         }
         return sampleEt;
+    }
+
+    public static ReadOnlyTodoList getSampleTodoList() {
+        TodoList sampleTd = new TodoList();
+        for (Task sampleTask : getSampleTasks()) {
+            sampleTd.addTask(sampleTask);
+        }
+        return sampleTd;
     }
 
     /**
