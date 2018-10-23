@@ -4,10 +4,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.classroom.ClassModule;
-import seedu.address.model.classroom.ClassName;
-import seedu.address.model.classroom.Classroom;
-import seedu.address.model.classroom.Enrollment;
 import seedu.address.model.course.Course;
 
 import static org.junit.Assert.assertEquals;
