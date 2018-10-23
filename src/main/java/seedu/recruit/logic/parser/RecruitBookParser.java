@@ -37,7 +37,6 @@ import seedu.recruit.logic.commands.SortCommand;
 import seedu.recruit.logic.commands.SwitchBookCommand;
 import seedu.recruit.logic.commands.UndoCandidateBookCommand;
 import seedu.recruit.logic.commands.UndoCompanyBookCommand;
-import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailContentsSelectCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailInitialiseCommand;
 import seedu.recruit.logic.commands.emailcommand.EmailRecipientsSelectCommand;
