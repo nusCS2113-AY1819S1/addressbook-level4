@@ -84,6 +84,12 @@ public interface Model {
     ObservableList<Person> getOtherList(Person person);
 
     /**
+     * Instantiates the user with a Person in database
+     * @param name
+     */
+    public void matchUserToPerson(String name);
+
+    /**
      * Returns true if the model has previous address book states to restore.
      */
     boolean canUndoAddressBook();

@@ -1,40 +1,64 @@
 package seedu.address.model.person;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 import seedu.address.model.person.exceptions.TimeSlotDoesNotExistException;
 import seedu.address.model.person.exceptions.TimeSlotOverlapException;
 
 /**
  * Represents a timetable that is associated with a person
- *
  */
 public class TimeTable {
-    private Collection <TimeSlot> timeSlots;
+    protected Collection <TimeSlot> timeSlots;
 
     public TimeTable() {
-        timeSlots = new ArrayList<>();
+        timeSlots = new HashSet<>();
     }
 
     public TimeTable(Collection <TimeSlot> input) {
-        timeSlots = input;
+        this();
+        timeSlots.addAll(input);
+    }
+
+    public TimeTable(TimeTable input) {
+        this(input.getTimeSlots());
     }
 
     public Collection <TimeSlot> getTimeSlots() {
-        Collection <TimeSlot> toReturn = new ArrayList<>();
+        Collection <TimeSlot> toReturn = new HashSet<>();
         toReturn.addAll(timeSlots);
         return toReturn;
     }
 
     /**
+     * Overwrites this {@code TimeTable} with {@code toReplace}
+     */
+    public void updateTimeTable(TimeTable toReplace) {
+        timeSlots.clear();
+        timeSlots.addAll(toReplace.getTimeSlots());
+    }
+
+    /**
+     * Adds a {@code TimeSlot} to the {@code TimeTable}
+     * Returns if the TimeTable is empty.
+     */
+    public boolean isEmpty() {
+        if (timeSlots.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
      * Adds a TimeSlot to the TimeTable
      *
-     * @param toAdd TimeSlot to be added
-     * @throws TimeSlotOverlapException if toAdd overlaps with an existing TimeSlot in the TimeTable
+     * @param toAdd {@code TimeSlot} to be added
+     * @throws TimeSlotOverlapException if {@code toAdd} overlaps with an existing {@code TimeSlot}
      */
     public void addTimeSlot(TimeSlot toAdd) throws TimeSlotOverlapException {
-        if (!findOverlapTimeSlots(toAdd).isEmpty()) {
+        if (hasOverlap(toAdd)) {
             throw new TimeSlotOverlapException();
         } else {
             timeSlots.add(toAdd);
@@ -42,10 +66,10 @@ public class TimeTable {
     }
 
     /**
-     * Removes a TimeSlot from the TimeTable
+     * Removes a {@code TimeSlot} from the {@code TimeTable}
      *
-     * @param toRemove TimeSlot to be removed
-     * @throws TimeSlotDoesNotExistException if toRemove does not exist in the TimeTable
+     * @param toRemove {@code TimeSlot} to be removed
+     * @throws TimeSlotDoesNotExistException if {@code toRemove} does not exist in the {@code TimeTable}
      */
     public void removeTimeSlot (TimeSlot toRemove) throws TimeSlotDoesNotExistException {
         if (!timeSlots.remove(toRemove)) {
@@ -54,31 +78,32 @@ public class TimeTable {
     }
 
     /**
-     * Checks whether toCheck overlaps with any TimeSlot in the existing timetable
-     *
-     * @param toCheck the TimeSlot to be checked against
-     * @return Optional containing overlapping TimeSlot
+     * Checks whether {@code toCheck} overlaps with any {@code TimeSlot}s in this {@code TimeTable}
+     * @param toCheck {@code TimeSlot} to be checked
+     * @return Whether an overlapping {@code TimeSlot} exists in this {@code TimeTable}
      */
-    public Collection <TimeSlot> findOverlapTimeSlots(TimeSlot toCheck) {
-        Collection <TimeSlot> toReturn = new ArrayList<>();
-
+    public boolean hasOverlap(TimeSlot toCheck) {
         for (TimeSlot timeSlot : timeSlots) {
             if (timeSlot.isOverlap(toCheck)) {
-                toReturn.add(timeSlot);
+                return true;
             }
         }
-        return toReturn;
-    }
 
-    public void updateTimeTable(TimeTable toReplace) {
-        this.timeSlots = toReplace.getTimeSlots();
+        return false;
     }
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof TimeTable // instanceof handles nulls
-                && timeSlots.equals(((TimeTable) other).getTimeSlots())); // state check
-    }
+        if (other == this) {
+            return true;
+        }
 
+        if (!(other instanceof TimeTable)) {
+            return false;
+        }
+
+        TimeTable otherTimeTable = (TimeTable) other;
+
+        return otherTimeTable.getTimeSlots().equals(this.getTimeSlots());
+    }
 }

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FILELOCATION;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +12,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.IcsUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -31,7 +31,7 @@ import seedu.address.model.tag.Tag;
 public class ImportCommand extends Command {
 
     public static final String COMMAND_WORD = "import";
-    public static final String COMMAND_WORD_ALIAS = "i";
+    public static final String COMMAND_WORD_ALIAS = "im";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Imports and overwrites timetable for the person identified by the "
@@ -41,12 +41,12 @@ public class ImportCommand extends Command {
             + PREFIX_FILELOCATION + "FILE_LOCATION \n"
             + "Example: " + COMMAND_WORD
             + " 1 "
-            + PREFIX_FILELOCATION + "C:\\Users\\happycat96\\Downloads\\nusmods_calendar.ics";
+            + PREFIX_FILELOCATION + "C:\\import_folder\\nusmods.ics";
 
     public static final String MESSAGE_SUCCESS = "Imported timetable for %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable file empty.";
     public static final String MESSAGE_IO_ERROR =
-            "IO error: your .ics file is corrupted/ not compatible.";
+            "Failed to read the file specified. Check if it is corrupted/ incompatible/ inaccessible/ exists?";
 
 
     private final Index index;
@@ -56,7 +56,8 @@ public class ImportCommand extends Command {
      * Creates an ImportCommand to import the .ics data, parse it, and add a {@code Person} with this timetable
      */
     public ImportCommand(Index index, Path filePath) {
-        //requireNonNull(timeTable);
+        requireNonNull(index);
+        requireNonNull(filePath);
 
         this.index = index;
         this.filePath = filePath;
@@ -76,8 +77,8 @@ public class ImportCommand extends Command {
         TimeTable timeTable;
 
         try {
-            optionalTimeTable = IcsUtil.getTimeTableFromFile(filePath);
-        } catch (DataConversionException e) {
+            optionalTimeTable = IcsUtil.getInstance().readTimeTableFromFile(filePath);
+        } catch (IOException e) {
             throw new CommandException(MESSAGE_IO_ERROR);
         }
         if (!optionalTimeTable.isPresent()) {
@@ -95,8 +96,8 @@ public class ImportCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * Only the TimeTable is changed in the new Person!
+     * Creates and returns a {@code Person}
+     * The returned {@code Person} only has their (@code TimeTable) changed!
      */
     private static Person createModifiedPerson(Person personToEdit, TimeTable importedTimeTable) {
         assert personToEdit != null;

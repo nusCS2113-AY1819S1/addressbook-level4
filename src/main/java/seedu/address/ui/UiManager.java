@@ -13,6 +13,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.security.LogoutEvent;
 import seedu.address.commons.events.security.SuccessfulLoginEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.util.StringUtil;
@@ -39,6 +40,7 @@ public class UiManager extends ComponentManager implements Ui {
     private UserPrefs prefs;
     private Security security;
     private MainWindow mainWindow;
+    private Stage primaryStage;
 
     public UiManager(Logic logic, Config config, UserPrefs prefs, Security security) {
         super();
@@ -50,6 +52,7 @@ public class UiManager extends ComponentManager implements Ui {
 
     @Override
     public void start(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         logger.info("Starting UI...");
 
         //Set the application icon
@@ -62,7 +65,9 @@ public class UiManager extends ComponentManager implements Ui {
             if (security.getAuthentication()) {
                 mainWindow.fillInnerParts();
             } else {
-                mainWindow.handleLogin();
+                //CLI Transition
+                // Save this for later mainWindow.handleLogin();
+                mainWindow.fillSecurityCommandBox();
             }
         } catch (Throwable e) {
             logger.severe(StringUtil.getDetails(e));
@@ -129,5 +134,10 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     public void handleSuccessfulLoginEvent(SuccessfulLoginEvent loginSuccess) {
         mainWindow.fillInnerParts();
+    }
+
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent logout) {
+        start(primaryStage);
     }
 }

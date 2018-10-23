@@ -183,6 +183,11 @@ public class AddCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void matchUserToPerson(String name) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
