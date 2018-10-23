@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import java.util.List;
+import java.util.Queue;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
@@ -22,7 +23,13 @@ public interface Logic {
      */
     CommandResult execute(String commandText) throws CommandException, ParseException;
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /**
+     * Compares substring isbn and completes the line
+     * @return the list of the books
+     */
+    Queue<String> getCompleteIsbn(String isbnText);
+
+    /** Returns an unmodifiable view of the filtered list of books */
     ObservableList<Book> getFilteredBookList();
 
     ObservableList<Request> getFilteredRequestList();

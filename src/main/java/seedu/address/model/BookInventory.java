@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Queue;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.book.Book;
@@ -15,7 +16,6 @@ import seedu.address.model.book.UniqueBookList;
 public class BookInventory implements ReadOnlyBookInventory {
 
     private final UniqueBookList books;
-
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
      * between constructors. See https://docs.oracle.com/javase/tutorial/java/javaOO/initial.html
@@ -61,6 +61,12 @@ public class BookInventory implements ReadOnlyBookInventory {
      */
     public void sortBooks() {
         this.books.sortBooks();
+    }
+
+    //// get data operations
+
+    public Queue<String> getCompleteIsbn(String isbnText) {
+        return books.getIsbnList(isbnText);
     }
 
     //// book-level operations

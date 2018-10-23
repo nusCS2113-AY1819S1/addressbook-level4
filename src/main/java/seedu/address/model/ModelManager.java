@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Queue;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -108,6 +109,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredBookList(Predicate<Book> predicate) {
         requireNonNull(predicate);
         filteredBooks.setPredicate(predicate);
+    }
+    //=========== Tab Pressed ===============================================================================
+
+    @Override
+    public Queue<String> getCompleteIsbn(String isbnText) {
+        return versionedAddressBook.getCompleteIsbn(isbnText);
     }
 
     //=========== Undo/Redo =================================================================================

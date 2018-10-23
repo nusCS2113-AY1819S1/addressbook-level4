@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Queue;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -60,6 +61,13 @@ public interface Model {
      * Sorts the books according the their quantity
      */
     void sortBooksUsingQuantity();
+
+    /**
+     * Completes substring of isbn with isbn from the inventory book list
+     * @param isbnText substring of isbn as entered by user
+     * @return completed string of isbn
+     */
+    Queue<String> getCompleteIsbn(String isbnText);
 
     /**
      * Returns true if the model has previous BookInventory states to restore.

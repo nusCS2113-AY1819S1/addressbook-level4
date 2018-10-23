@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -24,12 +26,14 @@ public class CommandBox extends UiPart<Region> {
 
     public static final String ERROR_STYLE_CLASS = "error";
     private static final String FXML = "CommandBox.fxml";
+    private static final Integer LENGTH_OF_PREFIX = 2;
 
     private final Logger logger = LogsCenter.getLogger(CommandBox.class);
     private final Logic logic;
     private ListElementPointer historySnapshot;
     private final CommandHistory commandHistory;
     private List<String> commands;
+    private Queue<String> isbnList = new LinkedList<>();
     private int commandHistoryPointer;
     @FXML
     private TextField commandTextField;
@@ -72,6 +76,12 @@ public class CommandBox extends UiPart<Region> {
             commandTextField.setText(commands.get(commandHistoryPointer));
             commandHistoryPointer++;
             break;
+        case TAB:
+            keyEvent.consume();
+            navigateToNextIsbn();
+            commandTextField.requestFocus();
+            commandTextField.positionCaret(commandTextField.getLength());
+            break;
         default:
             // let JavaFx handle the keypress
         }
@@ -101,6 +111,36 @@ public class CommandBox extends UiPart<Region> {
         }
 
         replaceText(historySnapshot.next());
+    }
+
+    /**
+     * Updates the text field with the next isbn found in inventory list,
+     * if there exists a next isbn in inventory list
+     */
+    private void navigateToNextIsbn() {
+        String curr = commandTextField.getText();
+        String isbnText = curr.substring(curr.indexOf("i/") + LENGTH_OF_PREFIX);
+        String isbn;
+        raise(new NewResultAvailableEvent(""));
+
+        // Switches to the next Isbn in the queue if user did not edit the original substring
+        // Else clears and remake the queue with the new substring
+        if (isbnText.equals(isbnList.peek())) {
+            isbn = isbnList.remove();
+            isbnList.add(isbn);
+        } else {
+            isbnList.clear();
+            isbnList = logic.getCompleteIsbn(isbnText);
+        }
+        isbn = isbnList.peek();
+        // Adds the isbn found to the end of the original string if user left the field empty
+        // Replaces the substring to the full isbn containing it if complete string is founf
+        if (isbnText.isEmpty()) {
+            replaceText(curr + isbn);
+        } else if (isbn != null) {
+            String updated = curr.replaceFirst(isbnText, isbn);
+            replaceText(updated);
+        }
     }
 
     /**
