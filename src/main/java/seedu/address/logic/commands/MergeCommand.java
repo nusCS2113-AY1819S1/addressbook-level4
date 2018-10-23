@@ -28,7 +28,7 @@ public class MergeCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Merges the timetables of selected people"
             + "by the index number used in the last person listing.\n "
             + "Parameters: INDEX (must be positive integer )"
-            + PREFIX_MERGE + "[INDEX] " + PREFIX_NAME +"[GROUP NAME]"
+            + PREFIX_MERGE + "[INDEX] " + PREFIX_NAME + "[GROUP NAME]"
             + "for all timetables you want to merge.\n"
             + "Example: " + COMMAND_WORD + PREFIX_MERGE + "1 " + PREFIX_MERGE + "2 " + PREFIX_NAME + "GES PROJECT";
 
@@ -87,13 +87,12 @@ public class MergeCommand extends Command {
         Phone phone = new Phone("99999999");
         Email email = new Email("notimportant@no");
         Address address;
-        if(index==0) {
+        if (index == 0) {
             address = new Address(person1.getName().toString() + ", " + person2.getName().toString());
-        }
-        else{
+        } else {
             address = new Address(person1.getAddress().toString() + ", " + person2.getName().toString());
         }
-        Set<Tag> mergedTags= new HashSet<>();
+        Set<Tag> mergedTags = new HashSet<>();
         mergedTags.add(new Tag("merged"));
         Map<String, List<TimeSlots>> mergedSlots = mergeTimeSlots(person1.getTimeSlots(), person2.getTimeSlots());
         Map<String, EnrolledClass> enrolledClassMap = new TreeMap<>();
@@ -105,8 +104,8 @@ public class MergeCommand extends Command {
 
     }
 
-    private Map<String, List<TimeSlots>> mergeTimeSlots(Map<String,List<TimeSlots>>slots1,
-                                                  Map<String,List<TimeSlots>>slots2) {
+    private Map<String, List<TimeSlots>> mergeTimeSlots(Map<String, List<TimeSlots>> slots1,
+                                                        Map<String, List<TimeSlots>> slots2) {
         TimeSlots[] mon1 = slots1.get("mon").toArray(new TimeSlots[0]);
         TimeSlots[] mon2 = slots2.get("mon").toArray(new TimeSlots[0]);
         TimeSlots[] tue1 = slots1.get("tue").toArray(new TimeSlots[0]);
@@ -124,70 +123,61 @@ public class MergeCommand extends Command {
         List<TimeSlots> finalFri = new ArrayList<>();
         Map<String, List<TimeSlots>> finalSlots = new HashMap<>();
 
-        for (int i = 0; i <12; i++) {
-            if(mon1[i].toString().equalsIgnoreCase("free")){
-                if(mon2[i].toString().charAt(5) == 'm' || mon2[i].toString().charAt(5) == 'a'){
+        for (int i = 0; i < 12; i++) {
+            if (mon1[i].toString().equalsIgnoreCase("free")) {
+                if (mon2[i].toString().charAt(5) == 'm' || mon2[i].toString().charAt(5) == 'a') {
                     finalMon.add(new TimeSlots("free"));
                 }
-            }
-            else if(mon1[i].toString().equalsIgnoreCase("busy")){
+            } else if (mon1[i].toString().equalsIgnoreCase("busy")) {
                 finalMon.add(new TimeSlots("busy"));
-            }
-            else if ((mon1[i].toString().charAt(5) == 'm' || mon1[i].toString().charAt(5) == 'a')
+            } else if ((mon1[i].toString().charAt(5) == 'm' || mon1[i].toString().charAt(5) == 'a')
                     && (mon2[i].toString().charAt(5) == 'm' || mon2[i].toString().charAt(5) == 'a')) {
                 finalMon.add(new TimeSlots("free"));
             } else {
                 finalMon.add(new TimeSlots("busy"));
             }
         }
-        for (int i = 0; i <12; i++) {
-            if(tue1[i].toString().equalsIgnoreCase("free")){
-                if(tue2[i].toString().charAt(5) == 'm' || tue2[i].toString().charAt(5) == 'a'){
+        for (int i = 0; i < 12; i++) {
+            if (tue1[i].toString().equalsIgnoreCase("free")) {
+                if (tue2[i].toString().charAt(5) == 'm' || tue2[i].toString().charAt(5) == 'a') {
                     finalTue.add(new TimeSlots("free"));
                 }
-            }
-            else if(tue1[i].toString().equalsIgnoreCase("busy")){
+            } else if (tue1[i].toString().equalsIgnoreCase("busy")) {
                 finalTue.add(new TimeSlots("busy"));
-            }
-            else if ((tue1[i].toString().charAt(5) == 'm' || tue1[i].toString().charAt(5) == 'a'
-                    ||tue1[i].toString().equalsIgnoreCase("free"))
+            } else if ((tue1[i].toString().charAt(5) == 'm' || tue1[i].toString().charAt(5) == 'a'
+                    || tue1[i].toString().equalsIgnoreCase("free"))
                     && (tue2[i].toString().charAt(5) == 'm' || tue2[i].toString().charAt(5) == 'a'
-                    ||tue2[i].toString().equalsIgnoreCase("free"))) {
+                    || tue2[i].toString().equalsIgnoreCase("free"))) {
                 finalTue.add(new TimeSlots("free"));
             } else {
                 finalTue.add(new TimeSlots("busy"));
             }
         }
-        for (int i = 0; i <12; i++) {
-            if(wed1[i].toString().equalsIgnoreCase("free")){
-                if(wed2[i].toString().charAt(5) == 'm' || wed2[i].toString().charAt(5) == 'a'){
+        for (int i = 0; i < 12; i++) {
+            if (wed1[i].toString().equalsIgnoreCase("free")) {
+                if (wed2[i].toString().charAt(5) == 'm' || wed2[i].toString().charAt(5) == 'a') {
                     finalWed.add(new TimeSlots("free"));
                 }
-            }
-            else if(wed1[i].toString().equalsIgnoreCase("busy")){
+            } else if (wed1[i].toString().equalsIgnoreCase("busy")) {
                 finalWed.add(new TimeSlots("busy"));
-            }
-            else if ((wed1[i].toString().charAt(5) == 'm' || wed1[i].toString().charAt(5) == 'a'
-                    ||wed1[i].toString().equalsIgnoreCase("free"))
+            } else if ((wed1[i].toString().charAt(5) == 'm' || wed1[i].toString().charAt(5) == 'a'
+                    || wed1[i].toString().equalsIgnoreCase("free"))
                     && (wed2[i].toString().charAt(5) == 'm' || wed2[i].toString().charAt(5) == 'a'
-                    ||wed2[i].toString().equalsIgnoreCase("free"))) {
+                    || wed2[i].toString().equalsIgnoreCase("free"))) {
                 finalWed.add(new TimeSlots("free"));
             } else {
                 finalWed.add(new TimeSlots("busy"));
             }
         }
-        for (int i = 0; i <12; i++) {
-            if(thu1[i].toString().equalsIgnoreCase("free")){
-                if(thu2[i].toString().charAt(5) == 'm' || thu2[i].toString().charAt(5) == 'a'){
+        for (int i = 0; i < 12; i++) {
+            if (thu1[i].toString().equalsIgnoreCase("free")) {
+                if (thu2[i].toString().charAt(5) == 'm' || thu2[i].toString().charAt(5) == 'a') {
                     finalThu.add(new TimeSlots("free"));
                 }
-            }
-            else if(thu1[i].toString().equalsIgnoreCase("busy")){
+            } else if (thu1[i].toString().equalsIgnoreCase("busy")) {
                 finalThu.add(new TimeSlots("busy"));
-            }
-
-            else if ((thu1[i].toString().charAt(5) == 'm' || thu1[i].toString().charAt(5) == 'a'
-                    ||thu1[i].toString().equalsIgnoreCase("free"))
+            } else if ((thu1[i].toString().charAt(5) == 'm' || thu1[i].toString().charAt(5) == 'a'
+                    || thu1[i].toString().equalsIgnoreCase("free"))
                     && (thu2[i].toString().charAt(5) == 'm' || thu2[i].toString().charAt(5) == 'a'
                     || thu2[i].toString().equalsIgnoreCase("free"))) {
                 finalThu.add(new TimeSlots("free"));
@@ -195,19 +185,17 @@ public class MergeCommand extends Command {
                 finalThu.add(new TimeSlots("busy"));
             }
         }
-        for (int i = 0; i <12; i++) {
-            if(fri1[i].toString().equalsIgnoreCase("free")){
-                if(fri2[i].toString().charAt(5) == 'm' || fri2[i].toString().charAt(5) == 'a'){
+        for (int i = 0; i < 12; i++) {
+            if (fri1[i].toString().equalsIgnoreCase("free")) {
+                if (fri2[i].toString().charAt(5) == 'm' || fri2[i].toString().charAt(5) == 'a') {
                     finalFri.add(new TimeSlots("free"));
                 }
-            }
-            else if(fri1[i].toString().equalsIgnoreCase("busy")){
+            } else if (fri1[i].toString().equalsIgnoreCase("busy")) {
                 finalFri.add(new TimeSlots("busy"));
-            }
-            else if ((fri1[i].toString().charAt(5) == 'm' || fri1[i].toString().charAt(5) == 'a'
-                    ||fri1[i].toString().equalsIgnoreCase("free"))
+            } else if ((fri1[i].toString().charAt(5) == 'm' || fri1[i].toString().charAt(5) == 'a'
+                    || fri1[i].toString().equalsIgnoreCase("free"))
                     && (mon2[i].toString().charAt(5) == 'm' || mon2[i].toString().charAt(5) == 'a'
-                    ||fri2[i].toString().equalsIgnoreCase("free"))) {
+                    || fri2[i].toString().equalsIgnoreCase("free"))) {
                 finalFri.add(new TimeSlots("free"));
             } else {
                 finalFri.add(new TimeSlots("busy"));

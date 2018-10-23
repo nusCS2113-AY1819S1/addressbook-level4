@@ -50,7 +50,6 @@ public class MergedTimetablePanel extends UiPart<Region> {
     }
 
 
-
     /**
      * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
      */

@@ -18,6 +18,7 @@ public class MergeCommandParser implements Parser<MergeCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public MergeCommand parse(String args) throws ParseException {
@@ -26,10 +27,10 @@ public class MergeCommandParser implements Parser<MergeCommand> {
 
         List<String> indices = argMultimap.getAllValues(PREFIX_MERGE);
         List<String> name = argMultimap.getAllValues(PREFIX_NAME);
-        if(indices.isEmpty()){
+        if (indices.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MergeCommand.MESSAGE_USAGE));
         }
-        if(name.isEmpty()){
+        if (name.isEmpty()) {
             throw new ParseException("No group name entered. " + MESSAGE_USAGE);
         }
 

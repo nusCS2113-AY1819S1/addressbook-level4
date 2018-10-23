@@ -40,11 +40,10 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
-        if(targetList.equalsIgnoreCase("main")) {
+        if (targetList.equalsIgnoreCase("main")) {
             lastShownList = ((ObservableList<Person>) lastShownList).filtered(new IsNotSelfOrMergedPredicate());
-        }
-        else if(targetList.equalsIgnoreCase("merged")){
-            lastShownList= ((ObservableList<Person>) lastShownList).filtered(new IsMergedPredicate());
+        } else if (targetList.equalsIgnoreCase("merged")) {
+            lastShownList = ((ObservableList<Person>) lastShownList).filtered(new IsMergedPredicate());
         }
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);

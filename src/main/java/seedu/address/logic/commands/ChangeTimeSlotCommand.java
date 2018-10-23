@@ -3,7 +3,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.util.*;
+import java.util.List;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
@@ -38,14 +39,14 @@ public class ChangeTimeSlotCommand extends Command {
     public static final String MESSAGE_NOTHING_CHANGED = "No time slot was changed";
 
     private final Index index;
-    private final String[]actions;
+    private final String[] actions;
 
-    public ChangeTimeSlotCommand(Index index,String[] actions) {
+    public ChangeTimeSlotCommand(Index index, String[] actions) {
         requireNonNull(actions);
         requireNonNull(index);
 
         this.index = index;
-        this.actions =actions;
+        this.actions = actions;
     }
 
     @Override
@@ -61,31 +62,30 @@ public class ChangeTimeSlotCommand extends Command {
         Person personToChange = lastShownList.get(index.getZeroBased());
 
         Map<String, List<TimeSlots>> timeSlots = personToChange.getTimeSlots();
-        String day=null;
-        String time=null;
+        String day = null;
+        String time = null;
 
-        for(int i=1;i<actions.length;i++){
+        for (int i = 1; i < actions.length; i++) {
 
             String activity;
-            if(i%3==1){
-                day=actions[i];
+            if (i % 3 == 1) {
+                day = actions[i];
             }
-            if(i%3==2){
-                time=actions[i];
+            if (i % 3 == 2) {
+                time = actions[i];
             }
-            if(i%3==0){
-                activity =actions[i];
-                if(actions[i].equalsIgnoreCase("free")){
+            if (i % 3 == 0) {
+                activity = actions[i];
+                if (actions[i].equalsIgnoreCase("free")) {
                     timeSlots.get(day).set(changeTimeToIndex(time),
-                            new TimeSlots (day.toLowerCase()+time.toLowerCase()));
-                }
-                else {
+                            new TimeSlots(day.toLowerCase() + time.toLowerCase()));
+                } else {
                     timeSlots.get(day).set(changeTimeToIndex(time), new TimeSlots(activity));
                 }
             }
         }
-        Person newPerson= new Person(personToChange.getName(),personToChange.getPhone(),personToChange.getEmail(),
-                personToChange.getAddress(),personToChange.getTags(),personToChange.getEnrolledClasses(),
+        Person newPerson = new Person(personToChange.getName(), personToChange.getPhone(), personToChange.getEmail(),
+                personToChange.getAddress(), personToChange.getTags(), personToChange.getEnrolledClasses(),
                 timeSlots);
 
         if (!personToChange.isSamePerson(newPerson) && model.hasPerson(newPerson)) {
@@ -112,45 +112,33 @@ public class ChangeTimeSlotCommand extends Command {
         return false;
     }
 
-    public int changeTimeToIndex (String time){
+    public int changeTimeToIndex(String time) {
         int index;
-        if(time.equalsIgnoreCase("8am")){
-            index=0;
-        }
-        else if(time.equalsIgnoreCase("9am")){
-            index=1;
-        }
-        else if(time.equalsIgnoreCase("10am")){
-            index=2;
-        }
-        else if(time.equalsIgnoreCase("11am")){
-            index=3;
-        }
-        else if(time.equalsIgnoreCase("12am")){
-            index=4;
-        }
-        else if(time.equalsIgnoreCase("1pm")){
-            index=5;
-        }
-        else if(time.equalsIgnoreCase("2pm")){
-            index=6;
-        }
-        else if(time.equalsIgnoreCase("3pm")){
-            index=7;
-        }
-        else if(time.equalsIgnoreCase("4pm")){
-            index=8;
-        }
-        else if(time.equalsIgnoreCase("5pm")){
-            index=9;
-        }
-        else if(time.equalsIgnoreCase("6pm")){
-            index=10;
-        }
-        else if(time.equalsIgnoreCase("7pm")){
-            index=11;
-        }
-        else{
+        if (time.equalsIgnoreCase("8am")) {
+            index = 0;
+        } else if (time.equalsIgnoreCase("9am")) {
+            index = 1;
+        } else if (time.equalsIgnoreCase("10am")) {
+            index = 2;
+        } else if (time.equalsIgnoreCase("11am")) {
+            index = 3;
+        } else if (time.equalsIgnoreCase("12am")) {
+            index = 4;
+        } else if (time.equalsIgnoreCase("1pm")) {
+            index = 5;
+        } else if (time.equalsIgnoreCase("2pm")) {
+            index = 6;
+        } else if (time.equalsIgnoreCase("3pm")) {
+            index = 7;
+        } else if (time.equalsIgnoreCase("4pm")) {
+            index = 8;
+        } else if (time.equalsIgnoreCase("5pm")) {
+            index = 9;
+        } else if (time.equalsIgnoreCase("6pm")) {
+            index = 10;
+        } else if (time.equalsIgnoreCase("7pm")) {
+            index = 11;
+        } else {
             return 11;
         }
         return index;

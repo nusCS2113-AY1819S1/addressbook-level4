@@ -69,26 +69,26 @@ public class TimetableCard extends UiPart<Region> {
             header.getChildren().add(day);
 
         }
-        String[] mon= new String[12];
-        String[] tue= new String[12];
-        String[] wed= new String[12];
-        String[] thu= new String[12];
-        String[] fri =new String[12];
+        String[] mon = new String[12];
+        String[] tue = new String[12];
+        String[] wed = new String[12];
+        String[] thu = new String[12];
+        String[] fri = new String[12];
 
-        for(int i=0; i<12; i++) {
-            mon[i]= person.getTimeSlots().get("mon").get(i).toString();
+        for (int i = 0; i < 12; i++) {
+            mon[i] = person.getTimeSlots().get("mon").get(i).toString();
         }
-        for(int i=0; i<12; i++) {
-            tue[i]= person.getTimeSlots().get("tue").get(i).toString();
+        for (int i = 0; i < 12; i++) {
+            tue[i] = person.getTimeSlots().get("tue").get(i).toString();
         }
-        for(int i=0; i<12; i++) {
-            wed[i]= person.getTimeSlots().get("wed").get(i).toString();
+        for (int i = 0; i < 12; i++) {
+            wed[i] = person.getTimeSlots().get("wed").get(i).toString();
         }
-        for(int i=0; i<12; i++) {
-            thu[i]= person.getTimeSlots().get("thu").get(i).toString();
+        for (int i = 0; i < 12; i++) {
+            thu[i] = person.getTimeSlots().get("thu").get(i).toString();
         }
-        for(int i=0; i<12; i++) {
-            fri[i]= person.getTimeSlots().get("fri").get(i).toString();
+        for (int i = 0; i < 12; i++) {
+            fri[i] = person.getTimeSlots().get("fri").get(i).toString();
         }
         getMod(mon, monday);
         getMod(tue, tuesday);
@@ -104,15 +104,13 @@ public class TimetableCard extends UiPart<Region> {
         for (String it : mods) {
             Label slot = new Label(it);
             slot.setPrefSize(51, 25);
-            if(it.equalsIgnoreCase("busy")){
+            if (it.equalsIgnoreCase("busy")) {
                 slot.getStyleClass().add("black");
                 slot.setText(" ");
-            }
-            else if(it.equalsIgnoreCase("free")){
+            } else if (it.equalsIgnoreCase("free")) {
                 slot.getStyleClass().add("white");
                 slot.setText(" ");
-            }
-            else if (it.charAt(5) == 'm' || it.charAt(5) == 'a') {
+            } else if (it.charAt(5) == 'm' || it.charAt(5) == 'a') {
                 slot.getStyleClass().add("white");
                 slot.setText(" ");
 
@@ -131,7 +129,7 @@ public class TimetableCard extends UiPart<Region> {
     }
 
     /**
-     *Reads tags from a person, changes them to labels and adds colour
+     * Reads tags from a person, changes them to labels and adds colour
      */
     private void colourTag(Person person) {
         person.getTags().forEach(tag -> {

@@ -1,6 +1,7 @@
 package seedu.address.model.person;
 
 import java.util.function.Predicate;
+
 import seedu.address.model.tag.Tag;
 
 
@@ -15,8 +16,8 @@ public class IsMergedPredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        for(Tag it: person.getTags()){
-            if(it.toString().equalsIgnoreCase("[merged]")){
+        for (Tag it : person.getTags()) {
+            if (it.toString().equalsIgnoreCase("[merged]")) {
                 return true;
             }
         }

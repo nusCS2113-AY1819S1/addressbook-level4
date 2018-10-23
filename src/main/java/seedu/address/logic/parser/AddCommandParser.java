@@ -31,12 +31,13 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                                            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ENROLLED_CLASS);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ENROLLED_CLASS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_PHONE, PREFIX_EMAIL)
                 || !argMultimap.getPreamble().isEmpty()) {
@@ -49,7 +50,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         Map<String, EnrolledClass> enrolledClassList = ParserUtil.parseEnrolledClasses(
-                                                        argMultimap.getAllValues(PREFIX_ENROLLED_CLASS));
+                argMultimap.getAllValues(PREFIX_ENROLLED_CLASS));
 
         Person person = new Person(name, phone, email, address, tagList, enrolledClassList, TimeSlots.initTimeSlots());
 

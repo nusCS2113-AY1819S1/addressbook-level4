@@ -14,6 +14,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the DeleteCommand
      * and returns an DeleteCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteCommand parse(String args) throws ParseException {
@@ -24,12 +25,12 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         }
 
         String[] deleteKeywords = trimmedArgs.split("\\s+");
-        if(deleteKeywords.length!=2){
+        if (deleteKeywords.length != 2) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
-        if(!deleteKeywords[0].equalsIgnoreCase("main")&&
-                !deleteKeywords[0].equalsIgnoreCase("merged")){
+        if (!deleteKeywords[0].equalsIgnoreCase("main") &&
+                !deleteKeywords[0].equalsIgnoreCase("merged")) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
         try {

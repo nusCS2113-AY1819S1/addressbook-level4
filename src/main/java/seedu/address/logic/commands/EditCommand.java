@@ -8,8 +8,13 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.sql.Time;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.Messages;
@@ -50,7 +55,7 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
-     * @param index of the person in the filtered person list to edit
+     * @param index                of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
     public EditCommand(Index index, EditPersonDescriptor editPersonDescriptor) {
@@ -97,8 +102,8 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         Map<String, EnrolledClass> updatedEnrolledClasses = editPersonDescriptor.getEnrolledClasses()
-                                                            .orElse(personToEdit.getEnrolledClasses());
-        Map<String, List<TimeSlots>> updatedTimeSlots= personToEdit.getTimeSlots();
+                .orElse(personToEdit.getEnrolledClasses());
+        Map<String, List<TimeSlots>> updatedTimeSlots = personToEdit.getTimeSlots();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedTags,
                 updatedEnrolledClasses, updatedTimeSlots);
@@ -135,7 +140,8 @@ public class EditCommand extends Command {
         private Map<String, EnrolledClass> enrolledClasses;
         private Map<String, List<TimeSlots>> timeslots;
 
-        public EditPersonDescriptor() {}
+        public EditPersonDescriptor() {
+        }
 
         /**
          * Copy constructor.
@@ -196,7 +202,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public void setTags(Set<Tag> tags) {
-            if (tags != null){
+            if (tags != null) {
                 this.tags = tags;
             } else {
                 this.tags = new HashSet<>();
@@ -209,7 +215,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            if (tags != null){
+            if (tags != null) {
                 return Optional.of(Collections.unmodifiableSet(tags));
             } else {
                 return Optional.empty();
@@ -221,7 +227,7 @@ public class EditCommand extends Command {
          * A defensive copy of {@code enrolledClasses} is used internally.
          */
         public void setEnrolledClasses(Map<String, EnrolledClass> enrolledClasses) {
-            if (enrolledClasses != null){
+            if (enrolledClasses != null) {
                 this.enrolledClasses = enrolledClasses;
             } else {
                 this.enrolledClasses = new TreeMap<>();
@@ -234,18 +240,18 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code enrolledClasses} is null.
          */
         public Optional<Map<String, EnrolledClass>> getEnrolledClasses() {
-            if (enrolledClasses != null){
+            if (enrolledClasses != null) {
                 return Optional.of(Collections.unmodifiableMap(enrolledClasses));
             } else {
                 return Optional.empty();
             }
         }
 
-        public void setTimeSlots(Map<String, List<TimeSlots>> timeslots){
-            this.timeslots=timeslots;
+        public void setTimeSlots(Map<String, List<TimeSlots>> timeslots) {
+            this.timeslots = timeslots;
         }
 
-        public Map<String, List<TimeSlots>> getTimeSlots(){
+        public Map<String, List<TimeSlots>> getTimeSlots() {
             return timeslots;
         }
 

@@ -17,7 +17,7 @@ public class TimetableContainsModulePredicate implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        for(Tag tags: person.getTags() ) {
+        for (Tag tags : person.getTags()) {
             if (tags.toString().equalsIgnoreCase("[merged]")) {
                 return true;
             }
@@ -41,6 +41,6 @@ public class TimetableContainsModulePredicate implements Predicate<Person> {
                 || (other instanceof seedu.address.model.person.TimetableContainsModulePredicate
                 // instanceof handles nulls
                 && keywords.equals(((seedu.address.model.person.TimetableContainsModulePredicate) other).keywords));
-                // state check
+        // state check
     }
 }

@@ -30,13 +30,14 @@ public class EditCommandParser implements Parser<EditCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
      * and returns an EditCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                                            PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ENROLLED_CLASS);
+                        PREFIX_ADDRESS, PREFIX_TAG, PREFIX_ENROLLED_CLASS);
 
         Index index;
 
@@ -62,7 +63,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         parseEnrolledClassesForEdit(argMultimap.getAllValues(PREFIX_ENROLLED_CLASS))
-                                            .ifPresent(editPersonDescriptor::setEnrolledClasses);
+                .ifPresent(editPersonDescriptor::setEnrolledClasses);
 
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
@@ -103,7 +104,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         Collection<String> enrolledClassesMap;
-        if (enrolledClasses.size() == 1 && enrolledClasses.contains("")){
+        if (enrolledClasses.size() == 1 && enrolledClasses.contains("")) {
             enrolledClassesMap = Collections.emptySet();
         } else {
             enrolledClassesMap = enrolledClasses;
