@@ -39,7 +39,8 @@ public class JobCard extends UiPart<Region> {
     private Label salary;
     @FXML
     private Label education;
-
+    @FXML
+    private Label companyName;
 
     public JobCard(JobOffer jobOffer, int displayedIndex) {
         super(FXML);
@@ -50,6 +51,7 @@ public class JobCard extends UiPart<Region> {
         ageRange.setText(jobOffer.getAgeRange().value);
         salary.setText(jobOffer.getSalary().value);
         education.setText(jobOffer.getEducation().value);
+        companyName.setText(jobOffer.getCompanyName().value);
     }
 
     @Override

@@ -3,6 +3,8 @@ package seedu.recruit.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.recruit.commons.util.EmailUtil;
+import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
@@ -31,7 +33,7 @@ public interface Model {
 
     /**
      * Deletes the given candidate.
-     * The candidate must exist in the recruit book.
+     * The candidate must exist in the candidate book.
      */
     void deleteCandidate(Candidate target);
 
@@ -137,6 +139,11 @@ public interface Model {
     void updateFilteredCompanyList(Predicate<Company> predicate);
 
     /**
+     * Sorts the candidates in CandidateBook
+     */
+    void sortCandidates(Prefix prefix);
+
+    /**
      * Returns true if the model has previous CompanyBook states to restore.
      */
     boolean canUndoCompanyBook();
@@ -170,6 +177,12 @@ public interface Model {
      */
     void addJobOffer(CompanyName companyName, JobOffer jobOffer);
 
+    /**
+     * Deletes the given job offer.
+     * The job offer must exist in the CompanyBook.
+     */
+    void deleteJobOffer(JobOffer target);
+
     /** Returns an unmodifiable view of the filtered job lists of all companies */
     ObservableList<JobOffer> getFilteredCompanyJobList();
 
@@ -178,4 +191,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredCompanyJobList(Predicate<JobOffer> predicate);
+
+    EmailUtil getEmailUtil();
+
+    void setEmailUtil(EmailUtil emailUtil);
 }

@@ -36,7 +36,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * *`list candidates`* : lists the names of all the candidates available
 * *`addc`* : add a job candidate to RecruitBook
 * *`addj`* : adds an available job to RecruitBook
-* **`delete`**`3` : deletes the 3rd job shown in the current list
+* **`deleteC`**`3` : deletes the 3rd company shown in the list of companies
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -56,6 +56,18 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Views help information of the various commands in RecruitBook. +
 Format: `help`
+
+=== Switching Books : `switch`
+
+Toggles between Candidate Book and Company Book according to your viewing needs.
+
+==== Switching to Candidate Book +
+Format: `switchc`
+
+==== Switching to Company Book +
+Format: `switchC`
+
+image::switchBook.png[width="790"]
 
 === Adding a candidate / company / job  : `add`
 
@@ -94,13 +106,15 @@ Format: `addj`
 
 Entering this command will prompt you the following: +
 *`Enter the following details of the job in the format:`* +
-`c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY`
+`c/COMPANY j/JOB_TITLE g/GENDER xr/AGE_RANGE h/EDUCATION s/SALARY` +
+`(Enter 'cancel' to stop adding jobs)` +
+`Example: c/McDonalds j/cashier g/M xr/20-30 h/O levels s/1200`
 
 Note: COMPANY specified has to be added to RecruitBook first!
 
 Examples:
 
-*	`c/McDonalds j/Cashier g/M xr/20-30 h/O levels s/1200`
+*	`c/Subway j/Cashier g/M xr/20-30 h/O levels s/1200`
 *	`c/KFC j/Cook g/F xr/20-30 h/O levels s/1400`
 
 === Exits from any intermediate command
@@ -109,26 +123,27 @@ Format: `cancel`
 === Listing details of candidates / jobs : `list`
 
 ==== Shows a list of all candidates present in the RecruitBook +
-Format: `list candidates`
+Format: `listc`
 
 Examples:
 
-*   `John Doe p/91234567 e/johndoe@example.com a/72 Kent Ridge Rd j/Writer h/Business Degree s/$5000 j/Marketing assistant y/2 c/NUS`
-*	`Betsy Crower p/98765432 e/betsycrower@example.com ...`
-*	`Chris Lee p/91238765 e/chrislee@example.com ...`
+image::candidatePanel.png[width="790", align="left"]
 
-==== Shows a list of all job offers available at the moment +
-Format: `list jobs`
+==== Shows a list of all job offers of a selected company available at the moment +
+Format: `listC<INDEX>`
+
+Shows the list of job offers of the company with the specified `INDEX`.
+The index must be an index number shown in the displayed company list.
 
 Examples:
 
-*	`j/Software Engineer c/NUS ar/25-40 h/Computing Degree s/$6000-$8000 g/U`
-*	`j/Writer c/Singapore Press Holdings ar/25-30 h/A levels s/$5000-$6000 g/F`
-*	`j/Research Assistant c/A*STAR ar/25-50 h/Computing Degree s/$4000-$6000 g/M`
+image::companyPanel1.png[width="790", align="left"]
+image::companyPanel2.png[width="790", align="left"]
+image::companyPanel3.png[width="790", align="left"]
 
-=== Editing a candidate / job : `editc`
+=== Editing a candidate / company / job : `edit`
 
-==== Edits attributes of the candidate at the specified index `<INDEX>`
+==== Edits attributes of the candidate at the specified index `INDEX`
 Format: `editc <INDEX>`
 
 Edits the candidate with the specified `INDEX`.
@@ -141,6 +156,17 @@ Example:
 
 * `editc 3 t/` +
 (Edits and clears all existing tags belonging to the candidate at index 3)
+
+==== Edits details of a company at the specified index `INDEX`
+Format: `editC <INDEX>`
+
+Edits the company with the specified `INDEX`.
+The index must be an index number shown in the displayed company list.
+
+Example:
+
+*   `editC 1 n/KFC p/62226111` +
+(Edits the name and phone number of the company with index 1 to be KFC and 62226111
 
 ==== Edits details of a job offer
 Format: `editj <INDEX>`
@@ -180,7 +206,7 @@ Examples:
 Format: `findC NAME` +
 
 ****
-* The search is case insentitive. e.g. `kfc` will match `KFC`
+* The search is case insensitive. e.g. `kfc` will match `KFC`
 * The order of the keywords does not matter. e.g. `Pte Ltd Hanbaobao` will match `Hanbaobao Pte Ltd`
 * Only full words will be matched e.g. `Mc` will not match `McDonalds`
 * Companies matching at least one keyword will be returned (i.e. `OR` search)
@@ -217,16 +243,33 @@ Examples:
 ==== Exits from the filter interface and system proceeds to ask for next command
 Format: `cancel`
 
-=== Deleting a candidate / job : `delete`
+=== Sorting candidates / company / job : `sort`
 
-==== Deleting a specific candidate
-Format: `deletec <INDEX>`
+==== Sorting candidates based on different fields
+Format: `sortc <tag>` +
+Supported tags: `n/`, `x/`, `e/`, `j/`, `h/`, `s/`
 
-*	Deletes the candidate with the specified `INDEX`
+*   Only one tag/field is included when using the sort command
+*   There must be one tag/field included
+
+Examples:
+
+*   `sortc n/` +
+(Sorts all candidates lexicographically by their name)
+*   `sortc s/` +
+(Sorts all candidates by their salary)
+
+=== Deleting candidates / companies / job offers : `delete`
+
+==== Deleting candidate(s)
+Format: `deletec <INDEX>,<INDEX> ...`
+
+*	Deletes the candidate(s) with the specified `INDEX`(s)
 *	This index must be an index number shown in the displayed candidate list.
 *	The full name can be found using the find function when a partial keyword is entered
 
-Example to delete a candidate:
+
+Example to delete candidate(s):
 
 Step 1. `find Betsy` +
 (Shows all saved candidates named Betsy)
@@ -234,29 +277,91 @@ Step 1. `find Betsy` +
 Step 2. `deletec 1` +
 (Deletes the 1st candidate on most recent list)
 
-==== Deleting a specific job offer
-Format: `deletej <INDEX>`
+==== Deleting company(s)
+Format: `deleteC <INDEX>,<INDEX> ...`
 
-* Deletes the job with the specified `INDEX`
+* Deletes the company(s) with the specified `INDEX`(s)
+* The index must be an index number shown in the displayed company list.
+
+Example to delete company(s):
+
+Step 1. `listC` +
+(Shows all available companies)
+
+Step 2. `deleteC 1,6,2` +
+(Deletes the 1st, 2nd and 6th job in the job list)
+
+
+==== Deleting job offer(s)
+Format: `deletej <INDEX>,<INDEX> ...`
+
+* Deletes the job(s) with the specified `INDEX`(s)
 * The index must be an index number shown in the displayed job list.
 
-Example to delete a job:
+Example to delete job(s):
 
-Step 1. `list jobs` +
+Step 1. `listj` +
 (Shows all available jobs)
 
-Step 2. `deletej 5` +
-(Deletes the 5th job in the job list)
+Step 2. `deletej 5,4` +
+(Deletes the 4th and 5th job in the job list)
 
 === Clearing all entries : `clear`
 
-Clears all entries from the RecruitBook. +
-Format: `clear`
+Clears all entries from the Candidate Book. +
+Format: `clearc`
+
+Clears all entries from the Company Book. +
+Format: `clearC`
 
 === Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
+
+=== Sending emails : `email`
+
+Sends an email to specified candidates about specified job offers OR
+to specified companies about specified candidates that are suitable for specified job offers. +
+
+NOTE: Only Gmail is supported at this point in time.
+
+NOTE: If it is your first time running RecruitBook, a Gmail log in page will open on your browser.
+The gmail account that you log in with will be the email account used to send emails.
+
+Format: `email`
+
+._Email command is a 4-step command_
+.   *Initialisation.* Type `email` to initialise the email command.
+.   *Choose your recipients.* On the RecruitBook application, what's shown on the main window
+    will be taken in as the recipients. You can use commands such as `list`, `filter`, `find`
+    to change the candidate/job offer shown. +
+    Type `next` to move on to the next step.
+.   *Choose your contents.* Same as before, what is shown on the main window will be taken in as
+    the contents. +
+    Type `next` to move on to the next step.
+
+.   *Sending your email.* Once both recipients and contents have been picked, type `send` to send your email. +
+    This step is a confirmation step before you actually send the email.
+
+WARNING: Recipients and contents must be contrasting - If recipients are candidates, then the
+content must be job offers and vice versa.
+
+Examples:
+
+._You wish to send an email to candidates whose asking salary is $1,000 about being a cashier_
+.   `email` +
+    (Initialise email command)
+.   `filter /s$1000` +
+    (On CandidateBook)
+.   `next` +
+    (To select recipients)
+.   `find /jCashier` +
+    (On CompanyBook)
+.   `next` +
+    (To select contents)
+.   `send` +
+    (To send email)
 
 === Saving the data
 
@@ -280,13 +385,13 @@ _{explain how the user can enable/disable data encryption}_
 *	*Add* : `addc n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS …` +
             e.g. `addc n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 …`
 *	*List* : `list [jobs /candidates]`
-*	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `edit <INDEX>` +
-            e.g. `editc 2 e/jameslee@example.com`, `editj 5`
-*	*Find* : `find <tag>/KEYWORD` +
-            e.g. `find n/James n/Jake`
+*	*Edit* : `editc <INDEX> [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS]` or `editC <INDEX>` +
+            e.g. `editc 2 e/jameslee@example.com`, `editC 5`
+*	*Find* : `find <tag>/KEYWORD [MORE_KEYWORDS]` +
 *	*Filter* : `filter <tag> [h/highest education level] [j/job] [s/expected salary] [x/age]` +
             e.g. `filter h/O LEVEL`
 *	*Delete* : `deletec <INDEX>` or `deletej <INDEX>` +
             e.g. `deletec 1 `, `deletej 5`
 *	*Clear* : `clear`
 *	*Exit* : `exit`
+*           *Email* : `email`

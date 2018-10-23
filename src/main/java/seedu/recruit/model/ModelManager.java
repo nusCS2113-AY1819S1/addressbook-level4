@@ -13,6 +13,8 @@ import seedu.recruit.commons.core.ComponentManager;
 import seedu.recruit.commons.core.LogsCenter;
 import seedu.recruit.commons.events.model.CandidateBookChangedEvent;
 import seedu.recruit.commons.events.model.CompanyBookChangedEvent;
+import seedu.recruit.commons.util.EmailUtil;
+import seedu.recruit.logic.parser.Prefix;
 import seedu.recruit.model.candidate.Candidate;
 import seedu.recruit.model.company.Company;
 import seedu.recruit.model.company.CompanyName;
@@ -29,6 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Candidate> filteredCandidates;
     private final FilteredList<Company> filteredCompanies;
     private final FilteredList<JobOffer> filteredJobs;
+    private EmailUtil emailUtil;
 
     /**
      * Initializes a ModelManager with the given candidateBook and userPrefs.
@@ -44,6 +47,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredCandidates = new FilteredList<>(versionedCandidateBook.getCandidateList());
         filteredCompanies = new FilteredList<>(versionedCompanyBook.getCompanyList());
         filteredJobs = new FilteredList<>(versionedCompanyBook.getCompanyJobList());
+        emailUtil = new EmailUtil();
     }
 
     public ModelManager() {
@@ -112,6 +116,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedCandidate);
 
         versionedCandidateBook.updatePerson(target, editedCandidate);
+        indicateCandidateBookChanged();
+    }
+
+    @Override
+    public void sortCandidates(Prefix prefix) {
+        versionedCandidateBook.sortCandidates(prefix);
         indicateCandidateBookChanged();
     }
 
@@ -272,6 +282,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateCompanyBookChanged();
     }
 
+    @Override
+    public void deleteJobOffer(JobOffer jobOffer) {
+        requireNonNull(jobOffer);
+        versionedCompanyBook.deleteJobOffer(jobOffer);
+        indicateCompanyBookChanged();
+    }
     /**
      * Returns an unmodifiable view of the job lists of all companies {@code Company} backed by the internal list of
      * {@code versionedCompanyBook}
@@ -285,5 +301,13 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredCompanyJobList(Predicate<JobOffer> predicate) {
         requireNonNull(predicate);
         filteredJobs.setPredicate(predicate);
+    }
+
+    public EmailUtil getEmailUtil() {
+        return emailUtil;
+    }
+
+    public void setEmailUtil(EmailUtil emailUtil) {
+        this.emailUtil = emailUtil;
     }
 }
