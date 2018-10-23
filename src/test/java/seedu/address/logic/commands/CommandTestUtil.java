@@ -7,8 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CONTACT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +30,8 @@ import seedu.address.testutil.EditEventDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_USERNAME = "bob";
+    public static final String VALID_PASSWORD = "pass";
     public static final String VALID_NAME_AMY = "Night Cycling";
     public static final String VALID_NAME_BOB = "House Movie Screening";
     public static final String VALID_CONTACT_AMY = "Amy Bee";
@@ -43,6 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
+    public static final String USERNAME_DESC = " " + PREFIX_USERNAME + VALID_USERNAME;
+    public static final String PASSWORD_DESC = " " + PREFIX_PASSWORD + VALID_PASSWORD;
     public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
     public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
     public static final String CONTACT_DESC_AMY = " " + PREFIX_CONTACT + VALID_CONTACT_AMY;
@@ -58,6 +64,8 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
+    public static final String INVALID_USERNAME_DESC = " " + PREFIX_USERNAME + "_james_"; // Incorrect format
+    public static final String INVALID_PASSWORD_DESC = " " + PREFIX_PASSWORD + "hello world"; // cannot contain space
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_CONTACT_DESC = " " + PREFIX_CONTACT + "James&"; // '&' not allowed in contact
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
