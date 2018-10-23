@@ -24,7 +24,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     private final Label idLabel;
     private final Label nameLabel;
     private final Label addressLabel;
-    private final Label SerialNumberLabel;
+    private final Label serialNumberLabel;
     private final Label emailLabel;
     private final List<Label> tagLabels;
 
@@ -34,7 +34,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
-        SerialNumberLabel = getChildNode(SERIAL_NUMBER_FIELD_ID);
+        serialNumberLabel = getChildNode(SERIAL_NUMBER_FIELD_ID);
         emailLabel = getChildNode(DIST_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
@@ -58,7 +58,7 @@ public class PersonCardHandle extends NodeHandle<Node> {
     }
 
     public String getSerialNumber() {
-        return SerialNumberLabel.getText();
+        return serialNumberLabel.getText();
     }
 
     public String getDistributor() {

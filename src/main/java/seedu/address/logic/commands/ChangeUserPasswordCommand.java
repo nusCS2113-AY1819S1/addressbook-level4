@@ -8,7 +8,7 @@ import seedu.address.model.Model;
 import seedu.address.model.login.Password;
 import seedu.address.model.login.User;
 import seedu.address.model.login.Username;
-import seedu.address.model.login.exceptions.AuthenticatedException;
+import seedu.address.model.login.exceptions.AuthenticationFailedException;
 import seedu.address.model.login.exceptions.UserNotFoundException;
 
 /**
@@ -55,7 +55,7 @@ public class ChangeUserPasswordCommand extends Command {
             } else {
                 return new CommandResult(MESSAGE_UPDATE_FAILURE);
             }
-        } catch (AuthenticatedException e) {
+        } catch (AuthenticationFailedException e) {
             throw new CommandException(MESSAGE_NOT_LOGGED_OUT);
         } catch (UserNotFoundException e) {
             throw new CommandException(MESSAGE_UPDATE_FAILURE);

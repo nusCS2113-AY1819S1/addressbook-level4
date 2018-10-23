@@ -25,7 +25,6 @@ import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateRemin
 import seedu.address.model.timeidentifiedclass.shopday.exceptions.DuplicateTransactionException;
 import seedu.address.model.timeidentifiedclass.transaction.Transaction;
 
-
 /**
  * Wraps all data at the address-book level
  * Duplicates are not allowed (by .isSamePerson comparison)
