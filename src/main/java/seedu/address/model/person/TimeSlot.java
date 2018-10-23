@@ -183,7 +183,6 @@ public class TimeSlot {
         String dayString = dayOfWeek.getDisplayName(TextStyle.FULL , Locale.ENGLISH);
         return dayString.substring(0, 2);
     }
-}
 
     @Override
     public int hashCode() {
