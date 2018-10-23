@@ -327,42 +327,69 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Group feature
 ==== Current Implementation
 
-The `group` mechanism is facilitated by `AddressBook`.
+The group mechanism is facilitated by `AddressBook`.
 Additionally, it implements the following operations:
 
-* `AddressBook#createGroup()` -- Creates a group in the address book.
-* `AddressBook#hasGroup()` -- Checks to see if the address book has a particular group.
+* `AddressBook#createGroup()` -- Creates a group in the student management system.
+* `AddressBook#hasGroup()` -- Checks to see if the student management system has a particular group.
 * `AddressBook#hasPersonInGroup()` -- Checks to see if a particular person is in a group.
 * `AddressBook#addGroup()` -- Add's persons to a group.
-* `AddressBook#getGroupList()` -- Returns a list of groups in the address book.
+* `AddressBook#removeGroup()` -- Removes a group form the student management system.
 
-These operations are exposed in the `Model` interface as `Model#createGroup()`, `Model#hasGroup()`, `Model#hasPersonInGroup()`, `Model#addGroup()` and `Model#getFilteredGroupList()` respectively.
+These operations are exposed in the `Model` interface as `Model#createGroup()`, `Model#hasGroup()`,
+`Model#hasPersonInGroup()`, `Model#addGroup()` and `Model#deleteGroup()` respectively.
 
-Given below is an example usage scenario and how the `group` mechanism behaves at each step.
+Given below is an example usage scenario and how the group mechanism behaves at each step.
 
-Step 1. User executes `group n/CS2113 l/LT15` command to add a group to the address book. The address book detects `group` as a command word will use `CreateGroupCommandParser` to
-parse the input given. `CreateGroupCommandParser` will then create a `Group` object after parsing and pass it to `GroupCommand` which will then execute creating a group in the address book.
+Step 1. User inputs `creategroup n/CS1231 l/LT15` to create a group in the student management system.
+The `AddressBookParser` detects `creategroup` as a command word to use `CreateGroupCommandParser` to parse the input given.
+`CreateGroupCommandParser` will then create a `Group` object containing all of the group's given information after parsing and pass it to `GroupCommand` which will then
+execute adding the group created to the student management system.
   +
 [NOTE]
-If a duplicate groups are found in the address book during its execution, it will not create a group or override the existing group but throw a `CommandException : Duplicate Group` which will notify the user of the issue.
+If a duplicate groups are found in the student management system during its execution,
+it will not create a group nor will it override the existing group but instead, it will throw a `DuplicateGroupException`
+which will then notify the user of the issue.
 
-Step 2. The user executes `addgroup g/1 p/1` command to add the first person in the address book to the first group in address book. The address book detects `addgroup` as a command word will use `AddGroupCommandParser` to
-parse the input given. `AddGroupCommandParser` will then create a `AddGroup` object after parsing and pass it to `AddGroupCommand` which will then execute adding persons to a group in the address book. +
+The following sequence diagram shows how the create group operation works within both `Model` and `Logic` components where `g` is the `Group` object created:
 
+.Interactions Inside the Logic and Model Component for the `creategroup n/CS1231 l/LT15` Command
+image::CreateGroupSequenceDiagram.png[width="800"]
 
-
+Step 2. The user inputs `addgroup g/1 p/1` to add the first person in the student management system to the first group
+in the student management system. The `AddressBookParser` detects `addgroup` as a command word will use `AddGroupCommandParser`
+to parse the input given. `AddGroupCommandParser` will then create an `AddGroup` object containing all relevant group and person indexes after parsing and pass it to `AddGroupCommand`
+which will then execute adding persons to the specified group in the student management system.
+ +
 [NOTE]
-If a duplicate persons are found in the group of the address book during its execution, it will not create a group or override the existing group but throw a `CommandException : Duplicate Persons` which will notify the user of the issue.
+If a duplicate persons are found in the group of the student management system during its execution,
+it will not create a group nor will it override the existing group but instead, it will throw a `DuplicatePersonException` which will notify the user of the issue.
+
+The following sequence diagram shows how the add persons to group operation works within both `Model` and `Logic` components where `ag` is the `AddGroup` object created:
+
+.Interactions Inside the Logic and Model Component for the `addgroup g/1 p/1` Command
+image::AddGroupSequenceDiagram.png[width="800"]
+
+Step 3. The user inputs `deletegroup 1` to delete the first group in the student management system. The `AddressBookParser` detects `deletegroup` as a command word will use `DeleteGroupCommandParser`
+to parse the input given. `DeleteGroupCommandParser` will then create an `Index` object after parsing and pass it to `DeleteGroupCommand`
+which will then execute deleting the specified group from the student management system.
+ +
+
+The following sequence diagram shows how the delete group operation works within both `Model` and `Logic` components:
+
+.Interactions Inside the Logic and Model Component's for the `deletegroup 1` Command
+image::DeleteGroupSequenceDiagram.png[width="800"]
+
 
 ==== Design Considerations
 
-===== Aspect: Create groups
+===== Aspect: Storage
 
-* **Alternative 1 (current choice):** Creates a group and writes it to `addressbook.xml`.
+* **Alternative 1 (current choice):** Stores groups in `addressbook.xml`.
 ** Pros: Easy to implement.
 ** Cons: Share same database as persons, not modular in terms of future expansions.
-* **Alternative 2:** Creates a group and writes it to a different file `addressbook2.xml`.
-** Pros: Modular as groups are stored in a different file, makes extraction of data easier.
+* **Alternative 2:** Stores groups in a different file `addressbookgroups.xml`.
+** Pros: Modular as groups are stored in a different file, makes data extraction easier.
 ** Cons: Harder to implement.
 
 // end::group[]
@@ -972,7 +999,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |university lecturer |add students to groups |have a list of all my students in a particular module/group
 
-|`* * *` |university lecturer |add groups to a calender |have a list of all my modules with their respective dates
+|`* * *` |university lecturer |delete groups |edit my student management system
 
 |`* * *` |university lecturer |send an email to a student, a group of students or students belonging to a group |make module specific announcements
 
@@ -1038,7 +1065,7 @@ Use case ends
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of data entered.
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
 +
 
 [none]
@@ -1068,7 +1095,7 @@ Use case ends
 *Extensions*
 
 [none]
-* 1a. Student management system detects incorrect format of in data entered.
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
 +
 
 [none]
@@ -1079,6 +1106,30 @@ Use case ends
 
 [none]
 ** 1b1. Student management system rejects command entered with relevant error message.
++
+
+
+[discrete]
+=== Use case: Delete Groups
+*Precondition*
+
+1.  Student management system has group(s)
+
+*MSS*
+
+1.  Lecturer deletes group
+2.  AddressBook confirms group is deleted
++
+Use case ends
+
+*Extensions*
+
+[none]
+* 1a. Student management system detects incorrect format of lecturer input (invalid & missing parameters).
++
+
+[none]
+** 1a1. Student management system rejects command entered with relevant error message.
 +
 
 
