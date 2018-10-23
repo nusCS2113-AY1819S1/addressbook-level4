@@ -23,7 +23,7 @@ public class GradebookEditCommandParser {
     private static final String MESSAGE_ERROR_EMPTY = "Module code and gradebook component name cannot be empty";
 
     /**
-     * Parses the given {@code String} of arguments in the context of the GradebookFindCommand
+     * Parses the given {@code String args} of arguments in the context of the GradebookFindCommand
      * and returns a GradebookFindCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
