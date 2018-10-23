@@ -33,7 +33,7 @@ public class AddExpenditureCommand extends Command {
     private final Expenditure toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an AddExpenditureCommand to add the specified {@code Expenditure}
      */
     public AddExpenditureCommand(Expenditure expenditure) {
         requireNonNull(expenditure);
