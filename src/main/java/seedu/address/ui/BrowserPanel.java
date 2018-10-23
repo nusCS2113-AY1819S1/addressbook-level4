@@ -60,9 +60,10 @@ public class BrowserPanel extends UiPart<Region> {
                 + "&contact=" + event.getContact()
                 + "&phone=" + event.getPhone()
                 + "&email=" + event.getEmail()
-                + "&address=" + event.getVenue().value.replaceAll("#", "%23")
+                + "&venue=" + event.getVenue().value.replaceAll("#", "%23")
                 + "&dateTime=" + PAGE_DATE_FORMAT.format(event.getDateTime().dateTime).replaceAll(" ", "%20")
-                + "&tags=" + event.getTagsString();
+                + "&tags=" + event.getTagsString()
+                + "&attendance=" + event.getAttendeesString();
 
         return searchPageString;
     }

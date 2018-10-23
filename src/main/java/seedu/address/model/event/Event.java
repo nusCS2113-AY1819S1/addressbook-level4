@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeSet;
 
 import seedu.address.model.attendee.Attendee;
 import seedu.address.model.tag.Tag;
@@ -80,6 +81,9 @@ public class Event {
         return Collections.unmodifiableSet(tags);
     }
 
+    /**
+     * Returns tags formatted as a string to be passed into Event Page HTML as query string parameter
+     */
     public String getTagsString() {
         List<String> tagsList = new ArrayList<>();
         for (Tag t: tags) {
@@ -95,6 +99,18 @@ public class Event {
      */
     public Set<Attendee> getAttendees() {
         return Collections.unmodifiableSet(attendees);
+    }
+
+    /**
+     * Returns attendee list formatted as a string to be passed into Event Page HTML as query string parameter
+     */
+    public String getAttendeesString() {
+        TreeSet<String> attendeesSet = new TreeSet<>();
+        for (Attendee a: attendees) {
+            attendeesSet.add(a.attendeeName);
+        }
+        String attendeesString = String.join("<br>", attendeesSet);
+        return attendeesString;
     }
 
     /**
