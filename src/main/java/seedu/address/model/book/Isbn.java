@@ -25,7 +25,7 @@ public class Isbn {
     public Isbn(String isbn) {
         requireNonNull(isbn);
         checkArgument(isValidIsbn(isbn), MESSAGE_ISBN_CONSTRAINTS);
-        value = isbn;
+        value = isbn.replace("-", "");
     }
 
     /**

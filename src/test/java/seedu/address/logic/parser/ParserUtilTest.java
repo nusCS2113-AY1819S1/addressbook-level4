@@ -89,48 +89,48 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIsbn((String) null));
     }
 
     @Test
     public void parsePhone_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parsePhone(INVALID_ISBN));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIsbn(INVALID_ISBN));
     }
 
     @Test
     public void parsePhone_validValueWithoutWhitespace_returnsPhone() throws Exception {
         Isbn expectedIsbn = new Isbn(VALID_ISBN);
-        assertEquals(expectedIsbn, ParserUtil.parsePhone(VALID_ISBN));
+        assertEquals(expectedIsbn, ParserUtil.parseIsbn(VALID_ISBN));
     }
 
     @Test
     public void parsePhone_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
         String phoneWithWhitespace = WHITESPACE + VALID_ISBN + WHITESPACE;
         Isbn expectedIsbn = new Isbn(VALID_ISBN);
-        assertEquals(expectedIsbn, ParserUtil.parsePhone(phoneWithWhitespace));
+        assertEquals(expectedIsbn, ParserUtil.parseIsbn(phoneWithWhitespace));
     }
 
     @Test
     public void parseAddress_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseAddress((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseQuantity((String) null));
     }
 
     @Test
     public void parseAddress_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseAddress(INVALID_QUANTITY));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseQuantity(INVALID_QUANTITY));
     }
 
     @Test
     public void parseAddress_validValueWithoutWhitespace_returnsAddress() throws Exception {
         Quantity expectedQuantity = new Quantity(VALID_QUANTITY);
-        assertEquals(expectedQuantity, ParserUtil.parseAddress(VALID_QUANTITY));
+        assertEquals(expectedQuantity, ParserUtil.parseQuantity(VALID_QUANTITY));
     }
 
     @Test
     public void parseAddress_validValueWithWhitespace_returnsTrimmedAddress() throws Exception {
         String addressWithWhitespace = WHITESPACE + VALID_QUANTITY + WHITESPACE;
         Quantity expectedQuantity = new Quantity(VALID_QUANTITY);
-        assertEquals(expectedQuantity, ParserUtil.parseAddress(addressWithWhitespace));
+        assertEquals(expectedQuantity, ParserUtil.parseQuantity(addressWithWhitespace));
     }
 
     @Test

@@ -52,7 +52,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
+    private StackPane bookListPanelPlaceholder;
 
     @FXML
     private StackPane requestListPanelPlaceholder;
@@ -122,14 +122,14 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Fills up all the
-     * placeholders of this window.
+     * placeholders of this window for Admin.
      */
-    void fillInnerParts() {
+    void fillInnerPartsAdmin() {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
         bookListPanel = new BookListPanel(logic.getFilteredBookList());
-        personListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
+        bookListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
 
         requestListPanel = new RequestListPanel(logic.getFilteredRequestList());
         requestListPanelPlaceholder.getChildren().addAll(requestListPanel.getRoot());
@@ -140,13 +140,31 @@ public class MainWindow extends UiPart<Stage> {
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getBookInventoryFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
+        StatusBarFooter requestStatusBarFooter = new StatusBarFooter(prefs.getRequestListFilePath());
+        statusbarPlaceholder.getChildren().add(requestStatusBarFooter.getRoot());
+
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
+    /**
+     *  * * Fills up all the
+     * placeholders of this window for Students.
+     */
+    void fillInnerPartsStudent() {
+        browserPanel = new BrowserPanel();
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-    void showBookList () {
         bookListPanel = new BookListPanel(logic.getFilteredBookList());
-        personListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
+        bookListPanelPlaceholder.getChildren().addAll(bookListPanel.getRoot());
+
+        ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getBookInventoryFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        CommandBox commandBox = new CommandBox(logic);
+        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
     }
 
     void hide() {
@@ -189,9 +207,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    void show() {
+    /**
+     * Introduce boolean isAdmin.
+     * Returns true if isAdmin, false if not.
+     */
+    boolean show(boolean []isAdmin) {
         primaryStage.show();
-        checkPassword.display();
+        checkPassword.display(isAdmin);
+        if (isAdmin[0]) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -209,6 +236,7 @@ public class MainWindow extends UiPart<Stage> {
     public RequestListPanel getRequestListPanel() {
         return requestListPanel;
     }
+
     void releaseResources() {
         browserPanel.freeResources();
     }

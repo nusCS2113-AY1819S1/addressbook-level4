@@ -49,7 +49,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editBookDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_ISBN).isPresent()) {
-            editBookDescriptor.setIsbn(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_ISBN).get()));
+            editBookDescriptor.setIsbn(ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get()));
         }
         if (argMultimap.getValue(PREFIX_PRICE).isPresent()) {
             editBookDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get()));
@@ -58,7 +58,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editBookDescriptor.setCost(ParserUtil.parseCost(argMultimap.getValue(PREFIX_COST).get()));
         }
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
-            editBookDescriptor.setQuantity(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_QUANTITY).get()));
+            editBookDescriptor.setQuantity(ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editBookDescriptor::setTags);
 

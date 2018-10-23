@@ -53,7 +53,7 @@ public class RequestParserUtil {
         requireNonNull(quantity);
         String trimmedQuantity = quantity.trim();
         if (!Quantity.isValidQuantity(trimmedQuantity)) {
-            throw new ParseException(Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
+            throw new ParseException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
         }
         return new Quantity(trimmedQuantity);
     }

@@ -251,50 +251,50 @@ The undo/redo mechanism is facilitated by `VersionedBookInventory`.
 It extends `BookInventory` with an undo/redo history, stored internally as an `bookInventoryStateList` and `currentStatePointer`.
 Additionally, it implements the following operations:
 
-* `VersionedBookInventory#commit()` -- Saves the current quantity book state in its history.
-* `VersionedBookInventory#undo()` -- Restores the previous quantity book state from its history.
-* `VersionedBookInventory#redo()` -- Restores a previously undone quantity book state from its history.
+* `VersionedBookInventory#commit()` -- Saves the current BookInventory state in its history.
+* `VersionedBookInventory#undo()` -- Restores the previous BookInventory state from its history.
+* `VersionedBookInventory#redo()` -- Restores a previously undone BookInventory state from its history.
 
 These operations are exposed in the `Model` interface as `Model#commitBookInventory()`, `Model#undoBookInventory()` and `Model#redoBookInventory()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedBookInventory` will be initialized with the initial quantity book state, and the `currentStatePointer` pointing to that single quantity book state.
+Step 1. The user launches the application for the first time. The `VersionedBookInventory` will be initialized with the initial BookInventory state, and the `currentStatePointer` pointing to that single BookInventory state.
 
 image::UndoRedoStartingStateListDiagram.png[width="800"]
 
-Step 2. The user executes `delete 5` command to delete the 5th book in the quantity book. The `delete` command calls `Model#commitBookInventory()`, causing the modified state of the quantity book after the `delete 5` command executes to be saved in the `bookInventoryStateList`, and the `currentStatePointer` is shifted to the newly inserted quantity book state.
+Step 2. The user executes `delete 5` command to delete the 5th book in the BookInventory. The `delete` command calls `Model#commitBookInventory()`, causing the modified state of the BookInventory after the `delete 5` command executes to be saved in the `bookInventoryStateList`, and the `currentStatePointer` is shifted to the newly inserted BookInventory state.
 
 image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
 
-Step 3. The user executes `add n/David ...` to add a new book. The `add` command also calls `Model#commitBookInventory()`, causing another modified quantity book state to be saved into the `bookInventoryStateList`.
+Step 3. The user executes `add n/David ...` to add a new book. The `add` command also calls `Model#commitBookInventory()`, causing another modified BookInventory state to be saved into the `bookInventoryStateList`.
 
 image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
 
 [NOTE]
-If a command fails its execution, it will not call `Model#commitBookInventory()`, so the quantity book state will not be saved into the `bookInventoryStateList`.
+If a command fails its execution, it will not call `Model#commitBookInventory()`, so the BookInventory state will not be saved into the `bookInventoryStateList`.
 
-Step 4. The user now decides that adding the book was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoBookInventory()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous quantity book state, and restores the quantity book to that state.
+Step 4. The user now decides that adding the book was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoBookInventory()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous BookInventory state, and restores the BookInventory to that state.
 
 image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
 
 [NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial quantity book state, then there are no previous quantity book states to restore. The `undo` command uses `Model#canUndoBookInventory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
+If the `currentStatePointer` is at index 0, pointing to the initial BookInventory state, then there are no previous BookInventory states to restore. The `undo` command uses `Model#canUndoBookInventory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
 
 The following sequence diagram shows how the undo operation works:
 
 image::UndoRedoSequenceDiagram.png[width="800"]
 
-The `redo` command does the opposite -- it calls `Model#redoBookInventory()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the quantity book to that state.
+The `redo` command does the opposite -- it calls `Model#redoBookInventory()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the BookInventory to that state.
 
 [NOTE]
-If the `currentStatePointer` is at index `bookInventoryStateList.size() - 1`, pointing to the latest quantity book state, then there are no undone quantity book states to restore. The `redo` command uses `Model#canRedoBookInventory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+If the `currentStatePointer` is at index `bookInventoryStateList.size() - 1`, pointing to the latest BookInventory state, then there are no undone BookInventory states to restore. The `redo` command uses `Model#canRedoBookInventory()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the quantity book, such as `list`, will usually not call `Model#commitBookInventory()`, `Model#undoBookInventory()` or `Model#redoBookInventory()`. Thus, the `BookInventoryStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the BookInventory, such as `list`, will usually not call `Model#commitBookInventory()`, `Model#undoBookInventory()` or `Model#redoBookInventory()`. Thus, the `BookInventoryStateList` remains unchanged.
 
 image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
 
-Step 6. The user executes `clear`, which calls `Model#commitBookInventory()`. Since the `currentStatePointer` is not pointing at the end of the `BookInventoryStateList`, all quantity book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitBookInventory()`. Since the `currentStatePointer` is not pointing at the end of the `BookInventoryStateList`, all BookInventory states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
 
 image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
 
@@ -306,7 +306,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire quantity book.
+* **Alternative 1 (current choice):** Saves the entire BookInventory.
 ** Pros: Easy to implement.
 ** Cons: May have performance issues in terms of memory usage.
 * **Alternative 2:** Individual command knows how to undo/redo by itself.
@@ -315,7 +315,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 ===== Aspect: Data structure to support the undo/redo commands
 
-* **Alternative 1 (current choice):** Use a list to store the history of quantity book states.
+* **Alternative 1 (current choice):** Use a list to store the history of BookInventory states.
 ** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
 ** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedBookInventory`.
 * **Alternative 2:** Use `HistoryManager` for undo/redo
@@ -328,7 +328,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ==== Current implementation
 The sell command utilises both the `Model` and `Logic` component to fulfil its function.
 
-The following sequence diagram shows how the sell operation is implemented:
+The following sequence diagram shows how the sell operation is implemented
 
 image::SellSequenceDiagram.png[width="800"]
 
@@ -674,12 +674,12 @@ Do take a look at <<Design-Logic>> before attempting to modify the `Logic` compo
 [discrete]
 ==== `Model` component
 
-*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the quantity book, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
+*Scenario:* You are in charge of `model`. One day, the `logic`-in-charge approaches you for help. He wants to implement a command such that the user is able to remove a particular tag from everyone in the BookInventory, but the model API does not support such a functionality at the moment. Your job is to implement an API method, so that your teammate can use your API to implement his command.
 
 [TIP]
 Do take a look at <<Design-Model>> before attempting to modify the `Model` component.
 
-. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the quantity book.
+. Add a `removeTag(Tag)` method. The specified tag will be removed from everyone in the BookInventory.
 +
 ****
 * Hints
@@ -696,7 +696,7 @@ Do take a look at <<Design-Model>> before attempting to modify the `Model` compo
 [discrete]
 ==== `Ui` component
 
-*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your quantity book application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last book in the list. Your job is to implement improvements to the UI to solve all these problems.
+*Scenario:* You are in charge of `ui`. During a beta testing session, your team is observing how the users use your BookInventory application. You realize that one of the users occasionally tries to delete non-existent tags from a contact, because the tags all look the same visually, and the user got confused. Another user made a typing mistake in his command, but did not realize he had done so because the error message wasn't prominent enough. A third user keeps scrolling down the list, because he keeps forgetting the index of the last book in the list. Your job is to implement improvements to the UI to solve all these problems.
 
 [TIP]
 Do take a look at <<Design-Ui>> before attempting to modify the `UI` component.
@@ -746,7 +746,7 @@ image::getting-started-ui-result-after.png[width="200"]
 *** Do read the commits one at a time if you feel overwhelmed.
 ****
 
-. Modify the link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the quantity book.
+. Modify the link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] to show the total number of people in the BookInventory.
 +
 **Before**
 +
@@ -759,7 +759,7 @@ image::getting-started-ui-status-after.png[width="500"]
 ****
 * Hints
 ** link:{repoURL}/src/main/resources/view/StatusBarFooter.fxml[`StatusBarFooter.fxml`] will need a new `StatusBar`. Be sure to set the `GridPane.columnIndex` properly for each `StatusBar` to avoid misalignment!
-** link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the quantity book is updated.
+** link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] needs to initialize the status bar on application start, and to update it accordingly whenever the BookInventory is updated.
 * Solution
 ** Modify the constructor of link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter`] to take in the number of books when the application just started.
 ** Use link:{repoURL}/src/main/java/seedu.address/ui/StatusBarFooter.java[`StatusBarFooter#handleBookInventoryChangedEvent(BookInventoryChangedEvent)`] to update the number of books whenever there are new changes to the BookInventory.
@@ -771,12 +771,12 @@ image::getting-started-ui-status-after.png[width="500"]
 [discrete]
 ==== `Storage` component
 
-*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the quantity book to the cloud. However, the current implementation of the application constantly saves the quantity book after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the quantity book storage.
+*Scenario:* You are in charge of `storage`. For your next project milestone, your team plans to implement a new feature of saving the BookInventory to the cloud. However, the current implementation of the application constantly saves the BookInventory after the execution of each command, which is not ideal if the user is working on limited internet connection. Your team decided that the application should instead save the changes to a temporary local backup file first, and only upload to the cloud after the user closes the application. Your job is to implement a backup API for the BookInventory storage.
 
 [TIP]
 Do take a look at <<Design-Storage>> before attempting to modify the `Storage` component.
 
-. Add a new method `backupBookInventory(ReadOnlyBookInventory)`, so that the quantity book can be saved in a fixed temporary location.
+. Add a new method `backupBookInventory(ReadOnlyBookInventory)`, so that the BookInventory can be saved in a fixed temporary location.
 +
 ****
 * Hint
@@ -976,7 +976,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
-|`*` |user with many books in the quantity book |sort books by name |locate a book easily
+|`*` |user with many books in the BookInventory |sort books by name |locate a book easily
 |=======================================================================
 
 _{More to be added}_

@@ -6,7 +6,9 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,6 +29,7 @@ import seedu.address.model.book.exceptions.DuplicateBookException;
 public class UniqueBookList implements Iterable<Book> {
 
     private final ObservableList<Book> internalList = FXCollections.observableArrayList();
+    private final Queue<String> isbnList = new LinkedList<>();
 
     /**
      * Returns true if the list contains an equivalent book as the given argument.
@@ -34,6 +37,16 @@ public class UniqueBookList implements Iterable<Book> {
     public boolean contains(Book toCheck) {
         requireNonNull(toCheck);
         return internalList.stream().anyMatch(toCheck::isSameBook);
+    }
+
+    /**
+     * Finds book with {@param isbn}
+     * @param isbn the field used to find book
+     * @return Book with {@param isbn}
+     */
+    public Book getBook(String isbn) {
+        requireNonNull(isbn);
+        return internalList.stream().filter(b -> b.getIsbn().value.equals(isbn)).findAny().orElse(null);
     }
 
     /**
@@ -104,10 +117,21 @@ public class UniqueBookList implements Iterable<Book> {
         Collections.sort(internalList, new Comparator<Book>() {
             @Override
             public int compare(Book b1, Book b2) {
-                return b1.getQuantity().getValue().compareTo(b2.getQuantity().getValue());
+                return Integer.parseInt(b1.getQuantity().getValue()) - Integer.parseInt(b2.getQuantity().getValue());
             }
         });
     }
+
+    public Queue<String> getIsbnList(String isbnText) {
+        for (Book book : internalList) {
+            String isbn = book.getIsbn().value;
+            if (isbn.contains(isbnText)) {
+                isbnList.add(isbn);
+            }
+        }
+        return isbnList;
+    }
+
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */

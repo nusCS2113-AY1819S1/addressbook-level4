@@ -2,12 +2,14 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ISBN;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.SellCommand;
 import seedu.address.logic.commands.SellCommand.DecreaseQuantity;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.book.Isbn;
 import seedu.address.model.book.Quantity;
 
 /**
@@ -24,24 +26,32 @@ public class SellCommandParser implements Parser<SellCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_QUANTITY);
+                ArgumentTokenizer.tokenize(args, PREFIX_ISBN, PREFIX_QUANTITY);
 
+        String findBookBy;
         Index index;
+        Isbn isbn;
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE), pe);
+        if (!argMultimap.getValue(PREFIX_ISBN).isPresent()) {
+            try {
+                index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE), pe);
+            }
+            findBookBy = Integer.toString(index.getZeroBased());
+        } else {
+            try {
+                isbn = ParserUtil.parseIsbn(argMultimap.getValue(PREFIX_ISBN).get());
+            } catch (ParseException pe) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SellCommand.MESSAGE_USAGE), pe);
+            }
+            findBookBy = isbn.value;
         }
 
         DecreaseQuantity decreaseQuantity = new DecreaseQuantity();
         if (argMultimap.getValue(PREFIX_QUANTITY).isPresent()) {
-            Quantity quantity = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_QUANTITY).get());
-            if (Integer.valueOf(quantity.getValue()) < 0) {
-                throw new ParseException(SellCommand.MESSAGE_NEGATIVE_SOLD_VALUE);
-            } else {
-                decreaseQuantity.setQuantity(quantity);
-            }
+            Quantity quantity = ParserUtil.parseQuantity(argMultimap.getValue(PREFIX_QUANTITY).get());
+            decreaseQuantity.setQuantity(quantity);
         }
 
         if (!decreaseQuantity.isQuantityFieldSpecified()) {
@@ -49,6 +59,6 @@ public class SellCommandParser implements Parser<SellCommand> {
         }
 
 
-        return new SellCommand(index, decreaseQuantity);
+        return new SellCommand(findBookBy, decreaseQuantity);
     }
 }

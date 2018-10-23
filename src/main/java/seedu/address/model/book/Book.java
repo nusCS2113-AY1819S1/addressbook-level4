@@ -7,10 +7,11 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.tag.Tag;
 
 /**
- * Represents a Book in the quantity book.
+ * Represents a Book in the BookInventory.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Book {
@@ -72,7 +73,7 @@ public class Book {
      * @param selling quantity of books sold
      * @return updated quantity
      */
-    public Quantity deductQuantity(Quantity selling) {
+    public Quantity deductQuantity(Quantity selling) throws CommandException {
         this.quantity.decrease(selling.toInteger());
         return quantity;
     }

@@ -1,4 +1,5 @@
 package seedu.address.logic.commands;
+
 import seedu.address.commons.core.StatisticCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;

@@ -115,7 +115,7 @@ public class XmlAdaptedBook {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Cost.class.getSimpleName()));
         }
         if (!Cost.isValidCost(cost)) {
-            throw new IllegalValueException(Cost.COST_CONSTRAINTS);
+            throw new IllegalValueException(Cost.MESSAGE_COST_CONSTRAINTS);
         }
         final Cost modelCost = new Cost(cost);
 
@@ -125,7 +125,7 @@ public class XmlAdaptedBook {
             );
         }
         if (!Quantity.isValidQuantity(quantity)) {
-            throw new IllegalValueException(Quantity.MESSAGE_ADDRESS_CONSTRAINTS);
+            throw new IllegalValueException(Quantity.MESSAGE_QUANTITY_CONSTRAINTS);
         }
         final Quantity modelQuantity = new Quantity(quantity);
 
