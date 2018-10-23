@@ -36,7 +36,7 @@ public class EventListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<Event> eventList) {
         eventListView.setItems(eventList);
         eventListView.setCellFactory(listView -> new EventListViewCell());
-        setEventHandlerForSelectionChangeEvent();
+        //setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
