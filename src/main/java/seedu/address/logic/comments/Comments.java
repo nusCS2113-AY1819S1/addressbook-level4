@@ -63,8 +63,7 @@ public abstract class Comments {
             if (commentsVector.get(i).toString().length() == 0) {
                 continue;
             }
-            comments += "\n" + "<li>" + commentsVector.get(i) + "</li>" + " <br>";
-            System.out.println(comments);
+            comments += "\n" + "<li>" + commentsVector.get(i) + "</li>";
         }
         comments += "\n</ol>\n";
         return comments;

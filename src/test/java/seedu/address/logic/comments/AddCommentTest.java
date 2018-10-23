@@ -21,19 +21,19 @@ class AddCommentTest {
                     + "</ol>";
 
     private String testcase =
-             "<span>Comment Section</span>\n"
-                     + "<ol>\n"
-                     + "<li>hello</li>\n"
-                     + "<li>My name is Gerald</li>\n"
-                     + "<li>Yup</li>\n"
-                     + "<li>REPLY--->HArlo</li>\n"
-                     + "<li>REPLY--->my name is</li>\n"
-                     + "<li>REPLY--->Chua</li>\n"
-                     + "<li>hello</li>\n"
-                     + "<li>there</li>\n"
-                     + "<li>hello</li>\n"
-                     + "<li>hi</li>\n"
-                     + "</ol>";
+            "<span>Comment Section</span>\n"
+                    + "<ol>\n"
+                    + "<li>hello</li>\n"
+                    + "<li>My name is Gerald</li>\n"
+                    + "<li>Yup</li>\n"
+                    + "<li>REPLY--->HArlo</li>\n"
+                    + "<li>REPLY--->my name is</li>\n"
+                    + "<li>REPLY--->Chua</li>\n"
+                    + "<li>hello</li>\n"
+                    + "<li>there</li>\n"
+                    + "<li>hello</li>\n"
+                    + "<li>hi</li>\n"
+                    + "</ol>\n";
     @Test
     void addComment_correctInput_success() {
         AddComment test = new AddComment(comments);
