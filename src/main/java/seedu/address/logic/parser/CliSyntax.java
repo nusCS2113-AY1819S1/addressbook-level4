@@ -25,10 +25,8 @@ public class CliSyntax {
     public static final Prefix PREFIX_TWENTY_FIVE = new Prefix("25/");
     public static final Prefix PREFIX_SEVENTY_FIVE = new Prefix("75/");
     public static final Prefix PREFIX_MEDIAN = new Prefix("median/");
-
-
     public static final Prefix PREFIX_TEST_NAME = new Prefix("tn/");
     public static final Prefix PREFIX_TEST_MARK = new Prefix("tm/");
-
-
+    public static final Prefix PREFIX_TEXT_FILE = new Prefix("txt/");
+    public static final Prefix PREFIX_COMMAND = new Prefix("c/");
 }
