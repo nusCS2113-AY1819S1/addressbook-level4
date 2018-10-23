@@ -40,12 +40,12 @@ public class ImportCommand extends Command {
             + PREFIX_FILELOCATION + "FILE_LOCATION \n"
             + "Example: " + COMMAND_WORD
             + " 1 "
-            + PREFIX_FILELOCATION + "C:\\Users\\happycat96\\Downloads\\nusmods_calendar.ics";
+            + PREFIX_FILELOCATION + "C:\\import_folder\\nusmods.ics";
 
     public static final String MESSAGE_SUCCESS = "Imported timetable for %1$s.";
     public static final String MESSAGE_EMPTY = "Timetable file empty.";
     public static final String MESSAGE_IO_ERROR =
-            "IO error: your .ics file is corrupted/ not compatible.";
+            "Failed to read the file specified. Check if it is corrupted/ incompatible/ inaccessible/ exists?";
 
 
     private final Index index;
@@ -55,7 +55,8 @@ public class ImportCommand extends Command {
      * Creates an ImportCommand to import the .ics data, parse it, and add a {@code Person} with this timetable
      */
     public ImportCommand(Index index, Path filePath) {
-        //requireNonNull(timeTable);
+        requireNonNull(index);
+        requireNonNull(filePath);
 
         this.index = index;
         this.filePath = filePath;
@@ -94,8 +95,8 @@ public class ImportCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
-     * Only the TimeTable is changed in the new Person!
+     * Creates and returns a {@code Person}
+     * The returned {@code Person} only has their (@code TimeTable) changed!
      */
     private static Person createModifiedPerson(Person personToEdit, TimeTable importedTimeTable) {
         assert personToEdit != null;
