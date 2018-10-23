@@ -13,12 +13,10 @@ import seedu.address.model.ReadOnlyExpenditureTracker;
 import seedu.address.model.expenditureinfo.Expenditure;
 
 /**
- * An Immutable AddressBook that is serializable to XML format
+ * An Immutable ExpenditureTracker that is serializable to XML format
  */
 @XmlRootElement(name = "expendituretracker")
 public class XmlSerializableExpenditureTracker {
-
-    //public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
 
     @XmlElement
     private List<XmlAdaptedExpenditure> expenditures;

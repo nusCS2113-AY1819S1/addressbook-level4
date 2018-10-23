@@ -182,4 +182,9 @@ public interface Model {
      * Saves the current to-do list state for undo/redo.
      */
     void commitTodoList();
+
+    /**
+     * Saves the current expenditure tracker state for undo/redo.
+     */
+    //void commitExpenditureTracker();
 }
