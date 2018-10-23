@@ -45,7 +45,7 @@ public class User {
      * Every field must be present and not null.
      */
     public User(Username username, Password password, Path addressBookFilePath, Path salesHistoryFilePath) {
-        requireAllNonNull(username, password, addressBookFilePath);
+        requireAllNonNull(username, password, addressBookFilePath, salesHistoryFilePath);
         this.username = username;
         this.password = password;
         this.addressBookFilePath = addressBookFilePath;

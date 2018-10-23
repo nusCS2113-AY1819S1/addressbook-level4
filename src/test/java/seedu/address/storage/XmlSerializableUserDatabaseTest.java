@@ -28,8 +28,10 @@ public class XmlSerializableUserDatabaseTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         XmlSerializableUserDatabase dataFromFile = XmlUtil.getDataFromFile(TYPICAL_USERS_FILE,
                 XmlSerializableUserDatabase.class);
+
         UserDatabase userDatabaseFromFile = dataFromFile.toModelType();
         UserDatabase typicalUsersUserDatabase = TypicalUsers.getTypicalUserDatabase();
+
         assertEquals(userDatabaseFromFile, typicalUsersUserDatabase);
     }
 

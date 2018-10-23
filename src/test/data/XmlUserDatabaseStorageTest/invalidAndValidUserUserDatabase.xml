@@ -5,11 +5,13 @@
         <username>amy</username>
         <password>pass</password>
         <addressbookfilepath>data/addressbook-amy.xml</addressbookfilepath>
+        <saleshistoryfilepath>data/saleshistory-amy.xml</saleshistoryfilepath>
     </users>
     <!-- Invalid User with invalid password field -->
     <users>
         <username>John</username>
         <password>p@ss</password>
         <addressbookfilepath>data/addressbook-u.xml</addressbookfilepath>
+        <saleshistoryfilepath>data/saleshistory-John.xml</saleshistoryfilepath>
     </users>
 </userdatabase>
