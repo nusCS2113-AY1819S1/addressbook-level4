@@ -9,8 +9,8 @@
 
 == PROJECT: https://github.com/CS2113-AY1819S1-W12-1/main[JitHub]
 
-// include UI screenshot here
-
+// TODO: include UI screenshot here
+image::../Ui.png[width="600"]
 ---
 
 == Overview
@@ -22,6 +22,8 @@ schedule
 meetings
 through cross-checking the
 timetable of your group mates.
+
+// TODO: add more stuff here
 
 
 == Summary of contributions
