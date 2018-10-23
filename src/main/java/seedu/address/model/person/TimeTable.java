@@ -41,6 +41,18 @@ public class TimeTable {
 
     /**
      * Adds a {@code TimeSlot} to the {@code TimeTable}
+     * Returns if the TimeTable is empty.
+     */
+    public boolean isEmpty() {
+        if (timeSlots.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Adds a TimeSlot to the TimeTable
      *
      * @param toAdd {@code TimeSlot} to be added
      * @throws TimeSlotOverlapException if {@code toAdd} overlaps with an existing {@code TimeSlot}

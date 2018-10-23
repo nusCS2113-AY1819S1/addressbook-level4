@@ -14,12 +14,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.FileLocation;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.TimeSlot;
@@ -234,9 +232,7 @@ public class ParserUtil {
     }
 
     /**
-     *
      * Parses a {@code String fileLocation} into a {@code fileLocation}
-     *
      */
     public static Path parseFileLocation (String fileLocation) throws ParseException {
         requireNonNull(fileLocation);
@@ -246,9 +242,10 @@ public class ParserUtil {
         Path newFilePath = Paths.get(trimmedFileLocation);
 
         //check file exists in the disk //does not check the validity of file!
+        /*
         if (!FileUtil.isFileExists(newFilePath)) {
             throw new ParseException(FileLocation.MESSAGE_CONSTRAINTS);
-        }
+        }*/
 
         //check file ends in .ics //does not check the validity of file!
         /*

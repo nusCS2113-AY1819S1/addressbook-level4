@@ -29,6 +29,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> friendList;
     private final FilteredList<Person> otherList;
     private final TimeTable timeTable;
+    private ObservableList<Person> list;
+    private User user;
 
     /**
      * Initializes a ModelManager with the given addressBook, userPrefs, timeTable.
@@ -201,5 +203,16 @@ public class ModelManager extends ComponentManager implements Model {
 
     public OtherListPredicate othersPredicateFromPerson(Person person) {
         return new OtherListPredicate(person.getFriends());
+    }
+
+    @Override
+    public void matchUserToPerson(String name) {
+        list = getAddressBook().getPersonList();
+        //Loops through personlist to get matched name Person Class
+        for (Person person : list) {
+            if (name.equals(person.getName().toString())) {
+                this.user = new User(person.getData());
+            }
+        }
     }
 }

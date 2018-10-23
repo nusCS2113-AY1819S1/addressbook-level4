@@ -174,6 +174,17 @@ public class TimeSlot {
                 && otherTimeSlot.endTime.equals(endTime);
     }
 
+    /**
+     * converts DayOfWeek object into the corresponding abbreviation.
+     * Possible outputs:
+     * MO, TU, WE, TH, FR, SA, SU
+     */
+    public String getAbbreviationFromDayOfWeek() {
+        String dayString = dayOfWeek.getDisplayName(TextStyle.FULL , Locale.ENGLISH);
+        return dayString.substring(0, 2);
+    }
+}
+
     @Override
     public int hashCode() {
         return Objects.hash(dayOfWeek, startTime, endTime);
