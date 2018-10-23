@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 import java.io.File;
 import java.io.IOException;
@@ -195,14 +196,10 @@ public class ParserUtil {
      *
      * @param oneBasedIndex the user input string.
      * @return the list of {@code Index} to return.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
-    private static ArrayList<Index> parseMultipleIndex(String oneBasedIndex) throws ParseException {
+    private static ArrayList<Index> parseMultipleIndex(String oneBasedIndex) {
         String trimmedIndex = oneBasedIndex.trim();
-        if (!StringUtil.areNonZeroUnsignedInteger(trimmedIndex)) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-        return StringUtil.tokenizeIndexWithSpace(oneBasedIndex);
+        return StringUtil.tokenizeIndexWithSpace(trimmedIndex);
     }
 
     /**
@@ -211,7 +208,6 @@ public class ParserUtil {
      *
      * @param oneBasedIndex the user input string.
      * @return the list of {@code Index} to return.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
      */
     private static ArrayList<Index> parseMultipleRangeIndex(String oneBasedIndex) {
         ArrayList<Index> output = new ArrayList<>();
@@ -240,31 +236,14 @@ public class ParserUtil {
     public static ArrayList<Index> parseSelectIndex(String oneBasedIndex) throws ParseException {
 
         // Perform a syntax check here
-        if (!isValidSelectSyntax(oneBasedIndex)) {
-            throw new ParseException("Select command format invalid!");
+        if (!StringUtil.isValidSelectSyntax(oneBasedIndex)) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
-        if (isRangeIndexFormat(oneBasedIndex)) {
+        if (StringUtil.isRangeIndexFormat(oneBasedIndex)) {
             return parseMultipleRangeIndex(oneBasedIndex);
         } else {
             return  parseMultipleIndex(oneBasedIndex);
         }
-    }
-
-    /**
-     * Determines if a user input conforms to the range selection format with the help of regex.
-     *
-     * @param input the user input string.
-     * @return true if conforms, false otherwise.
-     */
-    private static boolean isRangeIndexFormat(String input) {
-        return input.trim().matches("(?s)(\\d*\\s*-\\s*\\d*\\s*\\s*,?)?(\\s*,\\s*\\d*\\s*-\\s*\\d*\\s*\\s*,?)*");
-    }
-
-    private static boolean isValidSelectSyntax(String input) {
-        if (isRangeIndexFormat(input) || StringUtil.areNonZeroUnsignedInteger(input)) {
-            return true;
-        }
-        return false;
     }
 }
