@@ -15,5 +15,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_MERGE = new Prefix("m/");
     public static final Prefix PREFIX_USERNAME = new Prefix("user/");
     public static final Prefix PREFIX_PASSWORD = new Prefix("pass/");
-    public static final Prefix PREFIX_MODULECODE= new Prefix("mod/");
+    public static final Prefix PREFIX_MODULECODE = new Prefix("mod/");
+    public static final Prefix PREFIX_SELECT_FILE = new Prefix("selectFile/");
 }
