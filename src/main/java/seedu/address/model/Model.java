@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 
 /**
- * The API of the Model component.
+ * The API of the DrinkModel component.
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */

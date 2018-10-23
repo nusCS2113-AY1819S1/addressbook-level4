@@ -9,3 +9,4 @@ public class DuplicatePersonException extends RuntimeException {
         super("Operation would result in duplicate persons");
     }
 }
+

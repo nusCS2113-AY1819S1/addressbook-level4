@@ -1,6 +1,9 @@
 package seedu.address;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -9,31 +12,38 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.ConfigUtil;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.controller.LoginController;
+import seedu.address.init.InitAddressBook;
 import seedu.address.logic.Logic;
-import seedu.address.logic.LogicManager;
-import seedu.address.model.AddressBook;
+import seedu.address.model.LoginInfoManager;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.logininfo.JsonLoginInfoStorage;
+import seedu.address.storage.logininfo.LoginInfoStorage;
 import seedu.address.ui.Ui;
-import seedu.address.ui.UiManager;
+import seedu.address.ui.UiPart;
+
+
 
 /**
  * The main entry point to the application.
@@ -41,8 +51,9 @@ import seedu.address.ui.UiManager;
 public class MainApp extends Application {
 
     public static final Version VERSION = new Version(0, 6, 0, true);
-
+    public static final String FXML_LOGIN_PATH = "LoginPage.fxml";
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
+
 
     protected Ui ui;
     protected Logic logic;
@@ -50,7 +61,14 @@ public class MainApp extends Application {
     protected Model model;
     protected Config config;
     protected UserPrefs userPrefs;
-
+    //author @tianhang
+    protected Stage loginWindow;
+    private FXMLLoader fxmlLoader;
+    private LoginInfoManager loginInfoList;
+    private LoginController loginController;
+    private InitAddressBook initAddressBook;
+    private Stage mainWindow;
+    //author @tianhang
 
     @Override
     public void init() throws Exception {
@@ -59,46 +77,18 @@ public class MainApp extends Application {
 
         AppParameters appParameters = AppParameters.parse(getParameters());
         config = initConfig(appParameters.getConfigPath());
-
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
+        LoginInfoStorage loginInfoStorage = new JsonLoginInfoStorage (config.getUserLoginInfoilePath ());
+        loginInfoList = initLoginInfo (loginInfoStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        storage = new StorageManager(addressBookStorage, userPrefsStorage, loginInfoStorage);
 
+        initAddressBook = new InitAddressBook (config, storage, userPrefs, loginInfoList);
         initLogging(config);
-
-        model = initModelManager(storage, userPrefs);
-
-        logic = new LogicManager(model);
-
-        ui = new UiManager(logic, config, userPrefs);
-
+        fxmlLoader = new FXMLLoader();
         initEventsCenter();
-    }
 
-    /**
-     * Returns a {@code ModelManager} with the data from {@code storage}'s address book and {@code userPrefs}. <br>
-     * The data from the sample address book will be used instead if {@code storage}'s address book is not found,
-     * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
-     */
-    private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
-        try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with a sample AddressBook");
-            }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-        } catch (DataConversionException e) {
-            logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        } catch (IOException e) {
-            logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
-            initialData = new AddressBook();
-        }
-
-        return new ModelManager(initialData, userPrefs);
     }
 
     private void initLogging(Config config) {
@@ -140,6 +130,37 @@ public class MainApp extends Application {
         }
         return initializedConfig;
     }
+    /**
+     * Returns a {@code LoginInfoManager} using the hardcoded file path,
+     * or a new {@code LoginInfoManager} with default configuration if errors occur when
+     * reading from the file.
+     */
+    protected LoginInfoManager initLoginInfo(LoginInfoStorage storage) {
+        Path loginInfoFilePath = storage.getLoginInfoFilePath ();
+        logger.info("Using Login information file : " + loginInfoFilePath);
+
+        LoginInfoManager initLoginInfoManager;
+        try {
+            Optional<LoginInfoManager> loginInfoOptional = storage.readLoginInfo();
+            initLoginInfoManager = loginInfoOptional.orElse(new LoginInfoManager ());
+        } catch (DataConversionException e) {
+            logger.warning("Login Info file at " + loginInfoFilePath + " is not in the correct format. "
+                    + "Using empty database");
+            initLoginInfoManager = new LoginInfoManager ();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Please find ADMIN");
+            initLoginInfoManager = new LoginInfoManager ();
+        }
+
+        //Update prefs file in case it was missing to begin with or there are new/unused fields
+        try {
+            storage.saveLoginInfo (initLoginInfoManager);
+        } catch (IOException e) {
+            logger.warning("Failed to save LoginInfoManager file : " + StringUtil.getDetails(e));
+        }
+
+        return initLoginInfoManager;
+    }
 
     /**
      * Returns a {@code UserPrefs} using the file at {@code storage}'s user prefs file path,
@@ -179,28 +200,91 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        loginWindow = primaryStage;
         logger.info("Starting AddressBook " + MainApp.VERSION);
-        ui.start(primaryStage);
+        showLoginPage();
     }
 
+    /**
+     * Start Login scene
+     */
+    private void showLoginPage() {
+        settingUpLoginWindow();
+        settingUpLoginController();
+    }
+    private void settingUpLoginWindow() {
+        URL fxmlLoginFileUrl = UiPart.getFxmlFileUrl(FXML_LOGIN_PATH);
+        Parent root = loadFxmlFile(fxmlLoginFileUrl, loginWindow);
+        //loginWindow.initStyle(StageStyle.UNDECORATED);
+        loginWindow.setTitle("Login Page");
+        loginWindow.setScene(new Scene(root));
+        loginWindow.show();
+    }
+    private void settingUpLoginController() {
+        loginController = new LoginController ();
+        passInLoginList();
+    }
+
+    /**
+     * pass the loginInfoManager to controller
+     */
+    private void passInLoginList() {
+        loginController.getLoginInfoList (loginInfoList);
+    }
+    /**
+     * loads the file from {@code location} and set {@code root}
+     * @param location
+     * @param root
+     * @return root of primary stage
+     */
+    private Parent loadFxmlFile(URL location, Stage stage) {
+        System.out.println(location);
+        requireNonNull(location);
+        fxmlLoader.setLocation(location);
+        Parent root = null;
+        try {
+            root = fxmlLoader.load ();
+
+        } catch (IOException e) {
+            //System.out.println("the exception is " + e);
+            throw new AssertionError(e);
+        }
+        return root;
+    }
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
-        ui.stop();
-        try {
-            storage.saveUserPrefs(userPrefs);
-        } catch (IOException e) {
-            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
-        }
+        closeUiWindow();
         Platform.exit();
         System.exit(0);
     }
 
+    /**
+     * Close Ui window and load LoginInfo and UserPref into storage
+     */
+    private void closeUiWindow() {
+        logger.info("============================ [ Stopping DRINK I/O ] =============================");
+        //EventsCenter.getInstance().post(new StopUiEvent ());
+        try {
+            storage.saveLoginInfo (loginInfoList);
+            storage.saveUserPrefs(userPrefs);
+        } catch (IOException e) {
+            logger.severe("Failed to save preferences " + StringUtil.getDetails(e));
+        }
+        loginWindow.close ();
+    }
     @Subscribe
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         stop();
     }
+    @Subscribe
+    public void handleLogoutEvent(LogoutEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        Window currentStage = Stage.getWindows().filtered(window -> window.isShowing()).get (0);
+        currentStage.hide ();
+        loginWindow.show ();
+    }
+
 
     public static void main(String[] args) {
         launch(args);

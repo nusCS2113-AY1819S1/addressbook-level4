@@ -239,6 +239,91 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+// tag::analyses[]
+=== Analyses of profits and quantities sold in the company
+==== Implementation
+To facilitate the analyses of total profit, revenue and costs of the company, as well as the quantities of drinks sold, transactions (sales and imports) are logged using `Transaction`. They will be logged when the drink stock increases due to import (`TransactionType` is `IMPORT`), or when they decrease due to a sale (`TransactionType` is `SALE`). These transactions are stored into a list of transactions, in `TransactionList`.
+
+Analyses are conducted in `Analysis`. The following operations are implemented for the analyses of profit, revenue and costs:
+* `Analysis#analyseProfit()`
+* `Analysis#analyseCost()`
+* `Analysis#analyseRevenue()`
+
+The methods that enable the analyses of quantities sold are:
+* `Analysis#analyseQuantitiesSold(Drink drink)`
+* <to be added>
+
+Internally, `Analysis#analyseProfit()` calls `Analysis#analyseCost()` and `Analysis#analyseRevenue()` to calculate the profit, using the formula “profit = revenue - cost”.
+
+`Analysis#analyseRevenue()` iterates through the `TransactionList` and checks the `Transaction`’s `TransactionType`. If the `TransactionType` is `SALE`, the `Price` at which the drink is sold is obtained and added to a sum of revenues. On the other hand, if the `TransactionType` is `IMPORT`, the `Transaction` will be ignored. The sum of revenues will be wrapped in a `Price` object and returned to the calling function.
+
+The opposite applies for `Analysis#analyseCost()`. It iterates through `TransactionList`, similar to `Analysis#analyseRevenue()`. Now, if the `TransactionType` is `IMPORT`, the `Price` at which the drink is bought for is obtained and added to a sum of costs. The sum of costs will be wrapped in `Price` and returned to the calling function.
+
+==== Design Considerations
+* *Current implementation:* Currently, the entire `TransactionList` since the beginning of using the application is used for the analyses. This presents the overview of the company’s profit margin since it started using the application, and is useful for tracking long term growth.
+** Pros: Easy to implement
+** Cons: Inefficient in terms of time complexity.
+
+* *Alternative:* Record the increases in revenue and cost when every transaction is logged.
+** Pros: More time efficient.
+** Cons: We must ensure that the additions are correct. Difficult to extend this to allow for the analyses over different time periods.
+
+==== Future Plans
+In the future, there will be a `TransactionList` for each calendar month, to allow for the analyses of desired attributes in time periods of: 1 day, 7 days and 1 month.
+
+For the analyses over 1 month, the same approach as mentioned above will be implemented.
+
+For the analyses over 1 day, the `Date` of the `Transaction` will be checked before adding the respective `Price` into either the sum of revenues or costs. If the `Date` is the same as that of the current day’s date, then the `Price` will be added.
+
+For the analyses over 7 days, a similar concept as that for analyses over 1 day will be used. Special care will have to be taken to account for changes in month over the span of 7 days, and possibly changes in the year.
+
+
+// end::analyses[]
+
+
+//tag::login[]
+=== Login/logout feature
+
+==== Current Implementation
+
+The login feature is a standalone feature that enable security check on user. It has a fxml page that name `LoginPage.fxml` at `main\resources\view`
+The controller of the fxml page named `LoginController` at `seedu.address\controller`
+
+Given below is a class diagram for logout function
+
+image::LoginUMLDiagram/Login_Class_diagram.png[width="800"]
+
+
+Given below is an example usage scenario and how logout mechanism behave at each step.
+
+image::LoginUMLDiagram/Login_sequence_diagram.png[width="800"]
+The `LoginController` will check for username and password will the LoginUtils
+Once the username and password is correct, it will continue to `initAddressBook`.
+It will also start the ui.
+
+
+image::LoginUMLDiagram/LoginUtils_sequence_diagram.png[width="800"]
+
+==== Design Considerations
+===== Aspect: How to store the data
+* **Alternative 1 (current choice):** Saves the login detail in a json file called `loginInfoList.json`.
+** Pros: Have a systematic and elegant way to store data.
+** Cons: Hard to implement
+* **Alternative 2:** Store the data in enum.
+** Pros: Easy to implement
+** Cons: Fixed database. Cannot add /modify/delete accounts. (suitable for very small project)
+
+===== Aspect: Data format for store data
+
+* **Alternative 1 (current choice):** Store in Json file.
+** Pros: Json is popular and have have support online.
+** Pros :JSON is relatively easier to implement compared to XML
+** Cons: Have to write serialized method for JSON file.
+* **Alternative 2:** Store in XML file
+** Pros: Classic and matured product
+** Pros: Have serialized code in original ab4.
+** Cons: It has many rule to set before implementation.
+
 // tag::undoredo[]
 === Undo/Redo feature
 ==== Current Implementation
@@ -815,13 +900,13 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has the need to manage a small ice cream store
 * prefer desktop apps over other types
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: Manage a store from inventory management to accounting better than using separate software
 
 [appendix]
 == User Stories
@@ -833,15 +918,44 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
 
-|`* * *` |user |add a new person |
+|`* * *` |Manager |add a new drink item |keep list of offerings updated
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |Manager |delete a drink item |keep list of offerings updated
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |Manager |modify the price of a drink item |maintain a good profit margin
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |Manager |see drink batches that have been imported before a certain date|take action to clear old inventory stocks
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * ` |Manager |see which drinks are selling well and the converse |take action to manage stocks better
+
+|`* * ` |Manager |view actions done by employees |track work done and monitor for fraud
+
+|`* * *` |Stock Taker |add new batches of drinks |keep inventory updated
+
+|`* * *` |Stock Taker |update the stocks of drinks |keep inventory updated
+
+|`* * *` |Stock Taker |view the stock numbers of drinks |know when to restock them
+
+|`* * *` |Stock Taker |view import dates of drink batches |sell the batches that have been in the inventory for longer
+
+|`* * *` |Accountant |update the cost price of drinks |ensure that the total costs and profits of the company are updated
+
+|`* *` |Accountant |keep track of the quantities of drinks sold over a certain period |report on the trends on drink sales
+
+|`* *` |Accountant |keep track of total profit over a period of time |report on the status and progress of the company
+
+|`* * *` |user |type commands easily |perform actions easily
+
+|`* * *` |user |login security feature |secure important data
+
+|`* * *` |user |view list of available commands |know which actions i can take
+
+|`* *` |user |confirmation for actions |reduce mistakes due to carelessness
+
+|`* * ` |user |see the pictures of drinks |easily identify the drink that i am looking at
+
+|`*` |experienced user |have shortcuts for commands |perform actions efficiently
+
 |=======================================================================
 
 _{More to be added}_
@@ -849,33 +963,51 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `DrinkIO` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add Transaction
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add specific item to sales list
+2.  System requests for confirmation
+3.  User confirms
+4.  System responds with successful add message
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 2a. User enters a non-existing item.
++
+[none]
+**   2a1. System responds that the item does not exist and requests for next command.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+* 2b. User enters a item that is already sold out
 +
 [none]
-** 3a1. AddressBook shows an error message.
+**	2b1. System responds that the item is sold out and requests for the next command.
 +
-Use case resumes at step 2.
+Use case ends.
+
+* 2c. User specified a quantity that is larger than the available stock
++
+[none]
+**	2c1. System prompts user to enter a valid sales number
++
+Use case resumes from 1.
+
+
+
+* 3a. User cancels procedure.
++
+[none]
++
+** Use case ends.
 
 _{More to be added}_
 
