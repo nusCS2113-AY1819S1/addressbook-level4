@@ -7,11 +7,10 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+import javafx.collections.ObservableList;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import javafx.collections.ObservableList;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -64,8 +63,8 @@ public class DeleteUserCommandTest {
 
     @Test
     public void execute_notLoggedOut_throwsCommandException() throws Exception {
-        DeleteUserCommandTest.ModelStubThrowingAuthenticatedException modelStub =
-                new DeleteUserCommandTest.ModelStubThrowingAuthenticatedException();
+        DeleteUserCommandTest.ModelStubThrowingAuthenticationFailedException modelStub =
+                new DeleteUserCommandTest.ModelStubThrowingAuthenticationFailedException();
 
         User validUser = registerValidUser();
 
@@ -104,7 +103,6 @@ public class DeleteUserCommandTest {
 
         @Override
         public boolean hasLoggedIn() {
-            fail("This method should not be called.");
             return false;
         }
 
@@ -127,8 +125,7 @@ public class DeleteUserCommandTest {
 
         @Override
         public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
-            fail("This method should not be called.");
-            return false;
+            return true;
         }
 
         @Override
@@ -286,15 +283,16 @@ public class DeleteUserCommandTest {
     }
 
     /**
-     * A Model stub that always accepts the registration attempt.
+     * A Model stub that always accepts the login attempt.
      */
     private class ModelStubAcceptingDeleteUser extends DeleteUserCommandTest.ModelStub {
         final ArrayList<User> usersAdded = new ArrayList<>();
 
         @Override
-        public void addUser(User user) throws DuplicateUserException {
+        public void deleteUser(User user) throws UserNotFoundException {
+            usersAdded.add(registerValidUser());
             requireNonNull(user);
-            usersAdded.add(user);
+            usersAdded.remove(user);
         }
 
     }
@@ -311,9 +309,9 @@ public class DeleteUserCommandTest {
     }
 
     /**
-     * A Model stub that always throw a AlreadyLoggedInException when trying to login.
+     * A Model stub that always throw a AuthenticationFailedException when trying to login.
      */
-    private class ModelStubThrowingAuthenticatedException extends DeleteUserCommandTest.ModelStub {
+    private class ModelStubThrowingAuthenticationFailedException extends DeleteUserCommandTest.ModelStub {
         @Override
         public boolean checkCredentials(Username username, Password password) throws AuthenticationFailedException {
             throw new AuthenticationFailedException();
@@ -322,6 +320,6 @@ public class DeleteUserCommandTest {
     }
 
     private User registerValidUser() {
-        return new User(new Username("user"), new Password("pass"));
+        return new User(new Username("John"), new Password("pass"));
     }
 }
