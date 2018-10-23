@@ -9,11 +9,14 @@ public class User {
 
     private final Username username;
     private final Password password;
+    private boolean loginStatus;
+    private boolean adminStatus;
 
     public User(Username username, Password password) {
         requireAllNonNull(username, password);
         this.username = username;
         this.password = password;
+        loginStatus = false;
     }
 
     public Username getUsername() {
@@ -24,19 +27,17 @@ public class User {
         return password;
     }
 
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
+    public boolean getAdminStatus() {
+        return adminStatus;
+    }
 
-        if (!(other instanceof User)) {
-            return false;
-        }
+    public boolean getLoginStatus() {
+        return loginStatus;
+    }
 
-        User user = (User) other;
-        return this.username.equals(user.getUsername())
-                && this.password.equals(user.getPassword());
+    public void setLoginStatus(boolean loginStatus, boolean adminStatus) {
+        this.loginStatus = loginStatus;
+        this.adminStatus = adminStatus;
     }
 }
 

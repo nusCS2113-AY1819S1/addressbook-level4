@@ -233,7 +233,7 @@ public abstract class EventManagerSystemTest {
                     + "&email="
                     + selectedCardHandle.getEmail()
                     + "&address="
-                    + selectedCardHandle.getAddress().replaceAll(" ", "%20").replaceAll("#", "%23")
+                    + selectedCardHandle.getVenue().replaceAll(" ", "%20").replaceAll("#", "%23")
                     + "&dateTime="
                     + PAGE_DATE_FORMAT.format(selectedCardHandleDateTime.dateTime).replaceAll(" ", "%20")
                     + "&tags="

@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.EventManager;
+import seedu.address.storage.XmlAdaptedAttendee;
 import seedu.address.storage.XmlAdaptedEvent;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableEManager;
@@ -40,10 +41,12 @@ public class XmlUtilTest {
     private static final String VALID_CONTACT = "Hans Muster";
     private static final String VALID_PHONE = "9482424";
     private static final String VALID_EMAIL = "hans@example";
-    private static final String VALID_ADDRESS = "4th street";
+    private static final String VALID_VENUE = "4th street";
     private static final String VALID_DATETIME  = "10/10/2010 10:10";
-
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedTag> VALID_TAGS =
+            Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final List<XmlAdaptedAttendee> VALID_ATTENDEES =
+            Collections.singletonList(new XmlAdaptedAttendee("Mary Kate"));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -82,8 +85,8 @@ public class XmlUtilTest {
     public void xmlAdaptedEventFromFile_fileWithMissingEventField_validResult() throws Exception {
         XmlAdaptedEvent actualEvent = XmlUtil.getDataFromFile(
                 MISSING_EVENT_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
-        XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(
-                null, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DATETIME, VALID_TAGS);
+        XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(null, VALID_CONTACT, VALID_PHONE, VALID_EMAIL,
+                VALID_VENUE, VALID_DATETIME, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedEvent, actualEvent);
     }
 
@@ -91,8 +94,8 @@ public class XmlUtilTest {
     public void xmlAdaptedEventFromFile_fileWithInvalidEventField_validResult() throws Exception {
         XmlAdaptedEvent actualEvent = XmlUtil.getDataFromFile(
                 INVALID_EVENT_FIELD_FILE, XmlAdaptedEventWithRootElement.class);
-        XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(
-                VALID_NAME, VALID_CONTACT, INVALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DATETIME, VALID_TAGS);
+        XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(VALID_NAME, VALID_CONTACT, INVALID_PHONE, VALID_EMAIL,
+                VALID_VENUE, VALID_DATETIME, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedEvent, actualEvent);
     }
 
@@ -100,8 +103,8 @@ public class XmlUtilTest {
     public void xmlAdaptedEventFromFile_fileWithValidEvent_validResult() throws Exception {
         XmlAdaptedEvent actualEvent = XmlUtil.getDataFromFile(
                 VALID_EVENT_FILE, XmlAdaptedEventWithRootElement.class);
-        XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(
-                VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL, VALID_ADDRESS, VALID_DATETIME, VALID_TAGS);
+        XmlAdaptedEvent expectedEvent = new XmlAdaptedEvent(VALID_NAME, VALID_CONTACT, VALID_PHONE, VALID_EMAIL,
+                VALID_VENUE, VALID_DATETIME, VALID_TAGS, VALID_ATTENDEES);
         assertEquals(expectedEvent, actualEvent);
     }
 

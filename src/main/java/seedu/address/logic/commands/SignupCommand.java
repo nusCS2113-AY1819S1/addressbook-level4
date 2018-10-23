@@ -43,11 +43,4 @@ public class SignupCommand extends Command {
         model.createUser(toSignup);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toSignup.getUsername().toString()));
     }
-
-    @Override
-    public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof SignupCommand // instanceof handles nulls
-                && toSignup.equals(((SignupCommand) other).toSignup));
-    }
 }
