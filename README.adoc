@@ -16,7 +16,7 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 == About App
-FrozenBook is a comprehensive inventory management system targeted at small-scale drink distribution companies that  typically use Microsoft Excel or paper to keep track of their stocks.
+DrinkIO is a comprehensive inventory management system targeted at small-scale drink distribution companies that  typically use Microsoft Excel or paper to keep track of their stocks.
 Our system will enable employees and managers to keep track of the stocks of various drinks, as well as the profit / revenue earned over time periods.
 This will enable them to stock up on goods in a timely manner and make it easier for them to track their finances.
 
