@@ -1,3 +1,4 @@
+//@@author LowGinWee
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
@@ -7,12 +8,15 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.schedule.Activity;
 
+/**
+ * Deletes an {@code Activity} to the schedule in the address book.
+ */
 public class ScheduleDeleteCommand extends ScheduleCommand {
     private static final String MESSAGE_SUCCESS = "Task \"%s\" on %s has been deleted.";
     private final Index index;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Creates an ScheduleDeleteCommand to delete the specified {@code Activity}
      */
     public ScheduleDeleteCommand(Index index) {
         requireNonNull(index);
@@ -24,7 +28,7 @@ public class ScheduleDeleteCommand extends ScheduleCommand {
         Activity toDelete = getActivityFromIndex(model, index);
         model.deleteActivity(toDelete);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-                toDelete.getActivity(),
+                toDelete.getActivityName(),
                 Activity.getDateString(toDelete.getDate())));
     }
 

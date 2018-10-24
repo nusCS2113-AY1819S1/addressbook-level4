@@ -1,3 +1,4 @@
+//@@author LowGinWee
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
@@ -15,12 +16,15 @@ import seedu.address.logic.commands.ScheduleEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.schedule.Activity;
 
+/**
+ * Parses input arguments and creates a new ScheduleCommand object
+ */
 public class ScheduleCommandParser implements Parser<ScheduleCommand> {
 
     private String errorMessage;
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ScheduleCommand
+     * and returns a ScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public ScheduleCommand parse(String args) throws ParseException {
@@ -46,6 +50,11 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         }
     }
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ScheduleAddCommand
+     * and returns a ScheduleAddCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     private ScheduleCommand parseAdd(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
@@ -56,11 +65,16 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_ADD));
         }
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        String task = argMultimap.getValue(PREFIX_ACTIVITY).get().trim();
+        String task = ParserUtil.parseActivityName(argMultimap.getValue(PREFIX_ACTIVITY).get());
         Activity activity = new Activity(date, task);
         return new ScheduleAddCommand(activity);
     }
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ScheduleDeleteCommand
+     * and returns a ScheduleDeleteCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     private ScheduleCommand parseDelete(String args) throws ParseException {
 
         Index index;
@@ -73,13 +87,17 @@ public class ScheduleCommandParser implements Parser<ScheduleCommand> {
         return new ScheduleDeleteCommand(index);
     }
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ScheduleEditCommand
+     * and returns a ScheduleEditCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     private ScheduleCommand parseEdit(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(
                         " " + args,
                         PREFIX_ACTIVITY);
-        if (!arePrefixesPresent(argMultimap, PREFIX_ACTIVITY)
-                || argMultimap.getPreamble().isEmpty()) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_ACTIVITY) || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ScheduleCommand.MESSAGE_EDIT));
         }
 

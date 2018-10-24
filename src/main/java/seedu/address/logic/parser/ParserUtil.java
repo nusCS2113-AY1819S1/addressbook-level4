@@ -118,7 +118,15 @@ public class ParserUtil {
         if (!Tag.isValidTagName(trimmedTag)) {
             throw new ParseException(Tag.MESSAGE_TAG_CONSTRAINTS);
         }
-        return new Tag(trimmedTag);
+        StringTokenizer st = new StringTokenizer(trimmedTag);
+        String tagName = st.nextToken();
+        Index priority;
+        if (st.hasMoreTokens()){
+            priority = Index.fromZeroBased(Integer.parseInt(st.nextToken()));
+        } else {
+            priority = Index.fromZeroBased(Tag.PRIORITY_LOW);
+        }
+        return new Tag(tagName, priority);
     }
 
     /**
@@ -162,7 +170,6 @@ public class ParserUtil {
         return new Position(trimmedPosition);
     }
 
-
     /**
      * Parses a {@code String note} into an {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
@@ -178,10 +185,10 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String position} into an {@code Position}.
+     * Parses a {@code String kpi} into an {@code Kpi}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code position} is invalid.
+     * @throws ParseException if the given {@code kpi} is invalid.
      */
     public static Kpi parseKpi(String kpi) throws ParseException {
         String trimmedScore = kpi.trim();
@@ -207,6 +214,20 @@ public class ParserUtil {
         int month = Integer.parseInt(tokens.nextToken());
         int year = Integer.parseInt(tokens.nextToken());
         return Activity.toDate(day, --month, year);
+    }
+
+    /**
+     * Parses a {@code String activityName} into an {@code Activity}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code activityName} is invalid.
+     */
+    public static String parseActivityName(String activityName) throws ParseException {
+        String trimmedActivityName = activityName.trim();
+        if (!Activity.isValidActivity(trimmedActivityName)) {
+            throw new ParseException(Activity.MESSAGE_ACTIVITY_CONSTRAINTS);
+        }
+        return trimmedActivityName;
     }
 
 

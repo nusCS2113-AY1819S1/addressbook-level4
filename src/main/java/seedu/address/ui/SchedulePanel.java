@@ -17,7 +17,7 @@ import seedu.address.model.schedule.Activity;
 
 
 /**
- * The Browser Panel of the App.
+ * The Schedule Panel of the App.
  */
 public class SchedulePanel extends UiPart<Region> {
 
@@ -34,13 +34,16 @@ public class SchedulePanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Loads the schedule of the address book.
+     */
     public void loadSchedule(TreeMap<Date, ArrayList<Activity>> schedule) {
         int count = 1;
         String scheduleText = new String();
         for (Date date : schedule.keySet()) {
             scheduleText += Activity.getDateString(date) + ":\n";
             for (Activity activity : schedule.get(date)) {
-                scheduleText += count + ". " + activity.getActivity() + "\n";
+                scheduleText += count + ". " + activity.getActivityName() + "\n";
                 count++;
             }
         }

@@ -8,26 +8,50 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Represents an Activity in the schedule.
+ */
 public class Activity {
     public static final String DATE_VALIDATION_REGEX = "\\d{2}/\\d{2}/\\d{4}";
+    public static final String ACTIVITY_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*\\.*";
     public static final String MESSAGE_DATE_CONSTRAINTS = "Date should be in \"DD/MM/YYYY\" and must be a valid date.";
+    public static final String MESSAGE_ACTIVITY_CONSTRAINTS = "Task name should only contain alphanumeric characters,"
+            + "spaces and fullstops.";
 
     private final Date date;
-    private final String activity;
+    private final String activityName;
 
+    /**
+     * Creates an Activity.
+     * @param date A valid date.
+     * @param activity Activity string.
+     */
     public Activity(Date date, String activity) {
         this.date = date;
-        this.activity = activity;
+        this.activityName = activity;
     }
 
+    /**
+     * @return Date of activity.
+     */
     public Date getDate() {
         return date;
     }
 
-    public String getActivity() {
-        return activity;
+    /**
+     * @return Activity name.
+     */
+    public String getActivityName() {
+        return activityName;
     }
 
+    /**
+     * Converts day, month and year specified to a {@code Date} object
+     * @param day A valid day of the month
+     * @param month A valid month of the year
+     * @param year A valid year.
+     * @return {@code Date} of activity.
+     */
     public static Date toDate(int day, int month, int year) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.DAY_OF_MONTH, day);
@@ -41,17 +65,23 @@ public class Activity {
         return date;
     }
 
+    /**
+     * @return {@code String} of date in "DAY dd/mm/yyyy" format.
+     */
     public static String getDateString (Date date) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(date);
         String dayOfWeek = new SimpleDateFormat("EE", Locale.ENGLISH).format(date);
         int month = cal.get(Calendar.MONTH);
-        return new String(dayOfWeek + " " + cal.get(Calendar.DATE) + "/" + ++month
-                + "/" + cal.get(Calendar.YEAR));
+        return dayOfWeek + " " + cal.get(Calendar.DATE) + "/" + ++month
+                + "/" + cal.get(Calendar.YEAR);
     }
 
-    public static boolean isValidDate(String test) {
 
+    /**
+     * Checks if specified date is valid
+     */
+    public static boolean isValidDate(String test) {
         DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         format.setLenient(false);
         try {
@@ -60,5 +90,13 @@ public class Activity {
             return false;
         }
         return test.matches(DATE_VALIDATION_REGEX);
+    }
+
+
+    /**
+     * Checks if specified Activity name is valid
+     */
+    public static boolean isValidActivity(String test) {
+        return test.matches(ACTIVITY_VALIDATION_REGEX);
     }
 }
