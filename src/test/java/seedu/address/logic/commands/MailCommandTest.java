@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.commands.MailCommand.TYPE_ALL;
+import static seedu.address.logic.commands.MailCommand.TYPE_GROUPS;
 import static seedu.address.logic.commands.MailCommand.TYPE_SELECTION;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
+import seedu.address.model.tag.Tag;
 
 public class MailCommandTest {
 
@@ -37,6 +40,21 @@ public class MailCommandTest {
 
         String expectedMessage = MailCommand.MESSAGE_SUCCESS
                 + buildRecipients(new ArrayList<>(model.getFilteredPersonList()));
+
+        CommandTestUtil.assertCommandSuccess(mailCommand, model, commandHistory, expectedMessage, model);
+    }
+
+    @Test
+    public void execute_selectedGroups_success() {
+        Tag tagToUse = (Tag) model.getFilteredPersonList().get(0).getTags().toArray()[0];
+        String tagToUseInString = tagToUse.toString();
+
+        MailCommand mailCommand = new MailCommand(TYPE_GROUPS, tagToUseInString);
+
+        // Retrieve the list of persons with that tag and build the expected message with it.
+        ArrayList<Person> mailingList = new ArrayList<>(model.getFilteredPersonList());
+        mailingList.removeIf(person -> !person.getTags().contains(tagToUse));
+        String expectedMessage = MailCommand.MESSAGE_SUCCESS + buildRecipients(mailingList);
 
         CommandTestUtil.assertCommandSuccess(mailCommand, model, commandHistory, expectedMessage, model);
     }
