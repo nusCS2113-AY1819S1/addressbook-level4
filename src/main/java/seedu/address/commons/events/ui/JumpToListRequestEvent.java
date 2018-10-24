@@ -12,10 +12,6 @@ public class JumpToListRequestEvent extends BaseEvent {
 
     public final ArrayList<Integer> targetIndex;
 
-    public JumpToListRequestEvent(Index targetIndex) {
-        this.targetIndex = new ArrayList<>(targetIndex.getZeroBased());
-    }
-
     public JumpToListRequestEvent(ArrayList<Index> targetIndex) {
         this.targetIndex = new ArrayList<>(extractIndexAsIntegers(targetIndex));
     }
