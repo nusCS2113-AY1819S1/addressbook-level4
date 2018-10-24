@@ -25,7 +25,7 @@ public interface Model {
      */
     boolean hasTask(Task task);
 
-    void deferTaskDeadline(Task task, String deadline);
+    void deferTaskDeadline(Task task, Deadline deadline);
     /**
      * Deletes the given task.
      * The task must exist in the task book.
@@ -45,10 +45,14 @@ public interface Model {
     void addTask(Task task);
 
     //@@author emobeany
-    /**
-     * Selects the input date as deadline.
-     */
+    /** Selects the input date as deadline.*/
     void selectDeadline(Deadline deadline);
+
+    /** Gets deadline previously selected from the TaskBook.*/
+    Deadline getDeadline();
+
+    /** Returns true if input deadline is valid.*/
+    boolean validDeadline(Deadline deadline);
 
     /**
      * Replaces the given task {@code target} with {@code editedTask}.

@@ -5,6 +5,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.Deadline;
 import seedu.address.model.task.PriorityLevel;
 import seedu.address.model.task.Task;
 
@@ -15,7 +16,7 @@ public class XmlAdaptedTask {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Task's %s field is missing!";
 
     @XmlElement(required = true)
-    private String deadline;
+    private Deadline deadline;
     @XmlElement(required = true)
     private String title;
     @XmlElement(required = true)
@@ -32,7 +33,7 @@ public class XmlAdaptedTask {
     /**
      * Constructs an {@code XmlAdaptedTask} with the given task details.
      */
-    public XmlAdaptedTask(String deadline, String title, String description, String priority) {
+    public XmlAdaptedTask(Deadline deadline, String title, String description, String priority) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
@@ -65,7 +66,7 @@ public class XmlAdaptedTask {
         //            throw new IllegalValueException(Deadline.MESSAGE_DEADLINE_CONSTRAINTS);
         //        }
         //TODO: Replace deadline
-        final String modelDeadline = deadline;
+        final Deadline modelDeadline = deadline;
 
         if (title == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, "Title"));

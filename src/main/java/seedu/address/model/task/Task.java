@@ -7,14 +7,14 @@ import java.util.Objects;
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Task {
-    private static final String PLACEHOLDER_DEADLINE = "1/1";
-    private String deadline;
+    private static final Deadline PLACEHOLDER_DEADLINE = new Deadline("1/1/2018");
+    private Deadline deadline;
     private final String title;
     private final String description;
     private final PriorityLevel priorityLevel;
     private boolean isCompleted;
 
-    public Task(String deadline, String title, String description, PriorityLevel priorityLevel) {
+    public Task(Deadline deadline, String title, String description, PriorityLevel priorityLevel) {
         this.deadline = deadline;
         this.title = title;
         this.description = description;
@@ -32,14 +32,19 @@ public class Task {
 
     public Task(String title, String description, PriorityLevel priorityLevel) {
         this.deadline = PLACEHOLDER_DEADLINE;
+        //this.deadline = getDeadline();
         this.title = title;
         this.description = description;
         this.priorityLevel = priorityLevel;
         this.isCompleted = false;
     }
 
-    public String getDeadline() {
+    public Deadline getDeadline() {
         return deadline;
+    }
+
+    public void setDeadline(Deadline deadline) {
+        this.deadline = deadline;
     }
 
     public String getTitle() {
@@ -85,7 +90,7 @@ public class Task {
      * @param deadline
      * @return the new Task
      */
-    public Task deferred(String deadline) {
+    public Task deferred(Deadline deadline) {
         this.deadline = deadline;
         return this;
     }
@@ -105,7 +110,7 @@ public class Task {
 
         Task otherTask = (Task) other;
         return otherTask.getTitle().equals(getTitle())
-                && otherTask.getDeadline().equals(getTitle())
+                && otherTask.getDeadline().equals(getDeadline())
                 && otherTask.getDescription().equals(getDescription())
                 && otherTask.getPriorityLevel().equals(getPriorityLevel())
                 && otherTask.isCompleted() == isCompleted();
