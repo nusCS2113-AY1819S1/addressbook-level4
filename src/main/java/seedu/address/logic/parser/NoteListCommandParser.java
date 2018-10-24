@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
@@ -19,10 +19,10 @@ public class NoteListCommandParser implements Parser<NoteListCommand> {
      */
     public NoteListCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_MODULECODE);
+                ArgumentTokenizer.tokenize(args, PREFIX_MODULE_CODE);
 
-        if (arePrefixesPresent(argMultimap, PREFIX_MODULECODE)) {
-            String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
+        if (arePrefixesPresent(argMultimap, PREFIX_MODULE_CODE)) {
+            String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
             return new NoteListCommand(moduleCode);
         } else if (args.trim().isEmpty()) {
             return new NoteListCommand("");

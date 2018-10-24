@@ -24,7 +24,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteDeleteCommandParserTest {
 
-    private static NoteManager noteManager = new NoteManager();
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private NoteDeleteCommandParser parser = new NoteDeleteCommandParser();
 

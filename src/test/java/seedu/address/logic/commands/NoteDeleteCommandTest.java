@@ -19,7 +19,7 @@ import seedu.address.testutil.NoteBuilder;
  */
 public class NoteDeleteCommandTest {
 
-    private static NoteManager noteManager = new NoteManager();
+    private static NoteManager noteManager = NoteManager.getInstance();
 
     private static NoteBuilder dummyNote = new NoteBuilder();
 
@@ -61,7 +61,6 @@ public class NoteDeleteCommandTest {
         assertEquals(expectedMessage, result.feedbackToUser);
 
         int expectedSize = 2;
-        noteManager = new NoteManager();
         assertEquals(expectedSize, noteManager.getNotes().size());
     }
 
