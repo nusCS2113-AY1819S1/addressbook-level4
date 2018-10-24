@@ -20,10 +20,10 @@ public class AddTaskCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the to-do list. "
             + "Parameters: "
-            + PREFIX_TASK + "TASK"
+            + PREFIX_TASK + "TASK "
             + PREFIX_MODULE + "MODULE "
-            + "[" + PREFIX_DATE + "DATE]..."
-            + "[" + PREFIX_PRIORITY + "PRIORITY]...\n"
+            + PREFIX_DATE + "DATE"
+            + PREFIX_PRIORITY + "PRIORITY\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_TASK + "Tutorial 5 "
             + PREFIX_MODULE + "CS2101 "
@@ -31,7 +31,7 @@ public class AddTaskCommand extends Command {
             + PREFIX_PRIORITY + "1 ";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This person already exists in the to-do list";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the to-do list";
 
     private final Task toAdd;
 
