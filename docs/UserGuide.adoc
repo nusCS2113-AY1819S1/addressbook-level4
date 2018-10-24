@@ -110,12 +110,82 @@ Examples:
 
 === Sorting a forumThread by most like : `sortlike`
 
-Sort the threads under a specific module by date. +
+Sort the threads under a specific module by most like. +
 Format: `sortlike m/MODULE_NAME`
 
 Examples:
 
 * `sortlike m/CS2113`
+
+=== Announcing new command : `announce`
+
+Announce the new announcement created by admin. +
+Format: `announce aTitle/ANNOUNCEMENT_TITLE aContent/ANNOUNCEMENT_CONTENT`
+
+Example:
+
+* `announce aTitle/Urgent! aContent/System maintenance from 4pm to 5pm.`
+
+=== Checking for the latest announcement : `checkAnnounce`
+
+Check for the latest announcement. +
+Format: `checkAnnounce`
+
+=== Blocking a user from creating thread or comment : `block`
+
+Block a specific user that match the given argument by admin. +
+Format: `block uName/USER_NAME`
+
+Example:
+
+* `block uName/john`
+
+=== Setting a user as admin or revert an admin to user : `setAdmin`
+
+Set a user as an admin or revert an admin to user. +
+Format: `setAdmin uName/USER_NAME set/SET_OR_REVERT`
+
+Examples:
+
+* `setAdmin uName/john set/true`
+
+* `setAdmin uName/john set/false`
+
+=== Creating a new module : `createModule`
+
+Create a new module by admin. +
+Format: `createModule mCode/MODULE_CODE mTitle/MODULE_TITLE`
+
+Example:
+
+* `createModule mCode/CS2113 mTitle/Software Engineering and OOP`
+
+=== Deleting a module : `deleteModule`
+
+Delete an existing module by admin. +
+Format: `deleteModule mCode/MODULE_CODE`
+
+Example:
+
+* `deleteModule mCode/CS2113`
+
+=== Updating password : `updatePass`
+
+Update the given user's password by admin. +
+Format: `updatePass uName/USER_NAME uPass/USER_PASSWORD`
+
+Example:
+
+* `updatePass uName/john uPass/098`
+
+=== Delete a user : `deleteUser`
+
+Delete a given user by admin. +
+Format: `deleteUser uName/USER_NAME`
+
+Example:
+
+* `deleteUser uName/john`
 
 === Exiting the program : `exit`
 
