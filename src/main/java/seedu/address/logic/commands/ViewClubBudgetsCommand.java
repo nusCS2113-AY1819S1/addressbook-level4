@@ -2,10 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLUB_NAME;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_CLUB_BUDGETS;
 
 import java.util.List;
+
 import seedu.address.logic.CommandHistory;
+
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.budgetelements.ClubName;
@@ -39,7 +40,7 @@ public class ViewClubBudgetsCommand extends Command {
 
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
         /**if (!(model.hasClubBudget(toShow))) {
