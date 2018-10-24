@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.function.Predicate;
 import java.util.logging.Logger;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -147,6 +148,11 @@ public class ModelManager extends ComponentManager implements Model {
         versionedExpenditureTracker.addExpenditure(expenditure);
         updateFilteredExpenditureList(PREDICATE_SHOW_ALL_EXPENDITURES);
         indicateExpenditureTrackerChanged();
+    }
+
+    @Override
+    public Map getExpenditureRecords() {
+        return versionedExpenditureTracker.getExpenditureRecords();
     }
 
     @Override

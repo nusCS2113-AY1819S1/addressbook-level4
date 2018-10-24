@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.function.Predicate;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.expenditureinfo.Expenditure;
@@ -78,6 +79,11 @@ public interface Model {
      * Adds the given expenditure.
      */
     void addExpenditure(Expenditure expenditure);
+
+    /**
+     * Get the expenditure records.
+     */
+    Map getExpenditureRecords();
 
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.

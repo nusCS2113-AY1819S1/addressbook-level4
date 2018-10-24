@@ -4,6 +4,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.expenditureinfo.Expenditure;
@@ -73,6 +74,13 @@ public class ExpenditureTracker implements ReadOnlyExpenditureTracker {
      */
     public void addExpenditure(Expenditure e) {
         expenditures.add(e);
+    }
+
+    /**
+     * Get the expenditure records
+     */
+    public Map getExpenditureRecords() {
+        return expenditures.getExpenditureRecords();
     }
 
     /**

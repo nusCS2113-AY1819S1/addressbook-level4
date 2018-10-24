@@ -6,10 +6,12 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DESCRIPTION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_MONEY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERIOD;
 
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddExpenditureCommand;
+import seedu.address.logic.commands.ExpenditureGetAdviceCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.expenditureinfo.Category;
 import seedu.address.model.expenditureinfo.Date;
@@ -18,33 +20,31 @@ import seedu.address.model.expenditureinfo.Expenditure;
 import seedu.address.model.expenditureinfo.Money;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new ExpenditureGetAdviceCommand object
  */
-public class AddExpenditureCommandParser implements Parser<AddExpenditureCommand> {
+public class ExpenditureGetAdviceCommandParser implements Parser<ExpenditureGetAdviceCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ExpenditureGetAdviceCommand
+     * and returns an ExpenditureGetAdviceCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public AddExpenditureCommand parse(String args) throws ParseException {
+    public ExpenditureGetAdviceCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_MONEY, PREFIX_CATEGORY);
+                ArgumentTokenizer.tokenize(args, PREFIX_MONEY, PREFIX_PERIOD);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_DESCRIPTION, PREFIX_DATE, PREFIX_MONEY, PREFIX_CATEGORY)
+        if (!arePrefixesPresent(argMultimap, PREFIX_MONEY, PREFIX_PERIOD)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    AddExpenditureCommand.MESSAGE_USAGE));
+                    ExpenditureGetAdviceCommand.MESSAGE_USAGE));
         }
 
-        Description description = ParserUtil.parseDescription(argMultimap.getValue(PREFIX_DESCRIPTION).get());
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Category category = ParserUtil.parseCategory(argMultimap.getValue(PREFIX_CATEGORY).get());
         Money money = ParserUtil.parseMoney(argMultimap.getValue(PREFIX_MONEY).get());
 
-        Expenditure expenditure = new Expenditure(description, date, money, category);
+        String m = money.addingMoney;
+        String n = argMultimap.getValue(PREFIX_PERIOD).get();
 
-        return new AddExpenditureCommand(expenditure);
+        return new ExpenditureGetAdviceCommand(m,n);
     }
 
     /**
@@ -56,4 +56,3 @@ public class AddExpenditureCommandParser implements Parser<AddExpenditureCommand
     }
 
 }
-
