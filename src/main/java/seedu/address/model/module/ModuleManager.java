@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.StorageController;
+import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.storage.adapter.XmlAdaptedModule;
 
 /**
@@ -27,7 +28,10 @@ public class ModuleManager {
     /**
      * Adds a new module to the in-memory array list
      */
-    public void addModule(Module module) {
+    public void addModule(Module module) throws DuplicateModuleException {
+        if (doesModuleExist(module)) {
+            throw new DuplicateModuleException();
+        }
         modules.add(module);
     }
 
@@ -83,11 +87,33 @@ public class ModuleManager {
                 .orElse(null);
     }
 
-    public ArrayList<Module> getModules() {
-        return this.modules;
+    /**
+     * Checks if the input module already exists in Trajectory.
+     * @param module The module whose existence needs to be checked.
+     * @return True if the module exists; false otherwise.
+     */
+    public boolean doesModuleExist(Module module) {
+        return this.modules.stream().anyMatch(m -> m.equals(module));
     }
 
-    public void setModules(ArrayList<Module> modules) {
-        this.modules = modules;
+    /**
+     * Checks if the input module code matches a module that exists in Trajectory.
+     * This is an overload to make it easier to check a module's existence without
+     * creating a whole {@oode Module} object.
+     * This overload adheres to the DRY principle by invoking the original
+     * {@link #doesModuleExist(Module)} mathod.
+     * @param moduleCode The module code that will be used to check for the module's existence.
+     * @return True if the module exists; false otherwise.
+     */
+    public boolean doesModuleExist(String moduleCode) {
+        Module module = getModuleByModuleCode(moduleCode);
+        if (module != null) {
+            return doesModuleExist(module);
+        }
+        return false;
+    }
+
+    public ArrayList<Module> getModules() {
+        return this.modules;
     }
 }
