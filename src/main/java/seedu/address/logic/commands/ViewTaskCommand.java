@@ -13,7 +13,7 @@ public class ViewTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "TDL_view";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    public static final String MESSAGE_SUCCESS = "Listed all uncompleted tasks";
 
 
     @Override
