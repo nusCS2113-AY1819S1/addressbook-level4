@@ -102,6 +102,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
         @Override
         public void updateRecord(Record target, Record editedRecord) {
             throw new AssertionError("This method should not be called.");
@@ -160,8 +161,21 @@ public class AddCommandTest {
 
 
         public void deleteListRecord(List<Record> targetList) {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public String autoLimitCheck() {
+            throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public String generateLimitOutput(boolean isExceeded, Limit limit) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Limit getSameDatesLimit(Date dateStart, Date dateEnd) {
             throw new AssertionError("This method should not be called.");
         }
 

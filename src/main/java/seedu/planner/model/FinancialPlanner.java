@@ -1,14 +1,11 @@
 package seedu.planner.model;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_BASIC;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_EXCEED;
-import static seedu.planner.logic.commands.LimitCommand.MESSAGE_NOT_EXCEED;
+
 
 import java.util.List;
 
 import javafx.collections.ObservableList;
-import seedu.planner.logic.commands.LimitCommand;
 import seedu.planner.model.record.Date;
 import seedu.planner.model.record.DateBasedLimitList;
 import seedu.planner.model.record.Limit;

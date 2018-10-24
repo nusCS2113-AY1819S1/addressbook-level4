@@ -48,7 +48,7 @@ public class LimitCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
 
         if (model.hasSameDateLimit(limit)) {
-            throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
+             throw new CommandException(MESSAGE_LIMITS_SAME_DATE);
         }
 
         model.addLimit(limit);

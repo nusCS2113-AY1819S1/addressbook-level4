@@ -3,8 +3,9 @@ package seedu.planner.logic.commands;
 import seedu.planner.logic.CommandHistory;
 import seedu.planner.logic.commands.exceptions.CommandException;
 import seedu.planner.model.Model;
-import seedu.planner.model.record.Date;
 import seedu.planner.model.record.Limit;
+
+import java.util.List;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.planner.logic.parser.CliSyntax.PREFIX_DATE;
@@ -36,8 +37,16 @@ public class DeleteLimitCommand extends Command{
         if (!model.hasSameDateLimit(limit)) {
             throw new CommandException(MESSAGE_LIMITS_DO_NOT_EXIST);
         }
-        model.deleteLimit(model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd()));
+       // model.deleteLimit(model.getSameDatesLimit(limit.getDateStart(), limit.getDateEnd()));
+        List<Limit> latestLimitList = model.getLimitList();
+        for (Limit targetLimit : latestLimitList) {
 
+            if (targetLimit.isSameLimitDates(limit)) {
+                model.deleteLimit(targetLimit);
+                model.commitFinancialPlanner();
+
+            }
+        }
         return new CommandResult(MESSAGE_SUCCESS + model.autoLimitCheck());
     }
 
