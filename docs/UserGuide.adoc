@@ -262,7 +262,7 @@ Examples:
 === Deleting candidates / companies / job offers : `delete`
 
 ==== Deleting candidate(s)
-Format: `deletec <INDEX>,<INDEX> ...`
+Format: `deletec <INDEX>,<INDEX>-<INDEX> ...`
 
 *	Deletes the candidate(s) with the specified `INDEX`(s)
 *	This index must be an index number shown in the displayed candidate list.
@@ -274,11 +274,11 @@ Example to delete candidate(s):
 Step 1. `find Betsy` +
 (Shows all saved candidates named Betsy)
 
-Step 2. `deletec 1` +
-(Deletes the 1st candidate on most recent list)
+Step 2. `deletec 1,2-3` +
+(Deletes the 1st, 2nd and 3rd candidate on most recent list)
 
 ==== Deleting company(s)
-Format: `deleteC <INDEX>,<INDEX> ...`
+Format: `deleteC <INDEX>,<INDEX>-<INDEX> ...`
 
 * Deletes the company(s) with the specified `INDEX`(s)
 * The index must be an index number shown in the displayed company list.
@@ -288,12 +288,12 @@ Example to delete company(s):
 Step 1. `listC` +
 (Shows all available companies)
 
-Step 2. `deleteC 1,6,2` +
-(Deletes the 1st, 2nd and 6th job in the job list)
+Step 2. `deleteC 1,6,2-3` +
+(Deletes the 1st, 2nd, 3rd and 6th job in the job list)
 
 
 ==== Deleting job offer(s)
-Format: `deletej <INDEX>,<INDEX> ...`
+Format: `deletej <INDEX>,<INDEX>-<INDEX> ...`
 
 * Deletes the job(s) with the specified `INDEX`(s)
 * The index must be an index number shown in the displayed job list.
@@ -303,8 +303,8 @@ Example to delete job(s):
 Step 1. `listj` +
 (Shows all available jobs)
 
-Step 2. `deletej 5,4` +
-(Deletes the 4th and 5th job in the job list)
+Step 2. `deletej 5-4,6` +
+(Deletes the 4th, 5th and 6th job in the job list)
 
 === Clearing all entries : `clear`
 

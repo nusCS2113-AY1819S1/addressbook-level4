@@ -22,8 +22,8 @@ public class DeleteJobOfferCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the job offer(s) identified by the index number(s) used in the displayed job list.\n"
-            + "Parameters: INDEX,INDEX ... (INDEX must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1,2";
+            + "Parameters: INDEX,INDEX-INDEX ... (INDEX must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1,2,7-9";
 
     public static final String MESSAGE_DELETE_JOB_OFFER_SUCCESS = "Deleted job offer:\n%1$s";
 
