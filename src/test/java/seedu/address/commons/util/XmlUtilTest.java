@@ -15,7 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.ProductDatabase;
 import seedu.address.storage.XmlAdaptedProduct;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableProductDatabase;
@@ -49,7 +49,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.getDataFromFile(null, AddressBook.class);
+        XmlUtil.getDataFromFile(null, ProductDatabase.class);
     }
 
     @Test
@@ -61,19 +61,19 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.getDataFromFile(MISSING_FILE, AddressBook.class);
+        XmlUtil.getDataFromFile(MISSING_FILE, ProductDatabase.class);
     }
 
     @Test
     public void getDataFromFile_emptyFile_dataFormatMismatchException() throws Exception {
         thrown.expect(JAXBException.class);
-        XmlUtil.getDataFromFile(EMPTY_FILE, AddressBook.class);
+        XmlUtil.getDataFromFile(EMPTY_FILE, ProductDatabase.class);
     }
 
     /**
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
-        AddressBook dataFromFile =
+        ProductDatabase dataFromFile =
     XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableProductDatabase.class).toModelType();
         assertEquals(9, dataFromFile.getPersonList().size());
     }
@@ -110,7 +110,7 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_nullFile_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        XmlUtil.saveDataToFile(null, new AddressBook());
+        XmlUtil.saveDataToFile(null, new ProductDatabase());
     }
 
     @Test
@@ -122,19 +122,19 @@ public class XmlUtilTest {
     @Test
     public void saveDataToFile_missingFile_fileNotFoundException() throws Exception {
         thrown.expect(FileNotFoundException.class);
-        XmlUtil.saveDataToFile(MISSING_FILE, new AddressBook());
+        XmlUtil.saveDataToFile(MISSING_FILE, new ProductDatabase());
     }
 
     @Test
     public void saveDataToFile_validFile_dataSaved() throws Exception {
         FileUtil.createFile(TEMP_FILE);
-        XmlSerializableProductDatabase dataToWrite = new XmlSerializableProductDatabase(new AddressBook());
+        XmlSerializableProductDatabase dataToWrite = new XmlSerializableProductDatabase(new ProductDatabase());
         XmlUtil.saveDataToFile(TEMP_FILE, dataToWrite);
         XmlSerializableProductDatabase dataFromFile =
                 XmlUtil.getDataFromFile(TEMP_FILE, XmlSerializableProductDatabase.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new AddressBook());
+        AddressBookBuilder builder = new AddressBookBuilder(new ProductDatabase());
         dataToWrite = new XmlSerializableProductDatabase(
                 builder.withPerson(new ProductBuilder().build()).build());
 

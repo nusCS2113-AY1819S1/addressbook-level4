@@ -73,7 +73,7 @@ public class XmlAdaptedUserTest {
     public void toModelType_nullAddressBookFilePath_throwsIllegalValueException() {
         XmlAdaptedUser user =
                 new XmlAdaptedUser(VALID_USERNAME, VALID_PASSWORD, null);
-        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "AddressBook file path");
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, "ProductDatabase file path");
         Assert.assertThrows(IllegalValueException.class, expectedMessage, user::toModelType);
     }
 

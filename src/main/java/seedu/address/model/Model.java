@@ -34,10 +34,10 @@ public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
-    /** Returns the AddressBook */
+    /** Returns the ProductDatabase */
     ReadOnlyAddressBook getProductInfoBook();
 
-    /** Returns the AddressBook */
+    /** Returns the ProductDatabase */
     ReadOnlyAddressBook getDistributorInfoBook();
 
     /**
@@ -205,7 +205,7 @@ public interface Model {
 
     void updateUserPassword(User target, User userWithNewPassword) throws UserNotFoundException;
 
-    /** Returns the AddressBook */
+    /** Returns the ProductDatabase */
     ReadOnlyAddressBook getAddressBook();
 
 }

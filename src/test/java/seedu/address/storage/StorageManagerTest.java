@@ -15,7 +15,7 @@ import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.AddressBook;
+import seedu.address.model.ProductDatabase;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserDatabase;
 import seedu.address.model.UserPrefs;
@@ -64,10 +64,10 @@ public class StorageManagerTest {
     //     * {@link XmlProductDatabaseStorage} class.
     //     * More extensive testing of UserPref saving/reading is done in {@link XmlAddressBookStorageTest} class.
     //     */
-    //    AddressBook original = getTypicalAddressBook();
+    //    ProductDatabase original = getTypicalAddressBook();
     //    storageManager.saveAddressBook(original);
     //    ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
-    //    assertEquals(original, new AddressBook(retrieved));
+    //    assertEquals(original, new ProductDatabase(retrieved));
     //}
 
     @Test
@@ -80,7 +80,7 @@ public class StorageManagerTest {
         Storage storage = new StorageManager(new XmlProductDatabaseStorageExceptionThrowingStub(Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")),
                 new XmlUserDatabaseStorageExceptionThrowingStub(Paths.get("dummy")));
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new AddressBook()));
+        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new ProductDatabase()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 

@@ -17,7 +17,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.login.User;
 
 /**
- * A class to access AddressBook data stored as an xml file on the hard disk.
+ * A class to access ProductDatabase data stored as an xml file on the hard disk.
  */
 public class XmlProductDatabaseStorage implements ProductDatabaseStorage {
 
@@ -52,7 +52,7 @@ public class XmlProductDatabaseStorage implements ProductDatabaseStorage {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
-            logger.info("AddressBook file " + filePath + " not found");
+            logger.info("ProductDatabase file " + filePath + " not found");
             return Optional.empty();
         }
 
