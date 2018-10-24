@@ -26,7 +26,8 @@ public class ViewClubBudgetsCommandParser implements Parser<ViewClubBudgetsComma
 
         if (!arePrefixesPresent(argMultimap, PREFIX_CLUB_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewClubBudgetsCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ViewClubBudgetsCommand.MESSAGE_USAGE));
         }
 
         ClubName clubName = ParserUtil.parseClubName(argMultimap.getValue(PREFIX_CLUB_NAME).get());
