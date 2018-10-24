@@ -17,6 +17,7 @@ public class Task {
     // Data fields
     private final TaskDate date;
     private final TaskPriority priority;
+
     private boolean isComplete;
 
     /**
@@ -91,8 +92,7 @@ public class Task {
         return otherTask.getName().equals(getName())
                 && otherTask.getModule().equals(getModule())
                 && otherTask.getDate().equals(getDate())
-                && otherTask.getPriority().equals(getPriority())
-                && otherTask.getComplete() == getComplete();
+                && otherTask.getPriority().equals(getPriority());
     }
 
     @Override

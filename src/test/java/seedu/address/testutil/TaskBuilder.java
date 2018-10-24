@@ -15,17 +15,20 @@ public class TaskBuilder {
     public static final String DEFAULT_MODULE = "CS2113";
     public static final String DEFAULT_DATE = "31-12";
     public static final String DEFAULT_PRIORITY = "3";
+    public static final boolean DEFAULT_STATUS = false;
 
     private TaskName name;
     private TaskModule module;
     private TaskDate date;
     private TaskPriority priority;
+    private boolean status;
 
     public TaskBuilder() {
         name = new TaskName(DEFAULT_NAME);
         module = new TaskModule(DEFAULT_MODULE);
         date = new TaskDate(DEFAULT_DATE);
         priority = new TaskPriority(DEFAULT_PRIORITY);
+        status = DEFAULT_STATUS;
     }
 
     /**
@@ -36,6 +39,7 @@ public class TaskBuilder {
         module = taskToCopy.getModule();
         date = taskToCopy.getDate();
         priority = taskToCopy.getPriority();
+        status = taskToCopy.getComplete();
     }
 
     /**
@@ -71,6 +75,6 @@ public class TaskBuilder {
     }
 
     public Task build() {
-        return new Task(name, module, date, priority);
+        return new Task(name, module, date, priority, status);
     }
 }
