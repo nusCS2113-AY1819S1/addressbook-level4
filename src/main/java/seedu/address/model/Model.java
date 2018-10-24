@@ -66,24 +66,19 @@ public interface Model {
      * Returns true if the model has previous stock list states to restore.
      */
 
-<<<<<<< HEAD
     /**
      * Lost the given item.
      * The item must exist in the stock list.
      */
     //void lostItem(Item target);
-=======
+
     boolean canUndoStockList();
->>>>>>> 6acad81de0d1611cb1916b635cd7085f6f847a82
 
     /**
      * Returns true if the model has undone stock list states to restore.
      */
-<<<<<<< HEAD
     //void foundItem(Item target);
-=======
     boolean canRedoStockList();
->>>>>>> 6acad81de0d1611cb1916b635cd7085f6f847a82
 
     /**
      * Restores the model's stock list to its previous state.
