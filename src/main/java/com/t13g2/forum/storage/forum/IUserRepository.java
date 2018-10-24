@@ -1,3 +1,4 @@
+//@@Meowzz95
 package com.t13g2.forum.storage.forum;
 
 import com.t13g2.forum.model.forum.User;
@@ -14,7 +15,7 @@ public interface IUserRepository {
 
     void deleteUser(int userId);
 
-    User getUser(int userId);
+    User getUser(int userId) throws EntityDoesNotExistException;
 
     User getUserByUsername(String username) throws EntityDoesNotExistException;
 

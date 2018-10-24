@@ -1,3 +1,4 @@
+//@@Meowzz95
 package com.t13g2.forum.storage.forum;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface ICommentRepository {
 
     void deleteComment(int commentId);
 
-    Comment getComment(int commentId);
+    Comment getComment(int commentId) throws EntityDoesNotExistException;
 
     List<Comment> getCommentsByThread(int threadId);
 

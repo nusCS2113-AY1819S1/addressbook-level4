@@ -1,3 +1,4 @@
+//@@Meowzz95
 package com.t13g2.forum.storage.forum;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface IForumThreadRepository {
 
     void updateThread(@NotNull ForumThread forumThread);
 
-    ForumThread getThread(int forumThreadId);
+    ForumThread getThread(int forumThreadId) throws EntityDoesNotExistException;
 
     List<ForumThread> getThreadsByModule(int moduleId);
 

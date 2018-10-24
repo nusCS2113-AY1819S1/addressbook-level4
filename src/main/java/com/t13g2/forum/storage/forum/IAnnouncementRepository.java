@@ -1,3 +1,4 @@
+//@@Meowzz95
 package com.t13g2.forum.storage.forum;
 
 import com.t13g2.forum.model.forum.Announcement;
@@ -12,7 +13,7 @@ public interface IAnnouncementRepository {
 
     void deleteAnnouncement(int announcementId);
 
-    Announcement getAnnouncement(int announcementId);
+    Announcement getAnnouncement(int announcementId) throws EntityDoesNotExistException;
 
     Announcement getLatestAnnouncement() throws EntityDoesNotExistException;
 }

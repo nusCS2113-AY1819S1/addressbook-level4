@@ -6,7 +6,6 @@ import static java.util.Objects.requireNonNull;
 import com.t13g2.forum.logic.CommandHistory;
 import com.t13g2.forum.logic.commands.exceptions.CommandException;
 import com.t13g2.forum.model.Model;
-import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.storage.forum.UnitOfWork;
 
 /**
@@ -29,18 +28,13 @@ public class DeleteThreadCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Thread deleted: %1$s";
     public static final String MESSAGE_INVALID_THREAD_ID = "Invalid Thread id";
 
-    private final ForumThread forumThread;
     private final int threadId;
-    private final String threadTitle;
 
     /**
      * Creates an DeleteThreadCommand to delete the specified {@code ForumThread}
      */
-    public DeleteThreadCommand(ForumThread forumThread) {
-        requireNonNull(forumThread);
-        this.forumThread = forumThread;
-        this.threadId = forumThread.getId();
-        this.threadTitle = forumThread.getTitle();
+    public DeleteThreadCommand(int threadId) {
+        this.threadId = threadId;
     }
 
     @Override
@@ -56,8 +50,7 @@ public class DeleteThreadCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_THREAD_ID);
         }
         String message = "\n"
-                + "Thread ID: " + threadId + "\n"
-                + "Thread Title: " + threadTitle + "\n";
+            + "Thread ID: " + threadId + "\n";
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, message));
     }

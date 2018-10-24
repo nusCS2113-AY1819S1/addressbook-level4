@@ -1,9 +1,12 @@
+//@@Meowzz95
 package com.t13g2.forum.storage.forum;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import com.sun.istack.NotNull;
 import com.t13g2.forum.model.forum.Module;
 
 /**
@@ -16,14 +19,18 @@ public class ModuleRepository extends BaseRepository implements IModuleRepositor
 
 
     @Override
-    public int addModule(Module module) {
+    public int addModule(@NotNull Module module) {
+        Objects.requireNonNull(module, "module can't be null");
+
         forumBookStorage.getModules().getList().add(module);
         forumBookStorage.getModules().setDirty();
         return module.getId();
     }
 
     @Override
-    public void removeModule(Module module) {
+    public void removeModule(@NotNull Module module) {
+        Objects.requireNonNull(module, "module can't be null");
+
         this.removeModule(module.getId());
     }
 
