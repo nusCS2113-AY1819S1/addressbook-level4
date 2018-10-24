@@ -36,16 +36,16 @@ public class XmlBookInventoryStorage implements BookInventoryStorage {
     }
 
     @Override
-    public Optional<ReadOnlyBookInventory> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyBookInventory> readBookInventory() throws DataConversionException, IOException {
+        return readBookInventory(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readBookInventory()}
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyBookInventory> readAddressBook(Path filePath) throws DataConversionException,
+    public Optional<ReadOnlyBookInventory> readBookInventory(Path filePath) throws DataConversionException,
                                                                                  FileNotFoundException {
         requireNonNull(filePath);
 
