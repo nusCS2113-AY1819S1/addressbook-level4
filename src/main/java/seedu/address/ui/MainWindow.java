@@ -35,8 +35,12 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
+
     //private PersonListPanel personListPanel;
     private TaskListPanel taskListPanel;
+    private ExpenditureListPanel expenditureListPanel;
+    private PersonListPanel personListPanel;
+
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -48,11 +52,14 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane commandBoxPlaceholder;
 
     @FXML
+    private StackPane expenditureListPanelPlaceholder;
+
+    @FXML
     private MenuItem helpMenuItem;
-/*
+    /*
     @FXML
     private StackPane personListPanelPlaceholder;
-*/
+    */
     @FXML
     private StackPane taskListPanelPlaceholder;
 
@@ -125,10 +132,15 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
-/*
+
+        expenditureListPanel = new ExpenditureListPanel(logic.getFilteredExpenditureList());
+        expenditureListPanelPlaceholder.getChildren().add(expenditureListPanel.getRoot());
+
+        /*
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
-*/
+        */
+
         taskListPanel = new TaskListPanel(logic.getFilteredTaskList());
         taskListPanelPlaceholder.getChildren().add(taskListPanel.getRoot());
 
@@ -193,13 +205,17 @@ public class MainWindow extends UiPart<Stage> {
     private void handleExit() {
         raise(new ExitAppRequestEvent());
     }
-/*
+    /*
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
     }
-*/
+    */
     public TaskListPanel getTaskListPanel() {
         return taskListPanel;
+    }
+
+    public ExpenditureListPanel getExpenditureListPanel() {
+        return expenditureListPanel;
     }
 
     void releaseResources() {

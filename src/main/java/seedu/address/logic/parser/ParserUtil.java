@@ -9,6 +9,10 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.expenditureinfo.Category;
+import seedu.address.model.expenditureinfo.Date;
+import seedu.address.model.expenditureinfo.Description;
+import seedu.address.model.expenditureinfo.Money;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -54,7 +58,13 @@ public class ParserUtil {
         return new Name(trimmedName);
     }
 
-    public static TaskName parseTask(String name) throws ParseException {
+    /**
+     * Parses a {@code String name} into a {@code TaskName}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static TaskName parseTaskName(String name) throws ParseException {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!TaskName.isValidName(trimmedName)) {
@@ -63,7 +73,13 @@ public class ParserUtil {
         return new TaskName(trimmedName);
     }
 
-    public static TaskModule parseModule(String module) throws ParseException {
+    /**
+     * Parses a {@code String module} into a {@code TaskModule}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code module} is invalid.
+     */
+    public static TaskModule parseTaskModule(String module) throws ParseException {
         requireNonNull(module);
         String trimmedModule = module.trim();
         if (!TaskModule.isValidModule(trimmedModule)) {
@@ -72,7 +88,13 @@ public class ParserUtil {
         return new TaskModule(trimmedModule);
     }
 
-    public static TaskDate parseDate(String date) throws ParseException {
+    /**
+     * Parses a {@code String date} into a {@code TaskDate}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+    public static TaskDate parseTaskDate(String date) throws ParseException {
         requireNonNull(date);
         String trimmedDate = date.trim();
         if (!TaskDate.isValidDate(trimmedDate)) {
@@ -81,13 +103,82 @@ public class ParserUtil {
         return new TaskDate(trimmedDate);
     }
 
-    public static TaskPriority parsePriority(String priority) throws ParseException {
+    /**
+     * Parses a {@code String priority} into a {@code TaskPriority}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code priority} is invalid.
+     */
+    public static TaskPriority parseTaskPriority(String priority) throws ParseException {
         requireNonNull(priority);
         String trimmedPriority = priority.trim();
         if (!TaskPriority.isValidPriority(trimmedPriority)) {
             throw new ParseException(TaskPriority.MESSAGE_PRIORITY_CONSTRAINTS);
         }
         return new TaskPriority(trimmedPriority);
+    }
+
+    /**
+     * Parses a {@code String description} into a {@code Description}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code description} is invalid.
+     */
+
+    public static Description parseDescription(String description) throws ParseException {
+        requireNonNull(description);
+        String trimmedDescription = description.trim();
+        if (!Description.isValidDescription(trimmedDescription)) {
+            throw new ParseException(Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+        }
+        return new Description(trimmedDescription);
+    }
+
+    /**
+     * Parses a {@code String date} into a {@code Date}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code date} is invalid.
+     */
+
+    public static Date parseDate(String date) throws ParseException {
+        requireNonNull(date);
+        String trimmedDate = date.trim();
+        if (!Date.isValidDate(trimmedDate)) {
+            throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
+        }
+        return new Date(trimmedDate);
+    }
+
+
+    /**
+     * Parses a {@code String money} into a {@code Money}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code money} is invalid.
+     */
+    public static Money parseMoney(String money) throws ParseException {
+        requireNonNull(money);
+        String trimmedMoney = money.trim();
+        if (!Money.isValidMoney(trimmedMoney)) {
+            throw new ParseException(Money.MESSAGE_MONEY_CONSTRAINTS);
+        }
+        return new Money(trimmedMoney);
+    }
+
+    /**
+     * Parses a {@code String category} into a {@code category}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code category} is invalid.
+     */
+    public static Category parseCategory(String category) throws ParseException {
+        requireNonNull(category);
+        String trimmedCategory = category.trim();
+        if (!Category.isValidCategory(trimmedCategory)) {
+            throw new ParseException(Category.MESSAGE_CATEGORY_CONSTRAINTS);
+        }
+        return new Category(trimmedCategory);
     }
 
     /**

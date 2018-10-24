@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.model.expenditureinfo;
 
 import static java.util.Objects.requireNonNull;
@@ -10,13 +11,13 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Category {
 
     public static final String MESSAGE_CATEGORY_CONSTRAINTS =
-            "Category can take any values, and it should not be blank";
+            "Category can only take few values, and it should not be blank";
 
     /*
      * The first character of the address must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String CATEGORY_VALIDATION_REGEX = "[^\\s].*";
+    //public static final String CATEGORY_VALIDATION_REGEX = "[^\\s].*";
 
     public final String categoryName;
 
@@ -35,7 +36,23 @@ public class Category {
      * Returns true if a given string is a valid category.
      */
     public static boolean isValidCategory(String test) {
-        return test.matches(CATEGORY_VALIDATION_REGEX);
+        return "Food".equals(test)
+                || "Drink".equals(test)
+                || "Clothing".equals(test)
+                || "Electronics".equals(test)
+                || "DailyNecessities".equals(test)
+                || "Sports".equals(test)
+                || "Communications".equals(test)
+                || "Travels".equals(test)
+                || "Study".equals(test)
+                || "Office".equals(test)
+                || "Pets".equals(test)
+                || "Gifts".equals(test)
+                || "Entertainment".equals(test)
+                || "Traffic".equals(test)
+                || "Shopping".equals(test)
+                || "Beauty".equals(test)
+                || "Furniture".equals(test);
     }
 
 

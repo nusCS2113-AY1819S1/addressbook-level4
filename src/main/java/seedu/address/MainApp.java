@@ -26,15 +26,19 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyExpenditureTracker;
+import seedu.address.model.ReadOnlyTodoList;
+import seedu.address.model.TodoList;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
+import seedu.address.storage.ExpenditureTrackerStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.TodoListStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.XmlExpenditureTrackerStorage;
 import seedu.address.storage.XmlTodoListStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -44,7 +48,7 @@ import seedu.address.ui.UiManager;
  */
 public class MainApp extends Application {
 
-    public static final Version VERSION = new Version(0, 6, 0, true);
+    public static final Version VERSION = new Version(1, 2, 0, true);
 
     private static final Logger logger = LogsCenter.getLogger(MainApp.class);
 
@@ -67,8 +71,10 @@ public class MainApp extends Application {
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
-        TodoListStorage todoListStorage = new XmlTodoListStorage(userPrefs.getAddressBookFilePath());
-        storage = new StorageManager(addressBookStorage, todoListStorage, userPrefsStorage);
+        ExpenditureTrackerStorage expenditureTrackerStorage =
+                new XmlExpenditureTrackerStorage(userPrefs.getExpenditureTrackerFilePath());
+        TodoListStorage todoListStorage = new XmlTodoListStorage(userPrefs.getTodoListFilePath());
+        storage = new StorageManager(addressBookStorage, expenditureTrackerStorage, todoListStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -88,24 +94,40 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        //Optional<ReadOnlyExpenditureTracker> expenditureTrackerOptional;
+        Optional<ReadOnlyExpenditureTracker> expenditureTrackerOptional;
+        Optional<ReadOnlyTodoList> todoListOptional;
         ReadOnlyAddressBook initialData;
-        ReadOnlyExpenditureTracker initialExpenditureTracker = new ExpenditureTracker();
+        ReadOnlyTodoList initialTodoListData;
+        ReadOnlyExpenditureTracker initialExpenditureTracker;
+
         try {
             addressBookOptional = storage.readAddressBook();
+            expenditureTrackerOptional = storage.readExpenditureTracker();
+            todoListOptional = storage.readTodoList();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
+            if (!todoListOptional.isPresent()) {
+                logger.info("Data file not found. Will be starting with a sample TodoList");
+            }
             initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialExpenditureTracker = expenditureTrackerOptional
+                    .orElseGet(SampleDataUtil::getSampleExpenditureTracker);
+            initialTodoListData = todoListOptional.orElseGet(SampleDataUtil::getSampleTodoList);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
+            initialExpenditureTracker = new ExpenditureTracker();
+            initialTodoListData = new TodoList();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
+            initialExpenditureTracker = new ExpenditureTracker();
+            initialTodoListData = new TodoList();
         }
 
-        return new ModelManager(initialData, initialExpenditureTracker, userPrefs);
+        return new ModelManager(initialData, initialTodoListData, initialExpenditureTracker, userPrefs);
+
     }
 
     private void initLogging(Config config) {

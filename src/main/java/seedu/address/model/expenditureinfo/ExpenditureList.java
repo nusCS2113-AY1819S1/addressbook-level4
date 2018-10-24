@@ -1,3 +1,4 @@
+//@@author SHININGGGG
 package seedu.address.model.expenditureinfo;
 
 import static java.util.Objects.requireNonNull;
@@ -8,6 +9,9 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.expenditureinfo.exceptions.DuplicateExpenditureException;
+import seedu.address.model.expenditureinfo.exceptions.ExpenditureNotFoundException;
+
 
 /**
  * A list of expenditures.
@@ -22,12 +26,32 @@ public class ExpenditureList implements Iterable<Expenditure> {
     private final ObservableList<Expenditure> internalList = FXCollections.observableArrayList();
 
     /**
+     * Returns true if the list contains an equivalent task as the given argument.
+     */
+    public boolean contains(Expenditure toCheck) {
+        requireNonNull(toCheck);
+        return internalList.stream().anyMatch(toCheck::isSameExpenditure);
+    }
+
+    /**
      * Adds an expenditure to the list.
      */
+
 
     public void add(Expenditure toAdd) {
         requireNonNull(toAdd);
         internalList.add(toAdd);
+    }
+
+    /**
+     * Removes the equivalent expenditure from the list.
+     * The expenditure must exist in the list.
+     */
+    public void remove(Expenditure toRemove) {
+        requireNonNull(toRemove);
+        if (!internalList.remove(toRemove)) {
+            throw new ExpenditureNotFoundException();
+        }
     }
 
     /**
@@ -40,13 +64,25 @@ public class ExpenditureList implements Iterable<Expenditure> {
         internalList.setAll(replacement.internalList);
     }
 
-    /**
-     * Replaces the contents of this list with {@code expenditures}.
-     */
 
     public void setExpenditures(List<Expenditure> expenditures) {
         requireAllNonNull(expenditures);
         internalList.setAll(expenditures);
+    }
+
+    public void setExpenditures(Expenditure target, Expenditure editedExpenditure) {
+        requireAllNonNull(target, editedExpenditure);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new ExpenditureNotFoundException();
+        }
+
+        if (!target.isSameExpenditure(editedExpenditure) && contains(editedExpenditure)) {
+            throw new DuplicateExpenditureException();
+        }
+
+        internalList.set(index, editedExpenditure);
     }
 
 
@@ -73,5 +109,4 @@ public class ExpenditureList implements Iterable<Expenditure> {
     public int hashCode() {
         return internalList.hashCode();
     }
-
 }

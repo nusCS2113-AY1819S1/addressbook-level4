@@ -26,9 +26,10 @@
                 </Label>
                 <Label fx:id="taskname" text="\$first" styleClass="cell_big_label" />
             </HBox>
-            <Label fx:id="taskpriority" />
             <Label fx:id="taskmodule" styleClass="cell_small_label" text="\$module" />
             <Label fx:id="taskdate" styleClass="cell_small_label" text="\$date" />
+            <Label fx:id="taskpriority" />
+            <Label fx:id="taskstate" styleClass="cell_small_label" text="\$status" />
         </VBox>
     </GridPane>
 </HBox>

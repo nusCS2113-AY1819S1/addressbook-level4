@@ -13,6 +13,8 @@ public class UserPrefs {
 
     private GuiSettings guiSettings;
     private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
+    private Path expenditureTrackerFilePath = Paths.get("data", "expendituretracker.xml");
+    private Path todoListFilePath = Paths.get("data" , "todolist.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -34,8 +36,24 @@ public class UserPrefs {
         return addressBookFilePath;
     }
 
+    public Path getExpenditureTrackerFilePath() {
+        return expenditureTrackerFilePath;
+    }
+
+    public Path getTodoListFilePath() {
+        return todoListFilePath;
+    }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setExpenditureTrackerFilePath(Path expenditureTrackerFilePath) {
+        this.expenditureTrackerFilePath = expenditureTrackerFilePath;
+    }
+
+    public void setTodoListFilePath(Path todoListFilePath) {
+        this.todoListFilePath = todoListFilePath;
     }
 
     @Override
@@ -50,7 +68,8 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath);
+                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
+                && Objects.equals(todoListFilePath, o.todoListFilePath);
     }
 
     @Override

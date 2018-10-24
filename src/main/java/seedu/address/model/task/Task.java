@@ -17,18 +17,19 @@ public class Task {
     // Data fields
     private final TaskDate date;
     private final TaskPriority priority;
-    private boolean completeness;
+
+    private boolean isComplete;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(TaskName name, TaskModule module, TaskDate date, TaskPriority priority) {
+    public Task(TaskName name, TaskModule module, TaskDate date, TaskPriority priority, boolean isComplete) {
         requireAllNonNull(name, module, date, priority);
         this.name = name;
         this.module = module;
         this.date = date;
         this.priority = priority;
-        completeness = false;
+        this.isComplete = isComplete;
     }
 
     public TaskName getName() {
@@ -47,16 +48,30 @@ public class Task {
         return priority;
     }
 
-    public boolean getCompleteness() {return completeness;}
+    public boolean getComplete() {
+        return isComplete;
+    }
 
-    public void setAsCompleted() {completeness = true;}
+    public void setAsCompleted() {
+        isComplete = true;
+    }
+
+    public void setAsUncompleted() {
+        isComplete = false;
+    }
 
     /**
      * Returns true if both tasks are totally the same.
      * This defines a weaker notion of equality between two tasks.
      */
     public boolean isSameTask(Task otherTask) {
-        return otherTask == this;
+        if (otherTask == this) {
+            return true;
+        }
+
+        return otherTask != null
+                && otherTask.getName().equals(getName())
+                && otherTask.getModule().equals(getModule());
     }
 
     /**
@@ -83,7 +98,7 @@ public class Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, module, date, priority);
+        return Objects.hash(name, module, date, priority, isComplete);
     }
 
     @Override

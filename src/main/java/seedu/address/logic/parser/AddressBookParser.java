@@ -6,7 +6,30 @@ import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.*;
+import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddExpenditureCommand;
+import seedu.address.logic.commands.AddTaskCommand;
+import seedu.address.logic.commands.CheckExpenditureCommand;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
+import seedu.address.logic.commands.CompleteTaskCommand;
+import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DeleteExpenditureCommand;
+import seedu.address.logic.commands.DeleteTaskCommand;
+import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditExpenditureCommand;
+import seedu.address.logic.commands.EditTaskCommand;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.HistoryCommand;
+import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RedoCommand;
+import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.UncompleteTaskCommand;
+import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.ViewTaskCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -36,15 +59,21 @@ public class AddressBookParser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case TDLAddCommand.COMMAND_WORD:
-            return new TDLAddCommandParser().parse(arguments);
+        case AddTaskCommand.COMMAND_WORD:
+            return new AddTaskCommandParser().parse(arguments);
+
+        case AddExpenditureCommand.COMMAND_WORD:
+            return new AddExpenditureCommandParser().parse(arguments);
 
         case AddCommand.COMMAND_WORD:
         case AddCommand.COMMAND_ALIAS:
             return new AddCommandParser().parse(arguments);
 
-        case TDLEditCommand.COMMAND_WORD:
-            return new TDLEditCommandParser().parse(arguments);
+        case EditTaskCommand.COMMAND_WORD:
+            return new EditTaskCommandParser().parse(arguments);
+
+        case EditExpenditureCommand.COMMAND_WORD:
+            return new EditExpenditureCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
         case EditCommand.COMMAND_ALIAS:
@@ -58,9 +87,17 @@ public class AddressBookParser {
         case DeleteCommand.COMMAND_ALIAS:
             return new DeleteCommandParser().parse(arguments);
 
-        case TDLDeleteCommand.COMMAND_WORD:
-            return new TDLDeleteCommandParser().parse(arguments);
+        case DeleteExpenditureCommand.COMMAND_WORD:
+            return new DeleteExpenditureCommandParser().parse(arguments);
 
+        case DeleteTaskCommand.COMMAND_WORD:
+            return new DeleteTaskCommandParser().parse(arguments);
+
+        case CompleteTaskCommand.COMMAND_WORD:
+            return new CompleteTaskCommandParser().parse(arguments);
+
+        case UncompleteTaskCommand.COMMAND_WORD:
+            return new UncompleteTaskCommandParser().parse(arguments);
 
         case ClearCommand.COMMAND_WORD:
         case ClearCommand.COMMAND_ALIAS:
@@ -75,8 +112,11 @@ public class AddressBookParser {
         case ListCommand.COMMAND_ALIAS:
             return new ListCommand();
 
-        case TDLViewCommand.COMMAND_WORD:
-            return new TDLViewCommand();
+        case CheckExpenditureCommand.COMMAND_WORD:
+            return new CheckExpenditureCommandParser().parse(arguments);
+
+        case ViewTaskCommand.COMMAND_WORD:
+            return new ViewTaskCommand();
 
         case HistoryCommand.COMMAND_WORD:
         case HistoryCommand.COMMAND_ALIAS:

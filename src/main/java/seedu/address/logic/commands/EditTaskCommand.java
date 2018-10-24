@@ -1,7 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRIORITY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TASK;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 
 import java.util.List;
@@ -13,12 +16,16 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.task.*;
+import seedu.address.model.task.Task;
+import seedu.address.model.task.TaskDate;
+import seedu.address.model.task.TaskModule;
+import seedu.address.model.task.TaskName;
+import seedu.address.model.task.TaskPriority;
 
 /**
  * Edits the details of an existing task in the address book.
  */
-public class TDLEditCommand extends Command {
+public class EditTaskCommand extends Command {
 
     public static final String COMMAND_WORD = "TDL_edit";
 
@@ -39,18 +46,18 @@ public class TDLEditCommand extends Command {
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the to-do list.";
 
     private final Index index;
-    private final TDLEditTaskDescriptor tdleditTaskDescriptor;
+    private final EditTaskDescriptor tdleditTaskDescriptor;
 
     /**
      * @param index of the task in the filtered task list to edit
      * @param tdleditTaskDescriptor details to edit the task with
      */
-    public TDLEditCommand(Index index, TDLEditTaskDescriptor tdleditTaskDescriptor) {
+    public EditTaskCommand(Index index, EditTaskDescriptor tdleditTaskDescriptor) {
         requireNonNull(index);
         requireNonNull(tdleditTaskDescriptor);
 
         this.index = index;
-        this.tdleditTaskDescriptor = new TDLEditTaskDescriptor(tdleditTaskDescriptor);
+        this.tdleditTaskDescriptor = new EditTaskDescriptor(tdleditTaskDescriptor);
     }
 
     @Override
@@ -71,7 +78,7 @@ public class TDLEditCommand extends Command {
 
         model.updateTask(taskToEdit, tdleditedTask);
         model.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
-        model.commitAddressBook();
+        model.commitTodoList();
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, tdleditedTask));
     }
 
@@ -79,15 +86,16 @@ public class TDLEditCommand extends Command {
      * Creates and returns a {@code Task} with the details of {@code taskToEdit}
      * edited with {@code tdleditTaskDescriptor}.
      */
-    private static Task createEditedTask(Task taskToEdit, TDLEditTaskDescriptor tdleditTaskDescriptor) {
+    private static Task createEditedTask(Task taskToEdit, EditTaskDescriptor tdleditTaskDescriptor) {
         assert taskToEdit != null;
 
         TaskName updatedName = tdleditTaskDescriptor.getName().orElse(taskToEdit.getName());
         TaskModule updatedModule = tdleditTaskDescriptor.getModule().orElse(taskToEdit.getModule());
         TaskDate updatedDate = tdleditTaskDescriptor.getDate().orElse(taskToEdit.getDate());
         TaskPriority updatedPriority = tdleditTaskDescriptor.getPriority().orElse(taskToEdit.getPriority());
+        boolean status = taskToEdit.getComplete();
 
-        return new Task(updatedName, updatedModule, updatedDate, updatedPriority);
+        return new Task(updatedName, updatedModule, updatedDate, updatedPriority, status);
     }
 
     @Override
@@ -98,12 +106,12 @@ public class TDLEditCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof TDLEditCommand)) {
+        if (!(other instanceof EditTaskCommand)) {
             return false;
         }
 
         // state check
-        TDLEditCommand e = (TDLEditCommand) other;
+        EditTaskCommand e = (EditTaskCommand) other;
         return index.equals(e.index)
                 && tdleditTaskDescriptor.equals(e.tdleditTaskDescriptor);
     }
@@ -112,19 +120,19 @@ public class TDLEditCommand extends Command {
      * Stores the details to edit the task with. Each non-empty field value will replace the
      * corresponding field value of the task.
      */
-    public static class TDLEditTaskDescriptor {
+    public static class EditTaskDescriptor {
         private TaskDate taskDate;
         private TaskModule taskModule;
         private TaskName taskName;
         private TaskPriority taskPriority;
 
-        public TDLEditTaskDescriptor() {}
+        public EditTaskDescriptor() {}
 
         /**
          * Copy constructor.
          * A defensive copy of {@code tags} is used internally.
          */
-        public TDLEditTaskDescriptor(TDLEditTaskDescriptor toCopy) {
+        public EditTaskDescriptor(EditTaskDescriptor toCopy) {
             setName(toCopy.taskName);
             setModule(toCopy.taskModule);
             setDate(toCopy.taskDate);
@@ -180,12 +188,12 @@ public class TDLEditCommand extends Command {
             }
 
             // instanceof handles nulls
-            if (!(other instanceof TDLEditTaskDescriptor)) {
+            if (!(other instanceof EditTaskDescriptor)) {
                 return false;
             }
 
             // state check
-            TDLEditTaskDescriptor e = (TDLEditTaskDescriptor) other;
+            EditTaskDescriptor e = (EditTaskDescriptor) other;
 
             return getName().equals(e.getName())
                     && getName().equals(e.getName())
