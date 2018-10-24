@@ -33,10 +33,33 @@ public class FindCommandParserTest {
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n Alice \n \t Bob  \t", expectedFindCommand);
 
-        // parsing with tag symbol
+        // parsing with exclude option enabled
         FindCommand expectedFindCommand2 =
+                new FindPersonSubCommand(new NameContainsKeywordsPredicate(Arrays.asList("Alice", "Bob")), true);
+        assertParseSuccess(parser, "\\exclude Alice Bob", expectedFindCommand2);
+
+        // parsing with tag option enabled
+        FindCommand expectedFindCommand3 =
                 new FindTagSubCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")));
-        assertParseSuccess(parser, "\\tag friends colleagues", expectedFindCommand2);
+        assertParseSuccess(parser, "\\tag friends colleagues", expectedFindCommand3);
+
+        // parsing with tag and exclude options enabled
+        FindCommand expectedFindCommand4 =
+                new FindTagSubCommand(new TagContainsKeywordsPredicate(Arrays.asList("friends", "colleagues")), true);
+        assertParseSuccess(parser, "\\tag friends colleagues", expectedFindCommand4);
+    }
+
+    @Test
+    public void parse_noKeywords_throwsParseException() {
+        //parse tags without keywords
+        assertParseFailure(parser, "\\tag",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        //parse with exclude option enabled without keywords
+        assertParseFailure(parser, "\\exclude",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        //parse tags with exclude option enabled without keywords
+        assertParseFailure(parser, "\\tag \\exclude",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
 }

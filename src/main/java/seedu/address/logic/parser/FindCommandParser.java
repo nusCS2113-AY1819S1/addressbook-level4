@@ -77,7 +77,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         if (keywordsList.get(0).equals(TAG_OPTION_STRING) && keywordsList.size() == 1) {
             return false;
         } else if (keywordsList.get(0).equals(TAG_OPTION_STRING)
-                && keywordsList.get(0).equals(EXCLUDE_OPTION_STRING) && keywordsList.size() == 2) {
+                && keywordsList.get(1).equals(EXCLUDE_OPTION_STRING) && keywordsList.size() == 2) {
             return false;
         } else if (keywordsList.get(0).equals(EXCLUDE_OPTION_STRING) && keywordsList.size() == 1) {
             return false;
