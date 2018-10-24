@@ -33,6 +33,7 @@ import seedu.planner.logic.commands.UndoCommand;
 public class AutoCompleteBox extends UiPart<Region> {
 
     private static final String FXML = "AutoCompleteBox.fxml";
+    private static final int MAX_ROWS = 5;
 
     private static Set<String> commandWordSet =
             new HashSet<>(Arrays.asList(AddCommand.COMMAND_WORD, ClearCommand.COMMAND_WORD, DeleteCommand.COMMAND_WORD,
@@ -42,12 +43,9 @@ public class AutoCompleteBox extends UiPart<Region> {
                     ListCommand.COMMAND_WORD, RedoCommand.COMMAND_WORD, SelectCommand.COMMAND_WORD,
                     SortCommand.COMMAND_WORD, SummaryCommand.COMMAND_WORD, UndoCommand.COMMAND_WORD));
 
-    @FXML
-    private AutoCompletionBinding<String> autoCompletionBinding;
-
     public AutoCompleteBox(TextField commandTextField) {
         super(FXML);
-        autoCompletionBinding = TextFields.bindAutoCompletion(commandTextField, commandWordSet);
+        TextFields.bindAutoCompletion(commandTextField, commandWordSet).setVisibleRowCount(MAX_ROWS);
     }
 
 }
