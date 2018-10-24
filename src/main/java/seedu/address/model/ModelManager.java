@@ -71,7 +71,9 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         //TODO Check whether this actually works when modifying your own data.
-        matchUserToPerson(user.getName().toString());
+        if (user != null) {
+            matchUserToPerson(user.getName().toString());
+        }
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
 
