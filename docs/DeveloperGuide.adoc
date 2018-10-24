@@ -421,31 +421,31 @@ image::SDAnnounce.png[width="800"]
 
 Step 2. The admin/user executes `checkAnnounce` to check for the latest announcement in storage file. The `checkAnnounce` calls the `UnitOfWork.getAnnouncementRepository().getLatestAnnouncement()` which returns an announcement to be shown in the message dialog.
 
-image::SDCheckAnnounce.png[width="800"]
+image::SDCheckAnnounce.png[width="200"]
 
 Step 3. The admin executes `block uName/john` to block john from creating new threads or comments. The `block` calls `User.setIsBlock(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
 
-image::SDBlockUserFromCreating.png[width="800"]
+image::SDBlockUserFromCreating.png[width="200"]
 
 Step 4. The admin executes `setAdmin uName/john set/true` to set a certain user as admin or to revert an admin to user. The `setAdmin` calls the `User.setAdmin(true)` and then `UnitOfWork.commit()`, causing another modified forum book state to be saved into `ForumBookStorage`.
 
-image::SDSetAdmin.png[width="800"]
+image::SDSetAdmin.png[width="200"]
 
 Step 5. The admin executes `createModule mCode/CS2113 mTitle/Software Engineering and OOP` to create the specific module. The `createModule` calls the `UnitOfWork.getModuleRepository().addModule(module)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
 
-image::SDCreateModule.png[width="800"]
+image::SDCreateModule.png[width="200"]
 
 Step 6. The admin executes `deleteModule mCode/CS2113` to delete specific module. The `deleteModule` calls the `UnitOfWork.getModuleRepository().removeModule(module);` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
 
-image::SDDeleteModule.png[width="800"]
+image::SDDeleteModule.png[width="200"]
 
 Step 7. The admin executes `updatePass uName/john uPass/098` to update the user john's password. The `updatePass` calls the `UnitOfWork.getUserRepository().updateUser(user)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
 
-image::SDUpdatePass.png[width="800"]
+image::SDUpdatePass.png[width="200"]
 
 Step 8. The admin executes `deleteUser uName/john` to delete the user john. The `deleteUser` calls the ` UnitOfWork.getUserRepository().deleteUser(userToDelete)` and then `UnitOfWork.commit()`, causing another modified forum book state to be save into `ForumBookStorage`.
 
-image::SDDeleteUser.png[width="800"]
+image::SDDeleteUser.png[width="200"]
 
 [NOTE]
 If the syntax of a command is wrong, the program will prompt the user to try again and show a suggested command format.
