@@ -15,8 +15,8 @@ public class ExpenditureGetAdviceCommand extends Command {
     public static final String COMMAND_WORD = "ET_advice";
     public static final String COMMAND_ALIAS = "a";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives user advice on " +
-            "how to save money based on last week record.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives user advice on "
+            + "how to save money based on last week record.\n"
             + "Parameters: "
             + PREFIX_MONEY + "MONEY "
             + PREFIX_PERIOD + "PERIOD "
@@ -24,10 +24,10 @@ public class ExpenditureGetAdviceCommand extends Command {
             + PREFIX_MONEY + "1000 "
             + PREFIX_PERIOD + "30 ";
 
-    public static final String MESSAGE_SUCCESS = "Here's the advice on how to " +
-            "spend your money in the following period:\n%s";
+    public static final String MESSAGE_SUCCESS = "Here's the advice on how to "
+            + "spend your money in the following period:\n%s";
 
-    private String ADVICE;
+    private String MESSAGE_ADVICE;
     private int money;
     private int numOfDays;
 
@@ -49,13 +49,13 @@ public class ExpenditureGetAdviceCommand extends Command {
         requireNonNull(model);
         map = model.getExpenditureRecords();
         StringBuilder x = new StringBuilder();
-        x.append("This is a summary of the expenditures you made in the past. " +
-                "From the first day you used this app till now, you have spent\n");
-        for(Map.Entry m : map.entrySet()){
-                    x.append(m.getValue())
-                    .append(" SGD on ")
-                    .append(m.getKey())
-                    .append("\n");
+        x.append("This is a summary of the expenditures you made in the past. "
+                + "From the first day you used this app till now, you have spent\n");
+        for (Map.Entry m : map.entrySet()) {
+            x.append(m.getValue())
+            .append(" SGD on ")
+            .append(m.getKey())
+            .append("\n");
         }
 
 
@@ -67,9 +67,9 @@ public class ExpenditureGetAdviceCommand extends Command {
                 .append(" days, on average, the maximum amount of money that you can spend per day is ")
                 .append(dailyExpense);
 
-        ADVICE = x.toString();
+        MESSAGE_ADVICE = x.toString();
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, ADVICE));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, MESSAGE_ADVICE));
 
     }
 

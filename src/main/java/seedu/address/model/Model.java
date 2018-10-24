@@ -1,7 +1,7 @@
 package seedu.address.model;
 
-import java.util.function.Predicate;
 import java.util.Map;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.expenditureinfo.Expenditure;

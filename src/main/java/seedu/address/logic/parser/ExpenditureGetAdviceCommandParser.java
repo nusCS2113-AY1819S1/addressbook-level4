@@ -36,7 +36,7 @@ public class ExpenditureGetAdviceCommandParser implements Parser<ExpenditureGetA
         String m = money.addingMoney;
         String n = argMultimap.getValue(PREFIX_PERIOD).get();
 
-        return new ExpenditureGetAdviceCommand(m,n);
+        return new ExpenditureGetAdviceCommand(m, n);
     }
 
     /**
