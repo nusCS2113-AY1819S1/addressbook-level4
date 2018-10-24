@@ -3,10 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_LIST_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_LIST_SIX;
-import static seedu.address.testutil.TypicalIndexes.INDEX_LIST_THIRD;
 import static seedu.address.testutil.TypicalIndexes.INDEX_LIST_THREE;
 
 import org.junit.Test;
@@ -49,22 +47,22 @@ public class SelectCommandParserTest {
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException_SingleNegative() {
+    public void parse_invalidSingleNegative_throwsParseException() {
         assertParseFailure(parser, "-1", invalidMessage);
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException_MultipleNegative() {
+    public void parse_invalidMultipleNegative_throwsParseException() {
         assertParseFailure(parser, "-1 -2 3", invalidMessage);
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException_InvalidRangeFormat() {
-        assertParseFailure(parser,"1 -- 3", invalidMessage);
+    public void parse_invalidRangeFormat_throwsParseException() {
+        assertParseFailure(parser, "1 -- 3", invalidMessage);
     }
 
     @Test
-    public void parse_invalidArgs_throwsParseException_InvalidRangeIndex() {
+    public void parse_invalidRangeIndex_throwsParseException() {
         assertParseFailure(parser, "-3 - 3", invalidMessage);
     }
 }
