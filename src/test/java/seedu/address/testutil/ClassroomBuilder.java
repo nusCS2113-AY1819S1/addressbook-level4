@@ -11,7 +11,7 @@ import seedu.address.model.module.ModuleCode;
 public class ClassroomBuilder {
 
     public static final String DEFAULT_CLASSNAME = "T16";
-    public static final String DEFAULT_ModuleCode = "CG1111";
+    public static final String DEFAULT_MODULECODE = "CG1111";
     public static final String DEFAULT_ENROLLMENT = "20";
 
     private ClassName className;
