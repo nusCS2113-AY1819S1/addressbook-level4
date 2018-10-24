@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import java.util.stream.Stream;
 
@@ -24,9 +24,9 @@ public class ClassDeleteCommandParser implements Parser<ClassDeleteCommand> {
     public ClassDeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CLASSNAME, PREFIX_MODULECODE);
+                ArgumentTokenizer.tokenize(args, PREFIX_CLASSNAME, PREFIX_MODULE_CODE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CLASSNAME, PREFIX_MODULECODE)
+        if (!arePrefixesPresent(argMultimap, PREFIX_CLASSNAME, PREFIX_MODULE_CODE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ClassDeleteCommand.MESSAGE_USAGE));
@@ -34,8 +34,8 @@ public class ClassDeleteCommandParser implements Parser<ClassDeleteCommand> {
 
         String className = argMultimap.getValue(PREFIX_CLASSNAME).get();
         ClassroomParserUtil.parseClassName(className);
-        String moduleCode = argMultimap.getValue(PREFIX_MODULECODE).get();
-        ClassroomParserUtil.parseClassModule(moduleCode);
+        String moduleCode = argMultimap.getValue(PREFIX_MODULE_CODE).get();
+        ParserUtil.parseModuleCode(moduleCode);
 
         return new ClassDeleteCommand(className, moduleCode);
     }

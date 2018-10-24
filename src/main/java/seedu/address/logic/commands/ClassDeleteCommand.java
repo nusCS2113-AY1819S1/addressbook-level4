@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CLASSNAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULECODE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_MODULE_CODE;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -19,15 +19,15 @@ public class ClassDeleteCommand extends Command {
             + " for a module for the system. "
             + "Parameters: "
             + PREFIX_CLASSNAME + "CLASS_NAME "
-            + PREFIX_MODULECODE + "MODULE_NAME "
+            + PREFIX_MODULE_CODE + "MODULE_NAME "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CLASSNAME + "T16 "
-            + PREFIX_MODULECODE + "CG1111 ";
+            + PREFIX_MODULE_CODE + "CG1111 ";
 
     public static final String MESSAGE_SUCCESS = "Class deleted: %1$s,"
-            + " ClassModule code: %2$s,"
+            + " Module code: %2$s,"
             + " Enrollment size: %3$s";
-    public static final String MESSAGE_FAIL = "Class belonging to module not found!";
+    private static final String MESSAGE_FAIL = "Class belonging to module not found!";
 
     private final Classroom classToDelete;
     private final ClassroomManager classroomManager;

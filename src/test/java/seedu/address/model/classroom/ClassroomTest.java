@@ -28,7 +28,7 @@ public class ClassroomTest {
         assertTrue(T16.isSameClassroom(editedT16));
 
         //same classname and different module -> returns false
-        editedT16 = new ClassroomBuilder(T16).withClassModule("CG1112").build();
+        editedT16 = new ClassroomBuilder(T16).withModuleCode("CG1112").build();
         assertFalse(T16.isSameClassroom(editedT16));
 
         //different classname
@@ -63,7 +63,7 @@ public class ClassroomTest {
         assertFalse(T16.equals(editedT16));
 
         // different moduleCode -> returns false
-        editedT16 = new ClassroomBuilder(T16).withClassModule("CG1112").build();;
+        editedT16 = new ClassroomBuilder(T16).withModuleCode("CG1112").build();;
         assertFalse(T16.equals(editedT16));
     }
 }
