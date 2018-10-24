@@ -13,6 +13,7 @@ import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
+import seedu.address.model.item.Status;
 import seedu.address.testutil.Assert;
 
 //    public static final Item INVALID_ARDUINO = new ItemBuilder().withName("Ardu@ino")
@@ -27,7 +28,7 @@ public class XmlAdaptedItemTest {
 
     private static final String VALID_NAME = ARDUINO.getName().toString();
     private static final String VALID_QUANTITY = ARDUINO.getQuantity().toString();
-    private static final List<Integer> VALID_STATUS = ARDUINO.getStatus();
+    private static final Status VALID_STATUS = ARDUINO.getStatus();
     private static final String VALID_MIN_QUANTITY = ARDUINO.getMinQuantity().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = ARDUINO.getTags().stream()
             .map(XmlAdaptedTag::new)

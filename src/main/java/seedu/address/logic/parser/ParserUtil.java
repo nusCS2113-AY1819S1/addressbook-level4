@@ -161,8 +161,9 @@ public class ParserUtil {
      */
     public static String parseFileName(String fileName) throws ParseException {
         requireNonNull(fileName);
+        String invalidFileNameRegex = "[^\\w\\-. ]";
         String trimmedName = fileName.trim();
-        if (!Name.isValidName(trimmedName)) {
+        if (trimmedName.matches(invalidFileNameRegex)) {
             throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
         return trimmedName;

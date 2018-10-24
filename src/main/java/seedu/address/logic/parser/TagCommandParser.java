@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.item.NameContainsKeywordsPredicate;
+import seedu.address.model.item.TagContainsKeywordsPredicate;
 
 /**
  * Parses input arguments and creates a new TagCommand object
@@ -26,7 +26,7 @@ public class TagCommandParser implements Parser<TagCommand> {
 
         String[] nameKeywords = trimmedArgs.split("\\s+");
 
-        return new TagCommand(new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords)));
+        return new TagCommand(new TagContainsKeywordsPredicate (Arrays.asList(nameKeywords)));
     }
 
 }

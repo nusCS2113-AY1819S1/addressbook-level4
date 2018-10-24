@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.item.Item;
 import seedu.address.model.item.Name;
 import seedu.address.model.item.Quantity;
+import seedu.address.model.item.Status;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +30,7 @@ public class XmlAdaptedItem {
     @XmlElement(required = true)
     private String minQuantity;
     @XmlElement(required = true)
-    private List<Integer> status = new ArrayList<>();
+    private Status status = new Status();
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -43,13 +44,13 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String name, String quantity, String minQuantity, List<Integer> status,
+    public XmlAdaptedItem(String name, String quantity, String minQuantity, Status status,
                           List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
         if (status != null) {
-            this.status = new ArrayList<>(status);
+            this.status = status;
         }
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -70,7 +71,9 @@ public class XmlAdaptedItem {
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
     }
-
+    public Status getStatus() {
+        return status;
+    }
     /**
      * Converts this jaxb-friendly adapted item object into the model's Item object.
      *

@@ -2,10 +2,8 @@ package seedu.address.model.item;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -17,11 +15,6 @@ import seedu.address.model.tag.Tag;
  */
 public class Item {
 
-    // Magic numbers
-    public static final int STATUS_READY = 0;
-    public static final int STATUS_ONLOAN = 1;
-    public static final int STATUS_FAULTY = 2;
-
     // Identity
     // fields
     private final Name name;
@@ -29,7 +22,7 @@ public class Item {
     private final Quantity minQuantity;
 
     // Data fields
-    private final List<Integer> status = new ArrayList<>();
+    private final Status status = new Status();
     private final Set<Tag> tags = new HashSet<>();
 
     /**
@@ -40,26 +33,18 @@ public class Item {
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        this.status.add(quantity.toInteger());
-        this.status.add(0);
-        this.status.add(0);
+        this.status.setDefaultValues(quantity.toInteger());
         this.tags.addAll(tags);
     }
 
-    public Item(Name name, Quantity quantity, Quantity minQuantity, List<Integer> status, Set<Tag> tags) {
+    public Item(Name name, Quantity quantity, Quantity minQuantity, Status status, Set<Tag> tags) {
         requireAllNonNull(name, quantity, minQuantity, tags);
         this.name = name;
         this.quantity = quantity;
         this.minQuantity = minQuantity;
-        if (status.isEmpty()) {
-            this.status.add(quantity.toInteger());
-            this.status.add(0);
-            this.status.add(0);
-        } else {
-            this.status.add(status.get(0));
-            this.status.add(status.get(1));
-            this.status.add(status.get(2));
-        }
+        this.status.setStatusReady(status.getStatusReady());
+        this.status.setStatusOnLoan(status.getStatusOnLoan());
+        this.status.setStatusFaulty(status.getStatusFaulty());
         this.tags.addAll(tags);
     }
 
@@ -75,8 +60,8 @@ public class Item {
         return minQuantity;
     }
 
-    public List<Integer> getStatus() {
-        return Collections.unmodifiableList(status);
+    public Status getStatus() {
+        return status;
     }
 
     /**
@@ -135,11 +120,11 @@ public class Item {
                 .append(" Minimum Quantity Required In Stocks: ")
                 .append(getMinQuantity())
                 .append(" Status: Ready | ")
-                .append(getStatus().get(STATUS_READY))
+                .append(getStatus().getStatusReady())
                 .append(", On-Loan | ")
-                .append(getStatus().get(STATUS_ONLOAN))
+                .append(getStatus().getStatusOnLoan())
                 .append(", Faulty | ")
-                .append(getStatus().get(STATUS_FAULTY))
+                .append(getStatus().getStatusFaulty())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
