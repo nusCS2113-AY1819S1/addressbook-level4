@@ -71,20 +71,3 @@ public class XmlSerializableProductDatabase {
         return persons.equals(((XmlSerializableProductDatabase) other).persons);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
