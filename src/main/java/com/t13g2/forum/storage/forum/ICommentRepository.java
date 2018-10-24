@@ -15,7 +15,7 @@ public interface ICommentRepository {
 
     void deleteComment(int commentId);
 
-    Comment getComment(int commentId);
+    Comment getComment(int commentId) throws EntityDoesNotExistException;
 
     List<Comment> getCommentsByThread(int threadId);
 

@@ -12,7 +12,7 @@ public interface IAnnouncementRepository {
 
     void deleteAnnouncement(int announcementId);
 
-    Announcement getAnnouncement(int announcementId);
+    Announcement getAnnouncement(int announcementId) throws EntityDoesNotExistException;
 
     Announcement getLatestAnnouncement() throws EntityDoesNotExistException;
 }

@@ -14,7 +14,7 @@ public interface IForumThreadRepository {
 
     void updateThread(@NotNull ForumThread forumThread);
 
-    ForumThread getThread(int forumThreadId);
+    ForumThread getThread(int forumThreadId) throws EntityDoesNotExistException;
 
     List<ForumThread> getThreadsByModule(int moduleId);
 

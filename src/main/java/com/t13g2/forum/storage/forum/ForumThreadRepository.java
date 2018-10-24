@@ -1,8 +1,12 @@
 package com.t13g2.forum.storage.forum;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import com.sun.istack.NotNull;
+import com.t13g2.forum.commons.util.Extensions;
 import com.t13g2.forum.model.forum.ForumThread;
 import com.t13g2.forum.model.forum.Module;
 
@@ -16,29 +20,36 @@ public class ForumThreadRepository extends BaseRepository implements IForumThrea
 
 
     @Override
-    public int addThread(ForumThread forumThread) {
+    public int addThread(@NotNull ForumThread forumThread) {
+        Objects.requireNonNull(forumThread, "forumThread can't be null");
         forumBookStorage.getForumThreads().getList().add(forumThread);
+        forumBookStorage.getForumThreads().setDirty();
         return forumThread.getId();
     }
 
     @Override
-    public void updateThread(ForumThread forumThread) {
-
+    public void updateThread(@NotNull ForumThread forumThread) {
+        Objects.requireNonNull(forumThread, "forumThread can't be null");
+        List<ForumThread> forumThreads = forumBookStorage.getForumThreads().getList();
+        Extensions.updateObjectInList(forumThreads, forumThread);
+        forumBookStorage.getForumThreads().setDirty();
     }
 
     @Override
-    public ForumThread getThread(int forumThreadId) {
-        return null;
+    public ForumThread getThread(int forumThreadId) throws EntityDoesNotExistException {
+        return this.getById(forumBookStorage.getForumThreads().getList(), forumThreadId);
     }
 
     @Override
     public List<ForumThread> getThreadsByModule(int moduleId) {
-        return null;
+        return forumBookStorage.getForumThreads().getList().stream()
+            .filter(aForumThread -> aForumThread.getModuleId() == moduleId).collect(Collectors.toList());
     }
 
     @Override
-    public List<ForumThread> getThreadsByModule(Module module) {
-        return null;
+    public List<ForumThread> getThreadsByModule(@NotNull Module module) {
+        Objects.requireNonNull(module, "module can't be null");
+        return this.getThreadsByModule(module.getId());
     }
 
     @Override
@@ -47,6 +58,7 @@ public class ForumThreadRepository extends BaseRepository implements IForumThrea
         Optional<ForumThread> toBeDeleted = pointer.stream().filter(forumThread -> forumThread.getId()
             == forumThreadId).findFirst();
         toBeDeleted.ifPresent(pointer::remove);
+        forumBookStorage.getForumThreads().setDirty();
     }
 
     @Override
