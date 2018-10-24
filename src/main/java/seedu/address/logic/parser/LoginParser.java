@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -32,7 +33,7 @@ public class LoginParser {
      */
 
 
-    public static ProManageParser loginCommand(String userInput) throws ParseException {
+    public static LoginCommand loginCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
@@ -43,10 +44,10 @@ public class LoginParser {
         switch (commandWord) {
 
         case KEY_MANAGER:
-            return new ManagerParser();
+            return new LoginCommand(KEY_MANAGER);
 
         case KEY_EMPLOYEE:
-            return new EmployeeParser();
+            return new LoginCommand(KEY_EMPLOYEE);
 
         default:
             throw new ParseException(MESSAGE_INVALID_LOGIN);

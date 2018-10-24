@@ -7,6 +7,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.LoginCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.LoginParser;
 import seedu.address.logic.parser.ProManageParser;
@@ -30,31 +31,13 @@ public class LogicManager extends ComponentManager implements Logic {
         history = new CommandHistory();
     }
 
-    /**
-     * Login for the app
-     *
-     * @param commandText
-     * @return CommandResult if successfully login
-     * @throws CommandException
-     * @throws ParseException
-     */
-
-    private CommandResult loginCommand(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
-        try {
-            this.proManageParser = LoginParser.loginCommand(commandText);
-            return new CommandResult(String.format("Successfully login as %s", proManageParser.getIdentity()));
-        } finally {
-            //history.add(commandText);
-        }
-    }
-
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         if (proManageParser == null) {
-            loginCommand("manager");
+            LoginCommand loginCommand = LoginParser.loginCommand("manager");
+            //return loginCommand.execute(model, history);
         }
         try {
             Command command = proManageParser.parseCommand(commandText);
