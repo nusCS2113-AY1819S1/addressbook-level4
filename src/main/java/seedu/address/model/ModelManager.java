@@ -184,6 +184,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void removePersonFromAllEvents(Person person) {
+        requireNonNull(person);
+
+        versionedEventList.removePersonFromAllEvents(person);
+        indicateEventListChanged();
+    }
+
+    @Override
     public ObservableList<Event> getFilteredEventList() {
         return FXCollections.unmodifiableObservableList(filteredEvents);
     }

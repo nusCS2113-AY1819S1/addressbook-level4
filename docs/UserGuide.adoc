@@ -133,14 +133,14 @@ Format: `schedule`
 
 Add employees to the project event at the respective specified INDEX. The index refers to the index number shown in the
 displayed person and event list. The index must be a positive integer 1, 2, 3... +
-Format: `invite LIST_INDEX to/SCHEDULE_INDEX` +
+Format: `invite PERSON_INDEX to/EVENT_INDEX` +
 Example: invite 1 to/2
 
 ==== Remove employee: `remove`
 
 Removes an employee from the project event. +
-Format/Prompts: `remove SCHEDULE_INDEX  n/NAME` +
-Example: remove 10 n/John Doe
+Format/Prompts: `remove PERSON_INDEX  from/EVENT_INDEX` +
+Example: remove 1 from/2
 
 
 ==== Modifying an event: `editEvent`
@@ -345,8 +345,8 @@ Example: invite 1 to/2
 ==== Remove employee: `remove`
 
 Removes an employee from the project event. +
-Format/Prompts: `remove SCHEDULE_INDEX  n/NAME` +
-Example: remove 10 n/John Doe
+Format/Prompts: `remove EVENT_INDEX  from/PERSON_INDEX` +
+Example: remove 1 from/2
 
 
 ==== Modifying an event: `editEvent`
@@ -567,9 +567,9 @@ Task with id 1 is submitted as complete.
 
 * *Schedule* : `schedule`
 
-* *Invite* : `invite LIST_INDEX to/SCHEDULE_INDEX`
+* *Invite* : `invite PERSON_INDEX to/EVENT_INDEX`
 
-* *Remove* : `remove SCHEDULE_INDEX  n/NAME`
+* *Remove* : `remove PERSON_INDEX  n/EVENT_INDEX`
 
 * *editEvent* : `n/NAME d/DESCRIPTION l/LOCATION date/DATE s/START TIME e/END TIME `
 

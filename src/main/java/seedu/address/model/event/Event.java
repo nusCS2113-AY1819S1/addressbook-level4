@@ -27,7 +27,7 @@ public class Event implements Comparable<Event> {
     private final StartTime startTime;
     private final EndTime endTime;
     private final Location location;
-    private final Attendees attendees;
+    private Attendees attendees;
 
     /**
      * Every field must be present not null
@@ -162,6 +162,7 @@ public class Event implements Comparable<Event> {
                 .append(attendees.toString());
         return builder.toString();
     }
+
 
     @Override
     public int compareTo(Event other) {

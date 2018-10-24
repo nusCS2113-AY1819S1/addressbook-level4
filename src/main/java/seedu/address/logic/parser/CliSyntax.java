@@ -18,5 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_DEPARTMENT = new Prefix("dep/");
     public static final Prefix PREFIX_LOCATION = new Prefix("l/");
     public static final Prefix PREFIX_TO = new Prefix("to/");
+    public static final Prefix PREFIX_FROM = new Prefix("from/");
 
 }
