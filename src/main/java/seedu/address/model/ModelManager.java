@@ -24,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedTaskBook versionedTaskBook;
     private final FilteredList<Task> filteredTasks;
+    private Predicate<Task> predicateShowCompletedTasks = Task::isCompleted;
 
     /**
      * Initializes a ModelManager with the given taskBook and userPrefs.
@@ -80,8 +81,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void completeTask(Task target) {
-        versionedTaskBook.completeTask(target);
+    public void completeTask(Task target, int hours) {
+        versionedTaskBook.completeTask(target, hours);
         indicateTaskBookChanged();
     }
 
@@ -192,5 +193,14 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedTaskBook.equals(other.versionedTaskBook)
                 && filteredTasks.equals(other.filteredTasks);
+    }
+    //@@author chelseyong
+    /**
+     * Updates the task to completed tasks only
+     * So that productivity can be correctly calculated
+     */
+    public void trackProductivity() {
+        updateFilteredTaskList(predicateShowCompletedTasks);
+        indicateTaskBookChanged();
     }
 }

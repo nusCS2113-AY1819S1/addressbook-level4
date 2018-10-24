@@ -8,9 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -22,9 +20,9 @@ import seedu.address.model.task.Task;
  */
 public class CommandTestUtil {
 
-    public static final String VALID_DEADLINE_1ST_JAN = "1/1";
-    public static final String VALID_DEADLINE_31ST_MARCH = "31/3";
-    public static final String VALID_DEADLINE_12TH_MAY = "12/5";
+    public static final String VALID_DEADLINE_1ST_JAN = "1/1/2018";
+    public static final String VALID_DEADLINE_31ST_MARCH = "31/3/2018";
+    public static final String VALID_DEADLINE_12TH_MAY = "12/5/2018";
     public static final String VALID_TITLE_1 = "Complete CS2113 Homework";
     public static final String VALID_TITLE_2 = "Start coding test units";
     public static final String VALID_TITLE_3 = "Prepare OP2";

@@ -1,4 +1,4 @@
-package seedu.address;
+package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_12TH_MAY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DEADLINE_1ST_JAN;
@@ -20,24 +20,32 @@ import java.util.List;
 import seedu.address.model.AddressBook;
 import seedu.address.model.task.Task;
 
-
+//@@author chelseyong
 /**
  * A utility class containing a list of {@code Task} objects to be used in tests.
  */
 public class TypicalTasks {
 
     // Manually added
-    public static final Task CS2113_homework = new TaskBuilder().withDeadline("1/1")
+    public static final Task CS2113_homework = new TaskBuilder().withDeadline("1/1/2018")
             .withTitle("Complete code refactoring").withDescription("Refer to notes!")
             .withPriority("low").build();
 
-    public static final Task CS2101_homework = new TaskBuilder().withDeadline("9/10")
+    public static final Task CS2101_homework = new TaskBuilder().withDeadline("9/10/2018")
         .withTitle("Plan a OP2 meeting").withDescription("OP2 is 40% of the grade")
         .withPriority("high").build();
 
-    public static final Task CS2102_homework = new TaskBuilder().withDeadline("11/11")
+    public static final Task CS2102_homework = new TaskBuilder().withDeadline("11/11/2018")
         .withTitle("Set up the backend framework").withDescription("Using Flask")
-            .withDescription("medium").build();
+            .withPriority("medium").build();
+
+    public static final Task CG2271_homework = new TaskBuilder().withDeadline("5/6/2018")
+        .withTitle("Implement message passing").withDescription("Symmetric & indirect naming scheme")
+            .withDescription("low").build();
+
+    public static final Task CG1112_homework = new TaskBuilder().withDeadline("2/5/2018")
+        .withTitle("Write buffer class").withDescription("refer to api")
+            .withDescription("high").build();
 
     // Manually added - Task's details found in {@code CommandTestUtil}
     public static final Task CS2113_TASK_1 = new TaskBuilder().withDeadline(VALID_DEADLINE_31ST_MARCH)

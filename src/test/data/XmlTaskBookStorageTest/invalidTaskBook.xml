@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <!-- Task with invalid priority level field -->
+    <tasks>
+        <deadline>31/3</deadline>
+        <title>Complete CS2113 Homework</title>
+        <description>Refer to notes</description>
+        <priorityLevel>midhigh</priorityLevel>
+        <expectedNumOfHours>3</expectedNumOfHours>
+        <isCompleted>false</isCompleted>
+    </tasks>
+</addressbook>

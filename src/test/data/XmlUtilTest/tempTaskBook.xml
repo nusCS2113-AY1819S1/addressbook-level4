@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+    <tasks>
+        <id>1</id>
+        <deadline>5/5/2018</deadline>
+        <title>Just coding</title>
+        <description>All my life</description>
+        <priorityLevel>high</priorityLevel>
+        <expectedNumOfHours>100</expectedNumOfHours>
+        <isCompleted>false</isCompleted>
+    </tasks>
+</addressbook>

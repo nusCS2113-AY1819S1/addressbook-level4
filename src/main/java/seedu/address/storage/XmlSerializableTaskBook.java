@@ -18,7 +18,7 @@ import seedu.address.model.task.Task;
 @XmlRootElement(name = "addressbook")
 public class XmlSerializableTaskBook {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate task(s).";
+    public static final String MESSAGE_DUPLICATE_TASK = "Task list contains duplicate task(s).";
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
@@ -50,7 +50,7 @@ public class XmlSerializableTaskBook {
         for (XmlAdaptedTask p : tasks) {
             Task task = p.toModelType();
             if (addressBook.hasTask(task)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_TASK);
             }
             addressBook.addTask(task);
         }
