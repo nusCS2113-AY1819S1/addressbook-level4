@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<bookinventory>
+    <!-- Valid Book -->
+    <books>
+        <name>Hans Muster</name>
+        <isbn isPrivate="978-1-86197-876-9">9482424</isbn>
+        <price isPrivate="false">19.90</price>
+        <cost isPrivate="false">1.90</cost>
+        <quantity isPrivate="false">4th street</quantity>
+    </books>
+    <!-- Book with invalid Isbn field -->
+    <books>
+        <name>Hans Muster</name>
+        <isbn isPrivate="false">978-1-asdf-876-9</isbn>
+        <price isPrivate="false">19.90</price>
+        <cost isPrivate="false">1.90</cost>
+        <quantity isPrivate="false">4th street</quantity>
+    </books>
+</bookinventory>

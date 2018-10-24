@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!-- Book with an invalid Isbn field -->
+<book>
+    <name>Hans Muster</name>
+    <isbn>9482asf424</isbn>
+    <price>5.90</price>
+    <cost>4.90</cost>
+    <quantity>4</quantity>
+    <tagged>friends</tagged>
+</book>
