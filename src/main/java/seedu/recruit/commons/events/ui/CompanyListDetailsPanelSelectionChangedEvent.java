@@ -4,13 +4,13 @@ import seedu.recruit.commons.events.BaseEvent;
 import seedu.recruit.model.company.Company;
 
 /**
- * Represents a selection change in the Company Details Panel
+ * Represents a selection change in the company list in CompanyJobDetailsPanel
  */
-public class CompanyDetailsPanelSelectionChangedEvent extends BaseEvent {
+public class CompanyListDetailsPanelSelectionChangedEvent extends BaseEvent {
 
     private final Company newSelection;
 
-    public CompanyDetailsPanelSelectionChangedEvent(Company newSelection) {
+    public CompanyListDetailsPanelSelectionChangedEvent(Company newSelection) {
         this.newSelection = newSelection;
     }
 

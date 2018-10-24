@@ -14,7 +14,7 @@ import guitests.GuiRobot;
 import guitests.guihandles.HelpWindowHandle;
 import seedu.recruit.logic.commands.DeleteCandidateCommand;
 import seedu.recruit.logic.commands.HelpCommand;
-import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.ui.BrowserPanel;
 import seedu.recruit.ui.StatusBarFooter;
 
@@ -62,7 +62,7 @@ public class HelpCommandSystemTest extends CandidateBookSystemTest {
         getMainWindowHandle().focus();
 
         // assert that while the help window is open the UI updates correctly for a command execution
-        executeCommand(SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        executeCommand(SelectCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals("", getCommandBox().getInput());
         assertCommandBoxShowsDefaultStyle();
         assertNotEquals(HelpCommand.SHOWING_HELP_MESSAGE, getResultDisplay().getText());

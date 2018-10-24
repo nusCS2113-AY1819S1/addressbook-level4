@@ -28,7 +28,7 @@ import seedu.recruit.logic.commands.HelpCommand;
 import seedu.recruit.logic.commands.HistoryCommand;
 import seedu.recruit.logic.commands.ListCandidateCommand;
 import seedu.recruit.logic.commands.RedoCommand;
-import seedu.recruit.logic.commands.SelectCommand;
+import seedu.recruit.logic.commands.SelectCandidateCommand;
 import seedu.recruit.logic.commands.UndoCommand;
 import seedu.recruit.logic.parser.exceptions.ParseException;
 import seedu.recruit.model.candidate.Candidate;
@@ -129,9 +129,9 @@ public class RecruitBookParserTest {
 
     @Test
     public void parseCommand_select() throws Exception {
-        SelectCommand command = (SelectCommand) parser.parseCommand(
-                SelectCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil);
-        assertEquals(new SelectCommand(INDEX_FIRST), command);
+        SelectCandidateCommand command = (SelectCandidateCommand) parser.parseCommand(
+                SelectCandidateCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased(), state, emailUtil);
+        assertEquals(new SelectCandidateCommand(INDEX_FIRST), command);
     }
 
     @Test

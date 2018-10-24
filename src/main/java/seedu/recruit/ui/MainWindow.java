@@ -38,6 +38,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private static CompanyJobDetailsPanel companyJobDetailsPanel;
 
+    private static ShortlistPanel shortlistPanel;
+
     private static StackPane staticPanelViewPlaceholder;
 
     private static Logic logic;
@@ -66,6 +68,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane panelViewPlaceholder;
+
+    @FXML
+    private StackPane shortlistPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -242,6 +247,12 @@ public class MainWindow extends UiPart<Stage> {
         return companyJobDetailsPanel;
     }
 
+    public static ShortlistPanel getShortlistPanel() {
+        shortlistPanel = new ShortlistPanel(logic.getFilteredPersonList(), logic.getFilteredCompanyList(),
+                logic.getFilteredCompanyJobList());
+        return shortlistPanel;
+    }
+
     public static String getDisplayedBook() {
         if (currentBook.contentEquals("companyBook")) {
             return "companyBook";
@@ -277,6 +288,40 @@ public class MainWindow extends UiPart<Stage> {
             getStaticPanelViewPlaceholder().getChildren().remove(0);
             getStaticPanelViewPlaceholder().getChildren().add(getCompanyJobDetailsPanel().getRoot());
             currentBook = "companyBook";
+        }
+    }
+
+    /**
+     * Switches the view on panelViewPlaceholder
+     * to the last viewed book.
+     */
+    public static void switchToLastViewedBook() {
+        switch (currentBook) {
+        case "companyBook":
+            if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
+                getStaticPanelViewPlaceholder().getChildren().remove(0);
+                getStaticPanelViewPlaceholder().getChildren().add(getCompanyJobDetailsPanel().getRoot());
+            }
+            break;
+
+        case "candidateBook":
+            if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
+                getStaticPanelViewPlaceholder().getChildren().remove(0);
+                getStaticPanelViewPlaceholder().getChildren().add(getCandidateDetailsPanel().getRoot());
+            }
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Switches the view on panelViewPlaceholder
+     * from Candidate/Company Book to carry out the Shortlist command.
+     */
+    public static void switchToShortlistPanel() {
+        if (!getStaticPanelViewPlaceholder().getChildren().isEmpty()) {
+            getStaticPanelViewPlaceholder().getChildren().remove(0);
+            getStaticPanelViewPlaceholder().getChildren().add(getShortlistPanel().getRoot());
         }
     }
 
