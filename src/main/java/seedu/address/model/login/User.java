@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class User {
 
-    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "AddressBook file path is incorrect.";
+    public static final String MESSAGE_AB_FILEPATH_CONSTRAINTS = "ProductDatabase file path is incorrect.";
 
     private static final String AB_FILEPATH_FOLDER = "data/";
     private static final String AB_FILEPATH_PREFIX = "addressbook-";

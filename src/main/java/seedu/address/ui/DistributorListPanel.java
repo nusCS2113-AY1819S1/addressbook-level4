@@ -16,7 +16,7 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.distributor.Distributor;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of products.
  */
 public class DistributorListPanel extends UiPart<Region> {
     private static final String FXML = "DistributorListPanel.fxml";
