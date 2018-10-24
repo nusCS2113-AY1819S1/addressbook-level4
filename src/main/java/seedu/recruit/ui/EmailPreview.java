@@ -8,6 +8,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import seedu.recruit.commons.core.LogsCenter;
 
+/**
+ * Email preview panel
+ */
 public class EmailPreview extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(EmailPreview.class);
@@ -30,6 +33,9 @@ public class EmailPreview extends UiPart<Stage> {
         preview.setText(emailPreview);
     }
 
+    /**
+     * Shows the preview of the email
+     */
     public void show() {
         logger.fine("Showing email preview");
         getRoot().show();

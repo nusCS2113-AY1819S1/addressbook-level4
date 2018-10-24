@@ -246,7 +246,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
-}
+    }
 
     public static CandidateDetailsPanel getCandidateDetailsPanel() {
         candidateDetailsPanel = new CandidateDetailsPanel(logic.getFilteredPersonList());

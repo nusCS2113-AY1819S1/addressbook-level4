@@ -1,5 +1,9 @@
 package seedu.recruit.logic.commands.emailcommand;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+
 import seedu.recruit.commons.core.EventsCenter;
 import seedu.recruit.commons.events.ui.ShowEmailPreviewEvent;
 import seedu.recruit.commons.util.EmailUtil;
@@ -7,10 +11,9 @@ import seedu.recruit.logic.CommandHistory;
 import seedu.recruit.logic.commands.CommandResult;
 import seedu.recruit.model.Model;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
-
+/**
+ * This class handles the preview sub command of the send phase
+ */
 public class EmailSendPreviewCommand extends EmailSendCommand {
 
     public static final String SHOWING_PREVIEW_MESSAGE = "Opened preview.";
