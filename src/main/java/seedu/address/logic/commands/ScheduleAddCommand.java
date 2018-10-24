@@ -21,8 +21,8 @@ public class ScheduleAddCommand extends ScheduleCommand {
     public CommandResult updateSchedule(Model model) {
         model.addActivity(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS,
-				toAdd.getActivity(),
-				Activity.getDateString(toAdd.getDate())));
+                toAdd.getActivity(),
+                Activity.getDateString(toAdd.getDate())));
     }
 
     @Override

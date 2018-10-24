@@ -37,7 +37,8 @@ public class Activity {
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
-        return cal.getTime();
+        Date date = cal.getTime();
+        return date;
     }
 
     public static String getDateString (Date date) {
@@ -45,10 +46,7 @@ public class Activity {
         cal.setTime(date);
         String dayOfWeek = new SimpleDateFormat("EE", Locale.ENGLISH).format(date);
         int month = cal.get(Calendar.MONTH);
-        if (month == 0) {
-            month = 12;
-        }
-        return new String(dayOfWeek + " " + cal.get(Calendar.DATE) + "/" + month
+        return new String(dayOfWeek + " " + cal.get(Calendar.DATE) + "/" + ++month
                 + "/" + cal.get(Calendar.YEAR));
     }
 

@@ -206,8 +206,7 @@ public class ParserUtil {
         int day = Integer.parseInt(tokens.nextToken());
         int month = Integer.parseInt(tokens.nextToken());
         int year = Integer.parseInt(tokens.nextToken());
-        Date date = Activity.toDate(day, month, year);
-        return date;
+        return Activity.toDate(day, --month, year);
     }
 
 
