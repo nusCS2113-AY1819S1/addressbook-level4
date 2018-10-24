@@ -12,23 +12,23 @@ public class DownloadSelectCommand extends Command {
 
     public static final String COMMAND_WORD = "downloadSelect";
     public static final String MESSAGE_USAGE = "downloadSelect pass/(password) user/(username) mod/(moduleCode) file/(0,1,2....n))";
-    public static final String CHROMEDRIVER_PATH_WINDOWS = "/chromeDrivers/windows/chromedriver.exe";
-    public static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver";
-    public static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
-    public static final String IVLE_TITLE = "IVLE";
-    public static final String WINDOWS_OS_NAME="Windows";
-    public static final String MAC_OS_NAME="Mac";
-    public static final String IVLE_ADDRESS = "https://ivle.nus.edu.sg";
-    public static final String IVLE_USERNAME_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_userid";
-    public static final String IVLE_PASSWORD_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_password";
-    public static final String IVLE_LOGIN_BUTTON_ID = "ctl00_ctl00_ContentPlaceHolder1_btnSignIn";
-    public static final String WRONG_PASS_USER_MESSAGE = "WRONG PASSWORD OR USERNAME ENTERED";
-    public static final String IVLE_DOWNLOAD_PAGE_ADDRESS = "https://ivle.nus.edu.sg/v1/File/download_all.aspx";
-    public static final String IVLE_MODULE_LIST_FIELD_ID = "ctl00_ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_ContentPlaceHolder1_ddlModule";
-    public static final String MODULE_NOT_FOUND_MESSAGE = "MODULE CODE NOT FOUND";
-    public static final String WORKBIN_CSS_SELECTOR_ID = "a[href^=\"/workbin\"]";
-    public static final String TREEVIEW_CLASS_ID = "TreeView";
-    public static final String FILE_DOWNLOAD_LINK_ATTRIBUTE_ID="href";
+    private static final String CHROMEDRIVER_PATH_WINDOWS = "/chromeDrivers/windows/chromedriver.exe";
+    private static final String CHROMEDRIVER_PATH_MAC = "/chromeDrivers/mac/chromedriver";
+    private static final String DOWNLOAD_RELATIVE_PATH = "/notesDownload";
+    private static final String IVLE_TITLE = "IVLE";
+    private static final String WINDOWS_OS_NAME="Windows";
+    private static final String MAC_OS_NAME="Mac";
+    private static final String IVLE_ADDRESS = "https://ivle.nus.edu.sg";
+    private static final String IVLE_USERNAME_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_userid";
+    private static final String IVLE_PASSWORD_FIELD_ID = "ctl00_ctl00_ContentPlaceHolder1_password";
+    private static final String IVLE_LOGIN_BUTTON_ID = "ctl00_ctl00_ContentPlaceHolder1_btnSignIn";
+    private static final String WRONG_PASS_USER_MESSAGE = "WRONG PASSWORD OR USERNAME ENTERED";
+    private static final String IVLE_DOWNLOAD_PAGE_ADDRESS = "https://ivle.nus.edu.sg/v1/File/download_all.aspx";
+    private static final String IVLE_MODULE_LIST_FIELD_ID = "ctl00_ctl00_ctl00_ContentPlaceHolder1_ContentPlaceHolder1_ContentPlaceHolder1_ddlModule";
+    private static final String MODULE_NOT_FOUND_MESSAGE = "MODULE CODE NOT FOUND";
+    private static final String WORKBIN_CSS_SELECTOR_ID = "a[href^=\"/workbin\"]";
+    private static final String TREEVIEW_CLASS_ID = "TreeView";
+    private static final String FILE_DOWNLOAD_LINK_ATTRIBUTE_ID="href";
 
     private String username;
     private String password;
@@ -56,7 +56,7 @@ public class DownloadSelectCommand extends Command {
         String returnMessage;
         WebDriver driver=initializeWebDriver();
         loginIvle(driver);
-        if(checkLoggedIn(driver)==false){
+        if(!checkLoggedIn(driver)){
             driver.close();
             returnMessage = WRONG_PASS_USER_MESSAGE;
         }
@@ -133,10 +133,7 @@ public class DownloadSelectCommand extends Command {
     }
 
     private boolean checkLoggedIn(WebDriver driver){
-        if(driver.getTitle().contains(IVLE_TITLE)){
-            return false;
-        }
-        return true;
+        return !(driver.getTitle().contains(IVLE_TITLE));
     }
 
     private boolean checkModuleExists(WebDriver driver){
