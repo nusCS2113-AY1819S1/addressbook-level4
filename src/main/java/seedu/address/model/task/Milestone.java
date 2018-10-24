@@ -10,7 +10,7 @@ public class Milestone extends Task {
     private final Integer rank;
 
     public Milestone(String title, String milestoneDescription, Integer rank) {
-        super(title, milestoneDescription, new PriorityLevel("high"));
+        super(title, milestoneDescription, new PriorityLevel("high"), 0);
         //this.title = title;
         //this.milestoneDescription = milestoneDescription;
         this.rank = rank;

@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TaskBuilder.DEFAULT_DEADLINE;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
-import seedu.address.TaskBuilder;
+import seedu.address.testutil.TaskBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -63,8 +64,8 @@ public class AddTaskCommandTest {
 
     @Test
     public void equals() {
-        Task jan1st = new TaskBuilder().withDeadline("1/1").build();
-        Task nov1st = new TaskBuilder().withDeadline("1/11").build();
+        Task jan1st = new TaskBuilder().withDeadline("1/1/2018").build();
+        Task nov1st = new TaskBuilder().withDeadline("1/11/2018").build();
         AddTaskCommand addJan1stCommand = new AddTaskCommand(jan1st);
         AddTaskCommand addNov1stCommand = new AddTaskCommand(nov1st);
 
@@ -100,6 +101,16 @@ public class AddTaskCommandTest {
         }
 
         @Override
+        public Deadline getDeadline() {
+            return new Deadline(DEFAULT_DEADLINE);
+        }
+
+        @Override
+        public boolean validDeadline(Deadline deadline) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void resetData(ReadOnlyTaskBook newData) {
             throw new AssertionError("This method should not be called.");
         }
@@ -115,7 +126,7 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public void deferTaskDeadline(Task task, String deadline) {
+        public void deferTaskDeadline(Task task, Deadline deadline) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -125,7 +136,7 @@ public class AddTaskCommandTest {
         }
 
         @Override
-        public void completeTask(Task target) {
+        public void completeTask(Task target, int hours) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -171,6 +182,11 @@ public class AddTaskCommandTest {
 
         @Override
         public void commitTaskBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void trackProductivity() {
             throw new AssertionError("This method should not be called.");
         }
     }

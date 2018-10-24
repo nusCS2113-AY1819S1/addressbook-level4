@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HOURS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INDEX;
 
 import java.util.List;
 
@@ -21,24 +23,29 @@ public class CompleteTaskCommand extends Command implements CommandParser {
     public static final String COMMAND_WORD = "complete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Completes the task identified by the index number used in the displayed task list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Completes the task identified by the index number used in the displayed task list,"
+            + " under a certain number of hours\n"
+            + "Parameters: " + PREFIX_INDEX + " INDEX(must be a positive integer) "
+            + PREFIX_HOURS + "HOURS\n"
+            + "Example: " + COMMAND_WORD + " 1 " + PREFIX_HOURS + "2";
 
     public static final String MESSAGE_SUCCESS = "Task completed: %1$s";
     public static final String MESSAGE_NONEXISTENT_TASK = "This task does not exist in the task book";
 
     private final Index targetIndex;
+    private final int completedNumOfHours;
     public CompleteTaskCommand() {
         // Null so that it can be initialized in LogicManager
         // Check in JUnit test
         targetIndex = null;
+        completedNumOfHours = 0;
     }
     /**
      * Creates an CompleteTaskCommand to add the specified {@code Task}
      */
-    public CompleteTaskCommand(Index targetIndex) {
+    public CompleteTaskCommand(Index targetIndex, int completedNumOfHours) {
         this.targetIndex = targetIndex;
+        this.completedNumOfHours = completedNumOfHours;
     }
 
     @Override
@@ -54,7 +61,7 @@ public class CompleteTaskCommand extends Command implements CommandParser {
         if (taskToComplete.isCompleted()) {
             throw new CommandException(Messages.MESSAGE_COMPLETED_TASK);
         }
-        model.completeTask(taskToComplete);
+        model.completeTask(taskToComplete, completedNumOfHours);
         model.commitTaskBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, taskToComplete));
     }
@@ -62,8 +69,8 @@ public class CompleteTaskCommand extends Command implements CommandParser {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-            || (other instanceof CompleteTaskCommand // instanceof handles nulls
-            && targetIndex.equals(((CompleteTaskCommand) other).targetIndex));
+                || (other instanceof CompleteTaskCommand // instanceof handles nulls
+                && targetIndex.equals(((CompleteTaskCommand) other).targetIndex));
     }
 
     @Override
