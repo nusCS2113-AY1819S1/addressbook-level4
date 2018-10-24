@@ -34,4 +34,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_MODULE_CODE = new Prefix("c/");
     public static final Prefix PREFIX_MODULE_NAME = new Prefix("n/");
     /* Note prefixes */
+    /* User prefixes */
+    public static final Prefix PREFIX_AUTH_PASSWORD = new Prefix("pw/");
 }
