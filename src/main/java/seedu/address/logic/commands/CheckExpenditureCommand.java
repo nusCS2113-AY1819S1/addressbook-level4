@@ -68,11 +68,11 @@ public class CheckExpenditureCommand extends Command {
             int month = Integer.parseInt(editedExpenditure.getDate().toString().substring(3, 5));
             int day = Integer.parseInt(editedExpenditure.getDate().toString().substring(0, 2));
 
-            if ((year1 > year) || (year2 < year)) { }
+            if ((year1 > year) || (year2 < year))          { }
             else if ((month1 > month) || (month2 < month)) { }
-            else if ((day1 > day) || (day2 < day)) { }
+            else if ((day1 > day) || (day2 < day))         { }
             else {
-            total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
+                total = total + Integer.parseInt(editedExpenditure.getMoney().toString());
             }
             index++;
         }
