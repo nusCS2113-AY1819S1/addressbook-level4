@@ -42,7 +42,7 @@ public class LoginCommand extends Command {
         if (loggedInSuccess) {
             return new CommandResult(String.format(MESSAGE_SUCCESS, userName));
         } else {
-            return new CommandResult(MESSAGE_FAIL);
+            return new CommandResult(String.format(MESSAGE_FAIL, userName));
         }
     }
 }
