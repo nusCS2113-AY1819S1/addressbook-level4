@@ -9,5 +9,7 @@ public interface IStorage {
 
     Object read(Class clazz);
 
+    void remove(Class clazz);
+
     void handleSourceChange(IEvent changeEvent);
 }
