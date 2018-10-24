@@ -299,7 +299,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedTodoList.equals(other.versionedTodoList)
+        return versionedAddressBook.equals(other.versionedAddressBook)
+                && filteredPersons.equals(other.filteredPersons)
+                && versionedExpenditureTracker.equals(other.versionedExpenditureTracker)
+                && filteredExpenditures.equals(other.filteredExpenditures)
+                && versionedTodoList.equals(other.versionedTodoList)
                 && filteredTasks.equals(other.filteredTasks);
     }
 

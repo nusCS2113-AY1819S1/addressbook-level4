@@ -1,12 +1,14 @@
 package seedu.address.model;
-/*
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_UNUSED;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_EXPENDITURES;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_TASKS;
 import static seedu.address.testutil.TypicalExpenditures.CHICKEN;
 import static seedu.address.testutil.TypicalExpenditures.IPHONE;
 import static seedu.address.testutil.TypicalPersons.ALICE;
@@ -32,9 +34,9 @@ import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.ExpenditureTrackerBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.TodoListBuilder;
-*/
+
 public class ModelManagerTest {
-    /*
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -70,7 +72,7 @@ public class ModelManagerTest {
         ExpenditureTracker expenditureTracker = new ExpenditureTrackerBuilder().withExpenditure(CHICKEN)
                 .withExpenditure(IPHONE).build();
         UserPrefs userPrefs = new UserPrefs();
-        ModelManager modelManager = new ModelManager(addressBook, todoList, expenditureTracker , userPrefs);
+        ModelManager modelManager = new ModelManager(addressBook, todoList, expenditureTracker, userPrefs);
         modelManager.deleteTag(new Tag(VALID_TAG_UNUSED));
         assertEquals(new ModelManager(addressBook, todoList, expenditureTracker, userPrefs), modelManager);
     }
@@ -125,6 +127,8 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredTaskList(PREDICATE_SHOW_ALL_TASKS);
+        modelManager.updateFilteredExpenditureList(PREDICATE_SHOW_ALL_EXPENDITURES);
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
@@ -132,5 +136,5 @@ public class ModelManagerTest {
         assertTrue(modelManager.equals(new ModelManager(addressBook, todoList, expenditureTracker,
                 differentUserPrefs)));
     }
-    */
+
 }

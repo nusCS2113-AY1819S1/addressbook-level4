@@ -78,7 +78,7 @@ public class VersionedExpenditureTracker extends ExpenditureTracker {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof VersionedAddressBook)) {
+        if (!(other instanceof VersionedExpenditureTracker)) {
             return false;
         }
 
